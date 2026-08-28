@@ -1,5 +1,5 @@
 softschema:
-  contract: packing.squares:Witness/v1
+  contract: packing.squares:Witness/v2
   schema: ../witness.schema.yaml
   envelope: witness
   status: enforced
@@ -222,7 +222,7 @@ witness:
     - '6.238934671877919628639831594511376690183521182952827374865825972005189202225209840686542401117078025'
     angle: '31.565779005731469882403502468503934847888675969835'
   claim:
-    assurance: numerically-checked
+    coordinate_provenance: numerically-checked
     method: numerical-multiprecision
     precision:
       decimal_digits: 120
@@ -245,7 +245,7 @@ witness:
     result:
       operation: check
       id: W-known-best-n041
-      assurance: numerically-checked
+      coordinate_provenance: numerically-checked
       method: numerical-multiprecision
       precision:
         decimal_digits: 120

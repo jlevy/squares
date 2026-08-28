@@ -1,5 +1,5 @@
 softschema:
-  contract: packing.squares:Witness/v1
+  contract: packing.squares:Witness/v2
   schema: ../witness.schema.yaml
   envelope: witness
   status: enforced
@@ -1457,7 +1457,7 @@ witness:
     - - '11'
       - '12'
   claim:
-    assurance: verified
+    coordinate_provenance: verified
     method: exact-algebraic
     limitations: Exactly verifies this canonical no-tilt construction. The source catalogue reports it
       as best known, but this witness does not prove global optimality, uniqueness, or the catalogue claim.

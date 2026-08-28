@@ -26,7 +26,7 @@ from sqpack.witness import (
 
 def parser() -> argparse.ArgumentParser:
     command = argparse.ArgumentParser(
-        description="Inspect, numerically check, formally verify, or promote a Witness/v1 file."
+        description="Inspect, numerically check, formally verify, or promote a Witness/v2 file."
     )
     subcommands = command.add_subparsers(dest="operation", required=True)
 

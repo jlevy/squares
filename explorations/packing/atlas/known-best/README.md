@@ -20,7 +20,7 @@ The pipeline has four separate layers:
 
 1. exact canonical grids, attributed Kingbird-derived numerical facts, or retained
    UnitSquare SVG renderings;
-2. normalized [`Witness/v1`](../../witnesses/witness.schema.yaml) geometry;
+2. normalized [`Witness/v2`](../../witnesses/witness.schema.yaml) geometry;
 3. numerical or exact feasibility receipts at the assurance the source supports; and
 4. deterministic SVGs under [`rendering/`](rendering/).
 
@@ -129,7 +129,7 @@ certified exact-contact feature, and the gallery remains calibration-only.
 
 Exact integer records use a canonical row-major subset of the corresponding grid.
 Noninteger catalogue records use attributed Kingbird-derived numerical center and angle
-facts retained in Witness/v1; the upstream SVGs are not retained in this source
+facts retained in Witness/v2; the upstream SVGs are not retained in this source
 inventory because the review located no express redistribution terms.
 This is a conservative retention policy, not a legal conclusion.
 The newer public UnitSquare renderings supersede the older Kingbird geometry at `n = 68`

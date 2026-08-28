@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Convert the Schadt n=29 text format into the generic Witness/v1 boundary."""
+"""Convert the Schadt n=29 text format into the generic Witness/v2 boundary."""
 
 from __future__ import annotations
 
@@ -51,7 +51,7 @@ def parse_source(path: Path) -> dict:
         },
         "squares": squares,
         "claim": {
-            "assurance": "reported",
+            "coordinate_provenance": "reported",
             "method": "numerical-multiprecision",
             "precision": {"decimal_digits": 300, "rounding": "decimal-context"},
             "tolerance": "1e-100",

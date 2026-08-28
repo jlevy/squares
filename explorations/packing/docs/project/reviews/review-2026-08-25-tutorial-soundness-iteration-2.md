@@ -73,7 +73,7 @@ could be traced to a primary artifact:
   `3.1875e-08`, `2.2204e-15`; `5.32e-03`, `4.51e-03`, `1.33e-15`).
 - The cost table matches the infrastructure benchmark doc line by line (`57 ns`,
   `2,726 ns`, `215.5 µs`, `1.2 µs`, `13.49 ms`, `0.35 s`).
-- The assurance and method tables match the `Witness/v1` schema enums and the semantics
+- The assurance and method tables match the `Witness/v2` schema enums and the semantics
   checker, including `beat_record` requiring `verified`.
 - The mathematics read as stated: the Lindemann–Weierstrass transcendence of the angle
   beside its algebraic tangent, the primitive-element argument with its unbounded degree

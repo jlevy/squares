@@ -18,7 +18,7 @@ which found most of the pieces of that architecture already built for a differen
 purpose — and turns them into a concrete build order.
 
 **Current implementation note (2026-08-25).** The repository now ships the first
-purpose-built slice of that design: `Witness/v1`, exact rational and real-algebraic
+purpose-built slice of that design: `Witness/v2`, exact rational and real-algebraic
 separating-axis checks, certified number-field preconditions, and a public
 `packing-witness` command.
 The broad filtered kernel, automatic source-corpus import, and a general interval

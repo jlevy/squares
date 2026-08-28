@@ -1,5 +1,5 @@
 softschema:
-  contract: packing.squares:Witness/v1
+  contract: packing.squares:Witness/v2
   schema: ../witness.schema.yaml
   envelope: witness
   status: enforced
@@ -357,7 +357,7 @@ witness:
     - - '3'
       - '6'
   claim:
-    assurance: verified
+    coordinate_provenance: verified
     method: exact-algebraic
     limitations: Verifies this known-best upper-bound construction, not uniqueness; optimality comes only
       from the separately cited frontier lower bound.

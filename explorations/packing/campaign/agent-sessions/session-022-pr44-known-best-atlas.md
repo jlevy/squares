@@ -897,7 +897,7 @@ session:
     focus: correctness
     objective: >-
       Build a deterministic prospective corpus seed for exactly 97 catalogue-rule grids
-      and the four CC-identified UnitSquare constructions, normalized to Witness/v1 and
+      and the four CC-identified UnitSquare constructions, normalized to Witness/v2 and
       rendered in the project house style without acquiring Kingbird assets or deriving
       any annotation.
     status: completed
@@ -927,7 +927,7 @@ session:
     outcome: >-
       The prospective seed now retains four hash-matched UnitSquare SVGs with CC BY 4.0
       dataset attribution and generates 97 exact grid cases. All 101 cases normalize to
-      distinct Witness/v1 documents and deterministic project-house SVGs under a
+      distinct Witness/v2 documents and deterministic project-house SVGs under a
       schema-checked manifest; all 123 Kingbird cases and every derived annotation remain
       explicitly excluded.
     evidence:
@@ -1750,7 +1750,7 @@ session:
       Fresh inspection of the house n=5 rendering confirms the intentionally visible
       exceptional arrangement, while n=69 visibly combines large axis-aligned regions
       with a diagonal chain. Neither image is used to manufacture contact coordinates;
-      both remain views of retained Witness/v1 geometry.
+      both remain views of retained Witness/v2 geometry.
     - >-
       Cross-field controls reject aggregate, sensitivity, source-stratum, partition-count,
       duplicate-n, geometry-channel, and hypothesis-channel mutations. The integrated
@@ -2028,7 +2028,7 @@ session:
   - Target-free pricing exactly counts labeled scaffolds through size five, exhaustively measures canonical local outcomes through size four, and replaces the size-five 9.30-billion-image raw path with 11,013 topology-first orbit representatives without LP execution.
   - Five deterministic descriptive contact strata replay through the house renderer with numerical graph incidence distinct from certified exact contact loci.
   - A schema-checked, annotation-free prospective source map covers all 224 counts from 101 through 324; the metadata-only live adapter audit now passes all 114 Kingbird SVG groups.
-  - The license-safe prospective seed replays 97 exact grids and four attributed UnitSquare constructions as Witness/v1 plus house-rendered SVGs, with annotations prohibited.
+  - The license-safe prospective seed replays 97 exact grids and four attributed UnitSquare constructions as Witness/v2 plus house-rendered SVGs, with annotations prohibited.
   - A compact 36-row non-grid evidence profile reconstructs every source-stratified contact, slide, narrow-partition, and detector-sensitivity metric and renders them in one house overview.
   - One hundred frontmatter artifacts and 223 pure-YAML datasets validate after adding the abstract scaffold atlas and non-grid evidence profile.
   - Complete Linux, macOS, and deep-golden portability validation passes on formatter-repair commit 405f71b.

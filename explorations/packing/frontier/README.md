@@ -132,11 +132,22 @@ The ones that carry the most weight:
   claims in the named source set.
   They do not endorse those claims.
 - `verified_upper_bound` and `verified_lower_bound` contain only formally supported
-  bounds. The formal upper may be a weaker rational construction or the exact grid when
-  the tighter public pose is only numerical.
+  bounds. They are a ceiling and a floor, not the value of `s(n)`. The certified ceiling
+  may be a weaker rational construction or the exact grid when the tighter public pose
+  is only numerical: for 33 of the 100 cases it is *larger* than the best known side
+  recorded two fields above it, by up to `0.46`, and each of those cases says so in its
+  own body and carries a `mathematics` blocker.
+  An `exact_form` on the ceiling is the exact form of the ceiling; `s(n)` is known
+  exactly only when `status` is `proved`.
 - `reported_status` is the source-set view; `status` is `proved` only when the verified
   bounds match exactly.
   There are currently 35 proved and 65 open formal cases.
+- `reported_upper_bound.catalogue_rigid` transcribes what the catalogue says about
+  rigidity, in the catalogue’s own three-valued vocabulary: `rigid`, `semi-rigid`, or
+  `not-stated`. `not-stated` is source silence and never a claim that a packing can
+  move. The case-level `rigidity` field is separate and is this repository’s own finding,
+  with an assurance level, a stated scope, and replayable evidence; `null` there means
+  not assessed.
 - `evidence` points into [`evidence.yaml`](evidence.yaml), where assurance, method,
   performer, independence, origin, actual precision, tolerance, certificate, replay,
   proof scope, and limitations remain separate fields.
@@ -177,7 +188,7 @@ uv run --frozen python -m devtools.check_source_coverage
 1. Retain the first-party source and add or update its dated coverage entry.
 2. Put the literal public claim in the reported lane and give it typed evidence.
 3. If geometry is available, adapt it once to
-   [`Witness/v1`](../witnesses/witness.schema.yaml), then use `packing-witness inspect`
+   [`Witness/v2`](../witnesses/witness.schema.yaml), then use `packing-witness inspect`
    or `check` with explicit arithmetic, precision, and tolerance.
 4. Put a value in the verified lane only after an exact proof, exact witness replay, or
    rigorous interval certificate discharges its assumptions.
@@ -271,8 +282,11 @@ That is the correct form of a claim the research document originally overstated.
 
 ## Provenance and Regeneration
 
-The baseline upper bounds, degrees, minimal polynomials, rigidity flags, analytic
+The baseline upper bounds, degrees, minimal polynomials, rigidity annotations, analytic
 status, and attributions were parsed from the retained Kingbird catalogue.
+`uv run --frozen python -m devtools.audit_kingbird_catalogue --rigidity` re-reads the
+rigidity annotations from that archive and checks them against all 100 records, so a
+dropped or invented transcription fails instead of being migrated forward.
 Newer first-party claims are selected through the source-coverage record rather than
 silently overwriting that baseline.
 Lower bounds were computed from four sources and the strongest taken.

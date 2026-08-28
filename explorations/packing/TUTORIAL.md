@@ -695,7 +695,7 @@ which are new here. The quench and annealer remain numerical instruments; listin
 here does not promote their outputs to verified.
 
 **The generic witness boundary and robust rational promotion are built.** One
-`Witness/v1` file can be inspected, numerically checked, or exactly verified without
+`Witness/v2` file can be inspected, numerically checked, or exactly verified without
 case-specific geometry code.
 The retained Schadt `n = 29` decimal pose is numerically checked at 300 digits and
 tolerance `1e-100`; a separate robustification produces a slightly larger rational

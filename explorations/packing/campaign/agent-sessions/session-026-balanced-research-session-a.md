@@ -1202,7 +1202,7 @@ session:
       system has no outward-rounded certificate or independent checker; exact Trump
       export and the n = 1 scalar interval control remain useful later calibrations.
     evidence:
-    - The n = 11 input is a complete 11-square center-angle Witness/v1 artifact with all 55 pairs numerically checked.
+    - The n = 11 input is a complete 11-square center-angle Witness/v2 artifact with all 55 pairs numerically checked.
     - Generic rational promotion emits typed malformed-option, unsupported-input, and robustification-failed outcomes rather than relabeling the source.
     - devtools.check_rational_witness_independent shares neither geometry nor verification code with the promotion path.
     - The n = 29 interval path correctly remains checker-not-built; high decimal precision is not a substitute.
@@ -1228,7 +1228,7 @@ session:
     started_at: '2026-08-27T00:57:30-07:00'
     deadline_at: '2026-08-27T01:17:30-07:00'
     expected_output: >-
-      A generated n = 11 rational Witness/v1 control, exact generic and independent
+      A generated n = 11 rational Witness/v2 control, exact generic and independent
       replays, and focused mutations for zero cap, incomplete geometry, overlap, and
       false claim widening.
     validation_command: >-
@@ -1243,7 +1243,7 @@ session:
       Delete the candidate artifact, retain the typed promotion failure and exact
       parameter receipt, leave BC-032 open, and rotate to BC-034.
     outcome: >-
-      Generated a byte-stable rational Witness/v1 control from the retained n = 11
+      Generated a byte-stable rational Witness/v2 control from the retained n = 11
       decimal pose at 36 rational digits. Its exact side is strictly above the source
       side by about 2.88e-31 and remains far below the declared 1e-8 relaxation cap.
       Both the generic exact verifier and a separate Fraction-only checker accept all

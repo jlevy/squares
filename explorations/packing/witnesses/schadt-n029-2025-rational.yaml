@@ -1,5 +1,5 @@
 softschema:
-  contract: packing.squares:Witness/v1
+  contract: packing.squares:Witness/v2
   schema: witness.schema.yaml
   envelope: witness
   status: enforced
@@ -307,7 +307,7 @@ witness:
     - - 4930535899906512939318226046481407263589990651293931822604648091421/1000000000000000000000000000000000000000000000000000000000000000000
       - 5933884313056993986907384754111011378431305699398690738475411051799/1000000000000000000000000000000000000000000000000000000000000000000
   claim:
-    assurance: verified
+    coordinate_provenance: verified
     method: exact-algebraic
     limitations: Exact feasible upper-bound witness derived by rational robustification; does not establish
       global optimality or certify the original decimal pose.

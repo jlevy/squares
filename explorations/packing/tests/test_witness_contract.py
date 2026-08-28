@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Behavior and regression checks for the generic Witness/v1 command boundary."""
+"""Behavior and regression checks for the generic Witness/v2 command boundary."""
 
 from __future__ import annotations
 
@@ -27,11 +27,11 @@ WITNESSES = ROOT / "witnesses"
 def main() -> int:
     grid = load_witness(WITNESSES / "grid-n004.yaml")
     grid_result, grid_report = exact_verify(grid)
-    assert grid_report.valid and grid_result["assurance"] == "verified"
+    assert grid_report.valid and grid_result["coordinate_provenance"] == "verified"
 
     algebraic = load_witness(WITNESSES / "rotated-n001-sqrt2.yaml")
     algebraic_result, algebraic_report = exact_verify(algebraic)
-    assert algebraic_report.valid and algebraic_result["assurance"] == "verified"
+    assert algebraic_report.valid and algebraic_result["coordinate_provenance"] == "verified"
     assert algebraic_result["field_certificate"]["irreducible_over_q"] is True
     inspected = inspect_witness(algebraic)
     assert inspected["assurance_conclusion"] == "none"
@@ -43,11 +43,14 @@ def main() -> int:
         tolerance="1e-70",
     )
     assert algebraic_numeric_report.valid
-    assert algebraic_numeric["assurance"] == "numerically-checked"
+    assert algebraic_numeric["coordinate_provenance"] == "numerically-checked"
 
     overlap = load_witness(WITNESSES / "overlap-negative-control.yaml")
     overlap_result, overlap_report = exact_verify(overlap)
-    assert not overlap_report.valid and overlap_result["assurance"] == "not-established"
+    assert (
+        not overlap_report.valid
+        and overlap_result["coordinate_provenance"] == "not-established"
+    )
     assert not independent_check(WITNESSES / "overlap-negative-control.yaml")[
         "verification_passed"
     ]
@@ -64,7 +67,7 @@ def main() -> int:
 
     decimal = load_witness(WITNESSES / "schadt-n029-2025-decimal.yaml")
     mislabeled_decimal = deepcopy(decimal)
-    mislabeled_decimal["claim"]["assurance"] = "verified"
+    mislabeled_decimal["claim"]["coordinate_provenance"] = "verified"
     mislabeled_decimal["claim"]["method"] = "exact-algebraic"
     assert any(
         "require rational or algebraic scalar data" in problem
@@ -76,7 +79,7 @@ def main() -> int:
         precision=300,
         tolerance="1e-100",
     )
-    assert numeric_report.valid and numeric["assurance"] == "numerically-checked"
+    assert numeric_report.valid and numeric["coordinate_provenance"] == "numerically-checked"
     minimum_gap = Fraction(numeric["minimum_best_pair_gap"])
     assert Fraction(-1, 10**100) < minimum_gap < 0
     try:
@@ -112,7 +115,7 @@ def main() -> int:
     )
     retained = load_witness(WITNESSES / "schadt-n029-2025-rational.yaml")
     assert generated == retained
-    assert promoted_result["assurance"] == "verified"
+    assert promoted_result["coordinate_provenance"] == "verified"
     promoted_side = Fraction(generated["side"])
     assert Fraction(decimal["side"]) < promoted_side < Fraction("5.9343418049")
     assert independent_check(WITNESSES / "schadt-n029-2025-rational.yaml")[
@@ -137,6 +140,21 @@ def main() -> int:
             assert "duplicate key 'n'" in str(error)
         else:
             raise AssertionError("witness loader silently overwrote a duplicate key")
+
+        retired_name = Path(directory) / "retired-assurance.yaml"
+        retired_name.write_text(
+            (WITNESSES / "grid-n004.yaml")
+            .read_text(encoding="utf-8")
+            .replace("    coordinate_provenance:", "    assurance:", 1),
+            encoding="utf-8",
+        )
+        try:
+            load_witness(retired_name, fallback_schema=WITNESSES / "witness.schema.yaml")
+        except WitnessError as error:
+            assert error.kind == "schema-invalid"
+            assert str(error).startswith("claim:")
+        else:
+            raise AssertionError("witness loader accepted the retired claim.assurance name")
 
         truncated = Path(directory) / "truncated.txt"
         source_lines = (ROOT / "resources/web/schadt-s29-2025/squares.txt").read_text(

@@ -35,7 +35,7 @@ class WitnessError(ValueError):
 
 
 def load_witness(path: Path, *, fallback_schema: Path | None = None) -> dict[str, Any]:
-    """Load and structurally validate one Witness/v1 YAML artifact."""
+    """Load and structurally validate one Witness/v2 YAML artifact."""
     try:
         document = load_yaml(path.read_text(encoding="utf-8"))
     except yaml.YAMLError as error:
@@ -46,8 +46,8 @@ def load_witness(path: Path, *, fallback_schema: Path | None = None) -> dict[str
     witness = document.get("witness")
     if not isinstance(metadata, dict) or not isinstance(witness, dict):
         raise WitnessError("malformed-input", "expected softschema and witness objects")
-    if metadata.get("contract") != "packing.squares:Witness/v1":
-        raise WitnessError("unsupported-contract", "expected packing.squares:Witness/v1")
+    if metadata.get("contract") != "packing.squares:Witness/v2":
+        raise WitnessError("unsupported-contract", "expected packing.squares:Witness/v2")
     schema_path = path.parent / str(metadata.get("schema", "witness.schema.yaml"))
     if not schema_path.is_file() and fallback_schema is not None:
         schema_path = fallback_schema
@@ -119,10 +119,10 @@ def check_witness_semantics(witness: Mapping[str, Any]) -> list[str]:
 
     scalar_kind = (witness.get("scalar") or {}).get("kind")
     claim = witness.get("claim") or {}
-    assurance, method = claim.get("assurance"), claim.get("method")
+    provenance, method = claim.get("coordinate_provenance"), claim.get("method")
     if method in {"numerical-f64", "numerical-multiprecision"}:
-        if assurance == "verified":
-            problems.append("a numerical method cannot support assurance: verified")
+        if provenance == "verified":
+            problems.append("a numerical method cannot support coordinate_provenance: verified")
         if claim.get("precision") is None or claim.get("tolerance") is None:
             problems.append("numerical claims require actual precision and tolerance")
         precision = claim.get("precision")
@@ -138,11 +138,13 @@ def check_witness_semantics(witness: Mapping[str, Any]) -> list[str]:
             or "binary_bits" in precision
         ):
             problems.append("numerical-multiprecision claims require decimal_digits")
-    if assurance == "verified" and method not in {"exact-algebraic", "interval-certified"}:
-        problems.append("verified assurance requires an exact or interval-certified method")
+    if provenance == "verified" and method not in {"exact-algebraic", "interval-certified"}:
+        problems.append(
+            "verified coordinate_provenance requires an exact or interval-certified method"
+        )
     if method == "exact-algebraic" and scalar_kind == "decimal":
         problems.append("exact-algebraic claims require rational or algebraic scalar data")
-    if assurance == "verified" and not isinstance(witness.get("certificate"), Mapping):
+    if provenance == "verified" and not isinstance(witness.get("certificate"), Mapping):
         problems.append("verified claims require a replayable certificate record")
     if (
         scalar_kind in {"rational", "algebraic-number-field"}
@@ -390,7 +392,7 @@ def inspect_witness(witness: Mapping[str, Any], *, digits: int = 50) -> dict[str
             "min_y": _number(min(y for _, y in values)),
             "max_y": _number(max(y for _, y in values)),
         },
-        "declared_assurance": witness["claim"]["assurance"],
+        "declared_coordinate_provenance": witness["claim"]["coordinate_provenance"],
         "assurance_conclusion": "none",
         "limitations": "Inspection renders and summarizes; it checks no packing claim.",
     }
@@ -452,7 +454,7 @@ def numerical_check(
     result = {
         "operation": "check",
         "id": witness["id"],
-        "assurance": "numerically-checked",
+        "coordinate_provenance": "numerically-checked",
         "method": method,
         "precision": precision_record,
         "tolerance": tolerance,
@@ -475,7 +477,7 @@ def exact_verify(witness: Mapping[str, Any]) -> tuple[dict[str, Any], Report]:
     if witness["claim"]["method"] == "interval-certified":
         raise WitnessError(
             "checker-not-built",
-            "Witness/v1 can describe interval evidence, but the generic interval "
+            "Witness/v2 can describe interval evidence, but the generic interval "
             "certificate checker is not built",
         )
     squares, side, field = _exact_materialize(witness)
@@ -490,7 +492,7 @@ def exact_verify(witness: Mapping[str, Any]) -> tuple[dict[str, Any], Report]:
     result = {
         "operation": "verify",
         "id": witness["id"],
-        "assurance": "verified" if report.valid else "not-established",
+        "coordinate_provenance": "verified" if report.valid else "not-established",
         "method": "exact-algebraic",
         "verification_passed": report.valid,
         "n": report.n,
@@ -657,7 +659,7 @@ def promote_rational(
                 for original, square in zip(witness["squares"], squares, strict=True)
             ],
             "claim": {
-                "assurance": "verified",
+                "coordinate_provenance": "verified",
                 "method": "exact-algebraic",
                 "limitations": (
                     "Exact feasible upper-bound witness derived by rational robustification; "
@@ -679,7 +681,7 @@ def promote_rational(
         result = {
             "operation": "promote",
             "status": "certificate-produced",
-            "assurance": "verified",
+            "coordinate_provenance": "verified",
             "method": "exact-algebraic",
             "source_witness": witness["id"],
             "promoted_witness": promoted["id"],
@@ -706,7 +708,7 @@ def witness_document(witness: Mapping[str, Any], *, schema: str = "witness.schem
         raise WitnessError("malformed-option", "schema path must be non-empty")
     document = {
         "softschema": {
-            "contract": "packing.squares:Witness/v1",
+            "contract": "packing.squares:Witness/v2",
             "schema": schema,
             "envelope": "witness",
             "status": "enforced",

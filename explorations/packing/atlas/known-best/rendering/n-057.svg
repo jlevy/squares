@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:sqpack="https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1" width="960" height="680" viewBox="0 0 960 680" role="img" aria-labelledby="figure-title figure-description" data-static-fallback="final">
   <title id="figure-title">Known-best packing of 57 unit squares</title>
-  <desc id="figure-description">The retained known-best n=57 construction, normalized to Witness/v1 and rendered with the repository's deterministic house renderer.</desc>
+  <desc id="figure-description">The retained known-best n=57 construction, normalized to Witness/v2 and rendered with the repository's deterministic house renderer.</desc>
   <metadata>
     <sqpack:profile version="7">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>

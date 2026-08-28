@@ -93,7 +93,6 @@ def evidence_style(evidence: EvidenceTier) -> tuple[str, str, str]:
         EvidenceTier.CANDIDATE: ("candidate", "8 5", "?"),
         EvidenceTier.NUMERICALLY_CHECKED: ("numerically checked", "none", "N"),
         EvidenceTier.CERTIFIED_UPPER_BOUND: ("certified upper bound", "3 3", "U"),
-        EvidenceTier.PROVED_OPTIMUM: ("proved optimum", "none", "P"),
     }[evidence]
 
 

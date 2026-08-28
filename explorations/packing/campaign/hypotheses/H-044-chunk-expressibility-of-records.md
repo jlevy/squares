@@ -27,7 +27,7 @@ hypothesis:
     direction: at least 0.80
     threshold: 0.8
   instrument: >-
-    A deterministic chunk-partition solver over imported Witness/v1 geometry: enumerate
+    A deterministic chunk-partition solver over imported Witness/v2 geometry: enumerate
     admissible bar/L/rectangle subsets whose members fit one angle modulo quarter turns,
     classify every internal contact as exact (residual <= 1e-9) or near (residual <=
     1e-3), and solve the resulting exact-cover/set-packing problem. Within the registered

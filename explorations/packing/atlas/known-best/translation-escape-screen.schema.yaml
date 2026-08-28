@@ -1,0 +1,229 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:TranslationEscapeScreen/v1
+title: Known-best single-square translation escape screen
+description: >-
+  One-sided screen for translational play in the retained known-best packings. A case
+  with a certificate has a square that provably moves, modulo the contact tolerance; a
+  case without one has only been shown to admit no single-square translation, which is
+  not rigidity. Rotation and coordinated multi-square motion are outside the screen.
+type: object
+additionalProperties: false
+required:
+- aggregate
+- cases
+- claim_boundaries
+- excluded
+- generated_by
+- inputs
+- method
+- one_sidedness
+$defs:
+  decimal:
+    description: A decimal rendering of an exactly computed scalar.
+    type: string
+    pattern: ^-?[0-9]+(\.[0-9]+)?(e[+-]?[0-9]+)?$
+  tolerance:
+    type: string
+    pattern: ^1e-[0-9]+$
+  index_list:
+    type: array
+    items: {type: integer, minimum: 0}
+    uniqueItems: true
+properties:
+  aggregate:
+    type: object
+    additionalProperties: false
+    required:
+    - movable_squares
+    - records_excluded
+    - records_screened
+    - records_with_movable_square
+    - records_with_separating_square
+    - separating_squares
+    - squares_screened
+    - tolerance_disagreement_ns
+    properties:
+      movable_squares: {type: integer, minimum: 0}
+      records_excluded: {type: integer, minimum: 0}
+      records_screened: {type: integer, minimum: 0}
+      records_with_movable_square: {type: integer, minimum: 0}
+      records_with_separating_square:
+        description: >-
+          Records with a square that can be pushed clear of everything it touches. The
+          headline count: it is the class whose certificate survives a perturbation.
+        type: integer
+        minimum: 0
+      separating_squares: {type: integer, minimum: 0}
+      squares_screened: {type: integer, minimum: 0}
+      tolerance_disagreement_ns:
+        description: >-
+          Records whose set of movable squares changed across the tolerance sweep. A
+          non-empty list is a finding about the witness, not about the packing.
+        $ref: '#/$defs/index_list'
+  cases:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      additionalProperties: false
+      required:
+      - min_container_slack
+      - min_pair_separation
+      - movable_square_count
+      - movable_squares
+      - n
+      - separating_square_count
+      - square_count
+      - stable_across_tolerances
+      properties:
+        min_container_slack:
+          description: Closest approach of any corner to the container boundary.
+          $ref: '#/$defs/decimal'
+        min_pair_separation:
+          description: >-
+            Worst separating-axis gap over candidate pairs; null when the packing has
+            no candidate pair. Negative beyond the tolerance would mean the retained
+            witness is not a valid packing at that tolerance.
+          oneOf:
+          - {$ref: '#/$defs/decimal'}
+          - {type: 'null'}
+        movable_square_count: {type: integer, minimum: 0}
+        movable_squares:
+          description: Certificates at the primary tolerance, in square order.
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required:
+            - active_blockers
+            - direction
+            - slide_distance
+            - square_index
+            - witness_kind
+            - witness_square_id
+            properties:
+              active_blockers:
+                description: What the square was touching when it was screened.
+                type: object
+                additionalProperties: false
+                required: [container_normals, square_indices]
+                properties:
+                  container_normals: {type: integer, minimum: 0, maximum: 4}
+                  square_indices: {$ref: '#/$defs/index_list'}
+              direction:
+                description: >-
+                  Unit direction of the certified translation. The angle is not stored
+                  alongside it: atan2(y, x) is the whole of it, and a second spelling of
+                  one fact is a second thing that can go stale.
+                type: object
+                additionalProperties: false
+                required: [x, y]
+                properties:
+                  x: {$ref: '#/$defs/decimal'}
+                  y: {$ref: '#/$defs/decimal'}
+              slide_distance:
+                description: >-
+                  Largest distance the square can travel along the direction before
+                  some constraint binds. Exact, because every constraint is affine in
+                  the slide parameter.
+                $ref: '#/$defs/decimal'
+              square_index:
+                description: Position in the materialized geometry, which the direction and distance refer to.
+                type: integer
+                minimum: 0
+              witness_kind:
+                description: >-
+                  strict-separating pushes the square clear of every active blocker at
+                  once; contact-preserving slides along a contact that stays closed.
+                enum: [contact-preserving, strict-separating]
+              witness_square_id:
+                description: >-
+                  The same square under the witness file's own numbering, so a reader
+                  can look it up there. It equals square_index + 1 for every retained
+                  witness, but the witness schema does not require that, so the
+                  cross-reference is stored rather than assumed.
+                type: integer
+                minimum: 1
+        movable_squares_by_tolerance:
+          description: >-
+            Per-tolerance sweep, present only where the tolerances disagree, which
+            is no case in the corpus today. Publishing it always would repeat the
+            primary list four times and say nothing that stable_across_tolerances
+            does not already say.
+          type: object
+          additionalProperties: false
+          minProperties: 2
+          patternProperties:
+            ^1e-[0-9]+$: {$ref: '#/$defs/index_list'}
+        n: {type: integer, minimum: 1}
+        separating_square_count: {type: integer, minimum: 0}
+        separating_squares_by_tolerance:
+          description: >-
+            As movable_squares_by_tolerance, for squares that can be pushed clear.
+          type: object
+          additionalProperties: false
+          minProperties: 2
+          patternProperties:
+            ^1e-[0-9]+$: {$ref: '#/$defs/index_list'}
+        square_count: {type: integer, minimum: 1}
+        stable_across_tolerances:
+          description: Both classes named the same squares at every tolerance screened.
+          type: boolean
+  claim_boundaries:
+    description: What a reader may and may not conclude from this file.
+    type: array
+    minItems: 4
+    items: {type: string, minLength: 20}
+  excluded:
+    description: >-
+      Records the screen refuses to report on, with the measurement that disqualified
+      them. Excluding a record is a claim about the witness, not about the packing.
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required: [bead, n, note, reason, shape_residual, source_kind]
+      properties:
+        bead: {type: string, minLength: 1}
+        n: {type: integer, minimum: 1}
+        note: {type: string, minLength: 20}
+        reason: {const: witness-shape-residual-above-limit}
+        shape_residual: {$ref: '#/$defs/decimal'}
+        source_kind: {type: string, minLength: 1}
+  generated_by: {type: string, minLength: 1}
+  inputs:
+    type: object
+    additionalProperties: false
+    required: [corpus, witnesses]
+    properties:
+      corpus: {type: string, minLength: 1}
+      witnesses: {type: string, minLength: 1}
+  method:
+    type: object
+    additionalProperties: false
+    required:
+    - certificate_classes
+    - certificate_replay
+    - direction_search
+    - exactness
+    - materialization_digits
+    - primary_tolerance
+    - shape_residual_limit
+    - tolerances
+    properties:
+      certificate_classes: {type: string, minLength: 20}
+      certificate_replay: {type: string, minLength: 20}
+      direction_search: {type: string, minLength: 20}
+      exactness: {type: string, minLength: 20}
+      materialization_digits: {type: integer, minimum: 30}
+      primary_tolerance: {$ref: '#/$defs/tolerance'}
+      shape_residual_limit: {$ref: '#/$defs/decimal'}
+      tolerances:
+        type: array
+        minItems: 2
+        uniqueItems: true
+        items: {$ref: '#/$defs/tolerance'}
+  one_sidedness:
+    description: The asymmetry between a hit and a miss, stated in the artifact itself.
+    type: string
+    minLength: 100

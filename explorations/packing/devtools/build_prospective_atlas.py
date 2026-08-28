@@ -242,7 +242,7 @@ def _render(witness: dict) -> str:
             overlays=frozenset(),
             title=f"Prospective source construction for {n} unit squares",
             description=(
-                f"The source-selected n={n} construction, normalized to Witness/v1 and "
+                f"The source-selected n={n} construction, normalized to Witness/v2 and "
                 "drawn with the repository deterministic house renderer. This is a "
                 "feasible construction, not an optimality or chunk-structure claim."
             ),
@@ -283,7 +283,7 @@ def _manifest_entry(entry: dict, witness: dict) -> dict:
         },
         "source": source,
         "witness": {
-            "assurance": claim["assurance"],
+            "coordinate_provenance": claim["coordinate_provenance"],
             "id": witness["id"],
             "method": claim["method"],
             "path": f"witnesses/prospective/n-{n:03d}.yaml",

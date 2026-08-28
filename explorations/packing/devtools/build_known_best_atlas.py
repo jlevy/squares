@@ -236,6 +236,10 @@ SUMMARY_LEGEND_BASELINE = Decimal(2540)
 # figure is the same family everywhere it is opened.
 SUMMARY_FONT = "Helvetica, Arial, sans-serif"
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
+# The one failure this catches: the committed PNG was exported from an older SVG.
+# --check rebuilds the SVG and compares it in full, but nothing otherwise ties the
+# export to it, and re-rendering a 25x26in page on every gate run to compare bytes
+# costs far more than reading a tEXt chunk. Not a tamper check; a staleness link.
 PNG_SOURCE_KEY = b"sqpack-source-svg-sha256"
 PNG_RENDER_TIMEOUT_SECONDS = 120
 
@@ -534,7 +538,12 @@ def frame_from_witness(witness: dict) -> PackingFrame:
         for index, corners in enumerate(source_squares, start=1)
     )
     claim = witness["claim"]
-    if claim["assurance"] == "verified":
+    # The tier states what this drawn packing establishes, which is exactly what
+    # coordinate_provenance answers: exact coordinates make the frame a certified
+    # upper bound, checked decimals make it numerically checked. Optimality is not
+    # on this ladder and is not readable from a witness; a figure that wants to say
+    # "proved" reads packing.status from frontier/n-NNN.md instead.
+    if claim["coordinate_provenance"] == "verified":
         evidence = EvidenceTier.CERTIFIED_UPPER_BOUND
         check = CheckSummary(
             passed=True,
@@ -578,7 +587,7 @@ def _render(witness: dict) -> str:
             overlays=frozenset(),
             title=f"Known-best packing of {n} unit squares",
             description=(
-                f"The retained known-best n={n} construction, normalized to Witness/v1 "
+                f"The retained known-best n={n} construction, normalized to Witness/v2 "
                 "and rendered with the repository's deterministic house renderer."
             ),
         ),
@@ -1227,7 +1236,7 @@ def _manifest_entry(built: BuiltCase) -> dict:
     if plan.kind == "exact-grid":
         derivation = "canonical row-major subset of an exact integer grid"
     elif plan.kind == "kingbird-derived-facts":
-        derivation = "deterministic reuse of retained Witness/v1 numerical center/angle facts"
+        derivation = "deterministic reuse of retained Witness/v2 numerical center/angle facts"
     elif n == plan.source_n:
         derivation = "direct normalization of complete source geometry"
     else:
@@ -1255,7 +1264,7 @@ def _manifest_entry(built: BuiltCase) -> dict:
         "witness": {
             "id": built.witness["id"],
             "path": f"witnesses/known-best/n-{n:03d}.yaml",
-            "assurance": claim["assurance"],
+            "coordinate_provenance": claim["coordinate_provenance"],
             "method": claim["method"],
             **({"tolerance": claim["tolerance"]} if "tolerance" in claim else {}),
         },

@@ -40,7 +40,7 @@
           "source_n": 1
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n001",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-001.yaml"
@@ -69,7 +69,7 @@
           "source_n": 2
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n002",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-002.yaml"
@@ -98,7 +98,7 @@
           "source_n": 3
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n003",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-003.yaml"
@@ -127,7 +127,7 @@
           "source_n": 4
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n004",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-004.yaml"
@@ -147,7 +147,7 @@
         },
         "reported_side": "2.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             5
@@ -157,7 +157,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-5.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n005",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-005.yaml",
@@ -187,7 +187,7 @@
           "source_n": 6
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n006",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-006.yaml"
@@ -216,7 +216,7 @@
           "source_n": 7
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n007",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-007.yaml"
@@ -245,7 +245,7 @@
           "source_n": 8
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n008",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-008.yaml"
@@ -274,7 +274,7 @@
           "source_n": 9
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n009",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-009.yaml"
@@ -294,7 +294,7 @@
         },
         "reported_side": "3.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             10
@@ -304,7 +304,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-10.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n010",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-010.yaml",
@@ -325,7 +325,7 @@
         },
         "reported_side": "3.87708359002281",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             11
@@ -335,7 +335,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-11.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n011",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-011.yaml",
@@ -365,7 +365,7 @@
           "source_n": 12
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n012",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-012.yaml"
@@ -394,7 +394,7 @@
           "source_n": 13
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n013",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-013.yaml"
@@ -423,7 +423,7 @@
           "source_n": 14
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n014",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-014.yaml"
@@ -452,7 +452,7 @@
           "source_n": 15
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n015",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-015.yaml"
@@ -481,7 +481,7 @@
           "source_n": 16
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n016",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-016.yaml"
@@ -501,7 +501,7 @@
         },
         "reported_side": "4.67553009360455",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             17
@@ -511,7 +511,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-17.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n017",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-017.yaml",
@@ -532,7 +532,7 @@
         },
         "reported_side": "4.82287565553229",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             18
@@ -542,7 +542,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-18.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n018",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-018.yaml",
@@ -563,7 +563,7 @@
         },
         "reported_side": "4.88561808316412",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             19
@@ -573,7 +573,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-19.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n019",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-019.yaml",
@@ -603,7 +603,7 @@
           "source_n": 20
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n020",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-020.yaml"
@@ -632,7 +632,7 @@
           "source_n": 21
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n021",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-021.yaml"
@@ -661,7 +661,7 @@
           "source_n": 22
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n022",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-022.yaml"
@@ -690,7 +690,7 @@
           "source_n": 23
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n023",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-023.yaml"
@@ -719,7 +719,7 @@
           "source_n": 24
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n024",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-024.yaml"
@@ -748,7 +748,7 @@
           "source_n": 25
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n025",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-025.yaml"
@@ -768,7 +768,7 @@
         },
         "reported_side": "5.62132034355964",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             26
@@ -778,7 +778,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-26b.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n026",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-026.yaml",
@@ -799,7 +799,7 @@
         },
         "reported_side": "5.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             27
@@ -809,7 +809,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-27.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n027",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-027.yaml",
@@ -830,7 +830,7 @@
         },
         "reported_side": "5.82444461667405",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             28
@@ -840,7 +840,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-28.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n028",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-028.yaml",
@@ -861,7 +861,7 @@
         },
         "reported_side": "5.93383346267692",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             29
@@ -871,7 +871,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-29.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n029",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-029.yaml",
@@ -901,7 +901,7 @@
           "source_n": 30
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n030",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-030.yaml"
@@ -930,7 +930,7 @@
           "source_n": 31
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n031",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-031.yaml"
@@ -959,7 +959,7 @@
           "source_n": 32
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n032",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-032.yaml"
@@ -988,7 +988,7 @@
           "source_n": 33
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n033",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-033.yaml"
@@ -1017,7 +1017,7 @@
           "source_n": 34
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n034",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-034.yaml"
@@ -1046,7 +1046,7 @@
           "source_n": 35
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n035",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-035.yaml"
@@ -1075,7 +1075,7 @@
           "source_n": 36
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n036",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-036.yaml"
@@ -1095,7 +1095,7 @@
         },
         "reported_side": "6.59861960924436",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             37
@@ -1105,7 +1105,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-37.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n037",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-037.yaml",
@@ -1126,7 +1126,7 @@
         },
         "reported_side": "6.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             38
@@ -1136,7 +1136,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-38.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n038",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-038.yaml",
@@ -1157,7 +1157,7 @@
         },
         "reported_side": "6.81072208306864",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             39
@@ -1167,7 +1167,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-39.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n039",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-039.yaml",
@@ -1188,7 +1188,7 @@
         },
         "reported_side": "6.82842712474619",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             40
@@ -1198,7 +1198,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-40.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n040",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-040.yaml",
@@ -1219,7 +1219,7 @@
         },
         "reported_side": "6.92669309446880",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             41
@@ -1229,7 +1229,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-41.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n041",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-041.yaml",
@@ -1259,7 +1259,7 @@
           "source_n": 42
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n042",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-042.yaml"
@@ -1288,7 +1288,7 @@
           "source_n": 43
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n043",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-043.yaml"
@@ -1317,7 +1317,7 @@
           "source_n": 44
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n044",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-044.yaml"
@@ -1346,7 +1346,7 @@
           "source_n": 45
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n045",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-045.yaml"
@@ -1375,7 +1375,7 @@
           "source_n": 46
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n046",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-046.yaml"
@@ -1404,7 +1404,7 @@
           "source_n": 47
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n047",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-047.yaml"
@@ -1433,7 +1433,7 @@
           "source_n": 48
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n048",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-048.yaml"
@@ -1462,7 +1462,7 @@
           "source_n": 49
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n049",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-049.yaml"
@@ -1482,7 +1482,7 @@
         },
         "reported_side": "7.57142857142857",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             50
@@ -1492,7 +1492,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-50.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n050",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-050.yaml",
@@ -1513,7 +1513,7 @@
         },
         "reported_side": "7.70079923541701",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             51
@@ -1523,7 +1523,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-51.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n051",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-051.yaml",
@@ -1544,7 +1544,7 @@
         },
         "reported_side": "7.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             52
@@ -1554,7 +1554,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-52.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n052",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-052.yaml",
@@ -1575,7 +1575,7 @@
         },
         "reported_side": "7.82287565553229",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             53
@@ -1585,7 +1585,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-53.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n053",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-053.yaml",
@@ -1606,7 +1606,7 @@
         },
         "reported_side": "7.84666719284348",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             54
@@ -1616,7 +1616,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-54.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n054",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-054.yaml",
@@ -1637,7 +1637,7 @@
         },
         "reported_side": "7.94577100750391",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             55
@@ -1647,7 +1647,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-55.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n055",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-055.yaml",
@@ -1677,7 +1677,7 @@
           "source_n": 56
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n056",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-056.yaml"
@@ -1706,7 +1706,7 @@
           "source_n": 57
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n057",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-057.yaml"
@@ -1735,7 +1735,7 @@
           "source_n": 58
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n058",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-058.yaml"
@@ -1764,7 +1764,7 @@
           "source_n": 59
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n059",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-059.yaml"
@@ -1793,7 +1793,7 @@
           "source_n": 60
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n060",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-060.yaml"
@@ -1822,7 +1822,7 @@
           "source_n": 61
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n061",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-061.yaml"
@@ -1851,7 +1851,7 @@
           "source_n": 62
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n062",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-062.yaml"
@@ -1880,7 +1880,7 @@
           "source_n": 63
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n063",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-063.yaml"
@@ -1909,7 +1909,7 @@
           "source_n": 64
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n064",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-064.yaml"
@@ -1929,7 +1929,7 @@
         },
         "reported_side": "8.53553390593273",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             65
@@ -1939,7 +1939,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-65.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n065",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-065.yaml",
@@ -1960,7 +1960,7 @@
         },
         "reported_side": "8.65685424949238",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             66
@@ -1970,7 +1970,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-66.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n066",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-066.yaml",
@@ -1991,7 +1991,7 @@
         },
         "reported_side": "8.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             67
@@ -2001,7 +2001,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-67.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n067",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-067.yaml",
@@ -2032,7 +2032,7 @@
           "url": "https://hmbelvedere.com/packings/n068.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n068",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-068.yaml",
@@ -2063,7 +2063,7 @@
           "url": "https://hmbelvedere.com/packings/n069.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n069",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-069.yaml",
@@ -2084,7 +2084,7 @@
         },
         "reported_side": "8.88166675700900",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             70
@@ -2094,7 +2094,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-70.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n070",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-070.yaml",
@@ -2115,7 +2115,7 @@
         },
         "reported_side": "8.94407155757031",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             71
@@ -2125,7 +2125,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-71.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n071",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-071.yaml",
@@ -2155,7 +2155,7 @@
           "source_n": 72
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n072",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-072.yaml"
@@ -2184,7 +2184,7 @@
           "source_n": 73
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n073",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-073.yaml"
@@ -2213,7 +2213,7 @@
           "source_n": 74
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n074",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-074.yaml"
@@ -2242,7 +2242,7 @@
           "source_n": 75
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n075",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-075.yaml"
@@ -2271,7 +2271,7 @@
           "source_n": 76
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n076",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-076.yaml"
@@ -2300,7 +2300,7 @@
           "source_n": 77
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n077",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-077.yaml"
@@ -2329,7 +2329,7 @@
           "source_n": 78
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n078",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-078.yaml"
@@ -2358,7 +2358,7 @@
           "source_n": 79
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n079",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-079.yaml"
@@ -2387,7 +2387,7 @@
           "source_n": 80
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n080",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-080.yaml"
@@ -2416,7 +2416,7 @@
           "source_n": 81
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n081",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-081.yaml"
@@ -2436,7 +2436,7 @@
         },
         "reported_side": "9.53553390593273",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             82
@@ -2446,7 +2446,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-82.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n082",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-082.yaml",
@@ -2467,7 +2467,7 @@
         },
         "reported_side": "9.63482562092335",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             83
@@ -2477,7 +2477,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-83.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n083",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-083.yaml",
@@ -2498,7 +2498,7 @@
         },
         "reported_side": "9.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             84
@@ -2508,7 +2508,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-84.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n084",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-084.yaml",
@@ -2529,7 +2529,7 @@
         },
         "reported_side": "9.74264068711928",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             85
@@ -2539,7 +2539,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-85b.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n085",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-085.yaml",
@@ -2560,7 +2560,7 @@
         },
         "reported_side": "9.82287565553229",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             86
@@ -2570,7 +2570,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-86.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n086",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-086.yaml",
@@ -2591,7 +2591,7 @@
         },
         "reported_side": "9.83881743996618",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             87
@@ -2601,7 +2601,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-87.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n087",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-087.yaml",
@@ -2622,7 +2622,7 @@
         },
         "reported_side": "9.88815305375857",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             88
@@ -2632,7 +2632,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-88.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n088",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-088.yaml",
@@ -2653,7 +2653,7 @@
         },
         "reported_side": "9.94974746830583",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             89
@@ -2663,7 +2663,7 @@
           "url": "https://kingbird.myphotos.cc/packing/square-89.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-known-best-n089",
           "method": "numerical-multiprecision",
           "path": "witnesses/known-best/n-089.yaml",
@@ -2693,7 +2693,7 @@
           "source_n": 90
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n090",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-090.yaml"
@@ -2722,7 +2722,7 @@
           "source_n": 91
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n091",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-091.yaml"
@@ -2751,7 +2751,7 @@
           "source_n": 92
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n092",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-092.yaml"
@@ -2780,7 +2780,7 @@
           "source_n": 93
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n093",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-093.yaml"
@@ -2809,7 +2809,7 @@
           "source_n": 94
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n094",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-094.yaml"
@@ -2838,7 +2838,7 @@
           "source_n": 95
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n095",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-095.yaml"
@@ -2867,7 +2867,7 @@
           "source_n": 96
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n096",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-096.yaml"
@@ -2896,7 +2896,7 @@
           "source_n": 97
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n097",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-097.yaml"
@@ -2925,7 +2925,7 @@
           "source_n": 98
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n098",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-098.yaml"
@@ -2954,7 +2954,7 @@
           "source_n": 99
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n099",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-099.yaml"
@@ -2983,7 +2983,7 @@
           "source_n": 100
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-known-best-n100",
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-100.yaml"

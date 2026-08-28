@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent exact checker for rational-corner Witness/v1 files.
+"""Independent exact checker for rational-corner Witness/v2 files.
 
 This intentionally shares no geometry or verification code with ``sqpack.witness`` or
 ``sqpack.verify``. It exists because a promotion generator accepting its own output
@@ -23,7 +23,7 @@ Square = list[Point]
 def parse(path: Path) -> tuple[list[Square], Fraction]:
     document = yaml.safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(document, dict) or not isinstance(document.get("witness"), dict):
-        raise TypeError("expected a Witness/v1 envelope")
+        raise TypeError("expected a Witness/v2 envelope")
     witness: dict[str, Any] = document["witness"]
     if witness.get("representation") != "corners" or witness.get("scalar") != {
         "kind": "rational"
@@ -114,7 +114,7 @@ def check(path: Path) -> dict[str, Any]:
         failures.append(f"{len(overlaps)} overlapping pairs; worst exact gap {min(overlaps)}")
     return {
         "verification_passed": not failures,
-        "assurance": "verified" if not failures else "not-established",
+        "coordinate_provenance": "verified" if not failures else "not-established",
         "method": "exact-algebraic",
         "field": "Q",
         "n": len(squares),

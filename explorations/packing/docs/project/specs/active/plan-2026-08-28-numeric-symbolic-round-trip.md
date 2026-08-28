@@ -125,7 +125,7 @@ no code in this repository, which is not the same as no capability.
 
 ### API Changes
 
-New devtools modules and one CLI surface; no change to `Witness/v1` or to the existing
+New devtools modules and one CLI surface; no change to `Witness/v2` or to the existing
 verification API. A promoted result must enter the record through the same witness and
 evidence contracts as any other certificate, so that assurance, method, precision and
 novelty are recorded rather than asserted in prose.

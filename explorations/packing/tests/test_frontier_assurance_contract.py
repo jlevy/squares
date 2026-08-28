@@ -75,6 +75,9 @@ def valid_case() -> dict[str, object]:
         "reported_upper_bound": {
             "value": "3",
             "exact_form": "3",
+            # The catalogue pictures n = 9 and says nothing about its rigidity. That
+            # silence is transcribed, not converted into a claim that it can move.
+            "catalogue_rigid": "not-stated",
             "construction_method": "trivial-grid",
             "source_key": "[Kingbird]",
             "evidence": ["E-grid-exact"],
@@ -88,6 +91,7 @@ def valid_case() -> dict[str, object]:
             "evidence": ["E-grid-exact"],
         },
         "verified_lower_bound": deepcopy(bound),
+        "rigidity": None,
         "evidence": ["E-grid-exact"],
         "conflicts": [],
         "blockers": [],
