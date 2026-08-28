@@ -1,27 +1,29 @@
 # Thinking Scratchpad
 
-This repository contains evidence-ranked research reports on computation, mathematical
-foundations, physics, geometry, and biology.
+Square packing: how many unit squares fit inside a square of side `s`, how to search for
+the packings that answer it, and how to certify the answer exactly rather than
+numerically.
+
+All of it lives in one self-contained directory,
+[`explorations/packing/`](explorations/packing/README.md), which owns its reports, the
+primary literature they cite, and the working code — so the whole line of work can be
+read, run, and moved as a single unit.
+
+| Start here | What it is |
+| --- | --- |
+| [README](explorations/packing/README.md) | The map: what is built, the workflow entry points, and the report index |
+| [SYNOPSIS](explorations/packing/SYNOPSIS.md) | The technical root: terminology contract, evidence rules, and current state |
+| [TUTORIAL](explorations/packing/TUTORIAL.md) | The problem from scratch, for a reader new to it |
+
 Reports separate what is proved from what is computed, conjectured, or merely asserted,
 and cite primary sources near the claims they support.
 
-Content lives in two trees, split by whether a line of work stands alone or comes with
-its own sources and code.
+## Moved elsewhere
 
-## Research reports
-
-The [research report index](docs/project/research/README.md) lists the standalone
-reports, their scope, and a suggested reading order.
-
-## Explorations
-
-[`explorations/`](explorations/) holds self-contained project directories.
-Each one owns everything for its topic — its reports, the primary literature they cite,
-and working code — so it can be read, run, and moved as a single unit.
-
-| Exploration | What is in it |
-| --- | --- |
-| [`packing/`](explorations/packing/README.md) | Square packing: three reports on `s(11)` and the algorithms and tooling around it, a local greppable archive of the primary literature, and an exact verifier that certifies Walter Trump’s 1979 packing over a degree-8 number field |
+The standalone research reports this repository used to carry — on algorithmic
+information theory, the Ruliad, the foundations of physics, and Michael Levin’s work in
+biology — now live in [jlevy/thinking](https://github.com/jlevy/thinking), with their
+history.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
