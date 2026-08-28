@@ -2124,9 +2124,13 @@ defects:
     A conjectural local property became structured fact, and the motivating case's
     numerical priority was overstated in the corpus artifact agents query.
   fix: >-
-    The rigidity field is now null; the text calls n = 11 the smallest open instance,
-    identifies its gap as fourth-smallest, and separates contact equations from a
-    missing local certificate.
+    The rigidity field was set to null; the text calls n = 11 the smallest open
+    instance, identifies its gap as fourth-smallest, and separates contact equations
+    from a missing local certificate. That null has since been superseded: the field
+    was split into `catalogue_rigid`, which records what the catalogue said, and a
+    structured `rigidity` block, which records what is established. A null could not
+    separate "the catalogue is silent" from "nobody knows", which is the same
+    conflation this defect was about.
   regression: none
   recorded_in: frontier/n-011.md
 - id: D-085
