@@ -25,8 +25,16 @@ format-check:
 	$(FLOWMARK) --auto --check .
 
 ## Install the git hooks. Run once after cloning.
+##
+## Pinned for the same reason FLOWMARK is pinned above: an unpinned zero-install
+## runner is what `tbd guidelines supply-chain-hardening` rule 6 warns against, and
+## it fails in a second way here. On 2026-08-27 the installed hook resolved lefthook
+## through a purged npx cache path, so every commit printed "Can't find lefthook in
+## PATH" and the format-markdown hook silently did nothing -- while AGENTS.md
+## promised that unformatted Markdown could not be committed by accident. 2.1.10 is
+## the version verified working here that day.
 hooks-install:
-	npx lefthook install
+	npx lefthook@2.1.10 install
 
 # ---------------------------------------------------------------------------
 # Hand-written agent skills.

@@ -105,6 +105,11 @@ Workflow selection is a routing decision, not a form to complete.
 | W6 | `research-loop` | A registered hypothesis has a fixed criterion, regime, budget, and instrument contract | A frozen instrument and one or more `exp-NNN` records, raw evidence, verdicts, and a current ledger | W2 for promoted or high-risk claims; otherwise W3 or another W6 slice |
 | W7 | `pipeline-improvement` | A named packing-pipeline surface or research consumer needs a new, stronger, simpler, or repaired capability | A bounded implementation or refactor, executable controls, explicit evidence limits, cost receipt, and readiness decision; no scientific verdict | W2 before a materially changed trust boundary reaches W6; otherwise W5 or W6 |
 
+The handoff column is the *usual* successor, not a rule the record enforces.
+Across 171 recorded phases only about a third of transitions follow it, and workflows
+repeat back-to-back when a purpose needs more than one slice.
+Treat it as the expected path and state a `switch_reason` when leaving it.
+
 Bounded implementation stays inside the workflow that owns its promised result: W1 or W2
 may correct research prose, W3 may implement a bounded exploratory derivation or
 visualization without spending an undeclared experiment budget, W4 may repair a process
@@ -169,10 +174,35 @@ The short hierarchy is:
 | Packing exploration | This self-contained project directory: research, code, sources, and records |
 | Campaign | The durable, multi-session square-packing research program and its shared record contract |
 | Series | One campaign-wide tooling regime and comparability boundary; `series-000` is a documented legacy exception awaiting migration |
+| Agenda | One mutable, ordered queue of bounded commitments |
+| Bounded commitment (`BC-NNN`) | One planned unit of work: a question, entry conditions, acceptable exits, and a budget, declared before it starts |
+| Bead (`think-xxxx`) | One durable work item in the `tbd` queue; what a commitment is *for* |
 | Agent session | One bounded interval of orchestrated work, containing one or more workflow phases |
 | Workflow phase / slice | One declared purpose and focus / one time-bounded action inside it |
 | Hypothesis / experiment | One falsifiable claim / one durable recorded round testing it |
 | Run / result / ledger | One tool invocation / one typed observation / the generated view of the record |
+
+Three of those are easy to confuse, because they share a shape — each declares a
+question, an entry condition, an acceptable ending, and a budget.
+They differ by lifetime and by who checks them:
+
+|  | Bead | Bounded commitment | Workflow phase |
+| --- | --- | --- | --- |
+| **Is** | A durable work item | A planned attempt at one | One executed step |
+| **Lives in** | `tbd` | An agenda | One session |
+| **Lifetime** | Until closed | Across sessions | Minutes to an hour |
+| **Typed by** | issue type | `purpose` and `owner_focus` | `workflow` (W1–W7) and `focus` |
+| **Falsifier** | none | `exit`, judged | `kill_condition` and `validation_command`, runnable |
+
+Read it as: a **bead** says what needs doing; a **bounded commitment** says what would
+have to be true to call it settled; a **workflow phase** is one typed move toward that,
+with a command you can run right now to check it.
+
+The relation is one-to-many downward and it is not tidy.
+A commitment is attempted over many phases — measured across the recorded sessions, the
+median is eight phases per commitment and no commitment has ever been settled by a
+single one. Several commitments may also share a bead when the same work is re-attempted
+under changed prerequisites.
 
 ### The Record, by ID
 
@@ -188,8 +218,8 @@ full definitions:
 | `exp-NNN` | One experiment: the durable artifact for one research round, which may aggregate several raw runs |
 | `series-NNN` | One campaign tooling regime; experiments also record their narrower subject and provenance |
 | `session-NNN` | One escalated agent-session record: entry workflow, ordered phase history, budget, evidence, stop reason, and handoff |
-| `agenda-NNN` | One mutable coordination queue ordering bounded cells by dependency and readiness |
-| `BC-NNN` | One cell in an agenda’s priority queue, currently the basin-map confidence ladder |
+| `agenda-NNN` | One mutable coordination queue ordering bounded commitments by dependency and readiness |
+| `BC-NNN` | One **bounded commitment**: a planned, budgeted unit of work in an agenda, with declared entry conditions, acceptable exits, and an owning bead |
 | `D-NNN` | One defect: what went wrong, what caught it, and what now stops it recurring |
 | `T-N` | The synopsis’s shorthand for a theoretical result established in this repository |
 | `think-xxxx` | One bead: a tracked work item in the `tbd` queue |
@@ -202,7 +232,7 @@ The eight words a reader meets everywhere here, in one line each;
 | Term | Means |
 | --- | --- |
 | **configuration** | A placement of all `n` squares plus the container side: `3n + 1` coordinates |
-| **cell** | A choice of separating axis and order for every pair of squares; at fixed angles, one cell is one linear program |
+| **cell** | A choice of separating axis and order for every pair of squares; at fixed angles, one cell is one linear program. This is the only meaning of *cell* here: `BC-NNN` is a bounded **commitment**, not a cell |
 | **quench** | The deterministic refinement carrying a configuration to a local optimum |
 | **basin** | For a fixed deterministic quench, the preimage of one returned pose; this point-basin can split one connected terminal component |
 | **polish** vs **exploration** | Refining within the basin you are in, versus reaching a different one; neither term says anything about formal assurance |
@@ -218,7 +248,7 @@ The operating documents divide ownership rather than repeat one another:
 | [Synopsis](SYNOPSIS.md#workflow-entry-contracts) | Full workflow contracts, work-unit vocabulary, transitions, and current technical state |
 | [Campaign runbook](campaign/README.md#the-bounded-research-cycle) | W6 experiment mechanics, portable slice protocol, clocks, result routing, and refusal rules |
 | [Agent sessions](campaign/agent-sessions/README.md) | Versioned objective, entry workflow, phase history, budget, evidence, stop reason, and handoff |
-| [Basin confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) | Mutable, size-by-size priority queue separating tool validation, measurement validation, and genuine research |
+| [Agendas](campaign/agendas/) | Mutable, ordered queues of bounded commitments, separating tool validation, measurement validation, and genuine research; agenda-001 is the original size-by-size confidence ladder |
 | [Current launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | Broader scientific and operational readiness; the agent loop can work now, while the generic numerical runner remains a no-go |
 | [Program review](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md#the-epic-and-its-bead-map) | Four-focus epic, durable findings, and bead map |
 

@@ -103,6 +103,22 @@ properties:
             Required by the checker in a clocked session; finalization is the final
             reserve phase.
         objective: {type: string, minLength: 1}
+        commitment:
+          type: string
+          pattern: "^BC-[0-9]{3}$"
+          description: >-
+            Optional: the bounded commitment this phase serves. Optional on purpose, so
+            no terminal session record has to be rewritten to adopt the field. Where it
+            is present the checker verifies the commitment exists, which the prose link
+            it replaces could not.
+        bead:
+          type: string
+          pattern: "^think-[a-z0-9]+$"
+          description: >-
+            Optional: the tracked work item this phase serves, when it differs from the
+            session's primary_bead. Sixteen of twenty sessions that name beads in phase
+            text name one other than their primary, and that mapping previously existed
+            only in prose.
         status: {enum: [in_progress, completed, stopped]}
         entered_by:
           enum: [session_start, planned_checkpoint, evidence_checkpoint, user_request]

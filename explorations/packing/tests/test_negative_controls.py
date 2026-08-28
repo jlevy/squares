@@ -22,6 +22,8 @@ from devtools.run_negative_controls import (
 def test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots() -> None:
     assert ROOT / "atlas/prospective/rendering" in PRUNE
     assert ROOT / "witnesses/prospective" in PRUNE
+    assert ROOT / "atlas/known-best/rendering" in PRUNE
+    assert ROOT / "atlas/known-best/contact-overlays" in PRUNE
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 

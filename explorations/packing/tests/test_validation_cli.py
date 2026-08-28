@@ -611,6 +611,39 @@ def test_failure_summary_uses_singular_step_for_one_failure() -> None:
     assert "1 STEP FAILED:" in stdout.getvalue()
 
 
+def test_multi_command_step_stops_at_first_failure_without_printing_success(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    marker = tmp_path / "later-command-ran"
+    commands = (
+        (sys.executable, "-c", "raise SystemExit(17)"),
+        (
+            sys.executable,
+            "-c",
+            f"from pathlib import Path; Path({str(marker)!r}).touch()",
+        ),
+    )
+    monkeypatch.setattr(validate, "ACTIVITY_MARKER", tmp_path / ".gate-running")
+    monkeypatch.setattr(
+        validate,
+        "STEPS",
+        (
+            validate.Step(
+                "multi-command mutation",
+                lambda context: validate._commands(context, commands),
+            ),
+        ),
+    )
+
+    status, stdout, stderr = _invoke("--jobs", "1")
+
+    assert status == 1
+    assert "command exited 17" in stderr
+    assert "1 STEP FAILED:" in stdout
+    assert "ALL CHECKS PASSED" not in stdout
+    assert not marker.exists()
+
+
 def test_frontier_contract_accepts_the_declared_schema_metadata(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:

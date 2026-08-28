@@ -6,18 +6,19 @@
 # the research document is generated from this file by python -m devtools.render_research_tables.
 #
 # RE-TEST RATHER THAN INHERIT. A "not retrievable" verdict is a negative search
-# result. This list has now been wrong six times: Gensane-Ryckelynck, Nagamochi
+# result. This list has now been wrong eight times: Gensane-Ryckelynck, Nagamochi
 # and Wang-Dong-Li were all freely available when re-tested on 2026-08-22, and
 # Markot 2021 was open access at PMC the whole time. Roth-Vaughan was supplied
 # by the requester on the same day. Stromquist's three memoranda were linked
 # directly from the author's publication page. Every entry below carries the
-# date it was last checked and the exact evidence.
+# date it was last checked and the exact evidence. Trump 2023 and El Moumni
+# 1999 were recovered from public author and institutional routes on 2026-08-27.
 softschema:
   contract: packing.squares:SourceAvailability/v1
   schema: source-availability.schema.yaml
   status: enforced
 
-last_checked: '2026-08-24'
+last_checked: '2026-08-27'
 archive: explorations/packing/resources/
 
 # Cleared since the first pass. Kept so the correction is visible, and as
@@ -57,6 +58,31 @@ recovered:
       asserts the unrestricted 2 + (4/5)sqrt(5) bound without coordinates, cover
       routing or proof. It therefore supplies no repair for the printed 2003 Figure 14
       gap.
+  - key: "[El Moumni 1999]"
+    title: Optimal Packings of Unit Squares in a Square
+    how: >
+      The Hungarian Academy's REAL-J institutional repository publicly serves the
+      complete published volume at https://real-j.mtak.hu/5478/; the article is PDF
+      pages 287-296 (printed pages 281-290). The full source scan and faithful text
+      extraction are retained locally. No article DOI was verified.
+    impact: >
+      Confirms the published proofs of s(7) = 3 and s(15) = 4 directly. The n = 7
+      proof combines a near-3-by-3 dissection, center forcing, a parallel-line
+      intersection bound, and three finite symmetry cases. The n = 15 proof applies
+      the paper's general parallel-line bound. This supplies a concrete proof-lane
+      replay control; it does not bear on n = 11 feasibility or optimality.
+  - key: "[Trump 2023]"
+    title: Packing of 11 unit squares in a square with minimum size
+    how: >
+      Walter Trump's public author page at https://trump.de/square-packing/index.htm
+      links the full PDF directly. The author copy and faithful text extraction are
+      retained locally; ResearchGate's blocked download is no longer the acquisition
+      route.
+    impact: >
+      Confirms the incidence description, degree-8 angle equation, and the author's
+      local-rigidity claim for the 1979 arrangement. It says that an improvement would
+      require an essentially different arrangement; it does not prove global
+      optimality.
 
 # Still missing. `blocker` is the mechanism, not a guess.
 unretrieved:
@@ -80,19 +106,6 @@ unretrieved:
     priority: 2
     route: author copy, institutional repository, or lawful institutional access
 
-  - key: "[El Moumni 1999]"
-    title: Optimal Packings of Unit Squares in a Square
-    authors: [Said El Moumni]
-    year: 1999
-    venue: Studia Sci. Math. Hungar. 35, 281-290
-    blocker: print_only
-    detail: No digital copy located.
-    depends_on_it: >
-      Published priority for s(7) = s(8) = 3 and s(15) = 4. No summary of this
-      field describes its method.
-    priority: 2
-    route: library access
-
   - key: "[Arslanov–Bui 2025]"
     title: Note on "efficient packings of unit squares in a large square"
     authors: [M. Z. Arslanov, Hong Duc Bui]
@@ -106,20 +119,6 @@ unretrieved:
     depends_on_it: Current continuation of the Kearney-Shiu delta_n / n_r line.
     priority: 2
     route: institutional subscription
-
-  - key: "[Trump 2023]"
-    title: Packing of 11 unit squares in a square with minimum size
-    authors: [Walter Trump]
-    year: 2023
-    venue: ResearchGate
-    blocker: bot_blocked
-    detail: ResearchGate returns 403 to automated clients.
-    depends_on_it: >
-      Accessible excerpts confirm rigidity and state the packing "cannot be
-      improved by computer programs as long as the same geometrical arrangement
-      is used" -- a statement about local, not global, optimality.
-    priority: 2
-    route: author request, or a browser session
 
   - key: "[Markót 2004]"
     title: Optimal Packing of 28 Equal Circles in a Unit Square - The First Reliable Solution

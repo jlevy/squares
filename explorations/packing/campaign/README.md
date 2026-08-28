@@ -140,13 +140,18 @@ Outcome and evidence are recorded only when it closes.
 | --- | ---: | --- |
 | Orientation | 10 minutes | Confirm the workflow, question, owning artifact, focused check, and the fuller session fields when escalation applies |
 | Evidence checkpoint | 20 minutes | Produce a passing check, minimized failure, retained measurement, source-bound derivation, or explicit blocked result; prose about continued investigation is not evidence |
-| Active slice | 30 minutes | Integrate a coherent checkpoint, or stop and preserve the partial work with its exact limitation; continuation requires a newly stated slice and clock |
+| Active slice | Up to 30 minutes | Integrate a coherent checkpoint, or stop and preserve the partial work with its exact limitation; continuation requires a newly stated slice and clock |
 | Finalization reserve | 15 minutes | Stop new work before the session deadline; reconcile artifacts, defects, beads, generated views, commits, pushes, and the next action |
 | Research command | Declared per hypothesis | Terminate or return at its own wall-clock bound and retain its stopping reason and resumable state |
 
 For multi-hour work, state the bounded slice plan through the next integration
 checkpoint before acting.
 Unless the user declares another cadence, place that checkpoint within about four hours.
+Thirty minutes is the maximum allocation before an inventory, not the default duration.
+Close a 5-, 10-, 15-, 20-, or 25-minute slice when its bounded output is complete; never
+pad it to fill the clock.
+Allocate another slice only after checking progress, dependency state, information
+value, and the remaining finalization reserve.
 At every slice boundary, compare measured command, coordinator, and delegation time with
 the estimates, finalization start, and session deadline.
 Shorten, split, reorder, or defer only future slices; never move a declared deadline or
@@ -237,8 +242,8 @@ coding agent, or a human changes the driver, not the research contract.
 A hypothesis registry is deliberately broad, while one agent session is deliberately
 narrow.
 A campaign agenda is the small coordination layer between them: an ordered set of
-bounded experiment cells that can be reprioritized at a checkpoint or divided among
-agents without changing a scientific claim.
+bounded commitments that can be reprioritized at a checkpoint or divided among agents
+without changing a scientific claim.
 
 The active [basin-map confidence ladder](agendas/agenda-001-basin-confidence-ladder.md)
 separates three purposes:
@@ -251,7 +256,7 @@ separates three purposes:
   validation dependencies pass.
 
 The agenda frontmatter is a lightweight soft schema, not an executable scheduler.
-It stores stable cell IDs, priorities, budgets, prerequisites, beads, and promised
+It stores stable commitment IDs, priorities, budgets, prerequisites, beads, and promised
 evidence; the body carries the rationale.
 Hypotheses still own criteria, experiment artifacts still own measurements, `tbd` still
 owns work dependencies, and the active session still owns the clock.
@@ -261,7 +266,7 @@ Update an agenda only at a checkpoint.
 A completed item means its bounded question has a retained answer, not that a basin map
 or hypothesis is complete.
 The generated ledger shows agenda states alongside experiments so the next agent does
-not need conversation history to find the next ready cell.
+not need conversation history to find the next ready commitment.
 
 ## Assurance and Method
 
@@ -362,13 +367,20 @@ move-denominated, so no equal-pair-budget comparison is yet admissible.
 | Budget | Value |
 | --- | --- |
 | Per round | tier S = `1e9` pair-tests; tier M = `1e11`; tier L = `1e13` |
-| Per session | 8 hours, or 40 rounds |
+| Default per session | 8 hours, or 40 rounds |
 | Per hypothesis | 3 rounds, then it must be `abandoned` with `reopen_when` |
 | Per round, wall clock | declare a `timebox` before starting; stopping when it expires is an outcome, not a failure |
 
 Stop, do not adapt, on: budget exhausted; queue empty; three consecutive guard refusals
 or crashes; a control cell breaching; any invariant check failing; or a decision that
 needs a human. Exit non-zero on an abnormal stop.
+
+The per-session value is a default safety bound, not a hard research limit.
+A longer user-level horizon may use multiple source sessions under one mutable agenda,
+or an explicitly reviewed longer session when that has less coordination cost.
+Reassess the pipeline, evidence quality, throughput, and remaining portfolio before
+extending the clock.
+Preserve a protected finalization reserve under either form.
 
 ### Effort, and how a round ends
 

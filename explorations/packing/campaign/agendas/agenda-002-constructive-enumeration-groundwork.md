@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-002
   title: Build the constructive proposer on foundations that can carry its results
-  updated: '2026-08-26'
+  updated: '2026-08-27'
   status: active
   objective: >-
     Sequence the stratified chunk-enumeration program from X-003 so that each cell buys
@@ -21,8 +21,8 @@ agenda:
   - id: BC-016
     purpose: measurement_validation
     owner_focus: correctness
-    instances: [5, 10, 11, 16]
-    state: ready
+    instances: [5, 10, 16]
+    state: blocked
     priority: 0
     question: >-
       Do aligned and glued chunk strata, which are the most degenerate cells this design
@@ -31,23 +31,40 @@ agenda:
     hypotheses: []
     budget: one bounded W7 slice; deterministic replay, no search
     entry: >-
-      the built cell-read quench, the proved n=5 and n=10 controls, and the exact n=16
-      not-below guard
+      retained input poses and symbolic active-cell rows for
+      `n005-seed007-known-answer`, `n010-seed014-known-answer`, and
+      `n016-grid-not-below`; pool widths one and ten; and peer routes
+      `.github/workflows/packing-validation.yml#validate` on `ubuntu-latest` and
+      `.github/workflows/packing-validation.yml#macos-portability` on `macos-latest`,
+      both using Python 3.14.7 and the frozen packing lock. Each receipt
+      must retain the actual runner, architecture, Python, NumPy, SciPy, and HiGHS
+      fingerprint rather than treating a moving runner label as the environment.
     exit: >-
-      A retained differential over declared toolchains showing either stable endpoints
-      and active cells on aligned strata, or a typed instability report naming the
-      affected rows. An instability finding blocks BC-018 rather than being carried into
-      it.
+      A complete `DegenerateCellDifferential/v1` receipt over every route, pool width,
+      and frozen row. The checker independently recomputes settled status, the n=5/n=10
+      proved-value or n=16 not-below guard, endpoint agreement at `LP_FEASIBLE_EPS`, and
+      canonical symbolic active-cell equality including every tied owner/axis choice.
+      A missing matrix row or first mismatch is a typed instability that blocks BC-018.
     bead: think-3yv8
     depends_on: []
     next_evidence: >-
-      retained aligned-stratum differential with per-row active-cell identity, attached
-      to the D-059 record
+      retain the three named input poses and an executable glued row, implement the
+      symbolic tied-axis label, independent receipt checker, and focused synthetic
+      mutations locally; then emit and compare the two workflow-route receipts
     note: >-
       Foundational, and specific to this design rather than generic hygiene: an
       enumerator spends most of its budget on exactly the symmetric, tie-rich cells
       where D-059 lives. If endpoint identity is toolchain-dependent there, an
-      enumeration ranking is not replayable and no coverage claim survives.
+      enumeration ranking is not replayable and no coverage claim survives. A bounded
+      2026-08-27 entry audit found that pool widths one and ten were declared but no peer
+      toolchain matrix was frozen, so it stopped without execution. The immediate W3
+      repair selected the existing Linux and macOS workflow routes and froze the runtime
+      receipt, intended target-free row ids, comparison floor, and symbolic tied-axis
+      contract. A deeper inventory then found that the golden rows drop their poses,
+      n=16 has only a value guard, terminal tie provenance is not retained, and glued
+      rows are not executable. BC-016 therefore stays blocked on those local instrument
+      inputs. Production `highs-ipm` remains only a status-4 fallback, not a peer arm.
+      This narrow control does not settle D-059's broader stochastic golden surface.
   - id: BC-017
     purpose: tool_validation
     owner_focus: efficiency
@@ -58,19 +75,36 @@ agenda:
       Can a stratum be priced in counted LP solves end to end, so enumeration results
       are comparable to each other and to the annealer without reference to wall time?
     hypotheses: []
-    budget: one bounded W7 slice
-    entry: the quench's existing solve path and the sqsearch pair-test meter
+    budget: two bounded W7 slices followed by one independent W2 audit
+    entry: >-
+      the completed source-free n=3 full-cell control, quench solver-attempt receipts,
+      and the sqsearch pair-test meter as separate accounting references; no complete
+      numerical full-cell semantics are yet frozen
     exit: >-
       Every enumerated stratum carries a retained LP-solve count and pair-test total;
       two runs under different host load produce identical counts.
     bead: think-u97a
     depends_on: []
-    next_evidence: identical retained counts across a loaded and unloaded host
+    next_evidence: >-
+      First retain a target-free tagged execution-plan receipt on the source-free n=3
+      control, with every wall and pair role visible and semantic-swap, forged-count,
+      and exact-replay controls. Then freeze the missing numerical semantics before any
+      real LP run. BC-017 completes only after real n=5 and n=10 executions retain
+      identical derived work and outcomes across declared pool widths and loaded and
+      unloaded host conditions.
     note: >-
-      D-126 makes wall-clock budgets load-dependent. A deterministic enumerator can
-      satisfy the work-unit rule by construction, which is why this is cheap here and
-      expensive everywhere else; doing it now also gives H-045 an admissible budget
-      currency before its first round rather than after.
+      D-126 makes wall-clock budgets load-dependent, but the target-free control exposes
+      an earlier instrumentation boundary. `solve_cell` counts actual retries while
+      collapsing seated-wall and contact/nonedge roles; `contact_realization` refuses
+      walls and omits nonedge separation; and sqsearch pair tests are dynamic overlap
+      tests, not compiled rows. The first slice therefore retains only a tagged
+      structural plan and derived accounting, with real LP attempts and sqsearch pair
+      tests both zero. This calibration-only tool evidence carries no coordinates, side,
+      geometry, feasibility, optimality, or n=11 target claim. BC-017 remains open until
+      the numerical semantics freeze and real n=5/n=10 counted executions agree across
+      pool width and host load. BC-018 separately still needs BC-016 plus the n=5, n=10,
+      and n=16 grammar controls. `think-u97a` separately requires stable n=4/n=10 quench
+      outcomes and work across pool widths and load.
   - id: BC-018
     purpose: tool_validation
     owner_focus: correctness
@@ -114,11 +148,11 @@ agenda:
       A versioned contact-assembly contract with explicit sliding degrees of freedom,
       complexity cost, canonical ties, and per-record certificates or typed limitations.
       The inspected n=1..100 corpus receives no H-044 verdict.
-    bead: think-eyix
+    bead: think-6mcd
     depends_on: []
     next_evidence: >-
-      CG-010 full fixed-angle cell controls with declared walls, one frozen separating
-      axis per non-edge, typed caps, and no target-sized execution
+      independent review of CG-010's structural full-cell control and a BC-016 or BC-017
+      readiness decision; numerical row compilation remains unbuilt
     parallel_group: corpus-measurement
     note: >-
       Independent of the enumerator: it reads geometry rather than searching. The first
@@ -127,9 +161,10 @@ agenda:
       partition, and eight are search-capped and therefore indeterminate. Broad contacts
       cover 1,780 of 1,860 non-grid squares. The versioned grammar, local uniform-angle
       prefilter, and 11,013-record abstract size-five atlas now represent and price
-      sliding contact scaffolds without claiming geometry or feasibility. CG-010's full
-      cell remains unbuilt. The 1-100 corpus was inspected during instrument repair and
-      is calibration-only.
+      sliding contact scaffolds without claiming geometry or feasibility. CG-010 now
+      retains one literal target-free structural label, joint orbit, derived price, and
+      typed mutations; numerical realization remains unbuilt. The 1-100 corpus was
+      inspected during instrument repair and is calibration-only.
   - id: BC-023
     purpose: tool_validation
     owner_focus: correctness
@@ -365,9 +400,10 @@ it: every cell is a bounded, deterministic, supervised slice.
 
 ## Handoff
 
-`BC-016`, `BC-017`, and `BC-023` are `ready` and independent of each other.
-The `corpus-measurement` group (`BC-023`, `BC-019`, `BC-024`) is a disjoint lane another
-agent may own concurrently with the instrument cells.
+`BC-016` is blocked; `BC-017`, `BC-019`, and `BC-024` are ready; and `BC-023` is
+complete.
+The remaining `corpus-measurement` cells (`BC-019` and `BC-024`) are a disjoint
+lane another agent may own concurrently with the instrument cells.
 Everything else is blocked in the order above.
 The grammar freeze at `BC-018` is the point after which no design change may be made
 without invalidating `H-045`.

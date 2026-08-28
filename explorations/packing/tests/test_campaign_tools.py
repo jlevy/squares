@@ -117,6 +117,42 @@ def _session_problems(
     )
 
 
+def _experiment_problems(
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    decision: str,
+    results: list[dict[str, object]],
+    lease: dict[str, str] | None,
+    now: dt.datetime,
+) -> list[str]:
+    """Run experiment cross-field invariants without repository link state."""
+    monkeypatch.setattr(ledger, "dead_links", list)
+    monkeypatch.setattr(ledger, "board_ids", _empty_board_ids)
+    experiment: dict[str, object] = {
+        "id": "exp-999",
+        "_path": Path("exp-999-contract-test.md"),
+        "series": "series-999",
+        "hypotheses": ["H-999"],
+        "subject": {"assurance": "verified", "method": "exact-algebraic"},
+        "instance": {"axis": "n", "point": 5, "role": "target"},
+        "results": results,
+        "verdict": {"decision": decision},
+    }
+    if decision != "in-progress":
+        experiment["effort"] = {"stopped_by": "dependency", "wall_seconds": 0}
+    if lease is not None:
+        experiment["lease"] = lease
+    return ledger.check(
+        [{"id": "series-999", "status": "open", "_path": Path("series-999.md")}],
+        [],
+        [{"id": "H-999", "_path": Path("H-999.md")}],
+        [experiment],
+        [],
+        agendas=[],
+        now=now,
+    )
+
+
 def _logbook_entry(path: Path) -> dict[str, object]:
     """Minimal run synopsis whose rollup matches `_bounded_session`."""
     sections = []
@@ -335,6 +371,34 @@ def test_active_agent_session_rejects_an_expired_absolute_deadline(
     assert (
         "session-999-contract-test.md: in-progress session deadline_at has passed"
     ) in problems
+
+
+def test_live_offset_lease_is_compared_as_the_same_utc_instant(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    problems = _experiment_problems(
+        monkeypatch,
+        decision="in-progress",
+        results=[],
+        lease={"expires": "2026-08-24T03:00:00-07:00"},
+        now=dt.datetime(2026, 8, 24, 9, tzinfo=dt.UTC).replace(tzinfo=None),
+    )
+
+    assert not any("STALE CLAIM" in problem for problem in problems)
+
+
+def test_terminal_round_requires_a_real_result(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    problems = _experiment_problems(
+        monkeypatch,
+        decision="blocked",
+        results=[],
+        lease=None,
+        now=dt.datetime(2026, 8, 24, tzinfo=dt.UTC).replace(tzinfo=None),
+    )
+
+    assert "exp-999-contract-test.md: terminal round without results" in problems
 
 
 def test_active_phase_and_delegation_reject_expired_slice_deadlines(

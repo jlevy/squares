@@ -31,12 +31,17 @@ grammar:
   - mandatory contact graph with normal axis and sign
   - mandatory wall contacts
   - canonical graph label and symmetry-orbit witness
+  - full-cell square-by-wall Boolean decision inventory
+  - exhaustive full-cell contact/non-edge pair partition
+  - one endpoint-owned local axis and pair order per full-cell pair
   continuous_semantics:
   - Every contact normal distance is exactly one unit in the assembly frame.
   - Every mandatory contact has tangential overlap at least the declared minimum_overlap.
   - Contact scaffolds do not freeze tangential offsets; the fixed-angle LP solves them.
   - Non-edges are not separation claims and may become active contacts after realization.
   - Wall hypotheses are equalities in the container frame and are charged in the label.
+  - FullFixedAngleCellLabel/v1 records total wall state structurally; it does not yet compile or enforce wall-equality rows.
+  - The full-cell layer freezes one oriented axis for each contact and non-edge while retaining the scaffold layer's non-edge-free semantics.
   - The current local realization prefilter accepts one fitted-angle class only and rejects mixed vertex colors before solving.
   complexity:
     ordered_tuple:
@@ -71,6 +76,7 @@ grammar:
   - Require semantic, caller-normalized color tokens; source-local class names are not label inputs.
   - Emit an orbit witness and reject labels whose replay does not return the canonical form.
   - Use deterministic tie order over canonical bytes; floating-point endpoint identity is absent.
+  - Transform the partition, fixed angles, every true and false wall decision, contacts, non-edges, and pair axes jointly before minimizing a full-cell label.
   controls:
   - id: CG-001
     expected: A diagonal point contact is not a contact-scaffold edge.
@@ -100,8 +106,8 @@ grammar:
     expected: The local contact-realization prefilter stops at its LP-solve cap with typed partial coverage.
     status: passing
   - id: CG-010
-    expected: A full fixed-angle cell enforces declared walls and one frozen separating axis per non-edge pair before reporting packing feasibility.
-    status: unbuilt
+    expected: A target-free fixed-angle structural cell records every wall decision and pair axis, canonicalizes the full label jointly, and derives its work price without reporting geometry or feasibility.
+    status: passing
   - id: CG-011
     expected: Target-free pricing separates raw labels, canonical orbits, duplicates, local LP outcomes, and cap-stopped sizes without consulting atlas geometry.
     status: passing
@@ -124,12 +130,12 @@ grammar:
       Calibration may choose representation and caps. Prospective annotations may only
       evaluate a committed grammar version; any change creates a new successor claim.
   next_implementation:
-    bead: think-eyix
+    bead: think-3yv8
     slice: >-
-      Design CG-010's full fixed-angle cell with declared wall equalities and one frozen
-      separating axis for each non-edge pair. Price angle assignments, wall seatings,
-      non-edge axes, and symmetry orbits before enabling any target-sized LP work.
+      Run BC-016's bounded deterministic differential over the existing aligned and
+      glued controls before adding a numerical full-cell driver. BC-017's end-to-end
+      work accounting remains ready behind that correctness check.
     exit: >-
-      A target-free control either verifies one complete packing-feasibility cell with
-      typed caps or retains the first counterexample. The 11,013-record size-five atlas
-      remains abstract and no calibration case emits an H-044 verdict.
+      The declared controls return stable endpoints and active cells across toolchains
+      and pool widths, or retain one typed instability report. The 11,013-record
+      size-five atlas remains abstract and no target execution or H-044 verdict begins.

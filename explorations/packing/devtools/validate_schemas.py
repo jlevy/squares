@@ -44,6 +44,9 @@ CONTACT_ASSEMBLY_GRAMMAR = (
 CONTACT_ENUMERATION_PRICING = (
     FRONTIER.parent / "atlas" / "known-best" / "contact-enumeration-pricing.json"
 )
+CONTACT_FULL_CELL_CONTROL = (
+    FRONTIER.parent / "atlas" / "known-best" / "contact-full-cell-control.json"
+)
 CONTACT_OVERLAY_GALLERY = FRONTIER.parent / "atlas" / "known-best" / "contact-overlays.json"
 CHUNK_EVIDENCE_PROFILE = (
     FRONTIER.parent / "atlas" / "known-best" / "chunk-evidence-profile.json"
@@ -230,6 +233,7 @@ def main() -> int:
     datasets.append(CHUNK_PARTITION_ATLAS)
     datasets.append(CONTACT_ASSEMBLY_GRAMMAR)
     datasets.append(CONTACT_ENUMERATION_PRICING)
+    datasets.append(CONTACT_FULL_CELL_CONTROL)
     datasets.append(CONTACT_OVERLAY_GALLERY)
     datasets.append(CHUNK_EVIDENCE_PROFILE)
     datasets.append(PROSPECTIVE_SOURCE_AVAILABILITY)

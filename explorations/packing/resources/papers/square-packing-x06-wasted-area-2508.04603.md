@@ -10,7 +10,7 @@
 ---
 
 > ⚠️ **Contains reconstructed passages.**
-> This transcription contains **5** annotated passage(s) where the PDF extraction was
+> This transcription contains **6** annotated passage(s) where the PDF extraction was
 > damaged and text or mathematics was reconstructed or marked unrecoverable. Search this
 > file for `GARBLED` and `NOTE` to find them.
 > **Any formula near an annotation must be checked against `square-packing-x06-wasted-area-2508.04603.raw.md`**, which is the
@@ -149,6 +149,8 @@ We have $\Delta_1 \approx 1 - \frac{\theta^2}{2}$, $\Delta_2 \approx \sigma_1$, 
 We perform some modifications as illustrated in Figure 6. Formal description follows.
 
 For each $j \geq 2$, we remove $S_{i',j-1}$ for all $i' \geq i_j$. Then we add a perfectly vertical stack of squares with the leftmost point having $x$-coordinate $j - 2$, and the top right point touching the bottom side of $(i_j - 1)$-th row. For each positive integer $\Delta i$, let $T_{i_j + \Delta i - 1, j-1}$ be the $\Delta i$-th unit square from the top of this stack. (So, for example, $T_{i_j, j-1}$ should almost overlap $S_{i_j, j-1}$ that has just been removed.)
+
+<!-- NOTE: The source prints the lower bound j >= 2 without an upper bound even though the initial grid has only columns 1..m. The later range 3 <= j <= m, the final row labels T_(i_m,1)..T_(i_m,m-1),S_(i_m,m), and the named deletion of S_(i_m,m) force the intended modification range 2 <= j <= m. H-037 records the exact index proof and its non-geometric scope. -->
 
 We note that none of the unit squares $S_{i,j}$ or $T_{i,j}$ overlap.
 

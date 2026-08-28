@@ -531,6 +531,12 @@ def _known_best_atlas(context: Context) -> str:
                 "--check",
             ),
             (sys.executable, "-m", "devtools.price_contact_enumeration", "--check"),
+            (
+                sys.executable,
+                "-m",
+                "devtools.generate_contact_full_cell_control",
+                "--check",
+            ),
         ),
     )
     _require_text(
@@ -542,6 +548,7 @@ def _known_best_atlas(context: Context) -> str:
         "known-best contact overlay check passed: 5 house-rendered calibration strata",
         "known-best chunk evidence profile check passed: 36 non-grid calibration cases",
         "contact enumeration pricing check passed",
+        "contact full-cell control check passed",
     )
     return output
 
@@ -677,9 +684,28 @@ def _exact_verification(context: Context) -> str:
     output = _commands(
         context,
         (
+            (
+                sys.executable,
+                "-m",
+                "devtools.generate_known_best_n011_rational_control",
+                "--check",
+            ),
             (sys.executable, "-m", "cases.trump11.verify_exact"),
             (sys.executable, "-m", "cases.gobel5.verify_exact"),
             (sys.executable, "-m", "cases.gobel10.verify_exact"),
+            (
+                sys.executable,
+                "-m",
+                "sqpack.cli.witness",
+                "verify",
+                "witnesses/known-best-n011-rational-control.yaml",
+            ),
+            (
+                sys.executable,
+                "-m",
+                "devtools.check_rational_witness_independent",
+                "witnesses/known-best-n011-rational-control.yaml",
+            ),
             (
                 sys.executable,
                 "-m",
@@ -697,6 +723,7 @@ def _exact_verification(context: Context) -> str:
     )
     _require_text(
         output,
+        "known-best n=11 rational control check passed",
         "VALID: 11 squares, 55 pairs tested",
         "14 separated with zero gap, 41 strictly",
         "20 corner coordinates exactly on the boundary",
@@ -704,6 +731,8 @@ def _exact_verification(context: Context) -> str:
         "s = 3.87708359002281417730789706010096",
         "VALID: 5 squares, 10 pairs tested",
         "VALID: 10 squares, 45 pairs tested",
+        "VERIFIED\n  id: W-known-best-n011-rational",
+        "VERIFIED: 11 squares, 55 pairs",
         "VERIFIED\n  id: W-schadt-n029-2025-decimal-rational",
         "VERIFIED: 29 squares, 406 pairs",
     )
@@ -973,7 +1002,16 @@ def _provenance(context: Context) -> str:
 
 
 def _campaign_record(context: Context) -> str:
-    return _module(context, "sqpack.campaign.ledger", "check")
+    return _commands(
+        context,
+        (
+            (sys.executable, "-m", "sqpack.campaign.ledger", "check"),
+            # A phase's validation_command is its declared falsifier. Nothing checked
+            # that the command could run, so two phases once carried a flag that exits
+            # 2 (think-ldy8).
+            (sys.executable, "-m", "devtools.check_declared_commands"),
+        ),
+    )
 
 
 STEPS: tuple[Step, ...] = (
