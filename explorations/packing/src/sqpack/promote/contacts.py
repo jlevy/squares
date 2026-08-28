@@ -30,12 +30,18 @@ from __future__ import annotations
 
 from collections.abc import Callable, Sequence
 from dataclasses import asdict, dataclass
+from typing import Any
 
 import mpmath as mp
 
 from sqpack.verify import Square, edge_axes, project
 
 WALLS = ("left", "bottom", "right", "top")
+
+# Margins are whatever scalar the caller's pose is built from -- an mpmath float or an
+# exact field element -- because the arithmetic is the caller's choice and not this
+# module's. Pinning the annotation to one of them would contradict the seam.
+Scalar = Any
 
 
 class ContactExtractionError(ValueError):
@@ -175,8 +181,8 @@ def extract_contacts(
 
     pair_contacts: list[Incidence] = []
     ambiguous: list[Incidence] = []
-    contact_magnitudes: list[mp.mpf] = []
-    strict_magnitudes: list[mp.mpf] = []
+    contact_magnitudes: list[Scalar] = []
+    strict_magnitudes: list[Scalar] = []
 
     def classify(kind: str, left: int, right: str, margin, sink: list[Incidence]) -> None:
         """Sort one relation into contact, strict separation, or the refused band."""

@@ -26,8 +26,15 @@ from __future__ import annotations
 
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
+from typing import Any
 
 import mpmath as mp
+from mpmath.libmp import NoConvergence
+
+# The scalars here are deliberately not pinned to one type: the same code runs over
+# mpmath floats and, through the injected sign, over exact field elements. `Scalar`
+# records that on purpose rather than leaving the annotation to drift.
+Scalar = Any
 
 # Newton is evaluated above the precision it reports, so the reported digits are not
 # the ones carrying the iteration's own rounding error.
@@ -63,7 +70,7 @@ def _decimal(value, digits: int) -> str:
     return str(mp.nstr(value, n=digits, strip_zeros=False))
 
 
-def _max_abs(values: Sequence) -> mp.mpf:
+def _max_abs(values: Sequence) -> Scalar:
     return max(abs(value) for value in values)
 
 
@@ -106,7 +113,7 @@ def refine(
         tolerance = mp.mpf(10) ** (-2 * digits)
         try:
             solution = mp.findroot(system, tuple(start), tol=tolerance)
-        except (ValueError, ZeroDivisionError, mp.libmp.libhyper.NoConvergence) as error:
+        except (ValueError, ZeroDivisionError, NoConvergence) as error:
             raise RefinementError(
                 "non-convergent",
                 f"Newton did not reach {digits} digits from the supplied seed: {error}",
