@@ -64,7 +64,7 @@ from sqpack.render.numbers import (
     scalar_from_decimal,
     scalar_from_fraction,
 )
-from sqpack.render.style import PAPER_THEME
+from sqpack.render.style import LABEL_MUTED_COLOR, PAPER_THEME
 from sqpack.render.svg import (
     append_metadata,
     append_title_desc,
@@ -218,7 +218,7 @@ SUMMARY_LEGEND_ROW_PITCH = Decimal(32)
 # to ask for: the card labels take bold, the only heavier face available, over a
 # darker grey. The footer block stays regular so the two do not compete.
 SUMMARY_SMALL_WEIGHT = "700"
-SUMMARY_SMALL_FILL = "#47525f"
+SUMMARY_SMALL_FILL = LABEL_MUTED_COLOR
 # Letters sit on their cap height, math symbols on the math axis, so a single
 # baseline cannot center both inside the badge box. Offsets are from the box top.
 SUMMARY_BADGE_FONT_SIZE = Decimal(15)

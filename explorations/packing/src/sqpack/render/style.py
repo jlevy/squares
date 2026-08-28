@@ -34,6 +34,10 @@ SQUARE_HUE_PALETTE = (
 )
 SQUARE_FILL_PALETTE = SQUARE_HUE_PALETTE
 SQUARE_FILL_OPACITY = 1.0
+# Small grey labels sit a step darker than the muted ink. Helvetica has no
+# semibold, so figure labels buy their legibility from contrast rather than
+# weight; see atlas/known-best/FIGURE-PLAYBOOK.md.
+LABEL_MUTED_COLOR = "#47525f"
 PACKING_BOUNDARY_COLOR = "#000000"
 PACKING_BOUNDARY_WIDTH = 1.25
 CONTACT_HIGHLIGHT_COLOR = "#e3c64a"

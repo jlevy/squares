@@ -10,85 +10,85 @@
       <sqpack:value name="view">exact-quotient-map</sqpack:value>
     </sqpack:profile>
   </metadata>
-  <rect width="1200" height="900" fill="#fbfaf7" />
+  <rect width="1200" height="900" fill="#ffffff" />
   <text x="55" y="55" font-size="27" font-weight="750" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a">F₃(2): exact quotient and stratum map</text>
   <text x="55" y="82" class="muted" font-size="14" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a">Arbitrary rotations add no configurations; the full physical space is axis-aligned.</text>
-  <rect class="panel" x="45" y="105" width="670" height="360" rx="14" fill="#ffffff" stroke="#8290a3" stroke-width="1.5" />
+  <rect class="panel" x="45" y="105" width="670" height="360" rx="14" fill="#f7f8fa" stroke="#5c6673" stroke-width="1.5" />
   <text x="70" y="140" class="label" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="15" font-weight="650">Labelled space: two disjoint 12-cycles</text>
-  <line id="labelled-0-edge-0" class="edge" x1="230" y1="190" x2="280" y2="203" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-0-edge-1" class="edge" x1="280" y1="203" x2="317" y2="240" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-0-edge-2" class="edge" x1="317" y1="240" x2="330" y2="290" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-0-edge-3" class="edge" x1="330" y1="290" x2="317" y2="340" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-0-edge-4" class="edge" x1="317" y1="340" x2="280" y2="377" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-0-edge-5" class="edge" x1="280" y1="377" x2="230" y2="390" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-0-edge-6" class="edge" x1="230" y1="390" x2="180" y2="377" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-0-edge-7" class="edge" x1="180" y1="377" x2="143" y2="340" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-0-edge-8" class="edge" x1="143" y1="340" x2="130" y2="290" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-0-edge-9" class="edge" x1="130" y1="290" x2="143" y2="240" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-0-edge-10" class="edge" x1="143" y1="240" x2="180" y2="203" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-0-edge-11" class="edge" x1="180" y1="203" x2="230" y2="190" stroke="#8290a3" stroke-width="2" fill="none" />
-  <circle id="labelled-0-vertex-0" class="node" cx="230" cy="190" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-0-vertex-1" class="node" cx="280" cy="203" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-0-vertex-2" class="node" cx="317" cy="240" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-0-vertex-3" class="node" cx="330" cy="290" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-0-vertex-4" class="node" cx="317" cy="340" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-0-vertex-5" class="node" cx="280" cy="377" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-0-vertex-6" class="node" cx="230" cy="390" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-0-vertex-7" class="node" cx="180" cy="377" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-0-vertex-8" class="node" cx="143" cy="340" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-0-vertex-9" class="node" cx="130" cy="290" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-0-vertex-10" class="node" cx="143" cy="240" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-0-vertex-11" class="node" cx="180" cy="203" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
+  <line id="labelled-0-edge-0" class="edge" x1="230" y1="190" x2="280" y2="203" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-0-edge-1" class="edge" x1="280" y1="203" x2="317" y2="240" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-0-edge-2" class="edge" x1="317" y1="240" x2="330" y2="290" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-0-edge-3" class="edge" x1="330" y1="290" x2="317" y2="340" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-0-edge-4" class="edge" x1="317" y1="340" x2="280" y2="377" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-0-edge-5" class="edge" x1="280" y1="377" x2="230" y2="390" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-0-edge-6" class="edge" x1="230" y1="390" x2="180" y2="377" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-0-edge-7" class="edge" x1="180" y1="377" x2="143" y2="340" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-0-edge-8" class="edge" x1="143" y1="340" x2="130" y2="290" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-0-edge-9" class="edge" x1="130" y1="290" x2="143" y2="240" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-0-edge-10" class="edge" x1="143" y1="240" x2="180" y2="203" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-0-edge-11" class="edge" x1="180" y1="203" x2="230" y2="190" stroke="#5c6673" stroke-width="2" fill="none" />
+  <circle id="labelled-0-vertex-0" class="node" cx="230" cy="190" r="7" fill="#1588d8" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-0-vertex-1" class="node" cx="280" cy="203" r="7" fill="#1588d8" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-0-vertex-2" class="node" cx="317" cy="240" r="7" fill="#1588d8" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-0-vertex-3" class="node" cx="330" cy="290" r="7" fill="#1588d8" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-0-vertex-4" class="node" cx="317" cy="340" r="7" fill="#1588d8" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-0-vertex-5" class="node" cx="280" cy="377" r="7" fill="#1588d8" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-0-vertex-6" class="node" cx="230" cy="390" r="7" fill="#1588d8" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-0-vertex-7" class="node" cx="180" cy="377" r="7" fill="#1588d8" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-0-vertex-8" class="node" cx="143" cy="340" r="7" fill="#1588d8" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-0-vertex-9" class="node" cx="130" cy="290" r="7" fill="#1588d8" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-0-vertex-10" class="node" cx="143" cy="240" r="7" fill="#1588d8" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-0-vertex-11" class="node" cx="180" cy="203" r="7" fill="#1588d8" stroke="#f7f8fa" stroke-width="2" />
   <text x="230" y="295" text-anchor="middle" class="small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">component 1</text>
-  <line id="labelled-1-edge-0" class="edge" x1="520" y1="190" x2="570" y2="203" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-1-edge-1" class="edge" x1="570" y1="203" x2="607" y2="240" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-1-edge-2" class="edge" x1="607" y1="240" x2="620" y2="290" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-1-edge-3" class="edge" x1="620" y1="290" x2="607" y2="340" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-1-edge-4" class="edge" x1="607" y1="340" x2="570" y2="377" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-1-edge-5" class="edge" x1="570" y1="377" x2="520" y2="390" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-1-edge-6" class="edge" x1="520" y1="390" x2="470" y2="377" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-1-edge-7" class="edge" x1="470" y1="377" x2="433" y2="340" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-1-edge-8" class="edge" x1="433" y1="340" x2="420" y2="290" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-1-edge-9" class="edge" x1="420" y1="290" x2="433" y2="240" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-1-edge-10" class="edge" x1="433" y1="240" x2="470" y2="203" stroke="#8290a3" stroke-width="2" fill="none" />
-  <line id="labelled-1-edge-11" class="edge" x1="470" y1="203" x2="520" y2="190" stroke="#8290a3" stroke-width="2" fill="none" />
-  <circle id="labelled-1-vertex-0" class="node" cx="520" cy="190" r="7" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-1-vertex-1" class="node" cx="570" cy="203" r="7" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-1-vertex-2" class="node" cx="607" cy="240" r="7" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-1-vertex-3" class="node" cx="620" cy="290" r="7" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-1-vertex-4" class="node" cx="607" cy="340" r="7" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-1-vertex-5" class="node" cx="570" cy="377" r="7" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-1-vertex-6" class="node" cx="520" cy="390" r="7" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-1-vertex-7" class="node" cx="470" cy="377" r="7" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-1-vertex-8" class="node" cx="433" cy="340" r="7" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-1-vertex-9" class="node" cx="420" cy="290" r="7" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-1-vertex-10" class="node" cx="433" cy="240" r="7" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
-  <circle id="labelled-1-vertex-11" class="node" cx="470" cy="203" r="7" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
+  <line id="labelled-1-edge-0" class="edge" x1="520" y1="190" x2="570" y2="203" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-1-edge-1" class="edge" x1="570" y1="203" x2="607" y2="240" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-1-edge-2" class="edge" x1="607" y1="240" x2="620" y2="290" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-1-edge-3" class="edge" x1="620" y1="290" x2="607" y2="340" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-1-edge-4" class="edge" x1="607" y1="340" x2="570" y2="377" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-1-edge-5" class="edge" x1="570" y1="377" x2="520" y2="390" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-1-edge-6" class="edge" x1="520" y1="390" x2="470" y2="377" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-1-edge-7" class="edge" x1="470" y1="377" x2="433" y2="340" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-1-edge-8" class="edge" x1="433" y1="340" x2="420" y2="290" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-1-edge-9" class="edge" x1="420" y1="290" x2="433" y2="240" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-1-edge-10" class="edge" x1="433" y1="240" x2="470" y2="203" stroke="#5c6673" stroke-width="2" fill="none" />
+  <line id="labelled-1-edge-11" class="edge" x1="470" y1="203" x2="520" y2="190" stroke="#5c6673" stroke-width="2" fill="none" />
+  <circle id="labelled-1-vertex-0" class="node" cx="520" cy="190" r="7" fill="#7f55cb" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-1-vertex-1" class="node" cx="570" cy="203" r="7" fill="#7f55cb" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-1-vertex-2" class="node" cx="607" cy="240" r="7" fill="#7f55cb" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-1-vertex-3" class="node" cx="620" cy="290" r="7" fill="#7f55cb" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-1-vertex-4" class="node" cx="607" cy="340" r="7" fill="#7f55cb" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-1-vertex-5" class="node" cx="570" cy="377" r="7" fill="#7f55cb" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-1-vertex-6" class="node" cx="520" cy="390" r="7" fill="#7f55cb" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-1-vertex-7" class="node" cx="470" cy="377" r="7" fill="#7f55cb" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-1-vertex-8" class="node" cx="433" cy="340" r="7" fill="#7f55cb" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-1-vertex-9" class="node" cx="420" cy="290" r="7" fill="#7f55cb" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-1-vertex-10" class="node" cx="433" cy="240" r="7" fill="#7f55cb" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="labelled-1-vertex-11" class="node" cx="470" cy="203" r="7" fill="#7f55cb" stroke="#f7f8fa" stroke-width="2" />
   <text x="520" y="295" text-anchor="middle" class="small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">component 2</text>
   <text x="690" y="280" text-anchor="middle" class="label" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="15" font-weight="650">/ S₃</text>
-  <path class="edge" d="M650 295 H735" marker-end="url(#arrow)" stroke="#8290a3" stroke-width="2" fill="none" />
+  <path class="edge" d="M650 295 H735" marker-end="url(#arrow)" stroke="#5c6673" stroke-width="2" fill="none" />
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8290a3" />
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5c6673" />
     </marker>
   </defs>
-  <rect class="panel" x="750" y="105" width="405" height="360" rx="14" fill="#ffffff" stroke="#8290a3" stroke-width="1.5" />
+  <rect class="panel" x="750" y="105" width="405" height="360" rx="14" fill="#f7f8fa" stroke="#5c6673" stroke-width="1.5" />
   <text x="775" y="140" class="label" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="15" font-weight="650">Unlabelled quotient: one four-cycle</text>
-  <line id="s3-edge-0" class="edge" x1="860" y1="220" x2="1020" y2="220" stroke="#8290a3" stroke-width="2" fill="none" />
-  <circle id="s3-vertex-0" class="node" cx="860" cy="220" r="9" fill="#d97706" stroke="#ffffff" stroke-width="2" />
-  <line id="s3-edge-1" class="edge" x1="1020" y1="220" x2="1020" y2="380" stroke="#8290a3" stroke-width="2" fill="none" />
-  <circle id="s3-vertex-1" class="node" cx="1020" cy="220" r="9" fill="#d97706" stroke="#ffffff" stroke-width="2" />
-  <line id="s3-edge-2" class="edge" x1="1020" y1="380" x2="860" y2="380" stroke="#8290a3" stroke-width="2" fill="none" />
-  <circle id="s3-vertex-2" class="node" cx="1020" cy="380" r="9" fill="#d97706" stroke="#ffffff" stroke-width="2" />
-  <line id="s3-edge-3" class="edge" x1="860" y1="380" x2="860" y2="220" stroke="#8290a3" stroke-width="2" fill="none" />
-  <circle id="s3-vertex-3" class="node" cx="860" cy="380" r="9" fill="#d97706" stroke="#ffffff" stroke-width="2" />
+  <line id="s3-edge-0" class="edge" x1="860" y1="220" x2="1020" y2="220" stroke="#5c6673" stroke-width="2" fill="none" />
+  <circle id="s3-vertex-0" class="node" cx="860" cy="220" r="9" fill="#c8654b" stroke="#f7f8fa" stroke-width="2" />
+  <line id="s3-edge-1" class="edge" x1="1020" y1="220" x2="1020" y2="380" stroke="#5c6673" stroke-width="2" fill="none" />
+  <circle id="s3-vertex-1" class="node" cx="1020" cy="220" r="9" fill="#c8654b" stroke="#f7f8fa" stroke-width="2" />
+  <line id="s3-edge-2" class="edge" x1="1020" y1="380" x2="860" y2="380" stroke="#5c6673" stroke-width="2" fill="none" />
+  <circle id="s3-vertex-2" class="node" cx="1020" cy="380" r="9" fill="#c8654b" stroke="#f7f8fa" stroke-width="2" />
+  <line id="s3-edge-3" class="edge" x1="860" y1="380" x2="860" y2="220" stroke="#5c6673" stroke-width="2" fill="none" />
+  <circle id="s3-vertex-3" class="node" cx="860" cy="380" r="9" fill="#c8654b" stroke="#f7f8fa" stroke-width="2" />
   <text x="940" y="305" text-anchor="middle" class="small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">missing-corner cycle</text>
   <text x="940" y="430" text-anchor="middle" class="muted small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">The D₄ reflection fixes each edge midpoint.</text>
-  <rect class="panel" x="45" y="495" width="1110" height="360" rx="14" fill="#ffffff" stroke="#8290a3" stroke-width="1.5" />
+  <rect class="panel" x="45" y="495" width="1110" height="360" rx="14" fill="#f7f8fa" stroke="#5c6673" stroke-width="1.5" />
   <text x="70" y="530" class="label" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="15" font-weight="650">Full quotient by D₄ × S₃: interval λ ∈ [0, 1/2]</text>
-  <line id="quotient-edge" x1="180" y1="600" x2="1020" y2="600" stroke="#2563eb" stroke-width="8" stroke-linecap="round" />
-  <circle id="stratum-C" cx="180" cy="600" r="15" fill="#d97706" class="node" stroke="#ffffff" stroke-width="2" />
-  <circle id="stratum-M" cx="1020" cy="600" r="15" fill="#7c3aed" class="node" stroke="#ffffff" stroke-width="2" />
+  <line id="quotient-edge" x1="180" y1="600" x2="1020" y2="600" stroke="#1588d8" stroke-width="8" stroke-linecap="round" />
+  <circle id="stratum-C" cx="180" cy="600" r="15" fill="#c8654b" class="node" stroke="#f7f8fa" stroke-width="2" />
+  <circle id="stratum-M" cx="1020" cy="600" r="15" fill="#7f55cb" class="node" stroke="#f7f8fa" stroke-width="2" />
   <text x="180" y="575" text-anchor="middle" class="label" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="15" font-weight="650">C</text>
   <text x="600" y="575" text-anchor="middle" class="label" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="15" font-weight="650">G</text>
   <text x="1020" y="575" text-anchor="middle" class="label" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="15" font-weight="650">M</text>
@@ -97,23 +97,23 @@
   <text x="1020" y="630" text-anchor="middle" class="small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">walls 5 · axes 3 · stab 2</text>
   <g id="packing-0" transform="translate(120,675)">
     <rect x="0" y="0" width="120" height="120" fill="none" stroke="#000000" stroke-width="3" />
-    <rect x="0" y="60" width="60" height="60" fill="#0f766e" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
-    <rect x="60" y="60" width="60" height="60" fill="#be123c" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
-    <rect x="0" y="0" width="60" height="60" fill="#7c3aed" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
+    <rect x="0" y="60" width="60" height="60" fill="#4b9582" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
+    <rect x="60" y="60" width="60" height="60" fill="#e97e90" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
+    <rect x="0" y="0" width="60" height="60" fill="#c1c13c" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
   </g>
   <text x="180" y="820" text-anchor="middle" class="small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">λ=0 · corner/L</text>
   <g id="packing-1-4" transform="translate(540,675)">
     <rect x="0" y="0" width="120" height="120" fill="none" stroke="#000000" stroke-width="3" />
-    <rect x="0" y="60" width="60" height="60" fill="#0f766e" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
-    <rect x="60" y="60" width="60" height="60" fill="#be123c" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
-    <rect x="15" y="0" width="60" height="60" fill="#7c3aed" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
+    <rect x="0" y="60" width="60" height="60" fill="#4b9582" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
+    <rect x="60" y="60" width="60" height="60" fill="#e97e90" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
+    <rect x="15" y="0" width="60" height="60" fill="#c1c13c" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
   </g>
   <text x="600" y="820" text-anchor="middle" class="small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">λ=1/4 · generic</text>
   <g id="packing-1-2" transform="translate(960,675)">
     <rect x="0" y="0" width="120" height="120" fill="none" stroke="#000000" stroke-width="3" />
-    <rect x="0" y="60" width="60" height="60" fill="#0f766e" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
-    <rect x="60" y="60" width="60" height="60" fill="#be123c" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
-    <rect x="30" y="0" width="60" height="60" fill="#7c3aed" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
+    <rect x="0" y="60" width="60" height="60" fill="#4b9582" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
+    <rect x="60" y="60" width="60" height="60" fill="#e97e90" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
+    <rect x="30" y="0" width="60" height="60" fill="#c1c13c" fill-opacity="0.78" stroke="#000000" stroke-width="3" />
   </g>
   <text x="1020" y="820" text-anchor="middle" class="small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">λ=1/2 · centred</text>
   <text x="70" y="842" class="muted small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">C and M are zero-dimensional orbit strata. Only C changes the active signature; M is singular because its stabilizer jumps.</text>
