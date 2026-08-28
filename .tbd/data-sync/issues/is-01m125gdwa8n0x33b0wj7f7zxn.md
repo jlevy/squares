@@ -3,14 +3,18 @@ type: is
 id: is-01m125gdwa8n0x33b0wj7f7zxn
 title: exp-045 declares twelve pre-certificate mutations but the instrument implements eight
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 labels:
   - packing
 dependencies: []
 created_at: 2026-08-27T17:50:27.201Z
-updated_at: 2026-08-27T17:50:27.201Z
+updated_at: 2026-08-28T01:36:55.195Z
+closed_at: 2026-08-28T01:36:55.182Z
+close_reason: BC-036 complete. Twelve pre-certificate mutations now enforced on twelve distinct failure identifiers, verified by direct call. Four ProofInputs fields added; certificate.acceleration_elimination split into acceleration_correction and acceleration_farkas so each control matches only its own frozen id. The declared twelve was never amended. Exactly four reachable modes existed with no slack, after a call-graph trace cut the grep-derived seven.
+resolution: null
+duplicate_of: null
 ---
 exp-045's method.control declares 'twelve typed pre-certificate mutations' and its Execution Admission section requires 'all twelve mutations enter before certificate construction and match only their frozen failure identifiers' before any pure -W target run.
 

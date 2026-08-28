@@ -3,15 +3,19 @@ type: is
 id: is-01m12e31xfbk5x36zs3634tqmm
 title: Enforce one live bounded commitment per bead
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels:
   - packing
 dependencies: []
 parent_id: is-01m127tej32njy532m2q642418
 created_at: 2026-08-27T20:20:26.158Z
-updated_at: 2026-08-27T20:20:26.158Z
+updated_at: 2026-08-28T01:36:56.103Z
+closed_at: 2026-08-28T01:36:56.102Z
+close_reason: "Invariant added: at most one READY commitment per bead. Refined from at-most-one-live during scoping, because at-most-one-live would flag think-sfzh's BC-018/BC-021 legitimate blocked dependency chain. Resolved the one violation (think-kdil backed BC-028 and BC-038, both ready; BC-028 stopped as superseded). Verified to fire and pinned by a negative control."
+resolution: null
+duplicate_of: null
 ---
 A bead may back several bounded commitments, which is the intended way to carry a lane across agendas: think-1s0h backs BC-010 (agenda-001), BC-029 (agenda-003) and BC-037 (agenda-004). Many COMPLETE commitments per bead is the useful part, a record of successive bounded attempts.
 

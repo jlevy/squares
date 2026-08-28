@@ -3,15 +3,19 @@ type: is
 id: is-01m12e3cjdmwhc34h0jaj7f78r
 title: Make the commitment-to-phase join machine-checkable
 kind: feature
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels:
   - packing
 dependencies: []
 parent_id: is-01m127tej32njy532m2q642418
 created_at: 2026-08-27T20:20:37.067Z
-updated_at: 2026-08-27T20:20:37.067Z
+updated_at: 2026-08-28T01:36:56.392Z
+closed_at: 2026-08-28T01:36:56.391Z
+close_reason: Optional commitment and bead fields on a workflow phase, optional workflows list on a commitment, all populated for real. A cross-file schema $ref does not resolve for these loaders (measured, not assumed), so the workflow enum is duplicated and guarded by a check comparing the two lists. Both new checks verified to fire and pinned by negative controls.
+resolution: null
+duplicate_of: null
 ---
 The layer where work actually happens has no structured link to the layer that planned it. Measured across 29 sessions and 171 phases:
 

@@ -3,15 +3,19 @@ type: is
 id: is-01m121k75y3sdhhvyg3h9f1cy4
 title: Session records can declare a validation_command that does not exist
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 2
+version: 3
 labels:
   - packing
 dependencies: []
 parent_id: is-01m127tej32njy532m2q642418
 created_at: 2026-08-27T16:42:04.348Z
-updated_at: 2026-08-27T18:30:57.859Z
+updated_at: 2026-08-28T01:36:55.814Z
+closed_at: 2026-08-28T01:36:55.813Z
+close_reason: "devtools/check_declared_commands parses every declared packing-validate and packing-ledger invocation against those tools' own parsers, wired into the campaign record step and pinned by a negative control. 70 invocations parse. Caught a flaw in its own first verification: packing-validate raises a custom UsageError rather than exiting, and the initial test used packing-ledger, confirming the guard fired on the path that was never broken. Both exception types now caught, both CLIs verified."
+resolution: null
+duplicate_of: null
 ---
 Nothing checks that a session phase's declared validation_command is runnable. Two phase records declare 'uv run --directory explorations/packing --frozen packing-validate --list-steps', which exits 2 with 'unrecognized arguments: --list-steps'. The correct flag is --list, used correctly in two other session records.
 

@@ -3,14 +3,18 @@ type: is
 id: is-01m125bb5682hjcrq7vkfstcps
 title: Regenerate the n=29 rational certificate at a tighter rational_digits
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels:
   - packing
 dependencies: []
 created_at: 2026-08-27T17:47:40.575Z
-updated_at: 2026-08-27T17:47:40.575Z
+updated_at: 2026-08-28T01:36:55.509Z
+closed_at: 2026-08-28T01:36:55.508Z
+close_reason: "BC-039 complete. Regenerated at rational_digits 36, the CLI default; relaxation 4.933898e-11 -> 4.933884e-31. Argued reason is that n-029.md described the artifact as the output of 'the generic promotion command' without naming the non-default flag; the tighter bound is a side effect. Corrected an earlier overstatement: the artifact was properly pinned by test_witness_contract and was never irreproducible."
+resolution: null
+duplicate_of: null
 ---
 Q-BC032-a (session 029, phase 3) established that the 4.94e-11 side relaxation in E-n029-schadt-rational-upper is an artifact of the promotion route, not a property of the Schadt pose.
 
