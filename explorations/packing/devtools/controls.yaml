@@ -218,6 +218,12 @@ controls:
   run: python3 -m sqpack.campaign.ledger check
   expect: "schema violation"
 
+- name: campaign - a declared validation command that could never run
+  file: campaign/agent-sessions/session-028-bc032-n29-promotion-inventory.md
+  replace: ["packing-validate --list", "packing-validate --list-steps"]
+  run: python3 -m devtools.check_declared_commands
+  expect: "is not runnable"
+
 - name: campaign - one bead backs two simultaneously ready commitments
   file: campaign/agendas/agenda-003-balanced-ten-hour-research-program.md
   replace: ["  - id: BC-028\n    purpose: tool_validation\n    owner_focus: efficiency\n    instances: [5]\n    state: stopped", "  - id: BC-028\n    purpose: tool_validation\n    owner_focus: efficiency\n    instances: [5]\n    state: ready"]

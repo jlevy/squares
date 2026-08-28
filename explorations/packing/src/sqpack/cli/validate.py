@@ -1000,7 +1000,16 @@ def _provenance(context: Context) -> str:
 
 
 def _campaign_record(context: Context) -> str:
-    return _module(context, "sqpack.campaign.ledger", "check")
+    return _commands(
+        context,
+        (
+            (sys.executable, "-m", "sqpack.campaign.ledger", "check"),
+            # A phase's validation_command is its declared falsifier. Nothing checked
+            # that the command could run, so two phases once carried a flag that exits
+            # 2 (think-ldy8).
+            (sys.executable, "-m", "devtools.check_declared_commands"),
+        ),
+    )
 
 
 STEPS: tuple[Step, ...] = (
