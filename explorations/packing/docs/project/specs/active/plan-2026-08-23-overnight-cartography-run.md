@@ -335,16 +335,20 @@ already decide its stated criterion need not open a ceremonial review phase.
 For the next supervised exact-research goal, use
 [session 035](../../../../campaign/agent-sessions/session-035-agenda005-block-a.md).
 Sessions 027 through 034 are terminal, and agenda-004 closed on measurement rather than
-opinion.
-Open BC-047 under `think-y85e` as the next bounded driver: the retained `n = 29`
-provenance SVG publishes the closed contact system and the symbolic layout map together,
-`cases/kingbird29/verify_svg.py` already transcribes both and evaluates residuals
-without ever solving, and the outstanding work is to manufacture precision from that
-system with a reported residual bound rather than to read it off the serialized source.
-The remaining outstanding items each have their own workflow entry in agenda-005, whose
-block A pairs that driver with an independent contact-structure freeze.
-Do not treat a refinement as an algebraic claim; this driver reports precision only, and
-the certification question belongs to the interval-certification blocks that follow it.
+opinion. Open BC-045 under `think-75ll` as the next bounded driver, built to
+[plan-2026-08-28-interval-certification](plan-2026-08-28-interval-certification.md):
+phases 1 and 2 first, the interval arithmetic and the Krawczyk operator, then the layout
+map and interval verification.
+Session 035 is terminal and closed agenda-005 block A, so precision is now manufactured
+in-repository and the `n = 29` contact structure is frozen with its 89 incidences and
+its measured separation; neither remains a prerequisite.
+The witness contract already names `interval-certified` among the methods that may carry
+`verified`, so the socket exists and only the checker is missing, because `exact_verify`
+still raises `checker-not-built`. Uniqueness is the load-bearing verdict: check that the
+operator’s image lies in the *interior* of the box, because containment alone does not
+give it, and a box holding two roots does not identify which pose was certified.
+Prove the operator refuses on the two-root and no-root controls before pointing it at
+anything, and do not treat a refinement as an algebraic claim.
 The measured W5 inventory and the row-jet inventory reuse remain scheduled after that
 driver; BC-016 stays blocked on its retained-pose, glued-row, tie-label, and
 receipt-checker prerequisites.

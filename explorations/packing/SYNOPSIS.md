@@ -297,13 +297,19 @@ The renderer’s standing exact-motion control remains independently replayable:
 
 **As of 2026-08-28 — start here.** The active plan is
 [agenda-005](campaign/agendas/agenda-005-symbolic-promotion-and-identity.md), replanned
-that day. Its next slice is **block A: `BC-047` under `think-y85e` and `BC-042` under
-`think-zmh8`**, two independent lanes.
-Blocks B and C are `BC-045` under `think-75ll`, built to
-[plan-2026-08-28-interval-certification](docs/project/specs/active/plan-2026-08-28-interval-certification.md).
-[Session 035](campaign/agent-sessions/session-035-agenda005-block-a.md) is the live
-block-A session; its frozen active slice is `BC-047` under `think-y85e`, and the
-contact-structure lane opens after it.
+that day. Block A is **closed**: `BC-047` under `think-y85e` and `BC-042` under
+`think-zmh8` both met their declared exits in
+[session 035](campaign/agent-sessions/session-035-agenda005-block-a.md), which is
+terminal.
+Precision is now manufactured in-repository rather than read off a source — the
+published `n = 29` system refines to 1000 declared digits with a reported residual bound
+of `1.09829e-1039` — and the `n = 29` contact structure is frozen with 89 incidences,
+six orientation classes, an empty ambiguity report and `97.5013` decades of separation,
+with the same extractor reproducing the known `n = 11` structure exactly under exact
+arithmetic.
+The next slice is **block B: `BC-045` under `think-75ll`**, phases 1 and 2 of
+[plan-2026-08-28-interval-certification](docs/project/specs/active/plan-2026-08-28-interval-certification.md);
+block C is phases 3 and 4 of the same spec.
 The narrative below is historical and its earlier “next bounded slice” pointers are
 superseded by this paragraph.
 

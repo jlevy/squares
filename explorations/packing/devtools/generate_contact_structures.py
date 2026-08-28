@@ -17,7 +17,6 @@ from __future__ import annotations
 
 import argparse
 import json
-from dataclasses import asdict
 from pathlib import Path
 
 import mpmath as mp
@@ -71,7 +70,11 @@ def _entry(structure, *, source: str, arithmetic: str, known_answer: dict) -> di
         "ambiguous_count": len(record["ambiguous"]),
         "angle_class_count": len(record["angle_classes"]),
         "angle_classes": [
-            {"label": item["label"], "members": list(item["members"]), "degrees": item["degrees"]}
+            {
+                "label": item["label"],
+                "members": list(item["members"]),
+                "degrees": item["degrees"],
+            }
             for item in record["angle_classes"]
         ],
         "worst_contact_margin": record["worst_contact_margin"],
@@ -99,7 +102,9 @@ def trump11_entry() -> dict:
         source="cases.trump11.packing (exact, over Q(u) with u = tan(a/2))",
         arithmetic="exact-algebraic",
         known_answer={
-            "checked_against": "sqpack.verify.verify_packing under exact_sign, and Trump's published layout",
+            "checked_against": (
+                "sqpack.verify.verify_packing under exact_sign, and Trump's published layout"
+            ),
             "agrees": agrees,
             "detail": (
                 f"the extractor found {len(structure.pair_contacts)} touching pairs and "

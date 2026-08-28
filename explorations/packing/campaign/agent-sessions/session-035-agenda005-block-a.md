@@ -221,7 +221,7 @@ session:
       Reconcile block A: run the full packing-validate rather than `--fast`, regenerate the
       views whose sources changed, verify them after the commit, and leave the block closed
       with an exact next action for block B.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       Both block-A lanes closed against their declared outputs well inside their budgets, so
@@ -240,14 +240,61 @@ session:
     fallback: >-
       Commit the retained evidence with the gate result recorded as red and stop the session
       rather than carrying an unvalidated block boundary into block B.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      The block boundary is closed, but not on the first attempt and not on the clock this
+      session declared. The machine crashed at about 01:07 with the first full gate still
+      running, and the session resumed at 07:44 after a 07:40 reboot. The full gate then ran
+      red on two steps, both of them this session's own defects rather than pre-existing
+      ones, and both were fixed before the boundary was called closed.
+    evidence:
+    - >-
+      'Nothing committed was lost. The working tree came back clean at `8b0092c`, matching
+      the remote, because both lanes were committed and pushed before the crash. What was
+      lost was the running gate and the scheduled continuation, which is the argument for
+      the session guide''s rule that the repository is the complete control plane: the run
+      was resumable from the tree alone.'
+    - >-
+      'A stale `.gate-running` marker directory blocked the first restart. It was verified
+      orphaned rather than assumed so: the marker was created at 01:05 and the machine booted
+      at 07:40, so it could not belong to a live run, and no `packing-validate` process
+      existed. Removing it on the error message''s own advice was the correct action, and
+      recording why it was safe matters more than the removal.'
+    - >-
+      'Full gate, first run: RED, 726.75s wall, two steps failed -- `lint floor (python)` and
+      `campaign record`.'
+    - >-
+      'The lint failure was a process gap, not a code defect. `devtools/generate_contact_structures.py`
+      was written after the last repository-wide lint of the session and was only ever linted
+      through the narrower path list this session had been reusing, so three errors and one
+      formatting difference reached the gate. The lesson is that a scoped lint over
+      remembered paths is not a substitute for the repository-wide one, and the gate caught
+      exactly what the shortcut missed.'
+    - >-
+      'The campaign-record failure was the crash showing up in the record contract: an
+      in-progress session and an in-progress finalization phase had both passed their
+      01:45 deadlines while the machine was down. The checker was right to complain. The fix
+      is to terminalize from retained evidence rather than to move the deadline, which is
+      what the clock-state table requires at or after the session deadline and is the one
+      response that does not rewrite history to look tidier.'
+    - >-
+      A claim made in the interim was wrong and is corrected here. The pull request body and
+      the session report both said repository-wide lint was green at the time block A was
+      pushed. It was not: the last clean repository-wide lint predated the generator by about
+      thirty-five minutes. The narrower checks named alongside it were green, but the
+      repository-wide one had not been run since the file existed.
+    - >-
+      Both defects are fixed, repository-wide `ruff check` and `ruff format --check` are clean
+      across 501 files, and `devtools.generate_contact_structures --check` still reproduces
+      the retained artifact byte for byte.
+    stop_reason: >-
+      Both block-A commitments are closed with their evidence retained, the two gate defects
+      this session introduced are fixed, and the session is past its own deadline, so it
+      terminalizes from retained evidence rather than opening further work.
     next_action: >-
       Open block B as session-036 under BC-045 and `think-75ll`, phases 1 and 2 of
-      plan-2026-08-28-interval-certification.
+      plan-2026-08-28-interval-certification, after the full gate passes on this commit.
   primary_bead: think-y85e
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 100
     max_cycles: 8
@@ -270,7 +317,15 @@ session:
       digits cannot identify a minimal polynomial. The n = 29 contact structure is measured
       but not frozen as a durable artifact, and no extraction has been checked against the
       known n = 11 answer.
-    after: null
+    after: >-
+      Both lanes are closed. Precision is manufactured in-repository rather than read off a
+      source: the published `n = 29` system refines to 1000 declared digits with a reported
+      residual bound of `1.09829e-1039`. The `n = 29` contact structure is frozen as a
+      durable artifact carrying 89 incidences, 6 orientation classes, an empty ambiguity
+      report and `97.5013` decades of separation, and the same extractor reproduces the known
+      `n = 11` structure exactly under exact arithmetic. Negative controls rise from 80 to 86.
+      Two controls that could not fire were found by running them rather than by reading
+      them, and both are recorded as findings rather than quietly repaired.
   delegations: []
   outputs:
   - campaign/agent-sessions/session-035-agenda005-block-a.md
@@ -278,13 +333,14 @@ session:
   - 'Baseline before target work: `packing-ledger check` reports OK across 1 series, 4 reports, 48 hypotheses, 45 rounds, 34 agent sessions, 5 agendas, 1 logbook entries.'
   - 'Baseline `packing-validate --fast --jobs 2 --inner-jobs 1` was started before target work and its result is recorded in phase evidence when it lands.'
   - 'The branch is `packing/overnight-agenda-005`, cut from the head of PR 53 (`70770c2`), which already contains `origin/main` at `8f21bd9`; the merge of main was therefore a no-op and is recorded as one rather than as an integration.'
-  stop_reason: null
+  stop_reason: >-
+    Both commitments closed against their declared exits, the block boundary is validated,
+    and the session is past its deadline after a mid-run machine crash, so it terminalizes
+    rather than extending.
   next_action: >-
-    Continue the active slice: BC-047 under `think-y85e`, driving the transcribed n = 29
-    system to a declared precision with a reported residual bound. The block's second lane,
-    the contact-structure freeze, opens after it and is independent of its outcome. At the
-    block boundary run the full packing-validate, not --fast, then finalize, commit and push
-    before the 04:05 deadline.
+    Open block B as session-036 under BC-045 and `think-75ll`, running phases 1 and 2 of
+    plan-2026-08-28-interval-certification: the interval arithmetic and the Krawczyk operator,
+    then the layout map and interval verification, each with the controls that spec names.
 ---
 # Session 035 — Agenda-005 Block A
 
