@@ -515,6 +515,7 @@ def _known_best_atlas(context: Context) -> str:
         context,
         (
             (sys.executable, "-m", "devtools.build_known_best_atlas", "--check"),
+            (sys.executable, "-m", "devtools.build_composite_figure_data", "--check"),
             (sys.executable, "-m", "devtools.render_composite_pdf", "--check"),
             (sys.executable, "-m", "devtools.census_known_best_chunks", "--check"),
             (

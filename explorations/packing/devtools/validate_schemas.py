@@ -35,6 +35,7 @@ from sqpack.yamlio import load_yaml
 FRONTIER = pathlib.Path(__file__).resolve().parent.parent / "frontier"
 WITNESSES = FRONTIER.parent / "witnesses"
 DOCUMENT_MAP = FRONTIER.parent / "docs" / "project" / "document-map.yaml"
+COMPOSITE_FIGURE = FRONTIER.parent / "atlas" / "known-best" / "composite-figure.json"
 KNOWN_BEST_MANIFEST = FRONTIER.parent / "atlas" / "known-best" / "manifest.json"
 CHUNK_PARTITION_ATLAS = FRONTIER.parent / "atlas" / "known-best" / "chunk-partitions.json"
 CONTACT_ASSEMBLY_GRAMMAR = (
@@ -225,6 +226,7 @@ def main() -> int:
     )
     datasets.append(DOCUMENT_MAP)
     datasets.append(KNOWN_BEST_MANIFEST)
+    datasets.append(COMPOSITE_FIGURE)
     datasets.append(CHUNK_PARTITION_ATLAS)
     datasets.append(CONTACT_ASSEMBLY_GRAMMAR)
     datasets.append(CONTACT_ENUMERATION_PRICING)

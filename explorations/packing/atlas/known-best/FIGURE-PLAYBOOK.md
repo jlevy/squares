@@ -23,13 +23,40 @@ uv run --frozen --all-extras --group dev packing-validate --only "known-best"
 ## What flows in
 
 ```
-frontier/n-NNN.md ────────────► status, side value, exactness, degree, rigid flag
-resources/web/ ───────────────► the retained sources those fields were read from
+frontier/n-NNN.md ───┐
+resources/web/ ──────┼──► composite-figure.json ──► the drawing
+derived here ────────┘         (every claim, with its provenance)
+
 witnesses/known-best/*.yaml ──► square geometry, and only geometry
 src/sqpack/render/color.py ───► hue from angle class, shade from contact count
 src/sqpack/render/style.py ───► the twenty base hues
-devtools/build_known_best_atlas.py ──► layout, badges, legend, footer
 ```
+
+Every fact the figure states is decided in `devtools/build_composite_figure_data.py`,
+written to [`composite-figure.json`](composite-figure.json), and validated against
+[`composite-figure.schema.yaml`](composite-figure.schema.yaml).
+The renderer reads that record and derives nothing of its own, so the drawing and the
+data cannot disagree.
+
+Each fact carries where it came from, because a bare null cannot separate “transcribed”,
+“missed in transcription”, “the source is silent” and “nobody knows” — and conflating
+those is what put a wrong badge on n=54:
+
+| Provenance | Meaning |
+| --- | --- |
+| `frontier` | Read from the case’s frontier record |
+| `catalogue` | Transcribed here from the retained catalogue, not carried by the frontier |
+| `derived` | Computed by this repository from a fact it already holds |
+| `absent` | No source on hand supplies it, which is not a claim about mathematics |
+
+To see where the figure knows more than the records do:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.build_composite_figure_data --review
+```
+
+Today that reports 95 degrees known, 11 stored upstream and **84 derived here** — each
+one a fact the corpus could hold and does not.
 
 ## The rule that matters
 

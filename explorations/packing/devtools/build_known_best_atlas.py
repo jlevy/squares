@@ -7,7 +7,6 @@ import argparse
 import copy
 import hashlib
 import json
-import math
 import shutil
 import struct
 import subprocess
@@ -28,7 +27,8 @@ import mpmath as mp
 import yaml
 from strif import atomic_output_file
 
-from devtools import render_composite_pdf
+from devtools import build_composite_figure_data, render_composite_pdf
+from devtools.build_composite_figure_data import load_record as load_figure_record
 from sqpack.known_best import (
     KINGBIRD_ATTRIBUTION,
     KINGBIRD_BASE_URL,
@@ -585,14 +585,6 @@ def _render(witness: dict) -> str:
     )
 
 
-def _summary_side_text(side: str) -> str:
-    value = Decimal(side)
-    text = format(value, ".7g")
-    if "." in text and "e" not in text.lower():
-        text = text.rstrip("0").rstrip(".")
-    return text
-
-
 def _summary_points(
     square: SquareGeometry,
     *,
@@ -716,16 +708,17 @@ def _append_summary_card(root: ET.Element, built: BuiltCase, *, spec: RenderSpec
             "fill": SUMMARY_SMALL_FILL,
         },
     )
-    # A proved optimum is an equality: s(n) IS this value. Everything else is a
-    # best known construction and stays an upper bound.
-    relation = "=" if _frontier_facts(built)["status"] == "proved" else "\u2264"
     # Only the function name is italic, as in ordinary mathematical setting: the
     # parentheses, the argument, the relation and the numeral stay upright.
+    display = _figure_entries()[n]["side"]["display"]
     sub(bound, "tspan", {"font-style": "italic"}).text = "s"
-    sub(bound, "tspan", {}).text = f"({n}) {relation} {_summary_side_text(built.frontier.side)}"
+    sub(bound, "tspan", {}).text = display[1:]
 
-    degree = _frontier_facts(built)["degree"]
-    if degree is not None:
+    # The record carries a degree for all 95 known cases, but printing "deg 1"
+    # on the 65 integer sides is noise: a whole number is self-evidently
+    # rational. Show the degree only where it says something.
+    degree = _figure_entries()[n]["exactness"]["degree"]
+    if degree is not None and degree >= 2:
         sub(
             card,
             "text",
@@ -742,74 +735,23 @@ def _append_summary_card(root: ET.Element, built: BuiltCase, *, spec: RenderSpec
         ).text = f"deg {degree}"
 
 
-def _is_perfect_square(n: int) -> bool:
-    root = math.isqrt(n)
-    return root * root == n
+@cache
+def _figure_entries() -> dict[int, dict]:
+    """The figure record, keyed by n.
 
-
-def _frontier_facts(built: BuiltCase) -> dict:
-    """Read what is mathematically known about this n from its frontier record."""
-    front_matter = built.frontier.text.split("---", 2)[1]
-    packing = yaml.safe_load(front_matter)["packing"]
-    reported = packing.get("reported_upper_bound") or {}
-    return {
-        "status": str(packing["status"]),
-        "degree": reported.get("algebraic_degree"),
-        # Rigidity is ESTABLISHED here, never merely absent. Two sound sources:
-        #
-        # 1. n a perfect square. The k^2 unit squares exactly tile a k x k
-        #    container, so there is no slack anywhere and nothing can move. This
-        #    is derived here rather than read from the record, because the
-        #    records are wrong about it: n=1 is stored rigid: false, and n=16
-        #    upward are null.
-        # 2. The catalogue annotates the picture "Rigid" -- n = 5, 11, 28, 40,
-        #    transcribed from kingbird-squares-in-squares.md lines 44, 80, 163
-        #    and 224, identified by the side value printed above each.
-        #
-        # The stored flag is NOT usable on its own: it is non-null only where
-        # catalogue_pictured is true, so false means "the catalogue did not say"
-        # and not "this packing has play". Absence of the badge therefore means
-        # rigidity is not established, never that the packing is known loose.
-        "rigid": _is_perfect_square(int(packing["n"])) or reported.get("rigid") is True,
-        "exact_known": bool(
-            reported.get("exact_form")
-            or reported.get("minimal_polynomial")
-            or reported.get("algebraic_degree")
-        ),
-    }
+    Every claim the figure states is decided in
+    devtools/build_composite_figure_data.py and validated against
+    composite-figure.schema.yaml. Nothing is re-derived here, so the drawing and
+    the record cannot disagree.
+    """
+    return {entry["n"]: entry for entry in load_figure_record()["entries"]}
 
 
 def _case_badges(built: BuiltCase) -> tuple[tuple[str, str, str], ...]:
-    """Badges for what is known about s(n), not for how this repository stores it.
-
-    ``O``  s(n) is proved optimal: 35 cases. The rest are the best construction
-           currently known and remain open.
-    ``=``  s(n) is pinned exactly, either by a radical such as 2 + sqrt(2)/2 (83
-           cases) or by a recorded minimal polynomial (11 more, n=11's of degree
-           8). Whether it was written as a radical is notation, not mathematics,
-           so both count as exact.
-    ``R``  rigidity is established: the perfect-square grids, where the squares
-           exactly tile the container, plus the four the catalogue annotates
-           rigid. Absence means not established, NOT that the packing has play.
-    ``~``  only a decimal is on record: n = 29, 55, 68, 69 and 71. For these five
-           the exact value is not pinned down here. That is a statement about
-           what the retained sources give, not a claim that the value is
-           irrational or of high degree: an integer-relation search over the
-           retained sides settles nothing for them, since it also fails on n=51,
-           whose degree-12 polynomial we do hold. The witness sides are 45-99
-           digits, well short of what those degrees would need.
-    """
-    facts = _frontier_facts(built)
-    badges: list[tuple[str, str, str]] = []
-    if facts["status"] == "proved":
-        badges.append(("O", "solid", "proved optimal"))
-    if facts["exact_known"]:
-        badges.append(("=", "solid", "exact value known"))
-    else:
-        badges.append(("\u2248", "muted", "only known numerically"))
-    if facts["rigid"]:
-        badges.append(("R", "solid", "rigid (established)"))
-    return tuple(badges)
+    entry = _figure_entries()[built.frontier.n]
+    return tuple(
+        (badge["glyph"], badge["style"], badge["meaning"]) for badge in entry["badges"]
+    )
 
 
 def _append_badge(
@@ -940,10 +882,13 @@ def _append_summary_legend(
     root: ET.Element, built: list[BuiltCase], *, spec: RenderSpec
 ) -> None:
     """Two rows: what the badges assert, then what color and shade encode."""
-    tally: dict[str, int] = {}
-    for item in built:
-        for _glyph, _style, label in _case_badges(item):
-            tally[label] = tally.get(label, 0) + 1
+    totals = load_figure_record()["totals"]
+    tally = {
+        "proved optimal": totals["proved_optimal"],
+        "exact value known": totals["exact_value_known"],
+        "only known numerically": totals["only_known_numerically"],
+        "rigid (established)": totals["rigidity_established"],
+    }
     palette = square_fill_palette(
         hue_count=spec.hue_count,
         shades_per_hue=spec.shades_per_hue,
@@ -1395,6 +1340,11 @@ def _expected_outputs() -> tuple[dict[Path, str], dict]:
 
 
 def update() -> None:
+    # The figure record decides every claim the drawing states, so refresh it
+    # first and drop the memo, or the render would use a stale one.
+    build_composite_figure_data.update()
+    _figure_entries.cache_clear()
+    clear_build_caches()
     outputs, _manifest = expected_outputs()
     for path, content in sorted(outputs.items(), key=lambda item: item[0].as_posix()):
         path.parent.mkdir(parents=True, exist_ok=True)

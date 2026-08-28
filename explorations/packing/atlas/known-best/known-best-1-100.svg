@@ -121,6 +121,7 @@
     <rect data-feature="evidence-badge" data-evidence="proved optimal" x="1089" y="334.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="1098.5" y="349.6" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">O</text>
     <text data-feature="side-bound" x="996" y="372" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(5) = 2.707107</tspan></text>
+    <text data-feature="algebraic-degree" x="1154" y="372" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="6" data-row="0" data-column="5" data-source-id="W-known-best-n006">
     <rect data-feature="container-outline" x="1224" y="164" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -208,6 +209,7 @@
     <rect data-feature="evidence-badge" data-evidence="proved optimal" x="2252" y="334.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="2261.5" y="349.6" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">O</text>
     <text data-feature="side-bound" x="2136" y="372" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(10) = 3.707107</tspan></text>
+    <text data-feature="algebraic-degree" x="2294" y="372" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="11" data-row="1" data-column="0" data-source-id="W-known-best-n011">
     <rect data-feature="container-outline" x="84" y="399" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -394,6 +396,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="1819" y="569.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="1828.5" y="583.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="1680" y="607" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(18) ≤ 4.822876</tspan></text>
+    <text data-feature="algebraic-degree" x="1838" y="607" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="19" data-row="1" data-column="8" data-source-id="W-known-best-n019">
     <rect data-feature="container-outline" x="1908" y="399" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -420,6 +423,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="2047" y="569.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="2056.5" y="583.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="1908" y="607" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(19) ≤ 4.885618</tspan></text>
+    <text data-feature="algebraic-degree" x="2066" y="607" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="20" data-row="1" data-column="9" data-source-id="W-known-best-n020">
     <rect data-feature="container-outline" x="2136" y="399" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -640,6 +644,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="1363" y="804.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="1372.5" y="818.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="1224" y="842" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(26) ≤ 5.62132</tspan></text>
+    <text data-feature="algebraic-degree" x="1382" y="842" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="27" data-row="2" data-column="6" data-source-id="W-known-best-n027">
     <rect data-feature="container-outline" x="1452" y="634" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -674,6 +679,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="1591" y="804.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="1600.5" y="818.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="1452" y="842" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(27) ≤ 5.707107</tspan></text>
+    <text data-feature="algebraic-degree" x="1610" y="842" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="28" data-row="2" data-column="7" data-source-id="W-known-best-n028">
     <rect data-feature="container-outline" x="1680" y="634" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -1128,6 +1134,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="1819" y="1039.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="1828.5" y="1053.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="1680" y="1077" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(38) ≤ 6.707107</tspan></text>
+    <text data-feature="algebraic-degree" x="1838" y="1077" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="39" data-row="3" data-column="8" data-source-id="W-known-best-n039">
     <rect data-feature="container-outline" x="1908" y="869" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -1224,6 +1231,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="2252" y="1039.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="2261.5" y="1053.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="2136" y="1077" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(40) ≤ 6.828427</tspan></text>
+    <text data-feature="algebraic-degree" x="2294" y="1077" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="41" data-row="4" data-column="0" data-source-id="W-known-best-n041">
     <rect data-feature="container-outline" x="84" y="1104" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -1878,6 +1886,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="451" y="1509.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="460.5" y="1523.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="312" y="1547" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(52) ≤ 7.707107</tspan></text>
+    <text data-feature="algebraic-degree" x="470" y="1547" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="53" data-row="5" data-column="2" data-source-id="W-known-best-n053">
     <rect data-feature="container-outline" x="540" y="1339" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -1938,6 +1947,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="679" y="1509.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="688.5" y="1523.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="540" y="1547" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(53) ≤ 7.822876</tspan></text>
+    <text data-feature="algebraic-degree" x="698" y="1547" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="54" data-row="5" data-column="3" data-source-id="W-known-best-n054">
     <rect data-feature="container-outline" x="768" y="1339" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -1999,6 +2009,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="907" y="1509.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="916.5" y="1523.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="768" y="1547" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(54) ≤ 7.846667</tspan></text>
+    <text data-feature="algebraic-degree" x="926" y="1547" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 4</text>
   </g>
   <g data-feature="packing-card" data-n="55" data-row="5" data-column="4" data-source-id="W-known-best-n055">
     <rect data-feature="container-outline" x="996" y="1339" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -2744,6 +2755,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="1135" y="1744.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="1144.5" y="1758.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="996" y="1782" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(65) ≤ 8.535534</tspan></text>
+    <text data-feature="algebraic-degree" x="1154" y="1782" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="66" data-row="6" data-column="5" data-source-id="W-known-best-n066">
     <rect data-feature="container-outline" x="1224" y="1574" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -2817,6 +2829,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="1363" y="1744.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="1372.5" y="1758.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="1224" y="1782" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(66) ≤ 8.656854</tspan></text>
+    <text data-feature="algebraic-degree" x="1382" y="1782" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="67" data-row="6" data-column="6" data-source-id="W-known-best-n067">
     <rect data-feature="container-outline" x="1452" y="1574" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -2891,6 +2904,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="1591" y="1744.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="1600.5" y="1758.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="1452" y="1782" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(67) ≤ 8.707107</tspan></text>
+    <text data-feature="algebraic-degree" x="1610" y="1782" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="68" data-row="6" data-column="7" data-source-id="W-known-best-n068">
     <rect data-feature="container-outline" x="1680" y="1574" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -4130,6 +4144,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="451" y="2214.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="460.5" y="2228.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="312" y="2252" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(82) ≤ 9.535534</tspan></text>
+    <text data-feature="algebraic-degree" x="470" y="2252" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="83" data-row="8" data-column="2" data-source-id="W-known-best-n083">
     <rect data-feature="container-outline" x="540" y="2044" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -4312,6 +4327,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="907" y="2214.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="916.5" y="2228.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="768" y="2252" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(84) ≤ 9.707107</tspan></text>
+    <text data-feature="algebraic-degree" x="926" y="2252" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="85" data-row="8" data-column="4" data-source-id="W-known-best-n085">
     <rect data-feature="container-outline" x="996" y="2044" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -4404,6 +4420,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="1135" y="2214.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="1144.5" y="2228.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="996" y="2252" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(85) ≤ 9.742641</tspan></text>
+    <text data-feature="algebraic-degree" x="1154" y="2252" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="86" data-row="8" data-column="5" data-source-id="W-known-best-n086">
     <rect data-feature="container-outline" x="1224" y="2044" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -4497,6 +4514,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="1363" y="2214.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="1372.5" y="2228.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="1224" y="2252" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(86) ≤ 9.822876</tspan></text>
+    <text data-feature="algebraic-degree" x="1382" y="2252" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="87" data-row="8" data-column="6" data-source-id="W-known-best-n087">
     <rect data-feature="container-outline" x="1452" y="2044" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
@@ -4784,6 +4802,7 @@
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="2047" y="2214.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="2056.5" y="2228.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <text data-feature="side-bound" x="1908" y="2252" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan>(89) ≤ 9.949747</tspan></text>
+    <text data-feature="algebraic-degree" x="2066" y="2252" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
   </g>
   <g data-feature="packing-card" data-n="90" data-row="8" data-column="9" data-source-id="W-known-best-n090">
     <rect data-feature="container-outline" x="2136" y="2044" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" vector-effect="non-scaling-stroke" />
