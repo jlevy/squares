@@ -10,7 +10,9 @@ cannot drift, so the Markdown between the GENERATED markers is written from
     uv run --frozen python -m devtools.render_research_tables --check
 
 `--check` compares parsed cells, not bytes, so it is unaffected by the
-Markdown formatter reflowing the surrounding prose.
+Markdown formatter reflowing the surrounding prose. Rendering answers to the
+same comparison: a row that still says what the document says is written back
+unchanged, so a run over an unchanged tree produces an empty diff.
 """
 
 from __future__ import annotations
@@ -270,16 +272,12 @@ def table_recovered() -> list[str]:
     return rows
 
 
-def splice(text: str, name: str, rows: list[str]) -> str:
-    b, e = BEGIN % name, END % name
-    i, j = text.index(b), text.index(e)
-    return text[:i] + b + "\n\n" + "\n".join(rows) + "\n\n" + text[j:]
-
-
 # The Markdown formatter normalizes typography in place (straight quotes to
 # curly, -- to en dash, ... to an ellipsis). That rewrites generated cells, so
-# --check compares *content*: both sides are folded back to ASCII punctuation
-# first. Anything that actually changes what a cell says still fails.
+# both directions compare *content*: sides are folded back to ASCII punctuation
+# first, by --check before it reports staleness and by the writer before it
+# decides a row needs rewriting. Anything that changes what a cell says still
+# reads as changed.
 _FOLD = str.maketrans(
     {
         "\u201c": '"',
@@ -293,12 +291,46 @@ _FOLD = str.maketrans(
 )
 
 
+def fold(line: str) -> str:
+    """What a generated line *says*, with formatter-owned typography folded away."""
+    return " ".join(line.translate(_FOLD).split())
+
+
+def keep_document_typography(previous: str, rows: list[str]) -> list[str]:
+    """Rewrite only the rows whose content actually changed.
+
+    The formatter owns typography everywhere, including inside these generated
+    blocks: it curls the straight quotes this module renders from the ASCII in
+    `frontier/`. Splicing freshly rendered rows in flattens them back, on every
+    run, in lines nobody edited -- and `--check` folds typography away, so it
+    never reports the damage. So a rendered row that says exactly what the
+    document already says is written back byte for byte, and only a row whose
+    content moved is replaced with the newly rendered text.
+    """
+    available: dict[str, list[str]] = {}
+    for line in previous.splitlines():
+        if line.strip():
+            available.setdefault(fold(line), []).append(line)
+    kept = []
+    for row in rows:
+        unchanged = available.get(fold(row))
+        kept.append(unchanged.pop(0) if unchanged else row)
+    return kept
+
+
+def splice(text: str, name: str, rows: list[str]) -> str:
+    b, e = BEGIN % name, END % name
+    i, j = text.index(b), text.index(e)
+    rows = keep_document_typography(text[i + len(b) : j], rows)
+    return text[:i] + b + "\n\n" + "\n".join(rows) + "\n\n" + text[j:]
+
+
 def cells(block: str) -> list[list[str]]:
     out = []
     for line in block.splitlines():
         if not line.startswith("|"):
             continue
-        c = [" ".join(x.translate(_FOLD).split()) for x in line.strip().strip("|").split("|")]
+        c = [fold(x) for x in line.strip().strip("|").split("|")]
         if set("".join(c)) <= set("- "):
             continue
         out.append(c)
