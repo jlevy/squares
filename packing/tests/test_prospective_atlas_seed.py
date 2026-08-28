@@ -82,7 +82,7 @@ def test_seed_sources_retain_attribution_without_local_hashes() -> None:
     assert all(source["creator"] == "UnitSquare Project" for source in sources)
     assert all(source["license"] == "CC-BY-4.0-in-dataset-page-metadata" for source in sources)
     for source in sources:
-        assert (ROOT.parents[1] / source["path"]).is_file()
+        assert (ROOT.parent / source["path"]).is_file()
     assert "sha256" not in json.dumps(seed, sort_keys=True)
 
 

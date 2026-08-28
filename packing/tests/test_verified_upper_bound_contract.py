@@ -31,6 +31,9 @@ import yaml
 from sqpack.assurance import bounds_agree_at_declared_precision
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+# The consumers of this field now span the repository: it is named in SYNOPSIS.md and
+# in active plans, which sit above packing/.
+REPO = PROJECT_ROOT.parent
 FRONTIER = PROJECT_ROOT / "frontier"
 SCHEMA = FRONTIER / "square-packing-case.schema.yaml"
 CEILING_HEADING = "## The verified upper bound is a ceiling"
@@ -40,35 +43,35 @@ CEILING_HEADING = "## The verified upper bound is a ceiling"
 # wants the best known side length wants `reported_upper_bound` instead, and a consumer
 # that wants a proved side length has to check `status` first.
 DECLARED_CONSUMERS = {
-    "devtools/check_basic_bounds.py": "checks the ceiling really is the certifiable grid bound",
-    "devtools/check_golden_basins.py": "reads the ceiling as an upper limit on a basin side",
-    "devtools/controls.yaml": "corrupts the field on purpose, to prove the checkers fire",
-    "devtools/migrate_frontier_v2.py": "builds the field from the v1 records",
-    "devtools/render_research_tables.py": "renders it beside the report, never instead of it",
+    "packing/devtools/check_basic_bounds.py": "checks the ceiling really is the certifiable grid bound",
+    "packing/devtools/check_golden_basins.py": "reads the ceiling as an upper limit on a basin side",
+    "packing/devtools/controls.yaml": "corrupts the field on purpose, to prove the checkers fire",
+    "packing/devtools/migrate_frontier_v2.py": "builds the field from the v1 records",
+    "packing/devtools/render_research_tables.py": "renders it beside the report, never instead of it",
     "docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md": (
         "the plan that introduced the reported/verified split"
     ),
-    "frontier/README.md": "documents the field for a reader of the corpus",
-    "frontier/evidence.yaml": "names the fields as the certificate the grid bound lives in",
-    "frontier/square-packing-case.schema.yaml": "defines it",
-    "src/sqpack/assurance.py": (
+    "packing/frontier/README.md": "documents the field for a reader of the corpus",
+    "packing/frontier/evidence.yaml": "names the fields as the certificate the grid bound lives in",
+    "packing/frontier/square-packing-case.schema.yaml": "defines it",
+    "packing/src/sqpack/assurance.py": (
         "compares report against ceiling and demands a blocker for any gap"
     ),
-    "tests/test_frontier_assurance_contract.py": "exercises those comparisons",
-    "tests/test_verified_upper_bound_contract.py": "this file",
+    "packing/tests/test_frontier_assurance_contract.py": "exercises those comparisons",
+    "packing/tests/test_verified_upper_bound_contract.py": "this file",
     "SYNOPSIS.md": "names the field when describing the reported/verified split",
-    "campaign/agendas/agenda-005-symbolic-promotion-and-identity.md": (
+    "packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md": (
         "plans promotion work that reads the ceiling, never as the value"
     ),
     "docs/project/specs/active/plan-2026-08-28-interval-certification.md": (
         "specs certification that would tighten the ceiling toward the report"
     ),
-    "devtools/assess_frontier_rigidity.py": (
+    "packing/devtools/assess_frontier_rigidity.py": (
         "reads the ceiling only together with the floor, and only to confirm they pin the "
         "side at exactly k before making the perfect-square tiling argument; a one-sided "
         "read would not establish a tiling and is never made"
     ),
-    "tests/test_frontier_rigidity_assessment.py": (
+    "packing/tests/test_frontier_rigidity_assessment.py": (
         "exercises that two-sided pin, including the cases where it must refuse"
     ),
 }
@@ -77,7 +80,15 @@ DECLARED_CONSUMERS = {
 # are outputs of the consumers below rather than consumers themselves: the atlas alone
 # is 44 MB of them, and nothing hand-written in this project comes close to the cap.
 SEARCHED_SUFFIXES = (".py", ".md", ".yaml", ".yml", ".rs")
-SKIPPED_PARTS = {".venv", "__pycache__", "resources", "target", ".pytest_cache", "results"}
+SKIPPED_PARTS = {
+    ".venv",
+    "__pycache__",
+    "resources",
+    "target",
+    ".pytest_cache",
+    "results",
+    "node_modules",
+}
 GENERATED_BYTES = 512 * 1024
 
 
@@ -173,11 +184,16 @@ def test_the_schema_states_what_the_field_is_and_is_not() -> None:
 
 def test_no_undeclared_consumer_reads_the_field() -> None:
     found: set[str] = set()
-    for path in sorted(PROJECT_ROOT.rglob("*")):
+    for path in sorted(REPO.rglob("*")):
         if path.is_dir() or path.suffix not in SEARCHED_SUFFIXES:
             continue
-        relative = path.relative_to(PROJECT_ROOT)
-        if SKIPPED_PARTS & set(relative.parts) or re.fullmatch(r"n-\d{3}\.md", path.name):
+        relative = path.relative_to(REPO)
+        # Dot-directories hold vendored agent skills and tooling state, not our prose.
+        if (
+            SKIPPED_PARTS & set(relative.parts)
+            or any(part.startswith(".") for part in relative.parts)
+            or re.fullmatch(r"n-\d{3}\.md", path.name)
+        ):
             continue
         if path.stat().st_size > GENERATED_BYTES:
             continue

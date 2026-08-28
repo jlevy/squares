@@ -359,7 +359,7 @@ def check_logbook_entries(logbook_entries, sessions, experiments) -> list[str]:
             problems.append(f"{name}: duplicate pipeline changes {duplicate_changes}")
         for change in entry["pipeline_changes"]:
             for relative_path in change["paths"]:
-                if not (PROJECT_ROOT / relative_path).exists():
+                if not (PROJECT_ROOT.parent / relative_path).exists():
                     problems.append(
                         f"{name}: pipeline change {change['name']} references missing "
                         f"path {relative_path}"

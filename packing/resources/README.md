@@ -1,7 +1,7 @@
 # Research Resources: Square Packing
 
 A local, greppable archive of the primary literature behind
-[research-2026-08-22-packing-11-unit-squares.md](../docs/project/research/research-2026-08-22-packing-11-unit-squares.md).
+[research-2026-08-22-packing-11-unit-squares.md](../../docs/project/research/research-2026-08-22-packing-11-unit-squares.md).
 
 The point of this directory is that **the literature can be searched locally**, without
 re-fetching, re-extracting, or fighting paywalls and bot-blocks.

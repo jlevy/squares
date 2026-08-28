@@ -33,6 +33,9 @@ from sqpack.assurance import check_case_semantics, check_evidence_semantics
 from sqpack.yamlio import load_yaml
 
 FRONTIER = pathlib.Path(__file__).resolve().parent.parent / "frontier"
+# The repository root. recorded_in paths, and the documents that cite defect ids, are
+# repository-relative because the reader-facing tree now sits above packing/.
+REPO = FRONTIER.parent.parent
 WITNESSES = FRONTIER.parent / "witnesses"
 DOCUMENT_MAP = FRONTIER.parent.parent / "docs" / "project" / "document-map.yaml"
 COMPOSITE_FIGURE = FRONTIER.parent / "atlas" / "known-best" / "composite-figure.json"
@@ -201,7 +204,7 @@ def defect_checks() -> list[str]:
             errs.append(f"{x['id']}: {x['class']} without a direction")
         if x.get("recurrence_of") and x["recurrence_of"] not in known:
             errs.append(f"{x['id']}: recurrence_of unknown {x['recurrence_of']}")
-        target = FRONTIER.parent / x["recorded_in"]
+        target = REPO / x["recorded_in"]
         if not target.exists():
             errs.append(f"{x['id']}: recorded_in does not exist: {x['recorded_in']}")
 
@@ -209,12 +212,15 @@ def defect_checks() -> list[str]:
     # cited in a schema comment and a commit message before its record was ever written,
     # and only the contiguity check noticed -- a reference to a defect nobody can look up
     # is the same dangling pointer the campaign's reserved-id rule exists to prevent.
-    root = FRONTIER.parent
+    root = REPO
     # controls.yaml is a file of deliberate corruptions -- it cites a defect that does
     # not exist precisely to prove the recurrence check fires on one.
     skip = {"defects.yaml", "defects.md", "controls.yaml"}
     for path in sorted(root.rglob("*.yaml")) + sorted(root.rglob("*.md")):
         if path.name in skip or "resources" in path.parts or ".venv" in path.parts:
+            continue
+        # Dot-directories hold vendored agent skills and tooling caches, not our prose.
+        if any(part.startswith(".") or part == "node_modules" for part in path.relative_to(root).parts):
             continue
         cited = set(re.findall(r"\bD-[0-9]{3}\b", path.read_text(encoding="utf-8")))
         errs.extend(

@@ -34,7 +34,7 @@ defects:
     Removed the container from the variables: minimise required_side + lambda * overlap
     directly, so every compacting move is rewarded and no feasibility oracle is needed.
   regression: 'n = 10 positive control, which is not the grid and so cannot be passed by returning it'
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md
 - id: D-002
   title: A restart cap made the declared move budget inert
   date: '2026-08-22'
@@ -53,7 +53,7 @@ defects:
     Every strategy comparison in the campaign would have been invalid, and silently so.
   fix: 'Cap raised to u64::MAX; the move budget is what binds.'
   regression: none
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md
 - id: D-003
   title: Squared overlap penalty has a vanishing gradient
   date: '2026-08-22'
@@ -69,7 +69,7 @@ defects:
   consequence: 'Screening would reject valid packings, or accept configurations that never became valid.'
   fix: 'Linear penalty, which has an exact finite-lambda constrained optimum.'
   regression: 'selftest asserts the reported packing is overlap-free'
-  recorded_in: campaign/ideas.md
+  recorded_in: packing/campaign/ideas.md
 - id: D-004
   title: Half the test suite was silently unreachable
   date: '2026-08-22'
@@ -92,7 +92,7 @@ defects:
     dependencies and falling back to a pinned zero-install runner; the chosen runner is
     echoed.
   regression: 'the runner is printed on every run, and a missing dependency now exits non-zero'
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-005
   title: Campaign schemas declared enforced, and nothing enforced them
   date: '2026-08-23'
@@ -226,7 +226,7 @@ defects:
     rate that was really total.
   fix: 'The starting configuration is scored on entry to the anneal.'
   regression: 'the eps = 0 cell of the basin-entry sweep, whose answer is known in advance'
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md
 - id: D-012
   title: A zero perturbation made the cooling schedule degenerate
   date: '2026-08-23'
@@ -242,7 +242,7 @@ defects:
   consequence: 'The one cell whose answer is known in advance could not be run.'
   fix: 'Starting temperature floored at the final temperature.'
   regression: 'the eps = 0 cell is part of the standing sweep'
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md
 - id: D-013
   title: An infeasible chain would have reported a perfect return
   date: '2026-08-23'
@@ -261,7 +261,7 @@ defects:
     the measurement the round existed to make.
   fix: 'Infeasible trials report null and are counted as non-returns.'
   regression: 'a feasible flag is carried on every trial record and checked at analysis'
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md
 - id: D-014
   title: The LP solver returned a packing that violated its own constraints
   date: '2026-08-23'
@@ -284,7 +284,7 @@ defects:
     Tolerance pinned at the solver's floor of 1e-10, and every returned solution is
     post-checked against the constraints that were imposed on it.
   regression: 'the post-check runs on every solve; a violation rejects the solve rather than being reported'
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
 - id: D-015
   title: The angle objective was not a function of the angles
   date: '2026-08-23'
@@ -305,7 +305,7 @@ defects:
     than plain descent -- the tell that the objective, not the optimiser, was at fault.
   fix: 'Cell fixed-point iteration, and every evaluation re-solves from the same reference centres.'
   regression: none
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
 - id: D-016
   title: One variable served as both the finite-difference probe and the line-search step
   date: '2026-08-23'
@@ -323,7 +323,7 @@ defects:
   consequence: 'Answers 10-20x further from optimal than the method could actually reach.'
   fix: 'Separate fixed probe size; the line search resets each round.'
   regression: none
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
 - id: D-017
   title: A three-cell sweep recorded as a one-cell round, again
   date: '2026-08-23'
@@ -343,7 +343,7 @@ defects:
     and this is what that costs.
   fix: 'exp-006 annotated rather than rewritten; the successor sweep split one round per cell.'
   regression: none
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
 - id: D-018
   title: One round, two hypotheses, one verdict
   date: '2026-08-23'
@@ -365,7 +365,7 @@ defects:
     entry, so the shape cannot recur. A round bearing on a second claim cites it in
     prose or is split.
   regression: 'schema maxItems, plus a negative control that gives a round two hypotheses and asserts the gate refuses it'
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md
   bead: think-lksm
 - id: D-019
   title: The bracketing quench does not always terminate
@@ -396,7 +396,7 @@ defects:
     backstop. The pathological cell now finishes in 1.6 s against 145 s, and lands at
     4.4e-16 rather than timing out.
   regression: 'the iteration cap makes non-termination impossible; the wall budget catches slowness that is not non-termination'
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md
   bead: think-x40t
 - id: D-020
   title: The quench's answer depends on a tuning parameter, and basin identity would inherit it
@@ -451,7 +451,7 @@ defects:
     `beat_record: true`, and the soundness-perimeter check holds every emitting component
     to the same bound so the two cannot drift apart.
   regression: 'the soundness perimeter at the same bound; every round carries assurance and method, and beat_record requires verified assurance'
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md
   bead: think-hg3u
 - id: D-022
   title: A numeric field and its display duplicate could disagree in silence
@@ -469,7 +469,7 @@ defects:
   consequence: 'An artifact carrying a number the report never shows, with no signal that they had parted.'
   fix: 'A cross-check that value_str parses to value, on every bound of every case.'
   regression: 'the cross-check, plus a negative control that mutates value_str and asserts it fires'
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-023
   title: Verification was done in throwaway snippets and left nothing behind
   date: '2026-08-23'
@@ -495,7 +495,7 @@ defects:
     and run in the gate. On its first full run it found D-022 and corrected two of its
     own control definitions.
   regression: 'the controls run in test.sh; a control whose anchor is ambiguous or absent fails loudly rather than mutating the wrong text'
-  recorded_in: devtools/run_negative_controls.py
+  recorded_in: packing/devtools/run_negative_controls.py
 - id: D-024
   title: A strategy's enum and its prose said opposite things
   date: '2026-08-23'
@@ -520,7 +520,7 @@ defects:
     schema rather than left to inference, with the rule that a note beginning "Yes"
     means and only means `produced_records`.
   regression: 'a cross-check in validate_schemas.py comparing every entry''s outcome against its note'
-  recorded_in: frontier/strategy-catalogue.schema.yaml
+  recorded_in: packing/frontier/strategy-catalogue.schema.yaml
 - id: D-025
   title: Two bead trees claimed the same spec phase after the plan was rebuilt
   date: '2026-08-23'
@@ -608,7 +608,7 @@ defects:
     `tools/check_generated_exempt.py` in the gate, so a third generated view cannot
     repeat this.
   regression: 'tools/check_generated_exempt.py in test.sh, with a negative control in tools/controls.yaml'
-  recorded_in: devtools/check_generated_markdown.py
+  recorded_in: packing/devtools/check_generated_markdown.py
 - id: D-028
   title: A defect-log headline stayed asserted after it stopped being true
   date: '2026-08-23'
@@ -638,7 +638,7 @@ defects:
     the claim is derived in tools/render_defects.py rather than written, so it cannot
     disagree with defects.yaml; check_synopsis.py already reconciles the synopsis's
     per-class counts against the same source
-  recorded_in: devtools/render_defects.py
+  recorded_in: packing/devtools/render_defects.py
 - id: D-029
   title: A single fixed-angle LP solve was called "the quench", and retracted a correct finding
   date: '2026-08-23'
@@ -1637,7 +1637,7 @@ defects:
     atlas, quench and descriptor prose no longer derives rarity, dimension or method
     impossibility from rigidity, contact count or a one-dimensional kink.
   regression: none
-  recorded_in: campaign/ideas.md
+  recorded_in: packing/campaign/ideas.md
 - id: D-064
   title: Runner preflight was unable to run inside the gate that mutation-tested it
   date: '2026-08-23'
@@ -1708,7 +1708,7 @@ defects:
     candidate to promotion.
   regression: none
   recurrence_of: D-042
-  recorded_in: cases/campaign_smoke/baseline_sweep.py
+  recorded_in: packing/cases/campaign_smoke/baseline_sweep.py
 - id: D-067
   title: The eleventh terminal round was omitted from campaign wall-time accounting
   date: '2026-08-23'
@@ -1772,7 +1772,7 @@ defects:
     H-002 now names the built instrument and the measured split: machine-precision
     polish on n=5 and n=10, but failure of the universal claim at n=11.
   regression: none
-  recorded_in: campaign/hypotheses/H-002-lp-in-cell-polish.md
+  recorded_in: packing/campaign/hypotheses/H-002-lp-in-cell-polish.md
 - id: D-070
   title: Exp-011 execution provenance was rewritten to a later record commit
   date: '2026-08-23'
@@ -2034,7 +2034,7 @@ defects:
     packing or remove from the n = 12 grid, and require a preregistered median best-side
     improvement over paired cold starts.
   regression: none
-  recorded_in: campaign/hypotheses/H-004-neighbor-transfer-seeding.md
+  recorded_in: packing/campaign/hypotheses/H-004-neighbor-transfer-seeding.md
 - id: D-081
   title: Runner preflight treats any nonempty queue as enough unattended work
   date: '2026-08-24'
@@ -2105,7 +2105,7 @@ defects:
     refiner's residual. The experiment retains a dated correction beside its original
     interpretation, and H-021 through H-023 own the missing component evidence.
   regression: none
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md
 - id: D-084
   title: The n=11 frontier artifact asserted rigidity and the wrong gap rank
   date: '2026-08-24'
@@ -2132,7 +2132,7 @@ defects:
     separate "the catalogue is silent" from "nobody knows", which is the same
     conflation this defect was about.
   regression: none
-  recorded_in: frontier/n-011.md
+  recorded_in: packing/frontier/n-011.md
 - id: D-085
   title: Living run commands could rewrite the locked dependency state
   date: '2026-08-24'
@@ -2153,7 +2153,7 @@ defects:
     in the runbook.
   regression: none
   recurrence_of: D-058
-  recorded_in: campaign/README.md
+  recorded_in: packing/campaign/README.md
 - id: D-086
   title: The overnight agenda and current handoff retained obsolete work and effort state
   date: '2026-08-24'
@@ -2201,7 +2201,7 @@ defects:
     angle-count claim with geometry-provenance requirements; and H-019's declared sweep
     is n = 11 only. Generalizations require separate registered hypotheses.
   regression: none
-  recorded_in: campaign/hypotheses/H-001-angle-class-reduction.md
+  recorded_in: packing/campaign/hypotheses/H-001-angle-class-reduction.md
 - id: D-088
   title: The finite-n frontier missed newer certified n=68 and n=69 constructions
   date: '2026-08-24'
@@ -2225,7 +2225,7 @@ defects:
     has not independently re-run the release validation.
   regression: none
   bead: think-f82b
-  recorded_in: frontier/n-068.md
+  recorded_in: packing/frontier/n-068.md
 - id: D-089
   title: The n=17 record was given symmetric plus-or-minus 40-degree orientations
   date: '2026-08-24'
@@ -2247,7 +2247,7 @@ defects:
     the qualitative three-class oblique calibration claim remains.
   regression: none
   bead: think-f82b
-  recorded_in: frontier/n-017.md
+  recorded_in: packing/frontier/n-017.md
 - id: D-090
   title: Two low-angle examples were generalized into a universal tiny-angle prior
   date: '2026-08-24'
@@ -2271,7 +2271,7 @@ defects:
     refutation until the full pose is independently reconstructed and verified.
   regression: none
   bead: think-w5rb
-  recorded_in: campaign/hypotheses/H-024-record-angle-class-count.md
+  recorded_in: packing/campaign/hypotheses/H-024-record-angle-class-count.md
 - id: D-091
   title: H-010 did not reproduce Stromquist's conditional proof mechanism
   date: '2026-08-24'
@@ -2297,7 +2297,7 @@ defects:
     false as printed; the five-node contract remains necessary so the right claim fails.
   regression: none
   bead: think-bvy9
-  recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
+  recorded_in: packing/campaign/hypotheses/H-010-stromquist-triple.md
 - id: D-092
   title: Structured asymptotic data repeated the phantom Roth-Vaughan constant
   date: '2026-08-24'
@@ -2317,7 +2317,7 @@ defects:
     Replaced the contradiction with the actual implicit-constant status.
   regression: none
   bead: think-f82b
-  recorded_in: frontier/asymptotic-waste-bounds.yaml
+  recorded_in: packing/frontier/asymptotic-waste-bounds.yaml
 - id: D-093
   title: Contact canonicalization discarded every advertised node attribute
   date: '2026-08-24'
@@ -2363,7 +2363,7 @@ defects:
   regression: none
   recurrence_of: D-084
   bead: think-f82b
-  recorded_in: campaign/ideas.md
+  recorded_in: packing/campaign/ideas.md
 - id: D-095
   title: The idea board called a refuted hypothesis the best runnable experiment
   date: '2026-08-24'
@@ -2384,7 +2384,7 @@ defects:
     states that H-018 is not a runnable basin-width experiment.
   regression: none
   bead: think-f82b
-  recorded_in: campaign/ideas.md
+  recorded_in: packing/campaign/ideas.md
 - id: D-096
   title: Algebraic degree was promoted into a proof-method ceiling and obstruction
   date: '2026-08-24'
@@ -2406,7 +2406,7 @@ defects:
     ceiling.
   regression: none
   bead: think-f82b
-  recorded_in: frontier/n-005.md
+  recorded_in: packing/frontier/n-005.md
 - id: D-097
   title: Strategy catalogues were described as exhaustive histories of the field
   date: '2026-08-24'
@@ -2428,7 +2428,7 @@ defects:
     adjacent practice.
   regression: none
   bead: think-f82b
-  recorded_in: frontier/README.md
+  recorded_in: packing/frontier/README.md
 - id: D-098
   title: Source code still called a finite stochastic return threshold a basin radius
   date: '2026-08-24'
@@ -2450,7 +2450,7 @@ defects:
   regression: none
   recurrence_of: D-083
   bead: think-f82b
-  recorded_in: sqsearch/src/search.rs
+  recorded_in: packing/sqsearch/src/search.rs
 - id: D-099
   title: H-023 placed six non-optimal endpoints in one optimum-side family question
   date: '2026-08-24'
@@ -2472,7 +2472,7 @@ defects:
     and minimax side-clearance bounds for unequal-side candidates.
   regression: none
   bead: think-f82b
-  recorded_in: campaign/hypotheses/H-023-n5-terminal-connectivity.md
+  recorded_in: packing/campaign/hypotheses/H-023-n5-terminal-connectivity.md
 - id: D-100
   title: Delta continuation had no preserved parameter and reversed its progress metric
   date: '2026-08-24'
@@ -2496,7 +2496,7 @@ defects:
     barriers.
   regression: none
   bead: think-f82b
-  recorded_in: campaign/hypotheses/H-013-delta-continuation.md
+  recorded_in: packing/campaign/hypotheses/H-013-delta-continuation.md
 - id: D-101
   title: Historical quench round wall times disagree with retained per-call durations
   date: '2026-08-24'
@@ -2518,7 +2518,7 @@ defects:
     replace historical values.
   regression: none
   bead: think-xzew
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md
 - id: D-102
   title: H-006 treated dual pose support as candidate piercing-point loci
   date: '2026-08-24'
@@ -2541,7 +2541,7 @@ defects:
     falsification and later certification.
   regression: none
   bead: think-f82b
-  recorded_in: campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md
+  recorded_in: packing/campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md
 - id: D-103
   title: H-011 omitted its declared component-identifiability prerequisites
   date: '2026-08-24'
@@ -2561,7 +2561,7 @@ defects:
     Added H-021 and H-023 to H-011's declared prerequisites.
   regression: none
   bead: think-f82b
-  recorded_in: campaign/hypotheses/H-011-small-n-census.md
+  recorded_in: packing/campaign/hypotheses/H-011-small-n-census.md
 - id: D-104
   title: Living artifacts still promoted local refinement failure into a wrong-basin claim
   date: '2026-08-24'
@@ -2584,7 +2584,7 @@ defects:
   regression: none
   recurrence_of: D-052
   bead: think-f82b
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md
 - id: D-105
   title: Superdisk continuation lacked a shape normalization and branch rules
   date: '2026-08-24'
@@ -2606,7 +2606,7 @@ defects:
     symmetry-breaking, bifurcation and termination events.
   regression: none
   bead: think-f82b
-  recorded_in: campaign/hypotheses/H-014-superdisk-continuation.md
+  recorded_in: packing/campaign/hypotheses/H-014-superdisk-continuation.md
 - id: D-106
   title: A living negative-control anchor still targeted corrected hypothesis prose
   date: '2026-08-24'
@@ -2627,7 +2627,7 @@ defects:
     same nonexistent-H-777 failure.
   regression: negctl requires every replacement anchor to appear exactly once
   bead: think-f82b
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-107
   title: Generated campaign views and next-work state lagged their corrected sources
   date: '2026-08-24'
@@ -2885,7 +2885,7 @@ defects:
   regression: none
   recurrence_of: D-104
   bead: think-0vt5
-  recorded_in: campaign/ideas.md
+  recorded_in: packing/campaign/ideas.md
 - id: D-118
   title: Budget scaling and attraction rarity were treated as the same cheap question
   date: '2026-08-24'
@@ -2909,7 +2909,7 @@ defects:
     validation blockers.
   regression: campaign ledger exposes each artifact's distinct metric, cost and prerequisites
   bead: think-0vt5
-  recorded_in: campaign/hypotheses/H-012-record-basins-are-rare.md
+  recorded_in: packing/campaign/hypotheses/H-012-record-basins-are-rare.md
 - id: D-119
   title: A continuous angle sheet was required to have only one nearby grid point
   date: '2026-08-24'
@@ -2934,7 +2934,7 @@ defects:
     grid offsets. Nearby non-minimizing points are expected rather than failures.
   regression: none
   bead: think-uyf4
-  recorded_in: campaign/hypotheses/H-028-reference-cell-angle-sheets.md
+  recorded_in: packing/campaign/hypotheses/H-028-reference-cell-angle-sheets.md
 - id: D-120
   title: Pair half-extent was recomputed four ways and injected ulp noise into cell selection
   date: '2026-08-24'
@@ -2984,7 +2984,7 @@ defects:
     The historical-regression step invokes the gate boundary with negative and
     nonnumeric values and checks the exact refusal.
   bead: think-wo4p
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-122
   title: A targeted gate built unrelated Rust code and could hide its build skip
   date: '2026-08-24'
@@ -3010,7 +3010,7 @@ defects:
     Focused command checks verify a README-only selection contains no build step and
     that skip accounting precedes the partial-run disposition.
   bead: think-bdv1
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-123
   title: A per-step process cap was documented as a shared global worker budget
   date: '2026-08-24'
@@ -3034,7 +3034,7 @@ defects:
     The historical-regression step traces a `--jobs 1 --list` invocation and requires
     `PACK_JOBS=1`.
   bead: think-mmw8
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-124
   title: The portable negative-control fallback copied a needlessly broad repository surface
   date: '2026-08-24'
@@ -3060,7 +3060,7 @@ defects:
     The harness prints the source size on every run and refuses before materialization
     if the portable-copy surface crosses its cap.
   bead: think-lyzi
-  recorded_in: devtools/run_negative_controls.py
+  recorded_in: packing/devtools/run_negative_controls.py
 - id: D-125
   title: Parallel negative controls could share one worker tree and erase each other's mutation
   date: '2026-08-24'
@@ -3086,7 +3086,7 @@ defects:
     The full control catalogue is run through the queue in the main gate; the original
     failing width sweep was repeated at 1, 2, 3, 5, and 10 workers.
   bead: think-oxwd
-  recorded_in: devtools/run_negative_controls.py
+  recorded_in: packing/devtools/run_negative_controls.py
 - id: D-126
   title: Quench convergence work was budgeted by machine time rather than reproducible work
   date: '2026-08-24'
@@ -3207,7 +3207,7 @@ defects:
     negctl refuses every replacement whose anchor does not appear exactly once, and the
     focused narrative-link control runs in the gate.
   bead: think-f7km
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-131
   title: The Python lint floor passed while reporting eight type-checker warnings
   date: '2026-08-24'
@@ -3232,7 +3232,7 @@ defects:
     `step_lint_floor_python` now greps for `0 errors, 0 warnings, 0 notes` after Ruff,
     format, and BasedPyright all return success.
   bead: think-6cbn
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-132
   title: Fixed-cell iteration returns capped states without a settlement result
   date: '2026-08-24'
@@ -3295,7 +3295,7 @@ defects:
     The H-024 result records criterion_missed, and a negative control mutates that value
     to an unknown outcome and requires schema validation to refuse it.
   bead: think-20fr
-  recorded_in: campaign/schemas/experiment.schema.yaml
+  recorded_in: packing/campaign/schemas/experiment.schema.yaml
 - id: D-134
   title: The n = 29 frontier row omitted its analytic improver and verified angles
   date: '2026-08-24'
@@ -3324,7 +3324,7 @@ defects:
     gate replays the retained source path, 29-square reconstruction, source equations,
     406 SAT pairs, and six-class multiplicities.
   bead: think-nayd
-  recorded_in: frontier/n-029.md
+  recorded_in: packing/frontier/n-029.md
 - id: D-135
   title: The experiment roll-up forbade the record-source evidence it displayed
   date: '2026-08-24'
@@ -3381,7 +3381,7 @@ defects:
     The terminal artifact must retain the asymmetric interpretation beside its verdict,
     and the checker records the linearized-versus-true-tangent scope in its raw result.
   bead: think-4oos
-  recorded_in: campaign/hypotheses/H-026-trump-first-order-rigidity.md
+  recorded_in: packing/campaign/hypotheses/H-026-trump-first-order-rigidity.md
 - id: D-137
   title: Trump certificate replay did not require one-to-one branch coverage
   date: '2026-08-24'
@@ -3409,7 +3409,7 @@ defects:
     derived set and requires replay coverage indexing to reject them. The gate replays
     all retained exp-013 certificates and therefore runs this control on every check.
   bead: think-vevb
-  recorded_in: cases/trump11/tangent_cones.py
+  recorded_in: packing/cases/trump11/tangent_cones.py
 - id: D-138
   title: The provenance gate skipped schema-valid unquoted commit hashes
   date: '2026-08-24'
@@ -3438,7 +3438,7 @@ defects:
     exact checked-total line.
   recurrence_of: D-006
   bead: think-t4xv
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-139
   title: H-032 omitted directly relevant hard-square configuration-space literature
   date: '2026-08-24'
@@ -3466,7 +3466,7 @@ defects:
     availability schema and generated research tables retain the Plakhta acquisition
     blocker until a primary PDF is archived.
   bead: think-izep
-  recorded_in: campaign/hypotheses/H-032-small-n-optimal-moduli.md
+  recorded_in: packing/campaign/hypotheses/H-032-small-n-optimal-moduli.md
 - id: D-140
   title: The closed n = 3 sliding family was said to have one contact certificate
   date: '2026-08-24'
@@ -3498,7 +3498,7 @@ defects:
     quotient SVG.
   recurrence_of: D-093
   bead: think-030v
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md
 - id: D-141
   title: Byte-exact raw literature failed the generic Git whitespace check
   date: '2026-08-24'
@@ -3524,7 +3524,7 @@ defects:
     Git retains the exact raw bytes, `git check-attr whitespace` reports `unset` only on
     the raw path, and `git diff --cached --check` passes with the extractions staged.
   bead: think-r2n2
-  recorded_in: resources/README.md
+  recorded_in: packing/resources/README.md
 - id: D-142
   title: The n = 3 source replay compared an unlabelled theorem with labelled homology
   date: '2026-08-24'
@@ -3551,7 +3551,7 @@ defects:
     Exp-014 replay rebuilds the complete model and requires the retained unlabelled
     source match to be true before the terminal determination can pass.
   bead: think-w4m2
-  recorded_in: cases/small_n/optimal_moduli.py
+  recorded_in: packing/cases/small_n/optimal_moduli.py
 - id: D-143
   title: The n = 4 source replay attributed an unreported f-vector to Alpert et al.
   date: '2026-08-24'
@@ -3577,7 +3577,7 @@ defects:
     Exp-015 replay rebuilds the literature record from retained source paths and requires
     its n = 4 evidence field to name Table 1 while leaving the reported f-vector null.
   bead: think-eb3w
-  recorded_in: cases/small_n/optimal_moduli.py
+  recorded_in: packing/cases/small_n/optimal_moduli.py
 - id: D-144
   title: The orientation identity check compared two identical hard-coded tuples
   date: '2026-08-24'
@@ -3605,7 +3605,7 @@ defects:
     Both exp-014 and exp-015 rebuild the independently derived coefficient vectors before
     any branch enumeration, and refuse to emit or replay a determination on mismatch.
   bead: think-uxlg
-  recorded_in: cases/small_n/optimal_moduli.py
+  recorded_in: packing/cases/small_n/optimal_moduli.py
 - id: D-145
   title: A broad integration edit fixed the wrong defect record
   date: '2026-08-24'
@@ -3656,7 +3656,7 @@ defects:
     the archive reconstruction table.
   regression: none
   bead: think-abdh
-  recorded_in: resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md
+  recorded_in: packing/resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md
 - id: D-147
   title: H-010 substituted unit squares for Stromquist's strict open boxes
   date: '2026-08-24'
@@ -3682,7 +3682,7 @@ defects:
     after its monotone implication is proved explicitly.
   regression: none
   bead: think-fe8n
-  recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
+  recorded_in: packing/campaign/hypotheses/H-010-stromquist-triple.md
 - id: D-148
   title: The D-091 correction omitted the published Figure 14 unavoidability claim
   date: '2026-08-24'
@@ -3709,7 +3709,7 @@ defects:
   regression: none
   recurrence_of: D-091
   bead: think-1vs7
-  recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
+  recorded_in: packing/campaign/hypotheses/H-010-stromquist-triple.md
 - id: D-149
   title: Search saturation was still presented as a Stromquist known-answer test
   date: '2026-08-24'
@@ -3790,7 +3790,7 @@ defects:
     accepted stationary root against the unsquared condition, and is replayed from the
     retained exp-016 record in the strict gate.
   bead: think-7nwj
-  recorded_in: resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md
+  recorded_in: packing/resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md
 - id: D-152
   title: Stromquist's printed Figure 14 point set admits an escaping box
   date: '2026-08-24'
@@ -3822,7 +3822,7 @@ defects:
     including all twelve avoidance signs, the failing Lemma 4 cell, and a left-shift
     mutation that makes the witness container-infeasible.
   bead: think-bv1d
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md
 - id: D-153
   title: The source ledger called three directly hosted 1984 Stromquist memoranda unavailable
   date: '2026-08-24'
@@ -3850,7 +3850,7 @@ defects:
     ledger, whose recovered row retains the exact acquisition route and mathematical
     impact.
   bead: think-7856
-  recorded_in: frontier/source-availability.yaml
+  recorded_in: packing/frontier/source-availability.yaml
 - id: D-154
   title: The first H-010 checker draft treated unchecked polynomials as exact fields
   date: '2026-08-24'
@@ -3875,7 +3875,7 @@ defects:
     any field decision is accepted.
   regression: Every generated and replayed H-010 record contains passing metadata checks for all four fields.
   bead: think-bv1d
-  recorded_in: cases/stromquist/printed_cover.py
+  recorded_in: packing/cases/stromquist/printed_cover.py
 - id: D-155
   title: The first H-010 record draft retained raw platform floating-point diagnostics
   date: '2026-08-24'
@@ -3898,7 +3898,7 @@ defects:
   regression: The retained record replays by semantic equality while the determination depends only on exact field signs.
   recurrence_of: D-059
   bead: think-x2ni
-  recorded_in: cases/stromquist/printed_cover.py
+  recorded_in: packing/cases/stromquist/printed_cover.py
 - id: D-156
   title: The first H-041 checker draft did not prove that tiling vertices stayed inside the container
   date: '2026-08-24'
@@ -3924,7 +3924,7 @@ defects:
     checked inventory in the replayed record.
   regression: An adversarial Figure 14 mutation moves H beyond the container and the checker rejects it.
   bead: think-5fmh
-  recorded_in: cases/stromquist/repaired_cover.py
+  recorded_in: packing/cases/stromquist/repaired_cover.py
 - id: D-157
   title: The first H-041 Lemma 6 replay squared inequalities without executable sign guards
   date: '2026-08-24'
@@ -3949,7 +3949,7 @@ defects:
     exact positive gap coefficient. The record exposes those premises separately.
   regression: Every generated and replayed H-041 record contains the complete passing sign-premise inventory.
   bead: think-ie1b
-  recorded_in: cases/stromquist/repaired_cover.py
+  recorded_in: packing/cases/stromquist/repaired_cover.py
 - id: D-158
   title: The first H-041 record blurred runtime source checks with unattached extraction hashes
   date: '2026-08-24'
@@ -3975,7 +3975,7 @@ defects:
     and topology manifests directly.
   regression: Deterministic replay requires the source paths and complete semantic manifests.
   bead: think-q1sd
-  recorded_in: cases/stromquist/repaired_cover.py
+  recorded_in: packing/cases/stromquist/repaired_cover.py
 - id: D-159
   title: Scanned archive PDFs were misclassified as text by Git
   date: '2026-08-24'
@@ -4002,7 +4002,7 @@ defects:
     `git check-attr diff` reports `unset` for each archived PDF, Git retains their exact
     bytes, and `git diff --cached --check` passes.
   bead: think-7fz7
-  recorded_in: resources/README.md
+  recorded_in: packing/resources/README.md
 - id: D-160
   title: A broad H-010 integration patch updated D-002 instead of D-151
   date: '2026-08-24'
@@ -4027,7 +4027,7 @@ defects:
   regression: none
   recurrence_of: D-145
   bead: think-4cua
-  recorded_in: defects.yaml
+  recorded_in: packing/defects.yaml
 - id: D-161
   title: The synopsis did not track the live hypothesis count
   date: '2026-08-24'
@@ -4083,7 +4083,7 @@ defects:
     must reject any attempt to count a cycle, cap, or rejected transition as converged.
   recurrence_of: D-030
   bead: think-wbra
-  recorded_in: golden/basin-maps.yaml
+  recorded_in: packing/golden/basin-maps.yaml
 - id: D-163
   title: The historical-regression gate masked a failing checker
   date: '2026-08-24'
@@ -4112,7 +4112,7 @@ defects:
     the ordinary step then continues to exercise its later boundary probes when green.
   recurrence_of: D-004
   bead: think-0bpx
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-164
   title: The fixed-cell solver mislabeled a numerical rejection as mathematical infeasibility
   date: '2026-08-24'
@@ -4152,7 +4152,7 @@ defects:
     side 2.
   recurrence_of: D-014
   bead: think-28x5
-  recorded_in: golden/basin-maps.yaml
+  recorded_in: packing/golden/basin-maps.yaml
 - id: D-165
   title: Initial cell-solve failures bypassed the fixed-point termination guard
   date: '2026-08-24'
@@ -4188,7 +4188,7 @@ defects:
     all-probes claim. Exp-021 must independently replay its complete receipt and pose.
   recurrence_of: D-132
   bead: think-007f
-  recorded_in: cases/campaign_smoke/basin_events.py
+  recorded_in: packing/cases/campaign_smoke/basin_events.py
 - id: D-166
   title: Basin events called producer convergence a fixed-cell certificate
   date: '2026-08-24'
@@ -4218,7 +4218,7 @@ defects:
     reject the forged promotion while D-165 is the declared blocker.
   recurrence_of: D-044
   bead: think-f2t0
-  recorded_in: cases/campaign_smoke/basin_events.py
+  recorded_in: packing/cases/campaign_smoke/basin_events.py
 - id: D-167
   title: Basin events omitted the wall time needed to price the loop
   date: '2026-08-24'
@@ -4243,7 +4243,7 @@ defects:
     Basin-event selftest and replay require the wall_seconds field and reject malformed
     termination records.
   bead: think-4g3f
-  recorded_in: cases/campaign_smoke/basin_events.py
+  recorded_in: packing/cases/campaign_smoke/basin_events.py
 - id: D-168
   title: A finite equal-objective adjacent-cell closure was labeled an unsettled cycle
   date: '2026-08-24'
@@ -4279,7 +4279,7 @@ defects:
     objectives differ by twice the LP screen must remain rejected.
   recurrence_of: D-132
   bead: think-8c61
-  recorded_in: src/sqpack/research/quench.py
+  recorded_in: packing/src/sqpack/research/quench.py
 - id: D-169
   title: The cell post-check ignored every containment row
   date: '2026-08-24'
@@ -4310,7 +4310,7 @@ defects:
     rejected after the single bounded retry, with row 1 and kind `containment` retained.
   recurrence_of: D-014
   bead: think-4hc3
-  recorded_in: src/sqpack/research/quench.py
+  recorded_in: packing/src/sqpack/research/quench.py
 - id: D-170
   title: D-165 reused the unrelated D-132 bead
   date: '2026-08-24'
@@ -4338,7 +4338,7 @@ defects:
     closing it; D-165 must resolve through `think-007f`, never `think-9qz0`.
   recurrence_of: D-039
   bead: think-k2vb
-  recorded_in: defects.yaml
+  recorded_in: packing/defects.yaml
 - id: D-171
   title: Argmax-only n=4 repair left one positive-control evaluation unsettled
   date: '2026-08-24'
@@ -4372,7 +4372,7 @@ defects:
     independently valid, admissible events.
   recurrence_of: D-164
   bead: think-pwd0
-  recorded_in: campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl
 - id: D-172
   title: The orientation tutorial said a configuration-space cell fixes the angles
   date: '2026-08-24'
@@ -4696,7 +4696,7 @@ defects:
     fail. Exp-027 retains and replays all four declared outcomes without resuming or
     rewriting exp-026.
   bead: think-78ws
-  recorded_in: cases/campaign_smoke/basin_events.py
+  recorded_in: packing/cases/campaign_smoke/basin_events.py
 - id: D-184
   title: Overlapping synopsis excerpts were mistaken for a duplicate experiment row
   date: '2026-08-24'
@@ -4723,7 +4723,7 @@ defects:
     tools/check_synopsis.py counts both tables independently; a negative control
     duplicates one cost row and requires the check to fail.
   bead: think-h1wm
-  recorded_in: devtools/check_synopsis.py
+  recorded_in: packing/devtools/check_synopsis.py
 - id: D-185
   title: The synopsis carried stale defect-direction and gate-detector aggregates
   date: '2026-08-24'
@@ -4747,7 +4747,7 @@ defects:
     Focused negative controls change each displayed aggregate and require
     tools/check_synopsis.py to report the derived mismatch.
   bead: think-m3io
-  recorded_in: devtools/check_synopsis.py
+  recorded_in: packing/devtools/check_synopsis.py
 - id: D-186
   title: The first angle-sheet bound omitted slide motion from one projection
   date: '2026-08-24'
@@ -4779,7 +4779,7 @@ defects:
     angle/slide boundary fixtures; derivation of the all-parameter bound remains a
     mathematical review obligation rather than a sampling claim.
   bead: think-7pn0
-  recorded_in: cases/n5/angle_sheet.py
+  recorded_in: packing/cases/n5/angle_sheet.py
 - id: D-187
   title: Two synopsis mutation controls retained the pre-D-186 aggregates
   date: '2026-08-24'
@@ -4808,7 +4808,7 @@ defects:
     normal gate runs the complete negative-control catalogue.
   recurrence_of: D-185
   bead: think-7pn0
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-188
   title: The conventions authorized multi-hypothesis rounds after the schema prohibited them
   date: '2026-08-24'
@@ -4965,7 +4965,7 @@ defects:
     affected synopsis aggregates again before committing the review.
   regression: none
   bead: think-tbmj
-  recorded_in: defects.yaml
+  recorded_in: packing/defects.yaml
 - id: D-194
   title: The n=5 tangent checker reused one contact differential across three slide strata
   date: '2026-08-24'
@@ -4994,7 +4994,7 @@ defects:
     The exact selftest reuses endpoint A's pair (0,4) coefficient at the interior and
     requires it to differ from the regenerated row and fail on the interior witness.
   bead: think-5hh9
-  recorded_in: cases/n5/tangent_cones.py
+  recorded_in: packing/cases/n5/tangent_cones.py
 - id: D-195
   title: The n=5 tangent checker treated tied support inequalities as alternatives
   date: '2026-08-24'
@@ -5021,7 +5021,7 @@ defects:
     The selftest removes one tied support row, coherently updates the redundant count
     and matrix digest, and requires semantic validation to reject the incomplete cone.
   bead: think-s41l
-  recorded_in: cases/n5/tangent_cones.py
+  recorded_in: packing/cases/n5/tangent_cones.py
 - id: D-196
   title: A broad exp-035 status patch updated D-034 instead of D-194
   date: '2026-08-24'
@@ -5048,7 +5048,7 @@ defects:
     defect view, and requires schema and synopsis aggregate agreement before commit.
   recurrence_of: D-160
   bead: think-uz8o
-  recorded_in: defects.yaml
+  recorded_in: packing/defects.yaml
 - id: D-197
   title: A concurrent checkout moved the exp-036 instrument commit to the wrong branch
   date: '2026-08-24'
@@ -5076,7 +5076,7 @@ defects:
     none; the lightweight campaign rule is an immediate branch-and-staged-scope check,
     and the mistaken commit was detected before push or target execution
   bead: think-x7vd
-  recorded_in: defects.yaml
+  recorded_in: packing/defects.yaml
 - id: D-198
   title: Two numeric negative-control anchors lagged the D-197 aggregates
   date: '2026-08-24'
@@ -5103,7 +5103,7 @@ defects:
     reject the changed aggregates.
   recurrence_of: D-187
   bead: think-tjqh
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-199
   title: A frozen residual-repair set rejected a valid n=10 cell
   date: '2026-08-24'
@@ -5133,7 +5133,7 @@ defects:
     cell, the typed four-call exhaustion fixture, and deep known-answer regeneration at
     pool widths 10 and 1.
   bead: think-yi6x
-  recorded_in: src/sqpack/research/quench.py
+  recorded_in: packing/src/sqpack/research/quench.py
 - id: D-200
   title: The synopsis gate-defect enumeration omitted D-198
   date: '2026-08-24'
@@ -5182,7 +5182,7 @@ defects:
     with the declared diagnostic.
   recurrence_of: D-198
   bead: think-u0ui
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-202
   title: A delegated long-running validation lost its final receipt
   date: '2026-08-24'
@@ -5209,7 +5209,7 @@ defects:
     partial only; session-011 phase 6 retains the yielded identifier, both labeled
     streams, timeout policy, final poll and exit 7, but D-300 owns the missing timestamps
   bead: think-b3bm
-  recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  recorded_in: packing/campaign/agent-sessions/session-009-autonomous-basin-map.md
 - id: D-203
   title: The n=4 seed-0 quench ends on a HiGHS solve error
   date: '2026-08-24'
@@ -5243,7 +5243,7 @@ defects:
     ladder rungs; Linux and macOS CI pass at b582fe1. No pool-width-1 or general producer
     health claim follows.
   bead: think-nr5w
-  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+  recorded_in: packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md
 - id: D-204
   title: The gate-aggregate control expected the mutated value
   date: '2026-08-24'
@@ -5271,7 +5271,7 @@ defects:
     and the normal gate must pass before this checkpoint is pushed.
   recurrence_of: D-201
   bead: think-g4jc
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-205
   title: The stacked workflow PR retained a superseded scientific checkpoint
   date: '2026-08-24'
@@ -5298,7 +5298,7 @@ defects:
     none; stacked documentation changes still require a current-base semantic review
     before living state is incorporated
   bead: think-j3io
-  recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  recorded_in: packing/campaign/agent-sessions/session-009-autonomous-basin-map.md
 - id: D-206
   title: The phase schema could not express the resumable contract promised by the docs
   date: '2026-08-24'
@@ -5324,7 +5324,7 @@ defects:
     AgentSession schema validation and negative controls remove each required active
     declaration or clock field and require the campaign checker to reject the mutation
   bead: think-84tp
-  recorded_in: campaign/schemas/agent-session.schema.yaml
+  recorded_in: packing/campaign/schemas/agent-session.schema.yaml
 - id: D-207
   title: The workflow map handed repairs to an undefined implementation workflow
   date: '2026-08-24'
@@ -5398,7 +5398,7 @@ defects:
     connectivity.
   regression: none
   bead: think-2m3b
-  recorded_in: campaign/series/series-000-smoke-and-calibration/README.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/README.md
 - id: D-210
   title: Retrospective workflow labels were counted as contemporaneous declarations
   date: '2026-08-24'
@@ -5424,7 +5424,7 @@ defects:
     The session schema and mutation controls require recording provenance and reject an
     active retrospective phase or an underdeclared contemporaneous phase
   bead: think-o8wu
-  recorded_in: src/sqpack/campaign/ledger.py
+  recorded_in: packing/src/sqpack/campaign/ledger.py
 - id: D-211
   title: The workflow cadence mandated review phases after routine guarded rounds
   date: '2026-08-24'
@@ -5498,7 +5498,7 @@ defects:
     The README work-model check derives the allowed rows from the schema and rejects an
     extra, missing, reordered, or renamed numbered workflow row
   bead: think-u7lr
-  recorded_in: devtools/check_readme.py
+  recorded_in: packing/devtools/check_readme.py
 - id: D-214
   title: The v2 loader ignored its declared contract and envelope identity
   date: '2026-08-24'
@@ -5523,7 +5523,7 @@ defects:
     Negative controls mutate the contract and envelope independently and require both
     identity mismatches to fail
   bead: think-4utf
-  recorded_in: src/sqpack/campaign/ledger.py
+  recorded_in: packing/src/sqpack/campaign/ledger.py
 - id: D-215
   title: Workflow drift checks accepted unauthorized rows and invalid transitions
   date: '2026-08-24'
@@ -5549,7 +5549,7 @@ defects:
     The expanded negative-control suite mutates each previously uncovered branch and
     requires the owning semantic checker to reject it
   bead: think-w40g
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-216
   title: Full phase histories made the generated orientation table unboundedly wide
   date: '2026-08-24'
@@ -5572,7 +5572,7 @@ defects:
     table; retain the full ordered phase history only in the authoritative session.
   regression: none
   bead: think-0gui
-  recorded_in: src/sqpack/campaign/ledger.py
+  recorded_in: packing/src/sqpack/campaign/ledger.py
 - id: D-217
   title: A parallel validation wrapper discarded a live command receipt
   date: '2026-08-24'
@@ -5600,7 +5600,7 @@ defects:
     polling, but its empty start and end fields make the combined receipt inadmissible
   recurrence_of: D-202
   bead: think-b3bm
-  recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  recorded_in: packing/campaign/agent-sessions/session-009-autonomous-basin-map.md
 - id: D-218
   title: Session-009's output inventory stopped before exp-035 and exp-036
   date: '2026-08-24'
@@ -5625,7 +5625,7 @@ defects:
     verdict.
   regression: none
   bead: think-kts5
-  recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  recorded_in: packing/campaign/agent-sessions/session-009-autonomous-basin-map.md
 - id: D-219
   title: The BC-010 agenda retained a superseded two-size solver diagnosis
   date: '2026-08-24'
@@ -5650,7 +5650,7 @@ defects:
     handoff gate remains red.
   regression: none
   bead: think-tqjr
-  recorded_in: campaign/agendas/agenda-001-basin-confidence-ladder.md
+  recorded_in: packing/campaign/agendas/agenda-001-basin-confidence-ladder.md
 - id: D-220
   title: The durable resume order was not encoded in the ready-work graph
   date: '2026-08-24'
@@ -5824,7 +5824,7 @@ defects:
   regression: >-
     test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock parses both
     workflow jobs and requires checkout fetch-depth zero.
-  recorded_in: ../.github/workflows/packing-validation.yml
+  recorded_in: .github/workflows/packing-validation.yml
 - id: D-227
   title: The uv cache key prefixed its working directory twice
   date: '2026-08-24'
@@ -5847,7 +5847,7 @@ defects:
   regression: >-
     test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock requires
     the relative uv.lock glob in both workflow jobs.
-  recorded_in: ../.github/workflows/packing-validation.yml
+  recorded_in: .github/workflows/packing-validation.yml
 - id: D-228
   title: The workflow regression assumed every YAML key was a string
   date: '2026-08-24'
@@ -5872,7 +5872,7 @@ defects:
   regression: >-
     The same test parses the real workflow through the corrected helper before checking
     both checkout and cache configurations.
-  recorded_in: tests/test_module_boundaries.py
+  recorded_in: packing/tests/test_module_boundaries.py
 - id: D-229
   title: The synopsis hypothesis-status aggregate drifted behind the generated ledger
   date: '2026-08-24'
@@ -5952,7 +5952,7 @@ defects:
     devtools/check_synopsis.py checks the seven ledger-derived open-question rows and
     aggregate.
   bead: think-kbmb
-  recorded_in: devtools/check_synopsis.py
+  recorded_in: packing/devtools/check_synopsis.py
 - id: D-232
   title: An unfrozen lint command rewrote the packing dependency lockfile
   date: '2026-08-24'
@@ -5976,7 +5976,7 @@ defects:
     through the existing project environment or uv --frozen paths.
   regression: none
   bead: think-yjll
-  recorded_in: defects.yaml
+  recorded_in: packing/defects.yaml
 - id: D-233
   title: README layout validation treated ignored migration caches as project content
   date: '2026-08-24'
@@ -6002,7 +6002,7 @@ defects:
     test_readme_inventory_ignores_cache_only_legacy_directories retains a visible source
     directory and excludes a removed directory containing only bytecode cache.
   bead: think-wliu
-  recorded_in: devtools/check_readme.py
+  recorded_in: packing/devtools/check_readme.py
 - id: D-234
   title: The implemented engineering plan carried stale inventory and defect references
   date: '2026-08-24'
@@ -6073,7 +6073,7 @@ defects:
     the log, update the synopsis, and check the matching launch requirement.
   regression: none
   bead: think-gwl3
-  recorded_in: defects.yaml
+  recorded_in: packing/defects.yaml
 - id: D-237
   title: Mutation-control target paths could escape their private snapshot
   date: '2026-08-24'
@@ -6098,7 +6098,7 @@ defects:
     test_control_targets_cannot_escape_the_private_snapshot exercises all three escape
     forms and the legitimate repository-root .flowmarkignore target.
   bead: think-cdhq
-  recorded_in: devtools/run_negative_controls.py
+  recorded_in: packing/devtools/run_negative_controls.py
 - id: D-238
   title: The synopsis called quench endpoints discrete basins with a well-defined census
   date: '2026-08-24'
@@ -6156,7 +6156,7 @@ defects:
     inheritance, SIGINT cleanup, late registration, Windows fail-closed behavior, and
     provenance probes
   bead: think-tx0b
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-240
   title: The autonomous-session wall budget could be reset indefinitely
   date: '2026-08-24'
@@ -6187,7 +6187,7 @@ defects:
     session clock, a deadline beyond the wall budget, reserve encroachment, and excess
     contemporaneous phases
   bead: think-hm0x
-  recorded_in: src/sqpack/campaign/ledger.py
+  recorded_in: packing/src/sqpack/campaign/ledger.py
 - id: D-241
   title: The session checker rejected a legitimate renewed slice
   date: '2026-08-24'
@@ -6214,7 +6214,7 @@ defects:
     A mutation that repeats workflow, focus, and objective is rejected as an unrecorded
     renewal
   bead: think-hm0x
-  recorded_in: src/sqpack/campaign/ledger.py
+  recorded_in: packing/src/sqpack/campaign/ledger.py
 - id: D-242
   title: A delegated focused check rewrote the dependency lock outside its scope
   date: '2026-08-24'
@@ -6242,7 +6242,7 @@ defects:
     write contract; the runbook keeps lockfile changes outside read-only validation
   recurrence_of: D-232
   bead: think-ysz2
-  recorded_in: campaign/agent-sessions/README.md
+  recorded_in: packing/campaign/agent-sessions/README.md
 - id: D-243
   title: The autonomous-loop instruction contradicted its upstream launch blocker
   date: '2026-08-24'
@@ -6294,7 +6294,7 @@ defects:
     Focused contract tests remove the phase and each receipt field from a terminal
     contemporaneous delegation and observe checker refusal
   bead: think-6c7g
-  recorded_in: campaign/schemas/agent-session.schema.yaml
+  recorded_in: packing/campaign/schemas/agent-session.schema.yaml
 - id: D-245
   title: A newly opened agent session had to invent completed progress
   date: '2026-08-24'
@@ -6319,7 +6319,7 @@ defects:
     Focused schema and checker tests accept null active progress and reject null
     terminal progress
   bead: think-6c7g
-  recorded_in: campaign/schemas/agent-session.schema.yaml
+  recorded_in: packing/campaign/schemas/agent-session.schema.yaml
 - id: D-246
   title: Reserve enforcement crashed on a malformed contemporaneous phase clock
   date: '2026-08-24'
@@ -6344,7 +6344,7 @@ defects:
     A focused contract test supplies a malformed work-phase deadline and observes a
     deterministic checker refusal rather than an exception
   bead: think-6c7g
-  recorded_in: src/sqpack/campaign/ledger.py
+  recorded_in: packing/src/sqpack/campaign/ledger.py
 - id: D-247
   title: A delegated follow-up again rewrote the dependency lock outside its scope
   date: '2026-08-24'
@@ -6370,7 +6370,7 @@ defects:
   regression: none
   recurrence_of: D-242
   bead: think-6c7g
-  recorded_in: uv.lock
+  recorded_in: packing/uv.lock
 - id: D-248
   title: Active slice deadlines were recorded but not enforced after expiry
   date: '2026-08-24'
@@ -6395,7 +6395,7 @@ defects:
     One focused contract test advances the clock past both active deadlines while the
     overall session remains live and observes both refusals
   bead: think-6c7g
-  recorded_in: src/sqpack/campaign/ledger.py
+  recorded_in: packing/src/sqpack/campaign/ledger.py
 - id: D-249
   title: Branch completion and landed-main state were treated as the same fact
   date: '2026-08-25'
@@ -6451,7 +6451,7 @@ defects:
     sheet/transverse swap, nonlinear scope overclaims, and three non-tautological toy
     cones while exact generation and replay rebuild all source evidence
   bead: think-7z0d
-  recorded_in: cases/n5/tangent_inventory.py
+  recorded_in: packing/cases/n5/tangent_inventory.py
 - id: D-251
   title: An omitted R6 coordinate produced a false exact blocker
   date: '2026-08-25'
@@ -6477,7 +6477,7 @@ defects:
     R6 is now rebuilt with all four nonzero coordinates and must open exactly the two
     square-1 upper-x slacks in each of the six matrices
   bead: think-j3wd
-  recorded_in: cases/n5/tangent_inventory.py
+  recorded_in: packing/cases/n5/tangent_inventory.py
 - id: D-252
   title: The preregistered refusal accidentally included already proved sheet lifts
   date: '2026-08-25'
@@ -6504,7 +6504,7 @@ defects:
     Exp-038 binds exp-034 exactly, tests physical sheet vectors in every matrix, and
     rejects both directions of a sheet/transverse classification swap
   bead: think-w2ii
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md
 - id: D-253
   title: The exp-038 wrapper was added under a forbidden legacy tools path
   date: '2026-08-25'
@@ -6531,7 +6531,7 @@ defects:
     tests/test_module_boundaries.py rejects any future Python implementation under
     tools, while devtools.check_readme rejects a matching unrecorded layout change
   bead: think-xe5t
-  recorded_in: tests/test_module_boundaries.py
+  recorded_in: packing/tests/test_module_boundaries.py
 - id: D-254
   title: The first exp-039 criterion conflated ray normalizations and rank with dimension
   date: '2026-08-25'
@@ -6563,7 +6563,7 @@ defects:
     x0-unboundedness mutation, input-level dual and stress perturbations, and a sharp
     global and terminal refusal boundary
   bead: think-p6j0
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md
 - id: D-255
   title: Four exact negative-control anchors lagged the current living-document values
   date: '2026-08-25'
@@ -6592,7 +6592,7 @@ defects:
     the defect and synopsis semantic checks to reject each mutated final aggregate
   recurrence_of: D-198
   bead: think-qox6
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-256
   title: Endpoint equality was treated as an affine full-interval axis proof
   date: '2026-08-25'
@@ -6621,7 +6621,7 @@ defects:
     The false-extra-axis mutation reruns the interval proof, while every path record
     carries exact signed projections, supports, endpoint gaps, and the proof type used
   bead: think-qh7t
-  recorded_in: cases/n5/fixed_angle_polytope.py
+  recorded_in: packing/cases/n5/fixed_angle_polytope.py
 - id: D-257
   title: Three stress samples were promoted without deriving the degree bound
   date: '2026-08-25'
@@ -6651,7 +6651,7 @@ defects:
     also retains independently rebuilt midpoint and endpoint fixtures, both owner
     branches, and exact zero coefficient arrays
   bead: think-59gi
-  recorded_in: cases/n5/fixed_angle_polytope.py
+  recorded_in: packing/cases/n5/fixed_angle_polytope.py
 - id: D-258
   title: An under-scoped status patch closed the wrong outstanding defect
   date: '2026-08-25'
@@ -6679,7 +6679,7 @@ defects:
     The existing schema and synopsis checks require outstanding defects to retain beads
     and canonical mentions; coordinator diff inspection remains the immediate guard
   bead: think-jvtt
-  recorded_in: defects.yaml
+  recorded_in: packing/defects.yaml
 - id: D-259
   title: An explicit Flowmark target bypassed the generated-view exclusion
   date: '2026-08-25'
@@ -6708,7 +6708,7 @@ defects:
     the generated-view exemption check and repository-root commit hook preserve the file
   recurrence_of: D-027
   bead: think-5tc9
-  recorded_in: ../.flowmarkignore
+  recorded_in: .flowmarkignore
 - id: D-260
   title: A solver fixture cross-wired two fixed-point evaluations
   date: '2026-08-25'
@@ -6738,7 +6738,7 @@ defects:
     its f64 inputs, and proves that substituting the cross-wired first cell axis breaks
     the comparison
   bead: think-mybt
-  recorded_in: tests/test_research_contracts.py
+  recorded_in: packing/tests/test_research_contracts.py
 - id: D-261
   title: The replay fixture was allowed to define its own failure receipt
   date: '2026-08-25'
@@ -6766,7 +6766,7 @@ defects:
     The fixture receipt must equal the hard-coded status-4 triple before the direct
     solver replay is classified
   bead: think-hi4t
-  recorded_in: tests/test_research_contracts.py
+  recorded_in: packing/tests/test_research_contracts.py
 - id: D-262
   title: A delegated fixture stopped after pytest while static checks were red
   date: '2026-08-25'
@@ -6792,7 +6792,7 @@ defects:
     Ruff passes, BasedPyright reports zero findings, and the fixture replay test passes
     in 0.33 seconds
   bead: think-35aa
-  recorded_in: tests/test_research_contracts.py
+  recorded_in: packing/tests/test_research_contracts.py
 - id: D-263
   title: A second status-only patch closed D-034 instead of the named defect
   date: '2026-08-25'
@@ -6818,7 +6818,7 @@ defects:
     through D-263 fixed before rendering the generated defect view
   recurrence_of: D-258
   bead: think-h7yd
-  recorded_in: defects.yaml
+  recorded_in: packing/defects.yaml
 - id: D-264
   title: An active session ended its workflow list on a completed phase
   date: '2026-08-25'
@@ -6841,7 +6841,7 @@ defects:
     W2 factual-review phase with its own 30-minute contract.
   regression: packing-ledger check requires the session and final-phase statuses to agree
   bead: think-lo31
-  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+  recorded_in: packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md
 - id: D-265
   title: Two delegation deadlines exceeded their declared budgets
   date: '2026-08-25'
@@ -6863,7 +6863,7 @@ defects:
     budget to its full 17-minute window without changing either recorded deadline.
   regression: packing-ledger check validates every delegation deadline against its budget
   bead: think-qefb
-  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+  recorded_in: packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md
 - id: D-266
   title: A numerical fallback disagreement was promoted to infeasibility
   date: '2026-08-25'
@@ -6890,7 +6890,7 @@ defects:
     Deterministic controls require primary status 2 to stay infeasible without fallback
     and the status-4-to-status-2 sequence to stay solver_failure with two indexed receipts
   bead: think-jg75
-  recorded_in: src/sqpack/research/quench.py
+  recorded_in: packing/src/sqpack/research/quench.py
 - id: D-267
   title: The soundness mutation diagnostic kept the old denominator
   date: '2026-08-25'
@@ -6914,7 +6914,7 @@ defects:
   regression: all 62 negative controls must apply and report their exact diagnostics
   recurrence_of: D-255
   bead: think-ut5r
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-268
   title: Focused fallback checks omitted the Python format gate
   date: '2026-08-25'
@@ -6942,7 +6942,7 @@ defects:
     `ruff format --check tests/test_research_contracts.py` and all ten focused fallback
     controls pass before the complete cross-platform gate is re-requested
   bead: think-lcor
-  recorded_in: tests/test_research_contracts.py
+  recorded_in: packing/tests/test_research_contracts.py
 - id: D-269
   title: A session delegation used an undeclared timing-quality value
   date: '2026-08-25'
@@ -6965,7 +6965,7 @@ defects:
     rerun the campaign-ledger validator before the complete gate.
   regression: packing-ledger check validates every terminal delegation timing-quality value
   bead: think-m01u
-  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+  recorded_in: packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md
 - id: D-270
   title: Phase 11 retained a next action that its own evidence had completed
   date: '2026-08-25'
@@ -6988,7 +6988,7 @@ defects:
     repair checkpoint and require green Linux plus macOS CI before phase closure.
   regression: precommit review compares every active phase next action with its latest evidence
   bead: think-ygpr
-  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+  recorded_in: packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md
 - id: D-271
   title: A phase rotation used an undeclared transition label
   date: '2026-08-25'
@@ -7011,7 +7011,7 @@ defects:
     ledger validator before collecting the remaining CI receipt.
   regression: packing-ledger check validates every workflow-phase entered_by value
   bead: think-sx6j
-  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+  recorded_in: packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md
 - id: D-272
   title: The macOS expected-failure guard rejected a recovered deep golden
   date: '2026-08-25'
@@ -7039,7 +7039,7 @@ defects:
     the workflow contract requires one direct blocking `packing-validate --deep --only
     "golden basin maps"` macOS step, and both PR jobs must pass
   bead: think-8qco
-  recorded_in: ../.github/workflows/packing-validation.yml
+  recorded_in: .github/workflows/packing-validation.yml
 - id: D-273
   title: The direct-blocking workflow test admitted advisory variants
   date: '2026-08-25'
@@ -7064,7 +7064,7 @@ defects:
     run command.
   regression: the strengthened workflow contract passes ten focused module-boundary tests
   bead: think-8aw8
-  recorded_in: tests/test_module_boundaries.py
+  recorded_in: packing/tests/test_module_boundaries.py
 - id: D-274
   title: The delegated promotion check named deleted paths and left one long assertion
   date: '2026-08-25'
@@ -7088,7 +7088,7 @@ defects:
   regression: focused Ruff format and lint pass, and all ten module-boundary tests pass
   recurrence_of: D-268
   bead: think-3bg6
-  recorded_in: tests/test_module_boundaries.py
+  recorded_in: packing/tests/test_module_boundaries.py
 - id: D-275
   title: The first pair-meter draft omitted basin-entry work from its summary
   date: '2026-08-25'
@@ -7115,7 +7115,7 @@ defects:
     `cargo test` requires two ordinary rows of 54 pair-tests and summary 108, then four
     basin-entry rows of 54 and summary 216
   bead: think-dai4
-  recorded_in: sqsearch/tests/pair_meter_jsonl.rs
+  recorded_in: packing/sqsearch/tests/pair_meter_jsonl.rs
 - id: D-276
   title: The first basin-entry meter probe selected a fixture without angles
   date: '2026-08-25'
@@ -7141,7 +7141,7 @@ defects:
     the Rust integration test writes its own conforming x/y/t seed and removes it after
     the basin-entry JSONL assertions pass
   bead: think-ujaj
-  recorded_in: sqsearch/tests/pair_meter_jsonl.rs
+  recorded_in: packing/sqsearch/tests/pair_meter_jsonl.rs
 - id: D-277
   title: The first pair-meter integration test omitted crate documentation
   date: '2026-08-25'
@@ -7164,7 +7164,7 @@ defects:
   regression: >-
     `cargo test --test pair_meter_jsonl` passes without warnings
   bead: think-4gqo
-  recorded_in: sqsearch/tests/pair_meter_jsonl.rs
+  recorded_in: packing/sqsearch/tests/pair_meter_jsonl.rs
 - id: D-278
   title: The D-277 regression command made the defect source invalid YAML
   date: '2026-08-25'
@@ -7186,7 +7186,7 @@ defects:
     complete source before rendering the generated view.
   regression: the complete defects.yaml source parses before defects.md is rendered
   bead: think-axl2
-  recorded_in: defects.yaml
+  recorded_in: packing/defects.yaml
 - id: D-279
   title: The finalization phase used an undeclared focus value
   date: '2026-08-25'
@@ -7209,7 +7209,7 @@ defects:
   regression: packing-ledger check validates every workflow-phase focus value
   recurrence_of: D-271
   bead: think-gbti
-  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+  recorded_in: packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md
 - id: D-280
   title: The phase-count cap ended a fast campaign before its wall-clock goal
   date: '2026-08-25'
@@ -7235,7 +7235,7 @@ defects:
     reusable contract still needs a wall-time-aware phase-cap policy.
   regression: none
   bead: think-bfwm
-  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+  recorded_in: packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md
 - id: D-281
   title: New defect totals left synopsis controls and the open inventory stale
   date: '2026-08-25'
@@ -7260,7 +7260,7 @@ defects:
   regression: devtools.check_synopsis and all 62 mutation controls pass on the current source
   recurrence_of: D-267
   bead: think-ghzs
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-282
   title: The stopped session retained a completed final phase
   date: '2026-08-25'
@@ -7284,7 +7284,7 @@ defects:
   regression: packing-ledger check enforces agreement between session and final-phase status
   recurrence_of: D-264
   bead: think-8lhm
-  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+  recorded_in: packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md
 - id: D-283
   title: A zero-step sqsearch regime can spin forever without spending its move budget
   date: '2026-08-25'
@@ -7309,7 +7309,7 @@ defects:
     refusal paths with bounded subprocess tests. Audit n=0 and chains=0 separately.
   regression: none
   bead: think-dprg
-  recorded_in: sqsearch/src/search.rs
+  recorded_in: packing/sqsearch/src/search.rs
 - id: D-284
   title: A delegated float scout ran before the Trump support criterion was frozen
   date: '2026-08-25'
@@ -7334,7 +7334,7 @@ defects:
     The delegate's scope breach remains visible in the session receipt.
   regression: none
   bead: think-19nv
-  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+  recorded_in: packing/campaign/agent-sessions/session-011-eight-hour-continuation.md
 - id: D-285
   title: The first H-043 pilot could pass while its exact cone oracle was unresolved
   date: '2026-08-25'
@@ -7361,7 +7361,7 @@ defects:
     the branch-0 selftest requires minimization_completed, proper_core_found and
     unresolved_oracle_is_terminal before the CLI exits zero
   bead: think-5bcy
-  recorded_in: cases/trump11/incidence_cores.py
+  recorded_in: packing/cases/trump11/incidence_cores.py
 - id: D-286
   title: The first H-043 record conflated conjunctive wall rows with feature aliases
   date: '2026-08-25'
@@ -7389,7 +7389,7 @@ defects:
     the branch-0 selftest requires wall_rows_are_not_called_aliases and
     contact_feature_aliases_are_complete
   bead: think-sx22
-  recorded_in: cases/trump11/incidence_cores.py
+  recorded_in: packing/cases/trump11/incidence_cores.py
 - id: D-287
   title: A shell-active bead description executed a backtick-delimited word
   date: '2026-08-25'
@@ -7413,7 +7413,7 @@ defects:
     arguments without shell-active backticks for subsequent tbd updates.
   regression: none
   bead: think-vf68
-  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+  recorded_in: packing/campaign/agent-sessions/session-011-eight-hour-continuation.md
 - id: D-288
   title: The first focused Ruff replay doubled the uv working-directory prefix
   date: '2026-08-25'
@@ -7437,7 +7437,7 @@ defects:
   regression: >-
     the session receipt retains the corrected directory-relative Ruff and BasedPyright commands
   bead: think-asaa
-  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+  recorded_in: packing/campaign/agent-sessions/session-011-eight-hour-continuation.md
 - id: D-289
   title: The H-043 pilot normalized row classes for counting but not for its cone oracle
   date: '2026-08-25'
@@ -7464,7 +7464,7 @@ defects:
     provenance.
   regression: none
   bead: think-jyit
-  recorded_in: cases/trump11/incidence_cores.py
+  recorded_in: packing/cases/trump11/incidence_cores.py
 - id: D-290
   title: H-043 pilot certificates can be recomputed but not replayed from a retained record
   date: '2026-08-25'
@@ -7490,7 +7490,7 @@ defects:
     into the existing Trump exact validation surface before promotion.
   regression: none
   bead: think-oa96
-  recorded_in: cases/trump11/incidence_cores.py
+  recorded_in: packing/cases/trump11/incidence_cores.py
 - id: D-291
   title: The branch-0 H-043 golden would classify a valid future refutation as test failure
   date: '2026-08-25'
@@ -7515,7 +7515,7 @@ defects:
     criterion_missed outcome exit zero; only invalid or unresolved states fail.
   regression: none
   bead: think-j92q
-  recorded_in: cases/trump11/incidence_cores.py
+  recorded_in: packing/cases/trump11/incidence_cores.py
 - id: D-292
   title: H-043 branch indices are regenerated but not bound to the retained exp-013 universe
   date: '2026-08-25'
@@ -7542,7 +7542,7 @@ defects:
     replay.
   regression: none
   bead: think-7jyh
-  recorded_in: cases/trump11/incidence_cores.py
+  recorded_in: packing/cases/trump11/incidence_cores.py
 - id: D-293
   title: Two H-043 provenance selftests claim completeness without checking exact mappings
   date: '2026-08-25'
@@ -7567,7 +7567,7 @@ defects:
     source labels before promoting the pilot.
   regression: none
   bead: think-8wgw
-  recorded_in: cases/trump11/incidence_cores.py
+  recorded_in: packing/cases/trump11/incidence_cores.py
 - id: D-294
   title: The canonical defect count lagged eleven committed records
   date: '2026-08-25'
@@ -7593,7 +7593,7 @@ defects:
     python -m devtools.validate_schemas rejects any future mismatch between count and the
     number of defect rows
   bead: think-w5eq
-  recorded_in: defects.yaml
+  recorded_in: packing/defects.yaml
 - id: D-295
   title: The first timeout draft isolated validation calls that remained unbounded
   date: '2026-08-25'
@@ -7621,7 +7621,7 @@ defects:
     test_run_selected_interrupt_stops_detached_production_process and
     test_process_registry_rejects_registration_after_stop
   bead: think-zms2
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-296
   title: The first timeout test could not expose an early-parent descendant leak
   date: '2026-08-25'
@@ -7648,7 +7648,7 @@ defects:
     test_run_timeout_terminates_child_and_reports_captured_output covers the
     early-parent-exit, output-detached descendant path
   bead: think-h20g
-  recorded_in: tests/test_validation_cli.py
+  recorded_in: packing/tests/test_validation_cli.py
 - id: D-297
   title: The first Windows timeout path treated taskkill as a proved tree guarantee
   date: '2026-08-25'
@@ -7672,7 +7672,7 @@ defects:
     Windows until a tested process-tree backend exists.
   regression: none
   bead: think-j3ti
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-298
   title: Overlapping inspection ranges fabricated a duplicate session key
   date: '2026-08-25'
@@ -7695,7 +7695,7 @@ defects:
     make no session edit for it, and keep this inspection error visible instead.
   regression: none
   bead: think-ntfh
-  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+  recorded_in: packing/campaign/agent-sessions/session-011-eight-hour-continuation.md
 - id: D-299
   title: A later successful check masked an earlier gate failure in the shell status
   date: '2026-08-25'
@@ -7719,7 +7719,7 @@ defects:
     the terminal status.
   regression: none
   bead: think-di0u
-  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+  recorded_in: packing/campaign/agent-sessions/session-011-eight-hour-continuation.md
 - id: D-300
   title: The receipt rehearsal requested an unsupported gdate precision
   date: '2026-08-25'
@@ -7744,7 +7744,7 @@ defects:
     offset-aware clock and require every receipt field to survive together.
   regression: none
   bead: think-jygr
-  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+  recorded_in: packing/campaign/agent-sessions/session-011-eight-hour-continuation.md
 - id: D-301
   title: The first receipt rule split a compound adjective after its hyphen
   date: '2026-08-25'
@@ -7765,7 +7765,7 @@ defects:
   fix: Join replay-relevant before committing and rerun the Markdown formatter.
   regression: none
   bead: think-wunq
-  recorded_in: campaign/agent-sessions/README.md
+  recorded_in: packing/campaign/agent-sessions/README.md
 - id: D-302
   title: Bui transcription changed the square-reduction divisor into a product
   date: '2026-08-25'
@@ -7788,7 +7788,7 @@ defects:
     an explicit source-check annotation, and update the archive annotation census.
   regression: none
   bead: think-hp6c
-  recorded_in: resources/papers/square-packing-x06-wasted-area-2508.04603.md
+  recorded_in: packing/resources/papers/square-packing-x06-wasted-area-2508.04603.md
 - id: D-303
   title: Bui transcription omitted the quantified width hypothesis
   date: '2026-08-25'
@@ -7811,7 +7811,7 @@ defects:
     and update the archive annotation census without changing the raw extraction.
   regression: none
   bead: think-gzoc
-  recorded_in: resources/papers/square-packing-x06-wasted-area-2508.04603.md
+  recorded_in: packing/resources/papers/square-packing-x06-wasted-area-2508.04603.md
 - id: D-304
   title: McClenagan's Section 3 proof uses a contradictory inequality chain
   date: '2026-08-25'
@@ -7836,7 +7836,7 @@ defects:
     equations (2.2), (2.5), and (3.2). H-037 records both checks and their local scope.
   regression: none
   bead: think-486e
-  recorded_in: campaign/hypotheses/H-037-asymptotic-waste-exponent.md
+  recorded_in: packing/campaign/hypotheses/H-037-asymptotic-waste-exponent.md
 - id: D-305
   title: The source checkpoint undercounted fixes without regression checks
   date: '2026-08-25'
@@ -7883,7 +7883,7 @@ defects:
     aggregate while retaining the same deliberately wrong nearby replacement.
   regression: uv run --frozen python -m devtools.run_negative_controls devtools/controls.yaml
   bead: think-wgg7
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-307
   title: Host Python misdiagnosed valid Python 3.14 exception syntax
   date: '2026-08-25'
@@ -7909,7 +7909,7 @@ defects:
     judgments.
   regression: uv run --frozen ruff format --check devtools/run_negative_controls.py
   bead: think-02c0
-  recorded_in: defects.yaml
+  recorded_in: packing/defects.yaml
 - id: D-308
   title: Two synchronized mutation controls expected the canonical rather than mutated count
   date: '2026-08-25'
@@ -7933,7 +7933,7 @@ defects:
     hypothesis count 42 and unprotected-fix count 105.
   regression: uv run --frozen python -m devtools.run_negative_controls devtools/controls.yaml
   bead: think-7y4k
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-309
   title: The first session-012 draft violated two clocked-session fields
   date: '2026-08-25'
@@ -7956,7 +7956,7 @@ defects:
     rerun the enforced session schema before validation.
   regression: uv run --frozen python -m devtools.validate_schemas
   bead: think-b5th
-  recorded_in: campaign/agent-sessions/session-012-eight-hour-final-continuation.md
+  recorded_in: packing/campaign/agent-sessions/session-012-eight-hour-final-continuation.md
 - id: D-310
   title: McClenagan's equation 3.2 calls a periodic tangent solution unique
   date: '2026-08-25'
@@ -7979,7 +7979,7 @@ defects:
     uniqueness on 0<theta'<theta from exact equations without presupposing the sign.
   regression: none
   bead: think-szk1
-  recorded_in: campaign/hypotheses/H-037-asymptotic-waste-exponent.md
+  recorded_in: packing/campaign/hypotheses/H-037-asymptotic-waste-exponent.md
 - id: D-311
   title: The open-defect bead control still mutated a fixed record
   date: '2026-08-25'
@@ -8002,7 +8002,7 @@ defects:
     to report that D-039 is outstanding without a bead.
   regression: defect log - open defect with no bead
   bead: think-kit3
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-312
   title: An early checkpoint phase claimed the outer finalization clock role
   date: '2026-08-25'
@@ -8023,7 +8023,7 @@ defects:
   regression: uv run --frozen python -m devtools.validate_schemas
   recurrence_of: D-309
   bead: think-ryai
-  recorded_in: campaign/agent-sessions/session-012-eight-hour-final-continuation.md
+  recorded_in: packing/campaign/agent-sessions/session-012-eight-hour-final-continuation.md
 - id: D-313
   title: Explicit Flowmark target bypassed the generated-ledger exclusion
   date: '2026-08-25'
@@ -8047,7 +8047,7 @@ defects:
   regression: uv run --directory explorations/packing --frozen packing-ledger check
   recurrence_of: D-259
   bead: think-chfy
-  recorded_in: campaign/agent-sessions/session-013-generated-view-recurrence-checkpoint.md
+  recorded_in: packing/campaign/agent-sessions/session-013-generated-view-recurrence-checkpoint.md
 - id: D-314
   title: The production commit-state probe was initially unbounded
   date: '2026-08-25'
@@ -8069,7 +8069,7 @@ defects:
     the finite production default.
   regression: test_commit_state_routes_git_probes_through_bounded_seam
   bead: think-orf4
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-315
   title: Detached production defaults could still wait on interrupted workers
   date: '2026-08-25'
@@ -8094,7 +8094,7 @@ defects:
     test_process_registry_rejects_registration_after_stop
   recurrence_of: D-295
   bead: think-7c35
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-316
   title: Quiet provenance probing lacked a Windows fail-closed guard
   date: '2026-08-25'
@@ -8115,7 +8115,7 @@ defects:
     Fail closed on Windows unless the supported tree-cleanup backend is available.
   regression: test_quiet_returncode_path_fails_closed_without_windows_tree_cleanup
   bead: think-fwnn
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-317
   title: The SIGINT timeout regression ceiling was too tight for the focused suite
   date: '2026-08-25'
@@ -8138,7 +8138,7 @@ defects:
     and bounded-command semantic assertions.
   regression: test_run_selected_interrupt_stops_detached_production_process
   bead: think-9pz6
-  recorded_in: tests/test_validation_cli.py
+  recorded_in: packing/tests/test_validation_cli.py
 - id: D-318
   title: The unprotected-fix mutation control retained a stale expected count
   date: '2026-08-25'
@@ -8163,7 +8163,7 @@ defects:
   regression: uv run --frozen python -m devtools.run_negative_controls devtools/controls.yaml
   recurrence_of: D-308
   bead: think-6lka
-  recorded_in: devtools/controls.yaml
+  recorded_in: packing/devtools/controls.yaml
 - id: D-319
   title: The cold-start handoff pointed to a closed BC-010 bead
   date: '2026-08-25'
@@ -8217,7 +8217,7 @@ defects:
     for real semantic changes, and report wrapping-only differences without failing.
   regression: test_deep_golden_ignores_yaml_wrapping
   bead: think-kwls
-  recorded_in: devtools/check_golden_basins.py
+  recorded_in: packing/devtools/check_golden_basins.py
 - id: D-321
   title: The SIGINT cleanup regression signaled before its child start condition
   date: '2026-08-25'
@@ -8242,7 +8242,7 @@ defects:
   regression: test_run_selected_interrupt_stops_detached_production_process
   recurrence_of: D-317
   bead: think-3vt3
-  recorded_in: tests/test_validation_cli.py
+  recorded_in: packing/tests/test_validation_cli.py
 - id: D-322
   title: The synopsis overstated which defect classes the gate had caught
   date: '2026-08-25'
@@ -8291,7 +8291,7 @@ defects:
   regression: test_frontier_assurance_contract
   recurrence_of: D-022
   bead: think-1p2e
-  recorded_in: devtools/render_research_tables.py
+  recorded_in: packing/devtools/render_research_tables.py
 - id: D-324
   title: Semantic golden comparison accepted ambiguous YAML identities
   date: '2026-08-25'
@@ -8317,7 +8317,7 @@ defects:
   regression: test_semantic_yaml_comparison_preserves_types_and_rejects_duplicate_keys
   recurrence_of: D-320
   bead: think-35wm
-  recorded_in: devtools/check_golden_basins.py
+  recorded_in: packing/devtools/check_golden_basins.py
 - id: D-325
   title: The current-handoff validator embedded one live agenda cell
   date: '2026-08-25'
@@ -8341,7 +8341,7 @@ defects:
   regression: test_handoff_cell_is_selected_from_the_latest_session_action
   recurrence_of: D-319
   bead: think-z96r
-  recorded_in: devtools/check_synopsis.py
+  recorded_in: packing/devtools/check_synopsis.py
 - id: D-326
   title: A second unprotected-fix aggregate escaped the single-match drift check
   date: '2026-08-25'
@@ -8366,7 +8366,7 @@ defects:
     every occurrence of the aggregate phrase instead of accepting the first match.
   regression: test_unprotected_fix_claims_rejects_stale_duplicate
   bead: think-8mkk
-  recorded_in: devtools/check_synopsis.py
+  recorded_in: packing/devtools/check_synopsis.py
 - id: D-327
   title: The timeout documentation split another compound adjective after its hyphen
   date: '2026-08-25'
@@ -8414,7 +8414,7 @@ defects:
     softschema contract enforcement fails loudly at render and gate time, which is
     what caught it; no additional check is needed.
   bead: think-clin
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md
 - id: D-329
   title: The tutorial's promotion example asserted an unattested separation value
   date: '2026-08-25'
@@ -8635,7 +8635,7 @@ defects:
     claim with no dated review, with a controls.yaml cell for each; schema validation
     enforces the enum. Prose provenance coverage remains review work.
   bead: think-bhjz
-  recorded_in: frontier/frontier-evidence.schema.yaml
+  recorded_in: packing/frontier/frontier-evidence.schema.yaml
 - id: D-337
   title: An upstream merge restored stale synopsis totals and an incorrect H-024 disposition
   date: '2026-08-25'
@@ -8725,7 +8725,7 @@ defects:
     residual assertions, followed by complete Linux and macOS validation.
   recurrence_of: D-155
   bead: think-eyix
-  recorded_in: src/sqpack/chunks.py
+  recorded_in: packing/src/sqpack/chunks.py
 - id: D-340
   title: The Bash gate suppressed errexit inside multi-command steps
   date: '2026-08-26'
@@ -8754,7 +8754,7 @@ defects:
     to swallow the exception and requires that regression to fail.
   recurrence_of: D-163
   bead: think-c90t
-  recorded_in: src/sqpack/cli/validate.py
+  recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-341
   title: In-progress experiments were forced to invent scientific results
   date: '2026-08-26'
@@ -8781,7 +8781,7 @@ defects:
     test_terminal_round_requires_a_real_result exercises the whole-set ledger rule;
     exp-045 schema and ledger validation exercise the honest empty in-progress form.
   bead: think-whwc
-  recorded_in: campaign/schemas/experiment.schema.yaml
+  recorded_in: packing/campaign/schemas/experiment.schema.yaml
 - id: D-342
   title: Offset leases were compared after discarding their UTC offset
   date: '2026-08-26'
@@ -8807,7 +8807,7 @@ defects:
     test_live_offset_lease_is_compared_as_the_same_utc_instant keeps a 03:00-07:00 lease
     live at 09:00 UTC and would fail under the previous tzinfo-removal behavior.
   bead: think-whwc
-  recorded_in: src/sqpack/campaign/ledger.py
+  recorded_in: packing/src/sqpack/campaign/ledger.py
 - id: D-343
   title: Bui's replacement instruction omitted its finite upper index bound
   date: '2026-08-27'
@@ -8835,7 +8835,7 @@ defects:
     test_unbounded_j_wording_cannot_extend_past_the_m_columns requires the case-local
     exact replay to reject a replacement endpoint other than m.
   bead: think-ykt7
-  recorded_in: campaign/hypotheses/H-037-asymptotic-waste-exponent.md
+  recorded_in: packing/campaign/hypotheses/H-037-asymptotic-waste-exponent.md
 - id: D-344
   title: El Moumni's n=7 proof prints a negative segment length
   date: '2026-08-27'
@@ -8986,7 +8986,7 @@ defects:
     reducers on a 2,651-event trace; browser QA confirmed a 769-event run renders only
     42 list nodes while every event remains reachable.
   bead: think-0l1y
-  recorded_in: src/sqpack/motion_lab/assets/free-quench.js
+  recorded_in: packing/src/sqpack/motion_lab/assets/free-quench.js
 - id: D-349
   title: An aborted free sweep drops its LP work from the run counter
   date: '2026-08-28'
@@ -9020,7 +9020,7 @@ defects:
     agreement on the normal path so a future engine change cannot break that half
     silently.
   bead: think-7dwo
-  recorded_in: src/sqpack/motion_lab/contracts.py
+  recorded_in: packing/src/sqpack/motion_lab/contracts.py
 - id: D-350
   title: A rejected quench left the previous run's trace reachable from Download
   date: '2026-08-28'
@@ -9049,7 +9049,7 @@ defects:
     None automated: this is a browser control-flow path with no headless-browser lane in
     the gate. The retained-trace and typed-error service controls cover the two halves
     separately, and the manual browser pass covers the sequence.
-  recorded_in: src/sqpack/motion_lab/assets/free-quench.js
+  recorded_in: packing/src/sqpack/motion_lab/assets/free-quench.js
 - id: D-351
   title: The replay command promised byte fidelity and compared only semantics
   date: '2026-08-28'
@@ -9077,7 +9077,7 @@ defects:
   regression: >-
     test_replay_rejects_a_reformatted_trace_that_still_parses reformats the retained
     fixture and requires the refusal.
-  recorded_in: devtools/serve_packing_motion_lab.py
+  recorded_in: packing/devtools/serve_packing_motion_lab.py
 - id: D-352
   title: A timeline counter changed meaning on the last event of every trace
   date: '2026-08-28'
@@ -9108,7 +9108,7 @@ defects:
     test_event_counters_are_per_call_and_the_stop_carries_only_the_result_total pins the
     fixed-point sum to the result total and requires the stop event to carry no call
     counters.
-  recorded_in: src/sqpack/motion_lab/contracts.py
+  recorded_in: packing/src/sqpack/motion_lab/contracts.py
 - id: D-353
   title: The lab told users the optimizer receives a container side it never sees
   date: '2026-08-28'
@@ -9137,7 +9137,7 @@ defects:
   regression: >-
     None automated: this is prose about a boundary rather than a computed value. The
     substitution that demonstrates it is one request field and is recorded here.
-  recorded_in: devtools/render_general_motion_lab.py
+  recorded_in: packing/devtools/render_general_motion_lab.py
 - id: D-354
   title: The frontier encoded catalogue silence about rigidity as a false rigid flag
   date: '2026-08-28'
@@ -9175,7 +9175,7 @@ defects:
     would agree with the records, and one that matches annotations by printed decimal
     rather than position. devtools/audit_kingbird_catalogue.py re-reads the four
     annotations from the retained source on every gate run.
-  recorded_in: frontier/square-packing-case.schema.yaml
+  recorded_in: packing/frontier/square-packing-case.schema.yaml
 - id: D-355
   title: Verification runs the whole gate after every change, so cycle time is set by the slowest step rather than by the change
   date: '2026-08-28'
@@ -9187,7 +9187,7 @@ defects:
   severity: high
   status: outstanding
   bead: think-ej1d
-  recorded_in: campaign/agendas/agenda-005-symbolic-promotion-and-identity.md
+  recorded_in: packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md
   what: >-
     `packing-validate` documents the right ladder in its own help -- `--fast` while
     editing, `--only TEXT` for one named surface, the default before a commit, `--strict`
