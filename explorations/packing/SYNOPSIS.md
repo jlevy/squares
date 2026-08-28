@@ -137,6 +137,7 @@ case or experiment separately.
 | [Packing Atlas](atlas/README.md) | component scope and use | supporting | maintained | — |
 | [Enumerated Contact-Scaffold Atlas](atlas/enumerated/README.md) | component scope and use | supporting | maintained | — |
 | [Known-Best Packing Atlas, `n = 1..100`](atlas/known-best/README.md) | component scope and use | supporting | maintained | — |
+| [Composite figure playbook](atlas/known-best/FIGURE-PLAYBOOK.md) | component scope and use | supporting | maintained | — |
 | [Prospective Packing Atlas, `n = 101..324`](atlas/prospective/README.md) | component scope and use | supporting | maintained | — |
 | [Deterministic SVG Gallery](atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
 | [Conventions for `explorations/packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
@@ -1071,8 +1072,7 @@ At `n = 11` the two ends of the interval have barely moved in a generation:
 
 *The upper-bound endpoint of the interval: a certified degree-8 construction, still
 separated from the independently certified lower bound.
-Translucent tempered-yellow segments and dots are exact edge and point contacts, not
-tolerance-based visual guesses.*
+The segment and dot contact marks are exact, not tolerance-based visual guesses.*
 
 The current audit found an explicit strict box avoiding all twelve printed Figure 14
 points, so the paper’s unavoidability subclaim is false as printed

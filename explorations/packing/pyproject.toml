@@ -25,6 +25,9 @@ symbolic = ["sympy>=1.13"]
 [dependency-groups]
 dev = [
     "basedpyright>=1.31",
+    # Vector PDF export of the known-best composite. Emits no timestamps, so the
+    # output is byte-reproducible and the staleness check is a byte comparison.
+    "cairosvg>=2.7",
     "pytest>=8.3",
     "ruff>=0.14",
     # Only derive_field.py uses SymPy, and only to re-derive a constant the verifier

@@ -16,9 +16,13 @@ Roughly `0.088` in side length remains between that bound and the 1979 construct
 
 [![One hundred known-best square packings arranged from n equals one through one hundred.](atlas/known-best/known-best-1-100.png)](atlas/known-best/known-best-1-100.svg)
 
-*The retained `n = 1…100` atlas, with each packing normalized to its own container and
-its reported side upper bound shown below.
-Select the image for the standalone, zoomable SVG.*
+*The retained `n = 1…100` atlas, each packing normalized to its own container and
+labeled with its best known side upper bound.
+Badges mark the 35 side lengths proved optimal (`O`), and whether a side length is
+pinned exactly by a radical or a minimal polynomial (`=`) or is so far known only
+numerically (`≈`); `deg` gives the algebraic degree where one is recorded.
+Select the image for the standalone, zoomable SVG, or take the
+[print-ready PDF](atlas/known-best/known-best-1-100.pdf) (vector, 25 × 26.2 in).*
 
 Work is organized at three levels.
 Four **operating principles** define what quality means and which concerns may veto
@@ -343,14 +347,12 @@ Numerically checked figures retain the arithmetic, actual precision, rounding,
 tolerance, method, and outcome in SVG metadata.
 Exact annotations retain algebraic or rational source expressions in SVG comments and
 namespaced metadata while using stable high-precision decimal projections for geometry.
-The container and every packed square use the same thin pure-black boundary, so a
-contact cannot look like a white gap.
-Exact-source adapters attach certified contact geometry: 60%-opaque tempered-yellow
-segments show shared boundary intervals, and dots in the same reserved highlight color
-show point contacts.
-Each mark is clipped to its participating square interiors and sits above the square
-fills and below the black outlines.
-This layer is shown by default, can be removed with `--no-contacts`, and is never
+The container and every packed square use the same boundary treatment, so contacts
+remain visually continuous.
+Exact-source adapters attach certified contact geometry: segments mark shared boundary
+intervals, and dots mark point contacts.
+Each mark is clipped to its participating square interiors.
+The contact layer is shown by default, can be removed with `--no-contacts`, and is never
 guessed for numerical candidate poses.
 
 See the [SVG gallery README](atlas/rendering/README.md) for the focused rendering

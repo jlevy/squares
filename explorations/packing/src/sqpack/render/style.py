@@ -6,51 +6,38 @@ from dataclasses import dataclass
 
 from sqpack.render.model import EvidenceTier
 
-SQUARE_FILL_PALETTE = (
-    "#378c3f",
-    "#00aeee",
-    "#c1a0fb",
-    "#00b393",
-    "#3d63be",
-    "#78d7d6",
-    "#877deb",
-    "#9fce85",
-    "#0096b1",
-    "#854888",
-    "#83c4ff",
-    "#3bb360",
-    "#008376",
-    "#7acfe9",
-    "#0079bf",
-    "#86a2ff",
-    "#865eb1",
-    "#7fd6b1",
-    "#00afb9",
-    "#c18dd8",
-)
+# Base hues for the twenty angle families. Slot 0 is pinned to right angles and
+# slot 1 to 45 degree tilts, so those two carry most of the atlas and are chosen
+# to stay quiet under repetition. Hues are spread with a minimum separation so no
+# two families read as the same colour; see tests/test_render_colors.py.
 SQUARE_HUE_PALETTE = (
-    "#00b393",
-    "#854888",
-    "#9fce85",
-    "#86a2ff",
-    "#378c3f",
-    "#00aeee",
-    "#c1a0fb",
-    "#877deb",
-    "#c18dd8",
-    "#7fd6b1",
-    "#00afb9",
-    "#3bb360",
-    "#83c4ff",
-    "#865eb1",
-    "#0096b1",
-    "#0079bf",
-    "#008376",
-    "#78d7d6",
-    "#3d63be",
-    "#7acfe9",
+    "#1faa8e",
+    "#c3c45f",
+    "#aa5585",
+    "#166eac",
+    "#b3543b",
+    "#c9a13a",
+    "#23b4e8",
+    "#158655",
+    "#a7539d",
+    "#75951c",
+    "#c8691e",
+    "#1990a2",
+    "#714fad",
+    "#67b45c",
+    "#e26e82",
+    "#8286e9",
+    "#ce871b",
+    "#147e7c",
+    "#4571c9",
+    "#a86cc6",
 )
+SQUARE_FILL_PALETTE = SQUARE_HUE_PALETTE
 SQUARE_FILL_OPACITY = 1.0
+# Small grey labels sit a step darker than the muted ink. Helvetica has no
+# semibold, so figure labels buy their legibility from contrast rather than
+# weight; see atlas/known-best/FIGURE-PLAYBOOK.md.
+LABEL_MUTED_COLOR = "#47525f"
 PACKING_BOUNDARY_COLOR = "#000000"
 PACKING_BOUNDARY_WIDTH = 1.25
 CONTACT_HIGHLIGHT_COLOR = "#e3c64a"

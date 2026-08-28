@@ -30,8 +30,9 @@ from xml.etree import ElementTree as ET
 
 from strif import atomic_output_file
 
+from sqpack.render.color import square_fill_palette
 from sqpack.render.numbers import format_svg_number
-from sqpack.render.style import PACKING_BOUNDARY_COLOR
+from sqpack.render.style import PACKING_BOUNDARY_COLOR, PAPER_THEME
 from sqpack.render.svg import append_metadata, serialize_svg, svg_tag
 from sqpack.research.canonical import canonical_key
 from sqpack.verify import verify_packing
@@ -116,6 +117,32 @@ class SeparationCell:
     selection: tuple[int, ...]
     free_variables: tuple[Variable, ...]
     states: tuple[State, ...]
+
+
+# House tokens, so this figure sits with the rest of the atlas rather than
+# carrying a palette of its own. The three strata and the three square glyphs
+# take widely separated hues from the shared palette; dark mode takes the light
+# end of the same families, so the identities survive the theme switch.
+_FAMILIES = square_fill_palette(hue_count=20, shades_per_hue=5)
+_STRATUM_HUES = {"--c": 4, "--g": 3, "--m": 12}
+_GLYPH_HUES = {"--sq1": 0, "--sq2": 14, "--sq3": 1}
+_HUE_ROLES = {**_STRATUM_HUES, **_GLYPH_HUES}
+
+
+def _house_colours(*, dark: bool) -> dict[str, str]:
+    shade = 4 if dark else 2
+    base = {
+        "--bg": "#111827" if dark else PAPER_THEME.background,
+        "--ink": "#f3f4f6" if dark else PAPER_THEME.ink,
+        "--muted": "#aab4c3" if dark else PAPER_THEME.muted,
+        "--line": "#64748b" if dark else PAPER_THEME.muted,
+        "--panel": "#1f2937" if dark else PAPER_THEME.panel,
+    }
+    return base | {name: _FAMILIES[hue][shade] for name, hue in _HUE_ROLES.items()}
+
+
+def _css_variables(*, dark: bool) -> str:
+    return ";".join(f"{name}:{value}" for name, value in _house_colours(dark=dark).items())
 
 
 def fraction_sign(value: Fraction) -> int:
@@ -724,8 +751,8 @@ def render_n3_moduli_svg(model: dict[str, object]) -> str:
         "<title>Exact optimal configuration spaces for three unit squares in side 2</title>",
         "<desc>Two labelled 12-cycles quotient to one unlabelled four-cycle and then to the C-G-M interval. Packing glyphs show the corner, generic, and centred strata.</desc>",
         "<style>",
-        ":root{--bg:#fbfaf7;--ink:#17202a;--muted:#637083;--line:#8290a3;--panel:#ffffff;--c:#d97706;--g:#2563eb;--m:#7c3aed;--sq1:#0f766e;--sq2:#be123c;--sq3:#7c3aed}",
-        "@media(prefers-color-scheme:dark){:root{--bg:#111827;--ink:#f3f4f6;--muted:#aab4c3;--line:#64748b;--panel:#1f2937;--c:#f59e0b;--g:#60a5fa;--m:#a78bfa;--sq1:#2dd4bf;--sq2:#fb7185;--sq3:#c4b5fd}}",
+        ":root{" + _css_variables(dark=False) + "}",
+        "@media(prefers-color-scheme:dark){:root{" + _css_variables(dark=True) + "}}",
         "text{font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;fill:var(--ink)} .muted{fill:var(--muted)} .edge{stroke:var(--line);stroke-width:2;fill:none} .panel{fill:var(--panel);stroke:var(--line);stroke-width:1.5} .node{stroke:var(--panel);stroke-width:2} .label{font-size:15px;font-weight:650} .small{font-size:12px}",
         "</style>",
         f'<rect width="{SVG_WIDTH}" height="{SVG_HEIGHT}" fill="var(--bg)"/>',
@@ -818,19 +845,7 @@ def render_n3_moduli_svg(model: dict[str, object]) -> str:
     if style is None:
         raise ValueError("the n=3 figure lost its renderer-owned style")
     root.remove(style)
-    colours = {
-        "--bg": "#fbfaf7",
-        "--ink": "#17202a",
-        "--muted": "#637083",
-        "--line": "#8290a3",
-        "--panel": "#ffffff",
-        "--c": "#d97706",
-        "--g": "#2563eb",
-        "--m": "#7c3aed",
-        "--sq1": "#0f766e",
-        "--sq2": "#be123c",
-        "--sq3": "#7c3aed",
-    }
+    colours = _house_colours(dark=False)
     class_attributes = {
         "muted": {"fill": colours["--muted"]},
         "edge": {"stroke": colours["--line"], "stroke-width": "2", "fill": "none"},

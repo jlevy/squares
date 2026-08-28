@@ -351,11 +351,11 @@ continues to use the readable serializer.
 ### Visual System
 
 The base theme is a fixed paper theme: neutral background, high-contrast boundary and
-text, restrained colorblind-safe square colors, consistent line weights, generous
-padding, and no shadows, filters, gradients, or decorative motion.
-The square colors derive narrow shade families from high-contrast cool base hues.
-The default visual encoding assigns those families to angle classes and shades them by
-full-side adjacency; the legacy index sequence remains opt-in.
+text, restrained square colors, consistent line weights, generous padding, and no
+shadows, filters, gradients, or decorative motion.
+The square colors derive narrow shade families from hue- and OKLab-separated base
+colors. The default visual encoding assigns those families to angle classes and shades
+them by full-side adjacency; the legacy index sequence remains opt-in.
 Container and square outlines use the same opaque pure-black 1.25px stroke.
 Certified contact segments and points use 60%-opaque tempered yellow `#e3c64a`, placed
 below the black outline and above the fills and clipped to their participant-square

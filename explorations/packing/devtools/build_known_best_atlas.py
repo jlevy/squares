@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import shutil
@@ -17,6 +18,7 @@ import zlib
 from dataclasses import dataclass
 from decimal import Decimal
 from fractions import Fraction
+from functools import cache
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as ET
@@ -25,6 +27,8 @@ import mpmath as mp
 import yaml
 from strif import atomic_output_file
 
+from devtools import build_composite_figure_data, render_composite_pdf
+from devtools.build_composite_figure_data import load_record as load_figure_record
 from sqpack.known_best import (
     KINGBIRD_ATTRIBUTION,
     KINGBIRD_BASE_URL,
@@ -40,7 +44,12 @@ from sqpack.known_best import (
     unitsquare_witness,
 )
 from sqpack.render import render_packing_svg
-from sqpack.render.color import ANGLE_CLASS_CONTRACT, assign_square_colors
+from sqpack.render.color import (
+    ANGLE_CLASS_CONTRACT,
+    assign_square_colors,
+    hex_oklch,
+    square_fill_palette,
+)
 from sqpack.render.model import (
     CheckKind,
     CheckSummary,
@@ -55,7 +64,7 @@ from sqpack.render.numbers import (
     scalar_from_decimal,
     scalar_from_fraction,
 )
-from sqpack.render.style import PAPER_THEME
+from sqpack.render.style import LABEL_MUTED_COLOR, PAPER_THEME
 from sqpack.render.svg import (
     append_metadata,
     append_title_desc,
@@ -90,26 +99,142 @@ GENERATOR = "python -m devtools.build_known_best_atlas"
 USER_AGENT = "thinking-scratchpad-known-best-atlas/1.0"
 
 SUMMARY_WIDTH = 2400
-SUMMARY_HEIGHT = 2540
+SUMMARY_HEIGHT = 2676
 SUMMARY_FIRST_N = 1
 SUMMARY_LAST_N = 100
 SUMMARY_COLUMNS = 10
 SUMMARY_ROWS = 10
 SUMMARY_SQUARE_COUNT = sum(range(SUMMARY_FIRST_N, SUMMARY_LAST_N + 1))
 SUMMARY_GRID_LEFT = Decimal(60)
-SUMMARY_GRID_TOP = Decimal(145)
+SUMMARY_GRID_TOP = Decimal(152)
 SUMMARY_COLUMN_PITCH = Decimal(228)
 SUMMARY_ROW_PITCH = Decimal(235)
 SUMMARY_CARD_WIDTH = Decimal(216)
 SUMMARY_CARD_HEIGHT = Decimal(225)
-SUMMARY_PACKING_SIZE = Decimal(168)
+SUMMARY_PACKING_SIZE = Decimal(158)
 SUMMARY_PACKING_INSET_X = Decimal(24)
 SUMMARY_PACKING_INSET_Y = Decimal(12)
-SUMMARY_LABEL_BASELINE = Decimal(202)
-SUMMARY_BOUND_BASELINE = Decimal(218)
-SUMMARY_FONT = (
-    "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+SUMMARY_LABEL_BASELINE = Decimal(203)
+SUMMARY_BOUND_BASELINE = Decimal(220)
+SUMMARY_BADGE_SIZE = Decimal(19)
+SUMMARY_EXPLAINER_BASELINE = Decimal(2614)
+SUMMARY_CREDIT_BASELINE = Decimal(2652)
+SUMMARY_EXPLAINER = (
+    "s(n) is the side of the smallest square holding n unit squares; "
+    "deg is the algebraic degree of that side length"
 )
+# Cap height as a fraction of font size, used to sit the badges flush with the
+# top of the card number rather than on its baseline.
+SUMMARY_LABEL_CAP_RATIO = Decimal("0.70")
+# One size for every small grey label: the bound, the degree, the legend and the
+# credit line, so they cannot drift apart.
+SUMMARY_SMALL_SIZE = "14"
+# The footer block -- legend, explainer, credit -- reads at arm's length rather
+# than beside a packing, so it sits larger than the card labels and takes bold.
+# Helvetica has no semibold, so bold is the only heavier face available.
+SUMMARY_FOOTER_SIZE = "19"
+# Helvetica-Bold advance widths in units of 1/1000 em, for the characters the
+# figure actually sets. A uniform per-character estimate cannot center a mixed
+# string: it put the two legend rows 107px and 189px off center, in opposite
+# amounts, because their character mixes differ.
+_HELVETICA_BOLD_WIDTHS = {
+    " ": 278,
+    "(": 333,
+    ")": 333,
+    ",": 278,
+    "-": 333,
+    ".": 278,
+    "/": 278,
+    ":": 333,
+    "=": 584,
+    "\u2264": 584,
+    "\u2248": 584,
+    "\u00b0": 400,
+    "a": 556,
+    "b": 611,
+    "c": 556,
+    "d": 611,
+    "e": 556,
+    "f": 333,
+    "g": 611,
+    "h": 611,
+    "i": 278,
+    "j": 278,
+    "k": 556,
+    "l": 278,
+    "m": 889,
+    "n": 611,
+    "o": 611,
+    "p": 611,
+    "q": 611,
+    "r": 389,
+    "s": 556,
+    "t": 333,
+    "u": 611,
+    "v": 556,
+    "w": 778,
+    "x": 556,
+    "y": 556,
+    "z": 500,
+    "A": 722,
+    "B": 722,
+    "C": 722,
+    "D": 722,
+    "E": 667,
+    "F": 611,
+    "G": 778,
+    "H": 722,
+    "I": 278,
+    "J": 556,
+    "K": 722,
+    "L": 611,
+    "M": 833,
+    "N": 722,
+    "O": 778,
+    "P": 667,
+    "Q": 778,
+    "R": 722,
+    "S": 667,
+    "T": 611,
+    "U": 722,
+    "V": 667,
+    "W": 944,
+    "X": 667,
+    "Y": 667,
+    "Z": 611,
+}
+_DEFAULT_ADVANCE = 556
+
+
+def _text_width(text: str, size: str) -> Decimal:
+    """Advance width of a string set in Helvetica Bold at this size."""
+    units = sum(_HELVETICA_BOLD_WIDTHS.get(ch, _DEFAULT_ADVANCE) for ch in text)
+    return Decimal(units) * Decimal(size) / Decimal(1000)
+
+
+SUMMARY_FOOTER_WEIGHT = "700"
+SUMMARY_LEGEND_ROW_PITCH = Decimal(32)
+# Helvetica offers regular and bold and nothing between, so there is no semibold
+# to ask for: the card labels take bold, the only heavier face available, over a
+# darker grey. The footer block stays regular so the two do not compete.
+SUMMARY_SMALL_WEIGHT = "700"
+SUMMARY_SMALL_FILL = LABEL_MUTED_COLOR
+# Letters sit on their cap height, math symbols on the math axis, so a single
+# baseline cannot center both inside the badge box. Offsets are from the box top.
+SUMMARY_BADGE_FONT_SIZE = Decimal(15)
+SUMMARY_GLYPH_BASELINE = {"O": Decimal("14.9")}
+SUMMARY_MATH_GLYPH_BASELINE = Decimal(14)
+SUMMARY_CREDIT = "Diagram by Joshua Levy with assistance from Claude and Codex"
+SUMMARY_REPOSITORY = "github.com/jlevy/squares"
+# Set a step above the other small labels so the URL reads as part of the
+# heading block rather than as another footnote.
+SUMMARY_REPOSITORY_SIZE = "26"
+SUMMARY_SUBTITLE_BASELINE = Decimal(126)
+SUMMARY_LEGEND_BASELINE = Decimal(2540)
+# Helvetica, with Arial as the metric-compatible stand-in where Helvetica is
+# absent. No webfont is referenced, so nothing is fetched at render time and the
+# figure is the same family everywhere it is opened.
+SUMMARY_FONT = "Helvetica, Arial, sans-serif"
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 PNG_SOURCE_KEY = b"sqpack-source-svg-sha256"
 PNG_RENDER_TIMEOUT_SECONDS = 120
@@ -191,6 +316,21 @@ def _source_plan(
     )
 
 
+def clear_build_caches() -> None:
+    """Drop the memoized source plans and built cases.
+
+    Only source_plans() needs clearing. It reads the module-level source roots,
+    so a caller that repoints one -- the negative controls do, to corrupt a
+    retained SVG on purpose -- would otherwise read or leave a plan set built
+    against the other root. _build_case() is keyed on the plan itself, which
+    carries the source path and its declared digest, so a corrupted source is a
+    different key and cannot collide with the real one.
+    """
+    source_plans.cache_clear()
+    _expected_outputs.cache_clear()
+
+
+@cache
 def source_plans() -> dict[int, SourcePlan]:
     catalogue = catalogue_source_map(CATALOGUE)
     release = json.loads(UNITSQUARE_RESULTS.read_text(encoding="utf-8"))
@@ -445,14 +585,6 @@ def _render(witness: dict) -> str:
     )
 
 
-def _summary_side_text(side: str) -> str:
-    value = Decimal(side)
-    text = format(value, ".7g")
-    if "." in text and "e" not in text.lower():
-        text = text.rstrip("0").rstrip(".")
-    return text
-
-
 def _summary_points(
     square: SquareGeometry,
     *,
@@ -470,7 +602,7 @@ def _summary_points(
     )
 
 
-def _append_summary_card(root: ET.Element, built: BuiltCase) -> None:
+def _append_summary_card(root: ET.Element, built: BuiltCase, *, spec: RenderSpec) -> None:
     n = built.frontier.n
     row, column = divmod(n - SUMMARY_FIRST_N, SUMMARY_COLUMNS)
     card_x = SUMMARY_GRID_LEFT + SUMMARY_COLUMN_PITCH * column
@@ -480,7 +612,7 @@ def _append_summary_card(root: ET.Element, built: BuiltCase) -> None:
     frame = frame_from_witness(built.witness)
     side = frame.container_side.projected
     scale = SUMMARY_PACKING_SIZE / side
-    colors = assign_square_colors(frame, RenderSpec(overlays=frozenset()))
+    colors = assign_square_colors(frame, spec)
 
     card = sub(
         root,
@@ -491,18 +623,6 @@ def _append_summary_card(root: ET.Element, built: BuiltCase) -> None:
             "data-row": str(row),
             "data-column": str(column),
             "data-source-id": frame.source_id,
-        },
-    )
-    sub(
-        card,
-        "rect",
-        {
-            "x": format_svg_number(card_x),
-            "y": format_svg_number(card_y),
-            "width": format_svg_number(SUMMARY_CARD_WIDTH),
-            "height": format_svg_number(SUMMARY_CARD_HEIGHT),
-            "rx": "10",
-            "fill": PAPER_THEME.panel,
         },
     )
     sub(
@@ -549,34 +669,259 @@ def _append_summary_card(root: ET.Element, built: BuiltCase) -> None:
         if color.angle_class is not None:
             polygon.set("data-angle-class", str(color.angle_class))
 
-    center = card_x + SUMMARY_CARD_WIDTH / 2
     sub(
         card,
         "text",
         {
             "data-feature": "packing-label",
-            "x": format_svg_number(center),
+            "x": format_svg_number(packing_x),
             "y": format_svg_number(card_y + SUMMARY_LABEL_BASELINE),
-            "text-anchor": "middle",
             "font-family": SUMMARY_FONT,
-            "font-size": "17",
-            "font-weight": "650",
+            "font-size": "29",
+            "font-weight": "700",
+            "letter-spacing": "-0.5",
             "fill": PAPER_THEME.ink,
         },
-    ).text = f"n = {n}"
-    sub(
+    ).text = str(n)
+
+    badges = _case_badges(built)
+    left = packing_x
+    right = packing_x + SUMMARY_PACKING_SIZE
+    top_row = card_y + SUMMARY_LABEL_BASELINE
+    bottom_row = card_y + SUMMARY_BOUND_BASELINE
+
+    badge_top = top_row - Decimal(29) * SUMMARY_LABEL_CAP_RATIO
+    cursor = right - SUMMARY_BADGE_SIZE
+    for glyph, style, label in reversed(badges):
+        _append_badge(card, glyph, style, label, x=cursor, top=badge_top)
+        cursor -= SUMMARY_BADGE_SIZE + Decimal(4)
+    bound = sub(
         card,
         "text",
         {
             "data-feature": "side-bound",
-            "x": format_svg_number(center),
-            "y": format_svg_number(card_y + SUMMARY_BOUND_BASELINE),
+            "x": format_svg_number(left),
+            "y": format_svg_number(bottom_row),
+            "font-family": SUMMARY_FONT,
+            "font-size": SUMMARY_SMALL_SIZE,
+            "font-weight": SUMMARY_SMALL_WEIGHT,
+            "fill": SUMMARY_SMALL_FILL,
+        },
+    )
+    # Only the function name is italic, as in ordinary mathematical setting: the
+    # parentheses, the argument, the relation and the numeral stay upright.
+    display = _figure_entries()[n]["side"]["display"]
+    sub(bound, "tspan", {"font-style": "italic"}).text = "s"
+    sub(bound, "tspan", {}).text = display[1:]
+
+    # The record carries a degree for all 95 known cases, but printing "deg 1"
+    # on the 65 integer sides is noise: a whole number is self-evidently
+    # rational. Show the degree only where it says something.
+    degree = _figure_entries()[n]["exactness"]["degree"]
+    if degree is not None and degree >= 2:
+        sub(
+            card,
+            "text",
+            {
+                "data-feature": "algebraic-degree",
+                "x": format_svg_number(right),
+                "y": format_svg_number(bottom_row),
+                "text-anchor": "end",
+                "font-family": SUMMARY_FONT,
+                "font-size": SUMMARY_SMALL_SIZE,
+                "font-weight": SUMMARY_SMALL_WEIGHT,
+                "fill": SUMMARY_SMALL_FILL,
+            },
+        ).text = f"deg {degree}"
+
+
+@cache
+def _figure_entries() -> dict[int, dict]:
+    """The figure record, keyed by n.
+
+    Every claim the figure states is decided in
+    devtools/build_composite_figure_data.py and validated against
+    composite-figure.schema.yaml. Nothing is re-derived here, so the drawing and
+    the record cannot disagree.
+    """
+    return {entry["n"]: entry for entry in load_figure_record()["entries"]}
+
+
+def _case_badges(built: BuiltCase) -> tuple[tuple[str, str, str], ...]:
+    entry = _figure_entries()[built.frontier.n]
+    return tuple(
+        (badge["glyph"], badge["style"], badge["meaning"]) for badge in entry["badges"]
+    )
+
+
+def _append_badge(
+    parent: ET.Element, glyph: str, style: str, label: str, *, x: Decimal, top: Decimal
+) -> None:
+    """Draw one badge at an explicit box top.
+
+    Callers position the box rather than passing a text baseline, so the card can
+    sit its badges flush with the top of the big number.
+    """
+    fill, stroke, glyph_fill = {
+        "solid": (PAPER_THEME.muted, "none", PAPER_THEME.background),
+        "ink": ("none", PAPER_THEME.muted, PAPER_THEME.muted),
+        "muted": ("none", PAPER_THEME.muted, PAPER_THEME.muted),
+    }[style]
+    sub(
+        parent,
+        "rect",
+        {
+            "data-feature": "evidence-badge",
+            "data-evidence": label,
+            "x": format_svg_number(x),
+            "y": format_svg_number(top),
+            "width": format_svg_number(SUMMARY_BADGE_SIZE),
+            "height": format_svg_number(SUMMARY_BADGE_SIZE),
+            "rx": "4.5",
+            "fill": fill,
+            "stroke": stroke,
+            "stroke-width": "1.2",
+        },
+    )
+    sub(
+        parent,
+        "text",
+        {
+            "x": format_svg_number(x + SUMMARY_BADGE_SIZE / 2),
+            "y": format_svg_number(
+                top + SUMMARY_GLYPH_BASELINE.get(glyph, SUMMARY_MATH_GLYPH_BASELINE)
+            ),
             "text-anchor": "middle",
             "font-family": SUMMARY_FONT,
-            "font-size": "11.5",
-            "fill": PAPER_THEME.muted,
+            "font-size": format_svg_number(SUMMARY_BADGE_FONT_SIZE),
+            "font-weight": "650",
+            "fill": glyph_fill,
         },
-    ).text = f"s ≤ {_summary_side_text(built.frontier.side)}"
+    ).text = glyph
+
+
+def _legend_row(
+    legend: ET.Element, entries: list[tuple[object, str]], *, baseline: Decimal
+) -> None:
+    """Lay one centerd legend row.
+
+    Each entry is (mark, label), where mark is either a badge triple or a run of
+    swatches. Widths are estimated from the label length because the renderer
+    holds no font metrics, so widths come from the Helvetica advance table.
+    """
+    top = baseline - SUMMARY_BADGE_SIZE + Decimal(4)
+
+    def mark_width(mark: object) -> Decimal:
+        if isinstance(mark, tuple):
+            return SUMMARY_BADGE_SIZE
+        return SUMMARY_BADGE_SIZE * Decimal(len(mark))  # pyright: ignore[reportArgumentType]
+
+    gap = Decimal(34)
+    widths = [
+        mark_width(mark) + Decimal(8) + _text_width(label, SUMMARY_FOOTER_SIZE)
+        for mark, label in entries
+    ]
+    cursor = (
+        Decimal(SUMMARY_WIDTH) - sum(widths, Decimal(0)) - gap * Decimal(len(entries) - 1)
+    ) / 2
+    for (mark, label), width in zip(entries, widths, strict=True):
+        if isinstance(mark, tuple):
+            glyph, style, name = mark
+            _append_badge(legend, glyph, style, name, x=cursor, top=top)
+            run_end = cursor + SUMMARY_BADGE_SIZE
+        else:
+            run_end = cursor
+            for fill, numeral in mark:  # pyright: ignore[reportGeneralTypeIssues]
+                sub(
+                    legend,
+                    "rect",
+                    {
+                        "data-feature": "legend-swatch",
+                        "x": format_svg_number(run_end),
+                        "y": format_svg_number(top),
+                        "width": format_svg_number(SUMMARY_BADGE_SIZE),
+                        "height": format_svg_number(SUMMARY_BADGE_SIZE),
+                        "fill": fill,
+                        "stroke": PAPER_THEME.container,
+                        "stroke-width": "0.8",
+                    },
+                )
+                if numeral:
+                    sub(
+                        legend,
+                        "text",
+                        {
+                            "x": format_svg_number(run_end + SUMMARY_BADGE_SIZE / 2),
+                            "y": format_svg_number(top + Decimal("13.4")),
+                            "text-anchor": "middle",
+                            "font-family": SUMMARY_FONT,
+                            "font-size": "11.5",
+                            "font-weight": "650",
+                            "fill": PAPER_THEME.background
+                            if hex_oklch(fill)[0] < 0.62
+                            else PAPER_THEME.ink,
+                        },
+                    ).text = numeral
+                run_end += SUMMARY_BADGE_SIZE
+        sub(
+            legend,
+            "text",
+            {
+                "x": format_svg_number(run_end + Decimal(8)),
+                "y": format_svg_number(baseline),
+                "font-family": SUMMARY_FONT,
+                "font-size": SUMMARY_FOOTER_SIZE,
+                "font-weight": SUMMARY_FOOTER_WEIGHT,
+                "fill": SUMMARY_SMALL_FILL,
+            },
+        ).text = label
+        cursor += width + gap
+
+
+def _append_summary_legend(
+    root: ET.Element, built: list[BuiltCase], *, spec: RenderSpec
+) -> None:
+    """Two rows: what the badges assert, then what color and shade encode."""
+    totals = load_figure_record()["totals"]
+    tally = {
+        "proved optimal": totals["proved_optimal"],
+        "exact value known": totals["exact_value_known"],
+        "only known numerically": totals["only_known_numerically"],
+        "rigid (established)": totals["rigidity_established"],
+    }
+    palette = square_fill_palette(
+        hue_count=spec.hue_count,
+        shades_per_hue=spec.shades_per_hue,
+        lightness_span=spec.shade_lightness_span,
+    )
+    middle = spec.shades_per_hue // 2
+    legend = sub(root, "g", {"data-feature": "evidence-legend"})
+    badges = [
+        ("O", "solid", "proved optimal"),
+        ("=", "solid", "exact value known"),
+        ("\u2248", "muted", "only known numerically"),
+        ("R", "solid", "rigid (established)"),
+    ]
+    _legend_row(
+        legend,
+        [(badge, f"{badge[2]} ({tally.get(badge[2], 0)})") for badge in badges],
+        baseline=SUMMARY_LEGEND_BASELINE,
+    )
+    # Color carries the tilt angle, shade the contact count. Four hues stand in
+    # for the twenty; the citron ramp illustrates the shades because that family
+    # shows every contact count in the atlas.
+    hue_run = [(palette[index][middle], "") for index in range(4)]
+    shade_run = [
+        (fill, str(spec.shades_per_hue - 1 - index)) for index, fill in enumerate(palette[1])
+    ]
+    _legend_row(
+        legend,
+        [
+            (hue_run, "colors indicate distinct tilt angles"),
+            (shade_run, "shade indicates number of full-side contacts"),
+        ],
+        baseline=SUMMARY_LEGEND_BASELINE + SUMMARY_LEGEND_ROW_PITCH,
+    )
 
 
 def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
@@ -584,6 +929,7 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
     numbers = [item.frontier.n for item in built]
     if numbers != list(range(SUMMARY_FIRST_N, SUMMARY_LAST_N + 1)):
         raise ValueError("known-best summary requires exactly n=1..100 in order")
+    spec = RenderSpec(overlays=frozenset())
     root = element(
         "svg",
         {
@@ -596,19 +942,27 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
     )
     append_title_desc(
         root,
-        "Known-best packings of one through one hundred unit squares",
+        "Best known packings of one through one hundred unit squares",
         (
-            "A ten-by-ten atlas of the retained known-best unit-square packings for "
+            "A ten-by-ten atlas of the retained best known unit-square packings for "
             "n equals 1 through 100. Each tile is normalized to its own container and "
-            "labeled with n and the retained upper bound on the container side."
+            "labeled with n and the best known upper bound on the container side. Badges "
+            "mark which side lengths are proved optimal, and whether a side length is "
+            "pinned exactly by a radical or a minimal polynomial rather than only by a "
+            "decimal."
         ),
     )
     append_metadata(
         root,
         {
             "angle-class-contract": ANGLE_CLASS_CONTRACT,
-            "color-hue-scheme": "angle",
-            "color-shade-scheme": "contacts",
+            "color-angle-tolerance-radians": str(spec.angle_tolerance_radians),
+            "color-full-side-contact-tolerance": str(spec.full_side_contact_tolerance),
+            "color-hue-count": str(spec.hue_count),
+            "color-hue-scheme": spec.hue_scheme.value,
+            "color-shade-lightness-span": str(spec.shade_lightness_span),
+            "color-shade-scheme": spec.shade_scheme.value,
+            "color-shades-per-hue": str(spec.shades_per_hue),
             "columns": str(SUMMARY_COLUMNS),
             "first-n": str(SUMMARY_FIRST_N),
             "generated-by": GENERATOR,
@@ -626,32 +980,66 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
             "fill": PAPER_THEME.background,
         },
     )
+    heading_x = str(SUMMARY_WIDTH // 2)
     sub(
         root,
         "text",
         {
-            "x": "60",
-            "y": "67",
+            "x": heading_x,
+            "y": "76",
+            "text-anchor": "middle",
             "font-family": SUMMARY_FONT,
-            "font-size": "40",
+            "font-size": "48",
             "font-weight": "700",
-            "letter-spacing": "-0.6",
+            "letter-spacing": "1.5",
             "fill": PAPER_THEME.ink,
         },
-    ).text = "100 known-best square packings"
+    ).text = "100 BEST KNOWN SQUARE PACKINGS"
     sub(
         root,
         "text",
         {
-            "x": "60",
-            "y": "104",
+            "data-feature": "repository",
+            "x": heading_x,
+            "y": format_svg_number(SUMMARY_SUBTITLE_BASELINE),
+            "text-anchor": "middle",
             "font-family": SUMMARY_FONT,
-            "font-size": "18",
+            "font-size": SUMMARY_REPOSITORY_SIZE,
+            "font-weight": "700",
             "fill": PAPER_THEME.muted,
         },
-    ).text = "n = 1-100  ·  each packing normalized to its own container"
+    ).text = SUMMARY_REPOSITORY
+    _append_summary_legend(root, built, spec=spec)
+    sub(
+        root,
+        "text",
+        {
+            "data-feature": "explainer",
+            "x": str(SUMMARY_WIDTH // 2),
+            "y": format_svg_number(SUMMARY_EXPLAINER_BASELINE),
+            "text-anchor": "middle",
+            "font-family": SUMMARY_FONT,
+            "font-size": SUMMARY_FOOTER_SIZE,
+            "font-weight": SUMMARY_SMALL_WEIGHT,
+            "fill": SUMMARY_SMALL_FILL,
+        },
+    ).text = SUMMARY_EXPLAINER
+    sub(
+        root,
+        "text",
+        {
+            "data-feature": "credit",
+            "x": str(SUMMARY_WIDTH // 2),
+            "y": format_svg_number(SUMMARY_CREDIT_BASELINE),
+            "text-anchor": "middle",
+            "font-family": SUMMARY_FONT,
+            "font-size": SUMMARY_FOOTER_SIZE,
+            "font-weight": SUMMARY_SMALL_WEIGHT,
+            "fill": SUMMARY_SMALL_FILL,
+        },
+    ).text = SUMMARY_CREDIT
     for item in built:
-        _append_summary_card(root, item)
+        _append_summary_card(root, item, spec=spec)
     return serialize_svg(root)
 
 
@@ -800,6 +1188,7 @@ def _update_png_preview(svg_text: str) -> None:
             temporary.write_bytes(content)
 
 
+@cache
 def _build_case(n: int, plan: SourcePlan) -> BuiltCase:
     case = _frontier_case(n)
     witness = _build_witness(case, plan)
@@ -886,6 +1275,16 @@ def _manifest_entry(built: BuiltCase) -> dict:
 
 
 def expected_outputs() -> tuple[dict[Path, str], dict]:
+    """Every derived artifact, and the manifest describing them.
+
+    Callers get copies so the memo cannot be mutated underneath them.
+    """
+    outputs, manifest = _expected_outputs()
+    return dict(outputs), copy.deepcopy(manifest)
+
+
+@cache
+def _expected_outputs() -> tuple[dict[Path, str], dict]:
     plans = source_plans()
     source_index = _source_index(plans)
     built = [_build_case(n, plans[n]) for n in range(1, 101)]
@@ -941,6 +1340,11 @@ def expected_outputs() -> tuple[dict[Path, str], dict]:
 
 
 def update() -> None:
+    # The figure record decides every claim the drawing states, so refresh it
+    # first and drop the memo, or the render would use a stale one.
+    build_composite_figure_data.update()
+    _figure_entries.cache_clear()
+    clear_build_caches()
     outputs, _manifest = expected_outputs()
     for path, content in sorted(outputs.items(), key=lambda item: item[0].as_posix()):
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -949,6 +1353,7 @@ def update() -> None:
         with atomic_output_file(path) as temporary:
             temporary.write_text(content, encoding="utf-8")
     _update_png_preview(outputs[SUMMARY_SVG])
+    render_composite_pdf.update()
     print(
         "known-best atlas updated: 100 witnesses, 100 house renderings, "
         "1 composite, 100 frontier links"

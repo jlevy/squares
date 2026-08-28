@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from decimal import ROUND_HALF_UP, Decimal, localcontext
 from functools import cache
+from math import atan2, cos, degrees, hypot, radians, sin
 
 import mpmath as mp
 
@@ -22,6 +23,38 @@ SHADE_ADJACENCY_TOLERANCE = Decimal("0.002")
 ANGLE_WORKING_DIGITS = 60
 QUARTER_TURN_RADIANS = Decimal("1.57079632679489661923132169163975144209858469968755291048747")
 ANGLE_CLASS_CONTRACT = "tolerance-seeded; strict-full-side contacts merged"
+HALF_QUARTER_RADIANS = QUARTER_TURN_RADIANS / 2
+RIGHT_ANGLE_HUE = 0
+DIAGONAL_HUE = 1
+RESERVED_HUES = 2
+HUE_ORDER_CONTRACT = (
+    "right angles pinned to hue 0; 45 degree tilts pinned to hue 1; "
+    "remaining classes assigned from hue 2 by descending class size"
+)
+
+# Shade ramp. Lightness is compressed toward a mid band so no family is very dark
+# or very pale, which matters because the four-contact shade carpets dense
+# packings. Saturation CLIMBS with lightness (a negative drop): raising HSL
+# lightness already costs chroma, so letting saturation fall too would grey the
+# few-contact shades out.
+SHADE_LIGHTNESS_CENTER = Decimal("0.52")
+SHADE_LIGHTNESS_COMPRESSION = Decimal("0.85")
+SHADE_SATURATION_FLOOR = Decimal("0.50")
+SHADE_SATURATION_CAP = Decimal("0.85")
+SHADE_SATURATION_DROP = Decimal("-0.12")
+# The two darkest shades carry most of the atlas and are already where they want
+# to be, so the ramp is widened only at the light end: shade i above the second
+# is lifted by this much per step. Keeps the dark end fixed while opening a
+# little more air between the lighter three.
+SHADE_LIGHT_SPREAD = Decimal("0.015")
+
+
+def _spread_light_end(lightnesses: tuple[Decimal, ...]) -> tuple[Decimal, ...]:
+    """Push the shades above the second progressively lighter."""
+    return tuple(
+        lightness + SHADE_LIGHT_SPREAD * Decimal(max(0, index - 1))
+        for index, lightness in enumerate(lightnesses)
+    )
 
 
 @dataclass(frozen=True)
@@ -41,6 +74,44 @@ class SquareColor:
     contact_sides: int | None
     full_side_contacts: tuple[str, ...]
     maximum_contact_residual: Decimal | None
+
+
+@dataclass
+class AngleHueRegistry:
+    """Share angle-class hue identities across panels in one render."""
+
+    hue_count: int
+    angle_tolerance_radians: Decimal
+    reserved: int = RESERVED_HUES
+    _representatives: list[Decimal] = field(default_factory=list)
+
+    def hues_for(self, representatives: tuple[Decimal, ...]) -> tuple[int, ...]:
+        """Return stable hues, preferring the closest earlier class match."""
+        registrations: list[int | None] = [None] * len(representatives)
+        used_registrations: set[int] = set()
+        candidates = sorted(
+            (
+                (_orientation_distance(representative, registered), current, previous)
+                for current, representative in enumerate(representatives)
+                for previous, registered in enumerate(self._representatives)
+                if _orientation_distance(representative, registered)
+                <= self.angle_tolerance_radians
+            )
+        )
+        for _distance, current, previous in candidates:
+            if registrations[current] is None and previous not in used_registrations:
+                registrations[current] = previous
+                used_registrations.add(previous)
+        for current, representative in enumerate(representatives):
+            if registrations[current] is None:
+                registrations[current] = len(self._representatives)
+                self._representatives.append(representative)
+        span = self.hue_count - self.reserved
+        return tuple(
+            self.reserved + registration % span
+            for registration in registrations
+            if registration is not None
+        )
 
 
 def _hue_slots(count: int) -> tuple[int, ...]:
@@ -65,14 +136,143 @@ def _hue_slots(count: int) -> tuple[int, ...]:
     return tuple(selected)
 
 
+@dataclass(frozen=True)
+class PerceptualRamp:
+    """A shade ramp stated in OkLCh instead of HSL.
+
+    Equal steps in HSL lightness are not equal steps in perceived lightness, and
+    the error is worst for hues that already sit near the top of the luminance
+    range. Slot 1's yellow-green travelled only 0.072 OkL across its five shades
+    where slot 0's travelled 0.185, so its shades were nearly indistinguishable.
+    Both pinned families therefore state their range perceptually. Chroma is
+    clamped per shade to what the sRGB gamut holds at that lightness.
+    """
+
+    dark_end: Decimal
+    light_end: Decimal
+    chroma: Decimal
+
+
+# Keyed by hue index. Only the two pinned families need this; every other family
+# uses the HSL ramp, which is well behaved at their lightnesses.
+PERCEPTUAL_SHADE_RAMPS = {
+    0: PerceptualRamp(Decimal("0.50"), Decimal("0.70"), Decimal("0.080")),
+    1: PerceptualRamp(Decimal("0.68"), Decimal("0.862"), Decimal("0.150")),
+}
+
+
+def _srgb_to_linear(channel: float) -> float:
+    return channel / 12.92 if channel <= 0.04045 else ((channel + 0.055) / 1.055) ** 2.4
+
+
+def _linear_to_srgb(channel: float) -> float:
+    return 12.92 * channel if channel <= 0.0031308 else 1.055 * channel ** (1 / 2.4) - 0.055
+
+
+def hex_oklch(fill: str) -> tuple[float, float, float]:
+    """Convert an sRGB hex fill to OkLCh lightness, chroma and hue degrees."""
+    red, green, blue = (
+        _srgb_to_linear(int(fill[offset : offset + 2], 16) / 255) for offset in (1, 3, 5)
+    )
+    long = (0.4122214708 * red + 0.5363325363 * green + 0.0514459929 * blue) ** (1 / 3)
+    medium = (0.2119034982 * red + 0.6806995451 * green + 0.1073969566 * blue) ** (1 / 3)
+    short = (0.0883024619 * red + 0.2817188376 * green + 0.6299787005 * blue) ** (1 / 3)
+    lightness = 0.2104542553 * long + 0.7936177850 * medium - 0.0040720468 * short
+    green_red = 1.9779984951 * long - 2.4285922050 * medium + 0.4505937099 * short
+    blue_yellow = 0.0259040371 * long + 0.7827717662 * medium - 0.8086757660 * short
+    return (
+        lightness,
+        hypot(green_red, blue_yellow),
+        degrees(atan2(blue_yellow, green_red)) % 360,
+    )
+
+
+def _oklch_linear_rgb(
+    lightness: float, chroma: float, hue: float
+) -> tuple[float, float, float]:
+    green_red = chroma * cos(radians(hue))
+    blue_yellow = chroma * sin(radians(hue))
+    long = (lightness + 0.3963377774 * green_red + 0.2158037573 * blue_yellow) ** 3
+    medium = (lightness - 0.1055613458 * green_red - 0.0638541728 * blue_yellow) ** 3
+    short = (lightness - 0.0894841775 * green_red - 1.2914855480 * blue_yellow) ** 3
+    return (
+        4.0767416621 * long - 3.3077115913 * medium + 0.2309699292 * short,
+        -1.2684380046 * long + 2.6097574011 * medium - 0.3413193965 * short,
+        -0.0041960863 * long - 0.7034186147 * medium + 1.7076147010 * short,
+    )
+
+
+def _oklch_hex(lightness: float, chroma: float, hue: float) -> str:
+    channels = []
+    for value in _oklch_linear_rgb(lightness, chroma, hue):
+        bounded = _linear_to_srgb(min(1.0, max(0.0, value)))
+        channels.append(min(255, max(0, round(bounded * 255))))
+    return f"#{channels[0]:02x}{channels[1]:02x}{channels[2]:02x}"
+
+
+def _maximum_chroma(lightness: float, hue: float) -> float:
+    """Largest chroma this hue holds at this lightness inside sRGB."""
+    low, high = 0.0, 0.45
+    for _step in range(48):
+        middle = (low + high) / 2
+        if all(-1e-4 <= c <= 1 + 1e-4 for c in _oklch_linear_rgb(lightness, middle, hue)):
+            low = middle
+        else:
+            high = middle
+    return low
+
+
+def _perceptual_family(fill: str, ramp: PerceptualRamp, count: int) -> tuple[str, ...]:
+    hue = hex_oklch(fill)[2]
+    if count == 1:
+        return (_oklch_hex(float(ramp.light_end), float(ramp.chroma), hue),)
+    dark, light = float(ramp.dark_end), float(ramp.light_end)
+    step = (light - dark) / (count - 1)
+    lightnesses = _spread_light_end(
+        tuple(Decimal(str(dark + step * index)) for index in range(count))
+    )
+    return tuple(
+        _oklch_hex(
+            float(lightness),
+            min(float(ramp.chroma), 0.95 * _maximum_chroma(float(lightness), hue)),
+            hue,
+        )
+        for lightness in lightnesses
+    )
+
+
 def _shade_lightnesses(count: int, *, base: Decimal, span: Decimal) -> tuple[Decimal, ...]:
+    """Lightness ramp for one family, compressed toward the mid band."""
     if count <= 0:
         raise ValueError("shade count must be positive")
+    centered = (
+        SHADE_LIGHTNESS_CENTER + (base - SHADE_LIGHTNESS_CENTER) * SHADE_LIGHTNESS_COMPRESSION
+    )
     if count == 1:
-        return (base,)
+        return (centered,)
     step = span / Decimal(count - 1)
-    minimum = base - span / 2
-    return tuple(minimum + step * index for index in range(count))
+    minimum = centered - span / 4
+    return _spread_light_end(tuple(minimum + step * index for index in range(count)))
+
+
+def _shade_saturations(count: int, *, base: Decimal) -> tuple[Decimal, ...]:
+    """Saturation across one family, climbing with lightness."""
+    if count <= 0:
+        raise ValueError("shade count must be positive")
+    saturation = min(max(base, SHADE_SATURATION_FLOOR), SHADE_SATURATION_CAP)
+    if count == 1:
+        return (saturation,)
+    return tuple(
+        min(
+            Decimal(1),
+            max(
+                Decimal("0.05"),
+                saturation
+                * (Decimal(1) - SHADE_SATURATION_DROP * (Decimal(index) / Decimal(count - 1))),
+            ),
+        )
+        for index in range(count)
+    )
 
 
 def _channel(value: Decimal) -> int:
@@ -109,7 +309,9 @@ def _hex_hsl(fill: str) -> tuple[Decimal, Decimal, Decimal]:
         return Decimal(0), Decimal(0), lightness
     saturation = difference / (Decimal(1) - abs(Decimal(2) * lightness - Decimal(1)))
     if maximum == red:
-        hue_sector = ((green - blue) / difference) % Decimal(6)
+        hue_sector = (green - blue) / difference
+        if hue_sector < 0:
+            hue_sector += Decimal(6)
     elif maximum == green:
         hue_sector = (blue - red) / difference + 2
     else:
@@ -141,26 +343,46 @@ def square_fill_palette(
     shades_per_hue: int,
     lightness_span: Decimal = Decimal("0.2"),
 ) -> tuple[tuple[str, ...], ...]:
-    """Derive stable, narrow shade families from the original fill palette."""
+    """Derive one shade family per hue from the fixed base palette."""
     if hue_count <= 0:
         raise ValueError("hue count must be positive")
+    if shades_per_hue <= 0:
+        raise ValueError("shade count must be positive")
     if not lightness_span.is_finite() or not Decimal(0) <= lightness_span <= Decimal("0.3"):
         raise ValueError("lightness span must be between 0 and 0.3")
-    return tuple(
-        tuple(
-            _hsl_hex(
-                hue_sector=hue_sector,
-                saturation=saturation,
-                lightness=lightness,
+    families: list[tuple[str, ...]] = []
+    for index, (hue_sector, saturation, base_lightness) in enumerate(
+        _base_hsl_palette(hue_count)
+    ):
+        ramp = PERCEPTUAL_SHADE_RAMPS.get(index)
+        if ramp is not None:
+            families.append(
+                _perceptual_family(
+                    _hsl_hex(
+                        hue_sector=hue_sector,
+                        saturation=saturation,
+                        lightness=base_lightness,
+                    ),
+                    ramp,
+                    shades_per_hue,
+                )
             )
-            for lightness in _shade_lightnesses(
-                shades_per_hue,
-                base=base_lightness,
-                span=lightness_span,
+            continue
+        families.append(
+            tuple(
+                _hsl_hex(
+                    hue_sector=hue_sector, saturation=shade_saturation, lightness=lightness
+                )
+                for shade_saturation, lightness in zip(
+                    _shade_saturations(shades_per_hue, base=saturation),
+                    _shade_lightnesses(
+                        shades_per_hue, base=base_lightness, span=lightness_span
+                    ),
+                    strict=True,
+                )
             )
         )
-        for hue_sector, saturation, base_lightness in _base_hsl_palette(hue_count)
-    )
+    return tuple(families)
 
 
 def _square_orientation(square: SquareGeometry) -> Decimal:
@@ -236,6 +458,50 @@ def _angle_classes(
         orientations,
         tuple(_orientation_representative(orientations, members) for members in frozen_classes),
     )
+
+
+def _pinned_hue(representative: Decimal, *, tolerance: Decimal) -> int | None:
+    """Pin the two orientations that recur across packings to fixed hues."""
+    if _orientation_distance(representative, Decimal(0)) <= tolerance:
+        return RIGHT_ANGLE_HUE
+    if _orientation_distance(representative, HALF_QUARTER_RADIANS) <= tolerance:
+        return DIAGONAL_HUE
+    return None
+
+
+def _angle_class_hues(
+    classes: tuple[tuple[int, ...], ...],
+    representatives: tuple[Decimal, ...],
+    *,
+    hue_count: int,
+    tolerance: Decimal,
+    registry: AngleHueRegistry | None,
+) -> tuple[int, ...]:
+    """Assign hues: pinned angles first, then the rest by descending size.
+
+    Hues 0 and 1 stay reserved whether or not a packing contains those
+    orientations, so a right angle is the same colour in every packing.
+    Orientation is stored modulo a quarter turn, so a class sitting just under
+    90 degrees is a right angle; ``_orientation_distance`` compares modulo that
+    seam rather than against zero directly.
+    """
+    pins = [
+        _pinned_hue(representative, tolerance=tolerance) for representative in representatives
+    ]
+    unpinned = sorted(
+        (index for index, pin in enumerate(pins) if pin is None),
+        key=lambda index: (-len(classes[index]), min(classes[index])),
+    )
+    hues = [pin if pin is not None else 0 for pin in pins]
+    if registry is not None:
+        shared = registry.hues_for(tuple(representatives[index] for index in unpinned))
+        for position, index in enumerate(unpinned):
+            hues[index] = shared[position]
+    else:
+        span = max(1, hue_count - RESERVED_HUES)
+        for position, index in enumerate(unpinned):
+            hues[index] = RESERVED_HUES + position % span
+    return tuple(hues)
 
 
 def _center(square: SquareGeometry) -> tuple[Decimal, Decimal]:
@@ -539,7 +805,12 @@ def _contact_shade(contact_sides: int, *, shades_per_hue: int) -> int:
     return int(scaled.quantize(Decimal(1), rounding=ROUND_HALF_UP))
 
 
-def assign_square_colors(frame: PackingFrame, spec: RenderSpec) -> dict[str, SquareColor]:
+def assign_square_colors(
+    frame: PackingFrame,
+    spec: RenderSpec,
+    *,
+    angle_hue_registry: AngleHueRegistry | None = None,
+) -> dict[str, SquareColor]:
     """Assign one deterministic color to every square in stable frame order."""
     if spec.hue_count <= 0 or spec.shades_per_hue <= 0:
         raise ValueError("color hue and shade counts must be positive")
@@ -556,6 +827,12 @@ def assign_square_colors(frame: PackingFrame, spec: RenderSpec) -> dict[str, Squ
         or spec.shade_lightness_span > Decimal("0.3")
     ):
         raise ValueError("color shade lightness span must be between 0 and 0.3")
+    if angle_hue_registry is not None and (
+        angle_hue_registry.reserved != RESERVED_HUES
+        or angle_hue_registry.hue_count != spec.hue_count
+        or angle_hue_registry.angle_tolerance_radians != spec.angle_tolerance_radians
+    ):
+        raise ValueError("angle hue registry must match the render color contract")
 
     orientations = tuple(_square_orientation(square) for square in frame.squares)
     contacts_by_square = _full_side_contacts(
@@ -583,9 +860,15 @@ def assign_square_colors(frame: PackingFrame, spec: RenderSpec) -> dict[str, Squ
             for class_index, members in enumerate(angle_classes)
             for square_index in members
         }
+        class_hues = _angle_class_hues(
+            angle_classes,
+            representatives,
+            hue_count=spec.hue_count,
+            tolerance=spec.angle_tolerance_radians,
+            registry=angle_hue_registry,
+        )
         hue_by_square = {
-            index: class_by_square[index] % spec.hue_count
-            for index in range(len(frame.squares))
+            index: class_hues[class_by_square[index]] for index in range(len(frame.squares))
         }
         shade_groups = {index: list(members) for index, members in enumerate(angle_classes)}
     else:

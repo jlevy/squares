@@ -19,6 +19,14 @@ SCHEMA = ROOT / "witnesses/witness.schema.yaml"
 UNITSQUARE_RESULTS = ROOT / "resources/web/unitsquare-release1-2026/results.json"
 
 
+@pytest.fixture
+def isolated_seed_build_cache():
+    """For the test that repoints SOURCE_ROOT; see clear_build_caches."""
+    prospective.clear_build_caches()
+    yield
+    prospective.clear_build_caches()
+
+
 def test_seed_replays_every_safe_source_and_excludes_kingbird() -> None:
     retained = json.loads(MANIFEST.read_text(encoding="utf-8"))
     _outputs, expected = expected_outputs()
@@ -109,7 +117,9 @@ def test_seed_cross_fields_reject_source_annotation_and_identity_mutations() -> 
 
 
 def test_fetch_rejects_corrupted_retained_source_before_use(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    isolated_seed_build_cache: None,
 ) -> None:
     monkeypatch.setattr(prospective, "SOURCE_ROOT", tmp_path)
     entry = next(

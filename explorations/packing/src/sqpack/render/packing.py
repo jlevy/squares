@@ -5,12 +5,18 @@ from __future__ import annotations
 from decimal import Decimal
 from xml.etree import ElementTree as ET
 
-from sqpack.render.color import ANGLE_CLASS_CONTRACT, SquareColor, assign_square_colors
+from sqpack.render.color import (
+    ANGLE_CLASS_CONTRACT,
+    AngleHueRegistry,
+    SquareColor,
+    assign_square_colors,
+)
 from sqpack.render.model import (
     ActiveFeature,
     AnnotationLevel,
     ContactFeature,
     DetectedContactFeature,
+    HueScheme,
     Overlay,
     PackingFrame,
     PackingTrajectory,
@@ -472,6 +478,7 @@ def _append_packing_panel(
     shared_side: Decimal,
     spec: RenderSpec,
     motion: bool,
+    angle_hue_registry: AngleHueRegistry | None,
 ) -> Decimal:
     left = Decimal(LAYOUT.margin + panel_index * (panel_width + LAYOUT.panel_gap))
     top = Decimal(LAYOUT.margin)
@@ -518,7 +525,7 @@ def _append_packing_panel(
         "g",
         {"id": f"panel-{panel_index}-fills", "data-layer": "fills"},
     )
-    colors = assign_square_colors(frame, spec)
+    colors = assign_square_colors(frame, spec, angle_hue_registry=angle_hue_registry)
     for square, _index, projected in projected_squares:
         _append_square_fill(
             fills,
@@ -661,6 +668,13 @@ def build_packing_document(
         {"width": str(width), "height": str(height), "fill": PAPER_THEME.background},
     )
     shared_side = _shared_extent(frames)
+    angle_hue_registry = (
+        AngleHueRegistry(spec.hue_count, spec.angle_tolerance_radians)
+        if spec.hue_scheme is HueScheme.ANGLE and spec.view is ViewLevel.COMPARISON
+        else None
+    )
+    if angle_hue_registry is not None:
+        assign_square_colors(frames[-1], spec, angle_hue_registry=angle_hue_registry)
     scales = []
     for index, frame in enumerate(frames):
         scales.append(
@@ -673,6 +687,7 @@ def build_packing_document(
                 shared_side=shared_side,
                 spec=spec,
                 motion=spec.view is ViewLevel.TRAJECTORY,
+                angle_hue_registry=angle_hue_registry,
             )
         )
     if spec.view is ViewLevel.TRAJECTORY and trajectory is not None:

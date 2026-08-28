@@ -1,0 +1,134 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:CompositeFigure/v1
+title: Composite figure record
+description: >-
+  Every fact the n=1..100 composite states, one entry per case, with the
+  provenance of each. The figure renders from this record and from nothing else,
+  so what the drawing asserts and what this file asserts cannot drift apart.
+
+  Provenance is carried per fact rather than inferred, because a missing value
+  has several distinct meanings that a bare null cannot separate: transcribed
+  from a source, missed in transcription, the source is silent, or nobody knows.
+  Reviewing the corpus programmatically means asking which facts are "derived"
+  or "absent" here while a source could supply them.
+type: object
+additionalProperties: false
+required: [range, generated_by, provenance_vocabulary, totals, entries]
+properties:
+  range:
+    type: object
+    additionalProperties: false
+    required: [first_n, last_n, count]
+    properties:
+      first_n: {const: 1}
+      last_n: {const: 100}
+      count: {const: 100}
+  generated_by: {type: string, minLength: 1}
+  provenance_vocabulary:
+    type: object
+    additionalProperties: false
+    description: What each provenance value asserts. Kept in the data so a reader need not consult code.
+    required: [frontier, catalogue, derived, absent]
+    properties:
+      frontier: {type: string, minLength: 1}
+      catalogue: {type: string, minLength: 1}
+      derived: {type: string, minLength: 1}
+      absent: {type: string, minLength: 1}
+  totals:
+    type: object
+    additionalProperties: false
+    description: Counts the figure's legend prints. Recomputed on every build, so a legend cannot go stale against the entries.
+    required:
+      - proved_optimal
+      - exact_value_known
+      - only_known_numerically
+      - rigidity_established
+      - degree_known
+      - degree_recorded_upstream
+      - degree_derived_here
+    properties:
+      proved_optimal: {type: integer, minimum: 0, maximum: 100}
+      exact_value_known: {type: integer, minimum: 0, maximum: 100}
+      only_known_numerically: {type: integer, minimum: 0, maximum: 100}
+      rigidity_established: {type: integer, minimum: 0, maximum: 100}
+      degree_known: {type: integer, minimum: 0, maximum: 100}
+      degree_recorded_upstream: {type: integer, minimum: 0, maximum: 100}
+      degree_derived_here: {type: integer, minimum: 0, maximum: 100}
+  entries:
+    type: array
+    minItems: 100
+    maxItems: 100
+    items: {$ref: '#/$defs/entry'}
+$defs:
+  provenance:
+    enum: [frontier, catalogue, derived, absent]
+  entry:
+    type: object
+    additionalProperties: false
+    required: [n, side, optimality, exactness, rigidity, badges]
+    properties:
+      n: {type: integer, minimum: 1, maximum: 100}
+      side:
+        type: object
+        additionalProperties: false
+        description: The number under the packing, and whether it is an equality or a bound.
+        required: [value, relation, display, provenance]
+        properties:
+          value: {type: string, minLength: 1}
+          relation:
+            enum: [equality, upper-bound]
+            description: equality only where optimality.status is proved.
+          display: {type: string, minLength: 1}
+          provenance: {$ref: '#/$defs/provenance'}
+      optimality:
+        type: object
+        additionalProperties: false
+        required: [status, provenance]
+        properties:
+          status: {enum: [proved, open]}
+          provenance: {$ref: '#/$defs/provenance'}
+      exactness:
+        type: object
+        additionalProperties: false
+        description: >-
+          Whether s(n) is pinned exactly. state is closed-form when a radical is
+          on record, minimal-polynomial when only a defining polynomial is, and
+          numeric-only when neither is. numeric-only is a statement about what
+          the sources give, never a claim that the value is not algebraic.
+        required: [state, degree, degree_provenance]
+        properties:
+          state: {enum: [closed-form, minimal-polynomial, numeric-only]}
+          exact_form: {type: [string, 'null']}
+          minimal_polynomial: {type: [string, 'null']}
+          degree: {type: [integer, 'null'], minimum: 1}
+          degree_provenance: {$ref: '#/$defs/provenance'}
+          degree_recorded_upstream:
+            type: boolean
+            description: >-
+              False with a non-null degree marks a fact this repository can
+              compute but does not store. That pairing is the review target.
+      rigidity:
+        type: object
+        additionalProperties: false
+        description: >-
+          established means a sound argument exists. not-established means no
+          argument is on hand, NEVER that the packing is known to have play.
+        required: [state, basis, provenance]
+        properties:
+          state: {enum: [established, not-established]}
+          basis:
+            enum: [perfect-square-tiling, catalogue-annotation, none]
+          evidence: {type: [string, 'null']}
+          provenance: {$ref: '#/$defs/provenance'}
+      badges:
+        type: array
+        maxItems: 3
+        description: Rendered left to right. Each is fully determined by the facts above.
+        items:
+          type: object
+          additionalProperties: false
+          required: [glyph, meaning, style]
+          properties:
+            glyph: {enum: ['O', '=', "≈", 'R']}
+            meaning: {type: string, minLength: 1}
+            style: {enum: [solid, muted]}

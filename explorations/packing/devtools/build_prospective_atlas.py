@@ -4,12 +4,14 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import time
 import urllib.error
 import urllib.request
 from dataclasses import replace
+from functools import cache
 from pathlib import Path
 
 from strif import atomic_output_file
@@ -290,7 +292,24 @@ def _manifest_entry(entry: dict, witness: dict) -> dict:
     }
 
 
+def clear_build_caches() -> None:
+    """Drop the memoized seed build.
+
+    ``_expected_outputs`` reads the module-level source roots, so a caller that
+    repoints one must clear the memo on the way in and out rather than read, or
+    leave behind, a build made against the other root.
+    """
+    _expected_outputs.cache_clear()
+
+
 def expected_outputs() -> tuple[dict[Path, str], dict]:
+    """Derived seed artifacts and manifest; callers get copies of the memo."""
+    outputs, manifest = _expected_outputs()
+    return dict(outputs), copy.deepcopy(manifest)
+
+
+@cache
+def _expected_outputs() -> tuple[dict[Path, str], dict]:
     entries = eligible_entries()
     outputs: dict[Path, str] = {}
     manifest_entries = []

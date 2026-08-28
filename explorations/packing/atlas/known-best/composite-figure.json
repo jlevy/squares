@@ -1,0 +1,3678 @@
+{
+  "figure": {
+    "entries": [
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "1",
+          "minimal_polynomial": "s - 1 = 0",
+          "state": "closed-form"
+        },
+        "n": 1,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "1 unit squares exactly tile a 1 by 1 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(1) = 1",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "1.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "2",
+          "minimal_polynomial": "s - 2 = 0",
+          "state": "closed-form"
+        },
+        "n": 2,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(2) = 2",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "2.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "2",
+          "minimal_polynomial": "s - 2 = 0",
+          "state": "closed-form"
+        },
+        "n": 3,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(3) = 2",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "2.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "2",
+          "minimal_polynomial": "s - 2 = 0",
+          "state": "closed-form"
+        },
+        "n": 4,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "4 unit squares exactly tile a 2 by 2 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(4) = 2",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "2.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "2 + (1/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 8*s + 7 = 0",
+          "state": "closed-form"
+        },
+        "n": 5,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "catalogue-annotation",
+          "evidence": "Kingbird annotates this packing \"Rigid.\"",
+          "provenance": "catalogue",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(5) = 2.707107",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "2.70710678118654"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "3",
+          "minimal_polynomial": "s - 3 = 0",
+          "state": "closed-form"
+        },
+        "n": 6,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(6) = 3",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "3.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "3",
+          "minimal_polynomial": "s - 3 = 0",
+          "state": "closed-form"
+        },
+        "n": 7,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(7) = 3",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "3.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "3",
+          "minimal_polynomial": "s - 3 = 0",
+          "state": "closed-form"
+        },
+        "n": 8,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(8) = 3",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "3.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "3",
+          "minimal_polynomial": "s - 3 = 0",
+          "state": "closed-form"
+        },
+        "n": 9,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "9 unit squares exactly tile a 3 by 3 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(9) = 3",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "3.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "3 + (1/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 12*s + 17 = 0",
+          "state": "closed-form"
+        },
+        "n": 10,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(10) = 3.707107",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "3.70710678118654"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 8,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "s^8 - 20s^7 + 178s^6 - 842s^5 + 1923s^4 - 496s^3 - 6754s^2 + 12420s - 6865 = 0",
+          "state": "minimal-polynomial"
+        },
+        "n": 11,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "catalogue-annotation",
+          "evidence": "Kingbird annotates this packing \"Rigid.\"",
+          "provenance": "catalogue",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(11) ≤ 3.877084",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "3.87708359002281"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "4",
+          "minimal_polynomial": "s - 4 = 0",
+          "state": "closed-form"
+        },
+        "n": 12,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(12) ≤ 4",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "4.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "4",
+          "minimal_polynomial": "s - 4 = 0",
+          "state": "closed-form"
+        },
+        "n": 13,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(13) = 4",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "4.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "4",
+          "minimal_polynomial": "s - 4 = 0",
+          "state": "closed-form"
+        },
+        "n": 14,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(14) = 4",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "4.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "4",
+          "minimal_polynomial": "s - 4 = 0",
+          "state": "closed-form"
+        },
+        "n": 15,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(15) = 4",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "4.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "4",
+          "minimal_polynomial": "s - 4 = 0",
+          "state": "closed-form"
+        },
+        "n": 16,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "16 unit squares exactly tile a 4 by 4 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(16) = 4",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "4.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 18,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "4775s^{18}-190430s^{17}+3501307s^{16}-39318012s^{15}+300416928s^{14}-1640654808s^{13}+6502333062s^{12}-18310153596s^{11}+32970034584s^{10}-18522084588s^9-93528282146s^8+350268230564s^7-662986732745s^6+808819596154s^5-660388959899s^4+358189195800s^3-126167814419s^2+26662976550s-2631254953=0",
+          "state": "minimal-polynomial"
+        },
+        "n": 17,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(17) ≤ 4.67553",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "4.67553009360455"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "(7/2) + (1/2)sqrt(7)",
+          "minimal_polynomial": "2*s**2 - 14*s + 21 = 0",
+          "state": "closed-form"
+        },
+        "n": 18,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(18) ≤ 4.822876",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "4.82287565553229"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "3 + (4/3)sqrt(2)",
+          "minimal_polynomial": "9*s**2 - 54*s + 49 = 0",
+          "state": "closed-form"
+        },
+        "n": 19,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(19) ≤ 4.885618",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "4.88561808316412"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "5",
+          "minimal_polynomial": "s - 5 = 0",
+          "state": "closed-form"
+        },
+        "n": 20,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(20) ≤ 5",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "5.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "5",
+          "minimal_polynomial": "s - 5 = 0",
+          "state": "closed-form"
+        },
+        "n": 21,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(21) ≤ 5",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "5.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "5",
+          "minimal_polynomial": "s - 5 = 0",
+          "state": "closed-form"
+        },
+        "n": 22,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(22) = 5",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "5.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "5",
+          "minimal_polynomial": "s - 5 = 0",
+          "state": "closed-form"
+        },
+        "n": 23,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(23) = 5",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "5.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "5",
+          "minimal_polynomial": "s - 5 = 0",
+          "state": "closed-form"
+        },
+        "n": 24,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(24) = 5",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "5.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "5",
+          "minimal_polynomial": "s - 5 = 0",
+          "state": "closed-form"
+        },
+        "n": 25,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "25 unit squares exactly tile a 5 by 5 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(25) = 5",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "5.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "(7/2) + (3/2)sqrt(2)",
+          "minimal_polynomial": "4*s**2 - 28*s + 31 = 0",
+          "state": "closed-form"
+        },
+        "n": 26,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(26) ≤ 5.62132",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "5.62132034355964"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "5 + (1/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 20*s + 49 = 0",
+          "state": "closed-form"
+        },
+        "n": 27,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(27) ≤ 5.707107",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "5.70710678118654"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 6,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "s^6-24s^5+212s^4-812s^3+1025s^2+882s-1615=0",
+          "state": "minimal-polynomial"
+        },
+        "n": 28,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "catalogue-annotation",
+          "evidence": "Kingbird annotates this packing \"Rigid.\"",
+          "provenance": "catalogue",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(28) ≤ 5.824445",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "5.82444461667405"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "n": 29,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(29) ≤ 5.933833",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "5.93383346267692"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "6",
+          "minimal_polynomial": "s - 6 = 0",
+          "state": "closed-form"
+        },
+        "n": 30,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(30) ≤ 6",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "6.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "6",
+          "minimal_polynomial": "s - 6 = 0",
+          "state": "closed-form"
+        },
+        "n": 31,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(31) ≤ 6",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "6.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "6",
+          "minimal_polynomial": "s - 6 = 0",
+          "state": "closed-form"
+        },
+        "n": 32,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(32) ≤ 6",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "6.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "6",
+          "minimal_polynomial": "s - 6 = 0",
+          "state": "closed-form"
+        },
+        "n": 33,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(33) = 6",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "6.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "6",
+          "minimal_polynomial": "s - 6 = 0",
+          "state": "closed-form"
+        },
+        "n": 34,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(34) = 6",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "6.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "6",
+          "minimal_polynomial": "s - 6 = 0",
+          "state": "closed-form"
+        },
+        "n": 35,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(35) = 6",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "6.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "6",
+          "minimal_polynomial": "s - 6 = 0",
+          "state": "closed-form"
+        },
+        "n": 36,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "36 unit squares exactly tile a 6 by 6 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(36) = 6",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "6.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 8,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "36s^8-2496s^7+59768s^6-733760s^5+5289248s^4-23462672s^3+63458276s^2-96673872s+64068561=0",
+          "state": "minimal-polynomial"
+        },
+        "n": 37,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(37) ≤ 6.59862",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "6.59861960924436"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "6 + (1/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 24*s + 71 = 0",
+          "state": "closed-form"
+        },
+        "n": 38,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(38) ≤ 6.707107",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "6.70710678118654"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 5,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "9s^5-171s^4+999s^3-1959s^2+1636s+166=0",
+          "state": "minimal-polynomial"
+        },
+        "n": 39,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(39) ≤ 6.810722",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "6.81072208306864"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "4 + 2 sqrt(2)",
+          "minimal_polynomial": "s**2 - 8*s + 8 = 0",
+          "state": "closed-form"
+        },
+        "n": 40,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "catalogue-annotation",
+          "evidence": "Kingbird annotates this packing \"Rigid.\"",
+          "provenance": "catalogue",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(40) ≤ 6.828427",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "6.82842712474619"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 42,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "144s^{42}-33248s^{41}+3740531s^{40}-273229120s^{39}+14568177368s^{38}-604345329616s^{37}+20303247278518s^{36}-567715628580628s^{35}+13476130642163772s^{34}-275622556171657148s^{33}+4913118839607229315s^{32}-77021965442580593792s^{31}+1069597207525632250760s^{30}-13234280063158548374864s^{29}+146588403144234109714492s^{28}-1459056537531761947694412s^{27}+13090219490685085049164304s^{26}-106115059640167069135194108s^{25}+778709778173545540562913112s^{24}-5180160724110239826615572336s^{23}+31267085211757278545052994144s^{22}-171331300125735569491450805184s^{21}+852412555299622931388971786184s^{20}-3849639590878015114188275848896s^{19}+15771592794879254264477226832440s^{18}-58556476540137831140983424890112s^{17}+196742347065286547712609208667628s^{16}-597075318553361988026330293830592s^{15}+1632807555219691500831155576662224s^{14}-4011703707846363075271797958908992s^{13}+8823126218415607049547609565313808s^{12}-17292499393880618294971765830702496s^{11}+30033784585675389426408059928238624s^{10}-45904080196423917967770013765165584s^9+61200148145342575539111090507985440s^8-70370773645277985938951580858638528s^7+68756165329665893470887878785349152s^6-55949600498940958320310297578555360s^5+36867848125763978702951438802849616s^4-18873332426700882570902855047275200s^3+7023595398126017089078028623797120s^2-1682258751137636203725622554061120s+192930128676231207430057837613968=0",
+          "state": "minimal-polynomial"
+        },
+        "n": 41,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(41) ≤ 6.926693",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "6.92669309446880"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "7",
+          "minimal_polynomial": "s - 7 = 0",
+          "state": "closed-form"
+        },
+        "n": 42,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(42) ≤ 7",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "7.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "7",
+          "minimal_polynomial": "s - 7 = 0",
+          "state": "closed-form"
+        },
+        "n": 43,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(43) ≤ 7",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "7.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "7",
+          "minimal_polynomial": "s - 7 = 0",
+          "state": "closed-form"
+        },
+        "n": 44,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(44) ≤ 7",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "7.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "7",
+          "minimal_polynomial": "s - 7 = 0",
+          "state": "closed-form"
+        },
+        "n": 45,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(45) ≤ 7",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "7.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "7",
+          "minimal_polynomial": "s - 7 = 0",
+          "state": "closed-form"
+        },
+        "n": 46,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(46) = 7",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "7.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "7",
+          "minimal_polynomial": "s - 7 = 0",
+          "state": "closed-form"
+        },
+        "n": 47,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(47) = 7",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "7.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "7",
+          "minimal_polynomial": "s - 7 = 0",
+          "state": "closed-form"
+        },
+        "n": 48,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(48) = 7",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "7.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "7",
+          "minimal_polynomial": "s - 7 = 0",
+          "state": "closed-form"
+        },
+        "n": 49,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "49 unit squares exactly tile a 7 by 7 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(49) = 7",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "7.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "7 + (4/7)",
+          "minimal_polynomial": "7*s - 53 = 0",
+          "state": "closed-form"
+        },
+        "n": 50,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(50) ≤ 7.571429",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "7.57142857142857"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 12,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "s^{12}-52s^{11}+1168s^{10}-14808s^9+116250s^8-584196s^7+1885642s^6-3878332s^5+5185145s^4-4669592s^3-1070690s^2+14600744s-1119939=0",
+          "state": "minimal-polynomial"
+        },
+        "n": 51,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(51) ≤ 7.700799",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "7.70079923541701"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "7 + (1/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 28*s + 97 = 0",
+          "state": "closed-form"
+        },
+        "n": 52,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(52) ≤ 7.707107",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "7.70710678118654"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "(13/2) + (1/2)sqrt(7)",
+          "minimal_polynomial": "2*s**2 - 26*s + 81 = 0",
+          "state": "closed-form"
+        },
+        "n": 53,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(53) ≤ 7.822876",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "7.82287565553229"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 4,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "7 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))",
+          "minimal_polynomial": "4*s**4 - 112*s**3 + 1164*s**2 - 5304*s + 8897 = 0",
+          "state": "closed-form"
+        },
+        "n": 54,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(54) ≤ 7.846667",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "7.84666719284348"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "n": 55,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(55) ≤ 7.945771",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "7.94577100750391"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "8",
+          "minimal_polynomial": "s - 8 = 0",
+          "state": "closed-form"
+        },
+        "n": 56,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(56) ≤ 8",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "8.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "8",
+          "minimal_polynomial": "s - 8 = 0",
+          "state": "closed-form"
+        },
+        "n": 57,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(57) ≤ 8",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "8.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "8",
+          "minimal_polynomial": "s - 8 = 0",
+          "state": "closed-form"
+        },
+        "n": 58,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(58) ≤ 8",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "8.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "8",
+          "minimal_polynomial": "s - 8 = 0",
+          "state": "closed-form"
+        },
+        "n": 59,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(59) ≤ 8",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "8.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "8",
+          "minimal_polynomial": "s - 8 = 0",
+          "state": "closed-form"
+        },
+        "n": 60,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(60) ≤ 8",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "8.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "8",
+          "minimal_polynomial": "s - 8 = 0",
+          "state": "closed-form"
+        },
+        "n": 61,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(61) ≤ 8",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "8.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "8",
+          "minimal_polynomial": "s - 8 = 0",
+          "state": "closed-form"
+        },
+        "n": 62,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(62) = 8",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "8.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "8",
+          "minimal_polynomial": "s - 8 = 0",
+          "state": "closed-form"
+        },
+        "n": 63,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(63) = 8",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "8.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "8",
+          "minimal_polynomial": "s - 8 = 0",
+          "state": "closed-form"
+        },
+        "n": 64,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "64 unit squares exactly tile a 8 by 8 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(64) = 8",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "8.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "5 + (5/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 20*s + 25 = 0",
+          "state": "closed-form"
+        },
+        "n": 65,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(65) ≤ 8.535534",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "8.53553390593273"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "3 + 4 sqrt(2)",
+          "minimal_polynomial": "s**2 - 6*s - 23 = 0",
+          "state": "closed-form"
+        },
+        "n": 66,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(66) ≤ 8.656854",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "8.65685424949238"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "8 + (1/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 32*s + 127 = 0",
+          "state": "closed-form"
+        },
+        "n": 67,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(67) ≤ 8.707107",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "8.70710678118654"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "n": 68,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(68) ≤ 8.803383",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "8.803383074716108386903836683375989697670063329"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "n": 69,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(69) ≤ 8.827206",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "8.827205507815920656880680735618736931225314831"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 4,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "23s^4-742s^3+8848s^2-45876s+86229=0",
+          "state": "minimal-polynomial"
+        },
+        "n": 70,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(70) ≤ 8.881667",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "8.88166675700900"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "n": 71,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(71) ≤ 8.944072",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "8.94407155757031"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "9",
+          "minimal_polynomial": "s - 9 = 0",
+          "state": "closed-form"
+        },
+        "n": 72,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(72) ≤ 9",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "9",
+          "minimal_polynomial": "s - 9 = 0",
+          "state": "closed-form"
+        },
+        "n": 73,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(73) ≤ 9",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "9",
+          "minimal_polynomial": "s - 9 = 0",
+          "state": "closed-form"
+        },
+        "n": 74,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(74) ≤ 9",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "9",
+          "minimal_polynomial": "s - 9 = 0",
+          "state": "closed-form"
+        },
+        "n": 75,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(75) ≤ 9",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "9",
+          "minimal_polynomial": "s - 9 = 0",
+          "state": "closed-form"
+        },
+        "n": 76,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(76) ≤ 9",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "9",
+          "minimal_polynomial": "s - 9 = 0",
+          "state": "closed-form"
+        },
+        "n": 77,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(77) ≤ 9",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "9",
+          "minimal_polynomial": "s - 9 = 0",
+          "state": "closed-form"
+        },
+        "n": 78,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(78) ≤ 9",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "9",
+          "minimal_polynomial": "s - 9 = 0",
+          "state": "closed-form"
+        },
+        "n": 79,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(79) = 9",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "9.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "9",
+          "minimal_polynomial": "s - 9 = 0",
+          "state": "closed-form"
+        },
+        "n": 80,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(80) = 9",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "9.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "9",
+          "minimal_polynomial": "s - 9 = 0",
+          "state": "closed-form"
+        },
+        "n": 81,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "81 unit squares exactly tile a 9 by 9 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(81) = 9",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "9.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "6 + (5/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 24*s + 47 = 0",
+          "state": "closed-form"
+        },
+        "n": 82,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(82) ≤ 9.535534",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.53553390593273"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 24,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "46438209s^{24}+1718447880s^{23}-1304818741864s^{22}+154362940868008s^{21}-10223870917986092s^{20}+463012769729234068s^{19}-15608677475881443482s^{18}+410530364971106359132s^{17}-8675319117762080311978s^{16}+150196459602374087471728s^{15}-2158879193002672091253360s^{14}+25993038455067669296355532s^{13}-263613888105247221344935027s^{12}+2258335015809616506745502008s^{11}-16347943921555337654669478150s^{10}+99786776593815833271369617220s^9-511154425074511891757096094175s^8+2180187656593439512672814134216s^7-7652314463979073976449593048904s^6+21727853135387976484209118127392s^5-48671720700899577518293563957136s^4+82801528406446840092722047620736s^3-100540002112755895115349929950336s^2+77621257841393908308227797286912s-28634116465193128516311336597248=0",
+          "state": "minimal-polynomial"
+        },
+        "n": 83,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(83) ≤ 9.634826",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.63482562092335"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "9 + (1/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 36*s + 161 = 0",
+          "state": "closed-form"
+        },
+        "n": 84,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(84) ≤ 9.707107",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.70710678118654"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "(11/2) + 3 sqrt(2)",
+          "minimal_polynomial": "4*s**2 - 44*s + 49 = 0",
+          "state": "closed-form"
+        },
+        "n": 85,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(85) ≤ 9.742641",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.74264068711928"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "(17/2) + (1/2)sqrt(7)",
+          "minimal_polynomial": "2*s**2 - 34*s + 141 = 0",
+          "state": "closed-form"
+        },
+        "n": 86,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(86) ≤ 9.822876",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.82287565553229"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 44,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "629407744s^{44}-222450679808s^{43}+38325385756672s^{42}-4288660082065408s^{41}+350399070882492416s^{40}-22278553803273224192s^{39}+1147211537906515146752s^{38}-49165134066758334425088s^{37}+1788289659043280951068608s^{36}-56019383059428524897963904s^{35}+1528333582392710799260183056s^{34}-36630930585616880256564390736s^{33}+776543722002840046363087727297s^{32}-14636706341423531247516707219912s^{31}+246257253722069243863014484299360s^{30}-3708577084615935587358116609301672s^{29}+50074372636267901037924496964125186s^{28}-606479613834953151228303026322056904s^{27}+6582752938907446459101615245660789892s^{26}-63854390288109107749984304630348881800s^{25}+550526226273592526694018724167940975017s^{24}-4175960161221920130654884897696082820472s^{23}+27333308361495923310409348740175473961584s^{22}-148034863695064180910459529146184056115272s^{21}+589148297042380492962295030591016626388382s^{20}-802163371353907808165482957048549332378608s^{19}-13170004747477877616293633845629891862121520s^{18}+167392797210322735047434221678453545578017040s^{17}-1289394300288384411131628488173364706102979582s^{16}+7787489258551633023583289334261547248712408216s^{15}-39385778676485241094858686353246027501471904572s^{14}+170965915920626557796308089870520546518118278944s^{13}-643154540172295005723535558458606455031058629500s^{12}+2101724893624280757011728452832803445528481662064s^{11}-5952381674143195979828863351096699278368526615456s^{10}+14521989109696597926922222011586158834006883331752s^9-30220186517608350885252195687799573775025255492983s^8+52871604435569645714797351939274760286735693270688s^7-76162701057186797152957613136211362895325167372620s^6+87583595303336820271204366145801190135485625910672s^5-76547308527338366706545567730043731458801541686452s^4+46512363388633322446129276907281520687047667820792s^3-15838102486745813882030359867355235545830428100484s^2+479096262707743168168387643797274914963482844224s+1204779998286697546929705082841769576290141607076=0",
+          "state": "minimal-polynomial"
+        },
+        "n": 87,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(87) ≤ 9.838817",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.83881743996618"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 20,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "254016s^{20}-43279488s^{19}+3506260608s^{18}-179642577984s^{17}+6530192527760s^{16}-179088304328704s^{15}+3846118270819200s^{14}-66261902137415296s^{13}+930479746642904384s^{12}-10759858027891736896s^{11}+103070340120029179008s^{10}-819709665351861223904s^9+5405590814889373243192s^8-29412949608198679086720s^7+130831566348158107359392s^6-468664620024162429231904s^5+1321046745485882223459068s^4-2825402176181244872057384s^3+4315682289270565775115128s^2-4199847844458434080013540s+1959329723251932809573425=0",
+          "state": "minimal-polynomial"
+        },
+        "n": 88,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(88) ≤ 9.888153",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.88815305375857"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "5 + (7/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 20*s + 1 = 0",
+          "state": "closed-form"
+        },
+        "n": 89,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(89) ≤ 9.949747",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "9.94974746830583"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "10",
+          "minimal_polynomial": "s - 10 = 0",
+          "state": "closed-form"
+        },
+        "n": 90,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(90) ≤ 10",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "10.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "10",
+          "minimal_polynomial": "s - 10 = 0",
+          "state": "closed-form"
+        },
+        "n": 91,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(91) ≤ 10",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "10.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "10",
+          "minimal_polynomial": "s - 10 = 0",
+          "state": "closed-form"
+        },
+        "n": 92,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(92) ≤ 10",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "10.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "10",
+          "minimal_polynomial": "s - 10 = 0",
+          "state": "closed-form"
+        },
+        "n": 93,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(93) ≤ 10",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "10.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "10",
+          "minimal_polynomial": "s - 10 = 0",
+          "state": "closed-form"
+        },
+        "n": 94,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(94) ≤ 10",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "10.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "10",
+          "minimal_polynomial": "s - 10 = 0",
+          "state": "closed-form"
+        },
+        "n": 95,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(95) ≤ 10",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "10.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "10",
+          "minimal_polynomial": "s - 10 = 0",
+          "state": "closed-form"
+        },
+        "n": 96,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(96) ≤ 10",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "10.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "10",
+          "minimal_polynomial": "s - 10 = 0",
+          "state": "closed-form"
+        },
+        "n": 97,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(97) ≤ 10",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "10.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "10",
+          "minimal_polynomial": "s - 10 = 0",
+          "state": "closed-form"
+        },
+        "n": 98,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(98) = 10",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "10.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "10",
+          "minimal_polynomial": "s - 10 = 0",
+          "state": "closed-form"
+        },
+        "n": 99,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(99) = 10",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "10.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "10",
+          "minimal_polynomial": "s - 10 = 0",
+          "state": "closed-form"
+        },
+        "n": 100,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "100 unit squares exactly tile a 10 by 10 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(100) = 10",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "10.0"
+        }
+      }
+    ],
+    "generated_by": "python -m devtools.build_composite_figure_data",
+    "provenance_vocabulary": {
+      "absent": "No source on hand supplies it. Not a claim that the fact is unknown to mathematics.",
+      "catalogue": "Transcribed here from the retained catalogue, not carried by the frontier record.",
+      "derived": "Computed by this repository from a fact it already holds.",
+      "frontier": "Read from the case's frontier record, which transcribes a retained source."
+    },
+    "range": {
+      "count": 100,
+      "first_n": 1,
+      "last_n": 100
+    },
+    "totals": {
+      "degree_derived_here": 84,
+      "degree_known": 95,
+      "degree_recorded_upstream": 11,
+      "exact_value_known": 95,
+      "only_known_numerically": 5,
+      "proved_optimal": 35,
+      "rigidity_established": 14
+    }
+  },
+  "softschema": {
+    "contract": "packing.squares:CompositeFigure/v1",
+    "envelope": "figure",
+    "schema": "composite-figure.schema.yaml",
+    "status": "enforced"
+  }
+}
