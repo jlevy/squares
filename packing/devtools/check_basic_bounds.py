@@ -58,9 +58,20 @@ def build_grid(n: int) -> tuple[list[list[tuple[Fraction, Fraction]]], Fraction]
 
 
 def verify_grid(n: int) -> Report:
-    """Verify one grid fallback with exact rational predicate evaluation."""
+    """Verify one grid fallback with exact rational predicate evaluation.
+
+    Bucketed, and the pruning is sound rather than convenient. `verify_packing` first
+    establishes that every piece is a unit square, and two unit squares overlap only if
+    their centres are within `sqrt(2)` of each other, so a bucket of side 2 with its
+    eight neighbours contains every pair that could overlap. Nothing is skipped that a
+    full sweep would have judged.
+
+    The sweep it replaces is quadratic in `n` at each of 96 sizes: 166,650 exact pair
+    tests to re-establish that unit squares on integer lattice points do not overlap,
+    against 57,665 bucketed (D-370).
+    """
     squares, side = build_grid(n)
-    return verify_packing(squares, side, sign=_sign)
+    return verify_packing(squares, side, sign=_sign, bucket=True)
 
 
 def _nagamochi_form(n: int) -> str:

@@ -9823,12 +9823,28 @@ defects:
     descent over 208 witness files and `10.29s` of exact geometry. Nothing was validated
     wrongly; the step was priced as if schemas were expensive when they are not.
   fix: >-
-    `sqpack.yamlio` now bases both loaders on `yaml.CSafeLoader` where libyaml is present,
-    keeping the duplicate-key refusal, and adds a `safe_load` that the 31 modules calling
-    `yaml.safe_load` directly now use. Measured `67.4s` to `25.2s` for the whole step, and
-    `11.3x` on `defects.yaml` alone. Separating the exact verification from the schema
-    check, and the witness sweep from both, is `BC-075`: it is a step-boundary change
-    rather than a loader swap, and the tier it belongs in is that block's question.
+    Three changes, `67.4s` to `15.5s`. `sqpack.yamlio` bases both loaders on
+    `yaml.CSafeLoader` where libyaml is present, keeping the duplicate-key refusal, and
+    adds a `safe_load` the 31 modules calling `yaml.safe_load` directly now use --
+    `11.3x` on `defects.yaml` alone. `Draft202012Validator` is built once per schema
+    rather than once per document, which had been re-reading and re-compiling each of 23
+    schemas fourteen times over. And the grid replay is bucketed, which is sound rather
+    than convenient: `verify_packing` establishes that every piece is a unit square, two
+    unit squares overlap only if their centres are within `sqrt(2)`, and a bucket of side
+    2 with its eight neighbours contains every such pair -- 166,650 exact pair tests
+    become 57,665 and nothing a full sweep would have judged is skipped.
+
+    ruamel.yaml was measured as an alternative and rejected. On 81 of this repository's
+    own files, 1 MB: PyYAML `CSafeLoader` `0.128s`, PyYAML pure `1.370s`, ruamel
+    `typ=safe` `1.991s`, ruamel `typ=safe, pure=False` `1.976s`, ruamel round-trip
+    `2.730s`. Its `pure=False` buys nothing in this build and its value, comment-preserving
+    round-trips, is not something this repository needs.
+
+    What remains is `6.06s` of jsonschema descent over 208 witness files carrying
+    3.7 MB of exact rationals, and `3.58s` of exact grid verification. Both are `BC-075`:
+    the first is a dependency question (a compiled validator such as `fastjsonschema`)
+    and the second is a step-boundary one, since exact geometry does not belong in a step
+    named for schemas.
   regression: >-
     `test_yaml_is_read_only_through_the_project_loader` walks `src`, `devtools` and
     `cases` for `yaml.safe_load` or a bare `yaml.SafeLoader` and fails on either, so the

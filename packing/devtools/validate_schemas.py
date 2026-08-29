@@ -21,6 +21,7 @@ Markdown artifacts.
 
 from __future__ import annotations
 
+import functools
 import pathlib
 import re
 import sys
@@ -85,6 +86,16 @@ def payload_and_meta(path: pathlib.Path) -> tuple[dict, dict]:
     return {k: v for k, v in doc.items() if k != "softschema"}, meta
 
 
+@functools.cache
+def _validator(schema_path: pathlib.Path) -> Draft202012Validator:
+    """One compiled validator per schema, not per document.
+
+    329 artifacts declare 23 distinct schemas, so building a validator at each call site
+    re-read and re-compiled every schema fourteen times over (D-370).
+    """
+    return Draft202012Validator(load_yaml(schema_path.read_text(encoding="utf-8")))
+
+
 def check(path: pathlib.Path) -> list[str]:
     errs: list[str] = []
     try:
@@ -106,7 +117,7 @@ def check(path: pathlib.Path) -> list[str]:
     schema_path = (path.parent / meta["schema"]).resolve()
     if not schema_path.exists():
         return [*errs, f"declared schema not found: {meta['schema']}"]
-    v = Draft202012Validator(load_yaml(schema_path.read_text(encoding="utf-8")))
+    v = _validator(schema_path)
     for e in sorted(v.iter_errors(payload), key=lambda e: list(e.path)):
         loc = "/".join(str(x) for x in e.path) or "<root>"
         errs.append(f"{loc}: {e.message}")
