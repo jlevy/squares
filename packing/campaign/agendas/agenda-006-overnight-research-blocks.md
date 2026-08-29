@@ -315,7 +315,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [29]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Can the pose model carry a chirality, so a layout built from mirror groups can be
@@ -329,17 +329,29 @@ agenda:
       Either the n = 29 contact system assembles with equations that vanish at the
       published pose, or a typed statement of what a chirality costs the feature naming
       and why that price is not worth paying.
+    artifacts:
+    - src/sqpack/promote/contacts.py
+    - src/sqpack/promote/system.py
+    - atlas/known-best/contact-structure.schema.yaml
+    - atlas/known-best/contact-structures.json
+    - tests/test_promote_system.py
+    - devtools/controls.yaml
+    - campaign/agent-sessions/session-040-block6-chirality.md
     bead: think-km5r
     depends_on: []
     workflows: [pipeline-improvement]
     next_evidence: >-
-      Measured in session-038: read as rotations, the reflected squares leave the assembled
-      residual at `2.0` instead of the noise floor. The refusal is correct and it is also
-      the thing standing between assembly and the case it was built for.
+      Closed in session-040. The corner model now reflects the local x axis before the
+      rotation turns it, and the n = 29 assembled residual falls from `2.0` to `1.3e-15`
+      across 94 equations with the n = 11 calibration unmoved at `4.4e-16`, rank 30 and
+      shortfall 4. The assembled n = 29 system has rank 81 against 88 unknowns.
     note: >-
-      A middle layer. The feature indices in a contact structure refer to a corner order,
-      so re-winding a square renames its features; that coupling is the actual problem and
-      the reason this was not done in passing.
+      A middle layer. This commitment was written expecting the hard part to be that
+      feature indices refer to a corner order, so re-winding a square would rename its
+      features. That cost was not paid: reflecting the *local* axis leaves the corner
+      indices alone and changes only where each one sits, so no feature name changed and no
+      structure needed re-indexing. Recorded because the expectation was wrong and a reader
+      should meet the correction where the expectation was set.
   - id: BC-059
     purpose: tool_validation
     owner_focus: correctness
@@ -363,10 +375,16 @@ agenda:
     next_evidence: >-
       The rank measurement is already in hand and its gap is wide -- `0.511` counted against
       `7.3e-42` discarded at n = 5 -- so how many conditions are needed is settled and only
-      what they are remains.
+      what they are remains. session-040 adds the measurement that says what kind they
+      cannot be: the projection of `e_s` onto the contact Jacobian's null space is
+      `1.00e-16` at n = 5 but `1.86e-1` at n = 11 and `1.14e-1` at n = 29, so
+      contact-preserving first-order motions that change the side exist at the two larger
+      sizes and no first-order stationarity condition can close them.
     note: >-
       The layer between assembly and the exact solve. Without it `solve` has nothing square
-      to work on.
+      to work on. Take n = 5 as the discriminating case rather than n = 29: it is the one
+      size where the first-order condition already holds, so a formulation that closes only
+      n = 5 has not been tested against the obstruction the other two carry.
   - id: BC-060
     purpose: tool_validation
     owner_focus: correctness

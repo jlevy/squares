@@ -17,10 +17,17 @@ the promotion spec expected and a future reader should meet them as measurements
   ninety degrees, so `t_i = t_j` is false for a class member a quarter or half turn from
   another.  Emitting those identities left `n = 11` at the noise floor -- its classes
   happen to have equal angles -- and drove `n = 29` to a residual of exactly `pi`.
-- **the `n = 29` layout contains reflected squares.**  Seven of twenty-nine are built
-  inside `scale(-1 1)` mirror groups, and a centre-plus-rotation pose cannot represent a
-  clockwise winding, so assembly refuses them by name rather than describing their
-  mirror images.
+- **a pose is a centre, an angle, *and* a chirality.**  Seven of the `n = 29` layout's
+  twenty-nine squares are built inside `scale(-1 1)` mirror groups, and a
+  centre-plus-rotation cannot produce a clockwise winding.  Read as rotations they left
+  the `n = 29` residual at `2.0`; with the reflection carried in the corner model it
+  falls to `1.3e-15`.  That number is why chirality is data on the structure rather than
+  something assembly infers.
+
+The reflected case is exercised on a *mirrored copy of `n = 11`* rather than on `n = 29`
+itself.  Mirroring an exact packing gives an all-`-1` chirality whose right answer is
+already known -- same contacts, same side -- so the reflected path is checked against
+something rather than only against itself, and without the hundred-digit walk.
 """
 
 from __future__ import annotations
@@ -41,6 +48,7 @@ from sqpack.promote.system import (
     pose_values,
     residual_at,
 )
+from sqpack.verify import float_sign
 
 PRECISION = 40
 
@@ -206,22 +214,82 @@ def closure_is_sized_by_the_measured_shortfall() -> None:
         mp.mp.dps = previous
 
 
-def reflected_squares_are_refused_by_name() -> None:
-    """A clockwise winding is not a pose this model can describe."""
+def a_mirrored_packing_assembles_and_vanishes() -> None:
+    """The reflected path, against a known answer: mirror `n = 11` and re-derive.
+
+    Reflecting `x -> side - x` flips every winding without moving a single contact, so
+    the mirrored packing must extract to an all-`-1` chirality, assemble, and satisfy its
+    own equations exactly as the original does.  Before chirality it could not: the same
+    corners read as rotations describe eleven different squares.
+    """
+    previous = mp.mp.dps
+    mp.mp.dps = PRECISION
+    try:
+        squares, side, field = trump11.build()
+        field.refine_to(PRECISION)
+        numbers, side_value = as_floats(field, squares, side)
+        mirrored = [[(side_value - x, y) for x, y in square] for square in numbers]
+
+        structure = extract_contacts(mirrored, side_value, sign=float_sign(1e-9))
+        assert structure.chirality == (-1,) * 11, (
+            f"mirroring flipped no windings: {structure.chirality}"
+        )
+        upright = extract_contacts(squares, side, sign=field.sign)
+        assert structure.chirality != upright.chirality
+        assert len(structure.pair_contacts) == len(upright.pair_contacts), (
+            "mirroring changed the contact count, so this is not the same packing "
+            "reflected and the comparison below proves nothing"
+        )
+
+        system = assemble(structure)
+        assert system.chirality == (-1,) * 11
+        residuals = residual_at(system, pose_values(system, mirrored, side_value))
+        worst = max(abs(value) for value in residuals)
+        assert worst < 1e-9, (
+            f"the mirrored packing does not satisfy the equations assembled for it "
+            f"(worst {worst:.3e}); the reflection is not in the corner model"
+        )
+    finally:
+        mp.mp.dps = previous
+
+
+def a_pose_of_the_wrong_chirality_is_refused() -> None:
+    """Substituting a mirrored pose into an unmirrored system is a typed refusal.
+
+    This is the failure the old `reflected-squares` refusal was standing in for.  It is
+    no longer that a reflection cannot be posed -- it can -- but that *these* corners
+    are not poses of *this* system, whose equations were written with the other signs
+    baked in.  Left unchecked it would surface as residuals that read like a bad
+    structure rather than a mismatched caller.
+    """
     squares, side, field = trump11.build()
-    structure = extract_contacts(squares, side, sign=field.sign)
-    system = assemble(structure)
+    system = assemble(extract_contacts(squares, side, sign=field.sign))
     numbers, side_value = as_floats(field, squares, side)
-    mirrored = [list(reversed(square)) for square in numbers]
+    mirrored = [[(side_value - x, y) for x, y in square] for square in numbers]
     try:
         pose_values(system, mirrored, side_value)
     except SystemAssemblyError as error:
-        assert error.kind == "reflected-squares"
+        assert error.kind == "chirality-mismatch", error.kind
         return
     raise AssertionError(
-        "a clockwise-wound square was posed as a rotation, which describes its mirror "
-        "image rather than the square"
+        "a mirrored pose was accepted by a system assembled for the upright packing"
     )
+
+
+def a_structure_without_chirality_is_refused() -> None:
+    """An extraction from before the field existed is refused, not defaulted to `+1`.
+
+    Defaulting would be right for most packings and wrong for exactly the one that
+    motivated the field, which is the worst available behaviour.
+    """
+    squares, side, field = trump11.build()
+    structure = extract_contacts(squares, side, sign=field.sign)
+    try:
+        assemble(dataclasses.replace(structure, chirality=()))
+    except SystemAssemblyError as error:
+        assert error.kind == "chirality-missing", error.kind
+        return
+    raise AssertionError("a structure carrying no chirality was assembled anyway")
 
 
 def assembly_refuses_an_unidentified_structure() -> None:
@@ -264,7 +332,9 @@ def main() -> int:
     the_packing_satisfies_its_own_equations()
     counting_rows_disagrees_with_the_rank()
     closure_is_sized_by_the_measured_shortfall()
-    reflected_squares_are_refused_by_name()
+    a_mirrored_packing_assembles_and_vanishes()
+    a_pose_of_the_wrong_chirality_is_refused()
+    a_structure_without_chirality_is_refused()
     assembly_refuses_an_unidentified_structure()
     extraction_still_agrees_with_a_second_case()
     print("contact feature and system assembly contract selftest passed")

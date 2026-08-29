@@ -334,13 +334,19 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 039](../../../../packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md).
-Sessions 027 through 039 are terminal, and agenda-004 closed on measurement rather than
-opinion.
-Open BC-058 under `think-km5r` as the next bounded driver: give the pose model a
-chirality so the seven reflected `n = 29` squares can be assembled, or state what that
-costs the feature naming.
-The continuation runs the missing middle layers of the promotion pipeline first; the
+[session 040](../../../../packing/campaign/agent-sessions/session-040-block6-chirality.md).
+Sessions 027 through 040 are terminal, and agenda-004 closed on measurement rather than
+opinion. Open BC-059 under `think-9c40` as the next bounded driver: derive the
+stationarity conditions `close` currently only sizes, so a closed system can actually be
+solved. It starts from a measurement rather than a count.
+The contact Jacobian is one condition short at `n = 5`, four at `n = 11` and seven at
+`n = 29`, and the projection of `e_s` onto its null space is `1.00e-16` at `n = 5`
+against `1.86e-1` and `1.14e-1` at the other two: contact-preserving first-order motions
+that change the side exist at the two larger sizes, so no first-order stationarity
+condition can close them and `n = 5` is the discriminating case.
+A pose is now a centre, an angle and a chirality, so the reflected `n = 29` squares
+assemble rather than being refused and the assembled residual is `1.3e-15`. The
+continuation runs the missing middle layers of the promotion pipeline first; the
 efficiency and research cells are deliberately last.
 Sessions 035 through 037 are terminal and closed agenda-005 block A together with
 `BC-045`, so precision is manufactured in-repository, the `n = 29` contact structure is

@@ -747,12 +747,36 @@ controls:
   run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
   expect: "the n = 11 equation count moved"
 
-- name: system assembly - reflected squares posed as rotations instead of refused
+# --- the reflected pose model (BC-058) ---
+# The refusal these replace is gone: a reflection is now representable, so the controls
+# ask whether it is represented *correctly* rather than whether it is turned away.
+- name: system assembly - the corner model drops the chirality sign
   file: src/sqpack/promote/system.py
-  replace: ["    reflected = [index for index, square in enumerate(squares) if _winding(square) <= 0]",
-            "    reflected = []"]
+  replace: ["    local_x, local_y = half * offset_x * pose.sigmas[index], half * offset_y",
+            "    local_x, local_y = half * offset_x, half * offset_y"]
   run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
-  expect: "was posed as a rotation"
+  expect: "the reflection is not in the corner model"
+
+- name: system assembly - a structure with no chirality is defaulted to all +1
+  file: src/sqpack/promote/system.py
+  replace: ["    signs = getattr(structure, \"chirality\", ()) or ()",
+            "    signs = getattr(structure, \"chirality\", ()) or (1,) * structure.n"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "carrying no chirality was assembled anyway"
+
+- name: system assembly - a pose of the wrong chirality is substituted unchecked
+  file: src/sqpack/promote/system.py
+  replace: ["    disagreeing = [i for i, (a, b) in enumerate(zip(expected, measured, strict=True)) if a != b]",
+            "    disagreeing = []"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "mirrored pose was accepted"
+
+- name: contact extraction - every square reported counter-clockwise regardless of winding
+  file: src/sqpack/promote/contacts.py
+  replace: ["    chirality = tuple(_winding(square, sign) for square in squares)",
+            "    chirality = tuple(1 for _ in squares)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "mirroring flipped no windings"
 
 - name: system assembly - angle identities emitted for a modulo-ninety class
   file: src/sqpack/promote/system.py

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 358
+count: 360
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9321,3 +9321,76 @@ defects:
     obvious detector rather than built in passing.
   bead: think-qs6k
   recorded_in: packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md
+- id: D-359
+  title: The generated atlas SVG's coordinate precision is inherited from ambient state
+  date: '2026-08-29'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: unknown; the emission has never pinned its digits
+  severity: medium
+  status: outstanding
+  what: >-
+    `sqpack.render.numbers.format_svg_number` renders a `ScalarSource` from its
+    `projected` decimal, whose digit count is whatever precision that scalar was last
+    refined to. Nothing downstream quantises it. So `devtools.build_known_best_atlas`
+    emits the `n = 11` card's corners with 27 fractional digits in a fresh process and
+    with 50 in a process where any earlier caller has run `field.refine_to(40)` on the
+    shared Trump field -- the same geometry, a different file.
+  consequence: >-
+    `known-best-1-100.svg` is not reproducible from its inputs alone, and
+    `test_known_best_composite_png_is_derived_from_current_svg` -- which asserts the
+    stored PNG's receipt matches the hash of the SVG the builder currently produces --
+    passes or fails on test ordering rather than on whether the PNG is stale. It passes
+    today because no test that refines a shared field runs before it in the gate's
+    ordering, which is not a property anybody chose. The failure is silent in the
+    direction that matters: a genuinely stale PNG would be indistinguishable from this.
+  fix: >-
+    Not fixed here, and deliberately so. Quantising at the emission site changes the byte
+    content of every stored SVG in the repository and every PNG receipt derived from one,
+    which is a regeneration and re-review rather than a fix made in passing during an
+    unrelated block. Recorded with a reproduction instead.
+  regression: >-
+    `uv run --frozen --group dev python -m pytest tests/test_promote_system.py
+    tests/test_known_best_atlas.py -q -p no:randomly` fails on the composite receipt;
+    either module alone passes. That command is the detector until the emission is
+    pinned.
+  bead: think-mt4h
+  recorded_in: packing/campaign/agent-sessions/session-040-block6-chirality.md
+- id: D-360
+  title: A null-space finding was read off a filtered display instead of being computed
+  date: '2026-08-29'
+  layer: record
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: about ten minutes, inside session-040 and never committed
+  severity: low
+  status: fixed
+  what: >-
+    session-040 phase 2 first recorded that the side `s` was absent from every vector of
+    the n = 29 contact Jacobian's null space, and drew a contrast with n = 11 where it
+    appears. Both halves came from a diagnostic printout that showed each vector's eight
+    largest coordinates and collected square indices only from names beginning `x`, `y` or
+    `t` -- which excludes `s` by construction. Computing the quantity the claim is about,
+    the norm of the projection of `e_s` onto the null space, gives `1.14e-1` at n = 29 and
+    `1.86e-1` at n = 11: the same behaviour, not opposite behaviour. The size that
+    actually differs is n = 5, at `1.00e-16`.
+  consequence: >-
+    None shipped; the error was caught before the commit and the corrected measurement is
+    what BC-059 receives. Had it not been, BC-059 would have inherited an inverted
+    discriminating pair and looked for a first-order closure at n = 29, where no
+    first-order condition can close the system at all.
+  fix: >-
+    The claim is replaced by the projection norms at all three sizes, and the session
+    record keeps a section saying what the first version said and why it was wrong.
+    Per-vector readings of a null space are not meaningful in any case: a null space is
+    defined up to an orthonormal basis, so only basis-independent quantities are claims
+    about it.
+  regression: >-
+    None automatic, and this is the second instance in run-002 of the same root cause --
+    D-358 substituted an estimate for a clock, this substituted a display for a
+    computation. The practice change is the same shape: when a record states a quantity,
+    compute that quantity rather than reading something correlated with it.
+  bead: think-km5r
+  recorded_in: packing/campaign/agent-sessions/session-040-block6-chirality.md

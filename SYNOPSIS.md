@@ -334,8 +334,20 @@ most of its budget unspent ([D-358](defects.md)). `BC-057` is closed in
 [session 039](packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md),
 which built the interval checker and recorded the `n = 29` certificate as evidence
 without promoting it.
-The next slice is **`BC-058` under `think-km5r`** — give the pose model a chirality so
-the seven reflected `n = 29` squares can be assembled.
+`BC-058` is closed in
+[session 040](packing/campaign/agent-sessions/session-040-block6-chirality.md): a pose
+is now a centre, an angle **and** a chirality, so the reflected squares are assembled
+rather than refused and the `n = 29` residual falls from `2.0` to `1.3e-15` with the
+`n = 11` calibration unmoved.
+The feature-renaming cost that commitment was written to weigh was not paid — reflecting
+the local axis leaves the corner indices alone.
+That assembled system has rank 81 against 88 unknowns, and measuring the projection of
+`e_s` onto its null space gives `1.14e-1` at `n = 29` and `1.86e-1` at `n = 11` against
+`1.00e-16` at `n = 5`. So contact-preserving first-order motions that change the side
+exist at the two larger sizes and not at `n = 5`, which means no first-order
+stationarity condition can close `n = 11` or `n = 29` — what forbids those motions is
+curvature. The next slice is **`BC-059` under `think-9c40`** — derive the stationarity
+conditions `close` currently only sizes.
 The continuation runs the missing middle layers first, with the efficiency and research
 cells deliberately last.
 The full ordering for the sessions after it — including which of the two `priority: 0`
@@ -2218,15 +2230,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 358 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 360 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 85 | asserted something false about the mathematics |
-| validity | 85 | was correct, but the measurement did not bear on the question |
+| validity | 86 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 137 | recorded something its own evidence contradicts |
-| robustness | 40 | did not finish, or finished only by luck |
+| robustness | 41 | did not finish, or finished only by luck |
 | performance | 11 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -2235,7 +2247,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-five defects in 358, and no soundness defect
+**The automated gate has caught forty-six defects in 360, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2263,6 +2275,17 @@ guards they would have exercised are asserted directly in their test instead.
 failed four times running, including against a clean tree, later fired correctly with
 nothing changed, so the standing-failure reading recorded first was wrong and the entry
 now says plainly that the trigger is not identified.
+
+A check can also pass for a reason other than the one it states.
+[D-359](defects.md) records that the generated atlas SVG’s coordinate precision is
+inherited rather than pinned: `format_svg_number` renders a scalar at whatever precision
+it was last refined to, so `known-best-1-100.svg` carries 27 fractional digits in a
+fresh process and 50 once anything has refined the shared field.
+The test asserting that the stored PNG was rendered from the current SVG therefore
+passes on test ordering, and a genuinely stale PNG would be indistinguishable from the
+passing case. It is open because pinning the emission re-hashes every stored SVG and PNG
+receipt in the repository, which is a regeneration and a review rather than a fix made
+in passing.
 
 The gate’s cost is itself a logged defect.
 [D-355](defects.md) records that verification runs the whole gate after every change, so

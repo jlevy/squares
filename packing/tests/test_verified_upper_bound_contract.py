@@ -83,6 +83,10 @@ DECLARED_CONSUMERS = {
     "packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md": (
         "records the certificate as evidence and says the ceiling was not moved to it"
     ),
+    "packing/campaign/agent-sessions/session-040-block6-chirality.md": (
+        "names the ceiling only as a stop condition: the block builds the pose model and "
+        "does not touch it"
+    ),
     "packing/campaign/ledger.md": (
         "generated: it renders the agenda notes below and inherits whatever they say, so "
         "it is an output of a consumer rather than one itself"

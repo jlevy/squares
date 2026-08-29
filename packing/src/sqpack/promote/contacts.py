@@ -88,7 +88,14 @@ class AngleClass:
 
 @dataclass(frozen=True)
 class ContactStructure:
-    """Everything the assembly step needs, plus everything it must not assume."""
+    """Everything the assembly step needs, plus everything it must not assume.
+
+    `chirality` is a pose property rather than a contact one, and it is here for the same
+    reason `angle_classes` is: assembly cannot write a square's corners without it.  A
+    unit square reached by a reflection has clockwise corner winding, which a centre and
+    an angle alone cannot produce, and seven of the twenty-nine squares of the `n = 29`
+    layout are built that way.
+    """
 
     n: int
     side: str
@@ -98,6 +105,7 @@ class ContactStructure:
     wall_contacts: tuple[Incidence, ...]
     ambiguous: tuple[Incidence, ...]
     angle_classes: tuple[AngleClass, ...]
+    chirality: tuple[int, ...]
     pairs_tested: int
     wall_relations_tested: int
     worst_contact_margin: str
@@ -140,6 +148,29 @@ def _pair_margin(first: Square, second: Square, sign: Callable):
         gap = _larger(second_low - first_high, first_low - second_high, sign)
         best = gap if best is None else _larger(best, gap, sign)
     return best
+
+
+def _winding(square: Square, sign: Callable) -> int:
+    """`+1` for counter-clockwise corner order, `-1` for clockwise.
+
+    Twice the signed area, decided by the injected sign so this stays exact wherever the
+    caller's scalars are.  A degenerate result is a refusal: a unit square has area one
+    and anything reporting zero here is not one.
+    """
+    total = None
+    for index in range(4):
+        x1, y1 = square[index]
+        x2, y2 = square[(index + 1) % 4]
+        term = x1 * y2 - x2 * y1
+        total = term if total is None else total + term
+    decided = sign(total)
+    if decided == 0:
+        raise ContactExtractionError(
+            "degenerate-square",
+            "a square reported zero signed area, so its corner order does not wind and "
+            "it is not a unit square",
+        )
+    return decided
 
 
 def _corners_at(square: Square, axis, value, sign: Callable) -> tuple[int, ...]:
@@ -343,6 +374,8 @@ def extract_contacts(
         for position, members in enumerate(classes)
     )
 
+    chirality = tuple(_winding(square, sign) for square in squares)
+
     worst_contact = max(contact_magnitudes) if contact_magnitudes else mp.mpf(0)
     smallest_strict = min(strict_magnitudes) if strict_magnitudes else None
     decades = None
@@ -358,6 +391,7 @@ def extract_contacts(
         wall_contacts=tuple(wall_contacts),
         ambiguous=tuple(ambiguous),
         angle_classes=angle_classes,
+        chirality=chirality,
         pairs_tested=count * (count - 1) // 2,
         wall_relations_tested=count * 4 * len(WALLS),
         worst_contact_margin=_decimal(worst_contact, 6),

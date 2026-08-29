@@ -29,6 +29,19 @@ continuum of nearby configurations shares them.  What singles out the optimum is
 the side cannot be decreased, which is a Lagrange or Fritz-John condition in determinant
 form. :func:`close` adds it.
 
+**The pose of a square is a centre, an angle, and a chirality.**  Not just the first
+two.  A packing may place a square by a reflection as readily as by a rotation, and a
+reflected square's corners wind clockwise, which no centre-plus-angle can produce.  The
+corner model is therefore
+
+    corner_k = c + R(t) . (sigma * ox_k / 2, oy_k / 2),    sigma = +1 or -1
+
+with `sigma` reflecting the *local* x axis before the rotation turns it.  `sigma = +1` is
+the ordinary case and the formula collapses to a rotation; `sigma = -1` reverses the
+corner order, which is exactly what a mirrored square needs.  Chirality is discrete data
+about the packing, read off the winding by :mod:`sqpack.promote.contacts` and carried
+through here -- it is never an unknown, because there is nothing continuous to solve for.
+
 Assembly is deliberately literal.  It writes down what the structure says and reports
 what that leaves, including when what it leaves is underdetermined.  It never invents a
 constraint to make the counts meet.
@@ -38,6 +51,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from dataclasses import dataclass
+from typing import NamedTuple
 
 import mpmath as mp
 import sympy as sp
@@ -83,6 +97,13 @@ class ContactSystem:
     equations: tuple[str, ...]
     sources: tuple[str, ...]
     angle_identities: int
+    #: Per-square `+1` / `-1`, in square order.  Kept on the system because the equations
+    #: were written with these signs baked in: a pose fed back in under the other
+    #: chirality solves a different system, so :func:`pose_values` checks rather than
+    #: assumes.  Required rather than defaulted, for the same reason
+    #: :func:`_chirality_of` refuses a structure without one -- a default would be right
+    #: for most packings and wrong for the one that motivated the field.
+    chirality: tuple[int, ...]
     closure: tuple[str, ...] = ()
 
     @property
@@ -114,6 +135,46 @@ class ContactSystem:
         )
 
 
+def _chirality_of(structure: ContactStructure) -> tuple[int, ...]:
+    """The structure's per-square chirality, refusing a structure that does not carry it.
+
+    An extraction that predates chirality cannot simply be read as all-`+1`.  That is the
+    common case, so the default would be right most of the time and wrong exactly where it
+    matters -- the `n = 29` layout, seven of whose squares are mirrored.  A silent default
+    turns that into a residual nobody looks at, so a structure without the field is a
+    refusal naming the fix.
+    """
+    signs = getattr(structure, "chirality", ()) or ()
+    if len(signs) != structure.n:
+        raise SystemAssemblyError(
+            "chirality-missing",
+            f"the structure carries {len(signs)} chirality signs for {structure.n} "
+            "squares; it predates the reflected-pose model and must be re-extracted "
+            "before its equations mean anything",
+        )
+    if any(sign not in (1, -1) for sign in signs):
+        raise SystemAssemblyError(
+            "chirality-malformed",
+            f"chirality must be +1 or -1 per square; got {sorted(set(signs))}",
+        )
+    return tuple(int(sign) for sign in signs)
+
+
+class _Pose(NamedTuple):
+    """The symbolic pose of every square: centres, angles, and chiralities.
+
+    Bundled rather than passed as four parallel sequences because they are only ever
+    used together and only ever indexed by the same square index -- and because writing
+    a corner needs all four, so any function that takes three of them is taking the
+    wrong three.
+    """
+
+    xs: list
+    ys: list
+    ts: list
+    sigmas: tuple[int, ...]
+
+
 def _symbols(n: int) -> tuple[list, list, list, sp.Symbol]:
     xs = [sp.Symbol(f"x{i}", real=True) for i in range(n)]
     ys = [sp.Symbol(f"y{i}", real=True) for i in range(n)]
@@ -121,15 +182,19 @@ def _symbols(n: int) -> tuple[list, list, list, sp.Symbol]:
     return xs, ys, ts, sp.Symbol("s", real=True, positive=True)
 
 
-def _corner(index: int, corner: int, xs, ys, ts):
-    """Corner `corner` of square `index`, as a symbolic point."""
+def _corner(index: int, corner: int, pose: _Pose):
+    """Corner `corner` of square `index`, as a symbolic point.
+
+    `pose.sigmas[index]` reflects the local x axis before the rotation, so a `-1` square
+    presents its corners in the reversed order a mirrored square actually has.
+    """
     offset_x, offset_y = CORNER_OFFSETS[corner]
     half = sp.Rational(1, 2)
-    cosine, sine = sp.cos(ts[index]), sp.sin(ts[index])
-    local_x, local_y = half * offset_x, half * offset_y
+    cosine, sine = sp.cos(pose.ts[index]), sp.sin(pose.ts[index])
+    local_x, local_y = half * offset_x * pose.sigmas[index], half * offset_y
     return (
-        xs[index] + cosine * local_x - sine * local_y,
-        ys[index] + sine * local_x + cosine * local_y,
+        pose.xs[index] + cosine * local_x - sine * local_y,
+        pose.ys[index] + sine * local_x + cosine * local_y,
     )
 
 
@@ -142,15 +207,20 @@ def _feature_corner(feature: str) -> int:
     return int(feature.split(":")[1])
 
 
-def _edge_normal(index: int, feature: str, xs, ys, ts):
-    """An outward normal of the named edge, and a point on it."""
+def _edge_normal(index: int, feature: str, pose: _Pose):
+    """A normal of the named edge, and a point on it.
+
+    Its orientation follows the square's chirality and is not normalised, because every
+    caller only ever asks whether a point lies on the edge's line -- a zero set that a
+    sign or a scale leaves alone.
+    """
     first, second = _edge_endpoints(feature)
-    ax, ay = _corner(index, first, xs, ys, ts)
-    bx, by = _corner(index, second, xs, ys, ts)
+    ax, ay = _corner(index, first, pose)
+    bx, by = _corner(index, second, pose)
     return (-(by - ay), bx - ax), (ax, ay)
 
 
-def _pair_equations(incidence: Incidence, xs, ys, ts) -> list:
+def _pair_equations(incidence: Incidence, pose: _Pose) -> list:
     left = incidence.left
     right = int(incidence.right)
     if incidence.contact is None:
@@ -160,8 +230,8 @@ def _pair_equations(incidence: Incidence, xs, ys, ts) -> list:
             "equation is not determined; re-extract with a version that identifies them",
         )
     if incidence.contact == "corner-corner":
-        px, py = _corner(left, _feature_corner(incidence.left_feature or ""), xs, ys, ts)
-        qx, qy = _corner(right, _feature_corner(incidence.right_feature or ""), xs, ys, ts)
+        px, py = _corner(left, _feature_corner(incidence.left_feature or ""), pose)
+        qx, qy = _corner(right, _feature_corner(incidence.right_feature or ""), pose)
         return [sp.expand(px - qx), sp.expand(py - qy)]
     if incidence.contact == "corner-edge":
         if (incidence.left_feature or "").startswith("corner:"):
@@ -170,13 +240,13 @@ def _pair_equations(incidence: Incidence, xs, ys, ts) -> list:
         else:
             corner_index, corner_feature = right, incidence.right_feature or ""
             edge_index, edge_feature = left, incidence.left_feature or ""
-        normal, anchor = _edge_normal(edge_index, edge_feature, xs, ys, ts)
-        px, py = _corner(corner_index, _feature_corner(corner_feature), xs, ys, ts)
+        normal, anchor = _edge_normal(edge_index, edge_feature, pose)
+        px, py = _corner(corner_index, _feature_corner(corner_feature), pose)
         return [sp.expand(normal[0] * (px - anchor[0]) + normal[1] * (py - anchor[1]))]
     if incidence.contact == "edge-edge":
-        normal, anchor = _edge_normal(left, incidence.left_feature or "", xs, ys, ts)
+        normal, anchor = _edge_normal(left, incidence.left_feature or "", pose)
         other_first, _ = _edge_endpoints(incidence.right_feature or "")
-        qx, qy = _corner(right, other_first, xs, ys, ts)
+        qx, qy = _corner(right, other_first, pose)
         return [sp.expand(normal[0] * (qx - anchor[0]) + normal[1] * (qy - anchor[1]))]
     raise SystemAssemblyError(
         "unknown-contact-type",
@@ -185,14 +255,14 @@ def _pair_equations(incidence: Incidence, xs, ys, ts) -> list:
     )
 
 
-def _wall_equation(incidence: Incidence, xs, ys, ts, side) -> list:
+def _wall_equation(incidence: Incidence, pose: _Pose, side) -> list:
     wall, corner = incidence.right.split(":")
     if wall not in WALL_AXIS:
         raise SystemAssemblyError(
             "unknown-wall", f"square {incidence.left} names wall {wall!r}"
         )
     axis, at_far_side = WALL_AXIS[wall]
-    point = _corner(incidence.left, int(corner), xs, ys, ts)[axis]
+    point = _corner(incidence.left, int(corner), pose)[axis]
     return [sp.expand(side - point if at_far_side else point)]
 
 
@@ -212,17 +282,18 @@ def assemble(structure: ContactStructure) -> ContactSystem:
         )
     n = structure.n
     xs, ys, ts, side = _symbols(n)
+    pose = _Pose(xs, ys, ts, _chirality_of(structure))
 
     equations: list = []
     sources: list[str] = []
 
     for incidence in structure.pair_contacts:
-        for equation in _pair_equations(incidence, xs, ys, ts):
+        for equation in _pair_equations(incidence, pose):
             equations.append(equation)
             sources.append(f"pair({incidence.left},{incidence.right}):{incidence.contact}")
 
     for incidence in structure.wall_contacts:
-        for equation in _wall_equation(incidence, xs, ys, ts, side):
+        for equation in _wall_equation(incidence, pose, side):
             equations.append(equation)
             sources.append(f"wall({incidence.left},{incidence.right})")
 
@@ -243,6 +314,7 @@ def assemble(structure: ContactStructure) -> ContactSystem:
         equations=tuple(sp.srepr(equation) for equation in equations),
         sources=tuple(sources),
         angle_identities=identities,
+        chirality=pose.sigmas,
     )
 
 
@@ -279,6 +351,7 @@ def close(system: ContactSystem, values: Sequence[float], *, tolerance: float = 
         equations=system.equations,
         sources=system.sources,
         angle_identities=system.angle_identities,
+        chirality=system.chirality,
         closure=conditions,
     )
 
@@ -310,34 +383,43 @@ def _winding(square: Sequence) -> float:
 def pose_values(system: ContactSystem, squares: Sequence, side_value: float) -> list[float]:
     """A pose in this system's unknown order, read off a corner representation.
 
-    Centres are the mean of the four corners and the angle comes from the first edge, so
-    this inverts :func:`_corner` rather than trusting a caller to order anything.
+    Centres are the mean of the four corners; the angle is recovered from the first edge,
+    which under the corner model runs along `sigma * (cos t, sin t)` -- so a mirrored
+    square's first edge points backwards along its own x axis and its angle is the edge
+    direction turned by half a turn.  Nothing here is chosen: this inverts :func:`_corner`
+    exactly, for either chirality.
 
-    **Reflected squares are refused, not silently mis-posed.**  The corner model here is
-    a centre plus a *rotation*, which cannot produce a clockwise winding; a square whose
-    corners run the other way is a different square from the one this pose describes.
-    That is not hypothetical: the `n = 29` source builds seven of its twenty-nine squares
-    inside `scale(-1 1)` mirror groups, and reading them as rotations left the assembled
-    residual at 2.0 instead of the noise floor.  Fixing it properly means either
-    re-indexing the contact features to match a re-wound square or giving the pose a
-    chirality of its own, and both change what a feature name means -- so this refuses and
-    names them rather than choosing one in passing.
+    **The chirality is checked against the system, not taken from it.**  The equations
+    were written with particular signs baked in, so a pose whose squares wind the other
+    way is a pose of a different system, and substituting it would produce residuals that
+    look like a bad structure rather than a mismatched caller.
     """
-    reflected = [index for index, square in enumerate(squares) if _winding(square) <= 0]
-    if reflected:
+    measured = tuple(1 if _winding(square) > 0 else -1 for square in squares)
+    expected = tuple(system.chirality)
+    if len(expected) != len(measured):
         raise SystemAssemblyError(
-            "reflected-squares",
-            f"squares {reflected} have clockwise corner winding, which a centre-plus-"
-            "rotation pose cannot represent; assembly would describe their mirror images",
+            "chirality-length-mismatch",
+            f"the system was assembled for {len(expected)} squares and this pose has "
+            f"{len(measured)}",
         )
+    disagreeing = [i for i, (a, b) in enumerate(zip(expected, measured, strict=True)) if a != b]
+    if disagreeing:
+        raise SystemAssemblyError(
+            "chirality-mismatch",
+            f"squares {disagreeing} wind the opposite way from the structure this system "
+            "was assembled from, so these corners describe their mirror images rather "
+            "than the poses the equations constrain",
+        )
+
     values: list[float] = []
     values.extend(float(sum(float(x) for x, _ in square)) / 4 for square in squares)
     values.extend(float(sum(float(y) for _, y in square)) / 4 for square in squares)
-    for square in squares:
+    for square, sigma in zip(squares, measured, strict=True):
         (ax, ay), (bx, by) = square[0], square[1]
-        values.append(
-            float(mp.atan2(mp.mpf(float(by) - float(ay)), mp.mpf(float(bx) - float(ax))))
+        direction = float(
+            mp.atan2(mp.mpf(float(by) - float(ay)), mp.mpf(float(bx) - float(ax)))
         )
+        values.append(direction if sigma > 0 else direction - float(mp.pi))
     values.append(float(side_value))
     return values
 
