@@ -87,7 +87,13 @@ def layout_tree(text: str) -> str | None:
     # directory name it opened with, which broke the moment that directory moved; a
     # branch marker is what actually makes a fenced block a tree, and it survives
     # renames.
-    for block in re.findall(r"```\n(.*?)```", text, re.S):
+    #
+    # Fences are paired opener-to-closer, with or without a language tag. The old
+    # pattern required a bare ``` as the opener, so every ```shell block ahead of the
+    # tree shifted the pairing by one and the tree was "found" mid-prose or not at all;
+    # which blocks sit ahead of the tree is a presentation choice that must not decide
+    # whether this check runs.
+    for block in re.findall(r"^```[^\n]*\n(.*?)^```", text, re.S | re.M):
         if "\u251c\u2500\u2500 " in block:
             return block
     return None

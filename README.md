@@ -23,6 +23,38 @@ best proved lower bound.
 Every claim here carries the evidence that earns it and says which kind of evidence that
 is; [Assurance in One Minute](#assurance-in-one-minute) is the whole vocabulary.
 
+## What Has Been Established
+
+The four theorems, one line each.
+The synopsis’s [results section](SYNOPSIS.md#results-established-here) owns the full
+statements, assurance labels, and the command that replays each one:
+
+- **Trump’s 1979 packing for `n = 11` is verified exactly** — over the degree-8 field
+  `ℚ(u)`, `u = tan(a/2)`, with 14 of the 55 square pairs touching at exactly zero gap:
+  contacts no floating-point tolerance can certify.
+  The check also independently confirms all 33 published digits of the record (**T-1**).
+- **The printed 2003 lower-bound proof for `s(11)` contains an exact gap, and a repair
+  is certified.**
+  [exp-016](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md)
+  exhibits a strict counterexample to the printed Figure 14 unavoidability claim;
+  [exp-017](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md)
+  proves `s(11) ≥ 2 + 4/√5` from a preregistered, source-distinct repaired point set
+  (**T-4** — apparently novel, and not externally peer-reviewed).
+- **Fix every angle and one separating axis per pair, and the problem becomes a linear
+  program** (**T-2**). On Trump’s contact cell, the optimum over the five tilted
+  squares’ shared angle is a **corner**, not a smooth peak (**T-3**) — a smooth local
+  model is misspecified exactly at the record.
+- **A verified upper bound at `n = 29`**: an exact rational witness, replayed here and
+  by an independent checker, proves `s(29) ≤ 5.93388579981…`, retained beside the
+  tighter numerically checked record it does not replace
+  ([`n-029`](packing/frontier/n-029.md)).
+
+The same source scrutiny runs against the literature itself: the earliest published
+proof of `s(7) = 3` (El Moumni 1999) carries four recorded defects in its printed route
+(D-344–D-347), and the case’s proved status rests on the independent later proofs
+([`n-007`](packing/frontier/n-007.md), with the audit in
+[the `n = 11` report](docs/project/research/research-2026-08-22-packing-11-unit-squares.md)).
+
 ## What Is Here
 
 | Where | What |
@@ -48,6 +80,178 @@ To resume work rather than only understand it, continue to the synopsis’s
 exists, otherwise the latest terminal session, together with the owning bead and exact
 next bounded slice.
 
+## Reports
+
+Written to be read in this order.
+They move from what is known, to how it is computed and checked, to what to build, to
+where a proof assistant fits, and finally to how to search: the strategy the tooling
+exists to serve.
+
+| Report | Scope |
+| --- | --- |
+| [Packing 11 Unit Squares in a Square](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | The mathematics of `s(11)`: what is proved, what is only conjectured, and why the available proof technique cannot close the gap |
+| [Algorithms and Tooling for Square Packing](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | How packings are searched for, refined from numerical to exact algebraic form, and verified; who holds the records and with what |
+| [FrankenSim as a Rust Toolkit for Square Packing](docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md) | First-hand study of a large Rust simulation framework as a source of certified-arithmetic and determinism building blocks |
+| [Infrastructure for Square-Packing Exploration](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md) | Synthesis of the two above into a build order: three latency tiers, the language boundary, which symbolic layer to use where, and what to deliberately not build |
+| [Lean for Square-Packing Proofs and Validation](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | Where a proof assistant fits: the upper bound is formalisable today and unclaimed, the lemma layer is the diagnostic first target, and certificates make a result checkable by someone who does not trust our code |
+| [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | The strategy layer: why volume-weighted search fails precisely at records, the basin atlas over the LP-quench map as the deliverable, diversity over structural descriptors instead of loss-shaping, the LLM at the structural layer, and relaxation ladders into the hard instances |
+
+These six are the research reports.
+For the full document set, including the reviews, the postmortem, the campaign runbook
+and what each one owns, see the synopsis’s [document map](SYNOPSIS.md#document-map).
+
+The structured record of the problem’s frontier, meaning the best known packing and best
+proved lower bound for every `n ≤ 100` with provenance and per-case editorial, lives in
+[`frontier/`](packing/frontier/README.md) as soft-schema artifacts rather than as a
+table inside a report, so it can be validated and queried.
+
+Claims in the reports distinguish formal proof or verification, finite numerical checks,
+and source reports. Every citation resolves both to a full reference and to a local copy
+in [`resources/`](packing/resources/README.md).
+
+The reports went through a full technical review on 2026-08-22: substantive claims were
+re-checked against the then-current primary-source archive and the central algebra was
+re-derived independently at 50-digit precision.
+The named frontier source set was refreshed again on 2026-08-25; its scope and replay
+dispositions live in
+[`frontier/source-coverage.yaml`](packing/frontier/source-coverage.yaml), so neither
+date is presented as an exhaustive web claim.
+Corrections from the technical review are recorded in the `n = 11` report’s
+[Corrections to Common Summaries](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#corrections-to-common-summaries),
+its remaining gaps in
+[Open Questions](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#open-questions),
+and the prioritized path forward in
+[A Research Program](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#a-research-program).
+
+## Exact Verification
+
+`sqpack` can formally verify complete rational witnesses and algebraic witnesses whose
+field preconditions it certifies.
+It can also inspect and numerically check decimal witnesses without upgrading their
+assurance.
+
+Why precision is not enough: a record packing has squares touching at exactly zero
+separation, floating point can certify a strict inequality but not an equality, and
+every tolerance that accepts the true contacts also accepts overlaps smaller than
+itself. The argument in full, with what it cost when ignored, is
+[Why Exactness Is Not Optional](SYNOPSIS.md#why-exactness-is-not-optional).
+`cases.trump11.verifier_limits` demonstrates both failure modes.
+
+### Use
+
+```shell
+uv run --frozen packing-witness inspect witnesses/schadt-n029-2025-decimal.yaml
+uv run --frozen packing-witness check witnesses/schadt-n029-2025-decimal.yaml \
+  --method numerical-multiprecision --precision 300 --tolerance 1e-100
+uv run --frozen packing-witness verify witnesses/schadt-n029-2025-rational.yaml
+
+uv run --frozen python -m cases.trump11.verify_exact
+uv run --frozen python -m cases.gobel5.verify_exact
+uv run --frozen python -m cases.gobel10.verify_exact
+uv run --frozen python -m cases.trump11.verifier_limits
+uv run --frozen python -m benchmarks.exact_verification
+uv run --frozen python -m cases.trump11.derive_field
+uv run --frozen --group dev packing-validate
+```
+
+Only `cases.trump11.derive_field` needs the optional symbolic dependency (SymPy).
+
+The Schadt source pose passes its declared 300-digit check at tolerance `1e-100`; that
+is numerical evidence, not a verified record.
+The retained rational witness is a separate, slightly relaxed construction produced by
+robust rational promotion and verified exactly by the public tool and an independent
+checker. It proves `s(29) ≤ 5.93388579981302587863645209`, not the tighter reported
+record and not optimality.
+See [`n-029.md`](packing/frontier/n-029.md) for the complete disposition.
+
+`cases.trump11.verify_exact` output:
+
+```
+VALID: 11 squares, 55 pairs tested
+  container: 20 corner coordinates exactly on the boundary
+  pairs:     14 separated with zero gap, 41 strictly
+  field:     Q(u), degree 8, u = tan(a/2)
+  P(s) == 0 for the published degree-8 polynomial: True
+  s = 3.87708359002281417730789706010096270637645566846
+```
+
+The 14 zero-gap pairs are the ones no floating-point verifier can certify.
+The 33 leading digits match the value published on the
+[Squares in Squares](https://kingbird.myphotos.cc/packing/squares_in_squares.html)
+record page, so this is also an independent check of that record.
+
+### Verifying Another Packing
+
+Use [`Witness/v2`](packing/witnesses/witness.schema.yaml) for supported rational,
+algebraic, or decimal center/basis, center/angle, and corner data.
+Source adapters should stop at that interchange boundary; `packing-witness inspect`,
+`check`, and `verify` then provide the shared behavior.
+
+Library callers can also supply corners in an exact field and call `verify_packing`:
+
+```python
+from sqpack.field import NumberField
+from sqpack.verify import verify_packing, exact_sign
+
+field = NumberField(min_poly, isolating_interval)  # coefficients high degree first
+squares = [...]  # 11 x 4 corners of FieldElements
+print(verify_packing(squares, side, sign=exact_sign))
+```
+
+The constructor rejects a reducible polynomial or an interval that does not isolate one
+real root. It uses exact finite-field irreducibility when that certificate exists, a
+complete factor-exclusion check for supported monic integer quartics, and exact Sturm
+root counting. Inputs outside those certified paths fail closed.
+Recovering a correct field and exact geometry from arbitrary decimal input remains the
+hard step; [`cases/trump11/packing.py`](packing/cases/trump11/packing.py) is the worked
+algebraic example. Robust rational promotion is built for suitable decimal center-angle
+poses and may need an explicit side relaxation.
+Generic interval-existence certification at the reported value is not built and may fail
+even after it is built when the contact system is singular, ambiguous, or
+ill-conditioned.
+
+The [synopsis](SYNOPSIS.md#verification-capability-ladder) classifies each path as
+built, buildable engineering, or mathematically contingent.
+The module docstrings in [`src/sqpack/`](packing/src/sqpack/) carry the maintained APIs,
+including the non-certifying numerical backends.
+
+### Scope
+
+This checks that a *proposed* packing is valid, which is a different and far easier
+question than whether it is optimal.
+The only rigorous computer-assisted optimality proof for rotatable unit squares in any
+container covers three squares in a circle (Montanher et al.
+2018); nothing comparable exists for squares in a square.
+
+## What Has Gone Wrong Here
+
+[`defects.md`](defects.md) is the generated defect log: every bug, inefficiency, and
+record defect found in this toolchain, what caught it, and what now stops it recurring.
+It is generated from [`defects.yaml`](packing/defects.yaml) and checked in the gate.
+It is separate from the
+[research-loop logbook](packing/campaign/research-loop-logbook/README.md), which
+summarizes bounded runs and links their positive, negative, and unresolved scientific
+results to the experiment records that own them.
+
+It is kept because the aggregate says things no individual bug report can, and two of
+those things shape how this project works:
+
+- **The dangerous defects flatter.** Most soundness failures found here pointed in the
+  direction that looks like success, which is why a run that beats the record is treated
+  as a bug until proved otherwise.
+- **The automated gate is not where soundness failures have been found.** No soundness
+  defect in the log was caught by it.
+  The rest came from control cells whose answers were known in advance, rules written
+  down before the measurement, generated views contradicting their sources, and careful
+  reading. Gates confirm what someone already thought to check.
+
+The counts live in [`defects.md`](defects.md), which is generated, and in
+[the synopsis](SYNOPSIS.md#the-defect-record), which is reconciled against the same
+source in the gate. They are deliberately not repeated here: this paragraph carried them
+before, and copied aggregates repeatedly went stale.
+
+## Operating Principles
+
 Work is organized at three levels.
 Four **operating principles** define what quality means and which concerns may veto
 promotion. Seven **workflow entry points** define the purpose and durable output of one
@@ -56,8 +260,6 @@ Keeping these levels separate lets an agent emphasize one dimension without sile
 changing the kind of work it promised to do.
 The focus is primary, not exclusive: the other three principles continue to constrain
 and contribute to the phase.
-
-## Operating Principles
 
 Successful research here is the result of four principles held in balance.
 None can stand in for another, and each has a preeminent goal:
@@ -295,6 +497,41 @@ validation loop to run at each step is
 [`packing-campaign`](packing/src/sqpack/campaign/runner.py) stays the smaller tool that
 executes already-preregistered numerical rounds, never a second project manager.
 
+## Plan
+
+The implementation plan for the first experiments, meaning search, verify and iterate on
+`n = 11` and `n = 12`, is
+[plan-2026-08-22-minimal-packing-toolkit.md](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md).
+It turns the six reports into seven phases and a bead tree, one epic per phase;
+`tbd list --spec docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md`
+shows the work items.
+Use `tbd ready` only as an input to a coordinator checkpoint after proving claimed
+implementation commits are ancestors of the session base; the current eight-hour
+portfolio is frozen in the active launch agenda.
+
+The implemented engineering reorganization and its evidence are recorded in
+[Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md).
+[`development.md`](development.md) is the maintained operating guide for that design.
+
+The current standing review,
+[review-2026-08-23-toolkit-docs-and-first-experiments.md](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md),
+is the historical source of the initial experiment method and `H-001`–`H-015` register.
+Once those claims were codified, their registry artifacts became authoritative; use the
+[idea board](packing/campaign/ideas.md) and
+[generated ledger](packing/campaign/ledger.md) for current status, not the review’s
+tables. The review also contains the proof that fixed angles and a fixed cell reduce the
+problem to a linear program.
+The synopsis records that current result as [T-2](SYNOPSIS.md#the-cell-decomposition),
+backed by two independent implementations.
+
+## Conventions
+
+[`conventions.md`](conventions.md) is the definitive registry of every convention and
+naming this directory runs on: the id scheme across all layers, file naming, artifact
+discipline, the assurance levels and what each may claim, provenance, corrections, and
+which rules are machine-checked versus which rest on care.
+Read it before adding an artifact, a round, or a tool.
+
 ## Layout
 
 ```
@@ -424,211 +661,6 @@ The focused read-only gate is:
 ```bash
 uv run --frozen --all-extras --group dev packing-validate --only "deterministic SVG rendering"
 ```
-
-## What Has Gone Wrong Here
-
-[`defects.md`](defects.md) is the generated defect log: every bug, inefficiency, and
-record defect found in this toolchain, what caught it, and what now stops it recurring.
-It is generated from [`defects.yaml`](packing/defects.yaml) and checked in the gate.
-It is separate from the
-[research-loop logbook](packing/campaign/research-loop-logbook/README.md), which
-summarizes bounded runs and links their positive, negative, and unresolved scientific
-results to the experiment records that own them.
-
-It is kept because the aggregate says things no individual bug report can, and two of
-those things shape how this directory works:
-
-- **The dangerous defects flatter.** Most soundness failures found here pointed in the
-  direction that looks like success, which is why a run that beats the record is treated
-  as a bug until proved otherwise.
-- **The automated gate is not where soundness failures have been found.** No soundness
-  defect in the log was caught by it.
-  The rest came from control cells whose answers were known in advance, rules written
-  down before the measurement, generated views contradicting their sources, and careful
-  reading. Gates confirm what someone already thought to check.
-
-The counts live in [`defects.md`](defects.md), which is generated, and in
-[the synopsis](SYNOPSIS.md#the-defect-record), which is reconciled against the same
-source in the gate. They are deliberately not repeated here: this paragraph carried them
-before, and copied aggregates repeatedly went stale.
-
-## Conventions
-
-[`conventions.md`](conventions.md) is the definitive registry of every convention and
-naming this directory runs on: the id scheme across all layers, file naming, artifact
-discipline, the assurance levels and what each may claim, provenance, corrections, and
-which rules are machine-checked versus which rest on care.
-Read it before adding an artifact, a round, or a tool.
-
-## Reports
-
-Written to be read in this order.
-They move from what is known, to how it is computed and checked, to what to build, to
-where a proof assistant fits, and finally to how to search: the strategy the tooling
-exists to serve.
-
-| Report | Scope |
-| --- | --- |
-| [Packing 11 Unit Squares in a Square](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | The mathematics of `s(11)`: what is proved, what is only conjectured, and why the available proof technique cannot close the gap |
-| [Algorithms and Tooling for Square Packing](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | How packings are searched for, refined from numerical to exact algebraic form, and verified; who holds the records and with what |
-| [FrankenSim as a Rust Toolkit for Square Packing](docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md) | First-hand study of a large Rust simulation framework as a source of certified-arithmetic and determinism building blocks |
-| [Infrastructure for Square-Packing Exploration](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md) | Synthesis of the two above into a build order: three latency tiers, the language boundary, which symbolic layer to use where, and what to deliberately not build |
-| [Lean for Square-Packing Proofs and Validation](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | Where a proof assistant fits: the upper bound is formalisable today and unclaimed, the lemma layer is the diagnostic first target, and certificates make a result checkable by someone who does not trust our code |
-| [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | The strategy layer: why volume-weighted search fails precisely at records, the basin atlas over the LP-quench map as the deliverable, diversity over structural descriptors instead of loss-shaping, the LLM at the structural layer, and relaxation ladders into the hard instances |
-
-These six are the research reports.
-For the full document set, including the reviews, the postmortem, the campaign runbook
-and what each one owns, see the synopsis’s [document map](SYNOPSIS.md#document-map).
-
-The structured record of the problem’s frontier, meaning the best known packing and best
-proved lower bound for every `n ≤ 100` with provenance and per-case editorial, lives in
-[`frontier/`](packing/frontier/README.md) as soft-schema artifacts rather than as a
-table inside a report, so it can be validated and queried.
-
-Claims in the reports distinguish formal proof or verification, finite numerical checks,
-and source reports. Every citation resolves both to a full reference and to a local copy
-in [`resources/`](packing/resources/README.md).
-
-The reports went through a full technical review on 2026-08-22: substantive claims were
-re-checked against the then-current primary-source archive and the central algebra was
-re-derived independently at 50-digit precision.
-The named frontier source set was refreshed again on 2026-08-25; its scope and replay
-dispositions live in
-[`frontier/source-coverage.yaml`](packing/frontier/source-coverage.yaml), so neither
-date is presented as an exhaustive web claim.
-Corrections from the technical review are recorded in the `n = 11` report’s
-[Corrections to Common Summaries](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#corrections-to-common-summaries),
-its remaining gaps in
-[Open Questions](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#open-questions),
-and the prioritized path forward in
-[A Research Program](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#a-research-program).
-
-## Plan
-
-The implementation plan for the first experiments, meaning search, verify and iterate on
-`n = 11` and `n = 12`, is
-[plan-2026-08-22-minimal-packing-toolkit.md](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md).
-It turns the six reports into seven phases and a bead tree, one epic per phase;
-`tbd list --spec docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md`
-shows the work items.
-Use `tbd ready` only as an input to a coordinator checkpoint after proving claimed
-implementation commits are ancestors of the session base; the current eight-hour
-portfolio is frozen in the active launch agenda.
-
-The implemented engineering reorganization and its evidence are recorded in
-[Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md).
-[`development.md`](development.md) is the maintained operating guide for that design.
-
-The current standing review,
-[review-2026-08-23-toolkit-docs-and-first-experiments.md](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md),
-is the historical source of the initial experiment method and `H-001`–`H-015` register.
-Once those claims were codified, their registry artifacts became authoritative; use the
-[idea board](packing/campaign/ideas.md) and
-[generated ledger](packing/campaign/ledger.md) for current status, not the review’s
-tables. The review also contains the proof that fixed angles and a fixed cell reduce the
-problem to a linear program.
-The synopsis records that current result as [T-2](SYNOPSIS.md#the-cell-decomposition),
-backed by two independent implementations.
-
-## Exact Verification
-
-`sqpack` can formally verify complete rational witnesses and algebraic witnesses whose
-field preconditions it certifies.
-It can also inspect and numerically check decimal witnesses without upgrading their
-assurance.
-
-Why precision is not enough: a record packing has squares touching at exactly zero
-separation, floating point can certify a strict inequality but not an equality, and
-every tolerance that accepts the true contacts also accepts overlaps smaller than
-itself. The argument in full, with what it cost when ignored, is
-[Why Exactness Is Not Optional](SYNOPSIS.md#why-exactness-is-not-optional).
-`cases.trump11.verifier_limits` demonstrates both failure modes.
-
-### Use
-
-```shell
-uv run --frozen packing-witness inspect witnesses/schadt-n029-2025-decimal.yaml
-uv run --frozen packing-witness check witnesses/schadt-n029-2025-decimal.yaml \
-  --method numerical-multiprecision --precision 300 --tolerance 1e-100
-uv run --frozen packing-witness verify witnesses/schadt-n029-2025-rational.yaml
-
-uv run --frozen python -m cases.trump11.verify_exact
-uv run --frozen python -m cases.gobel5.verify_exact
-uv run --frozen python -m cases.gobel10.verify_exact
-uv run --frozen python -m cases.trump11.verifier_limits
-uv run --frozen python -m benchmarks.exact_verification
-uv run --frozen python -m cases.trump11.derive_field
-uv run --frozen --group dev packing-validate
-```
-
-Only `cases.trump11.derive_field` needs the optional symbolic dependency (SymPy).
-
-The Schadt source pose passes its declared 300-digit check at tolerance `1e-100`; that
-is numerical evidence, not a verified record.
-The retained rational witness is a separate, slightly relaxed construction produced by
-robust rational promotion and verified exactly by the public tool and an independent
-checker. It proves `s(29) ≤ 5.93388579981302587863645209`, not the tighter reported
-record and not optimality.
-See [`n-029.md`](packing/frontier/n-029.md) for the complete disposition.
-
-`cases.trump11.verify_exact` output:
-
-```
-VALID: 11 squares, 55 pairs tested
-  container: 20 corner coordinates exactly on the boundary
-  pairs:     14 separated with zero gap, 41 strictly
-  field:     Q(u), degree 8, u = tan(a/2)
-  P(s) == 0 for the published degree-8 polynomial: True
-  s = 3.87708359002281417730789706010096270637645566846
-```
-
-The 14 zero-gap pairs are the ones no floating-point verifier can certify.
-The 33 leading digits match the value published on the
-[Squares in Squares](https://kingbird.myphotos.cc/packing/squares_in_squares.html)
-record page, so this is also an independent check of that record.
-
-### Verifying Another Packing
-
-Use [`Witness/v2`](packing/witnesses/witness.schema.yaml) for supported rational,
-algebraic, or decimal center/basis, center/angle, and corner data.
-Source adapters should stop at that interchange boundary; `packing-witness inspect`,
-`check`, and `verify` then provide the shared behavior.
-
-Library callers can also supply corners in an exact field and call `verify_packing`:
-
-```python
-from sqpack.field import NumberField
-from sqpack.verify import verify_packing, exact_sign
-
-field = NumberField(min_poly, isolating_interval)  # coefficients high degree first
-squares = [...]  # 11 x 4 corners of FieldElements
-print(verify_packing(squares, side, sign=exact_sign))
-```
-
-The constructor rejects a reducible polynomial or an interval that does not isolate one
-real root. It uses exact finite-field irreducibility when that certificate exists, a
-complete factor-exclusion check for supported monic integer quartics, and exact Sturm
-root counting. Inputs outside those certified paths fail closed.
-Recovering a correct field and exact geometry from arbitrary decimal input remains the
-hard step; [`cases/trump11/packing.py`](packing/cases/trump11/packing.py) is the worked
-algebraic example. Robust rational promotion is built for suitable decimal center-angle
-poses and may need an explicit side relaxation.
-Generic interval-existence certification at the reported value is not built and may fail
-even after it is built when the contact system is singular, ambiguous, or
-ill-conditioned.
-
-The [synopsis](SYNOPSIS.md#verification-capability-ladder) classifies each path as
-built, buildable engineering, or mathematically contingent.
-The module docstrings in [`src/sqpack/`](packing/src/sqpack/) carry the maintained APIs,
-including the non-certifying numerical backends.
-
-### Scope
-
-This checks that a *proposed* packing is valid, which is a different and far easier
-question than whether it is optimal.
-The only rigorous computer-assisted optimality proof for rotatable unit squares in any
-container covers three squares in a circle (Montanher et al.
-2018); nothing comparable exists for squares in a square.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
