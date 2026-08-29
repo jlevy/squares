@@ -217,6 +217,26 @@ def msolve_input(
     return ",".join(names) + f"\n{characteristic}\n" + ",\n".join(bodies) + "\n"
 
 
+def phc_input(
+    polynomials: Sequence[sp.Poly], order: Sequence[sp.Symbol], point: Sequence[Any]
+) -> str:
+    """The same guarded system, in the format PHCpack reads.
+
+    Homotopy continuation answers a different question from a Groebner basis and answers
+    it without computing one: it bounds and then counts the isolated solutions, which is
+    what the degree of `s(29)` is bounded by.  The mixed volume alone -- Bernstein's
+    bound on the solutions with every coordinate nonzero -- is far tighter than Bezout
+    for a sparse system like this one, and the packing's own solution lies in that torus
+    because no angle in it is zero.
+
+    The body is emitted by the same `_term_text` and guarded the same way, so the two
+    exports cannot drift apart in what they claim to describe.
+    """
+    text = msolve_input(polynomials, order, point)
+    bodies = text.split("\n", 2)[2].rstrip().rstrip(",").split(",\n")
+    return f"{len(bodies)}\n" + "".join(body + ";\n" for body in bodies)
+
+
 def verify_eliminant(coefficients: Sequence[int], side_value: Any, *, digits: int) -> dict:
     """Check a returned eliminant against the value it is supposed to admit.
 
@@ -256,7 +276,7 @@ def verify_eliminant(coefficients: Sequence[int], side_value: Any, *, digits: in
     return report
 
 
-def _emit(path: Path, *, reduced: bool, characteristic: int = 0) -> dict:
+def _emit(path: Path, *, reduced: bool, characteristic: int = 0, phc: bool = False) -> dict:
     started = time.monotonic()
     values, _names = witness_point()
     if reduced:
@@ -269,12 +289,16 @@ def _emit(path: Path, *, reduced: bool, characteristic: int = 0) -> dict:
         polynomials = [sp.Poly(p.as_expr(), *order) for p in polynomials]
         point = [values[str(symbol)] for symbol in order]
         note = "six equations in six unknowns, s last so an elimination leaves it"
-    text = msolve_input(polynomials, order, point, characteristic=characteristic)
+    if phc:
+        text = phc_input(polynomials, order, point)
+    else:
+        text = msolve_input(polynomials, order, point, characteristic=characteristic)
     path.write_text(text, encoding="utf-8")
     return {
         "path": str(path),
         "bytes": len(text),
         "characteristic": characteristic,
+        "format": "phc" if phc else "msolve",
         "note": note,
         "unknowns": [str(symbol) for symbol in order],
         "degrees": [p.total_degree() for p in polynomials],
@@ -304,6 +328,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="field characteristic for the emitted system; a prime gives the eliminant's "
         "degree without coefficient swell, and certifies nothing about s(29)",
     )
+    parser.add_argument(
+        "--phc",
+        action="store_true",
+        help="emit in PHCpack format instead, for mixed volume and homotopy continuation",
+    )
     parser.add_argument("--digits", type=int, default=WITNESS_DIGITS)
     parser.add_argument("--json", action="store_true", help="machine-readable output")
     arguments = parser.parse_args(argv)
@@ -314,6 +343,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             arguments.emit,
             reduced=arguments.reduced,
             characteristic=arguments.characteristic,
+            phc=arguments.phc,
         )
     if arguments.verify is not None:
         raw = arguments.verify.read_text(encoding="utf-8").replace(",", " ").split()

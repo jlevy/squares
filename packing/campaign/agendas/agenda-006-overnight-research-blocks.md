@@ -779,6 +779,44 @@ agenda:
       `close` reports that one condition is needed and refuses to invent it. This block is
       allowed to derive one; it is not allowed to size one to make the counts meet, which
       is the failure BC-059 recorded as D-361.
+  - id: BC-070
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [29]
+    state: ready
+    priority: 0
+    question: >-
+      How many isolated solutions does the n = 29 system have, and what does that make the
+      degree of `s(29)` -- without computing a Groebner basis at all?
+    hypotheses: []
+    budget: 90 minutes
+    entry: >-
+      BC-066 measured that elimination does not reach an eliminant here, and that the
+      obstruction is the size of the ideal rather than the arithmetic carried through it.
+      Its own next action names this route.
+    exit: >-
+      A bound on the number of isolated solutions tighter than Bezout's `1,039,500`, and
+      where the path tracking reaches it, the number of distinct `s` values among them --
+      which is the degree of the projection to the `s`-axis; or a typed statement of what
+      the continuation could not decide.
+    artifacts:
+    - devtools/probe_elimination.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-066-n29-elimination-wall.json
+    bead: think-xy0e
+    depends_on: [BC-066]
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      Bezout is loose for a sparse system and this one is sparse. Bernstein's theorem
+      bounds the isolated solutions with every coordinate nonzero by the mixed volume of
+      the Newton polytopes, and the packing's own solution lies in that torus because no
+      angle in it is zero -- so the bound applies to the solution that matters rather than
+      only to a generic one.
+    note: >-
+      A numerical count is not a proof and must not be recorded as one. Path tracking can
+      lose or duplicate a path, so a solution count is evidence about the degree and not a
+      certificate of it. What it can honestly buy is a *target*: BC-060's integer-relation
+      sweep searched blindly through degree twenty, and a measured degree would tell it
+      where to look. Nothing here may move `verified_upper_bound`.
   - id: BC-064
     purpose: tool_validation
     owner_focus: process

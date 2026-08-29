@@ -260,7 +260,7 @@ session:
     objective: >-
       Run only the verification steps a change can reach, with a control proving the
       selector cannot under-run, measured against a baseline taken on this container.
-    status: in_progress
+    status: stopped
     entered_by: planned_checkpoint
     switch_reason: >-
       The exact-route blocks are terminal and the two remaining middle-layer lanes are
@@ -278,11 +278,68 @@ session:
       the gate is a soundness defect; a selector that is merely slow is a disappointment.
     fallback: >-
       A measured rejection, recorded with the baseline it was measured against.
+    outcome: >-
+      Stopped after design reading, without a measurement. Two reasons, and the second is
+      the real one.
+    evidence:
+    - >-
+      'It is a measurement block and the machine was not measurable. Two delegated lanes
+      were running on four cores; a gate timing taken against them would not have been
+      comparable to the 8m04s baseline, and a selector justified by a contended
+      measurement is worse than no selector.'
+    - >-
+      '`Step` declares `name`, `action`, `fast` and `needs_engine` and no input paths at
+      all, so a reachability selector needs a per-step read declaration first. The only
+      safe shape is fail-open -- a step runs unless it can prove it is unreachable -- with
+      the declaration verified against observed reads rather than trusted, since an
+      incomplete declaration is exactly the under-run this block calls a soundness defect.
+      That design is recorded here rather than half-built.'
+    - >-
+      'BC-066 redirected the clock. Its measured finding names homotopy continuation as
+      the next thing to try at n = 29, and that is worth more of this session than a
+      tool for the loop. BC-062 is the block this continuation twice judged cuttable, and
+      cutting it here is that judgement rather than an overrun.'
+    stop_reason: >-
+      Deliberately cut in favour of BC-070, and left `ready` in the agenda rather than
+      part-done.
+    next_action: >-
+      Open BC-070 on `think-xy0e`.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-070
+    bead: think-xy0e
+    objective: >-
+      Bound and, if the tracking reaches it, count the isolated solutions of the n = 29
+      system without computing a Groebner basis, and say what that makes the degree of
+      `s(29)`.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      BC-066's measurement says the obstruction is the size of the ideal rather than the
+      arithmetic, which makes a route that needs no basis the one worth the remaining
+      clock.
+    budget_minutes: 90
+    started_at: '2026-08-29T10:31:00Z'
+    deadline_at: '2026-08-29T12:01:00Z'
+    expected_output: >-
+      A bound tighter than Bezout's `1,039,500`, and where reachable the number of
+      distinct `s` values among the isolated solutions.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev python -m pytest tests/test_promote_elimination.py
+      -q -p no:randomly
+    kill_condition: >-
+      Stop if the path tracking cannot account for its own paths. A count that loses or
+      duplicates paths is not evidence about a degree, and must not be recorded as one.
+    fallback: >-
+      Record the mixed volume alone, which is a bound and does not depend on any path
+      being tracked successfully.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Integrate the delegated lanes as they land, then open the reserved BC-064.
+      Report the bound and the count, then integrate the delegated lanes.
   primary_bead: think-obgk
   status: in_progress
   budget:
