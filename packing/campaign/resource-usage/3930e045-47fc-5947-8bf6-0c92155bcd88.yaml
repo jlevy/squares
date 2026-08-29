@@ -7,51 +7,79 @@ rollup:
   source:
     harness: claude-code
     filename: 3930e045-47fc-5947-8bf6-0c92155bcd88.jsonl
-    sha256: 27529004f855ae4f3db90dff06a91a47c3adfb372c96d51877628aeb8757ef08
-    bytes: 8471669
-    records: 4740
+    sha256: 5f6c540e32fc10cd584529d7d0487a5987c0550361feebac130d727408bd1b70
+    bytes: 8849063
+    records: 4902
     session_id: 3930e045-47fc-5947-8bf6-0c92155bcd88
     harness_versions:
     - 2.1.251
   span:
     started_at: '2026-08-29T08:22:59.196Z'
-    ended_at: '2026-08-29T21:41:42.285Z'
-    wall_seconds: 47923.089
+    ended_at: '2026-08-29T22:28:53.285Z'
+    wall_seconds: 50754.089
   turns:
-    assistant: 1689
+    assistant: 1734
     sidechain: 0
     by_model:
-      claude-opus-5: 1689
+      claude-opus-5: 1734
     by_thinking_level:
       xhigh: 1210
-      max: 479
+      max: 524
+    by_model_and_thinking_level:
+      claude-opus-5 @ xhigh: 1210
+      claude-opus-5 @ max: 524
     by_branch:
       claude/squares-research-blocks-kqu96s: 1247
-      claude/pr-61-review-continuation-3n4ob9: 352
+      claude/pr-61-review-continuation-3n4ob9: 397
       worktree-agent-a2b26389a68623fec: 90
-    content_blocks:
-      tool_use: 941
-      thinking: 455
-      text: 293
+    latency:
+      count: 1734
+      total_seconds: 9776.519
+      median_seconds: 3.499
+      max_seconds: 64.322
   tokens:
-    cache_creation_input_tokens: 8298204
-    cache_read_input_tokens: 655800698
-    ephemeral_1h_input_tokens: 8298204
+    cache_creation_input_tokens: 8426158
+    cache_read_input_tokens: 680956264
+    ephemeral_1h_input_tokens: 8426158
     ephemeral_5m_input_tokens: 0
-    input_tokens: 3378
-    output_tokens: 1446998
-    thinking_tokens: 487520
+    input_tokens: 3468
+    output_tokens: 1531057
+    thinking_tokens: 504220
+  tokens_by_thinking_level:
+    max:
+      cache_creation_input_tokens: 5884128
+      cache_read_input_tokens: 179262354
+      ephemeral_1h_input_tokens: 5884128
+      ephemeral_5m_input_tokens: 0
+      input_tokens: 1048
+      output_tokens: 520420
+      thinking_tokens: 179372
+    xhigh:
+      cache_creation_input_tokens: 2542030
+      cache_read_input_tokens: 501693910
+      ephemeral_1h_input_tokens: 2542030
+      ephemeral_5m_input_tokens: 0
+      input_tokens: 2420
+      output_tokens: 1010637
+      thinking_tokens: 324848
   tool_calls:
-    total: 940
-    total_seconds: 28238.39
-    share_of_wall: 0.5892
+    total: 965
+    total_seconds: 28367.11
+    share_of_wall: 0.5589
+    errors: 23
+    denied: 2
     unpaired_results: 0
     outstanding_at_snapshot: 1
+    one_off_code:
+      count: 255
+      total_seconds: 2508.42
+      median_seconds: 4.041
+      max_seconds: 246.89
     by_tool:
       Bash:
-        count: 855
-        total_seconds: 28171.91
-        median_seconds: 2.204
+        count: 878
+        total_seconds: 28299.718
+        median_seconds: 2.262
         max_seconds: 604.744
       mcp__github__pull_request_read:
         count: 21
@@ -94,14 +122,14 @@ rollup:
         median_seconds: 0.04
         max_seconds: 0.572
       Write:
-        count: 7
-        total_seconds: 0.192
-        median_seconds: 0.031
-        max_seconds: 0.041
+        count: 8
+        total_seconds: 1.091
+        median_seconds: 0.033
+        max_seconds: 0.899
       Read:
-        count: 3
-        total_seconds: 0.037
-        median_seconds: 0.012
+        count: 4
+        total_seconds: 0.05
+        median_seconds: 0.013
         max_seconds: 0.013
       TaskStop:
         count: 2
@@ -110,9 +138,9 @@ rollup:
         max_seconds: 0.015
     by_executable:
       cd:
-        count: 521
-        total_seconds: 23053.064
-        median_seconds: 2.85
+        count: 522
+        total_seconds: 23062.352
+        median_seconds: 2.854
         max_seconds: 603.293
       for:
         count: 4
@@ -135,18 +163,18 @@ rollup:
         median_seconds: 1.819
         max_seconds: 601.958
       uv:
-        count: 24
-        total_seconds: 258.86
-        median_seconds: 4.508
+        count: 27
+        total_seconds: 300.497
+        median_seconds: 8.155
         max_seconds: 68.776
       python3:
-        count: 29
-        total_seconds: 210.559
-        median_seconds: 1.895
+        count: 35
+        total_seconds: 252.071
+        median_seconds: 1.927
         max_seconds: 29.046
       grep:
-        count: 43
-        total_seconds: 159.69
+        count: 46
+        total_seconds: 159.99
         median_seconds: 0.1
         max_seconds: 95.609
       make:
@@ -165,14 +193,14 @@ rollup:
         median_seconds: 0.074
         max_seconds: 68.633
       (unlexable):
-        count: 22
-        total_seconds: 73.865
-        median_seconds: 2.364
+        count: 24
+        total_seconds: 82.568
+        median_seconds: 2.579
         max_seconds: 9.193
       tbd:
-        count: 17
-        total_seconds: 69.973
-        median_seconds: 2.282
+        count: 20
+        total_seconds: 77.803
+        median_seconds: 2.289
         max_seconds: 27.588
       git:
         count: 22
@@ -189,16 +217,16 @@ rollup:
         total_seconds: 44.472
         median_seconds: 0.184
         max_seconds: 36.506
+      cat:
+        count: 17
+        total_seconds: 37.101
+        median_seconds: 1.958
+        max_seconds: 8.292
       timeout:
         count: 6
         total_seconds: 30.622
         median_seconds: 3.912
         max_seconds: 10.055
-      cat:
-        count: 13
-        total_seconds: 21.45
-        median_seconds: 1.44
-        max_seconds: 4.557
       export:
         count: 4
         total_seconds: 21.393
@@ -219,6 +247,11 @@ rollup:
         total_seconds: 7.971
         median_seconds: 7.971
         max_seconds: 7.971
+      mkdir:
+        count: 2
+        total_seconds: 5.298
+        median_seconds: 2.649
+        max_seconds: 2.887
       ps:
         count: 5
         total_seconds: 4.678
@@ -249,16 +282,64 @@ rollup:
         total_seconds: 2.944
         median_seconds: 1.472
         max_seconds: 1.478
-      mkdir:
-        count: 1
-        total_seconds: 2.411
-        median_seconds: 2.411
-        max_seconds: 2.411
       pkill:
         count: 1
         total_seconds: 2.072
         median_seconds: 2.072
         max_seconds: 2.072
+    by_shell_shape:
+      compound:
+        count: 492
+        total_seconds: 24625.1
+        median_seconds: 1.805
+        max_seconds: 604.744
+      python_heredoc:
+        count: 212
+        total_seconds: 1946.942
+        median_seconds: 4.44
+        max_seconds: 71.421
+      pipeline:
+        count: 64
+        total_seconds: 1023.396
+        median_seconds: 1.707
+        max_seconds: 601.72
+      python_inline:
+        count: 43
+        total_seconds: 561.478
+        median_seconds: 2.586
+        max_seconds: 246.89
+      heredoc:
+        count: 33
+        total_seconds: 129.67
+        median_seconds: 3.329
+        max_seconds: 14.899
+      simple:
+        count: 34
+        total_seconds: 13.132
+        median_seconds: 0.073
+        max_seconds: 6.53
+    by_thinking_level:
+      xhigh:
+        count: 669
+        total_seconds: 26280.452
+        median_seconds: 2.274
+        max_seconds: 603.293
+      max:
+        count: 296
+        total_seconds: 2086.658
+        median_seconds: 1.627
+        max_seconds: 604.744
+    shell_traits:
+      pipes: 684
+      redirects_output: 284
+      substitutes: 107
+  session_events:
+    compact_boundaries: 1
+    stop_hook_summaries: 8
+    queue_operations:
+      enqueue: 101
+      remove: 80
+      dequeue: 21
   semantics:
     wall_seconds: First to last timestamped record. It is elapsed session time and includes
       every interval in which nothing was running, so it is an upper bound on work and never
@@ -270,17 +351,34 @@ rollup:
       model-stream items and no first-token latency, so model time cannot be separated from
       the interval before a turn's record is written. It is absent rather than zero, and a
       consumer that sums it with a harness that does report it must carry the gap forward.
-    share_of_wall: tool_call_seconds over wall_seconds. Concurrent tool calls are summed independently,
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
       so on a session that backgrounds work this can exceed one and is a load figure, not
       an occupancy figure.
     tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
-      are distinct from input tokens and are not double-counted here, but no cost is derived
-      from them: pricing is not this record''s.'
-    by_executable: The leading executable word of a Bash command, which is identity rather
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_executable: The leading executable word of a shell command, which is identity rather
       than content. Nothing reconstructs a command line from this file.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
     unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
       a log that begins mid-session after a compaction. A large count means the elapsed figures
       cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
     excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
       and stderr, file contents, and diffs. This record is not a transcript and cannot be
       read as one.'

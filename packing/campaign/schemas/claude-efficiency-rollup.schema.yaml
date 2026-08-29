@@ -14,7 +14,15 @@ $id: packing.squares:ClaudeEfficiencyRollup/v1
 title: Claude Code efficiency rollup
 type: object
 additionalProperties: false
-required: [source, span, turns, tokens, tool_calls, semantics]
+required:
+  - source
+  - span
+  - turns
+  - tokens
+  - tokens_by_thinking_level
+  - tool_calls
+  - session_events
+  - semantics
 properties:
   source:
     type: object
@@ -51,7 +59,14 @@ properties:
   turns:
     type: object
     additionalProperties: false
-    required: [assistant, sidechain, by_model, by_thinking_level, by_branch, content_blocks]
+    required:
+      - assistant
+      - sidechain
+      - by_model
+      - by_thinking_level
+      - by_model_and_thinking_level
+      - by_branch
+      - latency
     properties:
       assistant: {type: integer, minimum: 0}
       sidechain:
@@ -65,24 +80,49 @@ properties:
         description: >-
           Effort as the harness recorded it. This is what OR-2's "matched to the task"
           claim is checkable against.
+      by_model_and_thinking_level:
+        type: object
+        additionalProperties: {type: integer, minimum: 0}
+        description: >-
+          The cross of the two above. A session that ran one model at three efforts and
+          a session that ran three models at one effort have identical margins and
+          different meanings.
       by_branch: {type: object, additionalProperties: {type: integer, minimum: 0}}
-      content_blocks: {type: object, additionalProperties: {type: integer, minimum: 0}}
+      latency:
+        allOf: [{$ref: "#/$defs/elapsed"}]
+        description: >-
+          Parent record to turn. The closest thing here to model time and not model time:
+          it also carries queueing and any human pause before a reply.
   tokens:
     type: object
     additionalProperties: {type: integer, minimum: 0}
     description: >-
       Per-turn usage as the harness reported it, summed. No cost is derived: pricing is
       not this record's to know, and a stored price goes stale silently.
+  tokens_by_thinking_level:
+    type: object
+    additionalProperties:
+      type: object
+      additionalProperties: {type: integer, minimum: 0}
+    description: >-
+      The same counters split by the effort each turn ran at, which is what makes the
+      cost of a thinking level answerable rather than asserted.
   tool_calls:
     type: object
     additionalProperties: false
     required:
       - total
       - total_seconds
+      - errors
+      - denied
       - unpaired_results
       - outstanding_at_snapshot
+      - one_off_code
       - by_tool
       - by_executable
+      - by_shell_shape
+      - by_thinking_level
+      - shell_traits
     properties:
       total: {type: integer, minimum: 0}
       total_seconds: {type: number, minimum: 0}
@@ -102,12 +142,58 @@ properties:
         type: integer
         minimum: 0
         description: Calls still in flight when the log was read.
+      errors:
+        type: integer
+        minimum: 0
+        description: >-
+          Calls the harness marked is_error. A failed call still spends its elapsed time,
+          so the count is separate rather than hidden inside the total.
+      denied:
+        type: integer
+        minimum: 0
+        description: Calls a permission decision refused.
+      one_off_code:
+        allOf: [{$ref: "#/$defs/elapsed"}]
+        description: >-
+          The `python_heredoc` and `python_inline` shapes together, which is what OR-1
+          calls a measurement left in one-off code. Promoted out of `by_shell_shape` so
+          the rule has one number rather than a sum a reader has to perform.
       by_tool: {$ref: "#/$defs/elapsed_group"}
       by_executable:
         allOf: [{$ref: "#/$defs/elapsed_group"}]
         description: >-
           Keyed by the leading executable word of a shell command, which is identity and
           not content. Nothing reconstructs a command line from this record.
+      by_shell_shape:
+        allOf: [{$ref: "#/$defs/elapsed_group"}]
+        description: >-
+          Structural classification in a fixed priority order, so a Python heredoc that
+          also pipes counts as a Python heredoc.
+      by_thinking_level: {$ref: "#/$defs/elapsed_group"}
+      shell_traits:
+        type: object
+        additionalProperties: {type: integer, minimum: 0}
+        description: >-
+          Non-exclusive structural features, counted rather than classified: a command
+          may pipe and redirect and background at once.
+  session_events:
+    type: object
+    additionalProperties: false
+    required: [compact_boundaries, stop_hook_summaries, queue_operations]
+    properties:
+      compact_boundaries:
+        type: integer
+        minimum: 0
+        description: >-
+          Context compactions. Each one means the figures before it describe a session
+          the model can no longer see.
+      stop_hook_summaries: {type: integer, minimum: 0}
+      queue_operations:
+        type: object
+        additionalProperties: {type: integer, minimum: 0}
+        description: >-
+          Messages queued and withdrawn mid-turn. An enqueue is an interjection, which
+          is a signal about pacing rather than about any tool.
   semantics:
     type: object
     minProperties: 1
@@ -119,14 +205,15 @@ properties:
       summed with a harness that reports the figure and the total will be wrong in the
       flattering direction.
 $defs:
+  elapsed:
+    type: object
+    additionalProperties: false
+    required: [count, total_seconds]
+    properties:
+      count: {type: integer, minimum: 0}
+      total_seconds: {type: number, minimum: 0}
+      median_seconds: {type: number, minimum: 0}
+      max_seconds: {type: number, minimum: 0}
   elapsed_group:
     type: object
-    additionalProperties:
-      type: object
-      additionalProperties: false
-      required: [count, total_seconds]
-      properties:
-        count: {type: integer, minimum: 0}
-        total_seconds: {type: number, minimum: 0}
-        median_seconds: {type: number, minimum: 0}
-        max_seconds: {type: number, minimum: 0}
+    additionalProperties: {$ref: "#/$defs/elapsed"}

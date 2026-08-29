@@ -12,17 +12,26 @@ live in git and detailed enough to answer the questions the efficiency work asks
 
 |  |  |
 | --- | --- |
-| `<session-id>.yaml` | One [`ClaudeEfficiencyRollup/v1`](../schemas/claude-efficiency-rollup.schema.yaml) record, written by `devtools.claude_log_rollup` |
+| `<session-id>.yaml` | One [`ClaudeEfficiencyRollup/v1`](../schemas/claude-efficiency-rollup.schema.yaml) record, written by `devtools.logrollup.claude` |
 
-`devtools.codex_log_rollup` is the sibling reader for Codex transcripts and emits
-`CodexEfficiencyRollup/v2`. The two are separate on purpose: the harnesses record
-genuinely different things, and one shape over both would either discard what one knows
-or invent fields the other cannot fill.
+The harness is detected from the log’s content, so one command serves every reader.
+
+[`devtools/logrollup/`](../../devtools/logrollup/) is where the split between systematic
+and per-agent lives.
+`model.py` holds what a rollup *is* for any harness — a content-identified source, a
+span, turns, tool calls, and a required `semantics` block — and `reader.py` holds the
+protocol and registry that find a reader by reading the file rather than trusting its
+name. Everything else is per-harness: adding one is a module and a line in `REGISTRY`.
+
+`devtools.codex_log_rollup` emits `CodexEfficiencyRollup/v2` and is deliberately **not**
+registered, for a real difference rather than an oversight: its unit is a tree of Codex
+task sessions under a root id, not one file, so it answers a question this registry’s
+one-log-in, one-record-out shape cannot ask.
 A unified `EfficiencyRollup` that both map into is `BC-075`’s, and it is the only thing
 downstream should read.
 
 ```bash
-uv run --frozen python -m devtools.claude_log_rollup LOG.jsonl --out campaign/resource-usage
+uv run --frozen python -m devtools.log_rollup LOG.jsonl --out campaign/resource-usage
 ```
 
 ## What survives, and what does not
