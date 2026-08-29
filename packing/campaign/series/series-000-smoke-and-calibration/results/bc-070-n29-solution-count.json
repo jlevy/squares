@@ -55,5 +55,20 @@
     "imaginary_part": "5.51012976947947e-40",
     "matches_to_digits": 15,
     "why_it_matters": "The homotopy shares no code and no method with the Newton refinement that produced the retained pose, and reached this value from a random start system rather than from the published digits. That the two agree is an independent check on the whole export chain -- the half-angle rationalisation, the coefficient clearing, and the emitted text -- by a route that could not have inherited an error from it."
-  }
+  },
+  "alternative_formulations_measured": [
+    {
+      "system": "the five equations in five half-angles left after solving f6 for s",
+      "total_degrees": [
+        16,
+        20,
+        15,
+        20,
+        12
+      ],
+      "mixed_volume": 24476,
+      "verdict": "worse",
+      "note": "Substituting s out raises every degree and raises the mixed volume with them, from 15,744 to 24,476. The elimination that costs nothing algebraically is not free geometrically, and the six-equation form is the one to bound from. Measured rather than assumed, because the reduced form is the one BC-065 left and the obvious thing to reach for."
+    }
+  ]
 }

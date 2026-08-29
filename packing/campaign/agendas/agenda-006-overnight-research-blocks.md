@@ -904,6 +904,12 @@ agenda:
       separately accounted here either. About 7,500 distinct `s` values were seen, and
       that number is recorded because it was measured, not because it settles anything.
 
+      One alternative was measured rather than assumed, because it is the obvious thing to
+      reach for: the five-equation form BC-065 left, after `s` is solved out of `f6`, has a
+      mixed volume of `24,476` -- *worse* than the six-equation form's `15,744`. The
+      elimination that costs nothing algebraically is not free geometrically, since
+      substituting `s` out raises every degree and the bound with them.
+
       What the run did buy beyond the bound is a check nobody designed it for. The
       retained `s(29)` is among the tracked solutions at
       `5.93383346267693` with an imaginary part of `5.51e-40`, agreeing to fifteen digits.
