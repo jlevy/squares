@@ -46,7 +46,8 @@
       "tolerance_1e-8": 7539
     },
     "verdict": "not usable as a degree",
-    "why": "BC-070's kill condition is that a count which cannot account for its own paths is not evidence about a degree. 148 paths ended in `no solution` and 600 solutions are reported singular, so the accounting is incomplete in both directions: paths were lost, and a singular endpoint may be several solutions coincident. The count is recorded because it was made, not because it settles anything, and the degree bound this artifact carries remains the mixed volume."
+    "why": "BC-070's kill condition is that a count which cannot account for its own paths is not evidence about a degree, and this one cannot, in three separate ways. Of the 15,744 paths, only 8,327 reach the reported solution list at all; 7,417 do not, which is expected rather than alarming -- the mixed volume is attained only for generic coefficients and this system is structured, so paths diverging to infinity is the normal outcome, but it is not separately accounted here. Of the 8,327 that do arrive, 148 are labelled `no solution`, and 600 are reported singular, where a singular endpoint may be several solutions coincident. The count is recorded because it was made, not because it settles anything, and the degree bound this artifact carries remains the mixed volume.",
+    "paths_not_reaching_the_final_list": 7417
   },
   "independent_confirmation": {
     "what": "The retained s(29) is among the tracked solutions.",

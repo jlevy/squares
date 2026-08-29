@@ -346,9 +346,11 @@ session:
       torus.'
     - >-
       'Tracking all `15,744` paths took 22m41s and returned 8,327 finite solutions, with
-      148 ending in `no solution` and 600 reported singular. The accounting is incomplete
-      in both directions, so the roughly 7,500 distinct `s` values seen are recorded as a
-      measurement and not as a degree.'
+      148 ending in `no solution` and 600 reported singular. Only 8,327 of the 15,744 paths
+      reach the reported list at all, the other 7,417 being the divergence a structured
+      system produces where a generic one would not. The accounting is incomplete in three
+      ways, so the roughly 7,500 distinct `s` values seen are recorded as a measurement and
+      not as a degree.'
     - >-
       'An independent check nobody designed the run for: the retained `s(29)` is among the
       tracked solutions at `5.93383346267693` with imaginary part `5.51e-40`, agreeing to

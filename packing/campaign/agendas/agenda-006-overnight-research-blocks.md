@@ -855,8 +855,11 @@ agenda:
       solutions -- 7,343 complex regular, 549 complex singular, 236 real regular, 51 real
       singular -- with **148 paths ending in `no solution`**. The accounting is incomplete
       in both directions: paths were lost, and a singular endpoint may be several
-      solutions coincident. About 7,500 distinct `s` values were seen, and that number is
-      recorded because it was measured, not because it settles anything.
+      solutions coincident. Only 8,327 of the 15,744 paths reach the reported list at all;
+      the other 7,417 do not, which is the expected behaviour for a structured system --
+      the mixed volume is attained only for generic coefficients -- but it is not
+      separately accounted here either. About 7,500 distinct `s` values were seen, and
+      that number is recorded because it was measured, not because it settles anything.
 
       What the run did buy beyond the bound is a check nobody designed it for. The
       retained `s(29)` is among the tracked solutions at

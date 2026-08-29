@@ -84,9 +84,6 @@ DECLARED_CONSUMERS = {
         "names the ceiling only as a standing constraint: the continuation measures where "
         "elimination stops and closes the round trip at n = 11, and moves nothing"
     ),
-    "packing/campaign/agendas/agenda-006-overnight-research-blocks.md": (
-        "schedules blocks that read the ceiling as the thing a runner may not move"
-    ),
     "packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md": (
         "records the certificate as evidence and says the ceiling was not moved to it"
     ),
