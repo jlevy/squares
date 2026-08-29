@@ -428,6 +428,33 @@ What a fresh agent needs to know that is not obvious from the diff:
 - **`verified_upper_bound` may not be moved by a runner**, and any record that names the
   field must declare what it takes it to mean or the gate will refuse it.
 
+### What `BC-066` would and would not buy
+
+Worth knowing before spending a block on it, because the instinct that elimination is
+the “real” answer is right about rigour and easy to over-read about consequence.
+
+Writing the system down is **not** the hard part and is already done, twice: our own
+assembly from the contact topology (122 equations in 88 unknowns, full rank, residual
+`1.3e-15`) and the source’s own six-equation system, which is itself the product of a
+large hand-elimination — Kingbird expressed all twenty-nine poses in six parameters.
+Rationalised, that is six polynomials over `Q`, and five after `s` is solved out.
+The wall is the elimination, not the transcription.
+
+Elimination is also genuinely **less error-prone** than integer relation, and that is
+the honest argument for it.
+Integer relation is guess-and-check: `pslq` emits candidates and the margin rule filters
+them, so the rule carries all the epistemic weight.
+Elimination is a derivation — exact by construction, with no margin, no precision
+question, and nothing to be fooled by.
+
+But a complete success upgrades the `n = 29` **upper bound** from “certified at a
+relaxation of `1e-20`” to “exactly this algebraic number”.
+It says nothing about optimality.
+The bound gap of about `0.46` at `n = 29` is untouched either way, and so is the
+question of whether Kingbird’s packing is the best one.
+Do the block for exactness and for making the pipeline general at sizes with no
+published system — not as a route to a larger theorem.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

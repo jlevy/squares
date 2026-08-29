@@ -568,15 +568,40 @@ agenda:
     depends_on: [BC-065]
     workflows: [pipeline-improvement]
     next_evidence: >-
-      The Bezout bound is `1,039,500`, which is an upper bound and loose. A resultant chain
-      over five variables at these degrees may blow up in intermediate size long before it
-      reaches an eliminant, so the block declares a cap and reports the sizes it reached at
-      each step rather than running until something dies.
+      The Bezout bound is `1,039,500`, an upper bound and loose. Two failure modes are
+      known in advance and the block should measure which one it hits. A **resultant
+      chain** multiplies degrees at every step -- from `[16, 20, 15, 20, 12]` one
+      elimination gives about `320`, the next about `10^5` -- and introduces extraneous
+      factors, so a successful chain still ends in factoring a very large polynomial.
+      A **Grobner basis** in lex order is doubly exponential in the worst case, but what
+      kills it in practice is intermediate coefficient swell: coefficients reach thousands
+      of digits from single-digit inputs and memory runs out before the steps do. Report
+      the sizes reached at each step rather than running until something dies.
     note: >-
       A refusal here is a result and should be recorded as one: it would say the exact
       route does not reach n = 29 at any practical cost, which is the measured
       justification for the interval route carrying that bound. Do not widen the cap to
       reach a positive answer.
+
+      **"Intractable in SymPy" is not "intractable", and the block should say which it
+      found.** Four things are worth reaching for before concluding the route is closed,
+      roughly in order of expected return: `msolve` or Singular or Magma, which implement
+      F4/F5 and compute a rational univariate representation of a zero-dimensional system,
+      and are orders of magnitude past SymPy's Buchberger; **multi-modular** computation,
+      which does the work mod several primes where coefficients stay bounded and lifts by
+      CRT and rational reconstruction, attacking the swell directly; **homotopy
+      continuation** (`HomotopyContinuation.jl`, Bertini), which tracks the solution paths
+      numerically and yields the *degree of the projection to the s-axis* without the
+      polynomial -- which is what would turn BC-060's blind sweep into a targeted search at
+      a known degree; and **LLL over a scaled integer lattice** (`fplll`) in place of
+      mpmath's pure-Python `pslq`, plausibly two to three orders of magnitude faster and so
+      a real change in reachable degree. None is in this repository today, so adding one is
+      part of the block rather than a prerequisite for it.
+
+      The two routes compose rather than compete. A successful elimination returns an
+      eliminant whose roots are the sides of *every* complex solution of the system, so the
+      irreducible factor carrying our root still has to be identified -- which needs the
+      high-precision numerics back again.
   - id: BC-067
     purpose: tool_validation
     owner_focus: correctness
