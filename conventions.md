@@ -429,16 +429,20 @@ or incomplete strict surfaces always return nonzero.
 deliberately separate from the edit/test loop, so an eight-hour hypothesis never makes a
 documentation correction take eight hours to validate:
 
-| Loop | Target latency | Use |
+| Loop | Measured latency | Use |
 | --- | ---: | --- |
 | Interactive | under about 2 seconds | Pytest, ledger and schema checks, exact-witness verification, engine self-test |
-| Focused | under about 60 seconds | `packing-validate --fast` or `packing-validate --only TEXT` for one component and its controls |
-| Checkpoint | about 2 minutes | Normal `packing-validate` before a commit, push, cross-component handoff, or checkpoint merge |
-| Deep handoff | about 5 minutes | `packing-validate --strict` before an unattended campaign, a handoff that depends on regenerated producer output, or any claim that the strict/deep path is healthy |
+| Focused | seconds | `packing-validate --only TEXT` for one component and its controls |
+| Pre-push | about 70 seconds | `packing-validate --records`: registries, generated views, and declared contracts. This is the set that actually breaks CI ([D-369](defects.md)) |
+| Edit loop | about 8 minutes | `packing-validate --fast`, which is the pre-push set plus the behavioural tests that dominate it |
+| Checkpoint | about 18 minutes | Normal `packing-validate` before a commit, cross-component handoff, or checkpoint merge |
+| Deep handoff | about 18 minutes, two steps currently failing | `packing-validate --strict` before an unattended campaign, a handoff that depends on regenerated producer output, or any claim that the strict/deep path is healthy |
 | Research round | preregistered per hypothesis | Candidate generation or proof search under its own declared timebox |
 
-These are working envelopes, not promises; repeated versioned benchmarks and warm/cold
-regimes remain tracked work.
+Measured on one container on 2026-08-29 and restated then, because the previous entries
+claimed sixty seconds for a tier that takes eight minutes and two minutes for one that
+takes eighteen. A latency column nobody re-measures is how a tier stops being chosen on
+cost. Whether these are the right tiers is `BC-075`.
 
 A checkpoint merge may retain a known strict/deep failure when the normal gate passes
 without skips, the exact failure and its limitation are recorded in the defect log and

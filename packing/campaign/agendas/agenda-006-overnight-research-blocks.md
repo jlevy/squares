@@ -1348,8 +1348,12 @@ agenda:
       gate whose tree you are about to change.
 
       BC-076 has since settled where the general form of that belongs -- `OR-3` in
-      `operating-rules.md`, summarised into `AGENTS.md` -- so what is left here is the
-      measured part: which of the three specific rules the timings actually support, and
+      `operating-rules.md`, summarised into `AGENTS.md` -- and `D-369` supplies the first
+      measurement this block was going to have to take. Seven CI failures on this branch,
+      every one a registry, generated view, or declared contract going stale, none a
+      behavioural test; the record checks run in about 70 seconds against the fast tier's
+      eight minutes, of which one step is 87%. `packing-validate --records` exists as the
+      increment that stops the recurrence, so what is left here is the measured part: which of the three specific rules the timings actually support, and
       whether any of them is better enforced by tooling than by a rule. A rule an agent
       reads and a tier that makes the rule unnecessary are different fixes, and this block
       is where they are told apart.

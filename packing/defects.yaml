@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 368
+count: 369
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9758,3 +9758,42 @@ defects:
     mirrored, and a gap in the rule numbering.
   bead: think-eb29
   recorded_in: operating-rules.md
+- id: D-369
+  title: The gate's cheap checks were hostage to its expensive one, so drift reached CI
+  date: '2026-08-29'
+  layer: tooling
+  class: performance
+  detected_by: review
+  latent_for: 'the whole of the 2026-08-29 branch'
+  severity: medium
+  status: fixed
+  what: >-
+    Seven CI failures on one branch, and every one of them was a registry, generated view,
+    or declared contract going stale: a duplicated key in the declared-consumer registry,
+    an undeclared `verified_upper_bound` consumer, two open beads sharing a title, a stale
+    `ledger.md`, and an agenda cell with an empty `instances` list. None was a behavioural
+    test. Those checks together run in about 70 seconds, but the only tier that contained
+    them was `--fast`, which takes about eight minutes because one step -- the behavioural
+    tests -- is roughly 87% of it. So the tier that catches everything that breaks was
+    priced at the cost of the step that never broke, and pushing without it kept looking
+    like the cheaper move.
+  consequence: >-
+    Wall clock and reviewer trust, not correctness. Each failure cost a CI round trip
+    plus a fix commit, and three consecutive pushes failed on one unfixed cause because
+    the next push went out before the first result landed. The gate's own cadence table
+    made it worse by claiming sixty seconds for the eight-minute tier and two minutes for
+    the eighteen-minute one, so the tier was being chosen against numbers that were wrong
+    by an order of magnitude.
+  fix: >-
+    `packing-validate --records` selects the eleven record checks and nothing else, at
+    about 70 seconds, and is the declared pre-push command. `conventions.md`'s cadence
+    table is restated from measurement rather than intention. `OR-3` gains the other half:
+    push first so CI runs concurrently with local checks, rather than serialising them.
+  regression: >-
+    A test asserts the tier is exactly the steps tagged `records`, that all of them are in
+    the fast tier, and that the behavioural-test step is not among them -- tagging a test
+    step into the tier would restore the cost that caused this. The structural question,
+    whether these are the right tiers at all, is `BC-075`; this entry is the increment that
+    stops the recurrence in the meantime.
+  bead: think-c46d
+  recorded_in: packing/src/sqpack/cli/validate.py

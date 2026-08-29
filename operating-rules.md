@@ -60,7 +60,13 @@ Never poll it, and never start one against a tree you are about to change: a gat
 inputs move underneath it has to be run again, so it spends the eight minutes and buys
 nothing.
 
-Whether the gate should be that long is `BC-075`, not this rule.
+**Run `packing-validate --records` before a push, and push before the slower checks
+finish** so CI runs concurrently with them rather than after them.
+The record checks take about 70 seconds and are the ones that break
+([D-369](defects.md)); the behavioural tests take eight minutes and have never broken
+here. Serialising local tests and CI pays the longer of the two costs twice.
+
+Whether these are the right tiers is `BC-075`, not this rule.
 
 ## OR-4: Take the next slice from the handoff, not from the backlog
 
