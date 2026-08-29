@@ -7,9 +7,10 @@
 **Owns:** The single technical account of what this project knows, how it knows it, and
 what it is doing next.
 
-> Every number here also appears in a schema-validated artifact in this directory, or is
-> reproducible by a command given in the text, and the artifact is authoritative where
-> the two differ. `devtools.check_synopsis` enforces that in the gate.
+> Every number here also appears in a schema-validated artifact in this repository, or
+> is reproducible by a command given in the text, and the artifact is authoritative
+> where the two differ.
+> `devtools.check_synopsis` enforces that in the gate.
 
 ## The Program at a Glance
 

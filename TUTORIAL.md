@@ -1,6 +1,6 @@
 # Tutorial: Square Packing from First Principles
 
-**Audience:** anyone arriving at this directory without a background in the problem.
+**Audience:** anyone arriving at this repository without a background in the problem.
 
 **Owns:** the conceptual on-ramp—what the objects are, why the approach is shaped the
 way it is, and what the research has and has not established.

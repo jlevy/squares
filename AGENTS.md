@@ -18,6 +18,16 @@ actions rather than telling them to run commands.
 
 <!-- END TBD INTEGRATION -->
 
+## Starting Research Work
+
+The entry point for the next research loops is the synopsis’s
+[current handoff](SYNOPSIS.md#current-handoff): it names the active agenda, the exact
+next bounded slice, and the owning bead.
+The active agenda’s session queue owns priority ordering.
+`tbd ready` includes the historical backlog and is an input to a coordinator checkpoint,
+not the queue itself — do not pick work from it directly when a handoff and agenda
+exist.
+
 ## Build & Test
 
 The repository is mostly prose.
