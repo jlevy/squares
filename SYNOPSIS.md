@@ -355,9 +355,23 @@ both sizes** — `34` of `34` at `n = 11` and `88` of `88` at `n = 29` — resid
 at `8.9e-16` and `1.3e-15`, and `close` now refuses at both.
 It is [D-361](defects.md), class `soundness`, direction `conservative`: it made the
 pipeline look further from a solvable system than it was.
-Göbel’s `n = 5` has no `edge-edge` contact, is untouched by the repair, and keeps a
-genuine shortfall of one — now the only size where a stationarity condition still has to
-be derived. `BC-060` is closed in
+Göbel’s `n = 5` has no `edge-edge` contact, is untouched by the repair, and kept a
+genuine shortfall of one.
+`BC-069` closes it, and the answer corrects the form the pipeline had been promising.
+The condition is not first-order: `side_leak` reads `1.00e-16` there, so “no admissible
+motion decreases the side” is already true and adds a dependent row.
+The single free direction is a rotation of the centre square about its own centre, and
+the contacts fail along it at `−0.25 t²` in both signs — an ordinary second-order
+obstruction, so the pose is infinitesimally flexible and second-order rigid, and the
+shortfall is a degenerate root rather than an unpinned optimum.
+Differentiating the contact map along that direction takes the rank to **16 of 16** with
+the residual unmoved at `1.11e-16`, and each emitted condition expands to exactly the
+statement that the contacting corner sits at the **midpoint of the contacted edge** — an
+identity of the corner-edge contact type, checked against a midpoint expression written
+independently of the derivative.
+Both determined sizes are unmoved.
+The misnaming is [D-363](defects.md).
+`BC-060` is closed in
 [session 042](packing/campaign/agent-sessions/session-042-block8-exact-solve.md), with
 one answer and one refusal.
 At `n = 11` the promotion spec’s frozen margin rule recovers Trump’s published
@@ -2316,13 +2330,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 362 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 363 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 86 | asserted something false about the mathematics |
-| validity | 86 | was correct, but the measurement did not bear on the question |
+| validity | 87 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 137 | recorded something its own evidence contradicts |
 | robustness | 42 | did not finish, or finished only by luck |
 | performance | 11 | worked, but cost far more than it should |
@@ -2333,7 +2347,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-six defects in 362, and no soundness defect
+**The automated gate has caught forty-six defects in 363, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 362
+count: 363
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9502,5 +9502,55 @@ defects:
     `uv run --frozen --all-extras --group dev python -m devtools.check_svg_rendering
     --check`, which then refuses the exact n = 5 trajectory.
   bead: think-mt4h
+  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+
+- id: D-363
+  title: A closure form was named in the record that could not close the case it was named
+    for
+  date: '2026-08-29'
+  layer: tooling
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: from BC-054 in session-038 until BC-069 in session-044
+  severity: low
+  status: fixed
+  what: >-
+    `close`'s docstring named the missing `n = 5` condition as "the Lagrange or Fritz-John
+    statement that no admissible motion decreases the side, in determinant form". That
+    statement is already true at `n = 5`: `side_leak` reads `1.00e-16` and the single free
+    direction is a rotation of the centre square about its own centre with an `s` component
+    at the same floor, so no contact-preserving first-order motion changes the side. A true
+    statement adds a dependent row and no rank. The obstruction is second-order -- the free
+    direction violates the contacts at `-0.25 t^2`, identical in both signs across three
+    decades -- so the shortfall is a degenerate root of the contact map rather than an
+    unpinned optimum.
+  consequence: >-
+    Nothing shipped; the misnaming was in prose. Had it been followed it would have sent
+    the next session after a first-order determinant condition at the one size where no
+    first-order condition can close the system. It was compounded by a structural gap:
+    `closure` held prose strings while `contact_jacobian` and `residual_at` read
+    `equations` alone, so the only thing a closure condition could do was change
+    `equation_count` -- which is the shape of the failure D-361 records, arriving a second
+    way.
+  fix: >-
+    `close` derives the condition by differentiating the contact map along the direction
+    the contacts leave free, and `closure` now carries `sp.srepr` with every consumer
+    reading `all_equations`. Rank at `n = 5` moves from 15 to `16` of `16` with the
+    residual unmoved at `1.110e-16`; `n = 11` and `n = 29` are unmoved at `34/34` and
+    `88/88` with `close` still refusing `already-determined`, verified after the change.
+    Each emitted condition expands to exactly the statement that the contacting corner sits
+    at the midpoint of the contacted edge -- an identity of the corner-edge contact type,
+    checked against a midpoint expression written independently of the derivative, so the
+    condition is derived rather than fitted.
+  regression: >-
+    Five controls, each watched to fire: the closure pinning the free angle at its measured
+    value, repeating the contact equations instead of differentiating them, taking the free
+    direction with its measurement noise, taking the Jacobian of the contacts alone, and
+    skipping the closure in the residual. The positive check compares each emitted
+    condition against the independently written midpoint statement and requires symbolic
+    equality. `t4 = pi/4` also reaches rank 16 and is asserted in the test as proof that
+    reaching full rank is not on its own evidence of anything.
+  bead: think-rqad
   recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
 

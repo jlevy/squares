@@ -424,7 +424,7 @@ session:
     objective: >-
       Integrate the delegated n = 5 closure lane, and hold it to the rule that a condition
       may be derived but not sized to make the counts meet.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       The exact-route and middle-layer blocks are terminal; this is the last research lane
@@ -443,9 +443,38 @@ session:
       exactly that and is the control the lane must fail.
     fallback: >-
       Record what the contact graph resists, which is a full result for this commitment.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      Closed, and the answer corrects the form the pipeline had been promising rather than
+      supplying the condition it promised.
+    evidence:
+    - >-
+      'The condition is not first-order. `side_leak` reads `1.00e-16` at n = 5, so "no
+      admissible motion decreases the side" is already true there and adds a dependent row.
+      The free direction is a rotation of the centre square about its own centre and the
+      contacts fail along it at `-0.25 t^2` in both signs across three decades -- a
+      second-order obstruction, not the `O(t)` signature that diagnosed D-361. Recorded as
+      D-363.'
+    - >-
+      'What closes it is the contact map differentiated along that free direction. Rank
+      goes to 16 of 16 with the residual unmoved at `1.110e-16`. Verified here rather than
+      taken on report: n = 11 stays `34/34` at `8.882e-16` and n = 29 stays `88/88` at
+      `1.332e-15`, both with `close` refusing `already-determined`.'
+    - >-
+      'The evidence that it is derived rather than fitted is not the rank. Each condition
+      expands to exactly the statement that the contacting corner sits at the midpoint of
+      the contacted edge, checked against a midpoint expression written from the corner
+      offsets alone, with the difference simplifying to zero as an identity in the
+      unknowns. Conditions are emitted per equation rather than per missing rank -- four
+      survive where the shortfall is one -- and the test asserts that `t4 = pi/4` also
+      reaches rank 16, so the file records that full rank proves nothing on its own.'
+    - >-
+      'A structural gap closed with it: `closure` held prose while `contact_jacobian` and
+      `residual_at` read `equations` alone, so a closure condition could only move a count.
+      Everything now reads `all_equations`. Five controls fire.'
+    stop_reason: >-
+      Exit met, with the restriction flagged rather than left implicit: the kernel vector
+      is fixed at a measured value rather than carried as an unknown, which is available
+      only because this kernel is one-dimensional and reads across sixteen decades.
     next_action: >-
       Open the reserved BC-064 endpoint check.
   primary_bead: think-obgk

@@ -2,7 +2,7 @@
 
 # Defect log
 
-362 defects recorded across the packing toolchain.
+363 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 23 | a cell of the sweep whose answer is known in advance |
-| `review` | 225 | a human or agent reading the work against a checklist |
+| `review` | 226 | a human or agent reading the work against a checklist |
 | `anomaly` | 12 | a result that made no sense, chased down |
 | `inspection` | 36 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 46 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 46 of 362, and none of the 86 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 46 of 363, and none of the 86 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 46 of 362, and none of
 | quench | 22 |
 | verifier | 4 |
 | record | 104 |
-| tooling | 118 |
+| tooling | 119 |
 | docs | 103 |
 
 ## By kind
@@ -43,7 +43,7 @@ The line worth reading twice: **the automated gate caught 46 of 362, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 86 |
-| validity | 86 |
+| validity | 87 |
 | bookkeeping | 137 |
 | robustness | 42 |
 | performance | 11 |
@@ -581,6 +581,7 @@ This is the actionable list.
 | [D-360](packing/campaign/agent-sessions/session-040-block6-chirality.md) | 2026-08-29 | record | validity | neutral | `review` | low | fixed | A null-space finding was read off a filtered display instead of being computed |
 | [D-361](packing/campaign/agent-sessions/session-041-block7-collinearity.md) | 2026-08-29 | tooling | soundness | conservative | `control_cell` | high | fixed | An edge-edge contact was assembled as one equation, so the contact system did not determine the pose |
 | [D-362](packing/campaign/agent-sessions/session-044-agenda006-continuation.md) | 2026-08-29 | tooling | robustness |  | `review` | low | outstanding | The translation-only trajectory check compares independently rounded projections for exact equality |
+| [D-363](packing/campaign/agent-sessions/session-044-agenda006-continuation.md) | 2026-08-29 | tooling | validity | neutral | `review` | low | fixed | A closure form was named in the record that could not close the case it was named for |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

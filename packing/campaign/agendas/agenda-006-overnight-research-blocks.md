@@ -783,7 +783,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       What is the one stationarity condition n = 5 still needs, in a form a solver accepts?
@@ -797,6 +797,10 @@ agenda:
       A condition whose addition takes the n = 5 rank to 16 of 16 with the residual unmoved
       at the retained pose; or a typed statement of which formulation the contact graph
       resists.
+    artifacts:
+    - src/sqpack/promote/system.py
+    - tests/test_promote_system.py
+    - devtools/probe_contact_system.py
     bead: think-rqad
     depends_on: [BC-059]
     workflows: [pipeline-improvement]
@@ -809,6 +813,45 @@ agenda:
       `close` reports that one condition is needed and refuses to invent it. This block is
       allowed to derive one; it is not allowed to size one to make the counts meet, which
       is the failure BC-059 recorded as D-361.
+
+      Closed in session-044, and the answer corrects the form the pipeline had been
+      promising. The condition is **not** first-order. `side_leak` reads `1.00e-16` at
+      `n = 5`, so "no admissible motion decreases the side" is already true there and adds
+      a dependent row; the single free direction is a rotation of the centre square about
+      its own centre, and the contacts fail along it at `-0.25 t^2` in both signs across
+      three decades. That is an ordinary second-order obstruction, not the `O(t)` signature
+      that diagnosed D-361, so the pose is infinitesimally flexible and second-order rigid
+      and the shortfall is a degenerate root rather than an unpinned optimum. The
+      misnaming is D-363.
+
+      What closes it is the contact map differentiated along the direction the contacts
+      leave free: `sum_j v_j d(g_k)/d(u_j) = 0`. Rank goes to **16 of 16** with the
+      residual unmoved at `1.110e-16`, and `n = 11` and `n = 29` are unmoved at `34/34`
+      and `88/88` with `close` still refusing `already-determined` -- verified after the
+      change rather than assumed.
+
+      The evidence that it is derived rather than fitted is not the rank. Each emitted
+      condition expands to *exactly* the statement that the contacting corner sits at the
+      midpoint of the contacted edge, checked against a midpoint expression written from
+      the corner offsets alone with no reference to any derivative, and the difference
+      simplifies to zero as an identity in the unknowns rather than as a coincidence at
+      this pose. So it is a theorem about the corner-edge contact type. Conditions are
+      also emitted per equation rather than per missing rank -- four survive where the
+      shortfall is one -- which is what sizing to the counts would not do. And the test
+      asserts that `t4 = pi/4` reaches rank 16 as well, so the file records that reaching
+      full rank proves nothing on its own.
+
+      One restriction is flagged rather than left implicit: this is the deflation step of
+      Leykin-Verschelde-Zhao specialised to a kernel that is one-dimensional and reads
+      across sixteen decades, with the kernel vector fixed at a measured value instead of
+      carried as unknowns under a normalisation. It is what Newton and Krawczyk need at
+      this pose, and it is less than a proof of optimality.
+
+      A structural gap was closed with it: `closure` held prose while `contact_jacobian`
+      and `residual_at` read `equations` alone, so a closure condition could only change a
+      count. Everything now reads `all_equations`, and `close` refuses
+      `closure-does-not-close` rather than returning a system its conditions did not
+      close.
   - id: BC-070
     purpose: tool_validation
     owner_focus: correctness
