@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 360
+count: 361
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9394,3 +9394,48 @@ defects:
     compute that quantity rather than reading something correlated with it.
   bead: think-km5r
   recorded_in: packing/campaign/agent-sessions/session-040-block6-chirality.md
+- id: D-361
+  title: An edge-edge contact was assembled as one equation, so the contact system did not
+    determine the pose
+  date: '2026-08-29'
+  layer: tooling
+  class: soundness
+  direction: conservative
+  detected_by: control_cell
+  latent_for: from BC-054 in session-038 until BC-059 in session-041
+  severity: high
+  status: fixed
+  what: >-
+    `sqpack.promote.system` emitted one scalar equation per `edge-edge` contact, putting a
+    single endpoint of one edge onto the other edge's line. Coincident lines in the plane
+    are two conditions, not one: the edges parallel and one point shared. With only the
+    incidence written down, the second square is free to pivot about that point, which
+    keeps the equation satisfied and drives the squares into each other at first order.
+    Measured at n = 11 by walking the contact Jacobian's null space in the direction that
+    most decreases the side: three declared edge-edge pairs reached overlaps of `-5.1e-6`,
+    `-4.2e-6` and `-3.2e-6` at a step of `1e-5`, growing linearly in the step.
+  consequence: >-
+    The assembled system did not isolate the pose it was assembled from, and the shortfall
+    that left was named as something it was not. `close` reported four missing
+    "stationarity conditions" at n = 11 and seven at n = 29, described as Lagrange or
+    Fritz-John determinant conditions; they were four and seven missing collinearity
+    equations. The record carried that reading into session-038, session-040, SYNOPSIS.md
+    and BC-059's own framing, which had gone as far as concluding from the same numbers
+    that no first-order condition could close either size. The error was conservative --
+    it made the pipeline look further from a solvable system than it was -- and it blocked
+    BC-060, which needs a square system to work on.
+  fix: >-
+    `edge-edge` contributes two equations, both endpoints of the right edge on the left
+    edge's line. The contact Jacobian then reaches full rank at both retained sizes, `34`
+    of `34` at n = 11 and `88` of `88` at n = 29, with residuals unmoved at `8.9e-16` and
+    `1.3e-15`; `close` takes its `already-determined` refusal at both. Göbel's n = 5 has
+    no edge-edge contact, is untouched by the repair, and keeps a genuine shortfall of one
+    -- the only size where a stationarity condition still has to be derived.
+  regression: >-
+    Two controls. One restores the single-endpoint equation and requires the n = 11
+    equation count to move; the other disables `close`'s `already-determined` guard and
+    requires the test to catch a closure invented for a determined system. The positive
+    check is a test that walks the null space and requires the projection of `e_s` onto it
+    to vanish, which is the property the missing equation destroyed.
+  bead: think-9c40
+  recorded_in: packing/campaign/agent-sessions/session-041-block7-collinearity.md

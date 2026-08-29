@@ -11,7 +11,7 @@ are not optional.**
 | Contact | Condition | Scalar equations |
 | --- | --- | ---: |
 | `corner-edge` | the corner lies on the edge's line | 1 |
-| `edge-edge` | the two edge lines coincide | 1 |
+| `edge-edge` | the two edge lines *coincide* | 2 |
 | `corner-corner` | the two corners are the same point | 2 |
 | `corner-wall` | the corner's coordinate meets the wall | 1 |
 
@@ -22,12 +22,25 @@ neither appears here.  Folding the four rows above into "one equation per contac
 mistake this table exists to prevent: it would silently drop the second corner-corner
 equation and produce a system that is square by accident.
 
-**Why the raw system is not square, and what closes it.**  The unknowns are each
-square's centre and angle plus the side: `3n + 1` of them.  Contacts alone do not
-determine a *locally optimal* packing -- they describe the combinatorics of one, and a
-continuum of nearby configurations shares them.  What singles out the optimum is that
-the side cannot be decreased, which is a Lagrange or Fritz-John condition in determinant
-form. :func:`close` adds it.
+**`edge-edge` is two, and reading it as one was a real bug.**  Coincident lines in the
+plane are two conditions -- the edges parallel, and one point shared -- so putting a
+single endpoint of one edge onto the other's line leaves the second square free to
+*rotate about that point*.  The rotation keeps the equation satisfied to first order
+while the edge digs into its neighbour linearly, which is exactly what was measured: at
+`n = 11` a motion in the Jacobian's null space drove three declared edge-edge pairs to
+overlaps of `-5.1e-6`, `-4.2e-6` and `-3.2e-6` at a step of `1e-5`, growing linearly in
+the step.  The second equation puts the *other* endpoint on the same line, which is
+collinearity.
+
+**The raw system is not short of stationarity conditions; it was short of contact
+equations.**  The unknowns are each square's centre and angle plus the side: `3n + 1` of
+them.  With `edge-edge` counted correctly the contact Jacobian reaches full rank at both
+retained sizes -- `34` of `34` at `n = 11` and `88` of `88` at `n = 29` -- so the
+contacts alone isolate the pose and nothing needs adding.  Göbel's `n = 5` has no
+`edge-edge` contact at all and keeps a genuine shortfall of one, which is where a real
+stationarity condition lives.  :func:`close` supplies conditions only when the rank says
+one is missing, and now refuses at the two sizes where it was previously inventing four
+and seven.
 
 **The pose of a square is a centre, an angle, and a chirality.**  Not just the first
 two.  A packing may place a square by a reflection as readily as by a rotation, and a
@@ -49,6 +62,7 @@ constraint to make the counts meet.
 
 from __future__ import annotations
 
+import math
 from collections.abc import Sequence
 from dataclasses import dataclass
 from typing import NamedTuple
@@ -61,7 +75,7 @@ from sqpack.promote.contacts import ContactStructure, Incidence
 #: How many scalar equations each contact type contributes.
 EQUATIONS_PER_CONTACT = {
     "corner-edge": 1,
-    "edge-edge": 1,
+    "edge-edge": 2,
     "corner-corner": 2,
     "corner-wall": 1,
 }
@@ -244,10 +258,16 @@ def _pair_equations(incidence: Incidence, pose: _Pose) -> list:
         px, py = _corner(corner_index, _feature_corner(corner_feature), pose)
         return [sp.expand(normal[0] * (px - anchor[0]) + normal[1] * (py - anchor[1]))]
     if incidence.contact == "edge-edge":
+        # Both endpoints of the right edge on the left edge's line.  One endpoint alone
+        # says the lines *meet*, not that they coincide, and leaves the right square free
+        # to pivot about that point -- a motion that satisfies the equation and overlaps
+        # the squares at first order.
         normal, anchor = _edge_normal(left, incidence.left_feature or "", pose)
-        other_first, _ = _edge_endpoints(incidence.right_feature or "")
-        qx, qy = _corner(right, other_first, pose)
-        return [sp.expand(normal[0] * (qx - anchor[0]) + normal[1] * (qy - anchor[1]))]
+        first, second = _edge_endpoints(incidence.right_feature or "")
+        return [
+            sp.expand(normal[0] * (px - anchor[0]) + normal[1] * (py - anchor[1]))
+            for px, py in (_corner(right, first, pose), _corner(right, second, pose))
+        ]
     raise SystemAssemblyError(
         "unknown-contact-type",
         f"incidence ({left}, {right}) is typed {incidence.contact!r}, which has no "
@@ -319,17 +339,24 @@ def assemble(structure: ContactStructure) -> ContactSystem:
 
 
 def close(system: ContactSystem, values: Sequence[float], *, tolerance: float = 1e-9):
-    """Add the stationarity conditions the contact equations leave short.
+    """Add the stationarity conditions the contact equations leave short, if any.
 
     Closure is sized by the **rank** of the contact Jacobian, not by counting rows.
-    Counting is the wrong instrument here and measurably so: at `n = 11` there are 35
-    contact equations against 34 unknowns, which reads as overdetermined, while the
-    Jacobian has rank 30 -- so the equations are redundant *and* four conditions short at
-    the same time. A closure sized by the count would have added none.
+    Counting remains the wrong instrument: at `n = 11` there are 42 contact equations
+    against 34 unknowns, and the question of whether they determine the pose is not
+    answered by the surplus of eight.
 
-    What the four are is the next step and is not derived here.  They are the Lagrange
-    or Fritz-John conditions saying no admissible motion decreases the side, in
-    determinant form; this reports how many are needed and refuses to invent them.
+    **Most of the time there is nothing to add, and believing otherwise was a bug.**
+    With `edge-edge` contributing its second equation the Jacobian reaches full rank at
+    `n = 11` and at `n = 29`, so both now take the `already-determined` refusal -- where
+    an earlier version of this function reported four and seven missing "stationarity
+    conditions" that were in fact missing collinearity equations.  Göbel's `n = 5` has no
+    `edge-edge` contact and is still one short, which is the case a real condition has to
+    be derived for.
+
+    What that one condition is remains the next step and is not derived here.  It is the
+    Lagrange or Fritz-John statement that no admissible motion decreases the side, in
+    determinant form; this reports that one is needed and refuses to invent it.
     """
     info = jacobian_rank(system, values, tolerance=tolerance)
     shortfall = info["shortfall"]
@@ -439,6 +466,15 @@ def jacobian_rank(
 
     Reported with the singular values around the cut, because a numerical rank is a
     judgement about a gap and hiding the gap makes it look like a fact.
+
+    `side_leak` is the norm of the projection of the side's unit vector onto the null
+    space, and it is the quantity that says whether the pose is pinned *as an optimum*.
+    A direction `v` with `A v = 0` preserves every contact to first order along both `+v`
+    and `-v`, so if it also changes the side then one of the two shrinks the container
+    while every contact holds -- and the packing is not a strict local minimum of its own
+    system. It reads zero at every retained size and is reported rather than asserted,
+    because it was `1.86e-1` at `n = 11` and `1.14e-1` at `n = 29` while `edge-edge` was
+    assembled as one equation, and that is how the missing one was found.
     """
     equations = [sp.sympify(equation) for equation in system.equations]
     symbols = _symbols_by_name(system, equations)
@@ -447,13 +483,18 @@ def jacobian_rank(
     )
     evaluate = sp.lambdify(symbols, matrix, "mpmath")
     numeric = mp.matrix(evaluate(*values))
-    singular = mp.svd_r(numeric, compute_uv=False)
+    _left, singular, right = mp.svd_r(numeric)
     ordered = sorted((float(value) for value in singular), reverse=True)
     largest = ordered[0] if ordered else 0.0
     cut = tolerance * largest if largest > 0 else tolerance
     rank = sum(1 for value in ordered if value > cut)
+    side_index = list(system.unknowns).index("s")
+    leak = math.sqrt(
+        sum(float(right[index, side_index]) ** 2 for index in range(rank, right.rows))
+    )
     return {
         "rank": rank,
+        "side_leak": leak,
         "unknowns": system.unknown_count,
         "equations": len(system.equations),
         "shortfall": system.unknown_count - rank,

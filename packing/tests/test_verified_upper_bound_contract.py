@@ -87,6 +87,10 @@ DECLARED_CONSUMERS = {
         "names the ceiling only as a stop condition: the block builds the pose model and "
         "does not touch it"
     ),
+    "packing/campaign/agent-sessions/session-041-block7-collinearity.md": (
+        "names the ceiling only as a stop condition: the block repairs an assembly "
+        "equation and does not touch it"
+    ),
     "packing/campaign/ledger.md": (
         "generated: it renders the agenda notes below and inherits whatever they say, so "
         "it is an output of a consumer rather than one itself"

@@ -328,6 +328,8 @@ that vanish at the packing they came from.
 Three findings there went against the promotion spec — counting rows cannot say whether
 a system determines the pose, an angle class does not license an angle identity, and
 seven of the `n = 29` squares are reflected and refused by name.
+The rank half of the first was later found to be measuring a bug rather than the
+packings: see the `BC-059` paragraph below and [D-361](defects.md).
 `BC-056` closed that first stretch, and the run then resumed rather than ending: a
 review of the commit timestamps showed it had misread its own clock and stopped with
 most of its budget unspent ([D-358](defects.md)). `BC-057` is closed in
@@ -341,13 +343,22 @@ rather than refused and the `n = 29` residual falls from `2.0` to `1.3e-15` with
 `n = 11` calibration unmoved.
 The feature-renaming cost that commitment was written to weigh was not paid — reflecting
 the local axis leaves the corner indices alone.
-That assembled system has rank 81 against 88 unknowns, and measuring the projection of
-`e_s` onto its null space gives `1.14e-1` at `n = 29` and `1.86e-1` at `n = 11` against
-`1.00e-16` at `n = 5`. So contact-preserving first-order motions that change the side
-exist at the two larger sizes and not at `n = 5`, which means no first-order
-stationarity condition can close `n = 11` or `n = 29` — what forbids those motions is
-curvature. The next slice is **`BC-059` under `think-9c40`** — derive the stationarity
-conditions `close` currently only sizes.
+`BC-059` is closed in
+[session 041](packing/campaign/agent-sessions/session-041-block7-collinearity.md), and
+the answer was that there were no stationarity conditions to derive.
+The shortfall `close` had been reporting — four at `n = 11`, seven at `n = 29` — was a
+bug in assembly rather than a property of the packings: an `edge-edge` contact was
+written as one equation where collinearity in the plane is two, which left one square
+free to pivot about the shared point and drive its neighbour open at first order.
+With both endpoints of the edge on the line the contact Jacobian reaches **full rank at
+both sizes** — `34` of `34` at `n = 11` and `88` of `88` at `n = 29` — residuals unmoved
+at `8.9e-16` and `1.3e-15`, and `close` now refuses at both.
+It is [D-361](defects.md), class `soundness`, direction `conservative`: it made the
+pipeline look further from a solvable system than it was.
+Göbel’s `n = 5` has no `edge-edge` contact, is untouched by the repair, and keeps a
+genuine shortfall of one — now the only size where a stationarity condition still has to
+be derived. The next slice is **`BC-060` under `think-ovp7`**, which this unblocks —
+solve the system exactly and discharge the result rather than trusting it.
 The continuation runs the missing middle layers first, with the efficiency and research
 cells deliberately last.
 The full ordering for the sessions after it — including which of the two `priority: 0`
@@ -2230,12 +2241,12 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 360 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 361 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 85 | asserted something false about the mathematics |
+| soundness | 86 | asserted something false about the mathematics |
 | validity | 86 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 137 | recorded something its own evidence contradicts |
 | robustness | 41 | did not finish, or finished only by luck |
@@ -2243,11 +2254,11 @@ and checked in the gate.
 
 Two observations the log exists to make.
 
-**Sixty-seven of the eighty-five soundness defects pointed in the *flattering*
+**Sixty-seven of the eighty-six soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-six defects in 360, and no soundness defect
+**The automated gate has caught forty-six defects in 361, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

@@ -9,10 +9,18 @@ floor, and a mistyped contact or a wrong feature moves it by orders of magnitude
 Three findings are asserted here rather than described, because each contradicts what
 the promotion spec expected and a future reader should meet them as measurements:
 
-- **counting rows is the wrong instrument.**  At `n = 11` there are 35 contact equations
-  against 34 unknowns, which reads as overdetermined, while the Jacobian has rank 30 --
-  redundant and four conditions short at the same time.  Closure is sized by the rank
-  shortfall, and a closure sized by the count would have added none.
+- **counting rows is the wrong instrument.**  At `n = 11` there are 42 contact equations
+  against 34 unknowns, and the surplus of eight says nothing about whether they determine
+  the pose.  The rank does, and closure is sized by it.
+- **`edge-edge` pins collinearity, which is two conditions, and reading it as one was a
+  bug that looked like mathematics.**  A single endpoint on the other edge's line leaves
+  the second square free to pivot about that point, satisfying the equation while the
+  edge digs in linearly -- measured at `n = 11` as overlaps of `-5.1e-6`, `-4.2e-6` and
+  `-3.2e-6` at a step of `1e-5`, on three declared edge-edge pairs, growing linearly in
+  the step.  With the second equation the contact Jacobian reaches **full rank at both
+  retained sizes**, `34` of `34` at `n = 11` and `88` of `88` at `n = 29`.  The four and
+  seven "stationarity conditions" an earlier version reported were missing collinearity
+  equations, not missing theory.
 - **an angle class does not license an angle identity.**  Classes are decided modulo
   ninety degrees, so `t_i = t_j` is false for a class member a quarter or half turn from
   another.  Emitting those identities left `n = 11` at the noise floor -- its classes
@@ -23,6 +31,12 @@ the promotion spec expected and a future reader should meet them as measurements
   the `n = 29` residual at `2.0`; with the reflection carried in the corner model it
   falls to `1.3e-15`.  That number is why chirality is data on the structure rather than
   something assembly infers.
+
+The order of the checks in `main` is load-bearing in one place: the `side_leak` check
+runs before the equation count, so restoring the single-endpoint `edge-edge` equation
+trips the *geometric* assertion rather than an arithmetic one.  A control that proves
+"the count moved" is much weaker than one that proves "a contact-preserving motion can
+now shrink the container".
 
 The reflected case is exercised on a *mirrored copy of `n = 11`* rather than on `n = 29`
 itself.  Mirroring an exact packing gives an all-`-1` chirality whose right answer is
@@ -134,13 +148,14 @@ def the_packing_satisfies_its_own_equations() -> None:
         mp.mp.dps = previous
 
 
-def counting_rows_disagrees_with_the_rank() -> None:
-    """The finding that decides how closure is sized.
+def the_contact_equations_determine_the_pose() -> None:
+    """The measurement that says `close` has nothing to add at `n = 11`.
 
     `plan-2026-08-28-promotion-pipeline-implementation` phase 2 proposes withholding
     `close()` and requiring the unclosed system to be reported *underdetermined*, which
-    presumes the count answers the question.  It does not: `n = 11` is overdetermined by
-    the count and four conditions short by the rank, at the same time.
+    presumes the count answers the question.  It does not, and neither does it here in
+    the direction first recorded: the contacts, written down correctly, isolate the pose
+    outright.
     """
     previous = mp.mp.dps
     mp.mp.dps = PRECISION
@@ -151,9 +166,10 @@ def counting_rows_disagrees_with_the_rank() -> None:
         system = assemble(structure)
 
         assert system.unknown_count == 3 * 11 + 1 == 34
-        assert len(system.equations) == 35, (
-            "the n = 11 equation count moved; a corner-corner contact contributes two "
-            "scalar equations and the others one, so this count is the typing's arithmetic"
+        assert len(system.equations) == 42, (
+            "the n = 11 equation count moved; corner-corner and edge-edge each contribute "
+            "two scalar equations and the others one, so this count is the typing's "
+            "arithmetic"
         )
         assert system.state() == "overdetermined", system.summary()
         assert system.angle_identities == 0, (
@@ -164,52 +180,88 @@ def counting_rows_disagrees_with_the_rank() -> None:
         numbers, side_value = as_floats(field, squares, side)
         values = pose_values(system, numbers, side_value)
         info = jacobian_rank(system, values)
-        assert info["rank"] == 30, info
-        assert info["shortfall"] == 4, (
-            f"the n = 11 contact Jacobian rank moved to {info['rank']}; the shortfall is "
-            "how many stationarity conditions closure has to supply"
+        assert info["rank"] == 34 and info["shortfall"] == 0, (
+            f"the n = 11 contact Jacobian no longer determines the pose: {info}. Full "
+            "rank here is what says no stationarity condition is missing at this size"
         )
 
-        closed = close(system, values)
-        assert len(closed.closure) == 4, closed.summary()
-        assert closed.equation_count == len(system.equations) + 4
+        try:
+            close(system, values)
+        except SystemAssemblyError as error:
+            assert error.kind == "already-determined", error.kind
+        else:
+            raise AssertionError(
+                "close() added conditions to a system that already isolates its pose, "
+                "which is an invented constraint"
+            )
     finally:
         mp.mp.dps = previous
 
 
-def closure_is_sized_by_the_measured_shortfall() -> None:
-    """Two sizes, two answers -- so the closure count is measured, not assumed.
+def an_edge_edge_contact_pins_collinearity_not_incidence() -> None:
+    """Why `edge-edge` is two equations, checked by the motion the missing one allowed.
 
-    Göbel's `n = 5` is one condition short and Trump's `n = 11` is four.  A `close` that
-    returned a fixed number, or one derived from the row count, would get at least one of
-    them wrong.
-
-    Recorded rather than faked: `close`'s `already-determined` refusal has **no case
-    yet**. Both packings here are rank-deficient, and no tolerance makes either look
-    determined -- the discarded singular values are around `1e-42` against counted ones
-    near `0.5`, so the rank gap is wide rather than marginal.  That branch stays
-    unexercised until a determined contact system turns up, and saying so is better than
-    a control contrived to reach it.
+    One endpoint of the right edge on the left edge's *line* says the lines meet.  It
+    leaves the right square free to pivot about that point, and the pivot satisfies the
+    equation while driving the squares into each other at first order.  `side_leak` is
+    exactly that: the norm of the projection of the side's unit vector onto the null
+    space, so a non-zero reading means a contact-preserving motion can shrink the
+    container.  It was `1.86e-1` here with the equation missing.
     """
     previous = mp.mp.dps
     mp.mp.dps = PRECISION
     try:
-        for build, expected in ((gobel5.build, 1), (trump11.build, 4)):
-            squares, side, field = build()
-            field.refine_to(PRECISION)
-            structure = extract_contacts(squares, side, sign=field.sign)
-            system = assemble(structure)
-            numbers, side_value = as_floats(field, squares, side)
-            values = pose_values(system, numbers, side_value)
-            info = jacobian_rank(system, values)
-            assert info["shortfall"] == expected, (
-                f"n = {structure.n} shortfall moved to {info['shortfall']}: {info}"
-            )
-            assert len(close(system, values).closure) == expected
+        squares, side, field = trump11.build()
+        field.refine_to(PRECISION)
+        structure = extract_contacts(squares, side, sign=field.sign)
+        assert any(item.contact == "edge-edge" for item in structure.pair_contacts), (
+            "n = 11 reports no edge-edge contact, so this check exercises nothing"
+        )
+        system = assemble(structure)
+        numbers, side_value = as_floats(field, squares, side)
+        info = jacobian_rank(system, pose_values(system, numbers, side_value))
+        assert info["side_leak"] < 1e-12, (
+            f"the null space of the n = 11 contact Jacobian contains directions that "
+            f"change the side (side_leak {info['side_leak']:.3e}); those are "
+            "contact-preserving first-order motions that shrink the container, and the "
+            "packing would not be a local optimum of its own system"
+        )
+    finally:
+        mp.mp.dps = previous
 
-            # The rank verdict rests on a gap, so the gap is asserted rather than the
-            # verdict alone: a marginal one would make the rank a judgement call.
-            assert info["largest_discarded"] < info["smallest_counted"] * 1e-20, info
+
+def closure_is_supplied_only_where_the_rank_says_it_is_missing() -> None:
+    """Two sizes, two answers -- and after the edge-edge repair they are 1 and none.
+
+    Göbel's `n = 5` has no edge-edge contact at all and keeps a genuine shortfall of one.
+    Trump's `n = 11` has seven, and with them written down correctly its contacts isolate
+    the pose, so `close` refuses.  A `close` that returned a fixed number, or one derived
+    from the row count, would get both wrong.
+
+    The `already-determined` refusal had **no case** when it was written, and this file
+    said so.  It has two now, which is the branch's first exercise and the clearest sign
+    the shortfall it used to report was an artefact.
+    """
+    previous = mp.mp.dps
+    mp.mp.dps = PRECISION
+    try:
+        squares, side, field = gobel5.build()
+        field.refine_to(PRECISION)
+        structure = extract_contacts(squares, side, sign=field.sign)
+        assert not any(item.contact == "edge-edge" for item in structure.pair_contacts), (
+            "n = 5 grew an edge-edge contact; its shortfall is only meaningful as the "
+            "case the collinearity repair does not touch"
+        )
+        system = assemble(structure)
+        numbers, side_value = as_floats(field, squares, side)
+        values = pose_values(system, numbers, side_value)
+        info = jacobian_rank(system, values)
+        assert info["shortfall"] == 1, f"n = 5 shortfall moved to {info['shortfall']}: {info}"
+        assert len(close(system, values).closure) == 1
+
+        # The rank verdict rests on a gap, so the gap is asserted rather than the verdict
+        # alone: a marginal one would make the rank a judgement call.
+        assert info["largest_discarded"] < info["smallest_counted"] * 1e-20, info
     finally:
         mp.mp.dps = previous
 
@@ -330,8 +382,9 @@ def extraction_still_agrees_with_a_second_case() -> None:
 def main() -> int:
     features_are_identified_and_typed()
     the_packing_satisfies_its_own_equations()
-    counting_rows_disagrees_with_the_rank()
-    closure_is_sized_by_the_measured_shortfall()
+    an_edge_edge_contact_pins_collinearity_not_incidence()
+    the_contact_equations_determine_the_pose()
+    closure_is_supplied_only_where_the_rank_says_it_is_missing()
     a_mirrored_packing_assembles_and_vanishes()
     a_pose_of_the_wrong_chirality_is_refused()
     a_structure_without_chirality_is_refused()

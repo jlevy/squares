@@ -271,6 +271,15 @@ So `close` is sized by the rank shortfall: one condition at `n = 5`, four at `n 
 The spec’s phase-2 control, which asks for the unclosed system to be reported
 underdetermined, cannot fire as written.
 
+> **The rank half of this is superseded by
+> [session-041](session-041-block7-collinearity.md) and [D-361](../../../defects.md).**
+> The shortfall was this block’s own bug, not a property of the packing: `edge-edge` was
+> assembled as one equation where collinearity in the plane is two, and the four missing
+> conditions were four missing equations.
+> With them the rank is `34` of `34` and `close` refuses.
+> The headline claim survives — counting rows still cannot answer the question — but the
+> four is gone, and `n = 5` is now the only size with a genuine shortfall.
+
 **An angle class does not license an angle identity.** Classes hold modulo ninety
 degrees, so `t_i = t_j` is false for a member a quarter or half turn from another.
 Emitting them left `n = 11` at the noise floor — its classes happen to have equal angles
@@ -292,6 +301,9 @@ Assembly refuses them by name rather than describing their mirror images.
 Phase 4’s exact solve.
 The closure is sized and not derived — the determinant conditions themselves are the
 next step — and the reflected-square limit is a second open question.
+Both were reached later and neither resolved as expected: the reflected squares became
+representable in [session-040](session-040-block6-chirality.md), and the determinant
+conditions turned out not to exist at this size, per the correction above.
 The block clock went to the three findings above, each of which changed what assembly
 had to do, and none of them was visible before the code existed to be wrong.
 

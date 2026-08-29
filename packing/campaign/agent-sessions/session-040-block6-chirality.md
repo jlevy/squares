@@ -108,7 +108,10 @@ session:
       Characterised, and n = 5 is the odd size out rather than n = 29. The quantity that
       matters is the norm of the projection of `e_s` onto the contact Jacobian's null
       space: `1.0e-16` at n = 5, `1.86e-1` at n = 11, `1.14e-1` at n = 29. The first is
-      zero and the other two are not.
+      zero and the other two are not. SUPERSEDED by session-041 and D-361: the two
+      non-zero readings were caused by an `edge-edge` contact assembled as one equation
+      where collinearity is two, and both fall to zero once it is repaired. The
+      measurements below stand; the conclusion drawn from them does not.
     evidence:
     - >-
       'The measurement is the projection norm, not whether a basis vector happens to show
@@ -296,6 +299,16 @@ Recorded because the expectation is in the agenda and a reader deserves to know 
 wrong.
 
 ## What the system still does not determine
+
+> **Superseded by [session-041](session-041-block7-collinearity.md) and
+> [D-361](../../../defects.md).** Everything measured in this section is correct and
+> everything concluded from it is not.
+> The shortfall was not a property of the packings: an `edge-edge` contact was assembled
+> as one equation where collinearity is two, and with the second the rank reaches `34`
+> of `34` at `n = 11` and `88` of `88` at `n = 29`, with the projection of `e_s` onto
+> the null space falling to zero at both.
+> There are no missing stationarity conditions at either size, first-order or otherwise.
+> The section is kept as written because the numbers in it are what led to the repair.
 
 The assembled `n = 29` system has 94 equations against 88 unknowns and rank 81 — seven
 conditions short, with the smallest counted singular value at `0.114` against a largest

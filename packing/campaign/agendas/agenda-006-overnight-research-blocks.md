@@ -356,7 +356,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 11]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can the stationarity conditions that `close` currently only counts be derived, so a
@@ -369,34 +369,44 @@ agenda:
     exit: >-
       Determinant or Lagrange conditions in a form a solver accepts, reproducing the known
       n = 11 system; or a typed statement of which formulation the contact graph resists.
+    artifacts:
+    - src/sqpack/promote/system.py
+    - tests/test_promote_system.py
+    - devtools/controls.yaml
+    - defects.yaml
+    - campaign/agent-sessions/session-041-block7-collinearity.md
     bead: think-9c40
     depends_on: []
     workflows: [pipeline-improvement]
     next_evidence: >-
-      The rank measurement is already in hand and its gap is wide -- `0.511` counted against
-      `7.3e-42` discarded at n = 5 -- so how many conditions are needed is settled and only
-      what they are remains. session-040 adds the measurement that says what kind they
-      cannot be: the projection of `e_s` onto the contact Jacobian's null space is
-      `1.00e-16` at n = 5 but `1.86e-1` at n = 11 and `1.14e-1` at n = 29, so
-      contact-preserving first-order motions that change the side exist at the two larger
-      sizes and no first-order stationarity condition can close them.
+      Closed in session-041, and the answer was that there were none to derive at either
+      large size. `edge-edge` was assembled as one equation where collinearity is two, so
+      the shortfall `close` reported was a bug rather than a property of the packings. With
+      the second equation the contact Jacobian reaches full rank -- 34 of 34 at n = 11 and
+      88 of 88 at n = 29 -- residuals unmoved at `8.9e-16` and `1.3e-15`, and `close`
+      refuses at both. Recorded as D-361, class soundness, direction conservative. n = 5
+      has no edge-edge contact, is untouched, and keeps a genuine shortfall of one.
     note: >-
-      The layer between assembly and the exact solve. Without it `solve` has nothing square
-      to work on. Take n = 5 as the discriminating case rather than n = 29: it is the one
-      size where the first-order condition already holds, so a formulation that closes only
-      n = 5 has not been tested against the obstruction the other two carry.
+      The layer between assembly and the exact solve. It turned out to be an assembly
+      repair rather than a derivation, and what remains is one condition at n = 5 -- now
+      the only size that needs one and the cleanest case to derive it on. Carried into
+      BC-063, which is already the n = 5 rigidity cell.
   - id: BC-060
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 29]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       Can the closed system be solved exactly and the result discharged rather than
       trusted?
     hypotheses: []
     budget: 60 minutes
-    entry: A closed system from BC-059, square and solvable
+    entry: >-
+      A full-rank contact system from BC-059. Not "closed" in the sense this commitment was
+      written expecting: nothing was added, an `edge-edge` equation was repaired, and the
+      contacts then determine the pose on their own -- 122 equations in 88 unknowns at
+      n = 29, overdetermined and full rank.
     exit: >-
       A minimal polynomial by elimination or integer relation under the spec's frozen
       margin rule, discharged by back-substitution at n = 11 against Trump's published
@@ -405,6 +415,7 @@ agenda:
     depends_on: [BC-059]
     workflows: [pipeline-improvement]
     next_evidence: >-
+      Unblocked by session-041 rather than by the closure this commitment anticipated.
       X-004 found no integer relation for the serialized n = 29 side through degree twenty
       below `10^22`, but that probe ran on roughly a hundred available digits; BC-047 now
       manufactures a thousand, which is the condition that made the probe uninformative

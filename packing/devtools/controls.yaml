@@ -747,6 +747,22 @@ controls:
   run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
   expect: "the n = 11 equation count moved"
 
+# --- collinearity at an edge-edge contact (BC-059) ---
+# The first of these is the bug itself, restored: one endpoint on the other edge's line
+# says the lines meet rather than coincide, and leaves the right square free to pivot.
+- name: system assembly - an edge-edge contact pins incidence instead of collinearity
+  file: src/sqpack/promote/system.py
+  replace: ["            for px, py in (_corner(right, first, pose), _corner(right, second, pose))",
+            "            for px, py in (_corner(right, first, pose),)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "contains directions that change the side"
+
+- name: system assembly - closure invented where the contacts already determine the pose
+  file: src/sqpack/promote/system.py
+  replace: ["    if shortfall <= 0:", "    if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "already isolates its pose"
+
 # --- the reflected pose model (BC-058) ---
 # The refusal these replace is gone: a reflection is now representable, so the controls
 # ask whether it is represented *correctly* rather than whether it is turned away.
