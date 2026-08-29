@@ -22,6 +22,7 @@ documents:
   - {path: operating-rules.md, role: operating-rules, authority: definitive, lifecycle: maintained}
   - {path: development.md, role: development-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/README.md, role: runbook, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/documentation-pass.md, role: runbook, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/agent-sessions/README.md, role: session-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/research-loop-logbook/README.md, role: research-loop-logbook, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/ideas.md, role: registry, authority: definitive, lifecycle: maintained}

@@ -146,6 +146,7 @@ case or experiment separately.
 | [Operating Rules](operating-rules.md) | how a session is conducted | definitive | maintained | — |
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign — W6 Runbook](packing/campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
+| [The W8 Documentation Pass — Runbook](packing/campaign/documentation-pass.md) | W6 experiment mechanics | definitive | maintained | — |
 | [Agent Sessions](packing/campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
 | [Research Loop Logbook](packing/campaign/research-loop-logbook/README.md) | reader-facing research-run summaries | definitive | maintained | — |
 | [Idea board — the `s(n)` search campaign](packing/campaign/ideas.md) | hand-maintained registry | definitive | maintained | — |
@@ -431,10 +432,11 @@ record moved a long way in a day while the front door did not move at all, and n
 in the gate noticed.
 `check_synopsis` binds this document to the artifacts; there is no equivalent for
 [`README.md`](README.md) or [`TUTORIAL.md`](TUTORIAL.md), so they drift silently.
-Its checklist is [conventions §12](conventions.md#12-the-w8-documentation-checklist),
-and its one hard rule is that it reconciles rather than authors: a claim the record does
-not already carry is not a documentation change, and a disagreement the artifacts cannot
-settle is a defect rather than a rewrite.
+Its checklist is the
+[documentation-pass runbook](packing/campaign/documentation-pass.md), and its one hard
+rule is that it reconciles rather than authors: a claim the record does not already
+carry is not a documentation change, and a disagreement the artifacts cannot settle is a
+defect rather than a rewrite.
 [D-367](defects.md) is what the alternative looks like.
 
 `BC-066` attempted the elimination and reached **a measured wall rather than an

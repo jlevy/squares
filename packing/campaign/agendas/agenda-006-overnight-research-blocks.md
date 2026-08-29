@@ -1204,7 +1204,7 @@ agenda:
       because `check_synopsis` forces it to; `README.md` and `TUTORIAL.md` do not, and
       nothing forces them.
     exit: >-
-      The checklist in `conventions.md` section 12 run over every root document, with each
+      The checklist in `campaign/documentation-pass.md` run over every root document, with each
       drift either fixed or filed as a defect and no third option; generated views
       regenerated; and an explicit statement of what was checked and what was left.
     bead: think-eb29
