@@ -22,6 +22,23 @@ A script in
 reported a Bézout bound of `12,690,480` where the answer is `1,039,500`, and it was said
 out loud before the guarded tool that refused it existed.
 
+Three shapes keep recurring.
+They are recorded concretely so a W7 session can generalise from instances rather than
+from a summary of them:
+
+- **Anchored prose replacement.** Swapping a multi-paragraph section of `AGENTS.md` for
+  another, by `str.index` slicing inside a heredoc.
+  An editor tool with a uniqueness guarantee does this directly; reach for one before
+  writing a script.
+- **Anchored insertion into a structured record.** Putting `BC-076` before
+  `- id: BC-075` in the agenda, and three control definitions before a named anchor in
+  `controls.yaml`. `run_negative_controls` already has the guard this wants: an anchor
+  matching other than exactly once is a refusal rather than a mutation.
+- **Coordinated edit under one invariant.** `operating-rules` had to reach the
+  document-map schema enum, the map, and `ROLE_LABELS` together or the renderer raises;
+  `count:` in `defects.yaml` has to move with three aggregates in `SYNOPSIS.md`. Both
+  were hand-written multi-file heredocs whose only check was a later gate step.
+
 ## OR-2: Run three to five sub-agents, at a thinking level matched to the task
 
 Read-only investigation and disjoint writes parallelise; shared records, integration,
