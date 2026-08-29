@@ -38,6 +38,7 @@ FRONTIER = pathlib.Path(__file__).resolve().parent.parent / "frontier"
 # repository-relative because the reader-facing tree now sits above packing/.
 REPO = FRONTIER.parent.parent
 WITNESSES = FRONTIER.parent / "witnesses"
+RESOURCE_USAGE = FRONTIER.parent / "campaign" / "resource-usage"
 DOCUMENT_MAP = FRONTIER.parent.parent / "docs" / "project" / "document-map.yaml"
 COMPOSITE_FIGURE = FRONTIER.parent / "atlas" / "known-best" / "composite-figure.json"
 TRANSLATION_ESCAPE_SCREEN = (
@@ -263,6 +264,10 @@ def main() -> int:
     datasets.append(PROSPECTIVE_ATLAS_SEED)
     datasets.append(CONTACT_SCAFFOLD_ATLAS)
     datasets.append(CONTACT_STRUCTURES)
+    # One record per harness session log. The logs themselves are not retained, so
+    # these are the durable artifact rather than a pointer to one and are enforced like
+    # any other dataset.
+    datasets += sorted(RESOURCE_USAGE.glob("*.yaml"))
     if not md or not datasets:
         print("frontier/ artifacts not found", file=sys.stderr)
         return 2

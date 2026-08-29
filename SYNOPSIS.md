@@ -149,6 +149,7 @@ case or experiment separately.
 | [The W8 Documentation Pass — Runbook](packing/campaign/documentation-pass.md) | W6 experiment mechanics | definitive | maintained | — |
 | [Agent Sessions](packing/campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
 | [Research Loop Logbook](packing/campaign/research-loop-logbook/README.md) | reader-facing research-run summaries | definitive | maintained | — |
+| [Resource Usage](packing/campaign/resource-usage/README.md) | component scope and use | definitive | maintained | — |
 | [Idea board — the `s(n)` search campaign](packing/campaign/ideas.md) | hand-maintained registry | definitive | maintained | — |
 | [Experiment ledger](packing/campaign/ledger.md) | generated status view | generated | generated | — |
 | [series-000 (S0) — smoke and calibration](packing/campaign/series/series-000-smoke-and-calibration/README.md) | series scope and comparability | definitive | maintained | — |

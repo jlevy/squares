@@ -25,6 +25,7 @@ documents:
   - {path: packing/campaign/documentation-pass.md, role: runbook, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/agent-sessions/README.md, role: session-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/research-loop-logbook/README.md, role: research-loop-logbook, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/resource-usage/README.md, role: component-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/ideas.md, role: registry, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/ledger.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/README.md, role: series-guide, authority: definitive, lifecycle: maintained}

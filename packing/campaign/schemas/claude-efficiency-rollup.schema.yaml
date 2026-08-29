@@ -1,0 +1,132 @@
+# Contract for one prose-excluding efficiency rollup over a Claude Code session log.
+#
+# The sibling of CodexEfficiencyRollup/v2, and deliberately a separate shape. Codex and
+# Claude Code record different things, and one schema over both would either discard what
+# one knows or invent fields the other cannot fill. A later unified EfficiencyRollup maps
+# from these; nothing downstream should read this one directly except that mapping.
+#
+# The rollup is the retained artifact rather than a pointer to one: the raw JSONL is large,
+# harness-private, and full of prose this repository has no reason to keep, so it will not
+# always be archived. `semantics` is required for that reason -- a figure whose meaning is
+# not carried beside it will be read as whatever the reader assumes.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:ClaudeEfficiencyRollup/v1
+title: Claude Code efficiency rollup
+type: object
+additionalProperties: false
+required: [source, span, turns, tokens, tool_calls, semantics]
+properties:
+  source:
+    type: object
+    additionalProperties: false
+    required: [harness, filename, sha256, bytes, records, session_id, harness_versions]
+    properties:
+      harness:
+        const: claude-code
+        description: Fixed, so a unified rollup can tell which reader produced this record.
+      filename: {type: string, minLength: 1}
+      sha256:
+        type: string
+        pattern: "^[0-9a-f]{64}$"
+        description: >-
+          Of the source JSONL. The log itself is not retained, so this is what lets a
+          later reader tell whether two rollups came from the same transcript.
+      bytes: {type: integer, minimum: 0}
+      records: {type: integer, minimum: 0}
+      session_id: {type: string}
+      harness_versions:
+        type: array
+        items: {type: string, minLength: 1}
+        description: >-
+          Every distinct harness version seen in the log. More than one means the session
+          spanned an upgrade, which is a reason for a figure to shift.
+  span:
+    type: object
+    additionalProperties: false
+    required: [started_at, ended_at, wall_seconds]
+    properties:
+      started_at: {type: [string, "null"]}
+      ended_at: {type: [string, "null"]}
+      wall_seconds: {type: number, minimum: 0}
+  turns:
+    type: object
+    additionalProperties: false
+    required: [assistant, sidechain, by_model, by_thinking_level, by_branch, content_blocks]
+    properties:
+      assistant: {type: integer, minimum: 0}
+      sidechain:
+        type: integer
+        minimum: 0
+        description: Turns belonging to a delegated agent rather than the coordinator.
+      by_model: {type: object, additionalProperties: {type: integer, minimum: 0}}
+      by_thinking_level:
+        type: object
+        additionalProperties: {type: integer, minimum: 0}
+        description: >-
+          Effort as the harness recorded it. This is what OR-2's "matched to the task"
+          claim is checkable against.
+      by_branch: {type: object, additionalProperties: {type: integer, minimum: 0}}
+      content_blocks: {type: object, additionalProperties: {type: integer, minimum: 0}}
+  tokens:
+    type: object
+    additionalProperties: {type: integer, minimum: 0}
+    description: >-
+      Per-turn usage as the harness reported it, summed. No cost is derived: pricing is
+      not this record's to know, and a stored price goes stale silently.
+  tool_calls:
+    type: object
+    additionalProperties: false
+    required:
+      - total
+      - total_seconds
+      - unpaired_results
+      - outstanding_at_snapshot
+      - by_tool
+      - by_executable
+    properties:
+      total: {type: integer, minimum: 0}
+      total_seconds: {type: number, minimum: 0}
+      share_of_wall:
+        type: [number, "null"]
+        minimum: 0
+        description: >-
+          May exceed one. Concurrent calls are summed independently, so this is a load
+          figure rather than an occupancy figure.
+      unpaired_results:
+        type: integer
+        minimum: 0
+        description: >-
+          tool_result blocks whose tool_use was not in the log, which is normal after a
+          compaction. A large count means the elapsed figures cover less than the session.
+      outstanding_at_snapshot:
+        type: integer
+        minimum: 0
+        description: Calls still in flight when the log was read.
+      by_tool: {$ref: "#/$defs/elapsed_group"}
+      by_executable:
+        allOf: [{$ref: "#/$defs/elapsed_group"}]
+        description: >-
+          Keyed by the leading executable word of a shell command, which is identity and
+          not content. Nothing reconstructs a command line from this record.
+  semantics:
+    type: object
+    minProperties: 1
+    additionalProperties: {type: string, minLength: 1}
+    description: >-
+      What each figure may and may not be read as, including which measurements this
+      harness cannot supply. A missing measurement is named `UNAVAILABLE` in prose here
+      and is absent from the data rather than defaulted to zero, because a zero will be
+      summed with a harness that reports the figure and the total will be wrong in the
+      flattering direction.
+$defs:
+  elapsed_group:
+    type: object
+    additionalProperties:
+      type: object
+      additionalProperties: false
+      required: [count, total_seconds]
+      properties:
+        count: {type: integer, minimum: 0}
+        total_seconds: {type: number, minimum: 0}
+        median_seconds: {type: number, minimum: 0}
+        max_seconds: {type: number, minimum: 0}
