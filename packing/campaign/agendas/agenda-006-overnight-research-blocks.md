@@ -1038,7 +1038,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [29]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Does higher-precision path tracking account for the paths the double-precision run
@@ -1055,6 +1055,9 @@ agenda:
       Either an accounting complete enough to read a degree from, with the distinct `s`
       values counted; or the same refusal with a second precision behind it, which is a
       stronger statement than one run makes.
+    artifacts:
+    - campaign/series/series-000-smoke-and-calibration/results/bc-070-n29-solution-count.json
+    - devtools/probe_elimination.py
     bead: think-utlo
     depends_on: [BC-070]
     workflows: [pipeline-improvement]
@@ -1068,6 +1071,30 @@ agenda:
       Do not read a degree off an incomplete accounting: BC-070's kill condition applies
       unchanged, and a count with lost paths is not evidence about a degree at any
       precision. Nothing here may move `verified_upper_bound`.
+
+      Closed in session-044 after 2h39m, and the refusal holds -- but for a narrower reason
+      than before, which is the result.
+
+      **The labelling is now complete.** Double precision reported 8,327 endpoints and left
+      7,417 paths absent from the output entirely; double-double labels all 15,744: 7,343
+      complex regular, 236 real regular, 1,676 complex singular, 30 real singular, 327 at
+      infinity, and 6,132 `no solution`. The missing paths were never lost -- they were
+      unreported, and that is worth knowing about the double-precision run's silence.
+
+      **What still blocks a degree is one label.** A path that genuinely diverges and a
+      path the tracker lost both come back `no solution`, and 6,132 of them do. So the
+      9,285 finite solutions found, carrying 8,288 distinct `s` values, are a lower bound
+      on what exists rather than the complete set; reading 8,288 as the degree of the
+      projection would assume every one of those 6,132 diverged. BC-070's kill condition
+      applies unchanged and the rigorous bound remains the mixed volume.
+
+      What the run does suggest, without bounding anything, is that the true count sits
+      well below `15,744` -- which is what a structured system should do, since the BKK
+      bound is attained only for generic coefficients.
+
+      And the independent check sharpened: the retained `s(29)` is again among the
+      solutions, now with an imaginary part of `1.85e-68` against `5.51e-40` at double
+      precision.
   - id: BC-073
     purpose: tool_validation
     owner_focus: correctness

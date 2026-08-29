@@ -1,5 +1,5 @@
 {
-  "claim": "The number of isolated solutions of the n = 29 contact system is at most 15,744, so the algebraic degree of s(29) is at most 15,744. Path tracking found 8,327 finite solutions but could not account for all its paths, so it bounds nothing further.",
+  "claim": "The number of isolated solutions of the n = 29 contact system is at most 15,744, so the algebraic degree of s(29) is at most 15,744. Path tracking at two precisions found the retained value among the solutions but could not establish a count.",
   "claim_boundary": "A bound on the degree, not the degree, and not a statement about s(29) being algebraic of any particular degree. It replaces a looser bound with a tighter one and moves nothing else: verified_upper_bound is untouched, and the n = 29 bound gap of about 0.46 is untouched.",
   "certified": false,
   "supersedes": {
@@ -70,5 +70,35 @@
       "verdict": "worse",
       "note": "Substituting s out raises every degree and raises the mixed volume with them, from 15,744 to 24,476. The elimination that costs nothing algebraically is not free geometrically, and the six-equation form is the one to bound from. Measured rather than assumed, because the reduced form is the one BC-065 left and the obvious thing to reach for."
     }
-  ]
+  ],
+  "retrack_at_higher_precision": {
+    "commitment": "BC-072",
+    "engine": "PHCpack 2.4.90 blackbox, double-double arithmetic, 3 threads",
+    "started_at": "2026-08-29T11:49:50Z",
+    "ended_at": "2026-08-29T14:29:06Z",
+    "elapsed_seconds": 9556,
+    "exit_code": 0,
+    "paths": 15744,
+    "every_path_labelled": true,
+    "what_changed": "Double precision reported 8,327 endpoints and left 7,417 paths absent from the output entirely. Double-double labels all 15,744. The missing paths were not lost; they were unreported.",
+    "path_outcomes": {
+      "complex regular": 7343,
+      "real regular": 236,
+      "complex singular": 1676,
+      "real singular": 30,
+      "at infinity": 327,
+      "no solution": 6132
+    },
+    "finite_solutions": 9285,
+    "regular_finite_solutions": 7579,
+    "distinct_s_values": {
+      "among regular, tol 1e-6": 7154,
+      "among regular, tol 1e-8": 7167,
+      "among all finite, tol 1e-6": 8288
+    },
+    "verdict": "still not usable as a degree, and for a narrower reason than before",
+    "why": "The labelling is complete, which is what BC-070's refusal turned on, but 6,132 paths are labelled `no solution` without being resolved into divergence or tracking failure. A path that genuinely diverges and a path the tracker lost look the same under that label, so the finite count of 9,285 is a lower bound on what exists rather than the complete set. Reading 8,288 as the degree of the projection would assume every one of those 6,132 diverged.",
+    "what_it_does_suggest": "That the true solution count is well below the mixed volume, which is what a structured system should do -- the BKK bound is attained only for generic coefficients, and 6,459 paths are explicitly divergent or unresolved. It is a suggestion and not a bound, and the rigorous bound remains 15,744.",
+    "independent_confirmation": "The retained s(29) is again among the solutions, and sharper: imaginary part 1.85e-68 against 5.51e-40 at double precision."
+  }
 }

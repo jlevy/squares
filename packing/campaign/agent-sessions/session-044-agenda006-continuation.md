@@ -548,15 +548,15 @@ session:
     objective: >-
       Retrack the n = 29 homotopy in double-double precision and see whether it accounts
       for the paths the double-precision run lost.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Every scheduled block reached a terminal state by 11:49Z against a 16:41Z deadline,
       so the honest use of the remainder is the measurement BC-070 could not complete
       rather than an early finish.
-    budget_minutes: 240
+    budget_minutes: 160
     started_at: '2026-08-29T11:49:50Z'
-    deadline_at: '2026-08-29T15:49:50Z'
+    deadline_at: '2026-08-29T14:29:50Z'
     expected_output: >-
       Either an accounting complete enough to read a degree from, or the same refusal with
       a second precision behind it.
@@ -569,11 +569,62 @@ session:
     fallback: >-
       Record the refusal with both precisions behind it, which is a stronger statement than
       one run makes.
+    outcome: >-
+      The refusal holds, for a narrower reason than before. Every path is now labelled;
+      one label is what still blocks a degree.
+    evidence:
+    - >-
+      'The labelling is complete. Double precision reported 8,327 endpoints and left 7,417
+      paths absent from the output entirely; double-double labels all 15,744 -- 7,343
+      complex regular, 236 real regular, 1,676 complex singular, 30 real singular, 327 at
+      infinity, 6,132 `no solution`. The missing paths were never lost, they were
+      unreported.'
+    - >-
+      'A path that genuinely diverges and a path the tracker lost both come back
+      `no solution`, and 6,132 do. So the 9,285 finite solutions found, carrying 8,288
+      distinct `s` values, are a lower bound on what exists rather than the complete set,
+      and reading 8,288 as the degree would assume every one of those diverged.'
+    - >-
+      'The independent check sharpened: the retained `s(29)` is again among the solutions,
+      with an imaginary part of `1.85e-68` against `5.51e-40` at double precision.'
+    stop_reason: >-
+      Terminal at 14:29Z after 2h39m, inside the four-hour cap. BC-070's kill condition
+      applied unchanged rather than being relaxed to let the count through.
+    next_action: >-
+      Open the reserved BC-064 endpoint check.
+  - workflow: process-review
+    recording: contemporaneous
+    clock_role: finalization
+    focus: process
+    commitment: BC-064
+    bead: think-c7oo
+    objective: >-
+      Check the whole record at the endpoints after the continuation, and make run-002
+      describe the run that actually happened.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      Every commitment this session opened is terminal, so the reserve opens on schedule
+      rather than being borrowed from.
+    budget_minutes: 90
+    started_at: '2026-08-29T14:33:00Z'
+    deadline_at: '2026-08-29T16:02:00Z'
+    expected_output: >-
+      A full strict `packing-validate` receipt, generated views regenerated, run-002
+      extended to cover this session with measured clocks, and a green PR.
+    kill_condition: >-
+      A failing strict step is named and recorded rather than worked around. This is the
+      block that catches what the fast tier does not, so a failure here is its output.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --strict
+    fallback: >-
+      Record the failing step with its cause, and leave the PR describing the state it is
+      actually in.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Integrate BC-071 when it lands, then open the reserved BC-064.
+      Hand off with the next action named on a bead that exists.
   primary_bead: think-obgk
   status: in_progress
   budget:
@@ -582,7 +633,11 @@ session:
     orientation_minutes: 30
     checkpoint_minutes: 20
     slice_minutes: 30
-    finalization_minutes: 40
+    # Widened from 40 at 14:32Z, not borrowed from. Every commitment this session opened
+    # reached a terminal state with over two hours of wall budget unspent, so the reserve
+    # absorbs the remainder rather than the session ending early or a block being invented
+    # to fill it.
+    finalization_minutes: 129
   stop_conditions:
   - >-
     A typed refusal is a valid ending. An elimination that stops on size is a measurement,
