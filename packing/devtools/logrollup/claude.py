@@ -13,7 +13,6 @@ from __future__ import annotations
 
 import json
 import re
-import shlex
 from collections import Counter, defaultdict
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
@@ -30,6 +29,7 @@ from devtools.logrollup.model import (
     Turn,
     instant,
 )
+from devtools.logrollup.shell import Invocation, invocations, primary
 
 CONTRACT = "packing.squares:ClaudeEfficiencyRollup/v1"
 SCHEMA = "../schemas/claude-efficiency-rollup.schema.yaml"
@@ -98,26 +98,6 @@ TRAITS = (
 )
 
 
-def executable_of(command: object) -> str | None:
-    """The leading executable word of a shell command.
-
-    Identity, not content. `shlex` rather than a whitespace split so a quoted path does
-    not become two tokens, and a command that will not lex says so instead of being
-    guessed at.
-    """
-    if not isinstance(command, str) or not command.strip():
-        return None
-    try:
-        tokens = shlex.split(command)
-    except ValueError:
-        return "(unlexable)"
-    for token in tokens:
-        if "=" in token and not token.startswith("/"):
-            continue  # a leading VAR=value assignment
-        return Path(token).name
-    return None
-
-
 def traits_of(command: object) -> tuple[str, ...]:
     """Non-exclusive structural features, counted alongside the shape."""
     if not isinstance(command, str):
@@ -173,6 +153,15 @@ class Session:
     records: tuple[dict[str, Any], ...]
     turns: tuple[Turn, ...]
     calls: tuple[ToolCall, ...]
+    invoked: Mapping[str, int]
+    """Every tool invoked, counted across all segments of every command.
+
+    Counts and not elapsed, on purpose. Most commands here run several tools and the
+    transcript times the call rather than the pipeline, so how often a CLI was reached
+    for is knowable and its share of the clock is not.
+    """
+
+    invoked_families: Mapping[str, int]
     traits: Mapping[str, int]
     errors: int
     denials: int
@@ -187,7 +176,7 @@ class _Issued:
     tool: str
     at: float | None
     thinking_level: str
-    executable: str | None
+    command: Invocation | None
     shape: Shape | None
 
 
@@ -197,6 +186,8 @@ def parse(records: Sequence[dict[str, Any]]) -> Session:
     turns: list[Turn] = []
     issued: dict[str, _Issued] = {}
     traits: Counter[str] = Counter()
+    invoked: Counter[str] = Counter()
+    invoked_families: Counter[str] = Counter()
 
     for record in records:
         if record.get("type") != "assistant":
@@ -225,12 +216,15 @@ def parse(records: Sequence[dict[str, Any]]) -> Session:
                 continue
             command = (block.get("input") or {}).get("command")
             traits.update(traits_of(command))
+            for call in invocations(command):
+                invoked[call.name] += 1
+                invoked_families[str(call.family)] += 1
             if isinstance(block.get("id"), str):
                 issued[block["id"]] = _Issued(
                     tool=str(block.get("name")),
                     at=at,
                     thinking_level=level,
-                    executable=executable_of(command),
+                    command=primary(command),
                     shape=Shape.of(command) if command is not None else None,
                 )
 
@@ -257,7 +251,8 @@ def parse(records: Sequence[dict[str, Any]]) -> Session:
                     tool=pending.tool,
                     seconds=done - pending.at,
                     thinking_level=pending.thinking_level,
-                    executable=pending.executable,
+                    command=pending.command.name if pending.command else None,
+                    family=str(pending.command.family) if pending.command else None,
                     shape=str(pending.shape) if pending.shape else None,
                 )
             )
@@ -266,6 +261,8 @@ def parse(records: Sequence[dict[str, Any]]) -> Session:
         records=tuple(records),
         turns=tuple(turns),
         calls=tuple(calls),
+        invoked=dict(invoked.most_common()),
+        invoked_families=dict(invoked_families.most_common()),
         traits=dict(traits.most_common()),
         errors=errors,
         denials=denials,
@@ -333,9 +330,27 @@ SEMANTICS: Mapping[str, str] = {
         "`python_inline` are the shapes OR-1 calls one-off code; a session with many of "
         "them was writing scripts where it should have been building a tool."
     ),
-    "by_executable": (
-        "The leading executable word of a shell command, which is identity rather than "
-        "content. Nothing reconstructs a command line from this file."
+    "by_command": (
+        "The tool a shell command actually runs, named as it was invoked: the runner "
+        "prefix is kept because `uv run foo.py` is not `foo.py`, a Python call is named "
+        "by its module or script, and a subcommanded tool keeps its subcommand. Peeling "
+        "matters more than it sounds: keyed on the leading word instead, `cd` led 524 of "
+        "882 commands in this session and the figure said nothing. A command no single "
+        "tool owns is `(pipeline)` rather than attributed to whichever ran first."
+    ),
+    "invoked": (
+        "Every tool reached for, counted across all segments of every command, not just "
+        "the one a call's time was attributed to. Counts and never elapsed: most commands "
+        "here run several tools and the transcript times the call rather than the "
+        "pipeline, so how often a CLI was used is knowable and its share of the clock is "
+        "not. This is the table that answers which instruments a session actually uses; "
+        "`by_command` answers where its measured time went."
+    ),
+    "by_command_family": (
+        "Our own instruments against everything else. `project` is this repository's "
+        "CLIs and modules, `toolchain` the language tooling, `inspection` the reading "
+        "and searching a session does to orient itself. Time in `packing-validate` and "
+        "time in `grep` are both real and are not the same kind of cost."
     ),
     "errors": (
         "tool_result blocks the harness marked is_error. A failed call still spends its "
@@ -433,7 +448,10 @@ class ClaudeCodeReader:
                 "outstanding_at_snapshot": session.outstanding,
                 "one_off_code": Elapsed.of([c.seconds for c in one_off]).payload(),
                 "by_tool": _ranked(calls, lambda c: c.tool, TOP_TOOLS),
-                "by_executable": _ranked(calls, lambda c: c.executable, TOP_COMMANDS),
+                "by_command": _ranked(calls, lambda c: c.command, TOP_COMMANDS),
+                "by_command_family": _ranked(calls, lambda c: c.family),
+                "invoked": dict(list(session.invoked.items())[:TOP_COMMANDS]),
+                "invoked_families": dict(session.invoked_families),
                 "by_shell_shape": _ranked(calls, lambda c: c.shape),
                 "by_thinking_level": _ranked(calls, lambda c: c.thinking_level),
                 "shell_traits": dict(session.traits),

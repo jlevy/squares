@@ -8,8 +8,9 @@ from pathlib import Path
 import pytest
 
 from devtools.logrollup import REGISTRY, ClaudeCodeReader, build_registry
-from devtools.logrollup.claude import Shape, executable_of, traits_of
+from devtools.logrollup.claude import Shape, traits_of
 from devtools.logrollup.model import Elapsed, SessionRollup, SourceLog, Span
+from devtools.logrollup.shell import Family, primary
 
 
 def test_shell_shapes_put_one_off_code_ahead_of_incidental_structure() -> None:
@@ -26,10 +27,43 @@ def test_shell_shapes_put_one_off_code_ahead_of_incidental_structure() -> None:
     assert not Shape.compound.is_one_off_code
 
 
-def test_command_identity_never_carries_content() -> None:
-    assert executable_of("VAR=1 /usr/bin/git status") == "git"
-    assert executable_of("'unclosed") == "(unlexable)"
-    assert executable_of("") is None
+def test_a_command_is_named_by_the_tool_it_runs_not_its_leading_word() -> None:
+    # `cd` led 524 of 882 commands in the session this was built from, so the leading
+    # word is the one thing the name must not be.
+    def name(command: str) -> str | None:
+        found = primary(command)
+        return found.name if found else None
+
+    assert name("cd /repo && uv run --frozen --group dev packing-validate --records") == (
+        "uv run packing-validate"
+    )
+    # The runner is part of the identity: `uv run foo.py` is not `foo.py`.
+    assert name("uv run foo.py") == "uv run foo.py"
+    assert name("python3 foo.py > out.txt") == "python3 foo.py"
+    assert name("uv run --frozen python -m devtools.log_rollup L") == (
+        "uv run python -m devtools.log_rollup"
+    )
+    assert name("cd /repo && git commit -q -F -") == "git commit"
+    # A filter after a pipe is not the work; the same tool leading the command is.
+    assert name("grep -rn x . | head -5") == "grep"
+    # No single tool owns these, and attributing to whichever ran first would be a lie.
+    assert name("make format && git add -A && git push") == "(pipeline)"
+    assert name("a | b | c") == "(pipeline)"
+
+
+def test_command_families_separate_our_instruments_from_everything_else() -> None:
+    def family(command: str) -> Family | None:
+        found = primary(command)
+        return found.family if found else None
+
+    assert family("uv run --frozen packing-validate") is Family.project
+    assert family("uv run python -m devtools.check_readme") is Family.project
+    assert family("uv run ruff check .") is Family.toolchain
+    assert family("git status") is Family.vcs
+    assert family("grep -rn x .") is Family.inspection
+
+
+def test_structural_traits_are_counted_without_content() -> None:
     assert set(traits_of("a | b > c $(d) &")) == {
         "pipes",
         "redirects_output",
@@ -99,6 +133,8 @@ def test_a_claude_log_reads_end_to_end(tmp_path: Path) -> None:
     assert rollup["tokens"] == {"input_tokens": 5, "output_tokens": 7}
     assert rollup["tokens_by_thinking_level"]["max"]["output_tokens"] == 7
     assert rollup["tool_calls"]["by_shell_shape"]["simple"]["count"] == 1
+    assert rollup["tool_calls"]["by_command"]["ls"]["count"] == 1
+    assert rollup["tool_calls"]["by_command_family"]["inspection"]["count"] == 1
     assert rollup["tool_calls"]["by_thinking_level"]["max"]["count"] == 1
     # The turn is 10s after its parent and the result 4s after the turn: latency and tool
     # time are different measurements and must not be conflated.

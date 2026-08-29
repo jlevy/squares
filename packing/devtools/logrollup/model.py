@@ -147,14 +147,16 @@ class Span:
 class ToolCall:
     """One completed tool call, reduced to identity and cost.
 
-    `shape` and `executable` are structural: neither carries an argument, a path, or a
-    literal out of the command. Nothing reconstructs a command line from a rollup.
+    `command`, `family` and `shape` are structural: none carries an argument value, a
+    path beyond a script's own basename, or a literal out of the command. Nothing
+    reconstructs a command line from a rollup.
     """
 
     tool: str
     seconds: float
     thinking_level: str
-    executable: str | None = None
+    command: str | None = None
+    family: str | None = None
     shape: str | None = None
 
 

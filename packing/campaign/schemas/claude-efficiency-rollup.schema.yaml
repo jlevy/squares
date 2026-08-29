@@ -119,7 +119,10 @@ properties:
       - outstanding_at_snapshot
       - one_off_code
       - by_tool
-      - by_executable
+      - by_command
+      - by_command_family
+      - invoked
+      - invoked_families
       - by_shell_shape
       - by_thinking_level
       - shell_traits
@@ -159,11 +162,34 @@ properties:
           calls a measurement left in one-off code. Promoted out of `by_shell_shape` so
           the rule has one number rather than a sum a reader has to perform.
       by_tool: {$ref: "#/$defs/elapsed_group"}
-      by_executable:
+      by_command:
         allOf: [{$ref: "#/$defs/elapsed_group"}]
         description: >-
-          Keyed by the leading executable word of a shell command, which is identity and
-          not content. Nothing reconstructs a command line from this record.
+          Keyed by the tool a shell command actually runs, named as it was invoked: the
+          runner prefix is kept because `uv run foo.py` is not `foo.py`, a Python call is
+          named by its module or script, and a subcommanded tool keeps its subcommand.
+          A command no single tool owns is `(pipeline)` rather than attributed to
+          whichever ran first. Identity only, never an argument value or a literal.
+      by_command_family:
+        allOf: [{$ref: "#/$defs/elapsed_group"}]
+        description: >-
+          Our own instruments against everything else: `project` for this repository's
+          CLIs and modules, `toolchain` for language tooling, `inspection` for the reading
+          and searching a session does to orient itself, and so on. Time in
+          `packing-validate` and time in `grep` are both real and are not the same cost.
+      invoked:
+        type: object
+        additionalProperties: {type: integer, minimum: 0}
+        description: >-
+          Every tool reached for, counted across all segments of every command rather
+          than only the one a call's time was attributed to. Counts and never elapsed:
+          most commands run several tools and the transcript times the call rather than
+          the pipeline, so how often a CLI was used is knowable and its share of the
+          clock is not. `by_command` says where measured time went; this says what the
+          session actually reached for.
+      invoked_families:
+        type: object
+        additionalProperties: {type: integer, minimum: 0}
       by_shell_shape:
         allOf: [{$ref: "#/$defs/elapsed_group"}]
         description: >-
