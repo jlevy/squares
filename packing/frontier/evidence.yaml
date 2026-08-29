@@ -402,6 +402,33 @@ evidence:
     limitations: Thirteen best pair gaps are negative; the worst is about -8.81e-102 and is accepted only by the declared tolerance.
     source_reviewed: '2026-08-25'
 
+  - id: E-n029-interval-certified-upper
+    claim: upper-bound
+    scope: {n_values: [29]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    novelty: apparently-novel
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Kingbird]'
+    certificate: witnesses/kingbird-n029-2026-interval.yaml
+    replay: uv run --frozen packing-witness verify witnesses/kingbird-n029-2026-interval.yaml
+    replay_status: passed
+    limitations: >-
+      Proves s(29) <= 5.93383346267692918974379895098 at a declared relaxation of 1e-20,
+      on outward-rounded enclosures rather than exact values. It is not the optimum, not an
+      optimality result -- the bound gap of about 0.46 is untouched -- and not the value the
+      enclosures surround: an enclosure of positive width decides strict inequalities and
+      never an equality. It sits below exact-algebraic on the assurance ladder because its
+      soundness rests on the interval library's directed rounding rather than on exact
+      predicates, and mpmath is not formally verified. Tighter than
+      E-n029-schadt-rational-upper by 5.2337e-5, which is the price each arithmetic regime
+      charges for a certificate rather than a difference in the packing: robust rational
+      promotion had to relax by 5.2e-5 to reach rational coordinates, this route by 5.4e-20.
+      Not reviewed independently, and verified_upper_bound has not been moved to it.
+    source_reviewed: '2026-08-29'
+
   - id: E-n029-schadt-rational-upper
     claim: upper-bound
     scope: {n_values: [29]}

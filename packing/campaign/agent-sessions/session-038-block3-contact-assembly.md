@@ -9,8 +9,8 @@ session:
   id: session-038
   title: Identify which features meet, assemble the contact equations, and measure what they leave
   date: '2026-08-29'
-  started_at: '2026-08-29T02:35:00-07:00'
-  deadline_at: '2026-08-29T05:35:00-07:00'
+  started_at: '2026-08-28T21:19:00-07:00'
+  deadline_at: '2026-08-28T21:47:00-07:00'
   goal: >-
     Close agenda-006 block 3 by building the unbuilt middle of the exact route: extraction
     that identifies which features realise each contact, assembly that turns a structure
@@ -31,9 +31,9 @@ session:
     status: completed
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 60
-    started_at: '2026-08-29T02:35:00-07:00'
-    deadline_at: '2026-08-29T03:35:00-07:00'
+    budget_minutes: 12
+    started_at: '2026-08-28T21:19:00-07:00'
+    deadline_at: '2026-08-28T21:31:00-07:00'
     expected_output: >-
       Every contact typed `corner-edge`, `edge-edge`, `corner-corner` or `corner-wall`
       with both features named, reproducing the known n = 11 counts and extending to
@@ -84,9 +84,9 @@ session:
     switch_reason: >-
       Features are identified, which is assembly's entry condition; the objective changes
       from describing contacts to writing equations.
-    budget_minutes: 75
-    started_at: '2026-08-29T03:35:00-07:00'
-    deadline_at: '2026-08-29T04:50:00-07:00'
+    budget_minutes: 10
+    started_at: '2026-08-28T21:31:00-07:00'
+    deadline_at: '2026-08-28T21:41:00-07:00'
     expected_output: >-
       Equations that vanish at the packing they were extracted from, a reported count of
       what they leave, and a closure sized by whatever that is.
@@ -154,9 +154,9 @@ session:
     status: completed
     entered_by: planned_checkpoint
     switch_reason: Both scientific phases reached their criteria.
-    budget_minutes: 45
-    started_at: '2026-08-29T04:50:00-07:00'
-    deadline_at: '2026-08-29T05:35:00-07:00'
+    budget_minutes: 6
+    started_at: '2026-08-28T21:41:00-07:00'
+    deadline_at: '2026-08-28T21:47:00-07:00'
     expected_output: >-
       A regenerated structure that validates, four controls that fire, and a defect record
       that says only what is established.
@@ -198,11 +198,11 @@ session:
   primary_bead: think-qs6k
   status: completed
   budget:
-    wall_minutes: 180
-    orientation_minutes: 10
-    checkpoint_minutes: 20
-    slice_minutes: 30
-    finalization_minutes: 45
+    wall_minutes: 28
+    orientation_minutes: 3
+    checkpoint_minutes: 8
+    slice_minutes: 20
+    finalization_minutes: 6
   stop_conditions:
   - The block deadline at 2026-08-29T05:35:00-07:00
   - A closure added to make counts meet rather than to take up a measured shortfall

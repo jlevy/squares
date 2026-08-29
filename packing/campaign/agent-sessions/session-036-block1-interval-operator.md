@@ -9,8 +9,8 @@ session:
   id: session-036
   title: Build the interval-certification bridge as far as a Krawczyk operator and a separating-axis test that both refuse correctly
   date: '2026-08-28'
-  started_at: '2026-08-28T20:10:00-07:00'
-  deadline_at: '2026-08-28T22:40:00-07:00'
+  started_at: '2026-08-28T20:04:00-07:00'
+  deadline_at: '2026-08-28T20:37:00-07:00'
   goal: >-
     Close agenda-006 block 1 by running phases 1 and 2 of
     plan-2026-08-28-interval-certification: interval arithmetic with a sign that refuses,
@@ -35,9 +35,9 @@ session:
     status: completed
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 60
-    started_at: '2026-08-28T20:10:00-07:00'
-    deadline_at: '2026-08-28T21:10:00-07:00'
+    budget_minutes: 14
+    started_at: '2026-08-28T20:04:00-07:00'
+    deadline_at: '2026-08-28T20:18:00-07:00'
     expected_output: >-
       A `certify(system, box, digits)` entry point returning a `CertifiedRoot`, agreement
       with `sqpack.field`'s Sturm isolation on `sqrt(2)`, and the two controls the spec
@@ -111,9 +111,9 @@ session:
     switch_reason: >-
       Phase 1's operator is calibrated and its controls fire, which is this phase's entry
       condition; the objective changes from certifying a root to certifying a packing.
-    budget_minutes: 60
-    started_at: '2026-08-28T21:10:00-07:00'
-    deadline_at: '2026-08-28T22:10:00-07:00'
+    budget_minutes: 13
+    started_at: '2026-08-28T20:18:00-07:00'
+    deadline_at: '2026-08-28T20:31:00-07:00'
     expected_output: >-
       A verifier returning separated, overlapping and undecided as three distinct verdicts,
       with the spec's two controls: a container shrunk below the packing must be refused,
@@ -181,9 +181,9 @@ session:
     switch_reason: >-
       Both scientific phases reached their criteria; what remains is reconciliation rather
       than measurement.
-    budget_minutes: 30
-    started_at: '2026-08-28T22:10:00-07:00'
-    deadline_at: '2026-08-28T22:40:00-07:00'
+    budget_minutes: 6
+    started_at: '2026-08-28T20:31:00-07:00'
+    deadline_at: '2026-08-28T20:37:00-07:00'
     expected_output: >-
       Four registered negative controls that fire in the shared harness, a green fast gate,
       and a pushed checkpoint.
@@ -231,11 +231,11 @@ session:
   primary_bead: think-qs6k
   status: completed
   budget:
-    wall_minutes: 150
-    orientation_minutes: 10
-    checkpoint_minutes: 20
-    slice_minutes: 30
-    finalization_minutes: 30
+    wall_minutes: 33
+    orientation_minutes: 3
+    checkpoint_minutes: 8
+    slice_minutes: 20
+    finalization_minutes: 6
   stop_conditions:
   - The block deadline at 2026-08-28T22:40:00-07:00
   - Any claim about n = 29, which belongs to block 2 and is out of scope here

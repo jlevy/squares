@@ -328,8 +328,16 @@ that vanish at the packing they came from.
 Three findings there went against the promotion spec — counting rows cannot say whether
 a system determines the pose, an angle class does not license an angle identity, and
 seven of the `n = 29` squares are reflected and refused by name.
-The next slice is **the endpoint check: `BC-056` under `think-lo3p`** — the full strict
-gate, regenerated views, and a logbook entry for the run.
+`BC-056` closed that first stretch, and the run then resumed rather than ending: a
+review of the commit timestamps showed it had misread its own clock and stopped with
+most of its budget unspent ([D-358](defects.md)). `BC-057` is closed in
+[session 039](packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md),
+which built the interval checker and recorded the `n = 29` certificate as evidence
+without promoting it.
+The next slice is **`BC-058` under `think-km5r`** — give the pose model a chirality so
+the seven reflected `n = 29` squares can be assembled.
+The continuation runs the missing middle layers first, with the efficiency and research
+cells deliberately last.
 The full ordering for the sessions after it — including which of the two `priority: 0`
 commitments goes first and why — is the
 [session queue](packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md#the-session-queue),
@@ -357,9 +365,13 @@ is stronger but of uncertain feasibility — a completed sweep found no integer 
 through degree twenty with coefficients below `10^22` — while `BC-045` needs no
 polynomial at all. The robust route was the one with no specification, so that
 specification now exists.
-The witness contract already names `interval-certified` as a method that may carry
-`verified`; only the checker is missing, and `exact_verify` still raises
-`checker-not-built`.
+The witness contract already named `interval-certified` as a method that may carry
+`verified`, and the checker is now built: `scalar.kind` gains `interval-enclosure`,
+`exact_verify` replays an interval witness instead of raising `checker-not-built`, and
+the `n = 29` certificate is retained as
+[`kingbird-n029-2026-interval`](packing/witnesses/kingbird-n029-2026-interval.yaml)
+under [`E-n029-interval-certified-upper`](packing/frontier/evidence.yaml).
+Recording is not promotion: `verified_upper_bound` has not moved to it.
 
 The standing rule is unchanged and applies to every block: an unattended runner may
 apply the accept rule only conservatively.
@@ -659,8 +671,11 @@ near a numerical root.
 An interval-Newton or Krawczyk checker is a buildable direction for suitable systems,
 but contact ambiguity, singularity, and ill-conditioning can make promotion
 mathematically contingent.
-The interval strategy therefore returns `checker-not-built` today rather than promising
-a conversion that may not exist.
+The interval strategy is now built and replayable, and those contingencies are reported
+rather than assumed away: the operator returns `exists` and `unique` separately, and
+nothing may be promoted from `exists` alone.
+At `n = 29` the Jacobian turned out well-conditioned enough to contract in two
+iterations, which was an open question rather than a given.
 
 Exp-033 remains a distinct dedicated result: it bound two retained `n = 5` float poses
 to exact endpoints on one certified fixed-angle optimal face and supplied an exact dual
@@ -2203,14 +2218,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 357 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 358 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 85 | asserted something false about the mathematics |
 | validity | 85 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 136 | recorded something its own evidence contradicts |
+| bookkeeping | 137 | recorded something its own evidence contradicts |
 | robustness | 40 | did not finish, or finished only by luck |
 | performance | 11 | worked, but cost far more than it should |
 
@@ -2220,7 +2235,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-five defects in 357, and no soundness defect
+**The automated gate has caught forty-five defects in 358, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2229,6 +2244,14 @@ Gates confirm what you already thought to check; these were found by devices bui
 test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
+
+The record can also be wrong about itself, and [D-358](defects.md) is this run being so:
+an unattended run declared blocks of 150, 180, 180 and 40 minutes and took 31, 42, 29
+and 23, because it estimated elapsed time between tool calls instead of reading a clock.
+The bookkeeping was the smaller half.
+The misreading also supplied a *reason* for stopping early -- that later blocks had
+overrun into the slack -- when nothing had overrun and most of the budget was unspent,
+which is a constraint the run claimed to meet and in fact a mistake it made.
 
 The harness that proves those checks fire has a blind spot of its own.
 [D-356](defects.md) records that `run_negative_controls` prunes the literature archive

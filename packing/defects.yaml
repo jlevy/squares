@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 357
+count: 358
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9286,3 +9286,38 @@ defects:
     None. Watch for a recurrence of the dead-link message from this control.
   bead: think-lo3p
   recorded_in: packing/campaign/agent-sessions/session-038-block3-contact-assembly.md
+- id: D-358
+  title: An unattended run misread its own clock by a factor of four and stopped early
+  date: '2026-08-29'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: the whole of run-002
+  severity: medium
+  status: outstanding
+  what: >-
+    run-002 declared blocks of 150, 180, 180 and 40 minutes against a 690-minute target.
+    The git timestamps say the planning commit landed at 03:04:56Z and the four block
+    commits at 03:36:09Z, 04:18:15Z, 04:46:49Z and 05:09:32Z: blocks of 31, 42, 29 and 23
+    minutes, and a whole run of 143 minutes rather than 690. The coordinating agent tracked
+    elapsed time by estimating between tool calls instead of reading a clock, and the
+    estimates ran roughly four times fast.
+  consequence: >-
+    Two things, and the second is worse than the first. Every declared clock in
+    session-036, session-037, session-038 and run-002 was wrong, which is ordinary
+    bookkeeping. But the misreading also drove a scheduling decision and then supplied a
+    false reason for it: BC-055 was recorded `stopped` because "blocks 2 and 3 overran into
+    this cell's slack", and nothing overran -- the run stopped with about eight hours of
+    its declared budget unspent. That reason reads as a constraint the run met and was in
+    fact a mistake the run made, which is the flattering direction.
+  fix: >-
+    Clocks in the four artifacts are corrected to the measured commit times, and BC-055's
+    stop reason is replaced with what actually happened. The practice change is mechanical:
+    read `date -u` at every block boundary and record it, rather than estimating elapsed
+    time from the conversation.
+  regression: >-
+    None automatic. A session artifact's declared clock could be checked against the commit
+    timestamps of the work it claims, which no current check does; recorded here as the
+    obvious detector rather than built in passing.
+  bead: think-qs6k
+  recorded_in: packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md

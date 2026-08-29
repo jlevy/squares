@@ -334,11 +334,14 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 038](../../../../packing/campaign/agent-sessions/session-038-block3-contact-assembly.md).
-Sessions 027 through 038 are terminal, and agenda-004 closed on measurement rather than
-opinion. Open BC-056 under `think-lo3p` as the next bounded driver: the endpoint check
-for the overnight run — the full strict gate, regenerated views, a research-loop logbook
-entry, and a green PR — before any new scientific slice starts.
+[session 039](../../../../packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md).
+Sessions 027 through 039 are terminal, and agenda-004 closed on measurement rather than
+opinion.
+Open BC-058 under `think-km5r` as the next bounded driver: give the pose model a
+chirality so the seven reflected `n = 29` squares can be assembled, or state what that
+costs the feature naming.
+The continuation runs the missing middle layers of the promotion pipeline first; the
+efficiency and research cells are deliberately last.
 Sessions 035 through 037 are terminal and closed agenda-005 block A together with
 `BC-045`, so precision is manufactured in-repository, the `n = 29` contact structure is
 frozen with its 89 incidences, and the interval route is built, calibrated and run: it

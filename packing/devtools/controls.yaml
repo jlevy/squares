@@ -759,3 +759,23 @@ controls:
   replace: ["    identities = 0\n\n    unknowns", "    identities = 1\n\n    unknowns"]
   run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
   expect: "an angle identity was emitted"
+
+# --- interval witnesses and their replay (BC-057) ---
+- name: interval witness - replay inherits the caller's precision instead of the witness's
+  file: src/sqpack/witness.py
+  replace: ["    mp.iv.dps = mp.mp.dps = digits + INTERVAL_GUARD_DIGITS",
+            "    mp.iv.dps = mp.mp.dps = 15"]
+  run: uv run --frozen --group dev python -m pytest tests/test_witness_interval.py -q
+  expect: "along with 51 other pair(s)"
+
+- name: interval witness - a root that is not unique is replayed anyway
+  file: src/sqpack/witness.py
+  replace: ["    if not enclosure[\"unique\"]:", "    if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_witness_interval.py -q
+  expect: "expected a root-not-unique refusal"
+
+- name: interval witness - an enclosure written backwards is accepted
+  file: src/sqpack/witness.py
+  replace: ["            if Fraction(low) > Fraction(high):", "            if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_witness_interval.py -q
+  expect: "endpoints must be properly ordered"

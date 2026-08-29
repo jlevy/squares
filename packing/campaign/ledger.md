@@ -9,7 +9,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | run | date | status | cycle slots | sessions | phases | workflows | new-round verdicts | prior retained results | next action |
 | --- | --- | --- | ---: | ---: | ---: | --- | --- | ---: | --- |
 | [run-001](research-loop-logbook/run-001-2026-08-25-four-hour-r4-r5.md) | 2026-08-25 | completed | 8 x 30m | 2 | 10 | `process-review` 2, `research-loop` 5, `pipeline-improvement` 3 | accepted 1, rejected 1, unresolved 3 | 6 | Under think-1s0h and BC-010, preregister exactly campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md; obtain independent criterion acceptance before implementing minus_w_scale.py or running any pure minus-W target. |
-| [run-002](research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md) | 2026-08-29 | completed | 23 x 30m | 3 | 9 | `pipeline-improvement` 6, `process-review` 3 |  | 0 | A human decision, not a runner's: whether the n = 29 interval certificate moves verified_upper_bound. It is retained, unpromoted, and 5.23371e-5 below the standing ceiling. After that, the queue is BC-051 and BC-049 in agenda-005 -- neither was run here -- and the two questions block 3 left open: deriving the determinant conditions the rank shortfall calls for, and giving the pose model a chirality so reflected layouts can be assembled. |
+| [run-002](research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md) | 2026-08-29 | stopped | 23 x 30m | 3 | 9 | `pipeline-improvement` 6, `process-review` 3 |  | 0 | A human decision, not a runner's: whether the n = 29 interval certificate moves verified_upper_bound. It is retained, unpromoted, and 5.23371e-5 below the standing ceiling. After that, the queue is BC-051 and BC-049 in agenda-005 -- neither was run here -- and the two questions block 3 left open: deriving the determinant conditions the rank shortfall calls for, and giving the pose model a chirality so reflected layouts can be assembled. |
 
 ## Agent sessions
 
@@ -53,6 +53,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-036](agent-sessions/session-036-block1-interval-operator.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (process) | 3 | think-qs6k | Open block 2 as session-037 under BC-053 and `think-9ida`. Merge origin/main first, then run phases 3 and 4 of plan-2026-08-28-interval-certification: certify n = 5 and n = 10 against the exact route, n = 11 against Trump's published polynomial, demonstrate a refusal on a plausible-but-infeasible pose, and only then drive the n = 29 system from BC-047's refinement. Record any n = 29 success as `unresolved` with `needs_review: true`; the ceiling does not move in this run. |
 | [session-037](agent-sessions/session-037-block2-interval-calibration.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (process) | 3 | think-qs6k | Open block 3 as session-038 under BC-054 and `think-zm3f`. Merge origin/main first, then assemble the contact equations from the frozen n = 29 structure, eliminate the centres where the graph permits, close by determinant conditions, and reproduce the known n = 11 system -- or state which reduction the graph does not admit. Separately, and for a human rather than a runner: the n = 29 interval certificate is retained and unpromoted, and whether it moves `verified_upper_bound` is a reviewed decision through the evidence contract. |
 | [session-038](agent-sessions/session-038-block3-contact-assembly.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (process) | 3 | think-qs6k | Open the endpoint check as BC-056 under `think-lo3p`: full strict gate, generated views regenerated, a logbook entry for the run, and a green PR. The efficiency and rigidity lanes were not run and are recorded as stopped rather than deferred silently; the exact solve of the closed system, and the two questions this block left open -- deriving the determinant conditions, and giving the pose model a chirality so reflected layouts can be assembled -- are the next slices after it. |
+| [session-039](agent-sessions/session-039-block5-witness-plumbing.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 3 | think-pfwx | Open block 6 as session-040 under BC-058 and `think-km5r`. Merge origin/main first, then give the pose model a chirality so the seven reflected n = 29 squares can be assembled, or state what that costs the feature naming. The middle layers run before the efficiency and research cells, which are deliberately last. |
 
 ### Workflow summary
 
@@ -63,10 +64,10 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-pass` | 0 | 0 | 7 | 0 |
 | `factual-review` | 1 | 0 | 21 | 2 |
 | `insight-iteration` | 2 | 1 | 25 | 2 |
-| `process-review` | 6 | 4 | 38 | 6 |
+| `process-review` | 7 | 4 | 40 | 6 |
 | `efficiency-loop` | 7 | 0 | 17 | 0 |
 | `research-loop` | 2 | 4 | 12 | 7 |
-| `pipeline-improvement` | 11 | 0 | 53 | 0 |
+| `pipeline-improvement` | 11 | 0 | 54 | 0 |
 
 ## Experiment agendas
 
@@ -167,6 +168,14 @@ Status: **active**. Schedule one unattended overnight run across three independe
 | BC-054 | tool_validation | 11, 29 | complete | 1 | think-zm3f | This is the unbuilt middle of the exact route: `promote/contacts.py` and `promote/refine.py` exist, and `promote/system.py` and `promote/solve.py` do not, so the pipeline currently runs from a structure straight to a refinement with no assembly between them. |
 | BC-055 | tool_validation | 5 | stopped | 1 | think-ojlr | The 4m15s baseline was measured on this container at the start of the run rather than assumed, and its breakdown is already known: 250.86s of fast behavioural tests against 40.38s of soft-schema validation and 30.29s of lint. Any selector that does not move the test figure has not moved the gate. |
 | BC-056 | tool_validation | 5, 10, 11, 16, 29 | complete | 0 | think-lo3p | The strict gate is the only receipt that exercises the slow tiers, and no block above runs it; each runs the fast gate instead. So the run's one end-to-end check belongs here, where there is still clock left to repair what it finds. |
+| BC-057 | tool_validation | 29 | complete | 0 | think-pfwx | `exact_verify` has raised `checker-not-built` on this branch since the contract was written. The socket was left open deliberately; this closes it. |
+| BC-058 | tool_validation | 29 | ready | 0 | think-km5r | Measured in session-038: read as rotations, the reflected squares leave the assembled residual at `2.0` instead of the noise floor. The refusal is correct and it is also the thing standing between assembly and the case it was built for. |
+| BC-059 | tool_validation | 5, 11 | ready | 1 | think-9c40 | The rank measurement is already in hand and its gap is wide -- `0.511` counted against `7.3e-42` discarded at n = 5 -- so how many conditions are needed is settled and only what they are remains. |
+| BC-060 | tool_validation | 11, 29 | blocked | 1 | think-ovp7 | X-004 found no integer relation for the serialized n = 29 side through degree twenty below `10^22`, but that probe ran on roughly a hundred available digits; BC-047 now manufactures a thousand, which is the condition that made the probe uninformative rather than negative. |
+| BC-061 | tool_validation | 5, 11 | ready | 1 | think-twa7 | Phase 5 of the promotion spec, unbuilt since it was written. It is the last of the middle layers and the one that makes the route usable on poses this repository produces rather than only on published ones. |
+| BC-062 | tool_validation | 5 | ready | 2 | think-d0q7 | D-355 measured a two-file edit at `979.79s` against the `12.06s` its two affected steps need, an 82x overrun. |
+| BC-063 | research | 5 | ready | 3 | think-298s | Advances BC-049 in agenda-005. The only genuinely research-shaped cell in this continuation; everything above it is tooling. |
+| BC-064 | tool_validation | 5, 10, 11, 16, 29 | ready | 0 | think-c7oo | The first endpoint check earned its place by failing: the logbook entry named `verified_upper_bound` and the consumer contract required it to say what it meant by it. A second one closes the continuation the same way. |
 
 ## Series
 

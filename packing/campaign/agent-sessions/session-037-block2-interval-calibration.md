@@ -9,8 +9,8 @@ session:
   id: session-037
   title: Calibrate the interval route where the answer is already known, then run it at n = 29
   date: '2026-08-29'
-  started_at: '2026-08-28T22:40:00-07:00'
-  deadline_at: '2026-08-29T01:40:00-07:00'
+  started_at: '2026-08-28T20:37:00-07:00'
+  deadline_at: '2026-08-28T21:19:00-07:00'
   goal: >-
     Close agenda-006 block 2 by running phases 3 and 4 of
     plan-2026-08-28-interval-certification. Phase 3 asks whether the checker agrees with
@@ -31,9 +31,9 @@ session:
     status: completed
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 75
-    started_at: '2026-08-28T22:40:00-07:00'
-    deadline_at: '2026-08-28T23:55:00-07:00'
+    budget_minutes: 19
+    started_at: '2026-08-28T20:37:00-07:00'
+    deadline_at: '2026-08-28T20:56:00-07:00'
     expected_output: >-
       A certified upper bound at a declared relaxation for each of the three exactly
       verified cases, each strictly above the exact side and approaching it as the
@@ -102,9 +102,9 @@ session:
     switch_reason: >-
       Phase 1's calibration passed, which is this phase's entry condition; the objective
       changes from agreeing with a known answer to producing one where none exists.
-    budget_minutes: 75
-    started_at: '2026-08-28T23:55:00-07:00'
-    deadline_at: '2026-08-29T01:10:00-07:00'
+    budget_minutes: 17
+    started_at: '2026-08-28T20:56:00-07:00'
+    deadline_at: '2026-08-28T21:13:00-07:00'
     expected_output: >-
       Either an interval-certified upper bound on `s(29)` with its relaxation declared and
       `needs_review` set, or a typed statement of which stage refused and why.
@@ -177,9 +177,9 @@ session:
     entered_by: planned_checkpoint
     switch_reason: >-
       Both scientific phases reached their criteria; what remains is reconciliation.
-    budget_minutes: 30
-    started_at: '2026-08-29T01:10:00-07:00'
-    deadline_at: '2026-08-29T01:40:00-07:00'
+    budget_minutes: 6
+    started_at: '2026-08-28T21:13:00-07:00'
+    deadline_at: '2026-08-28T21:19:00-07:00'
     expected_output: >-
       Registered controls that fire in the shared harness, a green gate, and a pushed
       checkpoint.
@@ -221,11 +221,11 @@ session:
   primary_bead: think-qs6k
   status: completed
   budget:
-    wall_minutes: 180
-    orientation_minutes: 10
-    checkpoint_minutes: 20
-    slice_minutes: 30
-    finalization_minutes: 30
+    wall_minutes: 42
+    orientation_minutes: 3
+    checkpoint_minutes: 8
+    slice_minutes: 20
+    finalization_minutes: 6
   stop_conditions:
   - The block deadline at 2026-08-29T01:40:00-07:00
   - Any write to frontier/, which this run may not make

@@ -9,7 +9,7 @@ logbook_entry:
   id: run-002
   title: Four bounded overnight blocks across the interval and exact promotion routes
   date: '2026-08-29'
-  status: completed
+  status: stopped
   objective: >-
     Run one unattended overnight programme across three independent agenda-005 lanes, in
     blocks small enough that an interruption costs one block rather than the night, and

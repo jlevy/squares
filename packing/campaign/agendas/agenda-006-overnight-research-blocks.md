@@ -220,11 +220,13 @@ agenda:
       gate is the failure mode that matters; a selector that is merely slow is a
       disappointment, and one that skips a step a change can reach is a soundness defect.
       Not run, and recorded as stopped rather than left ready so the queue does not imply
-      work that this run did not do. Blocks 2 and 3 each overran into the slack this cell
-      was placed last to absorb, which is what the slack was for; the choice at the boundary
-      was between a rushed efficiency change to the shared gate and a real endpoint check,
-      and the endpoint check won. Nothing measured here is retracted: the 4m15s baseline
-      stands and BC-051 and BC-049 remain ready in agenda-005.
+      work that this run did not do. The reason first written here -- that blocks 2 and 3
+      overran into this cell's slack -- was false, and is corrected under D-358: the commit
+      timestamps give blocks of 31, 42, 29 and 23 minutes against declared budgets of 150,
+      180, 180 and 40, so nothing overran and the run stopped with most of its budget
+      unspent. The coordinating agent misread its own clock by about a factor of four.
+      Nothing measured here is retracted: the 4m15s baseline stands, and BC-051 and BC-049
+      remain ready in agenda-005, now scheduled in agenda-007.
   - id: BC-056
     purpose: tool_validation
     owner_focus: process
@@ -263,6 +265,234 @@ agenda:
       `verified_upper_bound` and the consumer contract required it to say what it takes
       the field to mean. That is the contract working, and it is the kind of thing only an
       end-to-end check finds.
+  - id: BC-057
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [29]
+    state: complete
+    priority: 0
+    question: >-
+      Can an interval certificate be written into the record as a witness the contract
+      accepts, rather than living as a script and a JSON file beside it?
+    hypotheses: []
+    budget: 45 minutes, sized from the 28-42 minute blocks this run actually measured
+    entry: >-
+      The n = 29 certificate exists and has survived an independent re-verification round;
+      the witness contract already names `interval-certified` as a method but has no
+      scalar kind for an enclosure and no checker branch
+    exit: >-
+      A fourth `scalar.kind` carrying the operator verdict, the pose box and the declared
+      relaxation; an `exact_verify` branch that replays an interval witness instead of
+      raising `checker-not-built`; the n = 29 witness emitted and replayable; and an
+      evidence entry recording assurance, method and replay. `verified_upper_bound` does
+      not move.
+    artifacts:
+    - witnesses/witness.schema.yaml
+    - src/sqpack/witness.py
+    - frontier/evidence.yaml
+    - witnesses/kingbird-n029-2026-interval.yaml
+    - tests/test_witness_interval.py
+    bead: think-pfwx
+    depends_on: []
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      `exact_verify` has raised `checker-not-built` on this branch since the contract was
+      written. The socket was left open deliberately; this closes it.
+    note: >-
+      The first of the missing middle layers, and the one that decides whether anything
+      built in this run is reviewable by someone else. Recording is not promotion: the
+      certificate enters as evidence with its assurance stated, and whether the ceiling
+      moves stays a human decision.
+      Closed in session-039, in 45 minutes read from a clock rather than estimated.
+      `exact_verify` replays an interval witness instead of raising `checker-not-built`,
+      and the n = 29 certificate verifies through the public tool at 406 of 406 pairs.
+      The replay found a real bug on its first run -- 52 undecided pairs, the packing's
+      contact count, because 40-digit enclosures were parsed at mpmath's ambient 15 and
+      widened past the 1e-20 relaxation -- and precision is now pinned from the witness.
+      Controls rise from 97 to 100. `verified_upper_bound` is untouched, and the block
+      also corrected this run's own clock record under D-358.
+  - id: BC-058
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [29]
+    state: ready
+    priority: 0
+    question: >-
+      Can the pose model carry a chirality, so a layout built from mirror groups can be
+      assembled instead of refused?
+    hypotheses: []
+    budget: 45 minutes
+    entry: >-
+      Assembly refuses seven of the twenty-nine n = 29 squares by name, because a
+      centre-plus-rotation pose cannot produce a clockwise winding
+    exit: >-
+      Either the n = 29 contact system assembles with equations that vanish at the
+      published pose, or a typed statement of what a chirality costs the feature naming
+      and why that price is not worth paying.
+    bead: think-km5r
+    depends_on: []
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      Measured in session-038: read as rotations, the reflected squares leave the assembled
+      residual at `2.0` instead of the noise floor. The refusal is correct and it is also
+      the thing standing between assembly and the case it was built for.
+    note: >-
+      A middle layer. The feature indices in a contact structure refer to a corner order,
+      so re-winding a square renames its features; that coupling is the actual problem and
+      the reason this was not done in passing.
+  - id: BC-059
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [5, 11]
+    state: ready
+    priority: 1
+    question: >-
+      Can the stationarity conditions that `close` currently only counts be derived, so a
+      closed system can actually be solved?
+    hypotheses: []
+    budget: 60 minutes
+    entry: >-
+      `close` sizes the shortfall from the contact Jacobian's rank -- one condition at
+      n = 5, four at n = 11 -- and returns descriptions rather than equations
+    exit: >-
+      Determinant or Lagrange conditions in a form a solver accepts, reproducing the known
+      n = 11 system; or a typed statement of which formulation the contact graph resists.
+    bead: think-9c40
+    depends_on: []
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      The rank measurement is already in hand and its gap is wide -- `0.511` counted against
+      `7.3e-42` discarded at n = 5 -- so how many conditions are needed is settled and only
+      what they are remains.
+    note: >-
+      The layer between assembly and the exact solve. Without it `solve` has nothing square
+      to work on.
+  - id: BC-060
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [11, 29]
+    state: blocked
+    priority: 1
+    question: >-
+      Can the closed system be solved exactly and the result discharged rather than
+      trusted?
+    hypotheses: []
+    budget: 60 minutes
+    entry: A closed system from BC-059, square and solvable
+    exit: >-
+      A minimal polynomial by elimination or integer relation under the spec's frozen
+      margin rule, discharged by back-substitution at n = 11 against Trump's published
+      degree-8 polynomial; then whatever n = 29 returns, including a refusal.
+    bead: think-ovp7
+    depends_on: [BC-059]
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      X-004 found no integer relation for the serialized n = 29 side through degree twenty
+      below `10^22`, but that probe ran on roughly a hundred available digits; BC-047 now
+      manufactures a thousand, which is the condition that made the probe uninformative
+      rather than negative.
+    note: >-
+      Advances BC-044 in agenda-005. A refusal here is a result: it would say the minimal
+      polynomial is large, which is itself worth knowing and is why the interval route
+      exists.
+  - id: BC-061
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [5, 11]
+    state: ready
+    priority: 1
+    question: >-
+      Can an exact LP over certified coefficients replace the float solver where a
+      certified answer is required?
+    hypotheses: []
+    budget: 60 minutes
+    entry: >-
+      D-021 records a `1e-11` floor on the float LP, which is what keeps the quench usable
+      only on someone else's high-precision data
+    exit: >-
+      An LP over exact rational or algebraic coefficients agreeing with the float path
+      where both are valid, and a report of which cells need algebraic rather than
+      rational coefficients; or a typed statement of what blocks it.
+    bead: think-twa7
+    depends_on: []
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      Phase 5 of the promotion spec, unbuilt since it was written. It is the last of the
+      middle layers and the one that makes the route usable on poses this repository
+      produces rather than only on published ones.
+    note: >-
+      Advances BC-048 in agenda-005.
+  - id: BC-062
+    purpose: tool_validation
+    owner_focus: efficiency
+    instances: [5]
+    state: ready
+    priority: 2
+    question: >-
+      Can verification run only the steps a change can reach, without any chance of
+      running fewer than it should?
+    hypotheses: []
+    budget: 45 minutes, only if the middle layers above are terminal
+    entry: A measured baseline of 4m15s for `--fast` on this container
+    exit: >-
+      A reachability-scoped selector with a control proving it cannot under-run, measured
+      against that baseline; or a measured rejection.
+    bead: think-d0q7
+    depends_on: []
+    workflows: [efficiency-loop]
+    next_evidence: >-
+      D-355 measured a two-file edit at `979.79s` against the `12.06s` its two affected
+      steps need, an 82x overrun.
+    note: >-
+      Deliberately behind the middle layers. This is a tool for the loop rather than for
+      the mathematics, and the run has now twice been in a position to cut it; saying so in
+      its priority is more honest than leaving it nominally next.
+  - id: BC-063
+    purpose: research
+    owner_focus: insight
+    instances: [5]
+    state: ready
+    priority: 3
+    question: >-
+      Are the three packings the catalogue annotates "Rigid." actually rigid, on evidence
+      of our own?
+    hypotheses: []
+    budget: 45 minutes, only if everything above is terminal
+    entry: The catalogue's annotation, and no independent check of it
+    exit: Our own rigidity evidence at n = 5, or a statement of what producing it would take.
+    bead: think-298s
+    depends_on: []
+    workflows: [research-pass]
+    next_evidence: >-
+      Advances BC-049 in agenda-005. The only genuinely research-shaped cell in this
+      continuation; everything above it is tooling.
+    note: >-
+      Last on purpose. It is the cell that can be cut without leaving a tool half-built.
+  - id: BC-064
+    purpose: tool_validation
+    owner_focus: process
+    instances: [5, 10, 11, 16, 29]
+    state: ready
+    priority: 0
+    question: >-
+      Does the whole record still hold at the endpoints after the continuation, and does
+      run-002 describe the run that actually happened?
+    hypotheses: []
+    budget: 30 minutes, reserved and never borrowed from
+    entry: The continuation blocks have reached terminal states, whatever those states are
+    exit: >-
+      A full strict `packing-validate` receipt, generated views regenerated, run-002
+      extended to cover every session of this run with measured clocks, and a green PR.
+    bead: think-c7oo
+    depends_on: [BC-057]
+    workflows: [process-review]
+    next_evidence: >-
+      The first endpoint check earned its place by failing: the logbook entry named
+      `verified_upper_bound` and the consumer contract required it to say what it meant by
+      it. A second one closes the continuation the same way.
+    note: >-
+      This run has already recorded one wrong reason for stopping early. The endpoint check
+      is where that is caught, and it is reserved rather than optional for that reason.
 ---
 # agenda-006 — four bounded overnight blocks
 

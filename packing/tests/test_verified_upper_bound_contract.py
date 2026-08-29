@@ -80,6 +80,9 @@ DECLARED_CONSUMERS = {
         "reports how far below the ceiling the run's certificate sits, and that the "
         "ceiling did not move"
     ),
+    "packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md": (
+        "records the certificate as evidence and says the ceiling was not moved to it"
+    ),
     "packing/campaign/ledger.md": (
         "generated: it renders the agenda notes below and inherits whatever they say, so "
         "it is an output of a consumer rather than one itself"

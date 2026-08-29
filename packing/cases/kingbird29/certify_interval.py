@@ -38,10 +38,10 @@ import mpmath as mp
 
 from cases.kingbird29 import system
 from cases.kingbird29.layout import DEFAULT_SOURCE, squares_at
-from sqpack.promote.interval import Dual, carrier, interval
+from sqpack.promote.interval import Dual, carrier, decimal_string, interval
 from sqpack.promote.krawczyk import PoseBox, certify
 from sqpack.promote.refine import refine
-from sqpack.promote.relax import certified_upper_bound
+from sqpack.promote.relax import certified_upper_bound, relax
 
 #: Working precision for the whole chain.  Well above what the bound reports, so the
 #: digits that are printed are not the ones carrying the chain's own rounding.
@@ -136,6 +136,121 @@ def certify_n29(source: Path = DEFAULT_SOURCE, *, digits: int = 45) -> dict:
                 "an optimality result, and not a promotion: verified_upper_bound moves "
                 "only by a reviewed change through the evidence contract."
             ),
+        }
+    finally:
+        mp.mp.dps, mp.iv.dps = previous
+
+
+def emit_witness(source: Path = DEFAULT_SOURCE, *, epsilon: str = "1e-20") -> dict:
+    """Build a `Witness/v2` record carrying the enclosures this route certified.
+
+    The witness stores the **relaxed** corners, because those are what was verified.
+    Storing the unrelaxed ones and the relaxation separately would leave a reader to
+    redo the shift and hope they did it the same way; storing what was checked means the
+    replay checks the same thing.
+    """
+    previous = mp.mp.dps, mp.iv.dps
+    mp.mp.dps = mp.iv.dps = PRECISION
+    try:
+        seed = system.seed(source)
+        refinement = refine(system.equations, seed, 60, names=system.UNKNOWNS)
+        root = certify(
+            system.equations,
+            PoseBox.around(system.UNKNOWNS, refinement.values, SEED_RADIUS),
+            digits=45,
+        )
+        if not root.unique:
+            raise ValueError("the root was not proved unique; nothing may be emitted")
+        squares = [
+            [(_scalar(x), _scalar(y)) for x, y in square]
+            for square in squares_at(source, [carrier(v) for v in root.box.intervals()])
+        ]
+        bound = certified_upper_bound(squares, epsilon=epsilon, digits=30)
+        if not bound.certified:
+            raise ValueError(f"nothing to emit: {bound.report.refusal_reason()}")
+        relaxed = relax(squares, epsilon)
+
+        def pair(value) -> list[str]:
+            return [
+                decimal_string(mp.mpf(value.a), 40, upward=False),
+                decimal_string(mp.mpf(value.b), 40, upward=True),
+            ]
+
+        return {
+            "id": "W-kingbird-n029-interval",
+            "n": 29,
+            "side": [bound.bound, bound.bound],
+            "square_size": "1",
+            "representation": "corners",
+            "scalar": {
+                "kind": "interval-enclosure",
+                "enclosure": {
+                    "operator": root.operator,
+                    "exists": root.exists,
+                    "unique": root.unique,
+                    "radius": root.max_radius,
+                    "working_precision": root.working_precision,
+                    "relaxation": epsilon,
+                    "contact_system": (
+                        "cases.kingbird29.system.equations -- the six closing equations "
+                        "f1..f6 the provenance SVG publishes, in {s, a, b, c, d, i}"
+                    ),
+                    "pose_box": {
+                        "names": list(root.box.names),
+                        "lo": list(root.box.lo),
+                        "hi": list(root.box.hi),
+                    },
+                },
+            },
+            "coordinates": {
+                "origin": "lower-left",
+                "axes": "x-right-y-up",
+                "angle_unit": "not-applicable",
+            },
+            "squares": [
+                {"id": index + 1, "corners": [[pair(x), pair(y)] for x, y in square]}
+                for index, square in enumerate(relaxed)
+            ],
+            "claim": {
+                "coordinate_provenance": "verified",
+                "method": "interval-certified",
+                "precision": {"decimal_digits": 40, "rounding": "outward"},
+                "limitations": (
+                    "An upper bound on s(29) at a declared relaxation of "
+                    f"{epsilon}, established on enclosures rather than exact values. Not "
+                    "the optimum, not an optimality result, and below exact-algebraic on "
+                    "the assurance ladder: soundness rests on the interval library's "
+                    "directed rounding, not on exact predicates. The enclosures are of "
+                    "the relaxed configuration, which is the one that was verified."
+                ),
+            },
+            "source": {
+                "key": "[Kingbird n=29 provenance SVG]",
+                "path": str(source),
+            },
+            "certificate": {
+                "kind": "interval-krawczyk-sat",
+                "derived_from": "cases.kingbird29.system.equations",
+                "operator": root.operator,
+                "root_unique": root.unique,
+                "pose_box_radius": root.max_radius,
+                "operator_iterations": root.iterations,
+                "working_precision": root.working_precision,
+                "refinement_residual_bound": refinement.residual_bound,
+                "relaxation": epsilon,
+                "pairs_tested": bound.report.pairs_tested,
+                "separated_pairs": bound.report.separated_pairs,
+                "undecided_pairs": len(bound.report.undecided_pairs),
+                "layout_equivalence": (
+                    "cases.kingbird29.layout.agrees_with_materialised reproduces all 29 "
+                    "squares of the independent numeric walk to 1e-40"
+                ),
+                "replay": (
+                    "uv run --frozen packing-witness verify "
+                    "witnesses/kingbird-n029-2026-interval.yaml"
+                ),
+                "rebuild": "uv run --frozen python -m cases.kingbird29.certify_interval",
+            },
         }
     finally:
         mp.mp.dps, mp.iv.dps = previous
