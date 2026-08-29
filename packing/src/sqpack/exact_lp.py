@@ -18,16 +18,18 @@ comparison goes through the injected `sign`, which is the seam `sqpack.verify` a
 `sqpack.promote.contacts` already use.  Nothing here rounds, and nothing here compares
 against a tolerance.
 
-**What it solves, and what it does not.**  Given a feasible vertex it pivots to the
-exact optimum by Bland's rule and returns a certificate: the exact optimal point, the
-exact multipliers, and the active set they belong to.  Optimality is then checkable
-without trusting the search -- `A_S z = b_S`, `A z <= b`, `A_S^T y = -c`, `y >= 0`, each
-decided by exact sign.  It does **not** find that first vertex.  Phase 1 of the simplex
-is not built here, and the intended supplier is the float path: HiGHS locates a basis in
-milliseconds, and this module certifies or repairs it in exact arithmetic.  That
-division is the standard one for exact LP, and it is why a float noise floor does not
-propagate into the answer -- a wrong starting basis is repaired or refused, never
-believed.
+**What it solves.**  Given a feasible vertex it pivots to the exact optimum by Bland's
+rule and returns a certificate: the exact optimal point, the exact multipliers, and the
+active set they belong to.  Optimality is then checkable without trusting the search --
+`A_S z = b_S`, `A z <= b`, `A_S^T y = -c`, `y >= 0`, each decided by exact sign.
+
+**Where the first vertex comes from.**  `feasible_basis` builds it here, out of the
+program's own coefficients: an auxiliary program carrying one artificial variable,
+entered at a vertex the coefficients construct rather than one a float solve reports,
+and pivoted by the same loop phase 2 uses.  A float basis remains a legitimate hint, and
+`solve` still takes one, but it is a shortcut now and not a dependency: a cell no float
+solver can start is decided here anyway, and a positive phase-1 optimum is a proof that
+the cell is empty rather than a search that gave up.
 """
 
 from __future__ import annotations
@@ -374,6 +376,161 @@ def solve(
         inactive.sort()
         active[leaving] = entering
         pivots += 1
+
+
+@dataclass(frozen=True)
+class Phase1Result:
+    """A feasible vertex of a program, reached from the program's own coefficients."""
+
+    active: tuple[int, ...]
+    point: tuple[Scalar, ...]
+    pivots: int
+    started_feasible: bool
+
+
+def auxiliary_program(
+    lp: ExactLP, sign: Callable[[Scalar], int]
+) -> tuple[ExactLP, tuple[int, ...]]:
+    """Build phase 1's program together with a vertex of it that is feasible by
+    construction.
+
+    The program is `min t` over `A z - w t <= b` and `-t <= 0`, one artificial variable
+    against the whole system.  It is feasible whenever `lp` has any point at all, its
+    optimum is `0` exactly when `lp` is feasible, and `t >= 0` bounds it below, so the
+    pivot loop can end optimal or over budget but never unbounded.
+
+    The construction that makes it startable is the weight vector `w`.  Take any `width`
+    independent rows `S` -- `independent_rows` over the whole system finds them, and
+    finding them needs no point -- and let `z0` be the point they determine and
+    `d = A_S^-1 1` the direction along which every one of them keeps its slack.  Setting
+    `w_S = 1` holds all of `S` active along the whole line `(z0 + t d, t)`, so that line
+    is an edge of the auxiliary program whatever `z0` does to the other rows.  Every
+    other row `j` then gets `w_j` large enough that its slack *grows* along that edge:
+    `w_j = A_j d + 1` where `A_j d` is positive, and `1` otherwise, which leaves the
+    rate `A_j d - w_j` at most `-1`.  Row `j` therefore blocks the edge from below and
+    not from above, and travelling far enough up it satisfies every row at once.  The
+    first row reached going down -- or the floor `t >= 0` when no row is violated at
+    `z0` -- closes `S` into a vertex, because a row whose slack changes along the edge
+    cannot lie in the span of rows whose slack does not.
+
+    No float seed enters, and no scalar appears that `lp` did not already carry: `w`, the
+    edge, and the height are all rational functions of the program's own coefficients.
+
+    The weight rule leaves every rate at most `-1`, so the refusal below cannot fire
+    while it holds.  It is there because the alternative to a typed refusal, when it does
+    not hold, is a division by a rate of zero -- a crash that says nothing about which
+    assumption broke.
+    """
+    width = lp.width
+    count = len(lp.rows)
+    support = _support(lp.rows)
+    crash = independent_rows(lp, range(count))
+    basis = [list(lp.rows[index].coefficients) for index in crash]
+    point = solve_square_system(basis, [lp.rhs[index] for index in crash], lp.one)
+    edge = solve_square_system(basis, [lp.one] * width, lp.one)
+
+    held = set(crash)
+    weights = [lp.one] * count
+    rates = [lp.zero] * count
+    for index in range(count):
+        if index in held:
+            continue
+        rate = _dot(lp.rows[index].coefficients, edge, support[index], lp.zero)
+        weights[index] = rate + lp.one if sign(rate) > 0 else lp.one
+        rates[index] = rate - weights[index]
+        if sign(rates[index]) >= 0:
+            raise ExactLPError(
+                "phase1-construction",
+                f"row {lp.rows[index].label} does not fall away along the phase-1 edge, "
+                f"so no height on that edge satisfies the whole system",
+            )
+
+    height = lp.zero
+    blocking = count
+    for index in range(count):
+        if index in held:
+            continue
+        slack = lp.rhs[index] - _dot(
+            lp.rows[index].coefficients, point, support[index], lp.zero
+        )
+        reach = slack / rates[index]
+        if sign(reach - height) > 0:
+            height, blocking = reach, index
+
+    rows = [
+        LinearRow(f"phase1:{row.label}", (*row.coefficients, -weights[index]))
+        for index, row in enumerate(lp.rows)
+    ]
+    rows.append(LinearRow("phase1:floor", (*(lp.zero,) * width, -lp.one)))
+    program = ExactLP(
+        objective=(*(lp.zero,) * width, lp.one),
+        rows=tuple(rows),
+        rhs=(*lp.rhs, lp.zero),
+        zero=lp.zero,
+        one=lp.one,
+    )
+    return program, (*crash, blocking)
+
+
+def feasible_basis(
+    lp: ExactLP,
+    sign: Callable[[Scalar], int],
+    *,
+    pivot_budget: int = DEFAULT_PIVOT_BUDGET,
+) -> Phase1Result:
+    """Find a feasible vertex of `lp` from `lp` alone, or refuse.
+
+    Phase 1: solve the auxiliary program to optimality by the same pivot loop phase 2
+    uses, then read the answer off its artificial variable.  A positive optimum is a
+    proof of infeasibility rather than a failure to find something -- the auxiliary
+    program's optimum is the least amount by which the whole system can be relaxed, and
+    `sign` decides whether that amount is zero.
+
+    What comes back is an active set, not a point, because that is what `solve` starts
+    from and what `certify_vertex` re-checks: nothing downstream has to trust that this
+    search was right.
+    """
+    program, start = auxiliary_program(lp, sign)
+    solution = solve(program, start, sign, pivot_budget=pivot_budget)
+    relaxation = solution.vertex.point[lp.width]
+    if sign(relaxation) > 0:
+        raise ExactLPError(
+            "infeasible",
+            f"no point satisfies every row: the least relaxation of the whole system "
+            f"that admits one is positive, reached after {solution.pivots} phase-1 pivots",
+        )
+
+    point = solution.vertex.point[: lp.width]
+    support = _support(lp.rows)
+    tight = [
+        index
+        for index in range(len(lp.rows))
+        if sign(
+            lp.rhs[index] - _dot(lp.rows[index].coefficients, point, support[index], lp.zero)
+        )
+        == 0
+    ]
+    return Phase1Result(
+        active=independent_rows(lp, tight),
+        point=tuple(point),
+        pivots=solution.pivots,
+        started_feasible=solution.started_optimal,
+    )
+
+
+def solve_from_scratch(
+    lp: ExactLP,
+    sign: Callable[[Scalar], int],
+    *,
+    pivot_budget: int = DEFAULT_PIVOT_BUDGET,
+) -> ExactSolution:
+    """Solve `lp` exactly with nothing supplied but `lp`: phase 1, then phase 2."""
+    return solve(
+        lp,
+        feasible_basis(lp, sign, pivot_budget=pivot_budget).active,
+        sign,
+        pivot_budget=pivot_budget,
+    )
 
 
 @dataclass(frozen=True)

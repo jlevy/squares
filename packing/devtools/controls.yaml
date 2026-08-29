@@ -1014,3 +1014,46 @@ controls:
   - "    equations = [sp.sympify(equation) for equation in system.equations]\n    symbols = _symbols_by_name(system, equations)\n    substitution = dict"
   run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
   expect: "so the closure is carried but never checked"
+
+# --- exact LP phase 1 (BC-071) ---
+# Phase 1 claims two things a wrong answer would also claim: that the vertex it starts
+# from is feasible by construction, and that a refusal means the cell is empty rather
+# than that the search gave up. The first three controls attack the construction -- the
+# weights that make the edge enterable, the row that closes it into a vertex, and the
+# point the finished active set is read at -- and the last two remove the two refusals.
+- name: exact LP phase 1 - the artificial column is too light to enter the edge from
+  file: src/sqpack/exact_lp.py
+  replace: ["        weights[index] = rate + lp.one if sign(rate) > 0 else lp.one",
+            "        weights[index] = lp.one"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_phase1.py -q
+  expect: "phase 1 could not build an edge into the axis-aligned cell"
+  timeout_seconds: 300
+
+- name: exact LP phase 1 - the edge is entered at the wrong end
+  file: src/sqpack/exact_lp.py
+  replace: ["        if sign(reach - height) > 0:", "        if sign(reach - height) < 0:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_phase1.py -q
+  expect: "the phase-1 start is not a feasible vertex of the auxiliary program"
+  timeout_seconds: 300
+
+- name: exact LP phase 1 - the starting basis is read at the wrong point
+  file: src/sqpack/exact_lp.py
+  replace: ["        )\n        == 0", "        )\n        >= 0"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_phase1.py -q
+  expect: "phase 1 handed phase 2 a start it refused"
+  timeout_seconds: 300
+
+- name: exact LP phase 1 - an empty cell is answered with a point
+  file: src/sqpack/exact_lp.py
+  replace: ["    if sign(relaxation) > 0:", "    if sign(relaxation) > 1:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_phase1.py -q
+  expect: "four unit squares were fitted into a side-1 container rather than refused"
+  timeout_seconds: 300
+
+- name: exact LP phase 1 - the pivot budget never reaches the auxiliary solve
+  file: src/sqpack/exact_lp.py
+  replace: ["    solution = solve(program, start, sign, pivot_budget=pivot_budget)",
+            "    solution = solve(program, start, sign, pivot_budget=pivot_budget + 1000)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_phase1.py -q
+  expect: "phase 1 ran past its pivot budget"
+  timeout_seconds: 300

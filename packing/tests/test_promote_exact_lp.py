@@ -23,7 +23,8 @@ the angle: multiples of a right angle give corner offsets `+-1/2` and edge norma
 **A float basis is a hint, not an answer.**  Started from the basis HiGHS finds for a
 perturbed objective -- a genuine vertex of the same polytope, at side `4.4086` -- the
 exact simplex pivots three times and lands on the published value exactly.  So the float
-path supplies phase 1, which is not built here, and the exact path decides the answer.
+path supplies phase 1 here and the exact path decides the answer;
+`test_promote_exact_phase1.py` measures the same cell with no float solver at all.
 
 **The `ambiguous` set is empty on the exact pose and cannot be on the float one.**  The
 exact reconstruction has fourteen pair contacts, worst contact margin exactly `0`, and
