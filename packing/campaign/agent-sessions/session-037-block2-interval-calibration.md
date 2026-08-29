@@ -218,7 +218,7 @@ session:
     stop_reason: criterion
     next_action: >-
       Open block 3 as session-038 under BC-054, merging origin/main first.
-  primary_bead: think-9ida
+  primary_bead: think-qs6k
   status: completed
   budget:
     wall_minutes: 180

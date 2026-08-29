@@ -76,6 +76,10 @@ DECLARED_CONSUMERS = {
     "docs/project/specs/active/plan-2026-08-28-interval-certification.md": (
         "specs certification that would tighten the ceiling toward the report"
     ),
+    "packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md": (
+        "reports how far below the ceiling the run's certificate sits, and that the "
+        "ceiling did not move"
+    ),
     "packing/campaign/ledger.md": (
         "generated: it renders the agenda notes below and inherits whatever they say, so "
         "it is an output of a consumer rather than one itself"

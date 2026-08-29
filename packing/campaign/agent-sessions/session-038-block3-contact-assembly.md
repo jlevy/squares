@@ -195,7 +195,7 @@ session:
     stop_reason: criterion
     next_action: >-
       Open the endpoint check as BC-056 under `think-lo3p`.
-  primary_bead: think-zm3f
+  primary_bead: think-qs6k
   status: completed
   budget:
     wall_minutes: 180

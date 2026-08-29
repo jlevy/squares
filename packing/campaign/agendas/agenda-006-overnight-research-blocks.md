@@ -229,13 +229,15 @@ agenda:
     purpose: tool_validation
     owner_focus: process
     instances: [5, 10, 11, 16, 29]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       After a night of unattended work, does the whole record still hold together at the
       endpoints — gate, generated views, schemas, links, and the PR?
     hypotheses: []
     budget: 40 minutes from about 2026-08-29T14:10Z
+    artifacts:
+    - campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md
     entry: >-
       The four blocks have reached terminal states, whatever those states are: BC-052,
       BC-053 and BC-054 complete, BC-055 stopped unrun
@@ -255,6 +257,12 @@ agenda:
     note: >-
       The endpoint check is a commitment rather than a courtesy: an unattended run that
       ends without one has produced work nobody has seen fail.
+      Closed. The full strict gate passes all 38 steps in 6m20s, generated views are
+      regenerated from their sources, and run-002 records the whole run. It earned its
+      place: the first strict run failed, because the logbook entry names
+      `verified_upper_bound` and the consumer contract required it to say what it takes
+      the field to mean. That is the contract working, and it is the kind of thing only an
+      end-to-end check finds.
 ---
 # agenda-006 — four bounded overnight blocks
 

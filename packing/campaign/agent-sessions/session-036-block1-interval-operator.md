@@ -228,7 +228,7 @@ session:
     next_action: >-
       Open block 2 as session-037 under BC-053, merging origin/main first, and run spec
       phases 3 and 4.
-  primary_bead: think-pr0m
+  primary_bead: think-qs6k
   status: completed
   budget:
     wall_minutes: 150
