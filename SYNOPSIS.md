@@ -2330,7 +2330,7 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 365 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 366 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -2339,7 +2339,7 @@ and checked in the gate.
 | validity | 87 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 137 | recorded something its own evidence contradicts |
 | robustness | 43 | did not finish, or finished only by luck |
-| performance | 11 | worked, but cost far more than it should |
+| performance | 12 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
@@ -2347,7 +2347,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-seven defects in 365, and no soundness defect
+**The automated gate has caught forty-eight defects in 366, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2413,7 +2413,11 @@ base commit of the session that found them, in a separate worktree — and it ru
 the strict tier, which is why a continuation running the fast gate at every checkpoint
 never met it.
 
-The gate’s cost is itself a logged defect.
+The gate’s cost is itself a logged defect, and this session added a second one.
+[D-366](defects.md) records that the negative-control step now outgrows the 900-second
+per-step timeout: nothing is wrong with the controls — run without the cap the suite
+completes in `1268s` and all **137** fire — but a step that always times out stops
+distinguishing a control that no longer fires from a machine that was busy.
 [D-355](defects.md) records that verification runs the whole gate after every change, so
 cycle time is set by the slowest full-tier step rather than by what the change can
 reach: a two-file edit measured at `979.79s` against the `12.06s` its two affected steps

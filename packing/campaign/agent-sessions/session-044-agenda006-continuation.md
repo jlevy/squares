@@ -601,7 +601,7 @@ session:
     objective: >-
       Check the whole record at the endpoints after the continuation, and make run-002
       describe the run that actually happened.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       Every commitment this session opened is terminal, so the reserve opens on schedule
@@ -620,13 +620,41 @@ session:
     fallback: >-
       Record the failing step with its cause, and leave the PR describing the state it is
       actually in.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      The endpoint check earned its place again: the full strict gate fails two steps that
+      no fast run would ever have shown, and only one of them is this session's.
+    evidence:
+    - >-
+      '`check_golden_basins --deep` fails three oracles at n = 10 -- the quench reaches
+      `3.735634792931` and refuses to certify convergence, and anneal-plus-quench lands
+      `2.85e-02` above the proved `s(10) = (6 + sqrt(2))/2`. Proven pre-existing rather
+      than assumed: an import walk shows this session touched none of the checker''s nine
+      transitive imports, and the identical failures reproduce at `64d1e19` in a separate
+      worktree with its own environment. Recorded as D-365.'
+    - >-
+      'The `negative controls` step is killed at the 900-second per-step timeout, and that
+      one is ours: the suite went from 113 controls to 137 this session. Nothing is wrong
+      with the controls -- run without the cap it completes in `1268s` and all 137 fire.
+      Recorded as D-366, with the count so the next session can see whether the number
+      moved or the machine did.'
+    - >-
+      'Every other strict step passed, including the two the fast tier skips that matter
+      most here: exhaustive exact behavioural tests at `534.66s`, and provenance over all
+      40 declared engine commits.'
+    - >-
+      'Generated views regenerated throughout rather than at the end: `defects.md`,
+      `ledger.md`, and the synopsis check green at every commit.'
+    stop_reason: >-
+      Reserve used for what it is for. Two failures found, both diagnosed to a cause and
+      recorded, neither worked around.
     next_action: >-
-      Hand off with the next action named on a bead that exists.
-  primary_bead: think-obgk
-  status: in_progress
+      `BC-066` is closed and the exact route's remaining question is the field at n = 29,
+      not any layer below it. The next slice is a route to the minimal polynomial of
+      `s(29)` -- or a proof its degree is large enough to close the question -- on
+      `think-obgk`. D-365 and D-366 are the two open gate items and belong to whoever owns
+      the quench lane and the gate contract respectively.
+  primary_bead: think-qs6k
+  status: completed
   budget:
     wall_minutes: 480
     max_cycles: 16
@@ -656,7 +684,12 @@ session:
     before: >-
       Eight ready commitments (BC-061 through BC-064, BC-066 through BC-069); the exact
       route at n = 29 has a degree bound but no elimination attempt
-    after: null
+    after: >-
+      Eleven commitments terminal, one stopped deliberately, and the exact route's every
+      layer below the field is built and exercised end to end at n = 11. At n = 29 the
+      degree bound falls from 1,039,500 to 15,744 and the relation refusal carries from
+      degree 20 to 29; the field itself remains out of reach, now measured rather than
+      assumed
   delegations:
   - task: >-
       BC-068 -- pin the atlas SVG emission precision and stop the field refiner leaking
@@ -934,7 +967,10 @@ session:
       Landed by cherry-pick; D-021 updated and BC-071 opened for the missing phase 1.
   outputs: []
   checks: []
-  stop_reason: null
+  stop_reason: >-
+    All eleven commitments this session opened reached a terminal state, and the reserved
+    endpoint check ran on schedule rather than being borrowed from. It found two strict-tier
+    failures, one pre-existing and one this session's, both diagnosed and recorded.
   next_action: >-
     Carry BC-066 on `think-obgk` to a terminal state: record the measured wall the
     rational elimination hit, and take the eliminant's degree from the finite-field run.

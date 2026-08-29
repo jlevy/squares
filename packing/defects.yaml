@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 365
+count: 366
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9637,6 +9637,43 @@ defects:
     `uv run --frozen --all-extras --group dev python -m devtools.check_golden_basins --deep`,
     which takes about 335 seconds and runs only in the strict tier -- which is why a
     continuation that ran the fast gate at every checkpoint never saw it.
+  bead: think-c7oo
+  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+
+- id: D-366
+  title: The negative-control step outgrew the gate's per-step timeout
+  date: '2026-08-29'
+  layer: tooling
+  class: performance
+  detected_by: gate
+  latent_for: 'introduced and detected in the same session'
+  severity: low
+  status: outstanding
+  what: >-
+    The strict tier's `negative controls` step is killed at the 900-second per-step
+    timeout. Nothing is wrong with the controls: run without that cap the suite completes
+    in `1268s` and reports `137 negative controls fire as expected`. The step simply costs
+    more than the cap now allows.
+  consequence: >-
+    The strict gate reports a failure where the evidence is a timeout, which is the least
+    useful kind of red. Worse in principle, a step that always times out stops
+    distinguishing a control that no longer fires from a machine that was busy -- and this
+    repository's whole argument for controls is that a guard nobody watches fire is
+    untested.
+  fix: >-
+    Not fixed here, and the honest reason is that the cheap fix and the right fix differ.
+    Raising the cap would make the step pass and would weaken the same guard for every
+    other step that shares it. The cost is concentrated rather than spread: this session
+    took the suite from 113 controls to 137, and the expensive additions are the ones whose
+    `run` invokes the exact-LP tests, where each control pays a full module import and the
+    end-to-end Trump solve behind it. Pointing those at a cheaper target, or giving the
+    step its own declared budget, is the repair; both are choices about the gate's contract
+    rather than edits to a control.
+  regression: >-
+    Measured rather than inferred: `uv run --frozen --all-extras --group dev python -m
+    devtools.run_negative_controls devtools/controls.yaml -j 1` completes in `1268s` with
+    all 137 firing, against a `900s` cap. Recorded with the count so the next session can
+    see whether the number moved or the machine did.
   bead: think-c7oo
   recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
 

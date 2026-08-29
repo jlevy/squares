@@ -26,29 +26,37 @@ logbook_entry:
   - session-041
   - session-042
   - session-043
+  - session-044
   primary_bead: think-qs6k
   source_branch: claude/squares-research-blocks-kqu96s
-  source_commit: d257a90cb41883e9375f666255ccf0b877e789aa
+  source_commit: 295a5460fbb02a1ffb18f7ec7ac5b02f6ba57e4a
   timebox:
-    target_wall_minutes: 690
+    target_wall_minutes: 1170
     cycle_minutes: 30
-    planned_cycle_slots: 23
+    planned_cycle_slots: 39
   rollup:
-    session_count: 8
-    phase_count: 21
+    session_count: 9
+    phase_count: 32
     workflow_counts:
-      pipeline-improvement: 13
-      process-review: 8
+      pipeline-improvement: 19
+      process-review: 10
+      general-improvement: 1
+      efficiency-loop: 1
+      research-pass: 1
     phase_status_counts:
-      completed: 21
+      completed: 31
+      stopped: 1
     focus_counts:
-      correctness: 14
-      process: 7
+      correctness: 21
+      process: 9
+      efficiency: 1
+      insight: 1
     clock_role_counts:
-      work: 13
-      finalization: 8
-    delegation_count: 0
-    delegation_status_counts: {}
+      work: 23
+      finalization: 9
+    delegation_count: 5
+    delegation_status_counts:
+      completed: 5
     new_round_decision_counts: {}
   new_round_results: []
   prior_retained_results: []
@@ -397,6 +405,47 @@ more. It is not the optimum, not an optimality result, and not promoted.
 
 The next action is a human one — whether that bound moves.
 It is not a runner’s to make.
+
+## The continuation, in session 044
+
+Eleven commitments, all terminal, in a session that reached its last research block with
+over two hours of wall budget unspent — which is why `BC-070`, `BC-071`, `BC-072` and
+`BC-073` exist at all: they are the remainder spent on the question rather than an early
+finish.
+
+| Block | Commitment | Outcome |
+| ---: | --- | --- |
+| 11 | `BC-066` — eliminate the five-unknown system | A measured wall. OOM at degree 32, `13.8 GB`; swell is not the cause |
+| 12 | `BC-070` — bound the degree without a basis | `15,744` by mixed volume, sixty-six times tighter than Bézout |
+| 13 | `BC-067` — the `n = 11` round trip | Closed. Reconstructed side exactly the field generator |
+| 14 | `BC-068` — pin the atlas emission (`D-359`) | Fixed; no stored artifact changed a byte |
+| 15 | `BC-069` — the one `n = 5` condition | Rank `16/16`; the promised form could not have closed it (`D-363`) |
+| 16 | `BC-061` — exact LP over certified coefficients | Optimum exact; `ambiguous` empty |
+| 17 | `BC-071` — phase 1 of that LP | First vertex from the cell’s own coefficients, no float solver |
+| 18 | `BC-063` — first-party `n = 5` rigidity | Infinitesimally flexible, second-order rigid |
+| 19 | `BC-072` — retrack at higher precision | Every path labelled; the count still refused, for a narrower reason |
+| 20 | `BC-073` — the sweep’s true reach | Refusal carries from degree 20 to 29; `D-364` found on the way |
+| 21 | `BC-064` — endpoint check | Two strict failures: `D-365` pre-existing, `D-366` this session’s |
+| — | `BC-062` — reachability-scoped verification | Stopped deliberately; a measurement block on a contended machine |
+
+**What the continuation was for, and what it settled.** The exact route’s every layer
+below the field is now built and exercised end to end at `n = 11`. At `n = 29` the
+degree bound falls from `1,039,500` to `15,744` and the relation refusal carries from
+degree 20 to 29. The field itself remains out of reach — but out of reach *measured*
+rather than assumed, which is the difference between a gap and a wall.
+
+**Six record defects a cold start inherits** were found by picking this branch up in a
+fresh container and following its own instructions: five bootstrap commands that do not
+run, a dangling `agenda-007`, four beads carrying pre-renumbering ids, two beads the
+agenda names that were never created, a bead closed with a reason `D-358` retracts, and
+a commit hook that was not installed.
+All repaired.
+
+**Four defects opened.** `D-362` and `D-365` are checks that passed for a reason other
+than the one they state; `D-363` is a closure form named in the record that could not
+close the case it was named for; `D-364` is the margin rule counting digits the value
+does not carry — flattering, and never fired, because no sweep had gone past twenty.
+`D-366` is this session’s own cost regression in the control suite.
 
 ## Where to resume
 
