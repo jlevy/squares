@@ -484,6 +484,27 @@ reverse: a pass that starts from the prose inherits the prose’s mistakes.
   witness is not a bound on `s(n)`. These are the sentences most likely to be smoothed
   away, and the ones that must not be.
 
+**Generated graphics.** Figures drift the way prose does, and they drift more quietly
+because nobody rereads them.
+
+- Run each generator’s own check, which is the cheap half:
+  `build_known_best_atlas --check`, `check_svg_rendering --check`,
+  `render_known_best_contact_overlays --check`, `build_prospective_atlas --check`,
+  `build_composite_figure_data --check`, `render_document_map --check`. A failure here
+  means the stored artifact no longer matches its inputs.
+- Then the half no checker does: **a figure can be byte-identical to its inputs and
+  still be stale in meaning.** If the record now says something the figure was drawn
+  before — a bound moved, a case was added, a claim narrowed — the drawing is wrong even
+  though it regenerates clean.
+  Read each figure against the sentence that introduces it.
+- Never hand-edit a generated artifact.
+  If it is wrong, the generator is wrong.
+- Two known limits, so a pass does not rediscover them: the composite PNG needs macOS
+  `sips` or ImageMagick 7 and cannot be regenerated on a stock Linux runner, and
+  emission precision is pinned at 28 ([D-359](defects.md)) with a related check still
+  open ([D-362](defects.md)) — a pass that finds a figure needing a precision change is
+  looking at that defect, not at a figure bug.
+
 **Before closing.**
 
 - Every drift either fixed or filed as a defect, with no third option.

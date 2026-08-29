@@ -1226,6 +1226,12 @@ agenda:
       bound on the Kingbird solution is not a bound on `s(29)`. D-367 is what that failure
       looks like when it happens, and it happened in the same run that is asking for this
       pass.
+
+      The figures are in scope too, and they drift more quietly than prose because nobody
+      rereads them. The generators' own `--check` flags catch an artifact that no longer
+      matches its inputs; what no checker catches is a figure that regenerates clean and
+      no longer illustrates what the sentence introducing it now claims. Read each against
+      its caption.
   - id: BC-075
     purpose: tool_validation
     owner_focus: efficiency
