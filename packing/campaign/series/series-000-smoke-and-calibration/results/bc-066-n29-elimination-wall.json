@@ -1,13 +1,27 @@
 {
   "claim": "Groebner elimination of the n = 29 contact system does not reach an eliminant in s on this hardware, and coefficient swell is not what stops it.",
-  "claim_boundary": "A measurement on two threads and 15 GB, not a proof of intractability. It does not exclude a larger machine, a different monomial order, or another engine. It says nothing about s(29) itself: no bound moved, and verified_upper_bound is untouched.",
+  "claim_boundary": "A measurement on two threads and 15 GB, not a proof of intractability, and it does not exclude a larger machine or another engine. The system is Kingbird's, so anything it yields is about the Kingbird solution rather than about s(29), which is the optimum and is not known to be it. No bound moved: verified_upper_bound is untouched.",
   "certified": false,
   "system": {
     "source": "cases.kingbird29.system.equations, rationalised by u = tan(theta/2)",
     "equations": 6,
     "unknowns": 6,
-    "unknown_order": ["u_a", "u_b", "u_c", "u_d", "u_i", "s"],
-    "total_degrees": [11, 15, 10, 15, 7, 6],
+    "unknown_order": [
+      "u_a",
+      "u_b",
+      "u_c",
+      "u_d",
+      "u_i",
+      "s"
+    ],
+    "total_degrees": [
+      11,
+      15,
+      10,
+      15,
+      7,
+      6
+    ],
     "bezout_bound": 1039500,
     "export_guard": "each emitted polynomial re-parsed from the written text, required to vanish at the pose refined to 100 digits and to equal the cleared original exactly"
   },
@@ -32,9 +46,24 @@
       "highest_degree_started": 32,
       "highest_degree_completed": 31,
       "matrices": [
-        {"degree": 29, "rows": 322322, "columns": 912889, "seconds": 134.73},
-        {"degree": 30, "rows": 484907, "columns": 1300382, "seconds": 329.63},
-        {"degree": 31, "rows": 656126, "columns": 1670545, "seconds": 382.84}
+        {
+          "degree": 29,
+          "rows": 322322,
+          "columns": 912889,
+          "seconds": 134.73
+        },
+        {
+          "degree": 30,
+          "rows": 484907,
+          "columns": 1300382,
+          "seconds": 329.63
+        },
+        {
+          "degree": 31,
+          "rows": 656126,
+          "columns": 1670545,
+          "seconds": 382.84
+        }
       ]
     },
     {
@@ -47,8 +76,18 @@
       "resident_gb_at_degree_31": 8.3,
       "highest_degree_started": 31,
       "matrices": [
-        {"degree": 29, "rows": 322322, "columns": 912889, "seconds": 150.08},
-        {"degree": 30, "rows": 484907, "columns": 1300382, "seconds": 266.21}
+        {
+          "degree": 29,
+          "rows": 322322,
+          "columns": 912889,
+          "seconds": 150.08
+        },
+        {
+          "degree": 30,
+          "rows": 484907,
+          "columns": 1300382,
+          "seconds": 266.21
+        }
       ]
     },
     {
@@ -61,7 +100,10 @@
       "outcome": "capped",
       "exit_code": 124,
       "peak_resident_gb": 2.7,
-      "largest_matrix": {"rows": 20611, "columns": 49890},
+      "largest_matrix": {
+        "rows": 20611,
+        "columns": 49890
+      },
       "peak_pair_list": 21661,
       "note": "An order of magnitude cheaper per matrix than the elimination order, and still no basis inside the declared cap. The pair list grew monotonically throughout."
     }

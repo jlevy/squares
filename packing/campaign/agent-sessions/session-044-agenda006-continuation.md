@@ -344,7 +344,8 @@ session:
       being tracked successfully.
     outcome: >-
       The bound landed and the count did not, which this block's kill condition
-      anticipated. `s(29)` is algebraic of degree at most `15,744`.
+      anticipated. The Kingbird solution has algebraic degree at most `15,744` -- Kingbird's,
+      not s(29)'s, which is the optimum and is not proved to be it.
     evidence:
     - >-
       'The mixed volume of the Newton polytopes is `15,744`, computed in nine seconds,

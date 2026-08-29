@@ -428,7 +428,7 @@ agenda:
       discharges it as irreducible over Q with an isolating interval. At n = 29, on 1000
       digits with a reported residual bound of `1.09829e-1039`, `pslq` returns nothing at
       any degree from 2 through 20 below `10^22`: not one degree reached a clause. So if
-      `s(29)` is algebraic of degree twenty or less, some coefficient is at least `10^22`.
+      the Kingbird solution has degree twenty or less, some coefficient is at least `10^22`.
     note: >-
       Advances BC-044 in agenda-005. The refusal is the result the commitment anticipated,
       and it is now measured rather than expected: the planning probe found relations at
@@ -597,8 +597,8 @@ agenda:
       pslq -- and only the second was built. It refused through degree twenty below `10^22`
       on a thousand digits, and nothing said what degree `s(29)` actually has.
     exit: >-
-      A bound on the algebraic degree of `s(29)`, computed from the published system rather
-      than estimated; or a typed statement of what in the transcription resists
+      A bound on the algebraic degree of the Kingbird solution, computed from the published
+      system rather than estimated; or a typed statement of what in the transcription resists
       rationalisation.
     artifacts:
     - src/sqpack/promote/interval.py
@@ -912,7 +912,7 @@ agenda:
     priority: 0
     question: >-
       How many isolated solutions does the n = 29 system have, and what does that make the
-      degree of `s(29)` -- without computing a Groebner basis at all?
+      degree of the Kingbird solution -- without computing a Groebner basis at all?
     hypotheses: []
     budget: 90 minutes
     entry: >-
@@ -943,7 +943,11 @@ agenda:
       in nine seconds, against the Bezout bound of `1,039,500` -- sixty-six times tighter.
       The stable mixed volume equals it, so there are no isolated solutions on the
       coordinate hyperplanes either and the bound covers every isolated solution rather
-      than only those in the torus. So `s(29)` is algebraic of degree at most `15,744`.
+      than only those in the torus. So **the Kingbird solution** has algebraic degree at
+      most `15,744`.
+
+      Kingbird's, not `s(29)`'s. `s(29)` is the optimum; Kingbird's packing is the best known
+      and is not proved optimal, and the bound gap at `n = 29` is about `0.46`.
 
       The count did not, and this commitment's own kill condition is why it is not
       recorded as one. Tracking all `15,744` paths took 22m41s and returned 8,327 finite
@@ -1147,7 +1151,7 @@ agenda:
       the `--max-degree` default. The reach the digits actually support is **degree 35**,
       and degrees 21 through 29 have now been swept: every one returns `no-relation`, with
       pslq finding nothing to judge rather than finding something a clause refused, which
-      is the stronger form. So if `s(29)` is algebraic of degree 29 or less, some
+      is the stronger form. So if the Kingbird solution has degree 29 or less, some
       coefficient is at least `10^22`.
 
       Two corrections came out of writing the reach down, and the second is a soundness

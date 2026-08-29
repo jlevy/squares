@@ -491,9 +491,10 @@ found no integer relation through degree twenty below `10^22` on a thousand digi
 and — more usefully — that coefficient swell is *not* what stops it: over `F_p`, where a
 coefficient is one machine word, the matrices reach the same dimensions and the cheapest
 monomial order still does not terminate, so what is being measured is the size of the
-ideal. `BC-070` then bounded the degree of `s(29)` at **`15,744`** by mixed volume, down
-from Bézout’s `1,039,500`, which is a sixty-sixfold improvement and still far beyond
-what an integer-relation search reaches.
+ideal.
+`BC-070` then bounded the degree of the Kingbird solution at **`15,744`** by mixed
+volume, down from Bézout’s `1,039,500`, which is a sixty-sixfold improvement and still
+far beyond what an integer-relation search reaches.
 
 So the honest state is: the pipeline is finished and the number is not available.
 A route that produces the minimal polynomial of `s(29)` — or a proof that its degree is

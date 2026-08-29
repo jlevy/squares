@@ -384,7 +384,7 @@ coefficient bound of `10^22`: not one degree reached a clause.
 The contrast is the finding, because the planning probe on the ~98 serialized digits got
 relations at almost every degree from 8 to 21. A search that answers when under-fed and
 falls silent when fed properly is evidence about the number, and what it bounds is
-concrete: if `s(29)` is algebraic of degree twenty or less, some coefficient of its
+concrete: if the Kingbird solution has degree twenty or less, some coefficient of its
 minimal polynomial is at least `10^22`. That is the measured reason the interval route
 carries the `n = 29` bound.
 `BC-065` is closed in
@@ -433,10 +433,12 @@ polytopes bounds the isolated solutions at **`15,744`** — sixty-six times tigh
 the Bézout bound of `1,039,500`, computed in nine seconds.
 The stable mixed volume is equal to it, so the bound covers every isolated solution
 rather than only those in the torus.
-So `s(29)` is algebraic of degree at most `15,744` if it is algebraic at all.
-That is still far beyond what an integer-relation search can reach, and saying otherwise
-would overstate it: what it replaces is an unusable bound with a merely large one,
-computed from the system rather than guessed.
+So **the Kingbird solution has algebraic degree at most `15,744`**. Kingbird’s, not
+`s(29)`'s: `s(29)` is the optimum, Kingbird’s packing is the best known and is not
+proved optimal, and the bound gap there is about `0.46`. That is still far beyond what
+an integer-relation search can reach, and saying otherwise would overstate it: what it
+replaces is an unusable bound with a merely large one, computed from the system rather
+than guessed.
 
 `BC-067` closed the exact route’s loop at `n = 11`, where the answer is published.
 `discharge` stops at the side, which is a claim about a *number*; the round trip carries
@@ -2330,12 +2332,12 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 366 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 367 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 87 | asserted something false about the mathematics |
+| soundness | 88 | asserted something false about the mathematics |
 | validity | 87 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 137 | recorded something its own evidence contradicts |
 | robustness | 43 | did not finish, or finished only by luck |
@@ -2343,11 +2345,11 @@ and checked in the gate.
 
 Two observations the log exists to make.
 
-**Sixty-eight of the eighty-seven soundness defects pointed in the *flattering*
+**Sixty-nine of the eighty-eight soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-eight defects in 366, and no soundness defect
+**The automated gate has caught forty-eight defects in 367, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

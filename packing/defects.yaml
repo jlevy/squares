@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 366
+count: 367
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9675,5 +9675,50 @@ defects:
     all 137 firing, against a `900s` cap. Recorded with the count so the next session can
     see whether the number moved or the machine did.
   bead: think-c7oo
+  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+
+- id: D-367
+  title: Degree bounds on the Kingbird solution were written as bounds on s(n)
+  date: '2026-08-29'
+  layer: record
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: from BC-060 in session-042 until session-044's endpoint review
+  severity: medium
+  status: fixed
+  what: >-
+    The promotion work at `n = 29` derives everything from the closed system Kingbird
+    publishes for Kingbird's own packing, so every degree statement it produces is about the
+    Kingbird solution. The record wrote them as statements about `s(29)`: "the degree of
+    `s(29)` is not twenty", "if `s(29)` is algebraic of degree twenty or less, some
+    coefficient is at least `10^22`", and this session's own "`s(29)` is algebraic of degree
+    at most `15,744`". `s(29)` is the optimum -- the side of the smallest square holding
+    twenty-nine unit squares -- and Kingbird's packing is the best known rather than a
+    proved one.
+  consequence: >-
+    Flattering, and about the most load-bearing distinction this repository maintains. The
+    whole `reported_upper_bound` / `verified_upper_bound` split exists because a published
+    packing is not known to be optimal, and the `n = 29` bound gap is about `0.46`; a degree
+    bound on the optimum would be a statement about a number nobody has pinned down, where a
+    degree bound on the Kingbird solution is a statement about a specific algebraic number
+    this project can point at. Nothing was computed wrongly and no other claim rests
+    on the phrasing, but the phrasing said more than the computation.
+  fix: >-
+    Every live artifact now names what it bounds: the retained result JSONs, agenda-006's
+    BC-060, BC-070 and BC-073 entries, the synopsis handoff, run-002 and `development.md`.
+    The bc-070 artifact gains a `what_it_bounds` field saying it in full, and its claim
+    boundary now separates the two questions rather than only the bound-versus-degree one.
+    Terminal session records from session-042 and session-043 are left as written: they are
+    history, this entry is where the correction lives, and editing a closed record to look
+    tidy is the practice this project refuses.
+  regression: >-
+    None mechanical, and that is worth stating rather than glossing. No checker distinguishes
+    a claim about `s(n)` from a claim about a retained witness's side, and writing one would
+    mean parsing prose. What exists instead is the `verified_upper_bound` consumer contract,
+    which forces any file naming that field to declare what it takes it to mean -- the same
+    discipline one level down, and the reason this conflation was caught in review rather
+    than shipped further.
+  bead: think-obgk
   recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
 

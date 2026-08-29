@@ -268,8 +268,8 @@ degree.
 
 [`probe_system_degree`](packing/devtools/probe_system_degree.py) rationalises the
 `n = 29` system by the half-angle substitution and reports what bounds the algebraic
-degree of `s(29)`, which is what says whether an integer-relation refusal at a given
-degree surveyed the space or a corner of it.
+degree of the Kingbird solution, which is what says whether an integer-relation refusal
+at a given degree surveyed the space or a corner of it.
 `--eliminate-side` also solves the smallest equation for `s` and reports the
 five-unknown system that leaves.
 The `n = 29` sweep takes about twelve minutes, which is why it is a tool with a recorded
