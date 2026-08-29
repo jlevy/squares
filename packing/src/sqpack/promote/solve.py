@@ -37,6 +37,23 @@ refinement's bound to be below `10^-(B + M)` in the first place.  Trump's degree
 relation falls from `4.99e-338` to `3.38e-412` against a value carrying 400 digits, and
 that fall is the signal; a relation pinned to its budget would sit at `10^-B` in both.
 
+**How far the rule can see is arithmetic, and :func:`reach` does it.**  Rearranging
+clause 3 for the worst relation a search may return -- one whose coefficients saturate
+the search's own bound -- gives `(d + 1) * log10(C) + M < P`, so the digits fix a
+largest degree beyond which no such relation could be judged.  That ceiling is what a
+sweep should stop at: a refusal above it is a statement about the digits rather than
+about the number.  It is a ceiling on the *worst* case only -- Trump's degree eight
+carries `C = 12420` and clears a bound that a degree-seven relation at `C = 10^22`
+would not -- so it bounds a sweep rather than gating an answer.
+
+**`P` is the worse of two limits, not the refinement's residual alone.**  A refinement
+reports a residual bound, and then rounds its value to the digits it was asked for on
+the way out; those need not agree.  The `n = 29` refinement at 1000 digits reports
+`1.09829e-1039` but serializes 1000 significant digits, and clause 3 reading the
+residual alone would have judged degrees 36 and 37 against 39 digits the value does not
+carry.  :func:`available_digits` takes the worse of the two, which is what clause 3 now
+tests.
+
 Everything the rule consumed is recorded on the result -- `d`, `C`, `B`, `M`, the
 residual at `B` and the residual at `2B + 2M` -- so a reader can re-run the judgement
 instead of taking the verdict.
@@ -64,6 +81,62 @@ class SolveError(ValueError):
     def __init__(self, kind: str, detail: str):
         super().__init__(detail)
         self.kind = kind
+
+
+#: The default coefficient ceiling handed to `pslq`, and the `C` a reach is computed at.
+MAX_COEFFICIENT = 10**22
+
+
+def digits_carried(value: str) -> int:
+    """Significant decimal digits in a serialized value, however it is written.
+
+    A refinement reports a bound on its residual and separately rounds its value to the
+    digits the caller asked for.  The search only ever sees the rounded string, so this
+    is the second of the two limits on what any clause may rely on.
+    """
+    mantissa = value.strip().lstrip("+-").partition("e")[0].partition("E")[0]
+    return len(mantissa.replace(".", "").lstrip("0"))
+
+
+def available_digits(value: str, residual_bound: str):
+    """`P`: the digits a clause may rely on, as the worse of the two limits on them.
+
+    The reported residual bound is one limit and the value's own length is the other,
+    and taking the better of them would credit the search with digits it was not given.
+    """
+    bound = mp.mpf(residual_bound)
+    truncation = mp.mpf(10) ** (-digits_carried(value))
+    return -mp.log10(max(bound, truncation))
+
+
+def reach(
+    value: str,
+    residual_bound: str,
+    *,
+    margin_digits: int = MARGIN_DIGITS,
+    max_coefficient: int = MAX_COEFFICIENT,
+) -> int:
+    """The largest degree at which a refusal is still a statement about the value.
+
+    Clause 3 demands `(d + 1) * log10(C) + M < P`.  Read at the largest `C` the search
+    may return, that is a ceiling on the degrees worth sweeping: above it, a relation
+    carrying coefficients near the bound could not be judged whether or not one exists,
+    so a refusal there measures the digits rather than the number.
+
+    This bounds a sweep; it does not gate an answer.  A relation that carries small
+    coefficients has a smaller `B` and can be judged well above this degree -- Trump's
+    degree eight, at `C = 12420`, is accepted from 400 digits where this function
+    reports seven.
+    """
+    span = mp.log10(max_coefficient)
+    if span <= 0:
+        raise SolveError(
+            "bad-request",
+            f"a coefficient bound of {max_coefficient} leaves no digits to charge a "
+            "relation for, so no reach is defined",
+        )
+    terms = (available_digits(value, residual_bound) - margin_digits) / span
+    return max(int(mp.ceil(terms)) - 2, 0)
 
 
 @dataclass(frozen=True)
@@ -189,7 +262,7 @@ def minimal_polynomial(
     max_degree: int = 20,
     min_degree: int = 2,
     margin_digits: int = MARGIN_DIGITS,
-    max_coefficient: int = 10**22,
+    max_coefficient: int = MAX_COEFFICIENT,
 ) -> Candidate | Refusal:
     """Search for the minimal polynomial of `value`, and judge it by the margin rule.
 
@@ -217,9 +290,15 @@ def minimal_polynomial(
         )
 
     attempts: list[tuple[int, str, str]] = []
+    # Clause 3 is tested against the worse of the refinement's reported bound and the
+    # digits the serialized value carries, because the search only ever sees the
+    # string. Where the two disagree the refusal says which one bound it.
+    usable = available_digits(value, residual_bound)
+    floor = mp.mpf(10) ** (-usable)
+    limit = "the value's serialized digits" if floor > bound else "the refinement"
     # Enough precision to evaluate at 2B + 2M for the largest budget a search could
     # return, plus guard. The search itself runs at the digits the value carries.
-    available = int(-mp.log10(bound))
+    available = int(usable)
     previous = mp.mp.dps
     try:
         for degree in range(min_degree, max_degree + 1):
@@ -234,14 +313,14 @@ def minimal_polynomial(
             largest, budget = _budget(degree, coefficients)
             needed = budget + margin_digits
 
-            if bound >= mp.mpf(10) ** (-needed):
+            if floor >= mp.mpf(10) ** (-needed):
                 attempts.append(
                     (
                         degree,
                         "digits-not-independent",
                         (
-                            f"the value's residual bound {residual_bound} is not below "
-                            f"10^-{_decimal(needed)}; clause 3"
+                            f"{limit} leaves the value good to 10^-{_decimal(usable)}, "
+                            f"which is not below 10^-{_decimal(needed)}; clause 3"
                         ),
                     )
                 )

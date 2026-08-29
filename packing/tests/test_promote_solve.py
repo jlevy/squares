@@ -18,6 +18,13 @@ relative residual of order `1e-90` had consumed almost exactly the 90 digits it 
 allowed.  The rule refuses every one of them, and this file asserts *which clause* does
 the refusing rather than only that a refusal happens.
 
+**The reach is the other half of the same rule.**  Clause 3 is an inequality in the
+digits, and reading it backwards says how far a sweep is worth running: the `n = 29`
+sweep stopped at degree twenty because twenty was a flag's default, where a thousand
+digits pay for thirty-five.  The tests below fix that arithmetic and the two ways it was
+being got wrong -- crediting the search with digits the serialized value does not carry,
+and stopping a degree either side of the ceiling.
+
 Clause 2, stability under precision, is mandatory and **has no exercised case here**.
 Clauses 3 and 1 fire first on everything available: a spurious relation found at low
 precision fails the independent-digits test, and one found at high precision fails the
@@ -34,12 +41,18 @@ import mpmath as mp
 import sympy as sp
 
 from cases.trump11 import packing as trump11
+from devtools import probe_minimal_polynomial as probe_tool
 from sqpack.promote.solve import (
+    MARGIN_DIGITS,
+    MAX_COEFFICIENT,
     Candidate,
     Refusal,
     SolveError,
+    available_digits,
+    digits_carried,
     discharge,
     minimal_polynomial,
+    reach,
 )
 
 #: Trump 1979, the minimal polynomial of `s(11)`, highest degree first.
@@ -200,7 +213,108 @@ def a_reducible_relation_is_refused_as_not_minimal() -> None:
     )
 
 
+#: The `n = 29` refinement at 1000 digits, as its two reported numbers: a residual bound
+#: of `1.09829e-1039` over a value serialized to a thousand significant digits.  The
+#: digits themselves do not matter to the arithmetic below, only how many there are.
+REFINED_N29_BOUND = "1.09829e-1039"
+REFINED_N29_DIGITS = "5." + "3" * 999
+
+
+def the_digits_a_clause_may_rely_on_are_the_worse_of_two_limits() -> None:
+    """A refinement rounds its value on the way out, and clause 3 has to see that.
+
+    The two numbers a refinement reports need not agree.  At `n = 29` the residual bound
+    is `1.09829e-1039` and the serialized value carries a thousand digits, and the search
+    only ever sees the string -- so reading the bound alone would credit it with
+    thirty-nine digits it was never given, which is exactly the headroom clause 3 exists
+    to insist on.
+    """
+    assert digits_carried(REFINED_N29_DIGITS) == 1000
+    assert digits_carried("0.00123") == 3, "leading zeros are not significant digits"
+    assert digits_carried("-1.2300e-7") == 5, "trailing zeros in a mantissa are"
+
+    available = available_digits(REFINED_N29_DIGITS, REFINED_N29_BOUND)
+    assert available == 1000, (
+        f"the digits available came back as {available} against a value carrying "
+        f"{digits_carried(REFINED_N29_DIGITS)}: the value's own length was not counted "
+        "against it, so clause 3 is judging relations against digits the string does "
+        "not carry"
+    )
+    assert available_digits(REFINED_N29_DIGITS, "1e-390") == 390, (
+        "a residual bound worse than the serialized value stopped binding, which drops "
+        "the clause the rule was written for"
+    )
+
+
+def the_reach_is_the_last_degree_clause_3_can_still_judge() -> None:
+    """Clause 3 read backwards: how far the digits pay for, at the coefficient bound.
+
+    A sweep past this degree measures the digits rather than the number, because a
+    relation carrying coefficients near the search's own bound could not be accepted
+    there whether or not one exists.
+    """
+    ceiling = reach(REFINED_N29_DIGITS, REFINED_N29_BOUND)
+    span = mp.log10(MAX_COEFFICIENT)
+    available = available_digits(REFINED_N29_DIGITS, REFINED_N29_BOUND)
+    assert (ceiling + 1) * span + MARGIN_DIGITS < available, (
+        f"the reach admits a degree clause 3 would refuse: degree {ceiling} charges "
+        f"{mp.nstr((ceiling + 1) * span + MARGIN_DIGITS, 8)} digits against the "
+        f"{mp.nstr(available, 8)} available"
+    )
+    assert (ceiling + 2) * span + MARGIN_DIGITS >= available, (
+        f"the reach stops at degree {ceiling} where degree {ceiling + 1} is still "
+        "inside the digits, which loses evidence the refinement already paid for"
+    )
+    assert ceiling == 35, (
+        f"a thousand digits reach degree {ceiling} at |c| < 1e22, not the 35 the "
+        "recorded n = 29 sweep was extended to"
+    )
+    # The ceiling is the worst case over coefficients, not a gate on an answer: Trump's
+    # degree eight carries C = 12420 and is accepted from 400 digits, where a relation
+    # saturating the search bound would not be.
+    assert reach(n11_value(400), "1e-390") == 7
+
+
+def the_probe_sweeps_to_the_reach_rather_than_a_typed_in_ceiling() -> None:
+    """The recorded `n = 29` refusal stopped at twenty because twenty was a default.
+
+    A synthetic case stands in for the real one so the contract is checked without
+    paying for the sweep: `pi` at 300 digits reaches degree three, and the probe is
+    asked for no ceiling at all.
+    """
+
+    def not_algebraic(digits: int) -> tuple[str, str, str]:
+        saved = mp.mp.dps
+        mp.mp.dps = digits + 20
+        try:
+            value = mp.nstr(mp.pi, n=digits, strip_zeros=False)
+        finally:
+            mp.mp.dps = saved
+        return str(value), f"1e-{digits - 10}", "pi, which is not algebraic at all"
+
+    probe_tool.CASES["not-algebraic"] = not_algebraic
+    try:
+        report = probe_tool.probe(
+            "not-algebraic", digits=300, max_degree=None, max_coefficient=MAX_COEFFICIENT
+        )
+    finally:
+        del probe_tool.CASES["not-algebraic"]
+
+    assert report["reach"] == 3, (
+        f"290 independent digits reach degree {report['reach']} at |c| < 1e22, not three"
+    )
+    assert report["max_degree"] == report["reach"], (
+        f"the probe stopped short of the degree its digits reach: it swept to "
+        f"{report['max_degree']} where the digits reach {report['reach']}, which is how "
+        "the n = 29 refusal came to be recorded at twenty"
+    )
+    assert report["outcome"] == "refused", report
+
+
 def main() -> int:
+    the_digits_a_clause_may_rely_on_are_the_worse_of_two_limits()
+    the_reach_is_the_last_degree_clause_3_can_still_judge()
+    the_probe_sweeps_to_the_reach_rather_than_a_typed_in_ceiling()
     the_rule_recovers_a_published_polynomial()
     a_lower_degree_is_preferred_to_a_multiple_of_it()
     the_serialized_digits_are_refused()

@@ -259,6 +259,12 @@ direction, and the free direction itself where it does not, as at Göbel’s `n 
 [`probe_minimal_polynomial`](packing/devtools/probe_minimal_polynomial.py) runs the
 integer-relation search under the promotion spec’s frozen margin rule and reports which
 clause decided each degree.
+It sweeps to the degree the digits reach rather than to a fixed ceiling.
+Clause 3 read backwards at the search’s own coefficient bound puts that at **degree 35**
+for the `n = 29` refinement at a thousand digits, where the flag used to stop at twenty
+for no reason but the default; `--max-degree` still stops it earlier, which is usually
+what you want, because the cost is almost all `pslq` and it climbs steeply with the
+degree.
 
 [`probe_system_degree`](packing/devtools/probe_system_degree.py) rationalises the
 `n = 29` system by the half-angle substitution and reports what bounds the algebraic

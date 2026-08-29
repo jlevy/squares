@@ -832,7 +832,7 @@ controls:
 
 - name: minimal polynomial - clause 3 does not test the refinement's residual bound
   file: src/sqpack/promote/solve.py
-  replace: ["            if bound >= mp.mpf(10) ** (-needed):", "            if False:"]
+  replace: ["            if floor >= mp.mpf(10) ** (-needed):", "            if False:"]
   run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
   expect: "refusals came from unexpected clauses"
 
@@ -1056,4 +1056,31 @@ controls:
             "    solution = solve(program, start, sign, pivot_budget=pivot_budget + 1000)"]
   run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_phase1.py -q
   expect: "phase 1 ran past its pivot budget"
+  timeout_seconds: 300
+
+# --- the relation sweep's reach (BC-073) ---
+# The n = 29 refusal was recorded at degree twenty because twenty was a flag's default,
+# not because the digits ran out. Saying how far they do go takes three pieces -- the
+# digits a clause may rely on, the ceiling that falls out of clause 3, and the probe
+# taking that ceiling rather than a number someone typed -- and each control removes one
+# of them. The last one runs a whole sweep on the synthetic case, hence the timeout.
+- name: relation reach - the digits are read from the residual bound alone
+  file: src/sqpack/promote/solve.py
+  replace:
+  - "    truncation = mp.mpf(10) ** (-digits_carried(value))\n    return -mp.log10(max(bound, truncation))"
+  - "    return -mp.log10(bound)"
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "the value's own length was not counted against it"
+
+- name: relation reach - the ceiling admits a degree clause 3 could not judge
+  file: src/sqpack/promote/solve.py
+  replace: ["    return max(int(mp.ceil(terms)) - 2, 0)", "    return max(int(mp.ceil(terms)) - 1, 0)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "the reach admits a degree clause 3 would refuse"
+
+- name: relation reach - the probe sweeps to a typed-in ceiling instead of the digits
+  file: devtools/probe_minimal_polynomial.py
+  replace: ["        max_degree = max(ceiling, 2)", "        max_degree = 20"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "the probe stopped short of the degree its digits reach"
   timeout_seconds: 300
