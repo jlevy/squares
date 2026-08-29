@@ -937,6 +937,10 @@ def _readme(context: Context) -> str:
     return _module(context, "devtools.check_readme")
 
 
+def _operating_rules(context: Context) -> str:
+    return _module(context, "devtools.render_operating_rules", "--check")
+
+
 def _differential(context: Context) -> str:
     if not ENGINE.is_file():
         raise StepSkippedError(
@@ -1096,6 +1100,7 @@ STEPS: tuple[Step, ...] = (
     Step("skills mirrored between .agents and .claude", _skills_mirrored, fast=True),
     Step("synopsis agrees with the artifacts", _synopsis, fast=True),
     Step("README agrees with the directory", _readme, fast=True),
+    Step("AGENTS.md mirrors the operating rules", _operating_rules, fast=True),
     Step("differential: search energy vs validity oracle", _differential, needs_engine=True),
     Step("provenance: recorded commits are reachable", _provenance, fast=True),
     Step("campaign record", _campaign_record, fast=True),

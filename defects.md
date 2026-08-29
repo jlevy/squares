@@ -2,7 +2,7 @@
 
 # Defect log
 
-367 defects recorded across the packing toolchain.
+368 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 23 | a cell of the sweep whose answer is known in advance |
-| `review` | 228 | a human or agent reading the work against a checklist |
+| `review` | 229 | a human or agent reading the work against a checklist |
 | `anomaly` | 12 | a result that made no sense, chased down |
 | `inspection` | 36 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 48 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 48 of 367, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 48 of 368, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -36,7 +36,7 @@ The line worth reading twice: **the automated gate caught 48 of 367, and none of
 | verifier | 4 |
 | record | 105 |
 | tooling | 121 |
-| docs | 103 |
+| docs | 104 |
 
 ## By kind
 
@@ -46,7 +46,7 @@ The line worth reading twice: **the automated gate caught 48 of 367, and none of
 | validity | 87 |
 | bookkeeping | 137 |
 | robustness | 43 |
-| performance | 12 |
+| performance | 13 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -588,6 +588,7 @@ This is the actionable list.
 | [D-365](packing/campaign/agent-sessions/session-044-agenda006-continuation.md) | 2026-08-29 | quench | robustness |  | `gate` | medium | outstanding | The deep golden-basin oracle fails at n = 10, and only the strict tier runs it |
 | [D-366](packing/campaign/agent-sessions/session-044-agenda006-continuation.md) | 2026-08-29 | tooling | performance |  | `gate` | low | outstanding | The negative-control step outgrew the gate's per-step timeout |
 | [D-367](packing/campaign/agent-sessions/session-044-agenda006-continuation.md) | 2026-08-29 | record | soundness | flattering | `review` | medium | fixed | Degree bounds on the Kingbird solution were written as bounds on s(n) |
+| [D-368](operating-rules.md) | 2026-08-29 | docs | performance |  | `review` | medium | fixed | The rules an agent needs before its first tool call had nowhere to live |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

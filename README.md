@@ -541,6 +541,12 @@ discipline, the assurance levels and what each may claim, provenance, correction
 which rules are machine-checked versus which rest on care.
 Read it before adding an artifact, a round, or a tool.
 
+[`operating-rules.md`](operating-rules.md) is the other half of the pair, and the
+division is worth knowing: conventions govern the *shape of what is produced*, operating
+rules govern *how the work is done*. Read it before starting a slice.
+[`AGENTS.md`](AGENTS.md) carries a generated one-line summary of each rule so an agent
+sees them before its first tool call.
+
 ## Layout
 
 ```
@@ -550,6 +556,8 @@ Read it before adding an artifact, a round, or a tool.
 ├── SYNOPSIS.md             The technical root: results, status, and the experiment
 │                           roll-up. Read this after the tutorial.
 ├── conventions.md          Every rule this project runs on, and which are checked
+├── operating-rules.md      How a session is conducted: what to pick up, how to spend
+│                           it, and the mistakes that cost the most wall clock
 ├── development.md          Python 3.14 setup, maturity boundaries, validation loops,
 │                           CLI policy, and the refactoring workflow
 ├── defects.md              generated from packing/defects.yaml; never edited by hand

@@ -2,8 +2,11 @@
 
 **The definitive registry of every convention and naming this project uses.** Where
 another document restates an id or naming convention, this one wins.
-Changing program status remains owned by `SYNOPSIS.md`, and schemas and source artifacts
-remain authoritative for their own fields and evidence.
+This page governs the *shape of what is produced*; how a session is conducted is
+[`operating-rules.md`](operating-rules.md), and a rule about agent conduct belongs there
+rather than here.
+Changing program status remains owned by `SYNOPSIS.md`, and schemas and
+source artifacts remain authoritative for their own fields and evidence.
 Read this before adding an artifact, workflow phase, round, series, or tool.
 
 Each rule is marked **[checked]** when something fails on a violation, or
@@ -472,6 +475,10 @@ reverse: a pass that starts from the prose inherits the prose’s mistakes.
 - [`conventions.md`](conventions.md) — this page.
   Is every `[checked]` claim still checked by something, and every `[convention]` still
   observed?
+- [`operating-rules.md`](operating-rules.md) — is every rule still one an agent should
+  follow, and does each still cite the failure that motivated it?
+  Regenerate `AGENTS.md`’s summary with `devtools.render_operating_rules` rather than
+  editing it.
 - [`development.md`](development.md) — do the commands still exist, with those flags?
 
 **Across documents.**

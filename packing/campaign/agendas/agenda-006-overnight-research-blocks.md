@@ -1232,6 +1232,68 @@ agenda:
       matches its inputs; what no checker catches is a figure that regenerates clean and
       no longer illustrates what the sentence introducing it now claims. Read each against
       its caption.
+  - id: BC-076
+    purpose: tool_validation
+    owner_focus: process
+    instances: []
+    state: complete
+    priority: 0
+    question: >-
+      Where do the rules an agent needs before its first tool call actually live, so that
+      an agent reads them in time to follow them?
+    hypotheses: []
+    budget: 30 minutes
+    entry: >-
+      Three failures recurred in this run and the lesson for each already existed
+      somewhere. Measurements were written as throwaway scripts (D-023, and again in
+      session-043, where the script's Bezout bound of `12,690,480` was wrong by a factor
+      of twelve); sub-agents went unused or ran without a thinking level chosen for the
+      task; and the coordinator blocked on an eight-minute gate with nothing else running,
+      twice to the point of user interruption. None of those lessons was anywhere an agent
+      reads before acting.
+    exit: >-
+      One document that owns agent conduct, a summary of it in the file guaranteed to be
+      in context first, and a check that keeps the two the same.
+    artifacts:
+    - operating-rules.md
+    - devtools/render_operating_rules.py
+    bead: think-aldw
+    depends_on: []
+    workflows: [process-review]
+    next_evidence: >-
+      The placement question has one hard constraint: `AGENTS.md` is the only file the
+      harness loads before the first tool call. `conventions.md` is definitive but long
+      and read on demand, the session guide is read once a session is already open -- too
+      late for a rule about how to spend the session -- and a defect entry is read during
+      a review, which is after the cost has been paid.
+    note: >-
+      Closed in session-044. `operating-rules.md` is a new root document carrying six
+      rules, each citing the failure that motivated it: build the tool rather than leaving
+      a measurement in one-off code; run three to five sub-agents at a thinking level
+      matched to the task; never wait on a gate with nothing else in flight; take the next
+      slice from the handoff rather than the backlog; declare the workflow entry point
+      before beginning; and plan multi-hour work in slices. The last three moved out of
+      `AGENTS.md`, so the file is shorter than before despite gaining three rules.
+
+      **The division it draws is the point, and it is now stated in both places.**
+      `conventions.md` governs the shape of what is produced -- ids, artifacts, schemas,
+      evidential status. `operating-rules.md` governs how the work is done. A rule about
+      agent conduct in the conventions registry is a rule nobody reads at the moment it
+      applies.
+
+      **Generated, not merely checked.** `devtools.render_operating_rules` writes the
+      summary block into `AGENTS.md` from the rule headings; `--check` runs in the fast
+      tier. The comparison is on collapsed whitespace rather than bytes, which is what lets
+      the block live inside a file flowmark owns -- verified by formatting the file and
+      watching the check still pass. A byte-exact generated block would have forced
+      `AGENTS.md` out of the formatter, which is the trade `.flowmarkignore` documents for
+      `ledger.md` and `defects.md`.
+
+      Three negative controls fire: a hand-edited summary, a rule added to the source and
+      never mirrored, and a gap in the numbering. The id and its statement are separated by
+      a plain label rather than a dash, and the parser treats the separator as optional --
+      punctuation that is also a display choice will eventually move, and a parse that
+      depends on it breaks silently when it does.
   - id: BC-075
     purpose: tool_validation
     owner_focus: efficiency
@@ -1283,8 +1345,14 @@ agenda:
       is the gate's fault. Three rules would have removed most of it: run `--only` for the
       steps a change can reach and keep the tier for boundaries; never poll a gate, launch
       it in the background and read it at the next natural stopping point; and never start a
-      gate whose tree you are about to change. Whether those belong in the session guide or
-      in the tooling is part of this block's decision.
+      gate whose tree you are about to change.
+
+      BC-076 has since settled where the general form of that belongs -- `OR-3` in
+      `operating-rules.md`, summarised into `AGENTS.md` -- so what is left here is the
+      measured part: which of the three specific rules the timings actually support, and
+      whether any of them is better enforced by tooling than by a rule. A rule an agent
+      reads and a tier that makes the rule unnecessary are different fixes, and this block
+      is where they are told apart.
 
       **Start from the rollup, and build on what exists.** Session-017 already built
       `devtools/codex_log_rollup.py`, a tested `CodexEfficiencyRollup/v2` scanner over Codex

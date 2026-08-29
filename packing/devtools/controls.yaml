@@ -98,6 +98,34 @@ controls:
   run: python3 -m devtools.check_readme
   expect: "README.md: workflow table is"
 
+# AGENTS.md restates each operating rule in one line so an agent sees it before its
+# first tool call, and operating-rules.md carries the rule and its evidence. Two copies
+# is the arrangement that drifts, so both directions of drift are rehearsed.
+- name: operating rules - the summary an agent reads contradicts the source
+  file: ../AGENTS.md
+  replace:
+    - "- **OR-3:** Never wait on a gate with nothing else in flight."
+    - "- **OR-3:** Wait for the gate to finish before starting anything else."
+  run: python3 -m devtools.render_operating_rules --check
+  expect: "AGENTS.md's summary has drifted"
+
+- name: operating rules - a new rule never reaches the summary
+  file: ../operating-rules.md
+  replace:
+    - "## Why this is a separate page"
+    - |-
+      ### OR-7: Never push to a branch other than the designated one
+
+      ## Why this is a separate page
+  run: python3 -m devtools.render_operating_rules --check
+  expect: "AGENTS.md's summary has drifted"
+
+- name: operating rules - a gap in the rule numbering is not renumbered silently
+  file: ../operating-rules.md
+  replace: ["### OR-6: Plan multi-hour", "### OR-9: Plan multi-hour"]
+  run: python3 -m devtools.render_operating_rules --check
+  expect: "rule ids are not contiguous from OR-1"
+
 - name: synopsis - dateline duplicates volatile campaign progress
   file: ../SYNOPSIS.md
   replace: ["**Date:**", "**Date:** after a campaign checkpoint;"]

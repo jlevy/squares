@@ -134,6 +134,8 @@ ROOT_DOCUMENTS = (
     REPO / "conventions.md",
     REPO / "development.md",
     REPO / "defects.md",
+    REPO / "operating-rules.md",
+    REPO / "AGENTS.md",
     REPO / "docs",
 )
 # Keep a bounded portable fallback with enough headroom for source, schemas, and

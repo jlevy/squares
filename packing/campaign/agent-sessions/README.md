@@ -30,6 +30,12 @@ and focused check in the place already tracking the work.
 
 ## Starting a Session
 
+The conduct rules apply before any of this: read
+[`operating-rules.md`](../../../operating-rules.md) first, since OR-4 decides what the
+session picks up and OR-5 decides what workflow it declares.
+Reaching this page already means a session is being opened, which is later than OR-1 to
+OR-3 need to be known.
+
 Open a versioned session when at least one of these conditions holds:
 
 - the work will cross multiple workflow or material-focus phases;

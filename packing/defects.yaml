@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 367
+count: 368
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9722,3 +9722,39 @@ defects:
   bead: think-obgk
   recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
 
+- id: D-368
+  title: The rules an agent needs before its first tool call had nowhere to live
+  date: '2026-08-29'
+  layer: docs
+  class: performance
+  detected_by: review
+  latent_for: 'every autonomous session so far'
+  severity: medium
+  status: fixed
+  what: >-
+    Three failures recurred across sessions, each already recorded somewhere: measurements
+    written as throwaway scripts rather than tools (D-023, and again in session-043, where
+    the script reported a Bezout bound of 12,690,480 for a system whose bound is 1,039,500);
+    sub-agents left unused or run without a thinking level matched to the task; and the
+    coordinator blocking on an eight-minute gate with nothing else in flight, twice to the
+    point of user interruption. The lesson existed in all three cases and reached the agent
+    in none of them, because a defect entry is read during a review, the session guide is
+    read once a session is already open, and `conventions.md` is long and consulted on
+    demand. Nothing named these as rules to read before acting.
+  consequence: >-
+    Wall clock, which is the scarce resource in a timed session, plus one wrong number said
+    out loud before the tool that would have refused it existed. No mathematical claim rests
+    on this entry; the cost is entirely in repeated time.
+  fix: >-
+    `operating-rules.md` is a new root document holding the six rules with the evidence for
+    each, and `AGENTS.md` -- the one file guaranteed to be in context before the first tool
+    call -- carries a generated one-line summary of them. `conventions.md` states the
+    division it implies: conventions govern the shape of what is produced, operating rules
+    govern how the work is done.
+  regression: >-
+    `devtools.render_operating_rules` writes the summary from the rule headings and
+    `--check` runs in the fast gate, so the two cannot part. Three negative controls
+    rehearse the failure modes: a hand-edited summary, a rule added to the source and never
+    mirrored, and a gap in the rule numbering.
+  bead: think-eb29
+  recorded_in: operating-rules.md

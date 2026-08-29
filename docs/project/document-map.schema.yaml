@@ -32,6 +32,7 @@ $defs:
       - technical-synthesis
       - tutorial
       - conventions
+      - operating-rules
       - development-guide
       - runbook
       - session-guide
