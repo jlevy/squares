@@ -971,7 +971,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can a cell be certified exactly without a float solver supplying its first feasible
@@ -985,6 +985,9 @@ agenda:
       A feasible vertex found from the exact data alone, agreeing with the known answer at
       n = 11 with no float solver anywhere in the chain, and a typed refusal on an
       infeasible program; or a statement of what the module cannot express.
+    artifacts:
+    - src/sqpack/exact_lp.py
+    - tests/test_promote_exact_phase1.py
     bead: think-lstj
     depends_on: [BC-061]
     workflows: [pipeline-improvement]
@@ -998,6 +1001,39 @@ agenda:
       itself: that needs the contact system assembled as an LP, which is a different block.
       Bland's rule against cycling, and a pivot budget as a second line, with exceeding it
       a typed refusal rather than a silent answer.
+
+      Closed in session-044, and the construction is the part worth recording. The
+      auxiliary program is the standard two-phase `min t` over `A z - w t <= b` with
+      `-t <= 0`; what makes it startable is the weight vector. Take any `width`
+      independent rows `S` -- finding them needs no point -- let `z0` be the point they
+      determine and `d = A_S^-1 . 1`. Setting `w_S = 1` holds every row of `S` active along
+      the whole line `(z0 + t d, t)`, so that line is an edge of the auxiliary program
+      whatever `z0` does to the other rows. Every other row `j` takes
+      `w_j = A_j . d + 1` where `A_j . d` is positive and `1` otherwise, leaving its rate
+      at most `-1`: it blocks the edge from below only, so travelling far enough up clears
+      every row at once. The first row met coming back down -- or the floor `t >= 0` when
+      nothing is violated -- closes `S` into a vertex, because a row whose slack changes
+      along the edge cannot lie in the span of rows whose slack does not.
+
+      Measured on Trump's cell, 1,056 rows and 23 variables over a degree-eight field: 42
+      phase-1 pivots to a feasible vertex at side `6.123390901223`, then 16 more down to
+      the published `3.877083590022`, the difference exactly zero and all 22 translation
+      coordinates exactly zero. That it used no float solver is asserted rather than
+      assumed -- an AST scan over every module on the path refuses scipy, numpy, mpmath and
+      the LP libraries, and the four runtime files import only the standard library.
+
+      The float seed is not thereby worthless and the block says so: the same cell from a
+      HiGHS basis takes `2.6s` against `100s`, a fortyfold speedup, and remains the right
+      first move wherever a basis exists. What changed is that it is no longer required.
+
+      Two costs are recorded rather than hidden. The fast tier goes from about `534s` to
+      `631s`, all of it the end-to-end Trump run, left in the edit loop so the load-bearing
+      claim is checked on every run; the repository's own `exhaustive_exact` mark would
+      move it, at the price of a contract change in the module-boundary test. And the
+      `100s` is dominated by exact sign tests on blown-up rationals inside the ratio test,
+      about 1,030 of them per pivot -- measured rather than fixed, because fixing it means
+      fraction-free elimination or an incremental basis factorisation inside BC-061's
+      code.
   - id: BC-072
     purpose: tool_validation
     owner_focus: correctness

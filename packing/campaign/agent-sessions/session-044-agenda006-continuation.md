@@ -711,7 +711,7 @@ session:
       solver supplying its first feasible vertex.
     operator: subagent
     recording: contemporaneous
-    status: in_progress
+    status: completed
     phase: 9
     budget_minutes: 45
     started_at: '2026-08-29T11:47:00Z'
@@ -734,17 +734,38 @@ session:
     - packing/devtools/controls.yaml
     excluded_commands:
     - git push
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Built, and Trump's cell is solved end to end with no float solver anywhere on the
+      path.
+    evidence:
+    - >-
+      '42 phase-1 pivots to a feasible vertex at side `6.123390901223`, then 16 more down
+      to the published `3.877083590022` with the difference exactly zero and all 22
+      translation coordinates exactly zero.'
+    - >-
+      'That no float solver was used is asserted rather than assumed: an AST scan over
+      every module on the path refuses scipy, numpy, mpmath and the LP libraries, and the
+      four runtime files import only the standard library.'
+    - >-
+      'Infeasibility is refused rather than answered -- four unit squares in a container
+      pinned to side 1 refuse with kind `infeasible` after six pivots. Five controls fire.'
+    - >-
+      'The float seed is measured rather than dismissed: `2.6s` against `100s`, a fortyfold
+      speedup, still the right first move where a basis exists and no longer required.'
+    files:
+    - packing/src/sqpack/exact_lp.py
+    - packing/tests/test_promote_exact_phase1.py
+    checks:
+    - uv run --frozen --all-extras --group dev python -m pytest tests/test_promote_exact_phase1.py -q
     uncertainty: >-
-      BC-061 estimated 60-100 lines, which is a sanity check rather than a target. Whether
-      an exact auxiliary program terminates cleanly over `FieldElement` is the open
-      question.
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Integrate when it lands.
+      The crash basis is the first `width` independent rows in file order. Any choice is
+      arbitrary without a point, and tuning it to Trump's cell would be overfitting, so it
+      is deterministic and documented rather than chosen.
+    elapsed_seconds: 4130
+    elapsed_quality: platform_measured
+    next_action: >-
+      Landed by cherry-pick; D-021's fix note updated, since the sentence saying phase 1
+      was not built is now false.
   - task: >-
       BC-061 -- an exact LP over certified rational or algebraic coefficients, replacing
       the float solver where a certified answer is required.

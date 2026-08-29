@@ -458,11 +458,18 @@ defects:
     read without its tier it says the record was beaten. Its `ambiguous` set is empty
     where the float path leaves three incidences undecided at this floor.
 
-    The status stays `contained` rather than moving to `fixed`, because the float path
-    still supplies the starting vertex: phase 1 of the exact simplex is not built, so the
-    floor still governs where the search begins. What it no longer governs is what the
-    result certifies -- a wrong starting basis is certified, repaired, or refused, never
-    believed.
+    Phase 1 is now built too (`feasible_basis`, BC-071): the starting vertex is
+    constructed from the cell's own exact coefficients by a two-phase auxiliary program,
+    and Trump's cell is solved end to end -- 42 phase-1 pivots to a feasible vertex at side
+    `6.123390901223`, then 16 more down to the published `3.877083590022`, the difference
+    exactly zero -- with no float solver anywhere on the path, asserted by an AST scan over
+    every module that runs. The float seed remains a fortyfold speedup, `2.6s` against
+    `100s`, and remains the right first move wherever a basis exists; it is no longer
+    required.
+
+    The status stays `contained` rather than moving to `fixed`, and what remains is no
+    longer the LP. It is that the `n = 29` contact system is not yet assembled as one, so
+    there is nothing at that size for the exact path to be pointed at.
   regression: 'the soundness perimeter at the same bound; every round carries assurance and method, and beat_record requires verified assurance'
   recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md
   bead: think-hg3u
