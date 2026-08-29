@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 356
+count: 357
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9221,40 +9221,68 @@ defects:
     declared path pattern, so a new step cannot be added without being wired to the
     sources that can break it.
 - id: D-356
-  title: The negative-control snapshot prunes the archive, so one synopsis control cannot fire
+  title: The negative-control snapshot prunes the archive, so the n=29 chain cannot be controlled there
   date: '2026-08-29'
   layer: tooling
   class: validity
   direction: conservative
   detected_by: control_cell
-  latent_for: since the snapshot's prune list gained the atlas renderings on 2026-08-27
-  severity: medium
+  latent_for: since the snapshot gained its prune list
+  severity: low
   status: outstanding
   what: >-
     `run_negative_controls` builds each worker from a bounded snapshot and prunes
-    `atlas/known-best/rendering` from it to stay under the portable size cap. The
-    `synopsis - README cold-start link drifts from current handoff` control runs
-    `check_synopsis` inside that snapshot, where `SYNOPSIS.md`'s link to
-    `packing/atlas/known-best/rendering/n-100.svg` therefore resolves to nothing.
-    `check_synopsis` reports the dead link and exits before it reaches the drift the
-    control mutated in, so the control's expected message never appears. Reproduced on a
-    clean tree at this commit, so it is not a consequence of the interval-certification
-    work that found it.
+    `resources/` -- the literature archive -- to stay under the portable size cap. The
+    `n = 29` interval chain reads its provenance SVG from that archive, so a mutation
+    control over that chain fails on a missing file rather than on the mutation. Three
+    such controls were written for BC-053 and withdrawn for this reason; the guards they
+    would have exercised are asserted directly in `tests/test_promote_relax.py` instead.
   consequence: >-
-    One control reports a failure that says nothing about the check it is supposed to
-    exercise, and the README cold-start guard is consequently unproven. The direction is
-    conservative -- a control that cannot fire is noise, never a false pass -- but a
-    control suite carrying a standing failure is one whose next real failure is easy to
-    wave through.
+    Any check whose input is archived source material is outside what this harness can
+    negative-control. The direction is conservative -- an absent control is missing
+    evidence, never a false pass -- but the gap is invisible from the control file unless
+    it is written down, which is what this entry is for.
   fix: >-
-    Not attempted here. The two candidate repairs are different in kind and the choice is
-    not obvious: either the snapshot keeps a stub for each pruned rendering so link
-    resolution succeeds without the bytes, or `check_synopsis` gains a declared notion of
-    an artifact that may legitimately be absent from a snapshot. The second is a change to
-    a shared trust boundary and belongs in its own slice rather than at the end of an
-    unrelated block.
+    Not attempted. Either the snapshot keeps the few archived files controls actually
+    need, or such checks declare their inputs so the snapshot can include them
+    selectively. Both change a shared trust boundary and belong in their own slice.
   regression: >-
-    None yet. The reproducer is `uv run --frozen --group dev python -m
-    devtools.run_negative_controls -k cold-start`, which fails identically on a clean tree.
+    None. The reproducer is to add a control whose `run` reaches
+    `cases.kingbird29.certify_interval` and observe it fail on the missing SVG rather
+    than on its mutation.
   bead: think-lo3p
   recorded_in: packing/campaign/agent-sessions/session-037-block2-interval-calibration.md
+
+- id: D-357
+  title: One synopsis negative control failed reproducibly, then passed, with no identified trigger
+  date: '2026-08-29'
+  layer: tooling
+  class: robustness
+  detected_by: control_cell
+  latent_for: unknown
+  severity: low
+  status: outstanding
+  what: >-
+    During session-037 the control `synopsis - README cold-start link drifts from current
+    handoff` failed four times in a row, reporting `SYNOPSIS.md: dead link ->
+    packing/atlas/known-best/rendering/n-100.svg` instead of the drift it introduces --
+    including once against a stashed, clean working tree at the same commit, which is why
+    it was first recorded as a standing failure. In session-038, with no change to
+    `check_synopsis`, `SYNOPSIS.md`, or the prune list, the same control fired correctly
+    and the full suite passed 97 of 97. The snapshot source size differed between the runs
+    (33.0 to 37.5 MiB), but the harness prunes statically and only aborts on its cap, so
+    size does not explain it. The trigger is not identified.
+  consequence: >-
+    A control that fails intermittently is worse than one that fails: it trains a reader
+    to wave the suite through. Nothing was concluded from the failing runs, and the first
+    version of this entry claimed the control could not fire at all -- a claim the later
+    passing run falsified, and which is corrected here rather than left standing.
+  fix: >-
+    Not attempted; there is nothing to fix until the trigger is known. The next occurrence
+    should capture the snapshot listing and the full `check_synopsis` output rather than
+    the harness's 120-character excerpt, which is what made this hard to diagnose in the
+    first place.
+  regression: >-
+    None. Watch for a recurrence of the dead-link message from this control.
+  bead: think-lo3p
+  recorded_in: packing/campaign/agent-sessions/session-038-block3-contact-assembly.md

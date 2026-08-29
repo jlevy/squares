@@ -334,17 +334,17 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 037](../../../../packing/campaign/agent-sessions/session-037-block2-interval-calibration.md).
-Sessions 027 through 037 are terminal, and agenda-004 closed on measurement rather than
-opinion. Open BC-054 under `think-zm3f` as the next bounded driver, built to
-[plan-2026-08-28-promotion-pipeline-implementation](plan-2026-08-28-promotion-pipeline-implementation.md):
-phase 2 first, contact-system assembly and closure, then phase 4’s exact solve if the
-clock allows. Sessions 035 through 037 are terminal and closed agenda-005 block A
-together with `BC-045`, so precision is manufactured in-repository, the `n = 29` contact
-structure is frozen with its 89 incidences, and the interval route is built, calibrated
-and run: it certifies `s(29) <= 5.93383346267692918974379895098` at a declared
-relaxation of `1e-20`, retained `unresolved` with `needs_review: true` and promoting
-nothing. None of those remains a prerequisite.
+[session 038](../../../../packing/campaign/agent-sessions/session-038-block3-contact-assembly.md).
+Sessions 027 through 038 are terminal, and agenda-004 closed on measurement rather than
+opinion. Open BC-056 under `think-lo3p` as the next bounded driver: the endpoint check
+for the overnight run — the full strict gate, regenerated views, a research-loop logbook
+entry, and a green PR — before any new scientific slice starts.
+Sessions 035 through 037 are terminal and closed agenda-005 block A together with
+`BC-045`, so precision is manufactured in-repository, the `n = 29` contact structure is
+frozen with its 89 incidences, and the interval route is built, calibrated and run: it
+certifies `s(29) <= 5.93383346267692918974379895098` at a declared relaxation of
+`1e-20`, retained `unresolved` with `needs_review: true` and promoting nothing.
+None of those remains a prerequisite.
 The witness contract already names `interval-certified` among the methods that may carry
 `verified`, and the checker now exists, but no witness branch has been written: so
 `exact_verify` still raises `checker-not-built` and the certificate above is retained as

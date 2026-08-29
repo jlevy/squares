@@ -56,88 +56,130 @@
       "pair_contact_count": 14,
       "pair_contacts": [
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 0,
+          "left_feature": "corner:2",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "6"
+          "right": "6",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 1,
+          "left_feature": "corner:3",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "9"
+          "right": "9",
+          "right_feature": "edge:0"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 2,
+          "left_feature": "corner:0",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "8"
+          "right": "8",
+          "right_feature": "edge:1"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 2,
+          "left_feature": "corner:1",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "10"
+          "right": "10",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 3,
+          "left_feature": "edge:1",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "4"
+          "right": "4",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 3,
+          "left_feature": "edge:0",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "5"
+          "right": "5",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "corner-corner",
           "kind": "pair",
           "left": 4,
+          "left_feature": "corner:0",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "5"
+          "right": "5",
+          "right_feature": "corner:2"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 4,
+          "left_feature": "corner:1",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "8"
+          "right": "8",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 5,
+          "left_feature": "corner:1",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "6"
+          "right": "6",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 6,
+          "left_feature": "edge:0",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "7"
+          "right": "7",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 6,
+          "left_feature": "edge:1",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "8"
+          "right": "8",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 7,
+          "left_feature": "edge:1",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "9"
+          "right": "9",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 8,
+          "left_feature": "edge:0",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "9"
+          "right": "9",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 9,
+          "left_feature": "edge:1",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "10"
+          "right": "10",
+          "right_feature": "edge:3"
         }
       ],
       "pairs_tested": 55,
@@ -148,124 +190,184 @@
       "wall_contact_count": 20,
       "wall_contacts": [
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 0,
+          "left_feature": "corner:0",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "left:0"
+          "right": "left:0",
+          "right_feature": "left"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 0,
+          "left_feature": "corner:0",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "bottom:0"
+          "right": "bottom:0",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 0,
+          "left_feature": "corner:1",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "bottom:1"
+          "right": "bottom:1",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 0,
+          "left_feature": "corner:3",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "left:3"
+          "right": "left:3",
+          "right_feature": "left"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 1,
+          "left_feature": "corner:0",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "bottom:0"
+          "right": "bottom:0",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 1,
+          "left_feature": "corner:1",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "bottom:1"
+          "right": "bottom:1",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 1,
+          "left_feature": "corner:1",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "right:1"
+          "right": "right:1",
+          "right_feature": "right"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 1,
+          "left_feature": "corner:2",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "right:2"
+          "right": "right:2",
+          "right_feature": "right"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 2,
+          "left_feature": "corner:2",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "top:2"
+          "right": "top:2",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 2,
+          "left_feature": "corner:3",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "top:3"
+          "right": "top:3",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 3,
+          "left_feature": "corner:0",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "left:0"
+          "right": "left:0",
+          "right_feature": "left"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 3,
+          "left_feature": "corner:2",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "top:2"
+          "right": "top:2",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 3,
+          "left_feature": "corner:3",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "left:3"
+          "right": "left:3",
+          "right_feature": "left"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 3,
+          "left_feature": "corner:3",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "top:3"
+          "right": "top:3",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 4,
+          "left_feature": "corner:2",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "top:2"
+          "right": "top:2",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 4,
+          "left_feature": "corner:3",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "top:3"
+          "right": "top:3",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 5,
+          "left_feature": "corner:0",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "left:0"
+          "right": "left:0",
+          "right_feature": "left"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 5,
+          "left_feature": "corner:3",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "left:3"
+          "right": "left:3",
+          "right_feature": "left"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 7,
+          "left_feature": "corner:0",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "bottom:0"
+          "right": "bottom:0",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 10,
+          "left_feature": "corner:1",
           "margin": "FieldElement(['0', '0', '0', '0', '0', '0', '0', '0'])",
-          "right": "right:1"
+          "right": "right:1",
+          "right_feature": "right"
         }
       ],
       "wall_relations_tested": 176,
@@ -354,316 +456,472 @@
       "pair_contact_count": 52,
       "pair_contacts": [
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 0,
+          "left_feature": "edge:1",
           "margin": "0.0",
-          "right": "1"
+          "right": "1",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 0,
+          "left_feature": "edge:2",
           "margin": "0.0",
-          "right": "2"
+          "right": "2",
+          "right_feature": "edge:0"
         },
         {
+          "contact": "corner-corner",
           "kind": "pair",
           "left": 1,
+          "left_feature": "corner:3",
           "margin": "0.0",
-          "right": "2"
+          "right": "2",
+          "right_feature": "corner:1"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 1,
+          "left_feature": "corner:2",
           "margin": "0.0",
-          "right": "15"
+          "right": "15",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 2,
+          "left_feature": "corner:2",
           "margin": "0.0",
-          "right": "26"
+          "right": "26",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 3,
+          "left_feature": "edge:1",
           "margin": "0.0",
-          "right": "4"
+          "right": "4",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 3,
+          "left_feature": "edge:2",
           "margin": "0.0",
-          "right": "6"
+          "right": "6",
+          "right_feature": "edge:0"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 4,
+          "left_feature": "edge:1",
           "margin": "0.0",
-          "right": "5"
+          "right": "5",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "corner-corner",
           "kind": "pair",
           "left": 4,
+          "left_feature": "corner:3",
           "margin": "0.0",
-          "right": "6"
+          "right": "6",
+          "right_feature": "corner:1"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 5,
+          "left_feature": "corner:2",
           "margin": "2.12703907742447744871382065351e-100",
-          "right": "15"
+          "right": "15",
+          "right_feature": "edge:0"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 5,
+          "left_feature": "edge:2",
           "margin": "8.96054828257817280501801359805e-101",
-          "right": "16"
+          "right": "16",
+          "right_feature": "corner:0"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 6,
+          "left_feature": "edge:2",
           "margin": "0.0",
-          "right": "7"
+          "right": "7",
+          "right_feature": "edge:0"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 6,
+          "left_feature": "edge:1",
           "margin": "3.21818364789098950528994429954e-100",
-          "right": "17"
+          "right": "17",
+          "right_feature": "corner:1"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 7,
+          "left_feature": "corner:2",
           "margin": "-3.55641399917612397350834146283e-161",
-          "right": "21"
+          "right": "21",
+          "right_feature": "edge:1"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 8,
+          "left_feature": "edge:1",
           "margin": "0.0",
-          "right": "9"
+          "right": "9",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 9,
+          "left_feature": "corner:2",
           "margin": "0.0",
-          "right": "18"
+          "right": "18",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 10,
+          "left_feature": "edge:1",
           "margin": "0.0",
-          "right": "11"
+          "right": "11",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 10,
+          "left_feature": "edge:2",
           "margin": "0.0",
-          "right": "13"
+          "right": "13",
+          "right_feature": "edge:0"
         },
         {
+          "contact": "corner-corner",
           "kind": "pair",
           "left": 10,
+          "left_feature": "corner:2",
           "margin": "0.0",
-          "right": "14"
+          "right": "14",
+          "right_feature": "corner:0"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 11,
+          "left_feature": "edge:1",
           "margin": "0.0",
-          "right": "12"
+          "right": "12",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "corner-corner",
           "kind": "pair",
           "left": 11,
+          "left_feature": "corner:3",
           "margin": "0.0",
-          "right": "13"
+          "right": "13",
+          "right_feature": "corner:1"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 11,
+          "left_feature": "edge:2",
           "margin": "0.0",
-          "right": "14"
+          "right": "14",
+          "right_feature": "edge:0"
         },
         {
+          "contact": "corner-corner",
           "kind": "pair",
           "left": 12,
+          "left_feature": "corner:3",
           "margin": "0.0",
-          "right": "14"
+          "right": "14",
+          "right_feature": "corner:1"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 12,
+          "left_feature": "corner:2",
           "margin": "2.65506319925658211739100574247e-100",
-          "right": "18"
+          "right": "18",
+          "right_feature": "edge:1"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 13,
+          "left_feature": "edge:1",
           "margin": "0.0",
-          "right": "14"
+          "right": "14",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 14,
+          "left_feature": "edge:2",
           "margin": "3.65694488264739951816807381456e-100",
-          "right": "21"
+          "right": "21",
+          "right_feature": "corner:3"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 14,
+          "left_feature": "corner:2",
           "margin": "7.11282799835224794701668292567e-161",
-          "right": "22"
+          "right": "22",
+          "right_feature": "edge:1"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 15,
+          "left_feature": "corner:1",
           "margin": "3.55641399917612397350834146283e-161",
-          "right": "16"
+          "right": "16",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 15,
+          "left_feature": "edge:2",
           "margin": "-3.75418777470038359755726478874e-101",
-          "right": "26"
+          "right": "26",
+          "right_feature": "corner:1"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 15,
+          "left_feature": "corner:2",
           "margin": "-4.05463524318447671695463160066e-101",
-          "right": "27"
+          "right": "27",
+          "right_feature": "edge:0"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 16,
+          "left_feature": "edge:1",
           "margin": "7.11282799835224794701668292567e-161",
-          "right": "17"
+          "right": "17",
+          "right_feature": "edge:3"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 16,
+          "left_feature": "corner:2",
           "margin": "-1.48671865771449508527661856739e-101",
-          "right": "28"
+          "right": "28",
+          "right_feature": "edge:0"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 17,
+          "left_feature": "edge:2",
           "margin": "-8.76038202935054680600161271705e-102",
-          "right": "28"
+          "right": "28",
+          "right_feature": "corner:1"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 18,
+          "left_feature": "edge:3",
           "margin": "0.0",
-          "right": "19"
+          "right": "19",
+          "right_feature": "edge:1"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 18,
+          "left_feature": "edge:0",
           "margin": "1.74511308952983321834051402787e-100",
-          "right": "22"
+          "right": "22",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 18,
+          "left_feature": "edge:0",
           "margin": "1.74511308952983321834051402787e-100",
-          "right": "23"
+          "right": "23",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 19,
+          "left_feature": "edge:3",
           "margin": "3.55641399917612397350834146283e-161",
-          "right": "20"
+          "right": "20",
+          "right_feature": "edge:1"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 19,
+          "left_feature": "edge:0",
           "margin": "1.74511308952983321834051402787e-100",
-          "right": "23"
+          "right": "23",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 19,
+          "left_feature": "edge:0",
           "margin": "1.74511308952983321834051402787e-100",
-          "right": "24"
+          "right": "24",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 20,
+          "left_feature": "edge:0",
           "margin": "1.74511308952983321834051402787e-100",
-          "right": "24"
+          "right": "24",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 21,
+          "left_feature": "edge:3",
           "margin": "4.79814250051110654928794747311e-101",
-          "right": "22"
+          "right": "22",
+          "right_feature": "corner:1"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 21,
+          "left_feature": "corner:0",
           "margin": "2.55680615359960019954413371343e-100",
-          "right": "28"
+          "right": "28",
+          "right_feature": "edge:1"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 22,
+          "left_feature": "edge:3",
           "margin": "0.0",
-          "right": "23"
+          "right": "23",
+          "right_feature": "edge:1"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 22,
+          "left_feature": "edge:0",
           "margin": "4.32286104900372909143728599352e-101",
-          "right": "28"
+          "right": "28",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 23,
+          "left_feature": "edge:3",
           "margin": "3.55641399917612397350834146283e-161",
-          "right": "24"
+          "right": "24",
+          "right_feature": "edge:1"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 23,
+          "left_feature": "edge:0",
           "margin": "4.32286104900372909143728599352e-101",
-          "right": "27"
+          "right": "27",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 23,
+          "left_feature": "edge:0",
           "margin": "4.32286104900372909143728599352e-101",
-          "right": "28"
+          "right": "28",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 24,
+          "left_feature": "edge:3",
           "margin": "0.0",
-          "right": "25"
+          "right": "25",
+          "right_feature": "edge:1"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 24,
+          "left_feature": "edge:0",
           "margin": "4.32286104900372909143728599352e-101",
-          "right": "27"
+          "right": "27",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 25,
+          "left_feature": "corner:1",
           "margin": "3.63480314313094248618212418474e-101",
-          "right": "26"
+          "right": "26",
+          "right_feature": "edge:2"
         },
         {
+          "contact": "corner-edge",
           "kind": "pair",
           "left": 26,
+          "left_feature": "edge:1",
           "margin": "3.55641399917612397350834146283e-161",
-          "right": "27"
+          "right": "27",
+          "right_feature": "corner:0"
         },
         {
+          "contact": "edge-edge",
           "kind": "pair",
           "left": 27,
+          "left_feature": "edge:1",
           "margin": "0.0",
-          "right": "28"
+          "right": "28",
+          "right_feature": "edge:3"
         }
       ],
       "pairs_tested": 406,
@@ -674,226 +932,337 @@
       "wall_contact_count": 37,
       "wall_contacts": [
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 0,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "left:0"
+          "right": "left:0",
+          "right_feature": "left"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 0,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "bottom:0"
+          "right": "bottom:0",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 0,
+          "left_feature": "corner:1",
           "margin": "0.0",
-          "right": "bottom:1"
+          "right": "bottom:1",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 0,
+          "left_feature": "corner:3",
           "margin": "0.0",
-          "right": "left:3"
+          "right": "left:3",
+          "right_feature": "left"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 1,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "bottom:0"
+          "right": "bottom:0",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 1,
+          "left_feature": "corner:1",
           "margin": "0.0",
-          "right": "bottom:1"
+          "right": "bottom:1",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 2,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "left:0"
+          "right": "left:0",
+          "right_feature": "left"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 2,
+          "left_feature": "corner:3",
           "margin": "0.0",
-          "right": "left:3"
+          "right": "left:3",
+          "right_feature": "left"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 3,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "bottom:0"
+          "right": "bottom:0",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 3,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "right:0"
+          "right": "right:0",
+          "right_feature": "right"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 3,
+          "left_feature": "corner:1",
           "margin": "0.0",
-          "right": "bottom:1"
+          "right": "bottom:1",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 3,
+          "left_feature": "corner:3",
           "margin": "0.0",
-          "right": "right:3"
+          "right": "right:3",
+          "right_feature": "right"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 4,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "bottom:0"
+          "right": "bottom:0",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 4,
+          "left_feature": "corner:1",
           "margin": "0.0",
-          "right": "bottom:1"
+          "right": "bottom:1",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 5,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "bottom:0"
+          "right": "bottom:0",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 5,
+          "left_feature": "corner:1",
           "margin": "0.0",
-          "right": "bottom:1"
+          "right": "bottom:1",
+          "right_feature": "bottom"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 6,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "right:0"
+          "right": "right:0",
+          "right_feature": "right"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 6,
+          "left_feature": "corner:3",
           "margin": "0.0",
-          "right": "right:3"
+          "right": "right:3",
+          "right_feature": "right"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 7,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "right:0"
+          "right": "right:0",
+          "right_feature": "right"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 7,
+          "left_feature": "corner:3",
           "margin": "0.0",
-          "right": "right:3"
+          "right": "right:3",
+          "right_feature": "right"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 8,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "left:0"
+          "right": "left:0",
+          "right_feature": "left"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 8,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "top:0"
+          "right": "top:0",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 8,
+          "left_feature": "corner:1",
           "margin": "0.0",
-          "right": "top:1"
+          "right": "top:1",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 8,
+          "left_feature": "corner:3",
           "margin": "0.0",
-          "right": "left:3"
+          "right": "left:3",
+          "right_feature": "left"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 9,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "top:0"
+          "right": "top:0",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 9,
+          "left_feature": "corner:1",
           "margin": "0.0",
-          "right": "top:1"
+          "right": "top:1",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 10,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "right:0"
+          "right": "right:0",
+          "right_feature": "right"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 10,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "top:0"
+          "right": "top:0",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 10,
+          "left_feature": "corner:1",
           "margin": "0.0",
-          "right": "top:1"
+          "right": "top:1",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 10,
+          "left_feature": "corner:3",
           "margin": "0.0",
-          "right": "right:3"
+          "right": "right:3",
+          "right_feature": "right"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 11,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "top:0"
+          "right": "top:0",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 11,
+          "left_feature": "corner:1",
           "margin": "0.0",
-          "right": "top:1"
+          "right": "top:1",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 12,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "top:0"
+          "right": "top:0",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 12,
+          "left_feature": "corner:1",
           "margin": "0.0",
-          "right": "top:1"
+          "right": "top:1",
+          "right_feature": "top"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 13,
+          "left_feature": "corner:0",
           "margin": "0.0",
-          "right": "right:0"
+          "right": "right:0",
+          "right_feature": "right"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 13,
+          "left_feature": "corner:3",
           "margin": "0.0",
-          "right": "right:3"
+          "right": "right:3",
+          "right_feature": "right"
         },
         {
+          "contact": "corner-wall",
           "kind": "wall",
           "left": 25,
+          "left_feature": "corner:3",
           "margin": "3.23904279611732929439668105586e-100",
-          "right": "left:3"
+          "right": "left:3",
+          "right_feature": "left"
         }
       ],
       "wall_relations_tested": 464,

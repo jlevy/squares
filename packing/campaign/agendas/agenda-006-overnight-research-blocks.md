@@ -135,7 +135,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 29]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can the contact equations be assembled and closed from a frozen structure, and can
@@ -153,6 +153,11 @@ agenda:
       determinant conditions and reproducing the known n = 11 system — or a typed
       statement of which reduction the particular contact graph does not admit. Then, if
       the clock allows, BC-044's exact solve under its frozen margin rule.
+    artifacts:
+    - src/sqpack/promote/system.py
+    - src/sqpack/promote/contacts.py
+    - tests/test_promote_system.py
+    - atlas/known-best/contact-structures.json
     bead: think-zm3f
     depends_on: []
     workflows: [pipeline-improvement]
@@ -167,11 +172,22 @@ agenda:
       complements, and neither unblocks the other. X-004 found no integer relation through
       degree twenty below 10^22, so BC-044 may terminate in a refusal, and a refusal here
       is a result rather than a failure of the block.
+      Closed in session-038, and it reached BC-043 rather than BC-044: the block clock went
+      to three findings that each changed what assembly had to do. Contacts now identify
+      which features meet -- typed from the intersection of their supports across every
+      realising axis, because per-axis reading turns a corner-corner contact into two
+      edge-edge ones that do not exist -- and assembly turns a structure into equations that
+      vanish at the packing they came from, `4.44e-16` at n = 11. Counting rows is the wrong
+      instrument: n = 11 is overdetermined by the count and four conditions short by the
+      rank, so closure is sized by the shortfall. An angle class does not license an angle
+      identity, which n = 29 showed with a residual of exactly pi. And seven n = 29 squares
+      are reflected, which a centre-plus-rotation pose cannot represent, so assembly refuses
+      them by name. Phase 4's exact solve was not reached.
   - id: BC-055
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5]
-    state: ready
+    state: stopped
     priority: 1
     question: >-
       Can verification run only the steps a change can reach without ever running fewer
@@ -203,18 +219,26 @@ agenda:
       ahead of it without any scientific commitment being cut short. Under-running the
       gate is the failure mode that matters; a selector that is merely slow is a
       disappointment, and one that skips a step a change can reach is a soundness defect.
+      Not run, and recorded as stopped rather than left ready so the queue does not imply
+      work that this run did not do. Blocks 2 and 3 each overran into the slack this cell
+      was placed last to absorb, which is what the slack was for; the choice at the boundary
+      was between a rushed efficiency change to the shared gate and a real endpoint check,
+      and the endpoint check won. Nothing measured here is retracted: the 4m15s baseline
+      stands and BC-051 and BC-049 remain ready in agenda-005.
   - id: BC-056
     purpose: tool_validation
     owner_focus: process
     instances: [5, 10, 11, 16, 29]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       After a night of unattended work, does the whole record still hold together at the
       endpoints — gate, generated views, schemas, links, and the PR?
     hypotheses: []
     budget: 40 minutes from about 2026-08-29T14:10Z
-    entry: The four blocks have reached terminal states, whatever those states are
+    entry: >-
+      The four blocks have reached terminal states, whatever those states are: BC-052,
+      BC-053 and BC-054 complete, BC-055 stopped unrun
     exit: >-
       A full strict `packing-validate` receipt, every generated view regenerated from its
       source, a research-loop logbook entry covering the run, agenda and session artifacts
@@ -222,7 +246,7 @@ agenda:
       Blocks that stopped early are recorded as stopped with their exact limitation, never
       quietly dropped.
     bead: think-lo3p
-    depends_on: [BC-052, BC-053, BC-054, BC-055]
+    depends_on: [BC-052, BC-053, BC-054]
     workflows: [process-review]
     next_evidence: >-
       The strict gate is the only receipt that exercises the slow tiers, and no block

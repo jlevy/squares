@@ -321,8 +321,15 @@ relaxation of `1e-20`. That certificate is retained `unresolved` with
 `needs_review: true` and promotes nothing: it sits `5.23371e-5` below the standing
 verified ceiling, and whether it moves `verified_upper_bound` is a reviewed human
 decision through the evidence contract.
-The next slice is **block 3: `BC-054` under `think-zm3f`**, the unbuilt middle of the
-exact route — contact-system assembly and closure.
+`BC-054` is closed in
+[session 038](packing/campaign/agent-sessions/session-038-block3-contact-assembly.md):
+contacts now identify which features meet, and assembly turns a structure into equations
+that vanish at the packing they came from.
+Three findings there went against the promotion spec — counting rows cannot say whether
+a system determines the pose, an angle class does not license an angle identity, and
+seven of the `n = 29` squares are reflected and refused by name.
+The next slice is **the endpoint check: `BC-056` under `think-lo3p`** — the full strict
+gate, regenerated views, and a logbook entry for the run.
 The full ordering for the sessions after it — including which of the two `priority: 0`
 commitments goes first and why — is the
 [session queue](packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md#the-session-queue),
@@ -2196,7 +2203,7 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 356 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 357 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -2204,7 +2211,7 @@ and checked in the gate.
 | soundness | 85 | asserted something false about the mathematics |
 | validity | 85 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 136 | recorded something its own evidence contradicts |
-| robustness | 39 | did not finish, or finished only by luck |
+| robustness | 40 | did not finish, or finished only by luck |
 | performance | 11 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -2213,7 +2220,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-five defects in 356, and no soundness defect
+**The automated gate has caught forty-five defects in 357, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2227,8 +2234,12 @@ The harness that proves those checks fire has a blind spot of its own.
 [D-356](defects.md) records that `run_negative_controls` prunes the literature archive
 and the atlas renderings from its snapshot to stay under a portable size cap, so any
 check reading one of them fails there on a missing file rather than on the mutation.
-One standing control cannot fire for that reason, and the `n = 29` interval guards are
-asserted directly in their test instead.
+Three controls written for the `n = 29` chain were withdrawn for that reason, and the
+guards they would have exercised are asserted directly in their test instead.
+[D-357](defects.md) is the companion, and it is a correction: a synopsis control that
+failed four times running, including against a clean tree, later fired correctly with
+nothing changed, so the standing-failure reading recorded first was wrong and the entry
+now says plainly that the trigger is not identified.
 
 The gate’s cost is itself a logged defect.
 [D-355](defects.md) records that verification runs the whole gate after every change, so

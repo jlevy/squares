@@ -54,12 +54,27 @@ class ContactExtractionError(ValueError):
 
 @dataclass(frozen=True)
 class Incidence:
-    """One decided contact: a touching pair, or a corner resting on a wall."""
+    """One decided contact: a touching pair, or a corner resting on a wall.
+
+    `contact` and the two feature fields say *which features* meet, which the pair of
+    square indices does not.  They are what an assembly step needs and what it cannot
+    recover: a corner-edge contact contributes one scalar equation and a free slide
+    along the edge, an edge-edge contact contributes an angle identity and an overlap
+    condition, and a corner-corner contact is a codimension-two coincidence.  Folding
+    the three together produces a system that looks assembled and is not the packing's.
+
+    They are optional only so that a structure extracted before this field existed still
+    loads. A `None` here means "not identified", never "no features involved", and the
+    assembly step refuses on it rather than guessing.
+    """
 
     kind: str
     left: int
     right: str
     margin: str
+    contact: str | None = None
+    left_feature: str | None = None
+    right_feature: str | None = None
 
 
 @dataclass(frozen=True)
@@ -127,6 +142,75 @@ def _pair_margin(first: Square, second: Square, sign: Callable):
     return best
 
 
+def _corners_at(square: Square, axis, value, sign: Callable) -> tuple[int, ...]:
+    """Which corner indices project onto `axis` exactly at `value`."""
+    return tuple(
+        index
+        for index, (px, py) in enumerate(square)
+        if sign(axis[0] * px + axis[1] * py - value) == 0
+    )
+
+
+def _feature(corners: tuple[int, ...]) -> str:
+    """The feature a set of extreme corners names: one corner, or the edge joining two."""
+    if len(corners) == 1:
+        return f"corner:{corners[0]}"
+    first, second = sorted(corners)
+    # Corners are stored in cycle order, so an edge is a consecutive pair -- including
+    # the wrap from the last corner back to the first.
+    edge = first if second - first == 1 else second
+    return f"edge:{edge}"
+
+
+def _touching_features(first: Square, second: Square, sign: Callable) -> tuple[str, str, str]:
+    """Which features realise a zero-gap contact, and what kind of contact it is.
+
+    Each axis that achieves a zero gap names the corners *supporting* the contact on
+    that axis, and a supporting set is not the contact.  Two axis-aligned squares placed
+    diagonally, touching at a single point, have a zero gap on both axes and a full edge
+    supporting each one -- read per-axis, that is two different edge-edge contacts, and
+    the packing has neither.  The contact is where the supports agree, so the sets are
+    intersected across every realising axis.  Measured on Trump's `n = 11`: pair (4, 5)
+    supports `edge:3` against `edge:1` on x and `edge:0` against `edge:2` on y, and the
+    intersection is the corner-corner contact those squares actually have.
+    """
+    left_support: set[int] | None = None
+    right_support: set[int] | None = None
+    for axis in edge_axes(first) + edge_axes(second):
+        first_low, first_high = project(first, axis, sign)
+        second_low, second_high = project(second, axis, sign)
+        for gap, first_value, second_value in (
+            (second_low - first_high, first_high, second_low),
+            (first_low - second_high, first_low, second_high),
+        ):
+            if sign(gap) != 0:
+                continue
+            left = set(_corners_at(first, axis, first_value, sign))
+            right = set(_corners_at(second, axis, second_value, sign))
+            left_support = left if left_support is None else left_support & left
+            right_support = right if right_support is None else right_support & right
+    if left_support is None or right_support is None:
+        raise ContactExtractionError(
+            "no-realising-axis",
+            "the pair was classified as touching but no separating axis achieves a zero "
+            "gap, so which features meet is not decided",
+        )
+    if not (1 <= len(left_support) <= 2 and 1 <= len(right_support) <= 2):
+        raise ContactExtractionError(
+            "degenerate-contact",
+            f"the supporting corner sets intersect to {sorted(left_support)} and "
+            f"{sorted(right_support)}; a unit-square contact is a corner or an edge, so "
+            "this is not one contact",
+        )
+    kind = {
+        (1, 1): "corner-corner",
+        (1, 2): "corner-edge",
+        (2, 1): "corner-edge",
+        (2, 2): "edge-edge",
+    }[(len(left_support), len(right_support))]
+    return kind, _feature(tuple(left_support)), _feature(tuple(right_support))
+
+
 def _same_orientation(first: Square, second: Square, sign: Callable) -> bool:
     """Whether two squares share an orientation modulo ninety degrees.
 
@@ -184,9 +268,24 @@ def extract_contacts(
     contact_magnitudes: list[Scalar] = []
     strict_magnitudes: list[Scalar] = []
 
-    def classify(kind: str, left: int, right: str, margin, sink: list[Incidence]) -> None:
+    def classify(  # noqa: PLR0917  (one relation's full description, kept together)
+        kind: str,
+        left: int,
+        right: str,
+        margin,
+        sink: list[Incidence],
+        features: tuple[str, str, str] | None = None,
+    ) -> None:
         """Sort one relation into contact, strict separation, or the refused band."""
-        incidence = Incidence(kind=kind, left=left, right=right, margin=_decimal(margin))
+        incidence = Incidence(
+            kind=kind,
+            left=left,
+            right=right,
+            margin=_decimal(margin),
+            contact=features[0] if features else None,
+            left_feature=features[1] if features else None,
+            right_feature=features[2] if features else None,
+        )
         try:
             magnitude = abs(mp.mpf(margin))
         except TypeError, ValueError:
@@ -204,19 +303,28 @@ def extract_contacts(
 
     for left in range(count):
         for right in range(left + 1, count):
-            classify(
-                "pair",
-                left,
-                str(right),
-                _pair_margin(squares[left], squares[right], sign),
-                pair_contacts,
+            margin = _pair_margin(squares[left], squares[right], sign)
+            features = (
+                _touching_features(squares[left], squares[right], sign)
+                if sign(margin) == 0
+                else None
             )
+            classify("pair", left, str(right), margin, pair_contacts, features)
 
     wall_contacts: list[Incidence] = []
     for index, square in enumerate(squares):
         for corner, (x, y) in enumerate(square):
             for wall, margin in zip(WALLS, (x, y, side - x, side - y), strict=True):
-                classify("wall", index, f"{wall}:{corner}", margin, wall_contacts)
+                # A wall relation already names its corner, so the feature on this side
+                # is fixed; the wall is the other feature and is named by `right`.
+                classify(
+                    "wall",
+                    index,
+                    f"{wall}:{corner}",
+                    margin,
+                    wall_contacts,
+                    ("corner-wall", f"corner:{corner}", wall),
+                )
 
     classes: list[list[int]] = []
     for index, square in enumerate(squares):

@@ -707,7 +707,7 @@ controls:
 
 # --- interval calibration and the relaxation route (BC-053) ---
 #
-# The n = 29 chain is deliberately not controlled here. Its source is the provenance SVG
+# The n = 29 chain is not controlled here, and D-356 records why. Its source is the SVG
 # in `resources/`, and this harness prunes the literature archive from its snapshot to
 # stay under the portable size cap -- so a mutation control over that chain would fail
 # on a missing file rather than on the mutation, which proves nothing. The n = 29
@@ -731,3 +731,31 @@ controls:
             "        context.rounding = ROUND_FLOOR if upward else ROUND_CEILING"]
   run: uv run --frozen --group dev python -m pytest tests/test_promote_relax.py -q
   expect: "endpoints must be properly ordered"
+
+# --- contact features and system assembly (BC-054) ---
+- name: contact features - per-axis supports taken instead of their intersection
+  file: src/sqpack/promote/contacts.py
+  replace: ["            left_support = left if left_support is None else left_support & left",
+            "            left_support = left"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "the n = 11 contact typing changed"
+
+- name: system assembly - a corner-corner contact contributes only one equation
+  file: src/sqpack/promote/system.py
+  replace: ["        return [sp.expand(px - qx), sp.expand(py - qy)]",
+            "        return [sp.expand(px - qx)]"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "the n = 11 equation count moved"
+
+- name: system assembly - reflected squares posed as rotations instead of refused
+  file: src/sqpack/promote/system.py
+  replace: ["    reflected = [index for index, square in enumerate(squares) if _winding(square) <= 0]",
+            "    reflected = []"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "was posed as a rotation"
+
+- name: system assembly - angle identities emitted for a modulo-ninety class
+  file: src/sqpack/promote/system.py
+  replace: ["    identities = 0\n\n    unknowns", "    identities = 1\n\n    unknowns"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "an angle identity was emitted"
