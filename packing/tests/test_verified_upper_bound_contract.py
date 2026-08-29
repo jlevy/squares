@@ -76,6 +76,9 @@ DECLARED_CONSUMERS = {
     "docs/project/specs/active/plan-2026-08-28-interval-certification.md": (
         "specs certification that would tighten the ceiling toward the report"
     ),
+    "packing/campaign/agendas/agenda-006-overnight-research-blocks.md": (
+        "schedules that certification work, and says the ceiling does not move in the run"
+    ),
     "packing/devtools/assess_frontier_rigidity.py": (
         "reads the ceiling only together with the floor, and only to confirm they pin the "
         "side at exactly k before making the perfect-square tiling argument; a one-sided "

@@ -676,3 +676,31 @@ controls:
   replace: ["    return sign(cross) == 0 or sign(dot) == 0", "    return True"]
   run: uv run --frozen --quiet pytest -q tests/test_promote_contacts.py
   expect: "expected a 6 + 5 orientation split"
+
+# --- the interval-certification route (BC-052): every stage that can refuse ---
+- name: interval promotion - certificate endpoints rounded to nearest, not outward
+  file: src/sqpack/promote/interval.py
+  replace: ["context.rounding = ROUND_CEILING if upward else ROUND_FLOOR",
+            "context.rounding = 'ROUND_HALF_EVEN'"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_krawczyk.py -q
+  expect: "no longer enclose the root they were rounded from"
+
+- name: interval promotion - straddling sign answers zero instead of refusing
+  file: src/sqpack/promote/interval.py
+  replace: ["    raise IntervalRefusalError(\n        \"undecided-sign\",",
+            "    return 0\n    raise IntervalRefusalError(\n        \"undecided-sign\","]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_krawczyk.py -q
+  expect: "expected a undecided-sign refusal and got a value"
+
+- name: interval promotion - operator reports its last state, not the verdict it proved
+  file: src/sqpack/promote/krawczyk.py
+  replace: ["if unique_now >= unique and exists_now >= exists:", "if True:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_krawczyk.py -q
+  expect: "a verdict proved during iteration was not reported"
+
+- name: interval promotion - undecided separation counted as separated
+  file: src/sqpack/promote/interval_verify.py
+  replace: ["return OVERLAPPING if all_axes_overlap else UNDECIDED",
+            "return OVERLAPPING if all_axes_overlap else SEPARATED"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_interval_verify.py -q
+  expect: "exact contacts were certified"

@@ -24,7 +24,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 10, 11, 29]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Can the interval-certification bridge be built as far as a Krawczyk operator and an
@@ -63,11 +63,22 @@ agenda:
       checkpoint. The uniqueness half of the Krawczyk verdict is the load-bearing part: a
       box holding two roots does not identify which pose was certified, so interior
       containment is checked rather than containment.
+      Closed in session-036, inside the block clock. Phases 1 and 2 are built and every
+      stage that can refuse was watched refusing; negative controls rise from 86 to 90 and
+      the fast gate is green at 4m03s. The calibration against `sqpack.field` found two
+      soundness bugs that inspection had not, both flattering: certificate endpoints were
+      serialized by rounding to nearest, which lifted both ends of a box above the root it
+      enclosed, and the operator reported its final iteration rather than the verdict it had
+      proved, discarding a uniqueness result obtained two iterations earlier. The block's
+      load-bearing result is a refusal: four unit squares packed exactly into a side-2
+      container return six undecided pairs and zero separated, which is correct and is what
+      a tolerance-based checker gets wrong. Nothing here certifies n = 29 and
+      `verified_upper_bound` is untouched.
   - id: BC-053
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 10, 11, 29]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Does the checker agree with the exact route where the answer is already known, and
@@ -98,6 +109,11 @@ agenda:
       may describe the reported n = 29 value as certified until a human accepts it. The
       bound move is a reviewed change through the evidence contract, never a search
       result written into the record.
+      Unblocked by block 1. BC-052 delivered an operator whose controls fire and a verifier
+      that refuses by name, which is this commitment's entry criterion, so the dependency is
+      discharged rather than merely older. The schema decision phase 4 needs -- whether a
+      fourth `scalar.kind` extends `Witness/v1` or forces a `v2` migration -- is taken in
+      this block with calibration results in hand, not before them.
   - id: BC-054
     purpose: tool_validation
     owner_focus: correctness
