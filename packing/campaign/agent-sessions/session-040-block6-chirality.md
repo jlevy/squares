@@ -209,7 +209,7 @@ session:
     stop_reason: criterion
     next_action: >-
       Open block 7 as session-041 under BC-059 and `think-9c40`.
-  primary_bead: think-km5r
+  primary_bead: think-qs6k
   status: completed
   budget:
     wall_minutes: 45

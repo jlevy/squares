@@ -125,8 +125,8 @@ session:
       is load-bearing, so the control changes `QQ` to `RR`.'
     stop_reason: criterion
     next_action: >-
-      Open block 10 as session-044 under BC-061 and `think-twa7`.
-  primary_bead: think-obgk
+      Open block 11 as session-044 under BC-066 and `think-obgk`.
+  primary_bead: think-qs6k
   status: completed
   budget:
     wall_minutes: 45
@@ -165,10 +165,12 @@ session:
     The bound is measured, pinned by a test, and the number this block first reported is
     corrected. The elimination itself is deliberately left to its own budget.
   next_action: >-
-    Open block 10 as session-044 under BC-061 and `think-twa7`. The elimination remainder
-    stays on `think-obgk`: five equations in five unknowns, degrees up to twenty, where a
-    resultant chain either succeeds or shows the exact-algebraic route out of reach at
-    n = 29.
+    Open block 11 as session-044 under BC-066 and `think-obgk`: eliminate the five
+    equations in five half-angles this block left, inside a declared wall-clock cap, and
+    record whatever the chain reaches. It runs before the remaining pipeline blocks because
+    it is the only one that can change what this run concludes about n = 29 -- a refusal
+    there is the measured justification for the interval route carrying that bound. The
+    ordering through block 18 is agenda-006's continuation schedule.
 ---
 # session-043 — block 9, how high the search would have to reach
 

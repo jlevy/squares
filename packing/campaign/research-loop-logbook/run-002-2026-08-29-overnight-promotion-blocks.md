@@ -7,7 +7,7 @@ softschema:
   status: enforced
 logbook_entry:
   id: run-002
-  title: Four bounded overnight blocks across the interval and exact promotion routes
+  title: Ten bounded overnight blocks that built the promotion pipeline's missing middle
   date: '2026-08-29'
   status: stopped
   objective: >-
@@ -17,35 +17,43 @@ logbook_entry:
     promotion problem at n = 29: whether a reported value can be certified without first
     recovering an exact algebraic form, and whether the exact route's missing middle can
     be built.
-  source_sessions: [session-036, session-037, session-038]
+  source_sessions:
+  - session-036
+  - session-037
+  - session-038
+  - session-039
+  - session-040
+  - session-041
+  - session-042
+  - session-043
   primary_bead: think-qs6k
   source_branch: claude/squares-research-blocks-kqu96s
-  source_commit: 90b74afd517cb29fab21898088a5d2536c70cdcf
+  source_commit: d257a90cb41883e9375f666255ccf0b877e789aa
   timebox:
     target_wall_minutes: 690
     cycle_minutes: 30
     planned_cycle_slots: 23
   rollup:
-    session_count: 3
-    phase_count: 9
+    session_count: 8
+    phase_count: 21
     workflow_counts:
-      pipeline-improvement: 6
-      process-review: 3
+      pipeline-improvement: 13
+      process-review: 8
     phase_status_counts:
-      completed: 9
+      completed: 21
     focus_counts:
-      correctness: 6
-      process: 3
+      correctness: 14
+      process: 7
     clock_role_counts:
-      work: 6
-      finalization: 3
+      work: 13
+      finalization: 8
     delegation_count: 0
     delegation_status_counts: {}
     new_round_decision_counts: {}
   new_round_results: []
   prior_retained_results: []
   defects:
-    opened_in_run: [D-356, D-357]
+    opened_in_run: [D-356, D-357, D-358, D-359, D-360, D-361]
     preexisting_relevant: []
     note: >-
       Both concern the negative-control harness rather than the mathematics. D-356 records
@@ -56,7 +64,15 @@ logbook_entry:
       four times running, including against a stashed clean tree, and was first written up
       as a standing failure; it later fired correctly with nothing changed, so the entry now
       says plainly that the trigger is not identified rather than keeping a claim a later
-      run falsified.
+      run falsified. D-358 is this run misreading its own clock by about a factor of four
+      and supplying a false reason for stopping early. D-359 is open: the generated atlas
+      SVG's coordinate precision is inherited rather than pinned, so the check that its
+      stored PNG is current passes on test ordering. D-360 is a null-space claim read off a
+      filtered display instead of computed, caught before it was committed. D-361 is the
+      one that mattered: an edge-edge contact assembled as one equation where collinearity
+      is two, which made close() report four and seven missing "stationarity conditions"
+      that were four and seven missing equations. None of the six is about the mathematics
+      of packing.
   pipeline_changes:
   - name: interval-certification
     status: built
@@ -94,6 +110,59 @@ logbook_entry:
     paths:
     - packing/cases/kingbird29/layout.py
     - packing/cases/kingbird29/certify_interval.py
+  - name: reflected-pose-model
+    status: built
+    summary: >-
+      A pose is a centre, an angle and a chirality. Seven of the n = 29 squares are placed
+      by reflection, which no centre-plus-rotation can express; carrying the sign in the
+      corner model takes the assembled residual from 2.0 to 1.3e-15 with n = 11 unmoved.
+    paths:
+    - packing/src/sqpack/promote/system.py
+    - packing/src/sqpack/promote/contacts.py
+    - packing/atlas/known-best/contact-structures.json
+  - name: edge-edge-collinearity
+    status: built
+    summary: >-
+      An edge-edge contact pins collinearity, which is two equations, not one. With the
+      second the contact Jacobian reaches full rank at both retained sizes -- 34 of 34 at
+      n = 11 and 88 of 88 at n = 29 -- and `close` refuses to add anything. The shortfall
+      it had been reporting was this bug, recorded as D-361.
+    paths:
+    - packing/src/sqpack/promote/system.py
+    - packing/tests/test_promote_system.py
+  - name: minimal-polynomial-margin-rule
+    status: built
+    summary: >-
+      The integer-relation step under the promotion spec's frozen three-clause rule, with a
+      discharge that proves irreducibility over Q and isolates the root. Recovers Trump's
+      published degree-eight polynomial at n = 11; returns nothing at any degree through
+      twenty at n = 29.
+    paths:
+    - packing/src/sqpack/promote/solve.py
+    - packing/tests/test_promote_solve.py
+    - packing/devtools/probe_minimal_polynomial.py
+  - name: symbolic-route-and-degree-bound
+    status: built
+    summary: >-
+      The same six-equation transcription now serves floats, intervals and SymPy, so the
+      n = 29 system rationalises over Q under the half-angle substitution. Total degrees
+      [11, 15, 10, 15, 7, 6] give a Bezout bound of 1,039,500 -- which is what says the
+      degree-twenty integer-relation refusal surveyed a corner of the space.
+    paths:
+    - packing/src/sqpack/promote/interval.py
+    - packing/devtools/probe_system_degree.py
+    - packing/tests/test_promote_system_degree.py
+  - name: pipeline-probes
+    status: built
+    summary: >-
+      Three devtools, because two of this run's findings were first made in throwaway
+      scripts and one of those scripts was wrong. They report what an assembled system
+      determines, what the margin rule made of a search, and what bounds the degree.
+      Documented in development.md so they are reached for before a one-off script.
+    paths:
+    - packing/devtools/probe_contact_system.py
+    - packing/devtools/probe_minimal_polynomial.py
+    - packing/devtools/probe_system_degree.py
   - name: contact-system-assembly
     status: built
     summary: >-
@@ -118,11 +187,14 @@ logbook_entry:
   - scope: negative-controls
     command: uv run --frozen --group dev python -m devtools.run_negative_controls
     status: passed
-    negative_controls: 97
+    negative_controls: 113
     note: >-
-      Eleven controls added across the run, 86 to 97, each watched to fire before being
-      registered. Three further controls for the n = 29 chain were written and withdrawn
-      under D-356.
+      Twenty-seven controls added across the run, 86 to 113, each watched to fire before
+      being registered. Five were written and withdrawn as unable to fire -- three for the
+      n = 29 chain under D-356, one faking `side_leak` to zero when the truth is zero
+      everywhere, and one mutating a coefficient that `Poly.from_dict(domain=QQ)` coerces
+      back. Several others needed retargeting against what the mutation actually reports,
+      which is why each is watched rather than assumed.
   - scope: n29-interval-certificate
     command: uv run --frozen python -m cases.kingbird29.certify_interval
     status: passed
@@ -130,12 +202,15 @@ logbook_entry:
       406 pairs tested, 406 strictly separated, none undecided, at a declared relaxation of
       1e-20. Recorded unresolved with needs_review; no runner may promote it.
   next_action: >-
-    A human decision, not a runner's: whether the n = 29 interval certificate moves
-    verified_upper_bound. It is retained, unpromoted, and 5.23371e-5 below the standing
-    ceiling. After that, the queue is BC-051 and BC-049 in agenda-005 -- neither was run
-    here -- and the two questions block 3 left open: deriving the determinant conditions
-    the rank shortfall calls for, and giving the pose model a chirality so reflected
-    layouts can be assembled.
+    Resume at agenda-006 block 11, `BC-066` under `think-obgk`: eliminate the five-unknown
+    system that BC-065 left, and record whatever the chain reaches inside a declared cap.
+    It is first because it is the only remaining block that can change what this run
+    concludes about n = 29; everything after it improves the pipeline. The full ordering
+    through block 18 is the continuation schedule in agenda-006, and the endpoint check
+    BC-064 is reserved and may not be borrowed from. Separately and not a runner's
+    decision: whether the n = 29 interval certificate moves verified_upper_bound. It is
+    retained, unpromoted, and 5.23371e-5 below the standing ceiling.
+
 ---
 # run-002 — an overnight run across both promotion routes
 
@@ -159,8 +234,11 @@ So a real certificate needs either exact algebra or rigorous enclosures.
 
 Two routes lead there.
 The **exact route** recovers the packing’s minimal polynomial and discharges it by exact
-substitution; it is stronger, and at `n = 29` it is stalled, because a sweep recorded in
-`X-004` found no integer relation through degree twenty with coefficients below `10^22`.
+substitution; it is stronger, and at `n = 29` this run measured *why* it does not reach.
+A sweep under the promotion spec’s frozen margin rule, on a thousand manufactured
+digits, returns no relation at any degree through twenty below `10^22` — and the
+rationalised system bounds the solution variety at `1,039,500`, so degree twenty was a
+corner of the space rather than a survey of it.
 The **interval route** proves that a root exists and is unique inside a box and checks
 separation on enclosures; it never needs the polynomial.
 This run built both.
@@ -295,9 +373,16 @@ unidentified rather than keeping the claim that it could not fire.
 
 ## Validation
 
-The fast gate was run and left green at all three block checkpoints; the full strict
-gate was run once at the endpoint.
-Negative controls rose from 86 to 97, each watched to fire before registration.
+The fast gate was run and left green at every block checkpoint; the full strict gate was
+run once at the block-5 endpoint.
+Negative controls rose from 86 to 113, each watched to fire before registration — and
+five were written and then withdrawn as unable to fire, which is the same discipline
+pointing the other way.
+
+The consumer contract on `verified_upper_bound` caught four of this run’s session
+records before they landed, each time for naming the field in a stop condition without
+declaring what the record takes it to mean.
+That is friction working as designed.
 
 Two environment facts, recorded because they cost time and will cost it again: the
 container needed Python 3.14.7 installed through a newer `uv` than it shipped with, and
@@ -310,10 +395,38 @@ The `n = 29` certificate proves an upper bound at a declared relaxation and noth
 more. It is not the optimum, not an optimality result, and not promoted.
 `verified_upper_bound` is where it was.
 
-The next action is a human one — whether that bound moves — and after it the queue is
-`BC-051` and `BC-049`, neither run here, and the two questions block 3 left open:
-deriving the determinant conditions the rank shortfall calls for, and giving the pose
-model a chirality so reflected layouts can be assembled.
+The next action is a human one — whether that bound moves.
+It is not a runner’s to make.
+
+## Where to resume
+
+**Start at
+[agenda-006’s continuation schedule](../agendas/agenda-006-overnight-research-blocks.md#the-continuation-schedule).**
+Blocks 1–10 are closed; 11–18 are mapped with budgets and a reason for the ordering.
+
+The next slice is **block 11, `BC-066` under `think-obgk`** — eliminate the five
+equations in five half-angles that `BC-065` left, inside a declared wall-clock cap, and
+record whatever the chain reaches.
+It is first because it is the only remaining block that can change what this run
+concludes about `n = 29`; every block after it improves the pipeline instead.
+`BC-064`, the endpoint check, is reserved and may not be borrowed from.
+
+What a fresh agent needs to know that is not obvious from the diff:
+
+- **Read block boundaries from `date -u`.** This run misread its own clock by about a
+  factor of four ([D-358](../../../defects.md)) and the practice change has caught a
+  wrong estimate twice since.
+- **A cited measurement goes in a tool, not a transcript.** Two findings here were first
+  made in throwaway scripts and one of those was wrong;
+  `devtools/probe_contact_system.py`, `probe_minimal_polynomial.py` and
+  `probe_system_degree.py` exist for that reason and are documented in `development.md`.
+- **Every block owes the five things listed in the agenda** — merge `origin/main`,
+  `tbd sync`, commit and push and update the PR, leave the gate green or name the
+  failure, and record the result in the artifact that owns it.
+- **A refusal is a result.** Three of this run’s most useful findings are refusals, and
+  none of them was reached by loosening anything.
+- **`verified_upper_bound` may not be moved by a runner**, and any record that names the
+  field must declare what it takes it to mean or the gate will refuse it.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

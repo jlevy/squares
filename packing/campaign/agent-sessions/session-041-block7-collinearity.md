@@ -155,7 +155,7 @@ session:
     stop_reason: criterion
     next_action: >-
       Open block 8 as session-042 under BC-060 and `think-ovp7`, which this unblocks.
-  primary_bead: think-9c40
+  primary_bead: think-qs6k
   status: completed
   budget:
     wall_minutes: 60

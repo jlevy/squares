@@ -334,27 +334,23 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 042](../../../../packing/campaign/agent-sessions/session-042-block8-exact-solve.md).
-Sessions 027 through 042 are terminal, and agenda-004 closed on measurement rather than
-opinion. Open BC-061 under `think-twa7` as the next bounded driver: an exact LP over
-certified rational or algebraic coefficients, removing the `1e-11` float floor so poses
-this project generates become promotable.
-It is the load-bearing layer now, and the reason is measured rather than assumed.
-The exact route answers at `n = 11` — the frozen margin rule recovers Trump’s published
-degree-eight polynomial from digits alone and discharges it as irreducible — and refuses
-at `n = 29`: on a thousand manufactured digits, `pslq` finds no relation at any degree
-through twenty below `10^22`, where the planning probe on ~98 digits had found one at
-almost every degree.
-If `s(29)` is algebraic of degree twenty or less, some coefficient is at least `10^22` —
-and the rationalised system says degree twenty was a corner of the space, with a Bézout
-bound of `1,039,500` on the solution variety.
-So the interval route is what carries that bound, and the elimination remainder — five
-equations in five unknowns after `s` is solved out — is tracked on its own bead in
-agenda-006’s BC-065 rather than here.
+[session 043](../../../../packing/campaign/agent-sessions/session-043-block9-degree-bound.md).
+Sessions 027 through 043 are terminal, and agenda-004 closed on measurement rather than
+opinion. Open BC-066 under `think-obgk` as the next bounded driver: eliminate the five
+equations in five half-angles that the rationalised `n = 29` system leaves, inside a
+declared wall-clock cap, and record whatever the chain reaches.
+It runs first because it is the only remaining block that can change what this run
+concludes about `n = 29` — a refusal there is the measured justification for the
+interval route carrying that bound, and every block after it improves the pipeline
+instead. The ordering through block 18 is
+[agenda-006’s continuation schedule](../../../../packing/campaign/agendas/agenda-006-overnight-research-blocks.md#the-continuation-schedule),
+and
+[run-002](../../../../packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md#where-to-resume)
+carries what a fresh agent needs that the diff does not show.
 The middle layers behind it are built: a pose is a centre, an angle and a chirality; an
-edge-edge contact pins collinearity; and the contact system reaches full rank at both
-retained sizes. The continuation runs those middle layers first; the efficiency and
-research cells are deliberately last.
+edge-edge contact pins collinearity; the contact system reaches full rank at both
+retained sizes; and the margin rule recovers Trump’s published polynomial at `n = 11`
+while returning nothing at `n = 29` through degree twenty.
 Sessions 035 through 037 are terminal and closed agenda-005 block A together with
 `BC-045`, so precision is manufactured in-repository, the `n = 29` contact structure is
 frozen with its 89 incidences, and the interval route is built, calibrated and run: it

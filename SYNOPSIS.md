@@ -384,8 +384,15 @@ function of two half-angles alone, leaving five equations in five unknowns.
 Eliminating those is where the exact-algebraic route either succeeds or is shown to be
 out of reach at `n = 29`, and it is left to its own budget on `think-obgk`. The bound
 reads as “not small” rather than “this large” — Bézout is loose for a structured system.
-The next slice is **`BC-061` under `think-twa7`** — an exact LP over certified
-coefficients, removing the `1e-11` float floor.
+The next slice is **`BC-066` under `think-obgk`** — eliminate the five equations in five
+half-angles that `BC-065` left, inside a declared cap, because it is the only remaining
+block that can change what this run concludes about `n = 29`. `BC-061`, `BC-069`,
+`BC-067`, `BC-068`, `BC-062` and `BC-063` follow, with `BC-064` reserved and last; the
+ordering and its reasons are the
+[continuation schedule](packing/campaign/agendas/agenda-006-overnight-research-blocks.md#the-continuation-schedule),
+and
+[run-002](packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md#where-to-resume)
+carries what a fresh agent needs that the diff does not show.
 The continuation runs the missing middle layers first, with the efficiency and research
 cells deliberately last.
 The full ordering for the sessions after it — including which of the two `priority: 0`

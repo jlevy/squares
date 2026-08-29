@@ -177,7 +177,7 @@ session:
     next_action: >-
       Open block 6 as session-040 under BC-058 and `think-km5r`: give the pose model a
       chirality so the reflected n = 29 squares can be assembled.
-  primary_bead: think-pfwx
+  primary_bead: think-qs6k
   status: completed
   budget:
     wall_minutes: 45

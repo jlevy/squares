@@ -546,6 +546,126 @@ agenda:
       route either succeeds or is shown to be out of reach at n = 29, and it needs its own
       budget. Read the bound as "not small" rather than "this large" -- Bezout is loose for
       a structured system.
+  - id: BC-066
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [29]
+    state: ready
+    priority: 0
+    question: >-
+      Can the five-unknown system be eliminated to an eliminant in `s`, or is the
+      exact-algebraic route out of reach at n = 29?
+    hypotheses: []
+    budget: 90 minutes, with a declared wall-clock cap inside it
+    entry: >-
+      BC-065 leaves five equations in five half-angles over Q, total degrees
+      `[16, 20, 15, 20, 12]`, after `s` is solved out of the smallest equation.
+    exit: >-
+      An eliminant in `s` whose degree is measured rather than bounded, discharged through
+      `promote/solve.discharge`; or a typed statement of where the chain stopped and what
+      it cost, which is itself the answer that the interval route carries n = 29.
+    bead: think-obgk
+    depends_on: [BC-065]
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      The Bezout bound is `1,039,500`, which is an upper bound and loose. A resultant chain
+      over five variables at these degrees may blow up in intermediate size long before it
+      reaches an eliminant, so the block declares a cap and reports the sizes it reached at
+      each step rather than running until something dies.
+    note: >-
+      A refusal here is a result and should be recorded as one: it would say the exact
+      route does not reach n = 29 at any practical cost, which is the measured
+      justification for the interval route carrying that bound. Do not widen the cap to
+      reach a positive answer.
+  - id: BC-067
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [11]
+    state: ready
+    priority: 1
+    question: >-
+      Can a recovered minimal polynomial be discharged all the way back to a verified
+      packing, rather than only to an isolated root?
+    hypotheses: []
+    budget: 60 minutes
+    entry: >-
+      `promote/solve.discharge` proves irreducibility and isolates the root, and stops at
+      the side. The promotion spec's phase 4 asks for the whole round trip.
+    exit: >-
+      A `NumberField` built from the candidate, every pose unknown solved exactly, the
+      packing rebuilt and passed to `verify_packing` under `exact_sign`, and the
+      reconstructed side compared against the input pose; or a typed statement of which
+      step the field cannot support.
+    bead: think-2q2c
+    depends_on: [BC-060]
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      Feasible now and not before: since BC-059 the n = 11 contact system has full rank
+      34 of 34, so the pose is determined by the contacts and there is something to solve.
+    note: >-
+      Compare the reconstructed *side*, not merely validity. A wrong contact structure can
+      yield a valid but suboptimal packing, which verification alone does not catch -- the
+      spec names that trap and it is the reason this step is not just a second call to
+      `verify_packing`.
+  - id: BC-068
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [11, 100]
+    state: ready
+    priority: 1
+    question: >-
+      Can the generated atlas SVG be made reproducible from its inputs alone?
+    hypotheses: []
+    budget: 60 minutes
+    entry: >-
+      D-359, open: `format_svg_number` renders a scalar at whatever precision it was last
+      refined to, so `known-best-1-100.svg` carries 27 fractional digits in a fresh process
+      and 50 once anything has refined the shared field.
+    exit: >-
+      A pinned emission precision, every stored SVG and PNG receipt regenerated against it,
+      and the composite-PNG check passing for the reason it states rather than on test
+      ordering; or a typed statement of which stored artifact cannot be regenerated.
+    bead: think-mt4h
+    depends_on: []
+    workflows: [general-improvement]
+    next_evidence: >-
+      The detector is already written down:
+      `pytest tests/test_promote_system.py tests/test_known_best_atlas.py -p no:randomly`
+      fails on the composite receipt, and either module alone passes.
+    note: >-
+      This re-hashes every stored SVG and every PNG receipt in the repository, which is why
+      it was left open rather than fixed inside a block about chirality. It is a
+      regeneration and a review, and it needs its own block for exactly that reason.
+  - id: BC-069
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [5]
+    state: ready
+    priority: 1
+    question: >-
+      What is the one stationarity condition n = 5 still needs, in a form a solver accepts?
+    hypotheses: []
+    budget: 60 minutes
+    entry: >-
+      After BC-059's edge-edge repair, Göbel's n = 5 is the only retained size with a
+      genuine shortfall: rank 15 of 16, `side_leak` `1.0e-16`, and no edge-edge contact for
+      the repair to have touched.
+    exit: >-
+      A condition whose addition takes the n = 5 rank to 16 of 16 with the residual unmoved
+      at the retained pose; or a typed statement of which formulation the contact graph
+      resists.
+    bead: think-864y
+    depends_on: [BC-059]
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      n = 5 is now the clean case rather than the odd one out. Its first-order condition
+      already holds -- no contact-preserving motion changes the side -- so what is missing
+      is a genuine closure and not another missing equation, which is what BC-059's repair
+      established by elimination.
+    note: >-
+      `close` reports that one condition is needed and refuses to invent it. This block is
+      allowed to derive one; it is not allowed to size one to make the counts meet, which
+      is the failure BC-059 recorded as D-361.
   - id: BC-064
     purpose: tool_validation
     owner_focus: process
@@ -593,6 +713,42 @@ A block that finishes early starts the next one early; a block that overruns eat
 BC-055, which is placed last precisely because it can absorb that without cutting a
 scientific commitment short.
 No block may borrow from BC-056.
+
+## The continuation schedule
+
+That first stretch closed at `BC-056` and the run then resumed rather than ending: a
+review of the commit timestamps showed it had misread its own clock by about a factor of
+four and stopped with most of its budget unspent ([D-358](../../../defects.md)).
+Measured from the commits, blocks 1–4 took **31, 42, 29 and 23 minutes** against
+declared budgets of 150, 180, 180 and 40.
+
+The continuation runs the promotion pipeline’s missing middle first, then efficiency and
+research, with the endpoint check reserved and last.
+Blocks 6–10 are closed; 11 onward are the remaining map.
+
+| Block | Commitment | Clock | State |
+| ---: | --- | --- | --- |
+| 6 | `BC-057` — witness contract, checker, evidence entry | `05:10Z`, 45 min | complete, took 58 |
+| 7 | `BC-058` — chirality in the pose model | `06:09Z`, 45 min | complete, took 46 |
+| 8 | `BC-059` — the closure, which was a missing equation | `06:56Z`, 60 min | complete, took 29 |
+| 9 | `BC-060` — exact solve under the frozen margin rule | `07:26Z`, 60 min | complete, took 31 |
+| 10 | `BC-065` — rationalise the system, bound the degree | `08:02Z`, 45 min | complete, took 20 |
+| 11 | `BC-066` — eliminate the five-unknown system | `08:30Z`, 90 min | ready |
+| 12 | `BC-061` — exact LP over certified coefficients | `10:00Z`, 60 min | ready |
+| 13 | `BC-069` — the one condition `n = 5` still needs | `11:00Z`, 60 min | ready |
+| 14 | `BC-067` — close the round trip at `n = 11` | `12:00Z`, 60 min | ready |
+| 15 | `BC-068` — pin the atlas SVG’s emission (D-359) | `13:00Z`, 60 min | ready |
+| 16 | `BC-062` — reachability-scoped verification | `14:00Z`, 45 min | ready |
+| 17 | `BC-063` — `n = 5` rigidity in the catalogue | `14:45Z`, 45 min | ready |
+| 18 | `BC-064` — endpoint check and run close | `15:30Z`, 30 min | reserved |
+
+`BC-066` is first because it is the only remaining block that can change what this run
+concludes about `n = 29`: everything else improves the pipeline, and that one decides
+whether the exact route reaches at all.
+`BC-064` is reserved and may not be borrowed from, for the reason D-358 records.
+
+**Read block boundaries from `date -u`, not from an estimate.** That is the practice
+change D-358 bought, and it has caught a wrong estimate twice since.
 
 ## What every block owes, regardless of what it found
 

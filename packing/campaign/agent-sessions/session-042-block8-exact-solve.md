@@ -143,7 +143,7 @@ session:
     stop_reason: criterion
     next_action: >-
       Open block 9 as session-043 under BC-061 and `think-twa7`.
-  primary_bead: think-ovp7
+  primary_bead: think-qs6k
   status: completed
   budget:
     wall_minutes: 60
