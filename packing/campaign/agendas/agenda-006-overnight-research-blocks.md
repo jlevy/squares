@@ -507,6 +507,45 @@ agenda:
       continuation; everything above it is tooling.
     note: >-
       Last on purpose. It is the cell that can be cut without leaving a tool half-built.
+  - id: BC-065
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [29]
+    state: complete
+    priority: 0
+    question: >-
+      Did the integer-relation refusal at n = 29 survey the space, or a corner of it?
+    hypotheses: []
+    budget: 45 minutes
+    entry: >-
+      BC-060 named two routes -- elimination via SymPy and integer relation via mpmath
+      pslq -- and only the second was built. It refused through degree twenty below `10^22`
+      on a thousand digits, and nothing said what degree `s(29)` actually has.
+    exit: >-
+      A bound on the algebraic degree of `s(29)`, computed from the published system rather
+      than estimated; or a typed statement of what in the transcription resists
+      rationalisation.
+    artifacts:
+    - src/sqpack/promote/interval.py
+    - devtools/probe_system_degree.py
+    - tests/test_promote_system_degree.py
+    - campaign/agent-sessions/session-043-block9-degree-bound.md
+    bead: think-obgk
+    depends_on: [BC-060]
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      Closed in session-043. Under `u = tan(theta/2)` the six equations rationalise over Q
+      with total degrees `[11, 15, 10, 15, 7, 6]`, so the Bezout bound on the solution
+      variety is `1,039,500` -- degree twenty was a corner. Every equation is degree one in
+      `s`, and solving the smallest for it gives `s` as a rational function of `u_b` and
+      `u_c` alone, leaving five equations in five unknowns with degrees `[16, 20, 15, 20,
+      12]`.
+    note: >-
+      The elimination itself is deliberately not attempted here and stays on `think-obgk`:
+      a resultant chain over five variables at these degrees is where the exact-algebraic
+      route either succeeds or is shown to be out of reach at n = 29, and it needs its own
+      budget. Read the bound as "not small" rather than "this large" -- Bezout is loose for
+      a structured system.
   - id: BC-064
     purpose: tool_validation
     owner_focus: process

@@ -21,16 +21,19 @@ from __future__ import annotations
 from fractions import Fraction
 
 import mpmath as mp
+import sympy as sp
 
 from sqpack.field import NumberField
 from sqpack.promote.interval import (
     IntervalRefusalError,
     cos,
+    cos_degrees,
     decimal_string,
     evaluate,
     interval,
     interval_sign,
     sin,
+    sin_degrees,
 )
 from sqpack.promote.krawczyk import PoseBox, certify
 
@@ -242,8 +245,49 @@ def box_radius_is_reported_outward() -> None:
         mp.mp.dps = previous
 
 
+def one_transcription_serves_three_arithmetics() -> None:
+    """`sin_degrees` and `cos_degrees` dispatch, so the `n = 29` system is written once.
+
+    Three routes read it: ordinary floats check the publication against itself, intervals
+    build a certificate, and SymPy expressions feed an elimination.  A second copy of a
+    six-equation contact system would be a second thing to keep correct, and the first
+    divergence between them would be silent -- so the branch that was missing is the one
+    asserted here.
+
+    The symbolic branch is a *branch*, not a fall-through: `mp.radians` raises on a SymPy
+    symbol, which is how the symbolic route was unavailable without anything reporting it.
+    """
+    angle = 37
+    numeric = mp.sin(mp.radians(angle))
+
+    saved = mp.iv.dps
+    mp.iv.dps = 40
+    try:
+        enclosure = sin_degrees(interval(angle))
+        assert mp.mpf(enclosure.a) <= numeric <= mp.mpf(enclosure.b), (
+            "the interval branch does not enclose the float branch's value"
+        )
+    finally:
+        mp.iv.dps = saved
+
+    symbol = sp.Symbol("theta", real=True)
+    symbolic = sin_degrees(symbol)
+    assert symbolic.has(sp.sin), f"the symbolic branch returned {symbolic!r}, not a sine"
+    assert abs(float(symbolic.subs(symbol, angle).evalf()) - float(numeric)) < 1e-12, (
+        "the symbolic branch disagrees with the float branch at 37 degrees, so the three "
+        "routes are not reading the same transcription"
+    )
+    cosine = cos_degrees(symbol)
+    assert cosine.has(sp.cos)
+    assert (
+        abs(float(cosine.subs(symbol, angle).evalf()) - float(mp.cos(mp.radians(angle))))
+        < 1e-12
+    )
+
+
 def main() -> int:
     sign_contract()
+    one_transcription_serves_three_arithmetics()
     derivatives_match_analysis()
     outward_serialization()
     univariate_against_an_independent_isolator()

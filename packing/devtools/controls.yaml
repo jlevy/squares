@@ -854,3 +854,30 @@ controls:
   replace: ["    if not irreducible:", "    if False:"]
   run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
   expect: "was reported irreducible"
+
+# --- the symbolic route and the degree bound (BC-065) ---
+# The bound is cited, so the controls attack the two ways it was computed wrongly while
+# being written rather than the arithmetic that follows from it.
+- name: symbolic system - combined angles are left unexpanded before substitution
+  file: devtools/probe_system_degree.py
+  replace: ["    equations = [sp.expand_trig(sp.expand(f)) for f in equations]",
+            "    equations = [sp.expand(f) for f in equations]"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system_degree.py -q
+  expect: "is not rational"
+
+# `from_dict(domain=QQ)` coerces, so mutating the converted coefficient is not a control:
+# a small integer float becomes the same rational either way. What is testable is that the
+# declared domain is load-bearing at all.
+- name: symbolic system - the polynomial domain is real rather than rational
+  file: devtools/probe_system_degree.py
+  replace: ["    return sp.Poly.from_dict(converted, *poly.gens, domain=sp.QQ)",
+            "    return sp.Poly.from_dict(converted, *poly.gens, domain=sp.RR)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system_degree.py -q
+  expect: "not QQ"
+
+- name: trig dispatch - the symbolic branch falls through to mpmath
+  file: src/sqpack/promote/interval.py
+  replace: ["    if isinstance(degrees, sp.Basic):\n        return sp.sin(degrees * sp.pi / 180)\n    return mp.sin(mp.radians(degrees))",
+            "    return mp.sin(mp.radians(degrees))"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_krawczyk.py -q
+  expect: "TypeError"

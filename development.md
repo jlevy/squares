@@ -240,6 +240,7 @@ wrong place for a measurement the next reader has to be able to replay.
 uv run --frozen --all-extras --group dev python -m devtools.probe_contact_system
 uv run --frozen --all-extras --group dev python -m devtools.probe_contact_system --case trump11 --walk
 uv run --frozen --all-extras --group dev python -m devtools.probe_minimal_polynomial --case trump11
+uv run --frozen --all-extras --group dev python -m devtools.probe_system_degree --eliminate-side
 ```
 
 [`probe_contact_system`](packing/devtools/probe_contact_system.py) reports, per retained
@@ -254,6 +255,13 @@ That distinction is the whole of `D-361`.
 [`probe_minimal_polynomial`](packing/devtools/probe_minimal_polynomial.py) runs the
 integer-relation search under the promotion spec’s frozen margin rule and reports which
 clause decided each degree.
+
+[`probe_system_degree`](packing/devtools/probe_system_degree.py) rationalises the
+`n = 29` system by the half-angle substitution and reports what bounds the algebraic
+degree of `s(29)`, which is what says whether an integer-relation refusal at a given
+degree surveyed the space or a corner of it.
+`--eliminate-side` also solves the smallest equation for `s` and reports the
+five-unknown system that leaves.
 The `n = 29` sweep takes about twelve minutes, which is why it is a tool with a recorded
 result rather than a test.
 

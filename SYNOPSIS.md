@@ -373,6 +373,17 @@ falls silent when fed properly is evidence about the number, and what it bounds 
 concrete: if `s(29)` is algebraic of degree twenty or less, some coefficient of its
 minimal polynomial is at least `10^22`. That is the measured reason the interval route
 carries the `n = 29` bound.
+`BC-065` is closed in
+[session 043](packing/campaign/agent-sessions/session-043-block9-degree-bound.md), and
+it says how to read that refusal.
+Under `u = tan(θ/2)` the published system rationalises over `Q` into six polynomials
+with total degrees `[11, 15, 10, 15, 7, 6]`, so the Bézout bound on the solution variety
+is `1,039,500`: **degree twenty surveyed a corner of the space, not the space.** Every
+equation is degree one in `s`, and solving the smallest for it gives `s` as a rational
+function of two half-angles alone, leaving five equations in five unknowns.
+Eliminating those is where the exact-algebraic route either succeeds or is shown to be
+out of reach at `n = 29`, and it is left to its own budget on `think-obgk`. The bound
+reads as “not small” rather than “this large” — Bézout is loose for a structured system.
 The next slice is **`BC-061` under `think-twa7`** — an exact LP over certified
 coefficients, removing the `1e-11` float floor.
 The continuation runs the missing middle layers first, with the efficiency and research

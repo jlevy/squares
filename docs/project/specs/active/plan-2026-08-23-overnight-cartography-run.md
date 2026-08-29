@@ -345,8 +345,12 @@ degree-eight polynomial from digits alone and discharges it as irreducible — a
 at `n = 29`: on a thousand manufactured digits, `pslq` finds no relation at any degree
 through twenty below `10^22`, where the planning probe on ~98 digits had found one at
 almost every degree.
-If `s(29)` is algebraic of degree twenty or less, some coefficient is at least `10^22`,
-so the interval route is what carries that bound.
+If `s(29)` is algebraic of degree twenty or less, some coefficient is at least `10^22` —
+and the rationalised system says degree twenty was a corner of the space, with a Bézout
+bound of `1,039,500` on the solution variety.
+So the interval route is what carries that bound, and the elimination remainder — five
+equations in five unknowns after `s` is solved out — is tracked on its own bead in
+agenda-006’s BC-065 rather than here.
 The middle layers behind it are built: a pose is a centre, an angle and a chirality; an
 edge-edge contact pins collinearity; and the contact system reaches full rank at both
 retained sizes. The continuation runs those middle layers first; the efficiency and

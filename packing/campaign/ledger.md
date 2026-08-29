@@ -57,6 +57,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-040](agent-sessions/session-040-block6-chirality.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (process) | 3 | think-km5r | Open block 7 as session-041 under BC-059 and `think-9c40`: derive the stationarity conditions `close` currently only sizes. This block hands it the measurement it needs -- the projection of `e_s` onto the contact null space is zero at n = 5 and is not at n = 11 or n = 29, so a first-order condition cannot close the latter two and BC-059 must reach for second-order information there. |
 | [session-041](agent-sessions/session-041-block7-collinearity.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (process) | 2 | think-9c40 | Open block 8 as session-042 under BC-060 and `think-ovp7`, which this unblocks: n = 29 is now an overdetermined, full-rank system of 122 contact equations in 88 unknowns, which is what an exact solve needs. |
 | [session-042](agent-sessions/session-042-block8-exact-solve.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-ovp7 | Open block 9 as session-043 under BC-061 and `think-twa7`: an exact LP over certified coefficients, removing the `1e-11` float floor. The n = 29 refusal above is what makes the interval route the load-bearing one, so the layer that certifies its coefficients is the next thing that matters. |
+| [session-043](agent-sessions/session-043-block9-degree-bound.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (correctness) | 2 | think-obgk | Open block 10 as session-044 under BC-061 and `think-twa7`. The elimination remainder stays on `think-obgk`: five equations in five unknowns, degrees up to twenty, where a resultant chain either succeeds or shows the exact-algebraic route out of reach at n = 29. |
 
 ### Workflow summary
 
@@ -67,10 +68,10 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-pass` | 0 | 0 | 7 | 0 |
 | `factual-review` | 1 | 0 | 21 | 2 |
 | `insight-iteration` | 2 | 1 | 25 | 2 |
-| `process-review` | 7 | 4 | 42 | 6 |
+| `process-review` | 7 | 4 | 43 | 6 |
 | `efficiency-loop` | 7 | 0 | 17 | 0 |
 | `research-loop` | 2 | 4 | 12 | 7 |
-| `pipeline-improvement` | 14 | 0 | 59 | 0 |
+| `pipeline-improvement` | 15 | 0 | 60 | 0 |
 
 ## Experiment agendas
 
@@ -178,6 +179,7 @@ Status: **active**. Schedule one unattended overnight run across three independe
 | BC-061 | tool_validation | 5, 11 | ready | 1 | think-twa7 | Phase 5 of the promotion spec, unbuilt since it was written. It is the last of the middle layers and the one that makes the route usable on poses this repository produces rather than only on published ones. |
 | BC-062 | tool_validation | 5 | ready | 2 | think-d0q7 | D-355 measured a two-file edit at `979.79s` against the `12.06s` its two affected steps need, an 82x overrun. |
 | BC-063 | research | 5 | ready | 3 | think-298s | Advances BC-049 in agenda-005. The only genuinely research-shaped cell in this continuation; everything above it is tooling. |
+| BC-065 | tool_validation | 29 | complete | 0 | think-obgk | Closed in session-043. Under `u = tan(theta/2)` the six equations rationalise over Q with total degrees `[11, 15, 10, 15, 7, 6]`, so the Bezout bound on the solution variety is `1,039,500` -- degree twenty was a corner. Every equation is degree one in `s`, and solving the smallest for it gives `s` as a rational function of `u_b` and `u_c` alone, leaving five equations in five unknowns with degrees `[16, 20, 15, 20, 12]`. |
 | BC-064 | tool_validation | 5, 10, 11, 16, 29 | ready | 0 | think-c7oo | The first endpoint check earned its place by failing: the logbook entry named `verified_upper_bound` and the consumer contract required it to say what it meant by it. A second one closes the continuation the same way. |
 
 ## Series

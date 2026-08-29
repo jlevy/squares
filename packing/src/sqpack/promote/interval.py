@@ -43,6 +43,7 @@ from decimal import ROUND_CEILING, ROUND_FLOOR, Decimal, localcontext
 from typing import Any
 
 import mpmath as mp
+import sympy as sp
 from mpmath.libmp import to_rational
 
 # The interval scalar type. Named rather than inlined because callers annotate against
@@ -339,15 +340,23 @@ def _radians_per_degree() -> Interval:
 def sin_degrees(degrees: Any) -> Any:
     """Sine of an angle in degrees, over whichever scalar type it is handed.
 
-    The `n = 29` transcription is written in degrees, because its source is, and it has
-    to serve two routes now: ordinary evaluation, which checks the publication against
-    itself, and interval evaluation, which is what a certificate needs.  Dispatching
-    here rather than duplicating the transcription is deliberate -- a second copy of a
-    six-equation contact system is a second thing to keep correct, and the first
-    divergence between them would be silent.
+    The `n = 29` transcription is written in degrees, because its source is, and it now
+    has to serve *three* routes: ordinary evaluation, which checks the publication
+    against itself; interval evaluation, which is what a certificate needs; and symbolic
+    evaluation, which is what an elimination needs.  Dispatching here rather than
+    duplicating the transcription is deliberate -- a second copy of a six-equation
+    contact system is a second thing to keep correct, and the first divergence between
+    them would be silent.
+
+    The symbolic branch returns `sin(x * pi / 180)` unevaluated, so a caller can rewrite
+    it with the half-angle substitution and clear denominators.  It is a separate branch
+    rather than a fall-through because `mp.radians` on a SymPy symbol raises, which is
+    how this arm was missing without anybody noticing.
     """
     if isinstance(degrees, Dual | mp.ctx_iv.ivmpf):
         return sin(degrees * _radians_per_degree())
+    if isinstance(degrees, sp.Basic):
+        return sp.sin(degrees * sp.pi / 180)
     return mp.sin(mp.radians(degrees))
 
 
@@ -355,4 +364,6 @@ def cos_degrees(degrees: Any) -> Any:
     """Cosine of an angle in degrees, over whichever scalar type it is handed."""
     if isinstance(degrees, Dual | mp.ctx_iv.ivmpf):
         return cos(degrees * _radians_per_degree())
+    if isinstance(degrees, sp.Basic):
+        return sp.cos(degrees * sp.pi / 180)
     return mp.cos(mp.radians(degrees))
