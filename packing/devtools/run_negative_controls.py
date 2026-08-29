@@ -236,9 +236,7 @@ def snapshot_source_bytes() -> int:
     total = sum(path.stat().st_size for path in COPY_SEPARATELY)
     for document in ROOT_DOCUMENTS:
         if document.is_dir():
-            total += sum(
-                path.stat().st_size for path in document.rglob("*") if path.is_file()
-            )
+            total += sum(path.stat().st_size for path in document.rglob("*") if path.is_file())
         elif document.is_file():
             total += document.stat().st_size
     for directory, names, files in os.walk(ROOT):

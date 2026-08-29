@@ -858,9 +858,7 @@ def run_gallery_controls() -> dict[str, bool]:
         <= document_svg_artifacts,
         "frontier_cases_reference_gallery_artifacts_or_guide": all(
             embeds(f"packing/{example['frontier_case']}", example["artifact"])
-            or references(
-                f"packing/{example['frontier_case']}", "atlas/rendering/README.md"
-            )
+            or references(f"packing/{example['frontier_case']}", "atlas/rendering/README.md")
             for example in examples
         ),
         "gallery_readme_embeds_every_artifact": all(
