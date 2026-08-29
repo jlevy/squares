@@ -20,10 +20,8 @@ actions rather than telling them to run commands.
 
 ## Operating Rules
 
-**[`operating-rules.md`](operating-rules.md) is the source and this block is generated
-from it** by `devtools.render_operating_rules`; the gate fails on drift.
-Read the source before starting a slice, since each rule there cites what breaking it
-cost.
+Generated from [`operating-rules.md`](operating-rules.md), which carries the evidence
+for each rule. Edit there, not here.
 
 <!-- BEGIN OPERATING RULES SUMMARY -->
 

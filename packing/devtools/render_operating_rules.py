@@ -37,10 +37,11 @@ AGENTS = REPO / "AGENTS.md"
 BEGIN = "<!-- BEGIN OPERATING RULES SUMMARY -->"
 END = "<!-- END OPERATING RULES SUMMARY -->"
 
-# The id is the field; the punctuation after it is typography. Both patterns treat the
-# separator as optional, so an editorial pass over either file cannot break the parse. A
-# delimiter that is also a display choice is a delimiter that will eventually move.
-HEADING = re.compile(r"^### (OR-\d+):?\s+(.+?)\s*$", re.M)
+# The id is the field; the punctuation after it, and the heading depth, are typography.
+# Both patterns treat the separator as optional and the depth as a range, so an editorial
+# pass over either file cannot break the parse. A delimiter that is also a display choice
+# is a delimiter that will eventually move.
+HEADING = re.compile(r"^#{2,3} (OR-\d+):?\s+(.+?)\s*$", re.M)
 BULLET = re.compile(r"^- \*\*(OR-\d+):?\*\*:?\s+(.+?)(?=\n- |\n*\Z)", re.M | re.S)
 
 

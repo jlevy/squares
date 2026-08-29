@@ -541,11 +541,9 @@ discipline, the assurance levels and what each may claim, provenance, correction
 which rules are machine-checked versus which rest on care.
 Read it before adding an artifact, a round, or a tool.
 
-[`operating-rules.md`](operating-rules.md) is the other half of the pair, and the
-division is worth knowing: conventions govern the *shape of what is produced*, operating
-rules govern *how the work is done*. Read it before starting a slice.
-[`AGENTS.md`](AGENTS.md) carries a generated one-line summary of each rule so an agent
-sees them before its first tool call.
+[`operating-rules.md`](operating-rules.md) is the other half of the pair: conventions
+govern the *shape of what is produced*, operating rules govern *how the work is done*.
+[`AGENTS.md`](AGENTS.md) carries a generated one-line summary of each.
 
 ## Layout
 

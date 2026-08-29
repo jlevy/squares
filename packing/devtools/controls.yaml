@@ -112,17 +112,17 @@ controls:
 - name: operating rules - a new rule never reaches the summary
   file: ../operating-rules.md
   replace:
-    - "## Why this is a separate page"
+    - "<!-- This document follows common-doc-guidelines.md."
     - |-
-      ### OR-7: Never push to a branch other than the designated one
+      ## OR-7: Never push to a branch other than the designated one
 
-      ## Why this is a separate page
+      <!-- This document follows common-doc-guidelines.md.
   run: python3 -m devtools.render_operating_rules --check
   expect: "AGENTS.md's summary has drifted"
 
 - name: operating rules - a gap in the rule numbering is not renumbered silently
   file: ../operating-rules.md
-  replace: ["### OR-6: Plan multi-hour", "### OR-9: Plan multi-hour"]
+  replace: ["## OR-6: Plan multi-hour", "## OR-9: Plan multi-hour"]
   run: python3 -m devtools.render_operating_rules --check
   expect: "rule ids are not contiguous from OR-1"
 
