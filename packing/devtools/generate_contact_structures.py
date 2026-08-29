@@ -77,6 +77,7 @@ def _entry(structure, *, source: str, arithmetic: str, known_answer: dict) -> di
             }
             for item in record["angle_classes"]
         ],
+        "chirality": [int(sign) for sign in record["chirality"]],
         "worst_contact_margin": record["worst_contact_margin"],
         "smallest_strict_separation": record["smallest_strict_separation"],
         "separation_decades": record["separation_decades"],

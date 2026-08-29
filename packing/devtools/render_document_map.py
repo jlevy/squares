@@ -24,6 +24,7 @@ ROLE_LABELS = {
     "technical-synthesis": "current technical state and terminology",
     "tutorial": "first-principles tutorial",
     "conventions": "artifact and naming conventions",
+    "operating-rules": "how a session is conducted",
     "development-guide": "engineering and validation rules",
     "runbook": "W6 experiment mechanics",
     "session-guide": "escalated session and recovery contract",

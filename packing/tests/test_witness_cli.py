@@ -89,7 +89,14 @@ def test_binary64_rejects_a_fictitious_precision(capsys) -> None:
     assert "numerical-f64 has exactly 53 binary precision bits" in captured.err
 
 
-def test_interval_witness_reports_that_replay_is_unbuilt(capsys, tmp_path: Path) -> None:
+def test_interval_claim_over_exact_geometry_is_refused(capsys, tmp_path: Path) -> None:
+    """An interval-certified claim needs enclosures, not rational coordinates.
+
+    This asserted `checker-not-built` until the checker was built. The refusal it gets
+    now is the more specific one and names the actual mismatch: the claim says the
+    coordinates were established by interval certification and the coordinates are exact
+    rationals, so whatever produced them, it was not this route.
+    """
     interval = deepcopy(load_witness(WITNESSES / "grid-n004.yaml"))
     interval["id"] = "W-interval-replay-control"
     interval["claim"]["method"] = "interval-certified"
@@ -100,8 +107,8 @@ def test_interval_witness_reports_that_replay_is_unbuilt(capsys, tmp_path: Path)
 
     captured = capsys.readouterr()
     assert status == 2
-    assert "checker-not-built" in captured.err
-    assert "generic interval certificate checker is not built" in captured.err
+    assert "formal-certificate-missing" in captured.err
+    assert "needs interval-enclosure geometry" in captured.err
 
 
 def test_interval_promotion_reports_the_unbuilt_checker(capsys, tmp_path: Path) -> None:

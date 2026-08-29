@@ -1,0 +1,46 @@
+{
+  "claim": "Gobel's n = 5 packing is infinitesimally flexible and second-order rigid. This repository's own evidence, and a finer statement than the catalogue's bare \"Rigid.\"",
+  "claim_boundary": "Both the rank and the walk are numerical, at the retained pose. This is not the n = 11 result: there is no branchwise tangent-cone argument and no exact field here. It is consistent with local rigidity and does not establish it, and no frontier record was changed -- a rigidity property is a promotion, and an unattended runner applies the accept rule only conservatively.",
+  "certified": false,
+  "case": "gobel5",
+  "side": "2 + sqrt(2)/2",
+  "catalogue_says": "Rigid.",
+  "escape_screen": {
+    "movable_square_count": 0,
+    "separating_square_count": 0,
+    "stable_across_tolerances": true,
+    "why_insufficient": "The screen exhibits single-square translations only. A miss is weak evidence: rotations and coordinated multi-square motion are outside it, so it is consistent with rigidity and cannot establish it."
+  },
+  "first_party_evidence": {
+    "contact_jacobian_rank": 15,
+    "unknowns": 16,
+    "infinitesimal_motion_space_dimension": 1,
+    "scope_of_that_dimension": "all squares, all coordinates and the side -- not only single-square translations, so this closes the gap the escape screen leaves at first order",
+    "rank_gap_at_50_digits": {"smallest_counted": "5.110e-01", "largest_discarded": "1.038e-51"},
+    "why_the_gap_matters": "Fifty decades between the smallest counted and the largest discarded singular value, so the dimension is a property of the packing rather than of the rank tolerance.",
+    "free_direction": "a rotation of the centre square about its own centre",
+    "side_along_the_direction": "unmoved at 2.707106781187 at every step",
+    "second_order_obstruction": {
+      "steps": ["1e-3", "1e-4", "1e-5"],
+      "worst_separation": ["-2.500e-07", "-2.500e-09", "-2.500e-11"],
+      "ratio_per_decade": 100.0,
+      "order": "O(t^2), coefficient -1/4",
+      "symmetric_in_both_signs": true,
+      "worst_offenders": "9 of 9 are declared contacts"
+    }
+  },
+  "recommendation_for_a_reviewer": {
+    "property": "locally-rigid",
+    "assurance": "numerically-checked",
+    "scope": "the unique first-order flex at the retained pose, and its second-order obstruction",
+    "not_applied_here": "A rigidity property is a promotion through the evidence contract, and this runner may not make it."
+  },
+  "n28_and_n40": {
+    "evidence_available": false,
+    "why": "Everything above needs a contact structure. The atlas retains contact structures for n = 11 and n = 29 only, and neither n = 28 nor n = 40 has a case module. Producing the same evidence means extracting a structure from the retained witness first, which the promotion pipeline can now do and which is a block of its own rather than a re-run of this one.",
+    "escape_screen": "the same negative result as n = 5: no movable square, zero separating squares, stable across tolerances"
+  },
+  "reproduce": [
+    "uv run --frozen --all-extras --group dev python -m devtools.probe_contact_system --case gobel5 --walk"
+  ]
+}

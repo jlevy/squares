@@ -98,6 +98,34 @@ controls:
   run: python3 -m devtools.check_readme
   expect: "README.md: workflow table is"
 
+# AGENTS.md restates each operating rule in one line so an agent sees it before its
+# first tool call, and operating-rules.md carries the rule and its evidence. Two copies
+# is the arrangement that drifts, so both directions of drift are rehearsed.
+- name: operating rules - the summary an agent reads contradicts the source
+  file: ../AGENTS.md
+  replace:
+    - "- **OR-3:** Never wait on a gate with nothing else in flight."
+    - "- **OR-3:** Wait for the gate to finish before starting anything else."
+  run: python3 -m devtools.render_operating_rules --check
+  expect: "AGENTS.md's summary has drifted"
+
+- name: operating rules - a new rule never reaches the summary
+  file: ../operating-rules.md
+  replace:
+    - "<!-- This document follows common-doc-guidelines.md."
+    - |-
+      ## OR-8: Never push to a branch other than the designated one
+
+      <!-- This document follows common-doc-guidelines.md.
+  run: python3 -m devtools.render_operating_rules --check
+  expect: "AGENTS.md's summary has drifted"
+
+- name: operating rules - a gap in the rule numbering is not renumbered silently
+  file: ../operating-rules.md
+  replace: ["## OR-6: Plan multi-hour", "## OR-9: Plan multi-hour"]
+  run: python3 -m devtools.render_operating_rules --check
+  expect: "rule ids are not contiguous from OR-1"
+
 - name: synopsis - dateline duplicates volatile campaign progress
   file: ../SYNOPSIS.md
   replace: ["**Date:**", "**Date:** after a campaign checkpoint;"]
@@ -676,3 +704,411 @@ controls:
   replace: ["    return sign(cross) == 0 or sign(dot) == 0", "    return True"]
   run: uv run --frozen --quiet pytest -q tests/test_promote_contacts.py
   expect: "expected a 6 + 5 orientation split"
+
+# --- the interval-certification route (BC-052): every stage that can refuse ---
+- name: interval promotion - certificate endpoints rounded to nearest, not outward
+  file: src/sqpack/promote/interval.py
+  replace: ["context.rounding = ROUND_CEILING if upward else ROUND_FLOOR",
+            "context.rounding = 'ROUND_HALF_EVEN'"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_krawczyk.py -q
+  expect: "no longer enclose the root they were rounded from"
+
+- name: interval promotion - straddling sign answers zero instead of refusing
+  file: src/sqpack/promote/interval.py
+  replace: ["    raise IntervalRefusalError(\n        \"undecided-sign\",",
+            "    return 0\n    raise IntervalRefusalError(\n        \"undecided-sign\","]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_krawczyk.py -q
+  expect: "expected a undecided-sign refusal and got a value"
+
+- name: interval promotion - operator reports its last state, not the verdict it proved
+  file: src/sqpack/promote/krawczyk.py
+  replace: ["if unique_now >= unique and exists_now >= exists:", "if True:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_krawczyk.py -q
+  expect: "a verdict proved during iteration was not reported"
+
+- name: interval promotion - undecided separation counted as separated
+  file: src/sqpack/promote/interval_verify.py
+  replace: ["return OVERLAPPING if all_axes_overlap else UNDECIDED",
+            "return OVERLAPPING if all_axes_overlap else SEPARATED"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_interval_verify.py -q
+  expect: "exact contacts were certified"
+
+# --- interval calibration and the relaxation route (BC-053) ---
+#
+# The n = 29 chain is not controlled here, and D-356 records why. Its source is the SVG
+# in `resources/`, and this harness prunes the literature archive from its snapshot to
+# stay under the portable size cap -- so a mutation control over that chain would fail
+# on a missing file rather than on the mutation, which proves nothing. The n = 29
+# guards are asserted directly in `tests/test_promote_relax.py` instead.
+- name: interval promotion - relaxation moves squares inward instead of apart
+  file: src/sqpack/promote/relax.py
+  replace: ["        relaxed.append([(x + shift_x, y + shift_y) for x, y in square])",
+            "        relaxed.append([(x - shift_x, y - shift_y) for x, y in square])"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_relax.py -q
+  expect: "is not anchored at the origin"
+
+- name: interval promotion - a zero relaxation opens no contact and is accepted anyway
+  file: src/sqpack/promote/relax.py
+  replace: ["    if mp.mpf(scale.a) <= 0:", "    if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_relax.py -q
+  expect: "opened no contact and was accepted anyway"
+
+- name: interval promotion - the exact-to-interval bridge rounds inward
+  file: src/sqpack/promote/enclose.py
+  replace: ["        context.rounding = ROUND_CEILING if upward else ROUND_FLOOR",
+            "        context.rounding = ROUND_FLOOR if upward else ROUND_CEILING"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_relax.py -q
+  expect: "endpoints must be properly ordered"
+
+# --- contact features and system assembly (BC-054) ---
+- name: contact features - per-axis supports taken instead of their intersection
+  file: src/sqpack/promote/contacts.py
+  replace: ["            left_support = left if left_support is None else left_support & left",
+            "            left_support = left"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "the n = 11 contact typing changed"
+
+- name: system assembly - a corner-corner contact contributes only one equation
+  file: src/sqpack/promote/system.py
+  replace: ["        return [sp.expand(px - qx), sp.expand(py - qy)]",
+            "        return [sp.expand(px - qx)]"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "the n = 11 equation count moved"
+
+# --- collinearity at an edge-edge contact (BC-059) ---
+# The first of these is the bug itself, restored: one endpoint on the other edge's line
+# says the lines meet rather than coincide, and leaves the right square free to pivot.
+- name: system assembly - an edge-edge contact pins incidence instead of collinearity
+  file: src/sqpack/promote/system.py
+  replace: ["            for px, py in (_corner(right, first, pose), _corner(right, second, pose))",
+            "            for px, py in (_corner(right, first, pose),)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "contains directions that change the side"
+
+- name: system assembly - closure invented where the contacts already determine the pose
+  file: src/sqpack/promote/system.py
+  replace: ["    if shortfall <= 0:", "    if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "already isolates its pose"
+
+# --- the reflected pose model (BC-058) ---
+# The refusal these replace is gone: a reflection is now representable, so the controls
+# ask whether it is represented *correctly* rather than whether it is turned away.
+- name: system assembly - the corner model drops the chirality sign
+  file: src/sqpack/promote/system.py
+  replace: ["    local_x, local_y = half * offset_x * pose.sigmas[index], half * offset_y",
+            "    local_x, local_y = half * offset_x, half * offset_y"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "the reflection is not in the corner model"
+
+- name: system assembly - a structure with no chirality is defaulted to all +1
+  file: src/sqpack/promote/system.py
+  replace: ["    signs = getattr(structure, \"chirality\", ()) or ()",
+            "    signs = getattr(structure, \"chirality\", ()) or (1,) * structure.n"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "carrying no chirality was assembled anyway"
+
+- name: system assembly - a pose of the wrong chirality is substituted unchecked
+  file: src/sqpack/promote/system.py
+  replace: ["    disagreeing = [i for i, (a, b) in enumerate(zip(expected, measured, strict=True)) if a != b]",
+            "    disagreeing = []"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "mirrored pose was accepted"
+
+- name: contact extraction - every square reported counter-clockwise regardless of winding
+  file: src/sqpack/promote/contacts.py
+  replace: ["    chirality = tuple(_winding(square, sign) for square in squares)",
+            "    chirality = tuple(1 for _ in squares)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "mirroring flipped no windings"
+
+- name: system assembly - angle identities emitted for a modulo-ninety class
+  file: src/sqpack/promote/system.py
+  replace: ["    identities = 0\n\n    unknowns", "    identities = 1\n\n    unknowns"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "an angle identity was emitted"
+
+# --- interval witnesses and their replay (BC-057) ---
+- name: interval witness - replay inherits the caller's precision instead of the witness's
+  file: src/sqpack/witness.py
+  replace: ["    mp.iv.dps = mp.mp.dps = digits + INTERVAL_GUARD_DIGITS",
+            "    mp.iv.dps = mp.mp.dps = 15"]
+  run: uv run --frozen --group dev python -m pytest tests/test_witness_interval.py -q
+  expect: "along with 51 other pair(s)"
+
+- name: interval witness - a root that is not unique is replayed anyway
+  file: src/sqpack/witness.py
+  replace: ["    if not enclosure[\"unique\"]:", "    if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_witness_interval.py -q
+  expect: "expected a root-not-unique refusal"
+
+- name: interval witness - an enclosure written backwards is accepted
+  file: src/sqpack/witness.py
+  replace: ["            if Fraction(low) > Fraction(high):", "            if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_witness_interval.py -q
+  expect: "endpoints must be properly ordered"
+
+# --- the minimal-polynomial margin rule (BC-060) ---
+# An integer-relation search always answers, so every control here attacks the rule that
+# refuses most of its answers rather than the search itself.
+- name: minimal polynomial - the budget is read from the search bound, not the relation
+  file: src/sqpack/promote/solve.py
+  replace: ["    return largest, mp.mpf(degree + 1) * mp.log10(largest)",
+            "    return largest, mp.mpf(degree + 1) * mp.log10(10**22)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "refused a value whose minimal polynomial is published"
+
+- name: minimal polynomial - clause 3 does not test the refinement's residual bound
+  file: src/sqpack/promote/solve.py
+  replace: ["            if floor >= mp.mpf(10) ** (-needed):", "            if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "refusals came from unexpected clauses"
+
+- name: minimal polynomial - the relation is not normalised to canonical form
+  file: src/sqpack/promote/solve.py
+  replace: ["    if leading < 0:", "    if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "which is not the published polynomial"
+
+- name: minimal polynomial - degrees are searched downward, so no answer is minimal
+  file: src/sqpack/promote/solve.py
+  replace: ["        for degree in range(min_degree, max_degree + 1):",
+            "        for degree in range(max_degree, min_degree - 1, -1):"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "not Trump's eight"
+
+- name: minimal polynomial - a reducible relation is discharged as if it were minimal
+  file: src/sqpack/promote/solve.py
+  replace: ["    if not irreducible:", "    if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "was reported irreducible"
+
+# --- the symbolic route and the degree bound (BC-065) ---
+# The bound is cited, so the controls attack the two ways it was computed wrongly while
+# being written rather than the arithmetic that follows from it.
+- name: symbolic system - combined angles are left unexpanded before substitution
+  file: devtools/probe_system_degree.py
+  replace: ["    equations = [sp.expand_trig(sp.expand(f)) for f in equations]",
+            "    equations = [sp.expand(f) for f in equations]"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system_degree.py -q
+  expect: "is not rational"
+
+# `from_dict(domain=QQ)` coerces, so mutating the converted coefficient is not a control:
+# a small integer float becomes the same rational either way. What is testable is that the
+# declared domain is load-bearing at all.
+- name: symbolic system - the polynomial domain is real rather than rational
+  file: devtools/probe_system_degree.py
+  replace: ["    return sp.Poly.from_dict(converted, *poly.gens, domain=sp.QQ)",
+            "    return sp.Poly.from_dict(converted, *poly.gens, domain=sp.RR)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system_degree.py -q
+  expect: "not QQ"
+
+- name: trig dispatch - the symbolic branch falls through to mpmath
+  file: src/sqpack/promote/interval.py
+  replace: ["    if isinstance(degrees, sp.Basic):\n        return sp.sin(degrees * sp.pi / 180)\n    return mp.sin(mp.radians(degrees))",
+            "    return mp.sin(mp.radians(degrees))"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_krawczyk.py -q
+  expect: "TypeError"
+
+# --- the atlas emission precision (BC-068) ---
+# Restoring the leak takes the whole `with` block, not just the assignment inside it:
+# setting the global context from within a `localcontext()` scope mutates the copy that
+# scope restores on exit, which leaks nothing and would leave the control silent.
+- name: emission precision - a field refinement leaks into the global decimal context
+  file: src/sqpack/field.py
+  replace:
+  - "        with decimal.localcontext() as context:\n            context.prec = digits + 20\n            slo, shi = str(+as_dec(lo)), str(+as_dec(hi))\n"
+  - "        decimal.getcontext().prec = digits + 20\n        slo, shi = str(+as_dec(lo)), str(+as_dec(hi))\n"
+  run: uv run --frozen --quiet pytest -q tests/test_emission_precision.py
+  expect: "NumberField.decimal left the global decimal precision at"
+
+- name: emission precision - the renderer inherits its precision instead of pinning it
+  file: src/sqpack/render/numbers.py
+  replace: ["        context.prec = SVG_EMISSION_PRECISION\n", "        context.prec = context.prec\n"]
+  run: uv run --frozen --quiet pytest -q tests/test_emission_precision.py
+  expect: "the emitted SVG followed the ambient decimal context to"
+
+# --- the exact round trip (BC-067) ---
+#
+# Both controls restore a form of "trust the answer". The first drops the certification
+# that makes the recovered generator a derivation rather than a guess; the second
+# replaces the side comparison with validity, which is precisely the trap the promotion
+# spec names -- a wrong contact structure yielding a packing that verifies and is not
+# the one the field describes.
+- name: exact round trip - the recovered generator is trusted instead of certified
+  file: src/sqpack/promote/roundtrip.py
+  replace: ["    certified = _horner(generator_min_poly, generator, field).is_zero()",
+            "    certified = True"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_roundtrip.py -q
+  expect: "a perturbed generator was certified against u's minimal polynomial"
+
+- name: exact round trip - the side comparison is replaced by validity
+  file: src/sqpack/promote/roundtrip.py
+  replace: ["    matches = (side - field.alpha).is_zero()",
+            "    matches = bool(report.valid)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_roundtrip.py -q
+  expect: "so the side comparison is not catching a valid but suboptimal packing"
+
+# --- the exact LP (BC-061) ---
+# The module's whole claim is that it refuses rather than rounds, so each control
+# restores a missing refusal and the test names the guard that went absent. The two
+# assembly controls attack the cell instead: a wrong row still solves, and only the
+# known answer catches it.
+- name: exact LP - a point that violates a row is certified as a vertex
+  file: src/sqpack/exact_lp.py
+  replace: ["        if sign(slack) < 0:", "        if slack is None:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "an active set whose point violates a row was certified as a vertex"
+
+- name: exact LP - a negative multiplier is accepted as optimal
+  file: src/sqpack/exact_lp.py
+  replace: ["    for position, value in enumerate(multipliers):\n        if sign(value) < 0:",
+            "    for position, value in enumerate(multipliers):\n        if value is None:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "a feasible but suboptimal vertex was certified as optimal"
+
+- name: exact LP - a rank-deficient active set is eliminated past instead of refused
+  file: src/sqpack/exact_lp.py
+  replace: ["        if pivot is None:\n            raise ExactLPError(\n                \"singular-basis\", f\"the active set is rank deficient at column {column}\"\n            )\n",
+            "        if pivot is None:\n            continue\n"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "a rank-deficient active set was solved rather than refused"
+
+- name: exact LP - a short candidate set is returned as if it spanned a vertex
+  file: src/sqpack/exact_lp.py
+  replace: ["    raise ExactLPError(\n        \"no-vertex-basis\",\n        f\"only {len(chosen)} of the {wanted} independent rows a vertex needs are among \"\n        f\"the {len(candidates)} candidate(s) offered\",\n    )",
+            "    return tuple(chosen)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "was accepted as a 23-row vertex basis"
+
+- name: exact LP - the pivot budget never stops the simplex
+  file: src/sqpack/exact_lp.py
+  replace: ["        if pivots >= pivot_budget:", "        if pivots >= pivot_budget + 1000:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "the exact simplex ran past its pivot budget"
+
+- name: exact LP - the container side drops out of a containment row
+  file: src/sqpack/exact_lp.py
+  replace: ["            add(f\"wall:{index}:right:{corner}\", {index: one, side_column: -one}, -px)",
+            "            add(f\"wall:{index}:right:{corner}\", {index: one, side_column: -one}, px)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "the exact LP optimum is not Trump's published side"
+
+- name: exact LP - every coefficient is reported rational
+  file: src/sqpack/exact_lp.py
+  replace: ["    return not any(coefficients[1:])", "    return True"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "Trump's cell was reported rational"
+
+# --- the n = 5 closure (BC-069) ---
+# The n = 5 condition is the contact map differentiated along the direction the contacts
+# leave free, and the risk it carries is D-361's: a condition sized or shaped to make the
+# counts meet rather than derived. The first two controls restore each way of doing that,
+# and both are caught by the comparison against the midpoint statement rather than by a
+# count. The last three restore the structural bug that made a closure inert -- prose in a
+# field nothing evaluates -- from each of the three places it can be reintroduced.
+- name: system assembly - the closure pins the free angle at its measured value
+  file: src/sqpack/promote/system.py
+  replace: ["sp.Float(component) * sp.diff(row, symbol)",
+            "sp.Float(component) * (symbol - sp.Float(0.7853981633974483))"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "is not the directional derivative of the contact map"
+
+- name: system assembly - the closure repeats the contact equations instead of differentiating them
+  file: src/sqpack/promote/system.py
+  replace: ["sp.Float(component) * sp.diff(row, symbol)", "sp.Float(component) * row"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "close could not supply the n = 5 condition"
+
+- name: system assembly - the free direction is taken with its measurement noise
+  file: src/sqpack/promote/system.py
+  replace: ["        kept = [value if abs(value) > cut else 0.0 for value in raw]",
+            "        kept = list(raw)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "has kept measurement noise the rank tolerance cuts"
+
+- name: system assembly - the Jacobian is taken of the contacts alone, so a closure cannot move it
+  file: src/sqpack/promote/system.py
+  replace:
+  - "    equations = [sp.sympify(equation) for equation in system.all_equations]\n    symbols = _symbols_by_name(system, equations)\n    matrix = sp.Matrix(\n"
+  - "    equations = [sp.sympify(equation) for equation in system.equations]\n    symbols = _symbols_by_name(system, equations)\n    matrix = sp.Matrix(\n"
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "close could not supply the n = 5 condition"
+
+- name: system assembly - the residual skips the closure, so nothing checks it at the pose
+  file: src/sqpack/promote/system.py
+  replace:
+  - "    equations = [sp.sympify(equation) for equation in system.all_equations]\n    symbols = _symbols_by_name(system, equations)\n    substitution = dict"
+  - "    equations = [sp.sympify(equation) for equation in system.equations]\n    symbols = _symbols_by_name(system, equations)\n    substitution = dict"
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "so the closure is carried but never checked"
+
+# --- exact LP phase 1 (BC-071) ---
+# Phase 1 claims two things a wrong answer would also claim: that the vertex it starts
+# from is feasible by construction, and that a refusal means the cell is empty rather
+# than that the search gave up. The first three controls attack the construction -- the
+# weights that make the edge enterable, the row that closes it into a vertex, and the
+# point the finished active set is read at -- and the last two remove the two refusals.
+- name: exact LP phase 1 - the artificial column is too light to enter the edge from
+  file: src/sqpack/exact_lp.py
+  replace: ["        weights[index] = rate + lp.one if sign(rate) > 0 else lp.one",
+            "        weights[index] = lp.one"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_phase1.py -q
+  expect: "phase 1 could not build an edge into the axis-aligned cell"
+  timeout_seconds: 300
+
+- name: exact LP phase 1 - the edge is entered at the wrong end
+  file: src/sqpack/exact_lp.py
+  replace: ["        if sign(reach - height) > 0:", "        if sign(reach - height) < 0:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_phase1.py -q
+  expect: "the phase-1 start is not a feasible vertex of the auxiliary program"
+  timeout_seconds: 300
+
+- name: exact LP phase 1 - the starting basis is read at the wrong point
+  file: src/sqpack/exact_lp.py
+  replace: ["        )\n        == 0", "        )\n        >= 0"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_phase1.py -q
+  expect: "phase 1 handed phase 2 a start it refused"
+  timeout_seconds: 300
+
+- name: exact LP phase 1 - an empty cell is answered with a point
+  file: src/sqpack/exact_lp.py
+  replace: ["    if sign(relaxation) > 0:", "    if sign(relaxation) > 1:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_phase1.py -q
+  expect: "four unit squares were fitted into a side-1 container rather than refused"
+  timeout_seconds: 300
+
+- name: exact LP phase 1 - the pivot budget never reaches the auxiliary solve
+  file: src/sqpack/exact_lp.py
+  replace: ["    solution = solve(program, start, sign, pivot_budget=pivot_budget)",
+            "    solution = solve(program, start, sign, pivot_budget=pivot_budget + 1000)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_phase1.py -q
+  expect: "phase 1 ran past its pivot budget"
+  timeout_seconds: 300
+
+# --- the relation sweep's reach (BC-073) ---
+# The n = 29 refusal was recorded at degree twenty because twenty was a flag's default,
+# not because the digits ran out. Saying how far they do go takes three pieces -- the
+# digits a clause may rely on, the ceiling that falls out of clause 3, and the probe
+# taking that ceiling rather than a number someone typed -- and each control removes one
+# of them. The last one runs a whole sweep on the synthetic case, hence the timeout.
+- name: relation reach - the digits are read from the residual bound alone
+  file: src/sqpack/promote/solve.py
+  replace:
+  - "    truncation = mp.mpf(10) ** (-digits_carried(value))\n    return -mp.log10(max(bound, truncation))"
+  - "    return -mp.log10(bound)"
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "the value's own length was not counted against it"
+
+- name: relation reach - the ceiling admits a degree clause 3 could not judge
+  file: src/sqpack/promote/solve.py
+  replace: ["    return max(int(mp.ceil(terms)) - 2, 0)", "    return max(int(mp.ceil(terms)) - 1, 0)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "the reach admits a degree clause 3 would refuse"
+
+- name: relation reach - the probe sweeps to a typed-in ceiling instead of the digits
+  file: devtools/probe_minimal_polynomial.py
+  replace: ["        max_degree = max(ceiling, 2)", "        max_degree = 20"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "the probe stopped short of the degree its digits reach"
+  timeout_seconds: 300

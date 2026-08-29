@@ -59,6 +59,10 @@ DECLARED_CONSUMERS = {
     "docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md": (
         "the plan that introduced the reported/verified split"
     ),
+    "packing/defects.yaml": (
+        "D-367 cites the consumer contract as the nearest existing guard against the "
+        "claim-boundary conflation it records, one level up from it"
+    ),
     "packing/frontier/README.md": "documents the field for a reader of the corpus",
     "packing/frontier/evidence.yaml": (
         "names the fields as the certificate the grid bound lives in"
@@ -75,6 +79,45 @@ DECLARED_CONSUMERS = {
     ),
     "docs/project/specs/active/plan-2026-08-28-interval-certification.md": (
         "specs certification that would tighten the ceiling toward the report"
+    ),
+    "packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md": (
+        "reports how far below the ceiling the run's certificate sits, and that the "
+        "ceiling did not move"
+    ),
+    "packing/campaign/agent-sessions/session-044-agenda006-continuation.md": (
+        "names the ceiling only as a standing constraint: the continuation measures where "
+        "elimination stops and closes the round trip at n = 11, and moves nothing"
+    ),
+    "packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md": (
+        "records the certificate as evidence and says the ceiling was not moved to it"
+    ),
+    "packing/campaign/agent-sessions/session-040-block6-chirality.md": (
+        "names the ceiling only as a stop condition: the block builds the pose model and "
+        "does not touch it"
+    ),
+    "packing/campaign/agent-sessions/session-041-block7-collinearity.md": (
+        "names the ceiling only as a stop condition: the block repairs an assembly "
+        "equation and does not touch it"
+    ),
+    "packing/campaign/agent-sessions/session-042-block8-exact-solve.md": (
+        "names the ceiling only as a stop condition: the block recovers a minimal "
+        "polynomial at n = 11 and records a refusal at n = 29, moving nothing"
+    ),
+    "packing/campaign/ledger.md": (
+        "generated: it renders the agenda notes below and inherits whatever they say, so "
+        "it is an output of a consumer rather than one itself"
+    ),
+    "packing/campaign/agent-sessions/session-036-block1-interval-operator.md": (
+        "records that block 1 did not touch the ceiling"
+    ),
+    "packing/campaign/agent-sessions/session-037-block2-interval-calibration.md": (
+        "reports how far below the ceiling its certificate sits, and that it promotes nothing"
+    ),
+    "packing/cases/kingbird29/certify_interval.py": (
+        "compares its bound against the ceiling and refuses to promote it"
+    ),
+    "packing/campaign/agendas/agenda-006-overnight-research-blocks.md": (
+        "schedules that certification work, and says the ceiling does not move in the run"
     ),
     "packing/devtools/assess_frontier_rigidity.py": (
         "reads the ceiling only together with the floor, and only to confirm they pin the "

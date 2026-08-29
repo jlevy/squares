@@ -1,0 +1,105 @@
+{
+  "claim": "The Kingbird n = 29 solution has algebraic degree at most 15,744: its closed system has at most that many isolated solutions, so at most that many distinct sides. Path tracking at two precisions found Kingbird's side among them but could not establish a count.",
+  "claim_boundary": "A bound on the degree of the Kingbird solution, not on s(29). s(29) is the optimum; Kingbird's packing is the best known and is not proved optimal, and the bound gap at n = 29 is about 0.46. It is also a bound rather than the degree. Nothing else moved: verified_upper_bound is untouched.",
+  "certified": false,
+  "supersedes": {
+    "bound": 1039500,
+    "kind": "Bezout, the product of the total degrees [11, 15, 10, 15, 7, 6]",
+    "recorded_in": "BC-065, session-043",
+    "factor": 66.02
+  },
+  "bound": {
+    "value": 15744,
+    "kind": "mixed volume of the Newton polytopes (Bernstein / BKK)",
+    "stable_mixed_volume": 15744,
+    "why_it_applies": "Bernstein's theorem bounds the isolated solutions with every coordinate nonzero. The packing's own solution lies in that torus because no angle in it is zero. The stable mixed volume is equal to the mixed volume here, which says there are no isolated solutions on the coordinate hyperplanes either -- so the bound covers all isolated solutions rather than only the torus ones.",
+    "dimension": 6,
+    "distinct_supports": 6,
+    "engine": "PHCpack 2.4.90, MixedVol algorithm",
+    "elapsed_seconds": 9,
+    "command": "printf '4\\n0\\nn\\nn\\n' | phc -m system.phc mixvol.out"
+  },
+  "why_this_route": "BC-066 measured that Groebner elimination does not reach an eliminant for this system on this hardware, and that the obstruction is the size of the ideal rather than coefficient swell -- the finite-field runs hit the same matrix dimensions as the rational one. Homotopy continuation bounds and counts the solutions without computing any basis, which is why it reaches an answer where elimination does not.",
+  "what_it_buys": "BC-060's integer-relation sweep searched blindly through degree twenty and refused. It had no target. A bound of 15,744 is still far beyond what pslq can reach, so it does not make that search feasible; what it does is replace an unusable bound with a merely large one, and give the next attempt a number computed from the system rather than guessed.",
+  "reproduce": [
+    "uv run --frozen --all-extras --group dev python -m devtools.probe_elimination --emit system.phc --phc",
+    "printf '4\\n0\\nn\\nn\\n' | phc -m system.phc mixvol.out"
+  ],
+  "tracking": {
+    "attempted": true,
+    "engine": "PHCpack 2.4.90 blackbox, 3 threads",
+    "started_at": "2026-08-29T10:38:42Z",
+    "ended_at": "2026-08-29T11:01:23Z",
+    "elapsed_seconds": 1361,
+    "exit_code": 0,
+    "paths": 15744,
+    "finite_solutions_returned": 8327,
+    "path_outcomes": {
+      "complex regular": 7343,
+      "complex singular": 549,
+      "real regular": 236,
+      "real singular": 51,
+      "no solution": 148
+    },
+    "distinct_s_values": {
+      "tolerance_1e-6": 7502,
+      "tolerance_1e-8": 7539
+    },
+    "verdict": "not usable as a degree",
+    "why": "BC-070's kill condition is that a count which cannot account for its own paths is not evidence about a degree, and this one cannot, in three separate ways. Of the 15,744 paths, only 8,327 reach the reported solution list at all; 7,417 do not, which is expected rather than alarming -- the mixed volume is attained only for generic coefficients and this system is structured, so paths diverging to infinity is the normal outcome, but it is not separately accounted here. Of the 8,327 that do arrive, 148 are labelled `no solution`, and 600 are reported singular, where a singular endpoint may be several solutions coincident. The count is recorded because it was made, not because it settles anything, and the degree bound this artifact carries remains the mixed volume.",
+    "paths_not_reaching_the_final_list": 7417
+  },
+  "independent_confirmation": {
+    "what": "The retained s(29) is among the tracked solutions.",
+    "value_found": "5.93383346267693",
+    "imaginary_part": "5.51012976947947e-40",
+    "matches_to_digits": 15,
+    "why_it_matters": "The homotopy shares no code and no method with the Newton refinement that produced the retained pose, and reached this value from a random start system rather than from the published digits. That the two agree is an independent check on the whole export chain -- the half-angle rationalisation, the coefficient clearing, and the emitted text -- by a route that could not have inherited an error from it."
+  },
+  "alternative_formulations_measured": [
+    {
+      "system": "the five equations in five half-angles left after solving f6 for s",
+      "total_degrees": [
+        16,
+        20,
+        15,
+        20,
+        12
+      ],
+      "mixed_volume": 24476,
+      "verdict": "worse",
+      "note": "Substituting s out raises every degree and raises the mixed volume with them, from 15,744 to 24,476. The elimination that costs nothing algebraically is not free geometrically, and the six-equation form is the one to bound from. Measured rather than assumed, because the reduced form is the one BC-065 left and the obvious thing to reach for."
+    }
+  ],
+  "retrack_at_higher_precision": {
+    "commitment": "BC-072",
+    "engine": "PHCpack 2.4.90 blackbox, double-double arithmetic, 3 threads",
+    "started_at": "2026-08-29T11:49:50Z",
+    "ended_at": "2026-08-29T14:29:06Z",
+    "elapsed_seconds": 9556,
+    "exit_code": 0,
+    "paths": 15744,
+    "every_path_labelled": true,
+    "what_changed": "Double precision reported 8,327 endpoints and left 7,417 paths absent from the output entirely. Double-double labels all 15,744. The missing paths were not lost; they were unreported.",
+    "path_outcomes": {
+      "complex regular": 7343,
+      "real regular": 236,
+      "complex singular": 1676,
+      "real singular": 30,
+      "at infinity": 327,
+      "no solution": 6132
+    },
+    "finite_solutions": 9285,
+    "regular_finite_solutions": 7579,
+    "distinct_s_values": {
+      "among regular, tol 1e-6": 7154,
+      "among regular, tol 1e-8": 7167,
+      "among all finite, tol 1e-6": 8288
+    },
+    "verdict": "still not usable as a degree, and for a narrower reason than before",
+    "why": "The labelling is complete, which is what BC-070's refusal turned on, but 6,132 paths are labelled `no solution` without being resolved into divergence or tracking failure. A path that genuinely diverges and a path the tracker lost look the same under that label, so the finite count of 9,285 is a lower bound on what exists rather than the complete set. Reading 8,288 as the degree of the projection would assume every one of those 6,132 diverged.",
+    "what_it_does_suggest": "That the true solution count is well below the mixed volume, which is what a structured system should do -- the BKK bound is attained only for generic coefficients, and 6,459 paths are explicitly divergent or unresolved. It is a suggestion and not a bound, and the rigorous bound remains 15,744.",
+    "independent_confirmation": "The retained s(29) is again among the solutions, and sharper: imaginary part 1.85e-68 against 5.51e-40 at double precision."
+  },
+  "what_it_bounds": "Kingbird's solution -- the packing that source published and this repository retains -- via the closed system the source publishes for it. Every solution of that system has an algebraic side, and the mixed volume bounds how many distinct sides there are. Kingbird's pose is one solution."
+}

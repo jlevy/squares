@@ -1,0 +1,58 @@
+{
+  "assurance": "interval-certified",
+  "bound": "5.93383346267692918974379895098",
+  "ceiling_gap_closed": "5.23371e-5",
+  "certified": true,
+  "claim": "s(29) <= 5.93383346267692918974379895098, by interval certification of a packing relaxed by eps = 1e-20",
+  "claim_boundary": "An upper bound on s(29) at a declared relaxation. Not the optimum, not an optimality result, and not a promotion: verified_upper_bound moves only by a reviewed change through the evidence contract.",
+  "elapsed_seconds": 0.581,
+  "ladder": [
+    {
+      "bound": "5.93383889651039186661865030582",
+      "certified": true,
+      "epsilon": "1e-6",
+      "overlapping_pairs": 0,
+      "undecided_pairs": 0
+    },
+    {
+      "bound": "5.93383346811076265236638980605",
+      "certified": true,
+      "epsilon": "1e-9",
+      "overlapping_pairs": 0,
+      "undecided_pairs": 0
+    },
+    {
+      "bound": "5.93383346268236302315213754555",
+      "certified": true,
+      "epsilon": "1e-12",
+      "overlapping_pairs": 0,
+      "undecided_pairs": 0
+    },
+    {
+      "bound": "5.93383346267693462352292329329",
+      "certified": true,
+      "epsilon": "1e-15",
+      "overlapping_pairs": 0,
+      "undecided_pairs": 0
+    },
+    {
+      "bound": "5.93383346267692918974379895098",
+      "certified": true,
+      "epsilon": "1e-20",
+      "overlapping_pairs": 0,
+      "undecided_pairs": 0
+    }
+  ],
+  "n": 29,
+  "needs_review": true,
+  "pairs_tested": 406,
+  "refinement_residual_bound": "1.05001e-99",
+  "relaxation": "1e-20",
+  "root_box_radius": "3.18862E-62",
+  "root_iterations": 2,
+  "root_operator": "krawczyk",
+  "separated_pairs": 406,
+  "squares": 29,
+  "standing_verified_ceiling": "5.93388579981302587863645209",
+  "working_precision": 80
+}

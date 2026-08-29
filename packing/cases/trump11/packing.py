@@ -38,7 +38,18 @@ def build():
     order; every coordinate is a :class:`~sqpack.field.FieldElement`.
     """
     field = NumberField(U_MIN_POLY, U_INTERVAL)
-    u = field.alpha
+    squares, side = build_in(field, field.alpha)
+    return squares, side, field
+
+
+def build_in(field, u):
+    """The same construction, over any field in which ``u = tan(a/2)`` lives.
+
+    Split out from :func:`build` so the exact round trip can rebuild this packing
+    inside ``Q(s)`` from a recovered ``u`` without a second copy of the closed forms.
+    A second copy would be a second thing to keep correct, and the round trip's whole
+    claim is that it reconstructs *this* packing rather than one that resembles it.
+    """
     K = field.rational
 
     one_plus_u2 = K(1) + u * u
@@ -80,7 +91,7 @@ def build():
         tilted(u1 + K(2), -v2),
     ]
     assert len(squares) == 11
-    return squares, side, field
+    return squares, side
 
 
 def side_satisfies_published_polynomial(side, field) -> bool:

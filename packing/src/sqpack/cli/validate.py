@@ -2,8 +2,13 @@
 
 The command is read-only. Checks run concurrently, but their captured output is
 replayed in the declared order so two runs remain comparable. Use `--fast` while
-editing, `--only TEXT` for one named surface, the default command before a commit, and
-`--strict` before an unattended research session or merge.
+editing, `--records` before a push, `--only TEXT` for one named surface, the default
+command before a commit, and `--strict` before an unattended research session or merge.
+
+`--records` exists because of what breaks. Every CI failure on this branch was a
+registry, generated view, or declared contract going stale, and none was a test; the
+record steps run in about seventy seconds against the fast tier's eight minutes, which
+is what made pushing without them the cheaper-looking move.
 """
 
 from __future__ import annotations
@@ -151,10 +156,16 @@ class Step:
     action: StepAction
     fast: bool = False
     needs_engine: bool = False
+    records: bool = False
+    """Checks the record rather than the mathematics: registries, generated views, and
+    declared contracts. Every CI failure on the 2026-08-29 branch was one of these and
+    none was a test, so they are selectable without paying for the test step (D-369)."""
 
     @property
     def tags(self) -> str:
         tags = ["fast" if self.fast else "full"]
+        if self.records:
+            tags.append("records")
         if self.needs_engine:
             tags.append("engine")
         return ", ".join(tags)
@@ -937,6 +948,10 @@ def _readme(context: Context) -> str:
     return _module(context, "devtools.check_readme")
 
 
+def _operating_rules(context: Context) -> str:
+    return _module(context, "devtools.render_operating_rules", "--check")
+
+
 def _differential(context: Context) -> str:
     if not ENGINE.is_file():
         raise StepSkippedError(
@@ -1062,7 +1077,7 @@ def _campaign_record(context: Context) -> str:
 
 STEPS: tuple[Step, ...] = (
     Step("soundness perimeter", _soundness_perimeter, needs_engine=True),
-    Step("lint floor (python)", _python_quality, fast=True),
+    Step("lint floor (python)", _python_quality, fast=True, records=True),
     Step("basin atlas", _basin_atlas),
     Step("basin event record and replay", _basin_events),
     Step("historical regressions", _historical_regressions),
@@ -1076,10 +1091,10 @@ STEPS: tuple[Step, ...] = (
     Step("fixed-angle cell is an LP, rebuilt independently", _independent_lp),
     Step("fast behavioral tests", _fast_tests, fast=True),
     Step("exhaustive exact behavioral tests", _exhaustive_exact_tests),
-    Step("bead tree", _bead_tree, fast=True),
+    Step("bead tree", _bead_tree, fast=True, records=True),
     Step("golden basin maps (proved cases, checked against mathematics)", _golden_basins),
     Step("basin identity", _canonical_identity),
-    Step("soft-schema validation", _schemas, fast=True),
+    Step("soft-schema validation", _schemas, fast=True, records=True),
     Step("derivation (needs sympy)", _derivation, fast=True),
     Step("search engine (sqsearch)", _search_engine, needs_engine=True),
     Step("lint floor (rust)", _rust_quality),
@@ -1090,15 +1105,18 @@ STEPS: tuple[Step, ...] = (
     Step("verifier perturbation limits", _verifier_limits, fast=True),
     Step("frontier corpus", _frontier_corpus),
     Step("frontier rigidity assessed here", _frontier_rigidity, fast=True),
-    Step("generated tables in sync with frontier/", _generated_tables, fast=True),
-    Step("strategy catalogues", _strategy_catalogues, fast=True),
-    Step("defect log", _defect_log, fast=True),
-    Step("skills mirrored between .agents and .claude", _skills_mirrored, fast=True),
-    Step("synopsis agrees with the artifacts", _synopsis, fast=True),
-    Step("README agrees with the directory", _readme, fast=True),
+    Step("generated tables in sync with frontier/", _generated_tables, fast=True, records=True),
+    Step("strategy catalogues", _strategy_catalogues, fast=True, records=True),
+    Step("defect log", _defect_log, fast=True, records=True),
+    Step(
+        "skills mirrored between .agents and .claude", _skills_mirrored, fast=True, records=True
+    ),
+    Step("synopsis agrees with the artifacts", _synopsis, fast=True, records=True),
+    Step("README agrees with the directory", _readme, fast=True, records=True),
+    Step("AGENTS.md mirrors the operating rules", _operating_rules, fast=True, records=True),
     Step("differential: search energy vs validity oracle", _differential, needs_engine=True),
     Step("provenance: recorded commits are reachable", _provenance, fast=True),
-    Step("campaign record", _campaign_record, fast=True),
+    Step("campaign record", _campaign_record, fast=True, records=True),
 )
 
 
@@ -1131,8 +1149,10 @@ def _environment_flag(name: str) -> bool:
     return value == "1"
 
 
-def _select_steps(*, only: list[str], fast: bool) -> list[Step]:
+def _select_steps(*, only: list[str], fast: bool, records: bool = False) -> list[Step]:
     selected = [step for step in STEPS if not fast or step.fast]
+    if records:
+        selected = [step for step in selected if step.records]
     if only:
         selected = [step for step in selected if any(pattern in step.name for pattern in only)]
     if not selected:
@@ -1284,7 +1304,7 @@ def _render_text(summary: RunSummary, *, strict: bool) -> int:
             return _summary_status(summary, strict=strict)
     if summary.selected_count != summary.total_count:
         qualifier = (
-            f"--only {summary.partial_pattern!r}" if summary.partial_pattern else "--fast"
+            f"--only {summary.partial_pattern!r}" if summary.partial_pattern else "a named tier"
         )
         print(
             f"{summary.selected_count} of {summary.total_count} STEPS PASSED "
@@ -1302,6 +1322,11 @@ def _parser() -> ArgumentParser:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("--fast", action="store_true", help="run the fast edit-loop checks")
+    parser.add_argument(
+        "--records",
+        action="store_true",
+        help="run only the record checks: registries, generated views, declared contracts",
+    )
     parser.add_argument(
         "--only",
         action="append",
@@ -1337,9 +1362,11 @@ def _parser() -> ArgumentParser:
     return parser
 
 
-def _validate_invocation(*, strict: bool, only: list[str], fast: bool) -> None:
-    if strict and (only or fast):
-        raise UsageError("--strict cannot be combined with --only or --fast")
+def _validate_invocation(
+    *, strict: bool, only: list[str], fast: bool, records: bool = False
+) -> None:
+    if strict and (only or fast or records):
+        raise UsageError("--strict cannot be combined with --only, --fast, or --records")
 
 
 def _validate_runtime() -> None:
@@ -1354,7 +1381,12 @@ def main(arguments: list[str] | None = None) -> int:
         namespace = parser.parse_args(arguments)
         strict = namespace.strict or _environment_flag("PACKING_VALIDATE_STRICT")
         deep = namespace.deep or _environment_flag("PACKING_VALIDATE_DEEP") or strict
-        _validate_invocation(strict=strict, only=namespace.only, fast=namespace.fast)
+        _validate_invocation(
+            strict=strict,
+            only=namespace.only,
+            fast=namespace.fast,
+            records=namespace.records,
+        )
         jobs_value = namespace.jobs or os.environ.get("PACKING_VALIDATE_JOBS")
         jobs = (
             _positive_integer("--jobs", jobs_value)
@@ -1380,7 +1412,9 @@ def main(arguments: list[str] | None = None) -> int:
         )
         _validate_runtime()
         require_project_root(PROJECT_ROOT)
-        selected = _select_steps(only=namespace.only, fast=namespace.fast)
+        selected = _select_steps(
+            only=namespace.only, fast=namespace.fast, records=namespace.records
+        )
         if namespace.list:
             records = [{"name": step.name, "tags": step.tags} for step in selected]
             if namespace.format == "json":

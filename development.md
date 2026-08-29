@@ -230,6 +230,56 @@ Durable documentation follows the common documentation guidelines and carries th
 footer. Run the repository hook or `make format`; do not introduce a second Markdown
 formatter.
 
+### Probing the promotion pipeline
+
+**Reach for these before writing a one-off script.** Both exist because a finding that
+overturned something in the record was first made in a throwaway probe, which is the
+wrong place for a measurement the next reader has to be able to replay.
+
+```shell
+uv run --frozen --all-extras --group dev python -m devtools.probe_contact_system
+uv run --frozen --all-extras --group dev python -m devtools.probe_contact_system --case trump11 --walk
+uv run --frozen --all-extras --group dev python -m devtools.probe_minimal_polynomial --case trump11
+uv run --frozen --all-extras --group dev python -m devtools.probe_system_degree --eliminate-side
+```
+
+[`probe_contact_system`](packing/devtools/probe_contact_system.py) reports, per retained
+case, what the assembled contact system determines: the typing, the equations against
+the unknowns, the Jacobian’s rank and the gap that verdict rests on, the residual at the
+pose, `side_leak`, and what `close` does — where `close` supplies conditions, the rank
+and residual are re-measured on the closed system, so “it closed” is a measurement
+rather than a count of conditions.
+`--walk` steps a direction the equations leave free and reads the violation’s **order in
+`t`** — `O(t²)` is an ordinary second-order obstruction, `O(t)` means an equation is not
+describing its constraint.
+That distinction is the whole of `D-361`. Which direction it walked is printed, because
+there are two: the steepest side-changing one where the null space contains such a
+direction, and the free direction itself where it does not, as at Göbel’s `n = 5`.
+
+[`probe_minimal_polynomial`](packing/devtools/probe_minimal_polynomial.py) runs the
+integer-relation search under the promotion spec’s frozen margin rule and reports which
+clause decided each degree.
+It sweeps to the degree the digits reach rather than to a fixed ceiling.
+Clause 3 read backwards at the search’s own coefficient bound puts that at **degree 35**
+for the `n = 29` refinement at a thousand digits, where the flag used to stop at twenty
+for no reason but the default; `--max-degree` still stops it earlier, which is usually
+what you want, because the cost is almost all `pslq` and it climbs steeply with the
+degree.
+
+[`probe_system_degree`](packing/devtools/probe_system_degree.py) rationalises the
+`n = 29` system by the half-angle substitution and reports what bounds the algebraic
+degree of the Kingbird solution, which is what says whether an integer-relation refusal
+at a given degree surveyed the space or a corner of it.
+`--eliminate-side` also solves the smallest equation for `s` and reports the
+five-unknown system that leaves.
+The `n = 29` sweep takes about twelve minutes, which is why it is a tool with a recorded
+result rather than a test.
+
+Both pin their working precision per case and print it beside the number it bounds.
+That is not decoration: a rank verdict is a judgement about a gap between singular
+values, and at mpmath’s ambient default the gap a probe can *see* is many decades
+narrower than the truth, with nothing in the output to say so.
+
 ## Safe Refactoring
 
 Use red-green-refactor for a behavior change and characterize intended behavior before a

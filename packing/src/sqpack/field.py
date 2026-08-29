@@ -474,6 +474,17 @@ class NumberField:
         while self._hi - self._lo > target:
             self._bisect()
 
+    def enclose(self, e: FieldElement) -> tuple[Rat, Rat]:
+        """Rigorous rational enclosure of `e`, at the current refinement.
+
+        Public for the same reason as :meth:`root_bounds`: a caller bridging exact
+        field arithmetic into interval arithmetic legitimately needs an enclosure of an
+        *element*, not only of the root, and reaching into the private evaluator to get
+        one couples it to how refinement is stored.  Call :meth:`refine_to` first if a
+        tighter enclosure is wanted; this never widens one.
+        """
+        return self._enclose(e.coeffs)
+
     def root_bounds(self) -> tuple[Rat, Rat]:
         """
         The current rigorous enclosure `(lo, hi)` of the field's root.
@@ -497,13 +508,20 @@ class NumberField:
     def decimal(self, e: FieldElement, digits: int = 30) -> str:
         """Decimal digits of `e` that are certain, from a rigorous enclosure."""
         self.refine_to(digits + 8)
-        decimal.getcontext().prec = digits + 20
         lo, hi = self._enclose(e.coeffs)
 
         def as_dec(q: Rat) -> decimal.Decimal:
             return decimal.Decimal(q.numerator) / decimal.Decimal(q.denominator)
 
-        slo, shi = str(+as_dec(lo)), str(+as_dec(hi))
+        # `decimal` keeps precision in a THREAD-GLOBAL context, so setting it here
+        # without restoring it would silently rewiden every unrelated Decimal in the
+        # process. It did: one refinement at 30 digits left the context at 50, and the
+        # atlas renderer -- which computes its coordinates in Decimal -- then emitted
+        # different SVG bytes depending on whether a test had refined a field first
+        # (D-359). The working precision is this method's business alone.
+        with decimal.localcontext() as context:
+            context.prec = digits + 20
+            slo, shi = str(+as_dec(lo)), str(+as_dec(hi))
         shared = 0
         for x, y in zip(slo, shi, strict=False):
             if x != y:

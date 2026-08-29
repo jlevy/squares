@@ -80,6 +80,7 @@ properties:
               - efficiency-loop
               - research-loop
               - pipeline-improvement
+              - documentation-pass
               - general-improvement
           description: >-
             Optional: the workflow entry points this commitment expects to run through.

@@ -18,15 +18,22 @@ actions rather than telling them to run commands.
 
 <!-- END TBD INTEGRATION -->
 
-## Starting Research Work
+## Operating Rules
 
-The entry point for the next research loops is the synopsis’s
-[current handoff](SYNOPSIS.md#current-handoff): it names the active agenda, the exact
-next bounded slice, and the owning bead.
-The active agenda’s session queue owns priority ordering.
-`tbd ready` includes the historical backlog and is an input to a coordinator checkpoint,
-not the queue itself — do not pick work from it directly when a handoff and agenda
-exist.
+Generated from [`operating-rules.md`](operating-rules.md), which carries the evidence
+for each rule. Edit there, not here.
+
+<!-- BEGIN OPERATING RULES SUMMARY -->
+
+- **OR-1:** Build the tool; never leave a measurement in one-off code.
+- **OR-2:** Run three to five sub-agents, at a thinking level matched to the task.
+- **OR-3:** Never wait on a gate with nothing else in flight.
+- **OR-4:** Take the next slice from the handoff, not from the backlog.
+- **OR-5:** Declare the workflow entry point before beginning.
+- **OR-6:** Plan multi-hour work in slices before starting it.
+- **OR-7:** Run the documentation guidelines pass at block boundaries.
+
+<!-- END OPERATING RULES SUMMARY -->
 
 ## Build & Test
 
@@ -128,26 +135,9 @@ packing, live in [jlevy/thinking](https://github.com/jlevy/thinking).
 - **Reports separate claims by evidential status** — proved, computationally verified,
   best known, or asserted-but-unverified — and cite primary sources near the claims they
   support.
-- **Independently tracked packing work declares its entry point.** The coordinating
-  agent chooses W1–W7 (or `general-improvement` only for genuine repository maintenance
-  outside those workflows) from [`README.md`](README.md#workflow-entry-points) before
-  beginning a session or a genuine workflow phase.
-  Bounded delegated work such as formatting, lint repair, extraction, or repeated checks
-  inherits the parent phase unless it opens its own independently tracked session.
-  Longer sessions record workflow and primary-focus changes as ordered phases;
-  [`SYNOPSIS.md`](SYNOPSIS.md#workflow-entry-contracts) owns the full contracts.
-- **Multi-hour packing work starts with a time-sliced plan.** Follow the
-  [bounded research cycle](packing/campaign/README.md#the-bounded-research-cycle) and
-  the
-  [portable session guide](packing/campaign/agent-sessions/README.md#starting-a-portable-four-hour-session).
-  Unless the user sets another cadence, target a coherent integration checkpoint within
-  about four hours and cap each slice at 30 minutes.
-  Thirty minutes is a ceiling and review point, not a quota: close a smaller process,
-  review, efficiency, or implementation slice as soon as its bounded output is complete.
-  At every boundary, compare measured command, coordinator, and sub-agent time with the
-  remaining plan and replan only future slices.
-  Use available sub-agents for independent read-only or disjoint-write work; the
-  coordinating agent owns shared records, integration, commits, and external updates.
+- **How work is conducted is not in this file.** Workflow entry points, session slicing,
+  sub-agent use, and the rest are [`operating-rules.md`](operating-rules.md); the
+  summary above is the whole of what belongs here.
 - **Archived source material is never edited to look tidy.** Where a transcription
   reconstructs damaged text, it is flagged inline and counted in the archive README.
 

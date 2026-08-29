@@ -421,11 +421,27 @@ def test_invalid_worker_count_and_unmatched_selection_are_actionable() -> None:
     assert "packing-validate --list" in stderr
 
 
-def test_strict_mode_refuses_a_partial_validation_surface() -> None:
-    status, _, stderr = _invoke("--strict", "--only", "fast behavioral tests")
+@pytest.mark.parametrize(
+    "narrowing", [("--only", "fast behavioral tests"), ("--fast",), ("--records",)]
+)
+def test_strict_mode_refuses_a_partial_validation_surface(narrowing: tuple[str, ...]) -> None:
+    status, _, stderr = _invoke("--strict", *narrowing)
 
     assert status == 2
-    assert "--strict cannot be combined with --only or --fast" in stderr
+    assert "--strict cannot be combined with --only, --fast, or --records" in stderr
+
+
+def test_the_records_tier_selects_every_record_check_and_no_test() -> None:
+    selected = validate._select_steps(only=[], fast=False, records=True)
+
+    assert [step.name for step in selected] == [
+        step.name for step in validate.STEPS if step.records
+    ]
+    # The tier exists because record drift is what breaks CI and the test step is what
+    # makes the fast tier too expensive to run before every push (D-369). A test step
+    # tagged into it would put the cost straight back.
+    assert "fast behavioral tests" not in {step.name for step in selected}
+    assert all(step.fast for step in selected)
 
 
 def test_strict_mode_enables_deep_validation(monkeypatch: pytest.MonkeyPatch) -> None:

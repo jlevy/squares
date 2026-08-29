@@ -70,7 +70,7 @@ atlas, ambiguity graph, discovery curve, and continuation tree, while the resear
 decides which views expose mechanisms rather than decorate a report.
 
 A focus is a quality dimension, not a workflow.
-Before taking work, choose W1–W7 from the
+Before taking work, choose W1–W8 from the
 [workflow entry contracts](../../../../SYNOPSIS.md#workflow-entry-contracts), then
 declare the primary focus inside that phase.
 A focus-only change starts another phase under the same workflow; a changed purpose
@@ -79,7 +79,7 @@ W7, `pipeline-improvement`, owns reusable packing-pipeline capabilities, targete
 refactors, robustness, visualization infrastructure, and cleanup for named research
 consumers. W6 retains only instruments specific to one registered round that freeze
 before measurement. `general-improvement` is only for genuine repository maintenance
-outside W1–W7 and the packing pipeline.
+outside W1–W8 and the packing pipeline.
 
 ## Measured checkpoint — 2026-08-24
 
@@ -334,20 +334,36 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 035](../../../../packing/campaign/agent-sessions/session-035-agenda005-block-a.md).
-Sessions 027 through 034 are terminal, and agenda-004 closed on measurement rather than
-opinion. Open BC-045 under `think-75ll` as the next bounded driver, built to
-[plan-2026-08-28-interval-certification](plan-2026-08-28-interval-certification.md):
-phases 1 and 2 first, the interval arithmetic and the Krawczyk operator, then the layout
-map and interval verification.
-Session 035 is terminal and closed agenda-005 block A, so precision is now manufactured
-in-repository and the `n = 29` contact structure is frozen with its 89 incidences and
-its measured separation; neither remains a prerequisite.
+[session 043](../../../../packing/campaign/agent-sessions/session-043-block9-degree-bound.md).
+Sessions 027 through 043 are terminal, and agenda-004 closed on measurement rather than
+opinion. Open BC-066 under `think-obgk` as the next bounded driver: eliminate the five
+equations in five half-angles that the rationalised `n = 29` system leaves, inside a
+declared wall-clock cap, and record whatever the chain reaches.
+It runs first because it is the only remaining block that can change what this run
+concludes about `n = 29` — a refusal there is the measured justification for the
+interval route carrying that bound, and every block after it improves the pipeline
+instead. The ordering through block 18 is
+[agenda-006’s continuation schedule](../../../../packing/campaign/agendas/agenda-006-overnight-research-blocks.md#the-continuation-schedule),
+and
+[run-002](../../../../packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md#where-to-resume)
+carries what a fresh agent needs that the diff does not show.
+The middle layers behind it are built: a pose is a centre, an angle and a chirality; an
+edge-edge contact pins collinearity; the contact system reaches full rank at both
+retained sizes; and the margin rule recovers Trump’s published polynomial at `n = 11`
+while returning nothing at `n = 29` through degree twenty.
+Sessions 035 through 037 are terminal and closed agenda-005 block A together with
+`BC-045`, so precision is manufactured in-repository, the `n = 29` contact structure is
+frozen with its 89 incidences, and the interval route is built, calibrated and run: it
+certifies `s(29) <= 5.93383346267692918974379895098` at a declared relaxation of
+`1e-20`, retained `unresolved` with `needs_review: true` and promoting nothing.
+None of those remains a prerequisite.
 The witness contract already names `interval-certified` among the methods that may carry
-`verified`, so the socket exists and only the checker is missing, because `exact_verify`
-still raises `checker-not-built`. Uniqueness is the load-bearing verdict: check that the
-operator’s image lies in the *interior* of the box, because containment alone does not
-give it, and a box holding two roots does not identify which pose was certified.
+`verified`, and the checker now exists, but no witness branch has been written: so
+`exact_verify` still raises `checker-not-built` and the certificate above is retained as
+a result rather than emitted as a witness.
+Uniqueness is the load-bearing verdict: check that the operator’s image lies in the
+*interior* of the box, because containment alone does not give it, and a box holding two
+roots does not identify which pose was certified.
 Prove the operator refuses on the two-root and no-root controls before pointing it at
 anything, and do not treat a refinement as an algebraic claim.
 The measured W5 inventory and the row-jet inventory reuse remain scheduled after that

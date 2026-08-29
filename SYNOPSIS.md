@@ -143,6 +143,7 @@ case or experiment separately.
 | [Prospective Packing Atlas, `n = 101..324`](packing/atlas/prospective/README.md) | component scope and use | supporting | maintained | — |
 | [Deterministic SVG Gallery](packing/atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
 | [Conventions for `packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
+| [Operating Rules](operating-rules.md) | how a session is conducted | definitive | maintained | — |
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign — W6 Runbook](packing/campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
 | [Agent Sessions](packing/campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
@@ -242,6 +243,7 @@ routine task.
 | W5 | `efficiency-loop` | A measured baseline, profile, target metric, and equivalence or validity guard | Improve time, cost, or throughput under the same regime; never relax correctness or provenance to win | Benchmark record, change or rejection, measured delta, and preserved guards | W6 when the research bottleneck moves; W4 if the process contract is wrong |
 | W6 | `research-loop` | A registered hypothesis, fixed criterion, regime, budget, stop rule, and instrument contract | Build or repair the bounded instrument, freeze it before measurement, then use creative effort inside the registered scope to execute the smallest fair test; never change the criterion, suppress a failure, or improvise a replacement hypothesis mid-round | Frozen instrument, `exp-NNN`, raw data or proof record, verdict, regenerated views, and the next bounded question | W2 before promoted or high-risk claims; otherwise W3 or another W6 slice |
 | W7 | `pipeline-improvement` | Named packing-research consumers, the smallest reusable capability or cleanup they need, controls or an independent oracle, a budget, and expected comparability impact | Add, strengthen, simplify, or repair only the bounded packing pipeline surface; do not collect a target verdict while it is mutable, optimize an unchanged implementation without a W5 baseline, or generalize beyond named consumers | Code, entry point or refactor; replayable positive and negative controls; exact validation command; cost and complexity receipt; evidence limits; and a readiness or retained-blocker decision | W2 before a new or materially changed trust boundary reaches W6; W5 if measured throughput remains the blocker; otherwise W6 |
+| W8 | `documentation-pass` | A period of research that closed several commitments, the artifacts it left, and the reader-facing documents that have not caught up | Reconcile the root tier — README, tutorial, synopsis, and the conventions they cite — against the artifacts and against each other; correct, cut, reorder and clarify, but never introduce a claim the record does not already carry, and never soften a claim boundary to make a document read better | A checklist run over each root document, every drift either fixed or filed as a defect, generated views regenerated, and an explicit statement of what was checked and what was left | W2 for any claim the pass could not verify against an artifact; otherwise the next owning workflow |
 
 Implementation is an action inside the workflow that owns its promised result, not an
 undefined handoff: W1 and W2 can make bounded research corrections, W3 can implement a
@@ -250,8 +252,21 @@ experiment budget, W4 can make a narrow accepted process correction, W5 can impl
 measured optimization, and W6 can build a one-round instrument that freezes before
 measurement. W7 owns reusable packing-pipeline capabilities, targeted refactors,
 robustness, visualization infrastructure, and cleanup for named consumers.
+W8 owns the reader-facing tier when research has moved past it, and it is a
+*reconciliation* workflow rather than an authoring one — its edits answer to the record,
+not to taste. Two boundaries make that real.
+It may not introduce a claim the artifacts do not already carry: a document that wants
+to say something new is asking for W1 or W6, not for a documentation pass.
+And it may not resolve a disagreement by choosing the more readable side — where a
+document and an artifact conflict and the artifact is not obviously right, the output is
+a defect, because a documentation pass that quietly picks a winner is how a wrong claim
+becomes the tidy one.
+Schedule it after a run that closed several commitments rather than continuously; the
+documents are meant to trail the record slightly, and a pass with nothing to reconcile
+is a pass that should not have been opened.
+
 `general-improvement` remains only for repository maintenance outside the packing
-pipeline whose output fits none of W1–W7. It must not hide core work or a session
+pipeline whose output fits none of W1–W8. It must not hide core work or a session
 alternating among research, review, and infrastructure; those are separate phases.
 
 ### Switching Workflows in One Session
@@ -310,9 +325,160 @@ bound of `1.09829e-1039` — and the `n = 29` contact structure is frozen with 8
 incidences, six orientation classes, an empty ambiguity report and `97.5013` decades of
 separation, with the same extractor reproducing the known `n = 11` structure exactly
 under exact arithmetic.
-The next slice is **block B: `BC-045` under `think-75ll`**, phases 1 and 2 of
-[plan-2026-08-28-interval-certification](docs/project/specs/active/plan-2026-08-28-interval-certification.md);
-block C is phases 3 and 4 of the same spec.
+`BC-045` is now closed at all four phases, in
+[session 036](packing/campaign/agent-sessions/session-036-block1-interval-operator.md)
+and
+[session 037](packing/campaign/agent-sessions/session-037-block2-interval-calibration.md),
+under [agenda-006](packing/campaign/agendas/agenda-006-overnight-research-blocks.md).
+The interval route is built, calibrated against `n = 5`, `n = 10` and `n = 11`, and run
+at `n = 29`, where it certifies `s(29) <= 5.93383346267692918974379895098` at a declared
+relaxation of `1e-20`. That certificate is retained `unresolved` with
+`needs_review: true` and promotes nothing: it sits `5.23371e-5` below the standing
+verified ceiling, and whether it moves `verified_upper_bound` is a reviewed human
+decision through the evidence contract.
+`BC-054` is closed in
+[session 038](packing/campaign/agent-sessions/session-038-block3-contact-assembly.md):
+contacts now identify which features meet, and assembly turns a structure into equations
+that vanish at the packing they came from.
+Three findings there went against the promotion spec — counting rows cannot say whether
+a system determines the pose, an angle class does not license an angle identity, and
+seven of the `n = 29` squares are reflected and refused by name.
+The rank half of the first was later found to be measuring a bug rather than the
+packings: see the `BC-059` paragraph below and [D-361](defects.md).
+`BC-056` closed that first stretch, and the run then resumed rather than ending: a
+review of the commit timestamps showed it had misread its own clock and stopped with
+most of its budget unspent ([D-358](defects.md)). `BC-057` is closed in
+[session 039](packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md),
+which built the interval checker and recorded the `n = 29` certificate as evidence
+without promoting it.
+`BC-058` is closed in
+[session 040](packing/campaign/agent-sessions/session-040-block6-chirality.md): a pose
+is now a centre, an angle **and** a chirality, so the reflected squares are assembled
+rather than refused and the `n = 29` residual falls from `2.0` to `1.3e-15` with the
+`n = 11` calibration unmoved.
+The feature-renaming cost that commitment was written to weigh was not paid — reflecting
+the local axis leaves the corner indices alone.
+`BC-059` is closed in
+[session 041](packing/campaign/agent-sessions/session-041-block7-collinearity.md), and
+the answer was that there were no stationarity conditions to derive.
+The shortfall `close` had been reporting — four at `n = 11`, seven at `n = 29` — was a
+bug in assembly rather than a property of the packings: an `edge-edge` contact was
+written as one equation where collinearity in the plane is two, which left one square
+free to pivot about the shared point and drive its neighbour open at first order.
+With both endpoints of the edge on the line the contact Jacobian reaches **full rank at
+both sizes** — `34` of `34` at `n = 11` and `88` of `88` at `n = 29` — residuals unmoved
+at `8.9e-16` and `1.3e-15`, and `close` now refuses at both.
+It is [D-361](defects.md), class `soundness`, direction `conservative`: it made the
+pipeline look further from a solvable system than it was.
+Göbel’s `n = 5` has no `edge-edge` contact, is untouched by the repair, and kept a
+genuine shortfall of one.
+`BC-069` closes it, and the answer corrects the form the pipeline had been promising.
+The condition is not first-order: `side_leak` reads `1.00e-16` there, so “no admissible
+motion decreases the side” is already true and adds a dependent row.
+The single free direction is a rotation of the centre square about its own centre, and
+the contacts fail along it at `−0.25 t²` in both signs — an ordinary second-order
+obstruction, so the pose is infinitesimally flexible and second-order rigid, and the
+shortfall is a degenerate root rather than an unpinned optimum.
+Differentiating the contact map along that direction takes the rank to **16 of 16** with
+the residual unmoved at `1.11e-16`, and each emitted condition expands to exactly the
+statement that the contacting corner sits at the **midpoint of the contacted edge** — an
+identity of the corner-edge contact type, checked against a midpoint expression written
+independently of the derivative.
+Both determined sizes are unmoved.
+The misnaming is [D-363](defects.md).
+`BC-060` is closed in
+[session 042](packing/campaign/agent-sessions/session-042-block8-exact-solve.md), with
+one answer and one refusal.
+At `n = 11` the promotion spec’s frozen margin rule recovers Trump’s published
+degree-eight minimal polynomial from digits alone — `C = 12420`, `B = 36.85`, `M = 200`,
+a relative residual of `4.99e-338` at `B + M` still falling to `3.38e-412` at `2B + 2M`
+— and discharges it as irreducible over `Q` with an isolating interval containing the
+refined value. At `n = 29`, on a thousand digits with a reported residual bound of
+`1.09829e-1039`, `pslq` returns **nothing at any degree from 2 through 20** below a
+coefficient bound of `10^22`: not one degree reached a clause.
+The contrast is the finding, because the planning probe on the ~98 serialized digits got
+relations at almost every degree from 8 to 21. A search that answers when under-fed and
+falls silent when fed properly is evidence about the number, and what it bounds is
+concrete: if the Kingbird solution has degree twenty or less, some coefficient of its
+minimal polynomial is at least `10^22`. That is the measured reason the interval route
+carries the `n = 29` bound.
+`BC-065` is closed in
+[session 043](packing/campaign/agent-sessions/session-043-block9-degree-bound.md), and
+it says how to read that refusal.
+Under `u = tan(θ/2)` the published system rationalises over `Q` into six polynomials
+with total degrees `[11, 15, 10, 15, 7, 6]`, so the Bézout bound on the solution variety
+is `1,039,500`: **degree twenty surveyed a corner of the space, not the space.** Every
+equation is degree one in `s`, and solving the smallest for it gives `s` as a rational
+function of two half-angles alone, leaving five equations in five unknowns.
+Eliminating those is where the exact-algebraic route either succeeds or is shown to be
+out of reach at `n = 29`, and it is left to its own budget on `think-obgk`. The bound
+reads as “not small” rather than “this large” — Bézout is loose for a structured system.
+The next slice is **`BC-066` under `think-obgk`** — eliminate the five equations in five
+half-angles that `BC-065` left, inside a declared cap, because it is the only remaining
+block that can change what this run concludes about `n = 29`. `BC-061`, `BC-069`,
+`BC-067`, `BC-068`, `BC-062` and `BC-063` follow, with `BC-064` reserved and last; the
+ordering and its reasons are the
+[continuation schedule](packing/campaign/agendas/agenda-006-overnight-research-blocks.md#the-continuation-schedule),
+and
+[run-002](packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md#where-to-resume)
+carries what a fresh agent needs that the diff does not show.
+[Session 044](packing/campaign/agent-sessions/session-044-agenda006-continuation.md) is
+terminal, and closed eleven commitments.
+
+**The next slice is `BC-074` under `think-eb29`, and it is a `documentation-pass`.**
+That workflow — W8 — is new, added because this run demonstrated the gap it fills: the
+record moved a long way in a day while the front door did not move at all, and nothing
+in the gate noticed.
+`check_synopsis` binds this document to the artifacts; there is no equivalent for
+[`README.md`](README.md) or [`TUTORIAL.md`](TUTORIAL.md), so they drift silently.
+Its checklist is [conventions §12](conventions.md#12-the-w8-documentation-checklist),
+and its one hard rule is that it reconciles rather than authors: a claim the record does
+not already carry is not a documentation change, and a disagreement the artifacts cannot
+settle is a defect rather than a rewrite.
+[D-367](defects.md) is what the alternative looks like.
+
+`BC-066` attempted the elimination and reached **a measured wall rather than an
+eliminant**, which is the exit that commitment names.
+Three `msolve` runs on the six-equation system: over `Q` in an elimination order, F4 was
+OOM-killed at degree 32 after 25m09s with `13.8 GB` resident, having completed degree 31
+on a `656126 × 1670545` matrix; mod `1073741827` in the same order the matrix dimensions
+were identical degree for degree; and mod the same prime in plain grevlex — an order of
+magnitude cheaper per matrix — the pair list still grew monotonically to 21,661 with no
+basis inside a declared 25-minute cap.
+**Neither predicted failure mode is what stopped it.** Coefficients cannot swell over
+`F_p`, and the cheapest monomial order did not terminate either, so what the runs
+measure is the size of the ideal rather than the arithmetic carried through it.
+The claim is narrower than “out of reach”: two threads and 15 GB is not a proof of
+intractability.
+What it establishes is that the interval route carries the `n = 29` bound
+for a measured reason, and that the next thing to try is a smaller question rather than
+a bigger computer.
+
+That is `BC-070`, and its first half has landed.
+Homotopy continuation needs no basis at all, and the mixed volume of the Newton
+polytopes bounds the isolated solutions at **`15,744`** — sixty-six times tighter than
+the Bézout bound of `1,039,500`, computed in nine seconds.
+The stable mixed volume is equal to it, so the bound covers every isolated solution
+rather than only those in the torus.
+So **the Kingbird solution has algebraic degree at most `15,744`**. Kingbird’s, not
+`s(29)`'s: `s(29)` is the optimum, Kingbird’s packing is the best known and is not
+proved optimal, and the bound gap there is about `0.46`. That is still far beyond what
+an integer-relation search can reach, and saying otherwise would overstate it: what it
+replaces is an unusable bound with a merely large one, computed from the system rather
+than guessed.
+
+`BC-067` closed the exact route’s loop at `n = 11`, where the answer is published.
+`discharge` stops at the side, which is a claim about a *number*; the round trip carries
+it back to a claim about a *packing* — eleven squares, fourteen touching pairs, valid
+under `exact_sign`, and the reconstructed side equal to the field generator **exactly**.
+The obstacle is real and `n = 11` is where it is avoidable: a pose unknown `t_i` is an
+angle and has no representation in `Q(s)` at all, but Trump’s construction is already
+over `Q(u)` with `u = tan(a/2)`, so the question reduces to recovering `u` from `s`.
+That recovery is a derivation rather than a search — `Q(s) = Q(u)`, both degree eight,
+so writing each `s^i` in the power basis of `Q(u)` gives a square rational system with
+one solution, and a singular one is refused rather than fitted.
+The continuation runs the missing middle layers first, with the efficiency and research
+cells deliberately last.
 The full ordering for the sessions after it — including which of the two `priority: 0`
 commitments goes first and why — is the
 [session queue](packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md#the-session-queue),
@@ -340,9 +506,13 @@ is stronger but of uncertain feasibility — a completed sweep found no integer 
 through degree twenty with coefficients below `10^22` — while `BC-045` needs no
 polynomial at all. The robust route was the one with no specification, so that
 specification now exists.
-The witness contract already names `interval-certified` as a method that may carry
-`verified`; only the checker is missing, and `exact_verify` still raises
-`checker-not-built`.
+The witness contract already named `interval-certified` as a method that may carry
+`verified`, and the checker is now built: `scalar.kind` gains `interval-enclosure`,
+`exact_verify` replays an interval witness instead of raising `checker-not-built`, and
+the `n = 29` certificate is retained as
+[`kingbird-n029-2026-interval`](packing/witnesses/kingbird-n029-2026-interval.yaml)
+under [`E-n029-interval-certified-upper`](packing/frontier/evidence.yaml).
+Recording is not promotion: `verified_upper_bound` has not moved to it.
 
 The standing rule is unchanged and applies to every block: an unattended runner may
 apply the accept rule only conservatively.
@@ -642,8 +812,11 @@ near a numerical root.
 An interval-Newton or Krawczyk checker is a buildable direction for suitable systems,
 but contact ambiguity, singularity, and ill-conditioning can make promotion
 mathematically contingent.
-The interval strategy therefore returns `checker-not-built` today rather than promising
-a conversion that may not exist.
+The interval strategy is now built and replayable, and those contingencies are reported
+rather than assumed away: the operator returns `exists` and `unique` separately, and
+nothing may be promoted from `exists` alone.
+At `n = 29` the Jacobian turned out well-conditioned enough to contract in two
+iterations, which was an open question rather than a given.
 
 Exp-033 remains a distinct dedicated result: it bound two retained `n = 5` float poses
 to exact endpoints on one certified fixed-angle optimal face and supplied an exact dual
@@ -2186,24 +2359,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 355 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 369 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 85 | asserted something false about the mathematics |
-| validity | 84 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 136 | recorded something its own evidence contradicts |
-| robustness | 39 | did not finish, or finished only by luck |
-| performance | 11 | worked, but cost far more than it should |
+| soundness | 88 | asserted something false about the mathematics |
+| validity | 87 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 137 | recorded something its own evidence contradicts |
+| robustness | 43 | did not finish, or finished only by luck |
+| performance | 14 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Sixty-seven of the eighty-five soundness defects pointed in the *flattering*
+**Sixty-nine of the eighty-eight soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-five defects in 355, and no soundness defect
+**The automated gate has caught forty-eight defects in 369, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2213,7 +2386,67 @@ test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
-The gate’s cost is itself a logged defect.
+The record can also be wrong about itself, and [D-358](defects.md) is this run being so:
+an unattended run declared blocks of 150, 180, 180 and 40 minutes and took 31, 42, 29
+and 23, because it estimated elapsed time between tool calls instead of reading a clock.
+The bookkeeping was the smaller half.
+The misreading also supplied a *reason* for stopping early -- that later blocks had
+overrun into the slack -- when nothing had overrun and most of the budget was unspent,
+which is a constraint the run claimed to meet and in fact a mistake it made.
+
+The harness that proves those checks fire has a blind spot of its own.
+[D-356](defects.md) records that `run_negative_controls` prunes the literature archive
+and the atlas renderings from its snapshot to stay under a portable size cap, so any
+check reading one of them fails there on a missing file rather than on the mutation.
+Three controls written for the `n = 29` chain were withdrawn for that reason, and the
+guards they would have exercised are asserted directly in their test instead.
+[D-357](defects.md) is the companion, and it is a correction: a synopsis control that
+failed four times running, including against a clean tree, later fired correctly with
+nothing changed, so the standing-failure reading recorded first was wrong and the entry
+now says plainly that the trigger is not identified.
+
+A check can also pass for a reason other than the one it states, and this log now has
+two of those a day apart.
+[D-359](defects.md) recorded that the generated atlas SVG’s coordinate precision was
+inherited rather than pinned: `format_svg_number` rendered a scalar at whatever
+precision it was last refined to, so `known-best-1-100.svg` carried 27 fractional digits
+in a fresh process and 50 once anything had refined the shared field.
+The test asserting that the stored PNG was rendered from the current SVG therefore
+passed on test ordering, and a genuinely stale PNG would have been indistinguishable
+from the passing case.
+It is now fixed, and the feared regeneration did not happen: the ambient state came from
+`NumberField.decimal` setting the *thread-global* decimal precision and never restoring
+it, and the emission is pinned at 28 — the precision every retained figure was already
+drawn at — so no stored artifact changed a byte.
+
+Fixing it surfaced the second.
+[D-362](defects.md) is open: `validate_translation_only_trajectory` compares two
+independently rounded projections of exact algebraic numbers for *exact* equality, and
+they agree to about thirty-one digits rather than exactly.
+It has never fired wrongly only because nothing had raised the ambient precision before
+it ran, which is the same accident D-359 was.
+It is left open deliberately: it is what stands between this repository and a principled
+emission precision of 32, and that is a decision about what the projection layer
+promises rather than a rounding to choose in passing.
+
+A control that does not reach its known answer is the third of these, and it took the
+first full strict run in a while to see it.
+[D-365](defects.md) records that `check_golden_basins --deep` fails three oracles at
+`n = 10`: the quench reaches `3.735634792931` and refuses to certify convergence, and
+anneal-plus-quench lands `2.85e-02` above the proved `s(10) = (6 + √2)/2`. Nothing
+downstream reads the failing value, so no result rests on it; what is lost is the
+control itself, at the one size in the ladder where the answer is proved and the packing
+is not trivially a grid.
+It is proven pre-existing rather than assumed — the identical failures reproduce at the
+base commit of the session that found them, in a separate worktree — and it runs only in
+the strict tier, which is why a continuation running the fast gate at every checkpoint
+never met it.
+
+The gate’s cost is itself a logged defect, and this session added a second one.
+[D-366](defects.md) records that the negative-control step now outgrows the 900-second
+per-step timeout: nothing is wrong with the controls — run without the cap the suite
+completes in `1268s` and all **137** fire — but a step that always times out stops
+distinguishing a control that no longer fires from a machine that was busy.
 [D-355](defects.md) records that verification runs the whole gate after every change, so
 cycle time is set by the slowest full-tier step rather than by what the change can
 reach: a two-file edit measured at `979.79s` against the `12.06s` its two affected steps

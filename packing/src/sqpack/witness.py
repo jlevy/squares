@@ -18,6 +18,8 @@ from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
 from sqpack.field import FieldElement, NumberField
+from sqpack.promote.interval import from_endpoints, interval, midpoint
+from sqpack.promote.interval_verify import verify_interval
 from sqpack.verify import Report, edge_axes, exact_sign, project, verify_packing
 from sqpack.yamlio import load_yaml
 
@@ -256,6 +258,16 @@ def _approximate_materialize(
     witness: Mapping[str, Any], digits: int
 ) -> tuple[list[Square], Any]:
     """Materialize every supported scalar kind for inspection or numerical checking."""
+    if witness["scalar"]["kind"] == "interval-enclosure":
+        # Midpoints, for inspection and rendering only. Nothing that decides anything may
+        # read them: the midpoint of an enclosure is a plausible point inside it and is
+        # not the value, which is the distinction this kind exists to keep.
+        mp.mp.dps = digits
+        squares, side = _interval_materialize(witness)
+        return (
+            [[(midpoint(x), midpoint(y)) for x, y in square] for square in squares],
+            midpoint(side),
+        )
     if witness["scalar"]["kind"] != "algebraic-number-field":
         return _mp_materialize(witness, digits)
 
@@ -296,6 +308,46 @@ def _f64_materialize(witness: Mapping[str, Any]) -> tuple[list[Square], float]:
 
     squares, side = _materialize(witness, parse, basis)
     return squares, side
+
+
+#: Working digits added above a witness's recorded precision when replaying it, so the
+#: replay's own rounding is not what decides a separation.
+INTERVAL_GUARD_DIGITS = 20
+
+
+def _interval_materialize(witness: Mapping[str, Any]) -> tuple[list[Square], Any]:
+    """Materialize an `interval-enclosure` witness into outward-rounded enclosures.
+
+    Each coordinate is written `[lo, hi]`, so the pair *is* the datum rather than a
+    two-element field vector.  Only the `corners` representation is accepted: a
+    centre-and-angle encoding would have to re-derive corners through trigonometry here,
+    and the whole point of this kind is that the enclosures were computed once, under
+    directed rounding, by the step that certified them.
+    """
+    if witness["representation"] != "corners":
+        raise WitnessError(
+            "unsupported-representation",
+            "an interval-enclosure witness stores the enclosures it was certified from, "
+            f"so it must use the corners representation, not {witness['representation']!r}",
+        )
+
+    def parse(value: Any) -> Any:
+        if isinstance(value, list):
+            if len(value) != 2:
+                raise WitnessError(
+                    "malformed-enclosure",
+                    f"an enclosure is a [lo, hi] pair; got {len(value)} components",
+                )
+            low, high = value
+            if Fraction(low) > Fraction(high):
+                raise WitnessError(
+                    "malformed-enclosure",
+                    f"enclosure [{low}, {high}] has its endpoints the wrong way round",
+                )
+            return from_endpoints(low, high)
+        return interval(value)
+
+    return _materialize(witness, parse)
 
 
 def _exact_materialize(
@@ -472,14 +524,88 @@ def numerical_check(
     return result, report
 
 
+def _interval_verify(witness: Mapping[str, Any]) -> tuple[dict[str, Any], Report]:
+    """Replay an interval certificate: prove separation and containment on enclosures.
+
+    What this establishes and what it does not are different claims, and the result says
+    both. It proves that *some* configuration inside the recorded enclosures is a valid
+    packing at the recorded side, which bounds `s(n)` above.  It does not establish the
+    optimum, and it does not establish the value the enclosures surround -- an enclosure
+    of positive width decides strict inequalities and never an equality.
+
+    The recorded `relaxation` is what makes every constraint strict, and it is reported
+    back rather than absorbed: a bound whose relaxation is not stated is indistinguishable
+    from a claim about the optimum.
+    """
+    scalar = witness["scalar"]
+    if scalar["kind"] != "interval-enclosure":
+        raise WitnessError(
+            "formal-certificate-missing",
+            "an interval-certified claim needs interval-enclosure geometry; "
+            f"this witness stores {scalar['kind']!r}",
+        )
+    enclosure = scalar["enclosure"]
+    if not enclosure["unique"]:
+        raise WitnessError(
+            "root-not-unique",
+            "the recorded operator did not prove the root unique, so which pose this "
+            "certificate describes is not decided and it may not be replayed as one",
+        )
+
+    # Precision is pinned from the witness, not inherited from the caller. Parsing a
+    # 40-digit enclosure at mpmath's default 15 widens it by about 1e-14, which swamps a
+    # relaxation of 1e-20 and turns every contact pair undecidable -- measured here as 52
+    # refusals, exactly the packing's contact count. A replay whose verdict depends on
+    # ambient precision is not a replay.
+    digits = int(witness["claim"].get("precision", {}).get("decimal_digits", 40))
+    previous = mp.iv.dps, mp.mp.dps
+    mp.iv.dps = mp.mp.dps = digits + INTERVAL_GUARD_DIGITS
+    try:
+        squares, side = _interval_materialize(witness)
+        report = verify_interval(squares, side, side_label=str(witness["side"]))
+    finally:
+        mp.iv.dps, mp.mp.dps = previous
+    compatible = Report(
+        valid=report.certified,
+        n=report.n,
+        pairs_tested=report.pairs_tested,
+        strict_pairs=report.separated_pairs,
+        failures=[("undecided", f"pair {a}-{b}") for a, b in report.undecided_pairs]
+        + [("overlap", f"pair {a}-{b}") for a, b in report.overlapping_pairs]
+        + [("container", detail) for detail in report.container_failures],
+    )
+    result = {
+        "operation": "verify",
+        "id": witness["id"],
+        "coordinate_provenance": "verified" if report.certified else "not-established",
+        "method": "interval-certified",
+        "verification_passed": report.certified,
+        "n": report.n,
+        "side": str(witness["side"]),
+        "pairs_tested": report.pairs_tested,
+        "separated_pairs": report.separated_pairs,
+        "undecided_pairs": len(report.undecided_pairs),
+        "overlapping_pairs": len(report.overlapping_pairs),
+        "operator": enclosure["operator"],
+        "root_unique": enclosure["unique"],
+        "pose_box_radius": enclosure["radius"],
+        "relaxation": enclosure["relaxation"],
+        "refusal": report.refusal_reason(),
+        "failures": compatible.failures,
+        "limitations": (
+            "An upper bound at the declared relaxation, established on enclosures. Not "
+            "the optimum, not the value the enclosures surround, and below exact-algebraic "
+            "on the assurance ladder: it rests on the interval library's directed rounding "
+            "rather than on exact predicates."
+        ),
+    }
+    return result, compatible
+
+
 def exact_verify(witness: Mapping[str, Any]) -> tuple[dict[str, Any], Report]:
     """Verify a rational or certified algebraic witness with exact predicates."""
     if witness["claim"]["method"] == "interval-certified":
-        raise WitnessError(
-            "checker-not-built",
-            "Witness/v2 can describe interval evidence, but the generic interval "
-            "certificate checker is not built",
-        )
+        return _interval_verify(witness)
     squares, side, field = _exact_materialize(witness)
     if field is None:
         sign: Callable[[Scalar], int] = _rational_sign

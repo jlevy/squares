@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 355
+count: 369
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -450,6 +450,26 @@ defects:
     rather than removed: the assurance contract forbids a numerical result from carrying
     `beat_record: true`, and the soundness-perimeter check holds every emitting component
     to the same bound so the two cannot drift apart.
+
+    An exact LP over the same cell (`packing/src/sqpack/exact_lp.py`, BC-061) now removes
+    the floor where a certified answer is required. On Trump's cell it returns the
+    published side with a difference of exactly zero, against `-1.80341e-16` for the float
+    solve -- and that gap is *negative*, which is the shape this entry warns about, since
+    read without its tier it says the record was beaten. Its `ambiguous` set is empty
+    where the float path leaves three incidences undecided at this floor.
+
+    Phase 1 is now built too (`feasible_basis`, BC-071): the starting vertex is
+    constructed from the cell's own exact coefficients by a two-phase auxiliary program,
+    and Trump's cell is solved end to end -- 42 phase-1 pivots to a feasible vertex at side
+    `6.123390901223`, then 16 more down to the published `3.877083590022`, the difference
+    exactly zero -- with no float solver anywhere on the path, asserted by an AST scan over
+    every module that runs. The float seed remains a fortyfold speedup, `2.6s` against
+    `100s`, and remains the right first move wherever a basis exists; it is no longer
+    required.
+
+    The status stays `contained` rather than moving to `fixed`, and what remains is no
+    longer the LP. It is that the `n = 29` contact system is not yet assembled as one, so
+    there is nothing at that size for the exact path to be pointed at.
   regression: 'the soundness perimeter at the same bound; every round carries assurance and method, and beat_record requires verified assurance'
   recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md
   bead: think-hg3u
@@ -9220,3 +9240,560 @@ defects:
     described above, plus a check that every step name is reachable from at least one
     declared path pattern, so a new step cannot be added without being wired to the
     sources that can break it.
+- id: D-356
+  title: The negative-control snapshot prunes the archive, so the n=29 chain cannot be controlled there
+  date: '2026-08-29'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: control_cell
+  latent_for: since the snapshot gained its prune list
+  severity: low
+  status: outstanding
+  what: >-
+    `run_negative_controls` builds each worker from a bounded snapshot and prunes
+    `resources/` -- the literature archive -- to stay under the portable size cap. The
+    `n = 29` interval chain reads its provenance SVG from that archive, so a mutation
+    control over that chain fails on a missing file rather than on the mutation. Three
+    such controls were written for BC-053 and withdrawn for this reason; the guards they
+    would have exercised are asserted directly in `tests/test_promote_relax.py` instead.
+  consequence: >-
+    Any check whose input is archived source material is outside what this harness can
+    negative-control. The direction is conservative -- an absent control is missing
+    evidence, never a false pass -- but the gap is invisible from the control file unless
+    it is written down, which is what this entry is for.
+  fix: >-
+    Not attempted. Either the snapshot keeps the few archived files controls actually
+    need, or such checks declare their inputs so the snapshot can include them
+    selectively. Both change a shared trust boundary and belong in their own slice.
+  regression: >-
+    None. The reproducer is to add a control whose `run` reaches
+    `cases.kingbird29.certify_interval` and observe it fail on the missing SVG rather
+    than on its mutation.
+  bead: think-lo3p
+  recorded_in: packing/campaign/agent-sessions/session-037-block2-interval-calibration.md
+
+- id: D-357
+  title: One synopsis negative control failed reproducibly, then passed, with no identified trigger
+  date: '2026-08-29'
+  layer: tooling
+  class: robustness
+  detected_by: control_cell
+  latent_for: unknown
+  severity: low
+  status: outstanding
+  what: >-
+    During session-037 the control `synopsis - README cold-start link drifts from current
+    handoff` failed four times in a row, reporting `SYNOPSIS.md: dead link ->
+    packing/atlas/known-best/rendering/n-100.svg` instead of the drift it introduces --
+    including once against a stashed, clean working tree at the same commit, which is why
+    it was first recorded as a standing failure. In session-038, with no change to
+    `check_synopsis`, `SYNOPSIS.md`, or the prune list, the same control fired correctly
+    and the full suite passed 97 of 97. The snapshot source size differed between the runs
+    (33.0 to 37.5 MiB), but the harness prunes statically and only aborts on its cap, so
+    size does not explain it. The trigger is not identified.
+  consequence: >-
+    A control that fails intermittently is worse than one that fails: it trains a reader
+    to wave the suite through. Nothing was concluded from the failing runs, and the first
+    version of this entry claimed the control could not fire at all -- a claim the later
+    passing run falsified, and which is corrected here rather than left standing.
+  fix: >-
+    Not attempted; there is nothing to fix until the trigger is known. The next occurrence
+    should capture the snapshot listing and the full `check_synopsis` output rather than
+    the harness's 120-character excerpt, which is what made this hard to diagnose in the
+    first place.
+  regression: >-
+    None. Watch for a recurrence of the dead-link message from this control.
+  bead: think-lo3p
+  recorded_in: packing/campaign/agent-sessions/session-038-block3-contact-assembly.md
+- id: D-358
+  title: An unattended run misread its own clock by a factor of four and stopped early
+  date: '2026-08-29'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: the whole of run-002
+  severity: medium
+  status: outstanding
+  what: >-
+    run-002 declared blocks of 150, 180, 180 and 40 minutes against a 690-minute target.
+    The git timestamps say the planning commit landed at 03:04:56Z and the four block
+    commits at 03:36:09Z, 04:18:15Z, 04:46:49Z and 05:09:32Z: blocks of 31, 42, 29 and 23
+    minutes, and a whole run of 143 minutes rather than 690. The coordinating agent tracked
+    elapsed time by estimating between tool calls instead of reading a clock, and the
+    estimates ran roughly four times fast.
+  consequence: >-
+    Two things, and the second is worse than the first. Every declared clock in
+    session-036, session-037, session-038 and run-002 was wrong, which is ordinary
+    bookkeeping. But the misreading also drove a scheduling decision and then supplied a
+    false reason for it: BC-055 was recorded `stopped` because "blocks 2 and 3 overran into
+    this cell's slack", and nothing overran -- the run stopped with about eight hours of
+    its declared budget unspent. That reason reads as a constraint the run met and was in
+    fact a mistake the run made, which is the flattering direction.
+  fix: >-
+    Clocks in the four artifacts are corrected to the measured commit times, and BC-055's
+    stop reason is replaced with what actually happened. The practice change is mechanical:
+    read `date -u` at every block boundary and record it, rather than estimating elapsed
+    time from the conversation.
+  regression: >-
+    None automatic. A session artifact's declared clock could be checked against the commit
+    timestamps of the work it claims, which no current check does; recorded here as the
+    obvious detector rather than built in passing.
+  bead: think-qs6k
+  recorded_in: packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md
+- id: D-359
+  title: The generated atlas SVG's coordinate precision is inherited from ambient state
+  date: '2026-08-29'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: unknown; the emission has never pinned its digits
+  severity: medium
+  status: fixed
+  what: >-
+    `sqpack.render.numbers.format_svg_number` renders a `ScalarSource` from its
+    `projected` decimal, whose digit count is whatever precision that scalar was last
+    refined to. Nothing downstream quantises it. So `devtools.build_known_best_atlas`
+    emits the `n = 11` card's corners with 27 fractional digits in a fresh process and
+    with 50 in a process where any earlier caller has run `field.refine_to(40)` on the
+    shared Trump field -- the same geometry, a different file.
+  consequence: >-
+    `known-best-1-100.svg` is not reproducible from its inputs alone, and
+    `test_known_best_composite_png_is_derived_from_current_svg` -- which asserts the
+    stored PNG's receipt matches the hash of the SVG the builder currently produces --
+    passes or fails on test ordering rather than on whether the PNG is stale. It passes
+    today because no test that refines a shared field runs before it in the gate's
+    ordering, which is not a property anybody chose. The failure is silent in the
+    direction that matters: a genuinely stale PNG would be indistinguishable from this.
+  fix: >-
+    Fixed under BC-066's successor block BC-068, in two halves. `NumberField.decimal` was
+    setting the *thread-global* decimal precision and never restoring it, which is where
+    the ambient state came from; its working precision now lives in a `localcontext`. And
+    the emission side now pins its own digits: `SVG_EMISSION_PRECISION` in
+    `sqpack.render.numbers`, applied as a decorator to the two document-level entry
+    points so it covers arithmetic added inside them later rather than only the
+    expressions someone remembered to wrap.
+
+    Pinned at 28 -- the precision every retained figure in this repository was already
+    drawn at -- so the pin declares where the emission is rather than moving it. That
+    choice was measured rather than assumed. At 32, the value the projection layer
+    promises for an exact source, `validate_translation_only_trajectory` breaks: two
+    independently projected coordinates of the exact `n = 5` face differ by `8e-32`,
+    which a 28-digit subtraction rounds away and a 32-digit one does not, and 66 stored
+    known-best outputs change. At 17 the coarsening reaches the edge and centroid
+    subtractions that feed angle classification, which decides hues and not only digits.
+
+    No stored artifact moved: all four generators rebuild byte-identical output under the
+    pin, which is the evidence that 28 is where they were already drawn.
+  regression: >-
+    `uv run --frozen --group dev python -m pytest tests/test_promote_system.py
+    tests/test_known_best_atlas.py -q -p no:randomly` fails on the composite receipt;
+    either module alone passes. That command is the detector until the emission is
+    pinned.
+  bead: think-mt4h
+  recorded_in: packing/campaign/agent-sessions/session-040-block6-chirality.md
+- id: D-360
+  title: A null-space finding was read off a filtered display instead of being computed
+  date: '2026-08-29'
+  layer: record
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: about ten minutes, inside session-040 and never committed
+  severity: low
+  status: fixed
+  what: >-
+    session-040 phase 2 first recorded that the side `s` was absent from every vector of
+    the n = 29 contact Jacobian's null space, and drew a contrast with n = 11 where it
+    appears. Both halves came from a diagnostic printout that showed each vector's eight
+    largest coordinates and collected square indices only from names beginning `x`, `y` or
+    `t` -- which excludes `s` by construction. Computing the quantity the claim is about,
+    the norm of the projection of `e_s` onto the null space, gives `1.14e-1` at n = 29 and
+    `1.86e-1` at n = 11: the same behaviour, not opposite behaviour. The size that
+    actually differs is n = 5, at `1.00e-16`.
+  consequence: >-
+    None shipped; the error was caught before the commit and the corrected measurement is
+    what BC-059 receives. Had it not been, BC-059 would have inherited an inverted
+    discriminating pair and looked for a first-order closure at n = 29, where no
+    first-order condition can close the system at all.
+  fix: >-
+    The claim is replaced by the projection norms at all three sizes, and the session
+    record keeps a section saying what the first version said and why it was wrong.
+    Per-vector readings of a null space are not meaningful in any case: a null space is
+    defined up to an orthonormal basis, so only basis-independent quantities are claims
+    about it.
+  regression: >-
+    None automatic, and this is the second instance in run-002 of the same root cause --
+    D-358 substituted an estimate for a clock, this substituted a display for a
+    computation. The practice change is the same shape: when a record states a quantity,
+    compute that quantity rather than reading something correlated with it.
+  bead: think-km5r
+  recorded_in: packing/campaign/agent-sessions/session-040-block6-chirality.md
+- id: D-361
+  title: An edge-edge contact was assembled as one equation, so the contact system did not
+    determine the pose
+  date: '2026-08-29'
+  layer: tooling
+  class: soundness
+  direction: conservative
+  detected_by: control_cell
+  latent_for: from BC-054 in session-038 until BC-059 in session-041
+  severity: high
+  status: fixed
+  what: >-
+    `sqpack.promote.system` emitted one scalar equation per `edge-edge` contact, putting a
+    single endpoint of one edge onto the other edge's line. Coincident lines in the plane
+    are two conditions, not one: the edges parallel and one point shared. With only the
+    incidence written down, the second square is free to pivot about that point, which
+    keeps the equation satisfied and drives the squares into each other at first order.
+    Measured at n = 11 by walking the contact Jacobian's null space in the direction that
+    most decreases the side: three declared edge-edge pairs reached overlaps of `-5.1e-6`,
+    `-4.2e-6` and `-3.2e-6` at a step of `1e-5`, growing linearly in the step.
+  consequence: >-
+    The assembled system did not isolate the pose it was assembled from, and the shortfall
+    that left was named as something it was not. `close` reported four missing
+    "stationarity conditions" at n = 11 and seven at n = 29, described as Lagrange or
+    Fritz-John determinant conditions; they were four and seven missing collinearity
+    equations. The record carried that reading into session-038, session-040, SYNOPSIS.md
+    and BC-059's own framing, which had gone as far as concluding from the same numbers
+    that no first-order condition could close either size. The error was conservative --
+    it made the pipeline look further from a solvable system than it was -- and it blocked
+    BC-060, which needs a square system to work on.
+  fix: >-
+    `edge-edge` contributes two equations, both endpoints of the right edge on the left
+    edge's line. The contact Jacobian then reaches full rank at both retained sizes, `34`
+    of `34` at n = 11 and `88` of `88` at n = 29, with residuals unmoved at `8.9e-16` and
+    `1.3e-15`; `close` takes its `already-determined` refusal at both. Göbel's n = 5 has
+    no edge-edge contact, is untouched by the repair, and keeps a genuine shortfall of one
+    -- the only size where a stationarity condition still has to be derived.
+  regression: >-
+    Two controls. One restores the single-endpoint equation and requires the n = 11
+    equation count to move; the other disables `close`'s `already-determined` guard and
+    requires the test to catch a closure invented for a determined system. The positive
+    check is a test that walks the null space and requires the projection of `e_s` onto it
+    to vanish, which is the property the missing equation destroyed.
+  bead: think-9c40
+  recorded_in: packing/campaign/agent-sessions/session-041-block7-collinearity.md
+- id: D-362
+  title: The translation-only trajectory check compares independently rounded projections
+    for exact equality
+  date: '2026-08-29'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: unknown; the check has always been written this way
+  severity: low
+  status: outstanding
+  what: >-
+    `sqpack.render.motion.validate_translation_only_trajectory` asserts that each
+    corner-minus-centre offset is *exactly* equal from frame to frame. Those offsets are
+    differences of two independently rounded decimal projections of exact algebraic
+    numbers, so they agree to about thirty-one digits rather than exactly. On the retained
+    exact `n = 5` equal-side face the two disagree by `8e-32`.
+  consequence: >-
+    The check passes for an ambient reason rather than the one it states. At the ambient
+    decimal precision of 28 the disagreement rounds away and the equality holds; at 32 or
+    40 it does not, and `check_svg_rendering --check` fails with `trajectory rendering
+    requires translation-only geometry` on geometry that is translation-only. It has never
+    fired wrongly because nothing had raised the ambient precision before it ran -- which
+    was not a property anybody chose, and is the same class of accident D-359 records.
+  fix: >-
+    Not fixed here. BC-068 pinned the emission at 28, which preserves the status quo and
+    does not address this; fixing it honestly means either an absolute tolerance derived
+    from each operand's declared `precision`, or a restatement of what the check is
+    asking. It is recorded rather than patched because it is the thing standing between
+    this repository and a principled emission precision of 32, and that is a decision
+    about what the projection layer promises rather than a rounding to choose in passing.
+  regression: >-
+    None yet. The reproduction is to raise the emission precision to 32 and run
+    `uv run --frozen --all-extras --group dev python -m devtools.check_svg_rendering
+    --check`, which then refuses the exact n = 5 trajectory.
+  bead: think-mt4h
+  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+
+- id: D-363
+  title: A closure form was named in the record that could not close the case it was named
+    for
+  date: '2026-08-29'
+  layer: tooling
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: from BC-054 in session-038 until BC-069 in session-044
+  severity: low
+  status: fixed
+  what: >-
+    `close`'s docstring named the missing `n = 5` condition as "the Lagrange or Fritz-John
+    statement that no admissible motion decreases the side, in determinant form". That
+    statement is already true at `n = 5`: `side_leak` reads `1.00e-16` and the single free
+    direction is a rotation of the centre square about its own centre with an `s` component
+    at the same floor, so no contact-preserving first-order motion changes the side. A true
+    statement adds a dependent row and no rank. The obstruction is second-order -- the free
+    direction violates the contacts at `-0.25 t^2`, identical in both signs across three
+    decades -- so the shortfall is a degenerate root of the contact map rather than an
+    unpinned optimum.
+  consequence: >-
+    Nothing shipped; the misnaming was in prose. Had it been followed it would have sent
+    the next session after a first-order determinant condition at the one size where no
+    first-order condition can close the system. It was compounded by a structural gap:
+    `closure` held prose strings while `contact_jacobian` and `residual_at` read
+    `equations` alone, so the only thing a closure condition could do was change
+    `equation_count` -- which is the shape of the failure D-361 records, arriving a second
+    way.
+  fix: >-
+    `close` derives the condition by differentiating the contact map along the direction
+    the contacts leave free, and `closure` now carries `sp.srepr` with every consumer
+    reading `all_equations`. Rank at `n = 5` moves from 15 to `16` of `16` with the
+    residual unmoved at `1.110e-16`; `n = 11` and `n = 29` are unmoved at `34/34` and
+    `88/88` with `close` still refusing `already-determined`, verified after the change.
+    Each emitted condition expands to exactly the statement that the contacting corner sits
+    at the midpoint of the contacted edge -- an identity of the corner-edge contact type,
+    checked against a midpoint expression written independently of the derivative, so the
+    condition is derived rather than fitted.
+  regression: >-
+    Five controls, each watched to fire: the closure pinning the free angle at its measured
+    value, repeating the contact equations instead of differentiating them, taking the free
+    direction with its measurement noise, taking the Jacobian of the contacts alone, and
+    skipping the closure in the residual. The positive check compares each emitted
+    condition against the independently written midpoint statement and requires symbolic
+    equality. `t4 = pi/4` also reaches rank 16 and is asserted in the test as proof that
+    reaching full rank is not on its own evidence of anything.
+  bead: think-rqad
+  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+
+- id: D-364
+  title: The margin rule counted digits the value does not carry
+  date: '2026-08-29'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: from BC-044's margin rule until BC-073 in session-044
+  severity: low
+  status: fixed
+  what: >-
+    Clause 3 of the frozen margin rule refuses a relation whose reported residual bound is
+    not far enough below the coefficient budget it carries, and it read "digits available"
+    from that bound alone. The refinement reports a residual bound and *separately* rounds
+    its value to the digits it was asked for, and at `n = 29` the two disagree: the bound
+    is `1.09829e-1039`, measured at a working precision of 1040, over a value string
+    carrying exactly 1000 significant digits. The search only ever sees the string, so the
+    clause was crediting it with 39 digits it does not have.
+  consequence: >-
+    Flattering, and narrowly missed. A relation is judged against digits the value does not
+    carry, so a spurious relation could pass a clause written to refuse it -- which is the
+    exact failure the margin rule exists to prevent, and the one the planning probe's
+    relations at almost every degree from 8 to 21 on ninety-eight digits demonstrated. It
+    could only have mattered at degrees 36 and 37, and no sweep had ever gone past 20, so
+    it never fired. It was found by asking why the sweep stopped at twenty, not by a
+    failure.
+  fix: >-
+    `available_digits` takes the worse of the reported residual bound and the length of the
+    serialized value, and clause 3 tests that. The `n = 11` calibration is untouched by
+    construction: there the reported bound (`1e-390`) is already worse than the string's
+    400 digits, so the clause sees what it always saw and Trump's degree-eight polynomial
+    is still recovered and discharged.
+  regression: >-
+    Three controls under the BC-073 banner, each watched to fire: reading the digits from
+    the residual bound alone, a ceiling that admits a degree clause 3 would refuse, and a
+    probe that sweeps to a typed-in ceiling instead of to the digits. One existing BC-060
+    control quoted the clause-3 line this repair rewired and was updated with it; its guard
+    was re-verified firing.
+  bead: think-gucc
+  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+
+- id: D-365
+  title: The deep golden-basin oracle fails at n = 10, and only the strict tier runs it
+  date: '2026-08-29'
+  layer: quench
+  class: robustness
+  detected_by: gate
+  latent_for: 'unknown; found by the first full strict run since the continuation began'
+  severity: medium
+  status: outstanding
+  what: >-
+    `devtools.check_golden_basins --deep` fails three oracles at `n = 10`. The quench
+    reaches `3.735634792931` and refuses to certify convergence -- "fixed cell unsettled
+    during bracket: cell cycle (closure exceeded 64-cell cap)" -- and anneal-plus-quench
+    lands `2.85e-02` above the proved `s(10) = (6 + sqrt(2))/2`, so the pipeline does not
+    converge onto a known answer. The rebuilt map then differs from the committed golden,
+    which is the third failure and a consequence of the first two.
+  consequence: >-
+    A known-answer control does not reach its known answer, at the one size in the ladder
+    where the answer is proved and the packing is not trivially a grid. Nothing downstream
+    reads the failing value -- the golden is a characterization artifact rather than an
+    input to any claim -- so no result rests on it. What is lost is the control itself: the
+    ladder exists to catch a quench that stops early, and at `n = 10` it is doing so and
+    being recorded as a failure rather than acted on.
+  fix: >-
+    Not fixed here. This is the quench's cell-closure logic and belongs to whoever owns
+    that lane; the continuation that found it was working on the promotion pipeline, which
+    shares no code with it -- an import walk over the checker's nine transitive imports
+    confirms none was touched.
+  regression: >-
+    Proven pre-existing rather than assumed. The identical three oracle failures reproduce
+    at `64d1e19`, this session's base commit, in a separate worktree with its own
+    environment. The reproduction is
+    `uv run --frozen --all-extras --group dev python -m devtools.check_golden_basins --deep`,
+    which takes about 335 seconds and runs only in the strict tier -- which is why a
+    continuation that ran the fast gate at every checkpoint never saw it.
+  bead: think-c7oo
+  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+
+- id: D-366
+  title: The negative-control step outgrew the gate's per-step timeout
+  date: '2026-08-29'
+  layer: tooling
+  class: performance
+  detected_by: gate
+  latent_for: 'introduced and detected in the same session'
+  severity: low
+  status: outstanding
+  what: >-
+    The strict tier's `negative controls` step is killed at the 900-second per-step
+    timeout. Nothing is wrong with the controls: run without that cap the suite completes
+    in `1268s` and reports `137 negative controls fire as expected`. The step simply costs
+    more than the cap now allows.
+  consequence: >-
+    The strict gate reports a failure where the evidence is a timeout, which is the least
+    useful kind of red. Worse in principle, a step that always times out stops
+    distinguishing a control that no longer fires from a machine that was busy -- and this
+    repository's whole argument for controls is that a guard nobody watches fire is
+    untested.
+  fix: >-
+    Not fixed here, and the honest reason is that the cheap fix and the right fix differ.
+    Raising the cap would make the step pass and would weaken the same guard for every
+    other step that shares it. The cost is concentrated rather than spread: this session
+    took the suite from 113 controls to 137, and the expensive additions are the ones whose
+    `run` invokes the exact-LP tests, where each control pays a full module import and the
+    end-to-end Trump solve behind it. Pointing those at a cheaper target, or giving the
+    step its own declared budget, is the repair; both are choices about the gate's contract
+    rather than edits to a control.
+  regression: >-
+    Measured rather than inferred: `uv run --frozen --all-extras --group dev python -m
+    devtools.run_negative_controls devtools/controls.yaml -j 1` completes in `1268s` with
+    all 137 firing, against a `900s` cap. Recorded with the count so the next session can
+    see whether the number moved or the machine did.
+  bead: think-c7oo
+  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+
+- id: D-367
+  title: Degree bounds on the Kingbird solution were written as bounds on s(n)
+  date: '2026-08-29'
+  layer: record
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: from BC-060 in session-042 until session-044's endpoint review
+  severity: medium
+  status: fixed
+  what: >-
+    The promotion work at `n = 29` derives everything from the closed system Kingbird
+    publishes for Kingbird's own packing, so every degree statement it produces is about the
+    Kingbird solution. The record wrote them as statements about `s(29)`: "the degree of
+    `s(29)` is not twenty", "if `s(29)` is algebraic of degree twenty or less, some
+    coefficient is at least `10^22`", and this session's own "`s(29)` is algebraic of degree
+    at most `15,744`". `s(29)` is the optimum -- the side of the smallest square holding
+    twenty-nine unit squares -- and Kingbird's packing is the best known rather than a
+    proved one.
+  consequence: >-
+    Flattering, and about the most load-bearing distinction this repository maintains. The
+    whole `reported_upper_bound` / `verified_upper_bound` split exists because a published
+    packing is not known to be optimal, and the `n = 29` bound gap is about `0.46`; a degree
+    bound on the optimum would be a statement about a number nobody has pinned down, where a
+    degree bound on the Kingbird solution is a statement about a specific algebraic number
+    this project can point at. Nothing was computed wrongly and no other claim rests
+    on the phrasing, but the phrasing said more than the computation.
+  fix: >-
+    Every live artifact now names what it bounds: the retained result JSONs, agenda-006's
+    BC-060, BC-070 and BC-073 entries, the synopsis handoff, run-002 and `development.md`.
+    The bc-070 artifact gains a `what_it_bounds` field saying it in full, and its claim
+    boundary now separates the two questions rather than only the bound-versus-degree one.
+    Terminal session records from session-042 and session-043 are left as written: they are
+    history, this entry is where the correction lives, and editing a closed record to look
+    tidy is the practice this project refuses.
+  regression: >-
+    None mechanical, and that is worth stating rather than glossing. No checker distinguishes
+    a claim about `s(n)` from a claim about a retained witness's side, and writing one would
+    mean parsing prose. What exists instead is the `verified_upper_bound` consumer contract,
+    which forces any file naming that field to declare what it takes it to mean -- the same
+    discipline one level down, and the reason this conflation was caught in review rather
+    than shipped further.
+  bead: think-obgk
+  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+
+- id: D-368
+  title: The rules an agent needs before its first tool call had nowhere to live
+  date: '2026-08-29'
+  layer: docs
+  class: performance
+  detected_by: review
+  latent_for: 'every autonomous session so far'
+  severity: medium
+  status: fixed
+  what: >-
+    Three failures recurred across sessions, each already recorded somewhere: measurements
+    written as throwaway scripts rather than tools (D-023, and again in session-043, where
+    the script reported a Bezout bound of 12,690,480 for a system whose bound is 1,039,500);
+    sub-agents left unused or run without a thinking level matched to the task; and the
+    coordinator blocking on an eight-minute gate with nothing else in flight, twice to the
+    point of user interruption. The lesson existed in all three cases and reached the agent
+    in none of them, because a defect entry is read during a review, the session guide is
+    read once a session is already open, and `conventions.md` is long and consulted on
+    demand. Nothing named these as rules to read before acting.
+  consequence: >-
+    Wall clock, which is the scarce resource in a timed session, plus one wrong number said
+    out loud before the tool that would have refused it existed. No mathematical claim rests
+    on this entry; the cost is entirely in repeated time.
+  fix: >-
+    `operating-rules.md` is a new root document holding the six rules with the evidence for
+    each, and `AGENTS.md` -- the one file guaranteed to be in context before the first tool
+    call -- carries a generated one-line summary of them. `conventions.md` states the
+    division it implies: conventions govern the shape of what is produced, operating rules
+    govern how the work is done.
+  regression: >-
+    `devtools.render_operating_rules` writes the summary from the rule headings and
+    `--check` runs in the fast gate, so the two cannot part. Three negative controls
+    rehearse the failure modes: a hand-edited summary, a rule added to the source and never
+    mirrored, and a gap in the rule numbering.
+  bead: think-eb29
+  recorded_in: operating-rules.md
+- id: D-369
+  title: The gate's cheap checks were hostage to its expensive one, so drift reached CI
+  date: '2026-08-29'
+  layer: tooling
+  class: performance
+  detected_by: review
+  latent_for: 'the whole of the 2026-08-29 branch'
+  severity: medium
+  status: fixed
+  what: >-
+    Seven CI failures on one branch, and every one of them was a registry, generated view,
+    or declared contract going stale: a duplicated key in the declared-consumer registry,
+    an undeclared `verified_upper_bound` consumer, two open beads sharing a title, a stale
+    `ledger.md`, and an agenda cell with an empty `instances` list. None was a behavioural
+    test. Those checks together run in about 70 seconds, but the only tier that contained
+    them was `--fast`, which takes about eight minutes because one step -- the behavioural
+    tests -- is roughly 87% of it. So the tier that catches everything that breaks was
+    priced at the cost of the step that never broke, and pushing without it kept looking
+    like the cheaper move.
+  consequence: >-
+    Wall clock and reviewer trust, not correctness. Each failure cost a CI round trip
+    plus a fix commit, and three consecutive pushes failed on one unfixed cause because
+    the next push went out before the first result landed. The gate's own cadence table
+    made it worse by claiming sixty seconds for the eight-minute tier and two minutes for
+    the eighteen-minute one, so the tier was being chosen against numbers that were wrong
+    by an order of magnitude.
+  fix: >-
+    `packing-validate --records` selects the eleven record checks and nothing else, at
+    about 70 seconds, and is the declared pre-push command. `conventions.md`'s cadence
+    table is restated from measurement rather than intention. `OR-3` gains the other half:
+    push first so CI runs concurrently with local checks, rather than serialising them.
+  regression: >-
+    A test asserts the tier is exactly the steps tagged `records`, that all of them are in
+    the fast tier, and that the behavioural-test step is not among them -- tagging a test
+    step into the tier would restore the cost that caused this. The structural question,
+    whether these are the right tiers at all, is `BC-075`; this entry is the increment that
+    stops the recurrence in the meantime.
+  bead: think-c46d
+  recorded_in: packing/src/sqpack/cli/validate.py

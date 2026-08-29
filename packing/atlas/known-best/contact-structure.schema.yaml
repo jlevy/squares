@@ -38,6 +38,7 @@ properties:
         - ambiguous_count
         - angle_class_count
         - angle_classes
+        - chirality
         - worst_contact_margin
         - smallest_strict_separation
         - separation_decades
@@ -74,6 +75,17 @@ properties:
               label: {type: string, minLength: 1}
               members: {type: array, minItems: 1, items: {type: integer, minimum: 0}}
               degrees: {type: [string, "null"]}
+        chirality:
+          type: array
+          minItems: 2
+          items: {enum: [1, -1]}
+          description: >-
+            Per-square corner winding, `+1` counter-clockwise and `-1` clockwise, in
+            square order. A packing may place a square by reflection, and seven of the
+            twenty-nine squares here are placed that way; a centre and an angle cannot
+            express that, so assembly needs this sign to write the square's corners at
+            all. Recorded rather than derived at assembly time because it is a property
+            of the retained pose, decided by the same arithmetic as the incidences.
         worst_contact_margin: {type: string, minLength: 1}
         smallest_strict_separation: {type: string, minLength: 1}
         separation_decades:
@@ -116,3 +128,20 @@ $defs:
       left: {type: integer, minimum: 0}
       right: {type: string, minLength: 1}
       margin: {type: string, minLength: 1}
+      contact:
+        type: [string, "null"]
+        enum: [corner-edge, edge-edge, corner-corner, corner-wall, null]
+        description: >-
+          Which features meet, which the pair of indices does not say. Each type carries a
+          different equation -- a corner-corner contact contributes two scalar equations
+          where the others contribute one -- so assembly refuses rather than guessing when
+          this is null. Nullable only so a structure extracted before the field existed
+          still loads.
+      left_feature:
+        type: [string, "null"]
+        description: The realising feature on the left square, as `corner:k` or `edge:k`.
+      right_feature:
+        type: [string, "null"]
+        description: >-
+          The realising feature on the right square, or the wall name for a wall
+          relation.

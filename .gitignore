@@ -19,3 +19,6 @@ packing/campaign/series/.ids/
 # Present only while `packing-validate` is running. Campaign runs refuse to overlap the
 # gate so a shared engine rebuild or validation CPU load cannot contaminate measurements.
 packing/.gate-running
+
+# Sub-agent worktrees, created by the harness inside the repo.
+.claude/worktrees/

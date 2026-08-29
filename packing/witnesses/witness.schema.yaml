@@ -30,7 +30,25 @@ properties:
     additionalProperties: false
     required: [kind]
     properties:
-      kind: {enum: [decimal, rational, algebraic-number-field]}
+      kind:
+        enum: [decimal, rational, algebraic-number-field, interval-enclosure]
+        description: >-
+          How the coordinates in this file are written down, which decides what can be
+          done with them.
+
+          `decimal` is numerical data at a recorded depth and never upgrades to formal
+          assurance on its own. `rational` and `algebraic-number-field` are exact: a
+          verifier evaluates them with exact predicates and decides every sign, including
+          the zero separations a tight packing has.
+
+          `interval-enclosure` is different in kind from all three and the difference is
+          the point. Each coordinate is an outward-rounded `[lo, hi]` pair enclosing a
+          value nobody has written exactly, so a verifier can prove a strict inequality
+          and can never prove an equality. That is enough for an upper bound and is not
+          enough for an exact one, which is why such a witness records the relaxation
+          that made every constraint strict. Added as a fourth kind rather than a new
+          contract version: no existing file changes meaning, and readers that switch on
+          `kind` already fail closed on one they do not know.
       minimal_polynomial:
         type: array
         minItems: 2
@@ -40,6 +58,44 @@ properties:
         minItems: 2
         maxItems: 2
         items: {type: string, minLength: 1}
+      enclosure:
+        type: object
+        additionalProperties: false
+        required: [operator, exists, unique, radius, working_precision, relaxation, pose_box]
+        description: >-
+          What produced the enclosures, and how much of the claim rests on each part.
+        properties:
+          operator:
+            enum: [krawczyk, interval-newton]
+            description: The existence-and-uniqueness operator applied to the pose box.
+          exists:
+            type: boolean
+            description: The operator's image lies inside the box, so a root is in it.
+          unique:
+            type: boolean
+            description: >-
+              The image lies in the box's *interior*, so the root is unique. This is the
+              load-bearing verdict: a box holding two roots identifies no pose, and
+              nothing may be promoted from `exists` alone.
+          radius: {type: string, minLength: 1}
+          working_precision: {type: integer, minimum: 1}
+          relaxation:
+            type: string
+            minLength: 1
+            description: >-
+              How far the certified configuration was opened from the one the contact
+              system describes, so that every constraint is a strict inequality. A bound
+              from an unstated relaxation is indistinguishable from a claim about the
+              optimum, and they are different claims.
+          contact_system: {type: string, minLength: 1}
+          pose_box:
+            type: object
+            additionalProperties: false
+            required: [names, lo, hi]
+            properties:
+              names: {type: array, minItems: 1, items: {type: string, minLength: 1}}
+              lo: {type: array, minItems: 1, items: {type: string, minLength: 1}}
+              hi: {type: array, minItems: 1, items: {type: string, minLength: 1}}
     allOf:
       - if:
           properties: {kind: {const: algebraic-number-field}}
@@ -49,6 +105,13 @@ properties:
           properties:
             minimal_polynomial: false
             isolating_interval: false
+      - if:
+          properties: {kind: {const: interval-enclosure}}
+        then:
+          required: [enclosure]
+        else:
+          properties:
+            enclosure: false
   coordinates:
     type: object
     additionalProperties: false
