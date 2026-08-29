@@ -60,6 +60,7 @@ from sqpack.render.model import (
     SquareGeometry,
 )
 from sqpack.render.numbers import (
+    emission_precision,
     format_svg_number,
     scalar_from_decimal,
     scalar_from_fraction,
@@ -933,8 +934,14 @@ def _append_summary_legend(
     )
 
 
+@emission_precision()
 def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
-    """Render a complete, zoomable 10 by 10 overview of ``n = 1..100``."""
+    """Render a complete, zoomable 10 by 10 overview of ``n = 1..100``.
+
+    The pin covers the per-card scale and corner arithmetic in `_append_summary_card`
+    and `_summary_points`, which is its own Decimal work rather than the house
+    renderer's, and so would otherwise track whatever precision the process was left in.
+    """
     numbers = [item.frontier.n for item in built]
     if numbers != list(range(SUMMARY_FIRST_N, SUMMARY_LAST_N + 1)):
         raise ValueError("known-best summary requires exactly n=1..100 in order")

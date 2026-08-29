@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import math
+from collections.abc import Iterator
+from contextlib import contextmanager
 from decimal import Decimal, InvalidOperation, localcontext
 from fractions import Fraction
 from typing import Protocol
@@ -13,6 +15,44 @@ DEFAULT_SIGNIFICANT_DIGITS = 17
 EXACT_SIGNIFICANT_DIGITS = 32
 VISIBLE_DIGITS = 10
 MAX_PLAIN_DECIMAL_EXPONENT = 100
+# The working precision every emitted coordinate is computed at, whatever the caller's
+# ambient decimal context happens to be.
+#
+# Pinned rather than inherited because `decimal` keeps precision in a thread-global
+# context. One unrestored `getcontext().prec = ...` elsewhere in the process moved every
+# coordinate in every figure, so the composite atlas's stored PNG receipt matched only
+# when no test had refined a number field first (D-359). A rendering is a function of
+# its inputs; ambient state is not one of them.
+#
+# Twenty-eight is where `decimal` starts a process, and so the precision every retained
+# figure here was already drawn at: this pin declares where the emission is rather than
+# moving it. Both directions were measured before settling there.
+#
+#   * Raising it to EXACT_SIGNIFICANT_DIGITS, on the argument that the projection layer
+#     promises 32 digits for an exact source, breaks the renderer's own translation-only
+#     trajectory check. Two coordinates independently projected to 32 digits differ in
+#     the last one, so the exact n=5 face's corner-minus-centre offsets disagree by
+#     8e-32 between frames -- a projection artifact, not a rotation, and one a 28-digit
+#     subtraction rounds away. That comparison's real resolution is a question of its
+#     own, not something to settle as a side effect of a rendering change.
+#   * Lowering it to DEFAULT_SIGNIFICANT_DIGITS, on the argument that no SVG consumer
+#     resolves more than a binary64, would also coarsen the unpinned edge and centroid
+#     arithmetic that feeds angle classification in `color.py` -- which decides hues,
+#     not just digits.
+SVG_EMISSION_PRECISION = 28
+
+
+@contextmanager
+def emission_precision() -> Iterator[None]:
+    """Compute emitted geometry at the renderer's declared precision, not the caller's.
+
+    Usable as a decorator on a whole renderer, which is how the document-level entry
+    points take it: the pin then covers arithmetic added later inside them, rather than
+    only the expressions someone remembered to wrap.
+    """
+    with localcontext() as context:
+        context.prec = SVG_EMISSION_PRECISION
+        yield
 
 
 class ExactDecimal(Protocol):

@@ -33,7 +33,12 @@ from sqpack.render.motion import (
     append_motion_styles,
     append_square_motion,
 )
-from sqpack.render.numbers import format_points, format_svg_number, format_visible_number
+from sqpack.render.numbers import (
+    emission_precision,
+    format_points,
+    format_svg_number,
+    format_visible_number,
+)
 from sqpack.render.style import (
     CONTACT_CENSUS_COLOR,
     CONTACT_CENSUS_DASH,
@@ -714,6 +719,7 @@ def build_packing_document(
     return root
 
 
+@emission_precision()
 def render_packing_svg(
     final: PackingFrame,
     *,

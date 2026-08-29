@@ -881,3 +881,21 @@ controls:
             "    return mp.sin(mp.radians(degrees))"]
   run: uv run --frozen --group dev python -m pytest tests/test_promote_krawczyk.py -q
   expect: "TypeError"
+
+# --- the atlas emission precision (BC-068) ---
+# Restoring the leak takes the whole `with` block, not just the assignment inside it:
+# setting the global context from within a `localcontext()` scope mutates the copy that
+# scope restores on exit, which leaks nothing and would leave the control silent.
+- name: emission precision - a field refinement leaks into the global decimal context
+  file: src/sqpack/field.py
+  replace:
+  - "        with decimal.localcontext() as context:\n            context.prec = digits + 20\n            slo, shi = str(+as_dec(lo)), str(+as_dec(hi))\n"
+  - "        decimal.getcontext().prec = digits + 20\n        slo, shi = str(+as_dec(lo)), str(+as_dec(hi))\n"
+  run: uv run --frozen --quiet pytest -q tests/test_emission_precision.py
+  expect: "NumberField.decimal left the global decimal precision at"
+
+- name: emission precision - the renderer inherits its precision instead of pinning it
+  file: src/sqpack/render/numbers.py
+  replace: ["        context.prec = SVG_EMISSION_PRECISION\n", "        context.prec = context.prec\n"]
+  run: uv run --frozen --quiet pytest -q tests/test_emission_precision.py
+  expect: "the emitted SVG followed the ambient decimal context to"
