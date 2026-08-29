@@ -1068,6 +1068,41 @@ agenda:
       Do not read a degree off an incomplete accounting: BC-070's kill condition applies
       unchanged, and a count with lost paths is not evidence about a degree at any
       precision. Nothing here may move `verified_upper_bound`.
+  - id: BC-073
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [11, 29]
+    state: ready
+    priority: 1
+    question: >-
+      What degree does the existing evidence actually support searching to, and does the
+      refusal hold there?
+    hypotheses: []
+    budget: 90 minutes
+    entry: >-
+      BC-060 swept degrees 2 through 20 at a coefficient bound of `10^22` on a thousand
+      digits and refused at every one. The tool's own reach formula admits a good deal more
+      than twenty at that precision, so the sweep stopped short of what the data already
+      supports and nothing said why.
+    exit: >-
+      The reach as the code actually implements it, the sweep extended to it with the
+      deciding clause reported degree by degree, and the measured cost of going further; or
+      a statement of what in the rule stops it earlier than the formula suggests.
+    bead: think-gucc
+    depends_on: [BC-060, BC-070]
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      BC-070's bound of `15,744` gives the search a ceiling for the first time. It will not
+      be reached -- no integer-relation method comes near it -- but a refusal at the
+      largest degree the digits support is a strictly stronger statement about `s(29)` than
+      a refusal at twenty, and it narrows the window from both ends.
+    note: >-
+      This block will almost certainly not find the polynomial and is not written expecting
+      to. Do not widen the coefficient bound to manufacture a hit: that is precisely the
+      failure the margin rule exists to prevent, and the planning probe's spurious
+      relations at almost every degree from 8 to 21 on ninety-eight digits are what it
+      caught. `n = 11` must keep recovering Trump's published degree-eight polynomial
+      unchanged; it is the known answer the whole rule is trusted on.
   - id: BC-064
     purpose: tool_validation
     owner_focus: process

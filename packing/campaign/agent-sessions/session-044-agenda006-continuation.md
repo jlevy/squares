@@ -767,6 +767,43 @@ session:
       Landed by cherry-pick; D-021's fix note updated, since the sentence saying phase 1
       was not built is now false.
   - task: >-
+      BC-073 -- establish what degree the existing digits support searching to, and extend
+      the n = 29 relation sweep to it.
+    operator: subagent
+    recording: contemporaneous
+    status: in_progress
+    phase: 10
+    budget_minutes: 90
+    started_at: '2026-08-29T12:33:00Z'
+    deadline_at: '2026-08-29T14:03:00Z'
+    expected_output: >-
+      The reach as the code implements it, the sweep extended to it with the deciding
+      clause degree by degree, and the measured cost of going further.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --fast
+    kill_condition: >-
+      Do not widen the coefficient bound to manufacture a hit. n = 11 must keep recovering
+      Trump's published degree-eight polynomial unchanged.
+    fallback: >-
+      A statement of what in the rule stops the sweep earlier than the formula suggests.
+    write_scope:
+    - packing/devtools/probe_minimal_polynomial.py
+    - packing/tests
+    - packing/devtools/controls.yaml
+    excluded_commands:
+    - git push
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: >-
+      Held to one core, because BC-072's retrack has the other three for the next two
+      hours. A measured statement of what a longer reach would cost is a full result here;
+      finding the polynomial is not expected and the degree bound says why.
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Integrate when it lands.
+  - task: >-
       BC-061 -- an exact LP over certified rational or algebraic coefficients, replacing
       the float solver where a certified answer is required.
     operator: subagent
