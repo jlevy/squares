@@ -159,7 +159,11 @@ def _term_text(monomial: Sequence[int], coefficient: int, names: Sequence[str]) 
 
 
 def msolve_input(
-    polynomials: Sequence[sp.Poly], order: Sequence[sp.Symbol], point: Sequence[Any]
+    polynomials: Sequence[sp.Poly],
+    order: Sequence[sp.Symbol],
+    point: Sequence[Any],
+    *,
+    characteristic: int = 0,
 ) -> str:
     """Render the system as `msolve` input, refusing unless the text re-parses to it.
 
@@ -167,6 +171,15 @@ def msolve_input(
     exercised at all.  Then every emitted polynomial is read back with SymPy and checked
     twice: that it still vanishes at the retained pose, and that it equals the original
     exactly.  Either check failing is a refusal rather than a warning.
+
+    `characteristic` is written verbatim into the second line.  A prime there asks for
+    the same Groebner basis over a finite field, where coefficients cannot swell -- which
+    is the cheap way to learn the *degree* of the eliminant even when the computation
+    over `Q` does not finish.  The degree obtained that way is the true one for all but
+    finitely many primes, and it is a measurement about the system rather than a
+    certificate about `s(29)`: nothing over `F_p` proves anything about a real number.
+    The guards still run, because they check the emitted text against the rational
+    system it was built from, which is what the file must faithfully carry either way.
     """
     names = [str(symbol) for symbol in order]
     bodies = []
@@ -201,7 +214,7 @@ def msolve_input(
                 f"f{index} as written is not the cleared original; the encoding changed "
                 "the polynomial",
             )
-    return ",".join(names) + "\n0\n" + ",\n".join(bodies) + "\n"
+    return ",".join(names) + f"\n{characteristic}\n" + ",\n".join(bodies) + "\n"
 
 
 def verify_eliminant(coefficients: Sequence[int], side_value: Any, *, digits: int) -> dict:
@@ -243,7 +256,7 @@ def verify_eliminant(coefficients: Sequence[int], side_value: Any, *, digits: in
     return report
 
 
-def _emit(path: Path, *, reduced: bool) -> dict:
+def _emit(path: Path, *, reduced: bool, characteristic: int = 0) -> dict:
     started = time.monotonic()
     values, _names = witness_point()
     if reduced:
@@ -256,11 +269,12 @@ def _emit(path: Path, *, reduced: bool) -> dict:
         polynomials = [sp.Poly(p.as_expr(), *order) for p in polynomials]
         point = [values[str(symbol)] for symbol in order]
         note = "six equations in six unknowns, s last so an elimination leaves it"
-    text = msolve_input(polynomials, order, point)
+    text = msolve_input(polynomials, order, point, characteristic=characteristic)
     path.write_text(text, encoding="utf-8")
     return {
         "path": str(path),
         "bytes": len(text),
+        "characteristic": characteristic,
         "note": note,
         "unknowns": [str(symbol) for symbol in order],
         "degrees": [p.total_degree() for p in polynomials],
@@ -283,13 +297,24 @@ def main(argv: Sequence[str] | None = None) -> int:
         type=Path,
         help="check a whitespace- or comma-separated coefficient list, highest degree first",
     )
+    parser.add_argument(
+        "--characteristic",
+        type=int,
+        default=0,
+        help="field characteristic for the emitted system; a prime gives the eliminant's "
+        "degree without coefficient swell, and certifies nothing about s(29)",
+    )
     parser.add_argument("--digits", type=int, default=WITNESS_DIGITS)
     parser.add_argument("--json", action="store_true", help="machine-readable output")
     arguments = parser.parse_args(argv)
 
     report: dict[str, Any] = {}
     if arguments.emit is not None:
-        report["emit"] = _emit(arguments.emit, reduced=arguments.reduced)
+        report["emit"] = _emit(
+            arguments.emit,
+            reduced=arguments.reduced,
+            characteristic=arguments.characteristic,
+        )
     if arguments.verify is not None:
         raw = arguments.verify.read_text(encoding="utf-8").replace(",", " ").split()
         values, _names = witness_point()

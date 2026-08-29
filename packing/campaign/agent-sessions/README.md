@@ -132,8 +132,8 @@ repository root, uses this sequence:
 
 ```shell
 uvx --from flowmark-rs==0.3.2 flowmark --auto <edited-markdown-files>
-uv run --directory packing --frozen softschema validate \
-  <edited-session-hypothesis-and-experiment-files>
+uv run --directory packing --frozen --all-extras --group dev \
+  packing-validate --only "soft-schema"
 uv run --directory packing --frozen packing-ledger render
 uv run --directory packing --frozen packing-ledger check
 uv run --directory packing --frozen python -m devtools.check_synopsis

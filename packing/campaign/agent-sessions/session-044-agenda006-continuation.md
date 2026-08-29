@@ -26,7 +26,7 @@ session:
     objective: >-
       Repair four record defects found while picking the run up cold, before any of them
       can be inherited by a block that trusts them.
-    status: in_progress
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 30
@@ -44,11 +44,64 @@ session:
       recorded. A record whose intent is unclear is a defect to file, not to rewrite.
     fallback: >-
       File the unclear item as a defect and carry the rest.
+    outcome: >-
+      All four repaired inside the block. The bootstrap guide's four commands run here
+      now; the two it opens with were executed to prove it rather than inspected.
+    evidence:
+    - >-
+      'The session bootstrap guide pointed at `--directory explorations/packing` in seven
+      places, a path retired when the packing tier was hoisted to the root. A cold-start
+      agent following the guide failed on its first four commands. Repointed, and
+      `packing-ledger check` and `packing-campaign status` were run from the repository
+      root to confirm it.'
+    - >-
+      'agenda-006 sent BC-051 and BC-049 to an `agenda-007` that was never written. They
+      were folded into agenda-006 itself as BC-062 and BC-063; the note now says so and
+      says the earlier pointer was wrong.'
+    - >-
+      'Four continuation beads carried pre-renumbering commitment ids -- think-twa7 said
+      BC-064, think-d0q7 BC-058, think-298s BC-062, think-c7oo BC-063 -- each pointing at
+      a commitment that now belongs to different work.'
+    - >-
+      'think-ojlr was closed with the claim D-358 retracts, that blocks 2 and 3 overran
+      into its slack. The close reason now carries the measured timestamps instead.'
+    stop_reason: >-
+      Bounded output complete at 08:43:59Z, 2.6 minutes into a 30-minute budget.
+    next_action: >-
+      Open the BC-066 phase against the six-equation system.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-066
+    bead: think-obgk
+    objective: >-
+      Attempt the elimination BC-065 set up, and measure which of the two predicted
+      failure modes it meets rather than running until something dies.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The record repairs are terminal; this opens the block the continuation exists for.
+    budget_minutes: 90
+    started_at: '2026-08-29T08:44:00Z'
+    deadline_at: '2026-08-29T10:14:00Z'
+    expected_output: >-
+      An eliminant in `s` whose degree is measured rather than bounded, or a typed
+      statement of where the chain stopped and what it cost.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev python -m pytest
+      tests/test_promote_elimination.py -q -p no:randomly
+    kill_condition: >-
+      Stop at the declared cap rather than widening it to reach a positive answer. A
+      computation killed on memory is a measurement and is recorded as one.
+    fallback: >-
+      Report the sizes reached at each step, which is the answer that says the interval
+      route carries n = 29.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Open the BC-066 phase against the five-unknown system.
+      Record the measured wall, then take the eliminant degree from the finite-field run.
   primary_bead: think-obgk
   status: in_progress
   budget:
@@ -82,7 +135,8 @@ session:
   checks: []
   stop_reason: null
   next_action: >-
-    Repair the four record defects, then open BC-066 against the five-unknown system.
+    Carry BC-066 on `think-obgk` to a terminal state: record the measured wall the
+    rational elimination hit, and take the eliminant's degree from the finite-field run.
 ---
 # session-044 — the exact route at n = 29, and the middle layers behind it
 

@@ -393,6 +393,8 @@ ordering and its reasons are the
 and
 [run-002](packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md#where-to-resume)
 carries what a fresh agent needs that the diff does not show.
+[Session 044](packing/campaign/agent-sessions/session-044-agenda006-continuation.md) is
+executing that continuation and is where its measurements land.
 The continuation runs the missing middle layers first, with the efficiency and research
 cells deliberately last.
 The full ordering for the sessions after it — including which of the two `priority: 0`
