@@ -315,11 +315,20 @@ The renderer’s standing exact-motion control remains independently replayable:
 
 ![The final frame of the certified exact five-square trajectory.](packing/atlas/rendering/n5-exact-face-trajectory.svg)
 
-**As of 2026-08-28 — start here.** The active plan is
-[agenda-005](packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md),
-replanned that day.
-Block A is **closed**: `BC-047` under `think-y85e` and `BC-042` under
-`think-zmh8` both met their declared exits in
+**As of 2026-08-29 — start here.** The active plan is
+[agenda-006](packing/campaign/agendas/agenda-006-overnight-research-blocks.md), and its
+queue is `BC-074` then `BC-075`.
+
+`BC-074` is the first W8 documentation pass, on `think-eb29`, against the checklist in
+[the documentation-pass runbook](packing/campaign/documentation-pass.md).
+`BC-075` is the efficiency block, on `think-c46d`, and it now has a spec:
+[plan-2026-08-29-gate-validation-speed](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md),
+whose phase 1 is `think-64bw`, `think-p9of` and `think-2bk2` and can land before the
+block opens.
+Everything below this paragraph is the accumulated record of how the program
+got here, not the next action; `agenda-005` is closed and appears in it as history.
+Block A is **closed**: `BC-047` under `think-y85e` and `BC-042` under `think-zmh8` both
+met their declared exits in
 [session 035](packing/campaign/agent-sessions/session-035-agenda005-block-a.md), which
 is terminal. Precision is now manufactured in-repository rather than read off a source —
 the published `n = 29` system refines to 1000 declared digits with a reported residual
@@ -2362,7 +2371,7 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 370 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 371 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -2370,7 +2379,7 @@ and checked in the gate.
 | soundness | 88 | asserted something false about the mathematics |
 | validity | 87 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 137 | recorded something its own evidence contradicts |
-| robustness | 43 | did not finish, or finished only by luck |
+| robustness | 44 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -2379,7 +2388,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-eight defects in 370, and no soundness defect
+**The automated gate has caught forty-eight defects in 371, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
