@@ -152,6 +152,18 @@ Status: **active**. Three programs, run as one agenda because they compete for t
 | BC-050 | measurement_validation | 68, 69 | blocked | 2 | think-ecqk | Shape residuals of 1.9e-8 and 1.5e-8 against 5.1e-50 or better everywhere else. Both records are excluded from the translation escape screen by measurement, so their rigidity blocks read undetermined for a reason that is about our witness rather than about the packing. Every future contact-based screen inherits the same exclusion. |
 | BC-051 | tool_validation | 5, 11, 29 | ready | 0 | think-ej1d | Measured on 2026-08-28: a two-file edit to the rigidity assessor was verified with a 979.79s full gate, while the two steps that edit can affect run together in 12.06s. That is 82x. Across one session the full gate ran six times to completion and was killed twice, and the last run's only finding was a single broken behavioural test. |
 
+### [agenda-006](agendas/agenda-006-overnight-research-blocks.md) — Four bounded overnight blocks, each ending in a checkpoint that holds
+
+Status: **active**. Schedule one unattended overnight run across three independent agenda-005 lanes, in blocks small enough that an interruption costs one block rather than the night. This agenda owns the clock, the ordering, and what a block must leave behind; it does not own a single scientific exit. Those stay with the agenda-005 commitments each block advances, so a block that stops early narrows the schedule and never a claim. The ordering is deliberate: the interval-certification lane runs first because it is the only one that can move a verified bound, and because session-035 left it declared and unstarted.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-052 | tool_validation | 5, 10, 11, 29 | ready | 0 | think-pr0m | Session-035 closed with this as its declared next action, naming BC-045 and `think-75ll` and the spec's phases 1 and 2. Nothing has been built against it since, so the block starts exactly where that handoff points. |
+| BC-053 | tool_validation | 5, 10, 11, 29 | blocked | 0 | think-9ida | Calibration is the test here and it is stronger than for the exact route, because n = 5, n = 10 and n = 11 have answers this implementation cannot influence. Agreeing with the exact route on valid input proves nothing about discrimination, which is why the refusal demonstration is part of the exit rather than a nicety. |
+| BC-054 | tool_validation | 11, 29 | ready | 1 | think-zm3f | This is the unbuilt middle of the exact route: `promote/contacts.py` and `promote/refine.py` exist, and `promote/system.py` and `promote/solve.py` do not, so the pipeline currently runs from a structure straight to a refinement with no assembly between them. |
+| BC-055 | tool_validation | 5 | ready | 1 | think-ojlr | The 4m15s baseline was measured on this container at the start of the run rather than assumed, and its breakdown is already known: 250.86s of fast behavioural tests against 40.38s of soft-schema validation and 30.29s of lint. Any selector that does not move the test figure has not moved the gate. |
+| BC-056 | tool_validation | 5, 10, 11, 16, 29 | blocked | 0 | think-lo3p | The strict gate is the only receipt that exercises the slow tiers, and no block above runs it; each runs the fast gate instead. So the run's one end-to-end check belongs here, where there is still clock left to repair what it finds. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
