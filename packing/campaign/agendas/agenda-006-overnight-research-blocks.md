@@ -1235,7 +1235,7 @@ agenda:
   - id: BC-076
     purpose: tool_validation
     owner_focus: process
-    instances: []
+    instances: [11, 29]
     state: complete
     priority: 0
     question: >-
