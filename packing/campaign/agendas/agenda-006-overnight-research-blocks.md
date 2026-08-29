@@ -496,7 +496,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5]
-    state: ready
+    state: stopped
     priority: 2
     question: >-
       Can verification run only the steps a change can reach, without any chance of
@@ -517,6 +517,19 @@ agenda:
       Deliberately behind the middle layers. This is a tool for the loop rather than for
       the mathematics, and the run has now twice been in a position to cut it; saying so in
       its priority is more honest than leaving it nominally next.
+
+      Stopped in session-044 and superseded by `BC-075`, which asks the prior question.
+      This commitment assumed the tiers were right and only their routing was wrong; the
+      measurements since say otherwise, and a selector bolted onto the wrong tiers makes
+      the wrong thing faster. Its reachability-scoped selector survives inside `BC-075` as
+      one candidate mechanism, and its `4m15s` baseline is superseded by the `484s`, `538s`
+      and `631s` measured on this container as the tier's content grew.
+
+      The design note it produced is retained rather than lost: `Step` declares `name`,
+      `action`, `fast` and `needs_engine` and no input paths, so any reachability selector
+      needs per-step read declarations first, and the only safe shape is fail-open with the
+      declaration verified against observed reads rather than trusted -- an incomplete
+      declaration being exactly the under-run this commitment called a soundness defect.
   - id: BC-063
     purpose: research
     owner_focus: insight
