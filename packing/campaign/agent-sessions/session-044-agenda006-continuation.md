@@ -909,9 +909,13 @@ session:
     checks:
     - uv run --frozen --all-extras --group dev python -m devtools.probe_minimal_polynomial --case trump11
     uncertainty: >-
-      Degrees 30 to 35 were unrun for time rather than for evidence. The coordinator
-      started the full sweep to 35 on the core BC-072 leaves free; whatever it reaches is
-      recorded at the endpoint check.
+      Degrees 30 to 35 remain unrun for time rather than for evidence, and the coordinator's
+      attempt to close them produced nothing. The full sweep to 35 was started at 13:58Z on
+      the core BC-072 left free, and was killed by its own 6600-second cap at 15:48Z with
+      its output still buffered, so not even the degrees it had already redone survived. The
+      lesson is the tool's, not the run's: a sweep that prints only at the end cannot be
+      interrupted usefully, and a resumable one would have kept nine degrees of work. The
+      recorded result is unchanged -- refusal through degree 29.
     elapsed_seconds: 5083
     elapsed_quality: platform_measured
     next_action: >-
