@@ -25,6 +25,15 @@ the promotion spec expected and a future reader should meet them as measurements
   ninety degrees, so `t_i = t_j` is false for a class member a quarter or half turn from
   another.  Emitting those identities left `n = 11` at the noise floor -- its classes
   happen to have equal angles -- and drove `n = 29` to a residual of exactly `pi`.
+- **the one condition `n = 5` needs is second-order, and the first-order statement the
+  pipeline had promised cannot supply it.**  `side_leak` reads `1.00e-16` there, so no
+  contact-preserving first-order motion changes the side and "no admissible motion
+  decreases the side" is already true; a true statement adds a dependent row.  The single
+  free direction is a rotation of the centre square about its own centre, and stepping
+  along it violates the contacts at `-0.25 t^2`, the same either way.  Differentiating the
+  contact map along that direction takes the rank from `15` to `16` of `16` with the
+  residual unmoved at `1.11e-16` -- and each surviving condition is, symbolically, the
+  statement that the contacting corner sits at the **midpoint of the contacted edge**.
 - **a pose is a centre, an angle, *and* a chirality.**  Seven of the `n = 29` layout's
   twenty-nine squares are built inside `scale(-1 1)` mirror groups, and a
   centre-plus-rotation cannot produce a clockwise winding.  Read as rotations they left
@@ -32,11 +41,14 @@ the promotion spec expected and a future reader should meet them as measurements
   falls to `1.3e-15`.  That number is why chirality is data on the structure rather than
   something assembly infers.
 
-The order of the checks in `main` is load-bearing in one place: the `side_leak` check
-runs before the equation count, so restoring the single-endpoint `edge-edge` equation
-trips the *geometric* assertion rather than an arithmetic one.  A control that proves
-"the count moved" is much weaker than one that proves "a contact-preserving motion can
-now shrink the container".
+The order of the checks in `main` is load-bearing in two places, and for the same
+reason.  The `side_leak` check runs before the equation count, so restoring the
+single-endpoint `edge-edge` equation trips the *geometric* assertion rather than an
+arithmetic one; a control that proves "the count moved" is much weaker than one that
+proves "a contact-preserving motion can now shrink the container".  And the `n = 5`
+derivation check runs before the check that closure is supplied where the rank asks for
+it, so a `close` that cannot close reports itself through an assertion naming the
+condition rather than through an uncaught refusal from a later check.
 
 The reflected case is exercised on a *mirrored copy of `n = 11`* rather than on `n = 29`
 itself.  Mirroring an exact packing gives an all-`-1` chirality whose right answer is
@@ -50,15 +62,19 @@ import dataclasses
 from collections import Counter
 
 import mpmath as mp
+import sympy as sp
 
 from cases.gobel5 import packing as gobel5
 from cases.trump11 import packing as trump11
 from sqpack.promote.contacts import Incidence, extract_contacts
 from sqpack.promote.system import (
+    CORNER_OFFSETS,
+    ContactSystem,
     SystemAssemblyError,
     assemble,
     close,
     jacobian_rank,
+    null_directions,
     pose_values,
     residual_at,
 )
@@ -73,6 +89,54 @@ def as_floats(field, squares, side):
         for square in squares
     ]
     return numbers, float(field.decimal(side, 30))
+
+
+def _midpoint_rule(system: ContactSystem, incidence: Incidence):
+    """Symbolically: the contacting corner sits at the midpoint of the contacted edge.
+
+    Written from the corner offsets rather than imported from
+    :mod:`sqpack.promote.system`, because the comparison it feeds is only worth making if
+    the two expressions were arrived at separately.  Reusing assembly's corner helper
+    would leave the geometry stated once and compared with itself.
+
+    The edge midpoint `m` satisfies `e . (m - c) = 0` for the edge direction `e` and the
+    square's centre `c`, so `e . (p - m)` and `e . (p - c)` are the same expression; the
+    first is written here because it is the one a reader can check against the picture.
+    """
+
+    def corner(index: int, which: int):
+        offset_x, offset_y = CORNER_OFFSETS[which]
+        angle = sp.Symbol(f"t{index}", real=True)
+        local_x = sp.Rational(offset_x, 2) * system.chirality[index]
+        local_y = sp.Rational(offset_y, 2)
+        return (
+            sp.Symbol(f"x{index}", real=True)
+            + sp.cos(angle) * local_x
+            - sp.sin(angle) * local_y,
+            sp.Symbol(f"y{index}", real=True)
+            + sp.sin(angle) * local_x
+            + sp.cos(angle) * local_y,
+        )
+
+    if (incidence.left_feature or "").startswith("corner:"):
+        point, edge_index, edge_feature = (
+            incidence.left_feature,
+            int(incidence.right),
+            incidence.right_feature,
+        )
+        point_index = incidence.left
+    else:
+        point, edge_index, edge_feature = (
+            incidence.right_feature,
+            incidence.left,
+            incidence.left_feature,
+        )
+        point_index = int(incidence.right)
+    first = int((edge_feature or "").split(":")[1])
+    ax, ay = corner(edge_index, first)
+    bx, by = corner(edge_index, (first + 1) % 4)
+    px, py = corner(point_index, int((point or "").split(":")[1]))
+    return sp.expand((bx - ax) * (px - (ax + bx) / 2) + (by - ay) * (py - (ay + by) / 2))
 
 
 def features_are_identified_and_typed() -> None:
@@ -231,7 +295,7 @@ def an_edge_edge_contact_pins_collinearity_not_incidence() -> None:
 
 
 def closure_is_supplied_only_where_the_rank_says_it_is_missing() -> None:
-    """Two sizes, two answers -- and after the edge-edge repair they are 1 and none.
+    """Two sizes, two answers: `n = 5` is closed and `n = 11` is refused.
 
     Göbel's `n = 5` has no edge-edge contact at all and keeps a genuine shortfall of one.
     Trump's `n = 11` has seven, and with them written down correctly its contacts isolate
@@ -240,7 +304,9 @@ def closure_is_supplied_only_where_the_rank_says_it_is_missing() -> None:
 
     The `already-determined` refusal had **no case** when it was written, and this file
     said so.  It has two now, which is the branch's first exercise and the clearest sign
-    the shortfall it used to report was an artefact.
+    the shortfall it used to report was an artefact.  What `close` supplies at the one
+    size that needs anything is checked in
+    :func:`the_n5_closure_is_the_contact_map_differentiated_along_its_free_direction`.
     """
     previous = mp.mp.dps
     mp.mp.dps = PRECISION
@@ -257,11 +323,158 @@ def closure_is_supplied_only_where_the_rank_says_it_is_missing() -> None:
         values = pose_values(system, numbers, side_value)
         info = jacobian_rank(system, values)
         assert info["shortfall"] == 1, f"n = 5 shortfall moved to {info['shortfall']}: {info}"
-        assert len(close(system, values).closure) == 1
+        assert close(system, values).closure, "close supplied nothing for a system one short"
 
         # The rank verdict rests on a gap, so the gap is asserted rather than the verdict
         # alone: a marginal one would make the rank a judgement call.
         assert info["largest_discarded"] < info["smallest_counted"] * 1e-20, info
+    finally:
+        mp.mp.dps = previous
+
+
+def the_n5_closure_is_the_contact_map_differentiated_along_its_free_direction() -> None:
+    """The one condition `n = 5` needs, and the evidence it is derived rather than fitted.
+
+    **The first-order statement the pipeline had promised is not it.**  `close` used to
+    say the missing condition would be the Lagrange or Fritz-John statement that no
+    admissible motion decreases the side.  That is already true at `n = 5`: `side_leak`
+    reads `1.00e-16`, and the direction the contacts leave free carries an `s` component
+    of the same size.  A true statement adds a dependent row and no rank, so it cannot be
+    the condition, and `close`'s docstring now says so.
+
+    **What is missing is second-order.**  The free direction is a rotation of the centre
+    square about its own centre, and `devtools.probe_contact_system --case gobel5 --walk`
+    reads `-0.25 t^2` along it in both signs across three decades of step -- an ordinary
+    second-order obstruction, not the `O(t)` signature that diagnosed D-361.  So the pose
+    is infinitesimally flexible and second-order rigid, and the shortfall is a degenerate
+    root of the contact map rather than an unpinned optimum.
+
+    **The condition is that the contact map is stationary along the direction it leaves
+    free**, `sum_j v_j dg_k/du_j = 0`.  Four survive at `n = 5`, against a shortfall of
+    one, because they are emitted per equation and not per missing rank -- the sixteen
+    wall equations drop out only because a wall equation does not mention the rotating
+    square, so its derivative along that rotation is identically zero.  The rank goes from
+    `15` to `16` of `16` and the residual is unmoved at `1.11e-16`.
+
+    **The check that says "derived" rather than "fitted" is the comparison below.**  Each
+    surviving condition is compared against the statement that the contacting corner sits
+    at the midpoint of the contacted edge, written out here from the corner offsets
+    without reference to any derivative, and the two agree *symbolically* -- the
+    difference expands to exactly zero in the unknowns, not to something small at this
+    pose.  That makes the condition an identity of the corner-edge contact type rather
+    than a fact about Göbel's packing.  The comparison is up to sign, because a null
+    direction is, and which sign the SVD returns moves with the working precision.
+
+    Reaching full rank is not by itself evidence of any of this, and the assertion on
+    `pinned` below is here to keep that visible: `t4 = pi/4` reaches `16` too, and it is
+    the answer copied out of the pose.
+    """
+    previous = mp.mp.dps
+    mp.mp.dps = PRECISION
+    try:
+        squares, side, field = gobel5.build()
+        field.refine_to(PRECISION)
+        structure = extract_contacts(squares, side, sign=field.sign)
+        system = assemble(structure)
+        numbers, side_value = as_floats(field, squares, side)
+        values = pose_values(system, numbers, side_value)
+
+        directions = null_directions(system, values)
+        assert len(directions) == 1, (
+            f"the n = 5 contacts leave {len(directions)} directions free rather than one; "
+            "the condition below is derived along a direction that is unique up to sign, "
+            "and with more than one the basis stops being an implementation detail"
+        )
+        direction = directions[0]
+        free = [
+            name
+            for name, part in zip(system.unknowns, direction.components, strict=True)
+            if part
+        ]
+        assert free == ["t4"], (
+            f"the direction the n = 5 contacts leave free reads as {free}; it is a "
+            "rotation of the centre square about its own centre and nothing else, so a "
+            "direction carrying more has kept measurement noise the rank tolerance cuts"
+        )
+        assert direction.largest_dropped < 1e-12 * direction.smallest_kept, (
+            f"the free direction was denoised across a gap of {direction.largest_dropped:.3e} "
+            f"against {direction.smallest_kept:.3e}; on a narrow gap, which components of a "
+            "measured vector count as zero is a judgement call, and so is any condition "
+            "derived from it"
+        )
+
+        try:
+            closed = close(system, values)
+        except SystemAssemblyError as error:
+            raise AssertionError(
+                f"close could not supply the n = 5 condition: {error.kind} -- {error}"
+            ) from error
+
+        emitted = dict(
+            zip(
+                closed.sources[len(closed.equations) :],
+                [sp.sympify(text) for text in closed.closure],
+                strict=True,
+            )
+        )
+        for incidence in structure.pair_contacts:
+            source = (
+                f"stationary(v0):pair({incidence.left},{incidence.right}):{incidence.contact}"
+            )
+            assert source in emitted, (
+                f"the corner-edge contact {source} contributed no closure condition, so "
+                "the closure is not the directional derivative of the contact map"
+            )
+            rule = _midpoint_rule(system, incidence)
+            # Up to sign: a null direction is defined up to sign, and `h = 0` and
+            # `-h = 0` cut out the same set.  Which one the SVD hands back is not stable
+            # across working precisions and is not a property of the system.
+            differences = [
+                sp.expand(sp.simplify(emitted[source] - sign * rule)) for sign in (1, -1)
+            ]
+            assert 0 in differences, (
+                f"the closure condition for {source} is not the statement that the "
+                f"contacting corner sits at the midpoint of the contacted edge: emitted "
+                f"{emitted[source]}, midpoint rule {rule}. What was emitted is not the "
+                "directional derivative of the contact map"
+            )
+
+        assert len(closed.closure) == 4, (
+            f"the n = 5 closure carries {len(closed.closure)} conditions against four "
+            "corner-edge contacts; the sixteen wall equations do not mention the rotating "
+            "square, so their derivative along its rotation is identically zero and only "
+            "measurement noise can put them here"
+        )
+
+        after = jacobian_rank(closed, values)
+        assert after["rank"] == 16 and after["shortfall"] == 0, (
+            f"the n = 5 closure left the rank at {after['rank']} of {after['unknowns']}; "
+            "a condition that does not raise the rank has closed nothing"
+        )
+
+        residuals = residual_at(closed, values)
+        assert len(residuals) == closed.equation_count == 24, (
+            f"residual_at evaluated {len(residuals)} of {closed.equation_count} equations, "
+            "so the closure is carried but never checked -- and a condition nobody "
+            "evaluates cannot be wrong at the pose"
+        )
+        worst = max(abs(value) for value in residuals)
+        assert worst < 1e-12, (
+            f"the closed n = 5 system does not vanish at the pose it was assembled from "
+            f"(worst {worst:.3e}); the retained pose is a root of the contacts, and a "
+            "closure it does not satisfy has replaced the answer rather than isolated it"
+        )
+
+        pinned = dataclasses.replace(
+            closed,
+            sources=(*closed.sources[: len(closed.equations)], "pinned(t4)"),
+            closure=(sp.srepr(sp.Symbol("t4", real=True) - sp.pi / 4),),
+        )
+        assert jacobian_rank(pinned, values)["rank"] == 16, (
+            "pinning t4 at pi/4 no longer reaches full rank, so this file no longer "
+            "records the thing it is here to record: that reaching full rank is not by "
+            "itself evidence that a condition was derived rather than read off the pose"
+        )
     finally:
         mp.mp.dps = previous
 
@@ -384,6 +597,7 @@ def main() -> int:
     the_packing_satisfies_its_own_equations()
     an_edge_edge_contact_pins_collinearity_not_incidence()
     the_contact_equations_determine_the_pose()
+    the_n5_closure_is_the_contact_map_differentiated_along_its_free_direction()
     closure_is_supplied_only_where_the_rank_says_it_is_missing()
     a_mirrored_packing_assembles_and_vanishes()
     a_pose_of_the_wrong_chirality_is_refused()

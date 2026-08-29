@@ -42,6 +42,17 @@ stationarity condition lives.  :func:`close` supplies conditions only when the r
 one is missing, and now refuses at the two sizes where it was previously inventing four
 and seven.
 
+**The `n = 5` shortfall is a degenerate root, not an unpinned optimum, and that is why
+the condition is second-order.**  The single direction the contacts leave free is a
+rotation of the centre square about its own centre; its `s` component measures `1.0e-16`
+and `side_leak` reads `1.00e-16`, so no contact-preserving first-order motion changes the
+side and first-order optimality already holds.  Stepping along that direction violates
+the contacts at `-0.25 t^2`, the same in both signs across three decades of step.  The pose
+is therefore infinitesimally flexible and second-order rigid, and what the contact map
+lacks at it is an invertible differential rather than a stationarity statement.
+:func:`close` supplies the second-order information by differentiating the contact map
+along the free direction; the condition is written out there.
+
 **The pose of a square is a centre, an angle, and a chirality.**  Not just the first
 two.  A packing may place a square by a reflection as readily as by a rotation, and a
 reflected square's corners wind clockwise, which no centre-plus-angle can produce.  The
@@ -109,6 +120,9 @@ class ContactSystem:
     n: int
     unknowns: tuple[str, ...]
     equations: tuple[str, ...]
+    #: What each scalar equation came from, parallel to :attr:`all_equations` rather than
+    #: to `equations` alone -- so a closure condition names the contact it was
+    #: differentiated from and is not an anonymous extra row.
     sources: tuple[str, ...]
     angle_identities: int
     #: Per-square `+1` / `-1`, in square order.  Kept on the system because the equations
@@ -121,8 +135,23 @@ class ContactSystem:
     closure: tuple[str, ...] = ()
 
     @property
+    def all_equations(self) -> tuple[str, ...]:
+        """Every scalar equation the system carries: the contacts, then the closure.
+
+        The two fields stay apart because their provenance differs -- one is read off the
+        structure, the other is derived from the first -- and nothing downstream should
+        care.  Everything that evaluates or differentiates the system reads this, which
+        is the difference between a closure a solver can use and a closure that only
+        moves :attr:`equation_count`.  While `closure` held prose and
+        :func:`contact_jacobian` read `equations` alone, changing a count was the only
+        thing a condition could do -- which is the shape of the failure D-361 records:
+        conditions sized to a shortfall and named for something they were not.
+        """
+        return self.equations + self.closure
+
+    @property
     def equation_count(self) -> int:
-        return len(self.equations) + len(self.closure)
+        return len(self.all_equations)
 
     @property
     def unknown_count(self) -> int:
@@ -338,8 +367,71 @@ def assemble(structure: ContactStructure) -> ContactSystem:
     )
 
 
+class NullDirection(NamedTuple):
+    """A direction the equations leave free, and how cleanly the measurement read it.
+
+    The gap travels with the vector because the vector is a *measurement*: its small
+    components are set to zero at the same relative tolerance that decided the rank, and
+    a reader who is told the direction without being told the gap cannot tell a clean
+    reading from a marginal one.  At Göbel's `n = 5` the largest component dropped is
+    `1.0e-16` against a smallest kept of `1.0`, so the denoising spans sixteen decades and
+    decides nothing; a narrow gap there would make the emitted condition a judgement call
+    and should be treated as one.
+    """
+
+    components: tuple[float, ...]
+    largest_dropped: float
+    smallest_kept: float
+
+
+def null_directions(
+    system: ContactSystem, values: Sequence[float], *, tolerance: float = 1e-9
+) -> list[NullDirection]:
+    """An orthonormal basis of the directions the system's equations do not constrain.
+
+    Individually these vectors are not claims about anything -- a null space has no
+    preferred basis, which is the correction D-360 records -- but the conditions
+    :func:`close` derives from them span the same space whichever basis is used, because
+    a directional derivative is linear in its direction.  So the basis is an
+    implementation detail of the emission and not of the system it emits.
+    """
+    _left, singular, right = mp.svd_r(contact_jacobian(system, values))
+    ordered = [float(singular[index]) for index in range(singular.rows)]
+    largest = max(ordered, default=0.0)
+    rank = sum(1 for value in ordered if value > tolerance * largest)
+    directions: list[NullDirection] = []
+    for row in range(rank, right.rows):
+        raw = [float(right[row, column]) for column in range(right.cols)]
+        cut = tolerance * max(abs(value) for value in raw)
+        kept = [value if abs(value) > cut else 0.0 for value in raw]
+        norm = math.sqrt(sum(value * value for value in kept))
+        if norm == 0:
+            continue
+        directions.append(
+            NullDirection(
+                components=tuple(value / norm for value in kept),
+                largest_dropped=max(
+                    (abs(value) for value in raw if abs(value) <= cut), default=0.0
+                ),
+                smallest_kept=min(abs(value) for value in kept if value),
+            )
+        )
+    return directions
+
+
+def _directional_derivative(row, direction: Sequence[float], symbols: Sequence):
+    """`sum_j v_j * d(row)/d(u_j)`: how one equation changes along one direction."""
+    return sp.expand(
+        sum(
+            sp.Float(component) * sp.diff(row, symbol)
+            for component, symbol in zip(direction, symbols, strict=True)
+            if component
+        )
+    )
+
+
 def close(system: ContactSystem, values: Sequence[float], *, tolerance: float = 1e-9):
-    """Add the stationarity conditions the contact equations leave short, if any.
+    """Add the conditions the contact equations leave short, by differentiating them.
 
     Closure is sized by the **rank** of the contact Jacobian, not by counting rows.
     Counting remains the wrong instrument: at `n = 11` there are 42 contact equations
@@ -348,15 +440,54 @@ def close(system: ContactSystem, values: Sequence[float], *, tolerance: float = 
 
     **Most of the time there is nothing to add, and believing otherwise was a bug.**
     With `edge-edge` contributing its second equation the Jacobian reaches full rank at
-    `n = 11` and at `n = 29`, so both now take the `already-determined` refusal -- where
-    an earlier version of this function reported four and seven missing "stationarity
+    `n = 11` and at `n = 29`, so both take the `already-determined` refusal -- where an
+    earlier version of this function reported four and seven missing "stationarity
     conditions" that were in fact missing collinearity equations.  Göbel's `n = 5` has no
-    `edge-edge` contact and is still one short, which is the case a real condition has to
-    be derived for.
+    `edge-edge` contact and is one short.
 
-    What that one condition is remains the next step and is not derived here.  It is the
-    Lagrange or Fritz-John statement that no admissible motion decreases the side, in
-    determinant form; this reports that one is needed and refuses to invent it.
+    **The condition `n = 5` needs is not a first-order optimality statement, and this
+    docstring used to say it was.**  It promised "the Lagrange or Fritz-John statement
+    that no admissible motion decreases the side, in determinant form".  That statement
+    cannot close `n = 5`, for the plainest of reasons: it is already true there.  The one
+    direction the contacts leave free is a rotation of the centre square about its own
+    centre, carrying an `s` component of `1.0e-16`, and `side_leak` -- the norm of the
+    projection of `e_s` onto the null space, which is exactly the quantity that assertion
+    is about -- reads `1.00e-16`.  A true statement adds a dependent row and no rank.
+
+    **What is missing is second-order.**  Stepping along the free direction violates the
+    contacts at `-0.25 t^2`, identical to the four figures
+    `devtools.probe_contact_system --case gobel5 --walk` prints at every step and in both
+    signs, so the pose is infinitesimally flexible and second-order rigid.  The
+    contact map has an isolated root there with a singular differential -- a degenerate
+    root, not an unpinned optimum -- and what removes the degeneracy is the statement
+    that the map is *stationary along the direction it leaves free*:
+
+        sum_j v_j * dg_k/du_j (u) = 0,   for every equation `g_k` the system carries
+
+    with `v` the direction :func:`null_directions` measures.  This is the deflation step
+    of Leykin, Verschelde and Zhao, *Newton's method with deflation for isolated
+    singularities of polynomial systems* (Theoretical Computer Science 359, 2006,
+    111-122), specialised in one way that is a restriction rather than a result: their
+    kernel vector is carried as unknowns under a normalisation, and here it is fixed at a
+    measured value, which is only available because this kernel is one-dimensional and
+    reads cleanly.  The closed system's roots are therefore a subset of the contact
+    system's, containing the retained pose and non-degenerate at it -- which is what a
+    Newton step and a Krawczyk certification need, and is less than a proof that the pose
+    is optimal.
+
+    **Nothing here is chosen to make the counts meet, and two things say so.**  The
+    conditions are emitted for *every* equation rather than for a shortfall's worth --
+    four survive at `n = 5`, where the shortfall is one -- so the emission is not sized;
+    and each surviving condition turns out to be, symbolically and not merely numerically,
+    the statement that the contacting corner sits at the **midpoint of the contacted
+    edge**.  That is an identity of the corner-edge contact type in the unknowns, not a
+    fact about Göbel's packing, and `tests/test_promote_system.py` checks it against a
+    midpoint expression written independently of the derivative.
+
+    At `n = 5` the sixteen wall equations contribute nothing, and for a reason worth
+    stating: a wall equation does not mention the rotating square, so its derivative along
+    that rotation is identically zero, and `0 = 0` is not a condition.  Dropping those is
+    the only filtering that happens.
     """
     info = jacobian_rank(system, values, tolerance=tolerance)
     shortfall = info["shortfall"]
@@ -367,20 +498,38 @@ def close(system: ContactSystem, values: Sequence[float], *, tolerance: float = 
             f"{info['unknowns']} unknowns, so the equations isolate this pose and a "
             "closure added anyway would be an invented constraint",
         )
-    conditions = tuple(
-        f"stationarity condition {index + 1} of {shortfall}: a rank-deficiency "
-        "determinant on the bordered Jacobian of the contact equations"
-        for index in range(shortfall)
-    )
-    return ContactSystem(
+    rows = [sp.sympify(equation) for equation in system.all_equations]
+    symbols = _symbols_by_name(system, rows)
+    conditions: list[str] = []
+    sources: list[str] = []
+    for index, direction in enumerate(null_directions(system, values, tolerance=tolerance)):
+        for row, source in zip(rows, system.sources, strict=True):
+            condition = _directional_derivative(row, direction.components, symbols)
+            if condition == 0:
+                continue
+            conditions.append(sp.srepr(condition))
+            sources.append(f"stationary(v{index}):{source}")
+
+    closed = ContactSystem(
         n=system.n,
         unknowns=system.unknowns,
         equations=system.equations,
-        sources=system.sources,
+        sources=system.sources + tuple(sources),
         angle_identities=system.angle_identities,
         chirality=system.chirality,
-        closure=conditions,
+        closure=system.closure + tuple(conditions),
     )
+    after = jacobian_rank(closed, values, tolerance=tolerance)
+    if after["shortfall"] > 0:
+        raise SystemAssemblyError(
+            "closure-does-not-close",
+            f"differentiating the contact map along the {shortfall} direction(s) it "
+            f"leaves free produced {len(conditions)} non-trivial condition(s), and the "
+            f"rank only moved from {info['rank']} to {after['rank']} against "
+            f"{after['unknowns']} unknowns; the conditions are dependent on the equations "
+            "they came from, so this formulation does not close this contact graph",
+        )
+    return closed
 
 
 def _symbols_by_name(system: ContactSystem, equations: Sequence) -> list:
@@ -458,8 +607,12 @@ def contact_jacobian(system: ContactSystem, values: Sequence[float]):
     :func:`_symbols_by_name`, which couples them to how this module names things.
     :func:`jacobian_rank` summarises it; `devtools.probe_contact_system` walks its null
     space; a solver would use it directly.
+
+    It differentiates :attr:`ContactSystem.all_equations`, so a closed system is
+    differentiated *with* its closure.  Reading `equations` alone here is what made a
+    closure condition unable to do anything but change a count.
     """
-    equations = [sp.sympify(equation) for equation in system.equations]
+    equations = [sp.sympify(equation) for equation in system.all_equations]
     symbols = _symbols_by_name(system, equations)
     matrix = sp.Matrix(
         [[sp.diff(equation, symbol) for symbol in symbols] for equation in equations]
@@ -470,7 +623,11 @@ def contact_jacobian(system: ContactSystem, values: Sequence[float]):
 def jacobian_rank(
     system: ContactSystem, values: Sequence[float], *, tolerance: float = 1e-9
 ) -> dict:
-    """The rank of the contact Jacobian at a pose, and what it says about closure.
+    """The rank of the system's Jacobian at a pose, and what it says about closure.
+
+    On an assembled system that is the contact Jacobian.  On a closed one it is the
+    Jacobian of the contacts *and* the closure, which is what makes "the closure took the
+    rank to full" a measurement rather than a hope.
 
     This is the measurement that equation counting cannot make.  A contact system for a
     rigid packing is *redundant*: many contacts follow from others, so there are more
@@ -506,7 +663,11 @@ def jacobian_rank(
         "rank": rank,
         "side_leak": leak,
         "unknowns": system.unknown_count,
+        # Reported apart rather than summed: on a closed system the rank is a verdict on
+        # both, and a reader who cannot see how many rows came from the closure cannot
+        # tell a rank the contacts reached from one the closure carried.
         "equations": len(system.equations),
+        "closure": len(system.closure),
         "shortfall": system.unknown_count - rank,
         "largest_singular_value": largest,
         "smallest_counted": ordered[rank - 1] if rank else None,
@@ -522,8 +683,12 @@ def residual_at(system: ContactSystem, values: Sequence[float]) -> list[float]:
     noise floor here.  One that does not -- a perturbed incidence, a mistyped feature --
     shows up as a residual that is not small, which is the cheapest available test that
     assembly wrote down the right equations.
+
+    Closure conditions are evaluated too, on the same argument as in
+    :func:`contact_jacobian`: a condition nobody evaluates cannot be wrong at the pose,
+    and "the residual is unmoved" is a claim about the closed system or it is not a claim.
     """
-    equations = [sp.sympify(equation) for equation in system.equations]
+    equations = [sp.sympify(equation) for equation in system.all_equations]
     symbols = _symbols_by_name(system, equations)
     substitution = dict(zip(symbols, values, strict=True))
     return [float(sp.Float(equation.subs(substitution))) for equation in equations]

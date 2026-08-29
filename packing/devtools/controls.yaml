@@ -971,3 +971,46 @@ controls:
   replace: ["    return not any(coefficients[1:])", "    return True"]
   run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
   expect: "Trump's cell was reported rational"
+
+# --- the n = 5 closure (BC-069) ---
+# The n = 5 condition is the contact map differentiated along the direction the contacts
+# leave free, and the risk it carries is D-361's: a condition sized or shaped to make the
+# counts meet rather than derived. The first two controls restore each way of doing that,
+# and both are caught by the comparison against the midpoint statement rather than by a
+# count. The last three restore the structural bug that made a closure inert -- prose in a
+# field nothing evaluates -- from each of the three places it can be reintroduced.
+- name: system assembly - the closure pins the free angle at its measured value
+  file: src/sqpack/promote/system.py
+  replace: ["sp.Float(component) * sp.diff(row, symbol)",
+            "sp.Float(component) * (symbol - sp.Float(0.7853981633974483))"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "is not the directional derivative of the contact map"
+
+- name: system assembly - the closure repeats the contact equations instead of differentiating them
+  file: src/sqpack/promote/system.py
+  replace: ["sp.Float(component) * sp.diff(row, symbol)", "sp.Float(component) * row"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "close could not supply the n = 5 condition"
+
+- name: system assembly - the free direction is taken with its measurement noise
+  file: src/sqpack/promote/system.py
+  replace: ["        kept = [value if abs(value) > cut else 0.0 for value in raw]",
+            "        kept = list(raw)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "has kept measurement noise the rank tolerance cuts"
+
+- name: system assembly - the Jacobian is taken of the contacts alone, so a closure cannot move it
+  file: src/sqpack/promote/system.py
+  replace:
+  - "    equations = [sp.sympify(equation) for equation in system.all_equations]\n    symbols = _symbols_by_name(system, equations)\n    matrix = sp.Matrix(\n"
+  - "    equations = [sp.sympify(equation) for equation in system.equations]\n    symbols = _symbols_by_name(system, equations)\n    matrix = sp.Matrix(\n"
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "close could not supply the n = 5 condition"
+
+- name: system assembly - the residual skips the closure, so nothing checks it at the pose
+  file: src/sqpack/promote/system.py
+  replace:
+  - "    equations = [sp.sympify(equation) for equation in system.all_equations]\n    symbols = _symbols_by_name(system, equations)\n    substitution = dict"
+  - "    equations = [sp.sympify(equation) for equation in system.equations]\n    symbols = _symbols_by_name(system, equations)\n    substitution = dict"
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_system.py -q
+  expect: "so the closure is carried but never checked"

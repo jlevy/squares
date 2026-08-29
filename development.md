@@ -246,11 +246,15 @@ uv run --frozen --all-extras --group dev python -m devtools.probe_system_degree 
 [`probe_contact_system`](packing/devtools/probe_contact_system.py) reports, per retained
 case, what the assembled contact system determines: the typing, the equations against
 the unknowns, the Jacobian’s rank and the gap that verdict rests on, the residual at the
-pose, `side_leak`, and what `close` does.
-`--walk` steps the side-changing null direction and reads the violation’s **order in
+pose, `side_leak`, and what `close` does — where `close` supplies conditions, the rank
+and residual are re-measured on the closed system, so “it closed” is a measurement
+rather than a count of conditions.
+`--walk` steps a direction the equations leave free and reads the violation’s **order in
 `t`** — `O(t²)` is an ordinary second-order obstruction, `O(t)` means an equation is not
 describing its constraint.
-That distinction is the whole of `D-361`.
+That distinction is the whole of `D-361`. Which direction it walked is printed, because
+there are two: the steepest side-changing one where the null space contains such a
+direction, and the free direction itself where it does not, as at Göbel’s `n = 5`.
 
 [`probe_minimal_polynomial`](packing/devtools/probe_minimal_polynomial.py) runs the
 integer-relation search under the promotion spec’s frozen margin rule and reports which

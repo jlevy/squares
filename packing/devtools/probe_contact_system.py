@@ -7,13 +7,16 @@ has to be replayable by the next reader, so it lives here rather than in a trans
 
 **What it reports.**  For each retained case: the contact typing, the assembled equation
 count against the unknowns, the Jacobian's rank and the gap the rank verdict rests on,
-the residual at the pose the structure came from, `side_leak`, and what `close` does.
+the residual at the pose the structure came from, `side_leak`, and what `close` does --
+where `close` supplies conditions, the rank and residual are re-measured on the *closed*
+system, because "it closed" is a claim about the Jacobian and a count of conditions is
+what the pipeline used to offer in place of one.
 
 **What `--walk` adds, and why it is the interesting half.**  A rank shortfall says the
 contacts do not pin the pose.  It does not say *why*, and the difference between "a
 stationarity condition is missing" and "an equation is wrong" is invisible to it.
-Walking the null direction that most changes the side separates them by the *order* of
-the violation it produces:
+Walking a direction the equations leave free separates them by the *order* of the
+violation it produces:
 
 - `O(t^2)` is an ordinary second-order obstruction.  The contacts hold to first order and
   curvature is what forbids the motion.  Nothing is missing.
@@ -23,6 +26,13 @@ the violation it produces:
 
 At `n = 11` with `edge-edge` written as one equation, the descent direction gave `O(t)`
 on three declared contacts.  That is the whole of D-361, and it is one command.
+
+Which direction gets walked is reported, because there are two.  Where the null space
+contains a side-changing direction the steepest one is walked; where it does not -- at
+Göbel's `n = 5`, whose single free direction is a rotation of the centre square about its
+own centre -- the free direction is walked instead, and reads `-0.25 t^2` in both signs.
+An earlier version called that case "nothing to walk", which reported a determined system
+where the rank says one short.
 
 Usage:
 
@@ -57,6 +67,7 @@ from sqpack.promote.system import (
     close,
     contact_jacobian,
     jacobian_rank,
+    null_directions,
     pose_values,
     residual_at,
 )
@@ -154,12 +165,20 @@ def _separation(first: Sequence, second: Sequence) -> float:
     return float(best if best is not None else 0.0)
 
 
-def _null_direction(system: ContactSystem, values: Sequence[float]) -> list[float] | None:
-    """The unit null-space direction that changes the side the most, or None if there is none.
+def _null_direction(
+    system: ContactSystem, values: Sequence[float]
+) -> tuple[list[float], str] | None:
+    """A unit direction the equations leave free, and which one it is.
 
-    Built from the projection of the side's unit vector onto the null space, so it is the
-    steepest side-changing motion the contacts permit rather than an arbitrary basis
-    vector -- which a null space does not have.
+    Two cases, and telling them apart is the point.  When some free direction changes the
+    side, the one built from the projection of the side's unit vector onto the null space
+    is walked: it is the steepest side-changing motion the contacts permit, rather than an
+    arbitrary basis vector -- which a null space does not have.  When the null space is
+    non-empty but changes the side nowhere, as at Göbel's `n = 5`, that direction does not
+    exist and the free direction is walked instead; saying "nothing to walk" there would
+    report a determined system, which is not what a rank shortfall of one is.
+
+    `None` means the system really is determined.
     """
     _left, singular, right = mp.svd_r(contact_jacobian(system, values))
     ordered = [float(singular[i]) for i in range(singular.rows)]
@@ -170,11 +189,17 @@ def _null_direction(system: ContactSystem, values: Sequence[float]) -> list[floa
     weights = [float(right[k, side_index]) for k in range(rank, right.rows)]
     norm = math.sqrt(sum(w * w for w in weights))
     if norm < 1e-14:
-        return None
+        free = null_directions(system, values)
+        if not free:
+            return None
+        label = "the free direction, which does not change the side"
+        if len(free) > 1:
+            label += " (one of several, and a null basis is not canonical)"
+        return list(free[0].components), label
     return [
         sum(weights[k - rank] * float(right[k, j]) for k in range(rank, right.rows)) / norm
         for j in range(right.cols)
-    ]
+    ], "the steepest side-changing direction"
 
 
 def walk(system: ContactSystem, values: Sequence[float], contacts: set) -> dict:
@@ -183,17 +208,19 @@ def walk(system: ContactSystem, values: Sequence[float], contacts: set) -> dict:
     Both signs are walked because they answer different questions.  The `+` direction
     grows the container and is expected to obstruct at second order; the `-` direction
     shrinks it, and a first-order violation there is the signature of an equation that
-    does not describe its constraint.
+    does not describe its constraint.  Where the free direction does not touch the side at
+    all the two readings should agree, and at `n = 5` they do: `-0.25 t^2` either way.
     """
-    direction = _null_direction(system, values)
-    if direction is None:
+    found = _null_direction(system, values)
+    if found is None:
         return {
             "walkable": False,
             "reason": (
-                "the null space contains no direction that changes the side, so there is "
-                "nothing here to walk -- which is what a determined system looks like"
+                "the equations leave no direction free, so there is nothing here to "
+                "walk -- which is what a determined system looks like"
             ),
         }
+    direction, walked = found
     count = system.n
     side_index = list(system.unknowns).index("s")
     rows: list[dict] = []
@@ -227,7 +254,7 @@ def walk(system: ContactSystem, values: Sequence[float], contacts: set) -> dict:
                     ],
                 }
             )
-    return {"walkable": True, "steps": rows, "order": _order(rows)}
+    return {"walkable": True, "walked": walked, "steps": rows, "order": _order(rows)}
 
 
 def _order(rows: Sequence[dict]) -> dict:
@@ -273,10 +300,19 @@ def probe(name: str, *, with_walk: bool = False) -> dict:
         residuals = residual_at(system, values)
         info = jacobian_rank(system, values)
         try:
-            closure = len(close(system, values).closure)
-            closure_note = f"{closure} conditions"
+            closed = close(system, values)
         except SystemAssemblyError as error:
             closure_note = f"refuses: {error.kind}"
+        else:
+            # The rank and residual are re-measured on the closed system rather than
+            # reported from the count of conditions: "it closed" is a measurement about
+            # the Jacobian, and a count is what the pipeline used to offer instead.
+            after = jacobian_rank(closed, values)
+            worst = max(abs(value) for value in residual_at(closed, values))
+            closure_note = (
+                f"{len(closed.closure)} conditions -> rank {after['rank']} of "
+                f"{after['unknowns']}, residual {worst:.3e}"
+            )
         walked = None
         if with_walk:
             contacts = {(i.left, int(i.right)) for i in structure.pair_contacts}
@@ -330,7 +366,7 @@ def _render(report: dict) -> None:
         if not result["walkable"]:
             print(f"  walk: {result['reason']}")
             return
-        print("  walk along the steepest side-changing null direction:")
+        print(f"  walk along {result['walked']}:")
         print(f"    {'step':>10} {'side':>20} {'worst sep':>14} {'overlaps':>9}")
         for row in result["steps"]:
             print(
