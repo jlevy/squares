@@ -63,6 +63,13 @@ session:
       BC-064, think-d0q7 BC-058, think-298s BC-062, think-c7oo BC-063 -- each pointing at
       a commitment that now belongs to different work.'
     - >-
+      'A fifth finding was reported and retracted. Two beads the agenda names were written
+      up as never created, on the strength of `tbd show` reporting them missing; they
+      existed the whole time on the shared `tbd-sync` branch, and a local store that has
+      not synced reports a bead as missing rather than as unsynced. The duplicates that
+      created are closed against the originals, and `check_bead_tree` is what caught it by
+      refusing two open beads sharing a title.'
+    - >-
       'think-ojlr was closed with the claim D-358 retracts, that blocks 2 and 3 overran
       into its slack. The close reason now carries the measured timestamps instead.'
     stop_reason: >-
@@ -127,7 +134,7 @@ session:
       stopped and what it cost is the exit BC-066 names, so the block is complete rather
       than stopped.
     next_action: >-
-      Open BC-067 on `think-er2h`: the n = 11 round trip, where the answer is published
+      Open BC-067 on `think-2q2c`: the n = 11 round trip, where the answer is published
       and the contact system has had full rank since BC-059.
   - workflow: general-improvement
     recording: contemporaneous
@@ -188,13 +195,13 @@ session:
       Exit met inside the budget, and the regeneration the commitment was sized for turned
       out not to be needed.
     next_action: >-
-      Open BC-067 on `think-er2h`.
+      Open BC-067 on `think-2q2c`.
   - workflow: pipeline-improvement
     recording: contemporaneous
     clock_role: work
     focus: correctness
     commitment: BC-067
-    bead: think-er2h
+    bead: think-2q2c
     objective: >-
       Discharge a recovered minimal polynomial all the way back to a verified packing at
       n = 11, rather than only to an isolated root.
@@ -420,7 +427,7 @@ session:
     clock_role: work
     focus: correctness
     commitment: BC-069
-    bead: think-rqad
+    bead: think-864y
     objective: >-
       Integrate the delegated n = 5 closure lane, and hold it to the rule that a condition
       may be derived but not sized to make the counts meet.

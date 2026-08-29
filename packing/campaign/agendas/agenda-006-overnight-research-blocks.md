@@ -729,7 +729,7 @@ agenda:
     - src/sqpack/promote/roundtrip.py
     - tests/test_promote_roundtrip.py
     - cases/trump11/packing.py
-    bead: think-er2h
+    bead: think-2q2c
     depends_on: [BC-060]
     workflows: [pipeline-improvement]
     next_evidence: >-
@@ -760,10 +760,18 @@ agenda:
       to be believed. The recovered `u` is then still required to satisfy `u`'s own
       minimal polynomial exactly in the rebuilt field.
 
-      The bead this commitment named, `think-2q2c`, was never created; the work is
-      tracked on `think-er2h`. `BC-069`'s `think-864y` was dangling the same way and is
-      now `think-rqad`. Neither was caught by the gate, which checks the bead tree it can
-      see rather than the ids the agenda quotes.
+      A correction about these two beads, because the first version of this note was
+      wrong. `think-2q2c` and `BC-069`'s `think-864y` were reported here as never created,
+      on the strength of `tbd show` saying MISSING for both. They existed the whole time,
+      on the shared `tbd-sync` branch: this container's freshly materialized local bead
+      store did not have them, and `tbd show` reports a bead it has not synced as missing
+      rather than as unsynced. A `tbd sync` late in the session pulled both down.
+
+      The duplicates that mistake created -- `think-rqad` and `think-er2h` -- are closed
+      against the originals, and the gate caught it: `check_bead_tree` refuses two open
+      beads sharing a title, which is the check that noticed what `tbd show` had not. The
+      real lesson is narrower and worth carrying: a local bead store can be silently stale,
+      so "the bead does not exist" is a claim that needs a sync behind it.
 
       Rebuilding inside `Q(s)` is also what makes the mandatory side comparison exact:
       the reconstructed side and the generator are elements of the same field, so the
@@ -845,7 +853,7 @@ agenda:
     - src/sqpack/promote/system.py
     - tests/test_promote_system.py
     - devtools/probe_contact_system.py
-    bead: think-rqad
+    bead: think-864y
     depends_on: [BC-059]
     workflows: [pipeline-improvement]
     next_evidence: >-

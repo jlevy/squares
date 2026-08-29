@@ -434,12 +434,22 @@ degree bound falls from `1,039,500` to `15,744` and the relation refusal carries
 degree 20 to 29. The field itself remains out of reach — but out of reach *measured*
 rather than assumed, which is the difference between a gap and a wall.
 
-**Six record defects a cold start inherits** were found by picking this branch up in a
+**Five record defects a cold start inherits** were found by picking this branch up in a
 fresh container and following its own instructions: five bootstrap commands that do not
-run, a dangling `agenda-007`, four beads carrying pre-renumbering ids, two beads the
-agenda names that were never created, a bead closed with a reason `D-358` retracts, and
-a commit hook that was not installed.
+run, a dangling `agenda-007`, four beads carrying pre-renumbering ids, a bead closed
+with a reason `D-358` retracts, and a commit hook that was not installed.
 All repaired.
+
+A sixth was reported and then retracted, and the retraction is the more useful half.
+Two beads the agenda names were written up as never created, on the strength of
+`tbd show` reporting them missing.
+They existed the whole time on the shared `tbd-sync` branch; this container’s freshly
+materialized local store did not have them, and an unsynced bead is reported as missing
+rather than as unsynced.
+The duplicates that mistake created are closed against the originals, and the gate is
+what caught it — `check_bead_tree` refuses two open beads sharing a title.
+The lesson that survives is narrower: a local bead store can be silently stale, so “the
+bead does not exist” is a claim that needs a sync behind it.
 
 **Four defects opened.** `D-362` and `D-365` are checks that passed for a reason other
 than the one they state; `D-363` is a closure form named in the record that could not
