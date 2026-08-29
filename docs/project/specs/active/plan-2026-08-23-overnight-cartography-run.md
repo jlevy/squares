@@ -334,22 +334,23 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 041](../../../../packing/campaign/agent-sessions/session-041-block7-collinearity.md).
-Sessions 027 through 041 are terminal, and agenda-004 closed on measurement rather than
-opinion. Open BC-060 under `think-ovp7` as the next bounded driver: solve the contact
-system exactly and discharge the result rather than trusting it.
-It is no longer blocked.
-The closure it was waiting on turned out not to exist — an edge-edge contact had been
-assembled as one equation where collinearity in the plane is two, and with the second
-the contact Jacobian reaches full rank at both retained sizes, `34` of `34` at `n = 11`
-and `88` of `88` at `n = 29`, residuals unmoved.
-So `n = 29` is now an overdetermined, full-rank system of 122 equations in 88 unknowns,
-which is what an exact solve needs, and a pose is a centre, an angle and a chirality so
-the reflected squares assemble rather than being refused.
-The one genuine shortfall left is a single condition at `n = 5`, which has no edge-edge
-contact and is untouched by the repair.
-The continuation runs the missing middle layers of the promotion pipeline first; the
-efficiency and research cells are deliberately last.
+[session 042](../../../../packing/campaign/agent-sessions/session-042-block8-exact-solve.md).
+Sessions 027 through 042 are terminal, and agenda-004 closed on measurement rather than
+opinion. Open BC-061 under `think-twa7` as the next bounded driver: an exact LP over
+certified rational or algebraic coefficients, removing the `1e-11` float floor so poses
+this project generates become promotable.
+It is the load-bearing layer now, and the reason is measured rather than assumed.
+The exact route answers at `n = 11` — the frozen margin rule recovers Trump’s published
+degree-eight polynomial from digits alone and discharges it as irreducible — and refuses
+at `n = 29`: on a thousand manufactured digits, `pslq` finds no relation at any degree
+through twenty below `10^22`, where the planning probe on ~98 digits had found one at
+almost every degree.
+If `s(29)` is algebraic of degree twenty or less, some coefficient is at least `10^22`,
+so the interval route is what carries that bound.
+The middle layers behind it are built: a pose is a centre, an angle and a chirality; an
+edge-edge contact pins collinearity; and the contact system reaches full rank at both
+retained sizes. The continuation runs those middle layers first; the efficiency and
+research cells are deliberately last.
 Sessions 035 through 037 are terminal and closed agenda-005 block A together with
 `BC-045`, so precision is manufactured in-repository, the `n = 29` contact structure is
 frozen with its 89 incidences, and the interval route is built, calibrated and run: it

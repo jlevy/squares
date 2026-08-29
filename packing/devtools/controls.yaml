@@ -819,3 +819,38 @@ controls:
   replace: ["            if Fraction(low) > Fraction(high):", "            if False:"]
   run: uv run --frozen --group dev python -m pytest tests/test_witness_interval.py -q
   expect: "endpoints must be properly ordered"
+
+# --- the minimal-polynomial margin rule (BC-060) ---
+# An integer-relation search always answers, so every control here attacks the rule that
+# refuses most of its answers rather than the search itself.
+- name: minimal polynomial - the budget is read from the search bound, not the relation
+  file: src/sqpack/promote/solve.py
+  replace: ["    return largest, mp.mpf(degree + 1) * mp.log10(largest)",
+            "    return largest, mp.mpf(degree + 1) * mp.log10(10**22)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "refused a value whose minimal polynomial is published"
+
+- name: minimal polynomial - clause 3 does not test the refinement's residual bound
+  file: src/sqpack/promote/solve.py
+  replace: ["            if bound >= mp.mpf(10) ** (-needed):", "            if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "refusals came from unexpected clauses"
+
+- name: minimal polynomial - the relation is not normalised to canonical form
+  file: src/sqpack/promote/solve.py
+  replace: ["    if leading < 0:", "    if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "which is not the published polynomial"
+
+- name: minimal polynomial - degrees are searched downward, so no answer is minimal
+  file: src/sqpack/promote/solve.py
+  replace: ["        for degree in range(min_degree, max_degree + 1):",
+            "        for degree in range(max_degree, min_degree - 1, -1):"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "not Trump's eight"
+
+- name: minimal polynomial - a reducible relation is discharged as if it were minimal
+  file: src/sqpack/promote/solve.py
+  replace: ["    if not irreducible:", "    if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  expect: "was reported irreducible"

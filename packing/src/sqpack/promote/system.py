@@ -451,6 +451,22 @@ def pose_values(system: ContactSystem, squares: Sequence, side_value: float) -> 
     return values
 
 
+def contact_jacobian(system: ContactSystem, values: Sequence[float]):
+    """The contact equations differentiated at a pose, as an `mpmath` matrix.
+
+    Public because more than one caller needs it and the alternative is reaching into
+    :func:`_symbols_by_name`, which couples them to how this module names things.
+    :func:`jacobian_rank` summarises it; `devtools.probe_contact_system` walks its null
+    space; a solver would use it directly.
+    """
+    equations = [sp.sympify(equation) for equation in system.equations]
+    symbols = _symbols_by_name(system, equations)
+    matrix = sp.Matrix(
+        [[sp.diff(equation, symbol) for symbol in symbols] for equation in equations]
+    )
+    return mp.matrix(sp.lambdify(symbols, matrix, "mpmath")(*values))
+
+
 def jacobian_rank(
     system: ContactSystem, values: Sequence[float], *, tolerance: float = 1e-9
 ) -> dict:
@@ -476,13 +492,7 @@ def jacobian_rank(
     because it was `1.86e-1` at `n = 11` and `1.14e-1` at `n = 29` while `edge-edge` was
     assembled as one equation, and that is how the missing one was found.
     """
-    equations = [sp.sympify(equation) for equation in system.equations]
-    symbols = _symbols_by_name(system, equations)
-    matrix = sp.Matrix(
-        [[sp.diff(equation, symbol) for symbol in symbols] for equation in equations]
-    )
-    evaluate = sp.lambdify(symbols, matrix, "mpmath")
-    numeric = mp.matrix(evaluate(*values))
+    numeric = contact_jacobian(system, values)
     _left, singular, right = mp.svd_r(numeric)
     ordered = sorted((float(value) for value in singular), reverse=True)
     largest = ordered[0] if ordered else 0.0

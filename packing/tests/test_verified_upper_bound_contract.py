@@ -91,6 +91,10 @@ DECLARED_CONSUMERS = {
         "names the ceiling only as a stop condition: the block repairs an assembly "
         "equation and does not touch it"
     ),
+    "packing/campaign/agent-sessions/session-042-block8-exact-solve.md": (
+        "names the ceiling only as a stop condition: the block recovers a minimal "
+        "polynomial at n = 11 and records a refusal at n = 29, moving nothing"
+    ),
     "packing/campaign/ledger.md": (
         "generated: it renders the agenda notes below and inherits whatever they say, so "
         "it is an output of a consumer rather than one itself"

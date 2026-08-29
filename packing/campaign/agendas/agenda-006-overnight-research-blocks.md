@@ -395,7 +395,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 29]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can the closed system be solved exactly and the result discharged rather than
@@ -411,19 +411,29 @@ agenda:
       A minimal polynomial by elimination or integer relation under the spec's frozen
       margin rule, discharged by back-substitution at n = 11 against Trump's published
       degree-8 polynomial; then whatever n = 29 returns, including a refusal.
+    artifacts:
+    - src/sqpack/promote/solve.py
+    - devtools/probe_minimal_polynomial.py
+    - devtools/probe_contact_system.py
+    - tests/test_promote_solve.py
+    - campaign/agent-sessions/session-042-block8-exact-solve.md
     bead: think-ovp7
     depends_on: [BC-059]
     workflows: [pipeline-improvement]
     next_evidence: >-
-      Unblocked by session-041 rather than by the closure this commitment anticipated.
-      X-004 found no integer relation for the serialized n = 29 side through degree twenty
-      below `10^22`, but that probe ran on roughly a hundred available digits; BC-047 now
-      manufactures a thousand, which is the condition that made the probe uninformative
-      rather than negative.
+      Closed in session-042, with one answer and one refusal. At n = 11 the frozen margin
+      rule recovers Trump's published degree-eight polynomial from digits alone -- C=12420,
+      B=36.85, M=200, residual `4.99e-338` at B+M falling to `3.38e-412` at 2B+2M -- and
+      discharges it as irreducible over Q with an isolating interval. At n = 29, on 1000
+      digits with a reported residual bound of `1.09829e-1039`, `pslq` returns nothing at
+      any degree from 2 through 20 below `10^22`: not one degree reached a clause. So if
+      `s(29)` is algebraic of degree twenty or less, some coefficient is at least `10^22`.
     note: >-
-      Advances BC-044 in agenda-005. A refusal here is a result: it would say the minimal
-      polynomial is large, which is itself worth knowing and is why the interval route
-      exists.
+      Advances BC-044 in agenda-005. The refusal is the result the commitment anticipated,
+      and it is now measured rather than expected: the planning probe found relations at
+      almost every degree from ~98 digits and the same search finds none from 1000, which
+      is evidence about the number rather than about the search. That is the concrete
+      reason the interval route carries the n = 29 bound.
   - id: BC-061
     purpose: tool_validation
     owner_focus: correctness

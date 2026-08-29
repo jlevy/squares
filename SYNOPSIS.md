@@ -357,8 +357,24 @@ It is [D-361](defects.md), class `soundness`, direction `conservative`: it made 
 pipeline look further from a solvable system than it was.
 Göbel’s `n = 5` has no `edge-edge` contact, is untouched by the repair, and keeps a
 genuine shortfall of one — now the only size where a stationarity condition still has to
-be derived. The next slice is **`BC-060` under `think-ovp7`**, which this unblocks —
-solve the system exactly and discharge the result rather than trusting it.
+be derived. `BC-060` is closed in
+[session 042](packing/campaign/agent-sessions/session-042-block8-exact-solve.md), with
+one answer and one refusal.
+At `n = 11` the promotion spec’s frozen margin rule recovers Trump’s published
+degree-eight minimal polynomial from digits alone — `C = 12420`, `B = 36.85`, `M = 200`,
+a relative residual of `4.99e-338` at `B + M` still falling to `3.38e-412` at `2B + 2M`
+— and discharges it as irreducible over `Q` with an isolating interval containing the
+refined value. At `n = 29`, on a thousand digits with a reported residual bound of
+`1.09829e-1039`, `pslq` returns **nothing at any degree from 2 through 20** below a
+coefficient bound of `10^22`: not one degree reached a clause.
+The contrast is the finding, because the planning probe on the ~98 serialized digits got
+relations at almost every degree from 8 to 21. A search that answers when under-fed and
+falls silent when fed properly is evidence about the number, and what it bounds is
+concrete: if `s(29)` is algebraic of degree twenty or less, some coefficient of its
+minimal polynomial is at least `10^22`. That is the measured reason the interval route
+carries the `n = 29` bound.
+The next slice is **`BC-061` under `think-twa7`** — an exact LP over certified
+coefficients, removing the `1e-11` float floor.
 The continuation runs the missing middle layers first, with the efficiency and research
 cells deliberately last.
 The full ordering for the sessions after it — including which of the two `priority: 0`
