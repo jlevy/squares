@@ -58,6 +58,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-041](agent-sessions/session-041-block7-collinearity.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (process) | 2 | think-qs6k | Open block 8 as session-042 under BC-060 and `think-ovp7`, which this unblocks: n = 29 is now an overdetermined, full-rank system of 122 contact equations in 88 unknowns, which is what an exact solve needs. |
 | [session-042](agent-sessions/session-042-block8-exact-solve.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-qs6k | Open block 9 as session-043 under BC-061 and `think-twa7`: an exact LP over certified coefficients, removing the `1e-11` float floor. The n = 29 refusal above is what makes the interval route the load-bearing one, so the layer that certifies its coefficients is the next thing that matters. |
 | [session-043](agent-sessions/session-043-block9-degree-bound.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (correctness) | 2 | think-qs6k | Open block 11 as session-044 under BC-066 and `think-obgk`: eliminate the five equations in five half-angles this block left, inside a declared wall-clock cap, and record whatever the chain reaches. It runs before the remaining pipeline blocks because it is the only one that can change what this run concludes about n = 29 -- a refusal there is the measured justification for the interval route carrying that bound. The ordering through block 18 is agenda-006's continuation schedule. |
+| [session-044](agent-sessions/session-044-agenda006-continuation.md) | in_progress | contemporaneous | `process-review` (process) | `process-review` (process) | 1 | think-obgk | Repair the four record defects, then open BC-066 against the five-unknown system. |
 
 ### Workflow summary
 
@@ -68,7 +69,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-pass` | 0 | 0 | 7 | 0 |
 | `factual-review` | 1 | 0 | 21 | 2 |
 | `insight-iteration` | 2 | 1 | 25 | 2 |
-| `process-review` | 7 | 4 | 43 | 6 |
+| `process-review` | 8 | 4 | 44 | 6 |
 | `efficiency-loop` | 7 | 0 | 17 | 0 |
 | `research-loop` | 2 | 4 | 12 | 7 |
 | `pipeline-improvement` | 15 | 0 | 60 | 0 |

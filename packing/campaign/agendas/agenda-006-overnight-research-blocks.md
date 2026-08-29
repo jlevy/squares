@@ -226,7 +226,8 @@ agenda:
       180, 180 and 40, so nothing overran and the run stopped with most of its budget
       unspent. The coordinating agent misread its own clock by about a factor of four.
       Nothing measured here is retracted: the 4m15s baseline stands, and BC-051 and BC-049
-      remain ready in agenda-005, now scheduled in agenda-007.
+      remain ready in agenda-005, rescheduled inside this agenda as BC-062 and BC-063.
+      An earlier version of this note sent them to an `agenda-007` that was never written.
   - id: BC-056
     purpose: tool_validation
     owner_focus: process

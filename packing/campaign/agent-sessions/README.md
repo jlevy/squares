@@ -69,10 +69,10 @@ From the repository root, establish the baseline:
 
 ```shell
 tbd prime
-uv run --directory explorations/packing --frozen packing-ledger check
-uv run --directory explorations/packing --frozen --all-extras --group dev \
+uv run --directory packing --frozen packing-ledger check
+uv run --directory packing --frozen --all-extras --group dev \
   packing-validate --fast --jobs 2 --inner-jobs 1
-uv run --directory explorations/packing --frozen packing-campaign status
+uv run --directory packing --frozen packing-campaign status
 ```
 
 Create the next sequential `session-NNN` artifact before target work starts.
@@ -132,11 +132,11 @@ repository root, uses this sequence:
 
 ```shell
 uvx --from flowmark-rs==0.3.2 flowmark --auto <edited-markdown-files>
-uv run --directory explorations/packing --frozen softschema validate \
+uv run --directory packing --frozen softschema validate \
   <edited-session-hypothesis-and-experiment-files>
-uv run --directory explorations/packing --frozen packing-ledger render
-uv run --directory explorations/packing --frozen packing-ledger check
-uv run --directory explorations/packing --frozen python -m devtools.check_synopsis
+uv run --directory packing --frozen packing-ledger render
+uv run --directory packing --frozen packing-ledger check
+uv run --directory packing --frozen python -m devtools.check_synopsis
 git diff --check
 git status --short --branch
 git add <explicit-reviewed-files>
