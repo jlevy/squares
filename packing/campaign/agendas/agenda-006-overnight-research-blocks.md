@@ -1331,6 +1331,8 @@ agenda:
       decision on the coordinator's own discipline, which is the other half of the waste.
       Both argued from a rollup of this session's own timing logs rather than from
       impressions of them.
+    artifacts:
+    - docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md
     bead: think-c46d
     depends_on: [BC-074]
     workflows: [efficiency-loop]
@@ -1363,6 +1365,13 @@ agenda:
       behavioural test; the record checks run against the fast tier's eight minutes, of
       which one step is 87%. `packing-validate --records` exists as the increment that
       stops the recurrence.
+
+      **This block now has a spec**, `docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md`,
+      and four beads on it: `think-64bw` swaps the validator, `think-p9of` moves the exact
+      geometry out of the schema step, `think-2bk2` builds the benchmark and the
+      differential test, and `think-av72` is this block's own tier contract. The first
+      three are phase 1 and can land before the block opens; the tier argument is phase 2
+      and is what the block is for.
 
       **`D-370` is the next thing this block has to act on, and it reframes the target.**
       A registry or schema check should be effectively instant, and these are: after the
