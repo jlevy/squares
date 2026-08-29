@@ -1,10 +1,10 @@
 # Faithful pdfminer ground truth is compared byte-for-byte with its source extraction.
 # Do not make Git's presentation-only whitespace policy rewrite or reject those bytes.
-explorations/packing/resources/**/*.raw.md -whitespace
+packing/resources/**/*.raw.md -whitespace
 
 # Retained Kingbird SVGs preserve the source server's CRLF bytes and are hash-checked.
-explorations/packing/resources/web/known-best-packings/kingbird/*.svg -whitespace
+packing/resources/web/known-best-packings/kingbird/*.svg -whitespace
 
 # Some scanned PDFs contain no early NUL byte, so Git can misclassify their compressed
 # streams as text. Archive PDFs are immutable binary evidence.
-explorations/packing/resources/**/*.pdf binary
+packing/resources/**/*.pdf binary

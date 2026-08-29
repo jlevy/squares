@@ -1,0 +1,176 @@
+[project]
+name = "sqpack"
+version = "0.2.0"
+description = "Exact verification and LP-in-cell quenching for square packings"
+# No `readme` field. The project README is the repository root README, which sits
+# outside this build root and so cannot be referenced here; sqpack is never
+# published to an index, so the packaging metadata loses nothing by omitting it.
+requires-python = ">=3.14,<3.15"
+dependencies = [
+    "jsonschema>=4.26.0",
+    "mpmath>=1.3.0",
+    "numpy>=2.0",
+    "pyyaml>=6.0.3",
+    "scipy>=1.14",
+    "strif>=3.0.0",
+]
+
+[project.scripts]
+packing-campaign = "sqpack.campaign.runner:main"
+packing-ledger = "sqpack.campaign.ledger:main"
+packing-validate = "sqpack.cli.validate:main"
+packing-witness = "sqpack.cli.witness:main"
+
+[project.optional-dependencies]
+symbolic = ["sympy>=1.13"]
+
+[dependency-groups]
+dev = [
+    "basedpyright>=1.31",
+    # Vector PDF export of the known-best composite. Emits no timestamps, so the
+    # output is byte-reproducible and the staleness check is a byte comparison.
+    "cairosvg>=2.7",
+    # The motion-lab contract tests execute the exact JavaScript shipped to browsers.
+    "nodejs-wheel-binaries>=24.16.0",
+    "pytest>=8.3",
+    "ruff>=0.14",
+    # Only derive_field.py uses SymPy, and only to re-derive a constant the verifier
+    # already carries. It stays out of the runtime dependencies for that reason, and
+    # sits here so the script still type-checks.
+    "sympy>=1.13",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sqpack"]
+
+# Lint
+#
+# The floor is deliberately high. This directory's whole argument is that a
+# tolerance nobody checks becomes a blind spot, and the same is true of a lint
+# rule nobody enables: defect D-014 was a soundness failure that passed every
+# check we had, because the checks were the ones we had thought to write.
+#
+# Rules are enabled by family rather than individually, and exceptions are
+# listed with a reason. See defects.md for what this codebase has actually got
+# wrong; several of the families below map directly onto entries there.
+
+[tool.ruff]
+line-length = 96
+target-version = "py314"
+extend-exclude = ["resources"]
+
+[tool.ruff.lint]
+select = [
+    "F",     # pyflakes: undefined names, unused imports and variables
+    "E",     # pycodestyle errors
+    "W",     # pycodestyle warnings
+    "I",     # import sorting
+    "UP",    # pyupgrade: modern syntax for the target version
+    "B",     # bugbear: real bug patterns, including B008 and loop-variable capture
+    "A",     # builtin shadowing
+    "C4",    # comprehension clarity
+    "DTZ",   # naive datetimes, which silently mean the wrong instant
+    "EM",    # exception messages assembled outside the raise
+    "FBT",   # boolean positional arguments, which read as noise at the call site
+    "ICN",   # conventional import aliases
+    "ISC",   # implicit string concatenation
+    "LOG",   # logging misuse
+    "N",     # pep8 naming
+    "PERF",  # obvious performance mistakes
+    "PIE",   # miscellaneous lints
+    "PL",    # pylint subset
+    "PTH",   # pathlib over os.path, per python-rules
+    "RET",   # return-statement structure
+    "RSE",   # raise syntax
+    "RUF",   # ruff's own rules, including mutable class defaults
+    "SIM",   # simplifiable constructs
+    "SLF",   # private member access across objects
+    "T20",   # stray print in library code
+    "TID",   # banned and relative imports
+    "TRY",   # exception antipatterns
+]
+ignore = [
+    # This is a scientific codebase and a CLI toolkit: printing IS the interface
+    # for the tools, and magic numbers in geometry are the geometry.
+    "T201",     # print, which is how every tool here reports
+    "PLR2004",  # magic value comparison: 0.5 is a half-edge, not a magic number
+    "PLR0912",  # branch count: the SAT and LP builders are inherently branchy
+    "PLR0913",  # argument count: quench takes its knobs explicitly, by design
+    "PLR0915",  # statement count, same reason
+    "TRY003",   # long messages inside raise, which are the useful ones here
+    "EM101",    # string literal in raise; paired with TRY003 above
+    "EM102",
+    "ISC001",   # conflicts with the formatter
+]
+
+[tool.ruff.lint.per-file-ignores]
+# `K` is the published symbol in the source these modules transcribe; renaming it to
+# `k` would make the code harder to check against the paper, which is the point.
+"cases/trump11/packing.py" = ["N806"]
+"cases/trump11/verifier_limits.py" = ["N806"]
+# The benchmark deliberately times the field's internals; that is what it measures.
+"benchmarks/exact_verification.py" = ["SLF001"]
+# The ledger and renderers build markdown a line at a time, which reads better than
+# the comprehension PERF401 would prefer.
+"src/sqpack/campaign/ledger.py" = ["PERF401"]
+"devtools/render_defects.py" = ["PERF401"]
+"devtools/render_research_tables.py" = ["PERF401"]
+"devtools/check_svg_rendering.py" = ["PLC0415"]
+# CLI behavior tests exercise small internal orchestration seams without making them APIs.
+"tests/test_validation_cli.py" = ["SLF001"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.isort]
+known-first-party = ["cases", "devtools", "sqpack"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+# Types
+
+[tool.basedpyright]
+include = ["src/sqpack", "cases", "devtools", "benchmarks", "tests"]
+exclude = ["**/__pycache__", "resources", ".venv"]
+pythonVersion = "3.14"
+typeCheckingMode = "standard"
+reportMissingImports = "error"
+reportUnusedImport = "error"
+reportUnusedVariable = "error"
+reportDuplicateImport = "error"
+reportPrivateUsage = "warning"
+# Ruff's ISC family owns this duplicate lexical check and avoids two diagnostics.
+reportImplicitStringConcatenation = "none"
+# Several numerical dependencies do not publish complete type information; boundary
+# behavior is covered by schema, replay, and scientific-contract tests.
+reportMissingTypeStubs = "none"
+# YAML and JSON enter through dynamically shaped library APIs. Callers validate their
+# envelopes before use; reporting every inbound Any would obscure those real boundaries.
+reportAny = "none"
+# Campaign and retained-case records deliberately use Any where the persisted schema,
+# rather than a Python class hierarchy, owns the shape.
+reportExplicitAny = "none"
+# PyYAML and jsonschema expose members through dynamic values after validation.
+reportUnknownMemberType = "none"
+# Dynamic records cross helper calls only after their owning schema or guard accepts them.
+reportUnknownArgumentType = "none"
+# Loaded scientific records are narrowed by contract checks instead of generated models.
+reportUnknownVariableType = "none"
+# Generic schema and renderer callbacks accept record shapes owned outside Python typing.
+reportUnknownParameterType = "none"
+# Small local helper classes in executable checks need no redundant attribute annotations.
+reportUnannotatedClassAttribute = "none"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+python_files = ["test_*.py"]
+addopts = ["--strict-config", "--strict-markers"]
+markers = [
+  "exhaustive_exact: expensive exact-algebra tests retained by full and integration validation",
+]

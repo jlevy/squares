@@ -23,8 +23,8 @@
 #
 # So the whole archive stays raw. Its README.md is NOT excluded -- it is our own
 # prose and is formatted like everything else.
-explorations/packing/resources/papers/
-explorations/packing/resources/web/
+packing/resources/papers/
+packing/resources/web/
 
 # ---------------------------------------------------------------------------
 # Generated agent skill files.
@@ -77,7 +77,7 @@ explorations/packing/resources/web/
 # check fail forever: flowmark rewraps the generated text, ledger.py regenerates
 # the unwrapped form, and the two never agree. Measured on 2026-08-22 -- the gate
 # failed on the first run after the file was formatted.
-explorations/packing/campaign/ledger.md
+packing/campaign/ledger.md
 
 # defects.md is the same case, and was missed when the rule above was written: it is
 # rebuilt by `devtools.render_defects` and drift-checked through `packing-validate`.
@@ -88,10 +88,10 @@ explorations/packing/campaign/ledger.md
 #
 # The gate now enforces this list rather than trusting it: `packing-validate` fails if a file
 # carrying the generated-by banner is not named here.
-explorations/packing/defects.md
+defects.md
 
 # STATUS.md is the complete reader view generated from the validated case and evidence
 # records by devtools.render_research_tables. `packing-validate` compares it byte-for-byte
 # with a fresh render; allowing Flowmark to rewrite its 100-row table would create two
 # competing owners for the same file.
-explorations/packing/frontier/STATUS.md
+packing/frontier/STATUS.md

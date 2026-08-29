@@ -7,15 +7,15 @@ node_modules/
 # Python bytecode from the packing explorations.
 __pycache__/
 *.py[cod]
-explorations/packing/.venv/
+packing/.venv/
 
 # The unattended runner's id reservations (`packing-campaign`): one empty marker
 # directory per allocated exp id, created with an atomic mkdir. Local coordination
 # state for runners sharing a filesystem; runners on separate branches use disjoint id
 # blocks instead. Not shared, because the artifacts themselves are the durable record
 # of which ids exist.
-explorations/packing/campaign/series/.ids/
+packing/campaign/series/.ids/
 
 # Present only while `packing-validate` is running. Campaign runs refuse to overlap the
 # gate so a shared engine rebuild or validation CPU load cannot contaminate measurements.
-explorations/packing/.gate-running
+packing/.gate-running

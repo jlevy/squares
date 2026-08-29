@@ -1,0 +1,184 @@
+softschema:
+  contract: packing.squares:DocumentMap/v1
+  schema: document-map.schema.yaml
+  status: enforced
+
+last_reviewed: '2026-08-26'
+scope: >
+  Durable Markdown owned by packing. Source-faithful archive content is
+  excluded because its role and lifecycle come from resources/README.md rather than
+  current project documentation rules.
+documents:
+  - {path: README.md, role: orientation, authority: definitive, lifecycle: maintained}
+  - {path: SYNOPSIS.md, role: technical-synthesis, authority: definitive, lifecycle: maintained}
+  - {path: TUTORIAL.md, role: tutorial, authority: supporting, lifecycle: maintained}
+  - {path: packing/atlas/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/atlas/enumerated/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/atlas/known-best/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/atlas/known-best/FIGURE-PLAYBOOK.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/atlas/prospective/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/atlas/rendering/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: conventions.md, role: conventions, authority: definitive, lifecycle: maintained}
+  - {path: development.md, role: development-guide, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/README.md, role: runbook, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/agent-sessions/README.md, role: session-guide, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/research-loop-logbook/README.md, role: research-loop-logbook, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/ideas.md, role: registry, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/ledger.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/README.md, role: series-guide, authority: definitive, lifecycle: maintained}
+  - {path: packing/frontier/README.md, role: frontier-guide, authority: definitive, lifecycle: maintained}
+  - {path: packing/frontier/STATUS.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/resources/README.md, role: source-index, authority: definitive, lifecycle: maintained}
+  - {path: defects.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/frankensim-probe/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - path: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: development.md
+  - path: docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: packing/campaign/README.md
+  - path: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: SYNOPSIS.md
+  - path: docs/project/reviews/review-2026-08-23-response-to-pr15-review.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: SYNOPSIS.md
+  - path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: SYNOPSIS.md
+  - path: docs/project/reviews/review-2026-08-23-tooling-layout.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: development.md
+  - path: docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: packing/campaign/ledger.md
+  - path: docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-08-25-tutorial-soundness-iteration-2.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-08-25-pr34-soundness-review.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-08-26-pr44-constructive-enumeration-and-known-best-atlas.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-08-25-research-loop-efficiency.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+    role: handoff
+    authority: record
+    lifecycle: superseded
+    superseded_by: SYNOPSIS.md
+  - path: docs/project/handoff-2026-08-23-quench-spine.md
+    role: handoff
+    authority: record
+    lifecycle: superseded
+    superseded_by: SYNOPSIS.md
+  - {path: docs/project/postmortems/postmortem-2026-08-23-soundness-class.md, role: postmortem, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-08-28-numeric-symbolic-round-trip.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-08-28-interval-certification.md, role: plan, authority: current, lifecycle: transient}
+  - path: docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+    role: plan
+    authority: record
+    lifecycle: superseded
+    superseded_by: packing/atlas/README.md
+  - path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+    role: plan
+    authority: record
+    lifecycle: superseded
+    superseded_by: development.md
+  - path: docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md
+    role: plan
+    authority: record
+    lifecycle: retained
+  - path: docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md
+    role: plan
+    authority: current
+    lifecycle: transient
+collections:
+  - pattern: packing/frontier/n-*.md
+    role: frontier-case
+    authority: definitive
+    lifecycle: maintained
+    contract: packing.squares:SquarePackingCase/v2
+    schema: packing/frontier/square-packing-case.schema.yaml
+  - pattern: packing/campaign/hypotheses/H-*.md
+    role: hypothesis-record
+    authority: definitive
+    lifecycle: maintained
+    contract: packing.squares:Hypothesis/v1
+    schema: packing/campaign/schemas/hypothesis.schema.yaml
+  - pattern: packing/campaign/series/*/experiments/exp-*.md
+    role: experiment-record
+    authority: record
+    lifecycle: retained
+    contract: packing.squares:Experiment/v2
+    schema: packing/campaign/schemas/experiment.schema.yaml
+  - pattern: packing/campaign/agent-sessions/session-*.md
+    role: session-record
+    authority: record
+    lifecycle: retained
+    contract: packing.squares:AgentSession/v2
+    schema: packing/campaign/schemas/agent-session.schema.yaml
+  - pattern: packing/campaign/research-loop-logbook/run-*.md
+    role: research-loop-run-record
+    authority: record
+    lifecycle: retained
+    contract: packing.squares:ResearchLoopLogEntry/v1
+    schema: packing/campaign/schemas/research-loop-log-entry.schema.yaml
+  - pattern: packing/campaign/agendas/agenda-*.md
+    role: agenda
+    authority: current
+    lifecycle: maintained
+    contract: packing.squares:ExperimentAgenda/v1
+    schema: packing/campaign/schemas/agenda.schema.yaml
+  - pattern: packing/campaign/explorations/X-*.md
+    role: exploration-report
+    authority: record
+    lifecycle: retained
+    contract: packing.squares:Exploration/v1
+    schema: packing/campaign/schemas/exploration.schema.yaml
+exclusions:
+  - pattern: packing/resources/papers/**/*.md
+    reason: Source-faithful transcriptions and raw extraction are governed by resources/README.md.
+  - pattern: packing/resources/web/**/*.md
+    reason: Retained first-party and web-source content is archival evidence, not project prose.
+  - pattern: AGENTS.md
+    reason: Assembled from generated tbd, flowmark and pprose blocks by their own installers.
+  - pattern: CLAUDE.md
+    reason: Generated by `pprose install`; a one-line bridge to AGENTS.md.

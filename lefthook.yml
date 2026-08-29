@@ -13,7 +13,7 @@ pre-commit:
     # flowmark reads .flowmarkignore relative to its target argument, so passing
     # explicit file paths bypasses the exclusion list. That would be actively
     # destructive here: .flowmarkignore protects the literature archive under
-    # explorations/packing/resources/, where the .raw.md extractions are ground truth
+    # packing/resources/, where the .raw.md extractions are ground truth
     # for checking the model-assisted transcriptions against. Reflowing them
     # would silently void that guarantee. Do not "optimise" this to staged files.
     #
