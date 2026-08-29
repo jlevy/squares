@@ -5,11 +5,11 @@ title: Eliminate the five-unknown system for the n=29 minimal polynomial
 kind: task
 status: open
 priority: 0
-version: 4
+version: 5
 labels: []
 dependencies: []
 created_at: 2026-08-29T08:01:48.299Z
-updated_at: 2026-08-29T08:12:35.593Z
+updated_at: 2026-08-29T10:09:57.466Z
 closed_at: null
 close_reason: null
 resolution: null
@@ -19,17 +19,25 @@ BC-060's exit named two routes — elimination via SymPy, and integer relation v
 
 ## Notes
 
-DONE in session-043 — the degree bound. Under u = tan(theta/2) the published system
-rationalises over Q into six polynomials with total degrees [11, 15, 10, 15, 7, 6],
-giving a Bezout bound of 1,039,500 on the solution variety. So the integer-relation
-refusal through degree twenty surveyed a corner of the space, not the space. Every
-equation is degree 1 in s, and solving the smallest for s gives it as a rational
-function of u_b and u_c alone. Tool: devtools/probe_system_degree.py --eliminate-side.
+BC-066 closed in session-044: a measured wall, not an eliminant.
 
-REMAINING — the elimination itself. Five equations in five unknowns
-(u_a, u_b, u_c, u_d, u_i) with total degrees [16, 20, 15, 20, 12]. Attempt a resultant
-chain or Groebner basis to get the eliminant in s exactly. This is where the
-exact-algebraic route either succeeds or is shown out of reach at n = 29, and a refusal
-is a result: it would confirm that the interval route is what carries the n = 29 bound.
-Needs its own budget — a five-variable resultant chain at these degrees can blow up, so
-the block should declare a wall-clock cap and report what it reached.
+Three msolve runs on the six-equation system with s ordered last, each from a
+guarded export that re-parses its own text:
+
+1. char 0, ELIM(5): OOM-killed at degree 32 after 25m09s, 13.8 GB anon-RSS.
+   Completed degree 31 on a 656126 x 1670545 matrix in 382.84s.
+2. char 1073741827, ELIM(5): identical matrix dimensions degree for degree, at
+   about 70% of the memory.
+3. char 1073741827, grevlex: largest matrix 20611 x 49890, 2.7 GB, pair list
+   grew monotonically to 21,661, no basis inside a 25-minute cap.
+
+Neither predicted failure mode stopped it. Coefficient swell is impossible over
+F_p and the cheapest order did not terminate either, so what the runs measure is
+the size of the ideal rather than the arithmetic carried through it.
+
+Scope: a measurement on 2 threads and 15 GB, not a proof of intractability.
+Nothing here moves any bound.
+
+Next on this bead: the degree of the projection to the s-axis by homotopy
+continuation, which needs no basis at all and would turn BC-060's blind sweep
+into a targeted search at a known degree.
