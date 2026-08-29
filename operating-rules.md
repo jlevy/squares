@@ -22,22 +22,20 @@ A script in
 reported a Bézout bound of `12,690,480` where the answer is `1,039,500`, and it was said
 out loud before the guarded tool that refused it existed.
 
-Three shapes keep recurring.
-They are recorded concretely so a W7 session can generalise from instances rather than
-from a summary of them:
+Three shapes keep recurring, kept here as instances so a W7 session can generalise the
+tool from them:
 
-- **Anchored prose replacement.** Swapping a multi-paragraph section of `AGENTS.md` for
+- **Anchored prose replacement:** swapping a multi-paragraph section of `AGENTS.md` for
   another, by `str.index` slicing inside a heredoc.
-  An editor tool with a uniqueness guarantee does this directly; reach for one before
-  writing a script.
-- **Anchored insertion into a structured record.** Putting `BC-076` before
+  An editor tool with a uniqueness guarantee does this directly.
+- **Anchored insertion into a structured record:** putting `BC-076` before
   `- id: BC-075` in the agenda, and three control definitions before a named anchor in
-  `controls.yaml`. `run_negative_controls` already has the guard this wants: an anchor
-  matching other than exactly once is a refusal rather than a mutation.
-- **Coordinated edit under one invariant.** `operating-rules` had to reach the
-  document-map schema enum, the map, and `ROLE_LABELS` together or the renderer raises;
-  `count:` in `defects.yaml` has to move with three aggregates in `SYNOPSIS.md`. Both
-  were hand-written multi-file heredocs whose only check was a later gate step.
+  `controls.yaml`. `run_negative_controls` already has the guard this wants, since an
+  anchor matching other than exactly once is a refusal rather than a mutation.
+- **Coordinated edit under one invariant:** `operating-rules` had to reach the
+  document-map schema enum, the map, and `ROLE_LABELS` together or the renderer raises,
+  and `count:` in `defects.yaml` has to move with three aggregates in `SYNOPSIS.md`.
+  Both were multi-file heredocs whose only check was a later gate step.
 
 ## OR-2: Run three to five sub-agents, at a thinking level matched to the task
 
@@ -86,6 +84,17 @@ hours and cap each slice at 30 minutes, per the
 [bounded research cycle](packing/campaign/README.md#the-bounded-research-cycle).
 Thirty minutes is a ceiling, not a quota: close a slice as soon as its bounded output is
 complete. Replan at each boundary from measured time, and only forward.
+
+## OR-7: Run the documentation guidelines pass at block boundaries
+
+A block that produced a new document, a substantial rewrite, or a long block comment
+closes with a `pprose-common-edit` pass; `tbd guidelines common-doc-guidelines` is the
+text it applies. The commit hook already handles formatting, so this is the structure,
+footer, and de-slop pass, which is the one that never happens on its own.
+
+Once per block, not per file: per file it re-reads the same guidelines for every edit
+and churns text that was already conformant, and a block that only touched records or
+code has nothing for it to do.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

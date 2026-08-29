@@ -31,6 +31,7 @@ for each rule. Edit there, not here.
 - **OR-4:** Take the next slice from the handoff, not from the backlog.
 - **OR-5:** Declare the workflow entry point before beginning.
 - **OR-6:** Plan multi-hour work in slices before starting it.
+- **OR-7:** Run the documentation guidelines pass at block boundaries.
 
 <!-- END OPERATING RULES SUMMARY -->
 
