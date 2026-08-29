@@ -310,9 +310,19 @@ bound of `1.09829e-1039` — and the `n = 29` contact structure is frozen with 8
 incidences, six orientation classes, an empty ambiguity report and `97.5013` decades of
 separation, with the same extractor reproducing the known `n = 11` structure exactly
 under exact arithmetic.
-The next slice is **block B: `BC-045` under `think-75ll`**, phases 1 and 2 of
-[plan-2026-08-28-interval-certification](docs/project/specs/active/plan-2026-08-28-interval-certification.md);
-block C is phases 3 and 4 of the same spec.
+`BC-045` is now closed at all four phases, in
+[session 036](packing/campaign/agent-sessions/session-036-block1-interval-operator.md)
+and
+[session 037](packing/campaign/agent-sessions/session-037-block2-interval-calibration.md),
+under [agenda-006](packing/campaign/agendas/agenda-006-overnight-research-blocks.md).
+The interval route is built, calibrated against `n = 5`, `n = 10` and `n = 11`, and run
+at `n = 29`, where it certifies `s(29) <= 5.93383346267692918974379895098` at a declared
+relaxation of `1e-20`. That certificate is retained `unresolved` with
+`needs_review: true` and promotes nothing: it sits `5.23371e-5` below the standing
+verified ceiling, and whether it moves `verified_upper_bound` is a reviewed human
+decision through the evidence contract.
+The next slice is **block 3: `BC-054` under `think-zm3f`**, the unbuilt middle of the
+exact route — contact-system assembly and closure.
 The full ordering for the sessions after it — including which of the two `priority: 0`
 commitments goes first and why — is the
 [session queue](packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md#the-session-queue),
@@ -2186,13 +2196,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 355 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 356 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 85 | asserted something false about the mathematics |
-| validity | 84 | was correct, but the measurement did not bear on the question |
+| validity | 85 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 136 | recorded something its own evidence contradicts |
 | robustness | 39 | did not finish, or finished only by luck |
 | performance | 11 | worked, but cost far more than it should |
@@ -2203,7 +2213,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-five defects in 355, and no soundness defect
+**The automated gate has caught forty-five defects in 356, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2212,6 +2222,13 @@ Gates confirm what you already thought to check; these were found by devices bui
 test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
+
+The harness that proves those checks fire has a blind spot of its own.
+[D-356](defects.md) records that `run_negative_controls` prunes the literature archive
+and the atlas renderings from its snapshot to stay under a portable size cap, so any
+check reading one of them fails there on a missing file rather than on the mutation.
+One standing control cannot fire for that reason, and the `n = 29` interval guards are
+asserted directly in their test instead.
 
 The gate’s cost is itself a logged defect.
 [D-355](defects.md) records that verification runs the whole gate after every change, so

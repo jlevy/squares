@@ -704,3 +704,30 @@ controls:
             "return OVERLAPPING if all_axes_overlap else SEPARATED"]
   run: uv run --frozen --group dev python -m pytest tests/test_promote_interval_verify.py -q
   expect: "exact contacts were certified"
+
+# --- interval calibration and the relaxation route (BC-053) ---
+#
+# The n = 29 chain is deliberately not controlled here. Its source is the provenance SVG
+# in `resources/`, and this harness prunes the literature archive from its snapshot to
+# stay under the portable size cap -- so a mutation control over that chain would fail
+# on a missing file rather than on the mutation, which proves nothing. The n = 29
+# guards are asserted directly in `tests/test_promote_relax.py` instead.
+- name: interval promotion - relaxation moves squares inward instead of apart
+  file: src/sqpack/promote/relax.py
+  replace: ["        relaxed.append([(x + shift_x, y + shift_y) for x, y in square])",
+            "        relaxed.append([(x - shift_x, y - shift_y) for x, y in square])"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_relax.py -q
+  expect: "is not anchored at the origin"
+
+- name: interval promotion - a zero relaxation opens no contact and is accepted anyway
+  file: src/sqpack/promote/relax.py
+  replace: ["    if mp.mpf(scale.a) <= 0:", "    if False:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_relax.py -q
+  expect: "opened no contact and was accepted anyway"
+
+- name: interval promotion - the exact-to-interval bridge rounds inward
+  file: src/sqpack/promote/enclose.py
+  replace: ["        context.rounding = ROUND_CEILING if upward else ROUND_FLOOR",
+            "        context.rounding = ROUND_FLOOR if upward else ROUND_CEILING"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_relax.py -q
+  expect: "endpoints must be properly ordered"

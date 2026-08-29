@@ -23,6 +23,7 @@ from pathlib import Path
 
 import mpmath as mp
 
+from sqpack.promote.interval import cos_degrees, sin_degrees
 from sqpack.verify import edge_axes, project, verify_packing
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -78,8 +79,15 @@ def scale(x, y=None):
 
 
 def rotate(degrees):
-    radians = mp.radians(degrees)
-    cosine, sine = mp.cos(radians), mp.sin(radians)
+    """The SVG rotation matrix for an angle in degrees.
+
+    Trig is taken from :mod:`sqpack.promote.interval`, which dispatches on the scalar it
+    is handed: ordinary mpmath for a float or `mpf`, interval arithmetic for an
+    enclosure or a forward-mode dual.  That is what lets the *same* transcription be
+    evaluated against the publication and driven through a Krawczyk operator, rather
+    than there being two copies of it to keep in step.
+    """
+    cosine, sine = cos_degrees(degrees), sin_degrees(degrees)
     return (cosine, sine, -sine, cosine, mp.mpf(0), mp.mpf(0))
 
 
@@ -95,7 +103,15 @@ def vector_difference(left, right):
     return left[0] - right[0], left[1] - right[1]
 
 
-def parse_transform(value: str | None):
+def parse_transform(value: str | None, *, scalar=mp.mpf, tokens=None):
+    """The affine map an SVG `transform` attribute denotes.
+
+    `scalar` and `tokens` are the seam the interval route needs.  By default an argument
+    is a decimal and becomes an `mpf`; :mod:`cases.kingbird29.layout` passes a resolver
+    and a wider token pattern so that an unexpanded entity reference resolves to an
+    interval instead, and the *same* grammar walks the *same* transforms either way.
+    """
+    tokens = NUMBER_RE if tokens is None else tokens
     result = identity()
     if not value:
         return result
@@ -103,7 +119,7 @@ def parse_transform(value: str | None):
     for match in TRANSFORM_RE.finditer(value):
         consumed += match.group(0)
         name = match.group(1)
-        args = [mp.mpf(token) for token in NUMBER_RE.findall(match.group(2))]
+        args = [scalar(token) for token in tokens.findall(match.group(2))]
         if name == "translate" and len(args) in {1, 2}:
             operation = translate(args[0], args[1] if len(args) == 2 else mp.mpf(0))
         elif name == "scale" and len(args) in {1, 2}:

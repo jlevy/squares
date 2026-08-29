@@ -474,6 +474,17 @@ class NumberField:
         while self._hi - self._lo > target:
             self._bisect()
 
+    def enclose(self, e: FieldElement) -> tuple[Rat, Rat]:
+        """Rigorous rational enclosure of `e`, at the current refinement.
+
+        Public for the same reason as :meth:`root_bounds`: a caller bridging exact
+        field arithmetic into interval arithmetic legitimately needs an enclosure of an
+        *element*, not only of the root, and reaching into the private evaluator to get
+        one couples it to how refinement is stored.  Call :meth:`refine_to` first if a
+        tighter enclosure is wanted; this never widens one.
+        """
+        return self._enclose(e.coeffs)
+
     def root_bounds(self) -> tuple[Rat, Rat]:
         """
         The current rigorous enclosure `(lo, hi)` of the field's root.

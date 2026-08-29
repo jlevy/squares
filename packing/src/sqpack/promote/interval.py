@@ -269,6 +269,23 @@ class Dual:
         return result
 
 
+def carrier(value: Number) -> Dual:
+    """An enclosure that mixes cleanly with ordinary `mpmath` constants.
+
+    `mpmath` will not promote an `mpf` to an interval: `mp.mpf(3) + enclosure` raises
+    rather than widening, so a transcription written with `mp.mpf` constants -- which
+    every one of them here is, because they were written for the numeric route --
+    cannot be evaluated on bare enclosures at all.
+
+    A dual carrying no derivatives is the smallest thing that fixes it.  It is an
+    enclosure with the reflected operators attached, so the constants meet something
+    that knows how to absorb them, and it costs nothing because there are no partials to
+    propagate. Use :meth:`Dual.seeds` when the Jacobian is wanted and this when it is
+    not.
+    """
+    return Dual(value, ())
+
+
 def sin(value: Any) -> Any:
     """Interval sine, lifted over :class:`Dual` when it is handed one."""
     if isinstance(value, Dual):
@@ -308,3 +325,34 @@ def evaluate(
             values.append(_as_interval(residual))
             rows.append([mp.iv.mpf(0)] * len(point))
     return values, rows
+
+
+def _radians_per_degree() -> Interval:
+    """One degree in radians, as an enclosure at the ambient precision.
+
+    Computed rather than stored: the enclosure has to be built at whatever precision the
+    caller is running, and `mp.iv.pi` is a context-sensitive constant.
+    """
+    return _as_interval(mp.iv.pi) / _as_interval(180)
+
+
+def sin_degrees(degrees: Any) -> Any:
+    """Sine of an angle in degrees, over whichever scalar type it is handed.
+
+    The `n = 29` transcription is written in degrees, because its source is, and it has
+    to serve two routes now: ordinary evaluation, which checks the publication against
+    itself, and interval evaluation, which is what a certificate needs.  Dispatching
+    here rather than duplicating the transcription is deliberate -- a second copy of a
+    six-equation contact system is a second thing to keep correct, and the first
+    divergence between them would be silent.
+    """
+    if isinstance(degrees, Dual | mp.ctx_iv.ivmpf):
+        return sin(degrees * _radians_per_degree())
+    return mp.sin(mp.radians(degrees))
+
+
+def cos_degrees(degrees: Any) -> Any:
+    """Cosine of an angle in degrees, over whichever scalar type it is handed."""
+    if isinstance(degrees, Dual | mp.ctx_iv.ivmpf):
+        return cos(degrees * _radians_per_degree())
+    return mp.cos(mp.radians(degrees))

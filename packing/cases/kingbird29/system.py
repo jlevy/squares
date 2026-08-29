@@ -25,6 +25,7 @@ from pathlib import Path
 import mpmath as mp
 
 from cases.kingbird29.verify_svg import rotate_vector, vector_difference, vector_sum
+from sqpack.promote.interval import cos_degrees, sin_degrees
 
 ENTITY_RE = re.compile(r'<!ENTITY\s+([A-Za-z][A-Za-z0-9]*)\s+"([^"]+)">')
 
@@ -45,12 +46,11 @@ class SystemTranscriptionError(ValueError):
     """The retained source did not supply what the transcription needs."""
 
 
-def _sin(degrees):
-    return mp.sin(mp.radians(degrees))
-
-
-def _cos(degrees):
-    return mp.cos(mp.radians(degrees))
+#: Trig that dispatches on the scalar it is handed, so this transcription evaluates
+#: over floats and over interval duals without being written twice.  See
+#: :func:`sqpack.promote.interval.sin_degrees`.
+_sin = sin_degrees
+_cos = cos_degrees
 
 
 def read_entities(source: Path) -> dict[str, str]:

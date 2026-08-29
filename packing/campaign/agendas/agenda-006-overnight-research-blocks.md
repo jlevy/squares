@@ -78,7 +78,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 10, 11, 29]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Does the checker agree with the exact route where the answer is already known, and
@@ -96,6 +96,12 @@ agenda:
       refusal on a plausible-but-infeasible pose, and then whatever n = 29 actually
       returns. Any n = 29 success is recorded `unresolved` with `needs_review: true`; this
       runner may not accept it.
+    artifacts:
+    - src/sqpack/promote/relax.py
+    - cases/kingbird29/layout.py
+    - cases/kingbird29/certify_interval.py
+    - tests/test_promote_relax.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-053-n29-interval-certificate.json
     bead: think-9ida
     depends_on: [BC-052]
     workflows: [pipeline-improvement]
@@ -114,6 +120,17 @@ agenda:
       discharged rather than merely older. The schema decision phase 4 needs -- whether a
       fourth `scalar.kind` extends `Witness/v1` or forces a `v2` migration -- is taken in
       this block with calibration results in hand, not before them.
+      Closed in session-037, slightly past the nominal boundary against block 4's slack.
+      Phases 3 and 4 are built and calibrated. The route agrees with the exact one on
+      n = 5, n = 10 and n = 11 -- strictly above each exact side and falling with the
+      relaxation -- and proves an overlap of 1e-30 that a float check at 1e-9 accepts,
+      which is the discrimination agreement alone cannot demonstrate. At n = 29 the chain
+      completes: `s(29) <= 5.93383346267692918974379895098` at eps = 1e-20, all 406 pairs
+      strictly separated, recorded `unresolved` with `needs_review: true` and promoting
+      nothing. The strongest check was unplanned: verified unrelaxed, the 52 pairs the
+      chain cannot decide are exactly the 52 contacts BC-042 extracted by a different
+      route. D-356 records a control-harness limitation found on the way and reproduced on
+      a clean tree.
   - id: BC-054
     purpose: tool_validation
     owner_focus: correctness

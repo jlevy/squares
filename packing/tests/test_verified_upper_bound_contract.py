@@ -76,6 +76,19 @@ DECLARED_CONSUMERS = {
     "docs/project/specs/active/plan-2026-08-28-interval-certification.md": (
         "specs certification that would tighten the ceiling toward the report"
     ),
+    "packing/campaign/ledger.md": (
+        "generated: it renders the agenda notes below and inherits whatever they say, so "
+        "it is an output of a consumer rather than one itself"
+    ),
+    "packing/campaign/agent-sessions/session-036-block1-interval-operator.md": (
+        "records that block 1 did not touch the ceiling"
+    ),
+    "packing/campaign/agent-sessions/session-037-block2-interval-calibration.md": (
+        "reports how far below the ceiling its certificate sits, and that it promotes nothing"
+    ),
+    "packing/cases/kingbird29/certify_interval.py": (
+        "compares its bound against the ceiling and refuses to promote it"
+    ),
     "packing/campaign/agendas/agenda-006-overnight-research-blocks.md": (
         "schedules that certification work, and says the ceiling does not move in the run"
     ),

@@ -50,6 +50,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-034](agent-sessions/session-034-block3-guards-and-joins.md) | completed | contemporaneous | `pipeline-improvement` (process) | `pipeline-improvement` (process) | 1 | think-cja6 | Under BC-038 and think-kdil, run block four: wire `evaluate_stress` to the shared row inventory now that exp-045 is terminal and the path is no longer frozen. |
 | [session-035](agent-sessions/session-035-agenda005-block-a.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (process) | 3 | think-y85e | Open block B as session-036 under BC-045 and `think-75ll`, running phases 1 and 2 of plan-2026-08-28-interval-certification: the interval arithmetic and the Krawczyk operator, then the layout map and interval verification, each with the controls that spec names. |
 | [session-036](agent-sessions/session-036-block1-interval-operator.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (process) | 3 | think-pr0m | Open block 2 as session-037 under BC-053 and `think-9ida`. Merge origin/main first, then run phases 3 and 4 of plan-2026-08-28-interval-certification: certify n = 5 and n = 10 against the exact route, n = 11 against Trump's published polynomial, demonstrate a refusal on a plausible-but-infeasible pose, and only then drive the n = 29 system from BC-047's refinement. Record any n = 29 success as `unresolved` with `needs_review: true`; the ceiling does not move in this run. |
+| [session-037](agent-sessions/session-037-block2-interval-calibration.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (process) | 3 | think-9ida | Open block 3 as session-038 under BC-054 and `think-zm3f`. Merge origin/main first, then assemble the contact equations from the frozen n = 29 structure, eliminate the centres where the graph permits, close by determinant conditions, and reproduce the known n = 11 system -- or state which reduction the graph does not admit. Separately, and for a human rather than a runner: the n = 29 interval certificate is retained and unpromoted, and whether it moves `verified_upper_bound` is a reviewed decision through the evidence contract. |
 
 ### Workflow summary
 
@@ -60,10 +61,10 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-pass` | 0 | 0 | 7 | 0 |
 | `factual-review` | 1 | 0 | 21 | 2 |
 | `insight-iteration` | 2 | 1 | 25 | 2 |
-| `process-review` | 6 | 4 | 36 | 6 |
+| `process-review` | 6 | 4 | 37 | 6 |
 | `efficiency-loop` | 7 | 0 | 17 | 0 |
 | `research-loop` | 2 | 4 | 12 | 7 |
-| `pipeline-improvement` | 9 | 0 | 49 | 0 |
+| `pipeline-improvement` | 10 | 0 | 51 | 0 |
 
 ## Experiment agendas
 
@@ -160,7 +161,7 @@ Status: **active**. Schedule one unattended overnight run across three independe
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-052 | tool_validation | 5, 10, 11, 29 | complete | 0 | think-pr0m | Session-035 closed with this as its declared next action, naming BC-045 and `think-75ll` and the spec's phases 1 and 2. Nothing has been built against it since, so the block starts exactly where that handoff points. |
-| BC-053 | tool_validation | 5, 10, 11, 29 | ready | 0 | think-9ida | Calibration is the test here and it is stronger than for the exact route, because n = 5, n = 10 and n = 11 have answers this implementation cannot influence. Agreeing with the exact route on valid input proves nothing about discrimination, which is why the refusal demonstration is part of the exit rather than a nicety. |
+| BC-053 | tool_validation | 5, 10, 11, 29 | complete | 0 | think-9ida | Calibration is the test here and it is stronger than for the exact route, because n = 5, n = 10 and n = 11 have answers this implementation cannot influence. Agreeing with the exact route on valid input proves nothing about discrimination, which is why the refusal demonstration is part of the exit rather than a nicety. |
 | BC-054 | tool_validation | 11, 29 | ready | 1 | think-zm3f | This is the unbuilt middle of the exact route: `promote/contacts.py` and `promote/refine.py` exist, and `promote/system.py` and `promote/solve.py` do not, so the pipeline currently runs from a structure straight to a refinement with no assembly between them. |
 | BC-055 | tool_validation | 5 | ready | 1 | think-ojlr | The 4m15s baseline was measured on this container at the start of the run rather than assumed, and its breakdown is already known: 250.86s of fast behavioural tests against 40.38s of soft-schema validation and 30.29s of lint. Any selector that does not move the test figure has not moved the gate. |
 | BC-056 | tool_validation | 5, 10, 11, 16, 29 | blocked | 0 | think-lo3p | The strict gate is the only receipt that exercises the slow tiers, and no block above runs it; each runs the fast gate instead. So the run's one end-to-end check belongs here, where there is still clock left to repair what it finds. |

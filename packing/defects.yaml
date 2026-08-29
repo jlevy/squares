@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 355
+count: 356
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9220,3 +9220,41 @@ defects:
     described above, plus a check that every step name is reachable from at least one
     declared path pattern, so a new step cannot be added without being wired to the
     sources that can break it.
+- id: D-356
+  title: The negative-control snapshot prunes the archive, so one synopsis control cannot fire
+  date: '2026-08-29'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: control_cell
+  latent_for: since the snapshot's prune list gained the atlas renderings on 2026-08-27
+  severity: medium
+  status: outstanding
+  what: >-
+    `run_negative_controls` builds each worker from a bounded snapshot and prunes
+    `atlas/known-best/rendering` from it to stay under the portable size cap. The
+    `synopsis - README cold-start link drifts from current handoff` control runs
+    `check_synopsis` inside that snapshot, where `SYNOPSIS.md`'s link to
+    `packing/atlas/known-best/rendering/n-100.svg` therefore resolves to nothing.
+    `check_synopsis` reports the dead link and exits before it reaches the drift the
+    control mutated in, so the control's expected message never appears. Reproduced on a
+    clean tree at this commit, so it is not a consequence of the interval-certification
+    work that found it.
+  consequence: >-
+    One control reports a failure that says nothing about the check it is supposed to
+    exercise, and the README cold-start guard is consequently unproven. The direction is
+    conservative -- a control that cannot fire is noise, never a false pass -- but a
+    control suite carrying a standing failure is one whose next real failure is easy to
+    wave through.
+  fix: >-
+    Not attempted here. The two candidate repairs are different in kind and the choice is
+    not obvious: either the snapshot keeps a stub for each pruned rendering so link
+    resolution succeeds without the bytes, or `check_synopsis` gains a declared notion of
+    an artifact that may legitimately be absent from a snapshot. The second is a change to
+    a shared trust boundary and belongs in its own slice rather than at the end of an
+    unrelated block.
+  regression: >-
+    None yet. The reproducer is `uv run --frozen --group dev python -m
+    devtools.run_negative_controls -k cold-start`, which fails identically on a clean tree.
+  bead: think-lo3p
+  recorded_in: packing/campaign/agent-sessions/session-037-block2-interval-calibration.md

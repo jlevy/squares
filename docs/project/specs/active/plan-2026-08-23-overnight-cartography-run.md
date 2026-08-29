@@ -334,20 +334,24 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 035](../../../../packing/campaign/agent-sessions/session-035-agenda005-block-a.md).
-Sessions 027 through 034 are terminal, and agenda-004 closed on measurement rather than
-opinion. Open BC-045 under `think-75ll` as the next bounded driver, built to
-[plan-2026-08-28-interval-certification](plan-2026-08-28-interval-certification.md):
-phases 1 and 2 first, the interval arithmetic and the Krawczyk operator, then the layout
-map and interval verification.
-Session 035 is terminal and closed agenda-005 block A, so precision is now manufactured
-in-repository and the `n = 29` contact structure is frozen with its 89 incidences and
-its measured separation; neither remains a prerequisite.
+[session 037](../../../../packing/campaign/agent-sessions/session-037-block2-interval-calibration.md).
+Sessions 027 through 037 are terminal, and agenda-004 closed on measurement rather than
+opinion. Open BC-054 under `think-zm3f` as the next bounded driver, built to
+[plan-2026-08-28-promotion-pipeline-implementation](plan-2026-08-28-promotion-pipeline-implementation.md):
+phase 2 first, contact-system assembly and closure, then phase 4’s exact solve if the
+clock allows. Sessions 035 through 037 are terminal and closed agenda-005 block A
+together with `BC-045`, so precision is manufactured in-repository, the `n = 29` contact
+structure is frozen with its 89 incidences, and the interval route is built, calibrated
+and run: it certifies `s(29) <= 5.93383346267692918974379895098` at a declared
+relaxation of `1e-20`, retained `unresolved` with `needs_review: true` and promoting
+nothing. None of those remains a prerequisite.
 The witness contract already names `interval-certified` among the methods that may carry
-`verified`, so the socket exists and only the checker is missing, because `exact_verify`
-still raises `checker-not-built`. Uniqueness is the load-bearing verdict: check that the
-operator’s image lies in the *interior* of the box, because containment alone does not
-give it, and a box holding two roots does not identify which pose was certified.
+`verified`, and the checker now exists, but no witness branch has been written: so
+`exact_verify` still raises `checker-not-built` and the certificate above is retained as
+a result rather than emitted as a witness.
+Uniqueness is the load-bearing verdict: check that the operator’s image lies in the
+*interior* of the box, because containment alone does not give it, and a box holding two
+roots does not identify which pose was certified.
 Prove the operator refuses on the two-root and no-root controls before pointing it at
 anything, and do not treat a refinement as an algebraic claim.
 The measured W5 inventory and the row-jet inventory reuse remain scheduled after that

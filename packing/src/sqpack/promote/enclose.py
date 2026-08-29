@@ -27,6 +27,8 @@ runs with shape checking off and says so.
 from __future__ import annotations
 
 from collections.abc import Callable, Sequence
+from decimal import ROUND_CEILING, ROUND_FLOOR, Decimal, localcontext
+from typing import Any
 
 import mpmath as mp
 
@@ -101,3 +103,44 @@ def widen(squares: Sequence[SquareBox], amount: str) -> list[SquareBox]:
     """
     pad = interval(f"-{amount}", amount)
     return [[(x + pad, y + pad) for x, y in square] for square in squares]
+
+
+def enclose_field_squares(
+    field: Any, squares: Sequence[Sequence[tuple]], side: Any, *, digits: int = 40
+) -> tuple[list[SquareBox], Interval]:
+    """Bridge an exactly-constructed packing into enclosures, losing nothing.
+
+    The exact cases -- Göbel's `n = 5` and `n = 10`, Trump's `n = 11` -- carry corners
+    as elements of a certified number field, which is a stronger representation than
+    anything this route produces.  Certifying one of them by interval arithmetic is
+    therefore not an upgrade; it is a **calibration**, and the point is that the two
+    routes have to agree where both can speak.
+
+    `NumberField.enclose` supplies a rigorous rational enclosure of each element, so the
+    conversion is an exact widening rather than an evaluation: nothing here can report a
+    corner the exact arithmetic does not admit.
+    """
+    field.refine_to(digits + 8)
+
+    def as_interval(element) -> Interval:
+        low, high = field.enclose(element)
+        return from_endpoints(
+            decimal_of(low, digits, upward=False), decimal_of(high, digits, upward=True)
+        )
+
+    boxes = [[(as_interval(x), as_interval(y)) for x, y in square] for square in squares]
+    return boxes, as_interval(side)
+
+
+def decimal_of(value, digits: int, *, upward: bool) -> str:
+    """A rational rounded strictly outward to a decimal string.
+
+    The same discipline as :func:`sqpack.promote.interval.decimal_string`, for the exact
+    rationals a number field produces rather than for `mpmath` floats.  Rounding these
+    to nearest would narrow an enclosure that was rigorous when it left the field, which
+    is the one way this bridge could lose what it was built to preserve.
+    """
+    with localcontext() as context:
+        context.prec = max(1, digits)
+        context.rounding = ROUND_CEILING if upward else ROUND_FLOOR
+        return str(Decimal(value.numerator) / Decimal(value.denominator))
