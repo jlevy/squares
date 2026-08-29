@@ -1294,9 +1294,27 @@ agenda:
       the reason it should not be flattened away in the mapping.
 
       **Two layers under it.** A folder of per-source records, one per JSONL file --
-      mechanical, regenerable, no interpretation. Then our own attribution of those minutes
-      to blocks, kept in separate records, because that attribution is a judgement someone
-      may disagree with and the source records should not move when they do.
+      mechanical, no interpretation. Then our own attribution of those minutes to blocks,
+      kept in separate records, because that attribution is a judgement someone may
+      disagree with and the source records should not move when they do.
+
+      **And a retention decision, which is the part with a real tension in it.** The raw
+      JSONL will not always be archived -- it is large, it is harness-private, and a
+      transcript carries prose this repository has no reason to keep. So the per-source
+      record cannot be a pointer to something that may be gone: it has to *be* the
+      retained artifact, small enough to check into git and detailed enough that the
+      questions this block asks can still be answered from it a year later.
+
+      That is a compression problem with a stated loss, not a dump. What has to survive is
+      per-tool-call timing at some granularity, command identity and outcome, model turn
+      boundaries with whatever token and timing accounting the harness gave, and the
+      unattributed remainder. What may be dropped is prose -- reasoning text, message
+      bodies, file contents, diffs. The design owes an explicit statement of what is
+      dropped, because a record whose losses are undocumented gets read as complete, and
+      it owes a size budget per session so the practice does not quietly become
+      unaffordable. `CodexEfficiencyRollup/v2` is already prose-excluding by construction
+      -- its own docstring says so -- which makes it the right precedent rather than a
+      thing to redesign around.
 
       **Then it becomes routine rather than ad hoc.** Every block and every session closes
       with a rollup; the campaign rollup is a rollup of rollups and is carried in

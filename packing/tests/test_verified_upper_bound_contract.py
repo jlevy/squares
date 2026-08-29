@@ -59,6 +59,10 @@ DECLARED_CONSUMERS = {
     "docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md": (
         "the plan that introduced the reported/verified split"
     ),
+    "packing/defects.yaml": (
+        "D-367 cites the consumer contract as the nearest existing guard against the "
+        "claim-boundary conflation it records, one level up from it"
+    ),
     "packing/frontier/README.md": "documents the field for a reader of the corpus",
     "packing/frontier/evidence.yaml": (
         "names the fields as the certificate the grid bound lives in"
