@@ -29,12 +29,12 @@ from devtools.logrollup.model import (
     Turn,
     instant,
 )
-from devtools.logrollup.shell import Invocation, invocations, primary
+from devtools.logrollup.shell import Invocation, capped, invocations, primary
 
 CONTRACT = "packing.squares:ClaudeEfficiencyRollup/v1"
 SCHEMA = "../schemas/claude-efficiency-rollup.schema.yaml"
 TOP_TOOLS = 25
-TOP_COMMANDS = 30
+TOP_COMMANDS = 40
 
 HEREDOC = re.compile(r"<<-?\s*['\"]?\w+['\"]?")
 PYTHON = re.compile(r"\bpython3?\b")
@@ -331,12 +331,15 @@ SEMANTICS: Mapping[str, str] = {
         "them was writing scripts where it should have been building a tool."
     ),
     "by_command": (
-        "The tool a shell command actually runs, named as it was invoked: the runner "
-        "prefix is kept because `uv run foo.py` is not `foo.py`, a Python call is named "
-        "by its module or script, and a subcommanded tool keeps its subcommand. Peeling "
-        "matters more than it sounds: keyed on the leading word instead, `cd` led 524 of "
-        "882 commands in this session and the figure said nothing. A command no single "
-        "tool owns is `(pipeline)` rather than attributed to whichever ran first."
+        "The tool a shell command actually runs. Every chain is split into components, "
+        "shell bookkeeping and text munging are dropped, and what is left names the "
+        "command: one component and it takes the full invoked form, so `uv run "
+        "packing-validate` keeps its runner and `grep -rn x . | head -5` is `grep`; "
+        "several and the name is the chain of bare tools, so `make format && git add -A "
+        "&& git push` is `make && git && git`. Peeling matters more than it sounds: keyed "
+        "on the leading word instead, `cd` led 524 of 882 commands here. Past 256 distinct "
+        "names the tail folds into `(other)`, which is a long tail of odd commands or a "
+        "resolver bug rather than anything to act on."
     ),
     "invoked": (
         "Every tool reached for, counted across all segments of every command, not just "
@@ -450,7 +453,7 @@ class ClaudeCodeReader:
                 "by_tool": _ranked(calls, lambda c: c.tool, TOP_TOOLS),
                 "by_command": _ranked(calls, lambda c: c.command, TOP_COMMANDS),
                 "by_command_family": _ranked(calls, lambda c: c.family),
-                "invoked": dict(list(session.invoked.items())[:TOP_COMMANDS]),
+                "invoked": capped(session.invoked),
                 "invoked_families": dict(session.invoked_families),
                 "by_shell_shape": _ranked(calls, lambda c: c.shape),
                 "by_thinking_level": _ranked(calls, lambda c: c.thinking_level),

@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import re
 import shlex
+from collections.abc import Mapping
 from dataclasses import dataclass
 from enum import StrEnum
 
@@ -54,8 +55,27 @@ KEYWORDS = frozenset(
         "return",
         "in",
         "select",
+        # Operators and grouping. `!`, `[`, `{` and their partners are syntax, and a
+        # chained name that reads `i && !` is this leaking through rather than a tool.
+        "!",
+        "[",
+        "[[",
+        "]",
+        "]]",
+        "{",
+        "}",
+        "(",
+        ")",
+        ":",
+        ".",
     }
 )
+# A subcommand is one word. `--only "fast behavioral tests"` would otherwise be read as
+# one, naming a call `uv run packing-validate fast behavioral tests`.
+SUBCOMMAND = re.compile(r"[A-Za-z][\w.-]*\Z")
+# Segments these lead hold a loop variable and its values, never a command. `while` and
+# `until` are absent on purpose: their condition really is a command.
+LIST_HEADS = frozenset({"for", "select"})
 # Runner flags that consume the next token, which would otherwise read as the tool.
 VALUE_FLAGS = frozenset(
     {"--from", "--with", "--group", "--python", "--project", "--directory", "-p"}
@@ -133,19 +153,33 @@ FAMILIES: dict[str, Family] = {
 
 @dataclass(frozen=True, slots=True)
 class Invocation:
-    """One resolved tool call: how it was invoked, and what kind of tool it is."""
+    """One resolved tool call: how it was invoked, and what kind of tool it is.
+
+    `name` is the full form, `uv run packing-validate`. `tool` is the bare executable,
+    `packing-validate`, which is what a chain of several is named by so that
+    `make format && git add -A && git push` reads `make && git && git` rather than a
+    sentence.
+    """
 
     name: str
+    tool: str
     family: Family
 
     @property
-    def is_shell_bookkeeping(self) -> bool:
-        return self.family is Family.shell
+    def is_trivial(self) -> bool:
+        """Shell bookkeeping and text munging, which never name a command.
+
+        `cd`, `echo` and `export` are not work, and `head` or `wc` at the end of a
+        pipeline is not the work either. Dropping both is what leaves
+        `grep -rn x . | head -5` naming itself `grep`.
+        """
+        return self.family is Family.shell or self.tool in FILTERS
 
 
-PIPELINE = Invocation(name="(pipeline)", family=Family.other)
-"""The name for a command no single tool owns. Parenthesised so it cannot be mistaken
-for an executable that exists."""
+OTHER = "(other)"
+"""Where the long tail goes once a table has more distinct names than `MAX_DISTINCT`.
+Parenthesised so it cannot be mistaken for an executable that exists."""
+MAX_DISTINCT = 256
 
 
 def basename(token: str) -> str:
@@ -167,7 +201,13 @@ def family_of(name: str) -> Family:
 
 
 def _meaningful(tokens: list[str]) -> list[str]:
-    """Tokens with assignments, flags, and everything after a redirect removed."""
+    """Tokens that could name a tool.
+
+    Removed: everything after a redirect, flags and the values they consume, assignments
+    wherever they sit, expanded variables, and a `for`/`select` loop variable. Each of
+    these turned up as a component name on real transcripts -- `h=$(git`, `$sw`, and an
+    `i` that led the heaviest bucket in the table.
+    """
     kept: list[str] = []
     skip_next = False
     for token in tokens:
@@ -179,8 +219,10 @@ def _meaningful(tokens: list[str]) -> list[str]:
         if token.startswith("-"):
             skip_next = token in VALUE_FLAGS
             continue
-        if "=" in token and not token.startswith("/") and not kept:
-            continue  # a leading VAR=value assignment
+        if token.startswith("$"):
+            continue
+        if "=" in token and not token.startswith("/"):
+            continue
         kept.append(token)
     return kept
 
@@ -205,10 +247,24 @@ def resolve(segment: str) -> Invocation | None:
         tokens = shlex.split(segment)
     except ValueError:
         return None
+    if tokens and tokens[0] in LIST_HEADS:
+        # `for i in 1 2 3` is a variable and a list, not a command. Dropping only the
+        # keyword left the loop values behind, and `1 && pgrep` led the table.
+        return None
     words = [w for w in _meaningful(tokens) if basename(w) not in KEYWORDS]
     if not words:
         return None
 
+    prefix, index = _peel_runners(words)
+    if index >= len(words):
+        # A bare runner with nothing after it, such as `time` alone.
+        runner = " ".join(prefix)
+        return Invocation(name=runner, tool=runner, family=Family.toolchain)
+    return _named(prefix, words[index:], tokens)
+
+
+def _peel_runners(words: list[str]) -> tuple[list[str], int]:
+    """The runner words in front of the real tool, and where the tool starts."""
     prefix: list[str] = []
     index = 0
     while index < len(words) and basename(words[index]) in RUNNERS:
@@ -221,25 +277,30 @@ def resolve(segment: str) -> Invocation | None:
         elif index < len(words) and runner == "timeout" and DURATION.fullmatch(words[index]):
             # `timeout 600 cmd` would otherwise name the call after its duration.
             index += 1
-    if index >= len(words):
-        # A bare runner with nothing after it, such as `time` alone.
-        return Invocation(name=" ".join(prefix), family=Family.toolchain)
+    return prefix, index
 
-    head = basename(words[index])
-    rest = words[index + 1 :]
+
+def _named(prefix: list[str], words: list[str], tokens: list[str]) -> Invocation:
+    """The invocation for one peeled segment, whose first word is the tool."""
+    head = basename(words[0])
+    rest = words[1:]
     if head.startswith("python"):
         target = _python_target(tokens, rest)
         parts = [*prefix, head, *(["-m", target] if "-m" in tokens and target else [])]
         if target and "-m" not in tokens:
             parts.append(target)
-        return Invocation(name=" ".join(parts), family=family_of(target or head))
+        return Invocation(
+            name=" ".join(parts), tool=target or head, family=family_of(target or head)
+        )
     family = family_of(head)
     # Our own CLIs carry subcommands too, and `packing-ledger check` is not
     # `packing-ledger render`. Keyed off the family rather than a second list, so a new
     # project CLI is distinguished without anyone remembering to enumerate it.
-    if rest and (head in SUBCOMMANDED or family is Family.project):
-        return Invocation(name=" ".join([*prefix, head, basename(rest[0])]), family=family)
-    return Invocation(name=" ".join([*prefix, head]), family=family)
+    candidate = basename(rest[0]) if rest else ""
+    takes_subcommand = head in SUBCOMMANDED or family is Family.project
+    if takes_subcommand and SUBCOMMAND.match(candidate):
+        return Invocation(name=" ".join([*prefix, head, candidate]), tool=head, family=family)
+    return Invocation(name=" ".join([*prefix, head]), tool=head, family=family)
 
 
 def invocations(command: object) -> tuple[Invocation, ...]:
@@ -254,29 +315,55 @@ def invocations(command: object) -> tuple[Invocation, ...]:
     return tuple(call for call in found if call is not None)
 
 
-def primary(command: object) -> Invocation | None:
-    """The one name a command's elapsed time is attributed to.
+def significant(command: object) -> tuple[Invocation, ...]:
+    """A chain's components with the trivia dropped.
 
-    A command with a single major tool is named by it, so `cd /repo && packing-validate`
-    is a validation call and `grep -rn x . | head` is a search. A command with several is
-    `(pipeline)`, whether joined by a pipe or by `&&`: the two differ in how output moves,
-    not in whether one tool owns the time, and giving a whole chain's time to whichever
-    ran first is how the previous keying went wrong.
+    Shell bookkeeping and text munging go, so `cd /repo && grep -rn x . | head -5` is one
+    component rather than three.
 
-    Shell bookkeeping is never major, and a text-munging tool is major only when it leads
-    the command rather than filtering something else's output.
+    A command that is nothing but trivia still has to be named, and the fallback prefers a
+    real tool over bookkeeping: `cd /repo && cat f | wc -l` is `cat`, not `cd`, because
+    `cd` is the one word that tells a reader nothing.
     """
     found = invocations(command)
-    if not found:
+    kept = tuple(call for call in found if not call.is_trivial)
+    if kept:
+        return kept
+    substantive = tuple(call for call in found if call.family is not Family.shell)
+    return substantive[:1] or found[:1]
+
+
+def primary(command: object) -> Invocation | None:
+    """The one name a command is attributed to.
+
+    One significant component and the command takes its full name, so
+    `cd /repo && uv run packing-validate --records` is `uv run packing-validate` and
+    `grep -rn x . | head -5` is `grep`.
+
+    Several, and the name is the chain of bare tools: `make format && git add -A && git
+    push` is `make && git && git`. That is honest about there being no single owner while
+    still saying what ran. The family is the first component's, which is a stated
+    convention rather than a claim about where the time went.
+    """
+    kept = significant(command)
+    if not kept:
         return None
-    major = [
-        call
-        for position, call in enumerate(found)
-        if not call.is_shell_bookkeeping
-        and (position == 0 or call.name.rsplit(" ", 1)[-1] not in FILTERS)
-    ]
-    if len(major) == 1:
-        return major[0]
-    if len(major) > 1:
-        return PIPELINE
-    return found[0]
+    if len(kept) == 1:
+        return kept[0]
+    chain = " && ".join(call.tool for call in kept)
+    return Invocation(name=chain, tool=chain, family=kept[0].family)
+
+
+def capped(counts: Mapping[str, int]) -> dict[str, int]:
+    """A table with its long tail folded into `(other)`.
+
+    Chained names multiply, and past `MAX_DISTINCT` the tail is odd one-off commands or a
+    resolver bug rather than anything a reader acts on. Folding beats truncating, because
+    the total still adds up.
+    """
+    if len(counts) <= MAX_DISTINCT:
+        return dict(counts)
+    ordered = sorted(counts.items(), key=lambda item: -item[1])
+    folded = dict(ordered[:MAX_DISTINCT])
+    folded[OTHER] = sum(count for _, count in ordered[MAX_DISTINCT:])
+    return folded

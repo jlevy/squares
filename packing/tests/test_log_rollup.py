@@ -10,7 +10,7 @@ import pytest
 from devtools.logrollup import REGISTRY, ClaudeCodeReader, build_registry
 from devtools.logrollup.claude import Shape, traits_of
 from devtools.logrollup.model import Elapsed, SessionRollup, SourceLog, Span
-from devtools.logrollup.shell import Family, primary
+from devtools.logrollup.shell import MAX_DISTINCT, Family, capped, primary
 
 
 def test_shell_shapes_put_one_off_code_ahead_of_incidental_structure() -> None:
@@ -44,11 +44,13 @@ def test_a_command_is_named_by_the_tool_it_runs_not_its_leading_word() -> None:
         "uv run python -m devtools.log_rollup"
     )
     assert name("cd /repo && git commit -q -F -") == "git commit"
-    # A filter after a pipe is not the work; the same tool leading the command is.
+    # Trivia is dropped, so one significant component is left and it names the command.
     assert name("grep -rn x . | head -5") == "grep"
-    # No single tool owns these, and attributing to whichever ran first would be a lie.
-    assert name("make format && git add -A && git push") == "(pipeline)"
-    assert name("a | b | c") == "(pipeline)"
+    assert name("cd /repo && cat f | wc -l | tail -1") == "cat"
+    # Several significant components chain by bare tool: honest that no one owns the
+    # time, and still saying what ran.
+    assert name("make format && git add -A && git push") == "make && git && git"
+    assert name("uv run ruff check . && uv run pytest -q") == "ruff && pytest"
 
 
 def test_command_families_separate_our_instruments_from_everything_else() -> None:
@@ -61,6 +63,19 @@ def test_command_families_separate_our_instruments_from_everything_else() -> Non
     assert family("uv run ruff check .") is Family.toolchain
     assert family("git status") is Family.vcs
     assert family("grep -rn x .") is Family.inspection
+
+
+def test_a_long_tail_of_chained_names_folds_rather_than_truncates() -> None:
+    # Chained names multiply, so the table needs a bound; folding keeps the total right
+    # where truncating would silently lose calls.
+    small = {f"tool-{i}": 1 for i in range(MAX_DISTINCT)}
+    assert capped(small) == small
+
+    large = {f"tool-{i}": 1 for i in range(MAX_DISTINCT + 10)}
+    folded = capped(large)
+    assert len(folded) == MAX_DISTINCT + 1
+    assert folded["(other)"] == 10
+    assert sum(folded.values()) == sum(large.values())
 
 
 def test_structural_traits_are_counted_without_content() -> None:

@@ -165,11 +165,11 @@ properties:
       by_command:
         allOf: [{$ref: "#/$defs/elapsed_group"}]
         description: >-
-          Keyed by the tool a shell command actually runs, named as it was invoked: the
-          runner prefix is kept because `uv run foo.py` is not `foo.py`, a Python call is
-          named by its module or script, and a subcommanded tool keeps its subcommand.
-          A command no single tool owns is `(pipeline)` rather than attributed to
-          whichever ran first. Identity only, never an argument value or a literal.
+          Keyed by the tool a shell command actually runs. Chains are split into
+          components with shell bookkeeping and text munging dropped; one component takes
+          the full invoked form (`uv run packing-validate`, `grep`) and several become a
+          chain of bare tools (`make && git && git`). Identity only, never an argument
+          value or a literal. Past 256 distinct names the tail folds into `(other)`.
       by_command_family:
         allOf: [{$ref: "#/$defs/elapsed_group"}]
         description: >-
