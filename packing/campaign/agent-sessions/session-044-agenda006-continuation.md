@@ -477,41 +477,103 @@ session:
       only because this kernel is one-dimensional and reads across sixteen decades.
     next_action: >-
       Open BC-071, then the reserved BC-064 endpoint check.
+  - workflow: research-pass
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    commitment: BC-063
+    bead: think-298s
+    objective: >-
+      Produce this repository's own rigidity evidence for the packings the catalogue
+      annotates "Rigid.", or state exactly what producing it would take.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The exact-route lanes are terminal and BC-071 runs as a delegation, so the
+      coordinator takes the one genuinely research-shaped cell in the continuation.
+    budget_minutes: 45
+    started_at: '2026-08-29T11:47:00Z'
+    deadline_at: '2026-08-29T12:32:00Z'
+    expected_output: >-
+      First-party rigidity evidence at n = 5, and a statement of what n = 28 and n = 40
+      would need.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev python -m devtools.probe_contact_system
+      --case gobel5 --walk
+    kill_condition: >-
+      Stop before changing any frontier record. An unattended runner may apply the accept
+      rule only conservatively, and a rigidity property is a promotion.
+    fallback: >-
+      Record the evidence and the recommendation, and leave the record for a human.
+    outcome: >-
+      Evidence at n = 5, and a concrete reason there is none at n = 28 or n = 40. No
+      frontier record was changed.
+    evidence:
+    - >-
+      'The escape screen gives all three sizes the same negative result -- no movable
+      square, zero separating squares, stable across tolerances -- which is consistent with
+      rigidity and does not establish it, because rotations and coordinated motion are
+      outside it.'
+    - >-
+      'BC-069''s machinery closes that gap at n = 5 without a new instrument. The contact
+      Jacobian has rank 15 of 16, so the space of infinitesimal contact-preserving motions
+      is exactly one-dimensional over all squares, all coordinates and the side -- not only
+      single-square translations. The rank gap is `5.110e-01` against `1.038e-51` at fifty
+      digits, so the dimension is not a tolerance artifact.'
+    - >-
+      'That direction is a rotation of the centre square about its own centre and leaves
+      the side unmoved at `2.707106781187` throughout the walk. It is obstructed at second
+      order: `-2.5e-7`, `-2.5e-9`, `-2.5e-11` at steps `1e-3`, `1e-4`, `1e-5`, a hundred
+      per decade, symmetric in both signs, all nine worst offenders declared contacts.'
+    - >-
+      'So Göbel''s n = 5 is infinitesimally flexible and second-order rigid -- a finer
+      statement than the catalogue''s bare "Rigid.", which does not distinguish the two.'
+    - >-
+      'n = 28 and n = 40 have no contact structure retained and no case module -- the atlas
+      holds structures for n = 11 and n = 29 only -- so the same evidence needs an
+      extraction first, which is a block rather than a re-run.'
+    stop_reason: >-
+      Exit met at the conservative boundary. Both the rank and the walk are numerical and
+      the argument is narrower than n = 11's, so the frontier property stays
+      `undetermined` and the recommendation -- `locally-rigid` at `numerically-checked`,
+      scoped to the retained pose -- is left for a reviewer.
+    next_action: >-
+      Open BC-072 with the clock the continuation did not spend.
   - workflow: pipeline-improvement
     recording: contemporaneous
     clock_role: work
     focus: correctness
-    commitment: BC-071
-    bead: think-lstj
+    commitment: BC-072
+    bead: think-utlo
     objective: >-
-      Build phase 1 of the exact simplex, so a cell can be certified without a float
-      solver supplying its first feasible vertex.
+      Retrack the n = 29 homotopy in double-double precision and see whether it accounts
+      for the paths the double-precision run lost.
     status: in_progress
     entered_by: evidence_checkpoint
     switch_reason: >-
-      BC-061 closed by naming this as the gap that matters at n = 29, where no float
-      solver produces a feasible vertex to start from. Opening it is acting on that
-      finding rather than deferring it to a later run.
-    budget_minutes: 75
-    started_at: '2026-08-29T11:15:00Z'
-    deadline_at: '2026-08-29T12:30:00Z'
+      Every scheduled block reached a terminal state by 11:49Z against a 16:41Z deadline,
+      so the honest use of the remainder is the measurement BC-070 could not complete
+      rather than an early finish.
+    budget_minutes: 240
+    started_at: '2026-08-29T11:49:50Z'
+    deadline_at: '2026-08-29T15:49:50Z'
     expected_output: >-
-      A feasible vertex found from the exact data alone, agreeing with the known answer at
-      n = 11 with no float solver anywhere in the chain, and a typed refusal on an
-      infeasible program.
+      Either an accounting complete enough to read a degree from, or the same refusal with
+      a second precision behind it.
     validation_command: >-
-      uv run --frozen --all-extras --group dev python -m pytest tests/test_promote_exact_lp.py
+      uv run --frozen --all-extras --group dev python -m pytest tests/test_promote_elimination.py
       -q -p no:randomly
     kill_condition: >-
-      Stop if phase 1 needs something the module cannot express, and say what. A
-      half-finished auxiliary program is worse than a named gap.
+      BC-070's kill condition applies unchanged: a count with lost paths is not evidence
+      about a degree at any precision. Stop at the cap rather than extending it.
     fallback: >-
-      A typed statement of what blocks it, which is what BC-061 did with this same gap.
+      Record the refusal with both precisions behind it, which is a stronger statement than
+      one run makes.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Open the reserved BC-064 endpoint check.
+      Integrate BC-071 when it lands, then open the reserved BC-064.
   primary_bead: think-obgk
   status: in_progress
   budget:
@@ -644,6 +706,45 @@ session:
     elapsed_quality: platform_measured
     next_action: >-
       Landed by cherry-pick; D-363 opened for the misnamed closure form.
+  - task: >-
+      BC-071 -- phase 1 of the exact simplex, so a cell can be certified without a float
+      solver supplying its first feasible vertex.
+    operator: subagent
+    recording: contemporaneous
+    status: in_progress
+    phase: 9
+    budget_minutes: 45
+    started_at: '2026-08-29T11:47:00Z'
+    deadline_at: '2026-08-29T12:32:00Z'
+    expected_output: >-
+      A feasible vertex found from the exact data alone, agreeing with the known answer at
+      n = 11 with no float solver in the chain, and a typed refusal on an infeasible
+      program.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev python -m pytest tests/test_promote_exact_lp.py
+      -q -p no:randomly
+    kill_condition: >-
+      Stop if phase 1 needs something the module cannot express, and say what. A
+      half-finished auxiliary program is worse than a named gap.
+    fallback: >-
+      A typed statement of what blocks it, which is what BC-061 did with this same gap.
+    write_scope:
+    - packing/src/sqpack/exact_lp.py
+    - packing/tests
+    - packing/devtools/controls.yaml
+    excluded_commands:
+    - git push
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: >-
+      BC-061 estimated 60-100 lines, which is a sanity check rather than a target. Whether
+      an exact auxiliary program terminates cleanly over `FieldElement` is the open
+      question.
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Integrate when it lands.
   - task: >-
       BC-061 -- an exact LP over certified rational or algebraic coefficients, replacing
       the float solver where a certified answer is required.

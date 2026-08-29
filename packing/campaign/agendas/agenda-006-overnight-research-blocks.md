@@ -521,7 +521,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [5]
-    state: ready
+    state: complete
     priority: 3
     question: >-
       Are the three packings the catalogue annotates "Rigid." actually rigid, on evidence
@@ -530,6 +530,9 @@ agenda:
     budget: 45 minutes, only if everything above is terminal
     entry: The catalogue's annotation, and no independent check of it
     exit: Our own rigidity evidence at n = 5, or a statement of what producing it would take.
+    artifacts:
+    - campaign/series/series-000-smoke-and-calibration/results/bc-063-n5-rigidity-evidence.json
+    - devtools/probe_contact_system.py
     bead: think-298s
     depends_on: []
     workflows: [research-pass]
@@ -538,6 +541,47 @@ agenda:
       continuation; everything above it is tooling.
     note: >-
       Last on purpose. It is the cell that can be cut without leaving a tool half-built.
+
+      Closed in session-044, with evidence at `n = 5` and a reason there is none at
+      `n = 28` or `n = 40`.
+
+      The escape screen gives all three the same negative result -- no movable square, zero
+      separating squares, stable across tolerances -- and that is consistent with rigidity
+      without establishing it, because rotations and coordinated motion are outside it.
+      What closes that gap at `n = 5` is BC-069's machinery rather than any new instrument:
+      the contact Jacobian at Göbel's retained pose has rank `15` of `16`, so the space of
+      infinitesimal contact-preserving motions is exactly one-dimensional -- over all
+      squares, all coordinates and the side, not only single-square translations. The rank
+      gap is `5.110e-01` against `1.038e-51` at fifty digits, so that dimension is not a
+      tolerance artifact.
+
+      That one direction is a rotation of the centre square about its own centre and it
+      leaves the side unmoved -- `2.707106781187` at every step of the walk. It is
+      obstructed at second order: walking it either way drives all four contacts into
+      overlap at `-2.5e-7`, `-2.5e-9` and `-2.5e-11` for steps of `1e-3`, `1e-4` and
+      `1e-5`, a ratio of a hundred per decade, so `-t^2/4`, symmetric in both signs, with
+      all nine worst offenders declared contacts.
+
+      **So Göbel's `n = 5` is infinitesimally flexible and second-order rigid.** That is
+      this repository's own evidence and it is a finer statement than the catalogue's bare
+      "Rigid.": the packing is rigid but not infinitesimally so, a distinction the
+      annotation does not make.
+
+      What it is still not is `n = 11`'s result. Both the rank and the walk are numerical,
+      and the argument covers the unique first-order flex and its second-order obstruction
+      rather than 128 derivative-distinct branchwise linearized cones over an exact field
+      with a finite-branch subsequence argument. So the frontier property stays
+      `undetermined` and this session does not move it: a rigidity property is a promotion,
+      and an unattended runner may apply the accept rule only conservatively. The
+      recommendation for a reviewer is `locally-rigid` at assurance `numerically-checked`,
+      scoped to the retained pose.
+
+      `n = 28` and `n = 40` have no first-party evidence available, and the reason is
+      concrete rather than a shortage of time: everything above needs a contact structure,
+      and the atlas retains structures for `n = 11` and `n = 29` only. Neither size has a
+      case module or a retained structure, so producing the same evidence means extracting
+      one from the retained witness first -- which the promotion pipeline can now do, and
+      which is a block of its own rather than a re-run of this one.
   - id: BC-065
     purpose: tool_validation
     owner_focus: correctness
@@ -954,6 +998,40 @@ agenda:
       itself: that needs the contact system assembled as an LP, which is a different block.
       Bland's rule against cycling, and a pivot budget as a second line, with exceeding it
       a typed refusal rather than a silent answer.
+  - id: BC-072
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [29]
+    state: ready
+    priority: 1
+    question: >-
+      Does higher-precision path tracking account for the paths the double-precision run
+      lost, and if it does, what degree does the projection to the `s`-axis have?
+    hypotheses: []
+    budget: >-
+      whatever remains before the finalization reserve, with a hard cap of four hours and
+      no extension
+    entry: >-
+      BC-070 bounded the degree at `15,744` and had its count refused by its own kill
+      condition: 148 of 15,744 paths ended in `no solution`, 600 solutions were reported
+      singular, and only 8,327 reached the final list at all.
+    exit: >-
+      Either an accounting complete enough to read a degree from, with the distinct `s`
+      values counted; or the same refusal with a second precision behind it, which is a
+      stronger statement than one run makes.
+    bead: think-utlo
+    depends_on: [BC-070]
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      Double-double arithmetic is where path jumping and near-singular endpoints usually
+      go away, and those are the two failures the double run reports. It costs about an
+      order of magnitude in time, which is affordable here only because the continuation
+      reached its terminal blocks with most of the session's clock unspent.
+    note: >-
+      This may simply fail again, and that is a recorded result rather than a wasted block.
+      Do not read a degree off an incomplete accounting: BC-070's kill condition applies
+      unchanged, and a count with lost paths is not evidence about a degree at any
+      precision. Nothing here may move `verified_upper_bound`.
   - id: BC-064
     purpose: tool_validation
     owner_focus: process
