@@ -1,0 +1,28 @@
+{
+  "claim": "The number of isolated solutions of the n = 29 contact system is at most 15,744, so the algebraic degree of s(29) is at most 15,744.",
+  "claim_boundary": "A bound on the degree, not the degree, and not a statement about s(29) being algebraic of any particular degree. It replaces a looser bound with a tighter one and moves nothing else: verified_upper_bound is untouched, and the n = 29 bound gap of about 0.46 is untouched.",
+  "certified": false,
+  "supersedes": {
+    "bound": 1039500,
+    "kind": "Bezout, the product of the total degrees [11, 15, 10, 15, 7, 6]",
+    "recorded_in": "BC-065, session-043",
+    "factor": 66.02
+  },
+  "bound": {
+    "value": 15744,
+    "kind": "mixed volume of the Newton polytopes (Bernstein / BKK)",
+    "stable_mixed_volume": 15744,
+    "why_it_applies": "Bernstein's theorem bounds the isolated solutions with every coordinate nonzero. The packing's own solution lies in that torus because no angle in it is zero. The stable mixed volume is equal to the mixed volume here, which says there are no isolated solutions on the coordinate hyperplanes either -- so the bound covers all isolated solutions rather than only the torus ones.",
+    "dimension": 6,
+    "distinct_supports": 6,
+    "engine": "PHCpack 2.4.90, MixedVol algorithm",
+    "elapsed_seconds": 9,
+    "command": "printf '4\\n0\\nn\\nn\\n' | phc -m system.phc mixvol.out"
+  },
+  "why_this_route": "BC-066 measured that Groebner elimination does not reach an eliminant for this system on this hardware, and that the obstruction is the size of the ideal rather than coefficient swell -- the finite-field runs hit the same matrix dimensions as the rational one. Homotopy continuation bounds and counts the solutions without computing any basis, which is why it reaches an answer where elimination does not.",
+  "what_it_buys": "BC-060's integer-relation sweep searched blindly through degree twenty and refused. It had no target. A bound of 15,744 is still far beyond what pslq can reach, so it does not make that search feasible; what it does is replace an unusable bound with a merely large one, and give the next attempt a number computed from the system rather than guessed.",
+  "reproduce": [
+    "uv run --frozen --all-extras --group dev python -m devtools.probe_elimination --emit system.phc --phc",
+    "printf '4\\n0\\nn\\nn\\n' | phc -m system.phc mixvol.out"
+  ]
+}

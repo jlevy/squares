@@ -394,7 +394,46 @@ and
 [run-002](packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md#where-to-resume)
 carries what a fresh agent needs that the diff does not show.
 [Session 044](packing/campaign/agent-sessions/session-044-agenda006-continuation.md) is
-executing that continuation and is where its measurements land.
+executing that continuation, and three of its blocks are terminal.
+
+`BC-066` attempted the elimination and reached **a measured wall rather than an
+eliminant**, which is the exit that commitment names.
+Three `msolve` runs on the six-equation system: over `Q` in an elimination order, F4 was
+OOM-killed at degree 32 after 25m09s with `13.8 GB` resident, having completed degree 31
+on a `656126 × 1670545` matrix; mod `1073741827` in the same order the matrix dimensions
+were identical degree for degree; and mod the same prime in plain grevlex — an order of
+magnitude cheaper per matrix — the pair list still grew monotonically to 21,661 with no
+basis inside a declared 25-minute cap.
+**Neither predicted failure mode is what stopped it.** Coefficients cannot swell over
+`F_p`, and the cheapest monomial order did not terminate either, so what the runs
+measure is the size of the ideal rather than the arithmetic carried through it.
+The claim is narrower than “out of reach”: two threads and 15 GB is not a proof of
+intractability.
+What it establishes is that the interval route carries the `n = 29` bound
+for a measured reason, and that the next thing to try is a smaller question rather than
+a bigger computer.
+
+That is `BC-070`, and its first half has landed.
+Homotopy continuation needs no basis at all, and the mixed volume of the Newton
+polytopes bounds the isolated solutions at **`15,744`** — sixty-six times tighter than
+the Bézout bound of `1,039,500`, computed in nine seconds.
+The stable mixed volume is equal to it, so the bound covers every isolated solution
+rather than only those in the torus.
+So `s(29)` is algebraic of degree at most `15,744` if it is algebraic at all.
+That is still far beyond what an integer-relation search can reach, and saying otherwise
+would overstate it: what it replaces is an unusable bound with a merely large one,
+computed from the system rather than guessed.
+
+`BC-067` closed the exact route’s loop at `n = 11`, where the answer is published.
+`discharge` stops at the side, which is a claim about a *number*; the round trip carries
+it back to a claim about a *packing* — eleven squares, fourteen touching pairs, valid
+under `exact_sign`, and the reconstructed side equal to the field generator **exactly**.
+The obstacle is real and `n = 11` is where it is avoidable: a pose unknown `t_i` is an
+angle and has no representation in `Q(s)` at all, but Trump’s construction is already
+over `Q(u)` with `u = tan(a/2)`, so the question reduces to recovering `u` from `s`.
+That recovery is a derivation rather than a search — `Q(s) = Q(u)`, both degree eight,
+so writing each `s^i` in the power basis of `Q(u)` gives a square rational system with
+one solution, and a singular one is refused rather than fitted.
 The continuation runs the missing middle layers first, with the efficiency and research
 cells deliberately last.
 The full ordering for the sessions after it — including which of the two `priority: 0`
