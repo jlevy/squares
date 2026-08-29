@@ -1175,11 +1175,149 @@ agenda:
       like `P / log10(C)`, so degree 15,744 at this coefficient bound wants roughly 350,000
       digits and a 15,745-term basis. That gap belongs to the interval route, not to this
       tool.
+  - id: BC-074
+    purpose: tool_validation
+    owner_focus: process
+    instances: [11, 29]
+    state: ready
+    priority: 0
+    question: >-
+      Do the reader-facing documents still describe the project the record describes?
+    hypotheses: []
+    budget: >-
+      a session of its own, not a block inside a research run
+    entry: >-
+      The continuation closed eleven commitments. `SYNOPSIS.md` carries their results
+      because `check_synopsis` forces it to; `README.md` and `TUTORIAL.md` do not, and
+      nothing forces them.
+    exit: >-
+      The checklist in `conventions.md` section 12 run over every root document, with each
+      drift either fixed or filed as a defect and no third option; generated views
+      regenerated; and an explicit statement of what was checked and what was left.
+    bead: think-eb29
+    depends_on: [BC-064]
+    workflows: [documentation-pass]
+    next_evidence: >-
+      This is the first W8 session, and the workflow exists because of what this run
+      demonstrated: the record can move a long way in a day while the front door does not
+      move at all, and nothing in the gate notices. `check_synopsis` binds the synopsis to
+      the artifacts and there is no equivalent for the README or the tutorial.
+    note: >-
+      W8 reconciles; it does not author. No claim may be introduced that the record does
+      not already carry, and a disagreement the artifacts cannot settle is a defect rather
+      than a rewrite -- a pass that quietly picks the more readable side is how a wrong
+      claim becomes the tidy one.
+
+      The sentences most at risk are the claim boundaries, because they are the ones that
+      read as clutter: `reported` is not `verified`, `verified` is not the optimum, and a
+      bound on the Kingbird solution is not a bound on `s(29)`. D-367 is what that failure
+      looks like when it happens, and it happened in the same run that is asking for this
+      pass.
+  - id: BC-075
+    purpose: tool_validation
+    owner_focus: efficiency
+    instances: [5, 11]
+    state: blocked
+    priority: 0
+    question: >-
+      Are the gate's tiers the right tiers, and is the coordinator running them at the
+      right times?
+    hypotheses: []
+    budget: >-
+      a session of its own; the measurement half is cheap and the retiering is a contract
+      change
+    entry: >-
+      Measured on this container today, on the same tree as its content grew: the fast tier
+      took `484s`, then `538s`, then `631s`. One step, `fast behavioural tests`, is nearly
+      all of it -- `473s` to `538s` -- against `50-77s` for soft-schema, `24-59s` for lint,
+      and under five seconds for everything else combined. The full strict tier took
+      `1055s` and left two steps failing. `D-355` already measured a two-file edit verified
+      at `979.79s` against the `12.06s` its affected steps need, and `D-366` records the
+      control step outgrowing its own cap.
+    exit: >-
+      A tier structure argued from what each step can catch and how often it can catch it,
+      not from what exists now: what must run on every edit, what belongs at a block
+      boundary, and what only needs running once or twice a session. Plus a measured
+      decision on the coordinator's own discipline, which is the other half of the waste.
+      Both argued from a rollup of this session's own timing logs rather than from
+      impressions of them.
+    bead: think-c46d
+    depends_on: [BC-074]
+    workflows: [efficiency-loop]
+    next_evidence: >-
+      The first-principles question is whether a step earns its slot. A check that has
+      never failed on an edit-loop change is ceremony there however good it is at a
+      boundary, and a check that can only fail after a regeneration belongs where
+      regenerations happen. `--only` already runs three targeted steps in about four
+      seconds against five hundred for the tier that contains them, so the mechanism exists
+      and the routing does not.
+    note: >-
+      This absorbs `BC-062`'s reachability-scoped selector as one candidate mechanism rather
+      than as the goal. A selector answers "which steps can this change reach"; the prior
+      question is "which steps should anyone run at this moment", and a selector bolted onto
+      the wrong tiers just makes the wrong thing faster.
+
+      **The second half is the coordinator, and it is the half with the larger measured
+      waste.** In this session the gate was launched at a tree the session had already moved
+      past, polled in tight loops for eight to eleven minutes at a stretch, and run in full
+      when three named steps would have answered the question in four seconds. None of that
+      is the gate's fault. Three rules would have removed most of it: run `--only` for the
+      steps a change can reach and keep the tier for boundaries; never poll a gate, launch
+      it in the background and read it at the next natural stopping point; and never start a
+      gate whose tree you are about to change. Whether those belong in the session guide or
+      in the tooling is part of this block's decision.
+
+      **Start from the rollup, and build on what exists.** Session-017 already built
+      `devtools/codex_log_rollup.py`, a tested `CodexEfficiencyRollup/v2` scanner over Codex
+      JSONL that separates the response envelope from timed model-stream items, records the
+      first-token wait, and carries a `semantics` block stating what each figure may and may
+      not be read as. That is most of the hard part and it should not be built twice.
+
+      **Three schemas, not one.** The tempting move is a single harness-agnostic parser,
+      and it is wrong: Codex and Claude Code expose genuinely different things, and forcing
+      one shape onto both means either discarding what one of them knows or inventing
+      fields the other cannot fill. So:
+
+      - `CodexEfficiencyRollup/v2` -- exists, tested, faithful to Codex JSONL. Unchanged.
+      - `ClaudeEfficiencyRollup/v1` -- new, and faithful to Claude Code JSONL in the same
+        way: whatever that transcript actually records about tool calls, model turns and
+        token accounting, in its own terms, with its own `semantics` block saying what each
+        figure may be read as.
+      - `EfficiencyRollup/v1` -- the unified format both map into, and the only one anything
+        downstream reads.
+
+      The unified schema's hard requirement is that it never defaults a missing measurement
+      to zero. Where a harness cannot supply a field, the record says *unavailable* and
+      names the harness, because a rollup that silently zeroes model time will be summed
+      with one that reports it and the total will be wrong in the flattering direction.
+      `CodexEfficiencyRollup/v2`'s `semantics` block is the model for that discipline and
+      the reason it should not be flattened away in the mapping.
+
+      **Two layers under it.** A folder of per-source records, one per JSONL file --
+      mechanical, regenerable, no interpretation. Then our own attribution of those minutes
+      to blocks, kept in separate records, because that attribution is a judgement someone
+      may disagree with and the source records should not move when they do.
+
+      **Then it becomes routine rather than ad hoc.** Every block and every session closes
+      with a rollup; the campaign rollup is a rollup of rollups and is carried in
+      `SYNOPSIS.md`. Adding that obligation to the session finalization contract is part of
+      this block, not a separate one -- a practice that is not in the contract is a practice
+      that lapses.
+
+      This session's own numbers are the first thing to normalise, and they are already
+      partly lost -- the shell logs lived in an ephemeral scratchpad. What survives in this
+      agenda and in session-044 is the gate and computation timing; the model and tool-call
+      accounting is in the harness transcript and was never extracted, which is exactly the
+      gap the Claude Code reader closes.
+
+      Under-running is still the failure mode that matters. A tier that is merely slow is a
+      disappointment; a tier that skips a step a change can reach is a soundness defect, and
+      any retiering has to carry a control proving it cannot.
   - id: BC-064
     purpose: tool_validation
     owner_focus: process
     instances: [5, 10, 11, 16, 29]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Does the whole record still hold at the endpoints after the continuation, and does
@@ -1190,6 +1328,9 @@ agenda:
     exit: >-
       A full strict `packing-validate` receipt, generated views regenerated, run-002
       extended to cover every session of this run with measured clocks, and a green PR.
+    artifacts:
+    - campaign/agent-sessions/session-044-agenda006-continuation.md
+    - campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md
     bead: think-c7oo
     depends_on: [BC-057]
     workflows: [process-review]
@@ -1200,6 +1341,23 @@ agenda:
     note: >-
       This run has already recorded one wrong reason for stopping early. The endpoint check
       is where that is caught, and it is reserved rather than optional for that reason.
+
+      Closed in session-044, and it earned its place a second time. The full strict gate
+      fails two steps no fast run would have shown. `D-365` -- the deep golden-basin oracle
+      failing at `n = 10` -- is proven pre-existing by an import walk and by reproducing the
+      identical failures at the session's base commit in a separate worktree. `D-366` is
+      this session's own: the negative-control step outgrew the 900-second per-step cap
+      because the suite went from 113 controls to 137, and without the cap all 137 fire in
+      `1268s`.
+
+      It also caught, through CI rather than locally, a wrong finding this session had
+      recorded: two beads reported as never created existed the whole time on the shared
+      `tbd-sync` branch. `check_bead_tree` refused the duplicates that mistake created,
+      which is the check working exactly as intended.
+
+      And the review it forced produced `D-367`: every `n = 29` degree statement here is
+      about the Kingbird solution, and the record had been writing them as statements about
+      `s(29)`, which is the optimum and is not proved to be it.
 ---
 # agenda-006 — four bounded overnight blocks
 

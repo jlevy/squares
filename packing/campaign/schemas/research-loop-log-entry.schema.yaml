@@ -170,6 +170,7 @@ $defs:
       efficiency-loop: {$ref: "#/$defs/count"}
       research-loop: {$ref: "#/$defs/count"}
       pipeline-improvement: {$ref: "#/$defs/count"}
+      documentation-pass: {$ref: "#/$defs/count"}
       general-improvement: {$ref: "#/$defs/count"}
   phase_status_counts:
     type: object

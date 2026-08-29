@@ -129,9 +129,12 @@ packing, live in [jlevy/thinking](https://github.com/jlevy/thinking).
   best known, or asserted-but-unverified — and cite primary sources near the claims they
   support.
 - **Independently tracked packing work declares its entry point.** The coordinating
-  agent chooses W1–W7 (or `general-improvement` only for genuine repository maintenance
+  agent chooses W1–W8 (or `general-improvement` only for genuine repository maintenance
   outside those workflows) from [`README.md`](README.md#workflow-entry-points) before
   beginning a session or a genuine workflow phase.
+  W8 is the documentation pass: open it after a run that closed several commitments, and
+  run it against [the checklist](conventions.md#12-the-w8-documentation-checklist)
+  rather than by taste.
   Bounded delegated work such as formatting, lint repair, extraction, or repeated checks
   inherits the parent phase unless it opens its own independently tracked session.
   Longer sessions record workflow and primary-focus changes as ordered phases;

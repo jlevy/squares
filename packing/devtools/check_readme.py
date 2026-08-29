@@ -81,6 +81,12 @@ _SPELLED = {
 }
 
 
+#: W1 through W8. Bumping this is the deliberate half of adding a workflow; the other
+#: half is the two orientation tables in README.md and SYNOPSIS.md, which this check
+#: compares against the schema rather than against each other.
+EXPECTED_NUMBERED_WORKFLOWS = 8
+
+
 def layout_tree(text: str) -> str | None:
     """The fenced block that draws the directory, if README still has one."""
     # Anchored on the drawing, not on a path prefix. The tree used to be found by the
@@ -251,10 +257,14 @@ def check_work_model(text: str) -> list[str]:
     expected_rows = [
         (f"W{index}", workflow) for index, workflow in enumerate(numbered_workflows, start=1)
     ]
-    if len(numbered_workflows) != 7 or not fallback:
+    # The count is asserted rather than derived on purpose: an enum that silently grows or
+    # shrinks would still produce a self-consistent pair of tables, and the point of this
+    # check is that a workflow cannot be added without a human editing both orientation
+    # tables and this number.
+    if len(numbered_workflows) != EXPECTED_NUMBERED_WORKFLOWS or not fallback:
         problems.append(
-            "agent-session.schema.yaml: workflow enum must contain seven numbered "
-            "workflows followed by one fallback"
+            f"agent-session.schema.yaml: workflow enum must contain "
+            f"{EXPECTED_NUMBERED_WORKFLOWS} numbered workflows followed by one fallback"
         )
     for label, rows in (
         ("README.md", workflow_rows(text)),

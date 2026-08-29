@@ -146,12 +146,12 @@ invalidate every artifact rather than the offending one
 ### Workflow, Focus, Phase, and Slice
 
 **Workflow names purpose and output; focus names the primary quality emphasis.**
-[checked for agent sessions] The seven numbered workflows and their full contracts live
+[checked for agent sessions] The eight numbered workflows and their full contracts live
 in [`SYNOPSIS.md`](SYNOPSIS.md#workflow-entry-contracts).
 Routine work declares its workflow, objective, artifact, and focused check where the
 work is already tracked.
 It does not create a session artifact merely to duplicate those facts.
-`general-improvement` is reserved for genuine repository maintenance outside W1–W7 and
+`general-improvement` is reserved for genuine repository maintenance outside W1–W8 and
 the packing pipeline, not a label for mixed or ordinary core work.
 
 **Session records are an escalation, not the default.** [checked once present] Use
@@ -166,9 +166,17 @@ merges. Do not create a separate default-branch copy or publication mechanism.
 **Implementation stays with its owning workflow.** [convention] Bounded research
 corrections stay in W1 or W2, idea probes in W3, process and checker repairs in W4,
 measured optimizations in W5, one-round registered instruments in W6 before measurement,
-and reusable packing-pipeline capabilities, targeted refactors, robustness,
-visualization infrastructure, and cleanup in W7. There is no undefined implementation
-handoff.
+reusable packing-pipeline capabilities, targeted refactors, robustness, visualization
+infrastructure, and cleanup in W7, and reconciliation of the reader-facing tier in W8.
+There is no undefined implementation handoff.
+
+**A documentation pass reconciles; it does not author.** [convention] W8 may correct,
+cut, reorder and clarify the root documents against the artifacts, and may not introduce
+a claim the record does not already carry — a document that wants to say something new
+is asking for W1 or W6. Where a document and an artifact disagree and the artifact is
+not obviously right, the output is a defect rather than a rewrite: a pass that quietly
+picks the more readable side is how a wrong claim becomes the tidy one.
+Its checklist is [§12](#12-the-w8-documentation-checklist).
 
 **A phase is contiguous; a slice is bounded.** [checked for phase history] Start a new
 phase when workflow, focus, or the bounded slice objective changes.
@@ -435,6 +443,54 @@ PR, and an open bead owns the repair.
 That merge preserves reviewed work; it does not certify the failed producer or authorize
 an unattended campaign.
 The strict gate remains mandatory before the deep handoff or launch that depends on it.
+
+## 12. The W8 Documentation Checklist
+
+A documentation pass is worth opening when a run has closed several commitments and the
+reader-facing tier has not caught up.
+It is worth *closing* when every item below has an answer, including the ones whose
+answer is “nothing to do”.
+
+**Order matters.** Read the artifacts first, the documents second, and never the
+reverse: a pass that starts from the prose inherits the prose’s mistakes.
+
+**Per document.**
+
+- [`README.md`](README.md) — the front door.
+  Does the first screen still say what the project is and what it has?
+  Do the workflow entry points, the directory tree, and every headline number match the
+  record? Is the thing a new reader should do first still the first thing offered?
+- [`TUTORIAL.md`](TUTORIAL.md) — orientation.
+  Does every command run, on a clean checkout, in the order given?
+  Does it teach the problem before the tooling?
+  Does a reader who finishes it know what this project can and cannot certify — and can
+  they say why the reported and verified bounds differ?
+- [`SYNOPSIS.md`](SYNOPSIS.md) — the technical account.
+  Does the readiness table match [What Is Built](SYNOPSIS.md#what-is-built)?
+  Does the handoff point at work that exists, on beads that exist?
+  Are the defect aggregates the generated ones?
+- [`conventions.md`](conventions.md) — this page.
+  Is every `[checked]` claim still checked by something, and every `[convention]` still
+  observed?
+- [`development.md`](development.md) — do the commands still exist, with those flags?
+
+**Across documents.**
+
+- One fact, one home. Where two documents state the same number, one of them should be
+  citing the other or the artifact — not restating it.
+- No document should be the only place a load-bearing claim appears.
+- Claim boundaries survive editing.
+  `reported` is not `verified`, `verified` is not the optimum, and a bound on a retained
+  witness is not a bound on `s(n)`. These are the sentences most likely to be smoothed
+  away, and the ones that must not be.
+
+**Before closing.**
+
+- Every drift either fixed or filed as a defect, with no third option.
+- Generated views regenerated: `packing-ledger render`, `devtools.render_defects`,
+  `devtools.check_synopsis`.
+- `make format` clean, gate green, and a statement of what was checked *and what was
+  left*.
 
 Everything else on this page is convention, and convention is what drifts.
 When a rule here is broken and nothing catches it, the fix is a check, not a reminder.

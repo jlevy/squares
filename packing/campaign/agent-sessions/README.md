@@ -4,7 +4,7 @@ These are escalation artifacts for the outer autonomous work loop.
 An agent session is one bounded interval of orchestrated work, not a campaign, series,
 experiment, or solver run.
 The [synopsis](../../../SYNOPSIS.md#work-units-and-records) owns those definitions; the
-[workflow contracts](../../../SYNOPSIS.md#workflow-entry-contracts) own W1–W7.
+[workflow contracts](../../../SYNOPSIS.md#workflow-entry-contracts) own W1–W8.
 
 Session records complement, and do not replace, the scientific record:
 
@@ -44,7 +44,7 @@ Before escalated work starts, record:
 
 - the overall session goal, offset-aware start and hard deadline, wall budget, cycle
   cap, finalization reserve, and stop conditions;
-- the first phase’s workflow, chosen from W1–W7, with `general-improvement` reserved for
+- the first phase’s workflow, chosen from W1–W8, with `general-improvement` reserved for
   genuine repository maintenance outside those workflows;
 - the phase’s primary focus, objective, clock role, expected output, validation command,
   kill condition, fallback, start, and deadline; and

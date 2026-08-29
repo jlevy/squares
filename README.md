@@ -322,6 +322,7 @@ Workflow selection is a routing decision, not a form to complete.
 | W5 | `efficiency-loop` | A measured bottleneck limits useful iterations | A baseline, profile, equivalence-safe change, and measured decision | W6 |
 | W6 | `research-loop` | A registered hypothesis has a fixed criterion, regime, budget, and instrument contract | A frozen instrument and one or more `exp-NNN` records, raw evidence, verdicts, and a current ledger | W2 for promoted or high-risk claims; otherwise W3 or another W6 slice |
 | W7 | `pipeline-improvement` | A named packing-pipeline surface or research consumer needs a new, stronger, simpler, or repaired capability | A bounded implementation or refactor, executable controls, explicit evidence limits, cost receipt, and readiness decision; no scientific verdict | W2 before a materially changed trust boundary reaches W6; otherwise W5 or W6 |
+| W8 | `documentation-pass` | A period of research has left the reader-facing documents behind what the record now says | Reconciled root documents — README, tutorial, synopsis — checked against the artifacts and against each other, with every drift either fixed or logged as a defect; no new claim introduced | W2 for any claim the pass could not verify; otherwise the next owning workflow |
 
 The handoff column is the *usual* successor, not a rule the record enforces.
 Across 171 recorded phases only about a third of transitions follow it, and workflows
@@ -336,8 +337,16 @@ that freezes before measurement.
 W7 owns the implementation itself when the promised result is a packing-pipeline
 capability, targeted refactor, robustness repair, visualization surface, or cleanup for
 a named pipeline surface or research consumer.
+W8 owns the reader-facing tier when research has moved past it.
+It is a *reconciliation* workflow, not an authoring one: it may correct, cut, reorder
+and clarify, and it may not introduce a claim the record does not already carry.
+A drift it cannot resolve from the artifacts is a defect, not a rewrite.
+Schedule it after a run that closed several commitments rather than continuously — the
+documents are meant to trail the record slightly, and a pass with nothing to reconcile
+is a pass that should not have been opened.
+
 Use `general-improvement` only for genuine repository maintenance whose output belongs
-outside the packing pipeline and fits none of W1–W7. It is not a core-work catchall or
+outside the packing pipeline and fits none of W1–W8. It is not a core-work catchall or
 permission to mix several purposes without checkpoints.
 
 For routine single-purpose work, record only the workflow, the bounded objective or
@@ -410,7 +419,7 @@ They differ by lifetime and by who checks them:
 | **Is** | A durable work item | A planned attempt at one | One executed step |
 | **Lives in** | `tbd` | An agenda | One session |
 | **Lifetime** | Until closed | Across sessions | Minutes to an hour |
-| **Typed by** | issue type | `purpose` and `owner_focus` | `workflow` (W1–W7) and `focus` |
+| **Typed by** | issue type | `purpose` and `owner_focus` | `workflow` (W1–W8) and `focus` |
 | **Falsifier** | none | `exit`, judged | `kill_condition` and `validation_command`, runnable |
 
 Read it as: a **bead** says what needs doing; a **bounded commitment** says what would

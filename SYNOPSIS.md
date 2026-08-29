@@ -242,6 +242,7 @@ routine task.
 | W5 | `efficiency-loop` | A measured baseline, profile, target metric, and equivalence or validity guard | Improve time, cost, or throughput under the same regime; never relax correctness or provenance to win | Benchmark record, change or rejection, measured delta, and preserved guards | W6 when the research bottleneck moves; W4 if the process contract is wrong |
 | W6 | `research-loop` | A registered hypothesis, fixed criterion, regime, budget, stop rule, and instrument contract | Build or repair the bounded instrument, freeze it before measurement, then use creative effort inside the registered scope to execute the smallest fair test; never change the criterion, suppress a failure, or improvise a replacement hypothesis mid-round | Frozen instrument, `exp-NNN`, raw data or proof record, verdict, regenerated views, and the next bounded question | W2 before promoted or high-risk claims; otherwise W3 or another W6 slice |
 | W7 | `pipeline-improvement` | Named packing-research consumers, the smallest reusable capability or cleanup they need, controls or an independent oracle, a budget, and expected comparability impact | Add, strengthen, simplify, or repair only the bounded packing pipeline surface; do not collect a target verdict while it is mutable, optimize an unchanged implementation without a W5 baseline, or generalize beyond named consumers | Code, entry point or refactor; replayable positive and negative controls; exact validation command; cost and complexity receipt; evidence limits; and a readiness or retained-blocker decision | W2 before a new or materially changed trust boundary reaches W6; W5 if measured throughput remains the blocker; otherwise W6 |
+| W8 | `documentation-pass` | A period of research that closed several commitments, the artifacts it left, and the reader-facing documents that have not caught up | Reconcile the root tier — README, tutorial, synopsis, and the conventions they cite — against the artifacts and against each other; correct, cut, reorder and clarify, but never introduce a claim the record does not already carry, and never soften a claim boundary to make a document read better | A checklist run over each root document, every drift either fixed or filed as a defect, generated views regenerated, and an explicit statement of what was checked and what was left | W2 for any claim the pass could not verify against an artifact; otherwise the next owning workflow |
 
 Implementation is an action inside the workflow that owns its promised result, not an
 undefined handoff: W1 and W2 can make bounded research corrections, W3 can implement a
@@ -250,8 +251,21 @@ experiment budget, W4 can make a narrow accepted process correction, W5 can impl
 measured optimization, and W6 can build a one-round instrument that freezes before
 measurement. W7 owns reusable packing-pipeline capabilities, targeted refactors,
 robustness, visualization infrastructure, and cleanup for named consumers.
+W8 owns the reader-facing tier when research has moved past it, and it is a
+*reconciliation* workflow rather than an authoring one — its edits answer to the record,
+not to taste. Two boundaries make that real.
+It may not introduce a claim the artifacts do not already carry: a document that wants
+to say something new is asking for W1 or W6, not for a documentation pass.
+And it may not resolve a disagreement by choosing the more readable side — where a
+document and an artifact conflict and the artifact is not obviously right, the output is
+a defect, because a documentation pass that quietly picks a winner is how a wrong claim
+becomes the tidy one.
+Schedule it after a run that closed several commitments rather than continuously; the
+documents are meant to trail the record slightly, and a pass with nothing to reconcile
+is a pass that should not have been opened.
+
 `general-improvement` remains only for repository maintenance outside the packing
-pipeline whose output fits none of W1–W7. It must not hide core work or a session
+pipeline whose output fits none of W1–W8. It must not hide core work or a session
 alternating among research, review, and infrastructure; those are separate phases.
 
 ### Switching Workflows in One Session
@@ -408,7 +422,19 @@ and
 [run-002](packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md#where-to-resume)
 carries what a fresh agent needs that the diff does not show.
 [Session 044](packing/campaign/agent-sessions/session-044-agenda006-continuation.md) is
-executing that continuation, and three of its blocks are terminal.
+terminal, and closed eleven commitments.
+
+**The next slice is `BC-074` under `think-eb29`, and it is a `documentation-pass`.**
+That workflow — W8 — is new, added because this run demonstrated the gap it fills: the
+record moved a long way in a day while the front door did not move at all, and nothing
+in the gate noticed.
+`check_synopsis` binds this document to the artifacts; there is no equivalent for
+[`README.md`](README.md) or [`TUTORIAL.md`](TUTORIAL.md), so they drift silently.
+Its checklist is [conventions §12](conventions.md#12-the-w8-documentation-checklist),
+and its one hard rule is that it reconciles rather than authors: a claim the record does
+not already carry is not a documentation change, and a disagreement the artifacts cannot
+settle is a defect rather than a rewrite.
+[D-367](defects.md) is what the alternative looks like.
 
 `BC-066` attempted the elimination and reached **a measured wall rather than an
 eliminant**, which is the exit that commitment names.

@@ -70,7 +70,7 @@ atlas, ambiguity graph, discovery curve, and continuation tree, while the resear
 decides which views expose mechanisms rather than decorate a report.
 
 A focus is a quality dimension, not a workflow.
-Before taking work, choose W1–W7 from the
+Before taking work, choose W1–W8 from the
 [workflow entry contracts](../../../../SYNOPSIS.md#workflow-entry-contracts), then
 declare the primary focus inside that phase.
 A focus-only change starts another phase under the same workflow; a changed purpose
@@ -79,7 +79,7 @@ W7, `pipeline-improvement`, owns reusable packing-pipeline capabilities, targete
 refactors, robustness, visualization infrastructure, and cleanup for named research
 consumers. W6 retains only instruments specific to one registered round that freeze
 before measurement. `general-improvement` is only for genuine repository maintenance
-outside W1–W7 and the packing pipeline.
+outside W1–W8 and the packing pipeline.
 
 ## Measured checkpoint — 2026-08-24
 
