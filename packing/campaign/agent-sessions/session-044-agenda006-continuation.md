@@ -771,7 +771,7 @@ session:
       the n = 29 relation sweep to it.
     operator: subagent
     recording: contemporaneous
-    status: in_progress
+    status: completed
     phase: 10
     budget_minutes: 90
     started_at: '2026-08-29T12:33:00Z'
@@ -792,17 +792,42 @@ session:
     - packing/devtools/controls.yaml
     excluded_commands:
     - git push
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      The refusal moves from degree 20 to degree 29, the reach is established at 35, and a
+      soundness defect in the rule was found on the way.
+    evidence:
+    - >-
+      'Degree twenty was never derived from anything -- it was the `--max-degree` default.
+      Degrees 21 through 29 now all return `no-relation`, with pslq finding nothing to
+      judge rather than something a clause refused, which is the stronger form.'
+    - >-
+      'The reach is a ceiling on the worst relation a sweep may return, not a gate on an
+      answer: `C` is the coefficient a relation carries rather than the search bound, so
+      Trump''s degree eight is accepted from 400 digits carrying `C = 12420`. A hard
+      stop-at-the-reach gate would have broken the calibration.'
+    - >-
+      'D-364: clause 3 read "digits available" from the reported residual bound alone, and
+      at n = 29 that bound is `1.09829e-1039` over a value string carrying exactly 1000
+      significant digits. It was crediting the value with 39 digits it does not have,
+      enough to matter at degrees 36 and 37. Flattering, and never fired because no sweep
+      had gone past twenty.'
+    - >-
+      'n = 11 still recovers and discharges Trump''s published degree-eight polynomial,
+      verified here rather than taken on report: ACCEPTED at degree 8, now sweeping to 34.'
+    files:
+    - packing/src/sqpack/promote/solve.py
+    - packing/devtools/probe_minimal_polynomial.py
+    - packing/tests/test_promote_solve.py
+    checks:
+    - uv run --frozen --all-extras --group dev python -m devtools.probe_minimal_polynomial --case trump11
     uncertainty: >-
-      Held to one core, because BC-072's retrack has the other three for the next two
-      hours. A measured statement of what a longer reach would cost is a full result here;
-      finding the polynomial is not expected and the degree bound says why.
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Integrate when it lands.
+      Degrees 30 to 35 were unrun for time rather than for evidence. The coordinator
+      started the full sweep to 35 on the core BC-072 leaves free; whatever it reaches is
+      recorded at the endpoint check.
+    elapsed_seconds: 5083
+    elapsed_quality: platform_measured
+    next_action: >-
+      Landed by cherry-pick; D-364 opened for the digit-counting gap.
   - task: >-
       BC-061 -- an exact LP over certified rational or algebraic coefficients, replacing
       the float solver where a certified answer is required.

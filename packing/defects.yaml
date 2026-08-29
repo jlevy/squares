@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 363
+count: 364
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9559,5 +9559,46 @@ defects:
     equality. `t4 = pi/4` also reaches rank 16 and is asserted in the test as proof that
     reaching full rank is not on its own evidence of anything.
   bead: think-rqad
+  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+
+- id: D-364
+  title: The margin rule counted digits the value does not carry
+  date: '2026-08-29'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: from BC-044's margin rule until BC-073 in session-044
+  severity: low
+  status: fixed
+  what: >-
+    Clause 3 of the frozen margin rule refuses a relation whose reported residual bound is
+    not far enough below the coefficient budget it carries, and it read "digits available"
+    from that bound alone. The refinement reports a residual bound and *separately* rounds
+    its value to the digits it was asked for, and at `n = 29` the two disagree: the bound
+    is `1.09829e-1039`, measured at a working precision of 1040, over a value string
+    carrying exactly 1000 significant digits. The search only ever sees the string, so the
+    clause was crediting it with 39 digits it does not have.
+  consequence: >-
+    Flattering, and narrowly missed. A relation is judged against digits the value does not
+    carry, so a spurious relation could pass a clause written to refuse it -- which is the
+    exact failure the margin rule exists to prevent, and the one the planning probe's
+    relations at almost every degree from 8 to 21 on ninety-eight digits demonstrated. It
+    could only have mattered at degrees 36 and 37, and no sweep had ever gone past 20, so
+    it never fired. It was found by asking why the sweep stopped at twenty, not by a
+    failure.
+  fix: >-
+    `available_digits` takes the worse of the reported residual bound and the length of the
+    serialized value, and clause 3 tests that. The `n = 11` calibration is untouched by
+    construction: there the reported bound (`1e-390`) is already worse than the string's
+    400 digits, so the clause sees what it always saw and Trump's degree-eight polynomial
+    is still recovered and discharged.
+  regression: >-
+    Three controls under the BC-073 banner, each watched to fire: reading the digits from
+    the residual bound alone, a ceiling that admits a degree clause 3 would refuse, and a
+    probe that sweeps to a typed-in ceiling instead of to the digits. One existing BC-060
+    control quoted the clause-3 line this repair rewired and was updated with it; its guard
+    was re-verified firing.
+  bead: think-gucc
   recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
 

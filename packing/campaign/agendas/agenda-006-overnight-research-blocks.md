@@ -1072,7 +1072,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 29]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       What degree does the existing evidence actually support searching to, and does the
@@ -1088,6 +1088,10 @@ agenda:
       The reach as the code actually implements it, the sweep extended to it with the
       deciding clause reported degree by degree, and the measured cost of going further; or
       a statement of what in the rule stops it earlier than the formula suggests.
+    artifacts:
+    - src/sqpack/promote/solve.py
+    - devtools/probe_minimal_polynomial.py
+    - tests/test_promote_solve.py
     bead: think-gucc
     depends_on: [BC-060, BC-070]
     workflows: [pipeline-improvement]
@@ -1103,6 +1107,35 @@ agenda:
       relations at almost every degree from 8 to 21 on ninety-eight digits are what it
       caught. `n = 11` must keep recovering Trump's published degree-eight polynomial
       unchanged; it is the known answer the whole rule is trusted on.
+
+      Closed in session-044. **Degree twenty was never derived from anything** -- it was
+      the `--max-degree` default. The reach the digits actually support is **degree 35**,
+      and degrees 21 through 29 have now been swept: every one returns `no-relation`, with
+      pslq finding nothing to judge rather than finding something a clause refused, which
+      is the stronger form. So if `s(29)` is algebraic of degree 29 or less, some
+      coefficient is at least `10^22`.
+
+      Two corrections came out of writing the reach down, and the second is a soundness
+      defect. The reach is a ceiling on the *worst* relation a sweep may return rather
+      than a gate on any particular answer: `C` is the coefficient a relation carries, not
+      the search bound, so Trump's degree eight is accepted from 400 digits carrying
+      `C = 12420` where a saturating relation at degree seven would not be. A hard
+      "stop at the reach" gate would have broken the calibration.
+
+      And the digits a clause may rely on are not the reported residual bound alone. At
+      `n = 29` that bound is `1.09829e-1039` over a value serialized to exactly 1000
+      significant digits, and the search only ever sees the string -- so clause 3 was
+      crediting it with 39 digits it does not have, enough to matter at degrees 36 and 37.
+      That is D-364, flattering and narrowly missed: no sweep had ever gone past twenty, so
+      it never fired, and it was found by asking why the sweep stopped there rather than by
+      a failure.
+
+      Degrees 30 to 35 are unrun for time rather than for evidence: pslq cost `387s` at
+      degree 29 and climbs about thirty seconds a degree, so the remainder is about fifty
+      minutes on one core. None of it approaches the `15,744` BC-070 allows -- reach grows
+      like `P / log10(C)`, so degree 15,744 at this coefficient bound wants roughly 350,000
+      digits and a 15,745-term basis. That gap belongs to the interval route, not to this
+      tool.
   - id: BC-064
     purpose: tool_validation
     owner_focus: process
