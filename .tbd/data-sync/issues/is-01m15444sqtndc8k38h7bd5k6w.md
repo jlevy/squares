@@ -3,14 +3,18 @@ type: is
 id: is-01m15444sqtndc8k38h7bd5k6w
 title: Run the full gate and merge
 kind: task
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m15219m6eh8fww5pm9sc2sqd
 created_at: 2026-08-28T21:23:59.414Z
-updated_at: 2026-08-28T21:23:59.414Z
+updated_at: 2026-08-29T02:44:03.334Z
+closed_at: 2026-08-29T02:44:03.332Z
+close_reason: "Full gate passed on main via the CI push run for the PR 59 merge (run 33229052942, success): the complete 38-step surface on a quiet runner. Local full-gate attempts were load-contaminated; CI is the authoritative pass."
+resolution: null
+duplicate_of: null
 ---
 Full `packing-validate`, not `--fast`, before the PR merges.
 
