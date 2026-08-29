@@ -10,7 +10,6 @@ from collections.abc import Iterator
 from pathlib import Path
 from typing import Any
 
-import yaml
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
@@ -30,6 +29,7 @@ from sqpack.render.svg import (
     sub,
     write_svg_atomic,
 )
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 ATLAS_ROOT = ROOT / "atlas/enumerated"
@@ -358,7 +358,7 @@ def atlas_errors(atlas: dict[str, Any]) -> list[str]:
 
 def schema_errors(atlas: dict[str, Any]) -> list[str]:
     """Return enforced structural-schema failures for mutation controls."""
-    schema = yaml.safe_load(SCHEMA.read_text(encoding="utf-8"))
+    schema = safe_load(SCHEMA.read_text(encoding="utf-8"))
     return [
         problem.message
         for problem in sorted(

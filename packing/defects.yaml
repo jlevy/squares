@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 369
+count: 370
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9797,3 +9797,42 @@ defects:
     stops the recurrence in the meantime.
   bead: think-c46d
   recorded_in: packing/src/sqpack/cli/validate.py
+- id: D-370
+  title: The registry checks were slow because they were not registry checks
+  date: '2026-08-29'
+  layer: tooling
+  class: performance
+  detected_by: review
+  latent_for: 'since the soft-schema step was written'
+  severity: medium
+  status: fixed
+  what: >-
+    `soft-schema validation` took 67 seconds, which made the pre-push tier `D-369`
+    introduced cost 70 seconds rather than the second or two a registry check should.
+    Profiling found two causes and neither was schema validation. First, every YAML read
+    in the repository used PyYAML's pure-Python scanner: 163 of 245 profiled seconds were
+    `yaml.load`, over 12.6 million `check_token` calls, while libyaml ships with the
+    pinned wheels and nothing was asking for it. Second, and larger in what remained,
+    `cross_checks` runs `verify_packing` over 96 packings -- 166,134 separation tests and
+    507,156 exact projections -- inside a step named for schemas.
+  consequence: >-
+    Wall clock and, through it, behaviour: a check that costs a minute is a check nobody
+    runs before a push, which is the mechanism `D-369` records. Measured after the loader
+    fix, the actual schema validation is `0.38s` for the 100 frontier cases, `0.03s` for
+    the frontier datasets and `0.08s` for `defects.yaml`. The cost is `8.64s` of jsonschema
+    descent over 208 witness files and `10.29s` of exact geometry. Nothing was validated
+    wrongly; the step was priced as if schemas were expensive when they are not.
+  fix: >-
+    `sqpack.yamlio` now bases both loaders on `yaml.CSafeLoader` where libyaml is present,
+    keeping the duplicate-key refusal, and adds a `safe_load` that the 31 modules calling
+    `yaml.safe_load` directly now use. Measured `67.4s` to `25.2s` for the whole step, and
+    `11.3x` on `defects.yaml` alone. Separating the exact verification from the schema
+    check, and the witness sweep from both, is `BC-075`: it is a step-boundary change
+    rather than a loader swap, and the tier it belongs in is that block's question.
+  regression: >-
+    `test_yaml_is_read_only_through_the_project_loader` walks `src`, `devtools` and
+    `cases` for `yaml.safe_load` or a bare `yaml.SafeLoader` and fails on either, so the
+    pure-Python scanner cannot return one call site at a time. The duplicate-key guard was
+    re-checked under the C loader before the base class changed.
+  bead: think-c46d
+  recorded_in: packing/src/sqpack/yamlio.py

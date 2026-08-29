@@ -360,3 +360,31 @@ def test_devtools_use_public_package_interfaces() -> None:
                 if alias.name.startswith("_")
             )
     assert violations == []
+
+
+def test_yaml_is_read_only_through_the_project_loader() -> None:
+    """PyYAML's pure-Python scanner cannot come back one call site at a time.
+
+    `yaml.safe_load` and a bare `yaml.SafeLoader` use the Python scanner, which cost 67
+    seconds to validate a record that parses in a fraction of that through libyaml
+    (D-370). `sqpack.yamlio` owns the choice; everything else asks it.
+    """
+    violations: list[str] = []
+    owner = PROJECT_ROOT / "src" / "sqpack" / "yamlio.py"
+    for directory in ("src", "devtools", "cases"):
+        for path in sorted((PROJECT_ROOT / directory).rglob("*.py")):
+            if path == owner:
+                continue
+            tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+            for node in ast.walk(tree):
+                if not isinstance(node, ast.Attribute) or node.attr not in {
+                    "safe_load",
+                    "SafeLoader",
+                }:
+                    continue
+                if isinstance(node.value, ast.Name) and node.value.id == "yaml":
+                    violations.append(
+                        f"{path.relative_to(PROJECT_ROOT)}:{node.lineno} uses "
+                        f"yaml.{node.attr}; import it from sqpack.yamlio instead"
+                    )
+    assert violations == []

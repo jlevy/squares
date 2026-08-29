@@ -15,7 +15,7 @@ import shlex
 import sys
 from decimal import Decimal
 
-import yaml
+from sqpack.yamlio import safe_load
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
@@ -25,7 +25,7 @@ EVIDENCE = FRONTIER / "evidence.yaml"
 
 def parse_case(path: pathlib.Path) -> dict:
     text = path.read_text(encoding="utf-8")
-    return yaml.safe_load(text.split("---\n")[1])["packing"]
+    return safe_load(text.split("---\n")[1])["packing"]
 
 
 def parse_kingbird(path: pathlib.Path, n_min: int, n_max: int) -> dict[int, str]:
@@ -94,7 +94,7 @@ def replay_input_errors(evidence: list[dict]) -> list[str]:
 
 
 def main() -> int:
-    coverage = yaml.safe_load(COVERAGE.read_text(encoding="utf-8"))
+    coverage = safe_load(COVERAGE.read_text(encoding="utf-8"))
     n_min = coverage["case_corpus"]["n_min"]
     n_max = coverage["case_corpus"]["n_max"]
     errors: list[str] = []
@@ -114,7 +114,7 @@ def main() -> int:
         if not (ROOT / source["local"]).exists()
     )
 
-    evidence_document = yaml.safe_load(EVIDENCE.read_text(encoding="utf-8"))
+    evidence_document = safe_load(EVIDENCE.read_text(encoding="utf-8"))
     evidence = evidence_document["evidence"]
     evidence_ids = [entry["id"] for entry in evidence]
     if len(evidence_ids) != len(set(evidence_ids)):

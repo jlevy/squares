@@ -34,12 +34,12 @@ import sys
 import tempfile
 from pathlib import Path
 
-import yaml
 from jsonschema import Draft202012Validator
 
 from sqpack.research.atlas import Atlas
 from sqpack.research.canonical import BasinKey, canonical_key
 from sqpack.research.quench import quench_bracket
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMA = ROOT / "atlas" / "atlas.schema.yaml"
@@ -61,7 +61,7 @@ def random_start(n: int, side: float, rng: random.Random):
 
 def main() -> int:
     passed = True
-    validator = Draft202012Validator(yaml.safe_load(SCHEMA.read_text()))
+    validator = Draft202012Validator(safe_load(SCHEMA.read_text()))
 
     # Build ONE real n = 4 quench as a smoke test that the real pipeline feeds the store,
     # plus
@@ -140,7 +140,7 @@ def main() -> int:
         atlas.save(path)
 
         # 5. Schema.
-        doc = yaml.safe_load(path.read_text())
+        doc = safe_load(path.read_text())
         errors = sorted(validator.iter_errors(doc["atlas"]), key=lambda e: list(e.path))
         passed &= check(
             "the written file validates against the declared contract",

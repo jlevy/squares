@@ -69,9 +69,8 @@ from contextlib import suppress
 from dataclasses import dataclass
 from pathlib import Path
 
-import yaml
-
 from sqpack.workers import worker_count
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 # The REPOSITORY root, not this directory: one control targets ../../.flowmarkignore,
@@ -369,7 +368,7 @@ def main(arguments: list[str] | None = None) -> int:
     """Run selected controls in isolated source snapshots."""
     options = _parser().parse_args(arguments)
     spec_path = options.spec if options.spec.is_absolute() else ROOT / options.spec
-    spec = yaml.safe_load(spec_path.read_text(encoding="utf-8"))
+    spec = safe_load(spec_path.read_text(encoding="utf-8"))
     only = options.match
     controls = [c for c in spec["controls"] if not only or only in c["name"]]
     if not controls:

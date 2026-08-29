@@ -8,8 +8,9 @@ import re
 import sys
 from pathlib import Path
 
-import yaml
 from strif import atomic_output_file
+
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parents[1]
 # The repository root. The reader-facing documents live there, not under packing/.
@@ -52,7 +53,7 @@ ROLE_LABELS = {
 
 def load_map() -> dict:
     """Load the pure-YAML DocumentMap/v1 payload."""
-    document = yaml.safe_load(MAP.read_text(encoding="utf-8"))
+    document = safe_load(MAP.read_text(encoding="utf-8"))
     return {key: value for key, value in document.items() if key != "softschema"}
 
 

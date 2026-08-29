@@ -20,8 +20,9 @@ import pathlib
 import sys
 from collections import Counter
 
-import yaml
 from strif import atomic_output_file
+
+from sqpack.yamlio import safe_load
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 # The repository root. The reader-facing documents live there, not under packing/.
@@ -195,7 +196,7 @@ def main(arguments: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
     options = parser.parse_args(arguments)
-    rendered = render(yaml.safe_load(SRC.read_text(encoding="utf-8")))
+    rendered = render(safe_load(SRC.read_text(encoding="utf-8")))
     if options.check:
         current = OUT.read_text(encoding="utf-8") if OUT.exists() else ""
         # Compare content, not typography: the formatter owns wrapping and quote style.
@@ -210,7 +211,7 @@ def main(arguments: list[str] | None = None) -> int:
                 file=sys.stderr,
             )
             return 1
-        count = len(yaml.safe_load(SRC.read_text(encoding="utf-8"))["defects"])
+        count = len(safe_load(SRC.read_text(encoding="utf-8"))["defects"])
         print(f"  defects.md matches defects.yaml ({count} defects)")
         return 0
     with atomic_output_file(OUT) as temporary:

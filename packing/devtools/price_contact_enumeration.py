@@ -13,7 +13,6 @@ from itertools import combinations
 from pathlib import Path
 from typing import Any
 
-import yaml
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
@@ -24,6 +23,7 @@ from sqpack.contact_assembly import (
     enumerate_isomorph_free_scaffolds,
 )
 from sqpack.contact_realization import realize_local_contact_scaffolds
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "atlas/known-best/contact-enumeration-pricing.json"
@@ -214,7 +214,7 @@ def expected_document(*, execute_through: int = 4) -> dict[str, Any]:
 
 
 def _validate(document: dict[str, Any]) -> None:
-    schema = yaml.safe_load(SCHEMA.read_text(encoding="utf-8"))
+    schema = safe_load(SCHEMA.read_text(encoding="utf-8"))
     problems = sorted(
         Draft202012Validator(schema).iter_errors(document["pricing"]),
         key=lambda problem: list(problem.path),

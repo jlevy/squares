@@ -38,6 +38,7 @@ from typing import Any
 import yaml
 
 from sqpack.research.canonical import DEFAULT_QUANTUM, BasinKey
+from sqpack.yamlio import safe_load
 
 CONTRACT = "packing.squares:BasinAtlas/v1"
 
@@ -182,7 +183,7 @@ class Atlas:
     def load(cls, path: Path) -> Atlas:
         if not path.exists():
             raise FileNotFoundError(path)
-        doc = yaml.safe_load(path.read_text())
+        doc = safe_load(path.read_text())
         a = doc["atlas"]
         return cls(
             n=a["n"],

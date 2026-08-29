@@ -32,6 +32,7 @@ import yaml
 from sqpack.campaign.ledger import _parser as _ledger_parser
 from sqpack.cli.validate import UsageError
 from sqpack.cli.validate import _parser as _validate_parser
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parents[1]
 SESSIONS = ROOT / "campaign" / "agent-sessions"
@@ -77,7 +78,7 @@ def _declared_commands() -> list[tuple[str, int, str]]:
         if len(parts) < 2:
             continue
         try:
-            document = yaml.safe_load(parts[1])
+            document = safe_load(parts[1])
         except yaml.YAMLError:
             continue
         session = (document or {}).get("session")

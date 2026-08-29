@@ -484,6 +484,11 @@ reverse: a pass that starts from the prose inherits the prose’s mistakes.
   Regenerate `AGENTS.md`’s summary with `devtools.render_operating_rules` rather than
   editing it.
 - [`development.md`](development.md) — do the commands still exist, with those flags?
+- **A dated document is a record, so a pass adds to it rather than rewriting it.** A
+  `research-YYYY-MM-DD-` report states what was known on its date.
+  Where the project’s own record has since moved past it, append what now holds and say
+  when; do not restate the newer finding as though it were the original one.
+  Which dated reports a given pass owns is the active agenda’s to name, not this page’s.
 
 **Across documents.**
 

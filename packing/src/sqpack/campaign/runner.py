@@ -68,6 +68,7 @@ import yaml
 from strif import atomic_output_file
 
 from sqpack.project import ProjectLayoutError, configured_project_root, require_project_root
+from sqpack.yamlio import safe_load
 
 ROOT = configured_project_root()
 CAMPAIGN = ROOT / "campaign"
@@ -127,7 +128,7 @@ def refuse_if_gate_running(marker: Path | None = None) -> None:
 
 def front(path: Path) -> dict[str, Any]:
     text = path.read_text()
-    return yaml.safe_load(text.split("---\n")[1]) if text.startswith("---\n") else {}
+    return safe_load(text.split("---\n")[1]) if text.startswith("---\n") else {}
 
 
 def write_atomic(path: Path, content: str) -> None:

@@ -14,9 +14,8 @@ from collections.abc import Mapping
 from fractions import Fraction
 from pathlib import Path
 
-import yaml
-
 from sqpack.verify import Report, verify_packing
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
@@ -119,7 +118,7 @@ def check_case_basic_bounds(case: Mapping[str, object]) -> list[str]:
 
 
 def _load_case(path: Path) -> Mapping[str, object]:
-    document = yaml.safe_load(path.read_text(encoding="utf-8").split("---\n")[1])
+    document = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])
     if not isinstance(document, Mapping) or not isinstance(document.get("packing"), Mapping):
         raise TypeError(f"{path}: malformed frontier frontmatter")
     return document["packing"]

@@ -41,6 +41,8 @@ from pathlib import Path
 import yaml
 from strif import atomic_output_file
 
+from sqpack.yamlio import safe_load
+
 ROOT = Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
 SCREEN = ROOT / "atlas/known-best/translation-escape-screen.json"
@@ -201,7 +203,7 @@ def _render(block: dict) -> str:
 
 def _record(text: str) -> dict:
     """The record's parsed `packing` frontmatter."""
-    return yaml.safe_load(text.split("---", 2)[1])["packing"]
+    return safe_load(text.split("---", 2)[1])["packing"]
 
 
 def _existing_evidence(record: dict) -> set[str] | None:

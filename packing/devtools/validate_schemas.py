@@ -30,7 +30,7 @@ from jsonschema import Draft202012Validator
 
 from devtools.check_basic_bounds import check_case_basic_bounds
 from sqpack.assurance import check_case_semantics, check_evidence_semantics
-from sqpack.yamlio import load_yaml
+from sqpack.yamlio import load_yaml, safe_load
 
 FRONTIER = pathlib.Path(__file__).resolve().parent.parent / "frontier"
 # The repository root. recorded_in paths, and the documents that cite defect ids, are
@@ -117,7 +117,7 @@ def cross_checks() -> list[str]:
     """Invariants a JSON Schema cannot express."""
     errs = []
     for kind in ("search", "proof"):
-        d = yaml.safe_load((FRONTIER / f"{kind}-strategies.yaml").read_text(encoding="utf-8"))
+        d = safe_load((FRONTIER / f"{kind}-strategies.yaml").read_text(encoding="utf-8"))
         ss = d["strategies"]
         if d["count"] != len(ss):
             errs.append(f"{kind}-strategies: count {d['count']} != {len(ss)} entries")
@@ -140,13 +140,13 @@ def cross_checks() -> list[str]:
         unknown = {s["family"] for s in ss} - set(d["families"])
         if unknown:
             errs.append(f"{kind}-strategies: families not declared: {sorted(unknown)}")
-    a = yaml.safe_load((FRONTIER / "asymptotic-waste-bounds.yaml").read_text(encoding="utf-8"))
+    a = safe_load((FRONTIER / "asymptotic-waste-bounds.yaml").read_text(encoding="utf-8"))
     errs.extend(
         f"asymptotic: reconstructed bound {b['source_key']} carries no note"
         for b in a["lower_bounds"]
         if b["confidence"] == "reconstructed" and not b.get("note")
     )
-    evidence_document = yaml.safe_load((FRONTIER / "evidence.yaml").read_text(encoding="utf-8"))
+    evidence_document = safe_load((FRONTIER / "evidence.yaml").read_text(encoding="utf-8"))
     evidence_records = evidence_document["evidence"]
     evidence_ids = [record["id"] for record in evidence_records]
     duplicate_evidence = {item for item in evidence_ids if evidence_ids.count(item) > 1}
@@ -158,7 +158,7 @@ def cross_checks() -> list[str]:
 
     case_numbers: list[int] = []
     for case in sorted(FRONTIER.glob("n-*.md")):
-        doc = yaml.safe_load(case.read_text(encoding="utf-8").split("---\n")[1])
+        doc = safe_load(case.read_text(encoding="utf-8").split("---\n")[1])
         packing = doc["packing"]
         case_numbers.append(packing["n"])
         errs.extend(
@@ -168,7 +168,7 @@ def cross_checks() -> list[str]:
     if case_numbers != list(range(1, 101)):
         errs.append("frontier cases are not exactly n=1..100 in filename order")
 
-    sa = yaml.safe_load((FRONTIER / "source-availability.yaml").read_text(encoding="utf-8"))
+    sa = safe_load((FRONTIER / "source-availability.yaml").read_text(encoding="utf-8"))
     keys = [s["key"] for s in sa["recovered"]] + [s["key"] for s in sa["unretrieved"]]
     dupes = {k for k in keys if keys.count(k) > 1}
     if dupes:
@@ -182,7 +182,7 @@ def defect_checks() -> list[str]:
     path = FRONTIER.parent / "defects.yaml"
     if not path.exists():
         return ["defects.yaml is missing"]
-    d = yaml.safe_load(path.read_text(encoding="utf-8"))
+    d = safe_load(path.read_text(encoding="utf-8"))
     ds = d["defects"]
     if d["count"] != len(ds):
         errs.append(f"defects: count {d['count']} != {len(ds)} entries")
@@ -273,7 +273,7 @@ def main() -> int:
         f"validate against their declared schemas"
     )
     declared = {
-        yaml.safe_load(d.read_text(encoding="utf-8"))["softschema"]["schema"] for d in datasets
+        safe_load(d.read_text(encoding="utf-8"))["softschema"]["schema"] for d in datasets
     }
     print(f"  schemas in use: {sorted(declared | {'square-packing-case.schema.yaml'})}")
     return 0
