@@ -29,6 +29,7 @@ import sympy as sp
 from scipy.optimize import linprog
 
 from cases.trump11 import packing as trump11
+from sqpack.exact_lp import LinearRow
 from sqpack.field import FieldElement, NumberField
 from sqpack.verify import edge_axes, exact_sign, separated, verify_packing
 
@@ -81,12 +82,6 @@ DETERMINATION_SCOPE = (
     "complete branch implies true-tangent zero, while a nonzero linearized vector "
     "requires nonlinear continuation"
 )
-
-
-@dataclass(frozen=True)
-class LinearRow:
-    label: str
-    coefficients: tuple[FieldElement, ...]
 
 
 @dataclass(frozen=True)

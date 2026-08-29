@@ -920,3 +920,54 @@ controls:
             "    matches = bool(report.valid)"]
   run: uv run --frozen --group dev python -m pytest tests/test_promote_roundtrip.py -q
   expect: "so the side comparison is not catching a valid but suboptimal packing"
+
+# --- the exact LP (BC-061) ---
+# The module's whole claim is that it refuses rather than rounds, so each control
+# restores a missing refusal and the test names the guard that went absent. The two
+# assembly controls attack the cell instead: a wrong row still solves, and only the
+# known answer catches it.
+- name: exact LP - a point that violates a row is certified as a vertex
+  file: src/sqpack/exact_lp.py
+  replace: ["        if sign(slack) < 0:", "        if slack is None:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "an active set whose point violates a row was certified as a vertex"
+
+- name: exact LP - a negative multiplier is accepted as optimal
+  file: src/sqpack/exact_lp.py
+  replace: ["    for position, value in enumerate(multipliers):\n        if sign(value) < 0:",
+            "    for position, value in enumerate(multipliers):\n        if value is None:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "a feasible but suboptimal vertex was certified as optimal"
+
+- name: exact LP - a rank-deficient active set is eliminated past instead of refused
+  file: src/sqpack/exact_lp.py
+  replace: ["        if pivot is None:\n            raise ExactLPError(\n                \"singular-basis\", f\"the active set is rank deficient at column {column}\"\n            )\n",
+            "        if pivot is None:\n            continue\n"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "a rank-deficient active set was solved rather than refused"
+
+- name: exact LP - a short candidate set is returned as if it spanned a vertex
+  file: src/sqpack/exact_lp.py
+  replace: ["    raise ExactLPError(\n        \"no-vertex-basis\",\n        f\"only {len(chosen)} of the {wanted} independent rows a vertex needs are among \"\n        f\"the {len(candidates)} candidate(s) offered\",\n    )",
+            "    return tuple(chosen)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "was accepted as a 23-row vertex basis"
+
+- name: exact LP - the pivot budget never stops the simplex
+  file: src/sqpack/exact_lp.py
+  replace: ["        if pivots >= pivot_budget:", "        if pivots >= pivot_budget + 1000:"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "the exact simplex ran past its pivot budget"
+
+- name: exact LP - the container side drops out of a containment row
+  file: src/sqpack/exact_lp.py
+  replace: ["            add(f\"wall:{index}:right:{corner}\", {index: one, side_column: -one}, -px)",
+            "            add(f\"wall:{index}:right:{corner}\", {index: one, side_column: -one}, px)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "the exact LP optimum is not Trump's published side"
+
+- name: exact LP - every coefficient is reported rational
+  file: src/sqpack/exact_lp.py
+  replace: ["    return not any(coefficients[1:])", "    return True"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_lp.py -q
+  expect: "Trump's cell was reported rational"

@@ -16,13 +16,13 @@ import itertools
 import json
 import sys
 import time
-from dataclasses import dataclass
 from pathlib import Path
 from typing import cast
 
 from strif import atomic_output_file
 
 from cases.n5 import equal_side_face as face
+from sqpack.exact_lp import LinearRow
 from sqpack.field import FieldElement, NumberField
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -83,12 +83,6 @@ EXPECTED_ZERO_AXES = {
     "3-4:owner4:a+",
 }
 EXPECTED_CONTACT_BRANCHES = ("owner3:a+", "owner4:a+")
-
-
-@dataclass(frozen=True)
-class LinearRow:
-    label: str
-    coefficients: tuple[FieldElement, ...]
 
 
 def require_dict(value: object, label: str) -> dict[str, object]:
