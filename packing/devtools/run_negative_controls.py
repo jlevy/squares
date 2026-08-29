@@ -122,6 +122,20 @@ PRUNE = frozenset(
 )
 LINK_BACK = (Path(".venv"), Path("sqsearch/target"))
 COPY_SEPARATELY = (ROOT / "resources/README.md", REPO / ".flowmarkignore")
+# The reader-facing documents live at the repository root now, and the controls reach
+# them: three mutate README.md and ten mutate SYNOPSIS.md, while the schema and
+# generated-view checkers read defects.md and docs/project/. Cloning only packing/ would
+# leave every one of those targets in the real working tree -- the exact accident this
+# file exists to prevent, and the same reason .flowmarkignore was already copied in.
+ROOT_DOCUMENTS = (
+    REPO / "README.md",
+    REPO / "SYNOPSIS.md",
+    REPO / "TUTORIAL.md",
+    REPO / "conventions.md",
+    REPO / "development.md",
+    REPO / "defects.md",
+    REPO / "docs",
+)
 # Keep a bounded portable fallback with enough headroom for source, schemas, and
 # manifests after generator-owned prospective geometry is pruned above.
 SNAPSHOT_MAX_BYTES = 40 * 1024 * 1024
@@ -220,6 +234,13 @@ def _clone_into(src: Path, dst: Path) -> None:
 def snapshot_source_bytes() -> int:
     """Bytes copied by the portable fallback, excluding linked build products."""
     total = sum(path.stat().st_size for path in COPY_SEPARATELY)
+    for document in ROOT_DOCUMENTS:
+        if document.is_dir():
+            total += sum(
+                path.stat().st_size for path in document.rglob("*") if path.is_file()
+            )
+        elif document.is_file():
+            total += document.stat().st_size
     for directory, names, files in os.walk(ROOT):
         parent = Path(directory)
         names[:] = [name for name in names if parent / name not in PRUNE]
@@ -240,6 +261,12 @@ def clone_tree(dest: Path) -> None:
     resource_readme.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / "resources/README.md", resource_readme)
     shutil.copy2(REPO / ".flowmarkignore", dest / ".flowmarkignore")
+
+    for document in ROOT_DOCUMENTS:
+        if document.is_dir():
+            shutil.copytree(document, dest / document.name, dirs_exist_ok=True)
+        elif document.is_file():
+            shutil.copy2(document, dest / document.name)
 
     for rel in LINK_BACK:
         source = ROOT / rel

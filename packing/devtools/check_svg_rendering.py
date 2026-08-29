@@ -15,6 +15,9 @@ from fractions import Fraction
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+# The repository root. Document surfaces (TUTORIAL.md, SYNOPSIS.md, README.md) live
+# there; the rendered artifacts they embed live under packing/.
+REPO = ROOT.parent
 
 
 def _rejects(function, *args, **kwargs) -> bool:
@@ -734,14 +737,14 @@ def run_gallery_controls() -> dict[str, bool]:
     artifacts = [ROOT / example["artifact"] for example in examples]
 
     def embeds(document: str, artifact: str) -> bool:
-        document_path = ROOT / document
+        document_path = REPO / document
         relative = os.path.relpath(ROOT / artifact, document_path.parent)
         text = document_path.read_text(encoding="utf-8")
         pattern = rf"!\[[^\]]+\]\({re.escape(relative)}\)"
         return re.search(pattern, text) is not None
 
     def references(document: str, target: str) -> bool:
-        document_path = ROOT / document
+        document_path = REPO / document
         relative = os.path.relpath(ROOT / target, document_path.parent)
         text = document_path.read_text(encoding="utf-8")
         pattern = rf"!?\[[^\]]+\]\({re.escape(relative)}(?:#[^)]+)?\)"
@@ -762,10 +765,12 @@ def run_gallery_controls() -> dict[str, bool]:
     }
 
     inline_svg_targets = []
-    for document_path in ROOT.rglob("*.md"):
-        document_parts = document_path.relative_to(ROOT).parts
-        if "resources" in document_parts or any(
-            part.startswith(".") for part in document_parts
+    for document_path in REPO.rglob("*.md"):
+        document_parts = document_path.relative_to(REPO).parts
+        if (
+            "resources" in document_parts
+            or "node_modules" in document_parts
+            or any(part.startswith(".") for part in document_parts)
         ):
             continue
         inline_svg_targets.extend(
@@ -798,10 +803,11 @@ def run_gallery_controls() -> dict[str, bool]:
     }
     comparison_artifact = by_id["n10-source-return-comparison"]["artifact"]
     comparison_embeds = {
-        document_path.relative_to(ROOT).as_posix()
-        for document_path in ROOT.rglob("*.md")
-        if "resources" not in document_path.relative_to(ROOT).parts
-        and embeds(document_path.relative_to(ROOT).as_posix(), comparison_artifact)
+        document_path.relative_to(REPO).as_posix()
+        for document_path in REPO.rglob("*.md")
+        if not {"resources", "node_modules"} & set(document_path.relative_to(REPO).parts)
+        and not any(part.startswith(".") for part in document_path.relative_to(REPO).parts)
+        and embeds(document_path.relative_to(REPO).as_posix(), comparison_artifact)
     }
     return {
         "gallery_has_five_known_answers": len(examples) == 5,
@@ -851,15 +857,18 @@ def run_gallery_controls() -> dict[str, bool]:
         "all_inline_svg_targets_are_owned_artifacts": set(inline_svg_targets)
         <= document_svg_artifacts,
         "frontier_cases_reference_gallery_artifacts_or_guide": all(
-            embeds(example["frontier_case"], example["artifact"])
-            or references(example["frontier_case"], "atlas/rendering/README.md")
+            embeds(f"packing/{example['frontier_case']}", example["artifact"])
+            or references(
+                f"packing/{example['frontier_case']}", "atlas/rendering/README.md"
+            )
             for example in examples
         ),
         "gallery_readme_embeds_every_artifact": all(
-            embeds("atlas/rendering/README.md", example["artifact"]) for example in examples
+            embeds("packing/atlas/rendering/README.md", example["artifact"])
+            for example in examples
         ),
         "comparison_is_embedded_only_in_focused_gallery": comparison_embeds
-        == {"atlas/rendering/README.md"},
+        == {"packing/atlas/rendering/README.md"},
         "exposition_surfaces_embed_expected_examples": all(
             embeds(document, by_id[example_id]["artifact"])
             for document, example_ids in surface_expectations.items()

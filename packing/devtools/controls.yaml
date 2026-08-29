@@ -29,7 +29,7 @@ controls:
 
 - name: defect log - narrative link pointing nowhere
   file: defects.yaml
-  replace: ["  bead: think-wo4p\n  recorded_in: src/sqpack/cli/validate.py",
+  replace: ["  bead: think-wo4p\n  recorded_in: packing/src/sqpack/cli/validate.py",
             "  bead: think-wo4p\n  recorded_in: no/such/file.md"]
   run: python3 -m devtools.validate_schemas
   expect: "recorded_in does not exist"
@@ -75,7 +75,7 @@ controls:
   expect: "count 20 !="
 
 - name: README - repeated numeric gate-defect aggregate
-  file: README.md
+  file: ../README.md
   replace:
     - "No soundness\n  defect in the log was caught by it."
     - "No soundness\n  defect in the log was caught by it. The gate caught two defects."
@@ -83,13 +83,13 @@ controls:
   expect: "repeats a numeric gate-defect aggregate"
 
 - name: README - workflow selector drifts from the canonical names
-  file: README.md
+  file: ../README.md
   replace: ["| W5 | `efficiency-loop` |", "| W5 | `speed-loop` |"]
   run: python3 -m devtools.check_readme
   expect: "README.md: workflow table is"
 
 - name: README - undeclared eighth workflow is not ignored
-  file: README.md
+  file: ../README.md
   replace:
     - "| W7 | `pipeline-improvement` |"
     - |-
@@ -99,7 +99,7 @@ controls:
   expect: "README.md: workflow table is"
 
 - name: synopsis - dateline duplicates volatile campaign progress
-  file: SYNOPSIS.md
+  file: ../SYNOPSIS.md
   replace: ["**Date:**", "**Date:** after a campaign checkpoint;"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "Date dateline repeats campaign progress"
@@ -108,31 +108,31 @@ controls:
 # silently lagged exp-039 this way (D-333), so the rounds column is now compared
 # row by row and this control rehearses one row going stale.
 - name: synopsis - registry rounds column lagging the ledger
-  file: SYNOPSIS.md
+  file: ../SYNOPSIS.md
   replace: ["classifiable | 14 | 106m agent", "classifiable | 13 | 106m agent"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "H-021 shows 13 rounds, ledger counts 14"
 
 - name: synopsis - narrative round aggregate lagging the ledger
-  file: SYNOPSIS.md
+  file: ../SYNOPSIS.md
   replace: ["There are 45 terminal rounds", "There are 39 terminal rounds"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "terminal-round aggregate is not 45 rounds"
 
 - name: synopsis - numerical result promoted past a formal prerequisite
-  file: SYNOPSIS.md
+  file: ../SYNOPSIS.md
   replace: ["leaves H-024 unresolved", "refutes H-024"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "exp-012 must leave H-024 unresolved"
 
 - name: synopsis - README cold-start link drifts from current handoff
-  file: README.md
+  file: ../README.md
   replace: ["SYNOPSIS.md#current-handoff", "SYNOPSIS.md#workflow-entry-contracts"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "README.md: does not route cold starts to SYNOPSIS current handoff"
 
 - name: synopsis - duplicate experiment cost row
-  file: SYNOPSIS.md
+  file: ../SYNOPSIS.md
   replace:
     - "| exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |"
     - |-
@@ -142,25 +142,25 @@ controls:
   expect: "exp-030 appears 2 times in the cost table"
 
 - name: synopsis - soundness direction aggregate drifting from the log
-  file: SYNOPSIS.md
+  file: ../SYNOPSIS.md
   replace: ["soundness defects pointed in the *flattering*", "soundness defects pointed in the *conservative*"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "soundness-direction aggregate is not"
 
 - name: synopsis - gate detector aggregate drifting from the log
-  file: SYNOPSIS.md
+  file: ../SYNOPSIS.md
   replace: ["automated gate has caught", "automated gate has missed"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "gate-detector aggregate is not"
 
 - name: synopsis - hypothesis-status aggregate drifting from the ledger
-  file: SYNOPSIS.md
+  file: ../SYNOPSIS.md
   replace: ["generated ledger currently derives", "generated ledger once derived"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "hypothesis-status aggregate does not match campaign/ledger.md"
 
 - name: synopsis - readiness dashboard detached from a canonical owner
-  file: SYNOPSIS.md
+  file: ../SYNOPSIS.md
   replace:
     - "[Where This Stands](#where-this-stands), then run"
     - "[Where This Stands](#what-is-built), then run"
