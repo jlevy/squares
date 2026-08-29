@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 364
+count: 365
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9600,5 +9600,43 @@ defects:
     control quoted the clause-3 line this repair rewired and was updated with it; its guard
     was re-verified firing.
   bead: think-gucc
+  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+
+- id: D-365
+  title: The deep golden-basin oracle fails at n = 10, and only the strict tier runs it
+  date: '2026-08-29'
+  layer: quench
+  class: robustness
+  detected_by: gate
+  latent_for: 'unknown; found by the first full strict run since the continuation began'
+  severity: medium
+  status: outstanding
+  what: >-
+    `devtools.check_golden_basins --deep` fails three oracles at `n = 10`. The quench
+    reaches `3.735634792931` and refuses to certify convergence -- "fixed cell unsettled
+    during bracket: cell cycle (closure exceeded 64-cell cap)" -- and anneal-plus-quench
+    lands `2.85e-02` above the proved `s(10) = (6 + sqrt(2))/2`, so the pipeline does not
+    converge onto a known answer. The rebuilt map then differs from the committed golden,
+    which is the third failure and a consequence of the first two.
+  consequence: >-
+    A known-answer control does not reach its known answer, at the one size in the ladder
+    where the answer is proved and the packing is not trivially a grid. Nothing downstream
+    reads the failing value -- the golden is a characterization artifact rather than an
+    input to any claim -- so no result rests on it. What is lost is the control itself: the
+    ladder exists to catch a quench that stops early, and at `n = 10` it is doing so and
+    being recorded as a failure rather than acted on.
+  fix: >-
+    Not fixed here. This is the quench's cell-closure logic and belongs to whoever owns
+    that lane; the continuation that found it was working on the promotion pipeline, which
+    shares no code with it -- an import walk over the checker's nine transitive imports
+    confirms none was touched.
+  regression: >-
+    Proven pre-existing rather than assumed. The identical three oracle failures reproduce
+    at `64d1e19`, this session's base commit, in a separate worktree with its own
+    environment. The reproduction is
+    `uv run --frozen --all-extras --group dev python -m devtools.check_golden_basins --deep`,
+    which takes about 335 seconds and runs only in the strict tier -- which is why a
+    continuation that ran the fast gate at every checkpoint never saw it.
+  bead: think-c7oo
   recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
 

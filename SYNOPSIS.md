@@ -2330,7 +2330,7 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 364 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 365 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -2338,7 +2338,7 @@ and checked in the gate.
 | soundness | 87 | asserted something false about the mathematics |
 | validity | 87 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 137 | recorded something its own evidence contradicts |
-| robustness | 42 | did not finish, or finished only by luck |
+| robustness | 43 | did not finish, or finished only by luck |
 | performance | 11 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -2347,7 +2347,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-six defects in 364, and no soundness defect
+**The automated gate has caught forty-seven defects in 365, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2399,6 +2399,19 @@ it ran, which is the same accident D-359 was.
 It is left open deliberately: it is what stands between this repository and a principled
 emission precision of 32, and that is a decision about what the projection layer
 promises rather than a rounding to choose in passing.
+
+A control that does not reach its known answer is the third of these, and it took the
+first full strict run in a while to see it.
+[D-365](defects.md) records that `check_golden_basins --deep` fails three oracles at
+`n = 10`: the quench reaches `3.735634792931` and refuses to certify convergence, and
+anneal-plus-quench lands `2.85e-02` above the proved `s(10) = (6 + √2)/2`. Nothing
+downstream reads the failing value, so no result rests on it; what is lost is the
+control itself, at the one size in the ladder where the answer is proved and the packing
+is not trivially a grid.
+It is proven pre-existing rather than assumed — the identical failures reproduce at the
+base commit of the session that found them, in a separate worktree — and it runs only in
+the strict tier, which is why a continuation running the fast gate at every checkpoint
+never met it.
 
 The gate’s cost is itself a logged defect.
 [D-355](defects.md) records that verification runs the whole gate after every change, so
