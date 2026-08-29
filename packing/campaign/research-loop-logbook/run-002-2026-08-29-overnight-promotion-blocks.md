@@ -402,13 +402,45 @@ It is not a runner’s to make.
 
 **Start at
 [agenda-006’s continuation schedule](../agendas/agenda-006-overnight-research-blocks.md#the-continuation-schedule).**
-Blocks 1–10 are closed; 11–18 are mapped with budgets and a reason for the ordering.
+Blocks 1–10 closed in this run; the continuation blocks closed in
+[session 044](../agent-sessions/session-044-agenda006-continuation.md).
 
-The next slice is **block 11, `BC-066` under `think-obgk`** — eliminate the five
-equations in five half-angles that `BC-065` left, inside a declared wall-clock cap, and
-record whatever the chain reaches.
-It is first because it is the only remaining block that can change what this run
-concludes about `n = 29`; every block after it improves the pipeline instead.
+### Where the exact route stands, in one place
+
+This is the thing hardest to reconstruct from the diff, because the answer is a shape
+rather than a result.
+
+**Every layer downstream of the field is now built.** Contact extraction, system
+assembly, chirality in the pose model, the `edge-edge` collinearity repair, closure at
+all three retained sizes, minimal-polynomial recovery under the frozen margin rule,
+irreducibility and root isolation, the round trip back to a verified packing, an exact
+LP over certified coefficients, and phase 1 of that LP so it needs no float starting
+vertex. At `n = 11`, where the field is published, the chain runs end to end and returns
+the published side with a difference of exactly zero.
+
+**The one missing piece is the field itself at `n = 29`, and everything is blocked
+behind it.** The exact LP cannot be pointed at `n = 29` for the same reason the round
+trip cannot: `fixed_cell_lp` needs exact coordinates, exact coordinates need an
+algebraic number field, and there is no minimal polynomial for `s(29)` to build one
+from.
+Assembling the `n = 29` contact system as an LP is therefore not the next block; it
+is the same block wearing different clothes.
+
+**And that missing piece has now been measured twice rather than assumed.** `BC-060`
+found no integer relation through degree twenty below `10^22` on a thousand digits.
+`BC-066` found that Gröbner elimination does not reach an eliminant on this hardware,
+and — more usefully — that coefficient swell is *not* what stops it: over `F_p`, where a
+coefficient is one machine word, the matrices reach the same dimensions and the cheapest
+monomial order still does not terminate, so what is being measured is the size of the
+ideal. `BC-070` then bounded the degree of `s(29)` at **`15,744`** by mixed volume, down
+from Bézout’s `1,039,500`, which is a sixty-sixfold improvement and still far beyond
+what an integer-relation search reaches.
+
+So the honest state is: the pipeline is finished and the number is not available.
+A route that produces the minimal polynomial of `s(29)` — or a proof that its degree is
+large enough to close the question — is the whole of what remains, and the interval
+certificate carries the bound in the meantime for a reason that is now measured.
+
 `BC-064`, the endpoint check, is reserved and may not be borrowed from.
 
 What a fresh agent needs to know that is not obvious from the diff:
