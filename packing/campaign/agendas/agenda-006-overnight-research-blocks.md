@@ -551,7 +551,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [29]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Can the five-unknown system be eliminated to an eliminant in `s`, or is the
@@ -565,6 +565,10 @@ agenda:
       An eliminant in `s` whose degree is measured rather than bounded, discharged through
       `promote/solve.discharge`; or a typed statement of where the chain stopped and what
       it cost, which is itself the answer that the interval route carries n = 29.
+    artifacts:
+    - devtools/probe_elimination.py
+    - tests/test_promote_elimination.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-066-n29-elimination-wall.json
     bead: think-obgk
     depends_on: [BC-065]
     workflows: [pipeline-improvement]
@@ -603,6 +607,31 @@ agenda:
       eliminant whose roots are the sides of *every* complex solution of the system, so the
       irreducible factor carrying our root still has to be identified -- which needs the
       high-precision numerics back again.
+
+      Closed in session-044, and the answer is a measured wall rather than an eliminant.
+      Three runs, all on the six-equation system with `s` ordered last, all guarded by an
+      export that re-parses its own text: over `Q` in an elimination order, F4 was
+      OOM-killed at degree 32 after 25m09s with 13.8 GB resident, having reached matrices
+      of `656126 x 1670545` at degree 31; mod `1073741827` in the same order the matrix
+      dimensions were *identical* and the memory about 70 per cent of it; and mod the same
+      prime in plain grevlex -- an order of magnitude cheaper, largest matrix
+      `20611 x 49890`, 2.7 GB -- the pair list still grew monotonically to 21,661 and no
+      basis was reached inside a declared 25-minute cap.
+
+      **Neither predicted failure mode is what stopped it.** Coefficient swell cannot
+      occur over `F_p`, where every coefficient is one machine word, and the cheapest
+      monomial order did not terminate either. What the runs measure is the size of the
+      ideal itself, not the arithmetic carried through it -- so `msolve` with F4 and
+      multi-modular arithmetic does not reach `n = 29` on this hardware, and the reason is
+      not the one the block was written expecting.
+
+      Scope of the claim, which is narrower than "out of reach": this is a measurement on
+      two threads and 15 GB, not a proof of intractability. It does not exclude a machine
+      with more memory, a different order, or Magma. What it does establish is that the
+      interval route carries the `n = 29` bound for a reason now measured rather than
+      assumed, and that the next thing to try is a smaller ideal rather than a bigger
+      computer -- the degree of the projection to the `s`-axis by homotopy continuation,
+      which needs no basis at all.
   - id: BC-067
     purpose: tool_validation
     owner_focus: correctness

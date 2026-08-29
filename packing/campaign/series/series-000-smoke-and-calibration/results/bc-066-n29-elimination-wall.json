@@ -1,0 +1,76 @@
+{
+  "claim": "Groebner elimination of the n = 29 contact system does not reach an eliminant in s on this hardware, and coefficient swell is not what stops it.",
+  "claim_boundary": "A measurement on two threads and 15 GB, not a proof of intractability. It does not exclude a larger machine, a different monomial order, or another engine. It says nothing about s(29) itself: no bound moved, and verified_upper_bound is untouched.",
+  "certified": false,
+  "system": {
+    "source": "cases.kingbird29.system.equations, rationalised by u = tan(theta/2)",
+    "equations": 6,
+    "unknowns": 6,
+    "unknown_order": ["u_a", "u_b", "u_c", "u_d", "u_i", "s"],
+    "total_degrees": [11, 15, 10, 15, 7, 6],
+    "bezout_bound": 1039500,
+    "export_guard": "each emitted polynomial re-parsed from the written text, required to vanish at the pose refined to 100 digits and to equal the cleared original exactly"
+  },
+  "engine": {
+    "name": "msolve",
+    "version": "0.6.5",
+    "algorithm": "F4, multi-modular with rational reconstruction",
+    "threads": 2,
+    "container_memory_gb": 15
+  },
+  "runs": [
+    {
+      "id": "rational-elimination-order",
+      "characteristic": 0,
+      "monomial_order": "ELIM(5)",
+      "started_at": "2026-08-29T08:50:42Z",
+      "ended_at": "2026-08-29T09:15:51Z",
+      "elapsed_seconds": 1509,
+      "outcome": "oom-killed",
+      "exit_code": 137,
+      "peak_anon_rss_gb": 13.8,
+      "highest_degree_started": 32,
+      "highest_degree_completed": 31,
+      "matrices": [
+        {"degree": 29, "rows": 322322, "columns": 912889, "seconds": 134.73},
+        {"degree": 30, "rows": 484907, "columns": 1300382, "seconds": 329.63},
+        {"degree": 31, "rows": 656126, "columns": 1670545, "seconds": 382.84}
+      ]
+    },
+    {
+      "id": "finite-field-elimination-order",
+      "characteristic": 1073741827,
+      "monomial_order": "ELIM(5)",
+      "started_at": "2026-08-29T09:25:29Z",
+      "outcome": "stopped-deliberately",
+      "note": "Stopped once it had shown what it was for: the matrix dimensions are identical to the rational run degree for degree, at about 70 per cent of its memory. Coefficients cannot swell over F_p, so the sizes are the system's and not the arithmetic's.",
+      "resident_gb_at_degree_31": 8.3,
+      "highest_degree_started": 31,
+      "matrices": [
+        {"degree": 29, "rows": 322322, "columns": 912889, "seconds": 150.08},
+        {"degree": 30, "rows": 484907, "columns": 1300382, "seconds": 266.21}
+      ]
+    },
+    {
+      "id": "finite-field-grevlex",
+      "characteristic": 1073741827,
+      "monomial_order": "grevlex, with a rational parametrization requested",
+      "started_at": "2026-08-29T09:42:37Z",
+      "ended_at": "2026-08-29T10:07:37Z",
+      "elapsed_seconds": 1500,
+      "outcome": "capped",
+      "exit_code": 124,
+      "peak_resident_gb": 2.7,
+      "largest_matrix": {"rows": 20611, "columns": 49890},
+      "peak_pair_list": 21661,
+      "note": "An order of magnitude cheaper per matrix than the elimination order, and still no basis inside the declared cap. The pair list grew monotonically throughout."
+    }
+  ],
+  "finding": "Neither failure mode the block was written expecting is what stopped it. A resultant chain's degree growth was never reached, and coefficient swell is impossible over F_p, where every coefficient is one machine word -- yet the finite-field runs hit the same matrix dimensions as the rational one, and the cheapest monomial order did not terminate either. What the three runs measure is the size of the ideal rather than the arithmetic carried through it.",
+  "next": "A smaller ideal rather than a bigger computer. Homotopy continuation gives the degree of the projection to the s-axis without computing any basis, which is what would turn BC-060's blind integer-relation sweep into a targeted search at a known degree.",
+  "reproduce": [
+    "uv run --frozen --all-extras --group dev python -m devtools.probe_elimination --emit system.ms",
+    "uv run --frozen --all-extras --group dev python -m devtools.probe_elimination --emit system-modp.ms --characteristic 1073741827",
+    "msolve -f system.ms -o eliminant.out -e 5 -v 2 -t 2"
+  ]
+}

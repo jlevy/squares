@@ -78,7 +78,7 @@ session:
     objective: >-
       Attempt the elimination BC-065 set up, and measure which of the two predicted
       failure modes it meets rather than running until something dies.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       The record repairs are terminal; this opens the block the continuation exists for.
@@ -97,11 +97,38 @@ session:
     fallback: >-
       Report the sizes reached at each step, which is the answer that says the interval
       route carries n = 29.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      A measured wall rather than an eliminant, and the wall is not where the block
+      expected it. Three runs, no basis, no bound moved.
+    evidence:
+    - >-
+      'Over `Q` in an elimination order, F4 was OOM-killed at degree 32 after 25m09s with
+      13.8 GB anon-RSS, having completed degree 31 on a `656126 x 1670545` matrix in
+      382.84s. Exit 137, confirmed against the cgroup OOM record rather than inferred from
+      the exit code.'
+    - >-
+      'Mod `1073741827` in the same order, the matrix dimensions are identical degree for
+      degree -- `322322 x 912889` at 29, `484907 x 1300382` at 30 -- at about 70 per cent
+      of the memory. Coefficients cannot swell over `F_p`, so those dimensions belong to
+      the system rather than to its arithmetic.'
+    - >-
+      'Mod the same prime in plain grevlex, matrices are an order of magnitude smaller
+      (largest `20611 x 49890`, 2.7 GB peak) and the pair list still grew monotonically to
+      21,661 with no basis inside a declared 25-minute cap.'
+    - >-
+      'The export is guarded because an unguarded one already lied. Writing negative
+      coefficients as `(-2)*x` -- a form msolve accepts and reads differently -- returned a
+      reduced Groebner basis of `{1}`, no solutions in the algebraic closure, for a system
+      whose solution this repository has refined to a thousand digits. The guard now
+      re-parses the emitted text and requires it to vanish at the pose and to equal the
+      cleared original.'
+    stop_reason: >-
+      The declared cap was reached and not widened. A typed statement of where the chain
+      stopped and what it cost is the exit BC-066 names, so the block is complete rather
+      than stopped.
     next_action: >-
-      Record the measured wall, then take the eliminant degree from the finite-field run.
+      Open BC-067 on `think-2q2c`: the n = 11 round trip, where the answer is published
+      and the contact system has had full rank since BC-059.
   primary_bead: think-obgk
   status: in_progress
   budget:
