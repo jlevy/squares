@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 361
+count: 362
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9329,7 +9329,7 @@ defects:
   detected_by: gate
   latent_for: unknown; the emission has never pinned its digits
   severity: medium
-  status: outstanding
+  status: fixed
   what: >-
     `sqpack.render.numbers.format_svg_number` renders a `ScalarSource` from its
     `projected` decimal, whose digit count is whatever precision that scalar was last
@@ -9346,10 +9346,25 @@ defects:
     ordering, which is not a property anybody chose. The failure is silent in the
     direction that matters: a genuinely stale PNG would be indistinguishable from this.
   fix: >-
-    Not fixed here, and deliberately so. Quantising at the emission site changes the byte
-    content of every stored SVG in the repository and every PNG receipt derived from one,
-    which is a regeneration and re-review rather than a fix made in passing during an
-    unrelated block. Recorded with a reproduction instead.
+    Fixed under BC-066's successor block BC-068, in two halves. `NumberField.decimal` was
+    setting the *thread-global* decimal precision and never restoring it, which is where
+    the ambient state came from; its working precision now lives in a `localcontext`. And
+    the emission side now pins its own digits: `SVG_EMISSION_PRECISION` in
+    `sqpack.render.numbers`, applied as a decorator to the two document-level entry
+    points so it covers arithmetic added inside them later rather than only the
+    expressions someone remembered to wrap.
+
+    Pinned at 28 -- the precision every retained figure in this repository was already
+    drawn at -- so the pin declares where the emission is rather than moving it. That
+    choice was measured rather than assumed. At 32, the value the projection layer
+    promises for an exact source, `validate_translation_only_trajectory` breaks: two
+    independently projected coordinates of the exact `n = 5` face differ by `8e-32`,
+    which a 28-digit subtraction rounds away and a 32-digit one does not, and 66 stored
+    known-best outputs change. At 17 the coarsening reaches the edge and centroid
+    subtractions that feed angle classification, which decides hues and not only digits.
+
+    No stored artifact moved: all four generators rebuild byte-identical output under the
+    pin, which is the evidence that 28 is where they were already drawn.
   regression: >-
     `uv run --frozen --group dev python -m pytest tests/test_promote_system.py
     tests/test_known_best_atlas.py -q -p no:randomly` fails on the composite receipt;
@@ -9439,3 +9454,40 @@ defects:
     to vanish, which is the property the missing equation destroyed.
   bead: think-9c40
   recorded_in: packing/campaign/agent-sessions/session-041-block7-collinearity.md
+- id: D-362
+  title: The translation-only trajectory check compares independently rounded projections
+    for exact equality
+  date: '2026-08-29'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: unknown; the check has always been written this way
+  severity: low
+  status: outstanding
+  what: >-
+    `sqpack.render.motion.validate_translation_only_trajectory` asserts that each
+    corner-minus-centre offset is *exactly* equal from frame to frame. Those offsets are
+    differences of two independently rounded decimal projections of exact algebraic
+    numbers, so they agree to about thirty-one digits rather than exactly. On the retained
+    exact `n = 5` equal-side face the two disagree by `8e-32`.
+  consequence: >-
+    The check passes for an ambient reason rather than the one it states. At the ambient
+    decimal precision of 28 the disagreement rounds away and the equality holds; at 32 or
+    40 it does not, and `check_svg_rendering --check` fails with `trajectory rendering
+    requires translation-only geometry` on geometry that is translation-only. It has never
+    fired wrongly because nothing had raised the ambient precision before it ran -- which
+    was not a property anybody chose, and is the same class of accident D-359 records.
+  fix: >-
+    Not fixed here. BC-068 pinned the emission at 28, which preserves the status quo and
+    does not address this; fixing it honestly means either an absolute tolerance derived
+    from each operand's declared `precision`, or a restatement of what the check is
+    asking. It is recorded rather than patched because it is the thing standing between
+    this repository and a principled emission precision of 32, and that is a decision
+    about what the projection layer promises rather than a rounding to choose in passing.
+  regression: >-
+    None yet. The reproduction is to raise the emission precision to 32 and run
+    `uv run --frozen --all-extras --group dev python -m devtools.check_svg_rendering
+    --check`, which then refuses the exact n = 5 trajectory.
+  bead: think-mt4h
+  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+

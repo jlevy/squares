@@ -636,7 +636,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can a recovered minimal polynomial be discharged all the way back to a verified
@@ -651,7 +651,11 @@ agenda:
       packing rebuilt and passed to `verify_packing` under `exact_sign`, and the
       reconstructed side compared against the input pose; or a typed statement of which
       step the field cannot support.
-    bead: think-2q2c
+    artifacts:
+    - src/sqpack/promote/roundtrip.py
+    - tests/test_promote_roundtrip.py
+    - cases/trump11/packing.py
+    bead: think-er2h
     depends_on: [BC-060]
     workflows: [pipeline-improvement]
     next_evidence: >-
@@ -662,11 +666,42 @@ agenda:
       yield a valid but suboptimal packing, which verification alone does not catch -- the
       spec names that trap and it is the reason this step is not just a second call to
       `verify_packing`.
+
+      Closed in session-044: the loop closes. Eleven squares, fourteen touching pairs,
+      valid under `exact_sign`, and the reconstructed side equal to the field generator
+      *exactly* rather than to a tolerance.
+
+      The obstacle was real and `n = 11` is where it is avoidable. A pose unknown `t_i` is
+      an angle and therefore transcendental, with no representation in `Q(s)` at all, so
+      "solve every pose unknown exactly" is unsatisfiable while a pose is parameterised
+      that way. Trump's construction is already written over `Q(u)` with `u = tan(a/2)`,
+      so every coordinate is built from `+ - * /` and the whole question reduces to
+      recovering `u` from `s`.
+
+      That recovery is a derivation rather than a search. `Q(s) = Q(u)`, both degree
+      eight, so `u` is a rational combination of powers of `s`; writing each `s^i` in the
+      power basis of `Q(u)` makes it a square rational linear system with one solution,
+      and a singular system is refused as `subfield-too-small` rather than fitted. An
+      integer-relation search would have returned the same coefficients and would have had
+      to be believed. The recovered `u` is then still required to satisfy `u`'s own
+      minimal polynomial exactly in the rebuilt field.
+
+      The bead this commitment named, `think-2q2c`, was never created; the work is
+      tracked on `think-er2h`. `BC-069`'s `think-864y` was dangling the same way and is
+      now `think-rqad`. Neither was caught by the gate, which checks the bead tree it can
+      see rather than the ids the agenda quotes.
+
+      Rebuilding inside `Q(s)` is also what makes the mandatory side comparison exact:
+      the reconstructed side and the generator are elements of the same field, so the
+      check is one identity with no tolerance and no cross-field comparison. The trap the
+      note above names is demonstrated rather than asserted -- a control rebuilds the real
+      packing in a container one unit larger, `verify_packing` correctly calls it valid,
+      and only the side comparison rejects it.
   - id: BC-068
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 100]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can the generated atlas SVG be made reproducible from its inputs alone?
@@ -680,6 +715,10 @@ agenda:
       A pinned emission precision, every stored SVG and PNG receipt regenerated against it,
       and the composite-PNG check passing for the reason it states rather than on test
       ordering; or a typed statement of which stored artifact cannot be regenerated.
+    artifacts:
+    - src/sqpack/render/numbers.py
+    - src/sqpack/field.py
+    - tests/test_emission_precision.py
     bead: think-mt4h
     depends_on: []
     workflows: [general-improvement]
@@ -691,6 +730,25 @@ agenda:
       This re-hashes every stored SVG and every PNG receipt in the repository, which is why
       it was left open rather than fixed inside a block about chirality. It is a
       regeneration and a review, and it needs its own block for exactly that reason.
+
+      Closed in session-044, and the feared regeneration did not happen. The defect had
+      two halves and only one was where the entry looked: `NumberField.decimal` was setting
+      the *thread-global* decimal precision and never restoring it, which is where the
+      ambient state came from, so the leak is fixed with a `localcontext` and the emission
+      is pinned separately by `SVG_EMISSION_PRECISION`.
+
+      Pinned at 28, which is the precision every retained figure was already drawn at, so
+      the pin declares where the emission is rather than moving it -- and no stored artifact
+      changed a byte. All four generators rebuild identical output under it, which is the
+      evidence for that claim rather than an assumption behind it. The alternatives were
+      measured, not argued: 32 changes 66 known-best outputs and breaks the translation-only
+      trajectory check by `8e-32`, and 17 would coarsen the subtractions that decide angle
+      class and therefore hue.
+
+      That trajectory check is now D-362, outstanding. It compares independently rounded
+      projections for exact equality and has always passed for an ambient reason rather than
+      the one it states -- the same class of accident as D-359 itself, found while measuring
+      the fix for it.
   - id: BC-069
     purpose: tool_validation
     owner_focus: correctness
@@ -709,7 +767,7 @@ agenda:
       A condition whose addition takes the n = 5 rank to 16 of 16 with the residual unmoved
       at the retained pose; or a typed statement of which formulation the contact graph
       resists.
-    bead: think-864y
+    bead: think-rqad
     depends_on: [BC-059]
     workflows: [pipeline-improvement]
     next_evidence: >-

@@ -58,7 +58,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-041](agent-sessions/session-041-block7-collinearity.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (process) | 2 | think-qs6k | Open block 8 as session-042 under BC-060 and `think-ovp7`, which this unblocks: n = 29 is now an overdetermined, full-rank system of 122 contact equations in 88 unknowns, which is what an exact solve needs. |
 | [session-042](agent-sessions/session-042-block8-exact-solve.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-qs6k | Open block 9 as session-043 under BC-061 and `think-twa7`: an exact LP over certified coefficients, removing the `1e-11` float floor. The n = 29 refusal above is what makes the interval route the load-bearing one, so the layer that certifies its coefficients is the next thing that matters. |
 | [session-043](agent-sessions/session-043-block9-degree-bound.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (correctness) | 2 | think-qs6k | Open block 11 as session-044 under BC-066 and `think-obgk`: eliminate the five equations in five half-angles this block left, inside a declared wall-clock cap, and record whatever the chain reaches. It runs before the remaining pipeline blocks because it is the only one that can change what this run concludes about n = 29 -- a refusal there is the measured justification for the interval route carrying that bound. The ordering through block 18 is agenda-006's continuation schedule. |
-| [session-044](agent-sessions/session-044-agenda006-continuation.md) | in_progress | contemporaneous | `process-review` (process) | `pipeline-improvement` (correctness) | 2 | think-obgk | Carry BC-066 on `think-obgk` to a terminal state: record the measured wall the rational elimination hit, and take the eliminant's degree from the finite-field run. |
+| [session-044](agent-sessions/session-044-agenda006-continuation.md) | in_progress | contemporaneous | `process-review` (process) | `efficiency-loop` (efficiency) | 5 | think-obgk | Carry BC-066 on `think-obgk` to a terminal state: record the measured wall the rational elimination hit, and take the eliminant's degree from the finite-field run. |
 
 ### Workflow summary
 
@@ -70,9 +70,10 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `factual-review` | 1 | 0 | 21 | 2 |
 | `insight-iteration` | 2 | 1 | 25 | 2 |
 | `process-review` | 8 | 4 | 44 | 6 |
-| `efficiency-loop` | 7 | 0 | 17 | 0 |
+| `efficiency-loop` | 7 | 0 | 18 | 0 |
 | `research-loop` | 2 | 4 | 12 | 7 |
-| `pipeline-improvement` | 15 | 0 | 61 | 0 |
+| `pipeline-improvement` | 15 | 0 | 62 | 0 |
+| `general-improvement` | 0 | 0 | 1 | 0 |
 
 ## Experiment agendas
 
@@ -182,9 +183,9 @@ Status: **active**. Schedule one unattended overnight run across three independe
 | BC-063 | research | 5 | ready | 3 | think-298s | Advances BC-049 in agenda-005. The only genuinely research-shaped cell in this continuation; everything above it is tooling. |
 | BC-065 | tool_validation | 29 | complete | 0 | think-obgk | Closed in session-043. Under `u = tan(theta/2)` the six equations rationalise over Q with total degrees `[11, 15, 10, 15, 7, 6]`, so the Bezout bound on the solution variety is `1,039,500` -- degree twenty was a corner. Every equation is degree one in `s`, and solving the smallest for it gives `s` as a rational function of `u_b` and `u_c` alone, leaving five equations in five unknowns with degrees `[16, 20, 15, 20, 12]`. |
 | BC-066 | tool_validation | 29 | complete | 0 | think-obgk | The Bezout bound is `1,039,500`, an upper bound and loose. Two failure modes are known in advance and the block should measure which one it hits. A **resultant chain** multiplies degrees at every step -- from `[16, 20, 15, 20, 12]` one elimination gives about `320`, the next about `10^5` -- and introduces extraneous factors, so a successful chain still ends in factoring a very large polynomial. A **Grobner basis** in lex order is doubly exponential in the worst case, but what kills it in practice is intermediate coefficient swell: coefficients reach thousands of digits from single-digit inputs and memory runs out before the steps do. Report the sizes reached at each step rather than running until something dies. |
-| BC-067 | tool_validation | 11 | ready | 1 | think-2q2c | Feasible now and not before: since BC-059 the n = 11 contact system has full rank 34 of 34, so the pose is determined by the contacts and there is something to solve. |
-| BC-068 | tool_validation | 11, 100 | ready | 1 | think-mt4h | The detector is already written down: `pytest tests/test_promote_system.py tests/test_known_best_atlas.py -p no:randomly` fails on the composite receipt, and either module alone passes. |
-| BC-069 | tool_validation | 5 | ready | 1 | think-864y | n = 5 is now the clean case rather than the odd one out. Its first-order condition already holds -- no contact-preserving motion changes the side -- so what is missing is a genuine closure and not another missing equation, which is what BC-059's repair established by elimination. |
+| BC-067 | tool_validation | 11 | complete | 1 | think-er2h | Feasible now and not before: since BC-059 the n = 11 contact system has full rank 34 of 34, so the pose is determined by the contacts and there is something to solve. |
+| BC-068 | tool_validation | 11, 100 | complete | 1 | think-mt4h | The detector is already written down: `pytest tests/test_promote_system.py tests/test_known_best_atlas.py -p no:randomly` fails on the composite receipt, and either module alone passes. |
+| BC-069 | tool_validation | 5 | ready | 1 | think-rqad | n = 5 is now the clean case rather than the odd one out. Its first-order condition already holds -- no contact-preserving motion changes the side -- so what is missing is a genuine closure and not another missing equation, which is what BC-059's repair established by elimination. |
 | BC-064 | tool_validation | 5, 10, 11, 16, 29 | ready | 0 | think-c7oo | The first endpoint check earned its place by failing: the logbook entry named `verified_upper_bound` and the consumer contract required it to say what it meant by it. A second one closes the continuation the same way. |
 
 ## Series

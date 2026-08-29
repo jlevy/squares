@@ -2,7 +2,7 @@
 
 # Defect log
 
-361 defects recorded across the packing toolchain.
+362 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 23 | a cell of the sweep whose answer is known in advance |
-| `review` | 224 | a human or agent reading the work against a checklist |
+| `review` | 225 | a human or agent reading the work against a checklist |
 | `anomaly` | 12 | a result that made no sense, chased down |
 | `inspection` | 36 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 46 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 46 of 361, and none of the 86 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 46 of 362, and none of the 86 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 46 of 361, and none of
 | quench | 22 |
 | verifier | 4 |
 | record | 104 |
-| tooling | 117 |
+| tooling | 118 |
 | docs | 103 |
 
 ## By kind
@@ -45,7 +45,7 @@ The line worth reading twice: **the automated gate caught 46 of 361, and none of
 | soundness | 86 |
 | validity | 86 |
 | bookkeeping | 137 |
-| robustness | 41 |
+| robustness | 42 |
 | performance | 11 |
 
 ## Fixed, but nothing stops it coming back
@@ -213,7 +213,7 @@ This is the actionable list.
 | D-356 | outstanding | low | The negative-control snapshot prunes the archive, so the n=29 chain cannot be controlled there | `think-lo3p` |
 | D-357 | outstanding | low | One synopsis negative control failed reproducibly, then passed, with no identified trigger | `think-lo3p` |
 | D-358 | outstanding | medium | An unattended run misread its own clock by a factor of four and stopped early | `think-qs6k` |
-| D-359 | outstanding | medium | The generated atlas SVG's coordinate precision is inherited from ambient state | `think-mt4h` |
+| D-362 | outstanding | low | The translation-only trajectory check compares independently rounded projections for exact equality | `think-mt4h` |
 
 ## Every defect
 
@@ -577,9 +577,10 @@ This is the actionable list.
 | [D-356](packing/campaign/agent-sessions/session-037-block2-interval-calibration.md) | 2026-08-29 | tooling | validity | conservative | `control_cell` | low | outstanding | The negative-control snapshot prunes the archive, so the n=29 chain cannot be controlled there |
 | [D-357](packing/campaign/agent-sessions/session-038-block3-contact-assembly.md) | 2026-08-29 | tooling | robustness |  | `control_cell` | low | outstanding | One synopsis negative control failed reproducibly, then passed, with no identified trigger |
 | [D-358](packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md) | 2026-08-29 | record | bookkeeping |  | `review` | medium | outstanding | An unattended run misread its own clock by a factor of four and stopped early |
-| [D-359](packing/campaign/agent-sessions/session-040-block6-chirality.md) | 2026-08-29 | tooling | robustness |  | `gate` | medium | outstanding | The generated atlas SVG's coordinate precision is inherited from ambient state |
+| [D-359](packing/campaign/agent-sessions/session-040-block6-chirality.md) | 2026-08-29 | tooling | robustness |  | `gate` | medium | fixed | The generated atlas SVG's coordinate precision is inherited from ambient state |
 | [D-360](packing/campaign/agent-sessions/session-040-block6-chirality.md) | 2026-08-29 | record | validity | neutral | `review` | low | fixed | A null-space finding was read off a filtered display instead of being computed |
 | [D-361](packing/campaign/agent-sessions/session-041-block7-collinearity.md) | 2026-08-29 | tooling | soundness | conservative | `control_cell` | high | fixed | An edge-edge contact was assembled as one equation, so the contact system did not determine the pose |
+| [D-362](packing/campaign/agent-sessions/session-044-agenda006-continuation.md) | 2026-08-29 | tooling | robustness |  | `review` | low | outstanding | The translation-only trajectory check compares independently rounded projections for exact equality |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

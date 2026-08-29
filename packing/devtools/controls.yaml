@@ -899,3 +899,24 @@ controls:
   replace: ["        context.prec = SVG_EMISSION_PRECISION\n", "        context.prec = context.prec\n"]
   run: uv run --frozen --quiet pytest -q tests/test_emission_precision.py
   expect: "the emitted SVG followed the ambient decimal context to"
+
+# --- the exact round trip (BC-067) ---
+#
+# Both controls restore a form of "trust the answer". The first drops the certification
+# that makes the recovered generator a derivation rather than a guess; the second
+# replaces the side comparison with validity, which is precisely the trap the promotion
+# spec names -- a wrong contact structure yielding a packing that verifies and is not
+# the one the field describes.
+- name: exact round trip - the recovered generator is trusted instead of certified
+  file: src/sqpack/promote/roundtrip.py
+  replace: ["    certified = _horner(generator_min_poly, generator, field).is_zero()",
+            "    certified = True"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_roundtrip.py -q
+  expect: "a perturbed generator was certified against u's minimal polynomial"
+
+- name: exact round trip - the side comparison is replaced by validity
+  file: src/sqpack/promote/roundtrip.py
+  replace: ["    matches = (side - field.alpha).is_zero()",
+            "    matches = bool(report.valid)"]
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_roundtrip.py -q
+  expect: "so the side comparison is not catching a valid but suboptimal packing"

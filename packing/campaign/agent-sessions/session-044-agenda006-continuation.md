@@ -127,8 +127,162 @@ session:
       stopped and what it cost is the exit BC-066 names, so the block is complete rather
       than stopped.
     next_action: >-
-      Open BC-067 on `think-2q2c`: the n = 11 round trip, where the answer is published
+      Open BC-067 on `think-er2h`: the n = 11 round trip, where the answer is published
       and the contact system has had full rank since BC-059.
+  - workflow: general-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-068
+    bead: think-mt4h
+    objective: >-
+      Make the generated atlas SVG a function of its inputs alone, so the composite
+      receipt passes for the reason it states rather than on test ordering.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      Ran as a delegated lane against an isolated worktree while BC-066's elimination held
+      the clock; integrated here once that block was terminal.
+    budget_minutes: 60
+    started_at: '2026-08-29T09:00:00Z'
+    deadline_at: '2026-08-29T10:00:00Z'
+    expected_output: >-
+      A pinned emission precision, every stored artifact regenerated against it, and the
+      composite-PNG check order-independent.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev pytest tests/test_promote_system.py
+      tests/test_known_best_atlas.py -q -p no:randomly
+    kill_condition: >-
+      Stop if a stored artifact cannot be regenerated from its inputs; name it rather than
+      hand-editing it.
+    fallback: >-
+      Record which artifact resists regeneration, which is a typed outcome and not a
+      failure to hide.
+    outcome: >-
+      Fixed, and no stored artifact moved. The defect had two halves and the entry had
+      only found one of them.
+    evidence:
+    - >-
+      'The ambient state came from `NumberField.decimal` setting the *thread-global*
+      decimal precision and never restoring it. That is now a `localcontext`; a grep over
+      `src`, `devtools` and `tests` found it to be the only global mutation, every other
+      site already scoped its own.'
+    - >-
+      'The emission is pinned separately by `SVG_EMISSION_PRECISION`, applied as a
+      decorator to the two document-level entry points so it covers arithmetic added
+      inside them later rather than only the expressions someone remembered to wrap.'
+    - >-
+      'Pinned at 28 after measuring the alternatives rather than arguing them: at 32 the
+      exact n = 5 face fails `validate_translation_only_trajectory` by `8e-32` and 66
+      stored known-best outputs change; at 17 the coarsening reaches the subtractions that
+      decide angle class and therefore hue.'
+    - >-
+      'No artifact changed a byte. All four generators -- known-best atlas, SVG rendering,
+      contact overlays, prospective atlas -- rebuild identical output under the pin, which
+      is the evidence that 28 is where they were already drawn.'
+    - >-
+      'The reproducer this repository recorded for D-359, `pytest tests/test_promote_system.py
+      tests/test_known_best_atlas.py -p no:randomly`, went from 1 failed and 16 passed to
+      17 passed. Both new controls fire.'
+    stop_reason: >-
+      Exit met inside the budget, and the regeneration the commitment was sized for turned
+      out not to be needed.
+    next_action: >-
+      Open BC-067 on `think-er2h`.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-067
+    bead: think-er2h
+    objective: >-
+      Discharge a recovered minimal polynomial all the way back to a verified packing at
+      n = 11, rather than only to an isolated root.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      BC-066 and BC-068 are terminal; this is the next block in the continuation order.
+    budget_minutes: 60
+    started_at: '2026-08-29T10:17:00Z'
+    deadline_at: '2026-08-29T11:17:00Z'
+    expected_output: >-
+      A `NumberField` built from the candidate, the pose unknowns solved exactly, the
+      packing rebuilt and passed to `verify_packing` under `exact_sign`, and the
+      reconstructed side compared against the input; or a typed statement of which step
+      the field cannot support.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev python -m pytest tests/test_promote_roundtrip.py
+      -q -p no:randomly
+    kill_condition: >-
+      Stop if closing the loop needs the pose unknowns re-parameterised. The angles are
+      transcendental and have no representation in `Q(s)`; saying so is the result, and
+      re-parameterising the whole system is not this block's budget.
+    fallback: >-
+      A typed statement naming the step the field cannot support.
+    outcome: >-
+      The loop closes. Eleven squares, fourteen touching pairs, valid under `exact_sign`,
+      and the reconstructed side equal to the field generator exactly.
+    evidence:
+    - >-
+      'The obstacle is real: a pose unknown `t_i` is an angle and has no representation in
+      `Q(s)`, so the exit''s literal reading is unsatisfiable while a pose is parameterised
+      by angles. `n = 11` is reachable because its retained construction is already over
+      `Q(u)` with `u = tan(a/2)`, built from `+ - * /` alone.'
+    - >-
+      '`u` is recovered by an exact rational linear solve rather than by integer relation:
+      `Q(s) = Q(u)`, both degree eight, so writing each `s^i` in the power basis of `Q(u)`
+      gives a square system with one solution. A singular system is refused as
+      `subfield-too-small`. The coefficients agree with what a PSLQ search returns, and
+      did not have to be believed to be used.'
+    - >-
+      'Rebuilding inside `Q(s)` makes the side comparison exact rather than approximate:
+      reconstructed side and field generator live in one field, so the check is
+      `(side - alpha).is_zero()`.'
+    - >-
+      'The spec''s trap is demonstrated, not asserted. A control rebuilds the real packing
+      in a container one unit larger; `verify_packing` correctly reports it valid, and only
+      the side comparison rejects it. Both negative controls fire.'
+    - >-
+      'The closed forms have one copy. `cases.trump11.packing.build_in` was split out so
+      the round trip rebuilds *this* packing rather than one that resembles it, and the
+      three existing consumers of that module are unmoved.'
+    stop_reason: >-
+      Exit met inside the budget.
+    next_action: >-
+      Integrate the delegated BC-069 and BC-061 lanes, then BC-062 and the reserved
+      BC-064 endpoint check.
+  - workflow: efficiency-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    commitment: BC-062
+    bead: think-d0q7
+    objective: >-
+      Run only the verification steps a change can reach, with a control proving the
+      selector cannot under-run, measured against a baseline taken on this container.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The exact-route blocks are terminal and the two remaining middle-layer lanes are
+      delegated; this is the next block the coordinator owns.
+    budget_minutes: 45
+    started_at: '2026-08-29T10:25:00Z'
+    deadline_at: '2026-08-29T11:10:00Z'
+    expected_output: >-
+      A reachability-scoped selector with a control proving it cannot under-run, measured
+      against the baseline; or a measured rejection.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --fast
+    kill_condition: >-
+      Stop if the selector can be shown to skip a step a change can reach. Under-running
+      the gate is a soundness defect; a selector that is merely slow is a disappointment.
+    fallback: >-
+      A measured rejection, recorded with the baseline it was measured against.
+    outcome: null
+    evidence: []
+    stop_reason: null
+    next_action: >-
+      Integrate the delegated lanes as they land, then open the reserved BC-064.
   primary_bead: think-obgk
   status: in_progress
   budget:
@@ -157,7 +311,129 @@ session:
       Eight ready commitments (BC-061 through BC-064, BC-066 through BC-069); the exact
       route at n = 29 has a degree bound but no elimination attempt
     after: null
-  delegations: []
+  delegations:
+  - task: >-
+      BC-068 -- pin the atlas SVG emission precision and stop the field refiner leaking
+      into the global decimal context.
+    operator: subagent
+    recording: contemporaneous
+    status: completed
+    phase: 3
+    budget_minutes: 60
+    started_at: '2026-08-29T09:00:00Z'
+    deadline_at: '2026-08-29T10:00:00Z'
+    expected_output: >-
+      A pinned emission precision with every stored artifact regenerated against it.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev pytest tests/test_promote_system.py
+      tests/test_known_best_atlas.py -q -p no:randomly
+    kill_condition: >-
+      Name any stored artifact that cannot be regenerated rather than hand-editing it.
+    fallback: A typed statement of which artifact resists regeneration.
+    write_scope:
+    - packing/src/sqpack/field.py
+    - packing/src/sqpack/render/numbers.py
+    - packing/src/sqpack/render/packing.py
+    - packing/devtools/build_known_best_atlas.py
+    - packing/devtools/controls.yaml
+    - packing/tests/test_emission_precision.py
+    excluded_commands:
+    - git push
+    outcome: >-
+      Fixed with no stored artifact changing a byte. Pinned at 28 after measuring that 32
+      moves 66 outputs and breaks the translation-only trajectory check by `8e-32`.
+    evidence:
+    - >-
+      'The recorded D-359 reproducer went from 1 failed and 16 passed to 17 passed.'
+    - >-
+      'Both new negative controls fire; the harness reports them under
+      `run_negative_controls -k "emission precision"`.'
+    files:
+    - packing/src/sqpack/field.py
+    - packing/src/sqpack/render/numbers.py
+    - packing/tests/test_emission_precision.py
+    checks:
+    - uv run --frozen --all-extras --group dev packing-validate --fast
+    uncertainty: >-
+      Its worktree was branched from `main` rather than from this branch, so it could not
+      see the promote work and reproduced the defect through `tests/test_motion_lab.py`
+      instead. The fix is independent of that difference and was re-verified here against
+      the reproducer the defect log actually records.
+    elapsed_seconds: 4245
+    elapsed_quality: platform_measured
+    next_action: >-
+      Landed by cherry-pick; D-359 closed and D-362 opened for the adjacent defect it
+      surfaced.
+  - task: >-
+      BC-069 -- derive the one stationarity condition n = 5 still needs, in a form a
+      solver accepts.
+    operator: subagent
+    recording: contemporaneous
+    status: in_progress
+    phase: 4
+    budget_minutes: 59
+    started_at: '2026-08-29T10:18:00Z'
+    deadline_at: '2026-08-29T11:17:00Z'
+    expected_output: >-
+      A condition taking the n = 5 rank to 16 of 16 with the residual unmoved, or a typed
+      statement of which formulation the contact graph resists.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --fast
+    kill_condition: >-
+      It may derive a condition; it may not size one to make the counts meet, which is
+      D-361.
+    fallback: A typed statement of what the contact graph resists.
+    write_scope:
+    - packing/src/sqpack/promote/system.py
+    - packing/tests/test_promote_system.py
+    - packing/devtools/controls.yaml
+    excluded_commands:
+    - git push
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: >-
+      Running against a worktree branched from this branch's head, so unlike the BC-068
+      lane it can see the promote work.
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Integrate when it lands.
+  - task: >-
+      BC-061 -- an exact LP over certified rational or algebraic coefficients, replacing
+      the float solver where a certified answer is required.
+    operator: subagent
+    recording: contemporaneous
+    status: in_progress
+    phase: 4
+    budget_minutes: 59
+    started_at: '2026-08-29T10:18:00Z'
+    deadline_at: '2026-08-29T11:17:00Z'
+    expected_output: >-
+      An LP over exact coefficients agreeing with the float path where both are valid,
+      and a report of which cells need algebraic rather than rational coefficients.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --fast
+    kill_condition: >-
+      If the exact LP needs a linear-algebra layer over `FieldElement` that does not
+      exist, scope it and say so rather than building a half-finished matrix library.
+    fallback: A typed statement of what blocks it.
+    write_scope:
+    - packing/src/sqpack/exact_lp.py
+    - packing/tests
+    - packing/devtools/controls.yaml
+    excluded_commands:
+    - git push
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: >-
+      D-021's `1e-11` floor is the entry condition; whether the cells that matter need
+      algebraic rather than rational coefficients is the open question the block reports.
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Integrate when it lands.
   outputs: []
   checks: []
   stop_reason: null
@@ -169,18 +445,18 @@ session:
 
 ## Why this session leads with `BC-066`
 
-[`BC-065`](../agendas/agenda-006-overnight-research-blocks.md) left the `n = 29` question
-in a specific state: the integer-relation route refused through degree twenty below
-`10^22`, and the Bézout bound of `1,039,500` says that refusal surveyed a corner rather
-than the space.
+[`BC-065`](../agendas/agenda-006-overnight-research-blocks.md) left the `n = 29`
+question in a specific state: the integer-relation route refused through degree twenty
+below `10^22`, and the Bézout bound of `1,039,500` says that refusal surveyed a corner
+rather than the space.
 Elimination is the route that does not have to guess a degree.
 
 It is worth being exact about what a success would and would not buy, because the
 instinct that elimination is the “real” answer is right about rigour and easy to
 over-read about consequence.
 A complete elimination upgrades the `n = 29` upper bound from *certified at a relaxation
-of `1e-20`* to *exactly this algebraic number*.
-It says nothing about optimality: the `0.46` bound gap is untouched either way.
+of `1e-20`* to *exactly this algebraic number*. It says nothing about optimality: the
+`0.46` bound gap is untouched either way.
 
 ## The block plan
 
@@ -197,9 +473,9 @@ It says nothing about optimality: the `0.46` bound gap is untouched either way.
 | 9 | `BC-064` — endpoint check | 40 min | Reserved |
 
 Blocks 7 and 8 are the absorbers, and they are named as cuttable here rather than
-discovered to be cuttable at 15:00Z.
-If `BC-066` is still producing measured progress at its cap, the second slice comes from
-that slack and the replan is recorded at the boundary.
+discovered to be cuttable at 15:00Z. If `BC-066` is still producing measured progress at
+its cap, the second slice comes from that slack and the replan is recorded at the
+boundary.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

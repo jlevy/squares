@@ -2277,7 +2277,7 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 361 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 362 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -2285,7 +2285,7 @@ and checked in the gate.
 | soundness | 86 | asserted something false about the mathematics |
 | validity | 86 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 137 | recorded something its own evidence contradicts |
-| robustness | 41 | did not finish, or finished only by luck |
+| robustness | 42 | did not finish, or finished only by luck |
 | performance | 11 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -2294,7 +2294,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-six defects in 361, and no soundness defect
+**The automated gate has caught forty-six defects in 362, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2323,16 +2323,29 @@ failed four times running, including against a clean tree, later fired correctly
 nothing changed, so the standing-failure reading recorded first was wrong and the entry
 now says plainly that the trigger is not identified.
 
-A check can also pass for a reason other than the one it states.
-[D-359](defects.md) records that the generated atlas SVG’s coordinate precision is
-inherited rather than pinned: `format_svg_number` renders a scalar at whatever precision
-it was last refined to, so `known-best-1-100.svg` carries 27 fractional digits in a
-fresh process and 50 once anything has refined the shared field.
+A check can also pass for a reason other than the one it states, and this log now has
+two of those a day apart.
+[D-359](defects.md) recorded that the generated atlas SVG’s coordinate precision was
+inherited rather than pinned: `format_svg_number` rendered a scalar at whatever
+precision it was last refined to, so `known-best-1-100.svg` carried 27 fractional digits
+in a fresh process and 50 once anything had refined the shared field.
 The test asserting that the stored PNG was rendered from the current SVG therefore
-passes on test ordering, and a genuinely stale PNG would be indistinguishable from the
-passing case. It is open because pinning the emission re-hashes every stored SVG and PNG
-receipt in the repository, which is a regeneration and a review rather than a fix made
-in passing.
+passed on test ordering, and a genuinely stale PNG would have been indistinguishable
+from the passing case.
+It is now fixed, and the feared regeneration did not happen: the ambient state came from
+`NumberField.decimal` setting the *thread-global* decimal precision and never restoring
+it, and the emission is pinned at 28 — the precision every retained figure was already
+drawn at — so no stored artifact changed a byte.
+
+Fixing it surfaced the second.
+[D-362](defects.md) is open: `validate_translation_only_trajectory` compares two
+independently rounded projections of exact algebraic numbers for *exact* equality, and
+they agree to about thirty-one digits rather than exactly.
+It has never fired wrongly only because nothing had raised the ambient precision before
+it ran, which is the same accident D-359 was.
+It is left open deliberately: it is what stands between this repository and a principled
+emission precision of 32, and that is a decision about what the projection layer
+promises rather than a rounding to choose in passing.
 
 The gate’s cost is itself a logged defect.
 [D-355](defects.md) records that verification runs the whole gate after every change, so
