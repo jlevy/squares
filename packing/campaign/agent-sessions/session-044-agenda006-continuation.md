@@ -476,6 +476,41 @@ session:
       is fixed at a measured value rather than carried as an unknown, which is available
       only because this kernel is one-dimensional and reads across sixteen decades.
     next_action: >-
+      Open BC-071, then the reserved BC-064 endpoint check.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-071
+    bead: think-lstj
+    objective: >-
+      Build phase 1 of the exact simplex, so a cell can be certified without a float
+      solver supplying its first feasible vertex.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      BC-061 closed by naming this as the gap that matters at n = 29, where no float
+      solver produces a feasible vertex to start from. Opening it is acting on that
+      finding rather than deferring it to a later run.
+    budget_minutes: 75
+    started_at: '2026-08-29T11:15:00Z'
+    deadline_at: '2026-08-29T12:30:00Z'
+    expected_output: >-
+      A feasible vertex found from the exact data alone, agreeing with the known answer at
+      n = 11 with no float solver anywhere in the chain, and a typed refusal on an
+      infeasible program.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev python -m pytest tests/test_promote_exact_lp.py
+      -q -p no:randomly
+    kill_condition: >-
+      Stop if phase 1 needs something the module cannot express, and say what. A
+      half-finished auxiliary program is worse than a named gap.
+    fallback: >-
+      A typed statement of what blocks it, which is what BC-061 did with this same gap.
+    outcome: null
+    evidence: []
+    stop_reason: null
+    next_action: >-
       Open the reserved BC-064 endpoint check.
   primary_bead: think-obgk
   status: in_progress
@@ -563,7 +598,7 @@ session:
       solver accepts.
     operator: subagent
     recording: contemporaneous
-    status: in_progress
+    status: completed
     phase: 4
     budget_minutes: 59
     started_at: '2026-08-29T10:18:00Z'
@@ -583,22 +618,38 @@ session:
     - packing/devtools/controls.yaml
     excluded_commands:
     - git push
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Both: a condition that closes n = 5, and a correction of the form the record had been
+      promising for it.
+    evidence:
+    - >-
+      'Rank 15 to 16 of 16 with the residual unmoved at `1.110e-16`; n = 11 and n = 29
+      unmoved at `34/34` and `88/88`, re-verified by the coordinator rather than taken on
+      report.'
+    - >-
+      'Each condition expands to exactly the midpoint statement, checked against an
+      independently written expression. Five controls fire.'
+    files:
+    - packing/src/sqpack/promote/system.py
+    - packing/tests/test_promote_system.py
+    - packing/devtools/probe_contact_system.py
+    checks:
+    - uv run --frozen --all-extras --group dev python -m devtools.probe_contact_system --case gobel5
     uncertainty: >-
-      Running against a worktree branched from this branch's head, so unlike the BC-068
-      lane it can see the promote work.
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Integrate when it lands.
+      The kernel vector is fixed at a measured value rather than carried as an unknown
+      under a normalisation, which is available only because this kernel is
+      one-dimensional and reads across sixteen decades. That is a restriction on the
+      method, not on this pose.
+    elapsed_seconds: 4014
+    elapsed_quality: platform_measured
+    next_action: >-
+      Landed by cherry-pick; D-363 opened for the misnamed closure form.
   - task: >-
       BC-061 -- an exact LP over certified rational or algebraic coefficients, replacing
       the float solver where a certified answer is required.
     operator: subagent
     recording: contemporaneous
-    status: in_progress
+    status: completed
     phase: 4
     budget_minutes: 59
     started_at: '2026-08-29T10:18:00Z'
@@ -618,16 +669,30 @@ session:
     - packing/devtools/controls.yaml
     excluded_commands:
     - git push
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Built. The exact optimum differs from the published side by exactly zero, against
+      `-1.80341e-16` for the float solve.
+    evidence:
+    - >-
+      'Under `exact_sign` the reconstruction leaves no undecided incidence and its worst
+      contact margin is exactly zero; under `float_sign(1e-11)` three of fourteen pair
+      contacts are undecided at `4.44089e-16`.'
+    - >-
+      'The dividing line for algebraic coefficients is the angle rather than the case:
+      1,842 of 25,367 outside `Q` on Trump''s cell, none on an axis-aligned grid. Seven
+      controls fire.'
+    files:
+    - packing/src/sqpack/exact_lp.py
+    - packing/tests/test_promote_exact_lp.py
+    checks:
+    - uv run --frozen --all-extras --group dev python -m pytest tests/test_promote_exact_lp.py -q
     uncertainty: >-
-      D-021's `1e-11` floor is the entry condition; whether the cells that matter need
-      algebraic rather than rational coefficients is the open question the block reports.
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Integrate when it lands.
+      Phase 1 of the exact simplex is not built, so the float path still supplies the
+      starting vertex. That is the case that matters at n = 29, and it is now BC-071.
+    elapsed_seconds: 2582
+    elapsed_quality: platform_measured
+    next_action: >-
+      Landed by cherry-pick; D-021 updated and BC-071 opened for the missing phase 1.
   outputs: []
   checks: []
   stop_reason: null

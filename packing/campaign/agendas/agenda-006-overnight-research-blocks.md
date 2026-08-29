@@ -917,6 +917,37 @@ agenda:
       certificate of it. What it can honestly buy is a *target*: BC-060's integer-relation
       sweep searched blindly through degree twenty, and a measured degree would tell it
       where to look. Nothing here may move `verified_upper_bound`.
+  - id: BC-071
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [11]
+    state: ready
+    priority: 1
+    question: >-
+      Can a cell be certified exactly without a float solver supplying its first feasible
+      vertex?
+    hypotheses: []
+    budget: 75 minutes
+    entry: >-
+      BC-061 built the exact LP and named this gap rather than hiding it: `solve` certifies
+      a vertex but does not find one, so the float path supplies the starting basis.
+    exit: >-
+      A feasible vertex found from the exact data alone, agreeing with the known answer at
+      n = 11 with no float solver anywhere in the chain, and a typed refusal on an
+      infeasible program; or a statement of what the module cannot express.
+    bead: think-lstj
+    depends_on: [BC-061]
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      This is the case that matters at n = 29. D-021's floor no longer governs what the
+      exact LP certifies, but it still governs where the search begins, and at n = 29 there
+      is no float solver producing a feasible vertex to begin from.
+    note: >-
+      A Big-M or two-phase auxiliary program over the same exact scalars, reusing
+      `solve_square_system` and the existing pivot loop. Do not widen into solving n = 29
+      itself: that needs the contact system assembled as an LP, which is a different block.
+      Bland's rule against cycling, and a pivot budget as a second line, with exceeding it
+      a typed refusal rather than a silent answer.
   - id: BC-064
     purpose: tool_validation
     owner_focus: process
