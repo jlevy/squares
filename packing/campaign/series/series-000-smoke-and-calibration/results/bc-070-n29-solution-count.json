@@ -1,5 +1,5 @@
 {
-  "claim": "The number of isolated solutions of the n = 29 contact system is at most 15,744, so the algebraic degree of s(29) is at most 15,744.",
+  "claim": "The number of isolated solutions of the n = 29 contact system is at most 15,744, so the algebraic degree of s(29) is at most 15,744. Path tracking found 8,327 finite solutions but could not account for all its paths, so it bounds nothing further.",
   "claim_boundary": "A bound on the degree, not the degree, and not a statement about s(29) being algebraic of any particular degree. It replaces a looser bound with a tighter one and moves nothing else: verified_upper_bound is untouched, and the n = 29 bound gap of about 0.46 is untouched.",
   "certified": false,
   "supersedes": {
@@ -24,5 +24,35 @@
   "reproduce": [
     "uv run --frozen --all-extras --group dev python -m devtools.probe_elimination --emit system.phc --phc",
     "printf '4\\n0\\nn\\nn\\n' | phc -m system.phc mixvol.out"
-  ]
+  ],
+  "tracking": {
+    "attempted": true,
+    "engine": "PHCpack 2.4.90 blackbox, 3 threads",
+    "started_at": "2026-08-29T10:38:42Z",
+    "ended_at": "2026-08-29T11:01:23Z",
+    "elapsed_seconds": 1361,
+    "exit_code": 0,
+    "paths": 15744,
+    "finite_solutions_returned": 8327,
+    "path_outcomes": {
+      "complex regular": 7343,
+      "complex singular": 549,
+      "real regular": 236,
+      "real singular": 51,
+      "no solution": 148
+    },
+    "distinct_s_values": {
+      "tolerance_1e-6": 7502,
+      "tolerance_1e-8": 7539
+    },
+    "verdict": "not usable as a degree",
+    "why": "BC-070's kill condition is that a count which cannot account for its own paths is not evidence about a degree. 148 paths ended in `no solution` and 600 solutions are reported singular, so the accounting is incomplete in both directions: paths were lost, and a singular endpoint may be several solutions coincident. The count is recorded because it was made, not because it settles anything, and the degree bound this artifact carries remains the mixed volume."
+  },
+  "independent_confirmation": {
+    "what": "The retained s(29) is among the tracked solutions.",
+    "value_found": "5.93383346267693",
+    "imaginary_part": "5.51012976947947e-40",
+    "matches_to_digits": 15,
+    "why_it_matters": "The homotopy shares no code and no method with the Newton refinement that produced the retained pose, and reached this value from a random start system rather than from the published digits. That the two agree is an independent check on the whole export chain -- the half-angle rationalisation, the coefficient clearing, and the emitted text -- by a route that could not have inherited an error from it."
+  }
 }

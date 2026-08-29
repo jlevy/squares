@@ -42,13 +42,16 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import time
 from collections.abc import Sequence
+from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
 import mpmath as mp
 import sympy as sp
+from sympy.parsing.sympy_parser import parse_expr
 
 from cases.kingbird29 import system as k29
 from cases.kingbird29.layout import DEFAULT_SOURCE
@@ -139,7 +142,7 @@ def reduced_system() -> tuple[list[sp.Poly], list[sp.Symbol], sp.Expr, str]:
     return reduced, halves, side_in_halves, f"f{pivot + 1}"
 
 
-def _term_text(monomial: Sequence[int], coefficient: int, names: Sequence[str]) -> str:
+def term_text(monomial: Sequence[int], coefficient: int, names: Sequence[str]) -> str:
     """One signed term, in the plain form `msolve` reads.
 
     Deliberately not parenthesised.  `msolve` accepts `(-2)*x` and does not mean by it
@@ -185,22 +188,34 @@ def msolve_input(
     bodies = []
     for index, polynomial in enumerate(polynomials, 1):
         exact = sp.Poly(polynomial.as_expr(), *order, domain=sp.QQ)
-        denominators = [sp.Rational(c).q for c in exact.coeffs()]
-        multiplier = sp.ilcm(*denominators) if len(denominators) > 1 else denominators[0]
+        # Through `Fraction` rather than SymPy's own rational type: the clearing is
+        # ordinary integer arithmetic and does not need a CAS, and a `Fraction` says so
+        # to a reader and to a type checker alike.
+        rationals = [Fraction(str(coefficient)) for coefficient in exact.coeffs()]
+        multiplier = 1
+        for rational in rationals:
+            multiplier = (
+                multiplier * rational.denominator // math.gcd(multiplier, rational.denominator)
+            )
         terms = []
-        for monomial, coefficient in zip(exact.monoms(), exact.coeffs(), strict=True):
-            cleared = sp.Rational(coefficient) * multiplier
-            if cleared.q != 1:
+        for monomial, rational in zip(exact.monoms(), rationals, strict=True):
+            cleared = rational * multiplier
+            if cleared.denominator != 1:
                 raise EliminationError(
                     "coefficient-not-integral",
-                    f"f{index} coefficient {coefficient} did not clear to an integer",
+                    f"f{index} coefficient {rational} did not clear to an integer",
                 )
-            terms.append(_term_text(monomial, int(cleared.p), names))
+            terms.append(term_text(monomial, cleared.numerator, names))
         text = "".join(terms)
         bodies.append(text[1:] if text.startswith("+") else text)
 
-        locals_ = dict(zip(names, order, strict=True))
-        reparsed = sp.sympify(bodies[-1].replace("^", "**"), locals=locals_)
+        # `parse_expr` rather than `sympify`, because the local symbol table is the whole
+        # point: re-parsing against fresh symbols would compare a polynomial to a
+        # different polynomial that happens to print the same way.
+        reparsed = parse_expr(
+            bodies[-1].replace("^", "**"),
+            local_dict=dict(zip(names, order, strict=True)),
+        )
         vanishes, ratio = _vanishes(reparsed, order, point)
         if not vanishes:
             raise EliminationError(

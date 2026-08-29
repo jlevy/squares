@@ -314,7 +314,7 @@ session:
       Bound and, if the tracking reaches it, count the isolated solutions of the n = 29
       system without computing a Groebner basis, and say what that makes the degree of
       `s(29)`.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       BC-066's measurement says the obstruction is the size of the ideal rather than the
@@ -335,11 +335,117 @@ session:
     fallback: >-
       Record the mixed volume alone, which is a bound and does not depend on any path
       being tracked successfully.
+    outcome: >-
+      The bound landed and the count did not, which this block's kill condition
+      anticipated. `s(29)` is algebraic of degree at most `15,744`.
+    evidence:
+    - >-
+      'The mixed volume of the Newton polytopes is `15,744`, computed in nine seconds,
+      against Bezout''s `1,039,500` -- sixty-six times tighter. The stable mixed volume
+      equals it, so the bound covers every isolated solution rather than only those in the
+      torus.'
+    - >-
+      'Tracking all `15,744` paths took 22m41s and returned 8,327 finite solutions, with
+      148 ending in `no solution` and 600 reported singular. The accounting is incomplete
+      in both directions, so the roughly 7,500 distinct `s` values seen are recorded as a
+      measurement and not as a degree.'
+    - >-
+      'An independent check nobody designed the run for: the retained `s(29)` is among the
+      tracked solutions at `5.93383346267693` with imaginary part `5.51e-40`, agreeing to
+      fifteen digits. The homotopy shares no code and no method with the Newton refinement
+      that produced that pose and reached it from a random start system, so it could not
+      have inherited an error from the export chain it agrees with.'
+    stop_reason: >-
+      Both halves terminal inside the budget; the count was refused by the block's own
+      kill condition rather than reported at face value.
+    next_action: >-
+      Integrate the delegated BC-069 lane, then open the reserved BC-064.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-061
+    bead: think-twa7
+    objective: >-
+      Replace the float solver with an LP over certified coefficients where a certified
+      answer is required, and report which cells need algebraic rather than rational ones.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      Ran as a delegated lane against a worktree branched from this branch's head, and is
+      integrated here.
+    budget_minutes: 60
+    started_at: '2026-08-29T10:18:00Z'
+    deadline_at: '2026-08-29T11:18:00Z'
+    expected_output: >-
+      An exact LP agreeing with the float path where both are valid, and a coefficient
+      report.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev python -m pytest tests/test_promote_exact_lp.py
+      -q -p no:randomly
+    kill_condition: >-
+      If the exact LP needs a linear-algebra layer that does not exist, scope it rather
+      than building a half-finished matrix library.
+    fallback: A typed statement of what blocks it.
+    outcome: >-
+      Built, and the floor is removed where a certified answer is required.
+    evidence:
+    - >-
+      'On Trump''s cell the exact optimum differs from the published side by *exactly
+      zero*, against `-1.80341e-16` for the float solve. That gap is negative, which is
+      the shape D-021 warns about: read without its tier it says the record was beaten.'
+    - >-
+      'The `ambiguous` question is answered by a contrast. Under `exact_sign` at floor
+      zero the reconstruction leaves no undecided incidence and its worst contact margin is
+      exactly zero; under `float_sign(1e-11)` three of fourteen pair contacts are undecided
+      and the worst margin is `4.44089e-16`. Zero is a value no float check can certify.'
+    - >-
+      'The dividing line for algebraic coefficients is the angle, not the case: Trump''s
+      cell has 1,842 of 25,367 coefficients outside `Q`, an axis-aligned grid none, because
+      multiples of a right angle give offsets of a half and normals of one.'
+    - >-
+      'The kill condition was met and answered rather than invoked: the missing
+      linear-algebra layer turned out to be about thirty lines, because `FieldElement`
+      already carries the arithmetic. Seven negative controls fire.'
+    stop_reason: >-
+      Exit met. Phase 1 of the exact simplex is deliberately not built and is named as the
+      gap that matters at n = 29, where no float solver supplies a feasible starting
+      vertex.
+    next_action: >-
+      Integrate the delegated BC-069 lane, then open the reserved BC-064.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-069
+    bead: think-rqad
+    objective: >-
+      Integrate the delegated n = 5 closure lane, and hold it to the rule that a condition
+      may be derived but not sized to make the counts meet.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The exact-route and middle-layer blocks are terminal; this is the last research lane
+      before the reserved endpoint check.
+    budget_minutes: 45
+    started_at: '2026-08-29T11:14:00Z'
+    deadline_at: '2026-08-29T11:59:00Z'
+    expected_output: >-
+      A condition taking the n = 5 rank to 16 of 16 with the residual unmoved, or a typed
+      statement of which formulation the contact graph resists.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev python -m pytest tests/test_promote_system.py
+      -q -p no:randomly
+    kill_condition: >-
+      Reject any condition that reaches rank 16 by writing the answer in. `t4 = pi/4` does
+      exactly that and is the control the lane must fail.
+    fallback: >-
+      Record what the contact graph resists, which is a full result for this commitment.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Report the bound and the count, then integrate the delegated lanes.
+      Open the reserved BC-064 endpoint check.
   primary_bead: think-obgk
   status: in_progress
   budget:

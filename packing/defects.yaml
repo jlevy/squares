@@ -450,6 +450,19 @@ defects:
     rather than removed: the assurance contract forbids a numerical result from carrying
     `beat_record: true`, and the soundness-perimeter check holds every emitting component
     to the same bound so the two cannot drift apart.
+
+    An exact LP over the same cell (`packing/src/sqpack/exact_lp.py`, BC-061) now removes
+    the floor where a certified answer is required. On Trump's cell it returns the
+    published side with a difference of exactly zero, against `-1.80341e-16` for the float
+    solve -- and that gap is *negative*, which is the shape this entry warns about, since
+    read without its tier it says the record was beaten. Its `ambiguous` set is empty
+    where the float path leaves three incidences undecided at this floor.
+
+    The status stays `contained` rather than moving to `fixed`, because the float path
+    still supplies the starting vertex: phase 1 of the exact simplex is not built, so the
+    floor still governs where the search begins. What it no longer governs is what the
+    result certifies -- a wrong starting basis is certified, repaired, or refused, never
+    believed.
   regression: 'the soundness perimeter at the same bound; every round carries assurance and method, and beat_record requires verified assurance'
   recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md
   bead: think-hg3u

@@ -439,7 +439,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 11]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can an exact LP over certified coefficients replace the float solver where a
@@ -453,6 +453,9 @@ agenda:
       An LP over exact rational or algebraic coefficients agreeing with the float path
       where both are valid, and a report of which cells need algebraic rather than
       rational coefficients; or a typed statement of what blocks it.
+    artifacts:
+    - src/sqpack/exact_lp.py
+    - tests/test_promote_exact_lp.py
     bead: think-twa7
     depends_on: []
     workflows: [pipeline-improvement]
@@ -462,6 +465,33 @@ agenda:
       produces rather than only on published ones.
     note: >-
       Advances BC-048 in agenda-005.
+
+      Closed in session-044. On Trump's cell the exact LP returns the published side with
+      a difference of *exactly zero* -- `FieldElement.is_zero`, not a tolerance -- against
+      `-1.80341e-16` for the float solve. That gap is negative, which is the shape D-021
+      warns about: read without its tier it says the record was beaten. All 22 translation
+      variables come back exactly zero, and the reconstruction re-verifies through
+      `verify_packing` under `exact_sign`.
+
+      The `ambiguous` question the exit asks is answered by a contrast rather than by a
+      number. Under `exact_sign` at floor zero the reconstruction leaves *no* undecided
+      incidence and its worst contact margin is exactly zero; under `float_sign(1e-11)`
+      at D-021's own floor, three of the fourteen pair contacts are undecided and the
+      worst margin is `4.44089e-16`. The point is not that the float margins are large --
+      it is that zero is a value no float check can certify.
+
+      Which cells need algebraic coefficients has a clean answer, and it is the angle
+      rather than the case. Trump's cell carries 25,367 coefficients of which 1,842 lie
+      outside `Q`; an axis-aligned grid carries 1,609 and none, because multiples of a
+      right angle give corner offsets of a half and edge normals of one. So the rational
+      cells run over `Fraction` with no field at all, and one implementation serves both.
+
+      Two things are deliberately not built and are named rather than implied. Phase 1 of
+      the exact simplex does not exist, so the float path still supplies the starting
+      vertex -- which is the standard division for exact LP, and is why the floor still
+      governs where the search begins and not what the result certifies. And that is
+      exactly the case that would matter at n = 29, where no float solver produces a
+      feasible vertex to start from.
   - id: BC-062
     purpose: tool_validation
     owner_focus: efficiency
@@ -783,7 +813,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [29]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       How many isolated solutions does the n = 29 system have, and what does that make the
@@ -812,6 +842,30 @@ agenda:
       angle in it is zero -- so the bound applies to the solution that matters rather than
       only to a generic one.
     note: >-
+      Closed in session-044, and the two halves came out differently.
+
+      The bound landed: the mixed volume of the Newton polytopes is **`15,744`**, computed
+      in nine seconds, against the Bezout bound of `1,039,500` -- sixty-six times tighter.
+      The stable mixed volume equals it, so there are no isolated solutions on the
+      coordinate hyperplanes either and the bound covers every isolated solution rather
+      than only those in the torus. So `s(29)` is algebraic of degree at most `15,744`.
+
+      The count did not, and this commitment's own kill condition is why it is not
+      recorded as one. Tracking all `15,744` paths took 22m41s and returned 8,327 finite
+      solutions -- 7,343 complex regular, 549 complex singular, 236 real regular, 51 real
+      singular -- with **148 paths ending in `no solution`**. The accounting is incomplete
+      in both directions: paths were lost, and a singular endpoint may be several
+      solutions coincident. About 7,500 distinct `s` values were seen, and that number is
+      recorded because it was measured, not because it settles anything.
+
+      What the run did buy beyond the bound is a check nobody designed it for. The
+      retained `s(29)` is among the tracked solutions at
+      `5.93383346267693` with an imaginary part of `5.51e-40`, agreeing to fifteen digits.
+      The homotopy shares no code and no method with the Newton refinement that produced
+      that pose and reached it from a random start system rather than from the published
+      digits -- so the agreement is an independent check on the whole export chain, by a
+      route that could not have inherited an error from it.
+
       A numerical count is not a proof and must not be recorded as one. Path tracking can
       lose or duplicate a path, so a solution count is evidence about the degree and not a
       certificate of it. What it can honestly buy is a *target*: BC-060's integer-relation

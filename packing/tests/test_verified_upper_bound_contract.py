@@ -80,6 +80,13 @@ DECLARED_CONSUMERS = {
         "reports how far below the ceiling the run's certificate sits, and that the "
         "ceiling did not move"
     ),
+    "packing/campaign/agent-sessions/session-044-agenda006-continuation.md": (
+        "names the ceiling only as a standing constraint: the continuation measures where "
+        "elimination stops and closes the round trip at n = 11, and moves nothing"
+    ),
+    "packing/campaign/agendas/agenda-006-overnight-research-blocks.md": (
+        "schedules blocks that read the ceiling as the thing a runner may not move"
+    ),
     "packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md": (
         "records the certificate as evidence and says the ceiling was not moved to it"
     ),

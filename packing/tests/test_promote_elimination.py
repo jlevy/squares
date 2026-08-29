@@ -20,9 +20,9 @@ import sympy as sp
 
 from devtools.probe_elimination import (
     EliminationError,
-    _term_text,
     msolve_input,
     reduced_system,
+    term_text,
     verify_eliminant,
     witness_point,
 )
@@ -33,11 +33,11 @@ def the_export_is_plain_and_unparenthesised() -> None:
 
     This is the whole bug.  `msolve` accepts both and means different things by them.
     """
-    text = _term_text((2, 0), -2, ["x", "y"])
+    text = term_text((2, 0), -2, ["x", "y"])
     assert text == "-2*x^2", f"a negative coefficient was rendered as {text!r}"
     assert "(" not in text, f"the export parenthesised a coefficient: {text!r}"
-    assert _term_text((1, 1), 1, ["x", "y"]) == "+x*y", "a unit coefficient was written out"
-    assert _term_text((0, 0), -7, ["x", "y"]) == "-7", "a bare constant lost its value"
+    assert term_text((1, 1), 1, ["x", "y"]) == "+x*y", "a unit coefficient was written out"
+    assert term_text((0, 0), -7, ["x", "y"]) == "-7", "a bare constant lost its value"
 
 
 def the_guard_rejects_a_polynomial_the_text_does_not_carry() -> None:
