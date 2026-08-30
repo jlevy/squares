@@ -1069,8 +1069,22 @@ coordinate, because outward rounding proves the claim for every point in its enc
 
 Reader views also name **origin** and **independence**. A complete published proof may
 be formally valid without a local audit.
-An external certificate and a repository replay remain separate evidence records.
-Running the generator’s own checker is not an independent implementation.
+Whether anyone here has *read* it is a separate fact and is recorded separately, in
+`external_review`: `not-reviewed` when the claim is transcribed and nobody here has
+worked through the argument, `informally-verified` when someone here read it and found
+no error, `defect-found` when someone here read it and it was wrong.
+
+That field changes no assurance and promotes no method — a published proof proves its
+claim whether or not we read it, and reading one is a careful human act, not the machine
+check `proof-assistant-checked` names.
+What it changes is whether a reader can tell the two apart.
+All six external proofs the register carries are `not-reviewed`, including
+[Nagamochi 2005], which supplies the lower bound for every `n` from 4 to 100 and is
+therefore the most load-bearing argument here and the least examined.
+The distinction is not hypothetical: [Stromquist 2003]'s `n = 11` argument needed a
+source-distinct repair, which `E-n011-repaired-lower` supplies without repairing the
+printed proof. An external certificate and a repository replay remain separate evidence
+records. Running the generator’s own checker is not an independent implementation.
 A page that says “interval verified” but publishes no certificate or replayable checker
 stays reported with a `public-certificate-missing` blocker.
 

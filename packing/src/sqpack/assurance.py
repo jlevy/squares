@@ -11,6 +11,9 @@ MACHINE_FORMAL_METHODS = frozenset(
     {"interval-certified", "exact-algebraic", "proof-assistant-checked"}
 )
 PROOF_METHODS = frozenset({"published-proof", "proof-audited"})
+
+EXTERNAL_ORIGINS = frozenset({"external", "independently-external"})
+"""Origins where the argument was made elsewhere, so reading it is a separate act."""
 FORMAL_METHODS = MACHINE_FORMAL_METHODS | PROOF_METHODS
 FORMAL_ORIGINS = frozenset(
     {"external", "independently-external", "replayed-here", "audited-here"}
@@ -98,6 +101,20 @@ def check_evidence_semantics(evidence: Mapping[str, object]) -> list[str]:
             errors.append(
                 prefix + "formal evidence must not use precision or tolerance as assurance"
             )
+        # An argument this repository did not produce carries `verified` on the source's
+        # authority, which is legitimate -- a published proof proves its claim whether or
+        # not we read it. What is not legitimate is leaving a reader unable to tell which
+        # of our verified claims anyone here has actually worked through. Six records were
+        # in that state, each saying "not independently audited here" in prose that nothing
+        # could query and nothing enforced, while `[Stromquist 2003]`'s n = 11 argument had
+        # already needed a source-distinct repair. So the state is now stated or refused.
+        if method in PROOF_METHODS and evidence.get("origin") in EXTERNAL_ORIGINS:
+            review = evidence.get("external_review")
+            if not isinstance(review, Mapping) or not review.get("state"):
+                errors.append(
+                    prefix + "an external proof must declare external_review.state: "
+                    "whether anyone here has read the argument"
+                )
 
     elif assurance == "reported":
         if method is not None:

@@ -82,6 +82,11 @@ evidence:
       assumptions:
         - Unit squares may rotate inside an open square container.
         - The square-packing side function is the paper's s(N).
+    external_review:
+      state: not-reviewed
+      date: '2026-08-30'
+      note: >-
+        Carries the lower bound for every n from 4 to 100, so it is the most load-bearing external argument here and the least examined.
     limitations: External published proof; its arithmetic is not independently replayed here.
     source_reviewed: '2026-08-24'
 
@@ -150,6 +155,11 @@ evidence:
       assumptions:
         - Packings permit arbitrary orientations and boundary contact.
         - The epsilon argument proves every strict smaller side impossible and passes to the infimum.
+    external_review:
+      state: not-reviewed
+      date: '2026-08-30'
+      note: >-
+        The source calls this an outline and omits routine analytic calculations, which is a reason to read it rather than a reason it is wrong.
     limitations: The source calls this an outline and omits routine analytic calculations; not independently audited here.
     source_reviewed: '2026-08-25'
 
@@ -172,6 +182,11 @@ evidence:
       assumptions:
         - Packings permit arbitrary orientations and boundary contact.
         - The paper's shrinking argument converts its open-box statement to unit-square lower bounds.
+    external_review:
+      state: not-reviewed
+      date: '2026-08-30'
+      note: >-
+        Transcribed with its theorem and pinpoints; nobody here has worked through the argument.
     limitations: Complete external published proof; not independently audited here.
     source_reviewed: '2026-08-25'
 
@@ -250,6 +265,11 @@ evidence:
       assumptions:
         - Packings permit arbitrary orientations and boundary contact.
         - The paper's open-box formulation and limiting argument apply to unit squares.
+    external_review:
+      state: not-reviewed
+      date: '2026-08-30'
+      note: >-
+        Not read here. Note that this same source's n = 11 argument needed a source-distinct repair (E-n011-repaired-lower), which is the standing reason not to treat this author's printed proofs as reviewed.
     limitations: Complete external published proof; not independently audited here.
     source_reviewed: '2026-08-25'
 
@@ -272,6 +292,11 @@ evidence:
       assumptions:
         - Packings permit arbitrary orientations and boundary contact.
         - The nonavoidance lemmas in Section 1 apply to the case-specific point systems.
+    external_review:
+      state: not-reviewed
+      date: '2026-08-30'
+      note: >-
+        Transcribed with its theorem and pinpoints; nobody here has worked through the argument.
     limitations: Complete external published proofs; not independently audited here.
     source_reviewed: '2026-08-25'
 
@@ -294,6 +319,11 @@ evidence:
       assumptions:
         - Packings permit arbitrary orientations and boundary contact.
         - The continuous unavoidable-set result in Theorem 8 applies to the displayed systems.
+    external_review:
+      state: not-reviewed
+      date: '2026-08-30'
+      note: >-
+        Transcribed with its theorem and pinpoints; nobody here has worked through the argument.
     limitations: Complete external published proofs; not independently audited here.
     source_reviewed: '2026-08-25'
 

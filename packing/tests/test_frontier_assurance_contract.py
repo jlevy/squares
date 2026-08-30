@@ -325,3 +325,94 @@ def test_frontier_assurance_contract() -> None:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+def external_proof() -> dict[str, object]:
+    """One complete external published proof, of the shape the register carries six of."""
+    return {
+        "id": "E-example-external-proof",
+        "claim": "lower-bound",
+        "scope": {"n_values": [7]},
+        "assurance": "verified",
+        "method": "published-proof",
+        "performed_by": "source-author",
+        "novelty": "previously-published",
+        "relationship_to_generator": "not-applicable",
+        "origin": "external",
+        "source_key": "[Example 1999]",
+        "replay_status": "not-attempted",
+        "proof": {
+            "source": "resources/papers/example.pdf",
+            "theorem": "Theorem 1",
+            "scope": "every n at least 7",
+            "pinpoints": "page 3",
+            "assumptions": "none beyond the stated hypotheses",
+        },
+        "limitations": "External published proof.",
+        "source_reviewed": "2026-08-30",
+        "external_review": {"state": "not-reviewed", "date": "2026-08-30"},
+    }
+
+
+def test_an_external_proof_must_say_whether_anyone_read_it() -> None:
+    """`verified` on someone else's argument is legitimate; silence about it is not.
+
+    A published proof proves its claim whether or not we read it, so this does not change
+    the assurance. What it changes is whether a reader can tell which verified claims rest
+    on an argument nobody here has worked through -- and `[Stromquist 2003]`'s n = 11
+    argument needed a source-distinct repair, so the distinction is not hypothetical.
+    """
+    record = external_proof()
+    assert check_evidence_semantics(record) == []
+
+    silent = {key: value for key, value in record.items() if key != "external_review"}
+    assert any(
+        "must declare external_review.state" in error
+        for error in check_evidence_semantics(silent)
+    )
+
+
+def test_reading_a_proof_does_not_promote_it() -> None:
+    """An informal review is a reading, not a formal check; the method is unchanged.
+
+    `proof-assistant-checked` is the formal lane and is a different thing entirely. If
+    reviewing a proof upgraded its method, the register would lose the distinction between
+    a careful human reading and a machine-checked proof object.
+    """
+    record = external_proof()
+    record["external_review"] = {
+        "state": "informally-verified",
+        "date": "2026-08-30",
+        "note": "Worked through Theorem 1; no error found.",
+    }
+    assert check_evidence_semantics(record) == []
+    assert record["method"] == "published-proof"
+
+
+def test_a_defect_found_in_a_source_is_recordable() -> None:
+    """The case the layer exists for: we read it and it was wrong."""
+    record = external_proof()
+    record["external_review"] = {
+        "state": "defect-found",
+        "date": "2026-08-30",
+        "note": "The printed figure omits a case; proved separately rather than repaired.",
+    }
+    assert check_evidence_semantics(record) == []
+
+
+def test_every_external_proof_in_the_register_declares_its_review() -> None:
+    path = Path(__file__).resolve().parent.parent / "frontier" / "evidence.yaml"
+    document = yaml.safe_load(path.read_text(encoding="utf-8"))
+    external = [
+        record
+        for record in document["evidence"]
+        if record.get("method") in {"published-proof", "proof-audited"}
+        and record.get("origin") in {"external", "independently-external"}
+    ]
+    assert len(external) == 6, "the count moved; check the new record declares its review"
+    for record in external:
+        assert record["external_review"]["state"] in {
+            "not-reviewed",
+            "informally-verified",
+            "defect-found",
+        }, record["id"]
