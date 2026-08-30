@@ -27,40 +27,49 @@ from devtools.logrollup import REGISTRY
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("log", type=Path, help="an agent session log")
+    parser.add_argument("logs", type=Path, nargs="+", help="agent session logs")
     parser.add_argument(
         "--out",
         type=Path,
         default=None,
-        help="directory to write <session-id>.yaml into; default prints to stdout",
+        help="directory to write <log-stem>.yaml into; default prints to stdout",
     )
     namespace = parser.parse_args(argv)
-    if not namespace.log.is_file():
-        print(f"  no such log: {namespace.log}", file=sys.stderr)
-        return 1
+    failed = 0
+    for log in namespace.logs:
+        failed += _one(log, namespace.out)
+    return 1 if failed else 0
 
+
+def _one(log: Path, out: Path | None) -> int:
+    """Roll up one log, returning 1 on failure so a batch can carry on."""
+    if not log.is_file():
+        print(f"  no such log: {log}", file=sys.stderr)
+        return 1
     try:
-        reader = REGISTRY.for_path(namespace.log)
+        reader = REGISTRY.for_path(log)
     except LookupError as error:
         print(f"  {error}", file=sys.stderr)
         return 1
 
-    rollup = reader.read(namespace.log)
+    rollup = reader.read(log)
     text = yaml.safe_dump(rollup.payload(), sort_keys=False, allow_unicode=True, width=88)
-    if namespace.out is None:
+    if out is None:
         print(text)
         return 0
 
-    namespace.out.mkdir(parents=True, exist_ok=True)
-    name = rollup.source.session_id or namespace.log.stem
-    destination = namespace.out / f"{name}.yaml"
+    out.mkdir(parents=True, exist_ok=True)
+    # Named by the log's own stem, never by `session_id`. A subagent transcript carries
+    # its parent's session id, so keying on that silently overwrote the parent's record
+    # with the last subagent's.
+    destination = out / f"{log.stem}.yaml"
     destination.write_text(text, encoding="utf-8")
     calls = rollup.extra.get("tool_calls", {})
     turns = rollup.extra.get("turns", {})
-    print(f"  wrote {destination} ({reader.harness})")
     print(
-        f"  {rollup.source.records} records, {turns.get('assistant', 0)} turns, "
-        f"{calls.get('total', 0)} tool calls, {rollup.span.hours:.2f} h wall"
+        f"  {destination.name}: {rollup.source.records} records, "
+        f"{turns.get('assistant', 0)} turns, {calls.get('total', 0)} tool calls, "
+        f"{rollup.span.hours:.2f} h"
     )
     return 0
 

@@ -43,8 +43,13 @@ records can be told apart.
 **Dropped, and stated because a record whose losses are undocumented gets read as
 complete:** every prose body — assistant text, thinking text, user messages, tool
 `stdout` and `stderr`, file contents, and diffs.
-A shell command is reduced to its leading executable word, which is identity rather than
-content. Nothing reconstructs a command line from these files.
+A shell command is reduced to the tool it runs and a structural shape, both identity
+rather than content.
+Nothing reconstructs a command line from these files.
+
+**One record per log, named by the log’s own stem.** A subagent transcript carries its
+parent’s `session_id`, so keying the filename on that would overwrite the parent’s
+record with the last subagent’s.
 
 ## Reading the numbers
 
