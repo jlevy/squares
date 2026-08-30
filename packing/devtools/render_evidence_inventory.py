@@ -237,7 +237,8 @@ def render() -> str:
     # record from elsewhere being cited eighty-eight times is a dependency.
     borrowed = [pair for pair in ranked if not ours(pair[1])]
     top_count, top = borrowed[0] if borrowed else ranked[0]
-    state = (top.get("external_review") or {}).get("state")
+    review = top.get("external_review")
+    state = str((review or {}).get("state") or "")
     read_line = {
         "not-reviewed": (
             "It is an external proof nobody here has read, which makes it simultaneously "
