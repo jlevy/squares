@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 378
+count: 379
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10368,3 +10368,47 @@ defects:
     future implementation that again discards its certificates is caught.
   bead: think-6zaz
   recorded_in: packing/campaign/explorations/X-006-the-discriminating-control-at-n5.md
+- id: D-379
+  title: An operating rule understated its own measured cost by quoting the transcript, not the rollup
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: 'from the OR-3 rewrite on 2026-08-30 until an audit compared it with the rollup'
+  severity: low
+  status: fixed
+  what: >-
+    `OR-3` gained a paragraph pricing the waste it exists to prevent: time spent watching a
+    gate finish. It reported `233.6s` across three `.gate-running` polling calls and "about
+    17% of the session".
+
+    The retained rollup for that same session records `.gate-running` at **four** calls
+    totalling `345.119s`, a test-wait command at three calls totalling `245.602s`, and
+    `wall_seconds: 3187.584` -- so the share is **18.5%**, not 17%. The same commit
+    reported `585.6s across 63 one-off code invocations`; the rollup's `one_off_code` block
+    says `count: 72, total_seconds: 732.861`.
+
+    Both figures were read off the transcript by hand while the rollup that measures them
+    sat in the repository, which is `OR-1` inside the rule that cites `OR-1`'s sibling.
+  consequence: >-
+    Flattering, and pointedly so: every error understated the waste. A rule justified by a
+    number is only as strong as the number, and a reader checking `OR-3` against the rollup
+    would have found the rule's own evidence contradicting its source -- which is the fastest
+    way to make a rule ignorable.
+
+    Nothing downstream consumed the figures, so no other claim moved.
+  fix: >-
+    `OR-3` now quotes the rollup's fields and names the file, and says what the earlier
+    numbers were so a reader who saw them can tell which is current.
+  regression: >-
+    None that runs. `check_synopsis` binds generated blocks and aggregates, not prose in
+    `operating-rules.md`, and a checker that verified a sentence against a YAML field would
+    have to be told which field the sentence means -- the same limit `D-372` records for
+    `README.md` and `TUTORIAL.md`.
+
+    What contains it is narrower and worth stating: a number in a rule should name the
+    artifact it came from, so the next reader can check it in one lookup rather than
+    re-deriving it. That is now true of this paragraph and is the pattern to copy.
+  bead: think-s424
+  recorded_in: operating-rules.md

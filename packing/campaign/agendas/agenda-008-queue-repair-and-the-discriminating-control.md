@@ -157,11 +157,18 @@ agenda:
       object than a census, and it is what would justify spending the next block
       somewhere else.
 
-      The first branch fired instead, and the control turned out to be one the record had
-      been quoting since 2026-08-23 without ever retaining it, which is D-376. It
-      discriminates on both of its two possible answers, and the branch where the count is
-      two refutes contact + closure, the relation X-005 declared. What it waits on is the
-      count itself, which exp-042 already names as a declared scope refusal.
+      The second branch fired, and it carried more than a refusal usually does. The typed
+      statement names the missing quantity exactly -- exp-042's declared scope refusal
+      `A_to_B_stationary_connection` -- and prices the two routes that cannot supply it.
+      Alongside it, a *candidate* control was retained: the pair the record had been
+      quoting since 2026-08-23 without ever keeping its endpoints, which is D-376. Both of
+      its possible answers separate the candidate relations, and the branch where the count
+      is two refutes contact + closure, the relation X-005 declared.
+
+      It is a candidate and not a control because the first branch requires a proved count
+      and `component_count` is null. D-378 records the related finding that no retained
+      control can separate contact + closure from a relation that merges everything, which
+      is why this pair reaches something nothing else does.
     artifacts:
     - devtools/build_n5_identity_pair.py
     - campaign/series/series-000-smoke-and-calibration/results/bc-083-n5-identity-pair.json

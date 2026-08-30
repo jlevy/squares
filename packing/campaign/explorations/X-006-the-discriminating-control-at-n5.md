@@ -1,5 +1,5 @@
 ---
-title: X-006 — n = 5 does admit a discriminating control, and it is the one D-034 has been quoting
+title: X-006 — the candidate discriminating control at n = 5 is the one D-034 has been quoting
 softschema:
   contract: packing.squares:Exploration/v1
   schema: ../schemas/exploration.schema.yaml
@@ -7,7 +7,7 @@ softschema:
   status: enforced
 exploration:
   id: X-006
-  title: n = 5 admits a discriminating control, and it is the one D-034 has been quoting
+  title: The candidate discriminating control at n = 5 is the one D-034 has been quoting
   date: '2026-08-30'
   author: Claude (agent), under BC-083 in agenda-008
   campaign: packing.squares
@@ -15,12 +15,13 @@ exploration:
     BC-083 asked whether n = 5 can be given a discriminating identity control -- one whose
     proved component count is neither one nor its labelled count -- since D-373 showed the
     existing quotient controls all answer one and D-375 showed the n = 4 labelled control
-    answers a number no relabelling-invariant relation can reach. The answer is yes, and
-    the control has been named in D-034 since 2026-08-23 without its two endpoints ever
-    being retained. They are retained now. Whichever way its component count resolves it
-    separates relations no existing control separates, and one of the two branches refutes
-    contact + closure, the standing sole survivor. What it lacks is that count, and exp-042
-    already names the missing claim as a declared scope refusal.
+    answers a number no candidate can reach. A candidate control exists: the pair D-034 has
+    named since 2026-08-23 without its two endpoints ever being retained. They are retained
+    now, and whichever way its component count resolves it separates relations no existing
+    control separates, with one branch refuting contact + closure, the standing sole
+    survivor. It is a candidate rather than a control because that count is not proved --
+    this report delivers the exit's second branch, naming the missing claim, which exp-042
+    already records as a declared scope refusal.
   sources:
   - packing/campaign/series/series-000-smoke-and-calibration/results/bc-083-n5-identity-pair.json
   - packing/campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json
@@ -31,7 +32,7 @@ exploration:
   - defects.md
   proposes: []
 ---
-# X-006 — The Discriminating Control at `n = 5`
+# X-006 — The Candidate Discriminating Control at `n = 5`
 
 **Date:** 2026-08-30
 
@@ -61,8 +62,8 @@ component count **one**, so a relation that merges everything passes them.
 A control whose answer is one confirms every candidate.
 
 [`D-375`](../../../defects.md) is the upper one: the `n = 4` labelled control has count
-**24**, and every candidate relation is invariant under relabelling by construction, so
-each reports one against it.
+**24**, and its 24 states are measured to collapse to a single geometric key and a
+single contact certificate, so every candidate reports one against it.
 A control whose answer no candidate can reach refutes every candidate.
 
 Neither bracket tests anything, and they fail in opposite directions.

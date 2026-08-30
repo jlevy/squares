@@ -10,11 +10,13 @@ change to either the schema or the renderer fails here rather than in a stale ta
 
 from __future__ import annotations
 
+from dataclasses import replace
 from pathlib import Path
 
 from devtools.render_agenda_map import (
     STATE_MEANING,
     STATE_ORDER,
+    Commitment,
     load,
     render,
     violations,
@@ -65,29 +67,47 @@ def test_states_come_from_the_state_field_not_the_status_field() -> None:
 def test_a_blocked_cell_with_all_predecessors_complete_is_reported() -> None:
     """The map's whole reason for existing is catching a queue that has stalled.
 
-    A cell whose blockers are discharged but whose state still reads `blocked` is
-    takeable and invisible. The renderer must say so -- but only when nothing else
-    blocks it. A cell whose edge cleared while its stated condition did not is still
-    blocked, and calling it takeable would be the same class of wrong claim the map
-    exists to remove. `BC-029` is exactly that case: `BC-027` is complete, and it still
-    waits on an independent acceptance decision.
+    On the real queue no cell is currently in that state -- `BC-029`'s edge has cleared but
+    it still states another blocker -- so asserting against real data only ever exercises
+    the silent branch, and deleting the whole reporting block would leave it green. The
+    positive branch is therefore driven by a synthetic queue, and both branches are checked
+    against the same renderer.
     """
-    rows = load()
-    done = {c.id for c in rows if c.state == "complete"}
-    blocked = [c for c in rows if c.state == "blocked"]
-    edge_cleared = [c for c in blocked if c.depends_on and set(c.depends_on) <= done]
-    takeable = [c for c in edge_cleared if not c.blocked_on]
-    text = render(rows)
-    if takeable:
-        assert "have every predecessor" in text
-        for c in takeable:
-            assert f"`{c.id}`" in text
-    else:
-        assert "have every predecessor" not in text
-    # A cell whose edge cleared but which states another blocker must not be advertised.
-    for c in edge_cleared:
-        if c.blocked_on:
-            assert f"and no other stated blocker, so `{c.id}`" not in text
+    done = Commitment(
+        agenda="agenda-001",
+        agenda_status="active",
+        doc="agenda-001-x.md",
+        id="BC-001",
+        state="complete",
+        priority=0,
+        purpose="research",
+        owner_focus="insight",
+        question="a finished predecessor",
+        bead="think-aaaa",
+        depends_on=(),
+        blocked_on="",
+        discharged_by="",
+    )
+    stalled = replace(
+        done,
+        id="BC-002",
+        state="blocked",
+        question="a cell whose only blocker is discharged",
+        bead="think-bbbb",
+        depends_on=("BC-001",),
+    )
+    text = render([done, stalled])
+    assert "have every predecessor" in text
+    assert "`BC-002`" in text
+
+    # The same cell, now stating a second blocker, must not be advertised as takeable.
+    # It belongs to neither summary bullet: its edge has cleared, so it is not waiting on
+    # a commitment, and it has an edge, so it is not in the no-predecessor set either. It
+    # is simply still blocked, and the map must say nothing rather than something wrong.
+    still_blocked = replace(stalled, blocked_on="an acceptance decision nobody has made")
+    quiet = render([done, still_blocked])
+    assert "have every predecessor" not in quiet
+    assert "an acceptance decision nobody has made" in quiet
 
 
 def test_the_rendered_map_names_every_live_commitment() -> None:

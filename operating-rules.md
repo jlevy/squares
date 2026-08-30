@@ -88,14 +88,18 @@ being fast at `499s` with one step 94% of it.
 regardless, so the split moves feedback latency and not coverage.
 
 **The waste this rule names is measured now, and it is the coordinator’s, not the
-gate’s.** The rollup of this session’s own log is the evidence: `233.6s` in
-`.gate-running` polling loops across three calls, plus `245.6s` in another three that
-waited on a test run — about 17% of the session spent watching a gate that was going to
-finish either way.
-Twice the gate was started against a tree that then changed underneath
-it, and both runs had to be discarded.
-The rule was already written; what was missing was the number saying how much ignoring
-it costs.
+gate’s.** The evidence is the retained rollup
+[`5cd11e53`](packing/campaign/resource-usage/5cd11e53-fb82-4a28-ab2a-0c26f16fe7e5.yaml),
+quoted from its own fields: `345.1s` across **four** `.gate-running` polling calls, plus
+`245.6s` across three that waited on a test run, against `3187.6s` of wall — **18.5%**
+of the session spent watching a gate that was going to finish either way.
+Twice the gate was started against a tree that then changed underneath it, and both runs
+had to be discarded.
+
+The first version of this paragraph said `233.6s` across three calls and “about 17%”,
+read off the transcript rather than the rollup ([D-379](defects.md)). Understating the
+waste in the rule that exists to stop it is the wrong direction to be wrong in, and the
+rollup is one field lookup away.
 
 ## OR-4: Take the next slice from the handoff, not from the backlog
 

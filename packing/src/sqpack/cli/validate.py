@@ -1491,10 +1491,12 @@ STEPS: tuple[Step, ...] = (
             *_CORE,
         ),
     ),
+    # 28s, so it stays out of `--edit` -- but that follows from `fast=False` alone, since
+    # `_select_steps` filters to the fast steps before `broad` is consulted. The flag was
+    # set here and did nothing; a step is excluded from `--edit` by not being fast.
     Step(
         "D-034's n=5 identity pair still reproduces",
         _n5_identity_pair,
-        broad=True,
         touches=(
             *_CORE,
             "packing/devtools/build_n5_identity_pair.py",

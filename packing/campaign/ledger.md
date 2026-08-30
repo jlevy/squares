@@ -371,7 +371,7 @@ Status: **active**. Eight to nine hours in four blocks. Block 1 is first because
 
 - X-004 — An exact algebraic characterization of the n = 29 record
 - X-005 — The relation the atlas should count, and why its acceptance rule could not test one
-- X-006 — n = 5 admits a discriminating control, and it is the one D-034 has been quoting
+- X-006 — The candidate discriminating control at n = 5 is the one D-034 has been quoting
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
