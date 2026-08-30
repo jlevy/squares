@@ -4,7 +4,7 @@
 
 **Author:** Claude (agent), from a working session with the repository owner
 
-**Status:** Phase 1 landed 2026-08-30; phase 2 is `BC-079` in agenda-007
+**Status:** Both phases landed 2026-08-30, under `BC-077` and `BC-079` in agenda-007
 
 ## Overview
 
@@ -204,18 +204,18 @@ every artifact in the repository is well-formed.
   cost is legible. Nothing about the check changes; only which step reports it.
 - [x] Record the measured before and after in `D-370`.
 
-### Phase 2: The tier contract
+### Phase 2: The tier contract — landed
 
-- [ ] Re-derive tier membership from what each step can catch and how often, and write
+- [x] Re-derive tier membership from what each step can catch and how often, and write
   the argument down. The candidate shape, to be confirmed against the timings rather than
   assumed: `--records` before every push; `--fast` at a block boundary; the default
   before a commit or handoff; `--strict` once or twice a session.
-- [ ] Decide `D-366`. The `negative controls` step exceeds the 900-second per-step cap
+- [x] Decide `D-366`. The `negative controls` step exceeds the 900-second per-step cap
   at 140 controls, needing `1268s` uncapped.
   Raising the cap weakens the same guard for every other step, so the options are
   sharding the suite, moving it to `--strict` with its own cap, or reducing per-control
   setup cost. The controls themselves are not at fault and none may be dropped.
-- [ ] Restate the cadence table in `conventions.md` from measurement after the changes
+- [x] Restate the cadence table in `conventions.md` from measurement after the changes
   land, as it was restated once already when it claimed sixty seconds for an
   eight-minute tier.
 - [ ] Roll up this session’s agent logs into the existing `CodexEfficiencyRollup/v2`

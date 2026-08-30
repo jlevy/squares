@@ -449,9 +449,31 @@ A latency column nobody re-measures is how a tier stops being chosen on cost.
 
 The pre-push row moved because a schema validator was swapped and exact geometry left a
 step named for schemas, not because anything stopped being checked
-([`D-370`](defects.md)). Whether these are the right tiers at all is `BC-079` in
-[agenda-007](packing/campaign/agendas/agenda-007-twelve-hour-steered-run.md), which owns
-re-deriving this table from what each step can catch rather than from what it costs.
+([`D-370`](defects.md)).
+
+**The edit-loop row is new, and it is where `BC-079` landed.** The tier called `--fast`
+had stopped being fast: measured at `499s`, with `fast behavioral tests` accounting for
+all but about 33 seconds of it.
+A tier priced at the cost of its widest step is a tier people skip, and that is the
+mechanism `D-369` records — seven CI failures on one branch, every one a record check,
+none a behavioural test.
+So the split is by what a step catches rather than by what it costs: `--edit` carries
+the seventeen steps that answer a question about the change in front of you, and
+`--fast` adds the one step whose cost is breadth.
+
+Three properties make the split safe rather than merely cheaper, and each is a test:
+
+- **The tiers nest.** `--records` is contained in `--edit`, contained in `--fast`,
+  contained in the full run — checked as sets, so swapping two steps between tiers
+  cannot pass by keeping the totals equal.
+- **Every step is reachable from the full run**, so a step can be deferred to a wider
+  tier and never dropped out of all of them.
+- **Exclusion is opt-out.** A new step joins `--edit` unless explicitly marked `broad`,
+  so forgetting the marker makes the tier slower rather than blinder.
+
+Being outside `--edit` is not being outside the gate.
+CI runs the full gate on every push, so the split changes feedback latency rather than
+coverage.
 
 A checkpoint merge may retain a known strict/deep failure when the normal gate passes
 without skips, the exact failure and its limitation are recorded in the defect log and

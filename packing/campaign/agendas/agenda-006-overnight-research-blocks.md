@@ -1315,7 +1315,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5, 11]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Are the gate's tiers the right tiers, and is the coordinator running them at the
@@ -1341,6 +1341,9 @@ agenda:
       impressions of them.
     artifacts:
     - docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md
+    - packing/campaign/agendas/agenda-007-twelve-hour-steered-run.md
+    - packing/benchmarks/bench_schema_validation.py
+    - conventions.md
     bead: think-c46d
     depends_on: [BC-074]
     workflows: [efficiency-loop]

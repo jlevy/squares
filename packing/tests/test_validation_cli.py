@@ -422,13 +422,20 @@ def test_invalid_worker_count_and_unmatched_selection_are_actionable() -> None:
 
 
 @pytest.mark.parametrize(
-    "narrowing", [("--only", "fast behavioral tests"), ("--fast",), ("--records",)]
+    "narrowing",
+    [("--only", "fast behavioral tests"), ("--fast",), ("--records",), ("--edit",)],
 )
 def test_strict_mode_refuses_a_partial_validation_surface(narrowing: tuple[str, ...]) -> None:
+    """Every tier flag must be refused under --strict, including new ones.
+
+    `--edit` is parametrized here rather than tested separately because the risk with a
+    new tier flag is that it is added to the selector and forgotten in the refusal, which
+    would let `--strict` quietly report a partial surface as a complete one.
+    """
     status, _, stderr = _invoke("--strict", *narrowing)
 
     assert status == 2
-    assert "--strict cannot be combined with --only, --fast, or --records" in stderr
+    assert "--strict cannot be combined with --only, --fast, --records, or --edit" in stderr
 
 
 def test_the_records_tier_selects_every_record_check_and_no_test() -> None:
@@ -673,3 +680,143 @@ def test_frontier_contract_accepts_the_declared_schema_metadata(
     assert stderr == ""
     assert "100 artifacts, n = 1..100; formal lane: 35 proved, 65 open" in stdout
     assert "reported lane: 35 proved, 65 open" in stdout
+
+
+def _budget_context(*, timeout_seconds: float, explicit: bool) -> validate.Context:
+    return validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+        timeout_seconds=timeout_seconds,
+        timeout_is_explicit=explicit,
+    )
+
+
+def _sleeping_step(name: str, seconds: float, budget: float | None) -> validate.Step:
+    def action(context: validate.Context) -> str:
+        return validate._run(
+            context, (sys.executable, "-c", f"import time; time.sleep({seconds})")
+        )
+
+    return validate.Step(name, action, budget_seconds=budget)
+
+
+def test_step_budget_raises_the_default_cap_for_that_step_only(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`D-366`: the control suite outgrew the shared cap and nothing was wrong with it.
+
+    A budget lets one step declare a higher ceiling without touching the ceiling every
+    other step runs under, which is the trade that made raising the shared cap the wrong
+    fix.
+    """
+    monkeypatch.setattr(validate, "ACTIVITY_MARKER", tmp_path / ".gate-running")
+    context = _budget_context(timeout_seconds=0.05, explicit=False)
+    budgeted = _sleeping_step("budgeted", 0.4, 5)
+    unbudgeted = _sleeping_step("unbudgeted", 0.4, None)
+
+    summary = validate._run_selected([budgeted, unbudgeted], context, [])
+    by_name = {result.name: result for result in summary.results}
+    assert by_name["budgeted"].status == "passed"
+    assert by_name["unbudgeted"].status == "failed"
+    assert "timed out after 0.05 seconds" in by_name["unbudgeted"].reason
+
+
+def test_an_explicit_operator_timeout_beats_a_step_budget(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Tightening the cap by hand must bound the run, budgets included.
+
+    A budget exists to correct a project-wide default that one step is known to exceed.
+    Someone typing `--timeout-seconds` is bounding *this* run deliberately, and a step
+    opting out of that would make the flag advisory.
+    """
+    monkeypatch.setattr(validate, "ACTIVITY_MARKER", tmp_path / ".gate-running")
+    context = _budget_context(timeout_seconds=0.05, explicit=True)
+    summary = validate._run_selected([_sleeping_step("budgeted", 0.4, 5)], context, [])
+    assert summary.results[0].status == "failed"
+    assert "timed out after 0.05 seconds" in summary.results[0].reason
+
+
+def test_a_step_that_exceeds_its_own_budget_still_fails(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A budget is a declaration, not a waiver.
+
+    Without this, a budget would be indistinguishable from switching the cap off for the
+    step that claims one, and a hung control suite would hang the run instead of
+    reporting.
+    """
+    monkeypatch.setattr(validate, "ACTIVITY_MARKER", tmp_path / ".gate-running")
+    context = _budget_context(timeout_seconds=0.05, explicit=False)
+    summary = validate._run_selected([_sleeping_step("budgeted", 2, 0.2)], context, [])
+    assert summary.results[0].status == "failed"
+    assert "timed out after 0.2 seconds" in summary.results[0].reason
+
+
+def test_the_only_budgeted_step_is_the_one_d366_names() -> None:
+    """A budget is an exception, so the set of them is worth watching.
+
+    If a second step acquires one, that is a signal the shared cap is wrong rather than
+    that another step is special, and this test is where that conversation starts.
+    """
+    budgeted = {
+        step.name: step.budget_seconds for step in validate.STEPS if step.budget_seconds
+    }
+    assert budgeted == {"negative controls": 1800}
+
+
+def test_the_edit_tier_cannot_under_run() -> None:
+    """Tiers must nest, or a narrower tier could contain a step a wider one lacks.
+
+    This is the property that makes retiering safe to do at all. `BC-079` split `--edit`
+    out of `--fast` because one step was 451 seconds more than the other seventeen
+    combined, and the risk in any such split is that a step ends up reachable from the
+    cheap tier and not the expensive one, or from neither.
+
+    Containment is checked as sets rather than counts, so a swap of two steps between
+    tiers cannot pass by keeping the totals equal.
+    """
+    names = lambda **kw: {  # noqa: E731
+        step.name for step in validate._select_steps(only=[], **kw)
+    }
+    everything = names(fast=False)
+    fast = names(fast=True)
+    edit = names(fast=False, edit=True)
+    records = names(fast=True, records=True)
+
+    assert records <= edit <= fast <= everything
+    assert fast - edit == {step.name for step in validate.STEPS if step.broad}, (
+        "the only steps --fast adds over --edit are the ones marked broad"
+    )
+
+
+def test_every_step_is_reachable_from_some_tier() -> None:
+    """A step in no tier is a check nobody runs, which is worse than not having it.
+
+    The full run is the backstop: every declared step must appear there, so a step can
+    only ever be *deferred* to a wider tier and never dropped out of all of them.
+    """
+    reachable = {step.name for step in validate._select_steps(only=[], fast=False)}
+    assert reachable == {step.name for step in validate.STEPS}
+
+
+def test_broad_is_opt_out_so_a_new_step_joins_the_edit_tier() -> None:
+    """Forgetting the marker must make the tier slower, never blinder.
+
+    A `broad` default of True would mean a new fast step silently sat outside the edit
+    loop until someone noticed. The default is False, so the failure mode of forgetting
+    is a tier that costs more than it needs to -- which shows up in the timings rather
+    than in a missed regression.
+    """
+    assert validate.Step("probe", lambda _context: "", fast=True).broad is False
+    assert {step.name for step in validate.STEPS if step.broad} == {"fast behavioral tests"}
+
+
+def test_edit_and_fast_are_not_silently_combinable() -> None:
+    """Passing both should say which is wider rather than quietly picking one."""
+    status, _stdout, stderr = _invoke("--edit", "--fast", "--list")
+    assert status == 2
+    assert "different tiers" in stderr

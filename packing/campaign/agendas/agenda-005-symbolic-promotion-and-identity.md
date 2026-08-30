@@ -262,7 +262,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [3, 4, 5]
-    state: ready
+    state: blocked
     priority: 0
     question: >-
       What relation should the atlas count, given that a connected optimal set produces

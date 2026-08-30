@@ -173,7 +173,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5, 11]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Are the gate's tiers the right tiers, and is the coordinator running them at the
@@ -218,11 +218,46 @@ agenda:
 
       A rule an agent reads and a tier that makes the rule unnecessary are different
       fixes, and this block is where they are told apart.
+
+      **Closed 2026-08-30.** The answer to "are these the right tiers" was no, and the
+      reason is one number: `--fast` measured `499s` with `fast behavioral tests` 94% of
+      it, so the tier that catches everything which actually breaks was priced at the cost
+      of the step that never has. `--edit` is that tier without the broad suite, measured
+      at `32.9s`. The ladder is now `--records` at `4s`, `--edit` at `33s`, `--fast` at
+      `499s`, and the full gate, and CI still runs `--fast` and the full gate on every
+      push, so the split moved feedback latency and not coverage.
+
+      Under-running was the failure mode to design against, and it is answered by making
+      exclusion opt-*out*: a new step joins `--edit` unless explicitly marked `broad`, so
+      forgetting the marker makes the tier slower rather than blinder. Three tests hold
+      it -- the tiers nest as sets, every step is reachable from the full run, and the set
+      of broad steps is asserted rather than assumed.
+
+      `D-366` is decided by the second repair it named, a per-step budget, with no control
+      dropped or retargeted. The verification run then improved the argument by
+      contradicting its premise: 142 controls took `736s`, inside the `900s` cap the step
+      was said to exceed, against `1268s` measured five days earlier at 137 controls. A
+      spread of `1.7x` straddling the cap means the step fails *intermittently*, which is
+      indistinguishable from the outside from a control that stopped firing -- a better
+      case for a declared budget than the one this block started with.
+
+      The coordinator half is now measured rather than argued. This session's rollup is
+      retained at `campaign/resource-usage/5cd11e53-....yaml`: `233.6s` in `.gate-running`
+      polling loops across three calls plus `245.6s` in three more waiting on tests, about
+      17% of the session, and two gate runs started against trees that then changed
+      underneath them and had to be discarded. `OR-3` already said not to do that; what it
+      lacked was the price. It also records `585.6s` across 63 one-off code invocations,
+      which is `OR-1`'s target measured for the first time.
+
+      One thing this block did *not* settle: whether a reachability-scoped selector is
+      worth building on top of the new tiers. At `33s` for the edit loop the answer is
+      probably no, and that is a measurement rather than a decision, so `think-d0q7` stays
+      where `BC-062` left it.
   - id: BC-080
     purpose: measurement_validation
     owner_focus: correctness
     instances: [3, 4, 5]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       What relation should the atlas count, given that a connected optimal set produces

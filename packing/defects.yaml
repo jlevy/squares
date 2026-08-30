@@ -9648,7 +9648,7 @@ defects:
   detected_by: gate
   latent_for: 'introduced and detected in the same session'
   severity: low
-  status: outstanding
+  status: fixed
   what: >-
     The strict tier's `negative controls` step is killed at the 900-second per-step
     timeout. Nothing is wrong with the controls: run without that cap the suite completes
@@ -9661,21 +9661,45 @@ defects:
     repository's whole argument for controls is that a guard nobody watches fire is
     untested.
   fix: >-
-    Not fixed here, and the honest reason is that the cheap fix and the right fix differ.
-    Raising the cap would make the step pass and would weaken the same guard for every
-    other step that shares it. The cost is concentrated rather than spread: this session
-    took the suite from 113 controls to 137, and the expensive additions are the ones whose
-    `run` invokes the exact-LP tests, where each control pays a full module import and the
-    end-to-end Trump solve behind it. Pointing those at a cheaper target, or giving the
-    step its own declared budget, is the repair; both are choices about the gate's contract
-    rather than edits to a control.
+    Fixed in `BC-079` by the second of the two repairs this entry named: the step declares
+    its own budget. `Step.budget_seconds` raises the ceiling for the step that claims one
+    and leaves it untouched for the other thirty-nine, which is the trade that made raising
+    the shared cap the wrong answer. `negative controls` declares `1800s` against the
+    `1268s` measured uncapped at 137 controls, so the number is that measurement plus room
+    for a suite that only grows -- not a value chosen to make one run pass.
+
+    Three properties keep a budget from becoming a waiver, and each is a test rather than
+    an intention. A step that exceeds its own budget still fails, so a hung control suite
+    reports instead of hanging the run. An explicit `--timeout-seconds` still wins, because
+    a budget corrects a project-wide default and may not override a bound an operator typed
+    for this run. And the set of budgeted steps is asserted to be exactly one: a second
+    step acquiring a budget is evidence the shared cap is wrong rather than that another
+    step is special, and the test is where that argument has to be made.
+
+    No control was dropped, made cheaper, or pointed at a different target. The first
+    repair this entry proposed -- retargeting the exact-LP controls -- remains available
+    and is now an optimization rather than a prerequisite.
+
+    **The verification run changed the argument, and it is recorded rather than tidied.**
+    Re-run on 2026-08-30 with 142 controls, the step took `736s` and all 142 fired -- well
+    inside the `900s` cap it was said to exceed. So this run would have passed without the
+    budget, and "it was over the cap, now it fits" is not what happened. What the two
+    measurements together show is worse than a step that is simply too slow: `1268s` on
+    2026-08-29 at 137 controls against `736s` today at 142, a spread of about `1.7x` on a
+    growing suite, straddling the cap in both directions.
+
+    A step whose cost varies by that much around its own limit fails *intermittently*,
+    which is the least diagnosable red there is -- indistinguishable, from the outside,
+    from a control that stopped firing. That is the case for a declared budget rather than
+    against it. The budget is sized against the slower of the two observations plus room
+    to grow, so the step's verdict stops depending on how loaded the container was.
   regression: >-
     Measured rather than inferred: `uv run --frozen --all-extras --group dev python -m
     devtools.run_negative_controls devtools/controls.yaml -j 1` completes in `1268s` with
     all 137 firing, against a `900s` cap. Recorded with the count so the next session can
     see whether the number moved or the machine did.
-  bead: think-c7oo
-  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+  bead: think-av72
+  recorded_in: packing/src/sqpack/cli/validate.py
 
 - id: D-367
   title: Degree bounds on the Kingbird solution were written as bounds on s(n)

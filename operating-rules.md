@@ -71,7 +71,21 @@ the schema validator and moved exact geometry out of the step named for schemas
 ([D-370](defects.md)). That changes how the rule reads: at seventy seconds running the
 record checks was a judgement call, and at four there is no argument for skipping them.
 
-Whether these are the right tiers is `BC-079`, not this rule.
+**Use `--edit` while editing.** `BC-079` split it out of `--fast`, which had stopped
+being fast at `499s` with one step 94% of it.
+`--edit` is 33 seconds and runs everything except that step.
+`--fast` is what a block boundary is for, and CI runs the full gate on every push
+regardless, so the split moves feedback latency and not coverage.
+
+**The waste this rule names is measured now, and it is the coordinator’s, not the
+gate’s.** The rollup of this session’s own log is the evidence: `233.6s` in
+`.gate-running` polling loops across three calls, plus `245.6s` in another three that
+waited on a test run — about 17% of the session spent watching a gate that was going to
+finish either way.
+Twice the gate was started against a tree that then changed underneath
+it, and both runs had to be discarded.
+The rule was already written; what was missing was the number saying how much ignoring
+it costs.
 
 ## OR-4: Take the next slice from the handoff, not from the backlog
 

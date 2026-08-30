@@ -27,7 +27,7 @@ import traceback
 from collections.abc import Callable, Iterator, Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from contextlib import contextmanager, suppress
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 from threading import Lock
 from typing import Literal, Never, override
@@ -139,6 +139,15 @@ class Context:
     inner_jobs: int
     environment: dict[str, str]
     timeout_seconds: float = DEFAULT_TIMEOUT_SECONDS
+    timeout_is_explicit: bool = False
+    """True when an operator named the cap through `--timeout-seconds` or the
+    environment variable, rather than taking the default.
+
+    A step's `budget_seconds` may raise the default cap, because the default is a
+    project-wide guess and one step is known to exceed it. It may not raise a number a
+    person typed: someone tightening the cap is deliberately bounding this run, and a
+    step quietly opting out of that is the bug, not the feature."""
+
     processes: _ProcessRegistry = field(
         default_factory=_ProcessRegistry, compare=False, repr=False
     )
@@ -160,9 +169,44 @@ class Step:
     declared contracts. Every CI failure on the 2026-08-29 branch was one of these and
     none was a test, so they are selectable without paying for the test step (D-369)."""
 
+    broad: bool = False
+    """Excluded from `--edit` because its cost is breadth rather than what it uniquely
+    catches.
+
+    Measured on 2026-08-30: `--fast` is 499s and `fast behavioral tests` is 499s of it,
+    so the other seventeen fast steps together cost about 48 seconds. A tier priced at
+    the cost of its widest step is a tier people skip, which is the mechanism `D-369`
+    records -- seven CI failures, every one a record check, none a behavioural test.
+
+    **The default is the safe direction on purpose.** A new step is in the edit tier
+    unless it says otherwise, so forgetting this flag makes the tier slower rather than
+    blinder. Marking a step `broad` is the change that needs an argument, and
+    `test_the_edit_tier_cannot_under_run` is where it has to be made.
+
+    Being excluded from `--edit` is not being excluded from the gate. Every broad step
+    still runs in `--fast` and above, and CI runs the full gate on every push."""
+
+    budget_seconds: float | None = None
+    """This step's own declared ceiling, for the rare step that legitimately costs more
+    than the shared per-step cap.
+
+    The shared cap exists to stop a hung step consuming the run, and it should stay tight
+    for the forty steps that do not need it. `D-366` is the case that motivated an
+    exception: the control suite is killed at 900 seconds and completes in about 1270,
+    with nothing wrong with it -- it simply grew. Raising the shared cap would have bought
+    that one step a pass by weakening the guard on every other step at once, which is the
+    trade this field exists to refuse.
+
+    A budget is a declaration, not a waiver. It is per step, it is written next to the
+    step that claims it with the measurement that justifies it, and a step that exceeds
+    its own budget still fails. An explicit `--timeout-seconds` on the command line still
+    wins, so an operator can always tighten what a step asked for."""
+
     @property
     def tags(self) -> str:
         tags = ["fast" if self.fast else "full"]
+        if self.fast and not self.broad:
+            tags.append("edit")
         if self.records:
             tags.append("records")
         if self.needs_engine:
@@ -1092,9 +1136,13 @@ STEPS: tuple[Step, ...] = (
     Step("prospective n=101..324 source map and safe seed", _prospective_atlas),
     Step("single-square translation escape screen", _translation_escape_screen),
     Step("abstract size-five contact-scaffold atlas", _contact_scaffold_atlas),
-    Step("negative controls", _negative_controls),
+    # 1268s measured uncapped at 137 controls (D-366), and the suite only grows. The
+    # budget is that measurement plus room for the growth, not a number chosen to make
+    # today's run pass; a control suite that doubles again should be re-argued, not
+    # re-padded.
+    Step("negative controls", _negative_controls, budget_seconds=1800),
     Step("fixed-angle cell is an LP, rebuilt independently", _independent_lp),
-    Step("fast behavioral tests", _fast_tests, fast=True),
+    Step("fast behavioral tests", _fast_tests, fast=True, broad=True),
     Step("exhaustive exact behavioral tests", _exhaustive_exact_tests),
     Step("bead tree", _bead_tree, fast=True, records=True),
     Step("golden basin maps (proved cases, checked against mathematics)", _golden_basins),
@@ -1154,8 +1202,12 @@ def _environment_flag(name: str) -> bool:
     return value == "1"
 
 
-def _select_steps(*, only: list[str], fast: bool, records: bool = False) -> list[Step]:
-    selected = [step for step in STEPS if not fast or step.fast]
+def _select_steps(
+    *, only: list[str], fast: bool, records: bool = False, edit: bool = False
+) -> list[Step]:
+    selected = [step for step in STEPS if not (fast or edit) or step.fast]
+    if edit:
+        selected = [step for step in selected if not step.broad]
     if records:
         selected = [step for step in selected if step.records]
     if only:
@@ -1172,6 +1224,12 @@ def _select_steps(*, only: list[str], fast: bool, records: bool = False) -> list
 
 def _execute_step(step: Step, context: Context) -> StepResult:
     started = time.perf_counter()
+    if (
+        step.budget_seconds is not None
+        and not context.timeout_is_explicit
+        and step.budget_seconds > context.timeout_seconds
+    ):
+        context = replace(context, timeout_seconds=step.budget_seconds)
     try:
         output = step.action(context)
     except StepSkippedError as error:
@@ -1326,6 +1384,11 @@ def _parser() -> ArgumentParser:
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
+    parser.add_argument(
+        "--edit",
+        action="store_true",
+        help="run the edit-loop checks: everything in --fast except the broad test suite",
+    )
     parser.add_argument("--fast", action="store_true", help="run the fast edit-loop checks")
     parser.add_argument(
         "--records",
@@ -1368,10 +1431,16 @@ def _parser() -> ArgumentParser:
 
 
 def _validate_invocation(
-    *, strict: bool, only: list[str], fast: bool, records: bool = False
+    *, strict: bool, only: list[str], fast: bool, records: bool = False, edit: bool = False
 ) -> None:
-    if strict and (only or fast or records):
-        raise UsageError("--strict cannot be combined with --only, --fast, or --records")
+    if strict and (only or fast or records or edit):
+        raise UsageError(
+            "--strict cannot be combined with --only, --fast, --records, or --edit"
+        )
+    if edit and fast:
+        raise UsageError(
+            "--edit and --fast select different tiers; --fast is the wider of the two"
+        )
 
 
 def _validate_runtime() -> None:
@@ -1391,6 +1460,7 @@ def main(arguments: list[str] | None = None) -> int:
             only=namespace.only,
             fast=namespace.fast,
             records=namespace.records,
+            edit=namespace.edit,
         )
         jobs_value = namespace.jobs or os.environ.get("PACKING_VALIDATE_JOBS")
         jobs = (
@@ -1410,6 +1480,7 @@ def main(arguments: list[str] | None = None) -> int:
         else:
             timeout_name = "PACKING_VALIDATE_TIMEOUT_SECONDS"
             timeout_value = os.environ.get(timeout_name)
+        timeout_is_explicit = timeout_value is not None
         timeout_seconds = (
             _positive_seconds(timeout_name, timeout_value)
             if timeout_value is not None
@@ -1418,7 +1489,10 @@ def main(arguments: list[str] | None = None) -> int:
         _validate_runtime()
         require_project_root(PROJECT_ROOT)
         selected = _select_steps(
-            only=namespace.only, fast=namespace.fast, records=namespace.records
+            only=namespace.only,
+            fast=namespace.fast,
+            records=namespace.records,
+            edit=namespace.edit,
         )
         if namespace.list:
             records = [{"name": step.name, "tags": step.tags} for step in selected]
@@ -1437,6 +1511,7 @@ def main(arguments: list[str] | None = None) -> int:
             inner_jobs=inner_jobs,
             environment=environment,
             timeout_seconds=timeout_seconds,
+            timeout_is_explicit=timeout_is_explicit,
         )
         summary = _run_selected(selected, context, namespace.only)
     except ParserExitError as error:
