@@ -24,7 +24,7 @@ Commitments a session may take now, in each agenda's declared order.
 | --- | --- | ---: | --- | --- | --- | --- |
 | agenda-001 | `BC-010` | 0 | insight | research | Are the equal-side n=5 candidates connected in the stationary set, and what verified minimax clearance… | `think-1s0h` |
 | agenda-002 | `BC-017` | 1 | efficiency | tool_validation | Can a stratum be priced in counted LP solves end to end, so enumeration results are comparable to each other… | `think-u97a` |
-| agenda-005 | `BC-049` | 1 | correctness | research | Are the three packings the catalogue annotates "Rigid." actually rigid, on evidence of our own rather than on… | `think-xdly` |
+| agenda-005 | `BC-049` | 1 | correctness | research | Are the packings the catalogue annotates "Rigid." actually rigid, on evidence of our own rather than on the… | `think-xdly` |
 
 ## Blocked, and on what
 

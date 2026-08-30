@@ -309,8 +309,11 @@ agenda:
     state: ready
     priority: 1
     question: >-
-      Are the three packings the catalogue annotates "Rigid." actually rigid, on evidence
-      of our own rather than on the catalogue's word?
+      Are the packings the catalogue annotates "Rigid." actually rigid, on evidence of our
+      own rather than on the catalogue's word? The catalogue annotates four -- n = 5, 11,
+      28 and 40 -- and this commitment carries three of them; n = 11 was already settled
+      locally-rigid on a first-party certificate before this was scoped, which is why it
+      is not in `instances`.
     hypotheses: []
     budget: one W1 research-pass slice of at most 60 minutes on n = 5 alone, then a replan
     entry: >-
