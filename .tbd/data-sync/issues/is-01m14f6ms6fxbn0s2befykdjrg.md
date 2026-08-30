@@ -5,12 +5,12 @@ title: Settle rigidity for n=5, 28 and 40 beyond single-square translation
 kind: task
 status: open
 priority: 2
-version: 5
+version: 6
 labels: []
 dependencies: []
 parent_id: is-01m12zjr144a4kg6rnv1t0pm6n
 created_at: 2026-08-28T15:18:21.210Z
-updated_at: 2026-08-30T12:24:55.522Z
+updated_at: 2026-08-30T13:06:29.214Z
 ---
 The translation escape screen finds no movable square for n=5, 11, 28 and 40, but a miss is one-directional: rotation of a single square and coordinated multi-square motion are outside it. So frontier/n-005, n-028 and n-040 now carry rigidity.property: undetermined, which is a result rather than an absence, while Kingbird annotates all four 'Rigid.'
 
@@ -24,26 +24,22 @@ Do not shortcut this by promoting catalogue_rigid into the rigidity block. That 
 
 ## Notes
 
-2026-08-30 phases 16-17 (session-045). n=40 DECIDED at first order: infinitesimally FLEXIBLE, with an exact witness, and that witness refused at second order.
+2026-08-30 phases 16-19 (session-045). n=40 decided at first order and characterized; nothing promoted.
 
-THE MOTION. All sixteen tilted-block squares turn together, each about its own centre at the same rate, with translations. No frame square moves. Exactly zero gap rate on all 248 contacts that hold in every branch; at each of the 42 corner-touching pairs one separating axis is given up and the other kept, which is all non-overlap asks (it only has to do that at 24 of the 42). Vector in Q(sqrt 2)^120, every claim re-decided in the field.
+RESULT. n=40 is infinitesimally FLEXIBLE, exactly, over Q(sqrt 2). Seven admissible directions are known: one in the null space of the rows every branch carries, six outside it (retained in devtools/n40_rays.py), together spanning rank 5. ALL SEVEN are refused at second order by verified non-negative self-stresses (w.A = 0, w.q < 0, only tight rows entering). This is NOT second-order rigidity: the cone is not bounded, and the record says so in three places.
 
-MECHANISM, checked by hand on the pair (24,25): for two block squares sharing a full edge, the moving corner's rotation term is +1/2 and the host normal's rotation term is -1/2, and they cancel. No instrument that ignores the host's rotation could find this.
+WHERE THE FLEX LIVES. Every admissible direction found, by two unrelated routes, turns squares of the tilted block and leaves all 24 axis-aligned squares fixed. Stronger: 52 of the frame's 72 coordinates are PROVED zero in every branch -- every branch's cone sits inside the relaxed cone, so a coordinate the relaxed rows pin is pinned however the 42 disjunctions resolve, and each carries a Farkas certificate verified in the field. No branch enumeration needed. The other 20 are unproved; 40 targeted searches found no admissible direction for them, which is coverage and not a proof (the translation-escape screen carries the same registered limitation).
 
-METHOD. No 2^42 enumeration. Candidates come from the null space of the single-axis rows (rank 115, null dimension 5) -- exact, so no rounding can push a candidate out of the cone it came from, which is what defeated the LP-vertex route. A candidate is a motion exactly when every disjunctive pair still has an admissible axis, and that choice names the branch directly.
+MECHANISM. For two block squares sharing a full edge, the moving corner's rotation term is +1/2 and the host normal's rotation term is -1/2; they cancel. That is why the block turns in place at first order, and why no instrument ignoring host rotation could see it.
 
-SECOND ORDER. 104 of the 283 tight contacts curve into the obstacle; a verified non-negative self-stress (w.A = 0, w.q < 0, 55 rows carrying weight) rules out every second-order correction. Only tight rows enter the stress -- a contact already opening at first order imposes nothing at second, and including one would assemble a refusal from non-binding constraints.
+METHOD, and the two things that did not work. The 2^42 branch enumeration was never run. Candidates come from exact null spaces -- of the all-branch rows, and of a linear program's ACTIVE SET (the vertex itself cannot be rationalized into its own cone; the set of rows it makes tight is combinatorial and re-solving it exactly gives a direction satisfying those rows by construction). What did not work: the relaxed cone is not a subspace (152 of 248 rows proved to vanish on it, 96 not), so the problem could not be collapsed into 5 dimensions that way.
 
-HOW MUCH OF THE CONE. Measured, not assumed: of the 3124 nonzero integer combinations in [-2,2]^5 of the null basis, exactly four extend, and all four are multiples of one basis vector. So inside the subspace where every all-branch contact is tight, the admissible set is exactly a LINE -- the same shape as n=5. This does not bound the cone: directions leaving some all-branch contact strictly opening are outside the subspace and unsearched. So NOT second-order rigid; one line refused, in one branch.
+DEFECTS. D-390 fixed (incidence != contact; 208 of 560 pair rows). D-391 OUTSTANDING and it INVERTS the n=40 answer -- an assessor that intersects the disjunctions certifies the block's 48 coordinates as pinned and reports this packing rigid. D-392, D-393 (the pre-push floor does not run tests; CI was red 75 min across 4 pushes), D-394. count 394.
 
-D-391's cost is measured, not counterfactual: it INVERTS the answer. An assessor that intersects the disjunctions certifies all 120 coordinates as pinned -- reports this packing rigid. Removing it is what found the witness.
+NOTHING PROMOTED. An infinitesimal flex is not a motion; the gaps curve shut at -t^2/2. frontier n-040 stays `undetermined` and the catalogue's "Rigid." is not contradicted. What is settled is that no first-order argument can establish n=40's rigidity.
 
-INDEPENDENT CONFIRMATION. An adversarial sub-agent reimplemented constraint_rows from scratch and compared all 48,000 entries (zero mismatches), wrote its own finite-motion checker, and confirmed t^2 scaling (fitted exponent 1.981). It also caught a real misstatement: the 42 given-up rows fall across 24 pairs, not one per pair. Corrected everywhere.
+ARTIFACTS. devtools/assess_n40_rigidity.py (gate step 3m18s, full tier, path-selected), devtools/n40_rays.py, devtools/assess_n5_rigidity.py (shared machinery; its name is now wrong and a rename is owed), tests/test_n40_rigidity.py, record bc-049-n40-rigidity-bracket.json, X-007 current.
 
-NOTHING IS PROMOTED. An infinitesimal flex is not a motion. frontier n-040 stays `undetermined`; the catalogue's "Rigid." is not contradicted. What is settled is that no first-order argument can establish n=40's rigidity.
+n=28 untouched: decimals only, no exact construction.
 
-Tools: devtools/assess_n40_rigidity.py (+ shared machinery in assess_n5_rigidity.py, whose name is now wrong and owes a rename); record bc-049-n40-rigidity-bracket.json; tests/test_n40_rigidity.py; gate step "n=40 rigidity bracket still reproduces" (full tier only, ~3 min). X-007 updated for all of it, including making its n=5 disjunction exemption a check rather than prose.
-
-n=28 remains untouched: it retains only decimals and has no exact construction.
-
-NEXT: whether n=40's first-order cone is larger than that line -- i.e. directions outside the null space of the all-branch rows.
+NEXT: bound the cone, or say what a bound needs. With 52 frame coordinates proved the live question is the block's 48 plus the 20 unproved frame ones.
