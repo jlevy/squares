@@ -25,6 +25,16 @@ is; [Assurance in One Minute](#assurance-in-one-minute) is the whole vocabulary.
 
 ## What Has Been Established
 
+An [inventory](packing/frontier/INVENTORY.md) of every claim in the register, generated
+from the evidence records, says which of them this repository established itself, which
+rest on someone else’s argument, and how far each has been checked.
+Seven results are marked `apparently-novel` — first established here as far as the
+archived corpus shows.
+That label is a statement about a search and never a claim of priority, so each names
+the corpus searched, what was searched for, that corpus’s known holes, and **what
+exactly is new**, which is usually narrower than the result: certifying someone else’s
+bound is real work and is not the same as establishing a new bound.
+
 The four theorems, one line each.
 The synopsis’s [results section](SYNOPSIS.md#results-established-here) owns the full
 statements, assurance labels, and the command that replays each one:

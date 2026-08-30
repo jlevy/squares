@@ -133,6 +133,15 @@ def check_evidence_semantics(evidence: Mapping[str, object]) -> list[str]:
     novelty = evidence.get("novelty")
     if novelty == "previously-published" and not evidence.get("source_key"):
         errors.append(prefix + "previously-published evidence must name its source_key")
+    # The vocabulary defines this label as "a statement about the search performed, never
+    # an assertion of priority" -- and a date is not a statement about a search. All four
+    # original claims carried one and none said what was looked for, so the label meant
+    # whatever a reader assumed. A search is also only as good as the corpus it ran over,
+    # which is why the basis names the corpus and its holes rather than just the terms.
+    if novelty == "apparently-novel" and not evidence.get("novelty_basis"):
+        errors.append(
+            "apparently-novel requires novelty_basis: the corpus searched and what for"
+        )
     if novelty == "apparently-novel" and not evidence.get("source_reviewed"):
         errors.append(prefix + "apparently-novel evidence requires a dated source_reviewed")
     return errors

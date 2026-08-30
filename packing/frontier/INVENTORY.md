@@ -10,7 +10,7 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 - **31** evidence records. **22** are formal; **16** of those were established here.
 - **6** rest on an argument made elsewhere, of which **6** have been read by nobody here.
-- **4** claim to be first established here. **6** make no novelty statement at all - not assessed, which is not the same as not novel.
+- **7** claim to be first established here. **3** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
 claim whether or not we read it. The count above is not a doubt about those
@@ -18,47 +18,75 @@ results, it is a statement about what this repository has itself examined.
 
 ## Every record
 
-| evidence | n | claim | assurance | method decides | whose work | read here | novelty |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| `E-kingbird-upper-register` | 1 to 100 | upper-bound | reported | - | - | - | previously-published |
-| `E-unitsquare-release1-report` | 6 sizes | upper-bound | reported | - | - | - | previously-published |
-| `E-basic-grid-upper` | 1 to 100 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
-| `E-basic-area-lower` | 1 to 100 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
-| `E-nagamochi-lower` | 4 to 100 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
-| `E-migrated-lower-report` | 1 to 100 | lower-bound | reported | - | - | - | *not assessed* |
-| `E-side2-center-lower` | 2, 3 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
-| `E-n005-gobel-upper` | 5 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
-| `E-n005-gobel-proof` | 5 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
-| `E-n006-kearney-shiu-proof` | 6 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
-| `E-n010-gobel-upper` | 10 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
-| `E-n040-gobel-upper` | 40 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
-| `E-gobel-family-upper` | 65, 89 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
-| `E-n010-stromquist-proof` | 10 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
-| `E-bentz-2010-proof` | 13, 46 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
-| `E-bentz-2016-proof` | 22, 33 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
-| `E-n011-trump-upper` | 11 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
-| `E-n005-second-order-rigidity` | 5 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* |
-| `E-n040-first-order-flexibility` | 40 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* |
-| `E-n011-trump-local-rigidity` | 11 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* |
-| `E-n011-repaired-lower` | 11 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
-| `E-n012-monotonicity-lower` | 12 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
-| `E-n029-kingbird-report` | 29 | upper-bound | reported | - | - | - | previously-published |
-| `E-n029-kingbird-numerical` | 29 | witness-feasibility | numerically-checked | nothing formally; a measurement at a tolerance | here | - | *not assessed* |
-| `E-n029-orientation-classes` | 29 | derived-structure | numerically-checked | nothing formally; a measurement at a tolerance | here | - | *not assessed* |
-| `E-n029-schadt-report` | 29 | upper-bound | reported | - | - | - | previously-published |
-| `E-n029-schadt-numerical` | 29 | witness-feasibility | numerically-checked | nothing formally; a measurement at a tolerance | here | - | previously-published |
-| `E-n029-interval-certified-upper` | 29 | upper-bound | verified | strict inequalities only | here | - | apparently-novel |
-| `E-n029-schadt-rational-upper` | 29 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
-| `E-translation-escape-not-rigid` | 89 sizes | derived-structure | numerically-checked | nothing formally; a measurement at a tolerance | here | - | apparently-novel |
-| `E-perfect-square-tiling-rigid` | 10 sizes | derived-structure | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
+| evidence | cases | claim | assurance | method decides | whose work | read here | novelty |
+| --- | ---: | --- | --- | --- | --- | --- | --- |
+| `E-kingbird-upper-register` | 98 | upper-bound | reported | - | - | - | previously-published |
+| `E-unitsquare-release1-report` | 2 | upper-bound | reported | - | - | - | previously-published |
+| `E-basic-grid-upper` | 93 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
+| `E-basic-area-lower` | 10 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
+| `E-nagamochi-lower` | 88 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
+| `E-migrated-lower-report` | 6 | lower-bound | reported | - | - | - | *not assessed* |
+| `E-side2-center-lower` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
+| `E-n005-gobel-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-n005-gobel-proof` | 1 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
+| `E-n006-kearney-shiu-proof` | 1 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
+| `E-n010-gobel-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-n040-gobel-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-gobel-family-upper` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-n010-stromquist-proof` | 1 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
+| `E-bentz-2010-proof` | 2 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
+| `E-bentz-2016-proof` | 2 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
+| `E-n011-trump-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-n005-second-order-rigidity` | 1 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n040-first-order-flexibility` | 1 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n011-trump-local-rigidity` | 1 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n011-repaired-lower` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n012-monotonicity-lower` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-n029-kingbird-report` | 1 | upper-bound | reported | - | - | - | previously-published |
+| `E-n029-kingbird-numerical` | 0 | witness-feasibility | numerically-checked | nothing formally; a measurement at a tolerance | here | - | *not assessed* |
+| `E-n029-orientation-classes` | 0 | derived-structure | numerically-checked | nothing formally; a measurement at a tolerance | here | - | *not assessed* |
+| `E-n029-schadt-report` | 0 | upper-bound | reported | - | - | - | previously-published |
+| `E-n029-schadt-numerical` | 0 | witness-feasibility | numerically-checked | nothing formally; a measurement at a tolerance | here | - | previously-published |
+| `E-n029-interval-certified-upper` | 1 | upper-bound | verified | strict inequalities only | here | - | apparently-novel |
+| `E-n029-schadt-rational-upper` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-translation-escape-not-rigid` | 87 | derived-structure | numerically-checked | nothing formally; a measurement at a tolerance | here | - | apparently-novel |
+| `E-perfect-square-tiling-rigid` | 10 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
 
 ## What the register rests on
 
 - **assurance**: numerically-checked 4, reported 5, verified 22
 - **method**: exact-algebraic 15, interval-certified 1, numerical-multiprecision 4, published-proof 6, reported 5
-- **novelty**: apparently-novel 4, common-knowledge 4, not assessed 6, previously-published 17
+- **novelty**: apparently-novel 7, common-knowledge 4, not assessed 3, previously-published 17
 
-The external proofs are the concentrated risk, and not equally: `[Nagamochi 2005]` supplies the lower bound for every `n` from 4 to 100, which makes it simultaneously the most load-bearing argument here and one nobody here has worked through. `[Stromquist 2003]` is why that matters rather than a formality: its `n = 11` argument needed a source-distinct repair, which `E-n011-repaired-lower` supplies.
+The `cases` column is how many of the hundred frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. The risk is not spread evenly across 31 records; it is concentrated in a few, and the most concentrated one is external.
+
+## What this repository established itself
+
+Claims marked `apparently-novel`: first established here as far as the archived corpus shows, ordered by how much of the frontier each carries. The label is a statement about a search, never a claim of priority, so each names the corpus it was searched against and that corpus's known holes.
+
+| result | n | what is new | cases | assurance |
+| --- | --- | --- | ---: | --- |
+| `E-translation-escape-not-rigid` | 89 sizes | A systematic screen over 98 configurations with replayable certificates; the idea of checking a slide is not new | 87 | numerically-checked |
+| `E-n005-second-order-rigidity` | 5 | That n = 5 is not infinitesimally rigid but is second-order rigid, proved exactly; the catalogue asserts 'Rigid.' without defining or arguing it | 1 | verified |
+| `E-n011-repaired-lower` | 11 | A correct proof of a bound stated in 1979 and cited as proved since, whose printed argument does not close | 1 | verified |
+| `E-n011-trump-local-rigidity` | 11 | Local rigidity proved by exhausting all 128 branchwise cones; sources assert rigidity, and zero algebraic freedom does not exclude a branching motion | 1 | verified |
+| `E-n029-interval-certified-upper` | 29 | An interval certificate for a square-in-square bound; the packing is Kingbird's | 1 | verified |
+| `E-n040-first-order-flexibility` | 40 | That the tilted block turns at first order and every turn is refused at second; DS7 asserts n = 40 is rigid and this refines rather than contradicts it | 1 | verified |
+| `E-n029-schadt-rational-upper` | 29 | A rational certificate for an n = 29 bound; the pose is Schadt's | 0 | verified |
+
+The `n` column is what each covers and `cases` is how many frontier records cite it, which are different numbers: a screen can span eighty sizes and be cited by none, because a screen reports structure rather than settling a bound.
+
+| evidence | cases | whose work | read here |
+| --- | ---: | --- | --- |
+| `E-kingbird-upper-register` | 98 | - | - |
+| `E-basic-grid-upper` | 93 | here | - |
+| `E-nagamochi-lower` | 88 | elsewhere | not-reviewed |
+| `E-translation-escape-not-rigid` | 87 | here | - |
+| `E-basic-area-lower` | 10 | here | - |
+
+`E-kingbird-upper-register` alone carries 98 of the hundred cases, against 93 for the next. It is an external proof nobody here has read, which makes it simultaneously the most load-bearing argument in the register and the least examined. That is not a doubt about the result -- a published proof proves its claim whether or not we read it -- but if one thing here deserved an informal review, the arithmetic says which.
+
+`[Stromquist 2003]` is why that matters rather than being a formality: its `n = 11` argument needed a source-distinct repair, which `E-n011-repaired-lower` supplies.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

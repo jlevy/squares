@@ -1089,6 +1089,12 @@ records. Running the generator’s own checker is not an independent implementat
 A page that says “interval verified” but publishes no certificate or replayable checker
 stays reported with a `public-certificate-missing` blocker.
 
+The [evidence inventory](packing/frontier/INVENTORY.md) is the generated roll-up of all
+four facts across the register, including which evidence the hundred cases actually lean
+on. That last column is the one worth reading: `E-nagamochi-lower` carries the verified
+lower bound for 88 of the hundred, against 2 for the next most-cited, and it is an
+external proof nobody here has read.
+
 Novelty—whose result this is—is a further separate fact.
 Its values differ in what they oblige, which is why each is recorded explicitly rather
 than inferred from an absence:

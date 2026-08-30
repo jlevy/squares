@@ -117,6 +117,31 @@ $defs:
       replay_status:
         enum: [passed, failed, unsupported, public-certificate-missing, not-attempted]
       proof: {$ref: '#/$defs/proof'}
+      novelty_basis:
+        type: object
+        additionalProperties: false
+        required: [corpus, searched, novel_object]
+        description: >-
+          What a novelty claim is relative to. `apparently-novel` is defined here as a
+          statement about the search performed and never an assertion of priority, and a
+          search is only as good as the corpus it ran over -- so the corpus, the date and
+          the terms are the claim's actual content. Without them `source_reviewed` dates an
+          assessment whose scope nobody can reconstruct.
+          Record the gaps too. A corpus with a known hole is more useful than one presumed
+          complete, because the hole is where the refutation would be.
+        properties:
+          corpus: {type: string, minLength: 1}
+          searched: {type: string, minLength: 1}
+          novel_object:
+            type: string
+            minLength: 1
+            description: >-
+              In one line, what exactly is new -- because the answer is usually narrower
+              than the record's claim reads. Certifying someone else's bound is real work
+              and is not the same as establishing a new bound; a systematic screen can be
+              new while the idea it applies is not. Naming the object is what stops a
+              defensible claim from being read as a larger one.
+          gaps: {type: string, minLength: 1}
       external_review:
         type: object
         additionalProperties: false
