@@ -1269,7 +1269,7 @@ session:
       others. With 52 frame coordinates proved pinned the live question is the block's 48
       coordinates plus the 20 unproved frame ones, which is the first version of this that
       is not obviously out of reach.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Phase 19's declared next_action, and the last step between what is proved and calling
@@ -1291,12 +1291,82 @@ session:
     fallback: >-
       The count of surviving branches, which is the number that says whether enumeration is
       a route or a figure of speech.
+    outcome: >-
+      A real bound and not a sufficient one, plus a proof nobody was looking for.
+
+      **The bound.** The seven known directions span six dimensions. Of the 114 functionals
+      vanishing on that span, 75 are pinned in every branch by certificates over the
+      all-branch rows, so every admissible motion lies in a subspace of **dimension at most
+      45** -- down from 120. That is proved, and it is seven times the dimension of anything
+      found admissible.
+
+      **Why it stops there.** Every branch's cone sits inside the relaxed cone, so this
+      route can never bound below that cone's own span; 682 exact elements of it were
+      collected and span rank 41. So the method's limit is 41 to 45 and the gap to six needs
+      the disjunctions. Those do not reduce: with 56 coordinates pinned, not one of the 42
+      becomes vacuous on what remains, so enumeration is still 2^42. The fallback's question
+      -- is enumeration a route or a figure of speech -- is answered: a figure of speech.
+
+      **The proof.** Twelve of the block's sixteen squares turn at one rate in every branch.
+      Every known direction turns all sixteen together, which is an observation about seven
+      vectors; `certify_target` makes it a theorem by pinning the functional omega_i -
+      omega_j rather than a coordinate, and 66 of the 120 pairs certify. The four left out
+      are exactly the interior cells of the four-by-four block, whose every contact is with
+      another block square -- the right four to be left with rather than an arbitrary four.
+    evidence:
+    - packing/devtools/assess_n40_rigidity.py
+    - packing/devtools/assess_n5_rigidity.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n40-rigidity-bracket.json
+    - packing/tests/test_n40_rigidity.py
+    stop_reason: >-
+      Exit reached on the fallback branch, with more than the fallback asked for. The kill
+      condition held: 45 is a bound because 75 certificates say so, not because a search
+      found nothing, and the record says three times where the method ends.
+    next_action: >-
+      The gate step is now 4m57s, a third of the full gate, which D-369 warns about. It is
+      left whole rather than thinned, and the honest alternative if the cost bites is a flag
+      rather than fewer checks. Beyond that, n = 40 needs an instrument this session does not
+      have: something that reasons about 2^42 disjunctions without enumerating them.
+  - workflow: factual-review
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-049
+    bead: think-xdly
+    objective: >-
+      Integration checkpoint on six research phases. n = 40 went from "no exact
+      construction retained" to a decided first-order question with a bounded cone in one
+      afternoon, and the record grew in pieces while it did. Read the whole of it against
+      the artifacts: X-007, the bracket record, the frontier block, the defect entries, and
+      the four claims that could be read as stronger than they are -- flexible, refused,
+      bounded, block-confined.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      OR-7: the documentation pass belongs at a block boundary, and this is one -- the
+      research route is exhausted rather than paused, so the next slice is not a
+      continuation of it. Six phases have landed since the last integration read.
+    budget_minutes: 45
+    started_at: '2026-08-30T13:34:00Z'
+    deadline_at: '2026-08-30T14:19:00Z'
+    expected_output: >-
+      Every retained claim about n = 40 traced to the certificate or measurement behind it,
+      with any that outruns its evidence corrected. A list of what a reader would have to
+      take on trust is an acceptable output; a claim that cannot be traced is not.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --fast
+    kill_condition: >-
+      This is a review and may not become a research slice. If it turns up a question rather
+      than an error, the question is recorded and left; the temptation after six phases of
+      results is to answer it instead, and that is how a checkpoint stops being one.
+    fallback: >-
+      The trace alone, without corrections, if nothing needs correcting.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Whatever the bound needs. If it closes, n = 40's frontier record gains a first-party
-      evidence id and joins n = 5.
+      Depends on what the read finds. If nothing, the handoff: n = 40 needs an instrument
+      this session does not have, and n = 28 needs a source.
   primary_bead: think-s424
   status: in_progress
   budget:

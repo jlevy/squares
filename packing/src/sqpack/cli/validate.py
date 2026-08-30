@@ -1139,16 +1139,23 @@ def _n5_rigidity_certificates(context: Context) -> str:
 
 
 def _n40_rigidity_bracket(context: Context) -> str:
-    # 3m18s measured 2026-08-30, on a full gate of about sixteen minutes. It re-derives
+    # 4m57s measured 2026-08-30, on a full gate of about sixteen minutes. It re-derives
     # n = 40's whole assessment: the witness and its second-order refusal, six retained
     # rays and theirs, a sweep of the null space, and 144 Farkas searches over the frame.
     # Neither `fast` nor `records` for that reason -- it re-derives the mathematics rather
     # than reading the record, and a three-minute check in the six-second records tier
     # would make that tier one people skip (D-369).
     #
-    # It was 4m12s until the intersecting-assessor section was cut from all 120
-    # coordinates to the block's 48, which is where the claim lives: the witness moves
-    # exactly those. Ninety seconds for a number that said nothing the forty-eight did not.
+    # It was cut once already: the intersecting-assessor section went from all 120
+    # coordinates to the block's 48, which is where the claim lives, saving ninety seconds
+    # for a number that said nothing the forty-eight did not. It has since grown again, to
+    # 4m57s, with the frame proof, the block-rotation relations and the cone bound.
+    #
+    # That is a third of the full gate for one step and `D-369` is the standing warning
+    # about exactly this. It is left in because every part of it is a claim the record
+    # makes and nothing here is a duplicate of anything else; the honest alternative, if
+    # the cost bites, is to move the whole step behind a flag rather than to thin the
+    # checks until they stop covering what is asserted.
     return _module(context, "devtools.assess_n40_rigidity", "--check")
 
 

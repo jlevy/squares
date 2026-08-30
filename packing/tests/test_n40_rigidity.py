@@ -393,3 +393,31 @@ def test_a_functional_certificate_is_verified_not_proposed() -> None:
     assert forward is not None and backward is not None
     assert verify_target_weights(pose, rows, forward, target)
     assert all(weight.sign() >= 0 for weight in forward)
+
+
+def test_the_cone_is_bounded_to_forty_five_dimensions() -> None:
+    """A real bound, and nowhere near tight enough to settle anything.
+
+    Seventy-five functionals vanishing on the known span are pinned in every branch, so
+    every admissible motion lies in their common kernel: 45 dimensions rather than 120.
+    The known directions span six. The factor between those two numbers is what is left,
+    and this route cannot reduce it -- the all-branch rows can never bound below the
+    relaxed cone's own span, measured at rank 41.
+    """
+    bound = _record()["how_far_the_cone_is_bounded"]
+
+    assert bound["known_directions"] == 7
+    assert bound["their_span"] == 6
+    assert bound["annihilator_dimension"] == 114
+    assert bound["functionals_proved_zero"] == 75
+    assert bound["cone_lies_in_dimension_at_most"] == 45
+    assert bound["measured_span_of_the_relaxed_cone"] == 41
+
+
+def test_the_bound_says_why_the_route_stops() -> None:
+    """The guard against 45 reading as an answer rather than as where the method ends."""
+    bound = _record()["how_far_the_cone_is_bounded"]
+
+    assert "never bound below that cone's own span" in bound["why_the_route_stops"]
+    assert "none becomes vacuous" in bound["why_the_route_stops"]
+    assert "still 2^42 and not a route" in _record()["scope"]["not_established"]

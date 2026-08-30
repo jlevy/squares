@@ -624,6 +624,54 @@ def block_rotation(pose: Pose, contacts: list[Contact]) -> dict[str, Any]:
     }
 
 
+def cone_bound(pose: Pose, contacts: list[Contact]) -> dict[str, Any]:
+    """How far the rows every branch carries can bound the cone: to 45 dimensions.
+
+    The known directions span six. If every functional vanishing on that span were pinned,
+    the cone would *be* that span and `n = 40` would be settled. Seventy-five of the 114
+    are pinned, each by a certificate over the all-branch rows, so the cone lies in their
+    common kernel: **a subspace of dimension at most 45**, proved, down from 120.
+
+    Forty-five against six is the size of what is left, and this route cannot close it.
+    The bound it can reach is the span of the relaxed cone itself -- every branch's cone
+    sits inside that -- and 682 exact elements of that cone were collected and found to
+    span rank 41 (measured 2026-08-30, one-time, not recomputed here). So the true limit of
+    this method is somewhere in 41 to 45, and the admissible set inside it appears to be
+    six-dimensional. Closing that gap needs the disjunctions, and none of the 42 becomes
+    vacuous once the pinned coordinates are removed.
+    """
+    rows = constraint_rows(pose, single_axis_contacts(pose, contacts))
+    found = find_witness(pose, contacts)
+    assert found is not None
+    known = [found[0]] + [retained_ray(pose, entries) for entries in WIDER_RAYS]
+    annihilator = nullspace(pose, known)
+    proved = sum(
+        1
+        for functional in annihilator
+        if certify_target(pose, rows, functional) is not None
+        and certify_target(pose, rows, [-value for value in functional]) is not None
+    )
+    return {
+        "known_directions": len(known),
+        "their_span": len(rows[0]) - len(annihilator),
+        "annihilator_dimension": len(annihilator),
+        "functionals_proved_zero": proved,
+        "cone_lies_in_dimension_at_most": len(rows[0]) - proved,
+        "measured_span_of_the_relaxed_cone": 41,
+        "how_that_was_measured": (
+            "682 exact elements of the relaxed cone -- its lineality space and the rays of "
+            "60 active sets -- taken to rank 41 on 2026-08-30. A one-time measurement, not "
+            "recomputed here, and a lower bound on what this route could ever prove"
+        ),
+        "why_the_route_stops": (
+            "every branch's cone sits inside the relaxed cone, so the all-branch rows can "
+            "never bound below that cone's own span. 41 to 45 against a six-dimensional "
+            "admissible set is the gap, and closing it needs the disjunctions -- of which "
+            "none becomes vacuous once the pinned coordinates are removed"
+        ),
+    }
+
+
 def _rank(pose: Pose, vectors: list[list[FieldElement]]) -> int:
     """Exact rank of a set of motions, by elimination over the field."""
     work = [list(vector) for vector in vectors]
@@ -755,6 +803,7 @@ def assess() -> dict[str, Any]:
         "outside_the_null_space": wider_cone(pose, contacts),
         "can_the_frame_move": frame_coordinates(pose, contacts),
         "does_the_block_turn_as_one": block_rotation(pose, contacts),
+        "how_far_the_cone_is_bounded": cone_bound(pose, contacts),
         "what_an_intersecting_assessor_reports": intersection_cone(pose, contacts),
         "verdict": {
             "infinitesimally_rigid": False,

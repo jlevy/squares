@@ -63,6 +63,16 @@
     "they_are_the_interior_cells": true,
     "what_is_not_proved": "that the interior four turn at that rate too. Every admissible direction found does turn all sixteen together, and a certificate search missing one is not a proof that none exists -- the search is sound and not complete"
   },
+  "how_far_the_cone_is_bounded": {
+    "annihilator_dimension": 114,
+    "cone_lies_in_dimension_at_most": 45,
+    "functionals_proved_zero": 75,
+    "how_that_was_measured": "682 exact elements of the relaxed cone -- its lineality space and the rays of 60 active sets -- taken to rank 41 on 2026-08-30. A one-time measurement, not recomputed here, and a lower bound on what this route could ever prove",
+    "known_directions": 7,
+    "measured_span_of_the_relaxed_cone": 41,
+    "their_span": 6,
+    "why_the_route_stops": "every branch's cone sits inside the relaxed cone, so the all-branch rows can never bound below that cone's own span. 41 to 45 against a six-dimensional admissible set is the gap, and closing it needs the disjunctions -- of which none becomes vacuous once the pinned coordinates are removed"
+  },
   "outside_the_null_space": {
     "all_obstructed": true,
     "all_verified": true,
