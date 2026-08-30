@@ -80,7 +80,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Proposal and search | Use the stock annealer for calibration and candidate generation; its two search paths emit exact pair-test work | Pair-budget enforcement, the proposer interface, campaign-wide aggregation, and mechanism-diverse proposers are unbuilt | [Proposer layer](#the-proposer-layerone-instrument-and-the-interface-is-unbuilt) |
 | Event capture and replay | Retain and independently replay watched control events | A valid terminal event is an observation, not a connected terminal component | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |
 | Basin identity, census, and atlas | Use exact `n = 3` and `n = 4` models as identity controls | Component counting is not admissible until the `n = 5` ambiguity is bounded and the classifier is validated successively | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |
-| Numerical-to-formal promotion | Robustify suitable decimal center-angle poses into explicitly relaxed rational witnesses and receive typed failures | The robust path may weaken the bound; contact inference and existence certification at the reported value remain unbuilt and mathematically contingent | [Promotion pipeline](#the-promotion-pipelinepartly-built-with-a-formal-value-gap) |
+| Numerical-to-formal promotion | Robustify suitable decimal center-angle poses into explicitly relaxed rational witnesses, infer and assemble a contact system, recover a minimal polynomial under a decidable margin rule, certify a root by Krawczyk, and receive typed failures throughout | The robust path may weaken the bound; every component of the reported-value route is built, but the `n = 29` certificate is retained `unresolved` and moving `verified_upper_bound` is a reviewed human decision, not a pipeline inference | [Promotion pipeline](#the-promotion-pipelinebuilt-end-to-end-with-the-promotion-itself-withheld) |
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
@@ -808,7 +808,7 @@ quotient models may assign components, while unsupported numerical observations 
 unresolved. A scalable retained-pose classifier is still unbuilt, so steering strategies
 that depend on sampled component identity or descriptor distances remain unbuilt too.
 
-### The promotion pipeline—partly built, with a formal-value gap
+### The promotion pipeline—built end to end, with the promotion itself withheld
 
 The public `packing-witness promote` command implements **robust rational promotion**
 for suitable decimal center-angle poses.
@@ -827,18 +827,48 @@ squares and 406 pairs.
 This formally proves the weaker upper bound; it does not verify the original decimal
 pose, the tighter current Kingbird report, or global optimality.
 
-The **reported-value path** remains unbuilt.
-The project does not generically infer corner–edge incidences, assemble and close
-contact equations, recognize an algebraic field, or certify existence and uniqueness
-near a numerical root.
-An interval-Newton or Krawczyk checker is a buildable direction for suitable systems,
-but contact ambiguity, singularity, and ill-conditioning can make promotion
-mathematically contingent.
-The interval strategy is now built and replayable, and those contingencies are reported
-rather than assumed away: the operator returns `exists` and `unique` separately, and
-nothing may be promoted from `exists` alone.
+The **reported-value path** now has every component built, and still promotes nothing.
+Those are two separate facts and the distance between them is the point.
+
+Each step named as missing when this section was first written now exists and is
+replayable. [`promote.contacts`](packing/src/sqpack/promote/contacts.py) infers which
+features meet and issues a typed refusal for any incidence it cannot decide rather than
+choosing one. [`promote.system`](packing/src/sqpack/promote/system.py) assembles those
+into equations that vanish at the packing they came from, one per contact type rather
+than one per contact.
+[`promote.solve`](packing/src/sqpack/promote/solve.py) recovers a minimal polynomial
+under a margin rule frozen as a test, because an integer-relation search given enough
+digits returns a relation whether or not one exists.
+[`promote.krawczyk`](packing/src/sqpack/promote/krawczyk.py) decides existence and
+uniqueness over a box with directed rounding, returning `exists` and `unique`
+separately, and nothing may be promoted from `exists` alone.
+[`promote.roundtrip`](packing/src/sqpack/promote/roundtrip.py) rebuilds the packing from
+the recovered field and compares the reconstructed side against the input, which is what
+catches a contact structure that is valid but suboptimal.
+
+The contingencies that made this look unbuildable are reported rather than assumed away.
 At `n = 29` the Jacobian turned out well-conditioned enough to contract in two
-iterations, which was an open question rather than a given.
+iterations, which was an open question rather than a given, and the contact Jacobian
+reaches full rank at both determined sizes — `34` of `34` at `n = 11` and `88` of `88`
+at `n = 29`. The shortfall that had suggested otherwise was [D-361](defects.md), a bug
+in assembly rather than a property of the packings.
+
+**Two things remain, and neither is a missing component.** The first is wiring: the
+public `packing-witness promote --strategy interval-existence` still raises the typed
+`checker-not-built` gap, because the certification that has been done ran through
+[`cases.kingbird29.certify_interval`](packing/cases/kingbird29/certify_interval.py), a
+case-specific driver over generic library code.
+A general path from an arbitrary `Witness/v2` to a certificate is not exposed, and the
+typed refusal is the honest answer until it is.
+
+The second is a decision.
+The interval route certifies `s(29) <= 5.93383346267692918974379895098` at a declared
+relaxation of `1e-20`, and that certificate is retained `unresolved` with
+`needs_review: true`. It sits `5.23371e-5` below the standing verified ceiling, and
+whether it moves `verified_upper_bound` is a reviewed human decision through the
+evidence contract rather than an inference this pipeline is permitted to make.
+A built path is not a promoted bound, and an unattended run may decline a marginal
+result and may not accept one.
 
 Exp-033 remains a distinct dedicated result: it bound two retained `n = 5` float poses
 to exact endpoints on one certified fixed-angle optimal face and supplied an exact dual
@@ -2381,14 +2411,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 371 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 372 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 88 | asserted something false about the mathematics |
 | validity | 87 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 137 | recorded something its own evidence contradicts |
+| bookkeeping | 138 | recorded something its own evidence contradicts |
 | robustness | 44 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
@@ -2398,7 +2428,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-eight defects in 371, and no soundness defect
+**The automated gate has caught forty-eight defects in 372, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

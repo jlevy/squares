@@ -56,9 +56,12 @@ agenda:
     workflows: [efficiency-loop]
     next_evidence: >-
       The differential verdict is the load-bearing measurement, not the timing. A
-      validator that is 559 times faster and accepts one artifact the old one rejected is
-      a soundness regression that buys six seconds, and the corpus is 314 documents
-      against 23 schemas, so agreement on it is checkable rather than arguable.
+      validator two orders of magnitude faster that accepts one artifact the old one
+      rejected is a soundness regression buying six seconds, and the corpus is 339
+      artifacts against 23 schemas, so agreement on it is checkable rather than arguable.
+      (Written before the block as "559 times faster" over "314 documents", from the
+      spec's scratch-script figures; both are corrected above from the landed
+      measurement.)
     note: >-
       Runs first, ahead of the documentation pass that agenda-006 puts before BC-075,
       because the spec itself says phase 1 can land before that block opens and because
@@ -82,8 +85,9 @@ agenda:
 
       Two of the spec's claims did not survive being made reproducible, and both are
       corrected in `D-370` and in the spec rather than quietly dropped. The speedup is
-      `128x` over the real 339-artifact corpus, not the `559x` a scratch script reported
-      over a 314-document subset. And `error.message` is *not* byte-identical between the
+      `83x` to `137x` across five runs over the real 339-artifact corpus, not the `559x` a
+      scratch script reported over a 314-document subset -- a range rather than a point,
+      because the Rust side is small enough that container noise moves it by half. And `error.message` is *not* byte-identical between the
       two libraries: they quote differently and systematically, so a consumer parsing that
       text would have broken silently. Nothing here parses it, which is the only reason the
       swap was safe rather than lucky.
@@ -95,7 +99,7 @@ agenda:
     purpose: tool_validation
     owner_focus: process
     instances: [11, 29]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Do the reader-facing documents still describe the project the record describes?
@@ -131,11 +135,45 @@ agenda:
       A pass that quietly picks the more readable side of a disagreement is how a wrong
       claim becomes the tidy one, so a conflict the artifacts cannot settle leaves a
       defect rather than an edit.
+
+      **Closed 2026-08-30. What was checked, and what was left.**
+
+      Checked and corrected: `SYNOPSIS.md`, `TUTORIAL.md` and `README.md` all described the
+      numeric-to-symbolic promotion route as unbuilt after every component of it had
+      landed, and the synopsis paragraph contradicted itself two sentences later. That is
+      `D-372`. `conventions.md`'s cadence table and `OR-3` both claimed seventy seconds for
+      the pre-push tier that `BC-077` had taken to four; both restated from measurement,
+      and `AGENTS.md` regenerated. The `n = 11` research report received a dated addendum
+      for the three results this project established at that size after 2026-08-25 -- the
+      exact route closing with a difference of exactly zero, the contact Jacobian at full
+      rank with the earlier shortfall identified as `D-361`, and a cell certified with no
+      float solver in the chain -- appended rather than rewritten, because it is a dated
+      record.
+
+      Checked and found current: `README.md`'s headline numbers, against the artifacts
+      rather than against each other -- 27 papers, 13 web sources, 35 side lengths proved
+      optimal, the `n = 11` gap of `0.088`, and `s(29) <= 5.93388579981302587863645209`.
+      All three `TUTORIAL.md` witness commands run as printed. All six figure generators
+      pass their own `--check`, and the atlas caption's badge counts reconcile with the
+      frontier. `development.md`'s commands and flags all resolve.
+
+      **The one that nearly went wrong is worth naming.** The first draft of the synopsis
+      fix said what remained was "a decision, not a component", which was itself an
+      overstatement in the opposite direction: the public `packing-witness promote
+      --strategy interval-existence` still raises `checker-not-built`, and the `n = 29`
+      certificate came from a case-specific driver. It was caught by checking which entry
+      point actually produced the certificate rather than by rereading the prose, which is
+      the whole argument for the runbook's ordering.
+
+      Left, deliberately: nothing binds `README.md` or `TUTORIAL.md` to the artifacts the
+      way `check_synopsis` binds the synopsis, and `D-372` argues that no checker can,
+      because it would have to decide what a sentence claims. The cadence table is restated
+      from measurement but not re-derived; `BC-079` owns that.
   - id: BC-079
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5, 11]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Are the gate's tiers the right tiers, and is the coordinator running them at the

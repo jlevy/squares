@@ -708,13 +708,27 @@ uv run --frozen packing-witness check witnesses/schadt-n029-2025-decimal.yaml \
 uv run --frozen packing-witness verify witnesses/schadt-n029-2025-rational.yaml
 ```
 
-**Reported-value recovery remains unbuilt and may be mathematically contingent.** The
-tool does not yet infer a contact model, certify existence near a contact solution, or
-recover a general algebraic witness at the reported value.
-A generic interval-existence checker is an understood engineering direction, but
-singular, ambiguous, or ill-conditioned contact systems may still defeat it.
-The command returns the typed `checker-not-built` gap today rather than pretending every
-decimal pose is promotable.
+**Reported-value recovery has its parts built, and no generic path through them.** Read
+those as two claims, because the distance between them is where this lane actually is.
+
+The parts exist and are library code rather than one-off scripts: contact inference that
+refuses an incidence it cannot decide, assembly of those contacts into equations,
+minimal-polynomial recovery under a margin rule, and a Krawczyk operator that decides
+existence and uniqueness over a box with directed rounding.
+They have certified a real case — `n = 29`, at a declared relaxation — through a
+case-specific driver written for that packing.
+
+What does not exist is the generic route from an arbitrary `Witness/v2` to a
+certificate. `packing-witness promote --strategy interval-existence` returns the typed
+`checker-not-built` gap today rather than pretending every decimal pose is promotable,
+and that refusal is still the honest answer.
+Singular, ambiguous, or ill-conditioned contact systems may defeat the approach even
+once it is wired, so this remains mathematically contingent and not merely unfinished.
+
+A certificate is also not a promotion.
+The `n = 29` result is retained `unresolved` pending human review and moves no bound;
+see [§8](#8-what-is-known-and-what-is-not) for which claims this project’s own work has
+and has not established.
 
 **Three instruments run, but only their narrow event claims are admissible.** The
 endpoint store, canonical identity keys, and census all execute.

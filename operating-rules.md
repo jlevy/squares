@@ -62,11 +62,16 @@ nothing.
 
 **Run `packing-validate --records` before a push, and push before the slower checks
 finish** so CI runs concurrently with them rather than after them.
-The record checks take about 70 seconds and are the ones that break
+The record checks take about four seconds and are the ones that break
 ([D-369](defects.md)); the behavioural tests take eight minutes and have never broken
 here. Serialising local tests and CI pays the longer of the two costs twice.
 
-Whether these are the right tiers is `BC-075`, not this rule.
+Four seconds rather than the seventy this rule first recorded, since `BC-077` swapped
+the schema validator and moved exact geometry out of the step named for schemas
+([D-370](defects.md)). That changes how the rule reads: at seventy seconds running the
+record checks was a judgement call, and at four there is no argument for skipping them.
+
+Whether these are the right tiers is `BC-079`, not this rule.
 
 ## OR-4: Take the next slice from the handoff, not from the backlog
 

@@ -2,7 +2,7 @@
 
 # Defect log
 
-371 defects recorded across the packing toolchain.
+372 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 23 | a cell of the sweep whose answer is known in advance |
-| `review` | 232 | a human or agent reading the work against a checklist |
+| `review` | 233 | a human or agent reading the work against a checklist |
 | `anomaly` | 12 | a result that made no sense, chased down |
 | `inspection` | 36 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 48 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 48 of 371, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 48 of 372, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -36,7 +36,7 @@ The line worth reading twice: **the automated gate caught 48 of 371, and none of
 | verifier | 4 |
 | record | 105 |
 | tooling | 124 |
-| docs | 104 |
+| docs | 105 |
 
 ## By kind
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 48 of 371, and none of
 | --- | ---: |
 | soundness | 88 |
 | validity | 87 |
-| bookkeeping | 137 |
+| bookkeeping | 138 |
 | robustness | 44 |
 | performance | 15 |
 
@@ -592,6 +592,7 @@ This is the actionable list.
 | [D-369](packing/src/sqpack/cli/validate.py) | 2026-08-29 | tooling | performance |  | `review` | medium | fixed | The gate's cheap checks were hostage to its expensive one, so drift reached CI |
 | [D-370](packing/src/sqpack/yamlio.py) | 2026-08-29 | tooling | performance |  | `review` | medium | fixed | The registry checks were slow because they were not registry checks |
 | [D-371](packing/devtools/run_negative_controls.py) | 2026-08-29 | tooling | robustness |  | `review` | low | fixed | The control snapshot guard was one artifact from refusing to run at all |
+| [D-372](SYNOPSIS.md) | 2026-08-30 | docs | bookkeeping |  | `review` | medium | fixed | The reader-facing tier said four built capabilities were unbuilt, for four days |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

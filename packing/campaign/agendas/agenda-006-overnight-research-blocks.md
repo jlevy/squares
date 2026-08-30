@@ -1192,7 +1192,7 @@ agenda:
     purpose: tool_validation
     owner_focus: process
     instances: [11, 29]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Do the reader-facing documents still describe the project the record describes?
@@ -1207,6 +1207,10 @@ agenda:
       The checklist in `campaign/documentation-pass.md` run over every root document, with each
       drift either fixed or filed as a defect and no third option; generated views
       regenerated; and an explicit statement of what was checked and what was left.
+    artifacts:
+    - packing/campaign/documentation-pass.md
+    - packing/campaign/agendas/agenda-007-twelve-hour-steered-run.md
+    - docs/project/research/research-2026-08-22-packing-11-unit-squares.md
     bead: think-eb29
     depends_on: [BC-064]
     workflows: [documentation-pass]

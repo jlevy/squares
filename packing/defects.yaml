@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 371
+count: 372
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9930,3 +9930,56 @@ defects:
     number being printed.
   bead: think-c46d
   recorded_in: packing/devtools/run_negative_controls.py
+- id: D-372
+  title: The reader-facing tier said four built capabilities were unbuilt, for four days
+  date: '2026-08-30'
+  layer: docs
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'from BC-054 in session-038 until the first W8 pass'
+  severity: medium
+  status: fixed
+  what: >-
+    `SYNOPSIS.md`, `TUTORIAL.md` and `README.md` all described the numeric-to-symbolic
+    promotion route as unbuilt after every one of its components had landed. The synopsis
+    sentence read "The project does not generically infer corner-edge incidences, assemble
+    and close contact equations, recognize an algebraic field, or certify existence and
+    uniqueness near a numerical root", and all four clauses were false:
+    `sqpack.promote.contacts`, `.system`, `.solve` and `.krawczyk` each existed and were
+    exercised. The same paragraph then said, two sentences later, "The interval strategy is
+    now built and replayable", so it contradicted itself in place. `TUTORIAL.md` carried the
+    matching claim, and `README.md`'s code inventory listed three components where the
+    record had six.
+  consequence: >-
+    Understatement rather than overstatement, which is the direction this project would
+    choose if it had to choose, and still a claim-integrity failure: a reader deciding
+    whether a capability exists got the wrong answer from all three reader-facing
+    documents at once. The mechanism is what matters. `check_synopsis` binds the synopsis
+    to the artifacts, so the synopsis absorbed each result as it landed -- and the binding
+    covers generated blocks and aggregates, not prose, so a hand-written paragraph in the
+    same file drifted for four days while the file passed its own checker every time.
+    Nothing binds `README.md` or `TUTORIAL.md` at all.
+  fix: >-
+    All three reconciled in the first W8 documentation pass, against the modules rather
+    than against each other. The claim boundary is now stated where it actually falls,
+    which is not where either the old text or the first draft of the new text put it: the
+    components are built and general, a case-specific driver has certified `n = 29`, the
+    public `packing-witness promote --strategy interval-existence` still raises the typed
+    `checker-not-built` gap because no generic route from an arbitrary `Witness/v2`
+    exists, and the certificate that does exist is retained `unresolved` and promotes
+    nothing pending human review.
+
+    Worth recording that the first attempt at the fix overstated in the opposite
+    direction. It said what remained was "a decision, not a component", which skipped the
+    missing CLI wiring; the error was caught by checking which entry point actually
+    produced the `n = 29` certificate rather than by rereading the prose. A documentation
+    pass that reconciles prose against prose reproduces this failure with more confidence.
+  regression: >-
+    None added, and the absence is the finding rather than an omission. A checker that
+    bound README and TUTORIAL prose to the artifacts the way `check_synopsis` binds the
+    synopsis would have to decide what a sentence claims, which no check here can do.
+    What this defect argues for instead is `OR-7`'s cadence and the W8 checklist: read the
+    artifacts first and the documents second, because a pass that starts from the prose
+    inherits the prose's mistakes. `BC-078` is the first pass run that way.
+  bead: think-eb29
+  recorded_in: SYNOPSIS.md
