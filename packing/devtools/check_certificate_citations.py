@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import ast
 import sys
+from collections.abc import Mapping
 from pathlib import Path
 
 from sqpack.yamlio import safe_load
@@ -74,6 +75,56 @@ def declared_sizes(module: Path) -> tuple[int, ...] | None:
     return None
 
 
+def referenced_evidence(node: object) -> set[str]:
+    """Every evidence id the record reaches, from any block that carries one.
+
+    Walking rather than naming three blocks: the schema puts `evidence` on both bounds,
+    both reported bounds, the rigidity block, the case roster, each conflict and each
+    blocker, and a sweep that reads a subset of those reports a citation as missing when it
+    is merely somewhere else. That direction is safe -- it over-reports -- but a guard that
+    cries wolf gets switched off, which is the failure this one exists to avoid.
+    """
+    found: set[str] = set()
+    if isinstance(node, Mapping):
+        for key, value in node.items():
+            if key == "evidence" and isinstance(value, list):
+                found.update(item for item in value if isinstance(item, str))
+            else:
+                found |= referenced_evidence(value)
+    elif isinstance(node, list):
+        for item in node:
+            found |= referenced_evidence(item)
+    return found
+
+
+def orphaned_evidence(evidence_by_id: dict[str, dict]) -> list[str]:
+    """Verified, replayable evidence that no frontier record cites.
+
+    The `CERTIFIES` sweep below runs from case packages, and a case package is only one
+    place a certificate lives. `E-n029-interval-certified-upper` is `verified`, replays,
+    proves a bound tighter than the one `n = 029` carries -- and was cited by nothing,
+    while that record's blocker said no formal certificate existed. The certificate is a
+    witness file, so nothing keyed on `cases/` could have found it.
+
+    This is the general form: evidence that is verified, has passed its replay, and names a
+    certificate is evidence somebody meant to bear on a case. If no case cites it, either
+    the record is behind or the evidence should not be in the register.
+    """
+    cited: set[str] = set()
+    for path in sorted(FRONTIER.glob("n-*.md")):
+        case = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])
+        cited |= referenced_evidence(case["packing"])
+
+    return sorted(
+        identifier
+        for identifier, record in evidence_by_id.items()
+        if record.get("assurance") == "verified"
+        and record.get("replay_status") == "passed"
+        and record.get("certificate")
+        and identifier not in cited
+    )
+
+
 def cited_certificates(n: int, evidence_by_id: dict[str, dict]) -> set[str]:
     """Return the certificate paths the record for `n` reaches through *verified* evidence.
 
@@ -90,11 +141,7 @@ def cited_certificates(n: int, evidence_by_id: dict[str, dict]) -> set[str]:
     case = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])
     packing = case["packing"]
 
-    referenced: set[str] = set()
-    for key in ("reported_upper_bound", "verified_upper_bound", "rigidity"):
-        block = packing.get(key)
-        if isinstance(block, dict):
-            referenced.update(block.get("evidence") or [])
+    referenced = referenced_evidence(packing)
 
     return {
         certificate
@@ -111,6 +158,13 @@ def main() -> int:
 
     problems: list[str] = []
     checked: list[str] = []
+
+    problems.extend(
+        f"{identifier} is verified, replays, and names a certificate, but no frontier "
+        "record cites it -- either a record is behind its own evidence, or the evidence "
+        "does not belong in the register"
+        for identifier in orphaned_evidence(evidence_by_id)
+    )
 
     for module in sorted(CASES.glob("*/verify_exact.py")):
         package = module.parent.name

@@ -20,6 +20,8 @@ from devtools.check_certificate_citations import (
     cited_certificates,
     declared_sizes,
     main,
+    orphaned_evidence,
+    referenced_evidence,
 )
 from sqpack.yamlio import safe_load
 
@@ -111,3 +113,45 @@ def test_a_reported_record_does_not_satisfy_the_sweep() -> None:
     assert not any(
         path.startswith("cases/gobel40/") for path in cited_certificates(40, downgraded)
     ), "a reported record must not satisfy the sweep"
+
+
+def test_no_verified_evidence_is_cited_by_nothing() -> None:
+    """The general form of D-398, and the half the CERTIFIES sweep cannot see.
+
+    A case package is only one place a certificate lives. `E-n029-interval-certified-upper`
+    is verified, replays, and proves a bound tighter than the one n = 29 carries -- and was
+    cited by nothing while that record's blocker said no formal certificate existed. Its
+    certificate is a witness file, so nothing keyed on `cases/` could have found it.
+    """
+    assert orphaned_evidence(evidence_by_id()) == []
+
+
+def test_the_orphan_check_bites() -> None:
+    """Remove the one citation that closes it and the sweep must say so."""
+    evidence = evidence_by_id()
+    identifier = "E-n029-interval-certified-upper"
+    assert identifier in evidence, "premise of this test changed"
+
+    case = safe_load((FRONTIER / "n-029.md").read_text(encoding="utf-8").split("---\n")[1])
+    assert identifier in referenced_evidence(case["packing"]), (
+        "n = 29 must cite the interval certificate; without it the record is behind its "
+        "own evidence, which is what D-398 named"
+    )
+
+
+def test_evidence_refs_are_found_wherever_the_schema_puts_them() -> None:
+    """Bounds, rigidity, the roster, conflicts and blockers all carry evidence lists.
+
+    Reading a subset reports a citation as missing when it is merely somewhere else, and a
+    guard that cries wolf gets switched off.
+    """
+    found = referenced_evidence(
+        {
+            "verified_upper_bound": {"evidence": ["A"]},
+            "rigidity": {"evidence": ["B"]},
+            "evidence": ["C"],
+            "conflicts": [{"evidence": ["D"]}],
+            "blockers": [{"evidence": ["E"]}],
+        }
+    )
+    assert found == {"A", "B", "C", "D", "E"}

@@ -2,15 +2,15 @@
 
 # Defect log
 
-399 defects recorded across the packing toolchain.
+400 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
 ## The short version
 
 - **91 soundness defects** — the system asserting something false about the mathematics. 72 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **108 fixes left no regression check behind.** That list is the best predictor of what comes back; recorded recurrences are D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267, D-282 repeats D-264, D-312 repeats D-309, D-313 repeats D-259, D-315 repeats D-295, D-318 repeats D-308, D-321 repeats D-317, D-323 repeats D-022, D-324 repeats D-320, D-325 repeats D-319, D-326 repeats D-305, D-327 repeats D-301, D-334 repeats D-028, D-337 repeats D-107, D-339 repeats D-155, D-340 repeats D-163, D-386 repeats D-358, D-395 repeats D-358, D-397 repeats D-358.
-- **50 are still open** (outstanding or contained), every one carrying a bead.
+- **108 fixes left no regression check behind.** That list is the best predictor of what comes back; recorded recurrences are D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267, D-282 repeats D-264, D-312 repeats D-309, D-313 repeats D-259, D-315 repeats D-295, D-318 repeats D-308, D-321 repeats D-317, D-323 repeats D-022, D-324 repeats D-320, D-325 repeats D-319, D-326 repeats D-305, D-327 repeats D-301, D-334 repeats D-028, D-337 repeats D-107, D-339 repeats D-155, D-340 repeats D-163, D-386 repeats D-358, D-395 repeats D-358, D-397 repeats D-358, D-400 repeats D-398.
+- **49 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
-| `review` | 243 | a human or agent reading the work against a checklist |
+| `review` | 244 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
 | `inspection` | 40 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 53 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 53 of 399, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 53 of 400, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 53 of 399, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 4 |
-| record | 121 |
+| record | 122 |
 | tooling | 134 |
 | docs | 106 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 53 of 399, and none of
 | --- | ---: |
 | soundness | 91 |
 | validity | 96 |
-| bookkeeping | 150 |
+| bookkeeping | 151 |
 | robustness | 47 |
 | performance | 15 |
 
@@ -209,7 +209,6 @@ This is the actionable list.
 | D-346 | contained | high | El Moumni's Figure 4 chord line passes through the wrong square center | `think-trkj` |
 | D-347 | contained | high | El Moumni's Figure 4 diameter argument uses an undefined point i | `think-trkj` |
 | D-349 | contained | low | An aborted free sweep drops its LP work from the run counter | `think-7dwo` |
-| D-355 | outstanding | high | Verification runs the whole gate after every change, so cycle time is set by the slowest step rather than by the change | `think-ej1d` |
 | D-356 | outstanding | low | The negative-control snapshot prunes the archive, so the n=29 chain cannot be controlled there | `think-lo3p` |
 | D-357 | outstanding | low | One synopsis negative control failed reproducibly, then passed, with no identified trigger | `think-lo3p` |
 | D-362 | outstanding | low | The translation-only trajectory check compares independently rounded projections for exact equality | `think-mt4h` |
@@ -577,7 +576,7 @@ This is the actionable list.
 | [D-352](packing/src/sqpack/motion_lab/contracts.py) | 2026-08-28 | tooling | bookkeeping | neutral | `review` | medium | fixed | A timeline counter changed meaning on the last event of every trace |
 | [D-353](packing/devtools/render_general_motion_lab.py) | 2026-08-28 | docs | bookkeeping | flattering | `review` | medium | fixed | The lab told users the optimizer receives a container side it never sees |
 | [D-354](packing/frontier/square-packing-case.schema.yaml) | 2026-08-28 | record | soundness | conservative | `review` | high | fixed | The frontier encoded catalogue silence about rigidity as a false rigid flag |
-| [D-355](packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md) | 2026-08-28 | tooling | performance | neutral | `review` | high | outstanding | Verification runs the whole gate after every change, so cycle time is set by the slowest step rather than by the change |
+| [D-355](packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md) | 2026-08-28 | tooling | performance | neutral | `review` | high | fixed | Verification runs the whole gate after every change, so cycle time is set by the slowest step rather than by the change |
 | [D-356](packing/campaign/agent-sessions/session-037-block2-interval-calibration.md) | 2026-08-29 | tooling | validity | conservative | `control_cell` | low | outstanding | The negative-control snapshot prunes the archive, so the n=29 chain cannot be controlled there |
 | [D-357](packing/campaign/agent-sessions/session-038-block3-contact-assembly.md) | 2026-08-29 | tooling | robustness |  | `control_cell` | low | outstanding | One synopsis negative control failed reproducibly, then passed, with no identified trigger |
 | [D-358](packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md) | 2026-08-29 | record | bookkeeping |  | `review` | medium | fixed | An unattended run misread its own clock by a factor of four and stopped early |
@@ -622,6 +621,7 @@ This is the actionable list.
 | [D-397](AGENTS.md) | 2026-08-30 | record | validity | conservative | `review` | medium | fixed | Two more sub-agents reported valid Python 3.14 as a syntax error |
 | [D-398](packing/frontier/n-040.md) | 2026-08-30 | record | bookkeeping |  | `review` | medium | fixed | Three cases declare a mathematical blocker the repository has already cleared |
 | [D-399](packing/cases/gobel_family/verify_exact.py) | 2026-08-30 | docs | bookkeeping |  | `inspection` | low | fixed | A residual's explanation had the sign backwards, and called a rounding a truncation |
+| [D-400](packing/frontier/n-029.md) | 2026-08-30 | record | bookkeeping |  | `review` | medium | fixed | A blocker denied a certificate the register held, and two guards let it |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

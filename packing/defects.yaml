@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 399
+count: 400
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9205,7 +9205,7 @@ defects:
   detected_by: review
   latent_for: from the gate's introduction to the first session that measured its own cycle time
   severity: high
-  status: outstanding
+  status: fixed
   bead: think-ej1d
   recorded_in: packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md
   what: >-
@@ -9228,18 +9228,23 @@ defects:
     to check exactly what the change can reach, and to be able to prove the selection is
     not missing anything.
   fix: >-
-    Unbuilt, and specified under BC-051. A change-scoped selector maps changed paths to
-    affected steps and is conservative by construction: an unrecognized path selects the
-    full gate rather than an empty set, so the failure mode is a slow run and never a
-    silent gap. The mapping is itself negative-controlled -- perturb a source file, and
-    the selector must choose a step that fails on it -- because a selector that cannot be
-    caught under-selecting is worse than no selector. The full gate keeps its existing
-    role at commit and merge boundaries; this changes the edit loop, not the contract.
+    Built under BC-084, discharging BC-051 unchanged in scope. `select_for_paths` in
+    `sqpack/cli/validate.py` maps changed paths to affected steps through a `touches`
+    field on each of the 52 steps, and is conservative by construction in both directions:
+    a changed path no step claims selects the whole gate rather than the steps that
+    happened to match, and a step declaring nothing is claimed by everything. So the
+    failure mode is a slow run and never a silent gap. On `D-355`'s own case -- an edit to
+    the rigidity assessor alone -- it selects 22 steps of 52. The full gate keeps its role
+    at commit and merge boundaries; this changed the edit loop, not the contract.
+
+    This entry said "Unbuilt" for as long as the feature has existed. It was found by a
+    sweep for exactly that shape, prompted by `D-398`, and is the same failure one register
+    over: a record asserting the absence of something the repository already had.
   regression: >-
-    None yet. The control that will pin it is the selector's own negative control
-    described above, plus a check that every step name is reachable from at least one
-    declared path pattern, so a new step cannot be added without being wired to the
-    sources that can break it.
+    `tests/test_change_scoped_selection.py`, ten cases, whose own header names this defect
+    and `BC-084`. It pins both directions of the conservatism -- an unclaimed path takes
+    the whole gate, a step declaring nothing is always selected -- and reproduces `D-355`'s
+    measured case directly.
 - id: D-356
   title: The negative-control snapshot prunes the archive, so the n=29 chain cannot be controlled there
   date: '2026-08-29'
@@ -11590,3 +11595,76 @@ defects:
     in place -- is written where the promotion would be attempted, in `D-398`'s fix field
     and in the module that builds it.
   recorded_in: packing/cases/gobel_family/verify_exact.py
+- id: D-400
+  title: A blocker denied a certificate the register held, and two guards let it
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'since 2026-08-29, when the interval certificate was recorded'
+  severity: medium
+  status: fixed
+  recurrence_of: D-398
+  what: >-
+    `D-398` was found by accident, so a sub-agent swept every declared blocker, limitation
+    and `replay_status` in the repository for the same shape. Two more turned up, and the
+    second is the same defect one register over.
+
+    `n = 029`'s blocker read "no formal certificate currently supports the tighter Kingbird
+    report at 5.93383346267692". `E-n029-interval-certified-upper` is `assurance: verified`,
+    `replay_status: passed`, and proves `s(29) <= 5.93383346267692918974379895098` -- which
+    agrees with the report at the fourteen digits the report is stated to. It was cited by
+    no case file at all: measured across the register, 30 of 31 evidence records are cited
+    by some case, and that one was the exception.
+
+    `D-355` was the other. It read `status: outstanding`, `fix: "Unbuilt"`, and
+    `regression: "None yet"` for a change-scoped gate selector that has existed since
+    `BC-084`: `select_for_paths` maps changed paths through a `touches` field on all 52
+    steps, and `tests/test_change_scoped_selection.py` -- ten passing cases whose header
+    names `D-355` itself -- is the regression it says does not exist.
+  consequence: >-
+    Conservative in both cases, and both point a reader at open problems that are not open.
+    But the sharper cost is what they say about the guards.
+
+    The certificate-citation sweep written hours earlier for exactly this class does not
+    catch `n = 029`. It walks `cases/*/verify_exact.py`, and this certificate is a witness
+    file, so nothing keyed on `cases/` could reach it. A guard built from one instance
+    matched the instance rather than the class.
+
+    And `check_synopsis`'s defect-count check searched for the number loose in the whole
+    document. The synopsis states the count twice, so the first sentence could read `400`
+    against a dataset of `399` and the check would still find the `399` in the second and
+    pass. That is not a hypothetical: it happened during this very fix, to a careless
+    one-line `sed`, and the gate reported the synopsis as agreeing.
+  fix: >-
+    `n = 029` cites the certificate in its evidence roster, and the blocker now says what
+    is true: a formal certificate does reach the reported value, and the bound has not
+    moved to it because it is interval-certified rather than exact-algebraic -- resting on
+    directed rounding in a library that is not itself formally verified -- and has had no
+    independent review. That is a decision to revisit, not an absence of evidence, and
+    saying so is the whole correction. Whether to move `verified_upper_bound` onto an
+    unreviewed interval certificate is a judgement this does not make.
+
+    `D-355` is `fixed`, with its `fix` and `regression` fields replaced by what was
+    actually built and what actually pins it.
+
+    Both guards are generalised rather than patched. `orphaned_evidence` requires every
+    record that is `verified`, has passed its replay, and names a certificate to be cited
+    by some frontier case -- regardless of where the certificate lives, which is the form
+    that covers witness files and case packages alike. And `referenced_evidence` walks
+    every block carrying an `evidence` list rather than the three it started with, since a
+    sweep that reads a subset reports a citation as missing when it is merely elsewhere,
+    and a guard that cries wolf gets switched off. The synopsis count is anchored to the
+    sentence that states it.
+  regression: >-
+    Three cases in `tests/test_certificate_citations.py`: that no verified, replayable,
+    certificate-bearing record is cited by nothing; that removing `n = 029`'s citation
+    makes the sweep say so; and that evidence refs are found in all five places the schema
+    puts them. The anchored synopsis check was verified by reproducing the exact `sed` that
+    defeated the old one -- it now fails, naming the sentence.
+
+    What none of this covers is a blocker whose claim is false for a reason no artifact
+    contradicts. Both instances here were findable because the thing said to be missing
+    existed as a record; a blocker that misdescribes mathematics nobody has filed remains
+    a matter of reading it.
+  recorded_in: packing/frontier/n-029.md
