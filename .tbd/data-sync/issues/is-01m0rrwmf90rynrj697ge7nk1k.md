@@ -5,14 +5,14 @@ title: quench_bracket's budget is wall-clock, so results depend on machine load
 kind: bug
 status: open
 priority: 2
-version: 6
+version: 7
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:16:45.800Z
-updated_at: 2026-08-27T10:12:54.511Z
+updated_at: 2026-08-30T10:37:37.222Z
 ---
 quench_bracket and _free_sweep take time_budget in seconds and stop on a wall-clock deadline. Host speed, load, pool width, and contention therefore change how many LP solves and angle probes a nominally identical quench performs, making convergence a property of the machine as well as the mathematics.
 
@@ -22,4 +22,4 @@ Express the scientific budget as work (LP solves or bracket iterations), retain 
 
 ## Notes
 
-Observed load dependence remains: under concurrent full gates the merged-main n=10 regression path failed, while an immediate isolated PACK_JOBS=1 replay passed; no threshold or retained map was changed. Session 027 W3 found that existing quench and local-realization paths collapse or omit the seated-wall, contact, and nonedge semantics needed by the new full-cell label. The bounded repair therefore retains only target-free FullCellExecutionPlan/v1: 15 exact tagged structural rows, complete derived work, pair_tests=0, lp_solver_attempts=0, hashless replay, and typed row/count mutations in the generator-owned control. It has no numerical matrix, target read, geometry, side, feasibility, or optimality result. Actual LP compilation remains blocked on full-cell-execution-semantics-unfrozen. BC-017 separately remains open for real n=5/n=10 counted execution and load equality; this bead remains open for stable n=4/n=10 quench outcomes and work across pool widths/load.
+2026-08-30 session-045: BC-017 advanced, not closed. The first sentence of its next_evidence was already discharged before the slice started -- the source-free n=3 full-cell control retains a target-free tagged execution plan with every wall and pair role visible, and its execution-plan forged-count, omitted-row, replay and role-swap controls all pass. Its own promotion_boundary says passing authorizes exactly a BC-016 or BC-017 readiness decision, so the slice produced that decision's input instead of another receipt. Measured on the same three-square subject: the structural plan reports 4 seated-wall equalities and 8 open-wall inequalities against 2 contact equalities and 1 non-edge inequality; solve_cell builds 12 containment rows and 3 pair rows. The same twelve and the same three -- every total agrees and every composition does not. Exactly one unit survives all three vocabularies, the LP solve attempt, and it is the unit this commitment's exit names, so the LP-solve half is reachable now. pair_tests does not transfer: compiled rows in the structural plan, dynamic overlap tests in sqsearch, so the exit's pair-test total is not one number until which sense is meant is decided, and that is a judgement rather than a measurement. Target-free throughout; no stratum is priced. Evidence: devtools/audit_work_accounting.py, campaign/series/series-000-smoke-and-calibration/results/bc-017-work-accounting.json, tests/test_work_accounting.py. Next action: someone takes the readiness decision the n=3 control's promotion_boundary authorizes; then freeze the numerical semantics; then real n=5 and n=10 counted executions agreeing across pool width and host load. An unattended runner may not take that decision alone.
