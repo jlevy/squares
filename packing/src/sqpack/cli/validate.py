@@ -1071,6 +1071,19 @@ def _n5_identity_pair(context: Context) -> str:
     return _module(context, "devtools.build_n5_identity_pair", "--check")
 
 
+def _session_clocks(context: Context) -> str:
+    """No session may declare a start time it could not have read (`D-358`).
+
+    Refuses only what cannot be true, so a delegated lane whose phase legitimately starts
+    before the one above it in the file passes with a printed note. The `--review` output
+    is the instrument `OR-6` needs: elapsed against budget for every phase of the newest
+    session, derived from the record's own successive timestamps.
+    """
+    output = _module(context, "devtools.check_session_clocks", "--review")
+    _require_text(output, "every declared start is one that could have been read")
+    return output
+
+
 def _n5_rigidity_certificates(context: Context) -> str:
     # 0.8s including the scipy import, because the linear programs are 20 rows wide. The
     # certificates are proposed in floating point and re-checked exactly in `Q(sqrt 2)`, so
@@ -1517,6 +1530,18 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/check_golden_basins.py",
             "packing/devtools/check_soundness_perimeter.py",
             "packing/campaign/series/*/results/bc-083-n5-identity-pair.json",
+        ),
+    ),
+    Step(
+        "session clocks are readable",
+        _session_clocks,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/campaign/agent-sessions/*",
+            "packing/campaign/schemas/agent-session.schema.yaml",
+            "packing/devtools/check_session_clocks.py",
         ),
     ),
     Step(

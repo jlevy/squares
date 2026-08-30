@@ -1196,3 +1196,16 @@ controls:
   replace: ["    if unclaimed:\n        return Selection(steps=universe, unattributed_paths=unclaimed)", "    if False:\n        return Selection(steps=universe, unattributed_paths=unclaimed)"]
   run: uv run --frozen --quiet python -m pytest tests/test_change_scoped_selection.py -q
   expect: "failed"
+
+# --- session clocks (D-358's missing regression, built after it recurred as D-386) ---
+- name: session clock - a phase declaring a start it could not have read
+  file: campaign/agent-sessions/session-044-agenda006-continuation.md
+  replace: ["    started_at: '2026-08-29T14:33:00Z'", "    started_at: '2099-01-01T00:00:00Z'"]
+  run: python3 -m devtools.check_session_clocks
+  expect: "ahead of now"
+
+- name: session clock - a deadline no run could fit in
+  file: campaign/agent-sessions/session-044-agenda006-continuation.md
+  replace: ["    started_at: '2026-08-29T11:49:50Z'", "    started_at: '2026-08-29T23:59:00Z'"]
+  run: python3 -m devtools.check_session_clocks
+  expect: "deadline is not after its own start"

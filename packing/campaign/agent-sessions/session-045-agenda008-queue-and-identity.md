@@ -325,10 +325,12 @@ session:
       arrive with 11 distinct number fields, and RowJetInventory refuses a foreign field by
       identity, so most of the sharing the commitment hoped for cannot happen at all.
 
-      Ran 70 minutes against a 45-minute budget. The overrun is the driver: the deciding
-      measurement is the seven-minute exhaustive-exact group, and it had to run three times
-      -- once to measure, once after the identity fix, once to confirm the counts
-      reproduce. Two of those three were avoidable only by not checking, which is D-384.
+      Ran 34 minutes against a 45-minute budget, 09:06Z to 09:40Z, which is under it only
+      because OR-3 held. The deciding measurement is the seven-minute exhaustive-exact
+      group and it ran three times -- once to measure, once after the identity fix, once to
+      confirm the counts reproduce -- so roughly 25 of those 34 minutes were test-group
+      time, and it fits inside the budget only because the D-385 investigation and the
+      record edits ran alongside it rather than after it.
     evidence:
     - >-
       '47 active_row_jets rebuilds cover 17 distinct (field, stratum) pairs, so 18 are
@@ -377,8 +379,8 @@ session:
       flattering in the most widely seen artifact here, which is not a good thing to leave
       standing overnight.
     budget_minutes: 50
-    started_at: '2026-08-30T10:16:00Z'
-    deadline_at: '2026-08-30T11:06:00Z'
+    started_at: '2026-08-30T09:40:00Z'
+    deadline_at: '2026-08-30T10:30:00Z'
     expected_output: >-
       The figure derives rigidity from each record's own frontier block, distinguishes an
       establishment from a transcribed annotation rather than merging them into one glyph,
@@ -423,41 +425,111 @@ session:
       with the record.
     next_action: >-
       Then BC-024 and BC-019 from the live queue. BC-010 and BC-029 stay out of scope.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      D-358 says an unattended run misread its own clock by a factor of four, and its
+      regression field says "None automatic". This session then made the same mistake
+      again: phases 7 and 8 were declared started_at 10:16Z and 11:10Z while the clock read
+      09:52Z. Build the check D-358 named and could not point at.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Taken ahead of BC-024 because the failure is live rather than historical: it happened
+      in this session's own record, in the artifact a later session reads to know what
+      happened. A descriptive census can wait an hour; a record that fabricates its own
+      timeline while writing itself cannot.
+    budget_minutes: 45
+    started_at: '2026-08-30T09:53:00Z'
+    deadline_at: '2026-08-30T10:38:00Z'
+    expected_output: >-
+      A checker in the records tier that refuses a session artifact declaring a start time
+      it cannot have observed -- one later than the commit that carries it -- and refuses
+      phases whose declared starts run backwards. Plus a negative control proving both
+      refusals fire, and D-358 moved to fixed with the regression it has been missing.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      Stop if the check cannot be anchored without a clock the gate does not have. A
+      checker that needs the wall clock to decide would fail differently on every run, and
+      a flaky guard on the record is worse than the gap it fills.
+    fallback: >-
+      A typed statement of which clock claims are unverifiable from the repository alone,
+      which is what D-358's regression field should then say instead of "None automatic".
+    outcome: >-
+      Built, and the kill condition did not fire: the check anchors on the wall clock and
+      that is sound rather than flaky, because the bound is monotone. A start time in the
+      past stays in the past, so a run that passes today cannot fail tomorrow for having
+      drifted. D-358 moves to fixed and D-386 records the recurrence that built it.
+    evidence:
+    - >-
+      'Refused: a start later than the moment of checking, a session starting after its own
+      phases, and a deadline at or before its own start. Nine tests, two negative controls,
+      0.17s in the records tier.'
+    - >-
+      'The line took the thinking, and the check drew it correctly on its first run.
+      Backwards phases looked like an obvious second refusal and are not: session-044 phase
+      7 begins thirteen minutes before phase 6 because it ran as a delegated lane against a
+      worktree. Position in the file is authoring order, not wall-clock order, so it is
+      printed rather than failed.'
+    - >-
+      'The report is the half that addresses D-358 rather than D-386: elapsed against budget
+      from the record''s own successive timestamps. This session reads 24, 8, 12, 48, 46,
+      34, 13 minutes against budgets of 120, 120, 150, 90, 60, 45, 50 -- the early blocks
+      overestimated by five to fifteen times, which nothing said until now.'
+    stop_reason: >-
+      Both refusals fire against mutated real records and the report is in the gate, so the
+      exit is met. Tightening the backwards-phase note into a refusal needs a delegated-lane
+      marker the schema does not have, which is a schema change and not this block.
+
+      It then caught its author twelve seconds after being built: the next phase was
+      declared started_at 10:02:00Z while the clock read 10:01:48Z, and the records tier
+      refused it. That is a smaller error than the one it was built for and it is the same
+      error, which is the point -- the practice change had already failed twice.
+    next_action: >-
+      Then BC-024 on `think-kr1d` from the live queue: extend the retained broad
+      contact-component census into a source-stratified taxonomy with a characterized
+      residue. BC-010 and BC-029 stay out of scope.
   - workflow: research-loop
     recording: contemporaneous
     clock_role: work
     focus: insight
+    commitment: BC-024
+    bead: think-kr1d
     objective: >-
-      BC-024: across the imported n <= 100 corpus, which chunk shapes, chunk sizes,
-      tilted-chunk counts and wall seatings actually recur, and what does the
-      non-expressible residue have in common?
+      Across the imported n <= 100 corpus, which chunk shapes, chunk sizes, tilted-chunk
+      counts and wall seatings actually recur, and what does the non-expressible residue
+      have in common?
     status: in_progress
     entered_by: planned_checkpoint
     switch_reason: >-
-      D-385's figure block is closed. BC-024 is the next live-queue cell that is
-      descriptive rather than adjudicating, so it can run without touching a proved count.
+      D-358's missing regression exists now, so the queue's own next cell is takeable. This
+      is the first descriptive block of the session: a pass over imported geometry with no
+      search and no adjudication.
     budget_minutes: 50
-    started_at: '2026-08-30T11:10:00Z'
-    deadline_at: '2026-08-30T12:00:00Z'
+    started_at: '2026-08-30T10:01:00Z'
+    deadline_at: '2026-08-30T10:51:00Z'
     expected_output: >-
-      A source-stratified taxonomy over the corpus -- chunk shapes, sizes, tilted-chunk
-      counts, wall seatings -- plus a characterized residue, feeding the partition
-      instrument design. No H-044 verdict is emitted.
+      A source-stratified taxonomy over the corpus -- shapes, sizes, tilted-chunk counts,
+      wall seatings -- plus a characterized residue, feeding the partition-instrument
+      design. No H-044 verdict is emitted.
     validation_command: >-
       uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: >-
       Stop if the taxonomy needs a quantity the retained census does not carry. The exit is
-      descriptive; inventing a detector to fill a gap would make this an adjudicating round
-      under a descriptive budget.
+      descriptive, and inventing a detector to fill a gap would make this an adjudicating
+      round under a descriptive budget.
     fallback: >-
-      A typed statement of which taxonomic axes the retained geometry cannot support,
-      which is what the partition-instrument design would need anyway.
+      A typed statement of which taxonomic axes the retained geometry cannot support, which
+      is what the partition-instrument design would need anyway.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Then BC-019 from the live queue. BC-010 and BC-029 stay out of scope: both are gated
-      on independent acceptance of exp-045's preregistered criterion.
+      Then BC-019 on `think-6mcd`. BC-010 and BC-029 stay out of scope: both are gated on
+      independent acceptance of exp-045's preregistered criterion.
   primary_bead: think-s424
   status: in_progress
   budget:

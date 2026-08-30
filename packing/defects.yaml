@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 385
+count: 386
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9314,7 +9314,7 @@ defects:
   detected_by: review
   latent_for: the whole of run-002
   severity: medium
-  status: outstanding
+  status: fixed
   what: >-
     run-002 declared blocks of 150, 180, 180 and 40 minutes against a 690-minute target.
     The git timestamps say the planning commit landed at 03:04:56Z and the four block
@@ -9336,9 +9336,20 @@ defects:
     read `date -u` at every block boundary and record it, rather than estimating elapsed
     time from the conversation.
   regression: >-
-    None automatic. A session artifact's declared clock could be checked against the commit
-    timestamps of the work it claims, which no current check does; recorded here as the
-    obvious detector rather than built in passing.
+    It said "None automatic" for a day and then this recurred as D-386, which is what built
+    the check: `devtools/check_session_clocks`, a records-tier gate step, refuses any
+    session artifact declaring a start time later than the moment of checking -- a phase
+    cannot have begun after the record of it was written -- along with a session that starts
+    after its own phases and a deadline at or before its own start.
+
+    Anchoring on the wall clock is sound here because the bound is monotone: a timestamp in
+    the past stays in the past, so a run that passes today cannot fail tomorrow. Nine tests
+    and two negative controls pin both directions.
+
+    It also prints elapsed against budget, derived from the record's own successive
+    timestamps, which is the part that addresses this entry rather than D-386. Had that line
+    existed, run-002's declared 150 minutes standing beside a derived 31 would have been
+    visible while the run was making the mistake instead of a day later.
   bead: think-qs6k
   recorded_in: packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md
 - id: D-359
@@ -10730,3 +10741,54 @@ defects:
     kinds separately, and `n = 11` is `first-party-argument` with a solid one.
   bead: think-xdly
   recorded_in: packing/devtools/build_composite_figure_data.py
+
+- id: D-386
+  title: A session declared two phases starting an hour and a half after the clock read
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: 'about twenty minutes, until a commit timestamp was read'
+  severity: low
+  status: fixed
+  recurrence_of: D-358
+  what: >-
+    While writing `session-045`, phase 7 was declared `started_at: 10:16Z` with a deadline
+    of `11:06Z`, and phase 8 `started_at: 11:10Z`. The clock read `09:52Z`. Both were
+    inferred from how long the work had felt rather than read, and the inference ran about
+    an hour and a quarter fast over four phases.
+
+    The mechanism is the one `D-358` records: elapsed time estimated between tool calls
+    rather than measured. `D-358`'s own fix said the practice change is to "read `date -u`
+    at every block boundary", which is what this session stopped doing after the first two
+    boundaries.
+  consequence: >-
+    Small in itself and caught within the same session -- the phase records were corrected
+    against the commit timestamps before anything was pushed. What makes it worth an entry
+    is that it is `D-358` happening again, in the artifact whose whole purpose is to tell a
+    later session what happened, one day after `D-358` was written and while its `fix` field
+    was still describing the practice that would have prevented it.
+
+    That is the `D-010` and `D-017` shape: the second occurrence is evidence that a practice
+    change without a check is not a fix. It is also why this is not filed as flattering --
+    the error made the run look slower than it was, not faster.
+  fix: >-
+    `devtools/check_session_clocks`, a records-tier gate step, refuses a session artifact
+    that declares a start time later than the moment of checking. A phase cannot have begun
+    after the record of it was written, which is the exact shape of both occurrences.
+
+    Where the line is drawn is the part that took the thinking. Phases running backwards
+    looked like an obvious second refusal and is not: `session-044`'s phase 7 begins
+    thirteen minutes before phase 6 because it ran as a delegated lane against a worktree
+    and was integrated afterwards. Position in the file is authoring order, not wall-clock
+    order, and no field separates them -- so that is printed with the reason rather than
+    failed. The check found that case on its first run, which is also how the line got
+    drawn correctly.
+  regression: >-
+    `tests/test_session_clocks.py` -- nine tests, including one asserting the refusal has no
+    grace period at one second, and one asserting a backwards pair is reported and not
+    refused. Two entries in `devtools/controls.yaml` mutate a real session record and watch
+    the guard complain. The gate step runs in `--records` at `0.17s`.
+  bead: think-s424
+  recorded_in: packing/devtools/check_session_clocks.py

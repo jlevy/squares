@@ -2461,14 +2461,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 385 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 386 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 88 | asserted something false about the mathematics |
 | validity | 92 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 144 | recorded something its own evidence contradicts |
+| bookkeeping | 145 | recorded something its own evidence contradicts |
 | robustness | 46 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
@@ -2478,10 +2478,10 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-nine defects in 385, and no soundness defect
-ever.** Every soundness failure was found by a control cell whose answer was known in
-advance, a rule written down before the measurement, a generated view contradicting its
-source, or someone reading carefully.
+**The automated gate has caught fifty defects in 386, and no soundness defect ever.**
+Every soundness failure was found by a control cell whose answer was known in advance, a
+rule written down before the measurement, a generated view contradicting its source, or
+someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Gate-detected entries here are mechanical process, implementation, or
 test-validity failures, found by contiguity, integration, mutation-anchor,
@@ -2495,6 +2495,14 @@ The bookkeeping was the smaller half.
 The misreading also supplied a *reason* for stopping early -- that later blocks had
 overrun into the slack -- when nothing had overrun and most of the budget was unspent,
 which is a constraint the run claimed to meet and in fact a mistake it made.
+
+It said “None automatic” under `regression`, and a day later it happened again
+([D-386](defects.md)): a session declared two phases starting an hour and a half after
+the clock read. A practice change without a check is not a fix, which is the same lesson
+`D-010` and `D-017` record one level down.
+The gate now refuses a session that declares a start time later than the moment of
+checking, and prints elapsed against budget derived from the record’s own successive
+timestamps — the line that would have made this visible while it was happening.
 
 The harness that proves those checks fire has a blind spot of its own.
 [D-356](defects.md) records that `run_negative_controls` prunes the literature archive
