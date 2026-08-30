@@ -18,15 +18,19 @@ violates exactly one axis of each of the 42 pairs that touch at a corner, and in
 both axes forbids it. That is not a hypothetical cost for that defect. It is the measured
 one: with the disjunctions intersected, all 120 coordinates certify as pinned.
 
-**What the witness is not.** It is not a motion. Along it every contact gap curves shut at
-order `t^2` -- the worst pair separation is `-t^2/2` -- so `n = 40` may well be rigid in the
-sense the catalogue means, and this record does not touch that question. The frontier's
-`rigidity` block stays `undetermined`. What is settled is that first-order rigidity is not
-the reason, and that a first-order argument for `n = 40` cannot succeed.
+**What the witness is not.** It is not a motion, and that is proved rather than observed.
+Along it 104 of the 283 tight contacts have negative gap curvature, and a non-negative
+self-stress over those rows -- `w . A = 0` with `w . q < 0`, verified in the field --
+refuses every second-order correction at once. So the direction curves into the obstacle
+whatever an arc does at order `t^2`, which is what the finite-motion measurement sees as a
+worst separation of `-t^2/2`. The frontier's `rigidity` block stays `undetermined`, and
+what is settled is that a first-order argument for `n = 40` cannot succeed.
 
 The parallel with `n = 5` is exact in shape and larger in scale: there, one square's
 rotation is free at first order and refused at second by a verified self-stress. Here
-sixteen squares turn together, and the second-order question is open.
+sixteen squares turn together and are refused the same way. What is missing for a
+second-order rigidity claim is coverage, not machinery: `n = 5` has a one-dimensional cone,
+and this search examined one direction of a five-dimensional null space in one branch.
 
 Usage:
     uv run --frozen python -m devtools.assess_n40_rigidity
@@ -58,8 +62,11 @@ from devtools.assess_n5_rigidity import (
     gap_rate,
     incident_contacts,
     nullspace,
+    propose_field_self_stress,
+    second_order_terms,
     unconstrained,
     variable_names,
+    verify_field_self_stress,
 )
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -217,10 +224,91 @@ def verify_witness(
         "rows_violated_if_the_disjunctions_are_intersected": sum(
             1 for row in intersection if gap_rate(row, motion).sign() < 0
         ),
-        "why_that_last_number_matters": (
-            "it is exactly the count of pairs whose second axis the motion gives up, and "
-            "an assessor that intersects instead of choosing reads every one of them as a "
-            "violation and the pose as rigid (D-391)"
+        "pairs_giving_up_an_axis": sum(
+            1
+            for group in groups.values()
+            if any(
+                gap_rate(row, motion).sign() < 0
+                for members in group
+                for row in constraint_rows(pose, members)
+            )
+        ),
+        "why_those_numbers_matter": (
+            "the motion gives up an axis at some of the corner pairs and keeps both at the "
+            "rest; an assessor that intersects instead of choosing reads every given-up row "
+            "as a violation and reports the pose rigid (D-391). The two are counted "
+            "separately because they are different counts and the first reads easily as "
+            "the second"
+        ),
+    }
+
+
+def branch_contacts(
+    pose: Pose, contacts: list[Contact], selection: dict[frozenset[int], int]
+) -> list[Contact]:
+    """The contacts of the branch that admits a given motion."""
+    chosen = list(single_axis_contacts(pose, contacts))
+    groups = axis_groups(pose, contacts)
+    for pair, group in groups.items():
+        chosen += group[selection[pair]]
+    return chosen
+
+
+def second_order(
+    pose: Pose,
+    contacts: list[Contact],
+    motion: list[FieldElement],
+    selection: dict[frozenset[int], int],
+) -> dict[str, Any]:
+    """Is the witness refused at second order, the way `n = 5`'s free direction is?
+
+    Only the contacts the motion holds tight take part. A gap already opening at first
+    order imposes nothing at second, and letting such a row into the self-stress would let
+    a refusal be assembled from constraints that are not binding -- a certificate for a
+    system nobody is solving.
+
+    On the tight rows a feasible arc needs `y` with `A y >= -q`, where `q_j = u . H_j . u`
+    is the gap's curvature along the motion. A non-negative `w` with `w . A = 0` and
+    `w . q < 0` proves there is no such `y`: it would give `0 = w . A y >= -w . q > 0`.
+    """
+    branch = branch_contacts(pose, contacts, selection)
+    rows = constraint_rows(pose, branch)
+    tight = [index for index, row in enumerate(rows) if gap_rate(row, motion).sign() == 0]
+    curvature = second_order_terms(pose, branch, motion)
+    carried = [position for position, index in enumerate(tight) if curvature[index].sign() < 0]
+    tight_rows = [rows[index] for index in tight]
+    tight_curvature = [curvature[index] for index in tight]
+
+    certificate: dict[str, Any] | None = None
+    if carried:
+        weights = propose_field_self_stress(pose, tight_rows, carried)
+        if weights is not None and verify_field_self_stress(pose, tight_rows, weights):
+            total = pose.field.rational(0)
+            for weight, value in zip(weights, tight_curvature, strict=True):
+                if weight.sign() != 0:
+                    total = total + value * weight
+            if total.sign() < 0:
+                certificate = {
+                    "rows_carrying_weight": sum(1 for weight in weights if weight.sign() != 0),
+                    "w_dot_q_is_negative": True,
+                    "meaning": (
+                        "w >= 0 and w . A = 0, so w . (A y) = 0 for every y; a y with "
+                        "A y >= -q would give 0 = w . A y >= -w . q > 0"
+                    ),
+                }
+    return {
+        "branch_rows": len(rows),
+        "tight_rows": len(tight),
+        "negative_curvature": len(carried),
+        "positive_curvature": sum(1 for index in tight if curvature[index].sign() > 0),
+        "obstructed": certificate is not None,
+        "certificate": certificate,
+        "what_this_settles": (
+            "this witness, and only this one. The first-order cone is not known to be its "
+            "span: the null space is five-dimensional, a short integer sweep of it was "
+            "searched, and other branches were not examined at all. So n = 40 is not "
+            "second-order rigid on this evidence -- one of its infinitesimal flexes is "
+            "refused"
         ),
     }
 
@@ -306,6 +394,7 @@ def assess() -> dict[str, Any]:
         "witness": {
             **describe(pose, motion),
             "verification": verify_witness(pose, contacts, motion, selection),
+            "second_order": second_order(pose, contacts, motion, selection),
             "second_order_behaviour": (
                 "moving along it by a finite t and measuring real separating-axis gaps "
                 "gives -5.0e-7, -5.0e-9 and -5.0e-11 at t = 1e-3, 1e-4 and 1e-5: exactly "
@@ -328,6 +417,11 @@ def assess() -> dict[str, Any]:
                 "at second order, so it is not a motion, and the catalogue's annotation is "
                 "not contradicted"
             ),
+            "the_witness_is_refused_at_second_order": (
+                "104 of the 283 tight contacts curve into the obstacle along it, and a "
+                "non-negative self-stress over those rows refuses every second-order "
+                "correction at once -- so this flex is not the start of a motion"
+            ),
             "what_it_costs_the_catalogue": (
                 "nothing directly, and everything for a first-order argument: any proof of "
                 "n = 40's rigidity has to be second-order or finite, because the first-order "
@@ -342,12 +436,13 @@ def assess() -> dict[str, Any]:
                 "pose rather than read back from this record."
             ),
             "not_established": (
-                "Whether the first-order cone is larger than this one witness, and whether "
-                "any of it survives second order. The null space of the single-axis rows is "
-                "five-dimensional and only a short integer sweep of it was searched, so the "
-                "cone's dimension is not measured here. n = 5's route -- a self-stress "
-                "refusing every second-order correction -- is the next instrument, and it "
-                "has to be posed on the chosen branch rather than on all the rows."
+                "Second-order rigidity, which needs every first-order flex refused and "
+                "not just this one. The null space of the single-axis rows is "
+                "five-dimensional, only a short integer sweep of it was searched, and only "
+                "the branch admitting this witness was examined, so the cone's dimension is "
+                "not measured here. The instrument for the rest is the one already used: "
+                "the obstruction argument transfers unchanged to any other witness this "
+                "search turns up."
             ),
             "relation_to_prior_evidence": (
                 "The translation-escape screen leaves n = 40 undetermined by deciding "

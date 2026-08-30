@@ -35,6 +35,7 @@ from devtools.assess_n40_rigidity import (
     OUT,
     assess,
     axis_groups,
+    branch_contacts,
     find_witness,
     load_pose,
     single_axis_contacts,
@@ -90,6 +91,8 @@ def test_intersecting_the_disjunctions_reports_the_pose_rigid() -> None:
     verification = _record()["witness"]["verification"]
     assert verification["rows_violated_if_the_disjunctions_are_intersected"] == 42
     assert verification["disjunctive_pairs_with_an_admissible_axis"] == 42
+    # Two counts that are easy to conflate: 42 rows, spread over 24 pairs, not 42 pairs.
+    assert verification["pairs_giving_up_an_axis"] == 24
 
 
 def test_the_null_space_is_what_makes_the_candidate_exact() -> None:
@@ -164,3 +167,62 @@ def test_the_witness_turns_every_block_square_at_the_same_rate() -> None:
 def test_the_record_round_trips() -> None:
     """Minutes: the intersecting-assessor section runs 240 linear programs."""
     assert _record() == assess()
+
+
+def test_the_witness_is_refused_at_second_order() -> None:
+    """The flex is not the start of a motion, and that is a certificate rather than a plot.
+
+    Along the witness 104 of the 283 tight contacts curve into the obstacle. A feasible arc
+    would need a second-order correction `y` with `A y >= -q`; a non-negative `w` with
+    `w . A = 0` and `w . q < 0` says there is none, because it would give
+    `0 = w . A y >= -w . q > 0`. Both halves are decided in the field.
+    """
+    second = _record()["witness"]["second_order"]
+
+    assert second["obstructed"] is True
+    assert second["negative_curvature"] == 104
+    assert second["tight_rows"] == 283
+    assert second["certificate"]["w_dot_q_is_negative"] is True
+    assert second["certificate"]["rows_carrying_weight"] > 0
+
+
+def test_the_obstruction_is_not_read_as_second_order_rigidity() -> None:
+    """One flex refused is not every flex refused, and the record has to keep saying so.
+
+    `n = 5` earns the phrase because its cone is one-dimensional and that one direction is
+    obstructed. Here a five-dimensional null space was swept over a short integer range in
+    a single branch, so the cone's dimension is not known and the phrase would be a claim
+    nobody has evidence for.
+    """
+    built = _record()
+
+    assert (
+        "this witness, and only this one"
+        in built["witness"]["second_order"]["what_this_settles"]
+    )
+    assert (
+        "not second-order rigid on this evidence"
+        in built["witness"]["second_order"]["what_this_settles"]
+    )
+    assert "Second-order rigidity" in built["scope"]["not_established"]
+
+
+def test_only_tight_rows_enter_the_obstruction() -> None:
+    """The soundness condition on the self-stress, checked against the branch itself.
+
+    A contact whose gap already opens at first order imposes nothing at second order.
+    Letting one into the stress would assemble a refusal out of constraints that are not
+    binding, which is a certificate for a system nobody is solving.
+    """
+    pose = load_pose()
+    contacts = active_contacts(pose)
+    found = find_witness(pose, contacts)
+    assert found is not None
+    motion, selection = found
+
+    rows = constraint_rows(pose, branch_contacts(pose, contacts, selection))
+    tight = [row for row in rows if gap_rate(row, motion).sign() == 0]
+    slack = [row for row in rows if gap_rate(row, motion).sign() > 0]
+
+    assert len(tight) == _record()["witness"]["second_order"]["tight_rows"]
+    assert len(tight) + len(slack) == len(rows), "no row is violated in this branch"

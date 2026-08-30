@@ -761,6 +761,69 @@ def propose_self_stress(
     return [Fraction(value).limit_denominator(10**6) for value in result.x]
 
 
+def propose_field_self_stress(
+    pose: Pose, rows: list[list[FieldElement]], support: list[int]
+) -> list[FieldElement] | None:
+    """`propose_self_stress` with weights in the field rather than in `Q`.
+
+    Same normalization and same reason for it: without forcing weight onto the rows that
+    carry a negative second-order term, the zero vector answers trivially. The restricted
+    cone is used rather than the sign-free one because every coefficient the solver sees
+    stays rational, so the vertex is rational and survives reconstruction -- and a stress
+    that misses is reported as no obstruction, never as a refusal.
+    """
+    from scipy.optimize import linprog  # noqa: PLC0415 - heavy optional import
+
+    root = pose.field.alpha
+    scaled = [[entry * root for entry in row] for row in rows]
+    count = len(rows)
+    equations: list[list[float]] = []
+    targets: list[float] = []
+    for column in range(len(rows[0])):
+        for part in range(2):
+            equations.append(
+                [float(row[column].coeffs[part]) for row in rows]
+                + [float(row[column].coeffs[part]) for row in scaled]
+            )
+            targets.append(0.0)
+    carried = set(support)
+    equations.append(
+        [1.0 if index in carried else 0.0 for index in range(count)] + [0.0] * count
+    )
+    targets.append(1.0)
+    result = linprog(
+        [0.0] * (2 * count),
+        A_eq=equations,
+        b_eq=targets,
+        bounds=[(0.0, None)] * (2 * count),
+        method="highs",
+    )
+    if not result.success:
+        return None
+    q = pose.field.rational
+    return [
+        q(Fraction(result.x[index]).limit_denominator(10**6))
+        + q(Fraction(result.x[count + index]).limit_denominator(10**6)) * root
+        for index in range(count)
+    ]
+
+
+def verify_field_self_stress(
+    pose: Pose, rows: list[list[FieldElement]], weights: list[FieldElement]
+) -> bool:
+    """Exactly: are these non-negative field weights, and is `w . A` the zero row?"""
+    if any(weight.sign() < 0 for weight in weights):
+        return False
+    for column in range(len(rows[0])):
+        total = pose.field.rational(0)
+        for weight, row in zip(weights, rows, strict=True):
+            if weight.sign() != 0:
+                total = total + row[column] * weight
+        if total.sign() != 0:
+            return False
+    return True
+
+
 def verify_self_stress(
     pose: Pose, rows: list[list[FieldElement]], weights: list[Fraction]
 ) -> bool:

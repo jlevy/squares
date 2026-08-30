@@ -11054,10 +11054,11 @@ defects:
     Flattering, and at `n = 40` the flattery is not hypothetical: **it inverts the answer.**
     That pose has an infinitesimal motion -- all sixteen squares of the tilted block turning
     together, each about its own centre, at exactly zero gap rate against every contact that
-    holds in all branches. The motion gives up one axis at each of the 42 corner contacts
-    and keeps the other, which is all non-overlap asks. An assessor that intersects reads
-    each of those 42 as a violation and certifies all 120 coordinates as pinned, which is to
-    say it reports the packing infinitesimally rigid. It is not.
+    holds in all branches. At the pairs that touch at a corner it gives up one separating
+    axis and keeps the other -- which is all non-overlap asks -- and it only has to do that
+    at 24 of the 42; at the remaining 18 both axes stay admissible. An assessor that
+    intersects reads the 42 given-up rows as violations and certifies all 120 coordinates as
+    pinned, which is to say it reports the packing infinitesimally rigid. It is not.
 
     So this defect is the reason `n = 40` looked rigid, and removing it is what found the
     witness. `n = 5` is unaffected and no retained record moves in either direction: an

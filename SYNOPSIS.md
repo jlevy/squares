@@ -2524,10 +2524,10 @@ Intersecting them is a subset of every branch, so a pose reads as more rigid tha
 pair; Göbel’s `n = 40` has 42 of its 98 touching pairs, and there the error inverts the
 answer rather than merely weakening it.
 That pose has an infinitesimal motion — all sixteen squares of its tilted block turning
-together, each about its own centre — which gives up one axis at each corner contact and
-keeps the other, which is all non-overlap asks.
-An assessor that intersects reads those 42 as violations and certifies every one of the
-120 coordinates as pinned, reporting a packing rigid that is not.
+together, each about its own centre — which gives up one separating axis at 24 of the 42
+corner contacts and keeps the other, which is all non-overlap asks.
+An assessor that intersects reads those given-up rows as violations and certifies every
+one of the 120 coordinates as pinned, reporting a packing rigid that is not.
 Removing the defect is what found the witness.
 It is still not a *motion*: the gaps curve shut at order `t²`, so `n = 40`’s record
 stays `undetermined` and the catalogue’s annotation stands.
