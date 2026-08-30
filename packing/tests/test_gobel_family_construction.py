@@ -13,11 +13,13 @@ family, exactly as `n = 40`'s turned out to be, and the test pins the bound that
 
 from __future__ import annotations
 
+import decimal
 from decimal import Decimal
 
 import pytest
 
 from cases.gobel40.packing import build as retained_n40
+from cases.gobel40.verify_exact import witness_disagreement as gobel40_gap
 from cases.gobel_family.packing import admits, build, count
 from cases.gobel_family.verify_exact import (
     SUBJECTS,
@@ -82,3 +84,20 @@ def test_a_pair_outside_goebels_condition_is_refused() -> None:
     assert not admits(1, 4)
     with pytest.raises(ValueError, match="does not satisfy"):
         build(1, 4)
+
+
+def test_measuring_the_gap_leaves_the_global_precision_alone() -> None:
+    """`decimal`'s context is process-global, so raising it must be scoped.
+
+    Bead `think-iskp` fixed `sqpack.field` and left "any sibling doing the same" open.
+    These were the siblings: both `witness_disagreement` functions set
+    `getcontext().prec` and never restored it, and the family one is reachable from the
+    fast suite, so every test after it saw precision 60. Nothing was wrong -- every
+    consumer that formats a Decimal against a recorded value pins its own context -- but a
+    new one that did not would have broken on test ordering alone.
+    """
+    before = decimal.getcontext().prec
+    assert witness_disagreement(4, 5) is not None
+    assert decimal.getcontext().prec == before
+    assert gobel40_gap() is not None
+    assert decimal.getcontext().prec == before

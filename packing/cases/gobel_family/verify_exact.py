@@ -29,7 +29,7 @@ Usage:
 
 from __future__ import annotations
 
-from decimal import Decimal, getcontext
+from decimal import Decimal, localcontext
 from pathlib import Path
 
 from cases.gobel_family.packing import build, count
@@ -94,26 +94,27 @@ def verify(a: int, b: int) -> Report:
 
 def witness_disagreement(a: int, b: int) -> Decimal | None:
     """Largest centre-coordinate gap against the retained witness, or `None` if absent."""
-    getcontext().prec = 60
-    path = WITNESSES / f"n-{count(a, b):03d}.yaml"
-    if not path.is_file():
-        return None
-    squares, _side, _field = build(a, b)
-    mine = sorted(
-        (
-            _decimal(sum((corner[0] for corner in square[1:]), square[0][0])) / 4,
-            _decimal(sum((corner[1] for corner in square[1:]), square[0][1])) / 4,
+    with localcontext() as context:
+        context.prec = 60
+        path = WITNESSES / f"n-{count(a, b):03d}.yaml"
+        if not path.is_file():
+            return None
+        squares, _side, _field = build(a, b)
+        mine = sorted(
+            (
+                _decimal(sum((corner[0] for corner in square[1:]), square[0][0])) / 4,
+                _decimal(sum((corner[1] for corner in square[1:]), square[0][1])) / 4,
+            )
+            for square in squares
         )
-        for square in squares
-    )
-    witness = load_witness(path, fallback_schema=WITNESS_SCHEMA)
-    theirs = sorted(
-        (Decimal(str(square["center"][0])), Decimal(str(square["center"][1])))
-        for square in witness["squares"]
-    )
-    return max(
-        max(abs(a[0] - b[0]), abs(a[1] - b[1])) for a, b in zip(mine, theirs, strict=True)
-    )
+        witness = load_witness(path, fallback_schema=WITNESS_SCHEMA)
+        theirs = sorted(
+            (Decimal(str(square["center"][0])), Decimal(str(square["center"][1])))
+            for square in witness["squares"]
+        )
+        return max(
+            max(abs(a[0] - b[0]), abs(a[1] - b[1])) for a, b in zip(mine, theirs, strict=True)
+        )
 
 
 def main() -> int:

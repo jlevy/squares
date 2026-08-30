@@ -40,7 +40,7 @@ CASES = ROOT / "cases"
 FRONTIER = ROOT / "frontier"
 
 
-class Undeclared(Exception):
+class UndeclaredError(Exception):
     """`CERTIFIES` is present but not readable as a literal, which is a refusal.
 
     Reading the declaration statically is what keeps this checker free of the import
@@ -67,7 +67,7 @@ def declared_sizes(module: Path) -> tuple[int, ...] | None:
                     value = ast.literal_eval(node.value)
                     return tuple(int(n) for n in value)
                 except (ValueError, TypeError) as exc:
-                    raise Undeclared(
+                    raise UndeclaredError(
                         "CERTIFIES must be a literal tuple of integers, readable without "
                         f"importing the module ({exc})"
                     ) from exc
@@ -116,7 +116,7 @@ def main() -> int:
         package = module.parent.name
         try:
             sizes = declared_sizes(module)
-        except Undeclared as exc:
+        except UndeclaredError as exc:
             problems.append(f"cases/{package}/verify_exact.py: {exc}")
             continue
         if sizes is None:
@@ -133,7 +133,8 @@ def main() -> int:
         out_of_range = [n for n in sizes if not (FRONTIER / f"n-{n:03d}.md").exists()]
         if out_of_range:
             problems.append(
-                f"cases/{package}: CERTIFIES names {out_of_range}, which have no frontier record"
+                f"cases/{package}: CERTIFIES names {out_of_range}, "
+                "which have no frontier record"
             )
             continue
         for n in sizes:

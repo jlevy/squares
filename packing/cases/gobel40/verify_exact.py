@@ -18,7 +18,7 @@ is the check worth running; agreement to some declared epsilon would not have be
 
 from __future__ import annotations
 
-from decimal import Decimal, getcontext
+from decimal import Decimal, localcontext
 from pathlib import Path
 
 from cases.gobel40.packing import build
@@ -65,23 +65,24 @@ def _decimal(element) -> Decimal:
 
 def witness_disagreement() -> Decimal:
     """The largest centre-coordinate gap between the construction and the witness."""
-    getcontext().prec = 120
-    squares, _side, _field = build()
-    mine = sorted(
-        (
-            _decimal(sum((corner[0] for corner in square[1:]), square[0][0])) / 4,
-            _decimal(sum((corner[1] for corner in square[1:]), square[0][1])) / 4,
+    with localcontext() as context:
+        context.prec = 120
+        squares, _side, _field = build()
+        mine = sorted(
+            (
+                _decimal(sum((corner[0] for corner in square[1:]), square[0][0])) / 4,
+                _decimal(sum((corner[1] for corner in square[1:]), square[0][1])) / 4,
+            )
+            for square in squares
         )
-        for square in squares
-    )
-    witness = load_witness(WITNESS, fallback_schema=WITNESS_SCHEMA)
-    theirs = sorted(
-        (Decimal(str(square["center"][0])), Decimal(str(square["center"][1])))
-        for square in witness["squares"]
-    )
-    return max(
-        max(abs(a[0] - b[0]), abs(a[1] - b[1])) for a, b in zip(mine, theirs, strict=True)
-    )
+        witness = load_witness(WITNESS, fallback_schema=WITNESS_SCHEMA)
+        theirs = sorted(
+            (Decimal(str(square["center"][0])), Decimal(str(square["center"][1])))
+            for square in witness["squares"]
+        )
+        return max(
+            max(abs(a[0] - b[0]), abs(a[1] - b[1])) for a, b in zip(mine, theirs, strict=True)
+        )
 
 
 def main() -> int:

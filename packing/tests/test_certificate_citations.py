@@ -16,7 +16,7 @@ import pytest
 from devtools.check_certificate_citations import (
     CASES,
     FRONTIER,
-    Undeclared,
+    UndeclaredError,
     cited_certificates,
     declared_sizes,
     main,
@@ -84,7 +84,7 @@ def test_a_non_literal_declaration_is_refused_not_a_crash(tmp_path: Path) -> Non
     """
     stub = tmp_path / "verify_exact.py"
     stub.write_text("CERTIFIES = tuple(range(1, 4))\n")
-    with pytest.raises(Undeclared):
+    with pytest.raises(UndeclaredError):
         declared_sizes(stub)
 
 
@@ -96,29 +96,18 @@ def test_an_out_of_range_size_does_not_crash(tmp_path: Path) -> None:
 def test_a_reported_record_does_not_satisfy_the_sweep() -> None:
     """Citing a certificate is not claiming it.
 
-    A `reported` evidence record carrying a path into a case package would satisfy the
-    letter of the sweep while asserting nothing this repository checked.
+    A `reported` evidence record carrying a path into a case package satisfies the letter
+    of the sweep while asserting nothing this repository checked -- the record would name
+    the certificate without claiming it. Verified is part of the question, not a separate
+    one.
     """
-    real = {
-        "E-fake": {
-            "id": "E-fake",
-            "assurance": "verified",
-            "certificate": "cases/gobel40/packing.py",
-        }
-    }
-    demoted = {"E-fake": {**real["E-fake"], "assurance": "reported"}}
-
-    # n = 40 reaches E-fake through neither map; use the real record set instead and
-    # check the filter directly on the shape the sweep consumes.
-    from devtools.check_certificate_citations import cited_certificates as sweep
-
     evidence = evidence_by_id()
-    assert any(path.startswith("cases/gobel40/") for path in sweep(40, evidence))
+    assert any(path.startswith("cases/gobel40/") for path in cited_certificates(40, evidence))
 
     downgraded = {
-        k: ({**v, "assurance": "reported"} if k == "E-n040-gobel-upper" else v)
-        for k, v in evidence.items()
+        key: ({**record, "assurance": "reported"} if key == "E-n040-gobel-upper" else record)
+        for key, record in evidence.items()
     }
-    assert not any(path.startswith("cases/gobel40/") for path in sweep(40, downgraded)), (
-        "a reported record must not satisfy the sweep"
-    )
+    assert not any(
+        path.startswith("cases/gobel40/") for path in cited_certificates(40, downgraded)
+    ), "a reported record must not satisfy the sweep"
