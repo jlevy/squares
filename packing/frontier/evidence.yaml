@@ -306,6 +306,45 @@ evidence:
       and is not restated as a finding of ours.
     source_reviewed: '2026-08-30'
 
+  - id: E-n040-first-order-flexibility
+    claim: derived-structure
+    scope: {n_values: [40]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    certificate: campaign/series/series-000-smoke-and-calibration/results/bc-049-n40-rigidity-bracket.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.assess_n40_rigidity --check
+    replay_status: passed
+    limitations: >-
+      First order, at fixed side, at Goebel's exact construction rather than the retained
+      decimal witness. The packing is infinitesimally FLEXIBLE: seven directions are
+      retained, each a vector in Q(sqrt 2)^120 verified to leave every contact's gap rate
+      non-negative, and each turning the sixteen squares of the tilted central block while
+      leaving the twenty-four axis-aligned ones fixed. Each is refused at second order by a
+      non-negative self-stress with w.A = 0 and w.q < 0, verified in the field over the rows
+      that direction holds tight.
+
+      That is why the property stays undetermined rather than moving to not-rigid. An
+      infinitesimal flex is not a motion: along every one of these the gaps curve shut at
+      order t^2, so nothing here contradicts local rigidity or the catalogue's annotation.
+      What it settles is that no first-order argument can establish rigidity here.
+
+      The cone is not characterised. It is bounded -- 75 certificates put every admissible
+      motion in a subspace of dimension at most 45, down from 120 -- and the seven known
+      directions span 6, so a factor of seven is unaccounted for. Bounding it further needs
+      the 42 corner-touching disjunctions, whose tangent cone is a union of half-spaces
+      rather than an intersection (D-391); none of them becomes vacuous once the pinned
+      coordinates are removed, so branch enumeration remains 2^42 and is not a route. In the
+      same way, 52 of the frame's 72 coordinates are proved zero in every branch and the
+      other 20 are covered only by a search that found nothing, which is not a proof.
+
+      This is a repository result about the packing and is independent of the catalogue's
+      unqualified Rigid annotation, which is carried by reported_upper_bound.catalogue_rigid
+      and is not restated as a finding of ours.
+    source_reviewed: '2026-08-30'
+
   - id: E-n011-trump-local-rigidity
     claim: derived-structure
     scope: {n_values: [11]}

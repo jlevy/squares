@@ -696,16 +696,23 @@ def _frontier_rigidity(context: Context) -> str:
     n=5 still *reads* `undetermined` -- second-order rigidity is not local rigidity and the
     schema has no word for it -- so it leaves the assessed bucket while keeping the same
     property, which is why both numbers here moved by one at once.
+
+    n=40 moved the same way on 2026-08-30 and for the opposite finding. It is
+    infinitesimally *flexible* over `Q(sqrt 2)`, with seven retained directions each refused
+    at second order; the property still reads `undetermined` because an infinitesimal flex
+    is not a motion and `not-rigid` would assert one. So the counts moved by one again, and
+    a record can leave the assessed bucket for having a stronger argument in either
+    direction.
     """
     output = _module(context, "devtools.assess_frontier_rigidity", "--check")
     _require_text(output, "frontier rigidity check passed")
     review = _module(context, "devtools.assess_frontier_rigidity", "--review")
     _require_text(
         review,
-        "assessed: 10 locally-rigid, 84 not-rigid, 4 undetermined, "
-        "2 left to a stronger argument",
+        "assessed: 10 locally-rigid, 84 not-rigid, 3 undetermined, "
+        "3 left to a stronger argument",
     )
-    _require_text(review, "left to a stronger argument: n = [5, 11]")
+    _require_text(review, "left to a stronger argument: n = [5, 11, 40]")
     return output + review
 
 

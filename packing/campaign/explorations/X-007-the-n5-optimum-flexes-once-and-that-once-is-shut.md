@@ -30,9 +30,11 @@ exploration:
     disjunctive tangent cone intersected (D-391). With all three corrected, n = 40 is
     infinitesimally FLEXIBLE -- its sixteen tilted squares turn together -- and seven such
     directions are now retained, each refused at second order by its own verified
-    self-stress. Every one of them leaves all twenty-four frame squares fixed, so the flex
-    is a block mechanism rather than a property of the packing at large. Nothing is
-    promoted: an infinitesimal flex is not a motion, so both records stay undetermined.
+    self-stress. Every one of them leaves all twenty-four frame squares fixed, and 52 of the
+    frame's 72 coordinates are proved zero in every branch, so the flex looks like a block
+    mechanism rather than a property of the packing at large -- twenty coordinates short of
+    saying so outright. Nothing is promoted: an infinitesimal flex is not a motion, so both
+    records stay undetermined.
   sources:
   - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json
   - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n40-rigidity-bracket.json
@@ -374,6 +376,13 @@ So `n = 5` leaves the assessed bucket and joins `n = 11` there — four `undeter
 records assessed rather than five, two left to a stronger argument rather than one.
 A record can leave that bucket without its verdict moving at all, and this is what that
 looks like.
+
+`n = 40` then did the same thing later the same day, for the opposite finding: it is
+infinitesimally *flexible*, its property still reads `undetermined` because a flex is
+not a motion, and it left the assessed bucket on evidence
+`E-n040-first-order-flexibility`. Three assessed and three left to a stronger argument.
+That a record can leave for a stronger argument in *either* direction is the part worth
+noticing — the bucket is about how much is known, not about which way the answer went.
 
 Two things follow, and both are deliberate.
 
