@@ -58,10 +58,9 @@ DECLARED_CONSUMERS = {
     "packing/devtools/check_basic_bounds.py": (
         "checks the ceiling really is the certifiable grid bound"
     ),
-    "packing/devtools/check_certificate_citations.py": (
-        "reads the field only as a place evidence ids are cited from, never as a side "
-        "length; it follows the refs to see whether an exact certificate is named, and "
-        "makes no claim about what the bound is worth"
+    "packing/tests/test_certificate_citations.py": (
+        "names the field in a fixture proving evidence refs are found in every block that "
+        "carries one; it asserts nothing about the bound's value"
     ),
     "packing/devtools/price_gobel_family.py": (
         "says in prose that the four family sizes now certify the exact side rather than "
