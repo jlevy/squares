@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 401
+count: 402
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -11731,3 +11731,69 @@ defects:
     does not read cannot notice when they stop being true.
   bead: think-r45s
   recorded_in: packing/devtools/render_agenda_map.py
+- id: D-402
+  title: A contact structure was read out of padding and reported as a result
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: gate
+  latent_for: 'one commit, about twenty minutes, caught by CI before anyone relied on it'
+  severity: high
+  status: fixed
+  what: >-
+    `BC-049`'s exit accepts a typed refusal for `n = 28`: no case module, no retained
+    contact structure, no provenance artifact, so the first step is a higher-precision
+    source. All three clauses are true. This run argued the inference from them was not --
+    `n = 11`'s minimal polynomial came from four hundred *manufactured* digits rather than
+    from its 32-digit witness, so precision can be built rather than sourced, and what
+    building it needs is the contact structure.
+
+    Extraction then appeared to supply one: 32 pair contacts, 40 corner-on-wall, nothing
+    undecided at floor `1e-80`, and 41 decades between the largest contact and the smallest
+    strict separation. That was written up, frozen into
+    `atlas/known-best/contact-structures.json`, recorded in the agenda as the refusal
+    failing, and pushed.
+
+    It was an artifact. The witness carries 57 fractional digits in its side; the
+    extraction materialised at 200 and classified incidences at a floor of `1e-80`. What
+    decided at that floor was the materialisation's padding, not the pose.
+  consequence: >-
+    Flattering, and it named itself a result. It made an open question look opened, and it
+    did so on the one commitment whose whole subject is whether a claim rests on evidence
+    of our own.
+
+    `devtools/price_exact_construction.py` already measured this exact question, correctly,
+    and its verdict was in the repository the whole time: it materialises at the witness's
+    own digits plus a margin rather than a flat count, sweeps floors, and reports 27 pair
+    contacts at `n = 28` rather than 32. Its prose says the deciding floors "sit below the
+    retained precision, which makes them windows on the materialisation's padding". That
+    sentence is a description of the mistake, written before it was made.
+
+    The calibration in that tool is what settles the question, and is why it sweeps at all.
+    At `n = 29` the retained structure is known from a 160-digit provenance artifact -- 52
+    pair and 37 wall -- and the decimal route reports 17 and 36. A route that reproduces
+    neither known answer cannot have its numbers at an unknown size read as structure. The
+    run had that control available and did not run it before reporting.
+  fix: >-
+    The `n = 28` entry is removed from the contact-structure generator and the artifact
+    regenerated, because a structure that measures padding is worse than none: the pricing
+    tool treats presence in that file as a retained structure and calibrates against it, so
+    leaving it would have corrupted the control that catches this.
+
+    `BC-049` records the challenge and its refutation rather than being reverted to
+    silence. The reasoning was tempting enough to be worth leaving visible next to why it
+    fails, and the refusal now says what it is -- a statement about what the retained
+    decimals can support, not a gap waiting for the extractor to be run harder.
+  regression: >-
+    `price_exact_construction --check`, already a gate step, which is what caught this: the
+    added entry changed its calibration count from two sizes to three and the frozen
+    pricing no longer matched. The detector existed and worked; nothing needed building.
+
+    What is not covered is the actual error, which was choosing a materialisation precision
+    unrelated to the record's own. `extract_contacts` takes a floor and a pose and has no
+    way to know the pose was padded to reach it. A guard would have to compare the
+    requested floor against the digits the witness declares and refuse a floor below them.
+    That check does not exist, and this is the argument for it.
+  bead: think-xdly
+  recorded_in: packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md

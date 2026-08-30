@@ -359,30 +359,32 @@ agenda:
       module, no retained contact structure, and no provenance artifact of the kind n = 29's
       extraction was run against. That is the typed refusal this exit accepts for that size.
 
-      **That refusal has since been tested and it does not hold.** All three clauses above
-      were true; the inference from them was not, and nobody had run it. A source is not
-      the only route to precision -- n = 11's degree-eight polynomial was recovered from
-      four hundred *manufactured* digits rather than from its 32-digit witness, and
-      manufacturing them needs the contact structure, not a better source. So the question
-      is whether the retained decimals resolve the contacts, and they do: extraction at
-      floor 1e-80 gives 32 touching pairs and 40 corner-on-wall incidences with **nothing
-      left undecided** and 41.02 decades between the largest contact and the smallest
-      strict separation. It is frozen in atlas/known-best/contact-structures.json beside
-      n = 11's and n = 29's, so "no retained contact structure" is no longer true either.
+      **That refusal was challenged and it stands.** The challenge was worth recording
+      because the reasoning behind it was tempting and wrong. A source is not the only
+      route to precision -- n = 11's degree-eight polynomial came from four hundred
+      *manufactured* digits, not from its 32-digit witness -- so it looked as though
+      n = 28 needed only its contact structure, and extraction appeared to supply one:
+      32 pair contacts, 40 wall, nothing undecided, 41 decades of separation.
 
-      Two things are still owed before this is a route rather than an opening. The pose
-      does not verify under a strict sign -- three pairs overlap below the witness's own
-      1e-8 tolerance, which is what refining against this structure would remove, and until
-      that is done the structure comes from a pose that does not satisfy its own
-      constraints. And it is unknown whether Q(u) = Q(s) for the single tilt angle; if it
-      is, the case is trump11 at degree 6, and if not the construction lives in a larger
-      field. The minimal polynomial is not the obstacle: the catalogue publishes
-      s^6 - 24s^5 + 212s^4 - 812s^3 + 1025s^2 + 882s - 1615, sqpack.field.NumberField
-      constructs it and proves it irreducible mod 13, and the retained side satisfies it to
-      7.1e-56.
+      That measurement was an artifact of over-materialisation. The witness carries 57
+      fractional digits in its side; the extraction ran at 200 and read incidences at a
+      floor of 1e-80, far below anything the record holds, so what decided at that floor
+      was the padding rather than the pose. `price_exact_construction` already sweeps this
+      properly, at the witness's own precision plus a margin, and reports 27 pair contacts
+      rather than 32.
 
-      So n = 28 is not blocked on a missing publication, and this commitment may not be
-      closed on the refusal above.
+      The calibration is what settles it, and it is why that tool sweeps at all: at n = 29
+      the true structure is known from a 160-digit provenance artifact -- 52 pair and 37
+      wall -- and the decimal route reports 17 and 36. A route that reproduces neither
+      known answer cannot have its numbers at n = 28 read as structure. So the refusal's
+      "no retained contact structure" clause is not a gap waiting to be filled by running
+      the extractor harder; it is a statement about what the retained decimals can support.
+
+      What would change this is what the refusal already says: a higher-precision source
+      for n = 28. The published minimal polynomial does not substitute for one -- the
+      catalogue gives s^6 - 24s^5 + 212s^4 - 812s^3 + 1025s^2 + 882s - 1615, and
+      `NumberField` constructs it and proves it irreducible mod 13, but a polynomial for
+      the side is not a pose.
 
       For n = 40 the refusal was wrong, and D-389 records why it was reached. Goebel's
       construction is published and transcribed here -- [Friedman DS7] section 2, the centred

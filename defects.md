@@ -2,7 +2,7 @@
 
 # Defect log
 
-401 defects recorded across the packing toolchain.
+402 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -23,9 +23,9 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `inspection` | 40 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 53 | the automated test suite |
+| `gate` | 54 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 53 of 401, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 54 of 402, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 53 of 401, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 4 |
-| record | 123 |
+| record | 124 |
 | tooling | 134 |
 | docs | 106 |
 
@@ -43,7 +43,7 @@ The line worth reading twice: **the automated gate caught 53 of 401, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 91 |
-| validity | 96 |
+| validity | 97 |
 | bookkeeping | 152 |
 | robustness | 47 |
 | performance | 15 |
@@ -623,6 +623,7 @@ This is the actionable list.
 | [D-399](packing/cases/gobel_family/verify_exact.py) | 2026-08-30 | docs | bookkeeping |  | `inspection` | low | fixed | A residual's explanation had the sign backwards, and called a rounding a truncation |
 | [D-400](packing/frontier/n-029.md) | 2026-08-30 | record | bookkeeping |  | `review` | medium | fixed | A blocker denied a certificate the register held, and two guards let it |
 | [D-401](packing/devtools/render_agenda_map.py) | 2026-08-30 | record | bookkeeping |  | `review` | low | fixed | The queue guarded against over-claiming readiness and not against hiding it |
+| [D-402](packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md) | 2026-08-30 | record | validity | flattering | `gate` | high | fixed | A contact structure was read out of padding and reported as a result |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
