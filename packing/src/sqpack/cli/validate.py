@@ -1138,6 +1138,14 @@ def _n5_rigidity_certificates(context: Context) -> str:
     return _module(context, "devtools.assess_n5_rigidity", "--check")
 
 
+def _n40_rigidity_bracket(context: Context) -> str:
+    # About three minutes: 240 linear programs over 400 rows, each proposal re-decided
+    # exactly in `Q(sqrt 2)`. That is why this step is neither `fast` nor `records` --
+    # it re-derives the mathematics rather than reading the record, and a three-minute
+    # check in the six-second records tier would make that tier one people skip (D-369).
+    return _module(context, "devtools.assess_n40_rigidity", "--check")
+
+
 def _differential(context: Context) -> str:
     if not ENGINE.is_file():
         raise StepSkippedError(
@@ -1656,6 +1664,17 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/assess_n5_rigidity.py",
             *_CASES,
             "packing/campaign/series/*/results/bc-049-n5-rigidity-certificates.json",
+        ),
+    ),
+    Step(
+        "n=40 rigidity bracket still reproduces",
+        _n40_rigidity_bracket,
+        touches=(
+            *_CORE,
+            "packing/devtools/assess_n40_rigidity.py",
+            "packing/devtools/assess_n5_rigidity.py",
+            *_CASES,
+            "packing/campaign/series/*/results/bc-049-n40-rigidity-bracket.json",
         ),
     ),
     Step(

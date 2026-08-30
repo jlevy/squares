@@ -20,6 +20,8 @@ from devtools.assess_n5_rigidity import (
     active_contacts,
     assess,
     constraint_rows,
+    contact_axes,
+    incident_contacts,
     load_pose,
     obstruction,
     propose_self_stress,
@@ -210,10 +212,11 @@ def test_a_mixed_row_is_refused_rather_than_answered() -> None:
 
     `rationalize` scales a row by `sqrt 2` when every entry is a pure multiple of it. That
     dichotomy is exhaustive at `n = 5` and not in general: Göbel's `n = 40` construction,
-    exact in the same field, has 296 of 608 rows carrying both a rational and a `sqrt 2`
-    part. No positive scalar rationalizes such a row, so the rational-weight search would
-    answer a different system -- and before this guard it did, reporting all 120 of that
-    pose's coordinates unpinned, which reads as a motion.
+    exact in the same field, has 184 of its 400 contact rows carrying both a rational and a
+    `sqrt 2` part -- 296 of 608 when the measurement was taken, before `D-390` removed the
+    incidences that are not contacts. No positive scalar rationalizes such a row, so the
+    rational-weight search would answer a different system -- and before this guard it did,
+    reporting all 120 of that pose's coordinates unpinned, which reads as a motion.
     """
     from cases.gobel40.packing import build  # noqa: PLC0415 - heavy exact construction
     from devtools.assess_n5_rigidity import MixedRowError, Pose  # noqa: PLC0415
@@ -237,3 +240,111 @@ def test_the_n5_dichotomy_really_is_exhaustive_there() -> None:
         and any(entry.coeffs[1] != 0 for entry in row)
     ]
     assert mixed == []
+
+
+def test_an_incidence_is_not_a_contact() -> None:
+    """`D-390`: a corner on an edge's endpoint constrains nothing, and 208 rows said it did.
+
+    Squares 0 and 6 of the `n = 40` pose are edge-to-edge neighbours at `(1/2, 1/2)` and
+    `(3/2, 1/2)`, separated by the line `x = 1` and by nothing else. The first square's
+    corners `(1, 0)` and `(1, 1)` land on the endpoints of the second's bottom and top
+    edges, so the raw incidence relation reports contacts on the vertical axis too --
+    asserting that a square free to move down may not.
+    """
+    from cases.gobel40.packing import build  # noqa: PLC0415 - heavy exact construction
+    from devtools.assess_n5_rigidity import Pose, separating  # noqa: PLC0415
+
+    squares, side, field = build()
+    pose = Pose(field, side, tuple(tuple(square) for square in squares))
+
+    incident = [one for one in incident_contacts(pose) if one.kind == "pair"]
+    contacts = [one for one in active_contacts(pose) if one.kind == "pair"]
+    assert (len(incident), len(contacts)) == (560, 352)
+
+    between = [one for one in incident if {one.moving, one.host} == {0, 6}]
+    normals: set[int] = set()
+    kept = 0
+    for one in between:
+        assert one.host is not None and one.edge is not None
+        if separating(pose, one.host, one.edge, one.moving):
+            kept += 1
+            normals.add(pose.normal(one.host, one.edge)[1].sign())
+    assert kept < len(between)
+    assert normals == {0}, "the surviving rows are horizontal, which is the only real axis"
+
+
+def test_n5_has_no_merely_incident_row() -> None:
+    """Why `D-390` went unnoticed, and why the `n = 5` result is unaffected."""
+    pose = load_pose()
+
+    assert incident_contacts(pose) == active_contacts(pose)
+
+
+def test_a_disjunctive_pose_is_refused_rather_than_answered() -> None:
+    """`D-391`: two squares touching at a corner may separate either way, not both ways.
+
+    Intersecting the two half-spaces is a subset of each branch, so the cone comes out too
+    small and the pose reads as more rigid than it is. The assessor refuses rather than
+    answering, because the answer would be wrong in the flattering direction.
+    """
+    from cases.gobel40.packing import build  # noqa: PLC0415 - heavy exact construction
+    from devtools.assess_n5_rigidity import (  # noqa: PLC0415
+        DisjunctiveContactError,
+        Pose,
+        disjunctive_pairs,
+        require_intersection_semantics,
+    )
+
+    squares, side, field = build()
+    pose = Pose(field, side, tuple(tuple(square) for square in squares))
+    contacts = active_contacts(pose)
+
+    assert len(disjunctive_pairs(pose, contacts)) == 42
+    assert len(contact_axes(pose, contacts)) == 98
+
+    with pytest.raises(DisjunctiveContactError, match="two axes at once"):
+        require_intersection_semantics(pose, contacts)
+
+
+def test_n5_has_no_disjunctive_pair() -> None:
+    """The exemption `X-007` argued in prose, as a check.
+
+    Each of the four contacts is a corner on the *interior* of a middle-square edge, so one
+    axis holds each pair and the tangent cone really is an intersection there.
+    """
+    from devtools.assess_n5_rigidity import disjunctive_pairs  # noqa: PLC0415
+
+    pose = load_pose()
+    contacts = active_contacts(pose)
+
+    assert disjunctive_pairs(pose, contacts) == []
+    assert len(contact_axes(pose, contacts)) == 4
+
+
+def test_the_ordered_field_search_reaches_what_the_restricted_cone_does() -> None:
+    """`certify` runs two searches, and the cheap one must not be silently doing nothing.
+
+    Bounding `p` and `q` below by zero refuses positive weights like `3 - sqrt 2`; leaving
+    them free and ordering by `p + sqrt(2) q >= 0` is complete over the field but
+    unbounded, and loses certificates to conditioning. Each reaches what the other cannot,
+    so the assertion is that both are live at `n = 5`.
+    """
+    from devtools.assess_n5_rigidity import (  # noqa: PLC0415
+        certify,
+        propose_field_weights,
+        verify_field_weights,
+    )
+
+    pose = load_pose()
+    rows = constraint_rows(pose, active_contacts(pose))
+    names = variable_names(pose.count)
+
+    restricted = 0
+    for index, name in enumerate(names):
+        if unconstrained(rows, index):
+            continue
+        assert certify(pose, rows, index, 1) is not None, name
+        weights = propose_field_weights(pose, rows, index, 1, ordered=False)
+        if weights is not None and verify_field_weights(pose, rows, weights, index, 1):
+            restricted += 1
+    assert restricted == 14, "the cheap cone carries n=5 on its own"

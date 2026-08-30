@@ -136,11 +136,15 @@ WALL_NORMALS: dict[str, tuple[int, int]] = {
 }
 
 
-def active_contacts(pose: Pose) -> list[Contact]:
-    """Every corner lying exactly on a wall or on another square's edge.
+def incident_contacts(pose: Pose) -> list[Contact]:
+    """Every corner lying exactly on a wall or on the segment of another square's edge.
 
     Decided by exact sign. A tight packing is one whose squares touch exactly, so a
     tolerance test here either invents contacts or misses the ones holding it together.
+
+    **Incidence is not contact**, and the difference is the whole of `D-390`. This is the
+    raw incidence relation, exposed so the gap between the two can be counted; the
+    constraint system is built from `active_contacts` below.
     """
     zero = pose.field.rational(0)
     found: list[Contact] = []
@@ -180,6 +184,95 @@ def _on_edge(pose: Pose, host: int, edge: int, point: Point) -> bool:
     along = (px - ax) * (bx - ax) + (py - ay) * (by - ay)
     length = (bx - ax) * (bx - ax) + (by - ay) * (by - ay)
     return along.sign() >= 0 and (length - along).sign() >= 0
+
+
+def separating(pose: Pose, host: int, edge: int, moving: int) -> bool:
+    """Does this host edge put the *whole* moving square on its outer side?
+
+    The test a corner incidence has to pass before it is a contact. Two convex bodies are
+    disjoint exactly when some axis separates them, and a host edge is such an axis only if
+    every corner of the moving square lies on its outer side -- not merely the one corner
+    that happens to touch its line.
+
+    An edge-to-edge neighbour fails this on two of its edges and passes on one. Squares at
+    centres `(1/2, 1/2)` and `(3/2, 1/2)` are separated by the vertical line `x = 1` and by
+    nothing else, yet the first square's corners `(1, 0)` and `(1, 1)` land on the
+    *endpoints* of the second's bottom and top edges, and `_on_edge` accepts an endpoint.
+    Reading those as contacts asserts that the first square may not move down, which is
+    false: it may, and nothing overlaps.
+    """
+    (ax, ay), _ = pose.edge(host, edge)
+    nx, ny = pose.normal(host, edge)
+    return all(((px - ax) * nx + (py - ay) * ny).sign() >= 0 for px, py in pose.squares[moving])
+
+
+def active_contacts(pose: Pose) -> list[Contact]:
+    """The incidences that are genuine contacts: every wall one, and the separating pairs.
+
+    Containment is a conjunction -- a corner on the bottom-left of the container is held by
+    both walls at once -- so every wall incidence is a constraint. A pair incidence is one
+    only if its edge actually separates the two squares.
+    """
+    return [
+        contact
+        for contact in incident_contacts(pose)
+        if contact.kind == "wall"
+        or separating(pose, contact.host, contact.edge, contact.moving)  # type: ignore[arg-type]
+    ]
+
+
+def contact_axes(pose: Pose, contacts: list[Contact]) -> dict[frozenset[int], set[Point]]:
+    """The distinct separating directions holding each touching pair, up to sign."""
+    axes: dict[frozenset[int], set[Point]] = {}
+    for contact in contacts:
+        if contact.kind != "pair":
+            continue
+        assert contact.host is not None and contact.edge is not None
+        nx, ny = pose.normal(contact.host, contact.edge)
+        if nx.sign() < 0 or (nx.sign() == 0 and ny.sign() < 0):
+            nx, ny = -nx, -ny
+        axes.setdefault(frozenset((contact.moving, contact.host)), set()).add((nx, ny))
+    return axes
+
+
+class DisjunctiveContactError(RuntimeError):
+    """A pair held apart by two axes at once, whose tangent cone is a union.
+
+    Two squares meeting at a single corner are separated by two independent directions, and
+    non-overlap asks for **either** to keep separating -- `a_1 . x >= 0` *or* `a_2 . x >= 0`.
+    The linearized feasible set is the union of two half-spaces, which is not a polyhedron
+    and not what a Farkas search decides.
+
+    Intersecting them instead is the flattering error, exactly as in `D-388`: the
+    intersection is a subset of each branch, so the cone comes out too small and the pose
+    reads as more rigid than it is. Squares at `(1/2, 1/2)` and `(3/2, 3/2)` touch at one
+    point and may separate along `x` or along `y`; requiring both forbids a motion that
+    overlaps nothing.
+
+    Measured on 2026-08-30: `n = 5` has none of these, which is why the assessment there is
+    exactly right. Goebel's `n = 40` has 42 of its 98 touching pairs, and enumerating the
+    branches is `2^42` linear programs.
+    """
+
+
+def disjunctive_pairs(pose: Pose, contacts: list[Contact]) -> list[frozenset[int]]:
+    """The touching pairs whose tangent cone is a union rather than a half-space."""
+    return [pair for pair, axes in contact_axes(pose, contacts).items() if len(axes) > 1]
+
+
+def require_intersection_semantics(pose: Pose, contacts: list[Contact]) -> None:
+    """Refuse a pose whose tangent cone is not the intersection of its contact half-spaces.
+
+    Called before any search runs, so the assessor stops rather than answering a question
+    its linearization does not pose.
+    """
+    disjunctive = disjunctive_pairs(pose, contacts)
+    if disjunctive:
+        raise DisjunctiveContactError(
+            f"{len(disjunctive)} touching pairs are held apart by two axes at once "
+            f"(first: squares {sorted(disjunctive[0])}); their tangent cone is a union of "
+            "half-spaces and intersecting it reports a cone smaller than the geometry has"
+        )
 
 
 def constraint_rows(pose: Pose, contacts: list[Contact]) -> list[list[FieldElement]]:
@@ -348,6 +441,153 @@ def propose_weights(
     if not result.success:
         return None
     return [Fraction(value).limit_denominator(10**6) for value in result.x]
+
+
+ROOT_TWO = 2.0**0.5
+"""The linear program's view of `sqrt 2`, which orders the weights approximately.
+
+Only the ordering is approximate. Every certificate is re-decided exactly in the field
+before it counts, so a float here can lose a certificate and cannot invent one.
+"""
+
+
+def _nonnegativity(count: int) -> list[list[float]]:
+    """`-(p_j + sqrt(2) q_j) <= 0` for each row: the weight is non-negative in the field."""
+    rows: list[list[float]] = []
+    for index in range(count):
+        row = [0.0] * (2 * count)
+        row[index] = -1.0
+        row[count + index] = -ROOT_TWO
+        rows.append(row)
+    return rows
+
+
+def _total_weight(count: int) -> list[float]:
+    """Minimize `sum_j w_j`, which makes the search usable rather than merely correct.
+
+    With `p` and `q` free in sign the feasible region is unbounded, and a solver handed a
+    zero objective returns whichever vertex it reaches -- typically one with enormous
+    entries, which `Fraction.limit_denominator` then rounds into something that fails the
+    exact check. Every certificate is lost that way, all fourteen at `n = 5` included.
+
+    The total weight is non-negative on the feasible set, so minimizing it is bounded, and
+    it selects the smallest certificate rather than an arbitrary one. That is also the one
+    worth recording: a Farkas certificate is meant to be read, and a short one can be
+    checked by hand.
+    """
+    return [1.0] * count + [ROOT_TWO] * count
+
+
+def propose_field_weights(
+    pose: Pose,
+    rows: list[list[FieldElement]],
+    index: int,
+    sign: int,
+    *,
+    ordered: bool = False,
+) -> list[FieldElement] | None:
+    """Search for non-negative *field* weights summing to `sign * e_index`.
+
+    Each row gets two rational unknowns and contributes `p_j a_j + q_j sqrt(2) a_j`, making
+    its weight `p_j + q_j sqrt(2)` -- a general element of the field, so the parametrization
+    excludes nothing. What has to be got right is the ordering, and there are two ways to
+    ask for it, neither dominating the other.
+
+    `ordered=False` bounds `p` and `q` below by zero. Sufficient for non-negativity and not
+    necessary: it refuses a weight like `3 - sqrt 2`, which is positive. It is also
+    well-conditioned, and the certificates it returns are short.
+
+    `ordered=True` leaves both free in sign and imposes the single linear inequality
+    `p_j + sqrt(2) q_j >= 0`, which is exactly non-negativity in the field. That is the
+    ordered-field search `D-388` said the mixed rows would need. It is complete in
+    principle and fragile in practice: the region is unbounded, `sqrt 2` enters the solver
+    as a float, and a vertex with large entries survives `limit_denominator` badly.
+    `certify` therefore runs the cheap cone first and falls back to this one.
+
+    `rationalize` is a special case of the restricted cone and was never merely a
+    conditioning step: run without it, `n = 5` certifies nothing at all. Scaling an
+    all-irrational row by `sqrt 2` is exactly the licence to give that row a weight in
+    `sqrt(2) Q` rather than in `Q`.
+
+    Either way the search only proposes. Every sign is re-decided exactly by
+    `verify_field_weights`, so an approximate ordering can lose a certificate and cannot
+    invent one -- and a lost certificate is reported `uncertified`, never `free`.
+
+    Mixed rows are no obstacle to either cone: nothing is being scaled into rationality, and
+    the column equations split into a rational half and a `sqrt 2` half as they always did.
+    """
+    from scipy.optimize import linprog  # noqa: PLC0415 - heavy optional import
+
+    root = pose.field.alpha
+    width = len(rows[0])
+    scaled = [[entry * root for entry in row] for row in rows]
+    equations: list[list[float]] = []
+    targets: list[float] = []
+    for column in range(width):
+        for part in range(2):
+            equations.append(
+                [float(row[column].coeffs[part]) for row in rows]
+                + [float(row[column].coeffs[part]) for row in scaled]
+            )
+            targets.append(float(sign if (column == index and part == 0) else 0))
+    count = len(rows)
+    result = linprog(
+        _total_weight(count) if ordered else [0.0] * (2 * count),
+        A_ub=_nonnegativity(count) if ordered else None,
+        b_ub=[0.0] * count if ordered else None,
+        A_eq=equations,
+        b_eq=targets,
+        bounds=[(None, None)] * (2 * count) if ordered else [(0.0, None)] * (2 * count),
+        method="highs",
+    )
+    if not result.success:
+        return None
+    q = pose.field.rational
+    half = len(rows)
+    return [
+        q(Fraction(result.x[j]).limit_denominator(10**6))
+        + q(Fraction(result.x[half + j]).limit_denominator(10**6)) * root
+        for j in range(half)
+    ]
+
+
+def certify(
+    pose: Pose, rows: list[list[FieldElement]], index: int, sign: int
+) -> list[FieldElement] | None:
+    """Verified field weights combining the rows into `sign * e_index`, or `None`.
+
+    Two searches, tried cheapest first, each proposal checked exactly. Their union is sound
+    because verification is the same either way, and it is more complete than either: the
+    restricted cone reaches certificates the unbounded program loses to conditioning, and
+    the ordered one reaches weights the restricted cone cannot express.
+    """
+    for ordered in (False, True):
+        weights = propose_field_weights(pose, rows, index, sign, ordered=ordered)
+        if weights is not None and verify_field_weights(pose, rows, weights, index, sign):
+            return weights
+    return None
+
+
+def verify_field_weights(
+    pose: Pose,
+    rows: list[list[FieldElement]],
+    weights: list[FieldElement],
+    index: int,
+    sign: int,
+) -> bool:
+    """Exactly: non-negative field weights whose combination is `sign * e_index`."""
+    q = pose.field.rational
+    if any(weight.sign() < 0 for weight in weights):
+        return False
+    for column in range(len(rows[0])):
+        total = q(0)
+        for weight, row in zip(weights, rows, strict=True):
+            if weight.sign() != 0:
+                total = total + row[column] * weight
+        wanted = q(sign) if column == index else q(0)
+        if (total - wanted).sign() != 0:
+            return False
+    return True
 
 
 def verify_weights(
@@ -570,6 +810,7 @@ def _second_order(
 def assess() -> dict[str, Any]:
     pose = load_pose()
     contacts = active_contacts(pose)
+    require_intersection_semantics(pose, contacts)
     raw = constraint_rows(pose, contacts)
     rows = rationalize(pose, raw)
     scales = row_scales(pose, raw)

@@ -2486,12 +2486,12 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 389 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 391 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 89 | asserted something false about the mathematics |
+| soundness | 91 | asserted something false about the mathematics |
 | validity | 93 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 146 | recorded something its own evidence contradicts |
 | robustness | 46 | did not finish, or finished only by luck |
@@ -2499,11 +2499,11 @@ and checked in the gate.
 
 Two observations the log exists to make.
 
-**Seventy of the eighty-nine soundness defects pointed in the *flattering* direction**,
-where the error looks like a success.
+**Seventy-two of the ninety-one soundness defects pointed in the *flattering*
+direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fifty defects in 389, and no soundness defect ever.**
+**The automated gate has caught fifty defects in 391, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -2512,6 +2512,18 @@ Gates confirm what you already thought to check; these were found by devices bui
 test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
+
+One entry is currently `outstanding` rather than fixed, and it is worth naming because
+refusing was the whole of the available fix.
+[D-391](defects.md) is the first-order rigidity assessor intersecting a tangent cone
+that is a union: two squares meeting at a single corner are held apart by two axes, and
+non-overlap asks that *either* keep separating, so the linearized feasible set is a
+union of half-spaces and not a polyhedron.
+Intersecting them is a subset of every branch, so a pose reads as more rigid than it is.
+`n = 5`, the only size this instrument has produced a retained claim about, has no such
+pair; Göbel’s `n = 40` has 42 of its 98 touching pairs, and deciding it is `2^42` linear
+programs by the route `cases/trump11/tangent_cones.py` takes at `n = 11` for `2^7`. The
+assessor now refuses that pose instead of answering it.
 
 The record can also be wrong about itself, and [D-358](defects.md) is this run being so:
 an unattended run declared blocks of 150, 180, 180 and 40 minutes and took 31, 42, 29

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 389
+count: 391
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10966,3 +10966,115 @@ defects:
     supply one.
   bead: think-xdly
   recorded_in: packing/cases/gobel40/packing.py
+
+- id: D-390
+  title: An incidence was read as a contact, and the difference is a false constraint
+  date: '2026-08-30'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: control_cell
+  latent_for: 'since assess_n5_rigidity was written the same day; caught the first time it met a pose with edge-to-edge neighbours'
+  severity: high
+  status: fixed
+  what: >-
+    `assess_n5_rigidity.active_contacts` emitted a constraint row for every corner lying
+    exactly on the *segment* of another square's edge, and `_on_edge` accepts a corner
+    landing on either **endpoint** of that segment. Incidence is not contact. A host edge
+    holds two squares apart only if the whole moving square lies on its outer side, and an
+    endpoint incidence routinely fails that.
+
+    Two squares sharing a full edge are the ordinary case. At centres `(1/2, 1/2)` and
+    `(3/2, 1/2)` the only separating line is `x = 1`; the first square's corners `(1, 0)`
+    and `(1, 1)` nonetheless land on the endpoints of the second's bottom and top edges, so
+    the assessor emitted rows asserting that the first square may not move down and may not
+    move up. It may do both, and nothing overlaps.
+
+    At `n = 5` every incidence is a genuine contact -- each corner rests at the *midpoint*
+    of a middle-square edge -- so all four pair rows are real and the assessment is
+    unaffected. Goebel's `n = 40` has **208 of its 560 pair rows** merely incident.
+  consequence: >-
+    Flattering, and by the same mechanism as `D-388` running the other way. Extra rows
+    shrink `{x : Ax >= 0}`, so coordinates come back pinned that the geometry does not pin,
+    and the pose reads as more rigid than it is. Run on `n = 40` with the spurious rows in
+    place, all 120 coordinates certify; with them removed and nothing else changed, the
+    honest system is 400 rows rather than 608.
+
+    Nothing was published from it. `n = 5` is the only pose this assessor has produced a
+    retained claim about and it has none of these rows, so no frontier record moves. What
+    earns `high` is the counterfactual: `X-007` reads a zero-dimensional cone as rigidity,
+    and this is a way for that cone to collapse from bookkeeping rather than from geometry.
+  fix: >-
+    `separating(pose, host, edge, moving)` -- every corner of the moving square on the outer
+    side of the host edge, decided by exact sign -- and `active_contacts` now keeps only the
+    pair incidences that pass it. The raw relation stays available as `incident_contacts`,
+    so the gap between the two can be counted rather than merely asserted.
+
+    Wall incidences are all kept and that asymmetry is the point: containment is a
+    conjunction, so a corner in the container's bottom-left is genuinely held by both walls,
+    where a pair is held apart by an axis or it is not held at all.
+  regression: >-
+    `test_an_incidence_is_not_a_contact` asserts the `n = 40` split (560 incident pair rows,
+    352 separating) and that the specific edge-to-edge pair contributes rows on one axis
+    only; `test_n5_has_no_merely_incident_row` asserts `n = 5`'s four pair incidences all
+    separate, which is why that result stands. The second test is the one that matters: a
+    filter without it would leave open whether the first size was ever safe.
+  bead: think-s424
+  recorded_in: packing/devtools/assess_n5_rigidity.py
+
+- id: D-391
+  title: A tangent cone that is a union of half-spaces was intersected
+  date: '2026-08-30'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: control_cell
+  latent_for: 'since assess_n5_rigidity was written the same day; the principle was already written down in X-007 and in two other instruments'
+  severity: high
+  status: outstanding
+  what: >-
+    Two squares meeting at a single corner are held apart by **two** independent axes, and
+    non-overlap asks that *either* keep separating: `a_1 . x >= 0` **or** `a_2 . x >= 0`.
+    The linearized feasible set is a union of half-spaces, which is not a polyhedron. The
+    assessor built one row per axis and intersected them.
+
+    Squares at `(1/2, 1/2)` and `(3/2, 3/2)` touch at one point and may separate along `x`
+    or along `y`. Requiring both forbids motions that overlap nothing. `n = 5` has no such
+    pair -- all four of its contacts are a corner on the interior of an edge -- and Goebel's
+    `n = 40` has **42 of its 98 touching pairs**.
+
+    The repository already knew this twice over. `screen_translation_escape.ActiveContacts`
+    preserves the union explicitly ("the OR inside a group and the AND across groups are the
+    whole geometry of the question"); `cases/trump11/tangent_cones.py` decides `n = 11` by
+    enumerating 128 branchwise cones rather than intersecting; and `X-007` states the
+    principle in prose, then argues `n = 5` is exempt from it. All three are right. The
+    assessor was written without either guard, and the exemption was never turned into a
+    check.
+  consequence: >-
+    Flattering. The intersection is a subset of every branch, so the cone comes out too
+    small and a pose reads as more rigid than it is. `n = 5` is unaffected and no retained
+    record moves.
+
+    The cost is that `n = 40` cannot be decided by this instrument, and the shape of the
+    obstruction is now measured rather than guessed. With the spurious rows of `D-390`
+    removed, two models bracket the truth: intersecting the 42 disjunctions gives a cone
+    contained in every branch, and it is trivial -- so no first-order flex can be exhibited
+    this cheaply; dropping them gives a cone containing every branch, and it pins 56 of 120
+    coordinates -- so rigidity is not proved either. Deciding between them is `2^42` linear
+    programs by the `n = 11` route.
+  fix: >-
+    Not fixed. `DisjunctiveContactError`, raised by `assess` before any search runs, so the
+    assessor refuses a pose it cannot honestly answer rather than answering it. `n = 5`
+    passes the guard because it has no such pair.
+
+    Refusing is the whole fix available here, exactly as with `D-388`. A branch-and-bound
+    over the disjunctions is a different instrument -- `cases/trump11/tangent_cones.py` is
+    what one looks like -- and until it exists the honest behaviour is to say which pairs
+    stop the answer and how many.
+  regression: >-
+    `test_a_disjunctive_pose_is_refused_rather_than_answered` builds `n = 40` and asserts
+    the guard fires with the 42-pair count; `test_n5_has_no_disjunctive_pair` asserts
+    `n = 5` has none. The pair is the point again: the guard is only meaningful alongside
+    evidence that the size it was written for never needed it.
+  bead: think-s424
+  recorded_in: packing/devtools/assess_n5_rigidity.py
