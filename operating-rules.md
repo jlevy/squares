@@ -22,6 +22,17 @@ A script in
 reported a Bézout bound of `12,690,480` where the answer is `1,039,500`, and it was said
 out loud before the guarded tool that refused it existed.
 
+**The rate is measured and nobody reads it.** `ClaudeEfficiencyRollup/v1` has always
+counted `one_off_code`, and session-047 is the first to look: 954 of 3416 tool calls,
+27.9%, three hours of wall time, 718 of them Python heredocs — in the session that wrote
+this paragraph. That number is not a gate and should not become one.
+The rule forbids *leaving* a measurement in one-off code, not exploring with it, and a
+threshold on heredocs would fail the exploration this repository depends on while
+catching none of the actual defect, which is a retained number whose tool does not
+exist. It is here because a rule with a number attached is harder to feel exempt from
+than one without, and because the rollup can answer this question for any session that
+asks.
+
 Three shapes keep recurring, kept here as instances so a W7 session can generalise the
 tool from them:
 
