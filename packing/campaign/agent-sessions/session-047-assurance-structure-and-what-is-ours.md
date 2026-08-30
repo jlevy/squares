@@ -8,7 +8,7 @@ softschema:
 session:
   id: session-047
   primary_bead: think-xdly
-  status: in_progress
+  status: completed
   title: Make the assurance record say who established what
   date: '2026-08-30'
   started_at: '2026-08-30T16:30:00Z'
@@ -281,7 +281,7 @@ session:
     bead: think-xdly
     objective: >-
       Record this session while it is still running, and account for what it cost.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       The clock role changes from work to finalization. Five phases of work had produced no
@@ -303,7 +303,7 @@ session:
       The rollups alone; they are the part that cannot be reconstructed once the harness
       log is gone.
     outcome: >-
-      In progress. The rollups are written: the session log at 18330 records, 6106 turns
+      The rollups are written: the session log at 18330 records, 6106 turns
       and 3416 tool calls over 35.88 hours, and twelve sub-agent logs beside it. One number
       in that rollup is worth reading against OR-1 rather than filing -- 954 of the tool
       calls are one-off code, and 718 are Python heredocs, in a session whose first
@@ -312,10 +312,11 @@ session:
     - packing/campaign/agent-sessions/session-047-assurance-structure-and-what-is-ours.md
     - packing/campaign/resource-usage/3930e045-47fc-5947-8bf6-0c92155bcd88.yaml
     - SYNOPSIS.md
-    stop_reason: null
+    stop_reason: >-
+      The record exists, the rollups are written, and PR #63's description was rewritten to
+      match the branch rather than the half of it that predates this session.
     next_action: >-
-      Push, then take the next slice from this record's own next_action rather than the
-      backlog.
+      The recognition sweep this record's next_action names.
   stop_conditions:
   - >-
     `apparently-novel` obliges a documented search. No record gets the label on an
@@ -367,7 +368,10 @@ session:
   - packing/campaign/resource-usage/agent-ade870588ae0888a1.yaml
   - packing/campaign/resource-usage/agent-aef07d923ca86729c.yaml
   - packing/campaign/resource-usage/agent-af6005e953cb04f35.yaml
-  stop_reason: null
+  stop_reason: >-
+    The block is complete and closed here rather than left open with a rolling deadline: an
+    in-progress session whose deadline has passed is a refusable state, and rolling it
+    forward to stay inside the gate would be the bookkeeping D-358 records.
   next_action: >-
     `BC-049` stays open and this session did not touch its mathematics. Three evidence
     records still make no novelty statement and should keep making none

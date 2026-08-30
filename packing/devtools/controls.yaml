@@ -109,12 +109,15 @@ controls:
   run: python3 -m devtools.render_operating_rules --check
   expect: "AGENTS.md's summary has drifted"
 
+# The injected id must be one past the highest real rule, or the renderer refuses on
+# contiguity before it can notice the drift this control is about -- which is what happened
+# when OR-8 was added for real and this still injected OR-8. Bump it with the rule count.
 - name: operating rules - a new rule never reaches the summary
   file: ../operating-rules.md
   replace:
     - "<!-- This document follows common-doc-guidelines.md."
     - |-
-      ## OR-8: Never push to a branch other than the designated one
+      ## OR-9: Never push to a branch other than the designated one
 
       <!-- This document follows common-doc-guidelines.md.
   run: python3 -m devtools.render_operating_rules --check
