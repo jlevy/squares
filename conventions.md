@@ -179,7 +179,8 @@ a claim the record does not already carry — a document that wants to say somet
 is asking for W1 or W6. Where a document and an artifact disagree and the artifact is
 not obviously right, the output is a defect rather than a rewrite: a pass that quietly
 picks the more readable side is how a wrong claim becomes the tidy one.
-Its checklist is [§12](#12-the-w8-documentation-checklist).
+Its checklist is the
+[documentation-pass runbook](packing/campaign/documentation-pass.md).
 
 **A phase is contiguous; a slice is bounded.** [checked for phase history] Start a new
 phase when workflow, focus, or the bounded slice objective changes.
@@ -451,81 +452,18 @@ That merge preserves reviewed work; it does not certify the failed producer or a
 an unattended campaign.
 The strict gate remains mandatory before the deep handoff or launch that depends on it.
 
-## 12. The W8 Documentation Checklist
+## 12. What This Page Is Not
 
-A documentation pass is worth opening when a run has closed several commitments and the
-reader-facing tier has not caught up.
-It is worth *closing* when every item below has an answer, including the ones whose
-answer is “nothing to do”.
+**A file-system map is [`README.md`](README.md); a procedure is
+[`operating-rules.md`](operating-rules.md) or a runbook.** This page carries the
+systematic formats that would otherwise be handled inconsistently: ids, naming, artifact
+and schema shape, notation, provenance and correction form, layer boundaries, and coding
+conventions. Where a family of them is large enough to stand alone it may live in a
+nested `conventions.md` that this one references, rather than growing this page.
 
-**Order matters.** Read the artifacts first, the documents second, and never the
-reverse: a pass that starts from the prose inherits the prose’s mistakes.
-
-**Per document.**
-
-- [`README.md`](README.md) — the front door.
-  Does the first screen still say what the project is and what it has?
-  Do the workflow entry points, the directory tree, and every headline number match the
-  record? Is the thing a new reader should do first still the first thing offered?
-- [`TUTORIAL.md`](TUTORIAL.md) — orientation.
-  Does every command run, on a clean checkout, in the order given?
-  Does it teach the problem before the tooling?
-  Does a reader who finishes it know what this project can and cannot certify — and can
-  they say why the reported and verified bounds differ?
-- [`SYNOPSIS.md`](SYNOPSIS.md) — the technical account.
-  Does the readiness table match [What Is Built](SYNOPSIS.md#what-is-built)?
-  Does the handoff point at work that exists, on beads that exist?
-  Are the defect aggregates the generated ones?
-- [`conventions.md`](conventions.md) — this page.
-  Is every `[checked]` claim still checked by something, and every `[convention]` still
-  observed?
-- [`operating-rules.md`](operating-rules.md) — is every rule still one an agent should
-  follow, and does each still cite the failure that motivated it?
-  Regenerate `AGENTS.md`’s summary with `devtools.render_operating_rules` rather than
-  editing it.
-- [`development.md`](development.md) — do the commands still exist, with those flags?
-
-**Across documents.**
-
-- One fact, one home. Where two documents state the same number, one of them should be
-  citing the other or the artifact — not restating it.
-- No document should be the only place a load-bearing claim appears.
-- Claim boundaries survive editing.
-  `reported` is not `verified`, `verified` is not the optimum, and a bound on a retained
-  witness is not a bound on `s(n)`. These are the sentences most likely to be smoothed
-  away, and the ones that must not be.
-
-**Generated graphics.** Figures drift the way prose does, and they drift more quietly
-because nobody rereads them.
-
-- Run each generator’s own check, which is the cheap half:
-  `build_known_best_atlas --check`, `check_svg_rendering --check`,
-  `render_known_best_contact_overlays --check`, `build_prospective_atlas --check`,
-  `build_composite_figure_data --check`, `render_document_map --check`. A failure here
-  means the stored artifact no longer matches its inputs.
-- Then the half no checker does: **a figure can be byte-identical to its inputs and
-  still be stale in meaning.** If the record now says something the figure was drawn
-  before — a bound moved, a case was added, a claim narrowed — the drawing is wrong even
-  though it regenerates clean.
-  Read each figure against the sentence that introduces it.
-- Never hand-edit a generated artifact.
-  If it is wrong, the generator is wrong.
-- Two known limits, so a pass does not rediscover them: the composite PNG needs macOS
-  `sips` or ImageMagick 7 and cannot be regenerated on a stock Linux runner, and
-  emission precision is pinned at 28 ([D-359](defects.md)) with a related check still
-  open ([D-362](defects.md)) — a pass that finds a figure needing a precision change is
-  looking at that defect, not at a figure bug.
-
-**Before closing.**
-
-- Every drift either fixed or filed as a defect, with no third option.
-- Generated views regenerated: `packing-ledger render`, `devtools.render_defects`,
-  `devtools.check_synopsis`.
-- `make format` clean, gate green, and a statement of what was checked *and what was
-  left*.
-
-Everything else on this page is convention, and convention is what drifts.
-When a rule here is broken and nothing catches it, the fix is a check, not a reminder.
+The W8 documentation checklist used to sit here and is now
+[the documentation-pass runbook](packing/campaign/documentation-pass.md), because a
+checklist for running a pass is a procedure and not a format.
 
 ## Defect Classes
 

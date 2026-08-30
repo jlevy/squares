@@ -32,13 +32,12 @@ from pathlib import Path
 from threading import Lock
 from typing import Literal, Never, override
 
-import yaml
-
 from sqpack.project import (
     ProjectLayoutError,
     configured_project_root,
     require_project_root,
 )
+from sqpack.yamlio import safe_load
 
 PROJECT_ROOT = configured_project_root()
 REPOSITORY_ROOT = PROJECT_ROOT.parent
@@ -377,17 +376,17 @@ def _soundness_perimeter(context: Context) -> str:
     return output
 
 
-def _python_quality(context: Context) -> str:
+def _lint_floor(context: Context) -> str:
+    """Ruff alone, because it is the half that is instant and the half that caught a
+    registry bug: the duplicated declared-consumer key behind one of D-369's CI
+    failures was an `F601`. Measured under a second against basedpyright's 36."""
     ruff = _required_tool(context, "ruff")
+    return _commands(context, ((ruff, "check", "."), (ruff, "format", "--check", ".")))
+
+
+def _type_floor(context: Context) -> str:
     basedpyright = _required_tool(context, "basedpyright")
-    output = _commands(
-        context,
-        (
-            (ruff, "check", "."),
-            (ruff, "format", "--check", "."),
-            (basedpyright,),
-        ),
-    )
+    output = _commands(context, ((basedpyright,),))
     _require_text(output, "0 errors, 0 warnings, 0 notes")
     return output
 
@@ -815,7 +814,7 @@ def _frontier_corpus(context: Context) -> str:
     reported_open = 0
     nagamochi_count = 0
     for path in files:
-        data = yaml.safe_load(path.read_text(encoding="utf-8").split("---\n")[1])
+        data = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])
         softschema = data["softschema"]
         packing = data["packing"]
         if softschema != {
@@ -886,7 +885,7 @@ def _strategy_catalogues(_context: Context) -> str:
     lines: list[str] = []
     for kind, field_name, expected in (("search", "outcome", 20), ("proof", "status", 30)):
         path = PROJECT_ROOT / "frontier" / f"{kind}-strategies.yaml"
-        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        data = safe_load(path.read_text(encoding="utf-8"))
         strategies = data["strategies"]
         observed_kind = data.get("kind")
         if observed_kind != kind:
@@ -1077,7 +1076,8 @@ def _campaign_record(context: Context) -> str:
 
 STEPS: tuple[Step, ...] = (
     Step("soundness perimeter", _soundness_perimeter, needs_engine=True),
-    Step("lint floor (python)", _python_quality, fast=True, records=True),
+    Step("lint floor (ruff)", _lint_floor, fast=True, records=True),
+    Step("type floor (basedpyright)", _type_floor, fast=True),
     Step("basin atlas", _basin_atlas),
     Step("basin event record and replay", _basin_events),
     Step("historical regressions", _historical_regressions),

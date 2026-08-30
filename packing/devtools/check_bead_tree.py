@@ -33,7 +33,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-import yaml
+from sqpack.yamlio import safe_load
 
 REPO = Path(__file__).resolve().parents[2]
 ISSUES = ".tbd/data-sync/issues"
@@ -49,7 +49,7 @@ def _parse(text: str) -> dict[str, Any] | None:
     end = text.find("\n---\n", 4)
     if end < 0:
         return None
-    front = yaml.safe_load(text[4:end])
+    front = safe_load(text[4:end])
     return front if isinstance(front, dict) and "id" in front else None
 
 

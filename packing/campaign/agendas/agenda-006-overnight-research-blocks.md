@@ -1204,7 +1204,7 @@ agenda:
       because `check_synopsis` forces it to; `README.md` and `TUTORIAL.md` do not, and
       nothing forces them.
     exit: >-
-      The checklist in `conventions.md` section 12 run over every root document, with each
+      The checklist in `campaign/documentation-pass.md` run over every root document, with each
       drift either fixed or filed as a defect and no third option; generated views
       regenerated; and an explicit statement of what was checked and what was left.
     bead: think-eb29
@@ -1226,6 +1226,15 @@ agenda:
       bound on the Kingbird solution is not a bound on `s(29)`. D-367 is what that failure
       looks like when it happens, and it happened in the same run that is asking for this
       pass.
+
+      **The `n = 11` research report is in scope and is the item most likely to be stale.**
+      `docs/project/research/research-2026-08-22-packing-11-unit-squares.md` was last
+      updated on 2026-08-25 and carries `Status: Complete`; everything this run established
+      at `n = 11` postdates it -- the exact route closing end to end with a difference of
+      exactly zero, the round trip from minimal polynomial back to a verified packing, the
+      exact LP and its constructed first vertex. It is a dated report, so the pass adds what
+      the record now establishes and does not rewrite what was known then. The other
+      research reports survey external literature and move only when a source does.
 
       The figures are in scope too, and they drift more quietly than prose because nobody
       rereads them. The generators' own `--check` flags catch an artifact that no longer
@@ -1322,6 +1331,8 @@ agenda:
       decision on the coordinator's own discipline, which is the other half of the waste.
       Both argued from a rollup of this session's own timing logs rather than from
       impressions of them.
+    artifacts:
+    - docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md
     bead: think-c46d
     depends_on: [BC-074]
     workflows: [efficiency-loop]
@@ -1351,9 +1362,27 @@ agenda:
       `operating-rules.md`, summarised into `AGENTS.md` -- and `D-369` supplies the first
       measurement this block was going to have to take. Seven CI failures on this branch,
       every one a registry, generated view, or declared contract going stale, none a
-      behavioural test; the record checks run in about 70 seconds against the fast tier's
-      eight minutes, of which one step is 87%. `packing-validate --records` exists as the
-      increment that stops the recurrence, so what is left here is the measured part: which of the three specific rules the timings actually support, and
+      behavioural test; the record checks run against the fast tier's eight minutes, of
+      which one step is 87%. `packing-validate --records` exists as the increment that
+      stops the recurrence.
+
+      **This block now has a spec**, `docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md`,
+      and four beads on it: `think-64bw` swaps the validator, `think-p9of` moves the exact
+      geometry out of the schema step, `think-2bk2` builds the benchmark and the
+      differential test, and `think-av72` is this block's own tier contract. The first
+      three are phase 1 and can land before the block opens; the tier argument is phase 2
+      and is what the block is for.
+
+      **`D-370` is the next thing this block has to act on, and it reframes the target.**
+      A registry or schema check should be effectively instant, and these are: after the
+      loader fix, validating the 100 frontier cases takes `0.38s`, the frontier datasets
+      `0.03s`, and `defects.yaml` `0.08s`. What the `25.2s` step actually spends is `8.64s`
+      of jsonschema descent over 208 witness files and `10.29s` of `verify_packing` over 96
+      packings -- exact geometry, inside a step named for schemas. So the tier question is
+      not only which steps run when; it is that two steps are wearing one step's name. Split
+      them and the pre-push tier is seconds rather than a minute.
+
+      So what is left here is the measured part: which of the three specific rules the timings actually support, and
       whether any of them is better enforced by tooling than by a rule. A rule an agent
       reads and a tier that makes the rule unnecessary are different fixes, and this block
       is where they are told apart.

@@ -69,9 +69,8 @@ from contextlib import suppress
 from dataclasses import dataclass
 from pathlib import Path
 
-import yaml
-
 from sqpack.workers import worker_count
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 # The REPOSITORY root, not this directory: one control targets ../../.flowmarkignore,
@@ -140,7 +139,15 @@ ROOT_DOCUMENTS = (
 )
 # Keep a bounded portable fallback with enough headroom for source, schemas, and
 # manifests after generator-owned prospective geometry is pruned above.
-SNAPSHOT_MAX_BYTES = 40 * 1024 * 1024
+#
+# Raised from 40 MiB on 2026-08-29, when the snapshot measured 39.20 MiB and the guard
+# was one artifact away from refusing to run the whole suite (D-371). The cap exists to
+# stop someone checking in a gigabyte of data, not to track the record's ordinary growth,
+# and a guard with 2% headroom fires for the wrong reason. Cost is the cap times the
+# worker count, so 64 MiB across three private trees is still bounded. `atlas/` is
+# 18.16 MiB of the total; pruning what no control reads is the alternative to raising
+# this again, and it belongs with the tier work rather than here.
+SNAPSHOT_MAX_BYTES = 64 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something
@@ -369,7 +376,7 @@ def main(arguments: list[str] | None = None) -> int:
     """Run selected controls in isolated source snapshots."""
     options = _parser().parse_args(arguments)
     spec_path = options.spec if options.spec.is_absolute() else ROOT / options.spec
-    spec = yaml.safe_load(spec_path.read_text(encoding="utf-8"))
+    spec = safe_load(spec_path.read_text(encoding="utf-8"))
     only = options.match
     controls = [c for c in spec["controls"] if not only or only in c["name"]]
     if not controls:

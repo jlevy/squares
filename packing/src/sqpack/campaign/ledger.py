@@ -31,12 +31,12 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
-import yaml
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
 from sqpack.assurance import check_experiment_semantics
 from sqpack.project import ProjectLayoutError, configured_project_root, require_project_root
+from sqpack.yamlio import safe_load
 
 PROJECT_ROOT = configured_project_root()
 ROOT = PROJECT_ROOT / "campaign"
@@ -105,7 +105,7 @@ def validator_for(path: Path, front: dict, envelope: str) -> Draft202012Validato
     if schema_path not in _SCHEMAS:
         if not schema_path.exists():
             raise SystemExit(f"{path}: declared schema not found: {rel}")
-        schema = yaml.safe_load(schema_path.read_text())
+        schema = safe_load(schema_path.read_text())
         _SCHEMAS[schema_path] = (schema, Draft202012Validator(schema))
     schema, validator = _SCHEMAS[schema_path]
     declared_envelope = meta.get("envelope")
@@ -132,7 +132,7 @@ def load(directory: Path, envelope: str, pattern: str = "*.md") -> list[dict]:
         text = path.read_text()
         if not text.startswith("---\n"):
             raise SystemExit(f"{path}: no frontmatter")
-        front = yaml.safe_load(text.split("---\n", 2)[1])
+        front = safe_load(text.split("---\n", 2)[1])
         payload = front.get(envelope)
         if payload is None:
             raise SystemExit(f"{path}: no '{envelope}' envelope in frontmatter")
@@ -148,7 +148,7 @@ def load(directory: Path, envelope: str, pattern: str = "*.md") -> list[dict]:
 
 def workflow_order() -> list[str]:
     """Canonical workflow order, owned by the agent-session contract."""
-    schema = yaml.safe_load(SESSION_SCHEMA.read_text())
+    schema = safe_load(SESSION_SCHEMA.read_text())
     workflows = (schema.get("$defs") or {}).get("workflow", {}).get("enum")
     if not isinstance(workflows, list) or not workflows:
         raise SystemExit(f"{SESSION_SCHEMA}: no canonical $defs.workflow enum")
@@ -233,8 +233,7 @@ def check_logbook_entries(logbook_entries, sessions, experiments) -> list[str]:
     sessions_by_id = {session["id"]: session for session in sessions}
     experiments_by_id = {experiment["id"]: experiment for experiment in experiments}
     defect_ids = {
-        defect["id"]
-        for defect in yaml.safe_load(DEFECTS.read_text(encoding="utf-8"))["defects"]
+        defect["id"] for defect in safe_load(DEFECTS.read_text(encoding="utf-8"))["defects"]
     }
     summaries_by_session: dict[str, list[str]] = defaultdict(list)
 
@@ -511,12 +510,12 @@ def check(
     # referencing it, because a cross-file `$ref` does not resolve for these loaders.
     # A duplicated enum that nothing compares is how a list quietly grows two versions.
     session_workflows = set(
-        yaml.safe_load(SESSION_SCHEMA.read_text(encoding="utf-8"))["$defs"]["workflow"]["enum"]
+        safe_load(SESSION_SCHEMA.read_text(encoding="utf-8"))["$defs"]["workflow"]["enum"]
     )
     agenda_workflows_node = (
-        yaml.safe_load(AGENDA_SCHEMA.read_text(encoding="utf-8"))["properties"]["items"][
-            "items"
-        ]["properties"]
+        safe_load(AGENDA_SCHEMA.read_text(encoding="utf-8"))["properties"]["items"]["items"][
+            "properties"
+        ]
         .get("workflows", {})
         .get("items", {})
     )
@@ -594,7 +593,7 @@ def check(
             if frontier_path.exists():
                 text = frontier_path.read_text()
                 if text.startswith("---\n"):
-                    packing = yaml.safe_load(text.split("---\n", 2)[1]).get("packing") or {}
+                    packing = safe_load(text.split("---\n", 2)[1]).get("packing") or {}
                     proved = packing.get("status") == "proved"
             if not proved:
                 problems.append(

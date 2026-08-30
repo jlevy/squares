@@ -21,13 +21,14 @@ import sys
 from pathlib import Path
 
 import sympy as sp
-import yaml
 from strif import atomic_output_file
 from sympy.parsing.sympy_parser import (
     implicit_multiplication_application,
     parse_expr,
     standard_transformations,
 )
+
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
@@ -58,7 +59,7 @@ _SIDE = sp.Symbol("s")
 
 def _packing(n: int) -> dict:
     text = (FRONTIER / f"n-{n:03d}.md").read_text(encoding="utf-8")
-    return yaml.safe_load(text.split("---", 2)[1])["packing"]
+    return safe_load(text.split("---", 2)[1])["packing"]
 
 
 def _degree_from_form(exact_form: str) -> tuple[int, str]:

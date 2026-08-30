@@ -22,8 +22,10 @@ documents:
   - {path: operating-rules.md, role: operating-rules, authority: definitive, lifecycle: maintained}
   - {path: development.md, role: development-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/README.md, role: runbook, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/documentation-pass.md, role: runbook, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/agent-sessions/README.md, role: session-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/research-loop-logbook/README.md, role: research-loop-logbook, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/resource-usage/README.md, role: component-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/ideas.md, role: registry, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/ledger.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/README.md, role: series-guide, authority: definitive, lifecycle: maintained}
@@ -113,6 +115,7 @@ documents:
   - {path: docs/project/specs/active/plan-2026-08-28-numeric-symbolic-round-trip.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-28-interval-certification.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md, role: plan, authority: current, lifecycle: transient}
   - path: docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
     role: plan
     authority: record

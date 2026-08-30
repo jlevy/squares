@@ -146,8 +146,10 @@ case or experiment separately.
 | [Operating Rules](operating-rules.md) | how a session is conducted | definitive | maintained | — |
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign — W6 Runbook](packing/campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
+| [The W8 Documentation Pass — Runbook](packing/campaign/documentation-pass.md) | W6 experiment mechanics | definitive | maintained | — |
 | [Agent Sessions](packing/campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
 | [Research Loop Logbook](packing/campaign/research-loop-logbook/README.md) | reader-facing research-run summaries | definitive | maintained | — |
+| [Resource Usage](packing/campaign/resource-usage/README.md) | component scope and use | definitive | maintained | — |
 | [Idea board — the `s(n)` search campaign](packing/campaign/ideas.md) | hand-maintained registry | definitive | maintained | — |
 | [Experiment ledger](packing/campaign/ledger.md) | generated status view | generated | generated | — |
 | [series-000 (S0) — smoke and calibration](packing/campaign/series/series-000-smoke-and-calibration/README.md) | series scope and comparability | definitive | maintained | — |
@@ -186,6 +188,7 @@ case or experiment separately.
 | [Feature: The Numeric–Symbolic Round Trip](docs/project/specs/active/plan-2026-08-28-numeric-symbolic-round-trip.md) | implementation plan | current | transient | — |
 | [Feature: Promotion Pipeline Implementation](docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md) | implementation plan | current | transient | — |
 | [Feature: The Interval Certification Bridge](docs/project/specs/active/plan-2026-08-28-interval-certification.md) | implementation plan | current | transient | — |
+| [Feature: Gate Validation Speed](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md) | implementation plan | current | transient | — |
 | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](packing/atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
 | [Spike: Interactive `n = 5` Motion Lab](docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md) | implementation plan | record | retained | — |
@@ -313,11 +316,20 @@ The renderer’s standing exact-motion control remains independently replayable:
 
 ![The final frame of the certified exact five-square trajectory.](packing/atlas/rendering/n5-exact-face-trajectory.svg)
 
-**As of 2026-08-28 — start here.** The active plan is
-[agenda-005](packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md),
-replanned that day.
-Block A is **closed**: `BC-047` under `think-y85e` and `BC-042` under
-`think-zmh8` both met their declared exits in
+**As of 2026-08-29 — start here.** The active plan is
+[agenda-006](packing/campaign/agendas/agenda-006-overnight-research-blocks.md), and its
+queue is `BC-074` then `BC-075`.
+
+`BC-074` is the first W8 documentation pass, on `think-eb29`, against the checklist in
+[the documentation-pass runbook](packing/campaign/documentation-pass.md).
+`BC-075` is the efficiency block, on `think-c46d`, and it now has a spec:
+[plan-2026-08-29-gate-validation-speed](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md),
+whose phase 1 is `think-64bw`, `think-p9of` and `think-2bk2` and can land before the
+block opens.
+Everything below this paragraph is the accumulated record of how the program
+got here, not the next action; `agenda-005` is closed and appears in it as history.
+Block A is **closed**: `BC-047` under `think-y85e` and `BC-042` under `think-zmh8` both
+met their declared exits in
 [session 035](packing/campaign/agent-sessions/session-035-agenda005-block-a.md), which
 is terminal. Precision is now manufactured in-repository rather than read off a source —
 the published `n = 29` system refines to 1000 declared digits with a reported residual
@@ -431,10 +443,11 @@ record moved a long way in a day while the front door did not move at all, and n
 in the gate noticed.
 `check_synopsis` binds this document to the artifacts; there is no equivalent for
 [`README.md`](README.md) or [`TUTORIAL.md`](TUTORIAL.md), so they drift silently.
-Its checklist is [conventions §12](conventions.md#12-the-w8-documentation-checklist),
-and its one hard rule is that it reconciles rather than authors: a claim the record does
-not already carry is not a documentation change, and a disagreement the artifacts cannot
-settle is a defect rather than a rewrite.
+Its checklist is the
+[documentation-pass runbook](packing/campaign/documentation-pass.md), and its one hard
+rule is that it reconciles rather than authors: a claim the record does not already
+carry is not a documentation change, and a disagreement the artifacts cannot settle is a
+defect rather than a rewrite.
 [D-367](defects.md) is what the alternative looks like.
 
 `BC-066` attempted the elimination and reached **a measured wall rather than an
@@ -2359,7 +2372,7 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 369 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 371 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -2367,8 +2380,8 @@ and checked in the gate.
 | soundness | 88 | asserted something false about the mathematics |
 | validity | 87 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 137 | recorded something its own evidence contradicts |
-| robustness | 43 | did not finish, or finished only by luck |
-| performance | 14 | worked, but cost far more than it should |
+| robustness | 44 | did not finish, or finished only by luck |
+| performance | 15 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
@@ -2376,7 +2389,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-eight defects in 369, and no soundness defect
+**The automated gate has caught forty-eight defects in 371, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

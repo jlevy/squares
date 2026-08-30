@@ -100,6 +100,13 @@ These six are the research reports.
 For the full document set, including the reviews, the postmortem, the campaign runbook
 and what each one owns, see the synopsis’s [document map](SYNOPSIS.md#document-map).
 
+**Five of the six survey outside work and move only when a source does.
+The `n = 11` report is the exception**, because `n = 11` is where this project does most
+of its own exact work, so every result about that case is a result about the report.
+Read it with its date in view and the [synopsis](SYNOPSIS.md#what-is-built) beside it:
+the synopsis carries the current state, and the report carries what was established when
+it was written.
+
 The structured record of the problem’s frontier, meaning the best known packing and best
 proved lower bound for every `n ≤ 100` with provenance and per-case editorial, lives in
 [`frontier/`](packing/frontier/README.md) as soft-schema artifacts rather than as a

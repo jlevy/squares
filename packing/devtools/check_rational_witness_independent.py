@@ -14,14 +14,14 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
-import yaml
+from sqpack.yamlio import safe_load
 
 Point = tuple[Fraction, Fraction]
 Square = list[Point]
 
 
 def parse(path: Path) -> tuple[list[Square], Fraction]:
-    document = yaml.safe_load(path.read_text(encoding="utf-8"))
+    document = safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(document, dict) or not isinstance(document.get("witness"), dict):
         raise TypeError("expected a Witness/v2 envelope")
     witness: dict[str, Any] = document["witness"]

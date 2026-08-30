@@ -27,14 +27,13 @@ from pathlib import Path
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
 
-import yaml
-
 from sqpack.known_best import (
     KINGBIRD_BASE_URL,
     SourceGeometryError,
     catalogue_source_map,
     parse_kingbird_svg,
 )
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 CATALOGUE = ROOT / "resources/web/kingbird-squares-in-squares.html"
@@ -149,7 +148,7 @@ def load_frontier_cases(frontier: Path = FRONTIER) -> dict[int, Mapping[str, obj
     """Return the frontier case payloads by n."""
     cases: dict[int, Mapping[str, object]] = {}
     for path in sorted(frontier.glob("n-*.md")):
-        payload = yaml.safe_load(path.read_text(encoding="utf-8").split("---\n")[1])["packing"]
+        payload = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])["packing"]
         cases[int(payload["n"])] = payload
     return cases
 

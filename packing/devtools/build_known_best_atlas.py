@@ -24,7 +24,6 @@ from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as ET
 
 import mpmath as mp
-import yaml
 from strif import atomic_output_file
 
 from devtools import build_composite_figure_data, render_composite_pdf
@@ -79,6 +78,7 @@ from sqpack.witness import (
     materialize_witness,
     witness_document,
 )
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 REPOSITORY_ROOT = ROOT.parent
@@ -281,7 +281,7 @@ def _frontier_case(n: int) -> FrontierCase:
     text = path.read_text(encoding="utf-8")
     if not text.startswith("---\n"):
         raise ValueError(f"{path.name}: missing frontmatter")
-    metadata = yaml.safe_load(text.split("---\n", 2)[1])
+    metadata = safe_load(text.split("---\n", 2)[1])
     packing = metadata["packing"]
     if packing["n"] != n:
         raise ValueError(f"{path.name}: frontier identity mismatch")
@@ -1227,7 +1227,7 @@ def _frontier_with_witness(case: FrontierCase, witness_id: str) -> str:
     end = start + 1
     while end < len(lines) and not lines[end].startswith("    evidence:"):
         end += 1
-    existing = yaml.safe_load("\n".join(lines[start:end]))["witnesses"] or []
+    existing = safe_load("\n".join(lines[start:end]))["witnesses"] or []
     if not isinstance(existing, list) or not all(isinstance(item, str) for item in existing):
         raise ValueError(f"{case.path.name}: witnesses must be a list of identifiers")
     witnesses = [*existing]

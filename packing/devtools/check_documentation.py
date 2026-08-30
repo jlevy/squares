@@ -9,9 +9,8 @@ from collections import Counter
 from pathlib import Path
 from urllib.parse import unquote
 
-import yaml
-
 from devtools.render_document_map import MAP, REPO, SYNOPSIS, expected_synopsis, load_map
+from sqpack.yamlio import safe_load
 
 FOOTER = "This document follows common-doc-guidelines.md."
 IGNORED_PARTS = {".pytest_cache", ".venv", "__pycache__", "node_modules", "attic"}
@@ -32,7 +31,7 @@ def _frontmatter(path: Path) -> dict:
     text = path.read_text(encoding="utf-8")
     if not text.startswith("---\n"):
         raise ValueError("missing YAML frontmatter")
-    return yaml.safe_load(text.split("---\n", 2)[1])
+    return safe_load(text.split("---\n", 2)[1])
 
 
 def _slugs(text: str) -> set[str]:

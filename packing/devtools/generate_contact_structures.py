@@ -20,7 +20,6 @@ import json
 from pathlib import Path
 
 import mpmath as mp
-import yaml
 from jsonschema import Draft202012Validator
 
 from cases.kingbird29.verify_svg import materialise_svg
@@ -32,6 +31,7 @@ from sqpack.promote.contacts import (
     require_decided,
 )
 from sqpack.verify import exact_sign, verify_packing
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "atlas/known-best/contact-structures.json"
@@ -205,7 +205,7 @@ def expected_document() -> dict:
 
 
 def validate_document(document: dict) -> None:
-    schema = yaml.safe_load(SCHEMA.read_text(encoding="utf-8"))
+    schema = safe_load(SCHEMA.read_text(encoding="utf-8"))
     payload = {key: value for key, value in document.items() if key != "softschema"}
     Draft202012Validator(schema).validate(payload)
     for entry in document["structures"]:

@@ -8,10 +8,10 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-import yaml
 from strif import atomic_output_file
 
 from sqpack.witness import load_witness, promote_rational, witness_document
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "witnesses/known-best/n-011.yaml"
@@ -54,7 +54,7 @@ def expected_text() -> str:
 
 def validate_document(document: Mapping[str, Any]) -> None:
     """Reject stale content or any mutation of the frozen control contract."""
-    expected = yaml.safe_load(expected_text())
+    expected = safe_load(expected_text())
     if document != expected:
         raise ValueError(
             "known-best n=11 rational control does not match its generated contract"
@@ -63,7 +63,7 @@ def validate_document(document: Mapping[str, Any]) -> None:
 
 def update() -> None:
     text = expected_text()
-    validate_document(yaml.safe_load(text))
+    validate_document(safe_load(text))
     with atomic_output_file(OUTPUT) as temporary:
         temporary.write_text(text, encoding="utf-8")
     print("known-best n=11 rational control updated")
@@ -73,7 +73,7 @@ def check() -> None:
     text = expected_text()
     if not OUTPUT.is_file() or OUTPUT.read_text(encoding="utf-8") != text:
         raise ValueError(f"{OUTPUT.relative_to(ROOT)} is stale")
-    retained = yaml.safe_load(text)
+    retained = safe_load(text)
     validate_document(retained)
     if load_witness(OUTPUT) != retained["witness"]:
         raise ValueError("known-best n=11 rational control failed Witness/v2 validation")

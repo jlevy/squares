@@ -11,7 +11,6 @@ from pathlib import Path
 from typing import Any
 from unittest.mock import patch
 
-import yaml
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
@@ -36,6 +35,7 @@ from sqpack.contact_full_cell_execution import (
     compile_full_cell_execution_plan,
     replay_full_cell_execution_plan,
 )
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "atlas/known-best/contact-full-cell-control.json"
@@ -315,7 +315,7 @@ def _text(document: dict[str, Any]) -> str:
 
 def validate_document(document: dict[str, Any]) -> None:
     """Validate the control payload against its enforced soft schema."""
-    schema = yaml.safe_load(SCHEMA.read_text(encoding="utf-8"))
+    schema = safe_load(SCHEMA.read_text(encoding="utf-8"))
     problems = sorted(
         Draft202012Validator(schema).iter_errors(document["control"]),
         key=lambda problem: list(problem.path),

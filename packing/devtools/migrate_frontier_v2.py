@@ -13,6 +13,7 @@ import yaml
 from strif import atomic_output_file
 
 from sqpack.assurance import bounds_agree_at_declared_precision
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
@@ -430,7 +431,7 @@ def _frontmatter(text: str) -> tuple[dict[str, object], str]:
     parts = text.split("---\n", 2)
     if len(parts) != 3:
         raise ValueError("Markdown artifact has unterminated YAML frontmatter")
-    document = yaml.safe_load(parts[1])
+    document = safe_load(parts[1])
     if not isinstance(document, dict):
         raise TypeError("frontmatter must be an object")
     return document, parts[2]

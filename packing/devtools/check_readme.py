@@ -33,9 +33,8 @@ import re
 import sys
 from pathlib import Path
 
-import yaml
-
 from devtools.check_synopsis import check_links
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 # The repository root. The reader-facing documents live there, not under packing/.
@@ -196,7 +195,7 @@ def check_reports(text: str) -> list[str]:
 
 def check_defect_summary(text: str) -> list[str]:
     """Keep the README's qualitative gate claim reconciled without copying counts."""
-    data = yaml.safe_load(DEFECTS.read_text(encoding="utf-8"))
+    data = safe_load(DEFECTS.read_text(encoding="utf-8"))
     normalized = re.sub(r"\s+", " ", text)
     gate_soundness = sum(
         1
@@ -230,7 +229,7 @@ def workflow_rows(text: str) -> list[tuple[str, str]]:
 def check_work_model(text: str) -> list[str]:
     """Keep the human workflow entry points and machine contract in lockstep."""
     synopsis = SYNOPSIS.read_text(encoding="utf-8")
-    schema = yaml.safe_load(SESSION_SCHEMA.read_text(encoding="utf-8"))
+    schema = safe_load(SESSION_SCHEMA.read_text(encoding="utf-8"))
     properties = schema.get("properties", {})
     schema_workflows = (schema.get("$defs") or {}).get("workflow", {}).get("enum", [])
     phase_workflow = (

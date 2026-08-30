@@ -42,6 +42,18 @@ CEILING_HEADING = "## The verified upper bound is a ceiling"
 # A new entry is a decision, not a formality: the field is a ceiling, so a consumer that
 # wants the best known side length wants `reported_upper_bound` instead, and a consumer
 # that wants a proved side length has to check `status` first.
+# Trees whose files may name the field without reading it, declared once rather than one
+# file at a time. A tree qualifies only when its files are generated, when the field can
+# appear in them as incidental identity rather than as a value anything consumes, and when
+# a new file arrives on every run so a per-file list would be pure churn.
+DECLARED_CONSUMER_TREES = {
+    "packing/campaign/resource-usage/": (
+        "derived per-session measurement records. They never read the field: it reaches "
+        "them as the name of a tool that ran, such as the test file that guards this very "
+        "contract, and a rollup makes no claim about any bound"
+    ),
+}
+
 DECLARED_CONSUMERS = {
     "packing/devtools/check_basic_bounds.py": (
         "checks the ceiling really is the certifiable grid bound"
@@ -252,7 +264,11 @@ def test_no_undeclared_consumer_reads_the_field() -> None:
             continue
         if "verified_upper_bound" in path.read_text(encoding="utf-8", errors="ignore"):
             found.add(relative.as_posix())
-    undeclared = sorted(found - set(DECLARED_CONSUMERS))
+    undeclared = sorted(
+        path
+        for path in found - set(DECLARED_CONSUMERS)
+        if not path.startswith(tuple(DECLARED_CONSUMER_TREES))
+    )
     assert undeclared == [], (
         "these name verified_upper_bound without saying what they take it to mean; "
         "it is a ceiling, not s(n) -- add them to DECLARED_CONSUMERS with a reason"

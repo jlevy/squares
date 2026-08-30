@@ -31,7 +31,6 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-import yaml
 from strif import atomic_output_file
 
 from cases.gobel10.packing import (
@@ -49,6 +48,7 @@ from cases.gobel10.packing import (
 from sqpack.research.canonical import canonical_key
 from sqpack.research.quench import QuenchResult, quench_bracket
 from sqpack.verify import corners_from_poses, float_sign, verify_packing
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parents[2]
 CONTRACT_V2 = "packing.squares:BasinEvent/v2"
@@ -75,7 +75,7 @@ def standing_side(n: int) -> float:
     if not path.exists():
         raise EventError(f"no frontier artifact for n={n}")
     text = path.read_text()
-    front = yaml.safe_load(text.split("---\n")[1])
+    front = safe_load(text.split("---\n")[1])
     return float(front["packing"]["upper_bound"]["value"])
 
 

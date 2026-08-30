@@ -24,10 +24,10 @@ import re
 import sys
 from decimal import Decimal
 
-import yaml
 from strif import atomic_output_file
 
 from sqpack.assurance import bounds_agree_at_declared_precision
+from sqpack.yamlio import safe_load
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 # The repository root. The reader-facing documents live there, not under packing/.
@@ -43,13 +43,13 @@ END = "<!-- END GENERATED: %s -->"
 def load_cases() -> list[dict]:
     out = []
     for f in sorted(FRONTIER.glob("n-*.md")):
-        fm = yaml.safe_load(f.read_text(encoding="utf-8").split("---\n")[1])
+        fm = safe_load(f.read_text(encoding="utf-8").split("---\n")[1])
         out.append(fm["packing"])
     return out
 
 
 def load_evidence() -> dict[str, dict]:
-    document = yaml.safe_load((FRONTIER / "evidence.yaml").read_text(encoding="utf-8"))
+    document = safe_load((FRONTIER / "evidence.yaml").read_text(encoding="utf-8"))
     return {record["id"]: record for record in document["evidence"]}
 
 
@@ -229,7 +229,7 @@ def render_status(cases: list[dict], evidence: dict[str, dict]) -> str:
 
 
 def table_strategies(kind: str) -> list[str]:
-    d = yaml.safe_load((FRONTIER / f"{kind}-strategies.yaml").read_text(encoding="utf-8"))
+    d = safe_load((FRONTIER / f"{kind}-strategies.yaml").read_text(encoding="utf-8"))
     head = "Produced records?" if kind == "search" else "Used on this problem?"
     rows = [
         f"| # | Strategy | Family | Mechanism | {head} |",
@@ -252,7 +252,7 @@ BLOCKER = {
 
 
 def table_unretrieved() -> list[str]:
-    d = yaml.safe_load((FRONTIER / "source-availability.yaml").read_text(encoding="utf-8"))
+    d = safe_load((FRONTIER / "source-availability.yaml").read_text(encoding="utf-8"))
     rows = [
         "| Source | Year | Where | Obstacle | What rests on it |",
         "| --- | --- | --- | --- | --- |",
@@ -267,7 +267,7 @@ def table_unretrieved() -> list[str]:
 
 
 def table_recovered() -> list[str]:
-    d = yaml.safe_load((FRONTIER / "source-availability.yaml").read_text(encoding="utf-8"))
+    d = safe_load((FRONTIER / "source-availability.yaml").read_text(encoding="utf-8"))
     rows = ["| Source | How it was recovered |", "| --- | --- |"]
     for s in d["recovered"]:
         rows.append(f"| **{s['key']}** {s['title']} | {' '.join(s['how'].split())} |")

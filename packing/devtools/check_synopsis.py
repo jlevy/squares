@@ -40,7 +40,7 @@ from collections import Counter
 from collections.abc import Iterable
 from pathlib import Path
 
-import yaml
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 # The repository root. The reader-facing documents live there, not under packing/.
@@ -66,7 +66,7 @@ READINESS_SOURCES = (
 
 def front(path: Path) -> dict:
     """The YAML frontmatter of a soft-schema artifact."""
-    return yaml.safe_load(path.read_text().split("---\n")[1])
+    return safe_load(path.read_text().split("---\n")[1])
 
 
 def slugs(text: str) -> set[str]:
@@ -446,7 +446,7 @@ def check_current_handoff(text: str) -> list[str]:
                 "active launch plan: current handoff bead set is "
                 f"{sorted(plan_beads)}, expected {[agenda_bead]}"
             )
-        defect_records = yaml.safe_load(DEFECTS.read_text(encoding="utf-8"))["defects"]
+        defect_records = safe_load(DEFECTS.read_text(encoding="utf-8"))["defects"]
         fixed_defects = {
             defect["id"] for defect in defect_records if defect["status"] == "fixed"
         }
@@ -507,7 +507,7 @@ def check_unprotected_fix_claims(text: str, expected: int) -> list[str]:
 
 def check_defects(text: str) -> list[str]:
     """The defect count and per-class counts match the dataset."""
-    data = yaml.safe_load((ROOT / "defects.yaml").read_text())
+    data = safe_load((ROOT / "defects.yaml").read_text())
     defects = data["defects"]
 
     problems = []

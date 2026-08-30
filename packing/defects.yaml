@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 369
+count: 371
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9797,3 +9797,91 @@ defects:
     stops the recurrence in the meantime.
   bead: think-c46d
   recorded_in: packing/src/sqpack/cli/validate.py
+- id: D-370
+  title: The registry checks were slow because they were not registry checks
+  date: '2026-08-29'
+  layer: tooling
+  class: performance
+  detected_by: review
+  latent_for: 'since the soft-schema step was written'
+  severity: medium
+  status: fixed
+  what: >-
+    `soft-schema validation` took 67 seconds, which made the pre-push tier `D-369`
+    introduced cost 70 seconds rather than the second or two a registry check should.
+    Profiling found two causes and neither was schema validation. First, every YAML read
+    in the repository used PyYAML's pure-Python scanner: 163 of 245 profiled seconds were
+    `yaml.load`, over 12.6 million `check_token` calls, while libyaml ships with the
+    pinned wheels and nothing was asking for it. Second, and larger in what remained,
+    `cross_checks` runs `verify_packing` over 96 packings -- 166,134 separation tests and
+    507,156 exact projections -- inside a step named for schemas.
+  consequence: >-
+    Wall clock and, through it, behaviour: a check that costs a minute is a check nobody
+    runs before a push, which is the mechanism `D-369` records. Measured after the loader
+    fix, the actual schema validation is `0.38s` for the 100 frontier cases, `0.03s` for
+    the frontier datasets and `0.08s` for `defects.yaml`. The cost is `8.64s` of jsonschema
+    descent over 208 witness files and `10.29s` of exact geometry. Nothing was validated
+    wrongly; the step was priced as if schemas were expensive when they are not.
+  fix: >-
+    Three changes, `67.4s` to `15.5s`. `sqpack.yamlio` bases both loaders on
+    `yaml.CSafeLoader` where libyaml is present, keeping the duplicate-key refusal, and
+    adds a `safe_load` the 31 modules calling `yaml.safe_load` directly now use --
+    `11.3x` on `defects.yaml` alone. `Draft202012Validator` is built once per schema
+    rather than once per document, which had been re-reading and re-compiling each of 23
+    schemas fourteen times over. And the grid replay is bucketed, which is sound rather
+    than convenient: `verify_packing` establishes that every piece is a unit square, two
+    unit squares overlap only if their centres are within `sqrt(2)`, and a bucket of side
+    2 with its eight neighbours contains every such pair -- 166,650 exact pair tests
+    become 57,665 and nothing a full sweep would have judged is skipped.
+
+    ruamel.yaml was measured as an alternative and rejected. On 81 of this repository's
+    own files, 1 MB: PyYAML `CSafeLoader` `0.128s`, PyYAML pure `1.370s`, ruamel
+    `typ=safe` `1.991s`, ruamel `typ=safe, pure=False` `1.976s`, ruamel round-trip
+    `2.730s`. Its `pure=False` buys nothing in this build and its value, comment-preserving
+    round-trips, is not something this repository needs.
+
+    What remains is `6.06s` of jsonschema descent over 208 witness files carrying
+    3.7 MB of exact rationals, and `3.58s` of exact grid verification. Both are `BC-075`:
+    the first is a dependency question (a compiled validator such as `fastjsonschema`)
+    and the second is a step-boundary one, since exact geometry does not belong in a step
+    named for schemas.
+  regression: >-
+    `test_yaml_is_read_only_through_the_project_loader` walks `src`, `devtools` and
+    `cases` for `yaml.safe_load` or a bare `yaml.SafeLoader` and fails on either, so the
+    pure-Python scanner cannot return one call site at a time. The duplicate-key guard was
+    re-checked under the C loader before the base class changed.
+  bead: think-c46d
+  recorded_in: packing/src/sqpack/yamlio.py
+- id: D-371
+  title: The control snapshot guard was one artifact from refusing to run at all
+  date: '2026-08-29'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: 'since the atlas renderings grew past 18 MiB'
+  severity: low
+  status: fixed
+  what: >-
+    `run_negative_controls` copies a source snapshot per worker and refuses to start if
+    that snapshot exceeds `SNAPSHOT_MAX_BYTES`. Measured on 2026-08-29 the snapshot was
+    39.20 MiB against a 40 MiB cap, 98% of it, with `atlas/` at 18.16 MiB the largest
+    contributor. Any artifact of ordinary size would have taken it over, and the failure
+    mode is not a slow run but a hard refusal to run the control suite at all.
+  consequence: >-
+    None yet, which is the point of recording it. The suite is what establishes that
+    every guard in this project actually fires, so a cap that stops it is a
+    claim-integrity outage wearing a resource-limit's clothes, and it would have arrived
+    on whichever commit happened to add a figure.
+  fix: >-
+    Raised to 64 MiB with the reasoning written at the constant: the cap exists to stop a
+    gigabyte of data being checked in, not to track the record's ordinary growth, and cost
+    is the cap times the worker count, so 64 MiB across three private trees is still
+    bounded. Pruning what no control reads is the alternative to raising it again and
+    belongs with the tier work in `BC-075` rather than in an unrelated commit.
+  regression: >-
+    The guard already reports the measured size on every run, which is how this was seen.
+    No new check: a second guard on the headroom of the first is the kind of process this
+    project adds only for a named benefit, and the named benefit here is served by the
+    number being printed.
+  bead: think-c46d
+  recorded_in: packing/devtools/run_negative_controls.py

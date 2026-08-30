@@ -11,7 +11,6 @@ from decimal import Decimal, localcontext
 from pathlib import Path
 from typing import Any
 
-import yaml
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
@@ -29,6 +28,7 @@ from sqpack.render.model import (
 )
 from sqpack.render.numbers import scalar_from_decimal
 from sqpack.witness import load_witness
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 ATLAS_ROOT = ROOT / "atlas/known-best"
@@ -264,7 +264,7 @@ def expected_outputs() -> tuple[dict[str, Any], dict[Path, str]]:
 
 
 def _validate(document: dict[str, Any]) -> None:
-    schema = yaml.safe_load(SCHEMA.read_text(encoding="utf-8"))
+    schema = safe_load(SCHEMA.read_text(encoding="utf-8"))
     problems = sorted(
         Draft202012Validator(schema).iter_errors(document["gallery"]),
         key=lambda problem: list(problem.path),
