@@ -484,6 +484,7 @@ evidence:
     method: numerical-multiprecision
     performed_by: repository
     relationship_to_generator: independent-implementation
+    origin: replayed-here
     source_key: '[Kingbird n=29 SVG]'
     precision: {decimal_digits: 160, rounding: nearest}
     tolerance: '1e-80'
@@ -502,6 +503,7 @@ evidence:
     method: numerical-multiprecision
     performed_by: repository
     relationship_to_generator: independent-implementation
+    origin: replayed-here
     source_key: '[Kingbird n=29 SVG]'
     precision: {decimal_digits: 160, rounding: nearest}
     tolerance: '1e-80'
@@ -536,6 +538,7 @@ evidence:
     performed_by: repository
     novelty: previously-published
     relationship_to_generator: independent-implementation
+    origin: replayed-here
     source_key: '[Schadt n=29 repository]'
     precision: {decimal_digits: 300, rounding: nearest}
     tolerance: '1e-100'

@@ -1152,6 +1152,13 @@ def _n5_rigidity_certificates(context: Context) -> str:
     return _module(context, "devtools.assess_n5_rigidity", "--check")
 
 
+def _evidence_inventory(context: Context) -> str:
+    # Sub-second: it reads one register and re-renders a table. Records tier because it is
+    # a generated view of the record, and a generated view that has drifted from its source
+    # is the thing this repository logs defects about most often.
+    return _module(context, "devtools.render_evidence_inventory", "--check")
+
+
 def _certificate_citations(context: Context) -> str:
     # Sub-second: it ast-parses five modules and reads a hundred frontmatter blocks. Records
     # tier because it checks the record, not the mathematics -- that every exact certificate
@@ -1713,6 +1720,18 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/assess_n5_rigidity.py",
             *_CASES,
             "packing/campaign/series/*/results/bc-049-n5-rigidity-certificates.json",
+        ),
+    ),
+    Step(
+        "the inventory agrees with the register",
+        _evidence_inventory,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/render_evidence_inventory.py",
+            "packing/frontier/evidence.yaml",
+            "packing/frontier/INVENTORY.md",
         ),
     ),
     Step(

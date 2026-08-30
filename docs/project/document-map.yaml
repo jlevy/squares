@@ -32,6 +32,7 @@ documents:
   - {path: packing/campaign/series/series-000-smoke-and-calibration/README.md, role: series-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/frontier/README.md, role: frontier-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/frontier/STATUS.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/frontier/INVENTORY.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/resources/README.md, role: source-index, authority: definitive, lifecycle: maintained}
   - {path: defects.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/frankensim-probe/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
