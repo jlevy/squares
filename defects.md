@@ -2,7 +2,7 @@
 
 # Defect log
 
-374 defects recorded across the packing toolchain.
+375 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -17,7 +17,7 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | Detector | Count | What it is |
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
-| `control_cell` | 24 | a cell of the sweep whose answer is known in advance |
+| `control_cell` | 25 | a cell of the sweep whose answer is known in advance |
 | `review` | 233 | a human or agent reading the work against a checklist |
 | `anomaly` | 12 | a result that made no sense, chased down |
 | `inspection` | 37 | reading the code or the design with intent |
@@ -25,7 +25,7 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 48 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 48 of 374, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 48 of 375, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 48 of 374, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 4 |
-| record | 107 |
+| record | 108 |
 | tooling | 124 |
 | docs | 105 |
 
@@ -43,7 +43,7 @@ The line worth reading twice: **the automated gate caught 48 of 374, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 88 |
-| validity | 89 |
+| validity | 90 |
 | bookkeeping | 138 |
 | robustness | 44 |
 | performance | 15 |
@@ -594,6 +594,7 @@ This is the actionable list.
 | [D-372](SYNOPSIS.md) | 2026-08-30 | docs | bookkeeping |  | `review` | medium | fixed | The reader-facing tier said four built capabilities were unbuilt, for four days |
 | [D-373](packing/campaign/explorations/X-005-identity-relation-and-its-controls.md) | 2026-08-30 | record | validity | flattering | `control_cell` | medium | fixed | The identity acceptance rule named only controls whose answer was one |
 | [D-374](packing/campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md) | 2026-08-30 | record | validity | flattering | `inspection` | medium | fixed | The agenda queue offered four finished commitments as takeable |
+| [D-375](packing/campaign/explorations/X-005-identity-relation-and-its-controls.md) | 2026-08-30 | record | validity | flattering | `control_cell` | medium | fixed | The atlas relation was scored at the wrong level, and the n=4 control separates nothing |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

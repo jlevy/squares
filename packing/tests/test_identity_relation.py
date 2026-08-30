@@ -55,10 +55,42 @@ def test_only_contact_with_closure_survives_every_control() -> None:
 def test_the_current_atlas_relation_is_refuted_where_it_can_be_scored() -> None:
     """`geometric + contact` splits one connected component into four sampled rows.
 
-    This is `D-034` as a number rather than a description: the `n = 3` labelled space has
-    two components, and four retained samples of it produce four distinct keys.
+    This is `D-034` as a number rather than a description: the `n = 3` D4xS3 quotient is
+    one component, and four retained samples of it produce four distinct keys.
+
+    Scored at the *quotient* level, which is `D-375`. Both of the relation's inputs are
+    canonical under relabelling and under D4 by construction, so it is a statement about
+    the quotient; the labelled controls report `n/a` for it, exactly as they do for the
+    other two quotient relations. The refutation is unchanged in force and is now
+    attributed to the control that can actually carry it.
     """
-    assert _verdicts()["geometric + contact"]["n=3 labelled"] == "REFUTED"
+    verdicts = _verdicts()["geometric + contact"]
+    assert verdicts["n=3 D4xS3 quotient"] == "REFUTED"
+    assert verdicts["n=3 labelled"] == NOT_APPLICABLE
+    assert verdicts["n=4 labelled"] == NOT_APPLICABLE
+
+
+def test_no_relabelling_invariant_relation_can_pass_a_labelled_control() -> None:
+    """`D-375`'s second half, and the constraint it puts on `BC-083`.
+
+    Every candidate is built from keys that are canonical under relabelling, so on the
+    n = 4 labelled control -- 24 states that differ only by relabelling -- each of them
+    reports 1 against a proved 24. A control whose answer no candidate can produce
+    refutes the whole family and separates nothing, which is the dual of `D-373`: there
+    every control's answer was 1 and everything passed.
+
+    So a discriminating control needs a proved count some relabelling-invariant relation
+    can reach and others cannot. That is why `BC-083` asks for one that is neither 1 nor
+    the labelled count, and this is the measurement behind that wording.
+    """
+    scored = {
+        name: got
+        for name, candidate in RELATIONS.items()
+        for control, got, verdict in score(candidate)
+        if control.name == "n=4 labelled" and verdict != NOT_APPLICABLE
+    }
+    assert scored, "the n=4 labelled control must score at least one relation"
+    assert set(scored.values()) == {1}, scored
 
 
 def test_the_quotient_controls_alone_do_not_discriminate() -> None:

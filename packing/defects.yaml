@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 374
+count: 375
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10025,7 +10025,10 @@ defects:
     every point of an optimal configuration space carries the optimal side by definition,
     so it returns one at every level -- and it is independently known wrong, since `D-034`
     records two n = 5 rows sharing side `2.767766952966` while differing geometrically.
-    Scored under the rule as written, three of four candidate relations survive.
+    Scored under the rule as written, three of four candidate relations survive. That
+    count is two once `D-375` corrects the level `geometric + contact` was scored at; the
+    finding is unchanged, since `side alone` and `contact + closure` remain
+    indistinguishable under the rule.
   consequence: >-
     None realised, because the rule had not been run before `BC-080` ran it. The direction
     is flattering: a criterion satisfied by a merge-everything relation would have licensed
@@ -10123,3 +10126,67 @@ defects:
     removed.
   bead: think-s424
   recorded_in: packing/campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md
+- id: D-375
+  title: The atlas relation was scored at the wrong level, and the n=4 control separates nothing
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: 'from X-005 on 2026-08-30 until exp-015 retained its per-sample keys the same day'
+  severity: medium
+  status: fixed
+  what: >-
+    `X-005` declared `geometric + contact` -- the relation `Atlas.add` implements -- at
+    level `labelled`, and refuted it on the `n = 3` labelled control. Both of its inputs
+    are canonical under relabelling and under `D4` by construction: `geometric_key` sorts
+    the squares and minimises the digest over the eight container images, and
+    `contact_certificate` minimises over the same images. It is therefore a statement
+    about the quotient and cannot distinguish two labelled components differing only by a
+    relabelling. `X-005` made precisely that argument for `contact alone` and
+    `contact + closure`, and did not apply it to this relation.
+
+    Two claims rested on the mis-levelling. First, "three of the four candidates survive
+    the quotient controls alone" is two. Second, and more substantially, `X-005` argued
+    that `distinct_basins` is "wrong twice over, and the two errors compose", making it a
+    strict upper bound on the quotient component count. The `n = 4` half of that is a
+    failure of *a relation that does not quotient*, and `distinct_basins` is not that
+    relation: measured on the `n = 4` quotient control it reports 1 against a proved 1.
+    There is one error, not two -- the geometric key's quantization splitting a connected
+    family, which is `D-034`.
+
+    Separately, the `n = 4` labelled control, once scoreable, refutes every candidate and
+    separates none: its 24 states differ only by relabelling, every candidate relation is
+    relabelling invariant, and each reports 1 against a proved 24.
+  consequence: >-
+    The conclusion did not move. `contact + closure` is still the sole survivor of all four
+    proved answers, and the refutation of `geometric + contact` is unchanged in force --
+    only reattributed to the control that can carry it, the `n = 3` quotient control at 4
+    against 1.
+
+    The direction is flattering in the specific way a mis-levelled score always is: the
+    relation was refuted for a reason it was not guilty of, which makes the instrument look
+    more discriminating than it is. Had the level been read off the implementation rather
+    than assumed, the `n = 4` labelled control would have been recognised as unable to
+    separate anything before it was cited as one of the two controls that do.
+  fix: >-
+    `BC-082` retained per-sample geometric keys and contact certificates for `exp-015`'s 24
+    labelled states, which `X-005` had named as the cheap missing piece. They are produced
+    by `grid_sample_record`, shared with the `n = 3` sampler rather than written a second
+    time: keys computed by a different function would not have been comparable, and an
+    incomparable verdict is worse than the `undecidable` it replaced. `exp-014` regenerates
+    byte-identically after the refactor, and `exp-015` differs only by the added `samples`
+    key -- no proved count moves.
+
+    `geometric + contact` is redeclared `quotient`. `X-005` carries a dated addendum rather
+    than a rewrite, since it is a dated record.
+  regression: >-
+    `tests/test_identity_relation.py` pins the corrected verdict -- refuted at `n = 3`
+    quotient, `n/a` at both labelled controls -- and adds
+    `test_no_relabelling_invariant_relation_can_pass_a_labelled_control`, which asserts
+    that every candidate the `n = 4` labelled control can score reports exactly 1. That
+    test is the finding: if a candidate ever reports something else there, the family has
+    stopped being relabelling invariant and the reasoning behind `BC-083`'s exit wording
+    has to be redone.
+  bead: think-m2j8
+  recorded_in: packing/campaign/explorations/X-005-identity-relation-and-its-controls.md

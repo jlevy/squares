@@ -68,6 +68,10 @@ def controls() -> list[Control]:
     n3 = _load(RESULTS / "exp-014-h-032-n3-optimal-moduli.json")
     n4 = _load(RESULTS / "exp-015-h-032-n4-optimal-moduli.json")
     n3_samples = tuple(n3["samples"])
+    # BC-082 retained these. Before it, `exp-015` carried its proved counts and no
+    # per-sample keys, so the one control that most directly tests the relation
+    # `Atlas.add` implements could not score it at all.
+    n4_samples = tuple(n4["samples"])
     closure_raw = n3["spaces"]["d4_s3_quotient"].get("incidence", {})
     closure = {
         key.removeprefix("closure(").removesuffix(")"): tuple(value)
@@ -98,7 +102,7 @@ def controls() -> list[Control]:
             level="labelled",
             component_count=n4["spaces"]["labelled"]["component_count"],
             isolates="symmetry: 24 isolated labelled grids, no connectivity at all",
-            samples=(),
+            samples=n4_samples,
             strata_closure={},
         ),
         Control(
@@ -107,7 +111,7 @@ def controls() -> list[Control]:
             level="d4_s4_quotient",
             component_count=n4["spaces"]["d4_s4_quotient"]["component_count"],
             isolates="symmetry: the same 24 states as one orbit",
-            samples=(),
+            samples=n4_samples,
             strata_closure={},
         ),
     ]
@@ -189,8 +193,17 @@ RELATIONS: dict[str, Candidate] = {
     "side alone": Candidate(
         relation_side_alone, "any", "the optimal side, shared by every point"
     ),
+    # Declared `quotient`, not `labelled`, and the correction is D-375. Both inputs are
+    # canonical under relabelling and under D4 by construction -- `geometric_key` sorts
+    # the squares and minimises over the eight container images, and
+    # `contact_certificate` does the same -- so this relation cannot distinguish two
+    # labelled components differing only by a relabelling, and scoring it against a
+    # labelled control refutes it for doing what it is built to do. X-005 made exactly
+    # that argument for `contact alone` and `contact + closure` and did not apply it
+    # here. At its true level it is still refuted, by the n = 3 quotient control, which
+    # is D-034 and is the refutation that was always load-bearing.
     "geometric + contact": Candidate(
-        relation_geometric_and_contact, "labelled", "what Atlas.add counts today (D-034)"
+        relation_geometric_and_contact, "quotient", "what Atlas.add counts today (D-034)"
     ),
     "contact alone": Candidate(
         relation_contact_alone, "quotient", "the contact certificate, ignoring pose"

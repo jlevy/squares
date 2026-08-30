@@ -47,6 +47,2384 @@
     },
     "support_width": "w=|cos(theta)|+|sin(theta)|"
   },
+  "samples": [
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@00|1@01|2@10|3@11",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "left",
+          "bottom"
+        ],
+        [
+          "1",
+          "left",
+          "top"
+        ],
+        [
+          "2",
+          "right",
+          "bottom"
+        ],
+        [
+          "3",
+          "right",
+          "top"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@00|1@01|2@11|3@10",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "left",
+          "bottom"
+        ],
+        [
+          "1",
+          "left",
+          "top"
+        ],
+        [
+          "2",
+          "right",
+          "top"
+        ],
+        [
+          "3",
+          "right",
+          "bottom"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@00|1@10|2@01|3@11",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "left",
+          "bottom"
+        ],
+        [
+          "1",
+          "right",
+          "bottom"
+        ],
+        [
+          "2",
+          "left",
+          "top"
+        ],
+        [
+          "3",
+          "right",
+          "top"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@00|1@10|2@11|3@01",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "left",
+          "bottom"
+        ],
+        [
+          "1",
+          "right",
+          "bottom"
+        ],
+        [
+          "2",
+          "right",
+          "top"
+        ],
+        [
+          "3",
+          "left",
+          "top"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@00|1@11|2@01|3@10",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "left",
+          "bottom"
+        ],
+        [
+          "1",
+          "right",
+          "top"
+        ],
+        [
+          "2",
+          "left",
+          "top"
+        ],
+        [
+          "3",
+          "right",
+          "bottom"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@00|1@11|2@10|3@01",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "left",
+          "bottom"
+        ],
+        [
+          "1",
+          "right",
+          "top"
+        ],
+        [
+          "2",
+          "right",
+          "bottom"
+        ],
+        [
+          "3",
+          "left",
+          "top"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@01|1@00|2@10|3@11",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "left",
+          "top"
+        ],
+        [
+          "1",
+          "left",
+          "bottom"
+        ],
+        [
+          "2",
+          "right",
+          "bottom"
+        ],
+        [
+          "3",
+          "right",
+          "top"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@01|1@00|2@11|3@10",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "left",
+          "top"
+        ],
+        [
+          "1",
+          "left",
+          "bottom"
+        ],
+        [
+          "2",
+          "right",
+          "top"
+        ],
+        [
+          "3",
+          "right",
+          "bottom"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@01|1@10|2@00|3@11",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "left",
+          "top"
+        ],
+        [
+          "1",
+          "right",
+          "bottom"
+        ],
+        [
+          "2",
+          "left",
+          "bottom"
+        ],
+        [
+          "3",
+          "right",
+          "top"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@01|1@10|2@11|3@00",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "left",
+          "top"
+        ],
+        [
+          "1",
+          "right",
+          "bottom"
+        ],
+        [
+          "2",
+          "right",
+          "top"
+        ],
+        [
+          "3",
+          "left",
+          "bottom"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@01|1@11|2@00|3@10",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "left",
+          "top"
+        ],
+        [
+          "1",
+          "right",
+          "top"
+        ],
+        [
+          "2",
+          "left",
+          "bottom"
+        ],
+        [
+          "3",
+          "right",
+          "bottom"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@01|1@11|2@10|3@00",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "left",
+          "top"
+        ],
+        [
+          "1",
+          "right",
+          "top"
+        ],
+        [
+          "2",
+          "right",
+          "bottom"
+        ],
+        [
+          "3",
+          "left",
+          "bottom"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@10|1@00|2@01|3@11",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "right",
+          "bottom"
+        ],
+        [
+          "1",
+          "left",
+          "bottom"
+        ],
+        [
+          "2",
+          "left",
+          "top"
+        ],
+        [
+          "3",
+          "right",
+          "top"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@10|1@00|2@11|3@01",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "right",
+          "bottom"
+        ],
+        [
+          "1",
+          "left",
+          "bottom"
+        ],
+        [
+          "2",
+          "right",
+          "top"
+        ],
+        [
+          "3",
+          "left",
+          "top"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@10|1@01|2@00|3@11",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "right",
+          "bottom"
+        ],
+        [
+          "1",
+          "left",
+          "top"
+        ],
+        [
+          "2",
+          "left",
+          "bottom"
+        ],
+        [
+          "3",
+          "right",
+          "top"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@10|1@01|2@11|3@00",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "right",
+          "bottom"
+        ],
+        [
+          "1",
+          "left",
+          "top"
+        ],
+        [
+          "2",
+          "right",
+          "top"
+        ],
+        [
+          "3",
+          "left",
+          "bottom"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@10|1@11|2@00|3@01",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "right",
+          "bottom"
+        ],
+        [
+          "1",
+          "right",
+          "top"
+        ],
+        [
+          "2",
+          "left",
+          "bottom"
+        ],
+        [
+          "3",
+          "left",
+          "top"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@10|1@11|2@01|3@00",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "right",
+          "bottom"
+        ],
+        [
+          "1",
+          "right",
+          "top"
+        ],
+        [
+          "2",
+          "left",
+          "top"
+        ],
+        [
+          "3",
+          "left",
+          "bottom"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@11|1@00|2@01|3@10",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "right",
+          "top"
+        ],
+        [
+          "1",
+          "left",
+          "bottom"
+        ],
+        [
+          "2",
+          "left",
+          "top"
+        ],
+        [
+          "3",
+          "right",
+          "bottom"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@11|1@00|2@10|3@01",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "right",
+          "top"
+        ],
+        [
+          "1",
+          "left",
+          "bottom"
+        ],
+        [
+          "2",
+          "right",
+          "bottom"
+        ],
+        [
+          "3",
+          "left",
+          "top"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@11|1@01|2@00|3@10",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "right",
+          "top"
+        ],
+        [
+          "1",
+          "left",
+          "top"
+        ],
+        [
+          "2",
+          "left",
+          "bottom"
+        ],
+        [
+          "3",
+          "right",
+          "bottom"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@11|1@01|2@10|3@00",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "right",
+          "top"
+        ],
+        [
+          "1",
+          "left",
+          "top"
+        ],
+        [
+          "2",
+          "right",
+          "bottom"
+        ],
+        [
+          "3",
+          "left",
+          "bottom"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@11|1@10|2@00|3@01",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "right",
+          "top"
+        ],
+        [
+          "1",
+          "right",
+          "bottom"
+        ],
+        [
+          "2",
+          "left",
+          "bottom"
+        ],
+        [
+          "3",
+          "left",
+          "top"
+        ]
+      ]
+    },
+    {
+      "active_sat_axis_count": 8,
+      "contact_certificate": "99b9cd0957e947aaed9f47c5aab217c8",
+      "contacts": [
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            1
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            0,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            0,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 2,
+          "contact_length": "0",
+          "pair": [
+            1,
+            2
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            1,
+            3
+          ]
+        },
+        {
+          "active_sat_axes": 1,
+          "contact_length": "1",
+          "pair": [
+            2,
+            3
+          ]
+        }
+      ],
+      "exact_valid": true,
+      "geometric_key": "d376e62b58754d400180bf7be7589aef",
+      "lower_left_positions": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "pair_contact_count": 6,
+      "state": "0@11|1@10|2@01|3@00",
+      "wall_incidence_count": 8,
+      "wall_incidences": [
+        [
+          "0",
+          "right",
+          "top"
+        ],
+        [
+          "1",
+          "right",
+          "bottom"
+        ],
+        [
+          "2",
+          "left",
+          "top"
+        ],
+        [
+          "3",
+          "left",
+          "bottom"
+        ]
+      ]
+    }
+  ],
   "schema_version": 1,
   "selftests": {
     "branch_alias_multiplicity_is_checked": true,

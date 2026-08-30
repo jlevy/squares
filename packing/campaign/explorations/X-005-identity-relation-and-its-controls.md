@@ -139,6 +139,60 @@ report neither specifies the quench nor certifies anything at `n >= 5`. What it 
 is the possibility of closing `D-034` against a rule that a merge-everything relation
 would have passed.
 
+## Addendum, 2026-08-30 — What Retaining the `n = 4` Keys Showed
+
+`BC-082` retained the per-sample keys this report said were missing, and the instrument
+then contradicted two things above.
+The conclusion is unchanged — `contact + closure` is still the sole survivor of all four
+proved answers — but two of the arguments for it were wrong, and the second one changes
+what `BC-083` should look for.
+Both corrections are `D-375`.
+
+**`geometric + contact` is a quotient relation, not a labelled one.** The table declared
+it `labelled` and refuted it on the `n = 3` labelled control.
+But both its inputs are canonical under relabelling and under `D4` *by construction*:
+`geometric_key` sorts the squares and minimises over the eight container images, and
+`contact_certificate` does the same.
+This report made exactly that argument for `contact alone` and `contact + closure` —
+that scoring a quotient invariant against a labelled control refutes it for doing what
+it is built to do — and did not apply it here.
+Scored at its true level it is refuted by the `n = 3` quotient control, `4` against a
+proved `1`, which is `D-034` and is the refutation that was always carrying the weight.
+
+The corrected row, and the corrected count below it:
+
+| Relation | Level | `n=3` labelled (2) | `n=3` quotient (1) | `n=4` labelled (24) | `n=4` quotient (1) |
+| --- | --- | --- | --- | --- | --- |
+| geometric + contact | quotient | — | **4 refuted** | — | 1 agrees |
+
+**Two of the four candidates survive the quotient controls alone, not three.** The
+finding this report exists for is unaffected: `side alone` and `contact + closure` are
+still indistinguishable there, so the rule as written still cannot separate a relation
+that merges correctly from one that merges indiscriminately.
+
+**`distinct_basins` is wrong once, not twice, and the “strict upper bound” argument
+loses half its support.** The `n = 4` symmetry failure above is a failure of *a relation
+that does not quotient*, and `distinct_basins` is not that relation — it quotients by
+`D4` and by relabelling before it hashes.
+On the `n = 4` quotient control it reports `1` against a proved `1`, correctly.
+So the two errors do not compose, because there is one error: the geometric key’s
+quantization splitting a connected family, which is `D-034`. Whether `distinct_basins`
+bounds the quotient component count from above now rests on that single mechanism rather
+than on two, and is not re-established here.
+
+**The `n = 4` labelled control refutes every candidate and separates none of them.** Its
+24 states differ only by relabelling, and every relation in the table is relabelling
+invariant, so each reports `1` against a proved `24`.
+
+> A control whose answer no candidate can produce refutes the whole family and separates
+> nothing. That is the dual of this report’s own finding, where every control’s answer
+> was one and everything passed.
+
+This is the measured reason `BC-083` asks for an `n = 5` control whose proved count is
+*neither one nor the labelled count*. A control at either extreme is uninformative, and
+which extreme it sits at decides whether it passes everything or fails everything.
+`think-byc6` is closed by this addendum.
+
 ## The Next Bounded Question
 
 Not a larger census.
