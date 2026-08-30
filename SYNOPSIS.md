@@ -316,27 +316,41 @@ The renderer’s standing exact-motion control remains independently replayable:
 
 ![The final frame of the certified exact five-square trajectory.](packing/atlas/rendering/n5-exact-face-trajectory.svg)
 
-**As of 2026-08-30 — start here.** The active plan is
-[agenda-007](packing/campaign/agendas/agenda-007-twelve-hour-steered-run.md), twelve
-steered hours in four blocks of about three, each ending in a merged pull request.
-Its queue is `BC-077`, `BC-078`, `BC-079`, `BC-080`, and the ordering is by what makes
-the later blocks cheaper rather than by importance: the pre-push tier costs `16.05s` on
-this container with one step the whole of it, so the two efficiency blocks bracket the
-documentation pass and the science runs last, where an open-ended question can absorb
-overrun without a commitment being cut short.
-Those four cells discharge `BC-075` phase 1, `BC-074`, `BC-075` phase 2, and
-agenda-005’s `BC-046` respectively, on the beads those commitments already carry;
-[agenda-006](packing/campaign/agendas/agenda-006-overnight-research-blocks.md) retains
-the record of the run that produced them.
+**As of 2026-08-30 — start here.**
+[agenda-007](packing/campaign/agendas/agenda-007-twelve-hour-steered-run.md) is
+**complete**: twelve steered hours in four blocks, each closed and merged, discharging
+`BC-074` and `BC-075` from agenda-006 and `BC-046` from agenda-005.
 
-`BC-074` is the first W8 documentation pass, on `think-eb29`, against the checklist in
-[the documentation-pass runbook](packing/campaign/documentation-pass.md).
-`BC-075` is the efficiency block, on `think-c46d`, and it now has a spec:
-[plan-2026-08-29-gate-validation-speed](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md),
-whose phase 1 is `think-64bw`, `think-p9of` and `think-2bk2` and can land before the
-block opens.
-Everything below this paragraph is the accumulated record of how the program
-got here, not the next action; `agenda-005` is closed and appears in it as history.
+What it left, in the order a next session would want it:
+
+The loop is fast now.
+`packing-validate --records` is `4s`, from `16.05s`; a new `--edit` tier is `26–33s`
+against `--fast`’s `499s`, and the split is by what a step catches rather than what it
+costs. `--edit` is the one to run while editing; `--fast` is a block boundary; CI runs
+`--fast` and the full gate on every push, so nothing lost coverage.
+`OR-3` now carries the price of ignoring it, measured from this session’s own rollup.
+
+The reader-facing tier is reconciled, and `D-372` records why it had drifted: nothing
+binds `README.md` or `TUTORIAL.md` to the artifacts the way `check_synopsis` binds this
+document, and no checker can, because it would have to decide what a sentence claims.
+
+**The next scientific question is sharper than it was, and narrower.**
+[X-005](packing/campaign/explorations/X-005-identity-relation-and-its-controls.md)
+declares the identity relation the atlas should count — contact certificates merged
+along the retained strata closure — and reports that the acceptance rule which was
+supposed to establish it could not have, because every control it named has component
+count one. That is `D-373`. `D-034` stays outstanding.
+
+So the next bounded question is **not** a larger census and not an `n = 5` count.
+It is whether `n = 5` can be given a *discriminating* control at all — one whose proved
+component count is neither one nor equal to its labelled count.
+Until such a control exists, any `n = 5` identity claim is validated against a constant.
+`think-byc6` is the cheap prerequisite: retain per-sample keys for `exp-015`, without
+which the relation the atlas uses today cannot be scored on the control that would most
+directly test it.
+
+Everything below this paragraph is the accumulated record of how the program got here,
+not the next action; `agenda-005` is closed and appears in it as history.
 Block A is **closed**: `BC-047` under `think-y85e` and `BC-042` under `think-zmh8` both
 met their declared exits in
 [session 035](packing/campaign/agent-sessions/session-035-agenda005-block-a.md), which
@@ -2411,13 +2425,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 372 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 373 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 88 | asserted something false about the mathematics |
-| validity | 87 | was correct, but the measurement did not bear on the question |
+| validity | 88 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 138 | recorded something its own evidence contradicts |
 | robustness | 44 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
@@ -2428,7 +2442,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-eight defects in 372, and no soundness defect
+**The automated gate has caught forty-eight defects in 373, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

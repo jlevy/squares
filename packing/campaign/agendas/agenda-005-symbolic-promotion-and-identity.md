@@ -262,7 +262,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [3, 4, 5]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       What relation should the atlas count, given that a connected optimal set produces
@@ -276,6 +276,9 @@ agenda:
       A declared identity relation with a criterion that the exact n = 3 sliding family
       and the exact n = 4 point both satisfy, or a typed statement of which property the
       candidate relation cannot decide.
+    artifacts:
+    - packing/campaign/explorations/X-005-identity-relation-and-its-controls.md
+    - packing/devtools/check_identity_relation.py
     bead: think-0yo9
     depends_on: []
     workflows: [insight-iteration, research-loop]

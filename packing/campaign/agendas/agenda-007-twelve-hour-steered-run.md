@@ -9,7 +9,7 @@ agenda:
   id: agenda-007
   title: Twelve steered hours in four blocks, process first, each block a merged PR
   updated: '2026-08-30'
-  status: active
+  status: completed
   objective: >-
     Spend twelve hours in four blocks of about three, in an order chosen so the blocks
     that make every later block cheaper run first. Blocks 1 and 3 are the loop itself:
@@ -257,7 +257,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [3, 4, 5]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       What relation should the atlas count, given that a connected optimal set produces
@@ -276,6 +276,10 @@ agenda:
       A declared identity relation with a criterion that the exact `n = 3` sliding family
       and the exact `n = 4` point both satisfy, or a typed statement of which property the
       candidate relation cannot decide.
+    artifacts:
+    - packing/campaign/explorations/X-005-identity-relation-and-its-controls.md
+    - packing/devtools/check_identity_relation.py
+    - packing/tests/test_identity_relation.py
     bead: think-0yo9
     depends_on: [BC-079]
     workflows: [insight-iteration, research-loop]
@@ -296,6 +300,39 @@ agenda:
       Last by design rather than by rank. Its question is the open-ended one, so it is the
       only block whose overrun costs a schedule rather than a commitment, and the three
       ahead of it each have a definite exit that a clock can be held against.
+
+      **Closed 2026-08-30, and the exit clause's second branch is the one that fired.**
+      A relation is declared: two endpoints are the same terminal component when their
+      contact certificates agree, or when the strata those certificates name lie in one
+      closure. It is the only one of four candidates that survives all four proved answers
+      in `exp-014` and `exp-015`, and the `n = 3` artifact retains exactly what it needs,
+      `closure(G) = [C, G, M]`, so the merge is read from the record rather than assumed.
+
+      **But the acceptance rule this cell inherited could not have established that**, and
+      that is `D-373`. It named the two quotient controls, both of which have component
+      count one, so a relation that merges everything passes them -- and `side alone` is
+      exactly that relation and is known wrong from `D-034`'s `n = 5` pair. Three of four
+      candidates survive the rule as written. The labelled controls, whose proved answers
+      are `2` and `24`, are what separate them. A criterion validated only on cases whose
+      answer is one is validated against a constant.
+
+      The two controls also turn out to isolate independent failures rather than duplicate
+      one test: `n = 4` is pure symmetry with no connectivity anywhere, `n = 3` is pure
+      connectivity inside a single orbit. `distinct_basins` is wrong on both counts and the
+      errors compose, so it is a strict upper bound on the component count and not an
+      estimate of it.
+
+      Deliberately not claimed: this is not a component counter. The relation survives four
+      proved answers and has not been shown to decide the general case, and the closure
+      data it needs exists at `n = 3` only because an exhaustive classification produced it.
+      `D-034` stays outstanding. What this removes is the possibility of closing it against
+      a rule a merge-everything relation would have passed.
+
+      Two gaps left with owners: `think-byc6` retains per-sample keys for `exp-015`, without
+      which the relation the atlas uses today cannot be scored on the control that would
+      most directly test it; and the next bounded question is whether `n = 5` can be given a
+      discriminating control at all, since until one exists any `n = 5` identity claim is
+      being validated against a constant in exactly the way `D-373` describes.
 ---
 # agenda-007 — Twelve Steered Hours in Four Blocks
 

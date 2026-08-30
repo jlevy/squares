@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 372
+count: 373
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10007,3 +10007,55 @@ defects:
     inherits the prose's mistakes. `BC-078` is the first pass run that way.
   bead: think-eb29
   recorded_in: SYNOPSIS.md
+- id: D-373
+  title: The identity acceptance rule named only controls whose answer was one
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: 'from BC-046 registration on 2026-08-24 until it was first run'
+  severity: medium
+  status: fixed
+  what: >-
+    `BC-046` set its exit as "a declared identity relation with a criterion that the exact
+    n = 3 sliding family and the exact n = 4 point both satisfy". Those are the `D4 x S3`
+    and `D4 x S4` quotient controls, and both have component count **one**. Any relation
+    that merges everything therefore passes the rule. `side alone` is such a relation --
+    every point of an optimal configuration space carries the optimal side by definition,
+    so it returns one at every level -- and it is independently known wrong, since `D-034`
+    records two n = 5 rows sharing side `2.767766952966` while differing geometrically.
+    Scored under the rule as written, three of four candidate relations survive.
+  consequence: >-
+    None realised, because the rule had not been run before `BC-080` ran it. The direction
+    is flattering: a criterion satisfied by a merge-everything relation would have licensed
+    declaring the identity question settled, and a settled identity relation is the
+    precondition the census and the discovery curve are waiting on. The failure is not that
+    the controls are wrong -- they are exact and proved -- but that every control in the set
+    had the same answer, so the set was checking a constant.
+  fix: >-
+    The labelled controls join the set. `exp-014` proves the labelled n = 3 space is two
+    circles and `exp-015` proves the labelled n = 4 space is 24 isolated grids, so the
+    four proved answers are now `2`, `1`, `24`, `1` rather than `1` and `1`. Under the
+    widened set exactly one candidate survives -- contact certificates merged along the
+    retained strata closure -- and `side alone` is refuted by both labelled controls.
+
+    The two controls also turn out to isolate independent failures rather than duplicate
+    one test, which is why widening the set was available at all: n = 4 is pure symmetry
+    with no connectivity anywhere, and n = 3 is pure connectivity inside a single orbit.
+    `distinct_basins` is wrong on both counts and the errors compose, so it is a strict
+    upper bound on the component count rather than an estimate of it.
+
+    The generalisable half is recorded in `X-005` rather than only here: a criterion
+    validated only on cases whose answer is one is validated against a constant, and that
+    is not specific to identity.
+  regression: >-
+    `devtools/check_identity_relation.py` scores every candidate against all four proved
+    answers, reading the component counts out of the retained experiment JSON rather than
+    from a number typed into the checker, and refuses with `--check` if the control set
+    stops separating the candidates. `tests/test_identity_relation.py` pins the verdicts,
+    including the one that is the finding itself: `side alone` must still survive the
+    quotient controls alone, because if it stops doing so this defect has silently changed
+    rather than been fixed.
+  bead: think-0yo9
+  recorded_in: packing/campaign/explorations/X-005-identity-relation-and-its-controls.md
