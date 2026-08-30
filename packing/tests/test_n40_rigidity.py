@@ -23,6 +23,7 @@ import pytest
 from devtools.assess_n5_rigidity import (
     DOF,
     active_contacts,
+    certify_target,
     constraint_rows,
     contact_axes,
     disjunctive_pairs,
@@ -30,6 +31,7 @@ from devtools.assess_n5_rigidity import (
     incident_contacts,
     nullspace,
     separating,
+    verify_target_weights,
 )
 from devtools.assess_n40_rigidity import (
     OUT,
@@ -340,3 +342,54 @@ def test_the_frame_search_reports_coverage_not_a_verdict() -> None:
     assert frame["admissible_directions_found"] == 0
     assert "weak evidence by construction" in frame["what_the_search_does_not_show"]
     assert "translation-escape screen" in frame["what_the_search_does_not_show"]
+
+
+def test_twelve_block_squares_provably_turn_at_one_rate() -> None:
+    """An observation about seven vectors, turned into a theorem about every branch.
+
+    `certify_target` pins a linear functional rather than a coordinate, so
+    `omega_i - omega_j` and its negative together prove the two squares turn together in
+    every branch -- whatever the 42 disjunctions do. Sixty-six pairs certify and
+    transitivity connects twelve of the sixteen.
+    """
+    block = _record()["does_the_block_turn_as_one"]
+
+    assert block["pairs_tested"] == 120
+    assert block["pairs_proved_equal"] == 66
+    assert block["largest_component"] == 12
+    assert "proved by certificates" in block["meaning"]
+
+
+def test_the_four_left_out_are_the_blocks_interior() -> None:
+    """Which four, and why that is the right four to be left with.
+
+    Squares 29, 30, 33 and 34 are the interior cells of the four-by-four block: every
+    contact they have is with another block square, so the rows that hold in all branches
+    reach them least. An arbitrary four would have been a reason to distrust the search.
+    """
+    block = _record()["does_the_block_turn_as_one"]
+
+    assert block["left_out"] == [29, 30, 33, 34]
+    assert block["they_are_the_interior_cells"] is True
+    assert "sound and not complete" in block["what_is_not_proved"]
+
+
+def test_a_functional_certificate_is_verified_not_proposed() -> None:
+    """The relation is re-derived from the pose, and both signs are required.
+
+    One sign alone gives an inequality; the pair gives the equality. A change that dropped
+    the second sign would turn a proved relation into a half-proved one silently.
+    """
+    pose = load_pose()
+    rows = constraint_rows(pose, single_axis_contacts(pose, active_contacts(pose)))
+    zero, one = pose.field.rational(0), pose.field.rational(1)
+
+    target = [zero] * len(rows[0])
+    target[24 * DOF + 2] = one
+    target[25 * DOF + 2] = -one
+    forward = certify_target(pose, rows, target)
+    backward = certify_target(pose, rows, [-value for value in target])
+
+    assert forward is not None and backward is not None
+    assert verify_target_weights(pose, rows, forward, target)
+    assert all(weight.sign() >= 0 for weight in forward)

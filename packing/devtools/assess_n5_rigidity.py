@@ -617,6 +617,73 @@ def certify(
     return None
 
 
+def certify_target(
+    pose: Pose, rows: list[list[FieldElement]], target: list[FieldElement]
+) -> list[FieldElement] | None:
+    """`certify` for an arbitrary linear functional rather than a coordinate.
+
+    `w >= 0` with `w . A = c` proves `c . x >= 0` for every admissible motion, whatever `c`
+    is; a coordinate is only the case `c = e_k`. Certifying `c` and `-c` together pins the
+    functional to zero, which is how a *relation* between coordinates -- two squares turning
+    at the same rate, say -- becomes a theorem about every branch rather than an observation
+    about the directions someone happened to find.
+    """
+    from scipy.optimize import linprog  # noqa: PLC0415 - heavy optional import
+
+    root = pose.field.alpha
+    count = len(rows)
+    scaled = [[entry * root for entry in row] for row in rows]
+    equations: list[list[float]] = []
+    wanted: list[float] = []
+    for column in range(len(rows[0])):
+        for part in range(2):
+            equations.append(
+                [float(row[column].coeffs[part]) for row in rows]
+                + [float(row[column].coeffs[part]) for row in scaled]
+            )
+            wanted.append(float(target[column].coeffs[part]))
+    for ordered in (False, True):
+        result = linprog(
+            _total_weight(count) if ordered else [0.0] * (2 * count),
+            A_ub=_nonnegativity(count) if ordered else None,
+            b_ub=[0.0] * count if ordered else None,
+            A_eq=equations,
+            b_eq=wanted,
+            bounds=[(None, None)] * (2 * count) if ordered else [(0.0, None)] * (2 * count),
+            method="highs",
+        )
+        if not result.success:
+            continue
+        q = pose.field.rational
+        weights = [
+            q(Fraction(result.x[index]).limit_denominator(10**6))
+            + q(Fraction(result.x[count + index]).limit_denominator(10**6)) * root
+            for index in range(count)
+        ]
+        if verify_target_weights(pose, rows, weights, target):
+            return weights
+    return None
+
+
+def verify_target_weights(
+    pose: Pose,
+    rows: list[list[FieldElement]],
+    weights: list[FieldElement],
+    target: list[FieldElement],
+) -> bool:
+    """Exactly: non-negative field weights whose combination of the rows is `target`."""
+    if any(weight.sign() < 0 for weight in weights):
+        return False
+    for column in range(len(rows[0])):
+        total = pose.field.rational(0)
+        for weight, row in zip(weights, rows, strict=True):
+            if weight.sign() != 0:
+                total = total + row[column] * weight
+        if (total - target[column]).sign() != 0:
+            return False
+    return True
+
+
 def verify_field_weights(
     pose: Pose,
     rows: list[list[FieldElement]],

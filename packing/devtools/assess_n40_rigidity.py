@@ -68,6 +68,7 @@ from devtools.assess_n5_rigidity import (
     Pose,
     active_contacts,
     certify,
+    certify_target,
     constraint_rows,
     contact_axes,
     disjunctive_pairs,
@@ -557,6 +558,72 @@ def frame_coordinates(pose: Pose, contacts: list[Contact]) -> dict[str, Any]:
     }
 
 
+def block_rotation(pose: Pose, contacts: list[Contact]) -> dict[str, Any]:
+    """Do the block's sixteen squares have to turn at one rate? Twelve of them do.
+
+    Every known admissible direction turns all sixteen at the same rate, which is an
+    observation about seven vectors. This asks it as a theorem: certify the functional
+    `omega_i - omega_j` and its negative against the rows every branch carries, and the
+    relation holds in every branch whatever the disjunctions do.
+
+    Sixty-six of the 120 pairs certify, and by transitivity they connect twelve of the
+    sixteen squares into one rate. The four they leave out -- 29, 30, 33 and 34 -- are
+    exactly the **interior** cells of the four-by-four block, the ones whose every contact
+    is with another block square. Nothing outside the block reaches them, so the rows every
+    branch carries have least to say about them, and it is the right four to be left with
+    rather than an arbitrary four.
+    """
+    rows = constraint_rows(pose, single_axis_contacts(pose, contacts))
+    zero = pose.field.rational(0)
+    one = pose.field.rational(1)
+    block = list(range(24, pose.count))
+    proved: list[tuple[int, int]] = []
+    for position, left in enumerate(block):
+        for right in block[position + 1 :]:
+            target = [zero] * len(rows[0])
+            target[left * DOF + 2] = one
+            target[right * DOF + 2] = -one
+            negated = [-value for value in target]
+            if certify_target(pose, rows, target) is not None and (
+                certify_target(pose, rows, negated) is not None
+            ):
+                proved.append((left, right))
+
+    parent = {index: index for index in block}
+
+    def root(index: int) -> int:
+        while parent[index] != index:
+            parent[index] = parent[parent[index]]
+            index = parent[index]
+        return index
+
+    for left, right in proved:
+        parent[root(left)] = root(right)
+    components: dict[int, list[int]] = {}
+    for index in block:
+        components.setdefault(root(index), []).append(index)
+    sizes = sorted((len(members) for members in components.values()), reverse=True)
+    singletons = sorted(members[0] for members in components.values() if len(members) == 1)
+    return {
+        "pairs_proved_equal": len(proved),
+        "pairs_tested": len(block) * (len(block) - 1) // 2,
+        "components": len(components),
+        "largest_component": sizes[0],
+        "left_out": singletons,
+        "they_are_the_interior_cells": singletons == [29, 30, 33, 34],
+        "meaning": (
+            "twelve of the sixteen block squares turn at one rate in every branch, proved "
+            "by certificates on the functional omega_i - omega_j rather than observed on "
+            "the directions that happen to be known"
+        ),
+        "what_is_not_proved": (
+            "that the interior four turn at that rate too. Every admissible direction found "
+            "does turn all sixteen together, and a certificate search missing one is not a "
+            "proof that none exists -- the search is sound and not complete"
+        ),
+    }
+
+
 def _rank(pose: Pose, vectors: list[list[FieldElement]]) -> int:
     """Exact rank of a set of motions, by elimination over the field."""
     work = [list(vector) for vector in vectors]
@@ -687,6 +754,7 @@ def assess() -> dict[str, Any]:
         "admissible_part_of_the_null_space": _sweep(pose, contacts, basis),
         "outside_the_null_space": wider_cone(pose, contacts),
         "can_the_frame_move": frame_coordinates(pose, contacts),
+        "does_the_block_turn_as_one": block_rotation(pose, contacts),
         "what_an_intersecting_assessor_reports": intersection_cone(pose, contacts),
         "verdict": {
             "infinitesimally_rigid": False,
@@ -701,6 +769,13 @@ def assess() -> dict[str, Any]:
                 "local rigidity, in either direction. The witness curves into the obstacle "
                 "at second order, so it is not a motion, and the catalogue's annotation is "
                 "not contradicted"
+            ),
+            "what_is_proved_about_every_branch": (
+                "52 of the frame's 72 coordinates are zero in every branch, and twelve of "
+                "the block's sixteen squares turn at one rate in every branch -- both by "
+                "certificates over the rows every branch carries, so no disjunction has to "
+                "be resolved for either. What is left free is 20 frame coordinates, the "
+                "block's translations, and the four interior squares' rotations"
             ),
             "the_cone_is_larger_than_this_witness": (
                 "six further motions are retained and verified, each opening an all-branch "
@@ -728,7 +803,10 @@ def assess() -> dict[str, Any]:
             ),
             "not_established": (
                 "Second-order rigidity, which needs every first-order flex refused and "
-                "not seven of them. The cone is not bounded here: inside the null space the "
+                "not seven of them, and the cone is not bounded here. Reducing the problem "
+                "to the branches did not work either: with 56 coordinates pinned, none of "
+                "the 42 disjunctions becomes vacuous on what is left, so enumeration is "
+                "still 2^42 and not a route: inside the null space the "
                 "admissible set is measured and is a line, outside it six directions were "
                 "found by one sampler over twenty-four objectives, and no argument here "
                 "says there are no others. That every one so far is refused, and that none "

@@ -48,6 +48,21 @@
     "why_that_gap_exists": "a corner landing on the endpoint of a host edge is an incidence, and the edge separates the two squares only if the whole moving square lies on its outer side; edge-to-edge neighbours fail that on two of four edges (D-390)",
     "why_those_cannot_be_intersected": "a pair touching at one corner is held apart by two axes and non-overlap asks that either keep separating, so the tangent cone is a union of half-spaces rather than their intersection (D-391)"
   },
+  "does_the_block_turn_as_one": {
+    "components": 5,
+    "largest_component": 12,
+    "left_out": [
+      29,
+      30,
+      33,
+      34
+    ],
+    "meaning": "twelve of the sixteen block squares turn at one rate in every branch, proved by certificates on the functional omega_i - omega_j rather than observed on the directions that happen to be known",
+    "pairs_proved_equal": 66,
+    "pairs_tested": 120,
+    "they_are_the_interior_cells": true,
+    "what_is_not_proved": "that the interior four turn at that rate too. Every admissible direction found does turn all sixteen together, and a certificate search missing one is not a proof that none exists -- the search is sound and not complete"
+  },
   "outside_the_null_space": {
     "all_obstructed": true,
     "all_verified": true,
@@ -194,7 +209,7 @@
   "schema_version": 2,
   "scope": {
     "established": "Exact, at the exact pose, over all forty squares and all three degrees of freedom each. Contacts decided by exact sign, the witness a vector in Q(sqrt 2)^120, and every claim about it re-decided in the field from the pose rather than read back from this record.",
-    "not_established": "Second-order rigidity, which needs every first-order flex refused and not seven of them. The cone is not bounded here: inside the null space the admissible set is measured and is a line, outside it six directions were found by one sampler over twenty-four objectives, and no argument here says there are no others. That every one so far is refused, and that none moves a frame square, is evidence about where to look rather than a proof that the looking is done.",
+    "not_established": "Second-order rigidity, which needs every first-order flex refused and not seven of them, and the cone is not bounded here. Reducing the problem to the branches did not work either: with 56 coordinates pinned, none of the 42 disjunctions becomes vacuous on what is left, so enumeration is still 2^42 and not a route: inside the null space the admissible set is measured and is a line, outside it six directions were found by one sampler over twenty-four objectives, and no argument here says there are no others. That every one so far is refused, and that none moves a frame square, is evidence about where to look rather than a proof that the looking is done.",
     "relation_to_prior_evidence": "The translation-escape screen leaves n = 40 undetermined by deciding single-square translation only; this motion is sixteen squares turning at once, which is outside it in every respect. Nothing conflicts: neither claims a property, and this one explains why the screen found nothing."
   },
   "subject": {
@@ -218,6 +233,7 @@
     "the_cone_is_larger_than_this_witness": "six further motions are retained and verified, each opening an all-branch contact strictly and so lying outside the subspace the null-space sweep covers; they span rank five, every one is refused at second order, and every one moves only the tilted block",
     "the_witness_is_refused_at_second_order": "104 of the 283 tight contacts curve into the obstacle along it, and a non-negative self-stress over those rows refuses every second-order correction at once -- so this flex is not the start of a motion",
     "what_is_not_claimed": "local rigidity, in either direction. The witness curves into the obstacle at second order, so it is not a motion, and the catalogue's annotation is not contradicted",
+    "what_is_proved_about_every_branch": "52 of the frame's 72 coordinates are zero in every branch, and twelve of the block's sixteen squares turn at one rate in every branch -- both by certificates over the rows every branch carries, so no disjunction has to be resolved for either. What is left free is 20 frame coordinates, the block's translations, and the four interior squares' rotations",
     "what_it_costs_the_catalogue": "nothing directly, and everything for a first-order argument: any proof of n = 40's rigidity has to be second-order or finite, because the first-order cone is nontrivial"
   },
   "what_an_intersecting_assessor_reports": {
