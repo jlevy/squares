@@ -115,6 +115,11 @@ DECLARED_CONSUMERS = {
         "names the ceiling only as a stop condition: the block recovers a minimal "
         "polynomial at n = 11 and records a refusal at n = 29, moving nothing"
     ),
+    "defects.md": (
+        "generated: it renders each defect's `recorded_in` path as a link, and D-392 is "
+        "recorded in this very file -- so the field's name reaches it inside a filename, "
+        "not as a value anything reads"
+    ),
     "packing/campaign/ledger.md": (
         "generated: it renders the agenda notes below and inherits whatever they say, so "
         "it is an output of a consumer rather than one itself"

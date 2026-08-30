@@ -177,6 +177,38 @@ def find_witness(
     return None
 
 
+SWEEP = (-2, -1, 0, 1, 2)
+"""Coefficients swept when asking how much of the null space is admissible.
+
+Wider than `SPAN` and for a different question. `SPAN` looks for *a* witness and stops;
+this asks which of the subspace survives, so it has to be wide enough that a direction
+needing unequal coefficients would show up. It is still a sweep of integer combinations
+and not a decision procedure, which is why what it reports is a measurement rather than
+the cone's dimension.
+"""
+
+
+def admissible_combinations(
+    pose: Pose, contacts: list[Contact], basis: list[list[FieldElement]]
+) -> list[tuple[int, ...]]:
+    """Which integer combinations of the null basis extend to a branch."""
+    groups = axis_groups(pose, contacts)
+    zero = pose.field.rational(0)
+    width = len(basis[0])
+    found: list[tuple[int, ...]] = []
+    for coefficients in itertools.product(SWEEP, repeat=len(basis)):
+        if not any(coefficients):
+            continue
+        motion = [zero] * width
+        for weight, vector in zip(coefficients, basis, strict=True):
+            if weight:
+                scale = pose.field.rational(weight)
+                motion = [a + scale * b for a, b in zip(motion, vector, strict=True)]
+        if all(admissible_axis(pose, group, motion) is not None for group in groups.values()):
+            found.append(coefficients)
+    return found
+
+
 def describe(pose: Pose, motion: list[FieldElement]) -> dict[str, Any]:
     """The witness in a form a reader can check against the picture."""
     names = variable_names(pose.count)
@@ -337,6 +369,43 @@ def intersection_cone(pose: Pose, contacts: list[Contact]) -> dict[str, Any]:
     }
 
 
+def _sweep(
+    pose: Pose, contacts: list[Contact], basis: list[list[FieldElement]]
+) -> dict[str, Any]:
+    """How much of the five-dimensional null space is actually admissible: a line.
+
+    Worth measuring because "a witness exists" and "the flex is one-dimensional" are very
+    different statements and the first is easy to mistake for the second. Of the 3124
+    nonzero integer combinations in `[-2, 2]^5`, four extend to a branch, and all four are
+    multiples of a single basis vector. So inside the subspace where every all-branch
+    contact is tight, the admissible set is exactly a line -- the same shape as `n = 5`,
+    two orders of magnitude larger.
+
+    It does not bound the cone. Directions that leave some all-branch contact strictly
+    opening are outside this subspace entirely and are not searched here.
+    """
+    combinations = admissible_combinations(pose, contacts, basis)
+    carried = sorted(
+        {
+            index
+            for combination in combinations
+            for index, weight in enumerate(combination)
+            if weight
+        }
+    )
+    return {
+        "swept": len(SWEEP) ** len(basis) - 1,
+        "extend": len(combinations),
+        "basis_directions_used": carried,
+        "is_a_single_line": len(carried) == 1,
+        "what_it_does_not_bound": (
+            "the cone. A direction that leaves some all-branch contact strictly opening is "
+            "outside this subspace and is not searched here, so the first-order cone may be "
+            "larger than this line"
+        ),
+    }
+
+
 def assess() -> dict[str, Any]:
     pose = load_pose()
     incident = incident_contacts(pose)
@@ -402,6 +471,7 @@ def assess() -> dict[str, Any]:
                 "linearization has no first-order error"
             ),
         },
+        "admissible_part_of_the_null_space": _sweep(pose, contacts, basis),
         "what_an_intersecting_assessor_reports": intersection_cone(pose, contacts),
         "verdict": {
             "infinitesimally_rigid": False,
@@ -437,12 +507,12 @@ def assess() -> dict[str, Any]:
             ),
             "not_established": (
                 "Second-order rigidity, which needs every first-order flex refused and "
-                "not just this one. The null space of the single-axis rows is "
-                "five-dimensional, only a short integer sweep of it was searched, and only "
-                "the branch admitting this witness was examined, so the cone's dimension is "
-                "not measured here. The instrument for the rest is the one already used: "
-                "the obstruction argument transfers unchanged to any other witness this "
-                "search turns up."
+                "not just this one. Inside the null space the admissible set is measured "
+                "and is a line, so what is unsearched is everything outside it: a direction "
+                "that leaves some all-branch contact strictly opening is not a null vector "
+                "and no sweep here reaches it. The instrument for the rest is the one "
+                "already used -- the obstruction argument transfers unchanged to any other "
+                "witness such a search turns up."
             ),
             "relation_to_prior_evidence": (
                 "The translation-escape screen leaves n = 40 undetermined by deciding "

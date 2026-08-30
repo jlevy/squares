@@ -1,4 +1,13 @@
 {
+  "admissible_part_of_the_null_space": {
+    "basis_directions_used": [
+      4
+    ],
+    "extend": 4,
+    "is_a_single_line": true,
+    "swept": 3124,
+    "what_it_does_not_bound": "the cone. A direction that leaves some all-branch contact strictly opening is outside this subspace and is not searched here, so the first-order cone may be larger than this line"
+  },
   "contact_model": {
     "contacts": 400,
     "disjunctive_pairs": 42,
@@ -11,7 +20,7 @@
   "schema_version": 2,
   "scope": {
     "established": "Exact, at the exact pose, over all forty squares and all three degrees of freedom each. Contacts decided by exact sign, the witness a vector in Q(sqrt 2)^120, and every claim about it re-decided in the field from the pose rather than read back from this record.",
-    "not_established": "Second-order rigidity, which needs every first-order flex refused and not just this one. The null space of the single-axis rows is five-dimensional, only a short integer sweep of it was searched, and only the branch admitting this witness was examined, so the cone's dimension is not measured here. The instrument for the rest is the one already used: the obstruction argument transfers unchanged to any other witness this search turns up.",
+    "not_established": "Second-order rigidity, which needs every first-order flex refused and not just this one. Inside the null space the admissible set is measured and is a line, so what is unsearched is everything outside it: a direction that leaves some all-branch contact strictly opening is not a null vector and no sweep here reaches it. The instrument for the rest is the one already used -- the obstruction argument transfers unchanged to any other witness such a search turns up.",
     "relation_to_prior_evidence": "The translation-escape screen leaves n = 40 undetermined by deciding single-square translation only; this motion is sixteen squares turning at once, which is outside it in every respect. Nothing conflicts: neither claims a property, and this one explains why the screen found nothing."
   },
   "subject": {

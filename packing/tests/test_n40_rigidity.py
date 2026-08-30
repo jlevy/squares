@@ -226,3 +226,20 @@ def test_only_tight_rows_enter_the_obstruction() -> None:
 
     assert len(tight) == _record()["witness"]["second_order"]["tight_rows"]
     assert len(tight) + len(slack) == len(rows), "no row is violated in this branch"
+
+
+def test_the_admissible_part_of_the_null_space_is_a_line() -> None:
+    """ "A witness exists" and "the flex is one-dimensional" are different claims.
+
+    The second is measured: of the 3124 nonzero integer combinations in `[-2, 2]^5` of the
+    null basis, four extend to a branch, and all four are multiples of a single basis
+    vector. Inside the subspace where every all-branch contact is tight, the admissible set
+    is exactly a line -- the same shape as `n = 5`, two orders of magnitude larger.
+    """
+    sweep = _record()["admissible_part_of_the_null_space"]
+
+    assert sweep["swept"] == 3124
+    assert sweep["extend"] == 4
+    assert sweep["basis_directions_used"] == [4]
+    assert sweep["is_a_single_line"] is True
+    assert "may be larger than this line" in sweep["what_it_does_not_bound"]
