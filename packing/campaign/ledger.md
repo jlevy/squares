@@ -59,7 +59,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-042](agent-sessions/session-042-block8-exact-solve.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-qs6k | Open block 9 as session-043 under BC-061 and `think-twa7`: an exact LP over certified coefficients, removing the `1e-11` float floor. The n = 29 refusal above is what makes the interval route the load-bearing one, so the layer that certifies its coefficients is the next thing that matters. |
 | [session-043](agent-sessions/session-043-block9-degree-bound.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (correctness) | 2 | think-qs6k | Open block 11 as session-044 under BC-066 and `think-obgk`: eliminate the five equations in five half-angles this block left, inside a declared wall-clock cap, and record whatever the chain reaches. It runs before the remaining pipeline blocks because it is the only one that can change what this run concludes about n = 29 -- a refusal there is the measured justification for the interval route carrying that bound. The ordering through block 18 is agenda-006's continuation schedule. |
 | [session-044](agent-sessions/session-044-agenda006-continuation.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 11 | think-qs6k | Carry BC-066 on `think-obgk` to a terminal state: record the measured wall the rational elimination hit, and take the eliminant's degree from the finite-field run. |
-| [session-045](agent-sessions/session-045-agenda008-queue-and-identity.md) | in_progress | contemporaneous | `pipeline-improvement` (process) | `research-loop` (insight) | 9 | think-s424 | Take BC-024 on `think-kr1d` once D-385's figure block closes: extend the retained broad contact-component census with minimal-partition shapes, wall seating and representative overlays, into a source-stratified taxonomy with a characterized residue, emitting no H-044 verdict. |
+| [session-045](agent-sessions/session-045-agenda008-queue-and-identity.md) | in_progress | contemporaneous | `pipeline-improvement` (process) | `insight-iteration` (insight) | 10 | think-s424 | Take BC-019 on `think-6mcd`: write the versioned contact-assembly contract against the shapes X-008 measured -- axis-aligned polyominoes seated on two or four walls -- with per-record certificates or typed limitations for n <= 30 and no H-044 verdict. |
 
 ### Workflow summary
 
@@ -69,7 +69,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 0 | 0 | 9 | 0 |
 | `factual-review` | 1 | 0 | 21 | 2 |
-| `insight-iteration` | 2 | 1 | 25 | 2 |
+| `insight-iteration` | 2 | 1 | 26 | 2 |
 | `process-review` | 8 | 4 | 45 | 6 |
 | `efficiency-loop` | 7 | 0 | 20 | 0 |
 | `research-loop` | 2 | 4 | 15 | 7 |
@@ -111,7 +111,7 @@ Status: **active**. Sequence the stratified chunk-enumeration program from X-003
 | BC-018 | tool_validation | 5, 10, 16 | blocked | 1 | think-sfzh | retained per-stratum ranking on the proved cells with the frozen grammar commit named in the record |
 | BC-019 | research | 11, 17, 18, 19, 28, 29 | ready | 2 | think-6mcd | independent review of CG-010's structural full-cell control and a BC-016 or BC-017 readiness decision; numerical row compilation remains unbuilt |
 | BC-023 | tool_validation | 11, 17, 18, 29, 68, 88 | complete | 1 | think-osm7 | complete manifest with retrieval provenance, declared precision, retained-source policy, witness paths, and rendering paths |
-| BC-024 | research | 11, 17, 18, 19, 26, 28, 29, 37, 40, 50, 68, 70, 83, 88 | ready | 2 | think-kr1d | extend the retained broad contact-component census with minimal-partition shapes, wall seating, and representative house-rendered overlays |
+| BC-024 | research | 11, 17, 18, 19, 26, 28, 29, 37, 40, 50, 68, 70, 83, 88 | complete | 2 | think-kr1d | extend the retained broad contact-component census with minimal-partition shapes, Answered descriptively and the answer inverts the expected shape of the residue. Stratified by the source each record's geometry came from, the corpus is three populations: exact-grid (64 records, 64 components, none tilted), kingbird-derived facts (34 records, 387 components, 237 tilted), and unitsquare-rendering (2 records, 137 components, every one a singleton and 58 of them tilted). Every other-polyomino in the corpus has angle exactly zero -- one distinct value across all 109 -- so every tilted component the repository holds is a singleton, bar, L or rectangle, all of which the grammar expresses. Extending the grammar to reach the residue is a question about axis-aligned polyominoes, not about tilted assemblies. Wall seating, computed from witness corners because lattice coordinates are relative to a component, splits the residue into exactly two populations with nothing between: 44 whole-record grid subsets touching all four walls, and 65 corner-seated blocks touching exactly two. None touches one, three or none. The seating agrees with n = 5's exactly known contacts from X-007, which is what stops it from measuring the decimal witnesses' precision instead of the packings. No H-044 verdict is emitted and none is available: the census's known_gap says an unexpressed component is not a refutation until the minimal-partition solver exists, and the record carries that sentence with a test asserting it is there. Recorded in campaign/explorations/X-008-the-residue-is-axis-aligned.md, devtools/census_chunk_taxonomy.py, tests/test_chunk_taxonomy.py, and campaign/series/series-000-smoke-and-calibration/results/bc-024-chunk-taxonomy.json. wall seating, and representative house-rendered overlays |
 | BC-020 | research | 11 | blocked | 2 | think-dh4b | retained per-step cell sequence with the cell-change count |
 | BC-025 | research | 5, 10, 11, 17, 18, 28, 29 | blocked | 2 | think-r45s | per-pose round-trip table with the record and non-record rates apart |
 | BC-026 | tool_validation | 5, 10 | blocked | 3 | think-coyu | recall and actual cost of the glued budget per proved cell |
@@ -373,6 +373,7 @@ Status: **completed**. Eight to nine hours in four blocks. Block 1 is first beca
 - X-005 — The relation the atlas should count, and why its acceptance rule could not test one
 - X-006 — The candidate discriminating control at n = 5 is the one D-034 has been quoting
 - X-007 — The n = 5 optimum flexes in exactly one direction, and that direction curves shut
+- X-008 — The shapes the grammar cannot express are the ones that are not tilted
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

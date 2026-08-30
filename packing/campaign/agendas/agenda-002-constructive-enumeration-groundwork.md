@@ -210,7 +210,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11, 17, 18, 19, 26, 28, 29, 37, 40, 50, 68, 70, 83, 88]
-    state: ready
+    state: complete
     priority: 2
     question: >-
       Across the imported n <= 100 corpus, which chunk shapes, chunk sizes, tilted-chunk
@@ -226,6 +226,32 @@ agenda:
     depends_on: [BC-023]
     next_evidence: >-
       extend the retained broad contact-component census with minimal-partition shapes,
+
+      Answered descriptively and the answer inverts the expected shape of the residue.
+      Stratified by the source each record's geometry came from, the corpus is three
+      populations: exact-grid (64 records, 64 components, none tilted), kingbird-derived
+      facts (34 records, 387 components, 237 tilted), and unitsquare-rendering (2 records,
+      137 components, every one a singleton and 58 of them tilted).
+
+      Every other-polyomino in the corpus has angle exactly zero -- one distinct value
+      across all 109 -- so every tilted component the repository holds is a singleton, bar,
+      L or rectangle, all of which the grammar expresses. Extending the grammar to reach the
+      residue is a question about axis-aligned polyominoes, not about tilted assemblies.
+
+      Wall seating, computed from witness corners because lattice coordinates are relative
+      to a component, splits the residue into exactly two populations with nothing between:
+      44 whole-record grid subsets touching all four walls, and 65 corner-seated blocks
+      touching exactly two. None touches one, three or none. The seating agrees with n = 5's
+      exactly known contacts from X-007, which is what stops it from measuring the decimal
+      witnesses' precision instead of the packings.
+
+      No H-044 verdict is emitted and none is available: the census's known_gap says an
+      unexpressed component is not a refutation until the minimal-partition solver exists,
+      and the record carries that sentence with a test asserting it is there.
+
+      Recorded in campaign/explorations/X-008-the-residue-is-axis-aligned.md,
+      devtools/census_chunk_taxonomy.py, tests/test_chunk_taxonomy.py, and
+      campaign/series/series-000-smoke-and-calibration/results/bc-024-chunk-taxonomy.json.
       wall seating, and representative house-rendered overlays
     parallel_group: corpus-measurement
     note: >-
@@ -236,6 +262,11 @@ agenda:
       finds no registered-universe partition for 23, and leaves eight search-capped and
       indeterminate. Contact-graph complexity, wall seating, and overlays are retained
       as descriptive calibration. Exploratory work may not emit a W6 verdict.
+    artifacts:
+    - devtools/census_chunk_taxonomy.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-024-chunk-taxonomy.json
+    - tests/test_chunk_taxonomy.py
+    - campaign/explorations/X-008-the-residue-is-axis-aligned.md
   - id: BC-020
     purpose: research
     owner_focus: insight

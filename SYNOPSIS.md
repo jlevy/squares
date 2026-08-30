@@ -323,13 +323,18 @@ is closed with all four commitments terminal, and
 [session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md)
 has continued past it into the live queue.
 Take the next slice from [`agenda-map.md`](packing/campaign/agenda-map.md).
-`BC-024` on `think-kr1d` is next: extend the retained broad contact-component census
-with minimal-partition shapes, wall seating and representative overlays into a
-source-stratified taxonomy with a characterized residue, emitting no `H-044` verdict.
+`BC-019` on `think-6mcd` is next: write the versioned contact-assembly contract against
+the shapes [X-008](packing/campaign/explorations/X-008-the-residue-is-axis-aligned.md)
+measured, with per-record certificates or typed limitations for `n <= 30`. `BC-024` is
+closed, and its answer inverts the expected shape of the residue: **every** component
+the grammar cannot express is axis-aligned — every `other-polyomino` in the corpus has
+angle exactly zero — so all 295 tilted components are singletons, bars, Ls or rectangles
+and already covered.
+Wall seating splits the residue into two populations with nothing between them: 44
+whole-record grid subsets on four walls, 65 corner-seated blocks on two.
 `BC-038` is closed and rejected on measured arithmetic — 35 `evaluate_stress` calls
 arrive with **eleven** distinct number fields, and `RowJetInventory` refuses a foreign
-field by identity, so the sharing it proposed mostly cannot happen; the floor is a
-`1.54x` ceiling against an exit that wants five-fold.
+field by identity, so the floor is a `1.54x` ceiling against an exit wanting five-fold.
 `BC-010` and `BC-029` are **not** takeable despite what the map’s priority says: both
 are gated on independent acceptance of `exp-045`’s preregistered criterion, which
 records `decision: unresolved` with `needs_review: true`, and an unattended runner may

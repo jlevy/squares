@@ -336,12 +336,11 @@ already decide its stated criterion need not open a ceremonial review phase.
 For the next supervised exact-research goal, use
 [session 045](../../../../packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md).
 Sessions 027 through 044 are terminal, and agendas 006 and 007 are closed.
-Open `BC-024` under `think-kr1d` as the next bounded driver: extend the retained broad
-contact-component census into a source-stratified taxonomy of chunk shapes, sizes,
-tilted-chunk counts and wall seatings, with the non-expressible residue characterized
-rather than dropped.
-It is bounded because it is descriptive: a pass over imported geometry with no search,
-and it emits no `H-044` verdict.
+Open `BC-019` under `think-6mcd` as the next bounded driver: write the versioned
+contact-assembly contract — sliding degrees of freedom, complexity cost, canonical ties,
+per-record certificates or typed limitations for `n <= 30`. It is takeable now because
+`X-008` measured what the residue is made of, so the contract is written against shapes
+rather than against a guess.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

@@ -502,7 +502,7 @@ session:
       Across the imported n <= 100 corpus, which chunk shapes, chunk sizes, tilted-chunk
       counts and wall seatings actually recur, and what does the non-expressible residue
       have in common?
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       D-358's missing regression exists now, so the queue's own next cell is takeable. This
@@ -524,12 +524,80 @@ session:
     fallback: >-
       A typed statement of which taxonomic axes the retained geometry cannot support, which
       is what the partition-instrument design would need anyway.
+    outcome: >-
+      Answered, and the answer inverts the expected shape of the residue. The corpus is
+      three populations rather than one sample, and the shapes the grammar cannot express
+      are precisely the ones that are not tilted -- so extending the grammar is a question
+      about axis-aligned polyominoes, and the tilted structure is already covered.
+    evidence:
+    - >-
+      'Every other-polyomino in the corpus has angle exactly zero: one distinct value across
+      all 109. So all 295 tilted components, across 36 records, are singletons, bars, Ls or
+      rectangles, and every one of those is expressible.'
+    - >-
+      'Wall seating splits the residue into exactly two populations with nothing between:
+      44 whole-record grid subsets touching all four walls, 65 corner-seated blocks touching
+      exactly two. None touches one, three or none.'
+    - >-
+      'The largest part of the residue is trivial geometry, not exotic. 44 of the 109 are
+      exact-grid records where the whole packing is one polyomino -- n = 7 is an integer
+      grid with two squares missing.'
+    - >-
+      'The seating computation is checked against n = 5, whose contacts X-007 knows exactly:
+      it reports [0, 2, 2, 2, 2], which is sixteen corner-on-wall contacts across four
+      corner squares and a middle square touching nothing. Without that check it would be
+      measuring the decimal witnesses'' precision.'
+    - >-
+      'Caught before retaining: the record was written with integer keys, which JSON turns
+      into strings, so its own --check could never have passed. --check now compares the
+      canonical text. Same lesson as D-384 and found the same way -- run the check the
+      moment the record exists.'
+    stop_reason: >-
+      Both halves of the exit are met -- a source-stratified taxonomy and a characterized
+      residue -- and the fallback branch was not needed. No H-044 verdict is emitted and the
+      record says so in a field a test reads.
+    next_action: >-
+      Then BC-019 on `think-6mcd`. BC-010 and BC-029 stay out of scope: both are gated on
+      independent acceptance of exp-045's preregistered criterion.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    commitment: BC-019
+    bead: think-6mcd
+    objective: >-
+      Are standing records at n <= 30 already chunk-structured, and if not, which grammar
+      move is missing? BC-024 just supplied the input this needs: the residue is
+      axis-aligned polyominoes seated on exactly two or exactly four walls, so the missing
+      move is a question with a shape rather than an open one.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      X-008 characterized the residue, which is what BC-019's grammar question was waiting
+      on. Taking it now means the contract is written against measured shapes rather than
+      against a guess about which ones matter.
+    budget_minutes: 50
+    started_at: '2026-08-30T10:16:00Z'
+    deadline_at: '2026-08-30T11:06:00Z'
+    expected_output: >-
+      A versioned contact-assembly contract carrying explicit sliding degrees of freedom,
+      complexity cost, canonical ties, and per-record certificates or typed limitations for
+      n <= 30. The inspected corpus receives no H-044 verdict.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      Stop if the contract needs a complexity cost that only the minimal-partition solver
+      can supply. The census's own contract already says grammar_cost is unfrozen, and
+      inventing a number for it would freeze the wrong thing.
+    fallback: >-
+      A typed statement of which contract fields the retained evidence cannot fill, which
+      is what the readiness decision BC-019's next_evidence names would have to weigh.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Then BC-019 on `think-6mcd`. BC-010 and BC-029 stay out of scope: both are gated on
-      independent acceptance of exp-045's preregistered criterion.
+      Then BC-017 on `think-u97a`, or an integration checkpoint if the clock is short.
+      BC-010 and BC-029 stay out of scope.
   primary_bead: think-s424
   status: in_progress
   budget:
@@ -768,10 +836,9 @@ session:
   checks: []
   stop_reason: null
   next_action: >-
-    Take BC-024 on `think-kr1d` once D-385's figure block closes: extend the retained broad
-    contact-component census with minimal-partition shapes, wall seating and representative
-    overlays, into a source-stratified taxonomy with a characterized residue, emitting no
-    H-044 verdict.
+    Take BC-019 on `think-6mcd`: write the versioned contact-assembly contract against the
+    shapes X-008 measured -- axis-aligned polyominoes seated on two or four walls -- with
+    per-record certificates or typed limitations for n <= 30 and no H-044 verdict.
 ---
 # Session-045 — Agenda-008
 

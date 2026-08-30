@@ -1071,6 +1071,17 @@ def _n5_identity_pair(context: Context) -> str:
     return _module(context, "devtools.build_n5_identity_pair", "--check")
 
 
+def _chunk_taxonomy(context: Context) -> str:
+    """The source-stratified taxonomy still describes the corpus it was drawn from.
+
+    2.6s, which is a third again on top of the records tier and is paid deliberately. The
+    record is a generated view over the chunk census and 100 retained witnesses, and
+    `D-369` measured that record drift, not mathematics, is what breaks CI -- so a view
+    whose drift check sits outside the pre-push tier is a view that drifts.
+    """
+    return _module(context, "devtools.census_chunk_taxonomy", "--check")
+
+
 def _session_clocks(context: Context) -> str:
     """No session may declare a start time it could not have read (`D-358`).
 
@@ -1530,6 +1541,20 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/check_golden_basins.py",
             "packing/devtools/check_soundness_perimeter.py",
             "packing/campaign/series/*/results/bc-083-n5-identity-pair.json",
+        ),
+    ),
+    Step(
+        "chunk taxonomy agrees with the corpus",
+        _chunk_taxonomy,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/chunk-components.json",
+            "packing/atlas/known-best/manifest.json",
+            "packing/witnesses/*",
+            "packing/devtools/census_chunk_taxonomy.py",
+            "packing/campaign/series/*/results/bc-024-chunk-taxonomy.json",
         ),
     ),
     Step(

@@ -10520,6 +10520,14 @@ defects:
     commit boundary, not `--edit`. Widening `--edit` to include the test step would put its
     529 seconds back and recreate exactly the tier-too-expensive-to-run problem `D-369`
     records, trading a rare stale pin for a tier nobody runs.
+
+    A refinement, measured the same day by getting it wrong again: `--records` alone is not
+    enough before a push. On 2026-08-30 a push validated only at `--records` failed CI on
+    the type floor, for a `reportPrivateUsage` warning that `--edit` catches in 43 seconds.
+    The tiers divide the work cleanly and the division is worth stating: `--records` (6s)
+    catches record drift, `--edit` (43s) adds lint and types, and only a test pinning a
+    literal the source computes needs `--fast`. The pre-push floor is `--edit`, not
+    `--records`.
   regression: >-
     `tests/test_validation_cli.py::test_strict_mode_refuses_a_partial_validation_surface`
     now parametrizes `--since` and asserts per flag, so a sixth narrowing flag added to the

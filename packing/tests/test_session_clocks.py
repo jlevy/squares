@@ -108,11 +108,11 @@ def test_the_refusal_has_no_grace_period(ahead: timedelta) -> None:
 
 def test_the_real_corpus_is_clean() -> None:
     """The check is worth nothing if it is only ever exercised on fixtures."""
-    from devtools.check_session_clocks import SESSIONS, _session  # noqa: PLC0415
+    from devtools.check_session_clocks import SESSIONS, session_record  # noqa: PLC0415
 
     now = datetime.now(UTC)
     paths = sorted(SESSIONS.glob("session-[0-9][0-9][0-9]-*.md"))
 
     assert len(paths) >= 45
     for path in paths:
-        assert violations(path.name, _session(path), now) == [], path.name
+        assert violations(path.name, session_record(path), now) == [], path.name

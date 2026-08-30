@@ -70,7 +70,8 @@ def _moment(value: object) -> datetime | None:
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
 
-def _session(path: pathlib.Path) -> dict[str, object]:
+def session_record(path: pathlib.Path) -> dict[str, object]:
+    """The `session` frontmatter of one artifact."""
     text = path.read_text(encoding="utf-8")
     return safe_load(text.split("---", 2)[1])["session"]
 
@@ -172,7 +173,7 @@ def audit(*, verbose: bool) -> int:
     clocked = 0
     counted = 0
     for path in paths:
-        record = _session(path)
+        record = session_record(path)
         problems.extend(violations(path.name, record, now))
         notes.extend(remarks(path.name, record))
         declared = phases(record)
@@ -193,7 +194,7 @@ def audit(*, verbose: bool) -> int:
     if verbose:
         latest = paths[-1]
         print(f"  elapsed against budget in {latest.name}:")
-        for line in elapsed_report(latest.name, _session(latest), now):
+        for line in elapsed_report(latest.name, session_record(latest), now):
             print(line)
     return 0
 
