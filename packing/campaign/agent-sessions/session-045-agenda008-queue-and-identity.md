@@ -980,7 +980,7 @@ session:
       (cases/trump11/tangent_cones.py); 2^42 is not enumerable, but a branch-and-bound that
       closes a node the moment every coordinate is pinned need not reach the leaves,
       because a node's pinned set only grows as rows are added.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Phase 15's own next_action. This is the one open slice that neither waits on a human
@@ -1005,12 +1005,86 @@ session:
     fallback: >-
       The measured search behaviour, which is what the next attempt needs and what tells a
       reader whether 2^42 is the real cost or a bound nobody tightened.
+    outcome: >-
+      n = 40 decided at first order: infinitesimally FLEXIBLE, with an exact witness. All
+      sixteen squares of the tilted block turn together, each about its own centre, at
+      exactly zero gap rate on all 248 contacts that hold in every branch; no frame square
+      moves. The 2^42 enumeration was never run and is not needed. Candidates come from the
+      null space of the single-axis rows (rank 115, null dimension 5), which is exact, and
+      a candidate is a motion exactly when every disjunctive pair still has an admissible
+      axis -- which names the branch directly. One search, not 2^42.
+
+      The witness is then refused at second order: 104 of the 283 tight contacts curve into
+      the obstacle, and a verified non-negative self-stress with w.A = 0 and w.q < 0 rules
+      out every second-order correction. So n = 40 reads like n = 5 one scale up. It is not
+      second-order rigidity, because only one direction of a five-dimensional null space in
+      one branch was examined, and the record says so in three places.
+
+      D-391's cost is now measured rather than counterfactual: it inverts the answer. An
+      assessor that intersects the disjunctions certifies all 120 coordinates as pinned,
+      reporting this packing rigid. Nothing is promoted: an infinitesimal flex is not a
+      motion, so n-040 stays undetermined and the catalogue's annotation stands.
+
+      The phase also found CI red since 10:50Z across four pushes, unnoticed because six
+      wake events went unread. Three test failures, all pre-existing from phase 14's push:
+      a stale broad-step pin, an undeclared exhaustive_exact marker, and D-392. Fixed here;
+      D-392 and D-393 recorded.
+    evidence:
+    - packing/devtools/assess_n40_rigidity.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n40-rigidity-bracket.json
+    - packing/tests/test_n40_rigidity.py
+    - packing/devtools/assess_n5_rigidity.py
+    stop_reason: >-
+      Exit reached on the primary branch rather than the fallback. The kill condition held:
+      every node claim is exact -- the null space is computed in the field, the branch
+      condition is decided by exact sign, and the self-stress is verified in the field
+      before it counts. No numeric rank or unverified proposal closes anything.
+    next_action: >-
+      X-007 owns the rigidity argument and now contradicts the record in two places: it
+      argues n = 5's exemption from the disjunction in prose without making it a check, and
+      it does not know n = 40 is flexible. That is the next slice. After it: whether the
+      first-order cone is larger than this one witness.
+  - workflow: factual-review
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-049
+    bead: think-xdly
+    objective: >-
+      Bring X-007 into agreement with what is now known. It owns the rigidity argument and
+      contradicts the record in two places: it states D-391's principle in prose and argues
+      n = 5 is exempt without making the exemption a check, and it does not know that
+      n = 40 is infinitesimally flexible. Neither is a small correction -- the first is the
+      only place the union-versus-intersection question is written down, and the second
+      changes what the document says a first-order argument can reach.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Phase 16's declared next_action, and OR-7: the documentation pass belongs at the block
+      boundary rather than after another research slice has moved the target again.
+    budget_minutes: 50
+    started_at: '2026-08-30T12:12:00Z'
+    deadline_at: '2026-08-30T13:02:00Z'
+    expected_output: >-
+      X-007 correct on both points, with the n = 5 exemption pointing at the test that now
+      enforces it rather than arguing it, and n = 40's flexibility and its second-order
+      refusal stated with their evidence. No new claim: everything it gains is already
+      verified in the record.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --edit
+    kill_condition: >-
+      The document may not acquire a claim the record does not carry. In particular it may
+      not say n = 40 is second-order rigid: one direction of a five-dimensional null space
+      in one branch was refused, which is not the same statement and is the exact shape of
+      overreach this document has already been corrected for once.
+    fallback: >-
+      Correcting the two contradictions alone, leaving the wider rewrite for a session that
+      can afford it.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      X-007 owns the rigidity argument and should carry both the bracket and whatever this
-      finds.
+      Whether the first-order cone at n = 40 is larger than this one witness.
   primary_bead: think-s424
   status: in_progress
   budget:

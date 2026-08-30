@@ -260,7 +260,13 @@ def test_no_undeclared_consumer_reads_the_field() -> None:
             or re.fullmatch(r"n-\d{3}\.md", path.name)
         ):
             continue
-        if path.stat().st_size > GENERATED_BYTES:
+        # The size cutoff is a heuristic for generated blobs, and a declared consumer is
+        # not a guess -- so it is scanned however large it has grown. `packing/defects.yaml`
+        # crossed 512 KiB on 2026-08-30 and silently stopped being read, which is `D-392`.
+        if (
+            path.stat().st_size > GENERATED_BYTES
+            and relative.as_posix() not in DECLARED_CONSUMERS
+        ):
             continue
         if "verified_upper_bound" in path.read_text(encoding="utf-8", errors="ignore"):
             found.add(relative.as_posix())

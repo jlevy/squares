@@ -332,6 +332,12 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
             "test_real_production_weight_perturbation_breaks_cancellation",
             "test_uniform_weight_rescaling_fails_exact_normalization",
         },
+        # Measured 2026-08-30: about three minutes. It re-derives n = 40's whole
+        # assessment, whose intersecting-assessor section runs 240 linear programs over
+        # 400 rows and re-decides every proposal in the field.
+        "test_n40_rigidity.py": {
+            "test_the_record_round_trips",
+        },
     }
     declared: dict[str, set[str]] = {}
     marker = "pytest.mark.exhaustive_exact"

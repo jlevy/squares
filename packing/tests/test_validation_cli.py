@@ -827,7 +827,14 @@ def test_broad_is_opt_out_so_a_new_step_joins_the_edit_tier() -> None:
     than in a missed regression.
     """
     assert validate.Step("probe", lambda _context: "", fast=True).broad is False
-    assert {step.name for step in validate.STEPS if step.broad} == {"fast behavioral tests"}
+    assert {step.name for step in validate.STEPS if step.broad} == {
+        "fast behavioral tests",
+        # Measured 2026-08-30: 31.6s in CI against a 43s edit tier, so carrying it there
+        # would nearly double the tier for a record that changes when a witness is
+        # retained -- which is to say rarely, and never from an edit. It still runs in
+        # `--fast` and above, and CI runs the full gate on every push.
+        "the decimal route still cannot price an exact pose",
+    }
 
 
 def test_edit_and_fast_are_not_silently_combinable() -> None:

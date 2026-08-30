@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 391
+count: 393
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -11088,3 +11088,99 @@ defects:
     intersection would fail while looking like it had started agreeing with the source.
   bead: think-s424
   recorded_in: packing/devtools/assess_n5_rigidity.py
+
+- id: D-392
+  title: A size cutoff meant for generated blobs went blind on a source file that grew
+  date: '2026-08-30'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: gate
+  latent_for: 'about two hours, and it would have been permanent'
+  severity: medium
+  status: fixed
+  what: >-
+    `test_no_undeclared_consumer_reads_the_field` sweeps the repository for files naming
+    `verified_upper_bound` and fails if one is not on the declared-consumer list. It skips
+    files over `512 KiB`, on the reasoning that anything that large is a generated view
+    rather than prose someone wrote.
+
+    `packing/defects.yaml` is not generated, and on 2026-08-30 it crossed that line: at
+    `541,903` bytes it stopped being scanned. It is a declared consumer, so the *other*
+    assertion in the same test -- that no declared consumer has gone stale -- fired, and
+    that is the only reason this was noticed at all.
+    The class is `validity` rather than `soundness` on the definitions this log uses: the
+    code is correct and nothing false about the mathematics was asserted -- the sweep simply
+    stopped bearing on one file. It is `flattering` because the direction of that blindness
+    is toward reporting nothing wrong.
+  consequence: >-
+    Flattering, and quietly so. The half that failed is the harmless half; the half that
+    went silent is the guard. Any new mention of `verified_upper_bound` in `defects.yaml`
+    would from then on have gone undeclared without the sweep saying anything, which is
+    exactly the conflation the contract exists to stop -- and `D-367`, the defect that
+    cites this contract as its nearest guard, lives in that same file.
+
+    The general shape is a heuristic that decides what to look at by a proxy for what it
+    means. "Large" stood in for "generated", and a source file grew. Nothing announced the
+    change of category, because a threshold crossing never does.
+  fix: >-
+    A declared consumer is scanned however large it has grown. The cutoff still applies to
+    everything else, where it is doing the job it was written for: guessing about files
+    nobody has classified. A file that has been classified is not a guess.
+  regression: >-
+    The failing assertion is its own regression and it is the one that caught this, so what
+    is added is the reason rather than another check: the exemption carries the measured
+    date and size in a comment, so the next person to tighten the cutoff can see that a
+    real file crossed it once.
+  bead: think-s424
+  recorded_in: packing/tests/test_verified_upper_bound_contract.py
+
+- id: D-393
+  title: The pre-push floor does not run tests, and CI stayed red for seventy-five minutes
+  date: '2026-08-30'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: 'seventy-five minutes and four pushes'
+  severity: medium
+  status: contained
+  what: >-
+    `D-381` established `--edit` as the pre-push floor after a push validated only by
+    `--records` went red. The floor holds for what it covers -- lint, types, record drift --
+    and it does not run the test step at all, because `fast behavioral tests` is `broad` and
+    `broad` is precisely what `--edit` drops.
+
+    So a change that breaks a test passes the floor. Three did: a `broad` flag whose pinned
+    inventory was not updated, a marker declared without its measured cost, and `D-392`.
+    CI went red at `26ace33` and stayed red across `307c1ba`, `0b7051d` and `9dd96ed`.
+
+    The wake events were delivered. Six of them, naming the failing check each time, and
+    none was read for seventy-five minutes because the session was mid-slice and treating
+    notifications as interruptions rather than as the signal they are.
+  consequence: >-
+    Neutral in the record -- nothing false was published, and the three failures were a
+    stale pin, an undeclared marker and a blind sweep. The cost is time and trust: four
+    pushes went out on a branch whose gate was failing, and the session did not know.
+
+    What makes it worth an entry is that the floor is now understood to be two things and
+    was being used as one. `--edit` answers "is this well-formed"; only `--fast` and above
+    answer "does it still work". A change that touches a test, a marker, or a gate step's
+    flags is in the second category and the floor cannot see it.
+  fix: >-
+    Contained rather than fixed, because the tiers are right and the discipline was wrong.
+    `--edit` stays the floor for prose and record edits. A change to `tests/`, to a `Step`'s
+    flags, or to a pytest marker needs the affected test file run directly before pushing,
+    and a wake event naming a failed check is read before the next push rather than after
+    the next slice.
+
+    Widening `--edit` to include the test step would make the floor a ten-minute wait and
+    the measured consequence of that is in the `broad` docstring already: a tier priced at
+    the cost of its widest step is a tier people skip, which is `D-369`.
+  regression: >-
+    None mechanical, and that is the honest state. The two pinned inventories that broke
+    here -- the `broad` set and the `exhaustive_exact` declaration -- are themselves the
+    regression tests for their own kind of drift, and they worked: they failed the moment
+    the flags moved. What failed was reading them in time.
+  bead: think-s424
+  recorded_in: packing/tests/test_validation_cli.py

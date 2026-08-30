@@ -2492,8 +2492,8 @@ and checked in the gate.
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
-| validity | 93 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 146 | recorded something its own evidence contradicts |
+| validity | 94 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 147 | recorded something its own evidence contradicts |
 | robustness | 46 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
@@ -2503,10 +2503,10 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fifty defects in 391, and no soundness defect ever.**
-Every soundness failure was found by a control cell whose answer was known in advance, a
-rule written down before the measurement, a generated view contradicting its source, or
-someone reading carefully.
+**The automated gate has caught fifty-two defects in 393, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Gate-detected entries here are mechanical process, implementation, or
 test-validity failures, found by contiguity, integration, mutation-anchor,
@@ -2531,6 +2531,15 @@ one of the 120 coordinates as pinned, reporting a packing rigid that is not.
 Removing the defect is what found the witness.
 It is still not a *motion*: the gaps curve shut at order `t²`, so `n = 40`’s record
 stays `undetermined` and the catalogue’s annotation stands.
+
+[D-393](defects.md) is the same run being wrong about its own gate.
+`D-381` established `--edit` as the pre-push floor, and that floor does not run tests:
+the test step is marked `broad`, and dropping `broad` steps is exactly what `--edit`
+does. So four pushes went out on a red branch — a stale pin, an undeclared marker, and
+[D-392](defects.md), a size cutoff meant for generated blobs that went blind when
+`defects.yaml` grew past half a megabyte.
+The wake events naming the failed check were delivered six times and read once, after
+the fact. The tiers are right; using one of them as though it were the other was not.
 
 The record can also be wrong about itself, and [D-358](defects.md) is this run being so:
 an unattended run declared blocks of 150, 180, 180 and 40 minutes and took 31, 42, 29

@@ -23,13 +23,24 @@ exploration:
     refused at second order by a verified non-negative self-stress. So the packing is
     second-order rigid, which is stronger than anything the record held and still weaker
     than local rigidity, and the report says exactly where the remaining gap is.
+
+    Extended on the same day to n = 40, which is where the instrument was found to carry
+    three assumptions that n = 5 cannot distinguish from theorems: rational Farkas weights
+    against mixed rows (D-388), corner incidences read as contacts (D-390), and a
+    disjunctive tangent cone intersected (D-391). With all three corrected, n = 40 is
+    infinitesimally FLEXIBLE -- its sixteen tilted squares turn together -- and that flex is
+    refused at second order by the same kind of self-stress. Nothing is promoted: an
+    infinitesimal flex is not a motion, so both records stay undetermined.
   sources:
   - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n40-rigidity-bracket.json
   - packing/campaign/series/series-000-smoke-and-calibration/results/bc-063-n5-rigidity-evidence.json
   - packing/atlas/known-best/translation-escape-screen.json
   - packing/frontier/n-005.md
+  - packing/frontier/n-040.md
   - packing/frontier/evidence.yaml
   - packing/cases/gobel5/packing.py
+  - packing/cases/gobel40/packing.py
   - defects.md
   proposes: []
 ---
@@ -42,9 +53,11 @@ the commitment’s **first** exit branch in substance and stops short of it in n
 first-party certificate with a stated scope, where the scope is second-order rigidity
 rather than local rigidity.
 
-**Owns:** The argument.
-`devtools/assess_n5_rigidity.py` owns the computation, `tests/test_n5_rigidity.py` pins
-it, and the gate step `n=5 rigidity certificates still verify` replays it.
+**Owns:** The argument, at `n = 5` and at `n = 40`. `devtools/assess_n5_rigidity.py`
+owns the `n = 5` computation and the shared machinery, `devtools/assess_n40_rigidity.py`
+the extension; `tests/test_n5_rigidity.py` and `tests/test_n40_rigidity.py` pin them,
+and the gate steps `n=5 rigidity certificates still verify` and
+`n=40 rigidity bracket still reproduces` replay them.
 
 ## What the Record Held, and Why Neither Half Was an Answer
 
@@ -126,6 +139,33 @@ Scaling each such row by `sqrt 2` — a positive constant, which leaves the cone
 — makes every row rational and the certificates ordinary.
 Written without that step, the search returns nothing at all, which is how it was first
 written.
+
+That rescaling turned out to be a special case rather than a trick, and finding its
+limit took three defects.
+It works here because every row is *wholly* rational or *wholly* irrational, and that
+dichotomy is exhaustive at `n = 5` and nowhere else — Göbel’s `n = 40`, in the same
+field, has 184 of its 400 contact rows carrying both parts, which no positive scalar
+rationalizes ([`D-388`](../../../defects.md)). What answers those is a Farkas search
+whose weights live in the ordered field: each row gets a weight `p + q sqrt 2` with both
+parts free in sign and non-negativity imposed as the single inequality
+`p + sqrt(2) q >= 0`. `certify` runs that alongside the cheaper restricted search and
+verifies either result exactly, and it reproduces all fourteen certificates below
+without the rescaling.
+
+**Two further assumptions about contacts were wrong, and neither shows at `n = 5`.**
+Both are recorded, both point the same way — toward reporting a pose *more* rigid than
+it is — and the second is still open:
+
+- [`D-390`](../../../defects.md): a corner lying on an edge’s **endpoint** is an
+  incidence, not a contact.
+  Two squares meeting edge-to-edge have exactly one separating axis, yet each one’s
+  corners land on the endpoints of the other’s two perpendicular edges.
+  Reading those as contacts asserts that a square free to move cannot.
+  At `n = 40` that was 208 of 560 pair rows; at `n = 5`, none, because every contact
+  here is a corner on the *interior* of an edge.
+- [`D-391`](../../../defects.md): the tangent cone at a corner-to-corner touch is a
+  **union** of half-spaces, not their intersection — see the next section, where this
+  document argued the point in prose and then relied on it without checking it.
 
 ## First Order: One Free Direction, Fourteen Certificates
 
@@ -244,8 +284,17 @@ candidate axes rather than one inequality.
 Here that maximum is attained at the contact normal and nowhere near it: along every
 other candidate axis the two squares overlap in projection at this pose, strictly, and
 therefore in a neighbourhood of it.
-So the curve selection lemma gives a semi-algebraic arc into the set, and Puiseux gives
-`gamma(s) = p + sum_{k >= m} a_k s^k` with `a_m != 0`. Then:
+
+This paragraph was the only place in the repository where that distinction was written
+down, and writing it down was not the same as checking it.
+It is a claim about `n = 5`’s geometry, it is true, and the tool that depends on it went
+on intersecting the half-spaces at every pose — which is [`D-391`](../../../defects.md).
+`disjunctive_pairs` now decides the question from the pose, `assess` refuses any pose
+that fails it, and `test_n5_has_no_disjunctive_pair` holds the exemption claimed here.
+The cost of leaving it as prose was not hypothetical: at `n = 40`, 42 of 98 touching
+pairs are corner-to-corner, and intersecting them reports that packing rigid when it is
+not. So the curve selection lemma gives a semi-algebraic arc into the set, and Puiseux
+gives `gamma(s) = p + sum_{k >= m} a_k s^k` with `a_m != 0`. Then:
 
 - The `s^m` coefficient of `g_j(gamma(s))` is `a_j . a_m`, so feasibility forces
   `a_j . a_m >= 0` for every `j`: `a_m` lies in the first-order cone, hence
@@ -333,27 +382,62 @@ rigidity claim on screen-miss evidence.
 That was the test this change was held to: a guard you have to weaken to land a result
 is a guard that was telling you something.
 
-**`n = 28` and `n = 40` are not covered.** They are in the same `undetermined` group and
-this says nothing about them.
-The pose used here is Göbel’s exact construction; neither of the others has an exact
-construction retained, and building one is the cost of extending this.
+**`n = 28` is not covered, and `n = 40` now is.** They were in the same `undetermined`
+group and this section originally said nothing about either, on the ground that neither
+had an exact construction retained.
+That was true of the repository and false of the mathematics
+([`D-389`](../../../defects.md)): Göbel’s family is published, `a = 3, b = 4` gives
+exactly forty squares in side `4 + 2 sqrt(2)`, and `cases/gobel40` now builds it
+exactly. What the extension found there is in the next section.
+`n = 28` still retains only decimals and is untouched by any of this.
 
-## What This Costs to Extend
+## What Extending It Cost, and What `n = 40` Turned Out to Be
 
-The instrument is general in shape and specific in inputs.
-`assess_n5_rigidity.py` takes a pose in `Q(sqrt 2)` and does the rest — contact
-enumeration, linearization, first-order certificates, second-order terms, self-stress —
-without knowing anything about `n = 5` in particular.
+This section predicted the wrong price, and the way it was wrong is the useful part.
 
-What does not generalize is the pose.
-The argument needs an **exact** configuration, and `n = 28` and `n = 40` retain decimal
-witnesses of the same kind `n = 5` does — `numerically-checked`,
-`numerical-multiprecision`. Only one of those has been measured against a certificate,
-and it failed: `n = 5`’s puts the middle square’s centre `2.4e-30` off the diagonal.
-Whether the other two are infeasible at that scale is not known here, and it is beside
-the point either way — a certificate needs an exact pose, not a sufficiently accurate
-one. So for both, the work is not “run the tool”; it is “produce an exact construction
-first”, and that is the real price.
+It said the instrument was general in shape and specific in inputs — that
+`assess_n5_rigidity.py` takes any pose in `Q(sqrt 2)` and does the rest without knowing
+anything about `n = 5` — and that the only obstacle was the pose.
+The pose was the smaller half.
+Given an exact `n = 40`, the tool ran and produced an answer, and the answer was wrong
+in three separate ways before it was right: rational weights against mixed rows
+([`D-388`](../../../defects.md)), incidences read as contacts
+([`D-390`](../../../defects.md)), and a union of half-spaces intersected
+([`D-391`](../../../defects.md)). Each is invisible at `n = 5`, each points toward
+reporting a pose *more* rigid than it is, and the third inverts the answer outright.
+
+**`n = 40` is infinitesimally flexible.** All sixteen squares of the tilted central
+block turn together, each about its own centre at the same rate, with translations that
+hold every contact surviving in all branches at exactly zero gap rate; the twenty-four
+frame squares do not move.
+The witness is a vector in `Q(sqrt 2)^120`. The mechanism is visible in a single pair:
+for two block squares sharing a full edge, the moving corner’s rotation contributes
+`+1/2` to the gap rate and the host normal’s rotation contributes `-1/2`, and they
+cancel. That is why the block can turn in place at first order, and why no instrument
+that ignores the host’s rotation could have found it.
+
+Finding it did not need the `2^42` branch enumeration the disjunction seems to demand.
+Candidates come from the null space of the rows every branch carries — exact, so no
+rounding can push a candidate out of the cone it came from, which is what defeated a
+search over linear-programming vertices.
+A candidate is a motion exactly when every corner-touching pair still has an axis that
+separates along it, and that choice *names* an admitting branch instead of searching for
+one.
+
+**And it is refused at second order**, by the same argument as `n = 5` one scale up: 104
+of the 283 tight contacts curve into the obstacle, and a verified non-negative
+self-stress with `w . A = 0` and `w . q < 0` rules out every second-order correction at
+once. So the shape of the two results is identical — flexible at first order, shut at
+second — and the strength is not.
+`n = 5` has a one-dimensional cone and that one direction is refused, which is what
+earns the phrase *second-order rigid*. At `n = 40` one direction of a five-dimensional
+null space, in one branch, is refused.
+Whether the rest of that cone survives is the open question, and the machinery for it is
+already written.
+
+The real price of extending this, then, was not the pose.
+It was that a tool validated on one pose had three assumptions in it that the pose could
+not distinguish from theorems.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
