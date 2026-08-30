@@ -42,7 +42,7 @@ inadequacy in the acceptance rule that was supposed to test one.
 `devtools/check_identity_relation.py` owns the numbers, and
 `tests/test_identity_relation.py` pins the verdicts.
 
-## The question, and why the obvious answer is wrong
+## The Question, and Why the Obvious Answer Is Wrong
 
 `Atlas.add` calls two endpoints the same basin when their quantized geometric key *and*
 their contact certificate agree, and `distinct_basins` is then read as a count of
@@ -57,7 +57,7 @@ That is wrong on the same control, and the artifact says so: the `D4 x S3` quoti
 `G` with `M` on the rest.
 Counting certificates reports two components where one is proved.
 
-## Four candidates, scored against four proved answers
+## Four Candidates, Scored Against Four Proved Answers
 
 Run `uv run --frozen python -m devtools.check_identity_relation`.
 
@@ -80,7 +80,7 @@ name lie in one closure.
 The `n = 3` artifact retains exactly what that needs — `closure(G) = [C, G, M]` — so the
 merge is read from the record rather than assumed.
 
-## The finding: the acceptance rule could not have tested this
+## The Finding: The Acceptance Rule Could Not Have Tested This
 
 `BC-046` wrote the exit as “a declared identity relation with a criterion that the exact
 `n = 3` sliding family and the exact `n = 4` point both satisfy”.
@@ -102,7 +102,7 @@ relation that merges correctly from one that merges indiscriminately.** That is 
 generalizable half of this report, and it is not specific to identity: any criterion
 validated only on cases whose answer is one is validated against a constant.
 
-## What the two controls actually isolate
+## What the Two Controls Actually Isolate
 
 They are not two instances of one test.
 They fail differently, and each isolates one of the two independent reasons the atlas
@@ -120,7 +120,7 @@ cancelling.
 It is a **strict upper bound** on the number of connected terminal components
 under `D4 x S_n`, and strict on both controls.
 
-## What is not established
+## What Is Not Established
 
 **This is not a component counter.** `contact + closure` survives four proved answers;
 it has not been shown to decide the relation in general, and the closure data it needs
@@ -129,7 +129,7 @@ At `n = 5` no such classification exists, which is why `H-032`’s instrument re
 still false there.
 
 **The `n = 4` samples are not retained**, so the relation the atlas uses today cannot be
-scored on the control that would most directly test it — the instrument reports
+scored on the control that would most directly test it—the instrument reports
 `undecidable` rather than guessing.
 Retaining per-sample keys for `exp-015` would close that, and is cheap.
 
@@ -139,11 +139,11 @@ report neither specifies the quench nor certifies anything at `n >= 5`. What it 
 is the possibility of closing `D-034` against a rule that a merge-everything relation
 would have passed.
 
-## The next bounded question
+## The Next Bounded Question
 
 Not a larger census.
-Whether the `n = 5` case can be given a discriminating control at all — one whose proved
-component count is neither `1` nor equal to its labelled count — because until such a
+Whether the `n = 5` case can be given a discriminating control at all—one whose proved
+component count is neither `1` nor equal to its labelled count—because until such a
 control exists, any `n = 5` identity claim is being validated against a constant in
 exactly the way this report describes.
 
