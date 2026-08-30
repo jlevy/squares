@@ -1131,3 +1131,30 @@ controls:
   run: uv run --frozen packing-validate --only "exact verification"
   expect: "exact grid witness replay failed"
   timeout_seconds: 300
+
+# The agenda map is generated from every agenda's frontmatter and is the document a
+# session reads to pick a slice. Two ways it can lie: the table drifts from the records,
+# or a commitment's state changes and the map keeps the old one. Both are rehearsed.
+- name: agenda map - the map drifts from the agendas it is generated from
+  file: campaign/agenda-map.md
+  replace: ["## Live queue", "## Live queue (edited by hand)"]
+  run: python3 -m devtools.render_agenda_map --check
+  expect: "is stale"
+
+- name: agenda map - a commitment changing state never reaches the map
+  file: campaign/agendas/agenda-005-symbolic-promotion-and-identity.md
+  replace:
+    - |-
+      - id: BC-051
+          purpose: tool_validation
+          owner_focus: efficiency
+          instances: [5, 11, 29]
+          state: ready
+    - |-
+      - id: BC-051
+          purpose: tool_validation
+          owner_focus: efficiency
+          instances: [5, 11, 29]
+          state: complete
+  run: python3 -m devtools.render_agenda_map --check
+  expect: "is stale"

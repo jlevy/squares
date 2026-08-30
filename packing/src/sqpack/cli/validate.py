@@ -1000,6 +1000,10 @@ def _operating_rules(context: Context) -> str:
     return _module(context, "devtools.render_operating_rules", "--check")
 
 
+def _agenda_map(context: Context) -> str:
+    return _module(context, "devtools.render_agenda_map", "--check")
+
+
 def _differential(context: Context) -> str:
     if not ENGINE.is_file():
         raise StepSkippedError(
@@ -1167,6 +1171,7 @@ STEPS: tuple[Step, ...] = (
     Step("synopsis agrees with the artifacts", _synopsis, fast=True, records=True),
     Step("README agrees with the directory", _readme, fast=True, records=True),
     Step("AGENTS.md mirrors the operating rules", _operating_rules, fast=True, records=True),
+    Step("agenda map agrees with the agendas", _agenda_map, fast=True, records=True),
     Step("differential: search energy vs validity oracle", _differential, needs_engine=True),
     Step("provenance: recorded commits are reachable", _provenance, fast=True),
     Step("campaign record", _campaign_record, fast=True, records=True),

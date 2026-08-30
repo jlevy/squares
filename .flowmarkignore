@@ -95,3 +95,8 @@ defects.md
 # with a fresh render; allowing Flowmark to rewrite its 100-row table would create two
 # competing owners for the same file.
 packing/frontier/STATUS.md
+
+# agenda-map.md is rebuilt by `devtools.render_agenda_map` from every agenda's
+# frontmatter and drift-checked in `packing-validate --records`. Same case as
+# ledger.md and defects.md: two owners for one file means the check never passes.
+packing/campaign/agenda-map.md
