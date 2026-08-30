@@ -139,9 +139,18 @@ tiling argument**. It no longer means the corpus is silent about the packing.
   The smallest certified slide is `2.03e-4` against witness coordinates carrying 28 or
   more digits, so none of these is numerical noise.
 - **Ten are rigid by exact tiling**, the same ten the figure badges.
-- **Five are `undetermined`**, which is a result rather than an absence: `n = 5, 28, 40`
+- **Five are `undetermined`**, which is a result rather than an absence: `n = 28, 40`
   because the screen finds no single-square translation but cannot rule out rotation or
-  coordinated motion, and `n = 68, 69` because their witness geometry is excluded.
+  coordinated motion, `n = 68, 69` because their witness geometry is excluded, and
+  `n = 5` for a different reason from any of them.
+  `n = 5` reads `undetermined` on a first-party exact argument rather than on a screen
+  miss —
+  [`X-007`](../../campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md)
+  settles its infinitesimal cone exactly and refuses the one free direction at second
+  order — and the property stays where it is only because second-order rigidity is not
+  local rigidity and the enum has no word for it.
+  The assessment tool no longer owns that record, so `n = 5` and `n = 11` are the two it
+  leaves to a stronger argument.
 
 The screen’s asymmetry is why the figure still derives its badge separately.
 A hit proves non-rigidity; a miss proves nothing, so the four packings the catalogue

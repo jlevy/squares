@@ -686,19 +686,26 @@ def _frontier_rigidity(context: Context) -> str:
     """Every rigidity block still follows from the screen and the tiling argument.
 
     The counts are pinned because they are the finding: 84 records are NOT rigid on a
-    replayable certificate, ten are rigid by an exact tiling with no slack, and five are
+    replayable certificate, ten are rigid by an exact tiling with no slack, and four are
     assessed and unsettled. `undetermined` is a result and is not the same as the field
-    being null; n=11 is excluded here because a stronger first-party argument owns it.
+    being null.
+
+    Two records are excluded here because a stronger first-party argument owns them, and
+    the exclusion is keyed on the evidence id rather than on a list of n: n=11 from the
+    tangent-cone work, and n=5 from `X-007`'s exact first- and second-order certificates.
+    n=5 still *reads* `undetermined` -- second-order rigidity is not local rigidity and the
+    schema has no word for it -- so it leaves the assessed bucket while keeping the same
+    property, which is why both numbers here moved by one at once.
     """
     output = _module(context, "devtools.assess_frontier_rigidity", "--check")
     _require_text(output, "frontier rigidity check passed")
     review = _module(context, "devtools.assess_frontier_rigidity", "--review")
     _require_text(
         review,
-        "assessed: 10 locally-rigid, 84 not-rigid, 5 undetermined, "
-        "1 left to a stronger argument",
+        "assessed: 10 locally-rigid, 84 not-rigid, 4 undetermined, "
+        "2 left to a stronger argument",
     )
-    _require_text(review, "left to a stronger argument: n = [11]")
+    _require_text(review, "left to a stronger argument: n = [5, 11]")
     return output + review
 
 
@@ -1062,6 +1069,13 @@ def _n5_identity_pair(context: Context) -> str:
     # has, and a census that stopped reproducing it would invalidate the control without
     # changing any file.
     return _module(context, "devtools.build_n5_identity_pair", "--check")
+
+
+def _n5_rigidity_certificates(context: Context) -> str:
+    # 0.8s including the scipy import, because the linear programs are 20 rows wide. The
+    # certificates are proposed in floating point and re-checked exactly in `Q(sqrt 2)`, so
+    # what this replays is the exact check and not the search that proposed it.
+    return _module(context, "devtools.assess_n5_rigidity", "--check")
 
 
 def _differential(context: Context) -> str:
@@ -1506,6 +1520,18 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     Step(
+        "n=5 rigidity certificates still verify",
+        _n5_rigidity_certificates,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/assess_n5_rigidity.py",
+            *_CASES,
+            "packing/campaign/series/*/results/bc-049-n5-rigidity-certificates.json",
+        ),
+    ),
+    Step(
         "differential: search energy vs validity oracle",
         _differential,
         needs_engine=True,
@@ -1754,7 +1780,15 @@ def _validation_activity(marker: Path) -> Iterator[None]:
     try:
         yield
     finally:
-        marker.rmdir()
+        # `missing_ok`, because releasing a lock that is already released is not a
+        # failure and the alternative is worse than the problem. On 2026-08-30 an
+        # operator cleared what they took for a stale marker while this run held it;
+        # the bare `rmdir` then raised out of the `finally`, and a 25-minute `--fast`
+        # whose steps had all completed reported nothing at all -- no results, no
+        # timings, just a `FileNotFoundError` traceback (D-383). The marker exists to
+        # stop two gates running at once, and by this point this gate is over.
+        with suppress(FileNotFoundError):
+            marker.rmdir()
 
 
 def _run_selected(

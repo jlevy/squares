@@ -209,36 +209,123 @@ session:
       changed under review rather than merely being confirmed by it.
     next_action: >-
       agenda-008 is closed. Take the next slice from the agenda map's live queue.
-  - workflow: research-loop
+  - workflow: research-pass
     recording: contemporaneous
     clock_role: work
-    focus: insight
+    focus: correctness
     objective: >-
-      Take BC-010, the only P0 in the map's live queue: whether the equal-side n = 5
-      candidates are connected in the stationary set.
-    status: in_progress
+      Take BC-049 at n = 5 alone: are the three packings the catalogue annotates "Rigid."
+      actually rigid, on first-party evidence?
+
+      BC-010 is the higher-priority cell and was entered first, then put back. Its declared
+      next slice is gated on independent acceptance of exp-045's preregistered criterion --
+      the experiment records `decision: unresolved` with `needs_review: true` -- and an
+      unattended runner may not grant that acceptance to itself. Recorded rather than
+      worked around; BC-029 is blocked on the same decision.
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       agenda-008 closed with every commitment terminal, so the next slice comes from the
       agenda map's live queue rather than from a new agenda.
-    budget_minutes: 90
-    started_at: '2026-08-30T08:45:00Z'
-    deadline_at: '2026-08-30T10:15:00Z'
+    budget_minutes: 60
+    started_at: '2026-08-30T08:20:00Z'
+    deadline_at: '2026-08-30T09:20:00Z'
     expected_output: >-
-      A certified connection, a certified separation bound, or an explicit ambiguity
-      interval -- BC-010's exit, unchanged.
+      The n = 5 rigidity block moves from undetermined to locally-rigid on a first-party
+      certificate with a stated scope, or a feasible motion is exhibited and the record
+      becomes not-rigid, or a typed refusal names what the machinery could not decide --
+      BC-049's exit, unchanged.
     validation_command: >-
       uv run --frozen --all-extras --group dev packing-validate --edit
     kill_condition: >-
-      No connectivity claim without a certificate. `A_to_B_stationary_connection` is a
-      declared scope refusal in exp-042 and this slice may not quietly assert it.
+      D-354: the catalogue's own "Rigid." annotation may not be promoted into the rigidity
+      block. A miss from the translation-escape screen rules out single-square axis
+      translation and nothing else, and may not be read as rigidity.
     fallback: >-
-      The explicit ambiguity interval, which the exit names as an acceptable answer.
+      The typed refusal, which the exit names as an acceptable answer.
+    outcome: >-
+      None of the three exit forms cleanly, and the honest answer is a fourth that sits
+      between the first and the third. The n = 5 optimum is second-order rigid: exactly, at
+      Goebel's exact pose over Q(sqrt 2), the cone of infinitesimal motions is
+      one-dimensional and that one direction is refused by a verified self-stress. That is
+      a first-party certificate with a stated scope, which is the first branch, but the
+      scope stops short of local rigidity, so the frontier property stays undetermined,
+      which reads like the third. Recorded as what it is rather than rounded to whichever
+      branch it is nearer.
+    evidence:
+    - >-
+      'The cone is exactly the line spanned by the middle square''s rotation: 14 of 15
+      coordinates pinned by Farkas certificates verified in the field, none uncertified,
+      and the fifteenth mentioned by no row at all.'
+    - >-
+      'The rotation is invisible to the contacts for a checkable reason: each corner
+      square''s inner corner rests at the midpoint of the middle square''s edge, so
+      (p - c) . n_perp is identically zero at all four pair contacts.'
+    - >-
+      'The same geometry shuts it at second order. Each pair gap is exactly
+      (1/2) cos(t) - 1/2 along the rotation -- curvature -1/2, both signs -- and a
+      non-negative self-stress with w . A = 0 and w . q < 0 proves no correction rescues
+      it.'
+    - >-
+      'Strictly stronger than both prior objects. bc-063 measured a numerical rank at the
+      retained witness and declined its own promotion; that witness is 2.4e-30 off the
+      diagonal and infeasible at this scale. The escape screen decides single-square
+      translation only.'
+    - >-
+      'D-354 untouched and its guard green without being edited: property stays
+      undetermined because the schema vocabulary has no value for "second-order rigid", and
+      undetermined is documented as assessed-and-not-settled.'
+    stop_reason: >-
+      The question is answered as far as this machinery reaches, and the remaining step --
+      ruling out an arc whose derivative vanishes at the pose -- is a cited semi-algebraic
+      argument rather than a computation, so running longer would not produce it.
+    next_action: >-
+      BC-010's next slice is gated on independent acceptance of exp-045's preregistered
+      criterion: the experiment records decision unresolved with needs_review true, and an
+      unattended runner may not grant that acceptance to itself. BC-029 is blocked on the
+      same decision. Do not enter either. Take BC-017, BC-019, BC-024 or BC-038 from the
+      live queue instead.
+  - workflow: efficiency-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    objective: >-
+      BC-038: does wiring `evaluate_stress` to the shared row inventory repay its build
+      cost at exact semantic equality? The commitment's own note names the first obligation
+      and it is not a timing one -- whether the 35 calls actually share a field identity
+      and stratum is not decidable from a profile, and no speedup means anything until they
+      are shown to.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      BC-049's n = 5 slice is done and its remaining instances need an exact construction
+      rather than an assessment, which is a different kind of work. BC-038 is the next
+      priority-1 cell in the live queue whose exit is bounded and already has its trigger
+      measured.
+    budget_minutes: 45
+    started_at: '2026-08-30T09:06:00Z'
+    deadline_at: '2026-08-30T09:51:00Z'
+    expected_output: >-
+      Either a rejection of the optimization on measured arithmetic, or the exact-output
+      equivalence result that the acceptance rule requires before any timing claim -- three
+      cold and five warm comparisons, five-fold improvement, warm median at most 45s and
+      p95 at most 55s, and exact semantic equality.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --edit
+    kill_condition: >-
+      Stop if the 35 `evaluate_stress` calls do not share a field identity and stratum. The
+      shared inventory would then be answering a different question, and the 0.025s against
+      11.95s comparison would not be a comparison.
+    fallback: >-
+      Reject the optimization and record the measured reason, which the exit names as an
+      acceptable answer and which is the more reusable half of an efficiency loop.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Report which of the three exit forms the evidence supports, and record it.
+      Record the equivalence result or the rejection, then take the next live-queue cell.
+      BC-010 and BC-029 stay out of scope: both are gated on independent acceptance of
+      exp-045's preregistered criterion, which an unattended runner may not grant itself.
   primary_bead: think-s424
   status: in_progress
   budget:

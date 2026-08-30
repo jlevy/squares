@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 381
+count: 383
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10517,3 +10517,99 @@ defects:
     computes, which is a property of every test at once.
   bead: think-s424
   recorded_in: packing/tests/test_validation_cli.py
+
+- id: D-382
+  title: A sentence asserted the rigidity its own next paragraph withdrew
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: 'one day, from 2026-08-29 to 2026-08-30'
+  severity: low
+  status: fixed
+  what: >-
+    `BC-063`'s note in `agenda-006` states, in bold, "So Goebel's `n = 5` is infinitesimally
+    flexible and second-order rigid", and continues: "the packing is rigid but not
+    infinitesimally so, a distinction the annotation does not make."
+
+    The retained result it summarises says the opposite about its own reach. `bc-063`'s
+    `claim_boundary` reads: "Both the rank and the walk are numerical, at the retained
+    pose. ... It is consistent with local rigidity and does not establish it." The very next
+    paragraph of the same note agrees, and says the frontier property stays `undetermined`
+    because a rigidity property is a promotion an unattended runner may not make.
+
+    So one paragraph asserts rigidity as established and the next withdraws it. The bold
+    sentence is the quotable one.
+  consequence: >-
+    Small, and entirely about what a reader carries away. The qualification is a paragraph
+    later and survives; nothing downstream consumed the overclaim, and the frontier record
+    correctly reads `undetermined`. But it is the flattering direction, in bold, in the
+    sentence a reader would quote, and this repository's own account of `D-354` is that the
+    danger is a word becoming a finding by being repeated.
+
+    It is also wrong twice over, which is what makes it worth an entry rather than a
+    correction. `X-007` has since established the second-order obstruction exactly, on a
+    verified self-stress rather than a sampled walk -- so the "second-order rigid" half is
+    now true on evidence the note did not have. The "the packing is rigid" half is still not
+    established even with that, because the step from "no arc with nonzero derivative" to
+    local rigidity is a cited semi-algebraic argument that nothing here runs. A sentence can
+    be overtaken by later work in one clause and still be wrong in the other.
+  fix: >-
+    The note is appended to rather than rewritten. Editing a completed agenda's record of
+    what a past session concluded would lose the thing worth keeping, which is that the
+    session concluded it. The appended correction names the two halves separately and points
+    at `X-007` for the one that has since been settled.
+  regression: >-
+    None mechanical, and the honest reason is that no checker can read a bold sentence
+    against a JSON `claim_boundary` two files away. What replaces it is that `X-007` and
+    `bc-049-n5-rigidity-certificates.json` both state the remaining gap in the same words --
+    "no twice differentiable feasible arc leaves this pose with a nonzero derivative", which
+    is not local rigidity -- so the next summary has a phrasing to copy that does not
+    overclaim.
+  bead: think-xdly
+  recorded_in: packing/campaign/agendas/agenda-006-overnight-research-blocks.md
+
+- id: D-383
+  title: A cleanup error in the gate's own lock discarded a completed run's entire report
+  date: '2026-08-30'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: anomaly
+  latent_for: 'since the activity marker was introduced; surfaced the first time two gates overlapped'
+  severity: medium
+  status: fixed
+  what: >-
+    `_validation_activity` takes a directory as a mutual-exclusion lock and releases it with
+    a bare `marker.rmdir()` in a `finally`. If the directory is already gone, that raises
+    `FileNotFoundError` out of the `finally` block, which replaces whatever the run was
+    about to report.
+
+    On 2026-08-30 an operator cleared what they took for a stale `.gate-running` while a
+    `--fast` run held it. All 25 minutes of steps completed; the summary was never printed.
+    The log contained one traceback and nothing else -- no step results, no timings, no pass
+    or fail. The run had to be repeated from the beginning to learn what it had already
+    found.
+  consequence: >-
+    Not a soundness problem and not flattering: it destroys a report rather than falsifying
+    one. The cost is the whole run, and the cost is paid at the end, when the expensive part
+    is already done. `--fast` is the tier `D-381` argues should run at every commit
+    boundary, so this makes the most expensive gate the most fragile one, which is the wrong
+    way round.
+
+    The trigger looks like operator error and partly is. But a lock whose release path can
+    destroy the thing it was protecting is a bug on its own terms: the marker exists to stop
+    two gates running at once, and by the time it is being released this gate is over.
+  fix: >-
+    The release is `with suppress(FileNotFoundError): marker.rmdir()`. Releasing a lock that
+    is already released is not a failure. Acquisition is unchanged and still refuses to
+    start when a marker exists, so nothing about the mutual exclusion is weakened -- only
+    the teardown stops being able to lose a report.
+  regression: >-
+    `test_a_vanished_activity_marker_does_not_discard_the_run` deletes the marker from
+    inside the block and asserts the context manager exits cleanly, which is exactly the
+    sequence that happened. The acquisition half keeps its own test, so the pair pins both
+    directions: a second gate is still refused, and a lost marker is still survivable.
+  bead: think-s424
+  recorded_in: packing/src/sqpack/cli/validate.py

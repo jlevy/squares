@@ -835,3 +835,32 @@ def test_edit_and_fast_are_not_silently_combinable() -> None:
     status, _stdout, stderr = _invoke("--edit", "--fast", "--list")
     assert status == 2
     assert "different tiers" in stderr
+
+
+def test_a_vanished_activity_marker_does_not_discard_the_run(tmp_path: Path) -> None:
+    """Releasing a lock that is already released is not a failure (D-383).
+
+    A bare `rmdir` in the `finally` raised out of the teardown and replaced the summary of
+    a completed 25-minute `--fast` run with a traceback. The marker stops two gates running
+    at once; by the time it is released this gate is over, so its absence is nothing to
+    report.
+    """
+    marker = tmp_path / ".gate-running"
+
+    with validate._validation_activity(marker):
+        assert marker.is_dir()
+        marker.rmdir()  # what an operator clearing a "stale" marker does
+
+    assert not marker.exists()
+
+
+def test_the_activity_marker_still_refuses_a_second_gate(tmp_path: Path) -> None:
+    """The half that must not be weakened by the fix above."""
+    marker = tmp_path / ".gate-running"
+    marker.mkdir()
+
+    with (
+        pytest.raises(validate.StepFailureError, match="another gate may be running"),
+        validate._validation_activity(marker),
+    ):
+        pass  # pragma: no cover - the context manager refuses to enter

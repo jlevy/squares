@@ -59,7 +59,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-042](agent-sessions/session-042-block8-exact-solve.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-qs6k | Open block 9 as session-043 under BC-061 and `think-twa7`: an exact LP over certified coefficients, removing the `1e-11` float floor. The n = 29 refusal above is what makes the interval route the load-bearing one, so the layer that certifies its coefficients is the next thing that matters. |
 | [session-043](agent-sessions/session-043-block9-degree-bound.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (correctness) | 2 | think-qs6k | Open block 11 as session-044 under BC-066 and `think-obgk`: eliminate the five equations in five half-angles this block left, inside a declared wall-clock cap, and record whatever the chain reaches. It runs before the remaining pipeline blocks because it is the only one that can change what this run concludes about n = 29 -- a refusal there is the measured justification for the interval route carrying that bound. The ordering through block 18 is agenda-006's continuation schedule. |
 | [session-044](agent-sessions/session-044-agenda006-continuation.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 11 | think-qs6k | Carry BC-066 on `think-obgk` to a terminal state: record the measured wall the rational elimination hit, and take the eliminant's degree from the finite-field run. |
-| [session-045](agent-sessions/session-045-agenda008-queue-and-identity.md) | in_progress | contemporaneous | `pipeline-improvement` (process) | `research-loop` (insight) | 5 | think-s424 | Finish BC-084 on `think-9qtn`: apply the sub-agent attributions that are provable supersets of their steps' true inputs, leave the rest unattributed with the typed statement the exit accepts, act on any under-selection finding before pushing, and run the OR-7 pass over the block's documents. |
+| [session-045](agent-sessions/session-045-agenda008-queue-and-identity.md) | in_progress | contemporaneous | `pipeline-improvement` (process) | `efficiency-loop` (efficiency) | 6 | think-s424 | Finish BC-084 on `think-9qtn`: apply the sub-agent attributions that are provable supersets of their steps' true inputs, leave the rest unattributed with the typed statement the exit accepts, act on any under-selection finding before pushing, and run the OR-7 pass over the block's documents. |
 
 ### Workflow summary
 
@@ -67,12 +67,12 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
-| `research-pass` | 0 | 0 | 8 | 0 |
+| `research-pass` | 0 | 0 | 9 | 0 |
 | `factual-review` | 1 | 0 | 21 | 2 |
 | `insight-iteration` | 2 | 1 | 25 | 2 |
 | `process-review` | 8 | 4 | 45 | 6 |
-| `efficiency-loop` | 7 | 0 | 19 | 0 |
-| `research-loop` | 2 | 4 | 15 | 7 |
+| `efficiency-loop` | 7 | 0 | 20 | 0 |
+| `research-loop` | 2 | 4 | 14 | 7 |
 | `pipeline-improvement` | 16 | 0 | 67 | 0 |
 | `general-improvement` | 0 | 0 | 1 | 0 |
 
@@ -160,7 +160,7 @@ Status: **active**. Three programs, run as one agenda because they compete for t
 | BC-045 | tool_validation | 5, 10, 11, 29 | complete | 0 | think-75ll | Built under plan-2026-08-28-interval-certification, all four phases, linked from this commitment's note. The witness contract already names this method: sqpack.assurance lists interval-certified among the methods that may carry verified, and sqpack.witness enforces it, but exact_verify raises checker-not-built. The socket exists and the checker does not. witness.schema.yaml has no scalar kind for an enclosure, which is a deliberate contract change the spec calls out. |
 | BC-048 | tool_validation | 5, 11 | complete | 1 | think-nfsd | D-021 names this directly: the float LP solver has a noise floor of about 1e-11 in the side, no numerical comparison may claim a difference finer than that floor, and the general fix is an exact LP over certified rational or algebraic coefficients, which is unbuilt. It is purely rational only for rational-coefficient cells. |
 | BC-046 | measurement_validation | 3, 4, 5 | complete | 0 | think-0yo9 | `distinct_basins` counts endpoint keys, not connected terminal components. The exact n = 3 side-2 optimum contains a sliding family of centres, so one connected set produces many keys and the store splits it. Until D-034 is resolved the discovery curve cannot plateau, the census cannot saturate, and the rarity premise is untestable rather than untested. |
-| BC-049 | research | 5, 28, 40 | ready | 1 | think-xdly | The translation escape screen finds no movable square for exactly n = 5, 11, 28, 40 and the ten perfect squares -- an independent partition that agrees with the catalogue's own four annotations. But the screen is sound in one direction only: a hit exhibits a motion and proves not-rigid, while a miss rules out single-square translation and nothing else. Rotation and coordinated multi-square motion are outside it, so these three records now read undetermined, which is a result rather than an absence. |
+| BC-049 | research | 5, 28, 40 | ready | 1 | think-xdly | The translation escape screen finds no movable square for exactly n = 5, 11, 28, 40 and the ten perfect squares -- an independent partition that agrees with the catalogue's own four annotations. But the screen is sound in one direction only: a hit exhibits a motion and proves not-rigid, while a miss rules out single-square translation and nothing else. Rotation and coordinated multi-square motion are outside it, so these three records now read undetermined, which is a result rather than an absence. n = 5 is now settled as far as this machinery reaches, and what remains for n = 28 and n = 40 is not a rerun of it. The argument needs an exact pose, and the retained witnesses for those two are decimals that are infeasible at the scale a certificate works at -- the n = 5 witness is 2.4e-30 off the diagonal, which the escape screen itself records as a negative pair separation. So the next slice here is an exact construction, not an assessment. |
 | BC-050 | measurement_validation | 68, 69 | blocked | 2 | think-ecqk | Shape residuals of 1.9e-8 and 1.5e-8 against 5.1e-50 or better everywhere else. Both records are excluded from the translation escape screen by measurement, so their rigidity blocks read undetermined for a reason that is about our witness rather than about the packing. Every future contact-based screen inherits the same exclusion. |
 | BC-051 | tool_validation | 5, 11, 29 | stopped | 0 | think-ej1d | Measured on 2026-08-28: a two-file edit to the rigidity assessor was verified with a 979.79s full gate, while the two steps that edit can affect run together in 12.06s. That is 82x. Across one session the full gate ran six times to completion and was killed twice, and the last run's only finding was a single broken behavioural test. |
 
@@ -372,6 +372,7 @@ Status: **completed**. Eight to nine hours in four blocks. Block 1 is first beca
 - X-004 — An exact algebraic characterization of the n = 29 record
 - X-005 — The relation the atlas should count, and why its acceptance rule could not test one
 - X-006 — The candidate discriminating control at n = 5 is the one D-034 has been quoting
+- X-007 — The n = 5 optimum flexes in exactly one direction, and that direction curves shut
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

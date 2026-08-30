@@ -332,11 +332,38 @@ agenda:
       translation and nothing else. Rotation and coordinated multi-square motion are
       outside it, so these three records now read undetermined, which is a result rather
       than an absence.
+
+      n = 5 is now settled as far as this machinery reaches, and what remains for n = 28
+      and n = 40 is not a rerun of it. The argument needs an exact pose, and the retained
+      witnesses for those two are decimals that are infeasible at the scale a certificate
+      works at -- the n = 5 witness is 2.4e-30 off the diagonal, which the escape screen
+      itself records as a negative pair separation. So the next slice here is an exact
+      construction, not an assessment.
     note: >-
       n = 5 first: it is proved optimal, its side is 2 + sqrt(2)/2, and its structure is
       the smallest of the three. Promoting reported_upper_bound.catalogue_rigid into the
       rigidity block is not a shortcut to this result, it is D-354, and
       tests/test_frontier_rigidity_assessment.py fails on it.
+
+      n = 5 is done and D-354 was not touched. Exactly, over Q(sqrt 2), at Goebel's exact
+      pose rather than the retained witness: the cone of infinitesimal motions is exactly
+      one-dimensional -- rotation of the middle square about its own centre, which no
+      contact mentions because each corner square's inner corner rests at the midpoint of
+      the middle square's edge -- and the other fourteen coordinates are pinned by verified
+      Farkas certificates. That one direction is then refused at second order by a verified
+      non-negative self-stress, since turning an edge line about the centre it is nearest
+      to can only bring it closer to the resting corner.
+
+      The frontier block deliberately keeps property: undetermined. The schema's vocabulary
+      is [locally-rigid, semi-rigid, not-rigid, undetermined] and second-order rigidity is
+      none of them: no motion has been exhibited, and the step from "no arc with nonzero
+      derivative" to local rigidity is cited rather than run. The D-354 guard stays green
+      without being edited, which is the outcome to want -- a guard you have to weaken to
+      land a result was telling you something.
+
+      Recorded in campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md,
+      devtools/assess_n5_rigidity.py, tests/test_n5_rigidity.py, and
+      campaign/series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json.
   - id: BC-050
     purpose: measurement_validation
     owner_focus: correctness

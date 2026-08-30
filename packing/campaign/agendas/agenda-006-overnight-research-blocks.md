@@ -580,6 +580,15 @@ agenda:
       "Rigid.": the packing is rigid but not infinitesimally so, a distinction the
       annotation does not make.
 
+      That last clause is D-382 and is corrected here rather than rewritten, because what a
+      past session concluded is the thing worth keeping. "The packing is rigid" was not
+      established by anything above, and the next paragraph of this same note says so. The
+      two halves have since parted company: X-007 establishes the second-order obstruction
+      exactly, on a verified self-stress rather than a sampled walk, so that half is now
+      true on evidence this note did not have -- while "rigid" is still not established even
+      with it, because the step from "no arc with nonzero derivative" to local rigidity is a
+      cited semi-algebraic argument that nothing here runs.
+
       What it is still not is `n = 11`'s result. Both the rank and the walk are numerical,
       and the argument covers the unique first-order flex and its second-order obstruction
       rather than 128 derivative-distinct branchwise linearized cones over an exact field

@@ -2,7 +2,7 @@
 
 # Defect log
 
-381 defects recorded across the packing toolchain.
+383 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 25 | a cell of the sweep whose answer is known in advance |
-| `review` | 235 | a human or agent reading the work against a checklist |
-| `anomaly` | 13 | a result that made no sense, chased down |
+| `review` | 236 | a human or agent reading the work against a checklist |
+| `anomaly` | 14 | a result that made no sense, chased down |
 | `inspection` | 39 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 49 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 49 of 381, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 49 of 383, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,8 +34,8 @@ The line worth reading twice: **the automated gate caught 49 of 381, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 4 |
-| record | 112 |
-| tooling | 126 |
+| record | 113 |
+| tooling | 127 |
 | docs | 105 |
 
 ## By kind
@@ -44,8 +44,8 @@ The line worth reading twice: **the automated gate caught 49 of 381, and none of
 | --- | ---: |
 | soundness | 88 |
 | validity | 92 |
-| bookkeeping | 141 |
-| robustness | 45 |
+| bookkeeping | 142 |
+| robustness | 46 |
 | performance | 15 |
 
 ## Fixed, but nothing stops it coming back
@@ -603,6 +603,8 @@ This is the actionable list.
 | [D-379](operating-rules.md) | 2026-08-30 | record | bookkeeping | flattering | `review` | low | fixed | An operating rule understated its own measured cost by quoting the transcript, not the rollup |
 | [D-380](.github/workflows/packing-validation.yml) | 2026-08-30 | tooling | robustness | conservative | `anomaly` | low | fixed | A superseded CI run reported the required check as a hard failure |
 | [D-381](packing/tests/test_validation_cli.py) | 2026-08-30 | tooling | validity | conservative | `gate` | low | fixed | The pre-push tier is blind to a test that pins a string in the code it tests |
+| [D-382](packing/campaign/agendas/agenda-006-overnight-research-blocks.md) | 2026-08-30 | record | bookkeeping | flattering | `review` | low | fixed | A sentence asserted the rigidity its own next paragraph withdrew |
+| [D-383](packing/src/sqpack/cli/validate.py) | 2026-08-30 | tooling | robustness | neutral | `anomaly` | medium | fixed | A cleanup error in the gate's own lock discarded a completed run's entire report |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

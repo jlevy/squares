@@ -273,6 +273,39 @@ evidence:
     limitations: Verifies this algebraic witness and upper bound, not global optimality.
     source_reviewed: '2026-08-24'
 
+  - id: E-n005-second-order-rigidity
+    claim: derived-structure
+    scope: {n_values: [5]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    certificate: campaign/series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.assess_n5_rigidity --check
+    replay_status: passed
+    limitations: >-
+      Second-order and at fixed side. Exactly, over Q(sqrt 2), at Goebel's exact construction
+      rather than the retained decimal witness: the cone of infinitesimal motions is exactly
+      the line spanned by rotation of the middle square about its own centre, with the other
+      fourteen coordinates pinned by Farkas certificates verified in the field, and that one
+      direction carries gap curvature -1/2 at each of the four pair contacts and is refused
+      by a verified non-negative self-stress. Together these exclude every twice
+      differentiable feasible arc that leaves the pose with a nonzero derivative.
+
+      They do not establish local rigidity, which is why the property stays undetermined. An
+      arc whose derivative vanishes at the pose is excluded only by a further argument --
+      curve selection on the semi-algebraic feasible set, then an induction on the arc's
+      Puiseux coefficients -- which is written out in
+      campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md and is
+      prose, not a computation this replay checks. The container side is a constant here,
+      not a variable, so nothing bears on what happens as the container grows.
+
+      This is a repository result about the packing and is independent of the catalogue's
+      unqualified Rigid annotation, which is carried by reported_upper_bound.catalogue_rigid
+      and is not restated as a finding of ours.
+    source_reviewed: '2026-08-30'
+
   - id: E-n011-trump-local-rigidity
     claim: derived-structure
     scope: {n_values: [11]}
