@@ -27,7 +27,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [11, 29]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Can the pre-push record tier be made effectively instant without any verdict
@@ -74,11 +74,28 @@ agenda:
       that is merely slow is a disappointment; a validator that silently stops checking a
       keyword is a defect that makes every later gate run a lie, and it would be invisible
       in the timings that motivated the change.
+
+      **Closed 2026-08-30.** The pre-push tier is `4.48s`, from `16.05s`, on the same
+      container: `soft-schema validation` fell from `15.71s` to `4.48s` and the exact grid
+      replay moved to `exact verification`, where it costs `3.6s` in a tier that does not
+      contain it. 369 differential assertions stand in the suite and all pass.
+
+      Two of the spec's claims did not survive being made reproducible, and both are
+      corrected in `D-370` and in the spec rather than quietly dropped. The speedup is
+      `128x` over the real 339-artifact corpus, not the `559x` a scratch script reported
+      over a 314-document subset. And `error.message` is *not* byte-identical between the
+      two libraries: they quote differently and systematically, so a consumer parsing that
+      text would have broken silently. Nothing here parses it, which is the only reason the
+      swap was safe rather than lucky.
+
+      One scope decision worth naming: nine other modules still build a `jsonschema`
+      validator, and none is on the pre-push tier. `think-gj9c` carries them, with the
+      instruction to measure before swapping.
   - id: BC-078
     purpose: tool_validation
     owner_focus: process
     instances: [11, 29]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Do the reader-facing documents still describe the project the record describes?

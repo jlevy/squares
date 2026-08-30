@@ -746,6 +746,11 @@ def _exact_verification(context: Context) -> str:
                 "devtools.generate_known_best_n011_rational_control",
                 "--check",
             ),
+            # The exact rational grid replay. It ran inside `soft-schema validation`
+            # until D-370, where it was 3.58s of that step and where nobody would look
+            # for exact geometry. Same cases, same predicate, same verdict; only the
+            # step reporting it changed.
+            (sys.executable, "-m", "devtools.check_basic_bounds"),
             (sys.executable, "-m", "cases.trump11.verify_exact"),
             (sys.executable, "-m", "cases.gobel5.verify_exact"),
             (sys.executable, "-m", "cases.gobel10.verify_exact"),

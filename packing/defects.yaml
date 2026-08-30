@@ -9840,17 +9840,62 @@ defects:
     `2.730s`. Its `pure=False` buys nothing in this build and its value, comment-preserving
     round-trips, is not something this repository needs.
 
-    What remains is `6.06s` of jsonschema descent over 208 witness files carrying
-    3.7 MB of exact rationals, and `3.58s` of exact grid verification. Both are `BC-075`:
-    the first is a dependency question (a compiled validator such as `fastjsonschema`)
-    and the second is a step-boundary one, since exact geometry does not belong in a step
-    named for schemas.
+    What remained after those three was `6.06s` of jsonschema descent over 208 witness
+    files carrying 3.7 MB of exact rationals, and `3.58s` of exact grid verification. Both
+    are now fixed under `BC-077`, and the pre-push tier measures `16.05s` before and
+    `4.48s` after on one container on 2026-08-30:
+
+    The validator is `jsonschema-rs`, PyO3 bindings to the Rust crate, pinned to `0.49.9`
+    rather than to the newest release because `0.52.0` was four days old on the day this
+    landed and the 14-day cool-off applies to a validator as much as to anything else.
+    Over the real corpus, 339 artifacts against 23 schemas, across five runs on
+    2026-08-30: `jsonschema` validates in `7145-7750ms` and `jsonschema-rs` in `55-88ms`,
+    a ratio between `83x` and `137x`. The range is quoted rather than a point because the
+    Rust side is small enough that container scheduling noise moves it by half, while the
+    Python side barely moves; a single run of this comparison is not a measurement.
+
+    That matters for a second reason. The spec proposing the swap predicted `559x` from a
+    scratch script over a 314-document subset, and no run of the real corpus reproduces
+    it. The prediction was taken on a different corpus and stated as a point;
+    `benchmarks/bench_schema_validation.py` is what makes the honest figure reproducible.
+    The decision does not turn on which end of the range is taken, which is the useful
+    property of a gap this size.
+
+    Two corrections to that spec, both found by making the comparison repeatable rather
+    than remembering it. First, the speedup above. Second, and the one that could have
+    cost something: the spec recorded `error.message` as "byte-identical on the cases
+    checked". It is not. The two libraries quote differently and systematically --
+    `jsonschema` renders `'a' is a required property` where `jsonschema-rs` renders
+    `"a" is a required property` -- so any consumer parsing that text would have broken
+    silently. Nothing in this repository parses it, which is why the swap is still safe,
+    but the equivalence that holds is verdict and instance path rather than message text,
+    and the test asserts the quoting difference rather than normalising it away unstated.
+
+    The exact grid replay moved out of `soft-schema validation` into `exact verification`,
+    where a reader looks for exact geometry and where its cost is legible. Nothing about
+    the check changed: the same cases are replayed with the same predicate to the same
+    verdict, and `devtools.check_basic_bounds` run directly still does both halves.
+
+    Measured on one container on 2026-08-30, `packing-validate --records`: `16.05s` before,
+    `4.48s` after, with `soft-schema validation` falling from `15.71s` to `4.48s` and
+    `exact verification` rising from `2.8s` to `6.35s` in a tier that does not contain it.
   regression: >-
     `test_yaml_is_read_only_through_the_project_loader` walks `src`, `devtools` and
     `cases` for `yaml.safe_load` or a bare `yaml.SafeLoader` and fails on either, so the
     pure-Python scanner cannot return one call site at a time. The duplicate-key guard was
     re-checked under the C loader before the base class changed.
-  bead: think-c46d
+
+    For the validator swap, `tests/test_schema_validator_equivalence.py` runs both
+    libraries side by side over all 339 enforced artifacts and over generated mutations of
+    them -- dropped required keys, retyped values, emptied arrays, unexpected properties --
+    and fails on any disagreement in verdict or instance path. A faster validator that
+    accepts one artifact the old one rejected is a soundness regression that buys six
+    seconds, and it would be invisible in the timings that motivated the change. Three
+    guards keep that test honest as it grows: one asserts the mutation generator actually
+    produces rejections rather than quietly emitting valid documents, one asserts every
+    schema in the corpus keeps a mutation representative through deduplication, and one
+    asserts no mutation writes through to the shared payload.
+  bead: think-64bw
   recorded_in: packing/src/sqpack/yamlio.py
 - id: D-371
   title: The control snapshot guard was one artifact from refusing to run at all

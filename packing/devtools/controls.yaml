@@ -1112,3 +1112,22 @@ controls:
   run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
   expect: "the probe stopped short of the degree its digits reach"
   timeout_seconds: 300
+
+# --- the exact grid replay, after it moved out of the schema step (D-370) ---
+# BC-077 moved this replay from `soft-schema validation` into `exact verification`.
+# A move that quietly stops a check is exactly the under-run the tier work is written
+# against, and the move is invisible in the timings that motivated it -- the step got
+# faster either way. These two controls are the difference between knowing it still
+# fires and assuming it does.
+- name: exact grid replay - a grid too small to hold its squares is still caught
+  file: devtools/check_basic_bounds.py
+  replace: ["    side = root if root * root == n else root + 1", "    side = root"]
+  run: uv run --frozen python -m devtools.check_basic_bounds
+  expect: "exact grid witness replay failed"
+
+- name: exact grid replay - the step that now owns it actually reaches it
+  file: devtools/check_basic_bounds.py
+  replace: ["    side = root if root * root == n else root + 1", "    side = root"]
+  run: uv run --frozen packing-validate --only "exact verification"
+  expect: "exact grid witness replay failed"
+  timeout_seconds: 300
