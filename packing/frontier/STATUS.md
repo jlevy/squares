@@ -36,7 +36,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`26`](n-026.md) | `(7/2) + (3/2)√2` | `6` | `5.123105625618` | `1 + √17` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
 | [`27`](n-027.md) | `5 + (1/2)√2` | `6` | `5.242640687119` | `1 + √18` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
 | [`28`](n-028.md) | `5.82444461667405` | `6` | `5.358898943541` | `1 + √19` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
-| [`29`](n-029.md) | `5.93383346267692` | `2966942899906512939318226046481160904289990651293931822604648091421/500000000000000000000000000000000000000000000000000000000000000000` | `5.472135955` | `1 + √20` | open | replayed here, external proof | formal upper trails report; 1 conflict | 2026-08-25 |
+| [`29`](n-029.md) | `5.93383346267692` | `296691673133846459487189947549/50000000000000000000000000000` | `5.472135955` | `1 + √20` | open | replayed here, external proof | formal upper trails report; 1 conflict | 2026-08-25 |
 | [`30`](n-030.md) | `6` | `6` | `5.582575694956` | `1 + √21` | open | replayed here, external proof | — | 2026-08-24 |
 | [`31`](n-031.md) | `6` | `6` | `5.690415759823` | `1 + √22` | open | replayed here, external proof | — | 2026-08-24 |
 | [`32`](n-032.md) | `6` | `6` | `5.795831523313` | `1 + √23` | open | replayed here, external proof | — | 2026-08-24 |
