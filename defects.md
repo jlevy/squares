@@ -2,7 +2,7 @@
 
 # Defect log
 
-380 defects recorded across the packing toolchain.
+381 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -23,9 +23,9 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `inspection` | 39 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 48 | the automated test suite |
+| `gate` | 49 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 48 of 380, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 49 of 381, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 48 of 380, and none of
 | quench | 23 |
 | verifier | 4 |
 | record | 112 |
-| tooling | 125 |
+| tooling | 126 |
 | docs | 105 |
 
 ## By kind
@@ -43,7 +43,7 @@ The line worth reading twice: **the automated gate caught 48 of 380, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 88 |
-| validity | 91 |
+| validity | 92 |
 | bookkeeping | 141 |
 | robustness | 45 |
 | performance | 15 |
@@ -602,6 +602,7 @@ This is the actionable list.
 | [D-378](packing/campaign/explorations/X-006-the-discriminating-control-at-n5.md) | 2026-08-30 | record | validity | flattering | `review` | medium | contained | No retained control can separate the surviving identity relation from merging everything |
 | [D-379](operating-rules.md) | 2026-08-30 | record | bookkeeping | flattering | `review` | low | fixed | An operating rule understated its own measured cost by quoting the transcript, not the rollup |
 | [D-380](.github/workflows/packing-validation.yml) | 2026-08-30 | tooling | robustness | conservative | `anomaly` | low | fixed | A superseded CI run reported the required check as a hard failure |
+| [D-381](packing/tests/test_validation_cli.py) | 2026-08-30 | tooling | validity | conservative | `gate` | low | fixed | The pre-push tier is blind to a test that pins a string in the code it tests |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

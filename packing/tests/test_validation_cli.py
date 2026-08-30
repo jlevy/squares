@@ -423,19 +423,34 @@ def test_invalid_worker_count_and_unmatched_selection_are_actionable() -> None:
 
 @pytest.mark.parametrize(
     "narrowing",
-    [("--only", "fast behavioral tests"), ("--fast",), ("--records",), ("--edit",)],
+    [
+        ("--only", "fast behavioral tests"),
+        ("--fast",),
+        ("--records",),
+        ("--edit",),
+        ("--since", "HEAD"),
+    ],
 )
 def test_strict_mode_refuses_a_partial_validation_surface(narrowing: tuple[str, ...]) -> None:
-    """Every tier flag must be refused under --strict, including new ones.
+    """Every narrowing flag must be refused under --strict, including new ones.
 
-    `--edit` is parametrized here rather than tested separately because the risk with a
-    new tier flag is that it is added to the selector and forgotten in the refusal, which
-    would let `--strict` quietly report a partial surface as a complete one.
+    Each is parametrized rather than tested separately because the risk with a new flag is
+    that it is added to the selector and forgotten in the refusal, which would let
+    `--strict` quietly report a partial surface as a complete one.
+
+    What is asserted is that the refusal **names the flag that was passed**, not that the
+    sentence reads a particular way. The verbatim sentence was pinned here until
+    2026-08-30, when adding `--since` broke this test four times over for no defect: the
+    refusal was correct and more complete than the pin. A pin that fails whenever the
+    behaviour it guards is extended correctly trains people to edit the assertion, which
+    is how a guard stops guarding. Per-flag, it is also the stronger check -- it now
+    verifies the refusal mentions *this* flag rather than any fixed list.
     """
     status, _, stderr = _invoke("--strict", *narrowing)
 
     assert status == 2
-    assert "--strict cannot be combined with --only, --fast, --records, or --edit" in stderr
+    assert "--strict cannot be combined with" in stderr
+    assert narrowing[0] in stderr
 
 
 def test_the_records_tier_selects_every_record_check_and_no_test() -> None:

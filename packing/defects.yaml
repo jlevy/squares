@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 380
+count: 381
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10455,3 +10455,65 @@ defects:
     check rather than a red one, which is self-describing in a way the failure was not.
   bead: think-s424
   recorded_in: .github/workflows/packing-validation.yml
+
+- id: D-381
+  title: The pre-push tier is blind to a test that pins a string in the code it tests
+  date: '2026-08-30'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: 'since --edit was introduced on 2026-08-30; two occurrences the same day'
+  severity: low
+  status: fixed
+  what: >-
+    `--edit` (43s) selects the fast steps that are not `broad`, and `fast behavioral tests`
+    is `broad`, so the edit tier runs no tests at all. That is the deliberate design --
+    `D-369` measured seven CI failures, every one a record check and none a test -- and it
+    is right about record drift. It is wrong about one class it did not anticipate: a test
+    that pins a **literal string emitted by the source under test**. Such a test is not a
+    record check, so no record step sees it, and it is in the excluded step, so the edit
+    tier does not run it either.
+
+    Twice on 2026-08-30, five commits apart:
+
+    - `47059fd` changed the `packing-required` guard from `always()` to `!cancelled()`;
+      `tests/test_module_boundaries.py` pinned the old expression and failed in CI.
+    - `a54797e` added `--since`, which lengthened the `--strict` refusal to name it;
+      `tests/test_validation_cli.py:438` pinned the old sentence and failed four times over
+      at `c9d768c`.
+
+    Both were caught, both cost a CI round trip, and in both cases the code was correct and
+    the pin was stale.
+  consequence: >-
+    Attention, and a specific bad habit. The failing assertion is always in a test the
+    author has just made obsolete, so the fix is always "edit the assertion" -- which is
+    indistinguishable, from inside the moment, from weakening a guard to make it pass. A
+    guard that reliably fails for non-defects is a guard people learn to edit rather than
+    to read.
+
+    It is also a `BC-084` failure of use rather than of construction. `--since` selects
+    every step an unattributed step could be affected by, and `fast behavioral tests` is
+    unattributed, so `packing-validate --since origin/main` would have run the tests and
+    caught both. The instrument existed at the second occurrence and was not used.
+  fix: >-
+    Two changes, neither of which is widening the edit tier.
+
+    The stale pin is replaced by a per-flag assertion: the refusal must name the flag that
+    was passed, rather than read a fixed sentence. That is strictly stronger against the
+    risk the test's own docstring states -- a new tier flag added to the selector and
+    forgotten in the refusal -- and it does not break when the behaviour is extended
+    correctly. `--since` is now parametrized alongside the four flags that were there.
+
+    The habit is fixed by `OR-7`'s neighbourhood rather than by a new tier: `--fast` at a
+    commit boundary, not `--edit`. Widening `--edit` to include the test step would put its
+    529 seconds back and recreate exactly the tier-too-expensive-to-run problem `D-369`
+    records, trading a rare stale pin for a tier nobody runs.
+  regression: >-
+    `tests/test_validation_cli.py::test_strict_mode_refuses_a_partial_validation_surface`
+    now parametrizes `--since` and asserts per flag, so a sixth narrowing flag added to the
+    selector and forgotten in the refusal fails here. The class itself is not testable in
+    general: what would have to be checked is that no test pins a literal the source
+    computes, which is a property of every test at once.
+  bead: think-s424
+  recorded_in: packing/tests/test_validation_cli.py
