@@ -13,6 +13,17 @@ Rollups are **regenerated, not appended**: a record is a function of the log it 
 so re-running the command on a session that has since grown replaces the record rather
 than adding to it. The sha256 is what tells two apart.
 
+**These records are the inputs; nothing here is a total.** A rollup is named by harness
+log id and a session by its sequence number, so what any of this cost is answered by the
+join in [`session-close-report.yaml`](../session-close-report.yaml), written by
+`devtools.close_session --render` and displayed under `## Sessions Conducted` in
+[`SYNOPSIS.md`](../../../SYNOPSIS.md).
+Read totals there rather than adding files in this directory: one log can be declared by
+several sessions, so adding per-session figures counts it once per claimant — 117.9
+hours for a campaign that had spent 43.7, measured on 2026-08-30. Every total in the
+report is over distinct rollups, and the ones no session declares are counted separately
+rather than dropped or assigned an owner.
+
 ## What is here
 
 |  |  |

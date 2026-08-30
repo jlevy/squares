@@ -332,8 +332,16 @@ sizes whose exact certificates were already running in this gate while their rec
 denied one existed, and filled in the two facts the register could not previously state
 — whether anyone here has read an external argument, and what a novelty claim was
 searched against.
+[session-048](packing/campaign/agent-sessions/session-048-what-every-session-cost.md)
+closed the same gap one level up, joining every session to what it cost and finding that
+both obvious ways of totalling that were wrong in the flattering direction — see
+[Sessions Conducted](#sessions-conducted).
 
-`BC-049` on `think-xdly` is the cell all of this sits under, and it stays open.
+**The next slice is `BC-085` on `think-9k5k`**, the first ready cell of
+[agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md)
+and the one the `BC-088` search reassessment is blocked on.
+`BC-049` on `think-xdly` is the research cell all of the mathematics below sits under,
+and it stays open.
 
 **`n = 40` is infinitesimally flexible**, exactly, over `Q(sqrt 2)`: seven retained
 directions turn the sixteen squares of its tilted block and leave the frame fixed, and
@@ -2284,22 +2292,23 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 31 | 8,896 | 5,186 | 110 | 1,212 | 43.69 h |
+| claimed by a session | 31 | 9,261 | 5,393 | 113 | 1,262 | 45.33 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **41** | **10,356** | **6,064** | **142** | **1,385** | **50.56 h** |
+| **measured** | **41** | **10,721** | **6,271** | **145** | **1,435** | **52.2 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md) | 23 | 16 | 1,248 | 765 | 11 | 4.03 h |
 | [session-046](packing/campaign/agent-sessions/session-046-gobel-family-constructions.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-047](packing/campaign/agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | 6 | 14 | 1,230 | 841 | 18 | 2.56 h |
-| *shared by 3 sessions* | — | 1 | 6,418 | 3,580 | 81 | 37.1 h |
+| [session-048](packing/campaign/agent-sessions/session-048-what-every-session-cost.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
+| *shared by 4 sessions* | — | 1 | 6,783 | 3,787 | 84 | 38.74 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 3 |
+| measured | 4 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **47** |
+| **total** | **48** |
 
 <!-- END GENERATED: session-close-report -->
 

@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 47
+count: 48
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 3
+  sessions_measured: 4
   sessions_unmeasured: 44
   attributed:
     rollups: 31
-    turns: 8896
-    tool_calls: 5186
-    tool_errors: 110
-    one_off_code: 1212
-    wall_hours: 43.69
+    turns: 9261
+    tool_calls: 5393
+    tool_errors: 113
+    one_off_code: 1262
+    wall_hours: 45.33
   unattributed:
     rollups: 10
     turns: 1460
@@ -29,11 +29,11 @@ totals:
     wall_hours: 6.87
   measured:
     rollups: 41
-    turns: 10356
-    tool_calls: 6064
-    tool_errors: 142
-    one_off_code: 1385
-    wall_hours: 50.56
+    turns: 10721
+    tool_calls: 6271
+    tool_errors: 145
+    one_off_code: 1435
+    wall_hours: 52.2
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -457,11 +457,11 @@ sessions:
   - packing/campaign/resource-usage/agent-a54e563746f9b7dd5.yaml
   - packing/campaign/resource-usage/agent-a561011b4ec8b1a7b.yaml
   - packing/campaign/resource-usage/agent-a6588ce8679d53bd1.yaml
-  turns: 7666
-  tool_calls: 4345
-  tool_errors: 92
-  one_off_code: 1107
-  wall_hours: 41.13
+  turns: 8031
+  tool_calls: 4552
+  tool_errors: 95
+  one_off_code: 1157
+  wall_hours: 42.77
 - id: session-046
   title: "Build the exact constructions for n = 65 and n = 89"
   status: completed
@@ -470,11 +470,11 @@ sessions:
   measured: true
   rollups:
   - packing/campaign/resource-usage/3930e045-47fc-5947-8bf6-0c92155bcd88.yaml
-  turns: 6418
-  tool_calls: 3580
-  tool_errors: 81
-  one_off_code: 998
-  wall_hours: 37.1
+  turns: 6783
+  tool_calls: 3787
+  tool_errors: 84
+  one_off_code: 1048
+  wall_hours: 38.74
 - id: session-047
   title: "Make the assurance record say who established what"
   status: completed
@@ -497,8 +497,21 @@ sessions:
   - packing/campaign/resource-usage/agent-af6005e953cb04f35.yaml
   - packing/campaign/resource-usage/agent-aac1c30acbe3cf402.yaml
   - packing/campaign/resource-usage/agent-af91d0bbee9cdbe25.yaml
-  turns: 7648
-  tool_calls: 4421
-  tool_errors: 99
-  one_off_code: 1103
-  wall_hours: 39.66
+  turns: 8013
+  tool_calls: 4628
+  tool_errors: 102
+  one_off_code: 1153
+  wall_hours: 41.3
+- id: session-048
+  title: "Report every session's cost, over distinct rollups rather than sessions"
+  status: completed
+  primary_bead: think-atm1
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/3930e045-47fc-5947-8bf6-0c92155bcd88.yaml
+  turns: 6783
+  tool_calls: 3787
+  tool_errors: 84
+  one_off_code: 1048
+  wall_hours: 38.74

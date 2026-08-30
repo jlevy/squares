@@ -198,6 +198,25 @@ Three things worth knowing when you do it:
   That is why it prints them with their dates rather than failing: an unattributed cost
   is worth seeing and is not by itself a defect.
 
+- **`close_session --render` is what closing a session produces**, and it writes two
+  views of one join: [`session-close-report.yaml`](../session-close-report.yaml), one
+  validated entry per session, and the generated block under `## Sessions Conducted` in
+  [`SYNOPSIS.md`](../../../SYNOPSIS.md).
+  `--check` refuses either having drifted and runs in `--records`; `--update`
+  regenerates rollups from logs and is the whole of backfill, since a retained log
+  turning up needs a run rather than a code change.
+
+- **Never total by adding sessions.** Sessions share harness logs — four declare the
+  current one in full, which is correct of each of them — so adding their figures counts
+  a shared log once per claimant.
+  Measured on 2026-08-30: 117.9 hours for a campaign that had spent 43.7. Every total in
+  the report is over *distinct* rollups, and the shared log is shown on its own row so
+  the per-session column still adds up.
+  The tool infers no owner for an unclaimed rollup, which is a different question from
+  the span comparison above: use spans to decide what *your* session declares, and let
+  the unclaimed ones stay counted separately rather than assigned to whichever window
+  happens to contain them.
+
   The coordinator substitutes the phase’s recorded validation command for
   `<focused-validation>` before the sequence and inspects every staged path before
   committing. A session checkpoint is durable only when its commit is on the recorded

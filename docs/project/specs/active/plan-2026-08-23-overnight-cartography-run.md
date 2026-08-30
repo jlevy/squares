@@ -333,14 +333,20 @@ Send promoted, novel, disputed, or otherwise high-risk claims through W2 before 
 move forward. A routine W6 result whose preregistered guards and independent replay
 already decide its stated criterion need not open a ceremonial review phase.
 
+The research cell at `n = 28` and `n = 40` stays open, and know what it costs before
+taking it: that slice is not an assessment but an **exact construction**. `X-007`
+settled `n = 5` because Göbel’s construction is exact; the other two retain decimal
+witnesses of the kind measured `2.4e-30` off the diagonal, which no certificate can rest
+on.
+It is not the next thing, because a reassessment of what to search is queued in front
+of it.
+
 For the next supervised exact-research goal, use
-[session 045](../../../../packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md).
-Sessions 027 through 044 are terminal, and agendas 006 and 007 are closed.
-Open `BC-049` under `think-xdly` at `n = 28` and `n = 40` as the next bounded driver,
-and know what it costs before starting: the slice is not an assessment but an **exact
-construction**. `X-007` settled `n = 5` because Göbel’s construction is exact; the other
-two retain decimal witnesses of the kind measured `2.4e-30` off the diagonal, which no
-certificate can rest on.
+[session 048](../../../../packing/campaign/agent-sessions/session-048-what-every-session-cost.md).
+Sessions 027 through 047 are terminal, and agendas 006, 007 and 008 are closed.
+Open `BC-085` under `think-9k5k` as the next bounded driver: it is `agenda-009`’s first
+ready cell and the one `BC-088`’s search reassessment is blocked on, so taking anything
+ahead of it leaves that reassessment blocked either way.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every
