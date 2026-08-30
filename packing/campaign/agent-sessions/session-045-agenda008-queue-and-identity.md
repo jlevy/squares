@@ -171,7 +171,7 @@ session:
     focus: efficiency
     objective: >-
       Give the gate change-scoped selection that cannot silently under-select.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       Block 3 reached a terminal answer with its reserve unspent.
@@ -190,13 +190,55 @@ session:
     fallback: >-
       The typed statement of which steps resist attribution, which the commitment's exit
       accepts as an answer.
+    outcome: >-
+      Both branches delivered: a selector conservative by construction with two negative
+      controls and a reachability check, plus the typed statement for the six steps whose
+      input set is the repository's path space. Measured 42 steps down to 9-12 for a
+      narrow change, and still 42 for an unrecognised file.
+    evidence:
+    - >-
+      'Four read-only sub-agents ran against the design, the first use of OR-2 this
+      session. Nine of ten adversarial findings were real and are fixed; the tenth
+      repeated OR-2''s own worked example about `except A, B:`.'
+    - >-
+      'The headline safety property was weaker than documented: `*.py` and `*.md` cross
+      separators, so 953 of 1312 tracked files are claimed and neither extension can reach
+      the whole-gate escape. The docstring now says so rather than overclaiming.'
+    stop_reason: >-
+      Both branches of the exit met, and the four sub-agent reports acted on. The design
+      changed under review rather than merely being confirmed by it.
+    next_action: >-
+      agenda-008 is closed. Take the next slice from the agenda map's live queue.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Take BC-010, the only P0 in the map's live queue: whether the equal-side n = 5
+      candidates are connected in the stationary set.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      agenda-008 closed with every commitment terminal, so the next slice comes from the
+      agenda map's live queue rather than from a new agenda.
+    budget_minutes: 90
+    started_at: '2026-08-30T08:45:00Z'
+    deadline_at: '2026-08-30T10:15:00Z'
+    expected_output: >-
+      A certified connection, a certified separation bound, or an explicit ambiguity
+      interval -- BC-010's exit, unchanged.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --edit
+    kill_condition: >-
+      No connectivity claim without a certificate. `A_to_B_stationary_connection` is a
+      declared scope refusal in exp-042 and this slice may not quietly assert it.
+    fallback: >-
+      The explicit ambiguity interval, which the exit names as an acceptable answer.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Apply the sub-agent attributions that are provable supersets, leave the rest
-      unattributed with the typed statement the exit accepts, and act on any
-      under-selection finding before pushing.
+      Report which of the three exit forms the evidence supports, and record it.
   primary_bead: think-s424
   status: in_progress
   budget:
@@ -236,7 +278,201 @@ session:
       discharge and blocker edges a checker refuses to let contradict themselves; the
       n = 4 control scores and corrected the level the atlas relation had been judged at;
       D-034's pair retained and scored prospectively, discriminating on both branches
-  delegations: []
+  delegations:
+  - task: >-
+      Attribute the remaining unattributed gate steps to path patterns that are provable
+      supersets of their true input sets.
+    operator: subagent
+    recording: contemporaneous
+    status: completed
+    phase: 4
+    budget_minutes: 45
+    started_at: '2026-08-30T07:35:00Z'
+    deadline_at: '2026-08-30T08:20:00Z'
+    expected_output: >-
+      Per step, the files it was verified to read with the file:line showing it, and a
+      proposed pattern tuple, or a recommendation to leave it unattributed.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev pytest tests/test_change_scoped_selection.py
+    kill_condition: >-
+      Recommend LEAVE UNATTRIBUTED rather than guess. A wrong narrow pattern is a
+      soundness hole; an honest refusal costs only time.
+    fallback: The typed statement of which steps resist attribution.
+    excluded_commands:
+    - git push
+    outcome: >-
+      Twenty-five steps attributed from its proposals; six left unattributed on its
+      recommendation. It also found the same five pre-existing narrownesses the review
+      agent found independently, which is the cross-check that made them worth acting on
+      without re-deriving each.
+    evidence:
+    - >-
+      'It traced each step from its action function through to the modules it invokes and
+      the files those open, and reported file:line for every claim. The proposals it
+      marked LEAVE UNATTRIBUTED were the six whose input set really is the repository path
+      space, and that judgement was taken as given rather than overridden.'
+    - >-
+      'Its closing finding -- ten files containing `except A, B:` called a SyntaxError on
+      every Python 3 -- is false. All ten parse under 3.14 (PEP 758). This is the third
+      recurrence of the example OR-2 already carries, and OR-2 now says so.'
+    files: []
+    checks:
+    - 'pytest tests/test_change_scoped_selection.py: 10 passed'
+    uncertainty: >-
+      Its per-step tracing was static, so a step that reads a file only at runtime would
+      not appear. The unattributed default absorbs that: a step nobody attributed runs on
+      every change.
+    elapsed_seconds: 934
+    elapsed_quality: platform_measured
+    next_action: >-
+      None. Its recommendations are applied or explicitly declined.
+  - task: >-
+      Adversarially review the change-scoped selector for cases where it would skip a
+      check that should have run.
+    operator: subagent
+    recording: contemporaneous
+    status: completed
+    phase: 4
+    budget_minutes: 45
+    started_at: '2026-08-30T07:35:00Z'
+    deadline_at: '2026-08-30T08:20:00Z'
+    expected_output: >-
+      Findings on under-selection, the whole-gate escape hatch, fnmatch semantics,
+      changed-path correctness, and tier interaction, each with file:line evidence.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev pytest tests/test_change_scoped_selection.py
+    kill_condition: Report only findings verified against the source.
+    fallback: A statement that an axis yielded nothing.
+    excluded_commands:
+    - git push
+    outcome: >-
+      Ten findings, nine of them real and all nine fixed. The most valuable was structural
+      rather than a bug: `*.py` and `*.md` cross separators, so 953 of 1312 tracked files
+      are already claimed and the whole-gate escape can never fire for either extension.
+      That made the documented safety property much weaker than written, and the docstring
+      now says so.
+    evidence:
+    - >-
+      'Five under-selections, each verified by running the selector on a concrete path:
+      TUTORIAL.md skipped the SVG step that reads every Markdown file in the repo; the
+      n=11 research report skipped the step that diffs it cell by cell; the escape screen
+      skipped the rigidity assessor that consumes it; kingbird29 skipped frontier corpus;
+      and sqpack/yamlio.py skipped both registry renderers that parse through it.'
+    - >-
+      'Four defects in `changed_paths`, each demonstrated in a scratch repository: rename
+      detection dropping the source path, the two-dot diff dropping what the base has
+      converged on, a `--since` naming an existing path silently read as a pathspec, and
+      non-ASCII paths arriving C-quoted.'
+    - >-
+      'It property-tested the escape hatch over 4000 random path sets and found no
+      violation, which is the half of the design that held.'
+    files: []
+    checks:
+    - 'pytest tests/test_change_scoped_selection.py: 10 passed after the fixes'
+    uncertainty: >-
+      Its `.pyi` finding is latent -- no stub file exists here -- and was closed anyway
+      because the cost was one pattern.
+    elapsed_seconds: 751
+    elapsed_quality: platform_measured
+    next_action: None. Every confirmed finding is fixed and tested.
+  - task: >-
+      Review the session's landed commits for defects, with attention to flattering errors
+      and to claims stronger than their retained evidence.
+    operator: subagent
+    recording: contemporaneous
+    status: completed
+    phase: 4
+    budget_minutes: 45
+    started_at: '2026-08-30T07:35:00Z'
+    deadline_at: '2026-08-30T08:20:00Z'
+    expected_output: >-
+      Findings against D-374, D-375, D-376 and X-006, each re-derived from the retained
+      artifacts rather than from the prose.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev pytest tests/test_identity_relation.py
+    kill_condition: Report only what was verified. An understated claim is not a defect.
+    fallback: A statement that a section yielded nothing.
+    excluded_commands:
+    - git push
+    outcome: >-
+      The most valuable of the four. It verified every numeric claim in the block as true,
+      then found four defects in the arguments built on them. All four are fixed, and one
+      became D-378.
+    evidence:
+    - >-
+      'D-378: `contact + closure` has exactly one distinguishing verdict and that verdict
+      cannot fail. The only closure set covers every stratum of the only control that has
+      any, so the answer is one whatever the certificates say -- confirmed by mutating the
+      samples three ways. The implementation was also discarding its certificates outright.'
+    - >-
+      'D-375 said both keys are relabelling-invariant "by construction". `geometric_key`
+      is; `contact_certificate` is not a canonical form, and the agent produced a minimal
+      counterexample plus the `angle_classes` order dependence that drives it. The
+      re-levelling survives because it rests on the measurement, not the argument.'
+    - >-
+      'X-006 gave the n = 5 optimum having two angle classes as the obstruction, which is
+      a symptom: orientation forcing follows from container side exactly 2, and finiteness
+      from each disjunct pinning a coordinate to an endpoint. It also said the cells are
+      decided by a linear program; no LP is solved there at all.'
+    - >-
+      'BC-083 was recorded as meeting the exit''s first branch, which requires a proved
+      count, while `component_count` is null. The body was scrupulous; the status line was
+      not.'
+    files: []
+    checks:
+    - 'pytest tests/test_identity_relation.py: 12 passed after the fixes'
+    uncertainty: >-
+      Its two cosmetic findings were taken as read rather than re-verified, since neither
+      changes a result.
+    elapsed_seconds: 1012
+    elapsed_quality: platform_measured
+    next_action: None. Every finding is fixed or recorded.
+  - task: Audit this session against OR-1 through OR-7 and report the concrete gaps.
+    operator: subagent
+    recording: contemporaneous
+    status: completed
+    phase: 4
+    budget_minutes: 45
+    started_at: '2026-08-30T07:35:00Z'
+    deadline_at: '2026-08-30T08:20:00Z'
+    expected_output: >-
+      Per rule, compliance and the specific artifact or action that would satisfy it.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: Concrete checklist, not an essay.
+    fallback: A partial audit naming which rules were not reached.
+    excluded_commands:
+    - git push
+    outcome: >-
+      Seven rules audited, five gaps found, all five closed. It caught the worst record
+      defect of the session: this file had been stamped with phase times of 08:40, 10:40
+      and 13:10 when it was written at 07:44, which is invented precision in a research
+      record. Replaced with commit-derived actuals.
+    evidence:
+    - >-
+      'OR-3''s new paragraph quoted 233.6s across three calls and "about 17%" while the
+      retained rollup records four calls at 345.119s and a share of 18.5%. That is D-379,
+      and every error understated the waste the rule exists to prevent.'
+    - >-
+      'OR-4: the SYNOPSIS handoff and the active launch plan both still offered work
+      closed hours earlier -- the same staleness the session had just diagnosed one level
+      up. Both rewritten.'
+    - >-
+      'OR-6: blocks budgeted 120, 120 and 150 minutes took 13, 7 and 12. The rule asks for
+      replanning from measured time at each boundary and that had not happened; the budget
+      now carries the measurement.'
+    - >-
+      'Its claim that ten committed files are a SyntaxError is false -- the same PEP 758
+      error the attribution agent made independently.'
+    files: []
+    checks:
+    - 'packing-validate --records: 12 of 42 steps passed, 5.6s'
+    uncertainty: >-
+      Parts of its OR-1 and OR-2 findings describe the earlier session on this branch
+      rather than this one, and were read with that in mind.
+    elapsed_seconds: 560
+    elapsed_quality: platform_measured
+    next_action: None. Every gap is closed or recorded.
   outputs: []
   checks: []
   stop_reason: null

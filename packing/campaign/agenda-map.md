@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **7** ready, **14** blocked, **4** stopped, **59** complete.
+- **6** ready, **14** blocked, **4** stopped, **60** complete.
 
 - **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
 
@@ -26,7 +26,6 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-002 | `BC-024` | 2 | insight | research | Across the imported n <= 100 corpus, which chunk shapes, chunk sizes, tilted-chunk counts, and wall seatings… | `think-kr1d` |
 | agenda-004 | `BC-038` | 1 | efficiency | tool_validation | Does wiring `evaluate_stress` to the existing shared row inventory repay its build cost at exact semantic… | `think-kdil` |
 | agenda-005 | `BC-049` | 1 | correctness | research | Are the three packings the catalogue annotates "Rigid." actually rigid, on evidence of our own rather than on… | `think-xdly` |
-| agenda-008 | `BC-084` | 1 | efficiency | tool_validation | Can verification run only the steps a change can reach, without any chance of running fewer than it should? | `think-9qtn` |
 
 ## Blocked, and on what
 
@@ -75,7 +74,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-005 | active | 1 |  | 1 | 1 | 7 | 10 |
 | agenda-006 | completed |  |  |  | 2 | 23 | 25 |
 | agenda-007 | completed |  |  |  |  | 4 | 4 |
-| agenda-008 | active | 1 |  |  |  | 3 | 4 |
+| agenda-008 | completed |  |  |  |  | 4 | 4 |
 
 ## What the states mean
 

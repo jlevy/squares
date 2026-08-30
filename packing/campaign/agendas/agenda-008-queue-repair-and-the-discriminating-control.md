@@ -9,7 +9,7 @@ agenda:
   id: agenda-008
   title: Repair the queue, then ask the one question the controls cannot currently answer
   updated: '2026-08-30'
-  status: active
+  status: completed
   objective: >-
     Eight to nine hours in four blocks. Block 1 is first because the queue is currently
     wrong in a way that sends a session to redo finished work: four agenda-005
@@ -180,7 +180,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5, 11, 29]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can verification run only the steps a change can reach, without any chance of
@@ -210,7 +210,20 @@ agenda:
       `think-ej1d` predates the tier work that changed what the baseline is. Last because
       BC-079 already took most of what this commitment was worth: the edit loop is fast
       now, so this is about the commit boundary, and its value dropped accordingly.
-    artifacts: []
+
+      Both branches of the exit are met. The selector is conservative by construction, two
+      negative controls prove it cannot under-select, and every step is reachable from a
+      declared probe. Six steps carry the typed statement instead, because their true input
+      set is the repository's path space.
+
+      Four read-only sub-agents ran against it and the review changed the design: the
+      whole-gate escape is far weaker than first documented, since `*.py` and `*.md` cross
+      separators and claim 953 of 1312 tracked files, and five attributions were measurably
+      too narrow.
+    artifacts:
+    - src/sqpack/cli/validate.py
+    - tests/test_change_scoped_selection.py
+    - devtools/controls.yaml
 ---
 # Agenda-008 — Repair the Queue, Then Ask the Question the Controls Cannot Answer
 
