@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-006
   title: Four bounded overnight blocks, each ending in a checkpoint that holds
-  updated: '2026-08-29'
+  updated: '2026-08-30'
   status: active
   objective: >-
     Schedule one unattended overnight run across three independent agenda-005 lanes, in
@@ -1192,7 +1192,7 @@ agenda:
     purpose: tool_validation
     owner_focus: process
     instances: [11, 29]
-    state: ready
+    state: blocked
     priority: 0
     question: >-
       Do the reader-facing documents still describe the project the record describes?
@@ -1216,6 +1216,10 @@ agenda:
       move at all, and nothing in the gate notices. `check_synopsis` binds the synopsis to
       the artifacts and there is no equivalent for the README or the tutorial.
     note: >-
+      Scheduled as `BC-078` in
+      [agenda-007](agenda-007-twelve-hour-steered-run.md), block 2, on this same bead and
+      with this scope unchanged.
+
       W8 reconciles; it does not author. No claim may be introduced that the record does
       not already carry, and a disagreement the artifacts cannot settle is a defect rather
       than a rewrite -- a pass that quietly picks the more readable side is how a wrong
@@ -1344,6 +1348,12 @@ agenda:
       seconds against five hundred for the tier that contains them, so the mechanism exists
       and the routing does not.
     note: >-
+      Split across two blocks of
+      [agenda-007](agenda-007-twelve-hour-steered-run.md): phase 1 of its spec is `BC-077`,
+      which runs first because the spec says it may and because every checkpoint pays the
+      tier's cost until it lands; the tier contract itself is `BC-079`, which keeps this
+      cell's recorded dependency on the documentation pass.
+
       This absorbs `BC-062`'s reachability-scoped selector as one candidate mechanism rather
       than as the goal. A selector answers "which steps can this change reach"; the prior
       question is "which steps should anyone run at this moment", and a selector bolted onto

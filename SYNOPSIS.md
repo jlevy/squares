@@ -316,9 +316,18 @@ The renderer’s standing exact-motion control remains independently replayable:
 
 ![The final frame of the certified exact five-square trajectory.](packing/atlas/rendering/n5-exact-face-trajectory.svg)
 
-**As of 2026-08-29 — start here.** The active plan is
-[agenda-006](packing/campaign/agendas/agenda-006-overnight-research-blocks.md), and its
-queue is `BC-074` then `BC-075`.
+**As of 2026-08-30 — start here.** The active plan is
+[agenda-007](packing/campaign/agendas/agenda-007-twelve-hour-steered-run.md), twelve
+steered hours in four blocks of about three, each ending in a merged pull request.
+Its queue is `BC-077`, `BC-078`, `BC-079`, `BC-080`, and the ordering is by what makes
+the later blocks cheaper rather than by importance: the pre-push tier costs `16.05s` on
+this container with one step the whole of it, so the two efficiency blocks bracket the
+documentation pass and the science runs last, where an open-ended question can absorb
+overrun without a commitment being cut short.
+Those four cells discharge `BC-075` phase 1, `BC-074`, `BC-075` phase 2, and
+agenda-005’s `BC-046` respectively, on the beads those commitments already carry;
+[agenda-006](packing/campaign/agendas/agenda-006-overnight-research-blocks.md) retains
+the record of the run that produced them.
 
 `BC-074` is the first W8 documentation pass, on `think-eb29`, against the checklist in
 [the documentation-pass runbook](packing/campaign/documentation-pass.md).

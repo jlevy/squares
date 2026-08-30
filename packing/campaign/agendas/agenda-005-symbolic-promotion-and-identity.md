@@ -286,6 +286,11 @@ agenda:
       curve cannot plateau, the census cannot saturate, and the rarity premise is
       untestable rather than untested.
     note: >-
+      Scheduled as `BC-080` in
+      [agenda-007](agenda-007-twelve-hour-steered-run.md), block 4, on this same bead and
+      with this scope unchanged. This cell moves to `blocked` when that block opens, so one
+      bead never backs two ready commitments.
+
       This is the map program and it shares nothing with BC-042 through BC-045 except the
       clock. A resolved identity relation still leaves n = 29 uncertified, and a working
       promoter still leaves the map counting keys.
