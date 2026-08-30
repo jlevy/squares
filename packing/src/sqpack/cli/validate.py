@@ -869,6 +869,13 @@ def _exact_verification(context: Context) -> str:
             # checks agreement with the retained decimal witness to that witness's own
             # truncation, which is the only discrepancy there is.
             (sys.executable, "-m", "cases.gobel40.verify_exact"),
+            # n=65 and n=89 joined the same day and by the same route. Goebel's family is
+            # exactly the best known at n = 5, 40, 65 and 89; the first two already had
+            # constructions, and building the other two took the general form of the rule
+            # rather than any new mathematics. Their replay also identifies their retained
+            # witnesses: agreement to 5e-33 is not something an independent optimisation
+            # reaches, so those decimals are materialisations of this family.
+            (sys.executable, "-m", "cases.gobel_family.verify_exact"),
             (
                 sys.executable,
                 "-m",

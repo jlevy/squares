@@ -319,17 +319,33 @@ The renderer’s standing exact-motion control remains independently replayable:
 
 **As of 2026-08-30 — start here.**
 [agenda-008](packing/campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md)
-is closed with all four commitments terminal, and
+is closed with all four commitments terminal;
 [session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md)
-has continued past it into the live queue.
+then ran nine unplanned phases on `BC-049` at `n = 40` and carries a handoff at its end
+that is the authoritative summary, and
+[session-046](packing/campaign/agent-sessions/session-046-gobel-family-constructions.md)
+took the cheapest thing that handoff named.
+
+`BC-049` on `think-xdly` is the cell all of this sits under, and it stays open.
+
+**`n = 40` is infinitesimally flexible**, exactly, over `Q(sqrt 2)`: seven retained
+directions turn the sixteen squares of its tilted block and leave the frame fixed, and
+every one is refused at second order by a verified self-stress.
+The property stays `undetermined` because an infinitesimal flex is not a motion — the
+gaps curve shut at order `t²` — so what is settled is that no *first-order* argument can
+establish rigidity there.
+Getting further needs an instrument this repository does not have: the cone is bounded
+to dimension 45 against six dimensions of anything found admissible, and closing that
+gap means reasoning about `2^42` corner disjunctions without enumerating them.
+
+The correction underneath it generalized.
+Göbel’s published family is *exactly* the best known at `n = 5`, `40`, `65` and `89`;
+all four now have exact constructions here, and the last two turn out to be what their
+retained decimal witnesses were all along — agreement to `5e-33` identifies rather than
+merely permits. `n = 28` is the near miss that stops the obvious guess: the family gives
+it a valid packing `0.004` worse than the best known, whose optimum is at algebraic
+degree 6 and is not in the family at all.
 Take the next slice from [`agenda-map.md`](packing/campaign/agenda-map.md).
-`BC-049` on `think-xdly` at `n = 28` and `n = 40` is the one live-queue cell that is
-neither finished nor waiting on a decision an unattended runner may not take — and its
-next slice is not another assessment.
-`X-007`’s machinery is general in shape and specific in inputs: it needs an **exact**
-pose, and both retained witnesses are decimals of the same kind as `n = 5`’s, which was
-measured `2.4e-30` off the diagonal and infeasible at the scale a certificate works at.
-Producing an exact construction is the real price.
 
 `BC-017` delivered its readiness input and stopped there.
 The `n = 3` full-cell control already retained the target-free execution-plan receipt

@@ -60,6 +60,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-043](agent-sessions/session-043-block9-degree-bound.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (correctness) | 2 | think-qs6k | Open block 11 as session-044 under BC-066 and `think-obgk`: eliminate the five equations in five half-angles this block left, inside a declared wall-clock cap, and record whatever the chain reaches. It runs before the remaining pipeline blocks because it is the only one that can change what this run concludes about n = 29 -- a refusal there is the measured justification for the interval route carrying that bound. The ordering through block 18 is agenda-006's continuation schedule. |
 | [session-044](agent-sessions/session-044-agenda006-continuation.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 11 | think-qs6k | Carry BC-066 on `think-obgk` to a terminal state: record the measured wall the rational elimination hit, and take the eliminant's degree from the finite-field run. |
 | [session-045](agent-sessions/session-045-agenda008-queue-and-identity.md) | completed | contemporaneous | `pipeline-improvement` (process) | `process-review` (correctness) | 23 | think-s424 | Read the handoff. BC-049 on `think-xdly` is not closed: n = 5 is done, n = 40 is decided at first order and open beyond it, n = 28 is untouched and its optimum is not in Goebel's family, so the n = 40 route does not carry over. The two sizes the family does answer -- n = 65 and n = 89 -- now have verified exact constructions available and no case package, which is the cheapest open work `think-xdly` offers. |
+| [session-046](agent-sessions/session-046-gobel-family-constructions.md) | completed | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-xdly | `BC-049` on `think-xdly` stays open: n = 5 is done, n = 40 is decided at first order and open beyond it, n = 28 is untouched and its optimum is not in Goebel's family. Whether n = 65 and n = 89's witnesses can move from `numerical-multiprecision` to `exact-algebraic` is the question this session makes askable and does not open. |
 
 ### Workflow summary
 
@@ -72,7 +73,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 2 | 1 | 26 | 2 |
 | `process-review` | 8 | 4 | 47 | 6 |
 | `efficiency-loop` | 7 | 0 | 20 | 0 |
-| `research-loop` | 2 | 4 | 20 | 7 |
+| `research-loop` | 3 | 4 | 21 | 7 |
 | `pipeline-improvement` | 16 | 0 | 71 | 0 |
 | `general-improvement` | 0 | 0 | 1 | 0 |
 
