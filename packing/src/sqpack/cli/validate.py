@@ -1145,6 +1145,14 @@ def _n5_rigidity_certificates(context: Context) -> str:
     return _module(context, "devtools.assess_n5_rigidity", "--check")
 
 
+def _gobel_family(context: Context) -> str:
+    # About five seconds: the family is twelve pairs and only the four whose side matches a
+    # retained best known are built and verified exactly, the largest being n = 89 at 3916
+    # pairs. Cheap enough for the records tier, and it belongs there -- what it checks is
+    # that the frontier still says what it said when the coverage was measured.
+    return _module(context, "devtools.price_gobel_family", "--check")
+
+
 def _n40_rigidity_bracket(context: Context) -> str:
     # 4m57s measured 2026-08-30, on a full gate of about sixteen minutes. It re-derives
     # n = 40's whole assessment: the witness and its second-order refusal, six retained
@@ -1684,6 +1692,19 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/assess_n5_rigidity.py",
             *_CASES,
             "packing/campaign/series/*/results/bc-049-n5-rigidity-certificates.json",
+        ),
+    ),
+    Step(
+        "Goebel's family reaches the sizes it reaches",
+        _gobel_family,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/price_gobel_family.py",
+            "packing/cases/gobel40/packing.py",
+            "packing/frontier/n-*.md",
+            "packing/campaign/series/*/results/bc-049-gobel-family-coverage.json",
         ),
     ),
     Step(

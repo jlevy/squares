@@ -1832,6 +1832,24 @@ and it does not run tests, so four pushes went out on a red branch while six wak
 naming the failing check went unread.
 The tiers are right; using one as though it were the other was not.
 
+### A last finding, and two sizes it opens
+
+`D-389` was specific to `n = 40`: a route priced while the construction sat published.
+Asking the general question took twenty minutes and answers two more sizes.
+Göbel’s family reaches twelve `n` below 100 and its side is *exactly* the best known at
+four of them — `n = 5`, `40`, `65` and `89`. Two are built here; **`n = 65` and `n = 89`
+are not**, and both verify exactly in seconds from the same rule.
+Neither is promoted: feasible at the retained side is not optimal, and moving either to
+an exact witness is a change to those records that `devtools/price_gobel_family.py` only
+makes possible.
+
+The near miss is the part that saves someone an afternoon.
+At `a = 2, b = 4` the family gives `n = 28` — a *valid* packing, `0.004` worse than the
+best known, whose optimum is at algebraic degree 6 and is not in this family.
+So the `n = 40` answer does not carry over to `n = 28`, which is why no exact
+construction is retained there, and why noticing that `28 = 2(4) + 4 + 16` is not the
+shortcut it looks like.
+
 ### Two things owed
 
 `devtools/assess_n5_rigidity.py` now holds the machinery both sizes use and its name

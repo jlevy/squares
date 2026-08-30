@@ -1,5 +1,8 @@
 """Frits Göbel's forty-square construction over the certified field Q(sqrt(2)).
 
+The geometry helpers here are public because `devtools/price_gobel_family.py` builds the
+same family at other `(a, b)` and must not carry a second copy of an exact overlap test.
+
 Göbel's family, as Friedman's survey states it: if integers `a` and `b` satisfy
 `a - 1 < b/sqrt(2) < a + 1`, then `2a^2 + 2a + b^2` unit squares pack into a square of side
 `a + 1 + b/sqrt(2)`, by placing a `b` by `b` block of squares at forty-five degrees in the
@@ -41,7 +44,7 @@ FRAME_OFFSETS = 3
 """`a`: how many unit squares deep the axis-aligned frame is against each wall."""
 
 
-def _corners(centre, half_x, half_y):
+def corners(centre, half_x, half_y):
     """The four corners of a unit square from its centre and two half-edge vectors."""
     cx, cy = centre
     ax, ay = half_x
@@ -54,7 +57,7 @@ def _corners(centre, half_x, half_y):
     ]
 
 
-def _overlaps(left, right) -> bool:
+def overlaps(left, right) -> bool:
     """Do these two unit squares overlap in area? Exact separating-axis test.
 
     Only the four edge normals of the two squares need testing, and here only two are
@@ -113,7 +116,7 @@ def build():
             # length is one: adjacent cells of the block touch, as they must.
             cx = rational(2) + (rational(u + v) / rational(2) - half) * root_two
             cy = rational(2) + (rational(v - u) / rational(2) + one) * root_two
-            tilted.append(_corners((cx, cy), (diagonal, diagonal), (-diagonal, diagonal)))
+            tilted.append(corners((cx, cy), (diagonal, diagonal), (-diagonal, diagonal)))
 
     # The frame lattice: three offsets from each wall, in both coordinates.
     offsets = [rational(2 * k + 1) / rational(2) for k in range(FRAME_OFFSETS)]
@@ -122,8 +125,8 @@ def build():
     axis = []
     for cx in offsets:
         for cy in offsets:
-            square = _corners((cx, cy), (half, rational(0)), (rational(0), half))
-            if not any(_overlaps(square, block) for block in tilted):
+            square = corners((cx, cy), (half, rational(0)), (rational(0), half))
+            if not any(overlaps(square, block) for block in tilted):
                 axis.append(square)
 
     squares = axis + tilted

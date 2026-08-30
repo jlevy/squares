@@ -1,0 +1,177 @@
+{
+  "already_built_here": [
+    5,
+    40
+  ],
+  "buildable_and_not_built": [
+    65,
+    89
+  ],
+  "family": [
+    {
+      "a": 1,
+      "b": 1,
+      "best_known": 2.70710678118654,
+      "matches_best_known": true,
+      "n": 5,
+      "side": "2 + 1/sqrt(2)",
+      "side_value": 2.707106781187,
+      "verified": {
+        "pairs_tested": 10,
+        "squares": 5,
+        "valid": true
+      }
+    },
+    {
+      "a": 1,
+      "b": 2,
+      "best_known": 3.0,
+      "best_known_degree": null,
+      "matches_best_known": false,
+      "n": 8,
+      "side": "2 + 2/sqrt(2)",
+      "side_value": 3.414213562373,
+      "worse_by": 0.414213562373
+    },
+    {
+      "a": 2,
+      "b": 2,
+      "best_known": 4.0,
+      "best_known_degree": null,
+      "matches_best_known": false,
+      "n": 16,
+      "side": "3 + 2/sqrt(2)",
+      "side_value": 4.414213562373,
+      "worse_by": 0.414213562373
+    },
+    {
+      "a": 2,
+      "b": 3,
+      "best_known": 5.0,
+      "best_known_degree": null,
+      "matches_best_known": false,
+      "n": 21,
+      "side": "3 + 3/sqrt(2)",
+      "side_value": 5.12132034356,
+      "worse_by": 0.12132034356
+    },
+    {
+      "a": 2,
+      "b": 4,
+      "best_known": 5.82444461667405,
+      "best_known_degree": 6,
+      "matches_best_known": false,
+      "n": 28,
+      "side": "3 + 4/sqrt(2)",
+      "side_value": 5.828427124746,
+      "worse_by": 0.003982508072
+    },
+    {
+      "a": 3,
+      "b": 3,
+      "best_known": 6.0,
+      "best_known_degree": null,
+      "matches_best_known": false,
+      "n": 33,
+      "side": "4 + 3/sqrt(2)",
+      "side_value": 6.12132034356,
+      "worse_by": 0.12132034356
+    },
+    {
+      "a": 3,
+      "b": 4,
+      "best_known": 6.82842712474619,
+      "matches_best_known": true,
+      "n": 40,
+      "side": "4 + 4/sqrt(2)",
+      "side_value": 6.828427124746,
+      "verified": {
+        "pairs_tested": 780,
+        "squares": 40,
+        "valid": true
+      }
+    },
+    {
+      "a": 3,
+      "b": 5,
+      "best_known": 7.0,
+      "best_known_degree": null,
+      "matches_best_known": false,
+      "n": 49,
+      "side": "4 + 5/sqrt(2)",
+      "side_value": 7.535533905933,
+      "worse_by": 0.535533905933
+    },
+    {
+      "a": 4,
+      "b": 5,
+      "best_known": 8.53553390593273,
+      "matches_best_known": true,
+      "n": 65,
+      "side": "5 + 5/sqrt(2)",
+      "side_value": 8.535533905933,
+      "verified": {
+        "pairs_tested": 2080,
+        "squares": 65,
+        "valid": true
+      }
+    },
+    {
+      "a": 4,
+      "b": 6,
+      "best_known": 9.0,
+      "best_known_degree": null,
+      "matches_best_known": false,
+      "n": 76,
+      "side": "5 + 6/sqrt(2)",
+      "side_value": 9.242640687119,
+      "worse_by": 0.242640687119
+    },
+    {
+      "a": 4,
+      "b": 7,
+      "best_known": 9.94974746830583,
+      "matches_best_known": true,
+      "n": 89,
+      "side": "5 + 7/sqrt(2)",
+      "side_value": 9.949747468306,
+      "verified": {
+        "pairs_tested": 3916,
+        "squares": 89,
+        "valid": true
+      }
+    },
+    {
+      "a": 5,
+      "b": 6,
+      "best_known": 10.0,
+      "best_known_degree": null,
+      "matches_best_known": false,
+      "n": 96,
+      "side": "6 + 6/sqrt(2)",
+      "side_value": 10.242640687119,
+      "worse_by": 0.242640687119
+    }
+  ],
+  "optimal_at": [
+    5,
+    40,
+    65,
+    89
+  ],
+  "reached": 12,
+  "schema_version": 1,
+  "subject": {
+    "commitment": "BC-049",
+    "promotes_nothing": "the constructions are verified feasible at the retained side, not shown optimal. Moving n = 65 or n = 89 to an exact witness is a change to those records that this only makes possible",
+    "question": "which sizes Goebel's centred-diagonal-block family reaches below n = 100, and where what it gives is already the best known",
+    "why": "D-389 recorded this project pricing a route to an exact n = 40 pose while the construction sat published in a source already transcribed here. That correction was specific to n = 40; this asks the question it implies"
+  },
+  "the_near_miss": {
+    "best_known": "5.824444...",
+    "family_side": "3 + 4/sqrt(2) = 5.828427...",
+    "n": 28,
+    "why_it_matters": "n = 28's optimum is at algebraic degree 6 and is not in this family, so the n = 40 answer does not carry over to it. That is why no exact construction is retained there, and it forecloses the obvious next guess",
+    "worse_by": 0.003982
+  }
+}
