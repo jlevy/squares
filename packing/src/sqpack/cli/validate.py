@@ -1160,6 +1160,14 @@ def _session_close(context: Context) -> str:
     return _module(context, "devtools.close_session", "--check")
 
 
+def _pr_rollup(context: Context) -> str:
+    # Sub-second: it re-reads the rollups the step above already parses and renders each
+    # branch shape without printing. Records tier because this block goes on every pull
+    # request, so a renderer that raises on a branch with no exclusive log breaks the one
+    # place a reviewer sees what the work cost.
+    return _module(context, "devtools.render_pr_rollup", "--check")
+
+
 def _control_anchors(context: Context) -> str:
     # Sub-second: it resolves 150 anchors by string containment, running no mutation and no
     # subprocess. Records tier because a control whose anchor has stopped matching is not
@@ -1759,6 +1767,17 @@ STEPS: tuple[Step, ...] = (
             # The step now also checks the reader-facing view spliced into the synopsis,
             # so editing that section has to be able to fail it.
             "SYNOPSIS.md",
+        ),
+    ),
+    Step(
+        "the branch cost rollup renders",
+        _pr_rollup,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/render_pr_rollup.py",
+            "packing/campaign/resource-usage/*.yaml",
         ),
     ),
     Step(

@@ -199,6 +199,34 @@ passed on both architectures; the workflow test rejects its return.
 Never accept a rebuilt golden to make the probe green, and do not add a second CI-only
 implementation of either check.
 
+### Every pull request carries what it cost
+
+Open or update a pull request and the description leads with the branch’s cost,
+generated rather than written:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.render_pr_rollup
+```
+
+It prints a markdown block — agent turns, model and thinking level, every tool called,
+and the tokens behind them — for the checked-out branch, or for `--branch <name>`. Paste
+it at the top of the description.
+A reviewer can see what changed and otherwise cannot see what it took, and that number
+has existed in `campaign/resource-usage/` the whole time.
+
+**The attribution is a bound and the block says so.** `turns.by_branch` is the only
+branch-aware field in `ClaudeEfficiencyRollup`, so a log that ran on more than one
+branch has an exact turn count here and no way to split its tokens or tool calls.
+The block prints three columns — on-branch logs only, prorated by turn share, and every
+log that touched the branch — of which the outer two are measurements and the middle is
+the estimate to quote.
+Do not replace them with a single number: the interval is wide because the measurement
+is, and narrowing it needs a branch-aware token count that the harness does not emit.
+
+The gate step `the branch cost rollup renders` runs the renderer over every branch in
+the records, including one no rollup mentions, because a division by a turn count fails
+on exactly that edge.
+
 ## Focused Quality Commands
 
 Use direct tools when their output is the point of the edit:

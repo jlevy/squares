@@ -3045,7 +3045,7 @@ and a result that changes a decision.
 launch is not yet authorized.** At that checkpoint the tree passed all 31 normal-gate
 steps in 97.68 wall-seconds, including seven exact small-`n` replays, 59 pytest
 contracts, and all 62 mutation controls.
-The gate has since grown to 56 steps, of which the pull-request tier runs 32; the
+The gate has since grown to 57 steps, of which the pull-request tier runs 33; the
 sentence is dated rather than restated because no check guards this number, so a
 current-tense figure here silently goes stale.
 The first deep regeneration had reproduced one unsettled `n=4` proposal and an `n=10`
