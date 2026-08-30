@@ -16,8 +16,9 @@ required:
   - completeness_obligations
   - evaluation_split
   - next_implementation
+  - per_record_coverage
 properties:
-  version: {const: contact-assembly-v1-draft}
+  version: {const: contact-assembly-v2-draft}
   status: {const: calibration-draft}
   evidence_role: {type: string, minLength: 1}
   primitives:
@@ -102,3 +103,25 @@ properties:
       bead: {type: string, pattern: '^think-[a-z0-9]+$'}
       slice: {type: string, minLength: 1}
       exit: {type: string, minLength: 1}
+  per_record_coverage:
+    type: object
+    additionalProperties: false
+    description: >-
+      Where the corpus's own records stand against this contract, and what the contract
+      asks for that the retained evidence cannot supply. `BC-019`'s exit asks for
+      certificates or typed limitations per record; this names where they live rather than
+      restating them, so the contract and the record cannot drift into disagreeing.
+    required: [horizon, certificate_record, replay, unfilled_here, emits_no_verdict]
+    properties:
+      horizon: {type: integer, minimum: 1, description: Largest n the certificates cover.}
+      certificate_record: {type: string, minLength: 1}
+      replay: {type: string, minLength: 1}
+      unfilled_here:
+        type: array
+        minItems: 1
+        items: {type: string, minLength: 1}
+        description: >-
+          Contract fields the retained corpus cannot fill. Listed rather than inferred: a
+          normal axis reconstructed from lattice deltas would be an assumption about the
+          fit presented as a measurement.
+      emits_no_verdict: {type: string, minLength: 1}

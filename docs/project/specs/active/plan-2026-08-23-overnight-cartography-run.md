@@ -336,11 +336,12 @@ already decide its stated criterion need not open a ceremonial review phase.
 For the next supervised exact-research goal, use
 [session 045](../../../../packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md).
 Sessions 027 through 044 are terminal, and agendas 006 and 007 are closed.
-Open `BC-019` under `think-6mcd` as the next bounded driver: write the versioned
-contact-assembly contract — sliding degrees of freedom, complexity cost, canonical ties,
-per-record certificates or typed limitations for `n <= 30`. It is takeable now because
-`X-008` measured what the residue is made of, so the contract is written against shapes
-rather than against a guess.
+Open `BC-017` under `think-u97a` as the next bounded driver: retain a target-free tagged
+execution-plan receipt on the source-free `n = 3` full-cell control, with semantic-swap,
+forged-count and exact-replay controls, and real LP attempts recorded as zero.
+It comes before any numerical full-cell freeze because `D-126` and the commitment’s own
+note say the current callables collapse the accounting roles the receipt has to
+separate.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

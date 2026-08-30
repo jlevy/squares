@@ -323,13 +323,18 @@ is closed with all four commitments terminal, and
 [session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md)
 has continued past it into the live queue.
 Take the next slice from [`agenda-map.md`](packing/campaign/agenda-map.md).
-`BC-019` on `think-6mcd` is next: write the versioned contact-assembly contract against
-the shapes [X-008](packing/campaign/explorations/X-008-the-residue-is-axis-aligned.md)
-measured, with per-record certificates or typed limitations for `n <= 30`. `BC-024` is
-closed, and its answer inverts the expected shape of the residue: **every** component
-the grammar cannot express is axis-aligned — every `other-polyomino` in the corpus has
-angle exactly zero — so all 295 tilted components are singletons, bars, Ls or rectangles
-and already covered.
+`BC-017` on `think-u97a` is next: retain a target-free tagged execution-plan receipt on
+the source-free `n = 3` full-cell control, with semantic-swap, forged-count and
+exact-replay controls, before any numerical semantics are frozen.
+`BC-019` is closed. The contact-assembly contract is at `contact-assembly-v2-draft` and
+carries the clause it never had — **17 certificates and 13 typed limitations** over
+`n <= 30` — with the missing grammar move named rather than guessed: a primitive for
+axis-aligned polyominoes that are not a bar, rectangle or corner L. `BC-024` is closed
+too, and it is what made that statement safe to make:
+[X-008](packing/campaign/explorations/X-008-the-residue-is-axis-aligned.md) measures
+that **every** component the grammar cannot express is axis-aligned — every
+`other-polyomino` in the corpus has angle exactly zero — so all 295 tilted components
+are already covered.
 Wall seating splits the residue into two populations with nothing between them: 44
 whole-record grid subsets on four walls, 65 corner-seated blocks on two.
 `BC-038` is closed and rejected on measured arithmetic — 35 `evaluate_stress` calls

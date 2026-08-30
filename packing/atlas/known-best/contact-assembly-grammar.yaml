@@ -5,7 +5,7 @@ softschema:
   status: enforced
 
 grammar:
-  version: contact-assembly-v1-draft
+  version: contact-assembly-v2-draft
   status: calibration-draft
   evidence_role: >-
     A finite proposer design derived from the inspected n=1..100 corpus. It is an
@@ -139,3 +139,21 @@ grammar:
       The declared controls return stable endpoints and active cells across toolchains
       and pool widths, or retain one typed instability report. The 11,013-record
       size-five atlas remains abstract and no target execution or H-044 verdict begins.
+  per_record_coverage:
+    horizon: 30
+    certificate_record: campaign/series/series-000-smoke-and-calibration/results/bc-019-assembly-coverage.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.certify_assembly_coverage --check
+    unfilled_here:
+    - >-
+      mandatory contact graph with normal axis and sign. The census stores internal edges
+      as square pairs with a residual and records neither. Inferring a normal from lattice
+      deltas would be an assumption about the fit presented as a measurement.
+    - >-
+      full-cell square-by-wall Boolean decision inventory. Wall seating is retained per
+      component, which is coarser: it counts distinct walls touched rather than deciding
+      each square against each wall. The full inventory belongs to the full-cell control.
+    emits_no_verdict: >-
+      Seventeen of the thirty records at n <= 30 carry a certificate and thirteen carry a
+      typed limitation. A record without a certificate is one the current detector did not
+      express, which the census's own known_gap says is not a refutation of chunk
+      expressibility until the minimal partition solver exists. H-044 is untouched.

@@ -1,0 +1,543 @@
+{
+  "certified": [
+    {
+      "complexity": {
+        "assembly_count": 0,
+        "fitted_angle_class_count": 1,
+        "free_square_count": 1,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 0,
+        "mandatory_contact_count": 0
+      },
+      "component_count": 1,
+      "n": 1,
+      "source": "exact-grid"
+    },
+    {
+      "complexity": {
+        "assembly_count": 1,
+        "fitted_angle_class_count": 1,
+        "free_square_count": 0,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 2,
+        "mandatory_contact_count": 1
+      },
+      "component_count": 1,
+      "n": 2,
+      "source": "exact-grid"
+    },
+    {
+      "complexity": {
+        "assembly_count": 1,
+        "fitted_angle_class_count": 1,
+        "free_square_count": 0,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 3,
+        "mandatory_contact_count": 2
+      },
+      "component_count": 1,
+      "n": 3,
+      "source": "exact-grid"
+    },
+    {
+      "complexity": {
+        "assembly_count": 1,
+        "fitted_angle_class_count": 1,
+        "free_square_count": 0,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 4,
+        "mandatory_contact_count": 4
+      },
+      "component_count": 1,
+      "n": 4,
+      "source": "exact-grid"
+    },
+    {
+      "complexity": {
+        "assembly_count": 0,
+        "fitted_angle_class_count": 2,
+        "free_square_count": 5,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 0,
+        "mandatory_contact_count": 0
+      },
+      "component_count": 5,
+      "n": 5,
+      "source": "kingbird-derived-facts"
+    },
+    {
+      "complexity": {
+        "assembly_count": 1,
+        "fitted_angle_class_count": 1,
+        "free_square_count": 0,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 6,
+        "mandatory_contact_count": 7
+      },
+      "component_count": 1,
+      "n": 6,
+      "source": "exact-grid"
+    },
+    {
+      "complexity": {
+        "assembly_count": 1,
+        "fitted_angle_class_count": 1,
+        "free_square_count": 0,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 9,
+        "mandatory_contact_count": 12
+      },
+      "component_count": 1,
+      "n": 9,
+      "source": "exact-grid"
+    },
+    {
+      "complexity": {
+        "assembly_count": 3,
+        "fitted_angle_class_count": 2,
+        "free_square_count": 2,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 3,
+        "mandatory_contact_count": 5
+      },
+      "component_count": 5,
+      "n": 10,
+      "source": "kingbird-derived-facts"
+    },
+    {
+      "complexity": {
+        "assembly_count": 1,
+        "fitted_angle_class_count": 2,
+        "free_square_count": 8,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 3,
+        "mandatory_contact_count": 2
+      },
+      "component_count": 9,
+      "n": 11,
+      "source": "kingbird-derived-facts"
+    },
+    {
+      "complexity": {
+        "assembly_count": 1,
+        "fitted_angle_class_count": 1,
+        "free_square_count": 0,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 12,
+        "mandatory_contact_count": 17
+      },
+      "component_count": 1,
+      "n": 12,
+      "source": "exact-grid"
+    },
+    {
+      "complexity": {
+        "assembly_count": 1,
+        "fitted_angle_class_count": 1,
+        "free_square_count": 0,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 16,
+        "mandatory_contact_count": 24
+      },
+      "component_count": 1,
+      "n": 16,
+      "source": "exact-grid"
+    },
+    {
+      "complexity": {
+        "assembly_count": 2,
+        "fitted_angle_class_count": 3,
+        "free_square_count": 11,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 3,
+        "mandatory_contact_count": 4
+      },
+      "component_count": 13,
+      "n": 17,
+      "source": "kingbird-derived-facts"
+    },
+    {
+      "complexity": {
+        "assembly_count": 6,
+        "fitted_angle_class_count": 2,
+        "free_square_count": 2,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 4,
+        "mandatory_contact_count": 10
+      },
+      "component_count": 8,
+      "n": 18,
+      "source": "kingbird-derived-facts"
+    },
+    {
+      "complexity": {
+        "assembly_count": 1,
+        "fitted_angle_class_count": 1,
+        "free_square_count": 0,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 20,
+        "mandatory_contact_count": 31
+      },
+      "component_count": 1,
+      "n": 20,
+      "source": "exact-grid"
+    },
+    {
+      "complexity": {
+        "assembly_count": 1,
+        "fitted_angle_class_count": 1,
+        "free_square_count": 0,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 25,
+        "mandatory_contact_count": 40
+      },
+      "component_count": 1,
+      "n": 25,
+      "source": "exact-grid"
+    },
+    {
+      "complexity": {
+        "assembly_count": 8,
+        "fitted_angle_class_count": 2,
+        "free_square_count": 0,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 4,
+        "mandatory_contact_count": 20
+      },
+      "component_count": 8,
+      "n": 28,
+      "source": "kingbird-derived-facts"
+    },
+    {
+      "complexity": {
+        "assembly_count": 1,
+        "fitted_angle_class_count": 1,
+        "free_square_count": 0,
+        "internal_slide_dof": 0,
+        "internal_slide_dof_basis": "zero by the rigid-lattice primitive's semantics -- fixed integer offsets in one fitted orientation -- and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact-scaffold. The detector finds no contact scaffolds here.",
+        "largest_assembly_size": 30,
+        "mandatory_contact_count": 49
+      },
+      "component_count": 1,
+      "n": 30,
+      "source": "exact-grid"
+    }
+  ],
+  "limited": [
+    {
+      "component_count": 1,
+      "limitation": {
+        "components": [
+          {
+            "id": "a01-c01",
+            "is_the_whole_record": true,
+            "shape": "other-polyomino",
+            "size": 7,
+            "tilted": false,
+            "walls_touched": 4
+          }
+        ],
+        "kind": "unexpressed-components",
+        "missing_move": "a primitive for axis-aligned polyominoes that are not a bar, rectangle or corner L. Every component listed here is untilted, which X-008 measures across the whole corpus: the grammar's gap is not about tilted assemblies.",
+        "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
+      },
+      "n": 7,
+      "source": "exact-grid"
+    },
+    {
+      "component_count": 1,
+      "limitation": {
+        "components": [
+          {
+            "id": "a01-c01",
+            "is_the_whole_record": true,
+            "shape": "other-polyomino",
+            "size": 8,
+            "tilted": false,
+            "walls_touched": 4
+          }
+        ],
+        "kind": "unexpressed-components",
+        "missing_move": "a primitive for axis-aligned polyominoes that are not a bar, rectangle or corner L. Every component listed here is untilted, which X-008 measures across the whole corpus: the grammar's gap is not about tilted assemblies.",
+        "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
+      },
+      "n": 8,
+      "source": "exact-grid"
+    },
+    {
+      "component_count": 1,
+      "limitation": {
+        "components": [
+          {
+            "id": "a01-c01",
+            "is_the_whole_record": true,
+            "shape": "other-polyomino",
+            "size": 13,
+            "tilted": false,
+            "walls_touched": 4
+          }
+        ],
+        "kind": "unexpressed-components",
+        "missing_move": "a primitive for axis-aligned polyominoes that are not a bar, rectangle or corner L. Every component listed here is untilted, which X-008 measures across the whole corpus: the grammar's gap is not about tilted assemblies.",
+        "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
+      },
+      "n": 13,
+      "source": "exact-grid"
+    },
+    {
+      "component_count": 1,
+      "limitation": {
+        "components": [
+          {
+            "id": "a01-c01",
+            "is_the_whole_record": true,
+            "shape": "other-polyomino",
+            "size": 14,
+            "tilted": false,
+            "walls_touched": 4
+          }
+        ],
+        "kind": "unexpressed-components",
+        "missing_move": "a primitive for axis-aligned polyominoes that are not a bar, rectangle or corner L. Every component listed here is untilted, which X-008 measures across the whole corpus: the grammar's gap is not about tilted assemblies.",
+        "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
+      },
+      "n": 14,
+      "source": "exact-grid"
+    },
+    {
+      "component_count": 1,
+      "limitation": {
+        "components": [
+          {
+            "id": "a01-c01",
+            "is_the_whole_record": true,
+            "shape": "other-polyomino",
+            "size": 15,
+            "tilted": false,
+            "walls_touched": 4
+          }
+        ],
+        "kind": "unexpressed-components",
+        "missing_move": "a primitive for axis-aligned polyominoes that are not a bar, rectangle or corner L. Every component listed here is untilted, which X-008 measures across the whole corpus: the grammar's gap is not about tilted assemblies.",
+        "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
+      },
+      "n": 15,
+      "source": "exact-grid"
+    },
+    {
+      "component_count": 8,
+      "limitation": {
+        "components": [
+          {
+            "id": "a01-c02",
+            "is_the_whole_record": false,
+            "shape": "other-polyomino",
+            "size": 6,
+            "tilted": false,
+            "walls_touched": 2
+          }
+        ],
+        "kind": "unexpressed-components",
+        "missing_move": "a primitive for axis-aligned polyominoes that are not a bar, rectangle or corner L. Every component listed here is untilted, which X-008 measures across the whole corpus: the grammar's gap is not about tilted assemblies.",
+        "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
+      },
+      "n": 19,
+      "source": "kingbird-derived-facts"
+    },
+    {
+      "component_count": 1,
+      "limitation": {
+        "components": [
+          {
+            "id": "a01-c01",
+            "is_the_whole_record": true,
+            "shape": "other-polyomino",
+            "size": 21,
+            "tilted": false,
+            "walls_touched": 4
+          }
+        ],
+        "kind": "unexpressed-components",
+        "missing_move": "a primitive for axis-aligned polyominoes that are not a bar, rectangle or corner L. Every component listed here is untilted, which X-008 measures across the whole corpus: the grammar's gap is not about tilted assemblies.",
+        "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
+      },
+      "n": 21,
+      "source": "exact-grid"
+    },
+    {
+      "component_count": 1,
+      "limitation": {
+        "components": [
+          {
+            "id": "a01-c01",
+            "is_the_whole_record": true,
+            "shape": "other-polyomino",
+            "size": 22,
+            "tilted": false,
+            "walls_touched": 4
+          }
+        ],
+        "kind": "unexpressed-components",
+        "missing_move": "a primitive for axis-aligned polyominoes that are not a bar, rectangle or corner L. Every component listed here is untilted, which X-008 measures across the whole corpus: the grammar's gap is not about tilted assemblies.",
+        "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
+      },
+      "n": 22,
+      "source": "exact-grid"
+    },
+    {
+      "component_count": 1,
+      "limitation": {
+        "components": [
+          {
+            "id": "a01-c01",
+            "is_the_whole_record": true,
+            "shape": "other-polyomino",
+            "size": 23,
+            "tilted": false,
+            "walls_touched": 4
+          }
+        ],
+        "kind": "unexpressed-components",
+        "missing_move": "a primitive for axis-aligned polyominoes that are not a bar, rectangle or corner L. Every component listed here is untilted, which X-008 measures across the whole corpus: the grammar's gap is not about tilted assemblies.",
+        "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
+      },
+      "n": 23,
+      "source": "exact-grid"
+    },
+    {
+      "component_count": 1,
+      "limitation": {
+        "components": [
+          {
+            "id": "a01-c01",
+            "is_the_whole_record": true,
+            "shape": "other-polyomino",
+            "size": 24,
+            "tilted": false,
+            "walls_touched": 4
+          }
+        ],
+        "kind": "unexpressed-components",
+        "missing_move": "a primitive for axis-aligned polyominoes that are not a bar, rectangle or corner L. Every component listed here is untilted, which X-008 measures across the whole corpus: the grammar's gap is not about tilted assemblies.",
+        "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
+      },
+      "n": 24,
+      "source": "exact-grid"
+    },
+    {
+      "component_count": 6,
+      "limitation": {
+        "components": [
+          {
+            "id": "a01-c02",
+            "is_the_whole_record": false,
+            "shape": "other-polyomino",
+            "size": 5,
+            "tilted": false,
+            "walls_touched": 2
+          },
+          {
+            "id": "a01-c05",
+            "is_the_whole_record": false,
+            "shape": "other-polyomino",
+            "size": 5,
+            "tilted": false,
+            "walls_touched": 2
+          }
+        ],
+        "kind": "unexpressed-components",
+        "missing_move": "a primitive for axis-aligned polyominoes that are not a bar, rectangle or corner L. Every component listed here is untilted, which X-008 measures across the whole corpus: the grammar's gap is not about tilted assemblies.",
+        "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
+      },
+      "n": 26,
+      "source": "kingbird-derived-facts"
+    },
+    {
+      "component_count": 5,
+      "limitation": {
+        "components": [
+          {
+            "id": "a01-c01",
+            "is_the_whole_record": false,
+            "shape": "other-polyomino",
+            "size": 10,
+            "tilted": false,
+            "walls_touched": 2
+          },
+          {
+            "id": "a01-c03",
+            "is_the_whole_record": false,
+            "shape": "other-polyomino",
+            "size": 10,
+            "tilted": false,
+            "walls_touched": 2
+          }
+        ],
+        "kind": "unexpressed-components",
+        "missing_move": "a primitive for axis-aligned polyominoes that are not a bar, rectangle or corner L. Every component listed here is untilted, which X-008 measures across the whole corpus: the grammar's gap is not about tilted assemblies.",
+        "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
+      },
+      "n": 27,
+      "source": "kingbird-derived-facts"
+    },
+    {
+      "component_count": 13,
+      "limitation": {
+        "components": [
+          {
+            "id": "a01-c04",
+            "is_the_whole_record": false,
+            "shape": "other-polyomino",
+            "size": 5,
+            "tilted": false,
+            "walls_touched": 2
+          }
+        ],
+        "kind": "unexpressed-components",
+        "missing_move": "a primitive for axis-aligned polyominoes that are not a bar, rectangle or corner L. Every component listed here is untilted, which X-008 measures across the whole corpus: the grammar's gap is not about tilted assemblies.",
+        "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
+      },
+      "n": 29,
+      "source": "kingbird-derived-facts"
+    }
+  ],
+  "schema_version": 1,
+  "subject": {
+    "band": "exact",
+    "commitment": "BC-019",
+    "contract": "atlas/known-best/contact-assembly-grammar.yaml",
+    "emits_no_verdict": "descriptive; H-044 is untouched and a record without a certificate is one the current detector did not express, not one shown inexpressible",
+    "horizon": 30
+  },
+  "totals": {
+    "certified": 17,
+    "limited": 13,
+    "records": 30
+  },
+  "unfilled_contract_fields": [
+    {
+      "field": "mandatory contact graph with normal axis and sign",
+      "why": "the census stores internal edges as square pairs with a residual and records no normal axis or sign. Inferring one from lattice deltas would be an assumption about the fit presented as a measurement."
+    },
+    {
+      "field": "full-cell square-by-wall Boolean decision inventory",
+      "why": "wall seating is retained per component here, which is coarser: it counts distinct walls touched rather than deciding each square against each wall. The full inventory is the full-cell control's."
+    }
+  ]
+}

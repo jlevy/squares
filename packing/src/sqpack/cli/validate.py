@@ -1071,6 +1071,16 @@ def _n5_identity_pair(context: Context) -> str:
     return _module(context, "devtools.build_n5_identity_pair", "--check")
 
 
+def _assembly_coverage(context: Context) -> str:
+    """Every record at `n <= 30` still carries its certificate or its typed limitation.
+
+    Cheap, because it reads the same census the taxonomy does. The value is that the
+    contract's `per_record_coverage` block names this record and this replay, so the
+    contract and the corpus cannot drift into disagreeing without one of them failing.
+    """
+    return _module(context, "devtools.certify_assembly_coverage", "--check")
+
+
 def _chunk_taxonomy(context: Context) -> str:
     """The source-stratified taxonomy still describes the corpus it was drawn from.
 
@@ -1541,6 +1551,22 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/check_golden_basins.py",
             "packing/devtools/check_soundness_perimeter.py",
             "packing/campaign/series/*/results/bc-083-n5-identity-pair.json",
+        ),
+    ),
+    Step(
+        "assembly coverage agrees with the contract",
+        _assembly_coverage,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/chunk-components.json",
+            "packing/atlas/known-best/contact-assembly-grammar.yaml",
+            "packing/atlas/known-best/manifest.json",
+            "packing/witnesses/*",
+            "packing/devtools/certify_assembly_coverage.py",
+            "packing/devtools/census_chunk_taxonomy.py",
+            "packing/campaign/series/*/results/bc-019-assembly-coverage.json",
         ),
     ),
     Step(

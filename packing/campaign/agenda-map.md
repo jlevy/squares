@@ -10,7 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **4** ready, **14** blocked, **4** stopped, **62** complete.
+- **3** ready, **14** blocked, **4** stopped, **63** complete.
+
+- **1 blocked commitment have every predecessor complete** and no other stated blocker, so `BC-025` is takeable now. A cell whose blocker is discharged but whose `state` still reads `blocked` is invisible to a coordinator reading the agenda.
 
 - **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
 
@@ -22,7 +24,6 @@ Commitments a session may take now, in each agenda's declared order.
 | --- | --- | ---: | --- | --- | --- | --- |
 | agenda-001 | `BC-010` | 0 | insight | research | Are the equal-side n=5 candidates connected in the stationary set, and what verified minimax clearance… | `think-1s0h` |
 | agenda-002 | `BC-017` | 1 | efficiency | tool_validation | Can a stratum be priced in counted LP solves end to end, so enumeration results are comparable to each other… | `think-u97a` |
-| agenda-002 | `BC-019` | 2 | insight | research | Are standing records at n <= 30 already chunk-structured, and if not, which grammar move is missing? | `think-6mcd` |
 | agenda-005 | `BC-049` | 1 | correctness | research | Are the three packings the catalogue annotates "Rigid." actually rigid, on evidence of our own rather than on… | `think-xdly` |
 
 ## Blocked, and on what
@@ -38,7 +39,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-002 | `BC-016` | 0 | — | no | Retained input poses and symbolic active-cell rows for `n005-seed007-known-answer`, `n010-seed014-known-answer` and… |
 | agenda-002 | `BC-018` | 1 | `BC-016`, `BC-017` | no | — |
 | agenda-002 | `BC-020` | 2 | `BC-017` | no | — |
-| agenda-002 | `BC-025` | 2 | `BC-023`, `BC-019` | no | — |
+| agenda-002 | `BC-025` | 2 | `BC-023`, `BC-019` | yes | — |
 | agenda-002 | `BC-026` | 3 | `BC-018` | no | — |
 | agenda-002 | `BC-021` | 3 | `BC-018`, `BC-019` | no | — |
 | agenda-002 | `BC-022` | 4 | `BC-021` | no | — |
@@ -66,7 +67,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda | status | ready | tentative | blocked | stopped | complete | total |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | agenda-001 | active | 1 |  | 4 |  | 10 | 15 |
-| agenda-002 | active | 2 |  | 7 |  | 2 | 11 |
+| agenda-002 | active | 1 |  | 7 |  | 3 | 11 |
 | agenda-003 | active |  |  | 2 | 1 | 5 | 8 |
 | agenda-004 | active |  |  |  |  | 7 | 7 |
 | agenda-005 | active | 1 |  | 1 | 1 | 7 | 10 |

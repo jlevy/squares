@@ -139,7 +139,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11, 17, 18, 19, 28, 29]
-    state: ready
+    state: complete
     priority: 2
     question: >-
       Are standing records at n <= 30 already chunk-structured, and if not, which
@@ -158,6 +158,38 @@ agenda:
     next_evidence: >-
       independent review of CG-010's structural full-cell control and a BC-016 or BC-017
       readiness decision; numerical row compilation remains unbuilt
+
+      Answered, and the last clause of the exit is the part that was missing. The contract
+      already carried sliding degrees of freedom, a complexity cost and canonicalization;
+      it had never carried per-record certificates. It does now, at version
+      contact-assembly-v2-draft: 17 of the 30 records at n <= 30 have every component
+      expressible as a rigid-lattice primitive and carry the complexity tuple, and 13 carry
+      a typed limitation naming exactly which components fail and what X-008 measured about
+      them.
+
+      The missing grammar move is named rather than guessed: a primitive for axis-aligned
+      polyominoes that are not a bar, rectangle or corner L. X-008 is what makes that
+      statement safe -- every unexpressed component in the whole corpus is untilted, so the
+      gap is not about tilted assemblies.
+
+      Two contract fields the retained corpus cannot fill are listed rather than inferred.
+      The census stores internal edges as square pairs with a residual and records no normal
+      axis or sign, and a normal reconstructed from lattice deltas would be an assumption
+      about the fit presented as a measurement. The full-cell square-by-wall inventory
+      belongs to the full-cell control, not here.
+
+      internal_slide_dof is zero throughout by the rigid-lattice primitive's own semantics
+      and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact scaffold.
+      The detector finds no contact scaffolds in this corpus, so reporting a rank would be
+      pricing a primitive that is not there. That was the block's declared kill condition
+      and it did not fire, because the contract answers the question itself.
+
+      No H-044 verdict is emitted. A record without a certificate is one the current
+      detector did not express, which the census's known_gap says is not a refutation.
+
+      Recorded in atlas/known-best/contact-assembly-grammar.yaml,
+      devtools/certify_assembly_coverage.py, tests/test_assembly_coverage.py, and
+      campaign/series/series-000-smoke-and-calibration/results/bc-019-assembly-coverage.json.
     parallel_group: corpus-measurement
     note: >-
       Independent of the enumerator: it reads geometry rather than searching. The first
@@ -170,6 +202,12 @@ agenda:
       retains one literal target-free structural label, joint orbit, derived price, and
       typed mutations; numerical realization remains unbuilt. The 1-100 corpus was
       inspected during instrument repair and is calibration-only.
+    artifacts:
+    - atlas/known-best/contact-assembly-grammar.yaml
+    - atlas/known-best/contact-assembly-grammar.schema.yaml
+    - devtools/certify_assembly_coverage.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-019-assembly-coverage.json
+    - tests/test_assembly_coverage.py
   - id: BC-023
     purpose: tool_validation
     owner_focus: correctness

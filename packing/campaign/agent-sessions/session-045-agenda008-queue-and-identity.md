@@ -570,7 +570,7 @@ session:
       move is missing? BC-024 just supplied the input this needs: the residue is
       axis-aligned polyominoes seated on exactly two or exactly four walls, so the missing
       move is a question with a shape rather than an open one.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       X-008 characterized the residue, which is what BC-019's grammar question was waiting
@@ -592,12 +592,81 @@ session:
     fallback: >-
       A typed statement of which contract fields the retained evidence cannot fill, which
       is what the readiness decision BC-019's next_evidence names would have to weigh.
+    outcome: >-
+      The contract is at contact-assembly-v2-draft and carries the clause it never had:
+      17 certificates and 13 typed limitations over n <= 30, with the missing grammar move
+      named rather than guessed. Both branches of the exit are met, and the fallback turned
+      out to be part of the answer rather than an alternative to it -- two contract fields
+      the corpus cannot fill are listed as such.
+    evidence:
+    - >-
+      'The split is clean: 17 records have every component expressible as a rigid-lattice
+      primitive and carry the complexity tuple; 13 carry a limitation naming exactly which
+      components fail, with the shape, size, tilt and wall seating X-008 measured.'
+    - >-
+      'The missing move is a primitive for axis-aligned polyominoes that are not a bar,
+      rectangle or corner L. X-008 is what makes that safe to say: every unexpressed
+      component in the corpus is untilted, so the gap is not about tilted assemblies.'
+    - >-
+      'The kill condition did not fire, and the reason is worth keeping. internal_slide_dof
+      is zero by the rigid-lattice primitive''s own semantics, not by a rank: the contract''s
+      D = 2m - rank(A_normal) - 2 prices a contact scaffold, and the detector finds none
+      here. Reporting a rank would price a primitive the corpus does not contain.'
+    - >-
+      'Two fields are declared unfillable rather than inferred. The census stores internal
+      edges as square pairs with a residual and no normal axis; a normal reconstructed from
+      lattice deltas would be an assumption about the fit presented as a measurement.'
+    - >-
+      'The contract names the record and the replay, so contract and corpus cannot drift
+      into disagreeing without one of them failing. Seven tests, and a records-tier gate
+      step.'
+    stop_reason: >-
+      Both exit branches met inside the budget, and the remaining contract work needs the
+      minimal-partition solver, which is a different commitment.
+    next_action: >-
+      Then BC-017 on `think-u97a`, or an integration checkpoint if the clock is short.
+      BC-010 and BC-029 stay out of scope.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    commitment: BC-017
+    bead: think-u97a
+    objective: >-
+      Can a stratum be priced in counted LP solves end to end, so enumeration results are
+      comparable to each other and to the annealer without reference to wall time? The
+      commitment's own next_evidence orders this: a target-free tagged execution-plan
+      receipt on the source-free n = 3 control first, with real LP attempts and sqsearch
+      pair tests both zero, before any numerical semantics are frozen.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      BC-019 is closed and BC-017 is the remaining priority-1 cell in the live queue. It is
+      also the one whose first slice is bounded by construction -- a structural receipt
+      carrying no coordinates, side, geometry, feasibility or optimality claim.
+    budget_minutes: 45
+    started_at: '2026-08-30T10:25:00Z'
+    deadline_at: '2026-08-30T11:10:00Z'
+    expected_output: >-
+      A retained target-free execution-plan receipt with derived work accounting, every
+      wall and pair role visible, and semantic-swap, forged-count and exact-replay controls
+      that fire. Real LP attempts and pair tests are zero and are recorded as zero.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --edit
+    kill_condition: >-
+      Stop if the receipt cannot be produced without freezing numerical full-cell semantics.
+      D-126 and the commitment's own note say solve_cell collapses seated-wall and
+      contact/nonedge roles and contact_realization refuses walls; a receipt that papered
+      over that would be the wrong instrument.
+    fallback: >-
+      A typed statement of which accounting roles the current callables cannot separate,
+      which is the readiness decision BC-018 and think-u97a both wait on.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Then BC-017 on `think-u97a`, or an integration checkpoint if the clock is short.
-      BC-010 and BC-029 stay out of scope.
+      Then an integration checkpoint and the OR-7 pass. BC-010 and BC-029 stay out of
+      scope: both are gated on independent acceptance of exp-045's preregistered criterion.
   primary_bead: think-s424
   status: in_progress
   budget:
@@ -836,9 +905,9 @@ session:
   checks: []
   stop_reason: null
   next_action: >-
-    Take BC-019 on `think-6mcd`: write the versioned contact-assembly contract against the
-    shapes X-008 measured -- axis-aligned polyominoes seated on two or four walls -- with
-    per-record certificates or typed limitations for n <= 30 and no H-044 verdict.
+    Take BC-017 on `think-u97a`: retain a target-free tagged execution-plan receipt on the
+    source-free n = 3 full-cell control, with every wall and pair role visible and with
+    semantic-swap, forged-count and exact-replay controls, before any real LP run.
 ---
 # Session-045 — Agenda-008
 
