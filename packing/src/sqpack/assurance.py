@@ -222,6 +222,63 @@ def _check_bound_evidence(
     return errors
 
 
+def _check_rigidity_claim(
+    rigidity: Mapping[str, object],
+    cited: Sequence[Mapping[str, object]],
+) -> list[str]:
+    """Hold a case's rigidity block to the contract its evidence records are held to.
+
+    `check_evidence_semantics` enforces the assurance-method pairing on `evidence.yaml`,
+    and until this existed the case-level `rigidity` block was the one place a first-party
+    claim escaped it. The schema requires only `[property, assurance, scope, evidence]`,
+    leaves `method`, `certificate` and `replay` optional and nullable, and couples none of
+    them -- so a block could read `verified` / `exact-algebraic` with nothing behind it, or
+    outrank the evidence it rests on, and validation passed.
+
+    The last of those is the one that matters. `n = 65`'s block cites evidence that is
+    `numerically-checked` at `tolerance: 1e-8`; relabelling the block `verified` was
+    accepted, which is a formal claim resting on a numerical one in the flattering
+    direction. See `D-396`.
+
+    Certificate and replay are satisfied by the block or by a cited verified record,
+    because both conventions are in use: `n = 5`, `11` and `40` name the artifacts on the
+    block, while the ten perfect squares leave them null and delegate to
+    `E-perfect-square-tiling-rigid`, which carries them. Neither is wrong; what was wrong
+    was that nothing required either.
+    """
+    errors: list[str] = []
+    assurance = rigidity.get("assurance")
+    method = rigidity.get("method")
+
+    if method in NUMERICAL_METHODS and assurance != "numerically-checked":
+        errors.append("numerical method cannot support verified or reported assurance")
+    elif method in FORMAL_METHODS and assurance != "verified":
+        errors.append("formal method requires verified assurance")
+
+    if assurance == "verified":
+        if method not in FORMAL_METHODS:
+            errors.append("verified requires a formal method")
+        # A verified claim must rest on verified evidence. Without this the block's own
+        # label is the whole of the argument, which is what the contract exists to refuse.
+        if not any(record.get("assurance") == "verified" for record in cited):
+            errors.append("verified rigidity requires at least one verified evidence record")
+        if method in MACHINE_FORMAL_METHODS:
+            backed = rigidity.get("certificate") and rigidity.get("replay")
+            delegated = any(
+                record.get("assurance") == "verified"
+                and record.get("certificate")
+                and record.get("replay")
+                for record in cited
+            )
+            if not backed and not delegated:
+                errors.append(
+                    f"{method} requires certificate and replay, "
+                    "on the block or on a cited verified record"
+                )
+
+    return errors
+
+
 def check_case_semantics(
     case: Mapping[str, object],
     evidence_by_id: Mapping[str, Mapping[str, object]],
@@ -260,12 +317,18 @@ def check_case_semantics(
     # an id that does not exist, or one whose scope does not reach this n, and pass.
     rigidity = case.get("rigidity")
     if isinstance(rigidity, Mapping):
+        cited: list[Mapping[str, object]] = []
         for ref in _string_list(rigidity.get("evidence")):
             evidence = evidence_by_id.get(ref)
             if evidence is None:
                 errors.append(f"n={n_value} rigidity: unknown evidence {ref}")
             elif not _scope_contains(evidence.get("scope"), n_value):
                 errors.append(f"n={n_value} rigidity: evidence {ref} does not cover this case")
+            else:
+                cited.append(evidence)
+        errors.extend(
+            f"n={n_value} rigidity: {error}" for error in _check_rigidity_claim(rigidity, cited)
+        )
 
     upper = _bound_identity(case.get("verified_upper_bound"))
     lower = _bound_identity(case.get("verified_lower_bound"))

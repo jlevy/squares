@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 395
+count: 397
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -11306,3 +11306,134 @@ defects:
     mandate alongside its wall target, so a run recorded as complete against an open-ended
     mandate is a refusable state rather than a judgement call. That is not built.
   recorded_in: packing/campaign/agent-sessions/README.md
+- id: D-396
+  title: A case's rigidity block could claim verified over numerical evidence
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: 'since the rigidity block gained assurance and method fields'
+  severity: medium
+  status: fixed
+  what: >-
+    `check_evidence_semantics` enforces this project's central contract -- verified means
+    formal, a numerical method cannot support verified assurance, and a machine-formal
+    method requires a certificate and a replay -- on every record in `evidence.yaml`.
+    The case-level `rigidity` block in `frontier/n-*.md` was the one first-party claim
+    that escaped it.
+
+    `check_case_semantics` resolved the block's evidence ids and checked their scope
+    reached this `n`, and stopped there. The schema requires only
+    `[property, assurance, scope, evidence]`, leaves `method`, `certificate` and `replay`
+    optional and nullable, and couples none of them. So the block's own assurance-method
+    pair was validated by nothing but two independent enums.
+
+    Four claims were accepted against the retained `n = 65` case, each verified by
+    mutating only the rigidity block: `verified` with a numerical method; `verified` with
+    no method at all; `verified` / `exact-algebraic` with null certificate and null
+    replay; and the one that matters, `verified` / `exact-algebraic` resting on evidence
+    that is `numerically-checked` at `tolerance: 1e-8`.
+  consequence: >-
+    Nothing false is on the record -- all hundred cases satisfy the contract as they
+    stand, and the ten perfect-square blocks that leave `certificate` and `replay` null
+    delegate to `E-perfect-square-tiling-rigid`, which carries both and whose argument is
+    elementary and complete. The defect is the missing guard, not a wrong claim.
+
+    What makes it worth a record rather than a quiet fix is which direction it was open
+    in. Every claim the gap admitted overstates; none understates. And it was found while
+    asking whether `n = 65` and `n = 89` could be promoted from `numerical-multiprecision`
+    to `exact-algebraic` -- which is to say, the check that should have adjudicated that
+    promotion was the check that was not running. Editing the frontmatter would have been
+    accepted, and the resulting record would have read `verified` while resting on a
+    tolerance.
+  fix: >-
+    `_check_rigidity_claim` in `sqpack/assurance.py` holds the block to the same pairing
+    rules as an evidence record, and adds the one the block needs and a record does not:
+    a `verified` block requires at least one cited evidence record that is itself
+    `verified` and covers this `n`. A claim may no longer outrank what it rests on.
+
+    Certificate and replay are satisfied by the block *or* by a cited verified record,
+    because both conventions are in use and both are legitimate -- `n = 5`, `11` and `40`
+    name the artifacts on the block; the ten perfect squares delegate. The guard requires
+    one of the two rather than picking a winner, which is the smaller change and the one
+    that adds no retroactive debt.
+  regression: >-
+    `tests/test_frontier_rigidity_claim_contract.py`, seven cases. Six assert the guard
+    refuses each accepted claim above; one asserts all hundred retained cases still pass,
+    so the guard is shown to add no debt rather than asserted to. The seventh closes the
+    delegation loophole directly: it strips `certificate` and `replay` from
+    `E-perfect-square-tiling-rigid` and requires that `n = 9` then fails, so delegation
+    means the artifacts exist somewhere rather than that nobody looks.
+  recorded_in: packing/tests/test_frontier_rigidity_claim_contract.py
+- id: D-397
+  title: Two more sub-agents reported valid Python 3.14 as a syntax error
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: 'two reports in one session, both caught before anything was acted on'
+  severity: medium
+  status: fixed
+  recurrence_of: D-358
+  what: >-
+    A sub-agent investigating the assurance contract opened its report with a warning
+    marked read-this-first: that `sqpack/assurance.py:163` is committed with Python-2-only
+    syntax (`except InvalidOperation, KeyError:`), that `ast.parse` refuses it, that the
+    contract's only checker therefore cannot run, and that this is masked by a stale
+    `.pyc` whose recorded source mtime and size it quoted to four significant figures.
+
+    All of it is false, and it is false for the reason `OR-2` already names three times:
+    [PEP 758](https://peps.python.org/pep-0758/) makes unparenthesised multiple exception
+    types valid, and this project runs Python 3.14. The system `python3` on `PATH` is
+    older and refuses the line; the project interpreter at `.venv/bin/python3` (3.14.7)
+    parses it. Deleting every `__pycache__` in the tree and importing fresh from source
+    works, which disposes of the stale-bytecode account as well.
+
+    A second sub-agent, running concurrently on a different question, opened its report
+    with the same claim about the same file -- reached independently and confirmed against
+    `/usr/bin/python3.12`, which it named. It listed the broken import as obstacle one of
+    sixteen and concluded that "the entire assurance-contract enforcement layer is
+    currently dead code".
+
+    So this session produced occurrences four and five. Two agents, different tasks,
+    different reasoning paths, the same wrong interpreter, the same false headline. The
+    error is not a lapse by one agent; it is what the environment produces by default,
+    because `python3` on `PATH` resolves to something older than the project's own.
+  consequence: >-
+    None, because the operating rules said to check it. `OR-2` records this exact error at
+    `session-044` and twice more at `session-045`, so both reports were verified against
+    the project interpreter before anything was acted on.
+
+    The cost had it been believed is the thing to weigh: the recommended action was to
+    treat a working contract checker as non-functioning, which would have meant "fixing"
+    correct code and disbelieving every guarantee downstream of it. That is the
+    conservative direction -- it refuses something sound rather than accepting something
+    false -- but a false alarm delivered with quoted mtimes and a read-this-first banner
+    is more expensive than an ordinary one, because the specificity is what earns the
+    belief.
+  fix: >-
+    The project's Python version and this precise trap are now stated in `AGENTS.md`,
+    under Build & Test. That file is the only one guaranteed to be in context before an
+    agent's first tool call, which is the property this needs: three prior recurrences
+    were all documented in `operating-rules.md`, and a sub-agent that never reads it
+    makes the mistake a fourth time.
+
+    The rule stated there is mechanical rather than a caution: run Python through
+    `uv run --frozen` or `.venv/bin/python3`, never the `python3` on `PATH`, because the
+    two disagree about what parses. A caution would have to be remembered; an instruction
+    about which command to type does not.
+
+    Five occurrences is also enough to say what the tell is. Every one of them arrived as
+    a confident headline finding rather than a hedge, and the two here came with
+    corroborating detail -- a named interpreter version, quoted `.pyc` mtimes -- that made
+    them read as more thoroughly checked, not less. Specificity is what earned the belief,
+    and it was specificity about the wrong interpreter.
+  regression: >-
+    None automated, and none is possible from inside this repository -- the failure
+    happens in a sub-agent's reasoning about a file, not in the file. What changed is
+    where the fact lives: `operating-rules.md` is read when an agent chooses to read it,
+    `AGENTS.md` is in context before the first tool call. Whether that is enough will be
+    visible in whether a fifth recurrence happens.
+  recorded_in: AGENTS.md
