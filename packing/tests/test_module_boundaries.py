@@ -245,7 +245,14 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     required_job = _mapping(jobs["packing-required"])
     assert required_job["needs"] == "validate"
-    assert required_job["if"] == ("always() && github.event_name == 'pull_request'")
+    # `!cancelled()`, not `always()`, and the difference is D-380. With `always()` a run
+    # superseded by the next push -- routine, since the workflow sets
+    # `cancel-in-progress: true` and OR-3 says to push and keep working -- reached this job
+    # with `needs.validate.result == 'cancelled'` and reported the required check as a hard
+    # failure. A genuine validate failure is not `cancelled()`, so the job still runs and
+    # still fails; a cancelled run now reports nothing and the check stays pending, which
+    # is the safe direction.
+    assert required_job["if"] == ("!cancelled() && github.event_name == 'pull_request'")
     assert "continue-on-error" not in required_job
     required_job_steps = required_job["steps"]
     assert isinstance(required_job_steps, list)
