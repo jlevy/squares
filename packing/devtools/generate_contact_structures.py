@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Freeze the measured contact structures at `n = 11` and `n = 29`.
+"""Freeze the measured contact structures at `n = 11`, `n = 28` and `n = 29`.
 
 `n = 11` is the calibration and `n = 29` is the target, and they are not alternatives.
 Trump's packing is exact, so its contacts are *certified* by field arithmetic and the
@@ -31,12 +31,19 @@ from sqpack.promote.contacts import (
     require_decided,
 )
 from sqpack.verify import exact_sign, verify_packing
+from sqpack.witness import load_witness, materialize_witness
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "atlas/known-best/contact-structures.json"
 SCHEMA = ROOT / "atlas/known-best/contact-structure.schema.yaml"
 PROVENANCE = ROOT / "resources/papers/kingbird-square-29-provenance.svg"
+WITNESSES = ROOT / "witnesses/known-best"
+WITNESS_SCHEMA = ROOT / "witnesses/witness.schema.yaml"
+
+#: `n = 28` is read at the retained witness's own precision rather than from a provenance
+#: artifact, because it has none. That is the whole question this entry answers.
+N028_DIGITS = 200
 
 KINGBIRD_DIGITS = 160
 KINGBIRD_FLOOR = "1e-80"
@@ -114,6 +121,71 @@ def trump11_entry() -> dict:
                 f"{len(structure.angle_classes)} orientation classes splitting "
                 f"{'6 axis-aligned + 5 tilted' if axis_like else 'unexpectedly'}, which is "
                 "the published construction"
+            ),
+        },
+    )
+
+
+def n028_entry() -> dict:
+    """Whether `n = 28`'s retained witness resolves its own contacts.
+
+    `BC-049`'s typed refusal says the first step for `n = 28` is a higher-precision
+    source and it has none -- no case module, no retained contact structure, no
+    provenance artifact of the kind `n = 29`'s extraction was run against. All three
+    clauses are true, and the inference from them was never tested: the source is not the
+    only route to precision. `n = 11`'s degree-eight polynomial was recovered from four
+    hundred *manufactured* digits, not from its 32-digit witness, and manufacturing them
+    needs the contact structure rather than a better source.
+
+    So the question is whether the retained decimals resolve the contacts, and this
+    measures it. They do, and by a wide margin, which is what `separation_decades`
+    reports and what the refusal could not have known without running.
+
+    The pose does not verify under this sign: a `numerical-multiprecision` record at
+    tolerance `1e-8` shows sub-tolerance overlaps when a stricter arithmetic reads it, and
+    three pairs do. That is expected and is not a contradiction of the extraction -- the
+    extractor classifies those same near-zero relations as contacts, which is the right
+    reading of them, and refining the pose against this structure is precisely how the
+    overlaps would be removed. The failure is recorded rather than smoothed over, because
+    a structure extracted from a pose that does not verify is a weaker object than one
+    extracted from a pose that does, and a reader has to be able to see which this is.
+    """
+    mp.mp.dps = N028_DIGITS
+    witness = load_witness(WITNESSES / "n-028.yaml", fallback_schema=WITNESS_SCHEMA)
+    squares, side = materialize_witness(witness, digits=N028_DIGITS)
+    report = verify_packing(squares, side, sign=kingbird_sign)
+    structure = require_decided(
+        extract_contacts(
+            squares,
+            side,
+            sign=kingbird_sign,
+            floor=KINGBIRD_FLOOR,
+            ambiguity_ratio=AMBIGUITY_RATIO,
+        )
+    )
+    overlaps = [detail for kind, detail in report.failures if kind == "overlap"]
+    return _entry(
+        structure,
+        source=(
+            f"witnesses/known-best/n-028.yaml at {N028_DIGITS} decimal digits "
+            "(the retained record; no provenance artifact exists)"
+        ),
+        arithmetic="numerical-multiprecision",
+        known_answer={
+            "checked_against": "sqpack.verify.verify_packing over the same materialisation",
+            "agrees": (
+                len(structure.pair_contacts) == report.touching_pairs
+                and len(structure.wall_contacts) == report.container_contacts
+            ),
+            "detail": (
+                f"{len(structure.pair_contacts)} touching pairs and "
+                f"{len(structure.wall_contacts)} corner-on-wall incidences against the "
+                f"verifier's {report.touching_pairs} and {report.container_contacts}, with "
+                f"no incidence left undecided at floor {KINGBIRD_FLOOR} and "
+                f"{structure.separation_decades} decades between the largest contact and "
+                f"the smallest strict separation. The pose itself does not verify: "
+                f"{len(overlaps)} pairs overlap below the witness's own 1e-8 tolerance, "
+                "which is what refining against this structure would remove."
             ),
         },
     )
@@ -199,7 +271,7 @@ def expected_document() -> dict:
         },
         "generated_by": "python -m devtools.generate_contact_structures",
         "evidence_role": EVIDENCE_ROLE,
-        "structures": [trump11_entry(), kingbird29_entry()],
+        "structures": [trump11_entry(), n028_entry(), kingbird29_entry()],
         "controls": {"perturbed_margin_refused": perturbation_control()},
     }
 
