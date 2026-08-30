@@ -1,35 +1,32 @@
 #!/usr/bin/env python3
-"""Bracket the first-order rigidity of Goebel's n=40 packing, and refuse to decide it.
+"""Goebel's n=40 packing is infinitesimally flexible, and the flex hides behind D-391.
 
 `BC-049` asks whether the packings the source catalogue calls rigid are rigid on evidence
 of our own. `n = 40` became askable when `cases/gobel40` produced an exact pose, and the
-answer is that this repository cannot yet give one -- for a reason that is measured here
-rather than asserted.
+answer is **no, not at first order** -- with an exact witness.
 
-**The obstruction is the contact model, not the field.** `D-388` predicted that `n = 40`
-would need a Farkas search whose weights live in `Q(sqrt 2)`; that search now exists and
-reproduces `n = 5` exactly. It was not enough. Two further defects turned up the first time
-it ran, both absent at `n = 5` and both flattering: `D-390`, an incidence read as a contact,
-and `D-391`, a tangent cone that is a union of half-spaces being intersected.
+**The motion.** All sixteen squares of the tilted central block turn, each about its own
+centre at unit angular velocity, with translations that keep every one of the 248
+single-axis contacts at exactly zero gap rate. The twenty-four frame squares do not move.
+The witness is a vector in `Q(sqrt 2)^120`, checked in the field.
 
-**What can be said is a bracket.** With `D-390`'s spurious rows removed, two polyhedral
-models sit either side of the truth, and the gap between them is exactly the 42 pairs that
-touch at a corner:
+**Why nobody had seen it.** The motion is invisible to every instrument that came before,
+and for a different reason in each case. The translation-escape screen decides single-square
+translation, and this is sixteen squares turning at once. An assessor that intersects the
+contact half-spaces -- which is what `D-391` is -- reports this pose *rigid*: the witness
+violates exactly one axis of each of the 42 pairs that touch at a corner, and intersecting
+both axes forbids it. That is not a hypothetical cost for that defect. It is the measured
+one: with the disjunctions intersected, all 120 coordinates certify as pinned.
 
-- **Intersect** the disjunctions and the cone is contained in every branch, so any nonzero
-  direction it admits is a genuine infinitesimal motion. It admits none: all 120
-  coordinates are pinned by certificates verified in the field. No flex can be exhibited
-  this cheaply.
-- **Drop** them and the cone contains every branch, so pinning every coordinate would prove
-  rigidity outright. It pins 56 of 120. Rigidity is not proved.
+**What the witness is not.** It is not a motion. Along it every contact gap curves shut at
+order `t^2` -- the worst pair separation is `-t^2/2` -- so `n = 40` may well be rigid in the
+sense the catalogue means, and this record does not touch that question. The frontier's
+`rigidity` block stays `undetermined`. What is settled is that first-order rigidity is not
+the reason, and that a first-order argument for `n = 40` cannot succeed.
 
-So `n = 40` is first-order **undecided**, with the two sides measured and the distance
-between them named. Deciding it is `2^42` linear programs by the route
-`cases/trump11/tangent_cones.py` takes at `n = 11`, where the same enumeration is `2^7`.
-
-Nothing here promotes a frontier record. `n = 40`'s `rigidity` block stays `undetermined`
-on the translation-escape screen's evidence, which is a different and weaker instrument;
-this adds a first-party bracket, not a property.
+The parallel with `n = 5` is exact in shape and larger in scale: there, one square's
+rotation is free at first order and refused at second by a verified self-stress. Here
+sixteen squares turn together, and the second-order question is open.
 
 Usage:
     uv run --frozen python -m devtools.assess_n40_rigidity
@@ -39,6 +36,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import itertools
 import json
 import pathlib
 import sys
@@ -48,14 +46,18 @@ from strif import atomic_output_file
 
 from cases.gobel40.packing import build
 from devtools.assess_n5_rigidity import (
+    DOF,
     Contact,
+    FieldElement,
     Pose,
     active_contacts,
     certify,
     constraint_rows,
     contact_axes,
     disjunctive_pairs,
+    gap_rate,
     incident_contacts,
+    nullspace,
     unconstrained,
     variable_names,
 )
@@ -64,46 +66,186 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 RESULTS = ROOT / "campaign" / "series" / "series-000-smoke-and-calibration" / "results"
 OUT = RESULTS / "bc-049-n40-rigidity-bracket.json"
 
+SPAN = (-1, 0, 1)
+"""Coefficients swept over the null basis when looking for an extending direction.
+
+Small on purpose. A witness is wanted, not the whole cone, and a short integer combination
+is one a reader can check. If a future pose needs more than this the search should widen
+deliberately rather than by accident, so the sweep is named.
+"""
+
 
 def load_pose() -> Pose:
     squares, side, field = build()
     return Pose(field, side, tuple(tuple(square) for square in squares))
 
 
-def relaxed_contacts(pose: Pose, contacts: list[Contact]) -> list[Contact]:
-    """Wall contacts, and only the pairs held apart by a single axis.
+def axis_groups(
+    pose: Pose, contacts: list[Contact]
+) -> dict[frozenset[int], list[list[Contact]]]:
+    """For each disjunctive pair, its contacts grouped by which axis they realize.
 
-    Every branch of the disjunction is a superset of this row set, so its cone contains
-    every branch's cone. A coordinate pinned here is pinned however the disjunctions
-    resolve -- which is what makes a verdict of rigidity from this model sound, and what
-    makes its silence uninformative.
+    A pair touching at a corner is held apart by two axes and needs only one of them, so
+    these groups are the alternatives a branch chooses between. Grouping is by normal
+    direction up to sign, because a single axis is generally realized by an edge of each
+    square and both give the same separating direction.
     """
-    single = {pair for pair, axes in contact_axes(pose, contacts).items() if len(axes) == 1}
+    disjunctive = set(disjunctive_pairs(pose, contacts))
+    grouped: dict[frozenset[int], dict[tuple[str, str], list[Contact]]] = {}
+    for contact in contacts:
+        if contact.kind != "pair":
+            continue
+        assert contact.host is not None and contact.edge is not None
+        pair = frozenset((contact.moving, contact.host))
+        if pair not in disjunctive:
+            continue
+        nx, ny = pose.normal(contact.host, contact.edge)
+        if nx.sign() < 0 or (nx.sign() == 0 and ny.sign() < 0):
+            nx, ny = -nx, -ny
+        key = (str(nx.coeffs), str(ny.coeffs))
+        grouped.setdefault(pair, {}).setdefault(key, []).append(contact)
+    return {
+        pair: [members for _, members in sorted(byaxis.items())]
+        for pair, byaxis in grouped.items()
+    }
+
+
+def single_axis_contacts(pose: Pose, contacts: list[Contact]) -> list[Contact]:
+    """Wall contacts and the pairs held apart by one axis: the rows every branch carries."""
+    disjunctive = set(disjunctive_pairs(pose, contacts))
     return [
         contact
         for contact in contacts
-        if contact.kind == "wall" or frozenset((contact.moving, contact.host)) in single  # type: ignore[arg-type]
+        if contact.kind == "wall"
+        or frozenset((contact.moving, contact.host)) not in disjunctive  # type: ignore[arg-type]
     ]
 
 
-def cone(pose: Pose, rows: list[list[Any]]) -> dict[str, Any]:
-    """Which coordinates this row set pins, with every certificate verified in the field."""
+def admissible_axis(
+    pose: Pose, group: list[list[Contact]], motion: list[FieldElement]
+) -> int | None:
+    """Which of this pair's axes still separates along the motion, if either does.
+
+    All of a chosen axis's rows must hold: the axis separates only while every currently
+    touching corner stays on its outer side, and a pair contributes one row per such
+    corner.
+    """
+    for index, members in enumerate(group):
+        if all(gap_rate(row, motion).sign() >= 0 for row in constraint_rows(pose, members)):
+            return index
+    return None
+
+
+def find_witness(
+    pose: Pose, contacts: list[Contact]
+) -> tuple[list[FieldElement], dict[frozenset[int], int]] | None:
+    """A nonzero infinitesimal motion, with the branch that admits it -- or `None`.
+
+    Candidates come from the null space of the single-axis rows, so each satisfies those
+    with equality and needs no rounding to stay in the cone. A candidate is a genuine
+    motion exactly when every disjunctive pair still has an axis that separates along it:
+    choosing those axes names a complete branch, and a branch's cone sits inside the
+    packing's tangent cone.
+    """
+    rows = constraint_rows(pose, single_axis_contacts(pose, contacts))
+    basis = nullspace(pose, rows)
+    groups = axis_groups(pose, contacts)
+    zero = pose.field.rational(0)
+    for coefficients in itertools.product(SPAN, repeat=len(basis)):
+        if not any(coefficients):
+            continue
+        motion = [zero] * len(rows[0])
+        for weight, vector in zip(coefficients, basis, strict=True):
+            if weight:
+                scale = pose.field.rational(weight)
+                motion = [a + scale * b for a, b in zip(motion, vector, strict=True)]
+        selection: dict[frozenset[int], int] = {}
+        for pair, group in groups.items():
+            index = admissible_axis(pose, group, motion)
+            if index is None:
+                break
+            selection[pair] = index
+        else:
+            return motion, selection
+    return None
+
+
+def describe(pose: Pose, motion: list[FieldElement]) -> dict[str, Any]:
+    """The witness in a form a reader can check against the picture."""
     names = variable_names(pose.count)
-    pinned: list[str] = []
+    moving = sorted({index // DOF for index, v in enumerate(motion) if v.sign() != 0})
+    turning = sorted(
+        {index // DOF for index, v in enumerate(motion) if v.sign() != 0 and index % DOF == 2}
+    )
+    return {
+        "squares_that_move": moving,
+        "squares_that_turn": turning,
+        "frame_squares_move": [one for one in moving if one < 24],
+        "components": {
+            names[index]: f"{value.coeffs[0]} + {value.coeffs[1]} sqrt2"
+            for index, value in enumerate(motion)
+            if value.sign() != 0
+        },
+    }
+
+
+def verify_witness(
+    pose: Pose,
+    contacts: list[Contact],
+    motion: list[FieldElement],
+    selection: dict[frozenset[int], int],
+) -> dict[str, Any]:
+    """Re-decide every claim about the witness in the field, from the pose."""
+    single = constraint_rows(pose, single_axis_contacts(pose, contacts))
+    groups = axis_groups(pose, contacts)
+    intersection = constraint_rows(pose, contacts)
+    return {
+        "nonzero": any(value.sign() != 0 for value in motion),
+        "single_axis_rows": len(single),
+        "exactly_zero_on_every_single_axis_row": all(
+            gap_rate(row, motion).sign() == 0 for row in single
+        ),
+        "disjunctive_pairs_with_an_admissible_axis": sum(
+            1
+            for pair, group in groups.items()
+            if all(
+                gap_rate(row, motion).sign() >= 0
+                for row in constraint_rows(pose, group[selection[pair]])
+            )
+        ),
+        "disjunctive_pairs": len(groups),
+        "rows_violated_if_the_disjunctions_are_intersected": sum(
+            1 for row in intersection if gap_rate(row, motion).sign() < 0
+        ),
+        "why_that_last_number_matters": (
+            "it is exactly the count of pairs whose second axis the motion gives up, and "
+            "an assessor that intersects instead of choosing reads every one of them as a "
+            "violation and the pose as rigid (D-391)"
+        ),
+    }
+
+
+def intersection_cone(pose: Pose, contacts: list[Contact]) -> dict[str, Any]:
+    """What an assessor that intersects the disjunctions would report: the wrong answer."""
+    rows = constraint_rows(pose, contacts)
+    names = variable_names(pose.count)
+    pinned = 0
     uncertified: list[str] = []
-    free: list[str] = []
     for index, name in enumerate(names):
         if unconstrained(rows, index):
-            free.append(name)
-        elif all(certify(pose, rows, index, sign) is not None for sign in (1, -1)):
-            pinned.append(name)
+            continue
+        if all(certify(pose, rows, index, sign) is not None for sign in (1, -1)):
+            pinned += 1
         else:
             uncertified.append(name)
     return {
         "rows": len(rows),
-        "pinned": len(pinned),
+        "pinned": pinned,
         "uncertified": uncertified,
-        "free": free,
+        "verdict_it_would_report": (
+            "infinitesimally rigid, which is false -- the witness above is a motion this "
+            "model forbids and the geometry allows"
+        ),
     }
 
 
@@ -113,21 +255,25 @@ def assess() -> dict[str, Any]:
     contacts = active_contacts(pose)
     axes = contact_axes(pose, contacts)
     disjunctive = disjunctive_pairs(pose, contacts)
-    relaxed = relaxed_contacts(pose, contacts)
+    single = single_axis_contacts(pose, contacts)
+    rows = constraint_rows(pose, single)
+    basis = nullspace(pose, rows)
 
-    upper = cone(pose, constraint_rows(pose, relaxed))
-    lower = cone(pose, constraint_rows(pose, contacts))
+    found = find_witness(pose, contacts)
+    assert found is not None, "the witness is the finding; its absence is a regression"
+    motion, selection = found
 
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "subject": {
             "n": pose.count,
             "commitment": "BC-049",
             "pose": "cases.gobel40.packing.build",
             "side": "4 + 2 sqrt(2), Goebel's centred diagonal block at a = 3, b = 4",
             "promotes_nothing": (
-                "n = 40's rigidity block stays undetermined on the translation-escape "
-                "screen's evidence; this is a first-party bracket, not a property"
+                "n = 40's rigidity block stays undetermined. An infinitesimal flex is not "
+                "a motion: along this one every gap curves shut at order t^2, so local "
+                "rigidity is untouched and not-rigid would be the wrong promotion"
             ),
         },
         "contact_model": {
@@ -147,60 +293,67 @@ def assess() -> dict[str, Any]:
                 "half-spaces rather than their intersection (D-391)"
             ),
         },
-        "bracket": {
-            "upper_model": {
-                "rows": "walls, and the pairs held apart by a single axis",
-                "contains": "every branch of the disjunction",
-                "so_pinning_everything_would_prove": "infinitesimal rigidity, outright",
-                **upper,
-            },
-            "lower_model": {
-                "rows": "walls, and every separating pair row including both axes",
-                "contained_in": "every branch of the disjunction",
-                "so_any_nonzero_direction_would_prove": "an infinitesimal flex, outright",
-                **lower,
-            },
+        "system": {
+            "variables": len(rows[0]),
+            "single_axis_rows": len(rows),
+            "rank": len(rows[0]) - len(basis),
+            "null_dimension": len(basis),
+            "meaning": (
+                "the rows every branch carries; their null space is inside every branch's "
+                "cone, so a null vector that some branch admits is an infinitesimal motion"
+            ),
         },
+        "witness": {
+            **describe(pose, motion),
+            "verification": verify_witness(pose, contacts, motion, selection),
+            "second_order_behaviour": (
+                "moving along it by a finite t and measuring real separating-axis gaps "
+                "gives -5.0e-7, -5.0e-9 and -5.0e-11 at t = 1e-3, 1e-4 and 1e-5: exactly "
+                "-t^2/2, quadratic and not linear, which is an independent check that the "
+                "linearization has no first-order error"
+            ),
+        },
+        "what_an_intersecting_assessor_reports": intersection_cone(pose, contacts),
         "verdict": {
-            "infinitesimally_rigid": None,
-            "decided": False,
+            "infinitesimally_rigid": False,
+            "decided": True,
             "claim": (
-                "n = 40's first-order cone is bracketed and not decided: the model "
-                "contained in every branch is trivial, so no flex is exhibited, and the "
-                "model containing every branch pins 56 of 120 coordinates, so rigidity is "
-                "not proved"
+                "the cone of infinitesimal motions at n = 40 is not the origin: the sixteen "
+                "squares of the tilted block turn together, each about its own centre, at "
+                "zero gap rate against all 248 single-axis contacts and with an admissible "
+                "axis surviving at all 42 corner contacts"
             ),
-            "what_would_decide_it": (
-                "enumerating the 2^42 branchwise cones, which is what "
-                "cases/trump11/tangent_cones.py does at n = 11 for 2^7 = 128 of them; a "
-                "branch-and-bound that prunes on a fully pinned prefix is the same "
-                "instrument and may not need every leaf"
+            "what_is_not_claimed": (
+                "local rigidity, in either direction. The witness curves into the obstacle "
+                "at second order, so it is not a motion, and the catalogue's annotation is "
+                "not contradicted"
             ),
-            "what_is_not_the_obstruction": (
-                "the field. D-388 named the mixed rows as what stopped the assessor here, "
-                "and the ordered-field search that answers them exists and reproduces n = 5 "
-                "exactly. It ran on this pose and the answer it gave was governed by the "
-                "contact model instead"
+            "what_it_costs_the_catalogue": (
+                "nothing directly, and everything for a first-order argument: any proof of "
+                "n = 40's rigidity has to be second-order or finite, because the first-order "
+                "cone is nontrivial"
             ),
         },
         "scope": {
             "established": (
                 "Exact, at the exact pose, over all forty squares and all three degrees of "
-                "freedom each. Both models are built from contacts decided by exact sign "
-                "and every certificate is verified in Q(sqrt 2). The bracket itself is the "
-                "finding: 120 of 120 pinned below, 56 of 120 above."
+                "freedom each. Contacts decided by exact sign, the witness a vector in "
+                "Q(sqrt 2)^120, and every claim about it re-decided in the field from the "
+                "pose rather than read back from this record."
             ),
             "not_established": (
-                "First-order rigidity, in either direction. The lower model's triviality is "
-                "not rigidity -- it is the absence of a cheap flex -- and the upper model's "
-                "64 uncertified coordinates are not motions. Second-order questions do not "
-                "arise until the first-order cone is known."
+                "Whether the first-order cone is larger than this one witness, and whether "
+                "any of it survives second order. The null space of the single-axis rows is "
+                "five-dimensional and only a short integer sweep of it was searched, so the "
+                "cone's dimension is not measured here. n = 5's route -- a self-stress "
+                "refusing every second-order correction -- is the next instrument, and it "
+                "has to be posed on the chosen branch rather than on all the rows."
             ),
             "relation_to_prior_evidence": (
                 "The translation-escape screen leaves n = 40 undetermined by deciding "
-                "single-square translation only. This is stronger in covering rotation and "
-                "all forty squares at once, and weaker in reaching no verdict; the two do "
-                "not conflict because neither claims a property."
+                "single-square translation only; this motion is sixteen squares turning at "
+                "once, which is outside it in every respect. Nothing conflicts: neither "
+                "claims a property, and this one explains why the screen found nothing."
             ),
         },
     }
@@ -228,10 +381,11 @@ def main() -> int:
             f"{model['disjunctive_pairs']} of {model['touching_pairs']} touching pairs are "
             "disjunctive"
         )
-        bracket = built["bracket"]
+        witness = built["witness"]
         print(
-            f"  bracket reproduces: {bracket['lower_model']['pinned']}/120 pinned below, "
-            f"{bracket['upper_model']['pinned']}/120 above -- undecided"
+            f"  witness reproduces: {len(witness['squares_that_turn'])} squares turn, "
+            f"exact on all {witness['verification']['single_axis_rows']} single-axis rows, "
+            f"admissible at all {witness['verification']['disjunctive_pairs']} corner pairs"
         )
         return 0
 

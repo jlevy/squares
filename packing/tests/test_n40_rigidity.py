@@ -1,14 +1,17 @@
-"""`n = 40` is bracketed, not decided, and the bracket is the thing to protect.
+"""`n = 40` is infinitesimally flexible, and the witness is what has to be protected.
 
-The interesting failure mode for this record is not drift in a number. It is someone
-reading one side of the bracket as a verdict. The lower model's cone is trivial because it
-imposes *more* than the geometry does, and that is the absence of a cheap flex rather than
-rigidity; the upper model leaves 64 coordinates uncertified because it imposes *less*, and
-those are not motions. Either half quoted alone says something false.
+This is a first-party finding against a source that annotates the packing "Rigid.", so the
+assertions are written to fail loudly if the witness ever stops being one. Three things
+have to hold together and each is checked from the pose rather than read back from the
+record: the motion is nonzero, it has exactly zero gap rate on every contact that holds in
+all branches, and every pair that touches at a corner still has an axis that separates
+along it. Drop any one and the vector stops being a motion.
 
-So the assertions below are mostly about the relationship between the two models -- that
-they are nested the right way round, that neither is empty, and that the verdict stays
-`None` while they disagree.
+The other assertion worth its place is the negative one. An assessor that intersects the
+corner disjunctions reports all 120 coordinates pinned -- that is, reports this pose rigid.
+`D-391` is therefore a defect with a measured consequence rather than a counterfactual one,
+and the test says so, because a future "simplification" that reinstates the intersection
+would otherwise look like it agreed with the catalogue.
 """
 
 from __future__ import annotations
@@ -18,62 +21,108 @@ import json
 import pytest
 
 from devtools.assess_n5_rigidity import (
+    DOF,
     active_contacts,
+    constraint_rows,
     contact_axes,
     disjunctive_pairs,
+    gap_rate,
     incident_contacts,
+    nullspace,
     separating,
 )
-from devtools.assess_n40_rigidity import OUT, assess, load_pose, relaxed_contacts
+from devtools.assess_n40_rigidity import (
+    OUT,
+    assess,
+    axis_groups,
+    find_witness,
+    load_pose,
+    single_axis_contacts,
+)
 
 
 def _record() -> dict:
     return json.loads(OUT.read_text(encoding="utf-8"))
 
 
-def test_the_verdict_is_withheld_while_the_models_disagree() -> None:
-    """The assertion that stops half a bracket becoming a claim."""
-    verdict = _record()["verdict"]
+def test_the_witness_is_a_motion_checked_from_the_pose() -> None:
+    """The finding, re-derived. Nothing here trusts the record's copy of it."""
+    pose = load_pose()
+    contacts = active_contacts(pose)
+    found = find_witness(pose, contacts)
+    assert found is not None
+    motion, selection = found
 
-    assert verdict["decided"] is False
-    assert verdict["infinitesimally_rigid"] is None
-    assert "bracketed and not decided" in verdict["claim"]
-    assert "2^42" in verdict["what_would_decide_it"]
+    assert any(value.sign() != 0 for value in motion)
+
+    single = constraint_rows(pose, single_axis_contacts(pose, contacts))
+    assert len(single) == 248
+    assert all(gap_rate(row, motion).sign() == 0 for row in single)
+
+    groups = axis_groups(pose, contacts)
+    assert len(groups) == 42
+    for pair, group in groups.items():
+        rows = constraint_rows(pose, group[selection[pair]])
+        assert all(gap_rate(row, motion).sign() >= 0 for row in rows), pair
 
 
-def test_the_two_models_are_nested_the_right_way_round() -> None:
-    """Upper contains every branch, lower is contained in every branch.
+def test_only_the_tilted_block_moves() -> None:
+    """Sixteen squares turning together, and no frame square displaced at all.
 
-    Fewer rows can only pin fewer coordinates, so the upper model must be the smaller row
-    set and the weaker result. If that inverted, the labels would be backwards and both
-    soundness arguments with them.
+    The shape of the motion is the reason every earlier instrument missed it: the
+    translation-escape screen decides one square translating, and this is sixteen turning.
     """
-    bracket = _record()["bracket"]
-    upper, lower = bracket["upper_model"], bracket["lower_model"]
+    witness = _record()["witness"]
 
-    assert upper["rows"] < lower["rows"]
-    assert upper["pinned"] < lower["pinned"]
-    assert lower["pinned"] == 120
-    assert upper["pinned"] == 56
-    assert len(upper["uncertified"]) == 64
+    assert witness["squares_that_turn"] == list(range(24, 40))
+    assert witness["squares_that_move"] == list(range(24, 40))
+    assert witness["frame_squares_move"] == []
 
 
-def test_the_relaxed_rows_really_are_a_subset() -> None:
-    """Derived from the pose rather than read from the record, because it is the premise.
+def test_intersecting_the_disjunctions_reports_the_pose_rigid() -> None:
+    """`D-391`'s cost, measured on this pose rather than argued in the abstract."""
+    reported = _record()["what_an_intersecting_assessor_reports"]
 
-    "Pinned in the upper model implies pinned in every branch" holds only if every branch's
-    row set contains the upper model's. That is a fact about contact selection, so it is
-    checked against the geometry.
+    assert reported["pinned"] == 120
+    assert reported["uncertified"] == []
+    assert "which is false" in reported["verdict_it_would_report"]
+
+    verification = _record()["witness"]["verification"]
+    assert verification["rows_violated_if_the_disjunctions_are_intersected"] == 42
+    assert verification["disjunctive_pairs_with_an_admissible_axis"] == 42
+
+
+def test_the_null_space_is_what_makes_the_candidate_exact() -> None:
+    """No rounding anywhere: a null vector is in the cone by construction.
+
+    A direction proposed by a linear program has to be rationalized before it can be
+    checked in the field, and a rationalized vertex generally stops satisfying the system
+    it came from -- which is what made the first search for this witness find nothing.
     """
     pose = load_pose()
     contacts = active_contacts(pose)
-    relaxed = relaxed_contacts(pose, contacts)
+    rows = constraint_rows(pose, single_axis_contacts(pose, contacts))
+    basis = nullspace(pose, rows)
 
-    assert set(relaxed) < set(contacts)
-    disjunctive = set(disjunctive_pairs(pose, contacts))
-    for contact in relaxed:
-        if contact.kind == "pair":
-            assert frozenset((contact.moving, contact.host)) not in disjunctive
+    assert len(basis) == 5
+    for vector in basis:
+        assert all(gap_rate(row, vector).sign() == 0 for row in rows)
+
+
+def test_flexibility_is_not_promoted_to_not_rigid() -> None:
+    """The distinction the record exists to keep.
+
+    An infinitesimal flex is a first-order object. Along this one the gaps curve shut at
+    order `t^2`, so it is not a motion, and moving `n = 40` to `not-rigid` would assert
+    something nobody has shown.
+    """
+    built = _record()
+
+    assert built["verdict"]["infinitesimally_rigid"] is False
+    assert "stays undetermined" in built["subject"]["promotes_nothing"]
+    assert "not a motion" in built["subject"]["promotes_nothing"]
+    assert "local rigidity" in built["verdict"]["what_is_not_claimed"]
+    assert "t^2" in built["witness"]["second_order_behaviour"]
 
 
 def test_the_contact_model_is_measured_not_assumed() -> None:
@@ -95,26 +144,23 @@ def test_the_contact_model_is_measured_not_assumed() -> None:
         assert not separating(pose, one.host, one.edge, one.moving)
 
 
-def test_the_field_is_not_the_obstruction() -> None:
-    """`D-388` named the mixed rows; the search that answers them exists and this is not it.
+def test_the_witness_turns_every_block_square_at_the_same_rate() -> None:
+    """What the motion is, geometrically: the block's squares counter-rotating in place."""
+    pose = load_pose()
+    found = find_witness(pose, active_contacts(pose))
+    assert found is not None
+    motion, _ = found
 
-    Worth asserting because the record's whole point is that the blocker moved. A future
-    reader finding `n = 40` undecided should not go and rebuild the ordered-field search.
-    """
-    verdict = _record()["verdict"]
-
-    assert "the field" in verdict["what_is_not_the_obstruction"]
-    assert "reproduces n = 5" in verdict["what_is_not_the_obstruction"]
-
-
-def test_nothing_here_promotes_anything() -> None:
-    subject = _record()["subject"]
-
-    assert "stays undetermined" in subject["promotes_nothing"]
-    assert "not a property" in subject["promotes_nothing"]
+    spins = {index: motion[index * DOF + 2] for index in range(24, 40)}
+    first = spins[24]
+    assert first.sign() != 0
+    for index, spin in spins.items():
+        assert (spin - first).sign() == 0, index
+    for index in range(24):
+        assert motion[index * DOF + 2].sign() == 0
 
 
 @pytest.mark.exhaustive_exact
 def test_the_record_round_trips() -> None:
-    """Three minutes: 240 linear programs, each proposal re-decided exactly in the field."""
+    """Minutes: the intersecting-assessor section runs 240 linear programs."""
     assert _record() == assess()

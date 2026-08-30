@@ -389,6 +389,55 @@ def rationalize(pose: Pose, rows: list[list[FieldElement]]) -> list[list[FieldEl
     ]
 
 
+def nullspace(pose: Pose, rows: list[list[FieldElement]]) -> list[list[FieldElement]]:
+    """A basis for `{x : Ax = 0}`, exactly, by reduction over the field.
+
+    Every element of this subspace satisfies `Ax = 0 >= 0`, so it lies in the cone these
+    rows define -- with no rounding anywhere, which is what makes it a usable source of
+    candidate motions. A direction proposed by a linear program has to be rationalized
+    before it can be checked, and a rationalized vertex generally stops satisfying the
+    system it came from; a null vector never had that problem.
+    """
+    work = [list(row) for row in rows]
+    pivots: list[int] = []
+    pivot = 0
+    for column in range(len(rows[0])):
+        target = next(
+            (index for index in range(pivot, len(work)) if work[index][column].sign() != 0),
+            None,
+        )
+        if target is None:
+            continue
+        work[pivot], work[target] = work[target], work[pivot]
+        lead = work[pivot][column]
+        work[pivot] = [value / lead for value in work[pivot]]
+        for index in range(len(work)):
+            if index != pivot and work[index][column].sign() != 0:
+                factor = work[index][column]
+                work[index] = [
+                    a - factor * b for a, b in zip(work[index], work[pivot], strict=True)
+                ]
+        pivots.append(column)
+        pivot += 1
+    basis: list[list[FieldElement]] = []
+    for column in (c for c in range(len(rows[0])) if c not in pivots):
+        vector = [pose.field.rational(0)] * len(rows[0])
+        vector[column] = pose.field.rational(1)
+        for index, pivot_column in enumerate(pivots):
+            vector[pivot_column] = -work[index][column]
+        basis.append(vector)
+    return basis
+
+
+def gap_rate(row: list[FieldElement], motion: list[FieldElement]) -> FieldElement:
+    """`a_j . x`: how fast this contact's gap opens along the motion, exactly."""
+    total = row[0] * motion[0]
+    for entry, value in zip(row[1:], motion[1:], strict=True):
+        if value.sign() != 0:
+            total = total + entry * value
+    return total
+
+
 def variable_names(count: int) -> list[str]:
     return [
         name for index in range(count) for name in (f"vx{index}", f"vy{index}", f"w{index}")

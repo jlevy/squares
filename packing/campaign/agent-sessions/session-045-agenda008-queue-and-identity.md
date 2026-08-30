@@ -913,7 +913,7 @@ session:
       stops the assessor consuming it: 296 of its 608 constraint rows carry both a rational
       and a sqrt 2 part, so a rational-weight Farkas search answers a different system. What
       is needed is a search whose weights live in the ordered field.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       The review block produced the pose and the blocker in the same hour. This is the only
@@ -936,12 +936,81 @@ session:
     fallback: >-
       The typed statement, which is what BC-049's exit accepts and what the next instrument
       would need written down anyway.
+    outcome: >-
+      The objective's premise was right about the field and wrong about what it would buy.
+      The ordered-field search was built and works -- `certify` runs a restricted cone and
+      a sign-free one ordered by `p + sqrt(2) q >= 0`, both verified exactly, and it
+      reproduces n = 5's fourteen certificates without `rationalize`. Running it on n = 40
+      then found two further defects in the assessor, both flattering and both absent at
+      n = 5: D-390 (an incidence read as a contact; 208 of 560 pair rows) and D-391 (a
+      tangent cone that is a union, intersected; 42 of 98 touching pairs). The blocker
+      moved from the arithmetic to the contact model, which is not what the phase expected
+      and is what the evidence says.
+
+      n = 40 was left bracketed rather than decided, with both sides measured: intersecting
+      the disjunctions gives a cone contained in every branch and it is trivial (120 of 120
+      pinned), dropping them gives a cone containing every branch and it pins 56 of 120.
+      Phase 16 then decided it in the flexibility direction, and this bracket is what made
+      the question askable.
+    evidence:
+    - packing/devtools/assess_n40_rigidity.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n40-rigidity-bracket.json
+    - packing/devtools/assess_n5_rigidity.py
+    - packing/tests/test_n40_rigidity.py
+    - packing/tests/test_n5_rigidity.py
+    stop_reason: >-
+      Exit reached on the fallback branch, which is the branch the evidence supports. The
+      kill condition held: D-388 was not worked around, and the two guards it turned up
+      refuse rather than loosen.
+    next_action: >-
+      X-007 owns the rigidity argument and states D-391's principle in prose while arguing
+      n = 5 is exempt from it; that exemption is now a check and the document should say
+      so. BC-010, BC-029, BC-017's next slice and BC-049 at n = 28 all wait on decisions or
+      sources an unattended runner cannot supply.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-049
+    bead: think-xdly
+    objective: >-
+      Decide n = 40 by enumerating the branches D-391 refuses to intersect. The bracket
+      from phase 15 is 120/120 below and 56/120 above, and the whole gap is 42 pairs that
+      touch at a corner. n = 11 was settled by exactly this route at 2^7 branches
+      (cases/trump11/tangent_cones.py); 2^42 is not enumerable, but a branch-and-bound that
+      closes a node the moment every coordinate is pinned need not reach the leaves,
+      because a node's pinned set only grows as rows are added.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Phase 15's own next_action. This is the one open slice that neither waits on a human
+      decision nor on a source, and it can decide n = 40 outright rather than describe it.
+    budget_minutes: 75
+    started_at: '2026-08-30T11:38:00Z'
+    deadline_at: '2026-08-30T12:53:00Z'
+    expected_output: >-
+      Either n = 40 decided -- every branch closed by verified certificates, or one branch
+      carrying a verified nonzero motion -- or a measured statement of how the search
+      behaves: nodes expanded, how fast the pinned set grows with depth, and what the
+      frontier looks like when the budget runs out. A partial tree is evidence about the
+      instrument even when it is not evidence about n = 40.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --edit
+    kill_condition: >-
+      Node closure must stay exact. A node closed on a numeric rank, or on a Farkas
+      proposal that was not re-verified in the field, closes 2^k leaves on a float and the
+      error compounds with depth rather than staying local. If the closure test cannot be
+      made both exact and cheap enough to run, report the tree that was actually searched
+      rather than widening the test.
+    fallback: >-
+      The measured search behaviour, which is what the next attempt needs and what tells a
+      reader whether 2^42 is the real cost or a bound nobody tightened.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Record the outcome. BC-010, BC-029, BC-017's next slice and BC-049 at n = 28 all wait
-      on decisions or sources an unattended runner cannot supply.
+      X-007 owns the rigidity argument and should carry both the bracket and whatever this
+      finds.
   primary_bead: think-s424
   status: in_progress
   budget:

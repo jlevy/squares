@@ -11051,30 +11051,39 @@ defects:
     assessor was written without either guard, and the exemption was never turned into a
     check.
   consequence: >-
-    Flattering. The intersection is a subset of every branch, so the cone comes out too
-    small and a pose reads as more rigid than it is. `n = 5` is unaffected and no retained
-    record moves.
+    Flattering, and at `n = 40` the flattery is not hypothetical: **it inverts the answer.**
+    That pose has an infinitesimal motion -- all sixteen squares of the tilted block turning
+    together, each about its own centre, at exactly zero gap rate against every contact that
+    holds in all branches. The motion gives up one axis at each of the 42 corner contacts
+    and keeps the other, which is all non-overlap asks. An assessor that intersects reads
+    each of those 42 as a violation and certifies all 120 coordinates as pinned, which is to
+    say it reports the packing infinitesimally rigid. It is not.
 
-    The cost is that `n = 40` cannot be decided by this instrument, and the shape of the
-    obstruction is now measured rather than guessed. With the spurious rows of `D-390`
-    removed, two models bracket the truth: intersecting the 42 disjunctions gives a cone
-    contained in every branch, and it is trivial -- so no first-order flex can be exhibited
-    this cheaply; dropping them gives a cone containing every branch, and it pins 56 of 120
-    coordinates -- so rigidity is not proved either. Deciding between them is `2^42` linear
-    programs by the `n = 11` route.
+    So this defect is the reason `n = 40` looked rigid, and removing it is what found the
+    witness. `n = 5` is unaffected and no retained record moves in either direction: an
+    infinitesimal flex is not a motion, and along this one every gap curves shut at order
+    `t^2`, so `n = 40`'s `rigidity` block stays `undetermined` and the catalogue's
+    annotation is not contradicted.
   fix: >-
-    Not fixed. `DisjunctiveContactError`, raised by `assess` before any search runs, so the
-    assessor refuses a pose it cannot honestly answer rather than answering it. `n = 5`
-    passes the guard because it has no such pair.
+    Contained rather than removed. `DisjunctiveContactError`, raised by
+    `require_intersection_semantics` before any search runs, so the `n = 5` assessor refuses
+    a pose whose tangent cone is not an intersection instead of answering it. `n = 5` passes
+    the guard because it has no such pair.
 
-    Refusing is the whole fix available here, exactly as with `D-388`. A branch-and-bound
-    over the disjunctions is a different instrument -- `cases/trump11/tangent_cones.py` is
-    what one looks like -- and until it exists the honest behaviour is to say which pairs
-    stop the answer and how many.
+    `devtools/assess_n40_rigidity.py` is the instrument that handles the union rather than
+    refusing it, and it does so without enumerating branches. Candidate motions come from
+    the null space of the rows every branch carries -- exact, no rounding -- and a candidate
+    is a motion exactly when every disjunctive pair still has an axis that separates along
+    it, which names an admitting branch directly. That is one search rather than `2^42`.
   regression: >-
     `test_a_disjunctive_pose_is_refused_rather_than_answered` builds `n = 40` and asserts
     the guard fires with the 42-pair count; `test_n5_has_no_disjunctive_pair` asserts
     `n = 5` has none. The pair is the point again: the guard is only meaningful alongside
     evidence that the size it was written for never needed it.
+
+    `test_intersecting_the_disjunctions_reports_the_pose_rigid` is the one that keeps the
+    cost visible. It asserts that the intersecting model certifies all 120 coordinates and
+    that the witness gives up exactly 42 rows, so a change that quietly reinstated the
+    intersection would fail while looking like it had started agreeing with the source.
   bead: think-s424
   recorded_in: packing/devtools/assess_n5_rigidity.py

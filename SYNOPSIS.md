@@ -2520,10 +2520,17 @@ that is a union: two squares meeting at a single corner are held apart by two ax
 non-overlap asks that *either* keep separating, so the linearized feasible set is a
 union of half-spaces and not a polyhedron.
 Intersecting them is a subset of every branch, so a pose reads as more rigid than it is.
-`n = 5`, the only size this instrument has produced a retained claim about, has no such
-pair; Göbel’s `n = 40` has 42 of its 98 touching pairs, and deciding it is `2^42` linear
-programs by the route `cases/trump11/tangent_cones.py` takes at `n = 11` for `2^7`. The
-assessor now refuses that pose instead of answering it.
+`n = 5`, the only size this instrument had produced a retained claim about, has no such
+pair; Göbel’s `n = 40` has 42 of its 98 touching pairs, and there the error inverts the
+answer rather than merely weakening it.
+That pose has an infinitesimal motion — all sixteen squares of its tilted block turning
+together, each about its own centre — which gives up one axis at each corner contact and
+keeps the other, which is all non-overlap asks.
+An assessor that intersects reads those 42 as violations and certifies every one of the
+120 coordinates as pinned, reporting a packing rigid that is not.
+Removing the defect is what found the witness.
+It is still not a *motion*: the gaps curve shut at order `t²`, so `n = 40`’s record
+stays `undetermined` and the catalogue’s annotation stands.
 
 The record can also be wrong about itself, and [D-358](defects.md) is this run being so:
 an unattended run declared blocks of 150, 180, 180 and 40 minutes and took 31, 42, 29
