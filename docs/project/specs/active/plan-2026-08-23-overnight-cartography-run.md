@@ -334,23 +334,22 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 043](../../../../packing/campaign/agent-sessions/session-043-block9-degree-bound.md).
-Sessions 027 through 043 are terminal, and agenda-004 closed on measurement rather than
-opinion. Open BC-066 under `think-obgk` as the next bounded driver: eliminate the five
-equations in five half-angles that the rationalised `n = 29` system leaves, inside a
-declared wall-clock cap, and record whatever the chain reaches.
-It runs first because it is the only remaining block that can change what this run
-concludes about `n = 29` — a refusal there is the measured justification for the
-interval route carrying that bound, and every block after it improves the pipeline
-instead. The ordering through block 18 is
-[agenda-006’s continuation schedule](../../../../packing/campaign/agendas/agenda-006-overnight-research-blocks.md#the-continuation-schedule),
-and
-[run-002](../../../../packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md#where-to-resume)
-carries what a fresh agent needs that the diff does not show.
-The middle layers behind it are built: a pose is a centre, an angle and a chirality; an
-edge-edge contact pins collinearity; the contact system reaches full rank at both
-retained sizes; and the margin rule recovers Trump’s published polynomial at `n = 11`
-while returning nothing at `n = 29` through degree twenty.
+[session 045](../../../../packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md).
+Sessions 027 through 044 are terminal, and agendas 006 and 007 are closed.
+Open `BC-084` under `think-9qtn` as the next bounded driver: give the gate change-scoped
+selection, so a change runs the steps it can reach rather than the whole gate, and prove
+the selector cannot silently under-select.
+It runs first because every later block pays the gate’s cost at each of its checkpoints.
+
+**Do not take a next slice from an agenda directly.**
+[`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every
+agenda and is the queue, because an agenda read on its own was found advertising four
+commitments as takeable that a later agenda had already discharged.
+This plan’s own pointer was stale in the same way until 2026-08-30. The middle layers
+behind it are built: a pose is a centre, an angle and a chirality; an edge-edge contact
+pins collinearity; the contact system reaches full rank at both retained sizes; and the
+margin rule recovers Trump’s published polynomial at `n = 11` while returning nothing at
+`n = 29` through degree twenty.
 Sessions 035 through 037 are terminal and closed agenda-005 block A together with
 `BC-045`, so precision is manufactured in-repository, the `n = 29` contact structure is
 frozen with its 89 incidences, and the interval route is built, calibrated and run: it

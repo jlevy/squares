@@ -318,37 +318,43 @@ The renderer’s standing exact-motion control remains independently replayable:
 ![The final frame of the certified exact five-square trajectory.](packing/atlas/rendering/n5-exact-face-trajectory.svg)
 
 **As of 2026-08-30 — start here.**
-[agenda-007](packing/campaign/agendas/agenda-007-twelve-hour-steered-run.md) is
-**complete**: twelve steered hours in four blocks, each closed and merged, discharging
-`BC-074` and `BC-075` from agenda-006 and `BC-046` from agenda-005.
+[agenda-008](packing/campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md)
+is running, recorded in
+[session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md).
+Three of its four blocks are closed; `BC-084` on `think-9qtn` is the open one.
 
-What it left, in the order a next session would want it:
+**Take `BC-084` first.** It gives the gate change-scoped selection: a changed path
+selects only the steps it can affect, an unrecognised path selects the whole gate rather
+than an empty set, and a step declaring nothing is claimed by everything.
+The mechanism, its tests and its negative controls are in place; what remains is
+attributing the roughly twenty-eight steps still unattributed, and the commitment’s exit
+accepts a typed statement of which ones resist attribution as an answer.
 
-The loop is fast now.
-`packing-validate --records` is `4s`, from `16.05s`; a new `--edit` tier is `26–33s`
-against `--fast`’s `499s`, and the split is by what a step catches rather than what it
-costs. `--edit` is the one to run while editing; `--fast` is a block boundary; CI runs
-`--fast` and the full gate on every push, so nothing lost coverage.
-`OR-3` now carries the price of ignoring it, measured from this session’s own rollup.
+**Read [`OR-4`](operating-rules.md) before trusting any older queue.** `BC-081` found
+that agenda-005 was advertising four commitments as takeable which agenda-006 had
+already discharged, and four more blocked on conditions no reader could observe.
+That is `D-374`, and the repair is [`agenda-map.md`](packing/campaign/agenda-map.md),
+generated from every agenda and drift-checked in `--records` at `0.14s`. It is the queue
+now; the live set is seven, and `BC-010` on `think-1s0h` is its only P0.
 
-The reader-facing tier is reconciled, and `D-372` records why it had drifted: nothing
-binds `README.md` or `TUTORIAL.md` to the artifacts the way `check_synopsis` binds this
-document, and no checker can, because it would have to decide what a sentence claims.
+**The identity question moved twice, and both moves were corrections.**
+[X-005](packing/campaign/explorations/X-005-identity-relation-and-its-controls.md) still
+declares `contact + closure` the relation the atlas should count, but `D-375` records
+that it had scored the atlas’s own relation at the wrong level — both of that relation’s
+inputs are canonical under relabelling and `D4` by construction, so it is a quotient
+statement, and the `n = 4` labelled control it was refuted on can refute no
+relabelling-invariant relation at all.
 
-**The next scientific question is sharper than it was, and narrower.**
-[X-005](packing/campaign/explorations/X-005-identity-relation-and-its-controls.md)
-declares the identity relation the atlas should count — contact certificates merged
-along the retained strata closure — and reports that the acceptance rule which was
-supposed to establish it could not have, because every control it named has component
-count one. That is `D-373`. `D-034` stays outstanding.
-
-So the next bounded question is **not** a larger census and not an `n = 5` count.
-It is whether `n = 5` can be given a *discriminating* control at all — one whose proved
-component count is neither one nor equal to its labelled count.
-Until such a control exists, any `n = 5` identity claim is validated against a constant.
-`think-byc6` is the cheap prerequisite: retain per-sample keys for `exp-015`, without
-which the relation the atlas uses today cannot be scored on the control that would most
-directly test it.
+[X-006](packing/campaign/explorations/X-006-the-discriminating-control-at-n5.md) then
+answers the question this handoff previously posed.
+`n = 5` **does** admit a discriminating control, and it is the pair `D-034` has been
+quoting since 2026-08-23 without ever retaining: two endpoints sharing a contact
+certificate, differing in geometric key, at a side difference of `8.9e-16`. It is
+retained now, and it discriminates whichever way its component count resolves — the
+branch where the count is two refutes `contact + closure` itself.
+What it waits on is that count, and `exp-042` already names the missing claim:
+`A_to_B_stationary_connection`, first of its eleven declared scope refusals.
+`D-034` stays outstanding, and no proof obligation shrank.
 
 Everything below this paragraph is the accumulated record of how the program got here,
 not the next action; `agenda-005` is closed and appears in it as history.
@@ -2426,14 +2432,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 376 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 377 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 88 | asserted something false about the mathematics |
 | validity | 90 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 139 | recorded something its own evidence contradicts |
+| bookkeeping | 140 | recorded something its own evidence contradicts |
 | robustness | 44 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
@@ -2443,7 +2449,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-eight defects in 376, and no soundness defect
+**The automated gate has caught forty-eight defects in 377, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2522,9 +2528,20 @@ The resolution is not to check less.
 The efficiency principle asks for iteration as fast as possible and the standing
 asymmetry lets efficiency simplify process but never weaken assurance, so what is owed
 is a change-scoped selector that is conservative by construction and can be caught
-under-selecting — `think-ej1d`, specified under BC-051. Good coverage and short cycles
-are a design tension, and resolving it is the design’s job rather than the operator’s
-discretion.
+under-selecting — `think-9qtn`, under BC-084, which carries BC-051’s scope unchanged.
+Good coverage and short cycles are a design tension, and resolving it is the design’s
+job rather than the operator’s discretion.
+
+A record contract can also be wrong by being unable to say something true.
+[D-377](defects.md) records that a delegation which is read-only by construction cannot
+be written down while it runs: `packing-ledger check` requires an `in_progress`
+delegation to declare a `write_scope`, and the schema requires that scope to be
+non-empty. Investigation, review, and audit are exactly the delegations
+[`OR-2`](operating-rules.md) says parallelise best, and all three write nothing.
+It is contained rather than fixed — such delegations are recorded on completion instead
+— because the repair is a decision about the session contract, and an explicit
+`read_only` flag is better than permitting an empty list that would be ambiguous between
+“writes nothing” and “nobody filled this in”.
 
 108 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,

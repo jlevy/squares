@@ -1181,3 +1181,18 @@ controls:
   replace: ["blocked_on: >-", "unrelated_note: >-"]
   run: python3 -m devtools.render_agenda_map --check
   expect: "unobservable"
+
+# BC-084: change-scoped selection may run too much and may never run too little. The
+# reachability check is the only thing standing between a mistyped glob and a step that
+# silently stops being selected, so it is rehearsed failing.
+- name: gate selection - a step's patterns stop matching anything real
+  file: src/sqpack/cli/validate.py
+  replace: ['touches=(*_CORE, "packing/frontier/*", "packing/devtools/assess_frontier_rigidity.py"),', 'touches=("packing/frontier/no-such-file-anywhere",),']
+  run: uv run --frozen --quiet python -m pytest tests/test_change_scoped_selection.py -q
+  expect: "match no probe path"
+
+- name: gate selection - an unclaimed path stops widening the selection
+  file: src/sqpack/cli/validate.py
+  replace: ["    if unclaimed:\n        return Selection(steps=universe, unattributed_paths=unclaimed)", "    if False:\n        return Selection(steps=universe, unattributed_paths=unclaimed)"]
+  run: uv run --frozen --quiet python -m pytest tests/test_change_scoped_selection.py -q
+  expect: "failed"

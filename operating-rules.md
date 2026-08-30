@@ -53,6 +53,16 @@ One in
 reported that `contacts.py` does not parse; it parses under the project’s Python 3.14,
 where [PEP 758](https://peps.python.org/pep-0758/) makes `except A, B:` valid.
 
+**That exact error recurred twice more**, in two independent sub-agents run at maximum
+effort on unrelated tasks during
+[session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md).
+One called it “a hard `SyntaxError` under Python 3.14”, the other “a `SyntaxError` on
+every Python 3” across ten named files.
+All ten parse. Three for three is not bad luck: `except A, B:` reads as a Python 2 tell
+strongly enough to survive being checked, so verify a parse claim by parsing rather than
+by reading. The same reports were otherwise excellent, which is the point — a report can
+be right about five real defects and confidently wrong about a sixth.
+
 ## OR-3: Never wait on a gate with nothing else in flight
 
 Launch it in the background and keep the next slice moving.

@@ -149,8 +149,10 @@ is retained, scored prospectively, and honest about which of the two columns it 
 and a field saying why, so a future run cannot mistake the prospective scoring for a
 verdict.
 
-**This does not close `D-034`**, and does not narrow it either.
-It converts a quoted claim into a checked one and identifies what the claim would buy.
+**This does not close `D-034`.** It does not shrink the proof obligation by any amount:
+`A_to_B_stationary_connection` is exactly as hard as it was.
+What changes is the *price* of the obligation, which was previously unstated — proving
+it now also resolves an identity control, so the work buys two things rather than one.
 
 **The pair is two endpoints, not a census.** Whether other `n = 5` rows would sharpen or
 complicate the control is unexamined; six seeds produced six rows and only these two

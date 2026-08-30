@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 376
+count: 377
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10243,3 +10243,53 @@ defects:
     this defect is about.
   bead: think-6zaz
   recorded_in: packing/campaign/explorations/X-006-the-discriminating-control-at-n5.md
+- id: D-377
+  title: A read-only delegation cannot be recorded while it is running
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: inspection
+  latent_for: >-
+    since the AgentSession/v2 write_scope invariant was written -- found the first time a
+    session delegated purely read-only investigation and tried to record it live
+  severity: low
+  status: contained
+  what: >-
+    `packing-ledger check` requires an `in_progress` delegation to carry a `write_scope`,
+    and the schema requires `write_scope` to be non-empty when present. A delegation that
+    is read-only by construction -- investigation, review, audit, the three kinds `OR-2`
+    names as the ones that parallelise best -- has an empty write surface, and there is no
+    way to say so. Recording it live requires either inventing a write surface it will not
+    use or omitting the delegation entirely.
+
+    The invariant's intent is sound: a running delegation with an undeclared write surface
+    is a coordinator not knowing what may change underneath it. The gap is that "nothing"
+    is a legitimate answer the encoding cannot express, and it is the answer for exactly
+    the delegations `OR-2` most encourages.
+  consequence: >-
+    Session-045 delegated four read-only sub-agents and recorded `delegations: []` while
+    they ran, filling them in on completion. That understates parallelism in the live
+    record: a reader of the running session cannot see that four investigations are in
+    flight, which is the one thing the field exists to show.
+
+    Neutral rather than flattering. Nothing is claimed that is not true; something true is
+    unsayable.
+  fix: >-
+    Not fixed. Contained by recording the delegations retrospectively on completion, which
+    is what session-045 does, and by this defect naming why the live record is thinner than
+    the session was.
+
+    The repair is a schema decision rather than a code change, and it belongs to whoever
+    owns the session contract: either allow an empty `write_scope` when a delegation
+    declares itself read-only, or add an explicit `read_only: true` that the invariant
+    accepts in place of a write surface. The second is better -- an empty list is
+    ambiguous between "writes nothing" and "nobody filled this in", and that ambiguity is
+    the reason the invariant exists.
+  regression: >-
+    None. A defect in what a schema can express is not caught by running anything; it is
+    caught by a session trying to record something true and finding it cannot. The next
+    session to delegate read-only work will hit it identically, which is the intended
+    signal.
+  bead: think-s424
+  recorded_in: packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md
