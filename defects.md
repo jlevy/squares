@@ -2,7 +2,7 @@
 
 # Defect log
 
-398 defects recorded across the packing toolchain.
+399 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
 | `review` | 243 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
-| `inspection` | 39 | reading the code or the design with intent |
+| `inspection` | 40 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 53 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 53 of 398, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 53 of 399, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -36,7 +36,7 @@ The line worth reading twice: **the automated gate caught 53 of 398, and none of
 | verifier | 4 |
 | record | 121 |
 | tooling | 134 |
-| docs | 105 |
+| docs | 106 |
 
 ## By kind
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 53 of 398, and none of
 | --- | ---: |
 | soundness | 91 |
 | validity | 96 |
-| bookkeeping | 149 |
+| bookkeeping | 150 |
 | robustness | 47 |
 | performance | 15 |
 
@@ -622,6 +622,7 @@ This is the actionable list.
 | [D-396](packing/tests/test_frontier_rigidity_claim_contract.py) | 2026-08-30 | record | validity | flattering | `review` | medium | fixed | A case's rigidity block could claim verified over numerical evidence |
 | [D-397](AGENTS.md) | 2026-08-30 | record | validity | conservative | `review` | medium | fixed | Two more sub-agents reported valid Python 3.14 as a syntax error |
 | [D-398](packing/frontier/n-040.md) | 2026-08-30 | record | bookkeeping |  | `review` | medium | outstanding | Three cases declare a mathematical blocker the repository has already cleared |
+| [D-399](packing/cases/gobel_family/verify_exact.py) | 2026-08-30 | docs | bookkeeping |  | `inspection` | low | fixed | A residual's explanation had the sign backwards, and called a rounding a truncation |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

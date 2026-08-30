@@ -44,7 +44,7 @@ SUBJECTS = ((4, 5), (4, 7))
 """`(a, b)` for `n = 65` and `n = 89`: the family's sizes that had no construction here."""
 
 WITNESS_ROUNDING = Decimal("1e-32")
-"""The witnesses' own truncation, rounded up -- and the measurement that identifies them.
+"""The witnesses' own rounding, rounded up -- and the measurement that identifies them.
 
 This started at `1e-11`, on the reasoning that both records are `numerical-multiprecision`
 and might be independently optimised numerics that merely land on the same side. They are
@@ -56,6 +56,19 @@ So the comparison identifies rather than merely permits: `n = 65` and `n = 89`'s
 witnesses **are** materialisations of Goebel's family, exactly as `n = 40`'s turned out to
 be. The bound sits just above the measured figures rather than at a round number, because a
 tolerance with slack in it would stop being a statement about the witnesses.
+
+**The two sizes differ in sign, and only one direction is comfortable.** Each witness is
+the exact side correctly rounded to thirty-two fractional digits, and which way that goes
+depends on the omitted tail. At `n = 65` it rounds up, so the witness sits `4.80e-33`
+*above* `5 + (5/2)sqrt(2)` and the exact construction fits inside it. At `n = 89` it rounds
+down, so the witness sits `3.27e-33` *below* `5 + (7/2)sqrt(2)` -- and the exact
+construction does **not** fit inside the witness's own declared side.
+
+Nothing here is wrong as a result: both witnesses are `numerical-multiprecision` records
+checked at `tolerance: 1e-8`, and `3e-33` is far inside that. But it means `n = 89` cannot
+be promoted to an exact record by relabelling. An exact claim at the witness's declared
+side would be false, so a promotion has to carry coordinates and a side computed from the
+construction rather than inherited from the witness. See `D-398`.
 
 What this does not show is optimality. Being at the best known side is a fact about the
 retained record.

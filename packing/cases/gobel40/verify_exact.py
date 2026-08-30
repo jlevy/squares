@@ -9,11 +9,11 @@ the container boundary.
 
 **It is the packing the corpus already holds.** The retained `n = 40` witness is a decimal
 record, and the exact pose reproduces it to `6.04e-31` -- which is not a coincidence and
-not an error term of this construction. It is the witness's own truncation: its side is
-written to thirty digits and falls short of `4 + 2 sqrt(2)` by exactly that amount, and the
-coordinates computed from the side inherit it. Agreement to the limit of the witness's
-precision, with the residual explained rather than tolerated, is the check worth running;
-agreement to some declared epsilon would not have been.
+not an error term of this construction. It is the witness's own rounding: its side is
+`4 + 2 sqrt(2)` correctly rounded to twenty-nine fractional digits, which puts it that far
+*above* the exact value, and the coordinates computed from the side inherit it. Agreement
+to the limit of the witness's precision, with the residual explained rather than tolerated,
+is the check worth running; agreement to some declared epsilon would not have been.
 """
 
 from __future__ import annotations
@@ -29,13 +29,20 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 WITNESS = ROOT / "witnesses" / "known-best" / "n-040.yaml"
 WITNESS_SCHEMA = ROOT / "witnesses" / "witness.schema.yaml"
 
-WITNESS_TRUNCATION = Decimal("7e-31")
+WITNESS_ROUNDING = Decimal("7e-31")
 """The witness's own rounding, rounded up.
 
-Its side is serialized to thirty fractional digits and sits `6.0384e-31` below
-`4 + 2 sqrt(2)`. Nothing in the construction may disagree by more than that, and the
-ceiling is deliberately just above the measured figure rather than a round number: a
+Its side is `4 + 2 sqrt(2)` correctly rounded to twenty-nine fractional digits, which puts
+it `6.0384e-31` *above* the exact value -- the omitted tail is `...41939615...`, so the
+last kept digit rounds up. Nothing in the construction may disagree by more than that, and
+the ceiling is deliberately just above the measured figure rather than a round number: a
 tolerance with slack in it would stop being a statement about the witness.
+
+The direction is worth stating rather than leaving to the magnitude, because it is not the
+same at every size and the other case is the interesting one. A witness rounded *down*
+sits below the exact side, and the exact construction then does not fit inside the
+witness's own declared side. That happens at `n = 89`; see `cases/gobel_family`. Here it
+does not.
 """
 
 
@@ -87,13 +94,13 @@ def main() -> int:
         return 1
 
     gap = witness_disagreement()
-    if gap > WITNESS_TRUNCATION:
+    if gap > WITNESS_ROUNDING:
         print(f"construction disagrees with the retained witness by {gap}")
         return 1
 
     print("field preconditions: x^2-2 irreducible; (1,2) isolates its positive root")
     print("negative control: duplicated square rejected")
-    print(f"agrees with the retained witness to {gap} -- the witness's own truncation")
+    print(f"agrees with the retained witness to {gap} -- the witness's own rounding")
     return 0
 
 

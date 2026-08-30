@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 398
+count: 399
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -11487,12 +11487,19 @@ defects:
     `tests/test_verified_upper_bound_contract.py`, which is written as a measurement and
     falls from 33 to 30, and the counts quoted in `frontier/README.md` and `SYNOPSIS.md`.
 
-    One asymmetry is worth carrying into that work rather than rediscovering: at `n = 89`
-    the retained witness's side is `3.275e-33` *below* `5 + (7/2) sqrt(2)`, because a
-    32-digit truncation of an irrational goes downward. `n = 65` and `n = 40` truncate the
-    other way. So `n = 89`'s exact construction does not fit inside its own retained
-    decimal, and its promotion must carry numbers computed from the construction rather
-    than inherited from the witness.
+    One asymmetry is worth carrying into that work rather than rediscovering. Each retained
+    witness is its exact side *correctly rounded* to the digits it carries -- not truncated
+    -- so which way it lands depends on the omitted tail and is not the same at every size.
+    At `n = 40` and `n = 65` the rounding goes up, putting the witness `6.04e-31` and
+    `4.80e-33` above the exact side, and the exact construction fits inside it. At `n = 89`
+    it goes down, putting the witness `3.27e-33` *below* `5 + (7/2) sqrt(2)`.
+
+    So `n = 89`'s exact construction does not fit inside its own retained decimal, and its
+    promotion cannot be a relabelling: an exact claim at the witness's declared side would
+    be false. It must carry a side and coordinates computed from the construction. Nothing
+    is currently wrong -- both records are `numerical-multiprecision` at `tolerance: 1e-8`
+    and `3e-33` is far inside that -- but the promotion is the operation that would make it
+    wrong.
   regression: >-
     None, and the missing detector is the point rather than an omission. The stale-blocker
     check reads only the record's two bound fields, so it cannot see a certificate the
@@ -11502,3 +11509,60 @@ defects:
     landed certificate goes unrecorded silently.
   bead: think-xdly
   recorded_in: packing/frontier/n-040.md
+- id: D-399
+  title: A residual's explanation had the sign backwards, and called a rounding a truncation
+  date: '2026-08-30'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: 'since cases/gobel40 was written, and inherited by cases/gobel_family'
+  severity: low
+  status: fixed
+  what: >-
+    `cases/gobel40/verify_exact.py` measures the gap between its exact construction and the
+    retained `n = 40` witness, gets `6.0384e-31`, and explains the number: the witness's
+    "side is written to thirty digits and falls short of `4 + 2 sqrt(2)` by exactly that
+    amount". It named the constant `WITNESS_TRUNCATION` and printed the residual as "the
+    witness's own truncation".
+
+    Three things are wrong with that. The witness is the exact side *correctly rounded*,
+    not truncated -- truncating would give `...841` where the record has `...842`. The
+    rounding therefore goes **up**, so the witness sits `6.0384e-31` *above* the exact
+    value rather than falling short of it. And the side carries twenty-nine fractional
+    digits, not thirty.
+
+    `cases/gobel_family/verify_exact.py` inherited the vocabulary: its constant is named
+    `WITNESS_ROUNDING` and its body says "rounding", but the first line of its docstring
+    says "the witnesses' own truncation", contradicting both.
+  consequence: >-
+    Nothing computed is affected. The tolerance is a magnitude, the comparison is
+    two-sided, and every test passes either way; this is prose about a number rather than
+    the number.
+
+    It is worth a record because of what the wrong sign describes. A witness rounded *down*
+    sits below the exact side, and the exact construction then does not fit inside the
+    witness's own declared side -- which is a real constraint on what may be claimed, not a
+    curiosity. `gobel40`'s docstring asserted precisely that situation and it was false
+    there; the situation is genuinely true at `n = 89`, and `cases/gobel_family` treated
+    both its sizes symmetrically ("`4.81e-33` and `3.28e-33`") while one is above and the
+    other below. So the one place the direction actually bites was the place no document
+    mentioned it.
+  fix: >-
+    Both docstrings state the direction per size and derive it from the omitted tail rather
+    than asserting it. `WITNESS_TRUNCATION` is renamed `WITNESS_ROUNDING` to match what it
+    measures and what the other module already called it, and the runtime line printing
+    "the witness's own truncation" says "rounding".
+
+    `cases/gobel_family` gains the asymmetry explicitly: `n = 65` rounds up and its
+    construction fits inside the witness; `n = 89` rounds down and its construction does
+    not, so that record cannot be promoted by relabelling. `gobel40` carries a
+    cross-reference to it, since the safe case is where a reader is most likely to
+    generalise the wrong way.
+  regression: >-
+    None automated. The claim is a direction stated in prose about a number the module
+    already computes and prints, so a check would have to parse the sentence. What replaces
+    it is that both modules now derive the direction from the tail rather than asserting
+    it, and that the one consequence of a downward rounding -- `n = 89` cannot be promoted
+    in place -- is written where the promotion would be attempted, in `D-398`'s fix field
+    and in the module that builds it.
+  recorded_in: packing/cases/gobel_family/verify_exact.py
