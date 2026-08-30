@@ -14,6 +14,8 @@ change a published claim silently.
 
 from __future__ import annotations
 
+import pytest
+
 from devtools.assess_n5_rigidity import (
     active_contacts,
     assess,
@@ -201,3 +203,37 @@ def test_the_record_says_second_order_rigid_and_stops_there() -> None:
     assert result["second_order"]["every_first_order_flex_is_obstructed"] is True
     assert "Local rigidity itself" in result["scope"]["not_established"]
     assert "fixed side" in result["scope"]["not_established"]
+
+
+def test_a_mixed_row_is_refused_rather_than_answered() -> None:
+    """The limitation that would otherwise report a motion that is not there.
+
+    `rationalize` scales a row by `sqrt 2` when every entry is a pure multiple of it. That
+    dichotomy is exhaustive at `n = 5` and not in general: Göbel's `n = 40` construction,
+    exact in the same field, has 296 of 608 rows carrying both a rational and a `sqrt 2`
+    part. No positive scalar rationalizes such a row, so the rational-weight search would
+    answer a different system -- and before this guard it did, reporting all 120 of that
+    pose's coordinates unpinned, which reads as a motion.
+    """
+    from cases.gobel40.packing import build  # noqa: PLC0415 - heavy exact construction
+    from devtools.assess_n5_rigidity import MixedRowError, Pose  # noqa: PLC0415
+
+    squares, side, field = build()
+    pose = Pose(field, side, tuple(tuple(square) for square in squares))
+
+    with pytest.raises(MixedRowError, match="both a rational and a sqrt"):
+        rationalize(pose, constraint_rows(pose, active_contacts(pose)))
+
+
+def test_the_n5_dichotomy_really_is_exhaustive_there() -> None:
+    """Why the limitation went unnoticed: at `n = 5` there is nothing to notice."""
+    pose = load_pose()
+    rows = constraint_rows(pose, active_contacts(pose))
+
+    mixed = [
+        row
+        for row in rows
+        if any(entry.coeffs[0] != 0 for entry in row)
+        and any(entry.coeffs[1] != 0 for entry in row)
+    ]
+    assert mixed == []

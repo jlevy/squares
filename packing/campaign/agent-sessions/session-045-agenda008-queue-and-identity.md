@@ -703,7 +703,7 @@ session:
       the declared budget remain. The OR-7 documentation pass over this session's documents,
       the PR body, and a full gate, so that whatever the next block is starts from a clean
       and described state.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       Every live-queue cell this session can take alone is now terminal or has delivered its
@@ -723,12 +723,225 @@ session:
       OR-7's pass is structure, footer and de-slop, not a second draft.
     fallback: >-
       Push what is green and record what the pass did not reach.
+    outcome: >-
+      Done, and the checkpoint found two process failures worth more than the code it was
+      checking. The PR body now describes the whole branch, the documentation pass is
+      applied, and everything through phase 11 is pushed and green.
+    evidence:
+    - >-
+      'D-387: campaign/agent-sessions/README.md forbids `git add -A` and ends its checkpoint
+      sequence with tbd update and tbd sync. Four commits used `git add -A` and five beads
+      went ninety minutes without an update. Every staged path in those four was inspected
+      afterwards and every one was intentional, so the staging cost nothing; the bead
+      omission would have told the next session BC-024 was mid-census while the taxonomy
+      was retained and gate-checked.'
+    - >-
+      'The cause is this run''s own continuity mechanism. A reminder rewritten every twenty
+      minutes drops something at each rewrite, and an earlier rewrite carried the staging
+      rule while a later one did not. The reminder now names its sources rather than
+      restating them, so a dropped rule is a broken pointer rather than a silent absence.'
+    - >-
+      'X-007 generalized a measurement taken only at n = 5 -- its witness 2.4e-30 off the
+      diagonal -- to n = 28 and n = 40. Corrected: they retain decimals of the same kind,
+      neither has been measured, and it is beside the point either way because a
+      certificate needs an exact pose rather than an accurate one.'
+    - >-
+      'All five beads updated and synced with checkpoint evidence and an exact next action:
+      think-xdly, think-kdil, think-kr1d, think-6mcd, think-u97a.'
+    stop_reason: >-
+      The branch describes itself, the record agrees with the tracker, and `--edit` is green
+      at 45.29s on the committed tree. About four hours of the declared budget remain, so
+      this is a checkpoint rather than the finalization reserve.
+    next_action: >-
+      Then the next live-queue cell. BC-010, BC-029 and BC-017's next slice all wait on
+      decisions an unattended runner may not take, and the agenda map names what is left.
+  - workflow: research-pass
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-049
+    bead: think-xdly
+    objective: >-
+      BC-049 at n = 28 and n = 40. Its next slice is an exact construction rather than
+      another assessment, so the question this slice can actually answer is what one would
+      cost: run the promotion machinery the repository already has against both records and
+      report what it says.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The only live-queue cell that is neither finished nor waiting on a decision an
+      unattended runner may not take. Pricing the construction is the precondition for
+      attempting one, and the handoff now says so.
+    budget_minutes: 50
+    started_at: '2026-08-30T10:43:00Z'
+    deadline_at: '2026-08-30T11:33:00Z'
+    expected_output: >-
+      A measured statement of whether an exact pose for n = 28 or n = 40 is reachable with
+      the retained machinery -- what the margin rule and the integer-relation search return
+      at the retained precision -- or a typed refusal naming the quantity that blocks it.
+      No frontier record moves.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      Stop if answering needs precision the witnesses do not carry. BC-060 already measured
+      that pslq returns nothing at n = 29 through degree twenty on a thousand digits with a
+      residual bound of 1.09829e-1039; manufacturing more digits for n = 28 or n = 40 is a
+      different commitment and a much larger one.
+    fallback: >-
+      The typed refusal, naming what would have to be produced and roughly what it costs,
+      which is what BC-049's remaining instances need recorded either way.
+    outcome: >-
+      The fallback, and the kill condition fired exactly as written -- answering does need
+      precision the witnesses do not carry. The price of an exact pose at n = 28 or n = 40
+      is a higher-precision source, before any computation, and neither has one.
+
+      What makes this a measurement rather than a reading of the code is that the route was
+      calibrated at the two sizes whose answers are known, and it reproduces neither. The
+      first version of the tool did not do that and reported deciding windows that looked
+      like structure; they sit below the retained precision and are windows on the
+      materialisation's padding.
+    evidence:
+    - >-
+      'promote.solve.reach is 0 at the retained precision for all four sizes, n = 11
+      included. Its degree-eight minimal polynomial was recovered from four hundred digits
+      manufactured out of a closed system, not from its 32-digit witness, so the retained
+      decimals are not the input to this route at any size.'
+    - >-
+      'Calibration at n = 11: the exact structure is 14 pair and 20 wall contacts at floor
+      0, and the decimal route decides at no floor in a sixty-step sweep.'
+    - >-
+      'Calibration at n = 29: the retained structure is 52 pair and 37 wall at floor 1e-80,
+      from a 160-digit materialisation of a provenance SVG, and the route reports 17 and 36
+      from the 99-digit witness.'
+    - >-
+      'Witness precision: 32 digits at n = 11, 57 at n = 28, 99 at n = 29, 29 at n = 40.
+      n = 40 carries fewer than n = 11.'
+    - >-
+      'Neither n = 28 nor n = 40 has a case module, a retained contact structure, or a
+      provenance artifact of the kind n = 29''s extraction was run against.'
+    stop_reason: >-
+      The kill condition is met and the refusal is typed. Manufacturing precision for these
+      two sizes is a different commitment and a much larger one, and BC-060 already measured
+      what that costs at n = 29.
+    next_action: >-
+      Record the price. BC-010, BC-029 and BC-017's next slice all wait on decisions an
+      unattended runner may not take.
+  - workflow: factual-review
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      The live queue is exhausted for an unattended runner: BC-010 waits on exp-045's
+      acceptance decision, BC-017 on the readiness decision its own promotion_boundary
+      authorizes, and BC-049's remaining instances are typed-refused for want of a source.
+      So the remaining clock goes to reviewing what this session produced, adversarially and
+      in parallel, rather than to entering a cell that would stop.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Not a cell from the queue, because the queue has none this runner may take. OR-2 is
+      the rule that applies: five tools, four retained records, two explorations and seven
+      defects were produced in about four hours and every one of them was reviewed only by
+      their author. A sub-agent has already caught a real error in a proof today.
+    budget_minutes: 60
+    started_at: '2026-08-30T10:54:00Z'
+    deadline_at: '2026-08-30T11:54:00Z'
+    expected_output: >-
+      Findings acted on, not merely collected: every real one fixed or recorded, and every
+      one dismissed verified before dismissal. A report that is wrong is evidence about the
+      reviewer, and this session has three such reports on record already.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --fast
+    kill_condition: >-
+      Do not act on a finding without checking it. Two sub-agents this session called valid
+      3.14 syntax a SyntaxError, and a third proposed a proof step that was wrong. A report
+      is evidence, not a verdict.
+    fallback: >-
+      Record what the review found and what it could not settle, which is the same
+      obligation either way.
+    outcome: >-
+      The review overturned the block that preceded it, which is the best argument for
+      running one. An archive search found Goebel's n = 40 construction published and
+      transcribed in this repository, the claim was verified independently before being
+      acted on, and n = 40 now has an exact pose that the exact verifier accepts -- where
+      the record, including what this session wrote an hour earlier, said none existed and
+      producing one was the price.
+    evidence:
+    - >-
+      'D-389: the promotion route was priced carefully and the conclusion was wrong for half
+      its subject. [Friedman DS7] section 2 gives Goebel''s centred diagonal block family --
+      2a^2 + 2a + b^2 squares in side a + 1 + b/sqrt(2) -- which at a = 3, b = 4 is forty
+      squares in 4 + 2 sqrt(2). A well-measured answer to the wrong question is harder to
+      notice than a badly measured one, because the numbers are all correct.'
+    - >-
+      'Verified before acting, per this phase''s own kill condition: all 80 retained
+      coordinates fit p + q sqrt(2) with half-integer p and q, angles are exactly 0 and 45,
+      and the single worst residual 6.04e-31 is the side''s own truncation inherited by the
+      one coordinate computed from it.'
+    - >-
+      'cases/gobel40 derives the frame from Goebel''s rule rather than reading it off the
+      witness -- 36 lattice positions less the 12 the diagonal block occupies, computed
+      exactly -- so the witness stays a check. sqpack.verify accepts it: 40 squares, 780
+      pairs, 48 corner coordinates exactly on the boundary, 98 pairs at zero gap, agreeing
+      with the witness to 6.04e-31.'
+    - >-
+      'D-388, and it is the more serious find: X-007''s assessor cannot consume the new pose
+      and would not have said so. 296 of 608 rows carry both a rational and a sqrt 2 part,
+      which no positive scalar rationalizes, so the rational-weight Farkas search answered a
+      different system -- reporting all 120 coordinates unpinned, which reads as a motion.
+      The n = 5 dichotomy is exhaustive there and nowhere else, which is why an adversarial
+      review of it found nothing. It refuses now.'
+    - >-
+      'So n = 40''s rigidity is open rather than answered, and deciding it needs a Farkas
+      search whose weights live in the ordered field. That is a different instrument, not a
+      patch to this one.'
+    stop_reason: >-
+      The review''s finding was acted on to the point where the next step is a new
+      instrument rather than a fix. Three defects recorded, two of them about tools this
+      session built four hours earlier.
+    next_action: >-
+      Depends on what the review finds. If nothing, the honest next action is the handoff:
+      the queue needs a human decision before an unattended runner can take another cell.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-049
+    bead: think-xdly
+    objective: >-
+      Decide n = 40's rigidity. The pose exists exactly now, and D-388 names precisely what
+      stops the assessor consuming it: 296 of its 608 constraint rows carry both a rational
+      and a sqrt 2 part, so a rational-weight Farkas search answers a different system. What
+      is needed is a search whose weights live in the ordered field.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The review block produced the pose and the blocker in the same hour. This is the only
+      live-queue slice left that does not wait on a human decision, and its shape is known
+      rather than open.
+    budget_minutes: 60
+    started_at: '2026-08-30T11:05:00Z'
+    deadline_at: '2026-08-30T12:05:00Z'
+    expected_output: >-
+      Either n = 40's first-order cone decided over Q(sqrt 2) with certificates verified in
+      the field, or a typed statement of what an ordered-field Farkas search needs that this
+      repository does not have. No claim about n = 40 that rests on rational weights.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --edit
+    kill_condition: >-
+      D-388 is the standing one and it must not be worked around. A search that answers a
+      mixed-row system with rational weights answers a different question, in the flattering
+      direction. If the ordered-field search cannot be built cleanly, say so rather than
+      loosening the guard.
+    fallback: >-
+      The typed statement, which is what BC-049's exit accepts and what the next instrument
+      would need written down anyway.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Then the next live-queue cell. BC-010, BC-029 and BC-017's next slice all wait on
-      decisions an unattended runner may not take, and the agenda map names what is left.
+      Record the outcome. BC-010, BC-029, BC-017's next slice and BC-049 at n = 28 all wait
+      on decisions or sources an unattended runner cannot supply.
   primary_bead: think-s424
   status: in_progress
   budget:
@@ -967,13 +1180,12 @@ session:
   checks: []
   stop_reason: null
   next_action: >-
-    Take BC-049 on `think-xdly` at n = 28 and n = 40, the one live-queue cell that is
-    neither finished nor waiting on a decision this runner may not take. Its next slice is
-    not another assessment: X-007's machinery is general in shape and specific in inputs,
-    and it needs an exact pose. Both retained witnesses are decimals of the same kind as
-    n = 5's, which was measured 2.4e-30 off the diagonal and infeasible at the scale a
-    certificate works at. So the slice is producing an exact construction, and that is the
-    real price.
+    Take BC-049 on `think-xdly` at n = 40, whose exact pose now exists and whose rigidity is
+    open for one measured reason: D-388. The assessor refuses the pose because 296 of its
+    608 constraint rows mix a rational and a sqrt 2 part, and deciding it needs a Farkas
+    search whose weights live in the ordered field rather than in Q. That is a bounded piece
+    of instrument work with a known shape, and it is the only live-queue slice left that
+    does not wait on a human decision.
 ---
 # Session-045 — Agenda-008
 

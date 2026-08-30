@@ -1,0 +1,128 @@
+{
+  "calibration": {
+    "11": {
+      "decimal_route_reports": "nothing decides at any swept floor",
+      "reproduced": false,
+      "retained": {
+        "floor": "0",
+        "pair_contacts": 14,
+        "wall_contacts": 20
+      }
+    },
+    "29": {
+      "decimal_route_reports": {
+        "pair_contacts": 17,
+        "wall_contacts": 36
+      },
+      "reproduced": false,
+      "retained": {
+        "floor": "1e-80",
+        "pair_contacts": 52,
+        "wall_contacts": 37
+      }
+    }
+  },
+  "schema_version": 2,
+  "stages": {
+    "11": {
+      "stage_1_digits": {
+        "available_digits": 32.0,
+        "margin_digits": 200,
+        "max_coefficient": "10000000000000000000000",
+        "meaning": "the largest degree at which a refusal would be a statement about the number rather than about the precision; zero means an integer-relation search on these digits can say nothing either way",
+        "reach_degree": 0,
+        "retained_digits": 32
+      },
+      "stage_2_contact_structure": {
+        "decided_at_any_swept_floor": false,
+        "meaning": "no floor in the sweep leaves every incidence decided, so this pose cannot say what touches what at any scale asked about",
+        "swept": "1e-2 to 1e-120"
+      },
+      "stage_3_closed_system": "retained"
+    },
+    "28": {
+      "stage_1_digits": {
+        "available_digits": 57.0,
+        "margin_digits": 200,
+        "max_coefficient": "10000000000000000000000",
+        "meaning": "the largest degree at which a refusal would be a statement about the number rather than about the precision; zero means an integer-relation search on these digits can say nothing either way",
+        "reach_degree": 0,
+        "retained_digits": 57
+      },
+      "stage_2_contact_structure": {
+        "counts_stable_across_window": true,
+        "decided_at_any_swept_floor": true,
+        "headroom_orders": -63,
+        "meaning": "the floors at which every incidence decides. It is a window rather than a threshold because the ambiguity ceiling is the floor times 1e10: too coarse a floor puts genuine separations inside the band, too fine a one puts contact residuals below it. A window that is wide, and over which the contact counts do not move, is a pose whose structure is not an artefact of the tolerance.",
+        "pair_contacts": 27,
+        "wall_contacts": 40,
+        "window": "1e-108 to 1e-120",
+        "window_orders": 12
+      },
+      "stage_3_closed_system": "absent -- no case module exists"
+    },
+    "29": {
+      "stage_1_digits": {
+        "available_digits": 99.0,
+        "margin_digits": 200,
+        "max_coefficient": "10000000000000000000000",
+        "meaning": "the largest degree at which a refusal would be a statement about the number rather than about the precision; zero means an integer-relation search on these digits can say nothing either way",
+        "reach_degree": 0,
+        "retained_digits": 99
+      },
+      "stage_2_contact_structure": {
+        "counts_stable_across_window": true,
+        "decided_at_any_swept_floor": true,
+        "headroom_orders": -21,
+        "meaning": "the floors at which every incidence decides. It is a window rather than a threshold because the ambiguity ceiling is the floor times 1e10: too coarse a floor puts genuine separations inside the band, too fine a one puts contact residuals below it. A window that is wide, and over which the contact counts do not move, is a pose whose structure is not an artefact of the tolerance.",
+        "pair_contacts": 17,
+        "wall_contacts": 36,
+        "window": "1e-112 to 1e-120",
+        "window_orders": 8
+      },
+      "stage_3_closed_system": "retained"
+    },
+    "40": {
+      "stage_1_digits": {
+        "available_digits": 29.0,
+        "margin_digits": 200,
+        "max_coefficient": "10000000000000000000000",
+        "meaning": "the largest degree at which a refusal would be a statement about the number rather than about the precision; zero means an integer-relation search on these digits can say nothing either way",
+        "reach_degree": 0,
+        "retained_digits": 29
+      },
+      "stage_2_contact_structure": {
+        "counts_stable_across_window": true,
+        "decided_at_any_swept_floor": true,
+        "headroom_orders": -91,
+        "meaning": "the floors at which every incidence decides. It is a window rather than a threshold because the ambiguity ceiling is the floor times 1e10: too coarse a floor puts genuine separations inside the band, too fine a one puts contact residuals below it. A window that is wide, and over which the contact counts do not move, is a pose whose structure is not an artefact of the tolerance.",
+        "pair_contacts": 58,
+        "wall_contacts": 48,
+        "window": "1e-80 to 1e-120",
+        "window_orders": 40
+      },
+      "stage_3_closed_system": "absent -- no case module exists"
+    }
+  },
+  "subject": {
+    "calibration": [
+      11,
+      29
+    ],
+    "commitment": "BC-049",
+    "instances": [
+      28,
+      40
+    ],
+    "promotes_nothing": "no frontier record moves and no rigidity claim is made here; clearing a stage buys the input to the next one, not an exact construction",
+    "question": "what would an exact pose cost at a size that retains only decimals?"
+  },
+  "verdict": {
+    "calibration_result": "the decimal route reproduces the retained structure at 0 of 2 sizes where one exists",
+    "n40_did_not_need_this_route_at_all": "and the first version of this file said it did, which was the error worth more than the measurement. Goebel's construction for n = 40 is published, is transcribed in this repository -- [Friedman DS7] section 2, the centred diagonal block family at a = 3, b = 4 -- and the retained witness is a materialisation of it: all eighty coordinates fit p + q sqrt(2) with half-integer p and q, the angles are exactly 0 and 45, and the only error anywhere is one 6.04e-31 truncation of the side. cases/gobel40 now builds it exactly and sqpack.verify accepts it: 40 squares, 780 pairs, 48 corner coordinates exactly on the boundary. This route was priced without first asking whether its destination was already reachable by another.",
+    "so_the_measured_windows_are_not_evidence": "n = 11's structure is exact and known -- 14 pair and 20 wall contacts at floor 0 -- and the decimal route decides at no floor at all. n = 29's is 52 pair and 37 wall at floor 1e-80, and the route reports different numbers. A route that reproduces neither known answer is not one whose numbers at n = 28 and n = 40 can be read as structure; the floors where it appears to decide sit below the retained precision, which makes them windows on the materialisation's padding.",
+    "stage_1_is_zero_everywhere": "reach is 0 at the retained precision for all four sizes, n = 11 included. Its degree-eight minimal polynomial was recovered from four hundred digits manufactured out of a closed system, not from its 32-digit witness. The retained decimals are not the input to this route at any size.",
+    "the_price": "for n = 28: a higher-precision source, before anything else. It has no case module, no retained contact structure, and no provenance artifact of the kind n = 29's extraction was run against, so there is no first step to take and that is the typed refusal BC-049's exit accepts.",
+    "why_it_fails": "the input, not the extractor. n = 29's retained structure came from a 160-digit materialisation of a provenance SVG and n = 11's from exact field arithmetic. The witnesses carry 32, 57, 99 and 29 fractional digits, which is not enough for a contact residual to fall below a floor whose ambiguity ceiling is ten orders above it."
+  }
+}

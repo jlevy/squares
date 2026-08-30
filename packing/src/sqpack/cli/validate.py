@@ -857,6 +857,11 @@ def _exact_verification(context: Context) -> str:
             (sys.executable, "-m", "cases.trump11.verify_exact"),
             (sys.executable, "-m", "cases.gobel5.verify_exact"),
             (sys.executable, "-m", "cases.gobel10.verify_exact"),
+            # n=40 joined the exact cases on 2026-08-30. Its construction is Goebel's
+            # published centred-diagonal-block family at a=3, b=4, and its replay also
+            # checks agreement with the retained decimal witness to that witness's own
+            # truncation, which is the only discrepancy there is.
+            (sys.executable, "-m", "cases.gobel40.verify_exact"),
             (
                 sys.executable,
                 "-m",
@@ -1069,6 +1074,17 @@ def _n5_identity_pair(context: Context) -> str:
     # has, and a census that stopped reproducing it would invalidate the control without
     # changing any file.
     return _module(context, "devtools.build_n5_identity_pair", "--check")
+
+
+def _exact_construction_price(context: Context) -> str:
+    """The decimal route still reproduces neither known contact structure.
+
+    38s, and `broad` for depth rather than breadth: the measurement is a sixty-floor sweep
+    at four sizes, and narrowing it would narrow the finding. Kept out of `--edit` for the
+    cost and in `--fast` because what it guards is a typed refusal -- if the route ever
+    started reproducing `n = 11`'s exact 14-and-20, that would be news either way.
+    """
+    return _module(context, "devtools.price_exact_construction", "--check")
 
 
 def _work_accounting(context: Context) -> str:
@@ -1561,6 +1577,19 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/check_golden_basins.py",
             "packing/devtools/check_soundness_perimeter.py",
             "packing/campaign/series/*/results/bc-083-n5-identity-pair.json",
+        ),
+    ),
+    Step(
+        "the decimal route still cannot price an exact pose",
+        _exact_construction_price,
+        fast=True,
+        broad=True,
+        touches=(
+            *_CORE,
+            "packing/witnesses/*",
+            "packing/atlas/known-best/contact-structures.json",
+            "packing/devtools/price_exact_construction.py",
+            "packing/campaign/series/*/results/bc-049-exact-construction-price.json",
         ),
     ),
     Step(

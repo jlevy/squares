@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 387
+count: 389
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10851,3 +10851,118 @@ defects:
     check decays, and the fix that is only a practice change is the fix that recurs.
   bead: think-s424
   recorded_in: packing/campaign/agent-sessions/README.md
+
+- id: D-388
+  title: A rationalization that was exhaustive at one size answered the wrong system at another
+  date: '2026-08-30'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: control_cell
+  latent_for: 'since assess_n5_rigidity was written the same day; caught the first time it met a second pose'
+  severity: high
+  status: fixed
+  what: >-
+    `assess_n5_rigidity.rationalize` scales a constraint row by `sqrt 2` when every entry is
+    a pure multiple of it, and leaves the row alone otherwise. At `n = 5` that dichotomy is
+    exhaustive: 16 rows are wholly rational and 4 are wholly irrational, and an adversarial
+    review checked exactly this and found nothing to report.
+
+    It is not exhaustive in general. Goebel's `n = 40` construction, built exactly in the
+    same field, has **296 of 608 rows carrying both a rational and a `sqrt 2` part**. No
+    positive scalar rationalizes such a row, so the rational-weight Farkas search was
+    solving a different system from the one the motion cone is defined by.
+
+    It solved it, and answered. Run on `n = 40` before this was noticed, the assessor
+    reported all 120 coordinates unpinned and no certificate anywhere.
+  consequence: >-
+    The dangerous direction, in the most direct way this repository has a name for. "No
+    Farkas certificate for this coordinate" is rendered by the assessor as `uncertified`,
+    and a reader reaches "not pinned", which reaches "there is a motion". A silent
+    limitation would have manufactured an infinitesimal flex at every size whose contact
+    normals mix the two parts -- which is to say at every size but the one it was written
+    for.
+
+    Nothing was published from it: the failure appeared the first time the tool met a second
+    pose, which was about ninety minutes after it was written, and the number it produced
+    was never recorded anywhere. What makes it worth a `high` severity is not what it cost
+    but what it would have cost: `X-007`'s whole argument is that a cone of dimension zero
+    means rigid, and this is the mechanism by which that argument reports a nonzero cone
+    from arithmetic rather than from geometry.
+  fix: >-
+    `MixedRowError`, raised by `row_scales` before any search runs. A row it cannot
+    rationalize now stops the assessment with the count and the first offending index,
+    rather than being handed to a linear program that will answer regardless.
+
+    Refusing is the fix rather than a step toward one. Handling mixed rows properly needs a
+    Farkas search whose weights live in the ordered field instead of in `Q` -- a different
+    instrument, not a patch -- and until that exists the honest behaviour is to say so.
+  regression: >-
+    Two tests, and the pair is the point. `test_a_mixed_row_is_refused_rather_than_answered`
+    builds the `n = 40` pose and asserts the refusal fires;
+    `test_the_n5_dichotomy_really_is_exhaustive_there` asserts `n = 5` has no mixed row at
+    all, which is why nothing caught this and why the `n = 5` result is unaffected. A guard
+    without the second test would leave open whether the first size was ever safe.
+  bead: think-xdly
+  recorded_in: packing/devtools/assess_n5_rigidity.py
+
+- id: D-389
+  title: A route was priced without asking whether its destination was already reachable
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: 'about thirty minutes, and a year in the record it inherited'
+  severity: medium
+  status: fixed
+  what: >-
+    `BC-049`'s remaining instances are `n = 28` and `n = 40`, and the record said of both
+    that no exact construction was retained and that producing one was the price of
+    extending the rigidity machinery. This session priced that: it measured what the
+    promotion route -- extract a contact structure, close the system, manufacture digits,
+    run the margin rule -- would cost at each, found the route unusable at the retained
+    precision, and recorded a typed refusal.
+
+    Every measurement in it is sound and the conclusion was wrong for half its subject.
+    Goebel's construction for `n = 40` is **published**, and transcribed in this repository:
+    `[Friedman DS7]` section 2 gives the centred diagonal block family, `2a^2 + 2a + b^2`
+    squares in side `a + 1 + b/sqrt(2)`, which at `a = 3, b = 4` is exactly forty squares in
+    `4 + 2 sqrt(2)`. The retained witness is a materialisation of it -- all eighty
+    coordinates fit `p + q sqrt(2)` with half-integer `p` and `q`, the angles are exactly
+    `0` and `45`, and the only error anywhere is one `6.04e-31` truncation of the side.
+
+    The route was never needed. `cases/gobel40` now builds the pose exactly and the exact
+    verifier accepts it: 40 squares, 780 pairs, 48 corner coordinates exactly on the
+    boundary, 98 pairs at zero gap.
+  consequence: >-
+    Conservative rather than flattering -- it understated what was reachable, and would have
+    left `n = 40` recorded as blocked on work nobody needed to do. The cost is the block
+    itself and the older statements it inherited: `BC-063`'s note in `agenda-006` and
+    `X-007`'s closing section both said neither size had an exact construction retained, and
+    both were reasoning about the repository rather than about the mathematics.
+
+    The general shape is worth naming because it is not specific to packing. A commitment
+    said "produce X"; the session asked "what does producing X cost by the route we have",
+    measured that carefully, and never asked "is X already available by a route we are not
+    thinking of". A well-measured answer to the wrong question is harder to notice than a
+    badly measured one, because the numbers are all correct.
+  fix: >-
+    `cases/gobel40/packing.py` builds the construction from Goebel's rule rather than from
+    the witness -- the frame is derived by removing from a thirty-six position lattice the
+    twelve the diagonal block occupies, computed exactly, so the witness stays a check
+    rather than becoming the source. `cases/gobel40/verify_exact.py` replays it, runs the
+    duplicated-square negative control, and asserts agreement with the retained witness to
+    that witness's own truncation. Both are in the `exact verification` gate step.
+
+    The price record is corrected rather than deleted: its measurements stand, its refusal
+    now names `n = 28` alone, and it carries why `n = 40` never needed the route.
+  regression: >-
+    The gate step is the mechanical part. The methodological part has no check and the
+    honest thing is to say so: what would have caught this earlier is reading the retained
+    literature for the case before pricing machinery against it, and the archive search that
+    did catch it was a delegation, not a rule. `H-038`'s instrument clause already asks for
+    field invariants of record packings; `n = 40` is now one of the few sizes that can
+    supply one.
+  bead: think-xdly
+  recorded_in: packing/cases/gobel40/packing.py

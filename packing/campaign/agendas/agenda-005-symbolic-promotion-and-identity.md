@@ -334,11 +334,48 @@ agenda:
       than an absence.
 
       n = 5 is now settled as far as this machinery reaches, and what remains for n = 28
-      and n = 40 is not a rerun of it. The argument needs an exact pose, and the retained
-      witnesses for those two are decimals that are infeasible at the scale a certificate
-      works at -- the n = 5 witness is 2.4e-30 off the diagonal, which the escape screen
-      itself records as a negative pair separation. So the next slice here is an exact
-      construction, not an assessment.
+      and n = 40 is not a rerun of it. The argument needs an exact pose, and both retain
+      decimal witnesses.
+
+      That next slice has since been priced, and the price is a source rather than a
+      computation. The obvious first step -- extract a contact structure from the decimals,
+      which is what a closed system is written against -- was run and calibrated at the two
+      sizes whose answers are known, and it reproduces neither. n = 11's structure is exact,
+      14 pair and 20 wall contacts at floor 0, and the decimal route decides at no floor at
+      all. n = 29's is 52 pair and 37 wall at floor 1e-80, extracted from a 160-digit
+      materialisation of a provenance SVG, and the route reports different numbers from the
+      99-digit witness. The floors where it appears to decide sit below the retained
+      precision, so they are windows on the materialisation's padding.
+
+      Stage one says the same thing from the other end: promote.solve.reach is 0 at the
+      retained precision for all four sizes, n = 11 included, whose degree-eight minimal
+      polynomial was recovered from four hundred manufactured digits rather than from its
+      32-digit witness. The retained decimals are not the input to this route at any size.
+
+      So the first step for n = 28 is a higher-precision source, and it has none: no case
+      module, no retained contact structure, and no provenance artifact of the kind n = 29's
+      extraction was run against. That is the typed refusal this exit accepts for that size.
+
+      For n = 40 the refusal was wrong, and D-389 records why it was reached. Goebel's
+      construction is published and transcribed here -- [Friedman DS7] section 2, the centred
+      diagonal block family, 2a^2 + 2a + b^2 squares in side a + 1 + b/sqrt(2), which at
+      a = 3, b = 4 is exactly forty squares in 4 + 2 sqrt(2). The retained witness is a
+      materialisation of it: all eighty coordinates fit p + q sqrt(2) with half-integer p
+      and q, the angles are exactly 0 and 45, and the only error anywhere is one 6.04e-31
+      truncation of the side. The promotion route was priced without anyone asking whether
+      its destination was already reachable another way.
+
+      cases/gobel40 now builds it exactly, deriving the frame from Goebel's rule rather than
+      reading it off the witness, and the exact verifier accepts it: 40 squares, 780 pairs,
+      48 corner coordinates exactly on the boundary, 98 pairs at zero gap, agreeing with the
+      retained witness to that witness's own truncation.
+
+      The rigidity question at n = 40 is still open, and D-388 is why. X-007's assessor
+      cannot consume the pose: 296 of its 608 constraint rows carry both a rational and a
+      sqrt 2 part, which no positive scalar rationalizes, and the rational-weight Farkas
+      search was answering a different system. It answered "no certificate anywhere", which
+      reads as a motion. It now refuses instead. Deciding n = 40 needs a Farkas search whose
+      weights live in the ordered field, which is a different instrument.
     note: >-
       n = 5 first: it is proved optimal, its side is 2 + sqrt(2)/2, and its structure is
       the smallest of the three. Promoting reported_upper_bound.catalogue_rigid into the
@@ -364,6 +401,15 @@ agenda:
       Recorded in campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md,
       devtools/assess_n5_rigidity.py, tests/test_n5_rigidity.py, and
       campaign/series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json.
+    artifacts:
+    - devtools/assess_n5_rigidity.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json
+    - campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md
+    - devtools/price_exact_construction.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-049-exact-construction-price.json
+    - tests/test_exact_construction_price.py
+    - cases/gobel40/packing.py
+    - cases/gobel40/verify_exact.py
   - id: BC-050
     purpose: measurement_validation
     owner_focus: correctness

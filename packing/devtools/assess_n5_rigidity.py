@@ -220,6 +220,26 @@ def constraint_rows(pose: Pose, contacts: list[Contact]) -> list[list[FieldEleme
     return rows
 
 
+class MixedRowError(RuntimeError):
+    """A row this scaling cannot rationalize, which the search must not be handed.
+
+    Raised rather than worked around, because the alternative is worse than an error. A
+    row with both rational and `sqrt 2` parts in it cannot be made rational by any positive
+    scalar, so the rational-weight linear program below would be solving a different system
+    from the one the cone is defined by -- and it would answer. It would answer "no
+    certificate", which reads as "this coordinate is not pinned", which reads as a motion.
+    The flattering direction, from a silent limitation.
+
+    Measured on 2026-08-30: Goebel's `n = 40` construction, built exactly in the same field,
+    has 296 mixed rows out of 608, and the assessor reported every one of its 120
+    coordinates unpinned before this guard existed. `n = 5` has none, which is why the
+    dichotomy held there and why nothing caught it.
+
+    Lifting this needs a Farkas search whose weights live in the ordered field rather than
+    in `Q`, which is a different instrument and not a patch to this one.
+    """
+
+
 def row_scales(pose: Pose, rows: list[list[FieldElement]]) -> list[FieldElement]:
     """The positive constant each row must be multiplied by to make its entries rational.
 
@@ -230,6 +250,19 @@ def row_scales(pose: Pose, rows: list[list[FieldElement]]) -> list[FieldElement]
     """
     one = pose.field.rational(1)
     root = pose.field.alpha
+    mixed = [
+        index
+        for index, row in enumerate(rows)
+        if any(entry.coeffs[0] != 0 for entry in row)
+        and any(entry.coeffs[1] != 0 for entry in row)
+    ]
+    if mixed:
+        raise MixedRowError(
+            f"{len(mixed)} of {len(rows)} constraint rows carry both a rational and a "
+            f"sqrt(2) part (first at index {mixed[0]}); no positive scalar rationalizes "
+            "such a row, so a rational-weight Farkas search would answer a different "
+            "question and answer it in the flattering direction"
+        )
     return [
         root
         if (
