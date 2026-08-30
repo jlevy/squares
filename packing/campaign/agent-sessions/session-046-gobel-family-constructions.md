@@ -115,6 +115,10 @@ session:
   delegations: []
   outputs: []
   checks: []
+  # Same harness log as session-045 -- one continuous transcript spanning both. This
+  # session spawned no sub-agents, so it names the log alone.
+  resource_rollups:
+  - packing/campaign/resource-usage/3930e045-47fc-5947-8bf6-0c92155bcd88.yaml
   stop_reason: >-
     The one slice this session declared is done and the mandate's wall budget is spent.
   next_action: >-

@@ -5,8 +5,13 @@ artifact rather than a pointer to one.**
 
 The raw JSONL a coding harness writes is large, harness-private, and full of prose this
 repository has no reason to keep, so it will not always be archived.
-This session’s transcript was 8.4 MB; its record is 8.3 KB, which is small enough to
-live in git and detailed enough to answer the questions the efficiency work asks.
+The ratio is the reason this works.
+The longest transcript here is 29.9 MB and its record is 23.0 KB — small enough to live
+in git, detailed enough to answer the questions the efficiency work asks.
+
+Rollups are **regenerated, not appended**: a record is a function of the log it names,
+so re-running the command on a session that has since grown replaces the record rather
+than adding to it. The sha256 is what tells two apart.
 
 ## What is here
 

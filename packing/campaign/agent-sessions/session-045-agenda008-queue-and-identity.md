@@ -1766,6 +1766,28 @@ session:
     next_action: None. Every gap is closed or recorded.
   outputs: []
   checks: []
+  # The harness log covers session-045 and session-046 both: one transcript, two sessions,
+  # so both records name it. The sixteen sub-agent rollups are the ones whose spans fall
+  # inside this session's window (06:48Z to 15:03Z on 2026-08-30), attributed by time
+  # rather than by memory.
+  resource_rollups:
+  - packing/campaign/resource-usage/3930e045-47fc-5947-8bf6-0c92155bcd88.yaml
+  - packing/campaign/resource-usage/agent-a5755a63a48474aa6.yaml
+  - packing/campaign/resource-usage/agent-abd1b7a36fc40a566.yaml
+  - packing/campaign/resource-usage/agent-ab66b719c5686d8ab.yaml
+  - packing/campaign/resource-usage/agent-ac315f4759f613fa6.yaml
+  - packing/campaign/resource-usage/agent-aa16fb499e8a12673.yaml
+  - packing/campaign/resource-usage/agent-acee7e15ab0cec4db.yaml
+  - packing/campaign/resource-usage/agent-aa06153c7ddddd0aa.yaml
+  - packing/campaign/resource-usage/agent-ac9c572de5292123c.yaml
+  - packing/campaign/resource-usage/agent-af82011e6570b4871.yaml
+  - packing/campaign/resource-usage/agent-ae69221bcaaefff24.yaml
+  - packing/campaign/resource-usage/agent-a760646281ffa08f3.yaml
+  - packing/campaign/resource-usage/agent-a3f58cb771695f453.yaml
+  - packing/campaign/resource-usage/agent-af0f0e43ec7cc1850.yaml
+  - packing/campaign/resource-usage/agent-a54e563746f9b7dd5.yaml
+  - packing/campaign/resource-usage/agent-a561011b4ec8b1a7b.yaml
+  - packing/campaign/resource-usage/agent-a6588ce8679d53bd1.yaml
   stop_reason: >-
     Wall budget reached after twenty-three phases against a plan for seventeen, with the
     research route on n = 40 exhausted rather than paused: the all-branch rows cannot bound

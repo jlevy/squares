@@ -150,10 +150,47 @@ tbd sync
 ```
 
 Do not use `git add -A` in a shared checkout.
-The coordinator substitutes the phase’s recorded validation command for
-`<focused-validation>` before the sequence and inspects every staged path before
-committing. A session checkpoint is durable only when its commit is on the recorded
-remote branch and the session’s next action identifies any remaining work.
+
+## Closing a Session
+
+The checkpoint sequence above is per-phase.
+Bringing a whole session to a terminal state adds one step, and it is not optional:
+
+```shell
+# From packing/. One record per log: the outer agent's, and every sub-agent it spawned.
+uv run --frozen python -m devtools.log_rollup <session-log>.jsonl --out campaign/resource-usage
+uv run --frozen python -m devtools.log_rollup <sub-agent-log>.jsonl --out campaign/resource-usage
+```
+
+Then list what those wrote in the session record’s `resource_rollups`,
+repository-relative.
+
+**Why this is a required field and a gate step rather than a line in a checklist.**
+Session-045 ran twenty-three phases without the rollup being written once, and nothing
+noticed: no field was empty, no check failed, and the session closed clean.
+The omission was invisible because there was no link at all between a session and its
+usage — rollups are named by harness log id, sessions by their own sequence number, and
+nothing joined the two.
+`OR-1` says the answer to a recurring measurement gap is a tool rather than a better
+memory, so `devtools.check_session_rollups` refuses a terminal session that declares
+none and the gate step `terminal sessions name what they cost` runs it in `--records`.
+
+Three things worth knowing when you do it:
+
+- **The rollup is regenerated, not appended.** A record is a function of the log it
+  names, so re-running the command on a session that has since grown replaces the
+  record. Run it at the end, not part-way through, or run it again if you do.
+- **Sub-agent transcripts are where the delegated cost lives**, and they are separate
+  logs. Session-045’s sixteen of them carry work that does not appear in the outer log at
+  all. Attribute them by comparing each rollup’s `span` against the session’s window
+  rather than by memory; the outer log may span more than one session, in which case
+  each names it.
+- **Sessions numbered below `session-045` predate the field** and the checker lists them
+  as grandfathered rather than skipping them silently.
+  The coordinator substitutes the phase’s recorded validation command for
+  `<focused-validation>` before the sequence and inspects every staged path before
+  committing. A session checkpoint is durable only when its commit is on the recorded
+  remote branch and the session’s next action identifies any remaining work.
 
 Do not infer that the generic numerical runner is admissible because
 `packing-campaign preflight` passes.

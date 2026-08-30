@@ -1152,6 +1152,12 @@ def _n5_rigidity_certificates(context: Context) -> str:
     return _module(context, "devtools.assess_n5_rigidity", "--check")
 
 
+def _session_rollups(context: Context) -> str:
+    # Sub-second: it reads frontmatter and stats files. Records-tier because that is exactly
+    # what it checks -- that a terminal session names what it cost and the record is there.
+    return _module(context, "devtools.check_session_rollups")
+
+
 def _gobel_family(context: Context) -> str:
     # About five seconds: the family is twelve pairs and only the four whose side matches a
     # retained best known are built and verified exactly, the largest being n = 89 at 3916
@@ -1699,6 +1705,18 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/assess_n5_rigidity.py",
             *_CASES,
             "packing/campaign/series/*/results/bc-049-n5-rigidity-certificates.json",
+        ),
+    ),
+    Step(
+        "terminal sessions name what they cost",
+        _session_rollups,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/check_session_rollups.py",
+            "packing/campaign/agent-sessions/*.md",
+            "packing/campaign/resource-usage/*.yaml",
         ),
     ),
     Step(
