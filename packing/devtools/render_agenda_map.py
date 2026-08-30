@@ -63,7 +63,7 @@ STATE_MEANING = {
     "ready": "may be taken now",
     "tentative": "declared but not yet committed to",
     "blocked": "waiting on a named predecessor",
-    "stopped": "abandoned deliberately, with the reason in the agenda",
+    "stopped": "not run here; the agenda says why, and `discharged_by` names where it moved",
     "complete": "discharged",
 }
 
@@ -83,6 +83,8 @@ class Commitment:
     question: str
     bead: str
     depends_on: tuple[str, ...]
+    blocked_on: str
+    discharged_by: str
 
     @classmethod
     def of(cls, agenda: dict, doc: str, item: dict) -> Self:
@@ -98,6 +100,8 @@ class Commitment:
             question=" ".join(item["question"].split()),
             bead=item["bead"],
             depends_on=tuple(item.get("depends_on", [])),
+            blocked_on=" ".join(item.get("blocked_on", "").split()),
+            discharged_by=item.get("discharged_by", ""),
         )
 
     @property
@@ -124,6 +128,43 @@ def load() -> list[Commitment]:
 
 def state_rank(c: Commitment) -> int:
     return STATE_ORDER.index(c.state) if c.state in STATE_ORDER else len(STATE_ORDER)
+
+
+def violations(commitments: list[Commitment]) -> list[str]:
+    """Queue invariants the schema cannot state, because they relate fields to states.
+
+    Both are the shapes D-374 recorded: work offered as takeable after another agenda
+    finished it, and a blocked cell whose blocker nothing can observe. A schema can
+    require a field but not require it *conditionally on a sibling's value*, so the
+    refusal lives here, where `--check` makes it a gate failure rather than a warning.
+    """
+    known = {c.id for c in commitments}
+    out: list[str] = []
+    for c in sorted(commitments, key=lambda c: c.id):
+        if c.discharged_by and c.state in ("ready", "tentative"):
+            out.append(
+                f"{c.id} is {c.state} but names discharged_by: {c.discharged_by}; "
+                "a commitment another one discharges is not takeable"
+            )
+        if c.discharged_by and c.discharged_by not in known:
+            out.append(
+                f"{c.id} names discharged_by: {c.discharged_by}, which is not a commitment"
+            )
+        if c.state == "blocked" and not c.depends_on and not c.blocked_on:
+            out.append(
+                f"{c.id} is blocked with no depends_on and no blocked_on; "
+                "what it waits on is unobservable"
+            )
+        out.extend(
+            f"{c.id} depends on {dep}, which is not a commitment"
+            for dep in c.depends_on
+            if dep not in known
+        )
+    return out
+
+
+def plural(count: int, noun: str) -> str:
+    return f"{count} {noun}" if count == 1 else f"{count} {noun}s"
 
 
 def truncate(text: str, width: int) -> str:
@@ -157,30 +198,40 @@ def render(commitments: list[Commitment]) -> str:
     tally = ", ".join(f"**{counts[s]}** {s}" for s in STATE_ORDER if counts[s])
     out += [f"- {tally}.", ""]
 
-    # A blocked cell whose predecessors are all discharged is the interesting case: it
-    # is takeable and nothing says so, which is exactly how a queue silently stalls.
-    unblocked = [c for c in blocked if c.depends_on and set(c.depends_on) <= done]
+    # A blocked cell whose predecessors are all discharged and which states no other
+    # blocker is takeable, and nothing says so. That is how a queue silently stalls.
+    # A cell that also carries `blocked_on` is not in this set: its edge cleared but its
+    # stated condition did not, and calling it takeable would be the same kind of wrong
+    # claim the map exists to remove.
+    unblocked = [
+        c for c in blocked if c.depends_on and set(c.depends_on) <= done and not c.blocked_on
+    ]
     if unblocked:
         rows = ", ".join(f"`{c.id}`" for c in unblocked)
         out += [
             (
-                f"- **{len(unblocked)} blocked commitments have every predecessor "
-                f"complete** and are takeable now: {rows}. A cell whose blocker is "
-                "discharged but whose `state` still reads `blocked` is invisible to a "
-                "coordinator reading the agenda, which is how a queue stalls without "
-                "anyone deciding it should."
+                f"- **{plural(len(unblocked), 'blocked commitment')} have every "
+                f"predecessor complete** and no other stated blocker, so {rows} "
+                f"{'is' if len(unblocked) == 1 else 'are'} takeable now. A cell whose "
+                "blocker is discharged but whose `state` still reads `blocked` is "
+                "invisible to a coordinator reading the agenda."
             ),
             "",
         ]
 
-    stale = [c for c in blocked if not c.depends_on]
-    if stale:
-        rows = ", ".join(f"`{c.id}`" for c in stale)
+    # Blocked on something that is not a commitment. This is a legitimate state, not a
+    # defect -- an artifact that does not exist yet blocks work as surely as a
+    # predecessor does. It is called out because no dependency edge will ever clear it,
+    # so it needs a person to notice rather than a queue to advance.
+    external = [c for c in blocked if not c.depends_on and c.blocked_on]
+    if external:
+        rows = ", ".join(f"`{c.id}`" for c in external)
         out += [
             (
-                f"- **{len(stale)} blocked commitments name no predecessor** ({rows}), "
-                "so what they wait on is prose rather than an edge, and nothing can "
-                "tell when it clears."
+                f"- **{plural(len(external), 'blocked commitment')} wait on something "
+                f"that is not a commitment** ({rows}). No edge will clear these; each "
+                "names its own condition in the table below, and someone has to decide "
+                "it is met."
             ),
             "",
         ]
@@ -205,18 +256,44 @@ def render(commitments: list[Commitment]) -> str:
     out += ["## Blocked, and on what", ""]
     if blocked:
         out += [
-            "| agenda | id | pri | waits on | all predecessors complete | question |",
+            (
+                "A commitment blocked by other commitments names them; one blocked by "
+                "something else states it, because a blocker nobody can observe never "
+                "clears."
+            ),
+            "",
+            "| agenda | id | pri | waits on | predecessors done | what else |",
             "| --- | --- | ---: | --- | --- | --- |",
         ]
         for c in sorted(blocked, key=lambda c: (c.agenda, c.priority)):
-            deps = ", ".join(f"`{d}`" for d in c.depends_on) or "*(unnamed)*"
+            deps = ", ".join(f"`{d}`" for d in c.depends_on) or "—"
             clear = "yes" if c.depends_on and set(c.depends_on) <= done else "no"
-            out.append(
-                f"| {c.agenda} | `{c.id}` | {c.priority} | {deps} | {clear} "
-                f"| {truncate(c.question, 90)} |"
-            )
+            other = truncate(c.blocked_on, 120) if c.blocked_on else "—"
+            out.append(f"| {c.agenda} | `{c.id}` | {c.priority} | {deps} | {clear} | {other} |")
     else:
         out += ["Nothing is blocked.", ""]
+    out += [""]
+
+    discharged = [c for c in commitments if c.discharged_by]
+    out += ["## Discharged elsewhere", ""]
+    if discharged:
+        out += [
+            (
+                "A commitment whose exit another agenda's commitment satisfied. "
+                "Recorded as an edge because prose could not be read: this is what the "
+                "queue was getting wrong when it offered four finished commitments as "
+                "takeable."
+            ),
+            "",
+            "| id | state | discharged by | question |",
+            "| --- | --- | --- | --- |",
+        ]
+        for c in sorted(discharged, key=lambda c: c.id):
+            out.append(
+                f"| `{c.id}` | {c.state} | `{c.discharged_by}` | {truncate(c.question, 100)} |"
+            )
+    else:
+        out += ["No commitment names another as its discharge.", ""]
     out += [""]
 
     out += ["## By agenda", ""]
@@ -246,6 +323,13 @@ def main() -> int:
     args = ap.parse_args()
 
     commitments = load()
+    # Invariants first, in both modes: rendering a map of a queue that contradicts
+    # itself would put the contradiction in a generated document and call it current.
+    if broken := violations(commitments):
+        for problem in broken:
+            print(f"  {problem}", file=sys.stderr)
+        return 1
+
     text = render(commitments)
     if args.check:
         current = OUT.read_text(encoding="utf-8") if OUT.exists() else ""

@@ -9,7 +9,7 @@ agenda:
   id: agenda-006
   title: Four bounded overnight blocks, each ending in a checkpoint that holds
   updated: '2026-08-30'
-  status: active
+  status: completed
   objective: >-
     Schedule one unattended overnight run across three independent agenda-005 lanes, in
     blocks small enough that an interruption costs one block rather than the night. This
@@ -1193,6 +1193,7 @@ agenda:
     owner_focus: process
     instances: [11, 29]
     state: complete
+    discharged_by: BC-078
     priority: 0
     question: >-
       Do the reader-facing documents still describe the project the record describes?
@@ -1316,6 +1317,7 @@ agenda:
     owner_focus: efficiency
     instances: [5, 11]
     state: complete
+    discharged_by: BC-079
     priority: 0
     question: >-
       Are the gate's tiers the right tiers, and is the coordinator running them at the

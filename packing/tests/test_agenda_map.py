@@ -12,7 +12,13 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from devtools.render_agenda_map import STATE_MEANING, STATE_ORDER, load, render
+from devtools.render_agenda_map import (
+    STATE_MEANING,
+    STATE_ORDER,
+    load,
+    render,
+    violations,
+)
 from sqpack.yamlio import safe_load
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -60,20 +66,28 @@ def test_a_blocked_cell_with_all_predecessors_complete_is_reported() -> None:
     """The map's whole reason for existing is catching a queue that has stalled.
 
     A cell whose blockers are discharged but whose state still reads `blocked` is
-    takeable and invisible. The renderer must say so; here it is checked against a
-    synthetic queue, since the real one may legitimately have none.
+    takeable and invisible. The renderer must say so -- but only when nothing else
+    blocks it. A cell whose edge cleared while its stated condition did not is still
+    blocked, and calling it takeable would be the same class of wrong claim the map
+    exists to remove. `BC-029` is exactly that case: `BC-027` is complete, and it still
+    waits on an independent acceptance decision.
     """
     rows = load()
     done = {c.id for c in rows if c.state == "complete"}
     blocked = [c for c in rows if c.state == "blocked"]
-    unblocked = [c for c in blocked if c.depends_on and set(c.depends_on) <= done]
+    edge_cleared = [c for c in blocked if c.depends_on and set(c.depends_on) <= done]
+    takeable = [c for c in edge_cleared if not c.blocked_on]
     text = render(rows)
-    if unblocked:
+    if takeable:
         assert "have every predecessor" in text
-        for c in unblocked:
+        for c in takeable:
             assert f"`{c.id}`" in text
     else:
         assert "have every predecessor" not in text
+    # A cell whose edge cleared but which states another blocker must not be advertised.
+    for c in edge_cleared:
+        if c.blocked_on:
+            assert f"and no other stated blocker, so `{c.id}`" not in text
 
 
 def test_the_rendered_map_names_every_live_commitment() -> None:
@@ -83,3 +97,33 @@ def test_the_rendered_map_names_every_live_commitment() -> None:
     for c in rows:
         if c.state in ("ready", "tentative"):
             assert f"`{c.id}`" in text, f"{c.id} is takeable but missing from the map"
+
+
+def test_no_commitment_is_offered_as_takeable_after_another_discharged_it() -> None:
+    """The defect D-374 records, as an assertion rather than a one-time repair.
+
+    Four agenda-005 commitments read `ready` after agenda-006 finished them, and OR-4
+    sends a session to exactly that queue. Nothing but this stops it recurring.
+    """
+    assert [c.id for c in load() if c.discharged_by and c.state in ("ready", "tentative")] == []
+
+
+def test_every_blocked_commitment_names_something_that_can_clear() -> None:
+    """A blocker nobody can observe never clears.
+
+    Either a predecessor commitment, or a stated condition. Four cells had neither and
+    sat blocked on prose for as long as five agendas.
+    """
+    orphans = [
+        c.id for c in load() if c.state == "blocked" and not c.depends_on and not c.blocked_on
+    ]
+    assert orphans == []
+
+
+def test_the_renderer_refuses_a_queue_that_contradicts_itself() -> None:
+    """The invariants are a refusal, not a report.
+
+    `violations` is what makes `--check` fail; if it returned findings the renderer then
+    ignored, the generated map would state the contradiction and call it current.
+    """
+    assert violations(load()) == []

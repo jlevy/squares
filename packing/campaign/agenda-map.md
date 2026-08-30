@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **12** ready, **17** blocked, **3** stopped, **52** complete.
+- **7** ready, **17** blocked, **4** stopped, **56** complete.
 
-- **4 blocked commitments name no predecessor** (`BC-016`, `BC-029`, `BC-033`, `BC-050`), so what they wait on is prose rather than an edge, and nothing can tell when it clears.
+- **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
 
 ## Live queue
 
@@ -25,35 +25,47 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-002 | `BC-019` | 2 | insight | research | Are standing records at n <= 30 already chunk-structured, and if not, which grammar move is missing? | `think-6mcd` |
 | agenda-002 | `BC-024` | 2 | insight | research | Across the imported n <= 100 corpus, which chunk shapes, chunk sizes, tilted-chunk counts, and wall seatings… | `think-kr1d` |
 | agenda-004 | `BC-038` | 1 | efficiency | tool_validation | Does wiring `evaluate_stress` to the existing shared row inventory repay its build cost at exact semantic… | `think-kdil` |
-| agenda-005 | `BC-045` | 0 | correctness | tool_validation | Can an interval checker discharge existence and uniqueness for a root of a declared contact system,… | `think-75ll` |
-| agenda-005 | `BC-051` | 0 | efficiency | tool_validation | Can verification run only the steps a change can reach, without any chance of running fewer than it should? | `think-ej1d` |
-| agenda-005 | `BC-043` | 1 | correctness | tool_validation | Can the contact equations be assembled from an accepted structure, reduced to eliminate the centres, and… | `think-va53` |
-| agenda-005 | `BC-044` | 1 | correctness | tool_validation | Can the closed system be solved exactly, by elimination or by integer relation, and can the result be… | `think-3lro` |
-| agenda-005 | `BC-048` | 1 | correctness | tool_validation | Can an exact LP over certified rational or algebraic coefficients replace the float solver where a certified… | `think-nfsd` |
 | agenda-005 | `BC-049` | 1 | correctness | research | Are the three packings the catalogue annotates "Rigid." actually rigid, on evidence of our own rather than on… | `think-xdly` |
 | agenda-008 | `BC-081` | 0 | process | tool_validation | Can a commitment's discharge be an edge the records carry, rather than prose in a later agenda that nothing… | `think-s424` |
 
 ## Blocked, and on what
 
-| agenda | id | pri | waits on | all predecessors complete | question |
+A commitment blocked by other commitments names them; one blocked by something else states it, because a blocker nobody can observe never clears.
+
+| agenda | id | pri | waits on | predecessors done | what else |
 | --- | --- | ---: | --- | --- | --- |
-| agenda-001 | `BC-011` | 1 | `BC-010` | no | With n=5 ambiguity resolved or bounded, does the classifier leave at most five percent of… |
-| agenda-001 | `BC-012` | 1 | `BC-011` | no | Under fixed proposer, quench, and component relation, does estimated unseen component… |
-| agenda-001 | `BC-013` | 2 | `BC-007`, `BC-008`, `BC-012` | no | Can the validated classifier and coverage loop scale past n=8 without canonicalization or… |
-| agenda-001 | `BC-014` | 2 | `BC-013` | no | What is the Trump record component's conditional attraction mass and which proposer most… |
-| agenda-002 | `BC-016` | 0 | *(unnamed)* | no | Do aligned and glued chunk strata, which are the most degenerate cells this design will… |
-| agenda-002 | `BC-018` | 1 | `BC-016`, `BC-017` | no | Does the stage-1 enumerator plus glued rows plus sweep driver reproduce the proved optima… |
-| agenda-002 | `BC-020` | 2 | `BC-017` | no | Does a class-angle path run from Trump's aligned chunk form to the record without chunk… |
-| agenda-002 | `BC-025` | 2 | `BC-023`, `BC-019` | no | Does rounding a pose to its chunk-regular predecessor and re-quenching return the pose,… |
-| agenda-002 | `BC-026` | 3 | `BC-018` | no | Does the cheap glued screen retain the soft-mode winning stratum at its declared solve… |
-| agenda-002 | `BC-021` | 3 | `BC-018`, `BC-019` | no | Does the frozen grammar rank the standing best first at n=11, hold the n=16 guard, and… |
-| agenda-002 | `BC-022` | 4 | `BC-021` | no | Can per-stratum optimization be made rigorous enough to prove a restricted-class… |
-| agenda-003 | `BC-029` | 0 | *(unnamed)* | no | Do the frozen minus-W scale routes and controls advance the n=5 terminal-family question… |
-| agenda-003 | `BC-033` | 2 | *(unnamed)* | no | Can delta continuation, neighbour transfer, quality-diversity, and packing surgery be… |
-| agenda-005 | `BC-050` | 2 | *(unnamed)* | no | Can n = 68 and n = 69 be given witnesses precise enough to carry a contact claim, so the… |
-| agenda-008 | `BC-082` | 0 | `BC-081` | no | Can the n = 4 labelled control score the relation the atlas uses today, rather than… |
-| agenda-008 | `BC-083` | 0 | `BC-082` | no | Does n = 5 admit a discriminating identity control -- one whose proved component count is… |
-| agenda-008 | `BC-084` | 1 | `BC-081` | no | Can verification run only the steps a change can reach, without any chance of running… |
+| agenda-001 | `BC-011` | 1 | `BC-010` | no | — |
+| agenda-001 | `BC-012` | 1 | `BC-011` | no | — |
+| agenda-001 | `BC-013` | 2 | `BC-007`, `BC-008`, `BC-012` | no | — |
+| agenda-001 | `BC-014` | 2 | `BC-013` | no | — |
+| agenda-002 | `BC-016` | 0 | — | no | Retained input poses and symbolic active-cell rows for `n005-seed007-known-answer`, `n010-seed014-known-answer` and… |
+| agenda-002 | `BC-018` | 1 | `BC-016`, `BC-017` | no | — |
+| agenda-002 | `BC-020` | 2 | `BC-017` | no | — |
+| agenda-002 | `BC-025` | 2 | `BC-023`, `BC-019` | no | — |
+| agenda-002 | `BC-026` | 3 | `BC-018` | no | — |
+| agenda-002 | `BC-021` | 3 | `BC-018`, `BC-019` | no | — |
+| agenda-002 | `BC-022` | 4 | `BC-021` | no | — |
+| agenda-003 | `BC-029` | 0 | `BC-027` | yes | Independent acceptance of the preregistered exp-045 criterion, which is a review decision rather than a commitment. Its… |
+| agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
+| agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
+| agenda-008 | `BC-082` | 0 | `BC-081` | no | — |
+| agenda-008 | `BC-083` | 0 | `BC-082` | no | — |
+| agenda-008 | `BC-084` | 1 | `BC-081` | no | — |
+
+## Discharged elsewhere
+
+A commitment whose exit another agenda's commitment satisfied. Recorded as an edge because prose could not be read: this is what the queue was getting wrong when it offered four finished commitments as takeable.
+
+| id | state | discharged by | question |
+| --- | --- | --- | --- |
+| `BC-043` | complete | `BC-054` | Can the contact equations be assembled from an accepted structure, reduced to eliminate the… |
+| `BC-044` | complete | `BC-060` | Can the closed system be solved exactly, by elimination or by integer relation, and can the result… |
+| `BC-045` | complete | `BC-053` | Can an interval checker discharge existence and uniqueness for a root of a declared contact system,… |
+| `BC-046` | complete | `BC-080` | What relation should the atlas count, given that a connected optimal set produces many endpoint… |
+| `BC-048` | complete | `BC-061` | Can an exact LP over certified rational or algebraic coefficients replace the float solver where a… |
+| `BC-051` | stopped | `BC-084` | Can verification run only the steps a change can reach, without any chance of running fewer than it… |
+| `BC-074` | complete | `BC-078` | Do the reader-facing documents still describe the project the record describes? |
+| `BC-075` | complete | `BC-079` | Are the gate's tiers the right tiers, and is the coordinator running them at the right times? |
 
 ## By agenda
 
@@ -63,8 +75,8 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-002 | active | 3 |  | 7 |  | 1 | 11 |
 | agenda-003 | active |  |  | 2 | 1 | 5 | 8 |
 | agenda-004 | active | 1 |  |  |  | 6 | 7 |
-| agenda-005 | active | 6 |  | 1 |  | 3 | 10 |
-| agenda-006 | active |  |  |  | 2 | 23 | 25 |
+| agenda-005 | active | 1 |  | 1 | 1 | 7 | 10 |
+| agenda-006 | completed |  |  |  | 2 | 23 | 25 |
 | agenda-007 | completed |  |  |  |  | 4 | 4 |
 | agenda-008 | active | 1 |  | 3 |  |  | 4 |
 
@@ -73,7 +85,7 @@ Commitments a session may take now, in each agenda's declared order.
 - `ready` — may be taken now
 - `tentative` — declared but not yet committed to
 - `blocked` — waiting on a named predecessor
-- `stopped` — abandoned deliberately, with the reason in the agenda
+- `stopped` — not run here; the agenda says why, and `discharged_by` names where it moved
 - `complete` — discharged
 
 <!-- This document follows common-doc-guidelines.md.

@@ -62,7 +62,8 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 29]
-    state: ready
+    state: complete
+    discharged_by: BC-054
     priority: 1
     question: >-
       Can the contact equations be assembled from an accepted structure, reduced to
@@ -142,7 +143,8 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: complete
+    discharged_by: BC-060
     priority: 1
     question: >-
       Can the closed system be solved exactly, by elimination or by integer relation, and
@@ -185,7 +187,8 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 10, 11, 29]
-    state: ready
+    state: complete
+    discharged_by: BC-053
     priority: 0
     question: >-
       Can an interval checker discharge existence and uniqueness for a root of a declared
@@ -227,7 +230,8 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 11]
-    state: ready
+    state: complete
+    discharged_by: BC-061
     priority: 1
     question: >-
       Can an exact LP over certified rational or algebraic coefficients replace the float
@@ -263,6 +267,7 @@ agenda:
     owner_focus: correctness
     instances: [3, 4, 5]
     state: complete
+    discharged_by: BC-080
     priority: 0
     question: >-
       What relation should the atlas count, given that a connected optimal set produces
@@ -337,6 +342,11 @@ agenda:
     owner_focus: correctness
     instances: [68, 69]
     state: blocked
+    blocked_on: >-
+      Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the
+      screens require. The retained ones are not, and the upstream construction the
+      records cite has not been re-run. No commitment owns producing them, so this waits
+      on an artifact rather than on a predecessor.
     priority: 2
     question: >-
       Can n = 68 and n = 69 be given witnesses precise enough to carry a contact claim, so
@@ -365,7 +375,8 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5, 11, 29]
-    state: ready
+    state: stopped
+    discharged_by: BC-084
     priority: 0
     question: >-
       Can verification run only the steps a change can reach, without any chance of

@@ -1142,19 +1142,42 @@ controls:
   expect: "is stale"
 
 - name: agenda map - a commitment changing state never reaches the map
-  file: campaign/agendas/agenda-005-symbolic-promotion-and-identity.md
+  file: campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md
   replace:
     - |-
-      - id: BC-051
+      - id: BC-081
           purpose: tool_validation
-          owner_focus: efficiency
-          instances: [5, 11, 29]
+          owner_focus: process
+          instances: [3, 5, 29]
           state: ready
     - |-
-      - id: BC-051
+      - id: BC-081
           purpose: tool_validation
-          owner_focus: efficiency
-          instances: [5, 11, 29]
+          owner_focus: process
+          instances: [3, 5, 29]
           state: complete
   run: python3 -m devtools.render_agenda_map --check
   expect: "is stale"
+
+# D-374: the queue offered four finished commitments as takeable, because a discharge
+# was prose in a later agenda and nothing read it. Both refusals that replaced the prose
+# are rehearsed here -- neither is a report the renderer can be talked past.
+- name: agenda map - a discharged commitment is offered as takeable again
+  file: campaign/agendas/agenda-005-symbolic-promotion-and-identity.md
+  replace:
+    - |-
+      state: complete
+          discharged_by: BC-053
+    - |-
+      state: ready
+          discharged_by: BC-053
+  run: python3 -m devtools.render_agenda_map --check
+  expect: "not takeable"
+
+- name: agenda map - a blocked commitment waits on nothing observable
+  file: campaign/agendas/agenda-002-constructive-enumeration-groundwork.md
+  # BC-016 is the only commitment in agenda-002 carrying `blocked_on`, so the bare key
+  # is a unique anchor inside this file and needs no fragile multi-line indentation.
+  replace: ["blocked_on: >-", "unrelated_note: >-"]
+  run: python3 -m devtools.render_agenda_map --check
+  expect: "unobservable"

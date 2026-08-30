@@ -2,7 +2,7 @@
 
 # Defect log
 
-373 defects recorded across the packing toolchain.
+374 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `control_cell` | 24 | a cell of the sweep whose answer is known in advance |
 | `review` | 233 | a human or agent reading the work against a checklist |
 | `anomaly` | 12 | a result that made no sense, chased down |
-| `inspection` | 36 | reading the code or the design with intent |
+| `inspection` | 37 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 48 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 48 of 373, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 48 of 374, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 48 of 373, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 4 |
-| record | 106 |
+| record | 107 |
 | tooling | 124 |
 | docs | 105 |
 
@@ -43,7 +43,7 @@ The line worth reading twice: **the automated gate caught 48 of 373, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 88 |
-| validity | 88 |
+| validity | 89 |
 | bookkeeping | 138 |
 | robustness | 44 |
 | performance | 15 |
@@ -593,6 +593,7 @@ This is the actionable list.
 | [D-371](packing/devtools/run_negative_controls.py) | 2026-08-29 | tooling | robustness |  | `review` | low | fixed | The control snapshot guard was one artifact from refusing to run at all |
 | [D-372](SYNOPSIS.md) | 2026-08-30 | docs | bookkeeping |  | `review` | medium | fixed | The reader-facing tier said four built capabilities were unbuilt, for four days |
 | [D-373](packing/campaign/explorations/X-005-identity-relation-and-its-controls.md) | 2026-08-30 | record | validity | flattering | `control_cell` | medium | fixed | The identity acceptance rule named only controls whose answer was one |
+| [D-374](packing/campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md) | 2026-08-30 | record | validity | flattering | `inspection` | medium | fixed | The agenda queue offered four finished commitments as takeable |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

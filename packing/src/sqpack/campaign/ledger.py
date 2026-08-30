@@ -450,6 +450,16 @@ def check(
                     f"{experiment['_path'].name}: references unknown {hypothesis_id}"
                 )
 
+    # `discharged_by` is the one agenda edge that crosses agendas -- a later agenda's
+    # commitment satisfying an earlier one's exit is exactly the case it exists for -- so
+    # it is resolved against every commitment, not against the containing agenda's items.
+    global_state = {item["id"]: item["state"] for agenda in agendas for item in agenda["items"]}
+    global_artifacts = {
+        item["id"]: item.get("artifacts") or []
+        for agenda in agendas
+        for item in agenda["items"]
+    }
+
     for agenda in agendas:
         name = agenda["_path"].name
         items = agenda["items"]
@@ -485,8 +495,31 @@ def check(
                     problems.append(
                         f"{name}: {item_id} is ready with incomplete dependencies {incomplete}"
                     )
-            if item["state"] == "complete" and not item.get("artifacts"):
+            # A commitment discharged by another one retains nothing of its own: the
+            # artifacts sit on the commitment that did the work, and copying the list
+            # across would give one evidence set two owners and let them drift. The
+            # `discharged_by` edge is the pointer, so it satisfies this rule -- but only
+            # when it names a commitment that is itself complete with artifacts, which is
+            # checked below rather than assumed.
+            discharger = item.get("discharged_by")
+            if item["state"] == "complete" and not item.get("artifacts") and not discharger:
                 problems.append(f"{name}: {item_id} is complete without retained artifacts")
+            if discharger and discharger not in global_state:
+                problems.append(f"{name}: {item_id} is discharged by unknown item {discharger}")
+            elif discharger and item["state"] == "complete":
+                # Complete means the exit was met, so the pointer has to reach evidence.
+                # A discharger that is itself unfinished would make this commitment claim
+                # a result nothing has produced -- the same false claim, one hop away.
+                if global_state[discharger] != "complete":
+                    problems.append(
+                        f"{name}: {item_id} is complete but its discharger {discharger} is "
+                        f"{global_state[discharger]}"
+                    )
+                elif not global_artifacts[discharger]:
+                    problems.append(
+                        f"{name}: {item_id} is complete but its discharger {discharger} "
+                        "retains no artifacts either"
+                    )
 
     # One bead may back several commitments -- that is how a lane is carried across
     # agendas, and `think-1s0h` has run from BC-010 to BC-029 to BC-037 that way. Several

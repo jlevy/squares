@@ -94,6 +94,26 @@ properties:
           type: array
           uniqueItems: true
           items: {type: string, pattern: "^BC-[0-9]{3}$"}
+        blocked_on:
+          type: string
+          minLength: 1
+          description: >-
+            What a blocked commitment waits on when it is not another commitment: an
+            artifact that does not exist yet, a decision, an outstanding defect. Required
+            by the renderer whenever `state` is `blocked` and `depends_on` is empty,
+            because four commitments sat blocked on nothing nameable and no reader could
+            tell when they would clear (D-374). A commitment blocked only on other
+            commitments uses `depends_on` and leaves this out.
+        discharged_by:
+          type: string
+          pattern: "^BC-[0-9]{3}$"
+          description: >-
+            The commitment in a later agenda that satisfied this one's exit. Recorded as
+            an edge because prose could not be read: agenda-007 declared its three
+            discharges in `note` fields, and agenda-006 discharged four agenda-005
+            commitments without saying so anywhere, so the queue offered finished work as
+            takeable (D-374). A commitment naming this may not be `ready`; the renderer
+            refuses that combination, which is the whole point of making it a field.
         next_evidence: {type: string, minLength: 1}
         artifacts:
           type: array

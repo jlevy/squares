@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 373
+count: 374
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10059,3 +10059,67 @@ defects:
     rather than been fixed.
   bead: think-0yo9
   recorded_in: packing/campaign/explorations/X-005-identity-relation-and-its-controls.md
+- id: D-374
+  title: The agenda queue offered four finished commitments as takeable
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: inspection
+  latent_for: 'from agenda-006 closing those cells on 2026-08-29 until the map was built'
+  severity: medium
+  status: fixed
+  what: >-
+    agenda-005 `BC-045` asks for outward-rounded interval certificates at n = 5, 10 and 11
+    with refusal controls and n = 29 recorded unresolved. agenda-006 `BC-053` has that
+    exact exit and is `complete`. The same holds for `BC-043` against `BC-054`, `BC-044`
+    against `BC-060`, and `BC-048` against `BC-061`. All four stayed `ready`, so the queue
+    advertised eleven takeable commitments where seven were takeable.
+
+    Separately, four commitments were `blocked` with an empty `depends_on` and no other
+    field naming a blocker, so what they waited on existed only in prose inside an `entry`
+    string. `BC-029`'s stated predecessor `BC-027` had been complete since agenda-003
+    closed, and nothing surfaced that.
+
+    Only agenda-007 declared its discharges at all, and it declared them in `note`, which
+    is prose no checker reads.
+  consequence: >-
+    None realised, because no session took one of the four. The direction is flattering in
+    the way a stale queue always is: the work looks available, a session following `OR-4`
+    correctly takes it, and the redone result agrees with the retained one, which reads as
+    confirmation rather than as waste. Roughly four commitments' worth of research time was
+    exposed.
+
+    The narrower cost is that `OR-4` names the agenda queue as authoritative precisely so a
+    coordinator does not have to reconstruct priority from `tbd ready`. A queue that
+    misreports what is takeable removes the reason that rule exists.
+  fix: >-
+    Discharge is an edge, not prose. `discharged_by` joins the agenda schema and is carried
+    by the eight commitments another commitment actually satisfied -- the four found here,
+    plus the three agenda-007 had recorded only in prose, plus `BC-051`, whose scope moved
+    to `BC-084` and which is therefore `stopped` rather than `complete`, since `BC-084` has
+    not run.
+
+    `blocked_on` joins the schema for a blocker that is not a commitment: an artifact that
+    does not exist, or a decision. `BC-016` and `BC-050` wait on artifacts nothing produces,
+    `BC-029` waits on an independent acceptance decision, and `BC-033` waits on `D-034`,
+    which is still outstanding. `BC-029` and `BC-033` also gained the dependency edges their
+    prose had named.
+
+    agenda-006 is `completed`. Six of seven agendas had declared themselves `active`, which
+    made the field unable to answer the question it looks like it answers.
+  regression: >-
+    `devtools/render_agenda_map.py` renders `packing/campaign/agenda-map.md` from every
+    agenda's frontmatter and refuses, rather than reports, three shapes: a commitment that
+    is `ready` while naming a `discharged_by`, a `blocked` commitment with neither a
+    predecessor nor a `blocked_on`, and any edge pointing at an id that is not a
+    commitment. The refusal runs before the render, so a contradictory queue cannot reach
+    the generated document. Drift-checked in `packing-validate --records` at 0.14s.
+
+    `tests/test_agenda_map.py` pins the two invariants and the state vocabulary against the
+    schema enum rather than a copy of it. Four negative controls, each watched failing: the
+    map edited by hand, a commitment changing state without the map following, a discharged
+    commitment offered as takeable again, and a blocked commitment whose stated blocker is
+    removed.
+  bead: think-s424
+  recorded_in: packing/campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md

@@ -23,6 +23,11 @@ agenda:
     owner_focus: correctness
     instances: [5, 10, 16]
     state: blocked
+    blocked_on: >-
+      Retained input poses and symbolic active-cell rows for `n005-seed007-known-answer`,
+      `n010-seed014-known-answer` and `n016-grid-not-below`, at pool widths one and ten.
+      No commitment in any agenda produces them, so this waits on an artifact rather than
+      on a predecessor, and nothing but this sentence can say when it clears.
     priority: 0
     question: >-
       Do aligned and glued chunk strata, which are the most degenerate cells this design
