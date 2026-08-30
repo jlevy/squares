@@ -326,6 +326,12 @@ then ran nine unplanned phases on `BC-049` at `n = 40` and carries a handoff at 
 that is the authoritative summary, and
 [session-046](packing/campaign/agent-sessions/session-046-gobel-family-constructions.md)
 took the cheapest thing that handoff named.
+[session-047](packing/campaign/agent-sessions/session-047-assurance-structure-and-what-is-ours.md)
+then left the mathematics alone and worked on the record itself: it promoted the three
+sizes whose exact certificates were already running in this gate while their records
+denied one existed, and filled in the two facts the register could not previously state
+— whether anyone here has read an external argument, and what a novelty claim was
+searched against.
 
 `BC-049` on `think-xdly` is the cell all of this sits under, and it stays open.
 

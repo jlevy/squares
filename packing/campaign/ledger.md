@@ -61,6 +61,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-044](agent-sessions/session-044-agenda006-continuation.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 11 | think-qs6k | Carry BC-066 on `think-obgk` to a terminal state: record the measured wall the rational elimination hit, and take the eliminant's degree from the finite-field run. |
 | [session-045](agent-sessions/session-045-agenda008-queue-and-identity.md) | completed | contemporaneous | `pipeline-improvement` (process) | `process-review` (correctness) | 23 | think-s424 | Read the handoff. BC-049 on `think-xdly` is not closed: n = 5 is done, n = 40 is decided at first order and open beyond it, n = 28 is untouched and its optimum is not in Goebel's family, so the n = 40 route does not carry over. The two sizes the family does answer -- n = 65 and n = 89 -- now have verified exact constructions available and no case package, which is the cheapest open work `think-xdly` offers. |
 | [session-046](agent-sessions/session-046-gobel-family-constructions.md) | completed | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-xdly | `BC-049` on `think-xdly` stays open: n = 5 is done, n = 40 is decided at first order and open beyond it, n = 28 is untouched and its optimum is not in Goebel's family. Whether n = 65 and n = 89's witnesses can move from `numerical-multiprecision` to `exact-algebraic` is the question this session makes askable and does not open. |
+| [session-047](agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | in_progress | contemporaneous | `general-improvement` (process) | `general-improvement` (process) | 6 | think-xdly | `BC-049` stays open and this session did not touch its mathematics. Three evidence records still make no novelty statement and should keep making none until someone searches: `E-migrated-lower-report`, whose provenance is `unknown-historical`, and the two n = 29 numerical checks. The inventory's own arithmetic names the highest-value unclaimed work -- an informal review of `[Nagamochi 2005]`, which 88 cases rest on and nobody here has read (`think-xdly`). |
 
 ### Workflow summary
 
@@ -69,13 +70,13 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 0 | 0 | 10 | 0 |
-| `factual-review` | 1 | 0 | 24 | 2 |
+| `factual-review` | 1 | 0 | 25 | 2 |
 | `insight-iteration` | 2 | 1 | 26 | 2 |
 | `process-review` | 8 | 4 | 47 | 6 |
 | `efficiency-loop` | 7 | 0 | 20 | 0 |
 | `research-loop` | 3 | 4 | 21 | 7 |
-| `pipeline-improvement` | 16 | 0 | 71 | 0 |
-| `general-improvement` | 0 | 0 | 1 | 0 |
+| `pipeline-improvement` | 16 | 0 | 72 | 0 |
+| `general-improvement` | 1 | 0 | 5 | 0 |
 
 ## Experiment agendas
 
