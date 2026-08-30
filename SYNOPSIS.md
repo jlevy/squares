@@ -2257,6 +2257,59 @@ V-representations, eight endpoint quotient rays, six interior quotient rays, and
 derived face vectors.
 Transverse and mixed nonlinear realization remains open.
 
+## Sessions Conducted
+
+An experiment records what was measured about square packing.
+A session records what an agent did for a stretch of hours, and until recently it
+recorded that without recording what the stretch cost: the phases and outcomes were in
+one file and the turns and wall-clock were in another, keyed by harness log id, and
+nothing joined them.
+[`session-close-report.yaml`](packing/campaign/session-close-report.yaml) is that join,
+one validated entry per session, written by `devtools.close_session --render` from the
+session records and the rollups rather than from anybody’s recollection, and
+drift-checked in `packing-validate --records`. The tables below are its reader-facing
+view.
+
+Two numbers here are easy to get wrong in the same direction, so both are stated.
+**A session’s cost is not a share of a log, and the campaign’s cost is not a sum of
+sessions.** Several sessions can run inside one harness log, each legitimately declaring
+the whole of it; charging it to each of them read as 117.9 hours for a campaign that had
+spent 43.7, so every total is taken over distinct rollups and the shared log gets its
+own row rather than a footnote.
+And a rollup exists on disk whether or not a session claims it, so the ones nobody
+claims are counted rather than dropped — the gap between those two rows is coverage, not
+rounding.
+
+<!-- BEGIN GENERATED: session-close-report (devtools.close_session) -->
+
+| Rollups | count | turns | tool calls | errors | one-off code | wall |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| claimed by a session | 31 | 8,896 | 5,186 | 110 | 1,212 | 43.69 h |
+| claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
+| **measured** | **41** | **10,356** | **6,064** | **142** | **1,385** | **50.56 h** |
+
+| Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| [session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md) | 23 | 16 | 1,248 | 765 | 11 | 4.03 h |
+| [session-046](packing/campaign/agent-sessions/session-046-gobel-family-constructions.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
+| [session-047](packing/campaign/agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | 6 | 14 | 1,230 | 841 | 18 | 2.56 h |
+| *shared by 3 sessions* | — | 1 | 6,418 | 3,580 | 81 | 37.1 h |
+
+| Coverage | sessions |
+| --- | ---: |
+| measured | 3 |
+| closed before `resource_rollups` existed, logs not retained | 44 |
+| **total** | **47** |
+
+<!-- END GENERATED: session-close-report -->
+
+The sessions with no measurement closed before `resource_rollups` existed and their
+harness logs are not retained, so that cost is gone rather than pending.
+The rollups no session claims are the delegated half of the same period: sub-agent logs
+that survived while the session records that would have claimed them predate the field.
+Backfill needs nothing but a retained log — `close_session --update` writes its rollup,
+and the entry fills in on the next render.
+
 ## Experiments Conducted
 
 There are 45 terminal rounds registered in `series-000`. They record 1106 agent-minutes
@@ -2980,9 +3033,12 @@ No hour-scale lane is promoted without a known-answer response, independent vali
 and a result that changes a decision.
 
 **The normal checkpoint and blocking macOS deep golden are green; broader unattended
-launch is not yet authorized.** The current tree passes all 31 normal-gate steps in
-97.68 wall-seconds, including seven exact small-`n` replays, 59 pytest contracts, and
-all 62 mutation controls.
+launch is not yet authorized.** At that checkpoint the tree passed all 31 normal-gate
+steps in 97.68 wall-seconds, including seven exact small-`n` replays, 59 pytest
+contracts, and all 62 mutation controls.
+The gate has since grown to 56 steps, of which the pull-request tier runs 32; the
+sentence is dated rather than restated because no check guards this number, so a
+current-tense figure here silently goes stale.
 The first deep regeneration had reproduced one unsettled `n=4` proposal and an `n=10`
 `1.503e-10` pair-row residual.
 [D-199](defects.md) identifies and fixes the n=10 cause: repairing first-call offenders

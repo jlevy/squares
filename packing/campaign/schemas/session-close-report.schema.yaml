@@ -1,0 +1,101 @@
+# One entry per agent session, joining what the session did to what it cost.
+#
+# Those two facts have always been in the repository and never in one place: the session
+# record carries phases and outcomes, `ClaudeEfficiencyRollup/v1` carries turns and tool
+# calls, and nothing joined them. So "what did this session cost" was a question you
+# answered by hand, and "what has the campaign cost" was one nobody answered at all.
+#
+# Every session appears, including the ones with no measurement. An entry that says
+# `measured: false` and names why is the point rather than an omission: forty-four sessions
+# closed before `resource_rollups` existed, and a report that quietly skipped them would
+# report a total that reads as the campaign's cost while being a fraction of it.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:SessionCloseReport/v1
+title: Session close report
+type: object
+additionalProperties: false
+required: [count, generated_by, totals, sessions]
+properties:
+  count: {type: integer, minimum: 0, description: Must equal len(sessions).}
+  generated_by:
+    type: string
+    minLength: 1
+    description: The command that writes this file, so a reader can regenerate it.
+  totals:
+    type: object
+    additionalProperties: false
+    required: [sessions_measured, sessions_unmeasured, attributed, unattributed, measured]
+    description: >-
+      Computed over DISTINCT rollups, never by summing the sessions. One harness log can be
+      declared by several sessions -- three declare this run's -- so the per-session figures
+      below overlap and adding them triple-counts a shared log, reporting 117.9 hours for a
+      campaign that had spent 43.7. That mistake inflates, which is the direction worth
+      building against.
+      The three blocks answer three different questions and only the third is the campaign's
+      cost: `attributed` is what sessions claim, `unattributed` is what exists on disk that
+      no session claims, and `measured` is their union. Reporting only the first would
+      understate by whatever the record failed to claim, which is the same failure the
+      per-session `measured: false` entries exist to prevent, one level up.
+    properties:
+      sessions_measured: {type: integer, minimum: 0}
+      sessions_unmeasured: {type: integer, minimum: 0}
+      attributed: {$ref: '#/$defs/figures'}
+      unattributed: {$ref: '#/$defs/figures'}
+      measured: {$ref: '#/$defs/figures'}
+  sessions:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      additionalProperties: false
+      required: [id, status, phases, measured, rollups]
+      properties:
+        id: {type: string, pattern: "^session-[0-9]{3}$"}
+        title: {type: string, minLength: 1}
+        status: {enum: [in_progress, completed, stopped]}
+        primary_bead: {type: [string, "null"]}
+        phases: {type: integer, minimum: 0}
+        measured:
+          type: boolean
+          description: >-
+            Whether any rollup accounts for this session. False is a legitimate and
+            informative state, not a gap to be filled with zeros.
+        unmeasured_reason:
+          type: string
+          minLength: 1
+          description: Required when `measured` is false; says why no rollup exists.
+        rollups:
+          type: array
+          uniqueItems: true
+          items: {type: string, minLength: 1}
+          description: Repository-relative paths, matching the session record's own field.
+        turns: {type: [integer, "null"], minimum: 0}
+        tool_calls: {type: [integer, "null"], minimum: 0}
+        tool_errors: {type: [integer, "null"], minimum: 0}
+        one_off_code:
+          type: [integer, "null"]
+          minimum: 0
+          description: >-
+            Tool calls that ran code written for one measurement. `OR-1` is about leaving
+            such a measurement behind rather than about exploring with it, so this is
+            reported and never gated.
+        wall_hours: {type: [number, "null"], minimum: 0}
+      allOf:
+        - if:
+            properties: {measured: {const: false}}
+            required: [measured]
+          then:
+            required: [unmeasured_reason]
+$defs:
+  figures:
+    type: object
+    additionalProperties: false
+    required: [rollups, turns, tool_calls]
+    description: One set of costs, summed over a set of distinct rollups.
+    properties:
+      rollups: {type: integer, minimum: 0}
+      turns: {type: integer, minimum: 0}
+      tool_calls: {type: integer, minimum: 0}
+      tool_errors: {type: integer, minimum: 0}
+      one_off_code: {type: integer, minimum: 0}
+      wall_hours: {type: number, minimum: 0}

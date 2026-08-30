@@ -1756,6 +1756,9 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/close_session.py",
             "packing/campaign/agent-sessions/*.md",
             "packing/campaign/resource-usage/*.yaml",
+            # The step now also checks the reader-facing view spliced into the synopsis,
+            # so editing that section has to be able to fail it.
+            "SYNOPSIS.md",
         ),
     ),
     Step(

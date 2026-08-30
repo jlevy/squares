@@ -39,6 +39,7 @@ FRONTIER = pathlib.Path(__file__).resolve().parent.parent / "frontier"
 REPO = FRONTIER.parent.parent
 WITNESSES = FRONTIER.parent / "witnesses"
 RESOURCE_USAGE = FRONTIER.parent / "campaign" / "resource-usage"
+SESSION_CLOSE_REPORT = RESOURCE_USAGE.parent / "session-close-report.yaml"
 DOCUMENT_MAP = FRONTIER.parent.parent / "docs" / "project" / "document-map.yaml"
 COMPOSITE_FIGURE = FRONTIER.parent / "atlas" / "known-best" / "composite-figure.json"
 TRANSLATION_ESCAPE_SCREEN = (
@@ -288,6 +289,10 @@ def corpus_paths() -> tuple[list[pathlib.Path], list[pathlib.Path]]:
     # these are the durable artifact rather than a pointer to one and are enforced like
     # any other dataset.
     datasets += sorted(RESOURCE_USAGE.glob("*.yaml"))
+    # The join between what a session did and what it cost. Enforced like any dataset,
+    # because a report that silently dropped an unmeasured session would total a fraction
+    # of the campaign and read as all of it.
+    datasets.append(SESSION_CLOSE_REPORT)
     return md, datasets
 
 
