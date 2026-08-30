@@ -1406,7 +1406,7 @@ session:
       `numerical-multiprecision`, so a reader of the corpus cannot reach any of this. The
       change is the same one `n = 5` took earlier in this session: the `property` stays
       `undetermined` and everything saying *why* moves to the first-party evidence.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Phase 21's declared next_action, and the one finding it deliberately did not act on.
@@ -1429,11 +1429,72 @@ session:
     fallback: >-
       Leaving the block alone and recording why, which is where phase 21 left it and is not
       a worse state than now.
+    outcome: >-
+      `n = 40`'s rigidity block now cites `E-n040-first-order-flexibility` and the bracket
+      record, with `assurance: verified` and `method: exact-algebraic`. `property` does not
+      move, and the scope text says why in the terms this change was most exposed to getting
+      wrong: an infinitesimal flex is not a motion, so `not-rigid` would assert something
+      nobody has shown. Both the block and the evidence entry carry what is *not* known --
+      the cone bounded to 45 and not characterised, the seven directions spanning 6, the 42
+      disjunctions none of which becomes vacuous, and the 20 frame coordinates covered only
+      by a search.
+
+      Mechanically this repeats what `n = 5` did in phase 5: the record leaves
+      `assess_frontier_rigidity`'s assessed bucket while keeping its property, so the counts
+      go to 3 undetermined and 3 left to a stronger argument, and the gate's pin moves with
+      them. The thing worth naming is that `n = 5` left that bucket for a rigidity argument
+      and `n = 40` left it for a flexibility one -- the bucket is about how much is known,
+      not about which way the answer went.
+
+      `D-354` untouched, the guard asserting `undetermined` for n = 5, 28 and 40 green
+      without being edited, 917 tests passing, CI green on the previous head.
+    evidence:
+    - packing/frontier/n-040.md
+    - packing/frontier/evidence.yaml
+    - packing/src/sqpack/cli/validate.py
+    - packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md
+    stop_reason: >-
+      Exit reached. The kill condition held: nothing was promoted, no guard was weakened,
+      and the property that a reader takes away is the same one it was this morning.
+    next_action: >-
+      Finalization: the handoff for what n = 40 needs next, and what n = 28 still waits on.
+  - workflow: process-review
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-049
+    bead: think-xdly
+    objective: >-
+      Close the session honestly. Write the handoff: what n = 40 has, what it would take to
+      finish it, what n = 28 still waits on, and what this run cost in defects and rework.
+      Reconcile the session record against what actually happened -- twenty-two phases were
+      declared against a plan that expected seventeen -- and leave the queue in a state
+      someone can pick up cold.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The research route is exhausted rather than paused, the review is done and its finding
+      acted on, and the wall budget has about an hour left. This is where the session ends.
+    budget_minutes: 40
+    started_at: '2026-08-30T14:07:00Z'
+    deadline_at: '2026-08-30T14:47:00Z'
+    expected_output: >-
+      A handoff a reader can act on without this transcript, the session record's own
+      accounting reconciled, and the beads and agenda map current.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --edit
+    kill_condition: >-
+      The handoff may not overstate what is finished. n = 40 is decided at first order and
+      not settled; BC-049 has one instance done, one advanced-and-open, and one untouched.
+      A summary that reads as though the commitment closed would be the worst artifact of
+      the day.
+    fallback: >-
+      The handoff alone, if the accounting takes longer than the budget.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Finalization: the handoff for what n = 40 needs next, and what n = 28 still waits on.
+      None: this is the last phase.
   primary_bead: think-s424
   status: in_progress
   budget:
@@ -1476,7 +1537,12 @@ session:
       Three of four commitments terminal; the queue reads seven takeable and carries
       discharge and blocker edges a checker refuses to let contradict themselves; the
       n = 4 control scores and corrected the level the atlas relation had been judged at;
-      D-034's pair retained and scored prospectively, discriminating on both branches
+      D-034's pair retained and scored prospectively, discriminating on both branches.
+
+      The session then ran nine unplanned phases on BC-049 at n = 40, which is not what
+      this metric measures and is most of what the session produced. That work is in the
+      handoff below rather than here, because folding it into an agenda-008 metric would
+      overstate what agenda-008 asked for.
   delegations:
   - task: >-
       Attribute the remaining unattributed gate steps to path patterns that are provable
@@ -1709,6 +1775,74 @@ it on a control that cannot carry that refutation.
 `D-034` had described an `n = 5` pair for a week without retaining either endpoint, so
 the one control capable of separating the two surviving candidate relations could not be
 constructed. Neither correction changes the conclusion; both change what supports it.
+
+## Handoff
+
+The session ran twenty-three phases against a plan that expected seventeen, and nine of
+them were one continuous line of work on `n = 40` that nobody had planned at all.
+This is what someone picking it up cold needs.
+
+### `BC-049` is not closed, and its three instances are in three different states
+
+`n = 5` is **done**: second-order rigid on first-party exact evidence, recorded,
+replayed in the gate, and the remaining gap — second-order rigidity is not local
+rigidity — is written out in `X-007` as prose, not machine-checked.
+That gap is the only thing left there and it is a hand argument by design.
+
+`n = 40` is **decided at first order and open beyond it**. It is infinitesimally
+flexible: seven directions retained, each verified in `Q(sqrt 2)`, each refused at
+second order by its own verified self-stress, each turning the tilted block and leaving
+the frame fixed. Fifty-two of the frame’s seventy-two coordinates are proved zero in
+every branch, and twelve of the block’s sixteen squares are proved to turn at one rate.
+The cone is bounded to dimension 45 and the known directions span 6.
+
+`n = 28` is **untouched**. It retains decimal witnesses and no exact construction, and
+`D-389` is the reason to check the literature before pricing machinery against it —
+`n = 40` turned out to be published all along.
+
+### What `n = 40` would take to finish
+
+Not more of what this session did.
+The route is exhausted, and the shape of the wall is measured rather than guessed:
+
+- The all-branch rows can never bound the cone below the relaxed cone’s own span, which
+  is rank 41. So 41 to 45 is the ceiling of every certificate this session can write.
+- Branch enumeration is `2^42` and does not reduce: with fifty-six coordinates pinned,
+  not one of the forty-two disjunctions becomes vacuous on what remains.
+- A linear program’s vertex cannot be rationalized back into its own cone.
+  What works is re-solving its *active set* exactly, and that is how the six wider rays
+  were produced — worth knowing before anyone tries the obvious thing again.
+
+What is needed is an instrument that reasons about the disjunctions without enumerating
+them.
+`cases/trump11/tangent_cones.py` is the only thing in the repository that decides a
+branchwise cone, and it does it by enumerating `2^7`.
+
+### What this run cost
+
+Five defects, four of them in tools this session had written hours earlier:
+[`D-390`](../../../defects.md) and [`D-391`](../../../defects.md) in the rigidity
+assessor, [`D-392`](../../../defects.md) and [`D-394`](../../../defects.md) in a
+contract sweep, and [`D-393`](../../../defects.md) in the session’s own gate discipline.
+`D-391` is the one to carry forward: it is **outstanding**, and it inverts the `n = 40`
+answer rather than merely weakening it.
+
+The process failure worth repeating out loud is `D-393`. `--edit` is the pre-push floor
+and it does not run tests, so four pushes went out on a red branch while six wake events
+naming the failing check went unread.
+The tiers are right; using one as though it were the other was not.
+
+### Two things owed
+
+`devtools/assess_n5_rigidity.py` now holds the machinery both sizes use and its name
+says otherwise. A rename is owed and was not done here because it touches the gate, the
+tests and two records.
+
+The `n=40 rigidity bracket still reproduces` gate step costs 4m57s, about a third of the
+full gate, which is exactly what [`D-369`](../../../defects.md) warns about.
+It is left whole rather than thinned: every part of it is a claim the record makes.
+If the cost bites, move the step behind a flag rather than thinning the checks until
+they stop covering what is asserted.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
