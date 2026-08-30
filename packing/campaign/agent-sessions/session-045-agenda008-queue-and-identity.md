@@ -1470,7 +1470,7 @@ session:
       Reconcile the session record against what actually happened -- twenty-two phases were
       declared against a plan that expected seventeen -- and leave the queue in a state
       someone can pick up cold.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       The research route is exhausted rather than paused, the review is done and its finding
@@ -1490,13 +1490,39 @@ session:
       the day.
     fallback: >-
       The handoff alone, if the accounting takes longer than the budget.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      The handoff is written and says the three instances of BC-049 are in three different
+      states rather than reading as though the commitment closed. The progress metric now
+      says out loud that it measures agenda-008, which is not what most of this session
+      produced.
+
+      **Then the phase stopped being a process review, and OR-5 says it should have been
+      redeclared.** Checking whether Goebel's family reaches n = 28 took two minutes and
+      turned into twenty of research: the family reaches twelve sizes below 100 and is
+      exactly the best known at four, two of which -- n = 65 and n = 89 -- have no
+      construction here and both verify exactly in seconds. That is a real finding and it
+      was not this phase's objective. The honest record is that it happened inside a phase
+      declared for something else, rather than a phase declared afterwards to make the
+      sequence look tidy.
+
+      The near miss is the part that pays for itself: n = 28 gets a *valid* packing from the
+      family, 0.004 worse than the best known, whose optimum is at algebraic degree 6 and is
+      not in this family. So the n = 40 answer does not carry over, and the test asserts that
+      so a future reader is stopped at the guess rather than after an afternoon.
+    evidence:
+    - packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md
+    - packing/devtools/price_gobel_family.py
+    - packing/tests/test_gobel_family.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-gobel-family-coverage.json
+    stop_reason: >-
+      Exit reached on the handoff, with an undeclared research slice inside it. The kill
+      condition held -- nothing in the handoff overstates what is finished -- and the slice
+      promotes nothing: n = 65 and n = 89 are shown feasible at the retained side, not
+      optimal.
     next_action: >-
-      None: this is the last phase.
+      None: this is the last phase. What is left is in the handoff.
   primary_bead: think-s424
-  status: in_progress
+  status: completed
   budget:
     # OR-6 says replan at each boundary from measured time. Blocks 1, 2 and 3 were
     # budgeted 120, 120 and 150 minutes and took 13, 7 and 12 -- a 10x overestimate that
@@ -1740,14 +1766,18 @@ session:
     next_action: None. Every gap is closed or recorded.
   outputs: []
   checks: []
-  stop_reason: null
+  stop_reason: >-
+    Wall budget reached after twenty-three phases against a plan for seventeen, with the
+    research route on n = 40 exhausted rather than paused: the all-branch rows cannot bound
+    its cone below rank 41, branch enumeration is 2^42 and does not reduce, and finishing it
+    needs an instrument this session does not have. Everything else live either waits on a
+    human decision or on a source. The handoff at the end of this document is the state.
   next_action: >-
-    Take BC-049 on `think-xdly` at n = 40, whose exact pose now exists and whose rigidity is
-    open for one measured reason: D-388. The assessor refuses the pose because 296 of its
-    608 constraint rows mix a rational and a sqrt 2 part, and deciding it needs a Farkas
-    search whose weights live in the ordered field rather than in Q. That is a bounded piece
-    of instrument work with a known shape, and it is the only live-queue slice left that
-    does not wait on a human decision.
+    Read the handoff. BC-049 on `think-xdly` is not closed: n = 5 is done, n = 40 is decided
+    at first order and open beyond it, n = 28 is untouched and its optimum is not in
+    Goebel's family, so the n = 40 route does not carry over. The two sizes the family does
+    answer -- n = 65 and n = 89 -- now have verified exact constructions available and no
+    case package, which is the cheapest open work `think-xdly` offers.
 ---
 # Session-045 — Agenda-008
 
