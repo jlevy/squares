@@ -1152,6 +1152,14 @@ def _n5_rigidity_certificates(context: Context) -> str:
     return _module(context, "devtools.assess_n5_rigidity", "--check")
 
 
+def _session_close(context: Context) -> str:
+    # Sub-second: frontmatter plus the span of each rollup. Records tier, and distinct from
+    # `_session_rollups` in what it adds -- the reverse direction. That checker asks whether
+    # every declared rollup exists; this one also reports rollups no session declares, which
+    # is how a measured cost goes unattributed without anything noticing.
+    return _module(context, "devtools.close_session", "--check")
+
+
 def _control_anchors(context: Context) -> str:
     # Sub-second: it resolves 150 anchors by string containment, running no mutation and no
     # subprocess. Records tier because a control whose anchor has stopped matching is not
@@ -1736,6 +1744,18 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/assess_n5_rigidity.py",
             *_CASES,
             "packing/campaign/series/*/results/bc-049-n5-rigidity-certificates.json",
+        ),
+    ),
+    Step(
+        "every session's cost is attributed",
+        _session_close,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/close_session.py",
+            "packing/campaign/agent-sessions/*.md",
+            "packing/campaign/resource-usage/*.yaml",
         ),
     ),
     Step(

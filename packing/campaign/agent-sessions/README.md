@@ -180,13 +180,24 @@ Three things worth knowing when you do it:
 - **The rollup is regenerated, not appended.** A record is a function of the log it
   names, so re-running the command on a session that has since grown replaces the
   record. Run it at the end, not part-way through, or run it again if you do.
+
 - **Sub-agent transcripts are where the delegated cost lives**, and they are separate
   logs. Session-045’s sixteen of them carry work that does not appear in the outer log at
   all. Attribute them by comparing each rollup’s `span` against the session’s window
   rather than by memory; the outer log may span more than one session, in which case
   each names it.
+
 - **Sessions numbered below `session-045` predate the field** and the checker lists them
   as grandfathered rather than skipping them silently.
+
+- **The reverse direction is reported, not refused.** `check_session_rollups` asks
+  whether every declared rollup exists; `close_session` also asks whether every rollup
+  on disk is declared by some session.
+  Ten currently are not, and all ten are legitimate — their spans fall in sessions that
+  closed before the field existed.
+  That is why it prints them with their dates rather than failing: an unattributed cost
+  is worth seeing and is not by itself a defect.
+
   The coordinator substitutes the phase’s recorded validation command for
   `<focused-validation>` before the sequence and inspects every staged path before
   committing. A session checkpoint is durable only when its commit is on the recorded
