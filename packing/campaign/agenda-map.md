@@ -2,7 +2,7 @@
 
 # Agenda map
 
-80 agenda commitments across 7 agendas, as declared in each agenda's own frontmatter.
+84 agenda commitments across 8 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **11** ready, **14** blocked, **3** stopped, **52** complete.
+- **12** ready, **17** blocked, **3** stopped, **52** complete.
 
 - **4 blocked commitments name no predecessor** (`BC-016`, `BC-029`, `BC-033`, `BC-050`), so what they wait on is prose rather than an edge, and nothing can tell when it clears.
 
@@ -31,6 +31,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-005 | `BC-044` | 1 | correctness | tool_validation | Can the closed system be solved exactly, by elimination or by integer relation, and can the result be… | `think-3lro` |
 | agenda-005 | `BC-048` | 1 | correctness | tool_validation | Can an exact LP over certified rational or algebraic coefficients replace the float solver where a certified… | `think-nfsd` |
 | agenda-005 | `BC-049` | 1 | correctness | research | Are the three packings the catalogue annotates "Rigid." actually rigid, on evidence of our own rather than on… | `think-xdly` |
+| agenda-008 | `BC-081` | 0 | process | tool_validation | Can a commitment's discharge be an edge the records carry, rather than prose in a later agenda that nothing… | `think-s424` |
 
 ## Blocked, and on what
 
@@ -50,6 +51,9 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-003 | `BC-029` | 0 | *(unnamed)* | no | Do the frozen minus-W scale routes and controls advance the n=5 terminal-family question… |
 | agenda-003 | `BC-033` | 2 | *(unnamed)* | no | Can delta continuation, neighbour transfer, quality-diversity, and packing surgery be… |
 | agenda-005 | `BC-050` | 2 | *(unnamed)* | no | Can n = 68 and n = 69 be given witnesses precise enough to carry a contact claim, so the… |
+| agenda-008 | `BC-082` | 0 | `BC-081` | no | Can the n = 4 labelled control score the relation the atlas uses today, rather than… |
+| agenda-008 | `BC-083` | 0 | `BC-082` | no | Does n = 5 admit a discriminating identity control -- one whose proved component count is… |
+| agenda-008 | `BC-084` | 1 | `BC-081` | no | Can verification run only the steps a change can reach, without any chance of running… |
 
 ## By agenda
 
@@ -62,6 +66,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-005 | active | 6 |  | 1 |  | 3 | 10 |
 | agenda-006 | active |  |  |  | 2 | 23 | 25 |
 | agenda-007 | completed |  |  |  |  | 4 | 4 |
+| agenda-008 | active | 1 |  | 3 |  |  | 4 |
 
 ## What the states mean
 
