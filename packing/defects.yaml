@@ -11510,17 +11510,27 @@ defects:
     and `3e-33` is far inside that -- but the promotion is the operation that would make it
     wrong.
   regression: >-
-    None, and the missing detector is the point rather than an omission -- the promotion
-    fixed the instance and not the class. The stale-blocker check reads only the record's
-    two bound fields, so it cannot see a certificate the record does not cite. What would
-    catch this is a sweep from the other direction: every case package that verifies a
-    construction exactly should be required to be cited by the frontier record for its `n`.
-    That check does not exist, and until it does the next landed certificate goes
-    unrecorded just as silently. `think-xdly` carries it.
+    `devtools/check_certificate_citations.py`, run by the gate step "exact certificates are
+    named by their records" in the `--records` tier. Every existing check reads a frontier
+    record against its own fields, which is why none of them could see a certificate the
+    record was never told about; this sweep runs the other way. Each
+    `cases/*/verify_exact.py` declares `CERTIFIES`, the sizes it decides, and each of those
+    sizes must reach an evidence record whose `certificate` lies in that package.
 
-    What the fix does leave behind is narrower and worth naming as what it is: the
-    trailing-ceiling count is now `30` in a test that says it is a measurement, so the next
-    promotion fails that assertion and has to say why -- which is a tripwire, not a check.
+    An undeclared `CERTIFIES` is a refusal rather than a skip, so a new case package cannot
+    opt out by staying silent -- which is the failure mode a sweep like this usually has.
+    The declaration is read with `ast` rather than by importing, because `verify_exact`
+    modules set `getcontext().prec` when they run and a checker that mutated process-global
+    decimal precision as a side effect of counting files would be its own defect.
+
+    `tests/test_certificate_citations.py`, five cases. The load-bearing one reconstructs the
+    state the repository was actually in: remove `E-n040-gobel-upper` from the evidence map
+    and `n = 40` reaches nothing citing `cases/gobel40`, which is exactly what the sweep
+    must refuse.
+
+    The trailing-ceiling count, now `30` in a test that calls itself a measurement, is a
+    tripwire rather than a check: the next promotion fails that assertion and has to say
+    why. That is deliberate, and it is weaker than the sweep.
   bead: think-xdly
   recorded_in: packing/frontier/n-040.md
 - id: D-399

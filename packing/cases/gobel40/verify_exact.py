@@ -25,6 +25,9 @@ from cases.gobel40.packing import build
 from sqpack.verify import Report, exact_sign, verify_packing
 from sqpack.witness import load_witness
 
+CERTIFIES = (40,)
+"""The sizes this module decides by exact predicate. See `CERTIFIES` in `cases/gobel5`."""
+
 ROOT = Path(__file__).resolve().parent.parent.parent
 WITNESS = ROOT / "witnesses" / "known-best" / "n-040.yaml"
 WITNESS_SCHEMA = ROOT / "witnesses" / "witness.schema.yaml"

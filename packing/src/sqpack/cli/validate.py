@@ -1152,6 +1152,14 @@ def _n5_rigidity_certificates(context: Context) -> str:
     return _module(context, "devtools.assess_n5_rigidity", "--check")
 
 
+def _certificate_citations(context: Context) -> str:
+    # Sub-second: it ast-parses five modules and reads a hundred frontmatter blocks. Records
+    # tier because it checks the record, not the mathematics -- that every exact certificate
+    # this repository holds is named by the frontier record it bears on. See D-398, where
+    # three records declared a mathematics blocker while their certificate ran in this gate.
+    return _module(context, "devtools.check_certificate_citations")
+
+
 def _session_rollups(context: Context) -> str:
     # Sub-second: it reads frontmatter and stats files. Records-tier because that is exactly
     # what it checks -- that a terminal session names what it cost and the record is there.
@@ -1705,6 +1713,19 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/assess_n5_rigidity.py",
             *_CASES,
             "packing/campaign/series/*/results/bc-049-n5-rigidity-certificates.json",
+        ),
+    ),
+    Step(
+        "exact certificates are named by their records",
+        _certificate_citations,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/check_certificate_citations.py",
+            "packing/cases/*/verify_exact.py",
+            "packing/frontier/n-*.md",
+            "packing/frontier/evidence.yaml",
         ),
     ),
     Step(

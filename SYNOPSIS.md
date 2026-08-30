@@ -2570,9 +2570,12 @@ done and what was missing was an evidence record naming it.
 The promotion is made: all three now cite Göbel’s construction, and the count of cases
 whose verified ceiling exceeds their best known falls from 33 to 30. The direction was
 conservative — the register understated what it could certify — but the reason nothing
-caught it is worth more than the instance, and that part is unfixed.
-The stale-blocker check compares a record’s two bound fields to each other, so a
-certificate can land without the record being told, and no sweep runs the other way.
+caught it is worth more than the instance.
+Every check on a frontier record read that record against its own fields, so none could
+see a certificate it had never been told about.
+A sweep now runs the other way: each exact verifier declares the sizes it decides, and
+each of those must reach an evidence record citing that package — with an undeclared
+verifier a refusal rather than a skip, so a new one cannot opt out by staying silent.
 
 The record can also be wrong about itself, and [D-358](defects.md) is this run being so:
 an unattended run declared blocks of 150, 180, 180 and 40 minutes and took 31, 42, 29

@@ -43,6 +43,9 @@ WITNESS_SCHEMA = ROOT / "witnesses" / "witness.schema.yaml"
 SUBJECTS = ((4, 5), (4, 7))
 """`(a, b)` for `n = 65` and `n = 89`: the family's sizes that had no construction here."""
 
+CERTIFIES = (65, 89)
+"""The sizes `SUBJECTS` decides. See `CERTIFIES` in `cases/gobel5`."""
+
 WITNESS_ROUNDING = Decimal("1e-32")
 """The witnesses' own rounding, rounded up -- and the measurement that identifies them.
 
