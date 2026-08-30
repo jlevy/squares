@@ -119,3 +119,58 @@ def test_a_machine_formal_claim_backed_nowhere_is_refused() -> None:
     assert any(
         "requires certificate and replay" in error for error in rigidity_errors(case, stripped)
     ), "with the artifacts gone from both block and record, the claim must be refused"
+
+
+def test_an_unsupported_pair_is_refused_rather_than_ignored() -> None:
+    """The catch-all `check_evidence_semantics` has and this once did not.
+
+    Every branch of the guard is keyed on a value the block might not have, so before the
+    catch-all the least-specified claim was the least checked: `reported` with no method,
+    or no assurance at all, produced no error.
+    """
+    evidence = load_evidence()
+    for patch in (
+        {"assurance": "reported", "method": None},
+        {"assurance": None, "method": None},
+        {"assurance": "numerically-checked", "method": None},
+    ):
+        case = deepcopy(load_case(65))
+        case["rigidity"].update(patch)
+        assert any(
+            "unsupported assurance-method pair" in error
+            for error in rigidity_errors(case, evidence)
+        ), patch
+
+
+def test_reported_rigidity_is_refused_outright() -> None:
+    """The block has no `reported_method` to carry it, and the register forbids it anyway.
+
+    What a source says about rigidity belongs in `reported_upper_bound.catalogue_rigid`
+    and must not be restated in this block.
+    """
+    evidence = load_evidence()
+    case = deepcopy(load_case(65))
+    case["rigidity"].update(assurance="reported", method=None, evidence=[])
+    assert rigidity_errors(case, evidence)
+
+
+def test_verified_rigidity_may_not_rest_on_a_bound_record() -> None:
+    """Verified backing must also be backing about rigidity.
+
+    Requiring only `assurance == verified` let a rigidity claim rest on a record of the
+    right n proving something else entirely -- an upper bound, say -- which is backing in
+    name only.
+    """
+    evidence = load_evidence()
+    borrowed = deepcopy(evidence["E-n040-gobel-upper"])
+    assert borrowed["claim"] == "upper-bound", "premise of this test changed"
+    borrowed["scope"] = {"n_values": [65]}
+    evidence = {**evidence, "E-n040-gobel-upper": borrowed}
+
+    case = deepcopy(load_case(65))
+    case["rigidity"].update(
+        assurance="verified", method="exact-algebraic", evidence=["E-n040-gobel-upper"]
+    )
+    assert any(
+        "claiming derived-structure" in error for error in rigidity_errors(case, evidence)
+    )

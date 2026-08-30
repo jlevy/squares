@@ -12,10 +12,17 @@ side `a + 1 + b / sqrt(2)`, by setting a `b` by `b` block at forty-five degrees 
 middle of a frame `a` squares deep.
 
 Twelve `(a, b)` pairs reach an `n` at most 100. At four of them the side is *exactly* the
-best known this repository retains: `n = 5`, `40`, `65` and `89`. Two of those already have
-exact constructions here. **The other two do not** -- `n = 65` and `n = 89` retain
-`numerical-multiprecision` witnesses and no case package, and this tool builds and verifies
-both exactly in seconds.
+best known this repository retains: `n = 5`, `40`, `65` and `89`, and all four now have an
+exact construction here -- `n = 5` and `n = 40` in their own case packages, `n = 65` and
+`n = 89` in `cases/gobel_family`, which session-046 added after this tool priced them.
+
+**Their retained witnesses are still `numerical-multiprecision`, and that is now a
+deliberate distinction rather than a gap.** The frontier records cite the exact
+construction, so `verified_upper_bound` at all four is the exact side (`D-398`). The
+witness files are a separate question: promoting those to `exact-algebraic` needs a
+representation change no tool here performs, and a provenance decision about records
+retained as another source's derived numerical facts. Feasible at the best known side is
+not optimal either way.
 
 The near miss is the interesting one. At `a = 2, b = 4` the family gives `n = 28` in side
 `3 + 2 sqrt(2) = 5.8284...`, and the best known is `5.8244...` -- better by `0.0040`, at

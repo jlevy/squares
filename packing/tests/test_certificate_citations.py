@@ -11,9 +11,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from devtools.check_certificate_citations import (
     CASES,
     FRONTIER,
+    Undeclared,
     cited_certificates,
     declared_sizes,
     main,
@@ -70,3 +73,52 @@ def test_the_family_package_covers_both_of_its_sizes() -> None:
         assert any(
             path.startswith("cases/gobel_family/") for path in cited_certificates(n, evidence)
         ), n
+
+
+def test_a_non_literal_declaration_is_refused_not_a_crash(tmp_path: Path) -> None:
+    """An unreadable CERTIFIES must name its package, not abort the sweep.
+
+    `ast.literal_eval` raises on `tuple(range(...))`, and an exception escaping `main`
+    would stop every later package from being checked -- the guard failing open on the one
+    input designed to confuse it.
+    """
+    stub = tmp_path / "verify_exact.py"
+    stub.write_text("CERTIFIES = tuple(range(1, 4))\n")
+    with pytest.raises(Undeclared):
+        declared_sizes(stub)
+
+
+def test_an_out_of_range_size_does_not_crash(tmp_path: Path) -> None:
+    """A size with no frontier record is a refusal; reading n-999.md would raise."""
+    assert cited_certificates(999, {}) == set()
+
+
+def test_a_reported_record_does_not_satisfy_the_sweep() -> None:
+    """Citing a certificate is not claiming it.
+
+    A `reported` evidence record carrying a path into a case package would satisfy the
+    letter of the sweep while asserting nothing this repository checked.
+    """
+    real = {
+        "E-fake": {
+            "id": "E-fake",
+            "assurance": "verified",
+            "certificate": "cases/gobel40/packing.py",
+        }
+    }
+    demoted = {"E-fake": {**real["E-fake"], "assurance": "reported"}}
+
+    # n = 40 reaches E-fake through neither map; use the real record set instead and
+    # check the filter directly on the shape the sweep consumes.
+    from devtools.check_certificate_citations import cited_certificates as sweep
+
+    evidence = evidence_by_id()
+    assert any(path.startswith("cases/gobel40/") for path in sweep(40, evidence))
+
+    downgraded = {
+        k: ({**v, "assurance": "reported"} if k == "E-n040-gobel-upper" else v)
+        for k, v in evidence.items()
+    }
+    assert not any(path.startswith("cases/gobel40/") for path in sweep(40, downgraded)), (
+        "a reported record must not satisfy the sweep"
+    )

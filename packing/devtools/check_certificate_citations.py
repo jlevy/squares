@@ -40,22 +40,54 @@ CASES = ROOT / "cases"
 FRONTIER = ROOT / "frontier"
 
 
+class Undeclared(Exception):
+    """`CERTIFIES` is present but not readable as a literal, which is a refusal.
+
+    Reading the declaration statically is what keeps this checker free of the import
+    side effects described in the module docstring, and the cost of that choice is that
+    `CERTIFIES = tuple(range(...))` cannot be evaluated. That has to surface as a message
+    naming the package rather than as a traceback: an exception escaping `main` aborts the
+    sweep, so one unreadable declaration would silently stop every later package from being
+    checked at all -- a guard that fails open on the one input designed to confuse it.
+    """
+
+
 def declared_sizes(module: Path) -> tuple[int, ...] | None:
-    """Return the module's `CERTIFIES` tuple, or None if it declares none."""
+    """Return the module's `CERTIFIES` tuple, or None if it declares none.
+
+    Raises `Undeclared` if `CERTIFIES` is present but not a literal.
+    """
     tree = ast.parse(module.read_text(encoding="utf-8"))
     for node in tree.body:
         if not isinstance(node, ast.Assign):
             continue
         for target in node.targets:
             if isinstance(target, ast.Name) and target.id == "CERTIFIES":
-                value = ast.literal_eval(node.value)
-                return tuple(int(n) for n in value)
+                try:
+                    value = ast.literal_eval(node.value)
+                    return tuple(int(n) for n in value)
+                except (ValueError, TypeError) as exc:
+                    raise Undeclared(
+                        "CERTIFIES must be a literal tuple of integers, readable without "
+                        f"importing the module ({exc})"
+                    ) from exc
     return None
 
 
 def cited_certificates(n: int, evidence_by_id: dict[str, dict]) -> set[str]:
-    """Return every certificate path the frontier record for `n` reaches through evidence."""
-    case = safe_load((FRONTIER / f"n-{n:03d}.md").read_text(encoding="utf-8").split("---\n")[1])
+    """Return the certificate paths the record for `n` reaches through *verified* evidence.
+
+    Verified is part of the question, not a separate one. The point of the sweep is that an
+    exact certificate is named by the record it bears on, and a `reported` evidence record
+    carrying a path into a case package would satisfy the letter of that while asserting
+    nothing this repository checked -- the record would cite the certificate and still not
+    claim it. Requiring the citing record to be `verified` is what makes a pass mean what
+    the step name says.
+    """
+    path = FRONTIER / f"n-{n:03d}.md"
+    if not path.exists():
+        return set()
+    case = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])
     packing = case["packing"]
 
     referenced: set[str] = set()
@@ -67,7 +99,9 @@ def cited_certificates(n: int, evidence_by_id: dict[str, dict]) -> set[str]:
     return {
         certificate
         for ref in referenced
-        if (record := evidence_by_id.get(ref)) and (certificate := record.get("certificate"))
+        if (record := evidence_by_id.get(ref))
+        and record.get("assurance") == "verified"
+        and (certificate := record.get("certificate"))
     }
 
 
@@ -80,7 +114,11 @@ def main() -> int:
 
     for module in sorted(CASES.glob("*/verify_exact.py")):
         package = module.parent.name
-        sizes = declared_sizes(module)
+        try:
+            sizes = declared_sizes(module)
+        except Undeclared as exc:
+            problems.append(f"cases/{package}/verify_exact.py: {exc}")
+            continue
         if sizes is None:
             problems.append(
                 f"cases/{package}/verify_exact.py declares no CERTIFIES; "
@@ -92,6 +130,12 @@ def main() -> int:
             continue
 
         prefix = f"cases/{package}/"
+        out_of_range = [n for n in sizes if not (FRONTIER / f"n-{n:03d}.md").exists()]
+        if out_of_range:
+            problems.append(
+                f"cases/{package}: CERTIFIES names {out_of_range}, which have no frontier record"
+            )
+            continue
         for n in sizes:
             certificates = cited_certificates(n, evidence_by_id)
             if not any(path.startswith(prefix) for path in certificates):

@@ -250,18 +250,39 @@ def _check_rigidity_claim(
     assurance = rigidity.get("assurance")
     method = rigidity.get("method")
 
-    if method in NUMERICAL_METHODS and assurance != "numerically-checked":
-        errors.append("numerical method cannot support verified or reported assurance")
-    elif method in FORMAL_METHODS and assurance != "verified":
-        errors.append("formal method requires verified assurance")
+    if method in NUMERICAL_METHODS:
+        if assurance != "numerically-checked":
+            errors.append("numerical method cannot support verified or reported assurance")
+    elif method in FORMAL_METHODS:
+        if assurance != "verified":
+            errors.append("formal method requires verified assurance")
+    else:
+        # The catch-all `check_evidence_semantics` has and this did not. Without it a block
+        # reading `reported` with no method, or no assurance and no method, produced no
+        # error at all -- every branch below is keyed on a value it does not have, so the
+        # least-specified claim was the least checked. `reported` in particular can never
+        # be backed here: the block has no `reported_method` field to carry it, and the
+        # register's own rule is that what a source says about rigidity belongs in
+        # `reported_upper_bound.catalogue_rigid` and must not be restated in this block.
+        errors.append(f"unsupported assurance-method pair: {assurance!r}, {method!r}")
 
     if assurance == "verified":
         if method not in FORMAL_METHODS:
             errors.append("verified requires a formal method")
         # A verified claim must rest on verified evidence. Without this the block's own
         # label is the whole of the argument, which is what the contract exists to refuse.
-        if not any(record.get("assurance") == "verified" for record in cited):
+        backing = [record for record in cited if record.get("assurance") == "verified"]
+        if not backing:
             errors.append("verified rigidity requires at least one verified evidence record")
+        # ...and on evidence about rigidity. Verified alone let a rigidity claim rest on a
+        # record of the right n proving something else entirely -- an upper bound, say --
+        # which is backing in name only. `_check_bound_evidence` already constrains claim
+        # for bounds; this is the same rule one block over.
+        elif not any(record.get("claim") == "derived-structure" for record in backing):
+            errors.append(
+                "verified rigidity requires verified evidence claiming derived-structure, "
+                f"not {sorted({str(record.get('claim')) for record in backing})}"
+            )
         if method in MACHINE_FORMAL_METHODS:
             backed = rigidity.get("certificate") and rigidity.get("replay")
             delegated = any(
