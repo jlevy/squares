@@ -1004,6 +1004,14 @@ def _agenda_map(context: Context) -> str:
     return _module(context, "devtools.render_agenda_map", "--check")
 
 
+def _n5_identity_pair(context: Context) -> str:
+    # Re-runs the six-seed n=5 census, so ~28s: too slow for --edit and too important to
+    # leave unreplayed. D-034's pair is the only prospective control the identity work
+    # has, and a census that stopped reproducing it would invalidate the control without
+    # changing any file.
+    return _module(context, "devtools.build_n5_identity_pair", "--check")
+
+
 def _differential(context: Context) -> str:
     if not ENGINE.is_file():
         raise StepSkippedError(
@@ -1172,6 +1180,7 @@ STEPS: tuple[Step, ...] = (
     Step("README agrees with the directory", _readme, fast=True, records=True),
     Step("AGENTS.md mirrors the operating rules", _operating_rules, fast=True, records=True),
     Step("agenda map agrees with the agendas", _agenda_map, fast=True, records=True),
+    Step("D-034's n=5 identity pair still reproduces", _n5_identity_pair, broad=True),
     Step("differential: search energy vs validity oracle", _differential, needs_engine=True),
     Step("provenance: recorded commits are reachable", _provenance, fast=True),
     Step("campaign record", _campaign_record, fast=True, records=True),

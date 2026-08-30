@@ -17,6 +17,8 @@ from devtools.check_identity_relation import (
     RELATIONS,
     controls,
     discriminating,
+    prospective_pair,
+    prospective_verdicts,
     score,
 )
 
@@ -152,3 +154,47 @@ def test_side_alone_is_refuted_by_both_labelled_controls() -> None:
     assert rows["n=4 labelled"] == "REFUTED"
     assert rows["n=3 D4xS3 quotient"] == "agrees"
     assert rows["n=4 D4xS4 quotient"] == "agrees"
+
+
+def test_the_n5_pair_discriminates_whichever_way_it_resolves() -> None:
+    """`BC-083`'s answer, as a computation rather than an argument.
+
+    The two existing quotient controls both have component count 1, so a merge-everything
+    relation passes them (`D-373`). The `n = 4` labelled control has count 24, which no
+    relabelling-invariant relation can reach, so it refutes all of them (`D-375`). A
+    discriminating control has to sit between those, and `D-034`'s `n = 5` pair does:
+    neither of its two possible answers is unanimous.
+
+    The stronger half is that answer 2 refutes `contact + closure`, the standing sole
+    survivor. A control that can only confirm the current winner would not be worth the
+    proof it is waiting on.
+    """
+    pair = prospective_pair()
+    assert pair is not None, "the retained n=5 pair is missing"
+    verdicts = prospective_verdicts(pair)
+    for answer in (1, 2):
+        outcomes = {by_answer[answer] for _got, by_answer in verdicts.values()}
+        assert outcomes == {"agrees", "REFUTED"}, (
+            f"answer {answer} is unanimous ({outcomes}), so the pair would decide nothing"
+        )
+    assert verdicts["contact + closure"][1][2] == "REFUTED"
+    assert verdicts["geometric + contact"][1][1] == "REFUTED"
+
+
+def test_the_n5_pair_measures_what_d034_asserted() -> None:
+    """`D-034` quoted these invariants for three years of session-time without retaining them.
+
+    The claim is that the two endpoints share a contact certificate while differing
+    geometrically. Now that both endpoints are retained, that is checkable rather than
+    quotable, and it is what makes the pair a control at all: if they differed in contact
+    certificate too, every relation would report 2 and the pair would decide nothing.
+    """
+    pair = prospective_pair()
+    assert pair is not None
+    assert pair["measured"]["share_contact_certificate"] is True
+    assert pair["measured"]["share_geometric_key"] is False
+    # D-021's floor is 1e-11; a side difference below it is not a difference.
+    assert pair["measured"]["side_difference"] < 1e-11
+    assert pair["component_count"] is None, (
+        "a proved count here would close D-034; it must not appear without one"
+    )

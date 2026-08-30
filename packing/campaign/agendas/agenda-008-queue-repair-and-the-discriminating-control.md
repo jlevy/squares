@@ -26,7 +26,7 @@ agenda:
     purpose: tool_validation
     owner_focus: process
     instances: [3, 5, 29]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Can a commitment's discharge be an edge the records carry, rather than prose in a
@@ -62,13 +62,18 @@ agenda:
       consequence. A wrong sentence misleads a reader; a wrong queue misdirects a session
       that is following OR-4 correctly. Only agenda-007 declared its discharges, and it
       declared them in a `note`, which is prose and which no checker reads.
-    artifacts: []
+    artifacts:
+    - devtools/render_agenda_map.py
+    - campaign/agenda-map.md
+    - campaign/schemas/agenda.schema.yaml
+    - tests/test_agenda_map.py
+    - src/sqpack/campaign/ledger.py
 
   - id: BC-082
     purpose: measurement_validation
     owner_focus: correctness
     instances: [3, 4]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Can the n = 4 labelled control score the relation the atlas uses today, rather than
@@ -102,13 +107,22 @@ agenda:
       this adds retained detail to an existing result rather than re-running it. If the
       scoring refutes `geometric + contact`, that is a finding about the atlas and not a
       reason to revisit the experiment.
-    artifacts: []
+
+      It did refute it, and it also corrected the level the relation had been scored at,
+      which is D-375. No proved count moved: exp-014 regenerates byte-identically after
+      the shared-sampler refactor, and exp-015 differs only by the added `samples` key.
+    artifacts:
+    - cases/small_n/optimal_moduli.py
+    - campaign/series/series-000-smoke-and-calibration/results/exp-015-h-032-n4-optimal-moduli.json
+    - devtools/check_identity_relation.py
+    - tests/test_identity_relation.py
+    - campaign/explorations/X-005-identity-relation-and-its-controls.md
 
   - id: BC-083
     purpose: research
     owner_focus: insight
     instances: [5]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Does n = 5 admit a discriminating identity control -- one whose proved component
@@ -142,13 +156,24 @@ agenda:
       typed statement of why n = 5 cannot be given a discriminating control is a sharper
       object than a census, and it is what would justify spending the next block
       somewhere else.
-    artifacts: []
+
+      The first branch fired instead, and the control turned out to be one the record had
+      been quoting since 2026-08-23 without ever retaining it, which is D-376. It
+      discriminates on both of its two possible answers, and the branch where the count is
+      two refutes contact + closure, the relation X-005 declared. What it waits on is the
+      count itself, which exp-042 already names as a declared scope refusal.
+    artifacts:
+    - devtools/build_n5_identity_pair.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-083-n5-identity-pair.json
+    - devtools/check_identity_relation.py
+    - tests/test_identity_relation.py
+    - campaign/explorations/X-006-the-discriminating-control-at-n5.md
 
   - id: BC-084
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5, 11, 29]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       Can verification run only the steps a change can reach, without any chance of

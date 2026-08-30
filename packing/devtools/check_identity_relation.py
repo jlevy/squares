@@ -241,6 +241,43 @@ def score(candidate: Candidate) -> list[tuple[Control, int | str, str]]:
     return rows
 
 
+PAIR = RESULTS / "bc-083-n5-identity-pair.json"
+
+
+def prospective_pair() -> dict[str, Any] | None:
+    """`D-034`'s two n = 5 endpoints, retained by `devtools.build_n5_identity_pair`.
+
+    A *prospective* control: its two constituents are retained and its component count is
+    not proved, so it is scored for what it would decide rather than for what it does.
+    """
+    if not PAIR.exists():
+        return None
+    return _load(PAIR)
+
+
+def prospective_verdicts(pair: dict[str, Any]) -> dict[str, tuple[int, dict[int, str]]]:
+    """What each relation reports on the pair, and what each possible answer decides.
+
+    The pair is two endpoints, so the only answers in question are 1 (one component seen
+    twice) and 2 (two components). Every relation is evaluated on the two retained
+    endpoints directly; there is no closure data at n = 5, so `contact + closure` and
+    `contact alone` coincide here, and that is itself part of what the control reports.
+    """
+    endpoints = pair["endpoints"]
+    reports = {
+        "side alone": 1,
+        "geometric + contact": len(
+            {(e["geometric_key"], e["contact_certificate"]) for e in endpoints}
+        ),
+        "contact alone": len({e["contact_certificate"] for e in endpoints}),
+        "contact + closure": len({e["contact_certificate"] for e in endpoints}),
+    }
+    return {
+        name: (got, {answer: ("agrees" if got == answer else "REFUTED") for answer in (1, 2)})
+        for name, got in reports.items()
+    }
+
+
 def discriminating(results: dict[str, list[tuple[Control, int | str, str]]]) -> bool:
     """Does the control set separate the candidates, or pass more than one?
 
@@ -308,6 +345,36 @@ def main(argv: Sequence[str] | None = None) -> int:
         f"survives the quotient controls alone: {passing_quotient_only} "
         f"-- the labelled controls are what refute the rest"
     )
+
+    pair = prospective_pair()
+    if pair is not None:
+        print()
+        print("prospective control -- D-034's n=5 pair, component count NOT proved")
+        measured = pair["measured"]
+        print(
+            f"  two endpoints at side {pair['subject']['side']}; "
+            f"same contact certificate: {measured['share_contact_certificate']}; "
+            f"same geometric key: {measured['share_geometric_key']}"
+        )
+        verdicts = prospective_verdicts(pair)
+        print(f"  {'relation':<22}{'reports':>9}{'if 1':>10}{'if 2':>10}")
+        for name, (got, by_answer) in verdicts.items():
+            print(f"  {name:<22}{got:>9}{by_answer[1]:>10}{by_answer[2]:>10}")
+        for answer in (1, 2):
+            split = {
+                verdict
+                for _got, by_answer in verdicts.values()
+                for verdict in [by_answer[answer]]
+            }
+            if len(split) < 2:
+                print(f"  answer {answer} would decide nothing: every relation {split.pop()}")
+        # The point of the table: whichever way it resolves, it separates the two
+        # relations no existing control separates, and one branch refutes the standing
+        # winner. That is what makes it worth the proof it is waiting on.
+        print(
+            f"  missing quantity: {pair['subject']['defect']} "
+            "-- see why_component_count_is_null"
+        )
 
     if args.check and not separates:
         print("controls do not separate the candidate relations", file=sys.stderr)

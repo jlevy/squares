@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 375
+count: 376
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10190,3 +10190,56 @@ defects:
     has to be redone.
   bead: think-m2j8
   recorded_in: packing/campaign/explorations/X-005-identity-relation-and-its-controls.md
+- id: D-376
+  title: The n=5 pair D-034 has quoted since August was never retained
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: inspection
+  latent_for: 'from D-034 on 2026-08-23 until BC-083 went looking for the two endpoints'
+  severity: low
+  status: fixed
+  what: >-
+    `D-034` states that two `n = 5` rows share side `2.767766952966`, closed form, contact
+    certificate, angle signature and contact count while differing geometrically. That
+    sentence has been cited by `D-034`, `X-005`, `H-023` and the ledger, and the two
+    endpoints it describes were never retained anywhere. `golden/basin-maps.yaml` keeps the
+    aggregate rows -- side, contact count, angle classes, frequencies -- and not the poses
+    or the keys, so nothing downstream could check the claim or score a relation against
+    it.
+
+    The claim was true. Rebuilt from the fixed seed stream, the two endpoints share
+    contact certificate `5dcbd27037e1bd5227723319c9f55c72`, differ in geometric key, and
+    differ in side by `8.9e-16`, which is four orders of magnitude below the `1e-11` quench
+    floor `D-021` records.
+  consequence: >-
+    None realised, and the direction is neutral rather than flattering: the claim held when
+    it was finally checked. The cost was that the one control capable of separating
+    `geometric + contact` from `contact + closure` could not be constructed, so `BC-046`
+    and `BC-080` both ran without it and `X-005` reported the `n = 4` labelled control as
+    the discriminating one -- which `D-375` then showed it is not.
+
+    The general shape is worth more than this instance: a defect that quotes a measurement
+    and retains nothing leaves a claim that can be repeated but not used.
+  fix: >-
+    `devtools/build_n5_identity_pair.py` reproduces the pair through `check_golden_basins`'s
+    own census functions rather than a second census, and retains both poses, both keys and
+    the measured invariants as `bc-083-n5-identity-pair.json`. `component_count` is `null`
+    with a field saying why, so the artifact cannot be mistaken for a proof.
+
+    `check_identity_relation` scores it as a prospective control: what each relation reports
+    on the pair, and what each of the two possible answers would decide. `X-006` owns the
+    argument.
+  regression: >-
+    `packing-validate` gains a step re-running the six-seed census and comparing the pair's
+    keys, at 28s. It is deliberately not in `--records` or `--edit`: a census that stopped
+    reproducing the pair would invalidate the control without changing a single file, which
+    is exactly the failure a retained-but-unreplayed artifact allows.
+
+    `tests/test_identity_relation.py` asserts the measured invariants, that the side
+    difference is below the `D-021` floor, and that `component_count` stays `null` -- a
+    proved count appearing there without closing `D-034` would be the same false claim
+    this defect is about.
+  bead: think-6zaz
+  recorded_in: packing/campaign/explorations/X-006-the-discriminating-control-at-n5.md

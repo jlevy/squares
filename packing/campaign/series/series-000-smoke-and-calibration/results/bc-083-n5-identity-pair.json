@@ -1,0 +1,73 @@
+{
+  "component_count": null,
+  "endpoints": [
+    {
+      "contact_certificate": "5dcbd27037e1bd5227723319c9f55c72",
+      "geometric_key": "0373183838f6f0c42956f969dadfda97",
+      "seed": 5,
+      "side": 2.76776695296637,
+      "theta": [
+        1.570796326794904,
+        0.7853981676985268,
+        0.7853981676985268,
+        -2.210056130330553e-07,
+        3.317182401300478e-15
+      ],
+      "x": [
+        0.5000000000000038,
+        1.323223304703368,
+        2.0606601717798227,
+        2.2677668424635757,
+        0.5000000000000017
+      ],
+      "y": [
+        0.5000000000000038,
+        1.3838834762222831,
+        0.7071067811865475,
+        2.146446720431309,
+        2.2677669529663684
+      ]
+    },
+    {
+      "contact_certificate": "5dcbd27037e1bd5227723319c9f55c72",
+      "geometric_key": "07860b128b38dd2e7856c11e9ff03eb7",
+      "seed": 2,
+      "side": 2.767766952966371,
+      "theta": [
+        1.5707963267949019,
+        1.5707963267950102,
+        1.5707963267949019,
+        0.7853981126414208,
+        0.7853981126414208
+      ],
+      "x": [
+        0.5000000000000027,
+        2.2677669529663143,
+        0.5000000000000027,
+        2.0606601717798245,
+        1.3838834734042618
+      ],
+      "y": [
+        2.1464466155645803,
+        0.5000000000000568,
+        0.5000000000000027,
+        2.0606601717798245,
+        1.323223304703422
+      ]
+    }
+  ],
+  "measured": {
+    "share_contact_certificate": true,
+    "share_geometric_key": false,
+    "side_difference": 8.881784197001252e-16
+  },
+  "schema_version": 1,
+  "subject": {
+    "commitment": "BC-083",
+    "defect": "D-034",
+    "n": 5,
+    "side": 2.767766953,
+    "source": "the six-seed n=5 census in devtools.check_golden_basins"
+  },
+  "why_component_count_is_null": "Not proved, and not provable by the route that proved n = 3 and n = 4. Those classifications are exhaustive because orientation is forced -- every square axis-aligned -- so the configuration space is a finite union of separation cells, 64 raw branches at n = 3 and 4096 at n = 4, each decided by an LP. The n = 5 optimum has two angle classes, so orientation is not forced and the space carries continuous angle parameters; the separation-cell method does not apply, and the obstruction is its kind rather than its count. exp-042 names the missing claim exactly: A_to_B_stationary_connection is one of its eleven declared scope refusals."
+}

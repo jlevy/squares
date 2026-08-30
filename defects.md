@@ -2,7 +2,7 @@
 
 # Defect log
 
-375 defects recorded across the packing toolchain.
+376 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `control_cell` | 25 | a cell of the sweep whose answer is known in advance |
 | `review` | 233 | a human or agent reading the work against a checklist |
 | `anomaly` | 12 | a result that made no sense, chased down |
-| `inspection` | 37 | reading the code or the design with intent |
+| `inspection` | 38 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 48 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 48 of 375, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 48 of 376, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 48 of 375, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 4 |
-| record | 108 |
+| record | 109 |
 | tooling | 124 |
 | docs | 105 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 48 of 375, and none of
 | --- | ---: |
 | soundness | 88 |
 | validity | 90 |
-| bookkeeping | 138 |
+| bookkeeping | 139 |
 | robustness | 44 |
 | performance | 15 |
 
@@ -595,6 +595,7 @@ This is the actionable list.
 | [D-373](packing/campaign/explorations/X-005-identity-relation-and-its-controls.md) | 2026-08-30 | record | validity | flattering | `control_cell` | medium | fixed | The identity acceptance rule named only controls whose answer was one |
 | [D-374](packing/campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md) | 2026-08-30 | record | validity | flattering | `inspection` | medium | fixed | The agenda queue offered four finished commitments as takeable |
 | [D-375](packing/campaign/explorations/X-005-identity-relation-and-its-controls.md) | 2026-08-30 | record | validity | flattering | `control_cell` | medium | fixed | The atlas relation was scored at the wrong level, and the n=4 control separates nothing |
+| [D-376](packing/campaign/explorations/X-006-the-discriminating-control-at-n5.md) | 2026-08-30 | record | bookkeeping | neutral | `inspection` | low | fixed | The n=5 pair D-034 has quoted since August was never retained |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

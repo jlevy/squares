@@ -212,10 +212,10 @@ Status: **active**. Eight to nine hours in four blocks. Block 1 is first because
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-081 | tool_validation | 3, 5, 29 | ready | 0 | think-s424 | Measured on 2026-08-30 by the map's first run. agenda-005 BC-045's exit is n = 5, n = 10 and n = 11 interval certificates with refusal controls and n = 29 recorded unresolved; agenda-006 BC-053's exit is the same, and BC-053 is complete. The same holds for BC-043 against BC-054, BC-044 against BC-060, and BC-048 against BC-061. Four of the eleven commitments the queue offers as takeable are finished work. |
-| BC-082 | measurement_validation | 3, 4 | blocked | 0 | think-m2j8 | `geometric + contact` is the relation `Atlas.add` implements, and n = 4 labelled is the control that most directly tests it: 24 isolated labelled grids, so a correct labelled relation must report 24. It is currently the one control that relation cannot be scored against, which means the atlas's own rule is the least-tested of the four candidates. |
-| BC-083 | research | 5 | blocked | 0 | think-6zaz | Until such a control exists, any n = 5 identity claim is validated against a constant: three of the four candidates survive the rule as written, and `side alone`, which merges everything, is among them. D-034 cannot be closed against a rule a merge-everything relation would have passed. |
-| BC-084 | tool_validation | 5, 11, 29 | blocked | 1 | think-9qtn | Measured on 2026-08-28: a two-file edit to the rigidity assessor was verified with a 979.79s full gate, while the two steps that edit can affect run together in 12.06s. BC-079 has since cut the pre-push tier to 4.1s and added `--edit` at 26s, so the remaining gap is the full gate at a commit boundary, not the edit loop. |
+| BC-081 | tool_validation | 3, 5, 29 | complete | 0 | think-s424 | Measured on 2026-08-30 by the map's first run. agenda-005 BC-045's exit is n = 5, n = 10 and n = 11 interval certificates with refusal controls and n = 29 recorded unresolved; agenda-006 BC-053's exit is the same, and BC-053 is complete. The same holds for BC-043 against BC-054, BC-044 against BC-060, and BC-048 against BC-061. Four of the eleven commitments the queue offers as takeable are finished work. |
+| BC-082 | measurement_validation | 3, 4 | complete | 0 | think-m2j8 | `geometric + contact` is the relation `Atlas.add` implements, and n = 4 labelled is the control that most directly tests it: 24 isolated labelled grids, so a correct labelled relation must report 24. It is currently the one control that relation cannot be scored against, which means the atlas's own rule is the least-tested of the four candidates. |
+| BC-083 | research | 5 | complete | 0 | think-6zaz | Until such a control exists, any n = 5 identity claim is validated against a constant: three of the four candidates survive the rule as written, and `side alone`, which merges everything, is among them. D-034 cannot be closed against a rule a merge-everything relation would have passed. |
+| BC-084 | tool_validation | 5, 11, 29 | ready | 1 | think-9qtn | Measured on 2026-08-28: a two-file edit to the rigidity assessor was verified with a 979.79s full gate, while the two steps that edit can affect run together in 12.06s. BC-079 has since cut the pre-push tier to 4.1s and added `--edit` at 26s, so the remaining gap is the full gate at a commit boundary, not the edit loop. |
 
 ## Series
 
@@ -370,6 +370,7 @@ Status: **active**. Eight to nine hours in four blocks. Block 1 is first because
 
 - X-004 — An exact algebraic characterization of the n = 29 record
 - X-005 — The relation the atlas should count, and why its acceptance rule could not test one
+- X-006 — n = 5 admits a discriminating control, and it is the one D-034 has been quoting
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
