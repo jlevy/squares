@@ -5,12 +5,12 @@ title: Settle rigidity for n=5, 28 and 40 beyond single-square translation
 kind: task
 status: open
 priority: 2
-version: 7
+version: 8
 labels: []
 dependencies: []
 parent_id: is-01m12zjr144a4kg6rnv1t0pm6n
 created_at: 2026-08-28T15:18:21.210Z
-updated_at: 2026-08-30T14:10:24.355Z
+updated_at: 2026-08-30T14:34:31.351Z
 ---
 The translation escape screen finds no movable square for n=5, 11, 28 and 40, but a miss is one-directional: rotation of a single square and coordinated multi-square motion are outside it. So frontier/n-005, n-028 and n-040 now carry rigidity.property: undetermined, which is a result rather than an absence, while Kingbird annotates all four 'Rigid.'
 
@@ -24,21 +24,19 @@ Do not shortcut this by promoting catalogue_rigid into the rigidity block. That 
 
 ## Notes
 
-2026-08-30 session-045 phases 15-23. HANDOFF for BC-049.
+2026-08-30 session-045 CLOSED (23 phases). Addendum to the handoff: Goebel's family, mapped.
 
-STATE OF THE THREE INSTANCES.
-n=5 DONE: second-order rigid on first-party exact evidence (E-n005-second-order-rigidity), replayed in the gate. Remaining gap is that second-order rigidity is not local rigidity; X-007 writes the curve-selection argument out as prose and nothing machine-checks it. That is by design.
-n=40 DECIDED AT FIRST ORDER, open beyond it. Infinitesimally FLEXIBLE. Seven directions retained, each verified in Q(sqrt 2), each refused at second order by its own verified self-stress, each turning the tilted block and leaving the frame fixed. 52 of 72 frame coordinates PROVED zero in every branch; 12 of 16 block squares PROVED to turn at one rate (the 4 left out are exactly the block's interior cells). Cone bounded to dimension 45; known directions span 6. Registered as E-n040-first-order-flexibility; frontier property stays `undetermined` because an infinitesimal flex is not a motion.
-n=28 UNTOUCHED: decimals only, no exact construction. D-389 is the reason to read the literature before pricing machinery against it -- n=40 turned out to be published all along.
+D-389 was specific to n=40 -- a route priced while the construction sat published. The general question took twenty minutes: devtools/price_gobel_family.py enumerates every (a,b) with a-1 < b/sqrt2 < a+1 reaching n <= 100, compares the side a+1+b/sqrt2 against the retained best known, and verifies exactly where they match.
 
-WHAT n=40 WOULD TAKE TO FINISH. Not more of what this session did; the route is exhausted and the wall is measured:
-- the all-branch rows can never bound the cone below the relaxed cone's own span, measured at rank 41, so 41-45 is the ceiling of every certificate available here;
-- branch enumeration is 2^42 and does NOT reduce -- with 56 coordinates pinned, not one of the 42 disjunctions becomes vacuous on what remains;
-- a linear program's vertex cannot be rationalized back into its own cone; what works is re-solving its ACTIVE SET exactly (that is how the six wider rays came out). Worth knowing before anyone retries the obvious thing.
-Needed: an instrument that reasons about the disjunctions without enumerating them. cases/trump11/tangent_cones.py is the only branchwise-cone decider in the repo and it enumerates 2^7.
+TWELVE sizes reached. OPTIMAL at FOUR: n = 5, 40, 65, 89.
+- n=5 and n=40 already have exact case packages here.
+- **n=65 (a=4,b=5) and n=89 (a=4,b=7) do NOT.** Both retain numerical-multiprecision witnesses and no case package, and both verify exactly in seconds -- 2080 and 3916 pairs decided by exact sign. Building cases/gobel65 and cases/gobel89 is the cheapest open work this bead offers.
+- Nothing promoted: feasible at the retained side is not optimal.
 
-COST. Five defects, four in tools written hours earlier the same day: D-390 and D-391 (rigidity assessor), D-392 and D-394 (contract sweep), D-393 (this session's own gate discipline). D-391 is OUTSTANDING and it INVERTS the n=40 answer rather than weakening it -- an assessor that intersects the disjunctions reports this packing rigid.
+THE NEAR MISS, which is the part that saves an afternoon: at a=2,b=4 the family gives n=28 -- a VALID packing of side 3+2sqrt2 = 5.82843, but the best known is 5.82444, better by 0.004, at algebraic degree 6. So n=28's optimum is NOT in this family and the n=40 answer does not carry over to it. That is why no exact construction is retained for n=28. `28 = 2(4)+4+16` is not the shortcut it looks like, and tests/test_gobel_family.py asserts the near miss so a future reader is stopped at the guess.
 
-OWED. (1) devtools/assess_n5_rigidity.py holds the machinery both sizes use and its name says otherwise; a rename touches the gate, the tests and two records. (2) The `n=40 rigidity bracket still reproduces` gate step is 4m57s, about a third of the full gate, which is what D-369 warns about; left whole deliberately -- if the cost bites, move it behind a flag rather than thinning the checks.
+The generalization is controlled against cases/gobel40: built at a=3,b=4 it must reproduce that case corner for corner (compared on coefficients, since each builder makes its own NumberField and the field API refuses cross-field comparison -- which is the point of that refusal).
 
-ARTIFACTS: devtools/assess_n40_rigidity.py, devtools/n40_rays.py, devtools/assess_n5_rigidity.py, tests/test_n40_rigidity.py, tests/test_n5_rigidity.py, record bc-049-n40-rigidity-bracket.json, X-007 (owns the argument for both sizes), frontier/n-040.md, frontier/evidence.yaml.
+Gate step "Goebel's family reaches the sizes it reaches", ~5s, records tier. Record bc-049-gobel-family-coverage.json. 925 tests pass; CI green.
+
+PROCESS NOTE: this slice happened inside a phase declared as process-review, which OR-5 says should have been redeclared. Recorded as a slip rather than papered over with a retroactive declaration.
