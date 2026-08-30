@@ -59,7 +59,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-042](agent-sessions/session-042-block8-exact-solve.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-qs6k | Open block 9 as session-043 under BC-061 and `think-twa7`: an exact LP over certified coefficients, removing the `1e-11` float floor. The n = 29 refusal above is what makes the interval route the load-bearing one, so the layer that certifies its coefficients is the next thing that matters. |
 | [session-043](agent-sessions/session-043-block9-degree-bound.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (correctness) | 2 | think-qs6k | Open block 11 as session-044 under BC-066 and `think-obgk`: eliminate the five equations in five half-angles this block left, inside a declared wall-clock cap, and record whatever the chain reaches. It runs before the remaining pipeline blocks because it is the only one that can change what this run concludes about n = 29 -- a refusal there is the measured justification for the interval route carrying that bound. The ordering through block 18 is agenda-006's continuation schedule. |
 | [session-044](agent-sessions/session-044-agenda006-continuation.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 11 | think-qs6k | Carry BC-066 on `think-obgk` to a terminal state: record the measured wall the rational elimination hit, and take the eliminant's degree from the finite-field run. |
-| [session-045](agent-sessions/session-045-agenda008-queue-and-identity.md) | in_progress | contemporaneous | `pipeline-improvement` (process) | `research-loop` (correctness) | 18 | think-s424 | Take BC-049 on `think-xdly` at n = 40, whose exact pose now exists and whose rigidity is open for one measured reason: D-388. The assessor refuses the pose because 296 of its 608 constraint rows mix a rational and a sqrt 2 part, and deciding it needs a Farkas search whose weights live in the ordered field rather than in Q. That is a bounded piece of instrument work with a known shape, and it is the only live-queue slice left that does not wait on a human decision. |
+| [session-045](agent-sessions/session-045-agenda008-queue-and-identity.md) | in_progress | contemporaneous | `pipeline-improvement` (process) | `research-loop` (correctness) | 19 | think-s424 | Take BC-049 on `think-xdly` at n = 40, whose exact pose now exists and whose rigidity is open for one measured reason: D-388. The assessor refuses the pose because 296 of its 608 constraint rows mix a rational and a sqrt 2 part, and deciding it needs a Farkas search whose weights live in the ordered field rather than in Q. That is a bounded piece of instrument work with a known shape, and it is the only live-queue slice left that does not wait on a human decision. |
 
 ### Workflow summary
 
@@ -72,7 +72,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 2 | 1 | 26 | 2 |
 | `process-review` | 8 | 4 | 46 | 6 |
 | `efficiency-loop` | 7 | 0 | 20 | 0 |
-| `research-loop` | 2 | 4 | 18 | 7 |
+| `research-loop` | 2 | 4 | 19 | 7 |
 | `pipeline-improvement` | 16 | 0 | 70 | 0 |
 | `general-improvement` | 0 | 0 | 1 | 0 |
 

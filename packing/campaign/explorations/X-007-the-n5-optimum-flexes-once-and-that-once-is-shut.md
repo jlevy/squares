@@ -28,9 +28,11 @@ exploration:
     three assumptions that n = 5 cannot distinguish from theorems: rational Farkas weights
     against mixed rows (D-388), corner incidences read as contacts (D-390), and a
     disjunctive tangent cone intersected (D-391). With all three corrected, n = 40 is
-    infinitesimally FLEXIBLE -- its sixteen tilted squares turn together -- and that flex is
-    refused at second order by the same kind of self-stress. Nothing is promoted: an
-    infinitesimal flex is not a motion, so both records stay undetermined.
+    infinitesimally FLEXIBLE -- its sixteen tilted squares turn together -- and seven such
+    directions are now retained, each refused at second order by its own verified
+    self-stress. Every one of them leaves all twenty-four frame squares fixed, so the flex
+    is a block mechanism rather than a property of the packing at large. Nothing is
+    promoted: an infinitesimal flex is not a motion, so both records stay undetermined.
   sources:
   - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json
   - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n40-rigidity-bracket.json
@@ -427,13 +429,27 @@ one.
 **And it is refused at second order**, by the same argument as `n = 5` one scale up: 104
 of the 283 tight contacts curve into the obstacle, and a verified non-negative
 self-stress with `w . A = 0` and `w . q < 0` rules out every second-order correction at
-once. So the shape of the two results is identical — flexible at first order, shut at
-second — and the strength is not.
+once.
+
+**The cone is wider than that one direction, and it is confined to the block.** Inside
+the subspace where every all-branch contact stays tight, the admissible set is exactly a
+line — of the 3124 nonzero integer combinations in `[-2, 2]^5` of the null basis, four
+extend to a branch and all four are multiples of one vector.
+Outside it there is more: six further motions are retained, each opening between four
+and eight all-branch contacts strictly, each admissible at all 42 corner pairs, together
+spanning rank five.
+Every one of the seven is refused at second order by its own verified
+self-stress. And every one of the seven — found by two unrelated routes — turns squares
+of the tilted block and leaves all twenty-four axis-aligned squares exactly where they
+are. So the frame is held and the block is the mechanism, which is a sharper statement
+than “`n = 40` flexes” and the one worth carrying forward.
+
+So the shape of the two results is identical — flexible at first order, shut at second —
+and the strength is not.
 `n = 5` has a one-dimensional cone and that one direction is refused, which is what
-earns the phrase *second-order rigid*. At `n = 40` one direction of a five-dimensional
-null space, in one branch, is refused.
-Whether the rest of that cone survives is the open question, and the machinery for it is
-already written.
+earns the phrase *second-order rigid*. At `n = 40` seven directions are refused and the
+cone is not bounded, so the phrase is not available.
+Bounding it is the open question, and the machinery for the refusals is already written.
 
 The real price of extending this, then, was not the pose.
 It was that a tool validated on one pose had three assumptions in it that the pose could

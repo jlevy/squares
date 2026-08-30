@@ -1127,7 +1127,7 @@ session:
       all-branch contact opens strictly rather than staying tight. If nothing lives there,
       the cone is that line and the second-order refusal already in hand makes n = 40
       second-order rigid -- the same statement as n = 5 at eight times the size.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Phase 17's declared next_action, and the only remaining step between what is proved
@@ -1155,13 +1155,81 @@ session:
     fallback: >-
       The measured coverage: which faces of the cone were examined, by what test, and what
       remains. That is what the next attempt needs.
+    outcome: >-
+      The cone is strictly larger than the line, so n = 40 does not become second-order
+      rigid by refusing one direction. Six further motions are retained and verified, each
+      opening between four and eight all-branch contacts strictly -- which is what puts them
+      outside the subspace the null-space sweep covers -- each admissible at all 42 corner
+      pairs, together spanning rank five. Every one is refused at second order by its own
+      verified self-stress, so all seven known directions are shut.
+
+      The finding worth carrying is what they share. Every admissible direction found, by
+      two unrelated routes, turns squares of the tilted block and leaves all twenty-four
+      axis-aligned squares exactly where they are. The frame is held; the block is the
+      mechanism. "n = 40 flexes" was too coarse a statement.
+
+      Two negative results on the way, both useful. The relaxed cone is not a subspace --
+      152 of its 248 rows are proved to vanish on it and 96 are not -- so the tangent cone
+      could not be collapsed into five dimensions that way. And a linear program's vertex
+      still cannot be rationalized into its own cone; what works is re-solving its active
+      set exactly, which is how the six rays were produced.
+    evidence:
+    - packing/devtools/n40_rays.py
+    - packing/devtools/assess_n40_rigidity.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n40-rigidity-bracket.json
+    - packing/tests/test_n40_rigidity.py
+    stop_reason: >-
+      Exit reached on the primary branch: the question was decided, in the direction that
+      says the cone is wider. The kill condition held -- no claim rests on a rationalized
+      vertex; the rays are exact null vectors of their own active sets and every property
+      asserted of them is re-decided in the field.
+    next_action: >-
+      Whether any admissible direction moves a frame square. Seven say no; a targeted search
+      over all 72 frame coordinates would say how hard the answer is to overturn.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-049
+    bead: think-xdly
+    objective: >-
+      Ask whether any admissible direction at n = 40 moves a frame square. Seven do not, and
+      they were found by two routes that were not looking for that, which is suggestive and
+      is not evidence. A targeted search -- for each of the 72 frame coordinates and each
+      sign, maximize it over the all-branch rows, re-solve the active set exactly, and test
+      the disjunctive condition -- turns the observation into a measurement with a stated
+      coverage.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Phase 18's declared next_action. If the frame is pinned the problem drops from 120
+      coordinates to the block's 48, which is where a cone bound becomes reachable; if some
+      frame direction is admissible, the block-mechanism reading is wrong and better found
+      now than built on.
+    budget_minutes: 55
+    started_at: '2026-08-30T12:50:00Z'
+    deadline_at: '2026-08-30T13:45:00Z'
+    expected_output: >-
+      A measured answer with its coverage stated: how many of the 144 targeted searches
+      produced an admissible direction, and if any did, the direction verified in the field
+      and characterized. A count of failures is not a proof that the frame is pinned and the
+      record must not read as one.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --edit
+    kill_condition: >-
+      A search that finds nothing is weak evidence by construction, and this repository has
+      a name for treating it otherwise: the translation-escape screen is registered as sound
+      in one direction only for exactly this reason. Whatever this finds, "no admissible
+      frame direction was found" may not become "the frame is pinned".
+    fallback: >-
+      The coverage statement alone, which is what the escape screen's own registered
+      limitation looks like and is a legitimate result.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      If the cone closes, n = 40 joins n = 5 as second-order rigid and the frontier records
-      gain a first-party evidence id. If it does not, the wider flex needs its own
-      obstruction.
+      If the frame holds up, the cone bound becomes a 48-coordinate question about the block
+      alone, which is the first version of it that looks tractable.
   primary_bead: think-s424
   status: in_progress
   budget:
