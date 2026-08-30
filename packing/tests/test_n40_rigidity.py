@@ -38,8 +38,10 @@ from devtools.assess_n40_rigidity import (
     branch_contacts,
     find_witness,
     load_pose,
+    retained_ray,
     single_axis_contacts,
 )
+from devtools.n40_rays import WIDER_RAYS
 
 
 def _record() -> dict:
@@ -243,3 +245,64 @@ def test_the_admissible_part_of_the_null_space_is_a_line() -> None:
     assert sweep["basis_directions_used"] == [4]
     assert sweep["is_a_single_line"] is True
     assert "may be larger than this line" in sweep["what_it_does_not_bound"]
+
+
+def test_the_cone_is_larger_than_the_line() -> None:
+    """The sweep's open question, answered: directions outside the null space exist.
+
+    Each retained ray opens at least one all-branch contact strictly, which is exactly what
+    the null-space sweep cannot reach -- a null vector holds every one of those rows tight.
+    So no argument that refuses a single direction can settle `n = 40`, and the record must
+    not read as though one could.
+    """
+    wider = _record()["outside_the_null_space"]
+
+    assert wider["retained"] == 6
+    assert wider["all_verified"] is True
+    assert wider["rank"] == 5
+    for ray in wider["rays"]:
+        assert ray["in_the_cone"] is True
+        assert ray["admissible"] is True
+        assert ray["all_branch_rows_opened"] > 0
+
+
+def test_no_frame_square_moves_in_any_admissible_direction() -> None:
+    """The sharpest thing measured about this packing.
+
+    Every direction found, by the null-space route and by the sampler alike, turns squares
+    of the tilted block and leaves all twenty-four axis-aligned ones exactly where they are.
+    That is what makes "n = 40 flexes" too coarse a statement: the frame is held and the
+    block is the mechanism.
+    """
+    wider = _record()["outside_the_null_space"]
+
+    assert wider["frame_squares_that_ever_move"] == []
+    assert wider["squares_that_move_in_any"] == list(range(24, 40))
+    assert _record()["witness"]["frame_squares_move"] == []
+
+
+def test_every_retained_ray_is_refused_at_second_order() -> None:
+    """Seven refusals, and the record still declines to call it second-order rigidity."""
+    wider = _record()["outside_the_null_space"]
+
+    assert wider["all_obstructed"] is True
+    for ray in wider["rays"]:
+        assert ray["second_order"]["obstructed"] is True
+        assert ray["second_order"]["certificate"]["w_dot_q_is_negative"] is True
+
+    assert "not seven of them" in _record()["scope"]["not_established"]
+    assert "no argument here" in _record()["scope"]["not_established"]
+
+
+def test_the_retained_rays_are_rebuilt_from_the_pose_not_trusted() -> None:
+    """The data module holds coefficients; the field arithmetic is redone here."""
+    pose = load_pose()
+    contacts = active_contacts(pose)
+    single = constraint_rows(pose, single_axis_contacts(pose, contacts))
+
+    assert len(WIDER_RAYS) == 6
+    for entries in WIDER_RAYS:
+        assert all(index >= 72 for index in entries), "frame coordinates are never carried"
+        motion = retained_ray(pose, entries)
+        assert all(gap_rate(row, motion).sign() >= 0 for row in single)
+        assert any(gap_rate(row, motion).sign() > 0 for row in single)

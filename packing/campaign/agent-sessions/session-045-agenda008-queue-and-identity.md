@@ -1142,9 +1142,11 @@ session:
       measured statement of what the search covered is acceptable; an unmeasured "probably
       nothing else" is not.
     validation_command: >-
-      uv run --frozen --all-extras --group dev packing-validate --edit, and the affected
-      tests run directly, because the edit tier does not run tests (D-393)
+      uv run --frozen --all-extras --group dev packing-validate --edit
     kill_condition: >-
+      The edit tier does not run tests (D-393), so the affected test files are run directly
+      as well; a green edit tier is not evidence for a change that touches them.
+
       A cone bound may not rest on a linear-programming vertex that was rationalized to fit.
       That is what defeated the first search for the witness and it fails in the flattering
       direction here: a rounded direction that no longer satisfies its own system would look

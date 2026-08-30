@@ -17,10 +17,153 @@
     "why_that_gap_exists": "a corner landing on the endpoint of a host edge is an incidence, and the edge separates the two squares only if the whole moving square lies on its outer side; edge-to-edge neighbours fail that on two of four edges (D-390)",
     "why_those_cannot_be_intersected": "a pair touching at one corner is held apart by two axes and non-overlap asks that either keep separating, so the tangent cone is a union of half-spaces rather than their intersection (D-391)"
   },
+  "outside_the_null_space": {
+    "all_obstructed": true,
+    "all_verified": true,
+    "frame_squares_that_ever_move": [],
+    "rank": 5,
+    "rays": [
+      {
+        "admissible": true,
+        "all_branch_rows_opened": 8,
+        "in_the_cone": true,
+        "outside_the_null_space": true,
+        "second_order": {
+          "branch_rows": 324,
+          "certificate": {
+            "meaning": "w >= 0 and w . A = 0, so w . (A y) = 0 for every y; a y with A y >= -q would give 0 = w . A y >= -w . q > 0",
+            "rows_carrying_weight": 52,
+            "w_dot_q_is_negative": true
+          },
+          "negative_curvature": 96,
+          "obstructed": true,
+          "positive_curvature": 4,
+          "tight_rows": 276,
+          "what_this_settles": "this witness, and only this one. The first-order cone is not known to be its span: the null space is five-dimensional, a short integer sweep of it was searched, and other branches were not examined at all. So n = 40 is not second-order rigid on this evidence -- one of its infinitesimal flexes is refused"
+        }
+      },
+      {
+        "admissible": true,
+        "all_branch_rows_opened": 8,
+        "in_the_cone": true,
+        "outside_the_null_space": true,
+        "second_order": {
+          "branch_rows": 324,
+          "certificate": {
+            "meaning": "w >= 0 and w . A = 0, so w . (A y) = 0 for every y; a y with A y >= -q would give 0 = w . A y >= -w . q > 0",
+            "rows_carrying_weight": 52,
+            "w_dot_q_is_negative": true
+          },
+          "negative_curvature": 96,
+          "obstructed": true,
+          "positive_curvature": 4,
+          "tight_rows": 276,
+          "what_this_settles": "this witness, and only this one. The first-order cone is not known to be its span: the null space is five-dimensional, a short integer sweep of it was searched, and other branches were not examined at all. So n = 40 is not second-order rigid on this evidence -- one of its infinitesimal flexes is refused"
+        }
+      },
+      {
+        "admissible": true,
+        "all_branch_rows_opened": 4,
+        "in_the_cone": true,
+        "outside_the_null_space": true,
+        "second_order": {
+          "branch_rows": 324,
+          "certificate": {
+            "meaning": "w >= 0 and w . A = 0, so w . (A y) = 0 for every y; a y with A y >= -q would give 0 = w . A y >= -w . q > 0",
+            "rows_carrying_weight": 52,
+            "w_dot_q_is_negative": true
+          },
+          "negative_curvature": 100,
+          "obstructed": true,
+          "positive_curvature": 3,
+          "tight_rows": 279,
+          "what_this_settles": "this witness, and only this one. The first-order cone is not known to be its span: the null space is five-dimensional, a short integer sweep of it was searched, and other branches were not examined at all. So n = 40 is not second-order rigid on this evidence -- one of its infinitesimal flexes is refused"
+        }
+      },
+      {
+        "admissible": true,
+        "all_branch_rows_opened": 8,
+        "in_the_cone": true,
+        "outside_the_null_space": true,
+        "second_order": {
+          "branch_rows": 324,
+          "certificate": {
+            "meaning": "w >= 0 and w . A = 0, so w . (A y) = 0 for every y; a y with A y >= -q would give 0 = w . A y >= -w . q > 0",
+            "rows_carrying_weight": 52,
+            "w_dot_q_is_negative": true
+          },
+          "negative_curvature": 96,
+          "obstructed": true,
+          "positive_curvature": 4,
+          "tight_rows": 276,
+          "what_this_settles": "this witness, and only this one. The first-order cone is not known to be its span: the null space is five-dimensional, a short integer sweep of it was searched, and other branches were not examined at all. So n = 40 is not second-order rigid on this evidence -- one of its infinitesimal flexes is refused"
+        }
+      },
+      {
+        "admissible": true,
+        "all_branch_rows_opened": 8,
+        "in_the_cone": true,
+        "outside_the_null_space": true,
+        "second_order": {
+          "branch_rows": 324,
+          "certificate": {
+            "meaning": "w >= 0 and w . A = 0, so w . (A y) = 0 for every y; a y with A y >= -q would give 0 = w . A y >= -w . q > 0",
+            "rows_carrying_weight": 52,
+            "w_dot_q_is_negative": true
+          },
+          "negative_curvature": 96,
+          "obstructed": true,
+          "positive_curvature": 4,
+          "tight_rows": 276,
+          "what_this_settles": "this witness, and only this one. The first-order cone is not known to be its span: the null space is five-dimensional, a short integer sweep of it was searched, and other branches were not examined at all. So n = 40 is not second-order rigid on this evidence -- one of its infinitesimal flexes is refused"
+        }
+      },
+      {
+        "admissible": true,
+        "all_branch_rows_opened": 4,
+        "in_the_cone": true,
+        "outside_the_null_space": true,
+        "second_order": {
+          "branch_rows": 324,
+          "certificate": {
+            "meaning": "w >= 0 and w . A = 0, so w . (A y) = 0 for every y; a y with A y >= -q would give 0 = w . A y >= -w . q > 0",
+            "rows_carrying_weight": 52,
+            "w_dot_q_is_negative": true
+          },
+          "negative_curvature": 100,
+          "obstructed": true,
+          "positive_curvature": 4,
+          "tight_rows": 280,
+          "what_this_settles": "this witness, and only this one. The first-order cone is not known to be its span: the null space is five-dimensional, a short integer sweep of it was searched, and other branches were not examined at all. So n = 40 is not second-order rigid on this evidence -- one of its infinitesimal flexes is refused"
+        }
+      }
+    ],
+    "retained": 6,
+    "squares_that_move_in_any": [
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "what_it_does_not": "bound the cone. Six directions were found by one sampler over twenty-four objectives; that they exist is a proof, that there are no others is not claimed",
+    "what_it_settles": "the first-order cone is strictly larger than the line in the null space, so no argument that refuses one direction can make n = 40 second-order rigid"
+  },
   "schema_version": 2,
   "scope": {
     "established": "Exact, at the exact pose, over all forty squares and all three degrees of freedom each. Contacts decided by exact sign, the witness a vector in Q(sqrt 2)^120, and every claim about it re-decided in the field from the pose rather than read back from this record.",
-    "not_established": "Second-order rigidity, which needs every first-order flex refused and not just this one. Inside the null space the admissible set is measured and is a line, so what is unsearched is everything outside it: a direction that leaves some all-branch contact strictly opening is not a null vector and no sweep here reaches it. The instrument for the rest is the one already used -- the obstruction argument transfers unchanged to any other witness such a search turns up.",
+    "not_established": "Second-order rigidity, which needs every first-order flex refused and not seven of them. The cone is not bounded here: inside the null space the admissible set is measured and is a line, outside it six directions were found by one sampler over twenty-four objectives, and no argument here says there are no others. That every one so far is refused, and that none moves a frame square, is evidence about where to look rather than a proof that the looking is done.",
     "relation_to_prior_evidence": "The translation-escape screen leaves n = 40 undetermined by deciding single-square translation only; this motion is sixteen squares turning at once, which is outside it in every respect. Nothing conflicts: neither claims a property, and this one explains why the screen found nothing."
   },
   "subject": {
@@ -41,6 +184,7 @@
     "claim": "the cone of infinitesimal motions at n = 40 is not the origin: the sixteen squares of the tilted block turn together, each about its own centre, at zero gap rate against all 248 single-axis contacts and with an admissible axis surviving at all 42 corner contacts",
     "decided": true,
     "infinitesimally_rigid": false,
+    "the_cone_is_larger_than_this_witness": "six further motions are retained and verified, each opening an all-branch contact strictly and so lying outside the subspace the null-space sweep covers; they span rank five, every one is refused at second order, and every one moves only the tilted block",
     "the_witness_is_refused_at_second_order": "104 of the 283 tight contacts curve into the obstacle along it, and a non-negative self-stress over those rows refuses every second-order correction at once -- so this flex is not the start of a motion",
     "what_is_not_claimed": "local rigidity, in either direction. The witness curves into the obstacle at second order, so it is not a motion, and the catalogue's annotation is not contradicted",
     "what_it_costs_the_catalogue": "nothing directly, and everything for a first-order argument: any proof of n = 40's rigidity has to be second-order or finite, because the first-order cone is nontrivial"

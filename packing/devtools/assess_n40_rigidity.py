@@ -26,11 +26,21 @@ whatever an arc does at order `t^2`, which is what the finite-motion measurement
 worst separation of `-t^2/2`. The frontier's `rigidity` block stays `undetermined`, and
 what is settled is that a first-order argument for `n = 40` cannot succeed.
 
+**Where the flex lives.** Not in one direction, and not anywhere near the walls. The cone
+is strictly larger than that first line: six further motions are retained here, each
+verified to open an all-branch contact strictly -- which is what puts it outside the
+subspace the first search covered -- and each refused at second order by its own
+self-stress. They span rank five, and **every admissible direction found by any route
+moves only the tilted block.** No frame square moves in any of them. So the twenty-four
+axis-aligned squares are held and the sixteen turned ones are the mechanism, which is a
+sharper statement than "n = 40 flexes" and a more useful one.
+
 The parallel with `n = 5` is exact in shape and larger in scale: there, one square's
 rotation is free at first order and refused at second by a verified self-stress. Here
-sixteen squares turn together and are refused the same way. What is missing for a
-second-order rigidity claim is coverage, not machinery: `n = 5` has a one-dimensional cone,
-and this search examined one direction of a five-dimensional null space in one branch.
+sixteen squares turn together and are refused the same way, in seven directions rather
+than one. What is still missing for a second-order rigidity claim is coverage: seven
+refusals are not a cone. `n = 5` earns the phrase because its cone is one-dimensional and
+that direction is refused; nothing here bounds this one.
 
 Usage:
     uv run --frozen python -m devtools.assess_n40_rigidity
@@ -44,6 +54,7 @@ import itertools
 import json
 import pathlib
 import sys
+from fractions import Fraction
 from typing import Any
 
 from strif import atomic_output_file
@@ -68,6 +79,7 @@ from devtools.assess_n5_rigidity import (
     variable_names,
     verify_field_self_stress,
 )
+from devtools.n40_rays import WIDER_RAYS
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 RESULTS = ROOT / "campaign" / "series" / "series-000-smoke-and-calibration" / "results"
@@ -369,6 +381,111 @@ def intersection_cone(pose: Pose, contacts: list[Contact]) -> dict[str, Any]:
     }
 
 
+def retained_ray(
+    pose: Pose, entries: dict[int, tuple[int, int, int, int]]
+) -> list[FieldElement]:
+    """Rebuild one retained motion as field elements."""
+    q = pose.field.rational
+    root = pose.field.alpha
+    motion = [q(0)] * (pose.count * DOF)
+    for index, (pn, pd, qn, qd) in entries.items():
+        motion[index] = q(Fraction(pn, pd)) + q(Fraction(qn, qd)) * root
+    return motion
+
+
+def wider_cone(pose: Pose, contacts: list[Contact]) -> dict[str, Any]:
+    """The cone is strictly larger than the line, and the extra directions are block-only.
+
+    The sweep over the null space said the admissible part of *that subspace* is a line, and
+    left open everything outside it -- directions that let an all-branch contact open rather
+    than holding it tight. They exist. Six are retained, each re-decided here from the pose:
+    in the cone, opening at least one all-branch row strictly, and leaving every corner pair
+    an axis.
+
+    Two things about the set are measurements about the packing rather than about the
+    search. Every one of them moves only the sixteen squares of the tilted block -- no frame
+    square moves in any admissible direction found, by any route, at any point. And every
+    one is refused at second order by its own verified self-stress, exactly as the first
+    witness is.
+    """
+    single = constraint_rows(pose, single_axis_contacts(pose, contacts))
+    groups = axis_groups(pose, contacts)
+    verified: list[dict[str, Any]] = []
+    movers: set[int] = set()
+    for entries in WIDER_RAYS:
+        motion = retained_ray(pose, entries)
+        selection: dict[frozenset[int], int] = {}
+        admissible = True
+        for pair, group in groups.items():
+            index = admissible_axis(pose, group, motion)
+            if index is None:
+                admissible = False
+                break
+            selection[pair] = index
+        opens = sum(1 for row in single if gap_rate(row, motion).sign() > 0)
+        inside = all(gap_rate(row, motion).sign() >= 0 for row in single)
+        movers |= {index // DOF for index, v in enumerate(motion) if v.sign() != 0}
+        verified.append(
+            {
+                "in_the_cone": inside,
+                "all_branch_rows_opened": opens,
+                "outside_the_null_space": opens > 0,
+                "admissible": admissible,
+                "second_order": (
+                    second_order(pose, contacts, motion, selection) if admissible else None
+                ),
+            }
+        )
+    return {
+        "retained": len(WIDER_RAYS),
+        "all_verified": all(
+            one["in_the_cone"] and one["outside_the_null_space"] and one["admissible"]
+            for one in verified
+        ),
+        "all_obstructed": all(
+            one["second_order"] is not None and one["second_order"]["obstructed"]
+            for one in verified
+        ),
+        "squares_that_move_in_any": sorted(movers),
+        "frame_squares_that_ever_move": sorted(index for index in movers if index < 24),
+        "rank": _rank(pose, [retained_ray(pose, entries) for entries in WIDER_RAYS]),
+        "rays": verified,
+        "what_it_settles": (
+            "the first-order cone is strictly larger than the line in the null space, so no "
+            "argument that refuses one direction can make n = 40 second-order rigid"
+        ),
+        "what_it_does_not": (
+            "bound the cone. Six directions were found by one sampler over twenty-four "
+            "objectives; that they exist is a proof, that there are no others is not claimed"
+        ),
+    }
+
+
+def _rank(pose: Pose, vectors: list[list[FieldElement]]) -> int:
+    """Exact rank of a set of motions, by elimination over the field."""
+    work = [list(vector) for vector in vectors]
+    width = len(work[0])
+    pivot = 0
+    for column in range(width):
+        target = next(
+            (row for row in range(pivot, len(work)) if work[row][column].sign() != 0), None
+        )
+        if target is None:
+            continue
+        work[pivot], work[target] = work[target], work[pivot]
+        lead = work[pivot][column]
+        for row in range(pivot + 1, len(work)):
+            if work[row][column].sign() != 0:
+                factor = work[row][column] / lead
+                work[row] = [
+                    a - factor * b for a, b in zip(work[row], work[pivot], strict=True)
+                ]
+        pivot += 1
+        if pivot == len(work):
+            break
+    return pivot
+
+
 def _sweep(
     pose: Pose, contacts: list[Contact], basis: list[list[FieldElement]]
 ) -> dict[str, Any]:
@@ -472,6 +589,7 @@ def assess() -> dict[str, Any]:
             ),
         },
         "admissible_part_of_the_null_space": _sweep(pose, contacts, basis),
+        "outside_the_null_space": wider_cone(pose, contacts),
         "what_an_intersecting_assessor_reports": intersection_cone(pose, contacts),
         "verdict": {
             "infinitesimally_rigid": False,
@@ -486,6 +604,12 @@ def assess() -> dict[str, Any]:
                 "local rigidity, in either direction. The witness curves into the obstacle "
                 "at second order, so it is not a motion, and the catalogue's annotation is "
                 "not contradicted"
+            ),
+            "the_cone_is_larger_than_this_witness": (
+                "six further motions are retained and verified, each opening an all-branch "
+                "contact strictly and so lying outside the subspace the null-space sweep "
+                "covers; they span rank five, every one is refused at second order, and "
+                "every one moves only the tilted block"
             ),
             "the_witness_is_refused_at_second_order": (
                 "104 of the 283 tight contacts curve into the obstacle along it, and a "
@@ -507,12 +631,12 @@ def assess() -> dict[str, Any]:
             ),
             "not_established": (
                 "Second-order rigidity, which needs every first-order flex refused and "
-                "not just this one. Inside the null space the admissible set is measured "
-                "and is a line, so what is unsearched is everything outside it: a direction "
-                "that leaves some all-branch contact strictly opening is not a null vector "
-                "and no sweep here reaches it. The instrument for the rest is the one "
-                "already used -- the obstruction argument transfers unchanged to any other "
-                "witness such a search turns up."
+                "not seven of them. The cone is not bounded here: inside the null space the "
+                "admissible set is measured and is a line, outside it six directions were "
+                "found by one sampler over twenty-four objectives, and no argument here "
+                "says there are no others. That every one so far is refused, and that none "
+                "moves a frame square, is evidence about where to look rather than a proof "
+                "that the looking is done."
             ),
             "relation_to_prior_evidence": (
                 "The translation-escape screen leaves n = 40 undetermined by deciding "
