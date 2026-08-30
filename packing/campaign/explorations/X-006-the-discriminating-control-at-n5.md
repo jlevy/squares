@@ -35,9 +35,16 @@ exploration:
 
 **Date:** 2026-08-30
 
-**Status:** W3 insight slice under `BC-083`. Answers the first branch of the exit — a
-declared `n = 5` control, scored against all four candidate relations — and names the
-one quantity it waits on.
+**Status:** W3 insight slice under `BC-083`. Delivers the exit’s **second** branch — a
+typed statement of what prevents a proved `n = 5` count, naming the quantity and pricing
+the alternative route — together with a retained *candidate* control, scored
+prospectively against all four relations.
+
+The first branch is not met, and this report does not claim it: that branch requires a
+**proved** component count, and `component_count` is `null`. What is established is that
+a discriminating control exists as an object, and that both of its possible answers
+separate the candidates.
+Whether it discriminates *in fact* rests on a count nobody has proved.
 
 **Owns:** The argument.
 `devtools/build_n5_identity_pair.py` owns the retained pair,
@@ -114,21 +121,45 @@ refuted, and the relation `Atlas.add` already implements is the one left standin
 A control that could only confirm the incumbent would not be worth proving.
 
 There is no closure data at `n = 5`, so `contact alone` and `contact + closure` coincide
-here. That is not a defect of the control; it is the statement that closure is what
-separates them, and `n = 5` has not been given any.
+here. That is not a defect of the control — it is what makes the control reach something
+nothing else does.
+
+[`D-378`](../../../defects.md) records why.
+The only closure the record carries is `closure(G) = [C, G, M]`, and it covers **every**
+stratum the `n = 3` quotient has, so on that control `contact + closure` returns one
+whatever its certificates say.
+Its “agrees” there is a property of the control rather than a test of the relation, and
+no retained control separates it from a relation that merges everything.
+The `n = 5` pair carries no closure for the merge to hide behind, so it is the first
+control that reaches the relation’s certificate half at all.
 
 ## The One Missing Quantity, and Why the `n = 3` Route Does Not Supply It
 
 The count is not proved, and cannot be proved the way `n = 3` and `n = 4` were.
 
-Those classifications are exhaustive because **orientation is forced**: every square is
-axis-aligned, so the configuration space is a finite union of separation cells — `64`
-raw branches at `n = 3` and `4096` at `n = 4`, each decided by a linear program.
-The `n = 5` optimum has two angle classes, so orientation is not forced and the space
-carries continuous angle parameters.
-`4^C(5,2) = 1048576` branches would be affordable; **the obstruction is the method’s
-kind, not its cost.** The separation-cell enumeration decides axis-aligned
-configurations, and this is not one.
+Two conditions make those classifications exhaustive, and **both are properties of
+container side exactly 2 with unit squares**, not of small `n`.
+
+First, orientation is forced.
+`orientation_forcing_record` proves it from containment on the chart `[-1,1]^2`, through
+the exact identity `1/2 - w(1 - w/2) = (w-1)^2/2`; the argument holds for any `n >= 2`
+at side 2 and fails the moment `s > 2`. Second, and this is what makes the
+classification *finite*, each separation disjunct pins a coordinate to an endpoint of
+`[0,1]`, which is why the enumerator can assert that `free_variables` is `{1}` at
+`n = 3` and `{0}` at `n = 4`.
+
+Neither survives `s > 2`. At `s(5) = 2.7071`, or the pair’s `2.7678`, the cells would be
+positive-dimensional polytopes *even with orientation forced*, so `4^C(5,2) = 1048576`
+branches is not the work either and **the obstruction is the method’s kind, not its
+cost**.
+
+An earlier draft gave “the `n = 5` optimum has two angle classes” as the reason.
+That is a true statement about the optimum and the wrong cause: it makes the obstruction
+look contingent on which optimum `n = 5` happens to have, when it follows from the side
+alone.
+The same draft said the cells are “decided by a linear program”; they are not — no
+LP is solved anywhere in that classification, and the cells are decided by exact
+endpoint propagation.
 
 The contact-scaffold route prices `n = 5` at `9,296,855,040` units of raw orbit work
 against a declared `10,000,000` cap, and its retained pricing therefore records

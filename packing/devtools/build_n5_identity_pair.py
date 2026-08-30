@@ -124,15 +124,21 @@ def build() -> dict[str, Any]:
         },
         "component_count": None,
         "why_component_count_is_null": (
-            "Not proved, and not provable by the route that proved n = 3 and n = 4. Those "
-            "classifications are exhaustive because orientation is forced -- every square "
-            "axis-aligned -- so the configuration space is a finite union of separation "
-            "cells, 64 raw branches at n = 3 and 4096 at n = 4, each decided by an LP. The "
-            "n = 5 optimum has two angle classes, so orientation is not forced and the "
-            "space carries continuous angle parameters; the separation-cell method does "
-            "not apply, and the obstruction is its kind rather than its count. exp-042 "
-            "names the missing claim exactly: A_to_B_stationary_connection is one of its "
-            "eleven declared scope refusals."
+            "Not proved, and not provable by the route that proved n = 3 and n = 4. Two "
+            "conditions make those classifications exhaustive, and both are properties of "
+            "container side exactly 2 with unit squares rather than of small n. First, "
+            "orientation is forced: containment on the chart [-1,1]^2 gives the exact "
+            "identity 1/2 - w(1 - w/2) = (w-1)^2/2, so every square is axis-aligned. "
+            "Second, and this is what makes the classification finite, each separation "
+            "disjunct pins a coordinate to an endpoint of [0,1], which is why the "
+            "enumerator can assert free_variables is {1} at n = 3 and {0} at n = 4. "
+            "Neither survives s > 2. At the pair's 2.7678 the cells would be "
+            "positive-dimensional polytopes even with orientation forced, so the "
+            "obstruction is the method's kind rather than its count -- 4^C(5,2) = 1048576 "
+            "branches would be affordable, and would not be the work. No linear program "
+            "is solved anywhere in that classification; the cells are decided by exact "
+            "endpoint propagation. exp-042 names the missing claim exactly: "
+            "A_to_B_stationary_connection is one of its eleven declared scope refusals."
         ),
     }
 

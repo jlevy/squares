@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 377
+count: 378
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10138,13 +10138,27 @@ defects:
   status: fixed
   what: >-
     `X-005` declared `geometric + contact` -- the relation `Atlas.add` implements -- at
-    level `labelled`, and refuted it on the `n = 3` labelled control. Both of its inputs
-    are canonical under relabelling and under `D4` by construction: `geometric_key` sorts
-    the squares and minimises the digest over the eight container images, and
-    `contact_certificate` minimises over the same images. It is therefore a statement
-    about the quotient and cannot distinguish two labelled components differing only by a
+    level `labelled`, and refuted it on the `n = 3` labelled control. It is a quotient
+    statement and cannot distinguish two labelled components differing only by a
     relabelling. `X-005` made precisely that argument for `contact alone` and
     `contact + closure`, and did not apply it to this relation.
+
+    **The first version of this defect said the two keys are relabelling-invariant "by
+    construction", and that is too strong for one of them.** `geometric_key` is: it sorts
+    the squares and minimises the digest over the eight container images, and 3000 fuzzed
+    `D4` images produced no mismatch. `contact_certificate` is not a canonical form. Its
+    colour refinement breaks ties among equal-sized classes in dict insertion order, which
+    is input labelling; and `angle_classes` is a greedy first-fit against class
+    representatives, so it chains order-dependently near its `1e-2` tolerance --
+    `angle_classes([0, 1e-6, 2e-6])` gives `[[0,1],[2]]` while `angle_classes([1e-6, 0,
+    2e-6])` gives `[[0,1,2]]`, flipping the angle signature for the same packing. Over
+    well-separated angles, 400 fuzzed relabellings produced no mismatch, which is why this
+    has never bitten here.
+
+    The re-levelling stands, because it does not rest on the "by construction" argument:
+    exp-015's 24 labelled states are measured to collapse to one geometric key and one
+    contact certificate, so on the control in question the relation demonstrably is a
+    quotient statement. It was the justification that was wrong, not the verdict.
 
     Two claims rested on the mis-levelling. First, "three of the four candidates survive
     the quotient controls alone" is two. Second, and more substantially, `X-005` argued
@@ -10293,3 +10307,64 @@ defects:
     signal.
   bead: think-s424
   recorded_in: packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md
+- id: D-378
+  title: No retained control can separate the surviving identity relation from merging everything
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: 'from X-005 on 2026-08-30 until a review asked what the relation reads'
+  severity: medium
+  status: contained
+  what: >-
+    `contact + closure` is the declared surviving relation: two endpoints are the same
+    terminal component when their contact certificates agree, or when the strata those
+    certificates name lie in one closure. Its only distinguishing verdict is `agrees` on
+    the `n = 3` quotient control, and that verdict cannot test it.
+
+    The record carries exactly one closure set, `closure(G) = [C, G, M]`, and it covers
+    every stratum the `n = 3` quotient has. Any faithful implementation therefore returns
+    one there whatever the certificates say -- verified by mutation: with the retained
+    samples, with all four given distinct certificates, and with all four given the same
+    certificate, the answer is one in every case.
+
+    Compounding it, the implementation was not faithful either. It computed the
+    certificate count and then discarded it whenever any closure existed, returning the
+    number of closure classes alone. On the retained controls that is the same answer, so
+    no verdict moved, but half the relation's definition was unread.
+  consequence: >-
+    Flattering, and it weakens the conclusion `X-005`, `D-373`, `D-375` and `X-006` all
+    rest on. "`contact + closure` is the sole survivor of all four proved answers" is
+    true, but the one cell that separates it from `contact alone` is a cell where the
+    closure structure makes the answer one regardless.
+
+    So the retained controls do not distinguish it from a relation that merges everything
+    -- which is `D-373`'s finding at a level below the one `D-373` stated. There the
+    problem was that every control's answer is one; here it is that the closure itself is
+    degenerate, so even a control whose answer were not one would not separate them unless
+    it carried two or more disjoint closure classes. None does.
+  fix: >-
+    Not fixed, and not fixable from the retained record. Contained in three ways.
+
+    `relation_contact_with_closure` now reads both halves: certificates partition the
+    samples, closure sets merge the partitions, and a certificate spanning two strata
+    merges them too. No scored verdict moves. A synthetic control with two disjoint
+    closure classes exercises the certificate half that no retained control reaches.
+
+    `X-006` states the degeneracy where it matters -- it is the reason the `n = 5` pair is
+    the first control to reach the relation's certificate half at all, since it carries no
+    closure for the merge to hide behind.
+
+    A real fix needs a control with two or more disjoint closure classes, which is a new
+    exact classification rather than a repair.
+  regression: >-
+    `tests/test_identity_relation.py` asserts the degeneracy directly: every retained
+    control with closure data has exactly one closure class, and that class covers every
+    stratum. If a future control adds a second, disjoint class, that assertion fails --
+    and the failure is the good news, because it means the relation has become testable.
+
+    A second test pins the certificate half against a synthetic two-class control, so a
+    future implementation that again discards its certificates is caught.
+  bead: think-6zaz
+  recorded_in: packing/campaign/explorations/X-006-the-discriminating-control-at-n5.md

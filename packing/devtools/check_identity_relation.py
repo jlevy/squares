@@ -36,7 +36,7 @@ import json
 import pathlib
 import sys
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -57,6 +57,8 @@ class Control:
     isolates: str
     samples: tuple[dict[str, Any], ...]
     strata_closure: dict[str, tuple[str, ...]]
+    strata: dict[str, str] = field(default_factory=dict)
+    """Stratum id to its exact parameter, so a sample can be placed in one."""
 
 
 def _load(path: pathlib.Path) -> dict[str, Any]:
@@ -77,6 +79,10 @@ def controls() -> list[Control]:
         key.removeprefix("closure(").removesuffix(")"): tuple(value)
         for key, value in closure_raw.items()
     }
+    n3_strata = {
+        stratum["id"]: str(stratum["parameter"])
+        for stratum in n3["spaces"]["d4_s3_quotient"]["strata"]
+    }
     return [
         Control(
             name="n=3 labelled",
@@ -86,6 +92,7 @@ def controls() -> list[Control]:
             isolates="connectivity, before any quotient",
             samples=n3_samples,
             strata_closure=closure,
+            strata=n3_strata,
         ),
         Control(
             name="n=3 D4xS3 quotient",
@@ -95,6 +102,7 @@ def controls() -> list[Control]:
             isolates="connectivity: one interval, three strata, two contact certificates",
             samples=n3_samples,
             strata_closure=closure,
+            strata=n3_strata,
         ),
         Control(
             name="n=4 labelled",
@@ -152,20 +160,81 @@ def relation_contact_alone(control: Control) -> int | str:
     return _keys(control, "contact_certificate")
 
 
-def relation_contact_with_closure(control: Control) -> int | str:
-    """Contact certificates, merged where one stratum lies in another's closure.
+def _stratum_of(control: Control, sample: dict[str, Any]) -> str:
+    """Which retained stratum a sample sits in, by its exact parameter.
 
-    This is the relation the `n = 3` artifact makes checkable: it retains
-    `closure(G) = [C, G, M]`, so the two certificates on that interval are two strata of
-    one connected set rather than two components.
+    Strata name their parameter as an exact value (`0`, `1/2`) or an open interval
+    (`0<lambda<1/2`). A sample matching no named value falls in the interval stratum, and
+    a control with no strata at all reports one synthetic stratum so the union-find below
+    still has something to work with.
     """
-    certificates = _keys(control, "contact_certificate")
-    if certificates == UNDECIDABLE:
+    if not control.strata:
+        return "(no strata)"
+    parameter = str(sample.get("parameter", ""))
+    for stratum_id, declared in control.strata.items():
+        if declared == parameter:
+            return stratum_id
+    interval = [sid for sid, declared in control.strata.items() if "<" in declared]
+    if len(interval) == 1:
+        return interval[0]
+    raise ValueError(f"sample parameter {parameter!r} matches no stratum in {control.name}")
+
+
+def relation_contact_with_closure(control: Control) -> int | str:
+    """Contact certificates, merged where the strata they name lie in one closure.
+
+    Two endpoints are the same terminal component when their contact certificates agree,
+    **or** when the strata those certificates name lie in a common closure. Both halves
+    are read here: certificates partition the samples, closure sets merge the partitions,
+    and a certificate spanning two strata merges them too.
+
+    An earlier version computed `certificates` and then discarded it whenever any closure
+    existed, returning the number of closure classes alone. On every retained control that
+    gives the same answer, so no verdict moves -- but the relation was not reading half its
+    own definition, and a reviewer was right to call the resulting "agrees" untested.
+
+    **No retained control distinguishes this from a merge-everything relation at quotient
+    level**, and the reason is structural rather than incidental: the only closure the
+    record carries is `closure(G) = [C, G, M]`, which covers every stratum the `n = 3`
+    quotient has. A control that separated them would need two or more disjoint closure
+    classes, and none exists. `D-378` records this; the `n = 5` pair in `X-006` is the
+    first control that reaches the certificate half at all, because it carries no closure
+    for the merge to hide behind.
+    """
+    if not control.samples:
         return UNDECIDABLE
-    if not control.strata_closure:
-        return certificates
-    merged = {frozenset(members) for members in control.strata_closure.values()}
-    return max(1, len(merged))
+
+    # Union-find over stratum ids: closure sets merge strata, and so does a certificate
+    # carried by samples in more than one stratum.
+    parent: dict[str, str] = {}
+
+    def find(item: str) -> str:
+        parent.setdefault(item, item)
+        while parent[item] != item:
+            parent[item] = parent[parent[item]]
+            item = parent[item]
+        return item
+
+    def union(left: str, right: str) -> None:
+        a, b = find(left), find(right)
+        if a != b:
+            parent[a] = b
+
+    by_certificate: dict[str, set[str]] = {}
+    for sample in control.samples:
+        stratum = _stratum_of(control, sample)
+        by_certificate.setdefault(str(sample["contact_certificate"]), set()).add(stratum)
+        find(stratum)
+
+    for members in control.strata_closure.values():
+        for other in members[1:]:
+            union(members[0], other)
+    for strata in by_certificate.values():
+        ordered = sorted(strata)
+        for other in ordered[1:]:
+            union(ordered[0], other)
+
+    return len({find(stratum) for strata in by_certificate.values() for stratum in strata})
 
 
 NOT_APPLICABLE = "n/a"

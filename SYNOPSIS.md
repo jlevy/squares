@@ -2432,13 +2432,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 377 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 378 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 88 | asserted something false about the mathematics |
-| validity | 90 | was correct, but the measurement did not bear on the question |
+| validity | 91 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 140 | recorded something its own evidence contradicts |
 | robustness | 44 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
@@ -2449,7 +2449,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-eight defects in 377, and no soundness defect
+**The automated gate has caught forty-eight defects in 378, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2531,6 +2531,22 @@ is a change-scoped selector that is conservative by construction and can be caug
 under-selecting — `think-9qtn`, under BC-084, which carries BC-051’s scope unchanged.
 Good coverage and short cycles are a design tension, and resolving it is the design’s
 job rather than the operator’s discretion.
+
+A control can also be wrong by being unable to fail.
+[D-378](defects.md) records that the declared surviving identity relation,
+`contact + closure`, has exactly one distinguishing verdict — `agrees` on the `n = 3`
+quotient control — and that this verdict cannot test it.
+The record carries one closure set, `closure(G) = [C, G, M]`, and it covers every
+stratum that control has, so any faithful implementation returns one there whatever the
+certificates say; mutating all four samples to distinct certificates, then to a single
+shared one, leaves the answer at one.
+That is [D-373](defects.md)’s finding one level down: there the problem was that every
+control’s answer is one, here it is that the closure is degenerate, so even a control
+whose answer were not one would not separate the relation from a merge-everything one
+unless it carried two disjoint closure classes.
+None does. It is contained rather than fixed — the relation now reads both halves of its
+own definition, and a synthetic two-class control exercises the half no retained control
+reaches — because a real fix needs a new exact classification.
 
 A record contract can also be wrong by being unable to say something true.
 [D-377](defects.md) records that a delegation which is read-only by construction cannot

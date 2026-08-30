@@ -12,13 +12,21 @@ argument in `X-005` has to be made again rather than assumed.
 
 from __future__ import annotations
 
+from collections.abc import Sequence
+from typing import Any
+
 from devtools.check_identity_relation import (
     NOT_APPLICABLE,
     RELATIONS,
+    Control,
     controls,
     discriminating,
     prospective_pair,
     prospective_verdicts,
+    relation_contact_alone,
+    relation_contact_with_closure,
+    relation_geometric_and_contact,
+    relation_side_alone,
     score,
 )
 
@@ -60,11 +68,13 @@ def test_the_current_atlas_relation_is_refuted_where_it_can_be_scored() -> None:
     This is `D-034` as a number rather than a description: the `n = 3` D4xS3 quotient is
     one component, and four retained samples of it produce four distinct keys.
 
-    Scored at the *quotient* level, which is `D-375`. Both of the relation's inputs are
-    canonical under relabelling and under D4 by construction, so it is a statement about
-    the quotient; the labelled controls report `n/a` for it, exactly as they do for the
-    other two quotient relations. The refutation is unchanged in force and is now
-    attributed to the control that can actually carry it.
+    Scored at the *quotient* level, which is `D-375`. `geometric_key` is relabelling- and
+    D4-invariant by construction, and exp-015's 24 labelled states are measured to collapse
+    to one key and one certificate, so the relation is a quotient statement; the labelled
+    controls report `n/a` for it, exactly as they do for the other two quotient relations.
+    The refutation is unchanged in force and is now attributed to the control that can
+    carry it. (`contact_certificate` is *not* invariant by construction -- see D-375 --
+    which is why the argument runs through the measurement rather than the code.)
     """
     verdicts = _verdicts()["geometric + contact"]
     assert verdicts["n=3 D4xS3 quotient"] == "REFUTED"
@@ -75,24 +85,29 @@ def test_the_current_atlas_relation_is_refuted_where_it_can_be_scored() -> None:
 def test_no_relabelling_invariant_relation_can_pass_a_labelled_control() -> None:
     """`D-375`'s second half, and the constraint it puts on `BC-083`.
 
-    Every candidate is built from keys that are canonical under relabelling, so on the
-    n = 4 labelled control -- 24 states that differ only by relabelling -- each of them
-    reports 1 against a proved 24. A control whose answer no candidate can produce
-    refutes the whole family and separates nothing, which is the dual of `D-373`: there
-    every control's answer was 1 and everything passed.
+    The n = 4 labelled control has 24 states that differ only by relabelling. The claim is
+    that no candidate can report 24 there, so the control refutes the whole family and
+    separates none of it -- the dual of `D-373`, where every answer was 1 and everything
+    passed.
 
-    So a discriminating control needs a proved count some relabelling-invariant relation
-    can reach and others cannot. That is why `BC-083` asks for one that is neither 1 nor
-    the labelled count, and this is the measurement behind that wording.
+    The assertion is against the *retained samples*, not against the relations' return
+    values. An earlier version collected the candidates the control scores, but `_applies`
+    admits only `side alone` at a labelled control, and that relation returns 1
+    unconditionally -- so it pinned a two-line constant and would have passed unchanged if
+    every key in the campaign had stopped being relabelling invariant. What actually
+    carries the claim is that exp-015's 24 states collapse to one key and one certificate.
     """
-    scored = {
-        name: got
-        for name, candidate in RELATIONS.items()
-        for control, got, verdict in score(candidate)
-        if control.name == "n=4 labelled" and verdict != NOT_APPLICABLE
-    }
-    assert scored, "the n=4 labelled control must score at least one relation"
-    assert set(scored.values()) == {1}, scored
+    n4 = next(c for c in controls() if c.name == "n=4 labelled")
+    assert len(n4.samples) == 24
+    assert n4.component_count == 24
+    # The measurement the claim rests on: 24 distinct labelled states, one key each.
+    assert len({s["geometric_key"] for s in n4.samples}) == 1
+    assert len({s["contact_certificate"] for s in n4.samples}) == 1
+    assert len({s["state"] for s in n4.samples}) == 24
+    # So every key-based relation reports 1 against a proved 24, whatever its level.
+    assert relation_geometric_and_contact(n4) == 1
+    assert relation_contact_alone(n4) == 1
+    assert relation_side_alone(n4) == 1
 
 
 def test_the_quotient_controls_alone_do_not_discriminate() -> None:
@@ -132,9 +147,10 @@ def test_the_full_control_set_does_discriminate() -> None:
 def test_a_quotient_relation_is_not_scored_against_a_labelled_control() -> None:
     """Scoring by level, so a relation is not refuted for the wrong reason.
 
-    A contact certificate is invariant under relabelling and under `D4`, so it is a
-    statement about the quotient. Two labelled components differing only by a relabelling
-    share it by construction, and calling that a refutation would reject the right
+    A contact certificate is a statement about the quotient: it is minimised over the
+    eight container images, and over well-separated angles it is invariant under
+    relabelling in every case fuzzed. Two labelled components differing only by a
+    relabelling therefore share it, and calling that a refutation would reject the right
     relation for doing exactly what it is supposed to do.
     """
     rows = {control.name: got for control, got, _v in score(RELATIONS["contact + closure"])}
@@ -198,3 +214,65 @@ def test_the_n5_pair_measures_what_d034_asserted() -> None:
     assert pair["component_count"] is None, (
         "a proved count here would close D-034; it must not appear without one"
     )
+
+
+def test_contact_with_closure_reads_its_certificates() -> None:
+    """The relation's certificate half, tested where a retained control cannot test it.
+
+    On the `n = 3` quotient control `closure(G) = [C, G, M]` covers every stratum, so any
+    faithful implementation returns 1 whatever the certificates say. That is a property of
+    the control, not of the relation (`D-378`), and it means the retained set never
+    exercises half the definition. A synthetic control with two *disjoint* closure classes
+    does, and this is what distinguishes the relation from a merge-everything one.
+    """
+    sample = {"parameter": "0", "contact_certificate": "a", "geometric_key": "g"}
+
+    def control(samples: Sequence[dict[str, Any]]) -> Control:
+        return Control(
+            name="synthetic",
+            n=3,
+            level="d4_s3_quotient",
+            component_count=2,
+            isolates="two disjoint closure classes",
+            samples=tuple(samples),
+            strata_closure={"P": ("P", "Q"), "R": ("R", "S")},
+            strata={"P": "0", "Q": "1/4", "R": "1/2", "S": "3/4"},
+        )
+
+    # Four samples, one per stratum, all with distinct certificates: the two closure
+    # classes merge P~Q and R~S, leaving two components.
+    distinct = [
+        {**sample, "parameter": p, "contact_certificate": c}
+        for p, c in (("0", "a"), ("1/4", "b"), ("1/2", "c"), ("3/4", "d"))
+    ]
+    assert relation_contact_with_closure(control(distinct)) == 2
+
+    # One certificate shared across the two classes merges them: the relation says two
+    # endpoints agreeing on their certificate are the same component, and it must act on
+    # that even when no closure connects their strata.
+    shared = [
+        {**sample, "parameter": p, "contact_certificate": c}
+        for p, c in (("0", "a"), ("1/4", "a"), ("1/2", "a"), ("3/4", "a"))
+    ]
+    assert relation_contact_with_closure(control(shared)) == 1
+
+
+def test_no_retained_control_separates_closure_from_merging_everything() -> None:
+    """`D-378`, as an assertion rather than a remark.
+
+    The record carries exactly one closure set and it covers every stratum of the only
+    control that has any, so `contact + closure` and `side alone` cannot be told apart on
+    the retained quotient controls. If a future control adds a second, disjoint closure
+    class, this fails -- and that failure is the good news, because it means the relation
+    has finally become testable.
+    """
+    with_closure = [c for c in controls() if c.strata_closure]
+    assert len(with_closure) == 2, "only the two n=3 controls carry closure data"
+    for control in with_closure:
+        classes = {frozenset(members) for members in control.strata_closure.values()}
+        assert len(classes) == 1
+        covered = set().union(*classes)
+        assert covered == set(control.strata), (
+            "the closure no longer covers every stratum, so this control can now "
+            "distinguish contact + closure from a merge-everything relation"
+        )
