@@ -1152,6 +1152,14 @@ def _n5_rigidity_certificates(context: Context) -> str:
     return _module(context, "devtools.assess_n5_rigidity", "--check")
 
 
+def _control_anchors(context: Context) -> str:
+    # Sub-second: it resolves 150 anchors by string containment, running no mutation and no
+    # subprocess. Records tier because a control whose anchor has stopped matching is not
+    # testing anything, and the suite that would say so runs only in the full gate -- which
+    # a pull request never reaches (D-403).
+    return _module(context, "devtools.check_control_anchors")
+
+
 def _nagamochi_bounds(context: Context) -> str:
     # Sub-second: a hundred frontmatter blocks and one closed-form per case. Records tier
     # because it checks the arithmetic of a citation the rest of the register leans on --
@@ -1729,6 +1737,13 @@ STEPS: tuple[Step, ...] = (
             *_CASES,
             "packing/campaign/series/*/results/bc-049-n5-rigidity-certificates.json",
         ),
+    ),
+    Step(
+        "control anchors still resolve",
+        _control_anchors,
+        fast=True,
+        records=True,
+        touches=(*_CORE, "packing/devtools/controls.yaml", "packing/devtools/*.py"),
     ),
     Step(
         "the borrowed lower bounds re-derive",

@@ -1157,13 +1157,13 @@ controls:
           purpose: tool_validation
           owner_focus: process
           instances: [3, 5, 29]
-          state: ready
+          state: complete
     - |-
       - id: BC-081
           purpose: tool_validation
           owner_focus: process
           instances: [3, 5, 29]
-          state: complete
+          state: ready
   run: python3 -m devtools.render_agenda_map --check
   expect: "is stale"
 
@@ -1184,9 +1184,10 @@ controls:
 
 - name: agenda map - a blocked commitment waits on nothing observable
   file: campaign/agendas/agenda-002-constructive-enumeration-groundwork.md
-  # BC-016 is the only commitment in agenda-002 carrying `blocked_on`, so the bare key
-  # is a unique anchor inside this file and needs no fragile multi-line indentation.
-  replace: ["blocked_on: >-", "unrelated_note: >-"]
+  # BC-016 was once the only commitment here carrying `blocked_on`; BC-025 now does too,
+  # so the bare key matches twice and the control stopped firing (D-403). Anchored on the
+  # id as well, which is what the old comment assumed rather than stated.
+  replace: ["    blocked_on: >-\n      Retained input poses and symbolic active-cell rows", "    unrelated_note: >-\n      Retained input poses and symbolic active-cell rows"]
   run: python3 -m devtools.render_agenda_map --check
   expect: "unobservable"
 
@@ -1195,13 +1196,21 @@ controls:
 # silently stops being selected, so it is rehearsed failing.
 - name: gate selection - a step's patterns stop matching anything real
   file: src/sqpack/cli/validate.py
-  replace: ['touches=(*_CORE, "packing/frontier/*", "packing/devtools/assess_frontier_rigidity.py"),', 'touches=("packing/frontier/no-such-file-anywhere",),']
+  # The mutation must replace the WHOLE tuple: leaving `*_CORE` in place keeps the step
+  # matching probe paths, so a minimal anchor makes this fire for the wrong reason --
+  # which is exactly what happened when it was first repaired. Multi-line by necessity,
+  # and check_control_anchors is what catches the source being reformatted under it.
+  replace:
+    - "        touches=(\n            *_CORE,\n            \"packing/frontier/*\",\n            \"packing/devtools/assess_frontier_rigidity.py\",\n            # `SCREEN` is atlas/known-best/translation-escape-screen.json, and the pinned\n            # rigid/not-rigid/undetermined counts are exactly what changing it moves.\n            \"packing/atlas/known-best/*\",\n        ),\n"
+    - "        touches=(\"packing/frontier/no-such-file-anywhere\",),\n"
   run: uv run --frozen --quiet python -m pytest tests/test_change_scoped_selection.py -q
   expect: "match no probe path"
 
 - name: gate selection - an unclaimed path stops widening the selection
   file: src/sqpack/cli/validate.py
-  replace: ["    if unclaimed:\n        return Selection(steps=universe, unattributed_paths=unclaimed)", "    if False:\n        return Selection(steps=universe, unattributed_paths=unclaimed)"]
+  # Anchored on the guard alone. The return it guarded was wrapped by the formatter, and
+  # pinning both lines made the control hostage to that (D-403).
+  replace: ["    if unclaimed:\n", "    if False:\n"]
   run: uv run --frozen --quiet python -m pytest tests/test_change_scoped_selection.py -q
   expect: "failed"
 
