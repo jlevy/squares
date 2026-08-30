@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 379
+count: 380
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10412,3 +10412,46 @@ defects:
     re-deriving it. That is now true of this paragraph and is the pattern to copy.
   bead: think-s424
   recorded_in: operating-rules.md
+- id: D-380
+  title: A superseded CI run reported the required check as a hard failure
+  date: '2026-08-30'
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: anomaly
+  latent_for: 'since packing-required was written; surfaced when pushes became frequent enough to supersede runs'
+  severity: low
+  status: fixed
+  what: >-
+    `packing-validation.yml` sets `cancel-in-progress: true`, so a push while a run is in
+    flight cancels it. The `packing-required` job guarded itself with `always()`, so it
+    still ran against the cancelled `validate` and evaluated
+    `test "$VALIDATE_RESULT" = "success"` against `cancelled`, exiting 1.
+
+    The required check therefore reported a hard failure for a run that had simply been
+    replaced. Twice within ten minutes on 2026-08-30, at `520366d` and `2fd8a8d`, each
+    waking a session to diagnose a red check whose log said only `VALIDATE_RESULT:
+    cancelled`.
+  consequence: >-
+    Not a soundness problem and not flattering -- it errs red, not green. The cost is
+    attention and trust. `OR-3` tells a session to push and keep working rather than wait,
+    which makes supersession routine, so following the operating rule reliably produces
+    false red on the PR. A check that cries wolf is the mechanism by which a real failure
+    gets scrolled past, and the workflow's own header comment already argues that "a check
+    that can never pass teaches everyone to ignore CI".
+  fix: >-
+    The guard is `!cancelled()` rather than `always()`. A cancelled run now reports nothing
+    and the required check stays pending, which is the safe direction; a genuine `validate`
+    failure is not `cancelled()`, so the job still runs and still fails.
+
+    Pending rather than green does not reintroduce the stuck-forever case the header
+    comment warns about, because supersession always starts a replacement run that supplies
+    the check. A run cancelled by hand with no successor leaves the check pending, and that
+    is correct: someone stopped the validation.
+  regression: >-
+    None that this repository can run -- the behaviour is GitHub's job-scheduling
+    semantics, reproducible only by superseding a live run. What replaces a test is that
+    the condition now states its intent, and the next occurrence is visible as an absent
+    check rather than a red one, which is self-describing in a way the failure was not.
+  bead: think-s424
+  recorded_in: .github/workflows/packing-validation.yml
