@@ -2,7 +2,7 @@
 
 # Defect log
 
-386 defects recorded across the packing toolchain.
+387 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 26 | a cell of the sweep whose answer is known in advance |
-| `review` | 237 | a human or agent reading the work against a checklist |
+| `review` | 238 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
 | `inspection` | 39 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 50 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 50 of 386, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 50 of 387, and none of the 88 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 50 of 386, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 4 |
-| record | 115 |
+| record | 116 |
 | tooling | 128 |
 | docs | 105 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 50 of 386, and none of
 | --- | ---: |
 | soundness | 88 |
 | validity | 92 |
-| bookkeeping | 145 |
+| bookkeeping | 146 |
 | robustness | 46 |
 | performance | 15 |
 
@@ -607,6 +607,7 @@ This is the actionable list.
 | [D-384](packing/devtools/price_row_jet_sharing.py) | 2026-08-30 | tooling | bookkeeping | neutral | `control_cell` | low | fixed | A count keyed on id() moved between two identical runs |
 | [D-385](packing/devtools/build_composite_figure_data.py) | 2026-08-30 | record | bookkeeping | flattering | `review` | medium | fixed | The composite figure badges rigidity from a hard-coded set and never reads the frontier |
 | [D-386](packing/devtools/check_session_clocks.py) | 2026-08-30 | record | bookkeeping | neutral | `gate` | low | fixed | A session declared two phases starting an hour and a half after the clock read |
+| [D-387](packing/campaign/agent-sessions/README.md) | 2026-08-30 | record | bookkeeping | neutral | `review` | low | fixed | A rule survived in one carried reminder and was dropped by the next |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

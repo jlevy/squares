@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 386
+count: 387
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10800,3 +10800,54 @@ defects:
     the guard complain. The gate step runs in `--records` at `0.17s`.
   bead: think-s424
   recorded_in: packing/devtools/check_session_clocks.py
+
+- id: D-387
+  title: A rule survived in one carried reminder and was dropped by the next
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: 'four commits, about ninety minutes'
+  severity: low
+  status: fixed
+  what: >-
+    `campaign/agent-sessions/README.md` gives the session checkpoint sequence and says, in
+    as many words, "Do not use `git add -A` in a shared checkout." Four commits in this
+    session used it: `581fabf`, `3b1c306`, `a69efe0` and `bf009f0`.
+
+    The same README's sequence also ends `tbd update <owning-bead> --notes ...` and `tbd
+    sync`, which this session had not run for any of the five commitments it advanced.
+
+    Neither omission was a decision. This is an unattended run that carries its own context
+    forward in a periodic reminder it writes for itself, and an earlier reminder in this
+    session did carry the staging rule. A later one, rewritten to make room for newer
+    state, did not. The rule was not overruled; it fell out of a summary.
+  consequence: >-
+    None from the staging itself, and that is checked rather than assumed: every path in
+    all four commits was inspected afterwards and every one was intentional. No scratch
+    file, no marker directory, nothing unreviewed. The rule exists because that outcome is
+    not guaranteed, not because it failed here.
+
+    The bead omission cost more. Five commitments advanced with their trackers left at
+    checkpoints from 2026-08-26, so `tbd show` would have told the next session that
+    `BC-024` was still mid-census while the taxonomy was retained and gate-checked. That is
+    the same shape as `D-374`, in the tracker rather than in the agenda queue.
+  fix: >-
+    Both practices resumed: staging by explicit path, and `tbd update` plus `tbd sync` for
+    all five beads with the checkpoint evidence and the exact next action.
+
+    The interesting half is the mechanism rather than the rules. A run that compresses its
+    own context every twenty minutes will drop something every time it rewrites, and what
+    it drops is invisible precisely because the reminder is the only place the dropped rule
+    was. So the reminder now names its sources -- `operating-rules.md`,
+    `AGENTS.md`, and the session README's checkpoint sequence -- rather than restating
+    them, which makes a dropped rule a broken pointer instead of a silent absence.
+  regression: >-
+    None automatic, and the honest reason is that the check would have to read a summary
+    the repository never sees. What replaces it is the pointer discipline above, plus the
+    fact that the session README is now named in the reminder that carries this session
+    forward. `D-358` and `D-386` are the same family one level down: a practice with no
+    check decays, and the fix that is only a practice change is the fix that recurs.
+  bead: think-s424
+  recorded_in: packing/campaign/agent-sessions/README.md

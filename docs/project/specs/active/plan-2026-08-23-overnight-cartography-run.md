@@ -336,12 +336,11 @@ already decide its stated criterion need not open a ceremonial review phase.
 For the next supervised exact-research goal, use
 [session 045](../../../../packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md).
 Sessions 027 through 044 are terminal, and agendas 006 and 007 are closed.
-Open `BC-017` under `think-u97a` as the next bounded driver: retain a target-free tagged
-execution-plan receipt on the source-free `n = 3` full-cell control, with semantic-swap,
-forged-count and exact-replay controls, and real LP attempts recorded as zero.
-It comes before any numerical full-cell freeze because `D-126` and the commitment’s own
-note say the current callables collapse the accounting roles the receipt has to
-separate.
+Open `BC-049` under `think-xdly` at `n = 28` and `n = 40` as the next bounded driver,
+and know what it costs before starting: the slice is not an assessment but an **exact
+construction**. `X-007` settled `n = 5` because Göbel’s construction is exact; the other
+two retain decimal witnesses of the kind measured `2.4e-30` off the diagonal, which no
+certificate can rest on.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

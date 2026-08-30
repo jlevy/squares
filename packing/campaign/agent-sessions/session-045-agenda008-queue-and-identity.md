@@ -638,7 +638,7 @@ session:
       commitment's own next_evidence orders this: a target-free tagged execution-plan
       receipt on the source-free n = 3 control first, with real LP attempts and sqsearch
       pair tests both zero, before any numerical semantics are frozen.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       BC-019 is closed and BC-017 is the remaining priority-1 cell in the live queue. It is
@@ -661,12 +661,74 @@ session:
     fallback: >-
       A typed statement of which accounting roles the current callables cannot separate,
       which is the readiness decision BC-018 and think-u97a both wait on.
+    outcome: >-
+      The receipt this slice was to produce already existed, so the slice produced the thing
+      the receipt authorizes instead: the readiness decision's input, measured rather than
+      read off the code. The kill condition did not fire -- nothing had to be frozen -- and
+      the fallback turned out to be the answer rather than a retreat from it.
+    evidence:
+    - >-
+      'The n = 3 full-cell control already retains a target-free tagged execution plan with
+      every wall and pair role visible, and its forged-count, omitted-row, replay and
+      role-swap controls all pass. Its promotion_boundary says passing authorizes exactly a
+      BC-016 or BC-017 readiness decision.'
+    - >-
+      'On the same three-square subject: structural plan 4 seated-wall equalities and 8
+      open-wall inequalities, 2 contact equalities and 1 non-edge inequality; solve_cell 12
+      containment rows and 3 pair rows. The same twelve and the same three. Every total
+      agrees and every composition does not.'
+    - >-
+      'Exactly one unit survives all three vocabularies -- the LP solve attempt -- and it is
+      the unit BC-017''s exit names, so the LP-solve half of that exit is reachable now.'
+    - >-
+      'pair_tests does not transfer: compiled rows in the structural plan, dynamic overlap
+      tests in sqsearch. The exit''s pair-test total is not one number until which sense is
+      meant is decided, and that is a judgement rather than a measurement.'
+    stop_reason: >-
+      The readiness input is measured and retained. What remains for BC-017 -- freezing the
+      numerical semantics, then real n = 5 and n = 10 counted executions across pool width
+      and host load -- is a different budget and a decision this runner may not take alone.
+    next_action: >-
+      Integration checkpoint: the OR-7 documentation pass over this session's documents, the
+      PR body, and a final --fast before handing off.
+    next_action: >-
+      Then an integration checkpoint and the OR-7 pass. BC-010 and BC-029 stay out of
+      scope: both are gated on independent acceptance of exp-045's preregistered criterion.
+  - workflow: process-review
+    recording: contemporaneous
+    clock_role: work
+    focus: process
+    objective: >-
+      Integration checkpoint, not the finalization reserve -- about four and a half hours of
+      the declared budget remain. The OR-7 documentation pass over this session's documents,
+      the PR body, and a full gate, so that whatever the next block is starts from a clean
+      and described state.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      Every live-queue cell this session can take alone is now terminal or has delivered its
+      slice. What remains in the queue needs a readiness decision or an acceptance decision,
+      neither of which an unattended runner may take.
+    budget_minutes: 45
+    started_at: '2026-08-30T10:31:00Z'
+    deadline_at: '2026-08-30T11:16:00Z'
+    expected_output: >-
+      The documentation pass applied, the PR body describing what this branch now contains,
+      a full --fast green, and the handoff naming what the next session may and may not
+      take.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --fast
+    kill_condition: >-
+      Stop rewriting a document if the change would be a rewording rather than a correction.
+      OR-7's pass is structure, footer and de-slop, not a second draft.
+    fallback: >-
+      Push what is green and record what the pass did not reach.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Then an integration checkpoint and the OR-7 pass. BC-010 and BC-029 stay out of
-      scope: both are gated on independent acceptance of exp-045's preregistered criterion.
+      Then the next live-queue cell. BC-010, BC-029 and BC-017's next slice all wait on
+      decisions an unattended runner may not take, and the agenda map names what is left.
   primary_bead: think-s424
   status: in_progress
   budget:
@@ -905,9 +967,13 @@ session:
   checks: []
   stop_reason: null
   next_action: >-
-    Take BC-017 on `think-u97a`: retain a target-free tagged execution-plan receipt on the
-    source-free n = 3 full-cell control, with every wall and pair role visible and with
-    semantic-swap, forged-count and exact-replay controls, before any real LP run.
+    Take BC-049 on `think-xdly` at n = 28 and n = 40, the one live-queue cell that is
+    neither finished nor waiting on a decision this runner may not take. Its next slice is
+    not another assessment: X-007's machinery is general in shape and specific in inputs,
+    and it needs an exact pose. Both retained witnesses are decimals of the same kind as
+    n = 5's, which was measured 2.4e-30 off the diagonal and infeasible at the scale a
+    certificate works at. So the slice is producing an exact construction, and that is the
+    real price.
 ---
 # Session-045 — Agenda-008
 

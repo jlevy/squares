@@ -1071,6 +1071,16 @@ def _n5_identity_pair(context: Context) -> str:
     return _module(context, "devtools.build_n5_identity_pair", "--check")
 
 
+def _work_accounting(context: Context) -> str:
+    """The three work meters still agree on exactly one unit, and no more.
+
+    Runs an LP on a literal three-square structural cell to observe the solver's own
+    counters, which is why this is not a records-only check: the number it compares against
+    the structural plan has to be measured rather than read.
+    """
+    return _module(context, "devtools.audit_work_accounting", "--check")
+
+
 def _assembly_coverage(context: Context) -> str:
     """Every record at `n <= 30` still carries its certificate or its typed limitation.
 
@@ -1551,6 +1561,18 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/check_golden_basins.py",
             "packing/devtools/check_soundness_perimeter.py",
             "packing/campaign/series/*/results/bc-083-n5-identity-pair.json",
+        ),
+    ),
+    Step(
+        "work accounting agrees on one unit",
+        _work_accounting,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/contact-full-cell-control.json",
+            "packing/devtools/audit_work_accounting.py",
+            "packing/campaign/series/*/results/bc-017-work-accounting.json",
         ),
     ),
     Step(

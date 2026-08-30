@@ -323,14 +323,29 @@ is closed with all four commitments terminal, and
 [session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md)
 has continued past it into the live queue.
 Take the next slice from [`agenda-map.md`](packing/campaign/agenda-map.md).
-`BC-017` on `think-u97a` is next: retain a target-free tagged execution-plan receipt on
-the source-free `n = 3` full-cell control, with semantic-swap, forged-count and
-exact-replay controls, before any numerical semantics are frozen.
+`BC-049` on `think-xdly` at `n = 28` and `n = 40` is the one live-queue cell that is
+neither finished nor waiting on a decision an unattended runner may not take — and its
+next slice is not another assessment.
+`X-007`’s machinery is general in shape and specific in inputs: it needs an **exact**
+pose, and both retained witnesses are decimals of the same kind as `n = 5`’s, which was
+measured `2.4e-30` off the diagonal and infeasible at the scale a certificate works at.
+Producing an exact construction is the real price.
+
+`BC-017` delivered its readiness input and stopped there.
+The `n = 3` full-cell control already retained the target-free execution-plan receipt
+the commitment asked for, so the slice produced what that receipt authorizes instead: on
+the same three-square subject the structural plan reports 4 seated-wall equalities and 8
+open-wall inequalities against 2 contact equalities and 1 non-edge inequality, while
+`solve_cell` builds 12 containment rows and 3 pair rows — **the same twelve and the same
+three**. Every total agrees and every composition does not, so the LP-solve half of the
+exit is reachable and `pair_tests` does not transfer between instruments that both
+report it.
+
 `BC-019` is closed. The contact-assembly contract is at `contact-assembly-v2-draft` and
 carries the clause it never had — **17 certificates and 13 typed limitations** over
 `n <= 30` — with the missing grammar move named rather than guessed: a primitive for
-axis-aligned polyominoes that are not a bar, rectangle or corner L. `BC-024` is closed
-too, and it is what made that statement safe to make:
+axis-aligned polyominoes that are not a bar, rectangle or corner L. `BC-024` is what
+made that safe to say:
 [X-008](packing/campaign/explorations/X-008-the-residue-is-axis-aligned.md) measures
 that **every** component the grammar cannot express is axis-aligned — every
 `other-polyomino` in the corpus has angle exactly zero — so all 295 tilted components
@@ -2471,14 +2486,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 386 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 387 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 88 | asserted something false about the mathematics |
 | validity | 92 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 145 | recorded something its own evidence contradicts |
+| bookkeeping | 146 | recorded something its own evidence contradicts |
 | robustness | 46 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
@@ -2488,7 +2503,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fifty defects in 386, and no soundness defect ever.**
+**The automated gate has caught fifty defects in 387, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.

@@ -97,6 +97,33 @@ agenda:
       real LP run. BC-017 completes only after real n=5 and n=10 executions retain
       identical derived work and outcomes across declared pool widths and loaded and
       unloaded host conditions.
+
+      The first sentence of this is already discharged and was before the slice started:
+      the source-free n = 3 full-cell control retains a target-free tagged execution plan
+      with every wall and pair role visible, and its execution-plan-forged-count,
+      execution-plan-omitted-row, execution-plan-replay and execution-plan-role-swap
+      controls all pass. Its own promotion_boundary says passing authorizes exactly a
+      BC-016 or BC-017 readiness decision, so what this slice owed was that decision's
+      input, not another receipt.
+
+      Measured on the same three-square subject: the structural plan reports 4 seated-wall
+      equalities and 8 open-wall inequalities against 2 contact equalities and 1 non-edge
+      inequality; solve_cell builds 12 containment rows and 3 pair rows. The same twelve
+      and the same three. The two instruments agree on every total and disagree on every
+      composition.
+
+      That is a narrower obstruction than the note reads and a better one. Exactly one unit
+      survives all three vocabularies -- the LP solve attempt -- and it is the unit this
+      commitment's own exit names, so the LP-solve half of the exit is reachable now. What
+      does not transfer is pair_tests, which appears in two instruments and counts compiled
+      rows in one and dynamic overlap tests in the other. The exit's pair-test total is not
+      one number until which sense is meant is decided, and that decision is a judgement
+      rather than a measurement.
+
+      What remains for this commitment is unchanged in shape: freeze the numerical
+      semantics, then real n = 5 and n = 10 counted executions agreeing across pool width
+      and host load. Nothing here prices an enumerated stratum, and the audit carries no
+      coordinates, side, geometry, feasibility or optimality claim.
     note: >-
       D-126 makes wall-clock budgets load-dependent, but the target-free control exposes
       an earlier instrumentation boundary. `solve_cell` counts actual retries while
@@ -110,6 +137,10 @@ agenda:
       pool width and host load. BC-018 separately still needs BC-016 plus the n=5, n=10,
       and n=16 grammar controls. `think-u97a` separately requires stable n=4/n=10 quench
       outcomes and work across pool widths and load.
+    artifacts:
+    - devtools/audit_work_accounting.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-017-work-accounting.json
+    - tests/test_work_accounting.py
   - id: BC-018
     purpose: tool_validation
     owner_focus: correctness

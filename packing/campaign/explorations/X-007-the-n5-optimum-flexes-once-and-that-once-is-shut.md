@@ -346,10 +346,14 @@ enumeration, linearization, first-order certificates, second-order terms, self-s
 without knowing anything about `n = 5` in particular.
 
 What does not generalize is the pose.
-The argument needs an **exact** configuration, and the retained witnesses are decimals
-that are infeasible at the scale a certificate works at.
-For `n = 28` and `n = 40` that means the work is not “run the tool”; it is “produce an
-exact construction first”, and that is the real price.
+The argument needs an **exact** configuration, and `n = 28` and `n = 40` retain decimal
+witnesses of the same kind `n = 5` does — `numerically-checked`,
+`numerical-multiprecision`. Only one of those has been measured against a certificate,
+and it failed: `n = 5`’s puts the middle square’s centre `2.4e-30` off the diagonal.
+Whether the other two are infeasible at that scale is not known here, and it is beside
+the point either way — a certificate needs an exact pose, not a sufficiently accurate
+one. So for both, the work is not “run the tool”; it is “produce an exact construction
+first”, and that is the real price.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
