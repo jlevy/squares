@@ -5,12 +5,12 @@ title: Settle rigidity for n=5, 28 and 40 beyond single-square translation
 kind: task
 status: open
 priority: 2
-version: 8
+version: 9
 labels: []
 dependencies: []
 parent_id: is-01m12zjr144a4kg6rnv1t0pm6n
 created_at: 2026-08-28T15:18:21.210Z
-updated_at: 2026-08-30T14:34:31.351Z
+updated_at: 2026-08-30T15:21:04.590Z
 ---
 The translation escape screen finds no movable square for n=5, 11, 28 and 40, but a miss is one-directional: rotation of a single square and coordinated multi-square motion are outside it. So frontier/n-005, n-028 and n-040 now carry rigidity.property: undetermined, which is a result rather than an absence, while Kingbird annotates all four 'Rigid.'
 
@@ -24,19 +24,18 @@ Do not shortcut this by promoting catalogue_rigid into the rigidity block. That 
 
 ## Notes
 
-2026-08-30 session-045 CLOSED (23 phases). Addendum to the handoff: Goebel's family, mapped.
+2026-08-30 session-046 (one slice, 35 min). Goebel's family: all four optimal sizes now have exact constructions.
 
-D-389 was specific to n=40 -- a route priced while the construction sat published. The general question took twenty minutes: devtools/price_gobel_family.py enumerates every (a,b) with a-1 < b/sqrt2 < a+1 reaching n <= 100, compares the side a+1+b/sqrt2 against the retained best known, and verifies exactly where they match.
+BUILT. cases/gobel_family/ holds the general form of the rule -- build(a, b) for any (a,b) with a-1 < b/sqrt2 < a+1 -- and verify_exact covers the two sizes that had none: n=65 (a=4,b=5) and n=89 (a=4,b=7). 2080 and 3916 pairs, every one decided by exact sign over Q(sqrt 2); 64 boundary coordinates each; duplicated-square negative control rejected at both. Wired into the `exact verification` gate step. One package rather than two copies of gobel40, and the control that makes the generalization trustworthy is that at a=3,b=4 it reproduces cases/gobel40 corner for corner (compared on coefficients, since each build makes its own NumberField).
 
-TWELVE sizes reached. OPTIMAL at FOUR: n = 5, 40, 65, 89.
-- n=5 and n=40 already have exact case packages here.
-- **n=65 (a=4,b=5) and n=89 (a=4,b=7) do NOT.** Both retain numerical-multiprecision witnesses and no case package, and both verify exactly in seconds -- 2080 and 3916 pairs decided by exact sign. Building cases/gobel65 and cases/gobel89 is the cheapest open work this bead offers.
-- Nothing promoted: feasible at the retained side is not optimal.
+UNEXPECTED FINDING. The witness-agreement bound started at 1e-11, on the reasoning that n=65 and n=89 are `numerical-multiprecision` records that might be independent optimisations merely landing on the same side. They agree with the construction to 4.81e-33 and 3.28e-33. Nothing independently optimised lands within 1e-32 of a construction it was not built from, so those two decimals ARE materialisations of Goebel's family -- exactly as n=40's turned out to be (D-389). Bound tightened to 1e-32; the docstring that said the opposite is corrected.
 
-THE NEAR MISS, which is the part that saves an afternoon: at a=2,b=4 the family gives n=28 -- a VALID packing of side 3+2sqrt2 = 5.82843, but the best known is 5.82444, better by 0.004, at algebraic degree 6. So n=28's optimum is NOT in this family and the n=40 answer does not carry over to it. That is why no exact construction is retained for n=28. `28 = 2(4)+4+16` is not the shortcut it looks like, and tests/test_gobel_family.py asserts the near miss so a future reader is stopped at the guess.
+So all four sizes where the family is exactly the best known -- n = 5, 40, 65, 89 -- now have exact constructions here, and three of the four retained witnesses are identified as materialisations of it.
 
-The generalization is controlled against cases/gobel40: built at a=3,b=4 it must reproduce that case corner for corner (compared on coefficients, since each builder makes its own NumberField and the field API refuses cross-field comparison -- which is the point of that refusal).
+NOT DONE, deliberately: n=65 and n=89's witnesses stay `numerical-multiprecision`. Feasible at the retained side is not optimal, and moving them to `exact-algebraic` is an assurance-contract question this session did not open. That is the next askable thing.
 
-Gate step "Goebel's family reaches the sizes it reaches", ~5s, records tier. Record bc-049-gobel-family-coverage.json. 925 tests pass; CI green.
+n=28 remains out: the family gives it a valid packing 0.004 worse than the best known, whose optimum is at algebraic degree 6 and is not in the family.
 
-PROCESS NOTE: this slice happened inside a phase declared as process-review, which OR-5 says should have been redeclared. Recorded as a slip rather than papered over with a retroactive declaration.
+SYNOPSIS's Current Handoff was still describing the morning's state and now carries the day.
+
+934 tests pass; --edit green.
