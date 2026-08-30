@@ -11260,11 +11260,24 @@ defects:
     flattering direction D-358 names, arrived at by a different route -- there, a
     misread clock; here, a correctly-read clock measuring the wrong authority.
 
-    The mechanism failure is separable and is the one worth fixing structurally.
-    `send_later` is one-shot, so an unbroken chain of re-arms depends on the agent
-    choosing to re-arm at the end of every single turn. One turn that concludes "we are
-    done" ends the run permanently, and no later turn exists to reconsider. A continuity
-    device that any single judgement can switch off is not a continuity device.
+    The mechanism failure is separable, and it has a precise first cause that is worth
+    more than the judgement failure. At 07:02:03Z the run tried to arm a recurring
+    `*/20 * * * *` trigger and the platform refused it: "the minimum interval is 1 hour".
+    The run read that as *cron is unusable here* -- it said so, "cron floors at one hour,
+    so a self-re-arming 20-minute reminder it is" -- and fell back to a chain of
+    one-shots, deleting the last recurring trigger it held nineteen seconds later.
+
+    The refusal did not say cron was unusable. It said cron had a one-hour floor, and a
+    floor is exactly what was needed. An hourly recurring trigger with the 20-minute
+    chain layered on top was available the whole time and costs nothing extra; the
+    category error was treating "too coarse to be the only device" as "not a device".
+
+    That is what made 15:32Z terminal rather than recoverable. `send_later` is one-shot,
+    so an unbroken chain of re-arms depends on the agent choosing to re-arm at the end of
+    every single turn, and one turn concluding "we are done" ends the run permanently
+    with no later turn to reconsider. A continuity device that any single judgement can
+    switch off is not a continuity device -- and here the redundant one had been declined
+    eight hours earlier, on a misreading.
   fix: >-
     Three things, in increasing order of how much they are worth.
 

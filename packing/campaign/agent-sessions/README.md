@@ -228,6 +228,13 @@ slice.
 `OR-8` in [`operating-rules.md`](../../../operating-rules.md) is the rule; this is
 the mechanism it needs.
 
+**Take the hourly floor even though an hour is too coarse.** The recurring-trigger
+interval is floored at one hour, and the run that produced `D-395` read that refusal as
+*cron is unusable here* and fell back to a chain of one-shots alone.
+It says one hour is the *floor*, which is what a floor is for: arm the hourly recurring
+trigger and layer the finer ping on top of it.
+Declining the coarse device because it is coarse leaves nothing underneath the fine one.
+
 **Arm a recurring trigger, not a chain of one-shots.** `send_later` fires once, so a
 chain of them is exactly as long as the first turn that concludes the work is finished —
 and that turn has no successor to reconsider it.
