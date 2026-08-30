@@ -62,6 +62,11 @@ DECLARED_CONSUMERS = {
         "names the field in a fixture proving evidence refs are found in every block that "
         "carries one; it asserts nothing about the bound's value"
     ),
+    "packing/devtools/render_evidence_inventory.py": (
+        "names the field only as one of the case blocks that can carry evidence ids, so "
+        "that citations can be counted; it reads no bound and makes no claim about what "
+        "any of them is worth"
+    ),
     "packing/devtools/price_gobel_family.py": (
         "says in prose that the four family sizes now certify the exact side rather than "
         "the grid ceiling, to keep its own coverage record from reading as a gap; it "
