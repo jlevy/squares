@@ -2502,14 +2502,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 397 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 398 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
 | validity | 96 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 148 | recorded something its own evidence contradicts |
+| bookkeeping | 149 | recorded something its own evidence contradicts |
 | robustness | 47 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
@@ -2519,7 +2519,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fifty-three defects in 397, and no soundness defect
+**The automated gate has caught fifty-three defects in 398, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2556,6 +2556,20 @@ does. So four pushes went out on a red branch — a stale pin, an undeclared mar
 `defects.yaml` grew past half a megabyte.
 The wake events naming the failed check were delivered six times and read once, after
 the fact. The tiers are right; using one of them as though it were the other was not.
+
+[D-398](defects.md) is the record being behind its own toolchain rather than wrong about
+it, and it is the one still open.
+`n = 40`, `n = 65` and `n = 89` each declare a blocker of kind `mathematics` reading “No
+formal certificate currently supports the tighter reported upper bound”, and each keeps
+its verified ceiling at the integer grid — `7`, `9`, `10`. All three certificates exist
+and run in the gate: 780 pairs decided by exact sign over `Q(√2)` at `n = 40`, 2080 at
+`n = 65`, 3916 at `n = 89`. A feasible packing at side `s`, decided exactly, is a proof
+that `s(n) ≤ s`, so the mathematics the blocker calls missing is done and what is
+missing is an evidence record naming it.
+The direction is conservative — the register understates what can be certified — and the
+reason nothing caught it is worth more than the instance: the stale-blocker check
+compares a record’s two bound fields to each other, so a certificate can land without
+the record being told, and no sweep runs the other way.
 
 The record can also be wrong about itself, and [D-358](defects.md) is this run being so:
 an unattended run declared blocks of 150, 180, 180 and 40 minutes and took 31, 42, 29

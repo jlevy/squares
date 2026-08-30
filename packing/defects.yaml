@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 397
+count: 398
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -11437,3 +11437,68 @@ defects:
     `AGENTS.md` is in context before the first tool call. Whether that is enough will be
     visible in whether a fifth recurrence happens.
   recorded_in: AGENTS.md
+- id: D-398
+  title: Three cases declare a mathematical blocker the repository has already cleared
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'n = 40 since session-045 closed; n = 65 and n = 89 since session-046 closed'
+  severity: medium
+  status: outstanding
+  what: >-
+    `n = 40`, `n = 65` and `n = 89` each carry the identical typed blocker in their
+    frontier record: `kind: mathematics`, detail "No formal certificate currently supports
+    the tighter reported upper bound." Each also keeps `verified_upper_bound` at the
+    integer grid ceiling -- `7`, `9` and `10` -- cited to `E-basic-grid-upper`.
+
+    All three certificates exist and are in the gate. `cases.gobel40.verify_exact` decides
+    780 pairs by exact sign over `Q(sqrt 2)` with 48 corner coordinates exactly on the
+    boundary; `cases.gobel_family.verify_exact` does the same for 2080 pairs at `n = 65`
+    and 3916 at `n = 89`. A feasible packing at side `s`, decided exactly, is precisely a
+    proof that `s(n) <= s`. So a formal certificate does support the tighter reported
+    bound at all three sizes, and has since the sessions that built them closed.
+
+    `kind: mathematics` is the wrong kind for what remains. The mathematics is done; what
+    is missing is an evidence record naming the certificate and the replay, which is
+    bookkeeping.
+  consequence: >-
+    Conservative, and that is the only reason it is medium rather than high: the record
+    understates what this repository can certify rather than overstating it. `n = 40`'s
+    verified ceiling reads `7` where `4 + 2 sqrt(2)` is approximately `6.83`, and the gap
+    the record calls a mathematical one is a paperwork one.
+
+    Two costs follow. A reader deciding where the frontier's open problems are is pointed
+    at three sizes that are not open in the way the blocker claims. And the assurance
+    machinery does not catch it: `assurance.py` makes the blocker two-sided -- removing it
+    before the bounds agree raises "formal upper trails report without a blocker", leaving
+    it once they agree raises "stale formal-upper-gap blocker" -- but both arms compare the
+    record's own two bound fields to each other. Neither asks whether a certificate exists
+    that the record has not been told about, so a certificate can land and the blocker
+    stays quietly true-looking.
+  fix: >-
+    None yet, and the remaining work is enumerated rather than estimated. Three evidence
+    records on the `E-n005-gobel-upper` template, each `verified` / `exact-algebraic` with
+    the case package as certificate and its `verify_exact` as replay; three
+    `verified_upper_bound` blocks moved to the exact side with `exact_form` and a value at
+    the witness's own depth; three blockers removed and three "the verified upper bound is
+    a ceiling" sections deleted, atomically, since `assurance.py` refuses either half
+    alone. Then the trailing-ceiling count in
+    `tests/test_verified_upper_bound_contract.py`, which is written as a measurement and
+    falls from 33 to 30, and the counts quoted in `frontier/README.md` and `SYNOPSIS.md`.
+
+    One asymmetry is worth carrying into that work rather than rediscovering: at `n = 89`
+    the retained witness's side is `3.275e-33` *below* `5 + (7/2) sqrt(2)`, because a
+    32-digit truncation of an irrational goes downward. `n = 65` and `n = 40` truncate the
+    other way. So `n = 89`'s exact construction does not fit inside its own retained
+    decimal, and its promotion must carry numbers computed from the construction rather
+    than inherited from the witness.
+  regression: >-
+    None, and the missing detector is the point rather than an omission. The stale-blocker
+    check reads only the record's two bound fields, so it cannot see a certificate the
+    record does not cite. What would catch this class is a sweep from the other direction:
+    every case package that verifies a construction exactly should be required to be cited
+    by the frontier record for its `n`. That check does not exist, and until it does a
+    landed certificate goes unrecorded silently.
+  bead: think-xdly
+  recorded_in: packing/frontier/n-040.md
