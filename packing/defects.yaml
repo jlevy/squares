@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 402
+count: 403
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -11797,3 +11797,55 @@ defects:
     That check does not exist, and this is the argument for it.
   bead: think-xdly
   recorded_in: packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md
+- id: D-403
+  title: The negative controls do not run on a pull request, so stale ones accumulate unseen
+  date: '2026-08-30'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: 'unknown; at least six controls were already stale when this was found'
+  severity: medium
+  status: contained
+  what: >-
+    `.github/workflows/ci.yml` runs `packing-validate --fast` on `pull_request` and the full
+    gate only off it. `Step("negative controls", ...)` carries neither `fast` nor `records`,
+    so it runs in the full gate alone. A branch can therefore be green on every push for its
+    whole life while its controls rot, and the rot only surfaces after merge.
+
+    Six of a hundred and fifty were not firing when this was checked. One is squarely this
+    session's: the control proving `apparently-novel` needs a dated `source_reviewed`
+    anchored on the whole literal field block of `E-n011-repaired-lower`, and inserting
+    `novelty_basis` into the middle of that block left the anchor matching nothing. Two
+    `gate selection` controls anchor a `touches=(...)` tuple in its one-line form, which the
+    formatter has since wrapped. Two agenda-map controls no longer match their blocks, and
+    one is masked by a link that resolves in the repository but not inside the
+    packing-scoped snapshot the runner builds.
+  consequence: >-
+    A control that does not fire is worse than an absent one, because the suite reports a
+    count that reads as coverage. The runner is what saves this: it distinguishes "failed
+    with the expected message" from "failed, but not with the expected message" and reports
+    an unmatched anchor rather than skipping, so the information was sitting in a log
+    nobody had run on this branch.
+
+    The direction is the same one this branch kept finding. Something noticed the condition
+    and printed it; nothing refused it, and nothing on the pull-request surface even looked.
+  fix: >-
+    The novelty control is re-anchored on a span that does not move: the record's own
+    `limitations` line, which is unique to it, paired with the `source_reviewed` it is meant
+    to remove. Pinning every field between two points made the control hostage to any field
+    added in between, which is exactly what happened.
+
+    The tier placement is left alone deliberately and this is recorded `contained` rather
+    than `fixed`. The controls take about half an hour, and moving them onto the
+    pull-request surface would push that surface past the point where it gets run at all --
+    `D-366` and `D-381` are both about that boundary. What is missing is not a faster suite
+    but a cheap check that every control's anchor still matches, which would run in
+    `--records` and catch this class in seconds without executing a single mutation.
+  regression: >-
+    None yet, and the bead carries the shape: an anchor-resolution check over
+    `devtools/controls.yaml` that asserts each `replace` source appears exactly once in its
+    declared file, without running the control. That is a `--records` step, and it turns
+    "the control fired for the wrong reason" from something a reader must notice in a
+    thirty-minute log into a refusal.
+  bead: think-xdly
+  recorded_in: packing/devtools/controls.yaml

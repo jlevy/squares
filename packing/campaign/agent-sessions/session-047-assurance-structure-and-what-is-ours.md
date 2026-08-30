@@ -368,6 +368,8 @@ session:
   - packing/campaign/resource-usage/agent-ade870588ae0888a1.yaml
   - packing/campaign/resource-usage/agent-aef07d923ca86729c.yaml
   - packing/campaign/resource-usage/agent-af6005e953cb04f35.yaml
+  - packing/campaign/resource-usage/agent-aac1c30acbe3cf402.yaml
+  - packing/campaign/resource-usage/agent-af91d0bbee9cdbe25.yaml
   stop_reason: >-
     The block is complete and closed here rather than left open with a rolling deadline: an
     in-progress session whose deadline has passed is a refusable state, and rolling it

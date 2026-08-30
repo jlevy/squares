@@ -2530,12 +2530,22 @@ table above.
 - **[D-021](defects.md) is contained.** Floating-point LP refinement has a noise floor
   of about `1e-11` in the side, and eight rounds sit on it.
   Those numerical results may not claim a difference smaller than the floor.
+- **[D-403](defects.md) is contained.** The negative controls run only in the full gate,
+  and a pull request runs `--fast`, so a branch can be green on every push while its
+  controls rot — six of a hundred and fifty were not firing when this was checked.
+  A control that does not fire is worse than an absent one, because the suite reports a
+  count that reads as coverage.
+  The runner is what saves it: an unmatched anchor is reported rather than skipped, and
+  “failed, but not with the expected message” is distinguished from a real firing.
+  Moving the suite onto the pull-request surface would push that surface past the point
+  where it gets run at all, so what is owed is a cheap anchor-resolution check in
+  `--records` rather than a faster suite.
 
 ## The Defect Record
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 402 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 403 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -2543,7 +2553,7 @@ and checked in the gate.
 | soundness | 91 | asserted something false about the mathematics |
 | validity | 97 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 152 | recorded something its own evidence contradicts |
-| robustness | 47 | did not finish, or finished only by luck |
+| robustness | 48 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -2552,7 +2562,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fifty-four defects in 402, and no soundness defect
+**The automated gate has caught fifty-four defects in 403, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

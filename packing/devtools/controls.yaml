@@ -550,10 +550,15 @@ controls:
   run: python3 -m devtools.validate_schemas
   expect: "previously-published evidence must name its source_key"
 
+# Anchored on this record's own limitations line, which is unique to it, rather than on
+# the whole field block. The block form broke the moment `novelty_basis` was inserted into
+# the middle of it: the control stopped firing and reported "anchor appears 0 times", which
+# is a control testing nothing until someone reads the run.
 - name: frontier - novelty claimed without a dated source review
   file: frontier/evidence.yaml
-  replace: ["    novelty: apparently-novel\n    relationship_to_generator: independent-implementation\n    origin: replayed-here\n    source_key: '[Stromquist 2003]'\n    certificate: campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json\n    replay: uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json\n    replay_status: passed\n    limitations: Proves the lower bound with a source-distinct repair; it does not repair the printed source proof.\n    source_reviewed: '2026-08-24'\n",
-            "    novelty: apparently-novel\n    relationship_to_generator: independent-implementation\n    origin: replayed-here\n    source_key: '[Stromquist 2003]'\n    certificate: campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json\n    replay: uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json\n    replay_status: passed\n    limitations: Proves the lower bound with a source-distinct repair; it does not repair the printed source proof.\n"]
+  replace:
+    - "    limitations: Proves the lower bound with a source-distinct repair; it does not repair the printed source proof.\n    source_reviewed: '2026-08-24'\n"
+    - "    limitations: Proves the lower bound with a source-distinct repair; it does not repair the printed source proof.\n"
   run: python3 -m devtools.validate_schemas
   expect: "apparently-novel evidence requires a dated source_reviewed"
 
