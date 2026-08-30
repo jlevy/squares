@@ -1152,6 +1152,14 @@ def _n5_rigidity_certificates(context: Context) -> str:
     return _module(context, "devtools.assess_n5_rigidity", "--check")
 
 
+def _nagamochi_bounds(context: Context) -> str:
+    # Sub-second: a hundred frontmatter blocks and one closed-form per case. Records tier
+    # because it checks the arithmetic of a citation the rest of the register leans on --
+    # 88 of the hundred verified lower bounds come from this one external proof, and
+    # nothing previously re-derived any of them.
+    return _module(context, "devtools.check_nagamochi_bounds")
+
+
 def _evidence_inventory(context: Context) -> str:
     # Sub-second: it reads one register and re-renders a table. Records tier because it is
     # a generated view of the record, and a generated view that has drifted from its source
@@ -1720,6 +1728,18 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/assess_n5_rigidity.py",
             *_CASES,
             "packing/campaign/series/*/results/bc-049-n5-rigidity-certificates.json",
+        ),
+    ),
+    Step(
+        "the borrowed lower bounds re-derive",
+        _nagamochi_bounds,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/check_nagamochi_bounds.py",
+            "packing/frontier/n-*.md",
+            "packing/frontier/evidence.yaml",
         ),
     ),
     Step(
