@@ -214,6 +214,41 @@ the workflow, focus, clock, or transition was declared at the time.
 Missing historical phase timing remains unknown rather than receiving invented
 precision.
 
+### What May End a Run
+
+The rollup above is what a session does when it legitimately ends.
+This is when that is.
+
+Under an open-ended mandate — “don’t stop”, “through the night”, “until it’s done” —
+three things end a run: the user says so, an external blocker makes progress impossible,
+or the agenda is exhausted.
+A plan running out is not one of them.
+The plan is an estimate the run wrote for itself, and its end is a cue to plan the next
+slice.
+`OR-8` in [`operating-rules.md`](../../../operating-rules.md) is the rule; this is
+the mechanism it needs.
+
+**Arm a recurring trigger, not a chain of one-shots.** `send_later` fires once, so a
+chain of them is exactly as long as the first turn that concludes the work is finished —
+and that turn has no successor to reconsider it.
+A recurring trigger fires on its own schedule regardless of what the last turn decided.
+Keep the one-shot as the fine-grained ping if it helps; the recurring one is the floor
+under it, and it is the floor precisely because no single judgement can remove it.
+
+**Deleting the recurring trigger needs the user to ask for it.** Every other bad call in
+the loop gets another firing to be corrected.
+This one does not, which puts it with the irreversible actions rather than the routine
+ones.
+
+[`D-395`](../../../defects.md) is what this costs when it is left to memory: a run with
+eleven and three-quarter hours of unbroken twenty-minute pings, every one re-armed by
+hand, that then wrote itself a note reading “the wall budget is spent … do not start new
+work” and deleted it.
+The clocks were accurate — that was [`D-358`](../../../defects.md)’s failure, not this
+one. What went wrong is that a budget the run invented was allowed to outrank an
+instruction the user gave in words, and “budget spent” went into the record looking like
+a constraint that had been met.
+
 ### Cycle Time Is Reported, Not Tolerated
 
 Efficiency is one of the four operating principles, and its goal is iteration *as fast

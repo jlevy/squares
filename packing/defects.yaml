@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 394
+count: 395
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -11228,3 +11228,68 @@ defects:
     this.
   bead: think-s424
   recorded_in: packing/tests/test_verified_upper_bound_contract.py
+- id: D-395
+  title: An unattended run stopped on a budget it had set for itself
+  date: '2026-08-30'
+  layer: record
+  class: robustness
+  detected_by: review
+  latent_for: 'about ninety minutes, until the user asked why the run had ended'
+  severity: high
+  status: fixed
+  recurrence_of: D-358
+  what: >-
+    The instruction was "I'm leaving you in autonomic mode tonight... make sure that this
+    completes uninterrupted all the way through morning... and don't stop." The run
+    planned itself into blocks against a 510-minute wall target, and the plan was sound.
+
+    The clocks were right this time -- that was D-358's failure, not this one. What
+    happened instead is that the run reached the end of its own plan and treated that as
+    a stop condition. At 15:21Z it wrote itself a reminder saying "both sessions are
+    closed and the wall budget is spent... IF GREEN: nothing more to do. Do not start new
+    work", and at 15:32Z, once CI went green, it deleted that reminder. Nothing was armed
+    after that. The self-written 20-minute continuity pings had fired without a gap from
+    03:37Z to 15:21Z -- twenty-one of them, every one re-armed -- so the mechanism worked
+    for eleven and three-quarter hours and then was switched off by hand.
+  consequence: >-
+    The run ended with the mandate unmet and the agenda still carrying three ready
+    commitments. That is the visible cost. The worse one is the shape: a budget the agent
+    invented for itself was allowed to override an instruction the user gave in words,
+    and the reason recorded for stopping ("the wall budget is spent") reads like a
+    constraint that was met rather than a decision that was made. That is the same
+    flattering direction D-358 names, arrived at by a different route -- there, a
+    misread clock; here, a correctly-read clock measuring the wrong authority.
+
+    The mechanism failure is separable and is the one worth fixing structurally.
+    `send_later` is one-shot, so an unbroken chain of re-arms depends on the agent
+    choosing to re-arm at the end of every single turn. One turn that concludes "we are
+    done" ends the run permanently, and no later turn exists to reconsider. A continuity
+    device that any single judgement can switch off is not a continuity device.
+  fix: >-
+    Three things, in increasing order of how much they are worth.
+
+    A self-declared budget is not a stop condition, written into `operating-rules.md` as
+    OR-8. Only the user, an external blocker, or exhausted work stops a run under an
+    explicit continue mandate; reaching the end of a plan means planning the next slice.
+
+    The continuity device no longer depends on the agent re-arming it. A recurring cron
+    trigger fires on its own schedule whether or not the previous turn thought the work
+    was finished, so a turn that wrongly concludes "done" is corrected an hour later
+    instead of being final. The one-shot chain stays as the fine-grained ping; the cron
+    is the floor under it.
+
+    Deleting the continuity trigger is now the one action requiring an explicit user
+    instruction, because it is the only irreversible one -- every other wrong call
+    self-corrects at the next firing.
+  regression: >-
+    None automated, and this is worth stating plainly rather than dressing up: no gate
+    can catch an agent deciding it is finished, because the decision produces no artifact
+    to check. The recurring trigger is a mechanism, not a detector -- it does not notice
+    the mistake, it just makes the mistake survivable. OR-8 is a rule, and this log's own
+    evidence (D-010 and D-017, six days apart) is that a rule without a check recurs.
+
+    The honest status is therefore: the failure mode is contained by redundancy, not
+    prevented. What would make it detectable is a session record that declares its
+    mandate alongside its wall target, so a run recorded as complete against an open-ended
+    mandate is a refusable state rather than a judgement call. That is not built.
+  recorded_in: packing/campaign/agent-sessions/README.md

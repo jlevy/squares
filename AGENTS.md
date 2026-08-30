@@ -32,6 +32,7 @@ for each rule. Edit there, not here.
 - **OR-5:** Declare the workflow entry point before beginning.
 - **OR-6:** Plan multi-hour work in slices before starting it.
 - **OR-7:** Run the documentation guidelines pass at block boundaries.
+- **OR-8:** A self-declared budget is not a stop condition.
 
 <!-- END OPERATING RULES SUMMARY -->
 

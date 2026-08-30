@@ -135,6 +135,35 @@ Once per block, not per file: per file it re-reads the same guidelines for every
 and churns text that was already conformant, and a block that only touched records or
 code has nothing for it to do.
 
+## OR-8: A self-declared budget is not a stop condition
+
+Under an open-ended mandate — “don’t stop”, “run through the night”, “until it is done”
+— only three things end a run: the user says so, an external blocker makes progress
+impossible, or the work is genuinely exhausted.
+Reaching the end of a plan is none of these.
+A plan is an estimate the run wrote for itself, and the end of an estimate means it is
+time to plan the next slice, not time to stop.
+
+Two devices keep this from being a matter of memory, because memory is what failed.
+
+**The continuity trigger does not depend on being re-armed.** `send_later` is one-shot,
+so a chain of re-arms is only as long as the first turn that decides the work is
+finished. A recurring trigger fires on its own schedule regardless of what the previous
+turn concluded, so a wrong “we are done” is corrected at the next firing rather than
+being final. Keep the one-shot chain for fine-grained pings if it helps; the recurring
+one is the floor under it.
+
+**Deleting that trigger requires the user to ask.** It is the only irreversible action
+in the loop — every other bad call gets another turn to be reconsidered, and this one
+does not. Treat it the way any other irreversible action is treated here.
+
+[D-395](defects.md) is a run that had eleven and three-quarter hours of unbroken
+20-minute pings, wrote itself a reminder saying “the wall budget is spent … do not start
+new work”, and then deleted it.
+The clocks were right; the authority was wrong.
+[D-358](defects.md) is the same stop, reached by a misread clock instead — which is why
+the rule is about what may end a run, not about how to measure time.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
