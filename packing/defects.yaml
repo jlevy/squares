@@ -10668,7 +10668,7 @@ defects:
   detected_by: review
   latent_for: 'since the figure gained a rigidity badge; surfaced when n=5 acquired first-party evidence'
   severity: medium
-  status: outstanding
+  status: fixed
   what: >-
     `devtools/build_composite_figure_data.py` decides each record's rigidity from `n`
     alone. A perfect square gets `state: established, basis: perfect-square-tiling`; any `n`
@@ -10699,21 +10699,34 @@ defects:
     the field split exists to reserve. The provenance fields are honest and nobody reads
     them; the glyph is what a reader takes away.
   fix: >-
-    None yet, deliberately. The change is small in code and not small in judgement: reading
-    the frontier `rigidity` block means the badge count moves from 14 to 11, the legend
-    needs to distinguish a derived establishment from a transcribed annotation, and the
-    published SVG and PDF both regenerate. That is a design decision about a published
-    figure, and it was found in the middle of an unrelated commitment by an unattended run,
-    which is the wrong moment to take it.
+    The figure reads each record's own rigidity block. `established` now means the block
+    says `locally-rigid` and nothing else does, so the count falls from 14 to 11 and
+    `n = 11` is credited to its own `verified` argument rather than to Kingbird.
+    `CATALOGUE_RIGID` is gone: the basis is keyed on the evidence id the record carries,
+    because deciding from `n` what the record already states is the general form of this
+    mistake.
 
-    The shape it should take: derive `rigidity` from `frontier/n-XXX.md`'s own block, keep
-    `catalogue_rigid` as a separate and separately-glyphed annotation, and let
-    `CATALOGUE_RIGID` go -- a hard-coded set of `n` is what let the two halves merge in the
-    first place.
+    The annotation is kept rather than deleted, which is the part worth arguing for.
+    Dropping it would lose a fact the corpus holds and would make the figure quieter than
+    the evidence. It is now a `not-established` entry with `basis: catalogue-annotation`, a
+    **muted** `R` badge against the solid one, and its own line in the legend and its own
+    total. Two facts, two glyphs.
+
+    `n = 5` is the case that makes the distinction earn its keep. `X-007` establishes more
+    about it than the catalogue ever said -- an exact one-dimensional infinitesimal cone
+    refused at second order -- and still not local rigidity, so it holds the muted badge
+    while carrying first-party evidence in the frontier.
+
+    Fixing this also surfaced that the preview renderer probed only for `magick`,
+    ImageMagick 7's name, and so refused to regenerate on every Debian and Ubuntu box,
+    which still ship 6 as `convert`. Both are accepted now, and 6 renders the composite at
+    the same 2400x2676 the receipt records.
   regression: >-
-    None yet. What the fix owes is a test asserting that no figure entry claims a rigidity
-    state its frontier record does not carry, which is the check whose absence is this
-    entry. `tests/test_frontier_rigidity_assessment.py` holds exactly that line for the
-    frontier and has no counterpart on the figure side.
+    `test_the_figure_never_claims_a_rigidity_its_record_does_not_carry` asserts, for all
+    100 entries, that the figure's `established` agrees exactly with the record's
+    `locally-rigid` -- the line whose absence is this entry.
+    `test_a_catalogue_annotation_is_shown_but_never_counted` pins the other half: the three
+    annotated records are `not-established` with a muted badge, the totals count the two
+    kinds separately, and `n = 11` is `first-party-argument` with a solid one.
   bead: think-xdly
   recorded_in: packing/devtools/build_composite_figure_data.py

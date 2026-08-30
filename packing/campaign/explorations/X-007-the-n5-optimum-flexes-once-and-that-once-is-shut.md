@@ -281,8 +281,20 @@ difference is exactly the kind that gets lost in a citation.
 
 Also not established, and worth stating because it is easy to lose: everything here is
 at **fixed side**. The container side is Göbel’s exact optimum and is a constant, not a
-sixteenth variable. This is a statement about motion within the optimal container, not
-about what happens as the container grows.
+sixteenth variable.
+
+That caveat is load-bearing rather than formal, and the cheapest way to see it is to
+drop it. Adding the side as a sixteenth variable takes the rank to 15 — the side appears
+in no pair constraint — but the admissible cone opens to the full sixteen dimensions,
+and the second-order refusal goes with it: `A y >= -q` becomes feasible, satisfied by
+growing the side while translating two corner squares outward.
+Every coordinate that is pinned above, the corner squares’ own rotations included, is
+free once the box may grow.
+
+None of that is surprising and none of it is a weakness: a container with slack in it is
+not the object here.
+It is worth measuring precisely because “rigid” said without a container condition would
+be false, and the distance between the two readings is the whole sixteen dimensions.
 
 ## What Moves in the Record, and What Deliberately Does Not
 

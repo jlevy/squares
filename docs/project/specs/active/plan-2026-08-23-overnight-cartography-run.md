@@ -336,11 +336,12 @@ already decide its stated criterion need not open a ceremonial review phase.
 For the next supervised exact-research goal, use
 [session 045](../../../../packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md).
 Sessions 027 through 044 are terminal, and agendas 006 and 007 are closed.
-Open `BC-038` under `think-kdil` as the next bounded driver: decide whether wiring
-`evaluate_stress` to the shared row-jet inventory repays its build cost, at exact
-semantic equality and against the declared thresholds rather than against a profile.
-It is bounded because the deciding quantity is a count, not a timing — whether the calls
-share a number field and a stratum, which a profile cannot see.
+Open `BC-024` under `think-kr1d` as the next bounded driver: extend the retained broad
+contact-component census into a source-stratified taxonomy of chunk shapes, sizes,
+tilted-chunk counts and wall seatings, with the non-expressible residue characterized
+rather than dropped.
+It is bounded because it is descriptive: a pass over imported geometry with no search,
+and it emits no `H-044` verdict.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

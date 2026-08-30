@@ -383,3 +383,62 @@ def test_known_best_composite_png_reports_renderer_failure(
 
     with pytest.raises(RuntimeError, match="PNG preview renderer exited 1"):
         known_best_builder.update()
+
+
+def _figure_entries() -> dict[int, dict]:
+    record = json.loads(
+        (ROOT / "atlas/known-best/composite-figure.json").read_text(encoding="utf-8")
+    )
+    return {entry["n"]: entry for entry in record["figure"]["entries"]}
+
+
+def _frontier_rigidity(n: int) -> dict | None:
+    text = (ROOT / f"frontier/n-{n:03d}.md").read_text(encoding="utf-8")
+    return yaml.safe_load(text.split("---", 2)[1])["packing"]["rigidity"]
+
+
+def test_the_figure_never_claims_a_rigidity_its_record_does_not_carry() -> None:
+    """`D-385`: the figure decided this from `n` and never opened the record.
+
+    A module-level set of the four packings the catalogue annotates "Rigid." earned the
+    same solid glyph as the ten derived from an exact tiling, so a source's word and a
+    first-party argument rendered identically. This is `D-354`'s split failing to reach
+    the figure lane, and the assertion below is the line that was missing.
+    """
+    for n, entry in _figure_entries().items():
+        established = entry["rigidity"]["state"] == "established"
+        block = _frontier_rigidity(n)
+        carried = block is not None and block["property"] == "locally-rigid"
+        assert established == carried, (
+            f"n={n}: figure says {entry['rigidity']['state']} while the frontier record "
+            f"says {None if block is None else block['property']}"
+        )
+
+
+def test_a_catalogue_annotation_is_shown_but_never_counted() -> None:
+    """Dropping the annotation would lose a fact; merging it was the defect.
+
+    The figure keeps it, as a muted badge on a `not-established` entry, and the totals
+    count the two separately. `n = 5` is the case that makes this earn its keep: `X-007`
+    establishes more about it than the catalogue ever said, and still not local rigidity.
+    """
+    record = json.loads(
+        (ROOT / "atlas/known-best/composite-figure.json").read_text(encoding="utf-8")
+    )
+    entries = {entry["n"]: entry for entry in record["figure"]["entries"]}
+    annotated = sorted(
+        n for n, e in entries.items() if e["rigidity"]["basis"] == "catalogue-annotation"
+    )
+
+    assert annotated == [5, 28, 40]
+    assert record["figure"]["totals"]["rigidity_catalogue_annotated"] == len(annotated)
+    assert record["figure"]["totals"]["rigidity_established"] == 11
+    for n in annotated:
+        entry = entries[n]
+        assert entry["rigidity"]["state"] == "not-established"
+        rigid_badges = [badge for badge in entry["badges"] if badge["glyph"] == "R"]
+        assert [badge["style"] for badge in rigid_badges] == ["muted"]
+
+    # n=11 is the case the old rule under-credited: its rigidity is ours, not Kingbird's.
+    assert entries[11]["rigidity"]["basis"] == "first-party-argument"
+    assert [b["style"] for b in entries[11]["badges"] if b["glyph"] == "R"] == ["solid"]

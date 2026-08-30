@@ -323,9 +323,13 @@ is closed with all four commitments terminal, and
 [session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md)
 has continued past it into the live queue.
 Take the next slice from [`agenda-map.md`](packing/campaign/agenda-map.md).
-`BC-038` on `think-kdil` is the one in hand: it asks whether wiring `evaluate_stress` to
-the shared row-jet inventory repays its build cost, and the answer is arithmetic rather
-than opinion once the calls are counted rather than profiled.
+`BC-024` on `think-kr1d` is next: extend the retained broad contact-component census
+with minimal-partition shapes, wall seating and representative overlays into a
+source-stratified taxonomy with a characterized residue, emitting no `H-044` verdict.
+`BC-038` is closed and rejected on measured arithmetic — 35 `evaluate_stress` calls
+arrive with **eleven** distinct number fields, and `RowJetInventory` refuses a foreign
+field by identity, so the sharing it proposed mostly cannot happen; the floor is a
+`1.54x` ceiling against an exit that wants five-fold.
 `BC-010` and `BC-029` are **not** takeable despite what the map’s priority says: both
 are gated on independent acceptance of `exp-045`’s preregistered criterion, which
 records `decision: unresolved` with `needs_review: true`, and an unattended runner may
@@ -2452,15 +2456,6 @@ table above.
 - **[D-021](defects.md) is contained.** Floating-point LP refinement has a noise floor
   of about `1e-11` in the side, and eight rounds sit on it.
   Those numerical results may not claim a difference smaller than the floor.
-- **[D-385](defects.md) is outstanding, and it is about the figure most people see.**
-  The composite figure decides rigidity from a hard-coded set of `n` and never opens the
-  frontier record, so it badges `rigid (established)` in one glyph for the ten it
-  derives from an exact tiling and for four it takes from the catalogue printing
-  “Rigid.”. That over-credits `n = 5, 28, 40`, whose frontier records read
-  `undetermined`, and under-credits `n = 11`, whose `verified` first-party argument the
-  figure files as a catalogue annotation.
-  Read the badge as “rigid or so annotated” until this is fixed; the frontier records
-  themselves are correct.
 
 ## The Defect Record
 

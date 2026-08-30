@@ -43,6 +43,7 @@ properties:
       - exact_value_known
       - only_known_numerically
       - rigidity_established
+      - rigidity_catalogue_annotated
       - degree_known
       - degree_recorded_upstream
       - degree_derived_here
@@ -51,6 +52,7 @@ properties:
       exact_value_known: {type: integer, minimum: 0, maximum: 100}
       only_known_numerically: {type: integer, minimum: 0, maximum: 100}
       rigidity_established: {type: integer, minimum: 0, maximum: 100}
+      rigidity_catalogue_annotated: {type: integer, minimum: 0, maximum: 100}
       degree_known: {type: integer, minimum: 0, maximum: 100}
       degree_recorded_upstream: {type: integer, minimum: 0, maximum: 100}
       degree_derived_here: {type: integer, minimum: 0, maximum: 100}
@@ -111,13 +113,16 @@ $defs:
         type: object
         additionalProperties: false
         description: >-
-          established means a sound argument exists. not-established means no
-          argument is on hand, NEVER that the packing is known to have play.
+          established means THIS REPOSITORY holds a sound argument -- the record's own
+          rigidity block reads locally-rigid. not-established means no such argument is on
+          hand, NEVER that the packing is known to have play, and in particular a
+          catalogue-annotation basis under not-established means a source calls it rigid
+          and we have not shown it (D-385).
         required: [state, basis, provenance]
         properties:
           state: {enum: [established, not-established]}
           basis:
-            enum: [perfect-square-tiling, catalogue-annotation, none]
+            enum: [perfect-square-tiling, first-party-argument, catalogue-annotation, none]
           evidence: {type: [string, 'null']}
           provenance: {$ref: '#/$defs/provenance'}
       badges:

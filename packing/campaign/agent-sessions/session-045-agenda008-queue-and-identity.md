@@ -295,7 +295,7 @@ session:
       and it is not a timing one -- whether the 35 calls actually share a field identity
       and stratum is not decidable from a profile, and no speedup means anything until they
       are shown to.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       BC-049's n = 5 slice is done and its remaining instances need an exact construction
@@ -319,13 +319,145 @@ session:
     fallback: >-
       Reject the optimization and record the measured reason, which the exit names as an
       acceptable answer and which is the more reusable half of an efficiency loop.
+    outcome: >-
+      Rejected on measured arithmetic, which is the exit's first branch. The first
+      obligation decided it and no timing argument was needed: 35 evaluate_stress calls
+      arrive with 11 distinct number fields, and RowJetInventory refuses a foreign field by
+      identity, so most of the sharing the commitment hoped for cannot happen at all.
+
+      Ran 70 minutes against a 45-minute budget. The overrun is the driver: the deciding
+      measurement is the seven-minute exhaustive-exact group, and it had to run three times
+      -- once to measure, once after the identity fix, once to confirm the counts
+      reproduce. Two of those three were avoidable only by not checking, which is D-384.
+    evidence:
+    - >-
+      '47 active_row_jets rebuilds cover 17 distinct (field, stratum) pairs, so 18 are
+      shareable and 17 are unavoidable however the sharing is arranged.'
+    - >-
+      'The floor is about 280s against 430s as it stands: a 1.54x ceiling. The exit
+      requires five-fold and a warm median of 45s, so it is missed by 3.2x and 6.2x.'
+    - >-
+      'The eager inventory this commitment proposes is the weaker arrangement: 11 fields
+      times 3 strata is 33 builds where 17 pairs are requested, so it removes 14 rebuilds
+      and adds 16 nobody asked for -- 1.36x against a lazy memo''s 1.54x.'
+    - >-
+      'The trigger measurement compared unlike things. 0.025s per call is evaluate_stress
+      with the rows handed to it; 11.95s on the owner_row_jets arm includes building them.
+      Sharing moves that cost rather than removing it.'
+    - >-
+      'D-384: the first counter keyed on id(field), a recycled memory address, and two
+      identical runs disagreed. Found by running the measurement twice before trusting
+      either answer, which is the practice worth keeping.'
+    stop_reason: >-
+      Both halves of the exit are unreachable by a wide margin and the reason is structural
+      rather than incidental, so further measurement would only re-price the same floor.
+    next_action: >-
+      Take D-385 as its own declared block. It was found during BC-049 and recorded
+      outstanding because slipping a published-figure change into another commitment's
+      block is the wrong way to take it; as its own block with its own exit that objection
+      does not apply. Then BC-024 and BC-019 from the live queue. BC-010 and BC-029 stay
+      out of scope: both are gated on independent acceptance of exp-045's preregistered
+      criterion, which an unattended runner may not grant itself.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      D-385: the composite figure decides rigidity from a hard-coded set of n and never
+      opens the frontier record, so one glyph covers ten packings derived from an exact
+      tiling and four taken from the catalogue printing "Rigid." That over-credits
+      n = 5, 28 and 40 and files n = 11's own verified argument under catalogue annotation.
+      This is D-354's split failing to reach the figure lane.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      Found during BC-049 and recorded outstanding rather than fixed, on the ground that a
+      published-figure change does not belong inside another commitment's block. Taken as
+      its own block, with its own exit, that objection does not apply -- and it errs
+      flattering in the most widely seen artifact here, which is not a good thing to leave
+      standing overnight.
+    budget_minutes: 50
+    started_at: '2026-08-30T10:16:00Z'
+    deadline_at: '2026-08-30T11:06:00Z'
+    expected_output: >-
+      The figure derives rigidity from each record's own frontier block, distinguishes an
+      establishment from a transcribed annotation rather than merging them into one glyph,
+      and carries a test asserting no entry claims a state its frontier record does not.
+      Or a typed statement of why the figure cannot express the distinction.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      Stop if fixing the badge requires asserting anything about n = 28 or n = 40 beyond
+      what their records carry. They have no first-party rigidity evidence and this block
+      does not manufacture any; the point is to stop claiming they do.
+    fallback: >-
+      Record the typed statement of what the schema's binary established/not-established
+      state cannot express, which is itself the useful half.
+    outcome: >-
+      Fixed, and the fallback was not needed: the binary state turned out to be enough once
+      the annotation was allowed a badge of its own. The figure now reads each record's
+      rigidity block, `established` means the block says locally-rigid and nothing else
+      does, and the catalogue's word is kept as a muted badge on a not-established entry
+      with its own legend line and its own total. Two facts, two glyphs.
+    evidence:
+    - >-
+      'The badge count falls from 14 to 11 -- the ten tilings plus n = 11, whose verified
+      first-party argument the old rule filed under catalogue-annotation.'
+    - >-
+      'n = 5, 28 and 40 move to not-established with a muted badge. n = 5 is the case that
+      earns the distinction: X-007 establishes more about it than the catalogue ever said
+      and still not local rigidity.'
+    - >-
+      'CATALOGUE_RIGID is gone. The basis is keyed on the evidence id the record carries,
+      because deciding from n what the record already states is the general form of this
+      mistake.'
+    - >-
+      'Two tests over all 100 entries: established agrees exactly with the record''s
+      locally-rigid, and the annotation is shown, muted, and counted separately.'
+    - >-
+      'Found in passing: the preview renderer probed only for `magick`, ImageMagick 7''s
+      name, so it refused to regenerate on any box shipping 6 as `convert`. Both accepted
+      now, and 6 renders at the same 2400x2676 the receipt records.'
+    stop_reason: >-
+      Both halves of the exit are met and the regenerated figure, PDF and PNG all agree
+      with the record.
+    next_action: >-
+      Then BC-024 and BC-019 from the live queue. BC-010 and BC-029 stay out of scope.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      BC-024: across the imported n <= 100 corpus, which chunk shapes, chunk sizes,
+      tilted-chunk counts and wall seatings actually recur, and what does the
+      non-expressible residue have in common?
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      D-385's figure block is closed. BC-024 is the next live-queue cell that is
+      descriptive rather than adjudicating, so it can run without touching a proved count.
+    budget_minutes: 50
+    started_at: '2026-08-30T11:10:00Z'
+    deadline_at: '2026-08-30T12:00:00Z'
+    expected_output: >-
+      A source-stratified taxonomy over the corpus -- chunk shapes, sizes, tilted-chunk
+      counts, wall seatings -- plus a characterized residue, feeding the partition
+      instrument design. No H-044 verdict is emitted.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      Stop if the taxonomy needs a quantity the retained census does not carry. The exit is
+      descriptive; inventing a detector to fill a gap would make this an adjudicating round
+      under a descriptive budget.
+    fallback: >-
+      A typed statement of which taxonomic axes the retained geometry cannot support,
+      which is what the partition-instrument design would need anyway.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Record the equivalence result or the rejection, then take the next live-queue cell.
-      BC-010 and BC-029 stay out of scope: both are gated on independent acceptance of
-      exp-045's preregistered criterion, which an unattended runner may not grant itself.
+      Then BC-019 from the live queue. BC-010 and BC-029 stay out of scope: both are gated
+      on independent acceptance of exp-045's preregistered criterion.
   primary_bead: think-s424
   status: in_progress
   budget:
@@ -564,10 +696,10 @@ session:
   checks: []
   stop_reason: null
   next_action: >-
-    Finish BC-038 on `think-kdil`: the counts are measured and the arithmetic points at the
-    exit's reject branch, so what is owed is the retained record, the rejection stated
-    against the declared thresholds rather than against a profile, and the OR-7 pass over
-    the block's documents.
+    Take BC-024 on `think-kr1d` once D-385's figure block closes: extend the retained broad
+    contact-component census with minimal-partition shapes, wall seating and representative
+    overlays, into a source-stratified taxonomy with a characterized residue, emitting no
+    H-044 verdict.
 ---
 # Session-045 — Agenda-008
 

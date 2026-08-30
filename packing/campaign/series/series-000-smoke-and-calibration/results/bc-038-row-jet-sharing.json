@@ -1,0 +1,41 @@
+{
+  "counts": {
+    "active_row_jets_rebuilds": 47,
+    "distinct_field_stratum_pairs": 17,
+    "distinct_number_fields": 11,
+    "eager_inventory_builds": 33,
+    "evaluate_stress_calls": 35,
+    "registered_strata": 3,
+    "shareable_rebuilds": 18
+  },
+  "schema_version": 2,
+  "subject": {
+    "commitment": "BC-038",
+    "driver": "pytest -q -p no:cacheprovider tests -m exhaustive_exact",
+    "driver_status": 0,
+    "question": "does wiring evaluate_stress to the shared row inventory repay its build cost at exact semantic equality?"
+  },
+  "timing_not_a_contract": {
+    "build_seconds": {
+      "as_it_stands": 390.84,
+      "eager_inventory_per_field": 276.314,
+      "lazy_memo_per_field_stratum": 240.614
+    },
+    "driver_seconds": {
+      "as_it_stands": 429.964,
+      "eager_inventory_per_field": 315.439,
+      "lazy_memo_per_field_stratum": 279.738
+    },
+    "per_stratum_median_seconds": {
+      "A": 7.932,
+      "B": 8.527,
+      "interior": 8.661
+    },
+    "speedup": {
+      "eager_inventory_per_field": 1.36,
+      "lazy_memo_per_field_stratum": 1.54
+    },
+    "unavoidable_overhead_seconds": 39.125,
+    "why": "retained for the report and deliberately excluded from --check: seconds move with host load, counts do not, and it is the counts that decide whether there is anything to share"
+  }
+}
