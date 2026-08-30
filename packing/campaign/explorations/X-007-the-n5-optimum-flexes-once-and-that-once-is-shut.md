@@ -166,8 +166,9 @@ it is — and the second is still open:
   At `n = 40` that was 208 of 560 pair rows; at `n = 5`, none, because every contact
   here is a corner on the *interior* of an edge.
 - [`D-391`](../../../defects.md): the tangent cone at a corner-to-corner touch is a
-  **union** of half-spaces, not their intersection — see the next section, where this
-  document argued the point in prose and then relied on it without checking it.
+  **union** of half-spaces, not their intersection.
+  “What This Establishes, and the One Step It Does Not”, below, is where this document
+  argued that point in prose and then relied on it without checking it.
 
 ## First Order: One Free Direction, Fourteen Certificates
 
@@ -441,8 +442,18 @@ spanning rank five.
 Every one of the seven is refused at second order by its own verified
 self-stress. And every one of the seven — found by two unrelated routes — turns squares
 of the tilted block and leaves all twenty-four axis-aligned squares exactly where they
-are. So the frame is held and the block is the mechanism, which is a sharper statement
-than “`n = 40` flexes” and the one worth carrying forward.
+are.
+
+**The frame is mostly held, and the “mostly” is the honest part.** Fifty-two of its
+seventy-two coordinates are *proved* zero in every branch: every branch’s cone sits
+inside the relaxed one, so a coordinate the all-branch rows pin is pinned however the
+disjunctions resolve, and each of the fifty-two carries a Farkas certificate verified in
+the field. The other twenty are not proved.
+Forty targeted searches over them reached twenty-four directions in the relaxed cone and
+found none admissible, which is coverage rather than a proof — the same limitation the
+translation-escape screen carries and is registered for.
+So “the block is the mechanism” is a sharper statement than “`n = 40` flexes” and it is
+not yet a theorem; twenty coordinates stand between.
 
 So the shape of the two results is identical — flexible at first order, shut at second —
 and the strength is not.

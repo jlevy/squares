@@ -31,9 +31,14 @@ is strictly larger than that first line: six further motions are retained here, 
 verified to open an all-branch contact strictly -- which is what puts it outside the
 subspace the first search covered -- and each refused at second order by its own
 self-stress. They span rank five, and **every admissible direction found by any route
-moves only the tilted block.** No frame square moves in any of them. So the twenty-four
-axis-aligned squares are held and the sixteen turned ones are the mechanism, which is a
-sharper statement than "n = 40 flexes" and a more useful one.
+moves only the tilted block.** No frame square moves in any of them.
+
+That is an observation about seven vectors, and half of it is a proof. Fifty-two of the
+frame's seventy-two coordinates are pinned in every branch by certificates over the
+all-branch rows. The other twenty are not: forty targeted searches found no admissible
+direction moving them, which is coverage and not a proof. So "the block is the mechanism"
+is a sharper statement than "n = 40 flexes" and it is twenty coordinates short of a
+theorem.
 
 The parallel with `n = 5` is exact in shape and larger in scale: there, one square's
 rotation is free at first order and refused at second by a verified self-stress. Here

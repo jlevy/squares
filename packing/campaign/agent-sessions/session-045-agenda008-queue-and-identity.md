@@ -1340,7 +1340,7 @@ session:
       the artifacts: X-007, the bracket record, the frontier block, the defect entries, and
       the four claims that could be read as stronger than they are -- flexible, refused,
       bounded, block-confined.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       OR-7: the documentation pass belongs at a block boundary, and this is one -- the
@@ -1361,12 +1361,79 @@ session:
       results is to answer it instead, and that is how a checkpoint stops being one.
     fallback: >-
       The trace alone, without corrections, if nothing needs correcting.
+    outcome: >-
+      Two sub-agents, one tracing every claim to its evidence and one re-deriving the
+      numbers by its own code. The arithmetic held everywhere: 608/400/208, 98/42,
+      248/115/5, 6 rays of rank 5 within 7 directions spanning 6, 104 of 283, 52 of 72, 66
+      of 120, 75 of 114, bound 45, relaxed span 41 -- all reproduced independently. So did
+      the three inferences worth doubting: that 75 independent functionals vanishing forces
+      the cone into 45 dimensions; that a branch ADDS rows and so its cone is inside the
+      relaxed one (the direction the whole certificate route depends on); and that every row
+      carrying weight in a self-stress is genuinely tight, which is what keeps a refusal
+      from being assembled out of non-binding constraints.
+
+      **Two real overstatements, both mine, both corrected.** "So the frame is held and the
+      block is the mechanism" appeared in X-007 and in the tool's docstring as a conclusion,
+      grounded in seven directions that happen to leave the frame fixed. The evidence is
+      split: 52 of 72 coordinates proved, 20 covered only by a search that found nothing.
+      Neither document carried that split. Both now say it, and both say the claim is twenty
+      coordinates short of a theorem.
+
+      **One gap left open deliberately.** frontier/n-040 still reads
+      `assurance: numerically-checked`, `method: numerical-multiprecision`, with the
+      translation-escape screen as its certificate and no evidence id for any of this work.
+      That is under-reporting rather than overclaiming, so it is safe, and it means the
+      afternoon's results are invisible from the frontier. Registering them is a record
+      slice with its own contract questions and the kill condition said this phase may not
+      become one. Phase 22.
+    evidence:
+    - packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md
+    - packing/devtools/assess_n40_rigidity.py
+    stop_reason: >-
+      Exit reached, and the kill condition held: the frontier gap was recorded and handed
+      to the next phase rather than answered inside a review.
+    next_action: >-
+      Register the n = 40 evidence in the frontier, without touching the property.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-049
+    bead: think-xdly
+    objective: >-
+      Make the n = 40 work findable from the frontier. `frontier/n-040.md` still cites the
+      translation-escape screen as its certificate and carries `numerically-checked` /
+      `numerical-multiprecision`, so a reader of the corpus cannot reach any of this. The
+      change is the same one `n = 5` took earlier in this session: the `property` stays
+      `undetermined` and everything saying *why* moves to the first-party evidence.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Phase 21's declared next_action, and the one finding it deliberately did not act on.
+    budget_minutes: 45
+    started_at: '2026-08-30T13:49:00Z'
+    deadline_at: '2026-08-30T14:34:00Z'
+    expected_output: >-
+      `n = 40`'s rigidity block citing a new first-party evidence id and the bracket record,
+      with `property: undetermined` unchanged, and `assess_frontier_rigidity` still agreeing
+      with its own derivation.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --fast
+    kill_condition: >-
+      `D-354` is the standing one: the catalogue's bare "Rigid." stays in
+      `reported_upper_bound.catalogue_rigid` and never becomes a finding, and
+      `test_frontier_rigidity_assessment.py` asserts `undetermined` for n = 5, 28 and 40. A
+      guard that has to be weakened to land this is a guard that was telling me something.
+      An infinitesimal flex is also not a motion: `not-rigid` is not available and is the
+      error this record is most exposed to.
+    fallback: >-
+      Leaving the block alone and recording why, which is where phase 21 left it and is not
+      a worse state than now.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Depends on what the read finds. If nothing, the handoff: n = 40 needs an instrument
-      this session does not have, and n = 28 needs a source.
+      Finalization: the handoff for what n = 40 needs next, and what n = 28 still waits on.
   primary_bead: think-s424
   status: in_progress
   budget:
