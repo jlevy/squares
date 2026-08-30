@@ -564,10 +564,10 @@ session:
   checks: []
   stop_reason: null
   next_action: >-
-    Finish BC-084 on `think-9qtn`: apply the sub-agent attributions that are provable
-    supersets of their steps' true inputs, leave the rest unattributed with the typed
-    statement the exit accepts, act on any under-selection finding before pushing, and run
-    the OR-7 pass over the block's documents.
+    Finish BC-038 on `think-kdil`: the counts are measured and the arithmetic points at the
+    exit's reject branch, so what is owed is the retained record, the rejection stated
+    against the declared thresholds rather than against a profile, and the OR-7 pass over
+    the block's documents.
 ---
 # Session-045 — Agenda-008
 

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 383
+count: 385
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -10613,3 +10613,107 @@ defects:
     directions: a second gate is still refused, and a lost marker is still survivable.
   bead: think-s424
   recorded_in: packing/src/sqpack/cli/validate.py
+
+- id: D-384
+  title: A count keyed on id() moved between two identical runs
+  date: '2026-08-30'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: control_cell
+  latent_for: 'two runs, about fifteen minutes'
+  severity: low
+  status: fixed
+  what: >-
+    `devtools/price_row_jet_sharing` decides `BC-038` by counting how many
+    `evaluate_stress` calls share a number field, since an inventory that cannot be shared
+    saves nothing. It keyed that on `id(field)`.
+
+    `id()` is a memory address, and CPython reuses the address of a collected object. Two
+    consecutive runs of the same twenty-four tests reported 11 and then 10 distinct number
+    fields, with `shareable_rebuilds` moving from 19 to 18. Both runs passed all 24 tests
+    and both counted 47 rebuilds and 35 stress calls, so nothing about the work changed; a
+    field built by one test was collected and a later test's field landed on its address.
+  consequence: >-
+    Contained, because the numbers never left the working tree: the tool was run twice
+    before anything was written down, and the disagreement is what surfaced the bug. Had it
+    been run once, a retained record would have carried a count that its own `--check`
+    would then have contradicted at the next run, and the obvious reading of that would
+    have been that the test suite had changed.
+
+    The verdict it supports does not move -- 47 rebuilds against 17 distinct pairs is a
+    1.6x ceiling either way, nowhere near the five-fold the commitment requires -- so this
+    cost a re-run rather than a conclusion.
+  fix: >-
+    An `Identities` map that assigns small integers by `is` comparison and holds a
+    reference to each object it has seen, so an address cannot be recycled underneath the
+    key. Holding about a dozen degree-two fields alive for the length of a run is a
+    rounding error against the row jets being measured, and it is what makes the count a
+    count.
+  regression: >-
+    None mechanical: the tool is not a gate step, deliberately, because its driver is the
+    seven-minute exhaustive-exact group and the decision it supports is taken once. What
+    replaces a test is the practice that caught it -- run a new measurement twice and
+    compare before retaining either answer. That is cheap, it generalizes past this tool,
+    and it is the only reason this was found at all.
+  bead: think-kdil
+  recorded_in: packing/devtools/price_row_jet_sharing.py
+
+- id: D-385
+  title: The composite figure badges rigidity from a hard-coded set and never reads the frontier
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: 'since the figure gained a rigidity badge; surfaced when n=5 acquired first-party evidence'
+  severity: medium
+  status: outstanding
+  what: >-
+    `devtools/build_composite_figure_data.py` decides each record's rigidity from `n`
+    alone. A perfect square gets `state: established, basis: perfect-square-tiling`; any `n`
+    in the module-level `CATALOGUE_RIGID = {5, 11, 28, 40}` gets `state: established,
+    basis: catalogue-annotation`; everything else gets `not-established`. The frontier
+    record's own `rigidity` block is never opened.
+
+    Both bases then emit the same badge, glyph `R`, meaning `rigid (established)`, and both
+    count toward the same `rigidity_established` total of 14.
+
+    So the figure says "established" for four packings on the strength of the catalogue
+    printing the word "Rigid.", which is the transcription half of the `D-354` split, and it
+    says it in the same glyph it uses for the ten it derives from an exact tiling.
+  consequence: >-
+    Two errors in opposite directions, from one missing read.
+
+    It over-credits. `n = 28` and `n = 40` have no first-party rigidity evidence at all and
+    their frontier records read `undetermined`; `n = 5` now reads `undetermined` on a
+    first-party exact argument that stops short of local rigidity (`X-007`). The figure
+    badges all three `rigid (established)`.
+
+    It under-credits. `n = 11` carries `E-n011-trump-local-rigidity` at `assurance:
+    verified` -- 128 branchwise linearized cones over an exact field -- and the figure files
+    it under `catalogue-annotation`, crediting Kingbird for this repository's own strongest
+    rigidity result.
+
+    The figure is the most widely seen artifact here, and `established` is exactly the word
+    the field split exists to reserve. The provenance fields are honest and nobody reads
+    them; the glyph is what a reader takes away.
+  fix: >-
+    None yet, deliberately. The change is small in code and not small in judgement: reading
+    the frontier `rigidity` block means the badge count moves from 14 to 11, the legend
+    needs to distinguish a derived establishment from a transcribed annotation, and the
+    published SVG and PDF both regenerate. That is a design decision about a published
+    figure, and it was found in the middle of an unrelated commitment by an unattended run,
+    which is the wrong moment to take it.
+
+    The shape it should take: derive `rigidity` from `frontier/n-XXX.md`'s own block, keep
+    `catalogue_rigid` as a separate and separately-glyphed annotation, and let
+    `CATALOGUE_RIGID` go -- a hard-coded set of `n` is what let the two halves merge in the
+    first place.
+  regression: >-
+    None yet. What the fix owes is a test asserting that no figure entry claims a rigidity
+    state its frontier record does not carry, which is the check whose absence is this
+    entry. `tests/test_frontier_rigidity_assessment.py` holds exactly that line for the
+    frontier and has no counterpart on the figure side.
+  bead: think-xdly
+  recorded_in: packing/devtools/build_composite_figure_data.py

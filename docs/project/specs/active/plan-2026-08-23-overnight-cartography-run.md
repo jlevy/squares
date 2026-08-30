@@ -336,10 +336,11 @@ already decide its stated criterion need not open a ceremonial review phase.
 For the next supervised exact-research goal, use
 [session 045](../../../../packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md).
 Sessions 027 through 044 are terminal, and agendas 006 and 007 are closed.
-Open `BC-084` under `think-9qtn` as the next bounded driver: give the gate change-scoped
-selection, so a change runs the steps it can reach rather than the whole gate, and prove
-the selector cannot silently under-select.
-It runs first because every later block pays the gate’s cost at each of its checkpoints.
+Open `BC-038` under `think-kdil` as the next bounded driver: decide whether wiring
+`evaluate_stress` to the shared row-jet inventory repays its build cost, at exact
+semantic equality and against the declared thresholds rather than against a profile.
+It is bounded because the deciding quantity is a count, not a timing — whether the calls
+share a number field and a stratum, which a profile cannot see.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

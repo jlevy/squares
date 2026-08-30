@@ -319,16 +319,41 @@ The renderer’s standing exact-motion control remains independently replayable:
 
 **As of 2026-08-30 — start here.**
 [agenda-008](packing/campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md)
-is running, recorded in
-[session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md).
-Three of its four blocks are closed; `BC-084` on `think-9qtn` is the open one.
+is closed with all four commitments terminal, and
+[session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md)
+has continued past it into the live queue.
+Take the next slice from [`agenda-map.md`](packing/campaign/agenda-map.md).
+`BC-038` on `think-kdil` is the one in hand: it asks whether wiring `evaluate_stress` to
+the shared row-jet inventory repays its build cost, and the answer is arithmetic rather
+than opinion once the calls are counted rather than profiled.
+`BC-010` and `BC-029` are **not** takeable despite what the map’s priority says: both
+are gated on independent acceptance of `exp-045`’s preregistered criterion, which
+records `decision: unresolved` with `needs_review: true`, and an unattended runner may
+not grant that acceptance to itself.
 
-**Take `BC-084` first.** It gives the gate change-scoped selection: a changed path
-selects only the steps it can affect, an unrecognised path selects the whole gate rather
-than an empty set, and a step declaring nothing is claimed by everything.
-The mechanism, its tests and its negative controls are in place; what remains is
-attributing the roughly twenty-eight steps still unattributed, and the commitment’s exit
-accepts a typed statement of which ones resist attribution as an answer.
+**`n = 5` is second-order rigid, and that is a first-party result.**
+[X-007](packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md)
+settles the question `BC-049` asked, exactly, over `Q(sqrt 2)` at Göbel’s construction
+rather than at the retained decimal witness — which is `2.4e-30` off the diagonal and so
+infeasible at the scale a certificate works at.
+The cone of infinitesimal motions is exactly the line spanned by rotation of the middle
+square; the other fourteen coordinates are pinned by Farkas certificates verified in the
+field; and that one direction is refused at second order by a verified self-stress.
+This confirms and strengthens the numerical account `BC-069` reached from the promotion
+side, including its observation that the contacting corner sits at the midpoint of the
+contacted edge — which turns out to be the reason for both the first-order blindness and
+the second-order obstruction.
+
+The frontier property stays `undetermined`, and the reason is worth carrying forward:
+second-order rigidity is not local rigidity, the step that would close the gap is a
+curve-selection argument that `X-007` writes out as prose and no replay checks, and the
+property enum has no word for what was actually established.
+What did change is everything saying why — `verified` rather than `numerically-checked`,
+`exact-algebraic` rather than `numerical-multiprecision`, and a first-party evidence id
+in place of the screen’s — which takes `n = 5` out of the assessment tool’s ownership,
+so it joins `n = 11` as left to a stronger argument.
+Both `D-354` guards stayed green without being edited, which was the test the change was
+held to.
 
 **Read [`OR-4`](operating-rules.md) before trusting any older queue.** `BC-081` found
 that agenda-005 was advertising four commitments as takeable which agenda-006 had
@@ -2427,19 +2452,28 @@ table above.
 - **[D-021](defects.md) is contained.** Floating-point LP refinement has a noise floor
   of about `1e-11` in the side, and eight rounds sit on it.
   Those numerical results may not claim a difference smaller than the floor.
+- **[D-385](defects.md) is outstanding, and it is about the figure most people see.**
+  The composite figure decides rigidity from a hard-coded set of `n` and never opens the
+  frontier record, so it badges `rigid (established)` in one glyph for the ten it
+  derives from an exact tiling and for four it takes from the catalogue printing
+  “Rigid.”. That over-credits `n = 5, 28, 40`, whose frontier records read
+  `undetermined`, and under-credits `n = 11`, whose `verified` first-party argument the
+  figure files as a catalogue annotation.
+  Read the badge as “rigid or so annotated” until this is fixed; the frontier records
+  themselves are correct.
 
 ## The Defect Record
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 383 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 385 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 88 | asserted something false about the mathematics |
 | validity | 92 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 142 | recorded something its own evidence contradicts |
+| bookkeeping | 144 | recorded something its own evidence contradicts |
 | robustness | 46 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
@@ -2449,7 +2483,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-nine defects in 383, and no soundness defect
+**The automated gate has caught forty-nine defects in 385, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

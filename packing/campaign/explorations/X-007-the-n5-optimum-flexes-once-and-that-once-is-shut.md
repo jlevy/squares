@@ -237,10 +237,14 @@ the second-order analysis no longer applies to the thing being analysed.
 The **correct** version needs no reparametrization at all; it runs the same argument
 inductively on the arc’s own coefficients.
 Suppose the pose is not isolated in the feasible set.
-The set is semi-algebraic — near this pose the non-overlap condition reduces to exactly
-these twenty polynomial inequalities in the centres and in `(cos θ, sin θ)`, because
-every other separating axis is strictly separating here and stays so nearby — so the
-curve selection lemma gives a semi-algebraic arc into it, and Puiseux gives
+The set is semi-algebraic, and near this pose it is cut out by exactly these twenty
+polynomial inequalities in the centres and in `(cos θ, sin θ)`. Two convex polygons are
+disjoint when *some* axis separates them, so in general the condition is a maximum over
+candidate axes rather than one inequality.
+Here that maximum is attained at the contact normal and nowhere near it: along every
+other candidate axis the two squares overlap in projection at this pose, strictly, and
+therefore in a neighbourhood of it.
+So the curve selection lemma gives a semi-algebraic arc into the set, and Puiseux gives
 `gamma(s) = p + sum_{k >= m} a_k s^k` with `a_m != 0`. Then:
 
 - The `s^m` coefficient of `g_j(gamma(s))` is `a_j . a_m`, so feasibility forces
