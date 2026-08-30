@@ -193,9 +193,13 @@ def trailing_ceilings() -> dict[int, tuple[Decimal, Decimal]]:
 
 def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> None:
     trailing = trailing_ceilings()
-    # Not a target to be held at 33; a measurement, and a loud one. Every one of these
-    # is a case where reading `verified_upper_bound` as s(n) overstates the side length.
-    assert len(trailing) == 33
+    # Not a target to be held at any number; a measurement, and a loud one. Every one of
+    # these is a case where reading `verified_upper_bound` as s(n) overstates the side
+    # length. It was 33 until D-398 promoted n = 40, 65 and 89 off the integer grid ceiling
+    # onto Goebel's exact family construction, whose certificates had been in the gate for
+    # two sessions while the records still declared a mathematical blocker. Moving it down
+    # is the point of the measurement, not a break in it.
+    assert len(trailing) == 30
     for n, (reported, verified) in trailing.items():
         assert verified > reported, n
     worst = max(verified - reported for reported, verified in trailing.values())

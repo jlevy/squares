@@ -11445,7 +11445,7 @@ defects:
   detected_by: review
   latent_for: 'n = 40 since session-045 closed; n = 65 and n = 89 since session-046 closed'
   severity: medium
-  status: outstanding
+  status: fixed
   what: >-
     `n = 40`, `n = 65` and `n = 89` each carry the identical typed blocker in their
     frontier record: `kind: mathematics`, detail "No formal certificate currently supports
@@ -11477,15 +11477,24 @@ defects:
     that the record has not been told about, so a certificate can land and the blocker
     stays quietly true-looking.
   fix: >-
-    None yet, and the remaining work is enumerated rather than estimated. Three evidence
-    records on the `E-n005-gobel-upper` template, each `verified` / `exact-algebraic` with
-    the case package as certificate and its `verify_exact` as replay; three
-    `verified_upper_bound` blocks moved to the exact side with `exact_form` and a value at
-    the witness's own depth; three blockers removed and three "the verified upper bound is
-    a ceiling" sections deleted, atomically, since `assurance.py` refuses either half
-    alone. Then the trailing-ceiling count in
-    `tests/test_verified_upper_bound_contract.py`, which is written as a measurement and
-    falls from 33 to 30, and the counts quoted in `frontier/README.md` and `SYNOPSIS.md`.
+    Two evidence records, not three: `E-n040-gobel-upper` for `n = 40`, and
+    `E-gobel-family-upper` scoped to `[65, 89]`, because one replay of
+    `cases.gobel_family.verify_exact` decides both and a record per size would have claimed
+    two independent checks where there is one. Both `verified` / `exact-algebraic`,
+    certificate the case package, replay its `verify_exact`.
+
+    Then, per size and atomically, since `assurance.py` refuses either half alone:
+    `verified_upper_bound` moved off the integer grid onto the exact side, its `exact_form`
+    matching the reported bound's string exactly and its value the exact side rounded to
+    the witness's own depth; the new record added to `reported_upper_bound.evidence`; the
+    blocker emptied; and the "verified upper bound is a ceiling" section deleted.
+
+    The trailing-ceiling count in `tests/test_verified_upper_bound_contract.py` falls from
+    33 to 30, carrying the reason rather than just the number, and `frontier/README.md`'s
+    "33 of the 100 cases" follows it. `devtools/price_gobel_family.py` was stale in the
+    same direction and by the same cause -- it still printed "exact and unbuilt at
+    [65, 89]" about constructions the gate was running -- so its `[5, 40]` literal is now
+    a named `BUILT_HERE` constant carrying why it drifted.
 
     One asymmetry is worth carrying into that work rather than rediscovering. Each retained
     witness is its exact side *correctly rounded* to the digits it carries -- not truncated
@@ -11501,12 +11510,17 @@ defects:
     and `3e-33` is far inside that -- but the promotion is the operation that would make it
     wrong.
   regression: >-
-    None, and the missing detector is the point rather than an omission. The stale-blocker
-    check reads only the record's two bound fields, so it cannot see a certificate the
-    record does not cite. What would catch this class is a sweep from the other direction:
-    every case package that verifies a construction exactly should be required to be cited
-    by the frontier record for its `n`. That check does not exist, and until it does a
-    landed certificate goes unrecorded silently.
+    None, and the missing detector is the point rather than an omission -- the promotion
+    fixed the instance and not the class. The stale-blocker check reads only the record's
+    two bound fields, so it cannot see a certificate the record does not cite. What would
+    catch this is a sweep from the other direction: every case package that verifies a
+    construction exactly should be required to be cited by the frontier record for its `n`.
+    That check does not exist, and until it does the next landed certificate goes
+    unrecorded just as silently. `think-xdly` carries it.
+
+    What the fix does leave behind is narrower and worth naming as what it is: the
+    trailing-ceiling count is now `30` in a test that says it is a measurement, so the next
+    promotion fails that assertion and has to say why -- which is a tripwire, not a check.
   bead: think-xdly
   recorded_in: packing/frontier/n-040.md
 - id: D-399

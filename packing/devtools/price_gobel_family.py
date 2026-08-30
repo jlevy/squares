@@ -128,6 +128,17 @@ def retained() -> dict[int, dict[str, Any]]:
     return table
 
 
+BUILT_HERE = [5, 40, 65, 89]
+"""The sizes whose exact construction this repository holds.
+
+`n = 5` and `n = 40` have their own case packages; `n = 65` and `n = 89` are built by
+`cases/gobel_family`, which session-046 added. This was a literal `[5, 40]` until then,
+and stayed a literal for one session after -- long enough for the record to print "exact
+and unbuilt at [65, 89]" about two constructions the gate was already running. See
+`D-398`, which is the same staleness in the frontier records.
+"""
+
+
 def assess() -> dict[str, Any]:
     table = retained()
     rows: list[dict[str, Any]] = []
@@ -180,8 +191,8 @@ def assess() -> dict[str, Any]:
         "family": rows,
         "reached": len(rows),
         "optimal_at": [row["n"] for row in optimal],
-        "already_built_here": [5, 40],
-        "buildable_and_not_built": [row["n"] for row in optimal if row["n"] not in {5, 40}],
+        "already_built_here": BUILT_HERE,
+        "buildable_and_not_built": [row["n"] for row in optimal if row["n"] not in BUILT_HERE],
         "the_near_miss": {
             "n": 28,
             "family_side": "3 + 4/sqrt(2) = 5.828427...",

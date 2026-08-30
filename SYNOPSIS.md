@@ -2558,18 +2558,21 @@ The wake events naming the failed check were delivered six times and read once, 
 the fact. The tiers are right; using one of them as though it were the other was not.
 
 [D-398](defects.md) is the record being behind its own toolchain rather than wrong about
-it, and it is the one still open.
-`n = 40`, `n = 65` and `n = 89` each declare a blocker of kind `mathematics` reading “No
-formal certificate currently supports the tighter reported upper bound”, and each keeps
-its verified ceiling at the integer grid — `7`, `9`, `10`. All three certificates exist
-and run in the gate: 780 pairs decided by exact sign over `Q(√2)` at `n = 40`, 2080 at
-`n = 65`, 3916 at `n = 89`. A feasible packing at side `s`, decided exactly, is a proof
-that `s(n) ≤ s`, so the mathematics the blocker calls missing is done and what is
-missing is an evidence record naming it.
-The direction is conservative — the register understates what can be certified — and the
-reason nothing caught it is worth more than the instance: the stale-blocker check
-compares a record’s two bound fields to each other, so a certificate can land without
-the record being told, and no sweep runs the other way.
+it.
+`n = 40`, `n = 65` and `n = 89` each declared a blocker of kind `mathematics` reading
+“No formal certificate currently supports the tighter reported upper bound”, and each
+kept its verified ceiling at the integer grid — `7`, `9`, `10`. All three certificates
+existed and ran in the gate the whole time: 780 pairs decided by exact sign over `Q(√2)`
+at `n = 40`, 2080 at `n = 65`, 3916 at `n = 89`. A feasible packing at side `s`, decided
+exactly, is a proof that `s(n) ≤ s`, so the mathematics the blocker called missing was
+done and what was missing was an evidence record naming it.
+
+The promotion is made: all three now cite Göbel’s construction, and the count of cases
+whose verified ceiling exceeds their best known falls from 33 to 30. The direction was
+conservative — the register understated what it could certify — but the reason nothing
+caught it is worth more than the instance, and that part is unfixed.
+The stale-blocker check compares a record’s two bound fields to each other, so a
+certificate can land without the record being told, and no sweep runs the other way.
 
 The record can also be wrong about itself, and [D-358](defects.md) is this run being so:
 an unattended run declared blocks of 150, 180, 180 and 40 minutes and took 31, 42, 29

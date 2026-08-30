@@ -30,8 +30,8 @@ def test_the_family_is_optimal_at_four_sizes() -> None:
 
     assert built["reached"] == 12
     assert built["optimal_at"] == [5, 40, 65, 89]
-    assert built["already_built_here"] == [5, 40]
-    assert built["buildable_and_not_built"] == [65, 89]
+    assert built["already_built_here"] == [5, 40, 65, 89]
+    assert built["buildable_and_not_built"] == []
 
 
 def test_every_optimal_size_verifies_exactly() -> None:

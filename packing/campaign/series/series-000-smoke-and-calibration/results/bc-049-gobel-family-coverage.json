@@ -1,12 +1,11 @@
 {
   "already_built_here": [
     5,
-    40
-  ],
-  "buildable_and_not_built": [
+    40,
     65,
     89
   ],
+  "buildable_and_not_built": [],
   "family": [
     {
       "a": 1,
