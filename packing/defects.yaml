@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 393
+count: 394
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -11184,3 +11184,47 @@ defects:
     the flags moved. What failed was reading them in time.
   bead: think-s424
   recorded_in: packing/tests/test_validation_cli.py
+
+- id: D-394
+  title: A contract sweep counted its own guard's filename as a use of the field
+  date: '2026-08-30'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: 'since the sweep was written; it needed a document that cites the guard to show'
+  severity: low
+  status: fixed
+  what: >-
+    `test_no_undeclared_consumer_reads_the_field` sweeps the repository for files naming
+    `verified_upper_bound` and requires each to be a declared consumer, so that nobody uses
+    the field without saying what they take it to mean.
+
+    The guard's own file is called `test_verified_upper_bound_contract.py`, and any document
+    that *cites* it therefore contains the string. `defects.md` renders every defect's
+    `recorded_in` as a link and `D-392` is recorded in that file; a session record listed it
+    as evidence for a phase. Both then read as consumers of a field neither makes any claim
+    about.
+  consequence: >-
+    Conservative -- it over-reports, and the failures were loud rather than silent. The cost
+    is churn and the direction it points: the honest response to each hit is a new
+    `DECLARED_CONSUMERS` line, so the list grows by an entry every time anyone refers to the
+    test, and a list that grows for reasons unrelated to its purpose stops being read.
+
+    That is the same argument `DECLARED_CONSUMER_TREES` already makes in this file for
+    generated trees, applied one level down. It was worth noticing that the rule had a
+    second instance rather than answering the symptom twice.
+  fix: >-
+    The sweep strips its own stem before searching. A document that discusses the field
+    still matches, because discussing it means writing the name somewhere other than inside
+    a filename; a document that merely cites the guard no longer does.
+
+    The `defects.md` entry added an hour earlier is removed with it -- it was the symptom,
+    and leaving it would have failed the same test's stale-consumer half.
+  regression: >-
+    The stale-consumer assertion, which now covers this: had the `defects.md` declaration
+    been left in place alongside the fix, that assertion would have caught it immediately.
+    The two halves of this test check each other, which is why it found both `D-392` and
+    this.
+  bead: think-s424
+  recorded_in: packing/tests/test_verified_upper_bound_contract.py

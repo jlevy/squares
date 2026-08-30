@@ -2,7 +2,7 @@
 
 # Defect log
 
-393 defects recorded across the packing toolchain.
+394 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -23,9 +23,9 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `inspection` | 39 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 52 | the automated test suite |
+| `gate` | 53 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 52 of 393, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 53 of 394, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 52 of 393, and none of
 | quench | 23 |
 | verifier | 4 |
 | record | 117 |
-| tooling | 133 |
+| tooling | 134 |
 | docs | 105 |
 
 ## By kind
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 52 of 393, and none of
 | --- | ---: |
 | soundness | 91 |
 | validity | 94 |
-| bookkeeping | 147 |
+| bookkeeping | 148 |
 | robustness | 46 |
 | performance | 15 |
 
@@ -616,6 +616,7 @@ This is the actionable list.
 | [D-391](packing/devtools/assess_n5_rigidity.py) | 2026-08-30 | tooling | soundness | flattering | `control_cell` | high | outstanding | A tangent cone that is a union of half-spaces was intersected |
 | [D-392](packing/tests/test_verified_upper_bound_contract.py) | 2026-08-30 | tooling | validity | flattering | `gate` | medium | fixed | A size cutoff meant for generated blobs went blind on a source file that grew |
 | [D-393](packing/tests/test_validation_cli.py) | 2026-08-30 | tooling | bookkeeping | neutral | `gate` | medium | contained | The pre-push floor does not run tests, and CI stayed red for seventy-five minutes |
+| [D-394](packing/tests/test_verified_upper_bound_contract.py) | 2026-08-30 | tooling | bookkeeping | conservative | `gate` | low | fixed | A contract sweep counted its own guard's filename as a use of the field |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

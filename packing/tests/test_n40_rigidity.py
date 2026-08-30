@@ -86,7 +86,8 @@ def test_intersecting_the_disjunctions_reports_the_pose_rigid() -> None:
     """`D-391`'s cost, measured on this pose rather than argued in the abstract."""
     reported = _record()["what_an_intersecting_assessor_reports"]
 
-    assert reported["pinned"] == 120
+    assert reported["coordinates_checked"] == 48
+    assert reported["pinned"] == 48
     assert reported["uncertified"] == []
     assert "which is false" in reported["verdict_it_would_report"]
 
@@ -306,3 +307,36 @@ def test_the_retained_rays_are_rebuilt_from_the_pose_not_trusted() -> None:
         motion = retained_ray(pose, entries)
         assert all(gap_rate(row, motion).sign() >= 0 for row in single)
         assert any(gap_rate(row, motion).sign() > 0 for row in single)
+
+
+def test_most_of_the_frame_is_proved_pinned_rather_than_searched() -> None:
+    """The half of this that is a proof, kept apart from the half that is a search.
+
+    Every branch's cone sits inside the relaxed cone, so a coordinate the relaxed rows pin
+    is pinned however the disjunctions resolve. Fifty-two of the frame's seventy-two go
+    that way, each with a Farkas certificate verified in the field. The other twenty do
+    not, and no amount of searching turns that into a proof.
+    """
+    frame = _record()["can_the_frame_move"]
+
+    assert frame["frame_coordinates"] == 72
+    assert frame["proved_zero_in_every_branch"] == 52
+    assert len(frame["not_proved"]) == 20
+    assert "every branch's cone is inside the relaxed cone" in frame["how_that_is_a_proof"]
+
+
+def test_the_frame_search_reports_coverage_not_a_verdict() -> None:
+    """The guard against the count becoming a claim.
+
+    Forty targeted searches, twenty-four of them reaching a direction in the relaxed cone,
+    none of them admissible. That is coverage. `n = 40`'s twenty remaining frame
+    coordinates are not shown pinned by it, and the record has to keep saying so -- the
+    translation-escape screen carries the same registered limitation for the same reason.
+    """
+    frame = _record()["can_the_frame_move"]
+
+    assert frame["targeted_searches"] == 40
+    assert frame["reachable_in_the_relaxed_cone"] == 24
+    assert frame["admissible_directions_found"] == 0
+    assert "weak evidence by construction" in frame["what_the_search_does_not_show"]
+    assert "translation-escape screen" in frame["what_the_search_does_not_show"]

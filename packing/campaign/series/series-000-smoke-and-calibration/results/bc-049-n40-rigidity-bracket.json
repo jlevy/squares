@@ -8,6 +8,37 @@
     "swept": 3124,
     "what_it_does_not_bound": "the cone. A direction that leaves some all-branch contact strictly opening is outside this subspace and is not searched here, so the first-order cone may be larger than this line"
   },
+  "can_the_frame_move": {
+    "admissible_directions_found": 0,
+    "frame_coordinates": 72,
+    "how_that_is_a_proof": "every branch's cone is inside the relaxed cone, so a coordinate the relaxed rows pin is pinned however the disjunctions resolve; each is a Farkas certificate verified in the field",
+    "not_proved": [
+      "vx1",
+      "vx4",
+      "vy6",
+      "vx7",
+      "vy7",
+      "w7",
+      "vy8",
+      "vx9",
+      "vy9",
+      "w9",
+      "vx13",
+      "vx16",
+      "vy18",
+      "vx19",
+      "vy19",
+      "w19",
+      "vy20",
+      "vx21",
+      "vy21",
+      "w21"
+    ],
+    "proved_zero_in_every_branch": 52,
+    "reachable_in_the_relaxed_cone": 24,
+    "targeted_searches": 40,
+    "what_the_search_does_not_show": "that the remaining coordinates are pinned. A search that finds nothing is weak evidence by construction and this repository registers the translation-escape screen as sound in one direction only for the same reason"
+  },
   "contact_model": {
     "contacts": 400,
     "disjunctive_pairs": 42,
@@ -190,10 +221,11 @@
     "what_it_costs_the_catalogue": "nothing directly, and everything for a first-order argument: any proof of n = 40's rigidity has to be second-order or finite, because the first-order cone is nontrivial"
   },
   "what_an_intersecting_assessor_reports": {
-    "pinned": 120,
+    "coordinates_checked": 48,
+    "pinned": 48,
     "rows": 400,
     "uncertified": [],
-    "verdict_it_would_report": "infinitesimally rigid, which is false -- the witness above is a motion this model forbids and the geometry allows"
+    "verdict_it_would_report": "infinitesimally rigid, which is false -- the witness above moves exactly these forty-eight coordinates and this model pins every one of them"
   },
   "witness": {
     "components": {

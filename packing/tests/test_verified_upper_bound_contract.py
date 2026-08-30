@@ -115,11 +115,6 @@ DECLARED_CONSUMERS = {
         "names the ceiling only as a stop condition: the block recovers a minimal "
         "polynomial at n = 11 and records a refusal at n = 29, moving nothing"
     ),
-    "defects.md": (
-        "generated: it renders each defect's `recorded_in` path as a link, and D-392 is "
-        "recorded in this very file -- so the field's name reaches it inside a filename, "
-        "not as a value anything reads"
-    ),
     "packing/campaign/ledger.md": (
         "generated: it renders the agenda notes below and inherits whatever they say, so "
         "it is an output of a consumer rather than one itself"
@@ -159,6 +154,21 @@ SKIPPED_PARTS = {
     "results",
     "node_modules",
 }
+OWN_NAME = "test_verified_upper_bound_contract"
+"""This file's own stem, which is not a mention of the field and must not read as one.
+
+Citing the guard is not using the thing it guards. `defects.md` renders each defect's
+`recorded_in` as a link and `D-392` is recorded here; a session record lists this file as
+evidence. Both then "name" `verified_upper_bound` without any claim about a ceiling
+anywhere in them, and declaring each one would grow the consumer list by a line every time
+someone referred to this test -- churn with no signal, which is the same argument
+`DECLARED_CONSUMER_TREES` already makes for generated trees.
+
+Stripping the stem keeps the sweep pointed at what it is for. A document that discusses the
+field still matches, because it cannot discuss it without writing the name outside a
+filename.
+"""
+
 GENERATED_BYTES = 512 * 1024
 
 
@@ -273,7 +283,8 @@ def test_no_undeclared_consumer_reads_the_field() -> None:
             and relative.as_posix() not in DECLARED_CONSUMERS
         ):
             continue
-        if "verified_upper_bound" in path.read_text(encoding="utf-8", errors="ignore"):
+        body = path.read_text(encoding="utf-8", errors="ignore").replace(OWN_NAME, "")
+        if "verified_upper_bound" in body:
             found.add(relative.as_posix())
     undeclared = sorted(
         path

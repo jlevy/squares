@@ -62,6 +62,7 @@ from strif import atomic_output_file
 from cases.gobel40.packing import build
 from devtools.assess_n5_rigidity import (
     DOF,
+    ROOT_TWO,
     Contact,
     FieldElement,
     Pose,
@@ -358,25 +359,34 @@ def second_order(
 
 
 def intersection_cone(pose: Pose, contacts: list[Contact]) -> dict[str, Any]:
-    """What an assessor that intersects the disjunctions would report: the wrong answer."""
+    """What an assessor that intersects the disjunctions would report: the wrong answer.
+
+    Only the block's forty-eight coordinates are re-certified, because they are the ones
+    that carry the claim: the witness moves exactly those, so pinning all of them is
+    already the statement that this model forbids the motion. The full run over all 120
+    also certifies every one -- measured on 2026-08-30 -- and costs ninety seconds more
+    for a number that says nothing the forty-eight do not.
+    """
     rows = constraint_rows(pose, contacts)
     names = variable_names(pose.count)
+    block = [index for index in range(len(names)) if index // DOF >= 24]
     pinned = 0
     uncertified: list[str] = []
-    for index, name in enumerate(names):
+    for index in block:
         if unconstrained(rows, index):
             continue
         if all(certify(pose, rows, index, sign) is not None for sign in (1, -1)):
             pinned += 1
         else:
-            uncertified.append(name)
+            uncertified.append(names[index])
     return {
         "rows": len(rows),
+        "coordinates_checked": len(block),
         "pinned": pinned,
         "uncertified": uncertified,
         "verdict_it_would_report": (
-            "infinitesimally rigid, which is false -- the witness above is a motion this "
-            "model forbids and the geometry allows"
+            "infinitesimally rigid, which is false -- the witness above moves exactly these "
+            "forty-eight coordinates and this model pins every one of them"
         ),
     }
 
@@ -457,6 +467,92 @@ def wider_cone(pose: Pose, contacts: list[Contact]) -> dict[str, Any]:
         "what_it_does_not": (
             "bound the cone. Six directions were found by one sampler over twenty-four "
             "objectives; that they exist is a proof, that there are no others is not claimed"
+        ),
+    }
+
+
+def frame_coordinates(pose: Pose, contacts: list[Contact]) -> dict[str, Any]:
+    """Can any admissible direction move a frame square? Two routes, and the first proves.
+
+    **Route one is a proof.** Every branch's cone sits inside the relaxed cone, so a
+    coordinate the relaxed rows already pin is pinned in every branch, whatever the
+    disjunctions do. A verified Farkas certificate there settles that coordinate outright,
+    and 52 of the frame's 72 go this way.
+
+    **Route two is a search, and it is weak by construction.** For each surviving
+    coordinate and sign, maximize it over the relaxed cone, re-solve the active set exactly,
+    and test the disjunctive condition. Finding nothing does not prove the coordinate is
+    pinned -- this repository registers the translation-escape screen as sound in one
+    direction only for exactly this reason, and the same limitation applies here. What it
+    reports is coverage.
+    """
+    from scipy.optimize import linprog  # noqa: PLC0415 - heavy optional import
+
+    rows = constraint_rows(pose, single_axis_contacts(pose, contacts))
+    groups = axis_groups(pose, contacts)
+    names = variable_names(pose.count)
+    frame = [index for index in range(len(rows[0])) if index // DOF < 24]
+
+    proved = [
+        index
+        for index in frame
+        if all(certify(pose, rows, index, sign) is not None for sign in (1, -1))
+    ]
+    remaining = [index for index in frame if index not in set(proved)]
+
+    numeric = [
+        [float(entry.coeffs[0]) + float(entry.coeffs[1]) * ROOT_TWO for entry in row]
+        for row in rows
+    ]
+    upper = [[-value for value in row] for row in numeric]
+    reachable = 0
+    hits: list[str] = []
+    for index in remaining:
+        for sign in (1, -1):
+            objective = [0.0] * len(rows[0])
+            objective[index] = -float(sign)
+            result = linprog(
+                objective,
+                A_ub=upper,
+                b_ub=[0.0] * len(rows),
+                bounds=[(-1.0, 1.0)] * len(rows[0]),
+                method="highs",
+            )
+            if not result.success or abs(result.x[index]) < 1e-7:
+                continue
+            reachable += 1
+            active = [
+                position
+                for position, row in enumerate(numeric)
+                if abs(sum(a * b for a, b in zip(row, result.x, strict=True))) < 1e-7
+            ]
+            for vector in nullspace(pose, [rows[position] for position in active]):
+                if vector[index].sign() == 0:
+                    continue
+                for flip in (1, -1):
+                    motion = [pose.field.rational(flip) * value for value in vector]
+                    if all(gap_rate(row, motion).sign() >= 0 for row in rows) and all(
+                        admissible_axis(pose, group, motion) is not None
+                        for group in groups.values()
+                    ):
+                        hits.append(names[index])
+                        break
+    return {
+        "frame_coordinates": len(frame),
+        "proved_zero_in_every_branch": len(proved),
+        "how_that_is_a_proof": (
+            "every branch's cone is inside the relaxed cone, so a coordinate the relaxed "
+            "rows pin is pinned however the disjunctions resolve; each is a Farkas "
+            "certificate verified in the field"
+        ),
+        "not_proved": [names[index] for index in remaining],
+        "targeted_searches": 2 * len(remaining),
+        "reachable_in_the_relaxed_cone": reachable,
+        "admissible_directions_found": len(hits),
+        "what_the_search_does_not_show": (
+            "that the remaining coordinates are pinned. A search that finds nothing is weak "
+            "evidence by construction and this repository registers the translation-escape "
+            "screen as sound in one direction only for the same reason"
         ),
     }
 
@@ -590,6 +686,7 @@ def assess() -> dict[str, Any]:
         },
         "admissible_part_of_the_null_space": _sweep(pose, contacts, basis),
         "outside_the_null_space": wider_cone(pose, contacts),
+        "can_the_frame_move": frame_coordinates(pose, contacts),
         "what_an_intersecting_assessor_reports": intersection_cone(pose, contacts),
         "verdict": {
             "infinitesimally_rigid": False,
