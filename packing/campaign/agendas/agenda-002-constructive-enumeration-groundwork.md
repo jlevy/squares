@@ -362,6 +362,23 @@ agenda:
     owner_focus: insight
     instances: [5, 10, 11, 17, 18, 28, 29]
     state: blocked
+    blocked_on: >-
+      Two things, neither an edge. First, the instrument does not exist: `H-047` carries
+      `instrument_ready: false`, and of the three pieces it names, the class-bracketing
+      quench and the D4-and-relabeling matcher are built while the regularizer that snaps
+      intra-chunk contacts to exact and chunk angles to their fitted class value is not
+      written. `chunks.py` computes the class values such a snapper would target; nothing
+      snaps.
+
+      Second, the declared inputs do not exist for most of the sweep. The entry asks for
+      retained series-000 non-record endpoints across `[5, 10, 11, 17, 18, 28, 29]`, and a
+      pose is retained for `n = 5` and `n = 10` only -- the quench-family results keep
+      scalars and drop the pose, so `n = 11, 17, 18, 28` and `29` have none at all.
+      Recovering them is a re-run with pose retention rather than a reformatting, which is
+      `BC-016`'s note recurring on a different corpus.
+
+      Both predecessors are complete, so the map reported this cell as takeable while
+      neither of these was written anywhere a reader could see. That is `D-401`.
     priority: 2
     question: >-
       Does rounding a pose to its chunk-regular predecessor and re-quenching return the

@@ -67,11 +67,18 @@ def test_states_come_from_the_state_field_not_the_status_field() -> None:
 def test_a_blocked_cell_with_all_predecessors_complete_is_reported() -> None:
     """The map's whole reason for existing is catching a queue that has stalled.
 
-    On the real queue no cell is currently in that state -- `BC-029`'s edge has cleared but
-    it still states another blocker -- so asserting against real data only ever exercises
-    the silent branch, and deleting the whole reporting block would leave it green. The
-    positive branch is therefore driven by a synthetic queue, and both branches are checked
-    against the same renderer.
+    Asserting against real data only ever exercises whichever branch the queue happens to
+    be in, and deleting the reporting block entirely would leave that green. So the
+    positive branch is driven by a synthetic queue, and both branches are checked against
+    the same renderer.
+
+    This docstring used to add that no real cell was in that state. It was true when
+    written and false within the day: `BC-025`'s predecessors both completed, and it sat
+    advertised as takeable while genuinely blocked on two unrecorded things. The claim
+    could not fail, because the assertions below run against the synthetic queue -- a
+    statement about real data, in a test that never reads it. `D-401` records the whole
+    of it; the state is now a refusal rather than a report, so the real queue is checked
+    by `violations` instead of by a sentence here.
     """
     done = Commitment(
         agenda="agenda-001",
@@ -97,7 +104,9 @@ def test_a_blocked_cell_with_all_predecessors_complete_is_reported() -> None:
         depends_on=("BC-001",),
     )
     text = render([done, stalled])
-    assert "have every predecessor" in text
+    # "has" for one, "have" for several: the noun was already pluralised conditionally
+    # and the verb was not, so a single stalled cell read "1 blocked commitment have".
+    assert "has every predecessor" in text
     assert "`BC-002`" in text
 
     # The same cell, now stating a second blocker, must not be advertised as takeable.
@@ -147,3 +156,42 @@ def test_the_renderer_refuses_a_queue_that_contradicts_itself() -> None:
     ignored, the generated map would state the contradiction and call it current.
     """
     assert violations(load()) == []
+
+
+def test_a_blocked_cell_whose_edges_all_cleared_must_say_why() -> None:
+    """Reporting the stall was never enough; it is a refusal now.
+
+    `BC-025` sat blocked with both predecessors complete and no `blocked_on`, so the map
+    advertised it as takeable. It was genuinely blocked -- `H-047`'s regularizer does not
+    exist, and five of its seven instances retain no pose -- but neither reason was written
+    anywhere, and nothing refused that. The asymmetry this closes is the point: `ledger.py`
+    already refuses a `ready` cell with incomplete dependencies, so the queue was guarded
+    against over-claiming readiness and not at all against under-claiming it.
+    """
+    done = Commitment(
+        agenda="agenda-001",
+        agenda_status="active",
+        doc="agenda-001-x.md",
+        id="BC-001",
+        state="complete",
+        priority=0,
+        purpose="research",
+        owner_focus="insight",
+        question="a finished predecessor",
+        bead="think-aaaa",
+        depends_on=(),
+        blocked_on="",
+        discharged_by="",
+    )
+    stalled = replace(
+        done,
+        id="BC-002",
+        state="blocked",
+        question="blocked, edges clear, silent about why",
+        bead="think-bbbb",
+        depends_on=("BC-001",),
+    )
+    assert any("no blocked_on says why" in problem for problem in violations([done, stalled]))
+
+    speaking = replace(stalled, blocked_on="A review decision nobody has taken.")
+    assert violations([done, speaking]) == []

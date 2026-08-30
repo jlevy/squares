@@ -139,6 +139,7 @@ def violations(commitments: list[Commitment]) -> list[str]:
     refusal lives here, where `--check` makes it a gate failure rather than a warning.
     """
     known = {c.id for c in commitments}
+    complete = {c.id for c in commitments if c.state == "complete"}
     out: list[str] = []
     for c in sorted(commitments, key=lambda c: c.id):
         if c.discharged_by and c.state in ("ready", "tentative"):
@@ -154,6 +155,26 @@ def violations(commitments: list[Commitment]) -> list[str]:
             out.append(
                 f"{c.id} is blocked with no depends_on and no blocked_on; "
                 "what it waits on is unobservable"
+            )
+        # The same defect one step later. A cell whose every predecessor has since
+        # completed is blocked on nothing this file can see, so either it is takeable and
+        # the state is wrong, or something else holds it and is unwritten. `BC-025` sat in
+        # that state for a day: genuinely blocked -- H-047's regularizer does not exist and
+        # five of its seven instances retain no pose -- with neither reason recorded, while
+        # the map advertised it as takeable. Reporting it was never enough, which is
+        # `D-401`. Note the asymmetry this closes: `ledger.py` already refuses a `ready`
+        # cell with incomplete dependencies, so the queue was guarded against over-claiming
+        # readiness and not at all against under-claiming it.
+        if (
+            c.state == "blocked"
+            and c.depends_on
+            and set(c.depends_on) <= complete
+            and not c.blocked_on
+        ):
+            out.append(
+                f"{c.id} is blocked, every predecessor is complete, and no blocked_on "
+                "says why; either it is takeable and the state is wrong, or the real "
+                "blocker is unwritten"
             )
         out.extend(
             f"{c.id} depends on {dep}, which is not a commitment"
@@ -210,7 +231,8 @@ def render(commitments: list[Commitment]) -> str:
         rows = ", ".join(f"`{c.id}`" for c in unblocked)
         out += [
             (
-                f"- **{plural(len(unblocked), 'blocked commitment')} have every "
+                f"- **{plural(len(unblocked), 'blocked commitment')} "
+                f"{'has' if len(unblocked) == 1 else 'have'} every "
                 f"predecessor complete** and no other stated blocker, so {rows} "
                 f"{'is' if len(unblocked) == 1 else 'are'} takeable now. A cell whose "
                 "blocker is discharged but whose `state` still reads `blocked` is "

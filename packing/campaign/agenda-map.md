@@ -12,8 +12,6 @@ order rather than imposing one across them.
 
 - **3** ready, **14** blocked, **4** stopped, **63** complete.
 
-- **1 blocked commitment have every predecessor complete** and no other stated blocker, so `BC-025` is takeable now. A cell whose blocker is discharged but whose `state` still reads `blocked` is invisible to a coordinator reading the agenda.
-
 - **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
 
 ## Live queue
@@ -39,7 +37,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-002 | `BC-016` | 0 | — | no | Retained input poses and symbolic active-cell rows for `n005-seed007-known-answer`, `n010-seed014-known-answer` and… |
 | agenda-002 | `BC-018` | 1 | `BC-016`, `BC-017` | no | — |
 | agenda-002 | `BC-020` | 2 | `BC-017` | no | — |
-| agenda-002 | `BC-025` | 2 | `BC-023`, `BC-019` | yes | — |
+| agenda-002 | `BC-025` | 2 | `BC-023`, `BC-019` | yes | Two things, neither an edge. First, the instrument does not exist: `H-047` carries `instrument_ready: false`, and of… |
 | agenda-002 | `BC-026` | 3 | `BC-018` | no | — |
 | agenda-002 | `BC-021` | 3 | `BC-018`, `BC-019` | no | — |
 | agenda-002 | `BC-022` | 4 | `BC-021` | no | — |

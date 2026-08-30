@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 400
+count: 401
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -11668,3 +11668,66 @@ defects:
     existed as a record; a blocker that misdescribes mathematics nobody has filed remains
     a matter of reading it.
   recorded_in: packing/frontier/n-029.md
+- id: D-401
+  title: The queue guarded against over-claiming readiness and not against hiding it
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'about eight hours, from the commit that completed its last predecessor'
+  severity: low
+  status: fixed
+  what: >-
+    `BC-025` read `state: blocked` with `depends_on: [BC-023, BC-019]`, both complete since
+    that morning, and an empty `blocked_on`. The map's generator noticed and printed it:
+    "1 blocked commitment have every predecessor complete ... so `BC-025` is takeable now."
+
+    It is not takeable, and both reasons check out. `H-047` carries
+    `instrument_ready: false`: of the three pieces it names, the class-bracketing quench
+    and the D4-and-relabeling matcher are built, and the regularizer that snaps intra-chunk
+    contacts to exact is not written anywhere. And the declared inputs are missing for most
+    of the sweep -- across `BC-025`'s seven instances a non-record endpoint pose is
+    retained for `n = 5` and `n = 10` only, so `n = 11, 17, 18, 28` and `29` have none at
+    all, the quench-family results having kept scalars and dropped the pose.
+
+    So the state was right and the record was silent about why, which left a coordinator
+    two equally wrong readings: take a cell that cannot be worked, or leave a cell that
+    looks available with no reason not to.
+  consequence: >-
+    Small in itself -- one cell, and an autonomous run would have bounced off
+    `runner.py`'s own refusal on `instrument_ready: false` before wasting much. The
+    structural half is worth more.
+
+    `ledger.py` refuses a `ready` commitment whose dependencies are incomplete. Nothing
+    refused a `blocked` one whose dependencies were all complete. The queue was guarded
+    against over-claiming readiness and entirely unguarded against under-claiming it, and
+    only one of those two mistakes is visible to someone reading the agenda for work.
+
+    The generator had the detection and stopped at reporting, which is the recurring shape
+    of this whole day: `D-398`'s stale-blocker check, `D-400`'s orphaned certificate, and
+    this. A condition worth printing is a condition worth refusing, and the gap between
+    those two is where a record sits wrong for as long as nobody happens to read the line.
+  fix: >-
+    `BC-025` states both blockers in `blocked_on`, so the reason is where a reader and the
+    generator both find it. `violations` in `render_agenda_map.py` now refuses a blocked
+    cell whose every predecessor is complete and which says nothing about why -- either it
+    is takeable and the state is wrong, or the real blocker is unwritten, and both are
+    defects.
+
+    Two things found while fixing it. The generator pluralised the noun conditionally and
+    not the verb, so a single cell rendered "1 blocked commitment have"; and the test
+    covering this branch carried a docstring asserting that no real cell was in that state,
+    which was true when written and false within the day -- and could not fail, because the
+    assertions run against a synthetic queue. A statement about real data, in a test that
+    never reads it.
+  regression: >-
+    `test_a_blocked_cell_whose_edges_all_cleared_must_say_why` in
+    `tests/test_agenda_map.py`, driven by a synthetic queue in both directions: silent
+    refuses, `blocked_on` present passes. Verified against the real tree by stripping
+    `BC-025`'s new `blocked_on` and confirming the refusal fires on it and on nothing else.
+
+    The stale docstring is replaced by a note saying what happened rather than a fresh
+    claim about the queue, since the lesson is that a test asserting facts about data it
+    does not read cannot notice when they stop being true.
+  bead: think-r45s
+  recorded_in: packing/devtools/render_agenda_map.py

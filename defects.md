@@ -2,7 +2,7 @@
 
 # Defect log
 
-400 defects recorded across the packing toolchain.
+401 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
-| `review` | 244 | a human or agent reading the work against a checklist |
+| `review` | 245 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
 | `inspection` | 40 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 53 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 53 of 400, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 53 of 401, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 53 of 400, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 4 |
-| record | 122 |
+| record | 123 |
 | tooling | 134 |
 | docs | 106 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 53 of 400, and none of
 | --- | ---: |
 | soundness | 91 |
 | validity | 96 |
-| bookkeeping | 151 |
+| bookkeeping | 152 |
 | robustness | 47 |
 | performance | 15 |
 
@@ -622,6 +622,7 @@ This is the actionable list.
 | [D-398](packing/frontier/n-040.md) | 2026-08-30 | record | bookkeeping |  | `review` | medium | fixed | Three cases declare a mathematical blocker the repository has already cleared |
 | [D-399](packing/cases/gobel_family/verify_exact.py) | 2026-08-30 | docs | bookkeeping |  | `inspection` | low | fixed | A residual's explanation had the sign backwards, and called a rounding a truncation |
 | [D-400](packing/frontier/n-029.md) | 2026-08-30 | record | bookkeeping |  | `review` | medium | fixed | A blocker denied a certificate the register held, and two guards let it |
+| [D-401](packing/devtools/render_agenda_map.py) | 2026-08-30 | record | bookkeeping |  | `review` | low | fixed | The queue guarded against over-claiming readiness and not against hiding it |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
