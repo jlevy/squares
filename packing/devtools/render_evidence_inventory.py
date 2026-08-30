@@ -179,9 +179,11 @@ def render() -> str:
         "",
         (
             "The `cases` column is how many of the hundred frontier records cite each "
-            "piece of evidence, and it is the reason to read this table rather than "
-            "count records. The risk is not spread evenly across 31 records; it is "
-            "concentrated in a few, and the most concentrated one is external."
+            "piece of evidence, and it is the reason to read this table rather than count "
+            "records. Ranked below are the *formal* records only: a `reported` record "
+            "cited by ninety-eight cases is the catalogue everyone reports from and is "
+            "labelled as such, which is the register working rather than risk. The risk is "
+            "a verified claim resting on an argument nobody has examined."
         ),
         "",
     ]
@@ -218,7 +220,11 @@ def render() -> str:
         "",
     ]
 
-    ranked = [(load.get(r["id"], 0), r) for r in records]
+    # Rank the FORMAL records only. A `reported` record cited by ninety-eight cases is the
+    # catalogue everyone reports from, and it is labelled reported -- that is not
+    # concentrated risk, it is the register working. The risk is a *verified* claim resting
+    # on an argument nobody has examined, so that is what this ranks.
+    ranked = [(load.get(r["id"], 0), r) for r in records if r.get("assurance") == "verified"]
     ranked.sort(key=lambda pair: -pair[0])
     lines += ["| evidence | cases | whose work | read here |", "| --- | ---: | --- | --- |"]
     for count, record in ranked[:5]:
@@ -226,16 +232,37 @@ def render() -> str:
         review = (record.get("external_review") or {}).get("state", "-")
         lines.append(f"| `{record['id']}` | {count} | {whose} | {review} |")
 
-    top_count, top = ranked[0]
+    # The narrative is about the most-cited record we did NOT produce. A verified record of
+    # our own being cited ninety-three times is the grid bound doing its job; a verified
+    # record from elsewhere being cited eighty-eight times is a dependency.
+    borrowed = [pair for pair in ranked if not ours(pair[1])]
+    top_count, top = borrowed[0] if borrowed else ranked[0]
+    state = (top.get("external_review") or {}).get("state")
+    read_line = {
+        "not-reviewed": (
+            "It is an external proof nobody here has read, which makes it simultaneously "
+            "the most load-bearing argument in the register and the least examined. That "
+            "is not a doubt about the result -- a published proof proves its claim whether "
+            "or not we read it -- but if one thing here deserved an informal review, the "
+            "arithmetic says which."
+        ),
+        "informally-verified": (
+            "It is an external proof, and it has been read here: its record carries the "
+            "review, what was re-derived, and the four things that were not. The arithmetic "
+            "is what picked it out for reading -- being cited this heavily is the reason to "
+            "open an argument, not a reason to trust it."
+        ),
+        "defect-found": (
+            "It is an external proof that was read here and found wanting; its record says "
+            "what fails and what was done about it. A record this heavily cited failing "
+            "review is the most consequential thing this table can show."
+        ),
+    }.get(state, "Its review state is not recorded, which the assurance contract refuses.")
     lines += [
         "",
         (
-            f"`{top['id']}` alone carries {top_count} of the hundred cases, against "
-            f"{ranked[1][0]} for the next. It is an external proof nobody here has read, "
-            "which makes it simultaneously the most load-bearing argument in the register "
-            "and the least examined. That is not a doubt about the result -- a published "
-            "proof proves its claim whether or not we read it -- but if one thing here "
-            "deserved an informal review, the arithmetic says which."
+            f"The most-cited argument this repository did not produce is `{top['id']}`, "
+            f"carrying {top_count} of the hundred cases. {read_line}"
         ),
         "",
         (

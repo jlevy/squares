@@ -1097,9 +1097,15 @@ stays reported with a `public-certificate-missing` blocker.
 
 The [evidence inventory](packing/frontier/INVENTORY.md) is the generated roll-up of all
 four facts across the register, including which evidence the hundred cases actually lean
-on. That last column is the one worth reading: `E-nagamochi-lower` carries the verified
-lower bound for 88 of the hundred, against 2 for the next most-cited, and it is an
-external proof nobody here has read.
+on.
+That last column is the one worth reading, and it needs its qualifier: the most-cited
+record overall is the Kingbird register at 98, which is the catalogue everyone reports
+from and is labelled `reported`. The dependency that matters is the most-cited argument
+this repository did not produce — `E-nagamochi-lower`, carrying the verified lower bound
+for 88 of the hundred.
+Being cited that heavily is a reason to open an argument, not a reason to trust it, so
+it was read here on 2026-08-30; its record carries what was re-derived and the four
+things that were not.
 
 Novelty—whose result this is—is a further separate fact.
 Its values differ in what they oblige, which is why each is recorded explicitly rather

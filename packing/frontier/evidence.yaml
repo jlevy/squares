@@ -83,10 +83,39 @@ evidence:
         - Unit squares may rotate inside an open square container.
         - The square-packing side function is the paper's s(N).
     external_review:
-      state: not-reviewed
+      state: informally-verified
       date: '2026-08-30'
+      reviewed_by: repository
       note: >-
-        Carries the lower bound for every n from 4 to 100, so it is the most load-bearing external argument here and the least examined.
+        Read here because the inventory's own arithmetic named it: this record carries the
+        verified lower bound for 88 of the hundred cases and the next most-cited carries
+        two, so it was simultaneously the most load-bearing external argument in the
+        register and the only one nobody had opened. The argument closes. Theorem 1 is the
+        substantive part -- an upper bound on how many unit squares fit strictly inside an
+        a-by-b rectangle, proved by an explicit unavoidable set whose capacity is computed
+        rather than asserted, with Lemmas 2 through 7 proved in the paper and only an
+        elementary containment fact cited outward. Theorem 2 follows by algebra. It is
+        stated for general packings with arbitrary rotation, the case analysis is
+        parametrised by angle throughout, and no figure carries weight the text does not.
+        Three load-bearing steps were re-derived symbolically here rather than taken from
+        the reading. The unavoidable set's capacity sums to `ab - 2` on the integer branch,
+        matching the claimed `ab - (a+1-ceil a) - (b+1-ceil b)`. The substitution behind
+        Theorem 2(ii) is exact: with `alpha = sqrt(N-2k+1)+1-k`, `(k+alpha)^2 - 2*alpha`
+        simplifies to `N` identically. The boundary has no off-by-one -- at `N = n^2-2` the
+        bound is `sqrt((n-1)^2)+1 = n` exactly, and at `N = n^2-3` it is `sqrt(n(n-2))+1`,
+        strictly below `n` because `n^2-2n < (n-1)^2`. What this is NOT: a careful reading
+        with the spine checked, not a line-by-line re-derivation. Four things are
+        unverified -- the coordinate-geometry formulas inside Lemmas 2, 3, 5 and 6, whose
+        structure and endpoint behaviour were followed but whose trigonometric expressions
+        were not re-derived; the completeness of the Case 5 subargument; the figures, which
+        were not rendered; and one step the paper itself does not prove, that the
+        intersection length is monotone in the square's side, where it says "we can assume
+        lambda = 1 to estimate the minimum". That last is geometrically evident and is the
+        only place the argument leans on something unargued. This promotes nothing: the
+        method stays `published-proof`, and `proof-assistant-checked` is a different thing.
+        Separately `devtools/check_nagamochi_bounds.py` re-derives all 88 recorded values
+        from Theorem 2 in the gate, so a transcription slip is caught even though the proof
+        behind them is not machine-checked.
     limitations: External published proof; its arithmetic is not independently replayed here.
     source_reviewed: '2026-08-24'
 

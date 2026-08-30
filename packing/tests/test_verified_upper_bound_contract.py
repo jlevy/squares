@@ -47,6 +47,14 @@ CEILING_HEADING = "## The verified upper bound is a ceiling"
 # appear in them as incidental identity rather than as a value anything consumes, and when
 # a new file arrives on every run so a per-file list would be pure churn.
 DECLARED_CONSUMER_TREES = {
+    "packing/campaign/agent-sessions/": (
+        "session records narrate work, and work touches this field, so every session that "
+        "did any names it -- seven were declared one by one before this became a tree. "
+        "They make no claim about any bound: a record saying a session moved a "
+        "verified_upper_bound is reporting what happened, and the claim itself lives in "
+        "the case record that moved. This is D-394's argument at a third level, and the "
+        "list it was growing had started to grow for reasons unrelated to its purpose"
+    ),
     "packing/campaign/resource-usage/": (
         "derived per-session measurement records. They never read the field: it reaches "
         "them as the name of a tool that ran, such as the test file that guards this very "
@@ -110,34 +118,9 @@ DECLARED_CONSUMERS = {
         "reports how far below the ceiling the run's certificate sits, and that the "
         "ceiling did not move"
     ),
-    "packing/campaign/agent-sessions/session-044-agenda006-continuation.md": (
-        "names the ceiling only as a standing constraint: the continuation measures where "
-        "elimination stops and closes the round trip at n = 11, and moves nothing"
-    ),
-    "packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md": (
-        "records the certificate as evidence and says the ceiling was not moved to it"
-    ),
-    "packing/campaign/agent-sessions/session-040-block6-chirality.md": (
-        "names the ceiling only as a stop condition: the block builds the pose model and "
-        "does not touch it"
-    ),
-    "packing/campaign/agent-sessions/session-041-block7-collinearity.md": (
-        "names the ceiling only as a stop condition: the block repairs an assembly "
-        "equation and does not touch it"
-    ),
-    "packing/campaign/agent-sessions/session-042-block8-exact-solve.md": (
-        "names the ceiling only as a stop condition: the block recovers a minimal "
-        "polynomial at n = 11 and records a refusal at n = 29, moving nothing"
-    ),
     "packing/campaign/ledger.md": (
         "generated: it renders the agenda notes below and inherits whatever they say, so "
         "it is an output of a consumer rather than one itself"
-    ),
-    "packing/campaign/agent-sessions/session-036-block1-interval-operator.md": (
-        "records that block 1 did not touch the ceiling"
-    ),
-    "packing/campaign/agent-sessions/session-037-block2-interval-calibration.md": (
-        "reports how far below the ceiling its certificate sits, and that it promotes nothing"
     ),
     "packing/cases/kingbird29/certify_interval.py": (
         "compares its bound against the ceiling and refuses to promote it"
