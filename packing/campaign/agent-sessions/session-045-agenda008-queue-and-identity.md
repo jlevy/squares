@@ -1199,7 +1199,7 @@ session:
       sign, maximize it over the all-branch rows, re-solve the active set exactly, and test
       the disjunctive condition -- turns the observation into a measurement with a stated
       coverage.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Phase 18's declared next_action. If the frame is pinned the problem drops from 120
@@ -1224,12 +1224,79 @@ session:
     fallback: >-
       The coverage statement alone, which is what the escape screen's own registered
       limitation looks like and is a legitimate result.
+    outcome: >-
+      Better than the fallback and short of a proof, which is the honest place for it to
+      land. **52 of the frame's 72 coordinates are proved zero in every branch** -- not
+      searched, proved, because every branch's cone sits inside the relaxed cone and a
+      coordinate the relaxed rows pin is pinned however the 42 disjunctions resolve. Each
+      carries a Farkas certificate verified in the field, and no branch enumeration was
+      needed for any of them.
+
+      The remaining 20 got the search: 40 targeted maximizations, 24 of them reaching a
+      direction in the relaxed cone, none of them admissible once the disjunctive condition
+      was applied. That is coverage. The block-mechanism reading now rests on 52 proofs and
+      20 failed searches rather than on seven coincidences, and the record says which is
+      which in two places.
+
+      Also fixed the gate step's cost: 3m18s, down from 4m12s, by certifying the block's 48
+      coordinates rather than all 120 in the intersecting-assessor section. The witness
+      moves exactly those, so pinning them is already the statement that that model forbids
+      it. And D-394, from CI: the contract sweep counted its own guard's filename as a use
+      of the field, so any document citing the test read as a consumer.
+    evidence:
+    - packing/devtools/assess_n40_rigidity.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n40-rigidity-bracket.json
+    - packing/tests/test_n40_rigidity.py
+    - packing/tests/test_verified_upper_bound_contract.py
+    stop_reason: >-
+      Exit reached. The kill condition held: the 52 are stated as proofs and the 20 as
+      coverage, and "no admissible frame direction was found" is nowhere rendered as "the
+      frame is pinned" -- the record cites the translation-escape screen's own registered
+      limitation as the reason.
+    next_action: >-
+      The cone bound. With 52 frame coordinates proved, the question is closer to the
+      block's 48 coordinates than to the packing's 120, which is the first version of it
+      that looks tractable.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-049
+    bead: think-xdly
+    objective: >-
+      Bound n = 40's first-order cone, or measure how far short the attempt falls. Seven
+      directions are known and refused; what is missing is a statement that there are no
+      others. With 52 frame coordinates proved pinned the live question is the block's 48
+      coordinates plus the 20 unproved frame ones, which is the first version of this that
+      is not obviously out of reach.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Phase 19's declared next_action, and the last step between what is proved and calling
+      n = 40 second-order rigid.
+    budget_minutes: 60
+    started_at: '2026-08-30T13:05:00Z'
+    deadline_at: '2026-08-30T14:05:00Z'
+    expected_output: >-
+      Either the cone bounded -- its extreme rays enumerated or excluded by verified
+      certificates -- or a measured statement of what the bound would need. If the answer is
+      that a bound needs branch enumeration after all, say how many branches survive the 52
+      proved coordinates rather than repeating 2^42.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --edit
+    kill_condition: >-
+      No bound may rest on a search that found nothing. Phase 19 ended with 20 coordinates
+      unproved and that is the shape of the risk here: a cone with no extreme ray found is
+      not a cone with no extreme ray. A bound is certificates or it is not a bound.
+    fallback: >-
+      The count of surviving branches, which is the number that says whether enumeration is
+      a route or a figure of speech.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      If the frame holds up, the cone bound becomes a 48-coordinate question about the block
-      alone, which is the first version of it that looks tractable.
+      Whatever the bound needs. If it closes, n = 40's frontier record gains a first-party
+      evidence id and joins n = 5.
   primary_bead: think-s424
   status: in_progress
   budget:
