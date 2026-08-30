@@ -1057,7 +1057,7 @@ session:
       n = 40 is infinitesimally flexible. Neither is a small correction -- the first is the
       only place the union-versus-intersection question is written down, and the second
       changes what the document says a first-order argument can reach.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Phase 16's declared next_action, and OR-7: the documentation pass belongs at the block
@@ -1080,11 +1080,86 @@ session:
     fallback: >-
       Correcting the two contradictions alone, leaving the wider rewrite for a session that
       can afford it.
+    outcome: >-
+      X-007 corrected in four places rather than two. The two known ones: the n = 5
+      disjunction exemption now points at `test_n5_has_no_disjunctive_pair` instead of
+      arguing itself, and the closing section carries n = 40's flex and its second-order
+      refusal. Two more turned up on reading it: `rationalize` was described as a trick
+      where it is a special case of the ordered-field search, and the section on n = 28 and
+      n = 40 still said neither had an exact construction retained, which D-389 had already
+      corrected elsewhere and not here.
+
+      The phase also cleared CI, which had been red since 10:50Z across four pushes while
+      six wake events went unread. Four failures, none from the n = 40 work: a stale
+      broad-step pin, an undeclared exhaustive_exact marker, D-392 (a 512 KiB cutoff meant
+      for generated blobs going blind when defects.yaml grew past it), and defects.md
+      reaching the same sweep through a rendered `recorded_in` path. D-392 and D-393
+      recorded; full suite green locally at 904 passed.
+
+      Last, a measurement the phase did not plan: of the 3124 nonzero integer combinations
+      in [-2,2]^5 of n = 40's null basis, exactly four extend to a branch and all four are
+      multiples of one basis vector. So inside the subspace where every all-branch contact
+      is tight, the admissible set is exactly a line -- which turns "one witness was found"
+      into a measured statement and names precisely what is left unsearched.
+    evidence:
+    - packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n40-rigidity-bracket.json
+    - packing/tests/test_verified_upper_bound_contract.py
+    - packing/tests/test_validation_cli.py
+    - packing/tests/test_module_boundaries.py
+    stop_reason: >-
+      Exit reached. The kill condition held: X-007 gained no claim the record does not
+      carry, and it says in three places why one line refused in one branch is not
+      second-order rigidity.
+    next_action: >-
+      Whether n = 40's first-order cone is larger than that line -- that is, directions
+      outside the null space of the all-branch rows, where some contact opens strictly.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-049
+    bead: think-xdly
+    objective: >-
+      Decide whether n = 40's first-order cone is larger than the line already found. The
+      sweep measured the admissible part of the null space of the all-branch rows and it is
+      exactly a line; what is unsearched is everything outside that subspace, where some
+      all-branch contact opens strictly rather than staying tight. If nothing lives there,
+      the cone is that line and the second-order refusal already in hand makes n = 40
+      second-order rigid -- the same statement as n = 5 at eight times the size.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Phase 17's declared next_action, and the only remaining step between what is proved
+      and a second-order rigidity claim for n = 40.
+    budget_minutes: 60
+    started_at: '2026-08-30T12:28:00Z'
+    deadline_at: '2026-08-30T13:28:00Z'
+    expected_output: >-
+      Either the cone shown to be exactly that line -- every extreme ray outside the null
+      space excluded by verified certificates -- or a direction outside it exhibited and
+      verified, which would widen the flex and need its own second-order treatment. A
+      measured statement of what the search covered is acceptable; an unmeasured "probably
+      nothing else" is not.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --edit, and the affected
+      tests run directly, because the edit tier does not run tests (D-393)
+    kill_condition: >-
+      A cone bound may not rest on a linear-programming vertex that was rationalized to fit.
+      That is what defeated the first search for the witness and it fails in the flattering
+      direction here: a rounded direction that no longer satisfies its own system would look
+      like an excluded ray. Every claim about a ray is decided in the field or it is not
+      made.
+    fallback: >-
+      The measured coverage: which faces of the cone were examined, by what test, and what
+      remains. That is what the next attempt needs.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Whether the first-order cone at n = 40 is larger than this one witness.
+      If the cone closes, n = 40 joins n = 5 as second-order rigid and the frontier records
+      gain a first-party evidence id. If it does not, the wider flex needs its own
+      obstruction.
   primary_bead: think-s424
   status: in_progress
   budget:
@@ -1095,7 +1170,11 @@ session:
     # the slice figure is the measured one, so the next block is planned against what
     # this session actually costs rather than against what the last plan guessed.
     wall_minutes: 510
-    max_cycles: 17
+    # Raised from 17 at the phase-18 boundary, per OR-6, from measured time rather than
+    # from the estimate that set it. Seventeen phases have run in 344 minutes, a mean of
+    # about 20; the mandate is 510, so the cap was going to bind on arithmetic long before
+    # the clock did. Twenty-eight is 510 over that measured mean.
+    max_cycles: 28
     orientation_minutes: 20
     checkpoint_minutes: 15
     slice_minutes: 15
