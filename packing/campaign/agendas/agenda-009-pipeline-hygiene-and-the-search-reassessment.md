@@ -218,6 +218,9 @@ agenda:
       grid-return at n = 17 before any target is spent, n = 71 first when taken (H-050);
       BC-092 folded into BC-090's instrument design -- the enumeration price (9.3e9 raw
       orbit work at n = 5, hard size cap at 5) rules it out as its own block.
+      Correction 2026-08-31: that price traces to no artifact and the entry's gap
+      measurement did not replicate (D-404, D-405, X-010); the sequencing stands, the
+      repricing is Lane B rung 0 on the x-010 beads.
     artifacts:
     - campaign/explorations/X-009-where-a-new-packing-is-reachable.md
     - campaign/hypotheses/H-049-squeezable-20-in-4x6.md
@@ -365,7 +368,9 @@ agenda:
       11,013 through size five with 9.3e9 raw orbit work already at n = 5, and the code
       caps scaffolds at size five by typed refusal), while the structural corpus's real
       value at a target n is proposer information -- which contact shapes and angle-class
-      structures carry records -- inside BC-090's instrument.
+      structures carry records -- inside BC-090's instrument. Correction 2026-08-31:
+      the 9.3e9 figure traces to no artifact (D-405, X-010); the stopped state stands
+      pending the Lane B repricing bead, which carries a measured go/no-go.
 ---
 # Agenda-009 — Hygiene First, Then Decide What the Machinery Is For
 

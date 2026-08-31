@@ -86,11 +86,11 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
 hypotheses, one open hypothesis, seven open questions, and thirty-two blocked
-hypotheses.
-One additional hypothesis is unresolved because its formal prerequisite is missing.
-Its active confidence ladder has completed the exact and event controls up to the first
-nontrivial identity question; the next scientific transition is from specialized `n = 5`
-local geometry to a defensible component relation, not to a larger raw census.
+hypotheses. One additional hypothesis is unresolved because its formal prerequisite is
+missing. Its active confidence ladder has completed the exact and event controls up to
+the first nontrivial identity question; the next scientific transition is from
+specialized `n = 5` local geometry to a defensible component relation, not to a larger
+raw census.
 
 #### Refresh rule
 
@@ -340,21 +340,21 @@ both obvious ways of totalling that were wrong in the flattering direction — s
 [session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md)
 then did three things in one morning: reconciled the queue against the tree (`BC-085`
 and `BC-087` had landed while the agenda still advertised both as ready), built the
-pre-push floor `BC-086` asked for (`packing-validate --push`, 58s against `--fast`'s
+pre-push floor `BC-086` asked for (`packing-validate --push`, 58s against `--fast`’s
 646s), and ran the `BC-088` reassessment whose sequenced plan is
 [X-009](packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md) — then
-executed that plan's first block: **twelve verified ceilings moved off the integer grid
+executed that plan’s first block: **twelve verified ceilings moved off the integer grid
 onto exact sides** at `n = 18, 19, 26, 27, 38, 52, 66, 67, 82, 84, 85, 86`, every one
 decided by exact sign — ten over `Q(sqrt 2)` and the last two over `Q(sqrt 7)`, the
 first exact verification outside `Q(sqrt 2)` — from a published rule or a coordinate
-lift, about `3.2` of aggregate gap. The widest trailing ceiling is now `n = 50`'s `3/7`.
+lift, about `3.2` of aggregate gap.
+The widest trailing ceiling is now `n = 50`’s `3/7`.
 
-**The next slice is `BC-089`'s remainder on `think-d0j1`** in
+**The next slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
 the last two witness lifts — `n = 50` rational, `n = 54` quartic — then the
-robust-rational sweep, then the typed refusal at `n = 53`.
-`BC-049` on `think-xdly` is the research cell all of the mathematics below sits under,
-and it stays open.
+robust-rational sweep, then the typed refusal at `n = 53`. `BC-049` on `think-xdly` is
+the research cell all of the mathematics below sits under, and it stays open.
 
 **`n = 40` is infinitesimally flexible**, exactly, over `Q(sqrt 2)`: seven retained
 directions turn the sixteen squares of its tilted block and leave the frame fixed, and
@@ -2165,8 +2165,8 @@ round that names the hypothesis, control roles included.
 | [H-046](packing/campaign/hypotheses/H-046-regular-predecessor-continuation.md) | blocked | A class-angle path runs from Trump’s aligned chunk form to the record without chunk fission | 0 | — |
 | [H-047](packing/campaign/hypotheses/H-047-chunk-regular-predecessors.md) | blocked | Rounding a pose to its chunk-regular predecessor and re-quenching returns the pose | 0 | — |
 | [H-048](packing/campaign/hypotheses/H-048-glued-screen-fidelity.md) | blocked | The glued-chunk screen keeps the soft-mode winning stratum in its top decile | 0 | — |
-| [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov's decomposition | 0 | — |
-| [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent's 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
+| [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov’s decomposition | 0 | — |
+| [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent’s 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
 
 ### Confirmed
 
@@ -2618,19 +2618,25 @@ table above.
   Moving the suite onto the pull-request surface would push that surface past the point
   where it gets run at all, so what is owed is a cheap anchor-resolution check in
   `--records` rather than a faster suite.
+- **[D-404](defects.md) and [D-405](defects.md) are the reassessment auditing itself.**
+  `BC-088`'s entry sequenced X-009 on an unmeasured gap claim — the measured spread is
+  `0.056`–`0.536`, structured by `k = m² − n`, and `devtools/gap_ranking.py` now
+  carries it — and `BC-092` was stopped on an enumeration price that traces to no
+  artifact. X-010 carries the corrected sequencing input; the repricing is open on the
+  `x-010` beads.
 
 ## The Defect Record
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 403 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 405 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
-| validity | 97 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 152 | recorded something its own evidence contradicts |
+| validity | 98 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 153 | recorded something its own evidence contradicts |
 | robustness | 48 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
@@ -2640,7 +2646,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fifty-four defects in 403, and no soundness defect
+**The automated gate has caught fifty-four defects in 405, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2650,8 +2656,9 @@ test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
-One entry is currently `outstanding` rather than fixed, and it is worth naming because
-refusing was the whole of the available fix.
+Two entries are currently `outstanding` rather than fixed.
+[D-405](defects.md) waits on the enumeration repricing X-010 filed.
+The older one is worth naming because refusing was the whole of the available fix:
 [D-391](defects.md) is the first-order rigidity assessor intersecting a tangent cone
 that is a union: two squares meeting at a single corner are held apart by two axes, and
 non-overlap asks that *either* keep separating, so the linearized feasible set is a

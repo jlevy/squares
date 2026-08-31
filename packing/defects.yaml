@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 403
+count: 405
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -11852,3 +11852,73 @@ defects:
     that resolves but no longer catches.
   bead: think-xdly
   recorded_in: packing/devtools/controls.yaml
+- id: D-404
+  title: A sequencing plan was built on an unmeasured claim that the verified gap ranks nothing
+  date: '2026-08-31'
+  layer: record
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: one agenda cycle; BC-088 was written 2026-08-31 and sequenced X-009 the same day
+  severity: medium
+  status: contained
+  what: >-
+    BC-088's entry states the best-known-to-proved-lower gap "is about 0.5 for every open
+    case" and concludes that "ranking by that gap ranks nothing", and X-009 repeats the
+    premise. No measurement stands behind either sentence. Measured over all 65 open
+    cases, the spread is a factor of ten -- 0.0557 at n = 97 to 0.5364 at n = 51 -- and
+    the ranking is structured by k = m^2 - n: the open k = 3 line (61, 78, 97), then
+    n = 11, then the k = 4 line head the table, and the "about 0.5" cases are exactly the
+    mid-range annealing and strip records the reassessment was looking at.
+  consequence: >-
+    The erased signal points at the proof lane -- the k = 3 line is Bentz's own stated
+    conjecture with five proved predecessors, and n = 12 sits one row further down with
+    a lower bound that is not even bespoke -- so the plan sequenced three upper-bound
+    blocks while the structured head of the table went unread. Conservative: it cost
+    direction, not soundness; nothing false entered a record lane.
+  fix: >-
+    The measurement is a tool now: devtools/gap_ranking.py ranks the open cases from the
+    frontier records at 80-digit precision with the m^2 - k form labeled per case.
+    X-010 carries the table and sequences on it; the agenda entry and X-009 carry dated
+    correction notes rather than rewritten history.
+  regression: >-
+    devtools/gap_ranking.py replays the ranking on demand; its durable wiring (records
+    tier or generated view) is a filed x-010 bead. The check that would have caught the
+    class -- a claim of the form "measurement M says X" citing no artifact -- remains
+    manual review.
+  bead: think-bxqv
+  recorded_in: packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md
+- id: D-405
+  title: BC-092 was stopped on an enumeration price that traces to no artifact
+  date: '2026-08-31'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: one agenda cycle; the figure entered with X-009 on 2026-08-31
+  severity: medium
+  status: outstanding
+  what: >-
+    X-009, agenda-009, session-049, and the ledger all quote "9.3e9 raw orbit work at
+    n = 5" as the measured reason generative enumeration is priced out as its own block.
+    The figure appears in no artifact: the recorded size-five scaffold atlas gives
+    1,533,696 topology-coloring candidates collapsing to 11,013 orbits (a measured 139x
+    symmetry quotient the price never applied), the local realizability prefilter is
+    unpriced, and MAX_SCAFFOLD_SIZE = 5 is a typed cap in contact_assembly.py rather
+    than a measured wall. OR-2 names the failure: a sub-agent report's number became a
+    stop decision without in-repo replay.
+  consequence: >-
+    A research block was stopped and folded into another on a number nobody can replay.
+    If the corrected price is affordable, the queue silently dropped the one route to
+    restricted-class optimality statements; if it is not, the record still cannot say
+    so. Either way the decision reads as measured and is not.
+  fix: >-
+    Dated correction notes in X-009 and agenda-009 point here; X-010's Lane B rung 0 is
+    the repricing -- chunk-level stage-1 in counted LP solves with the orbit quotient
+    and prefilter applied and an omission-control design stated -- tracked on the x-010
+    beads. The stopped state stands until that number exists.
+  regression: >-
+    None yet beyond the correction notes; the repricing bead's exit is the number plus
+    a go/no-go, and the general detector (no load-bearing figure without an artifact
+    path) remains manual review under OR-2.
+  bead: think-bxqv
+  recorded_in: packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md
