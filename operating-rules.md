@@ -175,6 +175,39 @@ The clocks were right; the authority was wrong.
 [D-358](defects.md) is the same stop, reached by a misread clock instead — which is why
 the rule is about what may end a run, not about how to measure time.
 
+## OR-9: A pull request leads with what the branch cost
+
+The reviewer can see what changed.
+Nothing on the page said what it took, and the number was never missing —
+`campaign/resource-usage/` has held one `ClaudeEfficiencyRollup` per agent log the whole
+time, with turns by model and thinking level, tokens, and every tool call.
+It was simply never put where the merge decision is made.
+
+So the description of an end-to-end session’s pull request opens with that block, and it
+is generated rather than written:
+
+```shell
+uv run --frozen --all-extras --group dev python -m devtools.render_pr_rollup
+```
+
+**Close the session first.** The block is a function of the rollups, so it is wrong
+until they are written — which is why `close_session --render` prints it as its last act
+rather than leaving it to a second command.
+Close, then paste, then open.
+
+**Never collapse it to one number.** `turns.by_branch` is the only branch-aware field in
+the record, so a log that ran on more than one branch has an exact turn count and no way
+to split its tokens or its tool calls.
+The block prints three columns — on-branch logs only, prorated by turn share, and every
+log that touched the branch — of which the outer two are measurements and the middle is
+the estimate to quote.
+On the branch that introduced this rule the straddling logs carried 5,486 of 8,423
+turns, so the interval is not a rounding matter and a single figure would be a guess
+wearing a measurement’s clothes.
+
+This is `OR-1` applied to the reviewer rather than to the researcher: a measurement that
+exists and is not reported is the same waste as one taken and thrown away.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

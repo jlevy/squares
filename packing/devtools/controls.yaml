@@ -109,15 +109,21 @@ controls:
   run: python3 -m devtools.render_operating_rules --check
   expect: "AGENTS.md's summary has drifted"
 
-# The injected id must be one past the highest real rule, or the renderer refuses on
-# contiguity before it can notice the drift this control is about -- which is what happened
-# when OR-8 was added for real and this still injected OR-8. Bump it with the rule count.
+# The injected id must be EXACTLY one past the highest real rule. Not one behind, which is
+# a duplicate, and not far ahead, which is a gap -- the renderer refuses both on contiguity
+# before it can notice the drift this control is about, and a control that fails for the
+# wrong reason is what `expect` exists to catch.
+#
+# This has now bitten three times: OR-8 added while this injected OR-8, OR-9 the same, and
+# then an attempt to end the recurrence by jumping to OR-900, which failed on 2026-08-31
+# with "rule ids are not contiguous from OR-1: ... OR-9, OR-900". There is no id that
+# survives a new rule, so bump this one and the gap control below whenever a rule is added.
 - name: operating rules - a new rule never reaches the summary
   file: ../operating-rules.md
   replace:
     - "<!-- This document follows common-doc-guidelines.md."
     - |-
-      ## OR-9: Never push to a branch other than the designated one
+      ## OR-10: Never push to a branch other than the designated one
 
       <!-- This document follows common-doc-guidelines.md.
   run: python3 -m devtools.render_operating_rules --check
@@ -125,7 +131,7 @@ controls:
 
 - name: operating rules - a gap in the rule numbering is not renumbered silently
   file: ../operating-rules.md
-  replace: ["## OR-6: Plan multi-hour", "## OR-9: Plan multi-hour"]
+  replace: ["## OR-6: Plan multi-hour", "## OR-10: Plan multi-hour"]
   run: python3 -m devtools.render_operating_rules --check
   expect: "rule ids are not contiguous from OR-1"
 

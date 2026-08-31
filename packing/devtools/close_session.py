@@ -46,6 +46,8 @@ from pathlib import Path
 from typing import TypedDict
 
 from devtools.check_session_rollups import GRANDFATHERED_BEFORE
+from devtools.render_pr_rollup import current_branch
+from devtools.render_pr_rollup import render as render_branch_cost
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -468,7 +470,17 @@ def main(argv: list[str] | None = None) -> int:
             splice_synopsis(SYNOPSIS.read_text(encoding="utf-8")), encoding="utf-8"
         )
         print(f"wrote {REPORT.relative_to(ROOT.parent)} and the {SYNOPSIS.name} view")
-        return report(args.session)
+        status = report(args.session)
+        # Printed here rather than left to a second command anyone can forget. `OR-9` says
+        # the pull request leads with what the branch cost, and the moment that block is
+        # correct is the moment the rollups are written -- which is now.
+        print()
+        print("=" * 78)
+        print("Paste the block below at the top of the pull request (OR-9).")
+        print("=" * 78)
+        print()
+        print(render_branch_cost(current_branch()), end="")
+        return status
 
     if args.update:
         if args.log is None:

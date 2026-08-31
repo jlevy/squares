@@ -154,16 +154,38 @@ Do not use `git add -A` in a shared checkout.
 ## Closing a Session
 
 The checkpoint sequence above is per-phase.
-Bringing a whole session to a terminal state adds one step, and it is not optional:
+Bringing a whole session to a terminal state adds two steps, and neither is optional.
+
+**First, write the rollups and list them.** One record per log: the outer agent’s, and
+every sub-agent it spawned.
 
 ```shell
-# From packing/. One record per log: the outer agent's, and every sub-agent it spawned.
-uv run --frozen python -m devtools.log_rollup <session-log>.jsonl --out campaign/resource-usage
-uv run --frozen python -m devtools.log_rollup <sub-agent-log>.jsonl --out campaign/resource-usage
+# From packing/.
+uv run --frozen --all-extras --group dev python -m devtools.close_session \
+    --update --log <session-log>.jsonl --agent-logs <sub-agent-log>.jsonl ...
 ```
 
-Then list what those wrote in the session record’s `resource_rollups`,
+Then list what that wrote in the session record’s `resource_rollups`,
 repository-relative.
+`devtools.log_rollup` is what `--update` calls and is still there for a single log, but
+the sub-agent sweep is where reconstructing by hand went wrong twice in one afternoon,
+which is the reason `--update` exists.
+
+**Second, render.** This is the step that turns the rollups into something a reader
+sees:
+
+```shell
+uv run --frozen --all-extras --group dev python -m devtools.close_session --render
+```
+
+It rewrites [`session-close-report.yaml`](../session-close-report.yaml) and the
+`## Sessions Conducted` block in [`SYNOPSIS.md`](../../../SYNOPSIS.md), then prints the
+branch cost block for the pull request.
+**Run it before opening or updating the PR, and lead the description with what it
+prints** — that is `OR-9`, and the ordering is not a preference: the block is a function
+of the rollups, so it is wrong until step one is done.
+`--check` runs both comparisons in `packing-validate --records`, so a stale report or a
+hand-edited synopsis block fails the gate rather than going unnoticed.
 
 **Why this is a required field and a gate step rather than a line in a checklist.**
 Session-045 ran twenty-three phases without the rollup being written once, and nothing
