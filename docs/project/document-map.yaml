@@ -19,6 +19,7 @@ documents:
   - {path: packing/atlas/prospective/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/rendering/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: conventions.md, role: conventions, authority: definitive, lifecycle: maintained}
+  - {path: epistemics.md, role: conventions, authority: definitive, lifecycle: maintained}
   - {path: operating-rules.md, role: operating-rules, authority: definitive, lifecycle: maintained}
   - {path: development.md, role: development-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/README.md, role: runbook, authority: definitive, lifecycle: maintained}
@@ -33,6 +34,7 @@ documents:
   - {path: packing/frontier/README.md, role: frontier-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/frontier/STATUS.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/frontier/INVENTORY.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/frontier/RESULTS.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/resources/README.md, role: source-index, authority: definitive, lifecycle: maintained}
   - {path: defects.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/frankensim-probe/README.md, role: component-guide, authority: supporting, lifecycle: maintained}

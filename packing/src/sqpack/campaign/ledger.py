@@ -604,9 +604,10 @@ def check(
                 f"ideas.md: {hypothesis_id} is reserved, so it must not be a link target"
             )
 
-    # Cross-field verdict rules. These would be `allOf` conditionals in the schema,
-    # except that softschema 0.6.2 refuses any allOf object composition under
-    # `status: enforced` -- see the note in experiment.schema.yaml. They live here.
+    # Cross-field verdict rules. These could be `allOf` conditionals in the schema
+    # (softschema 0.8.0 lifted the old 0.6.2 refusal), and stay here by the
+    # conventions.md rule: a checker rule fails the offending artifact with a named
+    # reason and carries its own negative control -- see experiment.schema.yaml.
     for experiment in experiments:
         name = experiment["_path"].name
         problems.extend(

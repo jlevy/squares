@@ -4,19 +4,17 @@
 Two profiles are in use and they need different handling:
 
 - `frontmatter-md` (the 100 `n-NNN.md` cases). The softschema CLI validates
-  these directly: `uvx softschema@latest validate n-011.md`.
-- `pure-yaml` (frontier datasets, defects, and witness interchange files). The spec
-  defines this profile, but
-  softschema 0.6.1's CLI rejects any file without frontmatter
-  ("missing --contract because the document has no YAML frontmatter"), so the
-  CLI cannot enforce them today. Declaring `status: enforced` on a file nothing
-  checks would be a claim-integrity defect of exactly the kind this project
-  keeps finding in its sources, so this script validates them against the same
-  compiled JSON Schema the CLI would use.
+  these directly: `uvx softschema==0.8.0 validate n-011.md`.
+- `pure-yaml` (frontier datasets, defects, results, and witness interchange
+  files). Since softschema 0.8.0 the CLI validates these directly too (0.6.x
+  rejected any file without frontmatter, which is why this script exists in
+  its current shape).
 
-That makes the enforcement real for both profiles with no network access, which
-is what `packing-validate` needs. Run the CLI separately for an independent check of the
-Markdown artifacts.
+This script remains the in-gate enforcement for both profiles because the gate
+must run hermetically with no network access, and because declaring
+`status: enforced` on a file nothing loads would be a claim-integrity defect of
+exactly the kind this project keeps finding in its sources. Run the CLI
+separately for an independent check of either profile.
 """
 
 from __future__ import annotations

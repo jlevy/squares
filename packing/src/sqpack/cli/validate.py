@@ -1214,6 +1214,15 @@ def _evidence_inventory(context: Context) -> str:
     return _module(context, "devtools.render_evidence_inventory", "--check")
 
 
+def _results_register(context: Context) -> str:
+    # Sub-second: re-derives every declared V and C rung from the cited evidence atoms
+    # per epistemics.md and refuses unsupported or unexplained-understated declarations,
+    # then checks the generated RESULTS.md view against the register.
+    first = _module(context, "devtools.check_results")
+    second = _module(context, "devtools.render_results", "--check")
+    return f"{first}\n{second}"
+
+
 def _certificate_citations(context: Context) -> str:
     # Sub-second: it ast-parses five modules and reads a hundred frontmatter blocks. Records
     # tier because it checks the record, not the mathematics -- that every exact certificate
@@ -1832,6 +1841,23 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/render_evidence_inventory.py",
             "packing/frontier/evidence.yaml",
             "packing/frontier/INVENTORY.md",
+        ),
+    ),
+    Step(
+        "results rungs are earned and the view agrees",
+        _results_register,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/check_results.py",
+            "packing/devtools/render_results.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/RESULTS.md",
+            "packing/frontier/evidence.yaml",
+            "epistemics.md",
+            "README.md",
+            "SYNOPSIS.md",
         ),
     ),
     Step(

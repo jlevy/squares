@@ -21,43 +21,69 @@ The question is elementary to state and stubbornly open: at `n = 11` the best kn
 packing dates from 1979, and roughly `0.088` in side length still separates it from the
 best proved lower bound.
 Every claim here carries the evidence that earns it and says which kind of evidence that
-is; [Assurance in One Minute](#assurance-in-one-minute) is the whole vocabulary.
+is; [Assurance in One Minute](#assurance-in-one-minute) is the per-claim vocabulary, and
+[`epistemics.md`](epistemics.md) is the rubric that grades whole results.
 
 ## What Has Been Established
 
-An [inventory](packing/frontier/INVENTORY.md) of every claim in the register, generated
-from the evidence records, says which of them this repository established itself, which
-rest on someone else’s argument, and how far each has been checked.
-Seven results are marked `apparently-novel` — first established here as far as the
-archived corpus shows.
-That label is a statement about a search and never a claim of priority, so each names
-the corpus searched, what was searched for, that corpus’s known holes, and **what
-exactly is new**, which is usually narrower than the result: certifying someone else’s
-bound is real work and is not the same as establishing a new bound.
+This repository is a survey **and** a source of first-party results, and the two are
+kept separate.
+The [results register](packing/frontier/RESULTS.md) is the prioritized list of whole
+results — currently 13, of which 8 are marked `apparently-novel` — each graded on the
+two axes [`epistemics.md`](epistemics.md) defines: **V**, the strongest verification the
+claim holds anywhere in the world, and **C**, what this repository has confirmed
+end-to-end itself.
+Both rungs are re-derived from the recorded evidence on every validation run, so the
+register cannot silently overstate.
+`apparently-novel` is a statement about a recorded search of the archived corpus, never
+a claim of priority: each names the corpus searched, that corpus’s known holes, and
+**what exactly is new**, which is usually narrower than the result reads.
 
-The four theorems, one line each.
-The synopsis’s [results section](SYNOPSIS.md#results-established-here) owns the full
-statements, assurance labels, and the command that replays each one:
+First established here, as far as the archived corpus shows:
 
-- **Trump’s 1979 packing for `n = 11` is verified exactly** — over the degree-8 field
-  `ℚ(u)`, `u = tan(a/2)`, with 14 of the 55 square pairs touching at exactly zero gap:
-  contacts no floating-point tolerance can certify.
-  The check also independently confirms all 33 published digits of the record (**T-1**).
-- **The printed 2003 lower-bound proof for `s(11)` contains an exact gap, and a repair
-  is certified.**
+- **T-001 / T-002 — `s(17) ≥ 4.426213` and `s(18) ≥ 4.426213`.** A sixteen-point
+  unavoidable set, certified by two independent formal methods: exact rational cover
+  verification and an interval branch-and-bound over the full pose space.
+  The register’s first lower-bound movement at these `n` since Nagamochi 2005.
+- **T-010 — `s(11) ≥ 2 + 4/√5`, repaired.** The printed 2003 proof does not close:
   [exp-016](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md)
-  exhibits a strict counterexample to the printed Figure 14 unavoidability claim;
+  exhibits a strict counterexample to its Figure 14 unavoidability claim, and
   [exp-017](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md)
-  proves `s(11) ≥ 2 + 4/√5` from a preregistered, source-distinct repaired point set
-  (**T-4** — apparently novel, and not externally peer-reviewed).
-- **Fix every angle and one separating axis per pair, and the problem becomes a linear
-  program** (**T-2**). On Trump’s contact cell, the optimum over the five tilted
-  squares’ shared angle is a **corner**, not a smooth peak (**T-3**) — a smooth local
-  model is misspecified exactly at the record.
-- **A verified upper bound at `n = 29`**: an exact rational witness, replayed here and
-  by an independent checker, proves `s(29) ≤ 5.93388579981…`, retained beside the
-  tighter numerically checked record it does not replace
+  restores the complete argument from a preregistered, source-distinct replacement point
+  set, certified exactly.
+- **T-009 — `s(29) ≤ 5.93383346267692918974379895098`**, by a Krawczyk interval
+  certificate over an exact rational 29-square witness: as far as the corpus shows, the
+  first interval certificate for a bound in this subject
   ([`n-029`](packing/frontier/n-029.md)).
+- **T-012 / T-013 — rigidity decided where the sources only assert.** Goebel’s `n = 5`
+  optimum is not infinitesimally rigid but is second-order rigid; the `n = 40` packing
+  is infinitesimally *flexible*, with every retained flex refused at second order.
+  The catalogues annotate both merely “Rigid.”
+- **T-005 — an erratum in Bentz 2010.** Lemma 10’s middle replacement point is false as
+  printed and true under the corrected reading `(1.74, 1)`, settled against the
+  journal’s own page image.
+
+Audited from the literature — the theorem is the source’s, the machine audit is the
+contribution:
+
+- **T-004 / T-008 — Bentz 2010, Theorem 8 certifies exactly as printed**: as far as the
+  corpus shows, the first machine verification of a published unavoidable-set proof in
+  this literature, giving `s(46) = 7` with both halves machine-confirmed.
+- **T-011 — Trump’s 1979 `n = 11` record witness is exactly valid** over its degree-8
+  field, deciding the 14 zero-gap contacts no floating-point tolerance can and
+  independently confirming all 33 published digits of the record.
+
+Still resting on a read of the source rather than a machine check: `s(13) = 4` (T-006)
+and the Nagamochi lower-bound family (T-007), the workhorse that still carries 86 of the
+hundred cases.
+The synopsis’s [results section](SYNOPSIS.md#results-established-here) keeps the full
+legacy statements and replay commands for the `n = 11` structural work, including the
+LP-in-cell reduction and the corner at Trump’s cell that a smooth local model misses.
+
+Beneath the register, an [inventory](packing/frontier/INVENTORY.md) of every claim,
+generated from the evidence records, says which of them this repository established
+itself, which rest on someone else’s argument, and how far each has been checked —
+including per-case evidence that never rises to a registered result.
 
 The same source scrutiny runs against the literature itself: the earliest published
 proof of `s(7) = 3` (El Moumni 1999) carries four recorded defects in its printed route
@@ -322,6 +348,12 @@ and verified upper and lower bounds side by side.
 The [synopsis](SYNOPSIS.md#assurance-methods-and-claims) owns the full vocabulary,
 logical consequences, and current tool gaps.
 
+This vocabulary grades individual pieces of evidence.
+Whole results are graded separately on the ladders of
+[`epistemics.md`](epistemics.md) — `V0`–`V5` for the strongest verification existing
+anywhere, `C0`–`C5` for what this repository has confirmed end-to-end — which are
+derived from these evidence fields and re-checked on every validation run.
+
 ### Workflow Entry Points
 
 Choose the workflow whose promised output matches the work, then choose the operating
@@ -571,6 +603,9 @@ govern the *shape of what is produced*, operating rules govern *how the work is 
 ├── SYNOPSIS.md             The technical root: results, status, and the experiment
 │                           roll-up. Read this after the tutorial.
 ├── conventions.md          Every rule this project runs on, and which are checked
+├── epistemics.md           The result-grading rubric: verification and confirmation
+│                           ladders, significance anchors, and novelty — the vocabulary
+│                           behind the results register
 ├── operating-rules.md      How a session is conducted: what to pick up, how to spend
 │                           it, and the mistakes that cost the most wall clock
 ├── development.md          Python 3.14 setup, maturity boundaries, validation loops,

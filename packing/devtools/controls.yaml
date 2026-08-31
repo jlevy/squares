@@ -535,6 +535,19 @@ controls:
   expect: "which is not in the registry"
 
 # --- the frontier corpus ---
+# epistemics.md's whole promise is that a confirmation rung is earned from recorded
+# atoms rather than asserted. The one failure that would hollow it out silently is a
+# register entry claiming a rung its citations do not support, so the checker's refusal
+# is itself controlled.
+- name: results - a confirmation rung claimed past its atoms
+  file: frontier/results.yaml
+  replace:
+    - "      s(13) = 4 (Bentz 2010, Theorem 9).\n    scope: {n_values: [13]}\n    verification: V3\n    confirmation: C1"
+    - "      s(13) = 4 (Bentz 2010, Theorem 9).\n    scope: {n_values: [13]}\n    verification: V3\n    confirmation: C4"
+  run: python3 -m devtools.check_results
+  expect: "T-006: declares C4 but the cited atoms support only C3"
+
+
 - name: frontier - generated table drifting from its source
   file: frontier/n-011.md
   # Mutate a digit the table actually SHOWS. The rendered cell carries 8 significant

@@ -147,6 +147,7 @@ case or experiment separately.
 | [Prospective Packing Atlas, `n = 101..324`](packing/atlas/prospective/README.md) | component scope and use | supporting | maintained | — |
 | [Deterministic SVG Gallery](packing/atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
 | [Conventions for `packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
+| [Epistemics](epistemics.md) | artifact and naming conventions | definitive | maintained | — |
 | [Operating Rules](operating-rules.md) | how a session is conducted | definitive | maintained | — |
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign — W6 Runbook](packing/campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
@@ -161,6 +162,7 @@ case or experiment separately.
 | [Frontier: What Is Known About `s(n)`, Case by Case](packing/frontier/README.md) | frontier semantics and contribution path | definitive | maintained | — |
 | [Current Square-Packing Frontier](packing/frontier/STATUS.md) | generated status view | generated | generated | — |
 | [Evidence inventory](packing/frontier/INVENTORY.md) | generated status view | generated | generated | — |
+| [Results](packing/frontier/RESULTS.md) | generated status view | generated | generated | — |
 | [Research Resources: Square Packing](packing/resources/README.md) | source retention and archive policy | definitive | maintained | — |
 | [Defect log](defects.md) | generated status view | generated | generated | — |
 | [FrankenSim probes](packing/frankensim-probe/README.md) | component scope and use | supporting | maintained | — |
@@ -435,7 +437,7 @@ forces the threshold/segment/moving-resource machinery. Everything mathematical
 from the run was held `unresolved` with `needs_review` overnight per the
 unattended rules; the verification review below resolved every hold the same day.
 
-**As of 2026-08-31, evening — start here.** The owner moved the review from
+**As of 2026-08-31, evening.** The owner moved the review from
 their queue to the repository's own rubric — determinations, not deferrals —
 and
 [session-060](packing/campaign/agent-sessions/session-060-verification-review.md)
@@ -467,6 +469,31 @@ and refutation at `4.427` and typed as follow-on. The assembled case is the
 the PR as a whole. Follow-ons stay on their beads (`think-1o1f`, `think-q6vy`,
 `think-07t7` paused, `think-0z9b`); `BC-097` and `BC-089`'s remainder remain
 the sanctioned gate filler.
+
+**As of 2026-08-31, night — start here.** The review's epistemics became
+infrastructure: the owner split *verified* (the strongest verification a claim
+holds anywhere in the world) from *confirmed* (what this repository has
+established end-to-end itself), and
+[session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md)
+is codifying that as `BC-107` under `think-n8vl` in
+[agenda-011](packing/campaign/agendas/agenda-011-verification-review.md), a
+`pipeline-improvement` slice.
+[`epistemics.md`](epistemics.md) at the repository root now owns the four axes —
+`V0`–`V5`, `C0`–`C5` with machine-checkable promotion checklists, anchored
+significance that never gates, and novelty adopted unchanged from the evidence
+contract — and the results register
+([`packing/frontier/results.yaml`](packing/frontier/results.yaml), rendered as
+[`RESULTS.md`](packing/frontier/RESULTS.md)) declares the whole results
+`T-001`–`T-013`, whose rungs `devtools/check_results.py` re-derives from the
+cited evidence atoms on every validation run — a declared rung the atoms do not
+support fails the build, and so does unexplained understatement, so committing a
+result after an effort is a register edit the gate itself adjudicates.
+The register subsumes the review's determinations (the `s(17)`/`s(18)` upgrade
+is `T-001`/`T-002` at `V4`/`C4`) and the legacy first-party theorems (the
+Stromquist repair is `T-010`; this document's own `T-1`–`T-4` below remain
+declared shorthand). softschema is upgraded to `0.8.0` across the schema
+toolchain in the same slice.
+Research follow-ons are unchanged on their beads.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
@@ -1757,6 +1784,17 @@ listed here so the dependencies of this program are explicit.
 
 ### Results established here
 
+The authoritative, prioritized list of whole results is now the
+[results register](packing/frontier/RESULTS.md)
+([`packing/frontier/results.yaml`](packing/frontier/results.yaml)), graded on
+the verification and confirmation ladders [`epistemics.md`](epistemics.md)
+defines and re-derived by `devtools/check_results.py` on every validation run;
+the repair below is registered there as `T-010`, the Trump validity check as
+`T-011`. This section keeps the original `n = 11` statements with their replay
+commands — the single-digit `T-N` ids are this document’s declared shorthand,
+retained where the surrounding prose cites them, and the structural results
+`T-2` and `T-3` live only here and in their registry artifacts.
+
 | Id | Statement | Assurance or basis | Where it lives | Reproduce with |
 | --- | --- | --- | --- | --- |
 | **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **verified** (`exact-algebraic`; a published construction, confirmed here) | `sqpack` | `uv run --frozen python -m cases.trump11.verify_exact` |
@@ -2428,9 +2466,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 42 | 12,876 | 7,405 | 151 | 1,561 | 65.1 h |
+| claimed by a session | 42 | 13,228 | 7,573 | 153 | 1,565 | 69.18 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **52** | **14,336** | **8,283** | **183** | **1,734** | **71.97 h** |
+| **measured** | **52** | **14,688** | **8,451** | **185** | **1,738** | **76.05 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2450,13 +2488,14 @@ rounding.
 | [session-058](packing/campaign/agent-sessions/session-058-block7-m8-sizing.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-059](packing/campaign/agent-sessions/session-059-block8-tau-star-pilot.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-060](packing/campaign/agent-sessions/session-060-verification-review.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
-| *shared by 16 sessions* | — | 3 | 9,539 | 5,272 | 118 | 56.79 h |
+| [session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
+| *shared by 17 sessions* | — | 3 | 9,891 | 5,440 | 120 | 60.87 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 16 |
+| measured | 17 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **60** |
+| **total** | **61** |
 
 <!-- END GENERATED: session-close-report -->
 

@@ -36,7 +36,7 @@ The prefix says what kind of thing it is.
 | Search/proof strategy | `search:N`, `proof:N` | the frontier catalogues | `search:12` |
 | Defect | `D-NNN` | the directory, logged in `defects.yaml` | `D-014` |
 | Bead | `think-xxxx` | the repository’s `tbd` queue (prefix set in `.tbd/config.yml`) | `think-1s0h` |
-| Theoretical result | `T-N` | `SYNOPSIS.md` shorthand; the registry artifact it cites is authoritative | `T-2` |
+| Theoretical result | `T-NNN` | the results register, [`packing/frontier/results.yaml`](packing/frontier/results.yaml), under [`epistemics.md`](epistemics.md); `SYNOPSIS.md`’s legacy single-digit `T-N` ids remain that document’s declared shorthand | `T-001` |
 | Review finding | `R-N`, `F-NN` | the review document that declares them | `R-2`, `F-07` |
 | Basin (planned) | canonical key, plus a `B-NNN` alias | campaign, spans series | — |
 
@@ -141,10 +141,12 @@ no evidence. [`development.md`](development.md#hashes-and-repository-owned-artif
 owns the narrow exceptions for real trust boundaries, deduplication, event identity, and
 cache correctness.
 
-**Cross-field rules live in the checker, not the schema.** [checked] softschema 0.6.2
-rejects `allOf` object composition under `status: enforced`, so a conditional would
-invalidate every artifact rather than the offending one
-([jlevy/softschema#41](https://github.com/jlevy/softschema/issues/41)).
+**Cross-field rules live in the checker, not the schema.** [checked] The convention
+began as a workaround — softschema 0.6.2 rejected `allOf` object composition under
+`status: enforced` ([jlevy/softschema#41](https://github.com/jlevy/softschema/issues/41)),
+fixed by 0.8.0 — and is retained by choice: a checker rule fails the offending
+artifact with a named reason where a schema conditional invalidates every artifact,
+and a checker rule can carry its own negative control.
 
 ### Workflow, Focus, Phase, and Slice
 
@@ -236,6 +238,15 @@ verified—and citations sit near the claims they support.
 “Verified” is reserved for the formal level.
 [convention]
 
+**The rubric that ranks whole results lives in [`epistemics.md`](epistemics.md), not
+here.** [checked: `devtools/check_results.py`] This section defines the recorded
+fields—assurance, method, precision, origin, review state—that its verification and
+confirmation ladders derive from.
+The ladder vocabulary (`V0`–`V5`, `C0`–`C5`, significance, novelty as applied to whole
+results) is defined there and only there, and the results register at
+`packing/frontier/results.yaml` is where a whole result’s rungs are declared and
+re-derived on every validation run.
+
 **Budgets are in pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`. [convention]
 Machine-independent, and comparable across proposers whose move semantics differ.
 Wall clock is reported alongside as a courtesy, never as the budget.
@@ -246,7 +257,9 @@ Wall clock is reported alongside as a courtesy, never as the budget.
 
 **One document owns each vocabulary, and the rest are short forms.** [convention]
 [Assurance and method](#4-evidence) above are definitive here, and the schemas enforce
-them. Mathematical terminology is defined in [`SYNOPSIS.md`](SYNOPSIS.md#terminology);
+them; the result-level epistemic vocabulary is owned by
+[`epistemics.md`](epistemics.md). Mathematical terminology is defined in
+[`SYNOPSIS.md`](SYNOPSIS.md#terminology);
 [`TUTORIAL.md`](TUTORIAL.md) §9 and [`README.md`](README.md)’s Essential Terms are short
 forms that may abbreviate but must not contradict it, and a term either appears in the
 synopsis or is marked local where it is used.
