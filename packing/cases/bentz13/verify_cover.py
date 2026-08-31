@@ -132,6 +132,24 @@ def lemma5_threshold_certificate(a: Fraction, b: Fraction) -> dict[str, object]:
     }
 
 
+def orient(first: Point, second: Point, third: Point):
+    """Twice the signed area of the triangle (first, second, third)."""
+    return (second[0] - first[0]) * (third[1] - first[1]) - (second[1] - first[1]) * (
+        third[0] - first[0]
+    )
+
+
+def between_points(first: Point, second: Point, value: Point) -> bool:
+    """Whether ``value`` lies within the axis-aligned bounding box of the segment."""
+    for axis in (0, 1):
+        low, high = first[axis], second[axis]
+        if (high - low).sign() < 0:
+            low, high = high, low
+        if (value[axis] - low).sign() < 0 or (high - value[axis]).sign() < 0:
+            return False
+    return True
+
+
 def build_certificate() -> dict[str, object]:
     set_points, vertices, plan = build()
     return certify(set_points=set_points, vertices=vertices, plan=plan)
@@ -144,11 +162,11 @@ def certify(
     plan: dict[str, CellPlan],
     expected_faces: int = EXPECTED_FACES,
     boundary: Face = BOUNDARY,
+    container_side: Fraction = Fraction(SIDE),
 ) -> dict[str, object]:
     one = Rat.of(1)
     half = Rat.of(Fraction(1, 2))
-    side = Rat.of(SIDE)
-    zero = Rat.of(0)
+    side = Rat.of(container_side)
 
     faces = tuple(entry.face for entry in plan.values())
     partition = validate_polygon_partition(
@@ -248,9 +266,21 @@ def certify(
             if len(entry.outs) != 2:
                 raise CoverCertificateError(f"{name}: Lemma 4 needs both inner corners")
             matched = []
+            set_outs = []
             for out in entry.outs:
-                require_set(name, out)
                 ox, oy = point(out)
+                on_wall = (
+                    ox.is_zero()
+                    or oy.is_zero()
+                    or (ox - side).is_zero()
+                    or (oy - side).is_zero()
+                )
+                if out in set_points:
+                    set_outs.append(out)
+                elif not on_wall:
+                    raise CoverCertificateError(
+                        f"{name}: out {out} is neither a set point nor uncontainable"
+                    )
                 matched.append(
                     next(
                         (
@@ -265,10 +295,12 @@ def certify(
                 raise CoverCertificateError(
                     f"{name}: outs do not match the rectangle's inner corners"
                 )
-            charged.update(entry.outs)
+            if not set_outs:
+                raise CoverCertificateError(f"{name}: no containable set-point out")
+            charged.update(set_outs)
         elif kind == "lemma5":
-            if entry.quad is None or entry.wall != "bottom":
-                raise CoverCertificateError(f"{name}: Lemma 5 cell declares no bottom quad")
+            if entry.quad is None or entry.wall not in ("bottom", "left"):
+                raise CoverCertificateError(f"{name}: Lemma 5 cell declares no wall quad")
             origin, a, b = entry.quad
             if not (Fraction(0) < a < 1 and Fraction(0) < b < 1):
                 raise CoverCertificateError(f"{name}: a, b outside Lemma 5's open box")
@@ -276,12 +308,21 @@ def certify(
                 raise CoverCertificateError(f"{name}: a not above 2 sqrt 2 - 2")
             if a * a + (b - 1) * (b - 1) > 1:
                 raise CoverCertificateError(f"{name}: (a, b) further than one from (0, 1)")
+            if entry.direction not in (1, -1):
+                raise CoverCertificateError(f"{name}: Lemma 5 direction must be +1 or -1")
             thresholds.append(lemma5_threshold_certificate(a, b))
+            span = Fraction(entry.direction) * a
+
+            def place(along: Fraction, perp: Fraction, *, wall: str = str(entry.wall)) -> Point:
+                if wall == "bottom":
+                    return (Rat.of(along), Rat.of(perp))
+                return (Rat.of(perp), Rat.of(along))
+
             corners = (
-                (Rat.of(origin), zero),
-                (Rat.of(origin + a), zero),
-                (Rat.of(origin + a), Rat.of(b)),
-                (Rat.of(origin), one),
+                place(origin, Fraction(0)),
+                place(origin + span, Fraction(0)),
+                place(origin + span, b),
+                place(origin, Fraction(1)),
             )
             for vertex in face:
                 if not point_in_closed_convex_polygon(point(vertex), corners):
@@ -329,13 +370,28 @@ def certify(
                     )
             charged.add(out)
         elif kind == "lemma2":
-            for left, right in zip(face, face[1:] + face[:1], strict=True):
-                gap = one - squared_distance(point(left), point(right))
+            corner_names = entry.corners if entry.corners is not None else tuple(face)
+            if len(corner_names) != 3 or len(set(corner_names)) != 3:
+                raise CoverCertificateError(f"{name}: Lemma 2 needs three distinct corners")
+            triangle = tuple(point(corner) for corner in corner_names)
+            for left, right in zip(triangle, triangle[1:] + triangle[:1], strict=True):
+                gap = one - squared_distance(left, right)
                 if gap.sign() < 0:
                     raise CoverCertificateError(f"{name}: a triangle side exceeds one")
-            if any(vertex not in set_points for vertex in face):
-                raise CoverCertificateError(f"{name}: a triangle vertex is not a set point")
-            charged.update(face)
+            if any(corner not in set_points for corner in corner_names):
+                raise CoverCertificateError(f"{name}: a triangle corner is not a set point")
+            for vertex in face:
+                position = point(vertex)
+                on_boundary = any(
+                    orient(triangle[index], triangle[(index + 1) % 3], position).is_zero()
+                    and between_points(triangle[index], triangle[(index + 1) % 3], position)
+                    for index in range(3)
+                )
+                if not on_boundary:
+                    raise CoverCertificateError(
+                        f"{name}: a face vertex is not on the triangle boundary"
+                    )
+            charged.update(corner_names)
         else:
             raise CoverCertificateError(f"{name}: unknown cell kind {kind}")
 
@@ -345,7 +401,8 @@ def certify(
 
     return {
         "claim": (
-            f"every box in [0,4]^2 contains one of the configuration's {len(set_points)} points"
+            f"every box in [0,{container_side}]^2 contains one of the "
+            f"configuration's {len(set_points)} points"
         ),
         "arithmetic": "exact rational signs only; radical premises squared away",
         "partition": partition,

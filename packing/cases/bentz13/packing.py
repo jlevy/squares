@@ -130,6 +130,8 @@ class CellPlan:
     corner: str | None = None
     rect: tuple[Fraction, Fraction, Fraction, Fraction] | None = None
     quad: tuple[Fraction, Fraction, Fraction] | None = None
+    direction: int = 1
+    corners: tuple[str, str, str] | None = None
 
 
 #: The near-corner offset 0.914 and the centre-block offset 1.65, exactly.

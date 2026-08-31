@@ -380,7 +380,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [17, 18]
-    state: blocked
+    state: complete
     priority: 1
     question: >-
       Can certified unavoidable sets beat Nagamochi's closed form at n = 17 and 18,
@@ -404,8 +404,21 @@ agenda:
     depends_on: [BC-093, BC-094, BC-099]
     workflows: [research-loop]
     next_evidence: >-
-      Promoted by the BC-098 checkpoint into tonight's recovered wall, behind BC-099:
-      the instruments it needs exist with their triples green, and the synthesis loop
+      Discharged by session-057: s(17) >= 17/4 = 4.25 and s(18) >= 17/4,
+      certified exactly by a sixteen-point unavoidable set (cases/green17) --
+      the first verified-lane movement at those sizes since 2005, above
+      Nagamochi's 4.1623, held unresolved with needs_review with frontier
+      adoption left to a reviewed evidence-contract change. The falsifier
+      corroborates by saturation (393,216 poses, best margin -1e-4, not-a-proof
+      caveat intact); the side is pinned to exactly 17/4 by an 11/1000000
+      slack in the near-slab corner bound. The dependency on BC-099 is
+      satisfied by its calibration half (Theorem 8 plus the m = 4 foundation
+      layer and Lemma 10 settlement); the m = 4 continuation stays typed on
+      think-1o1f.
+    artifacts:
+    - cases/green17/packing.py
+    - cases/green17/verify_cover.py
+    - tests/test_green17.py
       it runs is the one BC-099 exercises first. Target window ~10:30Z-12:00Z.
   - id: BC-102
     purpose: research

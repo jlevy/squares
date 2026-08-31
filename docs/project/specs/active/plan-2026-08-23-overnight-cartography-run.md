@@ -342,12 +342,15 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, use
-[session 056](../../../../packing/campaign/agent-sessions/session-056-block5-bentz13-figure2.md),
-the closed block 5 carrying the m = 4 foundation layer (Figure 2 certified and
-Lemma 10 machine-settled both ways, held for review); the next slice is `BC-101`
-under `think-q6vy` in
-[agenda-010](../../../../packing/campaign/agendas/agenda-010-two-lane-overnight-run.md),
-the two-lane overnight run X-010 argued and the owner directed.
+[session 057](../../../../packing/campaign/agent-sessions/session-057-block6-green-sizes.md),
+the closed block 6 carrying the s(17) >= 17/4 certificate held for review; the
+run's committed blocks are all discharged, and the finalization handoff names
+`BC-101` under `think-q6vy` in
+[agenda-010](../../../../packing/campaign/agendas/agenda-010-two-lane-overnight-run.md)
+as the reviewed cell whose follow-ons (the n = 19 variant, the Green
+reconstruction) a next session would take.
+Everything mathematical from the overnight run is held `unresolved` with
+`needs_review` for the owner's morning review.
 Sessions 027 through 049 are terminal, and agendas 006, 007 and 008 are closed; the
 recognition block BC-089 keeps its remainder open as sanctioned gate filler.
 

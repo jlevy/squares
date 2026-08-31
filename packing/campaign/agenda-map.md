@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **7** ready, **5** tentative, **14** blocked, **5** stopped, **74** complete.
+- **7** ready, **5** tentative, **13** blocked, **5** stopped, **75** complete.
 
 - **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
 
@@ -52,7 +52,6 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-002 | `BC-022` | 4 | `BC-021` | no | — |
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
-| agenda-010 | `BC-101` | 1 | `BC-093`, `BC-094`, `BC-099` | no | — |
 
 ## Discharged elsewhere
 
@@ -82,7 +81,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-007 | completed |  |  |  |  | 4 | 4 |
 | agenda-008 | completed |  |  |  |  | 4 | 4 |
 | agenda-009 | active | 2 | 1 |  | 1 | 4 | 8 |
-| agenda-010 | active | 2 | 4 | 1 |  | 6 | 13 |
+| agenda-010 | active | 2 | 4 |  |  | 7 | 13 |
 
 ## What the states mean
 
