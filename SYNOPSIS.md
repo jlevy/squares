@@ -357,8 +357,11 @@ two-lane overnight program from
 blocks of two to three hours, instruments before research in both lanes, a checkpoint
 (`BC-098`) resequencing the tentative half mid-run, and the standard unattended rules
 stated in the agenda’s own objective.
-Take its block 1 (`BC-093`, then `BC-094`) first; `BC-097` and `BC-089`’s remainder are
-the sanctioned gate filler.
+**The run is live:
+[session-050](packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md)
+is in progress on `BC-093` under `think-y2ju`**, block 1 of that agenda, with `BC-094`
+on `think-yrvm` as the block’s second phase; `BC-097` and `BC-089`’s remainder are the
+sanctioned gate filler.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
@@ -2333,8 +2336,8 @@ rounding.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 5 |
-| closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **49** |
+| closed before `resource_rollups` existed, logs not retained | 45 |
+| **total** | **50** |
 
 <!-- END GENERATED: session-close-report -->
 

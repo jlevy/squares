@@ -342,12 +342,12 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, use
-[session 049](../../../../packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md).
-Sessions 027 through 049 are terminal, and agendas 006, 007 and 008 are closed.
-Open `BC-089`’s remainder under `think-d0j1` as the next bounded driver: the hygiene
-commitments are complete, `BC-088`’s reassessment is discharged by X-009, and the
-recognition block it sequenced first has twelve of its fourteen cases certified with
-only the rational `n = 50` and quartic `n = 54` lifts still open.
+[session 050](../../../../packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md),
+which is in progress on `BC-093` under `think-y2ju` as block 1 of
+[agenda-010](../../../../packing/campaign/agendas/agenda-010-two-lane-overnight-run.md),
+the two-lane overnight run X-010 argued and the owner directed.
+Sessions 027 through 049 are terminal, and agendas 006, 007 and 008 are closed; the
+recognition block BC-089 keeps its remainder open as sanctioned gate filler.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

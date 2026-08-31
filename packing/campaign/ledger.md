@@ -64,6 +64,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-047](agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | completed | contemporaneous | `general-improvement` (process) | `general-improvement` (process) | 6 | think-xdly | `BC-049` stays open and this session did not touch its mathematics. Three evidence records still make no novelty statement and should keep making none until someone searches: `E-migrated-lower-report`, whose provenance is `unknown-historical`, and the two n = 29 numerical checks. The inventory's own arithmetic names the highest-value unclaimed work -- an informal review of `[Nagamochi 2005]`, which 88 cases rest on and nobody here has read (`think-xdly`). |
 | [session-048](agent-sessions/session-048-what-every-session-cost.md) | completed | contemporaneous | `pipeline-improvement` (process) | `general-improvement` (process) | 3 | think-atm1 | `BC-085` on `think-9k5k`, the first ready cell of `agenda-009` and the one the reassessment behind it is blocked on. The ten unclaimed rollups stay unclaimed: they predate the field, and inventing owners for them would be worse than counting them separately, which the report now does. |
 | [session-049](agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | completed | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 5 | think-bxqv | `BC-089` continues on `think-d0j1`: the remaining witness lifts -- n = 50 rational and n = 54 in the quartic field, the Q(sqrt 7) pair having landed as a coda to this session -- then the robust-rational sweep bead, then the block's typed-refusal record for n = 53. |
+| [session-050](agent-sessions/session-050-block1-certifier-and-falsifier.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 1 | think-y2ju | The session is in progress on `BC-093` under `think-y2ju`: slice 1 reads the certifier core first-hand and produces the extraction cut list; `think-yrvm` opens phase 2. |
 
 ### Workflow summary
 
@@ -77,7 +78,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 9 | 4 | 48 | 6 |
 | `efficiency-loop` | 7 | 0 | 20 | 0 |
 | `research-loop` | 3 | 4 | 23 | 7 |
-| `pipeline-improvement` | 17 | 0 | 74 | 0 |
+| `pipeline-improvement` | 18 | 0 | 75 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas

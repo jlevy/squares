@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 49
+count: 50
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 5
-  sessions_unmeasured: 44
+  sessions_unmeasured: 45
   attributed:
     rollups: 36
     turns: 10487
@@ -532,3 +532,12 @@ sessions:
   tool_errors: 10
   one_off_code: 121
   wall_hours: 2.48
+- id: session-050
+  title: "Block 1 of the two-lane overnight run: the certifier instrument and the falsifier"
+  status: in_progress
+  primary_bead: think-y2ju
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
