@@ -8,7 +8,7 @@ softschema:
 session:
   id: session-050
   primary_bead: think-1s0h
-  status: in_progress
+  status: completed
   title: The exp-045 independent audit, the -W bridge, and the acceptance
   date: '2026-08-31'
   started_at: '2026-08-31T03:05:00Z'
@@ -132,7 +132,7 @@ session:
       the experiment record (identifier map, retention equivalence, docstring), D-404,
       the verdict flip to accepted under the owner's direction, BC-029's completion,
       and the SYNOPSIS reconciliation.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       The bridge closed the mathematical gap; what remains is the record carrying the
@@ -152,11 +152,24 @@ session:
     fallback: >-
       Leave the verdict unresolved with the amendment in place and the acceptance as
       the named next action.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      All recorded where the next auditor will look. The Amendment carries the
+      identifier substitution and its session-032 derivation with the frozen list
+      retained unedited; the verdict is accepted with provenance named and the claim
+      boundary untouched; D-404 is rendered; BC-029 is complete with its three-stage
+      discharge stated; SYNOPSIS carries the acceptance in both narratives, the
+      registry row, and the defect aggregates; and the records tier is green on the
+      exact tree, with the push floor green at 137s including the bridge tests.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md
+    - defects.md
+    - packing/campaign/agendas/agenda-003-balanced-ten-hour-research-program.md
+    - SYNOPSIS.md
+    stop_reason: >-
+      The acceptance is recorded with its audit, the queue reflects it, and the branch
+      is pushed with the floor green.
     next_action: >-
-      Push, open the pull request, and close this session with the tool.
+      Open the pull request per OR-9 and end the session.
   budget:
     wall_minutes: 110
     finalization_minutes: 20
@@ -179,7 +192,12 @@ session:
       admission condition unperformed and two P0 commitments parked behind it. The
       registration and the artifact disagreed on the mutation vocabulary and nobody had
       noticed; the accepted helpers had never run on -W.
-    after: null
+    after: >-
+      Accepted, on an audit an outsider can replay: the certificate's byte-exact replay
+      refuses perturbation, the accepted helpers corroborate all eighteen records on the
+      actual -W direction with +W/-W coefficients equal, the registration's vocabulary
+      drift is mapped in the record as D-404, and the gate that parked two P0
+      commitments is cleared with the claim boundary unmoved.
   delegations: []
   outputs:
   - packing/campaign/agent-sessions/session-050-exp045-audit-and-acceptance.md
@@ -191,8 +209,11 @@ session:
   - uv run --frozen --all-extras --group dev packing-validate --records
   - uv run --frozen --all-extras --group dev packing-validate --push
   - uv run --frozen --all-extras --group dev python -m devtools.check_minus_w_bridge
-  resource_rollups: []
-  stop_reason: null
+  resource_rollups:
+  - packing/campaign/resource-usage/39fcaf14-acd6-59fb-88e9-05f635cb7f4d.yaml
+  stop_reason: >-
+    Every phase at its exit, the acceptance recorded with provenance, and the pull
+    request the owner asked to review carrying the whole block.
   next_action: >-
     `BC-089`'s remainder on `think-d0j1` stays the next slice, per X-009's sequencing;
     what this session changed is what comes after it: the n = 5 connectivity question

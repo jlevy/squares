@@ -11,15 +11,15 @@ count: 50
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 5
-  sessions_unmeasured: 45
+  sessions_measured: 6
+  sessions_unmeasured: 44
   attributed:
     rollups: 36
-    turns: 10487
-    tool_calls: 6132
-    tool_errors: 123
-    one_off_code: 1383
-    wall_hours: 47.81
+    turns: 10671
+    tool_calls: 6223
+    tool_errors: 125
+    one_off_code: 1395
+    wall_hours: 49.79
   unattributed:
     rollups: 10
     turns: 1460
@@ -29,11 +29,11 @@ totals:
     wall_hours: 6.87
   measured:
     rollups: 46
-    turns: 11947
-    tool_calls: 7010
-    tool_errors: 155
-    one_off_code: 1556
-    wall_hours: 54.68
+    turns: 12131
+    tool_calls: 7101
+    tool_errors: 157
+    one_off_code: 1568
+    wall_hours: 56.66
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -527,17 +527,21 @@ sessions:
   - packing/campaign/resource-usage/agent-a71eca88143ad786d.yaml
   - packing/campaign/resource-usage/agent-a8c1a849b5e57ee7a.yaml
   - packing/campaign/resource-usage/agent-ac4fec61a53717f37.yaml
-  turns: 1226
-  tool_calls: 739
-  tool_errors: 10
-  one_off_code: 121
-  wall_hours: 2.48
+  turns: 1410
+  tool_calls: 830
+  tool_errors: 12
+  one_off_code: 133
+  wall_hours: 4.46
 - id: session-050
   title: "The exp-045 independent audit, the -W bridge, and the acceptance"
-  status: in_progress
+  status: completed
   primary_bead: think-1s0h
   phases: 3
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/39fcaf14-acd6-59fb-88e9-05f635cb7f4d.yaml
+  turns: 795
+  tool_calls: 466
+  tool_errors: 8
+  one_off_code: 42
+  wall_hours: 3.24

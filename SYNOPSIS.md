@@ -2315,9 +2315,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 36 | 10,487 | 6,132 | 123 | 1,383 | 47.81 h |
+| claimed by a session | 36 | 10,671 | 6,223 | 125 | 1,395 | 49.79 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **46** | **11,947** | **7,010** | **155** | **1,556** | **54.68 h** |
+| **measured** | **46** | **12,131** | **7,101** | **157** | **1,568** | **56.66 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2325,13 +2325,14 @@ rounding.
 | [session-046](packing/campaign/agent-sessions/session-046-gobel-family-constructions.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-047](packing/campaign/agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | 6 | 14 | 1,230 | 841 | 18 | 2.56 h |
 | [session-048](packing/campaign/agent-sessions/session-048-what-every-session-cost.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
-| [session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | 5 | 5 | 1,226 | 739 | 10 | 2.48 h |
-| *shared by 5 sessions* | — | 1 | 6,783 | 3,787 | 84 | 38.74 h |
+| [session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | 5 | 4 | 615 | 364 | 4 | 1.22 h |
+| [session-050](packing/campaign/agent-sessions/session-050-exp045-audit-and-acceptance.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
+| *shared by 6 sessions* | — | 2 | 7,578 | 4,253 | 92 | 41.98 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 5 |
-| closed before `resource_rollups` existed, logs not retained | 45 |
+| measured | 6 |
+| closed before `resource_rollups` existed, logs not retained | 44 |
 | **total** | **50** |
 
 <!-- END GENERATED: session-close-report -->
