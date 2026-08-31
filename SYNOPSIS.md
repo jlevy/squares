@@ -400,11 +400,13 @@ instrument — converging with `BC-095`'s repricing from the price side.
 Two results already landed on first complete runs, both held `unresolved` with
 `needs_review`: **Figure 2's sixteen-point base configuration is machine-certified**
 (30 exact rational cells: 4 Lemma 1 corner pentagons, 8 Lemma 4 wall rectangles, 18
-Lemma 2 triangles; 16/16 charged), and **the Lemma 10 audit found a candidate printed
-defect** — the replacement point `(1, 1.74)` is refuted by an exact escape
-certificate, while the corrected reading `(1.74, 1)` is contained by the same box and
-corroborated three independent ways. The corrected replacement certificates and then
-`BC-101` (`think-q6vy`, the Green sizes ladder) follow; `BC-097` and `BC-089`’s
+Lemma 2 triangles; 16/16 charged), and **Lemma 10 is machine-settled both
+ways** — the printed replacement point `(1, 1.74)` is refuted by an exact escape
+certificate, and all three corrected replacement sets (`(1.12, 1)`, `(1.74, 1)`,
+`(1.87, 0.76)`) certify exactly, their Lemma 5 quadrilaterals landing inside the very
+parameter families the paper's Section 1 lists. The certifier gained subset
+semantics, margin and near cells, and the rational-`a` threshold bound along the way.
+`BC-101` (`think-q6vy`, the Green sizes ladder) follows; `BC-097` and `BC-089`’s
 remainder are the sanctioned gate filler.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
@@ -2367,9 +2369,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 42 | 12,020 | 6,950 | 141 | 1,504 | 54.72 h |
+| claimed by a session | 42 | 12,178 | 7,034 | 143 | 1,525 | 55.57 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **52** | **13,480** | **7,828** | **173** | **1,677** | **61.59 h** |
+| **measured** | **52** | **13,638** | **7,912** | **175** | **1,698** | **62.44 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2384,12 +2386,13 @@ rounding.
 | [session-053](packing/campaign/agent-sessions/session-053-block3-bentz-machine-check.md) | 2 | 1 | 25 | 15 | 0 | 0.16 h |
 | [session-054](packing/campaign/agent-sessions/session-054-block1-certifier-and-falsifier.md) | 2 | 2 | 88 | 64 | 0 | 0.13 h |
 | [session-055](packing/campaign/agent-sessions/session-055-block4-h044-verdict.md) | 1 | 1 | 93 | 56 | 0 | 0.16 h |
-| *shared by 11 sessions* | — | 3 | 8,683 | 4,817 | 108 | 46.41 h |
+| [session-056](packing/campaign/agent-sessions/session-056-block5-bentz13-figure2.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
+| *shared by 12 sessions* | — | 3 | 8,841 | 4,901 | 110 | 47.26 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 11 |
-| closed before `resource_rollups` existed, logs not retained | 45 |
+| measured | 12 |
+| closed before `resource_rollups` existed, logs not retained | 44 |
 | **total** | **56** |
 
 <!-- END GENERATED: session-close-report -->

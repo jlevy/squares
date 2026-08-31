@@ -315,10 +315,20 @@ agenda:
       one new premise type, tilings reconstructed from prose, the SA (1.74, 1) case
       split flagged as a candidate printed gap, Corollary 7 derived from Lemma 6.
       X-010 Lane A rung 2; the calibration case for H-033's m = 7 encoding and the
-      m = 8 attempt behind it.
+      m = 8 attempt behind it. Session-056 then certified the m = 4 foundation
+      layer: Figure 2's base configuration (30 exact rational cells, 16/16
+      charged) and Lemma 10 settled both ways -- refuted as printed by an exact
+      escape certificate against the transposed point (1, 1.74), certified as
+      corrected by all three replacement covers, whose Lemma 5 quads sit in
+      exactly the parameter families the paper's Section 1 lists. Held
+      unresolved with needs_review; Section 3.1's staged sets are the typed
+      continuation on think-1o1f.
     artifacts:
     - cases/bentz46/verify_cover.py
     - tests/test_bentz46.py
+    - cases/bentz13/verify_cover.py
+    - cases/bentz13/lemma10_audit.py
+    - cases/bentz13/lemma10_replacements.py
   - id: BC-100
     purpose: research
     owner_focus: insight

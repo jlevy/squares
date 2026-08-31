@@ -8,7 +8,7 @@ softschema:
 session:
   id: session-056
   primary_bead: think-1o1f
-  status: in_progress
+  status: completed
   title: "Block 5 of the overnight run: the m = 4 foundation layer"
   date: '2026-08-31'
   started_at: '2026-08-31T08:50:00Z'
@@ -112,7 +112,7 @@ session:
       container -- and each replacement set gets its own retiling near old A:
       (1.12, 1) and (1.74, 1) keep most of the Figure 2 complex, while
       (1.87, 0.76) reworks the bottom strip around its low replacement point.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Phase 1 met both objectives early; the audit's corrected reading is what
@@ -134,11 +134,34 @@ session:
     fallback: >-
       Retain whichever replacements certify with the others typed as the next
       slice's first work.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      Lemma 10 is machine-settled both ways. The certifier gained subset
+      semantics (a cell may be any subset of its declared lemma region) and two
+      new honest kinds -- margin cells (within 1/2 of a wall, where no box
+      centre can lie) and near cells (every vertex within 1/2 of the named
+      point, which any box centred there contains via its inscribed ball) --
+      plus the rational-a Lemma 5 threshold bound. With those, all three
+      corrected replacement sets certify on first complete runs: (1.12, 1) with
+      a Lemma 5 quad at a = 22/25, b = 457/500 (certified infimum bound
+      0.936340), (1.74, 1) with margin plus near cells alone, and
+      (1.87, 0.76) with the quad at a = 239/250, b = 19/25 (bound 0.780032).
+      Both quads sit inside exactly the parameter families Bentz's Section 1
+      lists for Lemma 5 use -- strong corroboration that the corrected reading
+      matches the intended figures. Together with the escape certificate
+      against the printed point, Lemma 10 is refuted as printed and certified
+      as corrected; nine tests pin all of it. Held unresolved with needs_review
+      per the unattended rules.
+    evidence:
+    - packing/cases/bentz13/lemma10_replacements.py
+    - packing/cases/bentz13/verify_cover.py
+    - packing/tests/test_bentz13.py
+    stop_reason: >-
+      All three replacements certified inside the phase budget; the block's
+      remaining wall goes to closing records and the next block.
     next_action: >-
-      Margin kind into verify_cover, then the (1.12, 1) retiling.
+      Close the session; block 6 opens as session-057 on `BC-101` under
+      `think-q6vy`, with Section 3.1's staged sets as the m = 4 continuation
+      typed on think-1o1f.
   budget:
     wall_minutes: 150
     finalization_minutes: 15
@@ -152,7 +175,16 @@ session:
       on think-1o1f (Section 3.1 first, sliding point Z the one new premise
       type, one candidate printed gap at the Lemma 11 case split) but no m = 4
       configuration has ever been machine-certified.
-    after: null
+    after: >-
+      The foundation layer certifies whole: Figure 2's base configuration (30
+      exact cells, 16/16 charged) and Lemma 10 settled both ways -- refuted as
+      printed by an exact escape certificate, certified as corrected by three
+      replacement covers whose Lemma 5 quads sit in exactly the parameter
+      families the paper lists. The certifier's subset semantics, margin and
+      near kinds, and rational-a threshold bound now exist for every later
+      Section 3 configuration. All verdicts held unresolved with needs_review;
+      the m = 4 continuation (Section 3.1's staged sets) is typed on
+      think-1o1f.
   stop_conditions:
   - >-
     Any candidate mathematical verdict is recorded unresolved with needs_review;
@@ -165,12 +197,22 @@ session:
   delegations: []
   outputs:
   - packing/campaign/agent-sessions/session-056-block5-bentz13-figure2.md
+  - packing/cases/bentz13/packing.py
+  - packing/cases/bentz13/verify_cover.py
+  - packing/cases/bentz13/lemma10_audit.py
+  - packing/cases/bentz13/lemma10_replacements.py
+  - packing/tests/test_bentz13.py
   checks:
   - uv run --frozen --all-extras --group dev packing-validate --records
-  stop_reason: null
+  resource_rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  stop_reason: >-
+    Block objective exceeded inside the wall: the foundation layer and the full
+    Lemma 10 settlement landed with two hours of block budget unspent, so the
+    session closes early and the run advances to the promoted BC-101.
   next_action: >-
-    The session is in progress on `BC-099` under `think-1o1f`: Figure 2's
-    certificate first, Lemma 10's replacements behind it.
+    Block 6 opens as session-057 on `BC-101` under `think-q6vy`: the Green
+    sizes ladder, per the checkpoint's promotion.
 ---
 # Session-056 — Block 5: The m = 4 Foundation Layer
 

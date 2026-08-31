@@ -115,13 +115,21 @@ class Rat:
 
 @dataclass(frozen=True)
 class CellPlan:
-    """One cell of the cover: its oriented face and the lemma its certificate checks."""
+    """One cell of the cover: its oriented face and the lemma its certificate checks.
+
+    ``rect`` (x0, x1, y0, y1) declares the Lemma 4 rectangle the cell is a subset of;
+    ``quad`` (origin, a, b) declares a bottom-wall Lemma 5 quadrilateral likewise.
+    A cell may be any subset of its declared lemma region: a box centred in the cell
+    is centred in the region, so the lemma's conclusion applies unchanged.
+    """
 
     face: Face
     kind: str
     wall: str | None = None
     outs: tuple[str, ...] = ()
     corner: str | None = None
+    rect: tuple[Fraction, Fraction, Fraction, Fraction] | None = None
+    quad: tuple[Fraction, Fraction, Fraction] | None = None
 
 
 #: The near-corner offset 0.914 and the centre-block offset 1.65, exactly.
@@ -197,14 +205,70 @@ def build() -> tuple[dict[str, Point], dict[str, Point], dict[str, CellPlan]]:
     )
 
     # Lemma 4 wall rectangles, both inner corners set points.
-    add("rb1", ("w10", "w20", "c3", "a1"), "lemma4", wall="bottom", outs=("a1", "c3"))
-    add("rb2", ("w20", "w30", "a2", "c3"), "lemma4", wall="bottom", outs=("c3", "a2"))
-    add("rl1", ("w01", "b1", "c1", "w02"), "lemma4", wall="left", outs=("b1", "c1"))
-    add("rl2", ("w02", "c1", "b3", "w03"), "lemma4", wall="left", outs=("c1", "b3"))
-    add("rr1", ("b2", "w41", "w42", "c2"), "lemma4", wall="right", outs=("b2", "c2"))
-    add("rr2", ("c2", "w42", "w43", "b4"), "lemma4", wall="right", outs=("c2", "b4"))
-    add("rt1", ("a3", "c4", "w24", "w14"), "lemma4", wall="top", outs=("a3", "c4"))
-    add("rt2", ("c4", "a4", "w34", "w24"), "lemma4", wall="top", outs=("c4", "a4"))
+    add(
+        "rb1",
+        ("w10", "w20", "c3", "a1"),
+        "lemma4",
+        wall="bottom",
+        outs=("a1", "c3"),
+        rect=(Fraction(1), Fraction(2), Fraction(0), NEAR),
+    )
+    add(
+        "rb2",
+        ("w20", "w30", "a2", "c3"),
+        "lemma4",
+        wall="bottom",
+        outs=("c3", "a2"),
+        rect=(Fraction(2), Fraction(3), Fraction(0), NEAR),
+    )
+    add(
+        "rl1",
+        ("w01", "b1", "c1", "w02"),
+        "lemma4",
+        wall="left",
+        outs=("b1", "c1"),
+        rect=(Fraction(0), NEAR, Fraction(1), Fraction(2)),
+    )
+    add(
+        "rl2",
+        ("w02", "c1", "b3", "w03"),
+        "lemma4",
+        wall="left",
+        outs=("c1", "b3"),
+        rect=(Fraction(0), NEAR, Fraction(2), Fraction(3)),
+    )
+    add(
+        "rr1",
+        ("b2", "w41", "w42", "c2"),
+        "lemma4",
+        wall="right",
+        outs=("b2", "c2"),
+        rect=(Fraction(4) - NEAR, Fraction(4), Fraction(1), Fraction(2)),
+    )
+    add(
+        "rr2",
+        ("c2", "w42", "w43", "b4"),
+        "lemma4",
+        wall="right",
+        outs=("c2", "b4"),
+        rect=(Fraction(4) - NEAR, Fraction(4), Fraction(2), Fraction(3)),
+    )
+    add(
+        "rt1",
+        ("a3", "c4", "w24", "w14"),
+        "lemma4",
+        wall="top",
+        outs=("a3", "c4"),
+        rect=(Fraction(1), Fraction(2), Fraction(4) - NEAR, Fraction(4)),
+    )
+    add(
+        "rt2",
+        ("c4", "a4", "w34", "w24"),
+        "lemma4",
+        wall="top",
+        outs=("c4", "a4"),
+        rect=(Fraction(2), Fraction(3), Fraction(4) - NEAR, Fraction(4)),
+    )
 
     # Lemma 2 triangles: four corner slivers, eight edge fans, four mid fans, two centre.
     triangles = (

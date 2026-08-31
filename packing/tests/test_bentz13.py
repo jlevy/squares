@@ -16,6 +16,11 @@ from fractions import Fraction
 import pytest
 
 from cases.bentz13.lemma10_audit import audit
+from cases.bentz13.lemma10_replacements import (
+    REPLACEMENTS,
+    build_replacement,
+    certify_replacement,
+)
 from cases.bentz13.packing import EXPECTED_FACES, EXPECTED_POINTS, Rat, build
 from cases.bentz13.verify_cover import (
     CoverCertificateError,
@@ -69,3 +74,45 @@ def test_lemma10_audit_certifies_both_directions() -> None:
     refusal = record["corrected_point_refusal"]
     assert refusal["defeated_by"] == "replacement"  # type: ignore[index]
     assert "unresolved" in str(record["status"])
+
+
+def test_all_three_corrected_replacements_certify() -> None:
+    for key in REPLACEMENTS:
+        record = certify_replacement(key)
+        assert record["set_point_count"] == EXPECTED_POINTS
+        assert record["every_cell_charges_a_set_point"] is True
+
+
+def test_replacement_lemma5_bounds_clear_their_thresholds() -> None:
+    r1 = certify_replacement("r1")
+    bound_r1 = Fraction(r1["lemma5_thresholds"][0]["certified_infimum_lower_bound"])  # type: ignore[index]
+    assert bound_r1 > Fraction(457, 500)
+    r3 = certify_replacement("r3")
+    bound_r3 = Fraction(r3["lemma5_thresholds"][0]["certified_infimum_lower_bound"])  # type: ignore[index]
+    assert bound_r3 > Fraction(19, 25)
+
+
+def test_replacement_refuses_a_missing_cell() -> None:
+    set_points, vertices, plan, expected, boundary = build_replacement("r2")
+    plan.pop("n0")
+    with pytest.raises(ValueError):
+        certify(
+            set_points=set_points,
+            vertices=vertices,
+            plan=plan,
+            expected_faces=expected - 1,
+            boundary=boundary,
+        )
+
+
+def test_near_cell_refuses_a_distant_vertex() -> None:
+    set_points, vertices, plan, expected, boundary = build_replacement("r3")
+    vertices["v2"] = (Rat.of(Fraction(139, 100)), Rat.of(Fraction(1, 2)))
+    with pytest.raises(ValueError, match=r"further than 1/2|noncrossing|areas"):
+        certify(
+            set_points=set_points,
+            vertices=vertices,
+            plan=plan,
+            expected_faces=expected,
+            boundary=boundary,
+        )
