@@ -140,18 +140,27 @@ mid-table gaps — `n = 17` from 0.513 to 0.230 — and touches nothing at the h
 table; `n = 31` is the one size where the frontier’s stored bound is better than the
 table’s.
 
-## Correction Two: the Enumeration Price Has No Artifact (D-405)
+## Correction Two: the Enumeration Price Misread Its Artifact (D-405)
 
 `BC-092` was stopped and folded into `BC-090` on “`9.3e9` raw orbit work at `n = 5`.”
-That figure appears in X-009, agenda-009, session-049, and the ledger, and traces to no
-artifact in the tree.
-What the tree records (`packing/atlas/enumerated/contact-scaffolds-size5.json`):
-1,533,696 topology-coloring candidates at size five collapsing to 11,013 orbits — a
-measured 139× symmetry quotient — with 1,705,312 orbit-action images as the work
-performed. Two further facts the stop decision did not price: the local realizability
-prefilter (`sqpack.contact_realization`) exists and screens scaffolds before any LP is
-spent, and `MAX_SCAFFOLD_SIZE = 5` is a typed refusal in `contact_assembly.py`, a
-constant rather than a measured wall.
+That figure appears in X-009, agenda-009, session-049, and the ledger, with no artifact
+path beside it — and the artifact says the opposite of what the stop decision took from
+it. Session-051 found it by finding its tool (`devtools/price_contact_enumeration.py`):
+`atlas/known-best/contact-enumeration-pricing.json` records
+`raw_orbit_image_upper_work = 9,296,855,040` at `n = 5` as the price of the *legacy
+labeled* route, and its own decision rule at `n = 5` is `enumerate-isomorph-free` —
+which reaches the same 11,013 canonical orbits without that work.
+(This document’s first version said no artifact existed: a text grep for “9.3e9” cannot
+find a record storing the exact integer.
+D-405 carries both layers.)
+What the scaffold atlas separately records
+(`packing/atlas/enumerated/contact-scaffolds-size5.json`): 1,533,696 topology-coloring
+candidates at size five collapsing to 11,013 orbits — a measured 139× symmetry quotient
+— with 1,705,312 orbit-action images as the work performed.
+Two further facts the stop decision did not price: the local realizability prefilter
+(`sqpack.contact_realization`) exists and screens scaffolds before any LP is spent, and
+`MAX_SCAFFOLD_SIZE = 5` is a typed refusal in `contact_assembly.py`, a constant rather
+than a measured wall.
 
 What survives the correction: X-003’s own caution.
 Chunk-level stage-1 combinatorics is `8^C(5,2) ≈ 1e9` raw before partition and skeleton

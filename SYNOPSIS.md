@@ -359,11 +359,11 @@ blocks of two to three hours, instruments before research in both lanes, a check
 stated in the agenda’s own objective.
 **The run is live:
 [session-050](packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md)
-closed block 1 complete** -- `BC-093` and `BC-094` both discharged, the certifier core
-and the falsifier landed with their controls green -- **and block 2 opens as session-051
-on `BC-095` under `think-kp7o`**, block 1 of that agenda, with `BC-094` on `think-yrvm`
-as the block’s second phase; `BC-097` and `BC-089`’s remainder are the sanctioned gate
-filler.
+closed block 1 complete** — `BC-093` and `BC-094` both discharged, the certifier core
+and the falsifier landed with their controls green — **and
+[session-051](packing/campaign/agent-sessions/session-051-block2-reprice-and-lp-gate.md)
+is in progress on `BC-095` under `think-kp7o`**, block 2 of that agenda; `BC-097` and
+`BC-089`’s remainder are the sanctioned gate filler.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
@@ -2339,8 +2339,8 @@ rounding.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 6 |
-| closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **50** |
+| closed before `resource_rollups` existed, logs not retained | 45 |
+| **total** | **51** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -2637,9 +2637,9 @@ table above.
 - **[D-404](defects.md) and [D-405](defects.md) are the reassessment auditing itself.**
   `BC-088`’s entry sequenced X-009 on an unmeasured gap claim — the measured spread is
   `0.056`–`0.536`, structured by `k = m² − n`, and `devtools/gap_ranking.py` now carries
-  it — and `BC-092` was stopped on an enumeration price that traces to no artifact.
-  X-010 carries the corrected sequencing input; the repricing is open on the `x-010`
-  beads.
+  it — and `BC-092` was stopped on an enumeration price quoted without its artifact and
+  against that artifact’s own isomorph-free decision at `n = 5`. X-010 carries the
+  corrected sequencing input; the repricing is open on the `x-010` beads.
 
 ## The Defect Record
 

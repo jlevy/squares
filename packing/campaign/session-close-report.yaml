@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 50
+count: 51
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 6
-  sessions_unmeasured: 44
+  sessions_unmeasured: 45
   attributed:
     rollups: 39
     turns: 11001
@@ -547,3 +547,12 @@ sessions:
   tool_errors: 6
   one_off_code: 30
   wall_hours: 2.11
+- id: session-051
+  title: "Block 2 of the overnight run: the enumeration reprice and the exact-LP gate"
+  status: in_progress
+  primary_bead: think-kp7o
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []

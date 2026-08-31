@@ -11899,23 +11899,35 @@ defects:
   status: outstanding
   what: >-
     X-009, agenda-009, session-049, and the ledger all quote "9.3e9 raw orbit work at
-    n = 5" as the measured reason generative enumeration is priced out as its own block.
-    The figure appears in no artifact: the recorded size-five scaffold atlas gives
-    1,533,696 topology-coloring candidates collapsing to 11,013 orbits (a measured 139x
-    symmetry quotient the price never applied), the local realizability prefilter is
-    unpriced, and MAX_SCAFFOLD_SIZE = 5 is a typed cap in contact_assembly.py rather
-    than a measured wall. OR-2 names the failure: a sub-agent report's number became a
-    stop decision without in-repo replay.
+    n = 5" as the measured reason generative enumeration is priced out as its own
+    block, citing no artifact path. The artifact exists --
+    atlas/known-best/contact-enumeration-pricing.json, entry n = 5,
+    raw_orbit_image_upper_work = 9,296,855,040 -- and it says the opposite of what the
+    stop decision took from it: that figure is the priced-out LEGACY route (labeled
+    canonicalization), and the artifact's own decision rule at n = 5 is
+    enumerate-isomorph-free, which reaches the same 11,013 canonical orbits without
+    that work. The local realizability prefilter is separately measured there through
+    n = 4 (26 of 124 orbits locally feasible) and unrun at n = 5, and
+    MAX_SCAFFOLD_SIZE = 5 remains a typed cap rather than a measured wall. Two
+    failures, then: the reassessment quoted a number without its artifact and read an
+    upper-work bound for a rejected route as pricing enumeration itself; and this
+    defect's own first version asserted no artifact existed, because a text grep for
+    "9.3e9" cannot find a record storing 9,296,855,040 -- corrected the same day by
+    session-051, which found the artifact by finding its tool
+    (devtools/price_contact_enumeration.py).
   consequence: >-
     A research block was stopped and folded into another on a number nobody can replay.
     If the corrected price is affordable, the queue silently dropped the one route to
     restricted-class optimality statements; if it is not, the record still cannot say
     so. Either way the decision reads as measured and is not.
   fix: >-
-    Dated correction notes in X-009 and agenda-009 point here; X-010's Lane B rung 0 is
-    the repricing -- chunk-level stage-1 in counted LP solves with the orbit quotient
-    and prefilter applied and an omission-control design stated -- tracked on the x-010
-    beads. The stopped state stands until that number exists.
+    Dated correction notes in X-009 and agenda-009 point here, amended with the
+    artifact path once session-051 found it; X-010's Lane B rung 0 is the repricing --
+    chunk-level stage-1 in counted LP solves, extending
+    devtools/price_contact_enumeration.py rather than shadowing it, with the
+    isomorph-free route and the prefilter applied and an omission-control design
+    stated -- tracked on the x-010 beads. The stopped state stands until that number
+    exists.
   regression: >-
     None yet beyond the correction notes; the repricing bead's exit is the number plus
     a go/no-go, and the general detector (no load-bearing figure without an artifact
