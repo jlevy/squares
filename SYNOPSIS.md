@@ -2472,9 +2472,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 42 | 13,228 | 7,573 | 153 | 1,565 | 69.18 h |
+| claimed by a session | 42 | 13,390 | 7,660 | 156 | 1,565 | 69.61 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **52** | **14,688** | **8,451** | **185** | **1,738** | **76.05 h** |
+| **measured** | **52** | **14,850** | **8,538** | **188** | **1,738** | **76.48 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2495,7 +2495,7 @@ rounding.
 | [session-059](packing/campaign/agent-sessions/session-059-block8-tau-star-pilot.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-060](packing/campaign/agent-sessions/session-060-verification-review.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
 | [session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
-| *shared by 17 sessions* | — | 3 | 9,891 | 5,440 | 120 | 60.87 h |
+| *shared by 17 sessions* | — | 3 | 10,053 | 5,527 | 123 | 61.3 h |
 
 | Coverage | sessions |
 | --- | ---: |
