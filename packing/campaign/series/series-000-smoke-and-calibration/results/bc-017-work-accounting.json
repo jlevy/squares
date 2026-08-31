@@ -1,0 +1,103 @@
+{
+  "instruments": {
+    "solve_cell": {
+      "attempt_receipts": 1,
+      "finest_role_distinction_available": "containment vs pair, via max_violation_kind",
+      "outcome": "optimal",
+      "rows_built": {
+        "containment": 12,
+        "note": "four containment inequalities per square against the variable side, regardless of whether that wall is seated, and one row per cell entry, regardless of whether it is a contact or a non-edge",
+        "pair": 3
+      },
+      "solver_calls": 1,
+      "source": "sqpack.research.quench.solve_cell"
+    },
+    "structural_plan": {
+      "contract": "packing.squares:FullCellExecutionPlan/v1",
+      "executed_work": {
+        "axis_order_branches_examined": 1,
+        "canonical_cells_emitted": 1,
+        "duplicate_orbit_images": 0,
+        "lp_solves": 0,
+        "orbit_images_examined": 48,
+        "raw_cells_built": 1,
+        "unique_orbit_images": 48
+      },
+      "inventory": {
+        "angle_values": 3,
+        "contact_pairs": 2,
+        "nonedge_pairs": 1,
+        "seated_walls": 4,
+        "squares": 3,
+        "wall_decisions": 12
+      },
+      "row_modes": {
+        "contact-equality": 2,
+        "nonedge-inequality": 1,
+        "open-wall-inequality": 8,
+        "seated-wall-equality": 4
+      },
+      "source": "atlas/known-best/contact-full-cell-control.json"
+    }
+  },
+  "role_separation": [
+    {
+      "role": "seated-wall equality",
+      "solve_cell": "collapsed into four containment inequalities per square",
+      "sqsearch_pair_meter": "absent",
+      "structural_plan": "separated"
+    },
+    {
+      "role": "open-wall inequality",
+      "solve_cell": "collapsed into the same four per square",
+      "sqsearch_pair_meter": "absent",
+      "structural_plan": "separated"
+    },
+    {
+      "role": "contact equality",
+      "solve_cell": "collapsed into one row per cell entry",
+      "sqsearch_pair_meter": "absent",
+      "structural_plan": "separated"
+    },
+    {
+      "role": "non-edge inequality",
+      "solve_cell": "collapsed into the same one row per cell entry",
+      "sqsearch_pair_meter": "absent",
+      "structural_plan": "separated"
+    },
+    {
+      "role": "pair test",
+      "solve_cell": "absent",
+      "sqsearch_pair_meter": "separated, as dynamic overlap tests",
+      "structural_plan": "separated, as compiled rows"
+    },
+    {
+      "role": "LP solve attempt",
+      "solve_cell": "separated, including failed attempts",
+      "sqsearch_pair_meter": "absent",
+      "structural_plan": "separated"
+    }
+  ],
+  "schema_version": 1,
+  "subject": {
+    "commitment": "BC-017",
+    "evidence_role": "target-free work-accounting comparison; no coordinates, side, geometry, feasibility or optimality claim, and no enumerated stratum is priced here",
+    "question": "which unit of work can be counted identically by the structural plan, the quench solver and the sqsearch pair meter?",
+    "squares": 3
+  },
+  "verdict": {
+    "not_reconcilable": "pair_tests appears in two instruments and counts different things in each -- compiled rows in the structural plan, dynamic overlap tests in sqsearch. The exit's pair-test total is therefore not one number until which sense is meant is decided, and that decision is not a measurement.",
+    "readiness": "the LP solve attempt is the only unit all instruments that count it report identically, and it is the unit BC-017's exit names. So the LP-solve half of that exit is reachable now.",
+    "roles_lost_to_the_solver": [
+      "seated-wall equality",
+      "open-wall inequality",
+      "contact equality",
+      "non-edge inequality"
+    ],
+    "shared_units": [
+      "LP solve attempt"
+    ],
+    "totals_agree_composition_does_not": "the sharpest form of the collapse, and it is measured rather than argued. The structural plan reports 4 seated-wall equalities and 8 open-wall inequalities against 2 contact equalities and 1 non-edge inequality; solve_cell builds 12 containment rows and 3 pair rows. The same twelve and the same three. The two instruments agree on every total and disagree on every composition, which is exactly why an LP-solve price transfers and a role-level price does not.",
+    "why_that_is_survivable": "BC-017 asks for an LP-solve count and a pair-test total, not for role-level parity. The four collapsed roles are separated by the structural plan, which is where the enumeration reads them; the solver never needed to."
+  }
+}

@@ -82,6 +82,40 @@ evidence:
       assumptions:
         - Unit squares may rotate inside an open square container.
         - The square-packing side function is the paper's s(N).
+    external_review:
+      state: informally-verified
+      date: '2026-08-30'
+      reviewed_by: repository
+      note: >-
+        Read here because the inventory's own arithmetic named it: this record carries the
+        verified lower bound for 88 of the hundred cases and the next most-cited carries
+        two, so it was simultaneously the most load-bearing external argument in the
+        register and the only one nobody had opened. The argument closes. Theorem 1 is the
+        substantive part -- an upper bound on how many unit squares fit strictly inside an
+        a-by-b rectangle, proved by an explicit unavoidable set whose capacity is computed
+        rather than asserted, with Lemmas 2 through 7 proved in the paper and only an
+        elementary containment fact cited outward. Theorem 2 follows by algebra. It is
+        stated for general packings with arbitrary rotation, the case analysis is
+        parametrised by angle throughout, and no figure carries weight the text does not.
+        Three load-bearing steps were re-derived symbolically here rather than taken from
+        the reading. The unavoidable set's capacity sums to `ab - 2` on the integer branch,
+        matching the claimed `ab - (a+1-ceil a) - (b+1-ceil b)`. The substitution behind
+        Theorem 2(ii) is exact: with `alpha = sqrt(N-2k+1)+1-k`, `(k+alpha)^2 - 2*alpha`
+        simplifies to `N` identically. The boundary has no off-by-one -- at `N = n^2-2` the
+        bound is `sqrt((n-1)^2)+1 = n` exactly, and at `N = n^2-3` it is `sqrt(n(n-2))+1`,
+        strictly below `n` because `n^2-2n < (n-1)^2`. What this is NOT: a careful reading
+        with the spine checked, not a line-by-line re-derivation. Four things are
+        unverified -- the coordinate-geometry formulas inside Lemmas 2, 3, 5 and 6, whose
+        structure and endpoint behaviour were followed but whose trigonometric expressions
+        were not re-derived; the completeness of the Case 5 subargument; the figures, which
+        were not rendered; and one step the paper itself does not prove, that the
+        intersection length is monotone in the square's side, where it says "we can assume
+        lambda = 1 to estimate the minimum". That last is geometrically evident and is the
+        only place the argument leans on something unargued. This promotes nothing: the
+        method stays `published-proof`, and `proof-assistant-checked` is a different thing.
+        Separately `devtools/check_nagamochi_bounds.py` re-derives all 88 recorded values
+        from Theorem 2 in the gate, so a transcription slip is caught even though the proof
+        behind them is not machine-checked.
     limitations: External published proof; its arithmetic is not independently replayed here.
     source_reviewed: '2026-08-24'
 
@@ -150,6 +184,11 @@ evidence:
       assumptions:
         - Packings permit arbitrary orientations and boundary contact.
         - The epsilon argument proves every strict smaller side impossible and passes to the infimum.
+    external_review:
+      state: not-reviewed
+      date: '2026-08-30'
+      note: >-
+        The source calls this an outline and omits routine analytic calculations, which is a reason to read it rather than a reason it is wrong.
     limitations: The source calls this an outline and omits routine analytic calculations; not independently audited here.
     source_reviewed: '2026-08-25'
 
@@ -172,6 +211,11 @@ evidence:
       assumptions:
         - Packings permit arbitrary orientations and boundary contact.
         - The paper's shrinking argument converts its open-box statement to unit-square lower bounds.
+    external_review:
+      state: not-reviewed
+      date: '2026-08-30'
+      note: >-
+        Transcribed with its theorem and pinpoints; nobody here has worked through the argument.
     limitations: Complete external published proof; not independently audited here.
     source_reviewed: '2026-08-25'
 
@@ -190,6 +234,46 @@ evidence:
     replay_status: passed
     limitations: Verifies the exact construction and upper bound, not optimality by itself.
     source_reviewed: '2026-08-25'
+
+  - id: E-n040-gobel-upper
+    claim: upper-bound
+    scope: {n_values: [40]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: previously-published
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Friedman DS7]'
+    certificate: cases/gobel40/packing.py
+    replay: uv run --frozen python -m cases.gobel40.verify_exact
+    replay_status: passed
+    limitations: >-
+      Decides all 780 pairs by exact sign over Q(sqrt 2), with 48 corner coordinates exactly
+      on the container boundary, so it establishes s(40) <= 4 + 2 sqrt(2) and nothing about
+      optimality. The lower bound remains Nagamochi's, and the gap between them is open.
+    source_reviewed: '2026-08-30'
+
+  - id: E-gobel-family-upper
+    claim: upper-bound
+    scope: {n_values: [65, 89]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: previously-published
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Friedman DS7]'
+    certificate: cases/gobel_family/packing.py
+    replay: uv run --frozen python -m cases.gobel_family.verify_exact
+    replay_status: passed
+    limitations: >-
+      One replay decides both sizes, 2080 pairs at n = 65 and 3916 at n = 89, every one by
+      exact sign over Q(sqrt 2). It establishes s(65) <= 5 + (5/2) sqrt(2) and
+      s(89) <= 5 + (7/2) sqrt(2), not optimality at either. Note that the retained n = 89
+      witness's side rounds down and so sits 3.27e-33 below the exact value: this record is
+      about the construction, and does not certify that witness at its own declared side.
+    source_reviewed: '2026-08-30'
 
   - id: E-n010-stromquist-proof
     claim: lower-bound
@@ -210,6 +294,11 @@ evidence:
       assumptions:
         - Packings permit arbitrary orientations and boundary contact.
         - The paper's open-box formulation and limiting argument apply to unit squares.
+    external_review:
+      state: not-reviewed
+      date: '2026-08-30'
+      note: >-
+        Not read here. Note that this same source's n = 11 argument needed a source-distinct repair (E-n011-repaired-lower), which is the standing reason not to treat this author's printed proofs as reviewed.
     limitations: Complete external published proof; not independently audited here.
     source_reviewed: '2026-08-25'
 
@@ -232,6 +321,11 @@ evidence:
       assumptions:
         - Packings permit arbitrary orientations and boundary contact.
         - The nonavoidance lemmas in Section 1 apply to the case-specific point systems.
+    external_review:
+      state: not-reviewed
+      date: '2026-08-30'
+      note: >-
+        Transcribed with its theorem and pinpoints; nobody here has worked through the argument.
     limitations: Complete external published proofs; not independently audited here.
     source_reviewed: '2026-08-25'
 
@@ -254,6 +348,11 @@ evidence:
       assumptions:
         - Packings permit arbitrary orientations and boundary contact.
         - The continuous unavoidable-set result in Theorem 8 applies to the displayed systems.
+    external_review:
+      state: not-reviewed
+      date: '2026-08-30'
+      note: >-
+        Transcribed with its theorem and pinpoints; nobody here has worked through the argument.
     limitations: Complete external published proofs; not independently audited here.
     source_reviewed: '2026-08-25'
 
@@ -273,6 +372,98 @@ evidence:
     limitations: Verifies this algebraic witness and upper bound, not global optimality.
     source_reviewed: '2026-08-24'
 
+  - id: E-n005-second-order-rigidity
+    claim: derived-structure
+    scope: {n_values: [5]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    certificate: campaign/series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.assess_n5_rigidity --check
+    replay_status: passed
+    novelty: apparently-novel
+    source_reviewed: '2026-08-30'
+    novelty_basis:
+      corpus: >-
+        packing/resources/ as retained on 2026-08-30: 27 papers (pdf plus faithful .raw.md transcription) and 22 archived web sources, including [Friedman DS7], [Goebel 1979], [Stromquist 2003], Trump 2023, Bentz 2010/2016, Kearney-Shiu, Nagamochi 2005, Gensane-Ryckelynck 2005, and the Kingbird catalogue
+      novel_object: >-
+        That n = 5 is not infinitesimally rigid but is second-order rigid, proved exactly; the catalogue asserts 'Rigid.' without defining or arguing it
+      searched: >-
+        every corpus file matching 'rigid', then the full tree for 'second-order', 'second order', 'infinitesimal', 'Farkas', 'self-stress' and 'tangent cone'. The last six return zero files: the corpus asserts rigidity in places and contains none of the machinery for deciding it. The Kingbird catalogue annotates n = 5 'Rigid.' with no definition and no argument, and [Friedman DS7] does not annotate n = 5 at all. Neither states the first-order cone is one-dimensional, names the motion, or refuses it at second order. An assertion of rigidity and a proof of second-order rigidity are different claims
+      gaps: >-
+        Kingbird's own 'Rigid packings' page, which defines the annotation it applies, was never archived, so what the catalogue means by 'Rigid.' is unknown here. [Goebel 1979] is a PDF with no transcription. Trump's personal site is not retained. The structural rigidity literature (Connelly, Whiteley and successors) is absent from this corpus entirely -- it is the body of work a refutation would most plausibly come from, and it is the largest known hole.
+    limitations: >-
+      Second-order and at fixed side. Exactly, over Q(sqrt 2), at Goebel's exact construction
+      rather than the retained decimal witness: the cone of infinitesimal motions is exactly
+      the line spanned by rotation of the middle square about its own centre, with the other
+      fourteen coordinates pinned by Farkas certificates verified in the field, and that one
+      direction carries gap curvature -1/2 at each of the four pair contacts and is refused
+      by a verified non-negative self-stress. Together these exclude every twice
+      differentiable feasible arc that leaves the pose with a nonzero derivative.
+
+      They do not establish local rigidity, which is why the property stays undetermined. An
+      arc whose derivative vanishes at the pose is excluded only by a further argument --
+      curve selection on the semi-algebraic feasible set, then an induction on the arc's
+      Puiseux coefficients -- which is written out in
+      campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md and is
+      prose, not a computation this replay checks. The container side is a constant here,
+      not a variable, so nothing bears on what happens as the container grows.
+
+      This is a repository result about the packing and is independent of the catalogue's
+      unqualified Rigid annotation, which is carried by reported_upper_bound.catalogue_rigid
+      and is not restated as a finding of ours.
+
+  - id: E-n040-first-order-flexibility
+    claim: derived-structure
+    scope: {n_values: [40]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    certificate: campaign/series/series-000-smoke-and-calibration/results/bc-049-n40-rigidity-bracket.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.assess_n40_rigidity --check
+    replay_status: passed
+    novelty: apparently-novel
+    source_reviewed: '2026-08-30'
+    novelty_basis:
+      corpus: >-
+        packing/resources/ as retained on 2026-08-30: 27 papers (pdf plus faithful .raw.md transcription) and 22 archived web sources, including [Friedman DS7], [Goebel 1979], [Stromquist 2003], Trump 2023, Bentz 2010/2016, Kearney-Shiu, Nagamochi 2005, Gensane-Ryckelynck 2005, and the Kingbird catalogue
+      novel_object: >-
+        That the tilted block turns at first order and every turn is refused at second; DS7 asserts n = 40 is rigid and this refines rather than contradicts it
+      searched: >-
+        every corpus file matching 'rigid', then the full tree for 'second-order', 'infinitesimal', 'Farkas', 'self-stress', 'tangent cone', 'Connelly' and 'Whiteley'. All return zero files. [Friedman DS7] line 59 states flatly 'The packing for n = 40 is rigid' and the Kingbird catalogue annotates it 'Rigid.', both without definition, argument or citation. Neither is contradicted by this record and neither anticipates it: an infinitesimal flex is not a motion, so a packing can be infinitesimally flexible and finitely rigid at once, which is precisely what a flex refused at second order means. What is novel is not a disagreement with the sources but the distinction itself -- no source in the corpus separates infinitesimal from finite rigidity for square packings, and none names the tilted block's motions. That the Goebel family's central block turns at all appears unexamined in the literature
+      gaps: >-
+        Kingbird's own 'Rigid packings' page, which defines the annotation it applies, was never archived, so what the catalogue means by 'Rigid.' is unknown here -- and for this record that is the gap that matters, since a catalogue meaning 'infinitesimally rigid' would contradict this result outright. Kingbird's 'Goebel squares' group page is also unarchived. [Goebel 1979] is a PDF with no transcription. The structural rigidity literature (Connelly, Whiteley and successors) is absent entirely, which is the largest hole: it is where a refutation would most plausibly come from
+    limitations: >-
+      First order, at fixed side, at Goebel's exact construction rather than the retained
+      decimal witness. The packing is infinitesimally FLEXIBLE: seven directions are
+      retained, each a vector in Q(sqrt 2)^120 verified to leave every contact's gap rate
+      non-negative, and each turning the sixteen squares of the tilted central block while
+      leaving the twenty-four axis-aligned ones fixed. Each is refused at second order by a
+      non-negative self-stress with w.A = 0 and w.q < 0, verified in the field over the rows
+      that direction holds tight.
+
+      That is why the property stays undetermined rather than moving to not-rigid. An
+      infinitesimal flex is not a motion: along every one of these the gaps curve shut at
+      order t^2, so nothing here contradicts local rigidity or the catalogue's annotation.
+      What it settles is that no first-order argument can establish rigidity here.
+
+      The cone is not characterised. It is bounded -- 75 certificates put every admissible
+      motion in a subspace of dimension at most 45, down from 120 -- and the seven known
+      directions span 6, so a factor of seven is unaccounted for. Bounding it further needs
+      the 42 corner-touching disjunctions, whose tangent cone is a union of half-spaces
+      rather than an intersection (D-391); none of them becomes vacuous once the pinned
+      coordinates are removed, so branch enumeration remains 2^42 and is not a route. In the
+      same way, 52 of the frame's 72 coordinates are proved zero in every branch and the
+      other 20 are covered only by a search that found nothing, which is not a proof.
+
+      This is a repository result about the packing and is independent of the catalogue's
+      unqualified Rigid annotation, which is carried by reported_upper_bound.catalogue_rigid
+      and is not restated as a finding of ours.
+
   - id: E-n011-trump-local-rigidity
     claim: derived-structure
     scope: {n_values: [11]}
@@ -284,8 +475,18 @@ evidence:
     certificate: campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json
     replay: uv run --frozen python -m cases.trump11.tangent_cones --replay campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json
     replay_status: passed
+    novelty: apparently-novel
+    source_reviewed: '2026-08-30'
+    novelty_basis:
+      corpus: >-
+        packing/resources/ as retained on 2026-08-30: 27 papers (pdf plus faithful .raw.md transcription) and 22 archived web sources, including [Friedman DS7], [Goebel 1979], [Stromquist 2003], Trump 2023, Bentz 2010/2016, Kearney-Shiu, Nagamochi 2005, Gensane-Ryckelynck 2005, and the Kingbird catalogue
+      novel_object: >-
+        Local rigidity proved by exhausting all 128 branchwise cones; sources assert rigidity, and zero algebraic freedom does not exclude a branching motion
+      searched: >-
+        every corpus file matching 'rigid', then the full tree for 'second-order', 'infinitesimal', 'Farkas', 'self-stress', 'tangent cone' and 'branchwise'. All return zero files. Three sources assert this packing is rigid and none proves it. Trump 2023 is the strongest -- 'The geometrical object is absolutely rigid, no unit square can be rotated or translated' -- but his 'as shown on page 2' is the algebraic derivation of the pose, which establishes that the contact graph determines it and not that no continuous deformation exists. Zero algebraic degrees of freedom is weaker than local rigidity: it does not exclude a branching motion through a corner-to-corner contact, which is exactly what enumerating all 128 branchwise cones addresses. [Friedman DS7] and the Kingbird SVG assert it bare
+      gaps: >-
+        Kingbird's own 'Rigid packings' page, which defines the annotation it applies, was never archived, so what the catalogue means by 'Rigid.' is unknown here. [Goebel 1979] is a PDF with no transcription. Trump's personal site is not retained. The structural rigidity literature (Connelly, Whiteley and successors) is absent from this corpus entirely -- it is the body of work a refutation would most plausibly come from, and it is the largest known hole.
     limitations: First-order and local. All 128 derivative-distinct branchwise linearized cones at the exact fixed-side pose are the zero cone, which with a finite-branch subsequence argument gives local isolation and strict local side optimality in the anchored pose-side chart. No neighborhood radius is quantified and nothing here bears on global optimality. It is a repository result about the packing, not a transcription of the catalogue's unqualified Rigid annotation.
-    source_reviewed: '2026-08-24'
 
   - id: E-n011-repaired-lower
     claim: lower-bound
@@ -300,6 +501,15 @@ evidence:
     certificate: campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
     replay: uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
     replay_status: passed
+    novelty_basis:
+      corpus: >-
+        packing/resources/ as retained on 2026-08-30: 27 papers (pdf plus faithful .raw.md transcription) and 22 archived web sources
+      novel_object: >-
+        A correct proof of a bound stated in 1979 and cited as proved since, whose printed argument does not close
+      searched: >-
+        Searched the corpus for prior repairs of Stromquist's Theorem 2 argument. The value 2 + 4/sqrt(5) was STATED in [Stromquist 2003] and has been cited as proved for 23 years; what was missing is a correct proof, since the printed Figure 14 cover admits an escaping box (D-152). Bentz 2010 footnote 1 does note an error in Stromquist's Lemma 4, but a different one -- the root selection, 'the minimum values in some of our cases corresponds to the second largest positive root' -- not the cover defect, and Bentz does not use or question Theorem 2. Bentz 2016 and [Friedman DS7] cite the bound as established. No alternative correct proof appears in the corpus. So the novel object is the certified proof and not the result, which is what source_key and limitations already say
+      gaps: >-
+        Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's personal site and the unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
     limitations: Proves the lower bound with a source-distinct repair; it does not repair the printed source proof.
     source_reviewed: '2026-08-24'
 
@@ -342,6 +552,7 @@ evidence:
     method: numerical-multiprecision
     performed_by: repository
     relationship_to_generator: independent-implementation
+    origin: replayed-here
     source_key: '[Kingbird n=29 SVG]'
     precision: {decimal_digits: 160, rounding: nearest}
     tolerance: '1e-80'
@@ -360,6 +571,7 @@ evidence:
     method: numerical-multiprecision
     performed_by: repository
     relationship_to_generator: independent-implementation
+    origin: replayed-here
     source_key: '[Kingbird n=29 SVG]'
     precision: {decimal_digits: 160, rounding: nearest}
     tolerance: '1e-80'
@@ -394,6 +606,7 @@ evidence:
     performed_by: repository
     novelty: previously-published
     relationship_to_generator: independent-implementation
+    origin: replayed-here
     source_key: '[Schadt n=29 repository]'
     precision: {decimal_digits: 300, rounding: nearest}
     tolerance: '1e-100'
@@ -415,6 +628,15 @@ evidence:
     certificate: witnesses/kingbird-n029-2026-interval.yaml
     replay: uv run --frozen packing-witness verify witnesses/kingbird-n029-2026-interval.yaml
     replay_status: passed
+    novelty_basis:
+      corpus: >-
+        packing/resources/ as retained on 2026-08-30: 27 papers (pdf plus faithful .raw.md transcription) and 22 archived web sources
+      novel_object: >-
+        An interval certificate for a square-in-square bound; the packing is Kingbird's
+      searched: >-
+        Searched the corpus for interval certification of square-in-square packing. Interval branch-and-bound appears for adjacent problems -- Montanher 2018 for unit squares in a circle, Markot 2021 for circles in a square -- and not for this geometry. The UnitSquare 2026 release describes outward-rounded interval validation but publishes no certificates, boxes or replayable checker, which is why its own record carries replay_status: public-certificate-missing. The novel object is the certificate, not the packing, which is [Kingbird]'s
+      gaps: >-
+        Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's personal site and the unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
     limitations: >-
       Proves s(29) <= 5.93383346267692918974379895098 at a declared relaxation of 1e-20,
       on outward-rounded enclosures rather than exact values. It is not the optimum, not an
@@ -442,6 +664,15 @@ evidence:
     certificate: witnesses/schadt-n029-2025-rational.yaml
     replay: uv run --frozen python -m devtools.check_rational_witness_independent witnesses/schadt-n029-2025-rational.yaml
     replay_status: passed
+    novelty_basis:
+      corpus: >-
+        packing/resources/ as retained on 2026-08-30: 27 papers (pdf plus faithful .raw.md transcription) and 22 archived web sources
+      novel_object: >-
+        A rational certificate for an n = 29 bound; the pose is Schadt's
+      searched: >-
+        Searched the corpus for any formal certificate of an n = 29 upper bound. None exists. Gensane-Ryckelynck 2005 reached an earlier n = 29 packing and stated plainly that 'the algebraic models for the dense packings of 29 and 37 squares are too complex to be numerically solved', verifying their bound only to sufficient accuracy. The novel object is the rational certificate, not the pose, which is Schadt's
+      gaps: >-
+        Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's personal site and the unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
     limitations: Proves a rational construction at a side about 4.93e-31 larger than the source decimal; it does not certify the source pose exactly or prove optimality.
     source_reviewed: '2026-08-25'
 
@@ -459,6 +690,15 @@ evidence:
     replay_status: passed
     precision: {decimal_digits: 50, rounding: nearest-even}
     tolerance: '1e-8'
+    novelty_basis:
+      corpus: >-
+        packing/resources/ as retained on 2026-08-30: 27 papers (pdf plus faithful .raw.md transcription) and 22 archived web sources
+      novel_object: >-
+        A systematic screen over 98 configurations with replayable certificates; the idea of checking a slide is not new
+      searched: >-
+        Searched the corpus for systematic screens of translational freedom. The phrase 'translation escape' returns zero files, and no bulk screen appears anywhere. The concept is NOT new, and the record should be read accordingly: Gensane-Ryckelynck 2005 observe of one packing that 'six squares are isolated and six can be displaced by small translations', the Kingbird catalogue annotates individual cases 'Rigid.', and [Friedman DS7] and Trump 2023 assert rigidity case by case. What is novel is the systematic application across 98 retained configurations with replayable certificates, not the idea of checking whether a square can slide. This is the thinnest novelty claim in the register
+      gaps: >-
+        Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's personal site and the unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
     limitations: 'Sound in one direction only. A hit exhibits a square, a direction and a distance, and every constraint is exactly affine in the slide parameter, so it certifies that the retained configuration admits a non-trivial feasible motion: 84 of the 98 screened records are not rigid on this evidence. A miss is weak and never establishes rigidity, because rotation and coordinated multi-square motion are outside the screen. Coordinates are the witness''s own finite-precision transcription, so every finding is about the retained configuration rather than the true optimum; the smallest certified slide is 2.03e-4 against witness coordinates carrying at least 28 digits. n=68 and n=69 are excluded by shape residual. Rigidity and optimality are independent and nothing here bears on the latter.'
     source_reviewed: '2026-08-28'
 

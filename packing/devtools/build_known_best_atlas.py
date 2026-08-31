@@ -897,7 +897,8 @@ def _append_summary_legend(
         "proved optimal": totals["proved_optimal"],
         "exact value known": totals["exact_value_known"],
         "only known numerically": totals["only_known_numerically"],
-        "rigid (established)": totals["rigidity_established"],
+        "rigid (established here)": totals["rigidity_established"],
+        "annotated rigid by the catalogue": totals["rigidity_catalogue_annotated"],
     }
     palette = square_fill_palette(
         hue_count=spec.hue_count,
@@ -910,7 +911,10 @@ def _append_summary_legend(
         ("O", "solid", "proved optimal"),
         ("=", "solid", "exact value known"),
         ("\u2248", "muted", "only known numerically"),
-        ("R", "solid", "rigid (established)"),
+        ("R", "solid", "rigid (established here)"),
+        # The muted twin is the point of D-385: one glyph used to cover both, so a
+        # source's annotation was rendered indistinguishable from an argument of ours.
+        ("R", "muted", "annotated rigid by the catalogue"),
     ]
     _legend_row(
         legend,
@@ -1147,7 +1151,12 @@ def _update_png_preview(svg_text: str) -> None:
     if _png_matches_summary(SUMMARY_PNG, svg_text):
         return
     sips = shutil.which("sips") if sys.platform == "darwin" else None
-    renderer = sips or shutil.which("magick")
+    # `magick` is ImageMagick 7's name for the tool and `convert` is ImageMagick 6's.
+    # Probing only for `magick` made this path unavailable on every Debian and Ubuntu
+    # box, which still ship 6 -- so the tool refused to regenerate the preview on a
+    # machine that had ImageMagick installed. Both accept this invocation, and 6 renders
+    # the composite at the same 2400x2676 the receipt records.
+    renderer = sips or shutil.which("magick") or shutil.which("convert")
     if renderer is None:
         raise RuntimeError("PNG preview generation requires sips or ImageMagick")
     with TemporaryDirectory() as directory:

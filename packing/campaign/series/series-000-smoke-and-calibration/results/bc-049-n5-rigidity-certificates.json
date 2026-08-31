@@ -1,0 +1,354 @@
+{
+  "contacts": {
+    "detail": [
+      "square 0 corner 0 on the left wall",
+      "square 0 corner 0 on the bottom wall",
+      "square 0 corner 1 on the bottom wall",
+      "square 0 corner 2 on square 4 edge 3",
+      "square 0 corner 3 on the left wall",
+      "square 1 corner 0 on the bottom wall",
+      "square 1 corner 1 on the bottom wall",
+      "square 1 corner 1 on the right wall",
+      "square 1 corner 2 on the right wall",
+      "square 1 corner 3 on square 4 edge 0",
+      "square 2 corner 0 on the left wall",
+      "square 2 corner 1 on square 4 edge 2",
+      "square 2 corner 2 on the top wall",
+      "square 2 corner 3 on the left wall",
+      "square 2 corner 3 on the top wall",
+      "square 3 corner 0 on square 4 edge 1",
+      "square 3 corner 1 on the right wall",
+      "square 3 corner 2 on the right wall",
+      "square 3 corner 2 on the top wall",
+      "square 3 corner 3 on the top wall"
+    ],
+    "pair": 4,
+    "total": 20,
+    "wall": 16
+  },
+  "first_order_cone": {
+    "dimension": 1,
+    "free": [
+      "w4"
+    ],
+    "pinned": [
+      {
+        "coordinate": "vx0",
+        "farkas": {
+          "negative": [
+            "square 0 corner 0 on the bottom wall x 1/2",
+            "square 0 corner 1 on the bottom wall x 1/2",
+            "square 0 corner 2 on square 4 edge 3 x 1",
+            "square 3 corner 0 on square 4 edge 1 x 1",
+            "square 3 corner 1 on the right wall x 1",
+            "square 3 corner 3 on the top wall x 1"
+          ],
+          "positive": [
+            "square 0 corner 0 on the left wall x 1/2",
+            "square 0 corner 3 on the left wall x 1/2"
+          ]
+        }
+      },
+      {
+        "coordinate": "vy0",
+        "farkas": {
+          "negative": [
+            "square 0 corner 0 on the left wall x 1/2",
+            "square 0 corner 2 on square 4 edge 3 x 1",
+            "square 0 corner 3 on the left wall x 1/2",
+            "square 3 corner 0 on square 4 edge 1 x 1",
+            "square 3 corner 1 on the right wall x 1",
+            "square 3 corner 3 on the top wall x 1"
+          ],
+          "positive": [
+            "square 0 corner 0 on the bottom wall x 1/2",
+            "square 0 corner 1 on the bottom wall x 1/2"
+          ]
+        }
+      },
+      {
+        "coordinate": "w0",
+        "farkas": {
+          "negative": [
+            "square 0 corner 0 on the bottom wall x 1",
+            "square 0 corner 2 on square 4 edge 3 x 1",
+            "square 0 corner 3 on the left wall x 1",
+            "square 3 corner 0 on square 4 edge 1 x 1",
+            "square 3 corner 1 on the right wall x 1",
+            "square 3 corner 3 on the top wall x 1"
+          ],
+          "positive": [
+            "square 0 corner 0 on the left wall x 1",
+            "square 0 corner 1 on the bottom wall x 1",
+            "square 0 corner 2 on square 4 edge 3 x 1",
+            "square 3 corner 0 on square 4 edge 1 x 1",
+            "square 3 corner 1 on the right wall x 1",
+            "square 3 corner 3 on the top wall x 1"
+          ]
+        }
+      },
+      {
+        "coordinate": "vx1",
+        "farkas": {
+          "negative": [
+            "square 1 corner 1 on the right wall x 1/2",
+            "square 1 corner 2 on the right wall x 1/2"
+          ],
+          "positive": [
+            "square 1 corner 0 on the bottom wall x 1/2",
+            "square 1 corner 1 on the bottom wall x 1/2",
+            "square 1 corner 3 on square 4 edge 0 x 1",
+            "square 2 corner 1 on square 4 edge 2 x 1",
+            "square 2 corner 3 on the left wall x 1",
+            "square 2 corner 3 on the top wall x 1"
+          ]
+        }
+      },
+      {
+        "coordinate": "vy1",
+        "farkas": {
+          "negative": [
+            "square 1 corner 1 on the right wall x 1/2",
+            "square 1 corner 2 on the right wall x 1/2",
+            "square 1 corner 3 on square 4 edge 0 x 1",
+            "square 2 corner 1 on square 4 edge 2 x 1",
+            "square 2 corner 3 on the left wall x 1",
+            "square 2 corner 3 on the top wall x 1"
+          ],
+          "positive": [
+            "square 1 corner 0 on the bottom wall x 1/2",
+            "square 1 corner 1 on the bottom wall x 1/2"
+          ]
+        }
+      },
+      {
+        "coordinate": "w1",
+        "farkas": {
+          "negative": [
+            "square 1 corner 0 on the bottom wall x 1",
+            "square 1 corner 1 on the right wall x 1",
+            "square 1 corner 3 on square 4 edge 0 x 1",
+            "square 2 corner 1 on square 4 edge 2 x 1",
+            "square 2 corner 3 on the left wall x 1",
+            "square 2 corner 3 on the top wall x 1"
+          ],
+          "positive": [
+            "square 1 corner 1 on the bottom wall x 1",
+            "square 1 corner 2 on the right wall x 1",
+            "square 1 corner 3 on square 4 edge 0 x 1",
+            "square 2 corner 1 on square 4 edge 2 x 1",
+            "square 2 corner 3 on the left wall x 1",
+            "square 2 corner 3 on the top wall x 1"
+          ]
+        }
+      },
+      {
+        "coordinate": "vx2",
+        "farkas": {
+          "negative": [
+            "square 1 corner 0 on the bottom wall x 1",
+            "square 1 corner 2 on the right wall x 1",
+            "square 1 corner 3 on square 4 edge 0 x 1",
+            "square 2 corner 1 on square 4 edge 2 x 1",
+            "square 2 corner 2 on the top wall x 1/2",
+            "square 2 corner 3 on the top wall x 1/2"
+          ],
+          "positive": [
+            "square 2 corner 0 on the left wall x 1/2",
+            "square 2 corner 3 on the left wall x 1/2"
+          ]
+        }
+      },
+      {
+        "coordinate": "vy2",
+        "farkas": {
+          "negative": [
+            "square 2 corner 2 on the top wall x 1/2",
+            "square 2 corner 3 on the top wall x 1/2"
+          ],
+          "positive": [
+            "square 1 corner 0 on the bottom wall x 1",
+            "square 1 corner 2 on the right wall x 1",
+            "square 1 corner 3 on square 4 edge 0 x 1",
+            "square 2 corner 0 on the left wall x 1/2",
+            "square 2 corner 1 on square 4 edge 2 x 1",
+            "square 2 corner 3 on the left wall x 1/2"
+          ]
+        }
+      },
+      {
+        "coordinate": "w2",
+        "farkas": {
+          "negative": [
+            "square 1 corner 0 on the bottom wall x 1",
+            "square 1 corner 2 on the right wall x 1",
+            "square 1 corner 3 on square 4 edge 0 x 1",
+            "square 2 corner 1 on square 4 edge 2 x 1",
+            "square 2 corner 2 on the top wall x 1",
+            "square 2 corner 3 on the left wall x 1"
+          ],
+          "positive": [
+            "square 1 corner 0 on the bottom wall x 1",
+            "square 1 corner 2 on the right wall x 1",
+            "square 1 corner 3 on square 4 edge 0 x 1",
+            "square 2 corner 0 on the left wall x 1",
+            "square 2 corner 1 on square 4 edge 2 x 1",
+            "square 2 corner 3 on the top wall x 1"
+          ]
+        }
+      },
+      {
+        "coordinate": "vx3",
+        "farkas": {
+          "negative": [
+            "square 3 corner 1 on the right wall x 1/2",
+            "square 3 corner 2 on the right wall x 1/2"
+          ],
+          "positive": [
+            "square 0 corner 1 on the bottom wall x 1",
+            "square 0 corner 2 on square 4 edge 3 x 1",
+            "square 0 corner 3 on the left wall x 1",
+            "square 3 corner 0 on square 4 edge 1 x 1",
+            "square 3 corner 2 on the top wall x 1/2",
+            "square 3 corner 3 on the top wall x 1/2"
+          ]
+        }
+      },
+      {
+        "coordinate": "vy3",
+        "farkas": {
+          "negative": [
+            "square 3 corner 2 on the top wall x 1/2",
+            "square 3 corner 3 on the top wall x 1/2"
+          ],
+          "positive": [
+            "square 0 corner 1 on the bottom wall x 1",
+            "square 0 corner 2 on square 4 edge 3 x 1",
+            "square 0 corner 3 on the left wall x 1",
+            "square 3 corner 0 on square 4 edge 1 x 1",
+            "square 3 corner 1 on the right wall x 1/2",
+            "square 3 corner 2 on the right wall x 1/2"
+          ]
+        }
+      },
+      {
+        "coordinate": "w3",
+        "farkas": {
+          "negative": [
+            "square 0 corner 1 on the bottom wall x 1",
+            "square 0 corner 2 on square 4 edge 3 x 1",
+            "square 0 corner 3 on the left wall x 1",
+            "square 3 corner 0 on square 4 edge 1 x 1",
+            "square 3 corner 1 on the right wall x 1",
+            "square 3 corner 2 on the top wall x 1"
+          ],
+          "positive": [
+            "square 0 corner 1 on the bottom wall x 1",
+            "square 0 corner 2 on square 4 edge 3 x 1",
+            "square 0 corner 3 on the left wall x 1",
+            "square 3 corner 0 on square 4 edge 1 x 1",
+            "square 3 corner 2 on the right wall x 1",
+            "square 3 corner 3 on the top wall x 1"
+          ]
+        }
+      },
+      {
+        "coordinate": "vx4",
+        "farkas": {
+          "negative": [
+            "square 1 corner 0 on the bottom wall x 1/2",
+            "square 1 corner 2 on the right wall x 1/2",
+            "square 1 corner 3 on square 4 edge 0 x 1/2",
+            "square 3 corner 0 on square 4 edge 1 x 1/2",
+            "square 3 corner 1 on the right wall x 1/2",
+            "square 3 corner 3 on the top wall x 1/2"
+          ],
+          "positive": [
+            "square 0 corner 1 on the bottom wall x 1/2",
+            "square 0 corner 2 on square 4 edge 3 x 1/2",
+            "square 0 corner 3 on the left wall x 1/2",
+            "square 2 corner 1 on square 4 edge 2 x 1/2",
+            "square 2 corner 3 on the left wall x 1/2",
+            "square 2 corner 3 on the top wall x 1/2"
+          ]
+        }
+      },
+      {
+        "coordinate": "vy4",
+        "farkas": {
+          "negative": [
+            "square 2 corner 1 on square 4 edge 2 x 1/2",
+            "square 2 corner 3 on the left wall x 1/2",
+            "square 2 corner 3 on the top wall x 1/2",
+            "square 3 corner 0 on square 4 edge 1 x 1/2",
+            "square 3 corner 1 on the right wall x 1/2",
+            "square 3 corner 3 on the top wall x 1/2"
+          ],
+          "positive": [
+            "square 0 corner 1 on the bottom wall x 1/2",
+            "square 0 corner 2 on square 4 edge 3 x 1/2",
+            "square 0 corner 3 on the left wall x 1/2",
+            "square 1 corner 0 on the bottom wall x 1/2",
+            "square 1 corner 2 on the right wall x 1/2",
+            "square 1 corner 3 on square 4 edge 0 x 1/2"
+          ]
+        }
+      }
+    ],
+    "uncertified": []
+  },
+  "schema_version": 1,
+  "scope": {
+    "established": "Exact, at the exact fixed-side pose, over all five squares and all three degrees of freedom each. The cone of infinitesimal motions is exactly the line spanned by rotation of the middle square: fourteen coordinates are pinned by verified Farkas certificates and the fifteenth appears in no constraint. Along that one direction every pair gap has curvature -1/2 and every wall gap curvature 0, and a verified non-negative self-stress with w . A = 0 and w . q < 0 admits no second-order correction. So no twice differentiable feasible arc leaves this pose with a nonzero derivative.",
+    "not_established": "Local rigidity itself, which is strictly stronger and needs one more step: an arc whose derivative vanishes at the pose is excluded by nothing above. Closing it takes the curve selection lemma and an induction on the Puiseux coefficients of the resulting analytic arc, written out in X-007 and not machine-checked here -- a hand argument, recorded as one. Everything here is also at fixed side: the container side is a constant, not a sixteenth variable.",
+    "relation_to_prior_evidence": "Strictly stronger than bc-063, which measured the same shortfall as a numerical rank at the retained pose and a sampled second-order coefficient along one displayed direction, and explicitly declined to promote it. Stronger than the translation-escape screen, which decides single-square translation only and whose miss is weak evidence by construction. Neither covered rotation, the exact field, or a certificate that refuses every correction at once."
+  },
+  "second_order": {
+    "directions": [
+      {
+        "certificate": {
+          "meaning": "w >= 0 and w . A = 0, so w . (A y) = 0 for every y; a y with A y >= -q would give 0 = w . A y >= -w . q > 0",
+          "self_stress": [
+            "square 1 corner 0 on the bottom wall x 1/2",
+            "square 1 corner 2 on the right wall x 1/2",
+            "square 1 corner 3 on square 4 edge 0 x 1/2",
+            "square 2 corner 0 on the left wall x 1/2",
+            "square 2 corner 1 on square 4 edge 2 x 1/2",
+            "square 2 corner 2 on the top wall x 1/2"
+          ],
+          "w_dot_q_is_negative": true
+        },
+        "coordinate": "w4",
+        "gap_curvature": {
+          "square 0 corner 2 on square 4 edge 3": "-1/2",
+          "square 1 corner 3 on square 4 edge 0": "-1/2",
+          "square 2 corner 1 on square 4 edge 2": "-1/2",
+          "square 3 corner 0 on square 4 edge 1": "-1/2"
+        },
+        "obstructed": true,
+        "why": "along a pure rotation of the middle square each pair gap is exactly (1/2) cos(t) - 1/2, because the resting corner is the foot of the perpendicular and the edge line's distance from the centre is unchanged by the turn while the corner's projection onto it shortens"
+      }
+    ],
+    "every_first_order_flex_is_obstructed": true,
+    "meaning": "for a feasible arc x(t) with x'(0) = u in the first-order cone, every gap opens at order t^2 with coefficient u.H_j.u + a_j.x''(0), so the arc needs some y with A y >= -q; a non-negative w with w.A = 0 and w.q < 0 proves there is none"
+  },
+  "subject": {
+    "commitment": "BC-049",
+    "n": 5,
+    "pose": "cases.gobel5.packing.build",
+    "side": "2 + sqrt(2)/2, the proved optimum, exact in Q(sqrt 2)",
+    "why_not_the_witness": "the retained decimal witness puts the middle square's centre 2.4e-30 off the diagonal, which the escape screen records as a -6.9e-30 pair separation; a certificate built on it would certify an infeasible pose"
+  },
+  "system": {
+    "meaning": "admissible infinitesimal motions are {x : Ax >= 0}",
+    "rows": 20,
+    "variables": 15
+  },
+  "verdict": {
+    "claim": "the cone of infinitesimal motions is exactly one-dimensional, spanned by rotation of the middle square about its own centre, and that one direction is obstructed at second order by an exactly verified self-stress",
+    "infinitesimally_rigid": false,
+    "second_order_rigid": true,
+    "why_the_contacts_cannot_see_it": "each corner square's inner corner rests at the midpoint of the middle square's edge, which is the foot of the perpendicular from its centre, so the rotation term (p - c) . n_perp is identically zero at all four pair contacts",
+    "why_the_curvature_does": "the same geometry that kills the first-order term fixes the second: the midpoint is where the edge line is closest to the centre, so turning the line about that centre can only bring it nearer, never further"
+  }
+}

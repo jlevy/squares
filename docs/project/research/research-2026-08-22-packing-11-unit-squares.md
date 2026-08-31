@@ -4,7 +4,8 @@
 
 **Author:** Claude (agent), for mailto:samanthadrakova@gmail.com
 
-**Status:** Complete
+**Status:** Complete as of 2026-08-25, with a dated addendum below for what this project
+established afterwards
 
 ## How to read the citations
 
@@ -59,6 +60,50 @@ Widely circulated summaries of this problem, including the briefing that prompte
 research, state that Stromquist’s 2003 paper *proved* Walter Trump’s 11-square packing
 optimal. That is false, and the error is consequential enough to be worth stating
 precisely. See [Corrections to Common Summaries](#corrections-to-common-summaries).
+
+## What This Project Established at `n = 11` After This Report
+
+**Added 2026-08-30.** Everything above this section states what was known on 2026-08-25
+and is left as written.
+The results below postdate it and are the project’s own; they do not alter the
+literature findings above, and none of them moves `s(11)`, which remains open with the
+same gap.
+
+**The exact route now closes end to end, and the difference is exactly zero.**
+`discharge` stops at the side, which is a claim about a *number*. The round trip carries
+it back to a claim about a *packing*: eleven squares, fourteen touching pairs, valid
+under `exact_sign`, and the reconstructed side equal to the field generator **exactly**
+rather than to a tolerance.
+`n = 11` is where this is available, and the reason is specific rather than lucky.
+A pose unknown `t_i` is an angle with no representation in `ℚ(s)` at all, but Trump’s
+construction is already over `ℚ(u)` with `u = tan(a/2)`, so recovering `u` from `s` is a
+derivation and not a search: `ℚ(s) = ℚ(u)`, both degree eight, so writing each `s^i` in
+the power basis of `ℚ(u)` gives a square rational system with one solution, and a
+singular one is refused rather than fitted.
+
+**The contact system determines the pose, and the earlier claim that it did not was a
+bug.** With contacts extracted and assembled from the packing, the contact Jacobian
+reaches **full rank, 34 of 34**, with the residual unmoved at `8.9e-16`. An earlier
+shortfall of four was not a property of the packing: an `edge-edge` contact had been
+written as one equation where collinearity in the plane is two, leaving one square free
+to pivot about the shared point.
+That is [`D-361`](../../../defects.md), class `soundness`, direction `conservative` — it
+made the pipeline look further from a solvable system than it was.
+The same extractor reproduces this structure exactly under exact arithmetic.
+
+**A cell can be certified without a float solver anywhere in the chain.** The exact LP
+constructs its own first feasible vertex from the exact data and agrees with the known
+answer here, with a typed refusal on an infeasible program.
+This matters at `n = 29`, where no float solver produces a feasible vertex to begin
+from; `n = 11` is the case where the answer is known and the method could therefore be
+checked.
+
+**What has not changed.** `s(11)` is unsolved.
+The upper bound is still Trump’s 1979 packing, the lower bound still `2 + 4/√5`, and
+roughly `0.088` still separates them.
+The [synopsis](../../../SYNOPSIS.md#what-is-built) carries the current state of every
+capability named here; this section records only which of this report’s open items the
+project has since answered for itself.
 
 ## Questions to Answer
 

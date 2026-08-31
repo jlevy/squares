@@ -6,6 +6,9 @@ import time
 from cases.trump11 import packing as trump11
 from sqpack.verify import exact_sign, verify_packing
 
+CERTIFIES = (11,)
+"""The sizes this module decides by exact predicate. See `CERTIFIES` in `cases/gobel5`."""
+
 
 def main() -> int:
     squares, side, field = trump11.build()

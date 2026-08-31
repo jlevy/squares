@@ -154,7 +154,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Does wiring `evaluate_stress` to the existing shared row inventory repay its build
@@ -181,6 +181,38 @@ agenda:
       Whether `evaluate_stress`'s 35 calls actually share a field identity and stratum is
       not decidable from a profile. That is this commitment's first obligation, before any
       timing claim.
+
+      The obligation was met and the answer rejects the optimization. Measured by
+      devtools/price_row_jet_sharing over the exhaustive-exact group: 35 evaluate_stress
+      calls arrive with 11 distinct number fields, 47 active_row_jets rebuilds cover only
+      17 distinct (field, stratum) pairs, and 18 of the 47 are repeats an inventory could
+      remove. RowJetInventory.active_rows refuses a field it does not own by identity
+      rather than by value, which is a soundness property and not a defect, so an inventory
+      built by one caller cannot serve another that constructed its own field -- and every
+      test here calls equal_side_face.make_field() for itself.
+
+      The arithmetic then decides it without a timing argument. The floor is 17 builds
+      however the sharing is arranged, so the group cannot fall below about 280s against
+      430s as it stands: a 1.54x ceiling. The exit requires five-fold and a warm median of
+      45s. Missed by 3.2x on the first and 6.2x on the second.
+
+      Worse for this commitment specifically, the eager inventory it proposes is the weaker
+      of the two arrangements. RowJetInventory.build constructs every registered stratum
+      for one field, so it costs 11 fields times 3 strata = 33 builds where only 17
+      (field, stratum) pairs are ever requested: it removes 14 rebuilds and adds 16 that
+      nobody asked for, landing at 1.36x against a lazy memo's 1.54x.
+
+      What the trigger measurement compared was not two ways of doing one thing. The
+      0.025s per call inside the shared-inventory test is what evaluate_stress costs when
+      the rows are handed to it; the 11.95s on the owner_row_jets arm includes building
+      them. The building does not disappear under sharing, it moves, and 17 unavoidable
+      builds at about 8.4s each is 140s that no arrangement removes.
+
+      D-384 records that the first version of the counter keyed on id(field) and moved
+      between identical runs.
+    artifacts:
+    - devtools/price_row_jet_sharing.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-038-row-jet-sharing.json
   - id: BC-039
     purpose: tool_validation
     owner_focus: correctness

@@ -434,16 +434,46 @@ documentation correction take eight hours to validate:
 | --- | ---: | --- |
 | Interactive | under about 2 seconds | Pytest, ledger and schema checks, exact-witness verification, engine self-test |
 | Focused | seconds | `packing-validate --only TEXT` for one component and its controls |
-| Pre-push | about 70 seconds | `packing-validate --records`: registries, generated views, and declared contracts. This is the set that actually breaks CI ([D-369](defects.md)) |
-| Edit loop | about 8 minutes | `packing-validate --fast`, which is the pre-push set plus the behavioural tests that dominate it |
+| Pre-push | about 4 seconds | `packing-validate --records`: registries, generated views, and declared contracts. This is the set that actually breaks CI ([D-369](defects.md)) |
+| Edit loop | about 8 minutes | `packing-validate --fast`, which is the pre-push set plus the behavioural tests that dominate it — one step is essentially all of it |
 | Checkpoint | about 18 minutes | Normal `packing-validate` before a commit, cross-component handoff, or checkpoint merge |
 | Deep handoff | about 18 minutes, two steps currently failing | `packing-validate --strict` before an unattended campaign, a handoff that depends on regenerated producer output, or any claim that the strict/deep path is healthy |
 | Research round | preregistered per hypothesis | Candidate generation or proof search under its own declared timebox |
 
-Measured on one container on 2026-08-29 and restated then, because the previous entries
-claimed sixty seconds for a tier that takes eight minutes and two minutes for one that
-takes eighteen. A latency column nobody re-measures is how a tier stops being chosen on
-cost. Whether these are the right tiers is `BC-075`.
+Measured on one container, the pre-push and edit-loop rows on 2026-08-30 and the rest on
+2026-08-29. Both restatements happened because the entries had drifted: the 2026-08-29
+pass found sixty seconds claimed for a tier that takes eight minutes and two minutes for
+one that takes eighteen, and the 2026-08-30 pass found seventy seconds claimed for a
+tier that `BC-077` had taken to four.
+A latency column nobody re-measures is how a tier stops being chosen on cost.
+
+The pre-push row moved because a schema validator was swapped and exact geometry left a
+step named for schemas, not because anything stopped being checked
+([`D-370`](defects.md)).
+
+**The edit-loop row is new, and it is where `BC-079` landed.** The tier called `--fast`
+had stopped being fast: measured at `499s`, with `fast behavioral tests` accounting for
+all but about 33 seconds of it.
+A tier priced at the cost of its widest step is a tier people skip, and that is the
+mechanism `D-369` records — seven CI failures on one branch, every one a record check,
+none a behavioural test.
+So the split is by what a step catches rather than by what it costs: `--edit` carries
+the seventeen steps that answer a question about the change in front of you, and
+`--fast` adds the one step whose cost is breadth.
+
+Three properties make the split safe rather than merely cheaper, and each is a test:
+
+- **The tiers nest.** `--records` is contained in `--edit`, contained in `--fast`,
+  contained in the full run — checked as sets, so swapping two steps between tiers
+  cannot pass by keeping the totals equal.
+- **Every step is reachable from the full run**, so a step can be deferred to a wider
+  tier and never dropped out of all of them.
+- **Exclusion is opt-out.** A new step joins `--edit` unless explicitly marked `broad`,
+  so forgetting the marker makes the tier slower rather than blinder.
+
+Being outside `--edit` is not being outside the gate.
+CI runs the full gate on every push, so the split changes feedback latency rather than
+coverage.
 
 A checkpoint merge may retain a known strict/deep failure when the normal gate passes
 without skips, the exact failure and its limitation are recorded in the defect log and

@@ -117,6 +117,59 @@ $defs:
       replay_status:
         enum: [passed, failed, unsupported, public-certificate-missing, not-attempted]
       proof: {$ref: '#/$defs/proof'}
+      novelty_basis:
+        type: object
+        additionalProperties: false
+        required: [corpus, searched, novel_object]
+        description: >-
+          What a novelty claim is relative to. `apparently-novel` is defined here as a
+          statement about the search performed and never an assertion of priority, and a
+          search is only as good as the corpus it ran over -- so the corpus, the date and
+          the terms are the claim's actual content. Without them `source_reviewed` dates an
+          assessment whose scope nobody can reconstruct.
+          Record the gaps too. A corpus with a known hole is more useful than one presumed
+          complete, because the hole is where the refutation would be.
+        properties:
+          corpus: {type: string, minLength: 1}
+          searched: {type: string, minLength: 1}
+          novel_object:
+            type: string
+            minLength: 1
+            description: >-
+              In one line, what exactly is new -- because the answer is usually narrower
+              than the record's claim reads. Certifying someone else's bound is real work
+              and is not the same as establishing a new bound; a systematic screen can be
+              new while the idea it applies is not. Naming the object is what stops a
+              defensible claim from being read as a larger one.
+          gaps: {type: string, minLength: 1}
+      external_review:
+        type: object
+        additionalProperties: false
+        required: [state, date]
+        description: >-
+          Whether anyone here has read an argument this repository did not produce.
+          A published proof establishes its claim whether or not we read it, so this does
+          not change the assurance -- what it changes is whether a reader can tell. Without
+          it, "verified on an external proof we transcribed" and "verified on an external
+          proof we worked through" are the same record, and the difference is exactly the
+          one that matters when a source turns out to be wrong. `[Stromquist 2003]` did:
+          `E-n011-repaired-lower` proves that bound by a source-distinct repair, and the
+          fact that the printed proof needed one lives in a prose limitation on a different
+          record.
+          Reviewing a proof by reading it is not a formal check and never promotes the
+          method; `proof-assistant-checked` is the formal lane and it is a different thing.
+        properties:
+          state:
+            enum: [not-reviewed, informally-verified, defect-found]
+            description: >-
+              not-reviewed -- the claim is transcribed and nobody here has worked through
+              the argument. informally-verified -- someone here read it and found no error;
+              a careful human reading, which is weaker than a machine check and stronger
+              than nothing. defect-found -- someone here worked through it and found a
+              problem; `note` says what, and what was done about it.
+          date: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
+          note: {type: string, minLength: 1}
+          reviewed_by: {type: string, minLength: 1}
       limitations: {type: string, minLength: 1}
       blocker: {$ref: '#/$defs/blocker'}
       source_reviewed: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}

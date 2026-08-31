@@ -160,7 +160,7 @@ def census_starts(n: int, seeds: int) -> list[tuple[int, int, list, list, list]]
     return [(n, seed, *start(n, box, rng)) for seed in range(seeds)]
 
 
-def _census_unit(unit: tuple[int, int, list, list, list]):
+def census_unit(unit: tuple[int, int, list, list, list]):
     """One start, quenched. Module-level so a process pool can pickle it."""
     n, seed, x, y, theta = unit
     return n, seed, quench_bracket(x, y, theta, time_budget=90.0)
@@ -272,7 +272,7 @@ def build() -> tuple[dict, list[str]]:
     units = [u for n, seeds in CASES for u in census_starts(n, seeds)]
     endpoints: dict[int, list] = {n: [] for n, _ in CASES}
     with ProcessPoolExecutor(max_workers=worker_count(len(units))) as pool:
-        for n, seed, r in pool.map(_census_unit, units):
+        for n, seed, r in pool.map(census_unit, units):
             endpoints[n].append((seed, r))
 
     for n, _seeds in CASES:

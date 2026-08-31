@@ -134,7 +134,7 @@ The ones that carry the most weight:
 - `verified_upper_bound` and `verified_lower_bound` contain only formally supported
   bounds. They are a ceiling and a floor, not the value of `s(n)`. The certified ceiling
   may be a weaker rational construction or the exact grid when the tighter public pose
-  is only numerical: for 33 of the 100 cases it is *larger* than the best known side
+  is only numerical: for 30 of the 100 cases it is *larger* than the best known side
   recorded two fields above it, by up to `0.46`, and each of those cases says so in its
   own body and carries a `mathematics` blocker.
   An `exact_form` on the ceiling is the exact form of the ceiling; `s(n)` is known

@@ -6,6 +6,9 @@ from __future__ import annotations
 from cases.gobel10.exact import build
 from sqpack.verify import Report, exact_sign, verify_packing
 
+CERTIFIES = (10,)
+"""The sizes this module decides by exact predicate. See `CERTIFIES` in `cases/gobel5`."""
+
 
 def verify() -> Report:
     """Return the exact separating-axis report for the named witness."""

@@ -6,6 +6,14 @@ from __future__ import annotations
 from cases.gobel5.packing import build
 from sqpack.verify import Report, exact_sign, verify_packing
 
+CERTIFIES = (5,)
+"""The sizes this module decides by exact predicate.
+
+`devtools.check_certificate_citations` requires the frontier record for each of these to
+cite this package as a certificate. See `D-398`: three records once declared a
+mathematical blocker while their certificate sat in the gate unnamed.
+"""
+
 
 def verify() -> Report:
     """Return the exact separating-axis report for the named witness."""

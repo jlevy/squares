@@ -58,7 +58,19 @@ jobs:
           packing-validate --jobs 2 --inner-jobs 2
 
   packing-required:
-    if: "always() && github.event_name == 'pull_request'"
+    # `!cancelled()` rather than `always()`. With `always()`, a run superseded by the next
+    # push -- which `cancel-in-progress: true` above makes routine, and which `OR-3`'s
+    # "push, then keep working" makes frequent -- reaches this job with
+    # `needs.validate.result == 'cancelled'` and reports the required check as a hard
+    # failure. Twice in ten minutes on 2026-08-30, each time waking a session to diagnose
+    # a run that had been replaced by a newer one (D-380).
+    #
+    # This does not weaken the gate. A genuine `validate` failure is not `cancelled()`, so
+    # the job still runs and still fails. A cancelled run reports nothing, which leaves the
+    # required check pending rather than green -- the safe direction, and the reason the
+    # header comment warns against *path* filtering is unaffected, since supersession
+    # always starts a replacement run that supplies the check.
+    if: "!cancelled() && github.event_name == 'pull_request'"
     needs: validate
     runs-on: ubuntu-latest
     steps:

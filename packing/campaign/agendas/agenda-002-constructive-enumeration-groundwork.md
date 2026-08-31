@@ -23,6 +23,11 @@ agenda:
     owner_focus: correctness
     instances: [5, 10, 16]
     state: blocked
+    blocked_on: >-
+      Retained input poses and symbolic active-cell rows for `n005-seed007-known-answer`,
+      `n010-seed014-known-answer` and `n016-grid-not-below`, at pool widths one and ten.
+      No commitment in any agenda produces them, so this waits on an artifact rather than
+      on a predecessor, and nothing but this sentence can say when it clears.
     priority: 0
     question: >-
       Do aligned and glued chunk strata, which are the most degenerate cells this design
@@ -92,6 +97,33 @@ agenda:
       real LP run. BC-017 completes only after real n=5 and n=10 executions retain
       identical derived work and outcomes across declared pool widths and loaded and
       unloaded host conditions.
+
+      The first sentence of this is already discharged and was before the slice started:
+      the source-free n = 3 full-cell control retains a target-free tagged execution plan
+      with every wall and pair role visible, and its execution-plan-forged-count,
+      execution-plan-omitted-row, execution-plan-replay and execution-plan-role-swap
+      controls all pass. Its own promotion_boundary says passing authorizes exactly a
+      BC-016 or BC-017 readiness decision, so what this slice owed was that decision's
+      input, not another receipt.
+
+      Measured on the same three-square subject: the structural plan reports 4 seated-wall
+      equalities and 8 open-wall inequalities against 2 contact equalities and 1 non-edge
+      inequality; solve_cell builds 12 containment rows and 3 pair rows. The same twelve
+      and the same three. The two instruments agree on every total and disagree on every
+      composition.
+
+      That is a narrower obstruction than the note reads and a better one. Exactly one unit
+      survives all three vocabularies -- the LP solve attempt -- and it is the unit this
+      commitment's own exit names, so the LP-solve half of the exit is reachable now. What
+      does not transfer is pair_tests, which appears in two instruments and counts compiled
+      rows in one and dynamic overlap tests in the other. The exit's pair-test total is not
+      one number until which sense is meant is decided, and that decision is a judgement
+      rather than a measurement.
+
+      What remains for this commitment is unchanged in shape: freeze the numerical
+      semantics, then real n = 5 and n = 10 counted executions agreeing across pool width
+      and host load. Nothing here prices an enumerated stratum, and the audit carries no
+      coordinates, side, geometry, feasibility or optimality claim.
     note: >-
       D-126 makes wall-clock budgets load-dependent, but the target-free control exposes
       an earlier instrumentation boundary. `solve_cell` counts actual retries while
@@ -105,6 +137,10 @@ agenda:
       pool width and host load. BC-018 separately still needs BC-016 plus the n=5, n=10,
       and n=16 grammar controls. `think-u97a` separately requires stable n=4/n=10 quench
       outcomes and work across pool widths and load.
+    artifacts:
+    - devtools/audit_work_accounting.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-017-work-accounting.json
+    - tests/test_work_accounting.py
   - id: BC-018
     purpose: tool_validation
     owner_focus: correctness
@@ -134,7 +170,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11, 17, 18, 19, 28, 29]
-    state: ready
+    state: complete
     priority: 2
     question: >-
       Are standing records at n <= 30 already chunk-structured, and if not, which
@@ -153,6 +189,38 @@ agenda:
     next_evidence: >-
       independent review of CG-010's structural full-cell control and a BC-016 or BC-017
       readiness decision; numerical row compilation remains unbuilt
+
+      Answered, and the last clause of the exit is the part that was missing. The contract
+      already carried sliding degrees of freedom, a complexity cost and canonicalization;
+      it had never carried per-record certificates. It does now, at version
+      contact-assembly-v2-draft: 17 of the 30 records at n <= 30 have every component
+      expressible as a rigid-lattice primitive and carry the complexity tuple, and 13 carry
+      a typed limitation naming exactly which components fail and what X-008 measured about
+      them.
+
+      The missing grammar move is named rather than guessed: a primitive for axis-aligned
+      polyominoes that are not a bar, rectangle or corner L. X-008 is what makes that
+      statement safe -- every unexpressed component in the whole corpus is untilted, so the
+      gap is not about tilted assemblies.
+
+      Two contract fields the retained corpus cannot fill are listed rather than inferred.
+      The census stores internal edges as square pairs with a residual and records no normal
+      axis or sign, and a normal reconstructed from lattice deltas would be an assumption
+      about the fit presented as a measurement. The full-cell square-by-wall inventory
+      belongs to the full-cell control, not here.
+
+      internal_slide_dof is zero throughout by the rigid-lattice primitive's own semantics
+      and not by evaluating D = 2m - rank(A_normal) - 2, which prices a contact scaffold.
+      The detector finds no contact scaffolds in this corpus, so reporting a rank would be
+      pricing a primitive that is not there. That was the block's declared kill condition
+      and it did not fire, because the contract answers the question itself.
+
+      No H-044 verdict is emitted. A record without a certificate is one the current
+      detector did not express, which the census's known_gap says is not a refutation.
+
+      Recorded in atlas/known-best/contact-assembly-grammar.yaml,
+      devtools/certify_assembly_coverage.py, tests/test_assembly_coverage.py, and
+      campaign/series/series-000-smoke-and-calibration/results/bc-019-assembly-coverage.json.
     parallel_group: corpus-measurement
     note: >-
       Independent of the enumerator: it reads geometry rather than searching. The first
@@ -165,6 +233,12 @@ agenda:
       retains one literal target-free structural label, joint orbit, derived price, and
       typed mutations; numerical realization remains unbuilt. The 1-100 corpus was
       inspected during instrument repair and is calibration-only.
+    artifacts:
+    - atlas/known-best/contact-assembly-grammar.yaml
+    - atlas/known-best/contact-assembly-grammar.schema.yaml
+    - devtools/certify_assembly_coverage.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-019-assembly-coverage.json
+    - tests/test_assembly_coverage.py
   - id: BC-023
     purpose: tool_validation
     owner_focus: correctness
@@ -205,7 +279,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11, 17, 18, 19, 26, 28, 29, 37, 40, 50, 68, 70, 83, 88]
-    state: ready
+    state: complete
     priority: 2
     question: >-
       Across the imported n <= 100 corpus, which chunk shapes, chunk sizes, tilted-chunk
@@ -221,6 +295,32 @@ agenda:
     depends_on: [BC-023]
     next_evidence: >-
       extend the retained broad contact-component census with minimal-partition shapes,
+
+      Answered descriptively and the answer inverts the expected shape of the residue.
+      Stratified by the source each record's geometry came from, the corpus is three
+      populations: exact-grid (64 records, 64 components, none tilted), kingbird-derived
+      facts (34 records, 387 components, 237 tilted), and unitsquare-rendering (2 records,
+      137 components, every one a singleton and 58 of them tilted).
+
+      Every other-polyomino in the corpus has angle exactly zero -- one distinct value
+      across all 109 -- so every tilted component the repository holds is a singleton, bar,
+      L or rectangle, all of which the grammar expresses. Extending the grammar to reach the
+      residue is a question about axis-aligned polyominoes, not about tilted assemblies.
+
+      Wall seating, computed from witness corners because lattice coordinates are relative
+      to a component, splits the residue into exactly two populations with nothing between:
+      44 whole-record grid subsets touching all four walls, and 65 corner-seated blocks
+      touching exactly two. None touches one, three or none. The seating agrees with n = 5's
+      exactly known contacts from X-007, which is what stops it from measuring the decimal
+      witnesses' precision instead of the packings.
+
+      No H-044 verdict is emitted and none is available: the census's known_gap says an
+      unexpressed component is not a refutation until the minimal-partition solver exists,
+      and the record carries that sentence with a test asserting it is there.
+
+      Recorded in campaign/explorations/X-008-the-residue-is-axis-aligned.md,
+      devtools/census_chunk_taxonomy.py, tests/test_chunk_taxonomy.py, and
+      campaign/series/series-000-smoke-and-calibration/results/bc-024-chunk-taxonomy.json.
       wall seating, and representative house-rendered overlays
     parallel_group: corpus-measurement
     note: >-
@@ -231,6 +331,11 @@ agenda:
       finds no registered-universe partition for 23, and leaves eight search-capped and
       indeterminate. Contact-graph complexity, wall seating, and overlays are retained
       as descriptive calibration. Exploratory work may not emit a W6 verdict.
+    artifacts:
+    - devtools/census_chunk_taxonomy.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-024-chunk-taxonomy.json
+    - tests/test_chunk_taxonomy.py
+    - campaign/explorations/X-008-the-residue-is-axis-aligned.md
   - id: BC-020
     purpose: research
     owner_focus: insight
@@ -257,6 +362,23 @@ agenda:
     owner_focus: insight
     instances: [5, 10, 11, 17, 18, 28, 29]
     state: blocked
+    blocked_on: >-
+      Two things, neither an edge. First, the instrument does not exist: `H-047` carries
+      `instrument_ready: false`, and of the three pieces it names, the class-bracketing
+      quench and the D4-and-relabeling matcher are built while the regularizer that snaps
+      intra-chunk contacts to exact and chunk angles to their fitted class value is not
+      written. `chunks.py` computes the class values such a snapper would target; nothing
+      snaps.
+
+      Second, the declared inputs do not exist for most of the sweep. The entry asks for
+      retained series-000 non-record endpoints across `[5, 10, 11, 17, 18, 28, 29]`, and a
+      pose is retained for `n = 5` and `n = 10` only -- the quench-family results keep
+      scalars and drop the pose, so `n = 11, 17, 18, 28` and `29` have none at all.
+      Recovering them is a re-run with pose retention rather than a reformatting, which is
+      `BC-016`'s note recurring on a different corpus.
+
+      Both predecessors are complete, so the map reported this cell as takeable while
+      neither of these was written anywhere a reader could see. That is `D-401`.
     priority: 2
     question: >-
       Does rounding a pose to its chunk-regular predecessor and re-quenching return the

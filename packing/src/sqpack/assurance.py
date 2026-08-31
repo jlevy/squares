@@ -11,6 +11,9 @@ MACHINE_FORMAL_METHODS = frozenset(
     {"interval-certified", "exact-algebraic", "proof-assistant-checked"}
 )
 PROOF_METHODS = frozenset({"published-proof", "proof-audited"})
+
+EXTERNAL_ORIGINS = frozenset({"external", "independently-external"})
+"""Origins where the argument was made elsewhere, so reading it is a separate act."""
 FORMAL_METHODS = MACHINE_FORMAL_METHODS | PROOF_METHODS
 FORMAL_ORIGINS = frozenset(
     {"external", "independently-external", "replayed-here", "audited-here"}
@@ -98,6 +101,20 @@ def check_evidence_semantics(evidence: Mapping[str, object]) -> list[str]:
             errors.append(
                 prefix + "formal evidence must not use precision or tolerance as assurance"
             )
+        # An argument this repository did not produce carries `verified` on the source's
+        # authority, which is legitimate -- a published proof proves its claim whether or
+        # not we read it. What is not legitimate is leaving a reader unable to tell which
+        # of our verified claims anyone here has actually worked through. Six records were
+        # in that state, each saying "not independently audited here" in prose that nothing
+        # could query and nothing enforced, while `[Stromquist 2003]`'s n = 11 argument had
+        # already needed a source-distinct repair. So the state is now stated or refused.
+        if method in PROOF_METHODS and evidence.get("origin") in EXTERNAL_ORIGINS:
+            review = evidence.get("external_review")
+            if not isinstance(review, Mapping) or not review.get("state"):
+                errors.append(
+                    prefix + "an external proof must declare external_review.state: "
+                    "whether anyone here has read the argument"
+                )
 
     elif assurance == "reported":
         if method is not None:
@@ -116,6 +133,15 @@ def check_evidence_semantics(evidence: Mapping[str, object]) -> list[str]:
     novelty = evidence.get("novelty")
     if novelty == "previously-published" and not evidence.get("source_key"):
         errors.append(prefix + "previously-published evidence must name its source_key")
+    # The vocabulary defines this label as "a statement about the search performed, never
+    # an assertion of priority" -- and a date is not a statement about a search. All four
+    # original claims carried one and none said what was looked for, so the label meant
+    # whatever a reader assumed. A search is also only as good as the corpus it ran over,
+    # which is why the basis names the corpus and its holes rather than just the terms.
+    if novelty == "apparently-novel" and not evidence.get("novelty_basis"):
+        errors.append(
+            "apparently-novel requires novelty_basis: the corpus searched and what for"
+        )
     if novelty == "apparently-novel" and not evidence.get("source_reviewed"):
         errors.append(prefix + "apparently-novel evidence requires a dated source_reviewed")
     return errors
@@ -222,6 +248,84 @@ def _check_bound_evidence(
     return errors
 
 
+def _check_rigidity_claim(
+    rigidity: Mapping[str, object],
+    cited: Sequence[Mapping[str, object]],
+) -> list[str]:
+    """Hold a case's rigidity block to the contract its evidence records are held to.
+
+    `check_evidence_semantics` enforces the assurance-method pairing on `evidence.yaml`,
+    and until this existed the case-level `rigidity` block was the one place a first-party
+    claim escaped it. The schema requires only `[property, assurance, scope, evidence]`,
+    leaves `method`, `certificate` and `replay` optional and nullable, and couples none of
+    them -- so a block could read `verified` / `exact-algebraic` with nothing behind it, or
+    outrank the evidence it rests on, and validation passed.
+
+    The last of those is the one that matters. `n = 65`'s block cites evidence that is
+    `numerically-checked` at `tolerance: 1e-8`; relabelling the block `verified` was
+    accepted, which is a formal claim resting on a numerical one in the flattering
+    direction. See `D-396`.
+
+    Certificate and replay are satisfied by the block or by a cited verified record,
+    because both conventions are in use: `n = 5`, `11` and `40` name the artifacts on the
+    block, while the ten perfect squares leave them null and delegate to
+    `E-perfect-square-tiling-rigid`, which carries them. Neither is wrong; what was wrong
+    was that nothing required either.
+    """
+    errors: list[str] = []
+    assurance = rigidity.get("assurance")
+    method = rigidity.get("method")
+
+    if method in NUMERICAL_METHODS:
+        if assurance != "numerically-checked":
+            errors.append("numerical method cannot support verified or reported assurance")
+    elif method in FORMAL_METHODS:
+        if assurance != "verified":
+            errors.append("formal method requires verified assurance")
+    else:
+        # The catch-all `check_evidence_semantics` has and this did not. Without it a block
+        # reading `reported` with no method, or no assurance and no method, produced no
+        # error at all -- every branch below is keyed on a value it does not have, so the
+        # least-specified claim was the least checked. `reported` in particular can never
+        # be backed here: the block has no `reported_method` field to carry it, and the
+        # register's own rule is that what a source says about rigidity belongs in
+        # `reported_upper_bound.catalogue_rigid` and must not be restated in this block.
+        errors.append(f"unsupported assurance-method pair: {assurance!r}, {method!r}")
+
+    if assurance == "verified":
+        if method not in FORMAL_METHODS:
+            errors.append("verified requires a formal method")
+        # A verified claim must rest on verified evidence. Without this the block's own
+        # label is the whole of the argument, which is what the contract exists to refuse.
+        backing = [record for record in cited if record.get("assurance") == "verified"]
+        if not backing:
+            errors.append("verified rigidity requires at least one verified evidence record")
+        # ...and on evidence about rigidity. Verified alone let a rigidity claim rest on a
+        # record of the right n proving something else entirely -- an upper bound, say --
+        # which is backing in name only. `_check_bound_evidence` already constrains claim
+        # for bounds; this is the same rule one block over.
+        elif not any(record.get("claim") == "derived-structure" for record in backing):
+            errors.append(
+                "verified rigidity requires verified evidence claiming derived-structure, "
+                f"not {sorted({str(record.get('claim')) for record in backing})}"
+            )
+        if method in MACHINE_FORMAL_METHODS:
+            backed = rigidity.get("certificate") and rigidity.get("replay")
+            delegated = any(
+                record.get("assurance") == "verified"
+                and record.get("certificate")
+                and record.get("replay")
+                for record in cited
+            )
+            if not backed and not delegated:
+                errors.append(
+                    f"{method} requires certificate and replay, "
+                    "on the block or on a cited verified record"
+                )
+
+    return errors
+
+
 def check_case_semantics(
     case: Mapping[str, object],
     evidence_by_id: Mapping[str, Mapping[str, object]],
@@ -260,12 +364,18 @@ def check_case_semantics(
     # an id that does not exist, or one whose scope does not reach this n, and pass.
     rigidity = case.get("rigidity")
     if isinstance(rigidity, Mapping):
+        cited: list[Mapping[str, object]] = []
         for ref in _string_list(rigidity.get("evidence")):
             evidence = evidence_by_id.get(ref)
             if evidence is None:
                 errors.append(f"n={n_value} rigidity: unknown evidence {ref}")
             elif not _scope_contains(evidence.get("scope"), n_value):
                 errors.append(f"n={n_value} rigidity: evidence {ref} does not cover this case")
+            else:
+                cited.append(evidence)
+        errors.extend(
+            f"n={n_value} rigidity: {error}" for error in _check_rigidity_claim(rigidity, cited)
+        )
 
     upper = _bound_identity(case.get("verified_upper_bound"))
     lower = _bound_identity(case.get("verified_lower_bound"))

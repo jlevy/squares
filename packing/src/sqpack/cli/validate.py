@@ -14,6 +14,7 @@ is what made pushing without them the cheaper-looking move.
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import json
 import math
 import os
@@ -27,7 +28,7 @@ import traceback
 from collections.abc import Callable, Iterator, Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from contextlib import contextmanager, suppress
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 from threading import Lock
 from typing import Literal, Never, override
@@ -139,6 +140,15 @@ class Context:
     inner_jobs: int
     environment: dict[str, str]
     timeout_seconds: float = DEFAULT_TIMEOUT_SECONDS
+    timeout_is_explicit: bool = False
+    """True when an operator named the cap through `--timeout-seconds` or the
+    environment variable, rather than taking the default.
+
+    A step's `budget_seconds` may raise the default cap, because the default is a
+    project-wide guess and one step is known to exceed it. It may not raise a number a
+    person typed: someone tightening the cap is deliberately bounding this run, and a
+    step quietly opting out of that is the bug, not the feature."""
+
     processes: _ProcessRegistry = field(
         default_factory=_ProcessRegistry, compare=False, repr=False
     )
@@ -160,9 +170,95 @@ class Step:
     declared contracts. Every CI failure on the 2026-08-29 branch was one of these and
     none was a test, so they are selectable without paying for the test step (D-369)."""
 
+    broad: bool = False
+    """Excluded from `--edit` because its cost is breadth rather than what it uniquely
+    catches.
+
+    Measured on 2026-08-30: `--fast` is 499s and `fast behavioral tests` is 499s of it,
+    so the other seventeen fast steps together cost about 48 seconds. A tier priced at
+    the cost of its widest step is a tier people skip, which is the mechanism `D-369`
+    records -- seven CI failures, every one a record check, none a behavioural test.
+
+    **The default is the safe direction on purpose.** A new step is in the edit tier
+    unless it says otherwise, so forgetting this flag makes the tier slower rather than
+    blinder. Marking a step `broad` is the change that needs an argument, and
+    `test_the_edit_tier_cannot_under_run` is where it has to be made.
+
+    Being excluded from `--edit` is not being excluded from the gate. Every broad step
+    still runs in `--fast` and above, and CI runs the full gate on every push."""
+
+    touches: tuple[str, ...] = ()
+    """Repo-relative path globs whose change can affect this step's verdict.
+
+    Empty means *unattributed*, and an unattributed step is selected by every change. The
+    default is therefore the safe direction, exactly as `broad` is: forgetting to attribute
+    a step costs time, never coverage.
+
+    Selection is conservative on both sides, which is the whole design (`BC-084`):
+
+    - a changed path matching no step's patterns selects the **entire gate**, never the
+      empty set, so a file nobody thought about cannot silently skip everything;
+    - a step with no patterns is always selected;
+    - `test_every_step_is_reachable_from_a_declared_pattern` requires each step to be
+      selected by at least one path under `PATTERN_PROBES`, so a pattern set that has
+      drifted into selecting nothing is caught rather than trusted.
+
+    **Do not over-trust the first of those.** `fnmatch` crosses separators, so `*.py` and
+    `*.md` claim every Python and Markdown file in the repository: measured over the 1312
+    tracked files, 953 are claimed and only 359 can still reach the escape hatch. No `.py`
+    or `.md` change ever triggers it. For those two extensions the narrow steps' own
+    patterns are the *only* protection, and five were measurably too narrow when first
+    written -- the SVG step reads every Markdown file in the repo and claimed none of
+    them, and `frontier corpus` claimed a module it never runs while missing the one it
+    does. The escape hatch is a backstop for unfamiliar file types, not for careless
+    attribution of familiar ones.
+
+    This is the commit-boundary instrument, not the edit-loop one. `BC-079` already made
+    the edit loop cheap -- `--records` is 5.7s and `--edit` 43s -- so the cost this
+    addresses is the full gate, where `D-355` measured a two-file edit to the rigidity
+    assessor verified by a 979.79s run whose two reachable steps take 12.06s together.
+
+    Measured on 2026-08-30 over the 42 steps: an edit to the rigidity assessor selects 11,
+    one root document 9, one agenda 10, the Rust engine 12, and one unrecognised file
+    still selects all 42. Six steps are deliberately unattributed because their true input
+    set is the repository's whole path space -- `negative controls` runs 148 declared shell
+    commands against a snapshot of nearly everything, `fast behavioral tests` walks
+    `REPO.rglob("*")`, and `synopsis`, `README`, `soft-schema validation` and the
+    exhaustive test step each resolve or enumerate arbitrary paths. Attributing those would
+    make a data file the load-bearing contract, which is the trade this field exists to
+    refuse."""
+
+    budget_seconds: float | None = None
+    """This step's own declared ceiling, for the rare step that legitimately costs more
+    than the shared per-step cap.
+
+    The shared cap exists to stop a hung step consuming the run, and it should stay tight
+    for the forty steps that do not need it. `D-366` is the case that motivated an
+    exception: the control suite is killed at 900 seconds and completes in about 1270,
+    with nothing wrong with it -- it simply grew. Raising the shared cap would have bought
+    that one step a pass by weakening the guard on every other step at once, which is the
+    trade this field exists to refuse.
+
+    A budget is a declaration, not a waiver. It is per step, it is written next to the
+    step that claims it with the measurement that justifies it, and a step that exceeds
+    its own budget still fails. An explicit `--timeout-seconds` on the command line still
+    wins, so an operator can always tighten what a step asked for."""
+
+    def reachable_from(self, path: str) -> bool:
+        """Can a change to `path` affect this step?
+
+        An unattributed step answers yes to everything, which is what makes forgetting to
+        attribute one safe.
+        """
+        if not self.touches:
+            return True
+        return any(fnmatch.fnmatch(path, pattern) for pattern in self.touches)
+
     @property
     def tags(self) -> str:
         tags = ["fast" if self.fast else "full"]
+        if self.fast and not self.broad:
+            tags.append("edit")
         if self.records:
             tags.append("records")
         if self.needs_engine:
@@ -590,19 +686,33 @@ def _frontier_rigidity(context: Context) -> str:
     """Every rigidity block still follows from the screen and the tiling argument.
 
     The counts are pinned because they are the finding: 84 records are NOT rigid on a
-    replayable certificate, ten are rigid by an exact tiling with no slack, and five are
+    replayable certificate, ten are rigid by an exact tiling with no slack, and four are
     assessed and unsettled. `undetermined` is a result and is not the same as the field
-    being null; n=11 is excluded here because a stronger first-party argument owns it.
+    being null.
+
+    Two records are excluded here because a stronger first-party argument owns them, and
+    the exclusion is keyed on the evidence id rather than on a list of n: n=11 from the
+    tangent-cone work, and n=5 from `X-007`'s exact first- and second-order certificates.
+    n=5 still *reads* `undetermined` -- second-order rigidity is not local rigidity and the
+    schema has no word for it -- so it leaves the assessed bucket while keeping the same
+    property, which is why both numbers here moved by one at once.
+
+    n=40 moved the same way on 2026-08-30 and for the opposite finding. It is
+    infinitesimally *flexible* over `Q(sqrt 2)`, with seven retained directions each refused
+    at second order; the property still reads `undetermined` because an infinitesimal flex
+    is not a motion and `not-rigid` would assert one. So the counts moved by one again, and
+    a record can leave the assessed bucket for having a stronger argument in either
+    direction.
     """
     output = _module(context, "devtools.assess_frontier_rigidity", "--check")
     _require_text(output, "frontier rigidity check passed")
     review = _module(context, "devtools.assess_frontier_rigidity", "--review")
     _require_text(
         review,
-        "assessed: 10 locally-rigid, 84 not-rigid, 5 undetermined, "
-        "1 left to a stronger argument",
+        "assessed: 10 locally-rigid, 84 not-rigid, 3 undetermined, "
+        "3 left to a stronger argument",
     )
-    _require_text(review, "left to a stronger argument: n = [11]")
+    _require_text(review, "left to a stronger argument: n = [5, 11, 40]")
     return output + review
 
 
@@ -746,9 +856,26 @@ def _exact_verification(context: Context) -> str:
                 "devtools.generate_known_best_n011_rational_control",
                 "--check",
             ),
+            # The exact rational grid replay. It ran inside `soft-schema validation`
+            # until D-370, where it was 3.58s of that step and where nobody would look
+            # for exact geometry. Same cases, same predicate, same verdict; only the
+            # step reporting it changed.
+            (sys.executable, "-m", "devtools.check_basic_bounds"),
             (sys.executable, "-m", "cases.trump11.verify_exact"),
             (sys.executable, "-m", "cases.gobel5.verify_exact"),
             (sys.executable, "-m", "cases.gobel10.verify_exact"),
+            # n=40 joined the exact cases on 2026-08-30. Its construction is Goebel's
+            # published centred-diagonal-block family at a=3, b=4, and its replay also
+            # checks agreement with the retained decimal witness to that witness's own
+            # truncation, which is the only discrepancy there is.
+            (sys.executable, "-m", "cases.gobel40.verify_exact"),
+            # n=65 and n=89 joined the same day and by the same route. Goebel's family is
+            # exactly the best known at n = 5, 40, 65 and 89; the first two already had
+            # constructions, and building the other two took the general form of the rule
+            # rather than any new mathematics. Their replay also identifies their retained
+            # witnesses: agreement to 5e-33 is not something an independent optimisation
+            # reaches, so those decimals are materialisations of this family.
+            (sys.executable, "-m", "cases.gobel_family.verify_exact"),
             (
                 sys.executable,
                 "-m",
@@ -951,6 +1078,162 @@ def _operating_rules(context: Context) -> str:
     return _module(context, "devtools.render_operating_rules", "--check")
 
 
+def _agenda_map(context: Context) -> str:
+    return _module(context, "devtools.render_agenda_map", "--check")
+
+
+def _n5_identity_pair(context: Context) -> str:
+    # Re-runs the six-seed n=5 census, so ~28s: too slow for --edit and too important to
+    # leave unreplayed. D-034's pair is the only prospective control the identity work
+    # has, and a census that stopped reproducing it would invalidate the control without
+    # changing any file.
+    return _module(context, "devtools.build_n5_identity_pair", "--check")
+
+
+def _exact_construction_price(context: Context) -> str:
+    """The decimal route still reproduces neither known contact structure.
+
+    38s, and `broad` for depth rather than breadth: the measurement is a sixty-floor sweep
+    at four sizes, and narrowing it would narrow the finding. Kept out of `--edit` for the
+    cost and in `--fast` because what it guards is a typed refusal -- if the route ever
+    started reproducing `n = 11`'s exact 14-and-20, that would be news either way.
+    """
+    return _module(context, "devtools.price_exact_construction", "--check")
+
+
+def _work_accounting(context: Context) -> str:
+    """The three work meters still agree on exactly one unit, and no more.
+
+    Runs an LP on a literal three-square structural cell to observe the solver's own
+    counters, which is why this is not a records-only check: the number it compares against
+    the structural plan has to be measured rather than read.
+    """
+    return _module(context, "devtools.audit_work_accounting", "--check")
+
+
+def _assembly_coverage(context: Context) -> str:
+    """Every record at `n <= 30` still carries its certificate or its typed limitation.
+
+    Cheap, because it reads the same census the taxonomy does. The value is that the
+    contract's `per_record_coverage` block names this record and this replay, so the
+    contract and the corpus cannot drift into disagreeing without one of them failing.
+    """
+    return _module(context, "devtools.certify_assembly_coverage", "--check")
+
+
+def _chunk_taxonomy(context: Context) -> str:
+    """The source-stratified taxonomy still describes the corpus it was drawn from.
+
+    2.6s, which is a third again on top of the records tier and is paid deliberately. The
+    record is a generated view over the chunk census and 100 retained witnesses, and
+    `D-369` measured that record drift, not mathematics, is what breaks CI -- so a view
+    whose drift check sits outside the pre-push tier is a view that drifts.
+    """
+    return _module(context, "devtools.census_chunk_taxonomy", "--check")
+
+
+def _session_clocks(context: Context) -> str:
+    """No session may declare a start time it could not have read (`D-358`).
+
+    Refuses only what cannot be true, so a delegated lane whose phase legitimately starts
+    before the one above it in the file passes with a printed note. The `--review` output
+    is the instrument `OR-6` needs: elapsed against budget for every phase of the newest
+    session, derived from the record's own successive timestamps.
+    """
+    output = _module(context, "devtools.check_session_clocks", "--review")
+    _require_text(output, "every declared start is one that could have been read")
+    return output
+
+
+def _n5_rigidity_certificates(context: Context) -> str:
+    # 0.8s including the scipy import, because the linear programs are 20 rows wide. The
+    # certificates are proposed in floating point and re-checked exactly in `Q(sqrt 2)`, so
+    # what this replays is the exact check and not the search that proposed it.
+    return _module(context, "devtools.assess_n5_rigidity", "--check")
+
+
+def _session_close(context: Context) -> str:
+    # Sub-second: frontmatter plus the span of each rollup. Records tier, and distinct from
+    # `_session_rollups` in what it adds -- the reverse direction. That checker asks whether
+    # every declared rollup exists; this one also reports rollups no session declares, which
+    # is how a measured cost goes unattributed without anything noticing.
+    return _module(context, "devtools.close_session", "--check")
+
+
+def _pr_rollup(context: Context) -> str:
+    # Sub-second: it re-reads the rollups the step above already parses and renders each
+    # branch shape without printing. Records tier because this block goes on every pull
+    # request, so a renderer that raises on a branch with no exclusive log breaks the one
+    # place a reviewer sees what the work cost.
+    return _module(context, "devtools.render_pr_rollup", "--check")
+
+
+def _control_anchors(context: Context) -> str:
+    # Sub-second: it resolves 150 anchors by string containment, running no mutation and no
+    # subprocess. Records tier because a control whose anchor has stopped matching is not
+    # testing anything, and the suite that would say so runs only in the full gate -- which
+    # a pull request never reaches (D-403).
+    return _module(context, "devtools.check_control_anchors")
+
+
+def _nagamochi_bounds(context: Context) -> str:
+    # Sub-second: a hundred frontmatter blocks and one closed-form per case. Records tier
+    # because it checks the arithmetic of a citation the rest of the register leans on --
+    # 88 of the hundred verified lower bounds come from this one external proof, and
+    # nothing previously re-derived any of them.
+    return _module(context, "devtools.check_nagamochi_bounds")
+
+
+def _evidence_inventory(context: Context) -> str:
+    # Sub-second: it reads one register and re-renders a table. Records tier because it is
+    # a generated view of the record, and a generated view that has drifted from its source
+    # is the thing this repository logs defects about most often.
+    return _module(context, "devtools.render_evidence_inventory", "--check")
+
+
+def _certificate_citations(context: Context) -> str:
+    # Sub-second: it ast-parses five modules and reads a hundred frontmatter blocks. Records
+    # tier because it checks the record, not the mathematics -- that every exact certificate
+    # this repository holds is named by the frontier record it bears on. See D-398, where
+    # three records declared a mathematics blocker while their certificate ran in this gate.
+    return _module(context, "devtools.check_certificate_citations")
+
+
+def _session_rollups(context: Context) -> str:
+    # Sub-second: it reads frontmatter and stats files. Records-tier because that is exactly
+    # what it checks -- that a terminal session names what it cost and the record is there.
+    return _module(context, "devtools.check_session_rollups")
+
+
+def _gobel_family(context: Context) -> str:
+    # About five seconds: the family is twelve pairs and only the four whose side matches a
+    # retained best known are built and verified exactly, the largest being n = 89 at 3916
+    # pairs. Cheap enough for the records tier, and it belongs there -- what it checks is
+    # that the frontier still says what it said when the coverage was measured.
+    return _module(context, "devtools.price_gobel_family", "--check")
+
+
+def _n40_rigidity_bracket(context: Context) -> str:
+    # 4m57s measured 2026-08-30, on a full gate of about sixteen minutes. It re-derives
+    # n = 40's whole assessment: the witness and its second-order refusal, six retained
+    # rays and theirs, a sweep of the null space, and 144 Farkas searches over the frame.
+    # Neither `fast` nor `records` for that reason -- it re-derives the mathematics rather
+    # than reading the record, and a three-minute check in the six-second records tier
+    # would make that tier one people skip (D-369).
+    #
+    # It was cut once already: the intersecting-assessor section went from all 120
+    # coordinates to the block's 48, which is where the claim lives, saving ninety seconds
+    # for a number that said nothing the forty-eight did not. It has since grown again, to
+    # 4m57s, with the frame proof, the block-rotation relations and the cone bound.
+    #
+    # That is a third of the full gate for one step and `D-369` is the standing warning
+    # about exactly this. It is left in because every part of it is a claim the record
+    # makes and nothing here is a duplicate of anything else; the honest alternative, if
+    # the cost bites, is to move the whole step behind a flag rather than to thin the
+    # checks until they stop covering what is asserted.
+    return _module(context, "devtools.assess_n40_rigidity", "--check")
+
+
 def _differential(context: Context) -> str:
     if not ENGINE.is_file():
         raise StepSkippedError(
@@ -1074,49 +1357,536 @@ def _campaign_record(context: Context) -> str:
     )
 
 
+# Attribution groups for `Step.touches`, deliberately generous. A pattern that is too
+# wide costs a step that need not have run; one that is too narrow costs a verdict nobody
+# checked, and only the second is a soundness failure.
+#
+# `fnmatch` is not a path glob -- its `*` crosses separators -- so `packing/src/sqpack/*`
+# covers the whole subtree, and every pattern here is repo-relative.
+_TOOLCHAIN = ("packing/pyproject.toml", "packing/uv.lock", "packing/.python-version")
+# `devtools/__init__.py` is imported by every devtools-invoking step and is covered by no
+# per-file devtools pattern, so it belongs with the shared core rather than repeated.
+_CORE = ("packing/src/sqpack/*", "packing/devtools/__init__.py", *_TOOLCHAIN)
+_ENGINE_SRC = ("packing/sqsearch/*",)
+_ANY_PYTHON = ("*.py", "*.pyi", *_TOOLCHAIN)
+_CASES = ("packing/cases/*",)
+# The retained replay archives. Whole subtree, not the named files: several steps
+# discover which archives to replay by globbing, so adding one changes what runs.
+_RESULTS = ("packing/campaign/series/*",)
+
 STEPS: tuple[Step, ...] = (
-    Step("soundness perimeter", _soundness_perimeter, needs_engine=True),
-    Step("lint floor (ruff)", _lint_floor, fast=True, records=True),
-    Step("type floor (basedpyright)", _type_floor, fast=True),
-    Step("basin atlas", _basin_atlas),
-    Step("basin event record and replay", _basin_events),
-    Step("historical regressions", _historical_regressions),
-    Step("small-n exact models and local geometry", _small_n),
-    Step("deterministic SVG rendering", _svg_rendering),
-    Step("known-best n=1..100 atlas", _known_best_atlas),
-    Step("prospective n=101..324 source map and safe seed", _prospective_atlas),
-    Step("single-square translation escape screen", _translation_escape_screen),
-    Step("abstract size-five contact-scaffold atlas", _contact_scaffold_atlas),
-    Step("negative controls", _negative_controls),
-    Step("fixed-angle cell is an LP, rebuilt independently", _independent_lp),
-    Step("fast behavioral tests", _fast_tests, fast=True),
-    Step("exhaustive exact behavioral tests", _exhaustive_exact_tests),
-    Step("bead tree", _bead_tree, fast=True, records=True),
-    Step("golden basin maps (proved cases, checked against mathematics)", _golden_basins),
-    Step("basin identity", _canonical_identity),
-    Step("soft-schema validation", _schemas, fast=True, records=True),
-    Step("derivation (needs sympy)", _derivation, fast=True),
-    Step("search engine (sqsearch)", _search_engine, needs_engine=True),
-    Step("lint floor (rust)", _rust_quality),
-    Step("Trump exact branchwise linearized cones", _trump_cones),
-    Step("H-041 Stromquist repaired-cover exact certificate", _stromquist_repair),
-    Step("H-010 Stromquist printed-cover exact rejection", _stromquist_rejection),
-    Step("exact verification", _exact_verification, fast=True),
-    Step("verifier perturbation limits", _verifier_limits, fast=True),
-    Step("frontier corpus", _frontier_corpus),
-    Step("frontier rigidity assessed here", _frontier_rigidity, fast=True),
-    Step("generated tables in sync with frontier/", _generated_tables, fast=True, records=True),
-    Step("strategy catalogues", _strategy_catalogues, fast=True, records=True),
-    Step("defect log", _defect_log, fast=True, records=True),
     Step(
-        "skills mirrored between .agents and .claude", _skills_mirrored, fast=True, records=True
+        "soundness perimeter",
+        _soundness_perimeter,
+        needs_engine=True,
+        touches=(*_CORE, *_ENGINE_SRC, "packing/devtools/check_soundness_perimeter.py"),
+    ),
+    Step("lint floor (ruff)", _lint_floor, fast=True, records=True, touches=_ANY_PYTHON),
+    Step("type floor (basedpyright)", _type_floor, fast=True, touches=_ANY_PYTHON),
+    Step(
+        "basin atlas",
+        _basin_atlas,
+        touches=(*_CORE, "packing/atlas/*", "packing/devtools/check_atlas.py"),
+    ),
+    Step(
+        "basin event record and replay",
+        _basin_events,
+        touches=(*_CORE, *_CASES, *_RESULTS, "packing/frontier/*"),
+    ),
+    Step(
+        "historical regressions",
+        _historical_regressions,
+        touches=(
+            *_CORE,
+            *_ENGINE_SRC,
+            *_CASES,
+            *_RESULTS,
+            "packing/devtools/check_regressions.py",
+        ),
+    ),
+    Step(
+        "small-n exact models and local geometry",
+        _small_n,
+        touches=(*_CORE, *_CASES, *_RESULTS, "packing/atlas/*"),
+    ),
+    Step(
+        "deterministic SVG rendering",
+        _svg_rendering,
+        touches=(
+            *_CORE,
+            "packing/atlas/*",
+            "packing/devtools/*",
+            "packing/cases/*",
+            # It asserts facts about every Markdown file in the repository:
+            # `surface_expectations` pins examples in TUTORIAL.md and SYNOPSIS.md, and
+            # three checks walk `REPO.rglob("*.md")` for inline SVG targets.
+            "*.md",
+        ),
+    ),
+    Step(
+        "known-best n=1..100 atlas",
+        _known_best_atlas,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/devtools/*",
+            "packing/atlas/*",
+            "packing/witnesses/*",
+            "packing/frontier/*",
+            "packing/resources/*",
+        ),
+    ),
+    Step(
+        "prospective n=101..324 source map and safe seed",
+        _prospective_atlas,
+        touches=(
+            *_CORE,
+            "packing/atlas/prospective/*",
+            # The generated witnesses declare a schema one level up, so the whole tree.
+            "packing/witnesses/*",
+            "packing/resources/web/*",
+            "packing/devtools/map_prospective_sources.py",
+            "packing/devtools/build_prospective_atlas.py",
+        ),
+    ),
+    Step(
+        "single-square translation escape screen",
+        _translation_escape_screen,
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/*",
+            "packing/witnesses/*",
+            "packing/devtools/screen_translation_escape.py",
+        ),
+    ),
+    Step(
+        "abstract size-five contact-scaffold atlas",
+        _contact_scaffold_atlas,
+        touches=(
+            *_CORE,
+            "packing/atlas/enumerated/*",
+            "packing/devtools/build_contact_scaffold_atlas.py",
+        ),
+    ),
+    # 1268s measured uncapped at 137 controls (D-366), and the suite only grows. The
+    # budget is that measurement plus room for the growth, not a number chosen to make
+    # today's run pass; a control suite that doubles again should be re-argued, not
+    # re-padded.
+    Step("negative controls", _negative_controls, budget_seconds=1800),
+    Step(
+        "fixed-angle cell is an LP, rebuilt independently",
+        _independent_lp,
+        touches=(*_CORE, "packing/cases/trump11/*"),
+    ),
+    Step("fast behavioral tests", _fast_tests, fast=True, broad=True),
+    Step("exhaustive exact behavioral tests", _exhaustive_exact_tests),
+    Step(
+        "bead tree",
+        _bead_tree,
+        fast=True,
+        records=True,
+        # The bead data lives in a sync worktree, not the tracked tree, so a bead-only
+        # change produces no changed path at all -- which selects the whole gate.
+        touches=(*_CORE, ".tbd/*", "packing/devtools/check_bead_tree.py"),
+    ),
+    Step(
+        "golden basin maps (proved cases, checked against mathematics)",
+        _golden_basins,
+        touches=(
+            *_CORE,
+            *_ENGINE_SRC,
+            "packing/golden/*",
+            "packing/frontier/*",
+            "packing/devtools/check_golden_basins.py",
+        ),
+    ),
+    Step(
+        "basin identity",
+        _canonical_identity,
+        touches=(
+            *_CORE,
+            "packing/cases/trump11/*",
+            *_RESULTS,
+            "packing/devtools/check_canonical.py",
+        ),
+    ),
+    Step("soft-schema validation", _schemas, fast=True, records=True),
+    Step(
+        "derivation (needs sympy)",
+        _derivation,
+        fast=True,
+        touches=(*_CORE, "packing/cases/trump11/*"),
+    ),
+    Step("search engine (sqsearch)", _search_engine, needs_engine=True, touches=_ENGINE_SRC),
+    Step("lint floor (rust)", _rust_quality, touches=_ENGINE_SRC),
+    Step(
+        "Trump exact branchwise linearized cones",
+        _trump_cones,
+        touches=(*_CORE, "packing/cases/trump11/*", *_RESULTS),
+    ),
+    Step(
+        "H-041 Stromquist repaired-cover exact certificate",
+        _stromquist_repair,
+        touches=(
+            *_CORE,
+            "packing/cases/stromquist/*",
+            *_RESULTS,
+            "packing/resources/papers/*",
+        ),
+    ),
+    Step(
+        "H-010 Stromquist printed-cover exact rejection",
+        _stromquist_rejection,
+        touches=(
+            *_CORE,
+            "packing/cases/stromquist/*",
+            *_RESULTS,
+            "packing/resources/papers/*",
+        ),
+    ),
+    Step(
+        "exact verification",
+        _exact_verification,
+        fast=True,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/witnesses/*",
+            "packing/frontier/*",
+            "packing/devtools/check_basic_bounds.py",
+            "packing/devtools/generate_known_best_n011_rational_control.py",
+            "packing/devtools/check_rational_witness_independent.py",
+        ),
+    ),
+    Step(
+        "verifier perturbation limits",
+        _verifier_limits,
+        fast=True,
+        touches=(*_CORE, "packing/cases/trump11/*"),
+    ),
+    # D-355's measured case: a two-file edit to the rigidity assessor was verified with a
+    # 979.79s full gate, and these three are what such an edit can reach.
+    Step(
+        "frontier corpus",
+        _frontier_corpus,
+        touches=(
+            *_CORE,
+            "packing/frontier/*",
+            "packing/cases/kingbird29/*",
+            "packing/resources/papers/*",
+        ),
+    ),
+    Step(
+        "frontier rigidity assessed here",
+        _frontier_rigidity,
+        fast=True,
+        touches=(
+            *_CORE,
+            "packing/frontier/*",
+            "packing/devtools/assess_frontier_rigidity.py",
+            # `SCREEN` is atlas/known-best/translation-escape-screen.json, and the pinned
+            # rigid/not-rigid/undetermined counts are exactly what changing it moves.
+            "packing/atlas/known-best/*",
+        ),
+    ),
+    Step(
+        "generated tables in sync with frontier/",
+        _generated_tables,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/frontier/*",
+            "packing/devtools/render_research_tables.py",
+            # `MAIN` is the n=11 research report, read and compared cell by cell; the
+            # step exists to catch a hand-edited table in exactly that file.
+            "docs/*",
+        ),
+    ),
+    Step(
+        "strategy catalogues",
+        _strategy_catalogues,
+        fast=True,
+        records=True,
+        touches=(*_CORE, "packing/frontier/*"),
+    ),
+    Step(
+        "defect log",
+        _defect_log,
+        fast=True,
+        records=True,
+        touches=(
+            "packing/defects.yaml",
+            "packing/defects.schema.yaml",
+            "defects.md",
+            *_CORE,
+            "packing/devtools/render_defects.py",
+            "packing/devtools/check_generated_markdown.py",
+            ".flowmarkignore",
+            "*.md",
+        ),
+    ),
+    Step(
+        "skills mirrored between .agents and .claude",
+        _skills_mirrored,
+        fast=True,
+        records=True,
+        # The mirrored list is a Make variable, so the Makefile is part of the contract.
+        touches=("Makefile", ".agents/*", ".claude/*"),
     ),
     Step("synopsis agrees with the artifacts", _synopsis, fast=True, records=True),
     Step("README agrees with the directory", _readme, fast=True, records=True),
-    Step("AGENTS.md mirrors the operating rules", _operating_rules, fast=True, records=True),
-    Step("differential: search energy vs validity oracle", _differential, needs_engine=True),
-    Step("provenance: recorded commits are reachable", _provenance, fast=True),
-    Step("campaign record", _campaign_record, fast=True, records=True),
+    Step(
+        "AGENTS.md mirrors the operating rules",
+        _operating_rules,
+        fast=True,
+        records=True,
+        touches=(
+            "AGENTS.md",
+            "CLAUDE.md",
+            "operating-rules.md",
+            "packing/devtools/render_operating_rules.py",
+        ),
+    ),
+    Step(
+        "agenda map agrees with the agendas",
+        _agenda_map,
+        fast=True,
+        records=True,
+        touches=(
+            "packing/campaign/agendas/*",
+            "packing/campaign/agenda-map.md",
+            "packing/campaign/schemas/agenda.schema.yaml",
+            "packing/devtools/render_agenda_map.py",
+            *_CORE,
+        ),
+    ),
+    # 28s, so it stays out of `--edit` -- but that follows from `fast=False` alone, since
+    # `_select_steps` filters to the fast steps before `broad` is consulted. The flag was
+    # set here and did nothing; a step is excluded from `--edit` by not being fast.
+    Step(
+        "D-034's n=5 identity pair still reproduces",
+        _n5_identity_pair,
+        touches=(
+            *_CORE,
+            "packing/devtools/build_n5_identity_pair.py",
+            "packing/devtools/check_golden_basins.py",
+            "packing/devtools/check_soundness_perimeter.py",
+            "packing/campaign/series/*/results/bc-083-n5-identity-pair.json",
+        ),
+    ),
+    Step(
+        "the decimal route still cannot price an exact pose",
+        _exact_construction_price,
+        fast=True,
+        broad=True,
+        touches=(
+            *_CORE,
+            "packing/witnesses/*",
+            "packing/atlas/known-best/contact-structures.json",
+            "packing/devtools/price_exact_construction.py",
+            "packing/campaign/series/*/results/bc-049-exact-construction-price.json",
+        ),
+    ),
+    Step(
+        "work accounting agrees on one unit",
+        _work_accounting,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/contact-full-cell-control.json",
+            "packing/devtools/audit_work_accounting.py",
+            "packing/campaign/series/*/results/bc-017-work-accounting.json",
+        ),
+    ),
+    Step(
+        "assembly coverage agrees with the contract",
+        _assembly_coverage,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/chunk-components.json",
+            "packing/atlas/known-best/contact-assembly-grammar.yaml",
+            "packing/atlas/known-best/manifest.json",
+            "packing/witnesses/*",
+            "packing/devtools/certify_assembly_coverage.py",
+            "packing/devtools/census_chunk_taxonomy.py",
+            "packing/campaign/series/*/results/bc-019-assembly-coverage.json",
+        ),
+    ),
+    Step(
+        "chunk taxonomy agrees with the corpus",
+        _chunk_taxonomy,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/chunk-components.json",
+            "packing/atlas/known-best/manifest.json",
+            "packing/witnesses/*",
+            "packing/devtools/census_chunk_taxonomy.py",
+            "packing/campaign/series/*/results/bc-024-chunk-taxonomy.json",
+        ),
+    ),
+    Step(
+        "session clocks are readable",
+        _session_clocks,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/campaign/agent-sessions/*",
+            "packing/campaign/schemas/agent-session.schema.yaml",
+            "packing/devtools/check_session_clocks.py",
+        ),
+    ),
+    Step(
+        "n=5 rigidity certificates still verify",
+        _n5_rigidity_certificates,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/assess_n5_rigidity.py",
+            *_CASES,
+            "packing/campaign/series/*/results/bc-049-n5-rigidity-certificates.json",
+        ),
+    ),
+    Step(
+        "every session's cost is attributed",
+        _session_close,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/close_session.py",
+            "packing/campaign/agent-sessions/*.md",
+            "packing/campaign/resource-usage/*.yaml",
+            # The step now also checks the reader-facing view spliced into the synopsis,
+            # so editing that section has to be able to fail it.
+            "SYNOPSIS.md",
+        ),
+    ),
+    Step(
+        "the branch cost rollup renders",
+        _pr_rollup,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/render_pr_rollup.py",
+            "packing/campaign/resource-usage/*.yaml",
+        ),
+    ),
+    Step(
+        "control anchors still resolve",
+        _control_anchors,
+        fast=True,
+        records=True,
+        touches=(*_CORE, "packing/devtools/controls.yaml", "packing/devtools/*.py"),
+    ),
+    Step(
+        "the borrowed lower bounds re-derive",
+        _nagamochi_bounds,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/check_nagamochi_bounds.py",
+            "packing/frontier/n-*.md",
+            "packing/frontier/evidence.yaml",
+        ),
+    ),
+    Step(
+        "the inventory agrees with the register",
+        _evidence_inventory,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/render_evidence_inventory.py",
+            "packing/frontier/evidence.yaml",
+            "packing/frontier/INVENTORY.md",
+        ),
+    ),
+    Step(
+        "exact certificates are named by their records",
+        _certificate_citations,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/check_certificate_citations.py",
+            "packing/cases/*/verify_exact.py",
+            "packing/frontier/n-*.md",
+            "packing/frontier/evidence.yaml",
+        ),
+    ),
+    Step(
+        "terminal sessions name what they cost",
+        _session_rollups,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/check_session_rollups.py",
+            "packing/campaign/agent-sessions/*.md",
+            "packing/campaign/resource-usage/*.yaml",
+        ),
+    ),
+    Step(
+        "Goebel's family reaches the sizes it reaches",
+        _gobel_family,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/price_gobel_family.py",
+            "packing/cases/gobel40/packing.py",
+            "packing/frontier/n-*.md",
+            "packing/campaign/series/*/results/bc-049-gobel-family-coverage.json",
+        ),
+    ),
+    Step(
+        "n=40 rigidity bracket still reproduces",
+        _n40_rigidity_bracket,
+        touches=(
+            *_CORE,
+            "packing/devtools/assess_n40_rigidity.py",
+            "packing/devtools/assess_n5_rigidity.py",
+            *_CASES,
+            "packing/campaign/series/*/results/bc-049-n40-rigidity-bracket.json",
+        ),
+    ),
+    Step(
+        "differential: search energy vs validity oracle",
+        _differential,
+        needs_engine=True,
+        touches=(*_CORE, *_ENGINE_SRC, "packing/devtools/check_search_differential.py"),
+    ),
+    Step(
+        "provenance: recorded commits are reachable",
+        _provenance,
+        fast=True,
+        # Also depends on git history and where HEAD points, which no path expresses. An
+        # empty changed-path set already selects the whole gate, so that is bounded.
+        touches=(*_CORE, *_RESULTS),
+    ),
+    Step(
+        "campaign record",
+        _campaign_record,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/campaign/*",
+            "packing/frontier/*",
+            "packing/defects.yaml",
+            "packing/devtools/check_declared_commands.py",
+        ),
+    ),
 )
 
 
@@ -1149,8 +1919,115 @@ def _environment_flag(name: str) -> bool:
     return value == "1"
 
 
-def _select_steps(*, only: list[str], fast: bool, records: bool = False) -> list[Step]:
-    selected = [step for step in STEPS if not fast or step.fast]
+@dataclass(frozen=True)
+class Selection:
+    """Which steps a set of changed paths reaches, and why."""
+
+    steps: tuple[Step, ...]
+    unattributed_paths: tuple[str, ...]
+    """Changed paths no step claims. Non-empty means the whole selection was returned."""
+
+    universe_size: int
+    """How many steps were offered. Not `len(STEPS)`: `--since` narrows whatever tier
+    preceded it, so "everything" means everything in that tier."""
+
+    @property
+    def is_whole_gate(self) -> bool:
+        return len(self.steps) == self.universe_size
+
+
+def select_for_paths(paths: Sequence[str], steps: Sequence[Step] | None = None) -> Selection:
+    """The steps a change to `paths` can affect, erring toward running too much.
+
+    Two refusals rather than one, because under-selection is the failure that costs
+    coverage and it can arrive from either direction:
+
+    - a path no step claims means the attribution is incomplete for this change, so the
+      whole gate runs. Returning the steps that happened to match would be an answer
+      derived from an admittedly incomplete map.
+    - a step that claims nothing is claimed by everything.
+
+    An empty `paths` is not "nothing changed"; it is "nothing was determined", and it
+    also selects the whole gate.
+    """
+    universe = STEPS if steps is None else tuple(steps)
+    if not paths:
+        return Selection(steps=universe, unattributed_paths=(), universe_size=len(universe))
+
+    attributed = {
+        path
+        for path in paths
+        if any(step.touches and step.reachable_from(path) for step in universe)
+    }
+    unclaimed = tuple(sorted(set(paths) - attributed))
+    if unclaimed:
+        return Selection(
+            steps=universe, unattributed_paths=unclaimed, universe_size=len(universe)
+        )
+
+    reached = tuple(
+        step for step in universe if any(step.reachable_from(path) for path in paths)
+    )
+    return Selection(steps=reached, unattributed_paths=(), universe_size=len(universe))
+
+
+def _git(*args: str) -> str:
+    result = subprocess.run(
+        ("git", *args), cwd=REPOSITORY_ROOT, capture_output=True, text=True, check=False
+    )
+    if result.returncode != 0:
+        raise UsageError(f"git {' '.join(args)} failed: {result.stderr.strip()}")
+    return result.stdout
+
+
+def changed_paths(since: str) -> list[str]:
+    """Repo-relative paths changed against a git ref, including uncommitted work.
+
+    Uncommitted changes are included deliberately: the question is "what do I need to run
+    before pushing this", and a working tree the diff ignored would be exactly the change
+    nobody checked.
+
+    Four details, each of which silently under-reported before it was fixed, and an
+    under-reported path is a step that does not run:
+
+    - **`--no-renames`.** Rename detection reports only the destination, so moving a file
+      out of an attributed subtree drops the path that named the steps it used to reach.
+      Renaming `devtools/assess_frontier_rigidity.py` left the step that imports it by
+      name unselected, and that step would then die with `ModuleNotFoundError`.
+    - **The merge base, not the ref tip.** A two-dot diff compares against the tip, so a
+      file this branch changed disappears from the answer once the base converges on the
+      same content. The question is what this branch did, which is the three-dot one.
+    - **`rev-parse --verify` and `--`.** Without them a `--since` value naming an existing
+      path is taken as a pathspec: `--since packing` exits 0 and returns a pathspec-limited
+      unstaged diff, dropping every committed change. Silent exactly when the argument
+      looks plausible.
+    - **`-z`.** With `core.quotePath` at its default a non-ASCII path arrives C-quoted,
+      quotes included, and matches no pattern. That fails safe -- an unmatched path selects
+      the whole gate -- but it defeats the feature for anyone with such a filename, and
+      splitting on NUL fixes the leading/trailing-whitespace corruption at the same time.
+    """
+    resolved = _git("rev-parse", "--verify", "--quiet", f"{since}^{{commit}}").strip()
+    if not resolved:
+        raise UsageError(f"--since {since!r} does not name a commit")
+    base = _git("merge-base", resolved, "HEAD").strip() or resolved
+
+    out: set[str] = set()
+    for args in (
+        ("diff", "--name-only", "--no-renames", "-z", base, "--"),
+        ("diff", "--name-only", "--no-renames", "-z"),
+        ("diff", "--name-only", "--no-renames", "-z", "--cached"),
+        ("ls-files", "--others", "--exclude-standard", "-z"),
+    ):
+        out |= {entry for entry in _git(*args).split("\0") if entry}
+    return sorted(out)
+
+
+def _select_steps(
+    *, only: list[str], fast: bool, records: bool = False, edit: bool = False
+) -> list[Step]:
+    selected = [step for step in STEPS if not (fast or edit) or step.fast]
+    if edit:
+        selected = [step for step in selected if not step.broad]
     if records:
         selected = [step for step in selected if step.records]
     if only:
@@ -1167,6 +2044,12 @@ def _select_steps(*, only: list[str], fast: bool, records: bool = False) -> list
 
 def _execute_step(step: Step, context: Context) -> StepResult:
     started = time.perf_counter()
+    if (
+        step.budget_seconds is not None
+        and not context.timeout_is_explicit
+        and step.budget_seconds > context.timeout_seconds
+    ):
+        context = replace(context, timeout_seconds=step.budget_seconds)
     try:
         output = step.action(context)
     except StepSkippedError as error:
@@ -1226,7 +2109,15 @@ def _validation_activity(marker: Path) -> Iterator[None]:
     try:
         yield
     finally:
-        marker.rmdir()
+        # `missing_ok`, because releasing a lock that is already released is not a
+        # failure and the alternative is worse than the problem. On 2026-08-30 an
+        # operator cleared what they took for a stale marker while this run held it;
+        # the bare `rmdir` then raised out of the `finally`, and a 25-minute `--fast`
+        # whose steps had all completed reported nothing at all -- no results, no
+        # timings, just a `FileNotFoundError` traceback (D-383). The marker exists to
+        # stop two gates running at once, and by this point this gate is over.
+        with suppress(FileNotFoundError):
+            marker.rmdir()
 
 
 def _run_selected(
@@ -1321,11 +2212,24 @@ def _parser() -> ArgumentParser:
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
+    parser.add_argument(
+        "--edit",
+        action="store_true",
+        help="run the edit-loop checks: everything in --fast except the broad test suite",
+    )
     parser.add_argument("--fast", action="store_true", help="run the fast edit-loop checks")
     parser.add_argument(
         "--records",
         action="store_true",
         help="run only the record checks: registries, generated views, declared contracts",
+    )
+    parser.add_argument(
+        "--since",
+        metavar="REF",
+        help=(
+            "run only the steps a change against REF can affect, including uncommitted "
+            "work; a path no step claims selects the whole gate"
+        ),
     )
     parser.add_argument(
         "--only",
@@ -1363,10 +2267,22 @@ def _parser() -> ArgumentParser:
 
 
 def _validate_invocation(
-    *, strict: bool, only: list[str], fast: bool, records: bool = False
+    *,
+    strict: bool,
+    only: list[str],
+    fast: bool,
+    records: bool = False,
+    edit: bool = False,
+    since: str | None = None,
 ) -> None:
-    if strict and (only or fast or records):
-        raise UsageError("--strict cannot be combined with --only, --fast, or --records")
+    if strict and (only or fast or records or edit or since):
+        raise UsageError(
+            "--strict cannot be combined with --only, --fast, --records, --edit, or --since"
+        )
+    if edit and fast:
+        raise UsageError(
+            "--edit and --fast select different tiers; --fast is the wider of the two"
+        )
 
 
 def _validate_runtime() -> None:
@@ -1386,6 +2302,8 @@ def main(arguments: list[str] | None = None) -> int:
             only=namespace.only,
             fast=namespace.fast,
             records=namespace.records,
+            edit=namespace.edit,
+            since=namespace.since,
         )
         jobs_value = namespace.jobs or os.environ.get("PACKING_VALIDATE_JOBS")
         jobs = (
@@ -1405,6 +2323,7 @@ def main(arguments: list[str] | None = None) -> int:
         else:
             timeout_name = "PACKING_VALIDATE_TIMEOUT_SECONDS"
             timeout_value = os.environ.get(timeout_name)
+        timeout_is_explicit = timeout_value is not None
         timeout_seconds = (
             _positive_seconds(timeout_name, timeout_value)
             if timeout_value is not None
@@ -1413,8 +2332,27 @@ def main(arguments: list[str] | None = None) -> int:
         _validate_runtime()
         require_project_root(PROJECT_ROOT)
         selected = _select_steps(
-            only=namespace.only, fast=namespace.fast, records=namespace.records
+            only=namespace.only,
+            fast=namespace.fast,
+            records=namespace.records,
+            edit=namespace.edit,
         )
+        if namespace.since:
+            paths = changed_paths(namespace.since)
+            selection = select_for_paths(paths, selected)
+            selected = list(selection.steps)
+            print(f"== change-scoped against {namespace.since}: {len(paths)} paths ==")
+            if selection.unattributed_paths:
+                shown = ", ".join(selection.unattributed_paths[:5])
+                more = (
+                    f" (+{len(selection.unattributed_paths) - 5} more)"
+                    if len(selection.unattributed_paths) > 5
+                    else ""
+                )
+                print(f"  no step claims {shown}{more}; running the whole selection")
+            else:
+                print(f"  {len(selected)} steps reachable from those paths")
+            print()
         if namespace.list:
             records = [{"name": step.name, "tags": step.tags} for step in selected]
             if namespace.format == "json":
@@ -1432,6 +2370,7 @@ def main(arguments: list[str] | None = None) -> int:
             inner_jobs=inner_jobs,
             environment=environment,
             timeout_seconds=timeout_seconds,
+            timeout_is_explicit=timeout_is_explicit,
         )
         summary = _run_selected(selected, context, namespace.only)
     except ParserExitError as error:

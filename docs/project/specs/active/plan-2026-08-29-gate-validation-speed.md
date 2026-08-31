@@ -4,7 +4,7 @@
 
 **Author:** Claude (agent), from a working session with the repository owner
 
-**Status:** Draft
+**Status:** Both phases landed 2026-08-30, under `BC-077` and `BC-079` in agenda-007
 
 ## Overview
 
@@ -94,7 +94,15 @@ and `3.58s` of exact geometry.
 | `fastjsonschema` (generates Python source) | `114.6 ms` | `667 ms` |
 | **`jsonschema-rs`** (PyO3 bindings to the Rust crate) | `3.0 ms` | **`10.7 ms`** |
 
-559 times faster than what runs now, and 62 times faster than `fastjsonschema`.
+**Superseded by the landed measurement.** Those figures came from a scratch script over
+a 314-document subset.
+`benchmarks/bench_schema_validation.py` now runs the comparison over the full
+339-artifact corpus the step actually validates, and across five runs reports
+`7,145–7,750 ms` against `55–88 ms` — between `83x` and `137x`, not `559x`. A range
+rather than a point, because the Rust side is small enough that container scheduling
+noise moves it by half while the Python side barely shifts.
+The swap is still right by a wide margin, and the number quoted should be the
+reproducible one.
 
 **Two alternatives were measured and rejected**, and both are recorded so neither is
 proposed again:
@@ -148,8 +156,18 @@ one.
 | `jsonschema` | `jsonschema-rs` |
 | --- | --- |
 | `Draft202012Validator(schema)` | `Draft202012Validator(schema)` |
-| `error.message` | `error.message`, byte-identical on the cases checked |
+| `error.message` | `error.message`, **not** byte-identical — see below |
 | `error.path` | `error.instance_path`, the same list |
+
+**The message claim above was wrong, and is corrected here rather than deleted.** The
+two libraries quote differently and systematically: `jsonschema` renders
+`'a' is a required property` where `jsonschema-rs` renders `"a" is a required property`.
+Nothing in this repository parses that text, so the swap is safe, but a consumer that
+did parse it would have broken silently.
+The equivalence that holds — and that the differential test asserts — is verdict and
+instance path. The quoting difference is asserted explicitly by a test rather than
+normalised away unstated, so a future release that makes the messages identical shows up
+as a failure rather than as drift.
 
 `iter_errors` exists on both, so the `sorted(..., key=lambda e: list(e.path))` ordering
 survives with one attribute rename.
@@ -159,39 +177,45 @@ macOS x86_64 and arm64, `manylinux_2_17` x86_64, and `win_amd64`. No Rust toolch
 CI, no source build on any platform this project uses, and no wheel churn on a Python
 bump. Pin the version, per `tbd guidelines supply-chain-hardening`.
 
+**Pinned to `0.49.9`, not to the newest release.** `0.52.0` was published four days
+before this landed, and the same guideline’s 14-day cool-off applies to a schema
+validator as much as to anything else — arguably more, since this one decides whether
+every artifact in the repository is well-formed.
+`0.49.9` cleared the cool-off with room to spare.
+
 ## Implementation Plan
 
-### Phase 1: The validator, and the geometry it was hiding
+### Phase 1: The validator, and the geometry it was hiding — landed
 
-- [ ] Add `jsonschema-rs`, pinned, to the project dependencies; keep `jsonschema`
+- [x] Add `jsonschema-rs`, pinned, to the project dependencies; keep `jsonschema`
   installed, because the differential test needs both.
-- [ ] Swap `_validator` to `jsonschema_rs.Draft202012Validator` and rename `e.path` to
+- [x] Swap `_validator` to `jsonschema_rs.Draft202012Validator` and rename `e.path` to
   `e.instance_path` at the one call site.
-- [ ] Add `benchmarks/bench_schema_validation.py`: a repeatable comparison over the real
+- [x] Add `benchmarks/bench_schema_validation.py`: a repeatable comparison over the real
   corpus that prints both timings and the differential verdict, so the choice can be
   re-argued rather than remembered.
-- [ ] Add a differential test asserting the two validators agree on every artifact in
+- [x] Add a differential test asserting the two validators agree on every artifact in
   the corpus and on a generated family of mutations of each: dropped required keys,
   retyped values, emptied arrays, unexpected properties.
   A validator that accepts what the old one rejected is a soundness regression, and this
   is the check that would catch it.
-- [ ] Move the exact grid replay out of `soft-schema validation`. It belongs with
+- [x] Move the exact grid replay out of `soft-schema validation`. It belongs with
   `exact verification`, which is where a reader looks for exact geometry and where its
   cost is legible. Nothing about the check changes; only which step reports it.
-- [ ] Record the measured before and after in `D-370`.
+- [x] Record the measured before and after in `D-370`.
 
-### Phase 2: The tier contract
+### Phase 2: The tier contract — landed
 
-- [ ] Re-derive tier membership from what each step can catch and how often, and write
+- [x] Re-derive tier membership from what each step can catch and how often, and write
   the argument down. The candidate shape, to be confirmed against the timings rather than
   assumed: `--records` before every push; `--fast` at a block boundary; the default
   before a commit or handoff; `--strict` once or twice a session.
-- [ ] Decide `D-366`. The `negative controls` step exceeds the 900-second per-step cap
+- [x] Decide `D-366`. The `negative controls` step exceeds the 900-second per-step cap
   at 140 controls, needing `1268s` uncapped.
   Raising the cap weakens the same guard for every other step, so the options are
   sharding the suite, moving it to `--strict` with its own cap, or reducing per-control
   setup cost. The controls themselves are not at fault and none may be dropped.
-- [ ] Restate the cadence table in `conventions.md` from measurement after the changes
+- [x] Restate the cadence table in `conventions.md` from measurement after the changes
   land, as it was restated once already when it claimed sixty seconds for an
   eight-minute tier.
 - [ ] Roll up this session’s agent logs into the existing `CodexEfficiencyRollup/v2`

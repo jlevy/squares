@@ -27,7 +27,7 @@ import re
 import sys
 
 import yaml
-from jsonschema import Draft202012Validator
+from jsonschema_rs import Draft202012Validator
 
 from devtools.check_basic_bounds import check_case_basic_bounds
 from sqpack.assurance import check_case_semantics, check_evidence_semantics
@@ -39,6 +39,7 @@ FRONTIER = pathlib.Path(__file__).resolve().parent.parent / "frontier"
 REPO = FRONTIER.parent.parent
 WITNESSES = FRONTIER.parent / "witnesses"
 RESOURCE_USAGE = FRONTIER.parent / "campaign" / "resource-usage"
+SESSION_CLOSE_REPORT = RESOURCE_USAGE.parent / "session-close-report.yaml"
 DOCUMENT_MAP = FRONTIER.parent.parent / "docs" / "project" / "document-map.yaml"
 COMPOSITE_FIGURE = FRONTIER.parent / "atlas" / "known-best" / "composite-figure.json"
 TRANSLATION_ESCAPE_SCREEN = (
@@ -93,6 +94,20 @@ def _validator(schema_path: pathlib.Path) -> Draft202012Validator:
 
     329 artifacts declare 23 distinct schemas, so building a validator at each call site
     re-read and re-compiled every schema fourteen times over (D-370).
+
+    The validator is `jsonschema_rs`, not `jsonschema`: same drafts, same schemas, and
+    two orders of magnitude faster over this corpus -- 7.1-7.8s against 55-88ms across
+    339 artifacts, a ratio between 83x and 137x depending on container load, reproducible
+    through `benchmarks/bench_schema_validation.py` (D-370).
+    `tests/test_schema_validator_equivalence.py` is what makes that swap checkable rather
+    than trusted -- it fails if the two disagree on any artifact or on any generated
+    mutation of one.
+
+    The two are equivalent in *verdict and location*, which is what this project reads.
+    They are not equivalent in message text: `jsonschema` quotes with `'` and
+    `jsonschema_rs` with `"`, so `'a' is a required property` becomes
+    `"a" is a required property`. Nothing here parses that text, and the equivalence
+    test normalises quoting rather than pretending the strings match.
     """
     return Draft202012Validator(load_yaml(schema_path.read_text(encoding="utf-8")))
 
@@ -119,8 +134,8 @@ def check(path: pathlib.Path) -> list[str]:
     if not schema_path.exists():
         return [*errs, f"declared schema not found: {meta['schema']}"]
     v = _validator(schema_path)
-    for e in sorted(v.iter_errors(payload), key=lambda e: list(e.path)):
-        loc = "/".join(str(x) for x in e.path) or "<root>"
+    for e in sorted(v.iter_errors(payload), key=lambda e: list(e.instance_path)):
+        loc = "/".join(str(x) for x in e.instance_path) or "<root>"
         errs.append(f"{loc}: {e.message}")
     return errs
 
@@ -243,7 +258,13 @@ def defect_checks() -> list[str]:
     return errs
 
 
-def main() -> int:
+def corpus_paths() -> tuple[list[pathlib.Path], list[pathlib.Path]]:
+    """Every enforced artifact, as (frontmatter-md, pure-yaml).
+
+    Extracted from `main` so the equivalence test and the benchmark validate the same
+    corpus this step does. A second enumeration would drift, and the first thing it
+    would stop covering is whatever was added last.
+    """
     md = sorted(FRONTIER.glob("n-*.md"))
     datasets = sorted(p for p in FRONTIER.glob("*.yaml") if not p.name.endswith(".schema.yaml"))
     datasets += [FRONTIER.parent / "defects.yaml"]
@@ -268,6 +289,15 @@ def main() -> int:
     # these are the durable artifact rather than a pointer to one and are enforced like
     # any other dataset.
     datasets += sorted(RESOURCE_USAGE.glob("*.yaml"))
+    # The join between what a session did and what it cost. Enforced like any dataset,
+    # because a report that silently dropped an unmeasured session would total a fraction
+    # of the campaign and read as all of it.
+    datasets.append(SESSION_CLOSE_REPORT)
+    return md, datasets
+
+
+def main() -> int:
+    md, datasets = corpus_paths()
     if not md or not datasets:
         print("frontier/ artifacts not found", file=sys.stderr)
         return 2

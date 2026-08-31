@@ -80,7 +80,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Proposal and search | Use the stock annealer for calibration and candidate generation; its two search paths emit exact pair-test work | Pair-budget enforcement, the proposer interface, campaign-wide aggregation, and mechanism-diverse proposers are unbuilt | [Proposer layer](#the-proposer-layerone-instrument-and-the-interface-is-unbuilt) |
 | Event capture and replay | Retain and independently replay watched control events | A valid terminal event is an observation, not a connected terminal component | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |
 | Basin identity, census, and atlas | Use exact `n = 3` and `n = 4` models as identity controls | Component counting is not admissible until the `n = 5` ambiguity is bounded and the classifier is validated successively | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |
-| Numerical-to-formal promotion | Robustify suitable decimal center-angle poses into explicitly relaxed rational witnesses and receive typed failures | The robust path may weaken the bound; contact inference and existence certification at the reported value remain unbuilt and mathematically contingent | [Promotion pipeline](#the-promotion-pipelinepartly-built-with-a-formal-value-gap) |
+| Numerical-to-formal promotion | Robustify suitable decimal center-angle poses into explicitly relaxed rational witnesses, infer and assemble a contact system, recover a minimal polynomial under a decidable margin rule, certify a root by Krawczyk, and receive typed failures throughout | The robust path may weaken the bound; every component of the reported-value route is built, but the `n = 29` certificate is retained `unresolved` and moving `verified_upper_bound` is a reviewed human decision, not a pipeline inference | [Promotion pipeline](#the-promotion-pipelinebuilt-end-to-end-with-the-promotion-itself-withheld) |
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
@@ -152,9 +152,11 @@ case or experiment separately.
 | [Resource Usage](packing/campaign/resource-usage/README.md) | component scope and use | definitive | maintained | — |
 | [Idea board — the `s(n)` search campaign](packing/campaign/ideas.md) | hand-maintained registry | definitive | maintained | — |
 | [Experiment ledger](packing/campaign/ledger.md) | generated status view | generated | generated | — |
+| [Agenda map](packing/campaign/agenda-map.md) | generated status view | generated | generated | — |
 | [series-000 (S0) — smoke and calibration](packing/campaign/series/series-000-smoke-and-calibration/README.md) | series scope and comparability | definitive | maintained | — |
 | [Frontier: What Is Known About `s(n)`, Case by Case](packing/frontier/README.md) | frontier semantics and contribution path | definitive | maintained | — |
 | [Current Square-Packing Frontier](packing/frontier/STATUS.md) | generated status view | generated | generated | — |
+| [Evidence inventory](packing/frontier/INVENTORY.md) | generated status view | generated | generated | — |
 | [Research Resources: Square Packing](packing/resources/README.md) | source retention and archive policy | definitive | maintained | — |
 | [Defect log](defects.md) | generated status view | generated | generated | — |
 | [FrankenSim probes](packing/frankensim-probe/README.md) | component scope and use | supporting | maintained | — |
@@ -316,18 +318,131 @@ The renderer’s standing exact-motion control remains independently replayable:
 
 ![The final frame of the certified exact five-square trajectory.](packing/atlas/rendering/n5-exact-face-trajectory.svg)
 
-**As of 2026-08-29 — start here.** The active plan is
-[agenda-006](packing/campaign/agendas/agenda-006-overnight-research-blocks.md), and its
-queue is `BC-074` then `BC-075`.
+**As of 2026-08-30 — start here.**
+[agenda-008](packing/campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md)
+is closed with all four commitments terminal;
+[session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md)
+then ran nine unplanned phases on `BC-049` at `n = 40` and carries a handoff at its end
+that is the authoritative summary, and
+[session-046](packing/campaign/agent-sessions/session-046-gobel-family-constructions.md)
+took the cheapest thing that handoff named.
+[session-047](packing/campaign/agent-sessions/session-047-assurance-structure-and-what-is-ours.md)
+then left the mathematics alone and worked on the record itself: it promoted the three
+sizes whose exact certificates were already running in this gate while their records
+denied one existed, and filled in the two facts the register could not previously state
+— whether anyone here has read an external argument, and what a novelty claim was
+searched against.
+[session-048](packing/campaign/agent-sessions/session-048-what-every-session-cost.md)
+closed the same gap one level up, joining every session to what it cost and finding that
+both obvious ways of totalling that were wrong in the flattering direction — see
+[Sessions Conducted](#sessions-conducted).
 
-`BC-074` is the first W8 documentation pass, on `think-eb29`, against the checklist in
-[the documentation-pass runbook](packing/campaign/documentation-pass.md).
-`BC-075` is the efficiency block, on `think-c46d`, and it now has a spec:
-[plan-2026-08-29-gate-validation-speed](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md),
-whose phase 1 is `think-64bw`, `think-p9of` and `think-2bk2` and can land before the
-block opens.
-Everything below this paragraph is the accumulated record of how the program
-got here, not the next action; `agenda-005` is closed and appears in it as history.
+**The next slice is `BC-085` on `think-9k5k`**, the first ready cell of
+[agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md)
+and the one the `BC-088` search reassessment is blocked on.
+`BC-049` on `think-xdly` is the research cell all of the mathematics below sits under,
+and it stays open.
+
+**`n = 40` is infinitesimally flexible**, exactly, over `Q(sqrt 2)`: seven retained
+directions turn the sixteen squares of its tilted block and leave the frame fixed, and
+every one is refused at second order by a verified self-stress.
+The property stays `undetermined` because an infinitesimal flex is not a motion — the
+gaps curve shut at order `t²` — so what is settled is that no *first-order* argument can
+establish rigidity there.
+Getting further needs an instrument this repository does not have: the cone is bounded
+to dimension 45 against six dimensions of anything found admissible, and closing that
+gap means reasoning about `2^42` corner disjunctions without enumerating them.
+
+The correction underneath it generalized.
+Göbel’s published family is *exactly* the best known at `n = 5`, `40`, `65` and `89`;
+all four now have exact constructions here, and the last two turn out to be what their
+retained decimal witnesses were all along — agreement to `5e-33` identifies rather than
+merely permits. `n = 28` is the near miss that stops the obvious guess: the family gives
+it a valid packing `0.004` worse than the best known, whose optimum is at algebraic
+degree 6 and is not in the family at all.
+Take the next slice from [`agenda-map.md`](packing/campaign/agenda-map.md).
+
+`BC-017` delivered its readiness input and stopped there.
+The `n = 3` full-cell control already retained the target-free execution-plan receipt
+the commitment asked for, so the slice produced what that receipt authorizes instead: on
+the same three-square subject the structural plan reports 4 seated-wall equalities and 8
+open-wall inequalities against 2 contact equalities and 1 non-edge inequality, while
+`solve_cell` builds 12 containment rows and 3 pair rows — **the same twelve and the same
+three**. Every total agrees and every composition does not, so the LP-solve half of the
+exit is reachable and `pair_tests` does not transfer between instruments that both
+report it.
+
+`BC-019` is closed. The contact-assembly contract is at `contact-assembly-v2-draft` and
+carries the clause it never had — **17 certificates and 13 typed limitations** over
+`n <= 30` — with the missing grammar move named rather than guessed: a primitive for
+axis-aligned polyominoes that are not a bar, rectangle or corner L. `BC-024` is what
+made that safe to say:
+[X-008](packing/campaign/explorations/X-008-the-residue-is-axis-aligned.md) measures
+that **every** component the grammar cannot express is axis-aligned — every
+`other-polyomino` in the corpus has angle exactly zero — so all 295 tilted components
+are already covered.
+Wall seating splits the residue into two populations with nothing between them: 44
+whole-record grid subsets on four walls, 65 corner-seated blocks on two.
+`BC-038` is closed and rejected on measured arithmetic — 35 `evaluate_stress` calls
+arrive with **eleven** distinct number fields, and `RowJetInventory` refuses a foreign
+field by identity, so the floor is a `1.54x` ceiling against an exit wanting five-fold.
+`BC-010` and `BC-029` are **not** takeable despite what the map’s priority says: both
+are gated on independent acceptance of `exp-045`’s preregistered criterion, which
+records `decision: unresolved` with `needs_review: true`, and an unattended runner may
+not grant that acceptance to itself.
+
+**`n = 5` is second-order rigid, and that is a first-party result.**
+[X-007](packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md)
+settles the question `BC-049` asked, exactly, over `Q(sqrt 2)` at Göbel’s construction
+rather than at the retained decimal witness — which is `2.4e-30` off the diagonal and so
+infeasible at the scale a certificate works at.
+The cone of infinitesimal motions is exactly the line spanned by rotation of the middle
+square; the other fourteen coordinates are pinned by Farkas certificates verified in the
+field; and that one direction is refused at second order by a verified self-stress.
+This confirms and strengthens the numerical account `BC-069` reached from the promotion
+side, including its observation that the contacting corner sits at the midpoint of the
+contacted edge — which turns out to be the reason for both the first-order blindness and
+the second-order obstruction.
+
+The frontier property stays `undetermined`, and the reason is worth carrying forward:
+second-order rigidity is not local rigidity, the step that would close the gap is a
+curve-selection argument that `X-007` writes out as prose and no replay checks, and the
+property enum has no word for what was actually established.
+What did change is everything saying why — `verified` rather than `numerically-checked`,
+`exact-algebraic` rather than `numerical-multiprecision`, and a first-party evidence id
+in place of the screen’s — which takes `n = 5` out of the assessment tool’s ownership,
+so it joins `n = 11` as left to a stronger argument.
+Both `D-354` guards stayed green without being edited, which was the test the change was
+held to.
+
+**Read [`OR-4`](operating-rules.md) before trusting any older queue.** `BC-081` found
+that agenda-005 was advertising four commitments as takeable which agenda-006 had
+already discharged, and four more blocked on conditions no reader could observe.
+That is `D-374`, and the repair is [`agenda-map.md`](packing/campaign/agenda-map.md),
+generated from every agenda and drift-checked in `--records` at `0.14s`. It is the queue
+now; the live set is seven, and `BC-010` on `think-1s0h` is its only P0.
+
+**The identity question moved twice, and both moves were corrections.**
+[X-005](packing/campaign/explorations/X-005-identity-relation-and-its-controls.md) still
+declares `contact + closure` the relation the atlas should count, but `D-375` records
+that it had scored the atlas’s own relation at the wrong level — both of that relation’s
+inputs are canonical under relabelling and `D4` by construction, so it is a quotient
+statement, and the `n = 4` labelled control it was refuted on can refute no
+relabelling-invariant relation at all.
+
+[X-006](packing/campaign/explorations/X-006-the-discriminating-control-at-n5.md) then
+answers the question this handoff previously posed.
+`n = 5` **does** admit a discriminating control, and it is the pair `D-034` has been
+quoting since 2026-08-23 without ever retaining: two endpoints sharing a contact
+certificate, differing in geometric key, at a side difference of `8.9e-16`. It is
+retained now, and it discriminates whichever way its component count resolves — the
+branch where the count is two refutes `contact + closure` itself.
+What it waits on is that count, and `exp-042` already names the missing claim:
+`A_to_B_stationary_connection`, first of its eleven declared scope refusals.
+`D-034` stays outstanding, and no proof obligation shrank.
+
+Everything below this paragraph is the accumulated record of how the program got here,
+not the next action; `agenda-005` is closed and appears in it as history.
 Block A is **closed**: `BC-047` under `think-y85e` and `BC-042` under `think-zmh8` both
 met their declared exits in
 [session 035](packing/campaign/agent-sessions/session-035-agenda005-block-a.md), which
@@ -799,7 +914,7 @@ quotient models may assign components, while unsupported numerical observations 
 unresolved. A scalable retained-pose classifier is still unbuilt, so steering strategies
 that depend on sampled component identity or descriptor distances remain unbuilt too.
 
-### The promotion pipeline—partly built, with a formal-value gap
+### The promotion pipeline—built end to end, with the promotion itself withheld
 
 The public `packing-witness promote` command implements **robust rational promotion**
 for suitable decimal center-angle poses.
@@ -818,18 +933,48 @@ squares and 406 pairs.
 This formally proves the weaker upper bound; it does not verify the original decimal
 pose, the tighter current Kingbird report, or global optimality.
 
-The **reported-value path** remains unbuilt.
-The project does not generically infer corner–edge incidences, assemble and close
-contact equations, recognize an algebraic field, or certify existence and uniqueness
-near a numerical root.
-An interval-Newton or Krawczyk checker is a buildable direction for suitable systems,
-but contact ambiguity, singularity, and ill-conditioning can make promotion
-mathematically contingent.
-The interval strategy is now built and replayable, and those contingencies are reported
-rather than assumed away: the operator returns `exists` and `unique` separately, and
-nothing may be promoted from `exists` alone.
+The **reported-value path** now has every component built, and still promotes nothing.
+Those are two separate facts and the distance between them is the point.
+
+Each step named as missing when this section was first written now exists and is
+replayable. [`promote.contacts`](packing/src/sqpack/promote/contacts.py) infers which
+features meet and issues a typed refusal for any incidence it cannot decide rather than
+choosing one. [`promote.system`](packing/src/sqpack/promote/system.py) assembles those
+into equations that vanish at the packing they came from, one per contact type rather
+than one per contact.
+[`promote.solve`](packing/src/sqpack/promote/solve.py) recovers a minimal polynomial
+under a margin rule frozen as a test, because an integer-relation search given enough
+digits returns a relation whether or not one exists.
+[`promote.krawczyk`](packing/src/sqpack/promote/krawczyk.py) decides existence and
+uniqueness over a box with directed rounding, returning `exists` and `unique`
+separately, and nothing may be promoted from `exists` alone.
+[`promote.roundtrip`](packing/src/sqpack/promote/roundtrip.py) rebuilds the packing from
+the recovered field and compares the reconstructed side against the input, which is what
+catches a contact structure that is valid but suboptimal.
+
+The contingencies that made this look unbuildable are reported rather than assumed away.
 At `n = 29` the Jacobian turned out well-conditioned enough to contract in two
-iterations, which was an open question rather than a given.
+iterations, which was an open question rather than a given, and the contact Jacobian
+reaches full rank at both determined sizes — `34` of `34` at `n = 11` and `88` of `88`
+at `n = 29`. The shortfall that had suggested otherwise was [D-361](defects.md), a bug
+in assembly rather than a property of the packings.
+
+**Two things remain, and neither is a missing component.** The first is wiring: the
+public `packing-witness promote --strategy interval-existence` still raises the typed
+`checker-not-built` gap, because the certification that has been done ran through
+[`cases.kingbird29.certify_interval`](packing/cases/kingbird29/certify_interval.py), a
+case-specific driver over generic library code.
+A general path from an arbitrary `Witness/v2` to a certificate is not exposed, and the
+typed refusal is the honest answer until it is.
+
+The second is a decision.
+The interval route certifies `s(29) <= 5.93383346267692918974379895098` at a declared
+relaxation of `1e-20`, and that certificate is retained `unresolved` with
+`needs_review: true`. It sits `5.23371e-5` below the standing verified ceiling, and
+whether it moves `verified_upper_bound` is a reviewed human decision through the
+evidence contract rather than an inference this pipeline is permitted to make.
+A built path is not a promoted bound, and an unattended run may decline a marginal
+result and may not accept one.
 
 Exp-033 remains a distinct dedicated result: it bound two retained `n = 5` float poses
 to exact endpoints on one certified fixed-angle optimal face and supplied an exact dual
@@ -939,10 +1084,36 @@ coordinate, because outward rounding proves the claim for every point in its enc
 
 Reader views also name **origin** and **independence**. A complete published proof may
 be formally valid without a local audit.
-An external certificate and a repository replay remain separate evidence records.
-Running the generator’s own checker is not an independent implementation.
+Whether anyone here has *read* it is a separate fact and is recorded separately, in
+`external_review`: `not-reviewed` when the claim is transcribed and nobody here has
+worked through the argument, `informally-verified` when someone here read it and found
+no error, `defect-found` when someone here read it and it was wrong.
+
+That field changes no assurance and promotes no method — a published proof proves its
+claim whether or not we read it, and reading one is a careful human act, not the machine
+check `proof-assistant-checked` names.
+What it changes is whether a reader can tell the two apart.
+All six external proofs the register carries are `not-reviewed`, including
+[Nagamochi 2005], which supplies the lower bound for every `n` from 4 to 100 and is
+therefore the most load-bearing argument here and the least examined.
+The distinction is not hypothetical: [Stromquist 2003]'s `n = 11` argument needed a
+source-distinct repair, which `E-n011-repaired-lower` supplies without repairing the
+printed proof. An external certificate and a repository replay remain separate evidence
+records. Running the generator’s own checker is not an independent implementation.
 A page that says “interval verified” but publishes no certificate or replayable checker
 stays reported with a `public-certificate-missing` blocker.
+
+The [evidence inventory](packing/frontier/INVENTORY.md) is the generated roll-up of all
+four facts across the register, including which evidence the hundred cases actually lean
+on.
+That last column is the one worth reading, and it needs its qualifier: the most-cited
+record overall is the Kingbird register at 98, which is the catalogue everyone reports
+from and is labelled `reported`. The dependency that matters is the most-cited argument
+this repository did not produce — `E-nagamochi-lower`, carrying the verified lower bound
+for 88 of the hundred.
+Being cited that heavily is a reason to open an argument, not a reason to trust it, so
+it was read here on 2026-08-30; its record carries what was re-derived and the four
+things that were not.
 
 Novelty—whose result this is—is a further separate fact.
 Its values differ in what they oblige, which is why each is recorded explicitly rather
@@ -2094,6 +2265,60 @@ V-representations, eight endpoint quotient rays, six interior quotient rays, and
 derived face vectors.
 Transverse and mixed nonlinear realization remains open.
 
+## Sessions Conducted
+
+An experiment records what was measured about square packing.
+A session records what an agent did for a stretch of hours, and until recently it
+recorded that without recording what the stretch cost: the phases and outcomes were in
+one file and the turns and wall-clock were in another, keyed by harness log id, and
+nothing joined them.
+[`session-close-report.yaml`](packing/campaign/session-close-report.yaml) is that join,
+one validated entry per session, written by `devtools.close_session --render` from the
+session records and the rollups rather than from anybody’s recollection, and
+drift-checked in `packing-validate --records`. The tables below are its reader-facing
+view.
+
+Two numbers here are easy to get wrong in the same direction, so both are stated.
+**A session’s cost is not a share of a log, and the campaign’s cost is not a sum of
+sessions.** Several sessions can run inside one harness log, each legitimately declaring
+the whole of it; charging it to each of them read as 117.9 hours for a campaign that had
+spent 43.7, so every total is taken over distinct rollups and the shared log gets its
+own row rather than a footnote.
+And a rollup exists on disk whether or not a session claims it, so the ones nobody
+claims are counted rather than dropped — the gap between those two rows is coverage, not
+rounding.
+
+<!-- BEGIN GENERATED: session-close-report (devtools.close_session) -->
+
+| Rollups | count | turns | tool calls | errors | one-off code | wall |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| claimed by a session | 31 | 9,261 | 5,393 | 113 | 1,262 | 45.33 h |
+| claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
+| **measured** | **41** | **10,721** | **6,271** | **145** | **1,435** | **52.2 h** |
+
+| Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| [session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md) | 23 | 16 | 1,248 | 765 | 11 | 4.03 h |
+| [session-046](packing/campaign/agent-sessions/session-046-gobel-family-constructions.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
+| [session-047](packing/campaign/agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | 6 | 14 | 1,230 | 841 | 18 | 2.56 h |
+| [session-048](packing/campaign/agent-sessions/session-048-what-every-session-cost.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
+| *shared by 4 sessions* | — | 1 | 6,783 | 3,787 | 84 | 38.74 h |
+
+| Coverage | sessions |
+| --- | ---: |
+| measured | 4 |
+| closed before `resource_rollups` existed, logs not retained | 44 |
+| **total** | **48** |
+
+<!-- END GENERATED: session-close-report -->
+
+The sessions with no measurement closed before `resource_rollups` existed and their
+harness logs are not retained, so that cost is gone rather than pending.
+The rollups no session claims are the delegated half of the same period: sub-agent logs
+that survived while the session records that would have claimed them predate the field.
+Backfill needs nothing but a retained log — `close_session --update` writes its rollup,
+and the entry fills in on the next render.
+
 ## Experiments Conducted
 
 There are 45 terminal rounds registered in `series-000`. They record 1106 agent-minutes
@@ -2367,29 +2592,39 @@ table above.
 - **[D-021](defects.md) is contained.** Floating-point LP refinement has a noise floor
   of about `1e-11` in the side, and eight rounds sit on it.
   Those numerical results may not claim a difference smaller than the floor.
+- **[D-403](defects.md) is contained.** The negative controls run only in the full gate,
+  and a pull request runs `--fast`, so a branch can be green on every push while its
+  controls rot — six of a hundred and fifty were not firing when this was checked.
+  A control that does not fire is worse than an absent one, because the suite reports a
+  count that reads as coverage.
+  The runner is what saves it: an unmatched anchor is reported rather than skipped, and
+  “failed, but not with the expected message” is distinguished from a real firing.
+  Moving the suite onto the pull-request surface would push that surface past the point
+  where it gets run at all, so what is owed is a cheap anchor-resolution check in
+  `--records` rather than a faster suite.
 
 ## The Defect Record
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 371 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 403 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 88 | asserted something false about the mathematics |
-| validity | 87 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 137 | recorded something its own evidence contradicts |
-| robustness | 44 | did not finish, or finished only by luck |
+| soundness | 91 | asserted something false about the mathematics |
+| validity | 97 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 152 | recorded something its own evidence contradicts |
+| robustness | 48 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Sixty-nine of the eighty-eight soundness defects pointed in the *flattering*
+**Seventy-two of the ninety-one soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-eight defects in 371, and no soundness defect
+**The automated gate has caught fifty-four defects in 403, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2399,6 +2634,54 @@ test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
+One entry is currently `outstanding` rather than fixed, and it is worth naming because
+refusing was the whole of the available fix.
+[D-391](defects.md) is the first-order rigidity assessor intersecting a tangent cone
+that is a union: two squares meeting at a single corner are held apart by two axes, and
+non-overlap asks that *either* keep separating, so the linearized feasible set is a
+union of half-spaces and not a polyhedron.
+Intersecting them is a subset of every branch, so a pose reads as more rigid than it is.
+`n = 5`, the only size this instrument had produced a retained claim about, has no such
+pair; Göbel’s `n = 40` has 42 of its 98 touching pairs, and there the error inverts the
+answer rather than merely weakening it.
+That pose has an infinitesimal motion — all sixteen squares of its tilted block turning
+together, each about its own centre — which gives up one separating axis at 24 of the 42
+corner contacts and keeps the other, which is all non-overlap asks.
+An assessor that intersects reads those given-up rows as violations and certifies every
+one of the 120 coordinates as pinned, reporting a packing rigid that is not.
+Removing the defect is what found the witness.
+It is still not a *motion*: the gaps curve shut at order `t²`, so `n = 40`’s record
+stays `undetermined` and the catalogue’s annotation stands.
+
+[D-393](defects.md) is the same run being wrong about its own gate.
+`D-381` established `--edit` as the pre-push floor, and that floor does not run tests:
+the test step is marked `broad`, and dropping `broad` steps is exactly what `--edit`
+does. So four pushes went out on a red branch — a stale pin, an undeclared marker, and
+[D-392](defects.md), a size cutoff meant for generated blobs that went blind when
+`defects.yaml` grew past half a megabyte.
+The wake events naming the failed check were delivered six times and read once, after
+the fact. The tiers are right; using one of them as though it were the other was not.
+
+[D-398](defects.md) is the record being behind its own toolchain rather than wrong about
+it.
+`n = 40`, `n = 65` and `n = 89` each declared a blocker of kind `mathematics` reading
+“No formal certificate currently supports the tighter reported upper bound”, and each
+kept its verified ceiling at the integer grid — `7`, `9`, `10`. All three certificates
+existed and ran in the gate the whole time: 780 pairs decided by exact sign over `Q(√2)`
+at `n = 40`, 2080 at `n = 65`, 3916 at `n = 89`. A feasible packing at side `s`, decided
+exactly, is a proof that `s(n) ≤ s`, so the mathematics the blocker called missing was
+done and what was missing was an evidence record naming it.
+
+The promotion is made: all three now cite Göbel’s construction, and the count of cases
+whose verified ceiling exceeds their best known falls from 33 to 30. The direction was
+conservative — the register understated what it could certify — but the reason nothing
+caught it is worth more than the instance.
+Every check on a frontier record read that record against its own fields, so none could
+see a certificate it had never been told about.
+A sweep now runs the other way: each exact verifier declares the sizes it decides, and
+each of those must reach an evidence record citing that package — with an undeclared
+verifier a refusal rather than a skip, so a new one cannot opt out by staying silent.
+
 The record can also be wrong about itself, and [D-358](defects.md) is this run being so:
 an unattended run declared blocks of 150, 180, 180 and 40 minutes and took 31, 42, 29
 and 23, because it estimated elapsed time between tool calls instead of reading a clock.
@@ -2406,6 +2689,14 @@ The bookkeeping was the smaller half.
 The misreading also supplied a *reason* for stopping early -- that later blocks had
 overrun into the slack -- when nothing had overrun and most of the budget was unspent,
 which is a constraint the run claimed to meet and in fact a mistake it made.
+
+It said “None automatic” under `regression`, and a day later it happened again
+([D-386](defects.md)): a session declared two phases starting an hour and a half after
+the clock read. A practice change without a check is not a fix, which is the same lesson
+`D-010` and `D-017` record one level down.
+The gate now refuses a session that declares a start time later than the moment of
+checking, and prints elapsed against budget derived from the record’s own successive
+timestamps — the line that would have made this visible while it was happening.
 
 The harness that proves those checks fire has a blind spot of its own.
 [D-356](defects.md) records that `run_negative_controls` prunes the literature archive
@@ -2468,9 +2759,36 @@ The resolution is not to check less.
 The efficiency principle asks for iteration as fast as possible and the standing
 asymmetry lets efficiency simplify process but never weaken assurance, so what is owed
 is a change-scoped selector that is conservative by construction and can be caught
-under-selecting — `think-ej1d`, specified under BC-051. Good coverage and short cycles
-are a design tension, and resolving it is the design’s job rather than the operator’s
-discretion.
+under-selecting — `think-9qtn`, under BC-084, which carries BC-051’s scope unchanged.
+Good coverage and short cycles are a design tension, and resolving it is the design’s
+job rather than the operator’s discretion.
+
+A control can also be wrong by being unable to fail.
+[D-378](defects.md) records that the declared surviving identity relation,
+`contact + closure`, has exactly one distinguishing verdict — `agrees` on the `n = 3`
+quotient control — and that this verdict cannot test it.
+The record carries one closure set, `closure(G) = [C, G, M]`, and it covers every
+stratum that control has, so any faithful implementation returns one there whatever the
+certificates say; mutating all four samples to distinct certificates, then to a single
+shared one, leaves the answer at one.
+That is [D-373](defects.md)’s finding one level down: there the problem was that every
+control’s answer is one, here it is that the closure is degenerate, so even a control
+whose answer were not one would not separate the relation from a merge-everything one
+unless it carried two disjoint closure classes.
+None does. It is contained rather than fixed — the relation now reads both halves of its
+own definition, and a synthetic two-class control exercises the half no retained control
+reaches — because a real fix needs a new exact classification.
+
+A record contract can also be wrong by being unable to say something true.
+[D-377](defects.md) records that a delegation which is read-only by construction cannot
+be written down while it runs: `packing-ledger check` requires an `in_progress`
+delegation to declare a `write_scope`, and the schema requires that scope to be
+non-empty. Investigation, review, and audit are exactly the delegations
+[`OR-2`](operating-rules.md) says parallelise best, and all three write nothing.
+It is contained rather than fixed — such delegations are recorded on completion instead
+— because the repair is a decision about the session contract, and an explicit
+`read_only` flag is better than permitting an empty list that would be ambiguous between
+“writes nothing” and “nobody filled this in”.
 
 108 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
@@ -2724,9 +3042,12 @@ No hour-scale lane is promoted without a known-answer response, independent vali
 and a result that changes a decision.
 
 **The normal checkpoint and blocking macOS deep golden are green; broader unattended
-launch is not yet authorized.** The current tree passes all 31 normal-gate steps in
-97.68 wall-seconds, including seven exact small-`n` replays, 59 pytest contracts, and
-all 62 mutation controls.
+launch is not yet authorized.** At that checkpoint the tree passed all 31 normal-gate
+steps in 97.68 wall-seconds, including seven exact small-`n` replays, 59 pytest
+contracts, and all 62 mutation controls.
+The gate has since grown to 57 steps, of which the pull-request tier runs 33; the
+sentence is dated rather than restated because no check guards this number, so a
+current-tense figure here silently goes stale.
 The first deep regeneration had reproduced one unsettled `n=4` proposal and an `n=10`
 `1.503e-10` pair-row residual.
 [D-199](defects.md) identifies and fixes the n=10 cause: repairing first-call offenders

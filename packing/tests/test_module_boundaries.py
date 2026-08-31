@@ -245,7 +245,14 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     required_job = _mapping(jobs["packing-required"])
     assert required_job["needs"] == "validate"
-    assert required_job["if"] == ("always() && github.event_name == 'pull_request'")
+    # `!cancelled()`, not `always()`, and the difference is D-380. With `always()` a run
+    # superseded by the next push -- routine, since the workflow sets
+    # `cancel-in-progress: true` and OR-3 says to push and keep working -- reached this job
+    # with `needs.validate.result == 'cancelled'` and reported the required check as a hard
+    # failure. A genuine validate failure is not `cancelled()`, so the job still runs and
+    # still fails; a cancelled run now reports nothing and the check stays pending, which
+    # is the safe direction.
+    assert required_job["if"] == ("!cancelled() && github.event_name == 'pull_request'")
     assert "continue-on-error" not in required_job
     required_job_steps = required_job["steps"]
     assert isinstance(required_job_steps, list)
@@ -324,6 +331,12 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
             "test_w_curvature_is_even_nonzero_and_quadratically_scaled",
             "test_real_production_weight_perturbation_breaks_cancellation",
             "test_uniform_weight_rescaling_fails_exact_normalization",
+        },
+        # Measured 2026-08-30: about three minutes. It re-derives n = 40's whole
+        # assessment, whose intersecting-assessor section runs 240 linear programs over
+        # 400 rows and re-decides every proposal in the field.
+        "test_n40_rigidity.py": {
+            "test_the_record_round_trips",
         },
     }
     declared: dict[str, set[str]] = {}

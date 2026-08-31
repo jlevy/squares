@@ -5,6 +5,14 @@ The grid replay is a machine check of a finite rational witness.  The lower-boun
 checks only confirm that each case instantiates the exact expression named by its
 evidence record; the mathematical force of Nagamochi's inequality still comes from the
 scoped published proof recorded in ``frontier/evidence.yaml``.
+
+The two halves run in different validation steps, on purpose.  ``check_case_basic_bounds``
+compares declared expressions against their closed forms and costs nothing, so it stays
+where the frontier records are read.  ``replay_grid_witness`` evaluates exact rational
+predicates and belongs with the other exact geometry; running it inside a step called
+``soft-schema validation`` is what made that step slow and what kept anyone from looking
+(``D-370``).  Running this module directly does both, which is what the
+``exact verification`` step invokes.
 """
 
 from __future__ import annotations
@@ -99,9 +107,6 @@ def check_case_basic_bounds(case: Mapping[str, object]) -> list[str]:
                 f"n={n}: grid upper bound must have exact value {expected}, "
                 f"got {upper.get('exact_form')!r}"
             )
-        report = verify_grid(n)
-        if not report.valid or report.n != n:
-            errors.append(f"n={n}: exact grid witness replay failed: {report.failures}")
 
     if lower is not None and "E-basic-area-lower" in _strings(lower.get("evidence")):
         expected = "1" if n == 1 else f"sqrt({n})"
@@ -128,6 +133,27 @@ def check_case_basic_bounds(case: Mapping[str, object]) -> list[str]:
     return errors
 
 
+def replay_grid_witness(case: Mapping[str, object]) -> list[str]:
+    """Replay the exact rational grid witness for one case, if it claims one.
+
+    Split out of `check_case_basic_bounds` so that exact geometry runs in the step named
+    for exact geometry. It used to run inside `soft-schema validation`, where it was
+    `3.58s` of the `15.5s` that step cost and where no reader would look for it
+    (`D-370`). Nothing about the check changed in the move: the same cases are replayed,
+    with the same predicate, to the same verdict.
+    """
+    n = case.get("n")
+    if not isinstance(n, int):
+        return ["case n is missing or malformed"]
+    upper = _bound(case, "verified_upper_bound")
+    if upper is None or "E-basic-grid-upper" not in _strings(upper.get("evidence")):
+        return []
+    report = verify_grid(n)
+    if not report.valid or report.n != n:
+        return [f"n={n}: exact grid witness replay failed: {report.failures}"]
+    return []
+
+
 def _load_case(path: Path) -> Mapping[str, object]:
     document = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])
     if not isinstance(document, Mapping) or not isinstance(document.get("packing"), Mapping):
@@ -145,6 +171,7 @@ def main() -> int:
         if upper is not None and "E-basic-grid-upper" in _strings(upper.get("evidence")):
             grid_count += 1
         errors.extend(f"{path.name}: {error}" for error in check_case_basic_bounds(case))
+        errors.extend(f"{path.name}: {error}" for error in replay_grid_witness(case))
     if errors:
         print("\n".join(errors))
         return 1

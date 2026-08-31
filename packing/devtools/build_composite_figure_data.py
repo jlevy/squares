@@ -37,10 +37,13 @@ GENERATOR = "python -m devtools.build_composite_figure_data"
 CONTRACT = "packing.squares:CompositeFigure/v1"
 SCHEMA = "composite-figure.schema.yaml"
 
-# Kingbird annotates exactly these four packings "Rigid.", at lines 44, 80, 163
-# and 224 of resources/web/kingbird-squares-in-squares.md, each identified by the
-# side value printed above it.
-CATALOGUE_RIGID = {5, 11, 28, 40}
+TILING_EVIDENCE = "E-perfect-square-tiling-rigid"
+"""The evidence id the frontier carries on a record rigid by exact tiling.
+
+Keyed on the id rather than on `math.isqrt(n)`. A hard-coded set of `n` is what let the
+two halves of `D-354`'s split merge back together here (`D-385`), and the general form of
+that mistake is deciding from `n` what the record already states.
+"""
 
 PROVENANCE_VOCABULARY = {
     "frontier": ("Read from the case's frontier record, which transcribes a retained source."),
@@ -76,6 +79,68 @@ def _side_text(value: str) -> str:
     return text or "0"
 
 
+def _rigidity(n: int, packing: dict) -> dict:
+    """What the figure may say about rigidity here, and on whose authority.
+
+    Read from the record. The previous version decided this from `n` alone -- a
+    module-level set of the four packings the catalogue annotates "Rigid." -- and never
+    opened the `rigidity` block at all, so one solid glyph covered ten packings derived
+    from an exact tiling and four taken from a source's word. That is `D-385`, and it is
+    `D-354`'s split failing to reach the figure lane: the whole point of separating
+    `reported_upper_bound.catalogue_rigid` from the first-party `rigidity` block is that
+    the two must never merge again, and in the most widely seen artifact here they had.
+
+    So `established` now means the record's own finding is `locally-rigid` and nothing
+    else does. That moves the count from 14 to 11 and, in the other direction, stops
+    crediting the catalogue for `n = 11`, whose rigidity is this repository's own
+    `verified` argument.
+
+    A catalogue annotation without that finding is still shown, because the corpus holds
+    the fact and dropping it would lose it -- but as an annotation, muted, and not
+    counted. `n = 5` is the case that makes the distinction earn its keep: `X-007`
+    establishes more about it than the catalogue ever said, and still not local rigidity.
+    """
+    block = packing.get("rigidity") or {}
+    reported = packing.get("reported_upper_bound") or {}
+    if block.get("property") == "locally-rigid":
+        if TILING_EVIDENCE in (block.get("evidence") or []):
+            root = math.isqrt(n)
+            return {
+                "state": "established",
+                "basis": "perfect-square-tiling",
+                "evidence": (
+                    f"{n} unit squares exactly tile a {root} by {root} container, "
+                    "leaving no slack, so no square can move."
+                ),
+                "provenance": "derived",
+            }
+        return {
+            "state": "established",
+            "basis": "first-party-argument",
+            "evidence": str(block.get("scope") or "").strip() or None,
+            "provenance": "frontier",
+        }
+    if reported.get("catalogue_rigid") == "rigid":
+        return {
+            "state": "not-established",
+            "basis": "catalogue-annotation",
+            "evidence": (
+                'Kingbird annotates this packing "Rigid." This repository has not '
+                "established it; see the record's own rigidity block for what it has."
+            ),
+            "provenance": "catalogue",
+        }
+    # The stored rigid flag is deliberately not consulted: it is non-null only where
+    # catalogue_pictured is true, so false there means "the catalogue did not say" and
+    # reads as "not rigid".
+    return {
+        "state": "not-established",
+        "basis": "none",
+        "evidence": None,
+        "provenance": "absent",
+    }
+
+
 def _entry(n: int) -> dict:
     packing = _packing(n)
     reported = packing.get("reported_upper_bound") or {}
@@ -101,34 +166,7 @@ def _entry(n: int) -> dict:
     else:
         state, degree, degree_provenance = "numeric-only", None, "absent"
 
-    root = math.isqrt(n)
-    if root * root == n:
-        rigidity = {
-            "state": "established",
-            "basis": "perfect-square-tiling",
-            "evidence": (
-                f"{n} unit squares exactly tile a {root} by {root} container, "
-                "leaving no slack, so no square can move."
-            ),
-            "provenance": "derived",
-        }
-    elif n in CATALOGUE_RIGID:
-        rigidity = {
-            "state": "established",
-            "basis": "catalogue-annotation",
-            "evidence": 'Kingbird annotates this packing "Rigid."',
-            "provenance": "catalogue",
-        }
-    else:
-        # The stored rigid flag is deliberately not consulted: it is non-null
-        # only where catalogue_pictured is true, so false there means "the
-        # catalogue did not say" and reads as "not rigid".
-        rigidity = {
-            "state": "not-established",
-            "basis": "none",
-            "evidence": None,
-            "provenance": "absent",
-        }
+    rigidity = _rigidity(n, packing)
 
     badges: list[dict] = []
     if status == "proved":
@@ -138,7 +176,13 @@ def _entry(n: int) -> dict:
     else:
         badges.append({"glyph": "=", "meaning": "exact value known", "style": "solid"})
     if rigidity["state"] == "established":
-        badges.append({"glyph": "R", "meaning": "rigid (established)", "style": "solid"})
+        badges.append({"glyph": "R", "meaning": "rigid (established here)", "style": "solid"})
+    elif rigidity["basis"] == "catalogue-annotation":
+        # Shown, because the corpus holds the fact and dropping it would lose it -- but
+        # muted, and not counted, because a source's word is not our finding.
+        badges.append(
+            {"glyph": "R", "meaning": "annotated rigid by the catalogue", "style": "muted"}
+        )
 
     relation = "equality" if status == "proved" else "upper-bound"
     return {
@@ -188,6 +232,11 @@ def build_record() -> dict:
                 ),
                 "rigidity_established": sum(
                     1 for e in entries if e["rigidity"]["state"] == "established"
+                ),
+                # Counted separately rather than folded in, which is the whole of D-385:
+                # a source's word and our own argument are two facts, not one.
+                "rigidity_catalogue_annotated": sum(
+                    1 for e in entries if e["rigidity"]["basis"] == "catalogue-annotation"
                 ),
                 "degree_known": sum(1 for e in entries if e["exactness"]["degree"] is not None),
                 "degree_recorded_upstream": sum(

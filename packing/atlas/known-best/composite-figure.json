@@ -15,7 +15,7 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
+            "meaning": "rigid (established here)",
             "style": "solid"
           }
         ],
@@ -137,7 +137,7 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
+            "meaning": "rigid (established here)",
             "style": "solid"
           }
         ],
@@ -181,8 +181,8 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
-            "style": "solid"
+            "meaning": "annotated rigid by the catalogue",
+            "style": "muted"
           }
         ],
         "exactness": {
@@ -200,9 +200,9 @@
         },
         "rigidity": {
           "basis": "catalogue-annotation",
-          "evidence": "Kingbird annotates this packing \"Rigid.\"",
+          "evidence": "Kingbird annotates this packing \"Rigid.\" This repository has not established it; see the record's own rigidity block for what it has.",
           "provenance": "catalogue",
-          "state": "established"
+          "state": "not-established"
         },
         "side": {
           "display": "s(5) = 2.707107",
@@ -342,7 +342,7 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
+            "meaning": "rigid (established here)",
             "style": "solid"
           }
         ],
@@ -420,7 +420,7 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
+            "meaning": "rigid (established here)",
             "style": "solid"
           }
         ],
@@ -438,9 +438,9 @@
           "status": "open"
         },
         "rigidity": {
-          "basis": "catalogue-annotation",
-          "evidence": "Kingbird annotates this packing \"Rigid.\"",
-          "provenance": "catalogue",
+          "basis": "first-party-argument",
+          "evidence": "First order at the exact fixed-side pose, in open real orientation charts: all 128 derivative-distinct branchwise one-sided linearized cones are the zero cone, and a finite-branch subsequence argument upgrades that to local isolation and strict local side optimality in the anchored pose-side chart. No neighborhood radius is quantified and nothing here bears on global optimality.",
+          "provenance": "frontier",
           "state": "established"
         },
         "side": {
@@ -615,7 +615,7 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
+            "meaning": "rigid (established here)",
             "style": "solid"
           }
         ],
@@ -946,7 +946,7 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
+            "meaning": "rigid (established here)",
             "style": "solid"
           }
         ],
@@ -1053,8 +1053,8 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
-            "style": "solid"
+            "meaning": "annotated rigid by the catalogue",
+            "style": "muted"
           }
         ],
         "exactness": {
@@ -1072,9 +1072,9 @@
         },
         "rigidity": {
           "basis": "catalogue-annotation",
-          "evidence": "Kingbird annotates this packing \"Rigid.\"",
+          "evidence": "Kingbird annotates this packing \"Rigid.\" This repository has not established it; see the record's own rigidity block for what it has.",
           "provenance": "catalogue",
-          "state": "established"
+          "state": "not-established"
         },
         "side": {
           "display": "s(28) ≤ 5.824445",
@@ -1350,7 +1350,7 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
+            "meaning": "rigid (established here)",
             "style": "solid"
           }
         ],
@@ -1491,8 +1491,8 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
-            "style": "solid"
+            "meaning": "annotated rigid by the catalogue",
+            "style": "muted"
           }
         ],
         "exactness": {
@@ -1510,9 +1510,9 @@
         },
         "rigidity": {
           "basis": "catalogue-annotation",
-          "evidence": "Kingbird annotates this packing \"Rigid.\"",
+          "evidence": "Kingbird annotates this packing \"Rigid.\" This repository has not established it; see the record's own rigidity block for what it has.",
           "provenance": "catalogue",
-          "state": "established"
+          "state": "not-established"
         },
         "side": {
           "display": "s(40) ≤ 6.828427",
@@ -1822,7 +1822,7 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
+            "meaning": "rigid (established here)",
             "style": "solid"
           }
         ],
@@ -2352,7 +2352,7 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
+            "meaning": "rigid (established here)",
             "style": "solid"
           }
         ],
@@ -2950,7 +2950,7 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
+            "meaning": "rigid (established here)",
             "style": "solid"
           }
         ],
@@ -3616,7 +3616,7 @@
           },
           {
             "glyph": "R",
-            "meaning": "rigid (established)",
+            "meaning": "rigid (established here)",
             "style": "solid"
           }
         ],
@@ -3666,7 +3666,8 @@
       "exact_value_known": 95,
       "only_known_numerically": 5,
       "proved_optimal": 35,
-      "rigidity_established": 14
+      "rigidity_catalogue_annotated": 3,
+      "rigidity_established": 11
     }
   },
   "softschema": {

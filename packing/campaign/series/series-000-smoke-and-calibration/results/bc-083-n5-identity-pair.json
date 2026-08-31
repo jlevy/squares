@@ -1,0 +1,73 @@
+{
+  "component_count": null,
+  "endpoints": [
+    {
+      "contact_certificate": "5dcbd27037e1bd5227723319c9f55c72",
+      "geometric_key": "0373183838f6f0c42956f969dadfda97",
+      "seed": 5,
+      "side": 2.76776695296637,
+      "theta": [
+        1.570796326794904,
+        0.7853981676985268,
+        0.7853981676985268,
+        -2.210056130330553e-07,
+        3.317182401300478e-15
+      ],
+      "x": [
+        0.5000000000000038,
+        1.323223304703368,
+        2.0606601717798227,
+        2.2677668424635757,
+        0.5000000000000017
+      ],
+      "y": [
+        0.5000000000000038,
+        1.3838834762222831,
+        0.7071067811865475,
+        2.146446720431309,
+        2.2677669529663684
+      ]
+    },
+    {
+      "contact_certificate": "5dcbd27037e1bd5227723319c9f55c72",
+      "geometric_key": "07860b128b38dd2e7856c11e9ff03eb7",
+      "seed": 2,
+      "side": 2.767766952966371,
+      "theta": [
+        1.5707963267949019,
+        1.5707963267950102,
+        1.5707963267949019,
+        0.7853981126414208,
+        0.7853981126414208
+      ],
+      "x": [
+        0.5000000000000027,
+        2.2677669529663143,
+        0.5000000000000027,
+        2.0606601717798245,
+        1.3838834734042618
+      ],
+      "y": [
+        2.1464466155645803,
+        0.5000000000000568,
+        0.5000000000000027,
+        2.0606601717798245,
+        1.323223304703422
+      ]
+    }
+  ],
+  "measured": {
+    "share_contact_certificate": true,
+    "share_geometric_key": false,
+    "side_difference": 8.881784197001252e-16
+  },
+  "schema_version": 1,
+  "subject": {
+    "commitment": "BC-083",
+    "defect": "D-034",
+    "n": 5,
+    "side": 2.767766953,
+    "source": "the six-seed n=5 census in devtools.check_golden_basins"
+  },
+  "why_component_count_is_null": "Not proved, and not provable by the route that proved n = 3 and n = 4. Two conditions make those classifications exhaustive, and both are properties of container side exactly 2 with unit squares rather than of small n. First, orientation is forced: containment on the chart [-1,1]^2 gives the exact identity 1/2 - w(1 - w/2) = (w-1)^2/2, so every square is axis-aligned. Second, and this is what makes the classification finite, each separation disjunct pins a coordinate to an endpoint of [0,1], which is why the enumerator can assert free_variables is {1} at n = 3 and {0} at n = 4. Neither survives s > 2. At the pair's 2.7678 the cells would be positive-dimensional polytopes even with orientation forced, so the obstruction is the method's kind rather than its count -- 4^C(5,2) = 1048576 branches would be affordable, and would not be the work. No linear program is solved anywhere in that classification; the cells are decided by exact endpoint propagation. exp-042 names the missing claim exactly: A_to_B_stationary_connection is one of its eleven declared scope refusals."
+}

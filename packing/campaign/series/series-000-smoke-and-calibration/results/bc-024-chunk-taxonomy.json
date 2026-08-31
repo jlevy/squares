@@ -1,0 +1,1148 @@
+{
+  "residue": {
+    "by_source": {
+      "exact-grid": 44,
+      "kingbird-derived-facts": 65
+    },
+    "components": 109,
+    "detail": [
+      {
+        "is_the_whole_record": true,
+        "n": 7,
+        "size": 7,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 8,
+        "size": 8,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 13,
+        "size": 13,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 14,
+        "size": 14,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 15,
+        "size": 15,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 19,
+        "size": 6,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 21,
+        "size": 21,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 22,
+        "size": 22,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 23,
+        "size": 23,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 24,
+        "size": 24,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 26,
+        "size": 5,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 26,
+        "size": 5,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 27,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 27,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 29,
+        "size": 5,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 31,
+        "size": 31,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 32,
+        "size": 32,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 33,
+        "size": 33,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 34,
+        "size": 34,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 35,
+        "size": 35,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 37,
+        "size": 6,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 37,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 38,
+        "size": 15,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 38,
+        "size": 15,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 39,
+        "size": 11,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 40,
+        "size": 6,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 40,
+        "size": 6,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 40,
+        "size": 6,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 40,
+        "size": 6,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 41,
+        "size": 7,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 41,
+        "size": 16,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 43,
+        "size": 43,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 44,
+        "size": 44,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 45,
+        "size": 45,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 46,
+        "size": 46,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 47,
+        "size": 47,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 48,
+        "size": 48,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 50,
+        "size": 6,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 50,
+        "size": 11,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 50,
+        "size": 6,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 50,
+        "size": 11,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 51,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 51,
+        "size": 12,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 52,
+        "size": 21,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 52,
+        "size": 21,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 53,
+        "size": 15,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 53,
+        "size": 21,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 54,
+        "size": 18,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 54,
+        "size": 18,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 55,
+        "size": 12,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 55,
+        "size": 19,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 57,
+        "size": 57,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 58,
+        "size": 58,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 59,
+        "size": 59,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 60,
+        "size": 60,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 61,
+        "size": 61,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 62,
+        "size": 62,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 63,
+        "size": 63,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 65,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 65,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 65,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 65,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 66,
+        "size": 15,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 66,
+        "size": 21,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 67,
+        "size": 28,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 67,
+        "size": 28,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 70,
+        "size": 21,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 70,
+        "size": 21,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 71,
+        "size": 11,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 71,
+        "size": 32,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 73,
+        "size": 73,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 74,
+        "size": 74,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 75,
+        "size": 75,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 76,
+        "size": 76,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 77,
+        "size": 77,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 78,
+        "size": 78,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 79,
+        "size": 79,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 80,
+        "size": 80,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 82,
+        "size": 14,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 82,
+        "size": 19,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 82,
+        "size": 14,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 82,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 83,
+        "size": 21,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 83,
+        "size": 28,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 84,
+        "size": 36,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 84,
+        "size": 36,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 85,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 85,
+        "size": 14,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 85,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 85,
+        "size": 14,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 86,
+        "size": 28,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 86,
+        "size": 35,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 87,
+        "size": 28,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 87,
+        "size": 36,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 88,
+        "size": 28,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 88,
+        "size": 36,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 89,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 89,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 89,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 89,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 91,
+        "size": 91,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 92,
+        "size": 92,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 93,
+        "size": 93,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 94,
+        "size": 94,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 95,
+        "size": 95,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 96,
+        "size": 96,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 97,
+        "size": 97,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 98,
+        "size": 98,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      },
+      {
+        "is_the_whole_record": true,
+        "n": 99,
+        "size": 99,
+        "source": "exact-grid",
+        "tilted": false,
+        "walls_touched": 4
+      }
+    ],
+    "sizes": {
+      "10": 15,
+      "11": 4,
+      "12": 2,
+      "13": 1,
+      "14": 5,
+      "15": 5,
+      "16": 1,
+      "18": 2,
+      "19": 2,
+      "21": 8,
+      "22": 1,
+      "23": 1,
+      "24": 1,
+      "28": 6,
+      "31": 1,
+      "32": 2,
+      "33": 1,
+      "34": 1,
+      "35": 2,
+      "36": 4,
+      "43": 1,
+      "44": 1,
+      "45": 1,
+      "46": 1,
+      "47": 1,
+      "48": 1,
+      "5": 3,
+      "57": 1,
+      "58": 1,
+      "59": 1,
+      "6": 8,
+      "60": 1,
+      "61": 1,
+      "62": 1,
+      "63": 1,
+      "7": 2,
+      "73": 1,
+      "74": 1,
+      "75": 1,
+      "76": 1,
+      "77": 1,
+      "78": 1,
+      "79": 1,
+      "8": 1,
+      "80": 1,
+      "91": 1,
+      "92": 1,
+      "93": 1,
+      "94": 1,
+      "95": 1,
+      "96": 1,
+      "97": 1,
+      "98": 1,
+      "99": 1
+    },
+    "tilted": 0,
+    "walls_touched": {
+      "2": 65,
+      "4": 44
+    },
+    "whole_record": 44
+  },
+  "schema_version": 1,
+  "sizes_by_shape": {
+    "L": {
+      "3": 23,
+      "4": 7,
+      "5": 2
+    },
+    "bar": {
+      "10": 1,
+      "2": 72,
+      "3": 6,
+      "5": 1,
+      "6": 1,
+      "8": 1,
+      "9": 1
+    },
+    "other-polyomino": {
+      "10": 15,
+      "11": 4,
+      "12": 2,
+      "13": 1,
+      "14": 5,
+      "15": 5,
+      "16": 1,
+      "18": 2,
+      "19": 2,
+      "21": 8,
+      "22": 1,
+      "23": 1,
+      "24": 1,
+      "28": 6,
+      "31": 1,
+      "32": 2,
+      "33": 1,
+      "34": 1,
+      "35": 2,
+      "36": 4,
+      "43": 1,
+      "44": 1,
+      "45": 1,
+      "46": 1,
+      "47": 1,
+      "48": 1,
+      "5": 3,
+      "57": 1,
+      "58": 1,
+      "59": 1,
+      "6": 8,
+      "60": 1,
+      "61": 1,
+      "62": 1,
+      "63": 1,
+      "7": 2,
+      "73": 1,
+      "74": 1,
+      "75": 1,
+      "76": 1,
+      "77": 1,
+      "78": 1,
+      "79": 1,
+      "8": 1,
+      "80": 1,
+      "91": 1,
+      "92": 1,
+      "93": 1,
+      "94": 1,
+      "95": 1,
+      "96": 1,
+      "97": 1,
+      "98": 1,
+      "99": 1
+    },
+    "rectangle": {
+      "100": 1,
+      "12": 1,
+      "16": 2,
+      "20": 1,
+      "24": 1,
+      "25": 3,
+      "30": 1,
+      "36": 2,
+      "4": 6,
+      "42": 1,
+      "49": 2,
+      "56": 1,
+      "6": 1,
+      "64": 1,
+      "72": 1,
+      "81": 1,
+      "9": 2,
+      "90": 1
+    },
+    "singleton": {
+      "1": 335
+    }
+  },
+  "strata": {
+    "exact-grid": {
+      "components": 64,
+      "records": 64,
+      "shapes": {
+        "L": 1,
+        "bar": 1,
+        "other-polyomino": 44,
+        "rectangle": 17,
+        "singleton": 1
+      },
+      "tilted_components": 0
+    },
+    "kingbird-derived-facts": {
+      "components": 387,
+      "records": 34,
+      "shapes": {
+        "L": 31,
+        "bar": 82,
+        "other-polyomino": 65,
+        "rectangle": 12,
+        "singleton": 197
+      },
+      "tilted_components": 237
+    },
+    "unitsquare-rendering": {
+      "components": 137,
+      "records": 2,
+      "shapes": {
+        "singleton": 137
+      },
+      "tilted_components": 58
+    }
+  },
+  "subject": {
+    "band": "exact",
+    "commitment": "BC-024",
+    "corpus": "atlas/known-best/chunk-components.json, exact-adjacency band",
+    "emits_no_verdict": "descriptive only; H-044 is untouched and an unsupported component is one the current detector did not express, which the census's own known_gap says is not a refutation until the minimal-partition solver exists"
+  },
+  "tilted_records": [
+    5,
+    10,
+    11,
+    17,
+    18,
+    19,
+    26,
+    27,
+    28,
+    29,
+    37,
+    38,
+    39,
+    40,
+    41,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89
+  ],
+  "wall_seating_by_shape": {
+    "L": {
+      "0": 6,
+      "2": 25,
+      "4": 1
+    },
+    "bar": {
+      "0": 72,
+      "1": 3,
+      "2": 7,
+      "3": 1
+    },
+    "other-polyomino": {
+      "2": 65,
+      "4": 44
+    },
+    "rectangle": {
+      "0": 11,
+      "2": 1,
+      "3": 8,
+      "4": 9
+    },
+    "singleton": {
+      "0": 254,
+      "1": 43,
+      "2": 37,
+      "4": 1
+    }
+  }
+}

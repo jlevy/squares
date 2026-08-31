@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 371
+count: 403
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9205,7 +9205,7 @@ defects:
   detected_by: review
   latent_for: from the gate's introduction to the first session that measured its own cycle time
   severity: high
-  status: outstanding
+  status: fixed
   bead: think-ej1d
   recorded_in: packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md
   what: >-
@@ -9228,18 +9228,23 @@ defects:
     to check exactly what the change can reach, and to be able to prove the selection is
     not missing anything.
   fix: >-
-    Unbuilt, and specified under BC-051. A change-scoped selector maps changed paths to
-    affected steps and is conservative by construction: an unrecognized path selects the
-    full gate rather than an empty set, so the failure mode is a slow run and never a
-    silent gap. The mapping is itself negative-controlled -- perturb a source file, and
-    the selector must choose a step that fails on it -- because a selector that cannot be
-    caught under-selecting is worse than no selector. The full gate keeps its existing
-    role at commit and merge boundaries; this changes the edit loop, not the contract.
+    Built under BC-084, discharging BC-051 unchanged in scope. `select_for_paths` in
+    `sqpack/cli/validate.py` maps changed paths to affected steps through a `touches`
+    field on each of the 52 steps, and is conservative by construction in both directions:
+    a changed path no step claims selects the whole gate rather than the steps that
+    happened to match, and a step declaring nothing is claimed by everything. So the
+    failure mode is a slow run and never a silent gap. On `D-355`'s own case -- an edit to
+    the rigidity assessor alone -- it selects 22 steps of 52. The full gate keeps its role
+    at commit and merge boundaries; this changed the edit loop, not the contract.
+
+    This entry said "Unbuilt" for as long as the feature has existed. It was found by a
+    sweep for exactly that shape, prompted by `D-398`, and is the same failure one register
+    over: a record asserting the absence of something the repository already had.
   regression: >-
-    None yet. The control that will pin it is the selector's own negative control
-    described above, plus a check that every step name is reachable from at least one
-    declared path pattern, so a new step cannot be added without being wired to the
-    sources that can break it.
+    `tests/test_change_scoped_selection.py`, ten cases, whose own header names this defect
+    and `BC-084`. It pins both directions of the conservatism -- an unclaimed path takes
+    the whole gate, a step declaring nothing is always selected -- and reproduces `D-355`'s
+    measured case directly.
 - id: D-356
   title: The negative-control snapshot prunes the archive, so the n=29 chain cannot be controlled there
   date: '2026-08-29'
@@ -9314,7 +9319,7 @@ defects:
   detected_by: review
   latent_for: the whole of run-002
   severity: medium
-  status: outstanding
+  status: fixed
   what: >-
     run-002 declared blocks of 150, 180, 180 and 40 minutes against a 690-minute target.
     The git timestamps say the planning commit landed at 03:04:56Z and the four block
@@ -9336,9 +9341,20 @@ defects:
     read `date -u` at every block boundary and record it, rather than estimating elapsed
     time from the conversation.
   regression: >-
-    None automatic. A session artifact's declared clock could be checked against the commit
-    timestamps of the work it claims, which no current check does; recorded here as the
-    obvious detector rather than built in passing.
+    It said "None automatic" for a day and then this recurred as D-386, which is what built
+    the check: `devtools/check_session_clocks`, a records-tier gate step, refuses any
+    session artifact declaring a start time later than the moment of checking -- a phase
+    cannot have begun after the record of it was written -- along with a session that starts
+    after its own phases and a deadline at or before its own start.
+
+    Anchoring on the wall clock is sound here because the bound is monotone: a timestamp in
+    the past stays in the past, so a run that passes today cannot fail tomorrow. Nine tests
+    and two negative controls pin both directions.
+
+    It also prints elapsed against budget, derived from the record's own successive
+    timestamps, which is the part that addresses this entry rather than D-386. Had that line
+    existed, run-002's declared 150 minutes standing beside a derived 31 would have been
+    visible while the run was making the mistake instead of a day later.
   bead: think-qs6k
   recorded_in: packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md
 - id: D-359
@@ -9648,7 +9664,7 @@ defects:
   detected_by: gate
   latent_for: 'introduced and detected in the same session'
   severity: low
-  status: outstanding
+  status: fixed
   what: >-
     The strict tier's `negative controls` step is killed at the 900-second per-step
     timeout. Nothing is wrong with the controls: run without that cap the suite completes
@@ -9661,21 +9677,45 @@ defects:
     repository's whole argument for controls is that a guard nobody watches fire is
     untested.
   fix: >-
-    Not fixed here, and the honest reason is that the cheap fix and the right fix differ.
-    Raising the cap would make the step pass and would weaken the same guard for every
-    other step that shares it. The cost is concentrated rather than spread: this session
-    took the suite from 113 controls to 137, and the expensive additions are the ones whose
-    `run` invokes the exact-LP tests, where each control pays a full module import and the
-    end-to-end Trump solve behind it. Pointing those at a cheaper target, or giving the
-    step its own declared budget, is the repair; both are choices about the gate's contract
-    rather than edits to a control.
+    Fixed in `BC-079` by the second of the two repairs this entry named: the step declares
+    its own budget. `Step.budget_seconds` raises the ceiling for the step that claims one
+    and leaves it untouched for the other thirty-nine, which is the trade that made raising
+    the shared cap the wrong answer. `negative controls` declares `1800s` against the
+    `1268s` measured uncapped at 137 controls, so the number is that measurement plus room
+    for a suite that only grows -- not a value chosen to make one run pass.
+
+    Three properties keep a budget from becoming a waiver, and each is a test rather than
+    an intention. A step that exceeds its own budget still fails, so a hung control suite
+    reports instead of hanging the run. An explicit `--timeout-seconds` still wins, because
+    a budget corrects a project-wide default and may not override a bound an operator typed
+    for this run. And the set of budgeted steps is asserted to be exactly one: a second
+    step acquiring a budget is evidence the shared cap is wrong rather than that another
+    step is special, and the test is where that argument has to be made.
+
+    No control was dropped, made cheaper, or pointed at a different target. The first
+    repair this entry proposed -- retargeting the exact-LP controls -- remains available
+    and is now an optimization rather than a prerequisite.
+
+    **The verification run changed the argument, and it is recorded rather than tidied.**
+    Re-run on 2026-08-30 with 142 controls, the step took `736s` and all 142 fired -- well
+    inside the `900s` cap it was said to exceed. So this run would have passed without the
+    budget, and "it was over the cap, now it fits" is not what happened. What the two
+    measurements together show is worse than a step that is simply too slow: `1268s` on
+    2026-08-29 at 137 controls against `736s` today at 142, a spread of about `1.7x` on a
+    growing suite, straddling the cap in both directions.
+
+    A step whose cost varies by that much around its own limit fails *intermittently*,
+    which is the least diagnosable red there is -- indistinguishable, from the outside,
+    from a control that stopped firing. That is the case for a declared budget rather than
+    against it. The budget is sized against the slower of the two observations plus room
+    to grow, so the step's verdict stops depending on how loaded the container was.
   regression: >-
     Measured rather than inferred: `uv run --frozen --all-extras --group dev python -m
     devtools.run_negative_controls devtools/controls.yaml -j 1` completes in `1268s` with
     all 137 firing, against a `900s` cap. Recorded with the count so the next session can
     see whether the number moved or the machine did.
-  bead: think-c7oo
-  recorded_in: packing/campaign/agent-sessions/session-044-agenda006-continuation.md
+  bead: think-av72
+  recorded_in: packing/src/sqpack/cli/validate.py
 
 - id: D-367
   title: Degree bounds on the Kingbird solution were written as bounds on s(n)
@@ -9840,17 +9880,62 @@ defects:
     `2.730s`. Its `pure=False` buys nothing in this build and its value, comment-preserving
     round-trips, is not something this repository needs.
 
-    What remains is `6.06s` of jsonschema descent over 208 witness files carrying
-    3.7 MB of exact rationals, and `3.58s` of exact grid verification. Both are `BC-075`:
-    the first is a dependency question (a compiled validator such as `fastjsonschema`)
-    and the second is a step-boundary one, since exact geometry does not belong in a step
-    named for schemas.
+    What remained after those three was `6.06s` of jsonschema descent over 208 witness
+    files carrying 3.7 MB of exact rationals, and `3.58s` of exact grid verification. Both
+    are now fixed under `BC-077`, and the pre-push tier measures `16.05s` before and
+    `4.48s` after on one container on 2026-08-30:
+
+    The validator is `jsonschema-rs`, PyO3 bindings to the Rust crate, pinned to `0.49.9`
+    rather than to the newest release because `0.52.0` was four days old on the day this
+    landed and the 14-day cool-off applies to a validator as much as to anything else.
+    Over the real corpus, 339 artifacts against 23 schemas, across five runs on
+    2026-08-30: `jsonschema` validates in `7145-7750ms` and `jsonschema-rs` in `55-88ms`,
+    a ratio between `83x` and `137x`. The range is quoted rather than a point because the
+    Rust side is small enough that container scheduling noise moves it by half, while the
+    Python side barely moves; a single run of this comparison is not a measurement.
+
+    That matters for a second reason. The spec proposing the swap predicted `559x` from a
+    scratch script over a 314-document subset, and no run of the real corpus reproduces
+    it. The prediction was taken on a different corpus and stated as a point;
+    `benchmarks/bench_schema_validation.py` is what makes the honest figure reproducible.
+    The decision does not turn on which end of the range is taken, which is the useful
+    property of a gap this size.
+
+    Two corrections to that spec, both found by making the comparison repeatable rather
+    than remembering it. First, the speedup above. Second, and the one that could have
+    cost something: the spec recorded `error.message` as "byte-identical on the cases
+    checked". It is not. The two libraries quote differently and systematically --
+    `jsonschema` renders `'a' is a required property` where `jsonschema-rs` renders
+    `"a" is a required property` -- so any consumer parsing that text would have broken
+    silently. Nothing in this repository parses it, which is why the swap is still safe,
+    but the equivalence that holds is verdict and instance path rather than message text,
+    and the test asserts the quoting difference rather than normalising it away unstated.
+
+    The exact grid replay moved out of `soft-schema validation` into `exact verification`,
+    where a reader looks for exact geometry and where its cost is legible. Nothing about
+    the check changed: the same cases are replayed with the same predicate to the same
+    verdict, and `devtools.check_basic_bounds` run directly still does both halves.
+
+    Measured on one container on 2026-08-30, `packing-validate --records`: `16.05s` before,
+    `4.48s` after, with `soft-schema validation` falling from `15.71s` to `4.48s` and
+    `exact verification` rising from `2.8s` to `6.35s` in a tier that does not contain it.
   regression: >-
     `test_yaml_is_read_only_through_the_project_loader` walks `src`, `devtools` and
     `cases` for `yaml.safe_load` or a bare `yaml.SafeLoader` and fails on either, so the
     pure-Python scanner cannot return one call site at a time. The duplicate-key guard was
     re-checked under the C loader before the base class changed.
-  bead: think-c46d
+
+    For the validator swap, `tests/test_schema_validator_equivalence.py` runs both
+    libraries side by side over all 339 enforced artifacts and over generated mutations of
+    them -- dropped required keys, retyped values, emptied arrays, unexpected properties --
+    and fails on any disagreement in verdict or instance path. A faster validator that
+    accepts one artifact the old one rejected is a soundness regression that buys six
+    seconds, and it would be invisible in the timings that motivated the change. Three
+    guards keep that test honest as it grows: one asserts the mutation generator actually
+    produces rejections rather than quietly emitting valid documents, one asserts every
+    schema in the corpus keeps a mutation representative through deduplication, and one
+    asserts no mutation writes through to the shared payload.
+  bead: think-64bw
   recorded_in: packing/src/sqpack/yamlio.py
 - id: D-371
   title: The control snapshot guard was one artifact from refusing to run at all
@@ -9885,3 +9970,1882 @@ defects:
     number being printed.
   bead: think-c46d
   recorded_in: packing/devtools/run_negative_controls.py
+- id: D-372
+  title: The reader-facing tier said four built capabilities were unbuilt, for four days
+  date: '2026-08-30'
+  layer: docs
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'from BC-054 in session-038 until the first W8 pass'
+  severity: medium
+  status: fixed
+  what: >-
+    `SYNOPSIS.md`, `TUTORIAL.md` and `README.md` all described the numeric-to-symbolic
+    promotion route as unbuilt after every one of its components had landed. The synopsis
+    sentence read "The project does not generically infer corner-edge incidences, assemble
+    and close contact equations, recognize an algebraic field, or certify existence and
+    uniqueness near a numerical root", and all four clauses were false:
+    `sqpack.promote.contacts`, `.system`, `.solve` and `.krawczyk` each existed and were
+    exercised. The same paragraph then said, two sentences later, "The interval strategy is
+    now built and replayable", so it contradicted itself in place. `TUTORIAL.md` carried the
+    matching claim, and `README.md`'s code inventory listed three components where the
+    record had six.
+  consequence: >-
+    Understatement rather than overstatement, which is the direction this project would
+    choose if it had to choose, and still a claim-integrity failure: a reader deciding
+    whether a capability exists got the wrong answer from all three reader-facing
+    documents at once. The mechanism is what matters. `check_synopsis` binds the synopsis
+    to the artifacts, so the synopsis absorbed each result as it landed -- and the binding
+    covers generated blocks and aggregates, not prose, so a hand-written paragraph in the
+    same file drifted for four days while the file passed its own checker every time.
+    Nothing binds `README.md` or `TUTORIAL.md` at all.
+  fix: >-
+    All three reconciled in the first W8 documentation pass, against the modules rather
+    than against each other. The claim boundary is now stated where it actually falls,
+    which is not where either the old text or the first draft of the new text put it: the
+    components are built and general, a case-specific driver has certified `n = 29`, the
+    public `packing-witness promote --strategy interval-existence` still raises the typed
+    `checker-not-built` gap because no generic route from an arbitrary `Witness/v2`
+    exists, and the certificate that does exist is retained `unresolved` and promotes
+    nothing pending human review.
+
+    Worth recording that the first attempt at the fix overstated in the opposite
+    direction. It said what remained was "a decision, not a component", which skipped the
+    missing CLI wiring; the error was caught by checking which entry point actually
+    produced the `n = 29` certificate rather than by rereading the prose. A documentation
+    pass that reconciles prose against prose reproduces this failure with more confidence.
+  regression: >-
+    None added, and the absence is the finding rather than an omission. A checker that
+    bound README and TUTORIAL prose to the artifacts the way `check_synopsis` binds the
+    synopsis would have to decide what a sentence claims, which no check here can do.
+    What this defect argues for instead is `OR-7`'s cadence and the W8 checklist: read the
+    artifacts first and the documents second, because a pass that starts from the prose
+    inherits the prose's mistakes. `BC-078` is the first pass run that way.
+  bead: think-eb29
+  recorded_in: SYNOPSIS.md
+- id: D-373
+  title: The identity acceptance rule named only controls whose answer was one
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: 'from BC-046 registration on 2026-08-24 until it was first run'
+  severity: medium
+  status: fixed
+  what: >-
+    `BC-046` set its exit as "a declared identity relation with a criterion that the exact
+    n = 3 sliding family and the exact n = 4 point both satisfy". Those are the `D4 x S3`
+    and `D4 x S4` quotient controls, and both have component count **one**. Any relation
+    that merges everything therefore passes the rule. `side alone` is such a relation --
+    every point of an optimal configuration space carries the optimal side by definition,
+    so it returns one at every level -- and it is independently known wrong, since `D-034`
+    records two n = 5 rows sharing side `2.767766952966` while differing geometrically.
+    Scored under the rule as written, three of four candidate relations survive. That
+    count is two once `D-375` corrects the level `geometric + contact` was scored at; the
+    finding is unchanged, since `side alone` and `contact + closure` remain
+    indistinguishable under the rule.
+  consequence: >-
+    None realised, because the rule had not been run before `BC-080` ran it. The direction
+    is flattering: a criterion satisfied by a merge-everything relation would have licensed
+    declaring the identity question settled, and a settled identity relation is the
+    precondition the census and the discovery curve are waiting on. The failure is not that
+    the controls are wrong -- they are exact and proved -- but that every control in the set
+    had the same answer, so the set was checking a constant.
+  fix: >-
+    The labelled controls join the set. `exp-014` proves the labelled n = 3 space is two
+    circles and `exp-015` proves the labelled n = 4 space is 24 isolated grids, so the
+    four proved answers are now `2`, `1`, `24`, `1` rather than `1` and `1`. Under the
+    widened set exactly one candidate survives -- contact certificates merged along the
+    retained strata closure -- and `side alone` is refuted by both labelled controls.
+
+    The two controls also turn out to isolate independent failures rather than duplicate
+    one test, which is why widening the set was available at all: n = 4 is pure symmetry
+    with no connectivity anywhere, and n = 3 is pure connectivity inside a single orbit.
+    `distinct_basins` is wrong on both counts and the errors compose, so it is a strict
+    upper bound on the component count rather than an estimate of it.
+
+    The generalisable half is recorded in `X-005` rather than only here: a criterion
+    validated only on cases whose answer is one is validated against a constant, and that
+    is not specific to identity.
+  regression: >-
+    `devtools/check_identity_relation.py` scores every candidate against all four proved
+    answers, reading the component counts out of the retained experiment JSON rather than
+    from a number typed into the checker, and refuses with `--check` if the control set
+    stops separating the candidates. `tests/test_identity_relation.py` pins the verdicts,
+    including the one that is the finding itself: `side alone` must still survive the
+    quotient controls alone, because if it stops doing so this defect has silently changed
+    rather than been fixed.
+  bead: think-0yo9
+  recorded_in: packing/campaign/explorations/X-005-identity-relation-and-its-controls.md
+- id: D-374
+  title: The agenda queue offered four finished commitments as takeable
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: inspection
+  latent_for: 'from agenda-006 closing those cells on 2026-08-29 until the map was built'
+  severity: medium
+  status: fixed
+  what: >-
+    agenda-005 `BC-045` asks for outward-rounded interval certificates at n = 5, 10 and 11
+    with refusal controls and n = 29 recorded unresolved. agenda-006 `BC-053` has that
+    exact exit and is `complete`. The same holds for `BC-043` against `BC-054`, `BC-044`
+    against `BC-060`, and `BC-048` against `BC-061`. All four stayed `ready`, so the queue
+    advertised eleven takeable commitments where seven were takeable.
+
+    Separately, four commitments were `blocked` with an empty `depends_on` and no other
+    field naming a blocker, so what they waited on existed only in prose inside an `entry`
+    string. `BC-029`'s stated predecessor `BC-027` had been complete since agenda-003
+    closed, and nothing surfaced that.
+
+    Only agenda-007 declared its discharges at all, and it declared them in `note`, which
+    is prose no checker reads.
+  consequence: >-
+    None realised, because no session took one of the four. The direction is flattering in
+    the way a stale queue always is: the work looks available, a session following `OR-4`
+    correctly takes it, and the redone result agrees with the retained one, which reads as
+    confirmation rather than as waste. Roughly four commitments' worth of research time was
+    exposed.
+
+    The narrower cost is that `OR-4` names the agenda queue as authoritative precisely so a
+    coordinator does not have to reconstruct priority from `tbd ready`. A queue that
+    misreports what is takeable removes the reason that rule exists.
+  fix: >-
+    Discharge is an edge, not prose. `discharged_by` joins the agenda schema and is carried
+    by the eight commitments another commitment actually satisfied -- the four found here,
+    plus the three agenda-007 had recorded only in prose, plus `BC-051`, whose scope moved
+    to `BC-084` and which is therefore `stopped` rather than `complete`, since `BC-084` has
+    not run.
+
+    `blocked_on` joins the schema for a blocker that is not a commitment: an artifact that
+    does not exist, or a decision. `BC-016` and `BC-050` wait on artifacts nothing produces,
+    `BC-029` waits on an independent acceptance decision, and `BC-033` waits on `D-034`,
+    which is still outstanding. `BC-029` and `BC-033` also gained the dependency edges their
+    prose had named.
+
+    agenda-006 is `completed`. Six of seven agendas had declared themselves `active`, which
+    made the field unable to answer the question it looks like it answers.
+  regression: >-
+    `devtools/render_agenda_map.py` renders `packing/campaign/agenda-map.md` from every
+    agenda's frontmatter and refuses, rather than reports, three shapes: a commitment that
+    is `ready` while naming a `discharged_by`, a `blocked` commitment with neither a
+    predecessor nor a `blocked_on`, and any edge pointing at an id that is not a
+    commitment. The refusal runs before the render, so a contradictory queue cannot reach
+    the generated document. Drift-checked in `packing-validate --records` at 0.14s.
+
+    `tests/test_agenda_map.py` pins the two invariants and the state vocabulary against the
+    schema enum rather than a copy of it. Four negative controls, each watched failing: the
+    map edited by hand, a commitment changing state without the map following, a discharged
+    commitment offered as takeable again, and a blocked commitment whose stated blocker is
+    removed.
+  bead: think-s424
+  recorded_in: packing/campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md
+- id: D-375
+  title: The atlas relation was scored at the wrong level, and the n=4 control separates nothing
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: 'from X-005 on 2026-08-30 until exp-015 retained its per-sample keys the same day'
+  severity: medium
+  status: fixed
+  what: >-
+    `X-005` declared `geometric + contact` -- the relation `Atlas.add` implements -- at
+    level `labelled`, and refuted it on the `n = 3` labelled control. It is a quotient
+    statement and cannot distinguish two labelled components differing only by a
+    relabelling. `X-005` made precisely that argument for `contact alone` and
+    `contact + closure`, and did not apply it to this relation.
+
+    **The first version of this defect said the two keys are relabelling-invariant "by
+    construction", and that is too strong for one of them.** `geometric_key` is: it sorts
+    the squares and minimises the digest over the eight container images, and 3000 fuzzed
+    `D4` images produced no mismatch. `contact_certificate` is not a canonical form. Its
+    colour refinement breaks ties among equal-sized classes in dict insertion order, which
+    is input labelling; and `angle_classes` is a greedy first-fit against class
+    representatives, so it chains order-dependently near its `1e-2` tolerance --
+    `angle_classes([0, 1e-6, 2e-6])` gives `[[0,1],[2]]` while `angle_classes([1e-6, 0,
+    2e-6])` gives `[[0,1,2]]`, flipping the angle signature for the same packing. Over
+    well-separated angles, 400 fuzzed relabellings produced no mismatch, which is why this
+    has never bitten here.
+
+    The re-levelling stands, because it does not rest on the "by construction" argument:
+    exp-015's 24 labelled states are measured to collapse to one geometric key and one
+    contact certificate, so on the control in question the relation demonstrably is a
+    quotient statement. It was the justification that was wrong, not the verdict.
+
+    Two claims rested on the mis-levelling. First, "three of the four candidates survive
+    the quotient controls alone" is two. Second, and more substantially, `X-005` argued
+    that `distinct_basins` is "wrong twice over, and the two errors compose", making it a
+    strict upper bound on the quotient component count. The `n = 4` half of that is a
+    failure of *a relation that does not quotient*, and `distinct_basins` is not that
+    relation: measured on the `n = 4` quotient control it reports 1 against a proved 1.
+    There is one error, not two -- the geometric key's quantization splitting a connected
+    family, which is `D-034`.
+
+    Separately, the `n = 4` labelled control, once scoreable, refutes every candidate and
+    separates none: its 24 states differ only by relabelling, every candidate relation is
+    relabelling invariant, and each reports 1 against a proved 24.
+  consequence: >-
+    The conclusion did not move. `contact + closure` is still the sole survivor of all four
+    proved answers, and the refutation of `geometric + contact` is unchanged in force --
+    only reattributed to the control that can carry it, the `n = 3` quotient control at 4
+    against 1.
+
+    The direction is flattering in the specific way a mis-levelled score always is: the
+    relation was refuted for a reason it was not guilty of, which makes the instrument look
+    more discriminating than it is. Had the level been read off the implementation rather
+    than assumed, the `n = 4` labelled control would have been recognised as unable to
+    separate anything before it was cited as one of the two controls that do.
+  fix: >-
+    `BC-082` retained per-sample geometric keys and contact certificates for `exp-015`'s 24
+    labelled states, which `X-005` had named as the cheap missing piece. They are produced
+    by `grid_sample_record`, shared with the `n = 3` sampler rather than written a second
+    time: keys computed by a different function would not have been comparable, and an
+    incomparable verdict is worse than the `undecidable` it replaced. `exp-014` regenerates
+    byte-identically after the refactor, and `exp-015` differs only by the added `samples`
+    key -- no proved count moves.
+
+    `geometric + contact` is redeclared `quotient`. `X-005` carries a dated addendum rather
+    than a rewrite, since it is a dated record.
+  regression: >-
+    `tests/test_identity_relation.py` pins the corrected verdict -- refuted at `n = 3`
+    quotient, `n/a` at both labelled controls -- and adds
+    `test_no_relabelling_invariant_relation_can_pass_a_labelled_control`, which asserts
+    that every candidate the `n = 4` labelled control can score reports exactly 1. That
+    test is the finding: if a candidate ever reports something else there, the family has
+    stopped being relabelling invariant and the reasoning behind `BC-083`'s exit wording
+    has to be redone.
+  bead: think-m2j8
+  recorded_in: packing/campaign/explorations/X-005-identity-relation-and-its-controls.md
+- id: D-376
+  title: The n=5 pair D-034 has quoted since August was never retained
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: inspection
+  latent_for: 'from D-034 on 2026-08-23 until BC-083 went looking for the two endpoints'
+  severity: low
+  status: fixed
+  what: >-
+    `D-034` states that two `n = 5` rows share side `2.767766952966`, closed form, contact
+    certificate, angle signature and contact count while differing geometrically. That
+    sentence has been cited by `D-034`, `X-005`, `H-023` and the ledger, and the two
+    endpoints it describes were never retained anywhere. `golden/basin-maps.yaml` keeps the
+    aggregate rows -- side, contact count, angle classes, frequencies -- and not the poses
+    or the keys, so nothing downstream could check the claim or score a relation against
+    it.
+
+    The claim was true. Rebuilt from the fixed seed stream, the two endpoints share
+    contact certificate `5dcbd27037e1bd5227723319c9f55c72`, differ in geometric key, and
+    differ in side by `8.9e-16`, which is four orders of magnitude below the `1e-11` quench
+    floor `D-021` records.
+  consequence: >-
+    None realised, and the direction is neutral rather than flattering: the claim held when
+    it was finally checked. The cost was that the one control capable of separating
+    `geometric + contact` from `contact + closure` could not be constructed, so `BC-046`
+    and `BC-080` both ran without it and `X-005` reported the `n = 4` labelled control as
+    the discriminating one -- which `D-375` then showed it is not.
+
+    The general shape is worth more than this instance: a defect that quotes a measurement
+    and retains nothing leaves a claim that can be repeated but not used.
+  fix: >-
+    `devtools/build_n5_identity_pair.py` reproduces the pair through `check_golden_basins`'s
+    own census functions rather than a second census, and retains both poses, both keys and
+    the measured invariants as `bc-083-n5-identity-pair.json`. `component_count` is `null`
+    with a field saying why, so the artifact cannot be mistaken for a proof.
+
+    `check_identity_relation` scores it as a prospective control: what each relation reports
+    on the pair, and what each of the two possible answers would decide. `X-006` owns the
+    argument.
+  regression: >-
+    `packing-validate` gains a step re-running the six-seed census and comparing the pair's
+    keys, at 28s. It is deliberately not in `--records` or `--edit`: a census that stopped
+    reproducing the pair would invalidate the control without changing a single file, which
+    is exactly the failure a retained-but-unreplayed artifact allows.
+
+    `tests/test_identity_relation.py` asserts the measured invariants, that the side
+    difference is below the `D-021` floor, and that `component_count` stays `null` -- a
+    proved count appearing there without closing `D-034` would be the same false claim
+    this defect is about.
+  bead: think-6zaz
+  recorded_in: packing/campaign/explorations/X-006-the-discriminating-control-at-n5.md
+- id: D-377
+  title: A read-only delegation cannot be recorded while it is running
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: inspection
+  latent_for: >-
+    since the AgentSession/v2 write_scope invariant was written -- found the first time a
+    session delegated purely read-only investigation and tried to record it live
+  severity: low
+  status: contained
+  what: >-
+    `packing-ledger check` requires an `in_progress` delegation to carry a `write_scope`,
+    and the schema requires `write_scope` to be non-empty when present. A delegation that
+    is read-only by construction -- investigation, review, audit, the three kinds `OR-2`
+    names as the ones that parallelise best -- has an empty write surface, and there is no
+    way to say so. Recording it live requires either inventing a write surface it will not
+    use or omitting the delegation entirely.
+
+    The invariant's intent is sound: a running delegation with an undeclared write surface
+    is a coordinator not knowing what may change underneath it. The gap is that "nothing"
+    is a legitimate answer the encoding cannot express, and it is the answer for exactly
+    the delegations `OR-2` most encourages.
+  consequence: >-
+    Session-045 delegated four read-only sub-agents and recorded `delegations: []` while
+    they ran, filling them in on completion. That understates parallelism in the live
+    record: a reader of the running session cannot see that four investigations are in
+    flight, which is the one thing the field exists to show.
+
+    Neutral rather than flattering. Nothing is claimed that is not true; something true is
+    unsayable.
+  fix: >-
+    Not fixed. Contained by recording the delegations retrospectively on completion, which
+    is what session-045 does, and by this defect naming why the live record is thinner than
+    the session was.
+
+    The repair is a schema decision rather than a code change, and it belongs to whoever
+    owns the session contract: either allow an empty `write_scope` when a delegation
+    declares itself read-only, or add an explicit `read_only: true` that the invariant
+    accepts in place of a write surface. The second is better -- an empty list is
+    ambiguous between "writes nothing" and "nobody filled this in", and that ambiguity is
+    the reason the invariant exists.
+  regression: >-
+    None. A defect in what a schema can express is not caught by running anything; it is
+    caught by a session trying to record something true and finding it cannot. The next
+    session to delegate read-only work will hit it identically, which is the intended
+    signal.
+  bead: think-s424
+  recorded_in: packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md
+- id: D-378
+  title: No retained control can separate the surviving identity relation from merging everything
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: 'from X-005 on 2026-08-30 until a review asked what the relation reads'
+  severity: medium
+  status: contained
+  what: >-
+    `contact + closure` is the declared surviving relation: two endpoints are the same
+    terminal component when their contact certificates agree, or when the strata those
+    certificates name lie in one closure. Its only distinguishing verdict is `agrees` on
+    the `n = 3` quotient control, and that verdict cannot test it.
+
+    The record carries exactly one closure set, `closure(G) = [C, G, M]`, and it covers
+    every stratum the `n = 3` quotient has. Any faithful implementation therefore returns
+    one there whatever the certificates say -- verified by mutation: with the retained
+    samples, with all four given distinct certificates, and with all four given the same
+    certificate, the answer is one in every case.
+
+    Compounding it, the implementation was not faithful either. It computed the
+    certificate count and then discarded it whenever any closure existed, returning the
+    number of closure classes alone. On the retained controls that is the same answer, so
+    no verdict moved, but half the relation's definition was unread.
+  consequence: >-
+    Flattering, and it weakens the conclusion `X-005`, `D-373`, `D-375` and `X-006` all
+    rest on. "`contact + closure` is the sole survivor of all four proved answers" is
+    true, but the one cell that separates it from `contact alone` is a cell where the
+    closure structure makes the answer one regardless.
+
+    So the retained controls do not distinguish it from a relation that merges everything
+    -- which is `D-373`'s finding at a level below the one `D-373` stated. There the
+    problem was that every control's answer is one; here it is that the closure itself is
+    degenerate, so even a control whose answer were not one would not separate them unless
+    it carried two or more disjoint closure classes. None does.
+  fix: >-
+    Not fixed, and not fixable from the retained record. Contained in three ways.
+
+    `relation_contact_with_closure` now reads both halves: certificates partition the
+    samples, closure sets merge the partitions, and a certificate spanning two strata
+    merges them too. No scored verdict moves. A synthetic control with two disjoint
+    closure classes exercises the certificate half that no retained control reaches.
+
+    `X-006` states the degeneracy where it matters -- it is the reason the `n = 5` pair is
+    the first control to reach the relation's certificate half at all, since it carries no
+    closure for the merge to hide behind.
+
+    A real fix needs a control with two or more disjoint closure classes, which is a new
+    exact classification rather than a repair.
+  regression: >-
+    `tests/test_identity_relation.py` asserts the degeneracy directly: every retained
+    control with closure data has exactly one closure class, and that class covers every
+    stratum. If a future control adds a second, disjoint class, that assertion fails --
+    and the failure is the good news, because it means the relation has become testable.
+
+    A second test pins the certificate half against a synthetic two-class control, so a
+    future implementation that again discards its certificates is caught.
+  bead: think-6zaz
+  recorded_in: packing/campaign/explorations/X-006-the-discriminating-control-at-n5.md
+- id: D-379
+  title: An operating rule understated its own measured cost by quoting the transcript, not the rollup
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: 'from the OR-3 rewrite on 2026-08-30 until an audit compared it with the rollup'
+  severity: low
+  status: fixed
+  what: >-
+    `OR-3` gained a paragraph pricing the waste it exists to prevent: time spent watching a
+    gate finish. It reported `233.6s` across three `.gate-running` polling calls and "about
+    17% of the session".
+
+    The retained rollup for that same session records `.gate-running` at **four** calls
+    totalling `345.119s`, a test-wait command at three calls totalling `245.602s`, and
+    `wall_seconds: 3187.584` -- so the share is **18.5%**, not 17%. The same commit
+    reported `585.6s across 63 one-off code invocations`; the rollup's `one_off_code` block
+    says `count: 72, total_seconds: 732.861`.
+
+    Both figures were read off the transcript by hand while the rollup that measures them
+    sat in the repository, which is `OR-1` inside the rule that cites `OR-1`'s sibling.
+  consequence: >-
+    Flattering, and pointedly so: every error understated the waste. A rule justified by a
+    number is only as strong as the number, and a reader checking `OR-3` against the rollup
+    would have found the rule's own evidence contradicting its source -- which is the fastest
+    way to make a rule ignorable.
+
+    Nothing downstream consumed the figures, so no other claim moved.
+  fix: >-
+    `OR-3` now quotes the rollup's fields and names the file, and says what the earlier
+    numbers were so a reader who saw them can tell which is current.
+  regression: >-
+    None that runs. `check_synopsis` binds generated blocks and aggregates, not prose in
+    `operating-rules.md`, and a checker that verified a sentence against a YAML field would
+    have to be told which field the sentence means -- the same limit `D-372` records for
+    `README.md` and `TUTORIAL.md`.
+
+    What contains it is narrower and worth stating: a number in a rule should name the
+    artifact it came from, so the next reader can check it in one lookup rather than
+    re-deriving it. That is now true of this paragraph and is the pattern to copy.
+  bead: think-s424
+  recorded_in: operating-rules.md
+- id: D-380
+  title: A superseded CI run reported the required check as a hard failure
+  date: '2026-08-30'
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: anomaly
+  latent_for: 'since packing-required was written; surfaced when pushes became frequent enough to supersede runs'
+  severity: low
+  status: fixed
+  what: >-
+    `packing-validation.yml` sets `cancel-in-progress: true`, so a push while a run is in
+    flight cancels it. The `packing-required` job guarded itself with `always()`, so it
+    still ran against the cancelled `validate` and evaluated
+    `test "$VALIDATE_RESULT" = "success"` against `cancelled`, exiting 1.
+
+    The required check therefore reported a hard failure for a run that had simply been
+    replaced. Twice within ten minutes on 2026-08-30, at `520366d` and `2fd8a8d`, each
+    waking a session to diagnose a red check whose log said only `VALIDATE_RESULT:
+    cancelled`.
+  consequence: >-
+    Not a soundness problem and not flattering -- it errs red, not green. The cost is
+    attention and trust. `OR-3` tells a session to push and keep working rather than wait,
+    which makes supersession routine, so following the operating rule reliably produces
+    false red on the PR. A check that cries wolf is the mechanism by which a real failure
+    gets scrolled past, and the workflow's own header comment already argues that "a check
+    that can never pass teaches everyone to ignore CI".
+  fix: >-
+    The guard is `!cancelled()` rather than `always()`. A cancelled run now reports nothing
+    and the required check stays pending, which is the safe direction; a genuine `validate`
+    failure is not `cancelled()`, so the job still runs and still fails.
+
+    Pending rather than green does not reintroduce the stuck-forever case the header
+    comment warns about, because supersession always starts a replacement run that supplies
+    the check. A run cancelled by hand with no successor leaves the check pending, and that
+    is correct: someone stopped the validation.
+  regression: >-
+    None that this repository can run -- the behaviour is GitHub's job-scheduling
+    semantics, reproducible only by superseding a live run. What replaces a test is that
+    the condition now states its intent, and the next occurrence is visible as an absent
+    check rather than a red one, which is self-describing in a way the failure was not.
+  bead: think-s424
+  recorded_in: .github/workflows/packing-validation.yml
+
+- id: D-381
+  title: The pre-push tier is blind to a test that pins a string in the code it tests
+  date: '2026-08-30'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: 'since --edit was introduced on 2026-08-30; two occurrences the same day'
+  severity: low
+  status: fixed
+  what: >-
+    `--edit` (43s) selects the fast steps that are not `broad`, and `fast behavioral tests`
+    is `broad`, so the edit tier runs no tests at all. That is the deliberate design --
+    `D-369` measured seven CI failures, every one a record check and none a test -- and it
+    is right about record drift. It is wrong about one class it did not anticipate: a test
+    that pins a **literal string emitted by the source under test**. Such a test is not a
+    record check, so no record step sees it, and it is in the excluded step, so the edit
+    tier does not run it either.
+
+    Twice on 2026-08-30, five commits apart:
+
+    - `47059fd` changed the `packing-required` guard from `always()` to `!cancelled()`;
+      `tests/test_module_boundaries.py` pinned the old expression and failed in CI.
+    - `a54797e` added `--since`, which lengthened the `--strict` refusal to name it;
+      `tests/test_validation_cli.py:438` pinned the old sentence and failed four times over
+      at `c9d768c`.
+
+    Both were caught, both cost a CI round trip, and in both cases the code was correct and
+    the pin was stale.
+  consequence: >-
+    Attention, and a specific bad habit. The failing assertion is always in a test the
+    author has just made obsolete, so the fix is always "edit the assertion" -- which is
+    indistinguishable, from inside the moment, from weakening a guard to make it pass. A
+    guard that reliably fails for non-defects is a guard people learn to edit rather than
+    to read.
+
+    It is also a `BC-084` failure of use rather than of construction. `--since` selects
+    every step an unattributed step could be affected by, and `fast behavioral tests` is
+    unattributed, so `packing-validate --since origin/main` would have run the tests and
+    caught both. The instrument existed at the second occurrence and was not used.
+  fix: >-
+    Two changes, neither of which is widening the edit tier.
+
+    The stale pin is replaced by a per-flag assertion: the refusal must name the flag that
+    was passed, rather than read a fixed sentence. That is strictly stronger against the
+    risk the test's own docstring states -- a new tier flag added to the selector and
+    forgotten in the refusal -- and it does not break when the behaviour is extended
+    correctly. `--since` is now parametrized alongside the four flags that were there.
+
+    The habit is fixed by `OR-7`'s neighbourhood rather than by a new tier: `--fast` at a
+    commit boundary, not `--edit`. Widening `--edit` to include the test step would put its
+    529 seconds back and recreate exactly the tier-too-expensive-to-run problem `D-369`
+    records, trading a rare stale pin for a tier nobody runs.
+
+    A refinement, measured the same day by getting it wrong again: `--records` alone is not
+    enough before a push. On 2026-08-30 a push validated only at `--records` failed CI on
+    the type floor, for a `reportPrivateUsage` warning that `--edit` catches in 43 seconds.
+    The tiers divide the work cleanly and the division is worth stating: `--records` (6s)
+    catches record drift, `--edit` (43s) adds lint and types, and only a test pinning a
+    literal the source computes needs `--fast`. The pre-push floor is `--edit`, not
+    `--records`.
+  regression: >-
+    `tests/test_validation_cli.py::test_strict_mode_refuses_a_partial_validation_surface`
+    now parametrizes `--since` and asserts per flag, so a sixth narrowing flag added to the
+    selector and forgotten in the refusal fails here. The class itself is not testable in
+    general: what would have to be checked is that no test pins a literal the source
+    computes, which is a property of every test at once.
+  bead: think-s424
+  recorded_in: packing/tests/test_validation_cli.py
+
+- id: D-382
+  title: A sentence asserted the rigidity its own next paragraph withdrew
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: 'one day, from 2026-08-29 to 2026-08-30'
+  severity: low
+  status: fixed
+  what: >-
+    `BC-063`'s note in `agenda-006` states, in bold, "So Goebel's `n = 5` is infinitesimally
+    flexible and second-order rigid", and continues: "the packing is rigid but not
+    infinitesimally so, a distinction the annotation does not make."
+
+    The retained result it summarises says the opposite about its own reach. `bc-063`'s
+    `claim_boundary` reads: "Both the rank and the walk are numerical, at the retained
+    pose. ... It is consistent with local rigidity and does not establish it." The very next
+    paragraph of the same note agrees, and says the frontier property stays `undetermined`
+    because a rigidity property is a promotion an unattended runner may not make.
+
+    So one paragraph asserts rigidity as established and the next withdraws it. The bold
+    sentence is the quotable one.
+  consequence: >-
+    Small, and entirely about what a reader carries away. The qualification is a paragraph
+    later and survives; nothing downstream consumed the overclaim, and the frontier record
+    correctly reads `undetermined`. But it is the flattering direction, in bold, in the
+    sentence a reader would quote, and this repository's own account of `D-354` is that the
+    danger is a word becoming a finding by being repeated.
+
+    It is also wrong twice over, which is what makes it worth an entry rather than a
+    correction. `X-007` has since established the second-order obstruction exactly, on a
+    verified self-stress rather than a sampled walk -- so the "second-order rigid" half is
+    now true on evidence the note did not have. The "the packing is rigid" half is still not
+    established even with that, because the step from "no arc with nonzero derivative" to
+    local rigidity is a cited semi-algebraic argument that nothing here runs. A sentence can
+    be overtaken by later work in one clause and still be wrong in the other.
+  fix: >-
+    The note is appended to rather than rewritten. Editing a completed agenda's record of
+    what a past session concluded would lose the thing worth keeping, which is that the
+    session concluded it. The appended correction names the two halves separately and points
+    at `X-007` for the one that has since been settled.
+  regression: >-
+    None mechanical, and the honest reason is that no checker can read a bold sentence
+    against a JSON `claim_boundary` two files away. What replaces it is that `X-007` and
+    `bc-049-n5-rigidity-certificates.json` both state the remaining gap in the same words --
+    "no twice differentiable feasible arc leaves this pose with a nonzero derivative", which
+    is not local rigidity -- so the next summary has a phrasing to copy that does not
+    overclaim.
+  bead: think-xdly
+  recorded_in: packing/campaign/agendas/agenda-006-overnight-research-blocks.md
+
+- id: D-383
+  title: A cleanup error in the gate's own lock discarded a completed run's entire report
+  date: '2026-08-30'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: anomaly
+  latent_for: 'since the activity marker was introduced; surfaced the first time two gates overlapped'
+  severity: medium
+  status: fixed
+  what: >-
+    `_validation_activity` takes a directory as a mutual-exclusion lock and releases it with
+    a bare `marker.rmdir()` in a `finally`. If the directory is already gone, that raises
+    `FileNotFoundError` out of the `finally` block, which replaces whatever the run was
+    about to report.
+
+    On 2026-08-30 an operator cleared what they took for a stale `.gate-running` while a
+    `--fast` run held it. All 25 minutes of steps completed; the summary was never printed.
+    The log contained one traceback and nothing else -- no step results, no timings, no pass
+    or fail. The run had to be repeated from the beginning to learn what it had already
+    found.
+  consequence: >-
+    Not a soundness problem and not flattering: it destroys a report rather than falsifying
+    one. The cost is the whole run, and the cost is paid at the end, when the expensive part
+    is already done. `--fast` is the tier `D-381` argues should run at every commit
+    boundary, so this makes the most expensive gate the most fragile one, which is the wrong
+    way round.
+
+    The trigger looks like operator error and partly is. But a lock whose release path can
+    destroy the thing it was protecting is a bug on its own terms: the marker exists to stop
+    two gates running at once, and by the time it is being released this gate is over.
+  fix: >-
+    The release is `with suppress(FileNotFoundError): marker.rmdir()`. Releasing a lock that
+    is already released is not a failure. Acquisition is unchanged and still refuses to
+    start when a marker exists, so nothing about the mutual exclusion is weakened -- only
+    the teardown stops being able to lose a report.
+  regression: >-
+    `test_a_vanished_activity_marker_does_not_discard_the_run` deletes the marker from
+    inside the block and asserts the context manager exits cleanly, which is exactly the
+    sequence that happened. The acquisition half keeps its own test, so the pair pins both
+    directions: a second gate is still refused, and a lost marker is still survivable.
+  bead: think-s424
+  recorded_in: packing/src/sqpack/cli/validate.py
+
+- id: D-384
+  title: A count keyed on id() moved between two identical runs
+  date: '2026-08-30'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: control_cell
+  latent_for: 'two runs, about fifteen minutes'
+  severity: low
+  status: fixed
+  what: >-
+    `devtools/price_row_jet_sharing` decides `BC-038` by counting how many
+    `evaluate_stress` calls share a number field, since an inventory that cannot be shared
+    saves nothing. It keyed that on `id(field)`.
+
+    `id()` is a memory address, and CPython reuses the address of a collected object. Two
+    consecutive runs of the same twenty-four tests reported 11 and then 10 distinct number
+    fields, with `shareable_rebuilds` moving from 19 to 18. Both runs passed all 24 tests
+    and both counted 47 rebuilds and 35 stress calls, so nothing about the work changed; a
+    field built by one test was collected and a later test's field landed on its address.
+  consequence: >-
+    Contained, because the numbers never left the working tree: the tool was run twice
+    before anything was written down, and the disagreement is what surfaced the bug. Had it
+    been run once, a retained record would have carried a count that its own `--check`
+    would then have contradicted at the next run, and the obvious reading of that would
+    have been that the test suite had changed.
+
+    The verdict it supports does not move -- 47 rebuilds against 17 distinct pairs is a
+    1.6x ceiling either way, nowhere near the five-fold the commitment requires -- so this
+    cost a re-run rather than a conclusion.
+  fix: >-
+    An `Identities` map that assigns small integers by `is` comparison and holds a
+    reference to each object it has seen, so an address cannot be recycled underneath the
+    key. Holding about a dozen degree-two fields alive for the length of a run is a
+    rounding error against the row jets being measured, and it is what makes the count a
+    count.
+  regression: >-
+    None mechanical: the tool is not a gate step, deliberately, because its driver is the
+    seven-minute exhaustive-exact group and the decision it supports is taken once. What
+    replaces a test is the practice that caught it -- run a new measurement twice and
+    compare before retaining either answer. That is cheap, it generalizes past this tool,
+    and it is the only reason this was found at all.
+  bead: think-kdil
+  recorded_in: packing/devtools/price_row_jet_sharing.py
+
+- id: D-385
+  title: The composite figure badges rigidity from a hard-coded set and never reads the frontier
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: 'since the figure gained a rigidity badge; surfaced when n=5 acquired first-party evidence'
+  severity: medium
+  status: fixed
+  what: >-
+    `devtools/build_composite_figure_data.py` decides each record's rigidity from `n`
+    alone. A perfect square gets `state: established, basis: perfect-square-tiling`; any `n`
+    in the module-level `CATALOGUE_RIGID = {5, 11, 28, 40}` gets `state: established,
+    basis: catalogue-annotation`; everything else gets `not-established`. The frontier
+    record's own `rigidity` block is never opened.
+
+    Both bases then emit the same badge, glyph `R`, meaning `rigid (established)`, and both
+    count toward the same `rigidity_established` total of 14.
+
+    So the figure says "established" for four packings on the strength of the catalogue
+    printing the word "Rigid.", which is the transcription half of the `D-354` split, and it
+    says it in the same glyph it uses for the ten it derives from an exact tiling.
+  consequence: >-
+    Two errors in opposite directions, from one missing read.
+
+    It over-credits. `n = 28` and `n = 40` have no first-party rigidity evidence at all and
+    their frontier records read `undetermined`; `n = 5` now reads `undetermined` on a
+    first-party exact argument that stops short of local rigidity (`X-007`). The figure
+    badges all three `rigid (established)`.
+
+    It under-credits. `n = 11` carries `E-n011-trump-local-rigidity` at `assurance:
+    verified` -- 128 branchwise linearized cones over an exact field -- and the figure files
+    it under `catalogue-annotation`, crediting Kingbird for this repository's own strongest
+    rigidity result.
+
+    The figure is the most widely seen artifact here, and `established` is exactly the word
+    the field split exists to reserve. The provenance fields are honest and nobody reads
+    them; the glyph is what a reader takes away.
+  fix: >-
+    The figure reads each record's own rigidity block. `established` now means the block
+    says `locally-rigid` and nothing else does, so the count falls from 14 to 11 and
+    `n = 11` is credited to its own `verified` argument rather than to Kingbird.
+    `CATALOGUE_RIGID` is gone: the basis is keyed on the evidence id the record carries,
+    because deciding from `n` what the record already states is the general form of this
+    mistake.
+
+    The annotation is kept rather than deleted, which is the part worth arguing for.
+    Dropping it would lose a fact the corpus holds and would make the figure quieter than
+    the evidence. It is now a `not-established` entry with `basis: catalogue-annotation`, a
+    **muted** `R` badge against the solid one, and its own line in the legend and its own
+    total. Two facts, two glyphs.
+
+    `n = 5` is the case that makes the distinction earn its keep. `X-007` establishes more
+    about it than the catalogue ever said -- an exact one-dimensional infinitesimal cone
+    refused at second order -- and still not local rigidity, so it holds the muted badge
+    while carrying first-party evidence in the frontier.
+
+    Fixing this also surfaced that the preview renderer probed only for `magick`,
+    ImageMagick 7's name, and so refused to regenerate on every Debian and Ubuntu box,
+    which still ship 6 as `convert`. Both are accepted now, and 6 renders the composite at
+    the same 2400x2676 the receipt records.
+  regression: >-
+    `test_the_figure_never_claims_a_rigidity_its_record_does_not_carry` asserts, for all
+    100 entries, that the figure's `established` agrees exactly with the record's
+    `locally-rigid` -- the line whose absence is this entry.
+    `test_a_catalogue_annotation_is_shown_but_never_counted` pins the other half: the three
+    annotated records are `not-established` with a muted badge, the totals count the two
+    kinds separately, and `n = 11` is `first-party-argument` with a solid one.
+  bead: think-xdly
+  recorded_in: packing/devtools/build_composite_figure_data.py
+
+- id: D-386
+  title: A session declared two phases starting an hour and a half after the clock read
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: 'about twenty minutes, until a commit timestamp was read'
+  severity: low
+  status: fixed
+  recurrence_of: D-358
+  what: >-
+    While writing `session-045`, phase 7 was declared `started_at: 10:16Z` with a deadline
+    of `11:06Z`, and phase 8 `started_at: 11:10Z`. The clock read `09:52Z`. Both were
+    inferred from how long the work had felt rather than read, and the inference ran about
+    an hour and a quarter fast over four phases.
+
+    The mechanism is the one `D-358` records: elapsed time estimated between tool calls
+    rather than measured. `D-358`'s own fix said the practice change is to "read `date -u`
+    at every block boundary", which is what this session stopped doing after the first two
+    boundaries.
+  consequence: >-
+    Small in itself and caught within the same session -- the phase records were corrected
+    against the commit timestamps before anything was pushed. What makes it worth an entry
+    is that it is `D-358` happening again, in the artifact whose whole purpose is to tell a
+    later session what happened, one day after `D-358` was written and while its `fix` field
+    was still describing the practice that would have prevented it.
+
+    That is the `D-010` and `D-017` shape: the second occurrence is evidence that a practice
+    change without a check is not a fix. It is also why this is not filed as flattering --
+    the error made the run look slower than it was, not faster.
+  fix: >-
+    `devtools/check_session_clocks`, a records-tier gate step, refuses a session artifact
+    that declares a start time later than the moment of checking. A phase cannot have begun
+    after the record of it was written, which is the exact shape of both occurrences.
+
+    Where the line is drawn is the part that took the thinking. Phases running backwards
+    looked like an obvious second refusal and is not: `session-044`'s phase 7 begins
+    thirteen minutes before phase 6 because it ran as a delegated lane against a worktree
+    and was integrated afterwards. Position in the file is authoring order, not wall-clock
+    order, and no field separates them -- so that is printed with the reason rather than
+    failed. The check found that case on its first run, which is also how the line got
+    drawn correctly.
+  regression: >-
+    `tests/test_session_clocks.py` -- nine tests, including one asserting the refusal has no
+    grace period at one second, and one asserting a backwards pair is reported and not
+    refused. Two entries in `devtools/controls.yaml` mutate a real session record and watch
+    the guard complain. The gate step runs in `--records` at `0.17s`.
+  bead: think-s424
+  recorded_in: packing/devtools/check_session_clocks.py
+
+- id: D-387
+  title: A rule survived in one carried reminder and was dropped by the next
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: 'four commits, about ninety minutes'
+  severity: low
+  status: fixed
+  what: >-
+    `campaign/agent-sessions/README.md` gives the session checkpoint sequence and says, in
+    as many words, "Do not use `git add -A` in a shared checkout." Four commits in this
+    session used it: `581fabf`, `3b1c306`, `a69efe0` and `bf009f0`.
+
+    The same README's sequence also ends `tbd update <owning-bead> --notes ...` and `tbd
+    sync`, which this session had not run for any of the five commitments it advanced.
+
+    Neither omission was a decision. This is an unattended run that carries its own context
+    forward in a periodic reminder it writes for itself, and an earlier reminder in this
+    session did carry the staging rule. A later one, rewritten to make room for newer
+    state, did not. The rule was not overruled; it fell out of a summary.
+  consequence: >-
+    None from the staging itself, and that is checked rather than assumed: every path in
+    all four commits was inspected afterwards and every one was intentional. No scratch
+    file, no marker directory, nothing unreviewed. The rule exists because that outcome is
+    not guaranteed, not because it failed here.
+
+    The bead omission cost more. Five commitments advanced with their trackers left at
+    checkpoints from 2026-08-26, so `tbd show` would have told the next session that
+    `BC-024` was still mid-census while the taxonomy was retained and gate-checked. That is
+    the same shape as `D-374`, in the tracker rather than in the agenda queue.
+  fix: >-
+    Both practices resumed: staging by explicit path, and `tbd update` plus `tbd sync` for
+    all five beads with the checkpoint evidence and the exact next action.
+
+    The interesting half is the mechanism rather than the rules. A run that compresses its
+    own context every twenty minutes will drop something every time it rewrites, and what
+    it drops is invisible precisely because the reminder is the only place the dropped rule
+    was. So the reminder now names its sources -- `operating-rules.md`,
+    `AGENTS.md`, and the session README's checkpoint sequence -- rather than restating
+    them, which makes a dropped rule a broken pointer instead of a silent absence.
+  regression: >-
+    None automatic, and the honest reason is that the check would have to read a summary
+    the repository never sees. What replaces it is the pointer discipline above, plus the
+    fact that the session README is now named in the reminder that carries this session
+    forward. `D-358` and `D-386` are the same family one level down: a practice with no
+    check decays, and the fix that is only a practice change is the fix that recurs.
+  bead: think-s424
+  recorded_in: packing/campaign/agent-sessions/README.md
+
+- id: D-388
+  title: A rationalization that was exhaustive at one size answered the wrong system at another
+  date: '2026-08-30'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: control_cell
+  latent_for: 'since assess_n5_rigidity was written the same day; caught the first time it met a second pose'
+  severity: high
+  status: fixed
+  what: >-
+    `assess_n5_rigidity.rationalize` scales a constraint row by `sqrt 2` when every entry is
+    a pure multiple of it, and leaves the row alone otherwise. At `n = 5` that dichotomy is
+    exhaustive: 16 rows are wholly rational and 4 are wholly irrational, and an adversarial
+    review checked exactly this and found nothing to report.
+
+    It is not exhaustive in general. Goebel's `n = 40` construction, built exactly in the
+    same field, has **296 of 608 rows carrying both a rational and a `sqrt 2` part**. No
+    positive scalar rationalizes such a row, so the rational-weight Farkas search was
+    solving a different system from the one the motion cone is defined by.
+
+    It solved it, and answered. Run on `n = 40` before this was noticed, the assessor
+    reported all 120 coordinates unpinned and no certificate anywhere.
+  consequence: >-
+    The dangerous direction, in the most direct way this repository has a name for. "No
+    Farkas certificate for this coordinate" is rendered by the assessor as `uncertified`,
+    and a reader reaches "not pinned", which reaches "there is a motion". A silent
+    limitation would have manufactured an infinitesimal flex at every size whose contact
+    normals mix the two parts -- which is to say at every size but the one it was written
+    for.
+
+    Nothing was published from it: the failure appeared the first time the tool met a second
+    pose, which was about ninety minutes after it was written, and the number it produced
+    was never recorded anywhere. What makes it worth a `high` severity is not what it cost
+    but what it would have cost: `X-007`'s whole argument is that a cone of dimension zero
+    means rigid, and this is the mechanism by which that argument reports a nonzero cone
+    from arithmetic rather than from geometry.
+  fix: >-
+    `MixedRowError`, raised by `row_scales` before any search runs. A row it cannot
+    rationalize now stops the assessment with the count and the first offending index,
+    rather than being handed to a linear program that will answer regardless.
+
+    Refusing is the fix rather than a step toward one. Handling mixed rows properly needs a
+    Farkas search whose weights live in the ordered field instead of in `Q` -- a different
+    instrument, not a patch -- and until that exists the honest behaviour is to say so.
+  regression: >-
+    Two tests, and the pair is the point. `test_a_mixed_row_is_refused_rather_than_answered`
+    builds the `n = 40` pose and asserts the refusal fires;
+    `test_the_n5_dichotomy_really_is_exhaustive_there` asserts `n = 5` has no mixed row at
+    all, which is why nothing caught this and why the `n = 5` result is unaffected. A guard
+    without the second test would leave open whether the first size was ever safe.
+  bead: think-xdly
+  recorded_in: packing/devtools/assess_n5_rigidity.py
+
+- id: D-389
+  title: A route was priced without asking whether its destination was already reachable
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: 'about thirty minutes, and a year in the record it inherited'
+  severity: medium
+  status: fixed
+  what: >-
+    `BC-049`'s remaining instances are `n = 28` and `n = 40`, and the record said of both
+    that no exact construction was retained and that producing one was the price of
+    extending the rigidity machinery. This session priced that: it measured what the
+    promotion route -- extract a contact structure, close the system, manufacture digits,
+    run the margin rule -- would cost at each, found the route unusable at the retained
+    precision, and recorded a typed refusal.
+
+    Every measurement in it is sound and the conclusion was wrong for half its subject.
+    Goebel's construction for `n = 40` is **published**, and transcribed in this repository:
+    `[Friedman DS7]` section 2 gives the centred diagonal block family, `2a^2 + 2a + b^2`
+    squares in side `a + 1 + b/sqrt(2)`, which at `a = 3, b = 4` is exactly forty squares in
+    `4 + 2 sqrt(2)`. The retained witness is a materialisation of it -- all eighty
+    coordinates fit `p + q sqrt(2)` with half-integer `p` and `q`, the angles are exactly
+    `0` and `45`, and the only error anywhere is one `6.04e-31` truncation of the side.
+
+    The route was never needed. `cases/gobel40` now builds the pose exactly and the exact
+    verifier accepts it: 40 squares, 780 pairs, 48 corner coordinates exactly on the
+    boundary, 98 pairs at zero gap.
+  consequence: >-
+    Conservative rather than flattering -- it understated what was reachable, and would have
+    left `n = 40` recorded as blocked on work nobody needed to do. The cost is the block
+    itself and the older statements it inherited: `BC-063`'s note in `agenda-006` and
+    `X-007`'s closing section both said neither size had an exact construction retained, and
+    both were reasoning about the repository rather than about the mathematics.
+
+    The general shape is worth naming because it is not specific to packing. A commitment
+    said "produce X"; the session asked "what does producing X cost by the route we have",
+    measured that carefully, and never asked "is X already available by a route we are not
+    thinking of". A well-measured answer to the wrong question is harder to notice than a
+    badly measured one, because the numbers are all correct.
+  fix: >-
+    `cases/gobel40/packing.py` builds the construction from Goebel's rule rather than from
+    the witness -- the frame is derived by removing from a thirty-six position lattice the
+    twelve the diagonal block occupies, computed exactly, so the witness stays a check
+    rather than becoming the source. `cases/gobel40/verify_exact.py` replays it, runs the
+    duplicated-square negative control, and asserts agreement with the retained witness to
+    that witness's own truncation. Both are in the `exact verification` gate step.
+
+    The price record is corrected rather than deleted: its measurements stand, its refusal
+    now names `n = 28` alone, and it carries why `n = 40` never needed the route.
+  regression: >-
+    The gate step is the mechanical part. The methodological part has no check and the
+    honest thing is to say so: what would have caught this earlier is reading the retained
+    literature for the case before pricing machinery against it, and the archive search that
+    did catch it was a delegation, not a rule. `H-038`'s instrument clause already asks for
+    field invariants of record packings; `n = 40` is now one of the few sizes that can
+    supply one.
+  bead: think-xdly
+  recorded_in: packing/cases/gobel40/packing.py
+
+- id: D-390
+  title: An incidence was read as a contact, and the difference is a false constraint
+  date: '2026-08-30'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: control_cell
+  latent_for: 'since assess_n5_rigidity was written the same day; caught the first time it met a pose with edge-to-edge neighbours'
+  severity: high
+  status: fixed
+  what: >-
+    `assess_n5_rigidity.active_contacts` emitted a constraint row for every corner lying
+    exactly on the *segment* of another square's edge, and `_on_edge` accepts a corner
+    landing on either **endpoint** of that segment. Incidence is not contact. A host edge
+    holds two squares apart only if the whole moving square lies on its outer side, and an
+    endpoint incidence routinely fails that.
+
+    Two squares sharing a full edge are the ordinary case. At centres `(1/2, 1/2)` and
+    `(3/2, 1/2)` the only separating line is `x = 1`; the first square's corners `(1, 0)`
+    and `(1, 1)` nonetheless land on the endpoints of the second's bottom and top edges, so
+    the assessor emitted rows asserting that the first square may not move down and may not
+    move up. It may do both, and nothing overlaps.
+
+    At `n = 5` every incidence is a genuine contact -- each corner rests at the *midpoint*
+    of a middle-square edge -- so all four pair rows are real and the assessment is
+    unaffected. Goebel's `n = 40` has **208 of its 560 pair rows** merely incident.
+  consequence: >-
+    Flattering, and by the same mechanism as `D-388` running the other way. Extra rows
+    shrink `{x : Ax >= 0}`, so coordinates come back pinned that the geometry does not pin,
+    and the pose reads as more rigid than it is. Run on `n = 40` with the spurious rows in
+    place, all 120 coordinates certify; with them removed and nothing else changed, the
+    honest system is 400 rows rather than 608.
+
+    Nothing was published from it. `n = 5` is the only pose this assessor has produced a
+    retained claim about and it has none of these rows, so no frontier record moves. What
+    earns `high` is the counterfactual: `X-007` reads a zero-dimensional cone as rigidity,
+    and this is a way for that cone to collapse from bookkeeping rather than from geometry.
+  fix: >-
+    `separating(pose, host, edge, moving)` -- every corner of the moving square on the outer
+    side of the host edge, decided by exact sign -- and `active_contacts` now keeps only the
+    pair incidences that pass it. The raw relation stays available as `incident_contacts`,
+    so the gap between the two can be counted rather than merely asserted.
+
+    Wall incidences are all kept and that asymmetry is the point: containment is a
+    conjunction, so a corner in the container's bottom-left is genuinely held by both walls,
+    where a pair is held apart by an axis or it is not held at all.
+  regression: >-
+    `test_an_incidence_is_not_a_contact` asserts the `n = 40` split (560 incident pair rows,
+    352 separating) and that the specific edge-to-edge pair contributes rows on one axis
+    only; `test_n5_has_no_merely_incident_row` asserts `n = 5`'s four pair incidences all
+    separate, which is why that result stands. The second test is the one that matters: a
+    filter without it would leave open whether the first size was ever safe.
+  bead: think-s424
+  recorded_in: packing/devtools/assess_n5_rigidity.py
+
+- id: D-391
+  title: A tangent cone that is a union of half-spaces was intersected
+  date: '2026-08-30'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: control_cell
+  latent_for: 'since assess_n5_rigidity was written the same day; the principle was already written down in X-007 and in two other instruments'
+  severity: high
+  status: outstanding
+  what: >-
+    Two squares meeting at a single corner are held apart by **two** independent axes, and
+    non-overlap asks that *either* keep separating: `a_1 . x >= 0` **or** `a_2 . x >= 0`.
+    The linearized feasible set is a union of half-spaces, which is not a polyhedron. The
+    assessor built one row per axis and intersected them.
+
+    Squares at `(1/2, 1/2)` and `(3/2, 3/2)` touch at one point and may separate along `x`
+    or along `y`. Requiring both forbids motions that overlap nothing. `n = 5` has no such
+    pair -- all four of its contacts are a corner on the interior of an edge -- and Goebel's
+    `n = 40` has **42 of its 98 touching pairs**.
+
+    The repository already knew this twice over. `screen_translation_escape.ActiveContacts`
+    preserves the union explicitly ("the OR inside a group and the AND across groups are the
+    whole geometry of the question"); `cases/trump11/tangent_cones.py` decides `n = 11` by
+    enumerating 128 branchwise cones rather than intersecting; and `X-007` states the
+    principle in prose, then argues `n = 5` is exempt from it. All three are right. The
+    assessor was written without either guard, and the exemption was never turned into a
+    check.
+  consequence: >-
+    Flattering, and at `n = 40` the flattery is not hypothetical: **it inverts the answer.**
+    That pose has an infinitesimal motion -- all sixteen squares of the tilted block turning
+    together, each about its own centre, at exactly zero gap rate against every contact that
+    holds in all branches. At the pairs that touch at a corner it gives up one separating
+    axis and keeps the other -- which is all non-overlap asks -- and it only has to do that
+    at 24 of the 42; at the remaining 18 both axes stay admissible. An assessor that
+    intersects reads the 42 given-up rows as violations and certifies all 120 coordinates as
+    pinned, which is to say it reports the packing infinitesimally rigid. It is not.
+
+    So this defect is the reason `n = 40` looked rigid, and removing it is what found the
+    witness. `n = 5` is unaffected and no retained record moves in either direction: an
+    infinitesimal flex is not a motion, and along this one every gap curves shut at order
+    `t^2`, so `n = 40`'s `rigidity` block stays `undetermined` and the catalogue's
+    annotation is not contradicted.
+  fix: >-
+    Contained rather than removed. `DisjunctiveContactError`, raised by
+    `require_intersection_semantics` before any search runs, so the `n = 5` assessor refuses
+    a pose whose tangent cone is not an intersection instead of answering it. `n = 5` passes
+    the guard because it has no such pair.
+
+    `devtools/assess_n40_rigidity.py` is the instrument that handles the union rather than
+    refusing it, and it does so without enumerating branches. Candidate motions come from
+    the null space of the rows every branch carries -- exact, no rounding -- and a candidate
+    is a motion exactly when every disjunctive pair still has an axis that separates along
+    it, which names an admitting branch directly. That is one search rather than `2^42`.
+  regression: >-
+    `test_a_disjunctive_pose_is_refused_rather_than_answered` builds `n = 40` and asserts
+    the guard fires with the 42-pair count; `test_n5_has_no_disjunctive_pair` asserts
+    `n = 5` has none. The pair is the point again: the guard is only meaningful alongside
+    evidence that the size it was written for never needed it.
+
+    `test_intersecting_the_disjunctions_reports_the_pose_rigid` is the one that keeps the
+    cost visible. It asserts that the intersecting model certifies all 120 coordinates and
+    that the witness gives up exactly 42 rows, so a change that quietly reinstated the
+    intersection would fail while looking like it had started agreeing with the source.
+  bead: think-s424
+  recorded_in: packing/devtools/assess_n5_rigidity.py
+
+- id: D-392
+  title: A size cutoff meant for generated blobs went blind on a source file that grew
+  date: '2026-08-30'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: gate
+  latent_for: 'about two hours, and it would have been permanent'
+  severity: medium
+  status: fixed
+  what: >-
+    `test_no_undeclared_consumer_reads_the_field` sweeps the repository for files naming
+    `verified_upper_bound` and fails if one is not on the declared-consumer list. It skips
+    files over `512 KiB`, on the reasoning that anything that large is a generated view
+    rather than prose someone wrote.
+
+    `packing/defects.yaml` is not generated, and on 2026-08-30 it crossed that line: at
+    `541,903` bytes it stopped being scanned. It is a declared consumer, so the *other*
+    assertion in the same test -- that no declared consumer has gone stale -- fired, and
+    that is the only reason this was noticed at all.
+    The class is `validity` rather than `soundness` on the definitions this log uses: the
+    code is correct and nothing false about the mathematics was asserted -- the sweep simply
+    stopped bearing on one file. It is `flattering` because the direction of that blindness
+    is toward reporting nothing wrong.
+  consequence: >-
+    Flattering, and quietly so. The half that failed is the harmless half; the half that
+    went silent is the guard. Any new mention of `verified_upper_bound` in `defects.yaml`
+    would from then on have gone undeclared without the sweep saying anything, which is
+    exactly the conflation the contract exists to stop -- and `D-367`, the defect that
+    cites this contract as its nearest guard, lives in that same file.
+
+    The general shape is a heuristic that decides what to look at by a proxy for what it
+    means. "Large" stood in for "generated", and a source file grew. Nothing announced the
+    change of category, because a threshold crossing never does.
+  fix: >-
+    A declared consumer is scanned however large it has grown. The cutoff still applies to
+    everything else, where it is doing the job it was written for: guessing about files
+    nobody has classified. A file that has been classified is not a guess.
+  regression: >-
+    The failing assertion is its own regression and it is the one that caught this, so what
+    is added is the reason rather than another check: the exemption carries the measured
+    date and size in a comment, so the next person to tighten the cutoff can see that a
+    real file crossed it once.
+  bead: think-s424
+  recorded_in: packing/tests/test_verified_upper_bound_contract.py
+
+- id: D-393
+  title: The pre-push floor does not run tests, and CI stayed red for seventy-five minutes
+  date: '2026-08-30'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: 'seventy-five minutes and four pushes'
+  severity: medium
+  status: contained
+  what: >-
+    `D-381` established `--edit` as the pre-push floor after a push validated only by
+    `--records` went red. The floor holds for what it covers -- lint, types, record drift --
+    and it does not run the test step at all, because `fast behavioral tests` is `broad` and
+    `broad` is precisely what `--edit` drops.
+
+    So a change that breaks a test passes the floor. Three did: a `broad` flag whose pinned
+    inventory was not updated, a marker declared without its measured cost, and `D-392`.
+    CI went red at `26ace33` and stayed red across `307c1ba`, `0b7051d` and `9dd96ed`.
+
+    The wake events were delivered. Six of them, naming the failing check each time, and
+    none was read for seventy-five minutes because the session was mid-slice and treating
+    notifications as interruptions rather than as the signal they are.
+  consequence: >-
+    Neutral in the record -- nothing false was published, and the three failures were a
+    stale pin, an undeclared marker and a blind sweep. The cost is time and trust: four
+    pushes went out on a branch whose gate was failing, and the session did not know.
+
+    What makes it worth an entry is that the floor is now understood to be two things and
+    was being used as one. `--edit` answers "is this well-formed"; only `--fast` and above
+    answer "does it still work". A change that touches a test, a marker, or a gate step's
+    flags is in the second category and the floor cannot see it.
+  fix: >-
+    Contained rather than fixed, because the tiers are right and the discipline was wrong.
+    `--edit` stays the floor for prose and record edits. A change to `tests/`, to a `Step`'s
+    flags, or to a pytest marker needs the affected test file run directly before pushing,
+    and a wake event naming a failed check is read before the next push rather than after
+    the next slice.
+
+    Widening `--edit` to include the test step would make the floor a ten-minute wait and
+    the measured consequence of that is in the `broad` docstring already: a tier priced at
+    the cost of its widest step is a tier people skip, which is `D-369`.
+  regression: >-
+    None mechanical, and that is the honest state. The two pinned inventories that broke
+    here -- the `broad` set and the `exhaustive_exact` declaration -- are themselves the
+    regression tests for their own kind of drift, and they worked: they failed the moment
+    the flags moved. What failed was reading them in time.
+  bead: think-s424
+  recorded_in: packing/tests/test_validation_cli.py
+
+- id: D-394
+  title: A contract sweep counted its own guard's filename as a use of the field
+  date: '2026-08-30'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: 'since the sweep was written; it needed a document that cites the guard to show'
+  severity: low
+  status: fixed
+  what: >-
+    `test_no_undeclared_consumer_reads_the_field` sweeps the repository for files naming
+    `verified_upper_bound` and requires each to be a declared consumer, so that nobody uses
+    the field without saying what they take it to mean.
+
+    The guard's own file is called `test_verified_upper_bound_contract.py`, and any document
+    that *cites* it therefore contains the string. `defects.md` renders every defect's
+    `recorded_in` as a link and `D-392` is recorded in that file; a session record listed it
+    as evidence for a phase. Both then read as consumers of a field neither makes any claim
+    about.
+  consequence: >-
+    Conservative -- it over-reports, and the failures were loud rather than silent. The cost
+    is churn and the direction it points: the honest response to each hit is a new
+    `DECLARED_CONSUMERS` line, so the list grows by an entry every time anyone refers to the
+    test, and a list that grows for reasons unrelated to its purpose stops being read.
+
+    That is the same argument `DECLARED_CONSUMER_TREES` already makes in this file for
+    generated trees, applied one level down. It was worth noticing that the rule had a
+    second instance rather than answering the symptom twice.
+  fix: >-
+    The sweep strips its own stem before searching. A document that discusses the field
+    still matches, because discussing it means writing the name somewhere other than inside
+    a filename; a document that merely cites the guard no longer does.
+
+    The `defects.md` entry added an hour earlier is removed with it -- it was the symptom,
+    and leaving it would have failed the same test's stale-consumer half.
+  regression: >-
+    The stale-consumer assertion, which now covers this: had the `defects.md` declaration
+    been left in place alongside the fix, that assertion would have caught it immediately.
+    The two halves of this test check each other, which is why it found both `D-392` and
+    this.
+  bead: think-s424
+  recorded_in: packing/tests/test_verified_upper_bound_contract.py
+- id: D-395
+  title: An unattended run stopped on a budget it had set for itself
+  date: '2026-08-30'
+  layer: record
+  class: robustness
+  detected_by: review
+  latent_for: 'about ninety minutes, until the user asked why the run had ended'
+  severity: high
+  status: fixed
+  recurrence_of: D-358
+  what: >-
+    The instruction was "I'm leaving you in autonomic mode tonight... make sure that this
+    completes uninterrupted all the way through morning... and don't stop." The run
+    planned itself into blocks against a 510-minute wall target, and the plan was sound.
+
+    The clocks were right this time -- that was D-358's failure, not this one. What
+    happened instead is that the run reached the end of its own plan and treated that as
+    a stop condition. At 15:21Z it wrote itself a reminder saying "both sessions are
+    closed and the wall budget is spent... IF GREEN: nothing more to do. Do not start new
+    work", and at 15:32Z, once CI went green, it deleted that reminder. Nothing was armed
+    after that. The self-written 20-minute continuity pings had fired without a gap from
+    03:37Z to 15:21Z -- twenty-one of them, every one re-armed -- so the mechanism worked
+    for eleven and three-quarter hours and then was switched off by hand.
+  consequence: >-
+    The run ended with the mandate unmet and the agenda still carrying three ready
+    commitments. That is the visible cost. The worse one is the shape: a budget the agent
+    invented for itself was allowed to override an instruction the user gave in words,
+    and the reason recorded for stopping ("the wall budget is spent") reads like a
+    constraint that was met rather than a decision that was made. That is the same
+    flattering direction D-358 names, arrived at by a different route -- there, a
+    misread clock; here, a correctly-read clock measuring the wrong authority.
+
+    The mechanism failure is separable, and it has a precise first cause that is worth
+    more than the judgement failure. At 07:02:03Z the run tried to arm a recurring
+    `*/20 * * * *` trigger and the platform refused it: "the minimum interval is 1 hour".
+    The run read that as *cron is unusable here* -- it said so, "cron floors at one hour,
+    so a self-re-arming 20-minute reminder it is" -- and fell back to a chain of
+    one-shots, deleting the last recurring trigger it held nineteen seconds later.
+
+    The refusal did not say cron was unusable. It said cron had a one-hour floor, and a
+    floor is exactly what was needed. An hourly recurring trigger with the 20-minute
+    chain layered on top was available the whole time and costs nothing extra; the
+    category error was treating "too coarse to be the only device" as "not a device".
+
+    That is what made 15:32Z terminal rather than recoverable. `send_later` is one-shot,
+    so an unbroken chain of re-arms depends on the agent choosing to re-arm at the end of
+    every single turn, and one turn concluding "we are done" ends the run permanently
+    with no later turn to reconsider. A continuity device that any single judgement can
+    switch off is not a continuity device -- and here the redundant one had been declined
+    eight hours earlier, on a misreading.
+  fix: >-
+    Three things, in increasing order of how much they are worth.
+
+    A self-declared budget is not a stop condition, written into `operating-rules.md` as
+    OR-8. Only the user, an external blocker, or exhausted work stops a run under an
+    explicit continue mandate; reaching the end of a plan means planning the next slice.
+
+    The continuity device no longer depends on the agent re-arming it. A recurring cron
+    trigger fires on its own schedule whether or not the previous turn thought the work
+    was finished, so a turn that wrongly concludes "done" is corrected an hour later
+    instead of being final. The one-shot chain stays as the fine-grained ping; the cron
+    is the floor under it.
+
+    Deleting the continuity trigger is now the one action requiring an explicit user
+    instruction, because it is the only irreversible one -- every other wrong call
+    self-corrects at the next firing.
+  regression: >-
+    None automated, and this is worth stating plainly rather than dressing up: no gate
+    can catch an agent deciding it is finished, because the decision produces no artifact
+    to check. The recurring trigger is a mechanism, not a detector -- it does not notice
+    the mistake, it just makes the mistake survivable. OR-8 is a rule, and this log's own
+    evidence (D-010 and D-017, six days apart) is that a rule without a check recurs.
+
+    The honest status is therefore: the failure mode is contained by redundancy, not
+    prevented. What would make it detectable is a session record that declares its
+    mandate alongside its wall target, so a run recorded as complete against an open-ended
+    mandate is a refusable state rather than a judgement call. That is not built.
+  recorded_in: packing/campaign/agent-sessions/README.md
+- id: D-396
+  title: A case's rigidity block could claim verified over numerical evidence
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: 'since the rigidity block gained assurance and method fields'
+  severity: medium
+  status: fixed
+  what: >-
+    `check_evidence_semantics` enforces this project's central contract -- verified means
+    formal, a numerical method cannot support verified assurance, and a machine-formal
+    method requires a certificate and a replay -- on every record in `evidence.yaml`.
+    The case-level `rigidity` block in `frontier/n-*.md` was the one first-party claim
+    that escaped it.
+
+    `check_case_semantics` resolved the block's evidence ids and checked their scope
+    reached this `n`, and stopped there. The schema requires only
+    `[property, assurance, scope, evidence]`, leaves `method`, `certificate` and `replay`
+    optional and nullable, and couples none of them. So the block's own assurance-method
+    pair was validated by nothing but two independent enums.
+
+    Four claims were accepted against the retained `n = 65` case, each verified by
+    mutating only the rigidity block: `verified` with a numerical method; `verified` with
+    no method at all; `verified` / `exact-algebraic` with null certificate and null
+    replay; and the one that matters, `verified` / `exact-algebraic` resting on evidence
+    that is `numerically-checked` at `tolerance: 1e-8`.
+  consequence: >-
+    Nothing false is on the record -- all hundred cases satisfy the contract as they
+    stand, and the ten perfect-square blocks that leave `certificate` and `replay` null
+    delegate to `E-perfect-square-tiling-rigid`, which carries both and whose argument is
+    elementary and complete. The defect is the missing guard, not a wrong claim.
+
+    What makes it worth a record rather than a quiet fix is which direction it was open
+    in. Every claim the gap admitted overstates; none understates. And it was found while
+    asking whether `n = 65` and `n = 89` could be promoted from `numerical-multiprecision`
+    to `exact-algebraic` -- which is to say, the check that should have adjudicated that
+    promotion was the check that was not running. Editing the frontmatter would have been
+    accepted, and the resulting record would have read `verified` while resting on a
+    tolerance.
+  fix: >-
+    `_check_rigidity_claim` in `sqpack/assurance.py` holds the block to the same pairing
+    rules as an evidence record, and adds the one the block needs and a record does not:
+    a `verified` block requires at least one cited evidence record that is itself
+    `verified` and covers this `n`. A claim may no longer outrank what it rests on.
+
+    Certificate and replay are satisfied by the block *or* by a cited verified record,
+    because both conventions are in use and both are legitimate -- `n = 5`, `11` and `40`
+    name the artifacts on the block; the ten perfect squares delegate. The guard requires
+    one of the two rather than picking a winner, which is the smaller change and the one
+    that adds no retroactive debt.
+  regression: >-
+    `tests/test_frontier_rigidity_claim_contract.py`, seven cases. Six assert the guard
+    refuses each accepted claim above; one asserts all hundred retained cases still pass,
+    so the guard is shown to add no debt rather than asserted to. The seventh closes the
+    delegation loophole directly: it strips `certificate` and `replay` from
+    `E-perfect-square-tiling-rigid` and requires that `n = 9` then fails, so delegation
+    means the artifacts exist somewhere rather than that nobody looks.
+  recorded_in: packing/tests/test_frontier_rigidity_claim_contract.py
+- id: D-397
+  title: Two more sub-agents reported valid Python 3.14 as a syntax error
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: 'two reports in one session, both caught before anything was acted on'
+  severity: medium
+  status: fixed
+  recurrence_of: D-358
+  what: >-
+    A sub-agent investigating the assurance contract opened its report with a warning
+    marked read-this-first: that `sqpack/assurance.py:163` is committed with Python-2-only
+    syntax (`except InvalidOperation, KeyError:`), that `ast.parse` refuses it, that the
+    contract's only checker therefore cannot run, and that this is masked by a stale
+    `.pyc` whose recorded source mtime and size it quoted to four significant figures.
+
+    All of it is false, and it is false for the reason `OR-2` already names three times:
+    [PEP 758](https://peps.python.org/pep-0758/) makes unparenthesised multiple exception
+    types valid, and this project runs Python 3.14. The system `python3` on `PATH` is
+    older and refuses the line; the project interpreter at `.venv/bin/python3` (3.14.7)
+    parses it. Deleting every `__pycache__` in the tree and importing fresh from source
+    works, which disposes of the stale-bytecode account as well.
+
+    A second sub-agent, running concurrently on a different question, opened its report
+    with the same claim about the same file -- reached independently and confirmed against
+    `/usr/bin/python3.12`, which it named. It listed the broken import as obstacle one of
+    sixteen and concluded that "the entire assurance-contract enforcement layer is
+    currently dead code".
+
+    So this session produced occurrences four and five. Two agents, different tasks,
+    different reasoning paths, the same wrong interpreter, the same false headline. The
+    error is not a lapse by one agent; it is what the environment produces by default,
+    because `python3` on `PATH` resolves to something older than the project's own.
+  consequence: >-
+    None, because the operating rules said to check it. `OR-2` records this exact error at
+    `session-044` and twice more at `session-045`, so both reports were verified against
+    the project interpreter before anything was acted on.
+
+    The cost had it been believed is the thing to weigh: the recommended action was to
+    treat a working contract checker as non-functioning, which would have meant "fixing"
+    correct code and disbelieving every guarantee downstream of it. That is the
+    conservative direction -- it refuses something sound rather than accepting something
+    false -- but a false alarm delivered with quoted mtimes and a read-this-first banner
+    is more expensive than an ordinary one, because the specificity is what earns the
+    belief.
+  fix: >-
+    The project's Python version and this precise trap are now stated in `AGENTS.md`,
+    under Build & Test. That file is the only one guaranteed to be in context before an
+    agent's first tool call, which is the property this needs: three prior recurrences
+    were all documented in `operating-rules.md`, and a sub-agent that never reads it
+    makes the mistake a fourth time.
+
+    The rule stated there is mechanical rather than a caution: run Python through
+    `uv run --frozen` or `.venv/bin/python3`, never the `python3` on `PATH`, because the
+    two disagree about what parses. A caution would have to be remembered; an instruction
+    about which command to type does not.
+
+    Five occurrences is also enough to say what the tell is. Every one of them arrived as
+    a confident headline finding rather than a hedge, and the two here came with
+    corroborating detail -- a named interpreter version, quoted `.pyc` mtimes -- that made
+    them read as more thoroughly checked, not less. Specificity is what earned the belief,
+    and it was specificity about the wrong interpreter.
+  regression: >-
+    None automated, and none is possible from inside this repository -- the failure
+    happens in a sub-agent's reasoning about a file, not in the file. What changed is
+    where the fact lives: `operating-rules.md` is read when an agent chooses to read it,
+    `AGENTS.md` is in context before the first tool call. Whether that is enough will be
+    visible in whether a fifth recurrence happens.
+  recorded_in: AGENTS.md
+- id: D-398
+  title: Three cases declare a mathematical blocker the repository has already cleared
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'n = 40 since session-045 closed; n = 65 and n = 89 since session-046 closed'
+  severity: medium
+  status: fixed
+  what: >-
+    `n = 40`, `n = 65` and `n = 89` each carry the identical typed blocker in their
+    frontier record: `kind: mathematics`, detail "No formal certificate currently supports
+    the tighter reported upper bound." Each also keeps `verified_upper_bound` at the
+    integer grid ceiling -- `7`, `9` and `10` -- cited to `E-basic-grid-upper`.
+
+    All three certificates exist and are in the gate. `cases.gobel40.verify_exact` decides
+    780 pairs by exact sign over `Q(sqrt 2)` with 48 corner coordinates exactly on the
+    boundary; `cases.gobel_family.verify_exact` does the same for 2080 pairs at `n = 65`
+    and 3916 at `n = 89`. A feasible packing at side `s`, decided exactly, is precisely a
+    proof that `s(n) <= s`. So a formal certificate does support the tighter reported
+    bound at all three sizes, and has since the sessions that built them closed.
+
+    `kind: mathematics` is the wrong kind for what remains. The mathematics is done; what
+    is missing is an evidence record naming the certificate and the replay, which is
+    bookkeeping.
+  consequence: >-
+    Conservative, and that is the only reason it is medium rather than high: the record
+    understates what this repository can certify rather than overstating it. `n = 40`'s
+    verified ceiling reads `7` where `4 + 2 sqrt(2)` is approximately `6.83`, and the gap
+    the record calls a mathematical one is a paperwork one.
+
+    Two costs follow. A reader deciding where the frontier's open problems are is pointed
+    at three sizes that are not open in the way the blocker claims. And the assurance
+    machinery does not catch it: `assurance.py` makes the blocker two-sided -- removing it
+    before the bounds agree raises "formal upper trails report without a blocker", leaving
+    it once they agree raises "stale formal-upper-gap blocker" -- but both arms compare the
+    record's own two bound fields to each other. Neither asks whether a certificate exists
+    that the record has not been told about, so a certificate can land and the blocker
+    stays quietly true-looking.
+  fix: >-
+    Two evidence records, not three: `E-n040-gobel-upper` for `n = 40`, and
+    `E-gobel-family-upper` scoped to `[65, 89]`, because one replay of
+    `cases.gobel_family.verify_exact` decides both and a record per size would have claimed
+    two independent checks where there is one. Both `verified` / `exact-algebraic`,
+    certificate the case package, replay its `verify_exact`.
+
+    Then, per size and atomically, since `assurance.py` refuses either half alone:
+    `verified_upper_bound` moved off the integer grid onto the exact side, its `exact_form`
+    matching the reported bound's string exactly and its value the exact side rounded to
+    the witness's own depth; the new record added to `reported_upper_bound.evidence`; the
+    blocker emptied; and the "verified upper bound is a ceiling" section deleted.
+
+    The trailing-ceiling count in `tests/test_verified_upper_bound_contract.py` falls from
+    33 to 30, carrying the reason rather than just the number, and `frontier/README.md`'s
+    "33 of the 100 cases" follows it. `devtools/price_gobel_family.py` was stale in the
+    same direction and by the same cause -- it still printed "exact and unbuilt at
+    [65, 89]" about constructions the gate was running -- so its `[5, 40]` literal is now
+    a named `BUILT_HERE` constant carrying why it drifted.
+
+    One asymmetry is worth carrying into that work rather than rediscovering. Each retained
+    witness is its exact side *correctly rounded* to the digits it carries -- not truncated
+    -- so which way it lands depends on the omitted tail and is not the same at every size.
+    At `n = 40` and `n = 65` the rounding goes up, putting the witness `6.04e-31` and
+    `4.80e-33` above the exact side, and the exact construction fits inside it. At `n = 89`
+    it goes down, putting the witness `3.27e-33` *below* `5 + (7/2) sqrt(2)`.
+
+    So `n = 89`'s exact construction does not fit inside its own retained decimal, and its
+    promotion cannot be a relabelling: an exact claim at the witness's declared side would
+    be false. It must carry a side and coordinates computed from the construction. Nothing
+    is currently wrong -- both records are `numerical-multiprecision` at `tolerance: 1e-8`
+    and `3e-33` is far inside that -- but the promotion is the operation that would make it
+    wrong.
+  regression: >-
+    `devtools/check_certificate_citations.py`, run by the gate step "exact certificates are
+    named by their records" in the `--records` tier. Every existing check reads a frontier
+    record against its own fields, which is why none of them could see a certificate the
+    record was never told about; this sweep runs the other way. Each
+    `cases/*/verify_exact.py` declares `CERTIFIES`, the sizes it decides, and each of those
+    sizes must reach an evidence record whose `certificate` lies in that package.
+
+    An undeclared `CERTIFIES` is a refusal rather than a skip, so a new case package cannot
+    opt out by staying silent -- which is the failure mode a sweep like this usually has.
+    The declaration is read with `ast` rather than by importing, because `verify_exact`
+    modules set `getcontext().prec` when they run and a checker that mutated process-global
+    decimal precision as a side effect of counting files would be its own defect.
+
+    `tests/test_certificate_citations.py`, five cases. The load-bearing one reconstructs the
+    state the repository was actually in: remove `E-n040-gobel-upper` from the evidence map
+    and `n = 40` reaches nothing citing `cases/gobel40`, which is exactly what the sweep
+    must refuse.
+
+    The trailing-ceiling count, now `30` in a test that calls itself a measurement, is a
+    tripwire rather than a check: the next promotion fails that assertion and has to say
+    why. That is deliberate, and it is weaker than the sweep.
+  bead: think-xdly
+  recorded_in: packing/frontier/n-040.md
+- id: D-399
+  title: A residual's explanation had the sign backwards, and called a rounding a truncation
+  date: '2026-08-30'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: 'since cases/gobel40 was written, and inherited by cases/gobel_family'
+  severity: low
+  status: fixed
+  what: >-
+    `cases/gobel40/verify_exact.py` measures the gap between its exact construction and the
+    retained `n = 40` witness, gets `6.0384e-31`, and explains the number: the witness's
+    "side is written to thirty digits and falls short of `4 + 2 sqrt(2)` by exactly that
+    amount". It named the constant `WITNESS_TRUNCATION` and printed the residual as "the
+    witness's own truncation".
+
+    Three things are wrong with that. The witness is the exact side *correctly rounded*,
+    not truncated -- truncating would give `...841` where the record has `...842`. The
+    rounding therefore goes **up**, so the witness sits `6.0384e-31` *above* the exact
+    value rather than falling short of it. And the side carries twenty-nine fractional
+    digits, not thirty.
+
+    `cases/gobel_family/verify_exact.py` inherited the vocabulary: its constant is named
+    `WITNESS_ROUNDING` and its body says "rounding", but the first line of its docstring
+    says "the witnesses' own truncation", contradicting both.
+  consequence: >-
+    Nothing computed is affected. The tolerance is a magnitude, the comparison is
+    two-sided, and every test passes either way; this is prose about a number rather than
+    the number.
+
+    It is worth a record because of what the wrong sign describes. A witness rounded *down*
+    sits below the exact side, and the exact construction then does not fit inside the
+    witness's own declared side -- which is a real constraint on what may be claimed, not a
+    curiosity. `gobel40`'s docstring asserted precisely that situation and it was false
+    there; the situation is genuinely true at `n = 89`, and `cases/gobel_family` treated
+    both its sizes symmetrically ("`4.81e-33` and `3.28e-33`") while one is above and the
+    other below. So the one place the direction actually bites was the place no document
+    mentioned it.
+  fix: >-
+    Both docstrings state the direction per size and derive it from the omitted tail rather
+    than asserting it. `WITNESS_TRUNCATION` is renamed `WITNESS_ROUNDING` to match what it
+    measures and what the other module already called it, and the runtime line printing
+    "the witness's own truncation" says "rounding".
+
+    `cases/gobel_family` gains the asymmetry explicitly: `n = 65` rounds up and its
+    construction fits inside the witness; `n = 89` rounds down and its construction does
+    not, so that record cannot be promoted by relabelling. `gobel40` carries a
+    cross-reference to it, since the safe case is where a reader is most likely to
+    generalise the wrong way.
+  regression: >-
+    None automated. The claim is a direction stated in prose about a number the module
+    already computes and prints, so a check would have to parse the sentence. What replaces
+    it is that both modules now derive the direction from the tail rather than asserting
+    it, and that the one consequence of a downward rounding -- `n = 89` cannot be promoted
+    in place -- is written where the promotion would be attempted, in `D-398`'s fix field
+    and in the module that builds it.
+  recorded_in: packing/cases/gobel_family/verify_exact.py
+- id: D-400
+  title: A blocker denied a certificate the register held, and two guards let it
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'since 2026-08-29, when the interval certificate was recorded'
+  severity: medium
+  status: fixed
+  recurrence_of: D-398
+  what: >-
+    `D-398` was found by accident, so a sub-agent swept every declared blocker, limitation
+    and `replay_status` in the repository for the same shape. Two more turned up, and the
+    second is the same defect one register over.
+
+    `n = 029`'s blocker read "no formal certificate currently supports the tighter Kingbird
+    report at 5.93383346267692". `E-n029-interval-certified-upper` is `assurance: verified`,
+    `replay_status: passed`, and proves `s(29) <= 5.93383346267692918974379895098` -- which
+    agrees with the report at the fourteen digits the report is stated to. It was cited by
+    no case file at all: measured across the register, 30 of 31 evidence records are cited
+    by some case, and that one was the exception.
+
+    `D-355` was the other. It read `status: outstanding`, `fix: "Unbuilt"`, and
+    `regression: "None yet"` for a change-scoped gate selector that has existed since
+    `BC-084`: `select_for_paths` maps changed paths through a `touches` field on all 52
+    steps, and `tests/test_change_scoped_selection.py` -- ten passing cases whose header
+    names `D-355` itself -- is the regression it says does not exist.
+  consequence: >-
+    Conservative in both cases, and both point a reader at open problems that are not open.
+    But the sharper cost is what they say about the guards.
+
+    The certificate-citation sweep written hours earlier for exactly this class does not
+    catch `n = 029`. It walks `cases/*/verify_exact.py`, and this certificate is a witness
+    file, so nothing keyed on `cases/` could reach it. A guard built from one instance
+    matched the instance rather than the class.
+
+    And `check_synopsis`'s defect-count check searched for the number loose in the whole
+    document. The synopsis states the count twice, so the first sentence could read `400`
+    against a dataset of `399` and the check would still find the `399` in the second and
+    pass. That is not a hypothetical: it happened during this very fix, to a careless
+    one-line `sed`, and the gate reported the synopsis as agreeing.
+  fix: >-
+    `n = 029` cites the certificate in its evidence roster, and the blocker now says what
+    is true: a formal certificate does reach the reported value, and the bound has not
+    moved to it because it is interval-certified rather than exact-algebraic -- resting on
+    directed rounding in a library that is not itself formally verified -- and has had no
+    independent review. That is a decision to revisit, not an absence of evidence, and
+    saying so is the whole correction. Whether to move `verified_upper_bound` onto an
+    unreviewed interval certificate is a judgement this does not make.
+
+    `D-355` is `fixed`, with its `fix` and `regression` fields replaced by what was
+    actually built and what actually pins it.
+
+    Both guards are generalised rather than patched. `orphaned_evidence` requires every
+    record that is `verified`, has passed its replay, and names a certificate to be cited
+    by some frontier case -- regardless of where the certificate lives, which is the form
+    that covers witness files and case packages alike. And `referenced_evidence` walks
+    every block carrying an `evidence` list rather than the three it started with, since a
+    sweep that reads a subset reports a citation as missing when it is merely elsewhere,
+    and a guard that cries wolf gets switched off. The synopsis count is anchored to the
+    sentence that states it.
+  regression: >-
+    Three cases in `tests/test_certificate_citations.py`: that no verified, replayable,
+    certificate-bearing record is cited by nothing; that removing `n = 029`'s citation
+    makes the sweep say so; and that evidence refs are found in all five places the schema
+    puts them. The anchored synopsis check was verified by reproducing the exact `sed` that
+    defeated the old one -- it now fails, naming the sentence.
+
+    What none of this covers is a blocker whose claim is false for a reason no artifact
+    contradicts. Both instances here were findable because the thing said to be missing
+    existed as a record; a blocker that misdescribes mathematics nobody has filed remains
+    a matter of reading it.
+  recorded_in: packing/frontier/n-029.md
+- id: D-401
+  title: The queue guarded against over-claiming readiness and not against hiding it
+  date: '2026-08-30'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'about eight hours, from the commit that completed its last predecessor'
+  severity: low
+  status: fixed
+  what: >-
+    `BC-025` read `state: blocked` with `depends_on: [BC-023, BC-019]`, both complete since
+    that morning, and an empty `blocked_on`. The map's generator noticed and printed it:
+    "1 blocked commitment have every predecessor complete ... so `BC-025` is takeable now."
+
+    It is not takeable, and both reasons check out. `H-047` carries
+    `instrument_ready: false`: of the three pieces it names, the class-bracketing quench
+    and the D4-and-relabeling matcher are built, and the regularizer that snaps intra-chunk
+    contacts to exact is not written anywhere. And the declared inputs are missing for most
+    of the sweep -- across `BC-025`'s seven instances a non-record endpoint pose is
+    retained for `n = 5` and `n = 10` only, so `n = 11, 17, 18, 28` and `29` have none at
+    all, the quench-family results having kept scalars and dropped the pose.
+
+    So the state was right and the record was silent about why, which left a coordinator
+    two equally wrong readings: take a cell that cannot be worked, or leave a cell that
+    looks available with no reason not to.
+  consequence: >-
+    Small in itself -- one cell, and an autonomous run would have bounced off
+    `runner.py`'s own refusal on `instrument_ready: false` before wasting much. The
+    structural half is worth more.
+
+    `ledger.py` refuses a `ready` commitment whose dependencies are incomplete. Nothing
+    refused a `blocked` one whose dependencies were all complete. The queue was guarded
+    against over-claiming readiness and entirely unguarded against under-claiming it, and
+    only one of those two mistakes is visible to someone reading the agenda for work.
+
+    The generator had the detection and stopped at reporting, which is the recurring shape
+    of this whole day: `D-398`'s stale-blocker check, `D-400`'s orphaned certificate, and
+    this. A condition worth printing is a condition worth refusing, and the gap between
+    those two is where a record sits wrong for as long as nobody happens to read the line.
+  fix: >-
+    `BC-025` states both blockers in `blocked_on`, so the reason is where a reader and the
+    generator both find it. `violations` in `render_agenda_map.py` now refuses a blocked
+    cell whose every predecessor is complete and which says nothing about why -- either it
+    is takeable and the state is wrong, or the real blocker is unwritten, and both are
+    defects.
+
+    Two things found while fixing it. The generator pluralised the noun conditionally and
+    not the verb, so a single cell rendered "1 blocked commitment have"; and the test
+    covering this branch carried a docstring asserting that no real cell was in that state,
+    which was true when written and false within the day -- and could not fail, because the
+    assertions run against a synthetic queue. A statement about real data, in a test that
+    never reads it.
+  regression: >-
+    `test_a_blocked_cell_whose_edges_all_cleared_must_say_why` in
+    `tests/test_agenda_map.py`, driven by a synthetic queue in both directions: silent
+    refuses, `blocked_on` present passes. Verified against the real tree by stripping
+    `BC-025`'s new `blocked_on` and confirming the refusal fires on it and on nothing else.
+
+    The stale docstring is replaced by a note saying what happened rather than a fresh
+    claim about the queue, since the lesson is that a test asserting facts about data it
+    does not read cannot notice when they stop being true.
+  bead: think-r45s
+  recorded_in: packing/devtools/render_agenda_map.py
+- id: D-402
+  title: A contact structure was read out of padding and reported as a result
+  date: '2026-08-30'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: gate
+  latent_for: 'one commit, about twenty minutes, caught by CI before anyone relied on it'
+  severity: high
+  status: fixed
+  what: >-
+    `BC-049`'s exit accepts a typed refusal for `n = 28`: no case module, no retained
+    contact structure, no provenance artifact, so the first step is a higher-precision
+    source. All three clauses are true. This run argued the inference from them was not --
+    `n = 11`'s minimal polynomial came from four hundred *manufactured* digits rather than
+    from its 32-digit witness, so precision can be built rather than sourced, and what
+    building it needs is the contact structure.
+
+    Extraction then appeared to supply one: 32 pair contacts, 40 corner-on-wall, nothing
+    undecided at floor `1e-80`, and 41 decades between the largest contact and the smallest
+    strict separation. That was written up, frozen into
+    `atlas/known-best/contact-structures.json`, recorded in the agenda as the refusal
+    failing, and pushed.
+
+    It was an artifact. The witness carries 57 fractional digits in its side; the
+    extraction materialised at 200 and classified incidences at a floor of `1e-80`. What
+    decided at that floor was the materialisation's padding, not the pose.
+  consequence: >-
+    Flattering, and it named itself a result. It made an open question look opened, and it
+    did so on the one commitment whose whole subject is whether a claim rests on evidence
+    of our own.
+
+    `devtools/price_exact_construction.py` already measured this exact question, correctly,
+    and its verdict was in the repository the whole time: it materialises at the witness's
+    own digits plus a margin rather than a flat count, sweeps floors, and reports 27 pair
+    contacts at `n = 28` rather than 32. Its prose says the deciding floors "sit below the
+    retained precision, which makes them windows on the materialisation's padding". That
+    sentence is a description of the mistake, written before it was made.
+
+    The calibration in that tool is what settles the question, and is why it sweeps at all.
+    At `n = 29` the retained structure is known from a 160-digit provenance artifact -- 52
+    pair and 37 wall -- and the decimal route reports 17 and 36. A route that reproduces
+    neither known answer cannot have its numbers at an unknown size read as structure. The
+    run had that control available and did not run it before reporting.
+  fix: >-
+    The `n = 28` entry is removed from the contact-structure generator and the artifact
+    regenerated, because a structure that measures padding is worse than none: the pricing
+    tool treats presence in that file as a retained structure and calibrates against it, so
+    leaving it would have corrupted the control that catches this.
+
+    `BC-049` records the challenge and its refutation rather than being reverted to
+    silence. The reasoning was tempting enough to be worth leaving visible next to why it
+    fails, and the refusal now says what it is -- a statement about what the retained
+    decimals can support, not a gap waiting for the extractor to be run harder.
+  regression: >-
+    `price_exact_construction --check`, already a gate step, which is what caught this: the
+    added entry changed its calibration count from two sizes to three and the frozen
+    pricing no longer matched. The detector existed and worked; nothing needed building.
+
+    What is not covered is the actual error, which was choosing a materialisation precision
+    unrelated to the record's own. `extract_contacts` takes a floor and a pose and has no
+    way to know the pose was padded to reach it. A guard would have to compare the
+    requested floor against the digits the witness declares and refuse a floor below them.
+    That check does not exist, and this is the argument for it.
+  bead: think-xdly
+  recorded_in: packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md
+- id: D-403
+  title: The negative controls do not run on a pull request, so stale ones accumulate unseen
+  date: '2026-08-30'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: 'unknown; at least six controls were already stale when this was found'
+  severity: medium
+  status: contained
+  what: >-
+    `.github/workflows/ci.yml` runs `packing-validate --fast` on `pull_request` and the full
+    gate only off it. `Step("negative controls", ...)` carries neither `fast` nor `records`,
+    so it runs in the full gate alone. A branch can therefore be green on every push for its
+    whole life while its controls rot, and the rot only surfaces after merge.
+
+    Six of a hundred and fifty were not firing when this was checked. One is squarely this
+    session's: the control proving `apparently-novel` needs a dated `source_reviewed`
+    anchored on the whole literal field block of `E-n011-repaired-lower`, and inserting
+    `novelty_basis` into the middle of that block left the anchor matching nothing. Two
+    `gate selection` controls anchor a `touches=(...)` tuple in its one-line form, which the
+    formatter has since wrapped. Two agenda-map controls no longer match their blocks, and
+    one is masked by a link that resolves in the repository but not inside the
+    packing-scoped snapshot the runner builds.
+  consequence: >-
+    A control that does not fire is worse than an absent one, because the suite reports a
+    count that reads as coverage. The runner is what saves this: it distinguishes "failed
+    with the expected message" from "failed, but not with the expected message" and reports
+    an unmatched anchor rather than skipping, so the information was sitting in a log
+    nobody had run on this branch.
+
+    The direction is the same one this branch kept finding. Something noticed the condition
+    and printed it; nothing refused it, and nothing on the pull-request surface even looked.
+  fix: >-
+    The novelty control is re-anchored on a span that does not move: the record's own
+    `limitations` line, which is unique to it, paired with the `source_reviewed` it is meant
+    to remove. Pinning every field between two points made the control hostage to any field
+    added in between, which is exactly what happened.
+
+    The tier placement is left alone deliberately and this is recorded `contained` rather
+    than `fixed`. The controls take about half an hour, and moving them onto the
+    pull-request surface would push that surface past the point where it gets run at all --
+    `D-366` and `D-381` are both about that boundary. What is missing is not a faster suite
+    but a cheap check that every control's anchor still matches, which would run in
+    `--records` and catch this class in seconds without executing a single mutation.
+  regression: >-
+    None yet, and the bead carries the shape: an anchor-resolution check over
+    `devtools/controls.yaml` that asserts each `replace` source appears exactly once in its
+    declared file, without running the control. That is a `--records` step, and it turns
+    "the control fired for the wrong reason" from something a reader must notice in a
+    thirty-minute log into a refusal.
+  bead: think-xdly
+  recorded_in: packing/devtools/controls.yaml

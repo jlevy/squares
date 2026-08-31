@@ -109,12 +109,21 @@ controls:
   run: python3 -m devtools.render_operating_rules --check
   expect: "AGENTS.md's summary has drifted"
 
+# The injected id must be EXACTLY one past the highest real rule. Not one behind, which is
+# a duplicate, and not far ahead, which is a gap -- the renderer refuses both on contiguity
+# before it can notice the drift this control is about, and a control that fails for the
+# wrong reason is what `expect` exists to catch.
+#
+# This has now bitten three times: OR-8 added while this injected OR-8, OR-9 the same, and
+# then an attempt to end the recurrence by jumping to OR-900, which failed on 2026-08-31
+# with "rule ids are not contiguous from OR-1: ... OR-9, OR-900". There is no id that
+# survives a new rule, so bump this one and the gap control below whenever a rule is added.
 - name: operating rules - a new rule never reaches the summary
   file: ../operating-rules.md
   replace:
     - "<!-- This document follows common-doc-guidelines.md."
     - |-
-      ## OR-8: Never push to a branch other than the designated one
+      ## OR-10: Never push to a branch other than the designated one
 
       <!-- This document follows common-doc-guidelines.md.
   run: python3 -m devtools.render_operating_rules --check
@@ -122,7 +131,7 @@ controls:
 
 - name: operating rules - a gap in the rule numbering is not renumbered silently
   file: ../operating-rules.md
-  replace: ["## OR-6: Plan multi-hour", "## OR-9: Plan multi-hour"]
+  replace: ["## OR-6: Plan multi-hour", "## OR-10: Plan multi-hour"]
   run: python3 -m devtools.render_operating_rules --check
   expect: "rule ids are not contiguous from OR-1"
 
@@ -547,10 +556,15 @@ controls:
   run: python3 -m devtools.validate_schemas
   expect: "previously-published evidence must name its source_key"
 
+# Anchored on this record's own limitations line, which is unique to it, rather than on
+# the whole field block. The block form broke the moment `novelty_basis` was inserted into
+# the middle of it: the control stopped firing and reported "anchor appears 0 times", which
+# is a control testing nothing until someone reads the run.
 - name: frontier - novelty claimed without a dated source review
   file: frontier/evidence.yaml
-  replace: ["    novelty: apparently-novel\n    relationship_to_generator: independent-implementation\n    origin: replayed-here\n    source_key: '[Stromquist 2003]'\n    certificate: campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json\n    replay: uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json\n    replay_status: passed\n    limitations: Proves the lower bound with a source-distinct repair; it does not repair the printed source proof.\n    source_reviewed: '2026-08-24'\n",
-            "    novelty: apparently-novel\n    relationship_to_generator: independent-implementation\n    origin: replayed-here\n    source_key: '[Stromquist 2003]'\n    certificate: campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json\n    replay: uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json\n    replay_status: passed\n    limitations: Proves the lower bound with a source-distinct repair; it does not repair the printed source proof.\n"]
+  replace:
+    - "    limitations: Proves the lower bound with a source-distinct repair; it does not repair the printed source proof.\n    source_reviewed: '2026-08-24'\n"
+    - "    limitations: Proves the lower bound with a source-distinct repair; it does not repair the printed source proof.\n"
   run: python3 -m devtools.validate_schemas
   expect: "apparently-novel evidence requires a dated source_reviewed"
 
@@ -1112,3 +1126,109 @@ controls:
   run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
   expect: "the probe stopped short of the degree its digits reach"
   timeout_seconds: 300
+
+# --- the exact grid replay, after it moved out of the schema step (D-370) ---
+# BC-077 moved this replay from `soft-schema validation` into `exact verification`.
+# A move that quietly stops a check is exactly the under-run the tier work is written
+# against, and the move is invisible in the timings that motivated it -- the step got
+# faster either way. These two controls are the difference between knowing it still
+# fires and assuming it does.
+- name: exact grid replay - a grid too small to hold its squares is still caught
+  file: devtools/check_basic_bounds.py
+  replace: ["    side = root if root * root == n else root + 1", "    side = root"]
+  run: uv run --frozen python -m devtools.check_basic_bounds
+  expect: "exact grid witness replay failed"
+
+- name: exact grid replay - the step that now owns it actually reaches it
+  file: devtools/check_basic_bounds.py
+  replace: ["    side = root if root * root == n else root + 1", "    side = root"]
+  run: uv run --frozen packing-validate --only "exact verification"
+  expect: "exact grid witness replay failed"
+  timeout_seconds: 300
+
+# The agenda map is generated from every agenda's frontmatter and is the document a
+# session reads to pick a slice. Two ways it can lie: the table drifts from the records,
+# or a commitment's state changes and the map keeps the old one. Both are rehearsed.
+- name: agenda map - the map drifts from the agendas it is generated from
+  file: campaign/agenda-map.md
+  replace: ["## Live queue", "## Live queue (edited by hand)"]
+  run: python3 -m devtools.render_agenda_map --check
+  expect: "is stale"
+
+- name: agenda map - a commitment changing state never reaches the map
+  file: campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md
+  replace:
+    - |-
+      - id: BC-081
+          purpose: tool_validation
+          owner_focus: process
+          instances: [3, 5, 29]
+          state: complete
+    - |-
+      - id: BC-081
+          purpose: tool_validation
+          owner_focus: process
+          instances: [3, 5, 29]
+          state: ready
+  run: python3 -m devtools.render_agenda_map --check
+  expect: "is stale"
+
+# D-374: the queue offered four finished commitments as takeable, because a discharge
+# was prose in a later agenda and nothing read it. Both refusals that replaced the prose
+# are rehearsed here -- neither is a report the renderer can be talked past.
+- name: agenda map - a discharged commitment is offered as takeable again
+  file: campaign/agendas/agenda-005-symbolic-promotion-and-identity.md
+  replace:
+    - |-
+      state: complete
+          discharged_by: BC-053
+    - |-
+      state: ready
+          discharged_by: BC-053
+  run: python3 -m devtools.render_agenda_map --check
+  expect: "not takeable"
+
+- name: agenda map - a blocked commitment waits on nothing observable
+  file: campaign/agendas/agenda-002-constructive-enumeration-groundwork.md
+  # BC-016 was once the only commitment here carrying `blocked_on`; BC-025 now does too,
+  # so the bare key matches twice and the control stopped firing (D-403). Anchored on the
+  # id as well, which is what the old comment assumed rather than stated.
+  replace: ["    blocked_on: >-\n      Retained input poses and symbolic active-cell rows", "    unrelated_note: >-\n      Retained input poses and symbolic active-cell rows"]
+  run: python3 -m devtools.render_agenda_map --check
+  expect: "unobservable"
+
+# BC-084: change-scoped selection may run too much and may never run too little. The
+# reachability check is the only thing standing between a mistyped glob and a step that
+# silently stops being selected, so it is rehearsed failing.
+- name: gate selection - a step's patterns stop matching anything real
+  file: src/sqpack/cli/validate.py
+  # The mutation must replace the WHOLE tuple: leaving `*_CORE` in place keeps the step
+  # matching probe paths, so a minimal anchor makes this fire for the wrong reason --
+  # which is exactly what happened when it was first repaired. Multi-line by necessity,
+  # and check_control_anchors is what catches the source being reformatted under it.
+  replace:
+    - "        touches=(\n            *_CORE,\n            \"packing/frontier/*\",\n            \"packing/devtools/assess_frontier_rigidity.py\",\n            # `SCREEN` is atlas/known-best/translation-escape-screen.json, and the pinned\n            # rigid/not-rigid/undetermined counts are exactly what changing it moves.\n            \"packing/atlas/known-best/*\",\n        ),\n"
+    - "        touches=(\"packing/frontier/no-such-file-anywhere\",),\n"
+  run: uv run --frozen --quiet python -m pytest tests/test_change_scoped_selection.py -q
+  expect: "match no probe path"
+
+- name: gate selection - an unclaimed path stops widening the selection
+  file: src/sqpack/cli/validate.py
+  # Anchored on the guard alone. The return it guarded was wrapped by the formatter, and
+  # pinning both lines made the control hostage to that (D-403).
+  replace: ["    if unclaimed:\n", "    if False:\n"]
+  run: uv run --frozen --quiet python -m pytest tests/test_change_scoped_selection.py -q
+  expect: "failed"
+
+# --- session clocks (D-358's missing regression, built after it recurred as D-386) ---
+- name: session clock - a phase declaring a start it could not have read
+  file: campaign/agent-sessions/session-044-agenda006-continuation.md
+  replace: ["    started_at: '2026-08-29T14:33:00Z'", "    started_at: '2099-01-01T00:00:00Z'"]
+  run: python3 -m devtools.check_session_clocks
+  expect: "ahead of now"
+
+- name: session clock - a deadline no run could fit in
+  file: campaign/agent-sessions/session-044-agenda006-continuation.md
+  replace: ["    started_at: '2026-08-29T11:49:50Z'", "    started_at: '2026-08-29T23:59:00Z'"]
+  run: python3 -m devtools.check_session_clocks
+  expect: "deadline is not after its own start"

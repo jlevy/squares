@@ -150,10 +150,99 @@ tbd sync
 ```
 
 Do not use `git add -A` in a shared checkout.
-The coordinator substitutes the phase’s recorded validation command for
-`<focused-validation>` before the sequence and inspects every staged path before
-committing. A session checkpoint is durable only when its commit is on the recorded
-remote branch and the session’s next action identifies any remaining work.
+
+## Closing a Session
+
+The checkpoint sequence above is per-phase.
+Bringing a whole session to a terminal state adds two steps, and neither is optional.
+
+**First, write the rollups and list them.** One record per log: the outer agent’s, and
+every sub-agent it spawned.
+
+```shell
+# From packing/.
+uv run --frozen --all-extras --group dev python -m devtools.close_session \
+    --update --log <session-log>.jsonl --agent-logs <sub-agent-log>.jsonl ...
+```
+
+Then list what that wrote in the session record’s `resource_rollups`,
+repository-relative.
+`devtools.log_rollup` is what `--update` calls and is still there for a single log, but
+the sub-agent sweep is where reconstructing by hand went wrong twice in one afternoon,
+which is the reason `--update` exists.
+
+**Second, render.** This is the step that turns the rollups into something a reader
+sees:
+
+```shell
+uv run --frozen --all-extras --group dev python -m devtools.close_session --render
+```
+
+It rewrites [`session-close-report.yaml`](../session-close-report.yaml) and the
+`## Sessions Conducted` block in [`SYNOPSIS.md`](../../../SYNOPSIS.md), then prints the
+branch cost block for the pull request.
+**Run it before opening or updating the PR, and lead the description with what it
+prints** — that is `OR-9`, and the ordering is not a preference: the block is a function
+of the rollups, so it is wrong until step one is done.
+`--check` runs both comparisons in `packing-validate --records`, so a stale report or a
+hand-edited synopsis block fails the gate rather than going unnoticed.
+
+**Why this is a required field and a gate step rather than a line in a checklist.**
+Session-045 ran twenty-three phases without the rollup being written once, and nothing
+noticed: no field was empty, no check failed, and the session closed clean.
+The omission was invisible because there was no link at all between a session and its
+usage — rollups are named by harness log id, sessions by their own sequence number, and
+nothing joined the two.
+`OR-1` says the answer to a recurring measurement gap is a tool rather than a better
+memory, so `devtools.check_session_rollups` refuses a terminal session that declares
+none and the gate step `terminal sessions name what they cost` runs it in `--records`.
+
+Three things worth knowing when you do it:
+
+- **The rollup is regenerated, not appended.** A record is a function of the log it
+  names, so re-running the command on a session that has since grown replaces the
+  record. Run it at the end, not part-way through, or run it again if you do.
+
+- **Sub-agent transcripts are where the delegated cost lives**, and they are separate
+  logs. Session-045’s sixteen of them carry work that does not appear in the outer log at
+  all. Attribute them by comparing each rollup’s `span` against the session’s window
+  rather than by memory; the outer log may span more than one session, in which case
+  each names it.
+
+- **Sessions numbered below `session-045` predate the field** and the checker lists them
+  as grandfathered rather than skipping them silently.
+
+- **The reverse direction is reported, not refused.** `check_session_rollups` asks
+  whether every declared rollup exists; `close_session` also asks whether every rollup
+  on disk is declared by some session.
+  Ten currently are not, and all ten are legitimate — their spans fall in sessions that
+  closed before the field existed.
+  That is why it prints them with their dates rather than failing: an unattributed cost
+  is worth seeing and is not by itself a defect.
+
+- **`close_session --render` is what closing a session produces**, and it writes two
+  views of one join: [`session-close-report.yaml`](../session-close-report.yaml), one
+  validated entry per session, and the generated block under `## Sessions Conducted` in
+  [`SYNOPSIS.md`](../../../SYNOPSIS.md).
+  `--check` refuses either having drifted and runs in `--records`; `--update`
+  regenerates rollups from logs and is the whole of backfill, since a retained log
+  turning up needs a run rather than a code change.
+
+- **Never total by adding sessions.** Sessions share harness logs — four declare the
+  current one in full, which is correct of each of them — so adding their figures counts
+  a shared log once per claimant.
+  Measured on 2026-08-30: 117.9 hours for a campaign that had spent 43.7. Every total in
+  the report is over *distinct* rollups, and the shared log is shown on its own row so
+  the per-session column still adds up.
+  The tool infers no owner for an unclaimed rollup, which is a different question from
+  the span comparison above: use spans to decide what *your* session declares, and let
+  the unclaimed ones stay counted separately rather than assigned to whichever window
+  happens to contain them.
+
+  The coordinator substitutes the phase’s recorded validation command for
+  `<focused-validation>` before the sequence and inspects every staged path before
+  committing. A session checkpoint is durable only when its commit is on the recorded
+  remote branch and the session’s next action identifies any remaining work.
 
 Do not infer that the generic numerical runner is admissible because
 `packing-campaign preflight` passes.
@@ -176,6 +265,48 @@ Their v2 rows are retrospective reconstructions from durable evidence, not proof
 the workflow, focus, clock, or transition was declared at the time.
 Missing historical phase timing remains unknown rather than receiving invented
 precision.
+
+### What May End a Run
+
+The rollup above is what a session does when it legitimately ends.
+This is when that is.
+
+Under an open-ended mandate — “don’t stop”, “through the night”, “until it’s done” —
+three things end a run: the user says so, an external blocker makes progress impossible,
+or the agenda is exhausted.
+A plan running out is not one of them.
+The plan is an estimate the run wrote for itself, and its end is a cue to plan the next
+slice.
+`OR-8` in [`operating-rules.md`](../../../operating-rules.md) is the rule; this is
+the mechanism it needs.
+
+**Take the hourly floor even though an hour is too coarse.** The recurring-trigger
+interval is floored at one hour, and the run that produced `D-395` read that refusal as
+*cron is unusable here* and fell back to a chain of one-shots alone.
+It says one hour is the *floor*, which is what a floor is for: arm the hourly recurring
+trigger and layer the finer ping on top of it.
+Declining the coarse device because it is coarse leaves nothing underneath the fine one.
+
+**Arm a recurring trigger, not a chain of one-shots.** `send_later` fires once, so a
+chain of them is exactly as long as the first turn that concludes the work is finished —
+and that turn has no successor to reconsider it.
+A recurring trigger fires on its own schedule regardless of what the last turn decided.
+Keep the one-shot as the fine-grained ping if it helps; the recurring one is the floor
+under it, and it is the floor precisely because no single judgement can remove it.
+
+**Deleting the recurring trigger needs the user to ask for it.** Every other bad call in
+the loop gets another firing to be corrected.
+This one does not, which puts it with the irreversible actions rather than the routine
+ones.
+
+[`D-395`](../../../defects.md) is what this costs when it is left to memory: a run with
+eleven and three-quarter hours of unbroken twenty-minute pings, every one re-armed by
+hand, that then wrote itself a note reading “the wall budget is spent … do not start new
+work” and deleted it.
+The clocks were accurate — that was [`D-358`](../../../defects.md)’s failure, not this
+one. What went wrong is that a budget the run invented was allowed to outrank an
+instruction the user gave in words, and “budget spent” went into the record looking like
+a constraint that had been met.
 
 ### Cycle Time Is Reported, Not Tolerated
 

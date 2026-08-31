@@ -333,24 +333,30 @@ Send promoted, novel, disputed, or otherwise high-risk claims through W2 before 
 move forward. A routine W6 result whose preregistered guards and independent replay
 already decide its stated criterion need not open a ceremonial review phase.
 
+The research cell at `n = 28` and `n = 40` stays open, and know what it costs before
+taking it: that slice is not an assessment but an **exact construction**. `X-007`
+settled `n = 5` because Göbel’s construction is exact; the other two retain decimal
+witnesses of the kind measured `2.4e-30` off the diagonal, which no certificate can rest
+on.
+It is not the next thing, because a reassessment of what to search is queued in front
+of it.
+
 For the next supervised exact-research goal, use
-[session 043](../../../../packing/campaign/agent-sessions/session-043-block9-degree-bound.md).
-Sessions 027 through 043 are terminal, and agenda-004 closed on measurement rather than
-opinion. Open BC-066 under `think-obgk` as the next bounded driver: eliminate the five
-equations in five half-angles that the rationalised `n = 29` system leaves, inside a
-declared wall-clock cap, and record whatever the chain reaches.
-It runs first because it is the only remaining block that can change what this run
-concludes about `n = 29` — a refusal there is the measured justification for the
-interval route carrying that bound, and every block after it improves the pipeline
-instead. The ordering through block 18 is
-[agenda-006’s continuation schedule](../../../../packing/campaign/agendas/agenda-006-overnight-research-blocks.md#the-continuation-schedule),
-and
-[run-002](../../../../packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md#where-to-resume)
-carries what a fresh agent needs that the diff does not show.
-The middle layers behind it are built: a pose is a centre, an angle and a chirality; an
-edge-edge contact pins collinearity; the contact system reaches full rank at both
-retained sizes; and the margin rule recovers Trump’s published polynomial at `n = 11`
-while returning nothing at `n = 29` through degree twenty.
+[session 048](../../../../packing/campaign/agent-sessions/session-048-what-every-session-cost.md).
+Sessions 027 through 047 are terminal, and agendas 006, 007 and 008 are closed.
+Open `BC-085` under `think-9k5k` as the next bounded driver: it is `agenda-009`’s first
+ready cell and the one `BC-088`’s search reassessment is blocked on, so taking anything
+ahead of it leaves that reassessment blocked either way.
+
+**Do not take a next slice from an agenda directly.**
+[`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every
+agenda and is the queue, because an agenda read on its own was found advertising four
+commitments as takeable that a later agenda had already discharged.
+This plan’s own pointer was stale in the same way until 2026-08-30. The middle layers
+behind it are built: a pose is a centre, an angle and a chirality; an edge-edge contact
+pins collinearity; the contact system reaches full rank at both retained sizes; and the
+margin rule recovers Trump’s published polynomial at `n = 11` while returning nothing at
+`n = 29` through degree twenty.
 Sessions 035 through 037 are terminal and closed agenda-005 block A together with
 `BC-045`, so precision is manufactured in-repository, the `n = 29` contact structure is
 frozen with its 89 incidences, and the interval route is built, calibrated and run: it

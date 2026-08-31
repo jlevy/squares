@@ -25,6 +25,16 @@ is; [Assurance in One Minute](#assurance-in-one-minute) is the whole vocabulary.
 
 ## What Has Been Established
 
+An [inventory](packing/frontier/INVENTORY.md) of every claim in the register, generated
+from the evidence records, says which of them this repository established itself, which
+rest on someone else’s argument, and how far each has been checked.
+Seven results are marked `apparently-novel` — first established here as far as the
+archived corpus shows.
+That label is a statement about a search and never a claim of priority, so each names
+the corpus searched, what was searched for, that corpus’s known holes, and **what
+exactly is new**, which is usually narrower than the result: certifying someone else’s
+bound is real work and is not the same as establishing a new bound.
+
 The four theorems, one line each.
 The synopsis’s [results section](SYNOPSIS.md#results-established-here) owns the full
 statements, assurance labels, and the command that replays each one:
@@ -63,7 +73,7 @@ proof of `s(7) = 3` (El Moumni 1999) carries four recorded defects in its printe
 | [**The atlas**](packing/atlas/README.md) | Deterministic renderings of the known-best packing for every `n ≤ 100`, a source map for the prospective range `n = 101…324`, and an enumeration of size-five contact scaffolds |
 | [**The literature**](packing/resources/README.md) | 27 papers and 13 web sources held locally and greppable: the original PDF or HTML, a cleaned Markdown transcription, and the unedited extraction to check it against |
 | [**The reports**](#reports) | Six research reports: the mathematics of `s(11)`, the algorithms and tooling, a search philosophy, and three on what to build |
-| [**The code**](development.md) | An exact verifier over algebraic number fields, an LP-in-cell quench, and `sqsearch`, a Rust search engine |
+| [**The code**](development.md) | An exact verifier over algebraic number fields, an LP-in-cell quench, a numeric-to-symbolic promotion route (contact inference, system assembly, minimal-polynomial recovery, and a Krawczyk existence-and-uniqueness checker), and `sqsearch`, a Rust search engine |
 | [**The experiment record**](packing/campaign/README.md) | A registry of falsifiable hypotheses, experiments that freeze their criterion before measuring, the agent-session record, and a generated ledger |
 | [**The defect log**](defects.md) | Every defect found in this project’s own reasoning and code, with what caught each one |
 

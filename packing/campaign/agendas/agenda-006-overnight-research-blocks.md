@@ -8,8 +8,8 @@ softschema:
 agenda:
   id: agenda-006
   title: Four bounded overnight blocks, each ending in a checkpoint that holds
-  updated: '2026-08-29'
-  status: active
+  updated: '2026-08-30'
+  status: completed
   objective: >-
     Schedule one unattended overnight run across three independent agenda-005 lanes, in
     blocks small enough that an interruption costs one block rather than the night. This
@@ -579,6 +579,15 @@ agenda:
       this repository's own evidence and it is a finer statement than the catalogue's bare
       "Rigid.": the packing is rigid but not infinitesimally so, a distinction the
       annotation does not make.
+
+      That last clause is D-382 and is corrected here rather than rewritten, because what a
+      past session concluded is the thing worth keeping. "The packing is rigid" was not
+      established by anything above, and the next paragraph of this same note says so. The
+      two halves have since parted company: X-007 establishes the second-order obstruction
+      exactly, on a verified self-stress rather than a sampled walk, so that half is now
+      true on evidence this note did not have -- while "rigid" is still not established even
+      with it, because the step from "no arc with nonzero derivative" to local rigidity is a
+      cited semi-algebraic argument that nothing here runs.
 
       What it is still not is `n = 11`'s result. Both the rank and the walk are numerical,
       and the argument covers the unique first-order flex and its second-order obstruction
@@ -1192,7 +1201,8 @@ agenda:
     purpose: tool_validation
     owner_focus: process
     instances: [11, 29]
-    state: ready
+    state: complete
+    discharged_by: BC-078
     priority: 0
     question: >-
       Do the reader-facing documents still describe the project the record describes?
@@ -1207,6 +1217,10 @@ agenda:
       The checklist in `campaign/documentation-pass.md` run over every root document, with each
       drift either fixed or filed as a defect and no third option; generated views
       regenerated; and an explicit statement of what was checked and what was left.
+    artifacts:
+    - packing/campaign/documentation-pass.md
+    - packing/campaign/agendas/agenda-007-twelve-hour-steered-run.md
+    - docs/project/research/research-2026-08-22-packing-11-unit-squares.md
     bead: think-eb29
     depends_on: [BC-064]
     workflows: [documentation-pass]
@@ -1216,6 +1230,10 @@ agenda:
       move at all, and nothing in the gate notices. `check_synopsis` binds the synopsis to
       the artifacts and there is no equivalent for the README or the tutorial.
     note: >-
+      Scheduled as `BC-078` in
+      [agenda-007](agenda-007-twelve-hour-steered-run.md), block 2, on this same bead and
+      with this scope unchanged.
+
       W8 reconciles; it does not author. No claim may be introduced that the record does
       not already carry, and a disagreement the artifacts cannot settle is a defect rather
       than a rewrite -- a pass that quietly picks the more readable side is how a wrong
@@ -1307,7 +1325,8 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5, 11]
-    state: blocked
+    state: complete
+    discharged_by: BC-079
     priority: 0
     question: >-
       Are the gate's tiers the right tiers, and is the coordinator running them at the
@@ -1333,6 +1352,9 @@ agenda:
       impressions of them.
     artifacts:
     - docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md
+    - packing/campaign/agendas/agenda-007-twelve-hour-steered-run.md
+    - packing/benchmarks/bench_schema_validation.py
+    - conventions.md
     bead: think-c46d
     depends_on: [BC-074]
     workflows: [efficiency-loop]
@@ -1344,6 +1366,12 @@ agenda:
       seconds against five hundred for the tier that contains them, so the mechanism exists
       and the routing does not.
     note: >-
+      Split across two blocks of
+      [agenda-007](agenda-007-twelve-hour-steered-run.md): phase 1 of its spec is `BC-077`,
+      which runs first because the spec says it may and because every checkpoint pays the
+      tier's cost until it lands; the tier contract itself is `BC-079`, which keeps this
+      cell's recorded dependency on the documentation pass.
+
       This absorbs `BC-062`'s reachability-scoped selector as one candidate mechanism rather
       than as the goal. A selector answers "which steps can this change reach"; the prior
       question is "which steps should anyone run at this moment", and a selector bolted onto

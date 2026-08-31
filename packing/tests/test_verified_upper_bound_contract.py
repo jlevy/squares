@@ -47,6 +47,14 @@ CEILING_HEADING = "## The verified upper bound is a ceiling"
 # appear in them as incidental identity rather than as a value anything consumes, and when
 # a new file arrives on every run so a per-file list would be pure churn.
 DECLARED_CONSUMER_TREES = {
+    "packing/campaign/agent-sessions/": (
+        "session records narrate work, and work touches this field, so every session that "
+        "did any names it -- seven were declared one by one before this became a tree. "
+        "They make no claim about any bound: a record saying a session moved a "
+        "verified_upper_bound is reporting what happened, and the claim itself lives in "
+        "the case record that moved. This is D-394's argument at a third level, and the "
+        "list it was growing had started to grow for reasons unrelated to its purpose"
+    ),
     "packing/campaign/resource-usage/": (
         "derived per-session measurement records. They never read the field: it reaches "
         "them as the name of a tool that ran, such as the test file that guards this very "
@@ -57,6 +65,20 @@ DECLARED_CONSUMER_TREES = {
 DECLARED_CONSUMERS = {
     "packing/devtools/check_basic_bounds.py": (
         "checks the ceiling really is the certifiable grid bound"
+    ),
+    "packing/tests/test_certificate_citations.py": (
+        "names the field in a fixture proving evidence refs are found in every block that "
+        "carries one; it asserts nothing about the bound's value"
+    ),
+    "packing/devtools/render_evidence_inventory.py": (
+        "names the field only as one of the case blocks that can carry evidence ids, so "
+        "that citations can be counted; it reads no bound and makes no claim about what "
+        "any of them is worth"
+    ),
+    "packing/devtools/price_gobel_family.py": (
+        "says in prose that the four family sizes now certify the exact side rather than "
+        "the grid ceiling, to keep its own coverage record from reading as a gap; it "
+        "computes nothing from the field"
     ),
     "packing/devtools/check_golden_basins.py": (
         "reads the ceiling as an upper limit on a basin side"
@@ -96,34 +118,9 @@ DECLARED_CONSUMERS = {
         "reports how far below the ceiling the run's certificate sits, and that the "
         "ceiling did not move"
     ),
-    "packing/campaign/agent-sessions/session-044-agenda006-continuation.md": (
-        "names the ceiling only as a standing constraint: the continuation measures where "
-        "elimination stops and closes the round trip at n = 11, and moves nothing"
-    ),
-    "packing/campaign/agent-sessions/session-039-block5-witness-plumbing.md": (
-        "records the certificate as evidence and says the ceiling was not moved to it"
-    ),
-    "packing/campaign/agent-sessions/session-040-block6-chirality.md": (
-        "names the ceiling only as a stop condition: the block builds the pose model and "
-        "does not touch it"
-    ),
-    "packing/campaign/agent-sessions/session-041-block7-collinearity.md": (
-        "names the ceiling only as a stop condition: the block repairs an assembly "
-        "equation and does not touch it"
-    ),
-    "packing/campaign/agent-sessions/session-042-block8-exact-solve.md": (
-        "names the ceiling only as a stop condition: the block recovers a minimal "
-        "polynomial at n = 11 and records a refusal at n = 29, moving nothing"
-    ),
     "packing/campaign/ledger.md": (
         "generated: it renders the agenda notes below and inherits whatever they say, so "
         "it is an output of a consumer rather than one itself"
-    ),
-    "packing/campaign/agent-sessions/session-036-block1-interval-operator.md": (
-        "records that block 1 did not touch the ceiling"
-    ),
-    "packing/campaign/agent-sessions/session-037-block2-interval-calibration.md": (
-        "reports how far below the ceiling its certificate sits, and that it promotes nothing"
     ),
     "packing/cases/kingbird29/certify_interval.py": (
         "compares its bound against the ceiling and refuses to promote it"
@@ -154,6 +151,21 @@ SKIPPED_PARTS = {
     "results",
     "node_modules",
 }
+OWN_NAME = "test_verified_upper_bound_contract"
+"""This file's own stem, which is not a mention of the field and must not read as one.
+
+Citing the guard is not using the thing it guards. `defects.md` renders each defect's
+`recorded_in` as a link and `D-392` is recorded here; a session record lists this file as
+evidence. Both then "name" `verified_upper_bound` without any claim about a ceiling
+anywhere in them, and declaring each one would grow the consumer list by a line every time
+someone referred to this test -- churn with no signal, which is the same argument
+`DECLARED_CONSUMER_TREES` already makes for generated trees.
+
+Stripping the stem keeps the sweep pointed at what it is for. A document that discusses the
+field still matches, because it cannot discuss it without writing the name outside a
+filename.
+"""
+
 GENERATED_BYTES = 512 * 1024
 
 
@@ -178,9 +190,13 @@ def trailing_ceilings() -> dict[int, tuple[Decimal, Decimal]]:
 
 def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> None:
     trailing = trailing_ceilings()
-    # Not a target to be held at 33; a measurement, and a loud one. Every one of these
-    # is a case where reading `verified_upper_bound` as s(n) overstates the side length.
-    assert len(trailing) == 33
+    # Not a target to be held at any number; a measurement, and a loud one. Every one of
+    # these is a case where reading `verified_upper_bound` as s(n) overstates the side
+    # length. It was 33 until D-398 promoted n = 40, 65 and 89 off the integer grid ceiling
+    # onto Goebel's exact family construction, whose certificates had been in the gate for
+    # two sessions while the records still declared a mathematical blocker. Moving it down
+    # is the point of the measurement, not a break in it.
+    assert len(trailing) == 30
     for n, (reported, verified) in trailing.items():
         assert verified > reported, n
     worst = max(verified - reported for reported, verified in trailing.values())
@@ -260,9 +276,16 @@ def test_no_undeclared_consumer_reads_the_field() -> None:
             or re.fullmatch(r"n-\d{3}\.md", path.name)
         ):
             continue
-        if path.stat().st_size > GENERATED_BYTES:
+        # The size cutoff is a heuristic for generated blobs, and a declared consumer is
+        # not a guess -- so it is scanned however large it has grown. `packing/defects.yaml`
+        # crossed 512 KiB on 2026-08-30 and silently stopped being read, which is `D-392`.
+        if (
+            path.stat().st_size > GENERATED_BYTES
+            and relative.as_posix() not in DECLARED_CONSUMERS
+        ):
             continue
-        if "verified_upper_bound" in path.read_text(encoding="utf-8", errors="ignore"):
+        body = path.read_text(encoding="utf-8", errors="ignore").replace(OWN_NAME, "")
+        if "verified_upper_bound" in body:
             found.add(relative.as_posix())
     undeclared = sorted(
         path

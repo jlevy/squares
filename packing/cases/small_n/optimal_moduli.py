@@ -385,27 +385,35 @@ def contact_record(
     }
 
 
-def sample_record(parameter: Fraction) -> dict[str, object]:
-    """Exact n=3 representative plus the current two-key identity diagnostics."""
-    positions = n3_positions(parameter)
+def grid_sample_record(
+    positions: tuple[tuple[Fraction, Fraction], ...],
+) -> dict[str, object]:
+    """Identity diagnostics for one exact configuration of axis-aligned unit squares.
+
+    Shared by the n = 3 sliding family and the n = 4 grid states, deliberately: the two
+    experiments' keys are only comparable if one function produced them. `BC-082` exists
+    because exp-015 retained no per-sample keys at all, and retaining keys computed a
+    second way would have been worse than retaining none -- the n = 4 verdict is only
+    meaningful against the n = 3 one.
+    """
+    count = len(positions)
     squares = [exact_square(point) for point in positions]
     verification = verify_packing(squares, SIDE, sign=fraction_sign)
-    if not verification.valid or verification.touching_pairs != 3:
-        raise ValueError(f"exact n=3 sample failed at {parameter}:\n{verification}")
+    if not verification.valid:
+        raise ValueError(f"exact n={count} sample failed:\n{verification}")
     contacts = [
         contact_record(first, second, positions)
-        for first, second in itertools.combinations(range(3), 2)
+        for first, second in itertools.combinations(range(count), 2)
     ]
     centres_x = [float(x + Fraction(1, 2)) for x, _ in positions]
     centres_y = [float(y + Fraction(1, 2)) for _, y in positions]
-    key = canonical_key(centres_x, centres_y, [0.0, 0.0, 0.0], float(SIDE))
+    key = canonical_key(centres_x, centres_y, [0.0] * count, float(SIDE))
     walls = wall_incidences(positions)
     return {
-        "parameter": fraction_text(parameter),
         "lower_left_positions": [[fraction_text(x), fraction_text(y)] for x, y in positions],
         "wall_incidence_count": sum(len(record) - 1 for record in walls),
         "wall_incidences": walls,
-        "pair_contact_count": 3,
+        "pair_contact_count": len(contacts),
         "active_sat_axis_count": sum(
             cast(int, contact["active_sat_axes"]) for contact in contacts
         ),
@@ -414,6 +422,26 @@ def sample_record(parameter: Fraction) -> dict[str, object]:
         "geometric_key": key.geometric,
         "contact_certificate": key.contact,
     }
+
+
+def sample_record(parameter: Fraction) -> dict[str, object]:
+    """Exact n=3 representative plus the current two-key identity diagnostics."""
+    positions = n3_positions(parameter)
+    squares = [exact_square(point) for point in positions]
+    verification = verify_packing(squares, SIDE, sign=fraction_sign)
+    if not verification.valid or verification.touching_pairs != 3:
+        raise ValueError(f"exact n=3 sample failed at {parameter}:\n{verification}")
+    return {"parameter": fraction_text(parameter), **grid_sample_record(positions)}
+
+
+def n4_sample_record(state: State) -> dict[str, object]:
+    """One of the 24 labelled n=4 grid states, with the same diagnostics as n=3.
+
+    The state is already an exact assignment of labels to grid corners, so unlike the
+    n = 3 family there is no parameter: `state_id` is what names it.
+    """
+    positions = tuple((Fraction(x), Fraction(y)) for x, y in state)
+    return {"state": state_id(state), **grid_sample_record(positions)}
 
 
 def orientation_forcing_record() -> dict[str, object]:
@@ -684,8 +712,14 @@ def build_n4_model() -> dict[str, object]:
         raise ValueError("the unlabelled 2 x 2 grid does not have full D4 stabilizer")
     literature = literature_record(4, [24, 0], [24])
     require_literature_matches(literature, require_unlabelled_n3=False)
+    # BC-082: retain the per-state keys. The component counts above are terminal and are
+    # not recomputed here; this adds the diagnostics exp-014 already carried, so the n = 4
+    # labelled control can score the relation `Atlas.add` implements instead of reporting
+    # it undecidable for want of retained detail.
+    samples = [n4_sample_record(states[state_id]) for state_id in sorted(states)]
     return {
         "schema_version": SCHEMA_VERSION,
+        "samples": samples,
         "subject": {
             "n": 4,
             "square_side": "1",

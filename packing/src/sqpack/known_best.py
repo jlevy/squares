@@ -30,7 +30,42 @@ KINGBIRD_ATTRIBUTION = (
     "Erich Friedman's original compilation."
 )
 KINGBIRD_LICENSE_STATUS = "no-express-reuse-terms-found"
+
 KINGBIRD_RETENTION_POLICY = "metadata-and-derived-numerical-facts-only"
+"""What this repository keeps from a source that states no reuse terms, and why.
+
+The inspected catalogue page states no express reuse terms, so the raw source assets are
+not retained -- the 34 Kingbird SVG paths were removed rather than committed -- while
+attributed metadata and numerical facts *derived* from them are. This is a retention
+policy, not a legal conclusion, and it is deliberately conservative in the direction that
+costs this project effort rather than the direction that costs the source anything.
+
+**The criterion this label was missing, which is what it permits and what would move a
+record out of it.** The policy is about *dependence on the source*, not about the
+assurance level of the record. So:
+
+- A record whose numbers are transcribed from the source stays under this policy however
+  they are re-expressed. Re-encoding a transcription into a number field does not make it
+  less derived from what it was transcribed from, and promoting one on that basis would
+  be relabelling provenance rather than changing it.
+- A record whose numbers are *recomputed from a published mathematical rule*, without
+  reading the source at all, is not under this policy, because it does not depend on the
+  source. It is first-party work that happens to agree with a retained record, and the
+  agreement is a check on both rather than a derivation of either.
+
+`cases/gobel_family` and `cases/gobel40` are the second kind and can be checked to be:
+neither module imports `load_witness` or names `witnesses/`, and both build from
+`[Friedman DS7]` section 2's statement of Goebel's rule. The retained witnesses at
+`n = 5, 40, 65, 89` agree with them to those witnesses' own rounding, which identifies
+what the witnesses are without being how the constructions were made.
+
+The consequence for promoting a witness to `exact-algebraic` is therefore decidable
+rather than a judgement: it is available exactly where a construction independent of the
+source exists, and unavailable where the only route is the source's own numbers. What
+this does not settle, and what no rule here can, is whether the underlying licensing
+assessment is right -- that is a review decision, and this criterion assumes it rather
+than revisiting it.
+"""
 
 _NUMBER = r"[-+]?(?:(?:\d+(?:\.\d*)?)|(?:\.\d+))(?:[eE][-+]?\d+)?"
 _PATH_TOKEN = re.compile(rf"[MmLlHhVvZz]|{_NUMBER}")

@@ -32,10 +32,24 @@ for each rule. Edit there, not here.
 - **OR-5:** Declare the workflow entry point before beginning.
 - **OR-6:** Plan multi-hour work in slices before starting it.
 - **OR-7:** Run the documentation guidelines pass at block boundaries.
+- **OR-8:** A self-declared budget is not a stop condition.
+- **OR-9:** A pull request leads with what the branch cost.
 
 <!-- END OPERATING RULES SUMMARY -->
 
 ## Build & Test
+
+**This project runs Python 3.14. Never invoke the `python3` on `PATH`** — it is older,
+and the two interpreters disagree about what parses.
+Run `uv run --frozen ...` from `packing/`, or `packing/.venv/bin/python3` directly.
+
+The trap this closes is specific and has caught four sub-agents:
+[PEP 758](https://peps.python.org/pep-0758/) makes `except A, B:` valid without
+parentheses, so files using it parse under the project interpreter and are reported as
+syntax errors by anything older.
+`sqpack/assurance.py` and `sqpack/contacts.py` both contain the construct and both are
+correct. A report that they do not parse is a report that the wrong interpreter was used
+— see [`D-397`](defects.md), and `OR-2` for the three occurrences before it.
 
 The repository is mostly prose.
 The only repo-wide tooling is Markdown formatting.

@@ -512,8 +512,18 @@ def check_defects(text: str) -> list[str]:
 
     problems = []
     total = len(defects)
-    if not re.search(rf"\b({total}|{spell(total)})\b", text, re.I):
-        problems.append(f"SYNOPSIS.md: does not state the defect count ({total})")
+    # Anchored to the sentence that states it, not searched for loose in the document.
+    # A bare `\b(399)\b` over the whole text passes on any other occurrence of the number,
+    # and the synopsis states it twice -- "The log contains N defects" and "the automated
+    # gate has caught M defects in N". So the first could read 400 against a dataset of 399
+    # and this check still found the 399 in the second and said nothing. That is what
+    # happened on 2026-08-30, to a one-line sed; see `D-400`.
+    log_pattern = rf"the\s+log\s+contains\s+(?:{total}|{re.escape(spell(total))})\s+defects"
+    if not re.search(log_pattern, text, re.I):
+        problems.append(
+            f"SYNOPSIS.md: does not state the defect count ({total}) in the form "
+            '"The log contains <n> defects"'
+        )
 
     counts: dict[str, int] = {}
     for defect in defects:

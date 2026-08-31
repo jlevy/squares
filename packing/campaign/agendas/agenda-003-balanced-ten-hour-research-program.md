@@ -103,6 +103,11 @@ agenda:
     owner_focus: insight
     instances: [5]
     state: blocked
+    blocked_on: >-
+      Independent acceptance of the preregistered exp-045 criterion, which is a review
+      decision rather than a commitment. Its other stated blocker, BC-027, has been
+      complete since agenda-003 closed that cell, so the dependency edge below is
+      discharged and this sentence is the only live constraint.
     priority: 0
     question: >-
       Do the frozen minus-W scale routes and controls advance the n=5 terminal-family
@@ -118,7 +123,7 @@ agenda:
       instrument blocker. Every valid result receives an immediate W3 mechanism pass;
       an invalid instrument returns to W7.
     bead: think-1s0h
-    depends_on: []
+    depends_on: [BC-027]
     next_evidence: >-
       Blocked at execution admission by session 029, a declared terminal exit for this
       cell. exp-045 requires twelve typed pre-certificate mutations; the instrument
@@ -239,6 +244,13 @@ agenda:
     owner_focus: efficiency
     instances: [5, 10, 11]
     state: blocked
+    blocked_on: >-
+      Two things, neither expressible as a `depends_on` edge here. First, a measurement
+      contract that does not call endpoint keys terminal components, which is D-034 and
+      is still outstanding: BC-080 declared the relation the atlas should count but did
+      not close D-034, and BC-083 asks whether n = 5 can be given a control that would.
+      Second, the priced proposer interface, which is agenda-002 BC-017 -- a different
+      agenda, and `depends_on` is checked within one agenda only.
     priority: 2
     question: >-
       Can delta continuation, neighbour transfer, quality-diversity, and packing surgery

@@ -62,7 +62,8 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 29]
-    state: ready
+    state: complete
+    discharged_by: BC-054
     priority: 1
     question: >-
       Can the contact equations be assembled from an accepted structure, reduced to
@@ -142,7 +143,8 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: complete
+    discharged_by: BC-060
     priority: 1
     question: >-
       Can the closed system be solved exactly, by elimination or by integer relation, and
@@ -185,7 +187,8 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 10, 11, 29]
-    state: ready
+    state: complete
+    discharged_by: BC-053
     priority: 0
     question: >-
       Can an interval checker discharge existence and uniqueness for a root of a declared
@@ -227,7 +230,8 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 11]
-    state: ready
+    state: complete
+    discharged_by: BC-061
     priority: 1
     question: >-
       Can an exact LP over certified rational or algebraic coefficients replace the float
@@ -262,7 +266,8 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [3, 4, 5]
-    state: ready
+    state: complete
+    discharged_by: BC-080
     priority: 0
     question: >-
       What relation should the atlas count, given that a connected optimal set produces
@@ -276,6 +281,9 @@ agenda:
       A declared identity relation with a criterion that the exact n = 3 sliding family
       and the exact n = 4 point both satisfy, or a typed statement of which property the
       candidate relation cannot decide.
+    artifacts:
+    - packing/campaign/explorations/X-005-identity-relation-and-its-controls.md
+    - packing/devtools/check_identity_relation.py
     bead: think-0yo9
     depends_on: []
     workflows: [insight-iteration, research-loop]
@@ -286,6 +294,11 @@ agenda:
       curve cannot plateau, the census cannot saturate, and the rarity premise is
       untestable rather than untested.
     note: >-
+      Scheduled as `BC-080` in
+      [agenda-007](agenda-007-twelve-hour-steered-run.md), block 4, on this same bead and
+      with this scope unchanged. This cell moves to `blocked` when that block opens, so one
+      bead never backs two ready commitments.
+
       This is the map program and it shares nothing with BC-042 through BC-045 except the
       clock. A resolved identity relation still leaves n = 29 uncertified, and a working
       promoter still leaves the map counting keys.
@@ -296,8 +309,11 @@ agenda:
     state: ready
     priority: 1
     question: >-
-      Are the three packings the catalogue annotates "Rigid." actually rigid, on evidence
-      of our own rather than on the catalogue's word?
+      Are the packings the catalogue annotates "Rigid." actually rigid, on evidence of our
+      own rather than on the catalogue's word? The catalogue annotates four -- n = 5, 11,
+      28 and 40 -- and this commitment carries three of them; n = 11 was already settled
+      locally-rigid on a first-party certificate before this was scoped, which is why it
+      is not in `instances`.
     hypotheses: []
     budget: one W1 research-pass slice of at most 60 minutes on n = 5 alone, then a replan
     entry: >-
@@ -319,16 +335,121 @@ agenda:
       translation and nothing else. Rotation and coordinated multi-square motion are
       outside it, so these three records now read undetermined, which is a result rather
       than an absence.
+
+      n = 5 is now settled as far as this machinery reaches, and what remains for n = 28
+      and n = 40 is not a rerun of it. The argument needs an exact pose, and both retain
+      decimal witnesses.
+
+      That next slice has since been priced, and the price is a source rather than a
+      computation. The obvious first step -- extract a contact structure from the decimals,
+      which is what a closed system is written against -- was run and calibrated at the two
+      sizes whose answers are known, and it reproduces neither. n = 11's structure is exact,
+      14 pair and 20 wall contacts at floor 0, and the decimal route decides at no floor at
+      all. n = 29's is 52 pair and 37 wall at floor 1e-80, extracted from a 160-digit
+      materialisation of a provenance SVG, and the route reports different numbers from the
+      99-digit witness. The floors where it appears to decide sit below the retained
+      precision, so they are windows on the materialisation's padding.
+
+      Stage one says the same thing from the other end: promote.solve.reach is 0 at the
+      retained precision for all four sizes, n = 11 included, whose degree-eight minimal
+      polynomial was recovered from four hundred manufactured digits rather than from its
+      32-digit witness. The retained decimals are not the input to this route at any size.
+
+      So the first step for n = 28 is a higher-precision source, and it has none: no case
+      module, no retained contact structure, and no provenance artifact of the kind n = 29's
+      extraction was run against. That is the typed refusal this exit accepts for that size.
+
+      **That refusal was challenged and it stands.** The challenge was worth recording
+      because the reasoning behind it was tempting and wrong. A source is not the only
+      route to precision -- n = 11's degree-eight polynomial came from four hundred
+      *manufactured* digits, not from its 32-digit witness -- so it looked as though
+      n = 28 needed only its contact structure, and extraction appeared to supply one:
+      32 pair contacts, 40 wall, nothing undecided, 41 decades of separation.
+
+      That measurement was an artifact of over-materialisation. The witness carries 57
+      fractional digits in its side; the extraction ran at 200 and read incidences at a
+      floor of 1e-80, far below anything the record holds, so what decided at that floor
+      was the padding rather than the pose. `price_exact_construction` already sweeps this
+      properly, at the witness's own precision plus a margin, and reports 27 pair contacts
+      rather than 32.
+
+      The calibration is what settles it, and it is why that tool sweeps at all: at n = 29
+      the true structure is known from a 160-digit provenance artifact -- 52 pair and 37
+      wall -- and the decimal route reports 17 and 36. A route that reproduces neither
+      known answer cannot have its numbers at n = 28 read as structure. So the refusal's
+      "no retained contact structure" clause is not a gap waiting to be filled by running
+      the extractor harder; it is a statement about what the retained decimals can support.
+
+      What would change this is what the refusal already says: a higher-precision source
+      for n = 28. The published minimal polynomial does not substitute for one -- the
+      catalogue gives s^6 - 24s^5 + 212s^4 - 812s^3 + 1025s^2 + 882s - 1615, and
+      `NumberField` constructs it and proves it irreducible mod 13, but a polynomial for
+      the side is not a pose.
+
+      For n = 40 the refusal was wrong, and D-389 records why it was reached. Goebel's
+      construction is published and transcribed here -- [Friedman DS7] section 2, the centred
+      diagonal block family, 2a^2 + 2a + b^2 squares in side a + 1 + b/sqrt(2), which at
+      a = 3, b = 4 is exactly forty squares in 4 + 2 sqrt(2). The retained witness is a
+      materialisation of it: all eighty coordinates fit p + q sqrt(2) with half-integer p
+      and q, the angles are exactly 0 and 45, and the only error anywhere is one 6.04e-31
+      truncation of the side. The promotion route was priced without anyone asking whether
+      its destination was already reachable another way.
+
+      cases/gobel40 now builds it exactly, deriving the frame from Goebel's rule rather than
+      reading it off the witness, and the exact verifier accepts it: 40 squares, 780 pairs,
+      48 corner coordinates exactly on the boundary, 98 pairs at zero gap, agreeing with the
+      retained witness to that witness's own truncation.
+
+      The rigidity question at n = 40 is still open, and D-388 is why. X-007's assessor
+      cannot consume the pose: 296 of its 608 constraint rows carry both a rational and a
+      sqrt 2 part, which no positive scalar rationalizes, and the rational-weight Farkas
+      search was answering a different system. It answered "no certificate anywhere", which
+      reads as a motion. It now refuses instead. Deciding n = 40 needs a Farkas search whose
+      weights live in the ordered field, which is a different instrument.
     note: >-
       n = 5 first: it is proved optimal, its side is 2 + sqrt(2)/2, and its structure is
       the smallest of the three. Promoting reported_upper_bound.catalogue_rigid into the
       rigidity block is not a shortcut to this result, it is D-354, and
       tests/test_frontier_rigidity_assessment.py fails on it.
+
+      n = 5 is done and D-354 was not touched. Exactly, over Q(sqrt 2), at Goebel's exact
+      pose rather than the retained witness: the cone of infinitesimal motions is exactly
+      one-dimensional -- rotation of the middle square about its own centre, which no
+      contact mentions because each corner square's inner corner rests at the midpoint of
+      the middle square's edge -- and the other fourteen coordinates are pinned by verified
+      Farkas certificates. That one direction is then refused at second order by a verified
+      non-negative self-stress, since turning an edge line about the centre it is nearest
+      to can only bring it closer to the resting corner.
+
+      The frontier block deliberately keeps property: undetermined. The schema's vocabulary
+      is [locally-rigid, semi-rigid, not-rigid, undetermined] and second-order rigidity is
+      none of them: no motion has been exhibited, and the step from "no arc with nonzero
+      derivative" to local rigidity is cited rather than run. The D-354 guard stays green
+      without being edited, which is the outcome to want -- a guard you have to weaken to
+      land a result was telling you something.
+
+      Recorded in campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md,
+      devtools/assess_n5_rigidity.py, tests/test_n5_rigidity.py, and
+      campaign/series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json.
+    artifacts:
+    - devtools/assess_n5_rigidity.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json
+    - campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md
+    - devtools/price_exact_construction.py
+    - campaign/series/series-000-smoke-and-calibration/results/bc-049-exact-construction-price.json
+    - tests/test_exact_construction_price.py
+    - cases/gobel40/packing.py
+    - cases/gobel40/verify_exact.py
   - id: BC-050
     purpose: measurement_validation
     owner_focus: correctness
     instances: [68, 69]
     state: blocked
+    blocked_on: >-
+      Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the
+      screens require. The retained ones are not, and the upstream construction the
+      records cite has not been re-run. No commitment owns producing them, so this waits
+      on an artifact rather than on a predecessor.
     priority: 2
     question: >-
       Can n = 68 and n = 69 be given witnesses precise enough to carry a contact claim, so
@@ -357,7 +478,8 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5, 11, 29]
-    state: ready
+    state: stopped
+    discharged_by: BC-084
     priority: 0
     question: >-
       Can verification run only the steps a change can reach, without any chance of

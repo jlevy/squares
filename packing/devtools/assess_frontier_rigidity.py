@@ -25,8 +25,14 @@ coordinated multi-square motion are outside it. So the four packings the
 catalogue annotates "Rigid." are left `undetermined` here rather than promoted:
 the catalogue's word for them lives in reported_upper_bound.catalogue_rigid, and
 restating it as a first-party finding is exactly the conflation the split fixed.
-n=11 is the one case with a real first-party argument, from the tangent-cone
-work, and this tool never overwrites it.
+
+Two records now carry a first-party argument and this tool never overwrites
+either: n=11 from the tangent-cone work, and n=5 from `X-007`, which settles the
+first-order cone exactly and refuses its one free direction at second order. Note
+what that does *not* do -- n=5 still reads `undetermined`, because second-order
+rigidity is not local rigidity and the property enum has no word for it. Leaving
+a record alone is about who owns the argument, not about which verdict it
+reached.
 """
 
 from __future__ import annotations
