@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 408
+count: 410
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -12052,4 +12052,83 @@ defects:
     check_control_anchors catches anchor rot; partner rot still has no dedicated
     detector -- the defense is partner choice, recorded here and in controls.yaml.
   bead: think-1o1f
+  recorded_in: packing/devtools/controls.yaml
+
+- id: D-409
+  title: The pruned-link copy covered the archive but not the pruned renderings
+  date: '2026-08-31'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: >-
+    four days: atlas/known-best/rendering joined the worker-snapshot prune on
+    2026-08-27, the synopsis handoff linked n-100.svg into it, and main's full
+    surface surfaced the dead link on 2026-08-31 after D-407's fix cleared the
+    resources/ and .agents cases in front of it
+  severity: medium
+  status: fixed
+  what: >-
+    The D-407 fix taught the negative-control worker snapshot to copy in the
+    archive files the checked documents actually link to -- but its scan was
+    written against resources/ alone, while the prune list also drops four
+    generator-owned rendering and witness directories. SYNOPSIS.md's handoff
+    links packing/atlas/known-best/rendering/n-100.svg, so inside every private
+    worker the link checker saw a dead link, and the synopsis round-aggregate
+    control failed with the wrong message. The merge that carried D-407/D-408
+    promised main's full surface green and left it red on this remaining case.
+  consequence: >-
+    Conservative: the suite stayed red and nothing passed falsely. The cost is
+    a broken promise about main going green and one more masked layer -- the
+    control's registered refusal went unverified while the dead link stood in
+    front of it, exactly the D-407 failure shape one directory over.
+  fix: >-
+    linked_pruned_targets generalizes the scan to every content prune: any
+    inline link from the campaign record or the root documents that resolves to
+    an existing file under a pruned directory is copied into the snapshot, so
+    the prunes and the link checker stay honest at once. epistemics.md joined
+    ROOT_DOCUMENTS in the same change, closing the identical gap for the new
+    root document before it shipped.
+  regression: >-
+    The full control suite replays the scan on every gate run; a link into a
+    newly pruned directory now rides the same copy path as the archive, and a
+    link to a file that truly does not exist is still left dead for the real
+    checker to refuse.
+  bead: think-n8vl
+  recorded_in: packing/devtools/run_negative_controls.py
+
+- id: D-410
+  title: A control's anchor was bumped without its expected message
+  date: '2026-08-31'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: >-
+    since round 46 landed: the anchor "There are 46 terminal rounds" was kept
+    current so check_control_anchors stayed green, while the expect string
+    still demanded the 45-round message; masked behind D-407 and D-409 until
+    the dead links cleared
+  severity: low
+  status: fixed
+  what: >-
+    The synopsis round-aggregate control mutates the terminal-round count and
+    expects the checker's complaint verbatim -- but the complaint embeds the
+    ledger's live total, and only the mutation anchor was updated when the
+    total moved from 45 to 46. check_control_anchors verifies that replace[0]
+    still appears exactly once; nothing verifies that expect still matches
+    what the checker would say, so the control failed with the right refusal
+    and the wrong pinned number.
+  consequence: >-
+    Conservative: red suite, nothing passed falsely. The cost is the recurring
+    shape -- an expectation pinned to live campaign state defuses silently
+    when that state moves, D-408's lesson restated for expect strings.
+  fix: >-
+    The expect string now pins the 46-round message alongside the bumped
+    anchor.
+  regression: >-
+    None dedicated: expect strings pinned to live totals still have no
+    freshness detector. The defense remains running the full control suite at
+    merge checkpoints, which is what caught this.
+  bead: think-n8vl
   recorded_in: packing/devtools/controls.yaml

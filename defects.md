@@ -2,7 +2,7 @@
 
 # Defect log
 
-408 defects recorded across the packing toolchain.
+410 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -23,9 +23,9 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `inspection` | 40 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 56 | the automated test suite |
+| `gate` | 58 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 56 of 408, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 58 of 410, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 56 of 408, and none of
 | quench | 23 |
 | verifier | 4 |
 | record | 127 |
-| tooling | 137 |
+| tooling | 139 |
 | docs | 106 |
 
 ## By kind
@@ -43,7 +43,7 @@ The line worth reading twice: **the automated gate caught 56 of 408, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 91 |
-| validity | 100 |
+| validity | 102 |
 | bookkeeping | 154 |
 | robustness | 48 |
 | performance | 15 |
@@ -633,6 +633,8 @@ This is the actionable list.
 | [D-406](packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md) | 2026-08-31 | record | bookkeeping |  | `review` | medium | outstanding | BC-092 was stopped on an enumeration price that traces to no artifact |
 | [D-407](packing/devtools/run_negative_controls.py) | 2026-08-31 | tooling | validity | conservative | `gate` | medium | fixed | The control snapshot omitted every file the checked documents link to |
 | [D-408](packing/devtools/controls.yaml) | 2026-08-31 | tooling | validity | conservative | `gate` | medium | fixed | A negative control was defused by its collision partner completing |
+| [D-409](packing/devtools/run_negative_controls.py) | 2026-08-31 | tooling | validity | conservative | `gate` | medium | fixed | The pruned-link copy covered the archive but not the pruned renderings |
+| [D-410](packing/devtools/controls.yaml) | 2026-08-31 | tooling | validity | conservative | `gate` | low | fixed | A control's anchor was bumped without its expected message |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

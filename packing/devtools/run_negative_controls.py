@@ -140,6 +140,7 @@ ROOT_DOCUMENTS = (
     REPO / "conventions.md",
     REPO / "development.md",
     REPO / "defects.md",
+    REPO / "epistemics.md",
     REPO / "operating-rules.md",
     REPO / "AGENTS.md",
     REPO / "docs",
@@ -247,21 +248,32 @@ def _clone_into(src: Path, dst: Path) -> None:
         subprocess.run(["cp", "-R", *bulk, str(dst)], capture_output=True, check=True)
 
 
-RESOURCE_LINK = re.compile(r"\]\(([^)#\s]*resources/[^)#\s]+)\)")
+INLINE_LINK = re.compile(r"\]\(([^)#\s]+)\)")
+# Pruned directories a checked document may legitimately link into. `.venv` and
+# `sqsearch/target` are symlinked back whole, and `.gate-running` is a marker,
+# so the linked-file copy covers only the content prunes.
+LINKED_PRUNE_ROOTS = tuple(
+    path
+    for path in sorted(PRUNE)
+    if path not in {ROOT / ".gate-running", ROOT / ".venv", ROOT / "sqsearch/target"}
+)
 
 
-def linked_resource_targets() -> list[Path]:
-    """Archive files the checked documents link to inline, resolved and existing.
+def linked_pruned_targets() -> list[Path]:
+    """Pruned files the checked documents link to inline, resolved and existing.
 
-    The archive is pruned from every worker (45 MiB against the cap), but the link
-    checker runs inside the worker and follows inline links from the campaign record
-    and the root documents into `resources/`. A target that exists in the real tree
-    must exist in the snapshot, or every campaign control fails on the dead link
-    instead of its registered refusal -- main went red exactly that way on
-    2026-08-31, three merges in a row, on links added that same night. Copying what
-    is actually linked (2.1 MiB measured that day) keeps the prune and the checker
-    honest at once; a link to a file that truly does not exist is left dead for the
-    real checker to refuse.
+    The archive and the generator-owned renderings are pruned from every worker
+    (45 MiB against the cap), but the link checker runs inside the worker and
+    follows inline links from the campaign record and the root documents into
+    them. A target that exists in the real tree must exist in the snapshot, or
+    every control that reaches the link scan fails on the dead link instead of
+    its registered refusal -- main went red exactly that way on 2026-08-31,
+    three merges in a row, on `resources/` and `.agents` links added that same
+    night, and again on 2026-08-31 when the synopsis handoff's link to the
+    pruned `atlas/known-best/rendering/n-100.svg` outlived the resources-only
+    version of this scan. Copying what is actually linked keeps the prunes and
+    the checker honest at once; a link to a file that truly does not exist is
+    left dead for the real checker to refuse.
     """
     documents = list((ROOT / "campaign").rglob("*.md"))
     for document in ROOT_DOCUMENTS:
@@ -271,9 +283,11 @@ def linked_resource_targets() -> list[Path]:
             documents.append(document)
     targets: set[Path] = set()
     for document in documents:
-        for raw in RESOURCE_LINK.findall(document.read_text(errors="ignore")):
+        for raw in INLINE_LINK.findall(document.read_text(errors="ignore")):
             resolved = (document.parent / raw).resolve()
-            if resolved.is_relative_to(ROOT / "resources") and resolved.is_file():
+            if resolved.is_file() and any(
+                resolved.is_relative_to(root) for root in LINKED_PRUNE_ROOTS
+            ):
                 targets.add(resolved)
     return sorted(targets)
 
@@ -281,7 +295,7 @@ def linked_resource_targets() -> list[Path]:
 def snapshot_source_bytes() -> int:
     """Bytes copied by the portable fallback, excluding linked build products."""
     total = sum(path.stat().st_size for path in COPY_SEPARATELY)
-    total += sum(target.stat().st_size for target in linked_resource_targets())
+    total += sum(target.stat().st_size for target in linked_pruned_targets())
     for document in ROOT_DOCUMENTS:
         if document.is_dir():
             total += sum(path.stat().st_size for path in document.rglob("*") if path.is_file())
@@ -306,7 +320,7 @@ def clone_tree(dest: Path) -> None:
     resource_readme = work / "resources/README.md"
     resource_readme.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / "resources/README.md", resource_readme)
-    for target in linked_resource_targets():
+    for target in linked_pruned_targets():
         landing = work / target.relative_to(ROOT)
         landing.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(target, landing)

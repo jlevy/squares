@@ -493,6 +493,12 @@ is `T-001`/`T-002` at `V4`/`C4`) and the legacy first-party theorems (the
 Stromquist repair is `T-010`; this document's own `T-1`–`T-4` below remain
 declared shorthand). softschema is upgraded to `0.8.0` across the schema
 toolchain in the same slice.
+The one-shot post-merge check found main's full surface still red on one
+negative control, behind the same mask D-407 named: the worker-snapshot link
+copy covered the pruned archive but not the pruned renderings, and the
+control's expected message lagged the ledger's round count — fixed as `D-409`
+and `D-410` on this branch, with `epistemics.md` added to the snapshot's root
+documents before the same gap could ship again.
 Research follow-ons are unchanged on their beads.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
@@ -2802,13 +2808,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 408 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 410 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
-| validity | 100 | was correct, but the measurement did not bear on the question |
+| validity | 102 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 154 | recorded something its own evidence contradicts |
 | robustness | 48 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
@@ -2819,7 +2825,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fifty-six defects in 408, and no soundness defect
+**The automated gate has caught fifty-eight defects in 410, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

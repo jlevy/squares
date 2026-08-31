@@ -156,8 +156,14 @@ session:
     - SYNOPSIS.md
     - docs/project/document-map.yaml
     - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+    - packing/devtools/run_negative_controls.py
+    - packing/defects.yaml
     stop_reason: >-
-      BC-107's exit criteria are all met on a green records tier; what
+      BC-107's exit criteria are all met on a green records tier, and the
+      one-shot post-merge check's finding rode along: main's full surface was
+      still red on one negative control (the pruned-rendering link gap and a
+      stale expected message, D-409/D-410), fixed and defect-logged here with
+      epistemics.md added to the worker snapshot's root documents; what
       remains is the push gate and the PR, which are finalization.
     next_action: >-
       Finalization: rollups regenerated, packing-validate --push on the
