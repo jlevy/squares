@@ -224,14 +224,14 @@ defects, and X-010 carries the corrected sequencing input.
 
 - The entry measurement repeated from `BC-088` — a best-known-to-proved gap of “about
   0.5 for every open case” that therefore “ranks nothing” — is unmeasured and wrong by a
-  factor of ten: the spread is 0.056 to 0.536, structured by `k = m² − n` (D-404).
+  factor of ten: the spread is 0.056 to 0.536, structured by `k = m² − n` (D-405).
   `devtools/gap_ranking.py` now carries the measurement.
 - The enumeration price quoted against `BC-092` ("9.3e9 raw orbit work at `n = 5`") was
   quoted without its artifact and misreads it: the retained pricing record
   (`atlas/known-best/contact-enumeration-pricing.json`) carries that figure as the
   *legacy labeled* route’s upper work, and its own decision at `n = 5` is
   `enumerate-isomorph-free` — the same 11,013 canonical orbits without that work — while
-  the realizability prefilter is measured there only through `n = 4` (D-405). The fold
+  the realizability prefilter is measured there only through `n = 4` (D-406). The fold
   of `BC-092` into `BC-090` is therefore unproved in both directions; X-010’s Lane B
   reprices it at the chunk level.
 

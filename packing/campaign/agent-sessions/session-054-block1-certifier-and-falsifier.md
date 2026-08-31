@@ -1,12 +1,12 @@
 ---
-title: "session-050 — block 1 of the two-lane overnight run: the certifier instrument and the falsifier"
+title: "session-054 — block 1 of the two-lane overnight run: the certifier instrument and the falsifier"
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
 session:
-  id: session-050
+  id: session-054
   primary_bead: think-y2ju
   status: completed
   title: "Block 1 of the two-lane overnight run: the certifier instrument and the falsifier"
@@ -265,7 +265,7 @@ session:
     deadline_at: '2026-08-31T06:40:00Z'
     excluded_commands: [git, tbd, packing-validate]
   outputs:
-  - packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md
+  - packing/campaign/agent-sessions/session-054-block1-certifier-and-falsifier.md
   - packing/src/sqpack/cover.py
   - packing/tests/test_cover.py
   - packing/src/sqpack/falsify.py
@@ -289,6 +289,12 @@ session:
 # Session-050 — Block 1: the Certifier Instrument and the Falsifier
 
 Contemporaneous record; the frontmatter is the session.
+Renumbering note (2026-08-31, merge of main): this session ran and closed as
+session-050; PR #65's independent session (the exp-045 audit) merged to main first
+under the same number, so this record was renumbered to session-054 at the merge, the
+lowest free number. Nothing else in the record changed; clocks and content are the
+contemporaneous originals.
+
 Agenda-010 owns the block plan, X-010 owns the argument, think-y2ju and think-yrvm own
 the work items.
 

@@ -2,7 +2,7 @@
 """Price X-003's chunk-level stage-1 label space before building the enumerator.
 
 `BC-095` (agenda-010): the queue stopped `BC-092` on a figure that priced the wrong
-object at the wrong route (D-405). This tool prices the object X-003 actually
+object at the wrong route (D-406). This tool prices the object X-003 actually
 proposed -- stratum labels over *chunks*, not squares -- at `n = 11` in counted LP
 solves (D-126), with every factor labeled by its evidential standing:
 
@@ -15,7 +15,7 @@ solves (D-126), with every factor labeled by its evidential standing:
   `atlas/known-best/contact-enumeration-pricing.json`;
 - **assumed**: the transfer of that square-level prefilter rate to chunk-level
   strata, which nothing has measured -- named here so the go/no-go carries it
-  explicitly instead of silently (the D-405 lesson, applied to ourselves).
+  explicitly instead of silently (the D-406 lesson, applied to ourselves).
 
 The orbit count is reported as an interval: Burnside gives `orbits >= raw / |G|`
 per stratum family, so the optimistic end divides by the full group (D4 times the

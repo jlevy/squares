@@ -47,7 +47,7 @@ session:
       uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: >-
       Any resequencing decision that rests on a figure without an artifact path -- the
-      D-405 shape -- stops the checkpoint and records the gap instead.
+      D-406 shape -- stops the checkpoint and records the gap instead.
     fallback: >-
       Leave every tentative state as it is and record why the evidence did not decide.
     outcome: >-

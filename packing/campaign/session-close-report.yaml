@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 53
+count: 54
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 8
-  sessions_unmeasured: 45
+  sessions_measured: 10
+  sessions_unmeasured: 44
   attributed:
-    rollups: 40
-    turns: 11135
-    tool_calls: 6504
-    tool_errors: 134
-    one_off_code: 1434
-    wall_hours: 50.25
+    rollups: 41
+    turns: 11766
+    tool_calls: 6811
+    tool_errors: 139
+    one_off_code: 1485
+    wall_hours: 54.12
   unattributed:
     rollups: 10
     turns: 1460
@@ -28,12 +28,12 @@ totals:
     one_off_code: 173
     wall_hours: 6.87
   measured:
-    rollups: 50
-    turns: 12595
-    tool_calls: 7382
-    tool_errors: 166
-    one_off_code: 1607
-    wall_hours: 57.12
+    rollups: 51
+    turns: 13226
+    tool_calls: 7689
+    tool_errors: 171
+    one_off_code: 1658
+    wall_hours: 60.99
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -527,26 +527,24 @@ sessions:
   - packing/campaign/resource-usage/agent-a71eca88143ad786d.yaml
   - packing/campaign/resource-usage/agent-a8c1a849b5e57ee7a.yaml
   - packing/campaign/resource-usage/agent-ac4fec61a53717f37.yaml
-  turns: 1226
-  tool_calls: 739
-  tool_errors: 10
-  one_off_code: 121
-  wall_hours: 2.48
+  turns: 1410
+  tool_calls: 830
+  tool_errors: 12
+  one_off_code: 133
+  wall_hours: 4.46
 - id: session-050
-  title: "Block 1 of the two-lane overnight run: the certifier instrument and the falsifier"
+  title: "The exp-045 independent audit, the -W bridge, and the acceptance"
   status: completed
-  primary_bead: think-y2ju
-  phases: 2
+  primary_bead: think-1s0h
+  phases: 3
   measured: true
   rollups:
-  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
-  - packing/campaign/resource-usage/a8a236cbd8a0e6d95.yaml
-  - packing/campaign/resource-usage/a0083f0c8eb083ddb.yaml
-  turns: 610
-  tool_calls: 344
-  tool_errors: 11
-  one_off_code: 51
-  wall_hours: 2.39
+  - packing/campaign/resource-usage/39fcaf14-acd6-59fb-88e9-05f635cb7f4d.yaml
+  turns: 795
+  tool_calls: 466
+  tool_errors: 8
+  one_off_code: 42
+  wall_hours: 3.24
 - id: session-051
   title: "Block 2 of the overnight run: the enumeration reprice and the exact-LP gate"
   status: completed
@@ -556,11 +554,11 @@ sessions:
   rollups:
   - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
   - packing/campaign/resource-usage/a35f6c5f493ae6cf0.yaml
-  turns: 560
-  tool_calls: 308
-  tool_errors: 11
-  one_off_code: 51
-  wall_hours: 2.31
+  turns: 982
+  tool_calls: 509
+  tool_errors: 14
+  one_off_code: 90
+  wall_hours: 4.04
 - id: session-052
   title: "The mid-run checkpoint: resequence the tentative half on the night's evidence"
   status: completed
@@ -569,17 +567,37 @@ sessions:
   measured: true
   rollups:
   - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
-  turns: 522
-  tool_calls: 280
-  tool_errors: 11
-  one_off_code: 51
-  wall_hours: 2.26
+  turns: 944
+  tool_calls: 481
+  tool_errors: 14
+  one_off_code: 90
+  wall_hours: 3.99
 - id: session-053
   title: "Block 3 of the overnight run: machine-checking Bentz 2010"
-  status: in_progress
+  status: completed
   primary_bead: think-1o1f
-  phases: 1
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  - packing/campaign/resource-usage/agent-ac40f3b59df269a0e.yaml
+  turns: 969
+  tool_calls: 496
+  tool_errors: 14
+  one_off_code: 90
+  wall_hours: 4.15
+- id: session-054
+  title: "Block 1 of the two-lane overnight run: the certifier instrument and the falsifier"
+  status: completed
+  primary_bead: think-y2ju
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  - packing/campaign/resource-usage/a8a236cbd8a0e6d95.yaml
+  - packing/campaign/resource-usage/a0083f0c8eb083ddb.yaml
+  turns: 1032
+  tool_calls: 545
+  tool_errors: 14
+  one_off_code: 90
+  wall_hours: 4.12

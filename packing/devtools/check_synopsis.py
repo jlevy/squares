@@ -370,9 +370,16 @@ def check_current_handoff(text: str) -> list[str]:
     if section is None:
         return ["SYNOPSIS.md: has no Current Handoff section"]
 
+    # Chronology, not numbering: a parallel session merged first can take a number
+    # this run had already minted, renumbering the survivor above the chronological
+    # head (session-054 is block 1 of the 2026-08-31 run, renumbered at the merge).
+    # The record's own clock is the truth the handoff follows.
     session_paths = sorted(
         AGENT_SESSIONS.glob("session-[0-9][0-9][0-9]-*.md"),
-        key=lambda path: int(path.name.split("-", 2)[1]),
+        key=lambda path: (
+            str(front(path)["session"].get("started_at") or ""),
+            int(path.name.split("-", 2)[1]),
+        ),
     )
     if not session_paths:
         return ["campaign/agent-sessions: has no numbered session artifact"]

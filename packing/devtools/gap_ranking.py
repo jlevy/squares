@@ -2,7 +2,7 @@
 """Rank every open case by its verified gap: reported upper minus verified lower.
 
 `BC-088`'s entry recorded the impression that this gap "is about 0.5 for every open
-case", so ranking by it ranks nothing (D-404). Measured, the spread is a factor of ten
+case", so ranking by it ranks nothing (D-405). Measured, the spread is a factor of ten
 -- 0.056 at `n = 97` to 0.536 at `n = 51` -- and the ranking is structured: writing
 `n = m^2 - k`, the gap shrinks as `k` falls and as `m` rises, so the open `k = 3` line
 (61, 78, 97) and `n = 11` head the table, then the `k = 4` line. A narrow gap is not a

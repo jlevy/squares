@@ -350,6 +350,11 @@ first exact verification outside `Q(sqrt 2)` — from a published rule or a coor
 lift, about `3.2` of aggregate gap.
 The widest trailing ceiling is now `n = 50`’s `3/7`.
 
+[session-050](packing/campaign/agent-sessions/session-050-exp045-audit-and-acceptance.md)
+then performed the independent audit `exp-045` had waited on since registration, built
+the `-W` bridge that makes the accepted helpers corroborate the certificate, and
+recorded the owner's acceptance — clearing the gate that held `BC-010` and `BC-029`.
+
 **Queued for the next run:
 [agenda-010](packing/campaign/agendas/agenda-010-two-lane-overnight-run.md)** — the
 two-lane overnight program from
@@ -358,17 +363,28 @@ blocks of two to three hours, instruments before research in both lanes, a check
 (`BC-098`) resequencing the tentative half mid-run, and the standard unattended rules
 stated in the agenda’s own objective.
 **The run is live: blocks 1 and 2 are complete** —
-[session-050](packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md)
-landed the certifier core and the falsifier (`BC-093`, `BC-094`), and
+[session-054](packing/campaign/agent-sessions/session-054-block1-certifier-and-falsifier.md)
+landed the certifier core and the falsifier (`BC-093`, `BC-094`; the session ran as
+050 and was renumbered at the merge — the audit session above holds that number), and
 [session-051](packing/campaign/agent-sessions/session-051-block2-reprice-and-lp-gate.md)
 landed the stage-1 price and the exact-LP measurement (`BC-095`, `BC-096`) — **and the
 checkpoint
 ([session-052](packing/campaign/agent-sessions/session-052-midrun-checkpoint.md)) has
 resequenced the tentative half;
 [session-053](packing/campaign/agent-sessions/session-053-block3-bentz-machine-check.md)
-is in progress on `BC-099` under `think-1o1f`** — machine-checking Bentz 2010, Theorem 8
-(`s(46) = 7`) first as the calibration, the `m = 4` analysis behind it; `BC-097` and
-`BC-089`’s remainder are the sanctioned gate filler.
+closed block 3 on `BC-099` under `think-1o1f` with the run's first research result:
+Bentz 2010, Theorem 8 (`s(46) = 7`) machine-certifies as printed** — 92 exact cells
+over `Q(sqrt 2, sqrt 3)`, the Lemma 5 threshold by a rigorous rational subdivision
+bound of `0.955390`, all 45 points charged — held `unresolved` with `needs_review`
+per the unattended rules, with the `m = 4` remainder typed on `think-1o1f` and one
+candidate printed gap flagged for replay. The same session absorbed a mid-run merge
+from `main` (the parallel audit session had taken `session-050` and `D-404`, so block
+1's record is `session-054` and the reassessment defects are `D-405`/`D-406`) and
+root-caused the base branch's red full surface to two stacked control defects,
+`D-407` and `D-408`, both fixed on this branch.
+**The next slice is block 4: `BC-100` under `think-l48p`** — the `H-044` verdict on
+the frozen corpus through the registered partition solver; `BC-097` and `BC-089`’s
+remainder are the sanctioned gate filler.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
@@ -419,10 +435,12 @@ whole-record grid subsets on four walls, 65 corner-seated blocks on two.
 `BC-038` is closed and rejected on measured arithmetic — 35 `evaluate_stress` calls
 arrive with **eleven** distinct number fields, and `RowJetInventory` refuses a foreign
 field by identity, so the floor is a `1.54x` ceiling against an exit wanting five-fold.
-`BC-010` and `BC-029` are **not** takeable despite what the map’s priority says: both
-are gated on independent acceptance of `exp-045`’s preregistered criterion, which
-records `decision: unresolved` with `needs_review: true`, and an unattended runner may
-not grant that acceptance to itself.
+`BC-010` and `BC-029` were gated for four days on independent acceptance of
+`exp-045`’s preregistered criterion, which an unattended runner may not grant to
+itself; on 2026-08-31 the owner accepted the round after session-050’s independent
+audit (findings and the corroborating `-W` bridge are the experiment record’s Amendment
+and `D-404`), so `exp-045` now records `decision: accepted`, `BC-029` is complete, and
+`BC-010`’s readiness on the map is genuine.
 
 **`n = 5` is second-order rigid, and that is a first-party result.**
 [X-007](packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md)
@@ -733,9 +751,10 @@ sequenced behind exp-045. The outstanding work is now carried by
 which gives each remaining item its own workflow entry.
 `BC-027` is complete.
 The `n = 5` H-023 successor under `BC-029`, `think-whwc`, and `think-1s0h` is no longer
-an instrument blocker: exp-045 has run and is terminal at `unresolved` with
-`needs_review`, excluding canonical pure `-W` at all three strata while every
-connectivity, component, isolation and terminality claim stays refused.
+an instrument blocker: exp-045 has run and is terminal — `accepted` since
+2026-08-31, after the independent audit its registration required — excluding canonical
+pure `-W` at all three strata while every connectivity, component, isolation and
+terminality claim stays refused.
 CG-010 is structurally complete under `BC-030`; BC-016 is blocked under `think-3yv8` on
 retained poses, an executable glued row, symbolic tie labels, and a receipt checker,
 while BC-017 under `think-u97a` remains the ready constructive W7 lane.
@@ -2327,9 +2346,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 40 | 11,135 | 6,504 | 134 | 1,434 | 50.25 h |
+| claimed by a session | 41 | 11,766 | 6,811 | 139 | 1,485 | 54.12 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **50** | **12,595** | **7,382** | **166** | **1,607** | **57.12 h** |
+| **measured** | **51** | **13,226** | **7,689** | **171** | **1,658** | **60.99 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2337,17 +2356,19 @@ rounding.
 | [session-046](packing/campaign/agent-sessions/session-046-gobel-family-constructions.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-047](packing/campaign/agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | 6 | 14 | 1,230 | 841 | 18 | 2.56 h |
 | [session-048](packing/campaign/agent-sessions/session-048-what-every-session-cost.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
-| [session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | 5 | 5 | 1,226 | 739 | 10 | 2.48 h |
-| [session-050](packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md) | 2 | 2 | 88 | 64 | 0 | 0.13 h |
+| [session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | 5 | 4 | 615 | 364 | 4 | 1.22 h |
+| [session-050](packing/campaign/agent-sessions/session-050-exp045-audit-and-acceptance.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
 | [session-051](packing/campaign/agent-sessions/session-051-block2-reprice-and-lp-gate.md) | 2 | 1 | 38 | 28 | 0 | 0.05 h |
 | [session-052](packing/campaign/agent-sessions/session-052-midrun-checkpoint.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
-| *shared by 8 sessions* | — | 2 | 7,305 | 4,067 | 95 | 41.0 h |
+| [session-053](packing/campaign/agent-sessions/session-053-block3-bentz-machine-check.md) | 2 | 1 | 25 | 15 | 0 | 0.16 h |
+| [session-054](packing/campaign/agent-sessions/session-054-block1-certifier-and-falsifier.md) | 2 | 2 | 88 | 64 | 0 | 0.13 h |
+| *shared by 10 sessions* | — | 3 | 8,522 | 4,734 | 106 | 45.97 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 8 |
-| closed before `resource_rollups` existed, logs not retained | 45 |
-| **total** | **53** |
+| measured | 10 |
+| closed before `resource_rollups` existed, logs not retained | 44 |
+| **total** | **54** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -2434,7 +2455,7 @@ archive beside it.
 | [exp-042](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md) | 5 | target | H-023 | endpoint-aware exact rotating paths | 6 paths; 6 stresses; 20 controls pass | **accepted** |
 | [exp-043](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md) | 5 | target | H-023 | exact pure -W second-order test | five instrument blockers; no retained result | **unresolved** |
 | [exp-044](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md) | 5 | target | H-023 | exact pure -W row-jet test | reviewed row builder; no retained target | **unresolved** |
-| [exp-045](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md) | 5 | target | H-023 | exact pure -W scale and control test | pure -W excluded at A, interior and B; sign symmetry holds; awaiting independent audit and a human accept decision | **unresolved** |
+| [exp-045](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md) | 5 | target | H-023 | exact pure -W scale and control test | pure -W excluded at A, interior and B; sign symmetry holds; accepted 2026-08-31 after the independent audit and -W bridge corroboration | **accepted** |
 
 ### Cost and provenance
 
@@ -2641,7 +2662,7 @@ table above.
   Moving the suite onto the pull-request surface would push that surface past the point
   where it gets run at all, so what is owed is a cheap anchor-resolution check in
   `--records` rather than a faster suite.
-- **[D-404](defects.md) and [D-405](defects.md) are the reassessment auditing itself.**
+- **[D-405](defects.md) and [D-406](defects.md) are the reassessment auditing itself.**
   `BC-088`’s entry sequenced X-009 on an unmeasured gap claim — the measured spread is
   `0.056`–`0.536`, structured by `k = m² − n`, and `devtools/gap_ranking.py` now carries
   it — and `BC-092` was stopped on an enumeration price quoted without its artifact and
@@ -2652,14 +2673,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 405 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 408 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
-| validity | 98 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 153 | recorded something its own evidence contradicts |
+| validity | 100 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 154 | recorded something its own evidence contradicts |
 | robustness | 48 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
@@ -2669,7 +2690,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fifty-four defects in 405, and no soundness defect
+**The automated gate has caught fifty-six defects in 408, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2680,7 +2701,7 @@ reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
 Two entries are currently `outstanding` rather than fixed.
-[D-405](defects.md) waits on the enumeration repricing X-010 filed.
+[D-406](defects.md) waits on the enumeration repricing X-010 filed.
 The older one is worth naming because refusing was the whole of the available fix:
 [D-391](defects.md) is the first-order rigidity assessor intersecting a tangent cone
 that is a union: two squares meeting at a single corner are held apart by two axes, and

@@ -273,9 +273,15 @@ controls:
   run: python3 -m devtools.check_declared_commands
   expect: "is not runnable"
 
+# The mutation partner is BC-049, the standing research cell that stays ready by
+# design -- the previous partner (BC-038, think-kdil) completed on 2026-08-30 and
+# silently defused the collision: the control still went red, but on ledger staleness
+# instead of the rule it registers (D-408). A partner that never terminates is the
+# rot-resistant choice; BC-092's own stop is held by D-406, and if it ever legitimately
+# leaves `stopped` the anchor stops matching and this control refuses loudly.
 - name: campaign - one bead backs two simultaneously ready commitments
-  file: campaign/agendas/agenda-003-balanced-ten-hour-research-program.md
-  replace: ["  - id: BC-028\n    purpose: tool_validation\n    owner_focus: efficiency\n    instances: [5]\n    state: stopped", "  - id: BC-028\n    purpose: tool_validation\n    owner_focus: efficiency\n    instances: [5]\n    state: ready"]
+  file: campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md
+  replace: ["  - id: BC-092\n    purpose: research\n    owner_focus: insight\n    instances: [5, 11, 29, 40]\n    state: stopped", "  - id: BC-092\n    purpose: research\n    owner_focus: insight\n    instances: [5, 11, 29, 40]\n    state: ready"]
   run: python3 -m sqpack.campaign.ledger check
   expect: "backs more than one ready commitment"
 

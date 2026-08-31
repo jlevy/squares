@@ -2,7 +2,7 @@
 
 # Defect log
 
-405 defects recorded across the packing toolchain.
+408 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
-| `review` | 248 | a human or agent reading the work against a checklist |
+| `review` | 249 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
 | `inspection` | 40 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 54 | the automated test suite |
+| `gate` | 56 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 54 of 405, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 56 of 408, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,8 +34,8 @@ The line worth reading twice: **the automated gate caught 54 of 405, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 4 |
-| record | 126 |
-| tooling | 135 |
+| record | 127 |
+| tooling | 137 |
 | docs | 106 |
 
 ## By kind
@@ -43,8 +43,8 @@ The line worth reading twice: **the automated gate caught 54 of 405, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 91 |
-| validity | 98 |
-| bookkeeping | 153 |
+| validity | 100 |
+| bookkeeping | 154 |
 | robustness | 48 |
 | performance | 15 |
 
@@ -218,8 +218,8 @@ This is the actionable list.
 | D-391 | outstanding | high | A tangent cone that is a union of half-spaces was intersected | `think-s424` |
 | D-393 | contained | medium | The pre-push floor does not run tests, and CI stayed red for seventy-five minutes | `think-s424` |
 | D-403 | contained | medium | The negative controls do not run on a pull request, so stale ones accumulate unseen | `think-xdly` |
-| D-404 | contained | medium | A sequencing plan was built on an unmeasured claim that the verified gap ranks nothing | `think-bxqv` |
-| D-405 | outstanding | medium | BC-092 was stopped on an enumeration price that traces to no artifact | `think-bxqv` |
+| D-405 | contained | medium | A sequencing plan was built on an unmeasured claim that the verified gap ranks nothing | `think-bxqv` |
+| D-406 | outstanding | medium | BC-092 was stopped on an enumeration price that traces to no artifact | `think-bxqv` |
 
 ## Every defect
 
@@ -628,8 +628,11 @@ This is the actionable list.
 | [D-401](packing/devtools/render_agenda_map.py) | 2026-08-30 | record | bookkeeping |  | `review` | low | fixed | The queue guarded against over-claiming readiness and not against hiding it |
 | [D-402](packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md) | 2026-08-30 | record | validity | flattering | `gate` | high | fixed | A contact structure was read out of padding and reported as a result |
 | [D-403](packing/devtools/controls.yaml) | 2026-08-30 | tooling | robustness |  | `review` | medium | contained | The negative controls do not run on a pull request, so stale ones accumulate unseen |
-| [D-404](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md) | 2026-08-31 | record | validity | conservative | `review` | medium | contained | A sequencing plan was built on an unmeasured claim that the verified gap ranks nothing |
-| [D-405](packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md) | 2026-08-31 | record | bookkeeping |  | `review` | medium | outstanding | BC-092 was stopped on an enumeration price that traces to no artifact |
+| [D-404](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md) | 2026-08-31 | record | bookkeeping | neutral | `review` | low | fixed | exp-045's registration froze a mutation vocabulary its instrument never carried |
+| [D-405](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md) | 2026-08-31 | record | validity | conservative | `review` | medium | contained | A sequencing plan was built on an unmeasured claim that the verified gap ranks nothing |
+| [D-406](packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md) | 2026-08-31 | record | bookkeeping |  | `review` | medium | outstanding | BC-092 was stopped on an enumeration price that traces to no artifact |
+| [D-407](packing/devtools/run_negative_controls.py) | 2026-08-31 | tooling | validity | conservative | `gate` | medium | fixed | The control snapshot omitted every file the checked documents link to |
+| [D-408](packing/devtools/controls.yaml) | 2026-08-31 | tooling | validity | conservative | `gate` | medium | fixed | A negative control was defused by its collision partner completing |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

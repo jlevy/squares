@@ -1,4 +1,4 @@
-"""Pin the counted half of the chunk-level stage-1 price (BC-095, D-405 follow-up).
+"""Pin the counted half of the chunk-level stage-1 price (BC-095, D-406 follow-up).
 
 The measured half (prefilter rate, per-candidate cost) is a runtime measurement and
 deliberately unpinned; these tests hold the closed-form combinatorics still, which is

@@ -66,7 +66,7 @@ note). Unlike X-009 it used no sub-agents: every measurement below was taken fir
 in this session and carries its replay path.
 
 **Owns:** the two-lane sequencing argument and the two corrections.
-The defect records D-404 and D-405 own the defects; the beads labeled `x-010` own the
+The defect records D-405 and D-406 own the defects; the beads labeled `x-010` own the
 work; the artifacts in `sources` own the measurements they carry.
 
 ## The Answer
@@ -101,7 +101,7 @@ certifier-falsifier pair) and structural description (the chunk census, the scaf
 orbit machinery, X-008’s axis-aligned-residue theorem about the corpus).
 The lanes are where those assets point.
 
-## Correction One: the Gap Ranking Ranks a Great Deal (D-404)
+## Correction One: the Gap Ranking Ranks a Great Deal (D-405)
 
 `BC-088`’s entry states that the gap between best known and proved lower bound “is about
 0.5 for every open case” and that “ranking by that gap ranks nothing.”
@@ -140,7 +140,7 @@ mid-table gaps — `n = 17` from 0.513 to 0.230 — and touches nothing at the h
 table; `n = 31` is the one size where the frontier’s stored bound is better than the
 table’s.
 
-## Correction Two: the Enumeration Price Misread Its Artifact (D-405)
+## Correction Two: the Enumeration Price Misread Its Artifact (D-406)
 
 `BC-092` was stopped and folded into `BC-090` on “`9.3e9` raw orbit work at `n = 5`.”
 That figure appears in X-009, agenda-009, session-049, and the ledger, with no artifact
@@ -152,7 +152,7 @@ labeled* route, and its own decision rule at `n = 5` is `enumerate-isomorph-free
 which reaches the same 11,013 canonical orbits without that work.
 (This document’s first version said no artifact existed: a text grep for “9.3e9” cannot
 find a record storing the exact integer.
-D-405 carries both layers.)
+D-406 carries both layers.)
 What the scaffold atlas separately records
 (`packing/atlas/enumerated/contact-scaffolds-size5.json`): 1,533,696 topology-coloring
 candidates at size five collapsing to 11,013 orbits — a measured 139× symmetry quotient
@@ -243,7 +243,7 @@ that shape, from 1984. As a side product, the stratum atlas is the proposer info
 `BC-090`’s gated search instrument needs — which contact shapes and angle-class
 structures carry records — so the lane feeds the search block without betting on it.
 
-**Why the lane is alive despite BC-092’s stop.** The stop rests on D-405’s figure.
+**Why the lane is alive despite BC-092’s stop.** The stop rests on D-406’s figure.
 The description side is strong: X-008 proved the corpus’s whole inexpressible residue is
 axis-aligned — all 295 tilted components are already inside the grammar — so the
 grammar’s coverage question is about axis-aligned polyominoes only.
@@ -290,7 +290,7 @@ The ladder:
   lane.
 - **The asymptotic lane.** Two independent 2025–2026 proofs of `O(x^0.6)` show it active
   and competitive, and nothing here contributes differentially; H-037 stays parked.
-- **Full-`n` generative enumeration.** Even after D-405’s correction, nothing suggests
+- **Full-`n` generative enumeration.** Even after D-406’s correction, nothing suggests
   square-level enumeration at target sizes; B0 prices the chunk level only.
 
 ## Weak Points Where Effort Pays Disproportionately
@@ -308,7 +308,7 @@ The ladder:
 5. **The field seam.** `cases/stromquist` carries a bespoke `Q(√5)` embedding beside
    `sqpack.field`; A0 should consume the shared field layer or record why not — a
    duplicate-arithmetic seam is where a certifier defect would live.
-6. **Queue trust.** The gap ranking is now a tool rather than an impression (D-404); 25
+6. **Queue trust.** The gap ranking is now a tool rather than an impression (D-405); 25
    `in_progress` beads from long-closed sessions still distort the ready queue (hygiene
    bead filed).
 
@@ -326,7 +326,7 @@ The numbered proposals below are retained as written.)*
    in a result or a typed refusal at tier-S/M cost), with A2, A3 and B2–B5 behind them
    as `tentative` — agenda-009’s own pattern of hygiene-then-decide, applied to
    ambition.
-3. Reopen `BC-092` only on B0’s number; until then its stopped state stands with D-405
+3. Reopen `BC-092` only on B0’s number; until then its stopped state stands with D-406
    noted against its rationale.
 4. Raise think-at4f and think-yrvm to the priority the ladder implies (done with this
    document); think-9m9x is sharpened to the Bentz-line route rather than the generic
@@ -344,7 +344,7 @@ The numbered proposals below are retained as written.)*
   hand-built, 10 annealing (nine of the ten dated 2024–2026; `n = 53` is Cantrell 2002),
   5 diagonal strips, 3 extensions, 2 unrecorded.
 - X-009 carries a dated correction note for the two premises above; agenda-009’s
-  `BC-088` and `BC-092` evidence fields point at D-404 and D-405.
+  `BC-088` and `BC-092` evidence fields point at D-405 and D-406.
 - `devtools/gap_ranking.py` added (OR-1); its durable wiring is a filed bead.
 
 ## Addendum: the BC-098 Checkpoint (2026-08-31, 06:26Z)
@@ -364,7 +364,7 @@ Four measured facts replaced this document’s forward guesses:
   enumerator, not the class this document imagined.
 - The exact LP at full cell scale costs ~1.4 s per pivot (58.8 s phase 1, 22.1 s phase
   2, first-hand), which decides B5’s route: sweep in float, certify winners exactly.
-- D-405 gained a second layer: the 9.3e9 figure has an artifact, and the artifact’s own
+- D-406 gained a second layer: the 9.3e9 figure has an artifact, and the artifact’s own
   decision at `n = 5` is the isomorph-free route — this document’s first version
   repeated the no-artifact claim, and the amendment is recorded in the defect.
 

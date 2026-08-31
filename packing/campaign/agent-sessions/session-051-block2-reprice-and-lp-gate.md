@@ -17,10 +17,10 @@ session:
     Agenda-010 block 2, 120 minutes: BC-095 (price X-003 stage-1 at the chunk level in
     counted LP solves, with the measured orbit quotient and the realizability
     prefilter actually applied and an omission-control design stated -- the number
-    D-405 says the queue never had) then BC-096 (measure the exact LP at the full
+    D-406 says the queue never had) then BC-096 (measure the exact LP at the full
     n = 11 cell against T-2's 1.28 ms float baseline). Block 1 closed early, so this
     block starts two hours inside the run's schedule; the same unattended rules hold,
-    and the D-405 lesson cuts both ways -- every factor in the price is either counted
+    and the D-406 lesson cuts both ways -- every factor in the price is either counted
     exactly or measured on a named sample, never estimated silently.
   workflow_phases:
   - workflow: efficiency-loop
@@ -53,7 +53,7 @@ session:
     kill_condition: >-
       Any factor in the price that cannot be counted or measured inside the budget is
       named as unpriced rather than estimated -- a price with a silent guess in it is
-      D-405 again, and the phase stops before shipping one.
+      D-406 again, and the phase stops before shipping one.
     fallback: >-
       Ship the tool with the factors it could price and a typed unpriced-factor list;
       the go/no-go then says what remains unknown instead of a number.
@@ -138,7 +138,7 @@ session:
       BC-105's certification route is decided by a measured exact-LP cost.
     before: >-
       The enumeration price in the record was quoted without its artifact and misread
-      it (D-405, amended this session); the exact LP's full-cell cost exists only as a
+      it (D-406, amended this session); the exact LP's full-cell cost exists only as a
       test file's own note, not as recorded agenda evidence.
     after: >-
       Both numbers exist with their standing labeled: the stage-1 price is an interval
@@ -215,7 +215,7 @@ session:
   - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
   - packing/campaign/resource-usage/a35f6c5f493ae6cf0.yaml
   stop_reason: >-
-    Both block-2 commitments met their exits inside budget; the D-405 amendment this
+    Both block-2 commitments met their exits inside budget; the D-406 amendment this
     block forced is recorded where the wrong claims lived.
   next_action: >-
     The checkpoint opens as session-052 on `BC-098` under `think-cjxk`, with all four
@@ -224,7 +224,7 @@ session:
 # Session-051 — Block 2: the Reprice and the Exact-LP Gate
 
 Contemporaneous record; the frontmatter is the session.
-Agenda-010 owns the block plan; the D-405 correction is the reason this block exists.
+Agenda-010 owns the block plan; the D-406 correction is the reason this block exists.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -14,7 +14,7 @@ agenda:
     Nine hours, unattended, done before the owner's morning. The program is X-010's two
     ladders mapped onto blocks: Lane A (proof) builds the general unavoidable-set
     certifier and falsifier, then machine-checks Bentz 2010's m = 4 argument; Lane B
-    (structure) reprices the chunk enumeration D-405 left unpriced, measures the
+    (structure) reprices the chunk enumeration D-406 left unpriced, measures the
     exact-LP cost gate, and takes the H-044 expressibility verdict. Tools run before
     research in both lanes, the lanes alternate so a gate never idles the run (OR-3),
     and a 30-minute checkpoint between the tool blocks and the research blocks
@@ -76,7 +76,7 @@ agenda:
     depends_on: []
     workflows: [pipeline-improvement]
     next_evidence: >-
-      Discharged by session-050 phase 1: sqpack/cover.py carries the general core
+      Discharged by session-054 phase 1: sqpack/cover.py carries the general core
       (geometry, tiling/mesh/partition validators parameterized by side, box
       predicates, record plumbing, typed resource-kind refusals), both case modules
       are callers (-403 lines), the exp-016/exp-017 replays are byte-stable through
@@ -116,7 +116,7 @@ agenda:
     depends_on: []
     workflows: [pipeline-improvement]
     next_evidence: >-
-      Discharged by session-050 phase 2: sqpack/falsify.py searches (x, y, theta)
+      Discharged by session-054 phase 2: sqpack/falsify.py searches (x, y, theta)
       deterministically and certifies only through exact signs; the known-answer
       triple is green as tests -- the Figure 13 escape found at margin 1.3e-2 in the
       45-degree family, the repaired set saturating at -(L-1) with the not-a-proof
@@ -138,7 +138,7 @@ agenda:
     budget: >-
       about 75 minutes, W5, in slices of 25
     entry: >-
-      D-405: BC-092 was stopped on "9.3e9 raw orbit work at n = 5", a figure with no
+      D-406: BC-092 was stopped on "9.3e9 raw orbit work at n = 5", a figure with no
       artifact behind it. What the tree records: 1,533,696 size-five coloring
       candidates collapse to 11,013 orbits (a measured 139x quotient), the local
       realizability prefilter in contact_realization is unpriced, and MAX_SCAFFOLD_SIZE
@@ -165,7 +165,7 @@ agenda:
       are honest only as restricted-class statements at K <= 3, or need canonical
       enumeration with pruning rather than raw generation. Four tests pin the counted
       closed forms as the enumerator's omission control. The 9.3e9 correction is
-      D-405's amendment, found and recorded by this block.
+      D-406's amendment, found and recorded by this block.
     artifacts:
     - devtools/price_stage1_chunks.py
     - tests/test_price_stage1_chunks.py
@@ -218,7 +218,7 @@ agenda:
       about 45 minutes, W5, in slices of 15, taken only as gate filler
     entry: >-
       devtools/gap_ranking.py exists and X-010 carries its table, but the measurement
-      has no durable surface (D-404's regression note), and tbd's in_progress list
+      has no durable surface (D-405's regression note), and tbd's in_progress list
       carries 25 beads from long-closed sessions, which distorts what the ready queue
       says a session may take (OR-4 takes the next slice from the handoff, and the
       handoff should not point at ghosts).
@@ -305,8 +305,20 @@ agenda:
     depends_on: [BC-093, BC-094]
     workflows: [research-loop]
     next_evidence: >-
-      Not started. X-010 Lane A rung 2; the calibration case for H-033's m = 7 encoding
-      and the m = 8 attempt behind it.
+      Session-053 resequenced the block inside its own question and delivered the
+      calibration half: Theorem 8 (s(46) = 7) is machine-certified as printed --
+      cases/bentz46, 92 exact cells over Q(sqrt 2, sqrt 3), the Lemma 5 threshold by
+      a rational interval subdivision bound of 0.955390, 45 of 45 points charged,
+      five tests pinning certificate and refusals -- held unresolved with
+      needs_review per the unattended rules. The m = 4 half is typed on think-1o1f
+      from the completed extraction: Section 3.1 first, the sliding point Z as the
+      one new premise type, tilings reconstructed from prose, the SA (1.74, 1) case
+      split flagged as a candidate printed gap, Corollary 7 derived from Lemma 6.
+      X-010 Lane A rung 2; the calibration case for H-033's m = 7 encoding and the
+      m = 8 attempt behind it.
+    artifacts:
+    - cases/bentz46/verify_cover.py
+    - tests/test_bentz46.py
   - id: BC-100
     purpose: research
     owner_focus: insight
