@@ -11,15 +11,15 @@ count: 51
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 6
-  sessions_unmeasured: 45
+  sessions_measured: 7
+  sessions_unmeasured: 44
   attributed:
-    rollups: 39
-    turns: 11001
-    tool_calls: 6422
-    tool_errors: 129
-    one_off_code: 1413
-    wall_hours: 49.92
+    rollups: 40
+    turns: 11135
+    tool_calls: 6504
+    tool_errors: 134
+    one_off_code: 1434
+    wall_hours: 50.25
   unattributed:
     rollups: 10
     turns: 1460
@@ -28,12 +28,12 @@ totals:
     one_off_code: 173
     wall_hours: 6.87
   measured:
-    rollups: 49
-    turns: 12461
-    tool_calls: 7300
-    tool_errors: 161
-    one_off_code: 1586
-    wall_hours: 56.79
+    rollups: 50
+    turns: 12595
+    tool_calls: 7382
+    tool_errors: 166
+    one_off_code: 1607
+    wall_hours: 57.12
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -542,17 +542,22 @@ sessions:
   - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
   - packing/campaign/resource-usage/a8a236cbd8a0e6d95.yaml
   - packing/campaign/resource-usage/a0083f0c8eb083ddb.yaml
-  turns: 514
-  tool_calls: 290
-  tool_errors: 6
-  one_off_code: 30
-  wall_hours: 2.11
+  turns: 610
+  tool_calls: 344
+  tool_errors: 11
+  one_off_code: 51
+  wall_hours: 2.39
 - id: session-051
   title: "Block 2 of the overnight run: the enumeration reprice and the exact-LP gate"
-  status: in_progress
+  status: completed
   primary_bead: think-kp7o
-  phases: 1
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  - packing/campaign/resource-usage/a35f6c5f493ae6cf0.yaml
+  turns: 560
+  tool_calls: 308
+  tool_errors: 11
+  one_off_code: 51
+  wall_hours: 2.31

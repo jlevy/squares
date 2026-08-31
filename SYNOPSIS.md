@@ -357,12 +357,12 @@ two-lane overnight program from
 blocks of two to three hours, instruments before research in both lanes, a checkpoint
 (`BC-098`) resequencing the tentative half mid-run, and the standard unattended rules
 stated in the agenda’s own objective.
-**The run is live:
+**The run is live: blocks 1 and 2 are complete** —
 [session-050](packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md)
-closed block 1 complete** — `BC-093` and `BC-094` both discharged, the certifier core
-and the falsifier landed with their controls green — **and
+landed the certifier core and the falsifier (`BC-093`, `BC-094`), and
 [session-051](packing/campaign/agent-sessions/session-051-block2-reprice-and-lp-gate.md)
-is in progress on `BC-095` under `think-kp7o`**, block 2 of that agenda; `BC-097` and
+landed the stage-1 price and the exact-LP measurement (`BC-095`, `BC-096`) — **and the
+mid-run checkpoint opens as session-052 on `BC-098` under `think-cjxk`**; `BC-097` and
 `BC-089`’s remainder are the sanctioned gate filler.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
@@ -2322,9 +2322,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 39 | 11,001 | 6,422 | 129 | 1,413 | 49.92 h |
+| claimed by a session | 40 | 11,135 | 6,504 | 134 | 1,434 | 50.25 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **49** | **12,461** | **7,300** | **161** | **1,586** | **56.79 h** |
+| **measured** | **50** | **12,595** | **7,382** | **166** | **1,607** | **57.12 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2333,13 +2333,14 @@ rounding.
 | [session-047](packing/campaign/agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | 6 | 14 | 1,230 | 841 | 18 | 2.56 h |
 | [session-048](packing/campaign/agent-sessions/session-048-what-every-session-cost.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
 | [session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | 5 | 5 | 1,226 | 739 | 10 | 2.48 h |
-| [session-050](packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md) | 2 | 3 | 514 | 290 | 6 | 2.11 h |
-| *shared by 6 sessions* | — | 1 | 6,783 | 3,787 | 84 | 38.74 h |
+| [session-050](packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md) | 2 | 2 | 88 | 64 | 0 | 0.13 h |
+| [session-051](packing/campaign/agent-sessions/session-051-block2-reprice-and-lp-gate.md) | 2 | 1 | 38 | 28 | 0 | 0.05 h |
+| *shared by 7 sessions* | — | 2 | 7,305 | 4,067 | 95 | 41.0 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 6 |
-| closed before `resource_rollups` existed, logs not retained | 45 |
+| measured | 7 |
+| closed before `resource_rollups` existed, logs not retained | 44 |
 | **total** | **51** |
 
 <!-- END GENERATED: session-close-report -->

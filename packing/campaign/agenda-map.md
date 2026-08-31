@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **10** ready, **6** tentative, **15** blocked, **5** stopped, **69** complete.
+- **9** ready, **6** tentative, **14** blocked, **5** stopped, **71** complete.
 
 - **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
 
@@ -26,9 +26,8 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-009 | `BC-089` | 0 | correctness | research | Which of the 15 trailing cases with a published exact side are materialisations of a published rule, the way… | `think-d0j1` |
 | agenda-009 | `BC-091` | 1 | insight | research | At the 31 open sizes where nobody has beaten the trivial grid, is the grid optimal or merely unbeaten? | `think-7t9u` |
 | agenda-009 | `BC-090` | 2 | insight | research | Can a stricter, better informed search beat a stochastic incumbent at any of the ten sizes whose best known… | `think-xdly` |
-| agenda-010 | `BC-095` | 0 | efficiency | tool_validation | What does chunk-level stage-1 enumeration actually cost in counted LP solves, once the measured orbit… | `think-kp7o` |
+| agenda-010 | `BC-098` | 0 | insight | research | Given what the instrument and measurement blocks actually produced, which tentative blocks run in the… | `think-cjxk` |
 | agenda-010 | `BC-099` | 0 | correctness | research | Does Bentz 2010's m = 4 argument certify mechanically, or where exactly does it escape? | `think-1o1f` |
-| agenda-010 | `BC-096` | 1 | efficiency | measurement_validation | What does the exact LP cost at the full n = 11 cell, and does that route or the interval route carry… | `think-nu4y` |
 | agenda-010 | `BC-100` | 1 | insight | research | Are the standing records chunk-expressible at K <= 6 with at most two free squares -- the H-044 verdict,… | `think-l48p` |
 | agenda-010 | `BC-101` | 1 | correctness | research | Can certified unavoidable sets beat Nagamochi's closed form at n = 17 and 18, where Green's unpublished… | `think-q6vy` |
 | agenda-010 | `BC-102` | 1 | insight | research | Can synthesis produce the first bespoke certified lower bound at n = 12 -- any value strictly above the… | `think-0z9b` |
@@ -57,7 +56,6 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-003 | `BC-029` | 0 | `BC-027` | yes | Independent acceptance of the preregistered exp-045 criterion, which is a review decision rather than a commitment. Its… |
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
-| agenda-010 | `BC-098` | 0 | `BC-093`, `BC-094`, `BC-095`, `BC-096` | no | — |
 
 ## Discharged elsewhere
 
@@ -87,7 +85,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-007 | completed |  |  |  |  | 4 | 4 |
 | agenda-008 | completed |  |  |  |  | 4 | 4 |
 | agenda-009 | active | 2 | 1 |  | 1 | 4 | 8 |
-| agenda-010 | active | 5 | 5 | 1 |  | 2 | 13 |
+| agenda-010 | active | 4 | 5 |  |  | 4 | 13 |
 
 ## What the states mean
 

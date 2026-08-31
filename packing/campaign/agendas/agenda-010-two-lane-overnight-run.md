@@ -129,7 +129,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5, 11]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       What does chunk-level stage-1 enumeration actually cost in counted LP solves,
@@ -154,13 +154,26 @@ agenda:
     depends_on: []
     workflows: [pipeline-improvement, efficiency-loop]
     next_evidence: >-
-      Not started. X-010 Lane B rung 0; replaces the impression the BC-092 stop
-      decision rests on with a number.
+      Discharged by session-051 phase 1: devtools/price_stage1_chunks.py prices the
+      space with factor standings labeled -- counted raw 4.357e20 at K <= 6 (orbit
+      floor 2.763e18), a K <= 3 slice under X-008's measured wall seatings at
+      24,611,472 raw / 2.250e6 orbit floor, prefilter rate 0.457 measured on 300
+      size-five scaffolds at 4.8 ms each, the square-to-chunk transfer named ASSUMED.
+      Go/no-go: exhaustive stage-1 is out of reach above K <= 3 (~2.1e8
+      sweep-inclusive LP solves there, ~73 h; ~3 h realization-only), and Trump's own
+      ~five-chunk decomposition sits outside the exhaustive range -- BC-104/BC-105
+      are honest only as restricted-class statements at K <= 3, or need canonical
+      enumeration with pruning rather than raw generation. Four tests pin the counted
+      closed forms as the enumerator's omission control. The 9.3e9 correction is
+      D-405's amendment, found and recorded by this block.
+    artifacts:
+    - devtools/price_stage1_chunks.py
+    - tests/test_price_stage1_chunks.py
   - id: BC-096
     purpose: measurement_validation
     owner_focus: efficiency
     instances: [11]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       What does the exact LP cost at the full n = 11 cell, and does that route or the
@@ -182,8 +195,15 @@ agenda:
     depends_on: []
     workflows: [efficiency-loop, pipeline-improvement]
     next_evidence: >-
-      Not started. X-010's Lane B gate; one afternoon-sized measurement that has
-      never been taken.
+      Discharged by session-051 phase 2, first-hand on this container: assembly 0.41 s
+      for the 1,056-row, 23-variable exact cell; phase 1 58.8 s over 42 pivots;
+      phase 2 22.1 s over 16 pivots; lands on the published side exactly. Float-seeded
+      path ~2.6 s at zero pivots per the retained test. Route decision recorded:
+      sweep in float, certify winners exactly -- whole-class exact certification at
+      K <= 3 scale is out of reach at ~1.4 s per pivot.
+    artifacts:
+    - tests/test_promote_exact_phase1.py
+    - tests/test_promote_exact_lp.py
   - id: BC-097
     purpose: tool_validation
     owner_focus: process
@@ -218,7 +238,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [12, 13, 61]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Given what the instrument and measurement blocks actually produced, which

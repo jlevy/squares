@@ -8,7 +8,7 @@ softschema:
 session:
   id: session-051
   primary_bead: think-kp7o
-  status: in_progress
+  status: completed
   title: "Block 2 of the overnight run: the enumeration reprice and the exact-LP gate"
   date: '2026-08-31'
   started_at: '2026-08-31T06:09:00Z'
@@ -38,7 +38,7 @@ session:
       and per-candidate cost measured on a named sample of the retained size-five
       scaffold atlas, and the total in counted LP solves (D-126) at T-2's measured
       per-solve cost.
-    status: in_progress
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 75
@@ -57,11 +57,78 @@ session:
     fallback: >-
       Ship the tool with the factors it could price and a typed unpriced-factor list;
       the go/no-go then says what remains unknown instead of a number.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      devtools/price_stage1_chunks.py prices the space with every factor's standing
+      labeled. Counted: 44 partition families at K <= 6; raw labels 4.357e20 with a
+      Burnside orbit floor of 2.763e18 (D4 times interchangeable-chunk permutations),
+      and a restricted-slice grid down to K <= 3 under X-008's measured wall seatings
+      at 24,611,472 raw / 2.250e6 orbit floor. Measured here: the local-realizability
+      prefilter accepts 0.457 of the first 300 size-five isomorph-free scaffolds at
+      4.8 ms per candidate (beside the retained n = 4 exhaustive 26/124 = 0.210).
+      Named as ASSUMED: the square-to-chunk transfer of that rate. The go/no-go:
+      exhaustive stage-1 is out of reach above K <= 3 by orders of magnitude -- K <= 3
+      with measured seatings prices at ~2.1e8 sweep-inclusive LP solves (~73 h at the
+      retained 1.28 ms) or ~3 h realization-only, K <= 4 at ~1.4e11, and Trump's own
+      decomposition (about five chunks) sits outside the exhaustive range. Four tests
+      pin the counted closed forms as the enumerator's omission control.
+    evidence:
+    - packing/devtools/price_stage1_chunks.py
+    - packing/tests/test_price_stage1_chunks.py
+    stop_reason: >-
+      BC-095's exit met: the price exists as a tool, the factors carry their standing,
+      and the go/no-go is a number with its assumptions named rather than an
+      impression.
     next_action: >-
-      Slice 1 under think-kp7o: the label-space counting core of the pricing tool.
+      Phase 2 under think-nu4y: the exact-LP measurement at Trump's full cell.
+  - workflow: efficiency-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    commitment: BC-096
+    bead: think-nu4y
+    objective: >-
+      BC-096: measure sqpack.exact_lp at Trump's full n = 11 cell, from scratch and
+      float-seeded, against T-2's 1.28 ms float baseline, re-verifying the recon
+      report's figures first-hand before they enter the record.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      BC-095 closed its exit inside its budget, and the delegated recon left phase 2 a
+      run-and-record measurement.
+    budget_minutes: 30
+    started_at: '2026-08-31T06:16:00Z'
+    deadline_at: '2026-08-31T06:46:00Z'
+    expected_output: >-
+      The measured cost of the exact route at full cell scale, recorded beside the
+      float baseline in the agenda and the bead.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev pytest tests/test_promote_exact_lp.py -q
+    kill_condition: >-
+      A measurement disagreeing with the retained test's recorded figures by more than
+      host variance -- that would be a finding about the record, not a number to
+      average away.
+    fallback: >-
+      Record the discrepancy as the phase outcome and leave the agenda evidence
+      unmoved.
+    outcome: >-
+      First-hand on this container: assembly 0.41 s for the 1,056-row, 23-variable
+      cell; phase 1 (feasible basis from the program's own coefficients) 58.8 s over
+      42 pivots; phase 2 22.1 s over 16 pivots; the optimum lands on the published
+      side exactly (is_zero). Against the test file's recorded ~100 s on its own host
+      and ~2.6 s float-seeded with zero pivots. Per exact pivot ~1.4 s at degree 8.
+      Consequence for BC-105: per-stratum exact certification costs seconds
+      (float-seeded) to ~81 s (from scratch), so the pipeline sweeps in float and
+      certifies winners exactly -- the split the quench already uses -- and exact
+      certification of a whole K <= 3 stratum class (~1e6 survivors) is out of reach.
+    evidence:
+    - packing/tests/test_promote_exact_phase1.py
+    - packing/tests/test_promote_exact_lp.py
+    stop_reason: >-
+      BC-096's exit met: the cost is measured on this host, consistent with the
+      retained figures, and the route decision it feeds is recorded.
+    next_action: >-
+      Close block 2 at its boundary; the checkpoint BC-098 opens as session-052 with
+      every dependency complete.
   budget:
     wall_minutes: 120
     finalization_minutes: 15
@@ -73,7 +140,11 @@ session:
       The enumeration price in the record was quoted without its artifact and misread
       it (D-405, amended this session); the exact LP's full-cell cost exists only as a
       test file's own note, not as recorded agenda evidence.
-    after: null
+    after: >-
+      Both numbers exist with their standing labeled: the stage-1 price is an interval
+      with its one assumption named and a K <= 3 tractability boundary, and the exact
+      LP is measured at full cell scale with the float-sweep/exact-certify split it
+      implies. The checkpoint has real evidence to resequence on.
   stop_conditions:
   - >-
     Any candidate mathematical verdict is recorded unresolved with needs_review;
@@ -135,12 +206,20 @@ session:
     excluded_commands: [git, tbd, packing-validate]
   outputs:
   - packing/campaign/agent-sessions/session-051-block2-reprice-and-lp-gate.md
+  - packing/devtools/price_stage1_chunks.py
+  - packing/tests/test_price_stage1_chunks.py
   checks:
   - uv run --frozen --all-extras --group dev packing-validate --records
-  stop_reason: null
+  - uv run --frozen --all-extras --group dev packing-validate --push
+  resource_rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  - packing/campaign/resource-usage/a35f6c5f493ae6cf0.yaml
+  stop_reason: >-
+    Both block-2 commitments met their exits inside budget; the D-405 amendment this
+    block forced is recorded where the wrong claims lived.
   next_action: >-
-    The session is in progress on `BC-095` under `think-kp7o`: the pricing tool's
-    label-space counting core, then the measured prefilter rate.
+    The checkpoint opens as session-052 on `BC-098` under `think-cjxk`, with all four
+    dependencies complete and two measured prices in hand.
 ---
 # Session-051 — Block 2: the Reprice and the Exact-LP Gate
 
