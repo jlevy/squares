@@ -63,8 +63,9 @@ make format-check    # report drift without writing
 Python, Rust, and research validation are documented in
 [`development.md`](development.md).
 Run them from `packing/`, which is where the project’s `pyproject.toml` and lockfile
-live: `uv run --frozen --all-extras --group dev packing-validate --fast` while editing,
-and the full `packing-validate` at a research or merge checkpoint.
+live: `uv run --frozen --all-extras --group dev packing-validate --edit` while editing,
+`packing-validate --push` before any push (the edit tier plus the tests reachable from
+the change), and the full `packing-validate` at a research or merge checkpoint.
 
 ### Markdown formatting
 

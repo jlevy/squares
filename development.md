@@ -131,6 +131,13 @@ Choose the smallest loop that protects the change:
 # Discover the available contracts.
 uv run --frozen --all-extras --group dev packing-validate --list
 
+# Edit loop: everything fast except the broad test suite. Seconds, runs during a gate.
+uv run --frozen --all-extras --group dev packing-validate --edit
+
+# Pre-push floor: the edit tier plus the behavioral tests reachable from the change
+# (against origin/main, or --since REF). About a minute for a code change; never blind.
+uv run --frozen --all-extras --group dev packing-validate --push
+
 # Fast edit loop: pytest plus Python quality, schemas, exact witness, and cheap drift.
 uv run --frozen --all-extras --group dev packing-validate --fast
 
@@ -162,6 +169,23 @@ Checks run concurrently, but their captured output is replayed in declared order
 workers.
 Strict mode cannot be combined with a partial selection and fails on every skip.
 
+`--push` is the pre-push floor (`BC-086`). It selects the edit tier plus a
+`reachable behavioral tests` step: `devtools.reachable_tests` computes the test files
+the change can reach — import closure over `src/sqpack`, `devtools`, `cases` and
+`tests`, text mention of a changed module or file, repository walkers always included —
+and errs toward running too many, up to the whole suite when nothing narrower is
+defensible. Each of 2026-08-30’s three red pushes broke a test reachable this way from
+the changed paths ([D-381, D-393](defects.md)), and the floor would have caught all
+three.
+
+The `.gate-running` marker is a load lock protecting calibrated step budgets, not a
+correctness lock — no step mutates the working tree.
+The floor tiers say so: `--records`, `--edit`, and a `--push` whose test selection is
+narrow take no marker and run even while a full gate holds it, because a floor the lock
+can refuse is a floor that gets skipped.
+Selections containing a broad or full-tier step still take the marker and still refuse
+a second gate.
+
 Every validation subprocess has a finite 900-second default deadline.
 Override it with `--timeout-seconds SECONDS` or `PACKING_VALIDATE_TIMEOUT_SECONDS`;
 values must be positive and finite, and an explicit smaller per-call timeout still wins.
@@ -180,13 +204,12 @@ D-239 is resolved.
 On pull requests, [`packing-validation.yml`](.github/workflows/packing-validation.yml)
 runs `packing-validate --fast` on Linux and reports the stable `packing-required`
 aggregate.
-The fast behavioral step excludes only 21 measured slow nodes declared on nine
-test functions with the `exhaustive_exact` marker; the workflow contract checks that
-exact function set and rejects module-level marking.
-The current combined tree collects 139 tests: the PR command runs 118 and deselects 21
-exhaustive exact cases.
-The first hosted pull-request run finished end to end in 46 seconds, including a
-37-second Linux job and two-second aggregate.
+The fast behavioral step excludes only measured slow nodes declared on named test
+functions with the `exhaustive_exact` marker; the workflow contract checks that exact
+function set and rejects module-level marking.
+Measured 2026-08-31: the tree collects 1,045 tests, of which the fast step runs 1,020
+and deselects 25 exhaustive exact cases, in 646 seconds of essentially serial wall time
+— which is why `--push` selects a reachable subset instead of the whole step.
 
 Pushes to `main`, manual dispatches, and the weekly schedule run the complete locked
 command on Linux and macOS. The macOS integration job also runs the focused deep-golden

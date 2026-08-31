@@ -126,6 +126,7 @@ ignore = [
 "devtools/check_svg_rendering.py" = ["PLC0415"]
 # CLI behavior tests exercise small internal orchestration seams without making them APIs.
 "tests/test_validation_cli.py" = ["SLF001"]
+"tests/test_reachable_tests.py" = ["SLF001"]
 
 [tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"

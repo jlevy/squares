@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 48
+count: 49
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 4
+  sessions_measured: 5
   sessions_unmeasured: 44
   attributed:
-    rollups: 31
-    turns: 9261
-    tool_calls: 5393
-    tool_errors: 113
-    one_off_code: 1262
-    wall_hours: 45.33
+    rollups: 36
+    turns: 10487
+    tool_calls: 6132
+    tool_errors: 123
+    one_off_code: 1383
+    wall_hours: 47.81
   unattributed:
     rollups: 10
     turns: 1460
@@ -28,12 +28,12 @@ totals:
     one_off_code: 173
     wall_hours: 6.87
   measured:
-    rollups: 41
-    turns: 10721
-    tool_calls: 6271
-    tool_errors: 145
-    one_off_code: 1435
-    wall_hours: 52.2
+    rollups: 46
+    turns: 11947
+    tool_calls: 7010
+    tool_errors: 155
+    one_off_code: 1556
+    wall_hours: 54.68
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -515,3 +515,20 @@ sessions:
   tool_errors: 84
   one_off_code: 1048
   wall_hours: 38.74
+- id: session-049
+  title: "Close the hygiene queue, reassess the search, run the first sequenced slice"
+  status: completed
+  primary_bead: think-bxqv
+  phases: 5
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/39fcaf14-acd6-59fb-88e9-05f635cb7f4d.yaml
+  - packing/campaign/resource-usage/agent-a5101e181b61c2125.yaml
+  - packing/campaign/resource-usage/agent-a71eca88143ad786d.yaml
+  - packing/campaign/resource-usage/agent-a8c1a849b5e57ee7a.yaml
+  - packing/campaign/resource-usage/agent-ac4fec61a53717f37.yaml
+  turns: 1226
+  tool_calls: 739
+  tool_errors: 10
+  one_off_code: 121
+  wall_hours: 2.48

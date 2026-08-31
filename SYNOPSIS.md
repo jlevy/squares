@@ -85,7 +85,8 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty blocked hypotheses.
+hypotheses, one open hypothesis, seven open questions, and thirty-two blocked
+hypotheses.
 One additional hypothesis is unresolved because its formal prerequisite is missing.
 Its active confidence ladder has completed the exact and event controls up to the first
 nontrivial identity question; the next scientific transition is from specialized `n = 5`
@@ -336,10 +337,22 @@ searched against.
 closed the same gap one level up, joining every session to what it cost and finding that
 both obvious ways of totalling that were wrong in the flattering direction — see
 [Sessions Conducted](#sessions-conducted).
+[session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md)
+then did three things in one morning: reconciled the queue against the tree (`BC-085`
+and `BC-087` had landed while the agenda still advertised both as ready), built the
+pre-push floor `BC-086` asked for (`packing-validate --push`, 58s against `--fast`'s
+646s), and ran the `BC-088` reassessment whose sequenced plan is
+[X-009](packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md) — then
+executed that plan's first block: **twelve verified ceilings moved off the integer grid
+onto exact sides** at `n = 18, 19, 26, 27, 38, 52, 66, 67, 82, 84, 85, 86`, every one
+decided by exact sign — ten over `Q(sqrt 2)` and the last two over `Q(sqrt 7)`, the
+first exact verification outside `Q(sqrt 2)` — from a published rule or a coordinate
+lift, about `3.2` of aggregate gap. The widest trailing ceiling is now `n = 50`'s `3/7`.
 
-**The next slice is `BC-085` on `think-9k5k`**, the first ready cell of
-[agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md)
-and the one the `BC-088` search reassessment is blocked on.
+**The next slice is `BC-089`'s remainder on `think-d0j1`** in
+[agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
+the last two witness lifts — `n = 50` rational, `n = 54` quartic — then the
+robust-rational sweep, then the typed refusal at `n = 53`.
 `BC-049` on `think-xdly` is the research cell all of the mathematics below sits under,
 and it stays open.
 
@@ -2152,6 +2165,8 @@ round that names the hypothesis, control roles included.
 | [H-046](packing/campaign/hypotheses/H-046-regular-predecessor-continuation.md) | blocked | A class-angle path runs from Trump’s aligned chunk form to the record without chunk fission | 0 | — |
 | [H-047](packing/campaign/hypotheses/H-047-chunk-regular-predecessors.md) | blocked | Rounding a pose to its chunk-regular predecessor and re-quenching returns the pose | 0 | — |
 | [H-048](packing/campaign/hypotheses/H-048-glued-screen-fidelity.md) | blocked | The glued-chunk screen keeps the soft-mode winning stratum in its top decile | 0 | — |
+| [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov's decomposition | 0 | — |
+| [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent's 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
 
 ### Confirmed
 
@@ -2292,9 +2307,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 31 | 9,261 | 5,393 | 113 | 1,262 | 45.33 h |
+| claimed by a session | 36 | 10,487 | 6,132 | 123 | 1,383 | 47.81 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **41** | **10,721** | **6,271** | **145** | **1,435** | **52.2 h** |
+| **measured** | **46** | **11,947** | **7,010** | **155** | **1,556** | **54.68 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2302,13 +2317,14 @@ rounding.
 | [session-046](packing/campaign/agent-sessions/session-046-gobel-family-constructions.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-047](packing/campaign/agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | 6 | 14 | 1,230 | 841 | 18 | 2.56 h |
 | [session-048](packing/campaign/agent-sessions/session-048-what-every-session-cost.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
-| *shared by 4 sessions* | — | 1 | 6,783 | 3,787 | 84 | 38.74 h |
+| [session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | 5 | 5 | 1,226 | 739 | 10 | 2.48 h |
+| *shared by 5 sessions* | — | 1 | 6,783 | 3,787 | 84 | 38.74 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 4 |
+| measured | 5 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **48** |
+| **total** | **49** |
 
 <!-- END GENERATED: session-close-report -->
 

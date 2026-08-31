@@ -11842,10 +11842,13 @@ defects:
     but a cheap check that every control's anchor still matches, which would run in
     `--records` and catch this class in seconds without executing a single mutation.
   regression: >-
-    None yet, and the bead carries the shape: an anchor-resolution check over
-    `devtools/controls.yaml` that asserts each `replace` source appears exactly once in its
-    declared file, without running the control. That is a `--records` step, and it turns
-    "the control fired for the wrong reason" from something a reader must notice in a
-    thirty-minute log into a refusal.
+    `devtools/check_control_anchors.py`, the records-tier step "control anchors still
+    resolve" (BC-085, commit d2b6ba3): every `replace` source in `devtools/controls.yaml`
+    must appear exactly once in its declared file, resolved with the runner's own
+    `resolve_control_target` and without executing a mutation. `tests/test_control_anchors.py`
+    proves a missing anchor and a doubled anchor are both refused. The status stays
+    contained rather than fixed because the mutations themselves still run only in the
+    full gate; what the pull-request surface now refuses is the anchor rot, not a control
+    that resolves but no longer catches.
   bead: think-xdly
   recorded_in: packing/devtools/controls.yaml
