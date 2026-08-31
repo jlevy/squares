@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **11** ready, **6** tentative, **16** blocked, **5** stopped, **67** complete.
+- **10** ready, **6** tentative, **16** blocked, **5** stopped, **68** complete.
 
 - **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
 
@@ -26,7 +26,6 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-009 | `BC-089` | 0 | correctness | research | Which of the 15 trailing cases with a published exact side are materialisations of a published rule, the way… | `think-d0j1` |
 | agenda-009 | `BC-091` | 1 | insight | research | At the 31 open sizes where nobody has beaten the trivial grid, is the grid optimal or merely unbeaten? | `think-7t9u` |
 | agenda-009 | `BC-090` | 2 | insight | research | Can a stricter, better informed search beat a stochastic incumbent at any of the ten sizes whose best known… | `think-xdly` |
-| agenda-010 | `BC-093` | 0 | correctness | tool_validation | Can the Stromquist certifier-falsifier pair become one resource-system instrument that any published… | `think-y2ju` |
 | agenda-010 | `BC-094` | 0 | correctness | tool_validation | Can an escaping-pose search decide "this set is avoidable" mechanically, with the known-answer triple as its… | `think-yrvm` |
 | agenda-010 | `BC-095` | 0 | efficiency | tool_validation | What does chunk-level stage-1 enumeration actually cost in counted LP solves, once the measured orbit… | `think-kp7o` |
 | agenda-010 | `BC-096` | 1 | efficiency | measurement_validation | What does the exact LP cost at the full n = 11 cell, and does that route or the interval route carry… | `think-nu4y` |
@@ -89,7 +88,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-007 | completed |  |  |  |  | 4 | 4 |
 | agenda-008 | completed |  |  |  |  | 4 | 4 |
 | agenda-009 | active | 2 | 1 |  | 1 | 4 | 8 |
-| agenda-010 | active | 6 | 5 | 2 |  |  | 13 |
+| agenda-010 | active | 5 | 5 | 2 |  | 1 | 13 |
 
 ## What the states mean
 

@@ -536,7 +536,7 @@ sessions:
   title: "Block 1 of the two-lane overnight run: the certifier instrument and the falsifier"
   status: in_progress
   primary_bead: think-y2ju
-  phases: 1
+  phases: 2
   measured: false
   unmeasured_reason: >-
     declares no rollups

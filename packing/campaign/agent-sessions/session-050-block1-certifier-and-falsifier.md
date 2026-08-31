@@ -36,7 +36,7 @@ session:
       certificates -- into a general instrument, with the bespoke Q(sqrt 5) module
       reduced to a caller and the field seam against sqpack.field resolved or its
       refusal recorded.
-    status: in_progress
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 90
@@ -57,12 +57,74 @@ session:
       Retain the bespoke module untouched, land the general core beside it with the
       divergence recorded as the block's finding, and hand BC-094 the search interface
       only.
+    outcome: >-
+      sqpack/cover.py exists: the geometry primitives, noncrossing and connectivity
+      checks, triangle-mesh, square-tiling, and polygon-partition validators
+      (parameterized by side, with additive zeros derived from inputs), the box
+      predicates (corners, exact-shape refusal, labelled clearances, local-frame
+      avoidance margin), the exact helpers, checked_number_field, atomic record
+      writing, and the typed resource-kind refusals (point supported;
+      weighted-point/segment/threshold-charge/moving-family refused by type).
+      repaired_cover.py dropped 298 lines and printed_cover.py 105, both reduced to
+      callers; the exp-016 and exp-017 replays both exit 0 with the certificate
+      comparison byte-stable (only the run-dependent elapsed_seconds differs from the
+      retained replay artifacts); eight new tests pin the general core on a third
+      scalar (plain rationals) so a regression preserving the Stromquist records is
+      still caught; ruff and basedpyright clean. The field seam is recorded in the
+      module docstring: FieldElement lacks ordering and text(), so Q5 remains the
+      Stromquist scalar and the seam stays named rather than papered over.
+    evidence:
+    - packing/src/sqpack/cover.py
+    - packing/tests/test_cover.py
+    - packing/cases/stromquist/repaired_cover.py
+    - packing/cases/stromquist/printed_cover.py
+    stop_reason: >-
+      BC-093's exit met inside budget: both controls replayed byte-stable through the
+      general instrument, the bespoke modules are callers, and the unsupported resource
+      kinds are typed refusals with tests.
+    next_action: >-
+      Phase 2 under think-yrvm: the escaping-pose falsifier with its known-answer
+      triple.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    commitment: BC-094
+    bead: think-yrvm
+    objective: >-
+      BC-094: the escaping-pose falsifier -- search (x, y, theta) for a box of declared
+      side avoiding every declared point, certify float candidates through the exact
+      predicates cover.py now exposes, and pass think-yrvm's known-answer triple: find
+      the Figure 13 escape at s = 2 + 4/sqrt(5), saturate on the repaired twelve-point
+      set, and report the defeating pose in every refusal.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Phase 1 closed its exit forty minutes inside budget; the block's second
+      commitment is the falsifier, and the delegated recon report is already in hand.
+    budget_minutes: 90
+    started_at: '2026-08-31T05:57:00Z'
+    deadline_at: '2026-08-31T07:27:00Z'
+    expected_output: >-
+      devtools or sqpack falsifier module with the triple as its own tests: a certified
+      strict escape on the Figure 13 ten-point set, a saturation report on the repaired
+      twelve-point set carrying resolution, candidates, best margin, defeating pose,
+      and the not-a-proof caveat, and typed refusal reporting.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: >-
+      A falsifier that turns saturation into a covering claim, or a search that cannot
+      find the known Figure 13 escape at any resolution tried within budget -- either
+      stops the phase and records the miss rather than relaxing the triple.
+    fallback: >-
+      Land the exact certification path alone (a hand-fed pose checker) with the
+      search recorded as the block remainder on think-yrvm.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Slice 1 under think-y2ju: first-hand read of repaired_cover.py's structure
-      against the delegated read-only map, then the core-extraction cut list.
+      Under think-yrvm: implement the float search over (x, y, theta), then the exact
+      certification bridge, then the triple as tests.
   budget:
     wall_minutes: 150
     finalization_minutes: 15
@@ -182,13 +244,14 @@ session:
     excluded_commands: [git, tbd, packing-validate]
   outputs:
   - packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md
+  - packing/src/sqpack/cover.py
+  - packing/tests/test_cover.py
   checks:
   - uv run --frozen --all-extras --group dev packing-validate --records
   stop_reason: null
   next_action: >-
-    The session is in progress on `BC-093` under `think-y2ju`: slice 1 reads the
-    certifier core first-hand and produces the extraction cut list; `think-yrvm`
-    opens phase 2.
+    The session is in progress on `BC-094` under `think-yrvm`: the falsifier and its
+    known-answer triple, on the instrument phase 1 landed.
 ---
 # Session-050 — Block 1: the Certifier Instrument and the Falsifier
 

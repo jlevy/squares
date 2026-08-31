@@ -48,7 +48,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 13]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Can the Stromquist certifier-falsifier pair become one resource-system instrument
@@ -76,8 +76,18 @@ agenda:
     depends_on: []
     workflows: [pipeline-improvement]
     next_evidence: >-
-      Not started. X-010 Lane A rung 0; the whole proof lane hangs on this block, which
-      is a generalization of working code rather than new mathematics.
+      Discharged by session-050 phase 1: sqpack/cover.py carries the general core
+      (geometry, tiling/mesh/partition validators parameterized by side, box
+      predicates, record plumbing, typed resource-kind refusals), both case modules
+      are callers (-403 lines), the exp-016/exp-017 replays are byte-stable through
+      it, eight tests pin the core on a third scalar, and the FieldElement seam
+      (no ordering, no text()) is recorded in the module docstring rather than
+      papered over.
+    artifacts:
+    - src/sqpack/cover.py
+    - tests/test_cover.py
+    - cases/stromquist/repaired_cover.py
+    - cases/stromquist/printed_cover.py
   - id: BC-094
     purpose: tool_validation
     owner_focus: correctness

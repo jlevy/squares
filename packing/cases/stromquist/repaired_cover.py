@@ -18,15 +18,28 @@ import argparse
 import copy
 import json
 import math
-import tempfile
 import time
-from collections import Counter, deque
 from collections.abc import Callable
 from dataclasses import dataclass
 from fractions import Fraction
 from itertools import pairwise
 from pathlib import Path
-from typing import cast
+
+from sqpack import cover
+from sqpack.cover import (
+    add_points,
+    cross,
+    edges_for_face,
+    fraction_text,
+    point_in_closed_convex_polygon,
+    polygon_area2,
+    scale_point,
+    squared_distance,
+    triangle_edge_certificate,
+    validate_polygon_partition,
+    validate_triangle_mesh,
+    write_text_atomic,
+)
 
 ROOT = Path(__file__).resolve().parents[2]
 PDF = ROOT / "resources/papers/stromquist-2003-packing-10-or-11-unit-squares.pdf"
@@ -178,118 +191,8 @@ def point(x: int | Fraction | Q5, y: int | Fraction | Q5) -> Point:
     return q(x), q(y)
 
 
-def fraction_text(value: Fraction) -> str:
-    return (
-        str(value.numerator)
-        if value.denominator == 1
-        else f"{value.numerator}/{value.denominator}"
-    )
-
-
 def point_record(value: Point) -> list[str]:
     return [coordinate.text() for coordinate in value]
-
-
-def add_points(left: Point, right: Point) -> Point:
-    return left[0] + right[0], left[1] + right[1]
-
-
-def scale_point(value: Point, scalar: Q5) -> Point:
-    return value[0] * scalar, value[1] * scalar
-
-
-def subtract_points(left: Point, right: Point) -> Point:
-    return left[0] - right[0], left[1] - right[1]
-
-
-def cross(left: Point, right: Point) -> Q5:
-    return left[0] * right[1] - left[1] * right[0]
-
-
-def orient(first: Point, second: Point, third: Point) -> Q5:
-    return cross(subtract_points(second, first), subtract_points(third, first))
-
-
-def squared_distance(first: Point, second: Point) -> Q5:
-    delta = subtract_points(first, second)
-    return delta[0] ** 2 + delta[1] ** 2
-
-
-def polygon_area2(vertices: tuple[Point, ...]) -> Q5:
-    return sum(
-        (
-            cross(vertices[index], vertices[(index + 1) % len(vertices)])
-            for index in range(len(vertices))
-        ),
-        ZERO,
-    )
-
-
-def normalized_edge(first: str, second: str) -> Edge:
-    return cast(Edge, tuple(sorted((first, second))))
-
-
-def edges_for_face(face: Face) -> tuple[Edge, ...]:
-    return tuple(
-        normalized_edge(face[index], face[(index + 1) % len(face)])
-        for index in range(len(face))
-    )
-
-
-def between(value: Q5, first: Q5, second: Q5) -> bool:
-    low, high = (first, second) if first <= second else (second, first)
-    return low <= value <= high
-
-
-def segments_cross_strict(first: tuple[Point, Point], second: tuple[Point, Point]) -> bool:
-    a, b = first
-    c, d = second
-    ab_c = orient(a, b, c).sign()
-    ab_d = orient(a, b, d).sign()
-    cd_a = orient(c, d, a).sign()
-    cd_b = orient(c, d, b).sign()
-    if ab_c * ab_d < 0 and cd_a * cd_b < 0:
-        return True
-    if ab_c == 0 and between(c[0], a[0], b[0]) and between(c[1], a[1], b[1]):
-        return True
-    if ab_d == 0 and between(d[0], a[0], b[0]) and between(d[1], a[1], b[1]):
-        return True
-    if cd_a == 0 and between(a[0], c[0], d[0]) and between(a[1], c[1], d[1]):
-        return True
-    return cd_b == 0 and between(b[0], c[0], d[0]) and between(b[1], c[1], d[1])
-
-
-def validate_noncrossing(points: dict[str, Point], edges: tuple[Edge, ...]) -> None:
-    if len(edges) != len(set(edges)):
-        raise ValueError("edge inventory contains a duplicate")
-    for index, first in enumerate(edges):
-        for second in edges[index + 1 :]:
-            if set(first) & set(second):
-                continue
-            if segments_cross_strict(
-                (points[first[0]], points[first[1]]),
-                (points[second[0]], points[second[1]]),
-            ):
-                raise ValueError(f"nonadjacent edges cross: {first}, {second}")
-
-
-def connected_vertices(edges: tuple[Edge, ...]) -> set[str]:
-    adjacency: dict[str, set[str]] = {}
-    for first, second in edges:
-        adjacency.setdefault(first, set()).add(second)
-        adjacency.setdefault(second, set()).add(first)
-    if not adjacency:
-        return set()
-    root = min(adjacency)
-    reached = {root}
-    queue = deque([root])
-    while queue:
-        vertex = queue.popleft()
-        for neighbour in adjacency[vertex]:
-            if neighbour not in reached:
-                reached.add(neighbour)
-                queue.append(neighbour)
-    return reached
 
 
 def _poly_trim(polynomial: Polynomial) -> Polynomial:
@@ -586,165 +489,20 @@ def validate_lemma4_placement(
     }
 
 
-def triangle_edge_certificate(points: dict[str, Point], face: Face) -> dict[str, object]:
-    if len(face) != 3 or len(set(face)) != 3:
-        raise ValueError(f"not a three-vertex triangle: {face}")
-    distances = {
-        "-".join(edge): squared_distance(points[edge[0]], points[edge[1]])
-        for edge in edges_for_face(face)
-    }
-    if any(value > 1 for value in distances.values()):
-        raise ValueError(f"triangle has an edge longer than one: {face}")
-    return {
-        "vertices": list(face),
-        "squared_edge_lengths": {
-            name: value.text() for name, value in sorted(distances.items())
-        },
-    }
-
-
-def validate_triangle_mesh(
-    points: dict[str, Point],
-    faces: tuple[Face, ...],
-    boundary: Face,
-    *,
-    expected_faces: int,
-    declared_edges: tuple[Edge, ...] | None = None,
-) -> dict[str, object]:
-    if len(faces) != expected_faces:
-        raise ValueError(f"expected {expected_faces} faces, got {len(faces)}")
-    face_keys = [tuple(sorted(face)) for face in faces]
-    if len(face_keys) != len(set(face_keys)):
-        raise ValueError("triangle inventory contains a duplicate face")
-    if any(len(face) != 3 or len(set(face)) != 3 for face in faces):
-        raise ValueError("mesh contains a degenerate or nontriangular face")
-    if any(vertex not in points for face in faces for vertex in face):
-        raise ValueError("mesh references an unknown vertex")
-
-    signed_areas = [polygon_area2(tuple(points[name] for name in face)) for face in faces]
-    signs = {area.sign() for area in signed_areas}
-    boundary_area = polygon_area2(tuple(points[name] for name in boundary))
-    if signs != {boundary_area.sign()} or 0 in signs:
-        raise ValueError("mesh faces do not share the boundary's nonzero orientation")
-
-    incidence = Counter(edge for face in faces for edge in edges_for_face(face))
-    boundary_edges = set(edges_for_face(boundary))
-    if {edge for edge, count in incidence.items() if count == 1} != boundary_edges:
-        raise ValueError("single-incidence edges are not exactly the declared boundary")
-    if any(count not in (1, 2) for count in incidence.values()):
-        raise ValueError("a mesh edge has invalid face incidence")
-    derived_edges = tuple(sorted(incidence))
-    if declared_edges is not None:
-        if len(declared_edges) != len(set(declared_edges)):
-            raise ValueError("declared mesh edge inventory contains a duplicate")
-        if tuple(sorted(declared_edges)) != derived_edges:
-            raise ValueError("declared mesh edges omit or invent an edge")
-    validate_noncrossing(points, derived_edges)
-
-    vertices = {vertex for face in faces for vertex in face}
-    if connected_vertices(derived_edges) != vertices:
-        raise ValueError("mesh edge graph is disconnected")
-    if len(vertices) - len(derived_edges) + len(faces) != 1:
-        raise ValueError("mesh violates the disk Euler characteristic")
-    if sum(signed_areas, ZERO) != boundary_area:
-        raise ValueError("mesh face areas do not exactly tile the boundary polygon")
-    triangle_certificates = [triangle_edge_certificate(points, face) for face in faces]
-    absolute_areas = [area if area.sign() > 0 else -area for area in signed_areas]
-    minimum_area2 = min(absolute_areas)
-    return {
-        "face_count": len(faces),
-        "edge_count": len(derived_edges),
-        "vertex_count": len(vertices),
-        "boundary_edge_count": len(boundary_edges),
-        "euler_characteristic": 1,
-        "signed_area_twice": boundary_area.text(),
-        "minimum_abs_face_area_twice": minimum_area2.text(),
-        "faces": triangle_certificates,
-        "edges": [list(edge) for edge in derived_edges],
-        "boundary": list(boundary),
-        "all_edges_at_most_one": True,
-        "noncrossing": True,
-    }
-
-
 def edge_on_container(points: dict[str, Point], edge: Edge) -> bool:
-    first, second = points[edge[0]], points[edge[1]]
-    return (
-        (first[0].is_zero() and second[0].is_zero())
-        or (first[0] == SIDE and second[0] == SIDE)
-        or (first[1].is_zero() and second[1].is_zero())
-        or (first[1] == SIDE and second[1] == SIDE)
-    )
+    return cover.edge_on_container(points, edge, SIDE)
 
 
 def validate_vertices_in_container(
     points: dict[str, Point], vertices: set[str]
 ) -> dict[str, object]:
-    unknown = vertices - points.keys()
-    if unknown:
-        raise ValueError(f"tiling references unknown vertices: {sorted(unknown)}")
-    ordered = sorted(vertices)
-    outside = [
-        name
-        for name in ordered
-        if not (0 <= points[name][0] <= SIDE and 0 <= points[name][1] <= SIDE)
-    ]
-    if outside:
-        raise ValueError(f"tiling vertices lie outside [0,SIDE]^2: {outside}")
-    return {
-        "container_x_interval": ["0", SIDE.text()],
-        "container_y_interval": ["0", SIDE.text()],
-        "vertex_count": len(ordered),
-        "vertices": {name: point_record(points[name]) for name in ordered},
-        "all_vertices_in_closed_container": True,
-    }
+    return cover.validate_vertices_in_container(points, vertices, SIDE)
 
 
 def validate_square_tiling(
     points: dict[str, Point], faces: tuple[Face, ...], *, expected_faces: int
 ) -> dict[str, object]:
-    if len(faces) != expected_faces:
-        raise ValueError(f"expected {expected_faces} tiling faces, got {len(faces)}")
-    keys = [tuple(sorted(face)) for face in faces]
-    if len(keys) != len(set(keys)):
-        raise ValueError("tiling contains a duplicate face")
-    vertices = {vertex for face in faces for vertex in face}
-    containment = validate_vertices_in_container(points, vertices)
-    signed_areas = [polygon_area2(tuple(points[name] for name in face)) for face in faces]
-    signs = {area.sign() for area in signed_areas}
-    if len(signs) != 1 or 0 in signs:
-        raise ValueError("tiling faces do not have one nonzero orientation")
-    orientation_sign = signs.pop()
-    absolute_area2 = sum((area * orientation_sign for area in signed_areas), ZERO)
-    if absolute_area2 != 2 * SIDE**2:
-        raise ValueError("tiling face areas do not sum to the exact container area")
-
-    incidence = Counter(edge for face in faces for edge in edges_for_face(face))
-    if any(count not in (1, 2) for count in incidence.values()):
-        raise ValueError("tiling edge incidence is not one or two")
-    boundary_edges = {edge for edge, count in incidence.items() if count == 1}
-    if not boundary_edges or any(
-        not edge_on_container(points, edge) for edge in boundary_edges
-    ):
-        raise ValueError("tiling has a non-container single-incidence edge")
-    edges = tuple(sorted(incidence))
-    validate_noncrossing(points, edges)
-    if connected_vertices(edges) != vertices:
-        raise ValueError("tiling edge graph is disconnected")
-    if len(vertices) - len(edges) + len(faces) != 1:
-        raise ValueError("tiling violates the disk Euler characteristic")
-    return {
-        "face_count": len(faces),
-        "edge_count": len(edges),
-        "vertex_count": len(vertices),
-        "boundary_edge_count": len(boundary_edges),
-        "euler_characteristic": 1,
-        "signed_area_twice": (2 * SIDE**2 * orientation_sign).text(),
-        "noncrossing": True,
-        "all_internal_edges_have_two_incident_faces": True,
-        "all_boundary_edges_lie_on_container": True,
-        "vertex_containment": containment,
-    }
+    return cover.validate_square_tiling(points, faces, side=SIDE, expected_faces=expected_faces)
 
 
 K4_ACTIONS = (
@@ -894,41 +652,6 @@ def figure13_lemma4_placements() -> tuple[Lemma4Placement, ...]:
     )
 
 
-def validate_polygon_partition(
-    points: dict[str, Point],
-    faces: tuple[Face, ...],
-    boundary: Face,
-    *,
-    expected_faces: int,
-) -> dict[str, object]:
-    if len(faces) != expected_faces:
-        raise ValueError(f"expected {expected_faces} partition faces, got {len(faces)}")
-    keys = [tuple(sorted(face)) for face in faces]
-    if len(keys) != len(set(keys)):
-        raise ValueError("polygon partition has duplicate faces")
-    areas = [polygon_area2(tuple(points[name] for name in face)) for face in faces]
-    boundary_area = polygon_area2(tuple(points[name] for name in boundary))
-    if {area.sign() for area in areas} != {boundary_area.sign()} or boundary_area.is_zero():
-        raise ValueError("polygon partition orientations disagree")
-    if sum(areas, ZERO) != boundary_area:
-        raise ValueError("polygon partition areas do not sum to its boundary")
-    incidence = Counter(edge for face in faces for edge in edges_for_face(face))
-    if {edge for edge, count in incidence.items() if count == 1} != set(
-        edges_for_face(boundary)
-    ):
-        raise ValueError("polygon partition boundary incidence is incomplete")
-    if any(count not in (1, 2) for count in incidence.values()):
-        raise ValueError("polygon partition has invalid edge incidence")
-    edges = tuple(sorted(incidence))
-    validate_noncrossing(points, edges)
-    return {
-        "face_count": len(faces),
-        "edge_count": len(edges),
-        "signed_area_twice": boundary_area.text(),
-        "noncrossing": True,
-    }
-
-
 def figure13_certificate() -> dict[str, object]:
     points, covered, exceptions = figure13_geometry()
     source_points = figure13_points()
@@ -1017,15 +740,6 @@ def figure13_certificate() -> dict[str, object]:
             "certified": True,
         },
     }
-
-
-def point_in_closed_convex_polygon(value: Point, polygon: tuple[Point, ...]) -> bool:
-    signs = {
-        orient(polygon[index], polygon[(index + 1) % len(polygon)], value).sign()
-        for index in range(len(polygon))
-    }
-    signs.discard(0)
-    return len(signs) <= 1
 
 
 def lemma6_exact_constants() -> dict[str, object]:
@@ -1788,28 +1502,6 @@ def build_result() -> dict[str, object]:
     core["selftests"] = run_selftests(core)
     validate_record_invariants(core)
     return core
-
-
-def write_text_atomic(path: Path, text: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary_name: str | None = None
-    try:
-        with tempfile.NamedTemporaryFile(
-            mode="w",
-            encoding="utf-8",
-            dir=path.parent,
-            prefix=f".{path.name}.",
-            delete=False,
-        ) as temporary:
-            temporary.write(text)
-            temporary.flush()
-            temporary_name = temporary.name
-        Path(temporary_name).replace(path)
-    finally:
-        if temporary_name is not None:
-            temporary_path = Path(temporary_name)
-            if temporary_path.exists():
-                temporary_path.unlink()
 
 
 def replay_record(path: Path) -> dict[str, object]:

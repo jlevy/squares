@@ -359,7 +359,8 @@ blocks of two to three hours, instruments before research in both lanes, a check
 stated in the agenda’s own objective.
 **The run is live:
 [session-050](packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md)
-is in progress on `BC-093` under `think-y2ju`**, block 1 of that agenda, with `BC-094`
+is in progress on `BC-094` under `think-yrvm`** (`BC-093` complete, the general
+certifier core landed), block 1 of that agenda, with `BC-094`
 on `think-yrvm` as the block’s second phase; `BC-097` and `BC-089`’s remainder are the
 sanctioned gate filler.
 

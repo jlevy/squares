@@ -64,7 +64,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-047](agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | completed | contemporaneous | `general-improvement` (process) | `general-improvement` (process) | 6 | think-xdly | `BC-049` stays open and this session did not touch its mathematics. Three evidence records still make no novelty statement and should keep making none until someone searches: `E-migrated-lower-report`, whose provenance is `unknown-historical`, and the two n = 29 numerical checks. The inventory's own arithmetic names the highest-value unclaimed work -- an informal review of `[Nagamochi 2005]`, which 88 cases rest on and nobody here has read (`think-xdly`). |
 | [session-048](agent-sessions/session-048-what-every-session-cost.md) | completed | contemporaneous | `pipeline-improvement` (process) | `general-improvement` (process) | 3 | think-atm1 | `BC-085` on `think-9k5k`, the first ready cell of `agenda-009` and the one the reassessment behind it is blocked on. The ten unclaimed rollups stay unclaimed: they predate the field, and inventing owners for them would be worse than counting them separately, which the report now does. |
 | [session-049](agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | completed | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 5 | think-bxqv | `BC-089` continues on `think-d0j1`: the remaining witness lifts -- n = 50 rational and n = 54 in the quartic field, the Q(sqrt 7) pair having landed as a coda to this session -- then the robust-rational sweep bead, then the block's typed-refusal record for n = 53. |
-| [session-050](agent-sessions/session-050-block1-certifier-and-falsifier.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 1 | think-y2ju | The session is in progress on `BC-093` under `think-y2ju`: slice 1 reads the certifier core first-hand and produces the extraction cut list; `think-yrvm` opens phase 2. |
+| [session-050](agent-sessions/session-050-block1-certifier-and-falsifier.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-y2ju | The session is in progress on `BC-094` under `think-yrvm`: the falsifier and its known-answer triple, on the instrument phase 1 landed. |
 
 ### Workflow summary
 
@@ -78,7 +78,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 9 | 4 | 48 | 6 |
 | `efficiency-loop` | 7 | 0 | 20 | 0 |
 | `research-loop` | 3 | 4 | 23 | 7 |
-| `pipeline-improvement` | 18 | 0 | 75 | 0 |
+| `pipeline-improvement` | 18 | 0 | 76 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas
@@ -244,7 +244,7 @@ Status: **active**. Nine hours, unattended, done before the owner's morning. The
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-093 | tool_validation | 11, 13 | ready | 0 | think-y2ju | Not started. X-010 Lane A rung 0; the whole proof lane hangs on this block, which is a generalization of working code rather than new mathematics. |
+| BC-093 | tool_validation | 11, 13 | complete | 0 | think-y2ju | Discharged by session-050 phase 1: sqpack/cover.py carries the general core (geometry, tiling/mesh/partition validators parameterized by side, box predicates, record plumbing, typed resource-kind refusals), both case modules are callers (-403 lines), the exp-016/exp-017 replays are byte-stable through it, eight tests pin the core on a third scalar, and the FieldElement seam (no ordering, no text()) is recorded in the module docstring rather than papered over. |
 | BC-094 | tool_validation | 11 | ready | 0 | think-yrvm | Not started. X-010 Lane A rung 1; co-develops with BC-093 against the same controls, and deliberately carries no dependency edge so block 1 has two independent starts. |
 | BC-095 | tool_validation | 5, 11 | ready | 0 | think-kp7o | Not started. X-010 Lane B rung 0; replaces the impression the BC-092 stop decision rests on with a number. |
 | BC-096 | measurement_validation | 11 | ready | 1 | think-nu4y | Not started. X-010's Lane B gate; one afternoon-sized measurement that has never been taken. |
