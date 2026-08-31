@@ -210,7 +210,7 @@ reviews as the work lands, so a session that runs more than one block opens the 
 request at its first completed block — with a mid-session rollup snapshot standing in
 for the terminal one — and refreshes the description and cost block at each block
 boundary rather than saving both for the end.
-Added 2026-08-31 at the owner's request, during the session that opened
+Added 2026-08-31 at the owner’s request, during the session that opened
 [PR #64](https://github.com/jlevy/squares/pull/64) this way.
 
 This is `OR-1` applied to the reviewer rather than to the researcher: a measurement that

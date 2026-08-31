@@ -752,14 +752,17 @@ than 13, proving `s(12) = 4` is **strictly stronger** than proving `s(13) = 4`.
 settled cases. So the open region begins at 11 and continues at 12.
 
 **A cautionary counterexample.** It was conjectured that `s(n² − n) = n` for small `n`.
-**[Friedman DS7]** records the smallest known counterexample, due to **Lars Cleemann**:
+**[Friedman DS7]** records the first counterexample, due to **Lars Cleemann**:
 `s(17² − 17) < 17`, i.e. 272 unit squares fit in a square of side 17 with room to spare.
 Three of its squares are tilted at 45°, and *the other tilted squares* at `arctan(8/15)`
 — most of the 272 remain axis-aligned.
-The lesson generalises well beyond that family: plausible patterns in this subject fail
-at sizes far beyond where intuition or small-case data would suggest, which is a
-standing argument against believing `s(11) = 3.877084…` merely because nothing has
-beaten it.
+The boundary has since moved three times: the retained **[Kingbird]** captures record
+sub-grid packings at `m = 16` (Hajba, 2015), `m = 12` (Arslanov, 2019), and `m = 11`
+(Cantrell, February 2025, `n = 110`), so the conjecture is now known false for every
+`m ≥ 11` *(updated 2026-08-31)*. The lesson generalises well beyond that family:
+plausible patterns in this subject fail at sizes far beyond where intuition or
+small-case data would suggest, which is a standing argument against believing
+`s(11) = 3.877084…` merely because nothing has beaten it.
 
 *Note on source discrepancies:* enumerations differ between sources.
 Wikipedia lists `n = 2, 3, 5, 6, 7, 8, 10, 13, 14, 15, 24, 34, 35, 46, 47, 48`, omitting
@@ -1748,10 +1751,10 @@ These are frequently conflated with the present problem in casual sources:
     Every other proof in the literature uses symmetry only to reduce case counts.
 
 13. **Plausible patterns here fail late.** The conjecture `s(n² − n) = n` survives small
-    cases and then dies at `n = 17`, where Cleemann packed 272 unit squares into a
-    side-17 square with room to spare.
-    That is a direct argument against inferring `s(11)` from the fact that fifty years
-    of search has not beaten Trump.
+    cases and then dies — first in print at `n = 17`, where Cleemann packed 272 unit
+    squares into a side-17 square with room to spare, and by February 2025 at every
+    `m ≥ 11` (Cantrell’s `n = 110`). That is a direct argument against inferring `s(11)`
+    from the fact that fifty years of search has not beaten Trump.
 
 14. **The packing is fully explicit, and the algebra is small.** The whole configuration
     — six axis-aligned squares and five tilted at a common angle — is pinned by just

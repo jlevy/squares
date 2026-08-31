@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """The register's most load-bearing citation is checked as arithmetic, not just as a link.
 
-`E-nagamochi-lower` carries the verified lower bound for 88 of the hundred cases; the next
-most-cited evidence record carries two. `assurance.py` checks that such a bound cites
-verified evidence of the right claim and scope, which is a statement about the citation.
-A transcription slip in any one of the 88 values would have passed every existing check.
+`E-nagamochi-lower` carries the verified lower bound for 86 of the hundred cases (88
+until 2026-08-31, when the first-party green17 certificate took over `n = 17` and
+`n = 18`); the next most-cited evidence record carries two. `assurance.py` checks that
+such a bound cites verified evidence of the right claim and scope, which is a statement
+about the citation. A transcription slip in any one of the 86 values would have passed
+every existing check.
 """
 
 from __future__ import annotations
@@ -31,11 +33,14 @@ def test_the_recorded_bounds_re_derive() -> None:
 
 
 def test_it_covers_the_cases_it_claims_to() -> None:
-    """Eighty-eight, and none outside the record's declared scope of 4 to 100."""
+    """Eighty-six, and none outside the record's declared scope of 4 to 100."""
     covered = citing()
-    assert len(covered) == 88
+    assert len(covered) == 86
     assert min(covered) >= 4
     assert max(covered) <= 100
+    # The two cases the green17 certificate took over cite it no longer.
+    assert 17 not in covered
+    assert 18 not in covered
 
 
 @pytest.mark.parametrize("n", [4, 7, 8, 9, 14, 15, 16, 99, 100])
@@ -75,7 +80,7 @@ def test_a_wrong_value_is_refused(monkeypatch: pytest.MonkeyPatch) -> None:
 
     def poisoned() -> dict[int, dict]:
         found = real()
-        found[17]["verified_lower_bound"]["value"] = "4.5"
+        found[19]["verified_lower_bound"]["value"] = "4.6"
         return found
 
     monkeypatch.setattr(nagamochi, "cases", poisoned)

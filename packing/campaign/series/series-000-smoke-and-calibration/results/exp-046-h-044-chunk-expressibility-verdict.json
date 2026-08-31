@@ -1,0 +1,662 @@
+{
+ "hypothesis": "H-044",
+ "criterion": "at least 4/5 of frozen-corpus records at n <= 30 admit a K <= 6 chunk decomposition with at most two free squares under the declared bands",
+ "corpus": {
+  "source": "atlas/known-best/chunk-partitions.json",
+  "freeze": "atlas/known-best/manifest.json; inspected n=1..100 calibration corpus",
+  "freeze_caveat": "no machine-readable freeze date or content hash exists for the manifest; the nearest anchors are the 2026-08-26 retrieval dates and H-044's own registration date, and H-044's review amendment marks this corpus calibration-only",
+  "denominator_readings": {
+   "all_records": "every atlas record at n <= 30 (30: 20 exact-grid plus 10 non-grid), per the claim text 'standing-record poses at n <= 30 with public full geometry'",
+   "non_grid_sweep_records": "the 10 non-grid records, which are exactly H-044's own sweep points at n <= 30; the registered text supports both readings and choosing between them is a preregistration-style decision held for the owner"
+  }
+ },
+ "contract_decisions_in_force": [
+  "singleton chunks are inadmissible (candidate generation requires size >= 2)",
+  "sliding contact assemblies and angle-class splits are outside the candidate universe; their misses are typed, never H-044 refutations"
+ ],
+ "bands": [
+  {
+   "band": "exact",
+   "denominator_readings": {
+    "all_records": {
+     "records": 30,
+     "established": 23,
+     "fraction": "23/30",
+     "fraction_decimal_display_only": "0.766667",
+     "criterion_met": false
+    },
+    "non_grid_sweep_records": {
+     "records": 10,
+     "established": 3,
+     "fraction": "3/10",
+     "fraction_decimal_display_only": "0.300000",
+     "criterion_met": false
+    }
+   },
+   "rows": [
+    {
+     "n": 1,
+     "witness_id": "W-known-best-n001",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 0,
+     "selected_free_square_count": 1,
+     "limitation": null
+    },
+    {
+     "n": 2,
+     "witness_id": "W-known-best-n002",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 3,
+     "witness_id": "W-known-best-n003",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 4,
+     "witness_id": "W-known-best-n004",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 5,
+     "witness_id": "W-known-best-n005",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 6,
+     "witness_id": "W-known-best-n006",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 7,
+     "witness_id": "W-known-best-n007",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 8,
+     "witness_id": "W-known-best-n008",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 9,
+     "witness_id": "W-known-best-n009",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 10,
+     "witness_id": "W-known-best-n010",
+     "source_kind": "kingbird-derived-facts",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 3,
+     "selected_free_square_count": 2,
+     "limitation": null
+    },
+    {
+     "n": 11,
+     "witness_id": "W-known-best-n011",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 12,
+     "witness_id": "W-known-best-n012",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 13,
+     "witness_id": "W-known-best-n013",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 14,
+     "witness_id": "W-known-best-n014",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 15,
+     "witness_id": "W-known-best-n015",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 16,
+     "witness_id": "W-known-best-n016",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 17,
+     "witness_id": "W-known-best-n017",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 18,
+     "witness_id": "W-known-best-n018",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 19,
+     "witness_id": "W-known-best-n019",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 20,
+     "witness_id": "W-known-best-n020",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 21,
+     "witness_id": "W-known-best-n021",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 22,
+     "witness_id": "W-known-best-n022",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 23,
+     "witness_id": "W-known-best-n023",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 24,
+     "witness_id": "W-known-best-n024",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 25,
+     "witness_id": "W-known-best-n025",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 26,
+     "witness_id": "W-known-best-n026",
+     "source_kind": "kingbird-derived-facts",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 6,
+     "selected_free_square_count": 2,
+     "limitation": null
+    },
+    {
+     "n": 27,
+     "witness_id": "W-known-best-n027",
+     "source_kind": "kingbird-derived-facts",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 5,
+     "selected_free_square_count": 2,
+     "limitation": null
+    },
+    {
+     "n": 28,
+     "witness_id": "W-known-best-n028",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 29,
+     "witness_id": "W-known-best-n029",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 30,
+     "witness_id": "W-known-best-n030",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    }
+   ]
+  },
+  {
+   "band": "near",
+   "denominator_readings": {
+    "all_records": {
+     "records": 30,
+     "established": 23,
+     "fraction": "23/30",
+     "fraction_decimal_display_only": "0.766667",
+     "criterion_met": false
+    },
+    "non_grid_sweep_records": {
+     "records": 10,
+     "established": 3,
+     "fraction": "3/10",
+     "fraction_decimal_display_only": "0.300000",
+     "criterion_met": false
+    }
+   },
+   "rows": [
+    {
+     "n": 1,
+     "witness_id": "W-known-best-n001",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 0,
+     "selected_free_square_count": 1,
+     "limitation": null
+    },
+    {
+     "n": 2,
+     "witness_id": "W-known-best-n002",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 3,
+     "witness_id": "W-known-best-n003",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 4,
+     "witness_id": "W-known-best-n004",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 5,
+     "witness_id": "W-known-best-n005",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 6,
+     "witness_id": "W-known-best-n006",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 7,
+     "witness_id": "W-known-best-n007",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 8,
+     "witness_id": "W-known-best-n008",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 9,
+     "witness_id": "W-known-best-n009",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 10,
+     "witness_id": "W-known-best-n010",
+     "source_kind": "kingbird-derived-facts",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 3,
+     "selected_free_square_count": 2,
+     "limitation": null
+    },
+    {
+     "n": 11,
+     "witness_id": "W-known-best-n011",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 12,
+     "witness_id": "W-known-best-n012",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 13,
+     "witness_id": "W-known-best-n013",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 14,
+     "witness_id": "W-known-best-n014",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 15,
+     "witness_id": "W-known-best-n015",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 16,
+     "witness_id": "W-known-best-n016",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 17,
+     "witness_id": "W-known-best-n017",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 18,
+     "witness_id": "W-known-best-n018",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 19,
+     "witness_id": "W-known-best-n019",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 20,
+     "witness_id": "W-known-best-n020",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 21,
+     "witness_id": "W-known-best-n021",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 22,
+     "witness_id": "W-known-best-n022",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 23,
+     "witness_id": "W-known-best-n023",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 24,
+     "witness_id": "W-known-best-n024",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 2,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 25,
+     "witness_id": "W-known-best-n025",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    },
+    {
+     "n": 26,
+     "witness_id": "W-known-best-n026",
+     "source_kind": "kingbird-derived-facts",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 6,
+     "selected_free_square_count": 2,
+     "limitation": null
+    },
+    {
+     "n": 27,
+     "witness_id": "W-known-best-n027",
+     "source_kind": "kingbird-derived-facts",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 5,
+     "selected_free_square_count": 2,
+     "limitation": null
+    },
+    {
+     "n": 28,
+     "witness_id": "W-known-best-n028",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 29,
+     "witness_id": "W-known-best-n029",
+     "source_kind": "kingbird-derived-facts",
+     "established": false,
+     "reason": "typed-no-partition",
+     "selected_chunk_count": null,
+     "selected_free_square_count": null,
+     "limitation": "Complete for bars, filled rectangles, and corner Ls within the reported maximal lattice components. Sliding contact assemblies and angle-class splits are outside this candidate universe; a non-establishment is not an H-044 refutation."
+    },
+    {
+     "n": 30,
+     "witness_id": "W-known-best-n030",
+     "source_kind": "exact-grid",
+     "established": true,
+     "reason": "established",
+     "selected_chunk_count": 1,
+     "selected_free_square_count": 0,
+     "limitation": null
+    }
+   ]
+  }
+ ],
+ "verdict_note": "held unresolved with needs_review per the run's unattended rules; the fraction sits near the registered threshold and both review questions are frozen-contract decisions, not tonight's"
+}

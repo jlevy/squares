@@ -183,8 +183,8 @@ correctness lock — no step mutates the working tree.
 The floor tiers say so: `--records`, `--edit`, and a `--push` whose test selection is
 narrow take no marker and run even while a full gate holds it, because a floor the lock
 can refuse is a floor that gets skipped.
-Selections containing a broad or full-tier step still take the marker and still refuse
-a second gate.
+Selections containing a broad or full-tier step still take the marker and still refuse a
+second gate.
 
 Every validation subprocess has a finite 900-second default deadline.
 Override it with `--timeout-seconds SECONDS` or `PACKING_VALIDATE_TIMEOUT_SECONDS`;
@@ -203,10 +203,9 @@ D-239 is resolved.
 
 On pull requests, [`packing-validation.yml`](.github/workflows/packing-validation.yml)
 runs `packing-validate --fast` on Linux and reports the stable `packing-required`
-aggregate.
-The fast behavioral step excludes only measured slow nodes declared on named test
-functions with the `exhaustive_exact` marker; the workflow contract checks that exact
-function set and rejects module-level marking.
+aggregate. The fast behavioral step excludes only measured slow nodes declared on named
+test functions with the `exhaustive_exact` marker; the workflow contract checks that
+exact function set and rejects module-level marking.
 Measured 2026-08-31: the tree collects 1,045 tests, of which the fast step runs 1,020
 and deselects 25 exhaustive exact cases, in 646 seconds of essentially serial wall time
 — which is why `--push` selects a reachable subset instead of the whole step.

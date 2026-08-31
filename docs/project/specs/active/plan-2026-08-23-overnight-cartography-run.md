@@ -342,12 +342,17 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, use
-[session 049](../../../../packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md).
-Sessions 027 through 049 are terminal, and agendas 006, 007 and 008 are closed.
-Open `BC-089`’s remainder under `think-d0j1` as the next bounded driver: the hygiene
-commitments are complete, `BC-088`’s reassessment is discharged by X-009, and the
-recognition block it sequenced first has twelve of its fourteen cases certified with
-only the rational `n = 50` and quartic `n = 54` lifts still open.
+[session 060](../../../../packing/campaign/agent-sessions/session-060-verification-review.md),
+the verification review the owner redirected onto the repository's own rubric;
+agenda-010 is fully discharged (eight sessions, BC-093 through BC-103's
+authorized slices), and the active slice is `BC-106` under `think-ngf0` in
+[agenda-011](../../../../packing/campaign/agendas/agenda-011-verification-review.md)
+-- the six overnight holds resolved as determinations, the green17 bound
+upgraded to `4.426213` on two independent formal methods with the frontier
+fields moved at `n = 17` and `n = 18`, and the assembled case landing on the
+pull request for the owner's whole-PR review.
+Sessions 027 through 049 are terminal, and agendas 006, 007 and 008 are closed; the
+recognition block BC-089 keeps its remainder open as sanctioned gate filler.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

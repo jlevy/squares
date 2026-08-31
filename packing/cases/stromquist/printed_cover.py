@@ -23,8 +23,19 @@ from collections.abc import Callable
 from fractions import Fraction
 from pathlib import Path
 
-import sympy as sp
-
+from sqpack.cover import (
+    avoidance_margin,
+    box_corners,
+    checked_number_field,
+    corner_clearances,
+    diagnostic_decimal,
+    exact_abs,
+    exact_max,
+    exact_min,
+    fraction_text,
+    object_dict,
+    validate_box_shape,
+)
 from sqpack.field import FieldElement, NumberField
 from sqpack.verify import exact_sign, verify_packing
 
@@ -38,75 +49,12 @@ ExactEdge = tuple[ExactPoint, ExactPoint]
 RationalEndpoint = int | Fraction
 
 
-def fraction_text(value: Fraction) -> str:
-    """Serialize a rational without losing its denominator."""
-    if value.denominator == 1:
-        return str(value.numerator)
-    return f"{value.numerator}/{value.denominator}"
-
-
 def exact_value(value: FieldElement) -> dict[str, object]:
     """Serialize a field element in its exact power-basis representation."""
     return {
         "coefficients_low_to_high": [fraction_text(c) for c in value.coeffs],
         "decimal_for_display_only": format(float(value), ".16g"),
     }
-
-
-def exact_abs(value: FieldElement) -> FieldElement:
-    return value if value.sign() >= 0 else -value
-
-
-def exact_max(left: FieldElement, right: FieldElement) -> tuple[FieldElement, str]:
-    if (left - right).sign() >= 0:
-        return left, "u"
-    return right, "v"
-
-
-def exact_min(
-    labelled: list[tuple[str, FieldElement]],
-) -> tuple[str, FieldElement]:
-    if not labelled:
-        raise ValueError("cannot take the minimum of an empty exact list")
-    label, value = labelled[0]
-    for candidate_label, candidate in labelled[1:]:
-        if (candidate - value).sign() < 0:
-            label, value = candidate_label, candidate
-    return label, value
-
-
-def object_dict(value: object, label: str) -> dict[str, object]:
-    """Narrow a nested evidence object without making the record dynamically typed."""
-    if not isinstance(value, dict):
-        raise TypeError(f"{label} evidence is not a mapping")
-    return value
-
-
-def checked_number_field(
-    min_poly: tuple[int, ...],
-    isolating: tuple[RationalEndpoint, RationalEndpoint],
-) -> tuple[NumberField, dict[str, bool]]:
-    """Construct a field only after replaying its exact metadata contract."""
-    variable = sp.Symbol("x")
-    polynomial = sp.Poly.from_list(list(min_poly), gens=variable, domain=sp.QQ)
-    lower = sp.Rational(isolating[0].numerator, isolating[0].denominator)
-    upper = sp.Rational(isolating[1].numerator, isolating[1].denominator)
-    checks = {
-        "minimal_polynomial_irreducible_over_Q": bool(polynomial.is_irreducible),
-        "minimal_polynomial_squarefree": bool(polynomial.gcd(polynomial.diff()).degree() == 0),
-        "isolating_interval_contains_exactly_one_root": bool(
-            polynomial.count_roots(lower, upper) == 1
-        ),
-    }
-    if not all(checks.values()):
-        failed = [name for name, passed in checks.items() if not passed]
-        raise ValueError(f"algebraic field metadata failed: {failed}")
-    return NumberField(min_poly, isolating), checks
-
-
-def diagnostic_decimal(value: float) -> str:
-    """Round non-decisive libm diagnostics before retaining them."""
-    return format(value, ".12g")
 
 
 def figure13_model() -> dict[str, object]:
@@ -218,30 +166,14 @@ def figure13_escape() -> dict[str, object]:
     if (cosine * cosine + sine * sine - rational(1)).sign() != 0:
         raise ValueError("Figure 13 escape orientation is not a unit vector")
 
-    corners: list[ExactPoint] = []
-    for sign_u, sign_v in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
-        corners.append(
-            (
-                center_x + sign_u * half * cosine - sign_v * half * sine,
-                center_y + sign_u * half * sine + sign_v * half * cosine,
-            )
-        )
+    corners: list[ExactPoint] = box_corners((center_x, center_y), half, cosine, sine)
     verifier = verify_packing(
         [corners], side, sign=exact_sign, check_shapes=False, bucket=False
     )
     if not verifier.valid:
         raise ValueError(f"Figure 13 escape violates the container: {verifier.failures}")
 
-    container_clearances: list[tuple[str, FieldElement]] = []
-    for index, (x, y) in enumerate(corners):
-        container_clearances.extend(
-            (
-                (f"corner_{index}_left", x),
-                (f"corner_{index}_bottom", y),
-                (f"corner_{index}_right", side - x),
-                (f"corner_{index}_top", side - y),
-            )
-        )
+    container_clearances: list[tuple[str, FieldElement]] = corner_clearances(corners, side)
     if any(value.sign() <= 0 for _, value in container_clearances):
         raise ValueError("Figure 13 escape is not strictly inside the container")
     min_clearance_label, min_clearance = exact_min(container_clearances)
@@ -260,12 +192,7 @@ def figure13_escape() -> dict[str, object]:
     ]
     avoidance: list[tuple[str, FieldElement]] = []
     for label, x, y in figure13_points:
-        dx, dy = x - center_x, y - center_y
-        local_u = cosine * dx + sine * dy
-        local_v = -sine * dx + cosine * dy
-        margin_u = exact_abs(local_u) - half
-        margin_v = exact_abs(local_v) - half
-        margin, _ = exact_max(margin_u, margin_v)
+        margin, _ = avoidance_margin((x, y), (center_x, center_y), half, cosine, sine)
         if margin.sign() <= 0:
             raise ValueError(f"Figure 13 witness does not strictly avoid {label}")
         avoidance.append((label, margin))
@@ -376,28 +303,8 @@ def printed_figure14_escape() -> dict[str, object]:
     if (length - rational(1)).sign() <= 0:
         raise ValueError("witness is not a box: its side must be strictly greater than one")
 
-    # Ordered corners use edge vectors L(cos,sin) and L(-sin,cos).
-    corners: list[ExactPoint] = []
-    for sign_u, sign_v in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
-        corners.append(
-            (
-                center_x + sign_u * half * cosine - sign_v * half * sine,
-                center_y + sign_u * half * sine + sign_v * half * cosine,
-            )
-        )
-
-    edge_squared = []
-    corner_dots = []
-    for index in range(4):
-        x1, y1 = corners[index]
-        x2, y2 = corners[(index + 1) % 4]
-        x0, y0 = corners[(index - 1) % 4]
-        edge_squared.append((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
-        corner_dots.append((x0 - x1) * (x2 - x1) + (y0 - y1) * (y2 - y1))
-    if not all((value - length * length).is_zero() for value in edge_squared):
-        raise ValueError("witness corners do not have the declared exact side length")
-    if not all(value.is_zero() for value in corner_dots):
-        raise ValueError("witness corners are not exact right angles")
+    corners: list[ExactPoint] = box_corners((center_x, center_y), half, cosine, sine)
+    validate_box_shape(corners, length)
 
     # Reuse the packing verifier only for its independently implemented container
     # checks.  Shape checking there is unit-specific, whereas a box has L > 1.
@@ -417,16 +324,7 @@ def printed_figure14_escape() -> dict[str, object]:
     if shifted_verifier.valid:
         raise ValueError("left-shift mutation was not rejected by the container verifier")
 
-    clearances: list[tuple[str, FieldElement]] = []
-    for index, (x, y) in enumerate(corners):
-        clearances.extend(
-            (
-                (f"corner_{index}_left", x),
-                (f"corner_{index}_bottom", y),
-                (f"corner_{index}_right", side - x),
-                (f"corner_{index}_top", side - y),
-            )
-        )
+    clearances: list[tuple[str, FieldElement]] = corner_clearances(corners, side)
     if any(value.sign() < 0 for _, value in clearances):
         raise ValueError("witness has a negative exact container clearance")
     contacts = [label for label, value in clearances if value.sign() == 0]
@@ -436,12 +334,7 @@ def printed_figure14_escape() -> dict[str, object]:
     point_records = []
     avoidance_margins: list[tuple[str, FieldElement]] = []
     for label, x, y in figure14_points(field, a):
-        dx, dy = x - center_x, y - center_y
-        local_u = cosine * dx + sine * dy
-        local_v = -sine * dx + cosine * dy
-        margin_u = exact_abs(local_u) - half
-        margin_v = exact_abs(local_v) - half
-        margin, active_axis = exact_max(margin_u, margin_v)
+        margin, active_axis = avoidance_margin((x, y), (center_x, center_y), half, cosine, sine)
         if margin.sign() <= 0:
             raise ValueError(f"witness does not strictly avoid printed point {label}")
         avoidance_margins.append((label, margin))

@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 50
+count: 60
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 6
+  sessions_measured: 16
   sessions_unmeasured: 44
   attributed:
-    rollups: 36
-    turns: 10671
-    tool_calls: 6223
-    tool_errors: 125
-    one_off_code: 1395
-    wall_hours: 49.79
+    rollups: 42
+    turns: 12876
+    tool_calls: 7405
+    tool_errors: 151
+    one_off_code: 1561
+    wall_hours: 65.1
   unattributed:
     rollups: 10
     turns: 1460
@@ -28,12 +28,12 @@ totals:
     one_off_code: 173
     wall_hours: 6.87
   measured:
-    rollups: 46
-    turns: 12131
-    tool_calls: 7101
-    tool_errors: 157
-    one_off_code: 1568
-    wall_hours: 56.66
+    rollups: 52
+    turns: 14336
+    tool_calls: 8283
+    tool_errors: 183
+    one_off_code: 1734
+    wall_hours: 71.97
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -545,3 +545,138 @@ sessions:
   tool_errors: 8
   one_off_code: 42
   wall_hours: 3.24
+- id: session-051
+  title: "Block 2 of the overnight run: the enumeration reprice and the exact-LP gate"
+  status: completed
+  primary_bead: think-kp7o
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  - packing/campaign/resource-usage/a35f6c5f493ae6cf0.yaml
+  turns: 1999
+  tool_calls: 1047
+  tool_errors: 26
+  one_off_code: 166
+  wall_hours: 14.86
+- id: session-052
+  title: "The mid-run checkpoint: resequence the tentative half on the night's evidence"
+  status: completed
+  primary_bead: think-cjxk
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  turns: 1961
+  tool_calls: 1019
+  tool_errors: 26
+  one_off_code: 166
+  wall_hours: 14.81
+- id: session-053
+  title: "Block 3 of the overnight run: machine-checking Bentz 2010"
+  status: completed
+  primary_bead: think-1o1f
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  - packing/campaign/resource-usage/agent-ac40f3b59df269a0e.yaml
+  turns: 1986
+  tool_calls: 1034
+  tool_errors: 26
+  one_off_code: 166
+  wall_hours: 14.97
+- id: session-054
+  title: "Block 1 of the two-lane overnight run: the certifier instrument and the falsifier"
+  status: completed
+  primary_bead: think-y2ju
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  - packing/campaign/resource-usage/a8a236cbd8a0e6d95.yaml
+  - packing/campaign/resource-usage/a0083f0c8eb083ddb.yaml
+  turns: 2049
+  tool_calls: 1083
+  tool_errors: 26
+  one_off_code: 166
+  wall_hours: 14.94
+- id: session-055
+  title: "Block 4 of the overnight run: the H-044 verdict"
+  status: completed
+  primary_bead: think-l48p
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  - packing/campaign/resource-usage/agent-a865b43cbbef91fe2.yaml
+  turns: 2054
+  tool_calls: 1075
+  tool_errors: 26
+  one_off_code: 166
+  wall_hours: 14.97
+- id: session-056
+  title: "Block 5 of the overnight run: the m = 4 foundation layer"
+  status: completed
+  primary_bead: think-1o1f
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  turns: 1961
+  tool_calls: 1019
+  tool_errors: 26
+  one_off_code: 166
+  wall_hours: 14.81
+- id: session-057
+  title: "Block 6 of the overnight run: the Green sizes ladder"
+  status: completed
+  primary_bead: think-q6vy
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  turns: 1961
+  tool_calls: 1019
+  tool_errors: 26
+  one_off_code: 166
+  wall_hours: 14.81
+- id: session-058
+  title: "The checkpoint's gate filler: sizing m = 8 against the m = 7 encoding"
+  status: completed
+  primary_bead: think-07t7
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  turns: 1961
+  tool_calls: 1019
+  tool_errors: 26
+  one_off_code: 166
+  wall_hours: 14.81
+- id: session-059
+  title: "The checkpoint's other filler: the tau* diagnostic at n = 12"
+  status: completed
+  primary_bead: think-0z9b
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  turns: 1961
+  tool_calls: 1019
+  tool_errors: 26
+  one_off_code: 166
+  wall_hours: 14.81
+- id: session-060
+  title: "The verification review: six determinations under the standing rubric"
+  status: completed
+  primary_bead: think-ngf0
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  turns: 1961
+  tool_calls: 1019
+  tool_errors: 26
+  one_off_code: 166
+  wall_hours: 14.81

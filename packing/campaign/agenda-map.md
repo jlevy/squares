@@ -2,7 +2,7 @@
 
 # Agenda map
 
-92 agenda commitments across 9 agendas, as declared in each agenda's own frontmatter.
+106 agenda commitments across 11 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **5** ready, **1** tentative, **13** blocked, **5** stopped, **68** complete.
+- **7** ready, **3** tentative, **13** blocked, **5** stopped, **78** complete.
 
 - **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
 
@@ -26,6 +26,10 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-009 | `BC-089` | 0 | correctness | research | Which of the 15 trailing cases with a published exact side are materialisations of a published rule, the way… | `think-d0j1` |
 | agenda-009 | `BC-091` | 1 | insight | research | At the 31 open sizes where nobody has beaten the trivial grid, is the grid optimal or merely unbeaten? | `think-7t9u` |
 | agenda-009 | `BC-090` | 2 | insight | research | Can a stricter, better informed search beat a stochastic incumbent at any of the ten sizes whose best known… | `think-xdly` |
+| agenda-010 | `BC-099` | 0 | correctness | research | Does Bentz 2010's m = 4 argument certify mechanically, or where exactly does it escape? | `think-1o1f` |
+| agenda-010 | `BC-104` | 2 | insight | research | Does the stage-1 pipeline -- enumerator, glued rows, class-angle sweep -- reproduce the proved controls… | `think-sfzh` |
+| agenda-010 | `BC-097` | 3 | process | tool_validation | Is the queue readable -- the gap ranking on a durable surface, and the 25 stale in_progress beads reconciled? | `think-6z95` |
+| agenda-010 | `BC-105` | 3 | correctness | research | Can a restricted-class optimality statement at n = 11 -- no packing of at most K chunks with at most two tilt… | `think-dbtx` |
 
 ## Blocked, and on what
 
@@ -75,6 +79,8 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-007 | completed |  |  |  |  | 4 | 4 |
 | agenda-008 | completed |  |  |  |  | 4 | 4 |
 | agenda-009 | active | 2 | 1 |  | 1 | 4 | 8 |
+| agenda-010 | active | 2 | 2 |  |  | 9 | 13 |
+| agenda-011 | active |  |  |  |  | 1 | 1 |
 
 ## What the states mean
 

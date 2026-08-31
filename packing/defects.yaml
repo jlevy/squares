@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 404
+count: 408
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -11852,7 +11852,6 @@ defects:
     that resolves but no longer catches.
   bead: think-xdly
   recorded_in: packing/devtools/controls.yaml
-
 - id: D-404
   title: exp-045's registration froze a mutation vocabulary its instrument never carried
   date: '2026-08-31'
@@ -11901,3 +11900,156 @@ defects:
     auditor will look first.
   bead: think-1s0h
   recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md
+- id: D-405
+  title: A sequencing plan was built on an unmeasured claim that the verified gap ranks nothing
+  date: '2026-08-31'
+  layer: record
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: one agenda cycle; BC-088 was written 2026-08-31 and sequenced X-009 the same day
+  severity: medium
+  status: contained
+  what: >-
+    BC-088's entry states the best-known-to-proved-lower gap "is about 0.5 for every open
+    case" and concludes that "ranking by that gap ranks nothing", and X-009 repeats the
+    premise. No measurement stands behind either sentence. Measured over all 65 open
+    cases, the spread is a factor of ten -- 0.0557 at n = 97 to 0.5364 at n = 51 -- and
+    the ranking is structured by k = m^2 - n: the open k = 3 line (61, 78, 97), then
+    n = 11, then the k = 4 line head the table, and the "about 0.5" cases are exactly the
+    mid-range annealing and strip records the reassessment was looking at.
+  consequence: >-
+    The erased signal points at the proof lane -- the k = 3 line is Bentz's own stated
+    conjecture with five proved predecessors, and n = 12 sits one row further down with
+    a lower bound that is not even bespoke -- so the plan sequenced three upper-bound
+    blocks while the structured head of the table went unread. Conservative: it cost
+    direction, not soundness; nothing false entered a record lane.
+  fix: >-
+    The measurement is a tool now: devtools/gap_ranking.py ranks the open cases from the
+    frontier records at 80-digit precision with the m^2 - k form labeled per case.
+    X-010 carries the table and sequences on it; the agenda entry and X-009 carry dated
+    correction notes rather than rewritten history.
+  regression: >-
+    devtools/gap_ranking.py replays the ranking on demand; its durable wiring (records
+    tier or generated view) is a filed x-010 bead. The check that would have caught the
+    class -- a claim of the form "measurement M says X" citing no artifact -- remains
+    manual review.
+  bead: think-bxqv
+  recorded_in: packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md
+- id: D-406
+  title: BC-092 was stopped on an enumeration price that traces to no artifact
+  date: '2026-08-31'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: one agenda cycle; the figure entered with X-009 on 2026-08-31
+  severity: medium
+  status: outstanding
+  what: >-
+    X-009, agenda-009, session-049, and the ledger all quote "9.3e9 raw orbit work at
+    n = 5" as the measured reason generative enumeration is priced out as its own
+    block, citing no artifact path. The artifact exists --
+    atlas/known-best/contact-enumeration-pricing.json, entry n = 5,
+    raw_orbit_image_upper_work = 9,296,855,040 -- and it says the opposite of what the
+    stop decision took from it: that figure is the priced-out LEGACY route (labeled
+    canonicalization), and the artifact's own decision rule at n = 5 is
+    enumerate-isomorph-free, which reaches the same 11,013 canonical orbits without
+    that work. The local realizability prefilter is separately measured there through
+    n = 4 (26 of 124 orbits locally feasible) and unrun at n = 5, and
+    MAX_SCAFFOLD_SIZE = 5 remains a typed cap rather than a measured wall. Two
+    failures, then: the reassessment quoted a number without its artifact and read an
+    upper-work bound for a rejected route as pricing enumeration itself; and this
+    defect's own first version asserted no artifact existed, because a text grep for
+    "9.3e9" cannot find a record storing 9,296,855,040 -- corrected the same day by
+    session-051, which found the artifact by finding its tool
+    (devtools/price_contact_enumeration.py).
+  consequence: >-
+    A research block was stopped and folded into another on a number nobody can replay.
+    If the corrected price is affordable, the queue silently dropped the one route to
+    restricted-class optimality statements; if it is not, the record still cannot say
+    so. Either way the decision reads as measured and is not.
+  fix: >-
+    Dated correction notes in X-009 and agenda-009 point here, amended with the
+    artifact path once session-051 found it; X-010's Lane B rung 0 is the repricing --
+    chunk-level stage-1 in counted LP solves, extending
+    devtools/price_contact_enumeration.py rather than shadowing it, with the
+    isomorph-free route and the prefilter applied and an omission-control design
+    stated -- tracked on the x-010 beads. The stopped state stands until that number
+    exists.
+  regression: >-
+    None yet beyond the correction notes; the repricing bead's exit is the number plus
+    a go/no-go, and the general detector (no load-bearing figure without an artifact
+    path) remains manual review under OR-2.
+  bead: think-bxqv
+  recorded_in: packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md
+- id: D-407
+  title: The control snapshot omitted every file the checked documents link to
+  date: '2026-08-31'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: >-
+    hours as red, longer as latent: the first inline link from a checked document
+    into a pruned tree turned main red at 00:58Z and stayed red through three merges
+  severity: medium
+  status: fixed
+  what: >-
+    The negative-control worker snapshot prunes the literature archive and never
+    copied .agents, but the link checker runs inside the worker and follows inline
+    links from the campaign record and the root documents. The night the record
+    first linked into both trees (campaign/README.md to .agents/skills, H-037 to a
+    paper PDF, agenda-010 to the Bentz transcription), every campaign control that
+    reached the link scan failed on a dead link instead of its registered refusal,
+    and the full surface on main went red three merges in a row while each pull
+    request's lighter surface stayed green.
+  consequence: >-
+    Conservative -- red for the wrong reason, not green for the wrong reason -- but
+    it buried the registered refusals: any real regression in a campaign rule would
+    have been indistinguishable from the link noise, and one such regression
+    (D-408) was in fact hiding behind it.
+  fix: >-
+    run_negative_controls now copies what is actually linked: .agents joins
+    ROOT_DOCUMENTS, and linked_resource_targets() scans the checked documents for
+    inline links into resources/ and copies exactly those targets into each worker
+    (2.1 MiB measured), counted by the snapshot byte guard. A link whose target
+    truly does not exist stays dead for the real checker to refuse.
+  regression: >-
+    The re-aimed bead-collision control (D-408) now reaches its registered rule
+    through the link scan; any future inline link into a pruned tree is copied by
+    the same scan rather than special-cased.
+  bead: think-1o1f
+  recorded_in: packing/devtools/run_negative_controls.py
+- id: D-408
+  title: A negative control was defused by its collision partner completing
+  date: '2026-08-31'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: 'a day: BC-038 completed 2026-08-30 09:52Z; found 2026-08-31 behind D-407'
+  severity: medium
+  status: fixed
+  what: >-
+    The control "one bead backs two simultaneously ready commitments" flipped
+    BC-028 to ready and expected think-kdil to back two ready commitments -- but
+    its partner BC-038 had completed, so the mutation created no collision and
+    sqpack.campaign.ledger check refused only on ledger staleness. The control
+    still went red (wrong message), so the suite caught it, but the rule it
+    registers went unverified from the moment the partner terminated, and the
+    failure read as link noise while D-407 stood in front of it.
+  consequence: >-
+    Conservative: the suite was red, nothing passed falsely. The cost is what the
+    red concealed -- a control pinned to live campaign state defuses whenever that
+    state moves, and its wrong-message failure is indistinguishable from unrelated
+    breakage without root-causing each layer.
+  fix: >-
+    The mutation partner is now BC-049, the standing research cell that stays ready
+    by design, with the flipped cell BC-092 held stopped by outstanding D-406 --
+    both ends chosen for stability, and the anchor goes loudly stale if either
+    moves. The choice and its reasoning are recorded beside the control.
+  regression: >-
+    check_control_anchors catches anchor rot; partner rot still has no dedicated
+    detector -- the defense is partner choice, recorded here and in controls.yaml.
+  bead: think-1o1f
+  recorded_in: packing/devtools/controls.yaml

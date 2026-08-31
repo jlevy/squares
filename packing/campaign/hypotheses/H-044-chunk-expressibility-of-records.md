@@ -39,7 +39,7 @@ hypothesis:
     proves existence after an earlier capped F slice, but its F/K minimality remains
     explicitly indeterminate. For an out-of-budget retained certificate, any capped F
     slice leaves both budget selection and F/K minimality indeterminate.
-  instrument_ready: false
+  instrument_ready: true
   regime: >-
     frozen public-geometry corpus from the archived record catalogue; the criterion is
     scored on n <= 30, and the declared sweep extends through n <= 100 as imported
@@ -74,6 +74,18 @@ hypothesis:
     detector contract was being repaired, so it is calibration-only. This hypothesis
     remains undisposed; a prospective confirmatory successor must freeze an unseen
     corpus after the partition instrument and grammar freeze.
+    Instrument note 2026-08-31 (session-055, BC-100): instrument_ready is true --
+    census_known_best_chunks evaluates every record under the frozen contract into
+    the partition atlas, and devtools/score_h044.py scores the registered n <= 30
+    slice with per-record re-derivation, typed misses, and byte-identical replay
+    under --check. First scored round: exp-046, exploratory per this amendment
+    (calibration corpus), held unresolved with needs_review at the time of the
+    round. Review resolution 2026-08-31 (session-060, BC-106): the hold is
+    cleared -- the criterion miss is determinate and robust to the registered
+    text's denominator ambiguity (23/30 and 3/10, both bands), and the round's
+    decision stands unresolved because this amendment types the corpus
+    calibration-only, so the hypothesis remains undisposed pending the
+    confirmatory successor on a fresh-frozen corpus.
 ---
 # H-044 — the coverage prior for chunk enumeration
 

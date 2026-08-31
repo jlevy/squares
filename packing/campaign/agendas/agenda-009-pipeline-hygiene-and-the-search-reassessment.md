@@ -218,6 +218,11 @@ agenda:
       grid-return at n = 17 before any target is spent, n = 71 first when taken (H-050);
       BC-092 folded into BC-090's instrument design -- the enumeration price (9.3e9 raw
       orbit work at n = 5, hard size cap at 5) rules it out as its own block.
+      Correction 2026-08-31: the entry's gap measurement did not replicate (D-405),
+      and the enumeration price was quoted without its artifact and misread it -- the
+      retained pricing record's own decision at n = 5 is enumerate-isomorph-free, not
+      the priced-out legacy route (D-406, X-010); the sequencing stands, the
+      chunk-level repricing is Lane B rung 0 on the x-010 beads.
     artifacts:
     - campaign/explorations/X-009-where-a-new-packing-is-reachable.md
     - campaign/hypotheses/H-049-squeezable-20-in-4x6.md
@@ -365,7 +370,11 @@ agenda:
       11,013 through size five with 9.3e9 raw orbit work already at n = 5, and the code
       caps scaffolds at size five by typed refusal), while the structural corpus's real
       value at a target n is proposer information -- which contact shapes and angle-class
-      structures carry records -- inside BC-090's instrument.
+      structures carry records -- inside BC-090's instrument. Correction 2026-08-31:
+      the 9.3e9 figure is the retained pricing artifact's legacy-route upper bound,
+      quoted without its path and against that artifact's own isomorph-free decision
+      at n = 5 (D-406, X-010); the stopped state stands pending the Lane B repricing
+      bead, which carries a measured go/no-go.
 ---
 # Agenda-009 — Hygiene First, Then Decide What the Machinery Is For
 

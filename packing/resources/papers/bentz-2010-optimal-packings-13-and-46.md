@@ -122,6 +122,28 @@ Non-avoidance lemmas apply to all regions, so each box contains at least one poi
 **Lemma 10** If a box $T$ covers $A(1, 0.914)$ but not any other point in Figure 2, then it contains $(1.12, 1)$, $(1, 1.74)$, and $(1.87, 0.76)$ (and hence the convex hull of these four points).
 
 *Proof:* This follows as the set stays unavoidable if $A$ is replaced by any of the other points. $\square$
+<!-- NOTE (audited 2026-08-31, cases/bentz13/lemma10_audit.py -- verify against the published
+     PDF before relying on this lemma as printed):
+     The point "(1, 1.74)" is refuted as printed: the axis-aligned box of side 1001/1000
+     centred at (1.46, 0.7) lies inside [0,4]^2 and strictly avoids every point of
+     (Figure 2 minus A) union {(1, 1.74)} -- an exact escape certificate, so that
+     replacement set is NOT unavoidable and the proof line fails for it. Three independent
+     lines say the intended point is (1.74, 1): the same box contains (1.74, 1); Section
+     3.2's S_A lists (1.4, 1) and (1.74, 1) "by Lemmas 10 and 11", which lie in the hull
+     only under the corrected reading; and (1, 1.74) is exactly the y = x mirror of
+     (1.74, 1), i.e. the point the symmetric B-covering version of this lemma delivers,
+     which is how Section 3.1's alternatives use it. The raw extraction carries the same
+     "(1, 1.74)" reading, so whether the transposition is the paper's or the extraction
+     pipeline's was initially typed undecidable from this repository.
+     SETTLED 2026-08-31 (session-060, BC-106): the published PDF's page 5, rendered as an
+     image and read visually, prints "(1.12, 1), (1, 1.74), and (1.87, 0.76)" in the lemma
+     statement, matching the byte-level text layer -- the transposition is the journal's,
+     an erratum-level defect in the published paper, not an extraction artifact. The lemma
+     is refuted as printed and certified under the corrected reading (1.74, 1):
+     cases/bentz13/lemma10_audit.py carries the exact escape certificate, and
+     cases/bentz13/lemma10_replacements.py certifies all three corrected replacement
+     covers exactly. Recorded in frontier/evidence.yaml (E-bentz13-figure2-audit) and in
+     the 2026-08-31 verification review. -->
 
 We will distinguish two cases of placements of the corner-restricted boxes.
 

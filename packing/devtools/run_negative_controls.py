@@ -59,6 +59,7 @@ import argparse
 import math
 import os
 import queue
+import re
 import shutil
 import signal
 import subprocess
@@ -127,6 +128,12 @@ COPY_SEPARATELY = (ROOT / "resources/README.md", REPO / ".flowmarkignore")
 # leave every one of those targets in the real working tree -- the exact accident this
 # file exists to prevent, and the same reason .flowmarkignore was already copied in.
 ROOT_DOCUMENTS = (
+    # `.agents` is linked from inside the record (campaign/README.md points at its
+    # skills), so the link checker running in a private worker needs it present;
+    # 0.4 MiB of text against the cap. Absent, every campaign control that reaches the
+    # link scan fails on the dead link instead of its registered refusal (main went
+    # red exactly this way on 2026-08-31).
+    REPO / ".agents",
     REPO / "README.md",
     REPO / "SYNOPSIS.md",
     REPO / "TUTORIAL.md",
@@ -240,9 +247,41 @@ def _clone_into(src: Path, dst: Path) -> None:
         subprocess.run(["cp", "-R", *bulk, str(dst)], capture_output=True, check=True)
 
 
+RESOURCE_LINK = re.compile(r"\]\(([^)#\s]*resources/[^)#\s]+)\)")
+
+
+def linked_resource_targets() -> list[Path]:
+    """Archive files the checked documents link to inline, resolved and existing.
+
+    The archive is pruned from every worker (45 MiB against the cap), but the link
+    checker runs inside the worker and follows inline links from the campaign record
+    and the root documents into `resources/`. A target that exists in the real tree
+    must exist in the snapshot, or every campaign control fails on the dead link
+    instead of its registered refusal -- main went red exactly that way on
+    2026-08-31, three merges in a row, on links added that same night. Copying what
+    is actually linked (2.1 MiB measured that day) keeps the prune and the checker
+    honest at once; a link to a file that truly does not exist is left dead for the
+    real checker to refuse.
+    """
+    documents = list((ROOT / "campaign").rglob("*.md"))
+    for document in ROOT_DOCUMENTS:
+        if document.is_dir():
+            documents.extend(document.rglob("*.md"))
+        elif document.is_file() and document.suffix == ".md":
+            documents.append(document)
+    targets: set[Path] = set()
+    for document in documents:
+        for raw in RESOURCE_LINK.findall(document.read_text(errors="ignore")):
+            resolved = (document.parent / raw).resolve()
+            if resolved.is_relative_to(ROOT / "resources") and resolved.is_file():
+                targets.add(resolved)
+    return sorted(targets)
+
+
 def snapshot_source_bytes() -> int:
     """Bytes copied by the portable fallback, excluding linked build products."""
     total = sum(path.stat().st_size for path in COPY_SEPARATELY)
+    total += sum(target.stat().st_size for target in linked_resource_targets())
     for document in ROOT_DOCUMENTS:
         if document.is_dir():
             total += sum(path.stat().st_size for path in document.rglob("*") if path.is_file())
@@ -267,6 +306,10 @@ def clone_tree(dest: Path) -> None:
     resource_readme = work / "resources/README.md"
     resource_readme.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / "resources/README.md", resource_readme)
+    for target in linked_resource_targets():
+        landing = work / target.relative_to(ROOT)
+        landing.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(target, landing)
     shutil.copy2(REPO / ".flowmarkignore", dest / ".flowmarkignore")
 
     for document in ROOT_DOCUMENTS:

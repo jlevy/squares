@@ -24,8 +24,8 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`14`](n-014.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`15`](n-015.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`16`](n-016.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-24 |
-| [`17`](n-017.md) | `4.67553009360455` | `5` | `4.162277660168` | `1 + √10` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
-| [`18`](n-018.md) | `(7/2) + (1/2)√7` | `(7/2) + (1/2)√7` | `4.316624790355` | `1 + √11` | open | replayed here, external proof | — | 2026-08-24 |
+| [`17`](n-017.md) | `4.67553009360455` | `5` | `4.162277660168` | `4426213/1000000` | open | replayed here | formal upper trails report; formal lower differs from report | 2026-08-24 |
+| [`18`](n-018.md) | `(7/2) + (1/2)√7` | `(7/2) + (1/2)√7` | `4.316624790355` | `4426213/1000000` | open | replayed here | formal lower differs from report | 2026-08-24 |
 | [`19`](n-019.md) | `3 + (4/3)√2` | `3 + (4/3)√2` | `4.464101615138` | `1 + √12` | open | replayed here, external proof | — | 2026-08-24 |
 | [`20`](n-020.md) | `5` | `5` | `4.605551275464` | `1 + √13` | open | replayed here, external proof | — | 2026-08-24 |
 | [`21`](n-021.md) | `5` | `5` | `4.741657386774` | `1 + √14` | open | replayed here, external proof | — | 2026-08-24 |
@@ -53,7 +53,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`43`](n-043.md) | `7` | `7` | `6.656854249492` | `1 + √32` | open | replayed here, external proof | — | 2026-08-24 |
 | [`44`](n-044.md) | `7` | `7` | `6.744562646538` | `1 + √33` | open | replayed here, external proof | — | 2026-08-24 |
 | [`45`](n-045.md) | `7` | `7` | `6.830951894845` | `1 + √34` | open | replayed here, external proof | — | 2026-08-24 |
-| [`46`](n-046.md) | `7` | `7` | `7.0` | `7` | proved | replayed here, external proof | — | 2026-08-25 |
+| [`46`](n-046.md) | `7` | `7` | `7.0` | `7` | proved | replayed here, external proof, audited here | — | 2026-08-25 |
 | [`47`](n-047.md) | `7` | `7` | `7` | `7` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`48`](n-048.md) | `7` | `7` | `7` | `7` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`49`](n-049.md) | `7` | `7` | `7.0` | `7` | proved | replayed here, external proof | — | 2026-08-24 |

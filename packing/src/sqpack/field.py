@@ -583,6 +583,41 @@ class FieldElement:
             return other
         return self.field.rational(other)
 
+    def __pow__(self, exponent: int) -> FieldElement:
+        if not isinstance(exponent, int) or exponent < 0:
+            raise ValueError("field elements support nonnegative integer powers only")
+        result = self.field.one
+        base = self
+        remaining = exponent
+        while remaining:
+            if remaining & 1:
+                result = result * base
+            base = base * base
+            remaining >>= 1
+        return result
+
+    def __le__(self, other) -> bool:
+        return (self - self._coerce(other)).sign() <= 0
+
+    def __lt__(self, other) -> bool:
+        return (self - self._coerce(other)).sign() < 0
+
+    def __ge__(self, other) -> bool:
+        return (self - self._coerce(other)).sign() >= 0
+
+    def __gt__(self, other) -> bool:
+        return (self - self._coerce(other)).sign() > 0
+
+    def text(self) -> str:
+        """Deterministic power-basis serialization, low coefficient first."""
+        parts = []
+        for coefficient in self.coeffs:
+            if coefficient.denominator == 1:
+                parts.append(str(coefficient.numerator))
+            else:
+                parts.append(f"{coefficient.numerator}/{coefficient.denominator}")
+        return "poly[" + ",".join(parts) + "]"
+
     def is_zero(self) -> bool:
         return all(c == 0 for c in self.coeffs)
 
