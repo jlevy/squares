@@ -3,48 +3,25 @@ type: is
 id: is-01m0n6rttj5zdmkgjxb3690bsb
 title: "Missing resources: acquire the 11 cited sources not in the archive"
 kind: task
-status: open
+status: in_progress
 priority: 0
-version: 5
+version: 10
 spec_path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
 labels: []
 dependencies: []
 parent_id: is-01m0nrh9mwfjndkzejq34js78c
+child_order_hints:
+  - is-01m0stacab0yqjj9hj0mz6bpmt
+  - is-01m0sz4jzd9jdsc65spmtygc2q
+hold: paused
+hold_until: null
 created_at: 2026-08-22T17:02:23.570Z
-updated_at: 2026-08-22T22:12:58.165Z
+updated_at: 2026-08-27T07:51:49.164Z
 ---
-THE CANONICAL LIST IS explorations/packing/frontier/source-availability.yaml
-Rendered in the report as a table under 'Source Availability' in
-explorations/packing/docs/project/research/research-2026-08-22-packing-11-unit-squares.md
+THE CANONICAL LIST IS explorations/packing/frontier/source-availability.yaml, rendered into the n=11 research report. CURRENT 2026-08-24: 11 unretrieved rows and 6 recovered rows. Stromquist's three 1984 memoranda are now archived from the author's official page; Memo III proves the restricted 0/45-degree result but only asserts the unrestricted 2+4/sqrt(5) bound, so it does not repair D-152. Highest-value remaining acquisitions: El Moumni 1999 for proof method/priority, Trump 2023 for local optimality, Chung-Graham 2009/2020 for the disputed asymptotic construction, and Arslanov-Bui 2025. Treat every unavailable verdict as a dated negative search result and re-test it; this ledger has now been wrong six times.
 
-That file is the fact-checking boundary of this research: every claim either traces to a
-file in explorations/packing/resources/, or to a row in that list and is marked
-[secondary]. Each row carries the obstacle (tested, not assumed), what depends on it, a
-priority 1-5, and a realistic route to obtaining it.
+## Notes
 
-STATE 2026-08-22: 11 unretrieved, 5 recovered.
+Session 026 BC-031 opened a 20-minute source-recovery pass at 2026-08-27 00:43 PT. Search El Moumni 1999 first and Trump 2023 second using independent bibliographic, institutional/repository, and exact-title routes. Retain a source or dated negative receipt; do not bypass login, paywall, robots, or reuse restrictions, and do not turn source absence into a mathematical conclusion.
 
-Recovered so far (kept in the file so the correction stays visible):
-- Roth-Vaughan 1978 - supplied by the requester; reading it corrected two errors carried
-  by BOTH Friedman DS7 and McClenagan (a phantom 10^-100 constant, and the Montgomery
-  exponent attribution).
-- Markot 2021 - open access at PMC the whole time, never tested.
-- Gensane-Ryckelynck 2005 - Springer serves the PDF openly at its /content/pdf/ URL.
-- Nagamochi 2005 - open access at E-JC, cited by exact title in DS7's own reference list.
-- Wang-Dong-Li 2016 - on arXiv.
-
-Highest-value remaining, by what rests on them:
-1. Stromquist 1984 Wagner Associates memoranda I-III (unpublished). Memo III covers
-   n <= 65 and Gardner's conjecture; sits behind a large share of the claim column in the
-   priority ledger. Route: author or institutional contact.
-2. El Moumni 1999, Studia Sci. Math. Hungar. 35 281-290 (print only). Holds published
-   priority for s(7)=s(8)=3 and s(15)=4; no summary of the field describes its method.
-   Route: library access.
-3. Chung-Graham 2009 and 2020 (paywall). 2020 is the O(x^{3/5}) claim McClenagan says
-   'has an error in it'; reading it would let us describe the error rather than relay it.
-
-WHY THIS IS P0: the archive's 'not retrievable' verdict has now been wrong five times.
-Every recovery so far changed something in the research, and two of them corrected
-published secondary sources. A 'not retrievable' entry is a negative search result, not a
-fact - RE-TEST THE LIST, do not inherit it. When revisiting, re-run the URL checks first;
-the source-availability.yaml header records how.
+Paused: BC-031 recovered and archived El Moumni 1999 and Trump 2023 on 2026-08-27 through public institutional and author routes. The source map now records eight corrections; Trump remains local-rigidity only, not global optimality. Source-driven follow-up think-trkj owns the bounded n=7 proof replay. Pause this broader acquisition bead while the balanced agenda rotates; remaining queue starts with Arslanov-Bui 2025 and Chung-Graham 2009/2020.
