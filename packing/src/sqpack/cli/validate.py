@@ -886,6 +886,9 @@ def _exact_verification(context: Context) -> str:
             # a + 1 + sqrt(2)/2 for a = 4..8, with the diamond-count control refusing
             # one more at every size. Five more grid ceilings became exact sides.
             (sys.executable, "-m", "cases.gobel_strip.verify_exact"),
+            # And the off-centre family, DS7 section 3's one sentence: n = 26 and 85 at
+            # a + 3/2 + b/sqrt(2), with the column-count control refusing square 2a + 2.
+            (sys.executable, "-m", "cases.gobel_offcentre.verify_exact"),
             (
                 sys.executable,
                 "-m",
