@@ -64,6 +64,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-047](agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | completed | contemporaneous | `general-improvement` (process) | `general-improvement` (process) | 6 | think-xdly | `BC-049` stays open and this session did not touch its mathematics. Three evidence records still make no novelty statement and should keep making none until someone searches: `E-migrated-lower-report`, whose provenance is `unknown-historical`, and the two n = 29 numerical checks. The inventory's own arithmetic names the highest-value unclaimed work -- an informal review of `[Nagamochi 2005]`, which 88 cases rest on and nobody here has read (`think-xdly`). |
 | [session-048](agent-sessions/session-048-what-every-session-cost.md) | completed | contemporaneous | `pipeline-improvement` (process) | `general-improvement` (process) | 3 | think-atm1 | `BC-085` on `think-9k5k`, the first ready cell of `agenda-009` and the one the reassessment behind it is blocked on. The ten unclaimed rollups stay unclaimed: they predate the field, and inventing owners for them would be worse than counting them separately, which the report now does. |
 | [session-049](agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | completed | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 5 | think-bxqv | `BC-089` continues on `think-d0j1`: the remaining witness lifts -- n = 50 rational and n = 54 in the quartic field, the Q(sqrt 7) pair having landed as a coda to this session -- then the robust-rational sweep bead, then the block's typed-refusal record for n = 53. |
+| [session-050](agent-sessions/session-050-exp045-audit-and-acceptance.md) | in_progress | contemporaneous | `factual-review` (correctness) | `factual-review` (process) | 3 | think-1s0h | `BC-089`'s remainder on `think-d0j1` stays the next slice, per X-009's sequencing; what this session changed is what comes after it: the n = 5 connectivity question is genuinely ready for the first time now that its instrument's acceptance gate is cleared. |
 
 ### Workflow summary
 
@@ -72,12 +73,12 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 0 | 0 | 10 | 0 |
-| `factual-review` | 1 | 0 | 25 | 2 |
+| `factual-review` | 2 | 0 | 27 | 2 |
 | `insight-iteration` | 2 | 1 | 27 | 2 |
 | `process-review` | 9 | 4 | 48 | 6 |
 | `efficiency-loop` | 7 | 0 | 20 | 0 |
 | `research-loop` | 3 | 4 | 23 | 7 |
-| `pipeline-improvement` | 17 | 0 | 74 | 0 |
+| `pipeline-improvement` | 17 | 0 | 75 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas
@@ -130,7 +131,7 @@ Status: **active**. Use one mutable ten-hour agenda, with a full five-hour midpo
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-027 | tool_validation | 5, 10, 11, 16, 26 | complete | 0 | think-whwc | Completed in session 026: D-340 retains the historical cause, the CLI regression and mutation control prove first-failure propagation, and the four-step replacement integration surface passes. |
 | BC-028 | tool_validation | 5 | stopped | 0 | think-kdil | Superseded by agenda-004's BC-038, which carries the same bead and the same work on a live agenda. Stopped here in session 034 so that one bead does not back two simultaneously ready commitments, which is the ambiguity the new ready-uniqueness invariant rejects. Nothing measured is retracted; the finding below stands and BC-038 inherits it. Trigger measured and passed in session 029. `active_row_jets` holds 93.0 percent of the `exhaustive_exact` group's cumulative time; the dominant arm is `evaluate_stress` to `owner_row_jets` at 57.6 percent of the group; and the reuse mechanism already exists, costing 0.025 seconds per call inside the shared-inventory test against 11.95 seconds on that arm. A five-fold reduction is worth about 136 seconds per run, roughly 42 percent of full-gate wall time. Implementation is sequenced after exp-045, which is preregistered against a frozen instrument on this same path, and still owes the declared exact-output equivalence result. |
-| BC-029 | research | 5 | blocked | 0 | think-1s0h | Blocked at execution admission by session 029, a declared terminal exit for this cell. exp-045 requires twelve typed pre-certificate mutations; the instrument implements and hard-enforces exactly eight, and no second mutation set exists in the lane. The other admission conditions hold: thirteen keyed refusals are present, the accepted helpers are used rather than an exp-043 hand-formula path, and the exp-034 sheet and exp-036 obstruction controls are wired into the same builder. Build the four missing mutations under think-oyn9; do not amend the declared twelve down to the implemented eight. |
+| BC-029 | research | 5 | complete | 0 | think-1s0h | Discharged in three stages the record carries separately: session-032 built the four missing mutations to the enforced twelve, session-033 ran exp-045 to its valid outcome with both determinations criterion_met and gave it the W3 mechanism pass this exit requires, and the round was accepted on 2026-08-31 by the owner after session-050's independent post-change audit -- the sixth admission condition -- whose findings and the corroborating -W bridge through the accepted helpers are the Amendment section of the experiment record and D-404. The exit's "valid exp-045 outcome" existed since session-033; only the acceptance gate held this cell open. |
 | BC-030 | tool_validation | 5, 10, 11 | complete | 1 | think-6mcd | Under think-3yv8, build BC-016's missing retained poses, executable glued row, symbolic tied-axis label, and independent receipt checker before its differential; alternatively take ready BC-017 through one target-free tagged execution-plan control while actual LP semantics remain blocked |
 | BC-031 | measurement_validation | 11, 12 | complete | 1 | think-4o6l | Under think-trkj, the exact two-branch Case 1 repair and source-distinct Figure 4 coordinate prerequisite are accepted. Next specify and falsify one surrounding center, chord, or polygon-incidence prerequisite, or retain its typed blocker and rotate to an independent later proof route. D-344 through D-347 keep the printed replay open; the remaining acquisition queue continues under think-4o6l. |
 | BC-032 | tool_validation | 11, 29 | complete | 2 | think-75ll | Superseded by the session 028 inventory. An n = 29 interval round is not the next step and its stated prerequisites do not describe this repository: the independent exact checker already exists and is gated on both n = 11 and n = 29, the n = 29 upper bound is already `verified` and `exact-algebraic` through `E-n029-schadt-rational-upper`, and no n = 29 contact equations or isolation boxes are needed for that route. Interval work is additionally blocked by a declared unbuilt instrument. The smallest open question is instead Q-BC032-a: whether the 4.94e-11 side relaxation is a property of the retained pose or an artifact of `promote_rational`'s fixed dilation ladder at the default `rational_digits = 36`. Neither the completed n = 11 robust-rational control nor any answer to Q-BC032-a certifies the source decimals, improves a record, establishes rigidity, or proves optimality. |
@@ -298,12 +299,6 @@ Status: **active**. Eight to twelve hours. The first three commitments are hygie
 | H-049 | blocked | search | delta((4,6), 20) > 0: twenty unit squares pack into a 4 by 6 rectangle |  | 0 |  |
 | H-050 | blocked | search | The n = 71 incumbent's split of sixteen oblique squares across two ang |  | 0 |  |
 
-## Needs review — held for a human, not decided
-
-| id | hypotheses | decision | why it was not decided |
-| --- | --- | --- | --- |
-| exp-045 | H-023 | unresolved | The instrument is now complete and the round executed. Twelve production mutation paths, thirteen refusal records, six cases, and deterministic record-and-replay agreement all hold, and both declared determinations report criterion_met: canonical pure -W is excluded at A, the interior, and B, and the -W coefficients equal the separately derived +W values. This is recorded `unresolved` with `needs_review` rather than accepted, because an unattended runner may apply the accept rule only in the conservative direction, and because the sixth admission condition, an independent post-change audit of the complete instrument, has not been performed. Every broader claim remains refused: no whole-component identity, no A-to-B stationary connection, no local isolation, no terminality, and no H-023 disposition beyond the excluded direction. |
-
 ## Rounds
 
 ### rejected (10)
@@ -321,7 +316,7 @@ Status: **active**. Eight to twelve hours. The first three commitments are hygie
 | exp-037 | series-000 | 29 | openai-codex | H-042 | The retained serialization has six numerical orientation classes, with minimum class gap 0.296067 degrees against a 1e-90 degree interval radius. |
 | exp-041 | series-000 | 5 | openai-codex | H-023 | The frozen complete-zero-inventory clause is false: one additional owner axis is zero only at the positive endpoint, while independent control review also found mutation-reason and partial-disposition guards that remain unfinished. |
 
-### unresolved (5)
+### unresolved (4)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -329,7 +324,6 @@ Status: **active**. Eight to twelve hours. The first three commitments are hygie
 | exp-040 | series-000 | 5 | openai-codex | H-023 | Temporary generation and replay passed, but independent review found five finite proof-perimeter gaps before any retained target result was accepted. |
 | exp-043 | series-000 | 5 | openai-codex | H-023 | Temporary generation and replay passed, but independent review found that the evaluator ignored center velocities in its second-order constants, combined no production rowwise curvatures, supplied no checked sheet acceleration witness, and asserted rather than proved the owner-3 two-scale routing. No target result was retained and no -W disposition follows. |
 | exp-044 | series-000 | 5 | openai-codex | H-023 | The criterion and fresh-agent handoff passed two independent audits, and a new production builder now constructs all six exact owner-row inventories through the accepted helper. The slice stopped before weighted row substitution, the exp-034 sheet evaluator, symbolic-real and unbounded scale routing, twelve mutations, or independent target dispositions were complete. No result JSON was written and no pure -W inference follows. |
-| exp-045 | series-000 | 5 | openai-codex | H-023 | The instrument is now complete and the round executed. Twelve production mutation paths, thirteen refusal records, six cases, and deterministic record-and-replay agreement all hold, and both declared determinations report criterion_met: canonical pure -W is excluded at A, the interior, and B, and the -W coefficients equal the separately derived +W values. This is recorded `unresolved` with `needs_review` rather than accepted, because an unattended runner may apply the accept rule only in the conservative direction, and because the sixth admission condition, an independent post-change audit of the complete instrument, has not been performed. Every broader claim remains refused: no whole-component identity, no A-to-B stationary connection, no local isolation, no terminality, and no H-023 disposition beyond the excluded direction. |
 
 ### blocked (4)
 
@@ -340,7 +334,7 @@ Status: **active**. Eight to twelve hours. The first three commitments are hygie
 | exp-020 | series-000 | 5 | openai-codex | H-021 | The block retains two repeated side values and full poses, but it finds no proved optimum and D-165 makes all four events ineligible for component classification. |
 | exp-026 | series-000 | 6 | openai-codex | H-021 | Seeds 0 through 2 replay as admissible, but seed 3 crashed at the retention boundary after failing independent validity. D-183 blocks the cell and all larger event slices until a separately preregistered replication retains that stop. |
 
-### accepted (15)
+### accepted (16)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -359,6 +353,7 @@ Status: **active**. Eight to twelve hours. The first three commitments are hygie
 | exp-038 | series-000 | 5 | openai-codex | H-023 | All six source matrices have the preregistered complete V-representation, both owner branches coincide at first order, both pointed-quotient face vectors are derived, replay is identical, and all ten controls reject their mutations. The verdict remains limited to branchwise linearization cones. |
 | exp-039 | series-000 | 5 | openai-codex | H-023 | The 30-row common cell is exactly equivalent to the bounded five-coordinate system, six feasible witnesses prove affine dimension five, and the exact LP dual fixes side 1+5sqrt(2)/4 throughout the cell. All twelve declared sharp paths pass separate exact packing checks and both owner branches have structurally derived positive stress-polynomial identities. Replay is identical and all ten controls reject. The verdict remains cell-local and pathwise first-order only. |
 | exp-042 | series-000 | 5 | openai-codex | H-023 | All six unchanged paths have exact universal feasibility certificates with the frozen base, open-interval, and endpoint inventories, and both owner branches have exact positive first-order stress certificates. Generation and replay agree, all twenty production-path controls reject with their expected identifiers, and the stress-only control retains feasibility while making the combined verdict unresolved. The result is pathwise only and refuses every broader H-023 claim. |
+| exp-045 | series-000 | 5 | openai-codex | H-023 | Accepted 2026-08-31 by the owner in session-050, after the independent post-change audit that was the sixth admission condition. The round's content is unchanged from session-033: both declared determinations report criterion_met -- canonical pure -W is excluded at A, the interior, and B, and the -W coefficients equal the separately derived +W values -- with twelve mutation controls, thirteen refusal records, and deterministic record-and-replay agreement, all independently replayed by the auditor (a perturbed artifact is refused with replay.drift). The audit raised three findings, resolved in the Amendment section below rather than glossed: the registration's mutation vocabulary differs from the implemented twelve (mapped and explained there, per session-032's reachability derivation), the driver did not route through the accepted production helpers, and its docstring still described the exp-043 draft (D-404). The decisive resolution is devtools.check_minus_w_bridge: the accepted row-jet, stress, scale, and owner-4 helpers, run on the actual -W direction, independently rebuild all fifteen owner-3 scale records and all three owner-4 records with strict exact contradictions and +W/-W coefficients equal -- two independently written implementations deciding the same question the same way, held in place by tests/test_minus_w_bridge.py. Acceptance widens nothing: every broader claim remains refused -- no whole-component identity, no A-to-B stationary connection, no local isolation, no terminality, and no H-023 disposition beyond the excluded direction. |
 
 ### baseline (11)
 

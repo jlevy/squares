@@ -72,8 +72,8 @@ experiment:
     role: guard
     outcome: criterion_met
   verdict:
-    decision: unresolved
-    needs_review: true
+    decision: accepted
+    needs_review: false
     primary_criterion: >-
       report criterion_met only when every owner-4 case and all fifteen owner-3 scale
       records yield strict exact contradictions after the complete instrument passes;
@@ -83,17 +83,26 @@ experiment:
       undecided; and report invalid with no scientific disposition when a source, row,
       witness, mutation, control, or replay guard fails
     reason: >-
-      The instrument is now complete and the round executed. Twelve production mutation
-      paths, thirteen refusal records, six cases, and deterministic record-and-replay
-      agreement all hold, and both declared determinations report criterion_met: canonical
-      pure -W is excluded at A, the interior, and B, and the -W coefficients equal the
-      separately derived +W values. This is recorded `unresolved` with `needs_review`
-      rather than accepted, because an unattended runner may apply the accept rule only in
-      the conservative direction, and because the sixth admission condition, an
-      independent post-change audit of the complete instrument, has not been performed.
-      Every broader claim remains refused: no whole-component identity, no A-to-B
-      stationary connection, no local isolation, no terminality, and no H-023 disposition
-      beyond the excluded direction.
+      Accepted 2026-08-31 by the owner in session-050, after the independent post-change
+      audit that was the sixth admission condition. The round's content is unchanged from
+      session-033: both declared determinations report criterion_met -- canonical pure -W
+      is excluded at A, the interior, and B, and the -W coefficients equal the separately
+      derived +W values -- with twelve mutation controls, thirteen refusal records, and
+      deterministic record-and-replay agreement, all independently replayed by the
+      auditor (a perturbed artifact is refused with replay.drift). The audit raised three
+      findings, resolved in the Amendment section below rather than glossed: the
+      registration's mutation vocabulary differs from the implemented twelve (mapped and
+      explained there, per session-032's reachability derivation), the driver did not
+      route through the accepted production helpers, and its docstring still described
+      the exp-043 draft (D-404). The decisive resolution is devtools.check_minus_w_bridge:
+      the accepted row-jet, stress, scale, and owner-4 helpers, run on the actual -W
+      direction, independently rebuild all fifteen owner-3 scale records and all three
+      owner-4 records with strict exact contradictions and +W/-W coefficients equal --
+      two independently written implementations deciding the same question the same way,
+      held in place by tests/test_minus_w_bridge.py. Acceptance widens nothing: every
+      broader claim remains refused -- no whole-component identity, no A-to-B stationary
+      connection, no local isolation, no terminality, and no H-023 disposition beyond
+      the excluded direction.
 ---
 # exp-045 — Exact Pure -W Scale and Controls
 
@@ -247,6 +256,54 @@ stationarity or identity, an A-to-B stationary connection, connectivity frequenc
 isolation, terminality, quench selection, basin mass, census completeness, unequal-side
 clearance, or any `n = 11` claim.
 H-023 remains an open question whose bidirectional-continuation instrument is not ready.
+
+## Amendment — the 2026-08-31 Independent Audit and Acceptance
+
+The sixth admission condition was performed by session-050, an agent that built none of
+the instrument, at the owner’s direction and with the owner making the accept decision.
+The audit replayed the certificate (byte-identical regeneration; a perturbed copy
+refused with `replay.drift`), ran the thirty helper tests, and raised three findings.
+Each is resolved here rather than glossed, because accepting over an unstated gap is
+the failure mode the condition exists to refuse.
+
+**The mutation vocabulary drifted from this registration, with the derivation on
+record.** Five of the twelve frozen identifiers ran verbatim: `source.minus_w`,
+`source.strata`, `source.owner_exhaustion`, `source.tied_rows`, `scope.overclaim`. The
+other seven registered names — the `jet.*` family, `certificate.weighted_curvature`,
+`control.sheet_witness`, `certificate.scale_exhaustion` — were written before the
+instrument existed, in an anticipated vocabulary the built proof core never carried.
+Session-032 traced `proof_core`’s reachable failure surface and found exactly twelve
+mutation-reachable modes with no slack, which are the twelve that ran:
+the five above plus `source.geometry`, `source.first_order`, `certificate.owner3_sign`,
+`certificate.owner4_sign`, `certificate.acceleration_correction`,
+`certificate.acceleration_farkas` (the last two a documented split of one shared
+identifier), and `control.realized_direction`. This is a substitution derived from the
+code’s actual failure surface, not a rename table, and this amendment — not the frozen
+list above — is what the retained artifact’s controls answer to.
+The frozen list is retained unedited as what was registered.
+
+**The driver never routed through the accepted helpers, and the retention clause was
+met in condensed form.** The certificate’s owner-3 cases retain a two-scale
+contradiction (negative `t²` gap plus negative cusp term) rather than the fifteen
+`G_j`-bearing scale records this registration froze.
+The gap is closed by corroboration rather than by rewriting the driver:
+[`devtools/check_minus_w_bridge.py`](../../../../devtools/check_minus_w_bridge.py) runs
+the accepted `minus_w_row_jets`/`minus_w_stress`/`minus_w_scale`/`minus_w_owner4`
+helpers on the actual `-W` direction and rebuilds **all fifteen** owner-3 scale records
+and all three owner-4 records — every correction coefficient and beta coefficient
+exactly zero, every deciding constant `-1/4 < 0`, both cusp coefficients strictly
+negative, and every coefficient equal to its `+W` twin — after first checking that the
+negated production `W` equals this certificate’s retained `canonical_minus_W` and that
+the helper constant matches the retained `obstruction_coefficient`.
+`tests/test_minus_w_bridge.py` holds the bridge in place, including sensitivity
+controls proving the deciding constant is a genuine quadratic in the direction.
+
+**The driver’s docstring still described the exp-043 draft**, claiming no scientific
+result is retained while the retained result was this experiment’s. Corrected, and
+recorded with the vocabulary drift as [`D-404`](../../../../../defects.md).
+
+What acceptance changes: `BC-029` and `BC-010` lose their acceptance gate.
+What it does not change: the claim boundary above, word for word.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

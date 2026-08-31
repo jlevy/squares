@@ -102,12 +102,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [5]
-    state: blocked
-    blocked_on: >-
-      Independent acceptance of the preregistered exp-045 criterion, which is a review
-      decision rather than a commitment. Its other stated blocker, BC-027, has been
-      complete since agenda-003 closed that cell, so the dependency edge below is
-      discharged and this sentence is the only live constraint.
+    state: complete
     priority: 0
     question: >-
       Do the frozen minus-W scale routes and controls advance the n=5 terminal-family
@@ -125,14 +120,15 @@ agenda:
     bead: think-1s0h
     depends_on: [BC-027]
     next_evidence: >-
-      Blocked at execution admission by session 029, a declared terminal exit for this
-      cell. exp-045 requires twelve typed pre-certificate mutations; the instrument
-      implements and hard-enforces exactly eight, and no second mutation set exists in the
-      lane. The other admission conditions hold: thirteen keyed refusals are present, the
-      accepted helpers are used rather than an exp-043 hand-formula path, and the exp-034
-      sheet and exp-036 obstruction controls are wired into the same builder. Build the
-      four missing mutations under think-oyn9; do not amend the declared twelve down to
-      the implemented eight.
+      Discharged in three stages the record carries separately: session-032 built the
+      four missing mutations to the enforced twelve, session-033 ran exp-045 to its
+      valid outcome with both determinations criterion_met and gave it the W3 mechanism
+      pass this exit requires, and the round was accepted on 2026-08-31 by the owner
+      after session-050's independent post-change audit -- the sixth admission
+      condition -- whose findings and the corroborating -W bridge through the accepted
+      helpers are the Amendment section of the experiment record and D-404. The exit's
+      "valid exp-045 outcome" existed since session-033; only the acceptance gate held
+      this cell open.
     artifacts:
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md

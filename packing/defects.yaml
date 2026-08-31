@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 403
+count: 404
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -11852,3 +11852,52 @@ defects:
     that resolves but no longer catches.
   bead: think-xdly
   recorded_in: packing/devtools/controls.yaml
+
+- id: D-404
+  title: exp-045's registration froze a mutation vocabulary its instrument never carried
+  date: '2026-08-31'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: 'four days; written at registration, found by the first independent audit'
+  severity: low
+  status: fixed
+  what: >-
+    exp-045's "Frozen Controls and Failures" section lists twelve mutation identifiers,
+    seven of which -- the jet.* family, certificate.weighted_curvature,
+    control.sheet_witness, certificate.scale_exhaustion -- never existed in the built
+    instrument. Session-032 traced proof_core's reachable failure surface, found exactly
+    twelve mutation-reachable modes with no slack, and built the seven that actually ran
+    (source.geometry, source.first_order, certificate.owner3_sign,
+    certificate.owner4_sign, the documented acceleration_elimination split, and
+    control.realized_direction) -- but the registration text was never amended and no
+    map between the two vocabularies was written anywhere. Session-033 then recorded
+    "all twelve mutations match only their frozen failure identifiers" as satisfied,
+    reading "frozen" as the implemented set. The same drift left the driver's module
+    docstring describing the exp-043 draft ("no scientific result is retained") for four
+    days after it produced and retained exp-045's certificate.
+  consequence: >-
+    Neutral in the record: the retained round is correct, the controls fired on real
+    identifiers, and nothing false was published. The cost landed on acceptance: an
+    independent auditor comparing the artifact against the registration finds a
+    twelve-name list of which seven match nothing, and cannot tell a documented
+    refinement from a silently changed instrument without excavating session-032. A
+    registration that cannot be checked against its own artifact defeats the point of
+    freezing one.
+  fix: >-
+    An Amendment section in the experiment record now carries the substitution and its
+    derivation, states that the retained artifact answers to the amendment rather than
+    to the frozen list, and leaves the frozen list unedited as what was registered. The
+    docstring is corrected. The deeper gap the audit found on the same pass -- the
+    driver never routing through the accepted production helpers -- is closed by
+    corroboration: devtools/check_minus_w_bridge.py rebuilds all fifteen owner-3 scale
+    records and three owner-4 records through those helpers on the actual -W direction
+    and requires every coefficient to match, held by tests/test_minus_w_bridge.py.
+  regression: >-
+    tests/test_minus_w_bridge.py, which fails if either implementation moves off the
+    other; and the amendment convention itself -- a registration whose implementation
+    vocabulary must change now records the map in the experiment file, where the next
+    auditor will look first.
+  bead: think-1s0h
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md
