@@ -359,10 +359,11 @@ blocks of two to three hours, instruments before research in both lanes, a check
 stated in the agenda’s own objective.
 **The run is live:
 [session-050](packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md)
-is in progress on `BC-094` under `think-yrvm`** (`BC-093` complete, the general
-certifier core landed), block 1 of that agenda, with `BC-094`
-on `think-yrvm` as the block’s second phase; `BC-097` and `BC-089`’s remainder are the
-sanctioned gate filler.
+closed block 1 complete** -- `BC-093` and `BC-094` both discharged, the certifier core
+and the falsifier landed with their controls green -- **and block 2 opens as session-051
+on `BC-095` under `think-kp7o`**, block 1 of that agenda, with `BC-094` on `think-yrvm`
+as the block’s second phase; `BC-097` and `BC-089`’s remainder are the sanctioned gate
+filler.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
@@ -2321,9 +2322,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 36 | 10,487 | 6,132 | 123 | 1,383 | 47.81 h |
+| claimed by a session | 39 | 11,001 | 6,422 | 129 | 1,413 | 49.92 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **46** | **11,947** | **7,010** | **155** | **1,556** | **54.68 h** |
+| **measured** | **49** | **12,461** | **7,300** | **161** | **1,586** | **56.79 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2332,12 +2333,13 @@ rounding.
 | [session-047](packing/campaign/agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | 6 | 14 | 1,230 | 841 | 18 | 2.56 h |
 | [session-048](packing/campaign/agent-sessions/session-048-what-every-session-cost.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
 | [session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | 5 | 5 | 1,226 | 739 | 10 | 2.48 h |
-| *shared by 5 sessions* | — | 1 | 6,783 | 3,787 | 84 | 38.74 h |
+| [session-050](packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md) | 2 | 3 | 514 | 290 | 6 | 2.11 h |
+| *shared by 6 sessions* | — | 1 | 6,783 | 3,787 | 84 | 38.74 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 5 |
-| closed before `resource_rollups` existed, logs not retained | 45 |
+| measured | 6 |
+| closed before `resource_rollups` existed, logs not retained | 44 |
 | **total** | **50** |
 
 <!-- END GENERATED: session-close-report -->

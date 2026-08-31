@@ -8,7 +8,7 @@ softschema:
 session:
   id: session-050
   primary_bead: think-y2ju
-  status: in_progress
+  status: completed
   title: "Block 1 of the two-lane overnight run: the certifier instrument and the falsifier"
   date: '2026-08-31'
   started_at: '2026-08-31T05:40:00Z'
@@ -97,7 +97,7 @@ session:
       predicates cover.py now exposes, and pass think-yrvm's known-answer triple: find
       the Figure 13 escape at s = 2 + 4/sqrt(5), saturate on the repaired twelve-point
       set, and report the defeating pose in every refusal.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Phase 1 closed its exit forty minutes inside budget; the block's second
@@ -119,12 +119,29 @@ session:
     fallback: >-
       Land the exact certification path alone (a hand-fed pose checker) with the
       search recorded as the block remainder on think-yrvm.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      sqpack/falsify.py: a deterministic coarse-grid-plus-Nelder-Mead search over
+      (x, y, theta in [0, pi/2)) with container fit as a constraint rather than an
+      objective term (the retained escapes touch the wall), a rationalize_pose bridge,
+      and certify_escape deciding everything by exact sign through cover's box
+      predicates with typed CertificationRefusedError refusals naming what defeated
+      the candidate. The known-answer triple passes as six tests: the search finds a
+      Figure 13 escape at margin 1.3e-2 in the 45-degree family (the K4 mirror of the
+      retained pose, at a better margin than its 9.2e-3); the repaired twelve-point
+      set saturates at best margin -1.0e-2 -- exactly -(L-1) at L = 1.01, consistent
+      with exp-017's cover being tight -- carrying the fixed not-a-proof caveat and
+      the defeating point; and the exact bridge certifies the retained Figure 13
+      escape over Q(sqrt 2 + sqrt 5) while refusing a pose on a point and a unit side
+      by type. The search runs in 0.2s at default resolution; ruff and basedpyright
+      clean.
+    evidence:
+    - packing/src/sqpack/falsify.py
+    - packing/tests/test_falsify.py
+    stop_reason: >-
+      The triple is green and replayable as tests; BC-094's exit is met with the
+      saturation semantics stated in code rather than convention.
     next_action: >-
-      Under think-yrvm: implement the float search over (x, y, theta), then the exact
-      certification bridge, then the triple as tests.
+      Block 1 is complete; block 2 opens as session-051 on BC-095 under think-kp7o.
   budget:
     wall_minutes: 150
     finalization_minutes: 15
@@ -137,7 +154,12 @@ session:
       The certifier is 2,645 lines hard-wired to one figure of one paper over a bespoke
       Q(sqrt 5); no escaping-pose search exists; both exp controls pass only through
       the bespoke module.
-    after: null
+    after: >-
+      Both instruments exist with their controls green: sqpack/cover.py replays
+      exp-016 and exp-017 byte-stable with both case modules reduced to callers, and
+      sqpack/falsify.py passes the known-answer triple with saturation explicitly
+      not-a-proof. Block 1 closed two hours inside its budget, with fourteen new
+      tests.
   stop_conditions:
   - >-
     Any candidate mathematical verdict this session produces is recorded unresolved
@@ -246,12 +268,23 @@ session:
   - packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md
   - packing/src/sqpack/cover.py
   - packing/tests/test_cover.py
+  - packing/src/sqpack/falsify.py
+  - packing/tests/test_falsify.py
   checks:
   - uv run --frozen --all-extras --group dev packing-validate --records
-  stop_reason: null
+  - uv run --frozen --all-extras --group dev packing-validate --push
+  resource_rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  - packing/campaign/resource-usage/a8a236cbd8a0e6d95.yaml
+  - packing/campaign/resource-usage/a0083f0c8eb083ddb.yaml
+  stop_reason: >-
+    Both block-1 commitments met their exits inside budget with every control green
+    and the push floor run before each push; closing, rendering, and the OR-9 pull
+    request are this record's final acts.
   next_action: >-
-    The session is in progress on `BC-094` under `think-yrvm`: the falsifier and its
-    known-answer triple, on the instrument phase 1 landed.
+    Block 2 opens as session-051 on `BC-095` under `think-kp7o`: reprice the
+    chunk-level enumeration with the measured orbit quotient and the realizability
+    prefilter.
 ---
 # Session-050 — Block 1: the Certifier Instrument and the Falsifier
 

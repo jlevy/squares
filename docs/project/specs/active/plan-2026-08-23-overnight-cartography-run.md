@@ -343,7 +343,7 @@ of it.
 
 For the next supervised exact-research goal, use
 [session 050](../../../../packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md),
-which is in progress on `BC-094` under `think-yrvm` as block 1 of
+whose block 1 is complete; the next slice is `BC-095` under `think-kp7o`, block 2 of
 [agenda-010](../../../../packing/campaign/agendas/agenda-010-two-lane-overnight-run.md),
 the two-lane overnight run X-010 argued and the owner directed.
 Sessions 027 through 049 are terminal, and agendas 006, 007 and 008 are closed; the

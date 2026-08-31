@@ -92,7 +92,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Can an escaping-pose search decide "this set is avoidable" mechanically, with the
@@ -116,9 +116,15 @@ agenda:
     depends_on: []
     workflows: [pipeline-improvement]
     next_evidence: >-
-      Not started. X-010 Lane A rung 1; co-develops with BC-093 against the same
-      controls, and deliberately carries no dependency edge so block 1 has two
-      independent starts.
+      Discharged by session-050 phase 2: sqpack/falsify.py searches (x, y, theta)
+      deterministically and certifies only through exact signs; the known-answer
+      triple is green as tests -- the Figure 13 escape found at margin 1.3e-2 in the
+      45-degree family, the repaired set saturating at -(L-1) with the not-a-proof
+      caveat fixed in code, refusals naming their defeating pose -- and the retained
+      Figure 13 escape replays through the generic bridge over Q(sqrt 2 + sqrt 5).
+    artifacts:
+    - src/sqpack/falsify.py
+    - tests/test_falsify.py
   - id: BC-095
     purpose: tool_validation
     owner_focus: efficiency
@@ -242,7 +248,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [13]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Does Bentz 2010's m = 4 argument certify mechanically, or where exactly does it
