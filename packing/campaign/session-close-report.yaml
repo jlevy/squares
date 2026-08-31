@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 52
+count: 53
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 8
-  sessions_unmeasured: 44
+  sessions_unmeasured: 45
   attributed:
     rollups: 40
     turns: 11135
@@ -574,3 +574,12 @@ sessions:
   tool_errors: 11
   one_off_code: 51
   wall_hours: 2.26
+- id: session-053
+  title: "Block 3 of the overnight run: machine-checking Bentz 2010"
+  status: in_progress
+  primary_bead: think-1o1f
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []

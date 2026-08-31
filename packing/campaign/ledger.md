@@ -67,6 +67,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-050](agent-sessions/session-050-block1-certifier-and-falsifier.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-y2ju | Block 2 opens as session-051 on `BC-095` under `think-kp7o`: reprice the chunk-level enumeration with the measured orbit quotient and the realizability prefilter. |
 | [session-051](agent-sessions/session-051-block2-reprice-and-lp-gate.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-kp7o | The checkpoint opens as session-052 on `BC-098` under `think-cjxk`, with all four dependencies complete and two measured prices in hand. |
 | [session-052](agent-sessions/session-052-midrun-checkpoint.md) | completed | contemporaneous | `process-review` (insight) | `process-review` (insight) | 1 | think-cjxk | Block 3 opens as session-053 on `BC-099` under `think-1o1f`: encode Bentz 2010's m = 4 argument in the general instrument, with the falsifier at every failed step. |
+| [session-053](agent-sessions/session-053-block3-bentz-machine-check.md) | in_progress | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-1o1f | The session is in progress on `BC-099` under `think-1o1f`: Theorem 8 first, the m = 4 extraction folding in behind it. |
 
 ### Workflow summary
 
@@ -79,7 +80,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 2 | 1 | 27 | 2 |
 | `process-review` | 10 | 4 | 49 | 6 |
 | `efficiency-loop` | 8 | 0 | 22 | 0 |
-| `research-loop` | 3 | 4 | 23 | 7 |
+| `research-loop` | 4 | 4 | 24 | 7 |
 | `pipeline-improvement` | 18 | 0 | 76 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 

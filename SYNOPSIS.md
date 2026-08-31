@@ -364,9 +364,11 @@ landed the certifier core and the falsifier (`BC-093`, `BC-094`), and
 landed the stage-1 price and the exact-LP measurement (`BC-095`, `BC-096`) — **and the
 checkpoint
 ([session-052](packing/campaign/agent-sessions/session-052-midrun-checkpoint.md)) has
-resequenced the tentative half; block 3 opens as session-053 on `BC-099` under
-`think-1o1f`**, the Bentz `m = 4` machine-check; `BC-097` and `BC-089`’s remainder are
-the sanctioned gate filler.
+resequenced the tentative half;
+[session-053](packing/campaign/agent-sessions/session-053-block3-bentz-machine-check.md)
+is in progress on `BC-099` under `think-1o1f`** — machine-checking Bentz 2010, Theorem 8
+(`s(46) = 7`) first as the calibration, the `m = 4` analysis behind it; `BC-097` and
+`BC-089`’s remainder are the sanctioned gate filler.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
@@ -2344,8 +2346,8 @@ rounding.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 8 |
-| closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **52** |
+| closed before `resource_rollups` existed, logs not retained | 45 |
+| **total** | **53** |
 
 <!-- END GENERATED: session-close-report -->
 
