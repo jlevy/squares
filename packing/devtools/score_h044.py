@@ -11,11 +11,13 @@ record from the stored options rather than trusting the stored status, applies t
 registered slice, and emits the exp-046 results record with a typed reason for every
 miss.
 
-The scoring never edits the atlas. A verdict lands in the experiment record and stays
-``unresolved`` with ``needs_review`` until the owner reviews -- especially here, where
-the fraction sits near the threshold and two frozen-contract decisions (singleton
-chunks are inadmissible; sliding contact assemblies are outside the candidate
-universe) are exactly what a review would weigh.
+The scoring never edits the atlas. A verdict lands in the experiment record; the
+emitted ``verdict_note`` string is frozen with the byte-identical replay and records
+the run-night hold. The 2026-08-31 verification review (session-060) resolved that
+hold in the experiment record itself: the miss is determinate under both denominator
+readings, and H-044 stays undisposed by its own calibration-only amendment; the two
+frozen-contract decisions (singleton chunks inadmissible; sliding contact assemblies
+outside the candidate universe) remain the priced reopen paths.
 
 Usage, from ``packing/``:
     uv run --frozen python -m devtools.score_h044 --record <out.json>

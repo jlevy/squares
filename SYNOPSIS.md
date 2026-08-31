@@ -87,8 +87,10 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 The generated ledger currently derives three confirmed hypotheses, six refuted
 hypotheses, one open hypothesis, seven open questions, and thirty-one blocked
 hypotheses. Two further hypotheses are unresolved: one because its formal prerequisite
-is missing, and H-044 because its first scored round (exp-046, calibration corpus)
-is held for the owner's review. Its active confidence ladder has completed the exact and event controls up to
+is missing, and H-044 because its registered calibration-only amendment keeps the
+hypothesis undisposed — its first scored round (exp-046) missed the criterion
+determinately under both denominator readings, the review hold is cleared, and
+disposition waits on a confirmatory successor over a fresh-frozen corpus. Its active confidence ladder has completed the exact and event controls up to
 the first nontrivial identity question; the next scientific transition is from
 specialized `n = 5` local geometry to a defensible component relation, not to a larger
 raw census.
@@ -179,6 +181,7 @@ case or experiment separately.
 | [Review: `TUTORIAL.md` Soundness, Iteration 2, on the Merged Record](docs/project/reviews/review-2026-08-25-tutorial-soundness-iteration-2.md) | dated review record | record | retained | — |
 | [Review: Soundness of the Session-011 Continuation (PR #34)](docs/project/reviews/review-2026-08-25-pr34-soundness-review.md) | dated review record | record | retained | — |
 | [Review: PR #44, Constructive Enumeration, and the Known-Best Atlas](docs/project/reviews/review-2026-08-26-pr44-constructive-enumeration-and-known-best-atlas.md) | dated review record | record | retained | — |
+| [Verification Determinations for the Agenda-010 Overnight Run](docs/project/reviews/review-2026-08-31-overnight-run-verification-determinations.md) | dated review record | record | retained | — |
 | [Review: Square Packing Research-Loop Efficiency](docs/project/reviews/review-2026-08-25-research-loop-efficiency.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -320,7 +323,7 @@ The renderer’s standing exact-motion control remains independently replayable:
 
 ![The final frame of the certified exact five-square trajectory.](packing/atlas/rendering/n5-exact-face-trajectory.svg)
 
-**As of 2026-08-30 — start here.**
+**As of 2026-08-30.**
 [agenda-008](packing/campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md)
 is closed with all four commitments terminal;
 [session-045](packing/campaign/agent-sessions/session-045-agenda008-queue-and-identity.md)
@@ -377,8 +380,9 @@ closed block 3 on `BC-099` under `think-1o1f` with the run's first research resu
 Bentz 2010, Theorem 8 (`s(46) = 7`) machine-certifies as printed** — 92 exact cells
 over `Q(sqrt 2, sqrt 3)`, the Lemma 5 threshold by a rigorous rational subdivision
 bound of `0.955390`, all 45 points charged — held `unresolved` with `needs_review`
-per the unattended rules, with the `m = 4` remainder typed on `think-1o1f` and one
-candidate printed gap flagged for replay. The same session absorbed a mid-run merge
+under the unattended rules that night (resolved by the review below), with the
+`m = 4` remainder typed on `think-1o1f` and one candidate printed gap flagged for
+replay. The same session absorbed a mid-run merge
 from `main` (the parallel audit session had taken `session-050` and `D-404`, so block
 1's record is `session-054` and the reassessment defects are `D-405`/`D-406`) and
 root-caused the base branch's red full surface to two stacked control defects,
@@ -386,19 +390,20 @@ root-caused the base branch's red full surface to two stacked control defects,
 **Block 4 is complete too**
 ([session-055](packing/campaign/agent-sessions/session-055-block4-h044-verdict.md),
 `BC-100`): the `H-044` chunk-expressibility verdict exists as `exp-046`, exploratory
-by the hypothesis's own calibration-only amendment and held `unresolved` with
-`needs_review` — the criterion is **missed under both denominator readings** the
+by the hypothesis's own calibration-only amendment, held `unresolved` with
+`needs_review` that night (resolved below) — the criterion is **missed under both
+denominator readings** the
 registered text supports (23/30 = 0.7667 over all records at `n ≤ 30`; 3/10 = 0.30
 over the non-grid sweep records), identically in both bands, every miss typed and
 determinate. The measured mechanism: the lattice grammar expresses the grid stratum
 completely and the tilted stratum not at all (flush groups are tangentially slid off
 the integer lattice step), so stage-1 over this grammar is a restricted-class
 instrument — converging with `BC-095`'s repricing from the price side.
-**Block 5 is in progress
+**Block 5 closed
 ([session-056](packing/campaign/agent-sessions/session-056-block5-bentz13-figure2.md)):
-`BC-099`'s own question continues under `think-1o1f`** — the m = 4 foundation layer.
-Two results already landed on first complete runs, both held `unresolved` with
-`needs_review`: **Figure 2's sixteen-point base configuration is machine-certified**
+`BC-099`'s own question continued under `think-1o1f`** — the m = 4 foundation layer.
+Two results landed on first complete runs, both held that night for review
+(resolved below): **Figure 2's sixteen-point base configuration is machine-certified**
 (30 exact rational cells: 4 Lemma 1 corner pentagons, 8 Lemma 4 wall rectangles, 18
 Lemma 2 triangles; 16/16 charged), and **Lemma 10 is machine-settled both
 ways** — the printed replacement point `(1, 1.74)` is refuted by an exact escape
@@ -411,10 +416,11 @@ semantics, margin and near cells, and the rational-`a` threshold bound along the
 `BC-101`) then moved the verified lower lane for the first time since 2005:
 `s(17) ≥ 17/4 = 4.25` and `s(18) ≥ 17/4`, certified exactly** by a sixteen-point
 unavoidable set in `[0, 17/4]²` (`cases/green17`) — above Nagamochi's `≈ 4.1623`,
-below Green's unadoptable `≈ 4.4452` — the side pinned to exactly `17/4` by an
+below Green's unadoptable `≈ 4.4452` — the cell plan pinned to `17/4` by an
 `11/1000000` slack, the falsifier corroborating by saturation, and the verdict held
-`unresolved` with `needs_review` (frontier adoption is a reviewed evidence-contract
-change). **The run then discharged the checkpoint's two authorized fillers and
+that night for review; the review's independent audit then showed `17/4` was the
+plan's ceiling rather than the set's, and the upgrade below carries the adopted
+bound. **The run then discharged the checkpoint's two authorized fillers and
 closed early.**
 [Session-058](packing/campaign/agent-sessions/session-058-block7-m8-sizing.md)
 (`BC-103`) sized the `m = 8` attempt exactly and parked it: the m = 7 pattern's
@@ -425,13 +431,42 @@ pitch cap by `0.0157`; 9 rows overrun the 60-point budget by 7).
 (`BC-102`) built the τ* pilot and read the method diagnostic: the eleven-crossing
 sits near side `3.83` (uncertified, typed), so a pure eleven-point set has at most
 a `~0.04`-wide window above `2 + 4/√5` and any ambitious bespoke `s(12)` bound
-forces the threshold/segment/moving-resource machinery. **Everything mathematical
-from the run — Theorem 8, the m = 4 layer with the Lemma 10 settlement, the
-`s(17) ≥ 17/4` certificate, the H-044 verdict, both diagnostics — is held
-`unresolved` with `needs_review` for the owner's morning review.** The review
-queue's follow-ons sit on their beads (`think-1o1f`, `think-q6vy`, `think-07t7`
-paused, `think-0z9b`); `BC-097` and `BC-089`’s remainder remain the sanctioned
-gate filler.
+forces the threshold/segment/moving-resource machinery. Everything mathematical
+from the run was held `unresolved` with `needs_review` overnight per the
+unattended rules; the verification review below resolved every hold the same day.
+
+**As of 2026-08-31, evening — start here.** The owner moved the review from
+their queue to the repository's own rubric — determinations, not deferrals —
+and
+[session-060](packing/campaign/agent-sessions/session-060-verification-review.md)
+is running it as `BC-106` under `think-ngf0` in
+[agenda-011](packing/campaign/agendas/agenda-011-verification-review.md). The
+determinations, each grounded in [conventions.md §4](conventions.md#4-evidence)
+and the frontier evidence contract: **Theorem 8's audit is verified** and fully
+machine-checked (`E-bentz46-theorem8-audit`); **the Lemma 10 settlement is
+verified and now source-settled** — the published page image itself prints the
+transposed `(1, 1.74)`, so the defect is the journal's, recorded as
+`defect-found` on `E-bentz-2010-proof` with the partial Theorem 9 audit in
+`E-bentz13-figure2-audit`; **exp-046's hold is cleared with H-044 undisposed by
+its own registered amendment** (the miss is determinate under both readings);
+**the m = 8 parking statement stands as exact arithmetic**; **the τ* diagnostic
+stays uncertified by construction** — final typed status, nothing pending. The
+green17 determination became an upgrade: the independent interval certifier
+built for the review (`cases/green17/interval_audit.py` — exhaustive exact
+integer branch-and-bound over the full pose space, pair-handoff and
+wall-tightened discharge rules, negative controls refuting tampered sets and
+oversized sides with exact witnesses) proved the run's `17/4` was the cell
+plan's ceiling, not the set's: the same sixteen points certify at
+`4426213/1000000 = 4.426213`, the cell certificate was rebuilt there (right-wall
+Lemma 4 rectangles replacing the near-slabs), and **`verified_lower_bound` at
+`n = 17` and `n = 18` moved to `4.426213` on two independent formal methods**
+(`E-green17-sixteen-point-lower`, `E-green17-interval-audit`), the set's exact
+ceiling `753/250 + √2 ≈ 4.42621356` bracketed by certification at `4.426213`
+and refutation at `4.427` and typed as follow-on. The assembled case is the
+2026-08-31 verification review under `docs/project/reviews/`; the owner reviews
+the PR as a whole. Follow-ons stay on their beads (`think-1o1f`, `think-q6vy`,
+`think-07t7` paused, `think-0z9b`); `BC-097` and `BC-089`'s remainder remain
+the sanctioned gate filler.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
@@ -2393,9 +2428,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 42 | 12,301 | 7,099 | 144 | 1,546 | 56.39 h |
+| claimed by a session | 42 | 12,757 | 7,342 | 151 | 1,561 | 63.61 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **52** | **13,761** | **7,977** | **176** | **1,719** | **63.26 h** |
+| **measured** | **52** | **14,217** | **8,220** | **183** | **1,734** | **70.48 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2414,13 +2449,14 @@ rounding.
 | [session-057](packing/campaign/agent-sessions/session-057-block6-green-sizes.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-058](packing/campaign/agent-sessions/session-058-block7-m8-sizing.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-059](packing/campaign/agent-sessions/session-059-block8-tau-star-pilot.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
-| *shared by 15 sessions* | — | 3 | 8,964 | 4,966 | 111 | 48.08 h |
+| [session-060](packing/campaign/agent-sessions/session-060-verification-review.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
+| *shared by 16 sessions* | — | 3 | 9,420 | 5,209 | 118 | 55.3 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 15 |
+| measured | 16 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **59** |
+| **total** | **60** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -2508,7 +2544,7 @@ archive beside it.
 | [exp-043](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md) | 5 | target | H-023 | exact pure -W second-order test | five instrument blockers; no retained result | **unresolved** |
 | [exp-044](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md) | 5 | target | H-023 | exact pure -W row-jet test | reviewed row builder; no retained target | **unresolved** |
 | [exp-045](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md) | 5 | target | H-023 | exact pure -W scale and control test | pure -W excluded at A, interior and B; sign symmetry holds; accepted 2026-08-31 after the independent audit and -W bridge corroboration | **accepted** |
-| [exp-046](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-046-h-044-chunk-expressibility-verdict.md) | 11 | target | H-044 | chunk-expressibility verdict at `n ≤ 30` | criterion missed under both denominator readings (23/30 and 3/10, both bands); every miss typed; calibration corpus, held for review | unresolved |
+| [exp-046](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-046-h-044-chunk-expressibility-verdict.md) | 11 | target | H-044 | chunk-expressibility verdict at `n ≤ 30` | criterion missed under both denominator readings (23/30 and 3/10, both bands); every miss typed; calibration corpus, review resolved 2026-08-31 with H-044 undisposed per its amendment | unresolved |
 
 ### Cost and provenance
 

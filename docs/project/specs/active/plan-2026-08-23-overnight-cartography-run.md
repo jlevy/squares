@@ -342,15 +342,15 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, use
-[session 059](../../../../packing/campaign/agent-sessions/session-059-block8-tau-star-pilot.md),
-the run's closing slice; agenda-010 is fully discharged (eight sessions,
-BC-093 through BC-103's authorized slices), and the next slice is `BC-102`'s
-successor work under `think-0z9b` in
-[agenda-010](../../../../packing/campaign/agendas/agenda-010-two-lane-overnight-run.md)
-only after the owner's review -- every mathematical verdict from the run
-(Theorem 8, the m = 4 layer with the Lemma 10 settlement, s(17) >= 17/4, the
-H-044 verdict, both diagnostics) is held `unresolved` with `needs_review`, and
-the review itself is the next action.
+[session 060](../../../../packing/campaign/agent-sessions/session-060-verification-review.md),
+the verification review the owner redirected onto the repository's own rubric;
+agenda-010 is fully discharged (eight sessions, BC-093 through BC-103's
+authorized slices), and the active slice is `BC-106` under `think-ngf0` in
+[agenda-011](../../../../packing/campaign/agendas/agenda-011-verification-review.md)
+-- the six overnight holds resolved as determinations, the green17 bound
+upgraded to `4.426213` on two independent formal methods with the frontier
+fields moved at `n = 17` and `n = 18`, and the assembled case landing on the
+pull request for the owner's whole-PR review.
 Sessions 027 through 049 are terminal, and agendas 006, 007 and 008 are closed; the
 recognition block BC-089 keeps its remainder open as sanctioned gate filler.
 

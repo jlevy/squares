@@ -1,11 +1,13 @@
-"""The 17/4 sixteen-point certificate, its refusal controls, and the falsifier check.
+"""The 4426213/10^6 sixteen-point certificate, its controls, and both companions.
 
-The positive direction replays the whole certificate; the falsifier cross-check
-saturates on a coarse grid (its caveat stands: saturation is corroboration, the
-certificate is the argument); the controls prove the checks refuse a displaced
-point and a side pushed past the near-slab corner bound. Per the run's unattended
-rules the mathematical verdict stays unresolved with needs_review; these tests pin
-the machinery, not the promotion or any frontier move.
+The positive direction replays the whole cell certificate at the module side;
+the falsifier cross-check saturates on a coarse grid (its caveat stands:
+saturation is corroboration, the certificate is the argument); the controls
+prove the checks refuse a displaced point and a side pushed past the top
+strips' Lemma 4 ceiling `753/250 + sqrt 2` -- in the cell certifier and in the
+independent interval audit alike. The interval audit's positive direction runs
+at a comfortably interior side here to stay fast; the full-side replay is the
+evidence entry's replay command.
 """
 
 from __future__ import annotations
@@ -15,6 +17,8 @@ from fractions import Fraction
 import pytest
 
 from cases.bentz13.verify_cover import certify
+from cases.green17.interval_audit import IntervalAuditError
+from cases.green17.interval_audit import certify as interval_certify
 from cases.green17.packing import EXPECTED_POINTS, SIDE, Rat, build
 from cases.green17.verify_cover import build_certificate
 from sqpack.falsify import SaturationReport, search_escape
@@ -23,10 +27,8 @@ from sqpack.falsify import SaturationReport, search_escape
 def test_certificate_builds_and_charges_every_point() -> None:
     certificate = build_certificate()
     assert certificate["cells"] == {
-        "lemma4": 10,
+        "lemma4": 13,
         "lemma5": 3,
-        "margin": 1,
-        "near": 4,
         "lemma2": 18,
     }
     assert certificate["set_point_count"] == EXPECTED_POINTS
@@ -65,35 +67,37 @@ def test_certificate_refuses_a_displaced_point() -> None:
         )
 
 
-def test_near_slab_refuses_a_wider_margin() -> None:
-    set_points, vertices, plan, boundary = build()
-    tampered_vertices = dict(vertices)
-    wider = Fraction(19, 5)
-    for name in ("m_r0", "m_c0", "m_c1", "m_c2", "m_r3"):
-        _x, y = tampered_vertices[name]
-        tampered_vertices[name] = (Rat.of(wider), y)
-    with pytest.raises(ValueError):
+def test_cell_certifier_refuses_a_side_past_the_lemma4_ceiling() -> None:
+    past_ceiling = Fraction(4427, 1000)
+    set_points, vertices, plan, boundary = build(side=past_ceiling)
+    with pytest.raises(ValueError, match=r"\(a \+ 2b\)\^2 exceeds 8"):
         certify(
             set_points=set_points,
-            vertices=tampered_vertices,
+            vertices=vertices,
             plan=plan,
             expected_faces=len(plan),
             boundary=boundary,
-            container_side=SIDE,
+            container_side=past_ceiling,
         )
 
 
-def test_lemma2_refuses_a_cut_vertex_off_the_boundary() -> None:
-    set_points, vertices, plan, boundary = build()
-    tampered_vertices = dict(vertices)
-    x, y = tampered_vertices["s_c0"]
-    tampered_vertices["s_c0"] = (x - Rat.of(Fraction(1, 50)), y)
-    with pytest.raises(ValueError):
-        certify(
-            set_points=set_points,
-            vertices=tampered_vertices,
-            plan=plan,
-            expected_faces=len(plan),
-            boundary=boundary,
-            container_side=SIDE,
-        )
+def test_interval_audit_certifies_an_interior_side() -> None:
+    stats = interval_certify(side=Fraction(22, 5), max_boxes=2_000_000)
+    assert stats.boxes > 10_000
+    # All four discharge rules are load-bearing on this geometry.
+    assert stats.near_point > 0
+    assert stats.oriented > 0
+    assert stats.pair > 0
+    assert stats.no_fit > 0
+
+
+def test_interval_audit_refutes_past_the_ceiling() -> None:
+    with pytest.raises(IntervalAuditError, match="refuted"):
+        interval_certify(side=Fraction(4427, 1000), max_boxes=60_000_000)
+
+
+def test_interval_audit_refutes_a_tampered_set() -> None:
+    set_points = build()[0]
+    points = [(p[0].value, p[1].value) for p in set_points.values()]
+    with pytest.raises(IntervalAuditError, match="refuted"):
+        interval_certify(points=points[:15], max_boxes=10_000_000)

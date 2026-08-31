@@ -81,7 +81,7 @@ experiment:
     outcome: criterion_met
   verdict:
     decision: unresolved
-    needs_review: true
+    needs_review: false
     primary_criterion: >-
       report criterion_met only when, per adjacency band, at least 4/5 of the atlas
       records at n <= 30 are established under the frozen contract (K <= 6, at most
@@ -124,7 +124,21 @@ experiment:
       detector contract was being repaired, so it is calibration-only, and a
       confirmatory disposition needs a successor round on an unseen corpus frozen
       after the instrument and grammar -- this round supplies the instrument and
-      the calibration number that successor will be judged against.
+      the calibration number that successor will be judged against. Review
+      resolution 2026-08-31 (session-060, BC-106): the hold is lifted with the
+      decision standing at unresolved -- the criterion miss is determinate,
+      byte-replayable, and robust to the one denominator ambiguity, so no
+      near-threshold judgement is pending; and the round cannot dispose H-044 in
+      either direction, because the ledger derives a hypothesis-level refutation
+      from any rejected round regardless of tier while the registered amendment
+      types this corpus calibration-only and the hypothesis undisposed. Nothing
+      about this round awaits review.
+    reopen_when: >-
+      A successor round scores a corpus frozen after the instrument and grammar
+      (the amendment's confirmatory path), or a preregistered re-run measures the
+      two typed relaxations this round priced -- singleton admission (provably
+      moves the broad reading to 24/30 exactly) and contact-relaxed sliding
+      assemblies (upper-bounds it at 26/30).
 ---
 # exp-046 — The H-044 Chunk-Expressibility Verdict at n <= 30
 
@@ -149,8 +163,8 @@ replay byte-identically from the atlas.
 **Criterion missed under both readings of the registered denominator: 23/30 =
 0.7667 over all records at n ≤ 30, and 3/10 = 0.30 over the non-grid records that
 are H-044's own sweep points — identically in both bands.** The registered text
-supports either reading, deciding between them is held for the owner, and the
-outcome does not depend on it. The twenty exact-grid records all establish (the
+supports either reading, and the outcome does not depend on it — which is why the
+review resolution below needed no decision between them. The twenty exact-grid records all establish (the
 grid is one rectangle chunk); three non-grid records establish; the seven misses
 are the tilted stratum, every search exhausting within seventeen states — a
 candidate-universe boundary, not a search-budget one, and no `n ≤ 30` record is
@@ -179,7 +193,7 @@ registration rather than tonight:
   two-free budget regardless of the tilted center square. Admitting singletons
   provably flips `n = 5` (five singleton chunks, zero free) and lands the broad
   reading on 24/30 = 0.80 exactly, while moving the sweep reading only to 4/10 —
-  which is one reason the round is held for review rather than closed.
+  which is one reason the round was initially held for review rather than closed.
 - **Sliding contact assemblies and angle-class splits are outside the universe**,
   so every miss is typed as a limit of the grammar, never as a refutation of the
   record's expressibility in some richer grammar. A contact-relaxed grammar
@@ -210,8 +224,34 @@ confirmatory path is a successor on an unseen corpus frozen after the instrument
 What this round contributes is that instrument, ready and replayed, and the
 calibration number the successor is judged against.
 
-Per the run's unattended rules the verdict stays `unresolved` with `needs_review`;
-no `verified_*` field moves tonight.
+Per the run's unattended rules the verdict was recorded `unresolved` with
+`needs_review` on the night of the round; the resolution below completes it.
+
+## Review Resolution (2026-08-31)
+
+Resolved in [session-060](../../../agent-sessions/session-060-verification-review.md)
+under `BC-106`, applying the repository's own rubric rather than deferring:
+
+- **The measurement stands as verified computation.** Every establishment is
+  re-derived from the stored options, every miss is a typed no-partition result
+  under the frozen contract with no search cap reached, and the score replays
+  byte-identically from the atlas (`--check`). Nothing in the number is a
+  judgement call.
+- **The near-threshold hold clause does not bind.** The registered criterion
+  held the round for review "whenever the fraction lands near the threshold";
+  the miss is robust to the one preregistration ambiguity (23/30 and 3/10 under
+  the two denominator readings, identically in both bands), so there is no
+  marginal reading left to adjudicate.
+- **The round cannot dispose H-044, by registration.** The 2026-08-26 amendment
+  types this corpus calibration-only and the hypothesis undisposed; and the
+  ledger derives a hypothesis-level refutation from any `rejected` round
+  regardless of tier, so recording `rejected` here would report a disposition
+  the registered contract forbids. The decision therefore stands `unresolved`
+  with the review hold cleared, and `reopen_when` names the confirmatory
+  successor and the two priced relaxations.
+
+No `verified_*` field is implicated: the round's claim is about grammar
+expressibility of serialized geometry under tolerances, never a frontier bound.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

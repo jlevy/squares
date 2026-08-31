@@ -1,19 +1,23 @@
-"""Exact certificate: sixteen points make `[0, 17/4]^2` unavoidable — `s(17) >= 17/4`.
+"""Exact certificate: sixteen points make `[0, 4426213/10^6]^2` unavoidable.
 
 Every decision routes through the shared Section 3 certifier
-(`cases.bentz13.verify_cover.certify`) over exact rationals: the 36-cell partition
-of the container, the Lemma 4 strips with their wall-vertex ends, the three
-left-wall Lemma 5 quadrilaterals with the rigorous threshold bound, the margin
-band and near-slabs, and the eighteen Lemma 2 triangles. The conclusion — every
-box contains one of the sixteen points, so at most sixteen disjoint boxes fit,
-so seventeen unit squares cannot pack below side 17/4 (nor can eighteen) — moves
-the verified lower lane at `n = 17, 18` above Nagamochi's closed form (about
-4.1623) for the first time since 2005. Green's unadoptable 4.4452 remains the
-stretch target; the near-slab corner bound `(t - 4)^2 + (433/1000)^2 <= 1/4` is
-what pins this construction to exactly `t = 17/4`.
+(`cases.bentz13.verify_cover.certify`) over exact rationals: the 34-cell
+partition of the container, the Lemma 4 strips with their wall-vertex ends and
+the three right-wall Lemma 4 rectangles, the three left-wall Lemma 5
+quadrilaterals with the rigorous threshold bound, and the eighteen Lemma 2
+triangles. The conclusion -- every box contains one of the sixteen points, so at
+most sixteen disjoint boxes fit, so seventeen unit squares cannot pack below
+side `4426213/1000000` (nor can eighteen) -- moves the verified lower lane at
+`n = 17, 18` above Nagamochi's closed form (about 4.1623). The side sits within
+`6 * 10^-7` of the set's exact ceiling `753/250 + sqrt 2` (the top strips'
+`a + 2b <= 2 sqrt 2` becoming equality), a hair below Green's reported but
+sourceless `(40 sqrt 2 + 19)/17` (about 4.4452).
 
-Held unresolved with needs_review per the run's unattended rules; adoption into
-the frontier record is a reviewed evidence-contract change.
+The independent companion is `cases/green17/interval_audit.py`: the same claim
+proved by exhaustive integer interval branch-and-bound over the full pose
+space, sharing the data and nothing else; it certifies this side and refutes
+`4427/1000` with an exact escaping pose. `sqpack.falsify.search_escape`
+saturates with negative margin at this side as the numerical third leg.
 
 Usage, from `packing/`:
     uv run --frozen python -m cases.green17.verify_cover
@@ -38,11 +42,13 @@ def build_certificate() -> dict[str, object]:
         container_side=SIDE,
     )
     record["theorem"] = (
-        "s(17) >= 17/4 and s(18) >= 17/4: sixteen unavoidable points in [0, 17/4]^2"
+        "s(17) >= 4426213/1000000 and s(18) >= 4426213/1000000: "
+        "sixteen unavoidable points in [0, 4426213/1000000]^2"
     )
     record["standing_comparison"] = {
         "nagamochi_closed_form_n17": "about 4.1623",
-        "this_certificate": "17/4 = 4.25 exactly",
+        "this_certificate": "4426213/1000000 = 4.426213 exactly",
+        "set_ceiling_exact": "753/250 + sqrt 2, about 4.42621356 (typed follow-on)",
         "green_unpublished_n17": "(40 sqrt 2 + 19)/17, about 4.4452 (no primary source)",
     }
     return record

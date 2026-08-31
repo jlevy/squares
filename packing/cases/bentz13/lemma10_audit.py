@@ -22,12 +22,14 @@ Three independent lines say the intended point is `(1.74, 1)`:
   uses it ("each corner-restricted box will contain one of `(1, 1.74)`,
   `(1.6, 1)`, or their symmetric counterparts").
 
-Whether the transposition is the paper's or the extraction pipeline's cannot be
-decided from this repository (the raw text is column-interleaved pdftotext output
-and carries the same reading), so the finding is held as a typed source delta in
-the H-041 discipline: the encoding proceeds against the corrected point, the
-printed reading is preserved beside it, and the verdict stays unresolved with
-needs_review until the owner checks the published PDF.
+Whether the transposition was the paper's or the extraction pipeline's was
+initially typed undecidable from the text layers alone. Settled 2026-08-31
+(session-060, BC-106): the published PDF's page 5, rendered as an image and read
+visually, prints "(1, 1.74)" in the lemma statement, matching the byte-level
+text layer -- the transposition is the journal's, an erratum-level defect in the
+published paper. The audit stands as a verified refutation of the lemma as
+printed and a verified certification under the corrected reading; the
+transcription carries the settlement note beside the printed text.
 
 Usage, from `packing/`:
     uv run --frozen python -m cases.bentz13.lemma10_audit
@@ -101,7 +103,11 @@ def audit() -> dict[str, object]:
         ),
         "escape_certificate": escape,
         "corrected_point_refusal": corrected_refusal,
-        "status": "unresolved; needs_review (source delta held in the H-041 discipline)",
+        "status": (
+            "settled 2026-08-31: the published page image carries the printed "
+            "reading, so the transposition is the journal's; refuted as printed, "
+            "certified as corrected (session-060, BC-106)"
+        ),
     }
 
 

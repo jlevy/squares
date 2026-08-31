@@ -134,7 +134,16 @@ Non-avoidance lemmas apply to all regions, so each box contains at least one poi
      (1.74, 1), i.e. the point the symmetric B-covering version of this lemma delivers,
      which is how Section 3.1's alternatives use it. The raw extraction carries the same
      "(1, 1.74)" reading, so whether the transposition is the paper's or the extraction
-     pipeline's is undecidable from this repository. Held unresolved with needs_review. -->
+     pipeline's was initially typed undecidable from this repository.
+     SETTLED 2026-08-31 (session-060, BC-106): the published PDF's page 5, rendered as an
+     image and read visually, prints "(1.12, 1), (1, 1.74), and (1.87, 0.76)" in the lemma
+     statement, matching the byte-level text layer -- the transposition is the journal's,
+     an erratum-level defect in the published paper, not an extraction artifact. The lemma
+     is refuted as printed and certified under the corrected reading (1.74, 1):
+     cases/bentz13/lemma10_audit.py carries the exact escape certificate, and
+     cases/bentz13/lemma10_replacements.py certifies all three corrected replacement
+     covers exactly. Recorded in frontier/evidence.yaml (E-bentz13-figure2-audit) and in
+     the 2026-08-31 verification review. -->
 
 We will distinguish two cases of placements of the corner-restricted boxes.
 

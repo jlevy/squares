@@ -438,11 +438,22 @@ evidence:
         - Packings permit arbitrary orientations and boundary contact.
         - The nonavoidance lemmas in Section 1 apply to the case-specific point systems.
     external_review:
-      state: not-reviewed
-      date: '2026-08-30'
+      state: defect-found
+      date: '2026-08-31'
+      reviewed_by: repository
       note: >-
-        Transcribed with its theorem and pinpoints; nobody here has worked through the argument.
-    limitations: Complete external published proofs; not independently audited here.
+        Machine audit (session-060, BC-106): Theorem 8's unavoidable-set argument
+        certifies exactly as printed (E-bentz46-theorem8-audit). In Theorem 9's
+        apparatus, Lemma 10's middle replacement point is printed transposed --
+        "(1, 1.74)" where the working point is (1.74, 1) -- refuted as printed by
+        an exact escape certificate and settled as the journal's own text against
+        the published page image; the corrected reading certifies exactly and the
+        paper's downstream usage matches it (E-bentz13-figure2-audit), so both
+        theorem statements stand with an erratum-level defect in one lemma.
+    limitations: >-
+      Complete external published proofs. Theorem 8's construction is now fully
+      machine-audited here; Theorem 9's Sections 3.1-3.2 case analysis remains
+      audited as prose only.
     source_reviewed: '2026-08-25'
 
   - id: E-bentz-2016-proof
@@ -832,3 +843,113 @@ evidence:
     replay_status: passed
     limitations: 'Elementary and complete for these ten cases: k*k unit squares of total area k^2 sit in a k by k container of area k^2, so the packing is a tiling with no slack and no square admits any feasible motion. Global rather than local, and about the exact configuration rather than a materialization of it. It establishes rigidity and optimality independently for these n; the optimality half is not claimed here.'
     source_reviewed: '2026-08-28'
+  - id: E-bentz46-theorem8-audit
+    claim: lower-bound
+    scope: {n_values: [46]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: previously-published
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    source_key: '[Bentz 2010]'
+    certificate: cases/bentz46/verify_cover.py
+    replay: uv run --frozen python -m cases.bentz46.verify_cover
+    replay_status: passed
+    limitations: >-
+      Machine-audits the complete s(46) >= 7 lower-bound argument as printed:
+      the 45-point system certifies exactly over Q(sqrt 2, sqrt 3) -- 92 cells
+      in three lemma kinds, the Lemma 5 threshold by a rigorous rational
+      subdivision bound, every box charged -- and 45 points against 46 boxes is
+      pigeonhole. An audit of the published construction by an independent
+      implementation of the section-1 lemma hypotheses; it does not re-derive
+      the paper's prose framing, and the upper-bound half of s(46) = 7 (the
+      trivial packing) is not this entry's claim.
+    source_reviewed: '2026-08-31'
+  - id: E-bentz13-figure2-audit
+    claim: derived-structure
+    scope: {n_values: [13]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: previously-published
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    source_key: '[Bentz 2010]'
+    certificate: cases/bentz13/verify_cover.py
+    replay: uv run --frozen python -m cases.bentz13.verify_cover
+    replay_status: passed
+    limitations: >-
+      Partial audit of Theorem 9's apparatus, exact over pure rationals: the
+      Figure 2 sixteen-point unavoidability certifies as printed, Lemma 10 is
+      refuted as printed by an exact escape certificate (the printed middle
+      replacement point (1, 1.74) is the journal's transposition of (1.74, 1),
+      settled against the published page image on 2026-08-31), and all three
+      corrected replacement covers certify exactly
+      (cases/bentz13/lemma10_replacements.py), landing inside the paper's own
+      Lemma 5 parameter families. The Sections 3.1-3.2 case analysis that
+      completes s(13) = 4 is audited as prose only, so this entry supports the
+      published proof without carrying the s(13) lower bound by itself.
+    source_reviewed: '2026-08-31'
+  - id: E-green17-sixteen-point-lower
+    claim: lower-bound
+    scope: {n_values: [17, 18]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: apparently-novel
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    source_key: '[Bentz 2010]'
+    certificate: cases/green17/verify_cover.py
+    replay: uv run --frozen python -m cases.green17.verify_cover
+    replay_status: passed
+    novelty_basis:
+      corpus: >-
+        The DS7 source register and the archived literature under
+        resources/papers, reviewed for n = 17 and n = 18 lower bounds.
+      searched: >-
+        Nagamochi 2005 gives the standing closed form (about 4.1623 at
+        n = 17); Green's Theorem 9 reports (40 sqrt 2 + 19)/17 (about
+        4.4452) with Figure 34 unextractable and no primary source; no other
+        bespoke lower bound at these n was found.
+      novel_object: >-
+        The certified object: sixteen rational points unavoidable in
+        [0, 4426213/1000000]^2, every decision an exact rational sign. The
+        bound's value sits below Green's reported number, so what is new is
+        the verified certificate, not the frontier of reported claims.
+      gaps: >-
+        If Green's construction exists as reported it exceeds this one by
+        about 0.019; nothing recoverable carries it.
+    limitations: >-
+      Certifies the sixteen-point set at side 4426213/1000000 through the
+      shared Bentz-lemma cell certifier (34 cells; the design was built
+      against that certifier, hence same-implementation -- the independent
+      leg is E-green17-interval-audit). The set's exact ceiling
+      753/250 + sqrt 2 (top-strip Lemma 4 equality) needs Q(sqrt 2)
+      arithmetic and is a typed follow-on; n = 18 inherits by monotonicity
+      (a packing of 18 contains a packing of 17). Supersedes the same
+      construction's first run at 17/4 (session-057), whose margin-band and
+      near-slab cells were the binding constraint.
+    source_reviewed: '2026-08-31'
+  - id: E-green17-interval-audit
+    claim: lower-bound
+    scope: {n_values: [17, 18]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    certificate: cases/green17/interval_audit.py
+    replay: uv run --frozen python -m cases.green17.interval_audit
+    replay_status: passed
+    limitations: >-
+      Proves the same closed-unit-square claim by exhaustive branch-and-bound
+      over the full pose space in exact fixed-scale integer arithmetic,
+      sharing the point data and nothing else with the cell certificate:
+      416,459 boxes, depth 70, about 150 s, four discharge rules (near-point,
+      oriented cover, pair handoff, no-fit) all load-bearing. Also refutes
+      side 4427/1000 with an exact escaping pose, bracketing the set's
+      ceiling around 753/250 + sqrt 2. The falsifier's saturation at this
+      side is numerical corroboration outside this entry's formal claim.
+    source_reviewed: '2026-08-31'

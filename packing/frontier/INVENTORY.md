@@ -8,9 +8,9 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **36** evidence records. **27** are formal; **21** of those were established here.
-- **6** rest on an argument made elsewhere, of which **5** have been read by nobody here.
-- **7** claim to be first established here. **3** make no novelty statement at all - not assessed, which is not the same as not novel.
+- **40** evidence records. **31** are formal; **25** of those were established here.
+- **6** rest on an argument made elsewhere, of which **4** have been read by nobody here.
+- **8** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
 claim whether or not we read it. The count above is not a doubt about those
@@ -39,7 +39,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-gobel-offcentre-upper` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n082-gobel-l-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n010-stromquist-proof` | 1 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
-| `E-bentz-2010-proof` | 2 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
+| `E-bentz-2010-proof` | 2 | lower-bound | verified | whatever its theorem states | elsewhere | defect-found | previously-published |
 | `E-bentz-2016-proof` | 2 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
 | `E-n011-trump-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n005-second-order-rigidity` | 1 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
@@ -56,12 +56,16 @@ results, it is a statement about what this repository has itself examined.
 | `E-n029-schadt-rational-upper` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-translation-escape-not-rigid` | 87 | derived-structure | numerically-checked | nothing formally; a measurement at a tolerance | here | - | apparently-novel |
 | `E-perfect-square-tiling-rigid` | 10 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
+| `E-bentz46-theorem8-audit` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-bentz13-figure2-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-green17-sixteen-point-lower` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-green17-interval-audit` | 2 | lower-bound | verified | strict inequalities only | here | - | *not assessed* |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 5, verified 27
-- **method**: exact-algebraic 20, interval-certified 1, numerical-multiprecision 4, published-proof 6, reported 5
-- **novelty**: apparently-novel 7, common-knowledge 4, not assessed 3, previously-published 22
+- **assurance**: numerically-checked 4, reported 5, verified 31
+- **method**: exact-algebraic 23, interval-certified 2, numerical-multiprecision 4, published-proof 6, reported 5
+- **novelty**: apparently-novel 8, common-knowledge 4, not assessed 4, previously-published 24
 
 The `cases` column is how many of the hundred frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited by ninety-eight cases is the catalogue everyone reports from and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -72,6 +76,7 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | result | n | what is new | cases | assurance |
 | --- | --- | --- | ---: | --- |
 | `E-translation-escape-not-rigid` | 89 sizes | A systematic screen over 98 configurations with replayable certificates; the idea of checking a slide is not new | 87 | numerically-checked |
+| `E-green17-sixteen-point-lower` | 17, 18 | The certified object: sixteen rational points unavoidable in [0, 4426213/1000000]^2, every decision an exact rational sign. The bound's value sits below Green's reported number, so what is new is the verified certificate, not the frontier of reported claims. | 2 | verified |
 | `E-n005-second-order-rigidity` | 5 | That n = 5 is not infinitesimally rigid but is second-order rigid, proved exactly; the catalogue asserts 'Rigid.' without defining or arguing it | 1 | verified |
 | `E-n011-repaired-lower` | 11 | A correct proof of a bound stated in 1979 and cited as proved since, whose printed argument does not close | 1 | verified |
 | `E-n011-trump-local-rigidity` | 11 | Local rigidity proved by exhausting all 128 branchwise cones; sources assert rigidity, and zero algebraic freedom does not exclude a branching motion | 1 | verified |

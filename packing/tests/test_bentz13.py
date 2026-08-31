@@ -4,9 +4,9 @@ The positive direction replays the whole base-configuration certificate; the
 controls prove the checks refuse (a displaced centre point, a removed face, a
 near-corner point pushed off Lemma 1's conclusion triangle); and the audit pins
 both halves of the Lemma 10 finding -- the printed replacement point is escaped
-exactly, the corrected one defeats the same box. Per the run's unattended rules
-the source-delta verdict stays unresolved with needs_review; these tests pin the
-machinery, not the promotion.
+exactly, the corrected one defeats the same box. The source-delta question was
+settled 2026-08-31 against the published page image (the transposition is the
+journal's); these tests pin the machinery and the settled status.
 """
 
 from __future__ import annotations
@@ -73,7 +73,8 @@ def test_lemma10_audit_certifies_both_directions() -> None:
     assert isinstance(escape, dict)
     refusal = record["corrected_point_refusal"]
     assert refusal["defeated_by"] == "replacement"  # type: ignore[index]
-    assert "unresolved" in str(record["status"])
+    assert "settled" in str(record["status"])
+    assert "refuted as printed" in str(record["status"])
 
 
 def test_all_three_corrected_replacements_certify() -> None:
