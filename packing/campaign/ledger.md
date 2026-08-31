@@ -69,6 +69,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-052](agent-sessions/session-052-midrun-checkpoint.md) | completed | contemporaneous | `process-review` (insight) | `process-review` (insight) | 1 | think-cjxk | Block 3 opens as session-053 on `BC-099` under `think-1o1f`: encode Bentz 2010's m = 4 argument in the general instrument, with the falsifier at every failed step. |
 | [session-053](agent-sessions/session-053-block3-bentz-machine-check.md) | completed | contemporaneous | `research-loop` (correctness) | `research-loop` (process) | 2 | think-1o1f | Block 4 opens as session-055 on `BC-100` under `think-l48p`: upgrade the chunks.py census to the registered partition solver and evaluate H-044's criterion on the frozen corpus. |
 | [session-054](agent-sessions/session-054-block1-certifier-and-falsifier.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-y2ju | Block 2 opens as session-051 on `BC-095` under `think-kp7o`: reprice the chunk-level enumeration with the measured orbit quotient and the realizability prefilter. |
+| [session-055](agent-sessions/session-055-block4-h044-verdict.md) | completed | contemporaneous | `research-pass` (insight) | `research-pass` (insight) | 1 | think-l48p | Block 5 opens as session-056 on `BC-101` under `think-q6vy`: the Green sizes ladder, per the checkpoint's promotion. |
 
 ### Workflow summary
 
@@ -76,7 +77,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
-| `research-pass` | 0 | 0 | 10 | 0 |
+| `research-pass` | 1 | 0 | 11 | 0 |
 | `factual-review` | 2 | 0 | 27 | 2 |
 | `insight-iteration` | 2 | 1 | 27 | 2 |
 | `process-review` | 10 | 4 | 49 | 6 |
@@ -255,7 +256,7 @@ Status: **active**. Nine hours, unattended, done before the owner's morning. The
 | BC-097 | tool_validation | 12, 61, 97 | ready | 3 | think-6z95 | Not started. Gate filler alongside BC-089's remainder; if the night never gates long enough, it rolls forward undone and that is fine. |
 | BC-098 | research | 12, 13, 61 | complete | 0 | think-cjxk | Discharged by session-052 on four measured facts (instruments green, the K <= 3 tractability boundary, the ~1.4 s/pivot exact-LP cost, ~3.5 h of recovered wall). Decisions: BC-101 promoted into tonight's window behind BC-099; BC-102 runs tonight only if BC-101 completes with wall remaining, else it is the next run's first slice; BC-103's 60-minute sizing slice is authorized as gate filler after BC-099; BC-104 rescoped to the class the price says is enumerable (K <= 3, measured wall seatings, pruned canonical enumeration) and stays behind BC-100's verdict; BC-105 carries the measured route (sweep in float, certify winners exactly) and its statement narrows to the K <= 3 class. Remaining wall: BC-099 to ~09:00Z, BC-100 to ~10:30Z, BC-101 to ~12:00Z, BC-102's first slice if wall remains, finalization from 14:10Z. X-010 carries the dated addendum. |
 | BC-099 | research | 13 | ready | 0 | think-1o1f | Session-053 resequenced the block inside its own question and delivered the calibration half: Theorem 8 (s(46) = 7) is machine-certified as printed -- cases/bentz46, 92 exact cells over Q(sqrt 2, sqrt 3), the Lemma 5 threshold by a rational interval subdivision bound of 0.955390, 45 of 45 points charged, five tests pinning certificate and refusals -- held unresolved with needs_review per the unattended rules. The m = 4 half is typed on think-1o1f from the completed extraction: Section 3.1 first, the sliding point Z as the one new premise type, tilings reconstructed from prose, the SA (1.74, 1) case split flagged as a candidate printed gap, Corollary 7 derived from Lemma 6. X-010 Lane A rung 2; the calibration case for H-033's m = 7 encoding and the m = 8 attempt behind it. |
-| BC-100 | research | 11, 17, 26, 29 | ready | 1 | think-l48p | Not started. X-010 Lane B rung 1; independent of BC-095's price, which is why the two lanes can alternate without idling. |
+| BC-100 | research | 11, 17, 26, 29 | complete | 1 | think-l48p | Discharged by session-055: the verdict is exp-046, exploratory per H-044's own calibration-only amendment, held unresolved with needs_review -- criterion missed under both denominator readings the registered text supports (23/30 = 0.7667 all records at n <= 30; 3/10 = 0.30 over the non-grid sweep records), both bands identical, every miss typed and determinate under the frozen cap. devtools/score_h044.py carries the scoring with per-record re-derivation and byte-identical replay; instrument_ready is true; the preregistration-style ambiguities (denominator reading, singleton admissibility, contact relaxation) are typed in the record for the owner, with the relaxed-universe census re-run named as the follow-on. |
 | BC-101 | research | 17, 18 | blocked | 1 | think-q6vy | Promoted by the BC-098 checkpoint into tonight's recovered wall, behind BC-099: the instruments it needs exist with their triples green, and the synthesis loop it runs is the one BC-099 exercises first. Target window ~10:30Z-12:00Z. |
 | BC-102 | research | 12 | tentative | 1 | think-0z9b | Checkpoint decision (session-052): runs tonight only if BC-101 completes with wall remaining; otherwise it is the next run's first slice. The instruments it needs exist; the most under-priced target in the corpus keeps its priority. |
 | BC-103 | research | 61 | tentative | 2 | think-07t7 | Checkpoint decision (session-052): the 60-minute sizing slice is authorized as gate filler once BC-099 lands; the full attempt stays a later agenda's. A peak, listed so the ladder's direction is on the map rather than in prose. |
@@ -266,7 +267,7 @@ Status: **active**. Nine hours, unattended, done before the owner's morning. The
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 45 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 46 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -315,13 +316,19 @@ Status: **active**. Nine hours, unattended, done before the owner's morning. The
 | H-041 | confirmed | proof | At s = 2 + 4/sqrt(5), replacing the printed Figure 14 point G = (4/5,  | n: 11* | 1 | 90m agent + 1s wall |
 | H-042 | refuted | search | The retained Kingbird n = 29 SVG serialization has at most three orien | n: 29* | 1 | 15m agent + 0s wall |
 | H-043 | blocked | proof | Every one of the 128 derivative-distinct fixed-side branches at Trump' | derivative_branch: all-128-exp-013-matrices | 0 |  |
-| H-044 | blocked | search | At least 80 percent of standing-record poses at n <= 30 with public fu | n: 5 10 11 17 18 19 26 27 28 29 37 39 40 41 50 51 54 68 69 70 83 87 88 | 0 |  |
+| H-044 | unresolved | search | At least 80 percent of standing-record poses at n <= 30 with public fu | n: 5 10 11* 17 18 19 26 27 28 29 37 39 40 41 50 51 54 68 69 70 83 87 88 | 1 | 25m agent + 1s wall |
 | H-045 | blocked | search | A chunk grammar and enumeration order frozen against the proved cells  | n: 5 10 11 16 17 | 0 |  |
 | H-046 | blocked | search | Starting from the aligned form of Trump's chunk arrangement and increa | n: 11 | 0 |  |
 | H-047 | blocked | search | For at least 70 percent of imported poses at n <= 30, rounding each de | n: 5 10 11 17 18 19 28 29 | 0 |  |
 | H-048 | blocked | search | On the proved cells n = 5 and n = 10, the stratum that is optimal unde | n: 5 10 | 0 |  |
 | H-049 | blocked | search | delta((4,6), 20) > 0: twenty unit squares pack into a 4 by 6 rectangle |  | 0 |  |
 | H-050 | blocked | search | The n = 71 incumbent's split of sixteen oblique squares across two ang |  | 0 |  |
+
+## Needs review — held for a human, not decided
+
+| id | hypotheses | decision | why it was not decided |
+| --- | --- | --- | --- |
+| exp-046 | H-044 | unresolved | The criterion is missed under both denominator readings the registered text supports, identically in the exact and near bands: 23/30 = 0.7667 over all atlas records at n <= 30, and 3/10 = 0.30 over the non-grid records that are H-044's own sweep points -- so the outcome is robust to the one preregistration-style ambiguity this round refuses to decide (which denominator the claim meant). All seven misses (n = 5, 11, 17, 18, 19, 28, 29, every non-grid record but three) are typed no-partition results, fully determinate -- no n <= 30 record is search-capped or outside-budget. The decisive mechanism, verified against the stored components: the grammar's adjacency is the integer lattice step, and the tilted stratum's flush groups are tangentially slid -- Trump's n = 11 five-square group has all contact residuals exactly zero in the normal direction yet no integer lattice offsets, so it enters the universe as five singletons (the same mechanism at n = 17), and H-044's own worked decomposition of n = 11 needs three free squares against its own registered two. At n = 18, 19, 28, 29 real shared-angle candidates form (sixteen to thirty-six) and no admissible set covers the squares within two free. Two frozen-contract decisions frame any review: singleton chunks are inadmissible (n = 5's four mutually non-adjacent corner squares can never group; admitting singletons provably flips n = 5 and lands the broad reading on 24/30 = 0.80 exactly, while moving the sweep reading only to 4/10), and sliding contact assemblies are outside the universe (a contact-relaxed grammar upper-bounds the broad reading at 26/30 = 0.8667, shape and off-frame budgets unchecked). Whether the remaining misses move under either relaxation needs one preregistered re-run of the census with the relaxed universe -- a follow-on, not tonight's decision. Either way the structural conclusion X-010 needs stands: the bar/L/rectangle lattice grammar as frozen expresses the grid stratum completely and the tilted stratum not at all, so a stage-1 pipeline built on it is a restricted-class instrument, exactly as block 2's repricing priced it. Tier is exploratory, not confirmatory, by H-044's own review amendment of 2026-08-26: the n = 1..100 corpus was inspected while the detector contract was being repaired, so it is calibration-only, and a confirmatory disposition needs a successor round on an unseen corpus frozen after the instrument and grammar -- this round supplies the instrument and the calibration number that successor will be judged against. |
 
 ## Rounds
 
@@ -340,7 +347,7 @@ Status: **active**. Nine hours, unattended, done before the owner's morning. The
 | exp-037 | series-000 | 29 | openai-codex | H-042 | The retained serialization has six numerical orientation classes, with minimum class gap 0.296067 degrees against a 1e-90 degree interval radius. |
 | exp-041 | series-000 | 5 | openai-codex | H-023 | The frozen complete-zero-inventory clause is false: one additional owner axis is zero only at the positive endpoint, while independent control review also found mutation-reason and partial-disposition guards that remain unfinished. |
 
-### unresolved (4)
+### unresolved (5)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -348,6 +355,7 @@ Status: **active**. Nine hours, unattended, done before the owner's morning. The
 | exp-040 | series-000 | 5 | openai-codex | H-023 | Temporary generation and replay passed, but independent review found five finite proof-perimeter gaps before any retained target result was accepted. |
 | exp-043 | series-000 | 5 | openai-codex | H-023 | Temporary generation and replay passed, but independent review found that the evaluator ignored center velocities in its second-order constants, combined no production rowwise curvatures, supplied no checked sheet acceleration witness, and asserted rather than proved the owner-3 two-scale routing. No target result was retained and no -W disposition follows. |
 | exp-044 | series-000 | 5 | openai-codex | H-023 | The criterion and fresh-agent handoff passed two independent audits, and a new production builder now constructs all six exact owner-row inventories through the accepted helper. The slice stopped before weighted row substitution, the exp-034 sheet evaluator, symbolic-real and unbounded scale routing, twelve mutations, or independent target dispositions were complete. No result JSON was written and no pure -W inference follows. |
+| exp-046 | series-000 | 11 | claude-code-overnight-run | H-044 | The criterion is missed under both denominator readings the registered text supports, identically in the exact and near bands: 23/30 = 0.7667 over all atlas records at n <= 30, and 3/10 = 0.30 over the non-grid records that are H-044's own sweep points -- so the outcome is robust to the one preregistration-style ambiguity this round refuses to decide (which denominator the claim meant). All seven misses (n = 5, 11, 17, 18, 19, 28, 29, every non-grid record but three) are typed no-partition results, fully determinate -- no n <= 30 record is search-capped or outside-budget. The decisive mechanism, verified against the stored components: the grammar's adjacency is the integer lattice step, and the tilted stratum's flush groups are tangentially slid -- Trump's n = 11 five-square group has all contact residuals exactly zero in the normal direction yet no integer lattice offsets, so it enters the universe as five singletons (the same mechanism at n = 17), and H-044's own worked decomposition of n = 11 needs three free squares against its own registered two. At n = 18, 19, 28, 29 real shared-angle candidates form (sixteen to thirty-six) and no admissible set covers the squares within two free. Two frozen-contract decisions frame any review: singleton chunks are inadmissible (n = 5's four mutually non-adjacent corner squares can never group; admitting singletons provably flips n = 5 and lands the broad reading on 24/30 = 0.80 exactly, while moving the sweep reading only to 4/10), and sliding contact assemblies are outside the universe (a contact-relaxed grammar upper-bounds the broad reading at 26/30 = 0.8667, shape and off-frame budgets unchecked). Whether the remaining misses move under either relaxation needs one preregistered re-run of the census with the relaxed universe -- a follow-on, not tonight's decision. Either way the structural conclusion X-010 needs stands: the bar/L/rectangle lattice grammar as frozen expresses the grid stratum completely and the tilted stratum not at all, so a stage-1 pipeline built on it is a restricted-class instrument, exactly as block 2's repricing priced it. Tier is exploratory, not confirmatory, by H-044's own review amendment of 2026-08-26: the n = 1..100 corpus was inspected while the detector contract was being repaired, so it is calibration-only, and a confirmatory disposition needs a successor round on an unseen corpus frozen after the instrument and grammar -- this round supplies the instrument and the calibration number that successor will be judged against. |
 
 ### blocked (4)
 
@@ -405,7 +413,7 @@ Status: **active**. Nine hours, unattended, done before the owner's morning. The
 
 ## Effort
 
-45 rounds, 1106 agent-minutes, 30.8 wall-minutes.
+46 rounds, 1131 agent-minutes, 30.9 wall-minutes.
 
 ## Exploration reports not yet codified
 

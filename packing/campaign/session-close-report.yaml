@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 54
+count: 55
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 10
+  sessions_measured: 11
   sessions_unmeasured: 44
   attributed:
-    rollups: 41
-    turns: 11766
-    tool_calls: 6811
-    tool_errors: 139
-    one_off_code: 1485
-    wall_hours: 54.12
+    rollups: 42
+    turns: 12020
+    tool_calls: 6950
+    tool_errors: 141
+    one_off_code: 1504
+    wall_hours: 54.72
   unattributed:
     rollups: 10
     turns: 1460
@@ -28,12 +28,12 @@ totals:
     one_off_code: 173
     wall_hours: 6.87
   measured:
-    rollups: 51
-    turns: 13226
-    tool_calls: 7689
-    tool_errors: 171
-    one_off_code: 1658
-    wall_hours: 60.99
+    rollups: 52
+    turns: 13480
+    tool_calls: 7828
+    tool_errors: 173
+    one_off_code: 1677
+    wall_hours: 61.59
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -554,11 +554,11 @@ sessions:
   rollups:
   - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
   - packing/campaign/resource-usage/a35f6c5f493ae6cf0.yaml
-  turns: 982
-  tool_calls: 509
-  tool_errors: 14
-  one_off_code: 90
-  wall_hours: 4.04
+  turns: 1143
+  tool_calls: 592
+  tool_errors: 16
+  one_off_code: 109
+  wall_hours: 4.48
 - id: session-052
   title: "The mid-run checkpoint: resequence the tentative half on the night's evidence"
   status: completed
@@ -567,11 +567,11 @@ sessions:
   measured: true
   rollups:
   - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
-  turns: 944
-  tool_calls: 481
-  tool_errors: 14
-  one_off_code: 90
-  wall_hours: 3.99
+  turns: 1105
+  tool_calls: 564
+  tool_errors: 16
+  one_off_code: 109
+  wall_hours: 4.43
 - id: session-053
   title: "Block 3 of the overnight run: machine-checking Bentz 2010"
   status: completed
@@ -581,11 +581,11 @@ sessions:
   rollups:
   - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
   - packing/campaign/resource-usage/agent-ac40f3b59df269a0e.yaml
-  turns: 969
-  tool_calls: 496
-  tool_errors: 14
-  one_off_code: 90
-  wall_hours: 4.15
+  turns: 1130
+  tool_calls: 579
+  tool_errors: 16
+  one_off_code: 109
+  wall_hours: 4.59
 - id: session-054
   title: "Block 1 of the two-lane overnight run: the certifier instrument and the falsifier"
   status: completed
@@ -596,8 +596,22 @@ sessions:
   - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
   - packing/campaign/resource-usage/a8a236cbd8a0e6d95.yaml
   - packing/campaign/resource-usage/a0083f0c8eb083ddb.yaml
-  turns: 1032
-  tool_calls: 545
-  tool_errors: 14
-  one_off_code: 90
-  wall_hours: 4.12
+  turns: 1193
+  tool_calls: 628
+  tool_errors: 16
+  one_off_code: 109
+  wall_hours: 4.56
+- id: session-055
+  title: "Block 4 of the overnight run: the H-044 verdict"
+  status: completed
+  primary_bead: think-l48p
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  - packing/campaign/resource-usage/agent-a865b43cbbef91fe2.yaml
+  turns: 1198
+  tool_calls: 620
+  tool_errors: 16
+  one_off_code: 109
+  wall_hours: 4.59

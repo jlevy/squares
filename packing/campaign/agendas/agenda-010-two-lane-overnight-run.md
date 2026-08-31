@@ -323,7 +323,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11, 17, 26, 29]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Are the standing records chunk-expressible at K <= 6 with at most two free
@@ -351,7 +351,20 @@ agenda:
     depends_on: []
     workflows: [research-pass, insight-iteration]
     next_evidence: >-
-      Not started. X-010 Lane B rung 1; independent of BC-095's price, which is why the
+      Discharged by session-055: the verdict is exp-046, exploratory per H-044's
+      own calibration-only amendment, held unresolved with needs_review --
+      criterion missed under both denominator readings the registered text
+      supports (23/30 = 0.7667 all records at n <= 30; 3/10 = 0.30 over the
+      non-grid sweep records), both bands identical, every miss typed and
+      determinate under the frozen cap. devtools/score_h044.py carries the
+      scoring with per-record re-derivation and byte-identical replay;
+      instrument_ready is true; the preregistration-style ambiguities
+      (denominator reading, singleton admissibility, contact relaxation) are
+      typed in the record for the owner, with the relaxed-universe census re-run
+      named as the follow-on.
+    artifacts:
+    - devtools/score_h044.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-046-h-044-chunk-expressibility-verdict.md
       two lanes can alternate without idling.
   - id: BC-101
     purpose: research

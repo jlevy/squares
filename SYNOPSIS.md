@@ -85,9 +85,10 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-two blocked
-hypotheses. One additional hypothesis is unresolved because its formal prerequisite is
-missing. Its active confidence ladder has completed the exact and event controls up to
+hypotheses, one open hypothesis, seven open questions, and thirty-one blocked
+hypotheses. Two further hypotheses are unresolved: one because its formal prerequisite
+is missing, and H-044 because its first scored round (exp-046, calibration corpus)
+is held for the owner's review. Its active confidence ladder has completed the exact and event controls up to
 the first nontrivial identity question; the next scientific transition is from
 specialized `n = 5` local geometry to a defensible component relation, not to a larger
 raw census.
@@ -382,9 +383,20 @@ from `main` (the parallel audit session had taken `session-050` and `D-404`, so 
 1's record is `session-054` and the reassessment defects are `D-405`/`D-406`) and
 root-caused the base branch's red full surface to two stacked control defects,
 `D-407` and `D-408`, both fixed on this branch.
-**The next slice is block 4: `BC-100` under `think-l48p`** — the `H-044` verdict on
-the frozen corpus through the registered partition solver; `BC-097` and `BC-089`’s
-remainder are the sanctioned gate filler.
+**Block 4 is complete too**
+([session-055](packing/campaign/agent-sessions/session-055-block4-h044-verdict.md),
+`BC-100`): the `H-044` chunk-expressibility verdict exists as `exp-046`, exploratory
+by the hypothesis's own calibration-only amendment and held `unresolved` with
+`needs_review` — the criterion is **missed under both denominator readings** the
+registered text supports (23/30 = 0.7667 over all records at `n ≤ 30`; 3/10 = 0.30
+over the non-grid sweep records), identically in both bands, every miss typed and
+determinate. The measured mechanism: the lattice grammar expresses the grid stratum
+completely and the tilted stratum not at all (flush groups are tangentially slid off
+the integer lattice step), so stage-1 over this grammar is a restricted-class
+instrument — converging with `BC-095`'s repricing from the price side.
+**The next slice is block 5: `BC-101` under `think-q6vy`** — the Green sizes ladder,
+per the checkpoint's promotion; `BC-097` and `BC-089`’s remainder are the sanctioned
+gate filler.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
@@ -2199,7 +2211,7 @@ round that names the hypothesis, control roles included.
 | [H-041](packing/campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | **confirmed** | Moving Figure 14 point `G.x` from `.8` to `.79` restores the complete lower-bound mechanism | 1 | 90m agent, 0.70s wall |
 | [H-042](packing/campaign/hypotheses/H-042-n29-numerical-angle-classes.md) | **refuted** | The retained `n=29` SVG serialization has at most three numerical angle classes under the declared 160-digit regime | 1 | 15m agent, 0.165s wall |
 | [H-043](packing/campaign/hypotheses/H-043-trump-incidence-rigidity-cores.md) | blocked | Every one of the 128 derivative-distinct fixed-side branches at Trump’s witness has a proper incidence rigidity core | 0 | — |
-| [H-044](packing/campaign/hypotheses/H-044-chunk-expressibility-of-records.md) | blocked | Standing records are already chunk-structured: at most six one-angle bar/L/rectangle groups plus at most two free squares | 0 | — |
+| [H-044](packing/campaign/hypotheses/H-044-chunk-expressibility-of-records.md) | unresolved | Standing records are already chunk-structured: at most six one-angle bar/L/rectangle groups plus at most two free squares | 1 | 25m agent, 1.1s wall |
 | [H-045](packing/campaign/hypotheses/H-045-chunk-grammar-rediscovery.md) | blocked | A grammar frozen on the proved cells ranks the standing best first at `n = 11` | 0 | — |
 | [H-046](packing/campaign/hypotheses/H-046-regular-predecessor-continuation.md) | blocked | A class-angle path runs from Trump’s aligned chunk form to the record without chunk fission | 0 | — |
 | [H-047](packing/campaign/hypotheses/H-047-chunk-regular-predecessors.md) | blocked | Rounding a pose to its chunk-regular predecessor and re-quenching returns the pose | 0 | — |
@@ -2346,9 +2358,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 41 | 11,766 | 6,811 | 139 | 1,485 | 54.12 h |
+| claimed by a session | 42 | 12,020 | 6,950 | 141 | 1,504 | 54.72 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **51** | **13,226** | **7,689** | **171** | **1,658** | **60.99 h** |
+| **measured** | **52** | **13,480** | **7,828** | **173** | **1,677** | **61.59 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2362,13 +2374,14 @@ rounding.
 | [session-052](packing/campaign/agent-sessions/session-052-midrun-checkpoint.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-053](packing/campaign/agent-sessions/session-053-block3-bentz-machine-check.md) | 2 | 1 | 25 | 15 | 0 | 0.16 h |
 | [session-054](packing/campaign/agent-sessions/session-054-block1-certifier-and-falsifier.md) | 2 | 2 | 88 | 64 | 0 | 0.13 h |
-| *shared by 10 sessions* | — | 3 | 8,522 | 4,734 | 106 | 45.97 h |
+| [session-055](packing/campaign/agent-sessions/session-055-block4-h044-verdict.md) | 1 | 1 | 93 | 56 | 0 | 0.16 h |
+| *shared by 11 sessions* | — | 3 | 8,683 | 4,817 | 108 | 46.41 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 10 |
+| measured | 11 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **54** |
+| **total** | **55** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -2381,8 +2394,8 @@ and the entry fills in on the next render.
 
 ## Experiments Conducted
 
-There are 45 terminal rounds registered in `series-000`. They record 1106 agent-minutes
-and 30.8 wall-minutes.
+There are 46 terminal rounds registered in `series-000`. They record 1131 agent-minutes
+and 30.9 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -2456,6 +2469,7 @@ archive beside it.
 | [exp-043](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md) | 5 | target | H-023 | exact pure -W second-order test | five instrument blockers; no retained result | **unresolved** |
 | [exp-044](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md) | 5 | target | H-023 | exact pure -W row-jet test | reviewed row builder; no retained target | **unresolved** |
 | [exp-045](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md) | 5 | target | H-023 | exact pure -W scale and control test | pure -W excluded at A, interior and B; sign symmetry holds; accepted 2026-08-31 after the independent audit and -W bridge corroboration | **accepted** |
+| [exp-046](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-046-h-044-chunk-expressibility-verdict.md) | 11 | target | H-044 | chunk-expressibility verdict at `n ≤ 30` | criterion missed under both denominator readings (23/30 and 3/10, both bands); every miss typed; calibration corpus, held for review | unresolved |
 
 ### Cost and provenance
 
@@ -2506,10 +2520,11 @@ archive beside it.
 | exp-043 | one 30-minute preregistration, implementation, and review slice | 3.071 s | 20 m | guard | — |
 | exp-044 | one 30-minute criterion, integration, and review slice | 100.41 s | 30 m | guard | `a5a4ef0` (row builder only) |
 | exp-045 | one 105-minute W6 mini-cycle inside agenda-004 block two | 6.64 s | 45 m | criterion | `caffcc3` |
+| exp-046 | one 45-minute phase of session-055 (block 4) | 1.1 s | 25 m | criterion | `db0c410a` (atlas input; scorer lands with this round) |
 
-### What the 45 rounds jointly establish
+### What the 46 rounds jointly establish
 
-The 45 rounds use 1106 agent-minutes and 30.8 wall-minutes under the campaign’s retained
+The 46 rounds use 1131 agent-minutes and 30.9 wall-minutes under the campaign’s retained
 effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through

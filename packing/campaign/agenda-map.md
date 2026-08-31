@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **8** ready, **5** tentative, **14** blocked, **5** stopped, **73** complete.
+- **7** ready, **5** tentative, **14** blocked, **5** stopped, **74** complete.
 
 - **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
 
@@ -27,7 +27,6 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-009 | `BC-091` | 1 | insight | research | At the 31 open sizes where nobody has beaten the trivial grid, is the grid optimal or merely unbeaten? | `think-7t9u` |
 | agenda-009 | `BC-090` | 2 | insight | research | Can a stricter, better informed search beat a stochastic incumbent at any of the ten sizes whose best known… | `think-xdly` |
 | agenda-010 | `BC-099` | 0 | correctness | research | Does Bentz 2010's m = 4 argument certify mechanically, or where exactly does it escape? | `think-1o1f` |
-| agenda-010 | `BC-100` | 1 | insight | research | Are the standing records chunk-expressible at K <= 6 with at most two free squares -- the H-044 verdict,… | `think-l48p` |
 | agenda-010 | `BC-102` | 1 | insight | research | Can synthesis produce the first bespoke certified lower bound at n = 12 -- any value strictly above the… | `think-0z9b` |
 | agenda-010 | `BC-103` | 2 | correctness | research | Does the m = 7 argument, encoded machine-readably, survive the substitution to m = 8 -- and if not, which… | `think-07t7` |
 | agenda-010 | `BC-104` | 2 | insight | research | Does the stage-1 pipeline -- enumerator, glued rows, class-angle sweep -- reproduce the proved controls… | `think-sfzh` |
@@ -83,7 +82,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-007 | completed |  |  |  |  | 4 | 4 |
 | agenda-008 | completed |  |  |  |  | 4 | 4 |
 | agenda-009 | active | 2 | 1 |  | 1 | 4 | 8 |
-| agenda-010 | active | 3 | 4 | 1 |  | 5 | 13 |
+| agenda-010 | active | 2 | 4 | 1 |  | 6 | 13 |
 
 ## What the states mean
 
