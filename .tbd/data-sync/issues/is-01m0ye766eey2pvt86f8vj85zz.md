@@ -5,7 +5,7 @@ title: "W7: chunk-grammar stage-1 enumerator prototype (X-003 idea 46)"
 kind: feature
 status: open
 priority: 1
-version: 4
+version: 5
 labels: []
 dependencies:
   - type: blocks
@@ -14,7 +14,9 @@ dependencies:
     target: is-01m0ye7mq2rqjtpka7hqa0m9r2
   - type: blocks
     target: is-01m0ye7n7h7e4mdnykyby86efy
+  - type: blocks
+    target: is-01m1b2ac6fw0dw674sd1tz5q7q
 created_at: 2026-08-26T07:05:43.886Z
-updated_at: 2026-08-26T07:05:59.280Z
+updated_at: 2026-08-31T04:47:53.039Z
 ---
 Enumerate stratum labels for stratified chunk enumeration: partitions of n into chunk sizes, bar/L/rectangle lattice skeletons per chunk, angle-class assignment (which chunks tilt), and chunk/wall contact hypotheses, symmetry-reduced. Emits concrete initial placements for the existing cell-read + LP quench path. Scope first to n in {5, 10} proved controls. E1 under cases/ until a second consumer exists. See campaign/explorations/X-003-stratified-chunk-enumeration.md.

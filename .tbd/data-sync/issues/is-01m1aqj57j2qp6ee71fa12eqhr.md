@@ -3,12 +3,16 @@ type: is
 id: is-01m1aqj57j2qp6ee71fa12eqhr
 title: "Record repair: s(m^2-m)=m boundary is m<11 (Cantrell Feb 2025), not m<17"
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-08-31T01:39:53.714Z
-updated_at: 2026-08-31T01:39:53.714Z
+updated_at: 2026-08-31T04:48:28.096Z
+closed_at: 2026-08-31T04:48:28.096Z
+close_reason: "Repaired with X-010: n-012.md and the n=11 report now carry the m<11 boundary (Hajba 2015 m=16, Arslanov 2019 m=12, Cantrell Feb 2025 n=110) with the retained witness linked; frontier/README provenance counts corrected to 14 hand-built / 10 annealing (9 of 10 dated 2024-2026; n=53 is 2002) / 5 strips / 3 extensions / 2 unrecorded. SYNOPSIS carries no stale boundary claim (checked; the bead's ~1562 pointer was the Cleemann-style technique mention, which is correct as written). The n-110 witness screens clean numerically this session: zero containment violation, worst pair separation +7.3e-8, side margin 3.2e-3 below 11 -- a screen, not a verification."
+resolution: null
+duplicate_of: null
 ---
 SYNOPSIS.md (~line 1562), packing/frontier/n-012.md (~line 130), and docs/project/research/research-2026-08-22-packing-11-unit-squares.md still quote Cleemann's n=17 as the smallest counterexample; the retained Kingbird archive records Hajba 2015 (m=16), Arslanov 2019 (m=12), Cantrell Feb 2025 (m=11, n=110, witness already retained at packing/witnesses/prospective/n-110.yaml). Also: frontier/README.md open-case provenance counts are off by one in two categories against the artifacts (says 15 hand-built/11 annealing; artifacts give 14/10 plus 2 unknown). W8/W2 repair; found by session-049's BC-088 investigation (X-009).
