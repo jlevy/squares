@@ -2301,8 +2301,8 @@ rounding.
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | claimed by a session | 31 | 9,261 | 5,393 | 113 | 1,262 | 45.33 h |
-| claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **41** | **10,721** | **6,271** | **145** | **1,435** | **52.2 h** |
+| claimed by none | 15 | 2,608 | 1,565 | 42 | 284 | 9.14 h |
+| **measured** | **46** | **11,869** | **6,958** | **155** | **1,546** | **54.47 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |

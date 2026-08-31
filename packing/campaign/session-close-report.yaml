@@ -21,19 +21,19 @@ totals:
     one_off_code: 1262
     wall_hours: 45.33
   unattributed:
-    rollups: 10
-    turns: 1460
-    tool_calls: 878
-    tool_errors: 32
-    one_off_code: 173
-    wall_hours: 6.87
+    rollups: 15
+    turns: 2608
+    tool_calls: 1565
+    tool_errors: 42
+    one_off_code: 284
+    wall_hours: 9.14
   measured:
-    rollups: 41
-    turns: 10721
-    tool_calls: 6271
-    tool_errors: 145
-    one_off_code: 1435
-    wall_hours: 52.2
+    rollups: 46
+    turns: 11869
+    tool_calls: 6958
+    tool_errors: 155
+    one_off_code: 1546
+    wall_hours: 54.47
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
