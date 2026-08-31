@@ -336,10 +336,15 @@ searched against.
 closed the same gap one level up, joining every session to what it cost and finding that
 both obvious ways of totalling that were wrong in the flattering direction — see
 [Sessions Conducted](#sessions-conducted).
+[session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md)
+opened by reconciling the queue against the tree: `BC-085` and `BC-087` had already
+landed (`check_control_anchors` in the records tier; `close_session` closing sessions
+idempotently) while the agenda still advertised both as ready.
 
-**The next slice is `BC-085` on `think-9k5k`**, the first ready cell of
+**The next slice is `BC-086` on `think-u5q2`**, the one hygiene commitment of
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md)
-and the one the `BC-088` search reassessment is blocked on.
+with no commit behind it and half of what the `BC-088` search reassessment is blocked
+on.
 `BC-049` on `think-xdly` is the research cell all of the mathematics below sits under,
 and it stays open.
 
@@ -2307,8 +2312,8 @@ rounding.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 4 |
-| closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **48** |
+| closed before `resource_rollups` existed, logs not retained | 45 |
+| **total** | **49** |
 
 <!-- END GENERATED: session-close-report -->
 

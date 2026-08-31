@@ -342,11 +342,11 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, use
-[session 048](../../../../packing/campaign/agent-sessions/session-048-what-every-session-cost.md).
-Sessions 027 through 047 are terminal, and agendas 006, 007 and 008 are closed.
-Open `BC-085` under `think-9k5k` as the next bounded driver: it is `agenda-009`’s first
-ready cell and the one `BC-088`’s search reassessment is blocked on, so taking anything
-ahead of it leaves that reassessment blocked either way.
+[session 049](../../../../packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md).
+Sessions 027 through 048 are terminal, and agendas 006, 007 and 008 are closed.
+Open `BC-086` under `think-u5q2` as the next bounded driver: `BC-085` and `BC-087` are
+complete on the tree, so it is the one hygiene commitment still standing between
+`BC-088`’s search reassessment and ready.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

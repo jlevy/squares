@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 48
+count: 49
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 4
-  sessions_unmeasured: 44
+  sessions_unmeasured: 45
   attributed:
     rollups: 31
     turns: 9261
@@ -515,3 +515,12 @@ sessions:
   tool_errors: 84
   one_off_code: 1048
   wall_hours: 38.74
+- id: session-049
+  title: "Close the hygiene queue, reassess the search, run the first sequenced slice"
+  status: in_progress
+  primary_bead: think-bxqv
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []

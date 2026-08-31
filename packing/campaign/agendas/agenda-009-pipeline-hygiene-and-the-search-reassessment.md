@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-009
   title: Fix what the rollups exposed, then decide what the machinery is now good for
-  updated: '2026-08-30'
+  updated: '2026-08-31'
   status: active
   objective: >-
     Eight to twelve hours. The first three commitments are hygiene and come first because
@@ -35,7 +35,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 11, 29]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Can a negative control that has stopped matching its own anchor be refused in
@@ -62,10 +62,19 @@ agenda:
     depends_on: []
     workflows: [pipeline-improvement]
     next_evidence: >-
-      The check is cheap because it resolves anchors rather than running controls: string
-      containment over about 150 declared files. The half-hour suite stays where it is;
-      `D-366` and `D-381` are both about what happens when the pull-request surface grows
-      past the point where anyone runs it.
+      Discharged by commit d2b6ba3: `check_control_anchors` resolves all 150 anchors by
+      string containment in under a second, wired as the records-tier step "control
+      anchors still resolve", reusing the runner's own `resolve_control_target` so it
+      cannot drift. Four remaining broken anchors repaired and verified firing (the sixth
+      was fixed in 8307ee3); the snapshot-scope case is handled by resolving against the
+      real checkout, which the checker states in its own comment. Five tests, including
+      that a missing anchor and a doubled anchor are both refused. Verified against the
+      tree on 2026-08-31 by session-049 before this state changed.
+    artifacts:
+    - devtools/check_control_anchors.py
+    - devtools/controls.yaml
+    - src/sqpack/cli/validate.py
+    - tests/test_control_anchors.py
   - id: BC-086
     purpose: tool_validation
     owner_focus: efficiency
@@ -102,7 +111,7 @@ agenda:
     purpose: tool_validation
     owner_focus: process
     instances: [5]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Is closing a session a tool, or a sequence a session has to remember?
@@ -127,9 +136,17 @@ agenda:
     depends_on: []
     workflows: [pipeline-improvement]
     next_evidence: >-
-      Measured 2026-08-30: 39 rollup files, 33 declared across 3 terminal sessions, 44
-      sessions grandfathered. The current session's own log is 19250 records, 6418 turns,
-      3580 tool calls, 37.10 hours.
+      Discharged by commit 9a6dd3e: `devtools/close_session.py` performs the cycle
+      idempotently and `--render` prints the cost block as its last act (OR-9).
+      Grandfathered sessions are reported rather than refused -- the records tier prints
+      the 44 sessions closed before the field existed by name. Session-048 closed itself
+      with the tool, which is the exercised proof. Verified against the tree on
+      2026-08-31 by session-049 before this state changed.
+    artifacts:
+    - devtools/close_session.py
+    - devtools/check_session_rollups.py
+    - campaign/session-close-report.yaml
+    - campaign/schemas/session-close-report.schema.yaml
   - id: BC-088
     purpose: research
     owner_focus: insight
