@@ -15,11 +15,11 @@ totals:
   sessions_unmeasured: 44
   attributed:
     rollups: 36
-    turns: 10451
-    tool_calls: 6107
+    turns: 10487
+    tool_calls: 6132
     tool_errors: 123
-    one_off_code: 1379
-    wall_hours: 47.7
+    one_off_code: 1383
+    wall_hours: 47.81
   unattributed:
     rollups: 10
     turns: 1460
@@ -29,11 +29,11 @@ totals:
     wall_hours: 6.87
   measured:
     rollups: 46
-    turns: 11911
-    tool_calls: 6985
+    turns: 11947
+    tool_calls: 7010
     tool_errors: 155
-    one_off_code: 1552
-    wall_hours: 54.57
+    one_off_code: 1556
+    wall_hours: 54.68
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -527,8 +527,8 @@ sessions:
   - packing/campaign/resource-usage/agent-a71eca88143ad786d.yaml
   - packing/campaign/resource-usage/agent-a8c1a849b5e57ee7a.yaml
   - packing/campaign/resource-usage/agent-ac4fec61a53717f37.yaml
-  turns: 1190
-  tool_calls: 714
+  turns: 1226
+  tool_calls: 739
   tool_errors: 10
-  one_off_code: 117
-  wall_hours: 2.37
+  one_off_code: 121
+  wall_hours: 2.48
