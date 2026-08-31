@@ -343,10 +343,11 @@ of it.
 
 For the next supervised exact-research goal, use
 [session 049](../../../../packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md).
-Sessions 027 through 048 are terminal, and agendas 006, 007 and 008 are closed.
-Open `BC-086` under `think-u5q2` as the next bounded driver: `BC-085` and `BC-087` are
-complete on the tree, so it is the one hygiene commitment still standing between
-`BC-088`’s search reassessment and ready.
+Sessions 027 through 049 are terminal, and agendas 006, 007 and 008 are closed.
+Open `BC-089`’s remainder under `think-d0j1` as the next bounded driver: the hygiene
+commitments are complete, `BC-088`’s reassessment is discharged by X-009, and the
+recognition block it sequenced first has ten of its fourteen cases certified with the
+witness lifts outside `Q(sqrt 2)` still open.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

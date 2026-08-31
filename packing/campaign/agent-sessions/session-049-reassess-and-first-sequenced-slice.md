@@ -8,7 +8,7 @@ softschema:
 session:
   id: session-049
   primary_bead: think-bxqv
-  status: in_progress
+  status: completed
   title: Close the hygiene queue, reassess the search, run the first sequenced slice
   date: '2026-08-31'
   started_at: '2026-08-31T01:00:00Z'
@@ -176,7 +176,7 @@ session:
       L of seventeen -- as a durable case package with an exact verification entry point,
       wire it into the gate, and record the evidence, following the D-398 recipe and the
       gobel_family precedent.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       The plan is written and its first slice is bounded and instrument-ready: the
@@ -199,11 +199,80 @@ session:
     fallback: >-
       Retain the case package and its verification without moving verified_upper_bound,
       recording the move as the named next action.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      cases/gobel82 certifies 82 squares at 6 + (5/2)sqrt(2): 3321 pairs by exact sign,
+      70 corners exactly on the boundary, a duplicate and a tenth column square both
+      refused, and the witness's declared side identified as the exact value rounded up
+      at its 32 digits. The witness's layout matches none of the construction's eight
+      dihedral images, so the certificate is stated to be about the construction. The
+      frontier record, evidence register, gate step and tripwire all moved together, and
+      the tier that validated the push was the one this session built in phase 2.
+    evidence:
+    - packing/cases/gobel82/packing.py
+    - packing/cases/gobel82/verify_exact.py
+    - packing/frontier/n-082.md
+    - packing/frontier/evidence.yaml
+    stop_reason: >-
+      packing-validate --push green on the exact tree; the worst trailing ceiling in the
+      corpus (0.464) is retired.
     next_action: >-
-      The strip family (27, 38, 52, 67, 84) by the same pattern, then the sweep bead.
+      The strip family (27, 38, 52, 67, 84) by the same pattern.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    bead: think-d0j1
+    objective: >-
+      BC-089's second stretch: derive and certify Goebel's strip family (27, 38, 52, 67,
+      84), Friedman's off-centre family (26, 85), and the first witness lifts (19, 66),
+      each as a case package wired into the gate with its records moved per the evidence
+      contract -- and open the pull request at the block boundary per the owner's
+      request, with the OR-9 amendment that codifies doing so.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The n = 82 slice met its exit inside its budget, and the same registered scope
+      (BC-089, sequenced by X-009) continues with the next constructions; the bead moves
+      to the block's own think-d0j1. The owner asked mid-session for a standing pull
+      request refreshed as blocks land, which this phase also delivers.
+    budget_minutes: 70
+    started_at: '2026-08-31T02:05:00Z'
+    deadline_at: '2026-08-31T03:15:00Z'
+    expected_output: >-
+      cases/gobel_strip, cases/gobel_offcentre and cases/lifted_q2 certifying nine sizes
+      between them, the nine frontier records moved, PR #64 open with the OR-9 block,
+      and the rule amendment rendered into AGENTS.md.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: >-
+      Any exact_sign failure, any layout guess that survives only by relaxing a control,
+      or a lift that needs tolerance above the witness's own precision. A case that
+      resists is recorded as a typed refusal, not forced.
+    fallback: >-
+      Land whichever case packages verify and record the rest as the block's remainder.
+    outcome: >-
+      All nine landed. The strip family verified on the first derivation at every size
+      -- staircases i + j <= a - 1, two corner squares, floor((a - 1) sqrt(2)) + 1
+      diamonds whose next member is refused at every a -- and the off-centre family on
+      the first derivation of DS7 section 3's one sentence, with the column-overflow
+      control firing at both sizes. n = 19 and 66 lifted coordinate by coordinate into
+      Q(sqrt 2) at height <= 48 and verified exactly, the operation D-402 does not
+      foreclose, with the side lift pinned to the published form. Ten verified ceilings
+      moved off the grid in this session in total, about 2.9 of aggregate gap; the
+      trailing tripwire moved 30 to 20 deliberately. PR #64 is open with the
+      block-boundary refresh process now written into OR-9.
+    evidence:
+    - packing/cases/gobel_strip/packing.py
+    - packing/cases/gobel_offcentre/packing.py
+    - packing/cases/lifted_q2/packing.py
+    - packing/frontier/evidence.yaml
+    - operating-rules.md
+    stop_reason: >-
+      packing-validate --push green before each of the three pushes; the session's wall
+      budget is spent and the block's remainder is recorded on its bead.
+    next_action: >-
+      BC-089 continues on think-d0j1: the remaining witness-lift cases and the
+      robust-rational sweep.
   budget:
     wall_minutes: 195
     finalization_minutes: 30
@@ -226,7 +295,15 @@ session:
       BC-085 and BC-087 landed but the agenda lists them ready; BC-086 is untouched;
       BC-088's reassessment has not started; the four candidate blocks are tentative with
       no sequencing decision.
-    after: null
+    after: >-
+      The queue reflects the machinery: X-009 sequences the four blocks with measured
+      reasons, H-049 and H-050 are registered, and seven follow-up beads carry the
+      remainder. The first sequenced block produced ten exactly verified constructions
+      -- n = 19, 26, 27, 38, 52, 66, 67, 82, 84, 85 -- moving each verified ceiling off
+      the integer grid onto the published exact side, about 2.9 of aggregate gap, with
+      every pair decided by exact sign over Q(sqrt 2) and every negative control
+      firing. The pre-push floor that validated all of it (--push, 58s against --fast's
+      646s) was built by this session's own second phase.
   delegations:
   - task: >-
       Read-only recognition scan of the 15 open cases with a published exact side:
@@ -386,15 +463,31 @@ session:
     started_at: '2026-08-31T01:14:00Z'
   outputs:
   - packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md
+  - packing/devtools/reachable_tests.py
+  - packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md
+  - packing/cases/gobel82/packing.py
+  - packing/cases/gobel_strip/packing.py
+  - packing/cases/gobel_offcentre/packing.py
+  - packing/cases/lifted_q2/packing.py
+  - packing/frontier/evidence.yaml
+  - operating-rules.md
   checks:
   - uv run --frozen --all-extras --group dev packing-validate --records
   - uv run --frozen --all-extras --group dev packing-validate --fast
-  resource_rollups: []
-  stop_reason: null
+  resource_rollups:
+  - packing/campaign/resource-usage/39fcaf14-acd6-59fb-88e9-05f635cb7f4d.yaml
+  - packing/campaign/resource-usage/agent-a5101e181b61c2125.yaml
+  - packing/campaign/resource-usage/agent-a71eca88143ad786d.yaml
+  - packing/campaign/resource-usage/agent-a8c1a849b5e57ee7a.yaml
+  - packing/campaign/resource-usage/agent-ac4fec61a53717f37.yaml
+  stop_reason: >-
+    The declared wall budget is spent with every phase at its exit, PR #64 open per the
+    owner's request, and the block's remainder recorded on its bead. The owner's mandate
+    was three hours; the clocks say the mandate is met and the queue says what is next.
   next_action: >-
-    Live plan, revised at each phase boundary: execute `BC-086` on `think-u5q2`, the one
-    hygiene commitment with no commit behind it and half of what blocks the
-    reassessment; the reassessment and the first sequenced block follow it.
+    `BC-089` continues on `think-d0j1`: the remaining witness lifts -- n = 18 and 86 in
+    Q(sqrt 7), n = 50 rational, n = 54 in the quartic field -- then the robust-rational
+    sweep bead, then the block's typed-refusal record for n = 53.
 ---
 # Session-049 — Close the Hygiene Queue, Reassess the Search, Run the First Slice
 

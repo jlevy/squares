@@ -63,7 +63,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-046](agent-sessions/session-046-gobel-family-constructions.md) | completed | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-xdly | `BC-049` on `think-xdly` stays open: n = 5 is done, n = 40 is decided at first order and open beyond it, n = 28 is untouched and its optimum is not in Goebel's family. Whether n = 65 and n = 89's witnesses can move from `numerical-multiprecision` to `exact-algebraic` is the question this session makes askable and does not open. |
 | [session-047](agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | completed | contemporaneous | `general-improvement` (process) | `general-improvement` (process) | 6 | think-xdly | `BC-049` stays open and this session did not touch its mathematics. Three evidence records still make no novelty statement and should keep making none until someone searches: `E-migrated-lower-report`, whose provenance is `unknown-historical`, and the two n = 29 numerical checks. The inventory's own arithmetic names the highest-value unclaimed work -- an informal review of `[Nagamochi 2005]`, which 88 cases rest on and nobody here has read (`think-xdly`). |
 | [session-048](agent-sessions/session-048-what-every-session-cost.md) | completed | contemporaneous | `pipeline-improvement` (process) | `general-improvement` (process) | 3 | think-atm1 | `BC-085` on `think-9k5k`, the first ready cell of `agenda-009` and the one the reassessment behind it is blocked on. The ten unclaimed rollups stay unclaimed: they predate the field, and inventing owners for them would be worse than counting them separately, which the report now does. |
-| [session-049](agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | in_progress | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 4 | think-bxqv | Live plan, revised at each phase boundary: execute `BC-086` on `think-u5q2`, the one hygiene commitment with no commit behind it and half of what blocks the reassessment; the reassessment and the first sequenced block follow it. |
+| [session-049](agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | completed | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 5 | think-bxqv | `BC-089` continues on `think-d0j1`: the remaining witness lifts -- n = 18 and 86 in Q(sqrt 7), n = 50 rational, n = 54 in the quartic field -- then the robust-rational sweep bead, then the block's typed-refusal record for n = 53. |
 
 ### Workflow summary
 
@@ -76,7 +76,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 2 | 1 | 27 | 2 |
 | `process-review` | 9 | 4 | 48 | 6 |
 | `efficiency-loop` | 7 | 0 | 20 | 0 |
-| `research-loop` | 3 | 4 | 22 | 7 |
+| `research-loop` | 3 | 4 | 23 | 7 |
 | `pipeline-improvement` | 17 | 0 | 74 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 

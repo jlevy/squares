@@ -338,14 +338,21 @@ closed the same gap one level up, joining every session to what it cost and find
 both obvious ways of totalling that were wrong in the flattering direction — see
 [Sessions Conducted](#sessions-conducted).
 [session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md)
-opened by reconciling the queue against the tree: `BC-085` and `BC-087` had already
-landed (`check_control_anchors` in the records tier; `close_session` closing sessions
-idempotently) while the agenda still advertised both as ready.
+then did three things in one morning: reconciled the queue against the tree (`BC-085`
+and `BC-087` had landed while the agenda still advertised both as ready), built the
+pre-push floor `BC-086` asked for (`packing-validate --push`, 58s against `--fast`'s
+646s), and ran the `BC-088` reassessment whose sequenced plan is
+[X-009](packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md) — then
+executed that plan's first block: **ten verified ceilings moved off the integer grid
+onto exact sides** at `n = 19, 26, 27, 38, 52, 66, 67, 82, 84, 85`, every one decided by
+exact sign over `Q(sqrt 2)` from a published rule or a coordinate lift, about `2.9` of
+aggregate gap. The widest trailing ceiling is now `n = 50`'s `3/7`.
 
-**The next slice is `BC-086` on `think-u5q2`**, the one hygiene commitment of
-[agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md)
-with no commit behind it and half of what the `BC-088` search reassessment is blocked
-on.
+**The next slice is `BC-089`'s remainder on `think-d0j1`** in
+[agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
+the witness lifts outside `Q(sqrt 2)` — `n = 18` and `86` in `Q(sqrt 7)`, `n = 50`
+rational, `n = 54` quartic — then the robust-rational sweep, then the typed refusal at
+`n = 53`.
 `BC-049` on `think-xdly` is the research cell all of the mathematics below sits under,
 and it stays open.
 
@@ -2300,9 +2307,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 31 | 9,261 | 5,393 | 113 | 1,262 | 45.33 h |
-| claimed by none | 15 | 2,608 | 1,565 | 42 | 284 | 9.14 h |
-| **measured** | **46** | **11,869** | **6,958** | **155** | **1,546** | **54.47 h** |
+| claimed by a session | 36 | 10,451 | 6,107 | 123 | 1,379 | 47.7 h |
+| claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
+| **measured** | **46** | **11,911** | **6,985** | **155** | **1,552** | **54.57 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2310,12 +2317,13 @@ rounding.
 | [session-046](packing/campaign/agent-sessions/session-046-gobel-family-constructions.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-047](packing/campaign/agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | 6 | 14 | 1,230 | 841 | 18 | 2.56 h |
 | [session-048](packing/campaign/agent-sessions/session-048-what-every-session-cost.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
-| *shared by 4 sessions* | — | 1 | 6,783 | 3,787 | 84 | 38.74 h |
+| [session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | 5 | 5 | 1,190 | 714 | 10 | 2.37 h |
+| *shared by 5 sessions* | — | 1 | 6,783 | 3,787 | 84 | 38.74 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 4 |
-| closed before `resource_rollups` existed, logs not retained | 45 |
+| measured | 5 |
+| closed before `resource_rollups` existed, logs not retained | 44 |
 | **total** | **49** |
 
 <!-- END GENERATED: session-close-report -->

@@ -889,6 +889,11 @@ def _exact_verification(context: Context) -> str:
             # And the off-centre family, DS7 section 3's one sentence: n = 26 and 85 at
             # a + 3/2 + b/sqrt(2), with the column-count control refusing square 2a + 2.
             (sys.executable, "-m", "cases.gobel_offcentre.verify_exact"),
+            # And the first witness lifts: n = 19 and 66 have published exact sides but
+            # no published rule, and their retained decimals lift coordinate by
+            # coordinate into Q(sqrt 2) at small height. The lift generates; exact_sign
+            # decides.
+            (sys.executable, "-m", "cases.lifted_q2.verify_exact"),
             (
                 sys.executable,
                 "-m",

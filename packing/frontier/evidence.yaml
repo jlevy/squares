@@ -299,6 +299,29 @@ evidence:
       diamond at every size.
     source_reviewed: '2026-08-31'
 
+  - id: E-lifted-q2-upper
+    claim: upper-bound
+    scope: {n_values: [19, 66]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: previously-published
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Friedman DS7]'
+    certificate: cases/lifted_q2/packing.py
+    replay: uv run --frozen python -m cases.lifted_q2.verify_exact
+    replay_status: passed
+    limitations: >-
+      One replay decides both sizes, 171 pairs at n = 19 and 2145 at n = 66, every one
+      by exact sign over Q(sqrt 2), establishing s(19) <= 3 + (4/3) sqrt(2) and
+      s(66) <= 3 + 4 sqrt(2), not optimality at either. Unlike the rule-derived
+      certificates, these poses are the retained witnesses' own geometry lifted into the
+      field the published side names -- the survey states no generating rule for either
+      figure -- so what the lift adds is exactness, and the side lift is pinned to the
+      published form so a drifted witness fails rather than certifying something else.
+    source_reviewed: '2026-08-31'
+
   - id: E-gobel-offcentre-upper
     claim: upper-bound
     scope: {n_values: [26, 85]}
