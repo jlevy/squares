@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **4** ready, **4** tentative, **15** blocked, **4** stopped, **65** complete.
+- **4** ready, **4** tentative, **14** blocked, **4** stopped, **66** complete.
 
 - **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
 
@@ -23,7 +23,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-001 | `BC-010` | 0 | insight | research | Are the equal-side n=5 candidates connected in the stationary set, and what verified minimax clearance… | `think-1s0h` |
 | agenda-002 | `BC-017` | 1 | efficiency | tool_validation | Can a stratum be priced in counted LP solves end to end, so enumeration results are comparable to each other… | `think-u97a` |
 | agenda-005 | `BC-049` | 1 | correctness | research | Are the packings the catalogue annotates "Rigid." actually rigid, on evidence of our own rather than on the… | `think-xdly` |
-| agenda-009 | `BC-086` | 0 | efficiency | tool_validation | What is the cheapest tier that would have caught each of this session's three red pushes, and is it cheap… | `think-u5q2` |
+| agenda-009 | `BC-088` | 0 | insight | research | Given machinery that did not exist when the research queue was written, where is a new packing actually… | `think-bxqv` |
 | agenda-009 | `BC-089` | 1 | correctness | research | Which of the 15 trailing cases with a published exact side are materialisations of a published rule, the way… | `think-xdly` |
 | agenda-009 | `BC-090` | 2 | insight | research | Can a stricter, better informed search beat a stochastic incumbent at any of the ten sizes whose best known… | `think-xdly` |
 | agenda-009 | `BC-092` | 2 | insight | research | Does the contact structure give a search anything the pose alone does not -- can the assembly grammar… | `think-xdly` |
@@ -49,7 +49,6 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-003 | `BC-029` | 0 | `BC-027` | yes | Independent acceptance of the preregistered exp-045 criterion, which is a review decision rather than a commitment. Its… |
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
-| agenda-009 | `BC-088` | 0 | `BC-085`, `BC-086` | no | — |
 
 ## Discharged elsewhere
 
@@ -78,7 +77,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-006 | completed |  |  |  | 2 | 23 | 25 |
 | agenda-007 | completed |  |  |  |  | 4 | 4 |
 | agenda-008 | completed |  |  |  |  | 4 | 4 |
-| agenda-009 | active | 1 | 4 | 1 |  | 2 | 8 |
+| agenda-009 | active | 1 | 4 |  |  | 3 | 8 |
 
 ## What the states mean
 

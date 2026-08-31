@@ -519,7 +519,7 @@ sessions:
   title: "Close the hygiene queue, reassess the search, run the first sequenced slice"
   status: in_progress
   primary_bead: think-bxqv
-  phases: 1
+  phases: 3
   measured: false
   unmeasured_reason: >-
     declares no rollups

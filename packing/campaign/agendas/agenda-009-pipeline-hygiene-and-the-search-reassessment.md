@@ -79,7 +79,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5, 29, 40]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       What is the cheapest tier that would have caught each of this session's three red
@@ -105,8 +105,22 @@ agenda:
     depends_on: []
     workflows: [pipeline-improvement, efficiency-loop]
     next_evidence: >-
-      Measured 2026-08-30: `--records` 7s, `--edit` 44s, `--fast` 568s in CI and past 900s
-      locally under load. The gap between 44s and 568s is where all three failures lived.
+      Discharged by session-049. The tier exists: `packing-validate --push` runs the edit
+      tier plus a "reachable behavioral tests" step, with `devtools.reachable_tests`
+      selecting test files by import closure, text mention, and an always-run walker set,
+      erring toward inclusion exactly as `Step.touches` does. Measured 2026-08-31 in one
+      container: `--push` 58s wall (126 reachable tests of 1,045 collected) against
+      `--fast` at 646s, essentially serial. All three 2026-08-30 red pushes are covered:
+      the D-381 pair falls in the import closure of `validate.py`, and the sweeps are
+      walkers that run every time. The marker half is also done: `.gate-running` is a load
+      lock, so `--records`, `--edit`, and a narrow `--push` take no marker and say so,
+      while broad or full selections still refuse a second gate. The tier caught two real
+      problems in its first hour: a D-358 clock violation in the session record being
+      written, and its own test file's lint exemption.
+    artifacts:
+    - devtools/reachable_tests.py
+    - src/sqpack/cli/validate.py
+    - tests/test_reachable_tests.py
   - id: BC-087
     purpose: tool_validation
     owner_focus: process
@@ -151,7 +165,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [28, 29, 51, 68, 69]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Given machinery that did not exist when the research queue was written, where is a

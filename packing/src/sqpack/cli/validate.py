@@ -1,9 +1,10 @@
 """Run the packing project's refactor, evidence, and infrastructure checks.
 
 The command is read-only. Checks run concurrently, but their captured output is
-replayed in the declared order so two runs remain comparable. Use `--fast` while
-editing, `--records` before a push, `--only TEXT` for one named surface, the default
-command before a commit, and `--strict` before an unattended research session or merge.
+replayed in the declared order so two runs remain comparable. Use `--edit` while
+editing, `--push` before a push (the edit tier plus the behavioral tests reachable from
+the change), `--only TEXT` for one named surface, the default command before a commit,
+and `--strict` before an unattended research session or merge.
 
 `--records` exists because of what breaks. Every CI failure on this branch was a
 registry, generated view, or declared contract going stale, and none was a test; the
@@ -27,7 +28,7 @@ import time
 import traceback
 from collections.abc import Callable, Iterator, Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from contextlib import contextmanager, suppress
+from contextlib import contextmanager, nullcontext, suppress
 from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 from threading import Lock
@@ -2022,6 +2023,41 @@ def changed_paths(since: str) -> list[str]:
     return sorted(out)
 
 
+def _push_test_step(base: str) -> Step:
+    """The behavioral tests reachable from the change against `base` (BC-086).
+
+    Selection happens in `devtools.reachable_tests`, which errs toward inclusion the
+    same way `Step.touches` does; this wrapper only needs to know whether the answer is
+    the whole suite, because that is what decides whether the run contends like a gate
+    and must take the marker. The probe is a subprocess because the selector lives in
+    `devtools`, which `sqpack` does not import.
+    """
+    probe = subprocess.run(
+        (sys.executable, "-m", "devtools.reachable_tests", "--summary", "--since", base),
+        cwd=PROJECT_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if probe.returncode != 0:
+        detail = probe.stderr.strip() or probe.stdout.strip() or "selector failed"
+        raise UsageError(f"--push could not resolve the change against {base!r}: {detail}")
+    everything = probe.stdout.strip().splitlines()[-1] == "everything"
+
+    def action(context: Context) -> str:
+        return _run(
+            context,
+            (sys.executable, "-m", "devtools.reachable_tests", "--run", "--since", base),
+        )
+
+    return Step(
+        name="reachable behavioral tests",
+        action=action,
+        fast=True,
+        broad=everything,
+    )
+
+
 def _select_steps(
     *, only: list[str], fast: bool, records: bool = False, edit: bool = False
 ) -> list[Step]:
@@ -2120,11 +2156,30 @@ def _validation_activity(marker: Path) -> Iterator[None]:
             marker.rmdir()
 
 
+def _selection_needs_marker(selected: Sequence[Step]) -> bool:
+    """Does this selection contend for the machine the way a gate does?
+
+    The marker is a load lock, not a correctness lock: no step mutates the working tree
+    (the controls corrupt private snapshots), so what two concurrent runs threaten is
+    each other's step budgets, and only the heavy runs carry budgets calibrated to an
+    uncontended machine. A selection of edit-tier steps is seconds of read-only work,
+    and refusing it while one's own full gate holds the marker is how the third red
+    push of 2026-08-30 went out unvalidated (BC-086): the floor must never be the thing
+    the lock talks an operator out of.
+    """
+    return any(not step.fast or step.broad for step in selected)
+
+
 def _run_selected(
     selected: Sequence[Step], context: Context, patterns: list[str]
 ) -> RunSummary:
     started = time.perf_counter()
-    with _validation_activity(ACTIVITY_MARKER):
+    if _selection_needs_marker(selected):
+        activity = _validation_activity(ACTIVITY_MARKER)
+    else:
+        print("== no gate marker: every selected step is read-only and edit-tier ==")
+        activity = nullcontext()
+    with activity:
         setup_output = _build_engine(context, selected)
         by_name: dict[str, StepResult] = {}
         with ThreadPoolExecutor(max_workers=context.jobs) as pool:
@@ -2219,6 +2274,14 @@ def _parser() -> ArgumentParser:
     )
     parser.add_argument("--fast", action="store_true", help="run the fast edit-loop checks")
     parser.add_argument(
+        "--push",
+        action="store_true",
+        help=(
+            "run the pre-push floor: the edit tier plus the behavioral tests reachable "
+            "from the change against --since REF (default origin/main)"
+        ),
+    )
+    parser.add_argument(
         "--records",
         action="store_true",
         help="run only the record checks: registries, generated views, declared contracts",
@@ -2274,14 +2337,21 @@ def _validate_invocation(
     records: bool = False,
     edit: bool = False,
     since: str | None = None,
+    push: bool = False,
 ) -> None:
-    if strict and (only or fast or records or edit or since):
+    if strict and (only or fast or records or edit or since or push):
         raise UsageError(
-            "--strict cannot be combined with --only, --fast, --records, --edit, or --since"
+            "--strict cannot be combined with --only, --fast, --records, --edit, "
+            "--push, or --since"
         )
     if edit and fast:
         raise UsageError(
             "--edit and --fast select different tiers; --fast is the wider of the two"
+        )
+    if push and (fast or records or edit):
+        raise UsageError(
+            "--push is its own tier: the edit tier plus reachable tests; "
+            "combine it only with --since to change the base ref"
         )
 
 
@@ -2304,6 +2374,7 @@ def main(arguments: list[str] | None = None) -> int:
             records=namespace.records,
             edit=namespace.edit,
             since=namespace.since,
+            push=namespace.push,
         )
         jobs_value = namespace.jobs or os.environ.get("PACKING_VALIDATE_JOBS")
         jobs = (
@@ -2335,9 +2406,15 @@ def main(arguments: list[str] | None = None) -> int:
             only=namespace.only,
             fast=namespace.fast,
             records=namespace.records,
-            edit=namespace.edit,
+            edit=namespace.edit or namespace.push,
         )
-        if namespace.since:
+        if namespace.push:
+            base = namespace.since or "origin/main"
+            step = _push_test_step(base)
+            selected = [*selected, step]
+            scope = "the whole suite" if step.broad else "a reachable subset"
+            print(f"== pre-push floor against {base}: tests select {scope} ==\n")
+        elif namespace.since:
             paths = changed_paths(namespace.since)
             selection = select_for_paths(paths, selected)
             selected = list(selection.steps)
