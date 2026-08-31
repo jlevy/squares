@@ -1,9 +1,20 @@
 #!/usr/bin/env python3
-"""Draft exp-043 pure -W checker; no scientific result is retained.
+"""The exp-045 pure -W obstruction checker: record, and byte-exact replay.
 
-Independent review found that this draft does not yet construct production rowwise
-second-order wall and SAT jets. Its temporary green record is therefore a resume point,
-not an obstruction certificate. See the terminal exp-043 artifact before using it.
+Grown from the exp-043 draft, which is why its owner-case argument is self-contained
+rather than routed through `minus_w_row_jets`/`minus_w_stress`/`minus_w_scale`/
+`minus_w_owner4`: it derives its six cases from the production `angle_sheet`,
+`second_order_obstruction`, `tangent_cones` and `tangent_inventory` layers, retains a
+condensed two-scale certificate per owner-3 case, and regenerates the retained exp-045
+artifact exactly on `--replay` (a perturbed artifact is refused with `replay.drift`).
+
+The independent corroboration that the accepted helpers decide the same question the
+same way -- all fifteen owner-3 scale records and three owner-4 records obstructing
+`-W` with coefficients equal to their `+W` twins -- is `devtools.check_minus_w_bridge`,
+built by the 2026-08-31 independent audit and held in place by
+`tests/test_minus_w_bridge.py`. This docstring previously still described the exp-043
+draft ("no scientific result is retained"), which was false of the module since
+session-033; that staleness is part of defect `D-404`.
 """
 
 from __future__ import annotations

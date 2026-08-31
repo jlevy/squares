@@ -349,6 +349,11 @@ decided by exact sign — ten over `Q(sqrt 2)` and the last two over `Q(sqrt 7)`
 first exact verification outside `Q(sqrt 2)` — from a published rule or a coordinate
 lift, about `3.2` of aggregate gap. The widest trailing ceiling is now `n = 50`'s `3/7`.
 
+[session-050](packing/campaign/agent-sessions/session-050-exp045-audit-and-acceptance.md)
+then performed the independent audit `exp-045` had waited on since registration, built
+the `-W` bridge that makes the accepted helpers corroborate the certificate, and
+recorded the owner's acceptance — clearing the gate that held `BC-010` and `BC-029`.
+
 **The next slice is `BC-089`'s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
 the last two witness lifts — `n = 50` rational, `n = 54` quartic — then the
@@ -399,10 +404,12 @@ whole-record grid subsets on four walls, 65 corner-seated blocks on two.
 `BC-038` is closed and rejected on measured arithmetic — 35 `evaluate_stress` calls
 arrive with **eleven** distinct number fields, and `RowJetInventory` refuses a foreign
 field by identity, so the floor is a `1.54x` ceiling against an exit wanting five-fold.
-`BC-010` and `BC-029` are **not** takeable despite what the map’s priority says: both
-are gated on independent acceptance of `exp-045`’s preregistered criterion, which
-records `decision: unresolved` with `needs_review: true`, and an unattended runner may
-not grant that acceptance to itself.
+`BC-010` and `BC-029` were gated for four days on independent acceptance of
+`exp-045`’s preregistered criterion, which an unattended runner may not grant to
+itself; on 2026-08-31 the owner accepted the round after session-050’s independent
+audit (findings and the corroborating `-W` bridge are the experiment record’s Amendment
+and `D-404`), so `exp-045` now records `decision: accepted`, `BC-029` is complete, and
+`BC-010`’s readiness on the map is genuine.
 
 **`n = 5` is second-order rigid, and that is a first-party result.**
 [X-007](packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md)
@@ -713,9 +720,10 @@ sequenced behind exp-045. The outstanding work is now carried by
 which gives each remaining item its own workflow entry.
 `BC-027` is complete.
 The `n = 5` H-023 successor under `BC-029`, `think-whwc`, and `think-1s0h` is no longer
-an instrument blocker: exp-045 has run and is terminal at `unresolved` with
-`needs_review`, excluding canonical pure `-W` at all three strata while every
-connectivity, component, isolation and terminality claim stays refused.
+an instrument blocker: exp-045 has run and is terminal — `accepted` since
+2026-08-31, after the independent audit its registration required — excluding canonical
+pure `-W` at all three strata while every connectivity, component, isolation and
+terminality claim stays refused.
 CG-010 is structurally complete under `BC-030`; BC-016 is blocked under `think-3yv8` on
 retained poses, an executable glued row, symbolic tie labels, and a receipt checker,
 while BC-017 under `think-u97a` remains the ready constructive W7 lane.
@@ -2307,9 +2315,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 36 | 10,487 | 6,132 | 123 | 1,383 | 47.81 h |
+| claimed by a session | 36 | 10,671 | 6,223 | 125 | 1,395 | 49.79 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **46** | **11,947** | **7,010** | **155** | **1,556** | **54.68 h** |
+| **measured** | **46** | **12,131** | **7,101** | **157** | **1,568** | **56.66 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2317,14 +2325,15 @@ rounding.
 | [session-046](packing/campaign/agent-sessions/session-046-gobel-family-constructions.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-047](packing/campaign/agent-sessions/session-047-assurance-structure-and-what-is-ours.md) | 6 | 14 | 1,230 | 841 | 18 | 2.56 h |
 | [session-048](packing/campaign/agent-sessions/session-048-what-every-session-cost.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
-| [session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | 5 | 5 | 1,226 | 739 | 10 | 2.48 h |
-| *shared by 5 sessions* | — | 1 | 6,783 | 3,787 | 84 | 38.74 h |
+| [session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | 5 | 4 | 615 | 364 | 4 | 1.22 h |
+| [session-050](packing/campaign/agent-sessions/session-050-exp045-audit-and-acceptance.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
+| *shared by 6 sessions* | — | 2 | 7,578 | 4,253 | 92 | 41.98 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 5 |
+| measured | 6 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **49** |
+| **total** | **50** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -2411,7 +2420,7 @@ archive beside it.
 | [exp-042](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md) | 5 | target | H-023 | endpoint-aware exact rotating paths | 6 paths; 6 stresses; 20 controls pass | **accepted** |
 | [exp-043](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md) | 5 | target | H-023 | exact pure -W second-order test | five instrument blockers; no retained result | **unresolved** |
 | [exp-044](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md) | 5 | target | H-023 | exact pure -W row-jet test | reviewed row builder; no retained target | **unresolved** |
-| [exp-045](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md) | 5 | target | H-023 | exact pure -W scale and control test | pure -W excluded at A, interior and B; sign symmetry holds; awaiting independent audit and a human accept decision | **unresolved** |
+| [exp-045](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md) | 5 | target | H-023 | exact pure -W scale and control test | pure -W excluded at A, interior and B; sign symmetry holds; accepted 2026-08-31 after the independent audit and -W bridge corroboration | **accepted** |
 
 ### Cost and provenance
 
@@ -2623,14 +2632,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 403 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 404 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
 | validity | 97 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 152 | recorded something its own evidence contradicts |
+| bookkeeping | 153 | recorded something its own evidence contradicts |
 | robustness | 48 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
@@ -2640,7 +2649,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fifty-four defects in 403, and no soundness defect
+**The automated gate has caught fifty-four defects in 404, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

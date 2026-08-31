@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **5** ready, **1** tentative, **14** blocked, **5** stopped, **67** complete.
+- **5** ready, **1** tentative, **13** blocked, **5** stopped, **68** complete.
 
 - **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
 
@@ -44,7 +44,6 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-002 | `BC-026` | 3 | `BC-018` | no | — |
 | agenda-002 | `BC-021` | 3 | `BC-018`, `BC-019` | no | — |
 | agenda-002 | `BC-022` | 4 | `BC-021` | no | — |
-| agenda-003 | `BC-029` | 0 | `BC-027` | yes | Independent acceptance of the preregistered exp-045 criterion, which is a review decision rather than a commitment. Its… |
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
 
@@ -69,7 +68,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | agenda-001 | active | 1 |  | 4 |  | 10 | 15 |
 | agenda-002 | active | 1 |  | 7 |  | 3 | 11 |
-| agenda-003 | active |  |  | 2 | 1 | 5 | 8 |
+| agenda-003 | active |  |  | 1 | 1 | 6 | 8 |
 | agenda-004 | active |  |  |  |  | 7 | 7 |
 | agenda-005 | active | 1 |  | 1 | 1 | 7 | 10 |
 | agenda-006 | completed |  |  |  | 2 | 23 | 25 |
