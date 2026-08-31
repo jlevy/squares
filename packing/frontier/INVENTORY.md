@@ -8,7 +8,7 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **31** evidence records. **22** are formal; **16** of those were established here.
+- **33** evidence records. **24** are formal; **18** of those were established here.
 - **6** rest on an argument made elsewhere, of which **5** have been read by nobody here.
 - **7** claim to be first established here. **3** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -22,7 +22,7 @@ results, it is a statement about what this repository has itself examined.
 | --- | ---: | --- | --- | --- | --- | --- | --- |
 | `E-kingbird-upper-register` | 98 | upper-bound | reported | - | - | - | previously-published |
 | `E-unitsquare-release1-report` | 2 | upper-bound | reported | - | - | - | previously-published |
-| `E-basic-grid-upper` | 93 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
+| `E-basic-grid-upper` | 87 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
 | `E-basic-area-lower` | 10 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
 | `E-nagamochi-lower` | 88 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published |
 | `E-migrated-lower-report` | 6 | lower-bound | reported | - | - | - | *not assessed* |
@@ -33,6 +33,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-n010-gobel-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n040-gobel-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-gobel-family-upper` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-gobel-strip-upper` | 5 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-n082-gobel-l-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n010-stromquist-proof` | 1 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
 | `E-bentz-2010-proof` | 2 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
 | `E-bentz-2016-proof` | 2 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
@@ -54,9 +56,9 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 5, verified 22
-- **method**: exact-algebraic 15, interval-certified 1, numerical-multiprecision 4, published-proof 6, reported 5
-- **novelty**: apparently-novel 7, common-knowledge 4, not assessed 3, previously-published 17
+- **assurance**: numerically-checked 4, reported 5, verified 24
+- **method**: exact-algebraic 17, interval-certified 1, numerical-multiprecision 4, published-proof 6, reported 5
+- **novelty**: apparently-novel 7, common-knowledge 4, not assessed 3, previously-published 19
 
 The `cases` column is how many of the hundred frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited by ninety-eight cases is the catalogue everyone reports from and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -78,11 +80,11 @@ The `n` column is what each covers and `cases` is how many frontier records cite
 
 | evidence | cases | whose work | read here |
 | --- | ---: | --- | --- |
-| `E-basic-grid-upper` | 93 | here | - |
 | `E-nagamochi-lower` | 88 | elsewhere | informally-verified |
+| `E-basic-grid-upper` | 87 | here | - |
 | `E-basic-area-lower` | 10 | here | - |
 | `E-perfect-square-tiling-rigid` | 10 | here | - |
-| `E-side2-center-lower` | 2 | here | - |
+| `E-gobel-strip-upper` | 5 | here | - |
 
 The most-cited argument this repository did not produce is `E-nagamochi-lower`, carrying 88 of the hundred cases. It is an external proof, and it has been read here: its record carries the review, what was re-derived, and the four things that were not. The arithmetic is what picked it out for reading -- being cited this heavily is the reason to open an argument, not a reason to trust it.
 

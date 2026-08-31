@@ -877,6 +877,15 @@ def _exact_verification(context: Context) -> str:
             # witnesses: agreement to 5e-33 is not something an independent optimisation
             # reaches, so those decimals are materialisations of this family.
             (sys.executable, "-m", "cases.gobel_family.verify_exact"),
+            # n=82 joined on 2026-08-31, the first slice of BC-089's recognition block:
+            # the family pose at (4,5) plus the one L DS7 states. Its replay checks the
+            # witness's declared side (the exact value rounded up at 32 digits) but not
+            # its layout, which matches none of the construction's dihedral images.
+            (sys.executable, "-m", "cases.gobel82.verify_exact"),
+            # The strip family joined the same day: n = 27, 38, 52, 67 and 84 at
+            # a + 1 + sqrt(2)/2 for a = 4..8, with the diamond-count control refusing
+            # one more at every size. Five more grid ceilings became exact sides.
+            (sys.executable, "-m", "cases.gobel_strip.verify_exact"),
             (
                 sys.executable,
                 "-m",

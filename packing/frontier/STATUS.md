@@ -34,7 +34,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`24`](n-024.md) | `5` | `5` | `5.0` | `5` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`25`](n-025.md) | `5` | `5` | `5.0` | `5` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`26`](n-026.md) | `(7/2) + (3/2)√2` | `6` | `5.123105625618` | `1 + √17` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
-| [`27`](n-027.md) | `5 + (1/2)√2` | `6` | `5.242640687119` | `1 + √18` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
+| [`27`](n-027.md) | `5 + (1/2)√2` | `5 + (1/2)√2` | `5.242640687119` | `1 + √18` | open | replayed here, external proof | — | 2026-08-24 |
 | [`28`](n-028.md) | `5.82444461667405` | `6` | `5.358898943541` | `1 + √19` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
 | [`29`](n-029.md) | `5.93383346267692` | `296691673133846459487189947549/50000000000000000000000000000` | `5.472135955` | `1 + √20` | open | replayed here, external proof | formal upper trails report; 1 conflict | 2026-08-25 |
 | [`30`](n-030.md) | `6` | `6` | `5.582575694956` | `1 + √21` | open | replayed here, external proof | — | 2026-08-24 |
@@ -45,7 +45,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`35`](n-035.md) | `6` | `6` | `6.0` | `6` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`36`](n-036.md) | `6` | `6` | `6.0` | `6` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`37`](n-037.md) | `6.59861960924436` | `7` | `6.099019513593` | `1 + √26` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
-| [`38`](n-038.md) | `6 + (1/2)√2` | `7` | `6.196152422707` | `1 + √27` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
+| [`38`](n-038.md) | `6 + (1/2)√2` | `6 + (1/2)√2` | `6.196152422707` | `1 + √27` | open | replayed here, external proof | — | 2026-08-24 |
 | [`39`](n-039.md) | `6.81072208306864` | `7` | `6.291502622129` | `1 + √28` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
 | [`40`](n-040.md) | `4 + 2 √2` | `4 + 2 √2` | `6.385164807135` | `1 + √29` | open | replayed here, external proof | — | 2026-08-24 |
 | [`41`](n-041.md) | `6.92669309446880` | `7` | `6.477225575052` | `1 + √30` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
@@ -59,7 +59,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`49`](n-049.md) | `7` | `7` | `7.0` | `7` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`50`](n-050.md) | `7 + (4/7)` | `8` | `7.082762530298` | `1 + √37` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
 | [`51`](n-051.md) | `7.70079923541701` | `8` | `7.164414002969` | `1 + √38` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
-| [`52`](n-052.md) | `7 + (1/2)√2` | `8` | `7.244997998398` | `1 + √39` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
+| [`52`](n-052.md) | `7 + (1/2)√2` | `7 + (1/2)√2` | `7.244997998398` | `1 + √39` | open | replayed here, external proof | — | 2026-08-24 |
 | [`53`](n-053.md) | `(13/2) + (1/2)√7` | `8` | `7.324555320337` | `1 + √40` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
 | [`54`](n-054.md) | `7 - (1/2)√2 + sqrt(1 + √2)` | `8` | `7.403124237433` | `1 + √41` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
 | [`55`](n-055.md) | `7.94577100750391` | `8` | `7.480740698408` | `1 + √42` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
@@ -74,7 +74,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`64`](n-064.md) | `8` | `8` | `8.0` | `8` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`65`](n-065.md) | `5 + (5/2)√2` | `5 + (5/2)√2` | `8.071067811865` | `1 + √50` | open | replayed here, external proof | — | 2026-08-24 |
 | [`66`](n-066.md) | `3 + 4 √2` | `9` | `8.141428428543` | `1 + √51` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
-| [`67`](n-067.md) | `8 + (1/2)√2` | `9` | `8.211102550928` | `1 + √52` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
+| [`67`](n-067.md) | `8 + (1/2)√2` | `8 + (1/2)√2` | `8.211102550928` | `1 + √52` | open | replayed here, external proof | — | 2026-08-24 |
 | [`68`](n-068.md) | `8.803383074716108386903836683375989697670063329` | `9` | `8.280109889281` | `1 + √53` | open | replayed here, external proof | formal upper trails report | 2026-08-25 |
 | [`69`](n-069.md) | `8.827205507815920656880680735618736931225314831` | `9` | `8.34846922835` | `1 + √54` | open | replayed here, external proof | formal upper trails report | 2026-08-25 |
 | [`70`](n-070.md) | `8.88166675700900` | `9` | `8.416198487096` | `1 + √55` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
@@ -89,9 +89,9 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`79`](n-079.md) | `9` | `9` | `9` | `9` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`80`](n-080.md) | `9` | `9` | `9` | `9` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`81`](n-081.md) | `9` | `9` | `9.0` | `9` | proved | replayed here, external proof | — | 2026-08-24 |
-| [`82`](n-082.md) | `6 + (5/2)√2` | `10` | `9.062257748299` | `1 + √65` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
+| [`82`](n-082.md) | `6 + (5/2)√2` | `6 + (5/2)√2` | `9.062257748299` | `1 + √65` | open | replayed here, external proof | — | 2026-08-24 |
 | [`83`](n-083.md) | `9.63482562092335` | `10` | `9.124038404636` | `1 + √66` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
-| [`84`](n-084.md) | `9 + (1/2)√2` | `10` | `9.185352771872` | `1 + √67` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
+| [`84`](n-084.md) | `9 + (1/2)√2` | `9 + (1/2)√2` | `9.185352771872` | `1 + √67` | open | replayed here, external proof | — | 2026-08-24 |
 | [`85`](n-085.md) | `(11/2) + 3 √2` | `10` | `9.246211251235` | `1 + √68` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
 | [`86`](n-086.md) | `(17/2) + (1/2)√7` | `10` | `9.306623862918` | `1 + √69` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
 | [`87`](n-087.md) | `9.83881743996618` | `10` | `9.366600265341` | `1 + √70` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |

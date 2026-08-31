@@ -83,6 +83,11 @@ DECLARED_CONSUMERS = {
     "packing/devtools/check_golden_basins.py": (
         "reads the ceiling as an upper limit on a basin side"
     ),
+    "packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md": (
+        "sequences the research blocks by how far each could move the ceiling; it treats "
+        "the field as the certified ceiling throughout and states that every move of it "
+        "is a reviewed change, never s(n)"
+    ),
     "packing/devtools/controls.yaml": (
         "corrupts the field on purpose, to prove the checkers fire"
     ),
@@ -195,12 +200,14 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
     # length. It was 33 until D-398 promoted n = 40, 65 and 89 off the integer grid ceiling
     # onto Goebel's exact family construction, whose certificates had been in the gate for
     # two sessions while the records still declared a mathematical blocker. Moving it down
-    # is the point of the measurement, not a break in it.
-    assert len(trailing) == 30
+    # is the point of the measurement, not a break in it: BC-089 took n = 82 (the worst
+    # trailing gap, 0.464) and the strip family's 27, 38, 52, 67 and 84 off the grid on
+    # 2026-08-31, leaving n = 50's 3/7 as the widest.
+    assert len(trailing) == 24
     for n, (reported, verified) in trailing.items():
         assert verified > reported, n
     worst = max(verified - reported for reported, verified in trailing.values())
-    assert worst > Decimal("0.46")
+    assert worst > Decimal("0.42")
 
     # And in those cases `exact_form` is exact about the ceiling and says nothing about
     # s(n): for all but n = 29 it is literally the integer grid bound.

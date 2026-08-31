@@ -275,6 +275,52 @@ evidence:
       about the construction, and does not certify that witness at its own declared side.
     source_reviewed: '2026-08-30'
 
+  - id: E-gobel-strip-upper
+    claim: upper-bound
+    scope: {n_values: [27, 38, 52, 67, 84]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: previously-published
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Friedman DS7]'
+    certificate: cases/gobel_strip/packing.py
+    replay: uv run --frozen python -m cases.gobel_strip.verify_exact
+    replay_status: passed
+    limitations: >-
+      One replay decides all five sizes, every pair by exact sign over Q(sqrt 2),
+      establishing s(n) <= a + 1 + sqrt(2)/2 for a = 4..8 and nothing about optimality
+      -- a = 3 is n = 17, where the same rule is beaten. The five retained witnesses
+      declare this exact side rounded down at their own digits (about 4.85e-30 below)
+      and other slack choices for the strip's translational freedom, so each certificate
+      carries the construction's coordinates, never a relabelled witness (D-398). The
+      diamond count floor((a-1) sqrt(2)) + 1 is exercised by a control refusing the next
+      diamond at every size.
+    source_reviewed: '2026-08-31'
+
+  - id: E-n082-gobel-l-upper
+    claim: upper-bound
+    scope: {n_values: [82]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: previously-published
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Friedman DS7]'
+    certificate: cases/gobel82/packing.py
+    replay: uv run --frozen python -m cases.gobel82.verify_exact
+    replay_status: passed
+    limitations: >-
+      Decides all 3321 pairs by exact sign over Q(sqrt 2), with 70 corner coordinates
+      exactly on the container boundary, establishing s(82) <= 6 + (5/2) sqrt(2) and
+      nothing about optimality. The retained witness declares this exact side correctly
+      rounded up at its 32 digits, but its centre layout matches none of the
+      construction's eight dihedral images, so this record certifies the construction
+      and deliberately not the witness's geometry.
+    source_reviewed: '2026-08-31'
+
   - id: E-n010-stromquist-proof
     claim: lower-bound
     scope: {n_values: [10]}
