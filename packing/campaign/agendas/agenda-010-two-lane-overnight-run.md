@@ -424,7 +424,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [12]
-    state: tentative
+    state: complete
     priority: 1
     question: >-
       Can synthesis produce the first bespoke certified lower bound at n = 12 -- any
@@ -451,14 +451,25 @@ agenda:
     depends_on: [BC-093, BC-094, BC-099]
     workflows: [research-loop, insight-iteration]
     next_evidence: >-
-      Checkpoint decision (session-052): runs tonight only if BC-101 completes with
-      wall remaining; otherwise it is the next run's first slice. The instruments it
+      The authorized first slice is discharged by session-059 through the exit's
+      diagnostic branch: devtools/pierce_pilot.py carries the uncertified tau*
+      pilot, and its ladder puts the eleven-crossing near side 3.83 (10.67 /
+      11.00 / 12.53 at 3.80 / 3.83 / 3.86, comparable grids; every number typed
+      not-a-bound), with the duality frame pinning the value at eleven or more
+      above s(11). Reading: a pure eleven-point set has at most a ~0.04-wide
+      window above 2 + 4/sqrt 5, and any ambitious bespoke s(12) bound forces
+      the threshold/segment/moving-resource machinery. Synthesis deliberately
+      not attempted tonight; the typed account and the certified-instrument gap
+      live on think-0z9b for the successor agenda.
+    artifacts:
+    - devtools/pierce_pilot.py
+    - campaign/agent-sessions/session-059-block8-tau-star-pilot.md
       needs exist; the most under-priced target in the corpus keeps its priority.
   - id: BC-103
     purpose: research
     owner_focus: correctness
     instances: [61]
-    state: tentative
+    state: complete
     priority: 2
     question: >-
       Does the m = 7 argument, encoded machine-readably, survive the substitution to
@@ -482,8 +493,16 @@ agenda:
     depends_on: [BC-099]
     workflows: [research-loop]
     next_evidence: >-
-      Checkpoint decision (session-052): the 60-minute sizing slice is authorized as
-      gate filler once BC-099 lands; the full attempt stays a later agenda's. A peak,
+      The authorized sizing slice is discharged by session-058, inside half its
+      budget, with the parking decision taken: the m = 7 pattern's ceiling at
+      m = 8 is 7 sqrt(3)/2 + 2 sqrt(2) - 1, exactly below side 8 (18816 < 21025)
+      and below the standing 7.928203 at n = 61, with the first breaking premise
+      the wall strip's depth cap and the lattice dilemma exact (8 rows overrun
+      the pitch cap by 0.0157; 9 rows overrun the point budget by 7). The full
+      attempt stays a later agenda's, typed on think-07t7 (paused), with the
+      candidate new resources named.
+    artifacts:
+    - campaign/agent-sessions/session-058-block7-m8-sizing.md
       listed so the ladder's direction is on the map rather than in prose.
   - id: BC-104
     purpose: research

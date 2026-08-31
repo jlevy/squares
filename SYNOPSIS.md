@@ -414,9 +414,24 @@ unavoidable set in `[0, 17/4]²` (`cases/green17`) — above Nagamochi's `≈ 4.
 below Green's unadoptable `≈ 4.4452` — the side pinned to exactly `17/4` by an
 `11/1000000` slack, the falsifier corroborating by saturation, and the verdict held
 `unresolved` with `needs_review` (frontier adoption is a reviewed evidence-contract
-change). The review queue and its follow-ons (the seventeen-point `n = 19`
-variant, the Green reconstruction) sit on `BC-101`'s bead `think-q6vy`; `BC-097`
-and `BC-089`’s remainder remain the sanctioned gate filler.
+change). **The run then discharged the checkpoint's two authorized fillers and
+closed early.**
+[Session-058](packing/campaign/agent-sessions/session-058-block7-m8-sizing.md)
+(`BC-103`) sized the `m = 8` attempt exactly and parked it: the m = 7 pattern's
+ceiling `7√3/2 + 2√2 − 1 ≈ 7.8906` sits below both side 8 and the standing
+`7.9282` at `n = 61`, with the lattice dilemma exact (8 rows overrun the Lemma 2
+pitch cap by `0.0157`; 9 rows overrun the 60-point budget by 7).
+[Session-059](packing/campaign/agent-sessions/session-059-block8-tau-star-pilot.md)
+(`BC-102`) built the τ* pilot and read the method diagnostic: the eleven-crossing
+sits near side `3.83` (uncertified, typed), so a pure eleven-point set has at most
+a `~0.04`-wide window above `2 + 4/√5` and any ambitious bespoke `s(12)` bound
+forces the threshold/segment/moving-resource machinery. **Everything mathematical
+from the run — Theorem 8, the m = 4 layer with the Lemma 10 settlement, the
+`s(17) ≥ 17/4` certificate, the H-044 verdict, both diagnostics — is held
+`unresolved` with `needs_review` for the owner's morning review.** The review
+queue's follow-ons sit on their beads (`think-1o1f`, `think-q6vy`, `think-07t7`
+paused, `think-0z9b`); `BC-097` and `BC-089`’s remainder remain the sanctioned
+gate filler.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
@@ -2378,9 +2393,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 42 | 12,235 | 7,067 | 143 | 1,539 | 56.03 h |
+| claimed by a session | 42 | 12,301 | 7,099 | 144 | 1,546 | 56.39 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **52** | **13,695** | **7,945** | **175** | **1,712** | **62.9 h** |
+| **measured** | **52** | **13,761** | **7,977** | **176** | **1,719** | **63.26 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2397,13 +2412,15 @@ rounding.
 | [session-055](packing/campaign/agent-sessions/session-055-block4-h044-verdict.md) | 1 | 1 | 93 | 56 | 0 | 0.16 h |
 | [session-056](packing/campaign/agent-sessions/session-056-block5-bentz13-figure2.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
 | [session-057](packing/campaign/agent-sessions/session-057-block6-green-sizes.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
-| *shared by 13 sessions* | — | 3 | 8,898 | 4,934 | 110 | 47.72 h |
+| [session-058](packing/campaign/agent-sessions/session-058-block7-m8-sizing.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
+| [session-059](packing/campaign/agent-sessions/session-059-block8-tau-star-pilot.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
+| *shared by 15 sessions* | — | 3 | 8,964 | 4,966 | 111 | 48.08 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 13 |
+| measured | 15 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **57** |
+| **total** | **59** |
 
 <!-- END GENERATED: session-close-report -->
 
