@@ -342,9 +342,9 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, use
-[session 055](../../../../packing/campaign/agent-sessions/session-055-block4-h044-verdict.md),
-the closed block 4 carrying the H-044 verdict held for review; the next slice is
-`BC-101` under `think-q6vy` in
+[session 056](../../../../packing/campaign/agent-sessions/session-056-block5-bentz13-figure2.md),
+block 5 in progress on the m = 4 foundation layer (Figure 2 certified, the Lemma 10
+audit's finding held for review); the current slice is `BC-099` under `think-1o1f` in
 [agenda-010](../../../../packing/campaign/agendas/agenda-010-two-lane-overnight-run.md),
 the two-lane overnight run X-010 argued and the owner directed.
 Sessions 027 through 049 are terminal, and agendas 006, 007 and 008 are closed; the

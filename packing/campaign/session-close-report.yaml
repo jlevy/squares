@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 55
+count: 56
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 11
-  sessions_unmeasured: 44
+  sessions_unmeasured: 45
   attributed:
     rollups: 42
     turns: 12020
@@ -615,3 +615,12 @@ sessions:
   tool_errors: 16
   one_off_code: 109
   wall_hours: 4.59
+- id: session-056
+  title: "Block 5 of the overnight run: the m = 4 foundation layer"
+  status: in_progress
+  primary_bead: think-1o1f
+  phases: 2
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []

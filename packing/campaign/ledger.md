@@ -70,6 +70,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-053](agent-sessions/session-053-block3-bentz-machine-check.md) | completed | contemporaneous | `research-loop` (correctness) | `research-loop` (process) | 2 | think-1o1f | Block 4 opens as session-055 on `BC-100` under `think-l48p`: upgrade the chunks.py census to the registered partition solver and evaluate H-044's criterion on the frozen corpus. |
 | [session-054](agent-sessions/session-054-block1-certifier-and-falsifier.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-y2ju | Block 2 opens as session-051 on `BC-095` under `think-kp7o`: reprice the chunk-level enumeration with the measured orbit quotient and the realizability prefilter. |
 | [session-055](agent-sessions/session-055-block4-h044-verdict.md) | completed | contemporaneous | `research-pass` (insight) | `research-pass` (insight) | 1 | think-l48p | Block 5 opens as session-056 on `BC-101` under `think-q6vy`: the Green sizes ladder, per the checkpoint's promotion. |
+| [session-056](agent-sessions/session-056-block5-bentz13-figure2.md) | in_progress | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 2 | think-1o1f | The session is in progress on `BC-099` under `think-1o1f`: Figure 2's certificate first, Lemma 10's replacements behind it. |
 
 ### Workflow summary
 
@@ -82,7 +83,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 2 | 1 | 27 | 2 |
 | `process-review` | 10 | 4 | 49 | 6 |
 | `efficiency-loop` | 8 | 0 | 22 | 0 |
-| `research-loop` | 4 | 4 | 25 | 7 |
+| `research-loop` | 5 | 4 | 27 | 7 |
 | `pipeline-improvement` | 18 | 0 | 77 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 

@@ -394,9 +394,18 @@ determinate. The measured mechanism: the lattice grammar expresses the grid stra
 completely and the tilted stratum not at all (flush groups are tangentially slid off
 the integer lattice step), so stage-1 over this grammar is a restricted-class
 instrument — converging with `BC-095`'s repricing from the price side.
-**The next slice is block 5: `BC-101` under `think-q6vy`** — the Green sizes ladder,
-per the checkpoint's promotion; `BC-097` and `BC-089`’s remainder are the sanctioned
-gate filler.
+**Block 5 is in progress
+([session-056](packing/campaign/agent-sessions/session-056-block5-bentz13-figure2.md)):
+`BC-099`'s own question continues under `think-1o1f`** — the m = 4 foundation layer.
+Two results already landed on first complete runs, both held `unresolved` with
+`needs_review`: **Figure 2's sixteen-point base configuration is machine-certified**
+(30 exact rational cells: 4 Lemma 1 corner pentagons, 8 Lemma 4 wall rectangles, 18
+Lemma 2 triangles; 16/16 charged), and **the Lemma 10 audit found a candidate printed
+defect** — the replacement point `(1, 1.74)` is refuted by an exact escape
+certificate, while the corrected reading `(1.74, 1)` is contained by the same box and
+corroborated three independent ways. The corrected replacement certificates and then
+`BC-101` (`think-q6vy`, the Green sizes ladder) follow; `BC-097` and `BC-089`’s
+remainder are the sanctioned gate filler.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
@@ -2380,8 +2389,8 @@ rounding.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 11 |
-| closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **55** |
+| closed before `resource_rollups` existed, logs not retained | 45 |
+| **total** | **56** |
 
 <!-- END GENERATED: session-close-report -->
 
