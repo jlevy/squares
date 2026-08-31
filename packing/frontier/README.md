@@ -236,9 +236,10 @@ to Stromquist’s single 2003 argument.
 Nothing in this table has been improved since 2005.
 
 **The search frontier is much healthier.** Of the 65 open cases, 31 are still held by
-the trivial grid, but the remaining 34 carry real constructions: 15 hand-built, 11 from
-simulated annealing (all dated 2024–2026), 5 diagonal strips, 3 extensions of smaller
-records. Records move monthly; bounds do not.
+the trivial grid, but the remaining 34 carry real constructions: 14 hand-built, 10 from
+simulated annealing (nine of the ten dated 2024–2026; `n = 53` is Cantrell’s from 2002),
+5 diagonal strips, 3 extensions of smaller records, and 2 whose method the source does
+not record (`n = 68, 69`). Records move monthly; bounds do not.
 
 **Algebraic degree explodes past `n = 11`.** Degrees recorded in the catalogue for
 `n ≤ 100` run 4, 5, 6, 8, 12, 18, 20, 24, 42, 44. Every *proved* case is degree ≤ 2.
