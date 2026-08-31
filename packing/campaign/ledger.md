@@ -66,6 +66,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-049](agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | completed | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 5 | think-bxqv | `BC-089` continues on `think-d0j1`: the remaining witness lifts -- n = 50 rational and n = 54 in the quartic field, the Q(sqrt 7) pair having landed as a coda to this session -- then the robust-rational sweep bead, then the block's typed-refusal record for n = 53. |
 | [session-050](agent-sessions/session-050-block1-certifier-and-falsifier.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-y2ju | Block 2 opens as session-051 on `BC-095` under `think-kp7o`: reprice the chunk-level enumeration with the measured orbit quotient and the realizability prefilter. |
 | [session-051](agent-sessions/session-051-block2-reprice-and-lp-gate.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-kp7o | The checkpoint opens as session-052 on `BC-098` under `think-cjxk`, with all four dependencies complete and two measured prices in hand. |
+| [session-052](agent-sessions/session-052-midrun-checkpoint.md) | completed | contemporaneous | `process-review` (insight) | `process-review` (insight) | 1 | think-cjxk | Block 3 opens as session-053 on `BC-099` under `think-1o1f`: encode Bentz 2010's m = 4 argument in the general instrument, with the falsifier at every failed step. |
 
 ### Workflow summary
 
@@ -76,7 +77,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-pass` | 0 | 0 | 10 | 0 |
 | `factual-review` | 1 | 0 | 25 | 2 |
 | `insight-iteration` | 2 | 1 | 27 | 2 |
-| `process-review` | 9 | 4 | 48 | 6 |
+| `process-review` | 10 | 4 | 49 | 6 |
 | `efficiency-loop` | 8 | 0 | 22 | 0 |
 | `research-loop` | 3 | 4 | 23 | 7 |
 | `pipeline-improvement` | 18 | 0 | 76 | 0 |
@@ -250,14 +251,14 @@ Status: **active**. Nine hours, unattended, done before the owner's morning. The
 | BC-095 | tool_validation | 5, 11 | complete | 0 | think-kp7o | Discharged by session-051 phase 1: devtools/price_stage1_chunks.py prices the space with factor standings labeled -- counted raw 4.357e20 at K <= 6 (orbit floor 2.763e18), a K <= 3 slice under X-008's measured wall seatings at 24,611,472 raw / 2.250e6 orbit floor, prefilter rate 0.457 measured on 300 size-five scaffolds at 4.8 ms each, the square-to-chunk transfer named ASSUMED. Go/no-go: exhaustive stage-1 is out of reach above K <= 3 (~2.1e8 sweep-inclusive LP solves there, ~73 h; ~3 h realization-only), and Trump's own ~five-chunk decomposition sits outside the exhaustive range -- BC-104/BC-105 are honest only as restricted-class statements at K <= 3, or need canonical enumeration with pruning rather than raw generation. Four tests pin the counted closed forms as the enumerator's omission control. The 9.3e9 correction is D-405's amendment, found and recorded by this block. |
 | BC-096 | measurement_validation | 11 | complete | 1 | think-nu4y | Discharged by session-051 phase 2, first-hand on this container: assembly 0.41 s for the 1,056-row, 23-variable exact cell; phase 1 58.8 s over 42 pivots; phase 2 22.1 s over 16 pivots; lands on the published side exactly. Float-seeded path ~2.6 s at zero pivots per the retained test. Route decision recorded: sweep in float, certify winners exactly -- whole-class exact certification at K <= 3 scale is out of reach at ~1.4 s per pivot. |
 | BC-097 | tool_validation | 12, 61, 97 | ready | 3 | think-6z95 | Not started. Gate filler alongside BC-089's remainder; if the night never gates long enough, it rolls forward undone and that is fine. |
-| BC-098 | research | 12, 13, 61 | ready | 0 | think-cjxk | Not started. Runs between the tool blocks and the research blocks; 30 minutes, hard. |
+| BC-098 | research | 12, 13, 61 | complete | 0 | think-cjxk | Discharged by session-052 on four measured facts (instruments green, the K <= 3 tractability boundary, the ~1.4 s/pivot exact-LP cost, ~3.5 h of recovered wall). Decisions: BC-101 promoted into tonight's window behind BC-099; BC-102 runs tonight only if BC-101 completes with wall remaining, else it is the next run's first slice; BC-103's 60-minute sizing slice is authorized as gate filler after BC-099; BC-104 rescoped to the class the price says is enumerable (K <= 3, measured wall seatings, pruned canonical enumeration) and stays behind BC-100's verdict; BC-105 carries the measured route (sweep in float, certify winners exactly) and its statement narrows to the K <= 3 class. Remaining wall: BC-099 to ~09:00Z, BC-100 to ~10:30Z, BC-101 to ~12:00Z, BC-102's first slice if wall remains, finalization from 14:10Z. X-010 carries the dated addendum. |
 | BC-099 | research | 13 | ready | 0 | think-1o1f | Not started. X-010 Lane A rung 2; the calibration case for H-033's m = 7 encoding and the m = 8 attempt behind it. |
 | BC-100 | research | 11, 17, 26, 29 | ready | 1 | think-l48p | Not started. X-010 Lane B rung 1; independent of BC-095's price, which is why the two lanes can alternate without idling. |
-| BC-101 | research | 17, 18 | tentative | 1 | think-q6vy | Not started. X-010 Lane A rung 3a; tentative until BC-098 promotes it into time that exists. |
-| BC-102 | research | 12 | tentative | 1 | think-0z9b | Not started. X-010 Lane A rung 3b; the most under-priced target in the corpus, and tentative only because the instrument must exist first. |
-| BC-103 | research | 61 | tentative | 2 | think-07t7 | Not started. X-010 Lane A rung 4; a peak, listed so the ladder's direction is on the map rather than in prose. |
+| BC-101 | research | 17, 18 | blocked | 1 | think-q6vy | Promoted by the BC-098 checkpoint into tonight's recovered wall, behind BC-099: the instruments it needs exist with their triples green, and the synthesis loop it runs is the one BC-099 exercises first. Target window ~10:30Z-12:00Z. |
+| BC-102 | research | 12 | tentative | 1 | think-0z9b | Checkpoint decision (session-052): runs tonight only if BC-101 completes with wall remaining; otherwise it is the next run's first slice. The instruments it needs exist; the most under-priced target in the corpus keeps its priority. |
+| BC-103 | research | 61 | tentative | 2 | think-07t7 | Checkpoint decision (session-052): the 60-minute sizing slice is authorized as gate filler once BC-099 lands; the full attempt stays a later agenda's. A peak, listed so the ladder's direction is on the map rather than in prose. |
 | BC-104 | research | 5, 10, 11 | tentative | 2 | think-sfzh | Not started. X-010 Lane B rungs 2-4; reopens BC-092's question properly if BC-095's number says go. |
-| BC-105 | research | 11 | tentative | 3 | think-dbtx | Not started. X-010 Lane B rung 5; certification route decided by BC-096's measurement. |
+| BC-105 | research | 11 | tentative | 3 | think-dbtx | Route decided by BC-096's measurement (session-051): sweep in float, certify winners exactly at ~2.6 s float-seeded per stratum; whole-class exact certification is out of reach at ~1.4 s per pivot. The statement narrows with BC-104's rescope: a restricted-class result at K <= 3 under the measured wall seatings, or nothing tonight-adjacent. |
 
 ## Series
 

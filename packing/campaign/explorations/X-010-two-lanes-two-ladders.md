@@ -347,6 +347,33 @@ The numbered proposals below are retained as written.)*
   `BC-088` and `BC-092` evidence fields point at D-404 and D-405.
 - `devtools/gap_ranking.py` added (OR-1); its durable wiring is a filed bead.
 
+## Addendum: the BC-098 Checkpoint (2026-08-31, 06:26Z)
+
+The overnight run’s mid-run checkpoint, written with blocks 1 and 2 complete about three
+and a half hours ahead of schedule.
+Four measured facts replaced this document’s forward guesses:
+
+- Both Lane A instruments exist with their controls green in a morning, not a night: the
+  certifier core replays exp-016/exp-017 byte-stable, and the falsifier’s triple passes
+  with the saturation caveat fixed in code.
+- The stage-1 price came back harder than the ladder hoped: exhaustive chunk-level
+  enumeration is out of reach above `K ≤ 3` (raw `4.357e20` at `K ≤ 6`; the `K ≤ 3`
+  slice under X-008’s measured seatings prices at a `2.250e6` orbit floor), and Trump’s
+  own ~five-chunk decomposition sits outside the exhaustive range.
+  Lane B’s peak is therefore a `K ≤ 3` restricted-class statement or a pruned-canonical
+  enumerator, not the class this document imagined.
+- The exact LP at full cell scale costs ~1.4 s per pivot (58.8 s phase 1, 22.1 s phase
+  2, first-hand), which decides B5’s route: sweep in float, certify winners exactly.
+- D-405 gained a second layer: the 9.3e9 figure has an artifact, and the artifact’s own
+  decision at `n = 5` is the isomorph-free route — this document’s first version
+  repeated the no-artifact claim, and the amendment is recorded in the defect.
+
+Resequencing: BC-101 (Green sizes) promoted behind BC-099 into the recovered wall;
+BC-102 tonight only if wall remains, else the next run’s first slice; BC-103’s sizing
+slice authorized as gate filler; BC-104 rescoped to the measured class; BC-105 narrowed
+with it. The peaks did not move: the ladder’s direction survives its first contact with
+measurement, but Lane B’s top rung is smaller than drawn.
+
 ## What This Document Does Not Establish
 
 No mathematical claim is promoted, no hypothesis is adjudicated, and no agenda state is

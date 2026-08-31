@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 51
+count: 52
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 7
+  sessions_measured: 8
   sessions_unmeasured: 44
   attributed:
     rollups: 40
@@ -561,3 +561,16 @@ sessions:
   tool_errors: 11
   one_off_code: 51
   wall_hours: 2.31
+- id: session-052
+  title: "The mid-run checkpoint: resequence the tentative half on the night's evidence"
+  status: completed
+  primary_bead: think-cjxk
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/913a5de0-f775-52cc-8f42-a03fcbd8234b.yaml
+  turns: 522
+  tool_calls: 280
+  tool_errors: 11
+  one_off_code: 51
+  wall_hours: 2.26

@@ -342,9 +342,8 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, use
-[session 050](../../../../packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md),
-whose blocks 1 and 2 are complete; the next slice is the mid-run checkpoint `BC-098`
-under `think-cjxk` in
+[session 052](../../../../packing/campaign/agent-sessions/session-052-midrun-checkpoint.md),
+the completed mid-run checkpoint; the next slice is `BC-099` under `think-1o1f` in
 [agenda-010](../../../../packing/campaign/agendas/agenda-010-two-lane-overnight-run.md),
 the two-lane overnight run X-010 argued and the owner directed.
 Sessions 027 through 049 are terminal, and agendas 006, 007 and 008 are closed; the

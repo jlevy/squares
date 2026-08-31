@@ -238,7 +238,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [12, 13, 61]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Given what the instrument and measurement blocks actually produced, which
@@ -262,8 +262,20 @@ agenda:
     depends_on: [BC-093, BC-094, BC-095, BC-096]
     workflows: [process-review, insight-iteration]
     next_evidence: >-
-      Not started. Runs between the tool blocks and the research blocks; 30 minutes,
-      hard.
+      Discharged by session-052 on four measured facts (instruments green, the K <= 3
+      tractability boundary, the ~1.4 s/pivot exact-LP cost, ~3.5 h of recovered
+      wall). Decisions: BC-101 promoted into tonight's window behind BC-099; BC-102
+      runs tonight only if BC-101 completes with wall remaining, else it is the next
+      run's first slice; BC-103's 60-minute sizing slice is authorized as gate filler
+      after BC-099; BC-104 rescoped to the class the price says is enumerable
+      (K <= 3, measured wall seatings, pruned canonical enumeration) and stays behind
+      BC-100's verdict; BC-105 carries the measured route (sweep in float, certify
+      winners exactly) and its statement narrows to the K <= 3 class. Remaining wall:
+      BC-099 to ~09:00Z, BC-100 to ~10:30Z, BC-101 to ~12:00Z, BC-102's first slice
+      if wall remains, finalization from 14:10Z. X-010 carries the dated addendum.
+    artifacts:
+    - campaign/explorations/X-010-two-lanes-two-ladders.md
+    - campaign/agent-sessions/session-052-midrun-checkpoint.md
   - id: BC-099
     purpose: research
     owner_focus: correctness
@@ -333,7 +345,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [17, 18]
-    state: tentative
+    state: blocked
     priority: 1
     question: >-
       Can certified unavoidable sets beat Nagamochi's closed form at n = 17 and 18,
@@ -357,8 +369,9 @@ agenda:
     depends_on: [BC-093, BC-094, BC-099]
     workflows: [research-loop]
     next_evidence: >-
-      Not started. X-010 Lane A rung 3a; tentative until BC-098 promotes it into time
-      that exists.
+      Promoted by the BC-098 checkpoint into tonight's recovered wall, behind BC-099:
+      the instruments it needs exist with their triples green, and the synthesis loop
+      it runs is the one BC-099 exercises first. Target window ~10:30Z-12:00Z.
   - id: BC-102
     purpose: research
     owner_focus: insight
@@ -390,8 +403,9 @@ agenda:
     depends_on: [BC-093, BC-094, BC-099]
     workflows: [research-loop, insight-iteration]
     next_evidence: >-
-      Not started. X-010 Lane A rung 3b; the most under-priced target in the corpus,
-      and tentative only because the instrument must exist first.
+      Checkpoint decision (session-052): runs tonight only if BC-101 completes with
+      wall remaining; otherwise it is the next run's first slice. The instruments it
+      needs exist; the most under-priced target in the corpus keeps its priority.
   - id: BC-103
     purpose: research
     owner_focus: correctness
@@ -420,8 +434,9 @@ agenda:
     depends_on: [BC-099]
     workflows: [research-loop]
     next_evidence: >-
-      Not started. X-010 Lane A rung 4; a peak, listed so the ladder's direction is on
-      the map rather than in prose.
+      Checkpoint decision (session-052): the 60-minute sizing slice is authorized as
+      gate filler once BC-099 lands; the full attempt stays a later agenda's. A peak,
+      listed so the ladder's direction is on the map rather than in prose.
   - id: BC-104
     purpose: research
     owner_focus: insight
@@ -429,19 +444,22 @@ agenda:
     state: tentative
     priority: 2
     question: >-
-      Does the stage-1 stratum enumerator, glued rows, and class-angle sweep pipeline
-      reproduce the proved controls and rank Trump's stratum where the grammar says it
-      should?
+      Does the stage-1 pipeline -- enumerator, glued rows, class-angle sweep --
+      reproduce the proved controls within the class the price says is enumerable:
+      K <= 3 chunks under the measured wall seatings, by pruned canonical enumeration?
     hypotheses: [H-045, H-046, H-047, H-048]
     budget: >-
       about 150 minutes, W7 then W6, in slices of 30
     entry: >-
-      X-003's pipeline with only stage 1 unbuilt: the enumerator with an omission
-      control (think-sfzh), glued equality rows validated on the n = 5 and n = 10
-      proved controls (think-vnm5), and the coarse class-angle sweep under the ranking
-      rule -- no stratum triage on aligned side values (think-dh4b). Gated on BC-095's
-      price and BC-100's verdict, which is what makes tonight's version honest where
-      X-003's 2026-08-26 version could only be hopeful.
+      X-003's pipeline with only stage 1 unbuilt, rescoped by BC-095's measured
+      boundary: exhaustive treatment is honest only at K <= 3 under X-008's measured
+      wall seatings (2.250e6 orbit floor; ~3 h realization-only, ~73 h with the
+      universal sweep), Trump's own ~five-chunk decomposition is outside the
+      exhaustive range, and anything larger needs pruned canonical enumeration rather
+      than raw generation. The enumerator ships the counted closed forms of
+      devtools/price_stage1_chunks.py as its omission control, with Trump's stratum
+      as the known-answer inclusion at the K where it exists. Gated on BC-100's
+      verdict.
     exit: >-
       The n = 5 and n = 10 controls reproduced through the full pipeline with glued and
       soft optima agreeing at the analytic values, work priced in counted LP solves,
@@ -480,8 +498,11 @@ agenda:
     depends_on: [BC-096, BC-104]
     workflows: [research-loop]
     next_evidence: >-
-      Not started. X-010 Lane B rung 5; certification route decided by BC-096's
-      measurement.
+      Route decided by BC-096's measurement (session-051): sweep in float, certify
+      winners exactly at ~2.6 s float-seeded per stratum; whole-class exact
+      certification is out of reach at ~1.4 s per pivot. The statement narrows with
+      BC-104's rescope: a restricted-class result at K <= 3 under the measured wall
+      seatings, or nothing tonight-adjacent.
 ---
 # Agenda-010 — The Two-Lane Overnight Run
 

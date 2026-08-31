@@ -362,8 +362,11 @@ stated in the agenda’s own objective.
 landed the certifier core and the falsifier (`BC-093`, `BC-094`), and
 [session-051](packing/campaign/agent-sessions/session-051-block2-reprice-and-lp-gate.md)
 landed the stage-1 price and the exact-LP measurement (`BC-095`, `BC-096`) — **and the
-mid-run checkpoint opens as session-052 on `BC-098` under `think-cjxk`**; `BC-097` and
-`BC-089`’s remainder are the sanctioned gate filler.
+checkpoint
+([session-052](packing/campaign/agent-sessions/session-052-midrun-checkpoint.md)) has
+resequenced the tentative half; block 3 opens as session-053 on `BC-099` under
+`think-1o1f`**, the Bentz `m = 4` machine-check; `BC-097` and `BC-089`’s remainder are
+the sanctioned gate filler.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
@@ -2335,13 +2338,14 @@ rounding.
 | [session-049](packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md) | 5 | 5 | 1,226 | 739 | 10 | 2.48 h |
 | [session-050](packing/campaign/agent-sessions/session-050-block1-certifier-and-falsifier.md) | 2 | 2 | 88 | 64 | 0 | 0.13 h |
 | [session-051](packing/campaign/agent-sessions/session-051-block2-reprice-and-lp-gate.md) | 2 | 1 | 38 | 28 | 0 | 0.05 h |
-| *shared by 7 sessions* | — | 2 | 7,305 | 4,067 | 95 | 41.0 h |
+| [session-052](packing/campaign/agent-sessions/session-052-midrun-checkpoint.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
+| *shared by 8 sessions* | — | 2 | 7,305 | 4,067 | 95 | 41.0 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 7 |
+| measured | 8 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **51** |
+| **total** | **52** |
 
 <!-- END GENERATED: session-close-report -->
 
