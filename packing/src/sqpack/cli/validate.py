@@ -894,6 +894,9 @@ def _exact_verification(context: Context) -> str:
             # coordinate into Q(sqrt 2) at small height. The lift generates; exact_sign
             # decides.
             (sys.executable, "-m", "cases.lifted_q2.verify_exact"),
+            # n = 18 and 86 lift the same way into Q(sqrt 7) -- the first exact
+            # verification outside Q(sqrt 2) -- at the tilt DS7 names exactly.
+            (sys.executable, "-m", "cases.lifted_q7.verify_exact"),
             (
                 sys.executable,
                 "-m",

@@ -343,16 +343,16 @@ and `BC-087` had landed while the agenda still advertised both as ready), built 
 pre-push floor `BC-086` asked for (`packing-validate --push`, 58s against `--fast`'s
 646s), and ran the `BC-088` reassessment whose sequenced plan is
 [X-009](packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md) — then
-executed that plan's first block: **ten verified ceilings moved off the integer grid
-onto exact sides** at `n = 19, 26, 27, 38, 52, 66, 67, 82, 84, 85`, every one decided by
-exact sign over `Q(sqrt 2)` from a published rule or a coordinate lift, about `2.9` of
-aggregate gap. The widest trailing ceiling is now `n = 50`'s `3/7`.
+executed that plan's first block: **twelve verified ceilings moved off the integer grid
+onto exact sides** at `n = 18, 19, 26, 27, 38, 52, 66, 67, 82, 84, 85, 86`, every one
+decided by exact sign — ten over `Q(sqrt 2)` and the last two over `Q(sqrt 7)`, the
+first exact verification outside `Q(sqrt 2)` — from a published rule or a coordinate
+lift, about `3.2` of aggregate gap. The widest trailing ceiling is now `n = 50`'s `3/7`.
 
 **The next slice is `BC-089`'s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
-the witness lifts outside `Q(sqrt 2)` — `n = 18` and `86` in `Q(sqrt 7)`, `n = 50`
-rational, `n = 54` quartic — then the robust-rational sweep, then the typed refusal at
-`n = 53`.
+the last two witness lifts — `n = 50` rational, `n = 54` quartic — then the
+robust-rational sweep, then the typed refusal at `n = 53`.
 `BC-049` on `think-xdly` is the research cell all of the mathematics below sits under,
 and it stays open.
 

@@ -322,6 +322,30 @@ evidence:
       published form so a drifted witness fails rather than certifying something else.
     source_reviewed: '2026-08-31'
 
+  - id: E-lifted-q7-upper
+    claim: upper-bound
+    scope: {n_values: [18, 86]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: previously-published
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Friedman DS7]'
+    certificate: cases/lifted_q7/packing.py
+    replay: uv run --frozen python -m cases.lifted_q7.verify_exact
+    replay_status: passed
+    limitations: >-
+      One replay decides both sizes, 153 pairs at n = 18 and 3655 at n = 86, every one
+      by exact sign over Q(sqrt 7) -- the repository's first exact verification outside
+      Q(sqrt 2) -- establishing s(18) <= (7 + sqrt(7))/2 and s(86) <= (17 + sqrt(7))/2,
+      not optimality at either. The shared tilt's cosine and sine, (1 + sqrt(7))/4 and
+      (sqrt(7) - 1)/4, are checked against the circle identity in the field. As at
+      E-lifted-q2-upper the poses are the retained witnesses' own geometry lifted into
+      the field the published side names, with the side lift pinned to the published
+      form.
+    source_reviewed: '2026-08-31'
+
   - id: E-gobel-offcentre-upper
     claim: upper-bound
     scope: {n_values: [26, 85]}

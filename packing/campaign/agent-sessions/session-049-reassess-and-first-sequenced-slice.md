@@ -485,9 +485,10 @@ session:
     owner's request, and the block's remainder recorded on its bead. The owner's mandate
     was three hours; the clocks say the mandate is met and the queue says what is next.
   next_action: >-
-    `BC-089` continues on `think-d0j1`: the remaining witness lifts -- n = 18 and 86 in
-    Q(sqrt 7), n = 50 rational, n = 54 in the quartic field -- then the robust-rational
-    sweep bead, then the block's typed-refusal record for n = 53.
+    `BC-089` continues on `think-d0j1`: the remaining witness lifts -- n = 50 rational
+    and n = 54 in the quartic field, the Q(sqrt 7) pair having landed as a coda to this
+    session -- then the robust-rational sweep bead, then the block's typed-refusal
+    record for n = 53.
 ---
 # Session-049 — Close the Hygiene Queue, Reassess the Search, Run the First Slice
 

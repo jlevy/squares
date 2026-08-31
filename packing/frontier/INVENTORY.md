@@ -8,7 +8,7 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **35** evidence records. **26** are formal; **20** of those were established here.
+- **36** evidence records. **27** are formal; **21** of those were established here.
 - **6** rest on an argument made elsewhere, of which **5** have been read by nobody here.
 - **7** claim to be first established here. **3** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -22,7 +22,7 @@ results, it is a statement about what this repository has itself examined.
 | --- | ---: | --- | --- | --- | --- | --- | --- |
 | `E-kingbird-upper-register` | 98 | upper-bound | reported | - | - | - | previously-published |
 | `E-unitsquare-release1-report` | 2 | upper-bound | reported | - | - | - | previously-published |
-| `E-basic-grid-upper` | 83 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
+| `E-basic-grid-upper` | 81 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
 | `E-basic-area-lower` | 10 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
 | `E-nagamochi-lower` | 88 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published |
 | `E-migrated-lower-report` | 6 | lower-bound | reported | - | - | - | *not assessed* |
@@ -35,6 +35,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-gobel-family-upper` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-gobel-strip-upper` | 5 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-lifted-q2-upper` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-lifted-q7-upper` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-gobel-offcentre-upper` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n082-gobel-l-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n010-stromquist-proof` | 1 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
@@ -58,9 +59,9 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 5, verified 26
-- **method**: exact-algebraic 19, interval-certified 1, numerical-multiprecision 4, published-proof 6, reported 5
-- **novelty**: apparently-novel 7, common-knowledge 4, not assessed 3, previously-published 21
+- **assurance**: numerically-checked 4, reported 5, verified 27
+- **method**: exact-algebraic 20, interval-certified 1, numerical-multiprecision 4, published-proof 6, reported 5
+- **novelty**: apparently-novel 7, common-knowledge 4, not assessed 3, previously-published 22
 
 The `cases` column is how many of the hundred frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited by ninety-eight cases is the catalogue everyone reports from and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -83,7 +84,7 @@ The `n` column is what each covers and `cases` is how many frontier records cite
 | evidence | cases | whose work | read here |
 | --- | ---: | --- | --- |
 | `E-nagamochi-lower` | 88 | elsewhere | informally-verified |
-| `E-basic-grid-upper` | 83 | here | - |
+| `E-basic-grid-upper` | 81 | here | - |
 | `E-basic-area-lower` | 10 | here | - |
 | `E-perfect-square-tiling-rigid` | 10 | here | - |
 | `E-gobel-strip-upper` | 5 | here | - |
