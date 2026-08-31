@@ -350,7 +350,17 @@ first exact verification outside `Q(sqrt 2)` — from a published rule or a coor
 lift, about `3.2` of aggregate gap.
 The widest trailing ceiling is now `n = 50`’s `3/7`.
 
-**The next slice is `BC-089`’s remainder on `think-d0j1`** in
+**Queued for the next run:
+[agenda-010](packing/campaign/agendas/agenda-010-two-lane-overnight-run.md)** — the
+two-lane overnight program from
+[X-010](packing/campaign/explorations/X-010-two-lanes-two-ladders.md): nine hours in
+blocks of two to three hours, instruments before research in both lanes, a checkpoint
+(`BC-098`) resequencing the tentative half mid-run, and the standard unattended rules
+stated in the agenda’s own objective.
+Take its block 1 (`BC-093`, then `BC-094`) first; `BC-097` and `BC-089`’s remainder are
+the sanctioned gate filler.
+
+**The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
 the last two witness lifts — `n = 50` rational, `n = 54` quartic — then the
 robust-rational sweep, then the typed refusal at `n = 53`. `BC-049` on `think-xdly` is
@@ -2619,11 +2629,11 @@ table above.
   where it gets run at all, so what is owed is a cheap anchor-resolution check in
   `--records` rather than a faster suite.
 - **[D-404](defects.md) and [D-405](defects.md) are the reassessment auditing itself.**
-  `BC-088`'s entry sequenced X-009 on an unmeasured gap claim — the measured spread is
-  `0.056`–`0.536`, structured by `k = m² − n`, and `devtools/gap_ranking.py` now
-  carries it — and `BC-092` was stopped on an enumeration price that traces to no
-  artifact. X-010 carries the corrected sequencing input; the repricing is open on the
-  `x-010` beads.
+  `BC-088`’s entry sequenced X-009 on an unmeasured gap claim — the measured spread is
+  `0.056`–`0.536`, structured by `k = m² − n`, and `devtools/gap_ranking.py` now carries
+  it — and `BC-092` was stopped on an enumeration price that traces to no artifact.
+  X-010 carries the corrected sequencing input; the repricing is open on the `x-010`
+  beads.
 
 ## The Defect Record
 

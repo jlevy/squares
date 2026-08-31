@@ -61,9 +61,9 @@ exploration:
 
 **Status:** Strategy synthesis from the interactive session of 2026-08-31, at the
 owner’s request. It promotes nothing and adjudicates nothing; the agenda adjustments at
-the end are proposed, not made.
-Unlike X-009 it used no sub-agents: every measurement below was taken first-hand in this
-session and carries its replay path.
+the end were proposed here and enacted the same day as agenda-010 (see that section’s
+note). Unlike X-009 it used no sub-agents: every measurement below was taken first-hand
+in this session and carries its replay path.
 
 **Owns:** the two-lane sequencing argument and the two corrections.
 The defect records D-404 and D-405 own the defects; the beads labeled `x-010` own the
@@ -89,7 +89,7 @@ First, the field’s division of labor: all twelve record movements of 2024–20
 bounds from stochastic search (Schadt, Ellsworth, Hajba, the UnitSquare Project, at
 `28 <= n <= 88`), the newest mathematics in the archive is asymptotic and disjoint from
 `n <= 100` (Bui’s `O(x^0.6)` waste bound, arXiv 2508.04603, and McClenagan’s independent
-proof, arXiv 2602.01484), and the exact- value lane has not moved since Bentz 2016: of
+proof, arXiv 2602.01484), and the exact-value lane has not moved since Bentz 2016: of
 the 65 open cases, 63 carry Nagamochi’s one 2005 closed form as their best proved lower
 bound, `n = 12` carries a bound proved about `n = 11` and inherited by monotonicity, and
 `n = 11` carries this repository’s own H-041 certificate.
@@ -303,7 +303,13 @@ The ladder:
    `in_progress` beads from long-closed sessions still distort the ready queue (hygiene
    bead filed).
 
-## Proposed Agenda Adjustments — for the Owner, Not Enacted Here
+## Proposed Agenda Adjustments — Enacted Same Day as Agenda-010
+
+*(This section proposed; the owner then directed the mapping, and
+[agenda-010](../agendas/agenda-010-two-lane-overnight-run.md) now carries it: the
+committed rungs as `BC-093`–`BC-100` with a mid-run checkpoint, the peaks as
+`BC-101`–`BC-105` tentative behind it, budgeted to a nine-hour overnight wall.
+The numbered proposals below are retained as written.)*
 
 1. Close agenda-009 on its own terms: `BC-089`’s remainder proceeds on think-d0j1;
    `BC-090` and `BC-091` keep X-009’s gates and narrowing untouched.
