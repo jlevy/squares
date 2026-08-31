@@ -125,7 +125,7 @@ session:
       candidate blocks should run; register hypotheses where the review finds them; state
       for at least one specific n what would have to be true and how an attempt would
       know it failed.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       BC-085 and BC-086 are complete, so the reassessment is unblocked; the delegated
@@ -145,11 +145,65 @@ session:
       claim must be re-verified before the plan relies on it.
     fallback: >-
       Sequence only the block whose evidence is strongest and record the rest as open.
+    outcome: >-
+      X-009 is the plan: BC-089 first, paired with the robust-rational sweep; BC-091
+      narrowed to n = 90 via H-049; BC-090 gated on beating exp-011's measured
+      grid-return at n = 17, with n = 71 first and H-050 its cheapest question; BC-092
+      folded into BC-090's instrument design on the measured enumeration price. One
+      load-bearing claim re-verified first-hand before the plan relied on it: 82 squares
+      in side 6 + (5/2)sqrt(2), exact over Q(sqrt 2), negative control firing. H-049 and
+      H-050 registered; five beads filed for the record repairs and follow-ups the
+      investigation surfaced (think-7x19, think-s1pc, think-830o, think-3nc4,
+      think-mvrq); n = 53 moved to BC-090's pool.
+    evidence:
+    - packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md
+    - packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md
+    - packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md
+    - packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md
+    stop_reason: >-
+      The exit's required artifacts exist: a sequenced plan with reasons for the blocks
+      not chosen, registered hypotheses, and the specific-n statement (n = 90, with
+      failure defined by lemma rather than budget). The records tier is the validation.
+    next_action: >-
+      Execute the first sequenced slice.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    bead: think-xdly
+    objective: >-
+      BC-089's first slice: build the n = 82 construction -- gobel_family(4, 5) plus one
+      L of seventeen -- as a durable case package with an exact verification entry point,
+      wire it into the gate, and record the evidence, following the D-398 recipe and the
+      gobel_family precedent.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The plan is written and its first slice is bounded and instrument-ready: the
+      construction verified first-hand as a probe in phase 3, so this phase turns the
+      probe into the tool per OR-1.
+    budget_minutes: 45
+    started_at: '2026-08-31T01:40:00Z'
+    deadline_at: '2026-08-31T02:25:00Z'
+    expected_output: >-
+      cases/gobel82 (or an extension of gobel_family) with verify_exact certifying
+      n = 82 at 6 + (5/2)sqrt(2), a gate step running it, the frontier record and
+      evidence register carrying the promotion per the evidence contract, and the
+      trailing-ceiling tripwire moved deliberately.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: >-
+      Any exact_sign failure, or a record change the evidence contract's checkers
+      refuse. The construction is dropped rather than relaxed: a probe that verified
+      once and fails as a package is a finding, not an inconvenience.
+    fallback: >-
+      Retain the case package and its verification without moving verified_upper_bound,
+      recording the move as the named next action.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Execute the first sequenced slice.
+      The strip family (27, 38, 52, 67, 84) by the same pattern, then the sweep bead.
   budget:
     wall_minutes: 195
     finalization_minutes: 30
@@ -280,16 +334,34 @@ session:
       Read-only capability inventory: what the search, exact, promotion, interval and
       contact layers can actually do today for a new-packing loop, per BC-088/BC-092.
     operator: claude-sub-agent-machinery
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Certification is seconds and search is the whole bottleneck: its own cold annealer
+      runs returned the trivial grid at n = 29, 41 and 51, while robust-rational
+      promotion took a quench pose at n = 11 to an independently verified exact rational
+      bound in about eleven seconds, and 34 of 36 decimal known-best witnesses promoted
+      in 33 seconds total. Found the generic interval route's one missing block (a
+      square-subsystem selector; refine and krawczyk raise not-square on 122 equations
+      against 88 unknowns) and measured that D-402's derived claim -- decimals reproduce
+      neither known contact structure -- is an artifact of the pricing tool reading the
+      finest deciding floor with an exact-zero sign; inside declared digits with the
+      retained tolerance sign both calibrations reproduce exactly. Generative
+      enumeration is priced out as its own block (9.3e9 raw orbit work at n = 5, size
+      capped at 5 by typed refusal).
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-exact-construction-price.json
+    - packing/atlas/known-best/contact-enumeration-pricing.json
+    - packing/src/sqpack/promote/krawczyk.py
+    files:
+    - no repository file written; read-only investigation (scratchpad builds only)
+    checks:
+    - report reviewed under OR-2; the sweep and calibration measurements queued for in-repo replay (beads think-3nc4, think-830o)
     uncertainty: >-
-      Same OR-2 posture; capability claims are read from code and records, not run.
-    elapsed_seconds: null
-    elapsed_quality: null
+      Same OR-2 posture; the sweep, the D-402 recalibration, and the selector sizing are
+      report measurements pending first-party replay before any record moves.
+    elapsed_seconds: 1585
+    elapsed_quality: platform_measured
     next_action: >-
       Fold into the BC-088 sequencing decision.
     phase: 3

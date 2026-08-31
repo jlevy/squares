@@ -165,7 +165,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [28, 29, 51, 68, 69]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Given machinery that did not exist when the research queue was written, where is a
@@ -208,18 +208,26 @@ agenda:
     depends_on: [BC-085, BC-086]
     workflows: [research-pass, insight-iteration]
     next_evidence: >-
-      `n = 29` is the owner's named target and the best-studied of the ten: two independent
-      witnesses, an interval certificate proving `s(29) <= 5.93383346267692918974`, and a
-      report at `5.93383346267692` that the certificate still trails by `9.19e-15`. It is
-      the case where the distance between what is reported and what is certified is
-      smallest, which makes it the cleanest test of whether the certification stack can
-      close a gap rather than merely describe one.
+      Discharged by session-049 phase 3; the plan is X-009 and it registers H-049 and
+      H-050. Sequencing: BC-089 first (14 of 15 trailing cases verify exactly at their
+      published side per the delegated scan, one of them -- n = 82 at 6 + (5/2)sqrt(2) --
+      re-verified first-hand under exact_sign this session), paired with the
+      robust-rational sweep the machinery inventory measured at 33s for 34 decimal
+      witnesses; BC-091 narrowed to the n = 90 primitive question (H-049) with n = 61
+      parked in the proof lane; BC-090 gated on an instrument beating exp-011's measured
+      grid-return at n = 17 before any target is spent, n = 71 first when taken (H-050);
+      BC-092 folded into BC-090's instrument design -- the enumeration price (9.3e9 raw
+      orbit work at n = 5, hard size cap at 5) rules it out as its own block.
+    artifacts:
+    - campaign/explorations/X-009-where-a-new-packing-is-reachable.md
+    - campaign/hypotheses/H-049-squeezable-20-in-4x6.md
+    - campaign/hypotheses/H-050-n71-angle-split-load-bearing.md
   - id: BC-089
     purpose: research
     owner_focus: correctness
-    instances: [18, 19, 26, 27, 38, 50, 52, 53, 54, 66, 67, 82, 84, 85, 86]
-    state: tentative
-    priority: 1
+    instances: [18, 19, 26, 27, 38, 50, 52, 54, 66, 67, 82, 84, 85, 86]
+    state: ready
+    priority: 0
     question: >-
       Which of the 15 trailing cases with a published exact side are materialisations of a
       published rule, the way `n = 40` turned out to be?
@@ -240,13 +248,18 @@ agenda:
       `D-402` established that recovering a pose from these decimals fails -- so the win
       here is recognition, and a case that needs pose recovery belongs in `BC-090` rather
       than being forced here.
-    bead: think-xdly
+    bead: think-d0j1
     depends_on: [BC-088]
     workflows: [research-pass, research-loop]
     next_evidence: >-
-      Tentative until `BC-088` sequences it. Listed first among the candidates because it
-      is the only one with a demonstrated hit rate and needs no machinery that does not
-      exist.
+      Sequenced first by X-009, with n = 53 moved to BC-090's pool (its two extra tilt
+      classes yield no stable relation at 49 digits) and the block widened by the
+      machinery inventory's sweep: robust-rational promotion of the decimal known-best
+      witnesses, measured at 33s for 34 sizes, then exact constructions replacing the
+      relaxed ceilings where a published rule exists. Session-049 phase 4 takes n = 82
+      first -- verified first-hand this session as gobel_family(4,5) plus one L of 17,
+      exact over Q(sqrt 2) at 6 + (5/2)sqrt(2), with the eighteenth L square refused.
+      Owned by think-d0j1 with the sweep on think-3nc4; think-xdly stays on BC-049.
   - id: BC-090
     purpose: research
     owner_focus: insight
@@ -275,15 +288,19 @@ agenda:
     depends_on: [BC-088]
     workflows: [research-loop, insight-iteration]
     next_evidence: >-
-      Tentative until `BC-088` sequences it. This is the block that could produce a genuinely
-      new result and also the one most likely to return nothing, which is why it is
-      sequenced after the review rather than started on enthusiasm.
+      Sequenced third by X-009 and gated: no target is spent until an instrument reaches
+      s(17) within 1e-4 on one of five seeds -- exp-011 measured the stock annealer
+      returning the grid there, and the machinery inventory's own cold runs returned the
+      grid at n = 29, 41 and 51. When the gate passes, n = 71 goes first (the one size
+      whose catalogue records cold search failing; H-050 is its cheapest question) and
+      n = 53 joins the pool from BC-089. Certification is not the bottleneck: a
+      candidate pose reaches an independently verified rational bound in seconds.
   - id: BC-091
     purpose: research
     owner_focus: insight
-    instances: [12, 20, 21, 30, 42, 56, 72, 90]
-    state: tentative
-    priority: 3
+    instances: [90]
+    state: ready
+    priority: 1
     question: >-
       At the 31 open sizes where nobody has beaten the trivial grid, is the grid optimal or
       merely unbeaten?
@@ -302,18 +319,22 @@ agenda:
       treatment the family constructions get. The honest expected outcome is that this is a
       hard open problem the catalogue has already absorbed, and establishing that with a
       measurement is worth more than attempting all 31.
-    bead: think-xdly
+    bead: think-7t9u
     depends_on: [BC-088]
     workflows: [research-pass]
     next_evidence: >-
-      Tentative until `BC-088` sequences it, and the lowest priority of the four because
-      these are the sizes most likely to have been attacked hardest by the catalogue's own
-      contributors.
+      Narrowed by X-009 from 31 cases to one: n = 90 via Arslanov's decomposition, which
+      reduces to H-049 -- whether 20 unit squares pack squeezably in a 4 by 6 rectangle.
+      The staircase measurement (no k <= m - 2 case beaten anywhere in the catalogue to
+      n = 324) absorbs the other 29 as hard-open; n = 61 stays parked in the proof lane
+      under H-033. The s(m^2 - m) = m boundary is m < 11 (Cantrell, February 2025,
+      retained in the Kingbird archive), not the m < 17 the frontier still quotes --
+      filed as a record repair.
   - id: BC-092
     purpose: research
     owner_focus: insight
     instances: [5, 11, 29, 40]
-    state: tentative
+    state: stopped
     priority: 2
     question: >-
       Does the contact structure give a search anything the pose alone does not -- can the
@@ -339,9 +360,12 @@ agenda:
     depends_on: [BC-088]
     workflows: [research-pass, insight-iteration]
     next_evidence: >-
-      Tentative until `BC-088` sequences it. Named separately from `BC-090` because it is
-      the systematic route and `BC-090` is the direct one; the review should decide whether
-      they are one block or two, and whether the structural route earns its longer path.
+      X-009 answers the one-block-or-two question: one, owned by BC-090. The enumeration
+      is priced out of reach as its own block (canonical orbits grow 1, 1, 7, 124,
+      11,013 through size five with 9.3e9 raw orbit work already at n = 5, and the code
+      caps scaffolds at size five by typed refusal), while the structural corpus's real
+      value at a target n is proposer information -- which contact shapes and angle-class
+      structures carry records -- inside BC-090's instrument.
 ---
 # Agenda-009 — Hygiene First, Then Decide What the Machinery Is For
 

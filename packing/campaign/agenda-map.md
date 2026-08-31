@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **4** ready, **4** tentative, **14** blocked, **4** stopped, **66** complete.
+- **5** ready, **1** tentative, **14** blocked, **5** stopped, **67** complete.
 
 - **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
 
@@ -23,11 +23,9 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-001 | `BC-010` | 0 | insight | research | Are the equal-side n=5 candidates connected in the stationary set, and what verified minimax clearance… | `think-1s0h` |
 | agenda-002 | `BC-017` | 1 | efficiency | tool_validation | Can a stratum be priced in counted LP solves end to end, so enumeration results are comparable to each other… | `think-u97a` |
 | agenda-005 | `BC-049` | 1 | correctness | research | Are the packings the catalogue annotates "Rigid." actually rigid, on evidence of our own rather than on the… | `think-xdly` |
-| agenda-009 | `BC-088` | 0 | insight | research | Given machinery that did not exist when the research queue was written, where is a new packing actually… | `think-bxqv` |
-| agenda-009 | `BC-089` | 1 | correctness | research | Which of the 15 trailing cases with a published exact side are materialisations of a published rule, the way… | `think-xdly` |
+| agenda-009 | `BC-089` | 0 | correctness | research | Which of the 15 trailing cases with a published exact side are materialisations of a published rule, the way… | `think-d0j1` |
+| agenda-009 | `BC-091` | 1 | insight | research | At the 31 open sizes where nobody has beaten the trivial grid, is the grid optimal or merely unbeaten? | `think-7t9u` |
 | agenda-009 | `BC-090` | 2 | insight | research | Can a stricter, better informed search beat a stochastic incumbent at any of the ten sizes whose best known… | `think-xdly` |
-| agenda-009 | `BC-092` | 2 | insight | research | Does the contact structure give a search anything the pose alone does not -- can the assembly grammar… | `think-xdly` |
-| agenda-009 | `BC-091` | 3 | insight | research | At the 31 open sizes where nobody has beaten the trivial grid, is the grid optimal or merely unbeaten? | `think-xdly` |
 
 ## Blocked, and on what
 
@@ -77,7 +75,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-006 | completed |  |  |  | 2 | 23 | 25 |
 | agenda-007 | completed |  |  |  |  | 4 | 4 |
 | agenda-008 | completed |  |  |  |  | 4 | 4 |
-| agenda-009 | active | 1 | 4 |  |  | 3 | 8 |
+| agenda-009 | active | 2 | 1 |  | 1 | 4 | 8 |
 
 ## What the states mean
 
