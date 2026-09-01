@@ -314,14 +314,14 @@ alone.
 
 Agenda-012 starts three disjoint blocks, each with its own bead and owned paths:
 
-1. `BC-107`: independently verify or reject the fixed `n = 17` weighted certificate;
-2. `BC-108`: build the `n = 68/69` rounding-envelope rigid-pose bridge; and
-3. `BC-109`: exactify `n = 50` as the large rational positive control.
+1. `BC-108`: independently verify or reject the fixed `n = 17` weighted certificate;
+2. `BC-109`: build the `n = 68/69` rounding-envelope rigid-pose bridge; and
+3. `BC-110`: exactify `n = 50` as the large rational positive control.
 
-`BC-110` is a 45-minute evidence checkpoint, not a fourth experiment.
+`BC-111` is a 45-minute evidence checkpoint, not a fourth experiment.
 It can promote the already-lined successors: assurance and a generic weighted proof tool
-(`BC-111`), blinded `n = 68` surgery (`BC-112`), and one construction-certification rung
-(`BC-113`). Existing BC-010 remains the sole `n = 5` commitment and is capped as above.
+(`BC-112`), blinded `n = 68` surgery (`BC-113`), and one construction-certification rung
+(`BC-114`). Existing BC-010 remains the sole `n = 5` commitment and is capped as above.
 
 This portfolio has three independent ways to pay: a stronger lower bound, a validated
 construction method, or a precision-aware route into high-`n` surgery.

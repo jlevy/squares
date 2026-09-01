@@ -409,9 +409,9 @@ than floating it, because an unpinned runner re-resolves on every invocation:
 
 ```bash
 softschema validate <doc.md>                    # if installed
-uvx softschema==0.6.2 validate <doc.md>         # pinned fallback
-uvx softschema==0.6.2 docs spec                 # the exact artifact format
-uvx softschema==0.6.2 skill --brief             # operating brief
+uvx softschema==0.8.0 validate <doc.md>         # pinned fallback
+uvx softschema==0.8.0 docs spec                 # the exact artifact format
+uvx softschema==0.8.0 skill --brief             # operating brief
 ```
 
 Real implementations to crib from:

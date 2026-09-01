@@ -36,7 +36,7 @@ The prefix says what kind of thing it is.
 | Search/proof strategy | `search:N`, `proof:N` | the frontier catalogues | `search:12` |
 | Defect | `D-NNN` | the directory, logged in `defects.yaml` | `D-014` |
 | Bead | `think-xxxx` | the repository’s `tbd` queue (prefix set in `.tbd/config.yml`) | `think-1s0h` |
-| Theoretical result | `T-N` | `SYNOPSIS.md` shorthand; the registry artifact it cites is authoritative | `T-2` |
+| Theoretical result | `T-NNN` | the results register, [`packing/frontier/results.yaml`](packing/frontier/results.yaml), under [`epistemics.md`](epistemics.md); `SYNOPSIS.md`’s legacy single-digit `T-N` ids remain that document’s declared shorthand | `T-001` |
 | Review finding | `R-N`, `F-NN` | the review document that declares them | `R-2`, `F-07` |
 | Basin (planned) | canonical key, plus a `B-NNN` alias | campaign, spans series | — |
 
@@ -141,10 +141,10 @@ no evidence. [`development.md`](development.md#hashes-and-repository-owned-artif
 owns the narrow exceptions for real trust boundaries, deduplication, event identity, and
 cache correctness.
 
-**Cross-field rules live in the checker, not the schema.** [checked] softschema 0.6.2
-rejects `allOf` object composition under `status: enforced`, so a conditional would
-invalidate every artifact rather than the offending one
-([jlevy/softschema#41](https://github.com/jlevy/softschema/issues/41)).
+**Schemas own local structure; checkers own relationships between fields and
+artifacts.** [checked] Put a rule in a checker when it needs a tailored diagnostic,
+reads another artifact, or merits a negative control.
+Keep required keys, types, enums, and other record-local constraints in the schema.
 
 ### Workflow, Focus, Phase, and Slice
 
@@ -236,6 +236,15 @@ verified—and citations sit near the claims they support.
 “Verified” is reserved for the formal level.
 [convention]
 
+**The rubric that ranks whole results lives in [`epistemics.md`](epistemics.md), not
+here.** [checked: `devtools/check_results.py`] This section defines the recorded
+fields—assurance, method, precision, origin, review state—that its verification and
+confirmation ladders derive from.
+The ladder vocabulary (`V0`–`V5`, `C0`–`C5`, significance, novelty as applied to whole
+results) is defined there and only there, and the results register at
+`packing/frontier/results.yaml` is where a whole result’s rungs are declared and
+re-derived on every validation run.
+
 **Budgets are in pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`. [convention]
 Machine-independent, and comparable across proposers whose move semantics differ.
 Wall clock is reported alongside as a courtesy, never as the budget.
@@ -246,7 +255,9 @@ Wall clock is reported alongside as a courtesy, never as the budget.
 
 **One document owns each vocabulary, and the rest are short forms.** [convention]
 [Assurance and method](#4-evidence) above are definitive here, and the schemas enforce
-them. Mathematical terminology is defined in [`SYNOPSIS.md`](SYNOPSIS.md#terminology);
+them; the result-level epistemic vocabulary is owned by
+[`epistemics.md`](epistemics.md).
+Mathematical terminology is defined in [`SYNOPSIS.md`](SYNOPSIS.md#terminology);
 [`TUTORIAL.md`](TUTORIAL.md) §9 and [`README.md`](README.md)’s Essential Terms are short
 forms that may abbreviate but must not contradict it, and a term either appears in the
 synopsis or is marked local where it is used.
@@ -426,40 +437,24 @@ A skipped check is recorded and re-listed at the end.
 `--strict` enables deep golden regeneration and turns every skip into a failure; failed
 or incomplete strict surfaces always return nonzero.
 
-**Run the cheapest loop that answers the current question.** The research round is
-deliberately separate from the edit/test loop, so an eight-hour hypothesis never makes a
-documentation correction take eight hours to validate:
+**Run the cheapest loop that answers the current question.** Research rounds remain
+separate from edit and validation loops, so a long hypothesis does not set the cost of a
+documentation correction:
 
-| Loop | Measured latency | Use |
-| --- | ---: | --- |
-| Interactive | under about 2 seconds | Pytest, ledger and schema checks, exact-witness verification, engine self-test |
-| Focused | seconds | `packing-validate --only TEXT` for one component and its controls |
-| Pre-push | about 4 seconds | `packing-validate --records`: registries, generated views, and declared contracts. This is the set that actually breaks CI ([D-369](defects.md)) |
-| Edit loop | about 8 minutes | `packing-validate --fast`, which is the pre-push set plus the behavioural tests that dominate it — one step is essentially all of it |
-| Checkpoint | about 18 minutes | Normal `packing-validate` before a commit, cross-component handoff, or checkpoint merge |
-| Deep handoff | about 18 minutes, two steps currently failing | `packing-validate --strict` before an unattended campaign, a handoff that depends on regenerated producer output, or any claim that the strict/deep path is healthy |
-| Research round | preregistered per hypothesis | Candidate generation or proof search under its own declared timebox |
+| Loop | Command or instrument | Use |
+| --- | --- | --- |
+| Interactive | Targeted pytest, checker, verifier, or engine self-test | Answer one local question while editing |
+| Focused | `packing-validate --only TEXT` | Run one named validation surface and its controls |
+| Records | `packing-validate --records` | Check registries, generated views, and declared contracts |
+| Edit | `packing-validate --edit` | Run the normal low-latency editing floor |
+| Pre-push | `packing-validate --push --since origin/main` | Add behavioral tests reachable from the change |
+| Full | `packing-validate` | Check a commit, cross-component handoff, or merge checkpoint |
+| Strict/deep | `packing-validate --strict` and, when producer output matters, `--deep` | Refuse skips and rebuild expensive producers before an unattended campaign or dependent handoff |
+| Research round | A preregistered W6 instrument | Run candidate generation or proof search under its declared timebox |
 
-Measured on one container, the pre-push and edit-loop rows on 2026-08-30 and the rest on
-2026-08-29. Both restatements happened because the entries had drifted: the 2026-08-29
-pass found sixty seconds claimed for a tier that takes eight minutes and two minutes for
-one that takes eighteen, and the 2026-08-30 pass found seventy seconds claimed for a
-tier that `BC-077` had taken to four.
-A latency column nobody re-measures is how a tier stops being chosen on cost.
-
-The pre-push row moved because a schema validator was swapped and exact geometry left a
-step named for schemas, not because anything stopped being checked
-([`D-370`](defects.md)).
-
-**The edit-loop row is new, and it is where `BC-079` landed.** The tier called `--fast`
-had stopped being fast: measured at `499s`, with `fast behavioral tests` accounting for
-all but about 33 seconds of it.
-A tier priced at the cost of its widest step is a tier people skip, and that is the
-mechanism `D-369` records — seven CI failures on one branch, every one a record check,
-none a behavioural test.
-So the split is by what a step catches rather than by what it costs: `--edit` carries
-the seventeen steps that answer a question about the change in front of you, and
-`--fast` adds the one step whose cost is breadth.
+The split follows what each step detects.
+Do not copy measured latencies into durable guidance; use the validator transcript when
+cost affects a decision.
 
 Three properties make the split safe rather than merely cheaper, and each is a test:
 
@@ -491,9 +486,9 @@ and schema shape, notation, provenance and correction form, layer boundaries, an
 conventions. Where a family of them is large enough to stand alone it may live in a
 nested `conventions.md` that this one references, rather than growing this page.
 
-The W8 documentation checklist used to sit here and is now
-[the documentation-pass runbook](packing/campaign/documentation-pass.md), because a
-checklist for running a pass is a procedure and not a format.
+The W8 checklist is the
+[documentation-pass runbook](packing/campaign/documentation-pass.md), because a
+checklist for running a pass is a procedure rather than a convention.
 
 ## Defect Classes
 
@@ -512,13 +507,13 @@ alike is how a critical bug gets the same attention as a stale link.
 
 Soundness and validity defects additionally record a **direction**: `flattering` errors
 overstate the result and are the dangerous kind, because they look like success;
-`conservative` errors understate it and cost only effort.
-Four of the six soundness defects found so far flattered.
+`conservative` errors understate it and primarily cost effort or opportunity.
+Current totals and detector statistics belong in the generated defect log.
 [checked]
 
 A soundness defect gets a postmortem, not just a fix—see
 [the first one](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md),
-whose rules R1–R4 apply to code that does not exist yet.
+whose rules R1–R4 define the defenses required for new soundness-sensitive code.
 [convention]
 
 ## Defects

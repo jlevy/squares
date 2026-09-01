@@ -212,10 +212,10 @@ session:
 # Session-055 — Block 4: The H-044 Verdict
 
 Contemporaneous record; the frontmatter is the session.
-The instrument-side groundwork this block leans on is block 2's repricing (the
-`K <= 3` tractability boundary) and the frozen contract already stamped in the
-partitions atlas; the delegation seeds the delta list, and every load-bearing
-delta is re-read first-hand before code changes, per OR-2.
+The instrument-side groundwork this block leans on is block 2’s repricing (the `K <= 3`
+tractability boundary) and the frozen contract already stamped in the partitions atlas;
+the delegation seeds the delta list, and every load-bearing delta is re-read first-hand
+before code changes, per OR-2.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

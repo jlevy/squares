@@ -32,9 +32,11 @@ $defs:
       - technical-synthesis
       - tutorial
       - conventions
+      - epistemic-policy
       - operating-rules
       - development-guide
-      - runbook
+      - research-runbook
+      - documentation-runbook
       - session-guide
       - research-loop-logbook
       - series-guide

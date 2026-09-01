@@ -1011,7 +1011,7 @@ records which are known to have produced records.
 | 14 | SAT / constraint programming | stochastic search | Reduce feasibility at a fixed side to a Boolean or CP instance | Used for 2D orthogonal packing; awkward under free rotation |
 | 15 | Branch and bound over contact classes | stochastic search | Enumerate combinatorial structures, optimise within each | Used in exact cutting-and-packing |
 | 16 | Genetic / evolutionary search | stochastic search | Population methods over configurations | Used in the wider packing literature |
-| 17 | Exact algebraic refinement | exact refinement | Fix the contact graph, solve the polynomial system | Used in the field to derive algebraic records and now exercised in this repository's exact lift and promotion cases. A reported exact side still does not supply an exact pose or a solvable contact system. |
+| 17 | Exact algebraic refinement | exact refinement | Fix the contact graph, solve the polynomial system | Used in the field to derive algebraic records and now exercised in this repository’s exact lift and promotion cases. A reported exact side still does not supply an exact pose or a solvable contact system. |
 | 18 | Rigidity-guided enumeration | exact refinement | Enumerate rigid contact graphs, then solve each | Standard in sphere/disk packing; the natural analogue here |
 | 19 | Interval-verified local optima | exact refinement | Certify a local optimum with interval arithmetic | Used for circle packing; not seen applied to `s(11)` |
 | 20 | Catalogue-driven record chasing | workflow | Human-computer loop against a public record table | Yes — how the tables actually advance |

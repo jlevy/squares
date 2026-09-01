@@ -1,6 +1,6 @@
 # Synopsis: The `s(n)` Program
 
-**Date:** 2026-08-25
+**Date:** 2026-08-31
 
 **Status:** Living document, revised whenever a result lands.
 
@@ -51,9 +51,11 @@ Capability 2 has two promotion boundaries.
 Robust rational promotion is built for suitable decimal center-angle poses and may prove
 a slightly weaker upper bound by making its side relaxation explicit.
 A generic path that infers contacts and certifies an exact solution at the reported
-value is not built and may not succeed for singular, ambiguous, or ill-conditioned
-systems. [What Is Built](#what-is-built) states, component by component, what runs, what
-its output may claim, and what remains engineering or mathematics.
+value is built as generic library components but is not exposed as an arbitrary
+`Witness/v2` command; certification may still fail for singular, ambiguous, or
+ill-conditioned systems.
+[What Is Built](#what-is-built) states, component by component, what runs, what its
+output may claim, and what remains engineering or mathematics.
 Read it before citing any capability here.
 
 ### Current research readiness
@@ -74,26 +76,27 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Research record and process | Reconstruct hypotheses, experiments, sessions, effort, and known failures | A closed bead or plausible output is not evidence until the artifact, landed tree, and generated views agree | [Ledger](packing/campaign/ledger.md), [defect log](defects.md), and [confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |
 | Agent loop and throughput | Run bounded phases with declared clocks, checkpoint each result, and select the next dependency-ready bead | Portable recovery and final receipts remain incomplete; wall-clock budgets do not define equal scientific work under load | [Campaign runbook](packing/campaign/README.md), [launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-autonomous-agent-loop), and [D-126](defects.md) |
 | Frontier and literature | Read reported and verified bounds side by side through `n = 100`; reconcile the named public sources and retain conflicts | Most reported records still lack a public formal witness; dated named-source coverage is not universal web completeness | [`frontier/STATUS.md`](packing/frontier/STATUS.md), [`frontier/`](packing/frontier/README.md), and [`resources/`](packing/resources/README.md) |
-| Witness inspection and verification | Inspect or numerically check supported decimal geometry; verify rational and certified algebraic witnesses exactly | Interval-certificate replay is represented by the contract but no generic interval checker is built | [Exact layer](#the-exact-layerbuilt) and [capability ladder](#verification-capability-ladder) |
+| Witness inspection and verification | Inspect or numerically check supported decimal geometry; verify rational and certified algebraic witnesses exactly | Generic interval-certification components are built, but the arbitrary-`Witness/v2` public command is not exposed | [Exact layer](#the-exact-layerbuilt) and [capability ladder](#verification-capability-ladder) |
 | Numerical refinement | Polish and compare fixed-cell controls above the measured solver floor | A stopped quench is neither certified stationary nor comparable by wall-clock budget under load | [Refinement layer](#the-refinement-layerbuilt-with-a-floor) and [D-021, D-052, D-126](defects.md) |
 | Exact local geometry and proof | Run the specialized small-`n`, Trump, and Stromquist checkers; this is the most productive mathematical lane so far | There is no generic proof-synthesis or interval branch-and-bound pipeline | [Proof lane](#the-proof-lanebuilt-and-producing-theorems) |
 | Proposal and search | Use the stock annealer for calibration and candidate generation; its two search paths emit exact pair-test work | Pair-budget enforcement, the proposer interface, campaign-wide aggregation, and mechanism-diverse proposers are unbuilt | [Proposer layer](#the-proposer-layerone-instrument-and-the-interface-is-unbuilt) |
 | Event capture and replay | Retain and independently replay watched control events | A valid terminal event is an observation, not a connected terminal component | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |
 | Basin identity, census, and atlas | Use exact `n = 3` and `n = 4` models as identity controls | Component counting is not admissible until the `n = 5` ambiguity is bounded and the classifier is validated successively | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |
-| Numerical-to-formal promotion | Robustify suitable decimal center-angle poses into explicitly relaxed rational witnesses, infer and assemble a contact system, recover a minimal polynomial under a decidable margin rule, certify a root by Krawczyk, and receive typed failures throughout | The robust path may weaken the bound; every component of the reported-value route is built, but the `n = 29` certificate is retained `unresolved` and moving `verified_upper_bound` is a reviewed human decision, not a pipeline inference | [Promotion pipeline](#the-promotion-pipelinebuilt-end-to-end-with-the-promotion-itself-withheld) |
+| Numerical-to-formal promotion | Robustify suitable decimal center-angle poses into explicitly relaxed rational witnesses, infer and assemble a contact system, recover a minimal polynomial under a decidable margin rule, certify a root by Krawczyk, and receive typed failures throughout | The `n = 29` interval certificate has passed review and now carries the verified upper bound; the tighter reported value remains uncertified | [Promotion pipeline](#the-promotion-pipelinebuilt-end-to-end-with-the-promotion-itself-withheld) |
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
 hypotheses, one open hypothesis, seven open questions, and thirty-one blocked
-hypotheses. Two further hypotheses are unresolved: one because its formal prerequisite
-is missing, and H-044 because its registered calibration-only amendment keeps the
+hypotheses.
+Two further hypotheses are unresolved: one because its formal prerequisite is
+missing, and H-044 because its registered calibration-only amendment keeps the
 hypothesis undisposed — its first scored round (exp-046) missed the criterion
 determinately under both denominator readings, the review hold is cleared, and
-disposition waits on a confirmatory successor over a fresh-frozen corpus. Its active confidence ladder has completed the exact and event controls up to
-the first nontrivial identity question; the next scientific transition is from
-specialized `n = 5` local geometry to a defensible component relation, not to a larger
-raw census.
+disposition waits on a confirmatory successor over a fresh-frozen corpus.
+Its active confidence ladder has completed the exact and event controls up to the first
+nontrivial identity question; the next scientific transition is from specialized `n = 5`
+local geometry to a defensible component relation, not to a larger raw census.
 
 #### Refresh rule
 
@@ -147,10 +150,11 @@ case or experiment separately.
 | [Prospective Packing Atlas, `n = 101..324`](packing/atlas/prospective/README.md) | component scope and use | supporting | maintained | — |
 | [Deterministic SVG Gallery](packing/atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
 | [Conventions for `packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
+| [Epistemics](epistemics.md) | whole-result evidence classifications | definitive | maintained | — |
 | [Operating Rules](operating-rules.md) | how a session is conducted | definitive | maintained | — |
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign — W6 Runbook](packing/campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
-| [The W8 Documentation Pass — Runbook](packing/campaign/documentation-pass.md) | W6 experiment mechanics | definitive | maintained | — |
+| [The W8 Documentation Pass — Runbook](packing/campaign/documentation-pass.md) | W8 documentation reconciliation | definitive | maintained | — |
 | [Agent Sessions](packing/campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
 | [Research Loop Logbook](packing/campaign/research-loop-logbook/README.md) | reader-facing research-run summaries | definitive | maintained | — |
 | [Resource Usage](packing/campaign/resource-usage/README.md) | component scope and use | definitive | maintained | — |
@@ -161,6 +165,7 @@ case or experiment separately.
 | [Frontier: What Is Known About `s(n)`, Case by Case](packing/frontier/README.md) | frontier semantics and contribution path | definitive | maintained | — |
 | [Current Square-Packing Frontier](packing/frontier/STATUS.md) | generated status view | generated | generated | — |
 | [Evidence inventory](packing/frontier/INVENTORY.md) | generated status view | generated | generated | — |
+| [Results](packing/frontier/RESULTS.md) | generated status view | generated | generated | — |
 | [Research Resources: Square Packing](packing/resources/README.md) | source retention and archive policy | definitive | maintained | — |
 | [Defect log](defects.md) | generated status view | generated | generated | — |
 | [FrankenSim probes](packing/frankensim-probe/README.md) | component scope and use | supporting | maintained | — |
@@ -317,6 +322,20 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+No escalated research session is active.
+The latest terminal record is
+[session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md),
+owned by `think-n8vl`; its branch is in final review and the bead closes when the pull
+request merges. It added the whole-results register, the V/C/S/N rubric, and the
+structural checker summarized in [`epistemics.md`](epistemics.md).
+
+No new scientific slice is authorized by that documentation and CI review.
+Select the next research slice from the generated
+[agenda map](packing/campaign/agenda-map.md), as required by
+[`OR-4`](operating-rules.md).
+
+### Handoff Record
+
 [Open the house rendering of the retained 100-square witness.](packing/atlas/known-best/rendering/n-100.svg)
 
 The renderer’s standing exact-motion control remains independently replayable:
@@ -357,7 +376,7 @@ The widest trailing ceiling is now `n = 50`’s `3/7`.
 [session-050](packing/campaign/agent-sessions/session-050-exp045-audit-and-acceptance.md)
 then performed the independent audit `exp-045` had waited on since registration, built
 the `-W` bridge that makes the accepted helpers corroborate the certificate, and
-recorded the owner's acceptance — clearing the gate that held `BC-010` and `BC-029`.
+recorded the owner’s acceptance — clearing the gate that held `BC-010` and `BC-029`.
 
 **Queued for the next run:
 [agenda-010](packing/campaign/agendas/agenda-010-two-lane-overnight-run.md)** — the
@@ -368,105 +387,128 @@ blocks of two to three hours, instruments before research in both lanes, a check
 stated in the agenda’s own objective.
 **The run is live: blocks 1 and 2 are complete** —
 [session-054](packing/campaign/agent-sessions/session-054-block1-certifier-and-falsifier.md)
-landed the certifier core and the falsifier (`BC-093`, `BC-094`; the session ran as
-050 and was renumbered at the merge — the audit session above holds that number), and
+landed the certifier core and the falsifier (`BC-093`, `BC-094`; the session ran as 050
+and was renumbered at the merge — the audit session above holds that number), and
 [session-051](packing/campaign/agent-sessions/session-051-block2-reprice-and-lp-gate.md)
 landed the stage-1 price and the exact-LP measurement (`BC-095`, `BC-096`) — **and the
 checkpoint
 ([session-052](packing/campaign/agent-sessions/session-052-midrun-checkpoint.md)) has
 resequenced the tentative half;
 [session-053](packing/campaign/agent-sessions/session-053-block3-bentz-machine-check.md)
-closed block 3 on `BC-099` under `think-1o1f` with the run's first research result:
-Bentz 2010, Theorem 8 (`s(46) = 7`) machine-certifies as printed** — 92 exact cells
-over `Q(sqrt 2, sqrt 3)`, the Lemma 5 threshold by a rigorous rational subdivision
-bound of `0.955390`, all 45 points charged — held `unresolved` with `needs_review`
-under the unattended rules that night (resolved by the review below), with the
-`m = 4` remainder typed on `think-1o1f` and one candidate printed gap flagged for
-replay. The same session absorbed a mid-run merge
-from `main` (the parallel audit session had taken `session-050` and `D-404`, so block
-1's record is `session-054` and the reassessment defects are `D-405`/`D-406`) and
-root-caused the base branch's red full surface to two stacked control defects,
-`D-407` and `D-408`, both fixed on this branch.
+closed block 3 on `BC-099` under `think-1o1f` with the run’s first research result:
+Bentz 2010, Theorem 8 (`s(46) = 7`) machine-certifies as printed** — 92 exact cells over
+`Q(sqrt 2, sqrt 3)`, the Lemma 5 threshold by a rigorous rational subdivision bound of
+`0.955390`, all 45 points charged — held `unresolved` with `needs_review` under the
+unattended rules that night (resolved by the review below), with the `m = 4` remainder
+typed on `think-1o1f` and one candidate printed gap flagged for replay.
+The same session absorbed a mid-run merge from `main` (the parallel audit session had
+taken `session-050` and `D-404`, so block 1’s record is `session-054` and the
+reassessment defects are `D-405`/`D-406`) and root-caused the base branch’s red full
+surface to two stacked control defects, `D-407` and `D-408`, both fixed on this branch.
 **Block 4 is complete too**
 ([session-055](packing/campaign/agent-sessions/session-055-block4-h044-verdict.md),
-`BC-100`): the `H-044` chunk-expressibility verdict exists as `exp-046`, exploratory
-by the hypothesis's own calibration-only amendment, held `unresolved` with
-`needs_review` that night (resolved below) — the criterion is **missed under both
-denominator readings** the
-registered text supports (23/30 = 0.7667 over all records at `n ≤ 30`; 3/10 = 0.30
-over the non-grid sweep records), identically in both bands, every miss typed and
-determinate. The measured mechanism: the lattice grammar expresses the grid stratum
-completely and the tilted stratum not at all (flush groups are tangentially slid off
-the integer lattice step), so stage-1 over this grammar is a restricted-class
-instrument — converging with `BC-095`'s repricing from the price side.
+`BC-100`): the `H-044` chunk-expressibility verdict exists as `exp-046`, exploratory by
+the hypothesis’s own calibration-only amendment, held `unresolved` with `needs_review`
+that night (resolved below) — the criterion is **missed under both denominator
+readings** the registered text supports (23/30 = 0.7667 over all records at `n ≤ 30`;
+3/10 = 0.30 over the non-grid sweep records), identically in both bands, every miss
+typed and determinate.
+The measured mechanism: the lattice grammar expresses the grid stratum completely and
+the tilted stratum not at all (flush groups are tangentially slid off the integer
+lattice step), so stage-1 over this grammar is a restricted-class instrument —
+converging with `BC-095`’s repricing from the price side.
 **Block 5 closed
 ([session-056](packing/campaign/agent-sessions/session-056-block5-bentz13-figure2.md)):
-`BC-099`'s own question continued under `think-1o1f`** — the m = 4 foundation layer.
-Two results landed on first complete runs, both held that night for review
-(resolved below): **Figure 2's sixteen-point base configuration is machine-certified**
-(30 exact rational cells: 4 Lemma 1 corner pentagons, 8 Lemma 4 wall rectangles, 18
-Lemma 2 triangles; 16/16 charged), and **Lemma 10 is machine-settled both
-ways** — the printed replacement point `(1, 1.74)` is refuted by an exact escape
-certificate, and all three corrected replacement sets (`(1.12, 1)`, `(1.74, 1)`,
-`(1.87, 0.76)`) certify exactly, their Lemma 5 quadrilaterals landing inside the very
-parameter families the paper's Section 1 lists. The certifier gained subset
-semantics, margin and near cells, and the rational-`a` threshold bound along the way.
+`BC-099`’s own question continued under `think-1o1f`** — the m = 4 foundation layer.
+Two results landed on first complete runs, both held that night for review (resolved
+below): **Figure 2’s sixteen-point base configuration is machine-certified** (30 exact
+rational cells: 4 Lemma 1 corner pentagons, 8 Lemma 4 wall rectangles, 18 Lemma 2
+triangles; 16/16 charged), and **Lemma 10 is machine-settled both ways** — the printed
+replacement point `(1, 1.74)` is refuted by an exact escape certificate, and all three
+corrected replacement sets (`(1.12, 1)`, `(1.74, 1)`, `(1.87, 0.76)`) certify exactly,
+their Lemma 5 quadrilaterals landing inside the very parameter families the paper’s
+Section 1 lists. The certifier gained subset semantics, margin and near cells, and the
+rational-`a` threshold bound along the way.
 **Block 6
 ([session-057](packing/campaign/agent-sessions/session-057-block6-green-sizes.md),
 `BC-101`) then moved the verified lower lane for the first time since 2005:
 `s(17) ≥ 17/4 = 4.25` and `s(18) ≥ 17/4`, certified exactly** by a sixteen-point
-unavoidable set in `[0, 17/4]²` (`cases/green17`) — above Nagamochi's `≈ 4.1623`,
-below Green's unadoptable `≈ 4.4452` — the cell plan pinned to `17/4` by an
-`11/1000000` slack, the falsifier corroborating by saturation, and the verdict held
-that night for review; the review's independent audit then showed `17/4` was the
-plan's ceiling rather than the set's, and the upgrade below carries the adopted
-bound. **The run then discharged the checkpoint's two authorized fillers and
-closed early.**
+unavoidable set in `[0, 17/4]²` (`cases/green17`) — above Nagamochi’s `≈ 4.1623`, below
+Green’s unadoptable `≈ 4.4452` — the cell plan pinned to `17/4` by an `11/1000000`
+slack, the falsifier corroborating by saturation, and the verdict held that night for
+review; the review’s independent audit then showed `17/4` was the plan’s ceiling rather
+than the set’s, and the upgrade below carries the adopted bound.
+**The run then discharged the checkpoint’s two authorized fillers and closed early.**
 [Session-058](packing/campaign/agent-sessions/session-058-block7-m8-sizing.md)
-(`BC-103`) sized the `m = 8` attempt exactly and parked it: the m = 7 pattern's
-ceiling `7√3/2 + 2√2 − 1 ≈ 7.8906` sits below both side 8 and the standing
-`7.9282` at `n = 61`, with the lattice dilemma exact (8 rows overrun the Lemma 2
-pitch cap by `0.0157`; 9 rows overrun the 60-point budget by 7).
+(`BC-103`) sized the `m = 8` attempt exactly and parked it: the m = 7 pattern’s ceiling
+`7√3/2 + 2√2 − 1 ≈ 7.8906` sits below both side 8 and the standing `7.9282` at `n = 61`,
+with the lattice dilemma exact (8 rows overrun the Lemma 2 pitch cap by `0.0157`; 9 rows
+overrun the 60-point budget by 7).
 [Session-059](packing/campaign/agent-sessions/session-059-block8-tau-star-pilot.md)
-(`BC-102`) built the τ* pilot and read the method diagnostic: the eleven-crossing
-sits near side `3.83` (uncertified, typed), so a pure eleven-point set has at most
-a `~0.04`-wide window above `2 + 4/√5` and any ambitious bespoke `s(12)` bound
-forces the threshold/segment/moving-resource machinery. Everything mathematical
-from the run was held `unresolved` with `needs_review` overnight per the
-unattended rules; the verification review below resolved every hold the same day.
+(`BC-102`) built the τ* pilot and read the method diagnostic: the eleven-crossing sits
+near side `3.83` (uncertified, typed), so a pure eleven-point set has at most a
+`~0.04`-wide window above `2 + 4/√5` and any ambitious bespoke `s(12)` bound forces the
+threshold/segment/moving-resource machinery.
+Everything mathematical from the run was held `unresolved` with `needs_review` overnight
+per the unattended rules; the verification review below resolved every hold the same
+day.
 
-**As of 2026-08-31, evening — verification complete.** The owner moved the review from
-their queue to the repository's own rubric — determinations, not deferrals —
-and
-[session-060](packing/campaign/agent-sessions/session-060-verification-review.md)
-completed it as `BC-106` under `think-ngf0` in
-[agenda-011](packing/campaign/agendas/agenda-011-verification-review.md). The
-determinations, each grounded in [conventions.md §4](conventions.md#4-evidence)
-and the frontier evidence contract: **Theorem 8's audit is verified** and fully
-machine-checked (`E-bentz46-theorem8-audit`); **the Lemma 10 settlement is
-verified and now source-settled** — the published page image itself prints the
-transposed `(1, 1.74)`, so the defect is the journal's, recorded as
-`defect-found` on `E-bentz-2010-proof` with the partial Theorem 9 audit in
-`E-bentz13-figure2-audit`; **exp-046's hold is cleared with H-044 undisposed by
-its own registered amendment** (the miss is determinate under both readings);
-**the m = 8 parking statement stands as exact arithmetic**; **the τ* diagnostic
-stays uncertified by construction** — final typed status, nothing pending. The
-green17 determination became an upgrade: the independent interval certifier
-built for the review (`cases/green17/interval_audit.py` — exhaustive exact
-integer branch-and-bound over the full pose space, pair-handoff and
-wall-tightened discharge rules, negative controls refuting tampered sets and
-oversized sides with exact witnesses) proved the run's `17/4` was the cell
-plan's ceiling, not the set's: the same sixteen points certify at
-`4426213/1000000 = 4.426213`, the cell certificate was rebuilt there (right-wall
-Lemma 4 rectangles replacing the near-slabs), and **`verified_lower_bound` at
-`n = 17` and `n = 18` moved to `4.426213` on two independent formal methods**
-(`E-green17-sixteen-point-lower`, `E-green17-interval-audit`), the set's exact
-ceiling `753/250 + √2 ≈ 4.42621356` bracketed by certification at `4.426213`
-and refutation at `4.427` and typed as follow-on. The assembled case is the
-2026-08-31 verification review under `docs/project/reviews/`; the owner reviews
-the PR as a whole. Follow-ons stay on their beads (`think-1o1f`, `think-q6vy`,
-`think-07t7` paused, `think-0z9b`); `BC-097` and `BC-089`'s remainder remain
-the sanctioned gate filler.
+**As of 2026-08-31, evening.** The owner moved the review from their queue to the
+repository’s own rubric — determinations, not deferrals — and
+[session-060](packing/campaign/agent-sessions/session-060-verification-review.md) is
+running it as `BC-106` under `think-ngf0` in
+[agenda-011](packing/campaign/agendas/agenda-011-verification-review.md).
+The determinations, each grounded in [conventions.md §4](conventions.md#4-evidence) and
+the frontier evidence contract: **Theorem 8’s audit is verified** and fully
+machine-checked (`E-bentz46-theorem8-audit`); **the Lemma 10 settlement is verified and
+now source-settled** — the published page image itself prints the transposed
+`(1, 1.74)`, so the defect is the journal’s, recorded as `defect-found` on
+`E-bentz-2010-proof` with the partial Theorem 9 audit in `E-bentz13-figure2-audit`;
+**exp-046’s hold is cleared with H-044 undisposed by its own registered amendment** (the
+miss is determinate under both readings); **the m = 8 parking statement stands as exact
+arithmetic**; **the τ* diagnostic stays uncertified by construction** — final typed
+status, nothing pending.
+The green17 determination became an upgrade: the independent interval certifier built
+for the review (`cases/green17/interval_audit.py` — exhaustive exact integer
+branch-and-bound over the full pose space, pair-handoff and wall-tightened discharge
+rules, negative controls refuting tampered sets and oversized sides with exact
+witnesses) proved the run’s `17/4` was the cell plan’s ceiling, not the set’s: the same
+sixteen points certify at `4426213/1000000 = 4.426213`, the cell certificate was rebuilt
+there (right-wall Lemma 4 rectangles replacing the near-slabs), and
+**`verified_lower_bound` at `n = 17` and `n = 18` moved to `4.426213` on two independent
+formal methods** (`E-green17-sixteen-point-lower`, `E-green17-interval-audit`), the
+set’s exact ceiling `753/250 + √2 ≈ 4.42621356` bracketed by certification at `4.426213`
+and refutation at `4.427` and typed as follow-on.
+The assembled case is the 2026-08-31 verification review under `docs/project/reviews/`;
+the owner reviews the PR as a whole.
+Follow-ons stay on their beads (`think-1o1f`, `think-q6vy`, `think-07t7` paused,
+`think-0z9b`); `BC-097` and `BC-089`’s remainder remain the sanctioned gate filler.
+
+**Session 061 summary.** The review’s epistemics became infrastructure: verification is
+the highest rung supported by the evidence a result cites, regardless of who performed
+it; confirmation records what this repository has read, replayed, or established.
+[Session 061](packing/campaign/agent-sessions/session-061-epistemics-codification.md)
+codified that distinction as `BC-107` under `think-n8vl` in
+[agenda-011](packing/campaign/agendas/agenda-011-verification-review.md), a
+`pipeline-improvement` slice.
+[`epistemics.md`](epistemics.md) at the repository root now owns the four axes —
+`V0`–`V5`, `C0`–`C5` with structural promotion checks, anchored significance that never
+gates, and a scoped novelty classification — and the results register
+([`packing/frontier/results.yaml`](packing/frontier/results.yaml), rendered as
+[`RESULTS.md`](packing/frontier/RESULTS.md)) declares the whole results `T-001`–`T-013`,
+whose declared rungs `devtools/check_results.py` checks against cited evidence, required
+notes, and review metadata on every validation run.
+Unsupported promotion and unexplained understatement fail the build.
+The register subsumes the review’s determinations (the `s(17)`/`s(18)` upgrade is
+`T-001`/`T-002` at `V4`/`C4`) and the legacy first-party theorems (the Stromquist repair
+is `T-010`; this document’s own `T-1`–`T-4` below remain declared shorthand).
+softschema is upgraded to `0.8.0` across the schema toolchain in the same slice.
+The one-shot post-merge check found main’s full surface still red on one negative
+control, behind the same mask D-407 named: the worker-snapshot link copy covered the
+pruned archive but not the pruned renderings, and the control’s expected message lagged
+the ledger’s round count — fixed as `D-409` and `D-410` on this branch, with
+`epistemics.md` added to the snapshot’s root documents before the same gap could ship
+again. Research follow-ons are unchanged on their beads.
 
 **As of 2026-08-31, late evening — next agents start here.**
 [X-011](packing/campaign/explorations/X-011-controls-are-not-targets.md) reconciles the
@@ -474,21 +516,22 @@ new `n = 17` weighted certificates, the `n = 68/69` precision gap, the medium-ca
 construction ladder, and the opportunity cost of a thirteenth open-ended `n = 5` round.
 [Agenda-012](packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md)
 turns that synthesis into three disjoint first-wave blocks with real beads and 15--30
-minute check-in cells: `BC-107` independently checks the proposed `4.5058` certificate;
-`BC-108` builds the rounded-SVG-to-rigid-pose bridge at `n = 68/69`; and `BC-109` takes
-the `n = 50` rational exact-promotion control. Run them in parallel, then take `BC-110`'s
-bounded checkpoint. The dependency-linked successors are already filed. Existing
-`BC-010` gets one final 90-minute discriminator with a matched `n = 10` transfer, or it
-parks. Take the exact entry command and owned paths from agenda-012, not from this
-summary.
+minute check-in cells: `BC-108` independently checks the proposed `4.5058` certificate;
+`BC-109` builds the rounded-SVG-to-rigid-pose bridge at `n = 68/69`; and `BC-110` takes
+the `n = 50` rational exact-promotion control.
+Run them in parallel, then take `BC-111`’s bounded checkpoint.
+The dependency-linked successors are already filed.
+Existing `BC-010` gets one final 90-minute discriminator with a matched `n = 10`
+transfer, or it parks.
+Take the exact entry command and owned paths from agenda-012, not from this summary.
 
 **The parallel recognition slice remains `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
-agenda-012 narrows its first slice to `n = 50` under `BC-109`; `n = 54` follows only if
-that result shows nested-radical representation is the next missing seam. The
-robust-rational sweep and typed `n = 53` refusal remain on the parent bead. `BC-049` on
-`think-xdly` is the research cell all of the mathematics below sits under, and it stays
-open.
+agenda-012 narrows its first slice to `n = 50` under `BC-110`; `n = 54` follows only if
+that result shows nested-radical representation is the next missing seam.
+The robust-rational sweep and typed `n = 53` refusal remain on the parent bead.
+`BC-049` on `think-xdly` is the research cell all of the mathematics below sits under,
+and it stays open.
 
 **`n = 40` is infinitesimally flexible**, exactly, over `Q(sqrt 2)`: seven retained
 directions turn the sixteen squares of its tilted block and leave the frame fixed, and
@@ -533,12 +576,12 @@ whole-record grid subsets on four walls, 65 corner-seated blocks on two.
 `BC-038` is closed and rejected on measured arithmetic — 35 `evaluate_stress` calls
 arrive with **eleven** distinct number fields, and `RowJetInventory` refuses a foreign
 field by identity, so the floor is a `1.54x` ceiling against an exit wanting five-fold.
-`BC-010` and `BC-029` were gated for four days on independent acceptance of
-`exp-045`’s preregistered criterion, which an unattended runner may not grant to
-itself; on 2026-08-31 the owner accepted the round after session-050’s independent
-audit (findings and the corroborating `-W` bridge are the experiment record’s Amendment
-and `D-404`), so `exp-045` now records `decision: accepted`, `BC-029` is complete, and
-`BC-010`’s readiness on the map is genuine.
+`BC-010` and `BC-029` were gated for four days on independent acceptance of `exp-045`’s
+preregistered criterion, which an unattended runner may not grant to itself; on
+2026-08-31 the owner accepted the round after session-050’s independent audit (findings
+and the corroborating `-W` bridge are the experiment record’s Amendment and `D-404`), so
+`exp-045` now records `decision: accepted`, `BC-029` is complete, and `BC-010`’s
+readiness on the map is genuine.
 
 **`n = 5` is second-order rigid, and that is a first-party result.**
 [X-007](packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md)
@@ -849,13 +892,12 @@ sequenced behind exp-045. The outstanding work is now carried by
 which gives each remaining item its own workflow entry.
 `BC-027` is complete.
 The `n = 5` H-023 successor under `BC-029`, `think-whwc`, and `think-1s0h` is no longer
-an instrument blocker: exp-045 has run and is terminal — `accepted` since
-2026-08-31, after the independent audit its registration required — excluding canonical
-pure `-W` at all three strata while every connectivity, component, isolation and
-terminality claim stays refused.
-CG-010 is structurally complete under `BC-030`; BC-016 is blocked under `think-3yv8` on
-retained poses, an executable glued row, symbolic tie labels, and a receipt checker,
-while BC-017 under `think-u97a` remains the ready constructive W7 lane.
+an instrument blocker: exp-045 has run and is terminal — `accepted` since 2026-08-31,
+after the independent audit its registration required — excluding canonical pure `-W` at
+all three strata while every connectivity, component, isolation and terminality claim
+stays refused. CG-010 is structurally complete under `BC-030`; BC-016 is blocked under
+`think-3yv8` on retained poses, an executable glued row, symbolic tie labels, and a
+receipt checker, while BC-017 under `think-u97a` remains the ready constructive W7 lane.
 
 All `n = 1..100` frontier entries now point to normalized witnesses and deterministic
 house renderings. The source-complete corpus is calibration evidence, not an unseen
@@ -1109,22 +1151,18 @@ reaches full rank at both determined sizes — `34` of `34` at `n = 11` and `88`
 at `n = 29`. The shortfall that had suggested otherwise was [D-361](defects.md), a bug
 in assembly rather than a property of the packings.
 
-**Two things remain, and neither is a missing component.** The first is wiring: the
-public `packing-witness promote --strategy interval-existence` still raises the typed
+**One integration boundary remains.** The public
+`packing-witness promote --strategy interval-existence` still raises the typed
 `checker-not-built` gap, because the certification that has been done ran through
 [`cases.kingbird29.certify_interval`](packing/cases/kingbird29/certify_interval.py), a
 case-specific driver over generic library code.
 A general path from an arbitrary `Witness/v2` to a certificate is not exposed, and the
 typed refusal is the honest answer until it is.
 
-The second is a decision.
 The interval route certifies `s(29) <= 5.93383346267692918974379895098` at a declared
-relaxation of `1e-20`, and that certificate is retained `unresolved` with
-`needs_review: true`. It sits `5.23371e-5` below the standing verified ceiling, and
-whether it moves `verified_upper_bound` is a reviewed human decision through the
-evidence contract rather than an inference this pipeline is permitted to make.
-A built path is not a promoted bound, and an unattended run may decline a marginal
-result and may not accept one.
+relaxation of `1e-20`. Review adopted that certificate as the case’s
+`verified_upper_bound` and as T-009. It remains `9.18974379895098e-15` above the tighter
+reported value, which is still uncertified at its declared precision.
 
 Exp-033 remains a distinct dedicated result: it bound two retained `n = 5` float poses
 to exact endpoints on one certified fixed-angle optimal face and supplied an exact dual
@@ -1143,7 +1181,7 @@ geometry witness.
 | Verify algebraic-number-field geometry | built and sound for accepted metadata | Constructor proves irreducibility and one isolated real root; caller must still supply the correct field and geometry |
 | Import center-angle, center-basis, or corner data | built at `Witness/v2` | A source-specific adapter must resolve the source’s units and coordinate convention without guessing |
 | Robustify a suitable decimal center-angle pose | built | May require an explicit side increase and certifies the new rational pose only |
-| Certify existence at the reported value | buildable for suitable systems; checker unbuilt | Needs outward-rounded boxes and a well-posed contact system; not guaranteed to succeed |
+| Certify existence around a well-posed contact solution | generic library components built; arbitrary-`Witness/v2` CLI unexposed | Needs outward-rounded boxes and a well-posed contact system; not guaranteed to succeed or to reach the reported value |
 | Infer the correct contact model from arbitrary serialized geometry | mathematically contingent | Ambiguous near-contacts and underdetermined models must remain explicit failures |
 | Prove global optimality from a feasible witness | separate mathematics | Requires a matching verified lower bound; no generic witness conversion supplies it |
 
@@ -1772,6 +1810,16 @@ listed here so the dependencies of this program are explicit.
   differs structurally from the ladder.
 
 ### Results established here
+
+The authoritative, prioritized list of whole results is now the
+[results register](packing/frontier/RESULTS.md)
+([`packing/frontier/results.yaml`](packing/frontier/results.yaml)), graded on the
+verification and confirmation ladders [`epistemics.md`](epistemics.md) defines and
+re-derived by `devtools/check_results.py` on every validation run; the repair below is
+registered there as `T-010`, the Trump validity check as `T-011`. This section keeps the
+original `n = 11` statements with their replay commands — the single-digit `T-N` ids are
+this document’s declared shorthand, retained where the surrounding prose cites them, and
+the structural results `T-2` and `T-3` live only here and in their registry artifacts.
 
 | Id | Statement | Assurance or basis | Where it lives | Reproduce with |
 | --- | --- | --- | --- | --- |
@@ -2444,9 +2492,9 @@ rounding.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 42 | 12,876 | 7,405 | 151 | 1,561 | 65.1 h |
+| claimed by a session | 42 | 13,390 | 7,660 | 156 | 1,565 | 69.61 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **52** | **14,336** | **8,283** | **183** | **1,734** | **71.97 h** |
+| **measured** | **52** | **14,850** | **8,538** | **188** | **1,738** | **76.48 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2466,13 +2514,14 @@ rounding.
 | [session-058](packing/campaign/agent-sessions/session-058-block7-m8-sizing.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-059](packing/campaign/agent-sessions/session-059-block8-tau-star-pilot.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-060](packing/campaign/agent-sessions/session-060-verification-review.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
-| *shared by 16 sessions* | — | 3 | 9,539 | 5,272 | 118 | 56.79 h |
+| [session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
+| *shared by 17 sessions* | — | 3 | 10,053 | 5,527 | 123 | 61.3 h |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 16 |
+| measured | 17 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **60** |
+| **total** | **61** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -2779,15 +2828,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 408 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 417 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
-| validity | 100 | was correct, but the measurement did not bear on the question |
+| validity | 108 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 154 | recorded something its own evidence contradicts |
-| robustness | 48 | did not finish, or finished only by luck |
+| robustness | 49 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -2796,10 +2845,10 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fifty-six defects in 408, and no soundness defect
-ever.** Every soundness failure was found by a control cell whose answer was known in
-advance, a rule written down before the measurement, a generated view contradicting its
-source, or someone reading carefully.
+**The automated gate has caught sixty defects in 417, and no soundness defect ever.**
+Every soundness failure was found by a control cell whose answer was known in advance, a
+rule written down before the measurement, a generated view contradicting its source, or
+someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Gate-detected entries here are mechanical process, implementation, or
 test-validity failures, found by contiguity, integration, mutation-anchor,

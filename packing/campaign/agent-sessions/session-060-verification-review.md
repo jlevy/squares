@@ -280,9 +280,9 @@ session:
 # Session-060 — The Verification Review
 
 Contemporaneous record; the frontmatter is the session.
-The owner's direction that opened it: the verification calls are the
-repository's to make under its own rubric, with independent verification built
-where it is missing, and the assembled case lands on PR #66 for their review.
+The owner’s direction that opened it: the verification calls are the repository’s to
+make under its own rubric, with independent verification built where it is missing, and
+the assembled case lands on PR #66 for their review.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

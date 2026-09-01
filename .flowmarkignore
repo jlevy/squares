@@ -101,6 +101,11 @@ packing/frontier/STATUS.md
 # `packing-validate --records`. Same case as STATUS.md: two owners for one file.
 packing/frontier/INVENTORY.md
 
+# RESULTS.md is generated from the results register by devtools.render_results
+# and drift-checked byte-for-byte in `packing-validate --records`. Same case as
+# STATUS.md: two owners for one file.
+packing/frontier/RESULTS.md
+
 # agenda-map.md is rebuilt by `devtools.render_agenda_map` from every agenda's
 # frontmatter and drift-checked in `packing-validate --records`. Same case as
 # ledger.md and defects.md: two owners for one file means the check never passes.

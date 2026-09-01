@@ -21,7 +21,7 @@ agenda:
     the first wave, no agent infers contacts from rounded pixels, and no n = 5 work
     expands beyond the single capped BC-010 commitment.
   items:
-  - id: BC-107
+  - id: BC-108
     purpose: measurement_validation
     owner_focus: correctness
     instances: [17, 18, 19]
@@ -59,9 +59,9 @@ agenda:
     next_evidence: >-
       Not started. The next agent claims think-swtr, opens the next free AgentSession,
       and owns only the Massaccesi case package, its tests, and the session record.
-      Shared frontier and strategy records wait for BC-111.
+      Shared frontier and strategy records wait for BC-112.
     parallel_group: agenda012-first-wave
-  - id: BC-108
+  - id: BC-109
     purpose: measurement_validation
     owner_focus: correctness
     instances: [68, 69]
@@ -101,7 +101,7 @@ agenda:
       source-derived measurement artifact, and session record. It does not edit H-030
       or shared frontier records.
     parallel_group: agenda012-first-wave
-  - id: BC-109
+  - id: BC-110
     purpose: measurement_validation
     owner_focus: correctness
     instances: [50]
@@ -138,7 +138,7 @@ agenda:
       owns only the n = 50 case package, tests, and session record. Shared BC-089
       records are changed only at finalization.
     parallel_group: agenda012-first-wave
-  - id: BC-110
+  - id: BC-111
     purpose: research
     owner_focus: insight
     instances: [17, 18, 19, 39, 50, 54, 68, 69]
@@ -150,11 +150,11 @@ agenda:
     hypotheses: []
     budget: >-
       45 minutes, insight-iteration and process-review. Cells: 0--15 audit each exit
-      against its predeclared evidence; 15--30 mark BC-111 through BC-113 ready,
+      against its predeclared evidence; 15--30 mark BC-112 through BC-114 ready,
       blocked, or stopped without widening them; 30--45 update the agenda, beads, and
       next-session handoff and run the documentation pass.
     entry: >-
-      BC-107, BC-108 and BC-109 are complete with retained artifacts and typed outcomes.
+      BC-108, BC-109 and BC-110 are complete with retained artifacts and typed outcomes.
       The checkpoint reads those artifacts; it does not rerun the experiments or resolve
       evidentiary disagreement by prose.
     exit: >-
@@ -162,12 +162,12 @@ agenda:
       negative results, and names the exact next AgentSession entry point. No new target,
       mathematical promotion, or unplanned experiment is allowed inside the checkpoint.
     bead: think-1dm8
-    depends_on: [BC-107, BC-108, BC-109]
+    depends_on: [BC-108, BC-109, BC-110]
     workflows: [insight-iteration, process-review, documentation-pass]
     next_evidence: >-
       Blocked on the three first-wave exits. It is the coordinator's shared-record cell,
       so first-wave agents do not edit its agenda disposition concurrently.
-  - id: BC-111
+  - id: BC-112
     purpose: research
     owner_focus: correctness
     instances: [12, 17, 18, 19]
@@ -182,9 +182,9 @@ agenda:
       result-contract reconciliation; generic certificate schema; inclusive-endpoint
       generator repair; exact-promotion and mutations; records validation and handoff.
     entry: >-
-      BC-107 agrees independently and BC-110 promotes this block. The then-current
+      BC-108 agrees independently and BC-111 promotes this block. The then-current
       evidence/result contract controls adoption. Float LP output is a candidate only;
-      exact replay is the proof. A disagreement in BC-107 routes here only if the
+      exact replay is the proof. A disagreement in BC-108 routes here only if the
       checkpoint scopes a repair, not an adoption.
     exit: >-
       Either an assurance-backed adoption or explicit refusal of 4.5058, correctly
@@ -192,12 +192,12 @@ agenda:
       path and repaired candidate generator, or a typed E1 refusal if no second consumer
       justifies promotion. No n = 20 improvement is claimed from this value.
     bead: think-5q0v
-    depends_on: [BC-107, BC-110]
+    depends_on: [BC-108, BC-111]
     workflows: [factual-review, pipeline-improvement, research-loop]
     next_evidence: >-
       Blocked on independent agreement and the checkpoint. If promoted, it owns shared
-      proof-strategy and frontier records; BC-107 does not.
-  - id: BC-112
+      proof-strategy and frontier records; BC-108 does not.
+  - id: BC-113
     purpose: research
     owner_focus: insight
     instances: [68]
@@ -213,7 +213,7 @@ agenda:
       bounded proposer; independently validate; compare only after the blind is lifted;
       record and finalize.
     entry: >-
-      BC-108 emits surgery-grade geometry and BC-110 promotes the block. The n = 68
+      BC-109 emits surgery-grade geometry and BC-111 promotes the block. The n = 68
       released gain is about twelve times n = 69's and is the first discriminator.
       H-030's hidden-child protocol and equal-work discipline apply unchanged.
     exit: >-
@@ -221,12 +221,12 @@ agenda:
       work, hidden-child comparison, independent validity, and all misses retained. A
       failed calibration stops unseen-record work; it does not buy a larger search.
     bead: think-gbkd
-    depends_on: [BC-108, BC-110]
+    depends_on: [BC-109, BC-111]
     workflows: [research-loop, insight-iteration]
     next_evidence: >-
       Blocked on a surgery-grade witness and the checkpoint. n = 69 remains held out
       until n = 68 establishes a measurable response.
-  - id: BC-113
+  - id: BC-114
     purpose: research
     owner_focus: correctness
     instances: [39, 54]
@@ -241,7 +241,7 @@ agenda:
       criterion and control; build the missing representation or interval step; verify;
       fire the case-matched negative control; compare to n = 50; record and finalize.
     entry: >-
-      BC-109 completes and BC-110 selects one branch from the measured seam. n = 19 and
+      BC-110 completes and BC-111 selects one branch from the measured seam. n = 19 and
       n = 53 stay refusal controls, n = 55 stays a later adversarial case, and n = 51
       stays in the separate rare-basin lane. The block may not silently become a sweep.
     exit: >-
@@ -249,13 +249,21 @@ agenda:
       a concrete next instrument seam. The unselected case remains queued rather than
       being reported as attempted.
     bead: think-dao9
-    depends_on: [BC-109, BC-110]
+    depends_on: [BC-110, BC-111]
     workflows: [research-loop, factual-review]
     next_evidence: >-
       Blocked on the n = 50 result and checkpoint. The coordinator records the branch
       choice before an agent claims this bead.
 ---
 # Agenda-012 — Weighted Proof, Precision Bridge, and Cross-Scale Controls
+
+> **Merge renumbering (2026-09-01):** this agenda was drafted in parallel with the
+> epistemics codification and originally minted `BC-107`–`BC-113`; `BC-107` had landed
+> on `main` first as agenda-011’s codification cell, so at merge the seven cells here
+> renumbered to `BC-108`–`BC-114` per the id convention (newer branch renumbers,
+> recorded as an annotation).
+> The owning beads and every cross-reference in X-011 and the synopsis were swept in the
+> same change.
 
 ## Workflow entry point
 
@@ -266,7 +274,7 @@ Run project Python only through `uv run --frozen ...` from `packing/` or with
 `uv run --directory packing`.
 
 Each first-wave agent owns the paths named in its `next_evidence` and sends
-shared-record changes to the BC-110 coordinator.
+shared-record changes to the BC-111 coordinator.
 The three blocks are intentionally disjoint and may run in parallel.
 The checkpoint is the only first-wave writer to this agenda after launch.
 
@@ -285,10 +293,10 @@ notes, and a handoff that another agent can execute without reconstructing conte
 
 ## Launch order
 
-1. Run BC-107, BC-108 and BC-109 concurrently when three agents are available.
-2. Run BC-110 only after all three have typed exits.
+1. Run BC-108, BC-109 and BC-110 concurrently when three agents are available.
+2. Run BC-111 only after all three have typed exits.
 3. Promote at most one successor per first-wave lane.
-   BC-111, BC-112 and BC-113 are already dependency-linked in tbd and require no new
+   BC-112, BC-113 and BC-114 are already dependency-linked in tbd and require no new
    planning bead.
 4. Do not open another `n = 5` task.
    Existing BC-010/H-023 gets one final bounded block with an `n = 10` transfer or is

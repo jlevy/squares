@@ -75,6 +75,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-058](agent-sessions/session-058-block7-m8-sizing.md) | completed | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-07t7 | Session-059 opens on `BC-102` under `think-0z9b`: the tau* diagnostic at n = 12, the checkpoint's other authorized filler. |
 | [session-059](agent-sessions/session-059-block8-tau-star-pilot.md) | completed | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-0z9b | Finalization: close the run's records, refresh PR #66 per OR-9 on `BC-102` under `think-0z9b`, and write the handoff. |
 | [session-060](agent-sessions/session-060-verification-review.md) | completed | contemporaneous | `factual-review` (correctness) | `factual-review` (correctness) | 3 | think-ngf0 | The owner's whole-PR review of the assembled case; BC-106 under think-ngf0 is the cell of record, and the typed follow-ons wait on their own beads. |
+| [session-061](agent-sessions/session-061-epistemics-codification.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-n8vl | The owner's whole-PR review of the codification; BC-107 under think-n8vl is the cell of record, and the two deferred register candidates wait on the controls that would earn their rungs. |
 
 ### Workflow summary
 
@@ -88,7 +89,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 10 | 4 | 49 | 6 |
 | `efficiency-loop` | 8 | 0 | 22 | 0 |
 | `research-loop` | 8 | 4 | 30 | 7 |
-| `pipeline-improvement` | 18 | 0 | 78 | 0 |
+| `pipeline-improvement` | 19 | 0 | 80 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas
@@ -275,6 +276,7 @@ Status: **completed**. The owner's direction after the agenda-010 run closed: st
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-106 | measurement_validation | 13, 17, 18, 46 | complete | 0 | think-ngf0 | Discharged 2026-08-31 by session-060. All six determinations are final: Theorem 8's audit verified (E-bentz46-theorem8-audit); the Lemma 10 settlement verified and source-settled against the published page image (journal transposition; E-bentz13-figure2-audit, defect-found on E-bentz-2010-proof); exp-046 resolved with H-044 undisposed by its registered amendment; the m = 8 statement standing as exact arithmetic; the tau* diagnostic typed uncertified-final. The green17 determination became an upgrade: the independent interval certifier proved 17/4 was the cell plan's ceiling, both methods now certify 4426213/1000000, and verified_lower_bound moved at n = 17 and n = 18 on two independent formal methods; the exact ceiling 753/250 + sqrt 2 is bracketed and typed on think-iye2. The assembled case is docs/project/reviews/review-2026-08-31-overnight-run-verification-determinations.md; the owner reviews the PR as a whole. |
+| BC-107 | measurement_validation | 17, 18, 46 | complete | 0 | think-n8vl | Discharged by session-061. epistemics.md at the repository root owns the four axes; frontier/results.yaml declares T-001 through T-013 and devtools/check_results.py re-derives every declared V and C from the cited atoms in the records tier, refusing inflation and unexplained understatement, with a firing negative control and the generated RESULTS.md view; conventions.md section 4 points result-level semantics at epistemics.md and the identity row points T-NNN at the register; the README's What Has Been Established separates first-established-here from audited-from-the-literature by T-id; SYNOPSIS defers its results section to the register and its night handoff names the session; softschema is at 0.8.0 across the toolchain. Deferred rather than force-fitted: the Trump local-isolation entry (derives C3, no adversarial control test to name) and the translation-escape survey observation, both typed on think-n8vl. |
 
 ### [agenda-012](agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md) — Weighted proof, precision bridge, and cross-scale controls
 
@@ -282,13 +284,13 @@ Status: **active**. Execute X-011's three disjoint first-wave decisions before b
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-107 | measurement_validation | 17, 18, 19 | ready | 0 | think-swtr | Not started. The next agent claims think-swtr, opens the next free AgentSession, and owns only the Massaccesi case package, its tests, and the session record. Shared frontier and strategy records wait for BC-111. |
-| BC-108 | measurement_validation | 68, 69 | ready | 0 | think-26b1 | Not started. The next agent claims think-26b1 and owns the regularizer, its tests, source-derived measurement artifact, and session record. It does not edit H-030 or shared frontier records. |
-| BC-109 | measurement_validation | 50 | ready | 1 | think-uz6f | Not started. The next agent claims think-uz6f, coordinates with think-d0j1, and owns only the n = 50 case package, tests, and session record. Shared BC-089 records are changed only at finalization. |
-| BC-110 | research | 17, 18, 19, 39, 50, 54, 68, 69 | blocked | 1 | think-1dm8 | Blocked on the three first-wave exits. It is the coordinator's shared-record cell, so first-wave agents do not edit its agenda disposition concurrently. |
-| BC-111 | research | 12, 17, 18, 19 | blocked | 1 | think-5q0v | Blocked on independent agreement and the checkpoint. If promoted, it owns shared proof-strategy and frontier records; BC-107 does not. |
-| BC-112 | research | 68 | blocked | 1 | think-gbkd | Blocked on a surgery-grade witness and the checkpoint. n = 69 remains held out until n = 68 establishes a measurable response. |
-| BC-113 | research | 39, 54 | blocked | 2 | think-dao9 | Blocked on the n = 50 result and checkpoint. The coordinator records the branch choice before an agent claims this bead. |
+| BC-108 | measurement_validation | 17, 18, 19 | ready | 0 | think-swtr | Not started. The next agent claims think-swtr, opens the next free AgentSession, and owns only the Massaccesi case package, its tests, and the session record. Shared frontier and strategy records wait for BC-112. |
+| BC-109 | measurement_validation | 68, 69 | ready | 0 | think-26b1 | Not started. The next agent claims think-26b1 and owns the regularizer, its tests, source-derived measurement artifact, and session record. It does not edit H-030 or shared frontier records. |
+| BC-110 | measurement_validation | 50 | ready | 1 | think-uz6f | Not started. The next agent claims think-uz6f, coordinates with think-d0j1, and owns only the n = 50 case package, tests, and session record. Shared BC-089 records are changed only at finalization. |
+| BC-111 | research | 17, 18, 19, 39, 50, 54, 68, 69 | blocked | 1 | think-1dm8 | Blocked on the three first-wave exits. It is the coordinator's shared-record cell, so first-wave agents do not edit its agenda disposition concurrently. |
+| BC-112 | research | 12, 17, 18, 19 | blocked | 1 | think-5q0v | Blocked on independent agreement and the checkpoint. If promoted, it owns shared proof-strategy and frontier records; BC-108 does not. |
+| BC-113 | research | 68 | blocked | 1 | think-gbkd | Blocked on a surgery-grade witness and the checkpoint. n = 69 remains held out until n = 68 establishes a measurable response. |
+| BC-114 | research | 39, 54 | blocked | 2 | think-dao9 | Blocked on the n = 50 result and checkpoint. The coordinator records the branch choice before an agent claims this bead. |
 
 ## Series
 

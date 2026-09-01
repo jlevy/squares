@@ -379,5 +379,5 @@ not run, questions opened.
 Validate at the boundary, every time an artifact is written or merged:
 
 ```bash
-uvx softschema==0.6.2 validate experiments/exp-007-*.md
+uvx softschema==0.8.0 validate experiments/exp-007-*.md
 ```
