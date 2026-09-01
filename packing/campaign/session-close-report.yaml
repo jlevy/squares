@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 70
+count: 71
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 26
+  sessions_measured: 27
   sessions_unmeasured: 44
   attributed:
     rollups: 42
@@ -35,9 +35,9 @@ totals:
     one_off_code: 1738
     wall_hours: 76.48
 codex_receipts:
-  attributed: 10
+  attributed: 11
   unattributed: 0
-  measured: 10
+  measured: 11
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -994,3 +994,23 @@ sessions:
     active_union_hours: 0.12
     wall_hours: 0.42
     snapshot_incomplete: false
+- id: session-071
+  title: "Agenda-014 publication and handoff"
+  status: completed
+  primary_bead: think-0sif
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-071.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-071.yaml
+    model_responses: 68
+    agent_hours: 0.25
+    active_union_hours: 0.25
+    wall_hours: 0.25
+    snapshot_incomplete: true

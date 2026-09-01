@@ -328,16 +328,19 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-The exact nine-hour agenda-013 run is active, with its latest lane record in
-[session-070](packing/campaign/agent-sessions/session-070-bc118-n50-source-semantics.md).
-The three selected second-wave continuations are terminal: `n = 17` retained 33/181
-agreeing hash-chained rows, `n = 68` stopped before target access on the missing
-production adapter, and `n = 50` retained an executed reason-3 E1 refusal with zero
-cells. None changes a hypothesis or frontier claim.
+The latest publication record is
+[session-071](packing/campaign/agent-sessions/session-071-agenda014-publication-and-handoff.md).
+It records a documentation-only handoff and makes no scientific claim.
 
-The exact cold-start entry point is `BC-119` under `think-47xw`. Run its mandatory W5
-comparison, reconcile all three terminal packets at one immutable revision, and make
-`BC-120` ready without running or repairing an experiment.
+The exact next cell is `BC-123` under `think-p2m6` in
+[agenda-014](packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md).
+Its entry condition requires agenda-013 `BC-121` to be terminal and that closeout’s
+final PR revision to be green.
+The coordinator removes the tbd hold only after both conditions hold; this publication
+slice does not satisfy them.
+Its frozen input boundary is exp-052 with checkpoint
+`db5c156959b6de4e6f2c9be283454d01dd5f3a436e6489f5e6bb60c38559fdb8` and progress
+`08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af`.
 
 ### Handoff Record
 
@@ -2558,12 +2561,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-069.yaml` | session-064, session-069 | 190 | 0.8 h | 0.8 h | 1.57 h | no |
 | `codex-task-tree-session-070-review.yaml` | session-064, session-070 | 23 | 0.12 h | 0.12 h | 0.42 h | no |
 | `codex-task-tree-session-070.yaml` | session-064, session-070 | 114 | 0.52 h | 0.52 h | 2.67 h | no |
+| `codex-task-tree-session-071.yaml` | session-071 | 68 | 0.25 h | 0.25 h | 0.25 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 26 |
+| measured | 27 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **70** |
+| **total** | **71** |
 
 <!-- END GENERATED: session-close-report -->
 

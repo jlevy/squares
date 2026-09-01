@@ -85,6 +85,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-068](agent-sessions/session-068-bc116-n17-resumability.md) | completed | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 8 | think-9zgs | Coordinator review may apply only the process transition. A continuation must be a newly preregistered resume round from ordinal 33; prefix agreement does not decide H-052 or alter the frontier. |
 | [session-069](agent-sessions/session-069-bc117-n68-refusal-localization.md) | stopped | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (insight) | 6 | think-t7v1 | Repair and independently test the production CLI adapter in a new W7 round, then preregister a new experiment before any parent or target access; do not repair or rerun exp-051. |
 | [session-070](agent-sessions/session-070-bc118-n50-source-semantics.md) | completed | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 7 | think-8pjf | Under BC-119 and think-47xw, freeze the terminal exp-050/session-070 pair into its revision-keyed review packet. Do not rerun, repair, reconstruct n = 50, enter W6 or change H-054 readiness. |
+| [session-071](agent-sessions/session-071-agenda014-publication-and-handoff.md) | completed | contemporaneous | `documentation-pass` (process) | `documentation-pass` (process) | 1 | think-0sif | Take BC-123 under think-p2m6 only after agenda-013 is terminal and its final PR revision is green; until then keep the tbd hold and do not enter the lane. |
 
 ### Workflow summary
 
@@ -99,7 +100,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `efficiency-loop` | 9 | 0 | 26 | 0 |
 | `research-loop` | 8 | 4 | 41 | 7 |
 | `pipeline-improvement` | 19 | 0 | 85 | 0 |
-| `documentation-pass` | 0 | 0 | 1 | 0 |
+| `documentation-pass` | 1 | 0 | 2 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas
