@@ -5,7 +5,7 @@ title: Measure terminal flatness and connectivity before defining basin identity
 kind: bug
 status: in_progress
 priority: 0
-version: 40
+version: 41
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - focus-correctness
@@ -30,10 +30,10 @@ child_order_hints:
   - is-01m0vyhtzd0j8gnfwm5k040ff1
   - is-01m0y16d21crjnn9tqa0120way
 created_at: 2026-08-23T20:11:30.757Z
-updated_at: 2026-09-01T05:35:28.139Z
+updated_at: 2026-09-01T05:39:51.079Z
 ---
 D-034, blocking the census. Exact evidence: the n=3 side-2 sliding family is a connected positive-dimensional terminal set that one contact certificate and many geometric keys split into quantum-dependent rows. The n=5 golden adds an unresolved pair: equal side, short form, contact certificate, angle signature and contact count but different geometry. Those facts do not prove the n=5 rows are connected or establish a five-dimensional family; raw constraint counting is not a rank certificate. Acceptance: archive both n=5 poses and their active cells; compute the fixed-cell optimal-face rank/nullity from the active LP matrix and objective; compute the full pose/angle active-constraint Jacobian; continue every null direction with independent validity checks; test whether the two endpoints are path-connected across cell/contact strata; report certified dimension or unresolved bounds; and feed the evidence to think-0yo9 rather than choosing identity from side/contact hashes.
 
 ## Notes
 
-X-011/agenda-001 terminal rule (2026-09-01): run one final 90-minute block in three 30-minute cells, with one n=5 discriminator and its matched n=10 transfer frozen before measurement. If transfer passes, mark BC-010 complete and close this bead so BC-011 may clear. If transfer is unavailable or fails, mark BC-010 and BC-011 through BC-014 stopped in the same agenda change, leave H-023 unresolved but parked, and place this bead on paused hold instead of closing it; closing on the refusal path would incorrectly advertise downstream work as ready.
+X-011/agenda-001 terminal rule (2026-09-01): run one final 90-minute block in three 30-minute cells, with one n=5 discriminator and its matched n=10 transfer frozen before measurement. If transfer passes, mark BC-010 complete, but close this bead only if its own acceptance is genuinely satisfied; otherwise the coordinator must retain a tbd gate before BC-011 becomes ready. If transfer is unavailable or fails, mark BC-010 and BC-011 through BC-014 stopped in the same agenda change, leave H-023 unresolved but parked, and put this bead on paused hold. Add stop notes to mapped downstream beads without changing statuses they carry for unrelated work. Never close this bead merely to clear an edge.
