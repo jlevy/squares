@@ -3,9 +3,9 @@ type: is
 id: is-01m1dbf99vwenmnpgd33nm3g8s
 title: "BC-109: verify the n=68/69 parent-child precision bridge"
 kind: task
-status: in_progress
+status: closed
 priority: 0
-version: 13
+version: 14
 spec_path: packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md
 labels:
   - packing
@@ -21,7 +21,11 @@ dependencies:
     target: is-01m1dv45w95er1vtxjvh9mhsee
 parent_id: is-01m1dbej7kqs8r1hwfmx5w3v3n
 created_at: 2026-09-01T02:06:19.960Z
-updated_at: 2026-09-01T09:04:32.516Z
+updated_at: 2026-09-01T09:53:19.723Z
+closed_at: 2026-09-01T09:53:19.723Z
+close_reason: BC-109 stopped before measurement at the interval-enclosure and complete-runner admission guards. Exp-047 retains a tested numerical prototype, H-053 remains instrument_ready false, and no parent/child target access or result exists. Route the lane to BC-117 at BC-111.
+resolution: null
+duplicate_of: null
 ---
 Run agenda-012 BC-109 as one 150-minute correctness block. Resolve SVG transforms and normalize to unit-square-length coordinates. For each stable-id model, require rigid corners inside source-coordinate enclosures and retain published-to-rigid displacement, pose ambiguity, side, signed wall-clearance, and signed pair-separation intervals plus the source-side relation. Before child qualification, hash the first parent-only surgery-grade arm under the fixed order; retain the corresponding child result without changing that receipt.
 
