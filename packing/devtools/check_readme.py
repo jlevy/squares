@@ -62,7 +62,10 @@ WORK_UNITS = (
 )
 
 # Tooling that is not part of what the directory *is*: caches, lockfiles, build config.
-NOT_CONTENT = {"uv.lock", "pyproject.toml", "__pycache__", ".venv"}
+# LICENSE is legal boilerplate rather than orientation content: the layout tree
+# may draw it once the README grows its license summary, but its absence from a
+# reader's map of the directory is not a documentation defect.
+NOT_CONTENT = {"uv.lock", "pyproject.toml", "__pycache__", ".venv", "LICENSE"}
 CACHE_PARTS = {"__pycache__", ".pytest_cache", ".ruff_cache", ".venv"}
 IGNORED_FILES = {".DS_Store"}
 
