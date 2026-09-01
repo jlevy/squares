@@ -77,7 +77,7 @@ session:
       push tier; commit and push one checkpoint; and update PR #71 with cumulative cost,
       exact revision, lane states and BC-122 as the sole next entry.
     bead: think-5xlb
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: The first-wave research wall ended with all lane writers stopped and independently reviewed.
     budget_minutes: 20
@@ -93,10 +93,68 @@ session:
     fallback: >-
       Preserve the last green remote revision and exact failing receipt, leave BC-122
       unclaimed, and do not dispatch a second-wave lane.
-    outcome: null
-    evidence: []
+    outcome: >-
+      Reconciled and rendered all three terminal lanes, repaired one invalid combined
+      engine-commit/source-hash field exposed by the provenance gate, passed the complete
+      push tier with 245 reachable tests, synchronized tbd, pushed checkpoint 5572cbf2,
+      and updated PR #71 with cumulative branch cost and the three typed outcomes.
+    evidence:
+    - packing/campaign/agenda-map.md
+    - packing/campaign/ledger.md
+    - packing/campaign/session-close-report.yaml
+    - packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md
+    stop_reason: The green first-wave checkpoint was published before the protected deadline.
+    next_action: Enter BC-122 under think-iv3e at 2026-09-01T11:31:55Z.
+  - workflow: efficiency-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    objective: >-
+      Measure first-wave cell throughput, retained output yield, rework, agent and tool
+      time, local validation and hosted-CI latency; identify the dominant reproducible
+      bottleneck; and retain exactly one guarded implementation or `no-change` under
+      BC-122's repayment rule before BC-111 opens.
+    commitment: BC-122
+    bead: think-iv3e
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      All first-wave lanes, receipts and the published checkpoint are terminal, so the
+      mandatory measured W5 entry guard passes.
+    budget_minutes: 15
+    started_at: '2026-09-01T11:31:55Z'
+    deadline_at: '2026-09-01T11:46:55Z'
+    expected_output: >-
+      One durable W5 review with a common per-lane baseline, dominant measured
+      bottleneck, admission-guard table, limitations and exact no-change or bounded-
+      optimization decision.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      Stop without a change if there is no profiled hot path, completed frozen-input
+      pre-change replay, equivalence guard, rollback seam, positive remaining-wall
+      repayment or guaranteed active-lane disjointness.
+    fallback: >-
+      Retain `no-change`, carry the bottleneck into the appropriate W7 successor, close
+      BC-122 and leave all scientific fixtures and evidence gates unchanged.
+    outcome: >-
+      Retained a common eight-cell baseline across 9,102.895 agent-active seconds, 16
+      declared outputs, 10 substantive outputs and 13 recorded lane defect groups. The
+      n = 17 target path consumed 3,920 seconds and 95.473% of first-wave command time.
+      Three independent audits agreed on `no-change`: the candidate direct-accumulator
+      repair lacks a profile, completed pre-change output, target-scale equivalence,
+      rollback seam, positive repayment and second-wave disjointness. Hosted checkpoint
+      5572cbf2 passed in 744 seconds on Linux, 65 seconds on macOS and 3 seconds in the
+      required aggregator.
+    evidence:
+    - docs/project/reviews/review-2026-09-01-agenda013-first-wave-efficiency.md
+    - packing/campaign/resource-usage/codex-task-tree-session-065.yaml
+    - packing/campaign/resource-usage/codex-task-tree-session-066.yaml
+    - packing/campaign/resource-usage/codex-task-tree-session-067.yaml
     stop_reason: null
-    next_action: Render, validate, sync, commit, push and update PR #71 before BC-122.
+    next_action: >-
+      Publish the closed think-iv3e and BC-122 receipt, then enter BC-111 under think-1dm8
+      at 2026-09-01T11:46:55Z.
   budget:
     wall_minutes: 540
     max_cycles: 9

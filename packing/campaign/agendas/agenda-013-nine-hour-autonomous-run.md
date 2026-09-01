@@ -39,7 +39,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [17, 50, 68]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Which measured agent, coordination, validation, CI or tool bottleneck from the
@@ -79,16 +79,18 @@ agenda:
       wide stop rather than bypassing the receipt.
     bead: think-iv3e
     depends_on: []
+    artifacts:
+    - docs/project/reviews/review-2026-09-01-agenda013-first-wave-efficiency.md
     blocked_on: >-
       BC-108, BC-109 and BC-110 in agenda-012 must be terminal with their session and
       timing receipts retained.
     workflows: [efficiency-loop]
     next_evidence: >-
-      Blocked on the three first-wave exits. The coordinator owns the W5 receipt and
-      integration of any admitted shared-tool change; lane owners supply timestamps and
-      artifact counts but do not optimize their own in-flight measurement. The receipt
-      names the affected paths and either the pre-dispatch landing gate, the proof of
-      active-lane disjointness, or `no-change`.
+      Completed by the dated first-wave efficiency review. The measured n = 17 target
+      path consumed 3,920 seconds and 95.473% of first-wave command time, but no change
+      passed the profile, completed baseline, fixed-target equivalence, rollback,
+      repayment and disjointness guards. Decision: `no-change`. Route checkpoint and
+      resume support as a newly registered BC-116 W7 prerequisite; do not alter exp-049.
   - id: BC-116
     purpose: research
     owner_focus: correctness

@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **7** ready, **3** tentative, **25** blocked, **7** stopped, **80** complete.
+- **8** ready, **3** tentative, **23** blocked, **7** stopped, **81** complete.
 
-- **11 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-111`, `BC-115`, `BC-122`, `BC-116`, `BC-117`, `BC-118`, `BC-119`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **9 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-116`, `BC-117`, `BC-118`, `BC-119`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -30,6 +30,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-010 | `BC-104` | 2 | insight | research | Does the stage-1 pipeline -- enumerator, glued rows, class-angle sweep -- reproduce the proved controls… | `think-sfzh` |
 | agenda-010 | `BC-097` | 3 | process | tool_validation | Is the queue readable -- the gap ranking on a durable surface, and the 25 stale in_progress beads reconciled? | `think-6z95` |
 | agenda-010 | `BC-105` | 3 | correctness | research | Can a restricted-class optimality statement at n = 11 -- no packing of at most K chunks with at most two tilt… | `think-dbtx` |
+| agenda-012 | `BC-111` | 1 | insight | research | Which first-wave lane earned its successor block, and which assumption should be stopped or repaired before… | `think-1dm8` |
 
 ## Blocked, and on what
 
@@ -50,12 +51,10 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-002 | `BC-022` | 4 | `BC-021` | no | — |
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
-| agenda-012 | `BC-111` | 1 | `BC-108`, `BC-109`, `BC-110` | no | Agenda-013 BC-122 must retain its W5 receipt, mark its row complete and close think-iv3e. The live tbd edge is the… |
 | agenda-012 | `BC-112` | 1 | `BC-108`, `BC-111` | no | — |
 | agenda-012 | `BC-113` | 1 | `BC-109`, `BC-111` | no | — |
 | agenda-012 | `BC-114` | 2 | `BC-110`, `BC-111` | no | — |
 | agenda-012 | `BC-115` | 2 | `BC-112` | no | BC-120 must clear and BC-121 must apply BC-112's adoption recommendation, and a second fixed-certificate consumer must… |
-| agenda-013 | `BC-122` | 0 | — | no | BC-108, BC-109 and BC-110 in agenda-012 must be terminal with their session and timing receipts retained. |
 | agenda-013 | `BC-119` | 0 | — | no | Exactly one declared second-wave continuation in each of the three lanes must be terminal and its sibling explicitly… |
 | agenda-013 | `BC-120` | 0 | `BC-119` | no | — |
 | agenda-013 | `BC-121` | 0 | `BC-120` | no | — |
@@ -93,8 +92,8 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-009 | active | 2 | 1 |  | 1 | 4 | 8 |
 | agenda-010 | active | 2 | 2 |  |  | 9 | 13 |
 | agenda-011 | completed |  |  |  |  | 2 | 2 |
-| agenda-012 | active |  |  | 5 | 2 | 1 | 8 |
-| agenda-013 | active |  |  | 7 |  |  | 7 |
+| agenda-012 | active | 1 |  | 4 | 2 | 1 | 8 |
+| agenda-013 | active |  |  | 6 |  | 1 | 7 |
 
 ## What the states mean
 

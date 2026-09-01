@@ -217,7 +217,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [17, 18, 19, 39, 50, 54, 68, 69]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       Which first-wave lane earned its successor block, and which assumption should be
@@ -248,20 +248,14 @@ agenda:
       `paused`. No new target, mathematical promotion, or unplanned experiment is allowed
       inside the checkpoint.
     bead: think-1dm8
-    depends_on: [BC-108, BC-109, BC-110]
-    blocked_on: >-
-      Agenda-013 BC-122 must retain its W5 receipt, mark its row complete and close
-      think-iv3e. The live tbd edge is the machine dependency; this cross-agenda manual
-      gate makes the same requirement visible in the agenda map.
+    depends_on: [BC-108]
     workflows: [insight-iteration, process-review, documentation-pass]
     next_evidence: >-
-      Blocked on the three first-wave exits and BC-122's W5 receipt. Each first-wave
-      owner hands off a terminal receipt without editing this agenda or tbd. The
-      coordinator owns every row and bead transition, verifies that all three task beads
-      closed without conflating task and scientific outcomes, regenerates the map after
-      all three rows are terminal, and then claims this checkpoint. Successor and
-      fallback beads begin on blocked hold; the coordinator applies agenda-013's exact
-      routing matrix and every explicit hold transition before closing think-1dm8.
+      Ready after BC-122 retained its measured `no-change` receipt. Audit the three
+      first-wave exits without rerunning them, route BC-116, BC-117 and BC-118 under the
+      frozen outcome matrix, preserve the n = 17 midmeasurement timebox as neither a
+      discrepancy nor a premeasurement guard, and apply every sibling hold transition
+      before closing think-1dm8.
   - id: BC-112
     purpose: research
     owner_focus: correctness
