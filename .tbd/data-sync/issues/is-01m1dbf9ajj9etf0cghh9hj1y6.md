@@ -5,7 +5,7 @@ title: "BC-111: agenda-012 bounded integration checkpoint"
 kind: task
 status: open
 priority: 1
-version: 16
+version: 17
 spec_path: packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md
 labels:
   - packing
@@ -27,10 +27,10 @@ dependencies:
     target: is-01m1dtgh88w1tdnx6rmz4t008v
 parent_id: is-01m1dbej7kqs8r1hwfmx5w3v3n
 created_at: 2026-09-01T02:06:19.985Z
-updated_at: 2026-09-01T07:01:48.138Z
+updated_at: 2026-09-01T08:04:33.131Z
 ---
 After BC-108, BC-109, and BC-110 terminalize and BC-122 retains its W5 efficiency receipt, spend at most 30 minutes comparing retained evidence. Under agenda-013, route exactly one continuation per lane: BC-112 or BC-116, BC-113 or BC-117, and BC-114 or BC-118. Set selected rows ready with hold none and siblings stopped with hold paused, preserve every disagreement, update both agendas and generated views, sync tbd, and name the exact AgentSession. No experiment or frontier promotion belongs here.
 
 ## Notes
 
-The coordinator owns every agenda and tbd transition; lane agents return terminal AgentSession receipts and do not edit shared records. Claim only after BC-108/109/110 are terminal, their task beads are closed, and BC-122 is complete, think-iv3e is closed, and the coordinator has marked BC-111 ready. Apply agenda-013's routing matrix exactly, including the parent-only n=68 arm rule and every stopped-plus-paused sibling transition.
+The coordinator owns every agenda and tbd transition. Lane agents return terminal-ready work receipts without editing shared records; after each lane task has stopped writing, the coordinator generates its disjoint Codex resource receipt, records the attributed branch and exact repository-relative path, terminalizes the AgentSession, and then closes the lane bead for its actual task outcome. Claim BC-111 only after BC-108/109/110 are terminal, their task beads are closed, BC-122 is complete, think-iv3e is closed, and the coordinator has marked BC-111 ready. Apply the agenda-013 routing matrix exactly, including the parent-only n=68 arm rule and every stopped-plus-paused sibling transition.
