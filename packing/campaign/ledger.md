@@ -320,7 +320,7 @@ Status: **completed**. Execute agenda-012 end to end during one owner-authorized
 
 ### [agenda-014](agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md) — Mechanism-first continuation and provenance closure
 
-Status: **active**. Run a second exact nine-hour wall from agenda-013's reviewed exits without replaying or repairing its evidence. The first 150-minute wave gives three agents disjoint n = 17 profile/merge, n = 68 production-adapter, and n = 50 producer-provenance blocks while the coordinator runs a bounded n = 54 source/formula audit. A mandatory 20-minute W5 slice and 25-minute W3 checkpoint route at most one continuation per lane into a common 180-minute second wave. Thirty minutes then measure efficiency and freeze review packets, 75 minutes independently review the outcomes, and 60 minutes synthesize, validate, synchronize tbd, and publish the PR checkpoint. The wall is exactly 540 minutes. Every block uses 15--30 minute Artifact / Result / Guard / Next cells; no failed gate silently pivots to another number.
+Status: **active**. Run a second exact nine-hour wall from agenda-013's reviewed exits without replaying or repairing its evidence. The first 150-minute wave gives three agents disjoint n = 17 profile/merge, n = 68 production-adapter, and n = 50 producer-provenance blocks while the coordinator runs a bounded n = 54 source/formula audit. A protected 15-minute process closeout freezes the first-wave receipts before a 10-minute W5 analysis and 25-minute W3 routing checkpoint. At most one continuation per lane then enters a common 180-minute second wave. A protected 20-minute closeout freezes that evidence before a 20-minute retrospective W5 and packet checkpoint, 60 minutes of independent review, and 60 minutes of synthesis, validation, tbd synchronization, and PR publication. The wall is exactly 540 minutes. Research and instrument blocks use 15--30 minute Artifact / Result / Guard / Next cells; the shorter coordinator exceptions are named in the wall and cannot open before their frozen-input gates.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
@@ -328,12 +328,12 @@ Status: **active**. Run a second exact nine-hour wall from agenda-013's reviewed
 | BC-124 | tool_validation | 68, 69 | ready | 0 | think-3i67 | Ready from exp-051's reviewed executable-runner refusal. The missing seam includes production dependencies and retention behavior, not just argument parsing. |
 | BC-125 | measurement_validation | 19, 50 | ready | 0 | think-17q7 | Ready from Packet C's bounded caveat. The smallest repair is a new runner-bound, stage-sentinel control round with exp-050 read-only. |
 | BC-126 | research | 19, 54 | ready | 1 | think-tabx | Ready from the bounded multilingual and exact-number audit. The historical survey supplies the 19-to-54 mechanism link and side formula, but not a complete primary pose derivation. |
-| BC-127 | tool_validation | 17, 50, 54, 68 | blocked | 0 | think-ne3d | Blocked until the four first-wave receipts make agent behavior and tool cost measurable on one common interval boundary. |
+| BC-127 | tool_validation | 17, 50, 54, 68 | blocked | 0 | think-ne3d | Blocked until the four first-wave lane closeouts make terminalization, agent behavior and tool cost measurable on one common interval boundary. |
 | BC-128 | measurement_validation | 17, 50, 54, 68 | blocked | 0 | think-8ih6 | Blocked on the first-wave W5 receipt and exact terminal outcomes. |
-| BC-129 | research | 17, 18, 19 | blocked | 0 | think-pzcl | Blocked until the performance result and routing checkpoint make a three-hour completion attempt honest. |
+| BC-129 | research | 17, 18, 19 | blocked | 0 | think-pzcl | Blocked until the performance result and routing checkpoint make a three-hour larger-prefix or possible-completion attempt honest. |
 | BC-130 | research | 68 | blocked | 0 | think-rtuk | Blocked on a complete production adapter and explicit route; no network or target access is authorized by agenda publication alone. |
 | BC-131 | research | 19, 54 | blocked | 1 | think-e6rj | Blocked until the source audit and routing checkpoint show whether any construction rung is admissible. |
-| BC-132 | tool_validation | 17, 50, 54, 68 | blocked | 0 | think-bhp0 | Blocked until the second-wave lane records are terminal and disjoint. |
+| BC-132 | tool_validation | 17, 50, 54, 68 | blocked | 0 | think-bhp0 | Blocked until the second-wave lane closeouts are disjoint and terminal-ready. |
 | BC-133 | measurement_validation | 17, 50, 54, 68 | blocked | 0 | think-1wrs | Blocked on immutable first- and second-wave packets and stopped source writers. |
 | BC-134 | research | 17, 19, 39, 50, 54, 68, 69 | blocked | 0 | think-m4r7 | Blocked on independent review of every first- and second-wave packet. |
 

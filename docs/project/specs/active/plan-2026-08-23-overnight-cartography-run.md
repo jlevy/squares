@@ -346,10 +346,10 @@ For the next supervised exact-research goal, use
 and retain `BC-123` under `think-p2m6` from
 [agenda-014](../../../../packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md)
 as the exact next cell.
-Its entry condition requires agenda-013 `BC-121` to be terminal and its final PR
-revision to be green; the coordinator removes the tbd hold only after both conditions
-hold, and this publication slice does not satisfy them.
-Its frozen input boundary is exp-052 with checkpoint
+That entry gate is satisfied by terminal revision `fa33ea79`, and agenda-014 is active.
+Begin the first wave under the agenda’s serial-allocation and disjoint-writer rules:
+BC-123--BC-125 are the three agent lanes, and the coordinator may run BC-126
+concurrently. Its frozen input boundary is exp-052 with checkpoint
 `db5c156959b6de4e6f2c9be283454d01dd5f3a436e6489f5e6bb60c38559fdb8` and progress
 `08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af`; session-071 neither
 changes nor resumes those files and claims no scientific result.

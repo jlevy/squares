@@ -331,13 +331,13 @@ The latest publication record is
 [session-071](packing/campaign/agent-sessions/session-071-agenda014-publication-and-handoff.md).
 It records a documentation-only handoff and makes no scientific claim.
 
-The exact next cell is `BC-123` under `think-p2m6` in
+The cold-start anchor is `BC-123` under `think-p2m6` in
 [agenda-014](packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md).
-Its entry condition requires agenda-013 `BC-121` to be terminal and that closeout’s
-final PR revision to be green.
-The coordinator removes the tbd hold only after both conditions hold; this publication
-slice does not satisfy them.
-Its frozen input boundary is exp-052 with checkpoint
+The gate preserved by session-071 is satisfied by terminal revision `fa33ea79`, and
+agenda-014 is active.
+Begin its first wave under the agenda’s serial-allocation and disjoint-writer rules:
+BC-123--BC-125 are the three agent lanes, and the coordinator may run BC-126
+concurrently. Its frozen input boundary is exp-052 with checkpoint
 `db5c156959b6de4e6f2c9be283454d01dd5f3a436e6489f5e6bb60c38559fdb8` and progress
 `08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af`.
 
@@ -517,7 +517,7 @@ the ledger’s round count — fixed as `D-409` and `D-410` on this branch, with
 `epistemics.md` added to the snapshot’s root documents before the same gap could ship
 again. Research follow-ons are unchanged on their beads.
 
-**As of 2026-08-31, late evening — next agents start here.**
+**As of 2026-08-31, late evening — historical agenda-012/013 launch record.**
 [X-011](packing/campaign/explorations/X-011-controls-are-not-targets.md) reconciles the
 new `n = 17` weighted certificates, the `n = 68/69` precision gap, the medium-case
 construction ladder, and the opportunity cost of a thirteenth open-ended `n = 5` round.
@@ -527,7 +527,7 @@ minute check-in cells: `BC-108` runs an independent-implementation agreement che
 the proposed `4.5058` certificate while naming shared assumptions; `BC-109` builds the
 hash-verified parent-child serialization bridge at `n = 68/69`; and `BC-110` decides
 whether `n = 50` can become the rational exact-promotion control.
-Run them in parallel, then take `BC-111`’s bounded checkpoint.
+They were scheduled to run in parallel, followed by `BC-111`’s bounded checkpoint.
 The dependency-linked successors are already filed.
 [Agenda-013](packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md) is the
 owner-authorized nine-hour execution graph on one pull request: 150 minutes for those
@@ -542,8 +542,8 @@ transfer under dedicated bead `think-iivb`. Its first cell freezes both fixtures
 observable, threshold, and refusal conditions before measurement.
 Only a passing transfer may remove `BC-011`’s blocked hold; a refusal stops the
 dedicated `BC-011` through `BC-014` chain and parks H-023. Legacy owner `think-1s0h` is
-not the queue gate. Take the exact entry command and owned paths from agenda-012, not
-from this summary.
+not the queue gate. Those launch instructions are retained as chronology; use the
+[Current Handoff](#current-handoff) for the live entry point.
 
 **The parallel recognition slice remains `BC-089` on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):

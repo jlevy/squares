@@ -55,11 +55,11 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
 | agenda-012 | `BC-115` | 2 | `BC-112` | no | BC-120 must clear and BC-121 must apply BC-112's adoption recommendation, and a second fixed-certificate consumer must… |
-| agenda-014 | `BC-127` | 0 | — | no | BC-123--BC-126 must each be terminal as `complete` or `stopped`; ordinary dependencies cannot encode that… |
+| agenda-014 | `BC-127` | 0 | — | no | BC-123--BC-126 must each stop lane work and commands at the common boundary and return a terminal-ready closeout;… |
 | agenda-014 | `BC-128` | 0 | `BC-127` | no | — |
 | agenda-014 | `BC-129` | 0 | `BC-123`, `BC-128` | no | — |
 | agenda-014 | `BC-130` | 0 | `BC-124`, `BC-128` | no | — |
-| agenda-014 | `BC-132` | 0 | — | no | BC-129--BC-131 must each be terminal as `complete` or `stopped` after BC-128 routes the second wave; ordinary… |
+| agenda-014 | `BC-132` | 0 | — | no | BC-129--BC-131 must each stop lane work and commands at the common boundary after BC-128 routes the second wave and… |
 | agenda-014 | `BC-133` | 0 | `BC-132` | no | — |
 | agenda-014 | `BC-134` | 0 | `BC-133` | no | — |
 | agenda-014 | `BC-131` | 1 | `BC-126`, `BC-128` | no | — |

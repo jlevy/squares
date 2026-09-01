@@ -14,13 +14,15 @@ agenda:
     Run a second exact nine-hour wall from agenda-013's reviewed exits without replaying
     or repairing its evidence. The first 150-minute wave gives three agents disjoint
     n = 17 profile/merge, n = 68 production-adapter, and n = 50 producer-provenance
-    blocks while the coordinator runs a bounded n = 54 source/formula audit. A mandatory
-    20-minute W5 slice and 25-minute W3 checkpoint route at most one continuation per
-    lane into a common 180-minute second wave. Thirty minutes then measure efficiency
-    and freeze review packets, 75 minutes independently review the outcomes, and 60
-    minutes synthesize, validate, synchronize tbd, and publish the PR checkpoint. The
-    wall is exactly 540 minutes. Every block uses 15--30 minute Artifact / Result / Guard
-    / Next cells; no failed gate silently pivots to another number.
+    blocks while the coordinator runs a bounded n = 54 source/formula audit. A protected
+    15-minute process closeout freezes the first-wave receipts before a 10-minute W5
+    analysis and 25-minute W3 routing checkpoint. At most one continuation per lane then
+    enters a common 180-minute second wave. A protected 20-minute closeout freezes that
+    evidence before a 20-minute retrospective W5 and packet checkpoint, 60 minutes of
+    independent review, and 60 minutes of synthesis, validation, tbd synchronization,
+    and PR publication. The wall is exactly 540 minutes. Research and instrument blocks
+    use 15--30 minute Artifact / Result / Guard / Next cells; the shorter coordinator
+    exceptions are named in the wall and cannot open before their frozen-input gates.
   items:
   - id: BC-123
     purpose: tool_validation
@@ -38,8 +40,8 @@ agenda:
       progress 08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af
       and bind H-057 plus fresh next-free session, experiment and output paths; 15--35 W7
       build the external per-direction profiler; 35--55 W7 build disjoint worker
-      fragments; 55--75 W7 build the deterministic single-writer merger and corruption
-      suite; 75--90 W2 independently readmit; 90--115 and 115--135 W6 run the fixed
+      fragments; 55--70 W7 build the deterministic single-writer merger and corruption
+      suite; 70--85 W2 independently readmit; 85--110 and 110--135 W6 run the fixed
       three-direction AB/BA/AB profile; 135--150 W3 retain the performance verdict.
     entry: >-
       Agenda-013 BC-121 is complete. Exp-052's checkpoint and progress are byte-frozen,
@@ -82,12 +84,14 @@ agenda:
     hypotheses: [H-058]
     budget: >-
       150 minutes: 0--15 W3 freeze the subordinate one-parent claim and literal command;
-      15--40 W7 implement the bounded opener and strict structural scanner; 40--65 W7
-      implement exact transform and serialization-model adapters; 65--90 W7 add bounded
-      proof-node and correspondence plumbing; 90--115 W7 execute the literal command
-      only through injected synthetic streams under normal and optimized Python; 115--135
-      W2 independently readmit; 135--150 W3 retain the exact stop or ready result. No
-      network or target opens in this first wave.
+      15--35 W7 implement the executable CLI and fresh-output skeleton and immediately
+      invoke the literal command through a target-blind injected stream; 35--60 W7 add
+      the bounded opener, strict scanner and exact transform; 60--85 W7 add serialization
+      models, proof-node and correspondence plumbing; 85--110 W7 execute the integrated
+      literal command and named mutations under normal and optimized Python; 110--135 W2
+      independently readmit; 135--150 W3 retain the exact stop or ready result. No
+      network or target opens in this first wave, and a command that cannot reach the
+      adapter boundary at minute 35 stops the lane before more implementation.
     entry: >-
       Exp-047, exp-051, session-069, run.py, verify.py and their focused test match the
       review-packet hashes, and the exp-051 result is absent. Bind existing H-058, then
@@ -121,15 +125,18 @@ agenda:
       precedes every observation and evaluation seam in the frozen n = 50 runner?
     hypotheses: [H-059]
     budget: >-
-      150 minutes: 0--15 W3 bind existing H-059, preregister its fresh prospective
+      At most 115 minutes of lane work inside the 150-minute first-wave wall: 0--15 W3
+      bind existing H-059, preregister its fresh prospective
       experiment and bind exp-050 result
       ab00e50debe0bc60279ce3472ed0c09eb062e8271a481a38c6ac65036aff4a02 plus runner
       52baeb1b6ad52aa504498ba21aeb6b3d361aaaec2461c76904a357d8d95cf29d;
-      15--40 W7 build a separate injected sentinel harness; 40--65 W7 fire runner-hash,
-      reordered-stage, changed-result and overwrite mutations under normal and optimized
-      Python; 65--90 W2 independently admit the frozen instrument; 90--115 W6 execute the
-      new control once into a fresh result; 115--135 W2 verify the result without
-      importing the producer; 135--150 W3 retain the result and exact limitation.
+      15--35 W7 build a separate injected sentinel harness; 35--55 W7 bind the runner,
+      fire the named mutations and compare normal with optimized Python; 55--70 W2
+      independently admit the frozen instrument; 70--85 W6 execute the new control once
+      into a fresh result; 85--100 W2 verify it without importing the producer; 100--115
+      W3 retain the result and exact limitation. Minutes 115--150 authorize no additional
+      BC-125 work; after terminal closeout the agent may take only a coordinator-assigned
+      fallback card defined below.
     entry: >-
       Exp-050 remains immutable, unresolved and review-pending. The successor binds the
       scientific revision, immutable result and producer-runner hash before import, and
@@ -196,27 +203,36 @@ agenda:
       lifecycle bottleneck can repay a change inside the remaining wall?
     hypotheses: []
     budget: >-
-      One twenty-minute W5 cell extracts common cell, substantive-output, rework,
-      command, model-stream and wait baselines; compares literal-command failures,
-      per-unit timing, review yield and CI; and retains exactly one guarded change or
-      `no-change` under the profile, fixed-input equivalence, rollback, repayment and
-      disjointness test.
+      Twenty-five minutes: 0--15 W4 stop every first-wave writer and command, terminalize
+      the four lane records and sessions, collect complete output inventories and
+      resource receipts, and freeze one evidence revision; 15--25 W5 extract common
+      cell, substantive-output, rework, command, model-stream and wait baselines, compare
+      literal-command failures, per-unit timing, review yield and CI, and retain exactly
+      one guarded change or `no-change` under the profile, fixed-input equivalence,
+      rollback, repayment and disjointness test. The 10-minute W5 analysis is a named
+      coordinator exception to the lane-cell minimum and begins only from complete
+      emitted rollups.
     entry: >-
-      BC-123--BC-126 are terminal with complete AgentSessions, output inventories,
-      timestamps and resource receipts. No active lane writer shares the proposed change
-      surface.
+      At the 02:30 hard boundary, BC-123--BC-126 have stopped all lane work and commands
+      and returned terminal-ready Artifact / Result / Guard / Next closeouts. No active
+      lane writer shares the process-closeout or proposed-change surface. If complete
+      sessions, receipts and the frozen revision do not exist by 02:45, the W5 analysis
+      and BC-128 do not open and no time is borrowed from the second wave.
     exit: >-
-      A durable W5 receipt and one explicit repayment decision. A change that lacks any
-      required guard is routed to a later W7 block and not implemented during this wall.
+      A frozen first-wave evidence revision with every lane and session terminal as
+      `complete` or `stopped`, complete receipts, no live writer, a durable W5 receipt
+      and one explicit repayment decision. A change that lacks any required guard is
+      routed to a later W7 block and not implemented during this wall.
     bead: think-ne3d
     depends_on: []
     blocked_on: >-
-      BC-123--BC-126 must each be terminal as `complete` or `stopped`; ordinary
-      dependencies cannot encode that complete-or-stopped gate.
-    workflows: [efficiency-loop]
+      BC-123--BC-126 must each stop lane work and commands at the common boundary and
+      return a terminal-ready closeout; ordinary dependencies cannot encode that
+      complete-or-stopped process gate.
+    workflows: [process-review, efficiency-loop]
     next_evidence: >-
-      Blocked until the four first-wave receipts make agent behavior and tool cost
-      measurable on one common interval boundary.
+      Blocked until the four first-wave lane closeouts make terminalization, agent
+      behavior and tool cost measurable on one common interval boundary.
   - id: BC-128
     purpose: measurement_validation
     owner_focus: insight
@@ -230,7 +246,9 @@ agenda:
       Twenty-five-minute W3 checkpoint: independently inspect all four exits and the W5
       decision, close unearned branches, freeze one continuation contract per lane,
       create complete lane sessions and experiment preregistrations serially, reconcile
-      tbd and generated views, validate, push and update the PR before dispatch.
+      tbd and generated views, validate, push and update the PR before dispatch. If the
+      exact launch revision is not pushed with its local gate green by 03:20, stop
+      BC-129--BC-131 unstarted and do not borrow from their wall.
     entry: >-
       BC-127 is terminal. A passing profile, adapter or source gate earns only its named
       successor; a stop cannot be reinterpreted as permission to pivot to another target.
@@ -251,7 +269,8 @@ agenda:
     priority: 0
     question: >-
       If the parent-bound parallel profile passes, can one 180-minute continuation
-      preserve or complete the remaining n = 17 comparison from ordinal 33?
+      retain a larger validated n = 17 prefix or, if the measured rate permits, complete
+      the remaining comparison from ordinal 33?
     hypotheses: [H-052]
     budget: >-
       180 minutes: 0--15 W3 freeze post-profile hashes and the parent checkpoint; 15--30
@@ -268,13 +287,15 @@ agenda:
       One immutable result, first exact disagreement, or validated resumable child
       prefix. Only all 181 exact pairs plus every frozen precondition and mutation can
       support H-052; agreement alone still requires the separate adoption/assurance
-      gate before any n = 17--19 lower-bound transition.
+      gate before any n = 17--19 lower-bound transition. The terminal closeout supplies
+      a draft review packet with exact hashes, declared absences, safe commands, one
+      named mutation and the unchanged claim boundary.
     bead: think-pzcl
     depends_on: [BC-123, BC-128]
     workflows: [insight-iteration, research-loop, factual-review]
     next_evidence: >-
       Blocked until the performance result and routing checkpoint make a three-hour
-      completion attempt honest.
+      larger-prefix or possible-completion attempt honest.
     parallel_group: agenda014-second-wave-n17
   - id: BC-130
     purpose: research
@@ -303,7 +324,9 @@ agenda:
     exit: >-
       A verified compatible localized parent polygon or the first sound refusal, with no
       raw source retained. It neither decides full H-053 nor opens H-051 surgery. n = 69
-      remains a later harder control.
+      remains a later harder control. The terminal closeout supplies a draft review
+      packet with exact hashes, declared absences, safe commands, one named mutation and
+      the unchanged claim boundary.
     bead: think-rtuk
     depends_on: [BC-124, BC-128]
     workflows: [insight-iteration, research-loop, factual-review]
@@ -337,7 +360,9 @@ agenda:
       One frozen, independently reviewed construction-instrument contract or an exact
       typed source/prerequisite refusal. No target geometry, forced recognition, sibling
       pivot, hypothesis disposition or frontier transition occurs without its declared
-      source and instrument gates.
+      source and instrument gates. The terminal closeout supplies a draft review packet
+      with exact hashes, declared absences, safe commands, one named mutation and the
+      unchanged claim boundary.
     bead: think-e6rj
     depends_on: [BC-126, BC-128]
     workflows: [research-pass, insight-iteration, pipeline-improvement, factual-review]
@@ -356,25 +381,35 @@ agenda:
       immutable cross-lane review packets?
     hypotheses: []
     budget: >-
-      Thirty minutes: 0--15 run the second mandatory W5 comparison against BC-127 and
-      admit only a guarded change that can repay before closeout; 15--30 reconcile every
-      first- and second-wave experiment and sibling and freeze revision-keyed packets
-      naming exact hashes, safe replay, mutation, boundary and proposed review-only
-      transition.
+      Forty minutes: 0--20 W4 stop every second-wave writer and command, terminalize the
+      routed lanes and sessions, collect complete receipts and freeze one scientific
+      evidence revision from their draft packets; 20--30 W5 compare the second wave with
+      BC-127 and record a retrospective `no-change` or future W7 entry, with no in-wall
+      implementation after evidence freeze; 30--40 W4 reconcile and freeze three
+      revision-keyed packets, preassign independent reviewers, and name exact hashes,
+      declared absences, safe replay commands, one mutation, claim boundary and proposed
+      review-only transition. Both 10-minute coordinator cells are named exceptions to
+      the lane-cell minimum.
     entry: >-
-      BC-129--BC-131 are terminal and all lane writers are stopped. Every result,
-      checkpoint, refusal and absence is retained at one scientific evidence revision.
+      At the 06:20 hard boundary, BC-129--BC-131 have stopped all lane work and commands
+      and returned terminal-ready closeouts and draft packets. If complete sessions,
+      receipts and the frozen evidence revision do not exist by 06:40, the W5 and packet
+      cells do not open and BC-133 remains blocked behind a typed incomplete gate.
     exit: >-
-      One W5 receipt and one immutable packet per lane, with tbd, agenda, ledger and PR
-      state reconciled. No experiment is repaired or promoted.
+      Every routed lane and session is terminal as `complete` or `stopped`, no writer is
+      live, and one W5 receipt plus three immutable assigned packets cover at most six new
+      experiment decisions, with tbd, agenda, ledger and PR state reconciled. No
+      experiment is repaired or promoted; excess or incomplete decisions remain
+      review-pending behind a typed continuation.
     bead: think-bhp0
     depends_on: []
     blocked_on: >-
-      BC-129--BC-131 must each be terminal as `complete` or `stopped` after BC-128 routes
-      the second wave; ordinary dependencies cannot encode that complete-or-stopped gate.
-    workflows: [efficiency-loop, process-review, documentation-pass]
+      BC-129--BC-131 must each stop lane work and commands at the common boundary after
+      BC-128 routes the second wave and return a terminal-ready closeout; ordinary
+      dependencies cannot encode that complete-or-stopped process gate.
+    workflows: [process-review, efficiency-loop, documentation-pass]
     next_evidence: >-
-      Blocked until the second-wave lane records are terminal and disjoint.
+      Blocked until the second-wave lane closeouts are disjoint and terminal-ready.
   - id: BC-133
     purpose: measurement_validation
     owner_focus: correctness
@@ -386,19 +421,22 @@ agenda:
       decision, mutation and scientific boundary at the frozen revision?
     hypotheses: []
     budget: >-
-      Seventy-five minutes: 0--15 assign three read-only reviewers and freeze packets;
-      15--45 replay only packet-declared review-safe loaders, self-tests and mutations;
-      45--60 reconcile experiment-level pass, bounded-caveat, discrepancy or
-      cannot-reproduce findings; 60--75 retain the review, validate, push and make BC-134
+      Sixty minutes: 0--30 three preassigned read-only reviewers replay only
+      packet-declared review-safe loaders, self-tests and mutations in parallel; 30--45
+      reconcile experiment-level pass, bounded-caveat, discrepancy, cannot-reproduce or
+      typed-incomplete findings; 45--60 retain the review, validate, push and make BC-134
       ready. Scientific target commands, network commands and retained-result writes are
-      excluded.
+      excluded. More than three packets or six new experiment decisions is a typed
+      incomplete outcome rather than authority to extend the wall.
     entry: >-
-      BC-132 supplies immutable packets. Each reviewer receives a lane they did not
-      author and may mutate only operating-system or pytest temporary data.
+      BC-132 supplies three immutable packets, exact commands and hashes, and preassigned
+      reviewers. Each reviewer receives a lane they did not author and may mutate only
+      operating-system or pytest temporary data.
     exit: >-
-      A durable determination for every new first- and second-wave experiment decision.
-      Only an exact pass permits BC-134 to clear a pre-frozen review flag; every other
-      finding remains pending and becomes newly registered repair work.
+      A durable determination for every in-cap first- and second-wave experiment
+      decision. Only an exact pass permits BC-134 to clear a pre-frozen review flag;
+      every other finding remains pending and becomes newly registered repair work, and
+      every excess decision stays review-pending behind the typed continuation.
     bead: think-1wrs
     depends_on: [BC-132]
     workflows: [factual-review, process-review]
@@ -416,19 +454,23 @@ agenda:
     hypotheses: []
     budget: >-
       Sixty-minute finalization: 0--15 apply only BC-133-cleared review transitions and
-      write the synthesis; 15--30 render views, close sessions and resource receipts and
-      run the documentation/records pass; 30--45 run full validation, commit, push,
-      update the PR and sync tbd; 45--60 wait for hosted checks and preserve the exact
-      handoff. The wall does not extend; a pending hosted check at the hard stop is a
-      typed incomplete gate, not a claimed pass.
+      write the synthesis; 15--25 render views, close sessions and resource receipts and
+      run the documentation/records pass; 25--40 run full local validation; 40--45
+      commit and push; 45--60 update the PR, sync tbd, wait for hosted checks and preserve
+      the exact handoff. These shorter coordinator finalization substeps are fixed
+      exceptions to the lane-cell cadence. The wall does not extend; a pending hosted
+      check at the hard stop is a typed incomplete gate, not a claimed pass.
     entry: >-
       BC-133 is complete, every finding has a disposition or registered blocker, and no
       target or source writer is active.
     exit: >-
       A revision-keyed synthesis separating proved, repository-verified, source-backed,
       measured-negative and unresolved claims; terminal sessions and cost receipts;
-      current agenda/ledger/synopsis; green full local and hosted validation; synchronized
-      tbd; and one exact next-agent entry. No merge occurs without the owner.
+      current agenda/ledger/synopsis; green full local validation; synchronized tbd; one
+      exact next-agent entry; and either green hosted validation or a typed incomplete
+      hosted gate naming the pushed revision. BC-134 is complete only if hosted checks
+      are green by 09:00; otherwise it remains stopped with the incomplete hosted gate.
+      No merge occurs without the owner.
     bead: think-m4r7
     depends_on: [BC-133]
     workflows: [insight-iteration, documentation-pass, process-review]
@@ -449,8 +491,18 @@ before dispatch; placeholders do not allocate identifiers.
 The first wave starts BC-123, BC-124 and BC-125 on three sub-agents with disjoint paths.
 The coordinator may run BC-126 concurrently because its source archive and review path
 do not overlap the lane code or records.
-No shared generated view, tbd, Git, PR or repository-wide validation write occurs until
-all four first-wave writers stop.
+At 02:30 every lane command and writer stops.
+BC-127 then owns the only process-closeout surface; no shared generated view, tbd, Git,
+PR or repository-wide validation write occurs before that boundary.
+BC-127 may enter its W5 subphase only after the four lane records, sessions, resource
+receipts and evidence revision are frozen.
+BC-128 may dispatch no second-wave agent until its exact launch revision is pushed and
+locally green.
+
+At 06:20 every second-wave command and writer stops.
+BC-132 then owns the only process-closeout and packet-freeze surface.
+No reviewer starts until BC-132 has frozen the evidence revision, packets, assignments,
+hashes and safe commands.
 
 H-057, H-058 and H-059 begin `instrument_ready: false`. Only the owning first-wave lane
 may set its assigned readiness field to `true`, and only after the lane’s named W2
@@ -464,22 +516,81 @@ changing the decision.
 | Elapsed | Wall | Workflow | Work |
 | --- | ---: | --- | --- |
 | 00:00--02:30 | 150m | W3/W7/W2/conditional W6 | Run BC-123--BC-126 in disjoint lanes |
-| 02:30--02:50 | 20m | W5 | Measure first-wave efficiency in BC-127 |
-| 02:50--03:15 | 25m | W3/W4 | Route and publish BC-128 |
-| 03:15--06:15 | 180m | W3/W7/W6/W2 | Run at most one earned continuation in each BC-129--BC-131 lane |
-| 06:15--06:45 | 30m | W5/W4 | Measure again and freeze BC-132 packets |
-| 06:45--08:00 | 75m | W2 | Independently review every packet in BC-133 |
+| 02:30--02:45 | 15m | W4 | Stop writers, terminalize receipts and freeze BC-127 evidence |
+| 02:45--02:55 | 10m | W5 | Measure first-wave efficiency in BC-127 |
+| 02:55--03:20 | 25m | W3/W4 | Route and publish BC-128 |
+| 03:20--06:20 | 180m | W3/W7/W6/W2 | Run at most one earned continuation in each BC-129--BC-131 lane |
+| 06:20--06:40 | 20m | W4 | Stop writers, terminalize receipts and freeze BC-132 evidence |
+| 06:40--07:00 | 20m | W5/W4 | Measure retrospectively and freeze BC-132 packets |
+| 07:00--08:00 | 60m | W2 | Independently review every packet in BC-133 |
 | 08:00--09:00 | 60m | W3/W4 | Synthesize, validate, publish and hand off in BC-134 |
 
-Every active lane records Artifact, Result, Guard and Next at each 15--30 minute cell.
+Every active research or instrument lane records Artifact, Result, Guard and Next at
+each 15--30 minute cell.
+A long child process may continue across cells only when each boundary observes it and
+preserves a restart or typed no-output state.
+The 10-minute BC-127 W5 analysis, the two 10-minute BC-132 coordinator cells and
+BC-134’s shorter publication substeps are the only cadence exceptions.
 A cell may stop early on its guard; its remaining time does not authorize a substitute
 target.
+
+## Cadence Basis
+
+The agenda-013
+[first-wave W5 review](../../../docs/project/reviews/review-2026-09-01-agenda013-first-wave-efficiency.md)
+and
+[second-wave W5 review](../../../docs/project/reviews/review-2026-09-01-agenda013-second-wave-efficiency.md)
+support 15--30 minute lane cells, but only when a long command remains observable at
+their boundaries. The first n = 17 target process consumed 3,920 seconds and retained no
+output or checkpoint.
+Its successor ran one 4,456-second process through three 25-minute observation cells and
+retained 33 validated rows.
+At n = 68, three 25-minute implementation cells preceded the first literal command,
+which then stopped in argument parsing; its receipt recorded 43.250 command-seconds
+against 1,065.387 model-stream seconds.
+The independent n = 50 closure review needed 425.742 agent-active seconds to find the
+missing producer-runner binding.
+
+Those measurements change allocation, not the scientific criteria:
+
+- BC-123 gives the paired fixed-input profile 50 minutes and keeps its W2 gate before
+  measurement.
+- BC-124 invokes the literal command in its first W7 cell, before the internal proof
+  residue can consume the block.
+- BC-125 caps active lane work at 115 minutes; BC-126 remains four 15-minute
+  source/formula cells.
+- BC-129 promises a larger prefix or possible completion, not completion.
+  At the observed 0.444 rows per minute, the remaining 148 rows project to about 119
+  minutes even after the required 2.8x speedup, nearly the full 120-minute W6
+  allocation.
+- BC-130 allocates no target time to n = 69. It remains a later harder control.
+- BC-133 uses 60 minutes only because BC-132 preassigns three packets and caps the
+  review at six new decisions.
+  Anything larger stays review-pending.
+
+## Target-Blind Fallback Queue
+
+An agent whose lane is terminal before a wave boundary may take one coordinator-assigned
+fallback card at a time, only against a different terminal lane and only on disjoint,
+read-only or temporary paths:
+
+1. **Admission audit, 15--20 minutes.** Check the literal command, fresh-result
+   behavior, producer provenance and checkpoint boundary named by the lane closeout.
+2. **Packet preflight, 15--20 minutes.** Check exact hashes, declared absences, one
+   named mutation, safe replay command and claim boundary before the coordinator freezes
+   the packet.
+
+Each card returns Artifact, Result, Guard and Next to the coordinator.
+A lane author may not audit that lane, and an idle agent receives at most two cards
+before the coordinator re-screens the queue.
+Cards create no hypothesis, experiment, target access, scientific or shared record
+write. If no eligible card remains, the agent stops.
 
 ## Routing Matrix
 
 | First-wave exit | Earned second wave | Otherwise |
 | --- | --- | --- |
-| BC-123 passes exact same-input profile at at least 2.8x | BC-129 parent-bound completion attempt | Stop BC-129 and price the sequential resumable wall |
+| BC-123 passes exact same-input profile at at least 2.8x | BC-129 parent-bound larger-prefix or possible-completion attempt | Stop BC-129 and price the sequential resumable wall |
 | BC-124 passes literal production adapter and independent readmission | BC-130 one-parent localization | Stop BC-130; register the exact adapter defect later |
 | BC-126 finds source evidence sufficient for a new source-cell contract | BC-131 target-blind n = 54 contract | Retain the source refusal; BC-125 is closure-only and does not earn this branch |
 
@@ -491,9 +602,11 @@ independent review.
 
 BC-127 and BC-132 compare agent-active time, command time, wait time, substantive
 outputs, rework, literal-entry failures, per-unit timings, validation and hosted CI.
-They may implement at most one change only when a profile, frozen before/after input,
-equivalence result, rollback seam, positive remaining-wall repayment and active-lane
-disjointness all exist.
+BC-127 may admit at most one predeclared change for the routing checkpoint, and only
+when a profile, frozen before/after input, equivalence result, rollback seam, positive
+remaining-wall repayment and active-lane disjointness all exist.
+BC-132 is retrospective after the scientific evidence freeze and may route only future
+W7 work; it implements nothing inside this wall.
 Otherwise the durable decision is `no-change` and the bottleneck becomes a future W7
 entry.
 
@@ -504,7 +617,9 @@ resource receipt, regenerates agenda, ledger, session-close and synopsis views, 
 full validation tier, synchronizes tbd, updates the PR with exact revision and cost, and
 waits for hosted checks.
 A failed check reopens BC-134 before repair.
-The agenda does not merge the pull request.
+A hosted check still pending at 09:00 leaves BC-134 stopped with a typed incomplete
+gate, and the handoff names the pushed revision and unresolved gate; it never counts as
+a pass. The agenda does not merge the pull request.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
