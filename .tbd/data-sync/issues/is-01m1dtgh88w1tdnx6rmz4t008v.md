@@ -5,7 +5,7 @@ title: "BC-119: reconcile the three second-wave outcomes"
 kind: task
 status: open
 priority: 0
-version: 3
+version: 5
 spec_path: packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md
 labels:
   - packing
@@ -18,6 +18,6 @@ parent_id: is-01m1dtfx94hb8ndgdxmmxp3z4m
 hold: blocked
 hold_until: null
 created_at: 2026-09-01T06:29:09.511Z
-updated_at: 2026-09-01T06:29:45.808Z
+updated_at: 2026-09-01T06:51:26.097Z
 ---
-Thirty-minute overnight checkpoint. Start only after exactly one declared continuation in each lane is terminal and its sibling is stopped or still held. Reconcile rows, beads, experiments, negative results, and claims; freeze one review packet per lane; make BC-120 ready; and do not run experiments or invent replacement work.
+Thirty-minute overnight checkpoint. Start only after exactly one declared continuation in each lane is terminal and every unselected sibling is stopped with hold paused. Measure second-wave throughput against BC-122, reconcile rows, beads, experiments, negative results, and claims, and freeze one review packet per lane including every proposed frontier or hypothesis transition. Then mark BC-119 complete and close this bead before making BC-120 ready and removing its hold. Do not run experiments or invent replacement work.
