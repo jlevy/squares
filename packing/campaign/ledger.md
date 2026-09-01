@@ -78,7 +78,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-061](agent-sessions/session-061-epistemics-codification.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-n8vl | The owner's whole-PR review of the codification; BC-107 under think-n8vl is the cell of record, and the two deferred register candidates wait on the controls that would earn their rungs. |
 | [session-062](agent-sessions/session-062-agenda013-preflight-and-publication.md) | stopped | contemporaneous | `process-review` (correctness) | `efficiency-loop` (efficiency) | 2 | think-r683 | Open the next AgentSession on the review-finding list, finish and validate the repairs on PR #71, then take BC-108 on think-swtr and dispatch BC-109/BC-110 only after the reviewed launch contract is green. |
 | [session-063](agent-sessions/session-063-agenda013-review-repairs.md) | completed | contemporaneous | `efficiency-loop` (correctness) | `documentation-pass` (process) | 2 | think-r683 | Publish the reviewed PR checkpoint, then open the nine-hour coordinator session and claim BC-108 on think-swtr after hosted checks are green. |
-| [session-064](agent-sessions/session-064-agenda013-nine-hour-coordinator.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `process-review` (process) | 8 | think-5xlb | Complete BC-119's packet checkpoint, then run three cross-lane independent reviews under BC-120 without changing the source artifacts they inspect. |
+| [session-064](agent-sessions/session-064-agenda013-nine-hour-coordinator.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (process) | 10 | think-5xlb | Complete BC-119's packet checkpoint, then run three cross-lane independent reviews under BC-120 without changing the source artifacts they inspect. |
 | [session-065](agent-sessions/session-065-bc108-n17-certificate.md) | completed | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 4 | think-swtr | Apply coordinator review to exp-049. Any replay belongs to BC-116 under a new declared timebox and the same frozen revision; do not infer an H-052 or frontier disposition from the missing result. |
 | [session-066](agent-sessions/session-066-bc109-n68-n69-precision.md) | stopped | contemporaneous | `insight-iteration` (insight) | `pipeline-improvement` (correctness) | 2 | think-26b1 | Keep W6 closed and wait for first-wave terminalization, BC-122 and BC-111. Only the coordinator may route this lane to BC-117; do not repair the verifier or allocate a new round directly from this terminal session. |
 | [session-067](agent-sessions/session-067-bc110-n50-exact-control.md) | stopped | contemporaneous | `insight-iteration` (insight) | `pipeline-improvement` (correctness) | 2 | think-uz6f | Enter BC-122 under think-iv3e. After that checkpoint, follow only the coordinator's retained route for the n = 50 E1 refusal; do not reopen either stopped first-wave lane directly. |
@@ -93,8 +93,8 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 1 | 0 | 12 | 0 |
-| `factual-review` | 3 | 0 | 30 | 2 |
-| `insight-iteration` | 9 | 1 | 40 | 2 |
+| `factual-review` | 3 | 0 | 31 | 2 |
+| `insight-iteration` | 9 | 1 | 41 | 2 |
 | `process-review` | 11 | 4 | 54 | 6 |
 | `efficiency-loop` | 9 | 0 | 26 | 0 |
 | `research-loop` | 8 | 4 | 41 | 7 |
@@ -314,8 +314,27 @@ Status: **active**. Execute agenda-012 end to end during one owner-authorized ni
 | BC-117 | tool_validation | 68, 69 | stopped | 1 | think-t7v1 | Stopped in session-069 and exp-051 before target access. The exact proof, verifier and generic injected-runner controls pass, but the literal preregistered `--record` command exits 2 because the CLI has no production adapter. H-053 remains unresolved and review-pending. Any continuation must repair and independently test the adapter in a new W7 round before a new experiment; exp-051 is not rerun. |
 | BC-118 | tool_validation | 19, 50 | complete | 1 | think-8pjf | Completed in session-070 and exp-050 with one immutable executed E1 refusal: ordered reason 3, `attribution-unbound`, zero cells. The n = 19 exact control and mutation passed, while independent replay found that the result does not bind the producer-runner hash and therefore cannot durably prove refusal ordering under a later runner mutation. H-054 stays unresolved, unready and review-pending; no n = 50 reconstruction or n = 39/54 substitution ran. |
 | BC-119 | research | 17, 39, 50, 54, 68 | complete | 0 | think-47xw | Completed after packet commit 90ced909. The mandatory W5 review retained `no-change`; one packet per lane names every exp-047--exp-052 decision, exact replay, mutation, claim boundary and permitted transition against evidence revision 529b6729. Think-47xw is closed, generated views and tbd are reconciled, and no experiment or scientific artifact changed. |
-| BC-120 | measurement_validation | 17, 39, 50, 54, 68 | ready | 0 | think-722v | Ready after BC-119 closed at packet commit 90ced909. Three cross-lane reviewers independently inspect evidence revision 529b6729 through the immutable packet set; the coordinator owns one new review document, this row, the BC-121 transition and the PR checkpoint. Reviewers do not edit the artifacts they inspect. |
-| BC-121 | research | 17, 39, 50, 54, 68 | blocked | 0 | think-0sif | Held `blocked` for the 08:15--09:00 terminal window. Own one overnight synthesis under packing/campaign/explorations/ or docs/project/reviews/, shared generated views, final validation, tbd synchronization and the PR description. |
+| BC-120 | measurement_validation | 17, 39, 50, 54, 68 | complete | 0 | think-722v | Completed with five explicit passes and one bounded caveat. Exp-047, exp-048, exp-049, exp-051 and exp-052 may have only `needs_review` cleared in BC-121; exp-050 remains review-pending because its result does not bind the producer runner. All 21 packet hashes, five declared absences and named guards reconciled without a scientific-source change. |
+| BC-121 | research | 17, 39, 50, 54, 68 | ready | 0 | think-0sif | Ready at the fixed 17:16:55Z boundary after BC-120 retained five passes and one bounded caveat. Own the five authorized review-flag changes, overnight synthesis, agenda-014 publication, generated views, final validation, tbd synchronization and PR checkpoint; leave exp-050 and every scientific state unchanged. |
+
+### [agenda-014](agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md) — Mechanism-first continuation and provenance closure
+
+Status: **active**. Run a second exact nine-hour wall from agenda-013's reviewed exits without replaying or repairing its evidence. The first 150-minute wave gives three agents disjoint n = 17 profile/merge, n = 68 production-adapter, and n = 50 producer-provenance blocks while the coordinator runs a bounded n = 54 source/formula audit. A mandatory 20-minute W5 slice and 25-minute W3 checkpoint route at most one continuation per lane into a common 180-minute second wave. Thirty minutes then measure efficiency and freeze review packets, 75 minutes independently review the outcomes, and 60 minutes synthesize, validate, synchronize tbd, and publish the PR checkpoint. The wall is exactly 540 minutes. Every block uses 15--30 minute Artifact / Result / Guard / Next cells; no failed gate silently pivots to another number.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-123 | tool_validation | 17 | ready | 0 | think-p2m6 | Ready from agenda-013's independently reviewed 33-row prefix. The observed 0.444 rows per minute makes another three-hour completion promise inadmissible without a fixed-input profile and at least 2.8x speedup. Three fixed ordinals are an admission discriminator, not evidence that every remaining direction has the same cost. |
+| BC-124 | tool_validation | 68, 69 | ready | 0 | think-3i67 | Ready from exp-051's reviewed executable-runner refusal. The missing seam includes production dependencies and retention behavior, not just argument parsing. |
+| BC-125 | measurement_validation | 19, 50 | ready | 0 | think-17q7 | Ready from Packet C's bounded caveat. The smallest repair is a new runner-bound, stage-sentinel control round with exp-050 read-only. |
+| BC-126 | research | 19, 54 | ready | 1 | think-tabx | Ready from the bounded multilingual and exact-number audit. The historical survey supplies the 19-to-54 mechanism link and side formula, but not a complete primary pose derivation. |
+| BC-127 | tool_validation | 17, 50, 54, 68 | blocked | 0 | think-ne3d | Blocked until the four first-wave receipts make agent behavior and tool cost measurable on one common interval boundary. |
+| BC-128 | measurement_validation | 17, 50, 54, 68 | blocked | 0 | think-8ih6 | Blocked on the first-wave W5 receipt and exact terminal outcomes. |
+| BC-129 | research | 17, 18, 19 | blocked | 0 | think-pzcl | Blocked until the performance result and routing checkpoint make a three-hour completion attempt honest. |
+| BC-130 | research | 68 | blocked | 0 | think-rtuk | Blocked on a complete production adapter and explicit route; no network or target access is authorized by agenda publication alone. |
+| BC-131 | research | 19, 54 | blocked | 1 | think-e6rj | Blocked until the source audit and routing checkpoint show whether any construction rung is admissible. |
+| BC-132 | tool_validation | 17, 50, 54, 68 | blocked | 0 | think-bhp0 | Blocked until the second-wave lane records are terminal and disjoint. |
+| BC-133 | measurement_validation | 17, 50, 54, 68 | blocked | 0 | think-1wrs | Blocked on immutable first- and second-wave packets and stopped source writers. |
+| BC-134 | research | 17, 19, 39, 50, 54, 68, 69 | blocked | 0 | think-m4r7 | Blocked on independent review of every first- and second-wave packet. |
 
 ## Series
 
@@ -378,22 +397,20 @@ Status: **active**. Execute agenda-012 end to end during one owner-authorized ni
 | H-049 | blocked | search | delta((4,6), 20) > 0: twenty unit squares pack into a 4 by 6 rectangle |  | 0 |  |
 | H-050 | blocked | search | The n = 71 incumbent's split of sixteen oblique squares across two ang |  | 0 |  |
 | H-051 | blocked | search | Starting only from the hash-verified public n = 68 parent, a proposer  |  | 0 |  |
-| H-052 | needs review | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 2 | 139.6m agent + 139.6m wall |
-| H-053 | needs review | search | For each fixed UnitSquare Release 1 parent-child pair at n = 68 and n  |  | 2 | 114m agent + 107.2m wall |
-| H-054 | needs review | search | The retained source facts for the reported n = 50 construction at side |  | 2 | 38m agent + 30.0m wall |
+| H-052 | unresolved | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 2 | 139.6m agent + 139.6m wall |
+| H-053 | blocked | search | For each fixed UnitSquare Release 1 parent-child pair at n = 68 and n  |  | 2 | 114m agent + 107.2m wall |
+| H-054 | unresolved | search | The retained source facts for the reported n = 50 construction at side |  | 2 | 38m agent + 30.0m wall |
 | H-055 | blocked | search | If BC-111 selects n = 54, the fixed retained witness at reported side  |  | 0 |  |
 | H-056 | blocked | search | If BC-111 selects n = 39, the fixed retained witness can be promoted t |  | 0 |  |
+| H-057 | blocked | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 0 |  |
+| H-058 | blocked | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 0 |  |
+| H-059 | blocked | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 0 |  |
 
 ## Needs review — held for a human, not decided
 
 | id | hypotheses | decision | why it was not decided |
 | --- | --- | --- | --- |
-| exp-047 | H-053 | blocked | Typed premeasurement stop `interval-enclosure`: the numerical prototype's selftest and synthetic controls pass, but a float midpoint fit with fixed tolerance and heuristic radii does not prove a nonempty compatible-pose enclosure or outward- rounded wall and pair signs, and the preregistered command lacks a complete post- authorization runner. No parent retrieval, target parse or target fit ran, so H-053 remains unresolved. |
-| exp-048 | H-054 | unresolved | Typed premeasurement stop E1 (source/provenance): the retained witness records numerical-checker precision and rounding settings, while the retained source inventory records only metadata and derived numerical facts. Neither declares the upstream serialization semantics needed to derive a defensible closed cell for every source scalar. This is process retention, not a scientific H-054 verdict; no target reconstruction, target verifier, sample or result file was created. |
-| exp-049 | H-052 | unresolved | The declared 3920-second W6 timebox expired while the independently accumulated target manifest was still running; the single interrupt produced no canonical JSON, complete comparison, or checkpoint, so H-052 remains unmeasured and is neither accepted nor rejected. |
 | exp-050 | H-054 | unresolved | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
-| exp-051 | H-053 | blocked | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
-| exp-052 | H-052 | unresolved | The declared timebox ended before all 181 paired rows and the frozen precondition and mutation checks completed. The preserved 33-row prefix is valid process evidence and every retained pair agrees, but it is not a completed sample under H-052's all-direction criterion. No canonical result exists, so H-052 remains neither accepted nor rejected. |
 
 ## Rounds
 

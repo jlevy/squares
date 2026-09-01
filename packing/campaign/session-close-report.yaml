@@ -11,8 +11,8 @@ count: 70
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 25
-  sessions_unmeasured: 45
+  sessions_measured: 26
+  sessions_unmeasured: 44
   attributed:
     rollups: 42
     turns: 13390
@@ -35,9 +35,9 @@ totals:
     one_off_code: 1738
     wall_hours: 76.48
 codex_receipts:
-  attributed: 9
+  attributed: 10
   unattributed: 0
-  measured: 9
+  measured: 10
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -802,12 +802,71 @@ sessions:
   title: "Agenda-013 nine-hour coordinator"
   status: in_progress
   primary_bead: think-5xlb
-  phases: 8
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
-  codex_receipts: []
+  phases: 10
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-064.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-065.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-066.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-067.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-068.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-069.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-070.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-064.yaml
+    model_responses: 3065
+    agent_hours: 15.85
+    active_union_hours: 7.7
+    wall_hours: 7.7
+    snapshot_incomplete: true
+  - path: packing/campaign/resource-usage/codex-task-tree-session-065.yaml
+    model_responses: 286
+    agent_hours: 1.74
+    active_union_hours: 1.74
+    wall_hours: 1.99
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-066.yaml
+    model_responses: 106
+    agent_hours: 0.64
+    active_union_hours: 0.64
+    wall_hours: 1.11
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-067.yaml
+    model_responses: 28
+    agent_hours: 0.14
+    active_union_hours: 0.14
+    wall_hours: 0.32
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-068.yaml
+    model_responses: 308
+    agent_hours: 1.9
+    active_union_hours: 1.9
+    wall_hours: 2.67
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-069.yaml
+    model_responses: 190
+    agent_hours: 0.8
+    active_union_hours: 0.8
+    wall_hours: 1.57
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-070.yaml
+    model_responses: 114
+    agent_hours: 0.52
+    active_union_hours: 0.52
+    wall_hours: 2.67
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
+    model_responses: 23
+    agent_hours: 0.12
+    active_union_hours: 0.12
+    wall_hours: 0.42
+    snapshot_incomplete: false
 - id: session-065
   title: "BC-108 n = 17 independent certificate agreement"
   status: completed

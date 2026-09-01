@@ -70,7 +70,7 @@ experiment:
     checked_by: frozen E1 source/provenance admission gate and independent closure audit
   verdict:
     decision: unresolved
-    needs_review: true
+    needs_review: false
     primary_criterion: >-
       Accept only if one complete rational 50-pose certificate at L = 53/7 passes exact
       unit-direction, wall, pairwise and independent-verifier checks, maps bijectively

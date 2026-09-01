@@ -281,7 +281,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [17, 39, 50, 54, 68]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Do three independent reviewers reproduce the lane outcomes and accept their claim
@@ -313,17 +313,20 @@ agenda:
       repairs to a separately registered follow-up.
     bead: think-722v
     depends_on: [BC-119]
+    artifacts:
+    - docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md
     workflows: [factual-review, process-review]
     next_evidence: >-
-      Ready after BC-119 closed at packet commit 90ced909. Three cross-lane reviewers
-      independently inspect evidence revision 529b6729 through the immutable packet set;
-      the coordinator owns one new review document, this row, the BC-121 transition and
-      the PR checkpoint. Reviewers do not edit the artifacts they inspect.
+      Completed with five explicit passes and one bounded caveat. Exp-047, exp-048,
+      exp-049, exp-051 and exp-052 may have only `needs_review` cleared in BC-121;
+      exp-050 remains review-pending because its result does not bind the producer
+      runner. All 21 packet hashes, five declared absences and named guards reconciled
+      without a scientific-source change.
   - id: BC-121
     purpose: research
     owner_focus: process
     instances: [17, 39, 50, 54, 68]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       What did the nine-hour run establish, refuse or leave unresolved, and what exact
@@ -361,9 +364,10 @@ agenda:
     depends_on: [BC-120]
     workflows: [insight-iteration, documentation-pass, process-review]
     next_evidence: >-
-      Held `blocked` for the 08:15--09:00 terminal window. Own one overnight synthesis
-      under packing/campaign/explorations/ or docs/project/reviews/, shared generated
-      views, final validation, tbd synchronization and the PR description.
+      Ready at the fixed 17:16:55Z boundary after BC-120 retained five passes and one
+      bounded caveat. Own the five authorized review-flag changes, overnight synthesis,
+      agenda-014 publication, generated views, final validation, tbd synchronization and
+      PR checkpoint; leave exp-050 and every scientific state unchanged.
 ---
 # Agenda-013 — Nine-Hour Autonomous W3/W6 Research Run
 

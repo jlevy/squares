@@ -373,7 +373,7 @@ session:
       one evidence revision; synchronize agenda and tbd state; and make BC-120 the sole
       next entry without changing scientific artifacts.
     bead: think-47xw
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       The mandatory second-wave W5 slice retained `no-change` and routed its observed
@@ -394,13 +394,112 @@ session:
     fallback: >-
       Preserve 529b6729 and the W5 receipt, leave BC-119 in progress and BC-120 blocked,
       and name the exact missing packet field.
+    outcome: >-
+      Frozen packet commit 90ced909 reconciles all six exp-047--exp-052 decisions into
+      three cross-lane review packets against evidence revision 529b6729. Each packet
+      names exact artifact hashes, replay commands, a mutation, the claim boundary and
+      the only permitted needs-review transition. Think-47xw is closed, BC-119 is
+      complete, BC-120 is ready without a hold, tbd is synchronized, the PR cost surface
+      includes all nine declared intervals, and pushed checkpoint e2d53d6c passed the
+      33-of-58 local push tier. No experiment, result, checkpoint or scientific source
+      changed.
+    evidence:
+    - docs/project/reviews/review-2026-09-01-agenda013-second-wave-efficiency.md
+    - docs/project/reviews/review-2026-09-01-agenda013-second-wave-packets.md
+    - packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md
+    - packing/campaign/agenda-map.md
+    - packing/campaign/ledger.md
+    stop_reason: >-
+      The packet set exists at immutable commit 90ced909 with SHA-256
+      c40af931289adde7ff22e8000f5b1fc50996183c34e45090796ce256185636a0,
+      and the reconciled review-gate checkpoint is pushed on PR #71.
+    next_action: >-
+      Assign the n = 17, n = 68 and n = 50 packets to three read-only cross-lane
+      reviewers and retain one determination per frozen experiment decision.
+  - workflow: factual-review
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Have three independent cross-lane reviewers reproduce the retained first- and
+      second-wave outcomes, fire each packet's named mutation or negative control, audit
+      all six claim boundaries and return explicit pass, bounded-caveat, discrepancy or
+      cannot-reproduce determinations without editing source artifacts.
+    bead: think-722v
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      BC-119 and think-47xw are terminal, packet commit 90ced909 and evidence revision
+      529b6729 are immutable, and BC-120's hold is removed.
+    budget_minutes: 90
+    started_at: '2026-09-01T15:46:55Z'
+    deadline_at: '2026-09-01T17:16:55Z'
+    expected_output: >-
+      One durable coordinator review recording six experiment-level determinations,
+      exact replays and mutations, lane claim boundaries, review-clearance permissions
+      and any separately routed repair, with BC-121 ready only after reconciliation.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: >-
+      Stop a reviewer on any repository write, target execution, n = 68 network or child
+      access, n = 50 geometry interpretation, mutation of retained bytes, source repair
+      or attempt to clear a decision without an exact replay and named guard.
+    fallback: >-
+      Retain the exact bounded caveat, discrepancy or cannot-reproduce finding, leave
+      the affected `needs_review` field true and route repairs to a future registered
+      round rather than changing the frozen evidence.
+    outcome: >-
+      Three cross-lane reviewers reproduced all six frozen decisions and their named
+      guards. Exp-047, exp-048, exp-049, exp-051 and exp-052 passed; exp-050 retained a
+      bounded producer-provenance caveat. The coordinator matched all 21 packet hashes,
+      all five declared absences and 50 focused tests without changing scientific bytes.
+    evidence:
+    - docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md
+    - docs/project/reviews/review-2026-09-01-agenda013-second-wave-packets.md
+    stop_reason: >-
+      BC-120's six determinations are retained at the declared 17:16:55Z boundary, with
+      five narrowly authorized review-flag changes and exp-050 explicitly withheld.
+    next_action: >-
+      Enter BC-121, apply only the five authorized review-flag changes, and publish the
+      synthesis and next mechanism-first agenda.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: finalization
+    focus: process
+    objective: >-
+      Apply only BC-120's five cleared review-flag transitions, retain the nine-hour
+      synthesis, publish a dependency-ready mechanism-first successor agenda, reconcile
+      all generated views and tbd state, push the terminal PR revision and acknowledge
+      hosted checks inside the owner-authorized wall.
+    bead: think-0sif
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      BC-120 completed at the fixed 17:16:55Z boundary with five passes and one bounded
+      caveat; think-722v is closed and think-0sif is resumed and claimed.
+    budget_minutes: 45
+    started_at: '2026-09-01T17:16:55Z'
+    deadline_at: '2026-09-01T18:01:55Z'
+    expected_output: >-
+      One reviewed synthesis, agenda-014 with real dependency-linked beads, a current
+      session-071 handoff, terminal coordinator records, clean validation and a pushed
+      PR checkpoint whose hosted checks are acknowledged.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: >-
+      Stop any new scientific execution, any transition beyond the five review flags,
+      any retrospective clock, any unbound successor bead or any final claim before the
+      fixed wall and required checks.
+    fallback: >-
+      Retain the exact incomplete closeout state, reopen think-0sif on a validation
+      failure and name the missing publication or hosted-check condition.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Freeze and validate the three revision-keyed review packets.
+    next_action: Apply the five review-flag clearances and publish agenda-014.
   budget:
     wall_minutes: 540
-    max_cycles: 9
+    max_cycles: 10
     checkpoint_minutes: 20
     slice_minutes: 30
     finalization_minutes: 45
@@ -927,6 +1026,90 @@ session:
     - gh
     - target execution
     - process signals
+  - task: Independently replay and challenge the frozen n = 17 review packet.
+    operator: /root/tooling_leverage
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Reproduced exp-049's priced-exhaustion boundary and exp-052's 33-row resumable
+      prefix, hash chain, optimized-mode agreement and named mutation. Both decisions
+      pass with their narrow claim boundaries unchanged.
+    evidence:
+    - docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md
+    files: []
+    checks:
+    - The normal and optimized receipts were byte-identical at the registered SHA-256.
+    uncertainty: The retained prefix does not decide H-052 or establish a packing bound.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Permit BC-121 to clear only exp-049 and exp-052 review flags.
+    phase: 9
+    budget_minutes: 45
+    started_at: '2026-09-01T16:01:55Z'
+    deadline_at: '2026-09-01T16:46:55Z'
+    expected_output: One pass, caveat, discrepancy or cannot-reproduce finding per experiment.
+    validation_command: >-
+      uv run --frozen pytest -q tests/test_n17_weighted_certificate.py tests/test_n17_resumable_certificate.py
+    kill_condition: Stop if review would execute the target or change retained bytes.
+    fallback: Retain the affected review flag and route a later registered repair.
+    write_scope: null
+    excluded_commands: [tbd, git, gh, target execution]
+  - task: Independently replay and challenge the frozen n = 68 review packet.
+    operator: /root/negative_queue
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Reproduced exp-047's premeasurement precision stop and exp-051's literal exit-2
+      production-adapter refusal, self-tests and wall-sign mutation. Both decisions pass
+      while H-053 remains unresolved and instrument-unready.
+    evidence:
+    - docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md
+    files: []
+    checks:
+    - The focused suite passed 38 tests without target, child or network access.
+    uncertainty: Synthetic residues do not establish a compatible production parent pose.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Permit BC-121 to clear only exp-047 and exp-051 review flags.
+    phase: 9
+    budget_minutes: 45
+    started_at: '2026-09-01T16:01:55Z'
+    deadline_at: '2026-09-01T16:46:55Z'
+    expected_output: One pass, caveat, discrepancy or cannot-reproduce finding per experiment.
+    validation_command: >-
+      uv run --frozen pytest -q tests/test_unitsquare_rigid_fit.py tests/test_n68_refusal.py
+    kill_condition: Stop on target, child or network access or a repository write.
+    fallback: Retain the affected review flag and route a later registered repair.
+    write_scope: null
+    excluded_commands: [tbd, git, gh, network, target execution]
+  - task: Independently replay and challenge the frozen n = 50 review packet.
+    operator: /root/math_frontier
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Passed exp-048's typed E1 premeasurement refusal and retained a bounded caveat on
+      exp-050: its reason-3 refusal reproduces, but the result and verifier do not bind
+      the producer runner. No geometry or target claim was inferred.
+    evidence:
+    - docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md
+    files: []
+    checks:
+    - Six focused tests and the missing-semantics, changed-result and duplicate-key controls passed.
+    uncertainty: Exp-050 cannot prove which runner bytes produced its retained result.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Clear only exp-048 in BC-121 and leave exp-050 review-pending.
+    phase: 9
+    budget_minutes: 45
+    started_at: '2026-09-01T16:01:55Z'
+    deadline_at: '2026-09-01T16:46:55Z'
+    expected_output: One pass, caveat, discrepancy or cannot-reproduce finding per experiment.
+    validation_command: >-
+      uv run --frozen pytest -q tests/test_n50_exact.py tests/test_n50_source_semantics.py
+    kill_condition: Stop if review would run target geometry or alter the immutable result.
+    fallback: Retain the affected review flag and route a later registered repair.
+    write_scope: null
+    excluded_commands: [tbd, git, gh, target execution]
   outputs:
   - packing/campaign/agent-sessions/session-064-agenda013-nine-hour-coordinator.md
   - packing/campaign/agent-sessions/session-065-bc108-n17-certificate.md
@@ -953,6 +1136,8 @@ session:
   - packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
   - docs/project/reviews/review-2026-09-01-agenda013-second-wave-efficiency.md
   - docs/project/reviews/review-2026-09-01-agenda013-second-wave-packets.md
+  - docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md
+  - packing/campaign/resource-usage/codex-task-tree-session-064.yaml
   checks:
   - >-
     PR #71 launch revision d7c94590 passed hosted validate in 12m32s, macOS
@@ -969,6 +1154,15 @@ session:
     The mandatory second-wave W5 comparison retained `no-change` and froze literal-
     command, producer-provenance and checkpoint/profile corrections without changing a
     scientific artifact.
+  resource_rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-064.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-065.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-066.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-067.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-068.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-069.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-070.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
   stop_reason: null
   next_action: >-
     Complete BC-119's packet checkpoint, then run three cross-lane independent reviews

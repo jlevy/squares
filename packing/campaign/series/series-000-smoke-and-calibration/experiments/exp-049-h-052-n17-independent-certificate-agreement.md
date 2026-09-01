@@ -76,7 +76,7 @@ experiment:
       check found no result JSON.
   verdict:
     decision: unresolved
-    needs_review: true
+    needs_review: false
     primary_criterion: >-
       Accept only if both exact paths agree on all 181 canonical direction manifests,
       all 168 atoms, the 29 by 29 grid, total mass 9744/576, global minimum 576/576,

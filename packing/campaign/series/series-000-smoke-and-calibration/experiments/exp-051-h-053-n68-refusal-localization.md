@@ -72,7 +72,7 @@ experiment:
       `--runner-selftest`, with no production dependency-injection or adapter entry.
   verdict:
     decision: blocked
-    needs_review: true
+    needs_review: false
     primary_criterion: >-
       Retain the first reproducible localization among instrument defect, provenance,
       affine transform, serialization, pose compatibility, compatible localized pose or

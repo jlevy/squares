@@ -77,7 +77,7 @@ experiment:
       the canonical result path remained absent.
   verdict:
     decision: unresolved
-    needs_review: true
+    needs_review: false
     primary_criterion: >-
       Accept H-052 only if all 181 paired rows agree exactly and every frozen fixture,
       precondition, mutation, provenance and independence guard passes. A valid prefix

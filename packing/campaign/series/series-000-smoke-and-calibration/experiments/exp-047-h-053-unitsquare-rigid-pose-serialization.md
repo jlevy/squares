@@ -83,7 +83,7 @@ experiment:
       at the W6 gate instead of exposing a complete authorized measurement route.
   verdict:
     decision: blocked
-    needs_review: true
+    needs_review: false
     primary_criterion: >-
       Accept only if both fixed pairs have at least one same-model parent and child with
       nonempty compatible rigid-pose enclosures, verified provenance and transforms, and

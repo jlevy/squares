@@ -87,13 +87,14 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-four blocked
+hypotheses, one open hypothesis, seven open questions, and thirty-eight blocked
 hypotheses.
-Two further hypotheses are unresolved: one because its formal prerequisite is
-missing, and H-044 because its registered calibration-only amendment keeps the
-hypothesis undisposed — its first scored round (exp-046) missed the criterion
-determinately under both denominator readings, the review hold is cleared, and
-disposition waits on a confirmatory successor over a fresh-frozen corpus.
+Four further hypotheses are unresolved. The set includes one claim whose formal
+prerequisite is missing, H-044 whose
+registered calibration-only amendment keeps the hypothesis undisposed — its first scored
+round (exp-046) missed the criterion determinately under both denominator readings, the
+review hold is cleared, and disposition waits on a confirmatory successor over a
+fresh-frozen corpus.
 Its active confidence ladder has completed the exact and event controls up to the first
 nontrivial identity question; the next scientific transition is from specialized `n = 5`
 local geometry to a defensible component relation, not to a larger raw census.
@@ -191,6 +192,8 @@ case or experiment separately.
 | [Review: Agenda 013 First-Wave Efficiency](docs/project/reviews/review-2026-09-01-agenda013-first-wave-efficiency.md) | dated review record | record | retained | — |
 | [Review: Agenda 013 Second-Wave Efficiency](docs/project/reviews/review-2026-09-01-agenda013-second-wave-efficiency.md) | dated review record | record | retained | — |
 | [Review Packets: Agenda 013 Second Wave](docs/project/reviews/review-2026-09-01-agenda013-second-wave-packets.md) | dated review record | record | retained | — |
+| [Independent Review: Agenda 013 Research Lanes](docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md) | dated review record | record | retained | — |
+| [Agenda 013 Overnight Synthesis: Controls, Mechanisms, and the Next Research Queue](docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
@@ -2370,11 +2373,14 @@ round that names the hypothesis, control roles included.
 | [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov’s decomposition | 0 | — |
 | [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent’s 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
 | [H-051](packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md) | blocked | A blinded tier-S n = 68 public-parent surgery pilot matches the released child under the frozen grammar | 0 | — |
-| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | needs review | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 2 | 139.6m agent + 139.6m wall |
-| [H-053](packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md) | needs review | Each fixed UnitSquare `n = 68, 69` parent-child pair admits compatible rigid poses under at least one declared serialization model | 2 | 114m agent + 107.2m wall |
-| [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | needs review | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 2 | 38m agent + 30.0m wall |
+| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | unresolved | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 2 | 139.6m agent + 139.6m wall |
+| [H-053](packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md) | blocked | Each fixed UnitSquare `n = 68, 69` parent-child pair admits compatible rigid poses under at least one declared serialization model | 2 | 114m agent + 107.2m wall |
+| [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | unresolved | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 2 | 38m agent + 30.0m wall |
 | [H-055](packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md) | blocked | If selected, the `n = 54` witness admits complete exact promotion in the reported nested-radical field | 0 | — |
 | [H-056](packing/campaign/hypotheses/H-056-n39-degree-five-interval-certificate.md) | blocked | If selected, the `n = 39` witness admits a complete interval certificate tied to the designated degree-five root | 0 | — |
+| [H-057](packing/campaign/hypotheses/H-057-n17-parent-bound-parallel-speedup.md) | blocked | A parent-bound three-process runner preserves exact output and reaches the fixed useful-speedup threshold on three exp-052 ordinals | 0 | — |
+| [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | blocked | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 0 | — |
+| [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | blocked | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 0 | — |
 
 ### Confirmed
 
@@ -2544,18 +2550,19 @@ in separate tables: their units differ, and the same work can appear in both.
 | --- | --- | ---: | ---: | ---: | ---: | --- |
 | `codex-task-tree-session-062.yaml` | session-062 | 607 | 2.84 h | 1.46 h | 1.46 h | yes |
 | `codex-task-tree-session-063.yaml` | session-063 | 441 | 2.08 h | 0.85 h | 0.85 h | yes |
-| `codex-task-tree-session-065.yaml` | session-065 | 286 | 1.74 h | 1.74 h | 1.99 h | no |
-| `codex-task-tree-session-066.yaml` | session-066 | 106 | 0.64 h | 0.64 h | 1.11 h | no |
-| `codex-task-tree-session-067.yaml` | session-067 | 28 | 0.14 h | 0.14 h | 0.32 h | no |
-| `codex-task-tree-session-068.yaml` | session-068 | 308 | 1.9 h | 1.9 h | 2.67 h | no |
-| `codex-task-tree-session-069.yaml` | session-069 | 190 | 0.8 h | 0.8 h | 1.57 h | no |
-| `codex-task-tree-session-070-review.yaml` | session-070 | 23 | 0.12 h | 0.12 h | 0.42 h | no |
-| `codex-task-tree-session-070.yaml` | session-070 | 114 | 0.52 h | 0.52 h | 2.67 h | no |
+| `codex-task-tree-session-064.yaml` | session-064 | 3,065 | 15.85 h | 7.7 h | 7.7 h | yes |
+| `codex-task-tree-session-065.yaml` | session-064, session-065 | 286 | 1.74 h | 1.74 h | 1.99 h | no |
+| `codex-task-tree-session-066.yaml` | session-064, session-066 | 106 | 0.64 h | 0.64 h | 1.11 h | no |
+| `codex-task-tree-session-067.yaml` | session-064, session-067 | 28 | 0.14 h | 0.14 h | 0.32 h | no |
+| `codex-task-tree-session-068.yaml` | session-064, session-068 | 308 | 1.9 h | 1.9 h | 2.67 h | no |
+| `codex-task-tree-session-069.yaml` | session-064, session-069 | 190 | 0.8 h | 0.8 h | 1.57 h | no |
+| `codex-task-tree-session-070-review.yaml` | session-064, session-070 | 23 | 0.12 h | 0.12 h | 0.42 h | no |
+| `codex-task-tree-session-070.yaml` | session-064, session-070 | 114 | 0.52 h | 0.52 h | 2.67 h | no |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 25 |
-| closed before `resource_rollups` existed, logs not retained | 45 |
+| measured | 26 |
+| closed before `resource_rollups` existed, logs not retained | 44 |
 | **total** | **70** |
 
 <!-- END GENERATED: session-close-report -->
