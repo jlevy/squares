@@ -238,7 +238,7 @@ agenda:
     purpose: research
     owner_focus: process
     instances: [17, 39, 50, 54, 68]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Are all three second-wave outcomes terminal, internally consistent and ready for an
@@ -266,18 +266,22 @@ agenda:
       experiment, repairs no finding and makes no mathematical promotion.
     bead: think-47xw
     depends_on: []
+    artifacts:
+    - docs/project/reviews/review-2026-09-01-agenda013-second-wave-efficiency.md
+    - docs/project/reviews/review-2026-09-01-agenda013-second-wave-packets.md
+    - packing/campaign/agent-sessions/session-064-agenda013-nine-hour-coordinator.md
     workflows: [efficiency-loop, insight-iteration, process-review, documentation-pass]
     next_evidence: >-
-      Ready at the 06:15 wall-clock checkpoint. BC-116 and BC-118 are complete, BC-117
-      is stopped, their unselected siblings remain stopped and paused, all three selected
-      task beads are terminal, and sessions 068--070 plus their disjoint receipts carry
-      every outcome. Begin with the mandatory ten-minute W5 comparison, then freeze one
-      revision-keyed review packet per lane without running or repairing an experiment.
+      Completed after packet commit 90ced909. The mandatory W5 review retained
+      `no-change`; one packet per lane names every exp-047--exp-052 decision, exact
+      replay, mutation, claim boundary and permitted transition against evidence revision
+      529b6729. Think-47xw is closed, generated views and tbd are reconciled, and no
+      experiment or scientific artifact changed.
   - id: BC-120
     purpose: measurement_validation
     owner_focus: correctness
     instances: [17, 39, 50, 54, 68]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Do three independent reviewers reproduce the lane outcomes and accept their claim
@@ -311,9 +315,10 @@ agenda:
     depends_on: [BC-119]
     workflows: [factual-review, process-review]
     next_evidence: >-
-      Held `blocked`. The future review coordinator owns one new document under
-      docs/project/reviews/, the BC-120 row, the BC-121 transition and the PR checkpoint;
-      reviewers do not edit the artifacts they inspect.
+      Ready after BC-119 closed at packet commit 90ced909. Three cross-lane reviewers
+      independently inspect evidence revision 529b6729 through the immutable packet set;
+      the coordinator owns one new review document, this row, the BC-121 transition and
+      the PR checkpoint. Reviewers do not edit the artifacts they inspect.
   - id: BC-121
     purpose: research
     owner_focus: process

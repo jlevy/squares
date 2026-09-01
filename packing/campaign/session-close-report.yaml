@@ -802,7 +802,7 @@ sessions:
   title: "Agenda-013 nine-hour coordinator"
   status: in_progress
   primary_bead: think-5xlb
-  phases: 6
+  phases: 8
   measured: false
   unmeasured_reason: >-
     declares no rollups
