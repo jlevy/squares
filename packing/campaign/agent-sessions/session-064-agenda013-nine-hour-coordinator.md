@@ -116,7 +116,7 @@ session:
       BC-122's repayment rule before BC-111 opens.
     commitment: BC-122
     bead: think-iv3e
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       All first-wave lanes, receipts and the published checkpoint are terminal, so the
@@ -151,10 +151,58 @@ session:
     - packing/campaign/resource-usage/codex-task-tree-session-065.yaml
     - packing/campaign/resource-usage/codex-task-tree-session-066.yaml
     - packing/campaign/resource-usage/codex-task-tree-session-067.yaml
-    stop_reason: null
+    stop_reason: The green W5 checkpoint was pushed and its PR state published before the fixed handoff.
     next_action: >-
       Publish the closed think-iv3e and BC-122 receipt, then enter BC-111 under think-1dm8
       at 2026-09-01T11:46:55Z.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Audit the three first-wave exits against their frozen criteria, route exactly one
+      member of each successor pair without rerunning evidence, name a credible second
+      weighted-certificate consumer or its absence, apply every agenda and tbd hold
+      transition, and publish the validated second-wave launch revision.
+    commitment: BC-111
+    bead: think-1dm8
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      BC-122 retained `no-change`, its bead is closed, all three first-wave lanes are
+      terminal, and BC-111 is the sole dependency-ready handoff.
+    budget_minutes: 30
+    started_at: '2026-09-01T11:46:55Z'
+    deadline_at: '2026-09-01T12:16:55Z'
+    expected_output: >-
+      BC-116, BC-117 and BC-118 ready with exact launch reasons and owned paths; BC-112,
+      BC-113 and BC-114 stopped with paused beads; one named second certificate consumer
+      or explicit absence; synchronized agendas, views, tbd and PR; and three unclaimed
+      AgentSession entry points for the 12:16:55Z dispatch.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: >-
+      Stop before dispatch if a route contradicts retained evidence, a task closure is
+      treated as scientific success, the n = 17 timebox is relabelled as a discrepancy
+      or premeasurement guard, a sibling transition is missing, or validation fails.
+    fallback: >-
+      Preserve the green W5 revision, leave every second-wave bead held and do not
+      allocate an experiment or start a lane.
+    outcome: >-
+      Three independent read-only audits agreed with the retained routing evidence.
+      Selected BC-116 for the executed n = 17 midmeasurement no-checkpoint timebox,
+      BC-117 for the n = 68 interval-enclosure and runner defects, and BC-118 under
+      exactly E1 source/provenance absence. Stopped and paused BC-112, BC-113 and BC-114.
+      Named the retained Burns 4.4811 certificate as a fixture-level candidate second
+      consumer with explicit same-family and assurance limitations. Reserved sessions
+      068--070 as the exact target-blind entry paths; no target or experiment was opened.
+    evidence:
+    - packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md
+    - packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md
+    stop_reason: null
+    next_action: >-
+      Publish the routing checkpoint, then at exactly 2026-09-01T12:16:55Z close BC-111,
+      create the named sessions 068--070 and start think-9zgs, think-t7v1 and think-8pjf.
   budget:
     wall_minutes: 540
     max_cycles: 9

@@ -217,7 +217,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [17, 18, 19, 39, 50, 54, 68, 69]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Which first-wave lane earned its successor block, and which assumption should be
@@ -249,18 +249,22 @@ agenda:
       inside the checkpoint.
     bead: think-1dm8
     depends_on: [BC-108]
+    artifacts:
+    - packing/campaign/agent-sessions/session-064-agenda013-nine-hour-coordinator.md
+    - packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md
     workflows: [insight-iteration, process-review, documentation-pass]
     next_evidence: >-
-      Ready after BC-122 retained its measured `no-change` receipt. Audit the three
-      first-wave exits without rerunning them, route BC-116, BC-117 and BC-118 under the
-      frozen outcome matrix, preserve the n = 17 midmeasurement timebox as neither a
-      discrepancy nor a premeasurement guard, and apply every sibling hold transition
-      before closing think-1dm8.
+      Completed on 2026-09-01 from the retained first-wave evidence without rerunning a
+      target. Routed BC-116, BC-117 and BC-118; stopped BC-112, BC-113 and BC-114. The n
+      = 17 run remains an executed midmeasurement `no_progress` timebox, not a
+      discrepancy, `cannot-reproduce` result or premeasurement guard. The retained Burns
+      4.4811 certificate is a candidate fixture-level second consumer for BC-115, not a
+      second proof method, cross-n validation, adoption result or frontier claim.
   - id: BC-112
     purpose: research
     owner_focus: correctness
     instances: [17, 18, 19]
-    state: blocked
+    state: stopped
     priority: 1
     question: >-
       Does the fixed 4.5058 certificate support repository adoption at n = 17--19 under
@@ -292,17 +296,17 @@ agenda:
     depends_on: [BC-108, BC-111]
     workflows: [factual-review, process-review, documentation-pass]
     next_evidence: >-
-      Blocked on BC-108 agreement and the checkpoint. If routed here, it owns a
-      provisional adoption packet under
-      packing/cases/n17_weighted_certificate/adoption/ and one AgentSession; it does not
-      edit packing/frontier/, generated frontier views or think-w8hh's hold. BC-121 owns
-      review-cleared frontier application and the final BC-115 gate; the dependency edge
-      alone is not authorization.
+      Stopped for this wave because BC-108 did not emit the complete all-invariant
+      agreement required by this entry. Exp-049 instead exhausted its single 3,920-second
+      wall while the independent accumulator was active and emitted no canonical row,
+      comparison, mutation result or checkpoint. This is not a discrepancy or guard
+      finding and supports no adoption, n = 18/19 transfer or frontier change. Its bead
+      remains paused while BC-116 owns resumability and instrument-cost adjudication.
   - id: BC-113
     purpose: research
     owner_focus: insight
     instances: [68]
-    state: blocked
+    state: stopped
     priority: 1
     question: >-
       In an exploratory n = 68 pilot with a real information barrier, can a frozen
@@ -355,27 +359,17 @@ agenda:
     depends_on: [BC-109, BC-111]
     workflows: [research-loop, insight-iteration]
     next_evidence: >-
-      Blocked on a frozen compatible and valid parent arm, its sealed corresponding child
-      result, a credible information barrier, and the checkpoint. Neither child
-      qualification nor the released gain selects, changes, or suppresses the arm. The
-      agent that reads this card is the coordinator, not the proposer; it must launch the
-      fresh proposer from a sanitized card with no inherited conversation. If promoted,
-      write only
-      packing/cases/unitsquare_surgery/n068/,
-      packing/src/sqpack/research/unitsquare_surgery.py,
-      packing/tests/test_unitsquare_surgery.py, the next free H-051 experiment and result
-      files under packing/campaign/series/series-000-smoke-and-calibration/,
-      packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md, and the exact
-      coordinator-created AgentSession path. The validator's hypothesis edit is limited
-      to the validated instrument description and the `instrument_ready` transition; the
-      fresh proposer never reads or edits that file. The experiment record must exist
-      before target execution. n = 69 remains held out until n = 68 establishes a
-      measurable response.
+      Stopped for this wave because BC-109 stopped before target measurement on
+      `interval-enclosure` and `executable-runner` readiness defects. No parent was
+      retrieved and no compatible or invalid parent arm was frozen. This does not show
+      that the source is incompatible. Its bead remains paused while BC-117 localizes the
+      one-square proof-instrument refusal. H-051 remains undisposed and no surgery or
+      child-qualified selection is authorized.
   - id: BC-114
     purpose: research
     owner_focus: correctness
     instances: [39, 54]
-    state: blocked
+    state: stopped
     priority: 2
     question: >-
       After n = 50, is the next cheapest capability test nested-radical exact promotion
@@ -401,15 +395,11 @@ agenda:
     depends_on: [BC-110, BC-111]
     workflows: [research-loop, factual-review]
     next_evidence: >-
-      Blocked on the n = 50 result and checkpoint. The coordinator records the branch
-      choice before an agent claims this bead. The selected write scope is either
-      packing/cases/n054_exact/ with packing/tests/test_n054_exact.py and
-      packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md, or
-      packing/cases/n039_interval/ with packing/tests/test_n039_interval.py and
-      packing/campaign/hypotheses/H-056-n39-degree-five-interval-certificate.md, plus the
-      exact coordinator-created AgentSession and experiment/result paths. The selected
-      hypothesis edit is limited to the validated instrument description and the
-      `instrument_ready` transition; never edit or run both cases in one block.
+      Stopped for this wave under exactly `E1 source/provenance absence`. BC-110 stopped
+      before measurement because the retained n = 50 evidence does not declare
+      attributable upstream serialization semantics for every pose scalar. No n = 50
+      reconstruction or result exists, so neither n = 39 nor n = 54 was selected. Its
+      bead remains paused while BC-118 tests only the missing-semantics seam.
   - id: BC-115
     purpose: tool_validation
     owner_focus: correctness
@@ -448,8 +438,12 @@ agenda:
     workflows: [pipeline-improvement]
     next_evidence: >-
       Held `blocked` on reviewed application of BC-112's recommendation and a second
-      consumer. BC-121 owns the clearing action; an arriving BC-115 agent must not claim
-      the bead merely because `tbd ready` exposes it. If promoted, own
+      consumer. BC-111 named the retained Burns 4.4811 certificate as a credible
+      fixture-level candidate: materially different atoms, weights and threshold under
+      the same weighted-point schema. It is not independently audited, peer reviewed, a
+      second proof method or cross-n evidence. BC-121 owns the clearing action; an
+      arriving BC-115 agent must not claim the bead merely because `tbd ready` exposes
+      it. If promoted, own
       packing/src/sqpack/research/weighted_certificate.py,
       packing/tests/test_weighted_certificate.py, the n = 17 fixture migration, and one
       new AgentSession; do not edit H-006 or H-034.

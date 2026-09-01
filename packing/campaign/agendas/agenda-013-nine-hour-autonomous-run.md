@@ -95,25 +95,31 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [17, 18, 19]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
-      If BC-108 disagrees with the published n = 17 certificate or stops on a guard, what
-      is the smallest reproducible discrepancy and which evidence layer owns it?
+      Can an external direction-sliced checkpoint driver make the unchanged n = 17
+      independent replay finish or retain valid partial progress inside a fixed wall?
     hypotheses: [H-052]
     budget: >-
-      160 minutes in seven 15--25 minute cells: freeze the smallest mismatch or guard and
-      all source hashes; reproduce it through the source-faithful path; reproduce it
-      through an implementation-independent scalar path; bisect to the first divergent
-      angle or event cell; fire one source-faithful control and one mutation; retain the
-      typed adjudication; run the final W3 mechanism pass, validation and handoff.
+      160 minutes in eight cells: 0--15 W3 freeze the actual no-checkpoint refusal and
+      hashes; 15--35 W7 build an external direction-sliced driver around unchanged
+      kernels; 35--55 W7 prove uninterrupted/resumed byte equivalence and rejection of
+      corrupt, stale, reordered or gapped checkpoints; 55--70 W2 independently replay
+      readiness; 70--95, 95--120 and 120--145 W6 run one resumable target process;
+      145--160 W3 stop once if live, retain a validated prefix or interpret immutable
+      output, validate and hand off.
     entry: >-
       BC-108 is terminal without the all-invariant agreement required by BC-112, and
       BC-111 routes the n = 17 lane here. Before the coordinator removes think-9zgs's
       blocked hold, it marks BC-112 `stopped` and puts think-5q0v on `paused` hold with the
       same routing reason. The block starts from BC-108's exact revision and smallest
-      retained discrepancy or premeasurement guard; it does not broaden into a new proof
-      search.
+      retained executed midmeasurement `no_progress` timebox, which is neither a
+      discrepancy nor a premeasurement guard. Before another target sample, the external
+      driver must hash-check the frozen package and fixtures, atomically persist only
+      completed paired direction rows in a contiguous hash chain, and obtain fresh W2
+      readmission. It does not edit the frozen kernels, exp-049 or broaden into a new
+      proof search.
     exit: >-
       A retained source-defect, implementation-defect, contract-defect, reproduced-
       agreement, or unresolved adjudication with the first divergent invariant and exact
@@ -122,22 +128,21 @@ agenda:
       18 or 19, clears BC-115, or changes the frontier.
     bead: think-9zgs
     depends_on: []
-    blocked_on: >-
-      BC-111 must route the n = 17 lane away from BC-112 and explicitly remove the manual
-      hold.
     workflows: [insight-iteration, research-loop, factual-review]
     next_evidence: >-
-      Held `blocked`. If routed here, own the BC-108 case package and tests, the next
-      coordinator-assigned H-052 experiment/result and AgentSession paths, and
-      packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md under
-      the readiness-only edit rule. Do not edit frontier records or generic certificate
-      code.
+      Ready at session-068. Own a case-specific external resume driver outside the frozen
+      packing/cases/n17_weighted_certificate/ package, its tests, the next
+      coordinator-assigned H-052 experiment/result, and the H-052 readiness-only edit.
+      Synthetic uninterrupted and interrupted-plus-resumed assemblies must be byte
+      identical, including under `python -O`, before target access. An incomplete target
+      wall remains a typed process result, not an H-052 verdict. Do not edit frontier
+      records or generic certificate code.
     parallel_group: agenda013-second-wave-n17
   - id: BC-117
     purpose: tool_validation
     owner_focus: correctness
     instances: [68, 69]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       If BC-109 cannot freeze a child-independent compatible parent arm, which provenance,
@@ -164,12 +169,14 @@ agenda:
       may rescue the arm.
     bead: think-t7v1
     depends_on: []
-    blocked_on: >-
-      BC-111 must route the precision lane away from BC-113 and explicitly remove the
-      manual hold.
     workflows: [insight-iteration, pipeline-improvement, research-loop, factual-review]
     next_evidence: >-
-      Held `blocked`. If routed here, own
+      Ready at session-069. Freeze `interval-enclosure / instrument-defect` as the
+      target-blind baseline on one synthetic rotated square: the current binary64
+      midpoint fitter and fixed tolerances demonstrate numerical behavior but not an
+      outward proof of nonempty compatible rigid poses, enclosure or required signs.
+      Build and independently verify a rational half-angle existence/cover certificate
+      and a complete injected runner before any parent retrieval. Then own
       packing/cases/unitsquare_precision/refusal/, the implicated tests in
       packing/tests/test_unitsquare_precision.py, the coordinator-assigned H-053
       experiment/result and AgentSession paths,
@@ -181,7 +188,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [19, 50]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       If n = 50 does not become an exact cross-scale control, is the limiting seam source
@@ -208,12 +215,14 @@ agenda:
       50 frontier or switch to n = 39 or 54.
     bead: think-8pjf
     depends_on: []
-    blocked_on: >-
-      BC-111 must route the cross-scale lane away from BC-114, name one refusal dispatch,
-      and explicitly remove the manual hold.
     workflows: [insight-iteration, pipeline-improvement, research-loop]
     next_evidence: >-
-      Held `blocked`. If routed here, own packing/cases/n050_exact/,
+      Ready at session-070 under exactly `E1 source/provenance absence`. Determine
+      whether a first-party SVG, catalogue artifact, generator source or attributable
+      author statement binds every center and rotation token to units, frame, exact or
+      rounded/truncated/interval semantics, and a stable byte hash. Without that, retain
+      E1; decimal patterns, 53/7 and a 3-4-5 angle are insufficient. Own
+      packing/cases/n050_exact/,
       packing/tests/test_n050_exact.py, the coordinator-assigned H-054 experiment/result
       and AgentSession paths, and
       packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md under the
@@ -431,9 +440,9 @@ second-wave agent claims work.
 | Lane | First-wave outcome | Run during 03:15--05:55 | Sibling disposition |
 | --- | --- | --- | --- |
 | n = 17 certificate | all fixed invariants agree and shared assumptions are named | BC-112 provisional adoption determination | BC-116 stopped; think-9zgs paused |
-| n = 17 certificate | discrepancy, cannot-reproduce or guard stop | BC-116 adjudication | BC-112 stopped; think-5q0v paused |
+| n = 17 certificate | discrepancy, cannot-reproduce, guard stop, or executed midmeasurement timebox without complete agreement | BC-116 resumability and instrument-cost adjudication | BC-112 stopped; think-5q0v paused |
 | n = 68 precision | compatible and valid parent arm freezes from parent-only facts | BC-113 blinded H-051 pilot | BC-117 stopped; think-t7v1 paused |
-| n = 68 precision | no compatible parent arm or a parent provenance/transform refusal | BC-117 refusal localization | BC-113 stopped; think-gbkd paused |
+| n = 68 precision | no compatible, independently valid parent arm was frozen, including a premeasurement instrument stop | BC-117 refusal localization | BC-113 stopped; think-gbkd paused |
 | n = 50 control | exact reconstruction and independent validity pass | BC-114 one-case n = 54 or n = 39 continuation | BC-118 stopped; think-8pjf paused |
 | n = 50 control | source, representation, verifier or price refusal | BC-118 refusal localization | BC-114 stopped; think-dao9 paused |
 
