@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import pathlib
 import sys
 from concurrent.futures import ProcessPoolExecutor
@@ -45,6 +46,8 @@ SEEDS = 6
 # The side D-034 names, to the golden map's own precision. Matching on the rounded side
 # rather than on a tolerance keeps this tied to the number the defect quotes.
 PAIR_SIDE = 2.767766953
+SIDE_DIFFERENCE_FLOOR = 1e-11
+MEASURED_FLAGS = ("share_contact_certificate", "share_geometric_key")
 
 
 @dataclass(frozen=True, slots=True)
@@ -143,6 +146,26 @@ def build() -> dict[str, Any]:
     }
 
 
+def measurement_problem(retained: dict[str, Any], rebuilt: dict[str, Any]) -> str | None:
+    """Return drift only for the invariants the retained measurement claims."""
+    for field in MEASURED_FLAGS:
+        if retained.get(field) != rebuilt.get(field):
+            return f"{field} has drifted"
+    for label, measured in (("retained", retained), ("rebuilt", rebuilt)):
+        difference = measured.get("side_difference")
+        if (
+            isinstance(difference, bool)
+            or not isinstance(difference, int | float)
+            or not math.isfinite(difference)
+            or difference >= SIDE_DIFFERENCE_FLOOR
+        ):
+            return (
+                f"{label} side_difference is not below the "
+                f"{SIDE_DIFFERENCE_FLOOR:g} solver floor"
+            )
+    return None
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--check", action="store_true", help="compare against the retained record")
@@ -157,10 +180,13 @@ def main() -> int:
         # Compare the identity content, not the float poses: the quench is deterministic
         # but its last bits are not a claim this file makes, and D-021 records a 1e-11
         # floor below which no difference here means anything.
-        for field in ("subject", "measured", "component_count"):
+        for field in ("subject", "component_count"):
             if retained.get(field) != built[field]:
                 print(f"  {RECORD.name}: {field} has drifted", file=sys.stderr)
                 return 1
+        if problem := measurement_problem(retained.get("measured", {}), built["measured"]):
+            print(f"  {RECORD.name}: measured {problem}", file=sys.stderr)
+            return 1
         keys = [(e["geometric_key"], e["contact_certificate"]) for e in retained["endpoints"]]
         rebuilt = [(e["geometric_key"], e["contact_certificate"]) for e in built["endpoints"]]
         if keys != rebuilt:

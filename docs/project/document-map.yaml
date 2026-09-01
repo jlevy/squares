@@ -19,11 +19,11 @@ documents:
   - {path: packing/atlas/prospective/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/rendering/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: conventions.md, role: conventions, authority: definitive, lifecycle: maintained}
-  - {path: epistemics.md, role: conventions, authority: definitive, lifecycle: maintained}
+  - {path: epistemics.md, role: epistemic-policy, authority: definitive, lifecycle: maintained}
   - {path: operating-rules.md, role: operating-rules, authority: definitive, lifecycle: maintained}
   - {path: development.md, role: development-guide, authority: definitive, lifecycle: maintained}
-  - {path: packing/campaign/README.md, role: runbook, authority: definitive, lifecycle: maintained}
-  - {path: packing/campaign/documentation-pass.md, role: runbook, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/README.md, role: research-runbook, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/documentation-pass.md, role: documentation-runbook, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/agent-sessions/README.md, role: session-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/research-loop-logbook/README.md, role: research-loop-logbook, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/resource-usage/README.md, role: component-guide, authority: definitive, lifecycle: maintained}

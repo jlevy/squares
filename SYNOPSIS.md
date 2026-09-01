@@ -1,6 +1,6 @@
 # Synopsis: The `s(n)` Program
 
-**Date:** 2026-08-25
+**Date:** 2026-08-31
 
 **Status:** Living document, revised whenever a result lands.
 
@@ -51,9 +51,11 @@ Capability 2 has two promotion boundaries.
 Robust rational promotion is built for suitable decimal center-angle poses and may prove
 a slightly weaker upper bound by making its side relaxation explicit.
 A generic path that infers contacts and certifies an exact solution at the reported
-value is not built and may not succeed for singular, ambiguous, or ill-conditioned
-systems. [What Is Built](#what-is-built) states, component by component, what runs, what
-its output may claim, and what remains engineering or mathematics.
+value is built as generic library components but is not exposed as an arbitrary
+`Witness/v2` command; certification may still fail for singular, ambiguous, or
+ill-conditioned systems.
+[What Is Built](#what-is-built) states, component by component, what runs, what its
+output may claim, and what remains engineering or mathematics.
 Read it before citing any capability here.
 
 ### Current research readiness
@@ -74,13 +76,13 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Research record and process | Reconstruct hypotheses, experiments, sessions, effort, and known failures | A closed bead or plausible output is not evidence until the artifact, landed tree, and generated views agree | [Ledger](packing/campaign/ledger.md), [defect log](defects.md), and [confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |
 | Agent loop and throughput | Run bounded phases with declared clocks, checkpoint each result, and select the next dependency-ready bead | Portable recovery and final receipts remain incomplete; wall-clock budgets do not define equal scientific work under load | [Campaign runbook](packing/campaign/README.md), [launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-autonomous-agent-loop), and [D-126](defects.md) |
 | Frontier and literature | Read reported and verified bounds side by side through `n = 100`; reconcile the named public sources and retain conflicts | Most reported records still lack a public formal witness; dated named-source coverage is not universal web completeness | [`frontier/STATUS.md`](packing/frontier/STATUS.md), [`frontier/`](packing/frontier/README.md), and [`resources/`](packing/resources/README.md) |
-| Witness inspection and verification | Inspect or numerically check supported decimal geometry; verify rational and certified algebraic witnesses exactly | Interval-certificate replay is represented by the contract but no generic interval checker is built | [Exact layer](#the-exact-layerbuilt) and [capability ladder](#verification-capability-ladder) |
+| Witness inspection and verification | Inspect or numerically check supported decimal geometry; verify rational and certified algebraic witnesses exactly | Generic interval-certification components are built, but the arbitrary-`Witness/v2` public command is not exposed | [Exact layer](#the-exact-layerbuilt) and [capability ladder](#verification-capability-ladder) |
 | Numerical refinement | Polish and compare fixed-cell controls above the measured solver floor | A stopped quench is neither certified stationary nor comparable by wall-clock budget under load | [Refinement layer](#the-refinement-layerbuilt-with-a-floor) and [D-021, D-052, D-126](defects.md) |
 | Exact local geometry and proof | Run the specialized small-`n`, Trump, and Stromquist checkers; this is the most productive mathematical lane so far | There is no generic proof-synthesis or interval branch-and-bound pipeline | [Proof lane](#the-proof-lanebuilt-and-producing-theorems) |
 | Proposal and search | Use the stock annealer for calibration and candidate generation; its two search paths emit exact pair-test work | Pair-budget enforcement, the proposer interface, campaign-wide aggregation, and mechanism-diverse proposers are unbuilt | [Proposer layer](#the-proposer-layerone-instrument-and-the-interface-is-unbuilt) |
 | Event capture and replay | Retain and independently replay watched control events | A valid terminal event is an observation, not a connected terminal component | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |
 | Basin identity, census, and atlas | Use exact `n = 3` and `n = 4` models as identity controls | Component counting is not admissible until the `n = 5` ambiguity is bounded and the classifier is validated successively | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |
-| Numerical-to-formal promotion | Robustify suitable decimal center-angle poses into explicitly relaxed rational witnesses, infer and assemble a contact system, recover a minimal polynomial under a decidable margin rule, certify a root by Krawczyk, and receive typed failures throughout | The robust path may weaken the bound; every component of the reported-value route is built, but the `n = 29` certificate is retained `unresolved` and moving `verified_upper_bound` is a reviewed human decision, not a pipeline inference | [Promotion pipeline](#the-promotion-pipelinebuilt-end-to-end-with-the-promotion-itself-withheld) |
+| Numerical-to-formal promotion | Robustify suitable decimal center-angle poses into explicitly relaxed rational witnesses, infer and assemble a contact system, recover a minimal polynomial under a decidable margin rule, certify a root by Krawczyk, and receive typed failures throughout | The `n = 29` interval certificate has passed review and now carries the verified upper bound; the tighter reported value remains uncertified | [Promotion pipeline](#the-promotion-pipelinebuilt-end-to-end-with-the-promotion-itself-withheld) |
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
@@ -148,11 +150,11 @@ case or experiment separately.
 | [Prospective Packing Atlas, `n = 101..324`](packing/atlas/prospective/README.md) | component scope and use | supporting | maintained | — |
 | [Deterministic SVG Gallery](packing/atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
 | [Conventions for `packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
-| [Epistemics](epistemics.md) | artifact and naming conventions | definitive | maintained | — |
+| [Epistemics](epistemics.md) | whole-result evidence classifications | definitive | maintained | — |
 | [Operating Rules](operating-rules.md) | how a session is conducted | definitive | maintained | — |
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign — W6 Runbook](packing/campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
-| [The W8 Documentation Pass — Runbook](packing/campaign/documentation-pass.md) | W6 experiment mechanics | definitive | maintained | — |
+| [The W8 Documentation Pass — Runbook](packing/campaign/documentation-pass.md) | W8 documentation reconciliation | definitive | maintained | — |
 | [Agent Sessions](packing/campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
 | [Research Loop Logbook](packing/campaign/research-loop-logbook/README.md) | reader-facing research-run summaries | definitive | maintained | — |
 | [Resource Usage](packing/campaign/resource-usage/README.md) | component scope and use | definitive | maintained | — |
@@ -320,6 +322,20 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+No escalated research session is active.
+The latest terminal record is
+[session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md),
+owned by `think-n8vl`; its branch is in final review and the bead closes when the pull
+request merges. It added the whole-results register, the V/C/S/N rubric, and the
+structural checker summarized in [`epistemics.md`](epistemics.md).
+
+No new scientific slice is authorized by that documentation and CI review.
+Select the next research slice from the generated
+[agenda map](packing/campaign/agenda-map.md), as required by
+[`OR-4`](operating-rules.md).
+
+### Handoff Record
+
 [Open the house rendering of the retained 100-square witness.](packing/atlas/known-best/rendering/n-100.svg)
 
 The renderer’s standing exact-motion control remains independently replayable:
@@ -468,22 +484,21 @@ the owner reviews the PR as a whole.
 Follow-ons stay on their beads (`think-1o1f`, `think-q6vy`, `think-07t7` paused,
 `think-0z9b`); `BC-097` and `BC-089`’s remainder remain the sanctioned gate filler.
 
-**As of 2026-08-31, night — start here.** The review’s epistemics became infrastructure:
-the owner split *verified* (the strongest verification a claim holds anywhere in the
-world) from *confirmed* (what this repository has established end-to-end itself), and
-[session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md) is
-codifying that as `BC-107` under `think-n8vl` in
+**Session 061 summary.** The review’s epistemics became infrastructure: verification is
+the highest rung supported by the evidence a result cites, regardless of who performed
+it; confirmation records what this repository has read, replayed, or established.
+[Session 061](packing/campaign/agent-sessions/session-061-epistemics-codification.md)
+codified that distinction as `BC-107` under `think-n8vl` in
 [agenda-011](packing/campaign/agendas/agenda-011-verification-review.md), a
 `pipeline-improvement` slice.
 [`epistemics.md`](epistemics.md) at the repository root now owns the four axes —
-`V0`–`V5`, `C0`–`C5` with machine-checkable promotion checklists, anchored significance
-that never gates, and novelty adopted unchanged from the evidence contract — and the
-results register ([`packing/frontier/results.yaml`](packing/frontier/results.yaml),
-rendered as [`RESULTS.md`](packing/frontier/RESULTS.md)) declares the whole results
-`T-001`–`T-013`, whose rungs `devtools/check_results.py` re-derives from the cited
-evidence atoms on every validation run — a declared rung the atoms do not support fails
-the build, and so does unexplained understatement, so committing a result after an
-effort is a register edit the gate itself adjudicates.
+`V0`–`V5`, `C0`–`C5` with structural promotion checks, anchored significance that never
+gates, and a scoped novelty classification — and the results register
+([`packing/frontier/results.yaml`](packing/frontier/results.yaml), rendered as
+[`RESULTS.md`](packing/frontier/RESULTS.md)) declares the whole results `T-001`–`T-013`,
+whose declared rungs `devtools/check_results.py` checks against cited evidence, required
+notes, and review metadata on every validation run.
+Unsupported promotion and unexplained understatement fail the build.
 The register subsumes the review’s determinations (the `s(17)`/`s(18)` upgrade is
 `T-001`/`T-002` at `V4`/`C4`) and the legacy first-party theorems (the Stromquist repair
 is `T-010`; this document’s own `T-1`–`T-4` below remain declared shorthand).
@@ -1119,22 +1134,18 @@ reaches full rank at both determined sizes — `34` of `34` at `n = 11` and `88`
 at `n = 29`. The shortfall that had suggested otherwise was [D-361](defects.md), a bug
 in assembly rather than a property of the packings.
 
-**Two things remain, and neither is a missing component.** The first is wiring: the
-public `packing-witness promote --strategy interval-existence` still raises the typed
+**One integration boundary remains.** The public
+`packing-witness promote --strategy interval-existence` still raises the typed
 `checker-not-built` gap, because the certification that has been done ran through
 [`cases.kingbird29.certify_interval`](packing/cases/kingbird29/certify_interval.py), a
 case-specific driver over generic library code.
 A general path from an arbitrary `Witness/v2` to a certificate is not exposed, and the
 typed refusal is the honest answer until it is.
 
-The second is a decision.
 The interval route certifies `s(29) <= 5.93383346267692918974379895098` at a declared
-relaxation of `1e-20`, and that certificate is retained `unresolved` with
-`needs_review: true`. It sits `5.23371e-5` below the standing verified ceiling, and
-whether it moves `verified_upper_bound` is a reviewed human decision through the
-evidence contract rather than an inference this pipeline is permitted to make.
-A built path is not a promoted bound, and an unattended run may decline a marginal
-result and may not accept one.
+relaxation of `1e-20`. Review adopted that certificate as the case’s
+`verified_upper_bound` and as T-009. It remains `9.18974379895098e-15` above the tighter
+reported value, which is still uncertified at its declared precision.
 
 Exp-033 remains a distinct dedicated result: it bound two retained `n = 5` float poses
 to exact endpoints on one certified fixed-angle optimal face and supplied an exact dual
@@ -1153,7 +1164,7 @@ geometry witness.
 | Verify algebraic-number-field geometry | built and sound for accepted metadata | Constructor proves irreducibility and one isolated real root; caller must still supply the correct field and geometry |
 | Import center-angle, center-basis, or corner data | built at `Witness/v2` | A source-specific adapter must resolve the source’s units and coordinate convention without guessing |
 | Robustify a suitable decimal center-angle pose | built | May require an explicit side increase and certifies the new rational pose only |
-| Certify existence at the reported value | buildable for suitable systems; checker unbuilt | Needs outward-rounded boxes and a well-posed contact system; not guaranteed to succeed |
+| Certify existence around a well-posed contact solution | generic library components built; arbitrary-`Witness/v2` CLI unexposed | Needs outward-rounded boxes and a well-posed contact system; not guaranteed to succeed or to reach the reported value |
 | Infer the correct contact model from arbitrary serialized geometry | mathematically contingent | Ambiguous near-contacts and underdetermined models must remain explicit failures |
 | Prove global optimality from a feasible witness | separate mathematics | Requires a matching verified lower bound; no generic witness conversion supplies it |
 
@@ -2800,15 +2811,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 410 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 417 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
-| validity | 102 | was correct, but the measurement did not bear on the question |
+| validity | 108 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 154 | recorded something its own evidence contradicts |
-| robustness | 48 | did not finish, or finished only by luck |
+| robustness | 49 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -2817,10 +2828,10 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fifty-eight defects in 410, and no soundness defect
-ever.** Every soundness failure was found by a control cell whose answer was known in
-advance, a rule written down before the measurement, a generated view contradicting its
-source, or someone reading carefully.
+**The automated gate has caught sixty defects in 417, and no soundness defect ever.**
+Every soundness failure was found by a control cell whose answer was known in advance, a
+rule written down before the measurement, a generated view contradicting its source, or
+someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Gate-detected entries here are mechanical process, implementation, or
 test-validity failures, found by contiguity, integration, mutation-anchor,

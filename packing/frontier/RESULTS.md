@@ -4,11 +4,11 @@
 
 One row per registered result, sorted by significance, then confirmation.
 The axes are defined in [`epistemics.md`](../../epistemics.md): `V` is the
-strongest verification existing anywhere, `C` what this repository has
-established end-to-end, `S` a judged and anchored score that never gates, and
-novelty a statement about a performed search.
-`devtools/check_results.py` re-derives every `V` and `C` from the cited
-evidence atoms on every validation run.
+highest verification rung supported by the cited evidence, `C` what this
+repository has recorded or performed, `S` a judged score that never gates,
+and novelty a scoped source-search classification.
+`devtools/check_results.py` validates the structural support and required
+explanations for every declared `V` and `C`.
 
 | id | n | V | C | S | novelty | claim |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -21,14 +21,14 @@ evidence atoms on every validation run.
 | T-012 | 5 | V4 | C3 | S3 | apparently-novel | Goebel's n = 5 optimal packing is not infinitesimally rigid but is second-order rigid at fixed side: the cone of infinitesimal motions is exactly the middle square's rotation about its own centre, and that one direction is refused at second order by a verified non-negative self-stress, all exactly over Q(sqrt 2). |
 | T-013 | 40 | V4 | C3 | S3 | apparently-novel | Goebel's n = 40 packing is infinitesimally flexible -- seven verified independent first-order flexes turn the sixteen-square tilted block -- and every retained flex is refused at second order by a verified non-negative self-stress, exactly over Q(sqrt 2), so no first-order argument can establish rigidity here. |
 | T-006 | 13 | V3 | C1 | S3 | previously-published | s(13) = 4 (Bentz 2010, Theorem 9). |
-| T-007 | 4-100 | V3 | C1 | S3 | previously-published | s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1) for all N >= 4 (Nagamochi 2005, Theorem 2). |
+| T-007 | 4-100 | V3 | C1 | S3 | previously-published | For every integer 4 <= N <= 100, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
 | T-003 | 17, 18 | V4 | C3 | S2 | apparently-novel | The sixteen-point set's unavoidability ceiling lies in [4426213/1000000, 4427/1000): certification at the left endpoint, an exact escaping pose at the right, with the top strips' a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2), inside the bracket. |
 | T-005 | 13 | V4 | C3 | S2 | apparently-novel | Bentz 2010, Lemma 10 is false as printed -- the middle replacement point (1, 1.74) is refuted by an exact escape certificate, and the published page image carries the same transposed text -- and true under the corrected reading (1.74, 1), with all three corrected replacement covers certified exactly. |
 | T-011 | 11 | V4 | C3 | S2 | previously-published | Trump's 1979 packing is exactly valid: 11 unit squares in a square of side the published degree-8 algebraic number 3.877083590022814..., with 14 of 55 pairs in exact zero-separation contact and 20 corner coordinates exactly on the boundary, so s(11) <= that side. |
 
-## Next rungs
+## Next actions
 
-What would raise each result, in the same order:
+The next evidence-improving action or terminal rationale for each result:
 
 - **T-010** — C4 by a second independent mechanism -- the pose-space interval audit built for T-001, run at side 2 + 4/sqrt(5) over the repaired twelve-point set; V5 by a proof-assistant port.
 - **T-001** — C5 by assembling the review artifact (statement, hypotheses, proof narrative, code map, replays); V5 by a proof-assistant port. The stronger side at the exact ceiling is T-003's business.

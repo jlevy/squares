@@ -1,36 +1,13 @@
 #!/usr/bin/env python3
-"""Grant or refuse the results register's declared rungs from recorded atoms.
+"""Validate structural support for the results register's declared rungs.
 
-`epistemics.md` at the repository root owns the vocabulary this enforces: every
-`T-NNN` record in `frontier/results.yaml` declares a verification rung (V) and a
-confirmation rung (C), and this checker re-derives both from the evidence
-entries the record cites, failing the build when a declared rung is unsupported
--- or understated, since sandbagging distorts the record as surely as
-inflation, unless a `composition` note claims the minimum over load-bearing
-parts (the one legitimate reason a declared rung sits below what the strongest
-cited atom supports).
-
-The derivation, from `frontier/evidence.yaml`'s fields:
-
-- an entry is *machine-proof shaped* (the C3 predicate, and V4's) when its
-  method is exact-algebraic or interval-certified, it retains a certificate,
-  and its replay is recorded and passing;
-- it counts toward C only when this repository performed it
-  (`origin: audited-here` or `replayed-here`);
-- C4 needs at least two C3-shaped entries of ours with distinct methods;
-- C2 is any passing replay of ours; C1 is a dated external review read
-  (`informally-verified` or `defect-found`);
-- V5 is a proof-assistant method, V4 any machine-proof-shaped entry by anyone,
-  V3 a published proof carrying a `proof` block, V1 a numerical method with
-  recorded precision; V0 and V2 are declared-not-derived and require a `notes`
-  field saying why.
-
-Beyond the rungs: ids are contiguous `T-001..`, evidence references resolve,
-artifact and control paths exist, a C3-or-better rung names its adversarial
-controls, a declared C5 names its review artifact, and every `T-NNN` mentioned
-in the reader tier (`README.md`, `SYNOPSIS.md`) exists in the register.
-The generated view is checked by `devtools.render_results --check`, registered
-alongside this checker in the validation gate.
+`epistemics.md` owns the policy. This checker derives V1 and V3 through V5,
+derives C0 through C5, requires explanations for declared-only V0 and V2, and
+refuses unsupported promotion or unexplained understatement. It also resolves
+evidence and repository-file references, requires retained controls at C3 and
+above, restricts C5 to mapped review artifacts, and rejects unknown result ids
+in the reader tier. Human review owns evidence relevance, claim coverage,
+composition, significance, and novelty.
 
 Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.check_results
@@ -40,8 +17,9 @@ from __future__ import annotations
 
 import re
 import sys
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
+from sqpack.assurance import EXTERNAL_ORIGINS, PROOF_METHODS
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -49,10 +27,11 @@ REPO = ROOT.parent
 RESULTS = ROOT / "frontier" / "results.yaml"
 EVIDENCE = ROOT / "frontier" / "evidence.yaml"
 READER_TIER = (REPO / "README.md", REPO / "SYNOPSIS.md")
+DOCUMENT_MAP = REPO / "docs" / "project" / "document-map.yaml"
 
 MACHINE_METHODS = {"exact-algebraic", "interval-certified"}
 OURS_ORIGINS = {"audited-here", "replayed-here"}
-DERIVED_NOT_DECLARED_V = {"V0", "V2"}
+DECLARED_ONLY_V = {"V0", "V2"}
 
 
 def _rank(rung: str) -> int:
@@ -68,22 +47,62 @@ def _machine_proof_shaped(entry: dict) -> bool:
     )
 
 
-def derive_confirmation(entries: list[dict]) -> str:
+def derive_confirmation(entries: list[dict], *, review_ready: bool = False) -> str:
     ours = [entry for entry in entries if entry.get("origin") in OURS_ORIGINS]
     machine = [entry for entry in ours if _machine_proof_shaped(entry)]
+    if machine and review_ready:
+        return "C5"
     if len({entry.get("method") for entry in machine}) >= 2:
         return "C4"
     if machine:
         return "C3"
-    if any(entry.get("replay_status") == "passed" for entry in ours):
+    if any(entry.get("replay") and entry.get("replay_status") == "passed" for entry in ours):
         return "C2"
     if any(
-        (entry.get("external_review") or {}).get("state")
-        in {"informally-verified", "defect-found"}
+        entry.get("origin") in EXTERNAL_ORIGINS
+        and _qualifying_read(entry.get("external_review") or {})
         for entry in entries
     ):
         return "C1"
     return "C0"
+
+
+def _qualifying_read(review: dict) -> bool:
+    return (
+        review.get("state") in {"informally-verified", "defect-found"}
+        and bool(review.get("date"))
+        and bool(review.get("reviewed_by"))
+        and bool(review.get("note"))
+    )
+
+
+def _document_map_entry(path: str, document_map: dict) -> dict | None:
+    for document in document_map["documents"]:
+        if path == document["path"]:
+            return document
+    pure = PurePosixPath(path)
+    return next(
+        (
+            collection
+            for collection in document_map["collections"]
+            if pure.match(collection["pattern"])
+        ),
+        None,
+    )
+
+
+def repository_file_problem(path: str) -> str | None:
+    pure = PurePosixPath(path)
+    if pure.is_absolute() or pure.as_posix() != path or ".." in pure.parts:
+        return "must be a normalized repository-relative path"
+    target = (REPO / pure).resolve()
+    try:
+        target.relative_to(REPO.resolve())
+    except ValueError:
+        return "resolves outside the repository"
+    if not target.is_file():
+        return "does not name a file"
+    return None
 
 
 def derive_verification(entries: list[dict]) -> str:
@@ -91,9 +110,7 @@ def derive_verification(entries: list[dict]) -> str:
         return "V5"
     if any(_machine_proof_shaped(entry) for entry in entries):
         return "V4"
-    if any(
-        entry.get("method") == "published-proof" and entry.get("proof") for entry in entries
-    ):
+    if any(entry.get("method") in PROOF_METHODS and entry.get("proof") for entry in entries):
         return "V3"
     if any(
         str(entry.get("method", "")).startswith("numerical") and entry.get("precision")
@@ -103,9 +120,20 @@ def derive_verification(entries: list[dict]) -> str:
     return "V0"
 
 
+def verification_relation(declared: str, derived: str) -> str:
+    if declared == "V2" and _rank(derived) <= 1:
+        return "supported"
+    if _rank(declared) > _rank(derived):
+        return "inflated"
+    if _rank(declared) < _rank(derived):
+        return "understated"
+    return "supported"
+
+
 def main() -> int:
     problems: list[str] = []
     register = safe_load(RESULTS.read_text(encoding="utf-8"))
+    document_map = safe_load(DOCUMENT_MAP.read_text(encoding="utf-8"))
     evidence_index = {
         entry["id"]: entry
         for entry in safe_load(EVIDENCE.read_text(encoding="utf-8"))["evidence"]
@@ -119,6 +147,11 @@ def main() -> int:
 
     for record in results:
         rid = record["id"]
+        scope = record["scope"]
+        if "n_min" in scope and scope["n_min"] > scope["n_max"]:
+            problems.append(
+                f"{rid}: scope range is reversed: {scope['n_min']} > {scope['n_max']}"
+            )
         cited: list[dict] = []
         for ref in record["evidence"]:
             entry = evidence_index.get(ref)
@@ -129,13 +162,22 @@ def main() -> int:
 
         for field in ("artifacts", "controls"):
             problems.extend(
-                f"{rid}: {field} path does not exist: {path}"
+                f"{rid}: {field} path {problem}: {path}"
                 for path in record.get(field) or []
-                if not (REPO / path).exists()
+                if (problem := repository_file_problem(path))
             )
 
         declared_c = record["confirmation"]
-        derived_c = derive_confirmation(cited)
+        review = record.get("review_artifact")
+        review_path_problem = repository_file_problem(review) if review else None
+        review_exists = bool(review and review_path_problem is None)
+        review_entry = _document_map_entry(review, document_map) if review else None
+        review_mapped = bool(
+            review_entry
+            and review_entry.get("role") == "review"
+            and review_entry.get("lifecycle") != "superseded"
+        )
+        derived_c = derive_confirmation(cited, review_ready=review_exists and review_mapped)
         has_composition = bool(record.get("composition"))
         if _rank(declared_c) > _rank(derived_c):
             problems.append(
@@ -148,32 +190,34 @@ def main() -> int:
             )
 
         declared_v = record["verification"]
-        if declared_v in DERIVED_NOT_DECLARED_V:
-            if not record.get("notes"):
-                problems.append(
-                    f"{rid}: {declared_v} is declared-not-derived and needs a "
-                    "notes field saying why"
-                )
-        else:
-            derived_v = derive_verification(cited)
-            if _rank(declared_v) > _rank(derived_v):
-                problems.append(
-                    f"{rid}: declares {declared_v} but the cited atoms support only {derived_v}"
-                )
-            elif _rank(declared_v) < _rank(derived_v) and not has_composition:
-                problems.append(
-                    f"{rid}: understates {derived_v} as {declared_v} with no "
-                    "composition note claiming the minimum over parts"
-                )
+        if declared_v in DECLARED_ONLY_V and not record.get("notes"):
+            problems.append(
+                f"{rid}: {declared_v} is declared-only and needs a notes field saying why"
+            )
+        derived_v = derive_verification(cited)
+        relation = verification_relation(declared_v, derived_v)
+        if relation == "inflated":
+            problems.append(
+                f"{rid}: declares {declared_v} but the cited atoms support only {derived_v}"
+            )
+        elif relation == "understated" and not has_composition:
+            problems.append(
+                f"{rid}: understates {derived_v} as {declared_v} with no "
+                "composition note claiming the minimum over parts"
+            )
 
         if _rank(declared_c) >= 3 and not record.get("controls"):
-            problems.append(f"{rid}: a {declared_c} rung names its adversarial controls")
+            problems.append(f"{rid}: a {declared_c} rung names at least one control file")
         if declared_c == "C5":
-            review = record.get("review_artifact")
             if not review:
                 problems.append(f"{rid}: C5 requires review_artifact")
-            elif not (REPO / review).exists():
-                problems.append(f"{rid}: review_artifact does not exist: {review}")
+            elif not review_exists:
+                problems.append(f"{rid}: review_artifact path {review_path_problem}: {review}")
+            elif not review_mapped:
+                problems.append(
+                    f"{rid}: review_artifact is not a non-superseded review in the "
+                    f"document map: {review}"
+                )
 
     known = set(actual_ids)
     for path in READER_TIER:
@@ -191,9 +235,8 @@ def main() -> int:
         return 1
 
     print(
-        f"{len(results)} registered results: every declared rung is supported "
-        "by its cited atoms, every path resolves, every reader-tier mention "
-        "exists"
+        f"{len(results)} registered results: every declared rung passes its "
+        "structural checks, every path resolves, every reader-tier mention exists"
     )
     return 0
 

@@ -18,6 +18,8 @@ import argparse
 import sys
 from pathlib import Path
 
+from strif import atomic_output_file
+
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -30,11 +32,11 @@ HEADER = """# Results
 
 One row per registered result, sorted by significance, then confirmation.
 The axes are defined in [`epistemics.md`](../../epistemics.md): `V` is the
-strongest verification existing anywhere, `C` what this repository has
-established end-to-end, `S` a judged and anchored score that never gates, and
-novelty a statement about a performed search.
-`devtools/check_results.py` re-derives every `V` and `C` from the cited
-evidence atoms on every validation run.
+highest verification rung supported by the cited evidence, `C` what this
+repository has recorded or performed, `S` a judged score that never gates,
+and novelty a scoped source-search classification.
+`devtools/check_results.py` validates the structural support and required
+explanations for every declared `V` and `C`.
 """
 
 
@@ -59,16 +61,16 @@ def render() -> str:
     lines.append("| id | n | V | C | S | novelty | claim |")
     lines.append("| --- | --- | --- | --- | --- | --- | --- |")
     for record in results:
-        claim = " ".join(str(record["claim"]).split())
+        claim = " ".join(str(record["claim"]).split()).replace("|", r"\|")
         lines.append(
             f"| {record['id']} | {_scope(record)} | {record['verification']} "
             f"| {record['confirmation']} | S{record['significance']['score']} "
             f"| {record['novelty']} | {claim} |"
         )
     lines.append("")
-    lines.append("## Next rungs")
+    lines.append("## Next actions")
     lines.append("")
-    lines.append("What would raise each result, in the same order:")
+    lines.append("The next evidence-improving action or terminal rationale for each result:")
     lines.append("")
     for record in results:
         next_rung = " ".join(str(record["next_rung"]).split())
@@ -91,7 +93,8 @@ def main() -> int:
     options = parser.parse_args()
     rendered = render()
     if options.update:
-        OUTPUT.write_text(rendered, encoding="utf-8")
+        with atomic_output_file(OUTPUT) as temporary:
+            temporary.write_text(rendered, encoding="utf-8")
         print(f"wrote {OUTPUT.relative_to(ROOT.parent)}")
         return 0
     if not OUTPUT.exists() or OUTPUT.read_text(encoding="utf-8") != rendered:

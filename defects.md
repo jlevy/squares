@@ -2,7 +2,7 @@
 
 # Defect log
 
-410 defects recorded across the packing toolchain.
+417 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
-| `review` | 249 | a human or agent reading the work against a checklist |
+| `review` | 254 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
 | `inspection` | 40 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 58 | the automated test suite |
+| `gate` | 60 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 58 of 410, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 60 of 417, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,8 +34,8 @@ The line worth reading twice: **the automated gate caught 58 of 410, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 4 |
-| record | 127 |
-| tooling | 139 |
+| record | 128 |
+| tooling | 145 |
 | docs | 106 |
 
 ## By kind
@@ -43,9 +43,9 @@ The line worth reading twice: **the automated gate caught 58 of 410, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 91 |
-| validity | 102 |
+| validity | 108 |
 | bookkeeping | 154 |
-| robustness | 48 |
+| robustness | 49 |
 | performance | 15 |
 
 ## Fixed, but nothing stops it coming back
@@ -635,6 +635,13 @@ This is the actionable list.
 | [D-408](packing/devtools/controls.yaml) | 2026-08-31 | tooling | validity | conservative | `gate` | medium | fixed | A negative control was defused by its collision partner completing |
 | [D-409](packing/devtools/run_negative_controls.py) | 2026-08-31 | tooling | validity | conservative | `gate` | medium | fixed | The pruned-link copy covered the archive but not the pruned renderings |
 | [D-410](packing/devtools/controls.yaml) | 2026-08-31 | tooling | validity | conservative | `gate` | low | fixed | A control's anchor was bumped without its expected message |
+| [D-411](packing/devtools/check_results.py) | 2026-08-31 | tooling | validity | neutral | `review` | high | fixed | The results checker and its epistemic policy disagreed at the boundary rungs |
+| [D-412](packing/src/sqpack/cli/validate.py) | 2026-08-31 | tooling | validity | flattering | `review` | high | fixed | Change-scoped validation could skip the open-ended results register dependencies |
+| [D-413](packing/devtools/run_negative_controls.py) | 2026-08-31 | tooling | validity | conservative | `review` | medium | fixed | Results controls ran in snapshots missing their structured evidence files |
+| [D-414](.github/workflows/packing-validation.yml) | 2026-08-31 | tooling | robustness |  | `review` | medium | fixed | CI installed an unpinned uv release |
+| [D-415](packing/devtools/controls.yaml) | 2026-08-31 | tooling | validity | conservative | `gate` | low | fixed | Flowmark reflow defused the README defect-aggregate control anchor |
+| [D-416](packing/frontier/results.yaml) | 2026-08-31 | record | validity | flattering | `review` | high | fixed | The results scope contract admitted a broader claim and reversed ranges |
+| [D-417](packing/devtools/build_n5_identity_pair.py) | 2026-08-31 | tooling | validity | conservative | `gate` | medium | fixed | The n=5 identity-pair replay compared meaningless floating-point last bits |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

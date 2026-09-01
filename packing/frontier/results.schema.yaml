@@ -111,5 +111,5 @@ $defs:
       next_rung:
         type: string
         minLength: 1
-        description: The concrete work that would raise C or V — what makes the register a work queue.
+        description: The next evidence-improving action, or why no independent rung change applies.
       notes: {type: string, minLength: 1}

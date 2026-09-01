@@ -141,13 +141,10 @@ no evidence. [`development.md`](development.md#hashes-and-repository-owned-artif
 owns the narrow exceptions for real trust boundaries, deduplication, event identity, and
 cache correctness.
 
-**Cross-field rules live in the checker, not the schema.** [checked] The convention
-began as a workaround — softschema 0.6.2 rejected `allOf` object composition under
-`status: enforced`
-([jlevy/softschema#41](https://github.com/jlevy/softschema/issues/41)), fixed by 0.8.0 —
-and is retained by choice: a checker rule fails the offending artifact with a named
-reason where a schema conditional invalidates every artifact, and a checker rule can
-carry its own negative control.
+**Schemas own local structure; checkers own relationships between fields and
+artifacts.** [checked] Put a rule in a checker when it needs a tailored diagnostic,
+reads another artifact, or merits a negative control.
+Keep required keys, types, enums, and other record-local constraints in the schema.
 
 ### Workflow, Focus, Phase, and Slice
 
@@ -440,40 +437,24 @@ A skipped check is recorded and re-listed at the end.
 `--strict` enables deep golden regeneration and turns every skip into a failure; failed
 or incomplete strict surfaces always return nonzero.
 
-**Run the cheapest loop that answers the current question.** The research round is
-deliberately separate from the edit/test loop, so an eight-hour hypothesis never makes a
-documentation correction take eight hours to validate:
+**Run the cheapest loop that answers the current question.** Research rounds remain
+separate from edit and validation loops, so a long hypothesis does not set the cost of a
+documentation correction:
 
-| Loop | Measured latency | Use |
-| --- | ---: | --- |
-| Interactive | under about 2 seconds | Pytest, ledger and schema checks, exact-witness verification, engine self-test |
-| Focused | seconds | `packing-validate --only TEXT` for one component and its controls |
-| Pre-push | about 4 seconds | `packing-validate --records`: registries, generated views, and declared contracts. This is the set that actually breaks CI ([D-369](defects.md)) |
-| Edit loop | about 8 minutes | `packing-validate --fast`, which is the pre-push set plus the behavioural tests that dominate it — one step is essentially all of it |
-| Checkpoint | about 18 minutes | Normal `packing-validate` before a commit, cross-component handoff, or checkpoint merge |
-| Deep handoff | about 18 minutes, two steps currently failing | `packing-validate --strict` before an unattended campaign, a handoff that depends on regenerated producer output, or any claim that the strict/deep path is healthy |
-| Research round | preregistered per hypothesis | Candidate generation or proof search under its own declared timebox |
+| Loop | Command or instrument | Use |
+| --- | --- | --- |
+| Interactive | Targeted pytest, checker, verifier, or engine self-test | Answer one local question while editing |
+| Focused | `packing-validate --only TEXT` | Run one named validation surface and its controls |
+| Records | `packing-validate --records` | Check registries, generated views, and declared contracts |
+| Edit | `packing-validate --edit` | Run the normal low-latency editing floor |
+| Pre-push | `packing-validate --push --since origin/main` | Add behavioral tests reachable from the change |
+| Full | `packing-validate` | Check a commit, cross-component handoff, or merge checkpoint |
+| Strict/deep | `packing-validate --strict` and, when producer output matters, `--deep` | Refuse skips and rebuild expensive producers before an unattended campaign or dependent handoff |
+| Research round | A preregistered W6 instrument | Run candidate generation or proof search under its declared timebox |
 
-Measured on one container, the pre-push and edit-loop rows on 2026-08-30 and the rest on
-2026-08-29. Both restatements happened because the entries had drifted: the 2026-08-29
-pass found sixty seconds claimed for a tier that takes eight minutes and two minutes for
-one that takes eighteen, and the 2026-08-30 pass found seventy seconds claimed for a
-tier that `BC-077` had taken to four.
-A latency column nobody re-measures is how a tier stops being chosen on cost.
-
-The pre-push row moved because a schema validator was swapped and exact geometry left a
-step named for schemas, not because anything stopped being checked
-([`D-370`](defects.md)).
-
-**The edit-loop row is new, and it is where `BC-079` landed.** The tier called `--fast`
-had stopped being fast: measured at `499s`, with `fast behavioral tests` accounting for
-all but about 33 seconds of it.
-A tier priced at the cost of its widest step is a tier people skip, and that is the
-mechanism `D-369` records — seven CI failures on one branch, every one a record check,
-none a behavioural test.
-So the split is by what a step catches rather than by what it costs: `--edit` carries
-the seventeen steps that answer a question about the change in front of you, and
-`--fast` adds the one step whose cost is breadth.
+The split follows what each step detects.
+Do not copy measured latencies into durable guidance; use the validator transcript when
+cost affects a decision.
 
 Three properties make the split safe rather than merely cheaper, and each is a test:
 
@@ -505,9 +486,9 @@ and schema shape, notation, provenance and correction form, layer boundaries, an
 conventions. Where a family of them is large enough to stand alone it may live in a
 nested `conventions.md` that this one references, rather than growing this page.
 
-The W8 documentation checklist used to sit here and is now
-[the documentation-pass runbook](packing/campaign/documentation-pass.md), because a
-checklist for running a pass is a procedure and not a format.
+The W8 checklist is the
+[documentation-pass runbook](packing/campaign/documentation-pass.md), because a
+checklist for running a pass is a procedure rather than a convention.
 
 ## Defect Classes
 
@@ -526,13 +507,13 @@ alike is how a critical bug gets the same attention as a stale link.
 
 Soundness and validity defects additionally record a **direction**: `flattering` errors
 overstate the result and are the dangerous kind, because they look like success;
-`conservative` errors understate it and cost only effort.
-Four of the six soundness defects found so far flattered.
+`conservative` errors understate it and primarily cost effort or opportunity.
+Current totals and detector statistics belong in the generated defect log.
 [checked]
 
 A soundness defect gets a postmortem, not just a fix—see
 [the first one](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md),
-whose rules R1–R4 apply to code that does not exist yet.
+whose rules R1–R4 define the defenses required for new soundness-sensitive code.
 [convention]
 
 ## Defects

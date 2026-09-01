@@ -77,8 +77,8 @@ controls:
 - name: README - repeated numeric gate-defect aggregate
   file: ../README.md
   replace:
-    - "No soundness\n  defect in the log was caught by it."
-    - "No soundness\n  defect in the log was caught by it. The gate caught two defects."
+    - "No soundness defect in the log was caught by it."
+    - "No soundness defect in the log was caught by it. The gate caught two defects."
   run: python3 -m devtools.check_readme
   expect: "repeats a numeric gate-defect aggregate"
 

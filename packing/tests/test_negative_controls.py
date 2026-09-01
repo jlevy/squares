@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import shlex
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -13,7 +14,9 @@ from devtools.run_negative_controls import (
     PRUNE,
     ROOT,
     SNAPSHOT_MAX_BYTES,
+    clone_tree,
     resolve_control_target,
+    result_pruned_targets,
     run_control_command,
     snapshot_source_bytes,
 )
@@ -25,6 +28,25 @@ def test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots() ->
     assert ROOT / "atlas/known-best/rendering" in PRUNE
     assert ROOT / "atlas/known-best/contact-overlays" in PRUNE
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
+
+
+def test_results_register_dependencies_survive_snapshot_pruning() -> None:
+    retained = {path.relative_to(ROOT).as_posix() for path in result_pruned_targets()}
+    assert "resources/papers/bentz-2010-optimal-packings-13-and-46.md" in retained
+    assert "resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.pdf" in retained
+
+
+def test_unmutated_results_checker_is_green_inside_a_worker(tmp_path: Path) -> None:
+    tree = tmp_path / "snapshot"
+    clone_tree(tree)
+    completed = subprocess.run(
+        [sys.executable, "-m", "devtools.check_results"],
+        cwd=tree / "packing",
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
 
 
 def test_control_targets_cannot_escape_the_private_snapshot(tmp_path: Path) -> None:

@@ -192,8 +192,8 @@ results:
       of the paper.
   - id: T-007
     claim: >-
-      s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1) for all
-      N >= 4 (Nagamochi 2005, Theorem 2).
+      For every integer 4 <= N <= 100, Nagamochi 2005, Theorem 2 gives
+      s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1).
     scope: {n_min: 4, n_max: 100}
     verification: V3
     confirmation: C1

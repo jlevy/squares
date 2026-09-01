@@ -292,10 +292,32 @@ def linked_pruned_targets() -> list[Path]:
     return sorted(targets)
 
 
+def result_pruned_targets() -> list[Path]:
+    """Pruned files named structurally by the results register."""
+    register = safe_load((ROOT / "frontier/results.yaml").read_text(encoding="utf-8"))
+    targets: set[Path] = set()
+    for record in register["results"]:
+        raw_paths = [*(record.get("artifacts") or []), *(record.get("controls") or [])]
+        if review := record.get("review_artifact"):
+            raw_paths.append(review)
+        for raw in raw_paths:
+            resolved = (REPO / raw).resolve()
+            if resolved.is_file() and any(
+                resolved.is_relative_to(root) for root in LINKED_PRUNE_ROOTS
+            ):
+                targets.add(resolved)
+    return sorted(targets)
+
+
+def snapshot_pruned_targets() -> list[Path]:
+    """All pruned source files needed by checks that run inside a worker."""
+    return sorted({*linked_pruned_targets(), *result_pruned_targets()})
+
+
 def snapshot_source_bytes() -> int:
     """Bytes copied by the portable fallback, excluding linked build products."""
     total = sum(path.stat().st_size for path in COPY_SEPARATELY)
-    total += sum(target.stat().st_size for target in linked_pruned_targets())
+    total += sum(target.stat().st_size for target in snapshot_pruned_targets())
     for document in ROOT_DOCUMENTS:
         if document.is_dir():
             total += sum(path.stat().st_size for path in document.rglob("*") if path.is_file())
@@ -320,7 +342,7 @@ def clone_tree(dest: Path) -> None:
     resource_readme = work / "resources/README.md"
     resource_readme.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / "resources/README.md", resource_readme)
-    for target in linked_pruned_targets():
+    for target in snapshot_pruned_targets():
         landing = work / target.relative_to(ROOT)
         landing.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(target, landing)

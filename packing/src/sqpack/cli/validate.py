@@ -1848,17 +1848,10 @@ STEPS: tuple[Step, ...] = (
         _results_register,
         fast=True,
         records=True,
-        touches=(
-            *_CORE,
-            "packing/devtools/check_results.py",
-            "packing/devtools/render_results.py",
-            "packing/frontier/results.yaml",
-            "packing/frontier/RESULTS.md",
-            "packing/frontier/evidence.yaml",
-            "epistemics.md",
-            "README.md",
-            "SYNOPSIS.md",
-        ),
+        # The register names arbitrary artifact, control, and review paths. An empty
+        # attribution selects this subsecond step for every change, so a rename or
+        # deletion cannot evade its existence checks.
+        touches=(),
     ),
     Step(
         "exact certificates are named by their records",
