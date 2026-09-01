@@ -3,9 +3,9 @@ type: is
 id: is-01m1dtfx94hb8ndgdxmmxp3z4m
 title: "Agenda 013: nine-hour autonomous W3 execution and review"
 kind: epic
-status: open
+status: closed
 priority: 0
-version: 10
+version: 11
 spec_path: packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md
 labels:
   - packing
@@ -23,6 +23,10 @@ child_order_hints:
   - is-01m1dw6c2mb2y2ect4qj49amwd
   - is-01m1dx687baaht2f42h43d3eyp
 created_at: 2026-09-01T06:28:49.048Z
-updated_at: 2026-09-01T07:15:58.314Z
+updated_at: 2026-09-01T18:28:18.437Z
+closed_at: 2026-09-01T18:28:18.436Z
+close_reason: Agenda-013 completed all scheduled W3, W6, W5, review and synthesis blocks with no scientific frontier change and an exact guarded successor handoff.
+resolution: null
+duplicate_of: null
 ---
 Own the exact nine-hour wall-clock execution of agenda-012's three first-wave lanes, one outcome-routed continuation per lane, an independent three-lane review, and a terminal synthesis gate. No lane may invent work to fill time; every positive, negative, refusal, and premeasurement stop is retained and routed through the declared matrix.
