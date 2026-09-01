@@ -1,9 +1,9 @@
 # One entry per agent session, joining what the session did to what it cost.
 #
 # Those two facts have always been in the repository and never in one place: the session
-# record carries phases and outcomes, `ClaudeEfficiencyRollup/v1` carries turns and tool
-# calls, and nothing joined them. So "what did this session cost" was a question you
-# answered by hand, and "what has the campaign cost" was one nobody answered at all.
+# record carries phases and outcomes, while harness-specific receipts carry measured cost,
+# and nothing joined them. Claude log totals and declared Codex intervals remain separate
+# because they use different units and may overlap.
 #
 # Every session appears, including the ones with no measurement. An entry that says
 # `measured: false` and names why is the point rather than an omission: forty-four sessions
@@ -14,7 +14,7 @@ $id: packing.squares:SessionCloseReport/v1
 title: Session close report
 type: object
 additionalProperties: false
-required: [count, generated_by, totals, sessions]
+required: [count, generated_by, totals, codex_receipts, sessions]
 properties:
   count: {type: integer, minimum: 0, description: Must equal len(sessions).}
   generated_by:
@@ -42,13 +42,25 @@ properties:
       attributed: {$ref: '#/$defs/figures'}
       unattributed: {$ref: '#/$defs/figures'}
       measured: {$ref: '#/$defs/figures'}
+  codex_receipts:
+    type: object
+    additionalProperties: false
+    required: [attributed, unattributed, measured]
+    description: >-
+      Counts of distinct privacy-reduced Codex task-tree interval receipts. They are never
+      added to the Claude totals above: a declared interval and a harness log can cover the
+      same work, and Codex model responses are not Claude assistant turns.
+    properties:
+      attributed: {type: integer, minimum: 0}
+      unattributed: {type: integer, minimum: 0}
+      measured: {type: integer, minimum: 0}
   sessions:
     type: array
     minItems: 1
     items:
       type: object
       additionalProperties: false
-      required: [id, status, phases, measured, rollups]
+      required: [id, status, phases, measured, rollups, codex_receipts]
       properties:
         id: {type: string, pattern: "^session-[0-9]{3}$"}
         title: {type: string, minLength: 1}
@@ -80,6 +92,9 @@ properties:
             such a measurement behind rather than about exploring with it, so this is
             reported and never gated.
         wall_hours: {type: [number, "null"], minimum: 0}
+        codex_receipts:
+          type: array
+          items: {$ref: '#/$defs/codex_receipt'}
       allOf:
         - if:
             properties: {measured: {const: false}}
@@ -99,3 +114,22 @@ $defs:
       tool_errors: {type: integer, minimum: 0}
       one_off_code: {type: integer, minimum: 0}
       wall_hours: {type: number, minimum: 0}
+  codex_receipt:
+    type: object
+    additionalProperties: false
+    required:
+      - path
+      - model_responses
+      - agent_hours
+      - active_union_hours
+      - wall_hours
+      - snapshot_incomplete
+    properties:
+      path: {type: string, minLength: 1}
+      model_responses: {type: integer, minimum: 0}
+      agent_hours: {type: number, minimum: 0}
+      active_union_hours: {type: number, minimum: 0}
+      wall_hours: {type: number, minimum: 0}
+      snapshot_incomplete:
+        type: boolean
+        description: True means the retained after-snapshot is explicitly a lower bound.

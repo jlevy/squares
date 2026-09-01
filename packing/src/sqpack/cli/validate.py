@@ -1794,8 +1794,11 @@ STEPS: tuple[Step, ...] = (
         touches=(
             *_CORE,
             "packing/devtools/close_session.py",
+            "packing/devtools/codex_task_tree_delta.py",
             "packing/campaign/agent-sessions/*.md",
             "packing/campaign/resource-usage/*.yaml",
+            "packing/campaign/schemas/codex-task-tree-delta.schema.yaml",
+            "packing/campaign/schemas/session-close-report.schema.yaml",
             # The step now also checks the reader-facing view spliced into the synopsis,
             # so editing that section has to be able to fail it.
             "SYNOPSIS.md",
@@ -1809,7 +1812,10 @@ STEPS: tuple[Step, ...] = (
         touches=(
             *_CORE,
             "packing/devtools/render_pr_rollup.py",
+            "packing/devtools/codex_task_tree_delta.py",
+            "packing/campaign/agent-sessions/*.md",
             "packing/campaign/resource-usage/*.yaml",
+            "packing/campaign/schemas/codex-task-tree-delta.schema.yaml",
         ),
     ),
     Step(
@@ -1876,6 +1882,8 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/check_session_rollups.py",
             "packing/campaign/agent-sessions/*.md",
             "packing/campaign/resource-usage/*.yaml",
+            "packing/campaign/schemas/agent-session.schema.yaml",
+            "packing/campaign/schemas/codex-task-tree-delta.schema.yaml",
         ),
     ),
     Step(

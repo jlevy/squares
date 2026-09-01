@@ -322,17 +322,16 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-No escalated research session is active.
-The latest terminal record is
-[session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md),
-owned by `think-n8vl`; its branch is in final review and the bead closes when the pull
-request merges. It added the whole-results register, the V/C/S/N rubric, and the
-structural checker summarized in [`epistemics.md`](epistemics.md).
+The agenda-013 publication checkpoint is active in
+[session-062](packing/campaign/agent-sessions/session-062-agenda013-preflight-and-publication.md).
+Its independent reviews, exact 540-minute schedule, state guards, and Codex interval
+receipt are complete; the stacked pull request and push gate are the remaining preflight
+actions.
 
-No new scientific slice is authorized by that documentation and CI review.
-Select the next research slice from the generated
-[agenda map](packing/campaign/agenda-map.md), as required by
-[`OR-4`](operating-rules.md).
+After publication, the exact scientific entry point is `BC-108` under `think-swtr`: the
+fixed `n = 17` weighted-certificate replay and independent accumulation path.
+The coordinator dispatches the other two agenda-013 first-wave launch cards in parallel,
+but `BC-108` is the single cold-start handoff named here.
 
 ### Handoff Record
 
@@ -522,6 +521,14 @@ hash-verified parent-child serialization bridge at `n = 68/69`; and `BC-110` dec
 whether `n = 50` can become the rational exact-promotion control.
 Run them in parallel, then take `BC-111`’s bounded checkpoint.
 The dependency-linked successors are already filed.
+[Agenda-013](packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md) is the
+owner-authorized nine-hour execution graph on one pull request: 150 minutes for those
+three first-wave blocks, a 15-minute W5 efficiency checkpoint, 30 minutes for BC-111,
+180 minutes for one positive or refusal-path continuation per lane, 30 minutes to
+measure throughput again and freeze review packets, 90 minutes for three independent
+reviewers, and 45 minutes for synthesis and final validation.
+Every wave boundary requires a commit, tbd and generated-view reconciliation, validation
+receipt, push, and PR update.
 Existing `BC-010` gets one final 90-minute discriminator with a matched `n = 10`
 transfer under dedicated bead `think-iivb`. Its first cell freezes both fixtures, the
 observable, threshold, and refusal conditions before measurement.
@@ -2477,9 +2484,8 @@ Transverse and mixed nonlinear realization remains open.
 
 An experiment records what was measured about square packing.
 A session records what an agent did for a stretch of hours, and until recently it
-recorded that without recording what the stretch cost: the phases and outcomes were in
-one file and the turns and wall-clock were in another, keyed by harness log id, and
-nothing joined them.
+recorded that without recording what the stretch cost: phases and outcomes were in one
+file while harness measurements were elsewhere, and nothing joined them.
 [`session-close-report.yaml`](packing/campaign/session-close-report.yaml) is that join,
 one validated entry per session, written by `devtools.close_session --render` from the
 session records and the rollups rather than from anybody’s recollection, and
@@ -2492,9 +2498,10 @@ sessions.** Several sessions can run inside one harness log, each legitimately d
 the whole of it; charging it to each of them read as 117.9 hours for a campaign that had
 spent 43.7, so every total is taken over distinct rollups and the shared log gets its
 own row rather than a footnote.
-And a rollup exists on disk whether or not a session claims it, so the ones nobody
+And a receipt exists on disk whether or not a session claims it, so the ones nobody
 claims are counted rather than dropped — the gap between those two rows is coverage, not
-rounding.
+rounding. Claude’s branch-aware log totals and Codex’s declared task-tree intervals stay
+in separate tables: their units differ, and the same work can appear in both.
 
 <!-- BEGIN GENERATED: session-close-report (devtools.close_session) -->
 
@@ -2525,20 +2532,26 @@ rounding.
 | [session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
 | *shared by 17 sessions* | — | 3 | 10,053 | 5,527 | 123 | 61.3 h |
 
+| Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| `codex-task-tree-session-062.yaml` | session-062 | 450 | 2.06 h | 1.14 h | 1.14 h | yes |
+
 | Coverage | sessions |
 | --- | ---: |
-| measured | 17 |
+| measured | 18 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **61** |
+| **total** | **62** |
 
 <!-- END GENERATED: session-close-report -->
 
 The sessions with no measurement closed before `resource_rollups` existed and their
 harness logs are not retained, so that cost is gone rather than pending.
-The rollups no session claims are the delegated half of the same period: sub-agent logs
-that survived while the session records that would have claimed them predate the field.
-Backfill needs nothing but a retained log — `close_session --update` writes its rollup,
-and the entry fills in on the next render.
+The Claude rollups no session claims are the delegated half of the same period:
+sub-agent logs that survived while the session records that would have claimed them
+predate the field. Claude backfill needs only a retained log; Codex interval refresh
+needs the root task id and the two declared cutoffs.
+The relevant generator writes the receipt, and the entry fills in on the next
+`close_session --render`.
 
 ## Experiments Conducted
 

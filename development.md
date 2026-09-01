@@ -447,7 +447,7 @@ uv run --frozen python -m devtools.codex_log_rollup \
 ```
 
 Repeat `--root-id` to compare task trees, use `--format json` for the stable
-`CodexEfficiencyRollup/v1` contract, and add `--include-turns` only when the full turn
+`CodexEfficiencyRollup/v2` contract, and add `--include-turns` only when the full turn
 tree is needed. The scanner follows descendant task ids, removes inherited history from
 current and legacy subagent logs, correlates command polling with its originating
 command when the log permits it, and keeps parent active time, recursive agent-time,
@@ -467,6 +467,22 @@ agent paths, token totals, and shortened normalized command excerpts.
 Review and reduce a report before retaining it in the repository.
 Store compact dated findings and comparison receipts, not raw Codex JSONL or complete
 private command histories.
+
+To retain a publishable AgentSession interval, do not archive the full v2 output.
+Build the enforced privacy-reduced delta from two explicit cutoffs instead:
+
+```shell
+uv run --frozen python -m devtools.codex_task_tree_delta \
+  --sessions-root ~/.codex/sessions --root-id <codex-task-id> \
+  --start <AgentSession-started_at> --end <snapshot-at> \
+  --out campaign/resource-usage/codex-task-tree-<session-id>.yaml
+```
+
+`CodexTaskTreeDelta/v1` keeps only additive aggregate counts, timing categories, model
+settings and tokens.
+It drops prose, paths, child and turn identifiers, and commands.
+The AgentSession must declare the receipt because Codex records no Git branch; an
+in-flight snapshot remains a lower bound until a later checkpoint replaces it.
 
 The session schema continues to represent an efficiency session through
 `workflow_phases[].workflow: efficiency-loop` and `focus: efficiency`. Recursive timing

@@ -14,6 +14,27 @@ from cases.campaign_smoke import baseline_sweep
 from sqpack.campaign import ledger, runner
 
 
+def test_review_pending_round_does_not_disposition_hypothesis() -> None:
+    hypothesis = {
+        "kind": "hypothesis",
+        "instrument_ready": True,
+        "instrument": "A frozen checker.",
+    }
+    pending = {"verdict": {"decision": "accepted", "needs_review": True}}
+
+    assert ledger.status_of(hypothesis, [pending]) == "needs review"
+
+
+def test_review_pending_round_does_not_override_reviewed_disposition() -> None:
+    hypothesis = {"kind": "hypothesis"}
+    reviewed = {"verdict": {"decision": "accepted", "needs_review": False}}
+    pending = {"verdict": {"decision": "rejected", "needs_review": True}}
+
+    assert ledger.status_of(hypothesis, [reviewed, pending]) == "confirmed"
+    pending["verdict"]["needs_review"] = False
+    assert ledger.status_of(hypothesis, [reviewed, pending]) == "refuted"
+
+
 def _empty_board_ids() -> tuple[set[str], set[str]]:
     """Remove unrelated idea-board state from isolated session tests."""
     return set(), set()

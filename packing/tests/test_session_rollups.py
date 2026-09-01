@@ -81,6 +81,47 @@ def test_an_in_progress_session_is_not_required_to_have_them(
     assert checker.main() == 0
 
 
+def test_the_checker_refuses_an_existing_file_with_an_unknown_contract(
+    monkeypatch, tmp_path: pathlib.Path
+) -> None:
+    record = tmp_path / "session-999-fabricated.md"
+    record.write_text(
+        "---\nsession:\n  id: session-999\n  status: completed\n"
+        "  resource_rollups: [usage.yaml]\n---\n# fabricated\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "usage.yaml").write_text(
+        "softschema:\n  contract: invented/v1\n  envelope: rollup\n"
+        "  status: enforced\nrollup: {}\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(checker, "SESSIONS", tmp_path)
+    monkeypatch.setattr(checker, "REPO", tmp_path)
+
+    assert checker.main() == 1
+
+
+def test_the_checker_accepts_an_enforced_codex_delta_contract(
+    monkeypatch, tmp_path: pathlib.Path
+) -> None:
+    record = tmp_path / "session-999-fabricated.md"
+    record.write_text(
+        "---\nsession:\n  id: session-999\n  status: completed\n"
+        "  resource_rollups: [usage.yaml]\n---\n# fabricated\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "usage.yaml").write_text(
+        "softschema:\n"
+        "  contract: packing.squares:CodexTaskTreeDelta/v1\n"
+        "  envelope: rollup\n  status: enforced\nrollup: {}\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(checker, "SESSIONS", tmp_path)
+    monkeypatch.setattr(checker, "REPO", tmp_path)
+
+    assert checker.main() == 0
+
+
 def test_the_grandfather_boundary_is_a_boundary_not_a_list() -> None:
     """A new session is above it by construction, so the exemption cannot quietly grow."""
     assert GRANDFATHERED_BEFORE == "session-045"

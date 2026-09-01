@@ -251,7 +251,8 @@ agenda:
       target output may be read first. During 30--60, execute the frozen n = 5
       discriminator. During 60--90, execute the identical observable at n = 10, record
       `transfer=passed` or `transfer=refused`, and apply the terminal transition below.
-      No successor n = 5 block is authorized by this commitment.
+      No additional H-023 or local-geometry block is authorized by this commitment;
+      only the already-declared BC-011 transfer-validation row may clear on a pass.
     entry: >-
       BC-003 and BC-009 complete; exp-033 binds the first declared pair to exact poses
       and exp-034 embeds its exact face in a two-parameter optimal sheet. The target run
@@ -267,8 +268,11 @@ agenda:
       blocked hold from think-v3u5. If transfer is refused or BC-010 stops before
       measurement, mark BC-011 through BC-014 `stopped` and close their dedicated beads
       with the same stop reason. Leave H-023 unresolved but explicitly parked. The
-      legacy think-1s0h remains the broader H-023 owner; its status and hold do not gate
-      this chain, and it must never be closed merely to clear an edge.
+      legacy think-1s0h remains the broader H-023 owner and must never be closed merely
+      to clear an edge. On the refused or premeasurement-stop branch, however, the
+      coordinator must place think-1s0h on `paused` hold with the same portfolio-stop
+      reason; on the passing branch its status and hold remain independent of this
+      chain.
     bead: think-iivb
     depends_on: [BC-003, BC-009]
     next_evidence: >-
@@ -378,7 +382,12 @@ agenda:
     hypotheses: [H-021]
     budget: one fixed four-seed block per n first; expand only under a preregistered interval rule
     entry: BC-010 provides the first nontrivial identity control
-    exit: per-n unresolved fractions with 95% upper bounds; stop at the first failed cell
+    exit: >-
+      Per-n unresolved fractions with 95% upper bounds. If every included cell meets
+      the preregistered threshold, mark BC-011 `complete` with a passing result, mark
+      BC-012 `ready`, and remove think-nbhe's blocked hold. At the first failed cell,
+      mark BC-011 `complete` with a measured-negative result, mark BC-012 through
+      BC-014 `stopped`, and close their dedicated tasks with the same stop reason.
     bead: think-v3u5
     depends_on: [BC-010]
     next_evidence: ambiguity-preserving classified event archive through the first failed or n=8 cell
@@ -388,7 +397,9 @@ agenda:
       `complete` with a retained `transfer=passed` result and the coordinator removes
       that hold. If BC-010 takes its refusal transition, this row and BC-012 through
       BC-014 become `stopped` and their dedicated tasks close with the stop reason; they
-      do not wait for or inherit another n = 5 task.
+      do not wait for or inherit another n = 5 task. A measured BC-011 failure also
+      stops BC-012 through BC-014; task closure records the measured negative and does
+      not turn it into a scientific pass.
   - id: BC-012
     purpose: research
     owner_focus: insight
@@ -401,7 +412,12 @@ agenda:
     hypotheses: [H-007, H-011]
     budget: successive halving; start with two independent four-seed blocks per n
     entry: BC-011 passes every included n and the estimator is frozen before held-out data
-    exit: preregistered coverage interval passes, fails, or exhausts its tier-S budget
+    exit: >-
+      The preregistered coverage interval passes, fails, or exhausts its tier-S budget.
+      On a pass, mark BC-012 `complete` with a passing result, mark BC-013 `ready`, and
+      remove think-3rv3's blocked hold. On failure or exhaustion, mark BC-012 `complete`
+      with that measured outcome, mark BC-013 and BC-014 `stopped`, and close their
+      dedicated tasks with the same reason.
     bead: think-nbhe
     depends_on: [BC-011]
     next_evidence: discovery curves, held-out predictions, uncertainty, and stop verdict
@@ -409,7 +425,10 @@ agenda:
     note: >-
       This dedicated task remains held `blocked` until BC-011 passes and the coordinator
       removes the hold. Stop with BC-011 when BC-010 records `transfer=refused`; only the
-      successful transfer branch may clear the dependency chain.
+      successful transfer branch may clear the dependency chain. A completed BC-011
+      row that records a failed cell does not pass this gate. If BC-012 itself fails or
+      exhausts its budget, stop BC-013 and BC-014 rather than clearing them from task
+      closure alone.
   - id: BC-013
     purpose: measurement_validation
     owner_focus: efficiency
@@ -421,17 +440,26 @@ agenda:
       canonicalization or quench cost dominating the information gained?
     hypotheses: [H-007, H-011]
     budget: one priced seed block at a time; stop when projected next block exceeds one 30m slice
-    entry: BC-007, BC-008, and BC-012 complete
-    exit: measured viable extension or a profile-backed scale ceiling
+    entry: >-
+      BC-007 and BC-008 are complete, and BC-012 records a passing coverage result;
+      BC-012 completion after failure or exhaustion does not pass this gate.
+    exit: >-
+      A measured viable extension or a profile-backed scale ceiling. On a viable
+      extension, mark BC-013 `complete` with a passing result, mark BC-014 `ready`, and
+      remove think-81mn's blocked hold. On a scale ceiling, mark BC-013 `complete` with
+      that measured-negative result, mark BC-014 `stopped`, and close think-81mn with
+      the same reason.
     bead: think-3rv3
     depends_on: [BC-007, BC-008, BC-012]
     next_evidence: component discoveries per wall-second and per pair-test with profile
     parallel_group: performance
     note: >-
       This dedicated task, rather than the shared performance bead think-xzew, owns the
-      agenda gate and remains held `blocked` until BC-012 completes. Stop with BC-011
-      when BC-010 records `transfer=refused`; a closed or paused n = 5 bead is not by
-      itself authorization to scale this lane.
+      agenda gate and remains held `blocked` until BC-012 passes. Stop with BC-011 when
+      BC-010 records `transfer=refused`, stop after a BC-011 classifier failure or
+      BC-012 coverage failure/exhaustion, and do not infer authorization from task
+      closure alone. A closed or paused n = 5 bead is not by itself authorization to
+      scale this lane.
   - id: BC-014
     purpose: research
     owner_focus: insight
@@ -451,9 +479,10 @@ agenda:
     parallel_group: frontier-search
     note: >-
       This dedicated task remains held `blocked` until BC-013 passes and the coordinator
-      removes the hold. Stop with BC-011 when BC-010 records `transfer=refused`; the
-      Trump search lane may be reconsidered later only under a new agenda with its own
-      matched control.
+      removes the hold. Stop after BC-010 refusal, BC-011 classifier failure, BC-012
+      coverage failure/exhaustion, or BC-013's profile-backed scale ceiling; a terminal
+      predecessor is not necessarily a passing predecessor. The Trump search lane may
+      be reconsidered later only under a new agenda with its own matched control.
   - id: BC-015
     purpose: tool_validation
     owner_focus: correctness

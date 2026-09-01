@@ -2,7 +2,7 @@
 
 # Agenda map
 
-115 agenda commitments across 12 agendas, as declared in each agenda's own frontmatter.
+122 agenda commitments across 13 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **10** ready, **3** tentative, **18** blocked, **5** stopped, **79** complete.
+- **10** ready, **3** tentative, **25** blocked, **5** stopped, **79** complete.
 
-- **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
+- **11 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-111`, `BC-115`, `BC-122`, `BC-116`, `BC-117`, `BC-118`, `BC-119`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -53,11 +53,18 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-002 | `BC-022` | 4 | `BC-021` | no | — |
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
-| agenda-012 | `BC-111` | 1 | `BC-108`, `BC-109`, `BC-110` | no | — |
+| agenda-012 | `BC-111` | 1 | `BC-108`, `BC-109`, `BC-110` | no | Agenda-013 BC-122 must retain its W5 receipt, mark its row complete and close think-iv3e. The live tbd edge is the… |
 | agenda-012 | `BC-112` | 1 | `BC-108`, `BC-111` | no | — |
 | agenda-012 | `BC-113` | 1 | `BC-109`, `BC-111` | no | — |
 | agenda-012 | `BC-114` | 2 | `BC-110`, `BC-111` | no | — |
-| agenda-012 | `BC-115` | 2 | `BC-112` | no | BC-112 must adopt the certificate and a second fixed-certificate consumer must be named before the coordinator removes… |
+| agenda-012 | `BC-115` | 2 | `BC-112` | no | BC-120 must clear and BC-121 must apply BC-112's adoption recommendation, and a second fixed-certificate consumer must… |
+| agenda-013 | `BC-122` | 0 | — | no | BC-108, BC-109 and BC-110 in agenda-012 must be terminal with their session and timing receipts retained. |
+| agenda-013 | `BC-119` | 0 | — | no | Exactly one declared second-wave continuation in each of the three lanes must be terminal and its sibling explicitly… |
+| agenda-013 | `BC-120` | 0 | `BC-119` | no | — |
+| agenda-013 | `BC-121` | 0 | `BC-120` | no | — |
+| agenda-013 | `BC-116` | 1 | — | no | BC-111 must route the n = 17 lane away from BC-112 and explicitly remove the manual hold. |
+| agenda-013 | `BC-117` | 1 | — | no | BC-111 must route the precision lane away from BC-113 and explicitly remove the manual hold. |
+| agenda-013 | `BC-118` | 1 | — | no | BC-111 must route the cross-scale lane away from BC-114, name one refusal dispatch, and explicitly remove the manual… |
 
 ## Discharged elsewhere
 
@@ -90,6 +97,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-010 | active | 2 | 2 |  |  | 9 | 13 |
 | agenda-011 | completed |  |  |  |  | 2 | 2 |
 | agenda-012 | active | 3 |  | 5 |  |  | 8 |
+| agenda-013 | active |  |  | 7 |  |  | 7 |
 
 ## What the states mean
 

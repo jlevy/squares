@@ -110,12 +110,14 @@ def test_a_blocked_cell_with_all_predecessors_complete_is_reported() -> None:
     assert "`BC-002`" in text
 
     # The same cell, now stating a second blocker, must not be advertised as takeable.
-    # It belongs to neither summary bullet: its edge has cleared, so it is not waiting on
-    # a commitment, and it has an edge, so it is not in the no-predecessor set either. It
-    # is simply still blocked, and the map must say nothing rather than something wrong.
+    # Its hybrid manual gate must appear in the summary even though it also has a
+    # dependency edge; otherwise a coordinator could mistake predecessor completion for
+    # authorization.
     still_blocked = replace(stalled, blocked_on="an acceptance decision nobody has made")
     quiet = render([done, still_blocked])
     assert "have every predecessor" not in quiet
+    assert "**1 blocked commitment carries a manual condition** (`BC-002`)" in quiet
+    assert "Dependency edges alone cannot make this ready" in quiet
     assert "an acceptance decision nobody has made" in quiet
 
 

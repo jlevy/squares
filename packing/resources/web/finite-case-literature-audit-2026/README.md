@@ -1,11 +1,12 @@
-# Finite-Case Literature Search Receipt, 2026-08-31
+# Finite-Case Literature Query Log, 2026-08-31
 
-This repeatable query receipt records the negative literature result used by
+This bounded query log records the negative literature result used by
 [`X-011`](../../../campaign/explorations/X-011-controls-are-not-targets.md).
-It records what was searched and what the retrieved primary sources establish. Search
-rankings and result sets were not snapshotted, so rerunning the strings may return a
-different corpus. This is not a systematic-review claim and does not prove that no
-unindexed paper exists.
+The searches ran through Codex's general web-search interface with its default locale
+and ranking; the underlying engine, result ids, ranking snapshot, and query URLs were
+not exposed or retained. The strings can be rerun, but this record is not a repeatable
+search receipt and may retrieve a different corpus. It is not a systematic-review claim
+and does not prove that no unindexed paper exists.
 
 ## Scope
 
@@ -53,10 +54,12 @@ Those results do not supply a new 2020--2026 finite-case theorem for the target 
 
 ## Bounded conclusion
 
-No additional paper in this retrieved corpus establishes a finite-case record or exact
-value for the prioritized cases. The recent finite-case changes remain first-party web
-evidence: catalogue entries and SVGs, UnitSquare's release, run-statistics artifacts,
-and the two proposed `n = 17` weighted certificates.
+No additional 2020--2026 paper in this retrieved corpus establishes a finite-case
+record, exact value, or target-specific bound for the prioritized cases. The Arslanov
+family begins above this below-100 list, while the Bui and McClenagan results are
+asymptotic rather than target-specific. The recent finite-case changes remain
+first-party web evidence: catalogue entries and SVGs, UnitSquare's release,
+run-statistics artifacts, and the two proposed `n = 17` weighted certificates.
 
 This conclusion is deliberately narrower than “the literature is complete.” Search
 index coverage, unpublished correspondence, and uncited papers remain possible gaps.

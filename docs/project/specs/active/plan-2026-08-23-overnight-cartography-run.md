@@ -342,18 +342,13 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, use
-[session 061](../../../../packing/campaign/agent-sessions/session-061-epistemics-codification.md),
-the epistemics codification the verification review fed; agenda-010 is fully discharged
-and `BC-106`’s review is merged (the six overnight holds resolved as determinations, the
-green17 bound upgraded to `4.426213` on two independent formal methods with the frontier
-fields moved at `n = 17` and `n = 18`), and the active slice is `BC-107` under
-`think-n8vl` in
-[agenda-011](../../../../packing/campaign/agendas/agenda-011-verification-review.md) --
-`epistemics.md` owning the verification/confirmation/significance/novelty axes, the
-results register `packing/frontier/results.yaml` with `devtools/check_results.py`
-re-deriving every declared rung in the gate, and the reader tier re-oriented around it.
-Sessions 027 through 049 are terminal, and agendas 006, 007 and 008 are closed; the
-recognition block BC-089 keeps its remainder open as sanctioned gate filler.
+[session 062](../../../../packing/campaign/agent-sessions/session-062-agenda013-preflight-and-publication.md)
+and take `BC-108` under `think-swtr` from
+[agenda-012](../../../../packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md).
+The entry is the fixed `n = 17` weighted-certificate replay plus an independently
+written exact accumulation path.
+Agenda-013 dispatches its other two first-wave lanes in parallel, but this paragraph
+deliberately names one cell and one bead as the cold-start handoff.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

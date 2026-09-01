@@ -192,9 +192,9 @@ The source-backed state is unusually good for a web result:
 - Massaccesi publishes a 168-atom certificate at `4.5058`; the extracted verifier
   replays under the repository’s Python 3.14 environment in under five seconds.
 - The exact totals and minimum reproduce.
-  A read-only audit found the angle cover, shrunken-square containment, sweep, and
-  scaling argument coherent.
-- The audit also found concrete source defects: the float LP generator omits an
+  A manual read-only review reported no issue in the angle cover, shrunken-square
+  containment, sweep, or scaling argument; no replayable independent audit exists yet.
+- That review also found concrete source defects: the float LP generator omits an
   inclusive endpoint, the illustration divides by 29 where the verifier uses 28
   intervals, and the prose contains two transpositions.
   None changes the final verifier’s reported result, but all matter when the method is
@@ -207,18 +207,21 @@ assumptions. The block should freeze the certificate data, harden the source-fai
 replay against optimized-Python `assert` removal, then compute the arrangement-cell
 minimum without copying the published two-dimensional difference-array sweep.
 
-If the independently written implementation agrees, a later assurance block can
-determine adoption at `n = 17` and monotone transfer to `18` and `19`. If it disagrees,
-the disagreement is already a typed discrepancy requiring adjudication.
+If the independently written implementation agrees, a later assurance block can freeze
+an adoption recommendation at `n = 17` and the exact monotone consequences at `18` and
+`19`; independent review must clear that recommendation before the frontier changes.
+If it disagrees, the disagreement is already a typed discrepancy requiring adjudication.
 In either case the generic weighted-point certifier is a higher-leverage proof
 instrument than another bespoke point-set search.
 
 Burns’s separate near-record construction at side about `4.677648`, just above the
 `4.675530` record, also matters strategically.
-Its topology differs from Bidwell’s. That does not improve the upper bound, but it is
-direct evidence that the `n = 17` landscape has more than one competitive structural
-basin. It strengthens `n = 17` as a search calibration while remaining separate from the
-lower-bound certificate.
+Burns describes its topology as different from Bidwell’s; this repository has not
+independently reconstructed either contact graph.
+If that source description survives reconstruction, it would be evidence that the
+`n = 17` landscape has more than one competitive structural basin.
+For now it makes `n = 17` a useful search-calibration candidate while remaining separate
+from the lower-bound certificate.
 
 ## The construction and certification ladder
 
@@ -280,20 +283,45 @@ The first block must build the missing bridge as a reusable tool:
 4. verify conservative relaxed container and pair-separation bounds for parent and
    child;
 5. label apparent contacts only `ruled-out`, `possible`, or `tolerance-qualified`; and
-6. emit both surgery-grade candidates or a typed source-precision/provenance refusal.
+6. emit separate parent and child candidates or typed source-precision/provenance
+   refusals, freezing the parent-only H-051 arm before child qualification.
 
 For `n = 68`, “surgery-grade” is a measured contract, not a visual judgment.
-Under each serialization model separately, the maximum induced corner displacement,
-container-side interval width, and worst wall/pair-separation interval width must each
-be at most one quarter of the released `7.68618004216131e-5` gain, and every validity
-sign must be decided except explicitly tolerance-qualified contacts.
+Resolve SVG transforms into global coordinates and map the container rectangle to
+`[0,L]^2`, reversing the SVG y-axis, so a recovered small square has side exactly 1. The
+gain and all thresholds are in these unit-square-length coordinates, not pixels or
+viewBox units. Each model maps a published decimal vertex to a closed source-coordinate
+rectangle; a compatible rigid pose must place every inverse-mapped corner inside its
+matched rectangle, or the model refuses.
+Published-to-rigid displacement is the largest Euclidean move from the normalized
+nominal decimal to a compatible corner.
+Corner ambiguity is the maximum diameter of a corresponding-corner position enclosure
+over all compatible poses and sides.
+Signed wall clearance is the minimum inward corner-to-wall distance; signed pair
+separation is the separating-axis maximum over both squares’ edge-normal projection
+gaps, positive for separation and negative for overlap.
+Under each serialization model separately, published-to-rigid displacement, corner
+ambiguity, container-side interval width, and every signed wall/pair-separation interval
+width must each be at most one quarter of the released `7.68618004216131e-5` gain, and
+every validity sign must be decided except explicitly tolerance-qualified contacts.
+A rounded or point-valued source side must lie in the side interval; a source-declared
+one-sided bound requires the whole interval to preserve its direction.
 Nearest-rounding, truncation, and declared export models may not be collapsed into one
 apparent contact graph.
 
-Only then should an operator working from an isolated, allowlisted parent snapshot with
-network access disabled attempt the registered exploratory public-parent surgery pilot
-H-051. One `n = 68` result cannot adjudicate H-030, whose registered criterion requires
-two successes among six parent-child pairs.
+H-051 uses exactly one model.
+Without inspecting the child or released gain, BC-109 hashes the first compatible,
+independently valid parent model in the fixed order `declared:<stable-id>`
+lexicographically, `nearest-6`, then `truncate-6`. That arm cannot change or be
+suppressed: after proposer output is immutable, the gain-relative threshold is applied
+to the selected parent and the corresponding child model either passes the full contract
+or causes a precision refusal; a later model cannot rescue the result.
+Only then should an agenda-reading coordinator launch a fresh proposer with no inherited
+history or prior receipt of these documents.
+The proposer receives only a sanitized launch card and isolated, allowlisted parent
+snapshot with network disabled; the coordinator may validate but may not propose.
+One `n = 68` result cannot adjudicate H-030, whose registered criterion requires two
+successes among six parent-child pairs.
 `n = 68` goes first: its released improvement, `7.68618e-5`, is about twelve times
 `n = 69`’s `6.54811e-6`. That makes success easier to distinguish from the numerical
 floor. A cold global search, an optimality attempt, and exactification of the superseded
@@ -302,9 +330,9 @@ floor. A cold global search, an optimality attempt, and exactification of the su
 ## What the literature audit establishes
 
 The retained author, phrase, arXiv, journal, and case-number queries in the
-[search receipt](../../resources/web/finite-case-literature-audit-2026/README.md) found
-no additional 2020--2026 paper in the retrieved corpus that establishes a finite-case
-record or exact value for the prioritized cases.
+[query log](../../resources/web/finite-case-literature-audit-2026/README.md) found no
+additional 2020--2026 paper in the retrieved corpus that establishes a finite-case
+record, exact value, or target-specific bound for the prioritized cases.
 The relevant recent papers in the retrieved corpus concern asymptotic waste, not these
 finite records. The new finite-case evidence lives in first-party catalogue pages, SVGs,
 run-statistic files, public repositories, and the two August 2026 `n = 17` posts.
@@ -348,12 +376,20 @@ Agenda-012 starts three disjoint blocks, each with its own bead and owned paths:
 2. `BC-109`: build the `n = 68/69` parent-child serialization/rigid-pose bridge; and
 3. `BC-110`: decide whether `n = 50` can become the large rational positive control.
 
-`BC-111` is a 45-minute evidence checkpoint, not a fourth experiment.
-It can promote the already-lined successors: the adoption determination (`BC-112`), an
+[`Agenda-013`](../agendas/agenda-013-nine-hour-autonomous-run.md) is the exact nine-hour
+execution graph for those blocks.
+`BC-122` first takes a 15-minute W5 efficiency measurement, then `BC-111` uses a
+30-minute evidence checkpoint to route one positive or negative-path continuation per
+lane. Neither is a fourth experiment.
+A three-way independent review and terminal synthesis follow on the same pull request.
+The positive successors are the provisional adoption determination (`BC-112`), an
 exploratory blinded `n = 68` surgery pilot (`BC-113`), and one
-construction-certification rung (`BC-114`). Generic certificate productization is a
-separate, second-consumer-gated block (`BC-115`). Existing BC-010 remains the sole
-`n = 5` commitment and follows the terminal transition above.
+construction-certification rung (`BC-114`); `BC-116` through `BC-118` retain the
+corresponding discrepancy/refusal paths.
+Generic certificate productization is a separate, second-consumer-gated block (`BC-115`)
+and is not smuggled into the nine-hour wall.
+Existing BC-010 remains the sole H-023/local-geometry commitment and follows the
+terminal transition above.
 
 This portfolio has three distinct ways to pay: a stronger lower bound, a validated
 construction method, or a precision-aware route into high-`n` surgery.
