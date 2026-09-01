@@ -141,7 +141,8 @@ agenda:
       corruption, normal/optimized and independent-readmission guards, then one target
       process retained 33 contiguous agreeing rows before the fixed stop. The checkpoint
       resumes at ordinal 33, but no canonical result exists: H-052 is unresolved and
-      review-pending, with no n = 18/19 transfer or frontier change.
+      BC-120 passed exp-052 and BC-121 cleared only its review flag, with no n = 18/19
+      transfer or frontier change.
     parallel_group: agenda013-second-wave-n17
   - id: BC-117
     purpose: tool_validation
@@ -184,8 +185,9 @@ agenda:
       Stopped in session-069 and exp-051 before target access. The exact proof, verifier
       and generic injected-runner controls pass, but the literal preregistered `--record`
       command exits 2 because the CLI has no production adapter. H-053 remains unresolved
-      and review-pending. Any continuation must repair and independently test the adapter
-      in a new W7 round before a new experiment; exp-051 is not rerun.
+      and instrument-unready; BC-120 passed exp-051 and BC-121 cleared only its review
+      flag. Any continuation must repair and independently test the adapter in a new W7
+      round before a new experiment; exp-051 is not rerun.
     parallel_group: agenda013-second-wave-n68
   - id: BC-118
     purpose: tool_validation
