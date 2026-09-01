@@ -34,6 +34,7 @@ exploration:
   - packing/campaign/hypotheses/H-023-n5-terminal-connectivity.md
   - packing/campaign/hypotheses/H-030-public-parent-surgery.md
   - packing/campaign/hypotheses/H-034-fractional-piercing-ceiling.md
+  - packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-046-h-044-chunk-expressibility-verdict.md
   - packing/campaign/agent-sessions/session-049-reassess-and-first-sequenced-slice.md
@@ -58,13 +59,14 @@ exploration:
   - packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md
   - packing/resources/web/n17-lower-bounds-2026/README.md
   - packing/resources/web/kingbird-run-statistics-2026/README.md
+  - packing/resources/web/finite-case-literature-audit-2026/README.md
   - packing/resources/web/unitsquare-release1-2026/README.md
   - packing/resources/web/unitsquare-release1-2026/results.json
   - packing/atlas/rendering/README.md
   - packing/atlas/known-best/README.md
   - packing/witnesses/known-best/n-068.yaml
   - packing/witnesses/known-best/n-069.yaml
-  proposes: []
+  proposes: [H-051]
 ---
 # X-011 — Controls Are Not Targets
 
@@ -95,11 +97,15 @@ The highest-payoff immediate block is now the proposed Massaccesi lower certific
 total mass `9744/576 < 17`, 181 rational directions, and exact minimum `576/576`. That
 is strong evidence and a weak independence story: the implementation descends from
 Burns’s architecture, and no independent program has checked the fixed certificate.
-Building that checker can move a proved lower frontier at `n = 17`, `18`, and `19`, or
-find a precise defect, while leaving a reusable weighted-point instrument either way.
+Building that checker can support a later adoption decision at `n = 17`, `18`, and `19`,
+or localize a discrepancy, while leaving a case-specific fixed-certificate checker
+either way.
+It is independent at the implementation layer only: the atoms, rational angle
+net, event-cell reduction, and shrink/scaling argument remain shared with the source.
 
 The `n = 68/69` colors also mean something, but less than an exact contact diagram.
-The house atlas maps hue to orientation class and shade to contact count.
+The house atlas maps hue to orientation class and shade to a tolerance-derived contact
+diagnostic, but the `n = 68/69` witnesses are excluded from contact claims.
 The retained `n = 68` witness really contains near-wall orientations about `0.009` to
 `0.080` degrees off axis, well outside the `1e-6`-radian grouping tolerance.
 Those offsets are in the retained numerical witness, not display antialiasing.
@@ -107,13 +113,15 @@ The witness itself is reconstructed from six-decimal SVG polygons, however, so i
 displayed digits are not independent source precision.
 The reported 45-digit sides come from the UnitSquare release’s interval claims, whose
 boxes, receipts, high-precision coordinates, and checker inputs were not publicly
-released. A rigid-pose reconstruction under an explicit rounding envelope is the
-necessary bridge before contact analysis or blinded surgery.
+released. A rigid-pose reconstruction under explicit serialization models, together with
+hash-verified public-parent reconstruction, is the necessary bridge before even a
+tolerance-qualified contact analysis or blinded surgery.
 
-Three disjoint blocks should therefore begin together: the independent `n = 17` checker,
-the `n = 68/69` precision bridge, and `n = 50` as a rational cross-scale exact-promotion
-control. The first integration checkpoint then decides whether to adopt the weighted
-bound, run blinded `n = 68` surgery, and take `n = 54` or `n = 39` as the next
+Three disjoint blocks should therefore begin together: the independent-implementation
+`n = 17` checker, the `n = 68/69` parent-child precision bridge, and `n = 50` as a
+rational cross-scale candidate control.
+The first integration checkpoint then decides whether to open an adoption review, run an
+exploratory blinded `n = 68` surgery pilot, and take `n = 54` or `n = 39` as the next
 construction-certification rung.
 
 ## What changed after X-010
@@ -131,10 +139,11 @@ Four facts reprice the program.
    followed by annealing, and UnitSquare results whose discovery method is undisclosed.
    X-010’s original description of every movement as stochastic was too broad.
 3. **The apparently awkward medium cases form an instrument ladder.** `n = 18`, `50`,
-   and `54` are positive controls over increasingly demanding exact fields; `n = 39` is
-   a degree-five, non-radical interval target; `n = 19` and `53` are refusal controls;
-   `n = 55` is an adversarial seven-angle case; and `n = 51` measures basin rarity
-   rather than symbolic difficulty.
+   and `54` are candidate controls with increasing representation and scale demands;
+   `n = 39` is a degree-five, non-radical interval target; `n = 19` is an exact
+   cross-field mechanism control; `n = 53` is the representation refusal; `n = 55` is an
+   adversarial seven-angle case; and `n = 51` measures basin rarity rather than symbolic
+   difficulty.
 4. **The large public children are evidence-rich but coordinate-poor.** UnitSquare gives
    reported sides and a strong first-party verification narrative at `n = 68/69`, but
    the public geometry is a rounded rendering.
@@ -192,15 +201,15 @@ The source-backed state is unusually good for a web result:
   generalized.
 
 The decisive missing evidence is not another run of the same program.
-It is an independent exact implementation with a different accumulation mechanism, plus
-mutations that must fail.
-The block should freeze the certificate data, harden the source-faithful replay against
-optimized-Python `assert` removal, then compute the arrangement-cell minimum without
-copying the published two-dimensional difference-array sweep.
+It is an independently written exact accumulator with a different implementation
+mechanism, plus mutations that must fail and an explicit list of shared proof
+assumptions. The block should freeze the certificate data, harden the source-faithful
+replay against optimized-Python `assert` removal, then compute the arrangement-cell
+minimum without copying the published two-dimensional difference-array sweep.
 
-If the independent result agrees, a later assurance block can determine adoption at
-`n = 17` and monotone transfer to `18` and `19`. If it disagrees, the disagreement is
-already a publishable-quality defect localization.
+If the independently written implementation agrees, a later assurance block can
+determine adoption at `n = 17` and monotone transfer to `18` and `19`. If it disagrees,
+the disagreement is already a typed discrepancy requiring adjudication.
 In either case the generic weighted-point certifier is a higher-leverage proof
 instrument than another bespoke point-set search.
 
@@ -221,24 +230,26 @@ ranking of pretty pictures.
 | Role | Case | Why it is informative | Cheapest next decision |
 | --- | ---: | --- | --- |
 | exact positive control | 18 | verified `Q(sqrt(7))` pose; proves the lift can leave `Q(sqrt(2))` | keep as known answer |
-| refusal control | 19 | exact `Q(sqrt(2))` construction, but a different mechanism | ensure the recognizer does not overfit `n = 18` |
-| rational large control | 50 | reported side `53/7`; large enough to test scale without field complexity | reconstruct and verify exactly first |
+| exact mechanism contrast | 19 | verified `Q(sqrt(2))` construction using a different mechanism | require an `n = 18`-specific recognizer to refuse without misclassifying the case |
+| candidate rational large control | 50 | reported side `53/7`; large enough to test scale without field complexity | reconstruct and verify exactly before calling it a control |
 | non-radical interval target | 39 | side has degree five and Galois group `S5` | certify an isolating interval and pose; do not search for radicals |
-| rare-basin benchmark | 51 | 4 of 3,004 categorized source runs refined to the record | benchmark a proposer only after a mechanism-matched control passes |
+| rare-basin benchmark | 51 | 4 of 3,004 categorized source instances refined to the record | benchmark a proposer only after a mechanism-matched control passes |
 | representation refusal | 53 | reported side lies in `Q(sqrt(7))`, retained pose does not stably lift there | require typed refusal, not forced recognition |
 | nested-radical positive | 54 | explicit quartic/nested-radical side | take after the rational `n = 50` control |
 | adversarial representation | 55 | seven retained orientation classes and substantial slides | held-out stress test, not first implementation target |
 
-`n = 37` remains useful as an older algebraic reconstruction control, while `n = 41` is
-a high-degree hard discriminator for a mature interval pipeline.
+`n = 37` remains useful as a candidate older algebraic reconstruction control, while
+`n = 41` is a high-degree hard discriminator for a mature interval pipeline.
 They should not be the first block.
-The immediate cross-scale sequence is `18 -> 50 -> 54 -> 39 -> 55`, with `19/53` as
-refusals and `51` in a separate search-cost lane.
+The immediate cross-scale sequence is `18 -> 50 -> 54 -> 39 -> 55`, with `19` as a
+cross-field mechanism contrast, `53` as the representation refusal, and `51` in a
+separate search-cost lane.
 
 The first-party run statistics quantify why direct record chasing is not low-hanging
-fruit. On Ellsworth’s stated RTX 3080 Ti setup, `n = 51` produced four record-refinable
-instances among 3,004 categorized runs, with a source estimate of 4.917 hours per hit;
-the `n = 55` source estimate is 40.604 minutes per screened-and-refinable hit.
+fruit. Across nine data-gathering sessions on Ellsworth’s stated RTX 3080 Ti setup,
+`n = 51` produced four record-refinable instances among 3,004 categorized instances,
+with a source estimate of 4.917 hours per hit; the `n = 55` source estimate is 40.604
+minutes per screened-and-refinable hit.
 These are regime-specific observations, not portable forecasts.
 Without the source program, settings, and seeds, matching the wall clock is not a
 reproducibility test.
@@ -246,9 +257,11 @@ reproducibility test.
 ## Precision-bounded surgery at `n = 68/69`
 
 The color observation is valid under the house renderer and invalid under the raw source
-SVG palette. House hue encodes orientation modulo a quarter turn; house shade encodes
-full-side contact count.
-The source SVG’s colors are decorative/index-based and carry no angle claim.
+SVG palette. House hue encodes recovered orientation modulo a quarter turn.
+House shade is a tolerance-derived contact diagnostic, but these two witnesses are
+excluded from contact claims, so their shade cannot establish adjacency, rigidity, or
+exact contact. The source SVG’s colors are decorative/index-based and carry no angle
+claim.
 
 The retained UnitSquare witnesses pass the repository’s rendering-level check, but their
 square-shape residuals are about `1.927e-8` at `n = 68` and `1.491e-8` at `n = 69`,
@@ -258,14 +271,29 @@ Appending decimal digits during reconstruction does not recover source precision
 
 The first block must build the missing bridge as a reusable tool:
 
-1. interpret each six-decimal SVG coordinate as a declared rounding interval;
+1. test the source semantics and bound nearest-rounding, truncation, and any declared
+   export transform rather than assuming six decimals imply nearest rounding;
 2. fit the nearest rigid unit-square pose and preserve all compatible solutions or an
    explicit ambiguity bound;
-3. verify a conservative relaxed container bound and pair separation;
-4. classify which apparent contacts survive the whole envelope; and
-5. emit a surgery-grade candidate or a typed source-precision refusal.
+3. retrieve each cited public parent ephemerally, verify its declared SHA-256, and
+   retain only the normalized facts permitted by the source policy;
+4. verify conservative relaxed container and pair-separation bounds for parent and
+   child;
+5. label apparent contacts only `ruled-out`, `possible`, or `tolerance-qualified`; and
+6. emit both surgery-grade candidates or a typed source-precision/provenance refusal.
 
-Only then should H-030 hide a released child and attempt public-parent surgery.
+For `n = 68`, “surgery-grade” is a measured contract, not a visual judgment.
+Under each serialization model separately, the maximum induced corner displacement,
+container-side interval width, and worst wall/pair-separation interval width must each
+be at most one quarter of the released `7.68618004216131e-5` gain, and every validity
+sign must be decided except explicitly tolerance-qualified contacts.
+Nearest-rounding, truncation, and declared export models may not be collapsed into one
+apparent contact graph.
+
+Only then should an operator working from an isolated, allowlisted parent snapshot with
+network access disabled attempt the registered exploratory public-parent surgery pilot
+H-051. One `n = 68` result cannot adjudicate H-030, whose registered criterion requires
+two successes among six parent-child pairs.
 `n = 68` goes first: its released improvement, `7.68618e-5`, is about twelve times
 `n = 69`’s `6.54811e-6`. That makes success easier to distinguish from the numerical
 floor. A cold global search, an optimality attempt, and exactification of the superseded
@@ -273,16 +301,17 @@ floor. A cold global search, an optimality attempt, and exactification of the su
 
 ## What the literature audit establishes
 
-The additional author, phrase, arXiv, and case-number searches through 2026-08-31 found
-no overlooked 2020--2026 paper that establishes a new finite-case record or exact value
-for the prioritized cases.
+The retained author, phrase, arXiv, journal, and case-number queries in the
+[search receipt](../../resources/web/finite-case-literature-audit-2026/README.md) found
+no additional 2020--2026 paper in the retrieved corpus that establishes a finite-case
+record or exact value for the prioritized cases.
 The relevant recent papers in the retrieved corpus concern asymptotic waste, not these
 finite records. The new finite-case evidence lives in first-party catalogue pages, SVGs,
 run-statistic files, public repositories, and the two August 2026 `n = 17` posts.
 
 That is a bounded search result, not a proof of absence.
-More importantly, the research record is complete along only one axis: the named current
-upper values agree with the live sources checked on the audit date.
+It does not update the broader source-coverage register’s review date or establish
+global completeness.
 Three other axes remain incomplete:
 
 - **source and witness coverage:** high-precision child coordinates and some generating
@@ -314,16 +343,19 @@ alone.
 
 Agenda-012 starts three disjoint blocks, each with its own bead and owned paths:
 
-1. `BC-108`: independently verify or reject the fixed `n = 17` weighted certificate;
-2. `BC-109`: build the `n = 68/69` rounding-envelope rigid-pose bridge; and
-3. `BC-110`: exactify `n = 50` as the large rational positive control.
+1. `BC-108`: run an independent-implementation agreement check on the fixed `n = 17`
+   weighted certificate while naming shared proof assumptions;
+2. `BC-109`: build the `n = 68/69` parent-child serialization/rigid-pose bridge; and
+3. `BC-110`: decide whether `n = 50` can become the large rational positive control.
 
 `BC-111` is a 45-minute evidence checkpoint, not a fourth experiment.
-It can promote the already-lined successors: assurance and a generic weighted proof tool
-(`BC-112`), blinded `n = 68` surgery (`BC-113`), and one construction-certification rung
-(`BC-114`). Existing BC-010 remains the sole `n = 5` commitment and is capped as above.
+It can promote the already-lined successors: the adoption determination (`BC-112`), an
+exploratory blinded `n = 68` surgery pilot (`BC-113`), and one
+construction-certification rung (`BC-114`). Generic certificate productization is a
+separate, second-consumer-gated block (`BC-115`). Existing BC-010 remains the sole
+`n = 5` commitment and follows the terminal transition above.
 
-This portfolio has three independent ways to pay: a stronger lower bound, a validated
+This portfolio has three distinct ways to pay: a stronger lower bound, a validated
 construction method, or a precision-aware route into high-`n` surgery.
 A negative in any lane removes a specific assumption without invalidating the other two.
 

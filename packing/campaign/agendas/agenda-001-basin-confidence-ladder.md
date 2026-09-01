@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-001
   title: Validate the basin stack before scaling genuine landscape research
-  updated: '2026-08-25'
+  updated: '2026-09-01'
   status: active
   objective: >-
     Build confidence from exact and proved controls upward, distinguish failures of our
@@ -245,25 +245,42 @@ agenda:
       verified minimax clearance connects unequal-side candidates?
     hypotheses: [H-023]
     budget: >-
-      One final 90-minute block in three 30-minute cells. It must decide one declared
-      connection/separation discriminator, exercise the same observable at n = 10, and
-      park H-023 if that transfer is unavailable. No successor n = 5 block is authorized
-      by this commitment.
+      One final 90-minute block in three 30-minute cells. During 0--30, write and hash
+      packing/cases/n5_transfer_gate/registration.yaml with the exact n = 5 fixture,
+      matched n = 10 fixture, observable, pass threshold, and refusal conditions; no
+      target output may be read first. During 30--60, execute the frozen n = 5
+      discriminator. During 60--90, execute the identical observable at n = 10, record
+      `transfer=passed` or `transfer=refused`, and apply the terminal transition below.
+      No successor n = 5 block is authorized by this commitment.
     entry: >-
       BC-003 and BC-009 complete; exp-033 binds the first declared pair to exact poses
-      and exp-034 embeds its exact face in a two-parameter optimal sheet
+      and exp-034 embeds its exact face in a two-parameter optimal sheet. The target run
+      is inadmissible until the retained registration freezes both fixtures, the single
+      observable, its threshold, and every premeasurement refusal condition.
     exit: >-
       Certified connection, certified separation bound, or explicit ambiguity interval
       for the declared n = 5 pair, plus a matched n = 10 transfer result or typed
-      instrument refusal. Without the transfer, retain the n = 5 result as a control and
-      park further local-geometry work.
-    bead: think-1s0h
+      instrument refusal. An executed positive or negative result marks BC-010
+      `complete`; a guard that fires before measurement marks it `stopped`. Close
+      think-iivb in either case with a reason naming the scientific outcome—task closure
+      is not scientific success. If transfer passes, mark BC-011 `ready` and remove the
+      blocked hold from think-v3u5. If transfer is refused or BC-010 stops before
+      measurement, mark BC-011 through BC-014 `stopped` and close their dedicated beads
+      with the same stop reason. Leave H-023 unresolved but explicitly parked. The
+      legacy think-1s0h remains the broader H-023 owner; its status and hold do not gate
+      this chain, and it must never be closed merely to clear an edge.
+    bead: think-iivb
     depends_on: [BC-003, BC-009]
     next_evidence: >-
-      X-011 caps the lane after twelve rounds. Choose one final discriminator from -W,
-      mixed-angle realization, or stationary continuation beyond the twelve exp-039 and
-      six exp-042 paths; freeze its n = 10 transfer before execution; and do not infer
-      whole-polytope terminality from positive first-order stresses.
+      X-011 caps the lane after twelve rounds. The first cell must retain
+      packing/cases/n5_transfer_gate/registration.yaml before reading any target output.
+      It may select one final discriminator from -W, mixed-angle realization, or
+      stationary continuation beyond the twelve exp-039 and six exp-042 paths, but must
+      bind the exact n = 5 and n = 10 fixtures, one observable, one pass threshold, and
+      every refusal condition in that file. Do not infer whole-polytope terminality from
+      positive first-order stresses. The final AgentSession must record
+      `transfer=passed` or `transfer=refused` and execute the agenda-and-tbd transition in
+      `exit` before handoff.
     parallel_group: identity
     note: >-
       This is the first genuine basin-structure experiment in the ladder. Exp-033
@@ -362,10 +379,16 @@ agenda:
     budget: one fixed four-seed block per n first; expand only under a preregistered interval rule
     entry: BC-010 provides the first nontrivial identity control
     exit: per-n unresolved fractions with 95% upper bounds; stop at the first failed cell
-    bead: think-0yo9
+    bead: think-v3u5
     depends_on: [BC-010]
     next_evidence: ambiguity-preserving classified event archive through the first failed or n=8 cell
     parallel_group: identity
+    note: >-
+      This dedicated task is held `blocked`. It may become ready only when BC-010 ends
+      `complete` with a retained `transfer=passed` result and the coordinator removes
+      that hold. If BC-010 takes its refusal transition, this row and BC-012 through
+      BC-014 become `stopped` and their dedicated tasks close with the stop reason; they
+      do not wait for or inherit another n = 5 task.
   - id: BC-012
     purpose: research
     owner_focus: insight
@@ -379,10 +402,14 @@ agenda:
     budget: successive halving; start with two independent four-seed blocks per n
     entry: BC-011 passes every included n and the estimator is frozen before held-out data
     exit: preregistered coverage interval passes, fails, or exhausts its tier-S budget
-    bead: think-ogv7
+    bead: think-nbhe
     depends_on: [BC-011]
     next_evidence: discovery curves, held-out predictions, uncertainty, and stop verdict
     parallel_group: census
+    note: >-
+      This dedicated task remains held `blocked` until BC-011 passes and the coordinator
+      removes the hold. Stop with BC-011 when BC-010 records `transfer=refused`; only the
+      successful transfer branch may clear the dependency chain.
   - id: BC-013
     purpose: measurement_validation
     owner_focus: efficiency
@@ -396,10 +423,15 @@ agenda:
     budget: one priced seed block at a time; stop when projected next block exceeds one 30m slice
     entry: BC-007, BC-008, and BC-012 complete
     exit: measured viable extension or a profile-backed scale ceiling
-    bead: think-xzew
+    bead: think-3rv3
     depends_on: [BC-007, BC-008, BC-012]
     next_evidence: component discoveries per wall-second and per pair-test with profile
     parallel_group: performance
+    note: >-
+      This dedicated task, rather than the shared performance bead think-xzew, owns the
+      agenda gate and remains held `blocked` until BC-012 completes. Stop with BC-011
+      when BC-010 records `transfer=refused`; a closed or paused n = 5 bead is not by
+      itself authorization to scale this lane.
   - id: BC-014
     purpose: research
     owner_focus: insight
@@ -413,10 +445,15 @@ agenda:
     budget: one preregistered strategy comparison at a time after an n=10 matched control
     entry: BC-013 passes and each proposer has a mechanism-matched control and pair-test budget
     exit: retained positive, negative, or exhausted strategy verdict; no record claim without exact promotion
-    bead: think-axbi
+    bead: think-81mn
     depends_on: [BC-013]
     next_evidence: paired component-level comparison with full poses and independent validity
     parallel_group: frontier-search
+    note: >-
+      This dedicated task remains held `blocked` until BC-013 passes and the coordinator
+      removes the hold. Stop with BC-011 when BC-010 records `transfer=refused`; the
+      Trump search lane may be reconsidered later only under a new agenda with its own
+      matched control.
   - id: BC-015
     purpose: tool_validation
     owner_focus: correctness

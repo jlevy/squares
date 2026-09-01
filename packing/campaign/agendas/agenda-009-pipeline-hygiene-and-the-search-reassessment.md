@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-009
   title: Fix what the rollups exposed, then decide what the machinery is now good for
-  updated: '2026-08-31'
+  updated: '2026-09-01'
   status: active
   objective: >-
     Eight to twelve hours. The first three commitments are hygiene and come first because
@@ -230,24 +230,24 @@ agenda:
   - id: BC-089
     purpose: research
     owner_focus: correctness
-    instances: [18, 19, 26, 27, 38, 50, 52, 54, 66, 67, 82, 84, 85, 86]
+    instances: [18, 19, 26, 27, 38, 52, 54, 66, 67, 82, 84, 85, 86]
     state: ready
     priority: 0
     question: >-
-      Which of the 15 trailing cases with a published exact side are materialisations of a
-      published rule, the way `n = 40` turned out to be?
+      Which of the 13 trailing cases still owned here with a published exact side are
+      materialisations of a published rule, the way `n = 40` turned out to be?
     hypotheses: []
     budget: >-
       about 180 minutes, W3 with sub-agents, in slices of 30
     entry: >-
-      15 open cases carry a published exact side and a verified ceiling that trails it.
-      Ten are in `Q(sqrt 2)` -- n = 19, 26, 27, 38, 52, 66, 67, 82, 84, 85 -- which is the
-      field this project already computes in. Three are in `Q(sqrt 7)`, `n = 50` is
-      rational at `7 + 4/7`, and `n = 54` is a nested radical.
+      Thirteen open cases remain after agenda-012 transferred the rational n = 50 case
+      to BC-110/think-uz6f with disjoint file ownership. Ten are in `Q(sqrt 2)` --
+      n = 19, 26, 27, 38, 52, 66, 67, 82, 84, 85 -- which is the field this project
+      already computes in. Two are in `Q(sqrt 7)`, and n = 54 is a nested radical.
       The pattern has fired twice: `D-389` and `D-398` both found a construction published
       and unbuilt here.
     exit: >-
-      For each of the 15, a statement of whether its witness is a materialisation of a
+      For each of the 13 cases retained here, a statement of whether its witness is a materialisation of a
       published rule, with the construction built and verified exactly where it is, and a
       typed refusal where it is not. Knowing the exact side is not knowing the pose --
       `D-402` established that recovering a pose from these decimals fails -- so the win
@@ -258,7 +258,8 @@ agenda:
     workflows: [research-pass, research-loop]
     next_evidence: >-
       Sequenced first by X-009, with n = 53 moved to BC-090's pool (its two extra tilt
-      classes yield no stable relation at 49 digits) and the block widened by the
+      classes yield no stable relation at 49 digits) and n = 50 transferred to
+      agenda-012 BC-110/think-uz6f. This block retains the other 13 cases and is widened by the
       machinery inventory's sweep: robust-rational promotion of the decimal known-best
       witnesses, measured at 33s for 34 sizes, then exact constructions replacing the
       relaxed ceilings where a published rule exists. Session-049 phase 4 takes n = 82

@@ -87,7 +87,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-one blocked
+hypotheses, one open hypothesis, seven open questions, and thirty-two blocked
 hypotheses.
 Two further hypotheses are unresolved: one because its formal prerequisite is
 missing, and H-044 because its registered calibration-only amendment keeps the
@@ -516,22 +516,27 @@ new `n = 17` weighted certificates, the `n = 68/69` precision gap, the medium-ca
 construction ladder, and the opportunity cost of a thirteenth open-ended `n = 5` round.
 [Agenda-012](packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md)
 turns that synthesis into three disjoint first-wave blocks with real beads and 15--30
-minute check-in cells: `BC-108` independently checks the proposed `4.5058` certificate;
-`BC-109` builds the rounded-SVG-to-rigid-pose bridge at `n = 68/69`; and `BC-110` takes
-the `n = 50` rational exact-promotion control.
+minute check-in cells: `BC-108` runs an independent-implementation agreement check on
+the proposed `4.5058` certificate while naming shared assumptions; `BC-109` builds the
+hash-verified parent-child serialization bridge at `n = 68/69`; and `BC-110` decides
+whether `n = 50` can become the rational exact-promotion control.
 Run them in parallel, then take `BC-111`’s bounded checkpoint.
 The dependency-linked successors are already filed.
 Existing `BC-010` gets one final 90-minute discriminator with a matched `n = 10`
-transfer, or it parks.
-Take the exact entry command and owned paths from agenda-012, not from this summary.
+transfer under dedicated bead `think-iivb`. Its first cell freezes both fixtures, the
+observable, threshold, and refusal conditions before measurement.
+Only a passing transfer may remove `BC-011`’s blocked hold; a refusal stops the
+dedicated `BC-011` through `BC-014` chain and parks H-023. Legacy owner `think-1s0h` is
+not the queue gate. Take the exact entry command and owned paths from agenda-012, not
+from this summary.
 
-**The parallel recognition slice remains `BC-089`’s remainder on `think-d0j1`** in
+**The parallel recognition slice remains `BC-089` on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
-agenda-012 narrows its first slice to `n = 50` under `BC-110`; `n = 54` follows only if
-that result shows nested-radical representation is the next missing seam.
-The robust-rational sweep and typed `n = 53` refusal remain on the parent bead.
-`BC-049` on `think-xdly` is the research cell all of the mathematics below sits under,
-and it stays open.
+agenda-012 transfers `n = 50` to `BC-110`, leaving thirteen disjoint cases on BC-089;
+`n = 54` follows only if that result shows nested-radical representation is the next
+missing seam. The robust-rational sweep and typed `n = 53` refusal remain on the parent
+bead. `BC-049` on `think-xdly` is the research cell all of the mathematics below sits
+under, and it stays open.
 
 **`n = 40` is infinitesimally flexible**, exactly, over `Q(sqrt 2)`: seven retained
 directions turn the sixteen squares of its tilted block and leave the frame fixed, and
@@ -612,7 +617,8 @@ that agenda-005 was advertising four commitments as takeable which agenda-006 ha
 already discharged, and four more blocked on conditions no reader could observe.
 That is `D-374`, and the repair is [`agenda-map.md`](packing/campaign/agenda-map.md),
 generated from every agenda and drift-checked in `--records` at `0.14s`. It is the queue
-now; the live set is seven, and `BC-010` on `think-1s0h` is its only P0.
+now; `BC-010` maps to its dedicated `think-iivb` gate, while `think-1s0h` remains the
+broader H-023 research owner.
 
 **The identity question moved twice, and both moves were corrections.**
 [X-005](packing/campaign/explorations/X-005-identity-relation-and-its-controls.md) still
@@ -950,7 +956,8 @@ deep-golden solver rejection.
 That bounded solver repair was recorded under the owning review phase before W7 existed.
 Future packing-pipeline repairs whose promised output is the implementation itself enter
 W7; historical phases are not relabelled after the fact.
-The current line is owned by `BC-010` under `think-1s0h`.
+The current terminal transfer line is owned by `BC-010` under `think-iivb`; `think-1s0h`
+retains the broader unresolved H-023 question without gating the agenda.
 [Session 015](packing/campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md) is
 terminal after reaching its declared eight-phase cap, and
 [session 016](packing/campaign/agent-sessions/session-016-final-hour-continuation.md) is
@@ -2352,6 +2359,7 @@ round that names the hypothesis, control roles included.
 | [H-048](packing/campaign/hypotheses/H-048-glued-screen-fidelity.md) | blocked | The glued-chunk screen keeps the soft-mode winning stratum in its top decile | 0 | — |
 | [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov’s decomposition | 0 | — |
 | [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent’s 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
+| [H-051](packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md) | blocked | A blinded tier-S n = 68 public-parent surgery pilot matches the released child under the frozen grammar | 0 | — |
 
 ### Confirmed
 
