@@ -5,7 +5,7 @@ title: "Agenda 012: weighted proof, precision bridge, and cross-scale controls"
 kind: epic
 status: open
 priority: 0
-version: 10
+version: 12
 spec_path: packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md
 labels:
   - packing
@@ -20,7 +20,8 @@ child_order_hints:
   - is-01m1dbf9cenp592fwymq4b7xqy
   - is-01m1dbf9dcdvtzpnjgd3168kdb
   - is-01m1dbf9e3fh87p3hr6dmssgwn
+  - is-01m1dqc43wtym6hsxmbnqca2k8
 created_at: 2026-09-01T02:05:56.337Z
-updated_at: 2026-09-01T02:11:20.476Z
+updated_at: 2026-09-01T05:35:27.029Z
 ---
-Owns the agent-ready execution queue produced by X-011. Three disjoint 1-3 hour launch blocks run first: independent verification of the proposed n=17 weighted certificate; a six-decimal-to-rigid-pose precision bridge for n=68/69; and n=50 exact promotion as a cross-scale positive control. A bounded checkpoint promotes only evidence-backed successors. Existing BC-010/H-023 remains the sole n=5 lane and is capped by X-011; this epic does not duplicate it.
+Owns the reviewed agent-ready queue from X-011. Three disjoint first-wave blocks run in 15-30 minute cells: an independent-implementation check of the fixed n=17 certificate with shared assumptions named; a provenance-checked n=68/69 parent-child serialization bridge; and the n=50 exact-control decision transferred from BC-089. BC-111 may promote at most one successor per lane. Adoption, productization, and the exploratory n=68 pilot remain separate decisions. BC-010 follows an explicit pass-or-stop terminal rule.

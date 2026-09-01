@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m1dbf9bp1jbje6ssryabtjpj
-title: "BC-110: exactify n=50 as the cross-scale positive control"
+title: "BC-110: decide whether n=50 is an exact cross-scale control"
 kind: task
 status: open
 priority: 1
-version: 6
+version: 7
 spec_path: packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md
 labels:
   - packing
@@ -17,6 +17,6 @@ dependencies:
     target: is-01m1dbf9e3fh87p3hr6dmssgwn
 parent_id: is-01m1dbej7kqs8r1hwfmx5w3v3n
 created_at: 2026-09-01T02:06:20.021Z
-updated_at: 2026-09-01T04:52:00.313Z
+updated_at: 2026-09-01T05:35:21.330Z
 ---
-Run agenda-012 BC-110 as one 120-minute correctness block in 15-30 minute cells. Take the n=50 subcase of the existing BC-089 recognition lane first: reconstruct the 53/7 construction from retained evidence, represent it exactly over Q, independently verify every wall and pair constraint, fire a one-square or side-tightening negative control, and record whether the general promotion path really transfers beyond small n. Exit with a verified exact upper-bound artifact or a typed refusal, plus a concrete n=54-versus-n=39 next-rung decision from the observed instrument gap. Coordinate with think-d0j1; do not duplicate its broad sweep.
+Agenda-009 has transferred n=50 out of BC-089 into this 120-minute block. Reconstruct the reported 53/7 construction, verify every exact wall and pair predicate, and freeze an exact coordinate or container mutation that makes one named predicate fail. Exit with a certificate-ready candidate control or a typed source or reconstruction refusal, plus an evidence-based n=54-versus-n=39 next-rung recommendation. Do not edit the frontier in this first wave.

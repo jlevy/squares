@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m1dbf99c7wvxdtkhw96336nm
-title: "BC-108: independently verify the n=17 weighted certificate"
+title: "BC-108: independent-implementation check of the n=17 weighted certificate"
 kind: task
 status: open
 priority: 0
-version: 6
+version: 7
 spec_path: packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md
 labels:
   - packing
@@ -17,6 +17,6 @@ dependencies:
     target: is-01m1dbf9ajj9etf0cghh9hj1y6
 parent_id: is-01m1dbej7kqs8r1hwfmx5w3v3n
 created_at: 2026-09-01T02:06:19.944Z
-updated_at: 2026-09-01T04:51:58.689Z
+updated_at: 2026-09-01T05:35:18.544Z
 ---
-Run agenda-012 BC-108 as one 150-minute correctness block in 15-30 minute cells. Freeze the retained Burns-Massaccesi certificate data and hashes; harden a source-faithful replay; implement a code-independent exact checker that does not copy the published difference-array sweep; compare exact total mass and global minimum; add boundary, weight, atom, angle-net, and optimized-Python mutation controls; close with a typed verify/disagree verdict and session handoff. Do not move the frontier in this block. Entry and file ownership are specified in packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md.
+Run agenda-012 BC-108 as one 150-minute correctness block in 15-30 minute cells. Preserve a source-faithful replay, then write a different exact accumulation implementation and mutation suite. Record the fixed atoms, rational angle net, event-cell reduction, and shrink/scaling argument as shared assumptions. Exit with agreement or a typed discrepancy requiring adjudication. This is implementation independence only and cannot move the frontier.
