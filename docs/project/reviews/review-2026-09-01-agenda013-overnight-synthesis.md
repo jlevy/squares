@@ -4,10 +4,10 @@
 
 **Author:** Codex, for the project maintainers
 
-**Status:** Complete
+**Status:** BC-121 synthesis retained; terminal close pending
 
-This synthesis closes the nine-hour agenda-013 run and answers the strategic question
-that started it: where another one to three hours of work is most likely to buy
+This synthesis will close the nine-hour agenda-013 run and answers the strategic
+question that started it: where another one to three hours of work is most likely to buy
 transferable evidence, given what the repository can now measure and verify.
 It separates mathematical claims from process results and does not promote a bound,
 packing, hypothesis, or frontier entry.
@@ -66,6 +66,10 @@ mathematical success.
 BC-121 cleared only exp-047, exp-048, exp-049, exp-051, and exp-052 `needs_review`;
 exp-050 remains `true`. Every frozen experiment decision stays unchanged, H-052--H-054
 remain unresolved, H-055 and H-056 remain unmeasured, and no frontier field moves.
+Pre-review `Next` instructions retained in the experiment prose are contemporaneous
+history rather than current state; BC-120’s determination and each experiment’s
+frontmatter review flag are authoritative.
+They remain untouched so review clearance does not rewrite the frozen decision record.
 
 ## What the W5 Slices Changed
 
@@ -215,10 +219,10 @@ after its literal command, provenance closure, mutations, and independent readmi
 pass. The n = 54 primary-source/formula audit runs as a separate research block and
 cannot open H-055 reconstruction.
 
-After the first three terminal receipts, a mandatory W5 slice compares useful retained
-evidence per agent-active and command hour, literal-command failures, rework, and hosted
-CI. It may change the remaining plan only under the same profile, equivalence, rollback,
-repayment, and disjointness rule used here.
+After the four first-wave terminal receipts, a mandatory W5 slice compares useful
+retained evidence per agent-active and command hour, literal-command failures, rework,
+and hosted CI. It may change the remaining plan only under the same profile,
+equivalence, rollback, repayment, and disjointness rule used here.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

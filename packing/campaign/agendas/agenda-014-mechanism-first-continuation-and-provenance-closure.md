@@ -26,7 +26,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [17]
-    state: ready
+    state: blocked
     priority: 0
     question: >-
       Can a parent-bound process-parallel direction runner preserve exact output while
@@ -36,7 +36,7 @@ agenda:
       150 minutes: 0--15 W3 bind the post-BC-121 exp-052 record, immutable checkpoint
       db5c156959b6de4e6f2c9be283454d01dd5f3a436e6489f5e6bb60c38559fdb8,
       progress 08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af
-      and fresh next-free session, hypothesis, experiment and output paths; 15--35 W7
+      and bind H-057 plus fresh next-free session, experiment and output paths; 15--35 W7
       build the external per-direction profiler; 35--55 W7 build disjoint worker
       fragments; 55--75 W7 build the deterministic single-writer merger and corruption
       suite; 75--90 W2 independently readmit; 90--115 and 115--135 W6 run the fixed
@@ -62,6 +62,8 @@ agenda:
       sequential resumable wall.
     bead: think-p2m6
     depends_on: []
+    blocked_on: >-
+      Agenda-013 BC-121 must be terminal and its final PR revision must be green.
     workflows: [insight-iteration, pipeline-improvement, factual-review, research-loop]
     next_evidence: >-
       Ready from agenda-013's independently reviewed 33-row prefix. The observed 0.444
@@ -73,7 +75,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [68, 69]
-    state: ready
+    state: blocked
     priority: 0
     question: >-
       Can the n = 68 exact proof boundary be reached through a complete production
@@ -90,8 +92,8 @@ agenda:
       network or target opens in this first wave.
     entry: >-
       Exp-047, exp-051, session-069, run.py, verify.py and their focused test match the
-      review-packet hashes, and the exp-051 result is absent. A new production module,
-      subordinate hypothesis, experiment and result path are allocated serially. Adding
+      review-packet hashes, and the exp-051 result is absent. Bind existing H-058, then
+      allocate a new production module and fresh experiment and result paths serially. Adding
       only `--record` is forbidden: the adapter must supply a bounded opener, digest-
       before-parse scanner, exact transform parser, model factory, proof evaluator,
       cleanup and independent verify-before-publication path.
@@ -105,6 +107,8 @@ agenda:
       child, gain, surgery or raw source is opened.
     bead: think-3i67
     depends_on: []
+    blocked_on: >-
+      Agenda-013 BC-121 must be terminal and its final PR revision must be green.
     workflows: [insight-iteration, pipeline-improvement, factual-review]
     next_evidence: >-
       Ready from exp-051's reviewed executable-runner refusal. The missing seam includes
@@ -114,15 +118,15 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [19, 50]
-    state: ready
+    state: blocked
     priority: 0
     question: >-
       Does a new producer-bound stage-sentinel receipt prove the existing-result refusal
       precedes every observation and evaluation seam in the frozen n = 50 runner?
     hypotheses: [H-059]
     budget: >-
-      150 minutes: 0--15 W3 preregister a narrow prospective provenance claim and bind
-      exp-050 result
+      150 minutes: 0--15 W3 bind existing H-059, preregister its fresh prospective
+      experiment and bind exp-050 result
       ab00e50debe0bc60279ce3472ed0c09eb062e8271a481a38c6ac65036aff4a02 plus runner
       52baeb1b6ad52aa504498ba21aeb6b3d361aaaec2461c76904a357d8d95cf29d;
       15--40 W7 build a separate injected sentinel harness; 40--65 W7 fire runner-hash,
@@ -146,6 +150,8 @@ agenda:
       terminal state repairs exp-050.
     bead: think-17q7
     depends_on: []
+    blocked_on: >-
+      Agenda-013 BC-121 must be terminal and its final PR revision must be green.
     workflows: [insight-iteration, pipeline-improvement, research-loop, factual-review]
     next_evidence: >-
       Ready from Packet C's bounded caveat. The smallest repair is a new runner-bound,
@@ -155,7 +161,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [19, 54]
-    state: ready
+    state: blocked
     priority: 1
     question: >-
       What primary source, formula derivation and pose-serialization evidence actually
@@ -167,7 +173,7 @@ agenda:
       and historical-mechanism paths; 45--60 reconcile attribution, field/embedding, pose
       availability and serialization semantics and retain sources or a typed absence.
     entry: >-
-      The finite-case literature audit has no primary derivation assigning all 54 poses.
+      The finite-case literature audit did not retrieve a primary derivation assigning all 54 poses.
       This block may extend the source archive with attributable, reusable material, but
       it may not infer coordinates from decimals, run n = 19 or n = 54 geometry, open
       H-055 measurement or pivot to n = 39 after a refusal.
@@ -179,6 +185,8 @@ agenda:
       The row becomes `complete` after either retained outcome.
     bead: think-tabx
     depends_on: []
+    blocked_on: >-
+      Agenda-013 BC-121 must be terminal and its final PR revision must be green.
     workflows: [research-pass, insight-iteration, factual-review]
     next_evidence: >-
       Ready from the bounded multilingual and exact-number audit. The historical survey
@@ -449,6 +457,13 @@ The coordinator may run BC-126 concurrently because its source archive and revie
 do not overlap the lane code or records.
 No shared generated view, tbd, Git, PR or repository-wide validation write occurs until
 all four first-wave writers stop.
+
+H-057, H-058 and H-059 begin `instrument_ready: false`. Only the owning first-wave lane
+may set its assigned readiness field to `true`, and only after the lane’s named W2
+admission guards pass; a failed admission stops premeasurement.
+Every new experiment decision begins `needs_review: true`. BC-133 must pass that exact
+decision and its named guard before BC-134 may clear only the review flag without
+changing the decision.
 
 ## Exact Wall
 
