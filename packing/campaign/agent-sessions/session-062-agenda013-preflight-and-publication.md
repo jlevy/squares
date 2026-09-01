@@ -8,11 +8,12 @@ softschema:
 session:
   id: session-062
   primary_bead: think-r683
-  status: in_progress
+  status: stopped
   title: "Agenda-013 preflight and first publication"
   date: '2026-09-01'
   started_at: '2026-09-01T06:27:10Z'
   deadline_at: '2026-09-01T07:57:10Z'
+  branch: codex/w3-nine-hour-autonomous-run
   goal: >-
     Put the owner-authorized nine-hour research run on one reviewable pull request with
     an exact 540-minute W3/W6/W5 schedule, executable lane contracts, consistent agenda
@@ -77,7 +78,7 @@ session:
       commit, pass the push gate, open the stacked pull request, and leave hosted checks
       running while the first research wave begins.
     bead: think-b9wn
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: >-
       The agenda and scientific controls passed independent review, but the preflight W5
@@ -102,12 +103,26 @@ session:
     fallback: >-
       Open the PR with an explicit unmeasured-cost blocker, retain the W5 design and red
       tests, and start no autonomous lane until the blocker has one honest consumer path.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      Built and published the privacy-reduced Codex interval path, opened PR #71, and
+      passed local push-tier plus hosted Linux and macOS validation. Post-publication
+      review then found bounded launch-contract and telemetry-integrity defects that must
+      be repaired before the first W6 wave.
+    evidence:
+    - packing/devtools/codex_task_tree_delta.py
+    - packing/devtools/render_pr_rollup.py
+    - packing/devtools/check_session_rollups.py
+    - packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md
+    - https://github.com/jlevy/squares/pull/71
+    stop_reason: >-
+      The lane-start gate fired before the deadline: independent review found executable-
+      contract and accounting-integrity defects even though the published revision and
+      hosted checks were green. Preserve the checkpoint and repair those findings before
+      launching BC-108--BC-110.
     next_action: >-
-      Finish the red-green adapter and consumer path, freeze the current live snapshot,
-      close this session, render the PR block, and publish the first checkpoint.
+      Start one bounded preflight-repair session, make every review finding executable
+      and regression-tested, refresh the receipt and PR, and begin the nine-hour
+      coordinator clock only from that clean revision.
   budget:
     wall_minutes: 90
     max_cycles: 2
@@ -124,7 +139,11 @@ session:
     before: >-
       The agenda existed only in the worktree, three review findings remained open, tbd
       was unsynchronized, and the required PR cost path could not consume Codex logs.
-    after: null
+    after: >-
+      PR #71 contains the exact 540-minute agenda, review gates, W5 baseline and initial
+      Codex telemetry path, and all hosted checks are green. Independent review retained
+      a bounded repair list, so no research lane has started and the next session has one
+      exact preflight entry point instead of inheriting hidden defects.
   delegations:
   - task: Challenge the mathematical and evidential routing, especially n = 68 blindness and provisional promotions.
     operator: /root/math_frontier
@@ -166,12 +185,23 @@ session:
     phase: 1
   - task: Audit launch ownership, validation, PR closure and Codex telemetry integration.
     operator: /root/tooling_leverage
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Implemented CodexTaskTreeDelta/v1 and its initial consumers, then found the missing
+      structured branch attribution and semantic/path-integrity gaps in the published
+      receipt boundary.
+    evidence:
+    - packing/devtools/codex_task_tree_delta.py
+    - packing/campaign/schemas/codex-task-tree-delta.schema.yaml
+    - packing/tests/test_codex_task_tree_delta.py
+    files:
+    - packing/devtools/codex_task_tree_delta.py
+    - packing/campaign/schemas/codex-task-tree-delta.schema.yaml
+    - packing/tests/test_codex_task_tree_delta.py
+    checks:
+    - 14 focused scanner and delta tests passed before publication.
+    - Ruff and BasedPyright passed on the adapter scope.
     uncertainty: >-
       A live root task can produce only a lower-bound snapshot; exact terminal accounting
       requires a later task or supervisor rescan after completion.
@@ -213,17 +243,22 @@ session:
   - packing/devtools/close_session.py
   - packing/campaign/resource-usage/codex-task-tree-session-062.yaml
   checks:
-  - 38 focused agenda-map and campaign-ledger tests pass.
+  - 51 focused agenda, ledger, rollup-consumer and session-rollup tests pass after review repairs began.
   - Ruff and BasedPyright pass on the changed Python and tests.
   - The records and edit validation tiers pass.
   - Flowmark and git diff checks pass.
+  - The committed push tier passed 177 reachable tests.
+  - PR #71 hosted validate, packing-required and macos-portability checks passed.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-062.yaml
-  stop_reason: null
+  stop_reason: >-
+    Stopped at the predeclared launch gate because post-publication review found bounded
+    agenda and telemetry-contract defects. The green PR remains the durable baseline;
+    first-wave research is withheld until the repairs and regression tests are pushed.
   next_action: >-
-    Publish the first PR checkpoint, then take BC-108 on think-swtr as the coordinator’s
-    exact entry point and dispatch the rest of agenda-013’s first parallel wave from its
-    launch cards.
+    Open the next AgentSession on the review-finding list, finish and validate the repairs
+    on PR #71, then take BC-108 on think-swtr and dispatch BC-109/BC-110 only after the
+    reviewed launch contract is green.
 ---
 # Session-062 — Agenda-013 Preflight and First Publication
 

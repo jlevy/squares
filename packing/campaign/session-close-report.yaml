@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 62
+count: 63
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 18
+  sessions_measured: 19
   sessions_unmeasured: 44
   attributed:
     rollups: 42
@@ -35,9 +35,9 @@ totals:
     one_off_code: 1738
     wall_hours: 76.48
 codex_receipts:
-  attributed: 1
+  attributed: 2
   unattributed: 0
-  measured: 1
+  measured: 2
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -760,7 +760,7 @@ sessions:
   codex_receipts: []
 - id: session-062
   title: "Agenda-013 preflight and first publication"
-  status: in_progress
+  status: stopped
   primary_bead: think-r683
   phases: 2
   measured: true
@@ -773,8 +773,28 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-062.yaml
-    model_responses: 450
-    agent_hours: 2.06
-    active_union_hours: 1.14
-    wall_hours: 1.14
+    model_responses: 607
+    agent_hours: 2.84
+    active_union_hours: 1.46
+    wall_hours: 1.46
+    snapshot_incomplete: true
+- id: session-063
+  title: "Agenda-013 post-publication review repairs"
+  status: completed
+  primary_bead: think-r683
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-063.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-063.yaml
+    model_responses: 441
+    agent_hours: 2.08
+    active_union_hours: 0.85
+    wall_hours: 0.85
     snapshot_incomplete: true

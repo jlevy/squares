@@ -87,7 +87,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-two blocked
+hypotheses, one open hypothesis, seven open questions, and thirty-seven blocked
 hypotheses.
 Two further hypotheses are unresolved: one because its formal prerequisite is
 missing, and H-044 because its registered calibration-only amendment keeps the
@@ -322,11 +322,11 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-The agenda-013 publication checkpoint is active in
-[session-062](packing/campaign/agent-sessions/session-062-agenda013-preflight-and-publication.md).
-Its independent reviews, exact 540-minute schedule, state guards, and Codex interval
-receipt are complete; the stacked pull request and push gate are the remaining preflight
-actions.
+The agenda-013 post-publication repair checkpoint is active in
+[session-063](packing/campaign/agent-sessions/session-063-agenda013-review-repairs.md).
+Session-062 stopped at its launch gate after independent review found bounded contract
+defects. Session-063 keeps every W6 lane unclaimed while it closes those defects,
+validates the repaired tree, and publishes the reviewed PR revision.
 
 After publication, the exact scientific entry point is `BC-108` under `think-swtr`: the
 fixed `n = 17` weighted-certificate replay and independent accumulation path.
@@ -2367,6 +2367,11 @@ round that names the hypothesis, control roles included.
 | [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov’s decomposition | 0 | — |
 | [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent’s 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
 | [H-051](packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md) | blocked | A blinded tier-S n = 68 public-parent surgery pilot matches the released child under the frozen grammar | 0 | — |
+| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | blocked | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 0 | — |
+| [H-053](packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md) | blocked | Each fixed UnitSquare `n = 68, 69` parent-child pair admits compatible rigid poses under at least one declared serialization model | 0 | — |
+| [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | blocked | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 0 | — |
+| [H-055](packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md) | blocked | If selected, the `n = 54` witness admits complete exact promotion in the reported nested-radical field | 0 | — |
+| [H-056](packing/campaign/hypotheses/H-056-n39-degree-five-interval-certificate.md) | blocked | If selected, the `n = 39` witness admits a complete interval certificate tied to the designated degree-five root | 0 | — |
 
 ### Confirmed
 
@@ -2534,13 +2539,14 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| `codex-task-tree-session-062.yaml` | session-062 | 450 | 2.06 h | 1.14 h | 1.14 h | yes |
+| `codex-task-tree-session-062.yaml` | session-062 | 607 | 2.84 h | 1.46 h | 1.46 h | yes |
+| `codex-task-tree-session-063.yaml` | session-063 | 441 | 2.08 h | 0.85 h | 0.85 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 18 |
+| measured | 19 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **62** |
+| **total** | **63** |
 
 <!-- END GENERATED: session-close-report -->
 

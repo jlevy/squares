@@ -46,7 +46,14 @@ from datetime import datetime
 from pathlib import Path
 from typing import TypedDict
 
-from devtools.check_session_rollups import GRANDFATHERED_BEFORE
+import yaml
+
+from devtools.check_session_rollups import (
+    GRANDFATHERED_BEFORE,
+    canonical_resource_rollup_reference,
+    unique_resource_rollups,
+)
+from devtools.codex_task_tree_delta import validate_delta_document
 from devtools.render_pr_rollup import current_branch
 from devtools.render_pr_rollup import render as render_branch_cost
 from sqpack.yamlio import safe_load
@@ -60,6 +67,21 @@ SYNOPSIS = ROOT.parent / "SYNOPSIS.md"
 TERMINAL = {"completed", "stopped"}
 CLAUDE_CONTRACT = "packing.squares:ClaudeEfficiencyRollup/v1"
 CODEX_CONTRACT = "packing.squares:CodexTaskTreeDelta/v1"
+
+
+def receipt_path(reference: object) -> Path | None:
+    """Resolve only the canonical repository-relative receipt contract."""
+    canonical = canonical_resource_rollup_reference(reference)
+    return ROOT.parent / canonical if canonical is not None else None
+
+
+def receipt_reference(path: Path) -> str:
+    """Name one on-disk usage receipt without collapsing its repository identity."""
+    return path.relative_to(ROOT.parent).as_posix()
+
+
+def usage_references() -> set[str]:
+    return {receipt_reference(path) for path in USAGE.glob("*.yaml")}
 
 
 def load_sessions() -> dict[str, dict]:
@@ -146,6 +168,8 @@ def contract_of(path: Path) -> str | None:
 
 def codex_receipt_summary(path: Path) -> CodexReceiptSummary:
     document = safe_load(path.read_text(encoding="utf-8"))
+    if problems := validate_delta_document(document):
+        raise ValueError(f"{path.name} fails semantic validation: {problems[0]}")
     rollup = document["rollup"]
     delta = rollup["delta"]
     source = rollup["source"]
@@ -162,7 +186,7 @@ def codex_receipt_summary(path: Path) -> CodexReceiptSummary:
     }
 
 
-def sum_rollups(names: set[str]) -> dict[str, int | float]:
+def sum_rollups(references: set[str]) -> dict[str, int | float]:
     """Add up a set of rollups, once each.
 
     Taking a set rather than a list is the whole safeguard. Sessions 045, 046 and 047 all
@@ -170,10 +194,11 @@ def sum_rollups(names: set[str]) -> dict[str, int | float]:
     times and reported 117.9 for a campaign that had spent 43.7 -- an error in the
     flattering direction, which is the direction to build against.
     """
+    paths = [receipt_path(reference) for reference in sorted(references)]
     each = [
-        totals(USAGE / name)
-        for name in sorted(names)
-        if (USAGE / name).exists() and contract_of(USAGE / name) == CLAUDE_CONTRACT
+        totals(path)
+        for path in paths
+        if path is not None and path.exists() and contract_of(path) == CLAUDE_CONTRACT
     ]
     return {
         "rollups": len(each),
@@ -198,7 +223,7 @@ def regenerate(log: Path, extra: list[Path]) -> list[str]:
             check=True,
             capture_output=True,
         )
-        written.append(target.name)
+        written.append(receipt_reference(target))
     return written
 
 
@@ -206,7 +231,7 @@ def report(session_id: str | None) -> int:
     sessions = load_sessions()
     declared_all: set[str] = set()
     for payload in sessions.values():
-        declared_all.update(Path(r).name for r in (payload.get("resource_rollups") or []))
+        declared_all.update(unique_resource_rollups(payload))
 
     problems: list[str] = []
 
@@ -219,8 +244,12 @@ def report(session_id: str | None) -> int:
         if payload.get("status") not in TERMINAL and session_id is None:
             continue
 
-        declared = [Path(r).name for r in (payload.get("resource_rollups") or [])]
-        missing = [name for name in declared if not (USAGE / name).exists()]
+        declared = unique_resource_rollups(payload)
+        missing = [
+            reference
+            for reference in declared
+            if (path := receipt_path(reference)) is None or not path.exists()
+        ]
         # Same boundary the gate's own checker uses, imported rather than restated: a
         # session that closed before the field existed cannot be faulted for not using it.
         grandfathered = ident < GRANDFATHERED_BEFORE
@@ -243,10 +272,11 @@ def report(session_id: str | None) -> int:
         print()
 
         print(f"  {len(declared)} rollups declared")
-        for name in declared:
-            path = USAGE / name
-            if not path.exists():
-                print(f"    MISSING  {name}")
+        for reference in declared:
+            path = receipt_path(reference)
+            name = Path(reference).name
+            if path is None or not path.exists():
+                print(f"    MISSING  {reference}")
                 continue
             if contract_of(path) == CODEX_CONTRACT:
                 c = codex_receipt_summary(path)
@@ -273,14 +303,17 @@ def report(session_id: str | None) -> int:
         )
         print()
 
-    orphans = sorted({p.name for p in USAGE.glob("*.yaml")} - declared_all)
+    orphans = sorted(usage_references() - declared_all)
     if orphans:
         print(
             f"{len(orphans)} rollups no session declares "
             "(pre-field sessions do this legitimately):"
         )
-        for name in orphans:
-            started, _ = rollup_span(USAGE / name)
+        for reference in orphans:
+            path = receipt_path(reference)
+            assert path is not None
+            started, _ = rollup_span(path)
+            name = Path(reference).name
             print(f"    {name[:44]:<44} span starts {started.date() if started else 'unknown'}")
         print()
 
@@ -309,10 +342,10 @@ def render_report() -> str:
     backfill means here, and it needs no change to this file.
     """
     sessions = load_sessions()
-    owners: dict[str, list[str]] = {}
+    owners: dict[str, set[str]] = {}
     for ident, payload in sessions.items():
-        for ref in payload.get("resource_rollups") or []:
-            owners.setdefault(Path(ref).name, []).append(ident)
+        for ref in unique_resource_rollups(payload):
+            owners.setdefault(ref, set()).add(ident)
 
     lines = [
         "# GENERATED by devtools.close_session --render. Do not edit by hand.",
@@ -331,10 +364,22 @@ def render_report() -> str:
     ]
 
     measured_ids = {ident for ids in owners.values() for ident in ids}
-    attributed = {name for name in owners if (USAGE / name).exists()}
-    orphaned = {path.name for path in USAGE.glob("*.yaml")} - attributed
-    codex_attributed = sum(contract_of(USAGE / name) == CODEX_CONTRACT for name in attributed)
-    codex_unattributed = sum(contract_of(USAGE / name) == CODEX_CONTRACT for name in orphaned)
+    attributed = {
+        reference
+        for reference in owners
+        if (path := receipt_path(reference)) is not None and path.exists()
+    }
+    orphaned = usage_references() - attributed
+    codex_attributed = sum(
+        contract_of(path) == CODEX_CONTRACT
+        for reference in attributed
+        if (path := receipt_path(reference)) is not None
+    )
+    codex_unattributed = sum(
+        contract_of(path) == CODEX_CONTRACT
+        for reference in orphaned
+        if (path := receipt_path(reference)) is not None
+    )
     codex_measured = sum(contract_of(path) == CODEX_CONTRACT for path in USAGE.glob("*.yaml"))
 
     lines[lines.index("sessions:")] = "totals:"
@@ -363,19 +408,20 @@ def render_report() -> str:
 
     for ident in sorted(sessions):
         payload = sessions[ident]
-        declared = [str(r) for r in (payload.get("resource_rollups") or [])]
+        declared = unique_resource_rollups(payload)
         declared_codex = [
-            USAGE / Path(ref).name
+            path
             for ref in declared
-            if (USAGE / Path(ref).name).exists()
-            and contract_of(USAGE / Path(ref).name) == CODEX_CONTRACT
+            if (path := receipt_path(ref)) is not None
+            and path.exists()
+            and contract_of(path) == CODEX_CONTRACT
         ]
         summed = {"turns": 0, "calls": 0, "errors": 0, "one_off": 0, "hours": 0.0}
         present = False
         claude_present = False
         for ref in declared:
-            path = USAGE / Path(ref).name
-            if not path.exists():
+            path = receipt_path(ref)
+            if path is None or not path.exists():
                 continue
             present = True
             if contract_of(path) != CLAUDE_CONTRACT:
@@ -451,17 +497,23 @@ def render_synopsis_block() -> str:
     section around this block, where flowmark owns it outright.
     """
     sessions = load_sessions()
-    owners: dict[str, list[str]] = {}
+    owners: dict[str, set[str]] = {}
     for ident, payload in sessions.items():
-        for ref in payload.get("resource_rollups") or []:
-            owners.setdefault(Path(ref).name, []).append(ident)
-    attributed = {name for name in owners if (USAGE / name).exists()}
-    orphaned = {path.name for path in USAGE.glob("*.yaml")} - attributed
+        for ref in unique_resource_rollups(payload):
+            owners.setdefault(ref, set()).add(ident)
+    attributed = {
+        reference
+        for reference in owners
+        if (path := receipt_path(reference)) is not None and path.exists()
+    }
+    orphaned = usage_references() - attributed
     measured_ids = sorted({ident for ids in owners.values() for ident in ids})
     codex_names = {
-        path.name for path in USAGE.glob("*.yaml") if contract_of(path) == CODEX_CONTRACT
+        receipt_reference(path)
+        for path in USAGE.glob("*.yaml")
+        if contract_of(path) == CODEX_CONTRACT
     }
-    claude_names = {path.name for path in USAGE.glob("*.yaml")} - codex_names
+    claude_names = usage_references() - codex_names
 
     def row(label: str, figures: dict[str, int | float], *, bold: bool = False) -> str:
         mark = "**" if bold else ""
@@ -499,7 +551,7 @@ def render_synopsis_block() -> str:
     )
     for ident in claude_measured_ids:
         payload = sessions[ident]
-        declared = {Path(r).name for r in (payload.get("resource_rollups") or [])}
+        declared = set(unique_resource_rollups(payload))
         figures = sum_rollups(declared - shared)
         lines.append(
             f"| [{ident}]({link(ident)}) "
@@ -524,11 +576,13 @@ def render_synopsis_block() -> str:
         ),
         "| --- | --- | ---: | ---: | ---: | ---: | --- |",
     ]
-    for name in [*declared_codex, *orphaned_codex]:
-        receipt = codex_receipt_summary(USAGE / name)
-        claimants = ", ".join(owners.get(name, [])) or "unattributed"
+    for reference in [*declared_codex, *orphaned_codex]:
+        path = receipt_path(reference)
+        assert path is not None
+        receipt = codex_receipt_summary(path)
+        claimants = ", ".join(sorted(owners.get(reference, set()))) or "unattributed"
         lines.append(
-            f"| `{name}` | {claimants} | {receipt['model_responses']:,} "
+            f"| `{Path(reference).name}` | {claimants} | {receipt['model_responses']:,} "
             f"| {receipt['agent_hours']} h | {receipt['active_union_hours']} h "
             f"| {receipt['wall_hours']} h "
             f"| {'yes' if receipt['snapshot_incomplete'] else 'no'} |"
@@ -564,24 +618,16 @@ def splice_synopsis(text: str) -> str:
     return text[:start] + render_synopsis_block() + text[stop + len(END) :]
 
 
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--session", help="report on one session in full")
-    parser.add_argument("--log", type=Path, help="the session's harness log, to regenerate")
-    parser.add_argument("--agent-logs", type=Path, nargs="*", default=[])
-    mode = parser.add_mutually_exclusive_group()
-    mode.add_argument("--check", action="store_true", help="verify without writing")
-    mode.add_argument("--update", action="store_true", help="regenerate rollups first")
-    mode.add_argument("--render", action="store_true", help="write the measured-cost view")
-    args = parser.parse_args(argv)
-
-    if args.render:
-        REPORT.write_text(render_report(), encoding="utf-8")
-        SYNOPSIS.write_text(
-            splice_synopsis(SYNOPSIS.read_text(encoding="utf-8")), encoding="utf-8"
-        )
+def _run(options: argparse.Namespace) -> int:
+    """Execute one parsed close operation so the CLI can contain receipt failures."""
+    if options.render:
+        report_text = render_report()
+        synopsis_text = splice_synopsis(SYNOPSIS.read_text(encoding="utf-8"))
+        branch_cost = render_branch_cost(current_branch())
+        REPORT.write_text(report_text, encoding="utf-8")
+        SYNOPSIS.write_text(synopsis_text, encoding="utf-8")
         print(f"wrote {REPORT.relative_to(ROOT.parent)} and the {SYNOPSIS.name} view")
-        status = report(args.session)
+        status = report(options.session)
         # Printed here rather than left to a second command anyone can forget. `OR-9` says
         # the pull request leads with what the branch cost, and the moment that block is
         # correct is the moment the rollups are written -- which is now.
@@ -590,18 +636,18 @@ def main(argv: list[str] | None = None) -> int:
         print("Paste the block below at the top of the pull request (OR-9).")
         print("=" * 78)
         print()
-        print(render_branch_cost(current_branch(), args.session), end="")
+        print(branch_cost, end="")
         return status
 
-    if args.update:
-        if args.log is None:
+    if options.update:
+        if options.log is None:
             print("--update needs --log")
             return 2
-        written = regenerate(args.log, list(args.agent_logs))
+        written = regenerate(options.log, list(options.agent_logs))
         print(f"wrote {len(written)} rollups: {', '.join(written) if written else 'none new'}")
         print()
 
-    if args.check:
+    if options.check:
         drifted = [
             name
             for name, current, wanted in (
@@ -625,7 +671,35 @@ def main(argv: list[str] | None = None) -> int:
         count = len(load_sessions())
         print(f"  the close report and its synopsis view agree with {count} sessions")
 
-    return report(args.session)
+    return report(options.session)
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--session", help="report on one session in full")
+    parser.add_argument("--log", type=Path, help="the session's harness log, to regenerate")
+    parser.add_argument("--agent-logs", type=Path, nargs="*", default=[])
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--check", action="store_true", help="verify without writing")
+    mode.add_argument("--update", action="store_true", help="regenerate rollups first")
+    mode.add_argument("--render", action="store_true", help="write the measured-cost view")
+    options = parser.parse_args(argv)
+    try:
+        return _run(options)
+    except ValueError as error:
+        print(f"error: {error}", file=sys.stderr)
+        return 1
+    except (
+        AttributeError,
+        IndexError,
+        KeyError,
+        OSError,
+        TypeError,
+        yaml.YAMLError,
+        subprocess.CalledProcessError,
+    ):
+        print("error: unable to close or report the session", file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":

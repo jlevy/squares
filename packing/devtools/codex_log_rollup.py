@@ -511,6 +511,7 @@ def _parse_session(
     source_kind: str,
     history_start_ordinal: int | None,
     cutoff_ms: float,
+    retrospective_cutoff: bool,
 ) -> ParsedSession:
     contexts: list[TurnContext] = []
     tokens: list[TokenEvent] = []
@@ -520,6 +521,8 @@ def _parse_session(
     task_starts: dict[str, float] = {}
     task_windows: list[TaskWindow] = []
     pending_calls: dict[str, PendingToolCall] = {}
+    continued_turn_ids: set[str] = set()
+    completed_call_ids_after_cutoff: set[str] = set()
     legacy_commands: list[LegacyCommand] = []
     running_commands: dict[str, str] = {}
     compaction_item_count = 0
@@ -556,14 +559,43 @@ def _parse_session(
             if not isinstance(timestamp, str):
                 continue
             at_ms = _timestamp_ms(timestamp)
+            if not isinstance(payload, dict):
+                continue
+            record_type = record.get("type")
             if at_ms > cutoff_ms:
+                # Completed-item records carry their own start/end timestamps. When an
+                # item straddles a retrospective cutoff, retain only the portion through
+                # that cutoff so subtracting two snapshots clips timing at both interval
+                # boundaries. Completion-emitted counters remain completion-attributed.
+                if retrospective_cutoff and record_type == "event_msg":
+                    future_event_type = payload.get("type")
+                    future_turn_id = payload.get("turn_id")
+                    if isinstance(future_turn_id, str) and future_event_type in {
+                        "item_completed",
+                        "task_complete",
+                    }:
+                        continued_turn_ids.add(future_turn_id)
+                    if future_event_type == "item_completed":
+                        _parse_completed_item(
+                            payload,
+                            streams,
+                            intervals,
+                            commands,
+                            cutoff_ms=cutoff_ms,
+                            include_completion=False,
+                        )
+                elif retrospective_cutoff and record_type == "response_item":
+                    if payload.get("type") in {
+                        "custom_tool_call_output",
+                        "function_call_output",
+                    }:
+                        future_call_id = payload.get("call_id")
+                        if isinstance(future_call_id, str):
+                            completed_call_ids_after_cutoff.add(future_call_id)
                 continue
             if at_ms >= snapshot_ms:
                 snapshot_at = timestamp
                 snapshot_ms = at_ms
-            if not isinstance(payload, dict):
-                continue
-            record_type = record.get("type")
 
             if record_type == "turn_context":
                 turn_id = payload.get("turn_id")
@@ -616,7 +648,13 @@ def _parse_session(
                 elif event_type == "context_compacted":
                     legacy_compaction_event_times_ms.append(at_ms)
                 elif event_type == "item_completed":
-                    _parse_completed_item(payload, streams, intervals, commands)
+                    _parse_completed_item(
+                        payload,
+                        streams,
+                        intervals,
+                        commands,
+                        cutoff_ms=cutoff_ms,
+                    )
                     item = payload.get("item")
                     if isinstance(item, dict) and item.get("type") == "ContextCompaction":
                         compaction_item_count += 1
@@ -674,12 +712,24 @@ def _parse_session(
                                 )
                             )
 
+    for call_id, pending in pending_calls.items():
+        if call_id in completed_call_ids_after_cutoff and pending.start_ms < cutoff_ms:
+            intervals.append(
+                Interval(
+                    pending.start_ms,
+                    cutoff_ms,
+                    _tool_call_category(pending.name, pending.input_value),
+                )
+            )
     for turn_id, start_ms in task_starts.items():
+        end_ms = (
+            cutoff_ms if retrospective_cutoff and turn_id in continued_turn_ids else snapshot_ms
+        )
         task_windows.append(
             TaskWindow(
                 turn_id=turn_id,
                 start_ms=start_ms,
-                end_ms=snapshot_ms,
+                end_ms=end_ms,
                 completed=False,
                 state="live",
             )
@@ -779,6 +829,9 @@ def _parse_completed_item(
     streams: list[StreamItem],
     intervals: list[Interval],
     commands: list[CommandEvent],
+    *,
+    cutoff_ms: float | None = None,
+    include_completion: bool = True,
 ) -> None:
     item = payload.get("item")
     if not isinstance(item, dict):
@@ -791,8 +844,14 @@ def _parse_completed_item(
         return
     if not isinstance(completed_at, int | float):
         return
+    start_ms = float(started_at)
+    end_ms = float(completed_at)
+    if cutoff_ms is not None:
+        end_ms = min(end_ms, cutoff_ms)
+    if end_ms <= start_ms:
+        return
     if item_type in MODEL_ITEM_TYPES and isinstance(turn_id, str):
-        streams.append(StreamItem(turn_id, item_type, float(started_at), float(completed_at)))
+        streams.append(StreamItem(turn_id, item_type, start_ms, end_ms))
         return
     category = TOOL_ITEM_CATEGORIES.get(item_type)
     if item_type == "ContextCompaction":
@@ -800,14 +859,18 @@ def _parse_completed_item(
     if item_type == "CollabAgentToolCall" and item.get("tool") == "wait":
         category = "agent_wait"
     if category is not None:
-        intervals.append(Interval(float(started_at), float(completed_at), category))
-    if item_type != "CommandExecution" or not isinstance(turn_id, str):
+        intervals.append(Interval(start_ms, end_ms, category))
+    if (
+        not include_completion
+        or item_type != "CommandExecution"
+        or not isinstance(turn_id, str)
+    ):
         return
     normalized = _normalized_command(item.get("command"))
     commands.append(
         CommandEvent(
             turn_id=turn_id,
-            duration_ms=max(0.0, float(completed_at) - float(started_at)),
+            duration_ms=max(0.0, end_ms - start_ms),
             normalized=normalized,
             display=_command_display(normalized),
             category=_command_category(normalized),
@@ -1342,6 +1405,7 @@ def build_rollup(
     root_ids: Sequence[str],
     *,
     through: str | None = None,
+    retrospective_cutoff: bool = False,
 ) -> dict[str, Any]:
     """Build a recursive, deterministic rollup for the requested Codex task ids."""
 
@@ -1374,6 +1438,7 @@ def build_rollup(
             source_kind=discovered[session_id][3],
             history_start_ordinal=discovered[session_id][4],
             cutoff_ms=cutoff_ms,
+            retrospective_cutoff=retrospective_cutoff,
         )
         for session_id in sorted(relevant)
     }
@@ -1459,8 +1524,11 @@ def build_rollup(
             ),
             "live_logs": (
                 "The scan-start time is the default cutoff, or --through supplies an explicit "
-                "cutoff. An incomplete task ends at its last included event, so a live "
-                "snapshot is a lower bound."
+                "cutoff. Ordinary live snapshots end incomplete tasks at their last included "
+                "event. A retrospective cutoff may clip tasks and timed items to the cutoff "
+                "only when a later record proves they straddled it. Completion-emitted "
+                "counters can still arrive later, so a live snapshot is a lower bound for "
+                "those counters."
             ),
         },
         "roots": roots,

@@ -53,6 +53,13 @@ properties:
     type: string
     format: date-time
     description: Optional offset-aware hard deadline for this session.
+  branch:
+    type: string
+    minLength: 1
+    description: >-
+      Optional Git branch explicitly attributed by the session operator. Required by the
+      resource-rollup checker when a terminal session declares a Codex task-tree receipt,
+      because Codex logs do not carry branch telemetry.
   goal:
     type: string
     minLength: 1
@@ -278,6 +285,7 @@ properties:
     items: {type: string, minLength: 1}
   resource_rollups:
     type: array
+    uniqueItems: true
     items: {type: string, minLength: 1}
     description: >-
       Repository-relative paths of enforced resource receipts for this session. Claude

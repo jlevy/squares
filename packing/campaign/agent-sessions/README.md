@@ -43,6 +43,12 @@ Open a versioned session when at least one of these conditions holds:
 
 Each such session has one integration bead and one active workflow phase.
 Several may exist concurrently; each keeps its own phase and clock.
+When several sessions will start from one shared tree, the coordinator is the sole id
+allocator. It creates each complete `session-NNN` artifact serially before dispatch and
+hands the owner that exact path.
+Creation must record the real goal, bead, phase, start, deadline, budget, stop
+conditions, fallback and next action; an empty or skeletal file is not a reservation.
+A lane never computes a next-free id after parallel work begins.
 Before escalated work starts, record:
 
 - the overall session goal, offset-aware start and hard deadline, wall budget, cycle
@@ -56,8 +62,21 @@ Before escalated work starts, record:
 In a clocked session, ordinary `work` phases must end before the finalization reserve.
 The final phase may instead declare `clock_role: finalization` and use that reserve for
 records, checks, commits, and handoff.
+For a parallel wave, every lane deadline precedes the coordinator checkpoint by its
+declared integration reserve.
+Lane work ends before the coordinator generates resource receipts, terminalizes sessions
+and beads, reconciles shared records, commits, or runs a repository-wide gate.
+Scheduling a lane through the instant its dependent checkpoint begins provides no
+finalization reserve.
 An active session leaves `progress.after` null; the checker requires the completed value
 when the session closes.
+
+A hypothesis-bearing measurement session records two boundaries separately.
+The instrument-readiness boundary names the frozen instrument, exact revision,
+validation commands and guards; the target-measurement boundary may begin only after
+those checks pass and the registry records the instrument as ready.
+A failed readiness guard closes the lane as a retained premeasurement stop without
+target samples or a scientific verdict.
 
 ### Starting a Portable Four-Hour Session
 
@@ -155,6 +174,11 @@ Do not use `git add -A` in a shared checkout.
 
 The checkpoint sequence above is per-phase.
 Bringing a whole session to a terminal state adds two steps, and neither is optional.
+For a delegated Codex lane, the owner first stops writing and returns a terminal-ready
+work receipt. The coordinator then snapshots that completed lane root, writes its exact
+resource receipt, records the attributed branch and repository-relative receipt path in
+the lane AgentSession, and only then marks the session terminal.
+The lane cannot declare itself terminal before the coordinator-owned receipt exists.
 
 **First, write the harness-appropriate receipts and list them.** Claude writes one
 record per log: the outer agent’s and every sub-agent it spawned.
@@ -167,6 +191,9 @@ uv run --frozen --all-extras --group dev python -m devtools.close_session \
 
 Then list what that wrote in the session record’s `resource_rollups`,
 repository-relative.
+The accepted identity is the exact path
+`packing/campaign/resource-usage/<receipt>.yaml`; basename-only, absolute, traversal and
+nested references are refused at the terminal gate.
 `devtools.log_rollup` is what `--update` calls and is still there for a single log, but
 the sub-agent sweep is where reconstructing by hand went wrong twice in one afternoon,
 which is the reason `--update` exists.
@@ -184,8 +211,8 @@ uv run --frozen --all-extras --group dev python -m devtools.codex_task_tree_delt
 ```
 
 Codex logs carry no Git-branch field.
-Listing this receipt in `resource_rollups` is the AgentSession’s explicit attribution;
-the receipt itself does not infer one.
+Listing this receipt in `resource_rollups` and naming the operator-attributed `branch`
+in the AgentSession is the explicit attribution; the receipt itself does not infer one.
 A receipt taken while the root task is live is a lower bound and must be regenerated at
 later checkpoints.
 
@@ -391,8 +418,13 @@ phase audits and implements D-199 without relabeling that repair as research.
 
 The parent agent owns shared-file integration.
 A delegated task should have a bounded, preferably disjoint write scope.
-A delegation that may cross a checkpoint or run a long or side-effecting command gets a
-durable queued or active row before it runs.
+The coordinator does not commit or run repository-wide validation while a delegated
+writer is active. A shared-tool optimization may overlap lane work only when its read,
+write, dependency and validation scopes are recorded as disjoint from every active lane;
+otherwise it lands and passes its fixed-input equivalence gate before those lanes start,
+or does not run.
+A delegation that may cross a checkpoint or run a long or side-effecting
+command gets a durable queued or active row before it runs.
 That row records `recording: contemporaneous`, phase, wall budget, expected output,
 validation command, kill condition, fallback, write scope, excluded long commands,
 start, and deadline.

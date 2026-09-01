@@ -3,15 +3,17 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from datetime import datetime
 from pathlib import Path
+from typing import Any
 
 import pytest
 import yaml
 from jsonschema_rs import Draft202012Validator
 
 import devtools.codex_task_tree_delta as delta_module
-from devtools.codex_task_tree_delta import build_delta
+from devtools.codex_task_tree_delta import build_delta, validate_delta_document
 from sqpack.yamlio import load_yaml
 
 ROOT_ID = "00000000-0000-0000-0000-000000000001"
@@ -23,6 +25,7 @@ SCHEMA = (
     / "schemas"
     / "codex-task-tree-delta.schema.yaml"
 )
+RETAINED_RECEIPT = SCHEMA.parent.parent / "resource-usage" / "codex-task-tree-session-062.yaml"
 
 
 def _model(*, responses: int, tokens: int, stream_seconds: float) -> dict[str, object]:
@@ -136,10 +139,15 @@ def test_build_delta_subtracts_only_safe_additive_tree_metrics(
     calls: list[str] = []
 
     def fake_build_rollup(
-        sessions_root: Path, root_ids: list[str], *, through: str
+        sessions_root: Path,
+        root_ids: list[str],
+        *,
+        through: str,
+        retrospective_cutoff: bool,
     ) -> dict[str, object]:
         assert sessions_root == tmp_path
         assert root_ids == [ROOT_ID]
+        assert retrospective_cutoff is True
         calls.append(through)
         return before if through == START else after
 
@@ -220,7 +228,9 @@ def test_build_delta_rejects_a_nonmonotone_selected_measurement(
     monkeypatch.setattr(
         delta_module,
         "build_rollup",
-        lambda _root, _ids, *, through: before if through == START else after,
+        lambda _root, _ids, *, through, retrospective_cutoff: (
+            before if through == START else after
+        ),
     )
 
     with pytest.raises(ValueError, match=r"non-monotone.*tokens.input"):
@@ -251,7 +261,9 @@ def test_retained_delta_validates_against_its_enforced_schema(
     monkeypatch.setattr(
         delta_module,
         "build_rollup",
-        lambda _root, _ids, *, through: before if through == START else after,
+        lambda _root, _ids, *, through, retrospective_cutoff: (
+            before if through == START else after
+        ),
     )
     document = build_delta(tmp_path, ROOT_ID, start=START, end=END)
 
@@ -285,7 +297,9 @@ def test_cli_writes_one_explicit_pure_yaml_artifact(
     monkeypatch.setattr(
         delta_module,
         "build_rollup",
-        lambda _root, _ids, *, through: before if through == START else after,
+        lambda _root, _ids, *, through, retrospective_cutoff: (
+            before if through == START else after
+        ),
     )
     destination = tmp_path / "resource-usage" / "codex-current.yaml"
 
@@ -382,7 +396,7 @@ def test_build_delta_consumes_the_real_codex_v2_scanner_shape(tmp_path: Path) ->
             "item_completed",
             turn_id=turn_id,
             item={"type": "Reasoning", "id": "reasoning-1", "private_prose": "secret"},
-            started_at_ms=epoch_ms + 6_000,
+            started_at_ms=epoch_ms + 1_000,
             completed_at_ms=epoch_ms + 10_000,
         ),
         event(
@@ -400,7 +414,7 @@ def test_build_delta_consumes_the_real_codex_v2_scanner_shape(tmp_path: Path) ->
                 "command": ["/bin/bash", "-lc", "curl https://secret.invalid"],
                 "status": "completed",
             },
-            started_at_ms=epoch_ms + 13_000,
+            started_at_ms=epoch_ms + 3_000,
             completed_at_ms=epoch_ms + 15_000,
         ),
         event(
@@ -419,9 +433,11 @@ def test_build_delta_consumes_the_real_codex_v2_scanner_shape(tmp_path: Path) ->
 
     delta = document["rollup"]["delta"]
     assert delta["completed_task_count"] == 1
-    assert delta["agent_active_seconds"] == 20.0
-    assert delta["timed_model_stream_seconds"] == 4.0
-    assert delta["tool_seconds_by_category"] == {"command": 2.0}
+    assert delta["agent_active_seconds"] == 15.0
+    assert delta["elapsed_envelope_seconds"] == 15.0
+    assert delta["active_union_seconds"] == 15.0
+    assert delta["timed_model_stream_seconds"] == 5.0
+    assert delta["tool_seconds_by_category"] == {"command": 10.0}
     assert delta["models"][0]["tokens"] == {
         "input": 100,
         "cached_input": 50,
@@ -429,3 +445,114 @@ def test_build_delta_consumes_the_real_codex_v2_scanner_shape(tmp_path: Path) ->
         "reasoning_output": 3,
     }
     assert "secret.invalid" not in yaml.safe_dump(document)
+
+
+def _retained_document() -> dict[str, Any]:
+    return load_yaml(RETAINED_RECEIPT.read_text(encoding="utf-8"))
+
+
+def _make_completeness_inconsistent(document: dict[str, Any]) -> None:
+    document["rollup"]["completeness"]["snapshot_incomplete"] = False
+
+
+def test_semantic_validator_accepts_the_actual_retained_receipt_shape() -> None:
+    assert validate_delta_document(_retained_document()) == []
+
+
+@pytest.mark.parametrize(
+    ("mutate", "expected"),
+    [
+        (
+            lambda document: document["rollup"]["source"].__setitem__(
+                "start_cutoff_at", document["rollup"]["source"]["end_cutoff_at"]
+            ),
+            "end cutoff must be later than start cutoff",
+        ),
+        (_make_completeness_inconsistent, "completeness fields disagree"),
+        (
+            lambda document: document["rollup"]["delta"].__setitem__(
+                "agent_active_seconds", 0.0
+            ),
+            "delta.agent_active_seconds does not equal after minus before",
+        ),
+        (
+            lambda document: document["rollup"]["delta"][
+                "tool_seconds_by_category"
+            ].__setitem__("command", 0.0),
+            "delta.tool_seconds_by_category.command does not equal after minus before",
+        ),
+        (
+            lambda document: document["rollup"]["delta"]["models"][0].__setitem__(
+                "model_response_count", 0
+            ),
+            "delta.models[0].model_response_count does not equal after minus before",
+        ),
+        (
+            lambda document: document["rollup"]["delta"]["models"][0]["tokens"].__setitem__(
+                "output", 0
+            ),
+            "delta.models[0].tokens.output does not equal after minus before",
+        ),
+    ],
+)
+def test_semantic_validator_rejects_retained_receipt_mutations(mutate, expected: str) -> None:
+    document = _retained_document()
+    mutate(document)
+
+    assert expected in validate_delta_document(document)
+
+
+def test_semantic_validator_rejects_duplicate_model_identities() -> None:
+    document = _retained_document()
+    document["rollup"]["delta"]["models"].append(
+        deepcopy(document["rollup"]["delta"]["models"][0])
+    )
+
+    problems = validate_delta_document(document)
+
+    assert "delta.models contains a duplicate model identity" in problems
+
+
+@pytest.mark.parametrize(
+    ("mutate", "expected"),
+    [
+        (lambda document: document.pop("rollup"), "rollup is not a mapping"),
+        (lambda document: document["rollup"].pop("before"), "before is not a mapping"),
+        (
+            lambda document: document["rollup"]["source"].pop("before_snapshot_at"),
+            "source.before_snapshot_at is missing",
+        ),
+        (
+            lambda document: document["rollup"]["after"].__setitem__("models", {}),
+            "after.models is not a list",
+        ),
+        (
+            lambda document: document["rollup"]["delta"]["models"][0].pop("tokens"),
+            "delta.models[0].tokens is not a mapping",
+        ),
+    ],
+)
+def test_semantic_validator_rejects_missing_or_malformed_structures(
+    mutate, expected: str
+) -> None:
+    document = _retained_document()
+    mutate(document)
+
+    assert expected in validate_delta_document(document)
+
+
+def test_semantic_validator_errors_do_not_echo_private_values() -> None:
+    document = _retained_document()
+    private = "PRIVATE-PROSE-AND-PATH-/Users/example"
+    document["rollup"]["source"]["start_cutoff_at"] = private
+    document["rollup"]["delta"]["models"][0]["model"] = private
+    document["rollup"]["delta"]["models"].append(
+        deepcopy(document["rollup"]["delta"]["models"][0])
+    )
+    document["rollup"]["delta"]["tool_seconds_by_category"][private] = 1.0
+
+    problems = validate_delta_document(document)
+
+    assert problems
+    assert private not in "\n".join(problems)
+    assert len(problems) <= 65

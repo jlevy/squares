@@ -481,8 +481,12 @@ uv run --frozen python -m devtools.codex_task_tree_delta \
 `CodexTaskTreeDelta/v1` keeps only additive aggregate counts, timing categories, model
 settings and tokens.
 It drops prose, paths, child and turn identifiers, and commands.
-The AgentSession must declare the receipt because Codex records no Git branch; an
-in-flight snapshot remains a lower bound until a later checkpoint replaces it.
+The AgentSession must declare both the receipt and its operator-attributed `branch`
+because Codex records no Git branch; an in-flight snapshot remains a lower bound until a
+later checkpoint replaces it.
+Declare the receipt by its exact repository-relative path directly under
+`packing/campaign/resource-usage/`; basename-only, absolute, traversal and nested paths
+are rejected so the checker and renderers cannot resolve different files.
 
 The session schema continues to represent an efficiency session through
 `workflow_phases[].workflow: efficiency-loop` and `focus: efficiency`. Recursive timing

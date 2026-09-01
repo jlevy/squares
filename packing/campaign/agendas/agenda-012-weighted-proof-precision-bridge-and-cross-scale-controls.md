@@ -34,17 +34,17 @@ agenda:
       Does an independently written exact accumulation implementation agree with the
       fixed Massaccesi weighted-point certificate at L = 4.5058, and which proof
       assumptions remain shared with the source?
-    hypotheses: []
+    hypotheses: [H-052]
     budget: >-
-      150 minutes: W3 during 0--20 and 135--150, with the W6/W7 execution core between.
-      Cells: 0--20 freeze certificate data, hashes, constants, mechanism and falsifier;
-      20--45
-      harden a source-faithful replay with explicit failures; 45--70 implement a second
-      exact accumulation path without the published two-dimensional difference-array
-      sweep; 70--95 compare total mass, angle coverage, event cells, and global minimum;
-      95--120 run boundary, atom, weight, and angle-net mutations; 120--135 run the
-      optimized-Python and source-defect controls; 135--150 record shared assumptions,
-      run a W3 mechanism pass, validate, and hand off.
+      130 minutes: W3 during 0--15 and 115--130, with the W7 readiness build and W6
+      execution core between. Cells: 0--15 freeze certificate data, hashes, constants,
+      mechanism and falsifier; 15--35 implement the source-faithful and independent
+      accumulation interfaces without executing the fixed target; 35--55 validate both
+      on synthetic exact fixtures and named mutations, then complete the readiness
+      handshake; 55--80 execute the fixed certificate and compare total mass, angle
+      coverage, event cells, and global minimum; 80--100 run boundary, atom, weight, and
+      angle-net mutations; 100--115 run the optimized-Python and source-defect controls;
+      115--130 record shared assumptions, run a W3 mechanism pass, validate, and hand off.
     entry: >-
       packing/resources/web/n17-lower-bounds-2026 contains the retained sources and
       hashes. The extracted source verifier replays with 168 atoms, total mass
@@ -67,7 +67,10 @@ agenda:
     next_evidence: >-
       Not started. Use the BC-108 launch card below. The write scope is
       packing/cases/n17_weighted_certificate/, packing/tests/test_n17_weighted_certificate.py,
-      and one new AgentSession. Shared frontier and strategy records wait for BC-112.
+      the coordinator-created AgentSession path, the exact H-052 experiment/result pair,
+      and packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md.
+      The hypothesis edit is limited to the validated instrument description and the
+      `instrument_ready` transition. Shared frontier and strategy records wait for BC-112.
     parallel_group: agenda012-first-wave
   - id: BC-109
     purpose: measurement_validation
@@ -79,20 +82,20 @@ agenda:
       Can the six-decimal UnitSquare children and their cited public parents be reduced
       to hash-verified rigid-pose candidates under conservative serialization models, or
       does source precision force a typed refusal?
-    hypotheses: []
+    hypotheses: [H-053]
     budget: >-
-      150 minutes: W3 during 0--20 and 135--150, with a W7 instrument build and W6
-      measurement core between. Cells: 0--20 freeze child hashes, parent URLs and hashes,
+      130 minutes: W3 during 0--15 and 115--130, with a W7 readiness build and W6
+      measurement core between. Cells: 0--15 freeze child hashes, parent URLs and hashes,
       the retention rule, candidate serialization models, mechanism and falsifier;
-      20--45 retrieve each parent ephemerally, verify its declared digest, and
-      normalize it without retaining raw Kingbird bytes; 45--70 build a reusable
-      corners-to-rigid-pose regularizer; 70--90 fit the parents, report displacement,
+      15--35 retrieve each parent ephemerally, verify its declared digest, and normalize
+      it without retaining raw Kingbird bytes; 35--60 build and validate a reusable
+      corners-to-rigid-pose regularizer; 60--80 fit the parents, report displacement,
       ambiguity, multiplicity, and conditioning, then hash the deterministic H-051 arm
       receipt using only parent compatibility and validity, without consulting the child
-      or released gain; 90--110 fit the children under the same stable model ids without
-      changing that receipt; 110--135 bound wall and pair predicates, assign only ruled-
+      or released gain; 80--95 fit the children under the same stable model ids without
+      changing that receipt; 95--115 bound wall and pair predicates, assign only ruled-
       out, possible, or tolerance-qualified contact labels, and run perturbation
-      controls; 135--150 run a W3 mechanism pass, retain permitted artifacts, validate,
+      controls; 115--130 run a W3 mechanism pass, retain permitted artifacts, validate,
       and hand off.
     entry: >-
       The public release reports 45-digit sides and strong first-party interval checks,
@@ -150,7 +153,10 @@ agenda:
       Not started. Use the BC-109 launch card below. The write scope is
       packing/src/sqpack/research/unitsquare_precision.py,
       packing/tests/test_unitsquare_precision.py, packing/cases/unitsquare_precision/,
-      and one new AgentSession. It does not edit H-030 or shared frontier records.
+      the coordinator-created AgentSession path, the exact H-053 experiment/result pair,
+      and packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md. The
+      hypothesis edit is limited to the validated instrument description and the
+      `instrument_ready` transition. It does not edit H-030 or shared frontier records.
     parallel_group: agenda012-first-wave
   - id: BC-110
     purpose: measurement_validation
@@ -162,16 +168,17 @@ agenda:
       Can the reported n = 50 packing at exact rational side 53/7 be reconstructed and
       verified exactly, turning it from a candidate into the large positive control for
       the promotion pipeline?
-    hypotheses: []
+    hypotheses: [H-054]
     budget: >-
-      120 minutes: W3 during 0--20 and 105--120, with the W6 execution core between.
+      120 minutes: W3 during 0--20 and 105--120, with the W7 readiness build and W6
+      execution core between.
       Cells: 0--20 verify the BC-089 ownership transfer, freeze retained source facts,
-      and name the mechanism and falsifier; 20--45 reconstruct the
-      rational construction or derive a typed source gap; 45--70 encode and verify every
-      wall and pair predicate over Q; 70--90 freeze and fire an exact mutation that makes
-      one named wall or pair predicate negative; 90--105 compare the observed seam with
-      the n = 18 and n = 19 exact controls; 105--120 retain the result, choose n = 54
-      versus n = 39 as the next instrument rung, validate, and hand off.
+      and name the mechanism and falsifier; 20--45 build and validate the rational
+      certificate representation and exact verifier on the n = 18 and n = 19 controls,
+      then complete the readiness handshake; 45--70 reconstruct the rational construction
+      or derive a typed source gap; 70--90 verify every wall and pair predicate over Q;
+      90--105 fire the frozen exact mutation; 105--120 retain the result, choose n = 54
+      versus n = 39 as the next instrument rung, run the final W3 pass, and hand off.
     entry: >-
       Agenda-009 now transfers n = 50 out of BC-089/think-d0j1 and into this block; the
       two blocks no longer share ownership. Read packing/frontier/n-050.md and
@@ -191,9 +198,12 @@ agenda:
     workflows: [insight-iteration, research-pass, research-loop]
     next_evidence: >-
       Not started. Use the BC-110 launch card below. The write scope is
-      packing/cases/n050_exact/, packing/tests/test_n050_exact.py, and one new
-      AgentSession. Agenda-009 already records the ownership transfer; do not reopen its
-      broad sweep or edit shared frontier records in this block.
+      packing/cases/n050_exact/, packing/tests/test_n050_exact.py, the coordinator-created
+      AgentSession path, the exact H-054 experiment/result pair, and
+      packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md. The
+      hypothesis edit is limited to the validated instrument description and the
+      `instrument_ready` transition. Agenda-009 already records the ownership transfer;
+      do not reopen its broad sweep or edit shared frontier records in this block.
     parallel_group: agenda012-first-wave
   - id: BC-111
     purpose: research
@@ -278,7 +288,7 @@ agenda:
       hold.
     bead: think-5q0v
     depends_on: [BC-108, BC-111]
-    workflows: [factual-review, research-loop, documentation-pass]
+    workflows: [factual-review, process-review, documentation-pass]
     next_evidence: >-
       Blocked on BC-108 agreement and the checkpoint. If routed here, it owns a
       provisional adoption packet under
@@ -297,14 +307,14 @@ agenda:
       public-parent surgery grammar recover the hidden released child's improvement?
     hypotheses: [H-051]
     budget: >-
-      180 minutes. Cells: 0--20 freeze the hash-verified parent snapshot, sanitized
-      launch card, input allowlist, fresh-proposer attestation, and child embargo; 20--45
+      160 minutes. Cells: 0--20 freeze the hash-verified parent snapshot, sanitized
+      launch card, input allowlist, fresh-proposer attestation, and child embargo; 20--40
       have the fresh proposer version-stamp its implementation and freeze the exact
-      schedule under the registered grammar; 45--70 run parent replay and a predeclared
-      non-hit control; 70--100 execute the bounded proposer; 100--125 validate outputs
-      without exposing the child; 125--150 lift the blind and compare; 150--180 record
-      all misses, the information barrier, the pilot disposition, validation, and
-      handoff.
+      schedule under the registered grammar; 40--60 run parent replay and a predeclared
+      non-hit control, then complete the readiness handshake; 60--90 execute the bounded proposer; 90--110 validate outputs
+      without exposing the child; 110--130 lift the blind and compare; 130--145 retain the
+      information-barrier and pilot disposition; 145--160 run the final W3 mechanism pass,
+      validation, and handoff.
     entry: >-
       BC-109 emits hash-verified candidates and hashes one model selection using only
       parent compatibility and validity under H-051's fixed order, without inspecting
@@ -352,9 +362,13 @@ agenda:
       packing/cases/unitsquare_surgery/n068/,
       packing/src/sqpack/research/unitsquare_surgery.py,
       packing/tests/test_unitsquare_surgery.py, the next free H-051 experiment and result
-      files under packing/campaign/series/series-000-smoke-and-calibration/, and one new
-      AgentSession. The experiment record must exist before target execution. n = 69
-      remains held out until n = 68 establishes a measurable response.
+      files under packing/campaign/series/series-000-smoke-and-calibration/,
+      packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md, and the exact
+      coordinator-created AgentSession path. The validator's hypothesis edit is limited
+      to the validated instrument description and the `instrument_ready` transition; the
+      fresh proposer never reads or edits that file. The experiment record must exist
+      before target execution. n = 69 remains held out until n = 68 establishes a
+      measurable response.
   - id: BC-114
     purpose: research
     owner_focus: correctness
@@ -364,11 +378,12 @@ agenda:
     question: >-
       After n = 50, is the next cheapest capability test nested-radical exact promotion
       at n = 54 or a degree-five interval certificate at n = 39?
-    hypotheses: []
+    hypotheses: [H-055, H-056]
     budget: >-
-      Up to 180 minutes in six 30-minute cells on exactly one selected case: freeze the
-      criterion and control; build the missing representation or interval step; verify;
-      fire the case-matched negative control; compare to n = 50; record and finalize.
+      Up to 160 minutes in six 20--30 minute cells on exactly one selected case: freeze
+      the criterion and control; build and readiness-check the missing representation or
+      interval step; verify; fire the case-matched negative control; compare to n = 50;
+      record, run the final W3 mechanism pass, and hand off.
     entry: >-
       BC-110 completes and BC-111 selects one branch from the measured seam. n = 19 is
       an exact Q(sqrt(2)) mechanism contrast and may refuse only an n = 18-specific
@@ -386,9 +401,13 @@ agenda:
     next_evidence: >-
       Blocked on the n = 50 result and checkpoint. The coordinator records the branch
       choice before an agent claims this bead. The selected write scope is either
-      packing/cases/n054_exact/ with packing/tests/test_n054_exact.py or
-      packing/cases/n039_interval/ with packing/tests/test_n039_interval.py, plus one
-      AgentSession; never both in one block.
+      packing/cases/n054_exact/ with packing/tests/test_n054_exact.py and
+      packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md, or
+      packing/cases/n039_interval/ with packing/tests/test_n039_interval.py and
+      packing/campaign/hypotheses/H-056-n39-degree-five-interval-certificate.md, plus the
+      exact coordinator-created AgentSession and experiment/result paths. The selected
+      hypothesis edit is limited to the validated instrument description and the
+      `instrument_ready` transition; never edit or run both cases in one block.
   - id: BC-115
     purpose: tool_validation
     owner_focus: correctness
@@ -451,22 +470,51 @@ for each lane, then owns the independent review and terminal synthesis gates.
 
 ## Workflow entry point
 
-At the start of a block, run `tbd prime`, claim the block’s named bead, and allocate the
-next free AgentSession id.
-Do not reserve empty session files.
+At the start of a block, run `tbd prime`. The coordinator claims the block’s named bead
+and serially creates its complete AgentSession at the next free id before handoff.
+The enforced record names the actual block, bead, phase, clock, guard, fallback and
+write scope; creating an empty file to hold an id is forbidden.
+The lane receives that exact path, verifies the claim and session contract, and never
+allocates another session id or mutates tbd.
 Run project Python only through `uv run --frozen ...` from `packing/` or with
 `uv run --directory packing`.
 
 Each first-wave agent owns only the disjoint paths named in its launch card and writes a
-terminal receipt in its AgentSession.
+terminal-ready work receipt in its AgentSession.
 Lane owners do not edit an agenda, generated view, shared frontier record or tbd state.
-The coordinator claims and terminalizes all lane beads, translates each receipt into its
-row’s `complete` or `stopped` state and `next_evidence`, and owns every shared edit.
+After a lane task returns, the coordinator generates that lane’s disjoint Codex resource
+receipt, attaches it to the AgentSession, terminalizes the session and bead, translates
+the work receipt into its row’s `complete` or `stopped` state and `next_evidence`, and
+owns every shared edit.
 A block that executes and returns a typed positive or negative outcome becomes
 `complete`; only a premeasurement gate stop becomes `stopped`. The coordinator closes
 its task bead with a reason naming the scientific outcome—task closure is not scientific
 success. After all three rows are terminal and their beads are closed, the coordinator
 regenerates the agenda map.
+
+Each W6 lane also receives one exact hypothesis path and one coordinator-created
+experiment preregistration after its initial W3 contract is frozen and before target
+output is read. Experiment ids are allocated serially by creating the complete
+preregistration; the experiment names its exact future result path, so no lane computes
+either id. The lane may edit its hypothesis only to bind the implemented instrument and
+change `instrument_ready` from `false` to `true`. It must first build the frozen
+instrument and pass the preregistered known-answer, provenance, independence and
+mutation guards. It records that readiness evidence in the experiment and AgentSession
+before W6 begins. An already-ready instrument is rebound to its exact validated revision
+and must pass the same guards; a materially different instrument requires a new
+hypothesis.
+
+If any readiness guard fails, the lane leaves `instrument_ready: false`, retains the
+preregistration and typed premeasurement outcome without target samples or a scientific
+verdict, and returns a `stopped` work receipt.
+The coordinator does not infer readiness from a lane report and never starts W6 on a
+blocked hypothesis. H-051 uses the same handshake, but its agenda-reading validator owns
+the H-051 edit and the fresh proposer never sees that file.
+For BC-114, only the selected H-055 or H-056 file enters a write scope; the other
+remains untouched. Every executed H-051--H-056 experiment records its proposed decision
+with `needs_review: true`. Scheduling checkpoints may route from the retained evidence,
+but only agenda-013 BC-121 may clear that field on an unchanged decision after BC-120
+explicitly passes the exact experiment.
 
 ## First-wave launch cards
 
@@ -479,7 +527,10 @@ regenerates the agenda map.
 - **Read-only inputs:** `packing/resources/web/n17-lower-bounds-2026/`,
   `packing/frontier/n-017.md`, and `epistemics.md` at repository root.
 - **Write scope:** `packing/cases/n17_weighted_certificate/`,
-  `packing/tests/test_n17_weighted_certificate.py`, and one new AgentSession.
+  `packing/tests/test_n17_weighted_certificate.py`, the exact coordinator-created
+  AgentSession and H-052 experiment/result paths, and
+  `packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md` under the
+  readiness-only edit rule above.
 - **Focused close:**
   `uv run --frozen --all-extras --group dev pytest -q tests/test_n17_weighted_certificate.py`
   followed by `uv run --frozen --all-extras --group dev packing-validate --records`.
@@ -503,7 +554,9 @@ regenerates the agenda map.
   same verification before parsing.
 - **Write scope:** `packing/src/sqpack/research/unitsquare_precision.py`,
   `packing/tests/test_unitsquare_precision.py`, `packing/cases/unitsquare_precision/`,
-  and one new AgentSession.
+  the exact coordinator-created AgentSession and H-053 experiment/result paths, and
+  `packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md` under the
+  readiness-only edit rule above.
   Raw Kingbird parent bytes remain ephemeral.
 - **Focused close:**
   `uv run --frozen --all-extras --group dev pytest -q tests/test_unitsquare_precision.py tests/test_known_best_atlas.py`
@@ -527,8 +580,10 @@ regenerates the agenda map.
   `packing/tests/test_promote_exact_phase1.py` is an n = 11 exact-LP control and
   `packing/tests/test_exact_construction_price.py` is a source/refusal control; neither
   is an n = 50 reconstruction entry point.
-- **Write scope:** `packing/cases/n050_exact/`, `packing/tests/test_n050_exact.py`, and
-  one new AgentSession.
+- **Write scope:** `packing/cases/n050_exact/`, `packing/tests/test_n050_exact.py`, the
+  exact coordinator-created AgentSession and H-054 experiment/result paths, and
+  `packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md` under the
+  readiness-only edit rule above.
 - **Focused close:**
   `uv run --frozen --all-extras --group dev pytest -q tests/test_n050_exact.py` followed
   by `uv run --frozen --all-extras --group dev packing-validate --records`.
@@ -543,8 +598,10 @@ At every 15--30 minute boundary, record four lines in the AgentSession:
 - **Next:** the next cell or the predeclared stop.
 
 If a cell produces no durable instrument or evidence, stop and rescope before spending
-the next cell. Keep the last 15--20 minutes of every block for records, validation, bead
-notes, and a handoff that another agent can execute without reconstructing context.
+the next cell. Keep the last 15--20 minutes of every lane block for records, validation
+and a handoff that another agent can execute without reconstructing context.
+The coordinator’s separate wave-finalization reserve owns resource receipts, bead notes,
+shared-record reconciliation, commit validation and publication after lane writers stop.
 
 ## Launch order
 

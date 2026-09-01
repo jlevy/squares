@@ -18,8 +18,9 @@ Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.render_pr_rollup \
         --branch claude/my-branch
 
-For Codex, also pass the declaring session. The renderer will not infer attribution from
-the task tree because Codex exposes no Git-branch field:
+For Codex, the renderer discovers every AgentSession that explicitly declares the branch.
+The command above is therefore the cumulative branch-cost entry point. Pass `--session`
+only to inspect one declaration:
     uv run --frozen --all-extras --group dev python -m devtools.render_pr_rollup \
         --branch codex/my-branch --session session-062
 """
@@ -33,6 +34,10 @@ from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
 
+import yaml
+
+from devtools.check_session_rollups import codex_branch_claims
+from devtools.codex_task_tree_delta import validate_delta_document
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -68,6 +73,13 @@ def resource_documents() -> list[tuple[str | None, dict, Path]]:
     return found
 
 
+def resource_reference(path: Path) -> str:
+    """Canonical identity for a receipt enumerated directly from the usage directory."""
+    if path.parent != USAGE:
+        raise ValueError("resource receipt is outside the usage directory")
+    return f"packing/campaign/resource-usage/{path.name}"
+
+
 def rollups() -> list[dict]:
     """Claude records retain harness-observed branch attribution."""
     found = []
@@ -79,28 +91,58 @@ def rollups() -> list[dict]:
     return found
 
 
-def session_payload(session_id: str) -> dict | None:
-    matches = sorted(SESSIONS.glob(f"{session_id}-*.md"))
-    if len(matches) != 1:
-        return None
-    text = matches[0].read_text(encoding="utf-8")
-    if not text.startswith("---\n"):
-        return None
-    document = safe_load(text.split("---\n")[1])
-    payload = document.get("session") if isinstance(document, dict) else None
-    return payload if isinstance(payload, dict) else None
+def session_payloads() -> list[dict]:
+    """Load declarations once; malformed records remain the schema gate's responsibility."""
+    found = []
+    for path in sorted(SESSIONS.glob("session-*.md")):
+        text = path.read_text(encoding="utf-8")
+        if not text.startswith("---\n"):
+            continue
+        document = safe_load(text.split("---\n")[1])
+        payload = document.get("session") if isinstance(document, dict) else None
+        if isinstance(payload, dict):
+            found.append(payload)
+    return found
 
 
-def codex_receipts(session_id: str | None) -> list[dict]:
-    """Codex intervals are eligible only through an explicit AgentSession declaration."""
-    if session_id is None or (payload := session_payload(session_id)) is None:
-        return []
-    declared = {Path(str(ref)).name for ref in payload.get("resource_rollups") or []}
-    return [
-        rollup
+def codex_receipts(session_id: str | None, branch: str) -> list[dict]:
+    """Return distinct intervals declared for a branch, with their session claimants."""
+    payloads = session_payloads()
+    if session_id is not None:
+        matches = [payload for payload in payloads if payload.get("id") == session_id]
+        if len(matches) != 1 or matches[0].get("branch") != branch:
+            return []
+
+    documents = {
+        resource_reference(path): (rollup, path)
         for contract, rollup, path in resource_documents()
-        if contract == CODEX_CONTRACT and path.name in declared
-    ]
+        if contract == CODEX_CONTRACT
+    }
+    claims = codex_branch_claims(payloads, set(documents))
+    conflicts = [reference for reference, branches in claims.items() if len(branches) > 1]
+    if conflicts:
+        name = Path(sorted(conflicts)[0]).name
+        raise ValueError(f"{name} is attributed to more than one branch")
+
+    retained = []
+    for reference, branches in sorted(claims.items()):
+        claimants = sorted(branches.get(branch, set()))
+        if not claimants or (session_id is not None and session_id not in claimants):
+            continue
+        rollup, path = documents[reference]
+        document = safe_load(path.read_text(encoding="utf-8"))
+        if problems := validate_delta_document(document):
+            raise ValueError(f"{path.name} fails semantic validation: {problems[0]}")
+        record = dict(rollup)
+        record["_name"] = path.name
+        record["_claimants"] = claimants
+        retained.append(record)
+    return retained
+
+
+def _claimant_label(record: dict) -> str:
+    claimants = [f"`{identifier}`" for identifier in record["_claimants"]]
+    return ", ".join(claimants)
 
 
 def thousands(value: float) -> str:
@@ -287,13 +329,13 @@ def _window_seconds(source: dict) -> float:
     return max(0.0, (end - start).total_seconds())
 
 
-def section_codex(records: list[dict], session_id: str, branch: str) -> list[str]:
+def section_codex(records: list[dict], branch: str) -> list[str]:
     """Render declared intervals separately from Claude's observed branch accounting."""
     lines = [
-        f"### Codex task-tree interval (declared by `{session_id}`)",
+        "### Codex task-tree intervals declared by AgentSessions",
         "",
         (
-            f"Codex logs expose no Git-branch field. `{session_id}` declares these task-tree "
+            f"Codex logs expose no Git-branch field. AgentSessions declare these task-tree "
             f"intervals as work for `{branch}`; that association is operator-recorded, not "
             "harness-observed. The receipt retains additive aggregates only and excludes "
             "prompts, reasoning prose, private paths, descendant and turn identifiers, and "
@@ -311,7 +353,10 @@ def section_codex(records: list[dict], session_id: str, branch: str) -> list[str
             add(tokens, model["tokens"])
         live = bool(record["completeness"]["snapshot_incomplete"])
         lines += [
-            f"#### Interval {index}",
+            (
+                f"#### Interval {index}: `{record['_name']}` — declared by "
+                f"{_claimant_label(record)}"
+            ),
             "",
             "| metric | value |",
             "| --- | ---: |",
@@ -371,7 +416,7 @@ def render(branch: str, session_id: str | None = None) -> str:
             continue
         (exact if here == record["turns"]["assistant"] else mixed).append(record)
 
-    codex = codex_receipts(session_id)
+    codex = codex_receipts(session_id, branch)
     if not exact and not mixed and not codex:
         return f"No rollup records any turn on `{branch}`.\n"
 
@@ -406,8 +451,8 @@ def render(branch: str, session_id: str | None = None) -> str:
             ),
             "",
         ]
-    if codex and session_id is not None:
-        lines += section_codex(codex, session_id, branch)
+    if codex:
+        lines += section_codex(codex, branch)
     command = f"devtools.render_pr_rollup --branch {branch}"
     if session_id:
         command += f" --session {session_id}"
@@ -427,6 +472,10 @@ def branches() -> list[str]:
     found: set[str] = set()
     for record in rollups():
         found.update((record["turns"].get("by_branch") or {}).keys())
+    for payload in session_payloads():
+        branch = payload.get("branch")
+        if isinstance(branch, str) and branch:
+            found.add(branch)
     return sorted(found)
 
 
@@ -444,18 +493,38 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
 
-    if args.check:
-        # Rendering every branch is the check. Each has a different shape -- one wholly-owned
-        # log, several straddling ones, a branch with no exclusive log at all -- and a
-        # renderer that divides by a turn count fails on exactly those edges.
-        names = branches()
-        for name in names:
-            render(name)
-        render("a-branch-no-rollup-mentions")
-        print(f"  the branch cost rollup renders for {len(names)} branches, and for none")
-        return 0
-
-    print(render(args.branch or current_branch(), args.session), end="")
+    checked_names: list[str] | None = None
+    rendered: str | None = None
+    try:
+        if args.check:
+            # Rendering every branch exercises both harness records and the retained corpus.
+            checked_names = branches()
+            for name in checked_names:
+                render(name)
+            render("a-branch-no-rollup-mentions")
+        else:
+            rendered = render(args.branch or current_branch(), args.session)
+    except ValueError as error:
+        print(f"error: {error}", file=sys.stderr)
+        return 1
+    except (
+        AttributeError,
+        IndexError,
+        KeyError,
+        OSError,
+        TypeError,
+        yaml.YAMLError,
+        subprocess.CalledProcessError,
+    ):
+        print("error: unable to render branch-cost rollup", file=sys.stderr)
+        return 1
+    if checked_names is not None:
+        print(
+            f"  the branch cost rollup renders for {len(checked_names)} branches, and for none"
+        )
+    else:
+        assert rendered is not None
+        print(rendered, end="")
     return 0
 
 

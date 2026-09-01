@@ -50,6 +50,21 @@ def test_commitments_are_loaded_from_every_agenda() -> None:
     assert {c.agenda for c in load()} == {"-".join(f.name.split("-")[:2]) for f in files}
 
 
+def test_current_autonomous_w6_rows_name_registered_hypotheses() -> None:
+    """Agenda-012/013 may not route scientific W6 results only through AgentSessions."""
+    for name in (
+        "agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md",
+        "agenda-013-nine-hour-autonomous-run.md",
+    ):
+        text = (AGENDAS / name).read_text(encoding="utf-8")
+        document = safe_load(text.split("---\n")[1])
+        for item in document["agenda"]["items"]:
+            if "research-loop" in (item.get("workflows") or []):
+                assert item.get("hypotheses"), (
+                    f"{item['id']} claims research-loop/W6 without a registered hypothesis"
+                )
+
+
 def test_states_come_from_the_state_field_not_the_status_field() -> None:
     """`state` is the commitment; `status` is the agenda that contains it.
 

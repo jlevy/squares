@@ -4,8 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import math
 import sys
-from collections.abc import Iterable, Mapping
+from collections.abc import Callable, Iterable, Mapping
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -48,6 +49,32 @@ MODEL_NUMBER_FIELDS = (
 )
 TOKEN_FIELDS = ("input", "cached_input", "output", "reasoning_output")
 ROUND_DIGITS = 3
+MAX_VALIDATION_PROBLEMS = 64
+
+_DOCUMENT_FIELDS = frozenset({"softschema", "rollup"})
+_SOFTSCHEMA_FIELDS = frozenset({"contract", "schema", "envelope", "status"})
+_ROLLUP_FIELDS = frozenset({"source", "completeness", "before", "after", "delta", "semantics"})
+_SOURCE_FIELDS = frozenset(
+    {
+        "harness",
+        "source_schema",
+        "root_task_id",
+        "start_cutoff_at",
+        "end_cutoff_at",
+        "before_snapshot_at",
+        "after_snapshot_at",
+    }
+)
+_COMPLETENESS_FIELDS = frozenset({"snapshot_incomplete", "live_session_count"})
+_METRIC_FIELDS = frozenset(
+    {*INTEGER_FIELDS, *NUMBER_FIELDS, "tool_seconds_by_category", "models"}
+)
+_MODEL_FIELDS = frozenset(
+    {"model", "thinking_level", *MODEL_INTEGER_FIELDS, *MODEL_NUMBER_FIELDS, "tokens"}
+)
+_SEMANTIC_FIELDS = frozenset(
+    {"attribution", "delta", "cutoff_boundary", "live_snapshot", "retention"}
+)
 
 
 def _instant(value: str) -> datetime:
@@ -73,9 +100,358 @@ def _integer(value: object, field: str) -> int:
 
 
 def _number(value: object, field: str) -> float:
-    if not isinstance(value, int | float) or isinstance(value, bool) or value < 0:
+    if (
+        not isinstance(value, int | float)
+        or isinstance(value, bool)
+        or not math.isfinite(value)
+        or value < 0
+    ):
         raise ValueError(f"{field} is not a nonnegative number")
     return round(float(value), ROUND_DIGITS)
+
+
+def _semantic_mapping(
+    value: object, field: str, problem: Callable[[str], None]
+) -> Mapping[object, object] | None:
+    if not isinstance(value, Mapping):
+        problem(f"{field} is not a mapping")
+        return None
+    return value
+
+
+def _semantic_keys(
+    value: Mapping[object, object],
+    allowed: frozenset[str],
+    field: str,
+    problem: Callable[[str], None],
+) -> None:
+    if any(not isinstance(key, str) or key not in allowed for key in value):
+        problem(f"{field} contains unexpected fields")
+
+
+def _semantic_integer(value: object, field: str, problem: Callable[[str], None]) -> int | None:
+    if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+        problem(f"{field} is not a nonnegative integer")
+        return None
+    return value
+
+
+def _semantic_number(value: object, field: str, problem: Callable[[str], None]) -> float | None:
+    if (
+        not isinstance(value, int | float)
+        or isinstance(value, bool)
+        or not math.isfinite(value)
+        or value < 0
+    ):
+        problem(f"{field} is not a finite nonnegative number")
+        return None
+    return round(float(value), ROUND_DIGITS)
+
+
+def _semantic_instant(
+    value: object, field: str, problem: Callable[[str], None]
+) -> datetime | None:
+    if not isinstance(value, str):
+        problem(f"{field} is not an offset-aware timestamp")
+        return None
+    try:
+        instant = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except OverflowError, ValueError:
+        problem(f"{field} is not an offset-aware timestamp")
+        return None
+    if instant.tzinfo is None:
+        problem(f"{field} is not an offset-aware timestamp")
+        return None
+    return instant
+
+
+def _semantic_models(
+    value: object, field: str, problem: Callable[[str], None]
+) -> dict[tuple[str, str], dict[str, Any]] | None:
+    if not isinstance(value, list):
+        problem(f"{field} is not a list")
+        return None
+    indexed: dict[tuple[str, str], dict[str, Any]] = {}
+    for index, raw in enumerate(value):
+        row_field = f"{field}[{index}]"
+        row = _semantic_mapping(raw, row_field, problem)
+        if row is None:
+            continue
+        _semantic_keys(row, _MODEL_FIELDS, row_field, problem)
+        model = row.get("model")
+        thinking = row.get("thinking_level")
+        if not isinstance(model, str) or not model:
+            problem(f"{row_field}.model is not a nonempty string")
+        if not isinstance(thinking, str) or not thinking:
+            problem(f"{row_field}.thinking_level is not a nonempty string")
+
+        scalars: dict[str, int | float] = {}
+        valid = (
+            isinstance(model, str)
+            and bool(model)
+            and isinstance(thinking, str)
+            and bool(thinking)
+        )
+        for name in MODEL_INTEGER_FIELDS:
+            parsed = _semantic_integer(row.get(name), f"{row_field}.{name}", problem)
+            valid = valid and parsed is not None
+            if parsed is not None:
+                scalars[name] = parsed
+        for name in MODEL_NUMBER_FIELDS:
+            parsed = _semantic_number(row.get(name), f"{row_field}.{name}", problem)
+            valid = valid and parsed is not None
+            if parsed is not None:
+                scalars[name] = parsed
+
+        tokens: dict[str, int] = {}
+        raw_tokens = _semantic_mapping(row.get("tokens"), f"{row_field}.tokens", problem)
+        if raw_tokens is None:
+            valid = False
+        else:
+            _semantic_keys(raw_tokens, frozenset(TOKEN_FIELDS), f"{row_field}.tokens", problem)
+            for name in TOKEN_FIELDS:
+                parsed = _semantic_integer(
+                    raw_tokens.get(name), f"{row_field}.tokens.{name}", problem
+                )
+                valid = valid and parsed is not None
+                if parsed is not None:
+                    tokens[name] = parsed
+
+        if not valid:
+            continue
+        assert isinstance(model, str)
+        assert isinstance(thinking, str)
+        identity = (model, thinking)
+        if identity in indexed:
+            problem(f"{field} contains a duplicate model identity")
+            continue
+        indexed[identity] = {"index": index, "scalars": scalars, "tokens": tokens}
+    return indexed
+
+
+def _semantic_metrics(
+    value: object, field: str, problem: Callable[[str], None]
+) -> dict[str, Any] | None:
+    metrics = _semantic_mapping(value, field, problem)
+    if metrics is None:
+        return None
+    _semantic_keys(metrics, _METRIC_FIELDS, field, problem)
+
+    scalars: dict[str, int | float] = {}
+    for name in INTEGER_FIELDS:
+        parsed = _semantic_integer(metrics.get(name), f"{field}.{name}", problem)
+        if parsed is not None:
+            scalars[name] = parsed
+    for name in NUMBER_FIELDS:
+        parsed = _semantic_number(metrics.get(name), f"{field}.{name}", problem)
+        if parsed is not None:
+            scalars[name] = parsed
+
+    tools: dict[str, float] | None = None
+    raw_tools = _semantic_mapping(
+        metrics.get("tool_seconds_by_category"), f"{field}.tool_seconds_by_category", problem
+    )
+    if raw_tools is not None:
+        _semantic_keys(raw_tools, TOOL_CATEGORIES, f"{field}.tool_seconds_by_category", problem)
+        tools = {}
+        for category in TOOL_CATEGORIES:
+            if category not in raw_tools:
+                continue
+            parsed = _semantic_number(
+                raw_tools.get(category),
+                f"{field}.tool_seconds_by_category.{category}",
+                problem,
+            )
+            if parsed is not None:
+                tools[category] = parsed
+
+    models = _semantic_models(metrics.get("models"), f"{field}.models", problem)
+    return {"scalars": scalars, "tools": tools, "models": models}
+
+
+def _semantic_difference(after: int | float, before: int | float) -> int | float | None:
+    if after < before:
+        return None
+    value = after - before
+    return value if isinstance(after, int) and isinstance(before, int) else round(value, 3)
+
+
+def _compare_metric_delta(
+    before: Mapping[str, Any],
+    after: Mapping[str, Any],
+    delta: Mapping[str, Any],
+    problem: Callable[[str], None],
+) -> None:
+    before_scalars = before["scalars"]
+    after_scalars = after["scalars"]
+    delta_scalars = delta["scalars"]
+    for name in (*INTEGER_FIELDS, *NUMBER_FIELDS):
+        if name not in before_scalars or name not in after_scalars or name not in delta_scalars:
+            continue
+        expected = _semantic_difference(after_scalars[name], before_scalars[name])
+        if expected is None:
+            problem(f"{name} is non-monotone between before and after")
+        elif delta_scalars[name] != expected:
+            problem(f"delta.{name} does not equal after minus before")
+
+    before_tools = before["tools"]
+    after_tools = after["tools"]
+    delta_tools = delta["tools"]
+    if before_tools is not None and after_tools is not None and delta_tools is not None:
+        expected_categories = set(before_tools) | set(after_tools)
+        if set(delta_tools) != expected_categories:
+            problem("delta.tool_seconds_by_category keys do not match before and after")
+        for category in sorted(expected_categories & set(delta_tools)):
+            expected = _semantic_difference(
+                after_tools.get(category, 0.0), before_tools.get(category, 0.0)
+            )
+            if expected is None:
+                problem(f"tool_seconds_by_category.{category} is non-monotone")
+            elif delta_tools[category] != expected:
+                problem(
+                    f"delta.tool_seconds_by_category.{category} does not equal "
+                    "after minus before"
+                )
+
+    before_models = before["models"]
+    after_models = after["models"]
+    delta_models = delta["models"]
+    if before_models is None or after_models is None or delta_models is None:
+        return
+    expected_identities = set(before_models) | set(after_models)
+    if set(delta_models) != expected_identities:
+        problem("delta.models identities do not match before and after")
+    zero_scalars: dict[str, int | float] = {
+        **dict.fromkeys(MODEL_INTEGER_FIELDS, 0),
+        **dict.fromkeys(MODEL_NUMBER_FIELDS, 0.0),
+    }
+    zero_tokens = dict.fromkeys(TOKEN_FIELDS, 0)
+    for identity in sorted(expected_identities & set(delta_models)):
+        first = before_models.get(identity)
+        last = after_models.get(identity)
+        observed = delta_models[identity]
+        first_scalars = first["scalars"] if first is not None else zero_scalars
+        last_scalars = last["scalars"] if last is not None else zero_scalars
+        index = observed["index"]
+        for name in (*MODEL_INTEGER_FIELDS, *MODEL_NUMBER_FIELDS):
+            if (
+                name not in first_scalars
+                or name not in last_scalars
+                or name not in observed["scalars"]
+            ):
+                continue
+            expected = _semantic_difference(last_scalars[name], first_scalars[name])
+            if expected is None:
+                problem(f"models[{index}].{name} is non-monotone")
+            elif observed["scalars"][name] != expected:
+                problem(f"delta.models[{index}].{name} does not equal after minus before")
+        first_tokens = first["tokens"] if first is not None else zero_tokens
+        last_tokens = last["tokens"] if last is not None else zero_tokens
+        for name in TOKEN_FIELDS:
+            if (
+                name not in first_tokens
+                or name not in last_tokens
+                or name not in observed["tokens"]
+            ):
+                continue
+            expected = _semantic_difference(last_tokens[name], first_tokens[name])
+            if expected is None:
+                problem(f"models[{index}].tokens.{name} is non-monotone")
+            elif observed["tokens"][name] != expected:
+                problem(
+                    f"delta.models[{index}].tokens.{name} does not equal after minus before"
+                )
+
+
+def validate_delta_document(document: object) -> list[str]:
+    """Return bounded, privacy-safe semantic problems in one retained delta document."""
+
+    problems: list[str] = []
+    truncated = False
+
+    def problem(message: str) -> None:
+        nonlocal truncated
+        if len(problems) < MAX_VALIDATION_PROBLEMS:
+            problems.append(message)
+        else:
+            truncated = True
+
+    root = _semantic_mapping(document, "document", problem)
+    if root is None:
+        return problems
+    _semantic_keys(root, _DOCUMENT_FIELDS, "document", problem)
+    meta = _semantic_mapping(root.get("softschema"), "softschema", problem)
+    if meta is not None:
+        _semantic_keys(meta, _SOFTSCHEMA_FIELDS, "softschema", problem)
+        if meta.get("contract") != CONTRACT:
+            problem("softschema.contract is not the Codex delta contract")
+        if meta.get("envelope") != "rollup":
+            problem("softschema.envelope is not rollup")
+        if meta.get("status") != "enforced":
+            problem("softschema.status is not enforced")
+        if not isinstance(meta.get("schema"), str) or not meta.get("schema"):
+            problem("softschema.schema is not a nonempty string")
+
+    rollup = _semantic_mapping(root.get("rollup"), "rollup", problem)
+    if rollup is None:
+        return problems
+    _semantic_keys(rollup, _ROLLUP_FIELDS, "rollup", problem)
+
+    source = _semantic_mapping(rollup.get("source"), "source", problem)
+    if source is not None:
+        _semantic_keys(source, _SOURCE_FIELDS, "source", problem)
+        if source.get("harness") != "codex":
+            problem("source.harness is not codex")
+        if source.get("source_schema") != ROLLUP_SCHEMA:
+            problem("source.source_schema is not the expected scanner contract")
+        if not isinstance(source.get("root_task_id"), str) or not source.get("root_task_id"):
+            problem("source.root_task_id is not a nonempty string")
+        start = _semantic_instant(
+            source.get("start_cutoff_at"), "source.start_cutoff_at", problem
+        )
+        end = _semantic_instant(source.get("end_cutoff_at"), "source.end_cutoff_at", problem)
+        if start is not None and end is not None and end <= start:
+            problem("end cutoff must be later than start cutoff")
+        for name in ("before_snapshot_at", "after_snapshot_at"):
+            if name not in source:
+                problem(f"source.{name} is missing")
+            elif source.get(name) is not None:
+                _semantic_instant(source.get(name), f"source.{name}", problem)
+
+    completeness = _semantic_mapping(rollup.get("completeness"), "completeness", problem)
+    if completeness is not None:
+        _semantic_keys(completeness, _COMPLETENESS_FIELDS, "completeness", problem)
+        incomplete = completeness.get("snapshot_incomplete")
+        if not isinstance(incomplete, bool):
+            problem("completeness.snapshot_incomplete is not a boolean")
+        live_count = _semantic_integer(
+            completeness.get("live_session_count"),
+            "completeness.live_session_count",
+            problem,
+        )
+        if (
+            isinstance(incomplete, bool)
+            and live_count is not None
+            and incomplete != (live_count > 0)
+        ):
+            problem("completeness fields disagree")
+
+    before = _semantic_metrics(rollup.get("before"), "before", problem)
+    after = _semantic_metrics(rollup.get("after"), "after", problem)
+    delta = _semantic_metrics(rollup.get("delta"), "delta", problem)
+    if before is not None and after is not None and delta is not None:
+        _compare_metric_delta(before, after, delta, problem)
+
+    semantics = _semantic_mapping(rollup.get("semantics"), "semantics", problem)
+    if semantics is not None:
+        _semantic_keys(semantics, _SEMANTIC_FIELDS, "semantics", problem)
+        for name in _SEMANTIC_FIELDS:
+            if not isinstance(semantics.get(name), str) or not semantics.get(name):
+                problem(f"semantics.{name} is not a nonempty string")
+
+    if truncated:
+        problems.append("additional semantic problems omitted")
+    return problems
 
 
 def _nodes(root: Mapping[str, Any]) -> Iterable[Mapping[str, Any]]:
@@ -270,8 +646,18 @@ def build_delta(
 
     if _instant(end) <= _instant(start):
         raise ValueError("end cutoff must be later than start cutoff")
-    before_rollup = build_rollup(sessions_root, [root_task_id], through=start)
-    after_rollup = build_rollup(sessions_root, [root_task_id], through=end)
+    before_rollup = build_rollup(
+        sessions_root,
+        [root_task_id],
+        through=start,
+        retrospective_cutoff=True,
+    )
+    after_rollup = build_rollup(
+        sessions_root,
+        [root_task_id],
+        through=end,
+        retrospective_cutoff=True,
+    )
     before = _metrics(before_rollup, root_task_id)
     after = _metrics(after_rollup, root_task_id)
     after_root = _root(after_rollup, root_task_id)
@@ -318,8 +704,10 @@ def build_delta(
                     "fields; a decrease is rejected rather than hidden."
                 ),
                 "cutoff_boundary": (
-                    "Codex emits some token and timed-item records at completion, so work that "
-                    "straddles the start cutoff can be charged wholly to this interval."
+                    "Task, tool, compaction, and model-stream timings are clipped at both "
+                    "cutoffs. Token counts and client-reported first-token waits are emitted "
+                    "on completion and can be charged wholly to the interval containing that "
+                    "completion."
                 ),
                 "live_snapshot": (
                     "When snapshot_incomplete is true, the after snapshot and delta are lower "
