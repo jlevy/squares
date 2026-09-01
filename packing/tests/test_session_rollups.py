@@ -14,6 +14,8 @@ from __future__ import annotations
 
 import pathlib
 
+import yaml
+
 import devtools.check_session_rollups as checker
 from devtools.check_session_rollups import (
     GRANDFATHERED_BEFORE,
@@ -23,6 +25,8 @@ from devtools.check_session_rollups import (
     sessions,
 )
 from sqpack.yamlio import safe_load
+
+CODEX_RECEIPT = REPO / "packing/campaign/resource-usage/codex-task-tree-session-062.yaml"
 
 
 def test_every_terminal_session_at_or_after_the_boundary_declares_rollups() -> None:
@@ -81,7 +85,181 @@ def test_an_in_progress_session_is_not_required_to_have_them(
     assert checker.main() == 0
 
 
+def test_the_checker_refuses_an_existing_file_with_an_unknown_contract(
+    monkeypatch, tmp_path: pathlib.Path
+) -> None:
+    usage = tmp_path / "packing" / "campaign" / "resource-usage"
+    usage.mkdir(parents=True)
+    record = tmp_path / "session-999-fabricated.md"
+    record.write_text(
+        "---\nsession:\n  id: session-999\n  status: completed\n"
+        "  resource_rollups: [packing/campaign/resource-usage/usage.yaml]\n"
+        "---\n# fabricated\n",
+        encoding="utf-8",
+    )
+    (usage / "usage.yaml").write_text(
+        "softschema:\n  contract: invented/v1\n  envelope: rollup\n"
+        "  status: enforced\nrollup: {}\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(checker, "SESSIONS", tmp_path)
+    monkeypatch.setattr(checker, "REPO", tmp_path)
+
+    assert checker.main() == 1
+
+
+def test_the_checker_refuses_noncanonical_or_absolute_receipt_paths(
+    monkeypatch, tmp_path: pathlib.Path
+) -> None:
+    outside = tmp_path / "outside.yaml"
+    outside.write_text(
+        "softschema:\n  contract: packing.squares:ClaudeEfficiencyRollup/v1\n"
+        "  envelope: rollup\n  status: enforced\nrollup: {}\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "session-998-traversal.md").write_text(
+        "---\nsession:\n  id: session-998\n  status: completed\n"
+        "  resource_rollups: "
+        "[packing/campaign/resource-usage/../outside.yaml]\n---\n# fabricated\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "session-999-absolute.md").write_text(
+        "---\nsession:\n  id: session-999\n  status: completed\n"
+        f"  resource_rollups: [{outside}]\n---\n# fabricated\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(checker, "SESSIONS", tmp_path)
+    monkeypatch.setattr(checker, "REPO", tmp_path)
+
+    assert checker.main() == 1
+
+
+def test_the_checker_accepts_an_enforced_codex_delta_contract(
+    monkeypatch, tmp_path: pathlib.Path
+) -> None:
+    usage = tmp_path / "packing" / "campaign" / "resource-usage"
+    usage.mkdir(parents=True)
+    record = tmp_path / "session-999-fabricated.md"
+    record.write_text(
+        "---\nsession:\n  id: session-999\n  status: completed\n"
+        "  branch: codex/example\n"
+        "  resource_rollups: [packing/campaign/resource-usage/usage.yaml]\n"
+        "---\n# fabricated\n",
+        encoding="utf-8",
+    )
+    (usage / "usage.yaml").write_text(
+        CODEX_RECEIPT.read_text(encoding="utf-8"), encoding="utf-8"
+    )
+    monkeypatch.setattr(checker, "SESSIONS", tmp_path)
+    monkeypatch.setattr(checker, "REPO", tmp_path)
+
+    assert checker.main() == 0
+
+
+def test_the_checker_requires_branch_attribution_for_a_terminal_codex_session(
+    monkeypatch, tmp_path: pathlib.Path
+) -> None:
+    usage = tmp_path / "packing" / "campaign" / "resource-usage"
+    usage.mkdir(parents=True)
+    record = tmp_path / "session-999-fabricated.md"
+    record.write_text(
+        "---\nsession:\n  id: session-999\n  status: completed\n"
+        "  resource_rollups: [packing/campaign/resource-usage/usage.yaml]\n"
+        "---\n# fabricated\n",
+        encoding="utf-8",
+    )
+    (usage / "usage.yaml").write_text(
+        CODEX_RECEIPT.read_text(encoding="utf-8"), encoding="utf-8"
+    )
+    monkeypatch.setattr(checker, "SESSIONS", tmp_path)
+    monkeypatch.setattr(checker, "REPO", tmp_path)
+
+    assert checker.main() == 1
+
+
+def test_the_checker_rejects_duplicate_rollup_declarations(
+    monkeypatch, tmp_path: pathlib.Path
+) -> None:
+    usage = tmp_path / "packing" / "campaign" / "resource-usage"
+    usage.mkdir(parents=True)
+    reference = "packing/campaign/resource-usage/usage.yaml"
+    (tmp_path / "session-999-fabricated.md").write_text(
+        "---\nsession:\n  id: session-999\n  status: completed\n"
+        "  branch: codex/example\n"
+        f"  resource_rollups: [{reference}, {reference}]\n"
+        "---\n# fabricated\n",
+        encoding="utf-8",
+    )
+    (usage / "usage.yaml").write_text(
+        CODEX_RECEIPT.read_text(encoding="utf-8"), encoding="utf-8"
+    )
+    monkeypatch.setattr(checker, "SESSIONS", tmp_path)
+    monkeypatch.setattr(checker, "REPO", tmp_path)
+
+    assert checker.main() == 1
+
+
+def test_the_checker_rejects_cross_branch_codex_claims(
+    monkeypatch, tmp_path: pathlib.Path
+) -> None:
+    usage = tmp_path / "packing" / "campaign" / "resource-usage"
+    usage.mkdir(parents=True)
+    reference = "packing/campaign/resource-usage/usage.yaml"
+    for session_id, branch in (
+        ("session-998", "codex/first"),
+        ("session-999", "codex/second"),
+    ):
+        (tmp_path / f"{session_id}-fabricated.md").write_text(
+            f"---\nsession:\n  id: {session_id}\n  status: completed\n"
+            f"  branch: {branch}\n"
+            f"  resource_rollups: [{reference}]\n"
+            "---\n# fabricated\n",
+            encoding="utf-8",
+        )
+    (usage / "usage.yaml").write_text(
+        CODEX_RECEIPT.read_text(encoding="utf-8"), encoding="utf-8"
+    )
+    monkeypatch.setattr(checker, "SESSIONS", tmp_path)
+    monkeypatch.setattr(checker, "REPO", tmp_path)
+
+    assert checker.main() == 1
+
+
+def test_the_checker_rejects_a_semantically_false_codex_delta(
+    monkeypatch, tmp_path: pathlib.Path
+) -> None:
+    usage = tmp_path / "packing" / "campaign" / "resource-usage"
+    usage.mkdir(parents=True)
+    record = tmp_path / "session-999-fabricated.md"
+    record.write_text(
+        "---\nsession:\n  id: session-999\n  status: completed\n"
+        "  branch: codex/example\n"
+        "  resource_rollups: [packing/campaign/resource-usage/usage.yaml]\n"
+        "---\n# fabricated\n",
+        encoding="utf-8",
+    )
+    document = safe_load(CODEX_RECEIPT.read_text(encoding="utf-8"))
+    document["rollup"]["delta"]["agent_active_seconds"] = 0.0
+    (usage / "usage.yaml").write_text(
+        yaml.safe_dump(document, sort_keys=False), encoding="utf-8"
+    )
+    monkeypatch.setattr(checker, "SESSIONS", tmp_path)
+    monkeypatch.setattr(checker, "REPO", tmp_path)
+
+    assert checker.main() == 1
+
+
 def test_the_grandfather_boundary_is_a_boundary_not_a_list() -> None:
     """A new session is above it by construction, so the exemption cannot quietly grow."""
     assert GRANDFATHERED_BEFORE == "session-045"
     assert main() == 0
+
+
+def test_agent_session_schema_requires_unique_resource_rollups() -> None:
+    schema = safe_load(
+        (REPO / "packing/campaign/schemas/agent-session.schema.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    assert schema["properties"]["resource_rollups"]["uniqueItems"] is True

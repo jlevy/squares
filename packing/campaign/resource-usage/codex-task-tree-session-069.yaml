@@ -1,0 +1,134 @@
+softschema:
+  contract: packing.squares:CodexTaskTreeDelta/v1
+  schema: ../schemas/codex-task-tree-delta.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: codex
+    source_schema: CodexEfficiencyRollup/v2
+    root_task_id: 01a05a80-69a7-7362-9347-d510f5fab14e
+    start_cutoff_at: '2026-09-01T12:16:55Z'
+    end_cutoff_at: '2026-09-01T13:51:00Z'
+    before_snapshot_at: '2026-09-01T11:51:35.959Z'
+    after_snapshot_at: '2026-09-01T13:50:26.836Z'
+  completeness:
+    snapshot_incomplete: false
+    live_session_count: 0
+  before:
+    session_count: 1
+    task_count: 23
+    completed_task_count: 22
+    interrupted_task_count: 1
+    agent_active_seconds: 20965.593
+    elapsed_envelope_seconds: 38735.635
+    active_union_seconds: 20965.593
+    parallel_overlap_seconds: 0.0
+    timed_model_stream_seconds: 4261.443
+    recorded_first_token_wait_seconds: 292.245
+    tool_seconds_by_category:
+      agent_control: 1.895
+      agent_wait: 30.006
+      command: 609.759
+      extension: 15.064
+      file_change: 4.351
+    compaction_seconds: 943.75
+    compaction_event_count: 10
+    compaction_item_count: 10
+    legacy_compaction_event_count: 0
+    excluded_legacy_replay_task_count: 0
+    models:
+    - model: gpt-5.6-sol
+      thinking_level: xhigh
+      model_response_count: 576
+      timed_model_stream_seconds: 4261.443
+      timed_reasoning_seconds: 3950.993
+      timed_message_seconds: 310.45
+      recorded_first_token_wait_seconds: 292.245
+      tokens:
+        input: 71895973
+        cached_input: 68495104
+        output: 319538
+        reasoning_output: 149708
+  after:
+    session_count: 1
+    task_count: 30
+    completed_task_count: 29
+    interrupted_task_count: 1
+    agent_active_seconds: 23844.489
+    elapsed_envelope_seconds: 45866.512
+    active_union_seconds: 23844.489
+    parallel_overlap_seconds: 0.0
+    timed_model_stream_seconds: 5326.83
+    recorded_first_token_wait_seconds: 344.897
+    tool_seconds_by_category:
+      agent_control: 2.551
+      agent_wait: 30.006
+      command: 653.009
+      extension: 15.064
+      file_change: 8.919
+    compaction_seconds: 1010.907
+    compaction_event_count: 12
+    compaction_item_count: 12
+    legacy_compaction_event_count: 0
+    excluded_legacy_replay_task_count: 0
+    models:
+    - model: gpt-5.6-sol
+      thinking_level: xhigh
+      model_response_count: 766
+      timed_model_stream_seconds: 5326.83
+      timed_reasoning_seconds: 4972.906
+      timed_message_seconds: 353.924
+      recorded_first_token_wait_seconds: 344.897
+      tokens:
+        input: 97177708
+        cached_input: 92776192
+        output: 435432
+        reasoning_output: 189230
+  delta:
+    session_count: 0
+    task_count: 7
+    completed_task_count: 7
+    interrupted_task_count: 0
+    compaction_event_count: 2
+    compaction_item_count: 2
+    legacy_compaction_event_count: 0
+    excluded_legacy_replay_task_count: 0
+    agent_active_seconds: 2878.896
+    elapsed_envelope_seconds: 7130.877
+    active_union_seconds: 2878.896
+    parallel_overlap_seconds: 0.0
+    timed_model_stream_seconds: 1065.387
+    recorded_first_token_wait_seconds: 52.652
+    compaction_seconds: 67.157
+    tool_seconds_by_category:
+      agent_control: 0.656
+      agent_wait: 0.0
+      command: 43.25
+      extension: 0.0
+      file_change: 4.568
+    models:
+    - model: gpt-5.6-sol
+      thinking_level: xhigh
+      model_response_count: 190
+      timed_model_stream_seconds: 1065.387
+      timed_reasoning_seconds: 1021.913
+      timed_message_seconds: 43.474
+      recorded_first_token_wait_seconds: 52.652
+      tokens:
+        input: 25281735
+        cached_input: 24281088
+        output: 115894
+        reasoning_output: 39522
+  semantics:
+    attribution: Codex logs carry no git-branch telemetry. This task-tree interval is not branch-attributed
+      unless an AgentSession explicitly declares it.
+    delta: Delta is after minus before for a fixed whitelist of cumulative additive fields; a decrease
+      is rejected rather than hidden.
+    cutoff_boundary: Task, tool, compaction, and model-stream timings are clipped at both cutoffs.
+      Token counts and client-reported first-token waits are emitted on completion and can be charged
+      wholly to the interval containing that completion.
+    live_snapshot: When snapshot_incomplete is true, the after snapshot and delta are lower bounds
+      on the task tree's eventual totals.
+    retention: The receipt retains aggregate counts, timings, models, efforts, and tokens; it drops
+      prose, private paths, agent paths, turn ids, and command history.

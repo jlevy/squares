@@ -342,18 +342,17 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, use
-[session 061](../../../../packing/campaign/agent-sessions/session-061-epistemics-codification.md),
-the epistemics codification the verification review fed; agenda-010 is fully discharged
-and `BC-106`’s review is merged (the six overnight holds resolved as determinations, the
-green17 bound upgraded to `4.426213` on two independent formal methods with the frontier
-fields moved at `n = 17` and `n = 18`), and the active slice is `BC-107` under
-`think-n8vl` in
-[agenda-011](../../../../packing/campaign/agendas/agenda-011-verification-review.md) --
-`epistemics.md` owning the verification/confirmation/significance/novelty axes, the
-results register `packing/frontier/results.yaml` with `devtools/check_results.py`
-re-deriving every declared rung in the gate, and the reader tier re-oriented around it.
-Sessions 027 through 049 are terminal, and agendas 006, 007 and 008 are closed; the
-recognition block BC-089 keeps its remainder open as sanctioned gate filler.
+[session 071](../../../../packing/campaign/agent-sessions/session-071-agenda014-publication-and-handoff.md)
+and retain `BC-123` under `think-p2m6` from
+[agenda-014](../../../../packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md)
+as the exact next cell.
+Its entry condition requires agenda-013 `BC-121` to be terminal and its final PR
+revision to be green; the coordinator removes the tbd hold only after both conditions
+hold, and this publication slice does not satisfy them.
+Its frozen input boundary is exp-052 with checkpoint
+`db5c156959b6de4e6f2c9be283454d01dd5f3a436e6489f5e6bb60c38559fdb8` and progress
+`08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af`; session-071 neither
+changes nor resumes those files and claims no scientific result.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

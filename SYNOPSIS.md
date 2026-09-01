@@ -87,16 +87,16 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-two blocked
-hypotheses.
-Two further hypotheses are unresolved: one because its formal prerequisite is
-missing, and H-044 because its registered calibration-only amendment keeps the
-hypothesis undisposed — its first scored round (exp-046) missed the criterion
-determinately under both denominator readings, the review hold is cleared, and
-disposition waits on a confirmatory successor over a fresh-frozen corpus.
-Its active confidence ladder has completed the exact and event controls up to the first
-nontrivial identity question; the next scientific transition is from specialized `n = 5`
-local geometry to a defensible component relation, not to a larger raw census.
+hypotheses, one open hypothesis, seven open questions, and thirty-eight blocked
+hypotheses. Four further hypotheses are unresolved.
+The set includes one claim whose formal prerequisite is missing, H-044 whose registered
+calibration-only amendment keeps the hypothesis undisposed — its first scored round
+(exp-046) missed the criterion determinately under both denominator readings, the review
+hold is cleared, and disposition waits on a confirmatory successor over a fresh-frozen
+corpus.
+Its active confidence ladder has completed the exact and event controls up to the
+first nontrivial identity question; the next scientific transition is from specialized
+`n = 5` local geometry to a defensible component relation, not to a larger raw census.
 
 #### Refresh rule
 
@@ -188,6 +188,11 @@ case or experiment separately.
 | [Review: PR #44, Constructive Enumeration, and the Known-Best Atlas](docs/project/reviews/review-2026-08-26-pr44-constructive-enumeration-and-known-best-atlas.md) | dated review record | record | retained | — |
 | [Verification Determinations for the Agenda-010 Overnight Run](docs/project/reviews/review-2026-08-31-overnight-run-verification-determinations.md) | dated review record | record | retained | — |
 | [Review: Square Packing Research-Loop Efficiency](docs/project/reviews/review-2026-08-25-research-loop-efficiency.md) | dated review record | record | retained | — |
+| [Review: Agenda 013 First-Wave Efficiency](docs/project/reviews/review-2026-09-01-agenda013-first-wave-efficiency.md) | dated review record | record | retained | — |
+| [Review: Agenda 013 Second-Wave Efficiency](docs/project/reviews/review-2026-09-01-agenda013-second-wave-efficiency.md) | dated review record | record | retained | — |
+| [Review Packets: Agenda 013 Second Wave](docs/project/reviews/review-2026-09-01-agenda013-second-wave-packets.md) | dated review record | record | retained | — |
+| [Independent Review: Agenda 013 Research Lanes](docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md) | dated review record | record | retained | — |
+| [Agenda 013 Overnight Synthesis: Controls, Mechanisms, and the Next Research Queue](docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
@@ -322,17 +327,19 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-No escalated research session is active.
-The latest terminal record is
-[session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md),
-owned by `think-n8vl`; its branch is in final review and the bead closes when the pull
-request merges. It added the whole-results register, the V/C/S/N rubric, and the
-structural checker summarized in [`epistemics.md`](epistemics.md).
+The latest publication record is
+[session-071](packing/campaign/agent-sessions/session-071-agenda014-publication-and-handoff.md).
+It records a documentation-only handoff and makes no scientific claim.
 
-No new scientific slice is authorized by that documentation and CI review.
-Select the next research slice from the generated
-[agenda map](packing/campaign/agenda-map.md), as required by
-[`OR-4`](operating-rules.md).
+The exact next cell is `BC-123` under `think-p2m6` in
+[agenda-014](packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md).
+Its entry condition requires agenda-013 `BC-121` to be terminal and that closeout’s
+final PR revision to be green.
+The coordinator removes the tbd hold only after both conditions hold; this publication
+slice does not satisfy them.
+Its frozen input boundary is exp-052 with checkpoint
+`db5c156959b6de4e6f2c9be283454d01dd5f3a436e6489f5e6bb60c38559fdb8` and progress
+`08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af`.
 
 ### Handoff Record
 
@@ -522,6 +529,14 @@ hash-verified parent-child serialization bridge at `n = 68/69`; and `BC-110` dec
 whether `n = 50` can become the rational exact-promotion control.
 Run them in parallel, then take `BC-111`’s bounded checkpoint.
 The dependency-linked successors are already filed.
+[Agenda-013](packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md) is the
+owner-authorized nine-hour execution graph on one pull request: 150 minutes for those
+three first-wave blocks, a 15-minute W5 efficiency checkpoint, 30 minutes for BC-111,
+180 minutes for one positive or refusal-path continuation per lane, 30 minutes to
+measure throughput again and freeze review packets, 90 minutes for three independent
+reviewers, and 45 minutes for synthesis and final validation.
+Every wave boundary requires a commit, tbd and generated-view reconciliation, validation
+receipt, push, and PR update.
 Existing `BC-010` gets one final 90-minute discriminator with a matched `n = 10`
 transfer under dedicated bead `think-iivb`. Its first cell freezes both fixtures, the
 observable, threshold, and refusal conditions before measurement.
@@ -2360,6 +2375,14 @@ round that names the hypothesis, control roles included.
 | [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov’s decomposition | 0 | — |
 | [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent’s 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
 | [H-051](packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md) | blocked | A blinded tier-S n = 68 public-parent surgery pilot matches the released child under the frozen grammar | 0 | — |
+| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | unresolved | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 2 | 139.6m agent + 139.6m wall |
+| [H-053](packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md) | blocked | Each fixed UnitSquare `n = 68, 69` parent-child pair admits compatible rigid poses under at least one declared serialization model | 2 | 114m agent + 107.2m wall |
+| [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | unresolved | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 2 | 38m agent + 30.0m wall |
+| [H-055](packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md) | blocked | If selected, the `n = 54` witness admits complete exact promotion in the reported nested-radical field | 0 | — |
+| [H-056](packing/campaign/hypotheses/H-056-n39-degree-five-interval-certificate.md) | blocked | If selected, the `n = 39` witness admits a complete interval certificate tied to the designated degree-five root | 0 | — |
+| [H-057](packing/campaign/hypotheses/H-057-n17-parent-bound-parallel-speedup.md) | blocked | A parent-bound three-process runner preserves exact output and reaches the fixed useful-speedup threshold on three exp-052 ordinals | 0 | — |
+| [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | blocked | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 0 | — |
+| [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | blocked | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 0 | — |
 
 ### Confirmed
 
@@ -2477,9 +2500,8 @@ Transverse and mixed nonlinear realization remains open.
 
 An experiment records what was measured about square packing.
 A session records what an agent did for a stretch of hours, and until recently it
-recorded that without recording what the stretch cost: the phases and outcomes were in
-one file and the turns and wall-clock were in another, keyed by harness log id, and
-nothing joined them.
+recorded that without recording what the stretch cost: phases and outcomes were in one
+file while harness measurements were elsewhere, and nothing joined them.
 [`session-close-report.yaml`](packing/campaign/session-close-report.yaml) is that join,
 one validated entry per session, written by `devtools.close_session --render` from the
 session records and the rollups rather than from anybody’s recollection, and
@@ -2492,9 +2514,10 @@ sessions.** Several sessions can run inside one harness log, each legitimately d
 the whole of it; charging it to each of them read as 117.9 hours for a campaign that had
 spent 43.7, so every total is taken over distinct rollups and the shared log gets its
 own row rather than a footnote.
-And a rollup exists on disk whether or not a session claims it, so the ones nobody
+And a receipt exists on disk whether or not a session claims it, so the ones nobody
 claims are counted rather than dropped — the gap between those two rows is coverage, not
-rounding.
+rounding. Claude’s branch-aware log totals and Codex’s declared task-tree intervals stay
+in separate tables: their units differ, and the same work can appear in both.
 
 <!-- BEGIN GENERATED: session-close-report (devtools.close_session) -->
 
@@ -2525,25 +2548,42 @@ rounding.
 | [session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
 | *shared by 17 sessions* | — | 3 | 10,053 | 5,527 | 123 | 61.3 h |
 
+| Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| `codex-task-tree-session-062.yaml` | session-062 | 607 | 2.84 h | 1.46 h | 1.46 h | yes |
+| `codex-task-tree-session-063.yaml` | session-063 | 441 | 2.08 h | 0.85 h | 0.85 h | yes |
+| `codex-task-tree-session-064.yaml` | session-064 | 3,444 | 17.57 h | 9.0 h | 9.0 h | yes |
+| `codex-task-tree-session-065.yaml` | session-064, session-065 | 286 | 1.74 h | 1.74 h | 1.99 h | no |
+| `codex-task-tree-session-066.yaml` | session-064, session-066 | 106 | 0.64 h | 0.64 h | 1.11 h | no |
+| `codex-task-tree-session-067.yaml` | session-064, session-067 | 28 | 0.14 h | 0.14 h | 0.32 h | no |
+| `codex-task-tree-session-068.yaml` | session-064, session-068 | 308 | 1.9 h | 1.9 h | 2.67 h | no |
+| `codex-task-tree-session-069.yaml` | session-064, session-069 | 190 | 0.8 h | 0.8 h | 1.57 h | no |
+| `codex-task-tree-session-070-review.yaml` | session-064, session-070 | 23 | 0.12 h | 0.12 h | 0.42 h | no |
+| `codex-task-tree-session-070.yaml` | session-064, session-070 | 114 | 0.52 h | 0.52 h | 2.67 h | no |
+| `codex-task-tree-session-071.yaml` | session-071 | 68 | 0.25 h | 0.25 h | 0.25 h | yes |
+
 | Coverage | sessions |
 | --- | ---: |
-| measured | 17 |
+| measured | 27 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **61** |
+| **total** | **71** |
 
 <!-- END GENERATED: session-close-report -->
 
 The sessions with no measurement closed before `resource_rollups` existed and their
 harness logs are not retained, so that cost is gone rather than pending.
-The rollups no session claims are the delegated half of the same period: sub-agent logs
-that survived while the session records that would have claimed them predate the field.
-Backfill needs nothing but a retained log — `close_session --update` writes its rollup,
-and the entry fills in on the next render.
+The Claude rollups no session claims are the delegated half of the same period:
+sub-agent logs that survived while the session records that would have claimed them
+predate the field. Claude backfill needs only a retained log; Codex interval refresh
+needs the root task id and the two declared cutoffs.
+The relevant generator writes the receipt, and the entry fills in on the next
+`close_session --render`.
 
 ## Experiments Conducted
 
-There are 46 terminal rounds registered in `series-000`. They record 1131 agent-minutes
-and 30.9 wall-minutes.
+There are 52 terminal rounds registered in `series-000`.
+
+They record 1422.6 agent-minutes and 307.7 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -2618,6 +2658,12 @@ archive beside it.
 | [exp-044](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md) | 5 | target | H-023 | exact pure -W row-jet test | reviewed row builder; no retained target | **unresolved** |
 | [exp-045](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md) | 5 | target | H-023 | exact pure -W scale and control test | pure -W excluded at A, interior and B; sign symmetry holds; accepted 2026-08-31 after the independent audit and -W bridge corroboration | **accepted** |
 | [exp-046](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-046-h-044-chunk-expressibility-verdict.md) | 11 | target | H-044 | chunk-expressibility verdict at `n ≤ 30` | criterion missed under both denominator readings (23/30 and 3/10, both bands); every miss typed; calibration corpus, review resolved 2026-08-31 with H-044 undisposed per its amendment | unresolved |
+| [exp-047](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-047-h-053-unitsquare-rigid-pose-serialization.md) | 68 | target | H-053 | binary64 precision-bridge prototype | interval-enclosure and complete-runner guards fire before parent retrieval or target access | blocked |
+| [exp-048](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-048-h-054-n50-exact-rational-reconstruction.md) | 50 | target | H-054 | exact-reconstruction admission gate | E1 source semantics absent; no reconstruction, target sample, or result | unresolved |
+| [exp-049](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-049-h-052-n17-independent-certificate-agreement.md) | 17 | target | H-052 | exact independent accumulator | 3,920-second timebox; no canonical comparison or checkpoint | unresolved |
+| [exp-050](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-050-h-054-n50-source-semantics-e1-localization.md) | 50 | target | H-054 | exact source-semantics intake | E1 reason 3, `attribution-unbound`; zero cells | unresolved |
+| [exp-051](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-051-h-053-n68-refusal-localization.md) | 68 | target | H-053 | proof-carrying pose instrument | production `--record` adapter absent; no target access | blocked |
+| [exp-052](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-052-h-052-n17-resumable-certificate-agreement.md) | 17 | target | H-052 | resumable exact accumulator | 33/181 contiguous paired rows agree; result incomplete | unresolved |
 
 ### Cost and provenance
 
@@ -2669,11 +2715,17 @@ archive beside it.
 | exp-044 | one 30-minute criterion, integration, and review slice | 100.41 s | 30 m | guard | `a5a4ef0` (row builder only) |
 | exp-045 | one 105-minute W6 mini-cycle inside agenda-004 block two | 6.64 s | 45 m | criterion | `caffcc3` |
 | exp-046 | one 45-minute phase of session-055 (block 4) | 1.1 s | 25 m | criterion | `db0c410a` (atlas input; scorer lands with this round) |
+| exp-047 | 115 minutes after target-blind W3; W7 admission first | 1,932 s | 39 m | guard | `d7c94590+sha256-92e7b6e43b8785c0` |
+| exp-048 | one 25-minute W7 readiness cell inside BC-110 | 0 s | 8 m | dependency | `d7c94590` |
+| exp-049 | 65 minutes 20 seconds | 3,920 s | 65.3333 m | timebox | `d7c94590+sha256-309ec24158f73dd2` |
+| exp-050 | 30m source-semantics application cell | 1,800 s | 30 m | criterion | `e21598f6+sha256-fed71cf825906bd0` |
+| exp-051 | 75m target-blind W7 instrument wall | 4,500 s | 75 m | guard | `e21598f6+sha256-3d91046ad9d4ea7b` |
+| exp-052 | one fixed 75-minute W6 interval | 4,456 s | 74.2667 m | timebox | `e21598f6+sha256-3e5284fd56fd33f7` |
 
-### What the 46 rounds jointly establish
+### What the 52 rounds jointly establish
 
-The 46 rounds use 1131 agent-minutes and 30.9 wall-minutes under the campaign’s retained
-effort accounting.
+The 52 rounds use 1422.6 agent-minutes and 307.7 wall-minutes under the campaign’s
+retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only

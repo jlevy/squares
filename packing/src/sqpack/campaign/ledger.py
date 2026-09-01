@@ -1042,14 +1042,15 @@ def check(
 
 
 def status_of(hypothesis: dict, rounds: list[dict]) -> str:
-    """Derived, never stored. Precedence matters: a later accept outranks a reject."""
+    """Derive status from reviewed rounds; pending decisions cannot move a claim."""
     if hypothesis.get("kind") == "open_question":
         return "open question"
     if not rounds:
         if not hypothesis.get("instrument_ready", True) or not hypothesis.get("instrument"):
             return "blocked"
         return "open"
-    decisions = {r.get("verdict", {}).get("decision") for r in rounds}
+    reviewed = [r for r in rounds if not (r.get("verdict") or {}).get("needs_review")]
+    decisions = {r.get("verdict", {}).get("decision") for r in reviewed}
     # `rejected` outranks `accepted` on purpose. A claim stated over a sweep is
     # universally quantified, so one failing cell refutes it however many cells pass --
     # and taking the optimistic reading would let a registry report a refuted claim as
@@ -1060,7 +1061,7 @@ def status_of(hypothesis: dict, rounds: list[dict]) -> str:
             return {"accepted": "confirmed", "rejected": "refuted"}.get(decision, decision)
     if decisions == {"in-progress"}:
         return "running"
-    return "measured"
+    return "measured" if reviewed else "needs review"
 
 
 def sweep_coverage(hypothesis: dict, rounds: list[dict]) -> str:

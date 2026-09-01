@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 61
+count: 71
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 17
+  sessions_measured: 27
   sessions_unmeasured: 44
   attributed:
     rollups: 42
@@ -34,6 +34,10 @@ totals:
     tool_errors: 188
     one_off_code: 1738
     wall_hours: 76.48
+codex_receipts:
+  attributed: 11
+  unattributed: 0
+  measured: 11
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -46,6 +50,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-002
   title: "Integrate the independent PR 16 review"
   status: completed
@@ -55,6 +60,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-003
   title: "Establish the unattended research readiness agenda"
   status: completed
@@ -64,6 +70,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-004
   title: "Deep mathematical-frontier and basin-map review"
   status: completed
@@ -73,6 +80,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-005
   title: "Reconstruct the n = 29 source witness and decide H-024"
   status: completed
@@ -82,6 +90,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-006
   title: "Decide the branchwise linearized geometry of Trump’s exact packing"
   status: completed
@@ -91,6 +100,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-007
   title: "Classify and render the complete optimal spaces at n = 3 and n = 4"
   status: completed
@@ -100,6 +110,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-008
   title: "Audit, falsify, and repair the unrestricted Stromquist lower-bound proof"
   status: completed
@@ -109,6 +120,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-009
   title: "Make the basin-map loop scientifically admissible and run bounded cells"
   status: stopped
@@ -118,6 +130,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-010
   title: "Execute the frozen mixed portfolio from a reconciled green base"
   status: stopped
@@ -127,6 +140,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-011
   title: "Eight-hour portfolio continuation after the cycle-cap checkpoint"
   status: completed
@@ -136,6 +150,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-012
   title: "Eight-hour final continuation after the source checkpoint"
   status: completed
@@ -145,6 +160,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-013
   title: "Generated-view recurrence checkpoint"
   status: completed
@@ -154,6 +170,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-014
   title: "Final portfolio rotation before the protected reserve"
   status: stopped
@@ -163,6 +180,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-015
   title: "Resolve the next exact n = 5 connectivity cells in bounded cycles"
   status: stopped
@@ -172,6 +190,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-016
   title: "Final-hour exact-instrument continuation"
   status: completed
@@ -181,6 +200,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-017
   title: "Research-loop efficiency infrastructure"
   status: completed
@@ -190,6 +210,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-018
   title: "Data-driven efficiency plan refinement"
   status: completed
@@ -199,6 +220,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-019
   title: "Native Codex timing correction spike"
   status: completed
@@ -208,6 +230,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-020
   title: "Fast pull-request lane spike"
   status: completed
@@ -217,6 +240,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-021
   title: "Land the fast validation lane and shorten PR 45 strict feedback"
   status: stopped
@@ -226,6 +250,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-022
   title: "Review PR 44 and build the known-best constructive atlas"
   status: completed
@@ -235,6 +260,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-023
   title: "Resolve the PR 45 review and reach a merge-ready checkpoint"
   status: completed
@@ -244,6 +270,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-024
   title: "Validate and publish the reviewed PR 45 candidate"
   status: stopped
@@ -253,6 +280,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-025
   title: "Stack the fast lane and shorten the known-best atlas check"
   status: completed
@@ -262,6 +290,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-026
   title: "Repair the pipeline and complete the first half of the balanced research program"
   status: completed
@@ -271,6 +300,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-027
   title: "Execute the second half of the balanced research program"
   status: stopped
@@ -280,6 +310,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-028
   title: "Execute the carried-forward BC-032 n=29 promotion inventory"
   status: completed
@@ -289,6 +320,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-029
   title: "Close the remaining agenda-003 cycles on strict per-workflow budgets"
   status: completed
@@ -298,6 +330,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-030
   title: "Make the three-layer work model explicit and re-gloss BC"
   status: completed
@@ -307,6 +340,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-031
   title: "Merge main, verify the merged tree, and land PR 48"
   status: completed
@@ -316,6 +350,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-032
   title: "Build exp-045's four missing pre-certificate mutations"
   status: completed
@@ -325,6 +360,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-033
   title: "Run exp-045 to a terminal H-023 disposition"
   status: completed
@@ -334,6 +370,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-034
   title: "Consolidate the pipeline guards and make the record-model joins checkable"
   status: completed
@@ -343,6 +380,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-035
   title: "Manufacture precision from the published n = 29 system, and freeze the contact structure it rests on"
   status: completed
@@ -352,6 +390,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-036
   title: "Build the interval-certification bridge as far as a Krawczyk operator and a separating-axis test that both refuse correctly"
   status: completed
@@ -361,6 +400,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-037
   title: "Calibrate the interval route where the answer is already known, then run it at n = 29"
   status: completed
@@ -370,6 +410,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-038
   title: "Identify which features meet, assemble the contact equations, and measure what they leave"
   status: completed
@@ -379,6 +420,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-039
   title: "Widen the witness contract for enclosures, build the checker branch, and record the n = 29 certificate as evidence"
   status: completed
@@ -388,6 +430,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-040
   title: "Give the pose model a reflection so the n = 29 contact system assembles"
   status: completed
@@ -397,6 +440,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-041
   title: "Derive the stationarity conditions, and find there are none to derive"
   status: completed
@@ -406,6 +450,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-042
   title: "Recover a minimal polynomial under the frozen margin rule, and record what n = 29 returns"
   status: completed
@@ -415,6 +460,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-043
   title: "Rationalise the n = 29 system and bound the algebraic degree of s(29)"
   status: completed
@@ -424,6 +470,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-044
   title: "Eliminate the n = 29 system, close the exact route at n = 11, and finish the middle layers"
   status: completed
@@ -433,6 +480,7 @@ sessions:
   unmeasured_reason: >-
     closed before resource_rollups existed; the harness log is not retained, so its cost cannot be recovered
   rollups: []
+  codex_receipts: []
 - id: session-045
   title: "Repair the agenda queue, then take the identity question it was blocking"
   status: completed
@@ -462,6 +510,7 @@ sessions:
   tool_errors: 95
   one_off_code: 1157
   wall_hours: 42.77
+  codex_receipts: []
 - id: session-046
   title: "Build the exact constructions for n = 65 and n = 89"
   status: completed
@@ -475,6 +524,7 @@ sessions:
   tool_errors: 84
   one_off_code: 1048
   wall_hours: 38.74
+  codex_receipts: []
 - id: session-047
   title: "Make the assurance record say who established what"
   status: completed
@@ -502,6 +552,7 @@ sessions:
   tool_errors: 102
   one_off_code: 1153
   wall_hours: 41.3
+  codex_receipts: []
 - id: session-048
   title: "Report every session's cost, over distinct rollups rather than sessions"
   status: completed
@@ -515,6 +566,7 @@ sessions:
   tool_errors: 84
   one_off_code: 1048
   wall_hours: 38.74
+  codex_receipts: []
 - id: session-049
   title: "Close the hygiene queue, reassess the search, run the first sequenced slice"
   status: completed
@@ -532,6 +584,7 @@ sessions:
   tool_errors: 12
   one_off_code: 133
   wall_hours: 4.46
+  codex_receipts: []
 - id: session-050
   title: "The exp-045 independent audit, the -W bridge, and the acceptance"
   status: completed
@@ -545,6 +598,7 @@ sessions:
   tool_errors: 8
   one_off_code: 42
   wall_hours: 3.24
+  codex_receipts: []
 - id: session-051
   title: "Block 2 of the overnight run: the enumeration reprice and the exact-LP gate"
   status: completed
@@ -559,6 +613,7 @@ sessions:
   tool_errors: 31
   one_off_code: 170
   wall_hours: 19.37
+  codex_receipts: []
 - id: session-052
   title: "The mid-run checkpoint: resequence the tentative half on the night's evidence"
   status: completed
@@ -572,6 +627,7 @@ sessions:
   tool_errors: 31
   one_off_code: 170
   wall_hours: 19.32
+  codex_receipts: []
 - id: session-053
   title: "Block 3 of the overnight run: machine-checking Bentz 2010"
   status: completed
@@ -586,6 +642,7 @@ sessions:
   tool_errors: 31
   one_off_code: 170
   wall_hours: 19.48
+  codex_receipts: []
 - id: session-054
   title: "Block 1 of the two-lane overnight run: the certifier instrument and the falsifier"
   status: completed
@@ -601,6 +658,7 @@ sessions:
   tool_errors: 31
   one_off_code: 170
   wall_hours: 19.45
+  codex_receipts: []
 - id: session-055
   title: "Block 4 of the overnight run: the H-044 verdict"
   status: completed
@@ -615,6 +673,7 @@ sessions:
   tool_errors: 31
   one_off_code: 170
   wall_hours: 19.48
+  codex_receipts: []
 - id: session-056
   title: "Block 5 of the overnight run: the m = 4 foundation layer"
   status: completed
@@ -628,6 +687,7 @@ sessions:
   tool_errors: 31
   one_off_code: 170
   wall_hours: 19.32
+  codex_receipts: []
 - id: session-057
   title: "Block 6 of the overnight run: the Green sizes ladder"
   status: completed
@@ -641,6 +701,7 @@ sessions:
   tool_errors: 31
   one_off_code: 170
   wall_hours: 19.32
+  codex_receipts: []
 - id: session-058
   title: "The checkpoint's gate filler: sizing m = 8 against the m = 7 encoding"
   status: completed
@@ -654,6 +715,7 @@ sessions:
   tool_errors: 31
   one_off_code: 170
   wall_hours: 19.32
+  codex_receipts: []
 - id: session-059
   title: "The checkpoint's other filler: the tau* diagnostic at n = 12"
   status: completed
@@ -667,6 +729,7 @@ sessions:
   tool_errors: 31
   one_off_code: 170
   wall_hours: 19.32
+  codex_receipts: []
 - id: session-060
   title: "The verification review: six determinations under the standing rubric"
   status: completed
@@ -680,6 +743,7 @@ sessions:
   tool_errors: 31
   one_off_code: 170
   wall_hours: 19.32
+  codex_receipts: []
 - id: session-061
   title: "The epistemics codification: ladders, register, checker, orientation"
   status: completed
@@ -693,3 +757,260 @@ sessions:
   tool_errors: 31
   one_off_code: 170
   wall_hours: 19.32
+  codex_receipts: []
+- id: session-062
+  title: "Agenda-013 preflight and first publication"
+  status: stopped
+  primary_bead: think-r683
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-062.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-062.yaml
+    model_responses: 607
+    agent_hours: 2.84
+    active_union_hours: 1.46
+    wall_hours: 1.46
+    snapshot_incomplete: true
+- id: session-063
+  title: "Agenda-013 post-publication review repairs"
+  status: completed
+  primary_bead: think-r683
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-063.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-063.yaml
+    model_responses: 441
+    agent_hours: 2.08
+    active_union_hours: 0.85
+    wall_hours: 0.85
+    snapshot_incomplete: true
+- id: session-064
+  title: "Agenda-013 nine-hour coordinator"
+  status: completed
+  primary_bead: think-5xlb
+  phases: 10
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-064.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-065.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-066.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-067.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-068.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-069.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-070.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-064.yaml
+    model_responses: 3444
+    agent_hours: 17.57
+    active_union_hours: 9.0
+    wall_hours: 9.0
+    snapshot_incomplete: true
+  - path: packing/campaign/resource-usage/codex-task-tree-session-065.yaml
+    model_responses: 286
+    agent_hours: 1.74
+    active_union_hours: 1.74
+    wall_hours: 1.99
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-066.yaml
+    model_responses: 106
+    agent_hours: 0.64
+    active_union_hours: 0.64
+    wall_hours: 1.11
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-067.yaml
+    model_responses: 28
+    agent_hours: 0.14
+    active_union_hours: 0.14
+    wall_hours: 0.32
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-068.yaml
+    model_responses: 308
+    agent_hours: 1.9
+    active_union_hours: 1.9
+    wall_hours: 2.67
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-069.yaml
+    model_responses: 190
+    agent_hours: 0.8
+    active_union_hours: 0.8
+    wall_hours: 1.57
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-070.yaml
+    model_responses: 114
+    agent_hours: 0.52
+    active_union_hours: 0.52
+    wall_hours: 2.67
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
+    model_responses: 23
+    agent_hours: 0.12
+    active_union_hours: 0.12
+    wall_hours: 0.42
+    snapshot_incomplete: false
+- id: session-065
+  title: "BC-108 n = 17 independent certificate agreement"
+  status: completed
+  primary_bead: think-swtr
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-065.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-065.yaml
+    model_responses: 286
+    agent_hours: 1.74
+    active_union_hours: 1.74
+    wall_hours: 1.99
+    snapshot_incomplete: false
+- id: session-066
+  title: "BC-109 n = 68/69 precision bridge"
+  status: stopped
+  primary_bead: think-26b1
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-066.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-066.yaml
+    model_responses: 106
+    agent_hours: 0.64
+    active_union_hours: 0.64
+    wall_hours: 1.11
+    snapshot_incomplete: false
+- id: session-067
+  title: "BC-110 n = 50 exact rational control"
+  status: stopped
+  primary_bead: think-uz6f
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-067.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-067.yaml
+    model_responses: 28
+    agent_hours: 0.14
+    active_union_hours: 0.14
+    wall_hours: 0.32
+    snapshot_incomplete: false
+- id: session-068
+  title: "BC-116 n = 17 resumability"
+  status: completed
+  primary_bead: think-9zgs
+  phases: 8
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-068.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-068.yaml
+    model_responses: 308
+    agent_hours: 1.9
+    active_union_hours: 1.9
+    wall_hours: 2.67
+    snapshot_incomplete: false
+- id: session-069
+  title: "BC-117 n = 68 refusal localization"
+  status: stopped
+  primary_bead: think-t7v1
+  phases: 6
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-069.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-069.yaml
+    model_responses: 190
+    agent_hours: 0.8
+    active_union_hours: 0.8
+    wall_hours: 1.57
+    snapshot_incomplete: false
+- id: session-070
+  title: "BC-118 n = 50 source-semantics localization"
+  status: completed
+  primary_bead: think-8pjf
+  phases: 7
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-070.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-070.yaml
+    model_responses: 114
+    agent_hours: 0.52
+    active_union_hours: 0.52
+    wall_hours: 2.67
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
+    model_responses: 23
+    agent_hours: 0.12
+    active_union_hours: 0.12
+    wall_hours: 0.42
+    snapshot_incomplete: false
+- id: session-071
+  title: "Agenda-014 publication and handoff"
+  status: completed
+  primary_bead: think-0sif
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-071.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-071.yaml
+    model_responses: 68
+    agent_hours: 0.25
+    active_union_hours: 0.25
+    wall_hours: 0.25
+    snapshot_incomplete: true

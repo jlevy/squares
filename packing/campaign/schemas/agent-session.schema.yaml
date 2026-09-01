@@ -53,6 +53,13 @@ properties:
     type: string
     format: date-time
     description: Optional offset-aware hard deadline for this session.
+  branch:
+    type: string
+    minLength: 1
+    description: >-
+      Optional Git branch explicitly attributed by the session operator. Required by the
+      resource-rollup checker when a terminal session declares a Codex task-tree receipt,
+      because Codex logs do not carry branch telemetry.
   goal:
     type: string
     minLength: 1
@@ -278,15 +285,17 @@ properties:
     items: {type: string, minLength: 1}
   resource_rollups:
     type: array
+    uniqueItems: true
     items: {type: string, minLength: 1}
     description: >-
-      Repository-relative paths of the `ClaudeEfficiencyRollup` records for this session:
-      the outer agent's log and every sub-agent transcript it spawned. Required to be
+      Repository-relative paths of enforced resource receipts for this session. Claude
+      receipts are per-log `ClaudeEfficiencyRollup` records. Codex receipts are
+      privacy-reduced `CodexTaskTreeDelta` intervals whose association with the session is
+      declared here because the Codex harness exposes no Git-branch field. Required to be
       nonempty at a terminal state and checked by `devtools.check_session_rollups`, because
-      without it there is no link at all from a session to what it cost -- the rollups are
-      named by harness log id and the session by its own sequence number, and nothing joined
-      the two. Absent on sessions that closed before the field existed; the checker names
-      those rather than pretending they comply.
+      without it there is no link from a session to what it cost. Absent on sessions that
+      closed before the field existed; the checker names those rather than pretending they
+      comply.
   stop_reason:
     type: [string, "null"]
     description: Null while in progress; explicit when completed or stopped.

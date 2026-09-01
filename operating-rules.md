@@ -178,9 +178,9 @@ the rule is about what may end a run, not about how to measure time.
 ## OR-9: A pull request leads with what the branch cost
 
 The reviewer can see what changed.
-Nothing on the page said what it took, and the number was never missing —
-`campaign/resource-usage/` has held one `ClaudeEfficiencyRollup` per agent log the whole
-time, with turns by model and thinking level, tokens, and every tool call.
+Nothing on the page said what it took, though harness telemetry existed: Claude records
+branch-aware per-log rollups, and Codex can now retain a privacy-reduced additive
+task-tree interval declared by an AgentSession.
 It was simply never put where the merge decision is made.
 
 So the description of an end-to-end session’s pull request opens with that block, and it
@@ -190,20 +190,28 @@ is generated rather than written:
 uv run --frozen --all-extras --group dev python -m devtools.render_pr_rollup
 ```
 
+For Codex, pass `--session session-NNN`. Codex exposes no Git-branch field, so the
+AgentSession declares the interval’s association with the PR and the renderer labels it
+operator-recorded rather than harness-observed.
+Never render a Codex receipt without that explicit declaration.
+
 **Close the session first.** The block is a function of the rollups, so it is wrong
 until they are written — which is why `close_session --render` prints it as its last act
 rather than leaving it to a second command.
 Close, then paste, then open.
 
-**Never collapse it to one number.** `turns.by_branch` is the only branch-aware field in
-the record, so a log that ran on more than one branch has an exact turn count and no way
-to split its tokens or its tool calls.
+**Never collapse it to one number.** In a Claude record, `turns.by_branch` is the only
+branch-aware field, so a log that ran on more than one branch has an exact turn count
+and no way to split its tokens or tool calls.
 The block prints three columns — on-branch logs only, prorated by turn share, and every
 log that touched the branch — of which the outer two are measurements and the middle is
 the estimate to quote.
 On the branch that introduced this rule the straddling logs carried 5,486 of 8,423
 turns, so the interval is not a rounding matter and a single figure would be a guess
 wearing a measurement’s clothes.
+Codex intervals render in a separate section: their model responses are not Claude
+turns, and adding the two harnesses could count the same work twice.
+A live Codex snapshot is explicitly a lower bound.
 
 **A multi-block session keeps the pull request current, not just open.** The owner
 reviews as the work lands, so a session that runs more than one block opens the pull
