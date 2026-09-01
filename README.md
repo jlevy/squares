@@ -29,10 +29,12 @@ is; [Assurance in One Minute](#assurance-in-one-minute) is the per-claim vocabul
 This repository is a survey **and** a source of first-party results, and the two are
 kept separate.
 The [results register](packing/frontier/RESULTS.md) is the prioritized list of whole
-results — currently 13, of which 8 are marked `apparently-novel` — each graded on the
-two axes [`epistemics.md`](epistemics.md) defines: **V**, the strongest verification the
-claim holds anywhere in the world, and **C**, what this repository has confirmed
-end-to-end itself.
+results — currently 13, of which 8 are marked `apparently-novel`.
+Each registered result carries a `T-NNN` id (`T` for theoretical result; the `T-` ids
+below all resolve in that register) and is graded on the two axes
+[`epistemics.md`](epistemics.md) defines: **V**, the strongest verification the claim
+holds anywhere in the world, and **C**, what this repository has confirmed end-to-end
+itself.
 Both rungs are re-derived from the recorded evidence on every validation run, so the
 register cannot silently overstate.
 `apparently-novel` is a statement about a recorded search of the archived corpus, never
@@ -95,6 +97,7 @@ proof of `s(7) = 3` (El Moumni 1999) carries four recorded defects in its printe
 
 | Where | What |
 | --- | --- |
+| [**The results register**](packing/frontier/RESULTS.md) | The catalogue of whole results, one `T-NNN` entry each — the bounds, machine audits, rigidity theorems, and errata above — prioritized and graded on the [`epistemics.md`](epistemics.md) ladders, every declared level re-derived by the gate |
 | [**The frontier**](packing/frontier/STATUS.md) | One schema-validated record per case for `n = 1…100`, tracking reported and formally verified bounds as separate lanes, plus a generated reader-first status table |
 | [**The atlas**](packing/atlas/README.md) | Deterministic renderings of the known-best packing for every `n ≤ 100`, a source map for the prospective range `n = 101…324`, and an enumeration of size-five contact scaffolds |
 | [**The literature**](packing/resources/README.md) | 27 papers and 13 web sources held locally and greppable: the original PDF or HTML, a cleaned Markdown transcription, and the unedited extraction to check it against |
