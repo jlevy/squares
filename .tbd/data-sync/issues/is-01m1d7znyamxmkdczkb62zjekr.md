@@ -3,15 +3,19 @@ type: is
 id: is-01m1d7znyamxmkdczkb62zjekr
 title: "W3: strategic synthesis of the next high-payoff research directions"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 labels:
   - research
   - w3
 dependencies: []
 created_at: 2026-09-01T01:05:22.889Z
-updated_at: 2026-09-01T01:45:34.701Z
+updated_at: 2026-09-01T08:48:14.334Z
+closed_at: 2026-09-01T08:48:14.333Z
+close_reason: Completed the owner-iterated W3 strategy synthesis and converted it into agendas 012/013 with registered H-052--H-056, exact W3/W7/W6/W5 scheduling, review gates, negative routes, session ownership, and an executable nine-hour handoff at BC-108.
+resolution: null
+duplicate_of: null
 ---
 Review the full square-packing research program from the current synopsis, idea board, ledger, negative results, frontier, recent sessions, and available instruments. Produce an initial W3 strategy map of several distinct high-payoff directions with mechanisms, falsifiers, expected information, dependencies, and limits; iterate with the owner before writing any durable full approach or registering successor hypotheses.
 
