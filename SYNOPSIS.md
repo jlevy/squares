@@ -189,6 +189,8 @@ case or experiment separately.
 | [Verification Determinations for the Agenda-010 Overnight Run](docs/project/reviews/review-2026-08-31-overnight-run-verification-determinations.md) | dated review record | record | retained | — |
 | [Review: Square Packing Research-Loop Efficiency](docs/project/reviews/review-2026-08-25-research-loop-efficiency.md) | dated review record | record | retained | — |
 | [Review: Agenda 013 First-Wave Efficiency](docs/project/reviews/review-2026-09-01-agenda013-first-wave-efficiency.md) | dated review record | record | retained | — |
+| [Review: Agenda 013 Second-Wave Efficiency](docs/project/reviews/review-2026-09-01-agenda013-second-wave-efficiency.md) | dated review record | record | retained | — |
+| [Review Packets: Agenda 013 Second Wave](docs/project/reviews/review-2026-09-01-agenda013-second-wave-packets.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |

@@ -267,7 +267,7 @@ session:
       rows and task beads, render generated views, pass the push gate, and publish one
       exact PR checkpoint before BC-119.
     bead: think-5xlb
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       All three lane writers stopped at the fixed boundary and returned terminal records
@@ -287,10 +287,117 @@ session:
     fallback: >-
       Preserve e21598f6 as the last green remote revision, retain the exact local failing
       receipt, and do not open BC-119 or an independent review.
+    outcome: >-
+      Reconciled and published the three terminal second-wave outcomes at revision
+      529b6729. The exact immutable exp-050 result and exp-052 checkpoint/progress
+      digests survived formatting; all 151 document anchors and 301 reachable tests
+      passed inside the 33-of-58 push tier; Ruff, BasedPyright, schema, exact-verifier,
+      campaign-record and tbd-tree checks passed; selected beads closed and BC-119
+      became the sole ready entry. The PR carries the revision-keyed outcome checkpoint,
+      macOS CI is green, and the asynchronous main validation job remains observable
+      without blocking useful work.
+    evidence:
+    - packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md
+    - packing/campaign/agenda-map.md
+    - packing/campaign/ledger.md
+    - packing/campaign/agent-sessions/session-068-bc116-n17-resumability.md
+    - packing/campaign/agent-sessions/session-069-bc117-n68-refusal-localization.md
+    - packing/campaign/agent-sessions/session-070-bc118-n50-source-semantics.md
+    stop_reason: >-
+      Revision 529b6729 passed the local push tier, was pushed to PR #71 and received a
+      public checkpoint before the fixed BC-119 boundary.
+    next_action: >-
+      Run BC-119's mandatory ten-minute W5 comparison before freezing any review packet.
+  - workflow: efficiency-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    objective: >-
+      Compare second-wave agent, command, validation, CI, artifact and scientific-process
+      throughput with the first-wave BC-122 baseline; identify behavioral and tooling
+      bottlenecks; and apply the predeclared change-admission rule without running or
+      repairing an experiment.
+    bead: think-47xw
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The protected second-wave checkpoint is pushed, all lane writers are terminal and
+      BC-119 begins with its mandatory W5 slice at the fixed 15:16:55Z boundary.
+    budget_minutes: 10
+    started_at: '2026-09-01T15:16:55Z'
+    deadline_at: '2026-09-01T15:26:55Z'
+    expected_output: >-
+      One durable W5 review with a common cross-wave baseline, measured agent and tool
+      bottlenecks, an explicit change-admission decision and process corrections routed
+      to the review packets or the next agenda.
+    validation_command: >-
+      uv run --frozen softschema validate
+      campaign/agent-sessions/session-064-agenda013-nine-hour-coordinator.md && uv run
+      --frozen python -m devtools.check_documentation
+    kill_condition: >-
+      Stop an optimization proposal if it lacks a profiled hot path, completed
+      pre-change output, fixed-input equivalence, rollback seam, positive remaining-wall
+      repayment or disjointness from the frozen review artifacts.
+    fallback: >-
+      Record `no-change`, preserve the descriptive measurements and route the observed
+      admission, provenance and lifecycle bottlenecks without changing scientific code.
+    outcome: >-
+      Retained a 21-cell second-wave baseline across 12,028.169 agent-active seconds,
+      27 declared outputs and 20 substantive outputs. The n = 17 lane retained 33 rows
+      at 0.444 rows per minute but supplied no speed comparison; n = 68 exposed its
+      unreachable literal command only after three W7 cells; and a 425.742-second n =
+      50 closure review found the missing producer-runner binding. Hosted Linux remained
+      stable at 747 seconds. The predeclared profile, equivalence, rollback, repayment
+      and disjointness guards reject an in-wall optimization, so the decision is
+      `no-change` and the admission, provenance and lifecycle corrections are routed
+      forward.
+    evidence:
+    - docs/project/reviews/review-2026-09-01-agenda013-second-wave-efficiency.md
+    - packing/campaign/resource-usage/codex-task-tree-session-068.yaml
+    - packing/campaign/resource-usage/codex-task-tree-session-069.yaml
+    - packing/campaign/resource-usage/codex-task-tree-session-070.yaml
+    - packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
+    stop_reason: >-
+      The W5 receipt passed its documentation, schema and formatting checks and selected
+      `no-change` at the fixed ten-minute boundary.
+    next_action: >-
+      Reconcile all first- and second-wave decisions and freeze one revision-keyed
+      independent-review packet per lane without running or repairing an experiment.
+  - workflow: process-review
+    recording: contemporaneous
+    clock_role: work
+    focus: process
+    objective: >-
+      Reconcile one terminal continuation per lane, every unselected sibling and all six
+      H-052--H-054 experiment decisions; freeze three immutable review packets against
+      one evidence revision; synchronize agenda and tbd state; and make BC-120 the sole
+      next entry without changing scientific artifacts.
+    bead: think-47xw
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The mandatory second-wave W5 slice retained `no-change` and routed its observed
+      guard failures into BC-119's review-packet contract.
+    budget_minutes: 20
+    started_at: '2026-09-01T15:26:55Z'
+    deadline_at: '2026-09-01T15:46:55Z'
+    expected_output: >-
+      Three lane packets at one immutable commit, each naming the two frozen experiment
+      decisions, exact replay, mutation, claim boundary, proposed transition and
+      evidence limitation, followed by coherent BC-119/BC-120 and tbd transitions.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: >-
+      Stop if packet construction runs a target, mutates exp-047--exp-052 evidence,
+      omits a review-pending decision, changes a proposed scientific transition, or
+      opens BC-120 before the packet revision and BC-119 closure exist.
+    fallback: >-
+      Preserve 529b6729 and the W5 receipt, leave BC-119 in progress and BC-120 blocked,
+      and name the exact missing packet field.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Complete the integration gate and publish the second-wave checkpoint.
+    next_action: Freeze and validate the three revision-keyed review packets.
   budget:
     wall_minutes: 540
     max_cycles: 9
@@ -831,6 +938,21 @@ session:
   - packing/campaign/resource-usage/codex-task-tree-session-065.yaml
   - packing/campaign/resource-usage/codex-task-tree-session-067.yaml
   - packing/campaign/resource-usage/codex-task-tree-session-066.yaml
+  - packing/campaign/agent-sessions/session-068-bc116-n17-resumability.md
+  - packing/campaign/agent-sessions/session-069-bc117-n68-refusal-localization.md
+  - packing/campaign/agent-sessions/session-070-bc118-n50-source-semantics.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-050-h-054-n50-source-semantics-e1-localization.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-051-h-053-n68-refusal-localization.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-052-h-052-n17-resumable-certificate-agreement.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/exp-050-h-054-n50-source-semantics-e1-localization.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/exp-052-h-052-n17-resumable-certificate-agreement.checkpoint.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/exp-052-h-052-n17-resumable-certificate-agreement.progress.json
+  - packing/campaign/resource-usage/codex-task-tree-session-068.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-069.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-070.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
+  - docs/project/reviews/review-2026-09-01-agenda013-second-wave-efficiency.md
+  - docs/project/reviews/review-2026-09-01-agenda013-second-wave-packets.md
   checks:
   - >-
     PR #71 launch revision d7c94590 passed hosted validate in 12m32s, macOS
@@ -839,10 +961,18 @@ session:
     Independent terminal review confirmed all three first-wave process/result absences,
     frozen hashes, experiment dispositions, hypothesis readiness states and complete
     lane receipts; BC-108 is complete while H-052 remains unresolved.
+  - >-
+    Revision 529b6729 passed the 33-of-58 push tier with 301 reachable tests and all 151
+    anchors, then passed hosted Linux in 747 seconds, macOS in 64 seconds and the
+    required aggregator in 4 seconds.
+  - >-
+    The mandatory second-wave W5 comparison retained `no-change` and froze literal-
+    command, producer-provenance and checkpoint/profile corrections without changing a
+    scientific artifact.
   stop_reason: null
   next_action: >-
-    Complete the protected first-wave checkpoint, then run BC-122 under think-iv3e
-    without opening a second-wave lane first.
+    Complete BC-119's packet checkpoint, then run three cross-lane independent reviews
+    under BC-120 without changing the source artifacts they inspect.
 ---
 # Session 064 — Agenda-013 Nine-Hour Coordinator
 

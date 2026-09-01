@@ -107,6 +107,14 @@ documents:
     role: review
     authority: record
     lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-01-agenda013-second-wave-efficiency.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-01-agenda013-second-wave-packets.md
+    role: review
+    authority: record
+    lifecycle: retained
   - path: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
     role: handoff
     authority: record
