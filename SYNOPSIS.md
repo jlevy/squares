@@ -86,14 +86,15 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
 hypotheses, one open hypothesis, seven open questions, and thirty-one blocked
-hypotheses. Two further hypotheses are unresolved: one because its formal prerequisite
-is missing, and H-044 because its registered calibration-only amendment keeps the
+hypotheses.
+Two further hypotheses are unresolved: one because its formal prerequisite is
+missing, and H-044 because its registered calibration-only amendment keeps the
 hypothesis undisposed — its first scored round (exp-046) missed the criterion
 determinately under both denominator readings, the review hold is cleared, and
-disposition waits on a confirmatory successor over a fresh-frozen corpus. Its active confidence ladder has completed the exact and event controls up to
-the first nontrivial identity question; the next scientific transition is from
-specialized `n = 5` local geometry to a defensible component relation, not to a larger
-raw census.
+disposition waits on a confirmatory successor over a fresh-frozen corpus.
+Its active confidence ladder has completed the exact and event controls up to the first
+nontrivial identity question; the next scientific transition is from specialized `n = 5`
+local geometry to a defensible component relation, not to a larger raw census.
 
 #### Refresh rule
 
@@ -359,7 +360,7 @@ The widest trailing ceiling is now `n = 50`’s `3/7`.
 [session-050](packing/campaign/agent-sessions/session-050-exp045-audit-and-acceptance.md)
 then performed the independent audit `exp-045` had waited on since registration, built
 the `-W` bridge that makes the accepted helpers corroborate the certificate, and
-recorded the owner's acceptance — clearing the gate that held `BC-010` and `BC-029`.
+recorded the owner’s acceptance — clearing the gate that held `BC-010` and `BC-029`.
 
 **Queued for the next run:
 [agenda-010](packing/campaign/agendas/agenda-010-two-lane-overnight-run.md)** — the
@@ -370,136 +371,129 @@ blocks of two to three hours, instruments before research in both lanes, a check
 stated in the agenda’s own objective.
 **The run is live: blocks 1 and 2 are complete** —
 [session-054](packing/campaign/agent-sessions/session-054-block1-certifier-and-falsifier.md)
-landed the certifier core and the falsifier (`BC-093`, `BC-094`; the session ran as
-050 and was renumbered at the merge — the audit session above holds that number), and
+landed the certifier core and the falsifier (`BC-093`, `BC-094`; the session ran as 050
+and was renumbered at the merge — the audit session above holds that number), and
 [session-051](packing/campaign/agent-sessions/session-051-block2-reprice-and-lp-gate.md)
 landed the stage-1 price and the exact-LP measurement (`BC-095`, `BC-096`) — **and the
 checkpoint
 ([session-052](packing/campaign/agent-sessions/session-052-midrun-checkpoint.md)) has
 resequenced the tentative half;
 [session-053](packing/campaign/agent-sessions/session-053-block3-bentz-machine-check.md)
-closed block 3 on `BC-099` under `think-1o1f` with the run's first research result:
-Bentz 2010, Theorem 8 (`s(46) = 7`) machine-certifies as printed** — 92 exact cells
-over `Q(sqrt 2, sqrt 3)`, the Lemma 5 threshold by a rigorous rational subdivision
-bound of `0.955390`, all 45 points charged — held `unresolved` with `needs_review`
-under the unattended rules that night (resolved by the review below), with the
-`m = 4` remainder typed on `think-1o1f` and one candidate printed gap flagged for
-replay. The same session absorbed a mid-run merge
-from `main` (the parallel audit session had taken `session-050` and `D-404`, so block
-1's record is `session-054` and the reassessment defects are `D-405`/`D-406`) and
-root-caused the base branch's red full surface to two stacked control defects,
-`D-407` and `D-408`, both fixed on this branch.
+closed block 3 on `BC-099` under `think-1o1f` with the run’s first research result:
+Bentz 2010, Theorem 8 (`s(46) = 7`) machine-certifies as printed** — 92 exact cells over
+`Q(sqrt 2, sqrt 3)`, the Lemma 5 threshold by a rigorous rational subdivision bound of
+`0.955390`, all 45 points charged — held `unresolved` with `needs_review` under the
+unattended rules that night (resolved by the review below), with the `m = 4` remainder
+typed on `think-1o1f` and one candidate printed gap flagged for replay.
+The same session absorbed a mid-run merge from `main` (the parallel audit session had
+taken `session-050` and `D-404`, so block 1’s record is `session-054` and the
+reassessment defects are `D-405`/`D-406`) and root-caused the base branch’s red full
+surface to two stacked control defects, `D-407` and `D-408`, both fixed on this branch.
 **Block 4 is complete too**
 ([session-055](packing/campaign/agent-sessions/session-055-block4-h044-verdict.md),
-`BC-100`): the `H-044` chunk-expressibility verdict exists as `exp-046`, exploratory
-by the hypothesis's own calibration-only amendment, held `unresolved` with
-`needs_review` that night (resolved below) — the criterion is **missed under both
-denominator readings** the
-registered text supports (23/30 = 0.7667 over all records at `n ≤ 30`; 3/10 = 0.30
-over the non-grid sweep records), identically in both bands, every miss typed and
-determinate. The measured mechanism: the lattice grammar expresses the grid stratum
-completely and the tilted stratum not at all (flush groups are tangentially slid off
-the integer lattice step), so stage-1 over this grammar is a restricted-class
-instrument — converging with `BC-095`'s repricing from the price side.
+`BC-100`): the `H-044` chunk-expressibility verdict exists as `exp-046`, exploratory by
+the hypothesis’s own calibration-only amendment, held `unresolved` with `needs_review`
+that night (resolved below) — the criterion is **missed under both denominator
+readings** the registered text supports (23/30 = 0.7667 over all records at `n ≤ 30`;
+3/10 = 0.30 over the non-grid sweep records), identically in both bands, every miss
+typed and determinate.
+The measured mechanism: the lattice grammar expresses the grid stratum completely and
+the tilted stratum not at all (flush groups are tangentially slid off the integer
+lattice step), so stage-1 over this grammar is a restricted-class instrument —
+converging with `BC-095`’s repricing from the price side.
 **Block 5 closed
 ([session-056](packing/campaign/agent-sessions/session-056-block5-bentz13-figure2.md)):
-`BC-099`'s own question continued under `think-1o1f`** — the m = 4 foundation layer.
-Two results landed on first complete runs, both held that night for review
-(resolved below): **Figure 2's sixteen-point base configuration is machine-certified**
-(30 exact rational cells: 4 Lemma 1 corner pentagons, 8 Lemma 4 wall rectangles, 18
-Lemma 2 triangles; 16/16 charged), and **Lemma 10 is machine-settled both
-ways** — the printed replacement point `(1, 1.74)` is refuted by an exact escape
-certificate, and all three corrected replacement sets (`(1.12, 1)`, `(1.74, 1)`,
-`(1.87, 0.76)`) certify exactly, their Lemma 5 quadrilaterals landing inside the very
-parameter families the paper's Section 1 lists. The certifier gained subset
-semantics, margin and near cells, and the rational-`a` threshold bound along the way.
+`BC-099`’s own question continued under `think-1o1f`** — the m = 4 foundation layer.
+Two results landed on first complete runs, both held that night for review (resolved
+below): **Figure 2’s sixteen-point base configuration is machine-certified** (30 exact
+rational cells: 4 Lemma 1 corner pentagons, 8 Lemma 4 wall rectangles, 18 Lemma 2
+triangles; 16/16 charged), and **Lemma 10 is machine-settled both ways** — the printed
+replacement point `(1, 1.74)` is refuted by an exact escape certificate, and all three
+corrected replacement sets (`(1.12, 1)`, `(1.74, 1)`, `(1.87, 0.76)`) certify exactly,
+their Lemma 5 quadrilaterals landing inside the very parameter families the paper’s
+Section 1 lists. The certifier gained subset semantics, margin and near cells, and the
+rational-`a` threshold bound along the way.
 **Block 6
 ([session-057](packing/campaign/agent-sessions/session-057-block6-green-sizes.md),
 `BC-101`) then moved the verified lower lane for the first time since 2005:
 `s(17) ≥ 17/4 = 4.25` and `s(18) ≥ 17/4`, certified exactly** by a sixteen-point
-unavoidable set in `[0, 17/4]²` (`cases/green17`) — above Nagamochi's `≈ 4.1623`,
-below Green's unadoptable `≈ 4.4452` — the cell plan pinned to `17/4` by an
-`11/1000000` slack, the falsifier corroborating by saturation, and the verdict held
-that night for review; the review's independent audit then showed `17/4` was the
-plan's ceiling rather than the set's, and the upgrade below carries the adopted
-bound. **The run then discharged the checkpoint's two authorized fillers and
-closed early.**
+unavoidable set in `[0, 17/4]²` (`cases/green17`) — above Nagamochi’s `≈ 4.1623`, below
+Green’s unadoptable `≈ 4.4452` — the cell plan pinned to `17/4` by an `11/1000000`
+slack, the falsifier corroborating by saturation, and the verdict held that night for
+review; the review’s independent audit then showed `17/4` was the plan’s ceiling rather
+than the set’s, and the upgrade below carries the adopted bound.
+**The run then discharged the checkpoint’s two authorized fillers and closed early.**
 [Session-058](packing/campaign/agent-sessions/session-058-block7-m8-sizing.md)
-(`BC-103`) sized the `m = 8` attempt exactly and parked it: the m = 7 pattern's
-ceiling `7√3/2 + 2√2 − 1 ≈ 7.8906` sits below both side 8 and the standing
-`7.9282` at `n = 61`, with the lattice dilemma exact (8 rows overrun the Lemma 2
-pitch cap by `0.0157`; 9 rows overrun the 60-point budget by 7).
+(`BC-103`) sized the `m = 8` attempt exactly and parked it: the m = 7 pattern’s ceiling
+`7√3/2 + 2√2 − 1 ≈ 7.8906` sits below both side 8 and the standing `7.9282` at `n = 61`,
+with the lattice dilemma exact (8 rows overrun the Lemma 2 pitch cap by `0.0157`; 9 rows
+overrun the 60-point budget by 7).
 [Session-059](packing/campaign/agent-sessions/session-059-block8-tau-star-pilot.md)
-(`BC-102`) built the τ* pilot and read the method diagnostic: the eleven-crossing
-sits near side `3.83` (uncertified, typed), so a pure eleven-point set has at most
-a `~0.04`-wide window above `2 + 4/√5` and any ambitious bespoke `s(12)` bound
-forces the threshold/segment/moving-resource machinery. Everything mathematical
-from the run was held `unresolved` with `needs_review` overnight per the
-unattended rules; the verification review below resolved every hold the same day.
+(`BC-102`) built the τ* pilot and read the method diagnostic: the eleven-crossing sits
+near side `3.83` (uncertified, typed), so a pure eleven-point set has at most a
+`~0.04`-wide window above `2 + 4/√5` and any ambitious bespoke `s(12)` bound forces the
+threshold/segment/moving-resource machinery.
+Everything mathematical from the run was held `unresolved` with `needs_review` overnight
+per the unattended rules; the verification review below resolved every hold the same
+day.
 
-**As of 2026-08-31, evening.** The owner moved the review from
-their queue to the repository's own rubric — determinations, not deferrals —
-and
-[session-060](packing/campaign/agent-sessions/session-060-verification-review.md)
-is running it as `BC-106` under `think-ngf0` in
-[agenda-011](packing/campaign/agendas/agenda-011-verification-review.md). The
-determinations, each grounded in [conventions.md §4](conventions.md#4-evidence)
-and the frontier evidence contract: **Theorem 8's audit is verified** and fully
-machine-checked (`E-bentz46-theorem8-audit`); **the Lemma 10 settlement is
-verified and now source-settled** — the published page image itself prints the
-transposed `(1, 1.74)`, so the defect is the journal's, recorded as
-`defect-found` on `E-bentz-2010-proof` with the partial Theorem 9 audit in
-`E-bentz13-figure2-audit`; **exp-046's hold is cleared with H-044 undisposed by
-its own registered amendment** (the miss is determinate under both readings);
-**the m = 8 parking statement stands as exact arithmetic**; **the τ* diagnostic
-stays uncertified by construction** — final typed status, nothing pending. The
-green17 determination became an upgrade: the independent interval certifier
-built for the review (`cases/green17/interval_audit.py` — exhaustive exact
-integer branch-and-bound over the full pose space, pair-handoff and
-wall-tightened discharge rules, negative controls refuting tampered sets and
-oversized sides with exact witnesses) proved the run's `17/4` was the cell
-plan's ceiling, not the set's: the same sixteen points certify at
-`4426213/1000000 = 4.426213`, the cell certificate was rebuilt there (right-wall
-Lemma 4 rectangles replacing the near-slabs), and **`verified_lower_bound` at
-`n = 17` and `n = 18` moved to `4.426213` on two independent formal methods**
-(`E-green17-sixteen-point-lower`, `E-green17-interval-audit`), the set's exact
-ceiling `753/250 + √2 ≈ 4.42621356` bracketed by certification at `4.426213`
-and refutation at `4.427` and typed as follow-on. The assembled case is the
-2026-08-31 verification review under `docs/project/reviews/`; the owner reviews
-the PR as a whole. Follow-ons stay on their beads (`think-1o1f`, `think-q6vy`,
-`think-07t7` paused, `think-0z9b`); `BC-097` and `BC-089`'s remainder remain
-the sanctioned gate filler.
+**As of 2026-08-31, evening.** The owner moved the review from their queue to the
+repository’s own rubric — determinations, not deferrals — and
+[session-060](packing/campaign/agent-sessions/session-060-verification-review.md) is
+running it as `BC-106` under `think-ngf0` in
+[agenda-011](packing/campaign/agendas/agenda-011-verification-review.md).
+The determinations, each grounded in [conventions.md §4](conventions.md#4-evidence) and
+the frontier evidence contract: **Theorem 8’s audit is verified** and fully
+machine-checked (`E-bentz46-theorem8-audit`); **the Lemma 10 settlement is verified and
+now source-settled** — the published page image itself prints the transposed
+`(1, 1.74)`, so the defect is the journal’s, recorded as `defect-found` on
+`E-bentz-2010-proof` with the partial Theorem 9 audit in `E-bentz13-figure2-audit`;
+**exp-046’s hold is cleared with H-044 undisposed by its own registered amendment** (the
+miss is determinate under both readings); **the m = 8 parking statement stands as exact
+arithmetic**; **the τ* diagnostic stays uncertified by construction** — final typed
+status, nothing pending.
+The green17 determination became an upgrade: the independent interval certifier built
+for the review (`cases/green17/interval_audit.py` — exhaustive exact integer
+branch-and-bound over the full pose space, pair-handoff and wall-tightened discharge
+rules, negative controls refuting tampered sets and oversized sides with exact
+witnesses) proved the run’s `17/4` was the cell plan’s ceiling, not the set’s: the same
+sixteen points certify at `4426213/1000000 = 4.426213`, the cell certificate was rebuilt
+there (right-wall Lemma 4 rectangles replacing the near-slabs), and
+**`verified_lower_bound` at `n = 17` and `n = 18` moved to `4.426213` on two independent
+formal methods** (`E-green17-sixteen-point-lower`, `E-green17-interval-audit`), the
+set’s exact ceiling `753/250 + √2 ≈ 4.42621356` bracketed by certification at `4.426213`
+and refutation at `4.427` and typed as follow-on.
+The assembled case is the 2026-08-31 verification review under `docs/project/reviews/`;
+the owner reviews the PR as a whole.
+Follow-ons stay on their beads (`think-1o1f`, `think-q6vy`, `think-07t7` paused,
+`think-0z9b`); `BC-097` and `BC-089`’s remainder remain the sanctioned gate filler.
 
-**As of 2026-08-31, night — start here.** The review's epistemics became
-infrastructure: the owner split *verified* (the strongest verification a claim
-holds anywhere in the world) from *confirmed* (what this repository has
-established end-to-end itself), and
-[session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md)
-is codifying that as `BC-107` under `think-n8vl` in
+**As of 2026-08-31, night — start here.** The review’s epistemics became infrastructure:
+the owner split *verified* (the strongest verification a claim holds anywhere in the
+world) from *confirmed* (what this repository has established end-to-end itself), and
+[session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md) is
+codifying that as `BC-107` under `think-n8vl` in
 [agenda-011](packing/campaign/agendas/agenda-011-verification-review.md), a
 `pipeline-improvement` slice.
 [`epistemics.md`](epistemics.md) at the repository root now owns the four axes —
-`V0`–`V5`, `C0`–`C5` with machine-checkable promotion checklists, anchored
-significance that never gates, and novelty adopted unchanged from the evidence
-contract — and the results register
-([`packing/frontier/results.yaml`](packing/frontier/results.yaml), rendered as
-[`RESULTS.md`](packing/frontier/RESULTS.md)) declares the whole results
-`T-001`–`T-013`, whose rungs `devtools/check_results.py` re-derives from the
-cited evidence atoms on every validation run — a declared rung the atoms do not
-support fails the build, and so does unexplained understatement, so committing a
-result after an effort is a register edit the gate itself adjudicates.
-The register subsumes the review's determinations (the `s(17)`/`s(18)` upgrade
-is `T-001`/`T-002` at `V4`/`C4`) and the legacy first-party theorems (the
-Stromquist repair is `T-010`; this document's own `T-1`–`T-4` below remain
-declared shorthand). softschema is upgraded to `0.8.0` across the schema
-toolchain in the same slice.
-The one-shot post-merge check found main's full surface still red on one
-negative control, behind the same mask D-407 named: the worker-snapshot link
-copy covered the pruned archive but not the pruned renderings, and the
-control's expected message lagged the ledger's round count — fixed as `D-409`
-and `D-410` on this branch, with `epistemics.md` added to the snapshot's root
-documents before the same gap could ship again.
-Research follow-ons are unchanged on their beads.
+`V0`–`V5`, `C0`–`C5` with machine-checkable promotion checklists, anchored significance
+that never gates, and novelty adopted unchanged from the evidence contract — and the
+results register ([`packing/frontier/results.yaml`](packing/frontier/results.yaml),
+rendered as [`RESULTS.md`](packing/frontier/RESULTS.md)) declares the whole results
+`T-001`–`T-013`, whose rungs `devtools/check_results.py` re-derives from the cited
+evidence atoms on every validation run — a declared rung the atoms do not support fails
+the build, and so does unexplained understatement, so committing a result after an
+effort is a register edit the gate itself adjudicates.
+The register subsumes the review’s determinations (the `s(17)`/`s(18)` upgrade is
+`T-001`/`T-002` at `V4`/`C4`) and the legacy first-party theorems (the Stromquist repair
+is `T-010`; this document’s own `T-1`–`T-4` below remain declared shorthand).
+softschema is upgraded to `0.8.0` across the schema toolchain in the same slice.
+The one-shot post-merge check found main’s full surface still red on one negative
+control, behind the same mask D-407 named: the worker-snapshot link copy covered the
+pruned archive but not the pruned renderings, and the control’s expected message lagged
+the ledger’s round count — fixed as `D-409` and `D-410` on this branch, with
+`epistemics.md` added to the snapshot’s root documents before the same gap could ship
+again. Research follow-ons are unchanged on their beads.
 
 **The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
@@ -550,12 +544,12 @@ whole-record grid subsets on four walls, 65 corner-seated blocks on two.
 `BC-038` is closed and rejected on measured arithmetic — 35 `evaluate_stress` calls
 arrive with **eleven** distinct number fields, and `RowJetInventory` refuses a foreign
 field by identity, so the floor is a `1.54x` ceiling against an exit wanting five-fold.
-`BC-010` and `BC-029` were gated for four days on independent acceptance of
-`exp-045`’s preregistered criterion, which an unattended runner may not grant to
-itself; on 2026-08-31 the owner accepted the round after session-050’s independent
-audit (findings and the corroborating `-W` bridge are the experiment record’s Amendment
-and `D-404`), so `exp-045` now records `decision: accepted`, `BC-029` is complete, and
-`BC-010`’s readiness on the map is genuine.
+`BC-010` and `BC-029` were gated for four days on independent acceptance of `exp-045`’s
+preregistered criterion, which an unattended runner may not grant to itself; on
+2026-08-31 the owner accepted the round after session-050’s independent audit (findings
+and the corroborating `-W` bridge are the experiment record’s Amendment and `D-404`), so
+`exp-045` now records `decision: accepted`, `BC-029` is complete, and `BC-010`’s
+readiness on the map is genuine.
 
 **`n = 5` is second-order rigid, and that is a first-party result.**
 [X-007](packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md)
@@ -866,13 +860,12 @@ sequenced behind exp-045. The outstanding work is now carried by
 which gives each remaining item its own workflow entry.
 `BC-027` is complete.
 The `n = 5` H-023 successor under `BC-029`, `think-whwc`, and `think-1s0h` is no longer
-an instrument blocker: exp-045 has run and is terminal — `accepted` since
-2026-08-31, after the independent audit its registration required — excluding canonical
-pure `-W` at all three strata while every connectivity, component, isolation and
-terminality claim stays refused.
-CG-010 is structurally complete under `BC-030`; BC-016 is blocked under `think-3yv8` on
-retained poses, an executable glued row, symbolic tie labels, and a receipt checker,
-while BC-017 under `think-u97a` remains the ready constructive W7 lane.
+an instrument blocker: exp-045 has run and is terminal — `accepted` since 2026-08-31,
+after the independent audit its registration required — excluding canonical pure `-W` at
+all three strata while every connectivity, component, isolation and terminality claim
+stays refused. CG-010 is structurally complete under `BC-030`; BC-016 is blocked under
+`think-3yv8` on retained poses, an executable glued row, symbolic tie labels, and a
+receipt checker, while BC-017 under `think-u97a` remains the ready constructive W7 lane.
 
 All `n = 1..100` frontier entries now point to normalized witnesses and deterministic
 house renderings. The source-complete corpus is calibration evidence, not an unseen
@@ -1792,14 +1785,13 @@ listed here so the dependencies of this program are explicit.
 
 The authoritative, prioritized list of whole results is now the
 [results register](packing/frontier/RESULTS.md)
-([`packing/frontier/results.yaml`](packing/frontier/results.yaml)), graded on
-the verification and confirmation ladders [`epistemics.md`](epistemics.md)
-defines and re-derived by `devtools/check_results.py` on every validation run;
-the repair below is registered there as `T-010`, the Trump validity check as
-`T-011`. This section keeps the original `n = 11` statements with their replay
-commands — the single-digit `T-N` ids are this document’s declared shorthand,
-retained where the surrounding prose cites them, and the structural results
-`T-2` and `T-3` live only here and in their registry artifacts.
+([`packing/frontier/results.yaml`](packing/frontier/results.yaml)), graded on the
+verification and confirmation ladders [`epistemics.md`](epistemics.md) defines and
+re-derived by `devtools/check_results.py` on every validation run; the repair below is
+registered there as `T-010`, the Trump validity check as `T-011`. This section keeps the
+original `n = 11` statements with their replay commands — the single-digit `T-N` ids are
+this document’s declared shorthand, retained where the surrounding prose cites them, and
+the structural results `T-2` and `T-3` live only here and in their registry artifacts.
 
 | Id | Statement | Assurance or basis | Where it lives | Reproduce with |
 | --- | --- | --- | --- | --- |

@@ -24,17 +24,43 @@ Every claim here carries the evidence that earns it and says which kind of evide
 is; [Assurance in One Minute](#assurance-in-one-minute) is the per-claim vocabulary, and
 [`epistemics.md`](epistemics.md) is the rubric that grades whole results.
 
-## What Has Been Established
+This repository is a survey **and** a source of first-party results: [Survey](#survey) ·
+[New Results](#new-results) · [What Is Here](#what-is-here) ·
+[Current Status](#current-status) · [Getting Started](#getting-started) ·
+[Reports](#reports) · [Autonomous Research Process](#autonomous-research-process) ·
+[Conventions](#conventions) · [Layout](#layout).
 
-This repository is a survey **and** a source of first-party results, and the two are
-kept separate.
+## Survey
+
+The survey layer records what is known for every case, with provenance, in a form a
+program can check. The structured record of the problem’s frontier, meaning the best
+known packing and best proved lower bound for every `n ≤ 100` with provenance and
+per-case editorial, lives in [`frontier/`](packing/frontier/README.md) as soft-schema
+artifacts rather than as a table inside a report, so it can be validated and queried;
+the generated [status table](packing/frontier/STATUS.md) is the reader-first view, and
+the atlas above renders every known-best packing.
+The primary literature is archived locally in
+[`resources/`](packing/resources/README.md) — the original PDF or HTML, a cleaned
+Markdown transcription, and the unedited extraction to check it against.
+An [inventory](packing/frontier/INVENTORY.md) of every recorded claim, generated from
+the evidence records, says which of them this repository established itself, which rest
+on someone else’s argument, and how far each has been checked — including per-case
+evidence that never rises to a registered result.
+
+The survey scrutinizes its sources rather than transcribing them: the earliest published
+proof of `s(7) = 3` (El Moumni 1999) carries four recorded defects in its printed route
+(D-344–D-347), and the case’s proved status rests on the independent later proofs
+([`n-007`](packing/frontier/n-007.md), with the audit in
+[the `n = 11` report](docs/project/research/research-2026-08-22-packing-11-unit-squares.md)).
+
+## New Results
+
 The [results register](packing/frontier/RESULTS.md) is the prioritized list of whole
-results — currently 13, of which 8 are marked `apparently-novel`.
-Each registered result carries a `T-NNN` id (`T` for theoretical result; the `T-` ids
-below all resolve in that register) and is graded on the two axes
-[`epistemics.md`](epistemics.md) defines: **V**, the strongest verification the claim
-holds anywhere in the world, and **C**, what this repository has confirmed end-to-end
-itself.
+results — currently 13, of which 8 are marked `apparently-novel`. Each registered result
+carries a `T-NNN` id (`T` for theoretical result; the `T-` ids below all resolve in that
+register) and is graded on the two axes [`epistemics.md`](epistemics.md) defines: **V**,
+the strongest verification the claim holds anywhere in the world, and **C**, what this
+repository has confirmed end-to-end itself.
 Both rungs are re-derived from the recorded evidence on every validation run, so the
 register cannot silently overstate.
 `apparently-novel` is a statement about a recorded search of the archived corpus, never
@@ -77,21 +103,10 @@ contribution:
 
 Still resting on a read of the source rather than a machine check: `s(13) = 4` (T-006)
 and the Nagamochi lower-bound family (T-007), the workhorse that still carries 86 of the
-hundred cases.
-The synopsis’s [results section](SYNOPSIS.md#results-established-here) keeps the full
-legacy statements and replay commands for the `n = 11` structural work, including the
-LP-in-cell reduction and the corner at Trump’s cell that a smooth local model misses.
-
-Beneath the register, an [inventory](packing/frontier/INVENTORY.md) of every claim,
-generated from the evidence records, says which of them this repository established
-itself, which rest on someone else’s argument, and how far each has been checked —
-including per-case evidence that never rises to a registered result.
-
-The same source scrutiny runs against the literature itself: the earliest published
-proof of `s(7) = 3` (El Moumni 1999) carries four recorded defects in its printed route
-(D-344–D-347), and the case’s proved status rests on the independent later proofs
-([`n-007`](packing/frontier/n-007.md), with the audit in
-[the `n = 11` report](docs/project/research/research-2026-08-22-packing-11-unit-squares.md)).
+hundred cases. The synopsis’s [results section](SYNOPSIS.md#results-established-here)
+keeps the full legacy statements and replay commands for the `n = 11` structural work,
+including the LP-in-cell reduction and the corner at Trump’s cell that a smooth local
+model misses.
 
 ## What Is Here
 
@@ -106,70 +121,30 @@ proof of `s(7) = 3` (El Moumni 1999) carries four recorded defects in its printe
 | [**The experiment record**](packing/campaign/README.md) | A registry of falsifiable hypotheses, experiments that freeze their criterion before measuring, the agent-session record, and a generated ledger |
 | [**The defect log**](defects.md) | Every defect found in this project’s own reasoning and code, with what caught each one |
 
-The verifier certifies Walter Trump’s 1979 `n = 11` packing exactly, over a degree-8
-number field, rather than to a tolerance.
+## Current Status
 
-## Start Here
-
-[`TUTORIAL.md`](TUTORIAL.md) is the first-principles orientation: what the objects are,
-why the approach is shaped the way it is, and what is established versus open.
-Read it once, then [`SYNOPSIS.md`](SYNOPSIS.md) for the state of the program.
+[`SYNOPSIS.md`](SYNOPSIS.md) is the technical root and the single current-state
+document: what is built, the frontier’s verified fields, the standing determinations,
+and the full experiment roll-up.
 To resume work rather than only understand it, continue to the synopsis’s
 [current handoff](SYNOPSIS.md#current-handoff); it names the active session when one
 exists, otherwise the latest terminal session, together with the owning bead and exact
-next bounded slice.
+next bounded slice. The generated day-to-day views sit beside it: the frontier
+[status table](packing/frontier/STATUS.md), the
+[results register](packing/frontier/RESULTS.md), the
+[campaign ledger](packing/campaign/ledger.md), and the
+[agenda map](packing/campaign/agenda-map.md).
 
-## Reports
+## Getting Started
 
-Written to be read in this order.
-They move from what is known, to how it is computed and checked, to what to build, to
-where a proof assistant fits, and finally to how to search: the strategy the tooling
-exists to serve.
+[`TUTORIAL.md`](TUTORIAL.md) is the first-principles orientation: what the objects are,
+why the approach is shaped the way it is, and what is established versus open.
+Read it once, then [`SYNOPSIS.md`](SYNOPSIS.md) for the state of the program and
+[Current Status](#current-status) above to pick up the active work.
+The two subsections below are the hands-on start: verifying a packing exactly, and
+rendering packing figures.
 
-| Report | Scope |
-| --- | --- |
-| [Packing 11 Unit Squares in a Square](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | The mathematics of `s(11)`: what is proved, what is only conjectured, and why the available proof technique cannot close the gap |
-| [Algorithms and Tooling for Square Packing](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | How packings are searched for, refined from numerical to exact algebraic form, and verified; who holds the records and with what |
-| [FrankenSim as a Rust Toolkit for Square Packing](docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md) | First-hand study of a large Rust simulation framework as a source of certified-arithmetic and determinism building blocks |
-| [Infrastructure for Square-Packing Exploration](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md) | Synthesis of the two above into a build order: three latency tiers, the language boundary, which symbolic layer to use where, and what to deliberately not build |
-| [Lean for Square-Packing Proofs and Validation](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | Where a proof assistant fits: the upper bound is formalisable today and unclaimed, the lemma layer is the diagnostic first target, and certificates make a result checkable by someone who does not trust our code |
-| [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | The strategy layer: why volume-weighted search fails precisely at records, the basin atlas over the LP-quench map as the deliverable, diversity over structural descriptors instead of loss-shaping, the LLM at the structural layer, and relaxation ladders into the hard instances |
-
-These six are the research reports.
-For the full document set, including the reviews, the postmortem, the campaign runbook
-and what each one owns, see the synopsis’s [document map](SYNOPSIS.md#document-map).
-
-**Five of the six survey outside work and move only when a source does.
-The `n = 11` report is the exception**, because `n = 11` is where this project does most
-of its own exact work, so every result about that case is a result about the report.
-Read it with its date in view and the [synopsis](SYNOPSIS.md#what-is-built) beside it:
-the synopsis carries the current state, and the report carries what was established when
-it was written.
-
-The structured record of the problem’s frontier, meaning the best known packing and best
-proved lower bound for every `n ≤ 100` with provenance and per-case editorial, lives in
-[`frontier/`](packing/frontier/README.md) as soft-schema artifacts rather than as a
-table inside a report, so it can be validated and queried.
-
-Claims in the reports distinguish formal proof or verification, finite numerical checks,
-and source reports. Every citation resolves both to a full reference and to a local copy
-in [`resources/`](packing/resources/README.md).
-
-The reports went through a full technical review on 2026-08-22: substantive claims were
-re-checked against the then-current primary-source archive and the central algebra was
-re-derived independently at 50-digit precision.
-The named frontier source set was refreshed again on 2026-08-25; its scope and replay
-dispositions live in
-[`frontier/source-coverage.yaml`](packing/frontier/source-coverage.yaml), so neither
-date is presented as an exhaustive web claim.
-Corrections from the technical review are recorded in the `n = 11` report’s
-[Corrections to Common Summaries](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#corrections-to-common-summaries),
-its remaining gaps in
-[Open Questions](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#open-questions),
-and the prioritized path forward in
-[A Research Program](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#a-research-program).
-
-## Exact Verification
+### Exact Verification
 
 `sqpack` can formally verify complete rational witnesses and algebraic witnesses whose
 field preconditions it certifies.
@@ -183,7 +158,7 @@ itself. The argument in full, with what it cost when ignored, is
 [Why Exactness Is Not Optional](SYNOPSIS.md#why-exactness-is-not-optional).
 `cases.trump11.verifier_limits` demonstrates both failure modes.
 
-### Use
+#### Use
 
 ```shell
 uv run --frozen packing-witness inspect witnesses/schadt-n029-2025-decimal.yaml
@@ -226,7 +201,7 @@ The 33 leading digits match the value published on the
 [Squares in Squares](https://kingbird.myphotos.cc/packing/squares_in_squares.html)
 record page, so this is also an independent check of that record.
 
-### Verifying Another Packing
+#### Verifying Another Packing
 
 Use [`Witness/v2`](packing/witnesses/witness.schema.yaml) for supported rational,
 algebraic, or decimal center/basis, center/angle, and corner data.
@@ -261,7 +236,7 @@ built, buildable engineering, or mathematically contingent.
 The module docstrings in [`src/sqpack/`](packing/src/sqpack/) carry the maintained APIs,
 including the non-certifying numerical backends.
 
-### Scope
+#### Scope
 
 This checks that a *proposed* packing is valid, which is a different and far easier
 question than whether it is optimal.
@@ -269,38 +244,145 @@ The only rigorous computer-assisted optimality proof for rotatable unit squares 
 container covers three squares in a circle (Montanher et al.
 2018); nothing comparable exists for squares in a square.
 
-## What Has Gone Wrong Here
+### Rendering Packing Figures
 
-[`defects.md`](defects.md) is the generated defect log: every bug, inefficiency, and
-record defect found in this toolchain, what caught it, and what now stops it recurring.
-It is generated from [`defects.yaml`](packing/defects.yaml) and checked in the gate.
-It is separate from the
-[research-loop logbook](packing/campaign/research-loop-logbook/README.md), which
-summarizes bounded runs and links their positive, negative, and unresolved scientific
-results to the experiment records that own them.
+`sqpack.render` turns retained pose arrays and exact constructions into deterministic,
+self-contained SVG without adding a runtime dependency.
+The base overview is compact enough for ordinary Markdown, HTML, Word, PDF, and slide
+documents.
+Comparison and trajectory views are opt-in; animation is enabled only inside a
+`prefers-reduced-motion: no-preference` media query, so unsupported or reduced-motion
+renderers show the useful final packing.
 
-It is kept because the aggregate says things no individual bug report can, and two of
-those things shape how this project works:
+The renderer preserves the input’s evidence tier.
+Its caption and metadata distinguish candidates, numerically checked constructions,
+certified upper bounds, and proved optima; typography cannot upgrade a numerical check
+to formal verification.
+Numerically checked figures retain the arithmetic, actual precision, rounding,
+tolerance, method, and outcome in SVG metadata.
+Exact annotations retain algebraic or rational source expressions in SVG comments and
+namespaced metadata while using stable high-precision decimal projections for geometry.
+The container and every packed square use the same boundary treatment, so contacts
+remain visually continuous.
+Exact-source adapters attach certified contact geometry: segments mark shared boundary
+intervals, and dots mark point contacts.
+Each mark is clipped to its participating square interiors.
+The contact layer is shown by default, can be removed with `--no-contacts`, and is never
+guessed for numerical candidate poses.
 
-- **The dangerous defects flatter.** Most soundness failures found here pointed in the
-  direction that looks like success, which is why a run that beats the record is treated
-  as a bug until proved otherwise.
-- **The automated gate is not where soundness failures have been found.** No soundness
-  defect in the log was caught by it.
-  The rest came from control cells whose answers were known in advance, rules written
-  down before the measurement, generated views contradicting their sources, and careful
-  reading. Gates confirm what someone already thought to check.
+See the [SVG gallery README](packing/atlas/rendering/README.md) for the focused
+rendering contract, the diagnostic start/final comparison, API and CLI examples,
+retained fixtures, and portability review.
+The [gallery manifest](packing/atlas/rendering/manifest.json) joins each artifact to its
+frontier case, evidence tier, view level, motion support, alt text, and exact
+regeneration command.
+From this directory:
 
-The counts live in [`defects.md`](defects.md), which is generated, and in
-[the synopsis](SYNOPSIS.md#the-defect-record), which is reconciled against the same
-source in the gate. They are deliberately not repeated here: this paragraph carried them
-before, and copied aggregates repeatedly went stale.
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --list
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --update
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --check
+```
 
-## Operating Principles
+The Motion Lab now has two scenarios on one shared visual system.
+The [self-contained exact `n = 5` lab](packing/atlas/rendering/n5-motion-lab.html)
+reuses the exact R4/R5 and `+W` case functions while leaving the publication renderer’s
+script-free SVG contract unchanged.
+The served setup-and-quench scenario accepts arbitrary seeded configurations, supports
+temporary sticky chunks for placement, releases every chunk before numerical
+optimization, and presents fixed-angle LP states separately from angular probes and
+accepted rotations.
+
+**The Motion Lab is a rough draft.** It landed on 2026-08-28 out of a single `n = 5`
+spike, has produced no research result, and its first review found six defects in it —
+all in the new instrument, none in the mathematics it displays.
+Its contracts are versioned because they are expected to change.
+Use it to look at what the quench does; do not cite it.
+The
+[runbook](packing/atlas/rendering/README.md#general-motion-lab-setup-and-free-quench)
+states the maturity boundary in full and records what that review found.
+
+From this directory, open the served lab in the default browser:
+
+```bash
+uv run --frozen --all-extras --group dev python \
+  -m devtools.serve_packing_motion_lab serve --open
+```
+
+The
+[Motion Lab runbook](packing/atlas/rendering/README.md#general-motion-lab-setup-and-free-quench)
+documents setup controls, phase marks, trace download and replay, the retained known
+answer, service limits, and the explicit absence of persistent optimization constraints.
+The
+[generalized Motion Lab plan](docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md)
+owns the versioned contracts and keeps rigid groups and contact locks behind a separate
+Phase 2 decision.
+
+The focused read-only gate is:
+
+```bash
+uv run --frozen --all-extras --group dev packing-validate --only "deterministic SVG rendering"
+```
+
+## Reports
+
+Written to be read in this order.
+They move from what is known, to how it is computed and checked, to what to build, to
+where a proof assistant fits, and finally to how to search: the strategy the tooling
+exists to serve.
+
+| Report | Scope |
+| --- | --- |
+| [Packing 11 Unit Squares in a Square](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | The mathematics of `s(11)`: what is proved, what is only conjectured, and why the available proof technique cannot close the gap |
+| [Algorithms and Tooling for Square Packing](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | How packings are searched for, refined from numerical to exact algebraic form, and verified; who holds the records and with what |
+| [FrankenSim as a Rust Toolkit for Square Packing](docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md) | First-hand study of a large Rust simulation framework as a source of certified-arithmetic and determinism building blocks |
+| [Infrastructure for Square-Packing Exploration](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md) | Synthesis of the two above into a build order: three latency tiers, the language boundary, which symbolic layer to use where, and what to deliberately not build |
+| [Lean for Square-Packing Proofs and Validation](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | Where a proof assistant fits: the upper bound is formalisable today and unclaimed, the lemma layer is the diagnostic first target, and certificates make a result checkable by someone who does not trust our code |
+| [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | The strategy layer: why volume-weighted search fails precisely at records, the basin atlas over the LP-quench map as the deliverable, diversity over structural descriptors instead of loss-shaping, the LLM at the structural layer, and relaxation ladders into the hard instances |
+
+These six are the research reports.
+For the full document set, including the reviews, the postmortem, the campaign runbook
+and what each one owns, see the synopsis’s [document map](SYNOPSIS.md#document-map).
+
+**Five of the six survey outside work and move only when a source does.
+The `n = 11` report is the exception**, because `n = 11` is where this project does most
+of its own exact work, so every result about that case is a result about the report.
+Read it with its date in view and the [synopsis](SYNOPSIS.md#what-is-built) beside it:
+the synopsis carries the current state, and the report carries what was established when
+it was written.
+
+Claims in the reports distinguish formal proof or verification, finite numerical checks,
+and source reports. Every citation resolves both to a full reference and to a local copy
+in [`resources/`](packing/resources/README.md).
+
+The reports went through a full technical review on 2026-08-22: substantive claims were
+re-checked against the then-current primary-source archive and the central algebra was
+re-derived independently at 50-digit precision.
+The named frontier source set was refreshed again on 2026-08-25; its scope and replay
+dispositions live in
+[`frontier/source-coverage.yaml`](packing/frontier/source-coverage.yaml), so neither
+date is presented as an exhaustive web claim.
+Corrections from the technical review are recorded in the `n = 11` report’s
+[Corrections to Common Summaries](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#corrections-to-common-summaries),
+its remaining gaps in
+[Open Questions](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#open-questions),
+and the prioritized path forward in
+[A Research Program](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#a-research-program).
+
+## Autonomous Research Process
+
+The research here is conducted in largely autonomous agent sessions against a recorded
+discipline, and this section is that discipline in compact form: the operating
+principles, the assurance vocabulary, the workflow entry points, the work units and ids,
+the defect record, and the outer loop that ties them together.
+The [synopsis](SYNOPSIS.md#workflow-entry-contracts) and the
+[campaign runbook](packing/campaign/README.md) own the full contracts.
+
+### Operating Principles
 
 Work is organized at three levels.
 Four **operating principles** define what quality means and which concerns may veto
-promotion. Seven **workflow entry points** define the purpose and durable output of one
+promotion. Eight **workflow entry points** define the purpose and durable output of one
 phase of work. A bounded **slice** is the smallest action taken inside that phase.
 Keeping these levels separate lets an agent emphasize one dimension without silently
 changing the kind of work it promised to do.
@@ -352,10 +434,10 @@ The [synopsis](SYNOPSIS.md#assurance-methods-and-claims) owns the full vocabular
 logical consequences, and current tool gaps.
 
 This vocabulary grades individual pieces of evidence.
-Whole results are graded separately on the ladders of
-[`epistemics.md`](epistemics.md) — `V0`–`V5` for the strongest verification existing
-anywhere, `C0`–`C5` for what this repository has confirmed end-to-end — which are
-derived from these evidence fields and re-checked on every validation run.
+Whole results are graded separately on the ladders of [`epistemics.md`](epistemics.md) —
+`V0`–`V5` for the strongest verification existing anywhere, `C0`–`C5` for what this
+repository has confirmed end-to-end — which are derived from these evidence fields and
+re-checked on every validation run.
 
 ### Workflow Entry Points
 
@@ -532,7 +614,39 @@ The operating documents divide ownership rather than repeat one another:
 | [Current launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | Broader scientific and operational readiness; the agent loop can work now, while the generic numerical runner remains a no-go |
 | [Program review](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md#the-epic-and-its-bead-map) | Four-focus epic, durable findings, and bead map |
 
-## The Autonomous Work Loop
+### Defects and Corrections
+
+[`defects.md`](defects.md) is the generated defect log: every bug, inefficiency, and
+record defect found in this toolchain, what caught it, and what now stops it recurring.
+It is generated from [`defects.yaml`](packing/defects.yaml) and checked in the gate.
+It is separate from the
+[research-loop logbook](packing/campaign/research-loop-logbook/README.md), which
+summarizes bounded runs and links their positive, negative, and unresolved scientific
+results to the experiment records that own them.
+
+It is kept because the aggregate says things no individual bug report can, and two of
+those things shape how this project works:
+
+- **The dangerous defects flatter.** Most soundness failures found here pointed in the
+  direction that looks like success, which is why a run that beats the record is treated
+  as a bug until proved otherwise.
+- **The automated gate is not where soundness failures have been found.** No soundness
+  defect in the log was caught by it.
+  The rest came from control cells whose answers were known in advance, rules written
+  down before the measurement, generated views contradicting their sources, and careful
+  reading. Gates confirm what someone already thought to check.
+
+The counts live in [`defects.md`](defects.md), which is generated, and in
+[the synopsis](SYNOPSIS.md#the-defect-record), which is reconciled against the same
+source in the gate. They are deliberately not repeated here: this paragraph carried them
+before, and copied aggregates repeatedly went stale.
+
+Corrections follow the same discipline, under
+[`conventions.md` §7](conventions.md#7-corrections): the record is corrected by
+addition, never rewritten — a defective artifact gets a dated annotation stating what
+still stands and what does not.
+
+### The Autonomous Work Loop
 
 The outer loop is a portable repository protocol, not a feature of one agent platform.
 The `tbd` queue owns dependencies and ready work; the active launch agenda freezes an
@@ -558,7 +672,7 @@ validation loop to run at each step is
 [`packing-campaign`](packing/src/sqpack/campaign/runner.py) stays the smaller tool that
 executes already-preregistered numerical rounds, never a second project manager.
 
-## Plan
+### Plan
 
 The implementation plan for the first experiments, meaning search, verify and iterate on
 `n = 11` and `n = 12`, is
@@ -650,86 +764,6 @@ govern the *shape of what is produced*, operating rules govern *how the work is 
 ├── lefthook.yml            The pre-commit hook that formats Markdown
 ├── package.json            Tooling-only package for lefthook
 └── package-lock.json       Its lockfile
-```
-
-## Rendering Packing Figures
-
-`sqpack.render` turns retained pose arrays and exact constructions into deterministic,
-self-contained SVG without adding a runtime dependency.
-The base overview is compact enough for ordinary Markdown, HTML, Word, PDF, and slide
-documents.
-Comparison and trajectory views are opt-in; animation is enabled only inside a
-`prefers-reduced-motion: no-preference` media query, so unsupported or reduced-motion
-renderers show the useful final packing.
-
-The renderer preserves the input’s evidence tier.
-Its caption and metadata distinguish candidates, numerically checked constructions,
-certified upper bounds, and proved optima; typography cannot upgrade a numerical check
-to formal verification.
-Numerically checked figures retain the arithmetic, actual precision, rounding,
-tolerance, method, and outcome in SVG metadata.
-Exact annotations retain algebraic or rational source expressions in SVG comments and
-namespaced metadata while using stable high-precision decimal projections for geometry.
-The container and every packed square use the same boundary treatment, so contacts
-remain visually continuous.
-Exact-source adapters attach certified contact geometry: segments mark shared boundary
-intervals, and dots mark point contacts.
-Each mark is clipped to its participating square interiors.
-The contact layer is shown by default, can be removed with `--no-contacts`, and is never
-guessed for numerical candidate poses.
-
-See the [SVG gallery README](packing/atlas/rendering/README.md) for the focused
-rendering contract, the diagnostic start/final comparison, API and CLI examples,
-retained fixtures, and portability review.
-The [gallery manifest](packing/atlas/rendering/manifest.json) joins each artifact to its
-frontier case, evidence tier, view level, motion support, alt text, and exact
-regeneration command.
-From this directory:
-
-```bash
-uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --list
-uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --update
-uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --check
-```
-
-The Motion Lab now has two scenarios on one shared visual system.
-The [self-contained exact `n = 5` lab](packing/atlas/rendering/n5-motion-lab.html)
-reuses the exact R4/R5 and `+W` case functions while leaving the publication renderer’s
-script-free SVG contract unchanged.
-The served setup-and-quench scenario accepts arbitrary seeded configurations, supports
-temporary sticky chunks for placement, releases every chunk before numerical
-optimization, and presents fixed-angle LP states separately from angular probes and
-accepted rotations.
-
-**The Motion Lab is a rough draft.** It landed on 2026-08-28 out of a single `n = 5`
-spike, has produced no research result, and its first review found six defects in it —
-all in the new instrument, none in the mathematics it displays.
-Its contracts are versioned because they are expected to change.
-Use it to look at what the quench does; do not cite it.
-The
-[runbook](packing/atlas/rendering/README.md#general-motion-lab-setup-and-free-quench)
-states the maturity boundary in full and records what that review found.
-
-From this directory, open the served lab in the default browser:
-
-```bash
-uv run --frozen --all-extras --group dev python \
-  -m devtools.serve_packing_motion_lab serve --open
-```
-
-The
-[Motion Lab runbook](packing/atlas/rendering/README.md#general-motion-lab-setup-and-free-quench)
-documents setup controls, phase marks, trace download and replay, the retained known
-answer, service limits, and the explicit absence of persistent optimization constraints.
-The
-[generalized Motion Lab plan](docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md)
-owns the versioned contracts and keeps rigid groups and contact locks behind a separate
-Phase 2 decision.
-
-The focused read-only gate is:
-
-```bash
-uv run --frozen --all-extras --group dev packing-validate --only "deterministic SVG rendering"
 ```
 
 <!-- This document follows common-doc-guidelines.md.

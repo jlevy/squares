@@ -145,9 +145,9 @@ agenda:
 ---
 # Agenda-011 — The Verification Review
 
-One cell: the owner moved the review from their queue to the repository's own
-rubric, so the six held results get determinations here, with the independent
-interval certifier built where first-party independence was missing.
+One cell: the owner moved the review from their queue to the repository’s own rubric, so
+the six held results get determinations here, with the independent interval certifier
+built where first-party independence was missing.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

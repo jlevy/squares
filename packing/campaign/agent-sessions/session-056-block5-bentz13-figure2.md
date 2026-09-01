@@ -217,14 +217,13 @@ session:
 # Session-056 — Block 5: The m = 4 Foundation Layer
 
 Contemporaneous record; the frontmatter is the session.
-The tiling design this block certifies was derived first-hand before any code:
-corner pentagons under Lemma 1 (their conclusion triangle contains both near-corner
-points, and the pentagon cut keeps the unchargeable notch vertex out of every
-Lemma 2 cell), wall rectangles under Lemma 4 with both inner corners set points
-(no wall-vertex outs needed at all in this figure), and an eighteen-triangle
-Lemma 2 layer through the D orbit whose longest side squared is 964196/1000000
-(the first draft of this note wrote 964096, a hand-arithmetic slip the certificate
-caught).
+The tiling design this block certifies was derived first-hand before any code: corner
+pentagons under Lemma 1 (their conclusion triangle contains both near-corner points, and
+the pentagon cut keeps the unchargeable notch vertex out of every Lemma 2 cell), wall
+rectangles under Lemma 4 with both inner corners set points (no wall-vertex outs needed
+at all in this figure), and an eighteen-triangle Lemma 2 layer through the D orbit whose
+longest side squared is 964196/1000000 (the first draft of this note wrote 964096, a
+hand-arithmetic slip the certificate caught).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

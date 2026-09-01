@@ -143,10 +143,11 @@ cache correctness.
 
 **Cross-field rules live in the checker, not the schema.** [checked] The convention
 began as a workaround — softschema 0.6.2 rejected `allOf` object composition under
-`status: enforced` ([jlevy/softschema#41](https://github.com/jlevy/softschema/issues/41)),
-fixed by 0.8.0 — and is retained by choice: a checker rule fails the offending
-artifact with a named reason where a schema conditional invalidates every artifact,
-and a checker rule can carry its own negative control.
+`status: enforced`
+([jlevy/softschema#41](https://github.com/jlevy/softschema/issues/41)), fixed by 0.8.0 —
+and is retained by choice: a checker rule fails the offending artifact with a named
+reason where a schema conditional invalidates every artifact, and a checker rule can
+carry its own negative control.
 
 ### Workflow, Focus, Phase, and Slice
 
@@ -258,8 +259,8 @@ Wall clock is reported alongside as a courtesy, never as the budget.
 **One document owns each vocabulary, and the rest are short forms.** [convention]
 [Assurance and method](#4-evidence) above are definitive here, and the schemas enforce
 them; the result-level epistemic vocabulary is owned by
-[`epistemics.md`](epistemics.md). Mathematical terminology is defined in
-[`SYNOPSIS.md`](SYNOPSIS.md#terminology);
+[`epistemics.md`](epistemics.md).
+Mathematical terminology is defined in [`SYNOPSIS.md`](SYNOPSIS.md#terminology);
 [`TUTORIAL.md`](TUTORIAL.md) §9 and [`README.md`](README.md)’s Essential Terms are short
 forms that may abbreviate but must not contradict it, and a term either appears in the
 synopsis or is marked local where it is used.

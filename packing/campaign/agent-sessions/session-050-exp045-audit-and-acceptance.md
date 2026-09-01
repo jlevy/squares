@@ -223,7 +223,7 @@ session:
 # Session-050 — The exp-045 Independent Audit, the -W Bridge, and the Acceptance
 
 The sixth admission condition sat unperformed for four days because it was the one
-condition the instrument's own builder could not satisfy.
+condition the instrument’s own builder could not satisfy.
 This session was the outsider: it replayed the certificate, proved the replay would
 refuse a perturbed artifact, and then compared the registration against the retained
 round the way an auditor does — against the artifacts, not the narratives.
@@ -237,16 +237,16 @@ Two implementations of the same mathematics, never compared.
 
 The bridge compared them.
 On the actual `-W` direction, at all three strata, the helpers rebuild all fifteen
-owner-3 scale records and all three owner-4 records with strict exact contradictions
-and every coefficient equal to its `+W` twin — the sign-symmetry determination derived
-rather than read. The deciding constant, `-1/4`, ties to the certificate's retained
+owner-3 scale records and all three owner-4 records with strict exact contradictions and
+every coefficient equal to its `+W` twin — the sign-symmetry determination derived
+rather than read. The deciding constant, `-1/4`, ties to the certificate’s retained
 `obstruction_coefficient` by exact equality.
 Agreement between independently written implementations is the strongest corroboration
 this round could get short of a formal proof, and it is now a checker a future session
 can re-run in seventy-five seconds.
 
-The acceptance is the owner's, granted in conversation after the audit and recorded in
-the experiment's amendment with its provenance.
+The acceptance is the owner’s, granted in conversation after the audit and recorded in
+the experiment’s amendment with its provenance.
 The claim boundary did not move a word.
 
 <!-- This document follows common-doc-guidelines.md.

@@ -290,9 +290,9 @@ session:
 
 Contemporaneous record; the frontmatter is the session.
 Renumbering note (2026-08-31, merge of main): this session ran and closed as
-session-050; PR #65's independent session (the exp-045 audit) merged to main first
-under the same number, so this record was renumbered to session-054 at the merge, the
-lowest free number. Nothing else in the record changed; clocks and content are the
+session-050; PR #65’s independent session (the exp-045 audit) merged to main first under
+the same number, so this record was renumbered to session-054 at the merge, the lowest
+free number. Nothing else in the record changed; clocks and content are the
 contemporaneous originals.
 
 Agenda-010 owns the block plan, X-010 owns the argument, think-y2ju and think-yrvm own

@@ -222,12 +222,11 @@ session:
 # Session-061 — The Epistemics Codification
 
 Contemporaneous record; the frontmatter is the session.
-The owner's approvals that scope it: the four-axis design and the
-verified/confirmed split from the in-session design review, epistemics.md as a
-new root document because conventions.md's scope is formats and naming, levels
-committable after an effort because the rubric rather than a reviewer grants
-them, and a README orientation so a visitor can tell survey content from novel
-results.
+The owner’s approvals that scope it: the four-axis design and the verified/confirmed
+split from the in-session design review, epistemics.md as a new root document because
+conventions.md’s scope is formats and naming, levels committable after an effort because
+the rubric rather than a reviewer grants them, and a README orientation so a visitor can
+tell survey content from novel results.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

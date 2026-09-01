@@ -146,9 +146,9 @@ session:
 # Session-057 — Block 6: The Green Sizes Ladder
 
 Contemporaneous record; the frontmatter is the session.
-The scouting that framed this block is recorded in the goal: the plain grid's
-side-4 ceiling was established by a concrete scaled-grid escape before any code,
-so the block's question is what the two reinforcement points buy above it.
+The scouting that framed this block is recorded in the goal: the plain grid’s side-4
+ceiling was established by a concrete scaled-grid escape before any code, so the block’s
+question is what the two reinforcement points buy above it.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
