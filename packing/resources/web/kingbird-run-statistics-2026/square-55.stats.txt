@@ -1,0 +1,23 @@
+Statistics from 5 sessions of data gathering by David Ellsworth on February 4-5, 2026, using an NVIDIA RTX 3080 Ti with the simulated annealing program set to use 65536 threads:
+ 0+  0+ 0+  0+  1 =    1 instance  that would directly                  refine to the s=7.94579839811299..., and with more delicate refinement, the s=7.94577100750391... (and during the initial search        got below 7.95416724257629...)
+ 0+  0+ 0+  0+  2 =    2 instances that would readily                   refine to the s=7.94579839811299..., and with more delicate refinement, the s=7.94577100750391... (and during the initial search        got below 7.95416724257629...)
+ 0+  0+ 0+  1+  1 =    2 instances that would readily                   refine to the s=7.94579839811299..., and with more delicate refinement, the s=7.94577100750391... (but during the initial search didn't get below 7.95416724257629...)
+ 7+121+14+286+388 =  816 instances that would directly or quite readily refine to the s=7.95416724257629...                                                               (note that not all of these           got below 7.96)
+ 0+  0+ 0+  1+  1 =    2 instances analogous to the s=7.95416724257629... in the way that the curreny s(29) record is analgous to the previous s(29) record, but in the case of this s(55), it does not beat the s=7.95416724257629... previous record (hasn't been fully refined yet, but it's gotten as low as s=7.9565296173)
+ 0+  2+ 0+  0+  2 =    4 instances of the simple s=7.98498441462971... (non-record-setting)
+ 0+  0+ 0+  2+  0 =    2 instances essentially identical to the s=7.98701198965972... found by David W. Cantrell in August 2002 (but lacking perfect symmetry).
+22+148+17+374+503 = 1064 others
+The above lists all that got below 8.0. Out of all 1893 of them, 454 (23.983%) got below 7.96 during the initial search.
+
+Additionally, 1 session of data gathering in which only those that got below 7.96 were saved:
+   0 instances that would directly refine to the s=7.94579839811299..., and with more delicate refinement, the s=7.94577100750391... (and during the initial search        got below 7.95416724257629...)
+   1 instance  that would readily  refine to the s=7.94579839811299..., and with more delicate refinement, the s=7.94577100750391... (and during the initial search        got below 7.95416724257629...)
+   0 instances that would readily  refine to the s=7.94579839811299..., and with more delicate refinement, the s=7.94577100750391... (but during the initial search didn't get below 7.95416724257629...)
+ 438 instances that would directly or quite readily refine to the s=7.95416724257629...
+   1 instance  analogous to the s=7.95416724257629... in the way that the curreny s(29) record is analgous to the previous s(29) record, but in the case of this s(55), it does not beat the s=7.95416724257629... previous record (hasn't been refined yet, but it's gotten as low as s=7.9565649033)
+   0 instances of the simple s=7.98498441462971... (non-record-setting)
+   0 instances essentially identical to the s=7.98701198965972... found by David W. Cantrell in August 2002 (but lacking perfect symmetry).
+1395 others that would have gotten below 8.0 but not 7.96 (estimate extrapolated from previous data)
+
+(3572.0 + 5363.8) / (898 + 1835) = 2.6140 seconds on average to find each of the above (during the last two sessions, which were the most optimized).
+That means it would take on average (29+271+31+664+898+1835)/(0+0+0+0+3+1)*2.6140 = 2436.2 seconds (40.604 minutes) to find a pattern that both gets below 7.95416724257629... and refines to the current record.

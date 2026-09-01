@@ -244,17 +244,26 @@ agenda:
       Are the equal-side n=5 candidates connected in the stationary set, and what
       verified minimax clearance connects unequal-side candidates?
     hypotheses: [H-023]
-    budget: one 30m local-geometry slice per declared candidate pair; retain partial bounds
+    budget: >-
+      One final 90-minute block in three 30-minute cells. It must decide one declared
+      connection/separation discriminator, exercise the same observable at n = 10, and
+      park H-023 if that transfer is unavailable. No successor n = 5 block is authorized
+      by this commitment.
     entry: >-
       BC-003 and BC-009 complete; exp-033 binds the first declared pair to exact poses
       and exp-034 embeds its exact face in a two-parameter optimal sheet
-    exit: certified connection, certified separation bound, or explicit ambiguity interval
+    exit: >-
+      Certified connection, certified separation bound, or explicit ambiguity interval
+      for the declared n = 5 pair, plus a matched n = 10 transfer result or typed
+      instrument refusal. Without the transfer, retain the n = 5 result as a control and
+      park further local-geometry work.
     bead: think-1s0h
     depends_on: [BC-003, BC-009]
     next_evidence: >-
-      test -W, mixed-angle realization, and stationary continuation beyond the twelve
-      exp-039 and six exp-042 paths without inferring whole-polytope terminality from
-      their positive first-order stresses
+      X-011 caps the lane after twelve rounds. Choose one final discriminator from -W,
+      mixed-angle realization, or stationary continuation beyond the twelve exp-039 and
+      six exp-042 paths; freeze its n = 10 transfer before execution; and do not infer
+      whole-polytope terminality from positive first-order stresses.
     parallel_group: identity
     note: >-
       This is the first genuine basin-structure experiment in the ladder. Exp-033

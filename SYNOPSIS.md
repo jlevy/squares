@@ -510,11 +510,28 @@ the ledger’s round count — fixed as `D-409` and `D-410` on this branch, with
 `epistemics.md` added to the snapshot’s root documents before the same gap could ship
 again. Research follow-ons are unchanged on their beads.
 
-**The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
+**As of 2026-08-31, late evening — next agents start here.**
+[X-011](packing/campaign/explorations/X-011-controls-are-not-targets.md) reconciles the
+new `n = 17` weighted certificates, the `n = 68/69` precision gap, the medium-case
+construction ladder, and the opportunity cost of a thirteenth open-ended `n = 5` round.
+[Agenda-012](packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md)
+turns that synthesis into three disjoint first-wave blocks with real beads and 15--30
+minute check-in cells: `BC-108` independently checks the proposed `4.5058` certificate;
+`BC-109` builds the rounded-SVG-to-rigid-pose bridge at `n = 68/69`; and `BC-110` takes
+the `n = 50` rational exact-promotion control.
+Run them in parallel, then take `BC-111`’s bounded checkpoint.
+The dependency-linked successors are already filed.
+Existing `BC-010` gets one final 90-minute discriminator with a matched `n = 10`
+transfer, or it parks.
+Take the exact entry command and owned paths from agenda-012, not from this summary.
+
+**The parallel recognition slice remains `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
-the last two witness lifts — `n = 50` rational, `n = 54` quartic — then the
-robust-rational sweep, then the typed refusal at `n = 53`. `BC-049` on `think-xdly` is
-the research cell all of the mathematics below sits under, and it stays open.
+agenda-012 narrows its first slice to `n = 50` under `BC-110`; `n = 54` follows only if
+that result shows nested-radical representation is the next missing seam.
+The robust-rational sweep and typed `n = 53` refusal remain on the parent bead.
+`BC-049` on `think-xdly` is the research cell all of the mathematics below sits under,
+and it stays open.
 
 **`n = 40` is infinitesimally flexible**, exactly, over `Q(sqrt 2)`: seven retained
 directions turn the sixteen squares of its tilted block and leave the frame fixed, and

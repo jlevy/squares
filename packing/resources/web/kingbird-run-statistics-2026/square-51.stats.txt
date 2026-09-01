@@ -1,0 +1,6 @@
+Statistics from 9 sessions of data gathering by David Ellsworth on January 31 - February 1, 2026, using an NVIDIA RTX 3080 Ti with the simulated annealing program set to use 65536 threads:
+3+12+43+248+104+300+675+711+720 = 2816 instances that would refine to the s  = 7.70435372947124... found by Károly Hajba in July 2009.
+1+ 0+ 3+ 17+  2+ 14+ 58+ 39+ 50 =  184 instances that would refine to the s <= 7.70374810693708... pattern.
+0+ 1+ 0+  0+  0+  0+  0+  1+  2 =    4 instances that would refine to the s  = 7.70079923541701... pattern (the current record), making it an exceedingly rare find.
+(16713.9 + 18040.9 + 18422.4) / (733 + 751 + 772) = 23.571 seconds on average to find each of the above (during the last three sessions, which were the most optimized, with the median average temperature and cooldown period taken from the previous sessions' finds).
+That means it would take on average (2816+184+4)/4*23.571 = 17702 seconds (4.917 hours) to find a pattern that refines to the current record.

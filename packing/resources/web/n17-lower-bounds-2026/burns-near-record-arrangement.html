@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+
+<meta name="robots" content="index, follow">
+
+<title>n=17 Square Packing: A Near-Record Arrangement | Sam Burns&#39; Tech Blog</title>
+<meta name="keywords" content="mathematics, geometry, square-packing">
+<meta name="description" content="A near-record arrangement for the n=17 square packing problem.">
+<meta name="author" content="Sam Burns">
+<link rel="canonical" href="https://sam-burns.com/posts/n17-square-packing-near-record-arrangement/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css" integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://sam-burns.com/images/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://sam-burns.com/images/favicon/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://sam-burns.com/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="https://sam-burns.com/images/favicon/favicon-96x96.png">
+<link rel="apple-touch-icon" href="https://sam-burns.com/images/favicon/apple-touch-icon.png">
+<link rel="mask-icon" href="https://sam-burns.com/images/favicon/favicon.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://sam-burns.com/posts/n17-square-packing-near-record-arrangement/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-6LGDCRYG4X"></script>
+      <script>
+        var doNotTrack = false;
+        if ( true ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-6LGDCRYG4X');
+        }
+      </script><meta property="og:url" content="https://sam-burns.com/posts/n17-square-packing-near-record-arrangement/">
+  <meta property="og:site_name" content="Sam Burns&#39; Tech Blog">
+  <meta property="og:title" content="n=17 Square Packing: A Near-Record Arrangement">
+  <meta property="og:description" content="A near-record arrangement for the n=17 square packing problem.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-08-05T10:00:00+01:00">
+    <meta property="article:modified_time" content="2026-08-17T16:39:01+01:00">
+    <meta property="article:tag" content="Mathematics">
+    <meta property="article:tag" content="Geometry">
+    <meta property="article:tag" content="Square-Packing">
+    <meta property="og:image" content="https://sam-burns.com/posts/n17-square-packing-near-record-arrangement/images/n17-arrangement.png">
+      <meta property="og:see_also" content="https://sam-burns.com/posts/n17-square-packing-problem-intro/">
+      <meta property="og:see_also" content="https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sam-burns.com/posts/n17-square-packing-near-record-arrangement/images/n17-arrangement.png">
+  <meta name="twitter:title" content="n=17 Square Packing: A Near-Record Arrangement">
+  <meta name="twitter:description" content="A near-record arrangement for the n=17 square packing problem.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://sam-burns.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "n=17 Square Packing: A Near-Record Arrangement",
+      "item": "https://sam-burns.com/posts/n17-square-packing-near-record-arrangement/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "n=17 Square Packing: A Near-Record Arrangement",
+  "name": "n=17 Square Packing: A Near-Record Arrangement",
+  "description": "A near-record arrangement for the n=17 square packing problem.",
+  "keywords": [
+    "mathematics", "geometry", "square-packing"
+  ],
+  "articleBody": "A Different Way to Pack 17 Squares The arrangement below is an n=17 square packing arrangement. It is not the world record, but it comes close. The arrangement requires a container very slightly larger - but it is a different topology, not merely a slight mutation.\nThe arangement at its topology-constrained limit. The container side is approximately 4.677648294965133 unit-square widths.\nThe best-known square packing arrangement for \\(n=17\\) has a container side of approximately\n$$ 4.675530093604551 $$The arrangement above needs\n$$ 4.677648294965133 $$It is therefore wider by about\n$$ 0.002118201360582 $$or roughly 0.0453% of the record container width. It is not, however, a poorly polished copy of the record - it is a completely distinct arrangement.\nBidwell’s best-known arrangement contains 10 axis-aligned squares and 7 tilted squares, divided between two different angles. This alternative contains 11 axis-aligned squares and 6 tilted squares. All 6 tilt at the same angle:\n\\[ \\theta \\approx 39.631881227553^\\circ \\]The contacts between the squares are different too. To turn one arrangement into the other, squares would have to separate, move past one another and form a new network of contacts. In the language of the previous post, these are different packing arrangement topologies, rather than two noisy mutations of the same solution.\nThe record is narrower, but the two arrangements obtain their widths from different internal structures.\nFrequent Rediscoveries I did not set out to design the six-tilted arrangement by hand. It appeared during searches in which a program rotated or translated squares, compacted the result and retained promising states.\nMore interestingly, it did not appear only once. Four good-looking outputs, produced using more than one search strategy, had the following raw widths:\nSearch output Raw container width Distance from the topology limit Learned top-\\(K\\), \\(K=8\\) 4.677835155206 0.000186860241 Learned top-\\(K\\), \\(K=32\\) 4.677848198015 0.000199903050 Learned top-\\(K\\), \\(K=8\\) 4.677970477889 0.000322182924 Family-balanced random, \\(K=8\\) 4.678278977657 0.000630682692 Basically, these are all reflections/rotations, or examples where a square has been moved or tilted very slightly to give a seemingly different arrangement.\nAfter ‘polishing’ (i.e. optimising) the recurrences, they converged at this width:\n\\[ 4.677648294965133\\ldots \\]\nThe drawings on the left contain numerical noise and different labellings. Once canonicalised and squeezed within the same topology, they collapse onto the arrangement at right.\nThat does not prove that this topology is globally important, and it does not make it a record. It does show that the arrangement is more than a one-off numerical accident. It occupies a basin which several searches can enter from slightly different directions.\nThe Tilt Angle Let\n\\[ q=\\sin\\theta, \\qquad c=\\cos\\theta. \\]Within this contact pattern, two different wall-to-wall networks constrain how narrow the container can become. Each network uses a collection of wall contacts and contacts between neighbouring squares. They produce the following lower bounds on the container width:\n\\[ A(\\theta)=\\frac{3+2q+3c}{q+c} \\]and\n\\[ B(\\theta)= \\frac{2c^2+2qc+3q^2+3c+2q}{1+qc}. \\]The diagram below shows the contacts used by the two certificates. The coloured lines are only a schematic way to identify the linked squares; they are not intended to show literal force directions or separating axes.\nCertificate \\(A\\) becomes the obstruction when the common angle is slightly too small. Certificate \\(B\\) becomes the obstruction when it is slightly too large.\nFor any chosen common angle in this family, the container must satisfy both bounds. Its required width is therefore\n\\[ W(\\theta)=\\max\\bigl(A(\\theta),B(\\theta)\\bigr). \\]Just below the best angle, \\(A\\) is larger. Just above it, \\(B\\) is larger. The smallest possible maximum occurs where the two obstructions balance:\n\\[ A(\\theta)=B(\\theta). \\]\nThe thick line is the width demanded by the worse of the two contact constraints. Its minimum is at their intersection.\nUsing \\(c^2+q^2=1\\) to eliminate \\(c\\), the crossing condition reduces to\n\\[ 5q^5+5q^4+3q^3-3q^2-3q+1=0. \\]The relevant root is\n\\[ q=0.63785262957341214549\\ldots, \\]which gives\n\\[ \\theta=39.63188122755316212\\ldots^\\circ. \\]The container width can then be written as\n\\[ W=4+\\frac{2}{q}-\\frac{1}{q^2}, \\]and \\(W\\) itself is the relevant real root of\n\\[ W^5-11W^4+41W^3-37W^2-81W+19=0. \\]Numerically, that root is\n\\[ W=4.67764829496513302001\\ldots \\]Files and Reproduction The search and optimisation code is available in the Squarl repository. The rounded coordinates used to draw the figures in this post are included alongside this article.\nThose rounded coordinates are intended for illustration, not as a rigorous non-overlap certificate.\n",
+  "wordCount" : "686",
+  "inLanguage": "en",
+  "image":"https://sam-burns.com/posts/n17-square-packing-near-record-arrangement/images/n17-arrangement.png","datePublished": "2026-08-05T10:00:00+01:00",
+  "dateModified": "2026-08-17T16:39:01+01:00",
+  "author":{
+    "@type": "Person",
+    "name": "Sam Burns"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sam-burns.com/posts/n17-square-packing-near-record-arrangement/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sam Burns' Tech Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sam-burns.com/images/favicon/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://sam-burns.com/" accesskey="h" title="Sam Burns&#39; Tech Blog (Alt + H)">Sam Burns&#39; Tech Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://sam-burns.com/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://sam-burns.com/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://sam-burns.com/series" title="Post Series">
+                    <span>Post Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://sam-burns.com/tags/talks" title="Talks">
+                    <span>Talks</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://sam-burns.com/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://sam-burns.com/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['\\(', '\\)']]                  
+    }
+  };
+</script>
+
+
+
+<article class="post-single">
+  <header class="post-header">
+    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <a href="/posts/">Posts</a>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</nav>
+    <h1 class="post-title entry-hint-parent">
+      n=17 Square Packing: A Near-Record Arrangement
+    </h1>
+    <div class="post-description">
+      A near-record arrangement for the n=17 square packing problem.
+    </div>
+    <div class="post-meta">
+
+<span title='2026-08-05 10:00:00 +0100 +0100'>August 5, 2026</span>&nbsp;·&nbsp;<span>Sam Burns</span>
+
+</div>
+  </header>
+  <link rel="stylesheet" href="/css/post-entry-override.css"/> 
+
+  
+
+
+<link rel="stylesheet" href="/css/series-nav.css" />
+<div class="seriesnav">
+    <h3 class="seriesnav-title">Part of the <i>Square Packing</i> series</h3>
+    <ul class="list-group">
+        
+            
+                <li class="list-group-item">
+                    <a href="/posts/n17-square-packing-problem-intro/">
+                        <b>1</b>&nbsp;&nbsp;<i>The n=17 Square Packing Problem- Introduction</i>
+                    </a>
+                </li>
+            
+        
+            
+                <li class="list-group-item active">
+                    <b>2</b>&nbsp;&nbsp;👉&nbsp;&nbsp;<i>n=17 Square Packing: A Near-Record Arrangement</i>
+                </li>
+            
+        
+            
+                <li class="list-group-item">
+                    <a href="/posts/proposing-better-lower-bound-for-n17-square-packing/">
+                        <b>3</b>&nbsp;&nbsp;<i>Proposing a Better Lower Bound for n=17 Square Packing</i>
+                    </a>
+                </li>
+            
+        
+    </ul>
+</div>
+
+<details class="toc"  open>
+    <summary accesskey="c" title="(Alt + C)">
+        <span class="title">Table of Contents</span>
+    </summary>
+
+    <div class="inner"><ul>
+            <li>
+                <a href="#a-different-way-to-pack-17-squares" aria-label="A Different Way to Pack 17 Squares">A Different Way to Pack 17 Squares</a></li>
+            <li>
+                <a href="#frequent-rediscoveries" aria-label="Frequent Rediscoveries">Frequent Rediscoveries</a></li>
+            <li>
+                <a href="#the-tilt-angle" aria-label="The Tilt Angle">The Tilt Angle</a></li>
+            <li>
+                <a href="#files-and-reproduction" aria-label="Files and Reproduction">Files and Reproduction</a>
+            </li>
+        </ul>
+    </div>
+</details>
+
+  <div class="post-content md-content"><h2 id="a-different-way-to-pack-17-squares">A Different Way to Pack 17 Squares<a hidden class="anchor" aria-hidden="true" href="#a-different-way-to-pack-17-squares">#</a></h2>
+<p>The arrangement below is an n=17 square packing arrangement. It is not the world record, but it comes close. The
+arrangement requires a container very slightly larger - but it is a different topology, not merely a slight mutation.</p>
+<p><img alt="Seventeen unit squares packed into a square container. Eleven are axis-aligned and six form an interlocking tilted\ncore." loading="lazy" src="/posts/n17-square-packing-near-record-arrangement/images/01-alternative-packing.svg"></p>
+<p>The arangement at its topology-constrained limit. The container side is approximately 4.677648294965133 unit-square
+widths.</p>
+<p>The <a href="https://erich-friedman.github.io/papers/squares.pdf">best-known square packing arrangement</a> for \(n=17\) has a container side of approximately</p>
+$$ 4.675530093604551 $$<p>The arrangement above needs</p>
+$$ 4.677648294965133 $$<p>It is therefore wider by about</p>
+$$ 0.002118201360582 $$<p>or roughly <strong>0.0453%</strong> of the record container width. It is not, however, a poorly polished copy of the record - it is a
+completely distinct arrangement.</p>
+<p>Bidwell&rsquo;s best-known arrangement contains 10 axis-aligned squares and 7 tilted squares, divided between two different angles. This alternative contains <strong>11 axis-aligned squares and 6 tilted squares</strong>. All 6 tilt at the same angle:</p>
+\[
+\theta \approx 39.631881227553^\circ
+\]<p>The contacts between the squares are different too. To turn one arrangement into the other, squares would have to
+separate, move past one another and form a new network of contacts. In the language of the <a href="/posts/n17-square-packing-problem-intro">previous
+post</a>, these are different packing arrangement topologies, rather than two
+noisy mutations of the same solution.</p>
+<p><img alt="The Bidwell record packing and the alternative six-tilted-square topology shown side by side." loading="lazy" src="/posts/n17-square-packing-near-record-arrangement/images/02-record-vs-alternative.svg"></p>
+<p><em>The record is narrower, but the two arrangements obtain their widths from different internal structures.</em></p>
+<h2 id="frequent-rediscoveries">Frequent Rediscoveries<a hidden class="anchor" aria-hidden="true" href="#frequent-rediscoveries">#</a></h2>
+<p>I did not set out to design the six-tilted arrangement by hand. It appeared during searches in which a program rotated
+or translated squares, compacted the result and retained promising states.</p>
+<p>More interestingly, it did not appear only once. Four good-looking outputs, produced using more than one search
+strategy, had the following raw widths:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Search output</th>
+					<th style="text-align: right">Raw container width</th>
+					<th style="text-align: right">Distance from the topology limit</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Learned top-\(K\), \(K=8\)</td>
+					<td style="text-align: right">4.677835155206</td>
+					<td style="text-align: right">0.000186860241</td>
+			</tr>
+			<tr>
+					<td>Learned top-\(K\), \(K=32\)</td>
+					<td style="text-align: right">4.677848198015</td>
+					<td style="text-align: right">0.000199903050</td>
+			</tr>
+			<tr>
+					<td>Learned top-\(K\), \(K=8\)</td>
+					<td style="text-align: right">4.677970477889</td>
+					<td style="text-align: right">0.000322182924</td>
+			</tr>
+			<tr>
+					<td>Family-balanced random, \(K=8\)</td>
+					<td style="text-align: right">4.678278977657</td>
+					<td style="text-align: right">0.000630682692</td>
+			</tr>
+	</tbody>
+</table>
+<p>Basically, these are all reflections/rotations, or examples where a square has been moved or tilted very slightly to
+give a seemingly different arrangement.</p>
+<p>After &lsquo;polishing&rsquo; (i.e. optimising) the recurrences, they converged at this width:</p>
+\[
+4.677648294965133\ldots
+\]<p><img alt="Four numerical search outputs converging to the same canonical contact topology." loading="lazy" src="/posts/n17-square-packing-near-record-arrangement/images/03-four-searches-one-topology.svg"></p>
+<p><em>The drawings on the left contain numerical noise and different labellings. Once canonicalised and squeezed within the same topology, they collapse onto the arrangement at right.</em></p>
+<p>That does not prove that this topology is globally important, and it does not make it a record. It does show that the arrangement is more than a one-off numerical accident. It occupies a basin which several searches can enter from slightly different directions.</p>
+<h2 id="the-tilt-angle">The Tilt Angle<a hidden class="anchor" aria-hidden="true" href="#the-tilt-angle">#</a></h2>
+<p>Let</p>
+\[
+q=\sin\theta, \qquad c=\cos\theta.
+\]<p>Within this contact pattern, two different wall-to-wall networks constrain how narrow the container can become. Each
+network uses a collection of wall contacts and contacts between neighbouring squares. They produce the following lower
+bounds on the container width:</p>
+\[
+A(\theta)=\frac{3+2q+3c}{q+c}
+\]<p>and</p>
+\[
+B(\theta)=
+\frac{2c^2+2qc+3q^2+3c+2q}{1+qc}.
+\]<p>The diagram below shows the contacts used by the two certificates. The coloured lines are only a schematic way to
+identify the linked squares; they are not intended to show literal force directions or separating axes.</p>
+<p><img alt="Two schematic contact certificates highlighted on the alternative packing." loading="lazy" src="/posts/n17-square-packing-near-record-arrangement/images/04-contact-certificates.svg"></p>
+<p><em>Certificate \(A\) becomes the obstruction when the common angle is slightly too small. Certificate \(B\) becomes the
+obstruction when it is slightly too large.</em></p>
+<p>For any chosen common angle in this family, the container must satisfy both bounds. Its required width is therefore</p>
+\[
+W(\theta)=\max\bigl(A(\theta),B(\theta)\bigr).
+\]<p>Just below the best angle, \(A\) is larger. Just above it, \(B\) is larger. The smallest possible maximum occurs where
+the two obstructions balance:</p>
+\[
+A(\theta)=B(\theta).
+\]<p><img alt="A graph of the two contact bounds crossing at the limiting common angle." loading="lazy" src="/posts/n17-square-packing-near-record-arrangement/images/05-angle-balance.svg"></p>
+<p><em>The thick line is the width demanded by the worse of the two contact constraints. Its minimum is at their intersection.</em></p>
+<p>Using \(c^2+q^2=1\) to eliminate \(c\), the crossing condition reduces to</p>
+\[
+5q^5+5q^4+3q^3-3q^2-3q+1=0.
+\]<p>The relevant root is</p>
+\[
+q=0.63785262957341214549\ldots,
+\]<p>which gives</p>
+\[
+\theta=39.63188122755316212\ldots^\circ.
+\]<p>The container width can then be written as</p>
+\[
+W=4+\frac{2}{q}-\frac{1}{q^2},
+\]<p>and \(W\) itself is the relevant real root of</p>
+\[
+W^5-11W^4+41W^3-37W^2-81W+19=0.
+\]<p>Numerically, that root is</p>
+\[
+W=4.67764829496513302001\ldots
+\]<h2 id="files-and-reproduction">Files and Reproduction<a hidden class="anchor" aria-hidden="true" href="#files-and-reproduction">#</a></h2>
+<p>The search and optimisation code is available in the <a href="https://github.com/sam-bee/squarl">Squarl repository</a>. The
+<a href="/downloads/n17-square-packing/alternative-packing-rounded-coordinates.json">rounded coordinates used to draw the figures in this
+post</a> are
+included alongside this article.</p>
+<p>Those rounded coordinates are intended for illustration, not as a rigorous non-overlap certificate.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://sam-burns.com/tags/mathematics/">mathematics</a></li>
+      <li><a href="https://sam-burns.com/tags/geometry/">geometry</a></li>
+      <li><a href="https://sam-burns.com/tags/square-packing/">square-packing</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Sam Burns</span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

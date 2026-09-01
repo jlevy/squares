@@ -85,14 +85,19 @@ needs either way.
 Everything else is parked with a stated reason, not silently.
 
 Two facts pick these lanes and no others.
-First, the field’s division of labor: all twelve record movements of 2024–2026 are upper
-bounds from stochastic search (Schadt, Ellsworth, Hajba, the UnitSquare Project, at
-`28 <= n <= 88`), the newest mathematics in the archive is asymptotic and disjoint from
+First, the field’s division of labor: the twelve upper-bound movements examined from
+2024–2026 mix stochastic search, extensions of smaller constructions, constructed seeds
+followed by annealing, and UnitSquare results whose discovery method is undisclosed
+(Schadt, Ellsworth, Hajba, and the UnitSquare Project, at `28 <= n <= 88`). The newest
+peer-reviewed or preprint mathematics in the archive is asymptotic and disjoint from
 `n <= 100` (Bui’s `O(x^0.6)` waste bound, arXiv 2508.04603, and McClenagan’s independent
-proof, arXiv 2602.01484), and the exact-value lane has not moved since Bentz 2016: of
-the 65 open cases, 63 carry Nagamochi’s one 2005 closed form as their best proved lower
-bound, `n = 12` carries a bound proved about `n = 11` and inherited by monotonicity, and
-`n = 11` carries this repository’s own H-041 certificate.
+proof, arXiv 2602.01484), and the external peer-reviewed exact-value lane has not moved
+since Bentz 2016. The repository has since produced verified Green17-derived lower
+bounds, and August 2026 brought two source-backed weighted-certificate proposals at
+`n = 17`; X-011 owns that later evidence and its assurance boundary.
+Of the 65 open cases in the register, most still carry Nagamochi’s 2005 closed form as
+their best verified lower bound, `n = 12` carries a bound proved about `n = 11` and
+inherited by monotonicity, and `n = 11` carries this repository’s own H-041 certificate.
 The upper-bound lane at small `n` is the one thing the field is currently good at; the
 proof lane has been unattended for a decade.
 Second, the machinery inventory: the two places this repository is ahead of everyone are

@@ -2,7 +2,7 @@
 
 # Agenda map
 
-107 agenda commitments across 11 agendas, as declared in each agenda's own frontmatter.
+114 agenda commitments across 12 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **7** ready, **3** tentative, **13** blocked, **5** stopped, **79** complete.
+- **10** ready, **3** tentative, **17** blocked, **5** stopped, **79** complete.
 
 - **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
 
@@ -30,6 +30,9 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-010 | `BC-104` | 2 | insight | research | Does the stage-1 pipeline -- enumerator, glued rows, class-angle sweep -- reproduce the proved controls… | `think-sfzh` |
 | agenda-010 | `BC-097` | 3 | process | tool_validation | Is the queue readable -- the gap ranking on a durable surface, and the 25 stale in_progress beads reconciled? | `think-6z95` |
 | agenda-010 | `BC-105` | 3 | correctness | research | Can a restricted-class optimality statement at n = 11 -- no packing of at most K chunks with at most two tilt… | `think-dbtx` |
+| agenda-012 | `BC-108` | 0 | correctness | measurement_validation | Does a code-independent exact implementation verify the fixed Massaccesi weighted-point certificate at L =… | `think-swtr` |
+| agenda-012 | `BC-109` | 0 | correctness | measurement_validation | Do the six-decimal UnitSquare child SVGs admit rigid unit-square poses inside an explicit rounding envelope,… | `think-26b1` |
+| agenda-012 | `BC-110` | 1 | correctness | measurement_validation | Can the reported n = 50 packing at exact rational side 53/7 be reconstructed and verified exactly as the… | `think-uz6f` |
 
 ## Blocked, and on what
 
@@ -50,6 +53,10 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-002 | `BC-022` | 4 | `BC-021` | no | — |
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
+| agenda-012 | `BC-111` | 1 | `BC-108`, `BC-109`, `BC-110` | no | — |
+| agenda-012 | `BC-112` | 1 | `BC-108`, `BC-111` | no | — |
+| agenda-012 | `BC-113` | 1 | `BC-109`, `BC-111` | no | — |
+| agenda-012 | `BC-114` | 2 | `BC-110`, `BC-111` | no | — |
 
 ## Discharged elsewhere
 
@@ -80,7 +87,8 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-008 | completed |  |  |  |  | 4 | 4 |
 | agenda-009 | active | 2 | 1 |  | 1 | 4 | 8 |
 | agenda-010 | active | 2 | 2 |  |  | 9 | 13 |
-| agenda-011 | active |  |  |  |  | 2 | 2 |
+| agenda-011 | completed |  |  |  |  | 2 | 2 |
+| agenda-012 | active | 3 |  | 4 |  |  | 7 |
 
 ## What the states mean
 
