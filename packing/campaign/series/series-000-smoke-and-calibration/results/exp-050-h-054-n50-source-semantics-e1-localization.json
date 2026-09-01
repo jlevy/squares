@@ -1,0 +1,45 @@
+{
+  "bindings": {
+    "focused_test": {
+      "path": "tests/test_n050_exact.py",
+      "sha256": "0bcbd7e6154dca5b688cb6baf5098d37b9eb938dc227d04e81e3e76329ca2707"
+    },
+    "n19_control_receipt": {
+      "path": "cases/n050_exact/n19_control_receipt.json",
+      "sha256": "accd0d9ce40c6e06c959804d4455dffb21b6a7062276391ddb9421ac805daaae"
+    },
+    "source_semantics_intake": {
+      "path": "cases/n050_exact/source_semantics.py",
+      "sha256": "fed71cf825906bd09f3711ec0a465dce0e4aecb91a1128f3a9d792e59c7c8d0c"
+    },
+    "w1_source_fixture": {
+      "path": "cases/n050_exact/w1_source_fixture.json",
+      "sha256": "113a6b3c82f343f62a7b07e67777dd11d6fa30994576f227d86ea45f2f936c26"
+    }
+  },
+  "cell_count": 0,
+  "cells": [],
+  "claim_boundary": "Executed source-semantics localization only: the checked hash-bound surfaces do not bind source-author and file-publisher roles. This is not an n = 50 geometry, feasibility, exactness, optimality, frontier, or H-054 verdict; H-054 remains instrument_ready false.",
+  "executed": true,
+  "experiment_id": "exp-050",
+  "hypothesis_id": "H-054",
+  "n19_control": {
+    "build_call": "build(19)",
+    "mutation_observed_valid": false,
+    "observed_pairs": 171,
+    "observed_side": {
+      "equals_expected": true,
+      "power_basis_coefficients": [
+        "3",
+        "4/3"
+      ],
+      "serialized": "poly[3,4/3]"
+    },
+    "skip_count": 0
+  },
+  "needs_review": true,
+  "outcome": "e1-refusal",
+  "reason": "attribution-unbound",
+  "reason_index": 3,
+  "retention": "sanitized-structured-source-seam-only"
+}

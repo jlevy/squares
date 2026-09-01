@@ -95,7 +95,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [17, 18, 19]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can an external direction-sliced checkpoint driver make the unchanged n = 17
@@ -128,21 +128,26 @@ agenda:
       18 or 19, clears BC-115, or changes the frontier.
     bead: think-9zgs
     depends_on: []
+    artifacts:
+    - packing/campaign/agent-sessions/session-068-bc116-n17-resumability.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-052-h-052-n17-resumable-certificate-agreement.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-052-h-052-n17-resumable-certificate-agreement.checkpoint.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-052-h-052-n17-resumable-certificate-agreement.progress.json
+    - packing/cases/n17_weighted_certificate_resume/
+    - packing/tests/test_n17_weighted_certificate_resume.py
     workflows: [insight-iteration, research-loop, factual-review]
     next_evidence: >-
-      Ready at session-068. Own a case-specific external resume driver outside the frozen
-      packing/cases/n17_weighted_certificate/ package, its tests, the next
-      coordinator-assigned H-052 experiment/result, and the H-052 readiness-only edit.
-      Synthetic uninterrupted and interrupted-plus-resumed assemblies must be byte
-      identical, including under `python -O`, before target access. An incomplete target
-      wall remains a typed process result, not an H-052 verdict. Do not edit frontier
-      records or generic certificate code.
+      Completed in session-068 and exp-052. The external driver passed its synthetic,
+      corruption, normal/optimized and independent-readmission guards, then one target
+      process retained 33 contiguous agreeing rows before the fixed stop. The checkpoint
+      resumes at ordinal 33, but no canonical result exists: H-052 is unresolved and
+      review-pending, with no n = 18/19 transfer or frontier change.
     parallel_group: agenda013-second-wave-n17
   - id: BC-117
     purpose: tool_validation
     owner_focus: correctness
     instances: [68, 69]
-    state: ready
+    state: stopped
     priority: 1
     question: >-
       If BC-109 cannot freeze a child-independent compatible parent arm, which provenance,
@@ -169,26 +174,24 @@ agenda:
       may rescue the arm.
     bead: think-t7v1
     depends_on: []
+    artifacts:
+    - packing/campaign/agent-sessions/session-069-bc117-n68-refusal-localization.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-051-h-053-n68-refusal-localization.md
+    - packing/cases/unitsquare_precision/refusal/
+    - packing/tests/test_unitsquare_precision.py
     workflows: [insight-iteration, pipeline-improvement, research-loop, factual-review]
     next_evidence: >-
-      Ready at session-069. Freeze `interval-enclosure / instrument-defect` as the
-      target-blind baseline on one synthetic rotated square: the current binary64
-      midpoint fitter and fixed tolerances demonstrate numerical behavior but not an
-      outward proof of nonempty compatible rigid poses, enclosure or required signs.
-      Build and independently verify a rational half-angle existence/cover certificate
-      and a complete injected runner before any parent retrieval. Then own
-      packing/cases/unitsquare_precision/refusal/, the implicated tests in
-      packing/tests/test_unitsquare_precision.py, the coordinator-assigned H-053
-      experiment/result and AgentSession paths,
-      packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md under the
-      readiness-only edit rule, and no H-051 result file. Preserve all parent-source
-      retention constraints.
+      Stopped in session-069 and exp-051 before target access. The exact proof, verifier
+      and generic injected-runner controls pass, but the literal preregistered `--record`
+      command exits 2 because the CLI has no production adapter. H-053 remains unresolved
+      and review-pending. Any continuation must repair and independently test the adapter
+      in a new W7 round before a new experiment; exp-051 is not rerun.
     parallel_group: agenda013-second-wave-n68
   - id: BC-118
     purpose: tool_validation
     owner_focus: correctness
     instances: [19, 50]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       If n = 50 does not become an exact cross-scale control, is the limiting seam source
@@ -215,24 +218,27 @@ agenda:
       50 frontier or switch to n = 39 or 54.
     bead: think-8pjf
     depends_on: []
+    artifacts:
+    - packing/campaign/agent-sessions/session-070-bc118-n50-source-semantics.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-050-h-054-n50-source-semantics-e1-localization.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-050-h-054-n50-source-semantics-e1-localization.json
+    - packing/cases/n050_exact/
+    - packing/tests/test_n050_exact.py
+    - packing/tests/test_n050_exact_independent.py
     workflows: [insight-iteration, pipeline-improvement, research-loop]
     next_evidence: >-
-      Ready at session-070 under exactly `E1 source/provenance absence`. Determine
-      whether a first-party SVG, catalogue artifact, generator source or attributable
-      author statement binds every center and rotation token to units, frame, exact or
-      rounded/truncated/interval semantics, and a stable byte hash. Without that, retain
-      E1; decimal patterns, 53/7 and a 3-4-5 angle are insufficient. Own
-      packing/cases/n050_exact/,
-      packing/tests/test_n050_exact.py, the coordinator-assigned H-054 experiment/result
-      and AgentSession paths, and
-      packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md under the
-      readiness-only edit rule. Shared frontier files remain untouched.
+      Completed in session-070 and exp-050 with one immutable executed E1 refusal:
+      ordered reason 3, `attribution-unbound`, zero cells. The n = 19 exact control and
+      mutation passed, while independent replay found that the result does not bind the
+      producer-runner hash and therefore cannot durably prove refusal ordering under a
+      later runner mutation. H-054 stays unresolved, unready and review-pending; no n =
+      50 reconstruction or n = 39/54 substitution ran.
     parallel_group: agenda013-second-wave-scale
   - id: BC-119
     purpose: research
     owner_focus: process
     instances: [17, 39, 50, 54, 68]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Are all three second-wave outcomes terminal, internally consistent and ready for an
@@ -260,13 +266,13 @@ agenda:
       experiment, repairs no finding and makes no mathematical promotion.
     bead: think-47xw
     depends_on: []
-    blocked_on: >-
-      Exactly one declared second-wave continuation in each of the three lanes must be
-      terminal and its sibling explicitly stopped.
     workflows: [efficiency-loop, insight-iteration, process-review, documentation-pass]
     next_evidence: >-
-      Held `blocked` until the 06:15 wall-clock checkpoint. The coordinator owns shared
-      agenda edits, review-packet hashes, generated views, bead transitions and PR update.
+      Ready at the 06:15 wall-clock checkpoint. BC-116 and BC-118 are complete, BC-117
+      is stopped, their unselected siblings remain stopped and paused, all three selected
+      task beads are terminal, and sessions 068--070 plus their disjoint receipts carry
+      every outcome. Begin with the mandatory ten-minute W5 comparison, then freeze one
+      revision-keyed review packet per lane without running or repairing an experiment.
   - id: BC-120
     purpose: measurement_validation
     owner_focus: correctness

@@ -323,16 +323,16 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-The exact nine-hour agenda-013 run is active, with the latest first-wave lane record in
-[session-067](packing/campaign/agent-sessions/session-067-bc110-n50-exact-control.md).
-All three first-wave lanes are terminal: `n = 17` exhausted its admitted exact-runtime
-timebox without a canonical result, while `n = 68/69` and `n = 50` stopped before
-measurement on typed evidence gates.
+The exact nine-hour agenda-013 run is active, with its latest lane record in
+[session-070](packing/campaign/agent-sessions/session-070-bc118-n50-source-semantics.md).
+The three selected second-wave continuations are terminal: `n = 17` retained 33/181
+agreeing hash-chained rows, `n = 68` stopped before target access on the missing
+production adapter, and `n = 50` retained an executed reason-3 E1 refusal with zero
+cells. None changes a hypothesis or frontier claim.
 
-The exact cold-start entry point is the mandatory W5 efficiency checkpoint `BC-122`
-under `think-iv3e`. It reads the three terminal session and resource receipts, retains a
-measured no-change or self-repaying improvement decision, and opens no scientific
-successor before the bounded integration checkpoint.
+The exact cold-start entry point is `BC-119` under `think-47xw`. Run its mandatory W5
+comparison, reconcile all three terminal packets at one immutable revision, and make
+`BC-120` ready without running or repairing an experiment.
 
 ### Handoff Record
 
@@ -2368,9 +2368,9 @@ round that names the hypothesis, control roles included.
 | [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov’s decomposition | 0 | — |
 | [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent’s 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
 | [H-051](packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md) | blocked | A blinded tier-S n = 68 public-parent surgery pilot matches the released child under the frozen grammar | 0 | — |
-| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | needs review | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 1 | 65.3333m agent + 65.3m wall |
-| [H-053](packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md) | needs review | Each fixed UnitSquare `n = 68, 69` parent-child pair admits compatible rigid poses under at least one declared serialization model | 1 | 39m agent + 32.2m wall |
-| [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | needs review | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 1 | 8m agent |
+| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | needs review | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 2 | 139.6m agent + 139.6m wall |
+| [H-053](packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md) | needs review | Each fixed UnitSquare `n = 68, 69` parent-child pair admits compatible rigid poses under at least one declared serialization model | 2 | 114m agent + 107.2m wall |
+| [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | needs review | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 2 | 38m agent + 30.0m wall |
 | [H-055](packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md) | blocked | If selected, the `n = 54` witness admits complete exact promotion in the reported nested-radical field | 0 | — |
 | [H-056](packing/campaign/hypotheses/H-056-n39-degree-five-interval-certificate.md) | blocked | If selected, the `n = 39` witness admits a complete interval certificate tied to the designated degree-five root | 0 | — |
 
@@ -2545,12 +2545,16 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-065.yaml` | session-065 | 286 | 1.74 h | 1.74 h | 1.99 h | no |
 | `codex-task-tree-session-066.yaml` | session-066 | 106 | 0.64 h | 0.64 h | 1.11 h | no |
 | `codex-task-tree-session-067.yaml` | session-067 | 28 | 0.14 h | 0.14 h | 0.32 h | no |
+| `codex-task-tree-session-068.yaml` | session-068 | 308 | 1.9 h | 1.9 h | 2.67 h | no |
+| `codex-task-tree-session-069.yaml` | session-069 | 190 | 0.8 h | 0.8 h | 1.57 h | no |
+| `codex-task-tree-session-070-review.yaml` | session-070 | 23 | 0.12 h | 0.12 h | 0.42 h | no |
+| `codex-task-tree-session-070.yaml` | session-070 | 114 | 0.52 h | 0.52 h | 2.67 h | no |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 22 |
+| measured | 25 |
 | closed before `resource_rollups` existed, logs not retained | 45 |
-| **total** | **67** |
+| **total** | **70** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -2565,9 +2569,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 49 terminal rounds registered in `series-000`.
+There are 52 terminal rounds registered in `series-000`.
 
-They record 1243.33 agent-minutes and 128.4 wall-minutes.
+They record 1422.6 agent-minutes and 307.7 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -2645,6 +2649,9 @@ archive beside it.
 | [exp-047](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-047-h-053-unitsquare-rigid-pose-serialization.md) | 68 | target | H-053 | binary64 precision-bridge prototype | interval-enclosure and complete-runner guards fire before parent retrieval or target access | blocked |
 | [exp-048](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-048-h-054-n50-exact-rational-reconstruction.md) | 50 | target | H-054 | exact-reconstruction admission gate | E1 source semantics absent; no reconstruction, target sample, or result | unresolved |
 | [exp-049](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-049-h-052-n17-independent-certificate-agreement.md) | 17 | target | H-052 | exact independent accumulator | 3,920-second timebox; no canonical comparison or checkpoint | unresolved |
+| [exp-050](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-050-h-054-n50-source-semantics-e1-localization.md) | 50 | target | H-054 | exact source-semantics intake | E1 reason 3, `attribution-unbound`; zero cells | unresolved |
+| [exp-051](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-051-h-053-n68-refusal-localization.md) | 68 | target | H-053 | proof-carrying pose instrument | production `--record` adapter absent; no target access | blocked |
+| [exp-052](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-052-h-052-n17-resumable-certificate-agreement.md) | 17 | target | H-052 | resumable exact accumulator | 33/181 contiguous paired rows agree; result incomplete | unresolved |
 
 ### Cost and provenance
 
@@ -2699,10 +2706,13 @@ archive beside it.
 | exp-047 | 115 minutes after target-blind W3; W7 admission first | 1,932 s | 39 m | guard | `d7c94590+sha256-92e7b6e43b8785c0` |
 | exp-048 | one 25-minute W7 readiness cell inside BC-110 | 0 s | 8 m | dependency | `d7c94590` |
 | exp-049 | 65 minutes 20 seconds | 3,920 s | 65.3333 m | timebox | `d7c94590+sha256-309ec24158f73dd2` |
+| exp-050 | 30m source-semantics application cell | 1,800 s | 30 m | criterion | `e21598f6+sha256-fed71cf825906bd0` |
+| exp-051 | 75m target-blind W7 instrument wall | 4,500 s | 75 m | guard | `e21598f6+sha256-3d91046ad9d4ea7b` |
+| exp-052 | one fixed 75-minute W6 interval | 4,456 s | 74.2667 m | timebox | `e21598f6+sha256-3e5284fd56fd33f7` |
 
-### What the 49 rounds jointly establish
+### What the 52 rounds jointly establish
 
-The 49 rounds use 1243.33 agent-minutes and 128.4 wall-minutes under the campaign’s
+The 52 rounds use 1422.6 agent-minutes and 307.7 wall-minutes under the campaign’s
 retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through

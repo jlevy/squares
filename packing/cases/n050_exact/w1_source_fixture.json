@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "resources": [
+    {
+      "role": "catalogue",
+      "url": "https://kingbird.myphotos.cc/packing/squares_in_squares.html",
+      "retrieved_at": "2026-09-01T12:39:02Z",
+      "available": true,
+      "http_status": 200,
+      "sha256": "d06590beefba61573f5ef2471d4e08afcfe4640bb8135824e0f715d0bb842ac8",
+      "etag": "\"290e3-651f6c464a9c0\"",
+      "last_modified": "Sat, 16 May 2026 22:22:39 GMT",
+      "content_type": "text/html",
+      "content_length": 168163
+    },
+    {
+      "role": "source_svg",
+      "url": "https://kingbird.myphotos.cc/packing/square-50.svg",
+      "retrieved_at": "2026-09-01T12:39:04Z",
+      "available": true,
+      "http_status": 200,
+      "sha256": "c044b04db21d01f4a5a6066b23bffe89f9585c4b99c88c4cca6b13af7b692c95",
+      "etag": "\"c0f-646d12d658100\"",
+      "last_modified": "Fri, 26 Dec 2025 01:54:44 GMT",
+      "content_type": "image/svg+xml",
+      "content_length": 3087
+    }
+  ],
+  "attribution_artifact_sha256": "d06590beefba61573f5ef2471d4e08afcfe4640bb8135824e0f715d0bb842ac8",
+  "role_map": {
+    "packing_finder": {
+      "name": "Thomas Schadt",
+      "evidence_resource": "catalogue"
+    },
+    "later_optimizer": {
+      "name": "David Ellsworth",
+      "evidence_resource": "catalogue"
+    },
+    "source_author": {
+      "name": null,
+      "evidence_resource": "catalogue"
+    },
+    "file_publisher": {
+      "name": null,
+      "evidence_resource": "catalogue"
+    },
+    "compilation_basis": {
+      "name": "Erich Friedman",
+      "evidence_resource": "catalogue"
+    }
+  },
+  "retention": {
+    "policy": "metadata-and-derived-numerical-facts-only",
+    "raw_asset_retained": false,
+    "license_status": "no-express-reuse-terms-found"
+  },
+  "checked_declaration_surfaces": [
+    {
+      "resource": "catalogue",
+      "surface": "n50-entry-and-global-attribution",
+      "checked": true
+    },
+    {
+      "resource": "source_svg",
+      "surface": "human-readable-comments-title-desc",
+      "checked": true
+    }
+  ],
+  "missing_semantics_fields": [
+    "coordinate_units",
+    "coordinate_frame",
+    "rotation_convention",
+    "exporter_version",
+    "serialization_rule",
+    "precision_or_error_bound"
+  ],
+  "bounded_search_scope": {
+    "kind": "checked-hashed-surfaces-only",
+    "resource_roles": [
+      "catalogue",
+      "source_svg"
+    ],
+    "separate_author_or_generator_artifact_retained": false
+  },
+  "semantics_context": {
+    "coordinate_units": null,
+    "coordinate_frame": null,
+    "rotation_convention": null,
+    "exporter_version": null
+  },
+  "token_inventory": [],
+  "declarations": []
+}

@@ -166,7 +166,7 @@ session:
       transition, and publish the validated second-wave launch revision.
     commitment: BC-111
     bead: think-1dm8
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       BC-122 retained `no-change`, its bead is closed, all three first-wave lanes are
@@ -199,10 +199,98 @@ session:
     evidence:
     - packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md
     - packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md
-    stop_reason: null
+    stop_reason: >-
+      The validated routing checkpoint e21598f6 was pushed before the exact second-wave
+      opening, with all selected and sibling holds synchronized.
     next_action: >-
-      Publish the routing checkpoint, then at exactly 2026-09-01T12:16:55Z close BC-111,
-      create the named sessions 068--070 and start think-9zgs, think-t7v1 and think-8pjf.
+      Close BC-111 and dispatch the three reserved target-blind AgentSession paths under
+      think-9zgs, think-t7v1 and think-8pjf.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Coordinate sessions 068--070 through their target-blind W3 contracts, serialize
+      fresh experiment allocation only after each contract returns, enforce W7
+      readmission before target access, retain 15--30 minute cell evidence, and stop all
+      lane writers at the exact second-wave wall.
+    bead: think-5xlb
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      BC-111 froze and published all three selected launch contracts, their sibling
+      dispositions and target-blind AgentSession paths at e21598f6.
+    budget_minutes: 160
+    started_at: '2026-09-01T12:16:55Z'
+    deadline_at: '2026-09-01T14:56:55Z'
+    expected_output: >-
+      Three immutable second-wave lane outcomes with complete sessions, experiments or
+      typed premeasurement stops, exact checks and handoffs for the protected coordinator
+      finalization.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      Stop the affected lane if target access precedes a frozen experiment and W7
+      readmission, a source-retention or scientific-boundary guard fails, ownership
+      overlaps, or the exact 14:56:55Z wall arrives.
+    fallback: >-
+      Retain the smallest typed guard or hash-valid partial process result, leave the
+      hypothesis unresolved and review-pending, and do not invent a replacement target.
+    outcome: >-
+      Terminalized all three selected continuations without a scientific promotion.
+      BC-116 retained 33 of 181 contiguous agreeing n = 17 rows before its fixed
+      midmeasurement stop; BC-117 stopped before target access because the exact
+      preregistered n = 68 command exposes no production adapter; BC-118 executed a
+      reason-3 attribution-unbound E1 refusal with zero cells and a bounded unbound-runner
+      provenance caveat. All results remain unresolved or blocked and review-pending.
+    evidence:
+    - packing/campaign/agent-sessions/session-068-bc116-n17-resumability.md
+    - packing/campaign/agent-sessions/session-069-bc117-n68-refusal-localization.md
+    - packing/campaign/agent-sessions/session-070-bc118-n50-source-semantics.md
+    - packing/campaign/resource-usage/codex-task-tree-session-068.yaml
+    - packing/campaign/resource-usage/codex-task-tree-session-069.yaml
+    - packing/campaign/resource-usage/codex-task-tree-session-070.yaml
+    - packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
+    stop_reason: >-
+      Every lane writer stopped by the fixed 14:56:55Z boundary with a typed, replayable
+      outcome and no target process left alive.
+    next_action: >-
+      Reconcile the three lane records, receipts, agenda rows and beads; render and
+      publish the protected second-wave checkpoint before BC-119 begins.
+  - workflow: process-review
+    recording: contemporaneous
+    clock_role: work
+    focus: process
+    objective: >-
+      Integrate and validate all second-wave artifacts, preserve immutable result and
+      checkpoint hashes through repository formatting, reconcile the selected agenda
+      rows and task beads, render generated views, pass the push gate, and publish one
+      exact PR checkpoint before BC-119.
+    bead: think-5xlb
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      All three lane writers stopped at the fixed boundary and returned terminal records
+      plus complete, non-overlapping resource receipts.
+    budget_minutes: 20
+    started_at: '2026-09-01T14:56:55Z'
+    deadline_at: '2026-09-01T15:16:55Z'
+    expected_output: >-
+      A pushed revision with terminal BC-116--BC-118 rows, closed selected beads, fresh
+      agenda/ledger/synopsis views, green push-tier validation, exact branch cost and
+      BC-119 as the sole next entry.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: >-
+      Stop on an immutable-result change, a hash mismatch, a shared-record contradiction,
+      an unresolved formatter/provenance conflict, or a push-tier failure that cannot be
+      repaired inside the protected checkpoint.
+    fallback: >-
+      Preserve e21598f6 as the last green remote revision, retain the exact local failing
+      receipt, and do not open BC-119 or an independent review.
+    outcome: null
+    evidence: []
+    stop_reason: null
+    next_action: Complete the integration gate and publish the second-wave checkpoint.
   budget:
     wall_minutes: 540
     max_cycles: 9

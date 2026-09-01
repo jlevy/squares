@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **10** ready, **3** tentative, **17** blocked, **10** stopped, **82** complete.
+- **8** ready, **3** tentative, **16** blocked, **11** stopped, **84** complete.
 
-- **6 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-119`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **5 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -30,9 +30,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-010 | `BC-104` | 2 | insight | research | Does the stage-1 pipeline -- enumerator, glued rows, class-angle sweep -- reproduce the proved controls… | `think-sfzh` |
 | agenda-010 | `BC-097` | 3 | process | tool_validation | Is the queue readable -- the gap ranking on a durable surface, and the 25 stale in_progress beads reconciled? | `think-6z95` |
 | agenda-010 | `BC-105` | 3 | correctness | research | Can a restricted-class optimality statement at n = 11 -- no packing of at most K chunks with at most two tilt… | `think-dbtx` |
-| agenda-013 | `BC-116` | 1 | correctness | research | Can an external direction-sliced checkpoint driver make the unchanged n = 17 independent replay finish or… | `think-9zgs` |
-| agenda-013 | `BC-117` | 1 | correctness | tool_validation | If BC-109 cannot freeze a child-independent compatible parent arm, which provenance, transform or… | `think-t7v1` |
-| agenda-013 | `BC-118` | 1 | correctness | tool_validation | If n = 50 does not become an exact cross-scale control, is the limiting seam source availability,… | `think-8pjf` |
+| agenda-013 | `BC-119` | 0 | process | research | Are all three second-wave outcomes terminal, internally consistent and ready for an independent review at one… | `think-47xw` |
 
 ## Blocked, and on what
 
@@ -54,7 +52,6 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
 | agenda-012 | `BC-115` | 2 | `BC-112` | no | BC-120 must clear and BC-121 must apply BC-112's adoption recommendation, and a second fixed-certificate consumer must… |
-| agenda-013 | `BC-119` | 0 | — | no | Exactly one declared second-wave continuation in each of the three lanes must be terminal and its sibling explicitly… |
 | agenda-013 | `BC-120` | 0 | `BC-119` | no | — |
 | agenda-013 | `BC-121` | 0 | `BC-120` | no | — |
 
@@ -89,7 +86,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-010 | active | 2 | 2 |  |  | 9 | 13 |
 | agenda-011 | completed |  |  |  |  | 2 | 2 |
 | agenda-012 | active |  |  | 1 | 5 | 2 | 8 |
-| agenda-013 | active | 3 |  | 3 |  | 1 | 7 |
+| agenda-013 | active | 1 |  | 2 | 1 | 3 | 7 |
 
 ## What the states mean
 

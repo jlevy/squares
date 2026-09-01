@@ -342,14 +342,16 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, use
-[session 067](../../../../packing/campaign/agent-sessions/session-067-bc110-n50-exact-control.md)
-and take the mandatory efficiency checkpoint `BC-122` under `think-iv3e` from
+[session 070](../../../../packing/campaign/agent-sessions/session-070-bc118-n50-source-semantics.md)
+and take `BC-119` under `think-47xw` from
 [agenda-013](../../../../packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md).
-All three first-wave lanes are terminal with complete resource receipts: exp-049
-exhausted its admitted runtime without a canonical result, exp-047 stopped at its
-proof-grade enclosure and runner gates, and exp-048 stopped at source semantics.
-The checkpoint measures those outcomes before any successor route opens; this paragraph
-deliberately names one cell and one bead as the cold-start handoff.
+All three selected second-wave lanes are terminal with complete resource receipts:
+exp-052 retained 33/181 agreeing rows before its fixed stop, exp-051 stopped before
+target access on its missing production adapter, and exp-050 retained an executed
+reason-3 source-semantics refusal.
+BC-119 first runs the mandatory W5 comparison, then freezes the three review packets
+without repairing or rerunning an experiment; this paragraph deliberately names one cell
+and one bead as the cold-start handoff.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

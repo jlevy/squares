@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 67
+count: 70
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 22
+  sessions_measured: 25
   sessions_unmeasured: 45
   attributed:
     rollups: 42
@@ -35,9 +35,9 @@ totals:
     one_off_code: 1738
     wall_hours: 76.48
 codex_receipts:
-  attributed: 5
+  attributed: 9
   unattributed: 0
-  measured: 5
+  measured: 9
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -802,7 +802,7 @@ sessions:
   title: "Agenda-013 nine-hour coordinator"
   status: in_progress
   primary_bead: think-5xlb
-  phases: 4
+  phases: 6
   measured: false
   unmeasured_reason: >-
     declares no rollups
@@ -867,4 +867,71 @@ sessions:
     agent_hours: 0.14
     active_union_hours: 0.14
     wall_hours: 0.32
+    snapshot_incomplete: false
+- id: session-068
+  title: "BC-116 n = 17 resumability"
+  status: completed
+  primary_bead: think-9zgs
+  phases: 8
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-068.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-068.yaml
+    model_responses: 308
+    agent_hours: 1.9
+    active_union_hours: 1.9
+    wall_hours: 2.67
+    snapshot_incomplete: false
+- id: session-069
+  title: "BC-117 n = 68 refusal localization"
+  status: stopped
+  primary_bead: think-t7v1
+  phases: 6
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-069.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-069.yaml
+    model_responses: 190
+    agent_hours: 0.8
+    active_union_hours: 0.8
+    wall_hours: 1.57
+    snapshot_incomplete: false
+- id: session-070
+  title: "BC-118 n = 50 source-semantics localization"
+  status: completed
+  primary_bead: think-8pjf
+  phases: 7
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-070.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-070.yaml
+    model_responses: 114
+    agent_hours: 0.52
+    active_union_hours: 0.52
+    wall_hours: 2.67
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
+    model_responses: 23
+    agent_hours: 0.12
+    active_union_hours: 0.12
+    wall_hours: 0.42
     snapshot_incomplete: false
