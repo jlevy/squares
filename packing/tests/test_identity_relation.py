@@ -15,6 +15,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 from typing import Any
 
+from devtools.build_n5_identity_pair import measurement_problem
 from devtools.check_identity_relation import (
     NOT_APPLICABLE,
     RELATIONS,
@@ -213,6 +214,23 @@ def test_the_n5_pair_measures_what_d034_asserted() -> None:
     assert pair["measured"]["side_difference"] < 1e-11
     assert pair["component_count"] is None, (
         "a proved count here would close D-034; it must not appear without one"
+    )
+
+
+def test_identity_pair_replay_ignores_only_subfloor_float_drift() -> None:
+    retained = {
+        "share_contact_certificate": True,
+        "share_geometric_key": False,
+        "side_difference": 8.881784197001252e-16,
+    }
+    rebuilt = {**retained, "side_difference": 2.6645352591003757e-15}
+    assert measurement_problem(retained, rebuilt) is None
+    assert "solver floor" in (
+        measurement_problem(retained, {**rebuilt, "side_difference": 2e-11}) or ""
+    )
+    assert (
+        measurement_problem(retained, {**rebuilt, "share_geometric_key": True})
+        == "share_geometric_key has drifted"
     )
 
 

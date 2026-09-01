@@ -263,8 +263,8 @@ The sixth admission condition was performed by session-050, an agent that built 
 the instrument, at the owner’s direction and with the owner making the accept decision.
 The audit replayed the certificate (byte-identical regeneration; a perturbed copy
 refused with `replay.drift`), ran the thirty helper tests, and raised three findings.
-Each is resolved here rather than glossed, because accepting over an unstated gap is
-the failure mode the condition exists to refuse.
+Each is resolved here rather than glossed, because accepting over an unstated gap is the
+failure mode the condition exists to refuse.
 
 **The mutation vocabulary drifted from this registration, with the derivation on
 record.** Five of the twelve frozen identifiers ran verbatim: `source.minus_w`,
@@ -273,8 +273,8 @@ other seven registered names — the `jet.*` family, `certificate.weighted_curva
 `control.sheet_witness`, `certificate.scale_exhaustion` — were written before the
 instrument existed, in an anticipated vocabulary the built proof core never carried.
 Session-032 traced `proof_core`’s reachable failure surface and found exactly twelve
-mutation-reachable modes with no slack, which are the twelve that ran:
-the five above plus `source.geometry`, `source.first_order`, `certificate.owner3_sign`,
+mutation-reachable modes with no slack, which are the twelve that ran: the five above
+plus `source.geometry`, `source.first_order`, `certificate.owner3_sign`,
 `certificate.owner4_sign`, `certificate.acceleration_correction`,
 `certificate.acceleration_farkas` (the last two a documented split of one shared
 identifier), and `control.realized_direction`. This is a substitution derived from the
@@ -282,10 +282,10 @@ code’s actual failure surface, not a rename table, and this amendment — not 
 list above — is what the retained artifact’s controls answer to.
 The frozen list is retained unedited as what was registered.
 
-**The driver never routed through the accepted helpers, and the retention clause was
-met in condensed form.** The certificate’s owner-3 cases retain a two-scale
-contradiction (negative `t²` gap plus negative cusp term) rather than the fifteen
-`G_j`-bearing scale records this registration froze.
+**The driver never routed through the accepted helpers, and the retention clause was met
+in condensed form.** The certificate’s owner-3 cases retain a two-scale contradiction
+(negative `t²` gap plus negative cusp term) rather than the fifteen `G_j`-bearing scale
+records this registration froze.
 The gap is closed by corroboration rather than by rewriting the driver:
 [`devtools/check_minus_w_bridge.py`](../../../../devtools/check_minus_w_bridge.py) runs
 the accepted `minus_w_row_jets`/`minus_w_stress`/`minus_w_scale`/`minus_w_owner4`
@@ -295,8 +295,8 @@ exactly zero, every deciding constant `-1/4 < 0`, both cusp coefficients strictl
 negative, and every coefficient equal to its `+W` twin — after first checking that the
 negated production `W` equals this certificate’s retained `canonical_minus_W` and that
 the helper constant matches the retained `obstruction_coefficient`.
-`tests/test_minus_w_bridge.py` holds the bridge in place, including sensitivity
-controls proving the deciding constant is a genuine quadratic in the direction.
+`tests/test_minus_w_bridge.py` holds the bridge in place, including sensitivity controls
+proving the deciding constant is a genuine quadratic in the direction.
 
 **The driver’s docstring still described the exp-043 draft**, claiming no scientific
 result is retained while the retained result was this experiment’s. Corrected, and

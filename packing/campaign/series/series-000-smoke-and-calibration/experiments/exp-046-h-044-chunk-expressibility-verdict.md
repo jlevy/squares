@@ -142,116 +142,117 @@ experiment:
 ---
 # exp-046 — The H-044 Chunk-Expressibility Verdict at n <= 30
 
-H-044 is the coverage prior for the whole stratified-enumeration design: a grammar
-that cannot express the records it is meant to rediscover has no budget claim.
+H-044 is the coverage prior for the whole stratified-enumeration design: a grammar that
+cannot express the records it is meant to rediscover has no budget claim.
 X-003 registered it refutation-first and search-free for exactly this moment — the
 verdict lands before any enumerator is built, from retained geometry alone.
 
 ## What Was Measured
 
-The frozen partition atlas already evaluated every standing record under the
-registered contract (the census runs the deterministic exact-cover solver per record
-at every free-square count; its schema pins `claim_status: calibration-no-verdict`
-by `const`, so the atlas itself can never quietly become evidence).
+The frozen partition atlas already evaluated every standing record under the registered
+contract (the census runs the deterministic exact-cover solver per record at every
+free-square count; its schema pins `claim_status: calibration-no-verdict` by `const`, so
+the atlas itself can never quietly become evidence).
 This round adds the registered slice and nothing else: `devtools/score_h044.py`
-re-derives each record's establishment from the stored options, applies the n <= 30
-cut and the 4/5 threshold per band, types every miss, and emits a record that must
-replay byte-identically from the atlas.
+re-derives each record’s establishment from the stored options, applies the n <= 30 cut
+and the 4/5 threshold per band, types every miss, and emits a record that must replay
+byte-identically from the atlas.
 
 ## The Number and What Sits Behind It
 
-**Criterion missed under both readings of the registered denominator: 23/30 =
-0.7667 over all records at n ≤ 30, and 3/10 = 0.30 over the non-grid records that
-are H-044's own sweep points — identically in both bands.** The registered text
-supports either reading, and the outcome does not depend on it — which is why the
-review resolution below needed no decision between them. The twenty exact-grid records all establish (the
-grid is one rectangle chunk); three non-grid records establish; the seven misses
-are the tilted stratum, every search exhausting within seventeen states — a
-candidate-universe boundary, not a search-budget one, and no `n ≤ 30` record is
-search-capped, so the slice is fully determinate under the frozen cap.
+**Criterion missed under both readings of the registered denominator: 23/30 = 0.7667
+over all records at n ≤ 30, and 3/10 = 0.30 over the non-grid records that are H-044’s
+own sweep points — identically in both bands.** The registered text supports either
+reading, and the outcome does not depend on it — which is why the review resolution
+below needed no decision between them.
+The twenty exact-grid records all establish (the grid is one rectangle chunk); three
+non-grid records establish; the seven misses are the tilted stratum, every search
+exhausting within seventeen states — a candidate-universe boundary, not a search-budget
+one, and no `n ≤ 30` record is search-capped, so the slice is fully determinate under
+the frozen cap.
 
-The decisive mechanism is sharper than "tilted squares share no angle." Trump's
-`n = 11` five-square group is flush — every internal contact residual is exactly
-zero in the normal direction — and shares one fitted angle, but it is
-*tangentially slid*: its members sit at no integer lattice offsets, and the
-grammar's adjacency is the lattice step. So the group enters the universe as five
-singletons, and `n = 11` dies with three candidates; `n = 17` misses by the same
-mechanism. H-044's own worked decomposition of `n = 11` — corner square, mirrored
-square, offset square, an L of three, a five-square group — leaves **three**
-squares ungrouped, against its own registered budget of two: the hypothesis's
-headline instance is excluded by its own criterion as written. At `n = 18`, `19`,
-`28`, `29` the universe is real (sixteen to thirty-six candidates — shared-angle
-diagonal strips do form chunks) and the failure is coverage: no admissible chunk
-set covers the full square set within two free squares.
+The decisive mechanism is sharper than “tilted squares share no angle.”
+Trump’s `n = 11` five-square group is flush — every internal contact residual is exactly
+zero in the normal direction — and shares one fitted angle, but it is *tangentially
+slid*: its members sit at no integer lattice offsets, and the grammar’s adjacency is the
+lattice step.
+So the group enters the universe as five singletons, and `n = 11` dies with
+three candidates; `n = 17` misses by the same mechanism.
+H-044’s own worked decomposition of `n = 11` — corner square, mirrored square, offset
+square, an L of three, a five-square group — leaves **three** squares ungrouped, against
+its own registered budget of two: the hypothesis’s headline instance is excluded by its
+own criterion as written.
+At `n = 18`, `19`, `28`, `29` the universe is real (sixteen to thirty-six candidates —
+shared-angle diagonal strips do form chunks) and the failure is coverage: no admissible
+chunk set covers the full square set within two free squares.
 
 Two frozen-contract decisions are what a review would weigh, and both were made at
 registration rather than tonight:
 
-- **Singleton chunks are inadmissible** (candidate generation requires size >= 2).
-  This alone decides `n = 5`: its four corner squares share the frame angle but
-  touch nothing, so they can never group, and four ungrouped squares exceed the
-  two-free budget regardless of the tilted center square. Admitting singletons
-  provably flips `n = 5` (five singleton chunks, zero free) and lands the broad
-  reading on 24/30 = 0.80 exactly, while moving the sweep reading only to 4/10 —
-  which is one reason the round was initially held for review rather than closed.
-- **Sliding contact assemblies and angle-class splits are outside the universe**,
-  so every miss is typed as a limit of the grammar, never as a refutation of the
-  record's expressibility in some richer grammar. A contact-relaxed grammar
-  upper-bounds the broad reading at 26/30 = 0.8667 — an upper bound only, with
-  shape and off-frame budgets unchecked there.
+- **Singleton chunks are inadmissible** (candidate generation requires size >= 2). This
+  alone decides `n = 5`: its four corner squares share the frame angle but touch
+  nothing, so they can never group, and four ungrouped squares exceed the two-free
+  budget regardless of the tilted center square.
+  Admitting singletons provably flips `n = 5` (five singleton chunks, zero free) and
+  lands the broad reading on 24/30 = 0.80 exactly, while moving the sweep reading only
+  to 4/10 — which is one reason the round was initially held for review rather than
+  closed.
+- **Sliding contact assemblies and angle-class splits are outside the universe**, so
+  every miss is typed as a limit of the grammar, never as a refutation of the record’s
+  expressibility in some richer grammar.
+  A contact-relaxed grammar upper-bounds the broad reading at 26/30 = 0.8667 — an upper
+  bound only, with shape and off-frame budgets unchecked there.
 
-Whether the other misses move under singleton admission or contact relaxation is
-not decidable from the stored options — either relaxation changes the exact-cover
-instance — so the honest answer is one preregistered re-run of the census with the
-relaxed universe, and that follow-on is deliberately left outside this round.
+Whether the other misses move under singleton admission or contact relaxation is not
+decidable from the stored options — either relaxation changes the exact-cover instance —
+so the honest answer is one preregistered re-run of the census with the relaxed
+universe, and that follow-on is deliberately left outside this round.
 
 ## What This Buys the Program
 
-Whatever the review decides about the threshold, the structural conclusion X-010's
-Lane B needs is now evidence-based rather than assumed: **the bar/L/rectangle
-grammar as frozen expresses the grid stratum completely and the tilted stratum not
-at all.** A stage-1 pipeline over this grammar is a restricted-class instrument —
-exactly the honesty boundary block 2's repricing (BC-095) priced, now confirmed
-from the geometry side before any enumerator spent anything. The typed remainder
-(what grammar extension would express the tilted stratum: sliding assemblies,
-per-square angle classes, or nothing short of free-form) is the follow-on question
-the registration deliberately left outside this round's scope.
+Whatever the review decides about the threshold, the structural conclusion X-010’s Lane
+B needs is now evidence-based rather than assumed: **the bar/L/rectangle grammar as
+frozen expresses the grid stratum completely and the tilted stratum not at all.** A
+stage-1 pipeline over this grammar is a restricted-class instrument — exactly the
+honesty boundary block 2’s repricing (BC-095) priced, now confirmed from the geometry
+side before any enumerator spent anything.
+The typed remainder (what grammar extension would express the tilted stratum: sliding
+assemblies, per-square angle classes, or nothing short of free-form) is the follow-on
+question the registration deliberately left outside this round’s scope.
 
-This round is exploratory by H-044's own review amendment (2026-08-26): the
-n = 1..100 corpus was inspected during detector-contract repair and is
-calibration-only, so no round on it can confirm H-044 — the registered
-confirmatory path is a successor on an unseen corpus frozen after the instrument.
-What this round contributes is that instrument, ready and replayed, and the
-calibration number the successor is judged against.
+This round is exploratory by H-044’s own review amendment (2026-08-26): the n = 1..100
+corpus was inspected during detector-contract repair and is calibration-only, so no
+round on it can confirm H-044 — the registered confirmatory path is a successor on an
+unseen corpus frozen after the instrument.
+What this round contributes is that instrument, ready and replayed, and the calibration
+number the successor is judged against.
 
-Per the run's unattended rules the verdict was recorded `unresolved` with
-`needs_review` on the night of the round; the resolution below completes it.
+Per the run’s unattended rules the verdict was recorded `unresolved` with `needs_review`
+on the night of the round; the resolution below completes it.
 
 ## Review Resolution (2026-08-31)
 
 Resolved in [session-060](../../../agent-sessions/session-060-verification-review.md)
-under `BC-106`, applying the repository's own rubric rather than deferring:
+under `BC-106`, applying the repository’s own rubric rather than deferring:
 
-- **The measurement stands as verified computation.** Every establishment is
-  re-derived from the stored options, every miss is a typed no-partition result
-  under the frozen contract with no search cap reached, and the score replays
-  byte-identically from the atlas (`--check`). Nothing in the number is a
-  judgement call.
-- **The near-threshold hold clause does not bind.** The registered criterion
-  held the round for review "whenever the fraction lands near the threshold";
-  the miss is robust to the one preregistration ambiguity (23/30 and 3/10 under
-  the two denominator readings, identically in both bands), so there is no
-  marginal reading left to adjudicate.
-- **The round cannot dispose H-044, by registration.** The 2026-08-26 amendment
-  types this corpus calibration-only and the hypothesis undisposed; and the
-  ledger derives a hypothesis-level refutation from any `rejected` round
-  regardless of tier, so recording `rejected` here would report a disposition
-  the registered contract forbids. The decision therefore stands `unresolved`
-  with the review hold cleared, and `reopen_when` names the confirmatory
-  successor and the two priced relaxations.
+- **The measurement stands as verified computation.** Every establishment is re-derived
+  from the stored options, every miss is a typed no-partition result under the frozen
+  contract with no search cap reached, and the score replays byte-identically from the
+  atlas (`--check`). Nothing in the number is a judgement call.
+- **The near-threshold hold clause does not bind.** The registered criterion held the
+  round for review “whenever the fraction lands near the threshold”; the miss is robust
+  to the one preregistration ambiguity (23/30 and 3/10 under the two denominator
+  readings, identically in both bands), so there is no marginal reading left to
+  adjudicate.
+- **The round cannot dispose H-044, by registration.** The 2026-08-26 amendment types
+  this corpus calibration-only and the hypothesis undisposed; and the ledger derives a
+  hypothesis-level refutation from any `rejected` round regardless of tier, so recording
+  `rejected` here would report a disposition the registered contract forbids.
+  The decision therefore stands `unresolved` with the review hold cleared, and
+  `reopen_when` names the confirmatory successor and the two priced relaxations.
 
-No `verified_*` field is implicated: the round's claim is about grammar
-expressibility of serialized geometry under tolerances, never a frontier bound.
+No `verified_*` field is implicated: the round’s claim is about grammar expressibility
+of serialized geometry under tolerances, never a frontier bound.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

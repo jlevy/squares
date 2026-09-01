@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 408
+count: 417
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -12053,3 +12053,289 @@ defects:
     detector -- the defense is partner choice, recorded here and in controls.yaml.
   bead: think-1o1f
   recorded_in: packing/devtools/controls.yaml
+
+- id: D-409
+  title: The pruned-link copy covered the archive but not the pruned renderings
+  date: '2026-08-31'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: >-
+    four days: atlas/known-best/rendering joined the worker-snapshot prune on
+    2026-08-27, the synopsis handoff linked n-100.svg into it, and main's full
+    surface surfaced the dead link on 2026-08-31 after D-407's fix cleared the
+    resources/ and .agents cases in front of it
+  severity: medium
+  status: fixed
+  what: >-
+    The D-407 fix taught the negative-control worker snapshot to copy in the
+    archive files the checked documents actually link to -- but its scan was
+    written against resources/ alone, while the prune list also drops four
+    generator-owned rendering and witness directories. SYNOPSIS.md's handoff
+    links packing/atlas/known-best/rendering/n-100.svg, so inside every private
+    worker the link checker saw a dead link, and the synopsis round-aggregate
+    control failed with the wrong message. The merge that carried D-407/D-408
+    promised main's full surface green and left it red on this remaining case.
+  consequence: >-
+    Conservative: the suite stayed red and nothing passed falsely. The cost is
+    a broken promise about main going green and one more masked layer -- the
+    control's registered refusal went unverified while the dead link stood in
+    front of it, exactly the D-407 failure shape one directory over.
+  fix: >-
+    linked_pruned_targets generalizes the scan to every content prune: any
+    inline link from the campaign record or the root documents that resolves to
+    an existing file under a pruned directory is copied into the snapshot, so
+    the prunes and the link checker stay honest at once. epistemics.md joined
+    ROOT_DOCUMENTS in the same change, closing the identical gap for the new
+    root document before it shipped.
+  regression: >-
+    The full control suite replays the scan on every gate run; a link into a
+    newly pruned directory now rides the same copy path as the archive, and a
+    link to a file that truly does not exist is still left dead for the real
+    checker to refuse.
+  bead: think-n8vl
+  recorded_in: packing/devtools/run_negative_controls.py
+
+- id: D-410
+  title: A control's anchor was bumped without its expected message
+  date: '2026-08-31'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: >-
+    since round 46 landed: the anchor "There are 46 terminal rounds" was kept
+    current so check_control_anchors stayed green, while the expect string
+    still demanded the 45-round message; masked behind D-407 and D-409 until
+    the dead links cleared
+  severity: low
+  status: fixed
+  what: >-
+    The synopsis round-aggregate control mutates the terminal-round count and
+    expects the checker's complaint verbatim -- but the complaint embeds the
+    ledger's live total, and only the mutation anchor was updated when the
+    total moved from 45 to 46. check_control_anchors verifies that replace[0]
+    still appears exactly once; nothing verifies that expect still matches
+    what the checker would say, so the control failed with the right refusal
+    and the wrong pinned number.
+  consequence: >-
+    Conservative: red suite, nothing passed falsely. The cost is the recurring
+    shape -- an expectation pinned to live campaign state defuses silently
+    when that state moves, D-408's lesson restated for expect strings.
+  fix: >-
+    The expect string now pins the 46-round message alongside the bumped
+    anchor.
+  regression: >-
+    None dedicated: expect strings pinned to live totals still have no
+    freshness detector. The defense remains running the full control suite at
+    merge checkpoints, which is what caught this.
+  bead: think-n8vl
+  recorded_in: packing/devtools/controls.yaml
+
+- id: D-411
+  title: The results checker and its epistemic policy disagreed at the boundary rungs
+  date: '2026-08-31'
+  layer: tooling
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: since the results register and checker landed on 2026-08-31
+  severity: high
+  status: fixed
+  what: >-
+    The checker claimed to derive the policy in epistemics.md, but its tests covered
+    only the middle of each ladder. C5 was documented and admitted by the schema but
+    impossible to derive; any existing mapped document could serve as its review;
+    `proof-audited` evidence did not earn V3; `independently-external` evidence did not
+    earn C1; and a V0 or V2 declaration with notes could conceal stronger cited
+    evidence. The same boundary gap let artifacts, controls, and review artifacts name
+    absolute paths, paths outside the repository, or directories rather than retained
+    repository files.
+  consequence: >-
+    The live register happened not to exploit the gaps, but the executable contract was
+    neither complete nor exact: it could refuse earned rungs, admit an unreviewed C5,
+    accept a non-artifact as evidence, or let a weak declaration hide stronger cited
+    evidence. That makes a green register check weaker than the reader-facing policy it
+    claimed to enforce.
+  fix: >-
+    The derivation now covers C0 through C5, shares the assurance module's proof and
+    external-origin vocabularies, distinguishes an unavailable proof from stronger
+    cited evidence, requires normalized repository-relative files, and grants C5 only
+    to a retained document-map entry whose role is review. epistemics.md now states
+    exactly which predicates are structural and which judgments remain human.
+  regression: >-
+    tests/test_results_register.py pins every confirmation rung, both declared-only
+    verification cases, proof-audited V3, independent external review, path boundaries,
+    C5 review-map requirements, inflation, and unexplained understatement.
+  bead: think-n8vl
+  recorded_in: packing/devtools/check_results.py
+
+- id: D-412
+  title: Change-scoped validation could skip the open-ended results register dependencies
+  date: '2026-08-31'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: since change-scoped validation gained a results-register step
+  severity: high
+  status: fixed
+  what: >-
+    The results-register step declared only its checker, schema, and fixed record files
+    as change triggers. Each result can also name arbitrary repository files in
+    artifacts, controls, and review_artifact, so deleting or changing one of those
+    dependencies did not select the step under `packing-validate --push --since ...`.
+  consequence: >-
+    The pre-push gate could report green without checking that a changed or deleted
+    result dependency still supported the register. Full CI would usually catch the
+    drift later, but the local gate's claim about checks reachable from a change was
+    false.
+  fix: >-
+    The results-register step is deliberately unscoped and therefore always selected.
+    Its records are an open dependency graph; treating the small validation cost as
+    fixed is safer than maintaining a second parser in the selector.
+  regression: >-
+    tests/test_change_scoped_selection.py checks that representative files from every
+    open-ended dependency family select the results-register step.
+  bead: think-n8vl
+  recorded_in: packing/src/sqpack/cli/validate.py
+
+- id: D-413
+  title: Results controls ran in snapshots missing their structured evidence files
+  date: '2026-08-31'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: since the results-rung negative control joined the pruned worker suite
+  severity: medium
+  status: fixed
+  what: >-
+    D-409 copied files reached through Markdown links, but the results register names
+    additional files structurally through artifacts, controls, and review_artifact.
+    When one lived under a pruned directory, the private worker omitted it and the
+    unmutated results checker failed before the registered mutation was evaluated.
+  consequence: >-
+    The control suite stayed red, but for missing baseline evidence rather than the
+    intended rung inflation. A real regression in the refusal could hide behind that
+    earlier failure.
+  fix: >-
+    Worker snapshots now parse results.yaml and retain every existing structured target
+    beneath a pruned tree, using the same bounded snapshot accounting as linked files.
+  regression: >-
+    tests/test_negative_controls.py checks representative archived paper and rendering
+    targets and requires the unmutated results checker to pass inside a cloned worker.
+  bead: think-n8vl
+  recorded_in: packing/devtools/run_negative_controls.py
+
+- id: D-414
+  title: CI installed an unpinned uv release
+  date: '2026-08-31'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: since the current GitHub Actions workflow was introduced
+  severity: medium
+  status: fixed
+  what: >-
+    Both validation jobs used astral-sh/setup-uv without a version. The project lockfile
+    pins its Python dependency graph, but the runner responsible for reading that graph
+    could change independently on any CI run.
+  consequence: >-
+    Identical commits could see different installer behavior, and a compromised or
+    incompatible new release would enter the validation path without a reviewed
+    repository change.
+  fix: >-
+    Linux and macOS jobs now request setup-uv version 0.12.8 explicitly.
+  regression: >-
+    The workflow diff carries the pin on both jobs; supply-chain review and the tbd
+    guideline prohibit floating zero-install runners.
+  bead: think-n8vl
+  recorded_in: .github/workflows/packing-validation.yml
+
+- id: D-415
+  title: Flowmark reflow defused the README defect-aggregate control anchor
+  date: '2026-08-31'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: one documentation pass
+  severity: low
+  status: fixed
+  what: >-
+    The README control anchored a semantic sentence with a hard-coded newline. Flowmark
+    correctly joined the sentence during the documentation cleanup, so the anchor
+    appeared zero times even though the policy text remained present.
+  consequence: >-
+    The anchor checker stopped the records gate before the mutation ran. Nothing passed
+    falsely, but a formatting-only change disabled a semantic control.
+  fix: >-
+    The control now anchors the formatter's canonical one-line sentence and still adds
+    the forbidden numeric aggregate for check_readme to reject.
+  regression: >-
+    check_control_anchors requires the updated anchor to resolve exactly once, and the
+    full control run requires the mutated numeric aggregate to be refused.
+  bead: think-n8vl
+  recorded_in: packing/devtools/controls.yaml
+
+- id: D-416
+  title: The results scope contract admitted a broader claim and reversed ranges
+  date: '2026-08-31'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: since T-007 entered the results register
+  severity: high
+  status: fixed
+  what: >-
+    T-007's claim stated Nagamochi's lower bound for every N at least 4, while both the
+    result and its cited evidence declared scope only through N = 100. The schema and
+    checker also accepted a range whose n_min exceeded n_max, which the generated view
+    would render literally as 100-4.
+  consequence: >-
+    The displayed V3/C1 classifications appeared to cover an unbounded theorem outside
+    the registered evidence scope, and malformed ranges could pass every structural
+    check. The underlying source theorem was not in doubt, but the whole-result contract
+    did not describe exactly what the repository had classified.
+  fix: >-
+    T-007 now states the bounded corollary for 4 <= N <= 100, matching both scope
+    records. The checker rejects a range whose lower endpoint exceeds its upper
+    endpoint.
+  regression: >-
+    tests/test_results_register.py poisons T-007 with n_min 100 and n_max 4 and requires
+    the checker to refuse the reversed range.
+  bead: think-n8vl
+  recorded_in: packing/frontier/results.yaml
+
+- id: D-417
+  title: The n=5 identity-pair replay compared meaningless floating-point last bits
+  date: '2026-08-31'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: since the BC-083 identity-pair artifact was retained
+  severity: medium
+  status: fixed
+  what: >-
+    build_n5_identity_pair stated that quench last bits were not part of the retained
+    claim, but its check compared the derived side_difference float for exact equality.
+    The full checkpoint rebuilt the same two keys and qualitative invariants while the
+    difference moved from 8.88e-16 to 2.66e-15, both far below D-021's 1e-11 solver
+    floor, and failed the gate as drift.
+  consequence: >-
+    A scientifically identical replay made the full integration surface red. No identity
+    or component claim changed, but the false refusal could block a merge or teach
+    maintainers to ignore a meaningful future drift in this control.
+  fix: >-
+    The replay now compares the two boolean invariants exactly and requires both retained
+    and rebuilt side differences to remain finite and below the declared solver floor.
+    It no longer treats sub-floor last-bit variation as a recorded quantity.
+  regression: >-
+    tests/test_identity_relation.py accepts two distinct sub-floor values, rejects a
+    rebuilt difference above 1e-11, and still rejects a changed geometric-key invariant.
+  bead: think-n8vl
+  recorded_in: packing/devtools/build_n5_identity_pair.py

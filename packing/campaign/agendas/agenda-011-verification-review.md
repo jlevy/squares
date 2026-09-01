@@ -79,12 +79,75 @@ agenda:
     - cases/green17/interval_audit.py
     - campaign/agent-sessions/session-060-verification-review.md
     - frontier/evidence.yaml
+  - id: BC-107
+    purpose: measurement_validation
+    owner_focus: correctness
+    instances: [17, 18, 46]
+    state: complete
+    priority: 0
+    question: >-
+      Can the epistemic vocabulary the verification review applied by hand
+      become a codified, machine-enforced rubric -- so a result's verification
+      and confirmation levels are granted by the gate rather than by anyone's
+      judgment, and the repository presents its results in one prioritized,
+      structured surface?
+    hypotheses: []
+    budget: >-
+      about 240 minutes, W7, in slices of 45
+    entry: >-
+      The 2026-08-31 verification review surfaced four rubric gaps and showed
+      the cost of scattered epistemics: the atoms live across five evidence
+      fields, conventions.md section 4 carries semantics outside its
+      formats-and-naming scope, results have no first-class record (the
+      identity table reserves T-N with no registry behind it), and a visitor
+      cannot tell from the README whether the project carries novel results.
+      The owner approved the design: a root epistemics.md owning four axes --
+      verification V0-V5 (of the claim, anywhere), confirmation C0-C5 (ours,
+      end-to-end, each rung a conjunction of machine-checkable predicates),
+      significance S1-S5 (declared, anchored, never gating), novelty (the
+      existing enum) -- with a T-NNN results register, a derivation checker
+      that fails on declared rungs the atoms do not support, a generated
+      RESULTS view, and README/SYNOPSIS orientation.
+    exit: >-
+      epistemics.md landed as the vocabulary's single owner; the register,
+      schema, checker (with a firing negative control), and generated RESULTS
+      view in the gate; conventions.md section 4 reduced to field formats with
+      the T-NNN identity row pointing at the register; the README orientation
+      section distinguishing survey content from first-party results by level,
+      SYNOPSIS matching; packing-validate --push green; the work on a new PR
+      from the restarted branch.
+    bead: think-n8vl
+    depends_on: [BC-106]
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      Discharged by session-061. epistemics.md at the repository root owns the
+      four axes; frontier/results.yaml declares T-001 through T-013 and
+      devtools/check_results.py re-derives every declared V and C from the
+      cited atoms in the records tier, refusing inflation and unexplained
+      understatement, with a firing negative control and the generated
+      RESULTS.md view; conventions.md section 4 points result-level semantics
+      at epistemics.md and the identity row points T-NNN at the register; the
+      README's What Has Been Established separates first-established-here
+      from audited-from-the-literature by T-id; SYNOPSIS defers its results
+      section to the register and its night handoff names the session;
+      softschema is at 0.8.0 across the toolchain. Deferred rather than
+      force-fitted: the Trump local-isolation entry (derives C3, no
+      adversarial control test to name) and the translation-escape survey
+      observation, both typed on think-n8vl.
+    artifacts:
+    - frontier/results.yaml
+    - frontier/results.schema.yaml
+    - frontier/RESULTS.md
+    - devtools/check_results.py
+    - devtools/render_results.py
+    - tests/test_results_register.py
+    - campaign/agent-sessions/session-061-epistemics-codification.md
 ---
 # Agenda-011 — The Verification Review
 
-One cell: the owner moved the review from their queue to the repository's own
-rubric, so the six held results get determinations here, with the independent
-interval certifier built where first-party independence was missing.
+One cell: the owner moved the review from their queue to the repository’s own rubric, so
+the six held results get determinations here, with the independent interval certifier
+built where first-party independence was missing.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

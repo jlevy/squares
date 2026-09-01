@@ -158,6 +158,18 @@ def test_a_markdown_only_change_skips_the_python_floors() -> None:
     assert "AGENTS.md mirrors the operating rules" in names
 
 
+def test_results_register_runs_for_its_open_ended_path_dependencies() -> None:
+    for path in (
+        "packing/cases/stromquist/repaired_cover.py",
+        "packing/tests/test_falsify.py",
+        "packing/witnesses/known-best/n-011.yaml",
+        "packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md",
+        "docs/project/document-map.yaml",
+    ):
+        names = {step.name for step in select_for_paths([path]).steps}
+        assert "results rungs are earned and the view agrees" in names
+
+
 def test_the_five_under_selections_an_adversarial_review_found() -> None:
     """Each of these was a real hole: a file that changes a step's verdict, unclaimed.
 
