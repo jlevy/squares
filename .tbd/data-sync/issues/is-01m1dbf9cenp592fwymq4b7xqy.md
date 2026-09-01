@@ -5,7 +5,7 @@ title: "BC-112: determine adoption of the fixed 4.5058 certificate"
 kind: task
 status: open
 priority: 1
-version: 6
+version: 7
 spec_path: packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md
 labels:
   - packing
@@ -14,7 +14,9 @@ dependencies:
   - type: blocks
     target: is-01m1dqc43wtym6hsxmbnqca2k8
 parent_id: is-01m1dbej7kqs8r1hwfmx5w3v3n
+hold: blocked
+hold_until: null
 created_at: 2026-09-01T02:06:20.043Z
-updated_at: 2026-09-01T05:35:23.243Z
+updated_at: 2026-09-01T05:47:06.268Z
 ---
 Blocked on BC-108 agreement and BC-111 promotion. Make three separate determinations: fixed-certificate checker agreement or discrepancy, repository assurance and adoption status, and exact monotone consequences at n=17,18,19. Agreement between implementations is not two independent proof methods; non-adoption is not mathematical refutation. Generic certificate tooling and the LP generator repair belong to BC-115.
