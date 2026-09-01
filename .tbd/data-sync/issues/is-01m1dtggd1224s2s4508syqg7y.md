@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m1dtggd1224s2s4508syqg7y
-title: "BC-117: localize an n=68 parent-precision or provenance refusal"
+title: "BC-117: localize the n=68 proof-instrument refusal"
 kind: task
 status: open
 priority: 1
-version: 3
+version: 4
 spec_path: packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md
 labels:
   - packing
@@ -16,9 +16,9 @@ parent_id: is-01m1dtfx94hb8ndgdxmmxp3z4m
 hold: null
 hold_until: null
 created_at: 2026-09-01T06:29:08.640Z
-updated_at: 2026-09-01T11:54:39.491Z
+updated_at: 2026-09-01T11:59:04.178Z
 ---
-Negative-path continuation for agenda-012 BC-109. Start only when BC-111 cannot route the n=68 lane to H-051 from a compatible and valid parent arm. Preserve source-retention rules, reduce the refusal to a deterministic fixture, test the SVG transform and serialization semantics against a synthetic known answer, and retain the smallest repair seam or terminal source limitation. Do not run surgery or dispose H-051.
+Selected by BC-111 because BC-109 stopped before target retrieval on interval-enclosure and executable-runner readiness defects. On one target-blind synthetic rotated square, build a proof-shaped rational half-angle existence/enclosure/sign certificate, independent verifier, and complete injected runner before any one-parent target access. Do not inspect child data or dispose H-051.
 
 ## Notes
 

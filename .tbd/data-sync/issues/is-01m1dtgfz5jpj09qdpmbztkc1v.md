@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m1dtgfz5jpj09qdpmbztkc1v
-title: "BC-116: adjudicate an n=17 certificate discrepancy or guard stop"
+title: "BC-116: add resumable n=17 certificate replay"
 kind: task
 status: open
 priority: 1
-version: 3
+version: 4
 spec_path: packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md
 labels:
   - packing
@@ -16,9 +16,9 @@ parent_id: is-01m1dtfx94hb8ndgdxmmxp3z4m
 hold: null
 hold_until: null
 created_at: 2026-09-01T06:29:08.196Z
-updated_at: 2026-09-01T11:54:39.481Z
+updated_at: 2026-09-01T11:59:03.930Z
 ---
-Negative-path continuation for agenda-012 BC-108. Start only when BC-111 routes the n=17 lane away from adoption. Freeze the smallest discrepancy or premeasurement guard, reproduce it independently, localize the first divergent event cell, fire a source-faithful control and a mutation, then retain a typed source, implementation, contract, or unresolved verdict. Never adopt or transfer the bound in this block.
+Selected by BC-111 from exp-049's executed 3,920-second midmeasurement no_progress timebox. Build an external direction-sliced checkpoint/resume driver around unchanged frozen kernels; prove uninterrupted/resumed byte equivalence and corruption rejection; obtain independent W2 readmission; then run one newly registered target process. A partial prefix is process evidence, not an H-052 verdict.
 
 ## Notes
 

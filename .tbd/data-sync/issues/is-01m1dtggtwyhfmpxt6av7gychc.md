@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m1dtggtwyhfmpxt6av7gychc
-title: "BC-118: localize the n=50 exact-control refusal seam"
+title: "BC-118: test n=50 source-serialization semantics"
 kind: task
 status: open
 priority: 1
-version: 3
+version: 4
 spec_path: packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md
 labels:
   - packing
@@ -16,9 +16,9 @@ parent_id: is-01m1dtfx94hb8ndgdxmmxp3z4m
 hold: null
 hold_until: null
 created_at: 2026-09-01T06:29:09.083Z
-updated_at: 2026-09-01T11:54:39.497Z
+updated_at: 2026-09-01T11:59:04.412Z
 ---
-Negative-path continuation for agenda-012 BC-110. Start only when BC-111 cannot route the scale lane to BC-114. Follow the typed refusal dispatch for source absence, representation mismatch, verifier defect, or priced exhaustion; retain the smallest deterministic fixture and mechanism-matched control. A repair may establish a candidate for later adoption but may not silently move the frontier in this block.
+Selected by BC-111 under exactly E1 source/provenance absence. Ask whether first-party materials bind every center and rotation token to explicit units, frame, exact/rounded/truncated/interval semantics, and a stable byte hash. Use the exact n=19 control and duplicate-square mutation. Without attributable semantics, retain E1; do not reconstruct n=50 or switch to n=39/54.
 
 ## Notes
 
