@@ -5,14 +5,14 @@ title: "Codify the epistemics: epistemics.md, V/C/S/N ladders, T-results registe
 kind: task
 status: closed
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-08-31T22:28:03.431Z
-updated_at: 2026-09-01T02:00:36.493Z
+updated_at: 2026-09-01T02:00:40.319Z
 started_at: 2026-08-31T22:58:47.788Z
 closed_at: 2026-09-01T02:00:36.481Z
 close_reason: null
@@ -23,4 +23,4 @@ Owner-approved build (2026-08-31, follows the verification review's rubric gaps)
 
 ## Notes
 
-Delivered by session-061 (BC-107): epistemics.md; results.yaml T-001..T-013 with ResultsRegister/v1 schema; devtools/check_results.py deriving V/C from cited atoms in the records tier (inflation and unexplained understatement both refused; C3+ requires named adversarial controls); firing negative control; 5 pytest cases; generated frontier/RESULTS.md; conventions.md section-4 pointer + T-NNN identity row; README orientation split (first-established-here vs audited-from-the-literature by T-id); SYNOPSIS deferral + night handoff; document map entries; softschema 0.6.2->0.8.0. Deferred rather than force-fitted: (a) Trump local-isolation (E-n011-trump-local-rigidity) derives C3 but has no adversarial control test to name — build a mutation control for cases/trump11 tangent-cone enumeration, then register; (b) E-translation-escape-not-rigid is a numerically-checked survey observation across 89 cases with no single claim shape — owner decides whether it enters the register. PR open for the owner's whole-PR review; bead closes at merge.
+Final review 2026-08-31: README is now the detailed reader front door (survey, results, inventory, terminology and ids, linked toolchain/technical stack, reports, autonomous research layers, conventions, layout) while definitive contracts remain in their owning documents. epistemics.md is a concise present-state V/C/S/N contract. Results validation now reaches C5, checks exact V/C predicates and repository-file boundaries, refuses hidden stronger evidence and reversed scopes, runs for open-ended dependencies, and has worker-snapshot coverage. The review also reconciled the synopsis/document map, current n=29 status, conventions, T-007 scope, generated views, CI uv pin, and D-411 through D-417. Pre-push passed with 1100 tests; the full gate passed every surface except sub-floor n=5 float equality, which D-417 fixes and whose formerly failing step plus regression now pass. PR #67 remains open; keep this bead in progress until merge.
