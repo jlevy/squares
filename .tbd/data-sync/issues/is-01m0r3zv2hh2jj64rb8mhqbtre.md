@@ -5,7 +5,7 @@ title: Measure terminal flatness and connectivity before defining basin identity
 kind: bug
 status: in_progress
 priority: 0
-version: 42
+version: 43
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - focus-correctness
@@ -30,10 +30,10 @@ child_order_hints:
   - is-01m0vyhtzd0j8gnfwm5k040ff1
   - is-01m0y16d21crjnn9tqa0120way
 created_at: 2026-08-23T20:11:30.757Z
-updated_at: 2026-09-01T05:54:22.922Z
+updated_at: 2026-09-01T06:04:06.683Z
 ---
 D-034, blocking the census. Exact evidence: the n=3 side-2 sliding family is a connected positive-dimensional terminal set that one contact certificate and many geometric keys split into quantum-dependent rows. The n=5 golden adds an unresolved pair: equal side, short form, contact certificate, angle signature and contact count but different geometry. Those facts do not prove the n=5 rows are connected or establish a five-dimensional family; raw constraint counting is not a rank certificate. Acceptance: archive both n=5 poses and their active cells; compute the fixed-cell optimal-face rank/nullity from the active LP matrix and objective; compute the full pose/angle active-constraint Jacobian; continue every null direction with independent validity checks; test whether the two endpoints are path-connected across cell/contact strata; report certified dimension or unresolved bounds; and feed the evidence to think-0yo9 rather than choosing identity from side/contact hashes.
 
 ## Notes
 
-Legacy H-023 research owner, not the agenda-001 queue gate. Dedicated BC-010 bead think-iivb owns the final preregistered n=5/n=10 transfer discriminator. Do not close, pause, or otherwise mutate this bead merely to clear BC-010 or any downstream agenda edge; change it only when its own broader acceptance is genuinely satisfied.
+Legacy H-023 research owner, not the agenda-001 queue gate. Dedicated BC-010 bead think-iivb owns the final preregistered n=5/n=10 transfer discriminator. A passing BC-010 branch does not mutate this bead merely to clear an agenda edge. If BC-010 records transfer=refused or stops before measurement, the coordinator must set this bead to hold paused with the same portfolio-stop reason. Never close or pause it merely to clear a dependency edge.
