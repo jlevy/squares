@@ -108,7 +108,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | BC-007 | tool_validation | 9 | complete | 2 | think-xzew | retained event plus canonicalization share of wall time |
 | BC-008 | tool_validation | 10 | complete | 1 | think-ouf0 | permanent exp-031 semantic replay in the focused and normal gates |
 | BC-009 | measurement_validation | 3, 4 | complete | 0 | think-a2v6 | classifier contract, positive fixtures, and negative mutations |
-| BC-010 | research | 5 | ready | 0 | think-1s0h | test -W, mixed-angle realization, and stationary continuation beyond the twelve exp-039 and six exp-042 paths without inferring whole-polytope terminality from their positive first-order stresses |
+| BC-010 | research | 5 | ready | 0 | think-1s0h | X-011 caps the lane after twelve rounds. Choose one final discriminator from -W, mixed-angle realization, or stationary continuation beyond the twelve exp-039 and six exp-042 paths; freeze its n = 10 transfer before execution; and do not infer whole-polytope terminality from positive first-order stresses. |
 | BC-011 | measurement_validation | 5, 6, 7, 8 | blocked | 1 | think-0yo9 | ambiguity-preserving classified event archive through the first failed or n=8 cell |
 | BC-012 | research | 5, 6, 7, 8 | blocked | 1 | think-ogv7 | discovery curves, held-out predictions, uncertainty, and stop verdict |
 | BC-013 | measurement_validation | 9, 10 | blocked | 2 | think-xzew | component discoveries per wall-second and per pair-test with profile |
@@ -270,11 +270,25 @@ Status: **active**. Nine hours, unattended, done before the owner's morning. The
 
 ### [agenda-011](agendas/agenda-011-verification-review.md) — The verification review: determinations, not deferrals
 
-Status: **active**. The owner's direction after the agenda-010 run closed: stop deferring verification to owner review. Apply the project's own assurance rubric -- conventions.md section 4 (reported / numerically-checked / verified, with method and origin as separate recorded facts) plus the frontier evidence contract -- to each of the run's six held results, and make the verified/not-verified call. Where independence is insufficient for a call, build the independent verification rather than flagging it; where the rubric itself is ambiguous, surface the ambiguity explicitly in the review document rather than deciding it silently. The owner reviews the assembled case on PR #66 afterward; nothing in this agenda waits on that review to land.
+Status: **completed**. The owner's direction after the agenda-010 run closed: stop deferring verification to owner review. Apply the project's own assurance rubric -- conventions.md section 4 (reported / numerically-checked / verified, with method and origin as separate recorded facts) plus the frontier evidence contract -- to each of the run's six held results, and make the verified/not-verified call. Where independence is insufficient for a call, build the independent verification rather than flagging it; where the rubric itself is ambiguous, surface the ambiguity explicitly in the review document rather than deciding it silently. The owner reviews the assembled case on PR #66 afterward; nothing in this agenda waits on that review to land.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-106 | measurement_validation | 13, 17, 18, 46 | complete | 0 | think-ngf0 | Discharged 2026-08-31 by session-060. All six determinations are final: Theorem 8's audit verified (E-bentz46-theorem8-audit); the Lemma 10 settlement verified and source-settled against the published page image (journal transposition; E-bentz13-figure2-audit, defect-found on E-bentz-2010-proof); exp-046 resolved with H-044 undisposed by its registered amendment; the m = 8 statement standing as exact arithmetic; the tau* diagnostic typed uncertified-final. The green17 determination became an upgrade: the independent interval certifier proved 17/4 was the cell plan's ceiling, both methods now certify 4426213/1000000, and verified_lower_bound moved at n = 17 and n = 18 on two independent formal methods; the exact ceiling 753/250 + sqrt 2 is bracketed and typed on think-iye2. The assembled case is docs/project/reviews/review-2026-08-31-overnight-run-verification-determinations.md; the owner reviews the PR as a whole. |
+
+### [agenda-012](agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md) — Weighted proof, precision bridge, and cross-scale controls
+
+Status: **active**. Execute X-011's three disjoint first-wave decisions before buying another broad search: independently check the proposed 4.5058 weighted certificate at n = 17; turn the rounded n = 68/69 renderings into rigorously scoped rigid-pose candidates or a typed refusal; and exactify n = 50 as the rational large-n control. Each research block lasts two to two-and-a-half hours and is divided into 15--30 minute cells with a retained checkpoint. A 45-minute integration cell then promotes only the successor whose prerequisite actually passed. No mathematical claim moves in the first wave, no agent infers contacts from rounded pixels, and no n = 5 work expands beyond the single capped BC-010 commitment.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-107 | measurement_validation | 17, 18, 19 | ready | 0 | think-swtr | Not started. The next agent claims think-swtr, opens the next free AgentSession, and owns only the Massaccesi case package, its tests, and the session record. Shared frontier and strategy records wait for BC-111. |
+| BC-108 | measurement_validation | 68, 69 | ready | 0 | think-26b1 | Not started. The next agent claims think-26b1 and owns the regularizer, its tests, source-derived measurement artifact, and session record. It does not edit H-030 or shared frontier records. |
+| BC-109 | measurement_validation | 50 | ready | 1 | think-uz6f | Not started. The next agent claims think-uz6f, coordinates with think-d0j1, and owns only the n = 50 case package, tests, and session record. Shared BC-089 records are changed only at finalization. |
+| BC-110 | research | 17, 18, 19, 39, 50, 54, 68, 69 | blocked | 1 | think-1dm8 | Blocked on the three first-wave exits. It is the coordinator's shared-record cell, so first-wave agents do not edit its agenda disposition concurrently. |
+| BC-111 | research | 12, 17, 18, 19 | blocked | 1 | think-5q0v | Blocked on independent agreement and the checkpoint. If promoted, it owns shared proof-strategy and frontier records; BC-107 does not. |
+| BC-112 | research | 68 | blocked | 1 | think-gbkd | Blocked on a surgery-grade witness and the checkpoint. n = 69 remains held out until n = 68 establishes a measurable response. |
+| BC-113 | research | 39, 54 | blocked | 2 | think-dao9 | Blocked on the n = 50 result and checkpoint. The coordinator records the branch choice before an agent claims this bead. |
 
 ## Series
 
@@ -430,6 +444,7 @@ Status: **active**. The owner's direction after the agenda-010 run closed: stop 
 - X-007 — The n = 5 optimum flexes in exactly one direction, and that direction curves shut
 - X-008 — The shapes the grammar cannot express are the ones that are not tilted
 - X-010 — Two lanes, two ladders — focusing the campaign on first-party theorems
+- X-011 — Controls are not targets — weighted proofs, construction ladders, and precision-bounded surgery
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -164,7 +164,9 @@ Citation keys match those used in the research document.
 | **[Friedman DS7 html]** | 2009 HTML edition of the DS7 survey | combinatorics.org | `friedman-ds7-survey-2009-html` |
 | **[Kingbird]** | Squares-in-Squares catalogue: exact minimal polynomials, rigidity flags | kingbird.myphotos.cc | `kingbird-squares-in-squares` |
 | **[Kingbird-compared]** | Supersession history: which record fell to which method, when | kingbird.myphotos.cc | `kingbird-squares-in-squares-compared` |
+| **[Kingbird run statistics]** | First-party simulated-annealing basin frequencies and setup-specific search costs for `n = 51, 55` | kingbird.myphotos.cc | `kingbird-run-statistics-2026/` |
 | **[UnitSquare 2026]** | Results Release 1: six reported construction-only improvements and its public structured record | hmbelvedere.com | `unitsquare-release1-2026/` |
+| **[Burns–Massaccesi n17]** | Proposed exact-rational lower-bound certificates at 4.4811 and 4.5058, plus a distinct near-record topology | sam-burns.com; gus-massa.blogspot.com | `n17-lower-bounds-2026/` |
 | **[Montanher et al. 2018]** | Rigorous packing of unit squares into a circle (full text via PMC) | pmc.ncbi.nlm.nih.gov | `montanher-2018-rigorous-packing-unit-squares-circle` |
 | **[Markót 2021]** | Improved interval methods for circle packing in the unit square (full text via PMC) | pmc.ncbi.nlm.nih.gov | `markot-2021-improved-interval-methods-circle-packing` |
 | **[squaring.net BSST]** | The Smith-diagram / Kirchhoff correspondence, in detail | squaring.net | `squaring-net-brooks-smith-stone-tutte-II` |

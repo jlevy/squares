@@ -435,11 +435,11 @@ forces the threshold/segment/moving-resource machinery. Everything mathematical
 from the run was held `unresolved` with `needs_review` overnight per the
 unattended rules; the verification review below resolved every hold the same day.
 
-**As of 2026-08-31, evening — start here.** The owner moved the review from
+**As of 2026-08-31, evening — verification complete.** The owner moved the review from
 their queue to the repository's own rubric — determinations, not deferrals —
 and
 [session-060](packing/campaign/agent-sessions/session-060-verification-review.md)
-is running it as `BC-106` under `think-ngf0` in
+completed it as `BC-106` under `think-ngf0` in
 [agenda-011](packing/campaign/agendas/agenda-011-verification-review.md). The
 determinations, each grounded in [conventions.md §4](conventions.md#4-evidence)
 and the frontier evidence contract: **Theorem 8's audit is verified** and fully
@@ -468,11 +468,27 @@ the PR as a whole. Follow-ons stay on their beads (`think-1o1f`, `think-q6vy`,
 `think-07t7` paused, `think-0z9b`); `BC-097` and `BC-089`'s remainder remain
 the sanctioned gate filler.
 
-**The parallel research slice is `BC-089`’s remainder on `think-d0j1`** in
+**As of 2026-08-31, late evening — next agents start here.**
+[X-011](packing/campaign/explorations/X-011-controls-are-not-targets.md) reconciles the
+new `n = 17` weighted certificates, the `n = 68/69` precision gap, the medium-case
+construction ladder, and the opportunity cost of a thirteenth open-ended `n = 5` round.
+[Agenda-012](packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md)
+turns that synthesis into three disjoint first-wave blocks with real beads and 15--30
+minute check-in cells: `BC-107` independently checks the proposed `4.5058` certificate;
+`BC-108` builds the rounded-SVG-to-rigid-pose bridge at `n = 68/69`; and `BC-109` takes
+the `n = 50` rational exact-promotion control. Run them in parallel, then take `BC-110`'s
+bounded checkpoint. The dependency-linked successors are already filed. Existing
+`BC-010` gets one final 90-minute discriminator with a matched `n = 10` transfer, or it
+parks. Take the exact entry command and owned paths from agenda-012, not from this
+summary.
+
+**The parallel recognition slice remains `BC-089`’s remainder on `think-d0j1`** in
 [agenda-009](packing/campaign/agendas/agenda-009-pipeline-hygiene-and-the-search-reassessment.md):
-the last two witness lifts — `n = 50` rational, `n = 54` quartic — then the
-robust-rational sweep, then the typed refusal at `n = 53`. `BC-049` on `think-xdly` is
-the research cell all of the mathematics below sits under, and it stays open.
+agenda-012 narrows its first slice to `n = 50` under `BC-109`; `n = 54` follows only if
+that result shows nested-radical representation is the next missing seam. The
+robust-rational sweep and typed `n = 53` refusal remain on the parent bead. `BC-049` on
+`think-xdly` is the research cell all of the mathematics below sits under, and it stays
+open.
 
 **`n = 40` is infinitesimally flexible**, exactly, over `Q(sqrt 2)`: seven retained
 directions turn the sixteen squares of its tilted block and leave the frame fixed, and

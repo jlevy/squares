@@ -1011,7 +1011,7 @@ records which are known to have produced records.
 | 14 | SAT / constraint programming | stochastic search | Reduce feasibility at a fixed side to a Boolean or CP instance | Used for 2D orthogonal packing; awkward under free rotation |
 | 15 | Branch and bound over contact classes | stochastic search | Enumerate combinatorial structures, optimise within each | Used in exact cutting-and-packing |
 | 16 | Genetic / evolutionary search | stochastic search | Population methods over configurations | Used in the wider packing literature |
-| 17 | Exact algebraic refinement | exact refinement | Fix the contact graph, solve the polynomial system | How exact values are obtained — see below |
+| 17 | Exact algebraic refinement | exact refinement | Fix the contact graph, solve the polynomial system | Used in the field to derive algebraic records and now exercised in this repository's exact lift and promotion cases. A reported exact side still does not supply an exact pose or a solvable contact system. |
 | 18 | Rigidity-guided enumeration | exact refinement | Enumerate rigid contact graphs, then solve each | Standard in sphere/disk packing; the natural analogue here |
 | 19 | Interval-verified local optima | exact refinement | Certify a local optimum with interval arithmetic | Used for circle packing; not seen applied to `s(11)` |
 | 20 | Catalogue-driven record chasing | workflow | Human-computer loop against a public record table | Yes — how the tables actually advance |
@@ -1075,7 +1075,7 @@ successive papers refining rather than replacing it.
 | 19 | Electrical-network / Kirchhoff methods | dissection tradition | Linear circuit laws on a dissection graph | Not applicable — see below |
 | 20 | Graph encodings of dissections (c-nets) | dissection tradition | Enumerate planar graphs of a tiling | Not applicable — dissection-only |
 | 21 | Transversal / hitting-set theory | transversal and wider | `τ ≥ ν`; bound the piercing number | Applied explicitly by Bašić–Slivková (2018), who study the piercing number of all unit-square poses in a square, connect it to s(n), and derive a specialized n=61 lower bound. Classical unavoidable-point proofs are the integral special case. |
-| 22 | Fractional transversals and LP duality | transversal and wider | Relax piercing to an LP; use the dual fractional packing | No application to `s(n)` was found in the retrieved corpus; this is not an exhaustive negative claim |
+| 22 | Fractional transversals and LP duality | transversal and wider | Relax piercing to an LP; use the dual fractional packing | Applied in the August 2026 Burns and Massaccesi proposed computer-assisted lower bounds for s(17): rational weighted atoms form a fractional hitting certificate, and Massaccesi uses LP to generate the fixed certificate. The exact source verifier replays, but the 4.5058 proposal is not yet independently implemented or adopted by this repository. |
 | 23 | Integrality-gap bounds (Wegner-type) | transversal and wider | Bound `τ/ν` for families of squares | Bounds exist for squares [Caoduro–Sebő]; no connection to `s(n)` was found in the retrieved corpus |
 | 24 | Gallai- and Helly-type theorems | transversal and wider | Structural results forcing small transversals | No application to `s(n)` was found in the retrieved corpus |
 | 25 | Delsarte/Cohn–Elkies LP bounds | transversal and wider | Auxiliary functions certifying density bounds | Powerful for lattice sphere packing; no bounded-container `s(n)` analogue was found in the retrieved corpus |

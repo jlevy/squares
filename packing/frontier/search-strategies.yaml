@@ -125,8 +125,11 @@ strategies:
   name: Exact algebraic refinement
   family: exact_refinement
   mechanism: Fix the contact graph, solve the polynomial system
-  outcome: untried_here
-  note: How exact values are obtained — see below
+  outcome: used_in_field
+  note: >-
+    Used in the field to derive algebraic records and now exercised in this repository's
+    exact lift and promotion cases. A reported exact side still does not supply an exact
+    pose or a solvable contact system.
   refs: []
 - id: 18
   name: Rigidity-guided enumeration

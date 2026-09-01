@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+
+<meta name="robots" content="index, follow">
+
+<title>Proposing a Better Lower Bound for n=17 Square Packing | Sam Burns&#39; Tech Blog</title>
+<meta name="keywords" content="mathematics, geometry, square-packing">
+<meta name="description" content="A proposed improvement to the lower bound for the n=17 square packing problem.">
+<meta name="author" content="Sam Burns">
+<link rel="canonical" href="https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css" integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://sam-burns.com/images/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://sam-burns.com/images/favicon/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://sam-burns.com/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="https://sam-burns.com/images/favicon/favicon-96x96.png">
+<link rel="apple-touch-icon" href="https://sam-burns.com/images/favicon/apple-touch-icon.png">
+<link rel="mask-icon" href="https://sam-burns.com/images/favicon/favicon.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-6LGDCRYG4X"></script>
+      <script>
+        var doNotTrack = false;
+        if ( true ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-6LGDCRYG4X');
+        }
+      </script><meta property="og:url" content="https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/">
+  <meta property="og:site_name" content="Sam Burns&#39; Tech Blog">
+  <meta property="og:title" content="Proposing a Better Lower Bound for n=17 Square Packing">
+  <meta property="og:description" content="A proposed improvement to the lower bound for the n=17 square packing problem.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-08-06T00:30:00+01:00">
+    <meta property="article:modified_time" content="2026-08-17T16:39:01+01:00">
+    <meta property="article:tag" content="Mathematics">
+    <meta property="article:tag" content="Geometry">
+    <meta property="article:tag" content="Square-Packing">
+    <meta property="og:image" content="https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/images/n17-lower-bound.png">
+      <meta property="og:see_also" content="https://sam-burns.com/posts/n17-square-packing-problem-intro/">
+      <meta property="og:see_also" content="https://sam-burns.com/posts/n17-square-packing-near-record-arrangement/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/images/n17-lower-bound.png">
+  <meta name="twitter:title" content="Proposing a Better Lower Bound for n=17 Square Packing">
+  <meta name="twitter:description" content="A proposed improvement to the lower bound for the n=17 square packing problem.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://sam-burns.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Proposing a Better Lower Bound for n=17 Square Packing",
+      "item": "https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Proposing a Better Lower Bound for n=17 Square Packing",
+  "name": "Proposing a Better Lower Bound for n=17 Square Packing",
+  "description": "A proposed improvement to the lower bound for the n=17 square packing problem.",
+  "keywords": [
+    "mathematics", "geometry", "square-packing"
+  ],
+  "articleBody": "Proposing a Better Lower Bound for n=17 Square Packing At the start of this project, the strongest published lower bound I could find for packing 17 unit squares into a square was\n$$ \\frac{40\\sqrt 2+19}{17} $$$$ ≈4.445208382 $$This was originally achieved by Trevor Green, and you can find a description of the lower bound here, from Erich Friedman.\nThis leaves quite a gap between the best known n=17 square packing, and the highest proven lower bound.\nChatGPT 5.6 Sol has been asked to come up with a better lower bound, and proposes a new value of:\n$$ 4.4811 $$Nature of the Proof Rather than assuming that a near-optimal packing resembles any known arrangement, it places a carefully chosen collection of weighted points inside a 4.4811×4.4811 container. It then proves that every possible unit square inside the container must cover at least one unit of weight.\nThe finite part of the argument is checked by an exact rational verifier. The certificate has 268 weighted atoms with total weight 16.9476, while every translated and rotated unit square is shown to contain weight at least 1.0003. 17 disjoint (i.e. non-overlapping) squares would therefore require more weight than is available.\nThis is published as a proposed computer-assisted proof, rather than a settled record: the verifier reproduces the result, but the certificate has not yet been independently implemented, audited or peer reviewed. The proof note is credited to ChatGPT (GPT-5.6 Pro, OpenAI), which developed the certificate during this project. I operated.\nFiles The Markdown contains the full proof, certificate data, reproduction instructions, audit boundary, acknowledgement and byline.\nThe Python file is the exact verifier referenced in the proof.\nHere are the downloadable files:\nn17-lower-bound-4.4811.md verify_n17_lower_bound_4_4811.py I reconstructed and reran the verifier successfully. Its exact minimum was \\( 10003/10000=1.0003 \\), and it concluded \\( s(17)≥4.4811 \\).\n",
+  "wordCount" : "300",
+  "inLanguage": "en",
+  "image":"https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/images/n17-lower-bound.png","datePublished": "2026-08-06T00:30:00+01:00",
+  "dateModified": "2026-08-17T16:39:01+01:00",
+  "author":{
+    "@type": "Person",
+    "name": "Sam Burns"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sam Burns' Tech Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sam-burns.com/images/favicon/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://sam-burns.com/" accesskey="h" title="Sam Burns&#39; Tech Blog (Alt + H)">Sam Burns&#39; Tech Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://sam-burns.com/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://sam-burns.com/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://sam-burns.com/series" title="Post Series">
+                    <span>Post Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://sam-burns.com/tags/talks" title="Talks">
+                    <span>Talks</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://sam-burns.com/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://sam-burns.com/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['\\(', '\\)']]                  
+    }
+  };
+</script>
+
+
+
+<article class="post-single">
+  <header class="post-header">
+    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <a href="/posts/">Posts</a>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</nav>
+    <h1 class="post-title entry-hint-parent">
+      Proposing a Better Lower Bound for n=17 Square Packing
+    </h1>
+    <div class="post-description">
+      A proposed improvement to the lower bound for the n=17 square packing problem.
+    </div>
+    <div class="post-meta">
+
+<span title='2026-08-06 00:30:00 +0100 +0100'>August 6, 2026</span>&nbsp;·&nbsp;<span>Sam Burns</span>
+
+</div>
+  </header>
+  <link rel="stylesheet" href="/css/post-entry-override.css"/> 
+<figure class="entry-cover">
+            <img loading="eager"
+                srcset='https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/images/n17-lower-bound_hu_ab01e6331f74b124.png 360w,https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/images/n17-lower-bound_hu_4f3c846b782dc7d0.png 480w,https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/images/n17-lower-bound_hu_bcae0866865ff3ab.png 720w,https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/images/n17-lower-bound_hu_541e8f8b61932f84.png 1080w,https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/images/n17-lower-bound.png 1155w'
+                src="https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/images/n17-lower-bound.png"
+                sizes="(min-width: 768px) 720px, 100vw"
+                width="1155" height="804"
+                alt="">
+        
+</figure>
+
+  
+
+
+<link rel="stylesheet" href="/css/series-nav.css" />
+<div class="seriesnav">
+    <h3 class="seriesnav-title">Part of the <i>Square Packing</i> series</h3>
+    <ul class="list-group">
+        
+            
+                <li class="list-group-item">
+                    <a href="/posts/n17-square-packing-problem-intro/">
+                        <b>1</b>&nbsp;&nbsp;<i>The n=17 Square Packing Problem- Introduction</i>
+                    </a>
+                </li>
+            
+        
+            
+                <li class="list-group-item">
+                    <a href="/posts/n17-square-packing-near-record-arrangement/">
+                        <b>2</b>&nbsp;&nbsp;<i>n=17 Square Packing: A Near-Record Arrangement</i>
+                    </a>
+                </li>
+            
+        
+            
+                <li class="list-group-item active">
+                    <b>3</b>&nbsp;&nbsp;👉&nbsp;&nbsp;<i>Proposing a Better Lower Bound for n=17 Square Packing</i>
+                </li>
+            
+        
+    </ul>
+</div>
+
+<details class="toc"  open>
+    <summary accesskey="c" title="(Alt + C)">
+        <span class="title">Table of Contents</span>
+    </summary>
+
+    <div class="inner"><ul>
+            <li>
+                <a href="#proposing-a-better-lower-bound-for-n17-square-packing" aria-label="Proposing a Better Lower Bound for n=17 Square Packing">Proposing a Better Lower Bound for n=17 Square Packing</a></li>
+            <li>
+                <a href="#nature-of-the-proof" aria-label="Nature of the Proof">Nature of the Proof</a></li>
+            <li>
+                <a href="#files" aria-label="Files">Files</a>
+            </li>
+        </ul>
+    </div>
+</details>
+
+  <div class="post-content md-content"><h2 id="proposing-a-better-lower-bound-for-n17-square-packing">Proposing a Better Lower Bound for n=17 Square Packing<a hidden class="anchor" aria-hidden="true" href="#proposing-a-better-lower-bound-for-n17-square-packing">#</a></h2>
+<p>At the <a href="/posts/n17-square-packing-problem-intro">start of this project</a>, the strongest published lower bound I could
+find for packing 17 unit squares into a square was</p>
+$$ \frac{40\sqrt 2+19}{17} $$$$ ≈4.445208382 $$<p>This was originally achieved by Trevor Green, and you can find a <a href="https://erich-friedman.github.io/papers/squares/squares.html">description of the lower
+bound</a> here, from Erich Friedman.</p>
+<p>This leaves quite a gap between the best known n=17 square packing, and the highest proven lower bound.</p>
+<p><strong>ChatGPT 5.6 Sol</strong> has been asked to come up with a better lower bound, and proposes a new value of:</p>
+$$ 4.4811 $$<h2 id="nature-of-the-proof">Nature of the Proof<a hidden class="anchor" aria-hidden="true" href="#nature-of-the-proof">#</a></h2>
+<p>Rather than assuming that a near-optimal packing resembles any known arrangement, it places a carefully chosen
+collection of weighted points inside a 4.4811×4.4811 container. It then proves that every possible unit square inside
+the container must cover at least one unit of weight.</p>
+<p>The finite part of the argument is checked by an exact rational verifier. The certificate has 268 weighted atoms with
+total weight 16.9476, while every translated and rotated unit square is shown to contain weight at least 1.0003. 17
+disjoint (i.e. non-overlapping) squares would therefore require more weight than is available.</p>
+<p>This is published as a proposed computer-assisted proof, rather than a settled record: the verifier reproduces the
+result, but the certificate has not yet been independently implemented, audited or peer reviewed. The proof note is
+credited to ChatGPT (GPT-5.6 Pro, OpenAI), which developed the certificate during this project. I operated.</p>
+<h2 id="files">Files<a hidden class="anchor" aria-hidden="true" href="#files">#</a></h2>
+<p>The Markdown contains the full proof, certificate data, reproduction instructions, audit boundary, acknowledgement and byline.</p>
+<p>The Python file is the exact verifier referenced in the proof.</p>
+<p>Here are the downloadable files:</p>
+<ul>
+<li><a href="/downloads/n17-square-packing/n17-lower-bound-4.4811.md">n17-lower-bound-4.4811.md</a></li>
+<li><a href="/downloads/n17-square-packing/verify_n17_lower_bound_4_4811.py">verify_n17_lower_bound_4_4811.py</a></li>
+</ul>
+<p>I reconstructed and reran the verifier successfully. Its exact minimum was \( 10003/10000=1.0003 \), and it concluded
+\( s(17)≥4.4811 \).</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://sam-burns.com/tags/mathematics/">mathematics</a></li>
+      <li><a href="https://sam-burns.com/tags/geometry/">geometry</a></li>
+      <li><a href="https://sam-burns.com/tags/square-packing/">square-packing</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Sam Burns</span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

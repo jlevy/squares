@@ -163,9 +163,15 @@ strategies:
   name: Fractional transversals and LP duality
   family: transversal_and_wider
   mechanism: Relax piercing to an LP; use the dual fractional packing
-  status: not_applied
-  note: No application to `s(n)` was found in the retrieved corpus; this is not an exhaustive negative claim
-  refs: []
+  status: used
+  note: >-
+    Applied in the August 2026 Burns and Massaccesi proposed computer-assisted lower
+    bounds for s(17): rational weighted atoms form a fractional hitting certificate,
+    and Massaccesi uses LP to generate the fixed certificate. The exact source verifier
+    replays, but the 4.5058 proposal is not yet independently implemented or adopted by
+    this repository.
+  refs:
+  - Burns–Massaccesi n17
 - id: 23
   name: Integrality-gap bounds (Wegner-type)
   family: transversal_and_wider

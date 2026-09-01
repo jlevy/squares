@@ -9,7 +9,7 @@ agenda:
   id: agenda-011
   title: "The verification review: determinations, not deferrals"
   updated: '2026-08-31'
-  status: active
+  status: completed
   objective: >-
     The owner's direction after the agenda-010 run closed: stop deferring
     verification to owner review. Apply the project's own assurance rubric --
@@ -82,9 +82,9 @@ agenda:
 ---
 # Agenda-011 — The Verification Review
 
-One cell: the owner moved the review from their queue to the repository's own
-rubric, so the six held results get determinations here, with the independent
-interval certifier built where first-party independence was missing.
+One cell: the owner moved the review from their queue to the repository’s own rubric, so
+the six held results get determinations here, with the independent interval certifier
+built where first-party independence was missing.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
