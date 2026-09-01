@@ -4,10 +4,10 @@
 
 **Author:** Codex, for the project maintainers
 
-**Status:** BC-121 synthesis retained; terminal close pending
+**Status:** Complete
 
-This synthesis will close the nine-hour agenda-013 run and answers the strategic
-question that started it: where another one to three hours of work is most likely to buy
+This synthesis closes the nine-hour agenda-013 run and answers the strategic question
+that started it: where another one to three hours of work is most likely to buy
 transferable evidence, given what the repository can now measure and verify.
 It separates mathematical claims from process results and does not promote a bound,
 packing, hypothesis, or frontier entry.

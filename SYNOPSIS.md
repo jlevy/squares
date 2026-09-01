@@ -88,16 +88,15 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
 hypotheses, one open hypothesis, seven open questions, and thirty-eight blocked
-hypotheses.
-Four further hypotheses are unresolved. The set includes one claim whose formal
-prerequisite is missing, H-044 whose
-registered calibration-only amendment keeps the hypothesis undisposed — its first scored
-round (exp-046) missed the criterion determinately under both denominator readings, the
-review hold is cleared, and disposition waits on a confirmatory successor over a
-fresh-frozen corpus.
-Its active confidence ladder has completed the exact and event controls up to the first
-nontrivial identity question; the next scientific transition is from specialized `n = 5`
-local geometry to a defensible component relation, not to a larger raw census.
+hypotheses. Four further hypotheses are unresolved.
+The set includes one claim whose formal prerequisite is missing, H-044 whose registered
+calibration-only amendment keeps the hypothesis undisposed — its first scored round
+(exp-046) missed the criterion determinately under both denominator readings, the review
+hold is cleared, and disposition waits on a confirmatory successor over a fresh-frozen
+corpus.
+Its active confidence ladder has completed the exact and event controls up to the
+first nontrivial identity question; the next scientific transition is from specialized
+`n = 5` local geometry to a defensible component relation, not to a larger raw census.
 
 #### Refresh rule
 
@@ -2553,7 +2552,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | --- | --- | ---: | ---: | ---: | ---: | --- |
 | `codex-task-tree-session-062.yaml` | session-062 | 607 | 2.84 h | 1.46 h | 1.46 h | yes |
 | `codex-task-tree-session-063.yaml` | session-063 | 441 | 2.08 h | 0.85 h | 0.85 h | yes |
-| `codex-task-tree-session-064.yaml` | session-064 | 3,065 | 15.85 h | 7.7 h | 7.7 h | yes |
+| `codex-task-tree-session-064.yaml` | session-064 | 3,444 | 17.57 h | 9.0 h | 9.0 h | yes |
 | `codex-task-tree-session-065.yaml` | session-064, session-065 | 286 | 1.74 h | 1.74 h | 1.99 h | no |
 | `codex-task-tree-session-066.yaml` | session-064, session-066 | 106 | 0.64 h | 0.64 h | 1.11 h | no |
 | `codex-task-tree-session-067.yaml` | session-064, session-067 | 28 | 0.14 h | 0.14 h | 0.32 h | no |

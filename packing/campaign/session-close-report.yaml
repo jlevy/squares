@@ -800,7 +800,7 @@ sessions:
     snapshot_incomplete: true
 - id: session-064
   title: "Agenda-013 nine-hour coordinator"
-  status: in_progress
+  status: completed
   primary_bead: think-5xlb
   phases: 10
   measured: true
@@ -820,10 +820,10 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-064.yaml
-    model_responses: 3065
-    agent_hours: 15.85
-    active_union_hours: 7.7
-    wall_hours: 7.7
+    model_responses: 3444
+    agent_hours: 17.57
+    active_union_hours: 9.0
+    wall_hours: 9.0
     snapshot_incomplete: true
   - path: packing/campaign/resource-usage/codex-task-tree-session-065.yaml
     model_responses: 286

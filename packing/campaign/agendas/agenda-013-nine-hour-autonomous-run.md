@@ -9,7 +9,7 @@ agenda:
   id: agenda-013
   title: "Nine-hour autonomous W3/W6 research run and review"
   updated: '2026-09-01'
-  status: active
+  status: completed
   objective: >-
     Execute agenda-012 end to end during one owner-authorized nine-hour wall, on one pull
     request, with a durable result at every branch. Short W3 insight passes frame each
@@ -326,7 +326,7 @@ agenda:
     purpose: research
     owner_focus: process
     instances: [17, 39, 50, 54, 68]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       What did the nine-hour run establish, refuse or leave unresolved, and what exact
@@ -362,12 +362,21 @@ agenda:
       while a failure reopens BC-121 and think-0sif before any repair commit.
     bead: think-0sif
     depends_on: [BC-120]
+    artifacts:
+    - docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md
+    - docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md
+    - packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md
+    - packing/campaign/agent-sessions/session-064-agenda013-nine-hour-coordinator.md
+    - packing/campaign/agent-sessions/session-071-agenda014-publication-and-handoff.md
+    - packing/campaign/agenda-map.md
+    - packing/campaign/ledger.md
     workflows: [insight-iteration, documentation-pass, process-review]
     next_evidence: >-
-      Ready at the fixed 17:16:55Z boundary after BC-120 retained five passes and one
-      bounded caveat. Own the five authorized review-flag changes, overnight synthesis,
-      agenda-014 publication, generated views, final validation, tbd synchronization and
-      PR checkpoint; leave exp-050 and every scientific state unchanged.
+      Completed after the fixed nine-hour wall with five authorized review flags
+      cleared, exp-050 still review-pending, no scientific or frontier transition, a
+      reviewed synthesis, dependency-linked agenda-014, current generated views and an
+      exact session-071 cold-start handoff. The four successor lane holds remain until
+      this terminal PR revision is green.
 ---
 # Agenda-013 — Nine-Hour Autonomous W3/W6 Research Run
 

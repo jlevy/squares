@@ -8,7 +8,7 @@ softschema:
 session:
   id: session-064
   primary_bead: think-5xlb
-  status: in_progress
+  status: completed
   title: "Agenda-013 nine-hour coordinator"
   date: '2026-09-01'
   started_at: '2026-09-01T09:01:55Z'
@@ -472,7 +472,7 @@ session:
       all generated views and tbd state, push the terminal PR revision and acknowledge
       hosted checks inside the owner-authorized wall.
     bead: think-0sif
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       BC-120 completed at the fixed 17:16:55Z boundary with five passes and one bounded
@@ -493,10 +493,27 @@ session:
     fallback: >-
       Retain the exact incomplete closeout state, reopen think-0sif on a validation
       failure and name the missing publication or hosted-check condition.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Apply the five review-flag clearances and publish agenda-014.
+    outcome: >-
+      Applied only the five review clearances authorized by BC-120 and retained
+      exp-050's producer-provenance caveat. Published the overnight synthesis,
+      dependency-linked agenda-014, its H-057--H-059 registrations and a cold-start
+      session-071 handoff backed by real tbd tasks. No hypothesis, packing bound or
+      frontier entry changed. The exact nine-hour wall elapsed after every in-repository
+      closeout artifact and successor guard was retained.
+    evidence:
+    - docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md
+    - docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md
+    - packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md
+    - packing/campaign/agent-sessions/session-071-agenda014-publication-and-handoff.md
+    - packing/campaign/agenda-map.md
+    - packing/campaign/ledger.md
+    stop_reason: >-
+      The exact 18:01:55Z wall arrived with all in-repository closeout artifacts,
+      handoff evidence and successor prerequisites retained; hosted acknowledgement of
+      the terminal revision follows its push and does not change the repository.
+    next_action: >-
+      After the terminal PR revision is green and the coordinator removes its tbd hold,
+      enter agenda-014 BC-123 under think-p2m6 from session-071.
   budget:
     wall_minutes: 540
     max_cycles: 10
@@ -513,7 +530,12 @@ session:
       The launch contracts and PR are reviewed and green, but no first-wave bead is
       claimed, no lane session or experiment record exists, and no H-052--H-054 target
       measurement has begun.
-    after: null
+    after: >-
+      All agenda-013 cells are terminal. Six experiment decisions received independent
+      review: five review flags were cleared and exp-050 retained one bounded caveat.
+      No hypothesis or frontier claim moved. Agenda-014 and session-071 preserve one
+      guarded mechanism-first successor, with every first-wave lane held until this
+      session's terminal PR revision is green.
   delegations:
   - task: Freeze the BC-108 H-052 target-blind W3 contract for the n = 17 independent certificate replay.
     operator: /root/math_frontier
@@ -1137,6 +1159,14 @@ session:
   - docs/project/reviews/review-2026-09-01-agenda013-second-wave-efficiency.md
   - docs/project/reviews/review-2026-09-01-agenda013-second-wave-packets.md
   - docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md
+  - docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md
+  - packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md
+  - packing/campaign/hypotheses/H-057-n17-parent-bound-parallel-speedup.md
+  - packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md
+  - packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md
+  - packing/campaign/agent-sessions/session-071-agenda014-publication-and-handoff.md
+  - packing/campaign/agenda-map.md
+  - packing/campaign/ledger.md
   - packing/campaign/resource-usage/codex-task-tree-session-064.yaml
   checks:
   - >-
@@ -1154,6 +1184,17 @@ session:
     The mandatory second-wave W5 comparison retained `no-change` and froze literal-
     command, producer-provenance and checkpoint/profile corrections without changing a
     scientific artifact.
+  - >-
+    BC-120 independently passed five experiment decisions and retained one bounded
+    caveat after reconciling 21 packet hashes, five declared absences and 50 focused
+    tests; only the five authorized `needs_review` fields changed.
+  - >-
+    The full frozen tree passed 1,232 fast tests, 25 exhaustive exact tests and all 151
+    negative-control anchors in 823.65 seconds before the terminal transition.
+  - >-
+    Revision b65b5a91 passed hosted Linux validation in 12m29s and macOS portability in
+    1m; revision 0d272070 passed the 301-test push tier and hosted Linux in 12m30s,
+    macOS in 1m3s and the required aggregator in 3s.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-064.yaml
   - packing/campaign/resource-usage/codex-task-tree-session-065.yaml
@@ -1163,10 +1204,13 @@ session:
   - packing/campaign/resource-usage/codex-task-tree-session-069.yaml
   - packing/campaign/resource-usage/codex-task-tree-session-070.yaml
   - packing/campaign/resource-usage/codex-task-tree-session-070-review.yaml
-  stop_reason: null
+  stop_reason: >-
+    The fixed nine-hour wall elapsed after all agenda cells, reviews, synthesis,
+    successor records and the cold-start handoff became terminal; only post-push hosted
+    acknowledgement and removal of the successor tbd holds remain outside the record.
   next_action: >-
-    Complete BC-119's packet checkpoint, then run three cross-lane independent reviews
-    under BC-120 without changing the source artifacts they inspect.
+    After the terminal PR revision is green, remove the four agenda-014 first-wave tbd
+    holds and begin BC-123 under think-p2m6 from session-071.
 ---
 # Session 064 — Agenda-013 Nine-Hour Coordinator
 
