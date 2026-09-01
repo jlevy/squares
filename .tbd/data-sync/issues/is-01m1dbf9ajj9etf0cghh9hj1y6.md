@@ -3,9 +3,9 @@ type: is
 id: is-01m1dbf9ajj9etf0cghh9hj1y6
 title: "BC-111: agenda-012 bounded integration checkpoint"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 18
+version: 19
 spec_path: packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md
 delegate: codex@spud10.local
 labels:
@@ -30,8 +30,12 @@ parent_id: is-01m1dbej7kqs8r1hwfmx5w3v3n
 hold: null
 hold_until: null
 created_at: 2026-09-01T02:06:19.985Z
-updated_at: 2026-09-01T11:47:00.666Z
+updated_at: 2026-09-01T12:17:25.537Z
 started_at: 2026-09-01T11:47:00.648Z
+closed_at: 2026-09-01T12:17:25.524Z
+close_reason: BC-111 audited the retained first wave, routed BC-116/117/118, stopped and paused BC-112/113/114, named the Burns fixture-level consumer with limitations, synchronized holds, and published e21598f6 before dispatch.
+resolution: null
+duplicate_of: null
 ---
 After BC-108, BC-109, and BC-110 terminalize and BC-122 retains its W5 efficiency receipt, spend at most 30 minutes comparing retained evidence. Under agenda-013, route exactly one continuation per lane: BC-112 or BC-116, BC-113 or BC-117, and BC-114 or BC-118. Set selected rows ready with hold none and siblings stopped with hold paused, preserve every disagreement, update both agendas and generated views, sync tbd, and name the exact AgentSession. No experiment or frontier promotion belongs here.
 
