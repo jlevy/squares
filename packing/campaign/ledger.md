@@ -324,10 +324,10 @@ Status: **active**. Run a second exact nine-hour wall from agenda-013's reviewed
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-123 | tool_validation | 17 | blocked | 0 | think-p2m6 | Ready from agenda-013's independently reviewed 33-row prefix. The observed 0.444 rows per minute makes another three-hour completion promise inadmissible without a fixed-input profile and at least 2.8x speedup. Three fixed ordinals are an admission discriminator, not evidence that every remaining direction has the same cost. |
-| BC-124 | tool_validation | 68, 69 | blocked | 0 | think-3i67 | Ready from exp-051's reviewed executable-runner refusal. The missing seam includes production dependencies and retention behavior, not just argument parsing. |
-| BC-125 | measurement_validation | 19, 50 | blocked | 0 | think-17q7 | Ready from Packet C's bounded caveat. The smallest repair is a new runner-bound, stage-sentinel control round with exp-050 read-only. |
-| BC-126 | research | 19, 54 | blocked | 1 | think-tabx | Ready from the bounded multilingual and exact-number audit. The historical survey supplies the 19-to-54 mechanism link and side formula, but not a complete primary pose derivation. |
+| BC-123 | tool_validation | 17 | ready | 0 | think-p2m6 | Ready from agenda-013's independently reviewed 33-row prefix. The observed 0.444 rows per minute makes another three-hour completion promise inadmissible without a fixed-input profile and at least 2.8x speedup. Three fixed ordinals are an admission discriminator, not evidence that every remaining direction has the same cost. |
+| BC-124 | tool_validation | 68, 69 | ready | 0 | think-3i67 | Ready from exp-051's reviewed executable-runner refusal. The missing seam includes production dependencies and retention behavior, not just argument parsing. |
+| BC-125 | measurement_validation | 19, 50 | ready | 0 | think-17q7 | Ready from Packet C's bounded caveat. The smallest repair is a new runner-bound, stage-sentinel control round with exp-050 read-only. |
+| BC-126 | research | 19, 54 | ready | 1 | think-tabx | Ready from the bounded multilingual and exact-number audit. The historical survey supplies the 19-to-54 mechanism link and side formula, but not a complete primary pose derivation. |
 | BC-127 | tool_validation | 17, 50, 54, 68 | blocked | 0 | think-ne3d | Blocked until the four first-wave receipts make agent behavior and tool cost measurable on one common interval boundary. |
 | BC-128 | measurement_validation | 17, 50, 54, 68 | blocked | 0 | think-8ih6 | Blocked on the first-wave W5 receipt and exact terminal outcomes. |
 | BC-129 | research | 17, 18, 19 | blocked | 0 | think-pzcl | Blocked until the performance result and routing checkpoint make a three-hour completion attempt honest. |

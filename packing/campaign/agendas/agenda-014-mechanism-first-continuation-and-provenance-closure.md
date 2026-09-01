@@ -26,7 +26,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [17]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Can a parent-bound process-parallel direction runner preserve exact output while
@@ -62,8 +62,6 @@ agenda:
       sequential resumable wall.
     bead: think-p2m6
     depends_on: []
-    blocked_on: >-
-      Agenda-013 BC-121 must be terminal and its final PR revision must be green.
     workflows: [insight-iteration, pipeline-improvement, factual-review, research-loop]
     next_evidence: >-
       Ready from agenda-013's independently reviewed 33-row prefix. The observed 0.444
@@ -75,7 +73,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [68, 69]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Can the n = 68 exact proof boundary be reached through a complete production
@@ -107,8 +105,6 @@ agenda:
       child, gain, surgery or raw source is opened.
     bead: think-3i67
     depends_on: []
-    blocked_on: >-
-      Agenda-013 BC-121 must be terminal and its final PR revision must be green.
     workflows: [insight-iteration, pipeline-improvement, factual-review]
     next_evidence: >-
       Ready from exp-051's reviewed executable-runner refusal. The missing seam includes
@@ -118,7 +114,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [19, 50]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Does a new producer-bound stage-sentinel receipt prove the existing-result refusal
@@ -150,8 +146,6 @@ agenda:
       terminal state repairs exp-050.
     bead: think-17q7
     depends_on: []
-    blocked_on: >-
-      Agenda-013 BC-121 must be terminal and its final PR revision must be green.
     workflows: [insight-iteration, pipeline-improvement, research-loop, factual-review]
     next_evidence: >-
       Ready from Packet C's bounded caveat. The smallest repair is a new runner-bound,
@@ -161,7 +155,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [19, 54]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       What primary source, formula derivation and pose-serialization evidence actually
@@ -185,8 +179,6 @@ agenda:
       The row becomes `complete` after either retained outcome.
     bead: think-tabx
     depends_on: []
-    blocked_on: >-
-      Agenda-013 BC-121 must be terminal and its final PR revision must be green.
     workflows: [research-pass, insight-iteration, factual-review]
     next_evidence: >-
       Ready from the bounded multilingual and exact-number audit. The historical survey
@@ -448,7 +440,9 @@ agenda:
 ## Workflow Entry Point
 
 Start only after agenda-013 BC-121 is terminal and its final PR revision is green.
-Run `tbd prime`, `tbd sync --status`, and the edit validation tier.
+That gate is satisfied by terminal revision `fa33ea79`, which passed the complete local
+validation gate and hosted Linux, macOS and required checks before these four first-wave
+rows became ready. Run `tbd prime`, `tbd sync --status`, and the edit validation tier.
 The coordinator creates complete next-free AgentSessions and experiment records serially
 before dispatch; placeholders do not allocate identifiers.
 
