@@ -342,12 +342,13 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, use
-[session 062](../../../../packing/campaign/agent-sessions/session-062-agenda013-preflight-and-publication.md)
-and take `BC-108` under `think-swtr` from
-[agenda-012](../../../../packing/campaign/agendas/agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md).
-The entry is the fixed `n = 17` weighted-certificate replay plus an independently
-written exact accumulation path.
-Agenda-013 dispatches its other two first-wave lanes in parallel, but this paragraph
+[session 067](../../../../packing/campaign/agent-sessions/session-067-bc110-n50-exact-control.md)
+and take the mandatory efficiency checkpoint `BC-122` under `think-iv3e` from
+[agenda-013](../../../../packing/campaign/agendas/agenda-013-nine-hour-autonomous-run.md).
+All three first-wave lanes are terminal with complete resource receipts: exp-049
+exhausted its admitted runtime without a canonical result, exp-047 stopped at its
+proof-grade enclosure and runner gates, and exp-048 stopped at source semantics.
+The checkpoint measures those outcomes before any successor route opens; this paragraph
 deliberately names one cell and one bead as the cold-start handoff.
 
 **Do not take a next slice from an agenda directly.**

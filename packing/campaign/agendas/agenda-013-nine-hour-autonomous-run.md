@@ -194,9 +194,10 @@ agenda:
     entry: >-
       BC-110 is terminal without the exact verified n = 50 control required by BC-114,
       and BC-111 routes the cross-scale lane here. The coordinator records exactly one
-      dispatch before removing think-8pjf's blocked hold: E1 source/provenance absence, E2
-      representation mismatch, E3 verifier defect, or E4 priced exhaustion. It marks
-      BC-114 `stopped` and puts think-dao9 on `paused` hold with the same reason.
+      dispatch before removing think-8pjf's blocked hold: E1 source/provenance absence,
+      E2 representation mismatch, E3 compatibility mismatch, E4 verifier/instrument
+      defect, or E5 priced exhaustion. It marks BC-114 `stopped` and puts think-dao9 on
+      `paused` hold with the same reason.
     exit: >-
       One replayable seam result with a mechanism-matched control and mutation: repaired
       candidate for later adoption, typed source/representation/verifier refusal, priced

@@ -87,7 +87,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-seven blocked
+hypotheses, one open hypothesis, seven open questions, and thirty-four blocked
 hypotheses.
 Two further hypotheses are unresolved: one because its formal prerequisite is
 missing, and H-044 because its registered calibration-only amendment keeps the
@@ -322,16 +322,16 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-The agenda-013 post-publication repair checkpoint is active in
-[session-063](packing/campaign/agent-sessions/session-063-agenda013-review-repairs.md).
-Session-062 stopped at its launch gate after independent review found bounded contract
-defects. Session-063 keeps every W6 lane unclaimed while it closes those defects,
-validates the repaired tree, and publishes the reviewed PR revision.
+The exact nine-hour agenda-013 run is active, with the latest first-wave lane record in
+[session-067](packing/campaign/agent-sessions/session-067-bc110-n50-exact-control.md).
+All three first-wave lanes are terminal: `n = 17` exhausted its admitted exact-runtime
+timebox without a canonical result, while `n = 68/69` and `n = 50` stopped before
+measurement on typed evidence gates.
 
-After publication, the exact scientific entry point is `BC-108` under `think-swtr`: the
-fixed `n = 17` weighted-certificate replay and independent accumulation path.
-The coordinator dispatches the other two agenda-013 first-wave launch cards in parallel,
-but `BC-108` is the single cold-start handoff named here.
+The exact cold-start entry point is the mandatory W5 efficiency checkpoint `BC-122`
+under `think-iv3e`. It reads the three terminal session and resource receipts, retains a
+measured no-change or self-repaying improvement decision, and opens no scientific
+successor before the bounded integration checkpoint.
 
 ### Handoff Record
 
@@ -2367,9 +2367,9 @@ round that names the hypothesis, control roles included.
 | [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov’s decomposition | 0 | — |
 | [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent’s 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
 | [H-051](packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md) | blocked | A blinded tier-S n = 68 public-parent surgery pilot matches the released child under the frozen grammar | 0 | — |
-| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | blocked | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 0 | — |
-| [H-053](packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md) | blocked | Each fixed UnitSquare `n = 68, 69` parent-child pair admits compatible rigid poses under at least one declared serialization model | 0 | — |
-| [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | blocked | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 0 | — |
+| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | needs review | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 1 | 65.3333m agent + 65.3m wall |
+| [H-053](packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md) | needs review | Each fixed UnitSquare `n = 68, 69` parent-child pair admits compatible rigid poses under at least one declared serialization model | 1 | 39m agent + 32.2m wall |
+| [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | needs review | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 1 | 8m agent |
 | [H-055](packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md) | blocked | If selected, the `n = 54` witness admits complete exact promotion in the reported nested-radical field | 0 | — |
 | [H-056](packing/campaign/hypotheses/H-056-n39-degree-five-interval-certificate.md) | blocked | If selected, the `n = 39` witness admits a complete interval certificate tied to the designated degree-five root | 0 | — |
 
@@ -2541,12 +2541,15 @@ in separate tables: their units differ, and the same work can appear in both.
 | --- | --- | ---: | ---: | ---: | ---: | --- |
 | `codex-task-tree-session-062.yaml` | session-062 | 607 | 2.84 h | 1.46 h | 1.46 h | yes |
 | `codex-task-tree-session-063.yaml` | session-063 | 441 | 2.08 h | 0.85 h | 0.85 h | yes |
+| `codex-task-tree-session-065.yaml` | session-065 | 286 | 1.74 h | 1.74 h | 1.99 h | no |
+| `codex-task-tree-session-066.yaml` | session-066 | 106 | 0.64 h | 0.64 h | 1.11 h | no |
+| `codex-task-tree-session-067.yaml` | session-067 | 28 | 0.14 h | 0.14 h | 0.32 h | no |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 19 |
-| closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **63** |
+| measured | 22 |
+| closed before `resource_rollups` existed, logs not retained | 45 |
+| **total** | **67** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -2561,8 +2564,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 46 terminal rounds registered in `series-000`. They record 1131 agent-minutes
-and 30.9 wall-minutes.
+There are 49 terminal rounds registered in `series-000`.
+
+They record 1243.33 agent-minutes and 128.4 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -2637,6 +2641,9 @@ archive beside it.
 | [exp-044](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md) | 5 | target | H-023 | exact pure -W row-jet test | reviewed row builder; no retained target | **unresolved** |
 | [exp-045](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md) | 5 | target | H-023 | exact pure -W scale and control test | pure -W excluded at A, interior and B; sign symmetry holds; accepted 2026-08-31 after the independent audit and -W bridge corroboration | **accepted** |
 | [exp-046](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-046-h-044-chunk-expressibility-verdict.md) | 11 | target | H-044 | chunk-expressibility verdict at `n ≤ 30` | criterion missed under both denominator readings (23/30 and 3/10, both bands); every miss typed; calibration corpus, review resolved 2026-08-31 with H-044 undisposed per its amendment | unresolved |
+| [exp-047](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-047-h-053-unitsquare-rigid-pose-serialization.md) | 68 | target | H-053 | binary64 precision-bridge prototype | interval-enclosure and complete-runner guards fire before parent retrieval or target access | blocked |
+| [exp-048](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-048-h-054-n50-exact-rational-reconstruction.md) | 50 | target | H-054 | exact-reconstruction admission gate | E1 source semantics absent; no reconstruction, target sample, or result | unresolved |
+| [exp-049](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-049-h-052-n17-independent-certificate-agreement.md) | 17 | target | H-052 | exact independent accumulator | 3,920-second timebox; no canonical comparison or checkpoint | unresolved |
 
 ### Cost and provenance
 
@@ -2688,11 +2695,14 @@ archive beside it.
 | exp-044 | one 30-minute criterion, integration, and review slice | 100.41 s | 30 m | guard | `a5a4ef0` (row builder only) |
 | exp-045 | one 105-minute W6 mini-cycle inside agenda-004 block two | 6.64 s | 45 m | criterion | `caffcc3` |
 | exp-046 | one 45-minute phase of session-055 (block 4) | 1.1 s | 25 m | criterion | `db0c410a` (atlas input; scorer lands with this round) |
+| exp-047 | 115 minutes after target-blind W3; W7 admission first | 1,932 s | 39 m | guard | `d7c94590+sha256-92e7b6e43b8785c0` |
+| exp-048 | one 25-minute W7 readiness cell inside BC-110 | 0 s | 8 m | dependency | `d7c94590` |
+| exp-049 | 65 minutes 20 seconds | 3,920 s | 65.3333 m | timebox | `d7c94590+sha256-309ec24158f73dd2` |
 
-### What the 46 rounds jointly establish
+### What the 49 rounds jointly establish
 
-The 46 rounds use 1131 agent-minutes and 30.9 wall-minutes under the campaign’s retained
-effort accounting.
+The 49 rounds use 1243.33 agent-minutes and 128.4 wall-minutes under the campaign’s
+retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only

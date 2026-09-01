@@ -28,7 +28,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [17]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Does an independently written exact accumulation implementation agree with the
@@ -65,18 +65,25 @@ agenda:
     depends_on: []
     workflows: [insight-iteration, factual-review, pipeline-improvement, research-loop]
     next_evidence: >-
-      Not started. Use the BC-108 launch card below. The write scope is
-      packing/cases/n17_weighted_certificate/, packing/tests/test_n17_weighted_certificate.py,
-      the coordinator-created AgentSession path, the exact H-052 experiment/result pair,
-      and packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md.
-      The hypothesis edit is limited to the validated instrument description and the
-      `instrument_ready` transition. Shared frontier and strategy records wait for BC-112.
+      Session-065 and exp-049 retain one executed W6 round at the hash-frozen revision.
+      The exact command consumed its declared 3920-second timebox and was interrupted
+      once at 2026-09-01T10:56:55Z without producing a canonical result or checkpoint.
+      H-052 remains instrument-ready, unresolved and review-pending; the missing result
+      neither agrees with nor rejects the certificate. BC-111 must route this lane to
+      BC-116 and keep BC-112 stopped; neither successor is ready before that checkpoint.
+      Shared frontier and strategy records remain closed.
+    artifacts:
+    - packing/cases/n17_weighted_certificate/
+    - packing/tests/test_n17_weighted_certificate.py
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-049-h-052-n17-independent-certificate-agreement.md
+    - packing/campaign/agent-sessions/session-065-bc108-n17-certificate.md
+    - packing/campaign/resource-usage/codex-task-tree-session-065.yaml
     parallel_group: agenda012-first-wave
   - id: BC-109
     purpose: measurement_validation
     owner_focus: correctness
     instances: [68, 69]
-    state: ready
+    state: stopped
     priority: 0
     question: >-
       Can the six-decimal UnitSquare children and their cited public parents be reduced
@@ -150,19 +157,21 @@ agenda:
     depends_on: []
     workflows: [insight-iteration, pipeline-improvement, research-loop, factual-review]
     next_evidence: >-
-      Not started. Use the BC-109 launch card below. The write scope is
-      packing/src/sqpack/research/unitsquare_precision.py,
-      packing/tests/test_unitsquare_precision.py, packing/cases/unitsquare_precision/,
-      the coordinator-created AgentSession path, the exact H-053 experiment/result pair,
-      and packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md. The
-      hypothesis edit is limited to the validated instrument description and the
-      `instrument_ready` transition. It does not edit H-030 or shared frontier records.
+      Stopped before measurement in exp-047 and session-066. The target-blind numerical
+      prototype, 13 focused tests and named-control inventory are retained, but its
+      midpoint binary64 fit, fixed tolerances and heuristic radii do not prove the
+      outward compatible-pose enclosures or wall/pair signs required by H-053. The
+      preregistered `--record` path also lacks a complete authorized retrieval, parent-
+      only seal, child evaluation, verification and atomic-write route. H-053 remains
+      instrument_ready false; no parent retrieval, child read, target fit, result file,
+      H-051 arm or frontier change exists. BC-111 must route this lane to BC-117 and
+      keep BC-113 stopped.
     parallel_group: agenda012-first-wave
   - id: BC-110
     purpose: measurement_validation
     owner_focus: correctness
     instances: [50]
-    state: ready
+    state: stopped
     priority: 1
     question: >-
       Can the reported n = 50 packing at exact rational side 53/7 be reconstructed and
@@ -197,13 +206,12 @@ agenda:
     depends_on: []
     workflows: [insight-iteration, research-pass, research-loop]
     next_evidence: >-
-      Not started. Use the BC-110 launch card below. The write scope is
-      packing/cases/n050_exact/, packing/tests/test_n050_exact.py, the coordinator-created
-      AgentSession path, the exact H-054 experiment/result pair, and
-      packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md. The
-      hypothesis edit is limited to the validated instrument description and the
-      `instrument_ready` transition. Agenda-009 already records the ownership transfer;
-      do not reopen its broad sweep or edit shared frontier records in this block.
+      Stopped before measurement in exp-048 and session-067. Frozen refusal E1 fired:
+      retained source metadata and the numerical witness do not declare upstream
+      serialization semantics for every scalar, so no defensible compatibility cells
+      can be built. H-054 remains instrument_ready false; no target reconstruction,
+      result file, n = 54 versus n = 39 selection, or frontier change exists. BC-111 must
+      route this lane to BC-118's source/provenance branch and keep BC-114 stopped.
     parallel_group: agenda012-first-wave
   - id: BC-111
     purpose: research

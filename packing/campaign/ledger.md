@@ -78,6 +78,10 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-061](agent-sessions/session-061-epistemics-codification.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-n8vl | The owner's whole-PR review of the codification; BC-107 under think-n8vl is the cell of record, and the two deferred register candidates wait on the controls that would earn their rungs. |
 | [session-062](agent-sessions/session-062-agenda013-preflight-and-publication.md) | stopped | contemporaneous | `process-review` (correctness) | `efficiency-loop` (efficiency) | 2 | think-r683 | Open the next AgentSession on the review-finding list, finish and validate the repairs on PR #71, then take BC-108 on think-swtr and dispatch BC-109/BC-110 only after the reviewed launch contract is green. |
 | [session-063](agent-sessions/session-063-agenda013-review-repairs.md) | completed | contemporaneous | `efficiency-loop` (correctness) | `documentation-pass` (process) | 2 | think-r683 | Publish the reviewed PR checkpoint, then open the nine-hour coordinator session and claim BC-108 on think-swtr after hosted checks are green. |
+| [session-064](agent-sessions/session-064-agenda013-nine-hour-coordinator.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `process-review` (process) | 2 | think-5xlb | Complete the protected first-wave checkpoint, then run BC-122 under think-iv3e without opening a second-wave lane first. |
+| [session-065](agent-sessions/session-065-bc108-n17-certificate.md) | completed | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 4 | think-swtr | Apply coordinator review to exp-049. Any replay belongs to BC-116 under a new declared timebox and the same frozen revision; do not infer an H-052 or frontier disposition from the missing result. |
+| [session-066](agent-sessions/session-066-bc109-n68-n69-precision.md) | stopped | contemporaneous | `insight-iteration` (insight) | `pipeline-improvement` (correctness) | 2 | think-26b1 | Keep W6 closed and wait for first-wave terminalization, BC-122 and BC-111. Only the coordinator may route this lane to BC-117; do not repair the verifier or allocate a new round directly from this terminal session. |
+| [session-067](agent-sessions/session-067-bc110-n50-exact-control.md) | stopped | contemporaneous | `insight-iteration` (insight) | `pipeline-improvement` (correctness) | 2 | think-uz6f | Enter BC-122 under think-iv3e. After that checkpoint, follow only the coordinator's retained route for the n = 50 E1 refusal; do not reopen either stopped first-wave lane directly. |
 
 ### Workflow summary
 
@@ -87,11 +91,11 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 1 | 0 | 11 | 0 |
 | `factual-review` | 3 | 0 | 29 | 2 |
-| `insight-iteration` | 2 | 1 | 27 | 2 |
-| `process-review` | 11 | 4 | 50 | 6 |
+| `insight-iteration` | 6 | 1 | 32 | 2 |
+| `process-review` | 11 | 4 | 51 | 6 |
 | `efficiency-loop` | 9 | 0 | 24 | 0 |
-| `research-loop` | 8 | 4 | 30 | 7 |
-| `pipeline-improvement` | 19 | 0 | 80 | 0 |
+| `research-loop` | 8 | 4 | 31 | 7 |
+| `pipeline-improvement` | 19 | 0 | 83 | 0 |
 | `documentation-pass` | 0 | 0 | 1 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
@@ -287,9 +291,9 @@ Status: **active**. Execute X-011's three disjoint first-wave decisions before b
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-108 | measurement_validation | 17 | ready | 0 | think-swtr | Not started. Use the BC-108 launch card below. The write scope is packing/cases/n17_weighted_certificate/, packing/tests/test_n17_weighted_certificate.py, the coordinator-created AgentSession path, the exact H-052 experiment/result pair, and packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md. The hypothesis edit is limited to the validated instrument description and the `instrument_ready` transition. Shared frontier and strategy records wait for BC-112. |
-| BC-109 | measurement_validation | 68, 69 | ready | 0 | think-26b1 | Not started. Use the BC-109 launch card below. The write scope is packing/src/sqpack/research/unitsquare_precision.py, packing/tests/test_unitsquare_precision.py, packing/cases/unitsquare_precision/, the coordinator-created AgentSession path, the exact H-053 experiment/result pair, and packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md. The hypothesis edit is limited to the validated instrument description and the `instrument_ready` transition. It does not edit H-030 or shared frontier records. |
-| BC-110 | measurement_validation | 50 | ready | 1 | think-uz6f | Not started. Use the BC-110 launch card below. The write scope is packing/cases/n050_exact/, packing/tests/test_n050_exact.py, the coordinator-created AgentSession path, the exact H-054 experiment/result pair, and packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md. The hypothesis edit is limited to the validated instrument description and the `instrument_ready` transition. Agenda-009 already records the ownership transfer; do not reopen its broad sweep or edit shared frontier records in this block. |
+| BC-108 | measurement_validation | 17 | complete | 0 | think-swtr | Session-065 and exp-049 retain one executed W6 round at the hash-frozen revision. The exact command consumed its declared 3920-second timebox and was interrupted once at 2026-09-01T10:56:55Z without producing a canonical result or checkpoint. H-052 remains instrument-ready, unresolved and review-pending; the missing result neither agrees with nor rejects the certificate. BC-111 must route this lane to BC-116 and keep BC-112 stopped; neither successor is ready before that checkpoint. Shared frontier and strategy records remain closed. |
+| BC-109 | measurement_validation | 68, 69 | stopped | 0 | think-26b1 | Stopped before measurement in exp-047 and session-066. The target-blind numerical prototype, 13 focused tests and named-control inventory are retained, but its midpoint binary64 fit, fixed tolerances and heuristic radii do not prove the outward compatible-pose enclosures or wall/pair signs required by H-053. The preregistered `--record` path also lacks a complete authorized retrieval, parent- only seal, child evaluation, verification and atomic-write route. H-053 remains instrument_ready false; no parent retrieval, child read, target fit, result file, H-051 arm or frontier change exists. BC-111 must route this lane to BC-117 and keep BC-113 stopped. |
+| BC-110 | measurement_validation | 50 | stopped | 1 | think-uz6f | Stopped before measurement in exp-048 and session-067. Frozen refusal E1 fired: retained source metadata and the numerical witness do not declare upstream serialization semantics for every scalar, so no defensible compatibility cells can be built. H-054 remains instrument_ready false; no target reconstruction, result file, n = 54 versus n = 39 selection, or frontier change exists. BC-111 must route this lane to BC-118's source/provenance branch and keep BC-114 stopped. |
 | BC-111 | research | 17, 18, 19, 39, 50, 54, 68, 69 | blocked | 1 | think-1dm8 | Blocked on the three first-wave exits and BC-122's W5 receipt. Each first-wave owner hands off a terminal receipt without editing this agenda or tbd. The coordinator owns every row and bead transition, verifies that all three task beads closed without conflating task and scientific outcomes, regenerates the map after all three rows are terminal, and then claims this checkpoint. Successor and fallback beads begin on blocked hold; the coordinator applies agenda-013's exact routing matrix and every explicit hold transition before closing think-1dm8. |
 | BC-112 | research | 17, 18, 19 | blocked | 1 | think-5q0v | Blocked on BC-108 agreement and the checkpoint. If routed here, it owns a provisional adoption packet under packing/cases/n17_weighted_certificate/adoption/ and one AgentSession; it does not edit packing/frontier/, generated frontier views or think-w8hh's hold. BC-121 owns review-cleared frontier application and the final BC-115 gate; the dependency edge alone is not authorization. |
 | BC-113 | research | 68 | blocked | 1 | think-gbkd | Blocked on a frozen compatible and valid parent arm, its sealed corresponding child result, a credible information barrier, and the checkpoint. Neither child qualification nor the released gain selects, changes, or suppresses the arm. The agent that reads this card is the coordinator, not the proposer; it must launch the fresh proposer from a sanitized card with no inherited conversation. If promoted, write only packing/cases/unitsquare_surgery/n068/, packing/src/sqpack/research/unitsquare_surgery.py, packing/tests/test_unitsquare_surgery.py, the next free H-051 experiment and result files under packing/campaign/series/series-000-smoke-and-calibration/, packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md, and the exact coordinator-created AgentSession path. The validator's hypothesis edit is limited to the validated instrument description and the `instrument_ready` transition; the fresh proposer never reads or edits that file. The experiment record must exist before target execution. n = 69 remains held out until n = 68 establishes a measurable response. |
@@ -314,7 +318,7 @@ Status: **active**. Execute agenda-012 end to end during one owner-authorized ni
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 46 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 49 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -371,11 +375,19 @@ Status: **active**. Execute agenda-012 end to end during one owner-authorized ni
 | H-049 | blocked | search | delta((4,6), 20) > 0: twenty unit squares pack into a 4 by 6 rectangle |  | 0 |  |
 | H-050 | blocked | search | The n = 71 incumbent's split of sixteen oblique squares across two ang |  | 0 |  |
 | H-051 | blocked | search | Starting only from the hash-verified public n = 68 parent, a proposer  |  | 0 |  |
-| H-052 | blocked | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 0 |  |
-| H-053 | blocked | search | For each fixed UnitSquare Release 1 parent-child pair at n = 68 and n  |  | 0 |  |
-| H-054 | blocked | search | The retained source facts for the reported n = 50 construction at side |  | 0 |  |
+| H-052 | needs review | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 1 | 65.3333m agent + 65.3m wall |
+| H-053 | needs review | search | For each fixed UnitSquare Release 1 parent-child pair at n = 68 and n  |  | 1 | 39m agent + 32.2m wall |
+| H-054 | needs review | search | The retained source facts for the reported n = 50 construction at side |  | 1 | 8m agent |
 | H-055 | blocked | search | If BC-111 selects n = 54, the fixed retained witness at reported side  |  | 0 |  |
 | H-056 | blocked | search | If BC-111 selects n = 39, the fixed retained witness can be promoted t |  | 0 |  |
+
+## Needs review — held for a human, not decided
+
+| id | hypotheses | decision | why it was not decided |
+| --- | --- | --- | --- |
+| exp-047 | H-053 | blocked | Typed premeasurement stop `interval-enclosure`: the numerical prototype's selftest and synthetic controls pass, but a float midpoint fit with fixed tolerance and heuristic radii does not prove a nonempty compatible-pose enclosure or outward- rounded wall and pair signs, and the preregistered command lacks a complete post- authorization runner. No parent retrieval, target parse or target fit ran, so H-053 remains unresolved. |
+| exp-048 | H-054 | unresolved | Typed premeasurement stop E1 (source/provenance): the retained witness records numerical-checker precision and rounding settings, while the retained source inventory records only metadata and derived numerical facts. Neither declares the upstream serialization semantics needed to derive a defensible closed cell for every source scalar. This is process retention, not a scientific H-054 verdict; no target reconstruction, target verifier, sample or result file was created. |
+| exp-049 | H-052 | unresolved | The declared 3920-second W6 timebox expired while the independently accumulated target manifest was still running; the single interrupt produced no canonical JSON, complete comparison, or checkpoint, so H-052 remains unmeasured and is neither accepted nor rejected. |
 
 ## Rounds
 
@@ -394,7 +406,7 @@ Status: **active**. Execute agenda-012 end to end during one owner-authorized ni
 | exp-037 | series-000 | 29 | openai-codex | H-042 | The retained serialization has six numerical orientation classes, with minimum class gap 0.296067 degrees against a 1e-90 degree interval radius. |
 | exp-041 | series-000 | 5 | openai-codex | H-023 | The frozen complete-zero-inventory clause is false: one additional owner axis is zero only at the positive endpoint, while independent control review also found mutation-reason and partial-disposition guards that remain unfinished. |
 
-### unresolved (5)
+### unresolved (7)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -403,8 +415,10 @@ Status: **active**. Execute agenda-012 end to end during one owner-authorized ni
 | exp-043 | series-000 | 5 | openai-codex | H-023 | Temporary generation and replay passed, but independent review found that the evaluator ignored center velocities in its second-order constants, combined no production rowwise curvatures, supplied no checked sheet acceleration witness, and asserted rather than proved the owner-3 two-scale routing. No target result was retained and no -W disposition follows. |
 | exp-044 | series-000 | 5 | openai-codex | H-023 | The criterion and fresh-agent handoff passed two independent audits, and a new production builder now constructs all six exact owner-row inventories through the accepted helper. The slice stopped before weighted row substitution, the exp-034 sheet evaluator, symbolic-real and unbounded scale routing, twelve mutations, or independent target dispositions were complete. No result JSON was written and no pure -W inference follows. |
 | exp-046 | series-000 | 11 | claude-code-overnight-run | H-044 | The criterion is missed under both denominator readings the registered text supports, identically in the exact and near bands: 23/30 = 0.7667 over all atlas records at n <= 30, and 3/10 = 0.30 over the non-grid records that are H-044's own sweep points -- so the outcome is robust to the one preregistration-style ambiguity this round refuses to decide (which denominator the claim meant). All seven misses (n = 5, 11, 17, 18, 19, 28, 29, every non-grid record but three) are typed no-partition results, fully determinate -- no n <= 30 record is search-capped or outside-budget. The decisive mechanism, verified against the stored components: the grammar's adjacency is the integer lattice step, and the tilted stratum's flush groups are tangentially slid -- Trump's n = 11 five-square group has all contact residuals exactly zero in the normal direction yet no integer lattice offsets, so it enters the universe as five singletons (the same mechanism at n = 17), and H-044's own worked decomposition of n = 11 needs three free squares against its own registered two. At n = 18, 19, 28, 29 real shared-angle candidates form (sixteen to thirty-six) and no admissible set covers the squares within two free. Two frozen-contract decisions frame any review: singleton chunks are inadmissible (n = 5's four mutually non-adjacent corner squares can never group; admitting singletons provably flips n = 5 and lands the broad reading on 24/30 = 0.80 exactly, while moving the sweep reading only to 4/10), and sliding contact assemblies are outside the universe (a contact-relaxed grammar upper-bounds the broad reading at 26/30 = 0.8667, shape and off-frame budgets unchecked). Whether the remaining misses move under either relaxation needs one preregistered re-run of the census with the relaxed universe -- a follow-on, not tonight's decision. Either way the structural conclusion X-010 needs stands: the bar/L/rectangle lattice grammar as frozen expresses the grid stratum completely and the tilted stratum not at all, so a stage-1 pipeline built on it is a restricted-class instrument, exactly as block 2's repricing priced it. Tier is exploratory, not confirmatory, by H-044's own review amendment of 2026-08-26: the n = 1..100 corpus was inspected while the detector contract was being repaired, so it is calibration-only, and a confirmatory disposition needs a successor round on an unseen corpus frozen after the instrument and grammar -- this round supplies the instrument and the calibration number that successor will be judged against. Review resolution 2026-08-31 (session-060, BC-106): the hold is lifted with the decision standing at unresolved -- the criterion miss is determinate, byte-replayable, and robust to the one denominator ambiguity, so no near-threshold judgement is pending; and the round cannot dispose H-044 in either direction, because the ledger derives a hypothesis-level refutation from any rejected round regardless of tier while the registered amendment types this corpus calibration-only and the hypothesis undisposed. Nothing about this round awaits review. |
+| exp-048 | series-000 | 50 | openai-codex | H-054 | Typed premeasurement stop E1 (source/provenance): the retained witness records numerical-checker precision and rounding settings, while the retained source inventory records only metadata and derived numerical facts. Neither declares the upstream serialization semantics needed to derive a defensible closed cell for every source scalar. This is process retention, not a scientific H-054 verdict; no target reconstruction, target verifier, sample or result file was created. |
+| exp-049 | series-000 | 17 | openai-codex | H-052 | The declared 3920-second W6 timebox expired while the independently accumulated target manifest was still running; the single interrupt produced no canonical JSON, complete comparison, or checkpoint, so H-052 remains unmeasured and is neither accepted nor rejected. |
 
-### blocked (4)
+### blocked (5)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -412,6 +426,7 @@ Status: **active**. Execute agenda-012 end to end during one owner-authorized ni
 | exp-019 | series-000 | 4 | openai-codex | H-021 | The block retains two exact side-2 endpoints and two explicit cell-cycle stops, but D-165 makes all four ineligible for terminal-component classification. |
 | exp-020 | series-000 | 5 | openai-codex | H-021 | The block retains two repeated side values and full poses, but it finds no proved optimum and D-165 makes all four events ineligible for component classification. |
 | exp-026 | series-000 | 6 | openai-codex | H-021 | Seeds 0 through 2 replay as admissible, but seed 3 crashed at the retention boundary after failing independent validity. D-183 blocks the cell and all larger event slices until a separately preregistered replication retains that stop. |
+| exp-047 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `interval-enclosure`: the numerical prototype's selftest and synthetic controls pass, but a float midpoint fit with fixed tolerance and heuristic radii does not prove a nonempty compatible-pose enclosure or outward- rounded wall and pair signs, and the preregistered command lacks a complete post- authorization runner. No parent retrieval, target parse or target fit ran, so H-053 remains unresolved. |
 
 ### accepted (16)
 
@@ -457,10 +472,12 @@ Status: **active**. Execute agenda-012 end to end during one owner-authorized ni
 | exp-018 | H-021 | 12m agent + 10s wall | dependency |  |  |
 | exp-019 | H-021 | 5m agent + 13s wall | dependency |  |  |
 | exp-020 | H-021 | 5m agent + 15s wall | dependency |  |  |
+| exp-048 | H-054 | 8m agent | dependency |  |  |
+| exp-049 | H-052 | 65.3333m agent + 65.3m wall | timebox | Frozen package-manifest SHA-256 309ec24158f73dd2e9b837c773b1 |  |
 
 ## Effort
 
-46 rounds, 1131 agent-minutes, 30.9 wall-minutes.
+49 rounds, 1243.33 agent-minutes, 128.4 wall-minutes.
 
 ## Exploration reports not yet codified
 

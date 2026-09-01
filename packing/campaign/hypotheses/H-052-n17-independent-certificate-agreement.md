@@ -29,12 +29,28 @@ hypothesis:
       implementation independence, provenance, or a guard cannot be established
     threshold: exact equality on every frozen invariant
   instrument: >-
-    Agenda-012 BC-108 freezes the retained certificate and invariant manifest, replays
-    the source-faithful path, and evaluates the same atoms with a separately written
-    exact accumulator whose control flow does not reproduce the published
-    two-dimensional difference-array sweep. It records exact rational outputs and runs
-    atom, weight, direction-cell, event-boundary, and scaling mutations.
-  instrument_ready: false
+    Exp-049 statically extracts the hash-pinned retained fixture through
+    cases/n17_weighted_certificate/extract.py at
+    db176a8eff7235991c63c8e7f098e2e2979edf64905d8f76427e0cd218b011e2. Its
+    clean-room direct Cartesian accumulator is frozen at
+    cases/n17_weighted_certificate/independent.py SHA-256
+    55d36239f1f7e860f059030d87f655d2ac0c82685d788b599a7dd23d33d18de0;
+    the separate source-faithful difference-array adapter is
+    cases/n17_weighted_certificate/source_faithful.py at
+    aaccd145c61fb20bc2b83a8ded83dfdd3f2d4b6d6c730ff46df31e1f1d8ae305.
+    cases/n17_weighted_certificate/run.py at
+    177e8545400799b6a701f258b685f2712f2529132803d78bf984575b897d027c
+    emits exact canonical manifests and the five frozen mutation decisions. The focused
+    suite in tests/test_n17_weighted_certificate.py passes under normal and optimized
+    project Python, with Ruff and BasedPyright clean. The SHA-256 of the sorted
+    `sha256sum` manifest for every Python file in cases/n17_weighted_certificate is
+    309ec24158f73dd2e9b837c773b1e5c1642f357de5bdf73311b73232abdb6d54,
+    which also binds the fixture, shared geometry, canonical model, production self-test
+    and target adapter. The self-test emits receipt hash
+    9c43160ad7b9f7407c5c1f7057838a925a13b4553b4edcde580f8abc58d9ec00;
+    its normal and optimized canonical stdout lines both hash to
+    459af1bd0345bee04e5a3af0d1c7a93cec635920774b3d647be13bed9d617579.
+  instrument_ready: true
   regime: >-
     The retained 168-atom Massaccesi certificate, its source hash, the 181-cell rational
     direction net, and the published shrink-and-scaling argument are fixed before either
@@ -44,7 +60,7 @@ hypothesis:
   instance: {axis: n, point: 17}
   priority: 1
   cost_estimate: >-
-    one 150-minute experiment round, executed through the agenda's 15–30-minute cells;
+    one 130-minute experiment round, executed through the agenda's 15–30-minute cells;
     freeze the invariant and mutation manifests before measurement, and stop unresolved
     when a provenance or independence guard fails
   prereqs:

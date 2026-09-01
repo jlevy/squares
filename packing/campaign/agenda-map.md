@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **10** ready, **3** tentative, **25** blocked, **5** stopped, **79** complete.
+- **7** ready, **3** tentative, **25** blocked, **7** stopped, **80** complete.
 
 - **11 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-111`, `BC-115`, `BC-122`, `BC-116`, `BC-117`, `BC-118`, `BC-119`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -30,9 +30,6 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-010 | `BC-104` | 2 | insight | research | Does the stage-1 pipeline -- enumerator, glued rows, class-angle sweep -- reproduce the proved controls… | `think-sfzh` |
 | agenda-010 | `BC-097` | 3 | process | tool_validation | Is the queue readable -- the gap ranking on a durable surface, and the 25 stale in_progress beads reconciled? | `think-6z95` |
 | agenda-010 | `BC-105` | 3 | correctness | research | Can a restricted-class optimality statement at n = 11 -- no packing of at most K chunks with at most two tilt… | `think-dbtx` |
-| agenda-012 | `BC-108` | 0 | correctness | measurement_validation | Does an independently written exact accumulation implementation agree with the fixed Massaccesi… | `think-swtr` |
-| agenda-012 | `BC-109` | 0 | correctness | measurement_validation | Can the six-decimal UnitSquare children and their cited public parents be reduced to hash-verified rigid-pose… | `think-26b1` |
-| agenda-012 | `BC-110` | 1 | correctness | measurement_validation | Can the reported n = 50 packing at exact rational side 53/7 be reconstructed and verified exactly, turning it… | `think-uz6f` |
 
 ## Blocked, and on what
 
@@ -96,7 +93,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-009 | active | 2 | 1 |  | 1 | 4 | 8 |
 | agenda-010 | active | 2 | 2 |  |  | 9 | 13 |
 | agenda-011 | completed |  |  |  |  | 2 | 2 |
-| agenda-012 | active | 3 |  | 5 |  |  | 8 |
+| agenda-012 | active |  |  | 5 | 2 | 1 | 8 |
 | agenda-013 | active |  |  | 7 |  |  | 7 |
 
 ## What the states mean

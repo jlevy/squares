@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 63
+count: 67
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 19
-  sessions_unmeasured: 44
+  sessions_measured: 22
+  sessions_unmeasured: 45
   attributed:
     rollups: 42
     turns: 13390
@@ -35,9 +35,9 @@ totals:
     one_off_code: 1738
     wall_hours: 76.48
 codex_receipts:
-  attributed: 2
+  attributed: 5
   unattributed: 0
-  measured: 2
+  measured: 5
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -798,3 +798,73 @@ sessions:
     active_union_hours: 0.85
     wall_hours: 0.85
     snapshot_incomplete: true
+- id: session-064
+  title: "Agenda-013 nine-hour coordinator"
+  status: in_progress
+  primary_bead: think-5xlb
+  phases: 2
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []
+- id: session-065
+  title: "BC-108 n = 17 independent certificate agreement"
+  status: completed
+  primary_bead: think-swtr
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-065.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-065.yaml
+    model_responses: 286
+    agent_hours: 1.74
+    active_union_hours: 1.74
+    wall_hours: 1.99
+    snapshot_incomplete: false
+- id: session-066
+  title: "BC-109 n = 68/69 precision bridge"
+  status: stopped
+  primary_bead: think-26b1
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-066.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-066.yaml
+    model_responses: 106
+    agent_hours: 0.64
+    active_union_hours: 0.64
+    wall_hours: 1.11
+    snapshot_incomplete: false
+- id: session-067
+  title: "BC-110 n = 50 exact rational control"
+  status: stopped
+  primary_bead: think-uz6f
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-067.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-067.yaml
+    model_responses: 28
+    agent_hours: 0.14
+    active_union_hours: 0.14
+    wall_hours: 0.32
+    snapshot_incomplete: false
