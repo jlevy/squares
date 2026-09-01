@@ -141,8 +141,22 @@ next bounded slice. The generated day-to-day views sit beside it: the frontier
 why the approach is shaped the way it is, and what is established versus open.
 Read it once, then [`SYNOPSIS.md`](SYNOPSIS.md) for the state of the program and
 [Current Status](#current-status) above to pick up the active work.
-The two subsections below are the hands-on start: verifying a packing exactly, and
-rendering packing figures.
+
+### Essential Terms
+
+The eight words a reader meets everywhere here — the tutorial’s vocabulary, in one line
+each; [`SYNOPSIS.md`](SYNOPSIS.md#terminology) owns the full definitions:
+
+| Term | Means |
+| --- | --- |
+| **configuration** | A placement of all `n` squares plus the container side: `3n + 1` coordinates |
+| **cell** | A choice of separating axis and order for every pair of squares; at fixed angles, one cell is one linear program. This is the only meaning of *cell* here: `BC-NNN` is a bounded **commitment**, not a cell |
+| **quench** | The deterministic refinement carrying a configuration to a local optimum |
+| **basin** | For a fixed deterministic quench, the preimage of one returned pose; this point-basin can split one connected terminal component |
+| **polish** vs **exploration** | Refining within the basin you are in, versus reaching a different one; neither term says anything about formal assurance |
+| **standing best** | The best side ever published for that `n`—an upper bound, not known optimal in open cases |
+| **gap** | `best_side − standing_best`, always signed |
+| **assurance** | `reported`, `numerically-checked`, or `verified`; only the last is formal, and method, precision, tolerance, origin, and any novelty qualification are recorded separately |
 
 ### Exact Verification
 
@@ -585,22 +599,6 @@ full definitions:
 | `D-NNN` | One defect: what went wrong, what caught it, and what now stops it recurring |
 | `T-N` | The synopsis’s shorthand for a theoretical result established in this repository |
 | `think-xxxx` | One bead: a tracked work item in the `tbd` queue |
-
-### Essential Terms
-
-The eight words a reader meets everywhere here, in one line each;
-[`SYNOPSIS.md`](SYNOPSIS.md#terminology) owns the full definitions:
-
-| Term | Means |
-| --- | --- |
-| **configuration** | A placement of all `n` squares plus the container side: `3n + 1` coordinates |
-| **cell** | A choice of separating axis and order for every pair of squares; at fixed angles, one cell is one linear program. This is the only meaning of *cell* here: `BC-NNN` is a bounded **commitment**, not a cell |
-| **quench** | The deterministic refinement carrying a configuration to a local optimum |
-| **basin** | For a fixed deterministic quench, the preimage of one returned pose; this point-basin can split one connected terminal component |
-| **polish** vs **exploration** | Refining within the basin you are in, versus reaching a different one; neither term says anything about formal assurance |
-| **standing best** | The best side ever published for that `n`—an upper bound, not known optimal in open cases |
-| **gap** | `best_side − standing_best`, always signed |
-| **assurance** | `reported`, `numerically-checked`, or `verified`; only the last is formal, and method, precision, tolerance, origin, and any novelty qualification are recorded separately |
 
 The operating documents divide ownership rather than repeat one another:
 
