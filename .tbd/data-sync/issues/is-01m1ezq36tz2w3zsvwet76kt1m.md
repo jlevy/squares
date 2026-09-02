@@ -5,7 +5,7 @@ title: "BC-127: first-wave W5 efficiency rollup"
 kind: task
 status: open
 priority: 0
-version: 4
+version: 10
 spec_path: packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md
 labels:
   - packing
@@ -18,6 +18,6 @@ parent_id: is-01m1ezp304q3fv8gjahq8n92q2
 hold: paused
 hold_until: null
 created_at: 2026-09-01T17:19:21.817Z
-updated_at: 2026-09-02T02:30:43.066Z
+updated_at: 2026-09-02T04:04:32.165Z
 ---
 Compare first-wave agent performance, literal-command failures, rework, tool latency and CI bottlenecks before routing continuations.

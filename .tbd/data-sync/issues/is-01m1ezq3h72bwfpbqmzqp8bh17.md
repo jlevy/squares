@@ -5,7 +5,7 @@ title: "BC-128: first-wave W3 routing checkpoint"
 kind: task
 status: open
 priority: 0
-version: 5
+version: 9
 spec_path: packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md
 labels:
   - packing
@@ -20,7 +20,8 @@ dependencies:
     target: is-01m1ezq4h8319jrpwwqbh7rwzq
 parent_id: is-01m1ezp304q3fv8gjahq8n92q2
 hold: paused
+hold_until: null
 created_at: 2026-09-01T17:19:22.150Z
-updated_at: 2026-09-02T02:30:43.073Z
+updated_at: 2026-09-02T04:04:32.169Z
 ---
 Route at most one continuation per lane from reviewed terminal evidence and the W5 decision.
