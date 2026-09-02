@@ -341,19 +341,24 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, use
-[session 061](../../../../packing/campaign/agent-sessions/session-061-epistemics-codification.md),
-the epistemics codification the verification review fed; agenda-010 is fully discharged
-and `BC-106`’s review is merged (the six overnight holds resolved as determinations, the
-green17 bound upgraded to `4.426213` on two independent formal methods with the frontier
-fields moved at `n = 17` and `n = 18`), and the active slice is `BC-107` under
-`think-n8vl` in
-[agenda-011](../../../../packing/campaign/agendas/agenda-011-verification-review.md) --
-`epistemics.md` owning the verification/confirmation/significance/novelty axes, the
-results register `packing/frontier/results.yaml` with `devtools/check_results.py`
-re-deriving every declared rung in the gate, and the reader tier re-oriented around it.
-Sessions 027 through 049 are terminal, and agendas 006, 007 and 008 are closed; the
-recognition block BC-089 keeps its remainder open as sanctioned gate filler.
+For the next supervised exact-research goal, follow
+[session 073](../../../../packing/campaign/agent-sessions/session-073-bc123-n17-parent-bound-parallel-profile.md),
+the latest lane closeout from Agenda 014’s frozen first wave.
+Its exact serial arm is retained, but host-load contamination stopped exp-053 before a
+paired profile existed.
+The owner paused the campaign after the checkpoint captured session 073, the terminal n
+= 68 adapter, the accepted-but-review-pending n = 50 refusal receipt and the n = 54
+source audit. The coordinating
+[session 072](../../../../packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md)
+on
+[agenda-014](../../../../packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md),
+is stopped rather than terminally synthesized.
+
+On resume, complete BC-127’s formal W5 receipt and BC-128’s immutable packet freeze,
+then take **BC-135 under `think-bpzq`** as the next supervised exact-research goal.
+That independent review must dispose exp-053 through exp-055 before BC-136 may derive a
+separate nine-hour overnight agenda.
+No candidate continuation is open at this checkpoint.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

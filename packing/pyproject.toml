@@ -136,6 +136,16 @@ known-first-party = ["cases", "devtools", "sqpack"]
 
 [tool.ruff.format]
 docstring-code-format = true
+# These executed instruments are content-addressed by immutable exp-050/exp-052/exp-055
+# evidence. Reformatting any file would sever the retained result or checkpoint from
+# the exact source bytes that produced it. Every file remains linted and type-checked.
+exclude = [
+    "cases/n050_exact/source_semantics.py",
+    "cases/n050_producer_refusal/run.py",
+    "cases/n050_producer_refusal/verify.py",
+    "cases/n17_weighted_certificate_resume/run.py",
+    "tests/test_n050_producer_refusal_independent.py",
+]
 
 # Types
 

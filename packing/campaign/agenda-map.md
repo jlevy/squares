@@ -2,7 +2,7 @@
 
 # Agenda map
 
-114 agenda commitments across 12 agendas, as declared in each agenda's own frontmatter.
+136 agenda commitments across 14 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **10** ready, **3** tentative, **17** blocked, **5** stopped, **79** complete.
+- **7** ready, **3** tentative, **24** blocked, **12** stopped, **90** complete.
 
-- **3 blocked commitments wait on something that is not a commitment** (`BC-016`, `BC-033`, `BC-050`). No edge will clear these; each names its own condition in the table below, and someone has to decide it is met.
+- **7 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-127`, `BC-132`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -20,19 +20,16 @@ Commitments a session may take now, in each agenda's declared order.
 
 | agenda | id | pri | focus | purpose | question | bead |
 | --- | --- | ---: | --- | --- | --- | --- |
-| agenda-001 | `BC-010` | 0 | insight | research | Are the equal-side n=5 candidates connected in the stationary set, and what verified minimax clearance… | `think-1s0h` |
+| agenda-001 | `BC-010` | 0 | insight | research | Are the equal-side n=5 candidates connected in the stationary set, and what verified minimax clearance… | `think-iivb` |
 | agenda-002 | `BC-017` | 1 | efficiency | tool_validation | Can a stratum be priced in counted LP solves end to end, so enumeration results are comparable to each other… | `think-u97a` |
 | agenda-005 | `BC-049` | 1 | correctness | research | Are the packings the catalogue annotates "Rigid." actually rigid, on evidence of our own rather than on the… | `think-xdly` |
-| agenda-009 | `BC-089` | 0 | correctness | research | Which of the 15 trailing cases with a published exact side are materialisations of a published rule, the way… | `think-d0j1` |
+| agenda-009 | `BC-089` | 0 | correctness | research | Which of the 13 trailing cases still owned here with a published exact side are materialisations of a… | `think-d0j1` |
 | agenda-009 | `BC-091` | 1 | insight | research | At the 31 open sizes where nobody has beaten the trivial grid, is the grid optimal or merely unbeaten? | `think-7t9u` |
 | agenda-009 | `BC-090` | 2 | insight | research | Can a stricter, better informed search beat a stochastic incumbent at any of the ten sizes whose best known… | `think-xdly` |
 | agenda-010 | `BC-099` | 0 | correctness | research | Does Bentz 2010's m = 4 argument certify mechanically, or where exactly does it escape? | `think-1o1f` |
 | agenda-010 | `BC-104` | 2 | insight | research | Does the stage-1 pipeline -- enumerator, glued rows, class-angle sweep -- reproduce the proved controls… | `think-sfzh` |
 | agenda-010 | `BC-097` | 3 | process | tool_validation | Is the queue readable -- the gap ranking on a durable surface, and the 25 stale in_progress beads reconciled? | `think-6z95` |
 | agenda-010 | `BC-105` | 3 | correctness | research | Can a restricted-class optimality statement at n = 11 -- no packing of at most K chunks with at most two tilt… | `think-dbtx` |
-| agenda-012 | `BC-108` | 0 | correctness | measurement_validation | Does a code-independent exact implementation verify the fixed Massaccesi weighted-point certificate at L =… | `think-swtr` |
-| agenda-012 | `BC-109` | 0 | correctness | measurement_validation | Do the six-decimal UnitSquare child SVGs admit rigid unit-square poses inside an explicit rounding envelope,… | `think-26b1` |
-| agenda-012 | `BC-110` | 1 | correctness | measurement_validation | Can the reported n = 50 packing at exact rational side 53/7 be reconstructed and verified exactly as the… | `think-uz6f` |
 
 ## Blocked, and on what
 
@@ -53,10 +50,17 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-002 | `BC-022` | 4 | `BC-021` | no | — |
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
-| agenda-012 | `BC-111` | 1 | `BC-108`, `BC-109`, `BC-110` | no | — |
-| agenda-012 | `BC-112` | 1 | `BC-108`, `BC-111` | no | — |
-| agenda-012 | `BC-113` | 1 | `BC-109`, `BC-111` | no | — |
-| agenda-012 | `BC-114` | 2 | `BC-110`, `BC-111` | no | — |
+| agenda-012 | `BC-115` | 2 | `BC-112` | no | BC-120 must clear and BC-121 must apply BC-112's adoption recommendation, and a second fixed-certificate consumer must… |
+| agenda-014 | `BC-127` | 0 | — | no | The four lane closeouts and resource receipts are frozen on the first-wave PR checkpoint, but the owner requested a… |
+| agenda-014 | `BC-128` | 0 | `BC-127` | no | — |
+| agenda-014 | `BC-135` | 0 | `BC-127`, `BC-128` | no | — |
+| agenda-014 | `BC-136` | 0 | `BC-135` | no | — |
+| agenda-014 | `BC-129` | 0 | `BC-123`, `BC-128` | no | — |
+| agenda-014 | `BC-130` | 0 | `BC-124`, `BC-128` | no | — |
+| agenda-014 | `BC-132` | 0 | — | no | BC-129--BC-131 must each stop lane work and commands at the common boundary after BC-128 routes the second wave and… |
+| agenda-014 | `BC-133` | 0 | `BC-132` | no | — |
+| agenda-014 | `BC-134` | 0 | `BC-133` | no | — |
+| agenda-014 | `BC-131` | 1 | `BC-126`, `BC-128` | no | — |
 
 ## Discharged elsewhere
 
@@ -88,7 +92,9 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-009 | active | 2 | 1 |  | 1 | 4 | 8 |
 | agenda-010 | active | 2 | 2 |  |  | 9 | 13 |
 | agenda-011 | completed |  |  |  |  | 2 | 2 |
-| agenda-012 | active | 3 |  | 4 |  |  | 7 |
+| agenda-012 | active |  |  | 1 | 5 | 2 | 8 |
+| agenda-013 | completed |  |  |  | 1 | 6 | 7 |
+| agenda-014 | active |  |  | 10 | 1 | 3 | 14 |
 
 ## What the states mean
 

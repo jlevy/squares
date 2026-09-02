@@ -50,6 +50,21 @@ def test_commitments_are_loaded_from_every_agenda() -> None:
     assert {c.agenda for c in load()} == {"-".join(f.name.split("-")[:2]) for f in files}
 
 
+def test_current_autonomous_w6_rows_name_registered_hypotheses() -> None:
+    """Agenda-012/013 may not route scientific W6 results only through AgentSessions."""
+    for name in (
+        "agenda-012-weighted-proof-precision-bridge-and-cross-scale-controls.md",
+        "agenda-013-nine-hour-autonomous-run.md",
+    ):
+        text = (AGENDAS / name).read_text(encoding="utf-8")
+        document = safe_load(text.split("---\n")[1])
+        for item in document["agenda"]["items"]:
+            if "research-loop" in (item.get("workflows") or []):
+                assert item.get("hypotheses"), (
+                    f"{item['id']} claims research-loop/W6 without a registered hypothesis"
+                )
+
+
 def test_states_come_from_the_state_field_not_the_status_field() -> None:
     """`state` is the commitment; `status` is the agenda that contains it.
 
@@ -110,12 +125,14 @@ def test_a_blocked_cell_with_all_predecessors_complete_is_reported() -> None:
     assert "`BC-002`" in text
 
     # The same cell, now stating a second blocker, must not be advertised as takeable.
-    # It belongs to neither summary bullet: its edge has cleared, so it is not waiting on
-    # a commitment, and it has an edge, so it is not in the no-predecessor set either. It
-    # is simply still blocked, and the map must say nothing rather than something wrong.
+    # Its hybrid manual gate must appear in the summary even though it also has a
+    # dependency edge; otherwise a coordinator could mistake predecessor completion for
+    # authorization.
     still_blocked = replace(stalled, blocked_on="an acceptance decision nobody has made")
     quiet = render([done, still_blocked])
     assert "have every predecessor" not in quiet
+    assert "**1 blocked commitment carries a manual condition** (`BC-002`)" in quiet
+    assert "Dependency edges alone cannot make this ready" in quiet
     assert "an acceptance decision nobody has made" in quiet
 
 

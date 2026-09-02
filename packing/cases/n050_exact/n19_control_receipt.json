@@ -1,0 +1,53 @@
+{
+  "build_call": "build(19)",
+  "control": "lifted-q2-n19-exact-sign",
+  "control_inputs": [
+    {
+      "path": "cases/lifted_q2/packing.py",
+      "sha256": "0e1cbf5b7eacb9e9c354aa9dab7f835097885c0b8ddc54ff6ad0eb62febc8a78"
+    },
+    {
+      "path": "cases/lifted_q2/verify_exact.py",
+      "sha256": "8019f856856be7d81a9a0a6b9aa2afd1aa9faabb3aa270677e3123eadfb7f2f3"
+    }
+  ],
+  "expected_side": {
+    "field": "Q(sqrt(2))",
+    "power_basis_coefficients": [
+      "3",
+      "4/3"
+    ],
+    "serialized": "poly[3,4/3]"
+  },
+  "mutation": {
+    "duplicated_index_one_based": 1,
+    "expected_pairs": 190,
+    "expected_valid": false,
+    "failure_kinds": [
+      "overlap"
+    ],
+    "kind": "append-duplicate-of-square-1",
+    "observed_n": 20,
+    "observed_pairs": 190,
+    "observed_valid": false
+  },
+  "observed_side": {
+    "equals_expected": true,
+    "power_basis_coefficients": [
+      "3",
+      "4/3"
+    ],
+    "serialized": "poly[3,4/3]"
+  },
+  "requested_n": 19,
+  "schema_version": 1,
+  "skip_count": 0,
+  "verification": {
+    "assurance": "exact-sign",
+    "expected_pairs": 171,
+    "observed_n": 19,
+    "observed_pairs": 171,
+    "pair_semantics": "all-unordered-pairs",
+    "valid": true
+  }
+}

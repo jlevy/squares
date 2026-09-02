@@ -1,0 +1,72 @@
+{
+  "schema": "UnitSquarePrecisionReadinessControls/v1",
+  "target_blind": true,
+  "controls": [
+    {
+      "id": "digest-before-parse",
+      "expected": "accept matching SHA-256 and refuse mismatch before invoking consumer"
+    },
+    {
+      "id": "identity-translation-scale-nested-transforms",
+      "expected": "recover normalized source cells under document-order CTM composition"
+    },
+    {
+      "id": "rotated-unit-square",
+      "expected": "recover a compatible canonical rigid pose"
+    },
+    {
+      "id": "wall-tangent-and-interior",
+      "expected": "independent verifier accepts nonnegative wall clearance"
+    },
+    {
+      "id": "separated-and-tangent-pairs",
+      "expected": "independent verifier accepts nonnegative separating-axis values"
+    },
+    {
+      "id": "decimal-cell-models",
+      "expected": "construct declared, nearest-six-place, and truncation-six-place closed cells"
+    },
+    {
+      "id": "cyclic-and-reversed-vertex-order",
+      "expected": "emit identical canonical receipts"
+    },
+    {
+      "id": "deterministic-replay",
+      "expected": "repeat byte-identical canonical serialization"
+    },
+    {
+      "id": "target-driver-gate",
+      "expected": "bind frozen inputs and refuse before every child read and parent retrieval"
+    },
+    {
+      "id": "parent-only-seal",
+      "expected": "seal the first qualifying parent model with no child input channel"
+    }
+  ],
+  "mutations": [
+    {
+      "id": "digest-mismatch",
+      "expected": "refuse before parsing"
+    },
+    {
+      "id": "transform-order-reversal",
+      "expected": "produce a discriminating normalized coordinate"
+    },
+    {
+      "id": "decimal-cell-corner-perturbation",
+      "expected": "refuse a compatible rigid pose"
+    },
+    {
+      "id": "duplicate-square-id",
+      "expected": "refuse parsing"
+    },
+    {
+      "id": "wall-crossing",
+      "expected": "independent verifier rejects"
+    },
+    {
+      "id": "pair-overlap",
+      "expected": "independent verifier rejects"
+    }
+  ]
+}

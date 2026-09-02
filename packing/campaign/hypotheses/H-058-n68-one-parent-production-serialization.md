@@ -1,0 +1,90 @@
+---
+title: H-058 — one fixed n = 68 parent admits a production-bound compatible pose
+softschema:
+  contract: packing.squares:Hypothesis/v1
+  schema: ../schemas/hypothesis.schema.yaml
+  envelope: hypothesis
+  status: enforced
+hypothesis:
+  id: H-058
+  kind: hypothesis
+  claim: >-
+    The fixed UnitSquare Release 1 n = 68 parent source admits at least one compatible
+    rigid unit-square pose enclosure under the declared serialization models when read
+    through a hash-bound production adapter, with provenance, transform, containment and
+    pairwise-validity guards independently replayed.
+  lane: search
+  derived_from: [X-011]
+  strategy_refs: ['search:17', 'search:20']
+  criterion:
+    shape: determination
+    metric: >-
+      literal production-command reachability; source digest and transform binding;
+      declared-model enumeration; one compatible parent-only rigid-pose enclosure with
+      every selected-polygon wall sign decided; synthetic separated, tangent and
+      overlap pair-control signs; verify-before-publication and cleanup receipts
+    direction: >-
+      accepted only if at least one declared model yields a compatible independently
+      verified parent pose and all three model executions terminate soundly; a sound
+      model-level incompatibility does not block a qualifying model, while any
+      provenance, transform, verifier, cleanup or other instrument failure invalidates
+      the round. Rejected only if a sound bounded evaluation exhausts all three models
+      and their correspondence spaces without one; otherwise unresolved by typed
+      refusal on any proof-node or budget guard
+    threshold: at least one qualifying model for the fixed n = 68 parent
+  instrument: >-
+    The independently admitted Agenda-014 BC-124 adapter is frozen at adapter.py SHA-256
+    9b503050115a5a48b01ec9f4d348b869495fbe4ee4847dc83188b05a3352f539,
+    run.py 8cef0f9cd4f473e594ed55e650be2fe7b286a798d2a94e5edb0a35efb7b12d54,
+    verify.py e39a6a725e7af01a2e1796e1a218576f76b8a2ec2cecf7fbde3f38aeb9630a7a
+    and focused-test SHA-256
+    17f4be0611fb02419d9007222f07b3f585b290c03866403a1d2bd5da954f01df.
+    It supplies the bounded opener, digest-before-parse scanner, exact transform and
+    model adapters, bounded proof evaluator and verify-before-publication path behind
+    one literal command. Manual prepublication review repaired the selected-path depth
+    check before descent; a fresh different-lane W2 review then reproduced 35 focused
+    tests, clean Ruff and BasedPyright checks, all 20 named mutations and byte-identical
+    normal and optimized receipts before admitting the corrected target-blind
+    instrument. BC-130 may now evaluate the claim only under a separately preregistered
+    target phase.
+  instrument_ready: true
+  regime: >-
+    The expected square-68.svg digest is
+    558fbdddfeb0b2f8752b88e172d2776544beb4d2a7122189ef77c1e1c5ebdc6d.
+    Models remain separate and ordered; raw bytes are bounded, hashed before parse and
+    discarded after the run. No child, released gain, surgery or n = 69 source is opened.
+  instance: {axis: release, point: unitsquare-release-1-n68-parent}
+  priority: 1
+  cost_estimate: >-
+    one 150-minute target-blind adapter block followed, only after independent admission,
+    by at most one 180-minute parent-only measurement block
+  prereqs:
+  - independently reviewed exp-047 and exp-051 records
+  - complete literal production adapter and mutation matrix
+  - fixed n = 68 parent digest, retention policy and model order
+  replication: false
+  registered: '2026-09-01'
+  notes: >-
+    Acceptance or rejection concerns one selected polygon from one parent only. The
+    pairwise signs in this claim are synthetic instrument controls, not target-parent
+    nonoverlap claims. It does not decide the two-pair H-053 claim, validate the full
+    parent packing or UnitSquare child, estimate record probability or open the H-051
+    surgery calibration. Readiness is instrument-only: no target source has been opened
+    and H-058 remains unmeasured. Whole-result verification independently checks shape,
+    binding and publication, but its exact proof replay shares the already reviewed
+    refusal.verify kernel at SHA-256
+    1533210f9d8e17cbdfa822da59187d280fc4ab063816644825c50d7b8b24552f with
+    the producer path. The reported side token still has no exact or directional
+    semantics, so the current production constructor soundly returns three typed
+    `serialization-refusal` outcomes unless a later preregistration supplies an
+    admissible binding.
+---
+# H-058 — One-Parent `n = 68` Production Serialization
+
+This claim isolates the first scientific fact the missing production adapter could
+measure. The child and its released improvement stay blinded until one parent can cross
+the provenance and pose boundary soundly.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

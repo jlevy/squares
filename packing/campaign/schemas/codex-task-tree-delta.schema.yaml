@@ -1,0 +1,123 @@
+# A retained, privacy-safe additive delta between two CodexEfficiencyRollup/v2 snapshots.
+# Branch attribution is deliberately absent: Codex task logs do not record it.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:CodexTaskTreeDelta/v1
+title: Codex task-tree delta
+type: object
+additionalProperties: false
+required: [source, completeness, before, after, delta, semantics]
+properties:
+  source:
+    type: object
+    additionalProperties: false
+    required:
+      - harness
+      - source_schema
+      - root_task_id
+      - start_cutoff_at
+      - end_cutoff_at
+      - before_snapshot_at
+      - after_snapshot_at
+    properties:
+      harness: {const: codex}
+      source_schema: {const: CodexEfficiencyRollup/v2}
+      root_task_id: {type: string, minLength: 1}
+      start_cutoff_at: {type: string, format: date-time}
+      end_cutoff_at: {type: string, format: date-time}
+      before_snapshot_at: {type: [string, "null"], format: date-time}
+      after_snapshot_at: {type: [string, "null"], format: date-time}
+  completeness:
+    type: object
+    additionalProperties: false
+    required: [snapshot_incomplete, live_session_count]
+    properties:
+      snapshot_incomplete: {type: boolean}
+      live_session_count: {type: integer, minimum: 0}
+  before: {$ref: "#/$defs/metrics"}
+  after: {$ref: "#/$defs/metrics"}
+  delta: {$ref: "#/$defs/metrics"}
+  semantics:
+    type: object
+    additionalProperties: false
+    required: [attribution, delta, cutoff_boundary, live_snapshot, retention]
+    properties:
+      attribution: {type: string, minLength: 1}
+      delta: {type: string, minLength: 1}
+      cutoff_boundary: {type: string, minLength: 1}
+      live_snapshot: {type: string, minLength: 1}
+      retention: {type: string, minLength: 1}
+$defs:
+  metrics:
+    type: object
+    additionalProperties: false
+    required:
+      - session_count
+      - task_count
+      - completed_task_count
+      - interrupted_task_count
+      - agent_active_seconds
+      - elapsed_envelope_seconds
+      - active_union_seconds
+      - parallel_overlap_seconds
+      - timed_model_stream_seconds
+      - recorded_first_token_wait_seconds
+      - tool_seconds_by_category
+      - compaction_seconds
+      - compaction_event_count
+      - compaction_item_count
+      - legacy_compaction_event_count
+      - excluded_legacy_replay_task_count
+      - models
+    properties:
+      session_count: {type: integer, minimum: 0}
+      task_count: {type: integer, minimum: 0}
+      completed_task_count: {type: integer, minimum: 0}
+      interrupted_task_count: {type: integer, minimum: 0}
+      agent_active_seconds: {type: number, minimum: 0}
+      elapsed_envelope_seconds: {type: number, minimum: 0}
+      active_union_seconds: {type: number, minimum: 0}
+      parallel_overlap_seconds: {type: number, minimum: 0}
+      timed_model_stream_seconds: {type: number, minimum: 0}
+      recorded_first_token_wait_seconds: {type: number, minimum: 0}
+      tool_seconds_by_category:
+        type: object
+        propertyNames:
+          enum: [agent_wait, command, mcp, agent_control, file_change, extension]
+        additionalProperties: {type: number, minimum: 0}
+      compaction_seconds: {type: number, minimum: 0}
+      compaction_event_count: {type: integer, minimum: 0}
+      compaction_item_count: {type: integer, minimum: 0}
+      legacy_compaction_event_count: {type: integer, minimum: 0}
+      excluded_legacy_replay_task_count: {type: integer, minimum: 0}
+      models:
+        type: array
+        items: {$ref: "#/$defs/model"}
+  model:
+    type: object
+    additionalProperties: false
+    required:
+      - model
+      - thinking_level
+      - model_response_count
+      - timed_model_stream_seconds
+      - timed_reasoning_seconds
+      - timed_message_seconds
+      - recorded_first_token_wait_seconds
+      - tokens
+    properties:
+      model: {type: string, minLength: 1}
+      thinking_level: {type: string, minLength: 1}
+      model_response_count: {type: integer, minimum: 0}
+      timed_model_stream_seconds: {type: number, minimum: 0}
+      timed_reasoning_seconds: {type: number, minimum: 0}
+      timed_message_seconds: {type: number, minimum: 0}
+      recorded_first_token_wait_seconds: {type: number, minimum: 0}
+      tokens:
+        type: object
+        additionalProperties: false
+        required: [input, cached_input, output, reasoning_output]
+        properties:
+          input: {type: integer, minimum: 0}
+          cached_input: {type: integer, minimum: 0}
+          output: {type: integer, minimum: 0}
+          reasoning_output: {type: integer, minimum: 0}

@@ -72,7 +72,14 @@ hypothesis:
     fifteen owner-3 scale records. Its target remains blocked until the scale helper,
     complete production controls, retained replay, and independent post-change review
     pass. Even a met criterion would remain local to canonical pure -W at the three
-    registered poses and would not answer this whole connectivity question.
+    registered poses and would not answer this whole connectivity question. Agenda-001
+    now gives dedicated BC-010 task think-iivb one terminal transfer test. Before
+    measurement it must retain the exact n = 5 and n = 10 fixtures, observable, pass
+    threshold, and refusal conditions. If the same discriminator does not transfer to
+    n = 10, H-023 remains an unresolved open question but is parked by portfolio
+    decision, BC-011 through BC-014 stop, and no further n = 5 local-geometry block is
+    implied by the unanswered mathematics. Legacy bead think-1s0h continues to own this
+    broader question but is not the agenda gate and must not be closed to clear it.
 ---
 # H-023 — resolve the first ambiguous census cell
 

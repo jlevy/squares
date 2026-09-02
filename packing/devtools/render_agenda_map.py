@@ -241,19 +241,20 @@ def render(commitments: list[Commitment]) -> str:
             "",
         ]
 
-    # Blocked on something that is not a commitment. This is a legitimate state, not a
-    # defect -- an artifact that does not exist yet blocks work as surely as a
-    # predecessor does. It is called out because no dependency edge will ever clear it,
-    # so it needs a person to notice rather than a queue to advance.
-    external = [c for c in blocked if not c.depends_on and c.blocked_on]
-    if external:
-        rows = ", ".join(f"`{c.id}`" for c in external)
+    # A written manual condition is legitimate whether or not the cell also has
+    # dependency edges. It is called out because edges alone cannot clear it: even a
+    # hybrid cell whose predecessors all finish still needs a person to record that the
+    # non-edge condition was met.
+    manual = [c for c in blocked if c.blocked_on]
+    if manual:
+        rows = ", ".join(f"`{c.id}`" for c in manual)
         out += [
             (
-                f"- **{plural(len(external), 'blocked commitment')} wait on something "
-                f"that is not a commitment** ({rows}). No edge will clear these; each "
-                "names its own condition in the table below, and someone has to decide "
-                "it is met."
+                f"- **{plural(len(manual), 'blocked commitment')} "
+                f"{'carries' if len(manual) == 1 else 'carry'} a manual condition** "
+                f"({rows}). Dependency edges alone cannot make "
+                f"{'this' if len(manual) == 1 else 'these'} ready; each condition is "
+                "named in the table below and must be explicitly cleared."
             ),
             "",
         ]

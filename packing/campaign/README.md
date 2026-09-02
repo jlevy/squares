@@ -466,7 +466,11 @@ Two refusals worth knowing, because they are structural rather than advisory:
   unwatched runner may apply it only in the conservative direction.
   A round passing clauses 1–4 is recorded `unresolved` with `needs_review: true` and
   waits for you. There is no code path that does otherwise, and `preflight` checks that
-  there is not.
+  there is not. The ledger reports such a round under **Needs review** but excludes its
+  decision from the hypothesis status; it cannot confirm, refute, or override an earlier
+  reviewed disposition.
+  A review applies the decision by clearing `needs_review` (or records a different
+  reviewed decision explicitly), after which the derived status may move.
 - **A hypothesis without a `runner` recipe is never run.** `instrument` is prose for a
   human; `runner.command` is the machine-readable form.
   A hypothesis carrying only the former is reported as needing an operator, never

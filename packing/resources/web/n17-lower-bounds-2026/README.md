@@ -19,8 +19,9 @@ check that every unit square contains mass at least 1.0003.
   byte.
 - `burns-verify-n17-lower-bound-4_4811.py` is the downloadable verifier, retained byte
   for byte.
-- `burns-near-record-arrangement.html` is a separate first-party post describing a
-  near-record `n = 17` arrangement with a topology distinct from the known record.
+- `burns-near-record-arrangement.html` is a separate first-party post in which Burns
+  describes a near-record `n = 17` arrangement as having a topology distinct from the
+  known record; this repository has not reconstructed that contact graph independently.
 
 Source URLs:
 
@@ -51,11 +52,11 @@ Source URLs:
 The extracted verifier was replayed on 31 August 2026 with the repository's Python 3.14
 environment. It completed in under five seconds and reported 168 atoms, total mass
 `9744 / 576`, a minimum score of `576 / 576` over 181 sampled rational directions, and
-`CERTIFICATE CONDITIONS VERIFIED`. A read-only audit found the angle cover, shrunken-square
-containment, event-cell sweep, and strict-scaling argument coherent. The result remains
-source-backed and audit-positive rather than repository-verified: Massaccesi's verifier
-is derived from Burns's, and no independent implementation has checked the same
-certificate.
+`CERTIFICATE CONDITIONS VERIFIED`. A manual read-only review reported no issue in the
+angle cover, shrunken-square containment, event-cell sweep, or strict-scaling argument,
+but no replayable audit checklist was retained. The result remains source-backed with a
+reported manual review rather than repository-verified: Massaccesi's verifier is derived
+from Burns's, and no independent implementation has checked the same certificate.
 
 The audit also found source defects that matter when reusing the work:
 

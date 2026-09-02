@@ -43,6 +43,12 @@ Open a versioned session when at least one of these conditions holds:
 
 Each such session has one integration bead and one active workflow phase.
 Several may exist concurrently; each keeps its own phase and clock.
+When several sessions will start from one shared tree, the coordinator is the sole id
+allocator. It creates each complete `session-NNN` artifact serially before dispatch and
+hands the owner that exact path.
+Creation must record the real goal, bead, phase, start, deadline, budget, stop
+conditions, fallback and next action; an empty or skeletal file is not a reservation.
+A lane never computes a next-free id after parallel work begins.
 Before escalated work starts, record:
 
 - the overall session goal, offset-aware start and hard deadline, wall budget, cycle
@@ -56,8 +62,21 @@ Before escalated work starts, record:
 In a clocked session, ordinary `work` phases must end before the finalization reserve.
 The final phase may instead declare `clock_role: finalization` and use that reserve for
 records, checks, commits, and handoff.
+For a parallel wave, every lane deadline precedes the coordinator checkpoint by its
+declared integration reserve.
+Lane work ends before the coordinator generates resource receipts, terminalizes sessions
+and beads, reconciles shared records, commits, or runs a repository-wide gate.
+Scheduling a lane through the instant its dependent checkpoint begins provides no
+finalization reserve.
 An active session leaves `progress.after` null; the checker requires the completed value
 when the session closes.
+
+A hypothesis-bearing measurement session records two boundaries separately.
+The instrument-readiness boundary names the frozen instrument, exact revision,
+validation commands and guards; the target-measurement boundary may begin only after
+those checks pass and the registry records the instrument as ready.
+A failed readiness guard closes the lane as a retained premeasurement stop without
+target samples or a scientific verdict.
 
 ### Starting a Portable Four-Hour Session
 
@@ -155,9 +174,14 @@ Do not use `git add -A` in a shared checkout.
 
 The checkpoint sequence above is per-phase.
 Bringing a whole session to a terminal state adds two steps, and neither is optional.
+For a delegated Codex lane, the owner first stops writing and returns a terminal-ready
+work receipt. The coordinator then snapshots that completed lane root, writes its exact
+resource receipt, records the attributed branch and repository-relative receipt path in
+the lane AgentSession, and only then marks the session terminal.
+The lane cannot declare itself terminal before the coordinator-owned receipt exists.
 
-**First, write the rollups and list them.** One record per log: the outer agent’s, and
-every sub-agent it spawned.
+**First, write the harness-appropriate receipts and list them.** Claude writes one
+record per log: the outer agent’s and every sub-agent it spawned.
 
 ```shell
 # From packing/.
@@ -167,15 +191,37 @@ uv run --frozen --all-extras --group dev python -m devtools.close_session \
 
 Then list what that wrote in the session record’s `resource_rollups`,
 repository-relative.
+The accepted identity is the exact path
+`packing/campaign/resource-usage/<receipt>.yaml`; basename-only, absolute, traversal and
+nested references are refused at the terminal gate.
 `devtools.log_rollup` is what `--update` calls and is still there for a single log, but
 the sub-agent sweep is where reconstructing by hand went wrong twice in one afternoon,
 which is the reason `--update` exists.
+
+Codex instead writes one privacy-reduced recursive interval from two frozen task-tree
+snapshots. Use the AgentSession start as the baseline and an explicit checkpoint as the
+end; descendants are already included, so do not list their raw logs separately:
+
+```shell
+# From packing/.
+uv run --frozen --all-extras --group dev python -m devtools.codex_task_tree_delta \
+  --sessions-root ~/.codex/sessions --root-id <codex-root-task-id> \
+  --start <AgentSession-started_at> --end <snapshot-at> \
+  --out campaign/resource-usage/codex-task-tree-<session-id>.yaml
+```
+
+Codex logs carry no Git-branch field.
+Listing this receipt in `resource_rollups` and naming the operator-attributed `branch`
+in the AgentSession is the explicit attribution; the receipt itself does not infer one.
+A receipt taken while the root task is live is a lower bound and must be regenerated at
+later checkpoints.
 
 **Second, render.** This is the step that turns the rollups into something a reader
 sees:
 
 ```shell
-uv run --frozen --all-extras --group dev python -m devtools.close_session --render
+uv run --frozen --all-extras --group dev python -m devtools.close_session \
+  --render --session <session-id>
 ```
 
 It rewrites [`session-close-report.yaml`](../session-close-report.yaml) and the
@@ -199,15 +245,17 @@ none and the gate step `terminal sessions name what they cost` runs it in `--rec
 
 Three things worth knowing when you do it:
 
-- **The rollup is regenerated, not appended.** A record is a function of the log it
-  names, so re-running the command on a session that has since grown replaces the
-  record. Run it at the end, not part-way through, or run it again if you do.
+- **A receipt is regenerated, not appended.** A Claude record is a function of its log;
+  a Codex delta is a function of its root and two cutoffs.
+  Re-running the command replaces the checkpoint receipt.
+  Run it at the end, or refresh it if you publish part-way through.
 
-- **Sub-agent transcripts are where the delegated cost lives**, and they are separate
-  logs. Session-045’s sixteen of them carry work that does not appear in the outer log at
-  all. Attribute them by comparing each rollup’s `span` against the session’s window
-  rather than by memory; the outer log may span more than one session, in which case
-  each names it.
+- **Claude sub-agent transcripts are separate; Codex descendants are recursive.**
+  Session-045’s sixteen Claude logs carry work absent from the outer log, so the Claude
+  update must list them.
+  `codex_task_tree_delta` follows descendants from the named root and separates
+  agent-time from active union, so listing those logs again would duplicate the measured
+  tree.
 
 - **Sessions numbered below `session-045` predate the field** and the checker lists them
   as grandfathered rather than skipping them silently.
@@ -225,19 +273,19 @@ Three things worth knowing when you do it:
   validated entry per session, and the generated block under `## Sessions Conducted` in
   [`SYNOPSIS.md`](../../../SYNOPSIS.md).
   `--check` refuses either having drifted and runs in `--records`; `--update`
-  regenerates rollups from logs and is the whole of backfill, since a retained log
-  turning up needs a run rather than a code change.
+  regenerates Claude rollups, while `codex_task_tree_delta` regenerates Codex intervals.
 
-- **Never total by adding sessions.** Sessions share harness logs — four declare the
-  current one in full, which is correct of each of them — so adding their figures counts
-  a shared log once per claimant.
+- **Never total by adding sessions or across harnesses.** Sessions share harness logs —
+  four declare the current one in full, which is correct of each of them — so adding
+  their figures counts a shared log once per claimant.
   Measured on 2026-08-30: 117.9 hours for a campaign that had spent 43.7. Every total in
   the report is over *distinct* rollups, and the shared log is shown on its own row so
   the per-session column still adds up.
   The tool infers no owner for an unclaimed rollup, which is a different question from
-  the span comparison above: use spans to decide what *your* session declares, and let
-  the unclaimed ones stay counted separately rather than assigned to whichever window
-  happens to contain them.
+  the span comparison above: use spans to decide what *your* Claude session declares,
+  and let unclaimed receipts stay counted separately.
+  Codex intervals remain their own table: model responses are not Claude assistant
+  turns, and the two receipt types can overlap.
 
   The coordinator substitutes the phase’s recorded validation command for
   `<focused-validation>` before the sequence and inspects every staged path before
@@ -370,8 +418,13 @@ phase audits and implements D-199 without relabeling that repair as research.
 
 The parent agent owns shared-file integration.
 A delegated task should have a bounded, preferably disjoint write scope.
-A delegation that may cross a checkpoint or run a long or side-effecting command gets a
-durable queued or active row before it runs.
+The coordinator does not commit or run repository-wide validation while a delegated
+writer is active. A shared-tool optimization may overlap lane work only when its read,
+write, dependency and validation scopes are recorded as disjoint from every active lane;
+otherwise it lands and passes its fixed-input equivalence gate before those lanes start,
+or does not run.
+A delegation that may cross a checkpoint or run a long or side-effecting
+command gets a durable queued or active row before it runs.
 That row records `recording: contemporaneous`, phase, wall budget, expected output,
 validation command, kill condition, fallback, write scope, excluded long commands,
 start, and deadline.

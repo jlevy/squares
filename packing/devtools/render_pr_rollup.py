@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Render the cost of the work behind a pull request, for the pull request itself.
 
-A reviewer looking at a branch can see what changed and cannot see what it took. That
-number exists -- `campaign/resource-usage/` holds one `ClaudeEfficiencyRollup` per agent
-log, with turns by model and thinking level, tokens, and every tool call -- and it has
-never been in front of the person deciding whether to merge.
+A reviewer looking at a branch can see what changed and cannot see what it took. Two
+harness-specific receipts can supply that view without pretending their telemetry is the
+same: Claude records Git branches in each log, while Codex can produce a privacy-reduced
+task-tree delta over the interval an AgentSession explicitly declares.
 
 **The attribution is a bound, not a figure, and saying so is the point.** `turns.by_branch`
 is the only branch-aware field in the record: tokens and tool calls are counted per log,
@@ -17,6 +17,12 @@ and the honest total is the interval between them.
 Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.render_pr_rollup \
         --branch claude/my-branch
+
+For Codex, the renderer discovers every AgentSession that explicitly declares the branch.
+The command above is therefore the cumulative branch-cost entry point. Pass `--session`
+only to inspect one declaration:
+    uv run --frozen --all-extras --group dev python -m devtools.render_pr_rollup \
+        --branch codex/my-branch --session session-062
 """
 
 from __future__ import annotations
@@ -25,12 +31,20 @@ import argparse
 import subprocess
 import sys
 from collections import Counter, defaultdict
+from datetime import datetime
 from pathlib import Path
 
+import yaml
+
+from devtools.check_session_rollups import codex_branch_claims
+from devtools.codex_task_tree_delta import validate_delta_document
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 USAGE = ROOT / "campaign" / "resource-usage"
+SESSIONS = ROOT / "campaign" / "agent-sessions"
+CLAUDE_CONTRACT = "packing.squares:ClaudeEfficiencyRollup/v1"
+CODEX_CONTRACT = "packing.squares:CodexTaskTreeDelta/v1"
 
 
 def current_branch() -> str:
@@ -44,14 +58,91 @@ def current_branch() -> str:
     return result.stdout.strip()
 
 
-def rollups() -> list[dict]:
+def resource_documents() -> list[tuple[str | None, dict, Path]]:
+    """Load retained resource receipts without pretending their shapes are unified."""
     found = []
     for path in sorted(USAGE.glob("*.yaml")):
         document = safe_load(path.read_text(encoding="utf-8"))
+        if not isinstance(document, dict):
+            continue
+        meta = document.get("softschema") or {}
         rollup = document.get("rollup") or document
+        if not isinstance(rollup, dict):
+            continue
+        found.append((meta.get("contract"), rollup, path))
+    return found
+
+
+def resource_reference(path: Path) -> str:
+    """Canonical identity for a receipt enumerated directly from the usage directory."""
+    if path.parent != USAGE:
+        raise ValueError("resource receipt is outside the usage directory")
+    return f"packing/campaign/resource-usage/{path.name}"
+
+
+def rollups() -> list[dict]:
+    """Claude records retain harness-observed branch attribution."""
+    found = []
+    for contract, rollup, path in resource_documents():
+        if contract != CLAUDE_CONTRACT:
+            continue
         rollup["_name"] = path.name
         found.append(rollup)
     return found
+
+
+def session_payloads() -> list[dict]:
+    """Load declarations once; malformed records remain the schema gate's responsibility."""
+    found = []
+    for path in sorted(SESSIONS.glob("session-*.md")):
+        text = path.read_text(encoding="utf-8")
+        if not text.startswith("---\n"):
+            continue
+        document = safe_load(text.split("---\n")[1])
+        payload = document.get("session") if isinstance(document, dict) else None
+        if isinstance(payload, dict):
+            found.append(payload)
+    return found
+
+
+def codex_receipts(session_id: str | None, branch: str) -> list[dict]:
+    """Return distinct intervals declared for a branch, with their session claimants."""
+    payloads = session_payloads()
+    if session_id is not None:
+        matches = [payload for payload in payloads if payload.get("id") == session_id]
+        if len(matches) != 1 or matches[0].get("branch") != branch:
+            return []
+
+    documents = {
+        resource_reference(path): (rollup, path)
+        for contract, rollup, path in resource_documents()
+        if contract == CODEX_CONTRACT
+    }
+    claims = codex_branch_claims(payloads, set(documents))
+    conflicts = [reference for reference, branches in claims.items() if len(branches) > 1]
+    if conflicts:
+        name = Path(sorted(conflicts)[0]).name
+        raise ValueError(f"{name} is attributed to more than one branch")
+
+    retained = []
+    for reference, branches in sorted(claims.items()):
+        claimants = sorted(branches.get(branch, set()))
+        if not claimants or (session_id is not None and session_id not in claimants):
+            continue
+        rollup, path = documents[reference]
+        document = safe_load(path.read_text(encoding="utf-8"))
+        if problems := validate_delta_document(document):
+            raise ValueError(f"{path.name} fails semantic validation: {problems[0]}")
+        record = dict(rollup)
+        record["_name"] = path.name
+        record["_claimants"] = claimants
+        retained.append(record)
+    return retained
+
+
+def _claimant_label(record: dict) -> str:
+    claimants = [f"`{identifier}`" for identifier in record["_claimants"]]
+    return ", ".join(claimants)
 
 
 def thousands(value: float) -> str:
@@ -232,7 +323,91 @@ def section_tools(records: list[dict]) -> list[str]:
     return lines
 
 
-def render(branch: str) -> str:
+def _window_seconds(source: dict) -> float:
+    start = datetime.fromisoformat(str(source["start_cutoff_at"]).replace("Z", "+00:00"))
+    end = datetime.fromisoformat(str(source["end_cutoff_at"]).replace("Z", "+00:00"))
+    return max(0.0, (end - start).total_seconds())
+
+
+def section_codex(records: list[dict], branch: str) -> list[str]:
+    """Render declared intervals separately from Claude's observed branch accounting."""
+    lines = [
+        "### Codex task-tree intervals declared by AgentSessions",
+        "",
+        (
+            f"Codex logs expose no Git-branch field. AgentSessions declare these task-tree "
+            f"intervals as work for `{branch}`; that association is operator-recorded, not "
+            "harness-observed. The receipt retains additive aggregates only and excludes "
+            "prompts, reasoning prose, private paths, descendant and turn identifiers, and "
+            "commands."
+        ),
+        "",
+    ]
+    for index, record in enumerate(records, start=1):
+        source = record["source"]
+        delta = record["delta"]
+        models = delta["models"]
+        responses = sum(int(model["model_response_count"]) for model in models)
+        tokens: Counter = Counter()
+        for model in models:
+            add(tokens, model["tokens"])
+        live = bool(record["completeness"]["snapshot_incomplete"])
+        lines += [
+            (
+                f"#### Interval {index}: `{record['_name']}` — declared by "
+                f"{_claimant_label(record)}"
+            ),
+            "",
+            "| metric | value |",
+            "| --- | ---: |",
+            f"| declared wall window | {duration(_window_seconds(source))} |",
+            f"| recursive agent time | {duration(delta['agent_active_seconds'])} |",
+            f"| active union | {duration(delta['active_union_seconds'])} |",
+            f"| parallel overlap | {duration(delta['parallel_overlap_seconds'])} |",
+            f"| model responses | {responses:,} |",
+            f"| output tokens | {tokens['output']:,} |",
+            f"| reasoning-output tokens | {tokens['reasoning_output']:,} |",
+            f"| cached-input tokens | {tokens['cached_input']:,} |",
+            "",
+            "| model @ thinking | responses | output | reasoning output | cached input |",
+            "| --- | ---: | ---: | ---: | ---: |",
+        ]
+        for model in models:
+            model_tokens = model["tokens"]
+            lines.append(
+                f"| `{model['model']} @ {model['thinking_level']}` "
+                f"| {model['model_response_count']:,} | {model_tokens['output']:,} "
+                f"| {model_tokens['reasoning_output']:,} "
+                f"| {model_tokens['cached_input']:,} |"
+            )
+        tools = delta["tool_seconds_by_category"]
+        if tools:
+            lines += [
+                "",
+                "| tool-time category | overlap-safe time |",
+                "| --- | ---: |",
+            ]
+            ordered_tools = sorted(tools.items(), key=lambda item: (-item[1], item[0]))
+            for category, seconds in ordered_tools:
+                lines.append(f"| `{category}` | {duration(seconds)} |")
+        lines += [
+            "",
+            (
+                "**Lower bound:** the after-snapshot still contained a live task, so later "
+                "work in that task is absent."
+                if live
+                else "The after-snapshot contained no live task in this measured tree."
+            ),
+            (
+                "Events emitted on completion can straddle an interval boundary; the receipt "
+                "states that boundary limitation rather than reallocating them."
+            ),
+            "",
+        ]
+    return lines
+
+
+def render(branch: str, session_id: str | None = None) -> str:
     exact, mixed = [], []
     for record in rollups():
         by_branch = record["turns"].get("by_branch") or {}
@@ -241,7 +416,8 @@ def render(branch: str) -> str:
             continue
         (exact if here == record["turns"]["assistant"] else mixed).append(record)
 
-    if not exact and not mixed:
+    codex = codex_receipts(session_id, branch)
+    if not exact and not mixed and not codex:
         return f"No rollup records any turn on `{branch}`.\n"
 
     versions = sorted(
@@ -254,20 +430,35 @@ def render(branch: str) -> str:
     lines = [
         "## What this branch cost",
         "",
-        *section_headline(exact, mixed, branch),
-        "",
-        "### Model use",
-        "",
-        *section_models(exact + mixed),
-        "",
-        "### Every tool used",
-        "",
-        *section_tools(exact + mixed),
-        "",
+    ]
+    if exact or mixed:
+        lines += [
+            "### Claude branch-derived rollups",
+            "",
+            *section_headline(exact, mixed, branch),
+            "",
+            "#### Model use",
+            "",
+            *section_models(exact + mixed),
+            "",
+            "#### Every tool used",
+            "",
+            *section_tools(exact + mixed),
+            "",
+            (
+                f"Generated from {len(exact) + len(mixed)} Claude rollups, harness "
+                f"{', '.join(versions) or 'unrecorded'}."
+            ),
+            "",
+        ]
+    if codex:
+        lines += section_codex(codex, branch)
+    command = f"devtools.render_pr_rollup --branch {branch}"
+    if session_id:
+        command += f" --session {session_id}"
+    lines += [
         (
-            f"Generated by `devtools.render_pr_rollup --branch {branch}` from "
-            f"{len(exact) + len(mixed)} rollups in `packing/campaign/resource-usage/`, "
-            f"harness {', '.join(versions) or 'unrecorded'}. "
+            f"Generated by `{command}` from `packing/campaign/resource-usage/`. "
             "Session-by-session figures are in "
             "[`session-close-report.yaml`](packing/campaign/session-close-report.yaml)."
         ),
@@ -281,6 +472,10 @@ def branches() -> list[str]:
     found: set[str] = set()
     for record in rollups():
         found.update((record["turns"].get("by_branch") or {}).keys())
+    for payload in session_payloads():
+        branch = payload.get("branch")
+        if isinstance(branch, str) and branch:
+            found.add(branch)
     return sorted(found)
 
 
@@ -288,24 +483,48 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--branch", help="branch to attribute (default: the checked-out one)")
     parser.add_argument(
+        "--session",
+        help="AgentSession that explicitly declares any Codex interval receipts",
+    )
+    parser.add_argument(
         "--check",
         action="store_true",
         help="render for every branch in the records without printing, as a smoke test",
     )
     args = parser.parse_args(argv)
 
-    if args.check:
-        # Rendering every branch is the check. Each has a different shape -- one wholly-owned
-        # log, several straddling ones, a branch with no exclusive log at all -- and a
-        # renderer that divides by a turn count fails on exactly those edges.
-        names = branches()
-        for name in names:
-            render(name)
-        render("a-branch-no-rollup-mentions")
-        print(f"  the branch cost rollup renders for {len(names)} branches, and for none")
-        return 0
-
-    print(render(args.branch or current_branch()), end="")
+    checked_names: list[str] | None = None
+    rendered: str | None = None
+    try:
+        if args.check:
+            # Rendering every branch exercises both harness records and the retained corpus.
+            checked_names = branches()
+            for name in checked_names:
+                render(name)
+            render("a-branch-no-rollup-mentions")
+        else:
+            rendered = render(args.branch or current_branch(), args.session)
+    except ValueError as error:
+        print(f"error: {error}", file=sys.stderr)
+        return 1
+    except (
+        AttributeError,
+        IndexError,
+        KeyError,
+        OSError,
+        TypeError,
+        yaml.YAMLError,
+        subprocess.CalledProcessError,
+    ):
+        print("error: unable to render branch-cost rollup", file=sys.stderr)
+        return 1
+    if checked_names is not None:
+        print(
+            f"  the branch cost rollup renders for {len(checked_names)} branches, and for none"
+        )
+    else:
+        assert rendered is not None
+        print(rendered, end="")
     return 0
 
 
