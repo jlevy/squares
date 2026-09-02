@@ -173,7 +173,7 @@ session:
       absences, safe commands, one named mutation and the unchanged claim boundary.
     commitment: BC-144
     bead: think-2tol
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: wave_two_boundary
     budget_minutes: 50
@@ -191,11 +191,62 @@ session:
     fallback: >-
       Retain the latest valid checkpoint and the first typed incomplete packet, leave
       every affected decision review-pending and do not open BC-145 for that packet.
+    outcome: >-
+      Commit 313624cc froze the terminal wave: exp-056 retained a valid 170-row
+      agreeing prefix and no canonical result, BC-141 completed its independently
+      admitted synthetic contract, and no writer remained. The registered W5 command
+      refused the live coordinator identically under normal and optimized Python, so
+      the durable decision is no-change. Exactly three immutable packets bind exp-056,
+      exp-057 and BC-141 with hashes, absences, safe controls, named mutations and
+      unchanged claim boundaries for fresh review.
+    evidence:
+    - docs/project/reviews/review-2026-09-02-agenda015-second-wave-efficiency.md
+    - docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-056-h-052-n17-sequential-larger-prefix.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.checkpoint.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.progress.json
+    stop_reason: >-
+      Reached the fixed 12:13Z BC-144 boundary with no live writer, a passing records
+      gate, one retained W5 no-change receipt and three reviewer-preassigned packets.
+    next_action: >-
+      Enter BC-145 under think-rh18 and give one immutable packet to each of three fresh
+      read-only Max reviewers through the fixed 13:43Z boundary.
+  - workflow: factual-review
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: >-
+      BC-145, 07:10--08:40: have three fresh reviewers independently replay only the
+      packet-declared hashes, absences, safe loaders, self-tests and mutations; reconcile
+      pass, bounded-caveat, discrepancy or cannot-reproduce findings without repair;
+      and retain a validated determination for every packet.
+    commitment: BC-145
+    bead: think-rh18
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: bc144_packet_freeze
+    budget_minutes: 90
+    started_at: '2026-09-02T12:13:00Z'
+    deadline_at: '2026-09-02T13:43:00Z'
+    expected_output: >-
+      Three independent packet determinations and one durable reconciliation record;
+      only exact passes may clear an experiment review flag.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      Stop the affected review on a repository write, scientific producer, target or
+      source access, network request, evidence-path drift, undeclared mutation or claim
+      wider than the packet.
+    fallback: >-
+      Retain the first typed caveat, discrepancy or cannot-reproduce finding, leave the
+      affected decision review-pending and register repair only after reconciliation.
     outcome: null
-    evidence: []
+    evidence:
+    - docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md
     stop_reason: null
     next_action: >-
-      Use 11:23--11:43Z only to terminalize the wave and freeze its evidence revision.
+      Use 12:13--12:58Z for three parallel fresh reviews, one immutable packet each;
+      run no review work on the coordinator while those determinations are in flight.
   primary_bead: think-x81p
   status: in_progress
   budget:
@@ -516,6 +567,8 @@ session:
   - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
   - packing/campaign/session-close-report.yaml
   - docs/project/reviews/review-2026-09-02-agenda015-first-wave-efficiency.md
+  - docs/project/reviews/review-2026-09-02-agenda015-second-wave-efficiency.md
+  - docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md
   - docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md
   - docs/project/document-map.yaml
   - SYNOPSIS.md
@@ -836,6 +889,66 @@ verifies both before any readmission card is issued.
   before any row append; no writer remains.
 - **Next:** enter BC-144 under `think-2tol`, retain the terminal vocabulary approved by
   the fresh Max reviewer and freeze the exact evidence revision before W5.
+
+## BC-144 Checkpoint Log
+
+### 06:20--06:40 (11:23--11:43Z) — terminal disposition and evidence freeze
+
+- **Artifact:** commit `313624cc08650bb9054e969da9cfd91ad83e2125`, the terminal exp-056
+  experiment and checkpoint pair, completed session-082, and closed beads `think-ovz9`
+  and `think-pkgx`.
+- **Result:** exp-056 is unresolved, stopped by the fixed timebox, and review-pending;
+  its cost-role result is `criterion_missed` because the 170-row agreeing prefix is not
+  the complete 181-direction round.
+  BC-141 is complete and independently admitted as synthetic-only instrumentation; H-055
+  remains instrument-unready.
+- **Guard:** no process or lane writer remains.
+  The records tier passes 26 of 58 named steps, the terminal checkpoint and progress
+  hashes remain `0d39a7e734e8afc62fda914fda4ec8b5e9b2e48ea1b1d8b197dc08e27e7a35d4` and
+  `0875f31fbf7391cfa40349812ca38a786069830a28f1c8d92ffd4ab33ecfe93c`, and the canonical
+  exp-056 result is absent.
+  The fresh Max disposition admits no H-052, lower-bound or frontier move.
+- **Next:** at 11:43Z run W5 once under normal and optimized Python against this frozen
+  revision; retain the typed result without manual reconstruction.
+
+### 06:40--06:50 (11:43--11:53Z) — W5 typed no-change
+
+- **Artifact:**
+  `docs/project/reviews/review-2026-09-02-agenda015-second-wave-efficiency.md` and the
+  normal/optimized captures in `/private/tmp/agenda015-bc144-w5-normal.txt` and
+  `/private/tmp/agenda015-bc144-w5-optimized.txt`.
+- **Result:** both registered invocations exit 2, emit the same 59 bytes, and hash to
+  `7687158e83453b7adb873845dd861d9243bf3c6c11408fa97ed26f3fc020c82e`. The exact refusal
+  is `refused: session-078: status 'in_progress' is not terminal`. Session-082’s shared
+  parent receipt is not lane-isolated, so no table is retained or reconstructed by hand
+  and the decision is `no-change`.
+- **Guard:** profile, frozen before/after input, equivalence, rollback, positive
+  remaining-wall repayment and active-lane disjointness remain the six mandatory guards.
+  No candidate passes all six; the evidence revision stays
+  `313624cc08650bb9054e969da9cfd91ad83e2125`, and no experiment state, criterion,
+  threshold, route or claim changes.
+- **Next:** at 11:53Z freeze at most three immutable review packets and preassign each
+  to a fresh BC-145 reviewer.
+  Unused W5 time does not move that boundary.
+
+### 06:50--07:10 (11:53--12:13Z) — immutable packet freeze
+
+- **Artifact:**
+  `docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md`, SHA-256
+  `67206898214e49250f559be57694633b920eb927ebf09650e76b79eb7727f0de`, containing exactly
+  Packet A for exp-056, Packet B for exp-057 and Packet C for BC-141.
+- **Result:** all three packets bind evidence revision
+  `313624cc08650bb9054e969da9cfd91ad83e2125`, exact artifact hashes, declared absences,
+  safe Python 3.14 commands, named mutations and the unchanged claim boundary.
+  They are preassigned one each to fresh Max reviewers; none authored a wave lane or the
+  BC-144 packet audit.
+- **Guard:** direct SHA-256 reconciliation matched every listed frozen byte.
+  The Softschema/records tier passes 26 of 58 named steps, the documentation map covers
+  403 durable documents, `make format-check` passes, and `git diff --check` is clean.
+  No packet opens a source, target, geometry, network, scientific producer or retained
+  result path.
+- **Next:** at 12:13Z close `think-2tol`, open `think-rh18`, dispatch the three fresh
+  reviewers in parallel and preserve the packet file unchanged through BC-145.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -1156,7 +1156,7 @@ sessions:
   title: "Agenda-015 ten-hour coordinator"
   status: in_progress
   primary_bead: think-x81p
-  phases: 4
+  phases: 5
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
