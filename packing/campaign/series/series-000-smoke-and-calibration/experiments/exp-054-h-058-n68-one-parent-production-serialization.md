@@ -76,7 +76,7 @@ experiment:
       and confirmed the canonical result remained absent.
   verdict:
     decision: unresolved
-    needs_review: true
+    needs_review: false
     primary_criterion: >-
       The literal production command reaches the injected adapter, normal and optimized
       receipts agree, all provenance, transform, model, proof, cleanup and publication
