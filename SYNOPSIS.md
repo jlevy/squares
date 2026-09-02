@@ -198,6 +198,7 @@ case or experiment separately.
 | [Review: Agenda 015 First-Wave Efficiency](docs/project/reviews/review-2026-09-02-agenda015-first-wave-efficiency.md) | dated review record | record | retained | — |
 | [Review: Agenda 015 Second-Wave Efficiency](docs/project/reviews/review-2026-09-02-agenda015-second-wave-efficiency.md) | dated review record | record | retained | — |
 | [Review Packets: Agenda 015 Second Wave](docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md) | dated review record | record | retained | — |
+| [Independent Review: Agenda 015 Second Wave](docs/project/reviews/review-2026-09-02-agenda015-second-wave-independent-review.md) | dated review record | record | retained | — |
 | [Design Note: `n = 50` Manifest and Sentinel Contract](docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md) | dated review record | record | retained | — |
 | [Agenda 013 Overnight Synthesis: Controls, Mechanisms, and the Next Research Queue](docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |

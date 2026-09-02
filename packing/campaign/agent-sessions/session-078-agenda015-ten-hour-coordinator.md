@@ -243,6 +243,7 @@ session:
     outcome: null
     evidence:
     - docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md
+    - docs/project/reviews/review-2026-09-02-agenda015-second-wave-independent-review.md
     stop_reason: null
     next_action: >-
       Use 12:13--12:58Z for three parallel fresh reviews, one immutable packet each;
@@ -719,6 +720,7 @@ session:
   - docs/project/reviews/review-2026-09-02-agenda015-first-wave-efficiency.md
   - docs/project/reviews/review-2026-09-02-agenda015-second-wave-efficiency.md
   - docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md
+  - docs/project/reviews/review-2026-09-02-agenda015-second-wave-independent-review.md
   - docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md
   - docs/project/document-map.yaml
   - SYNOPSIS.md
@@ -1099,6 +1101,45 @@ verifies both before any readmission card is issued.
   result path.
 - **Next:** at 12:13Z close `think-2tol`, open `think-rh18`, dispatch the three fresh
   reviewers in parallel and preserve the packet file unchanged through BC-145.
+
+## BC-145 Independent Review Log
+
+### 07:10--07:55 (12:13--12:58Z) — three fresh packet replays
+
+- **Artifact:** three read-only Max returns for Packets A, B and C, retained verbatim in
+  this session at commit `c0433f3807c16f30d14147691b53a6c73b42064e`.
+- **Result:** all three determinations are `pass` with no mismatch.
+  Packet A reproduces 12 hashes, result absence, the 170-row chain, both self-test
+  modes, 17 tests and four chain/interruption controls.
+  Packet B reproduces 12 hashes, both absences, both self-test modes, 62 tests,
+  `wrong-direction` and the source-provenance refusal.
+  Packet C reproduces 14 hashes, both author modes, 79 tests, both exact exit mutations,
+  canonical JSON and the independent import closure.
+- **Guard:** each reviewer was fresh and had authored neither a wave lane nor its BC-144
+  packet audit. No review changed a repository file or opened a source, network, target,
+  geometry, scientific producer or retained-result path.
+  Every early return was held without reconciliation until 12:58Z.
+- **Next:** at 12:58Z reconcile the three determinations without applying a state
+  transition or starting BC-146.
+
+### 07:55--08:20 (12:58--13:23Z) — cross-packet reconciliation
+
+- **Artifact:**
+  `docs/project/reviews/review-2026-09-02-agenda015-second-wave-independent-review.md`,
+  binding evidence revision `313624cc08650bb9054e969da9cfd91ad83e2125`, packet commit
+  `9d3ea64d6131439993d26dabea63bdbf209044ce` and packet SHA-256
+  `67206898214e49250f559be57694633b920eb927ebf09650e76b79eb7727f0de`.
+- **Result:** the three passes are mutually consistent.
+  They authorize BC-146 to clear only exp-056 and exp-057 `needs_review`; both decisions
+  stay unresolved. Packet C authorizes no H-055 transition.
+  H-052 and H-058 remain instrument-ready and undecided or unmeasured; H-055 remains
+  instrument-unready; every bound, frontier fact and future route remains unchanged.
+- **Guard:** no caveat, discrepancy or cannot-reproduce finding was hidden by a
+  lane-level summary. Exp-057’s guard-role outcome stays `invalid`; exp-056’s cost-role
+  outcome stays `criterion_missed`; Packet C stays synthetic-structure-only.
+  No review flag is cleared inside BC-145.
+- **Next:** at 13:23Z register and validate the review record; do not apply the two
+  authorized transitions or open BC-146 before the fixed 13:43Z boundary.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
