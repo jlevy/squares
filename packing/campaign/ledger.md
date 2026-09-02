@@ -92,10 +92,11 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-075](agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 7 | think-17q7 | Independent campaign review may clear or challenge exp-055 needs_review without rerunning it. |
 | [session-076](agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 5 | think-v0rj | Take BC-136 under think-oa22 only on a new owner instruction; it may clear the three review flags and write the separate overnight agenda from the one conditional route. |
 | [session-077](agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 3 | think-oa22 | Take BC-137 under think-ovz9 at agenda-015's wave-one dispatch; the two sibling lanes open in the same dispatch. |
-| [session-078](agent-sessions/session-078-agenda015-ten-hour-coordinator.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `process-review` (process) | 2 | think-x81p | Commit and push the frozen wave-one evidence, retain BC-143's registered W5 outcome, and route wave two only from the reviewed lane exits by 08:23Z. |
+| [session-078](agent-sessions/session-078-agenda015-ten-hour-coordinator.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (correctness) | 3 | think-x81p | Run BC-141's target-blind synthetic contract in session-082 while observing BC-137 every 25 minutes, then stop every writer at the fixed 11:23Z boundary. |
 | [session-079](agent-sessions/session-079-bc137-n17-sequential-larger-prefix.md) | completed | contemporaneous | `insight-iteration` (correctness) | `factual-review` (correctness) | 3 | think-ovz9 | The coordinator launches the registered exp-056 `--record` command and observes it with `--status` on the exp-056 checkpoint at each 25-minute boundary. |
 | [session-080](agent-sessions/session-080-bc138-n68-side-semantics-binding.md) | completed | contemporaneous | `insight-iteration` (correctness) | `factual-review` (correctness) | 4 | think-ymjp | Retain the literal point-model instrument and the typed refusal. Do not open BC-139; a future literal-only route requires a new prospectively frozen hypothesis and experiment. |
 | [session-081](agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `factual-review` (process) | 4 | think-hrw2 | Return the readmitted n = 54 subset to BC-143 under think-8hcp for the frozen routing decision; track the eight missing bound controls under D-418 / think-ifgr. |
+| [session-082](agent-sessions/session-082-bc141-n54-source-contract.md) | in_progress | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 1 | think-pkgx | Complete BC-141 under think-pkgx: finish the 08:23--08:43Z contract freeze, then either admit the first implementation slice or retain the exact typed refusal. |
 
 ### Workflow summary
 
@@ -105,7 +106,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 1 | 0 | 12 | 0 |
 | `factual-review` | 3 | 0 | 39 | 2 |
-| `insight-iteration` | 16 | 1 | 53 | 2 |
+| `insight-iteration` | 17 | 1 | 55 | 2 |
 | `process-review` | 13 | 4 | 60 | 6 |
 | `efficiency-loop` | 9 | 0 | 27 | 0 |
 | `research-loop` | 8 | 4 | 43 | 7 |

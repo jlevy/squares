@@ -195,6 +195,7 @@ case or experiment separately.
 | [Review: Agenda 014 First-Wave Efficiency](docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md) | dated review record | record | retained | — |
 | [Review Packets: Agenda 014 First Wave](docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md) | dated review record | record | retained | — |
 | [Independent Review: Agenda 014 First Wave](docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md) | dated review record | record | retained | — |
+| [Review: Agenda 015 First-Wave Efficiency](docs/project/reviews/review-2026-09-02-agenda015-first-wave-efficiency.md) | dated review record | record | retained | — |
 | [Design Note: `n = 50` Manifest and Sentinel Contract](docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md) | dated review record | record | retained | — |
 | [Agenda 013 Overnight Synthesis: Controls, Mechanisms, and the Next Research Queue](docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -331,9 +332,11 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-The latest lane closeout is
-[session-081](packing/campaign/agent-sessions/session-081-bc140-target-blind-guard-repairs.md),
-the BC-140 guard repairs, which returned with
+The latest active lane is
+[session-082](packing/campaign/agent-sessions/session-082-bc141-n54-source-contract.md),
+the target-blind BC-141 contract earned from
+[session-081](packing/campaign/agent-sessions/session-081-bc140-target-blind-guard-repairs.md).
+That BC-140 guard lane returned with
 [session-079](packing/campaign/agent-sessions/session-079-bc137-n17-sequential-larger-prefix.md)
 and
 [session-080](packing/campaign/agent-sessions/session-080-bc138-n68-side-semantics-binding.md)
@@ -347,17 +350,19 @@ published;
 [session-076](packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md)
 holds the reviewed first-wave evidence those routes rest on.
 
-Wave one: the `n = 17` child chain (exp-056) resumed across the matched Linux/Claude to
+Wave one closed at the fixed 08:23Z checkpoint.
+The `n = 17` child chain (exp-056) resumed across the matched Linux/Claude to
 macOS/Codex handoff and remains live under its original wall.
 Independent readmission stopped the `n = 68` binding (exp-057): only the literal
 printed-side point model is source-supported, so BC-139 will not open.
 BC-140 is partial because eight declared bounds lack named exceeding controls, but its
-replayed n = 54 controls and frozen-input inventory may still route the synthetic BC-141
+replayed n = 54 controls and frozen-input inventory routed the synthetic BC-141
 contract. BC-142 is partial because its 13-of-115 selection control does not prove
 exact-set equivalence.
-BC-137 remains live under observation at 25-minute boundaries.
-The pending checkpoint is **BC-143 under bead `think-8hcp`** at `07:33Z`; it freezes the
-wave and may route only BC-141 while BC-137 continues if its prefix is growing.
+The checkpoint retained W5 as `no-change`, stopped BC-139, and opened **BC-141 under
+bead `think-pkgx`** only for the synthetic parser/correspondence contract.
+BC-137 reached 92 verified agreeing rows at 08:23Z and remains live under 25-minute
+observation through the 11:23Z wave-two boundary.
 No scientific target result has been promoted, and H-052, H-055 and H-058 move only
 under their own frozen criteria.
 
@@ -2595,8 +2600,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 37 |
-| closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **81** |
+| closed before `resource_rollups` existed, logs not retained | 45 |
+| **total** | **82** |
 
 <!-- END GENERATED: session-close-report -->
 

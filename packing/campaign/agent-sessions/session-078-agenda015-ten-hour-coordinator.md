@@ -74,7 +74,7 @@ session:
       from their reviewed exits.
     commitment: BC-143
     bead: think-8hcp
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: wave_one_boundary
     budget_minutes: 50
@@ -92,12 +92,63 @@ session:
     fallback: >-
       Retain the first typed refusal, leave the unsupported row stopped, and publish
       the exact frozen revision without borrowing time from wave two.
+    outcome: >-
+      Commit d15e96c8 froze and pushed the 72-row wave-one prefix and terminal lane
+      records; hosted checks are green. The registered W5 renderer refused the mixed
+      receipt harnesses under D-421, so the durable decision is no-change. BC-139 is
+      stopped without source or network access; BC-141 is routed only to the synthetic,
+      target-blind contract admitted by BC-140's n = 54 subset; and BC-137 continues
+      from a verified 92-row agreeing prefix observed at 08:23Z.
+    evidence:
+    - packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md
+    - docs/project/reviews/review-2026-09-02-agenda015-first-wave-efficiency.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.checkpoint.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.progress.json
+    stop_reason: >-
+      Reached the fixed 08:23Z checkpoint with the evidence revision pushed, W5
+      retained, every route typed, and the records gate passing 26 of 58 named steps.
+    next_action: >-
+      Observe BC-137 every 25 minutes and run only BC-141's target-blind synthetic
+      contract through the fixed 11:23Z wave-two boundary.
+  - workflow: insight-iteration
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: >-
+      Wave two, 03:20--06:20: keep BC-137's single long process under exact 25-minute
+      observation; freeze, implement, mutate and independently review BC-141's
+      source-cell parser and labeled-correspondence contract only against a synthetic
+      fixture; and stop every writer at 11:23Z without source, network, target or n = 54
+      geometry access.
+    commitment: BC-141
+    bead: think-pkgx
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: bc143_routed_wave_two
+    budget_minutes: 180
+    started_at: '2026-09-02T08:23:00Z'
+    deadline_at: '2026-09-02T11:23:00Z'
+    expected_output: >-
+      A frozen and independently reviewed n = 54 parser/correspondence contract with
+      two rejecting mutations or one exact typed refusal, plus a terminal retained
+      exp-056 checkpoint whose claim boundary moves no packing bound.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      Stop BC-141 on any live-source, network, target, witness-geometry or production
+      parser access, any ambiguous or incomplete formula accepted, any independent
+      verifier disagreement, or a synthetic fixture that cannot stand in for the
+      declared source structure. Stop BC-137 on disagreement, chain failure, absent
+      checkpoint or a non-growing scheduled boundary.
+    fallback: >-
+      Retain the first typed refusal, keep H-055 instrument-unready, preserve the latest
+      valid exp-056 checkpoint, and do not substitute n = 39 or n = 54 geometry.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Commit and push the frozen evidence revision, then run W5 and route wave two by
-      08:23Z.
+      Allocate session-082, dispatch the Max/XHigh contract team, and take the next
+      exp-056 observation at 08:48Z.
   primary_bead: think-x81p
   status: in_progress
   budget:
@@ -381,10 +432,12 @@ session:
     phase: 1
   outputs:
   - packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md
+  - packing/campaign/agent-sessions/session-082-bc141-n54-source-contract.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.checkpoint.json
   - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.progress.json
   - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
   - packing/campaign/session-close-report.yaml
+  - docs/project/reviews/review-2026-09-02-agenda015-first-wave-efficiency.md
   - docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md
   - docs/project/document-map.yaml
   - SYNOPSIS.md
@@ -412,8 +465,8 @@ session:
   - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
   stop_reason: null
   next_action: >-
-    Commit and push the frozen wave-one evidence, retain BC-143's registered W5 outcome,
-    and route wave two only from the reviewed lane exits by 08:23Z.
+    Run BC-141's target-blind synthetic contract in session-082 while observing BC-137
+    every 25 minutes, then stop every writer at the fixed 11:23Z boundary.
 ---
 # Session 078 — Agenda-015 Ten-Hour Coordinator
 
@@ -547,6 +600,55 @@ verifies both before any readmission card is issued.
 - **Next:** BC-143 freezes and pushes the revision, retains W5 `no-change` under D-421,
   stops BC-139, routes only the admitted n = 54 subset to BC-141, and keeps BC-137 under
   observation through 11:23Z.
+
+## BC-143 Checkpoint Log
+
+### 02:30--02:50 (07:33--07:53Z) — frozen evidence revision and PR checkpoint
+
+- **Artifact:** commit `d15e96c888794c486d3f40b9693fcf4b849f3dbc`, the recut session-078
+  task-tree receipt through 07:35:50Z, and the cost-first PR #75 body.
+- **Result:** the records tier passed 26 of 58 named steps; local HEAD, origin, and the
+  PR head agree; the PR reports the 72-row frozen prefix and the continuing 11:23Z
+  lease.
+- **Guard:** staged-blob hashing reproduced the observed checkpoint and progress SHA-256
+  values. The new hosted macOS portability check passes; Linux validation runs
+  concurrently. The cell finished early and did not lend its unused minutes to W5.
+- **Next:** run the registered cross-harness wave-efficiency command at 07:53Z and
+  retain its typed outcome without manual arithmetic.
+
+### 02:50--03:05 (07:53--08:08Z) — W5 typed no-change
+
+- **Artifact:**
+  `docs/project/reviews/review-2026-09-02-agenda015-first-wave-efficiency.md`.
+- **Result:** normal and optimized invocations of the registered renderer both exit 2
+  with the same D-421 refusal because sessions 079 through 081 contain Claude rather
+  than Codex efficiency receipts.
+  BC-142’s reachable-test map also fails the exact-set equivalence and
+  commensurate-before/after guards.
+  The predeclared decision is `no-change`; no instrument or route changes.
+- **Guard:** four focused renderer tests and the 400-document gate pass, hosted checks
+  on `d15e96c8` are green, and the review contains no manually reconstructed efficiency
+  table. The cell finished early and did not lend its unused minutes to routing.
+- **Next:** use 08:08--08:23Z only for route closure: stop BC-139, admit BC-141’s
+  target-blind n = 54 contract slice, and continue BC-137 only while the verified child
+  chain grows.
+
+### 03:05--03:20 (08:08--08:23Z) — typed wave-two route
+
+- **Artifact:** the three-row routing decision in this session, closed BC-139 bead
+  `think-3lfz`, and allocated session-082 for BC-141.
+- **Result:** BC-139 stays stopped because BC-138 did not readmit the side semantics.
+  BC-141 opens only for the synthetic, target-blind parser/correspondence contract
+  admitted by BC-140’s n = 54 subset.
+  BC-137 continues: the 08:23Z observation contains 92 rows, 59 child rows, last ordinal
+  91, exact agreement and a verified chain; it grew by 20 rows from the 07:34Z freeze.
+- **Guard:** the checkpoint and progress SHA-256 values are
+  `7c03ac2c62a06ef64870070ee2da9b98553e6e473bd4570138ff0c7da41c8189` and
+  `2b31b4bcb75834e4c1aef103173ee04615db15832e23c9c8a5c39194cf73b1bf`; progress is
+  ordinal 92 at `independent_started`, the canonical result is absent, and the writer
+  remains live. No unused checkpoint time moved into wave two.
+- **Next:** start session-082 at 08:23Z, observe exp-056 next at 08:48Z, and stop both
+  wave-two lanes at 11:23Z for BC-144.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

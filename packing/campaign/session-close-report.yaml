@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 81
+count: 82
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 37
-  sessions_unmeasured: 44
+  sessions_unmeasured: 45
   attributed:
     rollups: 55
     turns: 14495
@@ -1156,7 +1156,7 @@ sessions:
   title: "Agenda-015 ten-hour coordinator"
   status: in_progress
   primary_bead: think-x81p
-  phases: 2
+  phases: 3
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
@@ -1213,4 +1213,14 @@ sessions:
   tool_errors: 0
   one_off_code: 19
   wall_hours: 0.24
+  codex_receipts: []
+- id: session-082
+  title: "BC-141 n = 54 source-cell contract"
+  status: in_progress
+  primary_bead: think-pkgx
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
   codex_receipts: []
