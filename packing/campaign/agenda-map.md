@@ -2,7 +2,7 @@
 
 # Agenda map
 
-136 agenda commitments across 14 agendas, as declared in each agenda's own frontmatter.
+146 agenda commitments across 15 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **7** ready, **3** tentative, **21** blocked, **12** stopped, **93** complete.
+- **11** ready, **3** tentative, **20** blocked, **18** stopped, **94** complete.
 
-- **10 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-136`, `BC-129`, `BC-130`, `BC-131`, `BC-132`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **5 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -30,6 +30,10 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-010 | `BC-104` | 2 | insight | research | Does the stage-1 pipeline -- enumerator, glued rows, class-angle sweep -- reproduce the proved controls… | `think-sfzh` |
 | agenda-010 | `BC-097` | 3 | process | tool_validation | Is the queue readable -- the gap ranking on a durable surface, and the 25 stale in_progress beads reconciled? | `think-6z95` |
 | agenda-010 | `BC-105` | 3 | correctness | research | Can a restricted-class optimality statement at n = 11 -- no packing of at most K chunks with at most two tilt… | `think-dbtx` |
+| agenda-015 | `BC-137` | 0 | correctness | research | Resumed sequentially from the reviewed 33-row exp-052 chain, does the independent exact accumulation agree… | `think-ovz9` |
+| agenda-015 | `BC-138` | 0 | correctness | tool_validation | Can the reported n = 68 side token be bound to admissible exact or directional semantics in a preregistered… | `think-ymjp` |
+| agenda-015 | `BC-140` | 0 | process | tool_validation | Do the three routed guard repairs exist as refusable tools: a named negative control and complete… | `think-hrw2` |
+| agenda-015 | `BC-142` | 1 | efficiency | tool_validation | Can the push tier select tests for a change under benchmarks/ and the first-wave case roots instead of… | `think-8zct` |
 
 ## Blocked, and on what
 
@@ -51,13 +55,12 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
 | agenda-012 | `BC-115` | 2 | `BC-112` | no | BC-120 must clear and BC-121 must apply BC-112's adoption recommendation, and a second fixed-certificate consumer must… |
-| agenda-014 | `BC-136` | 0 | `BC-135` | yes | The owner's resume instruction covered BC-127, BC-128 and BC-135 and left later blocks paused. BC-136's synthesis, the… |
-| agenda-014 | `BC-129` | 0 | `BC-123`, `BC-128` | no | BC-128 stopped this row: BC-123 measured no paired sample, so the 2.8x condition never held, and the retained serial… |
-| agenda-014 | `BC-130` | 0 | `BC-124`, `BC-128` | yes | BC-128 froze this row as a conditional candidate: it opens only if exp-054 passes BC-135 review and a separate… |
-| agenda-014 | `BC-132` | 0 | — | no | BC-129--BC-131 must each stop lane work and commands at the common boundary after BC-128 routes the second wave and… |
-| agenda-014 | `BC-133` | 0 | `BC-132` | no | — |
-| agenda-014 | `BC-134` | 0 | `BC-133` | no | — |
-| agenda-014 | `BC-131` | 1 | `BC-126`, `BC-128` | yes | BC-128 stopped this row and retained the source refusal exact-source-parser-and-labeled-correspondence-absent. The… |
+| agenda-015 | `BC-139` | 0 | `BC-138`, `BC-143` | no | — |
+| agenda-015 | `BC-143` | 0 | `BC-138`, `BC-140`, `BC-142` | no | — |
+| agenda-015 | `BC-144` | 0 | `BC-143` | no | — |
+| agenda-015 | `BC-145` | 0 | `BC-144` | no | — |
+| agenda-015 | `BC-146` | 0 | `BC-145` | no | — |
+| agenda-015 | `BC-141` | 1 | `BC-140`, `BC-143` | no | — |
 
 ## Discharged elsewhere
 
@@ -91,7 +94,8 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-011 | completed |  |  |  |  | 2 | 2 |
 | agenda-012 | active |  |  | 1 | 5 | 2 | 8 |
 | agenda-013 | completed |  |  |  | 1 | 6 | 7 |
-| agenda-014 | active |  |  | 7 | 1 | 6 | 14 |
+| agenda-014 | completed |  |  |  | 7 | 7 | 14 |
+| agenda-015 | active | 4 |  | 6 |  |  | 10 |
 
 ## What the states mean
 

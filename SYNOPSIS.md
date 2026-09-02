@@ -86,9 +86,9 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives three confirmed hypotheses, six refuted
+The generated ledger currently derives four confirmed hypotheses, six refuted
 hypotheses, one open hypothesis, seven open questions, and thirty-five blocked
-hypotheses. Three further hypotheses need review and four are unresolved.
+hypotheses. No hypothesis waits on review and six are unresolved.
 The set includes one claim whose formal prerequisite is missing, H-044 whose registered
 calibration-only amendment keeps the hypothesis undisposed — its first scored round
 (exp-046) missed the criterion determinately under both denominator readings, the review
@@ -331,28 +331,27 @@ controller, not permission to blur contracts.
 ### Current Handoff
 
 The latest session is
-[session-076](packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md),
-which resumed Agenda 014 from the pushed PR #73 checkpoint at revision `1e175108` on the
-owner’s explicit instruction and closed the three blocks that instruction named.
-BC-127 recorded `no-change` in
-[review-2026-09-02-agenda014-first-wave-efficiency](docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md),
-with its baseline rendered by `devtools.render_wave_efficiency` and five routed W7
-entries. BC-128 stopped BC-129 and BC-131, froze BC-130 as a conditional candidate, and
-froze three packets in
-[review-2026-09-02-agenda014-first-wave-packets](docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md).
-BC-135 then ran three fresh reviewers against those packets:
-[review-2026-09-02-agenda014-first-wave-independent-review](docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md)
-records **pass** for exp-053, exp-054 and exp-055, with every hash, mutation and absence
-reproduced. The coordinating
+[session-077](packing/campaign/agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md),
+which closed Agenda 014 on the owner’s instruction: the three BC-135-cleared review
+flags are applied in the exp-053, exp-054 and exp-055 records, every unearned
+second-wave row is stopped or carried, and the successor is
+[agenda-015](packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md),
+an exact ten-hour run built only from reviewed routes and target-blind fallbacks.
+[session-076](packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md)
+holds the W5 receipt, the routing packets and the independent review that earned those
+routes; the coordinating
 [session-072](packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md)
-and the lane closeouts in sessions 073--075 hold the first-wave evidence.
+and sessions 073--075 hold the first-wave evidence.
 
-No scientific target result was promoted, and the three `needs_review` flags remain
-`true`: only BC-136 may clear them, and it is paused.
-The next cell is **BC-136 under bead `think-oa22`**, which opens only on a new owner
-instruction: it applies the three cleared review flags, writes the first-wave synthesis
-and a separate nine-hour overnight agenda from the one conditional route.
-No second-wave lane is authorized from this checkpoint alone.
+Agenda-015 runs three lanes over a 150/50/180/50/90/80 wall: an `n = 17` sequential
+larger-prefix round resuming the reviewed exp-052 chain from ordinal 33 (BC-137), an
+`n = 68` side-semantics preregistration that earns the one-parent localization (BC-138
+then BC-139), and the three routed guard repairs that gate the `n = 54` parser and
+correspondence contract (BC-140 then BC-141), with two checkpoints, an independent
+review and a closeout on the coordinator.
+The next cell is **BC-137 under bead `think-ovz9`**, taken together with BC-138 and
+BC-140 at the wave-one dispatch; no scientific target result has been promoted, and
+H-052, H-055 and H-058 move only under their own frozen criteria.
 
 ### Handoff Record
 
@@ -2393,9 +2392,9 @@ round that names the hypothesis, control roles included.
 | [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | unresolved | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 2 | 38m agent + 30.0m wall |
 | [H-055](packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md) | blocked | If selected, the `n = 54` witness admits complete exact promotion in the reported nested-radical field | 0 | — |
 | [H-056](packing/campaign/hypotheses/H-056-n39-degree-five-interval-certificate.md) | blocked | If selected, the `n = 39` witness admits a complete interval certificate tied to the designated degree-five root | 0 | — |
-| [H-057](packing/campaign/hypotheses/H-057-n17-parent-bound-parallel-speedup.md) | needs review | A parent-bound three-process runner preserves exact output and reaches the fixed useful-speedup threshold on three exp-052 ordinals | 1 | — |
-| [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | needs review | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 1 | — |
-| [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | needs review | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 1 | — |
+| [H-057](packing/campaign/hypotheses/H-057-n17-parent-bound-parallel-speedup.md) | unresolved | A parent-bound three-process runner preserves exact output and reaches the fixed useful-speedup threshold on three exp-052 ordinals | 1 | — |
+| [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | unresolved | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 1 | — |
+| [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | confirmed | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 1 | — |
 
 ### Confirmed
 
@@ -2536,9 +2535,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 49 | 13,942 | 8,008 | 160 | 1,585 | 70.61 h |
+| claimed by a session | 52 | 14,215 | 8,179 | 163 | 1,598 | 71.29 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **59** | **15,402** | **8,886** | **192** | **1,758** | **77.48 h** |
+| **measured** | **62** | **15,675** | **9,057** | **195** | **1,771** | **78.16 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2559,8 +2558,9 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-059](packing/campaign/agent-sessions/session-059-block8-tau-star-pilot.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-060](packing/campaign/agent-sessions/session-060-verification-review.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
 | [session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
-| [session-076](packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md) | 5 | 7 | 552 | 348 | 4 | 1.0 h |
-| *shared by 18 sessions* | — | 3 | 10,053 | 5,527 | 123 | 61.3 h |
+| [session-076](packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md) | 5 | 6 | 355 | 212 | 1 | 0.5 h |
+| [session-077](packing/campaign/agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md) | 3 | 3 | 148 | 97 | 0 | 0.22 h |
+| *shared by 19 sessions* | — | 4 | 10,375 | 5,737 | 129 | 62.26 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -2582,9 +2582,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 32 |
+| measured | 33 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **76** |
+| **total** | **77** |
 
 <!-- END GENERATED: session-close-report -->
 

@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 76
+count: 77
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 32
+  sessions_measured: 33
   sessions_unmeasured: 44
   attributed:
-    rollups: 49
-    turns: 13942
-    tool_calls: 8008
-    tool_errors: 160
-    one_off_code: 1585
-    wall_hours: 70.61
+    rollups: 52
+    turns: 14215
+    tool_calls: 8179
+    tool_errors: 163
+    one_off_code: 1598
+    wall_hours: 71.29
   unattributed:
     rollups: 10
     turns: 1460
@@ -28,12 +28,12 @@ totals:
     one_off_code: 173
     wall_hours: 6.87
   measured:
-    rollups: 59
-    turns: 15402
-    tool_calls: 8886
-    tool_errors: 192
-    one_off_code: 1758
-    wall_hours: 77.48
+    rollups: 62
+    turns: 15675
+    tool_calls: 9057
+    tool_errors: 195
+    one_off_code: 1771
+    wall_hours: 78.16
 codex_receipts:
   attributed: 15
   unattributed: 0
@@ -1129,9 +1129,26 @@ sessions:
   - packing/campaign/resource-usage/agent-a83a6c7bceb3e5328.yaml
   - packing/campaign/resource-usage/agent-aa6ff0a4866d6ae7a.yaml
   - packing/campaign/resource-usage/agent-a5781a0c4bc6c49b5.yaml
-  turns: 552
-  tool_calls: 348
-  tool_errors: 4
-  one_off_code: 20
-  wall_hours: 1.0
+  turns: 677
+  tool_calls: 422
+  tool_errors: 7
+  one_off_code: 32
+  wall_hours: 1.46
+  codex_receipts: []
+- id: session-077
+  title: "Agenda-014 closeout and the ten-hour successor agenda"
+  status: completed
+  primary_bead: think-oa22
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/7e50f2aa-a36b-5d97-8e99-bf910369266c.yaml
+  - packing/campaign/resource-usage/agent-a885b989ed30caa8e.yaml
+  - packing/campaign/resource-usage/agent-a7bbfb8af0613a001.yaml
+  - packing/campaign/resource-usage/agent-a87a59e05bd605708.yaml
+  turns: 470
+  tool_calls: 307
+  tool_errors: 6
+  one_off_code: 31
+  wall_hours: 1.18
   codex_receipts: []

@@ -342,21 +342,19 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, follow
-[session 076](../../../../packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md),
-which resumed Agenda 014 from the pushed first-wave checkpoint on the owner’s
-instruction and closed BC-127, BC-128 and BC-135. The W5 receipt is `no-change`; BC-129
-and BC-131 are stopped and BC-130 is a conditional candidate; and three fresh reviewers
-returned **pass** for exp-053, exp-054 and exp-055 at evidence revision `1e175108`. The
-coordinating
-[session 072](../../../../packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md)
-on
-[agenda-014](../../../../packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md)
-and the lane closeouts in sessions 073--075 hold the first-wave evidence.
+[session 077](../../../../packing/campaign/agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md),
+which closed Agenda 014 and published
+[agenda-015](../../../../packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md),
+the exact ten-hour successor built only from reviewed routes and target-blind fallbacks.
+The first-wave evidence and its independent review are held by
+[session 076](../../../../packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md)
+and the coordinating
+[session 072](../../../../packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md).
 
-On a new owner instruction, take **BC-136 under `think-oa22`** as the next supervised
-exact-research goal: it may clear only the three reviewed `needs_review` flags, write
-the first-wave synthesis, and derive a separate nine-hour overnight agenda from the one
-conditional route. No second-wave lane is open at this checkpoint.
+Take **BC-137 under `think-ovz9`** as the next supervised exact-research goal,
+dispatched together with BC-138 and BC-140 at agenda-015’s wave-one boundary; BC-143
+routes the second wave.
+No target result is promoted and no review flag is cleared outside BC-146.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every
