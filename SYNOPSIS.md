@@ -194,6 +194,7 @@ case or experiment separately.
 | [Independent Review: Agenda 013 Research Lanes](docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md) | dated review record | record | retained | — |
 | [Review: Agenda 014 First-Wave Efficiency](docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md) | dated review record | record | retained | — |
 | [Review Packets: Agenda 014 First Wave](docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md) | dated review record | record | retained | — |
+| [Independent Review: Agenda 014 First Wave](docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md) | dated review record | record | retained | — |
 | [Agenda 013 Overnight Synthesis: Controls, Mechanisms, and the Next Research Queue](docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -332,24 +333,26 @@ controller, not permission to blur contracts.
 The latest session is
 [session-076](packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md),
 which resumed Agenda 014 from the pushed PR #73 checkpoint at revision `1e175108` on the
-owner’s explicit instruction.
-BC-127 is complete: the W5 receipt
-[review-2026-09-02-agenda014-first-wave-efficiency](docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md)
-records `no-change`, with its baseline rendered by `devtools.render_wave_efficiency` and
-five routed W7 entries.
-BC-128 is complete: the routing decision and three immutable packets are
-[review-2026-09-02-agenda014-first-wave-packets](docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md);
-BC-129 and BC-131 are stopped, and BC-130 is a conditional candidate that needs an
-exp-054 pass and a separate side-semantics preregistration.
-The coordinating
+owner’s explicit instruction and closed the three blocks that instruction named.
+BC-127 recorded `no-change` in
+[review-2026-09-02-agenda014-first-wave-efficiency](docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md),
+with its baseline rendered by `devtools.render_wave_efficiency` and five routed W7
+entries. BC-128 stopped BC-129 and BC-131, froze BC-130 as a conditional candidate, and
+froze three packets in
+[review-2026-09-02-agenda014-first-wave-packets](docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md).
+BC-135 then ran three fresh reviewers against those packets:
+[review-2026-09-02-agenda014-first-wave-independent-review](docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md)
+records **pass** for exp-053, exp-054 and exp-055, with every hash, mutation and absence
+reproduced. The coordinating
 [session-072](packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md)
 and the lane closeouts in sessions 073--075 hold the first-wave evidence.
 
-Exp-053 through exp-055 remain review-pending; no scientific target result was promoted.
-The active cell is **BC-135 under bead `think-bpzq`**: three independent reviewers
-replay the packets read-only and return one determination per experiment.
-BC-136 and every second-wave lane remain unopened; no overnight agenda is authorized
-from this checkpoint alone.
+No scientific target result was promoted, and the three `needs_review` flags remain
+`true`: only BC-136 may clear them, and it is paused.
+The next cell is **BC-136 under bead `think-oa22`**, which opens only on a new owner
+instruction: it applies the three cleared review flags, writes the first-wave synthesis
+and a separate nine-hour overnight agenda from the one conditional route.
+No second-wave lane is authorized from this checkpoint alone.
 
 ### Handoff Record
 
@@ -2533,9 +2536,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 42 | 13,390 | 7,660 | 156 | 1,565 | 69.61 h |
+| claimed by a session | 49 | 13,942 | 8,008 | 160 | 1,585 | 70.61 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **52** | **14,850** | **8,538** | **188** | **1,738** | **76.48 h** |
+| **measured** | **59** | **15,402** | **8,886** | **192** | **1,758** | **77.48 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2556,7 +2559,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-059](packing/campaign/agent-sessions/session-059-block8-tau-star-pilot.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-060](packing/campaign/agent-sessions/session-060-verification-review.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
 | [session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
-| *shared by 17 sessions* | — | 3 | 10,053 | 5,527 | 123 | 61.3 h |
+| [session-076](packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md) | 5 | 7 | 552 | 348 | 4 | 1.0 h |
+| *shared by 18 sessions* | — | 3 | 10,053 | 5,527 | 123 | 61.3 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -2578,8 +2582,8 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 31 |
-| closed before `resource_rollups` existed, logs not retained | 45 |
+| measured | 32 |
+| closed before `resource_rollups` existed, logs not retained | 44 |
 | **total** | **76** |
 
 <!-- END GENERATED: session-close-report -->

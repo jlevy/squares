@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **8** ready, **3** tentative, **21** blocked, **12** stopped, **92** complete.
+- **7** ready, **3** tentative, **21** blocked, **12** stopped, **93** complete.
 
-- **9 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-129`, `BC-130`, `BC-131`, `BC-132`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **10 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-136`, `BC-129`, `BC-130`, `BC-131`, `BC-132`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -30,7 +30,6 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-010 | `BC-104` | 2 | insight | research | Does the stage-1 pipeline -- enumerator, glued rows, class-angle sweep -- reproduce the proved controls… | `think-sfzh` |
 | agenda-010 | `BC-097` | 3 | process | tool_validation | Is the queue readable -- the gap ranking on a durable surface, and the 25 stale in_progress beads reconciled? | `think-6z95` |
 | agenda-010 | `BC-105` | 3 | correctness | research | Can a restricted-class optimality statement at n = 11 -- no packing of at most K chunks with at most two tilt… | `think-dbtx` |
-| agenda-014 | `BC-135` | 0 | correctness | measurement_validation | Do independent cross-lane reviewers reproduce every first-wave decision, named mutation and scientific… | `think-bpzq` |
 
 ## Blocked, and on what
 
@@ -52,7 +51,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
 | agenda-012 | `BC-115` | 2 | `BC-112` | no | BC-120 must clear and BC-121 must apply BC-112's adoption recommendation, and a second fixed-certificate consumer must… |
-| agenda-014 | `BC-136` | 0 | `BC-135` | no | — |
+| agenda-014 | `BC-136` | 0 | `BC-135` | yes | The owner's resume instruction covered BC-127, BC-128 and BC-135 and left later blocks paused. BC-136's synthesis, the… |
 | agenda-014 | `BC-129` | 0 | `BC-123`, `BC-128` | no | BC-128 stopped this row: BC-123 measured no paired sample, so the 2.8x condition never held, and the retained serial… |
 | agenda-014 | `BC-130` | 0 | `BC-124`, `BC-128` | yes | BC-128 froze this row as a conditional candidate: it opens only if exp-054 passes BC-135 review and a separate… |
 | agenda-014 | `BC-132` | 0 | — | no | BC-129--BC-131 must each stop lane work and commands at the common boundary after BC-128 routes the second wave and… |
@@ -92,7 +91,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-011 | completed |  |  |  |  | 2 | 2 |
 | agenda-012 | active |  |  | 1 | 5 | 2 | 8 |
 | agenda-013 | completed |  |  |  | 1 | 6 | 7 |
-| agenda-014 | active | 1 |  | 7 | 1 | 5 | 14 |
+| agenda-014 | active |  |  | 7 | 1 | 6 | 14 |
 
 ## What the states mean
 

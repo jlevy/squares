@@ -342,23 +342,21 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, follow
-[session 073](../../../../packing/campaign/agent-sessions/session-073-bc123-n17-parent-bound-parallel-profile.md),
-the latest lane closeout from Agenda 014’s frozen first wave.
-Its exact serial arm is retained, but host-load contamination stopped exp-053 before a
-paired profile existed.
-The owner paused the campaign after the checkpoint captured session 073, the terminal n
-= 68 adapter, the accepted-but-review-pending n = 50 refusal receipt and the n = 54
-source audit. The coordinating
+[session 076](../../../../packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md),
+which resumed Agenda 014 from the pushed first-wave checkpoint on the owner’s
+instruction and closed BC-127, BC-128 and BC-135. The W5 receipt is `no-change`; BC-129
+and BC-131 are stopped and BC-130 is a conditional candidate; and three fresh reviewers
+returned **pass** for exp-053, exp-054 and exp-055 at evidence revision `1e175108`. The
+coordinating
 [session 072](../../../../packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md)
 on
-[agenda-014](../../../../packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md),
-is stopped rather than terminally synthesized.
+[agenda-014](../../../../packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md)
+and the lane closeouts in sessions 073--075 hold the first-wave evidence.
 
-On resume, complete BC-127’s formal W5 receipt and BC-128’s immutable packet freeze,
-then take **BC-135 under `think-bpzq`** as the next supervised exact-research goal.
-That independent review must dispose exp-053 through exp-055 before BC-136 may derive a
-separate nine-hour overnight agenda.
-No candidate continuation is open at this checkpoint.
+On a new owner instruction, take **BC-136 under `think-oa22`** as the next supervised
+exact-research goal: it may clear only the three reviewed `needs_review` flags, write
+the first-wave synthesis, and derive a separate nine-hour overnight agenda from the one
+conditional route. No second-wave lane is open at this checkpoint.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

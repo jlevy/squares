@@ -191,7 +191,7 @@ session:
       retain and validate the review record.
     commitment: BC-135
     bead: think-bpzq
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       BC-128 is terminal with three frozen packets at commit e9c92091.
@@ -209,13 +209,75 @@ session:
       command, or on a listed evidence path that differs from 1e175108.
     fallback: >-
       Record the affected experiment as typed-incomplete and leave needs_review true.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      Artifact:
+      docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md
+      with the frozen review surface, three assignments and three separate
+      determinations. Result: exp-053, exp-054 and exp-055 each pass; every packet hash
+      matched at 1e175108, every required mutation rejected, every declared absence
+      held, and no reviewer found a frozen limitation that prevents clearance. Guard:
+      no reviewer wrote a repository file, made a network request, or ran a pair,
+      assemble, production or producer command; one commit landed during the window
+      (377a155c, session-076 only) and every reviewer re-ran the evidence diff at the
+      new head and found it clean. Eleven packet facts are retained for the next
+      packet author. Next: BC-136 holds permission to clear the three review flags but
+      remains paused; close this session without applying them.
+    evidence:
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md
+    stop_reason: >-
+      Every in-cap first-wave experiment decision has a durable determination.
     next_action: >-
-      Reconcile the three returns into the review record.
+      Close the session: records, generated views, rollup, validation, tbd, push and
+      the PR checkpoint comment, leaving BC-136 unopened.
+  - workflow: process-review
+    focus: process
+    recording: contemporaneous
+    clock_role: work
+    objective: >-
+      Close session-076: update the agenda, synopsis and generated views, write this
+      session's Claude rollup, run the record and push validation tiers, synchronize
+      tbd, commit, push and post the PR checkpoint comment. Do not open BC-136, clear a
+      review flag or write an overnight agenda.
+    commitment: BC-135
+    bead: think-bpzq
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      BC-135 is complete with three determinations recorded.
+    budget_minutes: 40
+    started_at: '2026-09-02T04:30:30Z'
+    deadline_at: '2026-09-02T05:10:30Z'
+    expected_output: >-
+      A pushed revision with green record and push tiers, a synchronized bead tree and
+      a PR comment naming the revision, cost and next entry.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: >-
+      Stop on a gate failure that would require changing a frozen evidence path or a
+      review flag.
+    fallback: >-
+      Push the last green revision and report the exact failing step.
+    outcome: >-
+      Artifact: the closed agenda rows BC-127, BC-128 and BC-135, the Current Handoff,
+      the regenerated document map, ledger, agenda map and session-cost views, this
+      record's Claude rollup and six sub-agent rollups, and synchronized beads. Result:
+      the record gate passed on the closed tree and the push tier ran before the push;
+      the PR checkpoint comment names the pushed revision and its cost. Guard: BC-136
+      stayed unopened, no review flag was cleared, no overnight agenda was written, and
+      no frozen evidence path changed. The rollup was written before the final commit
+      and push, so those last commands are outside its span. Next: BC-136 under
+      think-oa22 on a new owner instruction.
+    evidence:
+    - packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md
+    - SYNOPSIS.md#current-handoff
+    - packing/campaign/resource-usage/7e50f2aa-a36b-5d97-8e99-bf910369266c.yaml
+    stop_reason: >-
+      The three blocks the owner's resume instruction named are terminal and the
+      checkpoint is published.
+    next_action: >-
+      Take BC-136 under think-oa22 only on a new owner instruction.
   primary_bead: think-v0rj
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 240
     max_cycles: 8
@@ -233,7 +295,11 @@ session:
     before: >-
       three review-pending experiment decisions, one blocked n = 54 packet, no W5
       receipt, no routing decision and no independent review
-    after: null
+    after: >-
+      three first-wave experiment decisions independently reviewed as pass, one
+      no-change W5 decision with five routed entries, and one conditional candidate
+      route (BC-130) with BC-129 and BC-131 stopped; no review flag cleared and no
+      overnight agenda written
   delegations:
   - task: BC-135 Packet A review, n = 17 / exp-053
     operator: claude sub-agent reviewer-a
@@ -249,7 +315,9 @@ session:
       nowhere assert a paired sample, a measured 2.8x or a speedup claim for arm A.
     evidence:
     - docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md
-    files: null
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md
+    files:
+    - none retained in the repository; temporary data only under the reviewer's scratchpad directory
     checks:
     - git diff --exit-code 1e175108 over the evidence paths was empty before and after replay.
     - git status --porcelain was empty at the end of the review; only gitignored __pycache__ was created.
@@ -281,15 +349,34 @@ session:
     - git, tbd or repository writes
   - task: BC-135 Packet B review, n = 68 / exp-054
     operator: claude sub-agent reviewer-b
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
+    outcome: >-
+      Determination pass. All nine frozen hashes matched at 1e175108 and in the
+      working tree; the entry point runs only the literal self-test with the synthetic
+      SVG and a temporary root; mark_selected_path checks its bounds before descent;
+      35 focused tests, Ruff and BasedPyright passed; the depth regression and
+      whole-result verifier mutations rejected; the receipt observed inside the
+      suite's subprocess was 1,112 bytes at SHA-256
+      becb4c7f865f2f4b3a9d6bd22b11bb736efe73ba2d7dc97e025cd4becbd55906 under normal
+      and optimized Python with exactly twenty mutation names; the exp-054 and
+      exp-051 result paths stayed absent. The round supplies no H-058 sample.
+    evidence:
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md
+    files:
+    - none retained in the repository; temporary data only under the reviewer's scratchpad directory
+    checks:
+    - git diff --exit-code 1e175108 over the nine paths was empty before and after replay.
+    - No network request; the one attempt to hand-run the registered command was refused by the permission classifier before executing.
+    - The receipt hash came from a scratchpad-only pytest plugin hashing the stdout the test captures.
+    uncertainty: >-
+      The receipt hash is invariant across the depth-guard correction, so it attests
+      the correction only together with the four current file hashes and the 34-to-35
+      test count. Three n = 68 SVGs are tracked under the atlas and web archive; the
+      production package opens no file on disk.
+    elapsed_seconds: 423
+    elapsed_quality: platform_measured
     next_action: Return Artifact / Result / Guard / Next and one determination for exp-054.
     phase: 4
     budget_minutes: 35
@@ -325,7 +412,9 @@ session:
       verbatim in verify.py, the result and the record.
     evidence:
     - docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md
-    files: null
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md
+    files:
+    - none retained in the repository; temporary data only under the reviewer's scratchpad directory
     checks:
     - git diff --exit-code 1e175108 over the thirteen paths was empty before and after replay.
     - The producer --record command and --selftest were not run; no network or geometry access.
@@ -359,11 +448,53 @@ session:
     - git, tbd or repository writes
   outputs:
   - packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md
-  checks: []
-  stop_reason: null
+  - docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md
+  - docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md
+  - docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md
+  - packing/devtools/render_wave_efficiency.py
+  - packing/tests/test_render_wave_efficiency.py
+  - packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md
+  - SYNOPSIS.md#current-handoff
+  - packing/campaign/resource-usage/7e50f2aa-a36b-5d97-8e99-bf910369266c.yaml
+  - packing/campaign/resource-usage/agent-a7d8aae14a834dc35.yaml
+  - packing/campaign/resource-usage/agent-a7cd7d666385121d0.yaml
+  - packing/campaign/resource-usage/agent-a6f56836f1d49ad37.yaml
+  - packing/campaign/resource-usage/agent-a83a6c7bceb3e5328.yaml
+  - packing/campaign/resource-usage/agent-aa6ff0a4866d6ae7a.yaml
+  - packing/campaign/resource-usage/agent-a5781a0c4bc6c49b5.yaml
+  checks:
+  - >-
+    The record gate passed on the unchanged frozen tree at session start (11.6 s) and
+    again on the closed tree.
+  - >-
+    uv run --frozen --all-extras --group dev pytest -q tests/test_render_wave_efficiency.py
+    passed four controls; Ruff and BasedPyright are clean on the new tool and test.
+  - >-
+    Every first-wave evidence path was byte-identical to 1e175108 before and after each
+    reviewer's replay, and no reviewer wrote a repository file.
+  - >-
+    Three reviewers returned pass with every packet hash, required mutation and
+    declared absence reproduced; needs_review stays true on exp-053, exp-054 and
+    exp-055.
+  - >-
+    The push tier ran before the push; its outcome is recorded in the PR checkpoint
+    comment.
+  resource_rollups:
+  - packing/campaign/resource-usage/7e50f2aa-a36b-5d97-8e99-bf910369266c.yaml
+  - packing/campaign/resource-usage/agent-a7d8aae14a834dc35.yaml
+  - packing/campaign/resource-usage/agent-a7cd7d666385121d0.yaml
+  - packing/campaign/resource-usage/agent-a6f56836f1d49ad37.yaml
+  - packing/campaign/resource-usage/agent-a83a6c7bceb3e5328.yaml
+  - packing/campaign/resource-usage/agent-aa6ff0a4866d6ae7a.yaml
+  - packing/campaign/resource-usage/agent-a5781a0c4bc6c49b5.yaml
+  stop_reason: >-
+    The owner's resume instruction named BC-127, BC-128 and BC-135; all three are
+    terminal, every first-wave decision has an independent determination, and the
+    checkpoint is published without opening BC-136.
   next_action: >-
-    Run the BC-135 independent review of the three frozen packets under think-bpzq
-    before any closeout.
+    Take BC-136 under think-oa22 only on a new owner instruction; it may clear the
+    three review flags and write the separate overnight agenda from the one
+    conditional route.
 ---
 # Session 076 — Agenda-014 First-Wave Closeout, Routing and Independent Review
 

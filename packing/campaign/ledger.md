@@ -90,7 +90,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-073](agent-sessions/session-073-bc123-n17-parent-bound-parallel-profile.md) | stopped | contemporaneous | `insight-iteration` (efficiency) | `insight-iteration` (insight) | 8 | think-p2m6 | Review exp-053 under BC-135 on think-bpzq. Any later timing round requires fresh paired roots and a host-wide quiet lease; exp-053 must not resume. |
 | [session-074](agent-sessions/session-074-bc124-n68-production-adapter.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 7 | think-3i67 | Route only to separately preregistered BC-130; preserve the typed side-semantics refusal unless a later contract binds exact or directional semantics. |
 | [session-075](agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 7 | think-17q7 | Independent campaign review may clear or challenge exp-055 needs_review without rerunning it. |
-| [session-076](agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md) | in_progress | contemporaneous | `process-review` (process) | `insight-iteration` (insight) | 3 | think-v0rj | Run the BC-135 independent review of the three frozen packets under think-bpzq before any closeout. |
+| [session-076](agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 5 | think-v0rj | Take BC-136 under think-oa22 only on a new owner instruction; it may clear the three review flags and write the separate overnight agenda from the one conditional route. |
 
 ### Workflow summary
 
@@ -99,9 +99,9 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 1 | 0 | 12 | 0 |
-| `factual-review` | 3 | 0 | 35 | 2 |
+| `factual-review` | 3 | 0 | 36 | 2 |
 | `insight-iteration` | 13 | 1 | 49 | 2 |
-| `process-review` | 12 | 4 | 56 | 6 |
+| `process-review` | 12 | 4 | 57 | 6 |
 | `efficiency-loop` | 9 | 0 | 27 | 0 |
 | `research-loop` | 8 | 4 | 43 | 7 |
 | `pipeline-improvement` | 19 | 0 | 95 | 0 |
@@ -335,7 +335,7 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 | BC-126 | research | 19, 54 | complete | 1 | think-tabx | Complete at the 01:00Z cell. The live source supplies exact defining equations, side, orientation and symbolic placement formulas in one quartic field, but no stable 54-cell labels, retained immutable source, exact pose manifest or verified correspondence to the retained witness. A different-lane packet preflight also found that the formula tool has no independent named negative control and omits the retained 2009 HTML from its frozen-input table. H-055 remains instrument-unready. Repair those two target-blind provenance controls before any parser/correspondence contract is reviewed. |
 | BC-127 | tool_validation | 17, 50, 54, 68 | complete | 0 | think-ne3d | Complete on the resumed wall in session-076. W4 verified revision 1e175108, its three green hosted checks, four terminal lane records, four declared receipts and no live writer. The W5 receipt is docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md, with its baseline rendered by devtools.render_wave_efficiency; the decision is no-change, and the one measured candidate (the unmapped benchmarks root that made the push tier select all 1,302 tests) fails the equivalence and repayment guards and is routed to W7 with four process-contract entries. |
 | BC-128 | measurement_validation | 17, 50, 54, 68 | complete | 0 | think-8ih6 | Complete in session-076. The routing decision and three immutable packets are docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md at evidence revision 1e175108: BC-129 stopped with the sequential resumable wall priced at about 5.6 hours; BC-130 a conditional candidate that needs an exp-054 pass and a separate side-semantics preregistration; BC-131 stopped with the source refusal retained behind the n = 54 negative-control and frozen-input repairs. No second-wave agent was dispatched and no target opened. |
-| BC-135 | measurement_validation | 17, 50, 54, 68 | ready | 0 | think-bpzq | Blocked on immutable first-wave packets and stopped lane writers. |
+| BC-135 | measurement_validation | 17, 50, 54, 68 | complete | 0 | think-bpzq | Complete in session-076. Three fresh reviewers replayed the three packets at packet commit e9c92091 on evidence revision 1e175108 and returned pass for exp-053, exp-054 and exp-055 with every hash, mutation and absence reproduced; the record is docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md. BC-136 holds permission to clear only the three needs_review flags; none was cleared here. |
 | BC-136 | research | 17, 19, 39, 50, 54, 68, 69 | blocked | 0 | think-oa22 | Blocked on independent review of every first-wave packet. |
 | BC-129 | research | 17, 18, 19 | blocked | 0 | think-pzcl | Blocked until the performance result and routing checkpoint make a three-hour larger-prefix or possible-completion attempt honest. |
 | BC-130 | research | 68 | blocked | 0 | think-rtuk | Blocked on a complete production adapter and explicit route; no network or target access is authorized by agenda publication alone. |

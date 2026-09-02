@@ -11,15 +11,15 @@ count: 76
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 31
-  sessions_unmeasured: 45
+  sessions_measured: 32
+  sessions_unmeasured: 44
   attributed:
-    rollups: 42
-    turns: 13390
-    tool_calls: 7660
-    tool_errors: 156
-    one_off_code: 1565
-    wall_hours: 69.61
+    rollups: 49
+    turns: 13942
+    tool_calls: 8008
+    tool_errors: 160
+    one_off_code: 1585
+    wall_hours: 70.61
   unattributed:
     rollups: 10
     turns: 1460
@@ -28,12 +28,12 @@ totals:
     one_off_code: 173
     wall_hours: 6.87
   measured:
-    rollups: 52
-    turns: 14850
-    tool_calls: 8538
-    tool_errors: 188
-    one_off_code: 1738
-    wall_hours: 76.48
+    rollups: 59
+    turns: 15402
+    tool_calls: 8886
+    tool_errors: 192
+    one_off_code: 1758
+    wall_hours: 77.48
 codex_receipts:
   attributed: 15
   unattributed: 0
@@ -1117,11 +1117,21 @@ sessions:
     snapshot_incomplete: false
 - id: session-076
   title: "Agenda-014 first-wave closeout, routing and independent review"
-  status: in_progress
+  status: completed
   primary_bead: think-v0rj
-  phases: 3
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
+  phases: 5
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/7e50f2aa-a36b-5d97-8e99-bf910369266c.yaml
+  - packing/campaign/resource-usage/agent-a7d8aae14a834dc35.yaml
+  - packing/campaign/resource-usage/agent-a7cd7d666385121d0.yaml
+  - packing/campaign/resource-usage/agent-a6f56836f1d49ad37.yaml
+  - packing/campaign/resource-usage/agent-a83a6c7bceb3e5328.yaml
+  - packing/campaign/resource-usage/agent-aa6ff0a4866d6ae7a.yaml
+  - packing/campaign/resource-usage/agent-a5781a0c4bc6c49b5.yaml
+  turns: 552
+  tool_calls: 348
+  tool_errors: 4
+  one_off_code: 20
+  wall_hours: 1.0
   codex_receipts: []

@@ -316,7 +316,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [17, 50, 54, 68]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Do independent cross-lane reviewers reproduce every first-wave decision, named
@@ -342,8 +342,17 @@ agenda:
     bead: think-bpzq
     depends_on: [BC-127, BC-128]
     workflows: [factual-review, process-review]
+    artifacts:
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md
+    - packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md
     next_evidence: >-
-      Blocked on immutable first-wave packets and stopped lane writers.
+      Complete in session-076. Three fresh reviewers replayed the three packets at
+      packet commit e9c92091 on evidence revision 1e175108 and returned pass for
+      exp-053, exp-054 and exp-055 with every hash, mutation and absence reproduced;
+      the record is
+      docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md.
+      BC-136 holds permission to clear only the three needs_review flags; none was
+      cleared here.
   - id: BC-136
     purpose: research
     owner_focus: process
@@ -375,6 +384,10 @@ agenda:
       No merge occurs without the owner.
     bead: think-oa22
     depends_on: [BC-135]
+    blocked_on: >-
+      The owner's resume instruction covered BC-127, BC-128 and BC-135 and left later
+      blocks paused. BC-136's synthesis, the three cleared review flags and the
+      separate nine-hour overnight agenda wait for a new owner instruction.
     workflows: [insight-iteration, documentation-pass, process-review]
     next_evidence: >-
       Blocked on independent review of every first-wave packet.
