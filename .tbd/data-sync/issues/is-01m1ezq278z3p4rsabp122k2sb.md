@@ -3,9 +3,9 @@ type: is
 id: is-01m1ezq278z3p4rsabp122k2sb
 title: "BC-124: build the n = 68 one-parent production adapter"
 kind: task
-status: in_progress
+status: closed
 priority: 0
-version: 6
+version: 7
 spec_path: packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md
 labels:
   - packing
@@ -18,7 +18,11 @@ parent_id: is-01m1ezp304q3fv8gjahq8n92q2
 hold: null
 hold_until: null
 created_at: 2026-09-01T17:19:20.807Z
-updated_at: 2026-09-02T00:26:31.053Z
+updated_at: 2026-09-02T02:30:42.539Z
+closed_at: 2026-09-02T02:30:42.538Z
+close_reason: BC-124 completed the independently admitted target-blind production adapter; H-058 is instrument-ready and no target result exists.
+resolution: null
+duplicate_of: null
 ---
 Reach the n = 68 exact proof boundary through a target-blind, provenance-bound production adapter.
 
