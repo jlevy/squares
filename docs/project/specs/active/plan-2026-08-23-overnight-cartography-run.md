@@ -351,10 +351,11 @@ published that agenda, and
 [session 076](../../../../packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md)
 holds the reviewed first-wave evidence.
 
-The active cell is **BC-137 under `think-ovz9`**, the `n = 17` sequential larger-prefix
-round, observed by the coordinator at 25-minute boundaries; BC-143 routes the second
-wave at `07:33Z`. No target result is promoted and no review flag is cleared outside
-BC-146.
+The `n = 17` sequential larger-prefix round remains live under coordinator observation
+at 25-minute boundaries.
+The pending checkpoint is **BC-143 under `think-8hcp`** at `07:33Z`; it freezes the
+first wave, stops the refused routes, and decides whether the readmitted n = 54 subset
+earns BC-141. No target result is promoted and no review flag is cleared outside BC-146.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

@@ -65,7 +65,7 @@ session:
     slice_minutes: 30
     finalization_minutes: 80
   stop_conditions:
-  - The fixed 2026-09-02T15:05:00Z wall deadline arrives.
+  - The fixed 2026-09-02T15:03:00Z wall deadline arrives.
   - Three consecutive lane crashes or guard refusals indicate a broken instrument.
   - A frozen scientific input, criterion, threshold, metric role or target scope would have to change.
   - A known-answer control or independent verifier disagrees.
@@ -226,12 +226,112 @@ session:
     - repository-wide validation
     - git or tbd mutation
     - edits to any file bound by an immutable result
+  - task: Recovery admission and BC-142 reachable-tests audit
+    operator: openai-codex sub-agent, extra-high
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Reproduced the exp-056 chain and instrument hashes across the handoff, then refused
+      complete BC-142 admission: the benchmark root selects 13 of 115 tests and unknown
+      roots refuse, but the control proves only one inclusion and one exclusion rather
+      than exact-set equivalence.
+    evidence:
+    - packing/devtools/reachable_tests.py
+    - packing/tests/test_reachable_tests.py
+    files:
+    - packing/devtools/reachable_tests.py
+    - packing/tests/test_reachable_tests.py
+    checks:
+    - 12 focused reachable-tests controls pass in 4.57 seconds.
+    - All 13 selected files enter through broad walker markers; D-420 records the gap.
+    uncertainty: >-
+      Static reachable-test selection is deliberately conservative; no exact oracle is
+      yet frozen for the benchmark root.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Preserve BC-142 as partial for BC-143.
+    phase: 1
+  - task: BC-140 packet preflight and coordinator-record integration audit
+    operator: openai-codex sub-agent, extra-high
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Replayed and admitted the n = 54 negative controls and frozen-input inventory, but
+      refused full BC-140 admission because 8 of 10 declared bounds pass through an
+      allowlist instead of a named exceeding control. The current coordinator record,
+      generated views, schemas, and handoff now reconcile.
+    evidence:
+    - packing/devtools/audit_n54_source_formula.py
+    - packing/devtools/check_declared_bounds.py
+    - packing/campaign/agent-sessions/session-081-bc140-target-blind-guard-repairs.md
+    files:
+    - packing/devtools/audit_n54_source_formula.py
+    - packing/devtools/check_declared_bounds.py
+    - packing/campaign/agent-sessions/session-081-bc140-target-blind-guard-repairs.md
+    checks:
+    - The n = 54 receipt remains SHA-256 3555f8910e0daced8022576bea238951654fface93f0d0b51109c0efd3678cf4.
+    - The two named n = 54 mutations refuse and the 12 focused controls pass.
+    uncertainty: >-
+      The normalization audit scans the known result-binding shapes and cannot infer a
+      file path from a digest-only binding.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Preserve the n = 54 subset for BC-143 routing and keep BC-140 partial.
+    phase: 1
+  - task: Max-level mathematical audit of BC-138, BC-140, and BC-143 routing
+    operator: openai-codex sub-agent, max
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Found that exp-057's literal printed-rational point model is defensible but its two
+      six-decimal side models lack source provenance. The conjunctive binding therefore
+      stops before network access and BC-139 does not open. The owner separately confirmed
+      that matched exact-algebraic host and agent handoffs preserve exp-056 under OR-10.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md
+    - packing/campaign/explorations/X-011-controls-are-not-targets.md
+    files:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md
+    - packing/campaign/explorations/X-011-controls-are-not-targets.md
+    checks:
+    - "_source_interval requires six fractional digits for coordinate tokens."
+    - The retained side token has fourteen fractional digits and no declared six-decimal side semantics.
+    uncertainty: >-
+      A future literal-only target round is possible only under a newly frozen hypothesis;
+      exp-057 cannot narrow its criterion during this wall.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Preserve the semantic-provenance refusal for BC-143 and do not route BC-139.
+    phase: 1
   outputs:
   - packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md
-  checks: []
+  checks:
+  - >-
+    Recovery on PR head aed41ae at 05:40Z reproduced the records gate and found every
+    hosted check green; the old Linux exp-056 PID and its fresh output paths were not
+    visible in this checkout.
+  - >-
+    A macOS/Codex continuation of the literal exp-056 command reproduced the frozen
+    parent and completed one agreeing child row. The owner confirmed that matched
+    Claude-to-Codex and Linux-to-macOS exact-algebraic handoffs preserve the round;
+    operating rule OR-10 now records the general contract.
+  - >-
+    Recovery audits registered think-ifgr for BC-140's allowlisted unnamed bounds and
+    think-lvqx for exp-057's unsupported six-decimal side models, and think-mo7r for
+    BC-142's missing exact-set equivalence control. The provisional handoff bead
+    think-d36j is superseded by the owner's OR-10 bridge rule.
+  - >-
+    The registered wave-efficiency command refuses sessions 079 through 081 because
+    they carry Claude rather than Codex receipts. D-421 / think-mlwo records the missing
+    cross-harness adapter; BC-143 must retain a typed W5 no-change receipt rather than a
+    hand-computed table.
+  resource_rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
   stop_reason: null
   next_action: >-
-    Run BC-137 under think-ovz9 through wave one, then freeze the wave in BC-143.
+    Observe the resumed BC-137 process at 25-minute boundaries, finish the target-blind
+    fallback audits, then freeze wave one in BC-143 and route only the rows their
+    reviewed guards earned.
 ---
 # Session 078 — Agenda-015 Ten-Hour Coordinator
 
@@ -266,6 +366,52 @@ verifies both before any readmission card is issued.
   The coordinator’s clock and lease edits to lane records during readmission were
   reviewer-visible; the instrument bytes under review did not move.
 - **Next:** observe the process at each 25-minute boundary; BC-143 at 07:33Z.
+
+### 00:25--00:50 (05:28--05:53Z) — interrupted and resumed host handoff
+
+- **Artifact:** PR head `aed41ae`, the unchanged exp-056 scientific bindings, and the
+  resumed checkpoint/progress pair at SHA-256 `06c0cc6e...eceec2` and
+  `90c5890a...0b5b32`.
+- **Result:** the preceding Linux/Claude process and its fresh paths did not cross the
+  interrupted host handoff.
+  A 05:40Z macOS/Codex restart used the literal registered command and reproduced the 33
+  reviewed parent rows, then completed ordinal 33 before a short provenance pause.
+  The owner then confirmed the matched-agent and matched-host bridge, so the same
+  checkpoint resumed under OR-10. At 05:53Z the chain verified with 34 rows, last
+  ordinal 33, and exact agreement; the canonical result remained absent.
+- **Guard:** the scientific inputs, package manifest, parent binding, executable bytes,
+  criterion, checkpoint chain, and 36 normal/optimized control receipts match.
+  The fixed `11:23Z` process boundary did not move.
+  A later old-host checkpoint may not be imported over the resumed chain.
+- **Next:** observe BC-137 again at 06:18Z, finish the target-blind fallback audits, and
+  freeze wave one in BC-143 at 07:33Z. Do not retrieve the n = 68 parent unless the side
+  semantics survive the pending Max-level disposition.
+
+### 00:50--01:15 (05:53--06:18Z) — fallback audits and typed partial stops
+
+- **Artifact:** three fresh cross-lane audits at PR head `aed41ae`, exp-057’s terminal
+  semantic-provenance refusal, D-418 through D-421 with owning tbd beads, and the 06:18Z
+  exp-056 checkpoint/progress observation at SHA-256 `9e3bf48b...a6677` and
+  `7daa8153...048cb`.
+- **Result:** Max review retains only exp-057’s literal printed-rational point model;
+  the two six-decimal side intervals lack source provenance, so BC-138 stops and BC-139
+  does not open. The n = 54 controls and five-input inventory replay exactly, so that
+  subset of BC-140 may route BC-141; the full lane is partial because only 2 of 10
+  declared bounds have named exceeding controls.
+  BC-142 maps `benchmarks/` and selects 13 of 115 tests, but its test asserts only one
+  inclusion and one exclusion rather than exact-set equivalence, so BC-142 is also
+  partial. At 06:18Z the live exp-056 chain verified with 43 rows, last ordinal 42, 10
+  child rows, and exact agreement; its canonical result remained absent.
+- **Guard:** no fallback audit opened a source, target, or network channel.
+  The exp-057 result path is absent.
+  The n = 54 receipt remains SHA-256 `3555f891...8cf4`; both named mutations refuse.
+  All 13 benchmark-selected tests enter through broad walker markers, so the passing
+  focused suite cannot be promoted to equivalence evidence.
+  The wave-efficiency renderer refuses the lanes’ Claude receipts, so D-421 preserves a
+  typed W5 no-change rather than a hand-computed comparison.
+- **Next:** observe the live BC-137 chain again at 06:43Z and preserve these typed
+  partial stops for the 07:33Z BC-143 freeze.
+  BC-141, if routed, stays synthetic and target-blind.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

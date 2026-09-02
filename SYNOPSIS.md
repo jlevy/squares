@@ -346,14 +346,19 @@ published;
 [session-076](packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md)
 holds the reviewed first-wave evidence those routes rest on.
 
-Wave one: the `n = 17` child chain (exp-056) and the guard repairs were readmitted by
-different-lane reviewers and the coordinator launched the sequential process; the
-`n = 68` side-semantics binding (exp-057) awaits its readmission before BC-143 can route
-the one-parent localization.
-The active cell is **BC-137 under bead `think-ovz9`**, observed at 25-minute boundaries;
-BC-143 at `07:33Z` freezes the wave and routes BC-139 and BC-141. No scientific target
-result has been promoted, and H-052, H-055 and H-058 move only under their own frozen
-criteria.
+Wave one: the `n = 17` child chain (exp-056) resumed across the matched Linux/Claude to
+macOS/Codex handoff and remains live under its original wall.
+Independent readmission stopped the `n = 68` binding (exp-057): only the literal
+printed-side point model is source-supported, so BC-139 will not open.
+BC-140 is partial because eight declared bounds lack named exceeding controls, but its
+replayed n = 54 controls and frozen-input inventory may still route the synthetic BC-141
+contract. BC-142 is partial because its 13-of-115 selection control does not prove
+exact-set equivalence.
+BC-137 remains live under observation at 25-minute boundaries.
+The pending checkpoint is **BC-143 under bead `think-8hcp`** at `07:33Z`; it freezes the
+wave and may route only BC-141 while BC-137 continues if its prefix is growing.
+No scientific target result has been promoted, and H-052, H-055 and H-058 move only
+under their own frozen criteria.
 
 ### Handoff Record
 
@@ -2584,11 +2589,12 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-073.yaml` | session-072, session-073 | 279 | 1.81 h | 1.81 h | 1.81 h | yes |
 | `codex-task-tree-session-074.yaml` | session-072, session-074 | 272 | 1.58 h | 1.58 h | 1.9 h | yes |
 | `codex-task-tree-session-075.yaml` | session-072, session-075 | 212 | 1.41 h | 1.41 h | 1.75 h | no |
+| `codex-task-tree-session-078.yaml` | session-078 | 523 | 1.64 h | 0.71 h | 1.26 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 36 |
-| closed before `resource_rollups` existed, logs not retained | 45 |
+| measured | 37 |
+| closed before `resource_rollups` existed, logs not retained | 44 |
 | **total** | **81** |
 
 <!-- END GENERATED: session-close-report -->
@@ -2606,8 +2612,8 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 There are 57 terminal rounds registered in `series-000`.
 
-They record 1721.43 agent-minutes and 419.0 wall-minutes.
-Two of the 57, exp-056 and exp-057, are registered under lease and not yet run.
+They record 1738.1 agent-minutes and 435.6 wall-minutes.
+Exp-056 is registered under lease and running; exp-057 stopped before target access.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -2692,7 +2698,7 @@ archive beside it.
 | [exp-054](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-054-h-058-n68-one-parent-production-serialization.md) | 68 | calibration | H-058 | target-blind production adapter | adapter admitted with side semantics still unbound; no source, target sample, or result | unresolved |
 | [exp-055](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-055-h-059-n50-producer-refusal-ordering.md) | 50 | calibration | H-059 | producer stage-sentinel harness | prospective existing-result refusal emitted a verified zero-call trace; exp-050 unchanged | **accepted** |
 | [exp-056](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-056-h-052-n17-sequential-larger-prefix.md) | 17 | calibration | H-052 | parent-bound child chain over the unchanged exp-052 driver | registered under lease; the sequential process from ordinal 33 is running under agenda-015 BC-137 | **in-progress** |
-| [exp-057](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md) | 68 | calibration | H-058 | side-semantics binding over the unchanged exp-054 adapter | registered under lease; the one-parent localization opens only on BC-143’s routing | **in-progress** |
+| [exp-057](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md) | 68 | calibration | H-058 | side-semantics binding over the unchanged exp-054 adapter | literal point model retained; six-decimal side provenance absent; no target access | **unresolved** |
 
 ### Cost and provenance
 
@@ -2754,11 +2760,11 @@ archive beside it.
 | exp-054 | one target-blind 150-minute first-wave lane | 5,940 s | 99 m | criterion | `909efafa+sha256-9b503050115a5a48` |
 | exp-055 | one fixed 15-minute W6 cell | 0.72 s | 92 m | criterion | `909efafa+sha256-9c90a04e5691f168` |
 | exp-056 | both agenda-015 waves to the 06:20 elapsed boundary | — | — | — | `11ce70ee` |
-| exp-057 | one 180-minute wave-two lane | — | — | — | `11ce70ee` |
+| exp-057 | one 150-minute target-blind BC-138 lane | 1,000 s | 16.6667 m | guard | `11ce70ee` |
 
 ### What the 57 rounds jointly establish
 
-The 57 rounds use 1721.43 agent-minutes and 419.0 wall-minutes under the campaign’s
+The 57 rounds use 1738.1 agent-minutes and 435.6 wall-minutes under the campaign’s
 retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
@@ -2922,15 +2928,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 417 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 421 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
-| validity | 108 | was correct, but the measurement did not bear on the question |
+| validity | 111 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 154 | recorded something its own evidence contradicts |
-| robustness | 49 | did not finish, or finished only by luck |
+| robustness | 50 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -2939,10 +2945,10 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty defects in 417, and no soundness defect ever.**
-Every soundness failure was found by a control cell whose answer was known in advance, a
-rule written down before the measurement, a generated view contradicting its source, or
-someone reading carefully.
+**The automated gate has caught sixty-one defects in 421, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Gate-detected entries here are mechanical process, implementation, or
 test-validity failures, found by contiguity, integration, mutation-anchor,
@@ -2968,6 +2974,17 @@ one of the 120 coordinates as pinned, reporting a packing rigid that is not.
 Removing the defect is what found the witness.
 It is still not a *motion*: the gaps curve shut at order `t²`, so `n = 40`’s record
 stays `undetermined` and the catalogue’s annotation stands.
+
+Four agenda-015 review findings are also open.
+[D-418](defects.md) records eight declared parser or recursion bounds without the named
+exceeding controls BC-140 required.
+[D-419](defects.md) stops exp-057 because two six-decimal coordinate rules were applied
+to a fourteen-digit release-text side token without source provenance.
+[D-420](defects.md) keeps BC-142 partial because its benchmark selection test proves a
+bounded inclusion and refusal, not exact reachable-set equivalence.
+[D-421](defects.md) records that the wave-efficiency renderer accepts Codex receipts but
+not the Claude receipts retained by this bridged wave, so BC-143 keeps a typed
+no-change/refusal instead of hand-computing incomparable telemetry.
 
 [D-393](defects.md) is the same run being wrong about its own gate.
 `D-381` established `--edit` as the pre-push floor, and that floor does not run tests:

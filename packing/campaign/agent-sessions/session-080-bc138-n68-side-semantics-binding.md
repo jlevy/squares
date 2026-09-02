@@ -238,9 +238,9 @@ session:
       zero; the reported side token is unbound and the production path returns three
       typed serialization refusals
     after: >-
-      three, preregistered and implemented without editing a frozen file, with thirteen
-      named guards and byte-identical normal and optimized receipts; H-058 still carries
-      zero target samples
+      one defensible literal printed-rational point model and two mechanically consistent
+      but source-unsupported six-decimal side models; H-058 still carries zero target
+      samples
   delegations: []
   outputs:
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md
@@ -271,20 +271,33 @@ session:
   - Ruff format, Ruff check and BasedPyright pass on the three new files.
   - exp-057 and session-080 pass their enforced soft-schema contracts.
   - The canonical exp-057 result path remained absent throughout.
+  - >-
+    Later independent Max-level review refused readmission: `_source_interval` supplies
+    six-decimal semantics for coordinate tokens, not for the fourteen-digit release-text
+    side token. The literal point model survives, but the conjunctive three-model
+    criterion does not.
   resource_rollups:
   - packing/campaign/resource-usage/agent-a2713c7d417bc60cc.yaml
   stop_reason: >-
-    The lane reached the W2 different-lane readmission gate with the binding registered,
-    implemented, mutation-tested and hash-recorded, and with no frozen file modified.
+    The author lane reached W2 with its mechanical controls green; later independent
+    review stopped BC-138 on missing semantic provenance before any network access.
   next_action: >-
-    The coordinator runs the different-lane readmission of the binding, the thirteen named
-    guards and the absent result path; BC-139 opens only on that receipt.
+    Retain the literal point-model instrument and the typed refusal. Do not open BC-139;
+    a future literal-only route requires a new prospectively frozen hypothesis and
+    experiment.
 ---
 # Session-080 — BC-138 `n = 68` Side-Semantics Binding
 
 This session is target-blind.
 It opened no network, source or target channel; the parent URL and digest are
 declarations carried from `run.py`, not access authority.
+
+Independent readmission later found that the source justifies only the literal
+printed-rational point model.
+The two six-decimal side intervals reuse coordinate-token semantics without source
+evidence for the fourteen-digit release-text side token.
+Accordingly, this record preserves the useful target-blind instrument but does not
+readmit BC-138 or open BC-139.
 
 ## What Was Bound
 

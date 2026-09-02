@@ -92,10 +92,10 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-075](agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 7 | think-17q7 | Independent campaign review may clear or challenge exp-055 needs_review without rerunning it. |
 | [session-076](agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 5 | think-v0rj | Take BC-136 under think-oa22 only on a new owner instruction; it may clear the three review flags and write the separate overnight agenda from the one conditional route. |
 | [session-077](agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 3 | think-oa22 | Take BC-137 under think-ovz9 at agenda-015's wave-one dispatch; the two sibling lanes open in the same dispatch. |
-| [session-078](agent-sessions/session-078-agenda015-ten-hour-coordinator.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 1 | think-x81p | Run BC-137 under think-ovz9 through wave one, then freeze the wave in BC-143. |
+| [session-078](agent-sessions/session-078-agenda015-ten-hour-coordinator.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 1 | think-x81p | Observe the resumed BC-137 process at 25-minute boundaries, finish the target-blind fallback audits, then freeze wave one in BC-143 and route only the rows their reviewed guards earned. |
 | [session-079](agent-sessions/session-079-bc137-n17-sequential-larger-prefix.md) | completed | contemporaneous | `insight-iteration` (correctness) | `factual-review` (correctness) | 3 | think-ovz9 | The coordinator launches the registered exp-056 `--record` command and observes it with `--status` on the exp-056 checkpoint at each 25-minute boundary. |
-| [session-080](agent-sessions/session-080-bc138-n68-side-semantics-binding.md) | completed | contemporaneous | `insight-iteration` (correctness) | `factual-review` (correctness) | 4 | think-ymjp | The coordinator runs the different-lane readmission of the binding, the thirteen named guards and the absent result path; BC-139 opens only on that receipt. |
-| [session-081](agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `factual-review` (process) | 4 | think-hrw2 | The coordinator readmits the three tools before the checkpoint routes the n = 54 contract; the run's active cell remains BC-137 under think-ovz9. |
+| [session-080](agent-sessions/session-080-bc138-n68-side-semantics-binding.md) | completed | contemporaneous | `insight-iteration` (correctness) | `factual-review` (correctness) | 4 | think-ymjp | Retain the literal point-model instrument and the typed refusal. Do not open BC-139; a future literal-only route requires a new prospectively frozen hypothesis and experiment. |
+| [session-081](agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `factual-review` (process) | 4 | think-hrw2 | Return the readmitted n = 54 subset to BC-143 under think-8hcp for the frozen routing decision; track the eight missing bound controls under D-418 / think-ifgr. |
 
 ### Workflow summary
 
@@ -433,7 +433,7 @@ Status: **active**. Run an exact ten-hour unattended campaign from agenda-014's 
 | H-055 | blocked | search | If BC-111 selects n = 54, the fixed retained witness at reported side  |  | 0 |  |
 | H-056 | blocked | search | If BC-111 selects n = 39, the fixed retained witness can be promoted t |  | 0 |  |
 | H-057 | unresolved | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 1 | 107.833m agent + 12.3m wall |
-| H-058 | unresolved | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 2 | 99m agent + 99.0m wall |
+| H-058 | unresolved | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 2 | 115.667m agent + 115.7m wall |
 | H-059 | confirmed | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 1 | 92m agent + 1s wall |
 
 ## Needs review — held for a human, not decided
@@ -441,8 +441,8 @@ Status: **active**. Run an exact ten-hour unattended campaign from agenda-014's 
 | id | hypotheses | decision | why it was not decided |
 | --- | --- | --- | --- |
 | exp-050 | H-054 | unresolved | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
-| exp-056 | H-052 | in-progress | Registered before the process runs; no exp-056 result exists yet, so H-052 is neither accepted nor rejected by this round. |
-| exp-057 | H-058 | in-progress | Registered before any network access and before the one declared parent is retrieved; no exp-057 result exists yet, so this round supplies no H-058 sample and neither accepts nor rejects the claim. |
+| exp-056 | H-052 | in-progress | The exact process resumed from its verified child checkpoint under the owner's matched Claude-to-Codex and Linux-to-macOS handoff rule; no scientific input, criterion, instrument byte, chain link, or guard receipt changed. |
+| exp-057 | H-058 | unresolved | The release supports the literal printed-rational point model but supplies no provenance for applying either six-decimal coordinate rule to its fourteen-digit side token, so the conjunctive binding stops before BC-139 and H-058 remains unmeasured. |
 
 ## Rounds
 
@@ -461,7 +461,7 @@ Status: **active**. Run an exact ten-hour unattended campaign from agenda-014's 
 | exp-037 | series-000 | 29 | openai-codex | H-042 | The retained serialization has six numerical orientation classes, with minimum class gap 0.296067 degrees against a 1e-90 degree interval radius. |
 | exp-041 | series-000 | 5 | openai-codex | H-023 | The frozen complete-zero-inventory clause is false: one additional owner axis is zero only at the positive endpoint, while independent control review also found mutation-reason and partial-disposition guards that remain unfinished. |
 
-### unresolved (11)
+### unresolved (12)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -476,6 +476,7 @@ Status: **active**. Run an exact ten-hour unattended campaign from agenda-014's 
 | exp-052 | series-000 | 17 | openai-codex | H-052 | The declared timebox ended before all 181 paired rows and the frozen precondition and mutation checks completed. The preserved 33-row prefix is valid process evidence and every retained pair agrees, but it is not a completed sample under H-052's all-direction criterion. No canonical result exists, so H-052 remains neither accepted nor rejected. |
 | exp-053 | series-000 | 17 | openai-codex | H-057 | Asymmetric external CPU load contaminated Pair 1's parallel arm after the serial control completed, so no paired timing is admissible and H-057 remains neither accepted nor rejected. The durable serial arm records 524.743164166 seconds of process cost, not a speedup sample; the interrupted parallel arm, Pair 1 receipt, Pairs 2--3 and canonical result do not exist. The 738-second effort is a conservative observed command wall, bounded from the 01:49:22Z process start through the 02:01:40Z cleanup observation, not a nanosecond timing receipt. |
 | exp-054 | series-000 | 68 | openai-codex | H-058 | The target-blind adapter passed its complete author-side and different-lane W2 admission gates, so H-058's instrument is ready for a separately preregistered target phase. This round opened no network or target source and created no exp-054 result, so it supplies no H-058 sample and cannot accept or reject the claim. Whole-result verification shares the frozen refusal.verify proof-replay kernel with the producer path, although its shape, binding and publication checks are separate. The reported side token also remains intentionally unbound; the production path therefore yields three typed `serialization-refusal` outcomes until a later preregistration supplies admissible exact or directional semantics. |
+| exp-057 | series-000 | 68 | claude-opus-5 | H-058 | The release supports the literal printed-rational point model but supplies no provenance for applying either six-decimal coordinate rule to its fourteen-digit side token, so the conjunctive binding stops before BC-139 and H-058 remains unmeasured. |
 
 ### blocked (6)
 
@@ -526,12 +527,11 @@ Status: **active**. Run an exact ten-hour unattended campaign from agenda-014's 
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
-### in-progress (2)
+### in-progress (1)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-056 | series-000 | 17 | claude-opus-5 | H-052 | Registered before the process runs; no exp-056 result exists yet, so H-052 is neither accepted nor rejected by this round. |
-| exp-057 | series-000 | 68 | claude-opus-5 | H-058 | Registered before any network access and before the one declared parent is retrieved; no exp-057 result exists yet, so this round supplies no H-058 sample and neither accepts nor rejects the claim. |
+| exp-056 | series-000 | 17 | claude-opus-5 then openai-codex-max-equivalent coordinator | H-052 | The exact process resumed from its verified child checkpoint under the owner's matched Claude-to-Codex and Linux-to-macOS handoff rule; no scientific input, criterion, instrument byte, chain link, or guard receipt changed. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -547,7 +547,7 @@ Status: **active**. Run an exact ten-hour unattended campaign from agenda-014's 
 
 ## Effort
 
-57 rounds, 1721.43 agent-minutes, 419.0 wall-minutes.
+57 rounds, 1738.1 agent-minutes, 435.6 wall-minutes.
 
 ## Exploration reports not yet codified
 

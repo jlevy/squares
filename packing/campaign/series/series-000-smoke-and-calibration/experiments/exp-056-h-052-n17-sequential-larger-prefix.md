@@ -19,7 +19,7 @@ experiment:
     engine_commit: 11ce70ee
     assurance: verified
     method: exact-algebraic
-    host_system: linux aarch64 container, Python 3.14
+    host_system: linux aarch64 container to macOS arm64 bridge, Python 3.14 exact-algebraic
     selftest_passed: true
   instance:
     axis: n
@@ -42,7 +42,7 @@ experiment:
       canonical hash-chained row per direction.
     runs_per_condition: 1
     interleaved: false
-    operator: claude-opus-5
+    operator: claude-opus-5 then openai-codex-max-equivalent coordinator
     commit: 11ce70ee
     dirty: true
     entry_point: cases/n17_weighted_certificate_child/run.py
@@ -70,8 +70,7 @@ experiment:
   results: []
   lease:
     expires: '2026-09-02T11:23:00Z'
-    host: claude-code-remote linux container, session-078
-    pid: 20747
+    host: macOS arm64 Codex continuation, session-078
   verdict:
     decision: in-progress
     needs_review: true
@@ -81,8 +80,9 @@ experiment:
       prefix is process evidence and moves no bound; the first exact disagreement is a
       retained result that may reject only after every instrument guard passes.
     reason: >-
-      Registered before the process runs; no exp-056 result exists yet, so H-052 is
-      neither accepted nor rejected by this round.
+      The exact process resumed from its verified child checkpoint under the owner's
+      matched Claude-to-Codex and Linux-to-macOS handoff rule; no scientific input,
+      criterion, instrument byte, chain link, or guard receipt changed.
     commit: 11ce70ee
     resume_from: >-
       Frozen exp-052 parent checkpoint SHA-256
@@ -124,9 +124,9 @@ preregistration:
 - `campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.checkpoint.json`
 - `campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.progress.json`
 
-The child driver binds `campaign/series/series-000-smoke-and-calibration/results/` as its
-only writable output root and refuses every lexical or resolved-path escape, every path
-carrying the `exp-052` slug, and every path under
+The child driver binds `campaign/series/series-000-smoke-and-calibration/results/` as
+its only writable output root and refuses every lexical or resolved-path escape, every
+path carrying the `exp-052` slug, and every path under
 `cases/n17_weighted_certificate_resume`. A checkpoint is process evidence, not a result,
 and a progress marker can never stand in for a completed paired row.
 
@@ -154,28 +154,59 @@ loading the retained fixture.
 
 This round can produce a larger contiguous agreeing prefix or all 181 pairs.
 Agreement alone moves no bound: it does not adopt the retained certificate as a frontier
-result, does not decide H-052 on a prefix, and does not open any `n = 17--19` lower-bound
-transition, which needs the separate adoption gate.
+result, does not decide H-052 on a prefix, and does not open any `n = 17--19`
+lower-bound transition, which needs the separate adoption gate.
 The first exact disagreement is a retained result, not a failure.
 
 ## Stopped-By Rules
 
 The process stops, retains its checkpoint and records why when any of these holds:
 
-1. **Boundary stop.** The fixed 2026-09-02T06:20:00Z wall arrives, whatever the row count.
+1. **Boundary stop.** The fixed 2026-09-02T11:23:00Z wall arrives, whatever the row
+   count.
 2. **No progress.** Two consecutive 25-minute boundary observations show no new row.
-3. **Disagreement.** A direction's two manifests differ exactly; the row is kept and the
+3. **Disagreement.** A direction’s two manifests differ exactly; the row is kept and the
    process stops.
 4. **Drift.** A frozen input, parent hash, package manifest or chain link fails
    verification, in which case nothing is written at all.
 
+Correction, 2026-09-02: the registration prose previously rendered the elapsed `06:20`
+boundary as `06:20Z`. The frontmatter and agenda both bind elapsed `06:20` to `11:23Z`;
+only the prose timestamp was wrong, and this correction changes no criterion, budget or
+evidence.
+
+## Interrupted and Resumed Handoff
+
+The registered writer began as Linux/Claude PID 20747 with a lease through `11:23Z`.
+After the coordinator host handoff, the recovery checkout could observe neither that
+process nor any exp-056 output path.
+The owner confirmed that a matched Claude-to-Codex and Linux-to-macOS handoff is a
+continuation when the exact inputs, instrument bytes, checkpoint chain, criteria, and
+guard receipts still match.
+
+At `05:40Z` the coordinator started the literal registered command on macOS under Codex.
+It reproduced the 33 frozen parent rows and completed one agreeing child row at ordinal
+33\. The coordinator paused on a provenance question, then resumed the same checkpoint
+after the owner clarified the bridge rule.
+The pause changed no scientific input or result.
+
+At the `05:53Z` observation, the resumed checkpoint had 34 rows and last row hash
+`dd34a2f7df3d78e5a89babb3f31f6658d96d3dd63f259777503c15e00f467e01`, and SHA-256
+`06c0cc6eed7050e9183ebfd8837342ff7ade570331781112f391f031ceeceec2`. Its progress marker
+was at ordinal 34, stage `independent_started`, with SHA-256
+`90c5890a93c45103e9ba7d9d2c335edc111825450d59e62233a34110af0b5b32`. The canonical result
+was absent at resumption.
+Those hashes preserve the handoff observation; the live checkpoint and progress files
+continue to advance under the lease.
+The round still requires all 181 paired rows to decide H-052, and the fixed `11:23Z`
+boundary did not move.
+
 ## Start and Immutability
 
-The child chain starts at ordinal 33.
-Ordinals 0--32 are the reviewed parent rows, copied verbatim with their original hashes
-and re-verified against the parent binding genesis, so the retained parent evidence is
-carried rather than recomputed.
-Exp-052's record, result, checkpoint and progress paths are never written, and the
+The child chain starts at ordinal 33. Ordinals 0--32 are the reviewed parent rows,
+copied verbatim with their original hashes and re-verified against the parent binding
+genesis, so the retained parent evidence is carried rather than recomputed.
+Exp-052’s record, result, checkpoint and progress paths are never written, and the
 exp-052 package is imported, never edited.
 
 <!-- This document follows common-doc-guidelines.md.

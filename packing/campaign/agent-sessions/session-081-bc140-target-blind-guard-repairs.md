@@ -16,8 +16,9 @@ session:
     Make the three routed W7 guard repairs exist as refusable tools: two named negative
     controls and a complete frozen-input inventory for the n = 54 formula audit, a
     pre-freeze normalization check for content-addressed instrument files, and a check
-    that every declared parser or recursion bound under cases/ is named by a test or
-    registered with a reason. Target-blind throughout: no source, target or network access.
+    that every declared parser or recursion bound under cases/ has a named
+    bound-exceeding mutation. Target-blind throughout: no source, target or network
+    access.
   workflow_phases:
   - workflow: pipeline-improvement
     focus: correctness
@@ -146,12 +147,18 @@ session:
       EXCLUDED_REFERENCES and the report names every reference rather than the first;
       guard-message matching requires a literal of at least 12 characters so a
       coincidental word cannot pass. No case file, pyproject.toml or bound file changed.
-      Next: run the formatter, linter and type checker over all six files and terminalize.
+      Independent readmission later found that the eight allowlist entries do not meet
+      BC-140's frozen named-mutation criterion. Next: retain this tool as a diagnostic
+      and terminalize the third repair as partial.
     evidence:
     - packing/devtools/check_declared_bounds.py
     - packing/tests/test_check_declared_bounds.py
-    stop_reason: The n = 68 depth control is named, the synthetic unnamed bound is refused, four focused tests pass.
-    next_action: Run ruff, basedpyright and the three focused suites, then hand the three tools to W2 readmission.
+    stop_reason: >-
+      Two bounds are named, but eight pass through a reason-only allowlist and therefore
+      do not meet BC-140's literal exit criterion.
+    next_action: >-
+      Run the mechanical gates, retain the first two repairs, and hand the n = 54 subset
+      to W2 readmission without claiming the declared-bound repair complete.
   - workflow: factual-review
     focus: process
     recording: contemporaneous
@@ -179,14 +186,21 @@ session:
       suites pass 12 tests together; the n = 54 --check receipt is still SHA-256
       3555f8910e0daced8022576bea238951654fface93f0d0b51109c0efd3678cf4. Guard: the write
       scope stayed inside the seven declared paths; no immutable result, case file,
-      pyproject.toml, Git or tbd state changed, and no packing-validate tier ran. Next:
-      the coordinator's different-lane W2 readmission decides whether BC-141 opens.
+      pyproject.toml, Git or tbd state changed, and no packing-validate tier ran.
+      Independent review admits the n = 54 subset and records the declared-bound repair
+      as partial. Next: the coordinator decides whether that narrower subset earns
+      BC-141.
     evidence:
     - packing/campaign/agent-sessions/session-081-bc140-target-blind-guard-repairs.md
     - packing/devtools/check_declared_bounds.py
     - packing/devtools/check_instrument_normalization.py
-    stop_reason: The three repairs are refusable, validated and recorded within the lane's write scope.
-    next_action: Hand the three tools and their control names to the coordinator for different-lane readmission.
+    stop_reason: >-
+      The n = 54 controls and normalization check are refusable and validated; the
+      declared-bound tool inventories all 10 bounds but leaves eight without the named
+      exceeding mutations the agenda requires.
+    next_action: >-
+      Hand only the readmitted n = 54 controls and frozen-input inventory to the
+      coordinator for BC-141 routing; keep the declared-bound repair partial.
   primary_bead: think-hrw2
   status: completed
   budget:
@@ -203,7 +217,9 @@ session:
   progress:
     metric: routed W7 guard repairs existing as tools with a passing positive and negative control
     before: zero of three; the n = 54 audit had positive-only tests and no way to be refused
-    after: three of three, each refusing its named mutation under Ruff and BasedPyright
+    after: >-
+      two repairs complete; the declared-bound inventory finds all 10 bounds, but only
+      two have named exceeding controls and eight remain allowlisted
   delegations: []
   outputs:
   - packing/devtools/audit_n54_source_formula.py
@@ -239,25 +255,28 @@ session:
   resource_rollups:
   - packing/campaign/resource-usage/agent-a5403a5fd8d5e9f8b.yaml
   stop_reason: >-
-    All three routed repairs are refusable with passing controls and the lane is terminal
-    ahead of the W2 gate; readmission belongs to a different lane.
+    Independent readmission admitted the n = 54 controls and frozen-input inventory but
+    stopped the full BC-140 claim because eight declared bounds have no named exceeding
+    mutation.
   next_action: >-
-    The coordinator readmits the three tools before the checkpoint routes the n = 54
-    contract; the run's active cell remains BC-137 under think-ovz9.
+    Return the readmitted n = 54 subset to BC-143 under think-8hcp for the frozen routing
+    decision; track the eight missing bound controls under D-418 / think-ifgr.
 ---
 # Session-081 — BC-140 Target-Blind Guard Repairs
 
-Three tools, three refusals.
+Two complete repairs and one typed partial stop.
 The n = 54 audit gains two named negative controls without its receipt moving a byte;
 the normalization check asks, before a result is frozen, whether the formatter could
 later sever it from its own digest; the declared-bound check lists every `MAX_` bound
-under `cases/` and accepts a test that reaches a guard by its refusal message, because
-`test_selected_path_scan_enforces_depth_before_python_recursion` never writes
-`MAX_XML_DEPTH` and is the best control in the repository.
+under `cases/`.
 
 Eight bounds have no naming test today.
-They are registered with reasons rather than repaired, because repairing them would mean
-editing case files this lane may not touch.
+The lane registered them with reasons because repairing them would mean editing case
+files outside its scope.
+That makes the inventory useful, but it does not satisfy the frozen rule that every
+parser or recursion bound have a named bound-exceeding mutation.
+BC-140 is therefore partial, while its independently replayed n = 54 subset remains
+eligible to route BC-141.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

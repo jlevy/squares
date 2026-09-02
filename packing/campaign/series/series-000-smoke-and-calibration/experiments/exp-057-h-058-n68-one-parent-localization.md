@@ -13,6 +13,8 @@ experiment:
   hypotheses:
   - H-058
   tier: exploratory
+  known_defects:
+  - D-419
   subject:
     label: preregistered side-semantics binding for one n = 68 parent source
     engine: sqpack UnitSquare one-parent production adapter 0.1.0-side-bound
@@ -60,13 +62,24 @@ experiment:
     timebox: >-
       One 150-minute BC-138 wall through 2026-09-02T06:43:00Z, of which the lane's own
       writing stops at the 100-minute W2 gate; the coordinator owns readmission.
-    stopped_by: criterion
-  results: []
-  lease:
-    expires: '2026-09-02T11:23:00Z'
-    host: claude-code-remote linux container, session-078
+    wall_seconds: 1000
+    agent_minutes: 16.666666666666668
+    stopped_by: guard
+  results:
+  - shape: determination
+    question: >-
+      Were all three side models derived from source evidence under their own declared
+      quantization rules, as the conjunctive BC-138 admission criterion requires?
+    role: guard
+    outcome: invalid
+    checked_by: >-
+      Independent Max-level review traced `_source_interval` to exactly six-digit SVG
+      coordinate tokens and found no source declaration that applies nearest-six or
+      truncate-six semantics to the fourteen-digit release-text side token. The literal
+      printed-rational point model remains mechanically valid but cannot satisfy the
+      three-model criterion alone.
   verdict:
-    decision: in-progress
+    decision: unresolved
     needs_review: true
     primary_criterion: >-
       The binding is admissible only if every declared model receives an exact or
@@ -77,9 +90,10 @@ experiment:
       byte-identical, and the frozen adapter, runner, verifier and refusal bytes are
       unchanged.
     reason: >-
-      Registered before any network access and before the one declared parent is
-      retrieved; no exp-057 result exists yet, so this round supplies no H-058 sample and
-      neither accepts nor rejects the claim.
+      The release supports the literal printed-rational point model but supplies no
+      provenance for applying either six-decimal coordinate rule to its fourteen-digit
+      side token, so the conjunctive binding stops before BC-139 and H-058 remains
+      unmeasured.
     commit: 11ce70ee
     resume_from: >-
       The frozen exp-054 instrument at adapter.py SHA-256
@@ -87,8 +101,9 @@ experiment:
       8cef0f9cd4f473e594ed55e650be2fe7b286a798d2a94e5edb0a35efb7b12d54, verify.py
       e39a6a725e7af01a2e1796e1a218576f76b8a2ec2cecf7fbde3f38aeb9630a7a and focused test
       17f4be0611fb02419d9007222f07b3f585b290c03866403a1d2bd5da954f01df, plus the bound
-      side semantics registered here. BC-139 resumes from the readmitted binding and the
-      absent exp-057 result path.
+      side semantics registered here. A future literal-only localization requires a new
+      prospectively frozen hypothesis and experiment; exp-057 cannot narrow its
+      three-model criterion after review.
 ---
 # Exp-057 — H-058 `n = 68` One-Parent Localization
 
@@ -244,6 +259,28 @@ was absent at preregistration and stays absent through BC-138. The `--record` mo
 the bound entry point runs only the literal target-blind selftest path against a
 synthetic SVG under a temporary root, exactly as `run.py` does; it publishes nothing to
 the canonical path.
+
+## Independent Readmission Refusal
+
+The author-side controls prove that the implementation is internally consistent with the
+three declared intervals.
+They do not prove that the retained source used those interval semantics for its side
+token.
+
+The source adapter’s six-decimal rule accepts coordinate tokens with exactly six
+fractional digits.
+The published side token has fourteen fractional digits and appears in
+release text rather than as an SVG coordinate.
+Reusing the coordinate quantum and direction therefore invents provenance for
+`nearest-6` and `truncate-6`; named mutations of those invented rules cannot supply the
+missing source evidence.
+
+The literal model remains a defensible point interpretation: it reads `8.80345993651653`
+as the exact rational the release prints, without asserting that the token is the
+parent’s true algebraic side.
+The registered acceptance rule is conjunctive across all three models, so that one model
+cannot readmit exp-057. BC-139 stops before network access, the canonical result remains
+absent, and H-058 is unresolved.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

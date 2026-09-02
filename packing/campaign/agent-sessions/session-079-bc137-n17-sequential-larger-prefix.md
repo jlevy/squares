@@ -201,9 +201,10 @@ session:
 ---
 # Session-079 — BC-137 `n = 17` Sequential Larger Prefix
 
-A child chain earns its parent's hashes by carrying the reviewed rows unchanged, not by
+A child chain earns its parent’s hashes by carrying the reviewed rows unchanged, not by
 recomputing them. The unchanged exp-052 driver validates the parent prefix in this lane
-and evaluates every new direction in the coordinator's process; this lane evaluated none.
+and evaluates every new direction in the coordinator’s process; this lane evaluated
+none.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -224,6 +224,39 @@ Added 2026-08-31 at the owner’s request, during the session that opened
 This is `OR-1` applied to the reviewer rather than to the researcher: a measurement that
 exists and is not reported is the same waste as one taken and thrown away.
 
+## OR-10: Treat matched agent and host handoffs as continuation, not a reset
+
+An interrupted session may move between Claude and Codex, or between Linux and macOS,
+without invalidating the work merely because the operator or host label changed.
+Carry the existing agenda, session, experiment id, checkpoint chain, and wall clock
+forward when the frozen scientific inputs, instrument bytes, acceptance criteria, and
+guard receipts still match.
+Record the handoff honestly; do not manufacture a new round or discard exact work just
+to keep a provenance label unchanged.
+
+Match judgment effort across harnesses by task, not by similarly named settings:
+
+- for the hardest mathematics or careful review, Codex **Max** corresponds to Claude
+  **Fable**;
+- for mechanical work requiring substantial care, Codex **High** or **Extra High**
+  corresponds to Claude **Opus Extra High** or **Opus Max**.
+
+This equivalence does not make host-sensitive measurements portable.
+Timing, floating-point last bits, nondeterministic search trajectories, or any method
+whose criterion names the machine or operator still needs the preregistered regime or a
+fresh prospective one.
+Exact-algebraic work with a verified hash chain and identical controls may resume across
+the bridge; a result whose meaning depends on the bridge may not.
+
+The cost was paid in
+[session-078](packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md):
+an interrupted Linux/Claude exact process was provisionally stopped after recovery on
+macOS/Codex even though the parent binding, executable package, checkpoint chain, and
+all exact guards still matched.
+The owner had to clarify that the matched handoff was part of the same autonomous
+session. The rule makes that continuity the default and keeps the exception where it
+belongs: in the measurement contract, not in the harness name.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
