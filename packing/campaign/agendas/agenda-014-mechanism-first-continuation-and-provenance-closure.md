@@ -11,18 +11,19 @@ agenda:
   updated: '2026-09-01'
   status: active
   objective: >-
-    Run a second exact nine-hour wall from agenda-013's reviewed exits without replaying
-    or repairing its evidence. The first 150-minute wave gives three agents disjoint
-    n = 17 profile/merge, n = 68 production-adapter, and n = 50 producer-provenance
-    blocks while the coordinator runs a bounded n = 54 source/formula audit. A protected
-    15-minute process closeout freezes the first-wave receipts before a 10-minute W5
-    analysis and 25-minute W3 routing checkpoint. At most one continuation per lane then
-    enters a common 180-minute second wave. A protected 20-minute closeout freezes that
-    evidence before a 20-minute retrospective W5 and packet checkpoint, 60 minutes of
-    independent review, and 60 minutes of synthesis, validation, tbd synchronization,
-    and PR publication. The wall is exactly 540 minutes. Research and instrument blocks
-    use 15--30 minute Artifact / Result / Guard / Next cells; the shorter coordinator
-    exceptions are named in the wall and cannot open before their frozen-input gates.
+    Run an exact six-hour first-wave campaign from agenda-013's reviewed exits without
+    replaying or repairing its evidence. The first 150 minutes give three agents
+    disjoint n = 17 profile/merge, n = 68 production-adapter and n = 50
+    producer-provenance blocks while the coordinator runs a bounded n = 54
+    source/formula audit. A protected 20-minute process closeout freezes the four lane
+    receipts before a 15-minute W5 analysis and 30-minute W3 routing and packet
+    checkpoint. Sixty minutes of independent cross-lane review then precede an
+    85-minute synthesis, validation, tbd synchronization and PR-publication reserve.
+    The wall is exactly 360 minutes. BC-129--BC-134 remain unopened candidate work;
+    BC-136 must translate only reviewed exits into a separate exact nine-hour overnight
+    agenda. Research and instrument blocks use 15--30 minute Artifact / Result / Guard /
+    Next cells; shorter coordinator exceptions are named in the wall and cannot open
+    before their frozen-input gates.
   items:
   - id: BC-123
     purpose: tool_validation
@@ -93,12 +94,17 @@ agenda:
       network or target opens in this first wave, and a command that cannot reach the
       adapter boundary at minute 35 stops the lane before more implementation.
     entry: >-
-      Exp-047, exp-051, session-069, run.py, verify.py and their focused test match the
-      review-packet hashes, and the exp-051 result is absent. Bind existing H-058, then
-      allocate a new production module and fresh experiment and result paths serially. Adding
-      only `--record` is forbidden: the adapter must supply a bounded opener, digest-
-      before-parse scanner, exact transform parser, model factory, proof evaluator,
-      cleanup and independent verify-before-publication path.
+      Session-069, run.py, verify.py and their focused test match the review-packet
+      hashes. Exp-047 and exp-051 match current post-review hashes
+      f209cd6f5fd6daa6c883143f97457dff441d4b61541829a9243bd55cc09e3b27 and
+      ed4a45f2e02a39fe1833d7405ded90472aba008662f58aeeb1dfbe5b37354c54;
+      their only authorized Packet B difference is the independently reviewed
+      `needs_review: true` to `false` transition, and the exp-051 result is absent. Bind
+      existing H-058, then allocate a new production module and fresh experiment and
+      result paths serially. Adding only `--record` is forbidden: the adapter must
+      supply a bounded opener, digest-before-parse scanner, exact transform parser,
+      model factory, proof evaluator, cleanup and independent verify-before-publication
+      path.
     exit: >-
       The literal production command is executable through target-blind injected data,
       normal and optimized receipts agree, the mutation matrix rejects, and W2 either
@@ -203,21 +209,20 @@ agenda:
       lifecycle bottleneck can repay a change inside the remaining wall?
     hypotheses: []
     budget: >-
-      Twenty-five minutes: 0--15 W4 stop every first-wave writer and command, terminalize
+      Thirty-five minutes: 0--20 W4 stop every first-wave writer and command, terminalize
       the four lane records and sessions, collect complete output inventories and
-      resource receipts, and freeze one evidence revision; 15--25 W5 extract common
+      resource receipts, and freeze one evidence revision; 20--35 W5 extract common
       cell, substantive-output, rework, command, model-stream and wait baselines, compare
       literal-command failures, per-unit timing, review yield and CI, and retain exactly
       one guarded change or `no-change` under the profile, fixed-input equivalence,
-      rollback, repayment and disjointness test. The 10-minute W5 analysis is a named
-      coordinator exception to the lane-cell minimum and begins only from complete
-      emitted rollups.
+      rollback, repayment and disjointness test. The W5 analysis begins only from
+      complete emitted rollups.
     entry: >-
       At the 02:30 hard boundary, BC-123--BC-126 have stopped all lane work and commands
       and returned terminal-ready Artifact / Result / Guard / Next closeouts. No active
       lane writer shares the process-closeout or proposed-change surface. If complete
-      sessions, receipts and the frozen revision do not exist by 02:45, the W5 analysis
-      and BC-128 do not open and no time is borrowed from the second wave.
+      sessions, receipts and the frozen revision do not exist by 02:50, the W5 analysis
+      and BC-128 do not open and no time is borrowed from review or finalization.
     exit: >-
       A frozen first-wave evidence revision with every lane and session terminal as
       `complete` or `stopped`, complete receipts, no live writer, a durable W5 receipt
@@ -240,27 +245,93 @@ agenda:
     state: blocked
     priority: 0
     question: >-
-      Which exact second-wave continuation, if any, did each first-wave result earn?
+      Which exact overnight continuation, if any, did each first-wave result earn?
     hypotheses: []
     budget: >-
-      Twenty-five-minute W3 checkpoint: independently inspect all four exits and the W5
-      decision, close unearned branches, freeze one continuation contract per lane,
-      create complete lane sessions and experiment preregistrations serially, reconcile
-      tbd and generated views, validate, push and update the PR before dispatch. If the
-      exact launch revision is not pushed with its local gate green by 03:20, stop
-      BC-129--BC-131 unstarted and do not borrow from their wall.
+      Thirty-minute W3/W4 checkpoint: inspect all four exits and the W5 decision, close
+      unearned branches, freeze at most one candidate continuation per lane, and prepare
+      immutable review packets with exact hashes, declared absences, safe commands, one
+      mutation and the unchanged claim boundary. No overnight session or experiment is
+      allocated and no second-wave agent is dispatched inside this six-hour wall.
     entry: >-
       BC-127 is terminal. A passing profile, adapter or source gate earns only its named
       successor; a stop cannot be reinterpreted as permission to pivot to another target.
     exit: >-
-      BC-129--BC-131 each become ready or stopped with exact evidence, owned paths,
-      kill conditions and no target opened. At most three disjoint second-wave agents
-      are dispatched from the pushed checkpoint.
+      BC-129--BC-131 each remain blocked or become candidate-ready with exact evidence,
+      proposed owned paths, kill conditions and no target opened. BC-135 receives at
+      most three immutable packets; only BC-136 may translate reviewed candidates into
+      a separate overnight agenda.
     bead: think-8ih6
     depends_on: [BC-127]
     workflows: [insight-iteration, factual-review, process-review]
     next_evidence: >-
       Blocked on the first-wave W5 receipt and exact terminal outcomes.
+  - id: BC-135
+    purpose: measurement_validation
+    owner_focus: correctness
+    instances: [17, 50, 54, 68]
+    state: blocked
+    priority: 0
+    question: >-
+      Do independent cross-lane reviewers reproduce every first-wave decision, named
+      mutation and scientific boundary at the frozen evidence revision?
+    hypotheses: []
+    budget: >-
+      Sixty minutes: 0--35 three preassigned read-only reviewers replay only
+      packet-declared safe loaders, self-tests and mutations in parallel; 35--50
+      reconcile experiment-level pass, bounded-caveat, discrepancy,
+      cannot-reproduce or typed-incomplete findings; 50--60 retain and validate the
+      review. Scientific target commands, network commands and retained-result writes
+      are excluded. More than three packets or three new experiment decisions is a
+      typed-incomplete outcome rather than authority to extend the wall.
+    entry: >-
+      BC-127 and BC-128 are terminal. BC-128 supplies immutable packets, exact commands
+      and hashes, and preassigned reviewers; each reviewer receives a lane they did not
+      author and may mutate only operating-system or pytest temporary data.
+    exit: >-
+      A durable determination for every in-cap first-wave experiment decision. Only an
+      exact pass permits BC-136 to clear a pre-frozen review flag. Every other finding
+      remains pending and becomes registered repair work; excess decisions stay
+      review-pending behind a typed continuation.
+    bead: think-bpzq
+    depends_on: [BC-127, BC-128]
+    workflows: [factual-review, process-review]
+    next_evidence: >-
+      Blocked on immutable first-wave packets and stopped lane writers.
+  - id: BC-136
+    purpose: research
+    owner_focus: process
+    instances: [17, 19, 39, 50, 54, 68, 69]
+    state: blocked
+    priority: 0
+    question: >-
+      What did the six-hour first wave establish, refuse or leave unresolved, and what
+      exact nine-hour overnight agenda follows from the reviewed mechanism evidence?
+    hypotheses: []
+    budget: >-
+      Eighty-five minutes: 0--20 apply only BC-135-cleared review transitions and write
+      the synthesis; 20--40 create the exact nine-hour successor agenda from earned
+      routes and close every unearned route; 40--55 render views, close sessions and
+      resource receipts and run the documentation/records pass; 55--70 run full local
+      validation; 70--75 commit and push; 75--85 update the PR, synchronize tbd, inspect
+      hosted checks and preserve the exact handoff. The wall does not extend; a pending
+      hosted check at the hard stop is a typed incomplete gate, not a claimed pass.
+    entry: >-
+      BC-135 is complete, every finding has a disposition or registered blocker, and no
+      target, source or lane writer is active.
+    exit: >-
+      A revision-keyed synthesis separating proved, repository-verified, source-backed,
+      measured-negative and unresolved claims; terminal sessions and cost receipts;
+      current agenda, ledger and synopsis; a separate exact nine-hour overnight agenda
+      containing only reviewed candidate routes and target-blind fallbacks; green full
+      local validation; synchronized tbd; one exact next-agent entry; and either green
+      hosted validation or a typed incomplete hosted gate naming the pushed revision.
+      No merge occurs without the owner.
+    bead: think-oa22
+    depends_on: [BC-135]
+    workflows: [insight-iteration, documentation-pass, process-review]
+    next_evidence: >-
+      Blocked on independent review of every first-wave packet.
   - id: BC-129
     purpose: research
     owner_focus: correctness
@@ -496,19 +567,16 @@ BC-127 then owns the only process-closeout surface; no shared generated view, tb
 PR or repository-wide validation write occurs before that boundary.
 BC-127 may enter its W5 subphase only after the four lane records, sessions, resource
 receipts and evidence revision are frozen.
-BC-128 may dispatch no second-wave agent until its exact launch revision is pushed and
-locally green.
-
-At 06:20 every second-wave command and writer stops.
-BC-132 then owns the only process-closeout and packet-freeze surface.
-No reviewer starts until BC-132 has frozen the evidence revision, packets, assignments,
-hashes and safe commands.
+BC-128 freezes candidate overnight routes and review packets but dispatches no
+second-wave agent. No reviewer starts until BC-128 has frozen the evidence revision,
+packets, assignments, hashes and safe commands.
+BC-135 independently reviews those packets, then BC-136 owns synthesis and finalization.
 
 H-057, H-058 and H-059 begin `instrument_ready: false`. Only the owning first-wave lane
 may set its assigned readiness field to `true`, and only after the lane’s named W2
 admission guards pass; a failed admission stops premeasurement.
-Every new experiment decision begins `needs_review: true`. BC-133 must pass that exact
-decision and its named guard before BC-134 may clear only the review flag without
+Every new experiment decision begins `needs_review: true`. BC-135 must pass that exact
+decision and its named guard before BC-136 may clear only the review flag without
 changing the decision.
 
 ## Exact Wall
@@ -516,21 +584,17 @@ changing the decision.
 | Elapsed | Wall | Workflow | Work |
 | --- | ---: | --- | --- |
 | 00:00--02:30 | 150m | W3/W7/W2/conditional W6 | Run BC-123--BC-126 in disjoint lanes |
-| 02:30--02:45 | 15m | W4 | Stop writers, terminalize receipts and freeze BC-127 evidence |
-| 02:45--02:55 | 10m | W5 | Measure first-wave efficiency in BC-127 |
-| 02:55--03:20 | 25m | W3/W4 | Route and publish BC-128 |
-| 03:20--06:20 | 180m | W3/W7/W6/W2 | Run at most one earned continuation in each BC-129--BC-131 lane |
-| 06:20--06:40 | 20m | W4 | Stop writers, terminalize receipts and freeze BC-132 evidence |
-| 06:40--07:00 | 20m | W5/W4 | Measure retrospectively and freeze BC-132 packets |
-| 07:00--08:00 | 60m | W2 | Independently review every packet in BC-133 |
-| 08:00--09:00 | 60m | W3/W4 | Synthesize, validate, publish and hand off in BC-134 |
+| 02:30--02:50 | 20m | W4 | Stop writers, terminalize receipts and freeze BC-127 evidence |
+| 02:50--03:05 | 15m | W5 | Measure first-wave efficiency in BC-127 |
+| 03:05--03:35 | 30m | W3/W4 | Route candidates and freeze packets in BC-128 |
+| 03:35--04:35 | 60m | W2 | Independently review every first-wave packet in BC-135 |
+| 04:35--06:00 | 85m | W3/W4 | Synthesize, write the overnight agenda, validate and publish in BC-136 |
 
 Every active research or instrument lane records Artifact, Result, Guard and Next at
 each 15--30 minute cell.
 A long child process may continue across cells only when each boundary observes it and
 preserves a restart or typed no-output state.
-The 10-minute BC-127 W5 analysis, the two 10-minute BC-132 coordinator cells and
-BC-134’s shorter publication substeps are the only cadence exceptions.
+BC-136’s 5--15 minute publication substeps are the only cadence exceptions.
 A cell may stop early on its guard; its remaining time does not authorize a substitute
 target.
 
@@ -564,8 +628,8 @@ Those measurements change allocation, not the scientific criteria:
   minutes even after the required 2.8x speedup, nearly the full 120-minute W6
   allocation.
 - BC-130 allocates no target time to n = 69. It remains a later harder control.
-- BC-133 uses 60 minutes only because BC-132 preassigns three packets and caps the
-  review at six new decisions.
+- BC-135 uses 60 minutes only because BC-128 preassigns three packets and caps the
+  review at three new decisions.
   Anything larger stays review-pending.
 
 ## Target-Blind Fallback Queue
@@ -590,36 +654,37 @@ write. If no eligible card remains, the agent stops.
 
 | First-wave exit | Earned second wave | Otherwise |
 | --- | --- | --- |
-| BC-123 passes exact same-input profile at at least 2.8x | BC-129 parent-bound larger-prefix or possible-completion attempt | Stop BC-129 and price the sequential resumable wall |
-| BC-124 passes literal production adapter and independent readmission | BC-130 one-parent localization | Stop BC-130; register the exact adapter defect later |
-| BC-126 finds source evidence sufficient for a new source-cell contract | BC-131 target-blind n = 54 contract | Retain the source refusal; BC-125 is closure-only and does not earn this branch |
+| BC-123 passes exact same-input profile at at least 2.8x | Candidate BC-129 parent-bound larger-prefix or possible-completion attempt | Stop BC-129 and price the sequential resumable wall |
+| BC-124 passes literal production adapter and independent readmission | Candidate BC-130 one-parent localization | Stop BC-130; register the exact adapter defect later |
+| BC-126 finds source evidence sufficient for a new source-cell contract | Candidate BC-131 target-blind n = 54 contract | Retain the source refusal; BC-125 is closure-only and does not earn this branch |
 
-The routing checkpoint never interprets task completion as scientific success.
+The routing checkpoint never interprets task completion as scientific success and never
+dispatches a candidate inside this wall.
 H-052, H-053, H-054, H-055 and H-056 move only under their own frozen criteria and later
 independent review.
 
 ## W5 Rule
 
-BC-127 and BC-132 compare agent-active time, command time, wait time, substantive
-outputs, rework, literal-entry failures, per-unit timings, validation and hosted CI.
-BC-127 may admit at most one predeclared change for the routing checkpoint, and only
-when a profile, frozen before/after input, equivalence result, rollback seam, positive
-remaining-wall repayment and active-lane disjointness all exist.
-BC-132 is retrospective after the scientific evidence freeze and may route only future
-W7 work; it implements nothing inside this wall.
+BC-127 compares agent-active time, command time, wait time, substantive outputs, rework,
+literal-entry failures, per-unit timings, validation and hosted CI. BC-127 may admit at
+most one predeclared change for the routing checkpoint, and only when a profile, frozen
+before/after input, equivalence result, rollback seam, positive remaining-wall repayment
+and active-lane disjointness all exist.
 Otherwise the durable decision is `no-change` and the bottleneck becomes a future W7
 entry.
 
 ## Final Guard
 
-The final revision preserves negative and partial results, declares every AgentSession
-resource receipt, regenerates agenda, ledger, session-close and synopsis views, runs the
-full validation tier, synchronizes tbd, updates the PR with exact revision and cost, and
-waits for hosted checks.
-A failed check reopens BC-134 before repair.
-A hosted check still pending at 09:00 leaves BC-134 stopped with a typed incomplete
+The six-hour final revision preserves negative and partial results, declares every
+AgentSession resource receipt, regenerates agenda, ledger, session-close and synopsis
+views, runs the full validation tier, synchronizes tbd, updates the PR with exact
+revision and cost, and inspects hosted checks.
+A failed check reopens BC-136 before repair.
+A hosted check still pending at 06:00 leaves BC-136 stopped with a typed incomplete
 gate, and the handoff names the pushed revision and unresolved gate; it never counts as
-a pass. The agenda does not merge the pull request.
+a pass. BC-136 also writes a separate exact nine-hour successor agenda from reviewed
+routes; BC-129--BC-134 remain unopened until that agenda is published.
+This agenda does not merge the pull request.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

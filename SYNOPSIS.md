@@ -87,8 +87,8 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-eight blocked
-hypotheses. Four further hypotheses are unresolved.
+hypotheses, one open hypothesis, seven open questions, and thirty-five blocked
+hypotheses. Three further hypotheses need review and four are unresolved.
 The set includes one claim whose formal prerequisite is missing, H-044 whose registered
 calibration-only amendment keeps the hypothesis undisposed — its first scored round
 (exp-046) missed the criterion determinately under both denominator readings, the review
@@ -327,19 +327,24 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-The latest publication record is
-[session-071](packing/campaign/agent-sessions/session-071-agenda014-publication-and-handoff.md).
-It records a documentation-only handoff and makes no scientific claim.
+The latest allocated lane record is
+[session-075](packing/campaign/agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md).
+It owns BC-125 under bead `think-17q7`; its evidence head is exp-055, and its active
+producer-provenance work stops at `2026-09-02T02:10:00Z`. The coordinating record is
+[session-072](packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md)
+on `codex/agenda014-six-hour-run`. It opens Agenda 014’s exact six-hour first-wave wall
+at `2026-09-02T00:15:00Z` and stops at `2026-09-02T06:15:00Z`.
 
-The cold-start anchor is `BC-123` under `think-p2m6` in
-[agenda-014](packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md).
-The gate preserved by session-071 is satisfied by terminal revision `fa33ea79`, and
-agenda-014 is active.
-Begin its first wave under the agenda’s serial-allocation and disjoint-writer rules:
-BC-123--BC-125 are the three agent lanes, and the coordinator may run BC-126
-concurrently. Its frozen input boundary is exp-052 with checkpoint
+The launch paths are allocated serially: session-073 and exp-053 own BC-123’s `n = 17`
+profile; session-074 and exp-054 own BC-124’s target-blind `n = 68` adapter; session-075
+and exp-055 own BC-125’s `n = 50` provenance control; the coordinator owns BC-126’s
+bounded `n = 54` source/formula audit.
+The lanes share no writable path.
+Exp-052 remains read-only at checkpoint
 `db5c156959b6de4e6f2c9be283454d01dd5f3a436e6489f5e6bb60c38559fdb8` and progress
-`08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af`.
+`08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af`. BC-129--BC-134
+cannot open inside this wall; BC-136 must publish a separate reviewed nine-hour
+overnight agenda.
 
 ### Handoff Record
 
@@ -2380,9 +2385,9 @@ round that names the hypothesis, control roles included.
 | [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | unresolved | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 2 | 38m agent + 30.0m wall |
 | [H-055](packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md) | blocked | If selected, the `n = 54` witness admits complete exact promotion in the reported nested-radical field | 0 | — |
 | [H-056](packing/campaign/hypotheses/H-056-n39-degree-five-interval-certificate.md) | blocked | If selected, the `n = 39` witness admits a complete interval certificate tied to the designated degree-five root | 0 | — |
-| [H-057](packing/campaign/hypotheses/H-057-n17-parent-bound-parallel-speedup.md) | blocked | A parent-bound three-process runner preserves exact output and reaches the fixed useful-speedup threshold on three exp-052 ordinals | 0 | — |
-| [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | blocked | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 0 | — |
-| [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | blocked | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 0 | — |
+| [H-057](packing/campaign/hypotheses/H-057-n17-parent-bound-parallel-speedup.md) | needs review | A parent-bound three-process runner preserves exact output and reaches the fixed useful-speedup threshold on three exp-052 ordinals | 1 | — |
+| [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | needs review | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 1 | — |
+| [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | needs review | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 1 | — |
 
 ### Confirmed
 
@@ -2565,8 +2570,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 27 |
-| closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **71** |
+| closed before `resource_rollups` existed, logs not retained | 48 |
+| **total** | **75** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -2581,7 +2586,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 52 terminal rounds registered in `series-000`.
+There are 55 terminal rounds registered in `series-000`.
 
 They record 1422.6 agent-minutes and 307.7 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
@@ -2664,6 +2669,9 @@ archive beside it.
 | [exp-050](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-050-h-054-n50-source-semantics-e1-localization.md) | 50 | target | H-054 | exact source-semantics intake | E1 reason 3, `attribution-unbound`; zero cells | unresolved |
 | [exp-051](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-051-h-053-n68-refusal-localization.md) | 68 | target | H-053 | proof-carrying pose instrument | production `--record` adapter absent; no target access | blocked |
 | [exp-052](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-052-h-052-n17-resumable-certificate-agreement.md) | 17 | target | H-052 | resumable exact accumulator | 33/181 contiguous paired rows agree; result incomplete | unresolved |
+| [exp-053](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-053-h-057-n17-parent-bound-parallel-speedup.md) | 17 | calibration | H-057 | parent-bound exact parallel profiler | allocated; no profile measurement run | in-progress |
+| [exp-054](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-054-h-058-n68-one-parent-production-serialization.md) | 68 | calibration | H-058 | target-blind production adapter | allocated; no target-blind command run | in-progress |
+| [exp-055](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-055-h-059-n50-producer-refusal-ordering.md) | 50 | calibration | H-059 | producer stage-sentinel harness | allocated; no producer observation run | in-progress |
 
 ### Cost and provenance
 
@@ -2721,10 +2729,13 @@ archive beside it.
 | exp-050 | 30m source-semantics application cell | 1,800 s | 30 m | criterion | `e21598f6+sha256-fed71cf825906bd0` |
 | exp-051 | 75m target-blind W7 instrument wall | 4,500 s | 75 m | guard | `e21598f6+sha256-3d91046ad9d4ea7b` |
 | exp-052 | one fixed 75-minute W6 interval | 4,456 s | 74.2667 m | timebox | `e21598f6+sha256-3e5284fd56fd33f7` |
+| exp-053 | one 150-minute first-wave lane | — | — | active | `81177148` (preregistered) |
+| exp-054 | one 150-minute first-wave lane | — | — | active | `81177148` (preregistered) |
+| exp-055 | one 115-minute active-lane cap | — | — | active | `81177148` (preregistered) |
 
-### What the 52 rounds jointly establish
+### What the 55 rounds jointly establish
 
-The 52 rounds use 1422.6 agent-minutes and 307.7 wall-minutes under the campaign’s
+The 55 rounds use 1422.6 agent-minutes and 307.7 wall-minutes under the campaign’s
 retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through

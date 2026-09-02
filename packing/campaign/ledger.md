@@ -86,6 +86,10 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-069](agent-sessions/session-069-bc117-n68-refusal-localization.md) | stopped | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (insight) | 6 | think-t7v1 | Repair and independently test the production CLI adapter in a new W7 round, then preregister a new experiment before any parent or target access; do not repair or rerun exp-051. |
 | [session-070](agent-sessions/session-070-bc118-n50-source-semantics.md) | completed | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 7 | think-8pjf | Under BC-119 and think-47xw, freeze the terminal exp-050/session-070 pair into its revision-keyed review packet. Do not rerun, repair, reconstruct n = 50, enter W6 or change H-054 readiness. |
 | [session-071](agent-sessions/session-071-agenda014-publication-and-handoff.md) | completed | contemporaneous | `documentation-pass` (process) | `documentation-pass` (process) | 1 | think-0sif | Take BC-123 under think-p2m6 only after agenda-013 is terminal and its final PR revision is green; until then keep the tbd hold and do not enter the lane. |
+| [session-072](agent-sessions/session-072-agenda014-six-hour-first-wave.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 1 | think-v0rj | Publish the launch revision, dispatch sessions 073--075 and begin BC-126. |
+| [session-073](agent-sessions/session-073-bc123-n17-parent-bound-parallel-profile.md) | in_progress | contemporaneous | `insight-iteration` (efficiency) | `insight-iteration` (efficiency) | 1 | think-p2m6 | Run BC-123's first W3 cell under think-p2m6 from the pushed launch revision. |
+| [session-074](agent-sessions/session-074-bc124-n68-production-adapter.md) | in_progress | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 1 | think-3i67 | Run BC-124's first W3 cell under think-3i67 from the pushed launch revision. |
+| [session-075](agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md) | in_progress | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 1 | think-17q7 | Run BC-125's first W3 cell under think-17q7 from the pushed launch revision. |
 
 ### Workflow summary
 
@@ -95,7 +99,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 1 | 0 | 12 | 0 |
 | `factual-review` | 3 | 0 | 31 | 2 |
-| `insight-iteration` | 9 | 1 | 41 | 2 |
+| `insight-iteration` | 13 | 1 | 45 | 2 |
 | `process-review` | 11 | 4 | 54 | 6 |
 | `efficiency-loop` | 9 | 0 | 26 | 0 |
 | `research-loop` | 8 | 4 | 41 | 7 |
@@ -320,7 +324,7 @@ Status: **completed**. Execute agenda-012 end to end during one owner-authorized
 
 ### [agenda-014](agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md) — Mechanism-first continuation and provenance closure
 
-Status: **active**. Run a second exact nine-hour wall from agenda-013's reviewed exits without replaying or repairing its evidence. The first 150-minute wave gives three agents disjoint n = 17 profile/merge, n = 68 production-adapter, and n = 50 producer-provenance blocks while the coordinator runs a bounded n = 54 source/formula audit. A protected 15-minute process closeout freezes the first-wave receipts before a 10-minute W5 analysis and 25-minute W3 routing checkpoint. At most one continuation per lane then enters a common 180-minute second wave. A protected 20-minute closeout freezes that evidence before a 20-minute retrospective W5 and packet checkpoint, 60 minutes of independent review, and 60 minutes of synthesis, validation, tbd synchronization, and PR publication. The wall is exactly 540 minutes. Research and instrument blocks use 15--30 minute Artifact / Result / Guard / Next cells; the shorter coordinator exceptions are named in the wall and cannot open before their frozen-input gates.
+Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's reviewed exits without replaying or repairing its evidence. The first 150 minutes give three agents disjoint n = 17 profile/merge, n = 68 production-adapter and n = 50 producer-provenance blocks while the coordinator runs a bounded n = 54 source/formula audit. A protected 20-minute process closeout freezes the four lane receipts before a 15-minute W5 analysis and 30-minute W3 routing and packet checkpoint. Sixty minutes of independent cross-lane review then precede an 85-minute synthesis, validation, tbd synchronization and PR-publication reserve. The wall is exactly 360 minutes. BC-129--BC-134 remain unopened candidate work; BC-136 must translate only reviewed exits into a separate exact nine-hour overnight agenda. Research and instrument blocks use 15--30 minute Artifact / Result / Guard / Next cells; shorter coordinator exceptions are named in the wall and cannot open before their frozen-input gates.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
@@ -330,6 +334,8 @@ Status: **active**. Run a second exact nine-hour wall from agenda-013's reviewed
 | BC-126 | research | 19, 54 | ready | 1 | think-tabx | Ready from the bounded multilingual and exact-number audit. The historical survey supplies the 19-to-54 mechanism link and side formula, but not a complete primary pose derivation. |
 | BC-127 | tool_validation | 17, 50, 54, 68 | blocked | 0 | think-ne3d | Blocked until the four first-wave lane closeouts make terminalization, agent behavior and tool cost measurable on one common interval boundary. |
 | BC-128 | measurement_validation | 17, 50, 54, 68 | blocked | 0 | think-8ih6 | Blocked on the first-wave W5 receipt and exact terminal outcomes. |
+| BC-135 | measurement_validation | 17, 50, 54, 68 | blocked | 0 | think-bpzq | Blocked on immutable first-wave packets and stopped lane writers. |
+| BC-136 | research | 17, 19, 39, 50, 54, 68, 69 | blocked | 0 | think-oa22 | Blocked on independent review of every first-wave packet. |
 | BC-129 | research | 17, 18, 19 | blocked | 0 | think-pzcl | Blocked until the performance result and routing checkpoint make a three-hour larger-prefix or possible-completion attempt honest. |
 | BC-130 | research | 68 | blocked | 0 | think-rtuk | Blocked on a complete production adapter and explicit route; no network or target access is authorized by agenda publication alone. |
 | BC-131 | research | 19, 54 | blocked | 1 | think-e6rj | Blocked until the source audit and routing checkpoint show whether any construction rung is admissible. |
@@ -341,7 +347,7 @@ Status: **active**. Run a second exact nine-hour wall from agenda-013's reviewed
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 52 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 55 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -403,15 +409,18 @@ Status: **active**. Run a second exact nine-hour wall from agenda-013's reviewed
 | H-054 | unresolved | search | The retained source facts for the reported n = 50 construction at side |  | 2 | 38m agent + 30.0m wall |
 | H-055 | blocked | search | If BC-111 selects n = 54, the fixed retained witness at reported side  |  | 0 |  |
 | H-056 | blocked | search | If BC-111 selects n = 39, the fixed retained witness can be promoted t |  | 0 |  |
-| H-057 | blocked | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 0 |  |
-| H-058 | blocked | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 0 |  |
-| H-059 | blocked | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 0 |  |
+| H-057 | needs review | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 1 |  |
+| H-058 | needs review | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 1 |  |
+| H-059 | needs review | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 1 |  |
 
 ## Needs review — held for a human, not decided
 
 | id | hypotheses | decision | why it was not decided |
 | --- | --- | --- | --- |
 | exp-050 | H-054 | unresolved | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
+| exp-053 | H-057 | in-progress | The round is allocated and no profile measurement has run. |
+| exp-054 | H-058 | in-progress | The adapter round is allocated and no target-blind command has run. |
+| exp-055 | H-059 | in-progress | The prospective control is allocated and no producer observation has run. |
 
 ## Rounds
 
@@ -492,6 +501,14 @@ Status: **active**. Run a second exact nine-hour wall from agenda-013's reviewed
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (3)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-053 | series-000 | 17 | openai-codex | H-057 | The round is allocated and no profile measurement has run. |
+| exp-054 | series-000 | 68 | openai-codex | H-058 | The adapter round is allocated and no target-blind command has run. |
+| exp-055 | series-000 | 50 | openai-codex | H-059 | The prospective control is allocated and no producer observation has run. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -505,7 +522,7 @@ Status: **active**. Run a second exact nine-hour wall from agenda-013's reviewed
 
 ## Effort
 
-52 rounds, 1422.6 agent-minutes, 307.7 wall-minutes.
+55 rounds, 1422.6 agent-minutes, 307.7 wall-minutes.
 
 ## Exploration reports not yet codified
 

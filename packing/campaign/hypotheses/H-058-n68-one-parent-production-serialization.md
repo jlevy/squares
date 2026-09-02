@@ -21,13 +21,16 @@ hypothesis:
     metric: >-
       literal production-command reachability; source digest and transform binding;
       declared-model enumeration; one compatible parent-only rigid-pose enclosure with
-      every wall and pairwise-validity sign decided; verify-before-publication and
-      cleanup receipts
+      every selected-polygon wall sign decided; synthetic separated, tangent and
+      overlap pair-control signs; verify-before-publication and cleanup receipts
     direction: >-
       accepted only if at least one declared model yields a compatible independently
-      verified parent pose; rejected only if a sound bounded evaluation exhausts the
-      frozen model and correspondence space without one; unresolved by typed refusal on
-      any provenance, transform, serialization, proof-node, cleanup or budget guard
+      verified parent pose and all three model executions terminate soundly; a sound
+      model-level incompatibility does not block a qualifying model, while any
+      provenance, transform, verifier, cleanup or other instrument failure invalidates
+      the round. Rejected only if a sound bounded evaluation exhausts all three models
+      and their correspondence spaces without one; otherwise unresolved by typed
+      refusal on any proof-node or budget guard
     threshold: at least one qualifying model for the fixed n = 68 parent
   instrument: >-
     Agenda-014 BC-124 builds the production opener, strict scanner, exact transform and
@@ -53,9 +56,11 @@ hypothesis:
   replication: false
   registered: '2026-09-01'
   notes: >-
-    Acceptance or rejection concerns one parent only. It does not decide the two-pair
-    H-053 claim, validate the UnitSquare child, estimate record probability or open the
-    H-051 surgery calibration.
+    Acceptance or rejection concerns one selected polygon from one parent only. The
+    pairwise signs in this claim are synthetic instrument controls, not target-parent
+    nonoverlap claims. It does not decide the two-pair H-053 claim, validate the full
+    parent packing or UnitSquare child, estimate record probability or open the H-051
+    surgery calibration.
 ---
 # H-058 — One-Parent `n = 68` Production Serialization
 

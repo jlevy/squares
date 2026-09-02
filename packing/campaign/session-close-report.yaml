@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 71
+count: 75
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 27
-  sessions_unmeasured: 44
+  sessions_unmeasured: 48
   attributed:
     rollups: 42
     turns: 13390
@@ -1014,3 +1014,43 @@ sessions:
     active_union_hours: 0.25
     wall_hours: 0.25
     snapshot_incomplete: true
+- id: session-072
+  title: "Agenda-014 six-hour first-wave coordinator"
+  status: in_progress
+  primary_bead: think-v0rj
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []
+- id: session-073
+  title: "BC-123 n = 17 parent-bound parallel profile"
+  status: in_progress
+  primary_bead: think-p2m6
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []
+- id: session-074
+  title: "BC-124 n = 68 production adapter"
+  status: in_progress
+  primary_bead: think-3i67
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []
+- id: session-075
+  title: "BC-125 n = 50 producer refusal ordering"
+  status: in_progress
+  primary_bead: think-17q7
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []

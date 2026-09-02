@@ -341,18 +341,22 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, use
-[session 071](../../../../packing/campaign/agent-sessions/session-071-agenda014-publication-and-handoff.md)
-and retain `BC-123` under `think-p2m6` from
-[agenda-014](../../../../packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md)
-as the exact next cell.
-That entry gate is satisfied by terminal revision `fa33ea79`, and agenda-014 is active.
-Begin the first wave under the agenda’s serial-allocation and disjoint-writer rules:
-BC-123--BC-125 are the three agent lanes, and the coordinator may run BC-126
-concurrently. Its frozen input boundary is exp-052 with checkpoint
+For the next supervised exact-research goal, follow
+[session 075](../../../../packing/campaign/agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md),
+which owns BC-125 under `think-17q7` with exp-055 as its evidence head.
+It runs inside the exact six-hour wall coordinated by
+[session 072](../../../../packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md)
+under
+[agenda-014](../../../../packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md),
+from `2026-09-02T00:15:00Z` through `2026-09-02T06:15:00Z`. Sessions 073--075 and
+experiments 053--055 own the three disjoint agent lanes; the coordinator owns BC-126.
+Exp-052 remains read-only at checkpoint
 `db5c156959b6de4e6f2c9be283454d01dd5f3a436e6489f5e6bb60c38559fdb8` and progress
-`08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af`; session-071 neither
-changes nor resumes those files and claims no scientific result.
+`08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af`.
+
+This first wave terminates, measures and independently reviews its lanes before
+publication. It opens no candidate continuation.
+BC-136 must derive a separate exact nine-hour overnight agenda from the reviewed exits.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

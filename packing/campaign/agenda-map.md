@@ -2,7 +2,7 @@
 
 # Agenda map
 
-134 agenda commitments across 14 agendas, as declared in each agenda's own frontmatter.
+136 agenda commitments across 14 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **11** ready, **3** tentative, **22** blocked, **11** stopped, **87** complete.
+- **11** ready, **3** tentative, **24** blocked, **11** stopped, **87** complete.
 
 - **7 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-127`, `BC-132`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -57,6 +57,8 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-012 | `BC-115` | 2 | `BC-112` | no | BC-120 must clear and BC-121 must apply BC-112's adoption recommendation, and a second fixed-certificate consumer must… |
 | agenda-014 | `BC-127` | 0 | — | no | BC-123--BC-126 must each stop lane work and commands at the common boundary and return a terminal-ready closeout;… |
 | agenda-014 | `BC-128` | 0 | `BC-127` | no | — |
+| agenda-014 | `BC-135` | 0 | `BC-127`, `BC-128` | no | — |
+| agenda-014 | `BC-136` | 0 | `BC-135` | no | — |
 | agenda-014 | `BC-129` | 0 | `BC-123`, `BC-128` | no | — |
 | agenda-014 | `BC-130` | 0 | `BC-124`, `BC-128` | no | — |
 | agenda-014 | `BC-132` | 0 | — | no | BC-129--BC-131 must each stop lane work and commands at the common boundary after BC-128 routes the second wave and… |
@@ -96,7 +98,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-011 | completed |  |  |  |  | 2 | 2 |
 | agenda-012 | active |  |  | 1 | 5 | 2 | 8 |
 | agenda-013 | completed |  |  |  | 1 | 6 | 7 |
-| agenda-014 | active | 4 |  | 8 |  |  | 12 |
+| agenda-014 | active | 4 |  | 10 |  |  | 14 |
 
 ## What the states mean
 
