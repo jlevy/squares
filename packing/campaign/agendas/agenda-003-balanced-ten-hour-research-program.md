@@ -381,7 +381,7 @@ but they may not alter completed history, frozen W6 criteria, or mathematical ve
 | 3:20–3:35 | 15 | W2 or W6 | BC-029 | Use W2 only for a promoted, disputed, high-risk, or changed trust boundary; otherwise perform guarded replay. |
 | 3:35–3:45 | 10 | W3 insight-iteration | BC-029 | Explain what the evidence changed and shape, park, or kill the successor. Invalid instrumentation returns to W7. |
 | 3:45–4:00 | 15 | W5 efficiency-loop | BC-028 | Compare throughput with the first checkpoint and re-rank only future cells. |
-| 4:00–4:15 | 15 | W1 research-pass | BC-030 | Read the full-cell and corrected calibration evidence without consulting target geometry. |
+| 4:00–4:15 | 15 | W1 research-survey | BC-030 | Read the full-cell and corrected calibration evidence without consulting target geometry. |
 | 4:15–4:30 | 15 | W3 insight-iteration | BC-030 | Shape CG-010’s smallest complete label, cap, pricing question, and falsifying mutations. |
 | 4:30–5:00 | 30 | finalization | BC-027 | Reconcile records and views, run proportional gates, commit and push, sync beads, terminalize session A, and conduct the full midpoint review. |
 
@@ -398,7 +398,7 @@ measurement and the reason is recorded.
 | 5:45–6:15 | 30 | W7 pipeline-improvement | BC-017 | Exercise the positive, seated-wall, contact/nonedge role-swap, forged-count, and deterministic-replay controls. Stop if a semantic mutation changes only metadata or any target, geometry, feasibility, or n=11 dependency appears. |
 | 6:15–6:30 | 15 | W2 factual-review | BC-017 | Independently audit per-key plan sensitivity and derived accounting. Keep BC-017 open for real n=5/n=10 counted execution and load equality; `think-u97a` separately remains open for stable n=4/n=10 quench outcomes and work across pool widths and load. |
 | 6:30–6:45 | 15 | W5 efficiency-loop | BC-028 | Measure Session B throughput and admit at most one bounded W5 substitution only if it repays the remaining clock. |
-| 6:45–7:05 | 20 | W1 research-pass | think-trkj | Reconstruct the D-344 Figure 4 coordinates and downstream dependencies independently from the retained scan; do not adopt the candidate correction yet. |
+| 6:45–7:05 | 20 | W1 research-survey | think-trkj | Reconstruct the D-344 Figure 4 coordinates and downstream dependencies independently from the retained scan; do not adopt the candidate correction yet. |
 | 7:05–7:35 | 30 | W7 pipeline-improvement | think-trkj | Encode a source-distinct coordinate packet or retain the first typed route blocker; keep Proposition 1 and full-Theorem-1 promotion closed. |
 | 7:35–7:50 | 15 | W2 factual-review | think-trkj | Audit the coordinate derivation, source labels, and every downstream use of the repaired segment length. |
 | 7:50–8:00 | 10 | W3 insight-iteration | think-trkj | Decide whether the n=7 proof packet advances, remains blocked, or should yield to a later independent proof route. |

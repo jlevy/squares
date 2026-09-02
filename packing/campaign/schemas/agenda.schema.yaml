@@ -73,7 +73,7 @@ properties:
           uniqueItems: true
           items:
             enum:
-              - research-pass
+              - research-survey
               - factual-review
               - insight-iteration
               - process-review
@@ -236,7 +236,7 @@ properties:
               bead: {type: string, pattern: "^think-[a-z0-9]+$"}
               workflow:
                 enum:
-                  - research-pass
+                  - research-survey
                   - factual-review
                   - insight-iteration
                   - process-review
@@ -258,7 +258,7 @@ properties:
 $defs:
   workflow:
     enum:
-      - research-pass
+      - research-survey
       - factual-review
       - insight-iteration
       - process-review

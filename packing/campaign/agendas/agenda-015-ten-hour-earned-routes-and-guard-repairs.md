@@ -557,13 +557,13 @@ agenda:
     - path: README.md
       decision: updated
       reason: >-
-        Adds W9 and W10 and makes post-agenda reconciliation visible at the repository
-        entry point.
+        Adds W9 and W10, renames W1 to research-survey, and makes post-agenda
+        reconciliation visible at the repository entry point.
     - path: SYNOPSIS.md
       decision: updated
       reason: >-
-        Records the two new workflow contracts, the Agenda 015 result classes, and the
-        reprioritized handoff.
+        Records the sharpened W1 boundary, the two new workflow contracts, the Agenda
+        015 result classes, and the reprioritized handoff.
     - path: TUTORIAL.md
       decision: checked-current
       reason: >-
@@ -611,17 +611,42 @@ agenda:
       - packing/campaign/schemas/agenda.schema.yaml
       - packing/campaign/remediation-pass.md
       - packing/campaign/review-planning-oversight.md
+      - docs/project/document-map.yaml
+      - docs/project/document-map.schema.yaml
+      - packing/devtools/render_document_map.py
       - .github/PULL_REQUEST_TEMPLATE.md
+    - name: workflow-taxonomy
+      result: >-
+        Renames W1 to research-survey so source assembly is distinct from W6
+        experimentation, migrates every repository-owned workflow record, and makes the
+        canonical vocabulary reject stale reader and logbook copies.
+      paths:
+      - README.md
+      - SYNOPSIS.md
+      - packing/campaign/schemas/agent-session.schema.yaml
+      - packing/campaign/schemas/agenda.schema.yaml
+      - packing/campaign/schemas/research-loop-log-entry.schema.yaml
+      - packing/campaign/agendas
+      - packing/campaign/agent-sessions
+      - packing/campaign/ledger.md
+      - packing/campaign/research-loop-logbook
+      - packing/frontier/README.md
+      - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+      - docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+      - packing/devtools/check_readme.py
+      - packing/src/sqpack/campaign/ledger.py
+      - packing/devtools/controls.yaml
     validation:
     - scope: local-full-gate
       status: passed
       evidence: >-
-        The W10 closeout tree passed all 58 steps in 723.07 seconds: 1,462 fast tests,
-        25 exhaustive tests, and 153 negative controls.
+        The W10 closeout tree passed all 58 steps in 731.54 seconds: 1,462 fast tests,
+        25 exhaustive tests, and 155 negative controls.
     - scope: hosted-pr-gates
-      status: passed
+      status: pending
       evidence: >-
-        PR #75 passed validate, macos-portability, and packing-required at 44f2252.
+        PR #75 passed validate, macos-portability, and packing-required at e86bdf26;
+        the W1 migration awaits those checks on its pushed revision.
     replanning:
       candidates:
       - bead: think-5j8d
@@ -663,7 +688,9 @@ agenda:
         status: revised
         note: >-
           The operator added W9 remediation and W10 oversight and required explicit
-          post-agenda disposition and replanning, but did not displace think-5j8d.
+          post-agenda disposition and replanning, then renamed W1 to research-survey to
+          separate source assembly from experimentation; neither change displaced
+          think-5j8d.
 ---
 # Agenda-015 — Ten-Hour Earned Routes and Guard Repairs
 

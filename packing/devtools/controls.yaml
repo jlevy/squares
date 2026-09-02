@@ -88,6 +88,12 @@ controls:
   run: python3 -m devtools.check_readme
   expect: "README.md: workflow table is"
 
+- name: README - retired workflow identifier survives a migration
+  file: ../README.md
+  replace: ["| W1 | `research-survey` |", "| W1 | `research\u002dpass` |"]
+  run: python3 -m devtools.check_readme
+  expect: "contains retired workflow identifier"
+
 - name: README - undeclared eleventh workflow is not ignored
   file: ../README.md
   replace:
@@ -262,6 +268,14 @@ controls:
     - "              - general-improvement\n              - invented-workflow\n          description: >-"
   run: python3 -m sqpack.campaign.ledger check
   expect: "item workflows have drifted"
+
+- name: campaign - logbook workflow-count keys drift from the canonical enum
+  file: campaign/schemas/research-loop-log-entry.schema.yaml
+  replace:
+    - '      general-improvement: {$ref: "#/$defs/count"}'
+    - "      general-improvement: {$ref: \"#/$defs/count\"}\n      invented-workflow: {$ref: \"#/$defs/count\"}"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "workflow count keys have drifted"
 
 - name: campaign - a declared validation command that could never run
   file: campaign/agent-sessions/session-028-bc032-n29-promotion-inventory.md

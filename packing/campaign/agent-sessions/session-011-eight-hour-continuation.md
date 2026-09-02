@@ -338,7 +338,7 @@ session:
       D-300 triggered the predeclared stop at the first missing receipt field. The phase
       does not retry its one-command rehearsal or claim that D-202/D-217 are fixed.
     next_action: Leave think-b3bm and think-jygr open and rotate to frozen order 13.
-  - workflow: research-pass
+  - workflow: research-survey
     recording: contemporaneous
     clock_role: work
     focus: insight

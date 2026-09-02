@@ -155,8 +155,8 @@ case or experiment separately.
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign — W6 Runbook](packing/campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
 | [The W8 Documentation Pass — Runbook](packing/campaign/documentation-pass.md) | W8 documentation reconciliation | definitive | maintained | — |
-| [W9 Remediation Pass](packing/campaign/remediation-pass.md) | W6 experiment mechanics | definitive | maintained | — |
-| [W10 Review, Planning, and Oversight](packing/campaign/review-planning-oversight.md) | W6 experiment mechanics | definitive | maintained | — |
+| [W9 Remediation Pass](packing/campaign/remediation-pass.md) | systematic defect and issue-backlog remediation | definitive | maintained | — |
+| [W10 Review, Planning, and Oversight](packing/campaign/review-planning-oversight.md) | post-agenda disposition, document review, and replanning | definitive | maintained | — |
 | [Agent Sessions](packing/campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
 | [Research Loop Logbook](packing/campaign/research-loop-logbook/README.md) | reader-facing research-run summaries | definitive | maintained | — |
 | [Resource Usage](packing/campaign/resource-usage/README.md) | component scope and use | definitive | maintained | — |
@@ -269,7 +269,7 @@ routine task.
 
 | ID | Workflow | Enter with | Work boundary | Durable exit | Default handoff |
 | --- | --- | --- | --- | --- | --- |
-| W1 | `research-pass` | A bounded question, source corpus, and identified coverage gap | Establish and source the state of knowledge; do not turn untested connections into campaign verdicts | Corrected or enriched research docs, source notes, explicit conflicts, and unresolved gaps | W2 audits the claims; W3 may mine supported gaps |
+| W1 | `research-survey` | A bounded question, source corpus, and identified coverage gap | Survey and source the state of knowledge; do not run a new experiment or turn untested connections into campaign verdicts | A sourced survey, source notes, explicit conflicts, and unresolved gaps | W2 audits the claims; W3 may mine supported gaps |
 | W2 | `factual-review` | A fixed artifact set, its sources, and the claims to audit | Correctness only; read-only by default, but an authorized review may apply an obvious bounded correction whose evidence and scope are unchanged; do not invent successor theory or redesign the process inside the review | Claim-by-claim dispositions, authorized corrections, or defects with exact evidence | Required before promoted, novel, disputed, or high-risk claims; otherwise W3 for new hypotheses or W4 for a process failure |
 | W3 | `insight-iteration` | Current synopsis, idea board, ledger, negative results, and a sharp frontier | Generate explanations and hypotheses freely; do not certify them or spend an undeclared experiment budget | `X-NNN` reports and candidate `H-NNN` items with mechanism, falsifier, expected information, and limits | Codification, then W6 |
 | W4 | `process-review` | Artifacts, beads, logs, checks, and a reconstructability or discipline question | Inspect ownership, handoffs, refusals, and controls; do not substitute process polish for a scientific result | Review findings, beads, and narrowly scoped contract or checker changes | W5 for a measured bottleneck or the next workflow that owns the result |
@@ -337,7 +337,7 @@ contemporaneously. Current and future phases are declared before work begins.
 The normal research cadence is not a mandate to traverse every workflow:
 
 ```
-W1 research-pass ──> W2 factual-review ──> W3 insight-iteration
+W1 research-survey ──> W2 factual-review ──> W3 insight-iteration
                                                │
                          missing reusable tool v
 W4 process-review ──> W7 pipeline-improvement ──> W2 ──> W6 research-loop

@@ -24,8 +24,8 @@ documents:
   - {path: development.md, role: development-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/README.md, role: research-runbook, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/documentation-pass.md, role: documentation-runbook, authority: definitive, lifecycle: maintained}
-  - {path: packing/campaign/remediation-pass.md, role: research-runbook, authority: definitive, lifecycle: maintained}
-  - {path: packing/campaign/review-planning-oversight.md, role: research-runbook, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/remediation-pass.md, role: remediation-runbook, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/review-planning-oversight.md, role: oversight-runbook, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/agent-sessions/README.md, role: session-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/research-loop-logbook/README.md, role: research-loop-logbook, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/resource-usage/README.md, role: component-guide, authority: definitive, lifecycle: maintained}

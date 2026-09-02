@@ -446,8 +446,9 @@ This plan is a `general-improvement` framework redesign, not a W4 process review
 It changes mathematical assurance, data contracts, reader surfaces, tools, and only the
 process needed to keep those parts coherent.
 
-The six workflow entry points remain W1 research pass, W2 factual review, W3 insight
-iteration, W4 process review, W5 efficiency loop, and W6 research loop.
+The [workflow entry points](../../../../SYNOPSIS.md#workflow-entry-contracts) remain the
+routing layer. W1 is a research survey: it assembles and sources the state of knowledge.
+W6 runs preregistered experiments and proof searches.
 For routine single-purpose work, choosing an entry point is a lightweight routing
 decision: record the workflow, objective, intended artifact, and focused check where the
 work is already tracked.

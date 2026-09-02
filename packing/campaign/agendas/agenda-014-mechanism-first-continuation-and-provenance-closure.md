@@ -217,7 +217,7 @@ agenda:
     - packing/tests/test_audit_n54_source_formula.py
     - packing/resources/web/n54-source-formula-audit-2026/README.md
     - packing/resources/web/finite-case-literature-audit-2026/README.md
-    workflows: [research-pass, insight-iteration, factual-review]
+    workflows: [research-survey, insight-iteration, factual-review]
     next_evidence: >-
       Complete at the 01:00Z cell. The live source supplies exact defining equations,
       side, orientation and symbolic placement formulas in one quartic field, but no
@@ -518,7 +518,7 @@ agenda:
       exact-source-parser-and-labeled-correspondence-absent. The formula tool's named
       negative control and the frozen-input inventory repair are target-blind W7
       prerequisites before any parser or correspondence contract is reviewed.
-    workflows: [research-pass, insight-iteration, pipeline-improvement, factual-review]
+    workflows: [research-survey, insight-iteration, pipeline-improvement, factual-review]
     next_evidence: >-
       Stopped by BC-128 with the source refusal retained. Agenda-015 BC-140 makes the
       two target-blind repairs and BC-141 builds the parser and correspondence

@@ -485,7 +485,7 @@ session:
       only because this kernel is one-dimensional and reads across sixteen decades.
     next_action: >-
       Open BC-071, then the reserved BC-064 endpoint check.
-  - workflow: research-pass
+  - workflow: research-survey
     recording: contemporaneous
     clock_role: work
     focus: insight

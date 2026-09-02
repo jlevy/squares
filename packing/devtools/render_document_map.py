@@ -30,6 +30,8 @@ ROLE_LABELS = {
     "development-guide": "engineering and validation rules",
     "research-runbook": "W6 experiment mechanics",
     "documentation-runbook": "W8 documentation reconciliation",
+    "remediation-runbook": "systematic defect and issue-backlog remediation",
+    "oversight-runbook": "post-agenda disposition, document review, and replanning",
     "session-guide": "escalated session and recovery contract",
     "research-loop-logbook": "reader-facing research-run summaries",
     "series-guide": "series scope and comparability",

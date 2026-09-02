@@ -204,7 +204,7 @@ agenda:
       representation is the next seam, or n = 39 if interval certification is cheaper.
     bead: think-uz6f
     depends_on: []
-    workflows: [insight-iteration, research-pass, research-loop]
+    workflows: [insight-iteration, research-survey, research-loop]
     next_evidence: >-
       Stopped before measurement in exp-048 and session-067. Frozen refusal E1 fired:
       retained source metadata and the numerical witness do not declare upstream

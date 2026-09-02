@@ -308,7 +308,7 @@ session:
       Independently reconstruct El Moumni Figure 4 and its downstream uses under
       think-trkj; do not adopt the candidate correction without a complete coordinate
       packet.
-  - workflow: research-pass
+  - workflow: research-survey
     recording: contemporaneous
     clock_role: work
     focus: correctness
@@ -357,7 +357,7 @@ session:
     stop_reason: >-
       The coordinate prerequisite is exact and independently reproducible, while the
       first surrounding incidences that require undeclared source repairs are named, so
-      the research pass closed before its ceiling rather than broadening into a theorem
+      the research survey closed before its ceiling rather than broadening into a theorem
       replay.
     next_action: >-
       Encode only the exact parameterized coordinate packet, replay boundary, and

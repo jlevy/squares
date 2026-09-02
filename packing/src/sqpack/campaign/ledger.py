@@ -45,6 +45,7 @@ IDEAS = ROOT / "ideas.md"
 DEFECTS = PROJECT_ROOT / "defects.yaml"
 SESSION_SCHEMA = ROOT / "schemas/agent-session.schema.yaml"
 AGENDA_SCHEMA = ROOT / "schemas/agenda.schema.yaml"
+LOGBOOK_SCHEMA = ROOT / "schemas/research-loop-log-entry.schema.yaml"
 REQUIRED_LOGBOOK_SECTIONS = (
     "Context",
     "Outcome",
@@ -684,6 +685,22 @@ def check(
                 "agent-session.schema.yaml: "
                 f"{sorted(agenda_workflows ^ session_workflows)}"
             )
+
+    # The logbook schema duplicates the same vocabulary as object keys so that a run
+    # rollup cannot invent an unrecognized workflow. Keep that fourth copy in the same
+    # whole-set invariant as the three agenda copies above.
+    logbook_schema = safe_load(LOGBOOK_SCHEMA.read_text(encoding="utf-8"))
+    logbook_workflows = set(
+        ((logbook_schema.get("$defs") or {}).get("workflow_counts") or {})
+        .get("properties", {})
+        .keys()
+    )
+    if logbook_workflows != session_workflows:
+        problems.append(
+            "research-loop-log-entry.schema.yaml: workflow count keys have drifted "
+            "from agent-session.schema.yaml: "
+            f"{sorted(logbook_workflows ^ session_workflows)}"
+        )
 
     # A phase may now name the commitment it serves. Where it does, the link is checked
     # rather than left as prose a regex has to recover.

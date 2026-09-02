@@ -27,7 +27,7 @@ session:
     unattended rules any verdict lands unresolved with needs_review -- especially
     if the fraction lands near the 0.80 threshold, per the cell's own exit text.
   workflow_phases:
-  - workflow: research-pass
+  - workflow: research-survey
     recording: contemporaneous
     clock_role: work
     focus: insight
