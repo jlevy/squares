@@ -232,7 +232,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [17, 50, 54, 68]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       After four bounded blocks, which measured agent, command, validation or evidence-
@@ -260,20 +260,26 @@ agenda:
       routed to a later W7 block and not implemented during this wall.
     bead: think-ne3d
     depends_on: []
-    blocked_on: >-
-      The four lane closeouts and resource receipts are frozen on the first-wave PR
-      checkpoint, but the owner requested a pause before this block opened.
     workflows: [process-review, efficiency-loop]
+    artifacts:
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md
+    - packing/devtools/render_wave_efficiency.py
+    - packing/tests/test_render_wave_efficiency.py
+    - packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md
     next_evidence: >-
-      Resume only on a new owner instruction from the pushed first-wave checkpoint.
-      Formal W5 must begin by verifying that revision and its hosted checks; the
-      preliminary read-only timing preflight is not a substitute for BC-127's durable
-      repayment decision.
+      Complete on the resumed wall in session-076. W4 verified revision 1e175108, its
+      three green hosted checks, four terminal lane records, four declared receipts
+      and no live writer. The W5 receipt is
+      docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md, with
+      its baseline rendered by devtools.render_wave_efficiency; the decision is
+      no-change, and the one measured candidate (the unmapped benchmarks root that
+      made the push tier select all 1,302 tests) fails the equivalence and repayment
+      guards and is routed to W7 with four process-contract entries.
   - id: BC-128
     purpose: measurement_validation
     owner_focus: insight
     instances: [17, 50, 54, 68]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Which exact overnight continuation, if any, did each first-wave result earn?
@@ -295,13 +301,22 @@ agenda:
     bead: think-8ih6
     depends_on: [BC-127]
     workflows: [insight-iteration, factual-review, process-review]
+    artifacts:
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md
+    - packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md
     next_evidence: >-
-      Blocked on the first-wave W5 receipt and exact terminal outcomes.
+      Complete in session-076. The routing decision and three immutable packets are
+      docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md at
+      evidence revision 1e175108: BC-129 stopped with the sequential resumable wall
+      priced at about 5.6 hours; BC-130 a conditional candidate that needs an exp-054
+      pass and a separate side-semantics preregistration; BC-131 stopped with the
+      source refusal retained behind the n = 54 negative-control and frozen-input
+      repairs. No second-wave agent was dispatched and no target opened.
   - id: BC-135
     purpose: measurement_validation
     owner_focus: correctness
     instances: [17, 50, 54, 68]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Do independent cross-lane reviewers reproduce every first-wave decision, named
@@ -394,6 +409,11 @@ agenda:
       named mutation and the unchanged claim boundary.
     bead: think-pzcl
     depends_on: [BC-123, BC-128]
+    blocked_on: >-
+      BC-128 stopped this row: BC-123 measured no paired sample, so the 2.8x condition
+      never held, and the retained serial control cannot be paired with a later
+      candidate. Any future profile is a newly registered round with fresh pair roots
+      and a host-wide quiet lease.
     workflows: [insight-iteration, research-loop, factual-review]
     next_evidence: >-
       Blocked until the performance result and routing checkpoint make a three-hour
@@ -431,6 +451,11 @@ agenda:
       the unchanged claim boundary.
     bead: think-rtuk
     depends_on: [BC-124, BC-128]
+    blocked_on: >-
+      BC-128 froze this row as a conditional candidate: it opens only if exp-054 passes
+      BC-135 review and a separate preregistration binds the reported side token's
+      exact or directional semantics; without that contract a run returns three typed
+      serialization refusals. Only BC-136 may place it in a separate overnight agenda.
     workflows: [insight-iteration, research-loop, factual-review]
     next_evidence: >-
       Blocked on a complete production adapter and explicit route; no network or target
@@ -467,6 +492,11 @@ agenda:
       unchanged claim boundary.
     bead: think-e6rj
     depends_on: [BC-126, BC-128]
+    blocked_on: >-
+      BC-128 stopped this row and retained the source refusal
+      exact-source-parser-and-labeled-correspondence-absent. The formula tool's named
+      negative control and the frozen-input inventory repair are target-blind W7
+      prerequisites before any parser or correspondence contract is reviewed.
     workflows: [research-pass, insight-iteration, pipeline-improvement, factual-review]
     next_evidence: >-
       Blocked until the source audit and routing checkpoint show whether any

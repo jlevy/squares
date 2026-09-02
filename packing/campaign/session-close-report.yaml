@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 75
+count: 76
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 31
-  sessions_unmeasured: 44
+  sessions_unmeasured: 45
   attributed:
     rollups: 42
     turns: 13390
@@ -1115,3 +1115,13 @@ sessions:
     active_union_hours: 1.41
     wall_hours: 1.75
     snapshot_incomplete: false
+- id: session-076
+  title: "Agenda-014 first-wave closeout, routing and independent review"
+  status: in_progress
+  primary_bead: think-v0rj
+  phases: 3
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []

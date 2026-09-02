@@ -119,6 +119,14 @@ documents:
     role: review
     authority: record
     lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md
+    role: review
+    authority: record
+    lifecycle: retained
   - path: docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md
     role: review
     authority: record

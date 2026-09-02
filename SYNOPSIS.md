@@ -192,6 +192,8 @@ case or experiment separately.
 | [Review: Agenda 013 Second-Wave Efficiency](docs/project/reviews/review-2026-09-01-agenda013-second-wave-efficiency.md) | dated review record | record | retained | — |
 | [Review Packets: Agenda 013 Second Wave](docs/project/reviews/review-2026-09-01-agenda013-second-wave-packets.md) | dated review record | record | retained | — |
 | [Independent Review: Agenda 013 Research Lanes](docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md) | dated review record | record | retained | — |
+| [Review: Agenda 014 First-Wave Efficiency](docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md) | dated review record | record | retained | — |
+| [Review Packets: Agenda 014 First Wave](docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md) | dated review record | record | retained | — |
 | [Agenda 013 Overnight Synthesis: Controls, Mechanisms, and the Next Research Queue](docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -327,22 +329,27 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-The latest lane closeout is
-[session-073](packing/campaign/agent-sessions/session-073-bc123-n17-parent-bound-parallel-profile.md).
-It retains an exact 524.743-second serial arm at `n = 17`, but asymmetric host load
-invalidated the parallel arm; exp-053 is unresolved and must not resume.
+The latest session is
+[session-076](packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md),
+which resumed Agenda 014 from the pushed PR #73 checkpoint at revision `1e175108` on the
+owner’s explicit instruction.
+BC-127 is complete: the W5 receipt
+[review-2026-09-02-agenda014-first-wave-efficiency](docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md)
+records `no-change`, with its baseline rendered by `devtools.render_wave_efficiency` and
+five routed W7 entries.
+BC-128 is complete: the routing decision and three immutable packets are
+[review-2026-09-02-agenda014-first-wave-packets](docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md);
+BC-129 and BC-131 are stopped, and BC-130 is a conditional candidate that needs an
+exp-054 pass and a separate side-semantics preregistration.
 The coordinating
 [session-072](packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md)
-freezes all four first-wave lanes on PR #73 and stops at the owner’s requested pause.
+and the lane closeouts in sessions 073--075 hold the first-wave evidence.
 
-BC-124 completed and freshly readmitted a corrected target-blind `n = 68` adapter,
-BC-125 completed its prospective `n = 50` refusal receipt, and BC-126 completed the
-bounded `n = 54` source/formula audit.
 Exp-053 through exp-055 remain review-pending; no scientific target result was promoted.
-On resume, BC-127 must formalize the efficiency decision and BC-128 must freeze
-immutable packets before the next review destination, **BC-135 under bead
-`think-bpzq`**, opens.
-No second-wave or overnight agenda is authorized from this checkpoint alone.
+The active cell is **BC-135 under bead `think-bpzq`**: three independent reviewers
+replay the packets read-only and return one determination per experiment.
+BC-136 and every second-wave lane remain unopened; no overnight agenda is authorized
+from this checkpoint alone.
 
 ### Handoff Record
 
@@ -2572,8 +2579,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 31 |
-| closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **75** |
+| closed before `resource_rollups` existed, logs not retained | 45 |
+| **total** | **76** |
 
 <!-- END GENERATED: session-close-report -->
 
