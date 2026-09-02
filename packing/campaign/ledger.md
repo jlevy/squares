@@ -92,6 +92,10 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-075](agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 7 | think-17q7 | Independent campaign review may clear or challenge exp-055 needs_review without rerunning it. |
 | [session-076](agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 5 | think-v0rj | Take BC-136 under think-oa22 only on a new owner instruction; it may clear the three review flags and write the separate overnight agenda from the one conditional route. |
 | [session-077](agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 3 | think-oa22 | Take BC-137 under think-ovz9 at agenda-015's wave-one dispatch; the two sibling lanes open in the same dispatch. |
+| [session-078](agent-sessions/session-078-agenda015-ten-hour-coordinator.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 1 | think-x81p | Run BC-137 under think-ovz9 through wave one, then freeze the wave in BC-143. |
+| [session-079](agent-sessions/session-079-bc137-n17-sequential-larger-prefix.md) | completed | contemporaneous | `insight-iteration` (correctness) | `factual-review` (correctness) | 3 | think-ovz9 | The coordinator launches the registered exp-056 `--record` command and observes it with `--status` on the exp-056 checkpoint at each 25-minute boundary. |
+| [session-080](agent-sessions/session-080-bc138-n68-side-semantics-binding.md) | completed | contemporaneous | `insight-iteration` (correctness) | `factual-review` (correctness) | 4 | think-ymjp | The coordinator runs the different-lane readmission of the binding, the thirteen named guards and the absent result path; BC-139 opens only on that receipt. |
+| [session-081](agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `factual-review` (process) | 4 | think-hrw2 | The coordinator readmits the three tools before the checkpoint routes the n = 54 contract; the run's active cell remains BC-137 under think-ovz9. |
 
 ### Workflow summary
 
@@ -100,12 +104,12 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 1 | 0 | 12 | 0 |
-| `factual-review` | 3 | 0 | 36 | 2 |
-| `insight-iteration` | 13 | 1 | 50 | 2 |
+| `factual-review` | 3 | 0 | 39 | 2 |
+| `insight-iteration` | 16 | 1 | 53 | 2 |
 | `process-review` | 13 | 4 | 59 | 6 |
 | `efficiency-loop` | 9 | 0 | 27 | 0 |
 | `research-loop` | 8 | 4 | 43 | 7 |
-| `pipeline-improvement` | 19 | 0 | 95 | 0 |
+| `pipeline-improvement` | 20 | 0 | 101 | 0 |
 | `documentation-pass` | 1 | 0 | 2 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
@@ -366,7 +370,7 @@ Status: **active**. Run an exact ten-hour unattended campaign from agenda-014's 
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 55 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 57 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -423,13 +427,13 @@ Status: **active**. Run an exact ten-hour unattended campaign from agenda-014's 
 | H-049 | blocked | search | delta((4,6), 20) > 0: twenty unit squares pack into a 4 by 6 rectangle |  | 0 |  |
 | H-050 | blocked | search | The n = 71 incumbent's split of sixteen oblique squares across two ang |  | 0 |  |
 | H-051 | blocked | search | Starting only from the hash-verified public n = 68 parent, a proposer  |  | 0 |  |
-| H-052 | unresolved | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 2 | 139.6m agent + 139.6m wall |
+| H-052 | unresolved | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 3 | 139.6m agent + 139.6m wall |
 | H-053 | blocked | search | For each fixed UnitSquare Release 1 parent-child pair at n = 68 and n  |  | 2 | 114m agent + 107.2m wall |
 | H-054 | unresolved | search | The retained source facts for the reported n = 50 construction at side |  | 2 | 38m agent + 30.0m wall |
 | H-055 | blocked | search | If BC-111 selects n = 54, the fixed retained witness at reported side  |  | 0 |  |
 | H-056 | blocked | search | If BC-111 selects n = 39, the fixed retained witness can be promoted t |  | 0 |  |
 | H-057 | unresolved | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 1 | 107.833m agent + 12.3m wall |
-| H-058 | unresolved | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 1 | 99m agent + 99.0m wall |
+| H-058 | unresolved | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 2 | 99m agent + 99.0m wall |
 | H-059 | confirmed | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 1 | 92m agent + 1s wall |
 
 ## Needs review — held for a human, not decided
@@ -437,6 +441,8 @@ Status: **active**. Run an exact ten-hour unattended campaign from agenda-014's 
 | id | hypotheses | decision | why it was not decided |
 | --- | --- | --- | --- |
 | exp-050 | H-054 | unresolved | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
+| exp-056 | H-052 | in-progress | Registered before the process runs; no exp-056 result exists yet, so H-052 is neither accepted nor rejected by this round. |
+| exp-057 | H-058 | in-progress | Registered before any network access and before the one declared parent is retrieved; no exp-057 result exists yet, so this round supplies no H-058 sample and neither accepts nor rejects the claim. |
 
 ## Rounds
 
@@ -520,6 +526,13 @@ Status: **active**. Run an exact ten-hour unattended campaign from agenda-014's 
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (2)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-056 | series-000 | 17 | claude-opus-5 | H-052 | Registered before the process runs; no exp-056 result exists yet, so H-052 is neither accepted nor rejected by this round. |
+| exp-057 | series-000 | 68 | claude-opus-5 | H-058 | Registered before any network access and before the one declared parent is retrieved; no exp-057 result exists yet, so this round supplies no H-058 sample and neither accepts nor rejects the claim. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -530,10 +543,11 @@ Status: **active**. Run an exact ten-hour unattended campaign from agenda-014's 
 | exp-048 | H-054 | 8m agent | dependency |  |  |
 | exp-049 | H-052 | 65.3333m agent + 65.3m wall | timebox | Frozen package-manifest SHA-256 309ec24158f73dd2e9b837c773b1 |  |
 | exp-052 | H-052 | 74.2667m agent + 74.3m wall | timebox | Canonical checkpoint SHA-256 db5c156959b6de4e6f2c9be283454d0 |  |
+| exp-056 | H-052 |  | timebox | Frozen exp-052 parent checkpoint SHA-256 db5c156959b6de4e6f2 |  |
 
 ## Effort
 
-55 rounds, 1721.43 agent-minutes, 419.0 wall-minutes.
+57 rounds, 1721.43 agent-minutes, 419.0 wall-minutes.
 
 ## Exploration reports not yet codified
 

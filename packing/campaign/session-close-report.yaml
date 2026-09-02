@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 77
+count: 81
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 33
-  sessions_unmeasured: 44
+  sessions_measured: 36
+  sessions_unmeasured: 45
   attributed:
-    rollups: 52
-    turns: 14215
-    tool_calls: 8179
-    tool_errors: 163
-    one_off_code: 1598
-    wall_hours: 71.29
+    rollups: 55
+    turns: 14495
+    tool_calls: 8351
+    tool_errors: 164
+    one_off_code: 1637
+    wall_hours: 72.04
   unattributed:
     rollups: 10
     turns: 1460
@@ -28,12 +28,12 @@ totals:
     one_off_code: 173
     wall_hours: 6.87
   measured:
-    rollups: 62
-    turns: 15675
-    tool_calls: 9057
-    tool_errors: 195
-    one_off_code: 1771
-    wall_hours: 78.16
+    rollups: 65
+    turns: 15955
+    tool_calls: 9229
+    tool_errors: 196
+    one_off_code: 1810
+    wall_hours: 78.91
 codex_receipts:
   attributed: 15
   unattributed: 0
@@ -1151,4 +1151,56 @@ sessions:
   tool_errors: 6
   one_off_code: 31
   wall_hours: 1.18
+  codex_receipts: []
+- id: session-078
+  title: "Agenda-015 ten-hour coordinator"
+  status: in_progress
+  primary_bead: think-x81p
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []
+- id: session-079
+  title: "BC-137 n = 17 sequential larger prefix"
+  status: completed
+  primary_bead: think-ovz9
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-a4dde96d6b1cf6924.yaml
+  turns: 78
+  tool_calls: 46
+  tool_errors: 0
+  one_off_code: 10
+  wall_hours: 0.23
+  codex_receipts: []
+- id: session-080
+  title: "BC-138 n = 68 side-semantics binding"
+  status: completed
+  primary_bead: think-ymjp
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-a2713c7d417bc60cc.yaml
+  turns: 115
+  tool_calls: 77
+  tool_errors: 1
+  one_off_code: 10
+  wall_hours: 0.28
+  codex_receipts: []
+- id: session-081
+  title: "BC-140 target-blind guard repairs"
+  status: completed
+  primary_bead: think-hrw2
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-a5403a5fd8d5e9f8b.yaml
+  turns: 87
+  tool_calls: 49
+  tool_errors: 0
+  one_off_code: 19
+  wall_hours: 0.24
   codex_receipts: []

@@ -342,19 +342,19 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, follow
-[session 077](../../../../packing/campaign/agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md),
-which closed Agenda 014 and published
+[session 078](../../../../packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md),
+the coordinator of
 [agenda-015](../../../../packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md),
-the exact ten-hour successor built only from reviewed routes and target-blind fallbacks.
-The first-wave evidence and its independent review are held by
+the exact ten-hour run that started at `05:03Z` on 2026-09-02.
+[session 077](../../../../packing/campaign/agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md)
+published that agenda, and
 [session 076](../../../../packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md)
-and the coordinating
-[session 072](../../../../packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md).
+holds the reviewed first-wave evidence.
 
-Take **BC-137 under `think-ovz9`** as the next supervised exact-research goal,
-dispatched together with BC-138 and BC-140 at agenda-015’s wave-one boundary; BC-143
-routes the second wave.
-No target result is promoted and no review flag is cleared outside BC-146.
+The active cell is **BC-137 under `think-ovz9`**, the `n = 17` sequential larger-prefix
+round, observed by the coordinator at 25-minute boundaries; BC-143 routes the second
+wave at `07:33Z`. No target result is promoted and no review flag is cleared outside
+BC-146.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

@@ -330,28 +330,30 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-The latest session is
-[session-077](packing/campaign/agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md),
-which closed Agenda 014 on the owner’s instruction: the three BC-135-cleared review
-flags are applied in the exp-053, exp-054 and exp-055 records, every unearned
-second-wave row is stopped or carried, and the successor is
-[agenda-015](packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md),
-an exact ten-hour run built only from reviewed routes and target-blind fallbacks.
+The latest lane closeout is
+[session-081](packing/campaign/agent-sessions/session-081-bc140-target-blind-guard-repairs.md),
+the BC-140 guard repairs, which returned with
+[session-079](packing/campaign/agent-sessions/session-079-bc137-n17-sequential-larger-prefix.md)
+and
+[session-080](packing/campaign/agent-sessions/session-080-bc138-n68-side-semantics-binding.md)
+as the three wave-one lanes of the
+[agenda-015](packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md)
+ten-hour run. The coordinating
+[session-078](packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md)
+started the wall at `05:03Z` on 2026-09-02 from the revision that
+[session-077](packing/campaign/agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md)
+published;
 [session-076](packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md)
-holds the W5 receipt, the routing packets and the independent review that earned those
-routes; the coordinating
-[session-072](packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md)
-and sessions 073--075 hold the first-wave evidence.
+holds the reviewed first-wave evidence those routes rest on.
 
-Agenda-015 runs three lanes over a 150/50/180/50/90/80 wall: an `n = 17` sequential
-larger-prefix round resuming the reviewed exp-052 chain from ordinal 33 (BC-137), an
-`n = 68` side-semantics preregistration that earns the one-parent localization (BC-138
-then BC-139), and the three routed guard repairs that gate the `n = 54` parser and
-correspondence contract (BC-140 then BC-141), with two checkpoints, an independent
-review and a closeout on the coordinator.
-The next cell is **BC-137 under bead `think-ovz9`**, taken together with BC-138 and
-BC-140 at the wave-one dispatch; no scientific target result has been promoted, and
-H-052, H-055 and H-058 move only under their own frozen criteria.
+Wave one: the `n = 17` child chain (exp-056) and the guard repairs were readmitted by
+different-lane reviewers and the coordinator launched the sequential process; the
+`n = 68` side-semantics binding (exp-057) awaits its readmission before BC-143 can route
+the one-parent localization.
+The active cell is **BC-137 under bead `think-ovz9`**, observed at 25-minute boundaries;
+BC-143 at `07:33Z` freezes the wave and routes BC-139 and BC-141. No scientific target
+result has been promoted, and H-052, H-055 and H-058 move only under their own frozen
+criteria.
 
 ### Handoff Record
 
@@ -2387,13 +2389,13 @@ round that names the hypothesis, control roles included.
 | [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov’s decomposition | 0 | — |
 | [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent’s 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
 | [H-051](packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md) | blocked | A blinded tier-S n = 68 public-parent surgery pilot matches the released child under the frozen grammar | 0 | — |
-| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | unresolved | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 2 | 139.6m agent + 139.6m wall |
+| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | unresolved | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 3 | 139.6m agent + 139.6m wall |
 | [H-053](packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md) | blocked | Each fixed UnitSquare `n = 68, 69` parent-child pair admits compatible rigid poses under at least one declared serialization model | 2 | 114m agent + 107.2m wall |
 | [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | unresolved | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 2 | 38m agent + 30.0m wall |
 | [H-055](packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md) | blocked | If selected, the `n = 54` witness admits complete exact promotion in the reported nested-radical field | 0 | — |
 | [H-056](packing/campaign/hypotheses/H-056-n39-degree-five-interval-certificate.md) | blocked | If selected, the `n = 39` witness admits a complete interval certificate tied to the designated degree-five root | 0 | — |
 | [H-057](packing/campaign/hypotheses/H-057-n17-parent-bound-parallel-speedup.md) | unresolved | A parent-bound three-process runner preserves exact output and reaches the fixed useful-speedup threshold on three exp-052 ordinals | 1 | — |
-| [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | unresolved | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 1 | — |
+| [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | unresolved | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 2 | — |
 | [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | confirmed | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 1 | — |
 
 ### Confirmed
@@ -2535,9 +2537,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 52 | 14,215 | 8,179 | 163 | 1,598 | 71.29 h |
+| claimed by a session | 55 | 14,495 | 8,351 | 164 | 1,637 | 72.04 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **62** | **15,675** | **9,057** | **195** | **1,771** | **78.16 h** |
+| **measured** | **65** | **15,955** | **9,229** | **196** | **1,810** | **78.91 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2560,7 +2562,10 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
 | [session-076](packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md) | 5 | 6 | 355 | 212 | 1 | 0.5 h |
 | [session-077](packing/campaign/agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md) | 3 | 3 | 148 | 97 | 0 | 0.22 h |
-| *shared by 19 sessions* | — | 4 | 10,375 | 5,737 | 129 | 62.26 h |
+| [session-079](packing/campaign/agent-sessions/session-079-bc137-n17-sequential-larger-prefix.md) | 3 | 1 | 78 | 46 | 0 | 0.23 h |
+| [session-080](packing/campaign/agent-sessions/session-080-bc138-n68-side-semantics-binding.md) | 4 | 1 | 115 | 77 | 1 | 0.28 h |
+| [session-081](packing/campaign/agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | 4 | 1 | 87 | 49 | 0 | 0.24 h |
+| *shared by 22 sessions* | — | 4 | 10,375 | 5,737 | 129 | 62.26 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -2582,9 +2587,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 33 |
-| closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **77** |
+| measured | 36 |
+| closed before `resource_rollups` existed, logs not retained | 45 |
+| **total** | **81** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -2599,9 +2604,10 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 55 terminal rounds registered in `series-000`.
+There are 57 terminal rounds registered in `series-000`.
 
 They record 1721.43 agent-minutes and 419.0 wall-minutes.
+Two of the 57, exp-056 and exp-057, are registered under lease and not yet run.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -2685,6 +2691,8 @@ archive beside it.
 | [exp-053](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-053-h-057-n17-parent-bound-parallel-speedup.md) | 17 | calibration | H-057 | parent-bound exact parallel profiler | exact serial arm retained; parallel arm invalidated by asymmetric host load; no paired sample | unresolved |
 | [exp-054](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-054-h-058-n68-one-parent-production-serialization.md) | 68 | calibration | H-058 | target-blind production adapter | adapter admitted with side semantics still unbound; no source, target sample, or result | unresolved |
 | [exp-055](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-055-h-059-n50-producer-refusal-ordering.md) | 50 | calibration | H-059 | producer stage-sentinel harness | prospective existing-result refusal emitted a verified zero-call trace; exp-050 unchanged | **accepted** |
+| [exp-056](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-056-h-052-n17-sequential-larger-prefix.md) | 17 | calibration | H-052 | parent-bound child chain over the unchanged exp-052 driver | registered under lease; the sequential process from ordinal 33 is running under agenda-015 BC-137 | **in-progress** |
+| [exp-057](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md) | 68 | calibration | H-058 | side-semantics binding over the unchanged exp-054 adapter | registered under lease; the one-parent localization opens only on BC-143’s routing | **in-progress** |
 
 ### Cost and provenance
 
@@ -2745,10 +2753,12 @@ archive beside it.
 | exp-053 | one 150-minute first-wave lane | 738 s | 107.8333 m | guard | `909efafa+sha256-e31abda6ce13df47` |
 | exp-054 | one target-blind 150-minute first-wave lane | 5,940 s | 99 m | criterion | `909efafa+sha256-9b503050115a5a48` |
 | exp-055 | one fixed 15-minute W6 cell | 0.72 s | 92 m | criterion | `909efafa+sha256-9c90a04e5691f168` |
+| exp-056 | both agenda-015 waves to the 06:20 elapsed boundary | — | — | — | `11ce70ee` |
+| exp-057 | one 180-minute wave-two lane | — | — | — | `11ce70ee` |
 
-### What the 55 rounds jointly establish
+### What the 57 rounds jointly establish
 
-The 55 rounds use 1721.43 agent-minutes and 419.0 wall-minutes under the campaign’s
+The 57 rounds use 1721.43 agent-minutes and 419.0 wall-minutes under the campaign’s
 retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through

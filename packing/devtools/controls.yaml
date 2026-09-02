@@ -152,9 +152,9 @@ controls:
 
 - name: synopsis - narrative round aggregate lagging the ledger
   file: ../SYNOPSIS.md
-  replace: ["There are 55 terminal rounds", "There are 45 terminal rounds"]
+  replace: ["There are 57 terminal rounds", "There are 45 terminal rounds"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "terminal-round aggregate is not 55 rounds"
+  expect: "terminal-round aggregate is not 57 rounds"
 
 - name: synopsis - numerical result promoted past a formal prerequisite
   file: ../SYNOPSIS.md
