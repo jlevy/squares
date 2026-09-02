@@ -5,7 +5,7 @@ title: "Agenda 015: ten-hour earned routes and guard repairs"
 kind: epic
 status: in_progress
 priority: 0
-version: 12
+version: 13
 spec_path: packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md
 labels:
   - packing
@@ -23,7 +23,8 @@ child_order_hints:
   - is-01m1g7bra0h8tqx9f1zpk1h5pt
   - is-01m1g7bsmekw7r8rfwcsm6hzbc
   - is-01m1g7btz9tbnfvpxdtkc0rqd1
+  - is-01m1gb24s8a7zjpkjyrmzbbb9m
 created_at: 2026-09-02T04:52:02.815Z
-updated_at: 2026-09-02T04:55:56.103Z
+updated_at: 2026-09-02T05:56:52.647Z
 ---
 Run the exact ten-hour successor to agenda-014 from its reviewed exits: an n = 17 sequential larger-prefix round, the n = 68 side-semantics binding and one-parent localization, target-blind guard repairs and the n = 54 parser/correspondence contract, with two checkpoints, independent review and terminal publication.
