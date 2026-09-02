@@ -237,15 +237,30 @@ session:
   delegations:
   - task: BC-135 Packet A review, n = 17 / exp-053
     operator: claude sub-agent reviewer-a
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
+    outcome: >-
+      Determination pass. All twelve frozen hashes matched at 1e175108 and in the
+      working tree; receipt.json reads mode serial and elapsed_ns 524743164166 with
+      fragment hashes in packet order; seven focused tests passed; normal and
+      optimized self-tests each emitted 30 guards and stdout SHA-256
+      0c256e5a164078119ffb3a98e9de2825c733a02cfbcff1c1b0aa8a6d28da0958; both named
+      mutations rejected; every declared absence held after replay. The records
+      nowhere assert a paired sample, a measured 2.8x or a speedup claim for arm A.
+    evidence:
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md
     files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
+    checks:
+    - git diff --exit-code 1e175108 over the evidence paths was empty before and after replay.
+    - git status --porcelain was empty at the end of the review; only gitignored __pycache__ was created.
+    - No pair or assemble subcommand ran; selftest ran twice.
+    uncertainty: >-
+      The frozen run's host was macOS arm64 and the replay ran on Linux, so the
+      identical self-test receipt is cross-platform evidence rather than a same-host
+      repeat. The receipt hash is the SHA-256 of the self-test's stdout including its
+      trailing newline, which the packet did not state.
+    elapsed_seconds: 338
+    elapsed_quality: platform_measured
     next_action: Return Artifact / Result / Guard / Next and one determination for exp-053.
     phase: 4
     budget_minutes: 35
@@ -296,15 +311,33 @@ session:
     - git, tbd or repository writes
   - task: BC-135 Packet C review, n = 50 / exp-055
     operator: claude sub-agent reviewer-c
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
+    outcome: >-
+      Determination pass. All thirteen frozen hashes matched at 1e175108 and in the
+      working tree; the result's six instrument bindings, producer binding and both
+      exp-050 bindings equal the computed values; the independent verifier exited 0
+      under normal and optimized Python with identical 390-byte stdout hashing to
+      64d37a00c43384033adedc94e1c4ba42ad1010a6f419d5b17f07c14265b73ccc; 21 focused
+      tests passed; all five named verifier mutations including review-cleared
+      rejected; the four stage sentinels each calibrate once and all twelve
+      producer-side mutation leaves are rejected true. The claim boundary is pinned
+      verbatim in verify.py, the result and the record.
+    evidence:
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md
     files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
+    checks:
+    - git diff --exit-code 1e175108 over the thirteen paths was empty before and after replay.
+    - The producer --record command and --selftest were not run; no network or geometry access.
+    - exp-050 hashes ab00e50debe0bc60279ce3472ed0c09eb062e8271a481a38c6ac65036aff4a02 after replay.
+    uncertainty: >-
+      The 0.72-second publication figure is a session-record attestation that Packet
+      C cannot replay. needs_review true exists both in the experiment record and
+      inside the immutable result; only the record's field may ever be cleared, since
+      the verifier requires the result's field and the review-cleared mutation proves
+      it.
+    elapsed_seconds: 319
+    elapsed_quality: platform_measured
     next_action: Return Artifact / Result / Guard / Next and one determination for exp-055.
     phase: 4
     budget_minutes: 35
