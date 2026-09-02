@@ -31,7 +31,7 @@ session:
       readmitted; observe every 25-minute boundary.
     commitment: BC-137
     bead: think-x81p
-    status: in_progress
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 150
@@ -50,11 +50,54 @@ session:
     fallback: >-
       Retain the first typed stop, leave the row stopped, and do not substitute a
       target.
+    outcome: >-
+      BC-138 stopped before network access on the side-semantics provenance refusal;
+      BC-140 and BC-142 terminalized partial with their admitted subsets and registered
+      defects; every target-blind fallback card returned; and BC-137 reached a verified
+      72-row agreeing prefix and remained live at the boundary.
+    evidence:
+    - packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.checkpoint.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.progress.json
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md
+    - docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md
+    stop_reason: Reached the fixed 07:33Z wave-one boundary with every lane terminal or observably live.
+    next_action: Run BC-143's evidence freeze, W5 receipt, and routing decision.
+  - workflow: process-review
+    focus: process
+    recording: contemporaneous
+    clock_role: work
+    objective: >-
+      BC-143, 02:30--03:20: freeze the terminal wave-one records and the observed
+      exp-056 pair in one pushed revision; retain the registered wave-efficiency
+      renderer's typed outcome under D-421; and route BC-139, BC-141, and BC-137 only
+      from their reviewed exits.
+    commitment: BC-143
+    bead: think-8hcp
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: wave_one_boundary
+    budget_minutes: 50
+    started_at: '2026-09-02T07:33:00Z'
+    deadline_at: '2026-09-02T08:23:00Z'
+    expected_output: >-
+      A pushed wave-one evidence revision, a durable W5 receipt, one routing decision
+      per wave-two row, and an updated PR cost block.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      Stop on a moving staged evidence pair, a renderer outcome replaced by manual
+      arithmetic, a route unsupported by its reviewed entry receipt, or a failed
+      records gate.
+    fallback: >-
+      Retain the first typed refusal, leave the unsupported row stopped, and publish
+      the exact frozen revision without borrowing time from wave two.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Freeze wave one in BC-143 at 07:33Z.
+      Commit and push the frozen evidence revision, then run W5 and route wave two by
+      08:23Z.
   primary_bead: think-x81p
   status: in_progress
   budget:
@@ -303,8 +346,48 @@ session:
     elapsed_quality: unavailable
     next_action: Preserve the semantic-provenance refusal for BC-143 and do not route BC-139.
     phase: 1
+  - task: Target-blind n = 50 executable-closure manifest and sentinel design
+    operator: openai-codex sub-agent, extra-high
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Wrote the agenda fallback note that specifies a future round's strict manifest,
+      literal argv and environment binding, transitive executable closure, injected
+      sentinel inventory, refusal order, result-path absence boundary, mutation matrix,
+      and independent no-import admission and replay contract.
+    evidence:
+    - docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md
+    files:
+    - docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md
+    checks:
+    - >-
+      The note labels the exp-050 and exp-055 hashes as historical anchors and leaves
+      cross-host Python-executable identity as an unresolved future design choice.
+    - >-
+      Owner replay reproduced all four on-disk SHA-256 anchors exactly and found the
+      normal/optimized observation digest in the immutable exp-055 result.
+    - >-
+      The lane ran no producer, source, target, geometry, network, verifier, hash,
+      validation, Git, or tbd command and changed no campaign record or code.
+    uncertainty: >-
+      No repository tool yet generates and validates the required transitive executable
+      closure; source and network sentinels remain conditional on a future authorized
+      round.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: >-
+      Retain the note as a future W7 contract only; it authorizes no agenda-015 route or
+      experiment execution.
+    phase: 1
   outputs:
   - packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.checkpoint.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.progress.json
+  - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
+  - packing/campaign/session-close-report.yaml
+  - docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md
+  - docs/project/document-map.yaml
+  - SYNOPSIS.md
   checks:
   - >-
     Recovery on PR head aed41ae at 05:40Z reproduced the records gate and found every
@@ -329,9 +412,8 @@ session:
   - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
   stop_reason: null
   next_action: >-
-    Observe the resumed BC-137 process at 25-minute boundaries, finish the target-blind
-    fallback audits, then freeze wave one in BC-143 and route only the rows their
-    reviewed guards earned.
+    Commit and push the frozen wave-one evidence, retain BC-143's registered W5 outcome,
+    and route wave two only from the reviewed lane exits by 08:23Z.
 ---
 # Session 078 — Agenda-015 Ten-Hour Coordinator
 
@@ -412,6 +494,59 @@ verifies both before any readmission card is issued.
 - **Next:** observe the live BC-137 chain again at 06:43Z and preserve these typed
   partial stops for the 07:33Z BC-143 freeze.
   BC-141, if routed, stays synthetic and target-blind.
+
+### 01:15--01:40 (06:18--06:43Z) — design fallback and live observation
+
+- **Artifact:** the target-blind n = 50 manifest-and-sentinel design note, its validated
+  document-map entry and generated synopsis row, and the 06:43Z exp-056
+  checkpoint/progress observation at SHA-256
+  `a94fffd2035adb90f57a046acbb7dbdbe967ee39055eb7e6834246aac6fdc677` and
+  `b50d3f1b5caa83cc81ad0821b9169de0201310d151d8a2b82d268755c0868329`.
+- **Result:** the n = 50 note freezes a future executable-closure and sentinel contract
+  without opening a producer, source, target, geometry, or network seam.
+  At 06:43Z the live exp-056 chain verified with 53 rows, 20 child rows, last ordinal
+  52, and exact agreement; progress records ordinal 53 at `independent_started`, and the
+  canonical result remains absent.
+- **Guard:** owner replay reproduced the note’s four historical file hashes and retained
+  normal/optimized observation digest.
+  Softschema accepted the enforced document map, the documentation gate covers 399
+  durable documents, and the frozen records tier passed 26 of 58 named steps.
+  Hosted `macos-portability`, `validate`, and `packing-required` all pass on recovery
+  commit `abe356f`.
+- **Next:** observe the process again at 07:08Z and freeze wave one in BC-143 at 07:33Z.
+  The fallback note is future W7 design only; it earns no route inside agenda-015.
+
+### 01:40--02:05 (06:43--07:08Z) — guarded continuation
+
+- **Artifact:** the 07:08Z exp-056 checkpoint/progress observation at SHA-256
+  `d60897a913117bff5060c73bac079f0e821b326ad9ae628cdeaef99891d622f5` and
+  `2cda6e039ec027660689c31bf4c22fd904be9318f0d335085973a29efe310ce8`.
+- **Result:** the chain verifies with 63 rows, 30 child rows, last ordinal 62, and exact
+  agreement; progress records ordinal 63 at `independent_started`, and the canonical
+  result remains absent.
+  The cell added ten completed rows.
+- **Guard:** no lane or fallback writer remained, no unregistered target was opened, and
+  the long process emitted no error output.
+  Consecutive observations both gained rows, so the no-progress stop does not fire.
+- **Next:** take the final wave-one observation at 07:33Z, immediately stage that exact
+  checkpoint/progress pair, and enter BC-143 without interrupting the process.
+
+### 02:05--02:30 (07:08--07:33Z) — wave-one freeze
+
+- **Artifact:** the immediately post-boundary 07:34Z exp-056 checkpoint/progress pair,
+  staged at SHA-256 `62765d94098632743de91f60249fc20368c34144ce4b851a7c16345c195b9b15`
+  and `5b15a9ad1846ee6d31c8a5ce0b5cb8952f05bee72b568c3388a5448530c581ad`.
+- **Result:** the verified chain contains 72 rows, 39 child rows, last ordinal 71, and
+  exact agreement; progress records ordinal 72 at `independent_started`, the canonical
+  result remains absent, and the cell added nine completed rows.
+  BC-137 earns wave-two continuation.
+- **Guard:** `git show :path | sha256sum` reproduces both observed hashes from the
+  index, so later writer progress cannot move the wave-one evidence revision.
+  BC-138, BC-140, and BC-142 were already terminal with typed close reasons; all four
+  fallback cards returned; no other writer remained.
+- **Next:** BC-143 freezes and pushes the revision, retains W5 `no-change` under D-421,
+  stops BC-139, routes only the admitted n = 54 subset to BC-141, and keeps BC-137 under
+  observation through 11:23Z.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

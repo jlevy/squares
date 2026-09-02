@@ -3,7 +3,7 @@ softschema:
   schema: document-map.schema.yaml
   status: enforced
 
-last_reviewed: '2026-09-01'
+last_reviewed: '2026-09-02'
 scope: >
   Durable Markdown owned by packing. Source-faithful archive content is
   excluded because its role and lifecycle come from resources/README.md rather than
@@ -128,6 +128,10 @@ documents:
     authority: record
     lifecycle: retained
   - path: docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md
     role: review
     authority: record
     lifecycle: retained

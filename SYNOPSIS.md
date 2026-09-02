@@ -195,6 +195,7 @@ case or experiment separately.
 | [Review: Agenda 014 First-Wave Efficiency](docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md) | dated review record | record | retained | — |
 | [Review Packets: Agenda 014 First Wave](docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md) | dated review record | record | retained | — |
 | [Independent Review: Agenda 014 First Wave](docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md) | dated review record | record | retained | — |
+| [Design Note: `n = 50` Manifest and Sentinel Contract](docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md) | dated review record | record | retained | — |
 | [Agenda 013 Overnight Synthesis: Controls, Mechanisms, and the Next Research Queue](docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -2589,7 +2590,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-073.yaml` | session-072, session-073 | 279 | 1.81 h | 1.81 h | 1.81 h | yes |
 | `codex-task-tree-session-074.yaml` | session-072, session-074 | 272 | 1.58 h | 1.58 h | 1.9 h | yes |
 | `codex-task-tree-session-075.yaml` | session-072, session-075 | 212 | 1.41 h | 1.41 h | 1.75 h | no |
-| `codex-task-tree-session-078.yaml` | session-078 | 523 | 1.64 h | 0.71 h | 1.26 h | yes |
+| `codex-task-tree-session-078.yaml` | session-078 | 736 | 3.04 h | 2.0 h | 2.55 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
