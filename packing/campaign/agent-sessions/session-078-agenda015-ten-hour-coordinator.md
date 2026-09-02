@@ -222,7 +222,7 @@ session:
       and retain a validated determination for every packet.
     commitment: BC-145
     bead: think-rh18
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: bc144_packet_freeze
     budget_minutes: 90
@@ -240,16 +240,75 @@ session:
     fallback: >-
       Retain the first typed caveat, discrepancy or cannot-reproduce finding, leave the
       affected decision review-pending and register repair only after reconciliation.
-    outcome: null
+    outcome: >-
+      Three fresh Max reviewers returned exact passes with no mismatch, caveat or
+      cannot-reproduce finding. The reconciled review at commit 162d0bea authorizes
+      BC-146 to clear only exp-056 and exp-057 needs_review; both experiments remain
+      unresolved, H-052 and H-058 remain undecided or unmeasured, H-055 remains
+      instrument-unready and no bound, frontier fact or route changes.
     evidence:
     - docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md
     - docs/project/reviews/review-2026-09-02-agenda015-second-wave-independent-review.md
-    stop_reason: null
+    stop_reason: >-
+      Reached the fixed 13:43Z BC-145 boundary with all three packet determinations
+      retained, reconciled and passing the records, documentation and formatting gates.
     next_action: >-
-      Use 12:13--12:58Z for three parallel fresh reviews, one immutable packet each;
-      run no review work on the coordinator while those determinations are in flight.
+      Enter BC-146 under think-8epx, apply only the two explicitly cleared review flags,
+      write the terminal synthesis and close the exact ten-hour wall without merging.
+  - workflow: insight-iteration
+    focus: process
+    recording: contemporaneous
+    clock_role: finalization
+    objective: >-
+      BC-146, 08:40--10:00: apply only BC-145-cleared review transitions and write the
+      revision-keyed terminal synthesis; render all views and close sessions and
+      receipts; run the full local gate; commit and push; then update PR #75 with cost,
+      inspect hosted checks and retain the exact next-agent entry without merging.
+    commitment: BC-146
+    bead: think-8epx
+    status: stopped
+    entered_by: planned_checkpoint
+    switch_reason: bc145_review_complete
+    budget_minutes: 80
+    started_at: '2026-09-02T13:43:00Z'
+    deadline_at: '2026-09-02T15:03:00Z'
+    expected_output: >-
+      A terminal synthesis separating proved, repository-verified, source-backed,
+      measured-negative and unresolved claims; closed session and agenda records;
+      current generated views; green full local validation; one pushed revision,
+      cost-first PR update, synchronized tbd and green hosted checks or one exact typed
+      incomplete hosted gate.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate
+    kill_condition: >-
+      Stop on any transition not cleared by BC-145, widened scientific claim, failed
+      full local gate, push whose revision differs from the validated commit, merge
+      attempt or hard wall at 15:03Z.
+    fallback: >-
+      Retain the first exact local or hosted failure, keep every unsupported transition
+      pending, publish the validated revision and do not extend the wall or merge.
+    outcome: >-
+      The complete gate exposed and drove two validation-contract repairs: stale OR-10
+      negative-control injections moved to OR-11, and the declared-bound checker now
+      discovers annotated Final constants while author and independent n = 54 tests
+      reach all fourteen caps. Focused validation passes with 84 tests, 24 declared
+      bounds and no violation. The definitive full gate then passed 57 of 58 steps,
+      including 1,450 fast tests, 25 exhaustive tests and 151 negative controls, but
+      stopped on Ruff formatting for the two new test files. The formatter repaired
+      both files and its focused check passes; the complete gate was not rerun before
+      the hard wall, so no BC-146 revision was pushed and no green claim is made.
+    evidence:
+    - docs/project/reviews/review-2026-09-02-agenda015-second-wave-independent-review.md
+    - docs/project/reviews/review-2026-09-02-agenda015-ten-hour-synthesis.md
+    stop_reason: >-
+      Reached the fixed 15:03Z wall after the definitive 726.74-second gate stopped on
+      its sole failed step, Ruff formatting; the mechanical repair passed its focused
+      check but did not receive a complete-gate rerun.
+    next_action: >-
+      Complete the separate post-wall publication remediation. The `think-5j8d` bead
+      becomes the next scientific entry only after PR #75's current head is hosted-green.
   primary_bead: think-x81p
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 600
     max_cycles: 24
@@ -268,7 +327,11 @@ session:
     before: >-
       zero agenda-015 experiments, the reviewed 33-row exp-052 prefix, an unbound
       n = 68 side token, and three routed guard repairs unimplemented
-    after: null
+    after: >-
+      two independently cleared experiment review flags; a retained 170-row n = 17
+      agreeing prefix; an independently admitted synthetic n = 54 contract; a typed
+      n = 68 provenance refusal; fourteen named n = 54 parser-bound controls; and one
+      exact local publication-gate stop with no scientific or frontier transition
   delegations:
   - task: BC-137 n = 17 sequential larger-prefix round, wave-one preparation
     operator: claude sub-agent lane-a
@@ -721,6 +784,7 @@ session:
   - docs/project/reviews/review-2026-09-02-agenda015-second-wave-efficiency.md
   - docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md
   - docs/project/reviews/review-2026-09-02-agenda015-second-wave-independent-review.md
+  - docs/project/reviews/review-2026-09-02-agenda015-ten-hour-synthesis.md
   - docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md
   - docs/project/document-map.yaml
   - SYNOPSIS.md
@@ -744,12 +808,20 @@ session:
     they carry Claude rather than Codex receipts. D-421 / think-mlwo records the missing
     cross-harness adapter; BC-143 must retain a typed W5 no-change receipt rather than a
     hand-computed table.
+  - >-
+    Post-wall publication remediation repaired the module-aware declared-bound and
+    terminal-handoff guards. The first complete rerun then passed all 58 steps in
+    756.25 seconds, including 1,454 fast tests, 25 exhaustive tests and 151 negative
+    controls. Terminal metadata is finalized before the exact publication-tree rerun.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
-  stop_reason: null
+  stop_reason: >-
+    Reached the fixed 15:03Z wall after the definitive 726.74-second gate stopped on
+    its sole failed step, Ruff formatting; the mechanical repair passed its focused
+    check but did not receive a complete-gate rerun.
   next_action: >-
-    Run BC-144 under think-2tol: terminalize exp-056, freeze the wave evidence, retain
-    W5 and prepare only the bounded packets earned for BC-145.
+    Complete the separate post-wall publication remediation. The `think-5j8d` bead
+    becomes the next scientific entry only after PR #75's current head is hosted-green.
 ---
 # Session 078 — Agenda-015 Ten-Hour Coordinator
 
@@ -1140,6 +1212,109 @@ verifies both before any readmission card is issued.
   No review flag is cleared inside BC-145.
 - **Next:** at 13:23Z register and validate the review record; do not apply the two
   authorized transitions or open BC-146 before the fixed 13:43Z boundary.
+
+### 08:20--08:40 (13:23--13:43Z) — retained and validated review
+
+- **Artifact:** commit `162d0bea2bf8033443ff40ff3f61d3d62481557a` and independent-review
+  SHA-256 `5f18e47672759989f99851ee164c53674147529d49ca45c7529ea780ee39627f`.
+- **Result:** the review record is registered in the document map and retained without
+  changing exp-056, exp-057, H-052, H-055, H-058, a scientific instrument, a bound, the
+  frontier or any route inside BC-145.
+- **Guard:** the records/Softschema tier passes 26 of 58 named steps, the documentation
+  map covers 404 durable documents, `make format-check` passes, `git diff --check` is
+  clean and the worktree is empty after commit.
+  The two authorized review-flag clears remain unapplied through the boundary.
+- **Next:** at 13:43Z close `think-rh18`, open `think-8epx` and apply only those two
+  review-flag transitions before writing the terminal synthesis.
+
+## BC-146 Terminalization Log
+
+### 08:40--09:00 (13:43--14:03Z) — cleared state and evidence synthesis
+
+- **Artifact:**
+  `docs/project/reviews/review-2026-09-02-agenda015-ten-hour-synthesis.md`, the two
+  one-line experiment-state changes and next-entry bead `think-5j8d`.
+- **Result:** exp-056 and exp-057 now set only `needs_review: false`; both decisions
+  stay `unresolved`, exp-056’s cost-role outcome stays `criterion_missed` and exp-057’s
+  guard-role outcome stays `invalid`. The synthesis separates proved,
+  repository-verified, source-backed, measured-negative and unresolved evidence, then
+  names one exact next action: a fresh n = 17 continuation from ordinal 170.
+- **Guard:** `git diff` shows exactly one authorized frontmatter line per reviewed
+  experiment and no hypothesis, criterion, result, instrument, bound, frontier or route
+  change. The new bead requires a fresh experiment and output paths, full replay of all
+  170 retained rows and a separate adoption gate; exp-056 itself cannot resume.
+- **Next:** at 14:03Z register and format the synthesis, refresh generated views and the
+  privacy-reduced session receipt, then hold the full gate until 14:18Z.
+
+### 09:00--09:15 (14:03--14:18Z) — view and receipt closure
+
+- **Artifact:** synthesis SHA-256
+  `1fb73b3dcba532dee67c7ec453b22cdac8280e887241781580f8198c86cc2565`, the refreshed
+  session-078 Codex receipt at SHA-256
+  `96857fdeee53d63e49e943bf812db78923572f78757e6dcd5b1bdc7e5616b3c2`, and current
+  synopsis, document-map, ledger and session-close views.
+- **Result:** the synthesis is registered among 405 durable documents.
+  The privacy- reduced receipt covers the explicit 05:03--14:04:26Z interval and remains
+  labeled a lower bound while the coordinator is live: 9.0 hours declared wall, 12.1
+  recursive agent-hours, 8.5 active-union hours and 3.7 parallel-overlap hours.
+  `tbd sync` retained the new `think-5j8d` next entry and four updated agenda beads.
+- **Guard:** the records/Softschema tier passes 26 of 58 named steps,
+  `make format-check` passes and `git diff --check` is clean.
+  The experiment diff remains exactly the two independently authorized `needs_review`
+  lines; no result, hypothesis, instrument, criterion, bound, frontier or route byte
+  changed.
+- **Next:** at 14:18Z run the complete frozen local gate with no concurrent edit, then
+  terminalize only from its exact result.
+
+### 09:15--10:00 (14:18--15:03Z) — full-gate repair and typed publication stop
+
+- **Artifact:** repaired operating-rule negative controls, an annotation-aware
+  declared-bound checker, and load-bearing author and independent n = 54 parser-cap
+  controls.
+- **Result:** the first full gate found two failures: the synthetic summary-drift
+  control reused real `OR-10`, and seven verifier caps had no naming refusal test.
+  Two independent XHigh audits reproduced both failures.
+  The repair also exposed and closed the checker’s `AnnAssign` discovery gap: 24 bounds
+  are now discovered, all 14 n = 54 bounds are named, and the focused suite passes 84
+  tests. The definitive full gate passed 57 of 58 steps in 726.74 seconds, including
+  1,450 fast tests, 25 exhaustive tests and 151 negative controls, then stopped because
+  Ruff would reformat the two new test files.
+  Ruff reformatted them and its focused format and lint checks pass, but the complete
+  gate was not rerun before the fixed wall.
+- **Guard:** the contract and verifier implementation bytes did not change; all added
+  fixtures are synthetic and temporary.
+  No source, target, network, witness geometry, result, hypothesis, criterion, bound or
+  frontier byte changed.
+  Because the formatted tree lacks a complete green rerun, BC-146 retains an exact
+  local-gate stop and does not push or update hosted checks.
+- **Next:** rerun the complete frozen gate, commit and push exactly that validated tree,
+  update PR #75 cost-first and inspect hosted checks; only then open `think-5j8d`.
+
+## Post-Wall Publication Remediation
+
+- **Artifact:** think-k67y, the module-aware declared-bound evidence resolver and its
+  duplicate-name negative control; think-mjis, the terminal-session and standalone-bead
+  handoff checker and its focused regressions.
+- **Result:** independent XHigh review found that equal `MAX_` names in different
+  modules could cross-satisfy their test evidence.
+  Qualified and imported references now resolve to the declaring module.
+  The current checker-and-n = 54 aggregate passes 85 tests, discovers 24 bounds, names
+  all 14 n = 54 caps in their declaring modules and reports no violation.
+  A second audit found that the cold-start guard sorted by start time and included live
+  sessions. It now selects only completed or stopped sessions by terminal clock and can
+  route a completed agenda to exactly one standalone bead; its eight focused tests pass.
+  Focused Ruff and BasedPyright checks pass.
+  The first complete post-wall gate passed all 58 steps in 756.25 seconds, including
+  1,454 fast tests, 25 exhaustive tests and 151 negative controls.
+- **Guard:** this remediation is outside the six historical phases and does not change
+  their states, wall times, stop reasons or receipts.
+  The frozen Packet C count remains 79, the current n = 54 pair remains 80, and no
+  contract, verifier, scientific source, result, hypothesis, criterion, bound or
+  frontier byte changed.
+- **Next:** rerun the complete frozen local gate over these final terminal records,
+  commit and push exactly that validated tree, put the generated cost block first in PR
+  #75 and require its current head to be hosted-green.
+  Only then is `think-5j8d` the next scientific entry; do not merge.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

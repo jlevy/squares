@@ -83,7 +83,7 @@ experiment:
       canonical result path remains absent.
   verdict:
     decision: unresolved
-    needs_review: true
+    needs_review: false
     primary_criterion: >-
       Accept H-052 only if all 181 paired rows agree exactly and every frozen fixture,
       binding, chain, mutation and independence guard passes. A larger contiguous agreeing

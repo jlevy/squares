@@ -1154,9 +1154,9 @@ sessions:
   codex_receipts: []
 - id: session-078
   title: "Agenda-015 ten-hour coordinator"
-  status: in_progress
+  status: stopped
   primary_bead: think-x81p
-  phases: 5
+  phases: 6
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
@@ -1167,10 +1167,10 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-078.yaml
-    model_responses: 736
-    agent_hours: 3.04
-    active_union_hours: 2.0
-    wall_hours: 2.55
+    model_responses: 2170
+    agent_hours: 12.14
+    active_union_hours: 8.48
+    wall_hours: 9.02
     snapshot_incomplete: true
 - id: session-079
   title: "BC-137 n = 17 sequential larger prefix"
@@ -1229,8 +1229,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-078.yaml
-    model_responses: 736
-    agent_hours: 3.04
-    active_union_hours: 2.0
-    wall_hours: 2.55
+    model_responses: 2170
+    agent_hours: 12.14
+    active_union_hours: 8.48
+    wall_hours: 9.02
     snapshot_incomplete: true

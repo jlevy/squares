@@ -14,6 +14,8 @@ bound with a named test is doing work. A bound without one is a number in a file
 Reaching a guard is recognized two ways, because tests legitimately do it two ways.
 
 **By name.** A test that imports the constant and asserts against it names it directly.
+The import is resolved to the declaring module, so a same-spelled constant in another
+module cannot satisfy the bound accidentally.
 
 **By refusal message.** `test_selected_path_scan_enforces_depth_before_python_recursion`
 never writes `MAX_XML_DEPTH`; it builds a scene deeper than the recursion limit and
@@ -154,6 +156,7 @@ class Reference:
 
     path: str
     function: str
+    bound_keys: frozenset[str] = field(default_factory=frozenset)
     identifiers: frozenset[str] = field(default_factory=frozenset)
     literals: tuple[str, ...] = ()
 
@@ -194,18 +197,25 @@ def declared_bounds(root: pathlib.Path) -> list[Bound]:
             continue
         module = path.relative_to(root).as_posix()
         for node in tree.body:
-            if not isinstance(node, ast.Assign) or len(node.targets) != 1:
+            if isinstance(node, ast.Assign):
+                if len(node.targets) != 1:
+                    continue
+                target = node.targets[0]
+                value = node.value
+            elif isinstance(node, ast.AnnAssign):
+                target = node.target
+                value = node.value
+            else:
                 continue
-            target = node.targets[0]
             if not isinstance(target, ast.Name) or not BOUND_PATTERN.match(target.id):
                 continue
-            if not (isinstance(node.value, ast.Constant) and isinstance(node.value.value, int)):
+            if not (isinstance(value, ast.Constant) and isinstance(value.value, int)):
                 continue
             found.append(
                 Bound(
                     module=module,
                     name=target.id,
-                    value=node.value.value,
+                    value=value.value,
                     line=node.lineno,
                     guard_messages=_guard_messages(tree, target.id),
                 )
@@ -220,6 +230,29 @@ def _functions(
         tree = ast.parse(path.read_text(encoding="utf-8"))
     except OSError, SyntaxError:
         return
+    module_aliases: dict[str, str] = {}
+    direct_bounds: dict[str, str] = {}
+    for statement in tree.body:
+        if isinstance(statement, ast.Import):
+            for imported in statement.names:
+                local = imported.asname or imported.name.split(".", 1)[0]
+                module_aliases[local] = (
+                    imported.name if imported.asname else imported.name.split(".", 1)[0]
+                )
+        elif (
+            isinstance(statement, ast.ImportFrom)
+            and statement.level == 0
+            and statement.module is not None
+        ):
+            for imported in statement.names:
+                if imported.name == "*":
+                    continue
+                local = imported.asname or imported.name
+                if BOUND_PATTERN.match(imported.name):
+                    module = statement.module.replace(".", "/") + ".py"
+                    direct_bounds[local] = f"{module}::{imported.name}"
+                else:
+                    module_aliases[local] = f"{statement.module}.{imported.name}"
     for node in ast.walk(tree):
         if not isinstance(node, ast.FunctionDef):
             continue
@@ -229,9 +262,25 @@ def _functions(
         identifiers = {inner.id for inner in ast.walk(node) if isinstance(inner, ast.Name)} | {
             inner.attr for inner in ast.walk(node) if isinstance(inner, ast.Attribute)
         }
+        bound_keys = {
+            direct_bounds[inner.id]
+            for inner in ast.walk(node)
+            if isinstance(inner, ast.Name) and inner.id in direct_bounds
+        }
+        for inner in ast.walk(node):
+            if not (
+                isinstance(inner, ast.Attribute)
+                and isinstance(inner.value, ast.Name)
+                and BOUND_PATTERN.match(inner.attr)
+            ):
+                continue
+            module = module_aliases.get(inner.value.id)
+            if module is not None:
+                bound_keys.add(f"{module.replace('.', '/')}.py::{inner.attr}")
         yield Reference(
             path=relative,
             function=node.name,
+            bound_keys=frozenset(bound_keys),
             identifiers=frozenset(identifiers),
             literals=tuple(_literal_parts(node)),
         )
@@ -256,14 +305,19 @@ def references(root: pathlib.Path) -> list[Reference]:
 
 def _names(bound: Bound, reference: Reference) -> NameEvidence | None:
     """How, if at all, one function names one bound."""
-    if bound.name in reference.identifiers or any(
-        bound.name in literal for literal in reference.literals
+    same_module_identifier = (
+        reference.path == bound.module and bound.name in reference.identifiers
+    )
+    if (
+        bound.key in reference.bound_keys
+        or same_module_identifier
+        or any(bound.key in literal for literal in reference.literals)
     ):
         return NameEvidence(
             kind="constant-name",
             path=reference.path,
             function=reference.function,
-            detail=bound.name,
+            detail=bound.key,
         )
     for message in bound.guard_messages:
         for literal in reference.literals:

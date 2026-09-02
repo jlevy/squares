@@ -9,7 +9,7 @@ agenda:
   id: agenda-015
   title: "Ten-Hour Earned Routes and Guard Repairs"
   updated: '2026-09-02'
-  status: active
+  status: completed
   objective: >-
     Run an exact ten-hour unattended campaign from agenda-014's reviewed exits without
     replaying or repairing its frozen evidence. Three agents own disjoint lanes: an
@@ -32,7 +32,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [17]
-    state: ready
+    state: stopped
     priority: 0
     question: >-
       Resumed sequentially from the reviewed 33-row exp-052 chain, does the independent
@@ -70,13 +70,14 @@ agenda:
     parallel_group: agenda015-lane-n17
     workflows: [insight-iteration, pipeline-improvement, factual-review, research-loop]
     next_evidence: >-
-      A registered exp-056, a readmitted child chain root, and one observed sequential
-      process with a growing prefix at every 25-minute boundary.
+      The terminal 170-of-181 agreeing prefix, ordinal-170 independent-started marker
+      and absent canonical result route to the fresh think-5j8d continuation; exp-056
+      itself remains stopped and never resumes.
   - id: BC-138
     purpose: tool_validation
     owner_focus: correctness
     instances: [68]
-    state: ready
+    state: stopped
     priority: 0
     question: >-
       Can the reported n = 68 side token be bound to admissible exact or directional
@@ -108,13 +109,14 @@ agenda:
     parallel_group: agenda015-lane-n68
     workflows: [insight-iteration, pipeline-improvement, factual-review]
     next_evidence: >-
-      A preregistered side-semantics binding with a passing different-lane readmission
-      receipt, or a typed refusal naming the semantic that cannot be bound.
+      Exp-057 remains invalid: the literal printed-rational point survives, but the two
+      six-decimal models lack retained provenance. No source or network access occurred;
+      think-lvqx owns any prospective literal-only route.
   - id: BC-139
     purpose: research
     owner_focus: correctness
     instances: [68]
-    state: blocked
+    state: stopped
     priority: 0
     question: >-
       Under the preregistered side semantics, does the one declared n = 68 parent
@@ -145,13 +147,14 @@ agenda:
     parallel_group: agenda015-lane-n68
     workflows: [insight-iteration, factual-review, research-loop]
     next_evidence: >-
-      Blocked until BC-138 is readmitted and BC-143 routes the one-parent
-      continuation.
+      The row never opened because BC-138 did not earn readmission. No source, network,
+      adapter or result path was opened, and any later route must begin from a new
+      preregistration rather than this stopped item.
   - id: BC-140
     purpose: tool_validation
     owner_focus: process
     instances: [54, 68, 17]
-    state: ready
+    state: stopped
     priority: 0
     question: >-
       Do the three routed guard repairs exist as refusable tools: a named negative
@@ -183,12 +186,14 @@ agenda:
     parallel_group: agenda015-lane-guards
     workflows: [pipeline-improvement, factual-review]
     next_evidence: >-
-      Three refusable tools with passing controls and a readmission receipt.
+      The n = 54 audit and normalization controls were admitted. The module-aware
+      declared-bound checker discovers 24 bounds and names all 14 n = 54 caps; eight
+      allowlisted bounds still require real refusal controls under think-ifgr.
   - id: BC-141
     purpose: tool_validation
     owner_focus: correctness
     instances: [54]
-    state: blocked
+    state: complete
     priority: 1
     question: >-
       Can a source-cell parser and labeled-correspondence contract for the n = 54
@@ -217,16 +222,23 @@ agenda:
       because the retained immutable source it also needs does not exist here.
     bead: think-pkgx
     depends_on: [BC-140, BC-143]
+    artifacts:
+    - packing/cases/n54_source_contract/
+    - packing/tests/test_n54_source_contract.py
+    - packing/tests/test_n54_source_contract_independent.py
+    - packing/campaign/agent-sessions/session-082-bc141-n54-source-contract.md
     parallel_group: agenda015-lane-guards
     workflows: [insight-iteration, pipeline-improvement, factual-review]
     next_evidence: >-
-      Blocked until the n = 54 controls pass readmission and BC-143 routes the
-      contract.
+      The reviewed synthetic N54SourceContract/v1 and canonical N54Result/v1 are
+      reusable instrumentation. The frozen packet passes 79 tests and the current n =
+      54 pair passes 80; H-055 remains instrument-unready without a live source or
+      geometry evidence.
   - id: BC-142
     purpose: tool_validation
     owner_focus: efficiency
     instances: [17, 54, 68]
-    state: ready
+    state: stopped
     priority: 1
     question: >-
       Can the push tier select tests for a change under benchmarks/ and the first-wave
@@ -250,12 +262,14 @@ agenda:
     depends_on: []
     workflows: [pipeline-improvement, factual-review]
     next_evidence: >-
-      A selection receipt for a benchmark-only change and its equivalence control.
+      The partial map selects 13 of 115 tests, but lacks a refusable exact-set oracle.
+      Think-mo7r owns that missing equivalence control; no efficiency admission follows
+      from this stopped item.
   - id: BC-143
     purpose: measurement_validation
     owner_focus: process
     instances: [17, 54, 68]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Are the wave-one lanes terminal or observably live, is the evidence revision
@@ -278,14 +292,19 @@ agenda:
       and a pushed PR whose description carries the cost block.
     bead: think-8hcp
     depends_on: [BC-138, BC-140, BC-142]
+    artifacts:
+    - docs/project/reviews/review-2026-09-02-agenda015-first-wave-efficiency.md
+    - packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md
     workflows: [process-review, efficiency-loop, insight-iteration]
     next_evidence: >-
-      Blocked until the wave-one lanes return terminal-ready closeouts at 02:30.
+      The first-wave freeze is d15e96c8, its W5 receipt is a typed no-change, BC-139
+      stayed closed, BC-141 opened and the still-growing BC-137 process continued to
+      the fixed second-wave boundary.
   - id: BC-144
     purpose: measurement_validation
     owner_focus: process
     instances: [17, 54, 68]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Are all wave-two lanes and the n = 17 process terminal at one frozen revision,
@@ -306,14 +325,18 @@ agenda:
       decisions stay review-pending behind a typed continuation.
     bead: think-2tol
     depends_on: [BC-143]
+    artifacts:
+    - docs/project/reviews/review-2026-09-02-agenda015-second-wave-efficiency.md
+    - docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md
     workflows: [process-review, efficiency-loop]
     next_evidence: >-
-      Blocked until the second wave stops at 06:20.
+      Evidence revision 313624cc stopped every writer, retained a second typed W5
+      no-change and froze the three immutable review packets used by BC-145.
   - id: BC-145
     purpose: measurement_validation
     owner_focus: correctness
     instances: [17, 54, 68]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Do independent reviewers reproduce every wave decision, named mutation and
@@ -335,14 +358,19 @@ agenda:
       stays pending and becomes registered repair work.
     bead: think-rh18
     depends_on: [BC-144]
+    artifacts:
+    - docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md
+    - docs/project/reviews/review-2026-09-02-agenda015-second-wave-independent-review.md
     workflows: [factual-review, process-review]
     next_evidence: >-
-      Blocked on immutable packets and stopped writers.
+      Three fresh Max reviews passed and were reconciled at 162d0bea. Only exp-056 and
+      exp-057 cleared needs_review; no result, hypothesis, instrument, bound, frontier
+      or route changed.
   - id: BC-146
     purpose: research
     owner_focus: process
     instances: [17, 54, 68]
-    state: blocked
+    state: stopped
     priority: 0
     question: >-
       What did the ten hours establish, refuse or leave unresolved, and what exact
@@ -370,7 +398,9 @@ agenda:
     depends_on: [BC-145]
     workflows: [insight-iteration, documentation-pass, process-review]
     next_evidence: >-
-      Blocked on the independent review of every packet.
+      BC-146 stopped at the hard wall. Post-wall work repairs the publication guards,
+      validates and pushes the exact tree, and requires PR #75's current head to be
+      hosted-green before think-5j8d becomes the next scientific entry.
 ---
 # Agenda-015 — Ten-Hour Earned Routes and Guard Repairs
 

@@ -24,7 +24,7 @@ Twelve checks:
   9. freshness labels name the current round count and do not embed a stale update note
  10. the readiness dashboard remains attached to its canonical status owners
  11. living reproducibility instructions do not name removed command paths
- 12. the cold-start handoff agrees with the latest session and active agenda
+ 12. the cold-start handoff agrees with the latest terminal session and its next entry
 
 Check 8 closes a real gap: `packing-ledger check` walks links under `campaign/`
 only, so the root document's forty-odd references were unchecked.
@@ -357,78 +357,122 @@ def select_handoff_cell(items: list[dict], next_action: str) -> dict:
     return matches[0]
 
 
+def session_handoff_key(session: dict, session_number: int) -> tuple[str, str, int]:
+    """Order sessions by their terminal clock, then their start and stable number."""
+    started_at = str(session.get("started_at") or "")
+    terminal_at = str(session.get("deadline_at") or started_at)
+    return terminal_at, started_at, session_number
+
+
+def select_latest_terminal_session(
+    records: Iterable[tuple[Path, dict]],
+) -> tuple[Path, dict] | None:
+    """Select the terminal session whose terminal clock is latest."""
+    terminal = [
+        (path, session)
+        for path, session in records
+        if session.get("status") in {"completed", "stopped"}
+    ]
+    if not terminal:
+        return None
+    return max(
+        terminal,
+        key=lambda record: session_handoff_key(record[1], int(record[0].name.split("-", 2)[1])),
+    )
+
+
+def select_handoff_target(items: list[dict], next_action: str) -> tuple[dict | None, str]:
+    """Resolve one agenda cell or one standalone bead from a terminal next action."""
+    matching_cells = [
+        item
+        for item in items
+        if isinstance(item.get("id"), str)
+        and re.search(rf"\b{re.escape(item['id'])}\b", next_action)
+    ]
+    if len(matching_cells) > 1:
+        count = len(matching_cells)
+        raise ValueError(
+            f"terminal next_action must name at most one agenda cell; found {count}"
+        )
+
+    beads = sorted(set(re.findall(r"\bthink-[a-z0-9]+\b", next_action)))
+    if matching_cells:
+        cell = matching_cells[0]
+        agenda_bead = cell["bead"]
+        if agenda_bead not in beads:
+            raise ValueError(f"next_action and {cell['id']} disagree on bead {agenda_bead}")
+        return cell, agenda_bead
+    if len(beads) != 1:
+        raise ValueError(
+            "terminal next_action without an agenda cell must name exactly one bead; "
+            f"found {len(beads)}"
+        )
+    return None, beads[0]
+
+
 def load_agenda_items(paths: Iterable[Path]) -> list[dict]:
     """Load agenda cells across every supplied mutable queue."""
     return [item for path in sorted(paths) for item in front(path)["agenda"].get("items", [])]
 
 
 def check_current_handoff(text: str) -> list[str]:
-    """The cold-start path names the latest session, agenda bead, and evidence head."""
+    """The cold-start path names the latest terminal session and next entry."""
     section = re.search(
         r"^### Current Handoff\s*$\n(?P<body>.*?)(?=^##\s|\Z)", text, re.M | re.S
     )
     if section is None:
         return ["SYNOPSIS.md: has no Current Handoff section"]
 
-    # Chronology, not numbering: a parallel session merged first can take a number
-    # this run had already minted, renumbering the survivor above the chronological
-    # head (session-054 is block 1 of the 2026-08-31 run, renumbered at the merge).
-    # The record's own clock is the truth the handoff follows.
-    session_paths = sorted(
-        AGENT_SESSIONS.glob("session-[0-9][0-9][0-9]-*.md"),
-        key=lambda path: (
-            str(front(path)["session"].get("started_at") or ""),
-            int(path.name.split("-", 2)[1]),
-        ),
-    )
-    if not session_paths:
-        return ["campaign/agent-sessions: has no numbered session artifact"]
+    # Chronology, not numbering or start order: a coordinator can start before a lane
+    # and terminalize after it. The record's terminal clock is the truth the handoff
+    # follows. Session number is only the final deterministic tie-breaker.
+    records = [
+        (path, front(path)["session"])
+        for path in AGENT_SESSIONS.glob("session-[0-9][0-9][0-9]-*.md")
+    ]
+    latest_record = select_latest_terminal_session(records)
+    if latest_record is None:
+        return ["campaign/agent-sessions: has no terminal numbered session artifact"]
 
-    latest_path = session_paths[-1]
-    latest = front(latest_path)["session"]
+    latest_path, latest = latest_record
     next_action = latest.get("next_action", "")
-    next_beads = re.findall(r"\bthink-[a-z0-9]+\b", next_action)
-    if not next_beads:
-        return [f"{latest_path.name}: terminal next_action names no bead"]
 
     agenda_items = load_agenda_items(AGENDAS.glob("agenda-*.md"))
     try:
-        cell = select_handoff_cell(agenda_items, next_action)
+        cell, expected_bead = select_handoff_target(agenda_items, next_action)
     except ValueError as error:
         return [f"{latest_path.name}: {error}"]
-    cell_id = cell["id"]
-    agenda_bead = cell["bead"]
 
     problems: list[str] = []
-    if agenda_bead not in next_beads:
-        problems.append(
-            f"{latest_path.name}: next_action and {cell_id} disagree on bead {agenda_bead}"
-        )
-
     body = section.group("body")
     session_target = f"campaign/agent-sessions/{latest_path.name}"
     if session_target not in body:
         problems.append(f"SYNOPSIS.md: Current Handoff does not point to latest {latest['id']}")
-    if cell_id not in body:
-        problems.append(f"SYNOPSIS.md: Current Handoff does not name {cell_id}")
-    if agenda_bead not in body:
-        problems.append(
-            f"SYNOPSIS.md: Current Handoff does not name {cell_id} bead {agenda_bead}"
-        )
+    if expected_bead not in body:
+        label = f"{cell['id']} bead" if cell is not None else "standalone bead"
+        problems.append(f"SYNOPSIS.md: Current Handoff does not name {label} {expected_bead}")
 
-    experiment_ids = sorted(
-        {
-            match
-            for artifact in cell.get("artifacts", [])
-            for match in re.findall(r"exp-[0-9]{3}", artifact)
-        }
-    )
+    experiment_ids: list[str] = []
+    evidence_owner: str | None = None
+    if cell is not None:
+        cell_id = cell["id"]
+        evidence_owner = cell_id
+        if cell_id not in body:
+            problems.append(f"SYNOPSIS.md: Current Handoff does not name {cell_id}")
+        experiment_ids = sorted(
+            {
+                match
+                for artifact in cell.get("artifacts", [])
+                for match in re.findall(r"exp-[0-9]{3}", artifact)
+            }
+        )
     body_lower = body.lower()
-    problems.extend(
-        f"SYNOPSIS.md: Current Handoff omits {cell_id} evidence {experiment_id}"
-        for experiment_id in experiment_ids
-        if experiment_id not in body_lower
-    )
+    if evidence_owner is not None:
+        problems.extend(
+            f"SYNOPSIS.md: Current Handoff omits {evidence_owner} evidence {experiment_id}"
+            for experiment_id in experiment_ids
+            if experiment_id not in body_lower
+        )
 
     if "SYNOPSIS.md#current-handoff" not in README.read_text(encoding="utf-8"):
         problems.append("README.md: does not route cold starts to SYNOPSIS current handoff")
@@ -443,15 +487,18 @@ def check_current_handoff(text: str) -> list[str]:
         problems.append("active launch plan: has no current handoff paragraph")
     else:
         plan_text = plan_handoff.group(0)
-        if cell_id not in plan_text or agenda_bead not in plan_text:
-            problems.append(
-                f"active launch plan: current handoff does not name {cell_id} and {agenda_bead}"
+        if expected_bead not in plan_text or (cell is not None and cell["id"] not in plan_text):
+            expected = (
+                f"{cell['id']} and {expected_bead}"
+                if cell is not None
+                else f"standalone bead {expected_bead}"
             )
+            problems.append(f"active launch plan: current handoff does not name {expected}")
         plan_beads = set(re.findall(r"\bthink-[a-z0-9]+\b", plan_text))
-        if plan_beads != {agenda_bead}:
+        if plan_beads != {expected_bead}:
             problems.append(
                 "active launch plan: current handoff bead set is "
-                f"{sorted(plan_beads)}, expected {[agenda_bead]}"
+                f"{sorted(plan_beads)}, expected {[expected_bead]}"
             )
         defect_records = safe_load(DEFECTS.read_text(encoding="utf-8"))["defects"]
         fixed_defects = {

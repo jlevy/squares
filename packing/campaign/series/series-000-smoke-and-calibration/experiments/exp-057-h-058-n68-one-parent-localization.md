@@ -80,7 +80,7 @@ experiment:
       three-model criterion alone.
   verdict:
     decision: unresolved
-    needs_review: true
+    needs_review: false
     primary_criterion: >-
       The binding is admissible only if every declared model receives an exact or
       directional side value derived from the reported token by the model's own declared

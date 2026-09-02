@@ -341,26 +341,23 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, take **BC-144 under `think-2tol`**, now
-active from the fixed 11:23Z wave-two boundary under
+For the next supervised exact-research goal, take **the fresh n = 17 continuation under
+`think-5j8d`**, but only after PR #75’s current head is hosted-green.
+The continuation starts from the terminal evidence retained by
 [session 078](../../../../packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md),
-the coordinator of
-[agenda-015](../../../../packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md),
-the exact ten-hour run that started at `05:03Z` on 2026-09-02.
-[session 082](../../../../packing/campaign/agent-sessions/session-082-bc141-n54-source-contract.md)
-has completed the target-blind BC-141 contract lane.
-[session 077](../../../../packing/campaign/agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md)
-published that agenda, and
-[session 076](../../../../packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md)
-holds the reviewed first-wave evidence.
+the coordinator of the completed
+[agenda-015](../../../../packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md).
+That exact ten-hour wall ran from `05:03Z` through `15:03Z` on 2026-09-02; its BC-146
+publication phase stopped at the wall, and later publication remediation is recorded
+separately rather than extending the session.
 
-The `n = 17` sequential larger-prefix round stopped once at the 11:23Z boundary with 170
-verified agreeing rows through ordinal 169, a verified chain and progress ordinal 170 at
-`independent_started`. The canonical result is absent, so H-052 remains undecided.
-BC-139 is stopped, W5 remains `no-change`, and BC-141 completed its synthetic,
-target-blind parser/correspondence contract without making H-055 instrument-ready.
-BC-144 is freezing this evidence and will prepare only the bounded review packets it
-earns. No target result is promoted and no review flag is cleared outside BC-146.
+The retained exp-056 chain has 170 of 181 verified agreeing rows through ordinal 169,
+with progress ordinal 170 at `independent_started` and no canonical result.
+The new round must use a fresh preregistration and fresh result, checkpoint and progress
+paths, then replay all 170 retained rows before continuing ordinals 170 through 180.
+Exp-056 never resumes.
+H-052 remains unresolved, and even a complete agreeing round requires the separate
+adoption gate before any packing-bound or frontier change.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

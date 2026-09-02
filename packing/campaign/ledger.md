@@ -92,7 +92,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-075](agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 7 | think-17q7 | Independent campaign review may clear or challenge exp-055 needs_review without rerunning it. |
 | [session-076](agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 5 | think-v0rj | Take BC-136 under think-oa22 only on a new owner instruction; it may clear the three review flags and write the separate overnight agenda from the one conditional route. |
 | [session-077](agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 3 | think-oa22 | Take BC-137 under think-ovz9 at agenda-015's wave-one dispatch; the two sibling lanes open in the same dispatch. |
-| [session-078](agent-sessions/session-078-agenda015-ten-hour-coordinator.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 5 | think-x81p | Run BC-144 under think-2tol: terminalize exp-056, freeze the wave evidence, retain W5 and prepare only the bounded packets earned for BC-145. |
+| [session-078](agent-sessions/session-078-agenda015-ten-hour-coordinator.md) | stopped | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (process) | 6 | think-x81p | Complete the separate post-wall publication remediation. The `think-5j8d` bead becomes the next scientific entry only after PR #75's current head is hosted-green. |
 | [session-079](agent-sessions/session-079-bc137-n17-sequential-larger-prefix.md) | completed | contemporaneous | `insight-iteration` (correctness) | `factual-review` (correctness) | 3 | think-ovz9 | The coordinator launches the registered exp-056 `--record` command and observes it with `--status` on the exp-056 checkpoint at each 25-minute boundary. |
 | [session-080](agent-sessions/session-080-bc138-n68-side-semantics-binding.md) | completed | contemporaneous | `insight-iteration` (correctness) | `factual-review` (correctness) | 4 | think-ymjp | Retain the literal point-model instrument and the typed refusal. Do not open BC-139; a future literal-only route requires a new prospectively frozen hypothesis and experiment. |
 | [session-081](agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `factual-review` (process) | 4 | think-hrw2 | Return the readmitted n = 54 subset to BC-143 under think-8hcp for the frozen routing decision; track the eight missing bound controls under D-418 / think-ifgr. |
@@ -106,7 +106,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 1 | 0 | 12 | 0 |
 | `factual-review` | 3 | 0 | 40 | 2 |
-| `insight-iteration` | 17 | 1 | 55 | 2 |
+| `insight-iteration` | 17 | 1 | 56 | 2 |
 | `process-review` | 13 | 4 | 61 | 6 |
 | `efficiency-loop` | 9 | 0 | 27 | 0 |
 | `research-loop` | 8 | 4 | 43 | 7 |
@@ -352,20 +352,20 @@ Status: **completed**. Run an exact six-hour first-wave campaign from agenda-013
 
 ### [agenda-015](agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md) — Ten-Hour Earned Routes and Guard Repairs
 
-Status: **active**. Run an exact ten-hour unattended campaign from agenda-014's reviewed exits without replaying or repairing its frozen evidence. Three agents own disjoint lanes: an n = 17 sequential larger-prefix round that resumes the reviewed exp-052 chain from ordinal 33 under a fresh registration; an n = 68 lane that preregisters the side-semantics binding target-blind, is readmitted, and only then retrieves the one declared parent; and a target-blind guard lane that repairs the three routed W7 controls and then builds the n = 54 parser and labeled-correspondence contract against a synthetic fixture. The coordinator owns the reachable-tests root map, the fallback queue, both checkpoints, the packet freeze, the independent review and the terminal publication. The wall is exactly 600 minutes: a 150-minute first wave, a 50-minute checkpoint, a 180-minute second wave, a 50-minute checkpoint, a 90-minute independent review and an 80-minute closeout. Research and instrument lanes record Artifact / Result / Guard / Next at 25-minute cells; the n = 17 process is the one long child that may run across cells, and only while each boundary observes it. Every criterion, threshold and target is frozen before its lane opens and does not adapt during the wall.
+Status: **completed**. Run an exact ten-hour unattended campaign from agenda-014's reviewed exits without replaying or repairing its frozen evidence. Three agents own disjoint lanes: an n = 17 sequential larger-prefix round that resumes the reviewed exp-052 chain from ordinal 33 under a fresh registration; an n = 68 lane that preregisters the side-semantics binding target-blind, is readmitted, and only then retrieves the one declared parent; and a target-blind guard lane that repairs the three routed W7 controls and then builds the n = 54 parser and labeled-correspondence contract against a synthetic fixture. The coordinator owns the reachable-tests root map, the fallback queue, both checkpoints, the packet freeze, the independent review and the terminal publication. The wall is exactly 600 minutes: a 150-minute first wave, a 50-minute checkpoint, a 180-minute second wave, a 50-minute checkpoint, a 90-minute independent review and an 80-minute closeout. Research and instrument lanes record Artifact / Result / Guard / Next at 25-minute cells; the n = 17 process is the one long child that may run across cells, and only while each boundary observes it. Every criterion, threshold and target is frozen before its lane opens and does not adapt during the wall.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-137 | research | 17 | ready | 0 | think-ovz9 | A registered exp-056, a readmitted child chain root, and one observed sequential process with a growing prefix at every 25-minute boundary. |
-| BC-138 | tool_validation | 68 | ready | 0 | think-ymjp | A preregistered side-semantics binding with a passing different-lane readmission receipt, or a typed refusal naming the semantic that cannot be bound. |
-| BC-139 | research | 68 | blocked | 0 | think-3lfz | Blocked until BC-138 is readmitted and BC-143 routes the one-parent continuation. |
-| BC-140 | tool_validation | 54, 68, 17 | ready | 0 | think-hrw2 | Three refusable tools with passing controls and a readmission receipt. |
-| BC-141 | tool_validation | 54 | blocked | 1 | think-pkgx | Blocked until the n = 54 controls pass readmission and BC-143 routes the contract. |
-| BC-142 | tool_validation | 17, 54, 68 | ready | 1 | think-8zct | A selection receipt for a benchmark-only change and its equivalence control. |
-| BC-143 | measurement_validation | 17, 54, 68 | blocked | 0 | think-8hcp | Blocked until the wave-one lanes return terminal-ready closeouts at 02:30. |
-| BC-144 | measurement_validation | 17, 54, 68 | blocked | 0 | think-2tol | Blocked until the second wave stops at 06:20. |
-| BC-145 | measurement_validation | 17, 54, 68 | blocked | 0 | think-rh18 | Blocked on immutable packets and stopped writers. |
-| BC-146 | research | 17, 54, 68 | blocked | 0 | think-8epx | Blocked on the independent review of every packet. |
+| BC-137 | research | 17 | stopped | 0 | think-ovz9 | The terminal 170-of-181 agreeing prefix, ordinal-170 independent-started marker and absent canonical result route to the fresh think-5j8d continuation; exp-056 itself remains stopped and never resumes. |
+| BC-138 | tool_validation | 68 | stopped | 0 | think-ymjp | Exp-057 remains invalid: the literal printed-rational point survives, but the two six-decimal models lack retained provenance. No source or network access occurred; think-lvqx owns any prospective literal-only route. |
+| BC-139 | research | 68 | stopped | 0 | think-3lfz | The row never opened because BC-138 did not earn readmission. No source, network, adapter or result path was opened, and any later route must begin from a new preregistration rather than this stopped item. |
+| BC-140 | tool_validation | 54, 68, 17 | stopped | 0 | think-hrw2 | The n = 54 audit and normalization controls were admitted. The module-aware declared-bound checker discovers 24 bounds and names all 14 n = 54 caps; eight allowlisted bounds still require real refusal controls under think-ifgr. |
+| BC-141 | tool_validation | 54 | complete | 1 | think-pkgx | The reviewed synthetic N54SourceContract/v1 and canonical N54Result/v1 are reusable instrumentation. The frozen packet passes 79 tests and the current n = 54 pair passes 80; H-055 remains instrument-unready without a live source or geometry evidence. |
+| BC-142 | tool_validation | 17, 54, 68 | stopped | 1 | think-8zct | The partial map selects 13 of 115 tests, but lacks a refusable exact-set oracle. Think-mo7r owns that missing equivalence control; no efficiency admission follows from this stopped item. |
+| BC-143 | measurement_validation | 17, 54, 68 | complete | 0 | think-8hcp | The first-wave freeze is d15e96c8, its W5 receipt is a typed no-change, BC-139 stayed closed, BC-141 opened and the still-growing BC-137 process continued to the fixed second-wave boundary. |
+| BC-144 | measurement_validation | 17, 54, 68 | complete | 0 | think-2tol | Evidence revision 313624cc stopped every writer, retained a second typed W5 no-change and froze the three immutable review packets used by BC-145. |
+| BC-145 | measurement_validation | 17, 54, 68 | complete | 0 | think-rh18 | Three fresh Max reviews passed and were reconciled at 162d0bea. Only exp-056 and exp-057 cleared needs_review; no result, hypothesis, instrument, bound, frontier or route changed. |
+| BC-146 | research | 17, 54, 68 | stopped | 0 | think-8epx | BC-146 stopped at the hard wall. Post-wall work repairs the publication guards, validates and pushes the exact tree, and requires PR #75's current head to be hosted-green before think-5j8d becomes the next scientific entry. |
 
 ## Series
 
@@ -442,8 +442,6 @@ Status: **active**. Run an exact ten-hour unattended campaign from agenda-014's 
 | id | hypotheses | decision | why it was not decided |
 | --- | --- | --- | --- |
 | exp-050 | H-054 | unresolved | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
-| exp-056 | H-052 | unresolved | The fixed 11:23Z timebox ended before all 181 paired rows completed. The retained 170-row prefix is valid process evidence, every completed pair agrees exactly and the interrupted ordinal was not appended, but a prefix does not satisfy H-052's all-direction criterion. No canonical result exists, so H-052 remains neither accepted nor rejected and the terminal decision stays review-pending for BC-145. |
-| exp-057 | H-058 | unresolved | The release supports the literal printed-rational point model but supplies no provenance for applying either six-decimal coordinate rule to its fourteen-digit side token, so the conjunctive binding stops before BC-139 and H-058 remains unmeasured. |
 
 ## Rounds
 

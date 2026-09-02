@@ -17,6 +17,7 @@ from typing import Any, cast
 
 import pytest
 
+from cases.n54_source_contract import contract as author
 from cases.n54_source_contract.contract import (
     D4_IDENTITY,
     D4_ORDER,
@@ -184,27 +185,39 @@ def test_transport_refuses_unsafe_or_unconsumed_bytes(content: bytes, message: s
         parse_fixture(content)
 
 
-def test_all_frozen_parser_caps_are_load_bearing() -> None:
+def test_all_frozen_parser_caps_are_load_bearing(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     with pytest.raises(ContractError, match="65,536-byte"):
-        parse_fixture(b" " * 65_537)
+        parse_fixture(b" " * (author.MAX_INPUT_BYTES + 1))
 
     with pytest.raises(ContractError, match="4,096-byte"):
-        parse_fixture(b"<!--@n54 " + b"x" * 4_097 + b"-->")
+        parse_fixture(b"<!--@n54 " + b"x" * (author.MAX_COMMENT_BYTES + 1) + b"-->")
 
-    too_many_comments = b"".join(_comment(f"x{index} = {index}") for index in range(257))
+    too_many_comments = b"".join(
+        _comment(f"x{index} = {index}") for index in range(author.MAX_COMMENTS + 1)
+    )
     with pytest.raises(ContractError, match="256-comment"):
         parse_fixture(too_many_comments)
 
-    too_many_tokens = "x = " + "+".join("1" for _ in range(129))
+    monkeypatch.setattr(author, "MAX_COMMENTS", author.MAX_ASSIGNMENTS + 1)
+    with pytest.raises(ContractError, match="256-assignment"):
+        parse_fixture(too_many_comments)
+
+    too_many_tokens = "x = " + "+".join(
+        "1" for _ in range(author.MAX_TOKENS_PER_FORMULA // 2 + 1)
+    )
     with pytest.raises(ContractError, match="256-token"):
         parse_fixture(_comment(too_many_tokens))
 
-    too_deep = "(" * 33 + "1" + ")" * 33
+    too_deep = (
+        "(" * (author.MAX_EXPRESSION_DEPTH + 1) + "1" + ")" * (author.MAX_EXPRESSION_DEPTH + 1)
+    )
     with pytest.raises(ContractError, match="expression-depth"):
         parse_fixture(_comment(f"x = {too_deep}"))
 
     with pytest.raises(ContractError, match="18-digit"):
-        parse_fixture(_comment("x = 1234567890123456789"))
+        parse_fixture(_comment("x = " + "1" * (author.MAX_INTEGER_DIGITS + 1)))
 
 
 def test_empty_transport_and_unknown_labels_refuse() -> None:

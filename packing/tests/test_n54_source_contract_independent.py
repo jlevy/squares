@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 import sys
@@ -10,6 +11,7 @@ from typing import Any
 
 import pytest
 
+from cases.n54_source_contract import verify as independent
 from cases.n54_source_contract.verify import (
     VerificationError,
     canonical_bytes,
@@ -50,6 +52,45 @@ def _document(path: Path) -> dict[str, Any]:
 
 def _write(path: Path, document: dict[str, Any]) -> None:
     path.write_bytes(canonical_bytes(document))
+
+
+def test_independent_verifier_parser_caps_are_load_bearing(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def parse(raw: bytes) -> None:
+        fixture = tmp_path / "bounded.n54"
+        fixture.write_bytes(raw)
+        monkeypatch.setattr(independent, "FIXTURE_SHA256", hashlib.sha256(raw).hexdigest())
+        independent.parse_fixture(fixture)
+
+    with pytest.raises(VerificationError, match="fixture byte cap exceeded"):
+        parse(b" " * (independent.MAX_INPUT_BYTES + 1))
+
+    with pytest.raises(VerificationError, match="comment byte cap exceeded"):
+        parse(b"<!--@n54 " + b"x" * (independent.MAX_COMMENT_BYTES + 1) + b" -->")
+
+    too_many_assignments = b"".join(
+        f"<!--@n54 x{index} = 0 -->\n".encode("ascii")
+        for index in range(independent.MAX_COMMENTS + 1)
+    )
+    with pytest.raises(VerificationError, match="comment cap exceeded"):
+        parse(too_many_assignments)
+
+    monkeypatch.setattr(independent, "MAX_COMMENTS", independent.MAX_ASSIGNMENTS + 1)
+    with pytest.raises(VerificationError, match="assignment cap exceeded"):
+        parse(too_many_assignments)
+
+    too_many_tokens = "x = " + "+".join("1" for _ in range(independent.MAX_TOKENS // 2 + 1))
+    with pytest.raises(VerificationError, match="formula token cap exceeded"):
+        parse(f"<!--@n54 {too_many_tokens} -->".encode("ascii"))
+
+    too_deep = "(" * (independent.MAX_DEPTH + 1) + "1" + ")" * (independent.MAX_DEPTH + 1)
+    with pytest.raises(VerificationError, match="formula depth cap exceeded"):
+        parse(f"<!--@n54 x = {too_deep} -->".encode("ascii"))
+
+    too_many_digits = "1" * (independent.MAX_INTEGER_DIGITS + 1)
+    with pytest.raises(VerificationError, match="integer digit cap exceeded"):
+        parse(f"<!--@n54 x = {too_many_digits} -->".encode("ascii"))
 
 
 def test_independent_verifier_import_closure_excludes_author_and_geometry() -> None:

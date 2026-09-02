@@ -199,6 +199,7 @@ case or experiment separately.
 | [Review: Agenda 015 Second-Wave Efficiency](docs/project/reviews/review-2026-09-02-agenda015-second-wave-efficiency.md) | dated review record | record | retained | — |
 | [Review Packets: Agenda 015 Second Wave](docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md) | dated review record | record | retained | — |
 | [Independent Review: Agenda 015 Second Wave](docs/project/reviews/review-2026-09-02-agenda015-second-wave-independent-review.md) | dated review record | record | retained | — |
+| [Agenda 015 Ten-Hour Synthesis](docs/project/reviews/review-2026-09-02-agenda015-ten-hour-synthesis.md) | dated review record | record | retained | — |
 | [Design Note: `n = 50` Manifest and Sentinel Contract](docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md) | dated review record | record | retained | — |
 | [Agenda 013 Overnight Synthesis: Controls, Mechanisms, and the Next Research Queue](docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -335,47 +336,45 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-The next scheduled entry is **BC-144 under bead `think-2tol`** at the fixed 11:23Z
-wave-two boundary. It follows the completed
-[session-082](packing/campaign/agent-sessions/session-082-bc141-n54-source-contract.md),
-which retained the target-blind BC-141 contract earned from
-[session-081](packing/campaign/agent-sessions/session-081-bc140-target-blind-guard-repairs.md).
-That BC-140 guard lane returned with
-[session-079](packing/campaign/agent-sessions/session-079-bc137-n17-sequential-larger-prefix.md)
-and
-[session-080](packing/campaign/agent-sessions/session-080-bc138-n68-side-semantics-binding.md)
-as the three wave-one lanes of the
-[agenda-015](packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md)
-ten-hour run. The coordinating
+[Agenda-015](packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md)
+and its coordinating
 [session-078](packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md)
-started the wall at `05:03Z` on 2026-09-02 from the revision that
-[session-077](packing/campaign/agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md)
-published;
-[session-076](packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md)
-holds the reviewed first-wave evidence those routes rest on.
+are terminal. The exact ten-hour wall ran from `05:03Z` through `15:03Z` on 2026-09-02.
+BC-146 stopped at that wall after the complete local gate reached 57 of 58 steps and
+failed only Ruff formatting; no agenda-015 publication revision was pushed inside the
+wall. Later formatting, independent audits and validation are recorded separately as
+post-wall publication remediation and do not change the historical phase states or
+times.
 
-Wave one closed at the fixed 08:23Z checkpoint.
-The `n = 17` child chain (exp-056) resumed across the matched Linux/Claude to
-macOS/Codex handoff and stopped once at its fixed 11:23Z wall with 170 verified agreeing
-rows through ordinal 169. Its canonical result is absent, so the prefix is
-review-pending process evidence and H-052 remains undecided.
-Independent readmission stopped the `n = 68` binding (exp-057): only the literal
-printed-side point model is source-supported, so BC-139 will not open.
-BC-140 is partial because eight declared bounds lack named exceeding controls, but its
-replayed n = 54 controls and frozen-input inventory routed the synthetic BC-141
-contract. BC-142 is partial because its 13-of-115 selection control does not prove
-exact-set equivalence.
-The checkpoint retained W5 as `no-change`, stopped BC-139, and opened BC-141 only for
-the synthetic parser/correspondence contract.
-BC-141 is now complete: author and independent implementations agree, both required
-mutations reject, and H-055 remains instrument-unready because no live-source fidelity,
-actual witness correspondence, precision cells or geometry were established.
-BC-144 is active under `think-2tol`: the sole writer is stopped, and the checkpoint
-records 170 verified agreeing rows with progress ordinal 170 at `independent_started`.
-BC-144 will freeze the terminal wave evidence, run the fixed W5 comparison and prepare
-only the bounded review packets the evidence earns.
-No scientific target result has been promoted, and H-052, H-055 and H-058 move only
-under their own frozen criteria.
+The retained scientific outcomes are narrower than the work completed:
+
+- exp-056 stopped with 170 of 181 verified agreeing rows through ordinal 169, progress
+  at ordinal 170 `independent_started` and no canonical result.
+  H-052 remains unresolved.
+- exp-057 retained the literal printed-rational point model but refused its two
+  six-decimal models for lack of source provenance.
+  BC-139 never opened, no source or network access occurred, and H-058 remains
+  unmeasured.
+- BC-141 completed the synthetic n = 54 parser and labeled-correspondence contract.
+  Its frozen review passed 79 tests; the current author and independent pair passes 80.
+  No live-source fidelity, witness correspondence, precision cells or geometry was
+  established, so H-055 remains instrument-unready.
+- BC-140 and BC-142 stopped partially complete.
+  Eight discovered bounds remain allowlisted under `think-ifgr`, while the 13-of-115
+  reachable-test selection lacks an exact-set oracle under `think-mo7r`. Both W5 slices
+  retained typed `no-change` receipts.
+
+Three fresh Max reviews reproduced all frozen packets.
+They authorized only the `needs_review` clears for exp-056 and exp-057; no result,
+hypothesis, instrument, bound, frontier fact or route changed.
+Post-wall review also repaired a module-collision defect in the declared-bound evidence
+checker without changing the n = 54 contract or verifier implementations.
+
+The next scientific entry is **`think-5j8d`**, a freshly preregistered n = 17
+continuation from the retained exp-056 chain.
+It stays gated until PR #75’s current head is hosted-green.
+Exp-056 itself never resumes, and an all-direction agreement would still require the
+separate adoption gate before any bound or frontier change.
 
 ### Handoff Record
 
@@ -2606,7 +2605,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-073.yaml` | session-072, session-073 | 279 | 1.81 h | 1.81 h | 1.81 h | yes |
 | `codex-task-tree-session-074.yaml` | session-072, session-074 | 272 | 1.58 h | 1.58 h | 1.9 h | yes |
 | `codex-task-tree-session-075.yaml` | session-072, session-075 | 212 | 1.41 h | 1.41 h | 1.75 h | no |
-| `codex-task-tree-session-078.yaml` | session-078, session-082 | 736 | 3.04 h | 2.0 h | 2.55 h | yes |
+| `codex-task-tree-session-078.yaml` | session-078, session-082 | 2,170 | 12.14 h | 8.48 h | 9.02 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

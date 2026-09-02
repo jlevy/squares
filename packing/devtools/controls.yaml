@@ -123,7 +123,7 @@ controls:
   replace:
     - "<!-- This document follows common-doc-guidelines.md."
     - |-
-      ## OR-10: Never push to a branch other than the designated one
+      ## OR-11: Never push to a branch other than the designated one
 
       <!-- This document follows common-doc-guidelines.md.
   run: python3 -m devtools.render_operating_rules --check
@@ -131,7 +131,7 @@ controls:
 
 - name: operating rules - a gap in the rule numbering is not renumbered silently
   file: ../operating-rules.md
-  replace: ["## OR-6: Plan multi-hour", "## OR-10: Plan multi-hour"]
+  replace: ["## OR-6: Plan multi-hour", "## OR-11: Plan multi-hour"]
   run: python3 -m devtools.render_operating_rules --check
   expect: "rule ids are not contiguous from OR-1"
 

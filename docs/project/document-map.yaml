@@ -147,6 +147,10 @@ documents:
     role: review
     authority: record
     lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-02-agenda015-ten-hour-synthesis.md
+    role: review
+    authority: record
+    lifecycle: retained
   - path: docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md
     role: review
     authority: record
