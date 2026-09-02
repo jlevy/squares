@@ -19,7 +19,7 @@ experiment:
     assurance: verified
     method: exact-algebraic
     host_system: macOS arm64, Apple M1 Pro
-    selftest_passed: false
+    selftest_passed: true
   instance:
     axis: n
     point: 50
@@ -47,18 +47,40 @@ experiment:
       2026-09-02T02:10:00Z. It then stops until the common first-wave boundary at
       2026-09-02T02:45:00Z.
     record: campaign/series/series-000-smoke-and-calibration/results/exp-055-h-059-n50-producer-refusal-ordering.json
-  lease:
-    expires: '2026-09-02T02:45:00Z'
-    host: local-macos-arm64
-  results: []
+  effort:
+    timebox: >-
+      One fixed 15-minute W6 cell, 2026-09-02T01:15:00Z--01:30:00Z, after independent
+      W2 admission and explicit coordinator authorization.
+    wall_seconds: 0.72
+    agent_minutes: 92
+    stopped_by: criterion
+  results:
+  - shape: determination
+    question: >-
+      Does the hash-bound frozen producer refuse the existing exp-050 result before all
+      four downstream seams under normal and optimized Python while leaving exp-050 unchanged?
+    role: outcome
+    outcome: criterion_met
+    checked_by: >-
+      cases/n050_producer_refusal/verify.py imported neither harness nor producer and
+      independently accepted retained result SHA-256
+      9c90a04e5691f168f042a455780cbdd5a66eac248e617930b79d084496a8654c
+      under normal and optimized Python with byte-identical verification receipts.
   verdict:
-    decision: in-progress
+    decision: accepted
     needs_review: true
     primary_criterion: >-
       Both runtimes bind the frozen producer and result, emit the exact same refusal and
       canonical zero-call trace, leave exp-050 byte-identical and reject every named
       mutation after every sentinel proves live.
-    reason: The prospective control is allocated and no producer observation has run.
+    reason: >-
+      The one authorized process produced the exact same existing-result refusal and
+      canonical zero-call trace under normal and optimized Python, every sentinel was
+      independently calibrated, every registered mutation rejected, exp-050 remained
+      byte-identical and the no-import verifier accepted the immutable result. This
+      accepts only H-059's prospective protocol claim; independent campaign review is
+      still required.
+    commit: 909efafa+sha256-9c90a04e5691f168
 ---
 # Exp-055 — H-059 `n = 50` Producer Refusal Ordering
 

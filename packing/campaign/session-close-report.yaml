@@ -11,8 +11,8 @@ count: 75
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 27
-  sessions_unmeasured: 48
+  sessions_measured: 31
+  sessions_unmeasured: 44
   attributed:
     rollups: 42
     turns: 13390
@@ -35,9 +35,9 @@ totals:
     one_off_code: 1738
     wall_hours: 76.48
 codex_receipts:
-  attributed: 11
+  attributed: 15
   unattributed: 0
-  measured: 11
+  measured: 15
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1016,41 +1016,102 @@ sessions:
     snapshot_incomplete: true
 - id: session-072
   title: "Agenda-014 six-hour first-wave coordinator"
-  status: in_progress
+  status: stopped
   primary_bead: think-v0rj
-  phases: 1
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
-  codex_receipts: []
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-072.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-073.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-074.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-075.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-072.yaml
+    model_responses: 1239
+    agent_hours: 7.07
+    active_union_hours: 2.12
+    wall_hours: 2.12
+    snapshot_incomplete: true
+  - path: packing/campaign/resource-usage/codex-task-tree-session-073.yaml
+    model_responses: 279
+    agent_hours: 1.81
+    active_union_hours: 1.81
+    wall_hours: 1.81
+    snapshot_incomplete: true
+  - path: packing/campaign/resource-usage/codex-task-tree-session-074.yaml
+    model_responses: 272
+    agent_hours: 1.58
+    active_union_hours: 1.58
+    wall_hours: 1.9
+    snapshot_incomplete: true
+  - path: packing/campaign/resource-usage/codex-task-tree-session-075.yaml
+    model_responses: 212
+    agent_hours: 1.41
+    active_union_hours: 1.41
+    wall_hours: 1.75
+    snapshot_incomplete: false
 - id: session-073
   title: "BC-123 n = 17 parent-bound parallel profile"
-  status: in_progress
+  status: stopped
   primary_bead: think-p2m6
-  phases: 1
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
-  codex_receipts: []
+  phases: 8
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-073.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-073.yaml
+    model_responses: 279
+    agent_hours: 1.81
+    active_union_hours: 1.81
+    wall_hours: 1.81
+    snapshot_incomplete: true
 - id: session-074
   title: "BC-124 n = 68 production adapter"
-  status: in_progress
+  status: completed
   primary_bead: think-3i67
-  phases: 1
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
-  codex_receipts: []
+  phases: 7
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-074.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-074.yaml
+    model_responses: 272
+    agent_hours: 1.58
+    active_union_hours: 1.58
+    wall_hours: 1.9
+    snapshot_incomplete: true
 - id: session-075
   title: "BC-125 n = 50 producer refusal ordering"
-  status: in_progress
+  status: completed
   primary_bead: think-17q7
-  phases: 1
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
-  codex_receipts: []
+  phases: 7
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-075.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-075.yaml
+    model_responses: 212
+    agent_hours: 1.41
+    active_union_hours: 1.41
+    wall_hours: 1.75
+    snapshot_incomplete: false

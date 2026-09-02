@@ -86,10 +86,10 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-069](agent-sessions/session-069-bc117-n68-refusal-localization.md) | stopped | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (insight) | 6 | think-t7v1 | Repair and independently test the production CLI adapter in a new W7 round, then preregister a new experiment before any parent or target access; do not repair or rerun exp-051. |
 | [session-070](agent-sessions/session-070-bc118-n50-source-semantics.md) | completed | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 7 | think-8pjf | Under BC-119 and think-47xw, freeze the terminal exp-050/session-070 pair into its revision-keyed review packet. Do not rerun, repair, reconstruct n = 50, enter W6 or change H-054 readiness. |
 | [session-071](agent-sessions/session-071-agenda014-publication-and-handoff.md) | completed | contemporaneous | `documentation-pass` (process) | `documentation-pass` (process) | 1 | think-0sif | Take BC-123 under think-p2m6 only after agenda-013 is terminal and its final PR revision is green; until then keep the tbd hold and do not enter the lane. |
-| [session-072](agent-sessions/session-072-agenda014-six-hour-first-wave.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 1 | think-v0rj | Publish the launch revision, dispatch sessions 073--075 and begin BC-126. |
-| [session-073](agent-sessions/session-073-bc123-n17-parent-bound-parallel-profile.md) | in_progress | contemporaneous | `insight-iteration` (efficiency) | `insight-iteration` (efficiency) | 1 | think-p2m6 | Run BC-123's first W3 cell under think-p2m6 from the pushed launch revision. |
-| [session-074](agent-sessions/session-074-bc124-n68-production-adapter.md) | in_progress | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 1 | think-3i67 | Run BC-124's first W3 cell under think-3i67 from the pushed launch revision. |
-| [session-075](agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md) | in_progress | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 1 | think-17q7 | Run BC-125's first W3 cell under think-17q7 from the pushed launch revision. |
+| [session-072](agent-sessions/session-072-agenda014-six-hour-first-wave.md) | stopped | contemporaneous | `insight-iteration` (insight) | `process-review` (process) | 2 | think-v0rj | Resume at BC-127 only on a new owner instruction. Begin from the pushed PR #73 checkpoint, verify its hosted checks, run the formal W5 rollup, and leave all scientific continuations closed until BC-128 and BC-135 review exact packets. |
+| [session-073](agent-sessions/session-073-bc123-n17-parent-bound-parallel-profile.md) | stopped | contemporaneous | `insight-iteration` (efficiency) | `insight-iteration` (insight) | 8 | think-p2m6 | Review exp-053 under BC-135 on think-bpzq. Any later timing round requires fresh paired roots and a host-wide quiet lease; exp-053 must not resume. |
+| [session-074](agent-sessions/session-074-bc124-n68-production-adapter.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 7 | think-3i67 | Route only to separately preregistered BC-130; preserve the typed side-semantics refusal unless a later contract binds exact or directional semantics. |
+| [session-075](agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 7 | think-17q7 | Independent campaign review may clear or challenge exp-055 needs_review without rerunning it. |
 
 ### Workflow summary
 
@@ -98,12 +98,12 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 1 | 0 | 12 | 0 |
-| `factual-review` | 3 | 0 | 31 | 2 |
-| `insight-iteration` | 13 | 1 | 45 | 2 |
-| `process-review` | 11 | 4 | 54 | 6 |
+| `factual-review` | 3 | 0 | 35 | 2 |
+| `insight-iteration` | 13 | 1 | 48 | 2 |
+| `process-review` | 11 | 4 | 55 | 6 |
 | `efficiency-loop` | 9 | 0 | 26 | 0 |
-| `research-loop` | 8 | 4 | 41 | 7 |
-| `pipeline-improvement` | 19 | 0 | 85 | 0 |
+| `research-loop` | 8 | 4 | 43 | 7 |
+| `pipeline-improvement` | 19 | 0 | 95 | 0 |
 | `documentation-pass` | 1 | 0 | 2 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
@@ -328,11 +328,11 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-123 | tool_validation | 17 | ready | 0 | think-p2m6 | Ready from agenda-013's independently reviewed 33-row prefix. The observed 0.444 rows per minute makes another three-hour completion promise inadmissible without a fixed-input profile and at least 2.8x speedup. Three fixed ordinals are an admission discriminator, not evidence that every remaining direction has the same cost. |
-| BC-124 | tool_validation | 68, 69 | ready | 0 | think-3i67 | Ready from exp-051's reviewed executable-runner refusal. The missing seam includes production dependencies and retention behavior, not just argument parsing. |
-| BC-125 | measurement_validation | 19, 50 | ready | 0 | think-17q7 | Ready from Packet C's bounded caveat. The smallest repair is a new runner-bound, stage-sentinel control round with exp-050 read-only. |
-| BC-126 | research | 19, 54 | ready | 1 | think-tabx | Ready from the bounded multilingual and exact-number audit. The historical survey supplies the 19-to-54 mechanism link and side formula, but not a complete primary pose derivation. |
-| BC-127 | tool_validation | 17, 50, 54, 68 | blocked | 0 | think-ne3d | Blocked until the four first-wave lane closeouts make terminalization, agent behavior and tool cost measurable on one common interval boundary. |
+| BC-123 | tool_validation | 17 | stopped | 0 | think-p2m6 | Stopped after Pair 1's exact serial arm completed in 524.743164166 seconds and unrelated sustained CPU load began only during the parallel arm. Cleanup retained the three exact serial fragments and removed the incomplete candidate; no pair receipt, paired sample, later pair or canonical result exists. Exp-053 is unresolved and review-pending. A future profile requires fresh pair roots and a whole-pair host-wide quiet lease; BC-129 is not eligible from this outcome. |
+| BC-124 | tool_validation | 68, 69 | complete | 0 | think-3i67 | Complete as a target-blind instrument result. After a prepublication depth-guard repair and fresh different-lane W2, the production adapter passed 35 focused tests, 20 named mutations, static checks and normal/optimized replay. H-058 is instrument-ready and exp-054 remains unresolved and review-pending; no source, target or result opened. Its first production boundary is still three typed side-semantics refusals. |
+| BC-125 | measurement_validation | 19, 50 | complete | 0 | think-17q7 | Complete with one immutable 5,211-byte prospective zero-call refusal result and byte-identical normal/optimized independent verification. Exp-055 is accepted and review-pending. Exp-050, H-054 and every scientific or geometry claim remain unchanged; BC-135 may review the result without rerunning its one-shot producer. |
+| BC-126 | research | 19, 54 | complete | 1 | think-tabx | Complete at the 01:00Z cell. The live source supplies exact defining equations, side, orientation and symbolic placement formulas in one quartic field, but no stable 54-cell labels, retained immutable source, exact pose manifest or verified correspondence to the retained witness. A different-lane packet preflight also found that the formula tool has no independent named negative control and omits the retained 2009 HTML from its frozen-input table. H-055 remains instrument-unready. Repair those two target-blind provenance controls before any parser/correspondence contract is reviewed. |
+| BC-127 | tool_validation | 17, 50, 54, 68 | blocked | 0 | think-ne3d | Resume only on a new owner instruction from the pushed first-wave checkpoint. Formal W5 must begin by verifying that revision and its hosted checks; the preliminary read-only timing preflight is not a substitute for BC-127's durable repayment decision. |
 | BC-128 | measurement_validation | 17, 50, 54, 68 | blocked | 0 | think-8ih6 | Blocked on the first-wave W5 receipt and exact terminal outcomes. |
 | BC-135 | measurement_validation | 17, 50, 54, 68 | blocked | 0 | think-bpzq | Blocked on immutable first-wave packets and stopped lane writers. |
 | BC-136 | research | 17, 19, 39, 50, 54, 68, 69 | blocked | 0 | think-oa22 | Blocked on independent review of every first-wave packet. |
@@ -409,18 +409,18 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 | H-054 | unresolved | search | The retained source facts for the reported n = 50 construction at side |  | 2 | 38m agent + 30.0m wall |
 | H-055 | blocked | search | If BC-111 selects n = 54, the fixed retained witness at reported side  |  | 0 |  |
 | H-056 | blocked | search | If BC-111 selects n = 39, the fixed retained witness can be promoted t |  | 0 |  |
-| H-057 | needs review | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 1 |  |
-| H-058 | needs review | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 1 |  |
-| H-059 | needs review | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 1 |  |
+| H-057 | needs review | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 1 | 107.833m agent + 12.3m wall |
+| H-058 | needs review | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 1 | 99m agent + 99.0m wall |
+| H-059 | needs review | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 1 | 92m agent + 1s wall |
 
 ## Needs review — held for a human, not decided
 
 | id | hypotheses | decision | why it was not decided |
 | --- | --- | --- | --- |
 | exp-050 | H-054 | unresolved | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
-| exp-053 | H-057 | in-progress | The round is allocated and no profile measurement has run. |
-| exp-054 | H-058 | in-progress | The adapter round is allocated and no target-blind command has run. |
-| exp-055 | H-059 | in-progress | The prospective control is allocated and no producer observation has run. |
+| exp-053 | H-057 | unresolved | Asymmetric external CPU load contaminated Pair 1's parallel arm after the serial control completed, so no paired timing is admissible and H-057 remains neither accepted nor rejected. The durable serial arm records 524.743164166 seconds of process cost, not a speedup sample; the interrupted parallel arm, Pair 1 receipt, Pairs 2--3 and canonical result do not exist. The 738-second effort is a conservative observed command wall, bounded from the 01:49:22Z process start through the 02:01:40Z cleanup observation, not a nanosecond timing receipt. |
+| exp-054 | H-058 | unresolved | The target-blind adapter passed its complete author-side and different-lane W2 admission gates, so H-058's instrument is ready for a separately preregistered target phase. This round opened no network or target source and created no exp-054 result, so it supplies no H-058 sample and cannot accept or reject the claim. Whole-result verification shares the frozen refusal.verify proof-replay kernel with the producer path, although its shape, binding and publication checks are separate. The reported side token also remains intentionally unbound; the production path therefore yields three typed `serialization-refusal` outcomes until a later preregistration supplies admissible exact or directional semantics. |
+| exp-055 | H-059 | accepted | The one authorized process produced the exact same existing-result refusal and canonical zero-call trace under normal and optimized Python, every sentinel was independently calibrated, every registered mutation rejected, exp-050 remained byte-identical and the no-import verifier accepted the immutable result. This accepts only H-059's prospective protocol claim; independent campaign review is still required. |
 
 ## Rounds
 
@@ -439,7 +439,7 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 | exp-037 | series-000 | 29 | openai-codex | H-042 | The retained serialization has six numerical orientation classes, with minimum class gap 0.296067 degrees against a 1e-90 degree interval radius. |
 | exp-041 | series-000 | 5 | openai-codex | H-023 | The frozen complete-zero-inventory clause is false: one additional owner axis is zero only at the positive endpoint, while independent control review also found mutation-reason and partial-disposition guards that remain unfinished. |
 
-### unresolved (9)
+### unresolved (11)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -452,6 +452,8 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 | exp-049 | series-000 | 17 | openai-codex | H-052 | The declared 3920-second W6 timebox expired while the independently accumulated target manifest was still running; the single interrupt produced no canonical JSON, complete comparison, or checkpoint, so H-052 remains unmeasured and is neither accepted nor rejected. |
 | exp-050 | series-000 | 50 | openai-codex | H-054 | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
 | exp-052 | series-000 | 17 | openai-codex | H-052 | The declared timebox ended before all 181 paired rows and the frozen precondition and mutation checks completed. The preserved 33-row prefix is valid process evidence and every retained pair agrees, but it is not a completed sample under H-052's all-direction criterion. No canonical result exists, so H-052 remains neither accepted nor rejected. |
+| exp-053 | series-000 | 17 | openai-codex | H-057 | Asymmetric external CPU load contaminated Pair 1's parallel arm after the serial control completed, so no paired timing is admissible and H-057 remains neither accepted nor rejected. The durable serial arm records 524.743164166 seconds of process cost, not a speedup sample; the interrupted parallel arm, Pair 1 receipt, Pairs 2--3 and canonical result do not exist. The 738-second effort is a conservative observed command wall, bounded from the 01:49:22Z process start through the 02:01:40Z cleanup observation, not a nanosecond timing receipt. |
+| exp-054 | series-000 | 68 | openai-codex | H-058 | The target-blind adapter passed its complete author-side and different-lane W2 admission gates, so H-058's instrument is ready for a separately preregistered target phase. This round opened no network or target source and created no exp-054 result, so it supplies no H-058 sample and cannot accept or reject the claim. Whole-result verification shares the frozen refusal.verify proof-replay kernel with the producer path, although its shape, binding and publication checks are separate. The reported side token also remains intentionally unbound; the production path therefore yields three typed `serialization-refusal` outcomes until a later preregistration supplies admissible exact or directional semantics. |
 
 ### blocked (6)
 
@@ -464,7 +466,7 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 | exp-047 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `interval-enclosure`: the numerical prototype's selftest and synthetic controls pass, but a float midpoint fit with fixed tolerance and heuristic radii does not prove a nonempty compatible-pose enclosure or outward- rounded wall and pair signs, and the preregistered command lacks a complete post- authorization runner. No parent retrieval, target parse or target fit ran, so H-053 remains unresolved. |
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
 
-### accepted (16)
+### accepted (17)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -484,6 +486,7 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 | exp-039 | series-000 | 5 | openai-codex | H-023 | The 30-row common cell is exactly equivalent to the bounded five-coordinate system, six feasible witnesses prove affine dimension five, and the exact LP dual fixes side 1+5sqrt(2)/4 throughout the cell. All twelve declared sharp paths pass separate exact packing checks and both owner branches have structurally derived positive stress-polynomial identities. Replay is identical and all ten controls reject. The verdict remains cell-local and pathwise first-order only. |
 | exp-042 | series-000 | 5 | openai-codex | H-023 | All six unchanged paths have exact universal feasibility certificates with the frozen base, open-interval, and endpoint inventories, and both owner branches have exact positive first-order stress certificates. Generation and replay agree, all twenty production-path controls reject with their expected identifiers, and the stress-only control retains feasibility while making the combined verdict unresolved. The result is pathwise only and refuses every broader H-023 claim. |
 | exp-045 | series-000 | 5 | openai-codex | H-023 | Accepted 2026-08-31 by the owner in session-050, after the independent post-change audit that was the sixth admission condition. The round's content is unchanged from session-033: both declared determinations report criterion_met -- canonical pure -W is excluded at A, the interior, and B, and the -W coefficients equal the separately derived +W values -- with twelve mutation controls, thirteen refusal records, and deterministic record-and-replay agreement, all independently replayed by the auditor (a perturbed artifact is refused with replay.drift). The audit raised three findings, resolved in the Amendment section below rather than glossed: the registration's mutation vocabulary differs from the implemented twelve (mapped and explained there, per session-032's reachability derivation), the driver did not route through the accepted production helpers, and its docstring still described the exp-043 draft (D-404). The decisive resolution is devtools.check_minus_w_bridge: the accepted row-jet, stress, scale, and owner-4 helpers, run on the actual -W direction, independently rebuild all fifteen owner-3 scale records and all three owner-4 records with strict exact contradictions and +W/-W coefficients equal -- two independently written implementations deciding the same question the same way, held in place by tests/test_minus_w_bridge.py. Acceptance widens nothing: every broader claim remains refused -- no whole-component identity, no A-to-B stationary connection, no local isolation, no terminality, and no H-023 disposition beyond the excluded direction. |
+| exp-055 | series-000 | 50 | openai-codex | H-059 | The one authorized process produced the exact same existing-result refusal and canonical zero-call trace under normal and optimized Python, every sentinel was independently calibrated, every registered mutation rejected, exp-050 remained byte-identical and the no-import verifier accepted the immutable result. This accepts only H-059's prospective protocol claim; independent campaign review is still required. |
 
 ### baseline (11)
 
@@ -501,14 +504,6 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
-### in-progress (3)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-053 | series-000 | 17 | openai-codex | H-057 | The round is allocated and no profile measurement has run. |
-| exp-054 | series-000 | 68 | openai-codex | H-058 | The adapter round is allocated and no target-blind command has run. |
-| exp-055 | series-000 | 50 | openai-codex | H-059 | The prospective control is allocated and no producer observation has run. |
-
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -522,7 +517,7 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 
 ## Effort
 
-55 rounds, 1422.6 agent-minutes, 307.7 wall-minutes.
+55 rounds, 1721.43 agent-minutes, 419.0 wall-minutes.
 
 ## Exploration reports not yet codified
 

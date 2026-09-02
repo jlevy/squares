@@ -327,24 +327,22 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-The latest allocated lane record is
-[session-075](packing/campaign/agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md).
-It owns BC-125 under bead `think-17q7`; its evidence head is exp-055, and its active
-producer-provenance work stops at `2026-09-02T02:10:00Z`. The coordinating record is
+The latest lane closeout is
+[session-073](packing/campaign/agent-sessions/session-073-bc123-n17-parent-bound-parallel-profile.md).
+It retains an exact 524.743-second serial arm at `n = 17`, but asymmetric host load
+invalidated the parallel arm; exp-053 is unresolved and must not resume.
+The coordinating
 [session-072](packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md)
-on `codex/agenda014-six-hour-run`. It opens Agenda 014’s exact six-hour first-wave wall
-at `2026-09-02T00:15:00Z` and stops at `2026-09-02T06:15:00Z`.
+freezes all four first-wave lanes on PR #73 and stops at the owner’s requested pause.
 
-The launch paths are allocated serially: session-073 and exp-053 own BC-123’s `n = 17`
-profile; session-074 and exp-054 own BC-124’s target-blind `n = 68` adapter; session-075
-and exp-055 own BC-125’s `n = 50` provenance control; the coordinator owns BC-126’s
+BC-124 completed and freshly readmitted a corrected target-blind `n = 68` adapter,
+BC-125 completed its prospective `n = 50` refusal receipt, and BC-126 completed the
 bounded `n = 54` source/formula audit.
-The lanes share no writable path.
-Exp-052 remains read-only at checkpoint
-`db5c156959b6de4e6f2c9be283454d01dd5f3a436e6489f5e6bb60c38559fdb8` and progress
-`08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af`. BC-129--BC-134
-cannot open inside this wall; BC-136 must publish a separate reviewed nine-hour
-overnight agenda.
+Exp-053 through exp-055 remain review-pending; no scientific target result was promoted.
+On resume, BC-127 must formalize the efficiency decision and BC-128 must freeze
+immutable packets before the next review destination, **BC-135 under bead
+`think-bpzq`**, opens.
+No second-wave or overnight agenda is authorized from this checkpoint alone.
 
 ### Handoff Record
 
@@ -2566,11 +2564,15 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-070-review.yaml` | session-064, session-070 | 23 | 0.12 h | 0.12 h | 0.42 h | no |
 | `codex-task-tree-session-070.yaml` | session-064, session-070 | 114 | 0.52 h | 0.52 h | 2.67 h | no |
 | `codex-task-tree-session-071.yaml` | session-071 | 68 | 0.25 h | 0.25 h | 0.25 h | yes |
+| `codex-task-tree-session-072.yaml` | session-072 | 1,239 | 7.07 h | 2.12 h | 2.12 h | yes |
+| `codex-task-tree-session-073.yaml` | session-072, session-073 | 279 | 1.81 h | 1.81 h | 1.81 h | yes |
+| `codex-task-tree-session-074.yaml` | session-072, session-074 | 272 | 1.58 h | 1.58 h | 1.9 h | yes |
+| `codex-task-tree-session-075.yaml` | session-072, session-075 | 212 | 1.41 h | 1.41 h | 1.75 h | no |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 27 |
-| closed before `resource_rollups` existed, logs not retained | 48 |
+| measured | 31 |
+| closed before `resource_rollups` existed, logs not retained | 44 |
 | **total** | **75** |
 
 <!-- END GENERATED: session-close-report -->
@@ -2588,7 +2590,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 There are 55 terminal rounds registered in `series-000`.
 
-They record 1422.6 agent-minutes and 307.7 wall-minutes.
+They record 1721.43 agent-minutes and 419.0 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -2669,9 +2671,9 @@ archive beside it.
 | [exp-050](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-050-h-054-n50-source-semantics-e1-localization.md) | 50 | target | H-054 | exact source-semantics intake | E1 reason 3, `attribution-unbound`; zero cells | unresolved |
 | [exp-051](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-051-h-053-n68-refusal-localization.md) | 68 | target | H-053 | proof-carrying pose instrument | production `--record` adapter absent; no target access | blocked |
 | [exp-052](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-052-h-052-n17-resumable-certificate-agreement.md) | 17 | target | H-052 | resumable exact accumulator | 33/181 contiguous paired rows agree; result incomplete | unresolved |
-| [exp-053](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-053-h-057-n17-parent-bound-parallel-speedup.md) | 17 | calibration | H-057 | parent-bound exact parallel profiler | allocated; no profile measurement run | in-progress |
-| [exp-054](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-054-h-058-n68-one-parent-production-serialization.md) | 68 | calibration | H-058 | target-blind production adapter | allocated; no target-blind command run | in-progress |
-| [exp-055](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-055-h-059-n50-producer-refusal-ordering.md) | 50 | calibration | H-059 | producer stage-sentinel harness | allocated; no producer observation run | in-progress |
+| [exp-053](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-053-h-057-n17-parent-bound-parallel-speedup.md) | 17 | calibration | H-057 | parent-bound exact parallel profiler | exact serial arm retained; parallel arm invalidated by asymmetric host load; no paired sample | unresolved |
+| [exp-054](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-054-h-058-n68-one-parent-production-serialization.md) | 68 | calibration | H-058 | target-blind production adapter | adapter admitted with side semantics still unbound; no source, target sample, or result | unresolved |
+| [exp-055](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-055-h-059-n50-producer-refusal-ordering.md) | 50 | calibration | H-059 | producer stage-sentinel harness | prospective existing-result refusal emitted a verified zero-call trace; exp-050 unchanged | **accepted** |
 
 ### Cost and provenance
 
@@ -2729,13 +2731,13 @@ archive beside it.
 | exp-050 | 30m source-semantics application cell | 1,800 s | 30 m | criterion | `e21598f6+sha256-fed71cf825906bd0` |
 | exp-051 | 75m target-blind W7 instrument wall | 4,500 s | 75 m | guard | `e21598f6+sha256-3d91046ad9d4ea7b` |
 | exp-052 | one fixed 75-minute W6 interval | 4,456 s | 74.2667 m | timebox | `e21598f6+sha256-3e5284fd56fd33f7` |
-| exp-053 | one 150-minute first-wave lane | — | — | active | `81177148` (preregistered) |
-| exp-054 | one 150-minute first-wave lane | — | — | active | `81177148` (preregistered) |
-| exp-055 | one 115-minute active-lane cap | — | — | active | `81177148` (preregistered) |
+| exp-053 | one 150-minute first-wave lane | 738 s | 107.8333 m | guard | `909efafa+sha256-e31abda6ce13df47` |
+| exp-054 | one target-blind 150-minute first-wave lane | 5,940 s | 99 m | criterion | `909efafa+sha256-9b503050115a5a48` |
+| exp-055 | one fixed 15-minute W6 cell | 0.72 s | 92 m | criterion | `909efafa+sha256-9c90a04e5691f168` |
 
 ### What the 55 rounds jointly establish
 
-The 55 rounds use 1422.6 agent-minutes and 307.7 wall-minutes under the campaign’s
+The 55 rounds use 1721.43 agent-minutes and 419.0 wall-minutes under the campaign’s
 retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through

@@ -33,12 +33,21 @@ hypothesis:
       refusal on any proof-node or budget guard
     threshold: at least one qualifying model for the fixed n = 68 parent
   instrument: >-
-    Agenda-014 BC-124 builds the production opener, strict scanner, exact transform and
-    model adapters, bounded proof evaluator and independent publication verifier behind
-    one literal command using injected target-blind streams. Only a complete reviewed
-    adapter may make the instrument ready; BC-130 may then retrieve the one digest-bound
-    parent and evaluate this claim.
-  instrument_ready: false
+    The independently admitted Agenda-014 BC-124 adapter is frozen at adapter.py SHA-256
+    9b503050115a5a48b01ec9f4d348b869495fbe4ee4847dc83188b05a3352f539,
+    run.py 8cef0f9cd4f473e594ed55e650be2fe7b286a798d2a94e5edb0a35efb7b12d54,
+    verify.py e39a6a725e7af01a2e1796e1a218576f76b8a2ec2cecf7fbde3f38aeb9630a7a
+    and focused-test SHA-256
+    17f4be0611fb02419d9007222f07b3f585b290c03866403a1d2bd5da954f01df.
+    It supplies the bounded opener, digest-before-parse scanner, exact transform and
+    model adapters, bounded proof evaluator and verify-before-publication path behind
+    one literal command. Manual prepublication review repaired the selected-path depth
+    check before descent; a fresh different-lane W2 review then reproduced 35 focused
+    tests, clean Ruff and BasedPyright checks, all 20 named mutations and byte-identical
+    normal and optimized receipts before admitting the corrected target-blind
+    instrument. BC-130 may now evaluate the claim only under a separately preregistered
+    target phase.
+  instrument_ready: true
   regime: >-
     The expected square-68.svg digest is
     558fbdddfeb0b2f8752b88e172d2776544beb4d2a7122189ef77c1e1c5ebdc6d.
@@ -60,7 +69,15 @@ hypothesis:
     pairwise signs in this claim are synthetic instrument controls, not target-parent
     nonoverlap claims. It does not decide the two-pair H-053 claim, validate the full
     parent packing or UnitSquare child, estimate record probability or open the H-051
-    surgery calibration.
+    surgery calibration. Readiness is instrument-only: no target source has been opened
+    and H-058 remains unmeasured. Whole-result verification independently checks shape,
+    binding and publication, but its exact proof replay shares the already reviewed
+    refusal.verify kernel at SHA-256
+    1533210f9d8e17cbdfa822da59187d280fc4ab063816644825c50d7b8b24552f with
+    the producer path. The reported side token still has no exact or directional
+    semantics, so the current production constructor soundly returns three typed
+    `serialization-refusal` outcomes unless a later preregistration supplies an
+    admissible binding.
 ---
 # H-058 — One-Parent `n = 68` Production Serialization
 

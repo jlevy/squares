@@ -29,7 +29,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [17]
-    state: ready
+    state: stopped
     priority: 0
     question: >-
       Can a parent-bound process-parallel direction runner preserve exact output while
@@ -67,16 +67,18 @@ agenda:
     depends_on: []
     workflows: [insight-iteration, pipeline-improvement, factual-review, research-loop]
     next_evidence: >-
-      Ready from agenda-013's independently reviewed 33-row prefix. The observed 0.444
-      rows per minute makes another three-hour completion promise inadmissible without a
-      fixed-input profile and at least 2.8x speedup. Three fixed ordinals are an admission
-      discriminator, not evidence that every remaining direction has the same cost.
+      Stopped after Pair 1's exact serial arm completed in 524.743164166 seconds and
+      unrelated sustained CPU load began only during the parallel arm. Cleanup retained
+      the three exact serial fragments and removed the incomplete candidate; no pair
+      receipt, paired sample, later pair or canonical result exists. Exp-053 is
+      unresolved and review-pending. A future profile requires fresh pair roots and a
+      whole-pair host-wide quiet lease; BC-129 is not eligible from this outcome.
     parallel_group: agenda014-first-wave-n17
   - id: BC-124
     purpose: tool_validation
     owner_focus: correctness
     instances: [68, 69]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Can the n = 68 exact proof boundary be reached through a complete production
@@ -115,16 +117,26 @@ agenda:
       child, gain, surgery or raw source is opened.
     bead: think-3i67
     depends_on: []
+    artifacts:
+    - packing/cases/unitsquare_precision/production/
+    - packing/tests/test_unitsquare_precision_production.py
+    - packing/campaign/agent-sessions/session-074-bc124-n68-production-adapter.md
+    - packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-054-h-058-n68-one-parent-production-serialization.md
     workflows: [insight-iteration, pipeline-improvement, factual-review]
     next_evidence: >-
-      Ready from exp-051's reviewed executable-runner refusal. The missing seam includes
-      production dependencies and retention behavior, not just argument parsing.
+      Complete as a target-blind instrument result. After a prepublication depth-guard
+      repair and fresh different-lane W2, the production adapter passed 35 focused
+      tests, 20 named mutations, static checks and normal/optimized replay. H-058 is
+      instrument-ready and exp-054 remains unresolved and review-pending; no source,
+      target or result opened. Its first production boundary is still three typed
+      side-semantics refusals.
     parallel_group: agenda014-first-wave-n68
   - id: BC-125
     purpose: measurement_validation
     owner_focus: correctness
     instances: [19, 50]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Does a new producer-bound stage-sentinel receipt prove the existing-result refusal
@@ -159,16 +171,24 @@ agenda:
       terminal state repairs exp-050.
     bead: think-17q7
     depends_on: []
+    artifacts:
+    - packing/cases/n050_producer_refusal/
+    - packing/tests/test_n050_producer_refusal.py
+    - packing/tests/test_n050_producer_refusal_independent.py
+    - packing/campaign/agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-055-h-059-n50-producer-refusal-ordering.json
     workflows: [insight-iteration, pipeline-improvement, research-loop, factual-review]
     next_evidence: >-
-      Ready from Packet C's bounded caveat. The smallest repair is a new runner-bound,
-      stage-sentinel control round with exp-050 read-only.
+      Complete with one immutable 5,211-byte prospective zero-call refusal result and
+      byte-identical normal/optimized independent verification. Exp-055 is accepted and
+      review-pending. Exp-050, H-054 and every scientific or geometry claim remain
+      unchanged; BC-135 may review the result without rerunning its one-shot producer.
     parallel_group: agenda014-first-wave-n50
   - id: BC-126
     purpose: research
     owner_focus: insight
     instances: [19, 54]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       What primary source, formula derivation and pose-serialization evidence actually
@@ -192,11 +212,21 @@ agenda:
       The row becomes `complete` after either retained outcome.
     bead: think-tabx
     depends_on: []
+    artifacts:
+    - packing/devtools/audit_n54_source_formula.py
+    - packing/tests/test_audit_n54_source_formula.py
+    - packing/resources/web/n54-source-formula-audit-2026/README.md
+    - packing/resources/web/finite-case-literature-audit-2026/README.md
     workflows: [research-pass, insight-iteration, factual-review]
     next_evidence: >-
-      Ready from the bounded multilingual and exact-number audit. The historical survey
-      supplies the 19-to-54 mechanism link and side formula, but not a complete primary
-      pose derivation.
+      Complete at the 01:00Z cell. The live source supplies exact defining equations,
+      side, orientation and symbolic placement formulas in one quartic field, but no
+      stable 54-cell labels, retained immutable source, exact pose manifest or verified
+      correspondence to the retained witness. A different-lane packet preflight also
+      found that the formula tool has no independent named negative control and omits
+      the retained 2009 HTML from its frozen-input table. H-055 remains
+      instrument-unready. Repair those two target-blind provenance controls before any
+      parser/correspondence contract is reviewed.
     parallel_group: agenda014-first-wave-n54
   - id: BC-127
     purpose: tool_validation
@@ -231,13 +261,14 @@ agenda:
     bead: think-ne3d
     depends_on: []
     blocked_on: >-
-      BC-123--BC-126 must each stop lane work and commands at the common boundary and
-      return a terminal-ready closeout; ordinary dependencies cannot encode that
-      complete-or-stopped process gate.
+      The four lane closeouts and resource receipts are frozen on the first-wave PR
+      checkpoint, but the owner requested a pause before this block opened.
     workflows: [process-review, efficiency-loop]
     next_evidence: >-
-      Blocked until the four first-wave lane closeouts make terminalization, agent
-      behavior and tool cost measurable on one common interval boundary.
+      Resume only on a new owner instruction from the pushed first-wave checkpoint.
+      Formal W5 must begin by verifying that revision and its hosted checks; the
+      preliminary read-only timing preflight is not a substitute for BC-127's durable
+      repayment decision.
   - id: BC-128
     purpose: measurement_validation
     owner_focus: insight

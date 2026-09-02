@@ -143,6 +143,15 @@ that is enough to motivate a source/formula audit, not enough to synthesize exac
 coordinates from the retained decimals.
 The registered H-055 source-cell and correspondence gates therefore remain necessary.
 
+Agenda 014's later
+[`BC-126` source/formula receipt](../n54-source-formula-audit-2026/README.md) inspected
+the linked SVG source rather than only its rendered catalogue entry. That source does
+carry exact defining equations, exact side and angle formulas, symbolic placement
+expressions, and a generative half-turn layout. This narrows the absence above: there is
+still no paper or 54-row labeled pose derivation, but the current construction is not
+available only as unexplained decimals. The remaining gap is an exact source parser,
+labeled correspondence, and independent geometry replay.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

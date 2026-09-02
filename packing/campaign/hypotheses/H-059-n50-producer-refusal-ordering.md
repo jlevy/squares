@@ -29,11 +29,16 @@ hypothesis:
       injection, equivalence or independent verification is incomplete
     threshold: zero calls to every downstream seam before the existing-result refusal
   instrument: >-
-    Agenda-014 BC-125 builds a separate injected sentinel harness, binds the producer
-    before import, injects bomb functions into all four downstream seams, independently
-    admits the frozen harness, executes one fresh prospective control result and verifies
-    it without importing the producer.
-  instrument_ready: false
+    Agenda-014 BC-125's frozen controller produces prospective receipt SHA-256
+    9c90a04e5691f168f042a455780cbdd5a66eac248e617930b79d084496a8654c.
+    It binds the producer and immutable result before import, injects a fake intake before
+    dynamically loading the producer, calibrates live bombs at all four downstream seams
+    and rejects every registered mutation. Independent verifier SHA-256
+    950fd4a4c41224792742d11e5e6b3f2caeeb4937204d680671892ba28820a0df
+    imports neither the harness nor producer and emitted byte-identical normal and
+    optimized admission receipt SHA-256
+    64d37a00c43384033adedc94e1c4ba42ad1010a6f419d5b17f07c14265b73ccc.
+  instrument_ready: true
   regime: >-
     Producer SHA-256
     52baeb1b6ad52aa504498ba21aeb6b3d361aaaec2461c76904a357d8d95cf29d and exp-050

@@ -31,12 +31,14 @@ hypothesis:
       profiling, equivalence, parent binding, deterministic merge or review is incomplete
     threshold: median paired speedup >= 2.8x and minimum paired speedup > 1x
   instrument: >-
-    Agenda-014 BC-123 builds an external profiler, disjoint worker-fragment format and
-    deterministic single-writer merger around the unchanged exp-052 kernels. It profiles
-    serial and three-process execution on the fixed ordinals, validates every row and
-    event hash, rejects gaps, duplicates, reordering, foreign parents and partial
-    fragments, and compares normal, optimized and interrupted assembly receipts.
-  instrument_ready: false
+    Agenda-014 BC-123's independently admitted external profiler wraps the unchanged
+    exp-052 kernels in disjoint, exact-root-bound worker fragments and a deterministic
+    single-writer merger. Its 30 target-blind controls validate every row, event hash and
+    final three-pair statistic; reject gaps, duplicates, reordering, foreign parents,
+    partial fragments, path escapes, missing or corrupt pairs and result overwrite; and
+    compare normal, optimized and interrupted assembly receipts without making an
+    exp-052 claim.
+  instrument_ready: true
   regime: >-
     One fixed host, three process workers, fixed ordinals 33, 107 and 180, three paired
     repetitions in AB/BA/AB order, cold process starts recorded separately, and exp-052

@@ -342,21 +342,23 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, follow
-[session 075](../../../../packing/campaign/agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md),
-which owns BC-125 under `think-17q7` with exp-055 as its evidence head.
-It runs inside the exact six-hour wall coordinated by
+[session 073](../../../../packing/campaign/agent-sessions/session-073-bc123-n17-parent-bound-parallel-profile.md),
+the latest lane closeout from Agenda 014’s frozen first wave.
+Its exact serial arm is retained, but host-load contamination stopped exp-053 before a
+paired profile existed.
+The owner paused the campaign after the checkpoint captured session 073, the terminal n
+= 68 adapter, the accepted-but-review-pending n = 50 refusal receipt and the n = 54
+source audit. The coordinating
 [session 072](../../../../packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md)
-under
+on
 [agenda-014](../../../../packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md),
-from `2026-09-02T00:15:00Z` through `2026-09-02T06:15:00Z`. Sessions 073--075 and
-experiments 053--055 own the three disjoint agent lanes; the coordinator owns BC-126.
-Exp-052 remains read-only at checkpoint
-`db5c156959b6de4e6f2c9be283454d01dd5f3a436e6489f5e6bb60c38559fdb8` and progress
-`08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af`.
+is stopped rather than terminally synthesized.
 
-This first wave terminates, measures and independently reviews its lanes before
-publication. It opens no candidate continuation.
-BC-136 must derive a separate exact nine-hour overnight agenda from the reviewed exits.
+On resume, complete BC-127’s formal W5 receipt and BC-128’s immutable packet freeze,
+then take **BC-135 under `think-bpzq`** as the next supervised exact-research goal.
+That independent review must dispose exp-053 through exp-055 before BC-136 may derive a
+separate nine-hour overnight agenda.
+No candidate continuation is open at this checkpoint.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every
