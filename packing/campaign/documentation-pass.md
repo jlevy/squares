@@ -10,6 +10,12 @@ reader-facing tier has not caught up.
 It is worth *closing* when every item below has an answer, including the ones whose
 answer is “nothing to do”.
 
+This is broader than W10’s mandatory document-impact review.
+Every terminal agenda checks README, tutorial, synopsis, conventions, and development
+guidance and records `updated` or `current`; that mechanical check does not by itself
+open W8. Use this runbook when the check finds substantive drift that requires a
+reader-facing reconciliation across artifacts and documents.
+
 **Order matters.** Read the artifacts first, the documents second, and never the
 reverse: a pass that starts from the prose inherits the prose’s mistakes.
 

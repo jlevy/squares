@@ -171,6 +171,8 @@ $defs:
       research-loop: {$ref: "#/$defs/count"}
       pipeline-improvement: {$ref: "#/$defs/count"}
       documentation-pass: {$ref: "#/$defs/count"}
+      remediation: {$ref: "#/$defs/count"}
+      review-planning-oversight: {$ref: "#/$defs/count"}
       general-improvement: {$ref: "#/$defs/count"}
   phase_status_counts:
     type: object

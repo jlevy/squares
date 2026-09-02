@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the cost of the work behind a pull request, for the pull request itself.
+"""Render the cost and checked closeout of work behind a pull request.
 
 A reviewer looking at a branch can see what changed and cannot see what it took. Two
 harness-specific receipts can supply that view without pretending their telemetry is the
@@ -23,6 +23,11 @@ The command above is therefore the cumulative branch-cost entry point. Pass `--s
 only to inspect one declaration:
     uv run --frozen --all-extras --group dev python -m devtools.render_pr_rollup \
         --branch codex/my-branch --session session-062
+
+For a terminal research agenda, add `--agenda agenda-NNN`. The cost block remains first;
+the result, stop-reason, disposition, grouped-change, validation, documentation, and
+replanning sections come from the agenda's checked W10 closeout rather than from a
+hand-written PR chronology.
 """
 
 from __future__ import annotations
@@ -43,6 +48,7 @@ from sqpack.yamlio import safe_load
 ROOT = Path(__file__).resolve().parent.parent
 USAGE = ROOT / "campaign" / "resource-usage"
 SESSIONS = ROOT / "campaign" / "agent-sessions"
+AGENDAS = ROOT / "campaign" / "agendas"
 CLAUDE_CONTRACT = "packing.squares:ClaudeEfficiencyRollup/v1"
 CODEX_CONTRACT = "packing.squares:CodexTaskTreeDelta/v1"
 
@@ -467,6 +473,157 @@ def render(branch: str, session_id: str | None = None) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _cell(value: object) -> str:
+    """One plain Markdown table cell from prose-shaped YAML."""
+    return " ".join(str(value).split()).replace("|", "\\|")
+
+
+def agenda_payload(agenda_id: str) -> dict:
+    """Load exactly one agenda by stable id and require its W10 closeout."""
+    matches = []
+    for path in sorted(AGENDAS.glob(f"{agenda_id}-*.md")):
+        text = path.read_text(encoding="utf-8")
+        if not text.startswith("---\n"):
+            continue
+        document = safe_load(text.split("---\n")[1])
+        agenda = document.get("agenda") if isinstance(document, dict) else None
+        if isinstance(agenda, dict) and agenda.get("id") == agenda_id:
+            matches.append(agenda)
+    if len(matches) != 1:
+        raise ValueError(f"{agenda_id} does not identify exactly one agenda")
+    agenda = matches[0]
+    if agenda.get("status") not in {"completed", "superseded"}:
+        raise ValueError(f"{agenda_id} is not terminal")
+    if not isinstance(agenda.get("closeout"), dict):
+        raise TypeError(f"{agenda_id} has no W10 closeout")
+    return agenda
+
+
+STOP_EXPLANATIONS = {
+    "achieved": "Frozen exit met",
+    "bounded-negative": "Declared search scope exhausted without a qualifying result",
+    "time-limited": "External wall arrived before the declared scope completed",
+    "guard-refused": "A correct admission, provenance, validity, or safety guard refused",
+    "technical-failure": "Unintended tooling or validation failure prevented completion",
+    "never-opened": "An upstream dependency never authorized execution",
+    "inconclusive": "The full valid protocol ran, but its frozen criterion did not decide",
+}
+
+
+def render_agenda_closeout(agenda: dict) -> str:
+    """Render reviewer-facing facts from one checked terminal agenda."""
+    closeout = agenda["closeout"]
+    lines = [
+        "## Results and Dispositions",
+        "",
+        (
+            "| Work or result | What was established | Evidence | Why it stopped "
+            "| Disposition and follow-up |"
+        ),
+        "| --- | --- | --- | --- | --- |",
+    ]
+    classifications = []
+    for item in agenda["items"]:
+        for outcome in item["outcomes"]:
+            classification = outcome["classification"]
+            classifications.append(classification)
+            follow_up = outcome.get("follow_up")
+            disposition = f"`{outcome['disposition']}`"
+            if follow_up:
+                disposition += f" via `{follow_up}`"
+            evidence = "<br>".join(_cell(item) for item in outcome["evidence"])
+            lines.append(
+                f"| `{item['id']}` — {_cell(outcome['scope'])} "
+                f"| {_cell(outcome['result'])} "
+                f"| {evidence} "
+                f"| `{classification}` — {STOP_EXPLANATIONS[classification]} "
+                f"| {disposition} |"
+            )
+
+    if "bounded-negative" not in classifications:
+        lines += [
+            "",
+            (
+                "**No completed bounded-negative search is claimed.** Partial prefixes, "
+                "guard refusals, technical failures, and unopened routes are reported "
+                "under their own classes rather than made to look like negative results."
+            ),
+        ]
+
+    lines += [
+        "",
+        "## Changes by Purpose",
+        "",
+        "| Area | Result | Principal files or interfaces |",
+        "| --- | --- | --- |",
+    ]
+    for change in closeout["changes"]:
+        paths = "<br>".join(f"`{path}`" for path in change["paths"])
+        lines.append(f"| `{change['name']}` | {_cell(change['result'])} | {paths} |")
+
+    lines += ["", "## Validation", ""]
+    for check in closeout["validation"]:
+        lines.append(
+            f"- **{_cell(check['scope'])}: {check['status']}.** {_cell(check['evidence'])}"
+        )
+
+    lines += [
+        "",
+        "## Documentation and Replanning",
+        "",
+        "| Document | Decision | Reason |",
+        "| --- | --- | --- |",
+    ]
+    for review in closeout["documentation_review"]:
+        lines.append(
+            f"| `{review['path']}` | `{review['decision']}` | {_cell(review['reason'])} |"
+        )
+
+    replanning = closeout["replanning"]
+    operator = replanning["operator_input"]
+    lines += [
+        "",
+        (f"Operator input: **{operator['status']}** — {_cell(operator['note'])}"),
+        "",
+        "| Priority | Candidate | Workflow | Why it remains |",
+        "| ---: | --- | --- | --- |",
+    ]
+    for candidate in sorted(
+        replanning["candidates"], key=lambda value: (value["priority"], value["bead"])
+    ):
+        lines.append(
+            f"| {candidate['priority']} | `{candidate['bead']}` "
+            f"| `{candidate['workflow']}` | {_cell(candidate['rationale'])} |"
+        )
+    selected = replanning["selected"]
+    lines += [
+        "",
+        (
+            f"**Selected next entry:** `{selected['bead']}` under "
+            f"`{selected['workflow']}` — {_cell(selected['rationale'])}"
+        ),
+        "",
+        "## Limits",
+        "",
+        (
+            f"This closeout reports only the claims and scopes recorded by "
+            f"`{agenda['id']}`. A continued or deferred item requires its named follow-up "
+            "and a fresh prospective contract where the original record is immutable."
+        ),
+        "",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def render_description(branch: str, agenda_id: str, session_id: str | None = None) -> str:
+    """The complete cost-first PR description for a terminal agenda."""
+    if session_id is not None:
+        # Validate the explicit Codex declaration without narrowing the PR's cumulative
+        # branch receipt to that one session.
+        render(branch, session_id)
+    return render(branch) + render_agenda_closeout(agenda_payload(agenda_id))
+
+
 def branches() -> list[str]:
     """Every branch any rollup has turns on, so `--check` exercises the real shapes."""
     found: set[str] = set()
@@ -487,6 +644,10 @@ def main(argv: list[str] | None = None) -> int:
         help="AgentSession that explicitly declares any Codex interval receipts",
     )
     parser.add_argument(
+        "--agenda",
+        help="terminal agenda whose checked W10 closeout follows the cost block",
+    )
+    parser.add_argument(
         "--check",
         action="store_true",
         help="render for every branch in the records without printing, as a smoke test",
@@ -502,8 +663,18 @@ def main(argv: list[str] | None = None) -> int:
             for name in checked_names:
                 render(name)
             render("a-branch-no-rollup-mentions")
+            for path in sorted(AGENDAS.glob("agenda-*.md")):
+                document = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])
+                agenda = document.get("agenda") if isinstance(document, dict) else None
+                if isinstance(agenda, dict) and isinstance(agenda.get("closeout"), dict):
+                    render_agenda_closeout(agenda)
         else:
-            rendered = render(args.branch or current_branch(), args.session)
+            branch = args.branch or current_branch()
+            rendered = (
+                render_description(branch, args.agenda, args.session)
+                if args.agenda
+                else render(branch, args.session)
+            )
     except ValueError as error:
         print(f"error: {error}", file=sys.stderr)
         return 1

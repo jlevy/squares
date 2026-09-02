@@ -21,6 +21,8 @@ $defs:
       - research-loop
       - pipeline-improvement
       - documentation-pass
+      - remediation
+      - review-planning-oversight
       - general-improvement
 required:
   - id

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+import subprocess
 from copy import deepcopy
 from pathlib import Path
 
@@ -412,3 +414,123 @@ def test_close_render_validates_branch_cost_before_writing_views(
     assert closer.main(["--render"]) == 1
     assert report_path.read_text(encoding="utf-8") == "old report\n"
     assert synopsis_path.read_text(encoding="utf-8") == "old synopsis\n"
+
+
+def test_agenda_closeout_renders_results_files_and_one_successor() -> None:
+    agenda = {
+        "id": "agenda-999",
+        "items": [
+            {
+                "id": "BC-999",
+                "outcomes": [
+                    {
+                        "scope": "finite search prefix",
+                        "classification": "time-limited",
+                        "result": "Seven rows agreed before the wall.",
+                        "evidence": ["Checkpoint retained seven agreeing rows."],
+                        "disposition": "continue",
+                        "follow_up": "think-next",
+                    }
+                ],
+            }
+        ],
+        "closeout": {
+            "changes": [
+                {
+                    "name": "guard-tool",
+                    "result": "Added one refusing guard.",
+                    "paths": ["packing/devtools/check_guard.py"],
+                }
+            ],
+            "validation": [
+                {"scope": "focused", "status": "passed", "evidence": "Three tests."}
+            ],
+            "documentation_review": [
+                {"path": "README.md", "decision": "updated", "reason": "New entry."}
+            ],
+            "replanning": {
+                "operator_input": {"status": "revised", "note": "Added W9."},
+                "candidates": [
+                    {
+                        "priority": 0,
+                        "bead": "think-next",
+                        "workflow": "research-loop",
+                        "rationale": "Continue the retained prefix.",
+                    }
+                ],
+                "selected": {
+                    "bead": "think-next",
+                    "workflow": "research-loop",
+                    "rationale": "Highest-ranked valid continuation.",
+                },
+            },
+        },
+    }
+
+    rendered = renderer.render_agenda_closeout(agenda)
+
+    assert "Seven rows agreed before the wall." in rendered
+    assert "`time-limited`" in rendered
+    assert "Checkpoint retained seven agreeing rows." in rendered
+    assert "`continue` via `think-next`" in rendered
+    assert "`packing/devtools/check_guard.py`" in rendered
+    assert "No completed bounded-negative search is claimed" in rendered
+    assert rendered.count("**Selected next entry:**") == 1
+
+
+def test_agenda_finalizer_bulk_checks_live_candidates(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[tuple[str, ...]] = []
+    agenda = {
+        "closeout": {
+            "replanning": {
+                "candidates": [
+                    {"bead": "think-next", "priority": 0},
+                    {"bead": "think-backlog", "priority": 1},
+                ],
+                "selected": {"bead": "think-next"},
+            }
+        }
+    }
+
+    def run(command: list[str], **_kwargs: object) -> subprocess.CompletedProcess[str]:
+        calls.append(tuple(command))
+        if command[:2] == ["tbd", "show"]:
+            output = json.dumps(
+                [
+                    {"displayId": "think-next", "status": "open", "priority": 0},
+                    {"displayId": "think-backlog", "status": "open", "priority": 1},
+                ]
+            )
+        elif command[:2] == ["tbd", "ready"]:
+            output = json.dumps([{"id": "think-next"}])
+        else:
+            output = ""
+        return subprocess.CompletedProcess(command, 0, stdout=output, stderr="")
+
+    monkeypatch.setattr(closer, "agenda_payload", lambda _agenda_id: agenda)
+    monkeypatch.setattr(closer.subprocess, "run", run)
+
+    closer.finalize_agenda_views("agenda-999")
+
+    show_calls = [call for call in calls if call[:2] == ("tbd", "show")]
+    assert show_calls == [("tbd", "show", "think-next", "think-backlog", "--json")]
+
+
+def test_close_main_reports_the_failed_finalizer_command(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    def fail(_options: object) -> int:
+        raise subprocess.CalledProcessError(
+            7,
+            ["tbd", "sync"],
+            stderr="live queue could not be synchronized",
+        )
+
+    monkeypatch.setattr(closer, "_run", fail)
+
+    assert closer.main([]) == 1
+    error = capsys.readouterr().err
+    assert "command failed with exit 7: tbd sync" in error
+    assert "live queue could not be synchronized" in error

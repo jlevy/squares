@@ -73,6 +73,18 @@ agenda:
       The terminal 170-of-181 agreeing prefix, ordinal-170 independent-started marker
       and absent canonical result route to the fresh think-5j8d continuation; exp-056
       itself remains stopped and never resumes.
+    outcomes:
+    - scope: exp-056 full 181-direction comparison
+      classification: time-limited
+      result: >-
+        The valid process retained 170 agreeing directions but did not reach all 181
+        or write a canonical result before the external ten-hour wall.
+      evidence:
+      - The checkpoint contains 170 of 181 directions with exact agreement.
+      - The progress marker stops at ordinal 170 in independent_started state.
+      - The canonical result path is absent.
+      disposition: continue
+      follow_up: think-5j8d
   - id: BC-138
     purpose: tool_validation
     owner_focus: correctness
@@ -112,6 +124,17 @@ agenda:
       Exp-057 remains invalid: the literal printed-rational point survives, but the two
       six-decimal models lack retained provenance. No source or network access occurred;
       think-lvqx owns any prospective literal-only route.
+    outcomes:
+    - scope: exp-057 three-model side-semantics binding
+      classification: guard-refused
+      result: >-
+        The provenance guard admitted only the literal printed-rational point and
+        correctly refused both six-decimal models, so no n = 68 search result exists.
+      evidence:
+      - The retained record names the missing provenance for nearest-6 and truncate-6.
+      - No source or network access occurred and H-058 remains unmeasured.
+      disposition: defer-dependency
+      follow_up: think-lvqx
   - id: BC-139
     purpose: research
     owner_focus: correctness
@@ -150,6 +173,17 @@ agenda:
       The row never opened because BC-138 did not earn readmission. No source, network,
       adapter or result path was opened, and any later route must begin from a new
       preregistration rather than this stopped item.
+    outcomes:
+    - scope: n = 68 one-parent localization
+      classification: never-opened
+      result: >-
+        Upstream provenance readmission did not clear, so the source retrieval,
+        localization, proof, and result stages were never authorized.
+      evidence:
+      - BC-138 did not satisfy BC-139's entry condition.
+      - No source, network, adapter, localization, or result path was opened.
+      disposition: defer-dependency
+      follow_up: think-lvqx
   - id: BC-140
     purpose: tool_validation
     owner_focus: process
@@ -189,6 +223,25 @@ agenda:
       The n = 54 audit and normalization controls were admitted. The module-aware
       declared-bound checker discovers 24 bounds and names all 14 n = 54 caps; eight
       allowlisted bounds still require real refusal controls under think-ifgr.
+    outcomes:
+    - scope: n = 54 audit and instrument-normalization guards
+      classification: achieved
+      result: >-
+        Both guard tools and their rejecting mutations were admitted and retained.
+      evidence:
+      - The n = 54 formula audit has named basis and minimal-polynomial mutations.
+      - The normalization check has positive and rejecting controls.
+      disposition: retire-success
+      follow_up: null
+    - scope: repository-wide declared-bound refusal coverage
+      classification: guard-refused
+      result: >-
+        The checker finds 24 declared bounds and names every n = 54 cap, but eight
+        allowlisted bounds still lack real bound-exceeding refusal controls.
+      evidence:
+      - The current declared-bound report identifies the eight allowlisted gaps.
+      disposition: defer-dependency
+      follow_up: think-ifgr
   - id: BC-141
     purpose: tool_validation
     owner_focus: correctness
@@ -234,6 +287,17 @@ agenda:
       reusable instrumentation. The frozen packet passes 79 tests and the current n =
       54 pair passes 80; H-055 remains instrument-unready without a live source or
       geometry evidence.
+    outcomes:
+    - scope: synthetic n = 54 parser and labeled-correspondence contract
+      classification: achieved
+      result: >-
+        The target-blind synthetic contract, verifier, and rejecting mutations passed
+        independent review at their declared instrumentation scope.
+      evidence:
+      - The frozen review packet passed 79 tests and the current pair passes 80.
+      - No live source, geometry, optimality, or bound claim was attempted.
+      disposition: retire-success
+      follow_up: null
   - id: BC-142
     purpose: tool_validation
     owner_focus: efficiency
@@ -265,6 +329,24 @@ agenda:
       The partial map selects 13 of 115 tests, but lacks a refusable exact-set oracle.
       Think-mo7r owns that missing equivalence control; no efficiency admission follows
       from this stopped item.
+    outcomes:
+    - scope: benchmark-root selection smoke
+      classification: achieved
+      result: >-
+        The partial map selects 13 of 115 tests for the exercised root.
+      evidence:
+      - The retained selection receipt reports the 13-of-115 subset.
+      disposition: retire-success
+      follow_up: null
+    - scope: exact reachable-set equivalence
+      classification: guard-refused
+      result: >-
+        The block did not earn its full exit because no independent exact-set oracle
+        can yet refuse an incomplete selection.
+      evidence:
+      - The synthesis records the missing equivalence control and withholds admission.
+      disposition: defer-dependency
+      follow_up: think-mo7r
   - id: BC-143
     purpose: measurement_validation
     owner_focus: process
@@ -300,6 +382,25 @@ agenda:
       The first-wave freeze is d15e96c8, its W5 receipt is a typed no-change, BC-139
       stayed closed, BC-141 opened and the still-growing BC-137 process continued to
       the fixed second-wave boundary.
+    outcomes:
+    - scope: first-wave freeze and routing
+      classification: achieved
+      result: >-
+        The evidence revision, lane states, routing decisions, and first PR checkpoint
+        were frozen as declared.
+      evidence:
+      - Revision d15e96c8 records the wave-one boundary and routes BC-141 only.
+      disposition: retire-success
+      follow_up: null
+    - scope: first-wave efficiency comparison
+      classification: guard-refused
+      result: >-
+        The renderer refused to turn incomparable receipt surfaces into an efficiency
+        verdict, so the correct result is a typed no-change rather than a null effect.
+      evidence:
+      - The W5 review records the mixed-harness and shared-parent comparability limits.
+      disposition: defer-dependency
+      follow_up: think-mlwo
   - id: BC-144
     purpose: measurement_validation
     owner_focus: process
@@ -332,6 +433,25 @@ agenda:
     next_evidence: >-
       Evidence revision 313624cc stopped every writer, retained a second typed W5
       no-change and froze the three immutable review packets used by BC-145.
+    outcomes:
+    - scope: second-wave terminal freeze and review packets
+      classification: achieved
+      result: >-
+        Every writer stopped at the boundary and three immutable packets were retained
+        for independent review.
+      evidence:
+      - Revision 313624cc owns the terminal lane states and packet hashes.
+      disposition: retire-success
+      follow_up: null
+    - scope: second-wave efficiency comparison
+      classification: guard-refused
+      result: >-
+        The receipt surfaces again failed the predeclared comparability guards, so no
+        efficiency direction was inferred.
+      evidence:
+      - The second-wave W5 review records a typed no-change and its refusal reason.
+      disposition: defer-dependency
+      follow_up: think-mlwo
   - id: BC-145
     purpose: measurement_validation
     owner_focus: correctness
@@ -366,6 +486,17 @@ agenda:
       Three fresh Max reviews passed and were reconciled at 162d0bea. Only exp-056 and
       exp-057 cleared needs_review; no result, hypothesis, instrument, bound, frontier
       or route changed.
+    outcomes:
+    - scope: independent review of the three frozen packets
+      classification: achieved
+      result: >-
+        Three fresh Max reviews reproduced the permitted packet claims and authorized
+        only the exp-056 and exp-057 review-flag clears.
+      evidence:
+      - Reconciliation revision 162d0bea retains all three determinations.
+      - No scientific decision, instrument, bound, frontier fact, or route changed.
+      disposition: retire-success
+      follow_up: null
   - id: BC-146
     purpose: research
     owner_focus: process
@@ -401,6 +532,138 @@ agenda:
       BC-146 stopped at the hard wall. Post-wall work repairs the publication guards,
       validates and pushes the exact tree, and requires PR #75's current head to be
       hosted-green before think-5j8d becomes the next scientific entry.
+    outcomes:
+    - scope: publication at the ten-hour wall
+      classification: technical-failure
+      result: >-
+        The scientific record was frozen, but Ruff and publication-guard defects kept
+        the wall-time tree from passing the required local and hosted gates.
+      evidence:
+      - The terminal synthesis records the exact failed checks at 15:03Z.
+      disposition: fix-and-rerun
+      follow_up: think-8epx
+    - scope: post-wall publication repair
+      classification: achieved
+      result: >-
+        The guard defects were repaired, the exact tree passed the full local gate,
+        and all three hosted checks passed without changing a scientific artifact.
+      evidence:
+      - The full local gate passed 58 steps, 1,454 fast tests, 25 exhaustive tests, and 151 controls.
+      - Hosted validate, macos-portability, and packing-required passed at 44f2252.
+      disposition: retire-success
+      follow_up: null
+  closeout:
+    documentation_review:
+    - path: README.md
+      decision: updated
+      reason: >-
+        Adds W9 and W10 and makes post-agenda reconciliation visible at the repository
+        entry point.
+    - path: SYNOPSIS.md
+      decision: updated
+      reason: >-
+        Records the two new workflow contracts, the Agenda 015 result classes, and the
+        reprioritized handoff.
+    - path: TUTORIAL.md
+      decision: checked-current
+      reason: >-
+        The tutorial teaches packing and verification rather than workflow selection;
+        Agenda 015 changed no tutorial claim or command.
+    - path: conventions.md
+      decision: updated
+      reason: >-
+        Assigns remediation and oversight to their workflow owners and keeps W8 limited
+        to documentation reconciliation.
+    - path: development.md
+      decision: updated
+      reason: >-
+        Documents the generated PR closeout command used at a terminal agenda boundary.
+    - path: operating-rules.md
+      decision: updated
+      reason: >-
+        Extends OR-9 from cost-only reporting and adds the mandatory W10 disposition and
+        reprioritization boundary as OR-11.
+    changes:
+    - name: agenda015-research-record
+      result: >-
+        Retained the 170-of-181 n = 17 checkpoint, the n = 68 provenance refusal, and
+        the reviewed synthetic n = 54 contract without promoting a mathematical claim.
+      paths:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-056-h-052-n17-sequential-larger-prefix.md
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md
+      - packing/cases/n54_source_contract/contract.py
+      - packing/cases/n54_source_contract/verify.py
+    - name: publication-guard-repairs
+      result: >-
+        Made declared-bound discovery module-aware and corrected the terminal-session
+        handoff selector and their rejecting controls.
+      paths:
+      - packing/devtools/check_declared_bounds.py
+      - packing/devtools/check_synopsis.py
+      - packing/tests/test_check_declared_bounds.py
+      - packing/tests/test_synopsis_handoff.py
+    - name: post-agenda-discipline
+      result: >-
+        Adds typed outcome, disposition, documentation-review, and replanning records;
+        first-class W9 and W10 workflows; and PR templates that report results and files.
+      paths:
+      - operating-rules.md
+      - packing/campaign/schemas/agenda.schema.yaml
+      - packing/campaign/remediation-pass.md
+      - packing/campaign/review-planning-oversight.md
+      - .github/PULL_REQUEST_TEMPLATE.md
+    validation:
+    - scope: local-full-gate
+      status: passed
+      evidence: >-
+        The W10 closeout tree passed all 58 steps in 723.07 seconds: 1,462 fast tests,
+        25 exhaustive tests, and 153 negative controls.
+    - scope: hosted-pr-gates
+      status: passed
+      evidence: >-
+        PR #75 passed validate, macos-portability, and packing-required at 44f2252.
+    replanning:
+      candidates:
+      - bead: think-5j8d
+        workflow: research-loop
+        priority: 0
+        rationale: >-
+          Continue exp-056 prospectively from its exact 170-row checkpoint; this is the
+          only time-limited scientific lane with an admitted continuation.
+      - bead: think-cyko
+        workflow: remediation
+        priority: 1
+        rationale: >-
+          Triage and repair the 56 open defects in bounded risk-ranked waves, returning
+          each wave through W10.
+      - bead: think-lvqx
+        workflow: research-loop
+        priority: 2
+        rationale: >-
+          A new literal-only n = 68 route must be preregistered before source access.
+      - bead: think-ifgr
+        workflow: pipeline-improvement
+        priority: 2
+        rationale: Replace eight declared-bound allowlists with real refusing controls.
+      - bead: think-mo7r
+        workflow: pipeline-improvement
+        priority: 2
+        rationale: Add the independent reachable-test exact-set oracle BC-142 lacked.
+      - bead: think-mlwo
+        workflow: efficiency-loop
+        priority: 3
+        rationale: Make future cross-wave efficiency receipts genuinely comparable.
+      selected:
+        bead: think-5j8d
+        workflow: research-loop
+        rationale: >-
+          Preserve the existing exact scientific handoff while adding W9 to the ranked
+          candidate set; W10 or the operator may reprioritize before execution.
+      operator_input:
+        status: revised
+        note: >-
+          The operator added W9 remediation and W10 oversight and required explicit
+          post-agenda disposition and replanning, but did not displace think-5j8d.
 ---
 # Agenda-015 — Ten-Hour Earned Routes and Guard Repairs
 

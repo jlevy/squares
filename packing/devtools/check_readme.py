@@ -20,7 +20,7 @@ Five checks:
    lists six; both must match what is in `docs/project/research/`.
 4. **The defect summary is derived.** README may state whether the gate has caught a
    soundness defect, but may not repeat a numeric aggregate owned by `defects.yaml`.
-5. **The work model agrees.** README and SYNOPSIS must expose the same seven numbered
+5. **The work model agrees.** README and SYNOPSIS must expose the same numbered
    workflow entry points, the agent-session schema must be able to record them, and the
    synopsis must define the work units those workflows produce.
 
@@ -83,10 +83,10 @@ _SPELLED = {
 }
 
 
-#: W1 through W8. Bumping this is the deliberate half of adding a workflow; the other
+#: W1 through W10. Bumping this is the deliberate half of adding a workflow; the other
 #: half is the two orientation tables in README.md and SYNOPSIS.md, which this check
 #: compares against the schema rather than against each other.
-EXPECTED_NUMBERED_WORKFLOWS = 8
+EXPECTED_NUMBERED_WORKFLOWS = 10
 
 
 def layout_tree(text: str) -> str | None:

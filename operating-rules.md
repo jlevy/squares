@@ -121,7 +121,7 @@ is never the queue.
 
 ## OR-5: Declare the workflow entry point before beginning
 
-Independently tracked work picks W1–W8 from
+Independently tracked work picks W1–W10 from
 [`README.md`](README.md#workflow-entry-points) before the session or phase starts, with
 `general-improvement` reserved for maintenance outside those workflows.
 Bounded delegated work inherits the parent phase unless it opens its own tracked
@@ -224,6 +224,18 @@ Added 2026-08-31 at the owner’s request, during the session that opened
 This is `OR-1` applied to the reviewer rather than to the researcher: a measurement that
 exists and is not reported is the same waste as one taken and thrown away.
 
+**Cost is the opening, not the whole account.** After the generated cost block, an
+agenda PR reports actual results at their honest scope, including an explicit statement
+when no mathematical result was obtained.
+Every stopped or incomplete block says whether it was a completed bounded-negative
+search, time-limited work, a correct guard refusal, a technical failure, never opened,
+or inconclusive. It then gives the actionable disposition — continue, fix and rerun,
+retire as success, retire as a bounded negative, or defer to a named dependency — and
+groups concrete file and interface changes by purpose.
+Validation, documentation decisions, limitations, ranked follow-up candidates, and the
+one selected next entry follow.
+Agenda chronology may support that account; it may not stand in for it.
+
 ## OR-10: Treat matched agent and host handoffs as continuation, not a reset
 
 An interrupted session may move between Claude and Codex, or between Linux and macOS,
@@ -256,6 +268,39 @@ all exact guards still matched.
 The owner had to clarify that the matched handoff was part of the same autonomous
 session. The rule makes that continuity the default and keeps the exception where it
 belongs: in the measurement contract, not in the harness name.
+
+## OR-11: Close an agenda through disposition and reprioritization
+
+A terminal clock does not finish the follow-up work.
+Before another candidate agenda starts, W10
+[review/planning/oversight](packing/campaign/review-planning-oversight.md) closes the
+one that just ran:
+
+1. every agenda item is terminal and every attempted scope has an outcome, stop-reason
+   classification, evidence, disposition, and named follow-up when one remains;
+2. generated views are refreshed, `SYNOPSIS.md` is reconciled, and README, tutorial,
+   conventions, operating rules, and development guidance each receive an explicit
+   update-or-current decision;
+3. live tbd status and priority are reconciled, retained candidates are ranked, and
+   operator input is recorded as confirmed, revised, or unavailable; and
+4. exactly one next entry is selected and published without being executed inside the
+   closeout.
+
+The mechanical steps run without waiting for an operator.
+Operator input can change the ranking or contribute new candidates before execution, but
+its absence does not excuse stale views, undocumented files, missing dispositions, or an
+unselected handoff. If the review exposes a defect backlog, W9 owns bounded remediation
+waves; if it exposes substantive reader-facing drift, W8 owns the documentation pass.
+
+[Agenda 015](packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md)
+paid for the rule. Its ten-hour wall closed with useful tools and reviews, one
+time-limited exact search, several correct guard refusals, a never-opened fallback, and
+a technical publication failure, but the PR initially reduced that outcome to cost and
+agenda completion.
+The operator then had to ask what actually changed, why the scientific
+work did not complete, whether each block should continue, and what had been
+reprioritized. Those are not optional questions after the run; W10 makes them the
+closeout product.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

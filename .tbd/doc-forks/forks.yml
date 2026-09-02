@@ -1,0 +1,13 @@
+forks:
+  - name: create-or-update-pr-simple
+    kind: shortcut
+    path: docs/tbd/shortcuts/create-or-update-pr-simple.md
+    source: internal:shortcuts/standard/create-or-update-pr-simple.md
+    base_hash: sha256:1f75ef02836f499957484dfe3fa38e1477496022825e9eebd4dfb6807193e4bb
+    tbd_version: 0.8.1
+  - name: create-or-update-pr-with-validation-plan
+    kind: shortcut
+    path: docs/tbd/shortcuts/create-or-update-pr-with-validation-plan.md
+    source: internal:shortcuts/standard/create-or-update-pr-with-validation-plan.md
+    base_hash: sha256:1277f9c287fa1f69113c56fee8a5ae32cf2652134f2e10de983001138638966e
+    tbd_version: 0.8.1

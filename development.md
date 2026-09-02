@@ -223,8 +223,8 @@ implementation of either check.
 
 ### Every pull request carries what it cost
 
-Open or update a pull request and the description leads with the branch’s cost,
-generated rather than written:
+Open or update a pull request and the description leads with the branch’s cost, then
+reports the checked agenda closeout when the branch completed one:
 
 ```bash
 uv run --frozen --all-extras --group dev python -m devtools.render_pr_rollup
@@ -235,6 +235,17 @@ and the tokens behind them — for the checked-out branch, or for `--branch <nam
 it at the top of the description.
 A reviewer can see what changed and otherwise cannot see what it took, and that number
 has existed in `campaign/resource-usage/` the whole time.
+For an agenda closeout, pass `--agenda agenda-NNN`; for a Codex session, also pass
+`--session session-NNN`. The combined rendering preserves the cost block first, then
+adds actual outcomes and stop reasons, dispositions, grouped file changes, validation,
+documentation decisions, limits, ranked candidates, and the selected successor.
+The final session command performs the generated-view and live-tbd reconciliation before
+printing the same description:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.close_session \
+  --render --session session-NNN --agenda agenda-NNN
+```
 
 **The attribution is a bound and the block says so.** `turns.by_branch` is the only
 branch-aware field in `ClaudeEfficiencyRollup`, so a log that ran on more than one

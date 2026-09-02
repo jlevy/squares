@@ -4,7 +4,7 @@ These are escalation artifacts for the outer autonomous work loop.
 An agent session is one bounded interval of orchestrated work, not a campaign, series,
 experiment, or solver run.
 The [synopsis](../../../SYNOPSIS.md#work-units-and-records) owns those definitions; the
-[workflow contracts](../../../SYNOPSIS.md#workflow-entry-contracts) own W1–W8.
+[workflow contracts](../../../SYNOPSIS.md#workflow-entry-contracts) own W1–W10.
 
 Session records complement, and do not replace, the scientific record:
 
@@ -53,8 +53,8 @@ Before escalated work starts, record:
 
 - the overall session goal, offset-aware start and hard deadline, wall budget, cycle
   cap, finalization reserve, and stop conditions;
-- the first phase’s workflow, chosen from W1–W8, with `general-improvement` reserved for
-  genuine repository maintenance outside those workflows;
+- the first phase’s workflow, chosen from W1–W10, with `general-improvement` reserved
+  for genuine repository maintenance outside those workflows;
 - the phase’s primary focus, objective, clock role, expected output, validation command,
   kill condition, fallback, start, and deadline; and
 - the next action if the phase succeeds, stops, or blocks.
@@ -221,12 +221,15 @@ sees:
 
 ```shell
 uv run --frozen --all-extras --group dev python -m devtools.close_session \
-  --render --session <session-id>
+  --render --session <session-id> --agenda <agenda-id>
 ```
 
 It rewrites [`session-close-report.yaml`](../session-close-report.yaml) and the
-`## Sessions Conducted` block in [`SYNOPSIS.md`](../../../SYNOPSIS.md), then prints the
-branch cost block for the pull request.
+`## Sessions Conducted` block in [`SYNOPSIS.md`](../../../SYNOPSIS.md), checks the
+agenda’s W10 outcome and disposition record, refreshes the agenda and document views,
+syncs and verifies the selected live tbd entry, then prints the complete pull-request
+description: branch cost first, followed by results, changes, validation, documentation,
+replanning, and limits.
 **Run it before opening or updating the PR, and lead the description with what it
 prints** — that is `OR-9`, and the ordering is not a preference: the block is a function
 of the rollups, so it is wrong until step one is done.

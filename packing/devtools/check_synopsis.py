@@ -415,6 +415,18 @@ def load_agenda_items(paths: Iterable[Path]) -> list[dict]:
     return [item for path in sorted(paths) for item in front(path)["agenda"].get("items", [])]
 
 
+def select_latest_closeout(paths: Iterable[Path]) -> tuple[Path, dict] | None:
+    """Select the newest terminal agenda carrying a W10 closeout."""
+    records = []
+    for path in paths:
+        agenda = front(path)["agenda"]
+        if agenda.get("status") in {"completed", "superseded"} and agenda.get("closeout"):
+            records.append((path, agenda["closeout"]))
+    if not records:
+        return None
+    return max(records, key=lambda record: int(record[0].stem.split("-", 2)[1]))
+
+
 def check_current_handoff(text: str) -> list[str]:
     """The cold-start path names the latest terminal session and next entry."""
     section = re.search(
@@ -445,6 +457,26 @@ def check_current_handoff(text: str) -> list[str]:
 
     problems: list[str] = []
     body = section.group("body")
+    closeout_record = select_latest_closeout(AGENDAS.glob("agenda-*.md"))
+    if closeout_record is not None:
+        closeout_path, closeout = closeout_record
+        selected = closeout["replanning"]["selected"]
+        if selected["bead"] != expected_bead:
+            problems.append(
+                f"{closeout_path.name}: selected bead {selected['bead']} disagrees with "
+                f"latest terminal session bead {expected_bead}"
+            )
+
+    selected_markers = re.findall(
+        r"^\*\*Selected next entry:\*\* `(?P<bead>think-[a-z0-9]+)`",
+        body,
+        re.M,
+    )
+    if selected_markers != [expected_bead]:
+        problems.append(
+            "SYNOPSIS.md: Current Handoff must contain exactly one canonical "
+            f"Selected next entry marker for {expected_bead}; found {selected_markers}"
+        )
     session_target = f"campaign/agent-sessions/{latest_path.name}"
     if session_target not in body:
         problems.append(f"SYNOPSIS.md: Current Handoff does not point to latest {latest['id']}")

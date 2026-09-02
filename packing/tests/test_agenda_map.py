@@ -212,3 +212,24 @@ def test_a_blocked_cell_whose_edges_all_cleared_must_say_why() -> None:
 
     speaking = replace(stalled, blocked_on="A review decision nobody has taken.")
     assert violations([done, speaking]) == []
+
+
+def test_terminal_agenda_refuses_nonterminal_items() -> None:
+    terminal = Commitment(
+        agenda="agenda-999",
+        agenda_status="completed",
+        doc="agenda-999-test.md",
+        id="BC-999",
+        state="ready",
+        priority=0,
+        purpose="research",
+        owner_focus="process",
+        question="A terminal-agenda contradiction.",
+        bead="think-test",
+        depends_on=(),
+        blocked_on="",
+        discharged_by="",
+    )
+
+    assert any("terminal agenda" in problem for problem in violations([terminal]))
+    assert violations([replace(terminal, state="stopped")]) == []

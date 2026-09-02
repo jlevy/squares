@@ -92,7 +92,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 - `ready` — may be taken now
 - `tentative` — declared but not yet committed to
 - `blocked` — waiting on a named predecessor
-- `stopped` — not run here; the agenda says why, and `discharged_by` names where it moved
+- `stopped` — ended without meeting the full exit; the agenda outcome says why and what follows
 - `complete` — discharged
 
 <!-- This document follows common-doc-guidelines.md.

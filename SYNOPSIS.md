@@ -155,6 +155,8 @@ case or experiment separately.
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign — W6 Runbook](packing/campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
 | [The W8 Documentation Pass — Runbook](packing/campaign/documentation-pass.md) | W8 documentation reconciliation | definitive | maintained | — |
+| [W9 Remediation Pass](packing/campaign/remediation-pass.md) | W6 experiment mechanics | definitive | maintained | — |
+| [W10 Review, Planning, and Oversight](packing/campaign/review-planning-oversight.md) | W6 experiment mechanics | definitive | maintained | — |
 | [Agent Sessions](packing/campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
 | [Research Loop Logbook](packing/campaign/research-loop-logbook/README.md) | reader-facing research-run summaries | definitive | maintained | — |
 | [Resource Usage](packing/campaign/resource-usage/README.md) | component scope and use | definitive | maintained | — |
@@ -219,6 +221,8 @@ case or experiment separately.
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
 | [Spike: Interactive `n = 5` Motion Lab](docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md) | implementation plan | record | retained | — |
 | [Feature: Generalized Square-Packing Motion Lab](docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md) | implementation plan | current | transient | — |
+| [create-or-update-pr-simple.md](docs/tbd/shortcuts/create-or-update-pr-simple.md) | component scope and use | definitive | maintained | — |
+| [create-or-update-pr-with-validation-plan.md](docs/tbd/shortcuts/create-or-update-pr-with-validation-plan.md) | component scope and use | definitive | maintained | — |
 | `packing/frontier/n-*.md` | typed case claim register | definitive | maintained | — |
 | `packing/campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `packing/campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
@@ -273,6 +277,8 @@ routine task.
 | W6 | `research-loop` | A registered hypothesis, fixed criterion, regime, budget, stop rule, and instrument contract | Build or repair the bounded instrument, freeze it before measurement, then use creative effort inside the registered scope to execute the smallest fair test; never change the criterion, suppress a failure, or improvise a replacement hypothesis mid-round | Frozen instrument, `exp-NNN`, raw data or proof record, verdict, regenerated views, and the next bounded question | W2 before promoted or high-risk claims; otherwise W3 or another W6 slice |
 | W7 | `pipeline-improvement` | Named packing-research consumers, the smallest reusable capability or cleanup they need, controls or an independent oracle, a budget, and expected comparability impact | Add, strengthen, simplify, or repair only the bounded packing pipeline surface; do not collect a target verdict while it is mutable, optimize an unchanged implementation without a W5 baseline, or generalize beyond named consumers | Code, entry point or refactor; replayable positive and negative controls; exact validation command; cost and complexity receipt; evidence limits; and a readiness or retained-blocker decision | W2 before a new or materially changed trust boundary reaches W6; W5 if measured throughput remains the blocker; otherwise W6 |
 | W8 | `documentation-pass` | A period of research that closed several commitments, the artifacts it left, and the reader-facing documents that have not caught up | Reconcile the root tier — README, tutorial, synopsis, and the conventions they cite — against the artifacts and against each other; correct, cut, reorder and clarify, but never introduce a claim the record does not already carry, and never soften a claim boundary to make a document read better | A checklist run over each root document, every drift either fixed or filed as a defect, generated views regenerated, and an explicit statement of what was checked and what was left | W2 for any claim the pass could not verify against an artifact; otherwise the next owning workflow |
+| W9 | `remediation` | A confirmed defect or issue inventory, risk ordering, owning beads, and a bounded repair wave | Triage and repair defects systematically without changing scientific criteria or hiding unresolved evidence; group only compatible work and preserve each item’s independent disposition | Fixed items with regressions, contained items with evidence, rerouted evidence work, explicit blockers, regenerated defect views, and validation receipts | W10 reviews the wave and selects what follows |
+| W10 | `review-planning-oversight` | A terminal agenda or session, its artifacts and receipts, live tbd state, and the documents it may have changed | Classify every attempted block, reconcile results and files, review document impact, reprioritize candidates, and select one next entry; do not execute that successor inside the closeout | Per-block outcomes and stop reasons, actionable dispositions, documentation decisions, grouped changes, validation, ranked candidates, operator status, and one selected next entry | The selected owning workflow, often W9 for backlog repair or W8 for substantive documentation drift |
 
 Implementation is an action inside the workflow that owns its promised result, not an
 undefined handoff: W1 and W2 can make bounded research corrections, W3 can implement a
@@ -294,8 +300,18 @@ Schedule it after a run that closed several commitments rather than continuously
 documents are meant to trail the record slightly, and a pass with nothing to reconcile
 is a pass that should not have been opened.
 
+W9 owns bounded repair waves over confirmed defects and issues.
+It does not turn a large backlog into one undifferentiated implementation phase: risk is
+ordered first, compatible defects are batched only when they share a trust surface, and
+every selected item exits fixed, contained, rerouted, blocked, or obsolete.
+W10 owns the closeout after an agenda or remediation wave.
+Its documentation review is a mandatory impact check over the root documents; W8 is the
+separate substantive reconciliation workflow when that check finds real drift.
+W10 completes the mechanical reconciliation and records one selected successor, but it
+does not start that successor.
+
 `general-improvement` remains only for repository maintenance outside the packing
-pipeline whose output fits none of W1–W8. It must not hide core work or a session
+pipeline whose output fits none of W1–W10. It must not hide core work or a session
 alternating among research, review, and infrastructure; those are separate phases.
 
 ### Switching Workflows in One Session
@@ -328,6 +344,9 @@ W4 process-review ──> W7 pipeline-improvement ──> W2 ──> W6 research
         │                    │                              │
         └─ accepted repair ──┘        W5 efficiency-loop ──┘
                          promoted/high-risk result ──> W2 ──> W3
+
+W1–W9 terminal work ──> W10 review/planning/oversight ──> one selected workflow
+confirmed defect wave ──> W9 remediation ────────────────┘
 ```
 
 At any checkpoint, the human operator may choose the next phase, narrow the question, or
@@ -345,6 +364,14 @@ failed only Ruff formatting; no agenda-015 publication revision was pushed insid
 wall. Later formatting, independent audits and validation are recorded separately as
 post-wall publication remediation and do not change the historical phase states or
 times.
+
+Agenda 015’s W10 closeout makes the stop reasons and follow-ups explicit.
+It found no new mathematical result and no completed bounded-negative search.
+Exp-056 was time-limited and continues only as the fresh `think-5j8d` round; exp-057 and
+the full bound, equivalence, and W5 comparisons were correctly guard-refused and defer
+to their named dependencies; BC-139 never opened; the synthetic contract, narrow smoke
+tests, typed freezes, and independent reviews achieved their declared scopes; and the
+BC-146 publication failure was technical, then fixed and rerun after the wall.
 
 The retained scientific outcomes are narrower than the work completed:
 
@@ -370,11 +397,14 @@ hypothesis, instrument, bound, frontier fact or route changed.
 Post-wall review also repaired a module-collision defect in the declared-bound evidence
 checker without changing the n = 54 contract or verifier implementations.
 
-The next scientific entry is **`think-5j8d`**, a freshly preregistered n = 17
-continuation from the retained exp-056 chain.
+**Selected next entry:** `think-5j8d`, a freshly preregistered n = 17 continuation from
+the retained exp-056 chain.
 It stays gated until PR #75’s current head is hosted-green.
 Exp-056 itself never resumes, and an all-direction agreement would still require the
 separate adoption gate before any bound or frontier change.
+The W9 candidate `think-cyko` is ranked next for systematic waves over the 56 open
+defects (35 outstanding and 21 contained); it does not displace the selected P0
+scientific handoff without another W10 or operator reprioritization.
 
 ### Handoff Record
 
@@ -2605,7 +2635,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-073.yaml` | session-072, session-073 | 279 | 1.81 h | 1.81 h | 1.81 h | yes |
 | `codex-task-tree-session-074.yaml` | session-072, session-074 | 272 | 1.58 h | 1.58 h | 1.9 h | yes |
 | `codex-task-tree-session-075.yaml` | session-072, session-075 | 212 | 1.41 h | 1.41 h | 1.75 h | no |
-| `codex-task-tree-session-078.yaml` | session-078, session-082 | 2,170 | 12.14 h | 8.48 h | 9.02 h | yes |
+| `codex-task-tree-session-078.yaml` | session-078, session-082 | 2,401 | 13.41 h | 9.45 h | 10.0 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
@@ -2972,9 +3002,12 @@ test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
-Two entries are currently `outstanding` rather than fixed.
+The generated log currently has 56 open entries: 35 `outstanding` and 21 `contained`.
+The W9 candidate `think-cyko` owns their systematic risk ordering and bounded repair
+waves; the synopsis names the cases that matter to current claims rather than pretending
+the examples below are the whole backlog.
 [D-406](defects.md) waits on the enumeration repricing X-010 filed.
-The older one is worth naming because refusing was the whole of the available fix:
+One older entry is worth naming because refusing was the whole of the available fix:
 [D-391](defects.md) is the first-order rigidity assessor intersecting a tangent cone
 that is a union: two squares meeting at a single corner are held apart by two axes, and
 non-overlap asks that *either* keep separating, so the linearized feasible set is a

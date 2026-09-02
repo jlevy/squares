@@ -13,6 +13,7 @@ from devtools.check_synopsis import (
     load_agenda_items,
     select_handoff_cell,
     select_handoff_target,
+    select_latest_closeout,
     select_latest_terminal_session,
     session_handoff_key,
 )
@@ -87,6 +88,29 @@ def test_latest_handoff_ignores_live_session_with_later_deadline() -> None:
             (Path("session-083-live.md"), live),
         ]
     ) == (Path("session-078-terminal.md"), terminal)
+
+
+def test_latest_closeout_uses_newest_terminal_agenda(tmp_path: Path) -> None:
+    for number, status, with_closeout in (
+        (14, "completed", True),
+        (15, "completed", True),
+        (16, "active", True),
+    ):
+        closeout = (
+            "\n  closeout:\n    replanning:\n      selected:\n        bead: think-next"
+            if with_closeout
+            else ""
+        )
+        (tmp_path / f"agenda-{number:03}.md").write_text(
+            f"---\nagenda:\n  status: {status}{closeout}\n---\n",
+            encoding="utf-8",
+        )
+
+    selected = select_latest_closeout(tmp_path.glob("agenda-*.md"))
+
+    assert selected is not None
+    assert selected[0].name == "agenda-015.md"
+    assert selected[1]["replanning"]["selected"]["bead"] == "think-next"
 
 
 def test_unprotected_fix_claims_rejects_stale_duplicate() -> None:

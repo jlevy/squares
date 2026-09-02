@@ -1167,10 +1167,10 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-078.yaml
-    model_responses: 2170
-    agent_hours: 12.14
-    active_union_hours: 8.48
-    wall_hours: 9.02
+    model_responses: 2401
+    agent_hours: 13.41
+    active_union_hours: 9.45
+    wall_hours: 10.0
     snapshot_incomplete: true
 - id: session-079
   title: "BC-137 n = 17 sequential larger prefix"
@@ -1229,8 +1229,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-078.yaml
-    model_responses: 2170
-    agent_hours: 12.14
-    active_union_hours: 8.48
-    wall_hours: 9.02
+    model_responses: 2401
+    agent_hours: 13.41
+    active_union_hours: 9.45
+    wall_hours: 10.0
     snapshot_incomplete: true
