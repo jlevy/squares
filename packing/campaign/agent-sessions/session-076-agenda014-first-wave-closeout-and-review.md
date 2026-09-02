@@ -139,7 +139,7 @@ session:
       boundary. Dispatch no second-wave agent and open no target.
     commitment: BC-128
     bead: think-8ih6
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       BC-127 is terminal with a recorded no-change decision.
@@ -158,11 +158,62 @@ session:
     fallback: >-
       Freeze the packets that are exact, leave the rest review-pending behind a typed
       continuation, and record why.
+    outcome: >-
+      Artifact: docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md
+      frozen at packet commit e9c92091 on evidence revision 1e175108, with the agenda
+      rows BC-128--BC-131 updated. Result: BC-129 stopped (no paired sample, the 2.8x
+      condition never held, sequential resumable wall priced at about 5.6 hours);
+      BC-130 a conditional candidate needing an exp-054 pass and a separate
+      side-semantics preregistration; BC-131 stopped with the source refusal retained
+      behind the n = 54 negative-control and frozen-input repairs; BC-125 earns no
+      branch. Three packets carry exp-053, exp-054 and exp-055 with exact hashes,
+      declared absences, safe commands, one required mutation each and the unchanged
+      claim boundary; n = 54 has no packet because BC-126 produced no experiment
+      decision. Guard: no second-wave agent was dispatched, no target, network or
+      source command was named as safe, and no hypothesis field or review flag
+      changed. Next: dispatch three fresh reviewers, one packet each.
+    evidence:
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md
+    - packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md
+    stop_reason: >-
+      Three packets and one routing decision per lane are frozen at a passing record
+      gate.
+    next_action: >-
+      Dispatch the three BC-135 reviewers against packet commit e9c92091.
+  - workflow: factual-review
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: >-
+      BC-135: three preassigned read-only reviewers replay only packet-declared safe
+      loaders, self-tests and mutations in parallel, one packet each; reconcile
+      experiment-level pass, bounded-caveat, discrepancy or cannot-reproduce findings;
+      retain and validate the review record.
+    commitment: BC-135
+    bead: think-bpzq
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      BC-128 is terminal with three frozen packets at commit e9c92091.
+    budget_minutes: 60
+    started_at: '2026-09-02T04:21:11Z'
+    deadline_at: '2026-09-02T05:21:11Z'
+    expected_output: >-
+      docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md
+      with one determination per experiment, each reviewer's Artifact / Result / Guard
+      / Next, and no change to any frozen decision.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      Stop a reviewer on any repository write, network request, target or producer
+      command, or on a listed evidence path that differs from 1e175108.
+    fallback: >-
+      Record the affected experiment as typed-incomplete and leave needs_review true.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Freeze the packets, then dispatch the three BC-135 reviewers.
+      Reconcile the three returns into the review record.
   primary_bead: think-v0rj
   status: in_progress
   budget:
@@ -183,7 +234,96 @@ session:
       three review-pending experiment decisions, one blocked n = 54 packet, no W5
       receipt, no routing decision and no independent review
     after: null
-  delegations: []
+  delegations:
+  - task: BC-135 Packet A review, n = 17 / exp-053
+    operator: claude sub-agent reviewer-a
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Return Artifact / Result / Guard / Next and one determination for exp-053.
+    phase: 4
+    budget_minutes: 35
+    started_at: '2026-09-02T04:22:00Z'
+    deadline_at: '2026-09-02T04:57:00Z'
+    expected_output: One determination for exp-053 with replay evidence.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev pytest -q
+      tests/test_n17_weighted_certificate_parallel.py
+    kill_condition: >-
+      Any repository write, pair or assemble command, or evidence path differing from
+      1e175108.
+    fallback: Report cannot-reproduce with the exact failing step.
+    write_scope:
+    - operating-system and pytest temporary directories only
+    excluded_commands:
+    - benchmarks.n17_weighted_certificate_parallel pair or assemble with any real root
+    - git, tbd or repository writes
+  - task: BC-135 Packet B review, n = 68 / exp-054
+    operator: claude sub-agent reviewer-b
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Return Artifact / Result / Guard / Next and one determination for exp-054.
+    phase: 4
+    budget_minutes: 35
+    started_at: '2026-09-02T04:22:00Z'
+    deadline_at: '2026-09-02T04:57:00Z'
+    expected_output: One determination for exp-054 with replay evidence.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev pytest -q
+      tests/test_unitsquare_precision_production.py
+    kill_condition: >-
+      Any repository write, network request, hand-run registered command, or evidence
+      path differing from 1e175108.
+    fallback: Report cannot-reproduce with the exact failing step.
+    write_scope:
+    - operating-system and pytest temporary directories only
+    excluded_commands:
+    - cases.unitsquare_precision.production.run invoked by hand
+    - any network, source or target access
+    - git, tbd or repository writes
+  - task: BC-135 Packet C review, n = 50 / exp-055
+    operator: claude sub-agent reviewer-c
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Return Artifact / Result / Guard / Next and one determination for exp-055.
+    phase: 4
+    budget_minutes: 35
+    started_at: '2026-09-02T04:22:00Z'
+    deadline_at: '2026-09-02T04:57:00Z'
+    expected_output: One determination for exp-055 with replay evidence.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev pytest -q
+      tests/test_n050_producer_refusal.py tests/test_n050_producer_refusal_independent.py
+    kill_condition: >-
+      Any repository write, exp-055 --record invocation, geometry or source access, or
+      evidence path differing from 1e175108.
+    fallback: Report cannot-reproduce with the exact failing step.
+    write_scope:
+    - operating-system and pytest temporary directories only
+    excluded_commands:
+    - cases.n050_producer_refusal.run --record
+    - n = 19 or n = 50 geometry or source access
+    - git, tbd or repository writes
   outputs:
   - packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md
   checks: []
