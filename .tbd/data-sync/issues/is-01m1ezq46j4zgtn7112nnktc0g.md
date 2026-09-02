@@ -3,9 +3,9 @@ type: is
 id: is-01m1ezq46j4zgtn7112nnktc0g
 title: "BC-130: bounded n = 68 one-parent production serialization"
 kind: task
-status: open
+status: closed
 priority: 0
-version: 1
+version: 3
 spec_path: packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md
 labels:
   - packing
@@ -13,7 +13,13 @@ labels:
   - overnight
 dependencies: []
 parent_id: is-01m1ezp304q3fv8gjahq8n92q2
+hold: null
+hold_until: null
 created_at: 2026-09-01T17:19:22.833Z
-updated_at: 2026-09-01T17:19:22.833Z
+updated_at: 2026-09-02T04:57:01.598Z
+closed_at: 2026-09-02T04:57:01.598Z
+close_reason: Stopped or superseded at agenda-014 closeout; carried work lives in agenda-015 BC-137..BC-146.
+resolution: null
+duplicate_of: null
 ---
 Execute one parent-only n = 68 production serialization determination after adapter and routing admission.
