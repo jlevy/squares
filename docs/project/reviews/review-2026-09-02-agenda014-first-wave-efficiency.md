@@ -69,7 +69,7 @@ are lower bounds. Different lane outcomes make output rates descriptive, not cau
 | session-074 | completed / 7 | 5,686.517 s (lower bound) | 95.913 s | 1,908.372 s | 1,380.309 s | 6.247 s | 139.895 s | 272 | 8 / 6 |
 | session-075 | completed / 7 | 5,093.446 s | 804.037 s | 2,104.759 s | 630.437 s | 11.559 s | 123.167 s | 212 | 8 / 6 |
 | **Lane total** | **22 cells** | **17,294.963 s** (lower bound) | **3,733.452 s** | **5,037.347 s** | **2,900.535 s** | **17.806 s** | **395.746 s** | **763** | **24 / 18** |
-| session-072 (coordinator, contains the lanes) | stopped / 2 | 25,451.681 s (lower bound) | 4,012.092 s | 8,166.253 s | 4,479.087 s | 45.276 s | 718.959 s | 1239 | 15 / 10 |
+| session-072 (coordinator, contains the lanes) | stopped / 2 | 31,104.632 s (lower bound) | 6,976.823 s | 8,166.253 s | 5,094.383 s | 75.013 s | 876.717 s | 1467 | 15 / 10 |
 
 Lane totals: 4.996 declared output paths and 3.747 substantive paths per recursive
 agent-active hour. Coordinator residual after removing the lane receipts: 8,156.718 s
@@ -85,12 +85,16 @@ and their [resource receipts](../../../packing/campaign/resource-usage/). BC-126
 inside the coordinator’s own tree and has no separate receipt; its three 15-minute cells
 are in session-072’s cell log.
 
-Removing the three lane receipts from the coordinator receipt leaves about 8,157 s of
-agent-active time, about 279 s of command time and about 1,578 s of model-stream time
+Removing the three lane receipts from the coordinator receipt leaves about 13,810 s of
+agent-active time, about 3,243 s of command time and about 2,194 s of model-stream time
 for the coordinator’s own work, which includes BC-126, four W2 readmission cards, two
 packet preflights and the checkpoint publication.
 Those residuals are approximate because the four cutoffs differ by up to 22 minutes and
 one lane receipt is a lower bound.
+The coordinator row was completed after this review was first written: commit `0b632c3e`
+on the PR branch extended the session-072 receipt to its full interval, and the row and
+residuals above are re-rendered from that receipt.
+The three lane receipts and every lane figure are unchanged.
 
 ### Where the lane time went
 

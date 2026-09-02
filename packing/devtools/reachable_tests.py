@@ -12,9 +12,11 @@ run them without paying for the whole suite.
 Reachability is computed from evidence, not convention, and every rule errs toward
 inclusion:
 
-- **Import closure.** A static import graph over `src/sqpack`, `devtools`, `cases` and
-  `tests` (AST, relative imports resolved); a test reaches a changed module if it
-  imports it transitively.
+- **Import closure.** A static import graph over `src/sqpack`, `devtools`, `cases`,
+  `benchmarks` and `tests` (AST, relative imports resolved); a test reaches a changed
+  module if it imports it transitively. `benchmarks` joined the map in agenda-015
+  `BC-142`, after the agenda-014 push tier selected all 1,302 tests for a change whose
+  only Python lived there.
 - **Text mention.** A test that names a changed module's dotted path, or a changed
   file's basename, is selected even without an import edge. This is what catches the
   `D-381` class: a test pinning a literal string emitted by code it exercises through a
@@ -56,6 +58,7 @@ PACKAGE_ROOTS: tuple[tuple[str, Path], ...] = (
     ("sqpack", ROOT / "src" / "sqpack"),
     ("devtools", ROOT / "devtools"),
     ("cases", ROOT / "cases"),
+    ("benchmarks", ROOT / "benchmarks"),
     ("tests", ROOT / "tests"),
 )
 
