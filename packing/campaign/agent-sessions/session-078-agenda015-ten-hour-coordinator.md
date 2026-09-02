@@ -559,6 +559,156 @@ session:
       Freeze exp-056 and its terminal pair in the BC-144 evidence revision, then expose
       only status, selftest and focused temporary-data controls to BC-145.
     phase: 4
+  - task: Fresh Max independent review of Packet A, exp-056 n = 17
+    operator: openai-codex sub-agent, max
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Returned pass with no mismatch: all twelve frozen hashes, canonical-result
+      absence, the 170-row verified agreeing chain, ordinal-170 independent-started
+      marker, normal/optimized 36-guard receipt, 17 focused tests and the interruption
+      controls reproduced. Only exp-056's needs_review flag may clear; H-052, every
+      bound, frontier fact and future-route requirement remain unchanged.
+    evidence:
+    - docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.checkpoint.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.progress.json
+    files: []
+    checks:
+    - >-
+      Status reported 170 rows, ordinals 0--169, 33 parent plus 137 child rows,
+      all_agree true, chain_verified true, complete false and last-row hash
+      8947b38e0351048c3a67d914f2b8449185686d920913f5a2404898bdeca4c0b6.
+    - >-
+      Normal and optimized self-tests were byte-identical at SHA-256
+      9d6cbdc83ad83bf5234b872d67931b7003a038fa870ebc426133368e8e43a28e;
+      all 36 guards fired with zero skips and the focused suite passed 17 tests.
+    - >-
+      `tampered-child-chain-link`, `between-accumulator-interruption`,
+      `no-partial-row-promotion` and `interrupted-resume-equivalence` all fired; no
+      writer, target direction, source, network or scientific continuation opened.
+    uncertainty: >-
+      Eleven directions remain uncomputed, so the pass reviews process evidence only
+      and cannot decide H-052 or move a packing bound.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Retain the raw pass unchanged until the 12:58Z reconciliation boundary.
+    phase: 5
+    budget_minutes: 45
+    started_at: '2026-09-02T12:13:00Z'
+    deadline_at: '2026-09-02T12:58:00Z'
+    expected_output: One exact packet determination with Artifact, Result, Guard and Next.
+    validation_command: >-
+      PYTHONDONTWRITEBYTECODE=1 .venv/bin/python3 -m pytest -q -p no:cacheprovider
+      tests/test_n17_weighted_certificate_child.py
+      tests/test_n17_weighted_certificate_resume.py
+    kill_condition: >-
+      Stop on any repository write, target evaluation, process continuation, source or
+      network access, changed frozen hash, created canonical result or widened claim.
+    fallback: Retain the first typed non-pass and leave exp-056 review-pending.
+    write_scope:
+    - No repository writes; read-only review.
+    excluded_commands:
+    - exp-056 record or resume commands
+    - source, network, target, geometry, Git or tbd mutation
+  - task: Fresh Max independent review of Packet B, exp-057 n = 68
+    operator: openai-codex sub-agent, max
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Returned pass with no mismatch: all twelve frozen hashes, result and source-file
+      absences, normal/optimized 13-guard receipt, 62 tests and the wrong-direction
+      mutation reproduced. The reviewer independently agreed that six-decimal SVG
+      coordinate semantics have no cited provenance for the fourteen-digit release-text
+      side token. Only exp-057's needs_review flag may clear; it remains unresolved,
+      H-058 remains unmeasured and BC-139 remains stopped.
+    evidence:
+    - docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md
+    files: []
+    checks:
+    - >-
+      Normal and optimized receipts were byte-identical at SHA-256
+      790a973ee5e11e079a3c41dab578311d491eabe5dee76a120ee3a12f5702d76b;
+      all thirteen guards fired and 62 focused tests passed.
+    - >-
+      `wrong-direction` refused both the downward positive truncate-six mutation and the
+      one-sided nearest-six mutation; no network, source, target, record mode, result
+      creation or n = 68 geometry access occurred.
+    uncertainty: >-
+      The literal printed-rational point model remains defensible, but it cannot satisfy
+      the unchanged conjunctive three-model criterion alone.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Retain the raw pass unchanged until the 12:58Z reconciliation boundary.
+    phase: 5
+    budget_minutes: 45
+    started_at: '2026-09-02T12:13:00Z'
+    deadline_at: '2026-09-02T12:58:00Z'
+    expected_output: One exact packet determination with Artifact, Result, Guard and Next.
+    validation_command: >-
+      PYTHONDONTWRITEBYTECODE=1 .venv/bin/python3 -m pytest -q -p no:cacheprovider
+      tests/test_unitsquare_precision_semantics.py
+      tests/test_unitsquare_precision_production.py
+    kill_condition: >-
+      Stop on any repository write, source or network access, record mode, target or
+      geometry access, changed frozen hash, created result or widened claim.
+    fallback: Retain the first typed non-pass and leave exp-057 review-pending.
+    write_scope:
+    - No repository writes; read-only review.
+    excluded_commands:
+    - exp-057 record commands
+    - source, network, target, geometry, Git or tbd mutation
+  - task: Fresh Max independent review of Packet C, BC-141 n = 54
+    operator: openai-codex sub-agent, max
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Returned pass with no mismatch: all fourteen frozen hashes, the normal/optimized
+      author digest, 79 tests, both exact mutation refusals, canonical JSON rules and
+      the standard-library-only independent import closure reproduced. The pass is
+      synthetic-structure-only; H-055 has no review transition and remains
+      instrument-ready false.
+    evidence:
+    - docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md
+    - packing/campaign/agent-sessions/session-082-bc141-n54-source-contract.md
+    files: []
+    checks:
+    - >-
+      Normal and optimized author streams were byte-identical at SHA-256
+      79008d0738f17102e77b4c45c54af01f0b0faf8666ab650289dbdef4f89aa3d9;
+      79 tests passed in 53.17 seconds.
+    - >-
+      `missing_structural_inventory` refused with `missing or unexpected synthetic
+      source endpoint`; the bijective `correspondence_swap` refused with `synthetic
+      structural-tag drift`.
+    - >-
+      Exact-key canonical JSON, compact sorted ASCII bytes, one terminal newline,
+      malformed-number refusal and independent import closure reproduced; no result,
+      source, network, target, witness-value, geometry or producer path opened.
+    uncertainty: >-
+      The pass establishes no live-source fidelity, actual row correspondence,
+      precision cells, geometry, feasibility, optimality or packing bound.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Retain the raw pass unchanged until the 12:58Z reconciliation boundary.
+    phase: 5
+    budget_minutes: 45
+    started_at: '2026-09-02T12:13:00Z'
+    deadline_at: '2026-09-02T12:58:00Z'
+    expected_output: One exact packet determination with Artifact, Result, Guard and Next.
+    validation_command: >-
+      PYTHONDONTWRITEBYTECODE=1 .venv/bin/python3 -m pytest -q -p no:cacheprovider
+      tests/test_n54_source_contract.py tests/test_n54_source_contract_independent.py
+    kill_condition: >-
+      Stop on any repository write, source, network, target, witness-value, geometry or
+      producer access, forbidden import, changed frozen hash or widened claim.
+    fallback: Retain the first typed non-pass; H-055 remains instrument-ready false.
+    write_scope:
+    - No repository writes; read-only review.
+    excluded_commands:
+    - source, network, target, witness-value, geometry, producer, Git or tbd mutation
+    - retained-result publication
   outputs:
   - packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md
   - packing/campaign/agent-sessions/session-082-bc141-n54-source-contract.md
