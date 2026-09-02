@@ -122,7 +122,7 @@ session:
       geometry access.
     commitment: BC-141
     bead: think-pkgx
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: bc143_routed_wave_two
     budget_minutes: 180
@@ -143,12 +143,59 @@ session:
     fallback: >-
       Retain the first typed refusal, keep H-055 instrument-unready, preserve the latest
       valid exp-056 checkpoint, and do not substitute n = 39 or n = 54 geometry.
+    outcome: >-
+      BC-141 completed and received final Max admission for its synthetic target-blind
+      contract: 79 tests pass, author and independent implementations agree, both exit
+      mutations reject and H-055 remains instrument-unready. The sole exp-056 writer
+      was interrupted once at 11:23Z and retained 170 contiguous agreeing rows through
+      ordinal 169, a verified chain and progress ordinal 170 at independent_started;
+      the canonical result remains absent, so the prefix moves no packing bound and
+      H-052 remains undecided pending BC-145 review.
+    evidence:
+    - packing/campaign/agent-sessions/session-082-bc141-n54-source-contract.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.checkpoint.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.progress.json
+    stop_reason: >-
+      Reached the fixed 11:23Z wave-two boundary with BC-141 terminal and the sole
+      process interrupted once after preserving its latest atomic checkpoint.
+    next_action: >-
+      Enter BC-144 under think-2tol: terminalize the process record, freeze one evidence
+      revision, retain the W5 decision and prepare at most three immutable packets.
+  - workflow: process-review
+    focus: process
+    recording: contemporaneous
+    clock_role: work
+    objective: >-
+      BC-144, 06:20--07:10: verify that every wave-two writer and process is terminal;
+      retain the exp-056 checkpoint and exact terminal disposition; freeze one evidence
+      revision; run the registered W5 comparison with no-change unless every guard
+      passes; and prepare at most three immutable packets with exact hashes, declared
+      absences, safe commands, one named mutation and the unchanged claim boundary.
+    commitment: BC-144
+    bead: think-2tol
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: wave_two_boundary
+    budget_minutes: 50
+    started_at: '2026-09-02T11:23:00Z'
+    deadline_at: '2026-09-02T12:13:00Z'
+    expected_output: >-
+      Every lane terminal, no live process, one frozen evidence revision, one W5
+      receipt and at most three immutable packets preassigned to fresh reviewers.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      Stop on any live writer, moving frozen byte, unsupported terminal vocabulary,
+      manually reconstructed W5 number, packet without exact hashes or absences, unsafe
+      review command or widened scientific claim.
+    fallback: >-
+      Retain the latest valid checkpoint and the first typed incomplete packet, leave
+      every affected decision review-pending and do not open BC-145 for that packet.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Allocate session-082, dispatch the Max/XHigh contract team, and take the next
-      exp-056 observation at 08:48Z.
+      Use 11:23--11:43Z only to terminalize the wave and freeze its evidence revision.
   primary_bead: think-x81p
   status: in_progress
   budget:
@@ -430,6 +477,37 @@ session:
       Retain the note as a future W7 contract only; it authorizes no agenda-015 route or
       experiment execution.
     phase: 1
+  - task: Max-level terminal disposition of exp-056 at the BC-144 boundary
+    operator: openai-codex sub-agent, max
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Independently admitted the 170-row terminal state as unresolved, stopped by the
+      fixed timebox, with a cost-role criterion_missed determination and needs_review
+      true. Refused accepted, rejected, blocked, abandoned and exhausted vocabulary:
+      eleven rows and the canonical result remain absent, no disagreement exists, and
+      the exact checkpoint is valid and resumable through a newly preregistered round.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-056-h-052-n17-sequential-larger-prefix.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.checkpoint.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.progress.json
+    files: []
+    checks:
+    - >-
+      Reproduced 170 rows through ordinal 169, all_agree true, chain_verified true,
+      progress ordinal 170 at independent_started and the absent canonical result.
+    - >-
+      Fixed `tampered-child-chain-link` as the packet's load-bearing mutation and kept
+      every source, target, geometry, writer, network, Git and tbd command excluded.
+    uncertainty: >-
+      The 170-row prefix does not answer the eleven uncomputed directions and makes no
+      H-052, lower-bound or frontier decision.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: >-
+      Freeze exp-056 and its terminal pair in the BC-144 evidence revision, then expose
+      only status, selftest and focused temporary-data controls to BC-145.
+    phase: 4
   outputs:
   - packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md
   - packing/campaign/agent-sessions/session-082-bc141-n54-source-contract.md
@@ -465,8 +543,8 @@ session:
   - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
   stop_reason: null
   next_action: >-
-    Run BC-141's target-blind synthetic contract in session-082 while observing BC-137
-    every 25 minutes, then stop every writer at the fixed 11:23Z boundary.
+    Run BC-144 under think-2tol: terminalize exp-056, freeze the wave evidence, retain
+    W5 and prepare only the bounded packets earned for BC-145.
 ---
 # Session 078 — Agenda-015 Ten-Hour Coordinator
 
@@ -649,6 +727,115 @@ verifies both before any readmission card is issued.
   remains live. No unused checkpoint time moved into wave two.
 - **Next:** start session-082 at 08:23Z, observe exp-056 next at 08:48Z, and stop both
   wave-two lanes at 11:23Z for BC-144.
+
+## Wave-Two BC-137 Observation Log
+
+### 03:20--03:45 (08:23--08:48Z)
+
+- **Artifact:** the live exp-056 checkpoint/progress observation at 08:48:16Z.
+- **Result:** 102 total rows, 69 child rows, last ordinal 101, exact agreement and a
+  verified chain. The cell added 10 rows from the 08:23 route boundary.
+- **Guard:** checkpoint SHA-256
+  `f16eb37f0c0898f44f931223ced7cf5d04e8c2ab9df72661f5f84bf707c91a34`; progress SHA-256
+  `3aa0bfa2a3d04d342ff27f30b530e116d004678cc72f56cbb00e5efe9bf58cb8`; progress ordinal
+  102 at `independent_started`; canonical result absent; writer live and silent.
+  Agreement, chain, persistence and growth guards all pass.
+- **Next:** keep the single writer live and take the next fixed observation at 09:13Z.
+
+### 03:45--04:10 (08:48--09:13Z)
+
+- **Artifact:** the live exp-056 checkpoint/progress observation at 09:13:09Z.
+- **Result:** 113 total rows, 80 child rows, last ordinal 112, exact agreement and a
+  verified chain. The cell added 11 rows from the 08:48 observation.
+- **Guard:** checkpoint SHA-256
+  `2caf69bf37926f4e26c9b4053e02163de70108510b9b21cd25c6e463b444005f`; progress SHA-256
+  `f30289a20c618fd9f6528db3ecb99735fa57e3728a58bee4db188f6a2477eee5`; progress ordinal
+  113 at `independent_started`; canonical result absent; writer live and silent.
+  Agreement, chain, persistence and growth guards all pass.
+- **Next:** keep the single writer live and take the next fixed observation at 09:38Z.
+
+### 04:10--04:35 (09:13--09:38Z)
+
+- **Artifact:** the live exp-056 checkpoint/progress observation at 09:38:25Z.
+- **Result:** 124 total rows, 91 child rows, last ordinal 123, exact agreement and a
+  verified chain. The cell added 11 rows from the 09:13 observation.
+- **Guard:** checkpoint SHA-256
+  `51b1d8e2c7333faeecd53d72850c73acf41ae10e35eedd4b4d091cda5769b44b`; progress SHA-256
+  `a033966d277ae5ca8474c16a2d935f9610d771d1dc0df9d2b54cfdea5cfbb036`; last-row hash
+  `dacc38055043c0cebe000b3dcc954f2ccc7c9f7cac81d830fbc781958a972dac`; progress ordinal
+  124 at `independent_started`; canonical result absent; writer live and silent.
+  Agreement, chain, persistence and growth guards all pass.
+- **Next:** keep the single writer live and take the next fixed observation at 10:03Z.
+
+### 04:35--05:00 (09:38--10:03Z)
+
+- **Artifact:** the live exp-056 checkpoint/progress observation at 10:03:37Z.
+- **Result:** 135 total rows, 102 child rows, last ordinal 134, exact agreement and a
+  verified chain. The cell added 11 rows from the 09:38 observation.
+- **Guard:** checkpoint SHA-256
+  `72387d7045f6f5d111561b704154de50f1b1a7fae8aeca026f19a5ad955e626b`; progress SHA-256
+  `7bcaaf491d823a976cf6cac79d73520c4b907bd4e24fcfd286ad5098f7ed4f2d`; last-row hash
+  `f7357c51146d401348be5012ff965711189b006d7d775e5907b17f83b583f954`; progress ordinal
+  135 at `independent_started`; canonical result absent; writer live and silent.
+  Agreement, chain, persistence and growth guards all pass.
+- **Next:** keep the single writer live and take the next fixed observation at 10:28Z.
+
+### 05:00--05:25 (10:03--10:28Z)
+
+- **Artifact:** the live exp-056 checkpoint/progress observation at 10:28:38Z.
+- **Result:** 146 total rows, 113 child rows, last ordinal 145, exact agreement and a
+  verified chain. The cell added 11 rows from the 10:03 observation.
+- **Guard:** checkpoint SHA-256
+  `2dfcf00538f5c033776e4c4f700ee5506435501e71c9bfd3db553528ee2d7cba`; progress SHA-256
+  `b8fb7b8acc2ee7011bd14a7bbf656df26c8f87bed998a7f3d0ee077ca7829594`; last-row hash
+  `ebd236e892a9de0b59c92356a3de6b80247022df41753916170a7faa741a0202`; progress ordinal
+  146 at `independent_started`; canonical result absent; writer live and silent.
+  Agreement, chain, persistence and growth guards all pass.
+- **Next:** keep the single writer live and take the next fixed observation at 10:53Z.
+
+### 05:25--05:50 (10:28--10:53Z)
+
+- **Artifact:** the live exp-056 checkpoint/progress observation at 10:53:36Z.
+- **Result:** 157 total rows, 124 child rows, last ordinal 156, exact agreement and a
+  verified chain. The cell added 11 rows from the 10:28 observation.
+- **Guard:** checkpoint SHA-256
+  `50a419a073ce089276e4e3a880784faa2cf68fe11a3d1c5f127f427195f2d56f`; progress SHA-256
+  `b0a5f1a45da2c76de881ddc2cba5989d099798526dcbb393c8ac608984090d7e`; last-row hash
+  `53cbf914c75c40b0ba60b46990c90be2791bdb1f23c48a24a09d80a32a0cadfd`; progress ordinal
+  157 at `independent_started`; canonical result absent; writer live and silent.
+  Agreement, chain, persistence and growth guards all pass.
+- **Next:** keep the single writer live and take the next fixed observation at 11:18Z.
+
+### 05:50--06:15 (10:53--11:18Z)
+
+- **Artifact:** the live exp-056 checkpoint/progress observation at 11:18:22Z.
+- **Result:** 168 total rows, 135 child rows, last ordinal 167, exact agreement and a
+  verified chain. The cell added 11 rows from the 10:53 observation.
+- **Guard:** checkpoint SHA-256
+  `c5d6752de45cd029084adfa3a64299eeaeda96c742de369d86b7ada9664ad2df`; progress SHA-256
+  `455e23979ef8b3f6f17864f84f26f731ca439db714d29668a41474ff2e5fc595`; last-row hash
+  `34eced01fd27c008feda20d3d00ccaa5e209b0bc6ffaf4f5783c2ab225d93bd4`; progress ordinal
+  168 at `independent_started`; canonical result absent; writer live and silent.
+  Agreement, chain, persistence and growth guards all pass.
+- **Next:** keep the single writer live until the fixed 11:23Z boundary, then interrupt
+  it once, retain the terminal checkpoint and enter BC-144 under `think-2tol`.
+
+### 06:15--06:20 (11:18--11:23Z) — terminal wave freeze
+
+- **Artifact:** the stopped exp-056 checkpoint/progress pair and the sole authorized
+  interrupt receipt.
+- **Result:** the writer completed two further rows after the scheduled observation and
+  stopped with 170 total rows, 137 child rows, last ordinal 169, exact agreement and a
+  verified chain. Progress records ordinal 170 at `independent_started`; the canonical
+  result is absent.
+- **Guard:** checkpoint SHA-256
+  `0d39a7e734e8afc62fda914fda4ec8b5e9b2e48ea1b1d8b197dc08e27e7a35d4`; progress SHA-256
+  `0875f31fbf7391cfa40349812ca38a786069830a28f1c8d92ffd4ab33ecfe93c`; last-row hash
+  `8947b38e0351048c3a67d914f2b8449185686d920913f5a2404898bdeca4c0b6`. The Ctrl-C landed
+  inside ordinal 170’s independent accumulation, after the atomic progress marker and
+  before any row append; no writer remains.
+- **Next:** enter BC-144 under `think-2tol`, retain the terminal vocabulary approved by
+  the fresh Max reviewer and freeze the exact evidence revision before W5.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

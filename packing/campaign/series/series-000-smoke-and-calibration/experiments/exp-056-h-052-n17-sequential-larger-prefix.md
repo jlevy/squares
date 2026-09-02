@@ -63,16 +63,26 @@ experiment:
     record: campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.json
   effort:
     timebox: >-
-      The BC-137 wave-one and wave-two allocation ending at the agenda's fixed 06:20
-      elapsed boundary, 2026-09-02T11:23:00Z on the wall clock; the checkpoint at that
-      boundary is retained and never resumed inside this wall.
+      One fixed elapsed lease from the registered 2026-09-02T05:27:00Z launch through
+      the agenda's 06:20 elapsed boundary, 2026-09-02T11:23:00Z on the wall clock. The
+      lease includes the interrupted host handoff because its hard stop did not move;
+      the checkpoint at that boundary is retained and never resumed inside this wall.
+    wall_seconds: 21360
     stopped_by: timebox
-  results: []
-  lease:
-    expires: '2026-09-02T11:23:00Z'
-    host: macOS arm64 Codex continuation, session-078
+  results:
+  - shape: determination
+    question: >-
+      Did the sole preregistered continuation finish all 181 paired directions inside
+      its fixed two-wave lease while preserving a replayable terminal artifact?
+    role: cost
+    outcome: criterion_missed
+    checked_by: >-
+      Post-interrupt status replay validated 170 contiguous agreeing rows, ordinals
+      0--169, and the chained ordinal-170 independent-start marker; 17 focused controls
+      pass, normal and optimized 36-guard self-tests are byte-identical, and the
+      canonical result path remains absent.
   verdict:
-    decision: in-progress
+    decision: unresolved
     needs_review: true
     primary_criterion: >-
       Accept H-052 only if all 181 paired rows agree exactly and every frozen fixture,
@@ -80,19 +90,21 @@ experiment:
       prefix is process evidence and moves no bound; the first exact disagreement is a
       retained result that may reject only after every instrument guard passes.
     reason: >-
-      The exact process resumed from its verified child checkpoint under the owner's
-      matched Claude-to-Codex and Linux-to-macOS handoff rule; no scientific input,
-      criterion, instrument byte, chain link, or guard receipt changed.
-    commit: 11ce70ee
+      The fixed 11:23Z timebox ended before all 181 paired rows completed. The retained
+      170-row prefix is valid process evidence, every completed pair agrees exactly and
+      the interrupted ordinal was not appended, but a prefix does not satisfy H-052's
+      all-direction criterion. No canonical result exists, so H-052 remains neither
+      accepted nor rejected and the terminal decision stays review-pending for BC-145.
+    commit: 11ce70ee+sha256-f45227508b28f377
     resume_from: >-
-      Frozen exp-052 parent checkpoint SHA-256
-      db5c156959b6de4e6f2c9be283454d01dd5f3a436e6489f5e6bb60c38559fdb8, parent progress
-      SHA-256 08e301b01c7ac6eef4b03c3a4daa5f72c5f1bdbe217dbbb061b57f5c94d947af, parent
-      last row hash
-      9badcc57c05e328344b0ec7ae4fbf9815e8eae027a79bec1bf1a35b9871fade6 and frozen package
-      manifest 309ec24158f73dd2e9b837c773b1e5c1642f357de5bdf73311b73232abdb6d54. The child
-      chain starts at ordinal 33 in the fresh exp-056 checkpoint and never rewrites an
-      exp-052 path.
+      Canonical child checkpoint SHA-256
+      0d39a7e734e8afc62fda914fda4ec8b5e9b2e48ea1b1d8b197dc08e27e7a35d4 contains the
+      validated contiguous prefix through ordinal 169, whose last row hash is
+      8947b38e0351048c3a67d914f2b8449185686d920913f5a2404898bdeca4c0b6. Canonical
+      progress SHA-256 0875f31fbf7391cfa40349812ca38a786069830a28f1c8d92ffd4ab33ecfe93c
+      records ordinal 170 at independent_started, chained to that row. Any continuation
+      requires a newly preregistered round that replays the frozen parent and child
+      bindings and resumes at ordinal 170; exp-056 itself must not be rerun.
 ---
 # Exp-056 — H-052 `n = 17` Sequential Larger Prefix
 
@@ -174,6 +186,22 @@ Correction, 2026-09-02: the registration prose previously rendered the elapsed `
 boundary as `06:20Z`. The frontmatter and agenda both bind elapsed `06:20` to `11:23Z`;
 only the prose timestamp was wrong, and this correction changes no criterion, budget or
 evidence.
+
+## Terminal Outcome
+
+BC-137 stopped at the fixed 11:23Z boundary after one authorized interrupt.
+The retained checkpoint contains 170 contiguous rows through ordinal 169; all completed
+pairs agree exactly and the chain verifies.
+The progress marker records ordinal 170 at `independent_started`, so the interrupted
+calculation was not promoted to a partial row.
+
+Seventeen focused tests pass after the interrupt.
+Normal and optimized self-tests each report 36 guards, zero skips and receipt hash
+`612349379b70ccddfa5bd4f5265a747caca768c5b9a9627b4057e69a5791f894`. The canonical result
+remains absent. This is an unresolved timebox outcome and process-cost measurement, not
+an H-052 decision or a packing-bound transition.
+BC-145 must independently replay the frozen checkpoint, absence boundary and one named
+interruption mutation before `needs_review` can clear.
 
 ## Interrupted and Resumed Handoff
 

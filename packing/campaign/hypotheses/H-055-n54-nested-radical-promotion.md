@@ -81,7 +81,11 @@ hypothesis:
     BC-111 selects at most one of H-055 and H-056 for this run. If it selects n = 39,
     H-055 stays unmeasured rather than rejected. Acceptance certifies one exact feasible
     construction; optimality, uniqueness, rigidity, and frontier adoption remain outside
-    this claim.
+    this claim. Agenda-015 BC-141 admitted a target-blind synthetic parser, exact-field,
+    label, D4, orientation and correspondence contract with two independently replayed
+    rejecting mutations. It established no live-source fidelity, actual witness-row
+    correspondence, precision cells or geometry, so instrument_ready remains false and
+    H-055 receives no disposition.
 ---
 # H-055 — Nested-Radical `n = 54` Promotion
 

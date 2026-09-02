@@ -341,24 +341,26 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, follow
-[session 082](../../../../packing/campaign/agent-sessions/session-082-bc141-n54-source-contract.md),
-the target-blind contract lane under
+For the next supervised exact-research goal, take **BC-144 under `think-2tol`**, now
+active from the fixed 11:23Z wave-two boundary under
 [session 078](../../../../packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md),
 the coordinator of
 [agenda-015](../../../../packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md),
 the exact ten-hour run that started at `05:03Z` on 2026-09-02.
+[session 082](../../../../packing/campaign/agent-sessions/session-082-bc141-n54-source-contract.md)
+has completed the target-blind BC-141 contract lane.
 [session 077](../../../../packing/campaign/agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md)
 published that agenda, and
 [session 076](../../../../packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md)
 holds the reviewed first-wave evidence.
 
-The `n = 17` sequential larger-prefix round reached 92 verified agreeing rows at the
-08:23Z checkpoint and remains live under coordinator observation at 25-minute
-boundaries. That checkpoint stopped BC-139, retained W5 as `no-change`, and opened
-**BC-141 under `think-pkgx`** only for a synthetic, target-blind parser/correspondence
-contract. Wave two stops at 11:23Z. No target result is promoted and no review flag is
-cleared outside BC-146.
+The `n = 17` sequential larger-prefix round stopped once at the 11:23Z boundary with 170
+verified agreeing rows through ordinal 169, a verified chain and progress ordinal 170 at
+`independent_started`. The canonical result is absent, so H-052 remains undecided.
+BC-139 is stopped, W5 remains `no-change`, and BC-141 completed its synthetic,
+target-blind parser/correspondence contract without making H-055 instrument-ready.
+BC-144 is freezing this evidence and will prepare only the bounded review packets it
+earns. No target result is promoted and no review flag is cleared outside BC-146.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

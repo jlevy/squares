@@ -11,8 +11,8 @@ count: 82
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 37
-  sessions_unmeasured: 45
+  sessions_measured: 38
+  sessions_unmeasured: 44
   attributed:
     rollups: 55
     turns: 14495
@@ -1156,7 +1156,7 @@ sessions:
   title: "Agenda-015 ten-hour coordinator"
   status: in_progress
   primary_bead: think-x81p
-  phases: 3
+  phases: 4
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
@@ -1216,11 +1216,21 @@ sessions:
   codex_receipts: []
 - id: session-082
   title: "BC-141 n = 54 source-cell contract"
-  status: in_progress
+  status: completed
   primary_bead: think-pkgx
   phases: 1
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
-  codex_receipts: []
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-078.yaml
+    model_responses: 736
+    agent_hours: 3.04
+    active_union_hours: 2.0
+    wall_hours: 2.55
+    snapshot_incomplete: true
