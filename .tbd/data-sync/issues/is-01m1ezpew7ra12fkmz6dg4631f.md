@@ -3,9 +3,9 @@ type: is
 id: is-01m1ezpew7ra12fkmz6dg4631f
 title: "BC-123: profile parent-bound n = 17 parallel speedup"
 kind: task
-status: open
+status: in_progress
 priority: 0
-version: 5
+version: 6
 spec_path: packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md
 labels:
   - packing
@@ -18,7 +18,7 @@ parent_id: is-01m1ezp304q3fv8gjahq8n92q2
 hold: null
 hold_until: null
 created_at: 2026-09-01T17:19:00.997Z
-updated_at: 2026-09-01T19:10:16.050Z
+updated_at: 2026-09-02T00:26:30.749Z
 ---
 Test exact same-input three-process speedup and deterministic merge guards before authorizing another long n = 17 continuation.
 

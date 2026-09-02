@@ -3,9 +3,9 @@ type: is
 id: is-01m1ezp304q3fv8gjahq8n92q2
 title: "Agenda 014: mechanism-first continuation and provenance closure"
 kind: epic
-status: open
+status: in_progress
 priority: 0
-version: 15
+version: 18
 spec_path: packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md
 labels:
   - packing
@@ -26,7 +26,9 @@ child_order_hints:
   - is-01m1ezq55z0rd4j6z2s4ntthb0
   - is-01m1ezq5gcw3ygc9vnypgb6zzk
   - is-01m1f9xb7qv48zkg8b3jn33512
+  - is-01m1fq4npmw2q8b2zap026kwsx
+  - is-01m1fq4p1bt0pvtr946db21whv
 created_at: 2026-09-01T17:18:48.835Z
-updated_at: 2026-09-01T20:17:32.406Z
+updated_at: 2026-09-02T00:26:30.434Z
 ---
 Run the next exact nine-hour mechanism-first campaign from agenda-013's reviewed exits, with three disjoint first-wave implementation lanes, a bounded n = 54 provenance audit, two W5 efficiency gates, independent review, and terminal publication.

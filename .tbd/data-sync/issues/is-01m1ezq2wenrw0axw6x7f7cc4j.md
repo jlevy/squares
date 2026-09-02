@@ -3,9 +3,9 @@ type: is
 id: is-01m1ezq2wenrw0axw6x7f7cc4j
 title: "BC-126: audit n = 54 source and formula provenance"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 5
+version: 6
 spec_path: packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md
 labels:
   - packing
@@ -18,7 +18,7 @@ parent_id: is-01m1ezp304q3fv8gjahq8n92q2
 hold: null
 hold_until: null
 created_at: 2026-09-01T17:19:21.485Z
-updated_at: 2026-09-01T19:10:16.072Z
+updated_at: 2026-09-02T00:26:31.695Z
 ---
 Audit the retained primary-source and exact-formula chain for the n = 19 to 54 mechanism without opening reconstruction.
 
