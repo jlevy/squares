@@ -643,10 +643,10 @@ agenda:
         The W10 closeout tree passed all 58 steps in 731.54 seconds: 1,462 fast tests,
         25 exhaustive tests, and 155 negative controls.
     - scope: hosted-pr-gates
-      status: pending
+      status: passed
       evidence: >-
-        PR #75 passed validate, macos-portability, and packing-required at e86bdf26;
-        the W1 migration awaits those checks on its pushed revision.
+        PR #75 passed validate (13m32s), macos-portability (52s), and packing-required
+        (4s) at 2d82fd27.
     replanning:
       candidates:
       - bead: think-5j8d
