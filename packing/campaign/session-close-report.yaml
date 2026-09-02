@@ -1032,10 +1032,10 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-072.yaml
-    model_responses: 1239
-    agent_hours: 7.07
-    active_union_hours: 2.12
-    wall_hours: 2.12
+    model_responses: 1467
+    agent_hours: 8.64
+    active_union_hours: 3.65
+    wall_hours: 3.65
     snapshot_incomplete: true
   - path: packing/campaign/resource-usage/codex-task-tree-session-073.yaml
     model_responses: 279

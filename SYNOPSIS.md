@@ -2564,7 +2564,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-070-review.yaml` | session-064, session-070 | 23 | 0.12 h | 0.12 h | 0.42 h | no |
 | `codex-task-tree-session-070.yaml` | session-064, session-070 | 114 | 0.52 h | 0.52 h | 2.67 h | no |
 | `codex-task-tree-session-071.yaml` | session-071 | 68 | 0.25 h | 0.25 h | 0.25 h | yes |
-| `codex-task-tree-session-072.yaml` | session-072 | 1,239 | 7.07 h | 2.12 h | 2.12 h | yes |
+| `codex-task-tree-session-072.yaml` | session-072 | 1,467 | 8.64 h | 3.65 h | 3.65 h | yes |
 | `codex-task-tree-session-073.yaml` | session-072, session-073 | 279 | 1.81 h | 1.81 h | 1.81 h | yes |
 | `codex-task-tree-session-074.yaml` | session-072, session-074 | 272 | 1.58 h | 1.58 h | 1.9 h | yes |
 | `codex-task-tree-session-075.yaml` | session-072, session-075 | 212 | 1.41 h | 1.41 h | 1.75 h | no |
