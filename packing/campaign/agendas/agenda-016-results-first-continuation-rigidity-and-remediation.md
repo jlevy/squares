@@ -1102,8 +1102,12 @@ agenda:
     - scope: local-full-gate
       status: failed
       evidence: >-
-        Re-run against the committed tree at d2d0ba4f, where it failed 3 of 58 steps in
-        1349 s. Two are one assertion counted twice, the negative-control snapshot cap at
+        Re-run twice against committed trees. At the final head it failed 3 of 58 steps;
+        the run that measured it also reported a fourth, `known-best n=1..100 atlas`,
+        because the composite figure embeds n-005.md's rigidity scope verbatim and a
+        correction to that scope had not yet been propagated -- the step regenerated the
+        file and reported the mismatch, which is what it is for, and it passes at
+        ab898587. At d2d0ba4f the same 3 failed in 1349 s. Two are one assertion counted twice, the negative-control snapshot cap at
         68,007,522 bytes against 67,108,864, breached by 11,164,000 bytes of build caches
         that running the gate itself writes -- D-422's surviving half, demonstrated rather
         than predicted. The third is `provenance: recorded commits are reachable` on
