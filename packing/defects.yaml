@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 426
+count: 427
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -12612,87 +12612,139 @@ defects:
   bead: think-mlwo
   recorded_in: packing/devtools/render_wave_efficiency.py
 - id: D-422
-  title: The snapshot cap refuses all 155 negative controls, and build caches are what breach it
+  title: Build caches are still copied into every worker, and the cap is held by a per-file prune
   date: '2026-09-03'
   layer: tooling
   class: robustness
   detected_by: inspection
-  latent_for: at least the ten commits of this branch; the base already exceeded the cap
+  latent_for: >-
+    the breach, from before this branch's base until the same day it was recorded; the
+    copied build caches, for as long as the portable fallback has bulk-copied the tree
   severity: high
   status: outstanding
   what: >-
-    `python -m devtools.run_negative_controls` exits 1 before executing a single control:
-    `negative-control snapshot source is 67823986 bytes; cap is 67108864`. The refusal is
-    the `source_bytes > SNAPSHOT_MAX_BYTES` guard at `run_negative_controls.py:471`,
-    measured by `snapshot_source_bytes()` (same file, line 317) against the 64 MiB
-    `SNAPSHOT_MAX_BYTES` at line 158. Overage 715,122 bytes, 1.07% over.
+    Recorded as "the snapshot cap refuses all 155 negative controls, and build caches are
+    what breach it", against a live measurement of 67,823,986 bytes and a 64 MiB cap. Both
+    halves have since moved, in opposite directions, and this entry is retitled to the half
+    that survives. The refusal is discharged; the diagnosis was superseded by a later
+    commit, which is a different thing from having been wrong, and both are kept because
+    the second is what a reader needs and the first is what this log is for.
 
-    What breaches it is not the record. Of the 67,823,986 counted bytes, 11,095,141 are
-    untracked build caches -- `__pycache__` under `tests/`, `src/`, `devtools/` and
-    `cases/`, plus `.pytest_cache` and `.ruff_cache` -- and the untracked non-cache
-    remainder is exactly zero. Drop the caches and the counted surface is 56,741,622
-    bytes, 9.9 MiB UNDER the cap. The guard is not miscounting: `_clone_into` bulk-copies
-    filesystem entries with `cp -R`, so those caches really are copied into every private
-    worker tree. It is measuring real work that has no reason to be done.
+    Correct when written, re-measured rather than taken on report. Replaying
+    `snapshot_source_bytes()`'s accounting over `git ls-tree` at `609e7392`, the commit
+    that recorded this entry -- counted over the git tree, so no build cache can enter the
+    figure -- the tracked counted surface was 56,903,590 bytes against the 67,108,864 cap,
+    10,205,274 under it. The live measurement was over only because 11,095,141 bytes of
+    `__pycache__`, `.pytest_cache` and `.ruff_cache` were counted with it, and the
+    untracked non-cache remainder was zero. (The entry's own figure, 56,735,348, differs by
+    168,242 -- the copy-back term its script priced from the live tree -- and the
+    conclusion is the same either way.)
 
-    The trip point is therefore a property of a working tree that has been used, not of
-    the commit. A checkout that has never run pytest or ruff measures ~56.7 MB and the
-    suite starts; the first full validation run puts it over. Every agent session and
-    every developer reaches the failing state by doing the ordinary thing.
+    Superseded by a commit, on 2026-09-03. `ceff4400` committed exp-059's completion record
+    (10,923,451 bytes) and its checkpoint (10,947,228), 21,870,679 together. Counted the
+    same way over the git tree, the surface went from 56,965,725 at its parent `2796174b`
+    to 78,841,684 at `ceff4400`: 11,732,820 over the cap with zero caches present. From
+    that commit the breach was record-caused, and no cache exclusion would have cleared it.
+
+    What survives, all measured at `3018f454` on 2026-09-03. First, the build caches are
+    still counted and still bulk-copied by `_clone_into` into each of the four private
+    worker trees: 11,819,796 bytes, 20.8% of the 56,898,058-byte live surface, and no
+    control names a `.pyc`. They sit in `tests/` (4,362,514), `cases/` (3,019,649),
+    `devtools/` (2,263,035), `src/` (1,942,655), `.pytest_cache` (160,825) and
+    `.ruff_cache` (71,118). Second, the measurement is still a property of a used checkout
+    rather than of the commit: it moved 678,914 bytes inside this one session, from
+    56,219,144 when the fix below was measured to 56,898,058 now, with no commit between
+    them and nothing but `__pycache__` to explain it. Live minus caches is 45,078,262,
+    exactly the tracked surface at HEAD, so the caches remain the whole of the drift.
+    Third, the fix that cleared the cap names four files, and the headroom now standing
+    behind that list -- 10,210,806 bytes -- is smaller than the single pair of artifacts
+    that consumed the last of it. The next result the size of exp-059's breaks the cap
+    again.
   consequence: >-
-    `devtools/controls.yaml` holds 155 controls over 50 target files. Each mutates a file
-    and asserts that a named checker catches the mutation, so the suite is the only thing
-    that establishes that this project's guards actually fire. None of them has run.
+    Discharged 2026-09-03, with evidence. The suite ran, for the first time on this branch:
+    `155 negative controls fire as expected`, exit 0, no failures, and no control failing
+    for the wrong reason. Three runs -- two in the session that applied the fix, the second
+    of them after two concurrent commits had landed, and one more at `3018f454` for this
+    entry.
 
-    The adjacency is the substance of the defect. `check_control_anchors` is green -- it
-    reports "155 negative control anchors each match their file exactly once" -- and it is
-    a `--records` step, so it runs on every push. Its own docstring is explicit that it
-    "deliberately does NOT check that a control still *catches* what it was written for".
-    The repository therefore reports a passing 155-anchor check next to a suite in which
-    no control has fired. That is D-403's failure shape one level up: there, controls had
-    rotted unseen because the suite runs full-gate only; here the anchors resolve and the
-    mutations still never execute. `Step("negative controls", ...)` carries neither `fast`
-    nor `records`, so nothing on the pull-request surface looks, and `packing-validate
-    --records` stays green with the suite dead.
+    That is the first direct evidence on this branch that the repository's guards catch
+    what they were written for, as opposed to that their anchors still resolve. The
+    adjacency this entry was written about is closed with it: `check_control_anchors`
+    reports "155 negative control anchors each match their file exactly once" and its own
+    docstring says it "deliberately does NOT check that a control still *catches* what it
+    was written for", so until this ran, that green count stood beside a suite in which
+    nothing had ever fired.
+
+    What the surviving half costs. About a fifth of every private worker tree is build
+    detritus, copied four times over for a suite that mutates source. Worse than the waste
+    is that the guard's subject is not the commit: the same tree measures 45,078,262 bytes
+    on a fresh checkout and 56,898,058 here, so the cap fires for one person and not
+    another on identical code. And the cap now stands on a list of four file names. When it
+    is next breached the suite stops running in the full gate again -- and that much is not
+    silent, because `tests/test_negative_controls.py` asserts
+    `snapshot_source_bytes() < SNAPSHOT_MAX_BYTES` and rides the `fast behavioral tests`
+    step, which is `fast=True`. What stays silent is everything finer: `Step("negative
+    controls", ...)` still carries neither `fast` nor `records`, so the pull-request surface
+    can say that the snapshot is too big and can never say that a control has stopped
+    catching what it was written for.
   fix: >-
-    None yet, and deliberately none in this branch: Agenda 016's W9 lane is bounded to
-    D-044 and D-046 and is forbidden from substituting another backlog item. Recorded and
-    left open.
+    Applied at `a478744a`, and deliberately narrow. Four file names joined `PRUNE` --
+    exp-059's result and checkpoint, plus the exp-052 and exp-056 checkpoints, which
+    predate this branch and are the same class rather than the next thing to trip the cap
+    -- 34,109,196 bytes together. The live counted surface went 90,031,065 to 56,219,144,
+    16.2% under the cap at the time, and the suite ran. The artifacts stay committed: they
+    are exp-059's evidence. What changed is that a throwaway mutation sandbox no longer
+    carries 34 MB of solver state in order to corrupt one line of a Python file. Pruning by
+    file rather than by directory is not durable and was not meant to be, which makes the
+    structural options below more urgent rather than less.
 
-    Three directions, none chosen here. (1) Exclude build caches from the counted surface
-    and from `_clone_into` -- the smallest change, it removes 11.1 MB of pure detritus, it
-    makes the measurement reproducible rather than a function of how recently the tests
-    ran, and no control names a `.pyc`. (2) Prune `campaign/series/*/results` from the
-    snapshot the way `atlas/` renderings already are, reached through the existing
-    linked-and-registered-target rule so the link checker keeps working. (3) Content-address
-    the large checkpoints so a worker links rather than copies them. Raising the cap again
-    is the fourth and the weakest: D-371 raised it from 40 to 64 MiB nine days ago on the
-    reasoning that the cap "exists to stop someone checking in a gigabyte of data, not to
-    track the record's ordinary growth", and the growth has consumed the headroom anyway.
+    Three directions remain, and the fourth has been withdrawn. (1) Exclude the build
+    caches from the counted surface and from `_clone_into`. Still the smallest change,
+    still 11.8 MB of pure detritus, and it is the only one of these that makes the
+    measurement a property of the commit instead of the checkout. (2) Content-address the
+    large checkpoints so a worker links rather than copies them. (3) Raising the cap again
+    is still the weakest: `D-371` raised it from 40 to 64 MiB on the reasoning that it
+    "exists to stop someone checking in a gigabyte of data, not to track the record's
+    ordinary growth", and the growth has consumed that headroom twice in the five days
+    since -- once with the caches counted, and once in the record alone.
 
-    Where the counted bytes are, so a fix has somewhere to start: `campaign/` 24,919,099
-    (36.7%), of which `series-000-smoke-and-calibration/results/` is 20,091,203; `atlas/`
-    19,044,838 (28.1%); `tests/` 5,368,978 (4,299,924 of it `__pycache__`); `cases/`
-    4,242,168; `devtools/` 3,285,104 (1,833,590 `__pycache__`); pruned targets pulled back
-    in by the link and results-register rules 3,067,392; `src/` 3,059,473 (1,892,950
-    `__pycache__`). The seven largest single files are the exp-056 checkpoint (10,282,769),
-    `atlas/known-best/chunk-components.json` (9,672,604), the exp-042 result (5,740,789),
-    `atlas/known-best/chunk-partitions.json` (5,220,955), `known-best-1-100.svg`
-    (2,491,928), the exp-052 checkpoint (1,955,748), and a 1,387,084-byte paper from the
-    pruned `resources/` archive that the linked-target rule copies back in.
+    Withdrawn: pruning `campaign/series/*/results` wholesale, which this entry previously
+    proposed. It is wrong, and silently so. `devtools.check_canonical` reads
+    `exp-003-baseline-n11-target.jsonl` from that directory for the wrong-basin `n = 11`
+    packing; `archived_n11()` returns `None` when the archive is absent and the caller does
+    not skip -- it records `FAIL  Trump's basin differs from the annealer's  [no archive]`
+    and the checker exits 1 before any mutation is applied. Since a control is scored on
+    "exited non-zero and printed its expect string", with no green baseline demanded, all
+    four canonical controls go on passing over a checker that was already red, and the
+    `n = 11` basin discrimination the checker exists for is silently not performed.
+    Demonstrated rather than argued: in a cloned worker with that one archive removed, the
+    checker exits 1 unmutated and `run_one` scores all four controls PASS. That scoring gap
+    is `D-427`. The prune also buys almost nothing -- 1,072,797 bytes beyond the four files,
+    because the linked- and registered-target rules pull 6,790,030 bytes of the directory
+    straight back.
 
-    Scope, verified rather than assumed. Replicating `snapshot_source_bytes()` over the git
-    trees at both refs, the tracked counted surface is 56,187,316 bytes at the base
-    `f0992678` and 56,735,348 at HEAD: this branch added 548,032 bytes inside the counted
-    surface. Two independent checks put the breach before the branch. Subtracting the
-    branch's entire counted contribution from the live measurement leaves 67,275,954, still
-    167,090 over cap, and that argument assumes nothing about which bytes are cache.
-    Holding the caches constant, since they are a property of the checkout and not of the
-    commit, the base measures 67,282,457 and is over by 173,593. The overage predates this
-    branch and would not be resolved by reverting it.
+    One residual of the applied prune, recorded so it is not rediscovered as a surprise.
+    `devtools.check_instrument_normalization` globs `campaign/series/*/results/*.json` for
+    instrument bindings, and inside a worker it now finds 8 of the 11 the real tree has. The
+    three it loses are the three carried by the pruned checkpoints and result, all naming
+    the same file, `resources/web/n17-lower-bounds-2026/massaccesi-verify-n17-lower-bound-4_5058.py`,
+    which lives under the already-pruned `resources/` tree. They cost nothing, and the
+    reason is worth knowing: the checker classifies a bound path as `excluded` before it
+    tests whether the file exists, and `tool.ruff` `extend-exclude` covers `resources`, so
+    those three were `excluded` in the real tree too and were never inspected. Nothing in
+    `controls.yaml` invokes this checker and its only test asserts `bound_python_files > 0`,
+    so the real-tree check is unaffected. Had the same prune removed a binding whose path
+    was not excluded, its status would have been `missing`, which is a violation, and this
+    checker would have been red in every worker -- the `D-427` shape one file over.
   regression: >-
-    none. The guard prints its measured size on every run, which is how this was seen, but
-    nothing runs the guard on the pull-request surface -- the same gap D-403 left contained.
+    none for either surviving half, and one correction to what this entry first said. The
+    cap does have a check: `tests/test_negative_controls.py::test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots`
+    asserts `snapshot_source_bytes() < SNAPSHOT_MAX_BYTES`, and the step that runs it is
+    `fast=True`, so a fresh checkout at `ceff4400`, where the surface was 78,841,684, fails
+    on the pull-request surface and not only in the full gate. What has no check at all is
+    the cache accounting: nothing refuses a snapshot that is a fifth detritus, nothing makes
+    two runs on one commit agree, and nothing says that the headroom is now smaller than the
+    last artifact that consumed it.
   recurrence_of: D-371
   bead: think-c46d
   recorded_in: packing/devtools/run_negative_controls.py
@@ -13017,3 +13069,92 @@ defects:
     over the surrounding code is not a detector for this class either.
   bead: think-ldq2
   recorded_in: packing/campaign/README.md
+- id: D-427
+  title: Controls are scored on the mutated run alone, so one can pass over an already-red checker
+  date: '2026-09-03'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: inspection
+  latent_for: >-
+    since the harness's first commit, 8f53f8e3 on 2026-08-24, with the scoring rule
+    unchanged since; the one occurrence, D-413 on 2026-08-31, went the conservative way
+    and was fixed for a single checker
+  severity: medium
+  status: outstanding
+  what: >-
+    `run_one` (`run_negative_controls.py:434`) writes the mutation into a private worker,
+    runs the control's command once, and scores it: pass if the command did not time out,
+    exited non-zero, and printed the control's `expect` string. The command is never run on
+    the unmutated snapshot. Nothing in the suite therefore establishes that the refusal it
+    reports was caused by the mutation. What 155 passing controls demonstrate is "after
+    this edit the command fails with this message", not "this edit is what makes it fail",
+    and the difference is the whole content of a negative control.
+
+    The gap opens whenever a checker fails inside a worker for a reason unrelated to the
+    mutation -- a pruned input, a dead link, an absent environment. Three such conditions
+    have already occurred, in `D-407`, `D-409` and `D-413`, and all three happened to be
+    conservative: the checker's own failure message was not the `expect` string, so the
+    control failed loudly and was found. Nothing makes that the direction.
+
+    Demonstrated rather than argued, at `3018f454`. `devtools.check_canonical` reads
+    `exp-003-baseline-n11-target.jsonl` for the wrong-basin `n = 11` packing that its
+    central discrimination turns on; `archived_n11()` returns `None` when that archive is
+    absent, and the caller does not skip -- it records `FAIL  Trump's basin differs from the
+    annealer's  [no archive]` and the checker exits 1. Clone a worker the way the harness
+    does, remove that one file the way pruning `campaign/series/*/results` would, and the
+    unmutated checker goes from exit 0 to exit 1; hand the four canonical controls to
+    `run_one` against that worker and all four are scored PASS, with empty detail. Their
+    `expect` strings are their own mutations' `FAIL` lines, so each still requires its own
+    message -- what none of them requires, and none of them notices, is that the checker
+    was refusing before it was touched, and that the one discrimination the checker exists
+    for was not performed in any of the four runs.
+
+    One command of the forty distinct `run:` commands in `controls.yaml` is protected by
+    hand. `tests/test_negative_controls.py::test_unmutated_results_checker_is_green_inside_a_worker`,
+    added for `D-413`, clones a worker and requires `devtools.check_results` to exit 0
+    unmutated. The mechanism is right and its scope is one checker; the other thirty-nine
+    commands, over 50 mutation targets, have nothing.
+  consequence: >-
+    `155 negative controls fire as expected` is the only direct evidence this repository
+    has that its guards catch what they were written for -- `check_control_anchors` is
+    explicit that it checks only that anchors still resolve -- and that number is read as
+    coverage. A control scored over a red baseline adds to it while establishing nothing
+    about its guard, and does so invisibly: the runner prints the same line for it as for a
+    control that fired.
+
+    Bounded honestly: no control is currently known to be scored that way. The four
+    canonical controls pass over a green checker in the real snapshot, which is why this is
+    recorded outstanding rather than as a live miscount. What makes it worth an entry now
+    is that the trigger is routine. Keeping the worker snapshot under its cap means pruning
+    it, `D-422` is open on exactly that, and the direction `D-422` proposed first --
+    pruning the results directory wholesale -- is the trigger. A fix chosen for one defect
+    would have blinded four controls under the other, and the suite would have gone on
+    reporting 155 of 155.
+
+    The failure shape is one this log has now recorded at three levels: `D-144`, a checker
+    comparing two copies of the same tuple; `D-424`, two rigidity controls computing their
+    own verdicts without ever calling the instrument; and here the harness itself, scoring
+    a refusal it never showed the mutation caused. This one is
+    the weakest of the three in degree -- these controls can come out the other way, and do
+    -- and the broadest in reach, because it applies to all 155 at once.
+  fix: >-
+    none yet. Recorded and left open; this session's mandate was the record, not the
+    harness.
+
+    The direction, and the cheaper of the two forms is the sharper one. Requiring the
+    unmutated command to exit 0 catches a checker that has been degraded inside a worker,
+    which is what `D-407`, `D-409` and `D-413` each were. But the condition that actually
+    separates a caused refusal from a coincident one is weaker and more exact: the `expect`
+    string must be absent from the unmutated run. Both want the same baseline run, so the
+    honest version asserts both and reports them separately.
+
+    Cost is why it was not free to begin with. The suite already takes about half an hour
+    and a per-control baseline doubles it. It does not have to be per control: the 155
+    controls share 40 distinct `run:` commands, so one baseline per command, cached across
+    the controls that share it and taken once per worker, is 40 extra runs rather than 155.
+    That is the shape worth pricing before anything is built.
+  regression: none
+  recurrence_of: D-413
+  bead: think-xdly
+  recorded_in: packing/devtools/run_negative_controls.py
