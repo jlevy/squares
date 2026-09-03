@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 423
+count: 425
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -12662,3 +12662,161 @@ defects:
     same way, so nothing in the gate would have raised this.
   bead: think-iye2
   recorded_in: packing/cases/green17/verify_cover.py
+- id: D-424
+  title: Two of the eight n = 5 rigidity controls adjudicated themselves and called nothing
+  date: '2026-09-03'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: forty-six minutes and six commits, from the controls' first appearance at e25d17ab to the BC-153 repair at 609e7392
+  severity: high
+  status: fixed
+  what: >-
+    `controls.changed_feature` (C1) and `controls.invented_contact` (C4) computed their
+    own verdicts inline. Neither built a mutated system and neither called `bind` or any
+    guard: `invented_contact` never named `bind`, and the only name `changed_feature` took
+    from `sqpack.local_rigidity.binding` was `embed`, a field-embedding helper.
+
+    C1, for each of the four touching pairs and each of the three sibling support features
+    of its active branch, formed `claimed = (active_keys - {contact.key}) |
+    {substitute.key}` and recorded `active_key_agreement_breaks = claimed != t012_keys`.
+    C4 took `system.inactive_walls[0]`, formed `claimed = active_keys | {invented.key}`,
+    and recorded `agrees = claimed == set(t012.contact_keys)`. In both, the key put into
+    the set was chosen *because* it is not one of T-012's contacts, so the comparison could
+    not have come out the other way. The other conjunct in each verdict -- that the
+    sibling's margin is nonzero, that the invented wall's margin is not zero -- is a true
+    fact about the pose, but it is a fact the control read off the unmutated system for
+    itself. No mutated object was ever handed to anything that could refuse it. C1 also
+    computed whether the sibling's gradient differs from the contact's, and no verdict read
+    it.
+
+    Checked rather than argued: run at `2f112f4c`, both controls return `rejected=True`,
+    and neither verdict expression references a function of the instrument.
+  consequence: >-
+    The receipt's control table and `test_every_control_rejects` said eight of eight
+    refuse. Six did. The other two restated their own premises, so the evidence behind the
+    single refusal this instrument exists to make was six controls and two decorations, and
+    nothing in any view distinguished them.
+
+    What that overstated is a readiness gate rather than a retained result, and the entry
+    is bounded accordingly. `H-060` -- Goebel's exact `n = 5` optimum is locally rigid at
+    fixed side -- registers the instrument-ready transition as a reviewed precondition, and
+    `exp-058` reopens its round only when the instrument "refuses all eight controls
+    substantively" -- a qualifier that round's record did not carry until this was found.
+    `H-060` still carries `instrument_ready: false` and no receipt has been retained, so
+    nothing downstream had consumed the claim. Unread, two tautologies would have been
+    discharged as evidence at exactly the step where a claimed new theorem is promoted.
+  fix: >-
+    Both controls now mutate a real `ConstraintSystem` and hand it back to the instrument.
+    `with_active_pair` and `with_forged_active_wall` build the mutant; C1 applies each of
+    the twelve substitutions twice, once renaming the contact onto the sibling and once
+    keeping the contact's name and its cached margin while swapping in the sibling's
+    polynomial; C4 forges a zero margin onto a slack wall inequality. Each verdict is now
+    the conjunction of a guard refusal and `bind` refusing.
+
+    The guard is new and its recomputation is the whole mechanism.
+    `system.require_active_margins_zero` re-evaluates every active polynomial at
+    `chart.origin()` instead of reading its stored `margin`, because both forgeries leave a
+    plausible cached margin behind, and it is called from `instrument.assess` before the
+    neighborhood is built -- so it guards the path the receipt is built on and not only the
+    controls. Its finding: against the key-preserving forgery the recomputing guard catches
+    all twelve substitutions while `bind`'s gradient check catches eight, the four it
+    misses being gradient-degenerate against the contact they replace.
+  regression: >-
+    Four retained tests, and they pin the mechanism rather than the verdict, which is what
+    the first version would have passed.
+    `test_a_changed_support_feature_is_refused_by_the_instrument_itself` and
+    `test_an_invented_contact_is_refused_by_the_guard_and_by_the_binding` assert, per
+    substitution, that the guard refused and that the binding does not hold;
+    `test_the_active_margin_guard_recomputes_rather_than_trusting_the_record` requires
+    `ActiveMarginError` on both mutation shapes; `test_every_control_rejects` holds the
+    suite at eight.
+
+    The standard that settled it is the part worth keeping, because it is what separates a
+    control from a decoration: the reviewer confirmed the repair *by removal*, not by
+    reading. Reproduced here against the working tree at HEAD -- baseline `(True, True)`;
+    with `require_active_margins_zero` replaced by a no-op, `(False, False)`; with `bind`
+    replaced by a certificate that always holds, `(False, False)`. That demonstration is
+    not itself automated, and until it is, a future control could be re-tautologised in a
+    way the four tests above would still have to be edited to accept.
+  recurrence_of: D-144
+  recorded_in: packing/src/sqpack/local_rigidity/controls.py
+- id: D-425
+  title: Coordinator snapshots committed the W9 lane's disabled runner guards to a shared branch
+  date: '2026-09-03'
+  layer: tooling
+  class: robustness
+  detected_by: inspection
+  latent_for: two commits and five minutes of shared-branch time, 08:10:31Z to 08:15:50Z, both pushed
+  severity: medium
+  status: fixed
+  what: >-
+    The W9 lane was mutation-testing `record()`'s guards by editing
+    `packing/src/sqpack/campaign/runner.py` in the shared working tree, and the
+    coordinator's periodic work-in-progress snapshots committed the mutants and pushed
+    them.
+
+    Two commits carry a dead guard, and they are not the same mutation. `f8ccd541`
+    short-circuits the inner digest comparison, `elif stored.get("archive_sha256") !=
+    verification["archive_sha256"]:` to `elif False:`. `a9c5fdcc`, whose subject is
+    "restore the archive-moved refusal the previous snapshot disabled", restores that
+    `elif` and in the same diff turns the enclosing `if archived:` into `if False:` --
+    trading a narrow mutation for the widest one available while its message said the guard
+    was back. That is the shape a shared tree produces: the lane had moved its mutation
+    between 08:10:31Z and 08:13:00Z, and a repair written against the file rather than
+    against the diff swept up whatever was live. `7d24225a` restores `if archived:`, and
+    `runner.py` is byte-identical to `6309e1f4` from there on.
+
+    Two claims in those messages do not survive checking, and they are recorded here
+    because this log is also where a message is held to its tree. `7d24225a` says both
+    mutations were cleared, "the engine self-test is the real call rather than a stubbed
+    receipt": `selftest = run_engine_selftest(recipe)` is present and unaltered in every
+    commit from `bf75ce0c` onward, so no commit ever carried a stubbed self-test and the
+    count of captures is two, not three. `a9c5fdcc` says "ruff, ruff format and
+    basedpyright clean on both files", and they are not -- dropping `if archived:` leaves
+    `archived` bound and never read, which `ruff check` reports as `RUF059` and
+    basedpyright as `reportUnusedVariable` on the committed file, under this repository's
+    own configuration.
+  consequence: >-
+    With `if archived:` dead, `record()` performs no archive re-verification at all:
+    `verification` stays `None`, `verify_archive_in_separate_process` is never called, the
+    retained certificate is never compared against the archive on disk, and the guard row
+    that states the geometry was re-derived in another process is never written into the
+    round. A round could then be recorded from an archive that moved under its own
+    certificate -- the `D-044` trust boundary the W9 lane exists to repair. `f8ccd541`'s
+    narrower `elif False:` is the same hole one step further in: the archive is
+    re-verified and the answer discarded.
+
+    Nothing was recorded through either, and the entry is scoped to that. Between
+    `609e7392` and HEAD only `runner.py` and its test file change; no ledger entry, series
+    record or archive moves, and no round was recorded in the five minutes concerned. What
+    did happen is that both commits reached
+    `origin/claude/squares-pr76-overnight-run-tpc888`, so anyone who took the branch in
+    that window held a runner whose archive check was dead. That exposure, not a corrupted
+    result, is what this is worth.
+  fix: >-
+    Mutation testing moved out of the shared tree in `1e5c116f`. `MUTATIONS` and
+    `_unrepaired` in `packing/tests/test_campaign_runner_trust_boundary.py` copy the module
+    into `tmp_path`, revert exactly one repair in the copy, import it under a name that is
+    removed again immediately, and show the copy accepting what the module refuses. Five
+    repairs are covered -- pose validation, cell and seed attribution, lease expiry, legal
+    transitions, prerequisites -- and the archive re-verification is not among them. The
+    guards themselves are restored at HEAD.
+
+    Not done here, and named so it is not mistaken for done: nothing in the repository
+    gates a commit against a disabled branch. The scan of diffs and files for
+    disabled-branch shapes that `7d24225a`'s message describes is a coordinator practice,
+    not an artifact -- `packing/devtools/` holds no such check.
+  regression: >-
+    The detector already existed and was not run.
+    `test_record_refuses_an_archive_edited_after_it_was_verified` fails against both mutant
+    commits -- 1 failed and 54 passed at `f8ccd541`, the same single failure at `a9c5fdcc`,
+    measured by extracting each commit into a scratch tree and running the suite against it
+    -- so `packing-validate --push`, which runs the tests, would have refused both. The
+    pre-snapshot gate ran `ruff`, `ruff format` and `basedpyright` instead, and on the
+    narrower mutation all three are clean: a dead branch is syntactically perfect. The
+    linters have something to say only when the dead branch orphans a binding, as
+    `a9c5fdcc`'s did and its message denied. Nothing added here closes the gap between the
+    tier that would have caught this and the tier the snapshot ran.
+  recorded_in: packing/tests/test_campaign_runner_trust_boundary.py

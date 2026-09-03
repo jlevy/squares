@@ -327,8 +327,17 @@ The step read “the curve selection lemma gives a semi-algebraic arc into the s
 Puiseux gives `gamma(s) = p + sum_{k >= m} a_k s^k` with `a_m != 0`”, which skips one:
 what Puiseux supplies for a merely continuous semi-algebraic arc is an expansion in
 *fractional* powers, and `s = u^N` has to clear them before a coefficient induction can
-run at all. The step is written in above; nothing else in the argument changes, and the
-pose removal that makes the arc nonconstant is written in with it.
+run at all. The step is written in above, and no other step of the induction changes.
+**The same edit closed a second, independent gap**, which is worth its own sentence
+because it is not the same repair: the lemma is now applied to the feasible set *with the
+pose removed*, so the arc it returns avoids `p` at every positive parameter value and is
+therefore nonconstant.
+As written before, the lemma was applied to the set itself, and under `x` in the closure
+alone it is entitled to hand back the constant arc — on which the coefficient induction has
+nothing to bite.
+The source verification calls that omission the trap for this proof and the step most
+likely to be skipped; [X-012](X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md)
+§4.2 treats it at length.
 The route that avoids the reparametrisation entirely is the *Nash* form of the curve
 selection lemma (Bochnak–Coste–Roy, *Real Algebraic Geometry*, Proposition 8.1.13),
 whose arc is real-analytic as well as semi-algebraic, so its expansion is in integer

@@ -30,8 +30,9 @@ exploration:
 
     None of this resolves H-060. The acceptance route is the registered curve-selection and
     coefficient argument, and two obligations on it are open: the W7 executable instrument
-    with its receipt and eight rejecting controls, which a separate lane owns and which
-    keeps instrument_ready false; and primary-text confirmation of the curve-selection
+    with its receipt and eight rejecting controls, which a separate lane built after this
+    packet was frozen and whose readiness review has not passed, which keeps
+    instrument_ready false; and primary-text confirmation of the curve-selection
     statement, which a separate verification lane has since answered YES on the
     mathematics, the statement being attested verbatim by one of BCR's own authors,
     without reaching the printed BCR page. The

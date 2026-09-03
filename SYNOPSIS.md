@@ -2937,9 +2937,13 @@ arc. None of that decides H-060, which stays **unresolved** with `instrument_rea
 false. Its registered criterion accepts only on a *checked* chart and a *reviewed*
 argument: every number here was computed by read-only scratchpad sympy rather than by a
 repository instrument, no independent reviewer has read the argument, and the
-curve-selection step rests on two secondary quotations rather than on the printed BCR
-text. A separate lane’s instrument reports ready, but that is its author’s claim, it is
-under independent review, and it does not decide isolation. The corroborating
+curve-selection step rests on a quotation from one of BCR’s own authors, in notes he calls
+provisional, plus four uses by a single author group, rather than on the printed BCR text;
+the packet’s second secondary source was withdrawn as an over-attribution, so nothing
+independent corroborates it. A separate lane’s instrument reports ready, but that is its
+author’s claim, its independent readiness review returned BOUNDED-CAVEAT rather than a pass
+— twice, the second time conditional on a provenance item still open — and it does not
+decide isolation. The corroborating
 second-order-sufficiency proof in the packet reaches the same conclusion from weaker
 hypotheses and discharges nothing, because acceptance was preregistered on the
 curve-selection route. Nothing is promoted: no frontier property, result-register entry
@@ -3019,15 +3023,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 423 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 425 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
-| validity | 111 | was correct, but the measurement did not bear on the question |
+| validity | 112 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 155 | recorded something its own evidence contradicts |
-| robustness | 51 | did not finish, or finished only by luck |
+| robustness | 52 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -3036,7 +3040,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-one defects in 423, and no soundness defect
+**The automated gate has caught sixty-one defects in 425, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
