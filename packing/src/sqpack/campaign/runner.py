@@ -991,18 +991,38 @@ def require_regenerated(step: str, eid: str | None = None) -> None:
         )
 
 
-def read_lines(stdout: str, fh: Any) -> float | None:
+def read_lines(
+    stdout: str, fh: Any, *, expect_n: int | None = None, expect_seed: int | None = None
+) -> float | None:
     """Archive every line, enforce the contract, return this invocation's best side.
 
     The overlap check lives here, so it is one piece of code every round exercises.
     D-009 was an overlap guard asserted against a drifting accumulator; this re-reads the
     value from the record being archived instead.
+
+    `expect_n` and `expect_seed` bind a line to the invocation that produced it. Without
+    them the cell a result counts towards is the producer's own assertion: a command run
+    for one declared cell could print lines labelled with another declared cell, and the
+    replay in `cells_from` would accept them because that cell is in the recipe. It also
+    bounds the geometry the independent verifier is asked to rebuild, since a pose is
+    exactly `n` squares long.
     """
     best: float | None = None
     for line in stdout.splitlines():
         if not line.strip():
             continue
         rec = validated_record(line)
+        if "best_side" in rec:
+            for label, expected, actual in (
+                ("n", expect_n, int(rec["n"])),
+                ("seed", expect_seed, int(rec["seed"])),
+            ):
+                if expected is not None and actual != expected:
+                    raise GuardError(
+                        f"a result line claims {label}={actual} but the command was run "
+                        f"for {label}={expected}: a result may not be attributed to a "
+                        "cell or seed other than the one that produced it"
+                    )
         # Validate before writing: a guard refusal must not create an archive that a
         # later `record` step could mistake for admissible evidence.
         fh.write(line + "\n")
@@ -1083,7 +1103,8 @@ def execute(eid: str) -> None:
                         raise GuardError(f"declared command not found: {cmd[0]}") from exc
                     if p.returncode:
                         raise GuardError(f"command exited {p.returncode} at n={n} seed={seed}")
-                    if (side := read_lines(p.stdout, fh)) is None:
+                    side = read_lines(p.stdout, fh, expect_n=int(n), expect_seed=int(seed))
+                    if side is None:
                         raise GuardError(f"no result line at n={n} seed={seed}")
                     print(f"   n={n} seed={seed}: {side:.12f}")
     finally:
@@ -1597,6 +1618,21 @@ def preflight() -> int:
         Sink(),
     )
     checks.append(("a seed's result is the min over its lines", best == 3.7, f"got {best}"))
+
+    sink = Sink()
+    try:
+        read_lines(grid_result_line(11, 2, 3.9), sink, expect_n=11, expect_seed=1)
+        attribution, attribution_detail = False, "a line from another seed was archived"
+    except GuardError as exc:
+        attribution = not sink.lines
+        attribution_detail = f"{exc}; {len(sink.lines)} line(s) reached the archive"
+    checks.append(
+        (
+            "a result may not be attributed to another cell or seed",
+            attribution,
+            attribution_detail,
+        )
+    )
 
     moved = json.loads(grid_result_line(11, 1, 3.9))
     shifted = dict(moved, x=[moved["x"][0] + 1e-9, *moved["x"][1:]])
