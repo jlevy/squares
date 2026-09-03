@@ -2653,8 +2653,8 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 55 | 14,495 | 8,351 | 164 | 1,637 | 72.04 h |
-| claimed by none | 46 | 8,163 | 4,574 | 82 | 547 | 30.75 h |
+| claimed by a session | 91 | 21,198 | 12,047 | 214 | 2,011 | 95.92 h |
+| claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
 | **measured** | **101** | **22,658** | **12,925** | **246** | **2,184** | **102.79 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
@@ -2681,7 +2681,9 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-079](packing/campaign/agent-sessions/session-079-bc137-n17-sequential-larger-prefix.md) | 3 | 1 | 78 | 46 | 0 | 0.23 h |
 | [session-080](packing/campaign/agent-sessions/session-080-bc138-n68-side-semantics-binding.md) | 4 | 1 | 115 | 77 | 1 | 0.28 h |
 | [session-081](packing/campaign/agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | 4 | 1 | 87 | 49 | 0 | 0.24 h |
-| *shared by 22 sessions* | — | 4 | 10,375 | 5,737 | 129 | 62.26 h |
+| [session-083](packing/campaign/agent-sessions/session-083-agenda016-ten-hour-coordinator.md) | 2 | 35 | 6,374 | 3,530 | 50 | 21.14 h |
+| [session-084](packing/campaign/agent-sessions/session-084-bc148-n17-fresh-successor-completion.md) | 3 | 1 | 329 | 166 | 0 | 2.74 h |
+| *shared by 24 sessions* | — | 4 | 10,375 | 5,737 | 129 | 62.26 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -2704,8 +2706,8 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 38 |
-| closed before `resource_rollups` existed, logs not retained | 46 |
+| measured | 40 |
+| closed before `resource_rollups` existed, logs not retained | 44 |
 | **total** | **84** |
 
 <!-- END GENERATED: session-close-report -->

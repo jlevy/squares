@@ -303,7 +303,42 @@ session:
   outputs: []
   checks:
   - 'uv run --frozen --all-extras --group dev packing-validate --records: 26 of 58 named-tier steps pass at f099267'
-  resource_rollups: []
+  resource_rollups:
+  - packing/campaign/resource-usage/21ae3bfc-58a6-55fc-90e3-6e29d229a7f1.yaml
+  - packing/campaign/resource-usage/agent-a032f504c7d03019d.yaml
+  - packing/campaign/resource-usage/agent-a05e29d5cc8ca0beb.yaml
+  - packing/campaign/resource-usage/agent-a07d97fac1ca1617a.yaml
+  - packing/campaign/resource-usage/agent-a1198eb19ad2a1214.yaml
+  - packing/campaign/resource-usage/agent-a12b8bf6a98aae67d.yaml
+  - packing/campaign/resource-usage/agent-a1ceb617ef78b74ca.yaml
+  - packing/campaign/resource-usage/agent-a32bcf8a033ccee37.yaml
+  - packing/campaign/resource-usage/agent-a35726319687ce645.yaml
+  - packing/campaign/resource-usage/agent-a3dc2fe43c8b7b8ce.yaml
+  - packing/campaign/resource-usage/agent-a4659edb971fec453.yaml
+  - packing/campaign/resource-usage/agent-a4904e1ce5324e63a.yaml
+  - packing/campaign/resource-usage/agent-a545925c6277ba758.yaml
+  - packing/campaign/resource-usage/agent-a5b9a82e111800828.yaml
+  - packing/campaign/resource-usage/agent-a70566eaf9e495d0f.yaml
+  - packing/campaign/resource-usage/agent-a70a0e0d7979a4fa4.yaml
+  - packing/campaign/resource-usage/agent-a737e0b539b455e94.yaml
+  - packing/campaign/resource-usage/agent-a76ea9ecbfaf16853.yaml
+  - packing/campaign/resource-usage/agent-a7e1acdae8851e178.yaml
+  - packing/campaign/resource-usage/agent-a885d46a3f6296e8b.yaml
+  - packing/campaign/resource-usage/agent-a93791d17657f8b2f.yaml
+  - packing/campaign/resource-usage/agent-aa8f13f160616bac8.yaml
+  - packing/campaign/resource-usage/agent-aa9e5cb32a0d2f0f7.yaml
+  - packing/campaign/resource-usage/agent-aaa07c893c7c4a767.yaml
+  - packing/campaign/resource-usage/agent-ab058e988509f8307.yaml
+  - packing/campaign/resource-usage/agent-ab53f012e7ffc4698.yaml
+  - packing/campaign/resource-usage/agent-ab792435339bc90f5.yaml
+  - packing/campaign/resource-usage/agent-abf0ff7a60548deeb.yaml
+  - packing/campaign/resource-usage/agent-acdaebb4d68f62e37.yaml
+  - packing/campaign/resource-usage/agent-ace5359d1cb81905a.yaml
+  - packing/campaign/resource-usage/agent-adbe9e9f8a337278f.yaml
+  - packing/campaign/resource-usage/agent-ae127dfc0af22403c.yaml
+  - packing/campaign/resource-usage/agent-ae3907a8c08e88a87.yaml
+  - packing/campaign/resource-usage/agent-af4c73dcce4198571.yaml
+  - packing/campaign/resource-usage/agent-afa589637108483de.yaml
   stop_reason: null
   next_action: >-
     Admit the BC-147 frozen-binding verification, freeze the launch packet, and hold the

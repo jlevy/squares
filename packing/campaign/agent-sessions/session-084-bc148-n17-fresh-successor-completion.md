@@ -208,6 +208,8 @@ session:
   - 'ruff check, ruff format --check and basedpyright clean on both new files'
   - 'ancestry verification against the real artifacts with 0 target directions evaluated'
   - 'exp-052 and exp-056 checkpoint and progress digests unchanged: db5c1569, 08e301b0, 0d39a7e7, 0875f31f'
+  resource_rollups:
+  - packing/campaign/resource-usage/agent-aecd43cdbf7383013.yaml
   stop_reason: null
   next_action: >-
     Stand by without running any process until 08:58:00Z, then run the registered writer
