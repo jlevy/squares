@@ -8,8 +8,8 @@ softschema:
 agenda:
   id: agenda-016
   title: Results-First Continuation, Rigidity, and Remediation
-  updated: '2026-09-02'
-  status: active
+  updated: '2026-09-03'
+  status: completed
   objective: >-
     Run one ten-hour autonomous session from Agenda 015's completed W10 closeout and
     the operator's revised priority order. Three disjoint lanes begin after a
@@ -30,7 +30,7 @@ agenda:
     purpose: tool_validation
     owner_focus: process
     instances: [5, 17]
-    state: ready
+    state: stopped
     priority: 0
     question: >-
       Can the merged Agenda 015 handoff, H-052 chain, H-060 criterion, W9 inventory,
@@ -118,7 +118,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [17]
-    state: blocked
+    state: stopped
     priority: 0
     question: >-
       Does a fresh, complete H-052 successor agree exactly on all 181 direction cells,
@@ -223,7 +223,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [17]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Does an independent Max reviewer reproduce the fresh H-052 result and its entire
@@ -251,6 +251,9 @@ agenda:
       registered scope, and names the next repair or adjudication bead.
     bead: think-sapq
     depends_on: [BC-148]
+    artifacts:
+    - docs/project/reviews/review-2026-09-03-bc149-h052-agreement-independent-review.md
+    - packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md
     parallel_group: agenda016-review-n17
     workflows: [factual-review, process-review]
     next_evidence: >-
@@ -299,7 +302,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [17, 18, 19]
-    state: blocked
+    state: stopped
     priority: 0
     question: >-
       Given independently reviewed all-direction agreement, does the retained
@@ -372,7 +375,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [17, 18, 19]
-    state: blocked
+    state: stopped
     priority: 0
     question: >-
       Does an independent Max review clear the adoption packet, and if so do the frozen
@@ -456,7 +459,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [5]
-    state: blocked
+    state: stopped
     priority: 0
     question: >-
       Is Goebel's exact n = 5 optimum locally rigid at fixed side under H-060's
@@ -607,7 +610,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [5]
-    state: blocked
+    state: stopped
     priority: 0
     question: >-
       Does an independent Max reviewer reproduce H-060's executable neighborhood and
@@ -714,7 +717,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 11, 17]
-    state: blocked
+    state: stopped
     priority: 1
     question: >-
       Can the generic unattended campaign runner's result-validity and lifecycle trust
@@ -831,7 +834,7 @@ agenda:
     purpose: research
     owner_focus: process
     instances: [5, 17, 18, 19]
-    state: blocked
+    state: stopped
     priority: 0
     question: >-
       What did Agenda 016 actually establish, fail to establish, or repair, why did each
@@ -931,6 +934,231 @@ agenda:
         is reported at the scope it covers.
       disposition: fix-and-rerun
       follow_up: think-xycf
+  closeout:
+    documentation_review:
+    - path: README.md
+      decision: updated
+      reason: >-
+        Marks T-001 and T-002 superseded by the adopted 22529/5000 bound at
+        n = 17--19 so the entry point does not repeat a number the frontier no
+        longer carries.
+    - path: SYNOPSIS.md
+      decision: updated
+      reason: >-
+        Publishes T-014, adds the H-052 and 4.5058-adoption sections, rewrites the
+        current handoff to the terminal session and the discharged think-5j8d marker,
+        corrects defect prose the run's own findings touched, and regenerates the
+        cost tables.
+    - path: TUTORIAL.md
+      decision: updated
+      reason: >-
+        Corrects one n = 5 sentence to place the two-parameter sheet of optima at a
+        container side above s(5) rather than beside it.
+    - path: conventions.md
+      decision: checked-current
+      reason: >-
+        This run changed no workflow contract; W1 through W10 and their owners are
+        unchanged.
+    - path: development.md
+      decision: checked-current
+      reason: >-
+        No build command, validation tier or Python/uv pin changed in this run.
+    - path: operating-rules.md
+      decision: checked-current
+      reason: >-
+        This run closed under OR-1 through OR-11 as written and added no new
+        operating rule.
+    changes:
+    - name: h052-successor-and-adoption
+      result: >-
+        Completed the fresh H-052 successor for all 181 exact direction pairs,
+        cleared its review flag, and installed the independently reviewed 4.5058
+        source-adoption packet that raised the verified lower bound to 22529/5000 at
+        n = 17--19.
+      paths:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-059-h-052-n17-fresh-successor-completion.md
+      - packing/cases/n17_weighted_certificate_successor
+      - packing/tests/test_n17_weighted_certificate_successor.py
+      - packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md
+      - packing/frontier/results.yaml
+      - packing/frontier/n-017.md
+      - packing/frontier/n-018.md
+      - packing/frontier/n-019.md
+      - packing/devtools/check_nagamochi_bounds.py
+      - docs/project/reviews/review-2026-09-03-bc149-h052-agreement-independent-review.md
+      - docs/project/reviews/review-2026-09-03-bc150-4-5058-adoption-packet.md
+      - docs/project/reviews/review-2026-09-03-bc151-4-5058-adoption-independent-review.md
+    - name: h060-fixed-side-local-rigidity
+      result: >-
+        Registered and published T-014, the n = 5 fixed-side local-rigidity theorem,
+        at V3/C5/S3, and built the local_rigidity instrument and rigidity-consumer
+        views its proof and its frontier registration cite.
+      paths:
+      - packing/campaign/explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md
+      - packing/campaign/hypotheses/H-060-n5-local-rigidity.md
+      - packing/src/sqpack/local_rigidity
+      - packing/tests/test_n5_local_rigidity.py
+      - packing/frontier/n-005.md
+      - packing/devtools/assess_frontier_rigidity.py
+      - packing/tests/test_frontier_rigidity_assessment.py
+      - docs/project/reviews/review-2026-09-03-bc152-n5-rigidity-instrument-readiness.md
+      - docs/project/reviews/review-2026-09-03-bc152-h060-prior-art-survey.md
+      - docs/project/reviews/review-2026-09-03-bc152-curve-selection-source-verification.md
+      - docs/project/reviews/review-2026-09-03-bc153-h060-proof-independent-review.md
+      - docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md
+    - name: w9-runner-trust-boundary-containment
+      result: >-
+        Contained D-044 and D-046 in the campaign runner's archive, validity and
+        lifecycle trust boundary with a reviewed regression suite, leaving four
+        source-finding clauses outstanding on the reviewer's own recorded dissent
+        from the contained label.
+      paths:
+      - packing/src/sqpack/campaign/runner.py
+      - packing/tests/test_campaign_runner_trust_boundary.py
+      - packing/defects.yaml
+      - packing/devtools/run_negative_controls.py
+      - packing/devtools/controls.yaml
+      - docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md
+    - name: post-agenda-closeout-records
+      result: >-
+        Closed both AgentSessions with resource receipts, corrected three inaccurate
+        commit messages' worth of overstatement in the run's own records, and
+        reconciled the ledger, agenda map, document map and reader-facing prose
+        against the terminalized agenda.
+      paths:
+      - packing/campaign/agent-sessions/session-083-agenda016-ten-hour-coordinator.md
+      - packing/campaign/agent-sessions/session-084-bc148-n17-fresh-successor-completion.md
+      - packing/campaign/resource-usage
+      - packing/campaign/ledger.md
+      - packing/campaign/agenda-map.md
+      - docs/project/document-map.yaml
+      - packing/src/sqpack/cli/validate.py
+      - SYNOPSIS.md
+      - README.md
+      - defects.md
+    validation:
+    - scope: records-tier
+      status: passed
+      evidence: >-
+        uv run --frozen --all-extras --group dev packing-validate --records passed
+        26 of 58 named-tier steps at ee42c371, rerun at closeout against the
+        terminalized agenda and session records.
+    - scope: local-full-gate
+      status: failed
+      evidence: >-
+        The full 58-step local gate passed 57 of 58 in 2118 s. The single failure is
+        `provenance: recorded commits are reachable`, and it is an environment
+        artifact rather than a repository defect: this checkout is shallow
+        (`git rev-parse --is-shallow-repository` reports `true`), so it cannot walk
+        back to a historical engine commit to verify reachability, while CI's
+        `fetch-depth: 0` clone on the same tree reports it "checked all 52 declared
+        engine commits". Recorded as failed on this evidence, not as passed.
+    - scope: hosted-pr-gates
+      status: passed
+      evidence: >-
+        Hosted validate (15m), packing-required and macos-portability all passed at
+        3100fb02. The branch head has since advanced past that revision and a hosted
+        re-run is in flight; the later revision has not yet reported and is not
+        claimed green on this evidence.
+    - scope: step-budget-measurements
+      status: passed
+      evidence: >-
+        `fast behavioral tests` measured 1210.79 s, confirming the 1187 s figure the
+        new 1800 s step budget was set from; `negative controls` measured 620.41 s
+        against its own 1800 s budget; and the full 155-negative-control suite ran to
+        completion for the first time on this branch (D-422).
+    replanning:
+      candidates:
+      - bead: think-ldq2
+        workflow: remediation
+        priority: 0
+        rationale: >-
+          Four clauses of the D-044/D-046 source findings never reached either
+          record: F-02's exact-zero overlap screen, still refusing a 1e-18 overlap
+          the identical geometry verifies; two of F-04's clauses, an unconditionally
+          true dirty flag and a per-cell timebox contract stated three different ways
+          across schema, runbook and code; and a report that can omit runnable-but-
+          unrun work. One of the four loosens an acceptance screen and needs a
+          reviewer before it changes. This is the run's own W9 reviewer's recorded
+          dissent from calling either defect fixed while these stand open, not new
+          scope.
+      - bead: think-5j8d
+        workflow: pipeline-improvement
+        priority: 1
+        rationale: >-
+          BC-148's own scope is discharged: exp-059 reached complete agreement on
+          all 181 exact direction cells and H-052 is confirmed at
+          implementation-agreement scope. This entry is the marker for where the run
+          stopped rather than a recommendation. What remains attached to it is
+          D-428: the successor's `validate_result` never ties a rebuilt chain spine
+          to `carried_boundary`, so an altered manifest inside the retained prefix
+          passes the validator alone, though the executed run that produced exp-059
+          could not have carried one. The recommended next action is named
+          separately, at think-ldq2.
+      - bead: think-xdly
+        workflow: pipeline-improvement
+        priority: 2
+        rationale: >-
+          `run_negative_controls.py` scores every mutation against the mutated run
+          alone and never against an unmutated baseline, so a control can pass while
+          the checker it targets was already red. Demonstrated on the four canonical
+          controls D-427 names, all scored PASS inside a worker whose n = 11 basin
+          archive was pruned and whose unmutated command already exited 1. A
+          per-command baseline, cached across the 155 controls' 40 distinct run
+          commands, is the priced fix.
+      - bead: think-c46d
+        workflow: pipeline-improvement
+        priority: 2
+        rationale: >-
+          D-422's applied fix pruned four named files and cleared the snapshot cap,
+          but build caches -- 11.8 MB, a fifth of every private worker tree -- are
+          still bulk-copied by `_clone_into` and counted toward it, and a per-file
+          prune is not durable: the next result exp-059's size breaks the cap again.
+          Excluding caches from the counted surface and from `_clone_into` is the
+          smallest durable fix and the only one that makes the measurement a
+          property of the commit rather than of the checkout.
+      - bead: think-iye2
+        workflow: research-loop
+        priority: 3
+        rationale: >-
+          The Green17 exact ceiling is the first bounded numeric fallback once the
+          4.5058 adoption is settled, and it is capped in value because that
+          adoption already dominates the verified bound at n = 17 and n = 18. NOT
+          READY: the precise Q(sqrt(2)) scalar and escape-family obligations this
+          agenda's own fallback card left unaddressed remain open.
+      - bead: think-0z9b
+        workflow: research-loop
+        priority: 4
+        rationale: >-
+          The bespoke n = 12 lower bound is the next larger theorem campaign,
+          deferred behind a fixed-threshold prerequisite list reconciling
+          think-0z9b, think-at4f and H-039. NOT READY: no preregistered instrument
+          exists, and prior estimates put its cost in agent-days rather than one
+          wall.
+      selected:
+        bead: think-5j8d
+        workflow: pipeline-improvement
+        rationale: >-
+          think-5j8d's own scope is discharged -- H-052 reached complete agreement
+          on all 181 exact direction cells and is confirmed at
+          implementation-agreement scope -- so this selection is the mechanical
+          marker recording where Agenda 016's chain stopped, cross-checked against
+          the latest terminal session's own next action, and not a recommendation to
+          keep working here. The residual still attached to it is D-428's validator
+          gap. The recommended next entry is named separately, at think-ldq2's four
+          unrepaired D-044/D-046 clauses, ranked first among these candidates.
+      operator_input:
+        status: revised
+        note: >-
+          The operator directed the ten-hour launch before this agenda's planning
+          revision was merged or hosted-green, waiving BC-147's entry condition
+          rather than satisfying it -- the planning bead correctly stayed in
+          progress for the run's duration and the live queue and the entry condition
+          disagreed throughout. The operator also set the model-delegation policy
+          carried into every lane: Claude Opus at Extra High or Max thinking for
+          mechanical and engineering work, Claude Fable at Max thinking for the
+          mathematics.
 ---
 # Agenda 016 — Results-First Continuation, Rigidity, and Remediation
 

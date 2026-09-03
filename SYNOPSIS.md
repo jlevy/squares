@@ -365,74 +365,83 @@ controller, not permission to blur contracts.
 ### Current Handoff
 
 [Agenda 016](packing/campaign/agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md)
-is the active, operator-confirmed program around the scientific successor selected by
-Agenda 015’s completed W10 closeout and terminal
-[session-078](packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md).
-It ran on 2026-09-03, and its three lanes are terminal.
+is complete: the scientific successor selected by Agenda 015’s W10 closeout, coordinated
+by terminal
+[session-083](packing/campaign/agent-sessions/session-083-agenda016-ten-hour-coordinator.md)
+and its n = 17 lane
+[session-084](packing/campaign/agent-sessions/session-084-bc148-n17-fresh-successor-completion.md).
+It ran the full ten-hour wall on 2026-09-03, and every one of its nine commitments is
+terminal with an outcome, stop reason, disposition and follow-up.
 H-052 reached complete agreement on all 181 exact direction cells and is confirmed at
-implementation-agreement scope; `T-014` proved fixed-side local rigidity at `n = 5`; the
-source-backed 4.5058 bound was adopted at `n = 17`--`19` as `T-015`/`T-016`; and the W9
-wave left D-044 and D-046 contained rather than fixed.
+implementation-agreement scope; `T-014` proved fixed-side local rigidity at `n = 5` at
+`V3`/`C5`/`S3` — `C4` is not claimed; the source-backed 4.5058 bound was adopted at
+`n = 17`--`19` as `T-015`/`T-016`; and the W9 wave left D-044 and D-046 contained rather
+than fixed, with four of the source findings’ own clauses still unrepaired on the
+reviewer’s recorded dissent from that label.
 The entry condition was waived by the operator rather than satisfied: the planning
 revision was never merged or hosted-green before the run began.
+The `tbd` CLI was absent throughout, so bead reconciliation stayed read-only rather than
+a satisfied obligation.
 
 **Selected next entry:** `think-5j8d`, the bead the last terminal session closed on.
 Its own scope is discharged — H-052 is confirmed at implementation-agreement scope and
 `exp-059` is terminal — so this marker records where the run stopped rather than work
-still owed on it.
+still owed on it; the residual attached to it is `D-428`, a gap the successor’s own
+validator has and the executed run does not.
 
 The recommended follow-up is the four unrepaired clauses of D-044 and D-046, carried on
 `think-ldq2` under `think-modk`. They are clauses of those defects' own source findings
 rather than new scope, and one of them loosens an acceptance screen, which needs a
 reviewer the closing run no longer had.
 
-The agenda separates three kinds of progress that the prior closeout showed must not be
-collapsed:
+The agenda separated three kinds of progress, and the closeout kept them from collapsing
+into each other:
 
-- **Assurance and possible adoption.** `think-5j8d` continues H-052 in a fresh result
-  path from exp-056’s verified 170-row prefix.
-  The new package must fully readmit the progress marker, distinguish exp-056’s
-  immediate parent binding from exp-052’s chain genesis, and carry separate terminal
-  schemas: full certificate summaries and global minima on agreement, or the exact
-  discrepant prefix with declared suffix and manifest absences.
-  Both paths require the frozen preconditions, mutation decisions and `instrument_valid`
-  boundary. A Max review follows.
-  Only an exact pass opens a new source-adoption decision for the reported 4.5058 lower
-  bound at `n = 17, 18, 19`; H-052 agreement itself is neither first-party mathematics
-  nor frontier adoption.
-- **A genuinely new theorem route.**
-  [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md) preregisters
-  fixed-side local rigidity of Goebel’s exact `n = 5` pose.
-  T-012’s exact first- and second-order certificates already exist.
-  The agenda must build an injective half-angle chart, account for every inactive wall
-  and pair constraint before reducing locally to the twenty active inequalities, bind
-  that chart’s first two jets to T-012, and freeze an independently reviewed
-  instrument-ready transition before evaluating the curve-selection argument.
-  A lone feasible point at positive distance cannot refute isolation; rejection requires
-  an arc through the pose or an exact accumulating family.
-  A separate H-060 prior-art survey is required before calling a successful first-party
-  proof apparently novel.
-- **A bounded W9 wave.** `think-modk` selects only D-044 and D-046, the two critical
-  defects sharing the generic campaign runner’s validity, archive, lifecycle and
-  persistence boundary.
-  It runs in parallel because neither defect blocks the two exact scientific lanes.
-  Each defect must finish fixed, contained, rerouted or explicitly blocked; the wave
-  cannot substitute easier backlog items.
+- **Assurance and adoption, not new mathematics.** `think-5j8d`’s fresh successor
+  replayed exp-056’s verified 170-row prefix, recomputed rather than promoted the
+  interrupted ordinal, and completed all 181 direction cells with both certificate
+  summaries, the global minima, every frozen precondition and mutation decision, and
+  `instrument_valid` all present. An independent Max review (`BC-149`) passed the round
+  at implementation-agreement scope only, which then opened source adoption:
+  `BC-150`/`BC-151` audited the published Massaccesi argument, an independently written
+  fifth implementation reproduced every row, and the verified lower bound rose to
+  `22529/5000` at `n = 17`--`19`. Neither step is first-party mathematics.
+- **A genuinely new theorem, at a fixed scope.**
+  [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md)’s fixed-side local
+  rigidity of Goebel’s exact `n = 5` pose passed an independent review (`BC-153`) of its
+  injective half-angle chart, complete constraint accounting, `T-012` transfer and
+  order-`2m` coefficient induction, and is registered as `T-014` at `V3`/`C5`/`S3`. `C5`
+  is `C3` plus a mapped review artifact; `C4` — confirmed by distinct methods — is not
+  claimed and is not supported, though the cited evidence entries carry different method
+  values for different claims. Isolation radius, side-free rigidity, global uniqueness
+  and other `n = 5` optima remain outside this result.
+- **A bounded W9 wave, contained rather than fixed.** `think-modk`’s repair of D-044 and
+  D-046 passed a mutation harness that reverted each guard in copies and found every one
+  load-bearing, but the review (`BC-154`) found four clauses of the two defects’ own
+  source findings — one loosening an acceptance screen — that never reached either
+  record and so were never repaired. Both defects are recorded `contained`, and the
+  reviewer’s recommendation against that label over `fixed` stands in both entries. The
+  wave also produced three new defects of its own: `D-424` and `D-425`, both fixed
+  in-run, and `D-427`, still open.
 
-Elapsed hours eight through ten are reserved for `think-xycf` and W10. Every attempted
-scope receives an outcome classification, evidence, stop reason, disposition and named
-follow-up. Generated views and live tbd are reconciled; README, tutorial, conventions,
-development guidance and operating rules each receive an explicit update-or-current
-decision; and exactly one successor is selected without being executed inside the
-closeout. If validation or hosted checks extend beyond the research wall, only the same
-mechanical closeout continues and its post-wall duration is reported separately.
+The closeout (`BC-155`, `think-xycf`) added an outcome, stop reason, disposition and
+follow-up to all nine commitments, including three defects the run created (`D-424`,
+`D-425`, `D-427`, `D-428`) and three inaccurate commit messages it found and corrected.
+Generated views and live tbd were reconciled — read-only, since `tbd` stayed absent;
+README, tutorial and SYNOPSIS were updated, and conventions, development guidance and
+operating rules were checked and found current. The records tier passed 26 of 58
+named-tier steps; the full 58-step local gate passed 57 of 58, its sole failure the
+shallow-checkout provenance artifact rather than a repository defect; hosted validate,
+packing-required and macos-portability passed at `3100fb02`, with a re-run in flight on
+the branch’s later head.
 
-The Green17 exact ceiling (`think-iye2`) is the first bounded fallback; bespoke `n = 12`
-work remains the next larger theorem campaign.
+The Green17 exact ceiling (`think-iye2`) is the first bounded numeric fallback once
+adoption settled, still not ready; bespoke `n = 12` work (`think-0z9b`) remains the next
+larger theorem campaign, also not ready.
 The `n = 68` and `n = 54` source routes stay parked behind their provenance and
 instrument-readiness defects.
-Actual Agenda 016 outcomes, rather than this initial ranking, control the next W10
-handoff.
+Agenda 016’s actual outcomes, rather than the prior ranking, now control this handoff,
+and the closeout ranked `think-ldq2`’s remediation above both.
 
 ### Handoff Record
 
@@ -1971,8 +1980,9 @@ on which the local feasible set is exactly twenty active rows, `T-012`’s first
 cone and non-negative self-stress transferred to that chart, then semialgebraic curve
 selection on the punctured feasible set and an induction on a putative arc’s Taylor
 coefficients that the self-stress contradicts at order `2m`. It is registered at
-`V3`/`C3` — the exact quantities are machine-confirmed here, the two steps that close
-the argument are an audited proof and no instrument decides isolation — and
+`V3`/`C5` — the exact quantities are machine-confirmed here, the two steps that close
+the argument are an audited proof, no instrument decides isolation, and that `C3` is
+raised one rung by the mapped review artifact below, not by a second method — and
 `apparently-novel` at `S3` on
 [`BC-153`](packing/campaign/agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md)’s
 independent review, which rebuilt every exact quantity from scratch in code sharing
@@ -2693,7 +2703,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-079](packing/campaign/agent-sessions/session-079-bc137-n17-sequential-larger-prefix.md) | 3 | 1 | 78 | 46 | 0 | 0.23 h |
 | [session-080](packing/campaign/agent-sessions/session-080-bc138-n68-side-semantics-binding.md) | 4 | 1 | 115 | 77 | 1 | 0.28 h |
 | [session-081](packing/campaign/agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | 4 | 1 | 87 | 49 | 0 | 0.24 h |
-| [session-083](packing/campaign/agent-sessions/session-083-agenda016-ten-hour-coordinator.md) | 2 | 35 | 6,374 | 3,530 | 50 | 21.14 h |
+| [session-083](packing/campaign/agent-sessions/session-083-agenda016-ten-hour-coordinator.md) | 3 | 35 | 6,374 | 3,530 | 50 | 21.14 h |
 | [session-084](packing/campaign/agent-sessions/session-084-bc148-n17-fresh-successor-completion.md) | 3 | 1 | 329 | 166 | 0 | 2.74 h |
 | *shared by 24 sessions* | — | 4 | 10,375 | 5,737 | 129 | 62.26 h |
 

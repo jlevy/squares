@@ -153,7 +153,7 @@ session:
       Support the Agenda 016 closeout from a terminal lane: answer replay questions
       against the frozen exp-059 artifacts, carry the successor's named instrument
       limitations into the closeout record, and run no further target work.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       The n = 17 target is terminal and independently reviewed, so the lane's
@@ -170,14 +170,28 @@ session:
       Any new target computation, or any edit to the frozen exp-059 artifacts.
     fallback: >-
       Report the limitation unanswered rather than recomputing it.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      Answered BC-155's replay questions against the frozen exp-059 artifacts without
+      recomputing anything: the published record re-validates in a separate process,
+      the two named instrument limitations (D-428, and the absent continue-past-
+      disagreement assembly path) were confirmed against the published bytes and
+      filed, and no target computation ran. BC-149's independent review passed the
+      round at implementation-agreement scope, and needs_review was cleared on
+      exp-059 at closeout, with the timing gap between the pass and the clear
+      recorded as its own finding rather than silently corrected.
+    evidence:
+    - packing/defects.yaml D-428, filed against packing/cases/n17_weighted_certificate_successor/run.py.
+    - docs/project/reviews/review-2026-09-03-bc149-h052-agreement-independent-review.md
+    - packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md Resolution.
+    stop_reason: >-
+      BC-155 closed the agenda with the lane's evidence bound in; no further replay
+      question or target work remained for this session.
     next_action: >-
-      Hand the lane's limitations and receipts to BC-155 and close the session with
-      its resource rollup.
+      think-5j8d is the marker Agenda 016's closeout selected for where this run's
+      chain stopped, not a recommendation to continue it here; the coordinator's
+      separately selected follow-up is recorded in the agenda's own closeout block.
   primary_bead: think-5j8d
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 597
     finalization_minutes: 15
@@ -193,7 +207,12 @@ session:
     before: >-
       170 of 181 in exp-056, in a chain whose assembler omits both certificate summaries,
       the global minima, the preconditions, the mutation map and instrument_valid
-    after: null
+    after: >-
+      181 of 181 in exp-059, with both CertificateManifest summaries, the global
+      minima, the shrink-and-scaling preconditions, all_mutations_rejected and
+      instrument_valid all present and independently reviewed at
+      implementation-agreement scope (BC-149 PASS); H-052 carries a Resolution at
+      that scope.
   delegations: []
   outputs:
   - packing/cases/n17_weighted_certificate_successor/run.py
@@ -201,6 +220,8 @@ session:
   - packing/tests/test_n17_weighted_certificate_successor.py
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-059-h-052-n17-fresh-successor-completion.md
   - packing/campaign/agent-sessions/session-084-bc148-n17-fresh-successor-completion.md
+  - packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md
+  - packing/defects.yaml
   checks:
   - 'selftest: 115 named guards, passed true, skipped 0, receipt hash 0109332a'
   - 'selftest receipts byte-identical under normal and optimized Python: 875722ce'
@@ -208,12 +229,17 @@ session:
   - 'ruff check, ruff format --check and basedpyright clean on both new files'
   - 'ancestry verification against the real artifacts with 0 target directions evaluated'
   - 'exp-052 and exp-056 checkpoint and progress digests unchanged: db5c1569, 08e301b0, 0d39a7e7, 0875f31f'
+  - 'BC-149 independent review: PASS, accumulation-level independence over a shared reduction'
   resource_rollups:
   - packing/campaign/resource-usage/agent-aecd43cdbf7383013.yaml
-  stop_reason: null
+  stop_reason: >-
+    BC-155 closed Agenda 016 with this lane's evidence bound into the closeout; the
+    fixed 16:48:00Z session deadline arrived with no further replay question or
+    target work open.
   next_action: >-
-    Stand by without running any process until 08:58:00Z, then run the registered writer
-    on the coordinator's authorization and assemble whichever terminal schema applies.
+    think-5j8d is the marker Agenda 016's closeout selected for where this run's
+    chain stopped, not a recommendation to continue it here; the coordinator's
+    separately selected follow-up is recorded in the agenda's own closeout block.
 ---
 # Session-084 — BC-148 `n = 17` Fresh Successor Completion
 

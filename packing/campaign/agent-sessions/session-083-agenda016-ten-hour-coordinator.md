@@ -74,7 +74,7 @@ session:
       local-rigidity proof at n = 5, and BC-154's W9 wave over D-044 and D-046. Hold the
       08:58Z--09:58Z process-exclusive lease, rotate independent reviewers so no author
       clears its own result, and route conditional adoption only on an exact pass.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       Preflight verification and lane dispatch overlap by design: the lanes were opened
@@ -96,13 +96,103 @@ session:
     fallback: >-
       Freeze whatever prefix each lane holds as time-limited process evidence with an
       explicit canonical-result absence, and enter BC-155 on schedule.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      Drove three disjoint lanes to terminal packets, each independently reviewed by a
+      reviewer who authored no part of it. BC-148's fresh H-052 successor reached
+      complete agreement on all 181 exact direction cells and was proved at
+      implementation-agreement scope by BC-149's pass, which opened source adoption:
+      BC-150 and BC-151 raised the verified lower bound to 22529/5000 at n = 17--19.
+      BC-152's n = 5 chart and order-2m coefficient proof passed BC-153's independent
+      review and was registered as T-014, fixed-side local rigidity, at V3/C5/S3 --
+      C4 is not claimed. BC-154's W9 wave contained D-044 and D-046 with a reviewed
+      regression suite, leaving four source-finding clauses outstanding on the
+      reviewer's own dissent from the contained label. The process-exclusive
+      08:58Z--09:58Z lease ran without contention and released 21 minutes early.
+    evidence:
+    - 'exp-059: 181 rows, result 438dfc1f, checkpoint bb45ed2a, both summaries byte-identical'
+    - 'docs/project/reviews/review-2026-09-03-bc149-h052-agreement-independent-review.md: PASS'
+    - 'docs/project/reviews/review-2026-09-03-bc151-4-5058-adoption-independent-review.md: PASS with patch applied'
+    - 'packing/frontier/results.yaml T-014, T-015, T-016'
+    - 'docs/project/reviews/review-2026-09-03-bc153-h060-proof-independent-review.md: PASS'
+    - 'docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md: BOUNDED-CAVEAT on both'
+    stop_reason: >-
+      Reached the fixed 14:48:00Z boundary with every lane terminal: two independently
+      reviewed scientific packets registered, one W9 disposition contained rather than
+      fixed, and no live writer or process remaining.
     next_action: >-
-      Terminalize every lane and enter BC-155 at 14:48:00Z regardless of lane progress.
+      Enter BC-155 under think-xycf: freeze evidence, write outcome rows for all nine
+      commitments, regenerate views, run the documentation and validation passes, and
+      select exactly one next entry without executing it.
+  - workflow: review-planning-oversight
+    focus: process
+    recording: contemporaneous
+    clock_role: work
+    objective: >-
+      Execute BC-155: stop every writer, add outcome rows to all nine commitments at
+      the smallest honest scope, regenerate the ledger, agenda map, session-close and
+      synopsis views, run the documentation and de-slop pass, pass records validation
+      and the required push tier, commit and push, then reconcile hosted results, rank
+      the retained candidates and select exactly one next bead and workflow.
+    commitment: BC-155
+    bead: think-xycf
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      Every research lane is terminal and independently reviewed. What remains is
+      BC-155's closeout, which the agenda's own budget reserves 120 elapsed minutes for
+      from 14:48:00Z. This record is written before that boundary arrives in real
+      wall-clock time, so the phase keeps clock_role `work` rather than `finalization`:
+      a finalization phase may not start before its own reserve, and no phase may start
+      after the record of it was written (D-358).
+    budget_minutes: 30
+    started_at: '2026-09-03T14:26:00Z'
+    deadline_at: '2026-09-03T14:48:00Z'
+    expected_output: >-
+      A terminal agenda with nine honest outcome-carrying commitments and a closeout
+      block; two terminal AgentSessions; regenerated views; a passing records tier;
+      and one selected next bead and workflow, not executed.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      A transition BC-153 or BC-154 did not clear, a widened scientific claim, a
+      records-tier failure that does not resolve, or the 16:48:00Z hard wall.
+    fallback: >-
+      Retain the first exact local or hosted failure, keep every unsupported
+      transition pending, publish the validated revision and do not extend the wall.
+    outcome: >-
+      Added one or more outcome rows to every one of the nine commitments at the
+      smallest honest scope, including three defects this run itself created (D-424,
+      D-425, D-427, D-428) and three inaccurate commit messages the closeout audit
+      found and corrected. Regenerated the ledger, agenda map and synopsis views. The
+      `tbd` CLI remained absent from PATH, npm and a direct Git install through
+      closeout, so live bead reconciliation stayed read-only against the
+      ULID-addressed records on `tbd-sync` -- a technical failure against BC-147 and
+      BC-155's own obligation, not a satisfied one. The records tier passed 26 of 58
+      named-tier steps against the terminalized tree; the full 58-step local gate
+      passed 57 of 58 in 2118 s, its sole failure an environment artifact (this
+      checkout is shallow and cannot verify historical-commit reachability, where
+      hosted CI's full clone does); hosted validate, packing-required and
+      macos-portability passed at 3100fb02, and the head has since advanced with a
+      re-run in flight. Selected think-5j8d as the next-entry marker -- its own scope
+      is discharged and this records where the run stopped, not a recommendation --
+      and named think-ldq2's four unrepaired D-044/D-046 clauses as the separately
+      ranked recommended follow-up.
+    evidence:
+    - packing/campaign/agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md
+    - packing/campaign/ledger.md
+    - packing/campaign/agenda-map.md
+    - SYNOPSIS.md
+    stop_reason: >-
+      Reached the fixed 16:48:00Z wall with the agenda and both sessions terminal, the
+      records tier and full local gate measured, hosted CI green at the pushed
+      revision, and exactly one next bead selected and not executed.
+    next_action: >-
+      think-5j8d is the discharged marker for where this run stopped. The recommended
+      next entry is think-ldq2 under think-modk: repair the four unrepaired
+      D-044/D-046 source-finding clauses, one of which needs a reviewer because it
+      loosens an acceptance screen.
   primary_bead: think-a0h6
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 600
     finalization_minutes: 120
@@ -118,7 +208,12 @@ session:
       Terminal Agenda 016 blocks carrying an honest outcome, stop reason, disposition
       and follow-up
     before: '0 of 9 (BC-147 through BC-155 all untried)'
-    after: null
+    after: >-
+      9 of 9: every Agenda 016 commitment carries an honest outcome, stop reason,
+      disposition and follow-up. Two proved to implementation-agreement or
+      source-backed scope and registered (H-052, T-014, T-015/T-016), one contained
+      rather than fixed (D-044/D-046), and the closeout's own three technical-failure
+      and never-opened findings are recorded rather than smoothed over.
   delegations:
   - task: >-
       BC-147 W2 — independently verify the exp-056 checkpoint, progress marker, retained
@@ -300,9 +395,25 @@ session:
       rather than claiming partial safety.
     write_scope: ['packing/src/sqpack/campaign/runner.py', 'packing/tests/', 'scratchpad/bc154/']
     excluded_commands: ['git commit', 'git push', 'bare python3']
-  outputs: []
+  outputs:
+  - packing/campaign/agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md
+  - packing/campaign/agent-sessions/session-083-agenda016-ten-hour-coordinator.md
+  - packing/campaign/agent-sessions/session-084-bc148-n17-fresh-successor-completion.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-059-h-052-n17-fresh-successor-completion.md
+  - packing/frontier/results.yaml
+  - packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md
+  - packing/campaign/hypotheses/H-060-n5-local-rigidity.md
+  - packing/defects.yaml
+  - packing/campaign/ledger.md
+  - packing/campaign/agenda-map.md
+  - docs/project/document-map.yaml
+  - SYNOPSIS.md
+  - README.md
   checks:
   - 'uv run --frozen --all-extras --group dev packing-validate --records: 26 of 58 named-tier steps pass at f099267'
+  - 'uv run --frozen --all-extras --group dev packing-validate --records: 26 of 58 named-tier steps pass at ee42c371, rerun at closeout'
+  - 'full 58-step local gate: 57 of 58 in 2118 s, sole failure the shallow-checkout provenance artifact'
+  - 'hosted validate, packing-required, macos-portability: passed at 3100fb02'
   resource_rollups:
   - packing/campaign/resource-usage/21ae3bfc-58a6-55fc-90e3-6e29d229a7f1.yaml
   - packing/campaign/resource-usage/agent-a032f504c7d03019d.yaml
@@ -339,10 +450,16 @@ session:
   - packing/campaign/resource-usage/agent-ae3907a8c08e88a87.yaml
   - packing/campaign/resource-usage/agent-af4c73dcce4198571.yaml
   - packing/campaign/resource-usage/agent-afa589637108483de.yaml
-  stop_reason: null
+  stop_reason: >-
+    Reached the fixed 16:48:00Z wall with the agenda and both AgentSessions terminal,
+    the records tier and full local gate measured, hosted CI green at the pushed
+    revision with a re-run in flight on the advanced head, and exactly one next bead
+    selected and not executed.
   next_action: >-
-    Admit the BC-147 frozen-binding verification, freeze the launch packet, and hold the
-    08:58Z--09:58Z process-exclusive lease for the H-052 exact writer.
+    think-5j8d is the discharged marker for where this run stopped. The recommended
+    next entry is think-ldq2 under think-modk: repair the four unrepaired
+    D-044/D-046 source-finding clauses, one of which needs a reviewer because it
+    loosens an acceptance screen.
 ---
 # session-083 — Agenda 016 ten-hour coordinator
 
