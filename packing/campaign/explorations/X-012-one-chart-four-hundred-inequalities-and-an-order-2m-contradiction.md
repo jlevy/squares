@@ -32,7 +32,9 @@ exploration:
     coefficient argument, and two obligations on it are open: the W7 executable instrument
     with its receipt and eight rejecting controls, which a separate lane owns and which
     keeps instrument_ready false; and primary-text confirmation of the curve-selection
-    statement, currently supported only by two independent secondary quotations. The
+    statement, which a separate verification lane has since answered YES on the
+    mathematics, the statement being attested verbatim by one of BCR's own authors,
+    without reaching the printed BCR page. The
     admissible novelty claim is S3, not S4. The closing principle is classical and the
     curve-selection proof shape matches Connelly-Whiteley 1996 Theorem 4.3.1; neither is
     claimed as new. Control C8 confirms exp-034's family is not a refutation: it sits at
@@ -54,8 +56,9 @@ exploration:
 
 **Date:** 2026-09-03
 
-**Status:** Review-pending. The frozen `BC-152` proof packet, installed unchanged in
-substance. `H-060` stays **unresolved** and `instrument_ready: false`; `BC-153` owns the
+**Status:** Review-pending.
+The frozen `BC-152` proof packet, installed unchanged in substance.
+`H-060` stays **unresolved** and `instrument_ready: false`; `BC-153` owns the
 independent review, and no frontier or result-register change follows from this report.
 
 **Owns:** The mathematics of `BC-152` phase 0–105 at `n = 5`. It owns no code: the `W7`
@@ -67,9 +70,8 @@ separate lane and do not exist yet.
 This report is the frozen `BC-152` proof packet, whose own header block read:
 
 - **Lane:** BC-152 (agenda-016), n = 5, phase 0–105 (mathematics, not code).
-- **Hypothesis:**
-  [H-060](../hypotheses/H-060-n5-local-rigidity.md), Goebel’s exact n = 5 optimum is
-  locally rigid at fixed side.
+- **Hypothesis:** [H-060](../hypotheses/H-060-n5-local-rigidity.md), Goebel’s exact n =
+  5 optimum is locally rigid at fixed side.
 - **Inputs held fixed:** T-012 (certificate record
   [`bc-049-n5-rigidity-certificates.json`](../series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json)),
   [X-007](X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md),
@@ -80,12 +82,28 @@ This report is the frozen `BC-152` proof packet, whose own header block read:
   No repository file was modified by it.
 
 The packet is `925` lines with SHA-256
-`28343b743e689fc99968d589a542d9022d061de8ec3ae5100bf4ef4930e40b6b`. Everything from the
-rule below is that packet’s body, byte-for-byte. What this installation added is the
-frontmatter, this preface, the artifact table immediately below, and the closing
-guidelines footer; no mathematical statement, number, count, citation or claim boundary
-was altered, and none may be altered here — the packet is frozen, and the hash above is
-what a reviewer checks against.
+`28343b743e689fc99968d589a542d9022d061de8ec3ae5100bf4ef4930e40b6b`, and that hash names
+the frozen source rather than this file: the body from the rule below reproduces the
+packet’s content, reformatted to house Markdown conventions.
+What this installation added is the frontmatter, this preface, the artifact table
+immediately below, and the closing guidelines footer; no mathematical statement, number,
+count, citation or claim boundary was altered by the installation, and none may be
+altered here — the packet is frozen, and the hash above is what a reviewer checks
+against.
+
+**Provenance pass, 2026-09-03.** One later pass has touched the body, and it is named
+here so that a reviewer diffing against the frozen source knows what to expect.
+The packet’s open obligation `O2` — primary-text confirmation of the curve-selection
+statement — was worked by a separate verification lane, which returned **YES**: the
+statement as used follows from the theorem cited, and §4 is sound as written.
+Its recommendations were provenance and completeness only.
+Applying them rewrote the citation apparatus of §4.1 (including one citation withdrawn),
+de-flagged the Milnor statement of §4.1 from “from memory”, added two items to that
+route’s reduction, added the nonconstancy clause and the hypothesis inventory to §4.2,
+and updated §8.3, the closing obligation note, the replay-artifact note above and this
+record’s brief. No statement, number, count, margin, inequality, proof step or claim
+boundary changed; `H-060` stays unresolved, `instrument_ready` stays false, and the
+printed BCR page is still unread.
 
 The packet’s replay scripts are **not** installed as repository code.
 Nothing under `campaign/` is code — the campaign tree holds records — and the executable
@@ -118,10 +136,11 @@ and digests are in the results record named above.
 | `sosc_check.py` | the numbers of §5.7: `w · q_geo = -√2/2`, `w · q_chart = -2√2`, the `mu = 1` signs in both normalizations, the threshold `mu > 2/(-w · q)` |
 
 The packet also drew on text extractions of `gobel-1979`, the Whiteley handbook chapter,
-`arXiv:2301.00128` and `arXiv:2504.03348` for §4 and §7. Those are literature, not first-party
-artifacts; retaining them is a `packing/resources/` decision outside this round’s write
-scope, and §7.3’s recommendation to archive the Kingbird page stands unactioned for the
-same reason.
+`arXiv:2301.00128` and `arXiv:2504.03348` for §4 and §7. Those are literature, not
+first-party artifacts; retaining them is a `packing/resources/` decision outside this
+round’s write scope, and §7.3’s recommendation to archive the Kingbird page stands
+unactioned for the same reason.
+`arXiv:2301.00128` is no longer relied on for §4; §4.1 records the withdrawal and why.
 
 `verify_chart.py` ends with `ALL CHECKS PASSED`; every number quoted below is taken from
 its output or from the repository’s own certificate record.
@@ -528,14 +547,34 @@ semialgebraic and `x ∈ Cl(A)`. Then there is a Nash arc `gamma : (-1, 1) -> R^
 (real-analytic and semialgebraic) with `gamma(0) = x` and `gamma((0, 1)) ⊂ A`.*
 
 Provenance, stated honestly: the printed text of BCR was **not** available in this
-environment. The statement above is confirmed by two independent secondary sources whose
-text was extracted here:
+environment, and it was not reached by the verification lane that later worked this
+obligation either — Springer Link redirects to an identity provider, the De Gruyter
+digitisation answers `405`, this project’s Google Books quota is `0`, and neither BCR
+nor Milnor is on archive.org or HathiTrust in readable form.
+Nothing below is the printed page of Proposition 8.1.13 and none of it is offered as a
+substitute for one. What it does establish is that the statement used here is attested
+verbatim by one of BCR’s own authors, and that its hypothesis class is attested by four
+verbatim applications of the proposition in the literature — all four by Fernando and
+coauthors, which is one author group and not four independent ones.
 
-- Nguyen Hong Duc, *Curve selection lemma in arc spaces*, arXiv:2301.00128 (2022), §1,
-  verbatim: “The classical version of Curve Selection Lemma was achieved by Milnor [15].
-  Let X be a semi-algebraic subset in R^n and x be a point in the closure X̄ of X. Then
-  there exists a Nash curve (analytic and semi-algebraic curve) φ : [0, ε) → R^n such
-  that φ(0) = x and φ(t) ∈ X for all t ∈ (0, ε).” (`arxiv-2301.00128.txt`, lines 13–17.)
+- **The printed table of contents of BCR itself** (Deutsche Nationalbibliothek scan,
+  `d-nb.info/953926273/04`), verbatim: “8. Nash Functions 161”, “8.1 Germs of Nash
+  Functions and Algebraic Power Series 161”, “8.2 Local Properties of Nash Functions
+  167”, and separately “2.5 Closed and Bounded Semi-algebraic Sets.
+  Curve-selection Lemma 35”. This is front matter of the book, and it places Proposition
+  8.1.13 in §8.1, pp. 161–166 — germs of Nash functions and algebraic power series, which
+  is the machinery a *Nash* curve selection lemma is proved with.
+  It also shows that the book carries a second, continuous curve-selection lemma at
+  §2.5, which is not the one cited here.
+- **M. Coste, *Real Algebraic Sets***, lecture notes from the RAAG winter school at
+  Aussois, document dated 23 March 2005, Theorem 1.15 (Analytic curve selection),
+  verbatim: “For A and x as in theorem 1.14, there exists a Nash curve γ : (−1, 1) → R^n
+  such that γ(0) = x and γ((0, 1)) ⊂ A.” Coste is the “C” of Bochnak–Coste–Roy, so this
+  is the cited statement in an author’s own words, and it is the statement used here;
+  his Theorem 1.14 is the continuous version, in the `x ∈ clos(S)`, `x ∉ S` form.
+  Two caveats, stated because they are why this is still not primary text: the notes are
+  self-described as “still in a provisional form”, and Theorem 1.15 is introduced with
+  “We explain the reason for this fact, without giving a complete proof”.
 - J. F. Fernando, *On a Nash curve selection lemma through finitely many points*,
   arXiv:2504.03348 (2025), proof of Lemma 3.1, verbatim: “there exists by
   [BCR, Prop.8.1.13] a Nash arc η := (η_1, ..., η_n) : [−1,1] → R^n such that η(0) = p
@@ -544,26 +583,91 @@ text was extracted here:
   Bibliography entry: “[BCR] J. Bochnak, M. Coste, M.-F. Roy: Real algebraic geometry.
   Ergeb. Math. 36, Springer-Verlag, Berlin (1998).” (`arxiv-2504.03348.txt`, lines 850,
   875–877, 3121.)
+- **Two further verbatim uses of the same proposition**, carrying the same bibliography
+  entry: Fernando & Ueno, arXiv:1212.1811, “there exists by the Nash curve selection
+  lemma [BCR, 8.1.13] a Nash path γ : (−1,1) → RP^m such that γ((0,1)) ⊂ S_1 and γ(0) =
+  p”; and Fernando, arXiv:1503.05706, “By the Nash curve selection lemma
+  [BCR, Prop.8.1.13] there exists a Nash arc γ : (−1,1) → M × S^{k−1} such that γ(0) =
+  (a,b) and γ((0,1)) ⊂ Γ_ε”.
+- **A. Carbone & J. F. Fernando, arXiv:2601.13164**, which applies the proposition to a
+  *difference*: “By the Nash curve selection lemma [BCR, Prop.8.1.13] there exist Nash
+  arcs γ_1 : [−1,0] → (R_1\R_2) ∪ {p} and γ_2 : [0,1] → (R_2\Y_1) ∪ {p} such that γ_i(0)
+  = p, γ_1([−1,0)) ⊂ R_1 and γ_2((0,1]) ⊂ R_2\Y_1.” `R_2 \ Y_1` is a semialgebraic set
+  minus an algebraic one — neither closed, nor open, nor basic — so this use is direct
+  evidence that Proposition 8.1.13 carries no unstated closedness, boundedness,
+  openness, basic-ness or dimension hypothesis.
+  §4.2 does not lean on that, since the set here satisfies all of those conditions
+  anyway.
 
-Both give: semialgebraic `A`, `x` in its closure, real-analytic semialgebraic arc, one
-branch inside `A`. The domain (`(-1,1)`, `[-1,1]` or `[0, ε)`) is immaterial here: only
-a convergent power series at `0` and the inclusion of `(0, ε)` are used.
+One author group leaves the *numbering* worth an independent check, and it has one:
+Coste, Ruiz and Shiota, *Nash triviality in families of Nash mappings* (Annales de
+l’Institut Fourier), state “PROPOSITION 1.1 ([BCR], 8.10.3)”, which matches “8.10
+Families of Nash Functions 202” in the printed table of contents above.
+BCR’s chapter 8 is numbered the way these citations assume.
+
+**One citation withdrawn.** The packet also quoted Nguyen Hong Duc, *Curve selection
+lemma in arc spaces*, arXiv:2301.00128 (2022), §1, which states the
+arbitrary-semialgebraic Nash version and attributes it to Milnor.
+The statement it gives is right and agrees with the one above; the attribution is not,
+because Milnor’s own hypotheses are narrower — see the alternative route below.
+Keeping it would have made this document repeat an over-attribution, so it is withdrawn:
+the general statement is cited to BCR, and Milnor is cited only together with the
+reduction that puts the set into his class.
+
+**What the sources agree on, and what is not used.** Semialgebraic `A`, `x` in its
+closure, a Nash — that is, real-analytic *and* semialgebraic — arc, one branch inside
+`A`. Nash is strictly stronger than anything consumed below: `sin` and `exp` are
+analytic and not Nash, and Corollary 4.3 and §5 use only real-analyticity.
+That much is load-bearing rather than decorative, because analyticity is what supplies a
+least `m` with `a_m != 0`: a merely `C^∞` arc could be flat at `0`, and a merely
+continuous semialgebraic one would carry a Puiseux expansion in fractional powers and
+need a reparametrisation `s = u^N` before the induction of §5 could start.
+The domain (`(-1,1)`, `[-1,1]` or `[0, ε)`) is immaterial here: only a convergent power
+series at `0` and the inclusion of `(0, ε)` are used.
 
 **Alternative route** (for a reviewer who prefers the older statement).
 Milnor, *Singular Points of Complex Hypersurfaces*, Ann.
 of Math.
-Studies 61, Princeton 1968, §3 “The curve selection lemma”, Lemma 3.1 (statement
-from memory, flagged): *if `V ⊂ R^m` is a real algebraic set and
-`U = {g_1 > 0, ..., g_l > 0}` with `g_i` polynomials, and `U ∩ V` contains points
-arbitrarily close to the origin, then there is a real-analytic curve `p : [0, ε) -> R^m`
-with `p(0) = 0` and `p(t) ∈ U ∩ V` for `t > 0`.* To apply it, write `F \ {0}` as a
-finite union of sets of the form
+Studies 61, Princeton 1968, §3 “The curve selection lemma”, Lemma 3.1. No longer
+quoted from memory: the statement below matches, hypothesis for hypothesis, the
+restatement in A. Derdzinski and Ś. R. Gal, *Indefinite Einstein metrics on simple Lie
+groups*, arXiv:1209.6084, §4 (“Milnor’s curve-selection lemma”), Theorem 4.1, which
+attributes it to “Milnor [14, p. 25]” — p. 25 being the opening page of Milnor’s §3.
+Milnor’s own printed page was not reached.
+*If `V ⊂ R^m` is a real algebraic set and `U = {g_1 > 0, ..., g_l > 0}` with `g_i`
+polynomials, and `U ∩ V` contains points arbitrarily close to the origin, then there is
+a real-analytic curve `p : [0, ε) -> R^m` with `p(0) = 0` and `p(t) ∈ U ∩ V` for
+`t > 0`.*
+
+The narrowness of that class is confirmed rather than suspected, and it is why the
+reduction below is required rather than decorative.
+Derdzinski–Gal define, verbatim: “By a *semi-algebraic set* in `S` one means the
+intersection of an algebraic set with `⋂_{j=1}^{k} f_j^{−1}((0, ∞))`, where `k ≥ 1` and
+`f_1, ..., f_k` are polynomial functions `S → R`” — finitely many **strict**
+inequalities.
+`F \ {0}` is outside that class on two independent counts: its inequalities
+are non-strict, and it has a point removed.
+
+To apply it, write `F \ {0}` as a finite union of sets of the form
 `{ f = 0 for f in Z } ∩ { f > 0 for f in P } ∩ { |z|^2 > 0 }`, obtained by choosing one
 branch per pair (`8^10` choices) and, for each of the resulting closed basic sets,
 splitting each `f >= 0` into `f = 0` or `f > 0`; `0` is in the closure of a finite union
 iff it is in the closure of one member; apply the lemma to that member.
 The finiteness is all that matters.
 This route needs no Nash-function theory.
+
+Two things the reduction owes, stated because their omission is the kind that survives
+review. **Localisation must stay inside the class.** Corollary 4.3 applies the lemma to
+`F \ {0}` and only then localises, by continuity, to `N`; a reviewer who prefers to
+localise first, applying the lemma to `(F ∩ N) \ {0}`, needs the restriction to `N` to
+be a strict polynomial inequality itself, and it is — `N` is defined in §3.4 by 128
+strict sign conditions, the 28 conditions `f < 0` being `-f > 0`, so intersecting with
+`N` keeps every member of the union in Milnor’s class and keeps the set semialgebraic
+for the BCR route. Nothing is lost either way, because isolation is local.
+**The finite-union step is in print.** Derdzinski–Gal’s displayed remark (4.1) —
+“whenever `Z ⊂ S` and `L ⊂ S` are algebraic, one easily sees that `Z \ L` is a finite
+union of semi-algebraic sets in `S`” — is precisely this move, made in a peer-reviewed
+paper immediately before they invoke Milnor’s lemma.
 
 ### 4.2 Hypotheses, verified for this chart
 
@@ -573,6 +677,41 @@ This route needs no Nash-function theory.
   homeomorphism onto the open set `U ∋ P^0` (Lemma 1), so `Feas(s) ∩ U` corresponds to
   `F`, and a point is nonisolated in a set iff it lies in the closure of the set minus
   the point.
+
+Those two bullets are the whole hypothesis of Proposition 8.1.13.
+
+**Applying the lemma to `F \ {0}` rather than to `F` is load-bearing, not tidiness.**
+The theorem is stated with `x ∈ Cl(A)`, which permits `x ∈ A`; and when `x ∈ A` the
+*constant* arc `gamma ≡ x` already satisfies `gamma(0) = x` and `gamma((0,1)) ⊂ A`, so a
+lemma entitled to return it says nothing about isolation and leaves the coefficient
+induction of §5 with no `a_m != 0` to run on.
+Removing the point is exactly what excludes that: with `0 ∉ A`, every arc satisfying
+`gamma((0,1)) ⊂ A` has `gamma(s) != 0` for `s ∈ (0,1)`, which is where Corollary 4.3
+gets its nonconstancy.
+Any rephrasing that applies the lemma to `F` itself breaks the argument silently.
+A reviewer who prefers the guard inside the theorem can cite Coste’s Theorem 1.14/1.15,
+stated for `x ∈ clos(A)`, `x ∉ A`.
+
+**Every hypothesis a weaker version of the lemma could impose is also satisfied**, so
+the argument does not depend on which formulation a reviewer reaches for:
+
+- **Closed, and locally closed basic.** All 400 conditions of §3.2 are non-strict, and
+  finite unions and intersections of closed sets are closed, so `F` is closed; the
+  twenty-row system `G := { g~_1 >= 0, ..., g~_20 >= 0 }` is a **closed basic**
+  semialgebraic set (inequalities only, no equalities), and Proposition 5(ii) says
+  `F ∩ N = G ∩ N`. Hence `F \ {0} = F ∩ (R^15 \ {0})` is closed intersected with open:
+  **locally closed**.
+- **`0 ∉ A`, and `0 ∈ Cl(A)` is exactly “not isolated”.** The first holds by
+  construction, the second is the second bullet above.
+- **Bounded, if a reviewer insists on it.** No cited statement asks for it: “Closed and
+  Bounded Semi-algebraic Sets” is the *title* of BCR §2.5, not a hypothesis, and Coste’s
+  proof of Theorem 1.14 opens by *reducing* to the bounded case (“Replacing `S` with its
+  intersection with a ball with center `x` and radius 1, we can assume `S` bounded”). It
+  is free here in any case: intersecting `A` with an open ball `{ rho^2 - |z|^2 > 0 }`
+  about the pose is one more strict polynomial inequality, which preserves
+  semialgebraicity, local closedness and membership in Milnor’s class, leaves
+  `0 ∈ Cl(A)` undisturbed because closure membership is local, and costs nothing because
+  isolation is local. It is not done above only because nothing above needs it.
 
 **Corollary 4.3.** If `P^0` is not isolated in `Feas(s)`, there is a real-analytic
 `gamma : (-1,1) -> R^15` with `gamma(0) = 0`, `gamma((0,1)) ⊂ F \ {0}`; writing its
@@ -957,11 +1096,14 @@ Paper proofs, with every exact quantity replayed by an independent sympy impleme
 ### 8.3 Cited, not verified against a primary text
 
 - The Nash curve selection lemma, BCR Prop.
-  8.1.13 (two independent verbatim secondary quotations agree on the statement; the book
-  itself was not opened here).
-  Alternative: Milnor 1968 Lemma 3.1 with the finite-union reduction of §4.1 (statement
-  from memory). Its hypotheses are verified for `F \ {0}` in §4.2. A separate agent is
-  closing this primary-source obligation.
+  8.1.13. The printed page was not reached, here or by the verification lane that later
+  worked this obligation; what stands behind it is the book’s own table of contents, the
+  statement in the words of Coste — an author of BCR — and four verbatim uses of
+  `[BCR, Prop. 8.1.13]` in the literature, one of them on a *difference* of
+  semialgebraic sets (§4.1). Alternative: Milnor 1968 Lemma 3.1 with the finite-union
+  reduction of §4.1, no longer quoted from memory but corroborated word for word against
+  Derdzinski–Gal §4, which cites Milnor p. 25; Milnor’s printed page was not reached
+  either. Its hypotheses are verified for `F \ {0}` in §4.2.
 - The SOSC numbering (Nocedal–Wright Theorem 12.6; McCormick 1967; Fiacco–McCormick
   1968). The packet does not depend on it: Theorem 11 is proved in full.
 - The prior-art scoping of §7.1 (the [CW96] Theorem 4.3.1 shape match, the disk-jamming
@@ -1023,6 +1165,18 @@ If the primary statement is as quoted, the registered proof is complete and H-06
 mathematical criterion is met; what then stands between “unresolved” and “accepted” is
 engineering (the instrument, its receipt, and the eight rejecting controls), not
 mathematics.
+
+**Where that obligation stands after the verification pass (2026-09-03).** A separate
+lane worked it and returned **YES**: the statement as used follows from the theorem
+cited, §4 is sound as written, and no mathematical defect was found.
+Its evidence is folded into §4.1 and §4.2 above, and so is its limit — the printed page
+of BCR Proposition 8.1.13 was not reached, so the strongest thing on record is the
+statement in the words of one of BCR’s three authors, four verbatim uses of the
+proposition by one author group, and the Milnor route corroborated word for word against
+a peer-reviewed restatement that cites Milnor’s page.
+A reviewer who requires the printed page still has that to do.
+Nothing else changes: `H-060` stays **unresolved**, `instrument_ready` stays false, and
+the engineering obligation above is untouched.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
