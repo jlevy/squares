@@ -701,16 +701,19 @@ The frontier property stayed `undetermined` then, and the reason is worth carryi
 forward: second-order rigidity is not local rigidity, the step that would close the gap
 is a curve-selection argument that `X-007` writes out as prose and no replay checks, and
 the property enum has no word for what was actually established.
-*(That gap closed on 2026-09-03: the argument was written out in full, checked against
-an exact 400-inequality accounting, independently reviewed and registered as `T-014`,
-and the property is now `locally-rigid` at fixed side — see the newest result under
-[Results established here](#results-established-here).)* What did change is everything
+What did change is everything
 saying why — `verified` rather than `numerically-checked`, `exact-algebraic` rather than
 `numerical-multiprecision`, and a first-party evidence id in place of the screen’s —
 which takes `n = 5` out of the assessment tool’s ownership, so it joins `n = 11` as left
 to a stronger argument.
 Both `D-354` guards stayed green without being edited, which was the test the change was
 held to.
+
+For `n = 5` that stronger argument arrived on 2026-09-03.
+`BC-152` wrote the curve-selection step out in full and checked it against an exact
+accounting of all 400 local inequalities, `BC-153` reviewed it independently, and the
+property now reads `locally-rigid` at fixed side on a second first-party evidence record
+— see [`T-014`](#results-established-here).
 
 **Read [`OR-4`](operating-rules.md) before trusting any older queue.** `BC-081` found
 that agenda-005 was advertising four commitments as takeable which agenda-006 had
@@ -1304,12 +1307,12 @@ not only instruments.
 | [`cases.trump11.tangent_cones`](packing/cases/trump11/tangent_cones.py) | Trump’s pose is locally isolated in the anchored chart (exp-013) |
 | [`cases.small_n.optimal_moduli`](packing/cases/small_n/optimal_moduli.py) | Exact optimal configuration spaces at `n = 3, 4` (exp-014, exp-015) |
 | [`cases.n5.equal_side_face`](packing/cases/n5/equal_side_face.py) | Two retained equal-side `n = 5` poses share one exact fixed-angle optimal face (exp-033) |
-| [`cases.n5.angle_sheet`](packing/cases/n5/angle_sheet.py) | That face lies in an exact two-parameter angle-and-slide sheet of optima (exp-034) |
+| [`cases.n5.angle_sheet`](packing/cases/n5/angle_sheet.py) | That face lies in an exact two-parameter angle-and-slide sheet of optima, at side `1 + 5√2/4`, above `s(5)` (exp-034) |
 | [`cases.n5.tangent_cones`](packing/cases/n5/tangent_cones.py) | Complete active first-order systems admit one displayed non-sheet direction (exp-035) |
 | [`cases.n5.second_order_obstruction`](packing/cases/n5/second_order_obstruction.py) | That displayed direction is excluded from the true Bouligand tangent cone (exp-036) |
 | [`cases.n5.tangent_inventory`](packing/cases/n5/tangent_inventory.py) | Both owner branches have the same complete first-order V-representation at A, the interior, and B (exp-038) |
 | [`cases.n5.fixed_angle_polytope`](packing/cases/n5/fixed_angle_polytope.py) | Four release classes have exact paths in one connected five-dimensional cell-local LP-optimal position polytope, with positive pathwise first-order stresses (exp-039) |
-| [`sqpack.local_rigidity`](packing/src/sqpack/local_rigidity/instrument.py) | The exact local system behind `T-014`: one injective half-angle chart, all 400 elementary inequalities, and a 128-condition neighbourhood on which Goebel’s `n = 5` pose is isolated at fixed side (exp-058, proof in X-012). It does not decide isolation — `isolation_decided` is false unconditionally — and the closing is the proof |
+| [`sqpack.local_rigidity`](packing/src/sqpack/local_rigidity/instrument.py) | The exact local system behind `T-014`: one injective half-angle chart, all 400 elementary inequalities, and a 128-condition neighbourhood on which the local feasible set is exactly the twenty active rows, carrying `T-012`’s first- and second-order data (exp-058, proof in X-012). It does not decide isolation — `isolation_decided` is false unconditionally — and X-012’s proof, not this package, closes the argument |
 | [`cases.kingbird29.verify_svg`](packing/cases/kingbird29/verify_svg.py) | A 160-digit numerical reconstruction of the `n = 29` SVG, rejecting H-042’s serialization-scoped three-class claim (exp-037). H-024’s formal prerequisite remains unresolved; the SVG is not a formal feasibility or optimality certificate |
 
 **Unbuilt on this lane:** the `PoseBox` scalar and the interval branch-and-bound hook,
@@ -1949,7 +1952,7 @@ side, proved exactly.** For `s = 2 + √2/2` and Goebel’s labeled pose `P⁰` 
 `C = (ℝ² × S¹)⁵`, `P⁰` is an isolated point of `Feas(s)` — closed unit squares in
 `[0, s]²`, pairwise disjoint interiors — equivalently there is no nonconstant continuous
 feasible path from `P⁰` and no sequence of distinct feasible poses converging to it, so
-the packing is rigid at fixed side in the catalogue’s own sense.
+the packing is rigid at fixed side in the catalogue’s sense.
 The proof is exact over `Q(√2)`: one intrinsic half-angle chart, all 400 elementary
 inequalities classified by exact sign, a neighbourhood cut out by 128 strict conditions
 on which the local feasible set is exactly twenty active rows, `T-012`’s first-order
@@ -1967,15 +1970,15 @@ and Friedman does not annotate it.
 **Not claimed:** any isolation radius; rigidity with the container side free, which
 [X-007](packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md)
 measured to be false; global uniqueness; any other `n = 5` optimum; applicability of the
-Connelly–Whiteley tensegrity theorems as stated; and no novelty of method — the closing
+Connelly–Whiteley tensegrity theorems as stated; and any novelty of method — the closing
 principle is the classical second-order sufficient optimality condition, and the proof
 shape is Connelly–Whiteley 1996 Theorem 4.3.1’s. The proof is
 [X-012](packing/campaign/explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md),
 the round is
 [exp-058](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md),
-and the review’s six named gaps — the unread printed page of the cited curve-selection
-lemma among them, none of them a condition of the pass — are listed in that record’s
-amendment.
+and the review’s six named gaps are listed in that record’s amendment.
+None is a condition of the pass, and one of them is the unread printed page of the cited
+curve-selection lemma.
 
 **Apparently novel here**, in the qualified sense above: the falsification of
 Stromquist’s printed Figure 14 argument and the source-distinct repaired certificate for
@@ -2585,8 +2588,9 @@ at `n=12`.
 **[H-017](packing/campaign/hypotheses/H-017-budget-scaling.md)** (100× budget) stays
 open and demoted behind a short response curve.
 It is operationally shaped, and D-044 — the boundary that made it inadmissible
-unattended — is repaired against the producer and independently reviewed, but stands
-`contained` rather than fixed: the review of 2026-09-03 returned BOUNDED-CAVEAT, and one
+unattended — is repaired against the producer and independently reviewed.
+D-044 stands `contained` rather than fixed:
+the review of 2026-09-03 returned BOUNDED-CAVEAT, and one
 clause of the defect’s source finding plus three residuals on the same archive boundary
 are named in the record and not closed.
 No live round has passed through the repaired boundary, so admitting it unattended is
@@ -2723,9 +2727,9 @@ They record 1903.1 agent-minutes and 825.0 wall-minutes.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
 result; exp-057 stopped before target access; exp-058 stopped on the review it was
 waiting for, which arrived and accepted it.
-Exp-058 records no agent-minutes at all, because the lane that produced its mathematics
-did not retain its own operator time, so the agent-minute total above understates what
-H-060 has cost. Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer),
+Exp-058 records no agent-minutes, because the lane that produced its mathematics did not
+retain its operator time; the agent-minute total above therefore understates what H-060
+has cost. Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer),
 `sqpack.quench` (0.1.0 with angle descent and 0.2.0 with class bracketing), the
 high-precision Kingbird SVG reconstruction, the exact Trump linearized-cone checker, the
 exact small-moduli checker, the exact Stromquist printed-set falsifier, and the exact
@@ -2966,7 +2970,7 @@ independent review on 2026-09-03 reproduced every refusal.
 That review returned BOUNDED-CAVEAT, and the record now names why — the float screen
 still demands an exact zero overlap where the source finding asked for an independently
 bounded one, and `record` never binds the lines it scores to the bytes the child
-verified. A producer-reported overlap scalar never closed it, and still does not.
+verified. A producer-reported overlap scalar still does not close it.
 
 **Trump’s exact pose is locally isolated.** Exp-013 retains all 512 raw active-feature
 selections as 128 derivative-distinct matrices.
@@ -2976,7 +2980,8 @@ A finite-branch subsequence argument upgrades that result to local isolation and
 local side optimality in the anchored pose–side chart, modulo finite symmetries.
 It does not prove global optimality or give an explicit isolation radius.
 
-**Goebel’s `n = 5` optimum is locally rigid at fixed side, and that is now a result.**
+**Goebel’s `n = 5` optimum is locally rigid at fixed side, and that is a first-party
+result.**
 Exp-058 registers the BC-152 proof packet: an intrinsic half-angle chart injective on
 all of `R^15`, all 400 elementary wall-corner and pair inequalities classified by exact
 sign (confirming the agenda’s 16/64 and 4/6 counts with no discrepancy), a neighbourhood
@@ -3000,12 +3005,16 @@ argument are an audited proof, and no instrument decides isolation — `isolatio
 is false unconditionally, by design.
 Not claimed: an isolation radius, the side as a variable (false, X-007), global
 uniqueness, any other `n = 5` optimum, applicability of Connelly–Whiteley as stated, or
-novelty of method. Six gaps stay named and none is a condition of the pass — the printed
+novelty of method.
+Exp-034’s two-parameter feasible family is not a counterexample: it lives at side
+`1 + 5√2/4`, disjoint from the feasible set at Goebel’s side, and X-012 runs it as the
+`C8` control on which the instrument must refuse a receipt.
+Six gaps stay named and none is a condition of the pass — the printed
 BCR page behind the curve-selection citation is still unread, and the review replaces it
 with a derivation from primary-text Basu–Pollack–Roy plus the one-variable Puiseux fact
 rather than closing it.
 The corroborating second-order-sufficiency proof in the packet reaches the same
-conclusion from weaker hypotheses and discharged nothing, because acceptance was
+conclusion from weaker hypotheses and discharges nothing, because acceptance was
 preregistered on the curve-selection route.
 
 **The optimal configuration spaces at `n = 3,4` are now exact controls.** Exp-014 proves

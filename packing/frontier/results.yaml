@@ -414,7 +414,7 @@ results:
       order 2m that T-012's non-negative self-stress contradicts.
     scope: {n_values: [5]}
     verification: V3
-    confirmation: C3
+    confirmation: C5
     significance:
       score: 3
       rationale: >-
@@ -440,10 +440,11 @@ results:
       fragments). The two steps that close the argument, the cited Nash
       curve-selection lemma and the order-2m coefficient induction, are an
       audited proof rather than a computation, and no instrument decides
-      isolation, so the whole claim declares V3. Confirmation stays C3 because
+      isolation, so the whole claim declares V3. Confirmation is C5 because
       every exact quantity the proof consumes carries a certificate and a
-      passing replay in this repository and no cited part rests on anything
-      weaker.
+      passing replay in this repository, no cited part rests on anything
+      weaker, and BC-153's independent review of the proof is installed and
+      mapped as a non-superseded review.
     evidence:
       - E-n005-fixed-side-local-rigidity
       - E-n005-second-order-rigidity
@@ -456,11 +457,12 @@ results:
     controls:
       - packing/tests/test_n5_local_rigidity.py
       - packing/tests/test_n5_rigidity.py
+    review_artifact: docs/project/reviews/review-2026-09-03-bc153-h060-proof-independent-review.md
     next_rung: >-
       V4 by mechanising the closing steps rather than only the quantities they
-      consume, or V5 by a proof-assistant port; C5 by installing BC-153's
-      review as a mapped review document, which the round record currently
-      carries only as an amendment. Reaching the printed BCR page, or citing
+      consume, or V5 by a proof-assistant port. C5 was reached on 2026-09-03 by
+      installing BC-153's review as a mapped review document; the round record
+      carries it as an amendment as well. Reaching the printed BCR page, or citing
       the Basu-Pollack-Roy plus Puiseux derivation the review writes out, would
       close the one cited hypothesis this rests on.
     notes: >-
