@@ -644,6 +644,17 @@ evidence:
       statement that stand in its place. The second-order-sufficiency theorem numbering in X-012
       section 8.3 is from memory and is on the non-acceptance route only.
 
+      Two limits of the instrument, echoed here from exp-058 because a reader meets this record
+      before that one. The binding check compares the second jet only along e_{u4}, the flex
+      direction, and not the full J^T H J; that is sufficient for what the proof consumes, since
+      Lemma 8's order-2m induction and Theorem 11 use only e^T H_j e, and the packet's own
+      verify_chart.py does check the full transported Hessian on all 20 rows. And the reduction
+      audit samples only the interior of the neighbourhood N, never at or near its boundary; N is
+      defined by sign persistence rather than by a radius, so the proof consumes only that N is
+      open, that 0 lies in it and that the 28 witnesses are negative on it, and the sampled audit
+      corroborates the instrument's implementation rather than the proposition. The BC-153 review
+      graded both non-blocking, the first sufficient and the second irrelevant to the proof.
+
   - id: E-n040-first-order-flexibility
     claim: derived-structure
     scope: {n_values: [40]}

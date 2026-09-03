@@ -209,6 +209,7 @@ case or experiment separately.
 | [H-060 prior-art survey — BC-152 W1/W2 (agenda 016)](docs/project/reviews/review-2026-09-03-bc152-h060-prior-art-survey.md) | dated review record | record | retained | — |
 | [BC-152 instrument-readiness review — H-060 half-angle chart (independent)](docs/project/reviews/review-2026-09-03-bc152-n5-rigidity-instrument-readiness.md) | dated review record | record | retained | — |
 | [BC-153 — Independent review of the H-060 proof (Goebel `n = 5`, fixed-side local rigidity)](docs/project/reviews/review-2026-09-03-bc153-h060-proof-independent-review.md) | dated review record | record | retained | — |
+| [BC-153 — Audit of the T-014 registration against the review that authorised it](docs/project/reviews/review-2026-09-03-bc153-t014-registration-audit.md) | dated review record | record | retained | — |
 | [BC-150 — Adoption Packet for the Source-Backed 4.5058 Bound at n = 17--19](docs/project/reviews/review-2026-09-03-bc150-4-5058-adoption-packet.md) | dated review record | record | retained | — |
 | [BC-151 — Independent Review of the 4.5058 Adoption Packet](docs/project/reviews/review-2026-09-03-bc151-4-5058-adoption-independent-review.md) | dated review record | record | retained | — |
 | [BC-154 — independent review of the W9 disposition for D-044 and D-046](docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md) | dated review record | record | retained | — |

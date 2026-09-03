@@ -684,22 +684,34 @@ agenda:
       disposition: retire-success
       follow_up: null
     - scope: independent audit of the T-014 registration itself
-      classification: technical-failure
+      classification: achieved
       result: >-
-        Nothing usable. The dispatched audit produced only regenerated comparison outputs
-        -- 303 expected-n-* files plus three manifests, all stamped 10:29 -- and no report,
-        no verdict and no finding. The agent was terminated mid-task by an infrastructure
-        rate limit at about 10:45Z and was deliberately not redispatched. This is a
-        reduction in scope, not a completed check: T-014 is registered and published
-        without an independent audit of the registration, which rests on the review of the
-        proof, a different object.
+        The registration is faithful. The first dispatch failed -- terminated by an
+        infrastructure rate limit at about 10:45Z, leaving 303 regenerated comparison
+        files stamped 10:29 and no verdict -- and this row said so. It was redispatched in
+        the closeout window and completed at 14:24Z with the verdict REGISTRATION
+        FAITHFUL: no claim in the T-014 entry exceeds what the BC-153 proof review
+        authorised. The theorem sentence is identical to the authorised one up to
+        punctuation, all six excluded items are present and none is broadened, the V3/C5
+        rungs pass their structural checks, and C4 is claimed nowhere. Two minor findings,
+        both non-blocking and neither an overclaim. Finding 1: SYNOPSIS carried T-014 at
+        V3/C3 in one of the two places it states the rung, stale from the raise to C5 --
+        an understatement, fixed in 51724b8e. Finding 2: two of the review's six gaps, the
+        instrument binding only the restricted second jet and its audit sampling the
+        neighbourhood interior only, were recorded in exp-058 but not echoed in the
+        frontier prose a reader meets first -- echoed into evidence.yaml and n-005.md at
+        closeout. Recorded honestly: the audit was dispatched by the coordinator, who
+        wrote none of the proof, the instrument or the registration.
       evidence:
-      - The audit directory holds comparison outputs only and no report deliverable.
       - >-
-        The commit record shows the largest inter-commit gap on the branch, 77 minutes,
-        consistent with the loss and with no declared cause.
-      disposition: fix-and-rerun
-      follow_up: think-xycf
+        docs/project/reviews/review-2026-09-03-bc153-t014-registration-audit.md, the
+        installed report, mapped as retained in docs/project/document-map.yaml.
+      - >-
+        The report's own consumer sweep: results.yaml, RESULTS.md, n-005.md, evidence.yaml,
+        INVENTORY.md, README.md, document-map.yaml and ledger.md all agree; SYNOPSIS.md
+        was the one consumer that disagreed with itself.
+      disposition: retire-success
+      follow_up: null
     - scope: the reviewer's recommendations 3 and 4
       classification: never-opened
       result: >-
@@ -901,21 +913,49 @@ agenda:
       - exp-059, H-052, H-060 and exp-058 records, and SYNOPSIS.md.
       disposition: retire-success
       follow_up: null
-    - scope: the closeout obligations still owed
+    - scope: the closeout obligations discharged inside the window
+      classification: achieved
+      result: >-
+        Six of the seven obligations these rows opened with were closed before the wall
+        ran out. The BC-150 adoption packet and the BC-151 review are installed under
+        docs/project/reviews/ and mapped as retained, so results.yaml no longer cites a
+        document that dies with the container. Both AgentSessions are terminal and declare
+        36 resource rollups between them. The PR cost block is rendered, and reports exact
+        attribution rather than an interval because all 36 logs sit entirely on this branch
+        and none straddles, so the renderer's on-branch, prorated and every-log columns
+        coincide -- the interval this row demanded does not exist to print. The
+        two-versus-three declared-deviation count is reconciled in favour of three, the
+        third being the preflight overlap that phase 2's switch_reason had carried all
+        along. The 10:45Z rate limit is recorded in session-083 as an interruption rather
+        than a deviation, with what it cost named. And the T-014 registration audit that
+        limit destroyed was redispatched and completed.
+      evidence:
+      - >-
+        docs/project/reviews/ holds the BC-150 packet, the BC-151 review and the T-014
+        registration audit, all three mapped in docs/project/document-map.yaml.
+      - >-
+        session-083 and session-084 are terminal with 35 and 1 resource rollups declared;
+        packing-validate --records passes its "terminal sessions name what they cost" step.
+      - >-
+        session-083's Declared Deviations section carries three and says why the count
+        changed; its Interruptions section carries the 10:45Z loss.
+      disposition: retire-success
+      follow_up: null
+    - scope: the timebox contract across schema, runbook and code
       classification: never-opened
       result: >-
-        Not started at the time these rows were written: installing the BC-150 adoption
-        packet and the BC-151 review, which results.yaml cites and which do not survive the
-        container; settling the timebox contract across schema, runbook and code;
-        reconciling the two-versus-three declared-deviation count between session-083's
-        phase-1 outcome and the launch packet; recording the 10:45Z interruption in
-        session-083; live bead reconciliation, which the absent CLI blocks; generating the
-        resource rollups, declaring them and closing both AgentSessions; and rendering the
-        PR cost block, which must print both ends of the attribution interval rather than
-        collapsing it to one number.
+        Not started, and not attempted. The schema, the runbook and the code disagree about
+        what a timebox binds; this run opened that scope by declaring a second per-step
+        budget and did not close it. Recorded here as the one closeout obligation that was
+        neither discharged nor blocked -- it simply did not fit the window, which is a
+        different thing from being prevented. Live bead reconciliation stayed read-only
+        throughout on the absent tbd CLI; that is carried at BC-147 and is not re-counted
+        here.
       evidence:
-      - session-083 and session-084 are status in_progress with resource_rollups empty.
-      - docs/project/reviews/ contains no BC-150 or BC-151 file.
+      - >-
+        cli/validate.py declares two budgeted steps; no schema or runbook change accompanies
+        the second.
+      - BC-147's own outcome row carries the CLI absence and its consequences.
       disposition: defer-dependency
       follow_up: think-xycf
     - scope: the required validation tiers at HEAD
