@@ -38,7 +38,9 @@ experiment:
       machinery and then decided exactly on container side; and the seven remaining
       declared controls C1-C7, which are specified in the proof artifact and belong to the
       W7 instrument phase rather than to this round. That instrument was built after this
-      packet was frozen and exercises all eight there; its readiness review has not passed
+      packet was frozen and exercises all eight there; its readiness review has now
+      passed, at final payload digest 743fd18a, which makes the instrument usable and
+      decides nothing about H-060
     candidate: >-
       an intrinsic half-angle chart Phi on R^15, injective everywhere, with cleared
       denominators 1 + t_i^2 >= 1 and second-jet transform J = diag(1, 1, 2) per square; a
@@ -51,12 +53,12 @@ experiment:
     operator: Claude (agent), BC-152 n = 5 proof lane of agenda-016, bead think-760r
     entry_point: >-
       campaign/series/series-000-smoke-and-calibration/results/exp-058-h-060-n5-chart-and-proof.json,
-      whose replay_scripts block holds the verbatim source and SHA-256 of the seven scripts
-      this round built. The round built no repository code. The executable form of this
-      mathematics was built after the freeze, at 6580a9fd, as the package
-      src/sqpack/local_rigidity/, which binds to devtools/assess_n5_rigidity.py rather than
-      extending it as W7's text asks; it is not this round's evidence, and its readiness
-      review has not passed
+      whose replay_scripts block holds the verbatim source and SHA-256 of the seven
+      scripts this round built. The round built no repository code. The executable form of
+      this mathematics was built after the freeze, at 6580a9fd, as the package
+      src/sqpack/local_rigidity/, which binds to devtools/assess_n5_rigidity.py rather
+      than extending it as W7's text asks; it is not this round's evidence, though its
+      readiness review has since passed
     command: >-
       cd packing && mkdir -p /tmp/replay058 && .venv/bin/python3 -c "import json,pathlib;
       r=json.loads(pathlib.Path('campaign/series/series-000-smoke-and-calibration/results/exp-058-h-060-n5-chart-and-proof.json').read_text());
@@ -181,34 +183,43 @@ experiment:
       unresolved
     reason: >-
       Both accept conditions are unmet and both reject conditions are absent, so the only
-      honest disposition is unresolved. The chart is not CHECKED in the criterion's sense --
-      every number in it was computed by scratchpad sympy, not by a repository instrument.
-      A W7 instrument was built after this packet was frozen, at 6580a9fd, as the package
-      sqpack.local_rigidity binding to devtools.assess_n5_rigidity rather than extending it;
-      it self-reports instrument_ready with isolation_decided false and it does exercise the
-      eight controls C1-C8. Its independent readiness review returned BOUNDED-CAVEAT and not
-      a pass, because two of the eight registered controls, C1 changed_feature and C4
-      invented_contact, could not fail and never reached the refusal path; the repair landed
-      at 609e7392, a re-review verified it by removal and returned BOUNDED-CAVEAT again, a
-      pass conditional on one unclosed provenance item -- the digested payload pins commit
-      2f112f4c, which cannot produce the recorded digest. So H-060 keeps instrument_ready
-      false because that review has not passed, not because nothing was built. The argument
-      is not REVIEWED -- BC-153 has not run -- and its curve-selection step rests on
-      quotations rather than on BCR Proposition 8.1.13 itself: one of BCR's own authors, in
-      self-described provisional notes, plus four verbatim uses by a single author group.
-      The packet's second secondary source was withdrawn from X-012 as an over-attribution,
-      so no independent corroborating source stands behind the citation. The
-      corroborating second-order-sufficiency proof recorded in the artifact reaches the
-      same conclusion from strictly weaker hypotheses, but acceptance was preregistered on
-      the curve-selection route, so it discharges nothing. What this round does establish
-      is that the mathematics of the registered route is complete on paper and replays
+      honest disposition is unresolved. The chart is not CHECKED in the criterion's sense
+      -- every number in it was computed by scratchpad sympy, not by a repository
+      instrument. A W7 instrument was built after this packet was frozen, at 6580a9fd, as
+      the package sqpack.local_rigidity binding to devtools.assess_n5_rigidity rather than
+      extending it; it self-reports instrument_ready with isolation_decided false and it
+      does exercise the eight controls C1-C8. Its independent readiness review has now
+      PASSED, on the third round: BOUNDED-CAVEAT at 2f112f4c because two of the eight
+      registered controls, C1 changed_feature and C4 invented_contact, could not fail and
+      never reached the refusal path; repair at 609e7392, verified by removal;
+      BOUNDED-CAVEAT again on one unclosed provenance item, the digested payload pinning a
+      commit that cannot produce the recorded digest; then PASS at final payload digest
+      743fd18a over source digest 9382bae1, replayed from a clean root one commit past the
+      author's observed commit, with the leaf diff against the author's certificate
+      showing exactly one differing leaf, the pinned commit, tree_matches true and no
+      differing paths. H-060 therefore moves to instrument_ready true. That transition is
+      about the instrument and not about this hypothesis: no target determination ran, the
+      instrument sets isolation_decided false unconditionally and cannot decide isolation
+      even in principle, and this round's numbers still did not come from it, so the chart
+      is not CHECKED in the criterion's sense here. The argument is not REVIEWED -- BC-153
+      has not run -- and its curve-selection step rests on quotations rather than on BCR
+      Proposition 8.1.13 itself: one of BCR's own authors, in self-described provisional
+      notes, plus four verbatim uses by a single author group. The packet's second
+      secondary source was withdrawn from X-012 as an over-attribution, so no independent
+      corroborating source stands behind the citation. The corroborating
+      second-order-sufficiency proof recorded in the artifact reaches the same conclusion
+      from strictly weaker hypotheses, but acceptance was preregistered on the
+      curve-selection route, so it discharges nothing. What this round does establish is
+      that the mathematics of the registered route is complete on paper and replays
       exactly, that the agenda's constraint counts are confirmed with no discrepancy, and
       that the one known nonconstant feasible arc lives at a different container side
     reopen_when: >-
-      the W7 instrument's readiness review passes -- it emits a neighbourhood receipt for
-      this chart, refuses all eight controls substantively, and pins the commit that
-      produces its digest -- and a reviewer confirms the curve-selection statement against a
-      primary text; either alone leaves the round where it is
+      a reviewer confirms the curve-selection statement against a primary text and BC-153
+      reviews the argument. The other half of this condition is closed: the W7
+      instrument's readiness review passed at payload digest 743fd18a, having emitted a
+      neighbourhood receipt for this chart, refused all eight controls substantively, and
+      pinned a commit that reproduces its digest. Readiness alone leaves the round where
+      it is, because acceptance needs a checked chart and a reviewed argument
     resume_from: >-
       the frozen packet installed as X-012, SHA-256
       28343b743e689fc99968d589a542d9022d061de8ec3ae5100bf4ef4930e40b6b, together with the
@@ -258,15 +269,24 @@ feasibility at order `2m`.
 
 ## What This Round Does Not Establish
 
-`H-060` is **unresolved** and `instrument_ready` stays **false**.
+`H-060` is **unresolved**. `instrument_ready` is now **true**, and that flag is about the
+instrument, not about the hypothesis: it says the instrument may be used to evaluate
+`H-060`, not that `H-060` is decided.
+No target determination ran at the readiness checkpoint, and the instrument sets
+`isolation_decided` false unconditionally, so it cannot decide isolation even in
+principle.
 The registered criterion accepts only on a *checked* chart and a *reviewed* argument, and
-neither adjective applies yet.
-Two obligations are open and both belong to other lanes:
+neither adjective applies to this round.
+One of the two obligations below is now discharged; the other is open, and both belong to
+other lanes:
 
-1. A `W7` instrument whose readiness review passes. Only `C8` was pre-run here, and only
-   to confirm that `exp-034` is not a refutation — not to exercise an instrument refusal.
-   An instrument was built after this packet was frozen; where its review stands is below.
-2. Primary-text confirmation of the curve-selection statement, `BCR` Proposition 8.1.13 —
+1. **Discharged.** A `W7` instrument whose readiness review passes — it passed on the
+   third round, at final payload digest `743fd18a`; the history and the reviewer's one
+   residual recommendation are below.
+   That does not make *this* round's chart checked: only `C8` was pre-run here, and only
+   to confirm that `exp-034` is not a refutation — not to exercise an instrument refusal,
+   and every number in this record still comes from scratchpad sympy.
+2. **Open.** Primary-text confirmation of the curve-selection statement, `BCR` Proposition 8.1.13 —
    or Milnor 1968 Lemma 3.1 *together with* the finite-union reduction of `X-012` §4.1,
    which is what puts the set into Milnor's narrower class of real algebraic sets cut by
    strict inequalities. The printed text was unavailable in this environment. What is
@@ -302,8 +322,8 @@ It self-reports `instrument_ready` with `isolation_decided` false — it does no
 isolation — and it exercises all eight controls `C1`–`C8`, matching the artifact's table
 one for one.
 
-Its readiness review has **not** passed, and that, not absence, is why `H-060` keeps
-`instrument_ready: false`:
+Its readiness review has now **passed**, on the third round, which is what moved `H-060`
+to `instrument_ready: true`:
 
 - Reviewed build: payload digest
   `1ab2708623cf4dd077a0f125ba81cf3777088ea8e4d750a56d1dc3f55f807978` at commit `2f112f4c`.
@@ -318,7 +338,38 @@ Its readiness review has **not** passed, and that, not absence, is why `H-060` k
   both controls stop rejecting — and returned **BOUNDED-CAVEAT** again: a pass conditional
   on one unclosed provenance item, since the digested payload pins commit `2f112f4c`, whose
   code cannot produce that payload, so a replayer following the pin gets CANNOT-REPRODUCE.
-- Any build after `609e7392` is unreviewed. No statement here refers to one.
+- **PASS.** Final payload digest
+  `743fd18a839fbc3dc566b5e622f688c5745845573414eea40ebf52d620d2cc67` over source digest
+  `9382bae12976bc1225382ef79ab4a777d5982cbc6b04a47dfbdba51d22c36357`, the reviewer
+  reproducing that source digest independently from the recipe.
+  Replayed from a clean root at a commit one past the author's observed commit, with the
+  package untouched between the two, and byte-identical under normal and optimized
+  Python; 46 tests pass.
+  The leaf diff against the author's final certificate shows exactly one differing leaf,
+  `/claim_boundary/provenance/pinned_commit`, with `tree_matches: True` and
+  `paths_differing: []` — which is precisely the provenance item the second round left
+  open, now closed.
+  The `C1`/`C4` repair was re-verified by removal: replace the guard with a no-op and both
+  controls stop rejecting.
+  The corrected constant is confirmed on all sixteen support features,
+  `G''(e_u4) = -2(m+1)` exactly; the reviewer's earlier `-(m + 1/2)` was the geometric
+  gap's second derivative rather than the cleared chart polynomial's.
+  The structural conclusion is unchanged and now machine-checked: the restricted second
+  jet is an affine function of the support feature's own base margin, and is **not** an
+  independent identifier.
+
+The reviewer carried one residual **recommendation**, which is not a condition of the pass
+and does not qualify it. It is recorded here as an open, named limitation:
+
+- **`source_digest` does not cover the instrument's inputs.** It covers the instrument
+  package and its driver, but not the three files the instrument reads —
+  [`sqpack/field.py`](../../../../src/sqpack/field.py),
+  [`cases/gobel5/packing.py`](../../../../cases/gobel5/packing.py) and
+  [`devtools/assess_n5_rigidity.py`](../../../../devtools/assess_n5_rigidity.py).
+  A change to any of those would alter what the instrument computes while leaving
+  `source_digest` unchanged.
+  Replayability is unaffected while `tree_matches` is true, since the pinned commit then
+  fixes those files as well; the gap is in what the digest alone attests.
 
 The instrument's own declared boundaries, none of which this record could state while it
 denied the instrument existed:
@@ -353,8 +404,9 @@ It describes the arithmetic, not the hypothesis.
 It does **not** mean `H-060` is verified, and the verdict is the field that says so.
 Every quantity here was computed by scratchpad sympy scripts run read-only against the
 repository, independently of `sqpack.field`; none of it came from a repository instrument,
-because the `W7` instrument was built only after this packet was frozen and its readiness
-review has not passed.
+because the `W7` instrument was built only after this packet was frozen, and its readiness
+review — which has since passed — certifies the instrument rather than this round's
+numbers.
 
 `selftest_passed` is `false` for the same reason: there is no engine gate to run.
 

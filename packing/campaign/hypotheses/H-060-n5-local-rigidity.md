@@ -43,7 +43,7 @@ hypothesis:
     over real arc coefficients; an independent Max reviewer replays the receipts and
     audits the theorem transfer before any frontier change. The instrument certifies
     existence of a valid neighborhood but need not report a numerical isolation radius.
-  instrument_ready: false
+  instrument_ready: true
   regime: >-
     Goebel's exact labeled n = 5 pose in open real orientation charts, exact arithmetic
     over Q(sqrt(2)), and container side fixed at 2 + sqrt(2)/2. Container growth,
@@ -88,6 +88,30 @@ The argument becomes a result only after the chart-to-certificate transfer, the 
 local nonoverlap system and the curve-selection hypotheses are checked independently.
 Only a feasible arc through the pose or an exact accumulating family can refute local
 isolation; a lone point outside a proposed neighborhood cannot.
+
+## Instrument Readiness, and What It Does Not Decide
+
+`instrument_ready` became **true** on 2026-09-03, on `BC-152`'s registered readiness
+checkpoint: an independent reviewer replayed the `W7` instrument from a clean root and
+returned **PASS**, after two `BOUNDED-CAVEAT` rounds and one repair.
+The reviewed build's payload digest is
+`743fd18a839fbc3dc566b5e622f688c5745845573414eea40ebf52d620d2cc67` over source digest
+`9382bae12976bc1225382ef79ab4a777d5982cbc6b04a47dfbdba51d22c36357`; the replay differed
+from the author's certificate in exactly one leaf,
+`/claim_boundary/provenance/pinned_commit`, with `tree_matches` true and no differing
+paths, which is what closed the earlier provenance caveat.
+The full review history and the reviewer's one residual recommendation are recorded in
+[`exp-058`](../series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md).
+
+**No target determination ran, and H-060 stays unresolved.** The flag says the instrument
+may now be used to evaluate this hypothesis; it does not say the hypothesis is decided.
+The instrument sets `isolation_decided = False` unconditionally and cannot decide
+isolation even in principle.
+The registered criterion above is unchanged — it was not amended for this transition —
+and acceptance still requires a checked chart *and* a reviewed curve-selection and
+coefficient argument, neither of which this checkpoint supplies.
+No frontier property, result-register entry or novelty classification changed; those
+belong to `BC-153`, which has not run.
 
 The fixed-side qualifier is part of the claim.
 Adding container side as a variable opens feasible directions and invalidates the
