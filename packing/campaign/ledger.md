@@ -98,6 +98,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-081](agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `factual-review` (process) | 4 | think-hrw2 | Return the readmitted n = 54 subset to BC-143 under think-8hcp for the frozen routing decision; track the eight missing bound controls under D-418 / think-ifgr. |
 | [session-082](agent-sessions/session-082-bc141-n54-source-contract.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 1 | think-pkgx | At the fixed 11:23Z wave boundary, open BC-144 under think-2tol, freeze the terminal wave evidence and prepare only the bounded independent-review packets it earns. |
 | [session-083](agent-sessions/session-083-agenda016-ten-hour-coordinator.md) | in_progress | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 2 | think-a0h6 | Admit the BC-147 frozen-binding verification, freeze the launch packet, and hold the 08:58Z--09:58Z process-exclusive lease for the H-052 exact writer. |
+| [session-084](agent-sessions/session-084-bc148-n17-fresh-successor-completion.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `research-loop` (correctness) | 2 | think-5j8d | Stand by without running any process until 08:58:00Z, then run the registered writer on the coordinator's authorization and assemble whichever terminal schema applies. |
 
 ### Workflow summary
 
@@ -110,8 +111,8 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 17 | 1 | 56 | 2 |
 | `process-review` | 14 | 4 | 62 | 6 |
 | `efficiency-loop` | 9 | 0 | 27 | 0 |
-| `research-loop` | 8 | 4 | 44 | 7 |
-| `pipeline-improvement` | 20 | 0 | 101 | 0 |
+| `research-loop` | 8 | 4 | 45 | 7 |
+| `pipeline-improvement` | 21 | 0 | 102 | 0 |
 | `documentation-pass` | 1 | 0 | 2 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
@@ -388,7 +389,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 58 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 59 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -445,7 +446,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | H-049 | blocked | search | delta((4,6), 20) > 0: twenty unit squares pack into a 4 by 6 rectangle |  | 0 |  |
 | H-050 | blocked | search | The n = 71 incumbent's split of sixteen oblique squares across two ang |  | 0 |  |
 | H-051 | blocked | search | Starting only from the hash-verified public n = 68 parent, a proposer  |  | 0 |  |
-| H-052 | unresolved | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 3 | 139.6m agent + 495.6m wall |
+| H-052 | unresolved | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 4 | 139.6m agent + 495.6m wall |
 | H-053 | blocked | search | For each fixed UnitSquare Release 1 parent-child pair at n = 68 and n  |  | 2 | 114m agent + 107.2m wall |
 | H-054 | unresolved | search | The retained source facts for the reported n = 50 construction at side |  | 2 | 38m agent + 30.0m wall |
 | H-055 | blocked | search | If BC-111 selects n = 54, the fixed retained witness at reported side  |  | 0 |  |
@@ -461,6 +462,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | --- | --- | --- | --- |
 | exp-050 | H-054 | unresolved | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
 | exp-058 | H-060 | unresolved | Both accept conditions are unmet and both reject conditions are absent, so the only honest disposition is unresolved. The chart is not CHECKED in the criterion's sense -- every number in it was computed by scratchpad sympy, not by a repository instrument, and the W7 tool, its neighbourhood receipt and the eight rejecting controls C1-C8 do not exist, which is why H-060 keeps instrument_ready false. The argument is not REVIEWED -- BC-153 has not run -- and its curve-selection step rests on two independent secondary quotations rather than on BCR Proposition 8.1.13 itself. The corroborating second-order-sufficiency proof recorded in the artifact reaches the same conclusion from strictly weaker hypotheses, but acceptance was preregistered on the curve-selection route, so it discharges nothing. What this round does establish is that the mathematics of the registered route is complete on paper and replays exactly, that the agenda's constraint counts are confirmed with no discrepancy, and that the one known nonconstant feasible arc lives at a different container side |
+| exp-059 | H-052 | in-progress | The package, both terminal schemas and the refusal battery are frozen and green, but the exact writer has not run, so no canonical result exists and H-052 keeps the unresolved disposition exp-056 left it with. |
 
 ## Rounds
 
@@ -547,6 +549,12 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-059 | series-000 | 17 | claude-opus-5 | H-052 | The package, both terminal schemas and the refusal battery are frozen and green, but the exact writer has not run, so no canonical result exists and H-052 keeps the unresolved disposition exp-056 left it with. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -562,7 +570,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 
 ## Effort
 
-58 rounds, 1738.1 agent-minutes, 791.8 wall-minutes.
+59 rounds, 1738.1 agent-minutes, 791.8 wall-minutes.
 
 ## Exploration reports not yet codified
 

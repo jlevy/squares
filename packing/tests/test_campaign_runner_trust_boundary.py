@@ -13,6 +13,7 @@ persistence failure, and broad staging.
 
 from __future__ import annotations
 
+import ast
 import json
 import os
 import stat
@@ -776,3 +777,50 @@ def test_the_detection_floor_is_far_below_the_decision_threshold(tmp_path: Path)
 
     assert runner.verify_archive_poses(below)["verified"] is True
     assert runner.POSE_TOLERANCE <= runner.REACHED_BASIN / 1e4
+
+
+def test_record_takes_its_verdict_only_from_the_child_process() -> None:
+    """The containment, enforced structurally rather than asserted in a comment.
+
+    `verify_archive_poses` is the oracle body and it lives in this same module, so the
+    parent process always has it — `preflight` legitimately calls it in-process, and
+    where the `sqpack.verify` import sits changes nothing about that. The property that
+    actually matters is narrower and checkable: **`record` may reach a verdict only
+    through the child process.** If someone ever "optimises" the subprocess away, this
+    fails rather than the comment quietly becoming untrue.
+    """
+    source = Path(runner.__file__).read_text(encoding="utf-8")
+    body = next(
+        node
+        for node in ast.walk(ast.parse(source))
+        if isinstance(node, ast.FunctionDef) and node.name == "record"
+    )
+    called = {
+        node.func.id
+        for node in ast.walk(body)
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+    }
+
+    assert "verify_archive_in_separate_process" in called
+    assert "verify_archive_poses" not in called
+    assert "verify_packing" not in called
+    assert "corners_from_poses" not in called
+
+
+def test_the_child_verifier_is_reached_by_re_entering_this_module() -> None:
+    """And the child really is a separate interpreter running this module's own step."""
+    source = Path(runner.__file__).read_text(encoding="utf-8")
+    spawn = next(
+        node
+        for node in ast.walk(ast.parse(source))
+        if isinstance(node, ast.FunctionDef)
+        and node.name == "verify_archive_in_separate_process"
+    )
+    literals = {
+        node.value
+        for node in ast.walk(spawn)
+        if isinstance(node, ast.Constant) and isinstance(node.value, str)
+    }
+
+    assert "verify-archive" in literals
+    assert runner.RUNNER_MODULE == "sqpack.campaign.runner"

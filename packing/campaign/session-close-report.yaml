@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 83
+count: 84
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 38
-  sessions_unmeasured: 45
+  sessions_unmeasured: 46
   attributed:
     rollups: 55
     turns: 14495
@@ -1238,6 +1238,16 @@ sessions:
   title: "Agenda 016 ten-hour coordinator"
   status: in_progress
   primary_bead: think-a0h6
+  phases: 2
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []
+- id: session-084
+  title: "BC-148 n = 17 fresh successor completion"
+  status: in_progress
+  primary_bead: think-5j8d
   phases: 2
   measured: false
   unmeasured_reason: >-

@@ -681,6 +681,11 @@ def verify_archive_poses(archive: Path) -> dict[str, Any]:
     that the verdict comes from code the producing command never touched, reading the
     file that is actually on disk, so agreement between the two is evidence.
 
+    `preflight` may call this directly, because preflight decides nothing. `record` may
+    not, and that is enforced rather than trusted: a regression walks `record`'s AST and
+    fails if it reaches any oracle other than
+    :func:`verify_archive_in_separate_process`.
+
     The producer's objective (`required_side`) is translation-invariant, so an emitted
     configuration is *not* normalised into `[0, s]^2`. Translating to the bounding-box
     origin before the containment test is therefore not a courtesy to the producer -- it

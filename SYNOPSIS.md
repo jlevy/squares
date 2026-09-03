@@ -87,8 +87,8 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives four confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-six blocked
-hypotheses. No hypothesis waits on review and six are unresolved.
+hypotheses, one open hypothesis, seven open questions, and thirty-five blocked
+hypotheses. One hypothesis waits on review and six are unresolved.
 The set includes one claim whose formal prerequisite is missing, H-044 whose registered
 calibration-only amendment keeps the hypothesis undisposed — its first scored round
 (exp-046) missed the criterion determinately under both denominator readings, the review
@@ -2457,7 +2457,7 @@ round that names the hypothesis, control roles included.
 | [H-057](packing/campaign/hypotheses/H-057-n17-parent-bound-parallel-speedup.md) | unresolved | A parent-bound three-process runner preserves exact output and reaches the fixed useful-speedup threshold on three exp-052 ordinals | 1 | — |
 | [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | unresolved | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 2 | — |
 | [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | confirmed | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 1 | — |
-| [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md) | blocked | Goebel’s exact `n = 5` optimum is locally rigid when the container side is fixed | 0 | — |
+| [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md) | needs review | Goebel’s exact `n = 5` optimum is locally rigid when the container side is fixed | 1 | 11s wall |
 
 ### Confirmed
 
@@ -2650,8 +2650,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 38 |
-| closed before `resource_rollups` existed, logs not retained | 45 |
-| **total** | **83** |
+| closed before `resource_rollups` existed, logs not retained | 46 |
+| **total** | **84** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -2666,11 +2666,14 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 57 terminal rounds registered in `series-000`.
+There are 58 terminal rounds registered in `series-000`.
 
-They record 1738.1 agent-minutes and 791.6 wall-minutes.
+They record 1738.1 agent-minutes and 791.8 wall-minutes.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
-result; exp-057 stopped before target access.
+result; exp-057 stopped before target access; exp-058 stopped on a missing dependency.
+Exp-058 records no agent-minutes at all, because the lane that produced its mathematics
+did not retain its own operator time, so the agent-minute total above understates what
+H-060 has cost.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -2678,6 +2681,8 @@ checker, the exact Stromquist printed-set falsifier, and the exact repaired-cove
 certificate, the exact terminal-component known-answer checker, and the exact `n = 5`
 fixed-angle face, angle-sheet, full-angle tangent, and second-order obstruction
 checkers, plus the exact branchwise tangent-inventory checker.
+Exp-058 alone used no repository instrument: its numbers come from read-only sympy
+scripts retained verbatim in its results record, which is why it is not a receipt.
 
 No record-search round has produced verified assurance, so **no result below claims a
 new record**. Exp-012 is an exploratory reconstruction of a published record witness;
@@ -2756,6 +2761,7 @@ archive beside it.
 | [exp-055](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-055-h-059-n50-producer-refusal-ordering.md) | 50 | calibration | H-059 | producer stage-sentinel harness | prospective existing-result refusal emitted a verified zero-call trace; exp-050 unchanged | **accepted** |
 | [exp-056](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-056-h-052-n17-sequential-larger-prefix.md) | 17 | calibration | H-052 | parent-bound child chain over the unchanged exp-052 driver | fixed timebox retained 170/181 contiguous agreeing rows through ordinal 169; canonical result absent | **unresolved** |
 | [exp-057](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md) | 68 | calibration | H-058 | side-semantics binding over the unchanged exp-054 adapter | literal point model retained; six-decimal side provenance absent; no target access | **unresolved** |
+| [exp-058](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md) | 5 | target | H-060 | scratchpad sympy chart-and-proof replay set, read-only; no repository instrument | all 400 elementary inequalities classified exactly and the 16/64 and 4/6 counts confirmed; `w · q_chart = -2√2 < 0`; no instrument receipt and no reviewed argument, so isolation is not decided | **unresolved** |
 
 ### Cost and provenance
 
@@ -2818,10 +2824,11 @@ archive beside it.
 | exp-055 | one fixed 15-minute W6 cell | 0.72 s | 92 m | criterion | `909efafa+sha256-9c90a04e5691f168` |
 | exp-056 | one fixed 356-minute elapsed lease | 21,360 s | — | timebox | `11ce70ee+sha256-f45227508b28f377` |
 | exp-057 | one 150-minute target-blind BC-138 lane | 1,000 s | 16.6667 m | guard | `11ce70ee` |
+| exp-058 | the 360-minute BC-152 `n = 5` lane of agenda-016 | 11.33 s | — | dependency | — (no engine; exact sympy replay) |
 
-### What the 57 rounds jointly establish
+### What the 58 rounds jointly establish
 
-The 57 rounds use 1738.1 agent-minutes and 791.6 wall-minutes under the campaign’s
+The 58 rounds use 1738.1 agent-minutes and 791.8 wall-minutes under the campaign’s
 retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
@@ -2910,6 +2917,25 @@ branchwise fixed-side linearized cone is zero.
 A finite-branch subsequence argument upgrades that result to local isolation and strict
 local side optimality in the anchored pose–side chart, modulo finite symmetries.
 It does not prove global optimality or give an explicit isolation radius.
+
+**The `n = 5` isolation argument is complete on paper and is not a result.** Exp-058
+registers the BC-152 proof packet: an intrinsic half-angle chart injective on all of
+`R^15`, all 400 elementary wall-corner and pair inequalities classified by exact sign
+(confirming the agenda’s 16/64 and 4/6 counts with no discrepancy), a neighbourhood on
+which the local feasible system is exactly the twenty active rows, T-012’s 28 Farkas
+certificates and self-stress replaying on the chart with `w · q_chart = -2√2 < 0`, and
+an order-`2m` coefficient induction that contradicts a nonconstant analytic feasible
+arc. None of that decides H-060, which stays **unresolved** with `instrument_ready`
+false. Its registered criterion accepts only on a *checked* chart and a *reviewed*
+argument: every number here was computed by read-only scratchpad sympy rather than by a
+repository instrument, no independent reviewer has read the argument, and the
+curve-selection step rests on two secondary quotations rather than on the printed BCR
+text. A separate lane’s instrument reports ready, but that is its author’s claim, it is
+under independent review, and it does not decide isolation. The corroborating
+second-order-sufficiency proof in the packet reaches the same conclusion from weaker
+hypotheses and discharges nothing, because acceptance was preregistered on the
+curve-selection route. Nothing is promoted: no frontier property, result-register entry
+or novelty claim follows until BC-153 reviews it.
 
 **The optimal configuration spaces at `n = 3,4` are now exact controls.** Exp-014 proves
 that `F_3(2)` is two labelled circles, its `S3` quotient is one circle, and its
