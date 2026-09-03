@@ -70,9 +70,9 @@ Results first established here, as far as the recorded source searches show, inc
   Both refine catalogue annotations that say only “Rigid.”
 - **T-014: Goebel’s `n = 5` optimum is locally rigid at fixed side.** At the exact side
   `2 + √2/2` the labeled pose is an isolated point of the feasible set: no nonconstant
-  continuous feasible path leaves it and no sequence of distinct feasible poses converges
-  to it. Proved exactly over `Q(√2)` from a complete accounting of all 400 local
-  inequalities, by curve selection and an order-`2m` coefficient induction, and
+  continuous feasible path leaves it and no sequence of distinct feasible poses
+  converges to it. Proved exactly over `Q(√2)` from a complete accounting of all 400
+  local inequalities, by curve selection and an order-`2m` coefficient induction, and
   independently reviewed.
   The side is fixed throughout; nothing is claimed about an isolation radius, about the
   side as a variable, or about global uniqueness.

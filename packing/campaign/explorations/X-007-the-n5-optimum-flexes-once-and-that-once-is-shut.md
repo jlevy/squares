@@ -329,15 +329,16 @@ what Puiseux supplies for a merely continuous semi-algebraic arc is an expansion
 *fractional* powers, and `s = u^N` has to clear them before a coefficient induction can
 run at all. The step is written in above, and no other step of the induction changes.
 **The same edit closed a second, independent gap**, which is worth its own sentence
-because it is not the same repair: the lemma is now applied to the feasible set *with the
-pose removed*, so the arc it returns avoids `p` at every positive parameter value and is
-therefore nonconstant.
+because it is not the same repair: the lemma is now applied to the feasible set *with
+the pose removed*, so the arc it returns avoids `p` at every positive parameter value
+and is therefore nonconstant.
 As written before, the lemma was applied to the set itself, and under `x` in the closure
-alone it is entitled to hand back the constant arc — on which the coefficient induction has
-nothing to bite.
+alone it is entitled to hand back the constant arc — on which the coefficient induction
+has nothing to bite.
 The source verification calls that omission the trap for this proof and the step most
-likely to be skipped; [X-012](X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md)
-§4.2 treats it at length.
+likely to be skipped;
+[X-012](X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md) §4.2
+treats it at length.
 The route that avoids the reparametrisation entirely is the *Nash* form of the curve
 selection lemma (Bochnak–Coste–Roy, *Real Algebraic Geometry*, Proposition 8.1.13),
 whose arc is real-analytic as well as semi-algebraic, so its expansion is in integer
@@ -386,11 +387,11 @@ be false, and the distance between the two readings is the whole sixteen dimensi
 written. The property it deliberately did not move has since moved: the prose step below
 was written out in full as
 [X-012](X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md),
-checked against an exact accounting of all 400 local inequalities, independently reviewed
-under `BC-153`, and registered as `T-014`, so the `n = 5` block now reads
-`property: locally-rigid` at fixed side on a second first-party evidence record. The
-reasoning below for why it could not move then is unchanged and is why the later move
-needed a proof.*
+checked against an exact accounting of all 400 local inequalities, independently
+reviewed under `BC-153`, and registered as `T-014`, so the `n = 5` block now reads
+`property: locally-rigid` at fixed side on a second first-party evidence record.
+The reasoning below for why it could not move then is unchanged and is why the later
+move needed a proof.*
 
 The frontier `rigidity` block for `n = 5` keeps `property: undetermined`, and everything
 else about it changes.

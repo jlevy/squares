@@ -91,79 +91,80 @@ isolation; a lone point outside a proposed neighborhood cannot.
 
 ## Resolution — Confirmed at Fixed Side, 2026-09-03
 
-**Confirmed.** [`exp-058`](../series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md)
-is `accepted` on `BC-153`'s independent review, which returned **PASS** and found the three
-acceptance clauses met with no clause weakened.
-The criterion above is **frozen and byte-unchanged**: it was written before the target work,
-never amended for the round or for the review, and met as registered — which is the point,
-and is what makes the acceptance mean anything.
+**Confirmed.**
+[`exp-058`](../series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md)
+is `accepted` on `BC-153`’s independent review, which returned **PASS** and found the
+three acceptance clauses met with no clause weakened.
+The criterion above is **frozen and byte-unchanged**: it was written before the target
+work, never amended for the round or for the review, and met as registered — which is
+the point, and is what makes the acceptance mean anything.
 
-**What is established, and it is the whole of the claim.**
-For `s = 2 + √2/2` and Goebel's labeled pose `P⁰` in `C = (ℝ² × S¹)⁵`, `P⁰` is an isolated
-point of `Feas(s)` (closed unit squares in `[0, s]²`, pairwise disjoint interiors);
-equivalently there is no nonconstant continuous feasible path from `P⁰` and no sequence of
-distinct feasible poses converging to it; hence Kingbird-rigid at fixed side.
-Proved exactly over `Q(√2)` by the registered route — one intrinsic half-angle chart, the
-complete accounting of all 400 elementary inequalities, curve selection on the punctured
-feasible set, and the order-`2m` coefficient induction closed by `T-012`'s non-negative
-self-stress — and corroborated by an independent second route with weaker hypotheses that
-discharges no registered obligation.
+**What is established, and it is the whole of the claim.** For `s = 2 + √2/2` and
+Goebel’s labeled pose `P⁰` in `C = (ℝ² × S¹)⁵`, `P⁰` is an isolated point of `Feas(s)`
+(closed unit squares in `[0, s]²`, pairwise disjoint interiors); equivalently there is
+no nonconstant continuous feasible path from `P⁰` and no sequence of distinct feasible
+poses converging to it; hence Kingbird-rigid at fixed side.
+Proved exactly over `Q(√2)` by the registered route — one intrinsic half-angle chart,
+the complete accounting of all 400 elementary inequalities, curve selection on the
+punctured feasible set, and the order-`2m` coefficient induction closed by `T-012`’s
+non-negative self-stress — and corroborated by an independent second route with weaker
+hypotheses that discharges no registered obligation.
 
-**Not established and not claimed:** any isolation radius; rigidity with the container side
-free, which `X-007` measured to be false; global uniqueness of the `n = 5` optimum;
+**Not established and not claimed:** any isolation radius; rigidity with the container
+side free, which `X-007` measured to be false; global uniqueness of the `n = 5` optimum;
 rigidity of any other `n = 5` optimal packing; applicability of the Connelly–Whiteley
 tensegrity theorems as stated; and any novelty of method — the closing principle is the
-classical second-order sufficient optimality condition and the `[CW96]` Theorem 4.3.1 proof
-shape is not new.
+classical second-order sufficient optimality condition and the `[CW96]` Theorem 4.3.1
+proof shape is not new.
 
 **Novelty, `S3`, independently accepted by the reviewer:** the first exact *proof* of
-fixed-side local rigidity of Goebel's `n = 5` optimum — a property asserted without proof by
-Kingbird, not stated by Goebel, and not stated by Friedman, whose `DS7` Theorem 2 is a lower
-bound only.
+fixed-side local rigidity of Goebel’s `n = 5` optimum — a property asserted without
+proof by Kingbird, not stated by Goebel, and not stated by Friedman, whose `DS7` Theorem
+2 is a lower bound only.
 
-**What the pass moved**, and it is the complete list: `needs_review` cleared on `exp-058`;
-the `n = 5` frontier rigidity property set to locally rigid at fixed side on a new evidence
-record `E-n005-fixed-side-local-rigidity`; and the theorem registered as `T-014`, which
-discharges `T-012`'s recorded next action.
+**What the pass moved**, and it is the complete list: `needs_review` cleared on
+`exp-058`; the `n = 5` frontier rigidity property set to locally rigid at fixed side on
+a new evidence record `E-n005-fixed-side-local-rigidity`; and the theorem registered as
+`T-014`, which discharges `T-012`’s recorded next action.
 
-**Six gaps were named and one more found, none a condition of the pass and none closed by
-it**: the unread printed page of `BCR` Proposition 8.1.13, replaced by two independent
-derivations of the statement; the second-order-sufficiency numbering from memory, on the
-non-acceptance route only; the prior-art scoping carried outside the claim; the
-instrument's restricted-jet binding, which is sufficient because only `eᵀ H_j e` is
-consumed; its interior-only reduction audit, irrelevant because `N` is defined by sign
-persistence; the unresolved Kingbird thirteen-versus-four list tension, non-load-bearing
-because `n = 5` is on both lists; and one terse sentence in `X-012` §1.3 (i).
-Each is stated in full in `exp-058`'s amendment.
+**Six gaps were named and one more found, none a condition of the pass and none closed
+by it**: the unread printed page of `BCR` Proposition 8.1.13, replaced by two
+independent derivations of the statement; the second-order-sufficiency numbering from
+memory, on the non-acceptance route only; the prior-art scoping carried outside the
+claim; the instrument’s restricted-jet binding, which is sufficient because only
+`eᵀ H_j e` is consumed; its interior-only reduction audit, irrelevant because `N` is
+defined by sign persistence; the unresolved Kingbird thirteen-versus-four list tension,
+non-load-bearing because `n = 5` is on both lists; and one terse sentence in `X-012`
+§1.3 (i). Each is stated in full in `exp-058`’s amendment.
 
 ## Instrument Readiness, and What It Does Not Decide
 
-`instrument_ready` became **true** on 2026-09-03, on `BC-152`'s registered readiness
+`instrument_ready` became **true** on 2026-09-03, on `BC-152`’s registered readiness
 checkpoint: an independent reviewer replayed the `W7` instrument from a clean root and
 returned **PASS**, after two `BOUNDED-CAVEAT` rounds and one repair.
-The reviewed build's payload digest is
+The reviewed build’s payload digest is
 `743fd18a839fbc3dc566b5e622f688c5745845573414eea40ebf52d620d2cc67` over source digest
 `9382bae12976bc1225382ef79ab4a777d5982cbc6b04a47dfbdba51d22c36357`; the replay differed
-from the author's certificate in exactly one leaf,
+from the author’s certificate in exactly one leaf,
 `/claim_boundary/provenance/pinned_commit`, with `tree_matches` true and no differing
 paths, which is what closed the earlier provenance caveat.
 The instrument has changed since that build, but only in provenance metadata, to
-implement the reviewer's one residual recommendation: the current build `bd450cb6` differs
-from the reviewed one in four leaves under `/claim_boundary/provenance` and in no package
-code, and is not itself claimed to be reviewed.
+implement the reviewer’s one residual recommendation: the current build `bd450cb6`
+differs from the reviewed one in four leaves under `/claim_boundary/provenance` and in
+no package code, and is not itself claimed to be reviewed.
 The full review history, that change and the named limitations are recorded in
 [`exp-058`](../series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md).
 
 **No target determination ran at that checkpoint, and H-060 stayed unresolved through
-it.** The flag said the instrument may now be used to evaluate this hypothesis; it did not
-say the hypothesis was decided, and what decided it is the review recorded above.
+it.** The flag said the instrument may now be used to evaluate this hypothesis; it did
+not say the hypothesis was decided, and what decided it is the review recorded above.
 The instrument sets `isolation_decided = False` unconditionally and cannot decide
 isolation even in principle.
 The registered criterion above is unchanged — it was not amended for this transition —
 and acceptance required a checked chart *and* a reviewed curve-selection and coefficient
 argument, neither of which this checkpoint supplied.
-No frontier property, result-register entry or novelty classification changed at it; those
-belonged to `BC-153`, which has since run and passed.
+No frontier property, result-register entry or novelty classification changed at it;
+those belonged to `BC-153`, which has since run and passed.
 
 The fixed-side qualifier is part of the claim.
 Adding container side as a variable opens feasible directions and invalidates the

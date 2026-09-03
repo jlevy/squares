@@ -234,8 +234,8 @@ experiment:
 ---
 # exp-058 — H-060 Chart, Constraint Accounting and Order-`2m` Coefficient Proof
 
-`BC-152` asked whether Goebel’s exact `n = 5` optimum is locally rigid at fixed side under
-`H-060`’s preregistered criterion.
+`BC-152` asked whether Goebel’s exact `n = 5` optimum is locally rigid at fixed side
+under `H-060`’s preregistered criterion.
 This round is the mathematics of that lane, frozen.
 The argument itself is the proof artifact,
 [`X-012`](../../../explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md);
@@ -245,137 +245,140 @@ this record is the round that produced it, and the two must be read together.
 
 Four things, all replayed exactly and none of them a disposition of `H-060`.
 
-**One chart, and no correction term.** An intrinsic half-angle chart on `R^15`, injective
-on all of it rather than on some unstated neighbourhood, with cleared denominators
-`1 + t_i^2 >= 1` everywhere.
-Its second-jet transfer is `J = diag(1, 1, 2)` per square with `Hess Phi(0) = 0`, so there
-is no second-order angle correction to carry — which is the reason the coefficient
+**One chart, and no correction term.** An intrinsic half-angle chart on `R^15`,
+injective on all of it rather than on some unstated neighbourhood, with cleared
+denominators `1 + t_i^2 >= 1` everywhere.
+Its second-jet transfer is `J = diag(1, 1, 2)` per square with `Hess Phi(0) = 0`, so
+there is no second-order angle correction to carry — which is the reason the coefficient
 induction can evaluate Hessians on `e_{t4}` alone.
 
 **The whole constraint system, counted rather than assumed.** All 400 elementary
-polynomial inequalities that define a valid packing at side `2 + sqrt(2)/2` were evaluated
-in `Q(sqrt 2)` and classified by exact sign: 80 wall-corner functions split 16 active and
-64 strictly positive with minimum inactive margin `1 - sqrt(2)/4`, and 320 pair functions
-over 10 pairs split 4 touching and 6 noncontact.
-The agenda’s declared 16/64 and 4/6 counts are confirmed independently and no discrepancy
-was found.
+polynomial inequalities that define a valid packing at side `2 + sqrt(2)/2` were
+evaluated in `Q(sqrt 2)` and classified by exact sign: 80 wall-corner functions split 16
+active and 64 strictly positive with minimum inactive margin `1 - sqrt(2)/4`, and 320
+pair functions over 10 pairs split 4 touching and 6 noncontact.
+The agenda’s declared 16/64 and 4/6 counts are confirmed independently and no
+discrepancy was found.
 On a neighbourhood cut out by 128 strict sign conditions, the local feasible system is
 exactly the 20 active rows.
-`D-390`’s endpoint incidence and `D-391`’s disjunction are excluded by computation rather
-than by argument: every active pair corner sits at along-edge parameter exactly `1/2`, and
-exactly one branch is satisfied per touching pair.
+`D-390`’s endpoint incidence and `D-391`’s disjunction are excluded by computation
+rather than by argument: every active pair corner sits at along-edge parameter exactly
+`1/2`, and exactly one branch is satisfied per touching pair.
 
 **T-012 transfers.** All 28 Farkas certificates and the self-stress replay on the chart
 rows, giving `A_chart = A_geo J`, `q_chart = -2` on the pair rows, and
 `w . q_chart = -2 sqrt 2 < 0`.
 
 **The induction closes, conditionally.** Given the cited curve selection lemma, no
-nonconstant analytic feasible arc through the pose exists, because every coefficient below
-order `2m` is forced into the flex line’s kernel and the self-stress contradicts
+nonconstant analytic feasible arc through the pose exists, because every coefficient
+below order `2m` is forced into the flex line’s kernel and the self-stress contradicts
 feasibility at order `2m`.
 
 ## What This Round Does Not Establish
 
 *This section is the round on its own, as frozen.
-`H-060` was resolved later and elsewhere — by `BC-153`'s independent review, which is what
-the verdict now records; see the [Amendment](#amendment--the-bc-153-independent-review-and-acceptance).*
+`H-060` was resolved later and elsewhere — by `BC-153`’s independent review, which is
+what the verdict now records; see the
+[Amendment](#amendment--the-bc-153-independent-review-and-acceptance).*
 
-`H-060` was **unresolved** at the freeze. `instrument_ready` is **true**, and that flag is
-about the instrument, not about the hypothesis: it says the instrument may be used to
-evaluate `H-060`, not that `H-060` is decided.
+`H-060` was **unresolved** at the freeze.
+`instrument_ready` is **true**, and that flag is about the instrument, not about the
+hypothesis: it says the instrument may be used to evaluate `H-060`, not that `H-060` is
+decided.
 No target determination ran at the readiness checkpoint, and the instrument sets
 `isolation_decided` false unconditionally, so it cannot decide isolation even in
-principle.
-The registered criterion accepts only on a *checked* chart and a *reviewed* argument, and
-neither adjective applied to this round on its own.
+principle. The registered criterion accepts only on a *checked* chart and a *reviewed*
+argument, and neither adjective applied to this round on its own.
 Of the two obligations below the first was discharged at the readiness checkpoint; the
 second is *not* closed — `BC-153` judged it non-blocking on a derivation rather than
 reaching the printed page, which is gap 1 of the Amendment:
 
 1. **Discharged.** A `W7` instrument whose readiness review passes — it passed on the
-   third round, at final payload digest `743fd18a`; the history, the reviewer's one
+   third round, at final payload digest `743fd18a`; the history, the reviewer’s one
    residual recommendation and what the lane changed after the pass are below.
-   That does not make *this* round's chart checked: only `C8` was pre-run here, and only
-   to confirm that `exp-034` is not a refutation — not to exercise an instrument refusal,
-   and every number in this record still comes from scratchpad sympy.
-2. **Open.** Primary-text confirmation of the curve-selection statement, `BCR` Proposition 8.1.13 —
-   or Milnor 1968 Lemma 3.1 *together with* the finite-union reduction of `X-012` §4.1,
-   which is what puts the set into Milnor's narrower class of real algebraic sets cut by
-   strict inequalities. The printed text was unavailable in this environment. What is
-   quoted verbatim in the artifact is one of `BCR`'s own authors, in notes he describes as
-   provisional, plus four uses of the proposition by a single author group; the packet's
-   second secondary source has since been withdrawn there as an over-attribution. That is
-   author-written and single-group attestation, not independent corroboration, and a
-   quotation is not a reading.
+   That does not make *this* round’s chart checked: only `C8` was pre-run here, and only
+   to confirm that `exp-034` is not a refutation — not to exercise an instrument
+   refusal, and every number in this record still comes from scratchpad sympy.
+2. **Open.** Primary-text confirmation of the curve-selection statement, `BCR`
+   Proposition 8.1.13 — or Milnor 1968 Lemma 3.1 *together with* the finite-union
+   reduction of `X-012` §4.1, which is what puts the set into Milnor’s narrower class of
+   real algebraic sets cut by strict inequalities.
+   The printed text was unavailable in this environment.
+   What is quoted verbatim in the artifact is one of `BCR`’s own authors, in notes he
+   describes as provisional, plus four uses of the proposition by a single author group;
+   the packet’s second secondary source has since been withdrawn there as an
+   over-attribution. That is author-written and single-group attestation, not independent
+   corroboration, and a quotation is not a reading.
 
-The artifact’s second proof, by the classical second-order sufficiency principle, reaches
-the same conclusion from strictly weaker hypotheses and is recorded because an error in
-the curve-selection section would not by itself break isolation.
+The artifact’s second proof, by the classical second-order sufficiency principle,
+reaches the same conclusion from strictly weaker hypotheses and is recorded because an
+error in the curve-selection section would not by itself break isolation.
 It is explicitly **not** the acceptance route.
-Acceptance was preregistered on curve selection, so the second proof softens no obligation
-above. Its one substantive subtlety is worth keeping in view because it is easy to get
-backwards: the multiplier scaling is not cosmetic.
+Acceptance was preregistered on curve selection, so the second proof softens no
+obligation above. Its one substantive subtlety is worth keeping in view because it is
+easy to get backwards: the multiplier scaling is not cosmetic.
 At `mu = 1` the sufficiency inequality reads `-2 + 2 sqrt 2 > 0` and holds in the chart
 normalization, but reads `-2 + sqrt(2)/2 < 0` and *fails* in the `(c, theta)`
 normalization; the threshold is `mu > 2/(-w . q)`.
 
 ## Where the `W7` Instrument Stands
 
-This round's mathematics was frozen before any instrument existed, and the instrument that
-was then built is not this round's evidence.
-It is recorded here because the round's disposition turns on its review state, and because
-a reader who is told only that the chart is unchecked would infer that nothing was built.
+This round’s mathematics was frozen before any instrument existed, and the instrument
+that was then built is not this round’s evidence.
+It is recorded here because the round’s disposition turns on its review state, and
+because a reader who is told only that the chart is unchecked would infer that nothing
+was built.
 
 Built at `6580a9fd`, sixteen minutes before this record was registered, as the package
 `src/sqpack/local_rigidity/`. It binds to
-[`devtools/assess_n5_rigidity.py`](../../../../devtools/assess_n5_rigidity.py) rather than
-extending it, which is a deviation from `W7`'s registered instrument text.
+[`devtools/assess_n5_rigidity.py`](../../../../devtools/assess_n5_rigidity.py) rather
+than extending it, which is a deviation from `W7`’s registered instrument text.
 It self-reports `instrument_ready` with `isolation_decided` false — it does not decide
-isolation — and it exercises all eight controls `C1`–`C8`, matching the artifact's table
+isolation — and it exercises all eight controls `C1`–`C8`, matching the artifact’s table
 one for one.
 
 Its readiness review has now **passed**, on the third round, which is what moved `H-060`
 to `instrument_ready: true`:
 
 - Reviewed build: payload digest
-  `1ab2708623cf4dd077a0f125ba81cf3777088ea8e4d750a56d1dc3f55f807978` at commit `2f112f4c`.
-  Classification **BOUNDED-CAVEAT**, not a pass.
+  `1ab2708623cf4dd077a0f125ba81cf3777088ea8e4d750a56d1dc3f55f807978` at commit
+  `2f112f4c`. Classification **BOUNDED-CAVEAT**, not a pass.
   Every mathematical and computational claim reproduced, but two of the eight registered
   controls — `C1` `changed_feature` and `C4` `invented_contact` — were structurally
-  incapable of failing and never reached the binding's refusal path, so “all eight controls
-  reject” overstated the evidence for the one refusal the instrument exists to make.
+  incapable of failing and never reached the binding’s refusal path, so “all eight
+  controls reject” overstated the evidence for the one refusal the instrument exists to
+  make.
 - Repaired at `609e7392`; digest
-  `ba99ccccd7303f260f48c62a10fb9b6dc43ca3e8ff804646ef5de89a48967971`.
-  The re-review verified the repair by removal — neutering the guard or the binding makes
-  both controls stop rejecting — and returned **BOUNDED-CAVEAT** again: a pass conditional
-  on one unclosed provenance item, since the digested payload pins commit `2f112f4c`, whose
-  code cannot produce that payload, so a replayer following the pin gets CANNOT-REPRODUCE.
+  `ba99ccccd7303f260f48c62a10fb9b6dc43ca3e8ff804646ef5de89a48967971`. The re-review
+  verified the repair by removal — neutering the guard or the binding makes both
+  controls stop rejecting — and returned **BOUNDED-CAVEAT** again: a pass conditional on
+  one unclosed provenance item, since the digested payload pins commit `2f112f4c`, whose
+  code cannot produce that payload, so a replayer following the pin gets
+  CANNOT-REPRODUCE.
 - **PASS.** Final payload digest
   `743fd18a839fbc3dc566b5e622f688c5745845573414eea40ebf52d620d2cc67` over source digest
   `9382bae12976bc1225382ef79ab4a777d5982cbc6b04a47dfbdba51d22c36357`, the reviewer
   reproducing that source digest independently from the recipe.
-  Replayed from a clean root at a commit one past the author's observed commit, with the
+  Replayed from a clean root at a commit one past the author’s observed commit, with the
   package untouched between the two, and byte-identical under normal and optimized
   Python; 46 tests pass.
-  The leaf diff against the author's final certificate shows exactly one differing leaf,
+  The leaf diff against the author’s final certificate shows exactly one differing leaf,
   `/claim_boundary/provenance/pinned_commit`, with `tree_matches: True` and
   `paths_differing: []` — which is precisely the provenance item the second round left
-  open, now closed.
-  The `C1`/`C4` repair was re-verified by removal: replace the guard with a no-op and both
-  controls stop rejecting.
+  open, now closed. The `C1`/`C4` repair was re-verified by removal: replace the guard
+  with a no-op and both controls stop rejecting.
   The corrected constant is confirmed on all sixteen support features,
-  `G''(e_u4) = -2(m+1)` exactly; the reviewer's earlier `-(m + 1/2)` was the geometric
-  gap's second derivative rather than the cleared chart polynomial's.
-  The structural conclusion is unchanged and now machine-checked: the restricted second
-  jet is an affine function of the support feature's own base margin, and is **not** an
+  `G''(e_u4) = -2(m+1)` exactly; the reviewer’s earlier `-(m + 1/2)` was the geometric
+  gap’s second derivative rather than the cleared chart polynomial’s. The structural
+  conclusion is unchanged and now machine-checked: the restricted second jet is an
+  affine function of the support feature’s own base margin, and is **not** an
   independent identifier.
 
 ### What Changed After the Pass, and What It Does Not Change
 
 The reviewer carried one residual **recommendation**, explicitly not a condition of the
 pass: `source_digest` covered the instrument package and its driver but not the three
-files the instrument reads —
-[`sqpack/field.py`](../../../../src/sqpack/field.py),
+files the instrument reads — [`sqpack/field.py`](../../../../src/sqpack/field.py),
 [`cases/gobel5/packing.py`](../../../../cases/gobel5/packing.py) and
 [`devtools/assess_n5_rigidity.py`](../../../../devtools/assess_n5_rigidity.py).
 A change to any of those would have altered what the instrument computes while leaving
@@ -390,59 +393,59 @@ modified input. The hashed set went from 9 files to 12.
 
 The current build is therefore **not** the reviewed build, and is not claimed to be:
 
-| | reviewed | current |
+|  | reviewed | current |
 | --- | --- | --- |
 | payload digest | `743fd18a…` | `bd450cb610a866972043a98a04673d6a9d75acd78642b658b9dccb098a18b26e` |
 | source digest | `9382bae1…` | `ad32062e5a01…` |
 | observed commit | `d45a3269…` | `15ebfa98d66a…` |
 
 The current build carries receipt `f8262c77…` and certificate `f3b0c2d6…`, is
-byte-identical under normal and optimized Python, and reports `tree_matches: True` with no
-differing paths.
-Its leaf diff against the reviewed build is exactly four leaves, all under
-`/claim_boundary/provenance`: `note`, `pinned_commit`, `source_digest`, and the length of
-`source_files`. **No package code changed**, which is why the 46 passing tests and the
-clean linters from the reviewed round remain current.
+byte-identical under normal and optimized Python, and reports `tree_matches: True` with
+no differing paths. Its leaf diff against the reviewed build is exactly four leaves, all
+under `/claim_boundary/provenance`: `note`, `pinned_commit`, `source_digest`, and the
+length of `source_files`. **No package code changed**, which is why the 46 passing tests
+and the clean linters from the reviewed round remain current.
 
 `pinned_commit` moved from `d45a3269…` to `15ebfa98…` only because an unrelated commit
-landed between runs. That is the documented sensitivity of the observing mechanism, not an
-instrument change; `source_digest` is the leaf that moved for a substantive reason.
+landed between runs.
+That is the documented sensitivity of the observing mechanism, not an instrument change;
+`source_digest` is the leaf that moved for a substantive reason.
 
 Two limitations stay named rather than fixed:
 
 - **`certificate_drift` digests a reduced payload.** It computes its recorded digest
   without the controls list and without provenance, so that field does not equal the
   shipped payload digest and a reader who expects it to match will be surprised.
-  It remains a sound drift test — the digest moves under two independent mutations and is
-  stable on rebuild — so this is a known cosmetic discrepancy, disclosed by the lane
+  It remains a sound drift test — the digest moves under two independent mutations and
+  is stable on rebuild — so this is a known cosmetic discrepancy, disclosed by the lane
   unprompted and deliberately left in place.
 - **Replayability rests on `tree_matches`, not on the digest alone.** With the widened
   hashed set the digest now covers the inputs, but what a replayer follows is still the
   pinned commit, and that pin is what fixes the whole tree.
 
-The instrument's own declared boundaries, none of which this record could state while it
+The instrument’s own declared boundaries, none of which this record could state while it
 denied the instrument existed:
 
-- **Four mathematical inputs are cited, not machine-checked**: the separating-axis theorem
-  for convex polygons; the topological half of `u -> 2 atan(u)` being a homeomorphism onto
-  `(-pi, pi)` (the polynomial injectivity is verified, the topology is cited); containment
-  of a convex square in a convex rectangle reducing to its four corners; and continuity of
-  polynomials, which is what makes `U` open.
-- **The binding compares a restricted second jet**, along one chart ray only — the image of
-  `T-012`'s single free direction, `e_u4` halved — not the full chart Hessian.
-  Directions outside the first-order cone are not compared, because `T-012` supplies no `q`
-  for them.
+- **Four mathematical inputs are cited, not machine-checked**: the separating-axis
+  theorem for convex polygons; the topological half of `u -> 2 atan(u)` being a
+  homeomorphism onto `(-pi, pi)` (the polynomial injectivity is verified, the topology
+  is cited); containment of a convex square in a convex rectangle reducing to its four
+  corners; and continuity of polynomials, which is what makes `U` open.
+- **The binding compares a restricted second jet**, along one chart ray only — the image
+  of `T-012`’s single free direction, `e_u4` halved — not the full chart Hessian.
+  Directions outside the first-order cone are not compared, because `T-012` supplies no
+  `q` for them.
 - **Classification covers single-support-feature touches only**; edge-flush and
   corner-on-corner touches are refused rather than classified.
 - **The reduction audit samples only inside `U`**, on a fixed grid rather than a search
-  towards `U`'s boundary, which is where a reduction argument is most likely to fail.
+  towards `U`’s boundary, which is where a reduction argument is most likely to fail.
   Points outside `U` are counted and skipped, so the filter is exercised, but no sampled
   point sits near the boundary by construction.
 
-The frozen packet itself is not subject to the restricted-jet limitation: `verify_chart.py`
-compares `H_chart` against `J^T H_geo J` on all twenty rows.
-The limitation belongs to the instrument's binding, and the difference is exactly the kind
-of gap between a paper proof and an instrument that a round record exists to state.
+The frozen packet itself is not subject to the restricted-jet limitation:
+`verify_chart.py` compares `H_chart` against `J^T H_geo J` on all twenty rows.
+The limitation belongs to the instrument’s binding, and the difference is exactly the
+kind of gap between a paper proof and an instrument that a round record exists to state.
 
 ## Reading `assurance: verified` Correctly
 
@@ -451,13 +454,12 @@ combination this campaign uses whenever the arithmetic is exact over `Q(sqrt 2)`
 than finite-precision.
 It describes the arithmetic, not the hypothesis.
 It does **not** mean `H-060` is verified: the verdict is the field that carries the
-hypothesis's disposition, and what put `accepted` there is `BC-153`'s review, not this
-line.
-Every quantity here was computed by scratchpad sympy scripts run read-only against the
-repository, independently of `sqpack.field`; none of it came from a repository instrument,
-because the `W7` instrument was built only after this packet was frozen, and its readiness
-review — which has since passed — certifies the instrument rather than this round's
-numbers.
+hypothesis’s disposition, and what put `accepted` there is `BC-153`’s review, not this
+line. Every quantity here was computed by scratchpad sympy scripts run read-only against
+the repository, independently of `sqpack.field`; none of it came from a repository
+instrument, because the `W7` instrument was built only after this packet was frozen, and
+its readiness review — which has since passed — certifies the instrument rather than
+this round’s numbers.
 
 `selftest_passed` is `false` for the same reason: there is no engine gate to run.
 
@@ -469,12 +471,11 @@ its recorded digest.
 That is the replay cost, and it is the only machine time this round has that can be
 measured after the fact.
 
-`agent_minutes` is **absent, and absent on purpose**.
-The packet lane did not record its own operator time before freezing, and the integration
-lane that wrote this record is not the lane that did the mathematics, so any number here
-would be a guess dressed as a measurement.
-`agenda-016` allots `BC-152` 360 elapsed minutes and the packet declares itself phase
-0–105, but an allotment is not a spend.
+`agent_minutes` is **absent, and absent on purpose**. The packet lane did not record its
+own operator time before freezing, and the integration lane that wrote this record is
+not the lane that did the mathematics, so any number here would be a guess dressed as a
+measurement. `agenda-016` allots `BC-152` 360 elapsed minutes and the packet declares
+itself phase 0–105, but an allotment is not a spend.
 The consequence is real and worth stating rather than hiding: this round contributes
 nothing to the campaign’s agent-minute total, so that total now understates what `H-060`
 has cost.
@@ -484,43 +485,43 @@ has cost.
 The proof went in as an exploration report rather than as a new document kind, because
 that is the campaign’s slot for a long-form research document and the only one the
 document map already covers.
-That SHA-256 — `28343b743e689fc99968d589a542d9022d061de8ec3ae5100bf4ef4930e40b6b` — names
-the frozen source and not the installed file, and the installed body is **not**
+That SHA-256 — `28343b743e689fc99968d589a542d9022d061de8ec3ae5100bf4ef4930e40b6b` —
+names the frozen source and not the installed file, and the installed body is **not**
 byte-identical to it.
 It was reformatted to house Markdown conventions at installation, and a later disclosed
-provenance pass rewrote the citation apparatus of `X-012` §4.1, withdrawing one citation.
-No statement, number, count, margin, inequality, proof step or claim boundary changed in
-either pass; the citation apparatus did.
+provenance pass rewrote the citation apparatus of `X-012` §4.1, withdrawing one
+citation. No statement, number, count, margin, inequality, proof step or claim boundary
+changed in either pass; the citation apparatus did.
 
 The seven replay scripts are retained verbatim, with their sizes and digests, in
-[this round’s results record](../results/exp-058-h-060-n5-chart-and-proof.json) rather than
-installed as repository code.
+[this round’s results record](../results/exp-058-h-060-n5-chart-and-proof.json) rather
+than installed as repository code.
 Nothing under `campaign/` is code — the campaign tree holds records — and the executable
 form of this mathematics was built after the freeze as
 [`src/sqpack/local_rigidity/`](../../../../src/sqpack/local_rigidity/), which binds to
-[`devtools/assess_n5_rigidity.py`](../../../../devtools/assess_n5_rigidity.py) rather than
-extending it as `W7`'s text asks.
+[`devtools/assess_n5_rigidity.py`](../../../../devtools/assess_n5_rigidity.py) rather
+than extending it as `W7`’s text asks.
 Installing seven one-off scripts as tooling would cross that boundary and preserve a
 measurement in one-off code.
 The `command` above extracts them from the record and re-runs all seven; that extraction
-and replay was exercised on 2026-09-03 and every script’s bytes hash back to its recorded
-digest.
+and replay was exercised on 2026-09-03 and every script’s bytes hash back to its
+recorded digest.
 
 ## Novelty, as Scoped
 
 The admissible claim is the first exact proof that Goebel’s `n = 5` optimum is locally
-rigid at fixed side — a property Kingbird asserts with no method anywhere on the site, that
-Goebel’s 1979 paper does not state (the words “rigid” and “unique” occur zero times in it),
-and that Friedman’s survey does not annotate.
-Carried *outside* the claim, as an unverified survey assertion: the coordinator's prior-art
-survey reports that no theorem stated in the structural-rigidity or jamming literature
-covers polygon contact systems.
-That is the survey's wording and its scope, it was not verified against the primary texts
-by any lane, and the instrument review directed that it be carried this way rather than
-inside the claim.
-It is narrower than “no stated rigidity theorem covers this”: the same survey records that
-the classical second-order sufficiency theorems have no failing hypothesis here once the
-system is reduced, so a stated theorem does cover the reduced system.
+rigid at fixed side — a property Kingbird asserts with no method anywhere on the site,
+that Goebel’s 1979 paper does not state (the words “rigid” and “unique” occur zero times
+in it), and that Friedman’s survey does not annotate.
+Carried *outside* the claim, as an unverified survey assertion: the coordinator’s
+prior-art survey reports that no theorem stated in the structural-rigidity or jamming
+literature covers polygon contact systems.
+That is the survey’s wording and its scope, it was not verified against the primary
+texts by any lane, and the instrument review directed that it be carried this way rather
+than inside the claim.
+It is narrower than “no stated rigidity theorem covers this”: the same survey records
+that the classical second-order sufficiency theorems have no failing hypothesis here
+once the system is reduced, so a stated theorem does cover the reduced system.
 Score **S3, not S4**. The closing principle is the classical second-order sufficient
 optimality condition and the curve-selection proof shape matches Connelly–Whiteley 1996
 Theorem 4.3.1; **neither is claimed as new**, nor is the half-angle rationalization, the
@@ -533,116 +534,118 @@ texts.
 
 ## Claim Boundary
 
-Not established and not claimed: a numerical isolation radius; rigidity when the container
-side is free, which `X-007` measured to be false; global uniqueness of the `n = 5` optimum;
-rigidity of any other `n = 5` optimal family; applicability of the Connelly–Whiteley
-theorem as stated; any novelty beyond the above.
+Not established and not claimed: a numerical isolation radius; rigidity when the
+container side is free, which `X-007` measured to be false; global uniqueness of the
+`n = 5` optimum; rigidity of any other `n = 5` optimal family; applicability of the
+Connelly–Whiteley theorem as stated; any novelty beyond the above.
 
 No frontier property, result-register entry or evidence record changed *in this round*,
-and none changed before `BC-153`’s independent review; what that review then authorised is
-listed in the Amendment.
-`H-060` itself was not amended: its registered criterion is frozen, this round was measured
-against it as written, and so was the review.
+and none changed before `BC-153`’s independent review; what that review then authorised
+is listed in the Amendment.
+`H-060` itself was not amended: its registered criterion is frozen, this round was
+measured against it as written, and so was the review.
 
 ## Amendment — the `BC-153` Independent Review and Acceptance
 
-`BC-153` reviewed this round on 2026-09-03 and returned **PASS**.
-The reviewer authored none of the packet, the instrument, `X-012`, the round record or the
-three supporting reviews, wrote only to their own scratchpad, and used the supporting
-reviews as evidence rather than as authority: every mathematical step was re-derived.
-The verdict above moves from `unresolved` to `accepted` on that review, and `needs_review`
-is cleared.
+`BC-153` reviewed this round on 2026-09-03 and returned **PASS**. The reviewer authored
+none of the packet, the instrument, `X-012`, the round record or the three supporting
+reviews, wrote only to their own scratchpad, and used the supporting reviews as evidence
+rather than as authority: every mathematical step was re-derived.
+The verdict above moves from `unresolved` to `accepted` on that review, and
+`needs_review` is cleared.
 
 **What the pass rests on.** Three layers, from most to least independent of the authors’
 code.
 
 1. **A from-scratch reconstruction.** In sympy, sharing no code with the packet, with
-   `sqpack` or with the instrument, the reviewer rebuilt the pose and chart and reproduced:
-   all 400 elementary polynomials classified by exact sign (80 wall-corner functions 16/64
-   with minimum inactive margin `1 - √2/4`; 320 pair functions, 4 touching pairs and 6
-   noncontact); the 28 negative witnesses, value for value; the 128 strict conditions of
-   `N`; the 20 active rows in `T-012`’s own order, with every gradient matching the §2.5
-   table and column `t4` identically zero; `q_chart = -2` on the four pair rows with each
-   pair row restricting to exactly `-t4²` on the flex line; the packet’s displayed
-   `g̃_3` as a polynomial; the four exact edge midpoints; the first-order cone by **28
-   Farkas certificates the reviewer built by hand** from the row inequalities; the
-   self-stress, `w · q_chart = -2√2`, and `Φ = Σ w_j g̃_j` restricting to `-√2 · t4²`;
-   `T-012`’s 28 stored certificates and its self-stress replayed against the reviewer’s own
-   `S A_chart`; and Lemma 8 on random rational arcs at `m = 2, 3`.
-2. **This round’s own scripts**, run read-only, all passing, with all seven files hashing
-   to the digests retained in this round’s [results
-   record](../results/exp-058-h-060-n5-chart-and-proof.json).
-3. **The instrument**, `sqpack.local_rigidity`, replayed from clean temporary roots under
-   normal and optimized Python: payload digest identical under both, `ready`,
+   `sqpack` or with the instrument, the reviewer rebuilt the pose and chart and
+   reproduced: all 400 elementary polynomials classified by exact sign (80 wall-corner
+   functions 16/64 with minimum inactive margin `1 - √2/4`; 320 pair functions, 4
+   touching pairs and 6 noncontact); the 28 negative witnesses, value for value; the 128
+   strict conditions of `N`; the 20 active rows in `T-012`’s own order, with every
+   gradient matching the §2.5 table and column `t4` identically zero; `q_chart = -2` on
+   the four pair rows with each pair row restricting to exactly `-t4²` on the flex line;
+   the packet’s displayed `g̃_3` as a polynomial; the four exact edge midpoints; the
+   first-order cone by **28 Farkas certificates the reviewer built by hand** from the
+   row inequalities; the self-stress, `w · q_chart = -2√2`, and `Φ = Σ w_j g̃_j`
+   restricting to `-√2 · t4²`; `T-012`’s 28 stored certificates and its self-stress
+   replayed against the reviewer’s own `S A_chart`; and Lemma 8 on random rational arcs
+   at `m = 2, 3`.
+2. **This round’s own scripts**, run read-only, all passing, with all seven files
+   hashing to the digests retained in this round’s
+   [results record](../results/exp-058-h-060-n5-chart-and-proof.json).
+3. **The instrument**, `sqpack.local_rigidity`, replayed from clean temporary roots
+   under normal and optimized Python: payload digest identical under both, `ready`,
    `controls_all_reject`, no refusals, `isolation_decided` false as designed, and a
-   neighbourhood receipt that is this document’s `N` exactly — 128 strict conditions,
-   64 + 24 + 12 positive and 28 negative — with `gradient_matches` and `second_jet_matches`
-   true on all twenty rows.
+   neighbourhood receipt that is this document’s `N` exactly — 128 strict conditions, 64
+   \+ 24 + 12 positive and 28 negative — with `gradient_matches` and
+   `second_jet_matches` true on all twenty rows.
    A leaf diff against the reviewed build `743fd18a` differs only under
    `/claim_boundary/provenance`, in no margin, count, row, jet, control verdict or
    determination, which confirms independently of this record’s own statement that the
    current build differs from the reviewed one in provenance metadata only.
 
-**The exact scope, and it is the whole of what is claimed.**
-For `s = 2 + √2/2` and Goebel’s labeled pose `P⁰` in `C = (ℝ² × S¹)⁵`, `P⁰` is an isolated
-point of `Feas(s)` (closed unit squares in `[0, s]²`, pairwise disjoint interiors);
-equivalently there is no nonconstant continuous feasible path from `P⁰` and no sequence of
-distinct feasible poses converging to it; hence Kingbird-rigid at fixed side.
+**The exact scope, and it is the whole of what is claimed.** For `s = 2 + √2/2` and
+Goebel’s labeled pose `P⁰` in `C = (ℝ² × S¹)⁵`, `P⁰` is an isolated point of `Feas(s)`
+(closed unit squares in `[0, s]²`, pairwise disjoint interiors); equivalently there is
+no nonconstant continuous feasible path from `P⁰` and no sequence of distinct feasible
+poses converging to it; hence Kingbird-rigid at fixed side.
 
-**Not claimed, and not to be claimed on this review:** any isolation radius; rigidity with
-the side free, which is false (`X-007`); global uniqueness; any other `n = 5` optimum;
-applicability of Connelly–Whiteley as stated; and any method novelty — the closing
-principle is classical and the `[CW96]` Theorem 4.3.1 proof shape is not new.
+**Not claimed, and not to be claimed on this review:** any isolation radius; rigidity
+with the side free, which is false (`X-007`); global uniqueness; any other `n = 5`
+optimum; applicability of Connelly–Whiteley as stated; and any method novelty — the
+closing principle is classical and the `[CW96]` Theorem 4.3.1 proof shape is not new.
 
 **Novelty, `S3`, in the reviewer’s own words as accepted:** the first exact *proof* of
-fixed-side local rigidity of Goebel’s `n = 5` optimum — a property *asserted without proof*
-by Kingbird (archived page, line 44), not stated by Goebel, and not stated by Friedman
-(`DS7` Theorem 2 is a lower bound only).
+fixed-side local rigidity of Goebel’s `n = 5` optimum — a property *asserted without
+proof* by Kingbird (archived page, line 44), not stated by Goebel, and not stated by
+Friedman (`DS7` Theorem 2 is a lower bound only).
 The reviewer checked those three sources first-hand rather than through the survey.
 
-**Six named gaps, and one new minor one. None is a condition of the pass, and none is
-closed by acceptance.**
+**Six named gaps, and one new minor one.
+None is a condition of the pass, and none is closed by acceptance.**
 
-1. **`BCR` Proposition 8.1.13’s printed page is still unread.** Non-blocking: the review’s
-   §6.5 derives the needed statement from primary-text `BPR` Theorem 3.22 plus the
-   one-variable Puiseux fact, through the `t = u^p` bridge Coste states and the reviewer
-   verified first-hand in his notes; Milnor with the finite-union reduction of `X-012` §4.1
-   is a third route.
-2. **The second-order-sufficiency numbering is from memory** — on the non-acceptance route
-   only; Theorem 11 is proved in full.
+1. **`BCR` Proposition 8.1.13’s printed page is still unread.** Non-blocking: the
+   review’s §6.5 derives the needed statement from primary-text `BPR` Theorem 3.22 plus
+   the one-variable Puiseux fact, through the `t = u^p` bridge Coste states and the
+   reviewer verified first-hand in his notes; Milnor with the finite-union reduction of
+   `X-012` §4.1 is a third route.
+2. **The second-order-sufficiency numbering is from memory** — on the non-acceptance
+   route only; Theorem 11 is proved in full.
 3. **Prior-art scoping comes from the coordinator’s survey and is unverified against the
    primary texts** — carried *outside* the claim, which is where it stays.
 4. **The instrument binds only the restricted jet along `e_{u4}`** — sufficient, since
    Lemma 8 at order `2m` and Theorem 11 consume only `eᵀ H_j e`.
 5. **The instrument’s reduction audit samples only the neighbourhood interior** —
-   irrelevant to the proof: `N` is defined by sign persistence rather than by a radius, and
-   the proof consumes no boundary behaviour.
+   irrelevant to the proof: `N` is defined by sign persistence rather than by a radius,
+   and the proof consumes no boundary behaviour.
 6. **The Kingbird thirteen-versus-four list tension** (`X-012` §7.3) is real and
    unresolved, and not load-bearing: `n = 5` is on both lists.
 7. **New, minor:** `X-012` §1.3 (i) is terse — a path can be constant on an initial
    segment, so the argument wants one sentence taking the supremum of that interval.
-   The conclusion holds; the frozen mathematics is left as it stands and this is recorded
-   rather than patched.
+   The conclusion holds; the frozen mathematics is left as it stands and this is
+   recorded rather than patched.
 
-**What this record changed, and what it did not.**
-The verdict is `accepted` with `needs_review` false; the outcome determination, which read
-`no_progress` with `checked_by` “nothing that the criterion accepts”, now reads
-`criterion_met` on the review; and `effort.stopped_by` moves from `dependency` to
-`criterion`, because the dependency this round stopped on — an independent review — arrived
-and decided it, so the round is no longer resumable work.
-Unchanged: `H-060`’s registered criterion, which is frozen and was met as written and not
-amended for this round or for the review; every number, count, margin and determination
-above; and this round’s [results record](../results/exp-058-h-060-n5-chart-and-proof.json),
-which is immutable run data and still states the round’s own disposition at the freeze.
+**What this record changed, and what it did not.** The verdict is `accepted` with
+`needs_review` false; the outcome determination, which read `no_progress` with
+`checked_by` “nothing that the criterion accepts”, now reads `criterion_met` on the
+review; and `effort.stopped_by` moves from `dependency` to `criterion`, because the
+dependency this round stopped on — an independent review — arrived and decided it, so
+the round is no longer resumable work.
+Unchanged: `H-060`’s registered criterion, which is frozen and was met as written and
+not amended for this round or for the review; every number, count, margin and
+determination above; and this round’s
+[results record](../results/exp-058-h-060-n5-chart-and-proof.json), which is immutable
+run data and still states the round’s own disposition at the freeze.
 
 **What the pass authorised elsewhere**, and it is the complete list: clearing
 `needs_review` here; setting the `n = 5` frontier rigidity property to locally rigid at
-fixed side, with a new evidence record `E-n005-fixed-side-local-rigidity`; and registering
-the theorem as `T-014`, `apparently-novel` at `S3`, which is permitted only because the
-reviewer independently accepted the novelty basis.
-`T-012`’s recorded next action — “local rigidity needs the curve-selection argument written
-out in `X-007` to become a computation” — is discharged by that registration, and `X-012`’s
-stale `instrument_ready: false` statements are corrected.
+fixed side, with a new evidence record `E-n005-fixed-side-local-rigidity`; and
+registering the theorem as `T-014`, `apparently-novel` at `S3`, which is permitted only
+because the reviewer independently accepted the novelty basis.
+`T-012`’s recorded next action — “local rigidity needs the curve-selection argument
+written out in `X-007` to become a computation” — is discharged by that registration,
+and `X-012`’s stale `instrument_ready: false` statements are corrected.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

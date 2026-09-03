@@ -691,17 +691,17 @@ contacted edge — which turns out to be the reason for both the first-order bli
 the second-order obstruction.
 
 The frontier property stayed `undetermined` then, and the reason is worth carrying
-forward: second-order rigidity is not local rigidity, the step that would close the gap is
-a curve-selection argument that `X-007` writes out as prose and no replay checks, and the
-property enum has no word for what was actually established.
-*(That gap closed on 2026-09-03: the argument was written out in full, checked against an
-exact 400-inequality accounting, independently reviewed and registered as `T-014`, and the
-property is now `locally-rigid` at fixed side — see the newest result under [Results
-established here](#results-established-here).)*
-What did change is everything saying why — `verified` rather than `numerically-checked`,
-`exact-algebraic` rather than `numerical-multiprecision`, and a first-party evidence id
-in place of the screen’s — which takes `n = 5` out of the assessment tool’s ownership,
-so it joins `n = 11` as left to a stronger argument.
+forward: second-order rigidity is not local rigidity, the step that would close the gap
+is a curve-selection argument that `X-007` writes out as prose and no replay checks, and
+the property enum has no word for what was actually established.
+*(That gap closed on 2026-09-03: the argument was written out in full, checked against
+an exact 400-inequality accounting, independently reviewed and registered as `T-014`,
+and the property is now `locally-rigid` at fixed side — see the newest result under
+[Results established here](#results-established-here).)* What did change is everything
+saying why — `verified` rather than `numerically-checked`, `exact-algebraic` rather than
+`numerical-multiprecision`, and a first-party evidence id in place of the screen’s —
+which takes `n = 5` out of the assessment tool’s ownership, so it joins `n = 11` as left
+to a stronger argument.
 Both `D-354` guards stayed green without being edited, which was the test the change was
 held to.
 
@@ -1944,26 +1944,25 @@ side, proved exactly.** For `s = 2 + √2/2` and Goebel’s labeled pose `P⁰` 
 feasible path from `P⁰` and no sequence of distinct feasible poses converging to it, so
 the packing is rigid at fixed side in the catalogue’s own sense.
 The proof is exact over `Q(√2)`: one intrinsic half-angle chart, all 400 elementary
-inequalities classified by exact sign, a neighbourhood cut out by 128 strict conditions on
-which the local feasible set is exactly twenty active rows, `T-012`’s first-order cone and
-non-negative self-stress transferred to that chart, then semialgebraic curve selection on
-the punctured feasible set and an induction on a putative arc’s Taylor coefficients that
-the self-stress contradicts at order `2m`.
-It is registered at `V3`/`C3` — the exact quantities are machine-confirmed here, the two
-steps that close the argument are an audited proof and no instrument decides isolation —
-and `apparently-novel` at `S3` on
+inequalities classified by exact sign, a neighbourhood cut out by 128 strict conditions
+on which the local feasible set is exactly twenty active rows, `T-012`’s first-order
+cone and non-negative self-stress transferred to that chart, then semialgebraic curve
+selection on the punctured feasible set and an induction on a putative arc’s Taylor
+coefficients that the self-stress contradicts at order `2m`. It is registered at
+`V3`/`C3` — the exact quantities are machine-confirmed here, the two steps that close
+the argument are an audited proof and no instrument decides isolation — and
+`apparently-novel` at `S3` on
 [`BC-153`](packing/campaign/agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md)’s
-independent review, which rebuilt every exact quantity from scratch in code sharing nothing
-with the author, replayed the instrument from clean roots, and accepted the novelty basis:
-Kingbird asserts the property with no argument, Goebel does not state it, and Friedman does
-not annotate it.
+independent review, which rebuilt every exact quantity from scratch in code sharing
+nothing with the author, replayed the instrument from clean roots, and accepted the
+novelty basis: Kingbird asserts the property with no argument, Goebel does not state it,
+and Friedman does not annotate it.
 **Not claimed:** any isolation radius; rigidity with the container side free, which
 [X-007](packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md)
 measured to be false; global uniqueness; any other `n = 5` optimum; applicability of the
 Connelly–Whiteley tensegrity theorems as stated; and no novelty of method — the closing
 principle is the classical second-order sufficient optimality condition, and the proof
-shape is Connelly–Whiteley 1996 Theorem 4.3.1’s.
-The proof is
+shape is Connelly–Whiteley 1996 Theorem 4.3.1’s. The proof is
 [X-012](packing/campaign/explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md),
 the round is
 [exp-058](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md),
@@ -2971,36 +2970,36 @@ local side optimality in the anchored pose–side chart, modulo finite symmetrie
 It does not prove global optimality or give an explicit isolation radius.
 
 **Goebel’s `n = 5` optimum is locally rigid at fixed side, and that is now a result.**
-Exp-058 registers the BC-152 proof packet: an intrinsic half-angle chart injective on all
-of `R^15`, all 400 elementary wall-corner and pair inequalities classified by exact sign
-(confirming the agenda’s 16/64 and 4/6 counts with no discrepancy), a neighbourhood cut
-out by 128 strict sign conditions on which the local feasible system is exactly the twenty
-active rows, T-012’s 28 Farkas certificates and self-stress replaying on the chart with
-`w · q_chart = -2√2 < 0`, and an order-`2m` coefficient induction that contradicts a
-nonconstant analytic feasible arc.
+Exp-058 registers the BC-152 proof packet: an intrinsic half-angle chart injective on
+all of `R^15`, all 400 elementary wall-corner and pair inequalities classified by exact
+sign (confirming the agenda’s 16/64 and 4/6 counts with no discrepancy), a neighbourhood
+cut out by 128 strict sign conditions on which the local feasible system is exactly the
+twenty active rows, T-012’s 28 Farkas certificates and self-stress replaying on the
+chart with `w · q_chart = -2√2 < 0`, and an order-`2m` coefficient induction that
+contradicts a nonconstant analytic feasible arc.
 `H-060` is **confirmed** on `BC-153`’s independent review, which returned PASS on
 2026-09-03 against a criterion frozen before the target work and met as written: the
 reviewer replayed the instrument from clean roots under both interpreters and got this
-chart’s neighbourhood back exactly, and rebuilt every exact quantity from scratch in code
-sharing nothing with the author before accepting each step from nonisolation to the
+chart’s neighbourhood back exactly, and rebuilt every exact quantity from scratch in
+code sharing nothing with the author before accepting each step from nonisolation to the
 second-order contradiction.
 What is established, exactly: for `s = 2 + √2/2` and Goebel’s labeled pose `P⁰` in
 `C = (ℝ² × S¹)⁵`, `P⁰` is an isolated point of `Feas(s)`, so no nonconstant continuous
-feasible path leaves it and no sequence of distinct feasible poses converges to it — hence
-rigid at fixed side in the catalogue’s sense.
+feasible path leaves it and no sequence of distinct feasible poses converges to it —
+hence rigid at fixed side in the catalogue’s sense.
 Registered as `T-014` at `V3`/`C3`, apparently-novel at `S3`: the exact quantities are
-machine-confirmed here, the curve-selection lemma and the induction that close the argument
-are an audited proof, and no instrument decides isolation — `isolation_decided` is false
-unconditionally, by design.
-Not claimed: an isolation radius, the side as a variable (false, X-007), global uniqueness,
-any other `n = 5` optimum, applicability of Connelly–Whiteley as stated, or novelty of
-method.
-Six gaps stay named and none is a condition of the pass — the printed BCR page behind the
-curve-selection citation is still unread, and the review replaces it with a derivation from
-primary-text Basu–Pollack–Roy plus the one-variable Puiseux fact rather than closing it.
-The corroborating second-order-sufficiency proof in the packet reaches the same conclusion
-from weaker hypotheses and discharged nothing, because acceptance was preregistered on the
-curve-selection route.
+machine-confirmed here, the curve-selection lemma and the induction that close the
+argument are an audited proof, and no instrument decides isolation — `isolation_decided`
+is false unconditionally, by design.
+Not claimed: an isolation radius, the side as a variable (false, X-007), global
+uniqueness, any other `n = 5` optimum, applicability of Connelly–Whiteley as stated, or
+novelty of method. Six gaps stay named and none is a condition of the pass — the printed
+BCR page behind the curve-selection citation is still unread, and the review replaces it
+with a derivation from primary-text Basu–Pollack–Roy plus the one-variable Puiseux fact
+rather than closing it.
+The corroborating second-order-sufficiency proof in the packet reaches the same
+conclusion from weaker hypotheses and discharged nothing, because acceptance was
+preregistered on the curve-selection route.
 
 **The optimal configuration spaces at `n = 3,4` are now exact controls.** Exp-014 proves
 that `F_3(2)` is two labelled circles, its `S3` quotient is one circle, and its

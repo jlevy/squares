@@ -63,16 +63,15 @@ exploration:
 
 **Status:** Reviewed and passed.
 The frozen `BC-152` proof packet, installed unchanged in substance.
-`H-060` is **confirmed** and `instrument_ready` is **true**: `BC-153`'s independent review
-returned PASS on 2026-09-03, and the frontier property and the `T-014` register entry that
-followed were made there, not by this report.
+`H-060` is **confirmed** and `instrument_ready` is **true**: `BC-153`’s independent
+review returned PASS on 2026-09-03, and the frontier property and the `T-014` register
+entry that followed were made there, not by this report.
 
 **Owns:** The mathematics of `BC-152` phase 0–105 at `n = 5`. It owns no code: the `W7`
 executable instrument, its receipt and the eight rejecting controls of §6 belong to a
-separate lane.
-That lane built them after this packet was frozen, at `6580a9fd`, as the package
-`src/sqpack/local_rigidity/`; their readiness review returned BOUNDED-CAVEAT twice and then
-**PASS**, which is what moved `instrument_ready` to true (§8.4).
+separate lane. That lane built them after this packet was frozen, at `6580a9fd`, as the
+package `src/sqpack/local_rigidity/`; their readiness review returned BOUNDED-CAVEAT
+twice and then **PASS**, which is what moved `instrument_ready` to true (§8.4).
 
 ## Provenance and installation
 
@@ -117,34 +116,34 @@ false, and the printed BCR page is still unread today.
 **Correction pass, 2026-09-03.** A second later pass, following an independent factual
 review of the round records against the artifacts they rest on, corrected four
 overstatements in this document: the “do not exist yet” description of the instrument
-above and in §8.4, which was false when written; the “equivalently Milnor 1968 Lemma 3.1”
-clause in the closing obligation, which restores exactly the over-attribution §4.1
-withdraws a citation for; the survey clause “not covered by any stated rigidity theorem for
-polygon contacts”, which is demoted out of the novelty claim in §7.4 and §8.5; and §7.3's
-list of thirteen rigid `n`, which is now recorded as in tension with the archived page.
-No statement, number, count, margin, inequality or proof step changed, and every correction
-makes this record weaker.
+above and in §8.4, which was false when written; the “equivalently Milnor 1968 Lemma
+3.1” clause in the closing obligation, which restores exactly the over-attribution §4.1
+withdraws a citation for; the survey clause “not covered by any stated rigidity theorem
+for polygon contacts”, which is demoted out of the novelty claim in §7.4 and §8.5; and
+§7.3’s list of thirteen rigid `n`, which is now recorded as in tension with the archived
+page. No statement, number, count, margin, inequality or proof step changed, and every
+correction makes this record weaker.
 
-**Status pass, 2026-09-03.** A third later pass, after `BC-153`'s independent review
+**Status pass, 2026-09-03.** A third later pass, after `BC-153`’s independent review
 returned **PASS**, corrected the six places where this document still said `H-060` was
-unresolved and `instrument_ready` false: the brief, the status line, the *Owns* paragraph,
-the provenance-pass note above, §8.4, and the closing obligation.
+unresolved and `instrument_ready` false: the brief, the status line, the *Owns*
+paragraph, the provenance-pass note above, §8.4, and the closing obligation.
 Each now says what is true after the review, and §8.4 and the closing obligation also
 record the readiness `PASS` and what `BC-153` did with the unread `BCR` page.
-No statement, number, count, margin, inequality, proof step or claim boundary changed here
-either. One thing the review asked for is deliberately *not* done: §1.3 (i)'s one-line
-argument that a nonconstant continuous path leaves the singleton is terse — a path can be
-constant on an initial segment, so it wants a sentence taking the supremum of that interval
-— and adding it would put a new proof step into a frozen packet.
-It is recorded as a gap in `exp-058`'s amendment instead, where the review's other six gaps
-are, and the conclusion it supports is unaffected.
+No statement, number, count, margin, inequality, proof step or claim boundary changed
+here either. One thing the review asked for is deliberately *not* done: §1.3 (i)'s
+one-line argument that a nonconstant continuous path leaves the singleton is terse — a
+path can be constant on an initial segment, so it wants a sentence taking the supremum
+of that interval — and adding it would put a new proof step into a frozen packet.
+It is recorded as a gap in `exp-058`’s amendment instead, where the review’s other six
+gaps are, and the conclusion it supports is unaffected.
 
 The packet’s replay scripts are **not** installed as repository code.
 Nothing under `campaign/` is code — the campaign tree holds records — and the executable
 form of this mathematics was built after this packet was frozen, as
 `src/sqpack/local_rigidity/`, which binds to
 [`devtools/assess_n5_rigidity.py`](../../devtools/assess_n5_rigidity.py) rather than
-extending it as `W7`'s text asks.
+extending it as `W7`’s text asks.
 Promoting seven scratchpad scripts to tooling would cross that boundary and leave a
 measurement in one-off code.
 Their verbatim source, sizes and SHA-256 digests are retained instead as the round’s raw
@@ -1071,14 +1070,13 @@ rather than resolved here: the rigid page is not under `packing/resources/`, and
 archived main page
 ([`kingbird-squares-in-squares.md`](../../resources/web/kingbird-squares-in-squares.md))
 carries exactly four “Rigid.”
-annotations at `n <= 100` — `n = 5, 11, 28, 40`, lines 44, 80, 163, 224 — which is what the
-coordinator's prior-art survey reports, and which agrees with that page's schema comment
-“all but four packings at n <= 100”. The thirteen-entry list adds `n = 18` and `n = 52`
-below 100.
-The two are reconcilable if rigid-but-inoptimal entries are simply not annotated on the
-main list, which the rigid page's own preamble allows (“in cases where they are inoptimal,
-they are shown alongside the best known”), but no reader can check that from anything in
-this repository until the rigid page is archived.
+annotations at `n <= 100` — `n = 5, 11, 28, 40`, lines 44, 80, 163, 224 — which is what
+the coordinator’s prior-art survey reports, and which agrees with that page’s schema
+comment “all but four packings at n <= 100”. The thirteen-entry list adds `n = 18` and
+`n = 52` below 100. The two are reconcilable if rigid-but-inoptimal entries are simply
+not annotated on the main list, which the rigid page’s own preamble allows (“in cases
+where they are inoptimal, they are shown alongside the best known”), but no reader can
+check that from anything in this repository until the rigid page is archived.
 Only the `n = 5` entry is used below, and it is corroborated on the archived page.
 So the catalogue’s “Rigid.”
 for `n = 5` is an assertion under a definition that coincides with H-060’s fixed-side
@@ -1097,21 +1095,21 @@ H-060 supplies the proof; it does not supply a *new* claim.
 - **Structural rigidity:** the closing principle is classical (SOSC) and is not claimed
   as new; the Puiseux/curve-selection proof shape matches [CW96] Theorem 4.3.1 and is
   not presented as new.
-  The coordinator's survey reports that no theorem stated in the structural-rigidity or
+  The coordinator’s survey reports that no theorem stated in the structural-rigidity or
   jamming literature covers polygon contact systems (§7.1); that is an unverified survey
   assertion, carried outside the claim below rather than inside it.
 
 **Admissible claim:** the first exact proof that Goebel’s `n = 5` optimum is locally
 rigid at fixed side — a property asserted without proof by Kingbird and not stated by
-Goebel or Friedman.
-**Novelty score S3, not S4.**
-Carried *outside* the claim: the survey's finding that no theorem stated in the
-structural-rigidity or jamming literature covers polygon contact systems.
-It is unverified against the primary texts by any lane, and it is narrower than “no stated
-rigidity theorem covers this” — the same survey records that the classical second-order
-sufficiency theorems have no failing hypothesis once the system is reduced to the local
-twenty inequalities. Nothing in the method (chart, SAT accounting, coefficient
-induction, SOSC) is claimed as new.
+Goebel or Friedman. **Novelty score S3, not S4.** Carried *outside* the claim: the
+survey’s finding that no theorem stated in the structural-rigidity or jamming literature
+covers polygon contact systems.
+It is unverified against the primary texts by any lane, and it is narrower than “no
+stated rigidity theorem covers this” — the same survey records that the classical
+second-order sufficiency theorems have no failing hypothesis once the system is reduced
+to the local twenty inequalities.
+Nothing in the method (chart, SAT accounting, coefficient induction, SOSC) is claimed as
+new.
 
 * * *
 
@@ -1176,29 +1174,30 @@ scratchpad sympy scripts, not by the repository instrument.
 The W7 instrument, its receipt, and the eight controls of §6 are not written by this
 lane. A separate lane wrote them after this packet was frozen, at `6580a9fd`, as
 `src/sqpack/local_rigidity/` — a new package binding to `devtools.assess_n5_rigidity`
-rather than an extension of it, which is a deviation from `W7`'s registered text.
+rather than an extension of it, which is a deviation from `W7`’s registered text.
 It self-reports ready with `isolation_decided` false.
-Its independent readiness review returned **BOUNDED-CAVEAT** at `2f112f4c` (payload digest
-`1ab27086…`), because two of the eight controls could not fail; after the repair at
-`609e7392` (digest `ba99cccc…`) the re-review verified the repair by removal and returned
-BOUNDED-CAVEAT again, a pass conditional on one unclosed provenance item; and on the third
-round it returned **PASS**, at payload digest `743fd18a…` over source digest `9382bae1…`,
-with the leaf diff against the author's certificate showing exactly one differing leaf.
-That is what moved `H-060` to `instrument_ready: true`.
-`H-060` was still **unresolved** at the end of this phase, which is what the agenda
-required of it; what resolved it was `BC-153`'s independent review of this document
-together with that instrument, recorded in `exp-058`.
+Its independent readiness review returned **BOUNDED-CAVEAT** at `2f112f4c` (payload
+digest `1ab27086…`), because two of the eight controls could not fail; after the repair
+at `609e7392` (digest `ba99cccc…`) the re-review verified the repair by removal and
+returned BOUNDED-CAVEAT again, a pass conditional on one unclosed provenance item; and
+on the third round it returned **PASS**, at payload digest `743fd18a…` over source
+digest `9382bae1…`, with the leaf diff against the author’s certificate showing exactly
+one differing leaf. That is what moved `H-060` to `instrument_ready: true`. `H-060` was
+still **unresolved** at the end of this phase, which is what the agenda required of it;
+what resolved it was `BC-153`’s independent review of this document together with that
+instrument, recorded in `exp-058`.
 
 ### 8.5 What is claimed as new, and what is not (governing novelty scoping)
 
 - **Claimed:** the first exact proof that Goebel’s `n = 5` optimum is locally rigid at
   fixed side — a property asserted without proof by Kingbird and not stated by Goebel or
   Friedman. Novelty score **S3, not S4**.
-- **Carried outside the claim, unverified:** the coordinator's survey finding that no
+- **Carried outside the claim, unverified:** the coordinator’s survey finding that no
   theorem stated in the structural-rigidity or jamming literature covers polygon contact
-  systems. No lane checked it against the primary texts, and it is narrower than “no stated
-  rigidity theorem covers this”: the same survey records that the classical second-order
-  sufficiency theorems have no failing hypothesis once the system is reduced.
+  systems. No lane checked it against the primary texts, and it is narrower than “no
+  stated rigidity theorem covers this”: the same survey records that the classical
+  second-order sufficiency theorems have no failing hypothesis once the system is
+  reduced.
 - **Not claimed as new:** the statement itself (Kingbird asserts it); the closing
   principle (classical second-order sufficiency, McCormick 1967 / Fiacco–McCormick
   1968); the Puiseux/curve-selection proof shape (it matches [CW96] Theorem 4.3.1); the
@@ -1230,13 +1229,13 @@ candidates at all.
 primary route is either proved above or exactly replayed.
 The one step this lane could not check against a primary source is the statement of BCR
 Proposition 8.1.13 — or Milnor 1968 Lemma 3.1 *with the finite-union reduction of §4.1*,
-which is a different route and not an equivalent statement, since Milnor's “semi-algebraic”
-means a real algebraic set intersected with finitely many **strict** polynomial
-inequalities: that for an arbitrary semialgebraic `A ⊂ R^n` (not assumed open, closed, or of any dimension) and `x ∈ Cl(A)`,
-there exists a *real-analytic* arc `gamma` with `gamma(0) = x` and `gamma((0, ε)) ⊂ A`.
-The BC-153 reviewer should confirm this against the printed text; the second proof of
-§5.7 does not remove this obligation, because acceptance is preregistered on the
-curve-selection route.
+which is a different route and not an equivalent statement, since Milnor’s
+“semi-algebraic” means a real algebraic set intersected with finitely many **strict**
+polynomial inequalities: that for an arbitrary semialgebraic `A ⊂ R^n` (not assumed
+open, closed, or of any dimension) and `x ∈ Cl(A)`, there exists a *real-analytic* arc
+`gamma` with `gamma(0) = x` and `gamma((0, ε)) ⊂ A`. The BC-153 reviewer should confirm
+this against the printed text; the second proof of §5.7 does not remove this obligation,
+because acceptance is preregistered on the curve-selection route.
 If the primary statement is as quoted, the registered proof is complete and H-060’s
 mathematical criterion is met; what then stands between “unresolved” and “accepted” is
 engineering (the instrument, its receipt, and the eight rejecting controls), not
@@ -1252,16 +1251,16 @@ proposition by one author group, and the Milnor route corroborated word for word
 a peer-reviewed restatement that cites Milnor’s page.
 A reviewer who requires the printed page still has that to do.
 
-**Where it stands after `BC-153` (2026-09-03).** The independent review returned **PASS**
-and judged this obligation non-blocking without closing it: the printed page is still
-unread, and in its place the reviewer derived the same statement first-hand from
-primary-text Basu–Pollack–Roy Theorem 3.22 plus the one-variable Puiseux fact, through the
-`t = u^p` change of variable Coste states in his own notes, with the Milnor route and the
-finite-union reduction of §4.1 as a third derivation.
-The engineering half is closed as well: the instrument's readiness review passed and the
+**Where it stands after `BC-153` (2026-09-03).** The independent review returned
+**PASS** and judged this obligation non-blocking without closing it: the printed page is
+still unread, and in its place the reviewer derived the same statement first-hand from
+primary-text Basu–Pollack–Roy Theorem 3.22 plus the one-variable Puiseux fact, through
+the `t = u^p` change of variable Coste states in his own notes, with the Milnor route
+and the finite-union reduction of §4.1 as a third derivation.
+The engineering half is closed as well: the instrument’s readiness review passed and the
 `BC-153` reviewer replayed the instrument itself from clean roots.
 So `H-060` is **confirmed** and the property is registered as `T-014`; the unread page
-remains a named, non-blocking citation-provenance gap and nothing in this document's
+remains a named, non-blocking citation-provenance gap and nothing in this document’s
 mathematics changed with it.
 
 <!-- This document follows common-doc-guidelines.md.
