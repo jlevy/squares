@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 428
+count: 429
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13281,3 +13281,54 @@ defects:
     repair above should land with exactly that mutation as its test.
   bead: think-5j8d
   recorded_in: packing/cases/n17_weighted_certificate_successor/run.py
+- id: D-429
+  title: The generated-view comparison folds an ellipsis but not the space the formatter puts before it
+  date: '2026-09-03'
+  layer: tooling
+  class: robustness
+  detected_by: inspection
+  latent_for: >-
+    since `fold` was written; no generated cell has carried an ellipsis until now, so the
+    bug has never fired and is recorded before it does rather than after
+  severity: low
+  status: outstanding
+  what: >-
+    `fold` in `packing/devtools/render_research_tables.py` exists so a generated block's
+    `--check` compares what a line *says* rather than its bytes, letting flowmark own the
+    typography inside generated blocks without the renderer and the formatter overwriting
+    each other on every run. Its `_FOLD` table maps `…` back to `...`, but flowmark
+    does not only substitute the character: it inserts a space before it. `fold` then
+    normalises runs of whitespace, so the formatter's ` …` folds to ` ...` while the
+    renderer's source is `...` with no space, and the two never compare equal.
+
+    The consequence is not a missed drift but an unresolvable one: a generated cell
+    containing an ellipsis would report drift on every `--check`, a render would rewrite
+    it, the formatter would rewrite it back at the next commit, and the pair would fight
+    forever. That is the `ledger.md` / `defects.md` churn `.flowmarkignore` was written to
+    stop, reappearing inside a block the formatter is allowed to touch.
+
+    Found while adding the synopsis results headline, whose `T-011` row carries
+    `3.877083590022814...`. Measured against the pinned flowmark-rs 0.3.2, which also
+    curls the apostrophe in 8 of that block's 16 rows -- the reason that block compares by
+    meaning rather than bytes in the first place.
+  consequence: >-
+    No view is currently wrong, because no other generated cell contains an ellipsis. The
+    new headline renderer works around it locally by emitting the formatter's own ` …`
+    form, so the block is a fixed point and its `--check` folds the space itself. That
+    workaround is the evidence the shared helper is the wrong place for this to be solved,
+    and it should be deleted when the helper is fixed.
+  fix: >-
+    One `.replace(" ...", "...")` inside `fold`, after the translation and before the
+    whitespace normalisation, with a test that a cell rendered as `x...` still compares
+    equal after the formatter has written `x …`. Deliberately not applied here: the
+    helper backs the `--check` of several generated views, and a change to a shared
+    comparison guard made unreviewed at the end of an unattended session is the shape of
+    D-425. Recorded with its measurement so the fix is a five-minute job for a reviewed
+    change rather than a rediscovery.
+  regression: >-
+    A test that renders a cell whose text ends in `...`, applies the pinned flowmark to
+    the document, and asserts `--check` still reports the block current. Written against
+    the formatter rather than against a hard-coded ` …`, so a future flowmark that stops
+    inserting the space does not leave a test asserting the old behaviour.
+  bead: think-c46d
+  recorded_in: packing/devtools/render_research_tables.py

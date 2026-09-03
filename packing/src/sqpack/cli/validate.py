@@ -1226,6 +1226,14 @@ def _results_register(context: Context) -> str:
     return f"{first}\n{second}"
 
 
+def _results_headline(context: Context) -> str:
+    # Sub-second: one register, one document, one rubric. Records tier because it checks
+    # presentation of the record -- that every registered result reaches the section a
+    # reader arrives at, in the register's own order. Agenda 016 scored three results and
+    # published a synopsis naming none of them, which no other step here would notice.
+    return _module(context, "devtools.render_results_headline", "--check")
+
+
 def _certificate_citations(context: Context) -> str:
     # Sub-second: it ast-parses five modules and reads a hundred frontmatter blocks. Records
     # tier because it checks the record, not the mathematics -- that every exact certificate
@@ -1878,6 +1886,21 @@ STEPS: tuple[Step, ...] = (
         # attribution selects this subsecond step for every change, so a rename or
         # deletion cannot evade its existence checks.
         touches=(),
+    ),
+    Step(
+        "the synopsis headline carries every result",
+        _results_headline,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "SYNOPSIS.md",
+            "epistemics.md",
+            "packing/frontier/results.yaml",
+            "packing/devtools/render_results_headline.py",
+            "packing/devtools/render_research_tables.py",
+            "packing/devtools/significance.py",
+        ),
     ),
     Step(
         "exact certificates are named by their records",

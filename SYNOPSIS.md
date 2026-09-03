@@ -58,6 +58,42 @@ ill-conditioned systems.
 output may claim, and what remains engineering or mathematics.
 Read it before citing any capability here.
 
+### Results and their significance
+
+Every result this project has registered, in the reading order its significance scores
+set. The full claims, the rationale behind each score, and the next evidence-improving
+action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the `V`,
+`C` and `S` axes are defined in [`epistemics.md`](epistemics.md).
+
+<!-- BEGIN GENERATED: results-headline (devtools.render_results_headline) -->
+
+| Result | `n` | [`V`](epistemics.md#verification) | [`C`](epistemics.md#confirmation) | [`S`](epistemics.md#significance-and-novelty) | [Novelty](epistemics.md#significance-and-novelty) | What it establishes |
+| --- | --- | --- | --- | --- | --- | --- |
+| [T-010](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003's Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
+| [T-014](packing/frontier/RESULTS.md) | 5 | `V3` | `C5` | `S3` | `apparently-novel` | For s = 2 + sqrt(2)/2 and Goebel's labeled pose P0 in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) -- closed unit squares in [0, s]^2, pairwise disjoint interiors -- equivalently there is no nonconstant continuous feasible path from P0 and no sequence of distinct feasible poses converging to it; hence the n = 5 optimum is rigid at fixed side in the catalogue's sense. |
+| [T-001](packing/frontier/RESULTS.md) | 17 | `V4` | `C4` | `S3` | `apparently-novel` | Sixteen points make [0, 4426213/1000000]^2 unavoidable for open squares of side above one, so s(17) >= 4426213/1000000 = 4.426213. |
+| [T-002](packing/frontier/RESULTS.md) | 18 | `V4` | `C4` | `S3` | `apparently-novel` | s(18) >= 4426213/1000000, by monotonicity from T-001 (a packing of 18 unit squares contains a packing of 17). |
+| [T-004](packing/frontier/RESULTS.md) | 46 | `V4` | `C3` | `S3` | `previously-published` | Bentz 2010, Theorem 8: the printed 45-point unavoidable-set argument for s(46) >= 7 is correct as printed, machine-audited in full. |
+| [T-008](packing/frontier/RESULTS.md) | 46 | `V4` | `C3` | `S3` | `previously-published` | s(46) = 7: the lower half by T-004's audited unavoidable set, the upper half by the exact 7 x 7 grid packing of 46 squares. |
+| [T-009](packing/frontier/RESULTS.md) | 29 | `V4` | `C3` | `S3` | `apparently-novel` | s(29) <= 5.93383346267692918974379895098, by a Krawczyk interval certificate over the retained rational 29-square witness at a declared relaxation of 1e-20. |
+| [T-012](packing/frontier/RESULTS.md) | 5 | `V4` | `C3` | `S3` | `apparently-novel` | Goebel's n = 5 optimal packing is not infinitesimally rigid but is second-order rigid at fixed side: the cone of infinitesimal motions is exactly the middle square's rotation about its own centre, and that one direction is refused at second order by a verified non-negative self-stress, all exactly over Q(sqrt 2). |
+| [T-013](packing/frontier/RESULTS.md) | 40 | `V4` | `C3` | `S3` | `apparently-novel` | Goebel's n = 40 packing is infinitesimally flexible -- seven verified independent first-order flexes turn the sixteen-square tilted block -- and every retained flex is refused at second order by a verified non-negative self-stress, exactly over Q(sqrt 2), so no first-order argument can establish rigidity here. |
+| [T-015](packing/frontier/RESULTS.md) | 17 | `V4` | `C3` | `S3` | `previously-published` | s(17) >= 22529/5000 = 4.5058, by Massaccesi's 168-atom fractional unavoidable-set certificate (2026) on Burns's architecture: total mass 203/12 < 17 and mass at least 1 in every closed unit square of [0, 22529/5000]^2, reduced exactly to 181 rational directions and finitely many event cells, replayed here by the source verifier and by an accumulation-independent repository instrument. |
+| [T-016](packing/frontier/RESULTS.md) | 18, 19 | `V4` | `C3` | `S3` | `previously-published` | s(18) >= 22529/5000 and s(19) >= 22529/5000, by monotonicity from T-015 (a packing of n >= 17 unit squares contains a packing of 17). |
+| [T-006](packing/frontier/RESULTS.md) | 13 | `V3` | `C1` | `S3` | `previously-published` | s(13) = 4 (Bentz 2010, Theorem 9). |
+| [T-007](packing/frontier/RESULTS.md) | 4-100 | `V3` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 100, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
+| [T-003](packing/frontier/RESULTS.md) | 17, 18 | `V4` | `C3` | `S2` | `apparently-novel` | The sixteen-point set's unavoidability ceiling lies in [4426213/1000000, 4427/1000): certification at the left endpoint, an exact escaping pose at the right, with the top strips' a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2), inside the bracket. |
+| [T-005](packing/frontier/RESULTS.md) | 13 | `V4` | `C3` | `S2` | `apparently-novel` | Bentz 2010, Lemma 10 is false as printed -- the middle replacement point (1, 1.74) is refuted by an exact escape certificate, and the published page image carries the same transposed text -- and true under the corrected reading (1.74, 1), with all three corrected replacement covers certified exactly. |
+| [T-011](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S2` | `previously-published` | Trump's 1979 packing is exactly valid: 11 unit squares in a square of side the published degree-8 algebraic number 3.877083590022814 …, with 14 of 55 pairs in exact zero-separation contact and 20 corner coordinates exactly on the boundary, so s(11) <= that side. |
+
+| Significance | What [`epistemics.md`](epistemics.md#significance-and-novelty) anchors it to |
+| --- | --- |
+| `S4` | A reusable technique, bound family, or resolved disputed value |
+| `S3` | A substantive case result or machine audit |
+| `S2` | A citable detail that changes no theorem |
+
+<!-- END GENERATED: results-headline -->
+
 ### Current research readiness
 
 The program has two promoted mathematical outputs: an exactly verified packing that
@@ -434,11 +470,14 @@ operating rules were checked and found current, though the pass behind those ent
 itself interrupted: an infrastructure rate limit at about 10:45Z ended six in-flight
 agents and left the closeout documentation and de-slop pass partially finished, which
 session-083 records as an interruption rather than a deviation. The records tier passed
-26 of 58 named-tier steps; the full 58-step local gate passed 57 of 58, its sole failure
-the
-shallow-checkout provenance artifact rather than a repository defect; hosted validate,
-packing-required and macos-portability passed at `3100fb02`, with a re-run in flight on
-the branch’s later head.
+its named steps; the full local gate ended red, failing 3 steps from two causes, neither
+a defect this branch introduced — the negative-control snapshot cap, breached by the
+build caches that running the gate itself writes, counted twice because one assertion
+rides two steps, and the shallow-checkout provenance artifact on a record no commit here
+touches. Apart from that cap the behavioural suite was 1,606 of 1,607 passing. Hosted
+validate, packing-required and macos-portability passed on every revision they ran on,
+including the branch’s final head, which is the same fact from the other side: CI clones
+fresh, so it carries no caches.
 
 The Green17 exact ceiling (`think-iye2`) is the first bounded numeric fallback once
 adoption settled, still not ready; bespoke `n = 12` work (`think-0z9b`) remains the next
@@ -3124,7 +3163,7 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 428 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 429 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -3132,7 +3171,7 @@ and checked in the gate.
 | soundness | 91 | asserted something false about the mathematics |
 | validity | 115 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 155 | recorded something its own evidence contradicts |
-| robustness | 52 | did not finish, or finished only by luck |
+| robustness | 53 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -3141,7 +3180,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-one defects in 428, and no soundness defect
+**The automated gate has caught sixty-one defects in 429, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3247,6 +3286,18 @@ that holds for the executed admission boundary, which ties the retained prefix t
 `exp-056` on disk before assembly, and not for the validator alone.
 The published result satisfies the tie and the record has been corrected; the code has
 not.
+
+[D-429](defects.md) is a guard that would have fought the formatter forever, recorded
+before it ever fired. Generated blocks inside formatted documents are compared by what a
+line *says* rather than by its bytes, so flowmark may own the typography inside them; the
+fold that makes that comparison work maps `…` back to `...` but not the space flowmark
+inserts before it. No generated cell has carried an ellipsis until the results headline,
+whose `n = 17` row does, so the failure has never happened — a render and the formatter
+would have rewritten each other on every commit, which is the churn `.flowmarkignore`
+exists to stop, reappearing inside a block the formatter is allowed to touch. The
+headline works around it locally and the shared fix is deliberately unapplied: a
+one-line change to a comparison guard backing several views, made unreviewed at the end
+of an unattended session, is the shape of `D-425`.
 
 [D-393](defects.md) is the same run being wrong about its own gate.
 `D-381` established `--edit` as the pre-push floor, and that floor does not run tests:
@@ -3641,9 +3692,10 @@ and a result that changes a decision.
 launch is not yet authorized.** At that checkpoint the tree passed all 31 normal-gate
 steps in 97.68 wall-seconds, including seven exact small-`n` replays, 59 pytest
 contracts, and all 62 mutation controls.
-The gate has since grown to 58 steps, of which the pull-request tier runs 34; the
+The gate has since grown to 59 steps, of which the pull-request tier runs 35; the
 sentence is dated rather than restated because no check guards this number, so a
-current-tense figure here silently goes stale.
+current-tense figure here silently goes stale — as it did twice on 2026-09-03, once when
+a second step budget landed and once when the results-headline check did.
 The first deep regeneration had reproduced one unsettled `n=4` proposal and an `n=10`
 `1.503e-10` pair-row residual.
 [D-199](defects.md) identifies and fixes the n=10 cause: repairing first-call offenders

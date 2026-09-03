@@ -780,7 +780,7 @@ def test_the_only_budgeted_step_is_the_one_d366_names() -> None:
     It started on 2026-09-03, when `fast behavioral tests` became the second. The
     conversation did not end in raising the shared cap, and the reason is that the two
     budgeted steps are the only two that run a whole suite: the control harness clones
-    the tree per worker, and the behavioural step walks every test. The other fifty-six
+    the tree per worker, and the behavioural step walks every test. The other fifty-seven
     steps check one record or one certificate and finish in seconds, so a cap wide
     enough for these two would stop being a guard for them at all -- which is the trade
     `budget_seconds` exists to refuse, and it does not get better for being made twice.

@@ -1010,14 +1010,28 @@ agenda:
         Corrects one n = 5 sentence to place the two-parameter sheet of optima at a
         container side above s(5) rather than beside it.
     - path: conventions.md
-      decision: checked-current
+      decision: updated
       reason: >-
-        This run changed no workflow contract; W1 through W10 and their owners are
-        unchanged.
+        Checked current during the run, which changed no workflow contract: W1 through
+        W10 and their owners were unchanged at the wall. Amended after it, on operator
+        instruction, with one W10 clause -- that a result whose significance was scored
+        inside the wall is presented with its rungs and the rubric's own wording in the
+        synopsis headline and above the pull request's dispositions, not merely recorded.
+        The amendment is this run's own failure written down as a rule: T-014, T-015 and
+        T-016 were registered, reviewed and scored S3, and the published synopsis then
+        mentioned no score for 400 lines while the pull request carried none at all for
+        two of the three. Recorded as a post-wall change rather than folded into the
+        closeout, because the closeout's own report of conventions.md was true when it
+        was written.
     - path: development.md
-      decision: checked-current
+      decision: updated
       reason: >-
-        No build command, validation tier or Python/uv pin changed in this run.
+        Checked current during the run, which changed no build command, validation tier
+        or Python/uv pin. Amended after it, with the one line the new generated view
+        needs: `devtools.render_results_headline` joins the commands that keep a
+        generated document current, so a contributor regenerating the views does not
+        leave the synopsis headline behind. Recorded as a post-wall change for the same
+        reason as conventions.md, and it is the whole of the difference.
     - path: operating-rules.md
       decision: checked-current
       reason: >-

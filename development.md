@@ -410,6 +410,7 @@ uv run --frozen packing-ledger render
 uv run --frozen python -m devtools.render_defects --check
 uv run --frozen python -m devtools.render_research_tables --check
 uv run --frozen python -m devtools.render_document_map
+uv run --frozen python -m devtools.render_results_headline
 ```
 
 **Creating any durable Markdown file is a two-step change.** Register it in
