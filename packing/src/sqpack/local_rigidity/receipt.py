@@ -73,7 +73,7 @@ def build_payload(
     determination: Determination,
     system: ConstraintSystem,
     controls: list[dict[str, Any]] | None = None,
-    pinned_commit: str = "",
+    provenance: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """The exact, canonical record of everything the instrument decided."""
     chart = system.chart
@@ -251,7 +251,7 @@ def build_payload(
         ),
         "declared_mathematical_inputs": [dict(entry) for entry in DECLARED_MATHEMATICAL_INPUTS],
         "claim_boundary": {
-            "pinned_commit": pinned_commit,
+            "provenance": provenance or {},
             "second_jets_are_restricted": (
                 "the binding compares the second derivative along one chart ray only -- "
                 "the image of T-012's single free direction, e_u4 halved -- not the full "
@@ -664,12 +664,60 @@ def render_markdown(payload: dict[str, Any], expected: dict[str, int]) -> str:
     out.append("")
 
     boundary = payload["claim_boundary"]
+    provenance = boundary["provenance"]
     out.append("## Claim boundary")
     out.append("")
+    out.append("### Provenance, computed rather than typed")
+    out.append("")
     out.append(
-        f"This packet is pinned to commit `{boundary['pinned_commit']}`. A formatter pass "
-        "landed mid-replay, so an unpinned replay can differ in whitespace while agreeing "
-        "in every value."
+        "A commit pin was wrong twice in this lane: it named a commit whose code could "
+        "not produce the payload it was attached to, which defeats the reproducibility it "
+        "exists to provide. So the pin is no longer a constant anyone types. The driver "
+        "observes the commit, hashes the exact source files it just ran, and records "
+        "whether the two agree -- a pin that cannot silently go stale."
+    )
+    out.append("")
+    out.extend(
+        _table(
+            ["field", "value"],
+            [
+                ["observed commit", f"`{provenance.get('pinned_commit', '')}`"],
+                [
+                    "working tree matches that commit for these paths",
+                    str(provenance.get("tree_matches_pinned_commit")),
+                ],
+                [
+                    "paths differing from the commit",
+                    ", ".join(f"`{one}`" for one in provenance.get("paths_differing", []))
+                    or "none",
+                ],
+                ["source digest (authoritative)", f"`{provenance.get('source_digest', '')}`"],
+                ["files hashed", str(len(provenance.get("source_files", [])))],
+            ],
+        )
+    )
+    out.append("")
+    if not provenance.get("tree_matches_pinned_commit", True):
+        out.append(
+            "**The observed commit does not reproduce this payload.** The authoritative "
+            "identity of the code is the source digest above, and the exact files are "
+            "carried beside this receipt under `source/`. Replay against those, or ask "
+            "for a commit that contains them and re-pin."
+        )
+    else:
+        out.append(
+            "The observed commit reproduces this payload: checking it out and rerunning "
+            "the driver is a complete replay."
+        )
+    out.append("")
+    out.extend(
+        _table(
+            ["source file", "sha256"],
+            [
+                [f"`{entry['path']}`", f"`{entry['sha256']}`"]
+                for entry in provenance.get("source_files", [])
+            ],
+        )
     )
     out.append("")
     out.extend(

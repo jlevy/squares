@@ -316,21 +316,53 @@ def test_a_changed_support_feature_is_refused_by_the_instrument_itself(
     premises. Every substitution is now applied to a real `ConstraintSystem` and handed
     back, and both refusals are required.
 
-    The finding survives the correction. Four of the twelve siblings have *exactly the
-    same gradient* as the contact they replace -- the degeneracy that hides the middle
-    square's rotation from first order -- so the binding's gradient check catches eight,
-    and the guard that recomputes the base margin is what catches all twelve.
+    The finding survives the correction, in its qualified form. Four of the twelve
+    siblings have *exactly the same gradient* as the contact they replace, so the gradient
+    check catches eight. The restricted second jet separates all twelve, but it is not an
+    independent identifier: it is the exact affine function `-2 * (margin + 1)` of the
+    support feature's own base margin, so it separates them precisely when their margins
+    do. The recomputed base margin is what decides, and that is the statement the receipt
+    keeps.
     """
     outcome = controls.changed_feature(chart, system, t012)
     assert outcome.rejected
     findings = outcome.findings
     assert findings["count"] == 12
     assert findings["forgery_gradient_caught"] == 8
+    assert findings["second_jet_affine_law_holds"] is True
+    assert findings["second_jet_is_an_independent_identifier"] is False
     for entry in findings["substitutions"]:
         assert entry["key_swapped_guard_refused"]
         assert entry["key_swapped_binding_refused"]
         assert entry["forgery_guard_refused"]
+        assert entry["second_jet_is_affine_in_the_margin"]
         assert entry["key_swapped_missing_from_t012"] == [entry["substitute"]]
+
+
+def test_the_restricted_second_jet_is_an_affine_function_of_the_base_margin(
+    chart: Chart, system
+) -> None:
+    """Why the second jet is not a second, independent identifier of a support feature.
+
+    `G = D_h D_k g` with `D(0) = 1`, `D'(0) = 0`, `D''(0) = 2`, and the geometric second
+    derivative along a pure host rotation is `-omega^2 (m + 1/2)`. At the chart unit
+    `e_u4`, where `omega = 2`, those combine to `G'' = 2m - 4(m + 1/2) = -2(m + 1)`. So the
+    jet is an affine reparametrisation of the margin and adds no information the margin
+    has not already carried -- checked here on every support feature of every contact
+    branch, contacts included.
+    """
+    field = chart.field
+    unit = [field.zero] * chart.arity
+    unit[chart.arity - 1] = field.one
+    checked = 0
+    for report in system.touching_pairs:
+        assert report.active_branch is not None
+        for constraint in report.active_branch.constraints:
+            observed = constraint.polynomial.second_derivative_along(unit)
+            predicted = -(constraint.margin + field.one) * field.rational(2)
+            assert (observed - predicted).sign() == 0, constraint.key
+            checked += 1
+    assert checked == 16
 
 
 def test_an_invented_contact_is_refused_by_the_guard_and_by_the_binding(

@@ -146,9 +146,28 @@ def changed_feature(chart: Chart, system: ConstraintSystem, t012: T012System) ->
 
     The finding the second version preserves: four of the twelve siblings have exactly the
     same gradient as the contact they replace -- the degeneracy that hides the middle
-    square's rotation from first order -- so `bind` alone catches eight, and the
-    recomputing margin guard is what catches all twelve.
+    square's rotation from first order -- so the gradient check alone catches eight, and
+    the recomputing margin guard is what catches all twelve.
+
+    The restricted second jet also separates all twelve, and that is **not** a second
+    independent identifier. Along the host rotation the cleared jet is an exact affine
+    function of the support feature's own base margin,
+
+        G''(e_u4) = D'' * g(0) + 2 D'(0) g'(0) + D(0) * g''
+                  = 2 * m - 4 * (m + 1/2)
+                  = -2 * (m + 1),
+
+    using `D = D_h D_k` with `D(0) = 1`, `D'(0) = 0`, `D''(0) = 2`, and the geometric
+    `q = -omega^2 (m + 1/2)` at `omega = 2`. So the jet orders the support features exactly
+    as their margins do and adds nothing the margin has not already decided. The identity
+    is verified per substitution below rather than asserted, and the statement that
+    survives is the plain one: the recomputed base margin is what decides.
     """
+    field = chart.field
+    one = field.one
+    two = field.rational(2)
+    unit_rotation = [field.zero] * chart.arity
+    unit_rotation[chart.arity - 1] = one
     substitutions: list[dict[str, Any]] = []
     for report in system.touching_pairs:
         contact = report.active_constraint
@@ -193,6 +212,11 @@ def changed_feature(chart: Chart, system: ConstraintSystem, t012: T012System) ->
                         forged_row is not None
                         and not all(forged_row.second_jet_matches.values())
                     ),
+                    "second_jet_is_affine_in_the_margin": (
+                        substitute.polynomial.second_derivative_along(unit_rotation)
+                        - (-(substitute.margin + one) * two)
+                    ).sign()
+                    == 0,
                 }
             )
     rejected = bool(substitutions) and all(
@@ -201,8 +225,9 @@ def changed_feature(chart: Chart, system: ConstraintSystem, t012: T012System) ->
         and entry["forgery_guard_refused"]
         for entry in substitutions
     )
-    gradient_caught = sum(1 for one in substitutions if one["forgery_gradient_caught"])
-    jet_caught = sum(1 for one in substitutions if one["forgery_second_jet_caught"])
+    gradient_caught = sum(1 for entry in substitutions if entry["forgery_gradient_caught"])
+    jet_caught = sum(1 for entry in substitutions if entry["forgery_second_jet_caught"])
+    affine_law = all(entry["second_jet_is_affine_in_the_margin"] for entry in substitutions)
     return ControlOutcome(
         name="changed_feature",
         rejected=rejected,
@@ -216,19 +241,28 @@ def changed_feature(chart: Chart, system: ConstraintSystem, t012: T012System) ->
             "binding's key agreement; forging the contact's polynomial while keeping its "
             f"name and cached margin is refused by the recomputing guard in all "
             f"{len(substitutions)} cases and by the binding's gradient check in "
-            f"{gradient_caught} of them and by its restricted second-jet check in "
-            f"{jet_caught}; the {len(substitutions) - gradient_caught} the gradient misses "
-            "are gradient-degenerate against the contact they replace"
+            f"{gradient_caught} of them, the other {len(substitutions) - gradient_caught} "
+            "being gradient-degenerate against the contact they replace. The restricted "
+            f"second jet also separates all {jet_caught}, but it is not an independent "
+            "identifier: along the host rotation it is the exact affine function "
+            "G''(e_u4) = -2*(margin + 1) of the support feature's own base margin "
+            f"(verified here on all {len(substitutions)}: {affine_law}), so it separates "
+            "support features precisely when their margins do. The recomputed base margin "
+            "is what decides"
         ),
         findings={
             "substitutions": substitutions,
             "count": len(substitutions),
             "forgery_gradient_caught": gradient_caught,
             "forgery_second_jet_caught": jet_caught,
+            "second_jet_affine_law": "G''(e_u4) = -2*(margin + 1), exactly",
+            "second_jet_affine_law_holds": affine_law,
+            "second_jet_is_an_independent_identifier": False,
             "finding": (
-                "the pair rows are degenerate across some support features of a branch, "
-                "so the binding's gradient check alone does not identify a support "
-                "feature; the recomputed base margin is what decides"
+                "the pair rows are gradient-degenerate across some support features of a "
+                "branch, and the restricted second jet is an affine reparametrisation of "
+                "the base margin rather than an independent test of feature identity; the "
+                "recomputed base margin is what decides"
             ),
         },
     )
