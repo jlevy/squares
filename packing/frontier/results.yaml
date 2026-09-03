@@ -364,8 +364,11 @@ results:
     controls:
       - packing/tests/test_n5_rigidity.py
     next_rung: >-
-      Local rigidity needs the curve-selection argument written out in X-007
-      to become a computation; V5 by a proof-assistant port.
+      Local rigidity is discharged, not open: X-007's curve-selection argument
+      was written out in full as X-012, checked against a complete exact
+      accounting of the 400 local inequalities, independently reviewed by
+      BC-153 and registered as T-014, which is where the n = 5 frontier
+      property now rests. What remains here is V5 by a proof-assistant port.
   - id: T-013
     claim: >-
       Goebel's n = 40 packing is infinitesimally flexible -- seven verified
@@ -397,3 +400,75 @@ results:
       Characterise the admissible cone past dimension 45 (the corner-touching
       branch obstruction, D-391) or establish local rigidity by another
       route; the rigidity property stays undetermined until then.
+  - id: T-014
+    claim: >-
+      For s = 2 + sqrt(2)/2 and Goebel's labeled pose P0 in C = (R^2 x S^1)^5,
+      P0 is an isolated point of Feas(s) -- closed unit squares in [0, s]^2,
+      pairwise disjoint interiors -- equivalently there is no nonconstant
+      continuous feasible path from P0 and no sequence of distinct feasible
+      poses converging to it; hence the n = 5 optimum is rigid at fixed side in
+      the catalogue's sense. Proved exactly over Q(sqrt 2) in one intrinsic
+      half-angle chart, from a complete exact accounting of all 400 elementary
+      inequalities, by semialgebraic curve selection on the punctured feasible
+      set and an induction on a putative arc's Taylor coefficients through
+      order 2m that T-012's non-negative self-stress contradicts.
+    scope: {n_values: [5]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        The first exact proof of fixed-side local rigidity of Goebel's n = 5
+        optimum -- a property Kingbird asserts with no argument, Goebel does
+        not state, and Friedman does not annotate -- at the smallest case where
+        tilting beats the grid. A case result, S3 rather than S4: the closing
+        principle is the classical second-order sufficient optimality condition
+        and the induction has the shape of Connelly-Whiteley 1996 Theorem
+        4.3.1, neither claimed as new; what is new is the exact accounting that
+        reduces the local feasible set to twenty inequalities on an explicit
+        neighbourhood, which is what lets that principle reach corner-on-line
+        and corner-on-wall contacts.
+      scored: '2026-09-03'
+      by: BC-153 independent review (agenda-016)
+    novelty: apparently-novel
+    composition: >-
+      Compound, and the minimum is set by the part no machine checks. The exact
+      local system -- the injective chart, all 400 base margins, the 20 active
+      rows, the 128 strict conditions that cut out the neighbourhood, T-012's
+      first-order cone and its non-negative self-stress with w . q < 0 -- is
+      machine-confirmed here and independently rebuilt by the reviewer (V4/C3
+      fragments). The two steps that close the argument, the cited Nash
+      curve-selection lemma and the order-2m coefficient induction, are an
+      audited proof rather than a computation, and no instrument decides
+      isolation, so the whole claim declares V3. Confirmation stays C3 because
+      every exact quantity the proof consumes carries a certificate and a
+      passing replay in this repository and no cited part rests on anything
+      weaker.
+    evidence:
+      - E-n005-fixed-side-local-rigidity
+      - E-n005-second-order-rigidity
+    artifacts:
+      - packing/campaign/explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/exp-058-h-060-n5-chart-and-proof.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json
+      - packing/src/sqpack/local_rigidity/instrument.py
+      - packing/devtools/assess_n5_rigidity.py
+    controls:
+      - packing/tests/test_n5_local_rigidity.py
+      - packing/tests/test_n5_rigidity.py
+    next_rung: >-
+      V4 by mechanising the closing steps rather than only the quantities they
+      consume, or V5 by a proof-assistant port; C5 by installing BC-153's
+      review as a mapped review document, which the round record currently
+      carries only as an amendment. Reaching the printed BCR page, or citing
+      the Basu-Pollack-Roy plus Puiseux derivation the review writes out, would
+      close the one cited hypothesis this rests on.
+    notes: >-
+      Not established and not claimed: any numerical isolation radius; rigidity
+      when the container side is a variable, which X-007 measured to be false;
+      global uniqueness of the n = 5 optimum; rigidity of any other n = 5
+      optimal packing; applicability of the Connelly-Whiteley tensegrity
+      theorems as stated, whose hypotheses are distance members and none of
+      which was invoked; and any novelty of method -- the closing principle is
+      classical and the Connelly-Whiteley 1996 Theorem 4.3.1 proof shape is not
+      new.

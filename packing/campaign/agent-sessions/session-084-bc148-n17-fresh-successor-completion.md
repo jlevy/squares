@@ -10,7 +10,7 @@ session:
   title: BC-148 n = 17 fresh successor completion
   date: '2026-09-03'
   started_at: '2026-09-03T06:51:00Z'
-  deadline_at: '2026-09-03T10:21:00Z'
+  deadline_at: '2026-09-03T16:48:00Z'
   branch: claude/squares-pr76-overnight-run-tpc888
   goal: >-
     Execute BC-148: build a fresh H-052 successor package that repairs the result
@@ -88,7 +88,7 @@ session:
       disagreement from the verified prefix through its exact discrepant pair.
     commitment: BC-148
     bead: think-5j8d
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       The build phase closed on its readiness verdict; what remains is registration, a
@@ -112,7 +112,12 @@ session:
       Freeze the checkpoint, progress marker, receipt and typed stop reason with an
       explicit canonical-result absence; a time-limited agreeing prefix is process
       evidence and is not a negative result.
-    outcome: null
+    outcome: >-
+      Reached complete agreement on all 181 exact direction cells. The writer replayed
+      the retained 170-row prefix, recomputed the interrupted ordinal 170 rather than
+      promoting it, and completed ordinals 170 through 180 inside the process-exclusive
+      lease, releasing it twenty-one minutes early. BC-149's independent review returned
+      an exact pass, at the scope of implementation agreement only.
     evidence:
     - >-
       writer ran 08:59:33Z to 09:32:44Z, 1991 s against a 3600 s lease and a 2100 s
@@ -132,15 +137,48 @@ session:
     - >-
       four frozen ancestor digests unchanged, frozen package 309ec241 intact, exp-052 and
       exp-056 never acquired a result file
-    stop_reason: null
+    stop_reason: >-
+      The registered criterion decided: all 181 exact pairs agree and the terminal schema
+      is complete-agreement.
     next_action: >-
       Hand BC-149 a terminal outcome with every input, output, command, decision,
       declared absence and mutation bound at one revision, including the named
       --assemble instrument limitation.
+  - workflow: documentation-pass
+    focus: process
+    recording: contemporaneous
+    clock_role: work
+    objective: >-
+      Support the Agenda 016 closeout from a terminal lane: answer replay questions
+      against the frozen exp-059 artifacts, carry the successor's named instrument
+      limitations into the closeout record, and run no further target work.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The n = 17 target is terminal and independently reviewed, so the lane's
+      remaining obligation is closeout support rather than measurement.
+    budget_minutes: 417
+    started_at: '2026-09-03T09:36:00Z'
+    deadline_at: '2026-09-03T16:33:00Z'
+    expected_output: >-
+      Closeout answers bound to the frozen artifacts, and the instrument
+      limitations carried into the agenda's outcome rows.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: >-
+      Any new target computation, or any edit to the frozen exp-059 artifacts.
+    fallback: >-
+      Report the limitation unanswered rather than recomputing it.
+    outcome: null
+    evidence: []
+    stop_reason: null
+    next_action: >-
+      Hand the lane's limitations and receipts to BC-155 and close the session with
+      its resource rollup.
   primary_bead: think-5j8d
   status: in_progress
   budget:
-    wall_minutes: 210
+    wall_minutes: 597
     finalization_minutes: 15
   stop_conditions:
   - A frozen input, ancestry hash, package manifest or chain link that fails verification.

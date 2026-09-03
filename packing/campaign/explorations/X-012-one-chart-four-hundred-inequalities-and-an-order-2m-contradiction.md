@@ -28,20 +28,24 @@ exploration:
     labelled non-acceptance; its multiplier scaling is not cosmetic, since at mu = 1 the
     inequality holds in the chart normalization and fails in the (c, theta) one.
 
-    None of this resolves H-060. The acceptance route is the registered curve-selection and
-    coefficient argument, and two obligations on it are open: the W7 executable instrument
-    with its receipt and eight rejecting controls, which a separate lane built after this
-    packet was frozen and whose readiness review has not passed, which keeps
-    instrument_ready false; and primary-text confirmation of the curve-selection
-    statement, which a separate verification lane has since answered YES on the
-    mathematics, the statement being attested verbatim by one of BCR's own authors,
-    without reaching the printed BCR page. The
+    This report on its own did not resolve H-060; BC-153's independent review did, on
+    2026-09-03, and exp-058 carries that determination. The acceptance route is the
+    registered curve-selection and coefficient argument, and the two obligations this
+    report left open are now closed or judged non-blocking: the W7 executable instrument
+    with its receipt and eight rejecting controls, built by a separate lane after this
+    packet was frozen, passed its independent readiness review, so instrument_ready is
+    true; and primary-text confirmation of the curve-selection statement, which a separate
+    verification lane answered YES on the mathematics, the statement being attested
+    verbatim by one of BCR's own authors, still without reaching the printed BCR page --
+    the BC-153 reviewer judged that non-blocking after deriving the same statement from
+    primary-text Basu-Pollack-Roy plus the one-variable Puiseux fact. The
     admissible novelty claim is S3, not S4. The closing principle is classical and the
     curve-selection proof shape matches Connelly-Whiteley 1996 Theorem 4.3.1; neither is
     claimed as new. Control C8 confirms exp-034's family is not a refutation: it sits at
     container side 1 + 5 sqrt 2 / 4, exactly 3 sqrt 2 / 4 - 1 above Goebel's side, so the
-    two feasible sets are disjoint. Review-pending; BC-153 owns the independent review, and
-    no frontier or result-register change follows from this report.
+    two feasible sets are disjoint. Reviewed and passed; the frontier and result-register
+    changes that followed are T-014 and the n = 5 rigidity property, and they were made by
+    BC-153, not by this report.
   sources:
   - packing/campaign/hypotheses/H-060-n5-local-rigidity.md
   - packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md
@@ -57,18 +61,18 @@ exploration:
 
 **Date:** 2026-09-03
 
-**Status:** Review-pending.
+**Status:** Reviewed and passed.
 The frozen `BC-152` proof packet, installed unchanged in substance.
-`H-060` stays **unresolved** and `instrument_ready: false`; `BC-153` owns the
-independent review, and no frontier or result-register change follows from this report.
+`H-060` is **confirmed** and `instrument_ready` is **true**: `BC-153`'s independent review
+returned PASS on 2026-09-03, and the frontier property and the `T-014` register entry that
+followed were made there, not by this report.
 
 **Owns:** The mathematics of `BC-152` phase 0–105 at `n = 5`. It owns no code: the `W7`
 executable instrument, its receipt and the eight rejecting controls of §6 belong to a
 separate lane.
 That lane built them after this packet was frozen, at `6580a9fd`, as the package
-`src/sqpack/local_rigidity/`; their readiness review returned BOUNDED-CAVEAT rather than a
-pass, twice, so `instrument_ready` stays false because the review has not passed and not
-because nothing exists (§8.4).
+`src/sqpack/local_rigidity/`; their readiness review returned BOUNDED-CAVEAT twice and then
+**PASS**, which is what moved `instrument_ready` to true (§8.4).
 
 ## Provenance and installation
 
@@ -107,8 +111,8 @@ de-flagged the Milnor statement of §4.1 from “from memory”, added two items
 route’s reduction, added the nonconstancy clause and the hypothesis inventory to §4.2,
 and updated §8.3, the closing obligation note, the replay-artifact note above and this
 record’s brief. No statement, number, count, margin, inequality, proof step or claim
-boundary changed; `H-060` stays unresolved, `instrument_ready` stays false, and the
-printed BCR page is still unread.
+boundary changed; at that pass `H-060` was still unresolved and `instrument_ready` still
+false, and the printed BCR page is still unread today.
 
 **Correction pass, 2026-09-03.** A second later pass, following an independent factual
 review of the round records against the artifacts they rest on, corrected four
@@ -120,6 +124,20 @@ polygon contacts”, which is demoted out of the novelty claim in §7.4 and §8.
 list of thirteen rigid `n`, which is now recorded as in tension with the archived page.
 No statement, number, count, margin, inequality or proof step changed, and every correction
 makes this record weaker.
+
+**Status pass, 2026-09-03.** A third later pass, after `BC-153`'s independent review
+returned **PASS**, corrected the six places where this document still said `H-060` was
+unresolved and `instrument_ready` false: the brief, the status line, the *Owns* paragraph,
+the provenance-pass note above, §8.4, and the closing obligation.
+Each now says what is true after the review, and §8.4 and the closing obligation also
+record the readiness `PASS` and what `BC-153` did with the unread `BCR` page.
+No statement, number, count, margin, inequality, proof step or claim boundary changed here
+either. One thing the review asked for is deliberately *not* done: §1.3 (i)'s one-line
+argument that a nonconstant continuous path leaves the singleton is terse — a path can be
+constant on an initial segment, so it wants a sentence taking the supremum of that interval
+— and adding it would put a new proof step into a frozen packet.
+It is recorded as a gap in `exp-058`'s amendment instead, where the review's other six gaps
+are, and the conclusion it supports is unaffected.
 
 The packet’s replay scripts are **not** installed as repository code.
 Nothing under `campaign/` is code — the campaign tree holds records — and the executable
@@ -1163,10 +1181,13 @@ It self-reports ready with `isolation_decided` false.
 Its independent readiness review returned **BOUNDED-CAVEAT** at `2f112f4c` (payload digest
 `1ab27086…`), because two of the eight controls could not fail; after the repair at
 `609e7392` (digest `ba99cccc…`) the re-review verified the repair by removal and returned
-BOUNDED-CAVEAT again, a pass conditional on one unclosed provenance item.
-H-060 therefore remains `instrument_ready: false` and **unresolved** at the end of this
-phase — because the review has not passed, not because the instrument is missing — as the
-agenda requires.
+BOUNDED-CAVEAT again, a pass conditional on one unclosed provenance item; and on the third
+round it returned **PASS**, at payload digest `743fd18a…` over source digest `9382bae1…`,
+with the leaf diff against the author's certificate showing exactly one differing leaf.
+That is what moved `H-060` to `instrument_ready: true`.
+`H-060` was still **unresolved** at the end of this phase, which is what the agenda
+required of it; what resolved it was `BC-153`'s independent review of this document
+together with that instrument, recorded in `exp-058`.
 
 ### 8.5 What is claimed as new, and what is not (governing novelty scoping)
 
@@ -1230,8 +1251,18 @@ statement in the words of one of BCR’s three authors, four verbatim uses of th
 proposition by one author group, and the Milnor route corroborated word for word against
 a peer-reviewed restatement that cites Milnor’s page.
 A reviewer who requires the printed page still has that to do.
-Nothing else changes: `H-060` stays **unresolved**, `instrument_ready` stays false, and
-the engineering obligation above is untouched.
+
+**Where it stands after `BC-153` (2026-09-03).** The independent review returned **PASS**
+and judged this obligation non-blocking without closing it: the printed page is still
+unread, and in its place the reviewer derived the same statement first-hand from
+primary-text Basu–Pollack–Roy Theorem 3.22 plus the one-variable Puiseux fact, through the
+`t = u^p` change of variable Coste states in his own notes, with the Milnor route and the
+finite-union reduction of §4.1 as a third derivation.
+The engineering half is closed as well: the instrument's readiness review passed and the
+`BC-153` reviewer replayed the instrument itself from clean roots.
+So `H-060` is **confirmed** and the property is registered as `T-014`; the unread page
+remains a named, non-blocking citation-provenance gap and nothing in this document's
+mathematics changed with it.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -160,16 +160,20 @@ one: a solid `R` earned by `n` alone, from a hard-coded set of the four packings
 catalogue annotates, which rendered a source’s word identically to an exact tiling
 argument — the field split failing to reach the figure.
 Now `established` means the record’s own `rigidity` block says `locally-rigid`, and
-nothing else does: **eleven** solid badges, the ten tilings plus `n = 11`’s own
-`verified` argument, which the old rule credited to Kingbird.
+nothing else does: **twelve** solid badges, the ten tilings plus `n = 11`’s own `verified`
+argument and `n = 5`’s, both of which the old rule credited to Kingbird.
 The catalogue’s annotation is still shown, because dropping it would lose a fact the
 corpus holds, but as a **muted** `R` on a `not-established` entry with its own legend
-line and its own total: `n = 5, 28, 40`.
+line and its own total: `n = 28, 40`.
 
-`n = 5` is why the distinction is worth the second glyph.
+`n = 5` is why the distinction is worth the second glyph, and it is also why the glyph is
+not decoration.
 [`X-007`](../../campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md)
-establishes more about it than the catalogue ever said and still not local rigidity, so
-it holds the muted badge while carrying first-party evidence in the frontier.
+established more about it than the catalogue ever said and still not local rigidity, so it
+held the muted badge for three days while carrying first-party evidence in the frontier.
+It moved to a solid badge on 2026-09-03 only when the missing step was written out,
+checked against a complete local accounting, independently reviewed and registered as
+`T-014` — on the proof, never on the annotation.
 
 ### Checking one claim by hand
 

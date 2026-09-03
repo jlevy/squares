@@ -809,10 +809,16 @@ def test_the_oracle_refuses_a_side_understated_above_the_declared_tolerance(
 def test_the_detection_floor_is_far_below_the_decision_threshold(tmp_path: Path) -> None:
     """What the tolerance costs, stated as a measurement rather than an assurance.
 
-    A fabrication small enough to slip past the oracle is 1e-9-ish, five orders of
-    magnitude below the 1e-4 basin gap the campaign actually decides on, so no evadable
-    forgery can manufacture a basin hit or a record. This pins that ratio: if the
-    tolerance is ever loosened towards the decision threshold, this fails.
+    A fabrication small enough to slip past the oracle is 1e-9-ish, which currently sits
+    five orders of magnitude below the 1e-4 basin gap the campaign actually decides on, so
+    no evadable forgery can manufacture a basin hit or a record.
+
+    The assertion below pins the weaker claim, and the gap is worth stating rather than
+    rounding off: it holds the tolerance *at least four* orders below the threshold, so a
+    tolerance loosened to 1e-8 -- one whole order of protection gone -- still passes, while
+    2e-8 fails. Strengthening the divisor to 1e5 would pin the ratio the constants actually
+    hold; until then this catches a loosening towards the decision threshold, not every
+    loosening.
     """
     below = tmp_path / "below.jsonl"
     below.write_text(_pose_line(overlap_depth=1e-10) + "\n")

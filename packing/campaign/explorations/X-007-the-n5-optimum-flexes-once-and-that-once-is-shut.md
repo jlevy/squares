@@ -382,6 +382,16 @@ be false, and the distance between the two readings is the whole sixteen dimensi
 
 ## What Moves in the Record, and What Deliberately Does Not
 
+*Note, 2026-09-03: this section describes what this round moved, and it is left as
+written. The property it deliberately did not move has since moved: the prose step below
+was written out in full as
+[X-012](X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md),
+checked against an exact accounting of all 400 local inequalities, independently reviewed
+under `BC-153`, and registered as `T-014`, so the `n = 5` block now reads
+`property: locally-rigid` at fixed side on a second first-party evidence record. The
+reasoning below for why it could not move then is unchanged and is why the later move
+needed a proof.*
+
 The frontier `rigidity` block for `n = 5` keeps `property: undetermined`, and everything
 else about it changes.
 

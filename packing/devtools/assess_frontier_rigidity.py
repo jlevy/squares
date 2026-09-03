@@ -21,18 +21,20 @@ arguments are available and neither needs a source:
   refuses when they do not pin the side at exactly k.
 
 What the screen cannot do is establish rigidity, because rotation and
-coordinated multi-square motion are outside it. So the four packings the
-catalogue annotates "Rigid." are left `undetermined` here rather than promoted:
-the catalogue's word for them lives in reported_upper_bound.catalogue_rigid, and
+coordinated multi-square motion are outside it. So the packings the catalogue
+annotates "Rigid." are left `undetermined` here rather than promoted: the
+catalogue's word for them lives in reported_upper_bound.catalogue_rigid, and
 restating it as a first-party finding is exactly the conflation the split fixed.
 
-Two records now carry a first-party argument and this tool never overwrites
-either: n=11 from the tangent-cone work, and n=5 from `X-007`, which settles the
-first-order cone exactly and refuses its one free direction at second order. Note
-what that does *not* do -- n=5 still reads `undetermined`, because second-order
-rigidity is not local rigidity and the property enum has no word for it. Leaving
-a record alone is about who owns the argument, not about which verdict it
-reached.
+Two records carry a first-party argument and this tool never overwrites either:
+n=11 from the tangent-cone work, and n=5 from `X-007` and its successor `X-012`,
+which settle the first-order cone exactly, refuse its one free direction at
+second order, and then close local isolation by curve selection and an order-2m
+coefficient induction. n=5 read `undetermined` while only the second-order half
+existed -- second-order rigidity is not local rigidity -- and reads
+`locally-rigid` since 2026-09-03, when that closing was independently reviewed
+and registered as T-014. Either way this tool leaves it alone: leaving a record
+alone is about who owns the argument, not about which verdict it reached.
 """
 
 from __future__ import annotations

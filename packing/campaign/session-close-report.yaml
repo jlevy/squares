@@ -1248,7 +1248,7 @@ sessions:
   title: "BC-148 n = 17 fresh successor completion"
   status: in_progress
   primary_bead: think-5j8d
-  phases: 2
+  phases: 3
   measured: false
   unmeasured_reason: >-
     declares no rollups

@@ -79,7 +79,7 @@ experiment:
       the 360-minute BC-152 n = 5 lane of agenda-016, of which this record covers the
       packet's declared phase 0-105 plus its freeze
     wall_seconds: 11.33
-    stopped_by: dependency
+    stopped_by: criterion
   complexity:
     lines_changed: 0
     new_dependencies: []
@@ -105,15 +105,24 @@ experiment:
       the entire local feasible set and a REVIEWED curve-selection and coefficient
       argument?
     role: outcome
-    outcome: no_progress
+    outcome: criterion_met
     checked_by: >-
-      nothing that the criterion accepts. The mathematics of the registered route is
-      complete on paper and every exact quantity in it replays, but no instrument checked
-      the chart and no independent reviewer has read the argument, so neither accept
-      condition is satisfied; and no nonconstant feasible arc through the pose and no exact
-      sequence of distinct feasible poses converging to it was found, so the reject clause
-      is not satisfied either. Validly undecided, in exp-045's sense: a finite named
-      obligation remains, so the determination is no_progress and the verdict is unresolved
+      BC-153's independent review, 2026-09-03, classification PASS, which supplies the two
+      adjectives this round could not. CHECKED: the reviewer replayed sqpack.local_rigidity
+      from clean temporary roots under normal and optimized Python, byte-identically, and
+      its neighbourhood receipt is this chart's N exactly -- 128 strict conditions in the
+      same four roles and counts -- with all twenty rows' gradients and restricted second
+      jets matching and all eight controls rejecting. REVIEWED: the reviewer, who authored
+      none of the packet, the instrument or this record, rebuilt the pose, the chart, all
+      400 elementary polynomials, the twenty rows, q, the midpoints, the first-order cone
+      by 28 hand-built Farkas certificates, the self-stress and Lemma 8 from scratch in
+      sympy sharing no code with the author, replayed T-012's 28 stored certificates and
+      the packet's five scripts to the digests this record retains, and accepted every
+      logical step from nonisolation to the second-order contradiction. The reject clause
+      stays unsatisfied: no nonconstant feasible arc through the pose and no exact sequence
+      of distinct feasible poses converging to it exists, which is what the theorem proves.
+      This determination read no_progress until that review ran; the Amendment below states
+      what it said and why it changed
   - shape: determination
     question: >-
       Do the chart's cleared polynomials, their gradients and their second jets bind
@@ -171,8 +180,8 @@ experiment:
       is at positive distance from the pose. control_exp034.py separately shows the cone is
       open there, which is what the unbuilt instrument's C8 refusal will have to reproduce
   verdict:
-    decision: unresolved
-    needs_review: true
+    decision: accepted
+    needs_review: false
     primary_criterion: >-
       H-060's registered direction, which is frozen and was not amended for this round:
       accept only if a checked intrinsic semialgebraic chart accounts for the entire local
@@ -182,44 +191,42 @@ experiment:
       the pose or an exact sequence of distinct feasible poses converging to it; otherwise
       unresolved
     reason: >-
-      Both accept conditions are unmet and both reject conditions are absent, so the only
-      honest disposition is unresolved. The chart is not CHECKED in the criterion's sense
-      -- every number in it was computed by scratchpad sympy, not by a repository
-      instrument. A W7 instrument was built after this packet was frozen, at 6580a9fd, as
-      the package sqpack.local_rigidity binding to devtools.assess_n5_rigidity rather than
-      extending it; it self-reports instrument_ready with isolation_decided false and it
-      does exercise the eight controls C1-C8. Its independent readiness review has now
-      PASSED, on the third round: BOUNDED-CAVEAT at 2f112f4c because two of the eight
-      registered controls, C1 changed_feature and C4 invented_contact, could not fail and
-      never reached the refusal path; repair at 609e7392, verified by removal;
-      BOUNDED-CAVEAT again on one unclosed provenance item, the digested payload pinning a
-      commit that cannot produce the recorded digest; then PASS at final payload digest
-      743fd18a over source digest 9382bae1, replayed from a clean root one commit past the
-      author's observed commit, with the leaf diff against the author's certificate
-      showing exactly one differing leaf, the pinned commit, tree_matches true and no
-      differing paths. H-060 therefore moves to instrument_ready true. That transition is
-      about the instrument and not about this hypothesis: no target determination ran, the
-      instrument sets isolation_decided false unconditionally and cannot decide isolation
-      even in principle, and this round's numbers still did not come from it, so the chart
-      is not CHECKED in the criterion's sense here. The argument is not REVIEWED -- BC-153
-      has not run -- and its curve-selection step rests on quotations rather than on BCR
-      Proposition 8.1.13 itself: one of BCR's own authors, in self-described provisional
-      notes, plus four verbatim uses by a single author group. The packet's second
-      secondary source was withdrawn from X-012 as an over-attribution, so no independent
-      corroborating source stands behind the citation. The corroborating
-      second-order-sufficiency proof recorded in the artifact reaches the same conclusion
-      from strictly weaker hypotheses, but acceptance was preregistered on the
-      curve-selection route, so it discharges nothing. What this round does establish is
-      that the mathematics of the registered route is complete on paper and replays
-      exactly, that the agenda's constraint counts are confirmed with no discrepancy, and
-      that the one known nonconstant feasible arc lives at a different container side
+      Accepted 2026-09-03 on BC-153's independent review, which returned PASS. The
+      registered criterion is frozen, was not amended for this round or for the review, and
+      was met as written: the chart is CHECKED -- the reviewer replayed the W7 instrument
+      from clean roots under normal and optimized Python and its neighbourhood receipt is
+      this chart's N exactly, 128 strict conditions in the same four roles and counts, with
+      every gradient and restricted second jet matching and all eight controls rejecting --
+      and the argument is REVIEWED, by a reviewer who authored none of the packet, the
+      instrument, X-012 or this record, who rebuilt every exact quantity from scratch in
+      sympy sharing no code with the author (the 400 margins, the 28 witnesses, the 20
+      active rows, -t4^2, q = -2, the displayed g-tilde_3, the midpoints, 28 hand-built
+      Farkas certificates plus T-012's 28 stored ones and its self-stress, and Lemma 8 on
+      random arcs), replayed the packet's five scripts to digests equal to this record's,
+      and accepted every logical step from nonisolation to the second-order contradiction.
+      What is accepted is exactly this: for s = 2 + sqrt(2)/2 and Goebel's labeled pose P0
+      in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) (closed unit squares in
+      [0, s]^2, pairwise disjoint interiors); equivalently there is no nonconstant
+      continuous feasible path from P0 and no sequence of distinct feasible poses converging
+      to it; hence Kingbird-rigid at fixed side. Acceptance widens nothing else: no
+      isolation radius, nothing with the side free (which is false, X-007), no global
+      uniqueness, no other n = 5 optimum, no applicability of Connelly-Whiteley as stated,
+      and no method novelty -- the closing principle is classical and the CW96 Theorem 4.3.1
+      proof shape is not new. The review names six gaps carried from the record plus one new
+      minor one, none of them a condition of the pass; they are listed in the Amendment
+      below and none of them is closed by this acceptance. This round's own account of what
+      it did and did not do is unchanged above: its numbers still came from scratchpad
+      sympy, and what the review adds is the instrument replay and the independent
+      reconstruction that the criterion's two adjectives require
     reopen_when: >-
-      a reviewer confirms the curve-selection statement against a primary text and BC-153
-      reviews the argument. The other half of this condition is closed: the W7
-      instrument's readiness review passed at payload digest 743fd18a, having emitted a
-      neighbourhood receipt for this chart, refused all eight controls substantively, and
-      pinned a commit that reproduces its digest. Readiness alone leaves the round where
-      it is, because acceptance needs a checked chart and a reviewed argument
+      only what H-060's frozen rejection clause names: a verified nonconstant feasible arc
+      through the pose, or an exact sequence of distinct feasible poses converging to it.
+      A lone feasible point at positive distance cannot reopen this -- it could invalidate a
+      proposed neighbourhood, and N here is defined by sign persistence rather than by a
+      radius. Reaching the printed page of BCR Proposition 8.1.13, or installing the
+      Basu-Pollack-Roy plus one-variable-Puiseux derivation the review writes out, would
+      close the one cited hypothesis the proof rests on; neither is a condition of this
+      verdict
     resume_from: >-
       the frozen packet installed as X-012, SHA-256
       28343b743e689fc99968d589a542d9022d061de8ec3ae5100bf4ef4930e40b6b, together with the
@@ -269,16 +276,21 @@ feasibility at order `2m`.
 
 ## What This Round Does Not Establish
 
-`H-060` is **unresolved**. `instrument_ready` is now **true**, and that flag is about the
-instrument, not about the hypothesis: it says the instrument may be used to evaluate
-`H-060`, not that `H-060` is decided.
+*This section is the round on its own, as frozen.
+`H-060` was resolved later and elsewhere — by `BC-153`'s independent review, which is what
+the verdict now records; see the [Amendment](#amendment--the-bc-153-independent-review-and-acceptance).*
+
+`H-060` was **unresolved** at the freeze. `instrument_ready` is **true**, and that flag is
+about the instrument, not about the hypothesis: it says the instrument may be used to
+evaluate `H-060`, not that `H-060` is decided.
 No target determination ran at the readiness checkpoint, and the instrument sets
 `isolation_decided` false unconditionally, so it cannot decide isolation even in
 principle.
 The registered criterion accepts only on a *checked* chart and a *reviewed* argument, and
-neither adjective applies to this round.
-One of the two obligations below is now discharged; the other is open, and both belong to
-other lanes:
+neither adjective applied to this round on its own.
+Of the two obligations below the first was discharged at the readiness checkpoint; the
+second is *not* closed — `BC-153` judged it non-blocking on a derivation rather than
+reaching the printed page, which is gap 1 of the Amendment:
 
 1. **Discharged.** A `W7` instrument whose readiness review passes — it passed on the
    third round, at final payload digest `743fd18a`; the history, the reviewer's one
@@ -438,7 +450,9 @@ The subject declares `assurance: verified` with `method: exact-algebraic`, which
 combination this campaign uses whenever the arithmetic is exact over `Q(sqrt 2)` rather
 than finite-precision.
 It describes the arithmetic, not the hypothesis.
-It does **not** mean `H-060` is verified, and the verdict is the field that says so.
+It does **not** mean `H-060` is verified: the verdict is the field that carries the
+hypothesis's disposition, and what put `accepted` there is `BC-153`'s review, not this
+line.
 Every quantity here was computed by scratchpad sympy scripts run read-only against the
 repository, independently of `sqpack.field`; none of it came from a repository instrument,
 because the `W7` instrument was built only after this packet was frozen, and its readiness
@@ -511,7 +525,11 @@ Score **S3, not S4**. The closing principle is the classical second-order suffic
 optimality condition and the curve-selection proof shape matches Connelly–Whiteley 1996
 Theorem 4.3.1; **neither is claimed as new**, nor is the half-angle rationalization, the
 separating-axis accounting, or Farkas certification.
-The scoping is this lane’s assertion, not a reviewed finding; `BC-153` owns it.
+The scoping was this lane’s assertion when written.
+`BC-153` has since checked the three load-bearing sources first-hand — Kingbird line 44,
+Friedman `DS7`, Goebel 1979 — and independently accepted the `S3` claim in those words;
+the wider survey scoping stays outside the claim, still unverified against the primary
+texts.
 
 ## Claim Boundary
 
@@ -520,10 +538,111 @@ side is free, which `X-007` measured to be false; global uniqueness of the `n = 
 rigidity of any other `n = 5` optimal family; applicability of the Connelly–Whiteley
 theorem as stated; any novelty beyond the above.
 
-No frontier property, result-register entry or evidence record changed, and none may
-change before `BC-153`’s independent review.
-`H-060` itself was not amended: its registered criterion is frozen, and this round was
-measured against it as written.
+No frontier property, result-register entry or evidence record changed *in this round*,
+and none changed before `BC-153`’s independent review; what that review then authorised is
+listed in the Amendment.
+`H-060` itself was not amended: its registered criterion is frozen, this round was measured
+against it as written, and so was the review.
+
+## Amendment — the `BC-153` Independent Review and Acceptance
+
+`BC-153` reviewed this round on 2026-09-03 and returned **PASS**.
+The reviewer authored none of the packet, the instrument, `X-012`, the round record or the
+three supporting reviews, wrote only to their own scratchpad, and used the supporting
+reviews as evidence rather than as authority: every mathematical step was re-derived.
+The verdict above moves from `unresolved` to `accepted` on that review, and `needs_review`
+is cleared.
+
+**What the pass rests on.** Three layers, from most to least independent of the authors’
+code.
+
+1. **A from-scratch reconstruction.** In sympy, sharing no code with the packet, with
+   `sqpack` or with the instrument, the reviewer rebuilt the pose and chart and reproduced:
+   all 400 elementary polynomials classified by exact sign (80 wall-corner functions 16/64
+   with minimum inactive margin `1 - √2/4`; 320 pair functions, 4 touching pairs and 6
+   noncontact); the 28 negative witnesses, value for value; the 128 strict conditions of
+   `N`; the 20 active rows in `T-012`’s own order, with every gradient matching the §2.5
+   table and column `t4` identically zero; `q_chart = -2` on the four pair rows with each
+   pair row restricting to exactly `-t4²` on the flex line; the packet’s displayed
+   `g̃_3` as a polynomial; the four exact edge midpoints; the first-order cone by **28
+   Farkas certificates the reviewer built by hand** from the row inequalities; the
+   self-stress, `w · q_chart = -2√2`, and `Φ = Σ w_j g̃_j` restricting to `-√2 · t4²`;
+   `T-012`’s 28 stored certificates and its self-stress replayed against the reviewer’s own
+   `S A_chart`; and Lemma 8 on random rational arcs at `m = 2, 3`.
+2. **This round’s own scripts**, run read-only, all passing, with all seven files hashing
+   to the digests retained in this round’s [results
+   record](../results/exp-058-h-060-n5-chart-and-proof.json).
+3. **The instrument**, `sqpack.local_rigidity`, replayed from clean temporary roots under
+   normal and optimized Python: payload digest identical under both, `ready`,
+   `controls_all_reject`, no refusals, `isolation_decided` false as designed, and a
+   neighbourhood receipt that is this document’s `N` exactly — 128 strict conditions,
+   64 + 24 + 12 positive and 28 negative — with `gradient_matches` and `second_jet_matches`
+   true on all twenty rows.
+   A leaf diff against the reviewed build `743fd18a` differs only under
+   `/claim_boundary/provenance`, in no margin, count, row, jet, control verdict or
+   determination, which confirms independently of this record’s own statement that the
+   current build differs from the reviewed one in provenance metadata only.
+
+**The exact scope, and it is the whole of what is claimed.**
+For `s = 2 + √2/2` and Goebel’s labeled pose `P⁰` in `C = (ℝ² × S¹)⁵`, `P⁰` is an isolated
+point of `Feas(s)` (closed unit squares in `[0, s]²`, pairwise disjoint interiors);
+equivalently there is no nonconstant continuous feasible path from `P⁰` and no sequence of
+distinct feasible poses converging to it; hence Kingbird-rigid at fixed side.
+
+**Not claimed, and not to be claimed on this review:** any isolation radius; rigidity with
+the side free, which is false (`X-007`); global uniqueness; any other `n = 5` optimum;
+applicability of Connelly–Whiteley as stated; and any method novelty — the closing
+principle is classical and the `[CW96]` Theorem 4.3.1 proof shape is not new.
+
+**Novelty, `S3`, in the reviewer’s own words as accepted:** the first exact *proof* of
+fixed-side local rigidity of Goebel’s `n = 5` optimum — a property *asserted without proof*
+by Kingbird (archived page, line 44), not stated by Goebel, and not stated by Friedman
+(`DS7` Theorem 2 is a lower bound only).
+The reviewer checked those three sources first-hand rather than through the survey.
+
+**Six named gaps, and one new minor one. None is a condition of the pass, and none is
+closed by acceptance.**
+
+1. **`BCR` Proposition 8.1.13’s printed page is still unread.** Non-blocking: the review’s
+   §6.5 derives the needed statement from primary-text `BPR` Theorem 3.22 plus the
+   one-variable Puiseux fact, through the `t = u^p` bridge Coste states and the reviewer
+   verified first-hand in his notes; Milnor with the finite-union reduction of `X-012` §4.1
+   is a third route.
+2. **The second-order-sufficiency numbering is from memory** — on the non-acceptance route
+   only; Theorem 11 is proved in full.
+3. **Prior-art scoping comes from the coordinator’s survey and is unverified against the
+   primary texts** — carried *outside* the claim, which is where it stays.
+4. **The instrument binds only the restricted jet along `e_{u4}`** — sufficient, since
+   Lemma 8 at order `2m` and Theorem 11 consume only `eᵀ H_j e`.
+5. **The instrument’s reduction audit samples only the neighbourhood interior** —
+   irrelevant to the proof: `N` is defined by sign persistence rather than by a radius, and
+   the proof consumes no boundary behaviour.
+6. **The Kingbird thirteen-versus-four list tension** (`X-012` §7.3) is real and
+   unresolved, and not load-bearing: `n = 5` is on both lists.
+7. **New, minor:** `X-012` §1.3 (i) is terse — a path can be constant on an initial
+   segment, so the argument wants one sentence taking the supremum of that interval.
+   The conclusion holds; the frozen mathematics is left as it stands and this is recorded
+   rather than patched.
+
+**What this record changed, and what it did not.**
+The verdict is `accepted` with `needs_review` false; the outcome determination, which read
+`no_progress` with `checked_by` “nothing that the criterion accepts”, now reads
+`criterion_met` on the review; and `effort.stopped_by` moves from `dependency` to
+`criterion`, because the dependency this round stopped on — an independent review — arrived
+and decided it, so the round is no longer resumable work.
+Unchanged: `H-060`’s registered criterion, which is frozen and was met as written and not
+amended for this round or for the review; every number, count, margin and determination
+above; and this round’s [results record](../results/exp-058-h-060-n5-chart-and-proof.json),
+which is immutable run data and still states the round’s own disposition at the freeze.
+
+**What the pass authorised elsewhere**, and it is the complete list: clearing
+`needs_review` here; setting the `n = 5` frontier rigidity property to locally rigid at
+fixed side, with a new evidence record `E-n005-fixed-side-local-rigidity`; and registering
+the theorem as `T-014`, `apparently-novel` at `S3`, which is permitted only because the
+reviewer independently accepted the novelty basis.
+`T-012`’s recorded next action — “local rigidity needs the curve-selection argument written
+out in `X-007` to become a computation” — is discharged by that registration, and `X-012`’s
+stale `instrument_ready: false` statements are corrected.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

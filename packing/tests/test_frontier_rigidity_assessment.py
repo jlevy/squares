@@ -7,10 +7,12 @@ a hit in the translation escape screen exhibits a motion and so certifies NOT ri
 a perfect square is an exact tiling with no slack and so is rigid outright.
 
 The direction of the screen is the whole point. A hit is strong and a miss is weak, so
-these tests hold the asymmetry in place: no record may claim rigidity on a miss, and the
-four packings the catalogue calls "Rigid." stay `undetermined` as OUR finding, because
-promoting a source's word to a first-party claim is the conflation the field split was
-built to prevent.
+these tests hold the asymmetry in place: no record may claim rigidity on a miss, and a
+packing the catalogue calls "Rigid." may be called rigid here only on an argument of our
+own, because promoting a source's word to a first-party claim is the conflation the field
+split was built to prevent. Three of the four annotated packings therefore stay
+`undetermined`; `n = 5` left that state on 2026-09-03 by being proved (`T-014`), not by
+being annotated.
 """
 
 from __future__ import annotations
@@ -62,20 +64,23 @@ def test_every_record_now_carries_an_assessment() -> None:
     assert sum(len(v) for v in grouped.values()) == 100
     assert sorted(grouped) == ["locally-rigid", "not-rigid", "undetermined"]
     assert len(grouped["not-rigid"]) == 84
-    assert len(grouped["locally-rigid"]) == 11  # ten tilings plus n=11's own argument
-    assert grouped["undetermined"] == [5, 28, 40, 68, 69]
+    # Ten tilings plus two first-party arguments: n=11's tangent cones and n=5's T-014.
+    assert len(grouped["locally-rigid"]) == 12
+    assert grouped["undetermined"] == [28, 40, 68, 69]
 
 
-def test_rigid_records_are_exactly_the_tilings_plus_n11() -> None:
+def test_rigid_records_are_exactly_the_tilings_plus_n5_and_n11() -> None:
     """Rigidity is claimed only where an argument exists, never from a screen miss."""
     perfect = [n for n in range(1, 101) if math.isqrt(n) ** 2 == n]
-    assert _by_property()["locally-rigid"] == sorted([*perfect, 11])
+    assert _by_property()["locally-rigid"] == sorted([*perfect, 5, 11])
     for n in perfect:
         assert _rigidity(n)["evidence"] == [TILING_EVIDENCE]
         assert _rigidity(n)["assurance"] == "verified"
-    # n=11 rests on the tangent-cone work, not on anything this assessment derived.
-    assert TILING_EVIDENCE not in _rigidity(11)["evidence"]
-    assert ESCAPE_EVIDENCE not in _rigidity(11)["evidence"]
+    # n=11 rests on the tangent-cone work and n=5 on the order-2m proof reviewed as
+    # T-014; neither is anything this assessment derived.
+    for n in (5, 11):
+        assert TILING_EVIDENCE not in _rigidity(n)["evidence"]
+        assert ESCAPE_EVIDENCE not in _rigidity(n)["evidence"]
 
 
 def test_no_record_claims_rigidity_from_a_screen_miss() -> None:
@@ -89,13 +94,25 @@ def test_no_record_claims_rigidity_from_a_screen_miss() -> None:
 
 
 def test_the_catalogues_rigid_annotation_is_not_promoted_to_our_finding() -> None:
-    """The conflation the split exists to prevent, held in place by a test."""
+    """The conflation the split exists to prevent, held in place by a test.
+
+    `n = 5` left the undetermined bucket on 2026-09-03, and how it left is the whole
+    point: not by adopting the annotation but by proving the statement. What this now
+    asserts for it is the basis -- a verified first-party formal claim resting on this
+    repository's own local-rigidity record -- which is a stricter test of the same rule.
+    """
     for n in CATALOGUE_RIGID:
         assert _case(n)["reported_upper_bound"]["catalogue_rigid"] == "rigid"
-    for n in (5, 28, 40):
+    for n in (28, 40):
         assert _rigidity(n)["property"] == "undetermined", (
             f"n={n}: the catalogue's word became our claim"
         )
+    five = _rigidity(5)
+    assert five["property"] == "locally-rigid"
+    assert five["assurance"] == "verified"
+    assert five["method"] == "proof-audited"
+    assert "E-n005-fixed-side-local-rigidity" in five["evidence"]
+    assert ESCAPE_EVIDENCE not in five["evidence"]
 
 
 def test_the_immobile_records_are_exactly_the_tilings_and_the_annotated_four() -> None:

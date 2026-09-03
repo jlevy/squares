@@ -694,9 +694,10 @@ def _frontier_rigidity(context: Context) -> str:
     Two records are excluded here because a stronger first-party argument owns them, and
     the exclusion is keyed on the evidence id rather than on a list of n: n=11 from the
     tangent-cone work, and n=5 from `X-007`'s exact first- and second-order certificates.
-    n=5 still *reads* `undetermined` -- second-order rigidity is not local rigidity and the
-    schema has no word for it -- so it leaves the assessed bucket while keeping the same
-    property, which is why both numbers here moved by one at once.
+    n=5 left the assessed bucket while still *reading* `undetermined` -- second-order
+    rigidity is not local rigidity -- which is why both numbers here moved by one at once;
+    it reads `locally-rigid` since 2026-09-03 (`T-014`), and because the exclusion is by
+    evidence id rather than by property, the counts below did not move again with it.
 
     n=40 moved the same way on 2026-08-30 and for the opposite finding. It is
     infinitesimally *flexible* over `Q(sqrt 2)`, with seven retained directions each refused

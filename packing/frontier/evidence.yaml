@@ -530,17 +530,119 @@ evidence:
       by a verified non-negative self-stress. Together these exclude every twice
       differentiable feasible arc that leaves the pose with a nonzero derivative.
 
-      They do not establish local rigidity, which is why the property stays undetermined. An
-      arc whose derivative vanishes at the pose is excluded only by a further argument --
-      curve selection on the semi-algebraic feasible set, then an induction on the arc's
-      Puiseux coefficients -- which is written out in
+      They do not establish local rigidity, which is why the property stayed undetermined
+      until 2026-09-03. An arc whose derivative vanishes at the pose is excluded only by a
+      further argument -- curve selection on the semi-algebraic feasible set, then an
+      induction on the arc's Puiseux coefficients -- which is written out in
       campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md and is
-      prose, not a computation this replay checks. The container side is a constant here,
+      prose, not a computation this replay checks. That argument was completed and checked
+      against a full local accounting in X-012, independently reviewed, and recorded as
+      E-n005-fixed-side-local-rigidity, which is the record the locally-rigid property now
+      rests on; this record still establishes only what it says above. The container side is a constant here,
       not a variable, so nothing bears on what happens as the container grows.
 
       This is a repository result about the packing and is independent of the catalogue's
       unqualified Rigid annotation, which is carried by reported_upper_bound.catalogue_rigid
       and is not restated as a finding of ours.
+
+  - id: E-n005-fixed-side-local-rigidity
+    claim: derived-structure
+    scope: {n_values: [5]}
+    assurance: verified
+    method: proof-audited
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    certificate: campaign/series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.assess_n5_rigidity --check
+    replay_status: passed
+    proof:
+      source: >-
+        campaign/explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md,
+        this repository's own proof artifact -- the frozen BC-152 packet (SHA-256
+        28343b743e689fc99968d589a542d9022d061de8ec3ae5100bf4ef4930e40b6b) installed unchanged in
+        substance -- with the round that produced it recorded as exp-058.
+      theorem: >-
+        For s = 2 + sqrt(2)/2 and Goebel's labeled pose P^0 in C = (R^2 x S^1)^5, P^0 is an isolated
+        point of Feas(s) -- closed unit squares in [0, s]^2 with pairwise disjoint interiors --
+        equivalently there is no nonconstant continuous feasible path from P^0 and no sequence of
+        distinct feasible poses converging to it; hence Kingbird-rigid at fixed side (X-012 Theorem
+        10, with the covering-space lift of section 1.3).
+      scope: >-
+        The exact labeled pose at the exact container side, over Q(sqrt 2), with the side held
+        fixed. It establishes no isolation radius, nothing about the side as a variable (which is
+        false, X-007), nothing about global uniqueness or any other n = 5 optimal packing, and it
+        invokes no tensegrity theorem.
+      pinpoints: >-
+        X-012 sections 2.2-2.4 (Lemmas 1-3, the injective half-angle chart and its 2-jet transfer),
+        3.1-3.3 (Lemma 4 and the exact base margins of all 400 elementary inequalities), 3.4
+        (Proposition 5, the 128-condition neighbourhood on which the local feasible system is
+        exactly the twenty active rows), 4.1-4.2 and Corollary 4.3 (curve selection on the punctured
+        set F \ {0}, with its hypotheses verified for this chart), 5.1 (Proposition 6, T-012's cone
+        and self-stress transferred to the chart), 5.2-5.4 (Lemmas 7-8 and Theorem 9, the order-2m
+        coefficient induction) and 5.5 (Theorem 10). Section 5.7's second-order-sufficiency proof
+        corroborates from weaker hypotheses and is not the acceptance route.
+      assumptions:
+        - >-
+          Nash (real-analytic) curve selection for a semialgebraic set at a point of its closure,
+          cited as BCR Proposition 8.1.13, whose printed page no lane reached. The BC-153 review
+          derives the same statement first-hand from primary-text Basu-Pollack-Roy Theorem 3.22
+          (continuous semialgebraic curve selection) plus the one-variable Puiseux fact, through the
+          t = u^p change of variable Coste states in his own notes; Milnor 1968 Lemma 3.1 with
+          X-012 section 4.1's finite-union reduction is a third route to it.
+        - The separating-axis theorem for two convex polygons, cited rather than machine-checked.
+        - >-
+          That u -> 2 arctan u is a homeomorphism onto (-pi, pi); the polynomial injectivity is
+          verified, the topology is cited.
+        - Containment of a convex square in a convex rectangle reduces to its four corners.
+        - Continuity of polynomials, which is what makes the chart image U open.
+      audit_record: >-
+        BC-153 independent review of agenda-016, 2026-09-03, classification PASS, recorded in
+        campaign/series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md
+        under "Amendment -- the BC-153 Independent Review and Acceptance". The reviewer authored
+        none of the packet, the instrument, X-012 or the round record; rebuilt the pose, chart, all
+        400 elementary polynomials, the twenty gradient rows, q, the midpoints, the first-order cone
+        (28 hand-built Farkas certificates), the self-stress and Lemma 8 from scratch in sympy
+        sharing no code with the author, with sqpack or with the instrument; replayed the packet's
+        five scripts to digests equal to the exp-058 record; and replayed the sqpack.local_rigidity
+        instrument from clean roots byte-identically under normal and optimized Python with all
+        eight controls rejecting.
+    novelty: apparently-novel
+    source_reviewed: '2026-09-03'
+    novelty_basis:
+      corpus: >-
+        packing/resources/ as retained on 2026-09-03: 27 papers (pdf plus faithful .raw.md transcription) and 22 archived web sources, including [Friedman DS7], [Goebel 1979], [Stromquist 2003], Trump 2023, Bentz 2010/2016, Kearney-Shiu, Nagamochi 2005, Gensane-Ryckelynck 2005, and the Kingbird catalogue; plus the Kingbird rigid-packings definition page and the structural-rigidity and jamming sources reached by BC-152's prior-art survey (Connelly-Whiteley 1996, Connelly-Servatius, Donev et al. 2007), which are read through the survey and not archived here
+      novel_object: >-
+        The first exact PROOF that Goebel's n = 5 optimum is locally rigid at fixed side -- a property ASSERTED WITHOUT PROOF by Kingbird (archived main page, line 44, "Rigid." with a link and no argument), not stated by Goebel 1979 (zero occurrences of "rigid" or "uniqu" in the extraction) and not annotated by Friedman DS7, whose Theorem 2 is a lower bound only and analyses no equality case
+      searched: >-
+        Checked first-hand by the BC-153 reviewer from the archived sources rather than from the survey's summary: Kingbird's n = 5 entry is bare "Rigid."; Friedman DS7 remarks rigidity only for n = 40 and Trump's n = 11; Goebel 1979 states neither rigidity nor uniqueness; no published uniqueness theorem for the n = 5 optimum was found, and an unavoidable-set proof does not analyse its equality case, so "uniqueness implies rigidity" is not available as a prior route. The closing principle (first-order cone a line, plus a nonnegative self-stress with w . q < 0, implies isolation) is the classical second-order sufficient optimality condition and the energy principle of Connelly-Whiteley; the analytic-flex induction to order 2m has the shape of Connelly-Whiteley 1996 Theorem 4.3.1. Neither is claimed as new, nor is the half-angle rationalization, the separating-axis accounting or Farkas certification. Score S3, a case result, not S4
+      gaps: >-
+        "First" is relative to the literature searched: Connelly 2008 was not read in print and Kingbird's method is unknown, so this is a statement about the search performed and never an assertion of priority. Relative to this repository's own prior state, T-012's certificates plus the classical second-order sufficiency condition already implied the result once the local reduction is granted, so the genuinely new content is Proposition 5 -- the exact accounting of all 400 functions and the 128-condition neighbourhood -- together with the closing proved directly for corner-on-line and corner-on-wall inequalities. The prior-art scoping beyond the three sources above comes from BC-152's coordinator survey, is unverified against the primary texts, and is carried outside the claim. The Kingbird thirteen-versus-four rigid-list tension (X-012 section 7.3) is real and unresolved; it is not load-bearing here because n = 5 is on both lists
+    limitations: >-
+      Fixed side, and the labeled pose. The claim is isolation of Goebel's exact pose in Feas(2 +
+      sqrt(2)/2), proved exactly over Q(sqrt 2); it establishes no numerical isolation radius, says
+      nothing about the side as a variable (with the side free the cone opens and the obstruction
+      fails -- X-007 measured that), nothing about global uniqueness or about any other n = 5
+      optimal family, and it invokes no Connelly-Whiteley tensegrity theorem as stated.
+
+      What the declared replay decides is the part T-012 owns and the proof consumes: the
+      first-order cone is exactly the line spanned by rotation of the middle square, the other
+      fourteen coordinates are pinned by 28 Farkas certificates verified in the field, and a
+      verified non-negative self-stress gives w . q < 0 on that line. The rest of the exact content
+      -- the chart, all 400 base margins, the 20 active rows and the 128 strict sign conditions that
+      cut out the neighbourhood -- is retained in exp-058's result record, which holds its seven
+      sympy scripts verbatim with their SHA-256 digests and declares the command that extracts and
+      re-runs them; it was reproduced from clean roots by the sqpack.local_rigidity instrument and
+      rebuilt independently in sympy by the BC-153 reviewer.
+
+      No replay decides isolation, and none can: the instrument sets isolation_decided false
+      unconditionally. The closing is a proof -- curve selection on the punctured feasible set and
+      an induction on the arc's Taylor coefficients through order 2m -- which is why this record is
+      proof-audited rather than exact-algebraic, and why the result it supports declares V3 rather
+      than V4. The proof's largest cited hypothesis is the Nash curve-selection lemma, whose printed
+      BCR page remains unread here; see proof.assumptions for the two independent derivations of the
+      statement that stand in its place. The second-order-sufficiency theorem numbering in X-012
+      section 8.3 is from memory and is on the non-acceptance route only.
 
   - id: E-n040-first-order-flexibility
     claim: derived-structure

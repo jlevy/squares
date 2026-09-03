@@ -8,9 +8,9 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **40** evidence records. **31** are formal; **25** of those were established here.
+- **41** evidence records. **32** are formal; **26** of those were established here.
 - **6** rest on an argument made elsewhere, of which **4** have been read by nobody here.
-- **8** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
+- **9** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
 claim whether or not we read it. The count above is not a doubt about those
@@ -43,6 +43,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-bentz-2016-proof` | 2 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published |
 | `E-n011-trump-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n005-second-order-rigidity` | 1 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n005-fixed-side-local-rigidity` | 1 | derived-structure | verified | whatever its theorem states | here | - | apparently-novel |
 | `E-n040-first-order-flexibility` | 1 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n011-trump-local-rigidity` | 1 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n011-repaired-lower` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
@@ -63,9 +64,9 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 5, verified 31
-- **method**: exact-algebraic 23, interval-certified 2, numerical-multiprecision 4, published-proof 6, reported 5
-- **novelty**: apparently-novel 8, common-knowledge 4, not assessed 4, previously-published 24
+- **assurance**: numerically-checked 4, reported 5, verified 32
+- **method**: exact-algebraic 23, interval-certified 2, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 5
+- **novelty**: apparently-novel 9, common-knowledge 4, not assessed 4, previously-published 24
 
 The `cases` column is how many of the hundred frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited by ninety-eight cases is the catalogue everyone reports from and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -77,6 +78,7 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | --- | --- | --- | ---: | --- |
 | `E-translation-escape-not-rigid` | 89 sizes | A systematic screen over 98 configurations with replayable certificates; the idea of checking a slide is not new | 87 | numerically-checked |
 | `E-green17-sixteen-point-lower` | 17, 18 | The certified object: sixteen rational points unavoidable in [0, 4426213/1000000]^2, every decision an exact rational sign. The bound's value sits below Green's reported number, so what is new is the verified certificate, not the frontier of reported claims. | 2 | verified |
+| `E-n005-fixed-side-local-rigidity` | 5 | The first exact PROOF that Goebel's n = 5 optimum is locally rigid at fixed side -- a property ASSERTED WITHOUT PROOF by Kingbird (archived main page, line 44, "Rigid." with a link and no argument), not stated by Goebel 1979 (zero occurrences of "rigid" or "uniqu" in the extraction) and not annotated by Friedman DS7, whose Theorem 2 is a lower bound only and analyses no equality case | 1 | verified |
 | `E-n005-second-order-rigidity` | 5 | That n = 5 is not infinitesimally rigid but is second-order rigid, proved exactly; the catalogue asserts 'Rigid.' without defining or arguing it | 1 | verified |
 | `E-n011-repaired-lower` | 11 | A correct proof of a bound stated in 1979 and cited as proved since, whose printed argument does not close | 1 | verified |
 | `E-n011-trump-local-rigidity` | 11 | Local rigidity proved by exhausting all 128 branchwise cones; sources assert rigidity, and zero algebraic freedom does not exclude a branching motion | 1 | verified |

@@ -115,6 +115,57 @@ PRUNE = frozenset(
         ROOT / "atlas/known-best/known-best-1-100.png",
         ROOT / "atlas/known-best/rendering",
         ROOT / "atlas/prospective/rendering",
+        # The n=17 weighted-certificate solver state joins them on 2026-09-03, when the
+        # H-052 lane committed exp-059's completion record and its checkpoint and pushed
+        # the snapshot to 90,031,065 bytes against the 67,108,864 cap. Counted over the
+        # git tree instead of the working tree, so build caches cannot flatter it, the
+        # record alone is 78,841,684 at this commit where the branch point was 56,324,303.
+        # Four files are 34,109,196 of that -- exp-059's pair, plus the exp-052 and exp-056
+        # checkpoints, which predate the branch and are pruned as the same class rather
+        # than left to trip the cap next time. Without them the tracked surface is
+        # 44,732,488 and the live one 56.1 MB, about 16% under the cap. The artifacts stay
+        # committed -- they are exp-059's evidence. What changes is that a throwaway
+        # mutation sandbox no longer carries 34 MB of solver state to corrupt one line of
+        # a Python file.
+        #
+        # Named by no control, and -- the part worth checking rather than assuming -- read
+        # by nothing a control runs. `controls.yaml` names no results path in any of its
+        # 50 `file:` targets, and every one of its 40 distinct `run:` commands was traced
+        # with `strace -f` for opens and directory reads under `campaign/series/*/results`.
+        # Exactly one command reaches that tree at all, and it reaches one 38 KB file.
+        #
+        # That one command is why the whole directory is not pruned, which is the obvious
+        # move and the wrong one. `check_canonical` backs four controls and reads
+        # `exp-003-baseline-n11-target.jsonl` for the wrong-basin n=11 packing; when
+        # `archived_n11()` finds no archive it does not skip that check, it records
+        # `FAIL ... [no archive]`. The checker would then be red in every worker before any
+        # mutation was applied, and a control is scored on "exited non-zero and printed its
+        # message" with no green baseline demanded -- so four controls would keep passing
+        # over a checker that was already failing. And it buys almost nothing: measured in
+        # the same run, pruning the whole directory sheds 1,072,797 bytes more than these
+        # four files, because the linked- and registered-target rules pull 6,790,030 bytes
+        # of it straight back. A megabyte is not worth a blinded control. The 38 KB stays.
+        #
+        # Two smaller measurements, so the next person does not repeat them. Pruning only
+        # the three `.checkpoint.json` files clears the cap by 72,785 bytes, and the counted
+        # surface moved 190,759 bytes across the session that measured it, purely from
+        # `__pycache__` written by the test runs -- headroom inside the noise is not
+        # headroom. And nothing links these four inline, which is why
+        # `linked_pruned_targets()` pulls back none of them: the record cites them in YAML
+        # fields and code spans, so the link checker never looks for them in a worker.
+        #
+        # Pruning by file rather than by directory is deliberate and not durable: the next
+        # multi-megabyte checkpoint breaks the cap again. D-422 holds the structural
+        # options, including excluding the build caches that are 11.3 MB of the live
+        # measurement and the whole reason it drifts between runs.
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results"
+        "/exp-052-h-052-n17-resumable-certificate-agreement.checkpoint.json",
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results"
+        "/exp-056-h-052-n17-sequential-larger-prefix.checkpoint.json",
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results"
+        "/exp-059-h-052-n17-fresh-successor-completion.checkpoint.json",
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results"
+        "/exp-059-h-052-n17-fresh-successor-completion.json",
         ROOT / "resources",
         ROOT / "sqsearch/target",
         ROOT / "witnesses/prospective",

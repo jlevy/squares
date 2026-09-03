@@ -86,9 +86,9 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives four confirmed hypotheses, six refuted
+The generated ledger currently derives five confirmed hypotheses, six refuted
 hypotheses, one open hypothesis, seven open questions, and thirty-five blocked
-hypotheses. One hypothesis waits on review and six are unresolved.
+hypotheses. No hypothesis waits on review and six are unresolved.
 The set includes one claim whose formal prerequisite is missing, H-044 whose registered
 calibration-only amendment keeps the hypothesis undisposed — its first scored round
 (exp-046) missed the criterion determinately under both denominator readings, the review
@@ -576,7 +576,7 @@ codified that distinction as `BC-107` under `think-n8vl` in
 `V0`–`V5`, `C0`–`C5` with structural promotion checks, anchored significance that never
 gates, and a scoped novelty classification — and the results register
 ([`packing/frontier/results.yaml`](packing/frontier/results.yaml), rendered as
-[`RESULTS.md`](packing/frontier/RESULTS.md)) declares the whole results `T-001`–`T-013`,
+[`RESULTS.md`](packing/frontier/RESULTS.md)) declares the whole results `T-001`–`T-014`,
 whose declared rungs `devtools/check_results.py` checks against cited evidence, required
 notes, and review metadata on every validation run.
 Unsupported promotion and unexplained understatement fail the build.
@@ -690,10 +690,14 @@ side, including its observation that the contacting corner sits at the midpoint 
 contacted edge — which turns out to be the reason for both the first-order blindness and
 the second-order obstruction.
 
-The frontier property stays `undetermined`, and the reason is worth carrying forward:
-second-order rigidity is not local rigidity, the step that would close the gap is a
-curve-selection argument that `X-007` writes out as prose and no replay checks, and the
+The frontier property stayed `undetermined` then, and the reason is worth carrying
+forward: second-order rigidity is not local rigidity, the step that would close the gap is
+a curve-selection argument that `X-007` writes out as prose and no replay checks, and the
 property enum has no word for what was actually established.
+*(That gap closed on 2026-09-03: the argument was written out in full, checked against an
+exact 400-inequality accounting, independently reviewed and registered as `T-014`, and the
+property is now `locally-rigid` at fixed side — see the newest result under [Results
+established here](#results-established-here).)*
 What did change is everything saying why — `verified` rather than `numerically-checked`,
 `exact-algebraic` rather than `numerical-multiprecision`, and a first-party evidence id
 in place of the screen’s — which takes `n = 5` out of the assessment tool’s ownership,
@@ -1298,6 +1302,7 @@ not only instruments.
 | [`cases.n5.second_order_obstruction`](packing/cases/n5/second_order_obstruction.py) | That displayed direction is excluded from the true Bouligand tangent cone (exp-036) |
 | [`cases.n5.tangent_inventory`](packing/cases/n5/tangent_inventory.py) | Both owner branches have the same complete first-order V-representation at A, the interior, and B (exp-038) |
 | [`cases.n5.fixed_angle_polytope`](packing/cases/n5/fixed_angle_polytope.py) | Four release classes have exact paths in one connected five-dimensional cell-local LP-optimal position polytope, with positive pathwise first-order stresses (exp-039) |
+| [`sqpack.local_rigidity`](packing/src/sqpack/local_rigidity/instrument.py) | The exact local system behind `T-014`: one injective half-angle chart, all 400 elementary inequalities, and a 128-condition neighbourhood on which Goebel’s `n = 5` pose is isolated at fixed side (exp-058, proof in X-012). It does not decide isolation — `isolation_decided` is false unconditionally — and the closing is the proof |
 | [`cases.kingbird29.verify_svg`](packing/cases/kingbird29/verify_svg.py) | A 160-digit numerical reconstruction of the `n = 29` SVG, rejecting H-042’s serialization-scoped three-class claim (exp-037). H-024’s formal prerequisite remains unresolved; the SVG is not a formal feasibility or optimality certificate |
 
 **Unbuilt on this lane:** the `PoseBox` scalar and the interval branch-and-bound hook,
@@ -1932,6 +1937,40 @@ exact contacts.
 **T-2** originated in the standing review as observation R-2 and has now been
 implemented twice, independently—see below for why that matters.
 
+**`T-014`, the newest whole result: Goebel’s `n = 5` optimum is locally rigid at fixed
+side, proved exactly.** For `s = 2 + √2/2` and Goebel’s labeled pose `P⁰` in
+`C = (ℝ² × S¹)⁵`, `P⁰` is an isolated point of `Feas(s)` — closed unit squares in
+`[0, s]²`, pairwise disjoint interiors — equivalently there is no nonconstant continuous
+feasible path from `P⁰` and no sequence of distinct feasible poses converging to it, so
+the packing is rigid at fixed side in the catalogue’s own sense.
+The proof is exact over `Q(√2)`: one intrinsic half-angle chart, all 400 elementary
+inequalities classified by exact sign, a neighbourhood cut out by 128 strict conditions on
+which the local feasible set is exactly twenty active rows, `T-012`’s first-order cone and
+non-negative self-stress transferred to that chart, then semialgebraic curve selection on
+the punctured feasible set and an induction on a putative arc’s Taylor coefficients that
+the self-stress contradicts at order `2m`.
+It is registered at `V3`/`C3` — the exact quantities are machine-confirmed here, the two
+steps that close the argument are an audited proof and no instrument decides isolation —
+and `apparently-novel` at `S3` on
+[`BC-153`](packing/campaign/agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md)’s
+independent review, which rebuilt every exact quantity from scratch in code sharing nothing
+with the author, replayed the instrument from clean roots, and accepted the novelty basis:
+Kingbird asserts the property with no argument, Goebel does not state it, and Friedman does
+not annotate it.
+**Not claimed:** any isolation radius; rigidity with the container side free, which
+[X-007](packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md)
+measured to be false; global uniqueness; any other `n = 5` optimum; applicability of the
+Connelly–Whiteley tensegrity theorems as stated; and no novelty of method — the closing
+principle is the classical second-order sufficient optimality condition, and the proof
+shape is Connelly–Whiteley 1996 Theorem 4.3.1’s.
+The proof is
+[X-012](packing/campaign/explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md),
+the round is
+[exp-058](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md),
+and the review’s six named gaps — the unread printed page of the cited curve-selection
+lemma among them, none of them a condition of the pass — are listed in that record’s
+amendment.
+
 **Apparently novel here**, in the qualified sense above: the falsification of
 Stromquist’s printed Figure 14 argument and the source-distinct repaired certificate for
 `s(11) ≥ 2 + 4/√5` (exp-016, exp-017); the corner at Trump’s cell (T-3, exp-010); the
@@ -2457,7 +2496,7 @@ round that names the hypothesis, control roles included.
 | [H-057](packing/campaign/hypotheses/H-057-n17-parent-bound-parallel-speedup.md) | unresolved | A parent-bound three-process runner preserves exact output and reaches the fixed useful-speedup threshold on three exp-052 ordinals | 1 | — |
 | [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | unresolved | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 2 | — |
 | [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | confirmed | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 1 | — |
-| [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md) | needs review | Goebel’s exact `n = 5` optimum is locally rigid when the container side is fixed | 1 | 11s wall |
+| [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md) | confirmed | Goebel’s exact `n = 5` optimum is locally rigid when the container side is fixed | 1 | 11s wall |
 
 ### Confirmed
 
@@ -2540,7 +2579,10 @@ at `n=12`.
 **[H-017](packing/campaign/hypotheses/H-017-budget-scaling.md)** (100× budget) stays
 open and demoted behind a short response curve.
 It is operationally shaped, and D-044 — the boundary that made it inadmissible
-unattended — is now fixed.
+unattended — is repaired against the producer and independently reviewed, but stands
+`contained` rather than fixed: the review of 2026-09-03 returned BOUNDED-CAVEAT, and one
+clause of the defect’s source finding plus three residuals on the same archive boundary
+are named in the record and not closed.
 No live round has passed through the repaired boundary, so admitting it unattended is
 still a review decision rather than a settled one.
 
@@ -2673,17 +2715,17 @@ There are 59 terminal rounds registered in `series-000`.
 
 They record 1903.1 agent-minutes and 825.0 wall-minutes.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
-result; exp-057 stopped before target access; exp-058 stopped on a missing dependency.
+result; exp-057 stopped before target access; exp-058 stopped on the review it was
+waiting for, which arrived and accepted it.
 Exp-058 records no agent-minutes at all, because the lane that produced its mathematics
 did not retain its own operator time, so the agent-minute total above understates what
-H-060 has cost.
-Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
-(0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
-SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
-checker, the exact Stromquist printed-set falsifier, and the exact repaired-cover
-certificate, the exact terminal-component known-answer checker, and the exact `n = 5`
-fixed-angle face, angle-sheet, full-angle tangent, and second-order obstruction
-checkers, plus the exact branchwise tangent-inventory checker.
+H-060 has cost. Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer),
+`sqpack.quench` (0.1.0 with angle descent and 0.2.0 with class bracketing), the
+high-precision Kingbird SVG reconstruction, the exact Trump linearized-cone checker, the
+exact small-moduli checker, the exact Stromquist printed-set falsifier, and the exact
+repaired-cover certificate, the exact terminal-component known-answer checker, and the
+exact `n = 5` fixed-angle face, angle-sheet, full-angle tangent, and second-order
+obstruction checkers, plus the exact branchwise tangent-inventory checker.
 Exp-058 alone used no repository instrument: its numbers come from read-only sympy
 scripts retained verbatim in its results record, which is why it is not a receipt.
 
@@ -2764,7 +2806,7 @@ archive beside it.
 | [exp-055](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-055-h-059-n50-producer-refusal-ordering.md) | 50 | calibration | H-059 | producer stage-sentinel harness | prospective existing-result refusal emitted a verified zero-call trace; exp-050 unchanged | **accepted** |
 | [exp-056](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-056-h-052-n17-sequential-larger-prefix.md) | 17 | calibration | H-052 | parent-bound child chain over the unchanged exp-052 driver | fixed timebox retained 170/181 contiguous agreeing rows through ordinal 169; canonical result absent | **unresolved** |
 | [exp-057](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md) | 68 | calibration | H-058 | side-semantics binding over the unchanged exp-054 adapter | literal point model retained; six-decimal side provenance absent; no target access | **unresolved** |
-| [exp-058](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md) | 5 | target | H-060 | scratchpad sympy chart-and-proof replay set, read-only; no repository instrument | all 400 elementary inequalities classified exactly and the 16/64 and 4/6 counts confirmed; `w · q_chart = -2√2 < 0`; no instrument receipt and no reviewed argument, so isolation is not decided | **unresolved** |
+| [exp-058](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md) | 5 | target | H-060 | scratchpad sympy chart-and-proof replay set, read-only; the W7 instrument and the BC-153 reviewer’s from-scratch sympy reconstruction | all 400 elementary inequalities classified exactly and the 16/64 and 4/6 counts confirmed; `w · q_chart = -2√2 < 0`; the frozen criterion met as written on BC-153’s PASS, so the pose is isolated at fixed side | **accepted** |
 | [exp-059](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-059-h-052-n17-fresh-successor-completion.md) | 17 | target | H-052 | fresh successor driver over the frozen exp-056 parent checkpoint and exp-052 chain genesis | all 181 exact direction cells agree; both 181-row manifest summaries byte-identical, every row minimum exactly 1/1, decision derived from the preconditions, mutations and instrument validity | accepted |
 
 ### Cost and provenance
@@ -2828,7 +2870,7 @@ archive beside it.
 | exp-055 | one fixed 15-minute W6 cell | 0.72 s | 92 m | criterion | `909efafa+sha256-9c90a04e5691f168` |
 | exp-056 | one fixed 356-minute elapsed lease | 21,360 s | — | timebox | `11ce70ee+sha256-f45227508b28f377` |
 | exp-057 | one 150-minute target-blind BC-138 lane | 1,000 s | 16.6667 m | guard | `11ce70ee` |
-| exp-058 | the 360-minute BC-152 `n = 5` lane of agenda-016 | 11.33 s | — | dependency | — (no engine; exact sympy replay) |
+| exp-058 | the 360-minute BC-152 `n = 5` lane of agenda-016 | 11.33 s | — | criterion | — (no engine; exact sympy replay) |
 | exp-059 | one fixed BC-148 process-exclusive lease, 08:58Z–09:58Z | 1991 s | 33 m | criterion | `2796174b` |
 
 ### What the 59 rounds jointly establish
@@ -2911,10 +2953,14 @@ and replays, all 6,631 fixed-point evaluations settle, and the maximum proved-si
 is `2.221e-15`. This is a local known-answer control, not a random-search or component
 claim. The exact small-moduli controls remain valid; component identity is the next
 blocked layer. The `n=12` calibration returns exactly `4.0`, but that is not a
-known-answer guard. The runner’s full-pose independent verification boundary is now
-closed under [D-044](defects.md): a scored line must carry the pose, and `record`
-re-checks the archived geometry in a separate process before writing a round.
-A producer-reported overlap scalar never closed it, and still does not.
+known-answer guard. The runner’s full-pose independent verification boundary is repaired
+but not closed under [D-044](defects.md): a scored line must carry the pose, `record`
+re-checks the archived geometry in a separate process before writing a round, and an
+independent review on 2026-09-03 reproduced every refusal.
+That review returned BOUNDED-CAVEAT, and the record now names why — the float screen
+still demands an exact zero overlap where the source finding asked for an independently
+bounded one, and `record` never binds the lines it scores to the bytes the child
+verified. A producer-reported overlap scalar never closed it, and still does not.
 
 **Trump’s exact pose is locally isolated.** Exp-013 retains all 512 raw active-feature
 selections as 128 derivative-distinct matrices.
@@ -2924,33 +2970,37 @@ A finite-branch subsequence argument upgrades that result to local isolation and
 local side optimality in the anchored pose–side chart, modulo finite symmetries.
 It does not prove global optimality or give an explicit isolation radius.
 
-**The `n = 5` isolation argument is complete on paper and is not a result.** Exp-058
-registers the BC-152 proof packet: an intrinsic half-angle chart injective on all of
-`R^15`, all 400 elementary wall-corner and pair inequalities classified by exact sign
-(confirming the agenda’s 16/64 and 4/6 counts with no discrepancy), a neighbourhood on
-which the local feasible system is exactly the twenty active rows, T-012’s 28 Farkas
-certificates and self-stress replaying on the chart with `w · q_chart = -2√2 < 0`, and
-an order-`2m` coefficient induction that contradicts a nonconstant analytic feasible
-arc. None of that decides H-060, which stays **unresolved** although `instrument_ready` is
-now true. Its registered criterion accepts only on a *checked* chart and a *reviewed*
-argument: every number here was computed by read-only scratchpad sympy rather than by a
-repository instrument, no independent reviewer has read the argument, and the
-curve-selection step rests on a quotation from one of BCR’s own authors, in notes he calls
-provisional, plus four uses by a single author group, rather than on the printed BCR text;
-the packet’s second secondary source was withdrawn as an over-attribution, so nothing
-independent corroborates it.
-A separate lane’s instrument passed its independent readiness review on the third round,
-after two BOUNDED-CAVEAT rounds and a repair, and that pass is what moved the flag: the
-reviewer replayed it from a clean root and found exactly one differing leaf, the pinned
-commit, which closed the provenance item the second round had left open.
-The pass certifies the instrument, not the hypothesis.
-No target determination ran, and the instrument sets `isolation_decided` false
-unconditionally, so it cannot decide isolation even in principle.
-The corroborating
-second-order-sufficiency proof in the packet reaches the same conclusion from weaker
-hypotheses and discharges nothing, because acceptance was preregistered on the
-curve-selection route. Nothing is promoted: no frontier property, result-register entry
-or novelty claim follows until BC-153 reviews it.
+**Goebel’s `n = 5` optimum is locally rigid at fixed side, and that is now a result.**
+Exp-058 registers the BC-152 proof packet: an intrinsic half-angle chart injective on all
+of `R^15`, all 400 elementary wall-corner and pair inequalities classified by exact sign
+(confirming the agenda’s 16/64 and 4/6 counts with no discrepancy), a neighbourhood cut
+out by 128 strict sign conditions on which the local feasible system is exactly the twenty
+active rows, T-012’s 28 Farkas certificates and self-stress replaying on the chart with
+`w · q_chart = -2√2 < 0`, and an order-`2m` coefficient induction that contradicts a
+nonconstant analytic feasible arc.
+`H-060` is **confirmed** on `BC-153`’s independent review, which returned PASS on
+2026-09-03 against a criterion frozen before the target work and met as written: the
+reviewer replayed the instrument from clean roots under both interpreters and got this
+chart’s neighbourhood back exactly, and rebuilt every exact quantity from scratch in code
+sharing nothing with the author before accepting each step from nonisolation to the
+second-order contradiction.
+What is established, exactly: for `s = 2 + √2/2` and Goebel’s labeled pose `P⁰` in
+`C = (ℝ² × S¹)⁵`, `P⁰` is an isolated point of `Feas(s)`, so no nonconstant continuous
+feasible path leaves it and no sequence of distinct feasible poses converges to it — hence
+rigid at fixed side in the catalogue’s sense.
+Registered as `T-014` at `V3`/`C3`, apparently-novel at `S3`: the exact quantities are
+machine-confirmed here, the curve-selection lemma and the induction that close the argument
+are an audited proof, and no instrument decides isolation — `isolation_decided` is false
+unconditionally, by design.
+Not claimed: an isolation radius, the side as a variable (false, X-007), global uniqueness,
+any other `n = 5` optimum, applicability of Connelly–Whiteley as stated, or novelty of
+method.
+Six gaps stay named and none is a condition of the pass — the printed BCR page behind the
+curve-selection citation is still unread, and the review replaces it with a derivation from
+primary-text Basu–Pollack–Roy plus the one-variable Puiseux fact rather than closing it.
+The corroborating second-order-sufficiency proof in the packet reaches the same conclusion
+from weaker hypotheses and discharged nothing, because acceptance was preregistered on the
+curve-selection route.
 
 **The optimal configuration spaces at `n = 3,4` are now exact controls.** Exp-014 proves
 that `F_3(2)` is two labelled circles, its `S3` quotient is one circle, and its
@@ -3026,13 +3076,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 425 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 426 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
-| validity | 112 | was correct, but the measurement did not bear on the question |
+| validity | 113 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 155 | recorded something its own evidence contradicts |
 | robustness | 52 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
@@ -3043,7 +3093,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-one defects in 425, and no soundness defect
+**The automated gate has caught sixty-one defects in 426, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3053,7 +3103,7 @@ test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
-The generated log currently has 56 open entries: 35 `outstanding` and 21 `contained`.
+The generated log currently has 59 open entries: 36 `outstanding` and 23 `contained`.
 The W9 candidate `think-cyko` owns their systematic risk ordering and bounded repair
 waves; the synopsis names the cases that matter to current claims rather than pretending
 the examples below are the whole backlog.
@@ -3090,14 +3140,35 @@ no-change/refusal instead of hand-computing incomparable telemetry.
 before one of them runs, and that untracked build caches, not the record, are what
 breach it. A checkout that has never run pytest or ruff measures under the cap and the
 suite starts; the first full validation run puts it over, so every session reaches the
-failing state by doing the ordinary thing. The adjacency is the point: the anchor check
-is a `--records` step and reports all 155 anchors matching, so the log shows a passing
-155-anchor check beside a suite in which no control has fired.
-[D-423](defects.md) records that the lemma closing the Green17 cover certificate's top
-strips is printed non-strict in Stromquist 2003 and Bentz 2010 and strict in Friedman's
-DS7, and that the repository holds all three. The readings agree everywhere except on
-the boundary the certificate uses, so the boundary case is an unrecorded source
-obligation rather than a settled step.
+failing state by doing the ordinary thing.
+The adjacency is the point: the anchor check is a `--records` step and reports all 155
+anchors matching, so the log shows a passing 155-anchor check beside a suite in which no
+control has fired. [D-423](defects.md) records that the lemma closing the Green17 cover
+certificate’s top strips is printed non-strict in Stromquist 2003 and Bentz 2010 and
+strict in Friedman’s DS7, and that the repository holds all three.
+The readings agree everywhere except on the boundary the certificate uses, so the
+boundary case is an unrecorded source obligation rather than a settled step.
+
+The W9 remediation lane leaves three open entries of its own, and the reason they are
+open is the more useful part.
+[D-044](defects.md) and [D-046](defects.md) were marked fixed at 08:25Z on 2026-09-03;
+the independent review that was meant to gate that disposition began at 08:46Z and
+returned BOUNDED-CAVEAT for both, so both are now `contained`. Both repairs are real and
+were reproduced against the code rather than against the record: the producer-side
+attack D-044 names is closed, and all twelve of D-046’s clauses are closed, including
+the seven guards that turn the suite red only when reverted in a copy.
+What holds them back is that both records summarise findings from the PR #14 review, the
+repairs were written against the summaries, and four clauses of the source findings
+never reached the summaries — the float screen’s exact-zero overlap, pre-run engine
+dirtiness, per-cell timebox semantics, and reporting runnable-but-unrun work.
+All four are conservative; none flatters a result; none is repaired.
+Three undisclosed residuals sit on the same archive boundary and close together with one
+receipt written by `execute` and compared by `record`. [D-426](defects.md) is the
+finding that review turned up on D-046’s own edge: a control-cell breach is a declared
+stop condition that the session does not honour, because `run` resets its failure count
+on the breached round and continues on the same suspect instrument.
+Nothing has been recorded through any of this — the search engine is not built here, no
+live round has run, and the numerical runner stays **NO-GO**.
 
 [D-393](defects.md) is the same run being wrong about its own gate.
 `D-381` established `--edit` as the pre-push floor, and that floor does not run tests:
@@ -3268,16 +3339,17 @@ rejected rank-free rigidity and dimension claims; and D-042 exposed `n = 12` as 
 target masquerading as a negative control.
 
 The systematic crosswalk then records every remaining technical finding from the PR #14
-review. D-043 closes the archive-before-validation path; D-044 now closes independent
-pose validity; D-045 tracks criterion-specific evaluators; D-046 now closes the runner
-state machine; D-047 closes contact-key reflection; D-048 retains unstable
-tolerance/equality semantics; D-049 tracks factorial canonicalization; D-050 and D-051
-separate observation promotion from regime-safe merging; D-052 narrows quench
-stationarity; D-053 now enforces the generic exact-field preconditions; D-054 separates
-budgets and final-best records from trajectory claims; D-055 and D-056 correct the angle
-and `m²-3` theorems; D-057 scopes H-020; D-058 reconciles the local handover; D-059
-keeps the golden oracle/characterization split open; D-060 restores producer-level
-strict checks; and D-061 preserves evidence for unrecognised endpoints.
+review. D-043 closes the archive-before-validation path; D-044 and D-046 repair
+independent pose validity and the runner state machine and stay contained on the
+residuals their independent review named; D-045 tracks criterion-specific evaluators;
+D-047 closes contact-key reflection; D-048 retains unstable tolerance/equality
+semantics; D-049 tracks factorial canonicalization; D-050 and D-051 separate observation
+promotion from regime-safe merging; D-052 narrows quench stationarity; D-053 now
+enforces the generic exact-field preconditions; D-054 separates budgets and final-best
+records from trajectory claims; D-055 and D-056 correct the angle and `m²-3` theorems;
+D-057 scopes H-020; D-058 reconciles the local handover; D-059 keeps the golden
+oracle/characterization split open; D-060 restores producer-level strict checks; and
+D-061 preserves evidence for unrecognised endpoints.
 D-062 catches the executable `n=12` rejection that survived the first D-042 correction;
 D-063 removes a false contrapositive from the rigidity premise; and D-064 keeps a
 read-only runner preflight executable inside the gate that mutation-tests it without

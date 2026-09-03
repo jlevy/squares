@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 425
+count: 426
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -1165,7 +1165,7 @@ defects:
   direction: flattering
   detected_by: review
   severity: critical
-  status: fixed
+  status: contained
   what: >-
     The runner contract requires only a scalar overlap field emitted by the same command
     that proposes the result; quench output stores no complete pose. It also hardcodes
@@ -1176,23 +1176,70 @@ defects:
     binary can pass the archive boundary. Later exact promotion is impossible when the
     pose that must be checked was discarded.
   fix: >-
-    Every scored line must now carry the full pose as equal-length x, y and t arrays of
-    length n. Each pose and the archive as a whole are content-addressed by sha256, and a
-    retained certificate is refused once the archive under it has moved. record rebuilds
-    every archived pose into corner geometry and re-checks containment and pairwise
-    separation through sqpack.verify in a separate process, translating to the
-    bounding-box origin because the producer's required_side is translation-invariant.
-    The engine self-test is executed before any measurement is taken and the binary that
-    passed it is hashed, so subject.selftest_passed is derived from an exit status and a
-    digest that still matches the file on disk rather than written as a literal. The same
-    repair closed one hole this record did not name: a result line is bound to the n and
-    seed the harness invoked, so a command run for one cell can no longer score into
-    another. The re-check is float arithmetic at 1e-9; it can refute a forged pose and
-    never promotes a round past numerically-checked. No criterion, threshold, control or
-    verdict changed: the campaign's accept rule already required, in clauses 3 and 4,
-    that the engine self-test passed in the same invocation and that every stored pose
-    pass an independent geometry check. The runner satisfied neither, and both now run,
-    so this enforces the rule as written rather than rewriting it.
+    Repaired against the producer, independently reviewed, and `contained` rather than
+    `fixed`: the attack this record names is closed and reproduced, and one clause of the
+    source finding plus three residuals on the same boundary are named below and are not.
+
+    What the repair does. Every scored line must now carry the full pose as equal-length
+    x, y and t arrays of length n. Each pose and the archive as a whole are
+    content-addressed by sha256, and a retained certificate is refused once the archive
+    under it has moved. record rebuilds every archived pose into corner geometry and
+    re-checks containment and pairwise separation through sqpack.verify in a separate
+    process, translating to the bounding-box origin because the producer's required_side
+    is translation-invariant. The engine self-test is executed before any measurement is
+    taken and the binary that passed it is hashed, so subject.selftest_passed is derived
+    from an exit status and a digest that still matches the file on disk rather than
+    written as a literal. The same repair closed one hole this record did not name: a
+    result line is bound to the n and seed the harness invoked, so a command run for one
+    cell can no longer score into another. The re-check is float arithmetic at 1e-9; it
+    can refute a forged pose and never promotes a round past numerically-checked. No
+    criterion, threshold, control or verdict changed: the campaign's accept rule already
+    required, in clauses 3 and 4, that the engine self-test passed in the same invocation
+    and that every stored pose pass an independent geometry check. The runner satisfied
+    neither, and both now run, so this enforces the rule as written rather than rewriting
+    it.
+
+    The independent review, 2026-09-03, returned BOUNDED-CAVEAT. The producer-side attack
+    this record names -- a fabricated side, a fabricated zero overlap, an untested binary
+    -- is genuinely closed, and the reviewer reproduced every refusal against the code
+    rather than against the summary of it. That is why this is contained and not
+    outstanding: none of what follows is unproven, and none of it flatters a result. It is
+    contained and not fixed because a status is a claim about the finding, not about the
+    row that summarises it, and against the finding the repair is incomplete.
+
+    The unrepaired clause. This record summarises finding F-02 of the PR #14 review and the
+    repair was written against the summary. F-02's fifth clause -- "exact zero is not
+    required at the float screen; independently bounded non-overlap is" -- was never
+    carried into this record and so was never implemented. validated_record
+    (packing/src/sqpack/campaign/runner.py:587) still refuses any line whose overlap is not
+    exactly 0.0. Measured 2026-09-03: an overlap of 1e-18 is refused outright while the
+    identical geometry verifies. The engine's own notion of feasible is a bound and not an
+    exact zero -- sqsearch's self-test accepts best_overlap <= FEASIBLE_EPS -- so a round in
+    which the engine reports a genuinely tiny non-zero overlap is refused before the oracle
+    that now exists to decide it is ever consulted. The repair added the independent bound
+    and kept the screen F-02 asked to drop. Conservative in direction, and unrecorded until
+    now. Close it by requiring overlap to be finite and <= POSE_TOLERANCE and letting the
+    geometric check decide, or by recording why the stricter screen was kept.
+
+    Three residuals the lane did not disclose, all on the boundary this defect names. They
+    share one precondition -- write access to the archive between execute and record, which
+    the producer does not have -- and one remedy. (1) record never binds the lines it scores
+    to the bytes the child verified: it reads the archive three times, through scan_archive,
+    the child's own read, and cells_from, and never compares archive_digest(archived) with
+    the child's archive_sha256; the stored-receipt comparison fires only when a receipt
+    already exists. (2) Only record writes a verification receipt, so on a first record
+    there is no execute-to-record binding at all and clause 44.6's archive-digest refusal is
+    unreachable in the unattended loop -- the test that covers it plants the receipt by
+    hand, because nothing else puts one there in time. (3) One genuinely valid scored line
+    duplicated under the other declared seeds manufactures the declared seed count: every
+    copy verifies because the geometry is real, so decide's evidence-sufficiency clause
+    turns a round that should be abandoned into unresolved, in the flattering direction,
+    and the geometric oracle structurally cannot object. All three were reproduced on
+    2026-09-03. Having execute append the archive digest of what it produced, and record
+    compare it, closes all three together.
+
+    Not repaired here. Agenda 016's W9 lane is bounded to D-044 and D-046 as scoped and this
+    branch does not have room to widen; all four items above are carried on think-ldq2.
   regression: >-
     tests/test_campaign_runner_trust_boundary.py, 61 tests over the result-line contract,
     the independent oracle, the executed engine gate, and the digest that binds a verdict
@@ -1205,8 +1252,23 @@ defects:
     tolerance at least four orders of magnitude below the 1e-4 basin threshold, where it
     currently sits five below. The pose and attribution guards are each shown
     load-bearing against a copy of the module with that one repair reverted.
+
+    Two bounds on that list, both established by the 2026-09-03 review rather than asserted
+    here. The AST test collects only ast.Call nodes whose func is an ast.Name, so it catches
+    the naive edit that optimises the subprocess away and would not see an attribute or
+    aliased call; it is behavioural coverage of the containment property, not a structural
+    proof of it. And the seven guards left without a permanent mutation proof were each
+    reverted in a copy and re-run: every one turns the suite red, so the twelve-guard claim
+    is verified in full. What those seven lack is protection against a future weakening of
+    the tests, which is not hypothetical -- two of the twelve were tautologies on the first
+    pass.
+
     No live round is covered: sqsearch is not built in this environment, so the
-    end-to-end round runs a fixture engine.
+    end-to-end round runs a fixture engine. Three things therefore remain inferred rather
+    than executed -- that the real producer satisfies the new contract end to end, that the
+    round artifact record now writes validates against the enforced Experiment/v2 schema
+    (no test checks this; the fixture stubs regenerate), and the engine gate's real cost
+    against the round budget. SYNOPSIS.md's NO-GO for unattended execution stands.
   bead: think-ldq2
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 - id: D-045
@@ -1241,7 +1303,7 @@ defects:
   class: robustness
   detected_by: review
   severity: critical
-  status: fixed
+  status: contained
   what: >-
     Queueing ignores prerequisites; execute and record do not require an in-progress
     state; one deadline is shared across cells and may exceed the lease or session;
@@ -1254,7 +1316,12 @@ defects:
     against the wrong time, and a scientific success can be reported without durable
     persistence. These failures are worst during unattended operation.
   fix: >-
-    The lifecycle is now a closed machine. execute, record and release each refuse a
+    Every clause of this record is closed in code, independently reviewed, and `contained`
+    rather than `fixed`: three clauses of the source finding never reached this record's
+    summary and so were never repaired, and two residuals sit on the same lifecycle.
+
+    What the repair does. The lifecycle is now a closed machine. execute, record and release
+    each refuse a
     round that is not in-progress, so a terminal round cannot be rewritten; the queue and
     claim both refuse a hypothesis whose declared prerequisites have not been accepted,
     with a prose prerequisite counted as unmet rather than waved through; and the queue is
@@ -1270,6 +1337,47 @@ defects:
     --no-verify is retained deliberately: the pre-commit hook formats the whole tree and
     re-stages it, which would sweep other lanes' files into the round's commit and defeat
     the narrow pathspec this defect asked for.
+
+    The independent review, 2026-09-03, returned BOUNDED-CAVEAT. All twelve clauses of this
+    record were read against the code and measured, including the seven guards the lane left
+    without a permanent mutation proof: each was reverted in a copy and every one turns the
+    suite red, so the twelve-guard claim is verified in full. That is why this is contained
+    and not outstanding.
+
+    The three unrepaired clauses. This record's `what` summarises finding F-04 of the PR #14
+    review, and three clauses present in F-04 did not reach the summary and so were never
+    repaired. (1) "Record pre-run engine dirtiness before campaign writes." execute
+    (packing/src/sqpack/campaign/runner.py:1071) captures git status --porcelain after claim
+    has written the in-progress stub and re-rendered campaign/ledger.md, neither committed.
+    Measured 2026-09-03 from a verifiably clean tree, the recorded method.dirty is True: the
+    field is unconditionally True on every unattended round, carries no information about
+    the engine's starting tree, and is copied into subject and method by
+    artifact_fields_from_execution. Capture it in claim, before the stub write. (2) Per-cell
+    timeboxes. campaign/schemas/hypothesis.schema.yaml:187-193 and F-04 itself say the
+    timebox bounds one cell; campaign/README.md:390 says per round; execute takes the round
+    budget and divides it by the cell count, which no document states. Latent only because
+    both live recipes declare one cell, where the split is the identity, so the semantics
+    now live in the code alone and the code holds the casting vote. Decide it and write it
+    in the schema, the runbook and this record; if per-cell wins it is a code change, not a
+    doc change. (3) "The report can omit runnable-but-unrun work." Half repaired: safe_release
+    and the report's Health section now make the what-moved / what-died distinction, which
+    was the substantive part. A hypothesis that was runnable and simply not reached, because
+    the session budget ran out before its turn, still appears in neither done nor skipped,
+    because skipped holds only what queue filtered out. All three are conservative or merely
+    uninformative -- none flatters a result -- which is why this is a caveat and not a
+    discrepancy.
+
+    Two residuals on this lifecycle. run's failure policy is not total: a KeyError, TypeError
+    or YAML error from a malformed recipe or artifact escapes the
+    (GuardError, RefusalError, OSError) clause, so the finally still writes the report but
+    the round is neither released nor counted toward MAX_CONSECUTIVE_FAILURES. And the three
+    archive residuals recorded under D-044 are closed from here rather than there: they need
+    execute to append the digest of what it produced and record to compare it, which is a
+    change on this defect's own execute-to-record edge.
+
+    Not repaired here, and carried on think-ldq2. Agenda 016's W9 lane is bounded to D-044
+    and D-046 as scoped. A control-cell breach failing to stop the session is a separate
+    declared stop condition rather than a clause of this defect, and is recorded as D-426.
   regression: >-
     tests/test_campaign_runner_trust_boundary.py covers the lifecycle guards. execute,
     record and release each refuse a terminal round and recording the same round twice is
@@ -1281,6 +1389,14 @@ defects:
     reached, and still writes its report when a step refuses before or after the verdict.
     The lease-expiry, terminal-round and prerequisite guards are each shown load-bearing
     against a copy of the module with that one repair reverted.
+
+    Two properties of that list, established by the 2026-09-03 review. Every one of the
+    twelve guards, including the seven with no permanent mutation proof, turns the suite red
+    when reverted in a copy, so the coverage claim holds. And
+    test_each_cell_gets_its_own_share_of_the_timebox is timing-sensitive: with a three-second
+    round budget over two cells, a loaded machine that overruns the first cell's share pushes
+    the second past its own start and fails the test. The stricter assertion that made the
+    test load-bearing also made it fragile, in a suite already at its 900-second step budget.
   bead: think-ldq2
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 - id: D-047
@@ -12743,7 +12859,7 @@ defects:
   recurrence_of: D-144
   recorded_in: packing/src/sqpack/local_rigidity/controls.py
 - id: D-425
-  title: Coordinator snapshots committed the W9 lane's disabled runner guards to a shared branch
+  title: A commit titled "restore" shipped the widest disabled runner guard to a shared branch
   date: '2026-09-03'
   layer: tooling
   class: robustness
@@ -12753,20 +12869,24 @@ defects:
   status: fixed
   what: >-
     The W9 lane was mutation-testing `record()`'s guards by editing
-    `packing/src/sqpack/campaign/runner.py` in the shared working tree, and the
-    coordinator's periodic work-in-progress snapshots committed the mutants and pushed
-    them.
+    `packing/src/sqpack/campaign/runner.py` in the shared working tree, and two commits
+    carrying a live mutant reached the shared branch. Only one of the two is a snapshot,
+    and the distinction is the entry: the wider hole was shipped by a hand-written repair.
 
-    Two commits carry a dead guard, and they are not the same mutation. `f8ccd541`
-    short-circuits the inner digest comparison, `elif stored.get("archive_sha256") !=
-    verification["archive_sha256"]:` to `elif False:`. `a9c5fdcc`, whose subject is
-    "restore the archive-moved refusal the previous snapshot disabled", restores that
-    `elif` and in the same diff turns the enclosing `if archived:` into `if False:` --
-    trading a narrow mutation for the widest one available while its message said the guard
-    was back. That is the shape a shared tree produces: the lane had moved its mutation
-    between 08:10:31Z and 08:13:00Z, and a repair written against the file rather than
-    against the diff swept up whatever was live. `7d24225a` restores `if archived:`, and
-    `runner.py` is byte-identical to `6309e1f4` from there on.
+    The two commits do not carry the same mutation. `f8ccd541`, the coordinator's
+    work-in-progress snapshot, captured the lane's narrow mutant: the inner digest
+    comparison `elif stored.get("archive_sha256") != verification["archive_sha256"]:`
+    short-circuited to `elif False:`. `a9c5fdcc` is not a snapshot. Its subject is "fix:
+    restore the archive-moved refusal the previous snapshot disabled", it is the commit that
+    shipped `if False:` over the whole archive-verification block, and it is the only commit
+    on the branch that ever carried that state: its diff restores the inner `elif` and in
+    the same hunk turns the enclosing `if archived:` into `if False:`, trading a narrow
+    mutation for the widest one available while its message said the guard was back. The
+    next commit's own subject -- "re-enable the archive verification block, this time
+    completely" -- admits it. That is the shape a shared tree produces: the lane had moved
+    its mutation between 08:10:31Z and 08:13:00Z, and a repair written against the file
+    rather than against the diff swept up whatever was live. `7d24225a` restores
+    `if archived:`, and `runner.py` is byte-identical to `6309e1f4` from there on.
 
     Two claims in those messages do not survive checking, and they are recorded here
     because this log is also where a message is held to its tree. `7d24225a` says both
@@ -12809,14 +12929,91 @@ defects:
     disabled-branch shapes that `7d24225a`'s message describes is a coordinator practice,
     not an artifact -- `packing/devtools/` holds no such check.
   regression: >-
-    The detector already existed and was not run.
-    `test_record_refuses_an_archive_edited_after_it_was_verified` fails against both mutant
-    commits -- 1 failed and 54 passed at `f8ccd541`, the same single failure at `a9c5fdcc`,
-    measured by extracting each commit into a scratch tree and running the suite against it
-    -- so `packing-validate --push`, which runs the tests, would have refused both. The
-    pre-snapshot gate ran `ruff`, `ruff format` and `basedpyright` instead, and on the
-    narrower mutation all three are clean: a dead branch is syntactically perfect. The
-    linters have something to say only when the dead branch orphans a binding, as
-    `a9c5fdcc`'s did and its message denied. Nothing added here closes the gap between the
-    tier that would have caught this and the tier the snapshot ran.
+    The detector already existed, took under nine seconds, and was not run. Measured on
+    2026-09-03 by extracting each commit into a scratch tree and running that commit's own
+    trust-boundary file against that commit's own runner: `f8ccd541` gives 1 failed and 54
+    passed in 7.40s, on
+    `test_record_refuses_an_archive_edited_after_it_was_verified`; `a9c5fdcc` gives 3 failed
+    and 53 passed in 7.58s, adding `test_record_refuses_a_forged_result_line` and
+    `test_a_supervised_round_records_a_verified_verdict` -- the exact three a mutation
+    analysis of `if archived:` predicts, since with the block dead no verification receipt is
+    appended and no guard row is written. So `packing-validate --push`, which runs the tests,
+    would have refused both, and so would the one file on its own.
+
+    That is the lesson, and it is not the one first drawn. The first version of this entry
+    said the finding was that `ruff`, `ruff format` and `basedpyright` are clean on a guard
+    short-circuited to `if False:` because a dead branch is syntactically perfect. That
+    remains true and is incidental: the actionable failure is an ordering one, in that a
+    commit went out red on the one guard the whole block is about while the suite that
+    catches it in eight seconds had just been written by the same lane and was not run
+    before committing. The linter observation survives only as a bound on the cheaper tier:
+    checked here, `ruff` is clean on `f8ccd541`'s narrow mutation and reports `RUF059` on
+    `a9c5fdcc`, whose dead branch orphans the `archived` binding -- which that commit's
+    message denied. Nothing added here closes the gap between the tier that would have
+    caught this and the tier that ran.
   recorded_in: packing/tests/test_campaign_runner_trust_boundary.py
+- id: D-426
+  title: A control-cell breach does not stop the unattended session
+  date: '2026-09-03'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: ten days and one repair of the loop itself, from the runner's first session loop at 8f53f8e3 on 2026-08-24
+  severity: high
+  status: outstanding
+  what: >-
+    `packing/campaign/README.md:393` declares the session stop conditions: "Stop, do not
+    adapt, on: budget exhausted; queue empty; three consecutive guard refusals or crashes;
+    a control cell breaching; any invariant check failing; or a decision that needs a
+    human." The runner does not honour the control-cell clause.
+
+    A breach reaches `decide` (`packing/src/sqpack/campaign/runner.py:1202`), which returns
+    `rejected` with `stopped_by: "guard"` and says why in its own reason string -- "the
+    instrument is suspect rather than the strategy good ... Clause 4 rejects regardless of
+    outcome". `record` then returns that decision through the ordinary path, so back in
+    `run` the round counts as completed: `failures` is reset to 0 and the loop proceeds to
+    the next hypothesis, on the same instrument the round just declared suspect. `run` never
+    reads `stopped_by`, so a guard breach is indistinguishable there from an ordinary
+    rejection. `abnormal` is set only by `GateRunningError` or by
+    `MAX_CONSECUTIVE_FAILURES`, so the session also exits 0.
+
+    Checked rather than argued, 2026-09-03: `control_breaches([Cell(16, [3.9])])` is
+    non-empty, `decide` returns `rejected` with `stopped_by: "guard"`, and `run`'s body
+    contains no reference to `stopped_by`.
+
+    The declared rule says stop; the runner adapts. This is not a clause of D-046 -- neither
+    that record nor its source finding F-04 names it -- and it is recorded separately so the
+    log keeps one date, one detector and one latency per finding.
+  consequence: >-
+    Bounded today and not bounded by design. `queue` will skip the breached hypothesis,
+    because its decision is now terminal, but nothing stops the other queued hypotheses from
+    running against the instrument whose control just failed. Their rounds are then recorded
+    through the ordinary path and reach a reviewer as ordinary measurements, the strongest
+    of them `unresolved` -- clauses 1-4 passed, held for review -- with nothing in the round
+    or the session report marking them as taken after a breach. That overstates what those
+    rounds are evidence of, which is the flattering direction, and it is precisely the
+    unattended failure mode the trust-boundary block exists to close.
+
+    Nothing has been recorded through it. `sqsearch` is not built in this environment, no
+    live round has run, and `SYNOPSIS.md:87` carries the numerical runner as NO-GO for
+    unattended execution. The exposure is what a future unattended session would do, not a
+    result already taken.
+  fix: >-
+    None yet, and none here: Agenda 016's W9 lane is bounded to D-044 and D-046 as scoped
+    and may not widen to a finding adjacent to them.
+
+    The remedy is small and belongs with the rest of the lifecycle work on `think-ldq2`:
+    have `run` read the decision's `stopped_by`, and treat a `guard` stop the way it already
+    treats `GateRunningError` -- release the round, set `abnormal`, and break -- so the
+    session ends non-zero on the declared condition instead of continuing. Whether an
+    invariant-check failure, the other clause of the same sentence, needs the same treatment
+    should be settled at the same time.
+  regression: >-
+    none. The breach itself is well covered -- `control_breaches` and `decide` are both
+    tested -- and nothing tests what the session does next, which is where the declared rule
+    lives. The D-046 repair rewrote this exact loop's failure policy, widening its `except`
+    clause and adding `safe_release`, and left the breach path as it was, so a repair pass
+    over the surrounding code is not a detector for this class either.
+  bead: think-ldq2
+  recorded_in: packing/campaign/README.md
