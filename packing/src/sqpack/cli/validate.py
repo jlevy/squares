@@ -996,10 +996,12 @@ def _frontier_corpus(context: Context) -> str:
         )
     # 61 since 2026-08-31: the green17 certificate took over the verified lower
     # bounds at n = 17 and n = 18, so two open cases stopped citing Nagamochi.
-    if (formal_open, reported_open, nagamochi_count) != (65, 65, 61):
+    # 60 since 2026-09-03: the adopted Massaccesi certificate took over the verified
+    # lower bound at n = 19 by monotonicity (T-016), so a third case stopped citing it.
+    if (formal_open, reported_open, nagamochi_count) != (65, 65, 60):
         raise StepFailureError(
             "frontier corpus counts drifted: expected 65 formal-open, 65 reported-open, "
-            f"and 61 Nagamochi-bounded; observed {formal_open}, {reported_open}, "
+            f"and 60 Nagamochi-bounded; observed {formal_open}, {reported_open}, "
             f"and {nagamochi_count}"
         )
 

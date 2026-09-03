@@ -57,6 +57,9 @@ Results first established here, as far as the recorded source searches show, inc
 - **T-001 / T-002: `s(17) ≥ 4.426213` and `s(18) ≥ 4.426213`.** A sixteen-point
   unavoidable set is certified by exact rational cover verification and an independent
   interval branch-and-bound over the full pose space.
+  Both are superseded as the verified lower bound by the source-backed
+  `s(17), s(18), s(19) ≥ 4.5058` adopted on 2026-09-03, which is externally proposed
+  rather than first established here.
 - **T-010: `s(11) ≥ 2 + 4/√5`, repaired.** The printed 2003 Figure 14 unavoidability
   claim has a strict counterexample.
   A preregistered, source-distinct replacement point set restores the full lower-bound

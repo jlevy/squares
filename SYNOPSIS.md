@@ -1854,7 +1854,7 @@ Where the program has spent effort, and what came of it.
 | 16 | proved, `4` | `4` | proved not-below control | The valid replacement for the old `n=12` guard: any reported side below `4` is known to be invalid |
 | 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°`, `+39.80496°`, and `−36.62379°`. One round: [exp-011](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) reports `5.0`, the trivial `5×5` grid, on all five binary64 screening seeds |
 | 61, 78, 97 | open, `m² − 3` | `8`, `9`, `10` (grids) | opportunistic slot | The narrowest gaps in the table. An analytic Cleemann-style attempt at `arctan(3/4)` is registered and **not yet made** |
-| 1–100 | 35 proved, 65 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](packing/frontier/README.md); 63 of the 65 open cases are bounded below by Nagamochi’s general theorem |
+| 1–100 | 35 proved, 65 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](packing/frontier/README.md); 60 of the 65 open cases are bounded below by Nagamochi’s general theorem |
 
 Three facts about this table drive the strategy.
 
@@ -3713,7 +3713,7 @@ Each entry names what this project relies on it for.
 - Erdős, P. and Graham, R. L. (1975). *On packing squares with equal squares.* The
   asymptotic waste line of work.
 - Nagamochi, H. (2005). *Packing unit squares in a rectangle.* The general lower bound
-  covering 63 of the 65 open cases in the corpus.
+  covering 60 of the 65 open cases in the corpus.
 - Montanher, T. et al.
   (2018). *Rigorous packing of unit squares into a circle.* The only rigorous
   computer-assisted optimality proof for rotatable unit squares in any container, and
