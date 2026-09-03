@@ -2933,17 +2933,22 @@ registers the BC-152 proof packet: an intrinsic half-angle chart injective on al
 which the local feasible system is exactly the twenty active rows, T-012’s 28 Farkas
 certificates and self-stress replaying on the chart with `w · q_chart = -2√2 < 0`, and
 an order-`2m` coefficient induction that contradicts a nonconstant analytic feasible
-arc. None of that decides H-060, which stays **unresolved** with `instrument_ready`
-false. Its registered criterion accepts only on a *checked* chart and a *reviewed*
+arc. None of that decides H-060, which stays **unresolved** although `instrument_ready` is
+now true. Its registered criterion accepts only on a *checked* chart and a *reviewed*
 argument: every number here was computed by read-only scratchpad sympy rather than by a
 repository instrument, no independent reviewer has read the argument, and the
 curve-selection step rests on a quotation from one of BCR’s own authors, in notes he calls
 provisional, plus four uses by a single author group, rather than on the printed BCR text;
 the packet’s second secondary source was withdrawn as an over-attribution, so nothing
-independent corroborates it. A separate lane’s instrument reports ready, but that is its
-author’s claim, its independent readiness review returned BOUNDED-CAVEAT rather than a pass
-— twice, the second time conditional on a provenance item still open — and it does not
-decide isolation. The corroborating
+independent corroborates it.
+A separate lane’s instrument passed its independent readiness review on the third round,
+after two BOUNDED-CAVEAT rounds and a repair, and that pass is what moved the flag: the
+reviewer replayed it from a clean root and found exactly one differing leaf, the pinned
+commit, which closed the provenance item the second round had left open.
+The pass certifies the instrument, not the hypothesis.
+No target determination ran, and the instrument sets `isolation_decided` false
+unconditionally, so it cannot decide isolation even in principle.
+The corroborating
 second-order-sufficiency proof in the packet reaches the same conclusion from weaker
 hypotheses and discharges nothing, because acceptance was preregistered on the
 curve-selection route. Nothing is promoted: no frontier property, result-register entry
