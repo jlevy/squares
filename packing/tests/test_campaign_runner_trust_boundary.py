@@ -14,6 +14,7 @@ persistence failure, and broad staging.
 from __future__ import annotations
 
 import ast
+import importlib.util
 import json
 import os
 import stat
@@ -865,3 +866,99 @@ def test_the_child_verifier_is_reached_by_re_entering_this_module() -> None:
 
     assert "verify-archive" in literals
     assert runner.RUNNER_MODULE == "sqpack.campaign.runner"
+
+
+# --- the guards are load-bearing, checked against an unrepaired copy ---------------
+#
+# A regression that also passes against the unrepaired runner is not evidence. Each test
+# below reverts exactly one repair in a COPY of the module under `tmp_path`, imports the
+# copy, and shows it accepts what the repaired module refuses. Nothing here edits the
+# module in the working tree: a mutation left in a shared tree is a live safety hole, and
+# `ruff`, `ruff format` and `basedpyright` are all clean on a guard short-circuited to
+# `if False:` -- a dead branch is syntactically perfect.
+
+MUTATIONS: dict[str, tuple[str, str]] = {
+    "pose": ("    validated_pose(rec, int(n))\n    return rec", "    return rec"),
+    "attribution": (
+        "                if expected is not None and actual != expected:",
+        "                if False:",
+    ),
+    "lease": ("    if left <= 0:", "    if False:"),
+    "transition": (
+        "    if decision == IN_PROGRESS:\n        return",
+        "    if True:\n        return",
+    ),
+    "prereqs": ("    unmet: list[str] = []", "    return []\n    unmet: list[str] = []"),
+}
+
+
+def _unrepaired(tmp_path: Path, name: str) -> Any:
+    """Import a copy of the runner with exactly one repair reverted."""
+    old, new = MUTATIONS[name]
+    source = Path(runner.__file__).read_text(encoding="utf-8")
+    assert old in source, f"mutation anchor for {name!r} no longer matches the source"
+    target = tmp_path / f"unrepaired_{name}.py"
+    target.write_text(source.replace(old, new, 1), encoding="utf-8")
+    spec = importlib.util.spec_from_file_location(f"runner_unrepaired_{name}", target)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    # `dataclasses` resolves annotations through `sys.modules[cls.__module__]`, so the
+    # copy has to be registered while it executes. It is removed again immediately: the
+    # unrepaired module is evidence for one assertion, not something to leave importable.
+    sys.modules[spec.name] = module
+    try:
+        spec.loader.exec_module(module)
+    finally:
+        sys.modules.pop(spec.name, None)
+    return module
+
+
+def test_the_pose_requirement_is_load_bearing(tmp_path: Path) -> None:
+    poseless = '{"n": 11, "seed": 1, "best_side": 3.9, "overlap": 0}'
+
+    with pytest.raises(runner.GuardError, match="no pose"):
+        runner.validated_record(poseless)
+
+    assert _unrepaired(tmp_path, "pose").validated_record(poseless)["best_side"] == 3.9
+
+
+def test_the_attribution_check_is_load_bearing(tmp_path: Path) -> None:
+    foreign = runner.grid_result_line(9, 1)
+    sink = tmp_path / "sink.jsonl"
+
+    with sink.open("w") as fh, pytest.raises(runner.GuardError, match="claims n=9"):
+        runner.read_lines(foreign, fh, expect_n=4, expect_seed=1)
+
+    with sink.open("w") as fh:
+        best = _unrepaired(tmp_path, "attribution").read_lines(
+            foreign, fh, expect_n=4, expect_seed=1
+        )
+    assert best == 3.0
+
+
+def test_the_lease_expiry_check_is_load_bearing(tmp_path: Path) -> None:
+    stale = {"lease": {"expires": (runner.now() - timedelta(minutes=5)).isoformat()}}
+
+    with pytest.raises(runner.RefusalError, match="lease expired"):
+        runner.lease_seconds_remaining("exp-1", stale)
+
+    assert _unrepaired(tmp_path, "lease").lease_seconds_remaining("exp-1", stale) < 0
+
+
+def test_the_terminal_round_guard_is_load_bearing(tmp_path: Path) -> None:
+    terminal = {"verdict": {"decision": "rejected"}}
+
+    with pytest.raises(runner.RefusalError, match="not in-progress"):
+        runner.require_in_progress("exp-1", terminal, "record")
+
+    assert (
+        _unrepaired(tmp_path, "transition").require_in_progress("exp-1", terminal, "record")
+        is None
+    )
+
+
+def test_the_prerequisite_gate_is_load_bearing(tmp_path: Path) -> None:
+    blocked = {"prereqs": ["H-011"]}
+
+    assert runner.unmet_prereqs(blocked, []) == ["H-011 has not been accepted"]
+    assert _unrepaired(tmp_path, "prereqs").unmet_prereqs(blocked, []) == []
