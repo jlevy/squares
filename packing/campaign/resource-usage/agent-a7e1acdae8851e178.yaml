@@ -1,0 +1,587 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: agent-a7e1acdae8851e178.jsonl
+    sha256: 2bc3daaa6c64a4ebdb832e2646463df4f3172e2c6038bc1876e7fda6ad63b0a8
+    bytes: 1084844
+    records: 517
+    session_id: 21ae3bfc-58a6-55fc-90e3-6e29d229a7f1
+    harness_versions:
+    - 2.1.259
+  span:
+    started_at: '2026-09-03T07:24:08.991Z'
+    ended_at: '2026-09-03T07:54:33.281Z'
+    wall_seconds: 1824.29
+  turns:
+    assistant: 262
+    sidechain: 262
+    by_model:
+      claude-opus-5: 262
+    by_thinking_level:
+      xhigh: 262
+    by_model_and_thinking_level:
+      claude-opus-5 @ xhigh: 262
+    by_branch:
+      claude/squares-pr76-overnight-run-tpc888: 262
+    latency:
+      count: 262
+      total_seconds: 1284.133
+      median_seconds: 1.945
+      max_seconds: 84.767
+  tokens:
+    cache_creation_input_tokens: 599884
+    cache_read_input_tokens: 46856165
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 599884
+    input_tokens: 524
+    output_tokens: 13902
+    thinking_tokens: 7665
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 599884
+      cache_read_input_tokens: 46856165
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 599884
+      input_tokens: 524
+      output_tokens: 13902
+      thinking_tokens: 7665
+  tool_calls:
+    total: 144
+    total_seconds: 691.704
+    share_of_wall: 0.3792
+    errors: 2
+    denied: 1
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 11
+      total_seconds: 30.222
+      median_seconds: 1.408
+      max_seconds: 12.991
+    by_tool:
+      Bash:
+        count: 144
+        total_seconds: 691.704
+        median_seconds: 1.161
+        max_seconds: 121.266
+    by_command:
+      devtools.check_synopsis && devtools.check_control_anchors && sqpack.campaign.ledger && ruff && ruff:
+        count: 1
+        total_seconds: 121.266
+        median_seconds: 121.266
+        max_seconds: 121.266
+      devtools.check_session_clocks && devtools.check_session_rollups:
+        count: 1
+        total_seconds: 117.962
+        median_seconds: 117.962
+        max_seconds: 117.962
+      timeout uv run python -m devtools.check_synopsis:
+        count: 5
+        total_seconds: 72.193
+        median_seconds: 2.348
+        max_seconds: 47.351
+      timeout uv run python -m sqpack.campaign.ledger:
+        count: 3
+        total_seconds: 63.773
+        median_seconds: 13.178
+        max_seconds: 46.551
+      timeout uv run python -m devtools.check_control_anchors:
+        count: 2
+        total_seconds: 61.491
+        median_seconds: 30.745
+        max_seconds: 59.241
+      timeout uv run packing-validate:
+        count: 5
+        total_seconds: 56.138
+        median_seconds: 12.546
+        max_seconds: 17.524
+      sed:
+        count: 27
+        total_seconds: 25.547
+        median_seconds: 0.061
+        max_seconds: 19.396
+      head:
+        count: 15
+        total_seconds: 17.511
+        median_seconds: 0.096
+        max_seconds: 10.697
+      ^\* \* \*$ && diff && sha256sum:
+        count: 3
+        total_seconds: 16.997
+        median_seconds: 4.012
+        max_seconds: 11.829
+      ls:
+        count: 8
+        total_seconds: 15.069
+        median_seconds: 0.082
+        max_seconds: 13.344
+      awk:
+        count: 1
+        total_seconds: 13.355
+        median_seconds: 13.355
+        max_seconds: 13.355
+      rm && mkdir && +%s.%N) && python3 && python3 && print_polys.py && +%s.%N):
+        count: 1
+        total_seconds: 12.991
+        median_seconds: 12.991
+        max_seconds: 12.991
+      packing-validate && FAILED:
+        count: 1
+        total_seconds: 11.893
+        median_seconds: 11.893
+        max_seconds: 11.893
+      python3:
+        count: 4
+        total_seconds: 8.546
+        median_seconds: 1.939
+        max_seconds: 3.329
+      timeout python3 verify_chart.py:
+        count: 1
+        total_seconds: 7.37
+        median_seconds: 7.37
+        max_seconds: 7.37
+      timeout python3:
+        count: 2
+        total_seconds: 5.318
+        median_seconds: 2.659
+        max_seconds: 2.964
+      timeout python3 print_polys.py:
+        count: 1
+        total_seconds: 4.052
+        median_seconds: 4.052
+        max_seconds: 4.052
+      ruff && ruff:
+        count: 3
+        total_seconds: 3.988
+        median_seconds: 1.191
+        max_seconds: 1.647
+      git && git:
+        count: 3
+        total_seconds: 3.902
+        median_seconds: 1.208
+        max_seconds: 1.652
+      ? the && the && and && a && a && and && mkdir && python3 && print_polys.py && the &&
+        reject && otherwise && this && two && the && none && that && **neither && `BC-153`
+        && rigidity && global && rigidity && applicability && any
+      : count: 1
+        total_seconds: 3.564
+        median_seconds: 3.564
+        max_seconds: 3.564
+      timeout uv run python -m devtools.run_negative_controls:
+        count: 2
+        total_seconds: 3.285
+        median_seconds: 1.643
+        max_seconds: 1.696
+      git show:
+        count: 2
+        total_seconds: 3.094
+        median_seconds: 1.547
+        max_seconds: 1.823
+      timeout uv run python -m devtools.check_documentation:
+        count: 1
+        total_seconds: 3.021
+        median_seconds: 3.021
+        max_seconds: 3.021
+      grep:
+        count: 14
+        total_seconds: 2.635
+        median_seconds: 0.066
+        max_seconds: 1.147
+      sqpack.campaign.ledger && sqpack.campaign.ledger:
+        count: 1
+        total_seconds: 2.631
+        median_seconds: 2.631
+        max_seconds: 2.631
+      diff:
+        count: 1
+        total_seconds: 2.357
+        median_seconds: 2.357
+        max_seconds: 2.357
+      git && ls && sqpack.campaign.ledger:
+        count: 1
+        total_seconds: 2.343
+        median_seconds: 2.343
+        max_seconds: 2.343
+      cut:
+        count: 1
+        total_seconds: 2.22
+        median_seconds: 2.22
+        max_seconds: 2.22
+      git status:
+        count: 1
+        total_seconds: 2.215
+        median_seconds: 2.215
+        max_seconds: 2.215
+      devtools.check_synopsis && devtools.check_control_anchors:
+        count: 1
+        total_seconds: 1.851
+        median_seconds: 1.851
+        max_seconds: 1.851
+      '    assurance: && ^    method: &&     decision:':
+        count: 1
+        total_seconds: 1.721
+        median_seconds: 1.721
+        max_seconds: 1.721
+      python3 make_record.py:
+        count: 1
+        total_seconds: 1.453
+        median_seconds: 1.453
+        max_seconds: 1.453
+      timeout uv run python:
+        count: 1
+        total_seconds: 1.408
+        median_seconds: 1.408
+        max_seconds: 1.408
+      rm && mkdir && cp && flowmark:
+        count: 1
+        total_seconds: 1.364
+        median_seconds: 1.364
+        max_seconds: 1.364
+      cd:
+        count: 4
+        total_seconds: 1.351
+        median_seconds: 0.071
+        max_seconds: 1.146
+      ls && find:
+        count: 1
+        total_seconds: 1.309
+        median_seconds: 1.309
+        max_seconds: 1.309
+      Trump’s exact pose is locally isolated:
+        count: 1
+        total_seconds: 1.293
+        median_seconds: 1.293
+        max_seconds: 1.293
+      find && git:
+        count: 1
+        total_seconds: 1.29
+        median_seconds: 1.29
+        max_seconds: 1.29
+      ? "H-060-n5-local-rigidity.md) && blocked && \n    Goebel’s && 0 && — && ,\n     &&\
+        \ H-060-n5-local-rigidity.md) && needs && \n    Goebel’s && 1 && 11s && \n    exp-057-h-058-n68-one-parent-localization.md)\
+        \ && 68 && calibration && H-058 && \n    side-semantics && literal && six-decimal\
+        \ && no && **unresolved** && n\n)\nswap(\n    exp057_rollup,\n    exp057_rollup\n\
+        \    +  && \n    exp-058-h-060-n5-chart-and-proof.md) && 5 && target && H-060 && scratchpad\
+        \ && no && all && \n    `w && no && **unresolved** && exp-057 && one && 1,000 && 16.6667\
+        \ && guard && \n    `11ce70ee` && n\n)\nswap(\n    exp057_cost,\n    exp057_cost\n\
+        \    +  && exp-058 && the && 11.33 && — && \n    dependency && — && exact && n,\n\
+        )\n\n# 5. Terminal-round aggregate and the stop-reason sentence beside it.\nswap(\n\
+        \    There && exp-057 && exp-057"
+      : count: 1
+        total_seconds: 1.263
+        median_seconds: 1.263
+        max_seconds: 1.263
+      ([a-z:
+        count: 1
+        total_seconds: 1.231
+        median_seconds: 1.231
+        max_seconds: 1.231
+    by_command_family:
+      project:
+        count: 23
+        total_seconds: 515.504
+        median_seconds: 10.233
+        max_seconds: 121.266
+      inspection:
+        count: 79
+        total_seconds: 81.115
+        median_seconds: 0.07
+        max_seconds: 19.396
+      other:
+        count: 16
+        total_seconds: 43.71
+        median_seconds: 1.373
+        max_seconds: 11.829
+      toolchain:
+        count: 10
+        total_seconds: 19.26
+        median_seconds: 1.613
+        max_seconds: 3.329
+      filesystem:
+        count: 3
+        total_seconds: 15.52
+        median_seconds: 1.364
+        max_seconds: 12.991
+      vcs:
+        count: 7
+        total_seconds: 11.554
+        median_seconds: 1.652
+        max_seconds: 2.343
+      shell:
+        count: 4
+        total_seconds: 1.351
+        median_seconds: 0.071
+        max_seconds: 1.146
+    invoked:
+      echo: 86
+      head: 61
+      cd: 59
+      sed: 47
+      grep: 41
+      tail: 32
+      ls: 18
+      the: 13
+      'no': 8
+      —: 8
+      cat: 7
+      find: 7
+      python3: 7
+      timeout uv run python -m sqpack.campaign.ledger: 7
+      timeout uv run python -m devtools.check_synopsis: 7
+      date: 6
+      git status: 6
+      sha256sum: 6
+      timeout uv run packing-validate: 6
+      cut: 6
+      sort: 5
+      exp-057: 5
+      uniq: 4
+      ruff check: 4
+      ruff format: 4
+      mkdir: 4
+      and: 4
+      ^\* \* \*$: 4
+      diff: 4
+      timeout uv run python -m devtools.check_control_anchors: 4
+      all: 3
+      exact: 3
+      '**unresolved**': 3
+      target: 3
+      exp-058: 3
+      timeout python3: 2
+      '`BC-153`': 2
+      rm: 2
+      +%s.%N): 2
+      python3 print_polys.py: 2
+      a: 2
+      rigidity: 2
+      git show: 2
+      H-060-n5-local-rigidity.md): 2
+      ? "\n    Goebel’s"
+      : 2
+      ? "\n    exp-058-h-060-n5-chart-and-proof.md)"
+      : 2
+      '5': 2
+      H-060: 2
+      scratchpad: 2
+      ? "\n    `w"
+      : 2
+      one: 2
+      '11.33': 2
+      ? "\n    dependency"
+      : 2
+      ? "\n    139.6m"
+      : 2
+      timeout uv run python -m devtools.run_negative_controls: 2
+      git branch: 1
+      wc: 1
+      tr: 1
+      git ls-files: 1
+      '    assurance:': 1
+      '^    method:': 1
+      '    decision:': 1
+      timeout python3 verify_chart.py: 1
+      timeout python3 print_polys.py: 1
+      A_chart: 1
+      Hess: 1
+      python3 make_record.py: 1
+      its: 1
+      neither: 1
+      BC-153: 1
+      File: 1
+      What: 1
+      '`verify_chart.py`': 1
+      pose: 1
+      '80': 1
+      '`A_chart': 1
+      '`print_polys.py`': 1
+      prints: 1
+      '`margins.py`': 1
+      '`midpoint_check.py`': 1
+      each: 1
+      '`control_exp034.py`': 1
+      pre-run: 1
+      '`c8_side_check.py`': 1
+      '`sosc_check.py`': 1
+      The: 1
+      retaining: 1
+      every: 1
+      reject: 1
+      otherwise: 1
+      this: 1
+      two: 1
+      none: 1
+      that: 1
+      '**neither': 1
+      global: 1
+      applicability: 1
+      any: 1
+      timeout uv run python -m devtools.check_documentation: 1
+      cp: 1
+      timeout uvx flowmark: 1
+      git log: 1
+      awk: 1
+      ([a-z: 1
+      Trump’s exact pose is locally isolated: 1
+      blocked: 1
+      '0': 1
+      ? ",\n    "
+      : 1
+      needs: 1
+      '1': 1
+      11s: 1
+      ? "\n    exp-057-h-058-n68-one-parent-localization.md)"
+      : 1
+      '68': 1
+      calibration: 1
+      H-058: 1
+      ? "\n    side-semantics"
+      : 1
+      literal: 1
+      six-decimal: 1
+      ? "n\n)\nswap(\n    exp057_rollup,\n    exp057_rollup\n    + "
+      : 1
+      1,000: 1
+      '16.6667': 1
+      guard: 1
+      ? "\n    `11ce70ee`"
+      : 1
+      ? "n\n)\nswap(\n    exp057_cost,\n    exp057_cost\n    + "
+      : 1
+      ? "n,\n)\n\n# 5. Terminal-round aggregate and the stop-reason sentence beside it.\n\
+        swap(\n    There"
+      : 1
+      timeout uv run python -m devtools.check_session_clocks: 1
+      timeout uv run python -m devtools.check_session_rollups: 1
+      '3': 1
+      ? ",\n    certificate"
+      : 1
+      '4': 1
+      ? "n\n)\nswap(\n    exp058_rollup,\n    exp058_rollup\n    + "
+      : 1
+      ? "\n    exp-059-h-052-n17-fresh-successor-completion.md)"
+      : 1
+      '17': 1
+      H-052: 1
+      fresh: 1
+      preregistered: 1
+      in-progress: 1
+      ? "n\n)\nswap(\n    exp058_cost,\n    exp058_cost\n    + "
+      : 1
+      exp-059: 1
+      '`2f112f4c`': 1
+      ? "n,\n)\n\n# D. Terminal-round aggregate.\nswap(\n    There"
+      : 1
+      timeout uv run python: 1
+      FAILED: 1
+    invoked_families:
+      inspection: 228
+      other: 178
+      shell: 151
+      project: 29
+      toolchain: 19
+      vcs: 11
+      filesystem: 7
+    by_shell_shape:
+      compound:
+        count: 86
+        total_seconds: 433.969
+        median_seconds: 1.149
+        max_seconds: 121.266
+      pipeline:
+        count: 27
+        total_seconds: 223.976
+        median_seconds: 2.037
+        max_seconds: 59.241
+      python_inline:
+        count: 5
+        total_seconds: 20.647
+        median_seconds: 1.579
+        max_seconds: 12.991
+      python_heredoc:
+        count: 6
+        total_seconds: 9.575
+        median_seconds: 1.216
+        max_seconds: 3.564
+      simple:
+        count: 20
+        total_seconds: 3.537
+        median_seconds: 0.059
+        max_seconds: 1.453
+    by_thinking_level:
+      xhigh:
+        count: 144
+        total_seconds: 691.704
+        median_seconds: 1.161
+        max_seconds: 121.266
+    shell_traits:
+      pipes: 97
+      substitutes: 21
+      redirects_output: 14
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

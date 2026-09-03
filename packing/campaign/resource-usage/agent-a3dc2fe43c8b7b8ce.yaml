@@ -1,0 +1,366 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: agent-a3dc2fe43c8b7b8ce.jsonl
+    sha256: 13d8546d26af2453bb431b942b01e572509875c252f7bfb94590523d89872e60
+    bytes: 477602
+    records: 139
+    session_id: 21ae3bfc-58a6-55fc-90e3-6e29d229a7f1
+    harness_versions:
+    - 2.1.259
+  span:
+    started_at: '2026-09-03T07:51:03.231Z'
+    ended_at: '2026-09-03T08:02:50.147Z'
+    wall_seconds: 706.916
+  turns:
+    assistant: 67
+    sidechain: 67
+    by_model:
+      claude-fable-5-1: 67
+    by_thinking_level:
+      xhigh: 67
+    by_model_and_thinking_level:
+      claude-fable-5-1 @ xhigh: 67
+    by_branch:
+      claude/squares-pr76-overnight-run-tpc888: 67
+    latency:
+      count: 67
+      total_seconds: 692.094
+      median_seconds: 1.718
+      max_seconds: 196.906
+  tokens:
+    cache_creation_input_tokens: 762708
+    cache_read_input_tokens: 5438941
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 762708
+    input_tokens: 8198
+    output_tokens: 3996
+    thinking_tokens: 1186
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 762708
+      cache_read_input_tokens: 5438941
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 762708
+      input_tokens: 8198
+      output_tokens: 3996
+      thinking_tokens: 1186
+  tool_calls:
+    total: 42
+    total_seconds: 16.723
+    share_of_wall: 0.0237
+    errors: 1
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 1
+      total_seconds: 1.393
+      median_seconds: 1.393
+      max_seconds: 1.393
+    by_tool:
+      Bash:
+        count: 42
+        total_seconds: 16.723
+        median_seconds: 0.075
+        max_seconds: 1.809
+    by_command:
+      grep:
+        count: 7
+        total_seconds: 3.853
+        median_seconds: 0.126
+        max_seconds: 1.809
+      git fetch:
+        count: 1
+        total_seconds: 1.782
+        median_seconds: 1.782
+        max_seconds: 1.782
+      ? list && behind && even && the && T-003 && session && no && bentz-2010-optimal-packings-13-and-46.md`
+        && Claim && Status && Basis && `s(17), && computationally && E-green17-sixteen-point-lower,
+        && ceiling && computationally && T-003, && ceiling && prose && the && asserted-but-unverified
+        && prose && **Where && Fraction` && the && (c) && (d) && it && no && sign && the &&
+        inner-corner && `1 && depth && `8 && and, && non-degeneracy && every && the && Fraction`
+        && this && bottom && left && right && all && the && here && the && u && 2`, && v &&
+        2` && hence && passage && the && containment && at && `quad` && `.text()` && the &&
+        S7 && an && T-003 && `n-018` && accept && refuse && Slice && Estimate && Confidence
+        && T1 && 3--5 && about && the && T3 && 1--2 && about && T5 && 1--2 && about && **Single-method
+        && **6--9 && **moderate** && T4, && 1--3 && low, && a && the && git
+      : count: 1
+        total_seconds: 1.64
+        median_seconds: 1.64
+        max_seconds: 1.64
+      sed:
+        count: 15
+        total_seconds: 1.607
+        median_seconds: 0.063
+        max_seconds: 0.684
+      git && git:
+        count: 1
+        total_seconds: 1.568
+        median_seconds: 1.568
+        max_seconds: 1.568
+      python3 scratch_check.py:
+        count: 1
+        total_seconds: 1.486
+        median_seconds: 1.486
+        max_seconds: 1.486
+      mkdir && HALF && u && and && v && half && cy && cx && cy:
+        count: 1
+        total_seconds: 1.393
+        median_seconds: 1.393
+        max_seconds: 1.393
+      '{if(f':
+        count: 1
+        total_seconds: 1.287
+        median_seconds: 1.287
+        max_seconds: 1.287
+      git show:
+        count: 1
+        total_seconds: 1.102
+        median_seconds: 1.102
+        max_seconds: 1.102
+      head:
+        count: 7
+        total_seconds: 0.486
+        median_seconds: 0.065
+        max_seconds: 0.1
+      ls:
+        count: 3
+        total_seconds: 0.222
+        median_seconds: 0.073
+        max_seconds: 0.08
+      wc:
+        count: 2
+        total_seconds: 0.188
+        median_seconds: 0.094
+        max_seconds: 0.13
+      ls && find:
+        count: 1
+        total_seconds: 0.109
+        median_seconds: 0.109
+        max_seconds: 0.109
+    by_command_family:
+      inspection:
+        count: 35
+        total_seconds: 6.465
+        median_seconds: 0.069
+        max_seconds: 1.809
+      vcs:
+        count: 3
+        total_seconds: 4.452
+        median_seconds: 1.568
+        max_seconds: 1.782
+      other:
+        count: 3
+        total_seconds: 4.413
+        median_seconds: 1.486
+        max_seconds: 1.64
+      filesystem:
+        count: 1
+        total_seconds: 1.393
+        median_seconds: 1.393
+        max_seconds: 1.393
+    invoked:
+      echo: 43
+      head: 41
+      sed: 30
+      cd: 17
+      grep: 13
+      the: 11
+      ls: 4
+      wc: 4
+      cat: 4
+      date: 3
+      about: 3
+      sort: 2
+      u: 2
+      v: 2
+      cy: 2
+      T-003: 2
+      'no': 2
+      computationally: 2
+      ceiling: 2
+      prose: 2
+      Fraction`: 2
+      1--2: 2
+      git branch: 1
+      git log: 1
+      awk: 1
+      git fetch: 1
+      tail: 1
+      uniq: 1
+      git show: 1
+      '{if(f': 1
+      find: 1
+      mkdir: 1
+      HALF: 1
+      and: 1
+      half: 1
+      cx: 1
+      python3 scratch_check.py: 1
+      list: 1
+      behind: 1
+      even: 1
+      session: 1
+      bentz-2010-optimal-packings-13-and-46.md`: 1
+      Claim: 1
+      Status: 1
+      Basis: 1
+      '`s(17),': 1
+      E-green17-sixteen-point-lower,: 1
+      T-003,: 1
+      asserted-but-unverified: 1
+      '**Where': 1
+      (c): 1
+      (d): 1
+      it: 1
+      sign: 1
+      inner-corner: 1
+      '`1': 1
+      depth: 1
+      '`8': 1
+      and,: 1
+      non-degeneracy: 1
+      every: 1
+      this: 1
+      bottom: 1
+      left: 1
+      right: 1
+      all: 1
+      here: 1
+      2`,: 1
+      2`: 1
+      hence: 1
+      passage: 1
+      containment: 1
+      at: 1
+      '`quad`': 1
+      '`.text()`': 1
+      S7: 1
+      an: 1
+      '`n-018`': 1
+      accept: 1
+      refuse: 1
+      Slice: 1
+      Estimate: 1
+      Confidence: 1
+      T1: 1
+      3--5: 1
+      T3: 1
+      T5: 1
+      '**Single-method': 1
+      '**6--9': 1
+      '**moderate**': 1
+      T4,: 1
+      1--3: 1
+      low,: 1
+      a: 1
+      git status: 1
+    invoked_families:
+      inspection: 102
+      other: 97
+      shell: 63
+      vcs: 5
+      filesystem: 1
+    by_shell_shape:
+      compound:
+        count: 36
+        total_seconds: 12.827
+        median_seconds: 0.075
+        max_seconds: 1.809
+      heredoc:
+        count: 1
+        total_seconds: 1.64
+        median_seconds: 1.64
+        max_seconds: 1.64
+      python_heredoc:
+        count: 1
+        total_seconds: 1.393
+        median_seconds: 1.393
+        max_seconds: 1.393
+      simple:
+        count: 3
+        total_seconds: 0.808
+        median_seconds: 0.062
+        max_seconds: 0.684
+      pipeline:
+        count: 1
+        total_seconds: 0.055
+        median_seconds: 0.055
+        max_seconds: 0.055
+    by_thinking_level:
+      xhigh:
+        count: 42
+        total_seconds: 16.723
+        median_seconds: 0.075
+        max_seconds: 1.809
+    shell_traits:
+      pipes: 29
+      redirects_output: 4
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'
