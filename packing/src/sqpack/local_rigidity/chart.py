@@ -299,6 +299,64 @@ class Chart:
                 )
         return checks
 
+    def pose_shape_certificate(self) -> list[IdentityCheck]:
+        """Exactly: the base pose really is unit squares, wound counter-clockwise.
+
+        Everything downstream reads these as given -- the outward normal formula
+        `(dy, -dx)` needs counter-clockwise winding, and the constant `1/2` in every pair
+        inequality is the inradius of a unit square. The `BC-153` review found them
+        assumed rather than checked, which was correct, so they are checked here: a pose
+        wound clockwise would give inward normals and invert every separating-axis test
+        while still producing a full receipt.
+        """
+        checks: list[IdentityCheck] = []
+        one = self.field.one
+        half = self.field.rational(1) / self.field.rational(2)
+        for square in range(self.pose.count):
+            corners = self.pose.corners[square]
+            count = len(corners)
+            twice_area = self.field.zero
+            for index in range(count):
+                (ax, ay), (bx, by) = corners[index], corners[(index + 1) % count]
+                twice_area = twice_area + (ax * by - bx * ay)
+            checks.append(
+                IdentityCheck(
+                    name=f"pose/counter-clockwise/square-{square}",
+                    statement="twice the shoelace area is exactly +2, so the winding is CCW",
+                    holds=(twice_area - self.field.rational(2)).is_zero(),
+                )
+            )
+            cx, cy = self.pose.centres[square]
+            for index in range(count):
+                (ax, ay) = corners[index]
+                (bx, by) = corners[(index + 1) % count]
+                (dx, dy) = corners[(index + 2) % count]
+                first = (bx - ax, by - ay)
+                second = (dx - bx, dy - by)
+                checks.append(
+                    IdentityCheck(
+                        name=f"pose/unit-edge/square-{square}/edge-{index}",
+                        statement="the edge vector has length exactly one",
+                        holds=(first[0] * first[0] + first[1] * first[1] - one).is_zero(),
+                    )
+                )
+                checks.append(
+                    IdentityCheck(
+                        name=f"pose/right-angle/square-{square}/corner-{index}",
+                        statement="consecutive edge vectors are exactly orthogonal",
+                        holds=(first[0] * second[0] + first[1] * second[1]).is_zero(),
+                    )
+                )
+                nx, ny = self.pose.base_normal(square, index)
+                checks.append(
+                    IdentityCheck(
+                        name=f"pose/inradius/square-{square}/edge-{index}",
+                        statement="the centre is exactly 1/2 inside this edge's line",
+                        holds=(nx * (ax - cx) + ny * (ay - cy) - half).is_zero(),
+                    )
+                )
+        return checks
+
     def injectivity_certificate(self) -> list[IdentityCheck]:
         """Exactly: the half-angle substitution is injective with a punctured-circle image.
 
@@ -383,6 +441,7 @@ class Chart:
             for group in (
                 self.orthogonality_certificate(),
                 self.base_normal_certificate(),
+                self.pose_shape_certificate(),
                 self.injectivity_certificate(),
             )
             for check in group

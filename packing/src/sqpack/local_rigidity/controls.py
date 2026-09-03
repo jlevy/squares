@@ -39,11 +39,12 @@ eight ways this particular instrument could be wrong and still print a clean rec
 from __future__ import annotations
 
 import copy
+import dataclasses
 from dataclasses import dataclass
 from typing import Any
 
 from sqpack.field import FieldElement, NumberField
-from sqpack.local_rigidity.binding import T012System, embed
+from sqpack.local_rigidity.binding import T012System, bind
 from sqpack.local_rigidity.chart import (
     DOF,
     BasePose,
@@ -54,6 +55,7 @@ from sqpack.local_rigidity.chart import (
 from sqpack.local_rigidity.instrument import Determination, probe_axes, probe_family
 from sqpack.local_rigidity.receipt import build_payload, digest, element_algebraic
 from sqpack.local_rigidity.system import (
+    ActiveMarginError,
     ConstraintSystem,
     IncompleteEnumerationError,
     InequalityBook,
@@ -62,6 +64,7 @@ from sqpack.local_rigidity.system import (
     build_book,
     build_system,
     is_feasible,
+    require_active_margins_zero,
 )
 
 
@@ -85,78 +88,147 @@ class ControlOutcome:
         }
 
 
+# -- mutating the instrument's own inputs, so the controls exercise its refusals ----
+
+
+def with_active_pair(system: ConstraintSystem, report, constraint) -> ConstraintSystem:
+    """The same system, with one touching pair's declared contact replaced.
+
+    Public because the tests mutate a system the same way the controls do, and reaching
+    into a private helper to do it would couple them to how the mutation is spelled.
+    """
+    replaced = dataclasses.replace(report, active_constraint=constraint)
+    pairs = tuple(
+        replaced if existing.key == report.key else existing for existing in system.pairs
+    )
+    return dataclasses.replace(system, pairs=pairs)
+
+
+def with_forged_active_wall(system: ConstraintSystem, constraint) -> ConstraintSystem:
+    """The same system, with one slack wall inequality carrying a forged zero margin.
+
+    Public for the same reason as `with_active_pair`.
+    """
+    forged = dataclasses.replace(constraint, margin=system.chart.field.zero)
+    walls = tuple(
+        forged if existing.key == constraint.key else existing for existing in system.walls
+    )
+    return dataclasses.replace(system, walls=walls)
+
+
+def _guard_refuses(system: ConstraintSystem) -> tuple[bool, str]:
+    """Does the recomputing active-margin guard refuse this system?"""
+    try:
+        require_active_margins_zero(system)
+    except ActiveMarginError as error:
+        return True, str(error)[:120]
+    return False, ""
+
+
 # -- C1 changed feature ------------------------------------------------------
 
 
 def changed_feature(chart: Chart, system: ConstraintSystem, t012: T012System) -> ControlOutcome:
-    """Rename each contact onto every sibling support feature of its own branch.
+    """Rename each contact onto every sibling support feature, and make the tool refuse.
 
-    Twelve substitutions at `n = 5`: four touching pairs, three siblings each. Every one
-    must be refused, and the refusal that does the work is the exact base margin, because
-    -- and this is a finding of the control rather than a nuisance -- the *gradients* do
-    not always distinguish them. At Goebel's pose the pair rows are degenerate across the
-    support features of a branch: the rotation columns vanish for every corner of the
-    moving square, not only for the touching one, which is the same geometry that hides
-    the middle square's rotation from `T-012`'s first order. A support feature identified
-    by derivative agreement alone would therefore be identified wrongly, and the proof
-    lane needs that stated rather than discovered later.
+    Twelve substitutions at `n = 5`: four touching pairs, three siblings each. Each is
+    applied twice, and each mutated system is handed back to the instrument rather than
+    adjudicated here -- which is the correction the `BC-153` review required. The first
+    version of this control compared keys and margins inline and never called `bind` or
+    any guard, so it restated its own premises and could not have failed.
+
+    - *key-swapped*: the active set names the sibling. `require_active_margins_zero`
+      refuses because the sibling does not vanish at the pose, and `bind` refuses because
+      the active keys no longer match `T-012`'s contact list.
+    - *key-preserving forgery*: the contact keeps its name and its cached margin, but
+      carries the sibling's polynomial. Only a guard that *recomputes* can see this, and
+      only a gradient comparison can see it inside `bind`. Both are run.
+
+    The finding the second version preserves: four of the twelve siblings have exactly the
+    same gradient as the contact they replace -- the degeneracy that hides the middle
+    square's rotation from first order -- so `bind` alone catches eight, and the
+    recomputing margin guard is what catches all twelve.
     """
-    field = chart.field
-    two = field.rational(2)
-    active_keys = {key for key, _ in system.active_constraints()}
-    t012_keys = set(t012.contact_keys)
     substitutions: list[dict[str, Any]] = []
     for report in system.touching_pairs:
-        assert report.active_branch is not None and report.active_constraint is not None
         contact = report.active_constraint
-        position = t012.contact_keys.index(contact.key)
-        scale = embed(field, t012.scales[position])
-        transported = [embed(field, target) for target in t012.rational_rows[position]]
-        for substitute in report.active_branch.constraints:
+        branch = report.active_branch
+        if contact is None or branch is None:
+            continue
+        for substitute in branch.constraints:
             if substitute.key == contact.key:
                 continue
-            gradient = substitute.polynomial.gradient()
-            differs = any(
-                (value * scale - (target * two if index % DOF == 2 else target)).sign() != 0
-                for index, (value, target) in enumerate(zip(gradient, transported, strict=True))
+            swapped = with_active_pair(system, report, substitute)
+            swapped_guard, swapped_reason = _guard_refuses(swapped)
+            swapped_certificate = bind(chart, swapped, t012)
+
+            forgery = with_active_pair(
+                system,
+                report,
+                dataclasses.replace(contact, polynomial=substitute.polynomial),
             )
-            claimed = (active_keys - {contact.key}) | {substitute.key}
+            forged_guard, _ = _guard_refuses(forgery)
+            forged_certificate = bind(chart, forgery, t012)
+            forged_row = next(
+                (row for row in forged_certificate.rows if row.key == contact.key), None
+            )
+
             substitutions.append(
                 {
                     "contact": contact.key,
                     "substitute": substitute.key,
                     "substitute_margin": element_algebraic(substitute.margin),
-                    "margin_is_nonzero": substitute.margin.sign() != 0,
-                    "gradient_differs": differs,
-                    "active_key_agreement_breaks": claimed != t012_keys,
+                    "key_swapped_guard_refused": swapped_guard,
+                    "key_swapped_binding_refused": not swapped_certificate.holds,
+                    "key_swapped_missing_from_t012": list(
+                        swapped_certificate.missing_from_t012
+                    ),
+                    "key_swapped_reason": swapped_reason,
+                    "forgery_guard_refused": forged_guard,
+                    "forgery_binding_refused": not forged_certificate.holds,
+                    "forgery_gradient_caught": bool(
+                        forged_row is not None and not forged_row.gradient_matches
+                    ),
+                    "forgery_second_jet_caught": bool(
+                        forged_row is not None
+                        and not all(forged_row.second_jet_matches.values())
+                    ),
                 }
             )
-    rejected = all(
-        entry["margin_is_nonzero"] and entry["active_key_agreement_breaks"]
+    rejected = bool(substitutions) and all(
+        entry["key_swapped_guard_refused"]
+        and entry["key_swapped_binding_refused"]
+        and entry["forgery_guard_refused"]
         for entry in substitutions
     )
-    indistinguishable = sum(1 for entry in substitutions if not entry["gradient_differs"])
+    gradient_caught = sum(1 for one in substitutions if one["forgery_gradient_caught"])
+    jet_caught = sum(1 for one in substitutions if one["forgery_second_jet_caught"])
     return ControlOutcome(
         name="changed_feature",
-        rejected=bool(substitutions) and rejected,
+        rejected=rejected,
         mechanism=(
-            "exact base margin must be zero for a contact, and the active key set must "
-            "match T-012's contact list"
+            "require_active_margins_zero recomputes every active margin, and bind "
+            "re-checks key agreement and gradients; both are invoked on the mutated system"
         ),
         detail=(
-            f"all {len(substitutions)} sibling support features of the four contact "
-            "branches have strictly nonzero base margin and break agreement with T-012's "
-            f"contact list. {indistinguishable} of them nonetheless have exactly the same "
-            "gradient as the contact they replace, so derivative agreement alone does not "
-            "identify a support feature at this pose and the margin is what decides"
+            f"all {len(substitutions)} sibling substitutions are refused. Renaming the "
+            "contact onto a sibling is refused by the recomputing margin guard and by the "
+            "binding's key agreement; forging the contact's polynomial while keeping its "
+            f"name and cached margin is refused by the recomputing guard in all "
+            f"{len(substitutions)} cases and by the binding's gradient check in "
+            f"{gradient_caught} of them and by its restricted second-jet check in "
+            f"{jet_caught}; the {len(substitutions) - gradient_caught} the gradient misses "
+            "are gradient-degenerate against the contact they replace"
         ),
         findings={
             "substitutions": substitutions,
             "count": len(substitutions),
-            "gradient_indistinguishable": indistinguishable,
+            "forgery_gradient_caught": gradient_caught,
+            "forgery_second_jet_caught": jet_caught,
             "finding": (
-                "the pair rows are degenerate across the support features of a branch; "
-                "support-feature identity is decided by exact margin, never by gradient"
+                "the pair rows are degenerate across some support features of a branch, "
+                "so the binding's gradient check alone does not identify a support "
+                "feature; the recomputed base margin is what decides"
             ),
         },
     )
@@ -248,26 +320,50 @@ def omitted_constraint(chart: Chart) -> ControlOutcome:
 # -- C4 invented contact -----------------------------------------------------
 
 
-def invented_contact(system: ConstraintSystem, t012: T012System) -> ControlOutcome:
-    """Declare a slack inequality to be a contact."""
+def invented_contact(
+    chart: Chart, system: ConstraintSystem, t012: T012System
+) -> ControlOutcome:
+    """Forge a zero margin onto a slack wall inequality and make the tool refuse.
+
+    The first version of this control compared the enlarged key set against `T-012`'s and
+    found it different -- which it was by construction, since the added key was chosen not
+    to be in it. Nothing was invoked and nothing could have failed. This version builds
+    the mutated `ConstraintSystem`, so that the enlarged active set is what the instrument
+    actually reads, and requires both refusals: the guard, which recomputes the margin and
+    finds it strictly positive, and `bind`, which finds a contact `T-012` does not have.
+    """
     invented = system.inactive_walls[0]
-    claimed = {key for key, _ in system.active_constraints()} | {invented.key}
-    agrees = claimed == set(t012.contact_keys)
-    margin_is_zero = invented.margin.sign() == 0
+    mutated = with_forged_active_wall(system, invented)
+    claimed = {key for key, _ in mutated.active_constraints()}
+    guard_refused, reason = _guard_refuses(mutated)
+    certificate = bind(chart, mutated, t012)
     return ControlOutcome(
         name="invented_contact",
-        rejected=(not agrees) and (not margin_is_zero),
-        mechanism="active keys must match T-012's contacts, and each must have margin zero",
+        rejected=(
+            guard_refused
+            and not certificate.holds
+            and invented.key in certificate.missing_from_t012
+        ),
+        mechanism=(
+            "require_active_margins_zero recomputes the forged margin, and bind reports "
+            "the contact as absent from T-012's list; both run on the mutated system"
+        ),
         detail=(
-            f"{invented.key} has base margin {element_algebraic(invented.margin)}, which "
-            "is strictly positive; adding it to the active set makes the local system "
-            "smaller than the geometry's and breaks agreement with T-012's contact list"
+            f"{invented.key} carries a forged zero margin while its polynomial still "
+            f"evaluates to {element_algebraic(invented.margin)} at the pose. The active "
+            f"set grows to {len(claimed)}, the recomputing guard refuses, and the binding "
+            "reports the invented key as missing from T-012's contact list"
         ),
         findings={
             "invented_key": invented.key,
-            "margin": element_algebraic(invented.margin),
-            "margin_is_zero": margin_is_zero,
-            "active_keys_still_agree_with_t012": agrees,
+            "recomputed_margin": element_algebraic(invented.margin),
+            "forged_margin": "0",
+            "active_set_size_after_mutation": len(claimed),
+            "guard_refused": guard_refused,
+            "guard_reason": reason,
+            "binding_holds": certificate.holds,
+            "binding_active_key_agreement": certificate.active_key_agreement,
+            "binding_missing_from_t012": list(certificate.missing_from_t012),
         },
     )
 
@@ -537,7 +633,7 @@ def run_all(
         changed_feature(chart, system, t012),
         zero_margin(system),
         omitted_constraint(chart),
-        invented_contact(system, t012),
+        invented_contact(chart, system, t012),
         side_release(chart),
         wrong_chart(chart.pose),
         certificate_drift(determination, system),

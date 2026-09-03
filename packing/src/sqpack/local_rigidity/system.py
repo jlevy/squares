@@ -58,6 +58,18 @@ class IncompleteEnumerationError(ValueError):
     """The constraint enumeration is missing inequalities the pose's combinatorics need."""
 
 
+class ActiveMarginError(ValueError):
+    """A constraint the system calls active does not actually vanish at the pose.
+
+    The check re-evaluates the polynomial rather than reading the stored `margin`, and the
+    difference is the whole point: a mutation that renames a contact onto a slack
+    inequality, or that keeps a contact's name while swapping in a neighbour's polynomial,
+    leaves a plausible cached margin behind. Recomputing is what makes
+    `controls.changed_feature` and `controls.invented_contact` exercise a refusal path
+    instead of restating their own premises.
+    """
+
+
 class OverlapError(ValueError):
     """A pair of squares whose every separating branch is strictly violated at base."""
 
@@ -459,6 +471,23 @@ def _pair_report(chart: Chart, branches: tuple[PairBranch, ...]) -> PairReport:
         witness_branch=None,
         witness_margin=None,
     )
+
+
+def require_active_margins_zero(system: ConstraintSystem) -> None:
+    """Refuse an active set whose members do not vanish at the pose, by recomputation."""
+    origin = system.chart.origin()
+    offenders = [
+        (key, polynomial.evaluate(origin))
+        for key, polynomial in system.active_constraints()
+        if polynomial.evaluate(origin).sign() != 0
+    ]
+    if offenders:
+        key, value = offenders[0]
+        raise ActiveMarginError(
+            f"{len(offenders)} of the declared active constraints do not vanish at the "
+            f"pose (first: {key}, recomputed value {value.text()}); an active set that "
+            "is not the zero set of the base margins is not the local system"
+        )
 
 
 # -- the neighborhood, as strict conditions rather than a radius -------------

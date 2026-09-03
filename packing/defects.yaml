@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 421
+count: 423
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -12446,3 +12446,170 @@ defects:
   regression: none
   bead: think-mlwo
   recorded_in: packing/devtools/render_wave_efficiency.py
+- id: D-422
+  title: The snapshot cap refuses all 155 negative controls, and build caches are what breach it
+  date: '2026-09-03'
+  layer: tooling
+  class: robustness
+  detected_by: inspection
+  latent_for: at least the ten commits of this branch; the base already exceeded the cap
+  severity: high
+  status: outstanding
+  what: >-
+    `python -m devtools.run_negative_controls` exits 1 before executing a single control:
+    `negative-control snapshot source is 67823986 bytes; cap is 67108864`. The refusal is
+    the `source_bytes > SNAPSHOT_MAX_BYTES` guard at `run_negative_controls.py:471`,
+    measured by `snapshot_source_bytes()` (same file, line 317) against the 64 MiB
+    `SNAPSHOT_MAX_BYTES` at line 158. Overage 715,122 bytes, 1.07% over.
+
+    What breaches it is not the record. Of the 67,823,986 counted bytes, 11,095,141 are
+    untracked build caches -- `__pycache__` under `tests/`, `src/`, `devtools/` and
+    `cases/`, plus `.pytest_cache` and `.ruff_cache` -- and the untracked non-cache
+    remainder is exactly zero. Drop the caches and the counted surface is 56,741,622
+    bytes, 9.9 MiB UNDER the cap. The guard is not miscounting: `_clone_into` bulk-copies
+    filesystem entries with `cp -R`, so those caches really are copied into every private
+    worker tree. It is measuring real work that has no reason to be done.
+
+    The trip point is therefore a property of a working tree that has been used, not of
+    the commit. A checkout that has never run pytest or ruff measures ~56.7 MB and the
+    suite starts; the first full validation run puts it over. Every agent session and
+    every developer reaches the failing state by doing the ordinary thing.
+  consequence: >-
+    `devtools/controls.yaml` holds 155 controls over 50 target files. Each mutates a file
+    and asserts that a named checker catches the mutation, so the suite is the only thing
+    that establishes that this project's guards actually fire. None of them has run.
+
+    The adjacency is the substance of the defect. `check_control_anchors` is green -- it
+    reports "155 negative control anchors each match their file exactly once" -- and it is
+    a `--records` step, so it runs on every push. Its own docstring is explicit that it
+    "deliberately does NOT check that a control still *catches* what it was written for".
+    The repository therefore reports a passing 155-anchor check next to a suite in which
+    no control has fired. That is D-403's failure shape one level up: there, controls had
+    rotted unseen because the suite runs full-gate only; here the anchors resolve and the
+    mutations still never execute. `Step("negative controls", ...)` carries neither `fast`
+    nor `records`, so nothing on the pull-request surface looks, and `packing-validate
+    --records` stays green with the suite dead.
+  fix: >-
+    None yet, and deliberately none in this branch: Agenda 016's W9 lane is bounded to
+    D-044 and D-046 and is forbidden from substituting another backlog item. Recorded and
+    left open.
+
+    Three directions, none chosen here. (1) Exclude build caches from the counted surface
+    and from `_clone_into` -- the smallest change, it removes 11.1 MB of pure detritus, it
+    makes the measurement reproducible rather than a function of how recently the tests
+    ran, and no control names a `.pyc`. (2) Prune `campaign/series/*/results` from the
+    snapshot the way `atlas/` renderings already are, reached through the existing
+    linked-and-registered-target rule so the link checker keeps working. (3) Content-address
+    the large checkpoints so a worker links rather than copies them. Raising the cap again
+    is the fourth and the weakest: D-371 raised it from 40 to 64 MiB nine days ago on the
+    reasoning that the cap "exists to stop someone checking in a gigabyte of data, not to
+    track the record's ordinary growth", and the growth has consumed the headroom anyway.
+
+    Where the counted bytes are, so a fix has somewhere to start: `campaign/` 24,919,099
+    (36.7%), of which `series-000-smoke-and-calibration/results/` is 20,091,203; `atlas/`
+    19,044,838 (28.1%); `tests/` 5,368,978 (4,299,924 of it `__pycache__`); `cases/`
+    4,242,168; `devtools/` 3,285,104 (1,833,590 `__pycache__`); pruned targets pulled back
+    in by the link and results-register rules 3,067,392; `src/` 3,059,473 (1,892,950
+    `__pycache__`). The seven largest single files are the exp-056 checkpoint (10,282,769),
+    `atlas/known-best/chunk-components.json` (9,672,604), the exp-042 result (5,740,789),
+    `atlas/known-best/chunk-partitions.json` (5,220,955), `known-best-1-100.svg`
+    (2,491,928), the exp-052 checkpoint (1,955,748), and a 1,387,084-byte paper from the
+    pruned `resources/` archive that the linked-target rule copies back in.
+
+    Scope, verified rather than assumed. Replicating `snapshot_source_bytes()` over the git
+    trees at both refs, the tracked counted surface is 56,187,316 bytes at the base
+    `f0992678` and 56,735,348 at HEAD: this branch added 548,032 bytes inside the counted
+    surface. Two independent checks put the breach before the branch. Subtracting the
+    branch's entire counted contribution from the live measurement leaves 67,275,954, still
+    167,090 over cap, and that argument assumes nothing about which bytes are cache.
+    Holding the caches constant, since they are a property of the checkout and not of the
+    commit, the base measures 67,282,457 and is over by 173,593. The overage predates this
+    branch and would not be resolved by reverting it.
+  regression: >-
+    none. The guard prints its measured size on every run, which is how this was seen, but
+    nothing runs the guard on the pull-request surface -- the same gap D-403 left contained.
+  recurrence_of: D-371
+  bead: think-c46d
+  recorded_in: packing/devtools/run_negative_controls.py
+- id: D-423
+  title: The cover certificate's Lemma 4 boundary is non-strict in two sources and strict in a third, unrecorded
+  date: '2026-09-03'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: since the green17 certificate was retained on 2026-08-31
+  severity: medium
+  status: outstanding
+  what: >-
+    The lemma that closes the top strips of the Green17 cover certificate is printed with
+    two different strictnesses, and the repository holds both. All three statements were
+    checked against the archive rather than taken on report.
+
+    Non-strict, twice. `[Stromquist 2003]` Lemma 3: "Let a and b satisfy a <= 1, b <= 1,
+    and a + 2b <= 2 sqrt 2. Then any box whose center is in the rectangle [0,a] x [0,b]
+    must intersect the x-axis, the point (0,b), or the point (a,b)"
+    (`packing/resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md:52`,
+    confirmed against the byte-level extraction at `.raw.md:161`). `[Bentz 2010]` Lemma 4,
+    attributed to Friedman and Stromquist, repeats it with `a + 2b <= 2 sqrt 2`
+    (`packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:55`, confirmed at
+    `.raw.md:93`).
+
+    Strict, once. Friedman's Dynamic Survey DS7 Lemma 2: "Let 0 < x <= 1, 0 < y <= 1, and
+    x + 2y < 2 sqrt 2" -- strict on that hypothesis alone while the other two stay
+    non-strict (`packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md:153`,
+    and independently in the separately extracted HTML at
+    `packing/resources/web/friedman-ds7-survey-2009-html.md:231`).
+
+    The two readings agree everywhere except at `a + 2b = 2 sqrt 2`, and that boundary is
+    exactly the case the certificate's ceiling argument uses.
+    `packing/cases/green17/verify_cover.py` says so in its own words: the certified side
+    "sits within 6 * 10^-7 of the set's exact ceiling 753/250 + sqrt 2 (the top strips'
+    a + 2b <= 2 sqrt 2 becoming equality)". `packing/frontier/RESULTS.md` T-003 carries the
+    same non-strict form into a retained apparently-novel result, "the top strips'
+    a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2)".
+    Under Friedman's strict form the lemma does not apply at that equality at all.
+
+    A second, smaller divergence sits in the same pair of statements and is recorded here
+    because it is the same unperformed collation: Stromquist's conclusion names the point
+    `(0, b)` where Bentz's names `(0, a)`, on a rectangle `[0,a] x [0,b]`. Bentz's `.md`
+    transcription and its `.raw.md` ground truth agree with each other, so this is a
+    difference between the printed sources and not a transcription error introduced here.
+    Which one is right is part of the same reconciliation and is not settled by this entry.
+  consequence: >-
+    Bounded, and worth stating precisely so this is not read as a refutation. The retained
+    numerical claim is untouched: the certificate proves `s(17), s(18) >= 4426213/1000000`,
+    and at that side the top strips satisfy `a + 2b < 2 sqrt 2` strictly, roughly 6e-7
+    inside the boundary, so the strict and non-strict readings give the same verdict there
+    and both formal legs -- the exact cell certifier and the interval branch-and-bound in
+    `packing/cases/green17/interval_audit.py` -- stand.
+
+    What is affected is the exact-ceiling follow-on. Nothing has been computed or retained
+    at `753/250 + sqrt(2)`: T-003 brackets the ceiling in
+    `[4426213/1000000, 4427/1000)` with a certification at the left endpoint and an exact
+    escaping pose at the right, and the ceiling value sits strictly inside that bracket
+    with only prose attached. So the boundary case has never been exercised at the value
+    in question, and the lemma form that would license it is the one the sources dispute.
+    A reader of T-003 meets the non-strict hypothesis presented as governing, with no
+    indication that a third printed source withholds it at exactly that point. Left
+    unrecorded, the obligation is invisible to whoever later tries to promote the ceiling
+    from bracketed to established.
+  fix: >-
+    None yet, and none here: Agenda 016's W9 lane is bounded to D-044 and D-046 and may not
+    substitute a backlog item, and this branch establishes no Green17 result.
+
+    The remedy is a short written reconciliation, not a recomputation. Decide, against the
+    three printed statements and their proofs, whether the boundary `a + 2b = 2 sqrt 2` is
+    covered -- Friedman's DS7 proof of the strict form derives the escape condition from
+    `f(theta) = cos + sin - x sin cos > y` with a minimum at `theta = 45 deg`, so whether
+    the inequality closes at equality is decidable from the printed argument -- then record
+    the verdict where the certificate and T-003 can cite it, and qualify the exact-ceiling
+    follow-on on `think-iye2` accordingly. If the strict reading wins, the ceiling claim
+    needs a different closing mechanism at `753/250 + sqrt(2)`; if the non-strict reading
+    wins, the note is what makes the existing prose load-bearing. Either way nothing about
+    `4426213/1000000` moves.
+  regression: >-
+    none. The frontier's source-availability and evidence records track whether a source is
+    held and whether it was reviewed, not whether two held sources state the same lemma the
+    same way, so nothing in the gate would have raised this.
+  bead: think-iye2
+  recorded_in: packing/cases/green17/verify_cover.py

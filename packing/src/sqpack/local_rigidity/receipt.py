@@ -73,6 +73,7 @@ def build_payload(
     determination: Determination,
     system: ConstraintSystem,
     controls: list[dict[str, Any]] | None = None,
+    pinned_commit: str = "",
 ) -> dict[str, Any]:
     """The exact, canonical record of everything the instrument decided."""
     chart = system.chart
@@ -101,6 +102,10 @@ def build_payload(
             "orthogonality": [
                 {"name": check.name, "statement": check.statement, "holds": check.holds}
                 for check in chart.orthogonality_certificate()
+            ],
+            "pose_shape": [
+                {"name": check.name, "statement": check.statement, "holds": check.holds}
+                for check in chart.pose_shape_certificate()
             ],
             "unit_base_normals": [
                 {"name": check.name, "statement": check.statement, "holds": check.holds}
@@ -236,11 +241,55 @@ def build_payload(
                 "points_inside_neighborhood": determination.audit.points_inside,
                 "agreements": determination.audit.agreements,
                 "counterexamples": list(determination.audit.counterexamples),
+                "points_outside_neighborhood": (
+                    determination.audit.points_tested - determination.audit.points_inside
+                ),
                 "consistent": determination.audit.consistent,
                 "caveat": determination.audit.audit_is_not_a_proof,
+                "sampling_caveat": determination.audit.sample_is_not_adversarial,
             }
         ),
         "declared_mathematical_inputs": [dict(entry) for entry in DECLARED_MATHEMATICAL_INPUTS],
+        "claim_boundary": {
+            "pinned_commit": pinned_commit,
+            "second_jets_are_restricted": (
+                "the binding compares the second derivative along one chart ray only -- "
+                "the image of T-012's single free direction, e_u4 halved -- not the full "
+                "chart Hessian. Directions outside the first-order cone are not compared, "
+                "because T-012 supplies no q for them"
+            ),
+            "type_narrowing_asserts": 4,
+            "asserts_are_not_load_bearing": (
+                "four asserts remain in the package, each narrowing a type after a pair "
+                "status has already been decided; no refusal is an assert, which is why -O "
+                "moves no byte"
+            ),
+            "reduction_audit_sampling": (
+                "the audit compares only at sampled points that lie inside U, and the "
+                "sample is a fixed grid rather than a search towards the boundary of U -- "
+                "the region where a reduction argument is most likely to fail. Points "
+                "outside U are counted and skipped, so the filter is exercised, but no "
+                "sampled point sits near the boundary by construction"
+            ),
+            "relationship_to_the_devtool": (
+                "the agenda asked to extend devtools.assess_n5_rigidity; this package "
+                "instead binds to it. sqpack is the library and devtools the tool tree, so "
+                "extending would have inverted that layering, and comparing against the "
+                "unmodified devtool is what makes the binding a check rather than an "
+                "agreement with a fork. The deviation is recorded rather than silent"
+            ),
+            "count_gate": (
+                "instrument_ready refuses on any disagreement between the declared counts "
+                "and the counts computed from the pose; before the BC-153 review the "
+                "receipt printed that comparison and no verdict read it"
+            ),
+            "machine_checked_pose_properties": [
+                "counter-clockwise winding, by exact shoelace area",
+                "unit edge lengths",
+                "exactly right angles at every corner",
+                "inradius exactly 1/2 against every edge line",
+            ],
+        },
         "controls": controls or [],
         "determination": {
             "instrument_ready": determination.instrument_ready,
@@ -549,6 +598,10 @@ def render_markdown(payload: dict[str, Any], expected: dict[str, int]) -> str:
         )
         out.append(f"- Binding holds: **{binding['holds']}**")
         out.append(
+            f"- Second jets compared along the restricted direction set "
+            f"`{binding['directions']}` only, not the full chart Hessian"
+        )
+        out.append(
             f"- Active keys agree with `T-012`'s contacts: {binding['active_key_agreement']}"
         )
         out.append(
@@ -597,7 +650,8 @@ def render_markdown(payload: dict[str, Any], expected: dict[str, int]) -> str:
     else:
         out.append(
             f"{audit['points_tested']} exact chart points sampled, "
-            f"{audit['points_inside_neighborhood']} of them inside `U`, "
+            f"{audit['points_inside_neighborhood']} of them inside `U` and "
+            f"{audit['points_outside_neighborhood']} outside it and skipped, "
             f"{audit['agreements']} agreements between the full separating-axis "
             f"feasibility predicate and the twenty-inequality local system, "
             f"{len(audit['counterexamples'])} counterexamples. Consistent: "
@@ -605,6 +659,37 @@ def render_markdown(payload: dict[str, Any], expected: dict[str, int]) -> str:
         )
         out.append("")
         out.append(f"**Caveat, recorded deliberately:** {audit['caveat']}.")
+        out.append("")
+        out.append(f"**Sampling caveat:** {audit['sampling_caveat']}.")
+    out.append("")
+
+    boundary = payload["claim_boundary"]
+    out.append("## Claim boundary")
+    out.append("")
+    out.append(
+        f"This packet is pinned to commit `{boundary['pinned_commit']}`. A formatter pass "
+        "landed mid-replay, so an unpinned replay can differ in whitespace while agreeing "
+        "in every value."
+    )
+    out.append("")
+    out.extend(
+        _table(
+            ["boundary", "statement"],
+            [
+                ["restricted second jets", boundary["second_jets_are_restricted"]],
+                ["asserts", boundary["asserts_are_not_load_bearing"]],
+                ["reduction-audit sampling", boundary["reduction_audit_sampling"]],
+                ["relationship to the devtool", boundary["relationship_to_the_devtool"]],
+                ["count gate", boundary["count_gate"]],
+            ],
+        )
+    )
+    out.append("")
+    out.append(
+        "Pose properties that earlier rounds assumed and this one checks exactly: "
+        + "; ".join(boundary["machine_checked_pose_properties"])
+        + f" ({len(payload['chart_certificates']['pose_shape'])} checks, all holding)."
+    )
     out.append("")
 
     out.append("## Declared mathematical inputs")
@@ -656,9 +741,11 @@ def render_markdown(payload: dict[str, Any], expected: dict[str, int]) -> str:
     out.append("")
     out.append(
         "Nothing on the certified path uses floating point, and no refusal in this "
-        "instrument is an `assert`; the five asserts in the package narrow a type after "
-        "a status has already been decided. So `-O`, which strips asserts, must not move "
-        "a single byte, and the check is a byte comparison rather than a claim."
+        f"instrument is an `assert`; the "
+        f"{payload['claim_boundary']['type_narrowing_asserts']} asserts in the package "
+        "narrow a type after a pair status has already been decided. So `-O`, which "
+        "strips asserts, must not move a single byte, and the check is a byte comparison "
+        "rather than a claim."
     )
     out.append("")
     out.append("```bash")

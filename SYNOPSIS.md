@@ -3015,15 +3015,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 421 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 423 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
 | validity | 111 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 154 | recorded something its own evidence contradicts |
-| robustness | 50 | did not finish, or finished only by luck |
+| bookkeeping | 155 | recorded something its own evidence contradicts |
+| robustness | 51 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -3032,7 +3032,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-one defects in 421, and no soundness defect
+**The automated gate has caught sixty-one defects in 423, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3075,6 +3075,18 @@ bounded inclusion and refusal, not exact reachable-set equivalence.
 [D-421](defects.md) records that the wave-efficiency renderer accepts Codex receipts but
 not the Claude receipts retained by this bridged wave, so BC-143 keeps a typed
 no-change/refusal instead of hand-computing incomparable telemetry.
+[D-422](defects.md) records that the snapshot cap refuses all 155 negative controls
+before one of them runs, and that untracked build caches, not the record, are what
+breach it. A checkout that has never run pytest or ruff measures under the cap and the
+suite starts; the first full validation run puts it over, so every session reaches the
+failing state by doing the ordinary thing. The adjacency is the point: the anchor check
+is a `--records` step and reports all 155 anchors matching, so the log shows a passing
+155-anchor check beside a suite in which no control has fired.
+[D-423](defects.md) records that the lemma closing the Green17 cover certificate's top
+strips is printed non-strict in Stromquist 2003 and Bentz 2010 and strict in Friedman's
+DS7, and that the repository holds all three. The readings agree everywhere except on
+the boundary the certificate uses, so the boundary case is an unrecorded source
+obligation rather than a settled step.
 
 [D-393](defects.md) is the same run being wrong about its own gate.
 `D-381` established `--edit` as the pre-push floor, and that floor does not run tests:

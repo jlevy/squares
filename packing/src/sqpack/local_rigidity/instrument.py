@@ -35,6 +35,7 @@ from sqpack.local_rigidity.system import (
     build_neighborhood,
     build_system,
     is_feasible,
+    require_active_margins_zero,
 )
 
 PROBE_DENOMINATORS: tuple[int, ...] = (10, 100, 1000, 10**4, 10**5, 10**6)
@@ -122,6 +123,7 @@ class Determination:
     binding_holds: bool
     probe: ProbeResult
     audit: ReductionAudit | None = None
+    count_disagreements: dict[str, tuple[int, int]] = dataclass_field(default_factory=dict)
     refusals: tuple[str, ...] = ()
     isolation_decided: bool = False
     scope: str = (
@@ -140,20 +142,34 @@ class Determination:
             and not self.probe.found_witness
             and self.audit is not None
             and self.audit.consistent
+            and not self.count_disagreements
             and not self.refusals
         )
 
 
 def assess(
-    chart: Chart, t012: T012System | None = None, *, audit: bool = True
+    chart: Chart,
+    t012: T012System | None = None,
+    *,
+    audit: bool = True,
+    expected_counts: dict[str, int] | None = None,
 ) -> tuple[Determination, ConstraintSystem]:
-    """Run the full instrument at one pose, refusing rather than guessing."""
+    """Run the full instrument at one pose, refusing rather than guessing.
+
+    `expected_counts` is a planning document's claim about the pose. It is compared, never
+    adopted, and a disagreement blocks `instrument_ready` -- which it did not do before the
+    BC-153 review, where the receipt printed a disagreement column that no verdict read.
+    """
     system = build_system(chart)
+    require_active_margins_zero(system)
     neighborhood = build_neighborhood(system)
     certificate = bind(chart, system, t012) if t012 is not None else None
     probe = probe_axes(system.book)
     reduction = audit_reduction(system, neighborhood) if audit else None
+    disagreements = system.verify_counts(expected_counts) if expected_counts is not None else {}
     refusals: list[str] = []
+    if disagreements:
+        refusals.append(f"declared counts disagree with the pose on {sorted(disagreements)}")
     if not neighborhood.valid():
         refusals.extend(
             f"non-strict neighborhood condition: {key}" for key in neighborhood.failures()
@@ -181,6 +197,7 @@ def assess(
         binding_holds=bool(certificate is not None and certificate.holds),
         probe=probe,
         audit=reduction,
+        count_disagreements=disagreements,
         refusals=tuple(refusals),
     )
     return determination, system
@@ -210,6 +227,12 @@ class ReductionAudit:
         "reduction itself holds by the exact base margins and continuity of the "
         "polynomials, and nothing here narrows or replaces that argument"
     )
+    sample_is_not_adversarial: str = (
+        "only points inside U are compared, and the sample is a fixed grid rather than a "
+        "search towards the boundary of U, which is where a reduction argument is most "
+        "likely to fail; points outside U are counted and skipped, so the filter is "
+        "exercised, but no sampled point sits near the boundary by construction"
+    )
 
     @property
     def consistent(self) -> bool:
@@ -226,7 +249,7 @@ def sample_points(chart: Chart) -> dict[str, list[FieldElement]]:
     names = chart.variable_names()
     points: dict[str, list[FieldElement]] = {}
     for index in range(chart.arity):
-        for denominator in (8, 64, 512, 4096):
+        for denominator in (1, 2, 8, 64, 512, 4096):
             for sign in (1, -1):
                 point = chart.origin()
                 point[index] = field.rational(sign) / field.rational(denominator)

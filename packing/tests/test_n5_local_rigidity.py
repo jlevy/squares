@@ -14,6 +14,8 @@ would produce a clean receipt and a false theorem.
 
 from __future__ import annotations
 
+import dataclasses
+
 import pytest
 
 from cases.gobel5.packing import build
@@ -35,10 +37,12 @@ from sqpack.local_rigidity.instrument import assess
 from sqpack.local_rigidity.polynomial import Poly
 from sqpack.local_rigidity.receipt import build_payload, digest, element_algebraic
 from sqpack.local_rigidity.system import (
+    ActiveMarginError,
     DisjunctiveTouchError,
     build_neighborhood,
     build_system,
     is_feasible,
+    require_active_margins_zero,
 )
 
 AGENDA_COUNTS = {
@@ -302,21 +306,104 @@ def test_the_exp034_family_is_real_at_its_own_side_and_absent_at_goebels(
     assert findings["family_passes_through_the_optimum"] is False
 
 
-def test_a_changed_support_feature_is_refused_by_margin_and_not_by_gradient(
+def test_a_changed_support_feature_is_refused_by_the_instrument_itself(
     chart: Chart, system, t012
 ) -> None:
-    """The sharpest thing the controls found, kept as an assertion.
+    """The control must call the tool, not adjudicate for it.
 
-    Four of the twelve sibling substitutions have *exactly the same gradient* as the
-    contact they replace -- the same degeneracy that hides the middle square's rotation
-    from first order. Identifying a support feature by derivative agreement would therefore
-    identify it wrongly, and only the exact base margin decides.
+    `BC-153` found the first version of this control tautological: it compared keys and
+    margins inline and never invoked a guard or the binding, so it restated its own
+    premises. Every substitution is now applied to a real `ConstraintSystem` and handed
+    back, and both refusals are required.
+
+    The finding survives the correction. Four of the twelve siblings have *exactly the
+    same gradient* as the contact they replace -- the degeneracy that hides the middle
+    square's rotation from first order -- so the binding's gradient check catches eight,
+    and the guard that recomputes the base margin is what catches all twelve.
     """
     outcome = controls.changed_feature(chart, system, t012)
     assert outcome.rejected
-    assert outcome.findings["count"] == 12
-    assert outcome.findings["gradient_indistinguishable"] == 4
-    assert all(entry["margin_is_nonzero"] for entry in outcome.findings["substitutions"])
+    findings = outcome.findings
+    assert findings["count"] == 12
+    assert findings["forgery_gradient_caught"] == 8
+    for entry in findings["substitutions"]:
+        assert entry["key_swapped_guard_refused"]
+        assert entry["key_swapped_binding_refused"]
+        assert entry["forgery_guard_refused"]
+        assert entry["key_swapped_missing_from_t012"] == [entry["substitute"]]
+
+
+def test_an_invented_contact_is_refused_by_the_guard_and_by_the_binding(
+    chart: Chart, system, t012
+) -> None:
+    """Forge a zero margin onto a slack wall and require both refusals to fire.
+
+    The first version of this control compared an enlarged key set against `T-012`'s and
+    found it different, which it was by construction. This one mutates the system, so the
+    twenty-one-element active set is what the instrument reads.
+    """
+    outcome = controls.invented_contact(chart, system, t012)
+    assert outcome.rejected
+    findings = outcome.findings
+    assert findings["active_set_size_after_mutation"] == 21
+    assert findings["guard_refused"]
+    assert findings["binding_holds"] is False
+    assert findings["binding_active_key_agreement"] is False
+    assert findings["binding_missing_from_t012"] == [findings["invented_key"]]
+    assert findings["forged_margin"] == "0"
+    assert findings["recomputed_margin"] != "0"
+
+
+def test_the_active_margin_guard_recomputes_rather_than_trusting_the_record(
+    system,
+) -> None:
+    """A cached margin is not evidence; the guard evaluates the polynomial itself.
+
+    Both mutations the controls use leave a plausible cached margin behind -- one renames
+    the contact, the other keeps the name and swaps the polynomial -- and only
+    recomputation sees either.
+    """
+    require_active_margins_zero(system)
+    report = system.touching_pairs[0]
+    assert report.active_branch is not None and report.active_constraint is not None
+    substitute = next(
+        one
+        for one in report.active_branch.constraints
+        if one.key != report.active_constraint.key
+    )
+    renamed = controls.with_active_pair(system, report, substitute)
+    with pytest.raises(ActiveMarginError):
+        require_active_margins_zero(renamed)
+
+    forged = controls.with_active_pair(
+        system,
+        report,
+        dataclasses.replace(report.active_constraint, polynomial=substitute.polynomial),
+    )
+    with pytest.raises(ActiveMarginError):
+        require_active_margins_zero(forged)
+
+
+def test_a_declared_count_disagreement_blocks_readiness(chart: Chart, t012) -> None:
+    """The receipt printed the comparison; now a verdict reads it."""
+    wrong, _ = assess(chart, t012, audit=False, expected_counts={"active_total": 19})
+    assert wrong.count_disagreements == {"active_total": (19, 20)}
+    assert not wrong.instrument_ready
+    assert any("disagree" in reason for reason in wrong.refusals)
+
+
+def test_the_pose_shape_is_checked_and_not_assumed(chart: Chart) -> None:
+    """Counter-clockwise winding, unit edges, right angles, inradius one half.
+
+    `BC-153` found these assumed. The outward-normal formula `(dy, -dx)` needs the winding,
+    and the constant `1/2` in every pair inequality is the inradius; a clockwise pose would
+    invert every separating-axis test and still produce a full receipt.
+    """
+    checks = chart.pose_shape_certificate()
+    assert len(checks) == 65
+    assert all(check.holds for check in checks)
+    kinds = {check.name.split("/")[1] for check in checks}
+    assert kinds == {"counter-clockwise", "unit-edge", "right-angle", "inradius"}
 
 
 def test_an_edge_flush_touch_is_refused_rather_than_intersected() -> None:
@@ -402,6 +489,9 @@ def test_the_local_reduction_agrees_with_full_feasibility_inside_the_neighborhoo
     assert audit.points_inside > 0
     assert audit.agreements == audit.points_inside
     assert "corroborates" in audit.audit_is_not_a_proof
+    # The inside-U filter must actually exclude something, or it is untested.
+    assert audit.points_tested > audit.points_inside
+    assert "boundary" in audit.sample_is_not_adversarial
 
 
 def test_the_mathematical_inputs_are_declared_rather_than_implied(determination) -> None:
