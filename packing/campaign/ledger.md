@@ -97,6 +97,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-080](agent-sessions/session-080-bc138-n68-side-semantics-binding.md) | completed | contemporaneous | `insight-iteration` (correctness) | `factual-review` (correctness) | 4 | think-ymjp | Retain the literal point-model instrument and the typed refusal. Do not open BC-139; a future literal-only route requires a new prospectively frozen hypothesis and experiment. |
 | [session-081](agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `factual-review` (process) | 4 | think-hrw2 | Return the readmitted n = 54 subset to BC-143 under think-8hcp for the frozen routing decision; track the eight missing bound controls under D-418 / think-ifgr. |
 | [session-082](agent-sessions/session-082-bc141-n54-source-contract.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 1 | think-pkgx | At the fixed 11:23Z wave boundary, open BC-144 under think-2tol, freeze the terminal wave evidence and prepare only the bounded independent-review packets it earns. |
+| [session-083](agent-sessions/session-083-agenda016-ten-hour-coordinator.md) | in_progress | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 2 | think-a0h6 | Admit the BC-147 frozen-binding verification, freeze the launch packet, and hold the 08:58Z--09:58Z process-exclusive lease for the H-052 exact writer. |
 
 ### Workflow summary
 
@@ -107,9 +108,9 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-survey` | 1 | 0 | 12 | 0 |
 | `factual-review` | 3 | 0 | 40 | 2 |
 | `insight-iteration` | 17 | 1 | 56 | 2 |
-| `process-review` | 13 | 4 | 61 | 6 |
+| `process-review` | 14 | 4 | 62 | 6 |
 | `efficiency-loop` | 9 | 0 | 27 | 0 |
-| `research-loop` | 8 | 4 | 43 | 7 |
+| `research-loop` | 8 | 4 | 44 | 7 |
 | `pipeline-improvement` | 20 | 0 | 101 | 0 |
 | `documentation-pass` | 1 | 0 | 2 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
