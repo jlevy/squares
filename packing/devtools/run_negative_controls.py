@@ -131,8 +131,10 @@ PRUNE = frozenset(
         # Named by no control, and -- the part worth checking rather than assuming -- read
         # by nothing a control runs. `controls.yaml` names no results path in any of its
         # 50 `file:` targets, and every one of its 40 distinct `run:` commands was traced
-        # with `strace -f` for opens and directory reads under `campaign/series/*/results`.
-        # Exactly one command reaches that tree at all, and it reaches one 38 KB file.
+        # with `strace -f` for opens and directory reads under `campaign/series/*/results`
+        # -- the full-suite command in its mutated form, since that one refuses at
+        # collection and never reaches a test. Exactly one command opens a file there, a
+        # 38 KB archive; one other only lists directories in the `.raw` tree, which stays.
         #
         # That one command is why the whole directory is not pruned, which is the obvious
         # move and the wrong one. `check_canonical` backs four controls and reads
