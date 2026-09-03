@@ -54,14 +54,9 @@ environment. It completed in under five seconds and reported 168 atoms, total ma
 `9744 / 576`, a minimum score of `576 / 576` over 181 sampled rational directions, and
 `CERTIFICATE CONDITIONS VERIFIED`. A manual read-only review reported no issue in the
 angle cover, shrunken-square containment, event-cell sweep, or strict-scaling argument,
-but no replayable audit checklist was retained at that time.
-Both of those gaps closed on 2026-09-03: `H-052` completed an independent implementation
-that agrees with this certificate on all 181 exact direction cells (`exp-059`), the
-`BC-150` packet audited the eleven lemmas, and `BC-151` reviewed both and adopted the
-bound at source-backed scope.
-The result stays externally proposed rather than first-party, and one method family
-carries it: Massaccesi's verifier is derived from Burns's, and every implementation on
-the record sweeps event cells over the same reduction.
+but no replayable audit checklist was retained. The result remains source-backed with a
+reported manual review rather than repository-verified: Massaccesi's verifier is derived
+from Burns's, and no independent implementation has checked the same certificate.
 
 The audit also found source defects that matter when reusing the work:
 

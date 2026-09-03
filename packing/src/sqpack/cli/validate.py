@@ -1513,7 +1513,19 @@ STEPS: tuple[Step, ...] = (
         _independent_lp,
         touches=(*_CORE, "packing/cases/trump11/*"),
     ),
-    Step("fast behavioral tests", _fast_tests, fast=True, broad=True),
+    # 1187s measured on 2026-09-03 at 1533 passing tests, against the 900s shared cap
+    # the step had been dying on. Two earlier readings disagree and the disagreement is
+    # left visible rather than averaged away: 880s on 2026-09-03 at 07:35Z when the step
+    # still passed, and 910s reported by the W9 lane the same morning. CI supplies only a
+    # floor, because it kills the step at the cap rather than timing it. The suite grew
+    # by roughly a hundred tests during that window -- the n = 5 rigidity instrument and
+    # the runner trust boundary -- which accounts for the direction but not the whole
+    # spread; the local readings were taken with other work in flight.
+    #
+    # The budget is the measurement plus room for that uncertainty and for growth, not a
+    # number chosen to make today's run pass. A suite that reaches this ceiling should be
+    # re-argued, not re-padded, and the step still fails if it exceeds what it asked for.
+    Step("fast behavioral tests", _fast_tests, fast=True, broad=True, budget_seconds=1800),
     Step("exhaustive exact behavioral tests", _exhaustive_exact_tests),
     Step(
         "bead tree",

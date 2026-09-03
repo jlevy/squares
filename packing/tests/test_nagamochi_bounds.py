@@ -33,14 +33,17 @@ def test_the_recorded_bounds_re_derive() -> None:
 
 
 def test_it_covers_the_cases_it_claims_to() -> None:
-    """Eighty-six, and none outside the record's declared scope of 4 to 100."""
+    """Eighty-five, and none outside the record's declared scope of 4 to 100."""
     covered = citing()
-    assert len(covered) == 86
+    assert len(covered) == 85
     assert min(covered) >= 4
     assert max(covered) <= 100
     # The two cases the green17 certificate took over cite it no longer.
     assert 17 not in covered
     assert 18 not in covered
+    # `n = 19` left on 2026-09-03, when `T-016` adopted the source-backed 4.5058
+    # bound and beat Theorem 2's `1 + sqrt(12)` there.
+    assert 19 not in covered
 
 
 @pytest.mark.parametrize("n", [4, 7, 8, 9, 14, 15, 16, 99, 100])
@@ -80,7 +83,15 @@ def test_a_wrong_value_is_refused(monkeypatch: pytest.MonkeyPatch) -> None:
 
     def poisoned() -> dict[int, dict]:
         found = real()
-        found[19]["verified_lower_bound"]["value"] = "4.6"
+        # Poison a case this record still carries. `n = 19` was the target until
+        # `T-016` took it over on 2026-09-03, at which point poisoning it stopped
+        # reaching the checker at all and this control passed without biting.
+        # The value has to miss by more than one unit in its own last place: the
+        # tolerance is `10 ** -places`, so against `n = 20`'s `4.6055...` both `4.6`
+        # and `4.7` are accepted at one decimal place, and only `4.8` disagrees.
+        # It also has to stay under the reported upper bound of 5.0, or the checker
+        # reports an inversion instead and the control passes for the wrong reason.
+        found[20]["verified_lower_bound"]["value"] = "4.8"
         return found
 
     monkeypatch.setattr(nagamochi, "cases", poisoned)
