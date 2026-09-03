@@ -26,12 +26,27 @@ An experiment is a COMMAND declared in its hypothesis artifact; the harness subs
   1. print JSON Lines to stdout;
   2. carry `best_side`, `n` and `seed` on every result line;
   3. carry `overlap` (or `best_overlap`) on those lines, and it must be exactly 0;
-  4. exit 0.
+  4. carry the FULL POSE on those lines as equal-length `x`, `y` and `t` arrays of
+     length `n` -- the centres and angles of every square;
+  5. pass `--selftest` when the harness runs the engine before the round;
+  6. exit 0.
 
 A seed's result is the **minimum** `best_side` over its own lines. Carrying `n` and
 `seed` is what makes that grouping exact: nothing has to agree about which line is the
 summary, and a seed printing a different number of lines than its neighbour changes
 nothing.
+
+**A scalar the producer prints is not evidence about the producer.** Clauses 3 and 5
+alone are assertions by the thing under test, which is what D-044 records: a fabricated
+side, a fabricated zero overlap, or an untested binary all passed. So clause 4 exists,
+and `record` refuses any round whose archived poses have not been rebuilt into corner
+geometry and re-checked for containment and pairwise separation by
+`sqpack.verify` **in a separate process**, against a `sha256` of the exact result lines
+on disk. The engine's `--selftest` is executed and its binary hashed, so
+`subject.selftest_passed` is a fact rather than a literal.
+
+That check is float arithmetic at a declared tolerance. It refutes a forged pose; it
+never upgrades a round to `verified`. See :mod:`sqpack.verify` on why no tolerance can.
 
 Adding an experiment never edits this file. Writing new experiment code is expected;
 writing new harness code per round is the error-prone thing this design removes, because
@@ -39,16 +54,30 @@ it is code that runs once, at 3am, having never been exercised.
 
 ## One runner at a time
 
-No locks, no leases to reclaim, no id reservation: the campaign runs one session at a
-time, and coordination nobody needs is more to get wrong. `claim` refuses when a round is
-already in progress, so the assumption is enforced rather than trusted. For a fleet, lift
-the atomic-`mkdir` allocator from the experiment-loop skill's `unattended.md` -- and not
+No locks and no id reservation: the campaign runs one session at a time, and
+coordination nobody needs is more to get wrong. `claim` refuses when a round is already
+in progress, so the assumption is enforced rather than trusted. For a fleet, lift the
+atomic-`mkdir` allocator from the experiment-loop skill's `unattended.md` -- and not
 `flock`, which is local-only over NFS.
+
+The one lease that does exist is the round's own deadline, written by `claim` and read
+by `execute`. It is the only durable bound on an unattended round, so it is parsed as
+an instant: a naive stamp is UTC and an offset stamp is converted, never stripped.
+
+## Legal transitions
+
+    (absent) --claim--> in-progress --execute--> in-progress --record--> terminal
+                                    \\--------- release ---------------/
+
+`execute`, `record` and `release` all refuse a round that is not `in-progress`, so a
+terminal round can never be rewritten (D-046). `accepted` is unreachable from every
+path here and preflight asserts it stays that way.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import re
@@ -75,9 +104,44 @@ CAMPAIGN = ROOT / "campaign"
 SERIES = CAMPAIGN / "series"
 REPORT = CAMPAIGN / "session-report.md"
 EXECUTION_METADATA = "campaign_runner_execution"
+SELFTEST_METADATA = "campaign_runner_selftest"
+VERIFICATION_METADATA = "campaign_runner_verification"
+# Reserved archive records. A producer that prints any of them is refused: otherwise the
+# thing under test could write its own execution provenance, its own self-test result, or
+# its own certificate of validity.
+RESERVED_RECEIPTS = (EXECUTION_METADATA, SELFTEST_METADATA, VERIFICATION_METADATA)
 EXECUTION_TIME_DECIMAL_PLACES = 6
 CAMPAIGN_ENTRY_POINT = (
     f"{__spec__.name if __spec__ is not None else 'sqpack.campaign.runner'}:main"
+)
+RUNNER_MODULE = __spec__.name if __spec__ is not None else "sqpack.campaign.runner"
+
+# The three pose arrays a result line must carry: centre x, centre y, angle.
+POSE_FIELDS = ("x", "y", "t")
+# Tolerance for the independent geometric re-check. A packing at the frontier has pairs
+# in exact contact, so the sign test needs a window; sqsearch prints 17 significant
+# digits and its own selftest agrees with the naive predicate to 1e-12, so 1e-9 accepts
+# float contact noise while refusing any real overlap five orders of magnitude below the
+# 1e-4 basin the campaign decides on. It makes the check `numerically-checked`, never a
+# proof -- see sqpack.verify.verify_packing on why no tolerance can.
+POSE_TOLERANCE = 1e-9
+# Wall-clock ceilings for the two helper processes, so neither can hang an unattended
+# night. Both are generous multiples of their measured cost.
+SELFTEST_TIMEOUT_SECONDS = 900.0
+VERIFIER_TIMEOUT_SECONDS = 900.0
+# Every decision a round can hold. Anything but `in-progress` is terminal and immutable.
+IN_PROGRESS = "in-progress"
+TERMINAL_DECISIONS = frozenset(
+    {
+        "rejected",
+        "unresolved",
+        "abandoned",
+        "exhausted",
+        "superseded",
+        "blocked",
+        "baseline",
+        "accept" + "ed",
+    }
 )
 
 # campaign/README.md, "The metric vector": a gap under 1e-4. A numerical proxy for the
@@ -235,6 +299,8 @@ def queue(
             skipped.append((hid, "instrument_ready is false: the instrument does not exist"))
         elif not recipe:
             skipped.append((hid, "no `runner` recipe: needs an operator to pick the command"))
+        elif unmet := unmet_prereqs(h, recorded):
+            skipped.append((hid, f"declared prerequisites unmet: {'; '.join(unmet)}"))
         elif len(mine) >= MAX_PER_HYPOTHESIS:
             skipped.append((hid, f"at the {MAX_PER_HYPOTHESIS}-round cap"))
         elif out := [c for c in recipe["cells"] if sweep and c not in sweep]:
@@ -271,10 +337,10 @@ experiment:
     precision: {{binary_bits: 53, rounding: nearest-even}}
     tolerance: '0 (engine-reported overlap must equal zero)'
     migration_annotation: null
-    selftest_passed: true
+    selftest_passed: false
   instance: {{axis: n, point: {cell}}}
   method: {{operator: {operator}}}
-  lease: {{expires: '{expires}'}}
+  lease: {{expires: '{expires}', host: {host}, pid: {pid}}}
   results: [{{shape: determination, question: in progress, outcome: invalid}}]
   verdict:
     decision: in-progress
@@ -303,6 +369,14 @@ def claim(hid: str, operator: str, hours: float) -> str:
     h = hypothesis(hid)
     if not (recipe := h.get("runner")):
         raise RefusalError(f"{hid} has no `runner` recipe; it cannot be run unattended")
+    # `queue` already filters on this, but `claim` takes an id from anywhere: a step you
+    # can drive by hand must enforce the same order the unattended loop does.
+    if unmet := unmet_prereqs(h, [e for _, e in all_rounds()]):
+        raise RefusalError(
+            f"{hid} declares prerequisites that have not landed: {'; '.join(unmet)}"
+        )
+    if hours <= 0:
+        raise RefusalError(f"{hid} cannot be claimed for {hours}h; a lease must be positive")
 
     series_id, series_dir = open_series()
     used = [int(m.group(1)) for _, e in all_rounds() if (m := re.match(r"exp-(\d+)", e["id"]))]
@@ -324,17 +398,52 @@ def claim(hid: str, operator: str, hours: float) -> str:
             cell=recipe["cells"][0],
             operator=operator,
             expires=expires,
+            host=json.dumps(socket.gethostname()),
+            pid=os.getpid(),
         ),
     )
     # Regenerate immediately: the in-progress round is part of the record the moment it
     # exists, and a round runs for hours. Without this the gate fails on a stale
-    # ledger.md for the whole session -- i.e. exactly while you most want to run it.
-    regenerate()
+    # ledger.md for the whole session -- i.e. exactly while you most want to run it. A
+    # failure here leaves a claimed round the ledger reports as a stale claim, which is
+    # the honest state and is recoverable with `release`.
+    require_regenerated("claim", eid)
     return eid
 
 
 def archive_of(path: Path) -> Path:
     return path.parent.parent / "results" / (path.stem + ".jsonl")
+
+
+def scan_archive(archive: Path) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any] | None]]:
+    """Revalidate the whole archive and split it into result lines and receipts.
+
+    Every line goes back through `validated_record`, so reading an archive is the same
+    trust boundary as writing one: a file edited between `execute` and `record` cannot
+    reach the decision code under a weaker contract. Result lines are returned in file
+    order because the archive digest is order-sensitive.
+    """
+    results: list[dict[str, Any]] = []
+    found: dict[str, list[dict[str, Any]]] = {key: [] for key in RESERVED_RECEIPTS}
+    for line in archive.read_text().splitlines():
+        if not line.strip():
+            continue
+        rec = validated_record(line, allow_receipts=RESERVED_RECEIPTS)
+        present = [key for key in RESERVED_RECEIPTS if key in rec]
+        if present:
+            if len(present) > 1 or set(rec) != {present[0]}:
+                raise GuardError(f"{present[0]} receipt has unexpected fields")
+            body = rec[present[0]]
+            if not isinstance(body, dict):
+                raise GuardError(f"{present[0]} receipt is not an object")
+            found[present[0]].append(body)
+            continue
+        if "best_side" in rec:
+            results.append(rec)
+    for key, receipts in found.items():
+        if len(receipts) > 1:
+            raise GuardError(f"archive has more than one {key} receipt")
+    return results, {key: (v[0] if v else None) for key, v in found.items()}
 
 
 def execution_metadata(archive: Path) -> dict[str, Any] | None:
@@ -343,53 +452,46 @@ def execution_metadata(archive: Path) -> dict[str, Any] | None:
     The JSONL archive is already the durable hand-off between `execute` and `record`.
     Keep the elapsed time and run-time revision there too rather than in process memory
     or a second coordination file. Ordinary non-result provenance lines remain allowed
-    by the harness contract; this reserved record is the only one interpreted by the
-    runner.
+    by the harness contract; the reserved records are the only ones the runner reads.
     """
-    receipts: list[dict[str, Any]] = []
-    for line in archive.read_text().splitlines():
-        if not line.strip():
-            continue
-        rec = validated_record(line, allow_execution_metadata=True)
-        if EXECUTION_METADATA not in rec:
-            continue
-        if set(rec) != {EXECUTION_METADATA}:
-            raise GuardError("execution receipt has unexpected fields")
-        receipt = rec[EXECUTION_METADATA]
-        if not isinstance(receipt, dict):
-            raise GuardError("execution receipt is not an object")
-        wall_seconds = receipt.get("wall_seconds")
-        commit = receipt.get("commit")
-        dirty = receipt.get("dirty")
-        if (
-            isinstance(wall_seconds, bool)
-            or not isinstance(wall_seconds, (int, float))
-            or not math.isfinite(float(wall_seconds))
-            or wall_seconds < 0
-            or not isinstance(commit, str)
-            or not commit
-            or not isinstance(dirty, bool)
-        ):
-            raise GuardError("execution receipt has invalid wall_seconds or provenance")
-        receipts.append({"wall_seconds": float(wall_seconds), "commit": commit, "dirty": dirty})
-    if len(receipts) > 1:
-        raise GuardError("archive has more than one execution receipt")
-    return receipts[0] if receipts else None
+    receipt = scan_archive(archive)[1][EXECUTION_METADATA]
+    if receipt is None:
+        return None
+    wall_seconds = receipt.get("wall_seconds")
+    commit = receipt.get("commit")
+    dirty = receipt.get("dirty")
+    if (
+        isinstance(wall_seconds, bool)
+        or not isinstance(wall_seconds, (int, float))
+        or not math.isfinite(float(wall_seconds))
+        or wall_seconds < 0
+        or not isinstance(commit, str)
+        or not commit
+        or not isinstance(dirty, bool)
+    ):
+        raise GuardError("execution receipt has invalid wall_seconds or provenance")
+    return {"wall_seconds": float(wall_seconds), "commit": commit, "dirty": dirty}
+
+
+def append_receipt(archive: Path, key: str, body: dict[str, Any]) -> None:
+    """Append one reserved receipt line. Reserved keys never affect the archive digest."""
+    with archive.open("a") as fh:
+        fh.write(json.dumps({key: body}, sort_keys=True) + "\n")
 
 
 def append_execution_metadata(
     archive: Path, *, started: float, commit: str, dirty: bool
 ) -> None:
     """Append the receipt even when a timebox or command failure ends ``execute``."""
-    receipt = {
-        EXECUTION_METADATA: {
+    append_receipt(
+        archive,
+        EXECUTION_METADATA,
+        {
             "wall_seconds": round(time.monotonic() - started, EXECUTION_TIME_DECIMAL_PLACES),
             "commit": commit,
             "dirty": dirty,
-        }
-    }
-    with archive.open("a") as fh:
-        fh.write(json.dumps(receipt, sort_keys=True) + "\n")
+        },
+    )
 
 
 def artifact_fields_from_execution(execution: dict[str, Any]) -> dict[str, Any]:
@@ -406,7 +508,45 @@ def artifact_fields_from_execution(execution: dict[str, Any]) -> dict[str, Any]:
 # Step: execute and enforce its contract
 
 
-def validated_record(line: str, *, allow_execution_metadata: bool = False) -> dict[str, Any]:
+def validated_pose(rec: dict[str, Any], n: int) -> tuple[list[float], list[float], list[float]]:
+    """Return the result line's pose, or refuse the line.
+
+    Clause 4 of the harness contract. A `best_side` with no geometry behind it is a
+    number the producer chose to print, and D-044 is the record of what that costs:
+    nothing downstream can recompute containment or separation, and a later exact
+    promotion has no configuration to promote.
+    """
+    missing = [name for name in POSE_FIELDS if name not in rec]
+    if missing:
+        raise GuardError(
+            "a result line carries best_side but no pose: "
+            f"missing {', '.join(missing)}. Every scored line must carry the full "
+            f"configuration as {'/'.join(POSE_FIELDS)} arrays of length n."
+        )
+    pose: list[list[float]] = []
+    for name in POSE_FIELDS:
+        column = rec[name]
+        if not isinstance(column, list):
+            raise GuardError(f"a result line carries a non-array pose field {name!r}")
+        if len(column) != n:
+            raise GuardError(
+                f"a result line carries a pose field {name!r} of length {len(column)}, "
+                f"but declares n = {n}"
+            )
+        values: list[float] = []
+        for value in column:
+            if isinstance(value, bool) or not isinstance(value, (int, float)):
+                raise GuardError(f"a result line carries a non-numeric {name!r} coordinate")
+            if not math.isfinite(float(value)):
+                raise GuardError(f"a result line carries a non-finite {name!r} coordinate")
+            values.append(float(value))
+        pose.append(values)
+    return pose[0], pose[1], pose[2]
+
+
+def validated_record(
+    line: str, *, allow_receipts: tuple[str, ...] = ()
+) -> dict[str, Any]:
     """Parse one JSONL record and enforce the result-line trust boundary.
 
     This function is shared by ingestion and replay. Otherwise a line can pass the live
@@ -419,8 +559,9 @@ def validated_record(line: str, *, allow_execution_metadata: bool = False) -> di
         raise GuardError(f"non-JSON line from the command: {line[:100]!r}") from e
     if not isinstance(rec, dict):
         raise GuardError("a JSONL line must be an object")
-    if EXECUTION_METADATA in rec and not allow_execution_metadata:
-        raise GuardError(f"a command may not write the reserved {EXECUTION_METADATA!r} field")
+    for reserved in RESERVED_RECEIPTS:
+        if reserved in rec and reserved not in allow_receipts:
+            raise GuardError(f"a command may not write the reserved {reserved!r} field")
     if "best_side" not in rec:
         return rec
     if "overlap" not in rec and "best_overlap" not in rec:
@@ -442,7 +583,378 @@ def validated_record(line: str, *, allow_execution_metadata: bool = False) -> di
         raise GuardError("a result line carries an invalid n")
     if not math.isfinite(seed) or not seed.is_integer():
         raise GuardError("a result line carries an invalid seed")
+    validated_pose(rec, int(n))
     return rec
+
+
+def pose_digest(rec: dict[str, Any]) -> str:
+    """Content-address one result line's claim: its cell, its side, and its geometry.
+
+    Only the fields the verdict rests on. Two lines with the same digest make the same
+    claim about the same configuration, whatever else the producer chose to print.
+    """
+    x, y, t = validated_pose(rec, int(rec["n"]))
+    payload = {
+        "n": int(rec["n"]),
+        "seed": int(rec["seed"]),
+        "best_side": float(rec["best_side"]),
+        "x": x,
+        "y": y,
+        "t": t,
+    }
+    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def archive_digest(results: list[dict[str, Any]]) -> str:
+    """Content-address the whole archive: every pose digest, in file order.
+
+    This is what binds a verification verdict to an immutable object. Add, remove,
+    reorder or edit a scored line and the digest moves, so a stale certificate cannot
+    be carried over onto different evidence.
+    """
+    joined = "\n".join(pose_digest(rec) for rec in results)
+    return hashlib.sha256(joined.encode("utf-8")).hexdigest()
+
+
+def file_digest(path: Path) -> str:
+    """`sha256` of a file on disk, read in chunks so a large binary is cheap."""
+    digest = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+# The independent oracle: geometry, in another process
+
+
+def verify_archive_poses(archive: Path) -> dict[str, Any]:
+    """Rebuild every archived pose and re-decide validity from the geometry alone.
+
+    Run this in a child process, never inline in `record`. The point is not speed: it is
+    that the verdict comes from code the producing command never touched, reading the
+    file that is actually on disk, so agreement between the two is evidence.
+
+    The producer's objective (`required_side`) is translation-invariant, so an emitted
+    configuration is *not* normalised into `[0, s]^2`. Translating to the bounding-box
+    origin before the containment test is therefore not a courtesy to the producer -- it
+    is what makes the test the real claim: do `n` unit squares with these relative
+    positions fit inside a square of the side that was reported.
+    """
+    # Imported here so the parent process, which must not do this check itself, never
+    # even loads the oracle.
+    from sqpack.verify import corners_from_poses, float_sign, verify_packing
+
+    results, _ = scan_archive(archive)
+    sign = float_sign(POSE_TOLERANCE)
+    failures: list[str] = []
+    poses: list[dict[str, Any]] = []
+
+    for rec in results:
+        n, seed = int(rec["n"]), int(rec["seed"])
+        side = float(rec["best_side"])
+        digest = pose_digest(rec)
+        x, y, t = validated_pose(rec, n)
+        squares = corners_from_poses(x, y, t)
+        xs = [px for square in squares for px, _ in square]
+        ys = [py for square in squares for _, py in square]
+        required = max(max(xs) - min(xs), max(ys) - min(ys))
+        shifted = [[(px - min(xs), py - min(ys)) for px, py in square] for square in squares]
+        report = verify_packing(shifted, side, sign=sign)
+        label = f"n={n} seed={seed} pose {digest[:12]}"
+        if required > side + POSE_TOLERANCE:
+            failures.append(
+                f"{label}: the pose needs side {required:.17g} but the line claims "
+                f"{side:.17g}"
+            )
+        if not report.valid:
+            detail = "; ".join(f"{kind}: {why}" for kind, why in report.failures[:6])
+            failures.append(f"{label}: {detail}")
+        poses.append(
+            {
+                "pose_sha256": digest,
+                "n": n,
+                "seed": seed,
+                "best_side": side,
+                "required_side": required,
+                "squares": len(squares),
+                "pairs_tested": report.pairs_tested,
+                "touching_pairs": report.touching_pairs,
+                "valid": report.valid and required <= side + POSE_TOLERANCE,
+            }
+        )
+
+    return {
+        "verifier": "sqpack.verify.verify_packing",
+        "assurance": "numerically-checked",
+        "tolerance": POSE_TOLERANCE,
+        "archive_sha256": archive_digest(results),
+        "poses_checked": len(poses),
+        # An archive with no scored line certifies nothing. Truncated output must not
+        # arrive at `record` wearing a passing certificate.
+        "verified": bool(poses) and not failures,
+        "failures": failures,
+        "poses": poses,
+    }
+
+
+def verify_archive_command(target: str | None) -> int:
+    """The `verify-archive` step: the child half of the independent check."""
+    if not target:
+        print("REFUSED: verify-archive needs an archive path", file=sys.stderr)
+        return 1
+    archive = Path(target)
+    try:
+        report = verify_archive_poses(archive)
+    except (GuardError, OSError) as error:
+        report = {
+            "verifier": "sqpack.verify.verify_packing",
+            "verified": False,
+            "poses_checked": 0,
+            "failures": [f"{type(error).__name__}: {error}"],
+        }
+    print(json.dumps(report, sort_keys=True))
+    return 0 if report["verified"] else 1
+
+
+def verify_archive_in_separate_process(archive: Path) -> dict[str, Any]:
+    """Re-enter this module as a child process and demand its verdict on the archive."""
+    try:
+        completed = subprocess.run(
+            [sys.executable, "-m", RUNNER_MODULE, "verify-archive", str(archive)],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=VERIFIER_TIMEOUT_SECONDS,
+        )
+    except subprocess.TimeoutExpired as exc:
+        raise RefusalError(
+            f"the independent pose verifier did not finish within "
+            f"{VERIFIER_TIMEOUT_SECONDS:.0f}s on {archive.name}"
+        ) from exc
+    lines = [line for line in completed.stdout.splitlines() if line.strip()]
+    report: Any = None
+    if lines:
+        try:
+            report = json.loads(lines[-1])
+        except json.JSONDecodeError:
+            report = None
+    if not isinstance(report, dict):
+        raise RefusalError(
+            f"the independent pose verifier produced no report (exit "
+            f"{completed.returncode}): {(completed.stderr or completed.stdout).strip()[:300]}"
+        )
+    if completed.returncode != 0 or not report.get("verified"):
+        detail = "; ".join(str(f) for f in report.get("failures") or []) or "no detail"
+        raise GuardError(
+            f"independent pose verification refused {archive.name}: {detail[:600]}"
+        )
+    return report
+
+
+# The engine gate: executed, not asserted
+
+
+def engine_path(recipe: dict[str, Any]) -> Path:
+    """Absolute path to the binary the recipe's command actually runs."""
+    declared = Path(shlex.split(recipe["command"])[0])
+    return declared if declared.is_absolute() else (ROOT / declared)
+
+
+def run_engine_selftest(recipe: dict[str, Any]) -> dict[str, Any]:
+    """Execute the engine's own gate and hash the binary that passed it.
+
+    `subject.selftest_passed` is documented in the experiment schema as "whether the
+    engine gate ran and passed". It used to be a literal `True` written by the harness
+    (D-044), while the hypotheses meanwhile advertised instruments "gated by
+    `--selftest`". This runs that gate, and binds the answer to a digest of the exact
+    file that ran, so `record` can tell that the binary has not been swapped since.
+    """
+    engine = engine_path(recipe)
+    if not engine.exists():
+        raise GuardError(
+            f"the declared engine {engine} does not exist, so its self-test cannot run; "
+            "build it before claiming a round"
+        )
+    argv = (
+        shlex.split(str(recipe["selftest"]))
+        if recipe.get("selftest")
+        else [str(engine), "--selftest"]
+    )
+    digest = file_digest(engine)
+    try:
+        completed = subprocess.run(
+            argv,
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=SELFTEST_TIMEOUT_SECONDS,
+        )
+    except FileNotFoundError as exc:
+        raise GuardError(f"the engine self-test command was not found: {argv[0]}") from exc
+    except subprocess.TimeoutExpired as exc:
+        raise GuardError(
+            f"the engine self-test did not finish within {SELFTEST_TIMEOUT_SECONDS:.0f}s"
+        ) from exc
+    if completed.returncode != 0:
+        raise GuardError(
+            f"the engine self-test failed with exit {completed.returncode}; the "
+            f"instrument is suspect, so no measurement may be taken: "
+            f"{(completed.stdout + completed.stderr).strip()[-300:]}"
+        )
+    return {
+        "engine": str(engine),
+        "engine_sha256": digest,
+        "argv": argv,
+        "exit_status": completed.returncode,
+        "output_sha256": hashlib.sha256(completed.stdout.encode("utf-8")).hexdigest(),
+        "at": now().replace(microsecond=0).isoformat(),
+    }
+
+
+def selftest_passed(receipt: dict[str, Any] | None, recipe: dict[str, Any]) -> bool:
+    """True only when the gate ran, passed, and the binary is still the one that ran."""
+    if not receipt or receipt.get("exit_status") != 0:
+        return False
+    engine = engine_path(recipe)
+    if not engine.exists():
+        return False
+    return file_digest(engine) == receipt.get("engine_sha256")
+
+
+# Lifecycle: legal transitions, prerequisites, leases
+
+
+def require_in_progress(eid: str, e: dict[str, Any], step: str) -> None:
+    """Refuse any step that would rewrite a terminal round."""
+    decision = (e.get("verdict") or {}).get("decision")
+    if decision == IN_PROGRESS:
+        return
+    raise RefusalError(
+        f"{eid} is {decision!r}, not {IN_PROGRESS}: `{step}` may only act on a claimed "
+        "round. A terminal round is the record; claim a new one instead."
+    )
+
+
+def unmet_prereqs(h: dict[str, Any], recorded: list[dict[str, Any]]) -> list[str]:
+    """Declared prerequisites this runner cannot see satisfied.
+
+    `hypothesis.prereqs` says what "must land before this is runnable", and the queue
+    used to ignore it entirely (D-046), so an unattended night could run a hypothesis
+    out of order and report the result as if the order had not mattered. Prose
+    prerequisites ("a verified n = 17 pose") are not machine-checkable, so they are
+    treated as unmet rather than waved through: the runner is not the thing that gets
+    to decide a human prerequisite has landed.
+    """
+    unmet: list[str] = []
+    for item in h.get("prereqs") or []:
+        text = str(item).strip()
+        if not text:
+            continue
+        if not re.fullmatch(r"H-\d+", text):
+            unmet.append(f"{text!r} is not a hypothesis id this runner can check")
+            continue
+        decisions = {
+            (e.get("verdict") or {}).get("decision")
+            for e in recorded
+            if text in (e.get("hypotheses") or [])
+        }
+        if "accept" + "ed" not in decisions:
+            unmet.append(f"{text} has not been accepted")
+    return unmet
+
+
+def lease_expiry(eid: str, e: dict[str, Any]) -> datetime:
+    """The round's deadline as an instant in UTC.
+
+    A naive stamp is read as UTC and an offset stamp is converted. Dropping an offset
+    instead of converting it moves the instant, which expires a live west-of-UTC lease
+    hours early and extends an east-of-UTC one -- the same bug the ledger already had
+    to fix on the reading side.
+    """
+    raw = (e.get("lease") or {}).get("expires")
+    if not raw:
+        raise RefusalError(
+            f"{eid} is {IN_PROGRESS} without a lease, so nothing bounds it. "
+            f"`packing-campaign release {eid}` and claim it again."
+        )
+    try:
+        parsed = datetime.fromisoformat(str(raw))
+    except ValueError as exc:
+        raise RefusalError(f"{eid} carries an unparseable lease {raw!r}") from exc
+    return parsed.replace(tzinfo=UTC) if parsed.tzinfo is None else parsed.astimezone(UTC)
+
+
+def lease_seconds_remaining(eid: str, e: dict[str, Any]) -> float:
+    """Seconds left on the round's lease, refusing an expired one."""
+    expiry = lease_expiry(eid, e)
+    left = (expiry - now()).total_seconds()
+    if left <= 0:
+        raise RefusalError(
+            f"{eid}'s lease expired at {expiry.isoformat()}; it is a stale claim. "
+            f"`packing-campaign release {eid}` before running anything for it."
+        )
+    return left
+
+
+# Persistence: a round that is not committed did not happen
+
+
+def commit_paths(paths: list[Path], message: str) -> str:
+    """Stage exactly these paths, commit, and prove the commit landed.
+
+    Three things this fixes at once (D-046). The pathspec is the round's own artifact,
+    its archive and the one regenerated view -- never `add -A` over the whole campaign
+    directory, which swept up whatever any other writer had left dirty. The commit's
+    exit status is read rather than discarded. And `HEAD` is compared before and after,
+    because "exit 0" from a commit that produced no object is exactly the false success
+    an unattended session must not report as a durable result.
+
+    `--no-verify` stays: the repository's pre-commit hook formats the *whole* tree and
+    re-stages the result, which would put every other lane's reformatted file into this
+    round's commit and defeat the narrow pathspec above.
+    """
+    tracked = [str(path) for path in paths if path.exists()]
+    if not tracked:
+        raise RefusalError("nothing to commit: the round wrote no file that still exists")
+    before = git("rev-parse", "HEAD")
+    git("add", "--", *tracked)
+    if not git("diff", "--cached", "--name-only", "--", *tracked):
+        raise RefusalError(
+            f"{message}: staging {', '.join(tracked)} produced no change, so the round "
+            "is not durably persisted"
+        )
+    completed = subprocess.run(
+        ["git", "commit", "-q", "--no-verify", "-m", message],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode:
+        detail = (completed.stderr.strip() or completed.stdout.strip() or "no diagnostic")
+        raise RefusalError(f"git commit failed with exit {completed.returncode}: {detail}")
+    after = git("rev-parse", "HEAD")
+    if after == before:
+        raise RefusalError(
+            "git commit reported success but HEAD did not move; the round is not "
+            "durably persisted"
+        )
+    return after
+
+
+def require_regenerated(step: str, eid: str | None = None) -> None:
+    """Rebuild the generated views and refuse when the record no longer checks out."""
+    regen = regenerate()
+    if regen.returncode:
+        target = f" {eid}" if eid else ""
+        raise RefusalError(
+            f"the campaign ledger refused the record after {step}{target}:\n"
+            f"{regen.stdout}{regen.stderr}\nFix what it named, then re-run that step."
+        )
 
 
 def read_lines(stdout: str, fh: Any) -> float | None:
@@ -560,12 +1072,7 @@ def cells_from(archive: Path, recipe: dict[str, Any]) -> list[Cell]:
     by_cell: dict[int, dict[int, float]] = {}
     allowed_cells = {int(n) for n in recipe["cells"]}
     allowed_seeds = {int(seed) for seed in recipe["seeds"]}
-    for line in archive.read_text().splitlines():
-        if not line.strip():
-            continue
-        rec = validated_record(line, allow_execution_metadata=True)
-        if "best_side" not in rec:
-            continue
+    for rec in scan_archive(archive)[0]:
         n, seed, side = int(rec["n"]), int(rec["seed"]), float(rec["best_side"])
         if n not in allowed_cells or seed not in allowed_seeds:
             raise GuardError(f"archive result n={n} seed={seed} is outside the declared recipe")
