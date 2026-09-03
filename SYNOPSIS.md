@@ -209,6 +209,8 @@ case or experiment separately.
 | [H-060 prior-art survey — BC-152 W1/W2 (agenda 016)](docs/project/reviews/review-2026-09-03-bc152-h060-prior-art-survey.md) | dated review record | record | retained | — |
 | [BC-152 instrument-readiness review — H-060 half-angle chart (independent)](docs/project/reviews/review-2026-09-03-bc152-n5-rigidity-instrument-readiness.md) | dated review record | record | retained | — |
 | [BC-153 — Independent review of the H-060 proof (Goebel `n = 5`, fixed-side local rigidity)](docs/project/reviews/review-2026-09-03-bc153-h060-proof-independent-review.md) | dated review record | record | retained | — |
+| [BC-150 — Adoption Packet for the Source-Backed 4.5058 Bound at n = 17--19](docs/project/reviews/review-2026-09-03-bc150-4-5058-adoption-packet.md) | dated review record | record | retained | — |
+| [BC-151 — Independent Review of the 4.5058 Adoption Packet](docs/project/reviews/review-2026-09-03-bc151-4-5058-adoption-independent-review.md) | dated review record | record | retained | — |
 | [BC-154 — independent review of the W9 disposition for D-044 and D-046](docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md) | dated review record | record | retained | — |
 | [BC-158 — factual review of the H-060 / exp-058 records against their sources](docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -366,13 +368,23 @@ controller, not permission to blur contracts.
 is the active, operator-confirmed program around the scientific successor selected by
 Agenda 015’s completed W10 closeout and terminal
 [session-078](packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md).
-It has not begun.
+It ran on 2026-09-03, and its three lanes are terminal.
+H-052 reached complete agreement on all 181 exact direction cells and is confirmed at
+implementation-agreement scope; `T-014` proved fixed-side local rigidity at `n = 5`; the
+source-backed 4.5058 bound was adopted at `n = 17`--`19` as `T-015`/`T-016`; and the W9
+wave left D-044 and D-046 contained rather than fixed.
+The entry condition was waived by the operator rather than satisfied: the planning
+revision was never merged or hosted-green before the run began.
 
-**Selected next entry:** `think-5j8d`, the fresh H-052 continuation owned by BC-148.
-Start only after the Agenda 016 planning revision is merged and hosted-green.
-BC-147 on `think-a0h6` first freezes the 600-minute wall, allocates complete next-free
-session and H-052 experiment records, replays the retained evidence and dispatches
-`think-5j8d` beside the H-060 and W9 lanes.
+**Selected next entry:** `think-5j8d`, the bead the last terminal session closed on.
+Its own scope is discharged — H-052 is confirmed at implementation-agreement scope and
+`exp-059` is terminal — so this marker records where the run stopped rather than work
+still owed on it.
+
+The recommended follow-up is the four unrepaired clauses of D-044 and D-046, carried on
+`think-ldq2` under `think-modk`. They are clauses of those defects' own source findings
+rather than new scope, and one of them loosens an acceptance screen, which needs a
+reviewer the closing run no longer had.
 
 The agenda separates three kinds of progress that the prior closeout showed must not be
 collapsed:
@@ -2497,7 +2509,7 @@ round that names the hypothesis, control roles included.
 | [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov’s decomposition | 0 | — |
 | [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent’s 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
 | [H-051](packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md) | blocked | A blinded tier-S n = 68 public-parent surgery pilot matches the released child under the frozen grammar | 0 | — |
-| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | confirmed | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 4 | 139.6m agent + 495.6m wall |
+| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | confirmed | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 4 | 304.6m agent + 528.8m wall |
 | [H-053](packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md) | blocked | Each fixed UnitSquare `n = 68, 69` parent-child pair admits compatible rigid poses under at least one declared serialization model | 2 | 114m agent + 107.2m wall |
 | [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | unresolved | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 2 | 38m agent + 30.0m wall |
 | [H-055](packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md) | blocked | If selected, the `n = 54` witness admits complete exact promotion in the reported nested-radical field | 0 | — |
@@ -3001,7 +3013,7 @@ What is established, exactly: for `s = 2 + √2/2` and Goebel’s labeled pose `
 `C = (ℝ² × S¹)⁵`, `P⁰` is an isolated point of `Feas(s)`, so no nonconstant continuous
 feasible path leaves it and no sequence of distinct feasible poses converges to it —
 hence rigid at fixed side in the catalogue’s sense.
-Registered as `T-014` at `V3`/`C3`, apparently-novel at `S3`: the exact quantities are
+Registered as `T-014` at `V3`/`C5`, apparently-novel at `S3`: the exact quantities are
 machine-confirmed here, the curve-selection lemma and the induction that close the
 argument are an audited proof, and no instrument decides isolation — `isolation_decided`
 is false unconditionally, by design.
