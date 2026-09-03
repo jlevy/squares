@@ -117,10 +117,14 @@ run entry.
 ## PR Descriptions
 
 Use the logbook entry as the PR description source.
-Link the entry, then carry over its Outcome, Run Rollup, Results, What Worked, What Did
-Not Work, Pipeline Changes, Validation, and Next Action.
-Keep the same counts and claim boundary; do not write a second, more flattering summary
-for the PR.
+Lead with the generated branch-cost block, link the entry, then carry over its Outcome,
+Run Rollup, Results, What Worked, What Did Not Work, Pipeline Changes, Validation, and
+Next Action. Keep the same counts and claim boundary; do not write a second, more
+flattering summary for the PR. When an agenda closed, use its W10 record to classify
+each incomplete scope as a bounded negative, time-limited, guard-refused, technically
+failed, never opened, or inconclusive; give each scope an actionable disposition; group
+concrete file changes by purpose; and report documentation decisions and the one
+selected successor.
 
 From `explorations/packing`, validate a new entry with:
 

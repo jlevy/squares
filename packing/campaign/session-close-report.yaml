@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 75
+count: 82
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 31
+  sessions_measured: 38
   sessions_unmeasured: 44
   attributed:
-    rollups: 42
-    turns: 13390
-    tool_calls: 7660
-    tool_errors: 156
-    one_off_code: 1565
-    wall_hours: 69.61
+    rollups: 55
+    turns: 14495
+    tool_calls: 8351
+    tool_errors: 164
+    one_off_code: 1637
+    wall_hours: 72.04
   unattributed:
     rollups: 10
     turns: 1460
@@ -28,16 +28,16 @@ totals:
     one_off_code: 173
     wall_hours: 6.87
   measured:
-    rollups: 52
-    turns: 14850
-    tool_calls: 8538
-    tool_errors: 188
-    one_off_code: 1738
-    wall_hours: 76.48
+    rollups: 65
+    turns: 15955
+    tool_calls: 9229
+    tool_errors: 196
+    one_off_code: 1810
+    wall_hours: 78.91
 codex_receipts:
-  attributed: 15
+  attributed: 16
   unattributed: 0
-  measured: 15
+  measured: 16
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1115,3 +1115,122 @@ sessions:
     active_union_hours: 1.41
     wall_hours: 1.75
     snapshot_incomplete: false
+- id: session-076
+  title: "Agenda-014 first-wave closeout, routing and independent review"
+  status: completed
+  primary_bead: think-v0rj
+  phases: 5
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/7e50f2aa-a36b-5d97-8e99-bf910369266c.yaml
+  - packing/campaign/resource-usage/agent-a7d8aae14a834dc35.yaml
+  - packing/campaign/resource-usage/agent-a7cd7d666385121d0.yaml
+  - packing/campaign/resource-usage/agent-a6f56836f1d49ad37.yaml
+  - packing/campaign/resource-usage/agent-a83a6c7bceb3e5328.yaml
+  - packing/campaign/resource-usage/agent-aa6ff0a4866d6ae7a.yaml
+  - packing/campaign/resource-usage/agent-a5781a0c4bc6c49b5.yaml
+  turns: 677
+  tool_calls: 422
+  tool_errors: 7
+  one_off_code: 32
+  wall_hours: 1.46
+  codex_receipts: []
+- id: session-077
+  title: "Agenda-014 closeout and the ten-hour successor agenda"
+  status: completed
+  primary_bead: think-oa22
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/7e50f2aa-a36b-5d97-8e99-bf910369266c.yaml
+  - packing/campaign/resource-usage/agent-a885b989ed30caa8e.yaml
+  - packing/campaign/resource-usage/agent-a7bbfb8af0613a001.yaml
+  - packing/campaign/resource-usage/agent-a87a59e05bd605708.yaml
+  turns: 470
+  tool_calls: 307
+  tool_errors: 6
+  one_off_code: 31
+  wall_hours: 1.18
+  codex_receipts: []
+- id: session-078
+  title: "Agenda-015 ten-hour coordinator"
+  status: stopped
+  primary_bead: think-x81p
+  phases: 6
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-078.yaml
+    model_responses: 2401
+    agent_hours: 13.41
+    active_union_hours: 9.45
+    wall_hours: 10.0
+    snapshot_incomplete: true
+- id: session-079
+  title: "BC-137 n = 17 sequential larger prefix"
+  status: completed
+  primary_bead: think-ovz9
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-a4dde96d6b1cf6924.yaml
+  turns: 78
+  tool_calls: 46
+  tool_errors: 0
+  one_off_code: 10
+  wall_hours: 0.23
+  codex_receipts: []
+- id: session-080
+  title: "BC-138 n = 68 side-semantics binding"
+  status: completed
+  primary_bead: think-ymjp
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-a2713c7d417bc60cc.yaml
+  turns: 115
+  tool_calls: 77
+  tool_errors: 1
+  one_off_code: 10
+  wall_hours: 0.28
+  codex_receipts: []
+- id: session-081
+  title: "BC-140 target-blind guard repairs"
+  status: completed
+  primary_bead: think-hrw2
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-a5403a5fd8d5e9f8b.yaml
+  turns: 87
+  tool_calls: 49
+  tool_errors: 0
+  one_off_code: 19
+  wall_hours: 0.24
+  codex_receipts: []
+- id: session-082
+  title: "BC-141 n = 54 source-cell contract"
+  status: completed
+  primary_bead: think-pkgx
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-078.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-078.yaml
+    model_responses: 2401
+    agent_hours: 13.41
+    active_union_hours: 9.45
+    wall_hours: 10.0
+    snapshot_incomplete: true

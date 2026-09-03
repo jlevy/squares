@@ -163,7 +163,7 @@ $defs:
     type: object
     additionalProperties: false
     properties:
-      research-pass: {$ref: "#/$defs/count"}
+      research-survey: {$ref: "#/$defs/count"}
       factual-review: {$ref: "#/$defs/count"}
       insight-iteration: {$ref: "#/$defs/count"}
       process-review: {$ref: "#/$defs/count"}
@@ -171,6 +171,8 @@ $defs:
       research-loop: {$ref: "#/$defs/count"}
       pipeline-improvement: {$ref: "#/$defs/count"}
       documentation-pass: {$ref: "#/$defs/count"}
+      remediation: {$ref: "#/$defs/count"}
+      review-planning-oversight: {$ref: "#/$defs/count"}
       general-improvement: {$ref: "#/$defs/count"}
   phase_status_counts:
     type: object

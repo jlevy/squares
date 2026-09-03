@@ -40,6 +40,7 @@ Usage, from `packing/`:
 from __future__ import annotations
 
 import argparse
+import json
 import subprocess
 import sys
 from datetime import datetime
@@ -54,8 +55,9 @@ from devtools.check_session_rollups import (
     unique_resource_rollups,
 )
 from devtools.codex_task_tree_delta import validate_delta_document
-from devtools.render_pr_rollup import current_branch
+from devtools.render_pr_rollup import agenda_payload, current_branch
 from devtools.render_pr_rollup import render as render_branch_cost
+from devtools.render_pr_rollup import render_description as render_pr_description
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -618,14 +620,98 @@ def splice_synopsis(text: str) -> str:
     return text[:start] + render_synopsis_block() + text[stop + len(END) :]
 
 
+def finalize_agenda_views(agenda_id: str) -> None:
+    """Regenerate every derived campaign and reader view at a W10 boundary."""
+    subprocess.run(
+        [sys.executable, "-m", "sqpack.campaign.ledger", "check"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    # Live tbd is the queue authority. Synchronize it before accepting the checked
+    # candidate ranking, then prove every retained candidate still exists at the priority
+    # W10 assigned and that the selected one is actually ready.
+    subprocess.run(
+        ["tbd", "sync"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    agenda = agenda_payload(agenda_id)
+    replanning = agenda["closeout"]["replanning"]
+    candidates = {candidate["bead"]: candidate for candidate in replanning["candidates"]}
+    shown = subprocess.run(
+        ["tbd", "show", *candidates, "--json"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    shown_payload = json.loads(shown.stdout)
+    shown_issues = shown_payload if isinstance(shown_payload, list) else [shown_payload]
+    issues = {issue["displayId"]: issue for issue in shown_issues}
+    missing = sorted(candidates.keys() - issues.keys())
+    if missing:
+        raise ValueError(f"W10 candidates are missing from live tbd: {missing}")
+    for bead, candidate in candidates.items():
+        issue = issues[bead]
+        if issue.get("status") not in {"open", "in_progress"}:
+            raise ValueError(f"W10 candidate {bead} is {issue.get('status')}, not live")
+        if issue.get("priority") != candidate["priority"]:
+            raise ValueError(
+                f"W10 candidate {bead} has tbd priority "
+                f"{issue.get('priority')}, expected {candidate['priority']}"
+            )
+    ready = subprocess.run(
+        ["tbd", "ready", "--json"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    ready_ids = {item["id"] for item in json.loads(ready.stdout)}
+    selected = replanning["selected"]["bead"]
+    if selected not in ready_ids:
+        raise ValueError(f"W10 selected bead {selected} is not ready in live tbd")
+
+    for arguments in (
+        ("sqpack.campaign.ledger", "render"),
+        ("devtools.render_agenda_map",),
+    ):
+        subprocess.run(
+            [sys.executable, "-m", *arguments],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+
 def _run(options: argparse.Namespace) -> int:
     """Execute one parsed close operation so the CLI can contain receipt failures."""
     if options.render:
+        pr_description = (
+            render_pr_description(current_branch(), options.agenda, options.session)
+            if options.agenda
+            else render_branch_cost(current_branch())
+        )
+        if options.agenda:
+            finalize_agenda_views(options.agenda)
         report_text = render_report()
         synopsis_text = splice_synopsis(SYNOPSIS.read_text(encoding="utf-8"))
-        branch_cost = render_branch_cost(current_branch())
         REPORT.write_text(report_text, encoding="utf-8")
         SYNOPSIS.write_text(synopsis_text, encoding="utf-8")
+        if options.agenda:
+            subprocess.run(
+                [sys.executable, "-m", "devtools.render_document_map"],
+                cwd=ROOT,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
         print(f"wrote {REPORT.relative_to(ROOT.parent)} and the {SYNOPSIS.name} view")
         status = report(options.session)
         # Printed here rather than left to a second command anyone can forget. `OR-9` says
@@ -633,10 +719,10 @@ def _run(options: argparse.Namespace) -> int:
         # correct is the moment the rollups are written -- which is now.
         print()
         print("=" * 78)
-        print("Paste the block below at the top of the pull request (OR-9).")
+        print("Use the generated description below for the pull request (OR-9/OR-11).")
         print("=" * 78)
         print()
-        print(branch_cost, end="")
+        print(pr_description, end="")
         return status
 
     if options.update:
@@ -679,6 +765,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--session", help="report on one session in full")
     parser.add_argument("--log", type=Path, help="the session's harness log, to regenerate")
     parser.add_argument("--agent-logs", type=Path, nargs="*", default=[])
+    parser.add_argument(
+        "--agenda",
+        help="terminal agenda to reconcile, validate against live tbd, and render for the PR",
+    )
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--check", action="store_true", help="verify without writing")
     mode.add_argument("--update", action="store_true", help="regenerate rollups first")
@@ -686,6 +776,19 @@ def main(argv: list[str] | None = None) -> int:
     options = parser.parse_args(argv)
     try:
         return _run(options)
+    except subprocess.CalledProcessError as error:
+        command = error.cmd
+        rendered_command = (
+            command if isinstance(command, str) else " ".join(str(part) for part in command)
+        )
+        print(
+            f"error: command failed with exit {error.returncode}: {rendered_command}",
+            file=sys.stderr,
+        )
+        detail = error.stderr or error.stdout
+        if isinstance(detail, str) and detail.strip():
+            print(detail.strip(), file=sys.stderr)
+        return 1
     except ValueError as error:
         print(f"error: {error}", file=sys.stderr)
         return 1
@@ -696,7 +799,6 @@ def main(argv: list[str] | None = None) -> int:
         OSError,
         TypeError,
         yaml.YAMLError,
-        subprocess.CalledProcessError,
     ):
         print("error: unable to close or report the session", file=sys.stderr)
         return 1

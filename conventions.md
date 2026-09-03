@@ -149,12 +149,12 @@ Keep required keys, types, enums, and other record-local constraints in the sche
 ### Workflow, Focus, Phase, and Slice
 
 **Workflow names purpose and output; focus names the primary quality emphasis.**
-[checked for agent sessions] The eight numbered workflows and their full contracts live
-in [`SYNOPSIS.md`](SYNOPSIS.md#workflow-entry-contracts).
+[checked for agent sessions] The ten numbered workflows and their full contracts live in
+[`SYNOPSIS.md`](SYNOPSIS.md#workflow-entry-contracts).
 Routine work declares its workflow, objective, artifact, and focused check where the
 work is already tracked.
 It does not create a session artifact merely to duplicate those facts.
-`general-improvement` is reserved for genuine repository maintenance outside W1–W8 and
+`general-improvement` is reserved for genuine repository maintenance outside W1–W10 and
 the packing pipeline, not a label for mixed or ordinary core work.
 
 **Session records are an escalation, not the default.** [checked once present] Use
@@ -170,8 +170,10 @@ merges. Do not create a separate default-branch copy or publication mechanism.
 corrections stay in W1 or W2, idea probes in W3, process and checker repairs in W4,
 measured optimizations in W5, one-round registered instruments in W6 before measurement,
 reusable packing-pipeline capabilities, targeted refactors, robustness, visualization
-infrastructure, and cleanup in W7, and reconciliation of the reader-facing tier in W8.
-There is no undefined implementation handoff.
+infrastructure, and cleanup in W7, reconciliation of the reader-facing tier in W8,
+bounded defect repair in W9, and terminal review, disposition, and replanning in W10.
+There is no undefined implementation handoff, and W10 selects but does not execute the
+successor.
 
 **A documentation pass reconciles; it does not author.** [convention] W8 may correct,
 cut, reorder and clarify the root documents against the artifacts, and may not introduce
@@ -181,6 +183,22 @@ not obviously right, the output is a defect rather than a rewrite: a pass that q
 picks the more readable side is how a wrong claim becomes the tidy one.
 Its checklist is the
 [documentation-pass runbook](packing/campaign/documentation-pass.md).
+Every W10 closeout performs the smaller document-impact review even when it finds
+nothing to change; it opens or selects W8 only when the reader-facing tier needs a
+substantive reconciliation.
+
+**Remediation is a bounded wave, not a backlog-shaped phase.** [convention] W9 begins
+from confirmed defects or issues with risk ordering and owning beads.
+It groups only repairs that share a trust surface, preserves the scientific criteria it
+touches, and gives every selected item a terminal disposition with evidence.
+Its procedure is the [remediation runbook](packing/campaign/remediation-pass.md).
+
+**Agenda closure includes oversight and one next entry.** [checked] W10 classifies each
+attempt at the smallest honest scope, gives it an actionable disposition, reconciles
+files, validation, documents, and live tbd state, records operator confirmation or
+unavailability, ranks the retained candidates, and selects exactly one successor.
+Its procedure is the
+[review/planning/oversight runbook](packing/campaign/review-planning-oversight.md).
 
 **A phase is contiguous; a slice is bounded.** [checked for phase history] Start a new
 phase when workflow, focus, or the bounded slice objective changes.

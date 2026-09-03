@@ -207,7 +207,7 @@ agenda:
       take.
     bead: think-ojlr
     depends_on: []
-    workflows: [efficiency-loop, research-pass]
+    workflows: [efficiency-loop, research-survey]
     next_evidence: >-
       The 4m15s baseline was measured on this container at the start of the run rather
       than assumed, and its breakdown is already known: 250.86s of fast behavioural tests
@@ -548,7 +548,7 @@ agenda:
     - devtools/probe_contact_system.py
     bead: think-298s
     depends_on: []
-    workflows: [research-pass]
+    workflows: [research-survey]
     next_evidence: >-
       Advances BC-049 in agenda-005. The only genuinely research-shaped cell in this
       continuation; everything above it is tooling.

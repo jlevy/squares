@@ -20,9 +20,10 @@ Five checks:
    lists six; both must match what is in `docs/project/research/`.
 4. **The defect summary is derived.** README may state whether the gate has caught a
    soundness defect, but may not repeat a numeric aggregate owned by `defects.yaml`.
-5. **The work model agrees.** README and SYNOPSIS must expose the same seven numbered
-   workflow entry points, the agent-session schema must be able to record them, and the
-   synopsis must define the work units those workflows produce.
+5. **The work model agrees.** README and SYNOPSIS must expose the same numbered
+   workflow entry points, the agent-session schema must be able to record them, the
+   synopsis must define the work units those workflows produce, and retired workflow
+   identifiers must not survive elsewhere in repository-owned text.
 
 Usage: uv run --frozen python -m devtools.check_readme
 """
@@ -69,6 +70,50 @@ NOT_CONTENT = {"uv.lock", "pyproject.toml", "__pycache__", ".venv", "LICENSE"}
 CACHE_PARTS = {"__pycache__", ".pytest_cache", ".ruff_cache", ".venv"}
 IGNORED_FILES = {".DS_Store"}
 
+# This is the repository-owned text surface, not the retained literature archive. The
+# latter is source evidence and may use any ordinary phrase; a workflow migration does
+# not rewrite it. Build products and caches are not product state.
+WORK_MODEL_TEXT_SUFFIXES = {
+    ".cfg",
+    ".conf",
+    ".css",
+    ".html",
+    ".ini",
+    ".js",
+    ".json",
+    ".jsonl",
+    ".lock",
+    ".md",
+    ".py",
+    ".rs",
+    ".sh",
+    ".svg",
+    ".toml",
+    ".ts",
+    ".tsx",
+    ".txt",
+    ".yaml",
+    ".yml",
+}
+WORK_MODEL_TEXT_NAMES = {
+    ".flowmarkignore",
+    ".gitattributes",
+    ".gitignore",
+    ".python-version",
+    "Makefile",
+}
+WORK_MODEL_SCAN_PRUNED_DIRS = {
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".tbd",
+    ".venv",
+    "__pycache__",
+    "node_modules",
+    "target",
+}
+
 _SPELLED = {
     1: "one",
     2: "two",
@@ -83,10 +128,10 @@ _SPELLED = {
 }
 
 
-#: W1 through W8. Bumping this is the deliberate half of adding a workflow; the other
+#: W1 through W10. Bumping this is the deliberate half of adding a workflow; the other
 #: half is the two orientation tables in README.md and SYNOPSIS.md, which this check
 #: compares against the schema rather than against each other.
-EXPECTED_NUMBERED_WORKFLOWS = 8
+EXPECTED_NUMBERED_WORKFLOWS = 10
 
 
 def layout_tree(text: str) -> str | None:
@@ -229,6 +274,47 @@ def workflow_rows(text: str) -> list[tuple[str, str]]:
     return re.findall(r"^\| (W\d+) \| `([^`]+)` \|", text, re.M)
 
 
+def check_retired_workflow_identifiers() -> list[str]:
+    """Reject old controlled names without rewriting retained source evidence."""
+    # Assemble the previous W1 slug so the guard does not preserve the token it bans.
+    retired = "-".join(("research", "pass"))
+    problems: list[str] = []
+
+    def record_walk_error(error: OSError) -> None:
+        problems.append(f"work-model text scan could not traverse the repository: {error}")
+
+    for directory, directory_names, filenames in REPO.walk(
+        top_down=True, on_error=record_walk_error
+    ):
+        directory_names[:] = sorted(
+            name
+            for name in directory_names
+            if name not in WORK_MODEL_SCAN_PRUNED_DIRS
+            and not (directory == REPO / "packing" / "resources" and name in {"papers", "web"})
+        )
+        for filename in sorted(filenames):
+            path = directory / filename
+            if (
+                path.suffix.lower() not in WORK_MODEL_TEXT_SUFFIXES
+                and path.name not in WORK_MODEL_TEXT_NAMES
+            ):
+                continue
+            relative = path.relative_to(REPO)
+            try:
+                lines = path.read_text(encoding="utf-8").splitlines()
+            except (OSError, UnicodeDecodeError) as error:
+                problems.append(
+                    f"{relative}: cannot scan for retired workflow identifiers: {error}"
+                )
+                continue
+            problems.extend(
+                f"{relative}:{line_number}: contains retired workflow identifier"
+                for line_number, line in enumerate(lines, start=1)
+                if retired in line
+            )
+    return problems
+
+
 def check_work_model(text: str) -> list[str]:
     """Keep the human workflow entry points and machine contract in lockstep."""
     synopsis = SYNOPSIS.read_text(encoding="utf-8")
@@ -313,6 +399,7 @@ def main() -> int:
         + check_reports(text)
         + check_defect_summary(text)
         + check_work_model(text)
+        + check_retired_workflow_identifiers()
     )
     if problems:
         print("README.md has drifted from the directory:", file=sys.stderr)

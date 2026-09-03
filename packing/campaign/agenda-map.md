@@ -2,7 +2,7 @@
 
 # Agenda map
 
-136 agenda commitments across 14 agendas, as declared in each agenda's own frontmatter.
+146 agenda commitments across 15 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **7** ready, **3** tentative, **24** blocked, **12** stopped, **90** complete.
+- **7** ready, **3** tentative, **14** blocked, **24** stopped, **98** complete.
 
-- **7 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-127`, `BC-132`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **5 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -51,16 +51,6 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
 | agenda-012 | `BC-115` | 2 | `BC-112` | no | BC-120 must clear and BC-121 must apply BC-112's adoption recommendation, and a second fixed-certificate consumer must… |
-| agenda-014 | `BC-127` | 0 | — | no | The four lane closeouts and resource receipts are frozen on the first-wave PR checkpoint, but the owner requested a… |
-| agenda-014 | `BC-128` | 0 | `BC-127` | no | — |
-| agenda-014 | `BC-135` | 0 | `BC-127`, `BC-128` | no | — |
-| agenda-014 | `BC-136` | 0 | `BC-135` | no | — |
-| agenda-014 | `BC-129` | 0 | `BC-123`, `BC-128` | no | — |
-| agenda-014 | `BC-130` | 0 | `BC-124`, `BC-128` | no | — |
-| agenda-014 | `BC-132` | 0 | — | no | BC-129--BC-131 must each stop lane work and commands at the common boundary after BC-128 routes the second wave and… |
-| agenda-014 | `BC-133` | 0 | `BC-132` | no | — |
-| agenda-014 | `BC-134` | 0 | `BC-133` | no | — |
-| agenda-014 | `BC-131` | 1 | `BC-126`, `BC-128` | no | — |
 
 ## Discharged elsewhere
 
@@ -94,14 +84,15 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-011 | completed |  |  |  |  | 2 | 2 |
 | agenda-012 | active |  |  | 1 | 5 | 2 | 8 |
 | agenda-013 | completed |  |  |  | 1 | 6 | 7 |
-| agenda-014 | active |  |  | 10 | 1 | 3 | 14 |
+| agenda-014 | completed |  |  |  | 7 | 7 | 14 |
+| agenda-015 | completed |  |  |  | 6 | 4 | 10 |
 
 ## What the states mean
 
 - `ready` — may be taken now
 - `tentative` — declared but not yet committed to
 - `blocked` — waiting on a named predecessor
-- `stopped` — not run here; the agenda says why, and `discharged_by` names where it moved
+- `stopped` — ended without meeting the full exit; the agenda outcome says why and what follows
 - `complete` — discharged
 
 <!-- This document follows common-doc-guidelines.md.

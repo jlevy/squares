@@ -71,7 +71,7 @@ session:
     next_action: >-
       Complete and validate the frozen contract, then wait for the coordinator to create
       the exact next-free experiment/result records and authorize the next phase.
-  - workflow: research-pass
+  - workflow: research-survey
     recording: contemporaneous
     clock_role: work
     focus: correctness

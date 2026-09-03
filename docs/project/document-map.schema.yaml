@@ -37,6 +37,8 @@ $defs:
       - development-guide
       - research-runbook
       - documentation-runbook
+      - remediation-runbook
+      - oversight-runbook
       - session-guide
       - research-loop-logbook
       - series-guide

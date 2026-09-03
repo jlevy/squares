@@ -63,7 +63,9 @@ STATE_MEANING = {
     "ready": "may be taken now",
     "tentative": "declared but not yet committed to",
     "blocked": "waiting on a named predecessor",
-    "stopped": "not run here; the agenda says why, and `discharged_by` names where it moved",
+    "stopped": (
+        "ended without meeting the full exit; the agenda outcome says why and what follows"
+    ),
     "complete": "discharged",
 }
 
@@ -142,6 +144,14 @@ def violations(commitments: list[Commitment]) -> list[str]:
     complete = {c.id for c in commitments if c.state == "complete"}
     out: list[str] = []
     for c in sorted(commitments, key=lambda c: c.id):
+        if c.agenda_status in ("completed", "superseded") and c.state not in (
+            "complete",
+            "stopped",
+        ):
+            out.append(
+                f"{c.id} is {c.state} inside terminal {c.agenda}; every item in a "
+                "completed or superseded agenda must be complete or stopped"
+            )
         if c.discharged_by and c.state in ("ready", "tentative"):
             out.append(
                 f"{c.id} is {c.state} but names discharged_by: {c.discharged_by}; "

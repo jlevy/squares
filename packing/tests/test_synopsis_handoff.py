@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 from devtools.check_synopsis import (
@@ -10,6 +12,10 @@ from devtools.check_synopsis import (
     check_unprotected_fix_claims,
     load_agenda_items,
     select_handoff_cell,
+    select_handoff_target,
+    select_latest_closeout,
+    select_latest_terminal_session,
+    session_handoff_key,
 )
 
 
@@ -38,6 +44,73 @@ def test_handoff_cells_are_loaded_across_agendas(tmp_path) -> None:
 
     assert [item["id"] for item in items] == ["BC-010", "BC-019"]
     assert select_handoff_cell(items, "Continue BC-019") == items[1]
+
+
+def test_handoff_target_accepts_one_standalone_bead_after_an_agenda() -> None:
+    items = [{"id": "BC-019", "bead": "think-old"}]
+
+    assert select_handoff_target(items, "Continue under think-fresh after publication") == (
+        None,
+        "think-fresh",
+    )
+    with pytest.raises(ValueError, match="exactly one bead"):
+        select_handoff_target(items, "Choose think-first or think-second")
+
+
+def test_handoff_chronology_uses_terminal_clock_before_start_order() -> None:
+    coordinator = {
+        "started_at": "2026-09-02T05:03:00Z",
+        "deadline_at": "2026-09-02T15:03:00Z",
+    }
+    later_lane = {
+        "started_at": "2026-09-02T08:23:00Z",
+        "deadline_at": "2026-09-02T11:23:00Z",
+    }
+
+    assert session_handoff_key(coordinator, 78) > session_handoff_key(later_lane, 82)
+
+
+def test_latest_handoff_ignores_live_session_with_later_deadline() -> None:
+    terminal = {
+        "status": "stopped",
+        "started_at": "2026-09-02T05:03:00Z",
+        "deadline_at": "2026-09-02T15:03:00Z",
+    }
+    live = {
+        "status": "in_progress",
+        "started_at": "2026-09-02T15:04:00Z",
+        "deadline_at": "2026-09-02T20:04:00Z",
+    }
+
+    assert select_latest_terminal_session(
+        [
+            (Path("session-078-terminal.md"), terminal),
+            (Path("session-083-live.md"), live),
+        ]
+    ) == (Path("session-078-terminal.md"), terminal)
+
+
+def test_latest_closeout_uses_newest_terminal_agenda(tmp_path: Path) -> None:
+    for number, status, with_closeout in (
+        (14, "completed", True),
+        (15, "completed", True),
+        (16, "active", True),
+    ):
+        closeout = (
+            "\n  closeout:\n    replanning:\n      selected:\n        bead: think-next"
+            if with_closeout
+            else ""
+        )
+        (tmp_path / f"agenda-{number:03}.md").write_text(
+            f"---\nagenda:\n  status: {status}{closeout}\n---\n",
+            encoding="utf-8",
+        )
+
+    selected = select_latest_closeout(tmp_path.glob("agenda-*.md"))
+
+    assert selected is not None
+    assert selected[0].name == "agenda-015.md"
+    assert selected[1]["replanning"]["selected"]["bead"] == "think-next"
 
 
 def test_unprotected_fix_claims_rejects_stale_duplicate() -> None:

@@ -70,7 +70,7 @@ atlas, ambiguity graph, discovery curve, and continuation tree, while the resear
 decides which views expose mechanisms rather than decorate a report.
 
 A focus is a quality dimension, not a workflow.
-Before taking work, choose W1–W8 from the
+Before taking work, choose W1–W10 from the
 [workflow entry contracts](../../../../SYNOPSIS.md#workflow-entry-contracts), then
 declare the primary focus inside that phase.
 A focus-only change starts another phase under the same workflow; a changed purpose
@@ -79,7 +79,7 @@ W7, `pipeline-improvement`, owns reusable packing-pipeline capabilities, targete
 refactors, robustness, visualization infrastructure, and cleanup for named research
 consumers. W6 retains only instruments specific to one registered round that freeze
 before measurement. `general-improvement` is only for genuine repository maintenance
-outside W1–W8 and the packing pipeline.
+outside W1–W10 and the packing pipeline.
 
 ## Measured checkpoint — 2026-08-24
 
@@ -199,7 +199,7 @@ and shared-record writes may not.
 | 10 | W2 `factual-review` / Correctness | `think-kfb4` | 1 slice, only after order 9 yields a result | Independent minimality and branch-scope disposition; an `exp-NNN` only if the frozen criterion is actually resolved | One unsupported branch or nonminimal certificate keeps the question unresolved and routes to order 11 |
 | 11 | W7 `pipeline-improvement` / Efficiency | `think-tx0b` | 1 slice | One timeout/process-group primitive and focused failure test in `tests/test_validation_cli.py`, or a minimized incompatibility | Do not retrofit every deep step in one slice; stop with the first coherent primitive or blocker |
 | 12 | W4 `process-review` / Process | `think-b3bm` | 1 slice | One short parent-owned rehearsal preserving argv, start/end, exit or signal, output paths, timeout, cleanup, and the portable runbook rule | If any receipt field disappears, retain that failure and leave the bead open; no long or deep command |
-| 13 | W1 `research-pass` / Insight | `think-ykt7` | 1 slice | Source-bound reproduction of one `O(x^(3/5))` primitive or error balance, with the exact boundary where finite transfer fails | If the local primary source is insufficient, record the gap and stop; no unsupported asymptotic or finite-instance claim |
+| 13 | W1 `research-survey` / Insight | `think-ykt7` | 1 slice | Source-bound reproduction of one `O(x^(3/5))` primitive or error balance, with the exact boundary where finite transfer fails | If the local primary source is insufficient, record the gap and stop; no unsupported asymptotic or finite-instance claim |
 | 14 | Evidence-earned continuation / owning workflow and focus | One of orders 2, 4, 6, 8–9, 11, or 13 | 1 slice | One bounded successor justified by the predecessor’s retained evidence | No new evidence, no continuation; never become a third consecutive slice |
 | 15 | W4 `process-review` / Process | `think-3cbq` | 45 minutes | All writers stopped; artifacts, ledger, defects, beads, commits, push, normal-gate receipt, terminal session report, and exact next action reconciled | The first gate failure gets one focused diagnosis only; otherwise preserve the last green checkpoint and stop at the eight-hour deadline |
 
@@ -341,24 +341,23 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, follow
-[session 073](../../../../packing/campaign/agent-sessions/session-073-bc123-n17-parent-bound-parallel-profile.md),
-the latest lane closeout from Agenda 014’s frozen first wave.
-Its exact serial arm is retained, but host-load contamination stopped exp-053 before a
-paired profile existed.
-The owner paused the campaign after the checkpoint captured session 073, the terminal n
-= 68 adapter, the accepted-but-review-pending n = 50 refusal receipt and the n = 54
-source audit. The coordinating
-[session 072](../../../../packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md)
-on
-[agenda-014](../../../../packing/campaign/agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md),
-is stopped rather than terminally synthesized.
+For the next supervised exact-research goal, take **the fresh n = 17 continuation under
+`think-5j8d`**, but only after PR #75’s current head is hosted-green.
+The continuation starts from the terminal evidence retained by
+[session 078](../../../../packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md),
+the coordinator of the completed
+[agenda-015](../../../../packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md).
+That exact ten-hour wall ran from `05:03Z` through `15:03Z` on 2026-09-02; its BC-146
+publication phase stopped at the wall, and later publication remediation is recorded
+separately rather than extending the session.
 
-On resume, complete BC-127’s formal W5 receipt and BC-128’s immutable packet freeze,
-then take **BC-135 under `think-bpzq`** as the next supervised exact-research goal.
-That independent review must dispose exp-053 through exp-055 before BC-136 may derive a
-separate nine-hour overnight agenda.
-No candidate continuation is open at this checkpoint.
+The retained exp-056 chain has 170 of 181 verified agreeing rows through ordinal 169,
+with progress ordinal 170 at `independent_started` and no canonical result.
+The new round must use a fresh preregistration and fresh result, checkpoint and progress
+paths, then replay all 170 retained rows before continuing ordinals 170 through 180.
+Exp-056 never resumes.
+H-052 remains unresolved, and even a complete agreeing round requires the separate
+adoption gate before any packing-bound or frontier change.
 
 **Do not take a next slice from an agenda directly.**
 [`agenda-map.md`](../../../../packing/campaign/agenda-map.md) is generated from every

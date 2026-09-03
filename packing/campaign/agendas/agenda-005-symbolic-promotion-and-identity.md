@@ -315,7 +315,7 @@ agenda:
       locally-rigid on a first-party certificate before this was scoped, which is why it
       is not in `instances`.
     hypotheses: []
-    budget: one W1 research-pass slice of at most 60 minutes on n = 5 alone, then a replan
+    budget: one W1 research-survey slice of at most 60 minutes on n = 5 alone, then a replan
     entry: >-
       the n = 11 tangent-cone machinery in cases/trump11/tangent_cones.py as a worked
       example, and the retained witnesses for n = 5, 28 and 40
@@ -326,7 +326,7 @@ agenda:
       refusal naming what the machinery could not decide also closes the slice.
     bead: think-xdly
     depends_on: []
-    workflows: [research-pass, research-loop]
+    workflows: [research-survey, research-loop]
     next_evidence: >-
       The translation escape screen finds no movable square for exactly n = 5, 11, 28, 40
       and the ten perfect squares -- an independent partition that agrees with the

@@ -83,7 +83,7 @@ experiment:
       decision.
   verdict:
     decision: unresolved
-    needs_review: true
+    needs_review: false
     primary_criterion: >-
       Median paired speedup is at least 2.8x, every candidate row and merged chain is
       byte-identical to serial, no pair is at or below 1x, and every corruption and

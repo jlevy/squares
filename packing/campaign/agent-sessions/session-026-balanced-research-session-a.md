@@ -680,7 +680,7 @@ session:
     next_action: >-
       Under BC-030 and think-6mcd, inspect the CG-010 fixed-angle cell contract and
       freeze the smallest target-free control without starting n=11 enumeration.
-  - workflow: research-pass
+  - workflow: research-survey
     recording: contemporaneous
     clock_role: work
     focus: insight
@@ -722,7 +722,7 @@ session:
     - Three independent audits agree that the scaffold, fixed-angle payload, total wall-state inventory, contacts, and non-edge axes must transform and canonicalize jointly; canonicalizing a scaffold first and appending axes would collapse distinct cells.
     - The formulation-independent price vector must keep separate partition, angle-assignment, wall-seating, non-edge-axis, raw-cell, orbit-image, canonical-cell, duplicate, and LP-work fields rather than one scalar.
     - The smallest fixture has three angle assignments, twelve total wall decisions, two contacts, one non-edge, eight raw choices for that non-edge axis and order, and 48 raw orbit images; these counts are derived from the literal fixture rather than the 1–100 calibration corpus or the 11,013 abstract scaffolds.
-    stop_reason: The source inventory, minimum control, missing contract, and W7 seam are explicit, so the research pass closed without implementation or target work.
+    stop_reason: The source inventory, minimum control, missing contract, and W7 seam are explicit, so the research survey closed without implementation or target work.
     next_action: >-
       Run a short W3 slice to freeze which structural and solve obligations belong in
       FullFixedAngleCellLabel/v1, then hand only that bounded contract to W7.
@@ -1080,7 +1080,7 @@ session:
     - Free space is 6.1 GiB, above the 4 GiB integration threshold but still too scarce for speculative duplicate gates.
     stop_reason: No measured bottleneck in the remaining per-edit loop can repay an optimization slice, so W5 closed immediately and preserved the breadth rotation.
     next_action: Open BC-031's bounded source-recovery pass and retain either one primary source or a dated reproducible negative result.
-  - workflow: research-pass
+  - workflow: research-survey
     recording: contemporaneous
     clock_role: work
     focus: correctness
@@ -1277,7 +1277,7 @@ session:
     deadline_at: '2026-08-27T01:14:00-07:00'
     expected_output: >-
       One explicit non-result boundary for BC-032 and one falsifiable, source-owned
-      BC-034 question that fits a 10-30-minute research pass.
+      BC-034 question that fits a 10-30-minute research survey.
     validation_command: >-
       rg -n "H-037|finite transfer|effective|synchronization|boundary" campaign
       docs/project/research docs/project/specs
@@ -1305,7 +1305,7 @@ session:
     next_action: >-
       Prove the all-parameter index bijection or retain the first counterexample or
       missing range, without invoking the primitive's geometry.
-  - workflow: research-pass
+  - workflow: research-survey
     recording: contemporaneous
     clock_role: work
     focus: insight
@@ -1393,7 +1393,7 @@ session:
     next_action: >-
       Prove or refute Bui Lemmas 3-5 exactly, retain endpoint and sign mutations, and
       stop before Lemma 6 unless a new slice is declared.
-  - workflow: research-pass
+  - workflow: research-survey
     recording: contemporaneous
     clock_role: work
     focus: insight
@@ -1674,7 +1674,7 @@ session:
     next_action: >-
       Use the remaining pre-reserve research window for the independent El Moumni n=7
       source-faithful proof-control lane under think-trkj.
-  - workflow: research-pass
+  - workflow: research-survey
     recording: contemporaneous
     clock_role: work
     focus: correctness

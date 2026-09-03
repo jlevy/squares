@@ -41,6 +41,21 @@ def test_python_outside_the_mapped_roots_selects_everything() -> None:
     assert select_tests(["docs/scripts/mystery.py"]).everything
 
 
+def test_a_benchmark_only_change_selects_its_reachable_tests() -> None:
+    """BC-142: the agenda-014 push tier ran all 1,302 tests for a change whose only
+    Python was `benchmarks/n17_weighted_certificate_parallel.py`, because that root was
+    unmapped. Mapped, the change reaches the test that names it and not the suite."""
+    selection = select_tests(["packing/benchmarks/n17_weighted_certificate_parallel.py"])
+    assert not selection.everything
+    assert "packing/tests/test_n17_weighted_certificate_parallel.py" in selection.tests
+    assert "packing/tests/test_reachable_tests.py" not in selection.tests
+
+
+def test_an_unmapped_python_root_is_still_refused_into_everything() -> None:
+    """Mapping one more root must not weaken the refusal for the next unmapped one."""
+    assert select_tests(["packing/scripts/unmapped.py"]).everything
+
+
 def test_suite_configuration_selects_everything() -> None:
     assert select_tests(["pyproject.toml"]).everything
     assert select_tests([".github/workflows/packing-validation.yml"]).everything

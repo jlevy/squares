@@ -8,8 +8,8 @@ softschema:
 agenda:
   id: agenda-014
   title: "Mechanism-first continuation and provenance closure"
-  updated: '2026-09-01'
-  status: active
+  updated: '2026-09-02'
+  status: completed
   objective: >-
     Run an exact six-hour first-wave campaign from agenda-013's reviewed exits without
     replaying or repairing its evidence. The first 150 minutes give three agents
@@ -217,7 +217,7 @@ agenda:
     - packing/tests/test_audit_n54_source_formula.py
     - packing/resources/web/n54-source-formula-audit-2026/README.md
     - packing/resources/web/finite-case-literature-audit-2026/README.md
-    workflows: [research-pass, insight-iteration, factual-review]
+    workflows: [research-survey, insight-iteration, factual-review]
     next_evidence: >-
       Complete at the 01:00Z cell. The live source supplies exact defining equations,
       side, orientation and symbolic placement formulas in one quartic field, but no
@@ -232,7 +232,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [17, 50, 54, 68]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       After four bounded blocks, which measured agent, command, validation or evidence-
@@ -260,20 +260,26 @@ agenda:
       routed to a later W7 block and not implemented during this wall.
     bead: think-ne3d
     depends_on: []
-    blocked_on: >-
-      The four lane closeouts and resource receipts are frozen on the first-wave PR
-      checkpoint, but the owner requested a pause before this block opened.
     workflows: [process-review, efficiency-loop]
+    artifacts:
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md
+    - packing/devtools/render_wave_efficiency.py
+    - packing/tests/test_render_wave_efficiency.py
+    - packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md
     next_evidence: >-
-      Resume only on a new owner instruction from the pushed first-wave checkpoint.
-      Formal W5 must begin by verifying that revision and its hosted checks; the
-      preliminary read-only timing preflight is not a substitute for BC-127's durable
-      repayment decision.
+      Complete on the resumed wall in session-076. W4 verified revision 1e175108, its
+      three green hosted checks, four terminal lane records, four declared receipts
+      and no live writer. The W5 receipt is
+      docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md, with
+      its baseline rendered by devtools.render_wave_efficiency; the decision is
+      no-change, and the one measured candidate (the unmapped benchmarks root that
+      made the push tier select all 1,302 tests) fails the equivalence and repayment
+      guards and is routed to W7 with four process-contract entries.
   - id: BC-128
     purpose: measurement_validation
     owner_focus: insight
     instances: [17, 50, 54, 68]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Which exact overnight continuation, if any, did each first-wave result earn?
@@ -295,13 +301,22 @@ agenda:
     bead: think-8ih6
     depends_on: [BC-127]
     workflows: [insight-iteration, factual-review, process-review]
+    artifacts:
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md
+    - packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md
     next_evidence: >-
-      Blocked on the first-wave W5 receipt and exact terminal outcomes.
+      Complete in session-076. The routing decision and three immutable packets are
+      docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md at
+      evidence revision 1e175108: BC-129 stopped with the sequential resumable wall
+      priced at about 5.6 hours; BC-130 a conditional candidate that needs an exp-054
+      pass and a separate side-semantics preregistration; BC-131 stopped with the
+      source refusal retained behind the n = 54 negative-control and frozen-input
+      repairs. No second-wave agent was dispatched and no target opened.
   - id: BC-135
     purpose: measurement_validation
     owner_focus: correctness
     instances: [17, 50, 54, 68]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Do independent cross-lane reviewers reproduce every first-wave decision, named
@@ -327,13 +342,22 @@ agenda:
     bead: think-bpzq
     depends_on: [BC-127, BC-128]
     workflows: [factual-review, process-review]
+    artifacts:
+    - docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md
+    - packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md
     next_evidence: >-
-      Blocked on immutable first-wave packets and stopped lane writers.
+      Complete in session-076. Three fresh reviewers replayed the three packets at
+      packet commit e9c92091 on evidence revision 1e175108 and returned pass for
+      exp-053, exp-054 and exp-055 with every hash, mutation and absence reproduced;
+      the record is
+      docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md.
+      BC-136 holds permission to clear only the three needs_review flags; none was
+      cleared here.
   - id: BC-136
     purpose: research
     owner_focus: process
     instances: [17, 19, 39, 50, 54, 68, 69]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       What did the six-hour first wave establish, refuse or leave unresolved, and what
@@ -360,14 +384,25 @@ agenda:
       No merge occurs without the owner.
     bead: think-oa22
     depends_on: [BC-135]
+    artifacts:
+    - packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md
+    - packing/campaign/agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-053-h-057-n17-parent-bound-parallel-speedup.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-054-h-058-n68-one-parent-production-serialization.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-055-h-059-n50-producer-refusal-ordering.md
     workflows: [insight-iteration, documentation-pass, process-review]
     next_evidence: >-
-      Blocked on independent review of every first-wave packet.
+      Complete in session-077 on the owner's instruction. The three BC-135-cleared
+      needs_review flags were set to false in the experiment records only; the
+      immutable exp-055 result is unchanged. The audit of BC-129--BC-134 found one
+      dead row, one carried route, one route behind two repairs and three superseded
+      process rows, and the separate ten-hour successor is agenda-015, whose blocks
+      carry only reviewed routes and target-blind fallbacks.
   - id: BC-129
     purpose: research
     owner_focus: correctness
     instances: [17, 18, 19]
-    state: blocked
+    state: stopped
     priority: 0
     question: >-
       If the parent-bound parallel profile passes, can one 180-minute continuation
@@ -394,16 +429,22 @@ agenda:
       named mutation and the unchanged claim boundary.
     bead: think-pzcl
     depends_on: [BC-123, BC-128]
+    blocked_on: >-
+      BC-128 stopped this row: BC-123 measured no paired sample, so the 2.8x condition
+      never held, and the retained serial control cannot be paired with a later
+      candidate. Any future profile is a newly registered round with fresh pair roots
+      and a host-wide quiet lease.
     workflows: [insight-iteration, research-loop, factual-review]
     next_evidence: >-
-      Blocked until the performance result and routing checkpoint make a three-hour
-      larger-prefix or possible-completion attempt honest.
-    parallel_group: agenda014-second-wave-n17
+      Stopped by BC-128 and closed by BC-136: the 2.8x condition never held. The priced
+      sequential resumable wall is scheduled as agenda-015 BC-137, a newly registered
+      round that resumes the reviewed exp-052 chain from ordinal 33 without any speed
+      claim.
   - id: BC-130
     purpose: research
     owner_focus: correctness
     instances: [68]
-    state: blocked
+    state: stopped
     priority: 0
     question: >-
       If the production adapter passes target-blind review, what is the first exact
@@ -431,16 +472,21 @@ agenda:
       the unchanged claim boundary.
     bead: think-rtuk
     depends_on: [BC-124, BC-128]
+    blocked_on: >-
+      BC-128 froze this row as a conditional candidate: it opens only if exp-054 passes
+      BC-135 review and a separate preregistration binds the reported side token's
+      exact or directional semantics; without that contract a run returns three typed
+      serialization refusals. Only BC-136 may place it in a separate overnight agenda.
     workflows: [insight-iteration, research-loop, factual-review]
     next_evidence: >-
-      Blocked on a complete production adapter and explicit route; no network or target
-      access is authorized by agenda publication alone.
-    parallel_group: agenda014-second-wave-n68
+      Carried into agenda-015 by BC-136: BC-138 preregisters the side-semantics
+      binding target-blind and BC-139 runs the one-parent localization only on that
+      readmission and BC-143's routing. This row itself does not open.
   - id: BC-131
     purpose: research
     owner_focus: correctness
     instances: [19, 54]
-    state: blocked
+    state: stopped
     priority: 1
     question: >-
       Did the n = 54 audit earn a source-cell/correspondence instrument, or must the
@@ -467,16 +513,21 @@ agenda:
       unchanged claim boundary.
     bead: think-e6rj
     depends_on: [BC-126, BC-128]
-    workflows: [research-pass, insight-iteration, pipeline-improvement, factual-review]
+    blocked_on: >-
+      BC-128 stopped this row and retained the source refusal
+      exact-source-parser-and-labeled-correspondence-absent. The formula tool's named
+      negative control and the frozen-input inventory repair are target-blind W7
+      prerequisites before any parser or correspondence contract is reviewed.
+    workflows: [research-survey, insight-iteration, pipeline-improvement, factual-review]
     next_evidence: >-
-      Blocked until the source audit and routing checkpoint show whether any
-      construction rung is admissible.
-    parallel_group: agenda014-second-wave-scale
+      Stopped by BC-128 with the source refusal retained. Agenda-015 BC-140 makes the
+      two target-blind repairs and BC-141 builds the parser and correspondence
+      contract against a synthetic fixture; H-055 stays instrument-unready.
   - id: BC-132
     purpose: tool_validation
     owner_focus: efficiency
     instances: [17, 50, 54, 68]
-    state: blocked
+    state: stopped
     priority: 0
     question: >-
       What did the second wave retain per unit cost, and are all outcomes frozen into
@@ -511,12 +562,13 @@ agenda:
       dependencies cannot encode that complete-or-stopped process gate.
     workflows: [process-review, efficiency-loop, documentation-pass]
     next_evidence: >-
-      Blocked until the second-wave lane closeouts are disjoint and terminal-ready.
+      Superseded by agenda-015 BC-143 and BC-144, which own the wave checkpoints of
+      the successor run; this row does not open.
   - id: BC-133
     purpose: measurement_validation
     owner_focus: correctness
     instances: [17, 50, 54, 68]
-    state: blocked
+    state: stopped
     priority: 0
     question: >-
       Do independent cross-lane reviewers reproduce every new first- and second-wave
@@ -543,12 +595,13 @@ agenda:
     depends_on: [BC-132]
     workflows: [factual-review, process-review]
     next_evidence: >-
-      Blocked on immutable first- and second-wave packets and stopped source writers.
+      Superseded by agenda-015 BC-145, the successor run's independent review; this
+      row does not open.
   - id: BC-134
     purpose: research
     owner_focus: process
     instances: [17, 19, 39, 50, 54, 68, 69]
-    state: blocked
+    state: stopped
     priority: 0
     question: >-
       What did the nine-hour continuation establish, refuse or leave unresolved, and
@@ -577,7 +630,8 @@ agenda:
     depends_on: [BC-133]
     workflows: [insight-iteration, documentation-pass, process-review]
     next_evidence: >-
-      Blocked on independent review of every first- and second-wave packet.
+      Superseded by agenda-015 BC-146, the successor run's synthesis and publication;
+      this row does not open.
 ---
 # Agenda-014 — Mechanism-First Continuation and Provenance Closure
 

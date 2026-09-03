@@ -68,7 +68,7 @@ experiment:
       under normal and optimized Python with byte-identical verification receipts.
   verdict:
     decision: accepted
-    needs_review: true
+    needs_review: false
     primary_criterion: >-
       Both runtimes bind the frozen producer and result, emit the exact same refusal and
       canonical zero-call trace, leave exp-050 byte-identical and reject every named

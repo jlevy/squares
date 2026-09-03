@@ -209,7 +209,7 @@ session:
       changed under review rather than merely being confirmed by it.
     next_action: >-
       agenda-008 is closed. Take the next slice from the agenda map's live queue.
-  - workflow: research-pass
+  - workflow: research-survey
     recording: contemporaneous
     clock_role: work
     focus: correctness
@@ -755,7 +755,7 @@ session:
     next_action: >-
       Then the next live-queue cell. BC-010, BC-029 and BC-017's next slice all wait on
       decisions an unattended runner may not take, and the agenda map names what is left.
-  - workflow: research-pass
+  - workflow: research-survey
     recording: contemporaneous
     clock_role: work
     focus: correctness

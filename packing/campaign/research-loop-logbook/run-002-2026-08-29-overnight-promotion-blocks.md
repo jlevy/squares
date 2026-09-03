@@ -42,7 +42,7 @@ logbook_entry:
       process-review: 10
       general-improvement: 1
       efficiency-loop: 1
-      research-pass: 1
+      research-survey: 1
     phase_status_counts:
       completed: 31
       stopped: 1

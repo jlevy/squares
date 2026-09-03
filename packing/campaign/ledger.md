@@ -9,7 +9,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | run | date | status | cycle slots | sessions | phases | workflows | new-round verdicts | prior retained results | next action |
 | --- | --- | --- | ---: | ---: | ---: | --- | --- | ---: | --- |
 | [run-001](research-loop-logbook/run-001-2026-08-25-four-hour-r4-r5.md) | 2026-08-25 | completed | 8 x 30m | 2 | 10 | `process-review` 2, `research-loop` 5, `pipeline-improvement` 3 | accepted 1, rejected 1, unresolved 3 | 6 | Under think-1s0h and BC-010, preregister exactly campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md; obtain independent criterion acceptance before implementing minus_w_scale.py or running any pure minus-W target. |
-| [run-002](research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md) | 2026-08-29 | stopped | 39 x 30m | 9 | 32 | `pipeline-improvement` 19, `process-review` 10, `general-improvement` 1, `efficiency-loop` 1, `research-pass` 1 |  | 0 | Resume at agenda-006 block 11, `BC-066` under `think-obgk`: eliminate the five-unknown system that BC-065 left, and record whatever the chain reaches inside a declared cap. It is first because it is the only remaining block that can change what this run concludes about n = 29; everything after it improves the pipeline. The full ordering through block 18 is the continuation schedule in agenda-006, and the endpoint check BC-064 is reserved and may not be borrowed from. Separately and not a runner's decision: whether the n = 29 interval certificate moves verified_upper_bound. It is retained, unpromoted, and 5.23371e-5 below the standing ceiling. |
+| [run-002](research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md) | 2026-08-29 | stopped | 39 x 30m | 9 | 32 | `pipeline-improvement` 19, `process-review` 10, `general-improvement` 1, `efficiency-loop` 1, `research-survey` 1 |  | 0 | Resume at agenda-006 block 11, `BC-066` under `think-obgk`: eliminate the five-unknown system that BC-065 left, and record whatever the chain reaches inside a declared cap. It is first because it is the only remaining block that can change what this run concludes about n = 29; everything after it improves the pipeline. The full ordering through block 18 is the continuation schedule in agenda-006, and the endpoint check BC-064 is reserved and may not be borrowed from. Separately and not a runner's decision: whether the n = 29 interval certificate moves verified_upper_bound. It is retained, unpromoted, and 5.23371e-5 below the standing ceiling. |
 
 ## Agent sessions
 
@@ -25,7 +25,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | retrospective | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-ciwv | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
 | [session-009](agent-sessions/session-009-autonomous-basin-map.md) | stopped | mixed | `process-review` (process) | `process-review` (process) | 10 | think-05hr | Open a new AgentSession/v2 under W2 factual-review with a Correctness focus. Capture the n=4 seed-0 status-4 millisecond fixture under think-nr5w, then finish think-b3bm's final-receipt runbook rehearsal and revalidate the strict launch path before new basin-map rounds. Keep D-126 separate; the exact-research queue remains think-nm35. |
 | [session-010](agent-sessions/session-010-eight-hour-mixed-research.md) | stopped | contemporaneous | `research-loop` (insight) | `process-review` (process) | 15 | think-3cbq | Continue the original wall-clock objective in a new bounded session from the final PR 29 head. Run frozen order 7 under think-b4jc: require identical seeded outputs, independently recomputed pair totals, and unloaded-host overhead before retaining the meter; then route the first unmetered quench adapter without changing a criterion. |
-| [session-011](agent-sessions/session-011-eight-hour-continuation.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `research-pass` (insight) | 7 | think-gszk | Rotate after the order-13 checkpoint; do not infer a finite improvement, launch an unbounded proof audit or resume the H-043 wider run. |
+| [session-011](agent-sessions/session-011-eight-hour-continuation.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `research-survey` (insight) | 7 | think-gszk | Rotate after the order-13 checkpoint; do not infer a finite improvement, launch an unbounded proof audit or resume the H-043 wider run. |
 | [session-012](agent-sessions/session-012-eight-hour-final-continuation.md) | completed | contemporaneous | `process-review` (correctness) | `process-review` (process) | 3 | think-gszk | Commit and push the local sign repair, then start a bounded successor session. |
 | [session-013](agent-sessions/session-013-generated-view-recurrence-checkpoint.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 1 | think-gszk | Commit and push, update PR 34, then begin a new bounded research session. |
 | [session-014](agent-sessions/session-014-final-portfolio-rotation.md) | stopped | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 2 | think-gszk | From the pushed PR 34 head, open a new bounded session and preregister one BC-010 exact R4/R5 nonlinear-realization slice under think-1s0h; retain D-239 as a separate pipeline slice and do not begin basin-frequency work before component identity. |
@@ -69,7 +69,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-052](agent-sessions/session-052-midrun-checkpoint.md) | completed | contemporaneous | `process-review` (insight) | `process-review` (insight) | 1 | think-cjxk | Block 3 opens as session-053 on `BC-099` under `think-1o1f`: encode Bentz 2010's m = 4 argument in the general instrument, with the falsifier at every failed step. |
 | [session-053](agent-sessions/session-053-block3-bentz-machine-check.md) | completed | contemporaneous | `research-loop` (correctness) | `research-loop` (process) | 2 | think-1o1f | Block 4 opens as session-055 on `BC-100` under `think-l48p`: upgrade the chunks.py census to the registered partition solver and evaluate H-044's criterion on the frozen corpus. |
 | [session-054](agent-sessions/session-054-block1-certifier-and-falsifier.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-y2ju | Block 2 opens as session-051 on `BC-095` under `think-kp7o`: reprice the chunk-level enumeration with the measured orbit quotient and the realizability prefilter. |
-| [session-055](agent-sessions/session-055-block4-h044-verdict.md) | completed | contemporaneous | `research-pass` (insight) | `research-pass` (insight) | 1 | think-l48p | Block 5 opens as session-056 on `BC-101` under `think-q6vy`: the Green sizes ladder, per the checkpoint's promotion. |
+| [session-055](agent-sessions/session-055-block4-h044-verdict.md) | completed | contemporaneous | `research-survey` (insight) | `research-survey` (insight) | 1 | think-l48p | Block 5 opens as session-056 on `BC-101` under `think-q6vy`: the Green sizes ladder, per the checkpoint's promotion. |
 | [session-056](agent-sessions/session-056-block5-bentz13-figure2.md) | completed | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 2 | think-1o1f | Block 6 opens as session-057 on `BC-101` under `think-q6vy`: the Green sizes ladder, per the checkpoint's promotion. |
 | [session-057](agent-sessions/session-057-block6-green-sizes.md) | completed | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-q6vy | Finalization: close every open record, refresh PR #66 per OR-9 on `BC-101` under `think-q6vy`, and write the handoff. |
 | [session-058](agent-sessions/session-058-block7-m8-sizing.md) | completed | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-07t7 | Session-059 opens on `BC-102` under `think-0z9b`: the tau* diagnostic at n = 12, the checkpoint's other authorized filler. |
@@ -90,6 +90,13 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-073](agent-sessions/session-073-bc123-n17-parent-bound-parallel-profile.md) | stopped | contemporaneous | `insight-iteration` (efficiency) | `insight-iteration` (insight) | 8 | think-p2m6 | Review exp-053 under BC-135 on think-bpzq. Any later timing round requires fresh paired roots and a host-wide quiet lease; exp-053 must not resume. |
 | [session-074](agent-sessions/session-074-bc124-n68-production-adapter.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 7 | think-3i67 | Route only to separately preregistered BC-130; preserve the typed side-semantics refusal unless a later contract binds exact or directional semantics. |
 | [session-075](agent-sessions/session-075-bc125-n50-producer-refusal-ordering.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 7 | think-17q7 | Independent campaign review may clear or challenge exp-055 needs_review without rerunning it. |
+| [session-076](agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 5 | think-v0rj | Take BC-136 under think-oa22 only on a new owner instruction; it may clear the three review flags and write the separate overnight agenda from the one conditional route. |
+| [session-077](agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 3 | think-oa22 | Take BC-137 under think-ovz9 at agenda-015's wave-one dispatch; the two sibling lanes open in the same dispatch. |
+| [session-078](agent-sessions/session-078-agenda015-ten-hour-coordinator.md) | stopped | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (process) | 6 | think-x81p | Complete the separate post-wall publication remediation. The `think-5j8d` bead becomes the next scientific entry only after PR #75's current head is hosted-green. |
+| [session-079](agent-sessions/session-079-bc137-n17-sequential-larger-prefix.md) | completed | contemporaneous | `insight-iteration` (correctness) | `factual-review` (correctness) | 3 | think-ovz9 | The coordinator launches the registered exp-056 `--record` command and observes it with `--status` on the exp-056 checkpoint at each 25-minute boundary. |
+| [session-080](agent-sessions/session-080-bc138-n68-side-semantics-binding.md) | completed | contemporaneous | `insight-iteration` (correctness) | `factual-review` (correctness) | 4 | think-ymjp | Retain the literal point-model instrument and the typed refusal. Do not open BC-139; a future literal-only route requires a new prospectively frozen hypothesis and experiment. |
+| [session-081](agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `factual-review` (process) | 4 | think-hrw2 | Return the readmitted n = 54 subset to BC-143 under think-8hcp for the frozen routing decision; track the eight missing bound controls under D-418 / think-ifgr. |
+| [session-082](agent-sessions/session-082-bc141-n54-source-contract.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 1 | think-pkgx | At the fixed 11:23Z wave boundary, open BC-144 under think-2tol, freeze the terminal wave evidence and prepare only the bounded independent-review packets it earns. |
 
 ### Workflow summary
 
@@ -97,13 +104,13 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
-| `research-pass` | 1 | 0 | 12 | 0 |
-| `factual-review` | 3 | 0 | 35 | 2 |
-| `insight-iteration` | 13 | 1 | 48 | 2 |
-| `process-review` | 11 | 4 | 55 | 6 |
-| `efficiency-loop` | 9 | 0 | 26 | 0 |
+| `research-survey` | 1 | 0 | 12 | 0 |
+| `factual-review` | 3 | 0 | 40 | 2 |
+| `insight-iteration` | 17 | 1 | 56 | 2 |
+| `process-review` | 13 | 4 | 61 | 6 |
+| `efficiency-loop` | 9 | 0 | 27 | 0 |
 | `research-loop` | 8 | 4 | 43 | 7 |
-| `pipeline-improvement` | 19 | 0 | 95 | 0 |
+| `pipeline-improvement` | 20 | 0 | 101 | 0 |
 | `documentation-pass` | 1 | 0 | 2 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
@@ -324,7 +331,7 @@ Status: **completed**. Execute agenda-012 end to end during one owner-authorized
 
 ### [agenda-014](agendas/agenda-014-mechanism-first-continuation-and-provenance-closure.md) — Mechanism-first continuation and provenance closure
 
-Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's reviewed exits without replaying or repairing its evidence. The first 150 minutes give three agents disjoint n = 17 profile/merge, n = 68 production-adapter and n = 50 producer-provenance blocks while the coordinator runs a bounded n = 54 source/formula audit. A protected 20-minute process closeout freezes the four lane receipts before a 15-minute W5 analysis and 30-minute W3 routing and packet checkpoint. Sixty minutes of independent cross-lane review then precede an 85-minute synthesis, validation, tbd synchronization and PR-publication reserve. The wall is exactly 360 minutes. BC-129--BC-134 remain unopened candidate work; BC-136 must translate only reviewed exits into a separate exact nine-hour overnight agenda. Research and instrument blocks use 15--30 minute Artifact / Result / Guard / Next cells; shorter coordinator exceptions are named in the wall and cannot open before their frozen-input gates.
+Status: **completed**. Run an exact six-hour first-wave campaign from agenda-013's reviewed exits without replaying or repairing its evidence. The first 150 minutes give three agents disjoint n = 17 profile/merge, n = 68 production-adapter and n = 50 producer-provenance blocks while the coordinator runs a bounded n = 54 source/formula audit. A protected 20-minute process closeout freezes the four lane receipts before a 15-minute W5 analysis and 30-minute W3 routing and packet checkpoint. Sixty minutes of independent cross-lane review then precede an 85-minute synthesis, validation, tbd synchronization and PR-publication reserve. The wall is exactly 360 minutes. BC-129--BC-134 remain unopened candidate work; BC-136 must translate only reviewed exits into a separate exact nine-hour overnight agenda. Research and instrument blocks use 15--30 minute Artifact / Result / Guard / Next cells; shorter coordinator exceptions are named in the wall and cannot open before their frozen-input gates.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
@@ -332,22 +339,39 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 | BC-124 | tool_validation | 68, 69 | complete | 0 | think-3i67 | Complete as a target-blind instrument result. After a prepublication depth-guard repair and fresh different-lane W2, the production adapter passed 35 focused tests, 20 named mutations, static checks and normal/optimized replay. H-058 is instrument-ready and exp-054 remains unresolved and review-pending; no source, target or result opened. Its first production boundary is still three typed side-semantics refusals. |
 | BC-125 | measurement_validation | 19, 50 | complete | 0 | think-17q7 | Complete with one immutable 5,211-byte prospective zero-call refusal result and byte-identical normal/optimized independent verification. Exp-055 is accepted and review-pending. Exp-050, H-054 and every scientific or geometry claim remain unchanged; BC-135 may review the result without rerunning its one-shot producer. |
 | BC-126 | research | 19, 54 | complete | 1 | think-tabx | Complete at the 01:00Z cell. The live source supplies exact defining equations, side, orientation and symbolic placement formulas in one quartic field, but no stable 54-cell labels, retained immutable source, exact pose manifest or verified correspondence to the retained witness. A different-lane packet preflight also found that the formula tool has no independent named negative control and omits the retained 2009 HTML from its frozen-input table. H-055 remains instrument-unready. Repair those two target-blind provenance controls before any parser/correspondence contract is reviewed. |
-| BC-127 | tool_validation | 17, 50, 54, 68 | blocked | 0 | think-ne3d | Resume only on a new owner instruction from the pushed first-wave checkpoint. Formal W5 must begin by verifying that revision and its hosted checks; the preliminary read-only timing preflight is not a substitute for BC-127's durable repayment decision. |
-| BC-128 | measurement_validation | 17, 50, 54, 68 | blocked | 0 | think-8ih6 | Blocked on the first-wave W5 receipt and exact terminal outcomes. |
-| BC-135 | measurement_validation | 17, 50, 54, 68 | blocked | 0 | think-bpzq | Blocked on immutable first-wave packets and stopped lane writers. |
-| BC-136 | research | 17, 19, 39, 50, 54, 68, 69 | blocked | 0 | think-oa22 | Blocked on independent review of every first-wave packet. |
-| BC-129 | research | 17, 18, 19 | blocked | 0 | think-pzcl | Blocked until the performance result and routing checkpoint make a three-hour larger-prefix or possible-completion attempt honest. |
-| BC-130 | research | 68 | blocked | 0 | think-rtuk | Blocked on a complete production adapter and explicit route; no network or target access is authorized by agenda publication alone. |
-| BC-131 | research | 19, 54 | blocked | 1 | think-e6rj | Blocked until the source audit and routing checkpoint show whether any construction rung is admissible. |
-| BC-132 | tool_validation | 17, 50, 54, 68 | blocked | 0 | think-bhp0 | Blocked until the second-wave lane closeouts are disjoint and terminal-ready. |
-| BC-133 | measurement_validation | 17, 50, 54, 68 | blocked | 0 | think-1wrs | Blocked on immutable first- and second-wave packets and stopped source writers. |
-| BC-134 | research | 17, 19, 39, 50, 54, 68, 69 | blocked | 0 | think-m4r7 | Blocked on independent review of every first- and second-wave packet. |
+| BC-127 | tool_validation | 17, 50, 54, 68 | complete | 0 | think-ne3d | Complete on the resumed wall in session-076. W4 verified revision 1e175108, its three green hosted checks, four terminal lane records, four declared receipts and no live writer. The W5 receipt is docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md, with its baseline rendered by devtools.render_wave_efficiency; the decision is no-change, and the one measured candidate (the unmapped benchmarks root that made the push tier select all 1,302 tests) fails the equivalence and repayment guards and is routed to W7 with four process-contract entries. |
+| BC-128 | measurement_validation | 17, 50, 54, 68 | complete | 0 | think-8ih6 | Complete in session-076. The routing decision and three immutable packets are docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md at evidence revision 1e175108: BC-129 stopped with the sequential resumable wall priced at about 5.6 hours; BC-130 a conditional candidate that needs an exp-054 pass and a separate side-semantics preregistration; BC-131 stopped with the source refusal retained behind the n = 54 negative-control and frozen-input repairs. No second-wave agent was dispatched and no target opened. |
+| BC-135 | measurement_validation | 17, 50, 54, 68 | complete | 0 | think-bpzq | Complete in session-076. Three fresh reviewers replayed the three packets at packet commit e9c92091 on evidence revision 1e175108 and returned pass for exp-053, exp-054 and exp-055 with every hash, mutation and absence reproduced; the record is docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md. BC-136 holds permission to clear only the three needs_review flags; none was cleared here. |
+| BC-136 | research | 17, 19, 39, 50, 54, 68, 69 | complete | 0 | think-oa22 | Complete in session-077 on the owner's instruction. The three BC-135-cleared needs_review flags were set to false in the experiment records only; the immutable exp-055 result is unchanged. The audit of BC-129--BC-134 found one dead row, one carried route, one route behind two repairs and three superseded process rows, and the separate ten-hour successor is agenda-015, whose blocks carry only reviewed routes and target-blind fallbacks. |
+| BC-129 | research | 17, 18, 19 | stopped | 0 | think-pzcl | Stopped by BC-128 and closed by BC-136: the 2.8x condition never held. The priced sequential resumable wall is scheduled as agenda-015 BC-137, a newly registered round that resumes the reviewed exp-052 chain from ordinal 33 without any speed claim. |
+| BC-130 | research | 68 | stopped | 0 | think-rtuk | Carried into agenda-015 by BC-136: BC-138 preregisters the side-semantics binding target-blind and BC-139 runs the one-parent localization only on that readmission and BC-143's routing. This row itself does not open. |
+| BC-131 | research | 19, 54 | stopped | 1 | think-e6rj | Stopped by BC-128 with the source refusal retained. Agenda-015 BC-140 makes the two target-blind repairs and BC-141 builds the parser and correspondence contract against a synthetic fixture; H-055 stays instrument-unready. |
+| BC-132 | tool_validation | 17, 50, 54, 68 | stopped | 0 | think-bhp0 | Superseded by agenda-015 BC-143 and BC-144, which own the wave checkpoints of the successor run; this row does not open. |
+| BC-133 | measurement_validation | 17, 50, 54, 68 | stopped | 0 | think-1wrs | Superseded by agenda-015 BC-145, the successor run's independent review; this row does not open. |
+| BC-134 | research | 17, 19, 39, 50, 54, 68, 69 | stopped | 0 | think-m4r7 | Superseded by agenda-015 BC-146, the successor run's synthesis and publication; this row does not open. |
+
+### [agenda-015](agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md) — Ten-Hour Earned Routes and Guard Repairs
+
+Status: **completed**. Run an exact ten-hour unattended campaign from agenda-014's reviewed exits without replaying or repairing its frozen evidence. Three agents own disjoint lanes: an n = 17 sequential larger-prefix round that resumes the reviewed exp-052 chain from ordinal 33 under a fresh registration; an n = 68 lane that preregisters the side-semantics binding target-blind, is readmitted, and only then retrieves the one declared parent; and a target-blind guard lane that repairs the three routed W7 controls and then builds the n = 54 parser and labeled-correspondence contract against a synthetic fixture. The coordinator owns the reachable-tests root map, the fallback queue, both checkpoints, the packet freeze, the independent review and the terminal publication. The wall is exactly 600 minutes: a 150-minute first wave, a 50-minute checkpoint, a 180-minute second wave, a 50-minute checkpoint, a 90-minute independent review and an 80-minute closeout. Research and instrument lanes record Artifact / Result / Guard / Next at 25-minute cells; the n = 17 process is the one long child that may run across cells, and only while each boundary observes it. Every criterion, threshold and target is frozen before its lane opens and does not adapt during the wall.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-137 | research | 17 | stopped | 0 | think-ovz9 | The terminal 170-of-181 agreeing prefix, ordinal-170 independent-started marker and absent canonical result route to the fresh think-5j8d continuation; exp-056 itself remains stopped and never resumes. |
+| BC-138 | tool_validation | 68 | stopped | 0 | think-ymjp | Exp-057 remains invalid: the literal printed-rational point survives, but the two six-decimal models lack retained provenance. No source or network access occurred; think-lvqx owns any prospective literal-only route. |
+| BC-139 | research | 68 | stopped | 0 | think-3lfz | The row never opened because BC-138 did not earn readmission. No source, network, adapter or result path was opened, and any later route must begin from a new preregistration rather than this stopped item. |
+| BC-140 | tool_validation | 54, 68, 17 | stopped | 0 | think-hrw2 | The n = 54 audit and normalization controls were admitted. The module-aware declared-bound checker discovers 24 bounds and names all 14 n = 54 caps; eight allowlisted bounds still require real refusal controls under think-ifgr. |
+| BC-141 | tool_validation | 54 | complete | 1 | think-pkgx | The reviewed synthetic N54SourceContract/v1 and canonical N54Result/v1 are reusable instrumentation. The frozen packet passes 79 tests and the current n = 54 pair passes 80; H-055 remains instrument-unready without a live source or geometry evidence. |
+| BC-142 | tool_validation | 17, 54, 68 | stopped | 1 | think-8zct | The partial map selects 13 of 115 tests, but lacks a refusable exact-set oracle. Think-mo7r owns that missing equivalence control; no efficiency admission follows from this stopped item. |
+| BC-143 | measurement_validation | 17, 54, 68 | complete | 0 | think-8hcp | The first-wave freeze is d15e96c8, its W5 receipt is a typed no-change, BC-139 stayed closed, BC-141 opened and the still-growing BC-137 process continued to the fixed second-wave boundary. |
+| BC-144 | measurement_validation | 17, 54, 68 | complete | 0 | think-2tol | Evidence revision 313624cc stopped every writer, retained a second typed W5 no-change and froze the three immutable review packets used by BC-145. |
+| BC-145 | measurement_validation | 17, 54, 68 | complete | 0 | think-rh18 | Three fresh Max reviews passed and were reconciled at 162d0bea. Only exp-056 and exp-057 cleared needs_review; no result, hypothesis, instrument, bound, frontier or route changed. |
+| BC-146 | research | 17, 54, 68 | stopped | 0 | think-8epx | BC-146 stopped at the hard wall. Post-wall work repairs the publication guards, validates and pushes the exact tree, and requires PR #75's current head to be hosted-green before think-5j8d becomes the next scientific entry. |
 
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 55 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 57 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -404,23 +428,20 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 | H-049 | blocked | search | delta((4,6), 20) > 0: twenty unit squares pack into a 4 by 6 rectangle |  | 0 |  |
 | H-050 | blocked | search | The n = 71 incumbent's split of sixteen oblique squares across two ang |  | 0 |  |
 | H-051 | blocked | search | Starting only from the hash-verified public n = 68 parent, a proposer  |  | 0 |  |
-| H-052 | unresolved | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 2 | 139.6m agent + 139.6m wall |
+| H-052 | unresolved | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 3 | 139.6m agent + 495.6m wall |
 | H-053 | blocked | search | For each fixed UnitSquare Release 1 parent-child pair at n = 68 and n  |  | 2 | 114m agent + 107.2m wall |
 | H-054 | unresolved | search | The retained source facts for the reported n = 50 construction at side |  | 2 | 38m agent + 30.0m wall |
 | H-055 | blocked | search | If BC-111 selects n = 54, the fixed retained witness at reported side  |  | 0 |  |
 | H-056 | blocked | search | If BC-111 selects n = 39, the fixed retained witness can be promoted t |  | 0 |  |
-| H-057 | needs review | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 1 | 107.833m agent + 12.3m wall |
-| H-058 | needs review | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 1 | 99m agent + 99.0m wall |
-| H-059 | needs review | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 1 | 92m agent + 1s wall |
+| H-057 | unresolved | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 1 | 107.833m agent + 12.3m wall |
+| H-058 | unresolved | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 2 | 115.667m agent + 115.7m wall |
+| H-059 | confirmed | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 1 | 92m agent + 1s wall |
 
 ## Needs review — held for a human, not decided
 
 | id | hypotheses | decision | why it was not decided |
 | --- | --- | --- | --- |
 | exp-050 | H-054 | unresolved | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
-| exp-053 | H-057 | unresolved | Asymmetric external CPU load contaminated Pair 1's parallel arm after the serial control completed, so no paired timing is admissible and H-057 remains neither accepted nor rejected. The durable serial arm records 524.743164166 seconds of process cost, not a speedup sample; the interrupted parallel arm, Pair 1 receipt, Pairs 2--3 and canonical result do not exist. The 738-second effort is a conservative observed command wall, bounded from the 01:49:22Z process start through the 02:01:40Z cleanup observation, not a nanosecond timing receipt. |
-| exp-054 | H-058 | unresolved | The target-blind adapter passed its complete author-side and different-lane W2 admission gates, so H-058's instrument is ready for a separately preregistered target phase. This round opened no network or target source and created no exp-054 result, so it supplies no H-058 sample and cannot accept or reject the claim. Whole-result verification shares the frozen refusal.verify proof-replay kernel with the producer path, although its shape, binding and publication checks are separate. The reported side token also remains intentionally unbound; the production path therefore yields three typed `serialization-refusal` outcomes until a later preregistration supplies admissible exact or directional semantics. |
-| exp-055 | H-059 | accepted | The one authorized process produced the exact same existing-result refusal and canonical zero-call trace under normal and optimized Python, every sentinel was independently calibrated, every registered mutation rejected, exp-050 remained byte-identical and the no-import verifier accepted the immutable result. This accepts only H-059's prospective protocol claim; independent campaign review is still required. |
 
 ## Rounds
 
@@ -439,7 +460,7 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 | exp-037 | series-000 | 29 | openai-codex | H-042 | The retained serialization has six numerical orientation classes, with minimum class gap 0.296067 degrees against a 1e-90 degree interval radius. |
 | exp-041 | series-000 | 5 | openai-codex | H-023 | The frozen complete-zero-inventory clause is false: one additional owner axis is zero only at the positive endpoint, while independent control review also found mutation-reason and partial-disposition guards that remain unfinished. |
 
-### unresolved (11)
+### unresolved (13)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -454,6 +475,8 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 | exp-052 | series-000 | 17 | openai-codex | H-052 | The declared timebox ended before all 181 paired rows and the frozen precondition and mutation checks completed. The preserved 33-row prefix is valid process evidence and every retained pair agrees, but it is not a completed sample under H-052's all-direction criterion. No canonical result exists, so H-052 remains neither accepted nor rejected. |
 | exp-053 | series-000 | 17 | openai-codex | H-057 | Asymmetric external CPU load contaminated Pair 1's parallel arm after the serial control completed, so no paired timing is admissible and H-057 remains neither accepted nor rejected. The durable serial arm records 524.743164166 seconds of process cost, not a speedup sample; the interrupted parallel arm, Pair 1 receipt, Pairs 2--3 and canonical result do not exist. The 738-second effort is a conservative observed command wall, bounded from the 01:49:22Z process start through the 02:01:40Z cleanup observation, not a nanosecond timing receipt. |
 | exp-054 | series-000 | 68 | openai-codex | H-058 | The target-blind adapter passed its complete author-side and different-lane W2 admission gates, so H-058's instrument is ready for a separately preregistered target phase. This round opened no network or target source and created no exp-054 result, so it supplies no H-058 sample and cannot accept or reject the claim. Whole-result verification shares the frozen refusal.verify proof-replay kernel with the producer path, although its shape, binding and publication checks are separate. The reported side token also remains intentionally unbound; the production path therefore yields three typed `serialization-refusal` outcomes until a later preregistration supplies admissible exact or directional semantics. |
+| exp-056 | series-000 | 17 | claude-opus-5 then openai-codex-max-equivalent coordinator | H-052 | The fixed 11:23Z timebox ended before all 181 paired rows completed. The retained 170-row prefix is valid process evidence, every completed pair agrees exactly and the interrupted ordinal was not appended, but a prefix does not satisfy H-052's all-direction criterion. No canonical result exists, so H-052 remains neither accepted nor rejected and the terminal decision stays review-pending for BC-145. |
+| exp-057 | series-000 | 68 | claude-opus-5 | H-058 | The release supports the literal printed-rational point model but supplies no provenance for applying either six-decimal coordinate rule to its fourteen-digit side token, so the conjunctive binding stops before BC-139 and H-058 remains unmeasured. |
 
 ### blocked (6)
 
@@ -514,10 +537,11 @@ Status: **active**. Run an exact six-hour first-wave campaign from agenda-013's 
 | exp-048 | H-054 | 8m agent | dependency |  |  |
 | exp-049 | H-052 | 65.3333m agent + 65.3m wall | timebox | Frozen package-manifest SHA-256 309ec24158f73dd2e9b837c773b1 |  |
 | exp-052 | H-052 | 74.2667m agent + 74.3m wall | timebox | Canonical checkpoint SHA-256 db5c156959b6de4e6f2c9be283454d0 |  |
+| exp-056 | H-052 | 356.0m wall | timebox | Canonical child checkpoint SHA-256 0d39a7e734e8afc62fda914fd |  |
 
 ## Effort
 
-55 rounds, 1721.43 agent-minutes, 419.0 wall-minutes.
+57 rounds, 1738.1 agent-minutes, 791.6 wall-minutes.
 
 ## Exploration reports not yet codified
 

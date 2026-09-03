@@ -4,7 +4,7 @@ An [experiment loop](../../.agents/skills/experiment-loop/SKILL.md) for the dura
 square-packing research program.
 This file owns W6, `research-loop`: the contract every experiment round runs under—the
 question, metric vector, accept rule, and budget.
-The [synopsis](../../SYNOPSIS.md#workflow-entry-contracts) owns the seven workflow entry
+The [synopsis](../../SYNOPSIS.md#workflow-entry-contracts) owns the ten workflow entry
 points and the distinction among campaign, series, session, experiment, round, and run.
 It is frozen while rounds are running — see
 [what a runner may not do](#what-a-runner-may-not-do).
@@ -191,6 +191,14 @@ even when the answer is negative or invalid.
 7. **Commit and re-screen.** Regenerate owned views, run the narrowest sufficient gate,
    commit and push the checkpoint, then choose again from the now-current queue.
 
+An agenda boundary adds W10 after the last research slice.
+W10 classifies every block, assigns a terminal disposition and follow-up bead where
+needed, reviews the reader-facing documents, reconciles live tbd, and reprioritizes the
+candidate set before one successor may start.
+The operator may confirm or revise that ranking; when no operator is available, the
+recorded fallback keeps an autonomous mandate moving without inventing a new criterion.
+The [W10 runbook](review-planning-oversight.md) owns the exact closeout.
+
 New tangents do not disappear and do not hijack the clock.
 Record one as a bead, defect, exploration report, hypothesis, or open question according
 to what it is; pursue it immediately only when it falsifies the active slice’s premise
@@ -215,6 +223,10 @@ its registered round, but measurement begins only after the hypothesis, criterio
 budget, and instrument are ready and frozen.
 A missing cross-round capability or a material change to a shared trust boundary stops
 W6 and hands off to W7, then W2 when independent review is required.
+Systematic repair of a confirmed defect backlog enters [W9](remediation-pass.md).
+Terminal reconciliation, documentation impact review, reprioritization, and successor
+selection enter [W10](review-planning-oversight.md); W10 does not execute the successor
+it selects.
 
 A user request may cause the same transition immediately, but it does not erase the
 phase already performed.
@@ -265,8 +277,14 @@ owns work dependencies, and the active session still owns the clock.
 Update an agenda only at a checkpoint.
 A completed item means its bounded question has a retained answer, not that a basin map
 or hypothesis is complete.
-The generated ledger shows agenda states alongside experiments so the next agent does
-not need conversation history to find the next ready commitment.
+For terminal agendas from agenda-015 onward, each item also records the smallest honest
+outcome class and an actionable disposition.
+The agenda closeout records grouped file changes, exact validation, decisions for
+README, SYNOPSIS, TUTORIAL, conventions, and development, plus the ranked successor
+candidates and operator input.
+Partial work, refused work, and unopened work remain distinct from a completed negative
+search. The generated ledger shows agenda states alongside experiments so the next agent
+does not need conversation history to find the next ready commitment.
 
 ## Assurance and Method
 

@@ -7,17 +7,42 @@ vector used by those expressions lie in one quartic field. The angle itself is a
 arctangent expression, not a claimed algebraic field element. The tool deliberately does
 not fetch the SVG, infer poses from decimals, or test packing geometry.
 
+A derivation that only ever agrees with itself proves nothing about the checks, so the
+receipt is refusable on demand. Two named negative controls perturb exactly one input
+each and must be refused by two different guards:
+
+`perturbed-side-basis` replaces the side's basis expansion `15/2 + p - p^2/2` with
+`15/2 + p - p^2/3`. It must fail the `side basis` identity, which is the guard that would
+catch a mistranscribed basis coefficient, and no receipt may be printed.
+
+`changed-minimal-polynomial` changes one coefficient of the expected side polynomial. It
+must fail the minimal-polynomial comparison, which is the independent guard: the basis
+identities and the `minpoly` computation could in principle agree on a wrong field, and
+this control shows the second gate is load-bearing rather than decorative.
+
+Neither control can move the default receipt, because both are injected downstream of the
+frozen expressions and only ever widen a refusal. The `--check` bytes are unchanged.
+
 Usage:
     uv run --frozen --all-extras --group dev python -m devtools.audit_n54_source_formula --check
+    uv run --frozen --all-extras --group dev python -m devtools.audit_n54_source_formula \
+        --mutate perturbed-side-basis
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import sys
 from collections.abc import Sequence
 
 import sympy as sp
+
+#: Named negative controls, each perturbing one input and refused by a different guard.
+NEGATIVE_CONTROLS: dict[str, str] = {
+    "perturbed-side-basis": "side basis expansion uses -p^2/3 instead of -p^2/2",
+    "changed-minimal-polynomial": "expected side polynomial constant term 8897 becomes 8896",
+}
 
 
 def _require_zero(name: str, value: sp.Expr) -> None:
@@ -30,8 +55,14 @@ def _polynomial_coefficients(value: sp.Expr, variable: sp.Symbol) -> list[int]:
     return [int(coefficient) for coefficient in polynomial.all_coeffs()]
 
 
-def derive_receipt() -> dict[str, object]:
-    """Check the source formulas and return their canonical exact-field receipt."""
+def derive_receipt(*, mutation: str | None = None) -> dict[str, object]:
+    """Check the source formulas and return their canonical exact-field receipt.
+
+    `mutation` names one entry of `NEGATIVE_CONTROLS` and must raise. It is `None` for
+    every real derivation, and the receipt is byte-identical to the unmutated tool.
+    """
+    if mutation is not None and mutation not in NEGATIVE_CONTROLS:
+        raise ValueError(f"unknown n=54 negative control: {mutation}")
     variable = sp.symbols("x")
     sqrt_two = sp.sqrt(2)
     primitive = sp.sqrt(1 + sqrt_two)
@@ -55,6 +86,8 @@ def derive_receipt() -> dict[str, object]:
         "sin_angle": (sp.Rational(1, 2) - primitive + sp.Rational(1, 2) * primitive**3),
         "cos_angle": 1 + primitive / 2 - primitive**2 / 2,
     }
+    if mutation == "perturbed-side-basis":
+        basis["side"] = sp.Rational(15, 2) + primitive - primitive**2 / 3
 
     _require_zero("primitive polynomial", primitive**4 - 2 * primitive**2 - 1)
     _require_zero("sqrt(2) basis", sqrt_two - basis["sqrt_two"])
@@ -86,6 +119,8 @@ def derive_receipt() -> dict[str, object]:
         "sin_angle": [8, -16, 16, -8, 1],
         "cos_angle": [8, -16, 0, 16, -7],
     }
+    if mutation == "changed-minimal-polynomial":
+        expected_polynomials["side"] = [4, -112, 1164, -5304, 8896]
     observed_polynomials = {"field": field_polynomial, **minimal_polynomials}
     if observed_polynomials != expected_polynomials:
         raise ValueError(
@@ -128,9 +163,25 @@ def derive_receipt() -> dict[str, object]:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="verify and print the receipt")
+    parser.add_argument(
+        "--mutate",
+        choices=sorted(NEGATIVE_CONTROLS),
+        help="run one named negative control, which must be refused and print no receipt",
+    )
     args = parser.parse_args(argv)
-    if not args.check:
-        parser.error("pass --check to run the exact derivation")
+    if not args.check and args.mutate is None:
+        parser.error("pass --check to run the exact derivation, or --mutate to run a control")
+    if args.mutate is not None:
+        try:
+            derive_receipt(mutation=args.mutate)
+        except ValueError as error:
+            print(f"refused {args.mutate}: {error}", file=sys.stderr)
+            return 1
+        print(
+            f"n=54 negative control was not refused: {args.mutate}",
+            file=sys.stderr,
+        )
+        return 2
     print(json.dumps(derive_receipt(), indent=2, sort_keys=True))
     return 0
 

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 417
+count: 421
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -12339,3 +12339,110 @@ defects:
     rebuilt difference above 1e-11, and still rejects a changed geometric-key invariant.
   bead: think-n8vl
   recorded_in: packing/devtools/build_n5_identity_pair.py
+
+- id: D-418
+  title: The BC-140 bound checker passed eight bounds with no named exceeding mutation
+  date: '2026-09-01'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one wave-one lane
+  severity: high
+  status: outstanding
+  what: >-
+    BC-140 required every declared parser or recursion bound to have a named
+    bound-exceeding mutation and required the checker to refuse an unnamed bound. The
+    implementation instead passed 8 of 10 declared bounds through a reason-only
+    allowlist; its tests require that weaker behavior to pass.
+  consequence: >-
+    Session-081 reported three of three repairs complete even though the executable
+    declared-bound guard proves only that each bound is named or allowlisted, not that
+    every bound has the frozen negative control.
+  fix: >-
+    Record BC-140 as partial and admit only its separately replayed n=54 controls and
+    retained-input inventory. Replace every parser or recursion allowlist entry with a
+    named exceeding mutation before claiming the repair complete.
+  regression: none
+  bead: think-ifgr
+  recorded_in: packing/devtools/check_declared_bounds.py
+
+- id: D-419
+  title: Exp-057 applied six-decimal coordinate semantics to a fourteen-digit side token
+  date: '2026-09-01'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one wave-one lane
+  severity: high
+  status: outstanding
+  what: >-
+    Exp-057 acknowledged that the retained parent side token has fourteen fractional
+    digits, then preregistered nearest-six-decimal and truncation-six-decimal side
+    intervals derived from the SVG coordinate quantum. The source packet supplies no
+    evidence that the side token was serialized under either coordinate rule.
+  consequence: >-
+    BC-138 could appear to establish a three-model side-semantics binding and authorize
+    n=68 retrieval even though two models do not describe the retained parent source.
+  fix: >-
+    Record BC-138 as partial and do not route BC-139. A future localization must derive
+    side semantics from source-declared evidence or restrict its claim to the defensible
+    literal printed-side point model.
+  regression: none
+  bead: think-lvqx
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md
+
+- id: D-420
+  title: The BC-142 reachable-tests control did not prove exact selection equivalence
+  date: '2026-09-01'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one wave-one coordinator lane
+  severity: high
+  status: outstanding
+  what: >-
+    BC-142 required the changed-module selector to have an equivalence control, but the
+    added test asserted only that the selection was smaller than the full suite, included
+    one expected test and excluded one unrelated test. It never pinned the exact expected
+    set, and every selected test at the reviewed revision entered through broad source
+    walker markers rather than the changed module's import closure.
+  consequence: >-
+    The coordinator could report a three-of-three BC-142 exit while the selector still
+    ran an accidental 13-test subset whose membership could drift without the control
+    noticing.
+  fix: >-
+    Record BC-142 as partial. Replace the bounded inclusion check with a refusable exact
+    expected-set equivalence fixture, including the reason each selected test is
+    reachable, before relying on the selector as a push-tier completeness contract.
+  regression: none
+  bead: think-mo7r
+  recorded_in: packing/devtools/reachable_tests.py
+
+- id: D-421
+  title: The wave-efficiency renderer refused the mixed Claude-to-Codex agenda lanes
+  date: '2026-09-01'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: one cross-harness wave
+  severity: medium
+  status: outstanding
+  what: >-
+    BC-143 requires devtools.render_wave_efficiency over sessions 079 through 081, but
+    the renderer accepts only CodexTaskTreeDelta receipts. All three lanes retain
+    ClaudeEfficiencyRollup receipts, so the registered renderer command refuses before
+    it can produce the comparison.
+  consequence: >-
+    The mandatory W5 slice cannot quote a cross-harness timing table even though each
+    lane has a retained resource receipt. Hand-computing the table would violate OR-1
+    and silently invent comparability between two telemetry schemas.
+  fix: >-
+    Retain a typed no-change/refusal for this agenda. A future W7 change must add a
+    tested Claude adapter or a common additive measurement surface while preserving
+    each harness's completeness and overlap semantics.
+  regression: none
+  bead: think-mlwo
+  recorded_in: packing/devtools/render_wave_efficiency.py

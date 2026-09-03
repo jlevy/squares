@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+from copy import deepcopy
 from pathlib import Path
 from typing import cast
 
@@ -136,6 +137,115 @@ def _session_problems(
         agendas=[],
         now=now or dt.datetime(2026, 8, 24, tzinfo=dt.UTC),
     )
+
+
+def _terminal_agenda() -> dict[str, object]:
+    """Smallest post-agenda fixture exercising W10 relationships."""
+    return {
+        "id": "agenda-015",
+        "_path": Path("agenda-015-contract-test.md"),
+        "status": "completed",
+        "items": [
+            {
+                "id": "BC-999",
+                "state": "complete",
+                "hypotheses": [],
+                "depends_on": [],
+                "bead": "think-next",
+                "artifacts": ["retained evidence"],
+                "outcomes": [
+                    {
+                        "scope": "bounded contract",
+                        "classification": "achieved",
+                        "disposition": "retire-success",
+                        "follow_up": None,
+                    }
+                ],
+            }
+        ],
+        "closeout": {
+            "documentation_review": [
+                {"path": path} for path in sorted(ledger.POST_AGENDA_DOCUMENTS)
+            ],
+            "changes": [
+                {
+                    "name": "closeout-contract",
+                    "paths": ["README.md"],
+                }
+            ],
+            "replanning": {
+                "candidates": [
+                    {
+                        "bead": "think-next",
+                        "workflow": "research-loop",
+                    }
+                ],
+                "selected": {
+                    "bead": "think-next",
+                    "workflow": "research-loop",
+                },
+            },
+        },
+    }
+
+
+def _agenda_problems(monkeypatch: pytest.MonkeyPatch, agenda: dict[str, object]) -> list[str]:
+    monkeypatch.setattr(ledger, "dead_links", list)
+    monkeypatch.setattr(ledger, "board_ids", _empty_board_ids)
+    return ledger.check(
+        [],
+        [],
+        [],
+        [],
+        [],
+        agendas=[agenda],
+        now=dt.datetime(2026, 9, 2, tzinfo=dt.UTC),
+    )
+
+
+def test_terminal_agenda_rejects_classification_disposition_mismatch(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    agenda = _terminal_agenda()
+    outcome = cast(dict[str, object], cast(list[object], agenda["items"])[0])["outcomes"]
+    cast(list[dict[str, object]], outcome)[0].update(
+        classification="bounded-negative", disposition="continue", follow_up="think-next"
+    )
+
+    problems = _agenda_problems(monkeypatch, agenda)
+
+    assert any(
+        "classifies 'bounded contract' as bounded-negative but gives disposition continue"
+        in problem
+        for problem in problems
+    )
+
+
+def test_terminal_agenda_requires_the_complete_document_impact_review(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    agenda = deepcopy(_terminal_agenda())
+    closeout = cast(dict[str, object], agenda["closeout"])
+    documentation = cast(list[object], closeout["documentation_review"])
+    documentation.pop()
+
+    problems = _agenda_problems(monkeypatch, agenda)
+
+    assert any("documentation review covers" in problem for problem in problems)
+
+
+def test_terminal_agenda_selected_bead_must_be_a_unique_candidate(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    agenda = deepcopy(_terminal_agenda())
+    closeout = cast(dict[str, object], agenda["closeout"])
+    replanning = cast(dict[str, object], closeout["replanning"])
+    selected = cast(dict[str, object], replanning["selected"])
+    selected["bead"] = "think-missing"
+
+    problems = _agenda_problems(monkeypatch, agenda)
+
+    assert any("is not one unique replanning candidate" in problem for problem in problems)
 
 
 def _experiment_problems(

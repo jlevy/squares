@@ -151,7 +151,7 @@ is the definitive registry.
 | `session-NNN` | One escalated agent-session record containing ordered workflow phases |
 | `D-NNN` | One defect and its detection, consequence, fix, and regression |
 | `think-xxxx` | One git-native `tbd` bead: durable work and dependency state |
-| `W1`–`W8` | A workflow entry point, not a durable artifact id |
+| `W1`–`W10` | A workflow entry point, not a durable artifact id |
 
 Other rules needed to read the repository:
 
@@ -303,7 +303,7 @@ action being executed:
 | Layer | Question | Recorded as |
 | --- | --- | --- |
 | Operating principle / focus | What quality dimension is preeminent for this phase? | `correctness`, `process`, `insight`, or `efficiency` |
-| Workflow | What durable result is this phase meant to produce? | One of W1–W8, or the narrow maintenance fallback |
+| Workflow | What durable result is this phase meant to produce? | One of W1–W10, or the narrow maintenance fallback |
 | Slice | What bounded action is being performed now, and how will it be checked? | Objective, intended artifact, focused validation, and stop condition |
 
 Focus and workflow are independent.
@@ -346,7 +346,7 @@ transition contracts.
 
 | ID | Workflow | Enter when | Durable result | Usual handoff |
 | --- | --- | --- | --- | --- |
-| W1 | `research-pass` | The source record or research document is incomplete | Corrected research prose, source notes, and explicit gaps | W2 |
+| W1 | `research-survey` | The sourced state of knowledge is incomplete | A sourced survey, source notes, conflicts, and explicit gaps | W2 |
 | W2 | `factual-review` | Existing claims need a correctness-only audit | Findings, authorized bounded corrections, or defects; no new theory smuggled into the review | W3 or W4 |
 | W3 | `insight-iteration` | Current evidence needs new explanations or hypotheses | Candidate `X-NNN`/`H-NNN` items with mechanisms, falsifiers, and information value | W6 |
 | W4 | `process-review` | Work is hard to reconstruct or the discipline itself needs review | Process findings, beads, and narrowly scoped contract or check changes | W5 or the next owning workflow |
@@ -354,8 +354,10 @@ transition contracts.
 | W6 | `research-loop` | A registered hypothesis has a fixed criterion, regime, budget, and instrument contract | A frozen instrument and one or more `exp-NNN` records, raw evidence, verdicts, and a current ledger | W2 for promoted or high-risk claims; otherwise W3 or another W6 slice |
 | W7 | `pipeline-improvement` | A named packing-pipeline surface or research consumer needs a new, stronger, simpler, or repaired capability | A bounded implementation or refactor, executable controls, explicit evidence limits, cost receipt, and readiness decision; no scientific verdict | W2 before a materially changed trust boundary reaches W6; otherwise W5 or W6 |
 | W8 | `documentation-pass` | A period of research has left the reader-facing documents behind what the record now says | Reconciled root documents—README, tutorial, synopsis—checked against the artifacts and against each other, with every drift either fixed or logged as a defect; no new claim introduced | W2 for any claim the pass could not verify; otherwise the next owning workflow |
+| W9 | `remediation` | Confirmed defects or issue backlogs need a systematic repair wave | Risk-ranked dispositions, bounded repairs, regression checks, updated defect records, and rerouted blockers; no scientific verdict | W10 |
+| W10 | `review-planning-oversight` | An agenda or consequential session has ended and its results must change the plan | Result and stop-reason classifications, actionable dispositions, reader-document review, a reprioritized candidate set, and one selected next entry | The selected workflow; W9 or W8 when remediation or documentation work wins |
 
-Use `general-improvement` only for repository maintenance that fits none of W1–W8.
+Use `general-improvement` only for repository maintenance that fits none of W1–W10.
 Routine work records a workflow, bounded objective, intended artifact, and focused
 check. Use a versioned [agent-session record](packing/campaign/agent-sessions/README.md)
 only when work crosses multiple workflow phases, coordinates independent delegates, or
@@ -420,6 +422,8 @@ Changing agents changes the driver, not the record or the evidence required for 
 | [`conventions.md`](conventions.md) | Ids, filenames, artifact shape, evidence fields, provenance, and corrections |
 | [`operating-rules.md`](operating-rules.md) | How sessions choose, divide, validate, and hand off work |
 | [Campaign runbook](packing/campaign/README.md) | Hypothesis and experiment mechanics, clocks, budgets, verdicts, and routing |
+| [W9 remediation pass](packing/campaign/remediation-pass.md) | Systematic defect and issue-backlog triage, repair waves, and terminal dispositions |
+| [W10 review, planning, and oversight](packing/campaign/review-planning-oversight.md) | Post-agenda result classification, document review, reprioritization, and next-entry selection |
 | [Agent-session guide](packing/campaign/agent-sessions/README.md) | Escalation threshold, workflow phases, recovery state, and session closeout |
 | [Agendas](packing/campaign/agendas/) | Mutable ordering and readiness of bounded commitments |
 | [`development.md`](development.md) | Engineering boundaries, commands, tests, and validation tiers |

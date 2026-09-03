@@ -13,7 +13,7 @@ additionalProperties: false
 $defs:
   workflow:
     enum:
-      - research-pass
+      - research-survey
       - factual-review
       - insight-iteration
       - process-review
@@ -21,6 +21,8 @@ $defs:
       - research-loop
       - pipeline-improvement
       - documentation-pass
+      - remediation
+      - review-planning-oversight
       - general-improvement
 required:
   - id

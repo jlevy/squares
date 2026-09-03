@@ -88,13 +88,19 @@ controls:
   run: python3 -m devtools.check_readme
   expect: "README.md: workflow table is"
 
-- name: README - undeclared eighth workflow is not ignored
+- name: README - retired workflow identifier survives a migration
+  file: ../README.md
+  replace: ["| W1 | `research-survey` |", "| W1 | `research\u002dpass` |"]
+  run: python3 -m devtools.check_readme
+  expect: "contains retired workflow identifier"
+
+- name: README - undeclared eleventh workflow is not ignored
   file: ../README.md
   replace:
-    - "| W7 | `pipeline-improvement` |"
+    - "| W10 | `review-planning-oversight` |"
     - |-
-      | W7 | `pipeline-improvement` |
-      | W8 | `rogue-loop` |
+      | W10 | `review-planning-oversight` |
+      | W11 | `rogue-loop` |
   run: python3 -m devtools.check_readme
   expect: "README.md: workflow table is"
 
@@ -123,7 +129,7 @@ controls:
   replace:
     - "<!-- This document follows common-doc-guidelines.md."
     - |-
-      ## OR-10: Never push to a branch other than the designated one
+      ## OR-12: Never push to a branch other than the designated one
 
       <!-- This document follows common-doc-guidelines.md.
   run: python3 -m devtools.render_operating_rules --check
@@ -131,7 +137,7 @@ controls:
 
 - name: operating rules - a gap in the rule numbering is not renumbered silently
   file: ../operating-rules.md
-  replace: ["## OR-6: Plan multi-hour", "## OR-10: Plan multi-hour"]
+  replace: ["## OR-6: Plan multi-hour", "## OR-11: Plan multi-hour"]
   run: python3 -m devtools.render_operating_rules --check
   expect: "rule ids are not contiguous from OR-1"
 
@@ -152,9 +158,9 @@ controls:
 
 - name: synopsis - narrative round aggregate lagging the ledger
   file: ../SYNOPSIS.md
-  replace: ["There are 55 terminal rounds", "There are 45 terminal rounds"]
+  replace: ["There are 57 terminal rounds", "There are 45 terminal rounds"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "terminal-round aggregate is not 55 rounds"
+  expect: "terminal-round aggregate is not 57 rounds"
 
 - name: synopsis - numerical result promoted past a formal prerequisite
   file: ../SYNOPSIS.md
@@ -231,13 +237,7 @@ controls:
   file: src/sqpack/cli/validate.py
   replace:
     - '    outputs = [_run(context, command, cwd=cwd) for command in commands]'
-    - |2-
-          outputs: list[str] = []
-          for command in commands:
-              try:
-                  outputs.append(_run(context, command, cwd=cwd))
-              except StepFailureError:
-                  continue
+    - "    outputs: list[str] = []\n    for command in commands:\n        try:\n            outputs.append(_run(context, command, cwd=cwd))\n        except StepFailureError:\n            continue"
   run: uv run --frozen --quiet pytest -q tests/test_validation_cli.py -k multi_command_step_stops_at_first_failure
   expect: "assert 0 == 1"
 
@@ -263,9 +263,19 @@ controls:
 
 - name: campaign - the duplicated workflow enum drifts between schemas
   file: campaign/schemas/agenda.schema.yaml
-  replace: ["              - general-improvement", "              - general-improvement\n              - invented-workflow"]
+  replace:
+    - "              - general-improvement\n          description: >-"
+    - "              - general-improvement\n              - invented-workflow\n          description: >-"
   run: python3 -m sqpack.campaign.ledger check
-  expect: "duplicated workflow enum has drifted"
+  expect: "item workflows have drifted"
+
+- name: campaign - logbook workflow-count keys drift from the canonical enum
+  file: campaign/schemas/research-loop-log-entry.schema.yaml
+  replace:
+    - '      general-improvement: {$ref: "#/$defs/count"}'
+    - "      general-improvement: {$ref: \"#/$defs/count\"}\n      invented-workflow: {$ref: \"#/$defs/count\"}"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "workflow count keys have drifted"
 
 - name: campaign - a declared validation command that could never run
   file: campaign/agent-sessions/session-028-bc032-n29-promotion-inventory.md
@@ -1174,7 +1184,7 @@ controls:
   run: python3 -m devtools.render_agenda_map --check
   expect: "is stale"
 
-- name: agenda map - a commitment changing state never reaches the map
+- name: agenda map - a terminal commitment cannot be reopened
   file: campaign/agendas/agenda-008-queue-repair-and-the-discriminating-control.md
   replace:
     - |-
@@ -1190,7 +1200,7 @@ controls:
           instances: [3, 5, 29]
           state: ready
   run: python3 -m devtools.render_agenda_map --check
-  expect: "is stale"
+  expect: "every item in a completed or superseded agenda must be complete or stopped"
 
 # D-374: the queue offered four finished commitments as takeable, because a discharge
 # was prose in a later agenda and nothing read it. Both refusals that replaced the prose
@@ -1251,3 +1261,18 @@ controls:
   replace: ["    started_at: '2026-08-29T11:49:50Z'", "    started_at: '2026-08-29T23:59:00Z'"]
   run: python3 -m devtools.check_session_clocks
   expect: "deadline is not after its own start"
+
+# A terminal agenda may not turn a partial run into a bounded-negative result while
+# retaining a continuation. The semantic checker owns that relationship; the schema
+# alone can only validate each enum independently.
+- name: agenda closeout - a bounded negative is left scheduled to continue
+  file: campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md
+  replace: ["      classification: time-limited", "      classification: bounded-negative"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "bounded-negative but gives disposition continue"
+
+- name: synopsis handoff - W10 selected entry is replaced by a deferred candidate
+  file: ../SYNOPSIS.md
+  replace: ["**Selected next entry:** `think-5j8d`", "**Selected next entry:** `think-cyko`"]
+  run: python3 -m devtools.check_synopsis
+  expect: "exactly one canonical Selected next entry marker for think-5j8d"

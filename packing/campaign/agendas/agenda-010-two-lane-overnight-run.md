@@ -359,7 +359,7 @@ agenda:
       evidence-based.
     bead: think-l48p
     depends_on: []
-    workflows: [research-pass, insight-iteration]
+    workflows: [research-survey, insight-iteration]
     next_evidence: >-
       Discharged by session-055: the verdict is exp-046, exploratory per H-044's
       own calibration-only amendment, held unresolved with needs_review --

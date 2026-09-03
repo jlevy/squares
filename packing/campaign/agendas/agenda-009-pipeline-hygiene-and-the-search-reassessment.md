@@ -206,7 +206,7 @@ agenda:
       failed.
     bead: think-bxqv
     depends_on: [BC-085, BC-086]
-    workflows: [research-pass, insight-iteration]
+    workflows: [research-survey, insight-iteration]
     next_evidence: >-
       Discharged by session-049 phase 3; the plan is X-009 and it registers H-049 and
       H-050. Sequencing: BC-089 first (14 of 15 trailing cases verify exactly at their
@@ -255,7 +255,7 @@ agenda:
       than being forced here.
     bead: think-d0j1
     depends_on: [BC-088]
-    workflows: [research-pass, research-loop]
+    workflows: [research-survey, research-loop]
     next_evidence: >-
       Sequenced first by X-009, with n = 53 moved to BC-090's pool (its two extra tilt
       classes yield no stable relation at 49 digits) and n = 50 transferred to
@@ -327,7 +327,7 @@ agenda:
       measurement is worth more than attempting all 31.
     bead: think-7t9u
     depends_on: [BC-088]
-    workflows: [research-pass]
+    workflows: [research-survey]
     next_evidence: >-
       Narrowed by X-009 from 31 cases to one: n = 90 via Arslanov's decomposition, which
       reduces to H-049 -- whether 20 unit squares pack squeezably in a 4 by 6 rectangle.
@@ -364,7 +364,7 @@ agenda:
       exist is a different object from annealing on coordinates.
     bead: think-xdly
     depends_on: [BC-088]
-    workflows: [research-pass, insight-iteration]
+    workflows: [research-survey, insight-iteration]
     next_evidence: >-
       X-009 answers the one-block-or-two question: one, owned by BC-090. The enumeration
       is priced out of reach as its own block (canonical orbits grow 1, 1, 7, 124,

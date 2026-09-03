@@ -74,7 +74,11 @@ hypothesis:
     neither proof-method independence nor adoption of 4.5058 as a reviewed lower bound,
     and it makes no cross-n or LP-generalization claim. A disagreement rejects this
     agreement claim but does not by itself refute the mathematical lower bound; the
-    discrepancy remains for independent adjudication.
+    discrepancy remains for independent adjudication. Agenda-015 exp-056 stopped at its
+    fixed 11:23Z timebox with 170 contiguous agreeing rows through ordinal 169, a
+    verified chain and ordinal 170 at independent_started. The canonical result is
+    absent, so the larger prefix is review-pending process evidence and gives H-052 no
+    disposition.
 ---
 # H-052 — Independent `n = 17` Certificate Agreement
 

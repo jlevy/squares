@@ -86,9 +86,9 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives three confirmed hypotheses, six refuted
+The generated ledger currently derives four confirmed hypotheses, six refuted
 hypotheses, one open hypothesis, seven open questions, and thirty-five blocked
-hypotheses. Three further hypotheses need review and four are unresolved.
+hypotheses. No hypothesis waits on review and six are unresolved.
 The set includes one claim whose formal prerequisite is missing, H-044 whose registered
 calibration-only amendment keeps the hypothesis undisposed — its first scored round
 (exp-046) missed the criterion determinately under both denominator readings, the review
@@ -155,6 +155,8 @@ case or experiment separately.
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign — W6 Runbook](packing/campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
 | [The W8 Documentation Pass — Runbook](packing/campaign/documentation-pass.md) | W8 documentation reconciliation | definitive | maintained | — |
+| [W9 Remediation Pass](packing/campaign/remediation-pass.md) | systematic defect and issue-backlog remediation | definitive | maintained | — |
+| [W10 Review, Planning, and Oversight](packing/campaign/review-planning-oversight.md) | post-agenda disposition, document review, and replanning | definitive | maintained | — |
 | [Agent Sessions](packing/campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
 | [Research Loop Logbook](packing/campaign/research-loop-logbook/README.md) | reader-facing research-run summaries | definitive | maintained | — |
 | [Resource Usage](packing/campaign/resource-usage/README.md) | component scope and use | definitive | maintained | — |
@@ -192,6 +194,15 @@ case or experiment separately.
 | [Review: Agenda 013 Second-Wave Efficiency](docs/project/reviews/review-2026-09-01-agenda013-second-wave-efficiency.md) | dated review record | record | retained | — |
 | [Review Packets: Agenda 013 Second Wave](docs/project/reviews/review-2026-09-01-agenda013-second-wave-packets.md) | dated review record | record | retained | — |
 | [Independent Review: Agenda 013 Research Lanes](docs/project/reviews/review-2026-09-01-agenda013-independent-lane-review.md) | dated review record | record | retained | — |
+| [Review: Agenda 014 First-Wave Efficiency](docs/project/reviews/review-2026-09-02-agenda014-first-wave-efficiency.md) | dated review record | record | retained | — |
+| [Review Packets: Agenda 014 First Wave](docs/project/reviews/review-2026-09-02-agenda014-first-wave-packets.md) | dated review record | record | retained | — |
+| [Independent Review: Agenda 014 First Wave](docs/project/reviews/review-2026-09-02-agenda014-first-wave-independent-review.md) | dated review record | record | retained | — |
+| [Review: Agenda 015 First-Wave Efficiency](docs/project/reviews/review-2026-09-02-agenda015-first-wave-efficiency.md) | dated review record | record | retained | — |
+| [Review: Agenda 015 Second-Wave Efficiency](docs/project/reviews/review-2026-09-02-agenda015-second-wave-efficiency.md) | dated review record | record | retained | — |
+| [Review Packets: Agenda 015 Second Wave](docs/project/reviews/review-2026-09-02-agenda015-second-wave-packets.md) | dated review record | record | retained | — |
+| [Independent Review: Agenda 015 Second Wave](docs/project/reviews/review-2026-09-02-agenda015-second-wave-independent-review.md) | dated review record | record | retained | — |
+| [Agenda 015 Ten-Hour Synthesis](docs/project/reviews/review-2026-09-02-agenda015-ten-hour-synthesis.md) | dated review record | record | retained | — |
+| [Design Note: `n = 50` Manifest and Sentinel Contract](docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md) | dated review record | record | retained | — |
 | [Agenda 013 Overnight Synthesis: Controls, Mechanisms, and the Next Research Queue](docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -210,6 +221,8 @@ case or experiment separately.
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
 | [Spike: Interactive `n = 5` Motion Lab](docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md) | implementation plan | record | retained | — |
 | [Feature: Generalized Square-Packing Motion Lab](docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md) | implementation plan | current | transient | — |
+| [create-or-update-pr-simple.md](docs/tbd/shortcuts/create-or-update-pr-simple.md) | component scope and use | definitive | maintained | — |
+| [create-or-update-pr-with-validation-plan.md](docs/tbd/shortcuts/create-or-update-pr-with-validation-plan.md) | component scope and use | definitive | maintained | — |
 | `packing/frontier/n-*.md` | typed case claim register | definitive | maintained | — |
 | `packing/campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `packing/campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
@@ -256,7 +269,7 @@ routine task.
 
 | ID | Workflow | Enter with | Work boundary | Durable exit | Default handoff |
 | --- | --- | --- | --- | --- | --- |
-| W1 | `research-pass` | A bounded question, source corpus, and identified coverage gap | Establish and source the state of knowledge; do not turn untested connections into campaign verdicts | Corrected or enriched research docs, source notes, explicit conflicts, and unresolved gaps | W2 audits the claims; W3 may mine supported gaps |
+| W1 | `research-survey` | A bounded question, source corpus, and identified coverage gap | Survey and source the state of knowledge; do not run a new experiment or turn untested connections into campaign verdicts | A sourced survey, source notes, explicit conflicts, and unresolved gaps | W2 audits the claims; W3 may mine supported gaps |
 | W2 | `factual-review` | A fixed artifact set, its sources, and the claims to audit | Correctness only; read-only by default, but an authorized review may apply an obvious bounded correction whose evidence and scope are unchanged; do not invent successor theory or redesign the process inside the review | Claim-by-claim dispositions, authorized corrections, or defects with exact evidence | Required before promoted, novel, disputed, or high-risk claims; otherwise W3 for new hypotheses or W4 for a process failure |
 | W3 | `insight-iteration` | Current synopsis, idea board, ledger, negative results, and a sharp frontier | Generate explanations and hypotheses freely; do not certify them or spend an undeclared experiment budget | `X-NNN` reports and candidate `H-NNN` items with mechanism, falsifier, expected information, and limits | Codification, then W6 |
 | W4 | `process-review` | Artifacts, beads, logs, checks, and a reconstructability or discipline question | Inspect ownership, handoffs, refusals, and controls; do not substitute process polish for a scientific result | Review findings, beads, and narrowly scoped contract or checker changes | W5 for a measured bottleneck or the next workflow that owns the result |
@@ -264,6 +277,8 @@ routine task.
 | W6 | `research-loop` | A registered hypothesis, fixed criterion, regime, budget, stop rule, and instrument contract | Build or repair the bounded instrument, freeze it before measurement, then use creative effort inside the registered scope to execute the smallest fair test; never change the criterion, suppress a failure, or improvise a replacement hypothesis mid-round | Frozen instrument, `exp-NNN`, raw data or proof record, verdict, regenerated views, and the next bounded question | W2 before promoted or high-risk claims; otherwise W3 or another W6 slice |
 | W7 | `pipeline-improvement` | Named packing-research consumers, the smallest reusable capability or cleanup they need, controls or an independent oracle, a budget, and expected comparability impact | Add, strengthen, simplify, or repair only the bounded packing pipeline surface; do not collect a target verdict while it is mutable, optimize an unchanged implementation without a W5 baseline, or generalize beyond named consumers | Code, entry point or refactor; replayable positive and negative controls; exact validation command; cost and complexity receipt; evidence limits; and a readiness or retained-blocker decision | W2 before a new or materially changed trust boundary reaches W6; W5 if measured throughput remains the blocker; otherwise W6 |
 | W8 | `documentation-pass` | A period of research that closed several commitments, the artifacts it left, and the reader-facing documents that have not caught up | Reconcile the root tier — README, tutorial, synopsis, and the conventions they cite — against the artifacts and against each other; correct, cut, reorder and clarify, but never introduce a claim the record does not already carry, and never soften a claim boundary to make a document read better | A checklist run over each root document, every drift either fixed or filed as a defect, generated views regenerated, and an explicit statement of what was checked and what was left | W2 for any claim the pass could not verify against an artifact; otherwise the next owning workflow |
+| W9 | `remediation` | A confirmed defect or issue inventory, risk ordering, owning beads, and a bounded repair wave | Triage and repair defects systematically without changing scientific criteria or hiding unresolved evidence; group only compatible work and preserve each item’s independent disposition | Fixed items with regressions, contained items with evidence, rerouted evidence work, explicit blockers, regenerated defect views, and validation receipts | W10 reviews the wave and selects what follows |
+| W10 | `review-planning-oversight` | A terminal agenda or session, its artifacts and receipts, live tbd state, and the documents it may have changed | Classify every attempted block, reconcile results and files, review document impact, reprioritize candidates, and select one next entry; do not execute that successor inside the closeout | Per-block outcomes and stop reasons, actionable dispositions, documentation decisions, grouped changes, validation, ranked candidates, operator status, and one selected next entry | The selected owning workflow, often W9 for backlog repair or W8 for substantive documentation drift |
 
 Implementation is an action inside the workflow that owns its promised result, not an
 undefined handoff: W1 and W2 can make bounded research corrections, W3 can implement a
@@ -285,8 +300,18 @@ Schedule it after a run that closed several commitments rather than continuously
 documents are meant to trail the record slightly, and a pass with nothing to reconcile
 is a pass that should not have been opened.
 
+W9 owns bounded repair waves over confirmed defects and issues.
+It does not turn a large backlog into one undifferentiated implementation phase: risk is
+ordered first, compatible defects are batched only when they share a trust surface, and
+every selected item exits fixed, contained, rerouted, blocked, or obsolete.
+W10 owns the closeout after an agenda or remediation wave.
+Its documentation review is a mandatory impact check over the root documents; W8 is the
+separate substantive reconciliation workflow when that check finds real drift.
+W10 completes the mechanical reconciliation and records one selected successor, but it
+does not start that successor.
+
 `general-improvement` remains only for repository maintenance outside the packing
-pipeline whose output fits none of W1–W8. It must not hide core work or a session
+pipeline whose output fits none of W1–W10. It must not hide core work or a session
 alternating among research, review, and infrastructure; those are separate phases.
 
 ### Switching Workflows in One Session
@@ -312,13 +337,16 @@ contemporaneously. Current and future phases are declared before work begins.
 The normal research cadence is not a mandate to traverse every workflow:
 
 ```
-W1 research-pass ──> W2 factual-review ──> W3 insight-iteration
+W1 research-survey ──> W2 factual-review ──> W3 insight-iteration
                                                │
                          missing reusable tool v
 W4 process-review ──> W7 pipeline-improvement ──> W2 ──> W6 research-loop
         │                    │                              │
         └─ accepted repair ──┘        W5 efficiency-loop ──┘
                          promoted/high-risk result ──> W2 ──> W3
+
+W1–W9 terminal work ──> W10 review/planning/oversight ──> one selected workflow
+confirmed defect wave ──> W9 remediation ────────────────┘
 ```
 
 At any checkpoint, the human operator may choose the next phase, narrow the question, or
@@ -327,22 +355,56 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-The latest lane closeout is
-[session-073](packing/campaign/agent-sessions/session-073-bc123-n17-parent-bound-parallel-profile.md).
-It retains an exact 524.743-second serial arm at `n = 17`, but asymmetric host load
-invalidated the parallel arm; exp-053 is unresolved and must not resume.
-The coordinating
-[session-072](packing/campaign/agent-sessions/session-072-agenda014-six-hour-first-wave.md)
-freezes all four first-wave lanes on PR #73 and stops at the owner’s requested pause.
+[Agenda-015](packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md)
+and its coordinating
+[session-078](packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md)
+are terminal. The exact ten-hour wall ran from `05:03Z` through `15:03Z` on 2026-09-02.
+BC-146 stopped at that wall after the complete local gate reached 57 of 58 steps and
+failed only Ruff formatting; no agenda-015 publication revision was pushed inside the
+wall. Later formatting, independent audits and validation are recorded separately as
+post-wall publication remediation and do not change the historical phase states or
+times.
 
-BC-124 completed and freshly readmitted a corrected target-blind `n = 68` adapter,
-BC-125 completed its prospective `n = 50` refusal receipt, and BC-126 completed the
-bounded `n = 54` source/formula audit.
-Exp-053 through exp-055 remain review-pending; no scientific target result was promoted.
-On resume, BC-127 must formalize the efficiency decision and BC-128 must freeze
-immutable packets before the next review destination, **BC-135 under bead
-`think-bpzq`**, opens.
-No second-wave or overnight agenda is authorized from this checkpoint alone.
+Agenda 015’s W10 closeout makes the stop reasons and follow-ups explicit.
+It found no new mathematical result and no completed bounded-negative search.
+Exp-056 was time-limited and continues only as the fresh `think-5j8d` round; exp-057 and
+the full bound, equivalence, and W5 comparisons were correctly guard-refused and defer
+to their named dependencies; BC-139 never opened; the synthetic contract, narrow smoke
+tests, typed freezes, and independent reviews achieved their declared scopes; and the
+BC-146 publication failure was technical, then fixed and rerun after the wall.
+
+The retained scientific outcomes are narrower than the work completed:
+
+- exp-056 stopped with 170 of 181 verified agreeing rows through ordinal 169, progress
+  at ordinal 170 `independent_started` and no canonical result.
+  H-052 remains unresolved.
+- exp-057 retained the literal printed-rational point model but refused its two
+  six-decimal models for lack of source provenance.
+  BC-139 never opened, no source or network access occurred, and H-058 remains
+  unmeasured.
+- BC-141 completed the synthetic n = 54 parser and labeled-correspondence contract.
+  Its frozen review passed 79 tests; the current author and independent pair passes 80.
+  No live-source fidelity, witness correspondence, precision cells or geometry was
+  established, so H-055 remains instrument-unready.
+- BC-140 and BC-142 stopped partially complete.
+  Eight discovered bounds remain allowlisted under `think-ifgr`, while the 13-of-115
+  reachable-test selection lacks an exact-set oracle under `think-mo7r`. Both W5 slices
+  retained typed `no-change` receipts.
+
+Three fresh Max reviews reproduced all frozen packets.
+They authorized only the `needs_review` clears for exp-056 and exp-057; no result,
+hypothesis, instrument, bound, frontier fact or route changed.
+Post-wall review also repaired a module-collision defect in the declared-bound evidence
+checker without changing the n = 54 contract or verifier implementations.
+
+**Selected next entry:** `think-5j8d`, a freshly preregistered n = 17 continuation from
+the retained exp-056 chain.
+It stays gated until PR #75’s current head is hosted-green.
+Exp-056 itself never resumes, and an all-direction agreement would still require the
+separate adoption gate before any bound or frontier change.
+The W9 candidate `think-cyko` is ranked next for systematic waves over the 56 open
+defects (35 outstanding and 21 contained); it does not displace the selected P0
+scientific handoff without another W10 or operator reprioritization.
 
 ### Handoff Record
 
@@ -2378,14 +2440,14 @@ round that names the hypothesis, control roles included.
 | [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov’s decomposition | 0 | — |
 | [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent’s 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
 | [H-051](packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md) | blocked | A blinded tier-S n = 68 public-parent surgery pilot matches the released child under the frozen grammar | 0 | — |
-| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | unresolved | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 2 | 139.6m agent + 139.6m wall |
+| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | unresolved | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 3 | 139.6m agent + 139.6m wall |
 | [H-053](packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md) | blocked | Each fixed UnitSquare `n = 68, 69` parent-child pair admits compatible rigid poses under at least one declared serialization model | 2 | 114m agent + 107.2m wall |
 | [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | unresolved | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 2 | 38m agent + 30.0m wall |
 | [H-055](packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md) | blocked | If selected, the `n = 54` witness admits complete exact promotion in the reported nested-radical field | 0 | — |
 | [H-056](packing/campaign/hypotheses/H-056-n39-degree-five-interval-certificate.md) | blocked | If selected, the `n = 39` witness admits a complete interval certificate tied to the designated degree-five root | 0 | — |
-| [H-057](packing/campaign/hypotheses/H-057-n17-parent-bound-parallel-speedup.md) | needs review | A parent-bound three-process runner preserves exact output and reaches the fixed useful-speedup threshold on three exp-052 ordinals | 1 | — |
-| [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | needs review | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 1 | — |
-| [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | needs review | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 1 | — |
+| [H-057](packing/campaign/hypotheses/H-057-n17-parent-bound-parallel-speedup.md) | unresolved | A parent-bound three-process runner preserves exact output and reaches the fixed useful-speedup threshold on three exp-052 ordinals | 1 | — |
+| [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | unresolved | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 2 | — |
+| [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | confirmed | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 1 | — |
 
 ### Confirmed
 
@@ -2526,9 +2588,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 42 | 13,390 | 7,660 | 156 | 1,565 | 69.61 h |
+| claimed by a session | 55 | 14,495 | 8,351 | 164 | 1,637 | 72.04 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **52** | **14,850** | **8,538** | **188** | **1,738** | **76.48 h** |
+| **measured** | **65** | **15,955** | **9,229** | **196** | **1,810** | **78.91 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2549,7 +2611,12 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-059](packing/campaign/agent-sessions/session-059-block8-tau-star-pilot.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
 | [session-060](packing/campaign/agent-sessions/session-060-verification-review.md) | 3 | 0 | 0 | 0 | 0 | 0 h |
 | [session-061](packing/campaign/agent-sessions/session-061-epistemics-codification.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
-| *shared by 17 sessions* | — | 3 | 10,053 | 5,527 | 123 | 61.3 h |
+| [session-076](packing/campaign/agent-sessions/session-076-agenda014-first-wave-closeout-and-review.md) | 5 | 6 | 355 | 212 | 1 | 0.5 h |
+| [session-077](packing/campaign/agent-sessions/session-077-agenda014-closeout-and-ten-hour-successor.md) | 3 | 3 | 148 | 97 | 0 | 0.22 h |
+| [session-079](packing/campaign/agent-sessions/session-079-bc137-n17-sequential-larger-prefix.md) | 3 | 1 | 78 | 46 | 0 | 0.23 h |
+| [session-080](packing/campaign/agent-sessions/session-080-bc138-n68-side-semantics-binding.md) | 4 | 1 | 115 | 77 | 1 | 0.28 h |
+| [session-081](packing/campaign/agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | 4 | 1 | 87 | 49 | 0 | 0.24 h |
+| *shared by 22 sessions* | — | 4 | 10,375 | 5,737 | 129 | 62.26 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -2568,12 +2635,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-073.yaml` | session-072, session-073 | 279 | 1.81 h | 1.81 h | 1.81 h | yes |
 | `codex-task-tree-session-074.yaml` | session-072, session-074 | 272 | 1.58 h | 1.58 h | 1.9 h | yes |
 | `codex-task-tree-session-075.yaml` | session-072, session-075 | 212 | 1.41 h | 1.41 h | 1.75 h | no |
+| `codex-task-tree-session-078.yaml` | session-078, session-082 | 2,401 | 13.41 h | 9.45 h | 10.0 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 31 |
+| measured | 38 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **75** |
+| **total** | **82** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -2588,9 +2656,11 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 55 terminal rounds registered in `series-000`.
+There are 57 terminal rounds registered in `series-000`.
 
-They record 1721.43 agent-minutes and 419.0 wall-minutes.
+They record 1738.1 agent-minutes and 791.6 wall-minutes.
+Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
+result; exp-057 stopped before target access.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -2674,6 +2744,8 @@ archive beside it.
 | [exp-053](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-053-h-057-n17-parent-bound-parallel-speedup.md) | 17 | calibration | H-057 | parent-bound exact parallel profiler | exact serial arm retained; parallel arm invalidated by asymmetric host load; no paired sample | unresolved |
 | [exp-054](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-054-h-058-n68-one-parent-production-serialization.md) | 68 | calibration | H-058 | target-blind production adapter | adapter admitted with side semantics still unbound; no source, target sample, or result | unresolved |
 | [exp-055](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-055-h-059-n50-producer-refusal-ordering.md) | 50 | calibration | H-059 | producer stage-sentinel harness | prospective existing-result refusal emitted a verified zero-call trace; exp-050 unchanged | **accepted** |
+| [exp-056](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-056-h-052-n17-sequential-larger-prefix.md) | 17 | calibration | H-052 | parent-bound child chain over the unchanged exp-052 driver | fixed timebox retained 170/181 contiguous agreeing rows through ordinal 169; canonical result absent | **unresolved** |
+| [exp-057](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md) | 68 | calibration | H-058 | side-semantics binding over the unchanged exp-054 adapter | literal point model retained; six-decimal side provenance absent; no target access | **unresolved** |
 
 ### Cost and provenance
 
@@ -2734,10 +2806,12 @@ archive beside it.
 | exp-053 | one 150-minute first-wave lane | 738 s | 107.8333 m | guard | `909efafa+sha256-e31abda6ce13df47` |
 | exp-054 | one target-blind 150-minute first-wave lane | 5,940 s | 99 m | criterion | `909efafa+sha256-9b503050115a5a48` |
 | exp-055 | one fixed 15-minute W6 cell | 0.72 s | 92 m | criterion | `909efafa+sha256-9c90a04e5691f168` |
+| exp-056 | one fixed 356-minute elapsed lease | 21,360 s | — | timebox | `11ce70ee+sha256-f45227508b28f377` |
+| exp-057 | one 150-minute target-blind BC-138 lane | 1,000 s | 16.6667 m | guard | `11ce70ee` |
 
-### What the 55 rounds jointly establish
+### What the 57 rounds jointly establish
 
-The 55 rounds use 1721.43 agent-minutes and 419.0 wall-minutes under the campaign’s
+The 57 rounds use 1738.1 agent-minutes and 791.6 wall-minutes under the campaign’s
 retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
@@ -2901,15 +2975,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 417 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 421 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
-| validity | 108 | was correct, but the measurement did not bear on the question |
+| validity | 111 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 154 | recorded something its own evidence contradicts |
-| robustness | 49 | did not finish, or finished only by luck |
+| robustness | 50 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -2918,19 +2992,22 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty defects in 417, and no soundness defect ever.**
-Every soundness failure was found by a control cell whose answer was known in advance, a
-rule written down before the measurement, a generated view contradicting its source, or
-someone reading carefully.
+**The automated gate has caught sixty-one defects in 421, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Gate-detected entries here are mechanical process, implementation, or
 test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
-Two entries are currently `outstanding` rather than fixed.
+The generated log currently has 56 open entries: 35 `outstanding` and 21 `contained`.
+The W9 candidate `think-cyko` owns their systematic risk ordering and bounded repair
+waves; the synopsis names the cases that matter to current claims rather than pretending
+the examples below are the whole backlog.
 [D-406](defects.md) waits on the enumeration repricing X-010 filed.
-The older one is worth naming because refusing was the whole of the available fix:
+One older entry is worth naming because refusing was the whole of the available fix:
 [D-391](defects.md) is the first-order rigidity assessor intersecting a tangent cone
 that is a union: two squares meeting at a single corner are held apart by two axes, and
 non-overlap asks that *either* keep separating, so the linearized feasible set is a
@@ -2947,6 +3024,17 @@ one of the 120 coordinates as pinned, reporting a packing rigid that is not.
 Removing the defect is what found the witness.
 It is still not a *motion*: the gaps curve shut at order `t²`, so `n = 40`’s record
 stays `undetermined` and the catalogue’s annotation stands.
+
+Four agenda-015 review findings are also open.
+[D-418](defects.md) records eight declared parser or recursion bounds without the named
+exceeding controls BC-140 required.
+[D-419](defects.md) stops exp-057 because two six-decimal coordinate rules were applied
+to a fourteen-digit release-text side token without source provenance.
+[D-420](defects.md) keeps BC-142 partial because its benchmark selection test proves a
+bounded inclusion and refusal, not exact reachable-set equivalence.
+[D-421](defects.md) records that the wave-efficiency renderer accepts Codex receipts but
+not the Claude receipts retained by this bridged wave, so BC-143 keeps a typed
+no-change/refusal instead of hand-computing incomparable telemetry.
 
 [D-393](defects.md) is the same run being wrong about its own gate.
 `D-381` established `--edit` as the pre-push floor, and that floor does not run tests:

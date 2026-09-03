@@ -73,7 +73,7 @@ properties:
           uniqueItems: true
           items:
             enum:
-              - research-pass
+              - research-survey
               - factual-review
               - insight-iteration
               - process-review
@@ -81,6 +81,8 @@ properties:
               - research-loop
               - pipeline-improvement
               - documentation-pass
+              - remediation
+              - review-planning-oversight
               - general-improvement
           description: >-
             Optional: the workflow entry points this commitment expects to run through.
@@ -115,6 +117,45 @@ properties:
             takeable (D-374). A commitment naming this may not be `ready`; the renderer
             refuses that combination, which is the whole point of making it a field.
         next_evidence: {type: string, minLength: 1}
+        outcomes:
+          type: array
+          minItems: 1
+          description: >-
+            Post-agenda results at the smallest honest scope. Required by the campaign
+            checker for every item in terminal agendas from agenda-015 onward.
+          items:
+            type: object
+            additionalProperties: false
+            required: [scope, classification, result, evidence, disposition, follow_up]
+            properties:
+              scope: {type: string, minLength: 1}
+              classification:
+                enum:
+                  - achieved
+                  - bounded-negative
+                  - time-limited
+                  - guard-refused
+                  - technical-failure
+                  - never-opened
+                  - inconclusive
+              result: {type: string, minLength: 1}
+              evidence:
+                type: array
+                minItems: 1
+                items: {type: string, minLength: 1}
+              disposition:
+                enum:
+                  - retire-success
+                  - retire-negative
+                  - continue
+                  - fix-and-rerun
+                  - defer-dependency
+              follow_up:
+                type: [string, "null"]
+                pattern: "^think-[a-z0-9]+$"
+                description: >-
+                  Required for continue, fix-and-rerun, and defer-dependency; null for
+                  retired work.
         artifacts:
           type: array
           uniqueItems: true
@@ -124,3 +165,107 @@ properties:
           minLength: 1
           description: Optional disjoint lane that another agent may own concurrently.
         note: {type: string, minLength: 1}
+  closeout:
+    type: object
+    additionalProperties: false
+    description: >-
+      Terminal W10 reconciliation. Required by the campaign checker for completed or
+      superseded agendas from agenda-015 onward.
+    required: [documentation_review, changes, validation, replanning]
+    properties:
+      documentation_review:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          additionalProperties: false
+          required: [path, decision, reason]
+          properties:
+            path: {type: string, minLength: 1}
+            decision: {enum: [updated, checked-current, not-applicable]}
+            reason: {type: string, minLength: 1}
+      changes:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          additionalProperties: false
+          required: [name, result, paths]
+          properties:
+            name: {type: string, pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"}
+            result: {type: string, minLength: 1}
+            paths:
+              type: array
+              minItems: 1
+              uniqueItems: true
+              items: {type: string, pattern: "^[^/][^\\n]*$"}
+      validation:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          additionalProperties: false
+          required: [scope, status, evidence]
+          properties:
+            scope: {type: string, pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"}
+            status: {enum: [passed, failed, pending]}
+            evidence: {type: string, minLength: 1}
+      replanning:
+        type: object
+        additionalProperties: false
+        required: [candidates, selected, operator_input]
+        properties:
+          candidates:
+            type: array
+            minItems: 1
+            items:
+              type: object
+              additionalProperties: false
+              required: [bead, workflow, priority, rationale]
+              properties:
+                bead: {type: string, pattern: "^think-[a-z0-9]+$"}
+                workflow:
+                  $ref: "#/$defs/workflow"
+                priority: {type: integer, minimum: 0, maximum: 4}
+                rationale: {type: string, minLength: 1}
+          selected:
+            type: object
+            additionalProperties: false
+            required: [bead, workflow, rationale]
+            properties:
+              bead: {type: string, pattern: "^think-[a-z0-9]+$"}
+              workflow:
+                enum:
+                  - research-survey
+                  - factual-review
+                  - insight-iteration
+                  - process-review
+                  - efficiency-loop
+                  - research-loop
+                  - pipeline-improvement
+                  - documentation-pass
+                  - remediation
+                  - review-planning-oversight
+                  - general-improvement
+              rationale: {type: string, minLength: 1}
+          operator_input:
+            type: object
+            additionalProperties: false
+            required: [status, note]
+            properties:
+              status: {enum: [confirmed, revised, unavailable]}
+              note: {type: string, minLength: 1}
+$defs:
+  workflow:
+    enum:
+      - research-survey
+      - factual-review
+      - insight-iteration
+      - process-review
+      - efficiency-loop
+      - research-loop
+      - pipeline-improvement
+      - documentation-pass
+      - remediation
+      - review-planning-oversight
+      - general-improvement

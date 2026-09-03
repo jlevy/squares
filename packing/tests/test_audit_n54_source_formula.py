@@ -4,6 +4,8 @@ import json
 import subprocess
 import sys
 
+import pytest
+
 from devtools.audit_n54_source_formula import derive_receipt
 
 
@@ -40,3 +42,52 @@ def test_n54_source_formula_cli_agrees_under_optimization() -> None:
     )
 
     assert json.loads(normal.stdout) == json.loads(optimized.stdout)
+
+
+def test_perturbed_side_basis_is_refused() -> None:
+    """A wrong basis coefficient must fail the side identity, not reach a receipt."""
+    with pytest.raises(ValueError, match="n=54 source identity failed: side basis"):
+        derive_receipt(mutation="perturbed-side-basis")
+
+    refused = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "devtools.audit_n54_source_formula",
+            "--mutate",
+            "perturbed-side-basis",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert refused.returncode == 1
+    assert refused.stdout == ""
+    assert "side basis" in refused.stderr
+
+
+def test_changed_minimal_polynomial_is_refused() -> None:
+    """The minimal-polynomial comparison must be a second, independent gate."""
+    with pytest.raises(ValueError, match="unexpected n=54 minimal polynomials"):
+        derive_receipt(mutation="changed-minimal-polynomial")
+
+    refused = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "devtools.audit_n54_source_formula",
+            "--mutate",
+            "changed-minimal-polynomial",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert refused.returncode == 1
+    assert refused.stdout == ""
+    assert "8896" in refused.stderr
+
+
+def test_unknown_negative_control_is_refused() -> None:
+    with pytest.raises(ValueError, match="unknown n=54 negative control"):
+        derive_receipt(mutation="not-a-control")

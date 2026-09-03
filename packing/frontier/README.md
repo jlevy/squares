@@ -177,7 +177,7 @@ The current baseline reparses the retained Kingbird catalogue through `n = 100`,
 the newer UnitSquare reports at `n = 68` and `n = 69`, retains its four beyond-horizon
 claims, and records the Schadt `n = 29` repository as a superseded numerical witness.
 The check is local and deterministic; refreshing a public source is a dated W1 research
-pass, not a network operation hidden inside ordinary validation.
+survey, not a network operation hidden inside ordinary validation.
 
 ```shell
 uv run --frozen python -m devtools.check_source_coverage
@@ -304,7 +304,7 @@ phrased unusually can be miscounted; `improved_by` in particular under-reports w
 uses “Refound”, “Optimized by”, or prose.
 Tilt angles are recorded only for the handful of cases where this research established
 them. The coverage inventory is dated and named; a newly published source still requires
-a new research pass and disposition.
+a new research survey and disposition.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
