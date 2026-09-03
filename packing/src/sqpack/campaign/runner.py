@@ -98,6 +98,7 @@ import yaml
 from strif import atomic_output_file
 
 from sqpack.project import ProjectLayoutError, configured_project_root, require_project_root
+from sqpack.verify import corners_from_poses, float_sign, verify_packing
 from sqpack.yamlio import safe_load
 
 ROOT = configured_project_root()
@@ -416,7 +417,9 @@ def archive_of(path: Path) -> Path:
     return path.parent.parent / "results" / (path.stem + ".jsonl")
 
 
-def scan_archive(archive: Path) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any] | None]]:
+def scan_archive(
+    archive: Path,
+) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any] | None]]:
     """Revalidate the whole archive and split it into result lines and receipts.
 
     Every line goes back through `validated_record`, so reading an archive is the same
@@ -549,9 +552,7 @@ def validated_pose(rec: dict[str, Any], n: int) -> tuple[list[float], list[float
     return pose[0], pose[1], pose[2]
 
 
-def validated_record(
-    line: str, *, allow_receipts: tuple[str, ...] = ()
-) -> dict[str, Any]:
+def validated_record(line: str, *, allow_receipts: tuple[str, ...] = ()) -> dict[str, Any]:
     """Parse one JSONL record and enforce the result-line trust boundary.
 
     This function is shared by ingestion and replay. Otherwise a line can pass the live
@@ -680,10 +681,6 @@ def verify_archive_poses(archive: Path) -> dict[str, Any]:
     is what makes the test the real claim: do `n` unit squares with these relative
     positions fit inside a square of the side that was reported.
     """
-    # Imported here so the parent process, which must not do this check itself, never
-    # even loads the oracle.
-    from sqpack.verify import corners_from_poses, float_sign, verify_packing
-
     results, _ = scan_archive(archive)
     sign = float_sign(POSE_TOLERANCE)
     failures: list[str] = []
@@ -703,8 +700,7 @@ def verify_archive_poses(archive: Path) -> dict[str, Any]:
         label = f"n={n} seed={seed} pose {digest[:12]}"
         if required > side + POSE_TOLERANCE:
             failures.append(
-                f"{label}: the pose needs side {required:.17g} but the line claims "
-                f"{side:.17g}"
+                f"{label}: the pose needs side {required:.17g} but the line claims {side:.17g}"
             )
         if not report.valid:
             detail = "; ".join(f"{kind}: {why}" for kind, why in report.failures[:6])
@@ -973,7 +969,7 @@ def commit_paths(paths: list[Path], message: str) -> str:
         check=False,
     )
     if completed.returncode:
-        detail = (completed.stderr.strip() or completed.stdout.strip() or "no diagnostic")
+        detail = completed.stderr.strip() or completed.stdout.strip() or "no diagnostic"
         raise RefusalError(f"git commit failed with exit {completed.returncode}: {detail}")
     after = git("rev-parse", "HEAD")
     if after == before:
@@ -1985,9 +1981,11 @@ def write_report(
         "",
         "## Health",
         "",
-        f"- Consecutive refusals: **{failures}** (the stop fires at "
-        f"{MAX_CONSECUTIVE_FAILURES}). A guard, a refused ledger, a failed commit and an "
-        "unreadable archive all count here: each ends the round without a measurement.",
+        (
+            f"- Consecutive refusals: **{failures}** (the stop fires at "
+            f"{MAX_CONSECUTIVE_FAILURES}). A guard, a refused ledger, a failed commit and "
+            "an unreadable archive all count: each ends the round without a measurement."
+        ),
         f"- Exit: **{'abnormal, non-zero' if abnormal else 'clean'}**.",
         "",
     ]
@@ -2008,8 +2006,7 @@ def main(arguments: list[str] | None = None) -> int:
         "target",
         nargs="?",
         help=(
-            "H-id for claim; exp-id for execute/record/release; "
-            "archive path for verify-archive"
+            "H-id for claim; exp-id for execute/record/release; archive path for verify-archive"
         ),
     )
     parser.add_argument("--operator", default="local-agent")

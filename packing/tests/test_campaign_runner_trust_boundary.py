@@ -20,8 +20,8 @@ import subprocess
 import sys
 from collections.abc import Iterator
 from dataclasses import dataclass
-from itertools import count
 from datetime import UTC, datetime, timedelta
+from itertools import count
 from pathlib import Path
 from typing import Any
 
@@ -181,12 +181,11 @@ def tree(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Tree]:
     engine.chmod(engine.stat().st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
 
     subprocess.run(["git", "init", "-q"], cwd=root, check=True)
-    subprocess.run(["git", "config", "user.email", "fixture@example.invalid"], cwd=root, check=True)
+    email = ["git", "config", "user.email", "fixture@example.invalid"]
+    subprocess.run(email, cwd=root, check=True)
     subprocess.run(["git", "config", "user.name", "fixture"], cwd=root, check=True)
     subprocess.run(["git", "add", "-A"], cwd=root, check=True)
-    subprocess.run(
-        ["git", "commit", "-qm", "fixture", "--no-verify"], cwd=root, check=True
-    )
+    subprocess.run(["git", "commit", "-qm", "fixture", "--no-verify"], cwd=root, check=True)
 
     monkeypatch.setattr(runner, "ROOT", root)
     monkeypatch.setattr(runner, "CAMPAIGN", campaign)
@@ -627,9 +626,10 @@ def test_run_reports_the_true_state_when_a_step_fails_after_the_verdict(
     out = capsys.readouterr().out
 
     assert "is already unresolved: the failure came after the verdict" in out
-    assert runner.front(tree.round_path("exp-001"))["experiment"]["verdict"][
-        "decision"
-    ] == "unresolved"
+    assert (
+        runner.front(tree.round_path("exp-001"))["experiment"]["verdict"]["decision"]
+        == "unresolved"
+    )
 
 
 def test_run_recomputes_the_queue_between_rounds(tree: Tree) -> None:
