@@ -113,11 +113,30 @@ session:
       explicit canonical-result absence; a time-limited agreeing prefix is process
       evidence and is not a negative result.
     outcome: null
-    evidence: []
+    evidence:
+    - >-
+      writer ran 08:59:33Z to 09:32:44Z, 1991 s against a 3600 s lease and a 2100 s
+      estimate, exit 0
+    - >-
+      terminal schema complete-agreement, decision accepted, instrument_valid true, 181
+      rows, first_disagreement_ordinal null
+    - >-
+      result 438dfc1f, checkpoint bb45ed2a, last row hash 60e58a70, carried boundary
+      8947b38e at ordinal 169
+    - >-
+      both 181-row summaries byte-identical, every row minimum 1/1, global minimum 1/1,
+      total weight 203/12, atom count 168
+    - >-
+      published bytes re-validated in a separate process: canonical, and validate_result
+      rebuilt all 181 chain links from the two summaries alone
+    - >-
+      four frozen ancestor digests unchanged, frozen package 309ec241 intact, exp-052 and
+      exp-056 never acquired a result file
     stop_reason: null
     next_action: >-
       Hand BC-149 a terminal outcome with every input, output, command, decision,
-      declared absence and mutation bound at one revision.
+      declared absence and mutation bound at one revision, including the named
+      --assemble instrument limitation.
   primary_bead: think-5j8d
   status: in_progress
   budget:

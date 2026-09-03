@@ -446,7 +446,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | H-049 | blocked | search | delta((4,6), 20) > 0: twenty unit squares pack into a 4 by 6 rectangle |  | 0 |  |
 | H-050 | blocked | search | The n = 71 incumbent's split of sixteen oblique squares across two ang |  | 0 |  |
 | H-051 | blocked | search | Starting only from the hash-verified public n = 68 parent, a proposer  |  | 0 |  |
-| H-052 | unresolved | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 4 | 139.6m agent + 495.6m wall |
+| H-052 | unresolved | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 4 | 304.6m agent + 528.8m wall |
 | H-053 | blocked | search | For each fixed UnitSquare Release 1 parent-child pair at n = 68 and n  |  | 2 | 114m agent + 107.2m wall |
 | H-054 | unresolved | search | The retained source facts for the reported n = 50 construction at side |  | 2 | 38m agent + 30.0m wall |
 | H-055 | blocked | search | If BC-111 selects n = 54, the fixed retained witness at reported side  |  | 0 |  |
@@ -462,7 +462,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | --- | --- | --- | --- |
 | exp-050 | H-054 | unresolved | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
 | exp-058 | H-060 | unresolved | Both accept conditions are unmet and both reject conditions are absent, so the only honest disposition is unresolved. The chart is not CHECKED in the criterion's sense -- every number in it was computed by scratchpad sympy, not by a repository instrument. A W7 instrument was built after this packet was frozen, at 6580a9fd, as the package sqpack.local_rigidity binding to devtools.assess_n5_rigidity rather than extending it; it self-reports instrument_ready with isolation_decided false and it does exercise the eight controls C1-C8. Its independent readiness review has now PASSED, on the third round: BOUNDED-CAVEAT at 2f112f4c because two of the eight registered controls, C1 changed_feature and C4 invented_contact, could not fail and never reached the refusal path; repair at 609e7392, verified by removal; BOUNDED-CAVEAT again on one unclosed provenance item, the digested payload pinning a commit that cannot produce the recorded digest; then PASS at final payload digest 743fd18a over source digest 9382bae1, replayed from a clean root one commit past the author's observed commit, with the leaf diff against the author's certificate showing exactly one differing leaf, the pinned commit, tree_matches true and no differing paths. H-060 therefore moves to instrument_ready true. That transition is about the instrument and not about this hypothesis: no target determination ran, the instrument sets isolation_decided false unconditionally and cannot decide isolation even in principle, and this round's numbers still did not come from it, so the chart is not CHECKED in the criterion's sense here. The argument is not REVIEWED -- BC-153 has not run -- and its curve-selection step rests on quotations rather than on BCR Proposition 8.1.13 itself: one of BCR's own authors, in self-described provisional notes, plus four verbatim uses by a single author group. The packet's second secondary source was withdrawn from X-012 as an over-attribution, so no independent corroborating source stands behind the citation. The corroborating second-order-sufficiency proof recorded in the artifact reaches the same conclusion from strictly weaker hypotheses, but acceptance was preregistered on the curve-selection route, so it discharges nothing. What this round does establish is that the mathematics of the registered route is complete on paper and replays exactly, that the agenda's constraint counts are confirmed with no discrepancy, and that the one known nonconstant feasible arc lives at a different container side |
-| exp-059 | H-052 | in-progress | The package, both terminal schemas and the refusal battery are frozen and green, but the exact writer has not run, so no canonical result exists and H-052 keeps the unresolved disposition exp-056 left it with. |
+| exp-059 | H-052 | accepted | All 181 paired direction cells agree exactly, both complete certificate summaries are identical with global minimum 1/1, every instrument guard holds and the decision derives to accepted from the emitted evidence, so the registered criterion is met at its declared scope. |
 
 ## Rounds
 
@@ -511,7 +511,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | exp-047 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `interval-enclosure`: the numerical prototype's selftest and synthetic controls pass, but a float midpoint fit with fixed tolerance and heuristic radii does not prove a nonempty compatible-pose enclosure or outward- rounded wall and pair signs, and the preregistered command lacks a complete post- authorization runner. No parent retrieval, target parse or target fit ran, so H-053 remains unresolved. |
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
 
-### accepted (17)
+### accepted (18)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -532,6 +532,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | exp-042 | series-000 | 5 | openai-codex | H-023 | All six unchanged paths have exact universal feasibility certificates with the frozen base, open-interval, and endpoint inventories, and both owner branches have exact positive first-order stress certificates. Generation and replay agree, all twenty production-path controls reject with their expected identifiers, and the stress-only control retains feasibility while making the combined verdict unresolved. The result is pathwise only and refuses every broader H-023 claim. |
 | exp-045 | series-000 | 5 | openai-codex | H-023 | Accepted 2026-08-31 by the owner in session-050, after the independent post-change audit that was the sixth admission condition. The round's content is unchanged from session-033: both declared determinations report criterion_met -- canonical pure -W is excluded at A, the interior, and B, and the -W coefficients equal the separately derived +W values -- with twelve mutation controls, thirteen refusal records, and deterministic record-and-replay agreement, all independently replayed by the auditor (a perturbed artifact is refused with replay.drift). The audit raised three findings, resolved in the Amendment section below rather than glossed: the registration's mutation vocabulary differs from the implemented twelve (mapped and explained there, per session-032's reachability derivation), the driver did not route through the accepted production helpers, and its docstring still described the exp-043 draft (D-404). The decisive resolution is devtools.check_minus_w_bridge: the accepted row-jet, stress, scale, and owner-4 helpers, run on the actual -W direction, independently rebuild all fifteen owner-3 scale records and all three owner-4 records with strict exact contradictions and +W/-W coefficients equal -- two independently written implementations deciding the same question the same way, held in place by tests/test_minus_w_bridge.py. Acceptance widens nothing: every broader claim remains refused -- no whole-component identity, no A-to-B stationary connection, no local isolation, no terminality, and no H-023 disposition beyond the excluded direction. |
 | exp-055 | series-000 | 50 | openai-codex | H-059 | The one authorized process produced the exact same existing-result refusal and canonical zero-call trace under normal and optimized Python, every sentinel was independently calibrated, every registered mutation rejected, exp-050 remained byte-identical and the no-import verifier accepted the immutable result. This accepts only H-059's prospective protocol claim; independent campaign review is still required. |
+| exp-059 | series-000 | 17 | claude-opus-5 | H-052 | All 181 paired direction cells agree exactly, both complete certificate summaries are identical with global minimum 1/1, every instrument guard holds and the decision derives to accepted from the emitted evidence, so the registered criterion is met at its declared scope. |
 
 ### baseline (11)
 
@@ -549,12 +550,6 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-059 | series-000 | 17 | claude-opus-5 | H-052 | The package, both terminal schemas and the refusal battery are frozen and green, but the exact writer has not run, so no canonical result exists and H-052 keeps the unresolved disposition exp-056 left it with. |
-
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -570,7 +565,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 
 ## Effort
 
-59 rounds, 1738.1 agent-minutes, 791.8 wall-minutes.
+59 rounds, 1903.1 agent-minutes, 825.0 wall-minutes.
 
 ## Exploration reports not yet codified
 

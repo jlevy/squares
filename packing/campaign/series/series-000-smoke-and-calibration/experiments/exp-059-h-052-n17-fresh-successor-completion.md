@@ -69,12 +69,47 @@ experiment:
       so 33.4 minutes of accumulation and about 35 minutes in total. The first exact
       disagreement stops the process and is retained.
     record: campaign/series/series-000-smoke-and-calibration/results/exp-059-h-052-n17-fresh-successor-completion.json
-  lease:
-    expires: '2026-09-03T10:21:00Z'
-    host: linux x86_64 container
-  results: []
+  effort:
+    timebox: >-
+      One fixed repository-wide process-exclusive lease, 2026-09-03T08:58:00Z through
+      2026-09-03T09:58:00Z, declared before the writer was launched. The process is
+      launched by the coordinator, never by the lane.
+    wall_seconds: 1991
+    agent_minutes: 165
+    stopped_by: criterion
+  results:
+  - shape: determination
+    question: >-
+      Does a fresh successor's independently written exact accumulation agree with the
+      source-faithful path on all 181 paired direction cells, both complete
+      CertificateManifest summaries, every row minimum and the global minimum for the
+      retained n = 17 certificate?
+    role: outcome
+    outcome: criterion_met
+    checked_by: >-
+      The published result was re-validated from its bytes on disk: the file is exactly
+      canonical, and validate_result re-derived the whole admission boundary, rebuilding
+      all 181 hash-chain links from the two summaries alone and reproducing the emitted
+      chain spine, the carried boundary 8947b38e at ordinal 169 and the last row hash
+      60e58a70. Both 181-row summaries are identical, atom count 168, atom hash 37d35da0,
+      direction hash cc789e1a, total weight 203/12, and every one of the 181 row minima
+      is exactly 1/1, so the global minimum is 1/1.
+  - shape: determination
+    question: >-
+      Did every declared instrument guard hold, so that agreement is decidable rather
+      than merely observed?
+    role: guard
+    outcome: criterion_met
+    checked_by: >-
+      preconditions_pass, shrink_and_scaling.all_hold, all_mutations_rejected over the
+      five frozen mutations, and all twelve frozen certificate invariants are true, so
+      instrument_valid is true. Each was re-derived from the emitted fields rather than
+      read: a record whose decision, instrument validity, precondition conjunction,
+      mutation conjunction or invariant set is asserted rather than derived is refused.
+      Before the run, 115 named guards passed with zero skips under byte-identical normal
+      and optimized Python, and 39 focused tests passed.
   verdict:
-    decision: in-progress
+    decision: accepted
     needs_review: true
     primary_criterion: >-
       Accept H-052 only if all 181 paired rows agree exactly, both 181-row
@@ -85,22 +120,24 @@ experiment:
       disagreement is a retained result that may reject only after every instrument guard
       passes.
     reason: >-
-      The package, both terminal schemas and the refusal battery are frozen and green,
-      but the exact writer has not run, so no canonical result exists and H-052 keeps the
-      unresolved disposition exp-056 left it with.
+      All 181 paired direction cells agree exactly, both complete certificate summaries
+      are identical with global minimum 1/1, every instrument guard holds and the
+      decision derives to accepted from the emitted evidence, so the registered
+      criterion is met at its declared scope.
     commit: 2f112f4c+sha256-ab4dd8fe66b15e8f7
-    resume_from: >-
-      Immediate parent exp-056 checkpoint SHA-256
-      0d39a7e734e8afc62fda914fda4ec8b5e9b2e48ea1b1d8b197dc08e27e7a35d4 with progress
-      SHA-256 0875f31fbf7391cfa40349812ca38a786069830a28f1c8d92ffd4ab33ecfe93c at
-      ordinal 170, stage independent_started, chained to row hash
-      8947b38e0351048c3a67d914f2b8449185686d920913f5a2404898bdeca4c0b6. Carried-chain
-      genesis exp-052 checkpoint SHA-256
-      db5c156959b6de4e6f2c9be283454d01dd5f3a436e6489f5e6bb60c38559fdb8 with binding hash
-      2446fa39e154800410b9b5cc19f19aed7cc0c797d116f7ece1c97a2c7c0b4d1a, which anchors
-      row 0. A continuation re-issues the registered command; the successor reloads its
-      own partial checkpoint, discards any stale marker and resumes at the first
-      incomplete ordinal. Neither exp-052 nor exp-056 may be rerun.
+  complexity:
+    lines_changed: 3696
+    new_dependencies: []
+    new_failure_modes:
+    - >-
+      The successor CLI has no path that assembles a terminal schema from an existing
+      checkpoint. On a disagreement the driver raises after retaining the row, so that
+      invocation would publish nothing and schema (b) would need a later assembly step.
+      The gap did not fire on this round, which agreed on every cell, and it is recorded
+      because that is the outcome in which an omission is least likely to be noticed.
+    notes: >-
+      One new package and one new test module, importing the hash-bound exact definitions
+      from three frozen packages and editing none of them.
 ---
 # Exp-059 — H-052 `n = 17` Fresh Successor Completion
 
@@ -236,6 +273,52 @@ reproducible:
 The second is the stronger of the two: the mechanism that will decide agreement is
 already known to agree with the frozen chain on real data, not only on synthetic
 directions.
+
+## Terminal Outcome
+
+The writer ran once, inside its declared lease, from 2026-09-03T08:59:33Z to
+2026-09-03T09:32:44Z — 1991 seconds against a 3600-second lease and a 2100-second
+estimate. It recomputed ordinal 170 and continued to ordinal 180, appending eleven new
+rows to the 170 carried ones.
+
+|  |  |
+| --- | --- |
+| Terminal schema | `complete-agreement` |
+| Decision | `accepted`, derived from the emitted evidence |
+| `instrument_valid` | true |
+| Rows | 181, all agreeing; `first_disagreement_ordinal` null |
+| Result SHA-256 | `438dfc1ffc3f5ac2c8b83bc03014aa52e616da95b4a3b276f22326d36dee2d0a` |
+| Checkpoint SHA-256 | `bb45ed2a1bd01b26ec4af3a137f5f51ce6a9ad1f8ccc744b76db936e62d1d28c` |
+| Last row hash | `60e58a70c49fe6be879230c6305e59695364016ecdf1ba5ac3a305c12f5cb9a6` |
+| Carried boundary | `8947b38e…` at ordinal 169 |
+
+Both 181-row summaries are byte-identical.
+Atom count 168, atom hash `37d35da0…`, direction count 181, direction hash `cc789e1a…`,
+total weight `203/12`. Every one of the 181 row minima is exactly `1/1`, so the global
+minimum is `1/1` — the frozen expectation `576/576`. All twelve certificate invariants,
+all five mutation rejections, the precondition conjunction and the shrink-and-scaling
+conjunction hold, and the progress marker was removed at the final reconciliation.
+
+The published result was then re-validated from its bytes on disk by a separate process:
+the file is exactly canonical, and `validate_result` re-derived the entire admission
+boundary, rebuilding all 181 hash-chain links from the two summaries alone.
+The four frozen ancestor digests are unchanged, the frozen package still computes to
+`309ec241…`, and neither exp-052 nor exp-056 ever acquired a result file.
+
+## Named Instrument Limitation
+
+The successor’s CLI has no path that assembles a terminal schema from an existing
+checkpoint.
+Schema (b) is built, validated and covered by ten named guards plus a focused
+control, but on a disagreement the driver raises before `run_target` reaches its
+assembly call, so that invocation would retain the discrepant row and publish nothing;
+schema (b) would need a later assembly step reading the retained checkpoint.
+This is a wiring omission in the command-line layer, not a defect in the assembler.
+
+It did not fire on this round, which agreed on every cell.
+It is recorded because the all-agree outcome is exactly the one in which such an
+omission is least likely to be noticed and most likely to mislead a later reader about
+what the instrument can do.
 
 ## Claim Boundary
 
