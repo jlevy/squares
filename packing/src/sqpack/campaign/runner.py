@@ -80,6 +80,7 @@ import argparse
 import hashlib
 import json
 import math
+import os
 import re
 import shlex
 import socket
@@ -988,8 +989,16 @@ def execute(eid: str) -> None:
     """
     refuse_if_gate_running()
     path, e = find_round(eid)
+    require_in_progress(eid, e, "execute")
     recipe = hypothesis(e["hypotheses"][0])["runner"]
     archive = archive_of(path)
+    # The lease is the only durable bound on an unattended round, so it is read before
+    # anything is spent and it caps the timebox. A timebox longer than the lease used to
+    # mean the round could outlive the claim that authorised it (D-046).
+    lease_left = lease_seconds_remaining(eid, e)
+    # Fire the engine's own gate before taking a single measurement, and refuse the round
+    # if it fails: an untested binary must not be able to reach the archive (D-044).
+    selftest = run_engine_selftest(recipe)
     started = time.monotonic()
     # Capture these before the command runs. `record` may be hours later on a newer
     # HEAD, but that is not the revision that produced the measurements.
@@ -999,14 +1008,30 @@ def execute(eid: str) -> None:
     try:
         archive.write_text("")
         archive_ready = True
-        deadline = time.monotonic() + duration(recipe["timebox"])
+        append_receipt(archive, SELFTEST_METADATA, selftest)
+        budget = min(duration(recipe["timebox"]), lease_left)
+        if budget < duration(recipe["timebox"]):
+            print(f"   lease caps this round at {budget / 60:.1f}m of {recipe['timebox']}")
+        session_deadline = time.monotonic() + budget
+        cells = list(recipe["cells"])
 
-        for n in recipe["cells"]:
+        for index, n in enumerate(cells):
+            # Each cell gets an equal share of whatever is left, rather than one deadline
+            # the first cell could spend in full (D-046). Unused time is reclaimed by the
+            # cells that follow, and no cell can ever run past the lease.
+            remaining = session_deadline - time.monotonic()
+            if remaining <= 0:
+                print(f"   n={n}: session deadline reached before the cell started")
+                break
+            cell_deadline = time.monotonic() + remaining / (len(cells) - index)
             with archive.open("a") as fh:
                 for seed in recipe["seeds"]:
-                    if (left := deadline - time.monotonic()) <= 0:
+                    if session_deadline - time.monotonic() <= 0:
                         print(f"   n={n}: TIMEBOX reached, {recipe['timebox']} spent")
                         return
+                    if (left := cell_deadline - time.monotonic()) <= 0:
+                        print(f"   n={n}: cell share spent; moving to the next cell")
+                        break
                     cmd = shlex.split(recipe["command"].format(n=n, seed=seed))
                     try:
                         p = subprocess.run(
@@ -1018,8 +1043,8 @@ def execute(eid: str) -> None:
                             check=False,
                         )
                     except subprocess.TimeoutExpired:
-                        print(f"   n={n}: TIMEBOX reached mid-seed")
-                        return
+                        print(f"   n={n}: cell share reached mid-seed")
+                        break
                     except FileNotFoundError as exc:
                         raise GuardError(f"declared command not found: {cmd[0]}") from exc
                     if p.returncode:
@@ -1145,18 +1170,56 @@ def record(eid: str, *, operator: str) -> str:
     """Read the archive, decide, write the round, regenerate the views, commit."""
     refuse_if_gate_running()
     path, stub = find_round(eid)
+    require_in_progress(eid, stub, "record")
     hid = stub["hypotheses"][0]
     h = hypothesis(hid)
     recipe = h["runner"]
     archive = archive_of(path)
-    execution = execution_metadata(archive) if archive.exists() else None
+    if not archive.exists():
+        raise RefusalError(
+            f"{eid} has no archive; run `packing-campaign execute {eid}` before recording"
+        )
+    archived, receipts = scan_archive(archive)
+    execution = execution_metadata(archive)
     if execution is None:
         raise RefusalError(
             f"{eid} has no execution receipt; "
             f"run `packing-campaign execute {eid}` before recording"
         )
+    selftest = receipts[SELFTEST_METADATA]
+    if selftest is None:
+        raise RefusalError(
+            f"{eid} has no self-test receipt, so nothing establishes that the engine "
+            f"gate ran. Re-run `packing-campaign execute {eid}`."
+        )
+    gate_passed = selftest_passed(selftest, recipe)
+    if not gate_passed:
+        raise RefusalError(
+            f"{eid}'s self-test receipt does not certify the engine that is on disk now "
+            f"(exit {selftest.get('exit_status')!r}, sha256 "
+            f"{str(selftest.get('engine_sha256'))[:12]}). The binary was swapped or the "
+            f"gate failed; re-run `packing-campaign execute {eid}`."
+        )
+    # The independent check, every time there is something to check. A stored certificate
+    # is an audit trail, not a licence: whoever can edit the archive can edit a
+    # certificate inside it, so the geometry is re-decided here, in another process, from
+    # the file as it stands. An archive with no scored line certifies nothing and is left
+    # to `decide`, which abandons the round and keeps the spent budget legible.
+    verification: dict[str, Any] | None = None
+    if archived:
+        verification = verify_archive_in_separate_process(archive)
+        stored = receipts[VERIFICATION_METADATA]
+        if stored is None:
+            append_receipt(archive, VERIFICATION_METADATA, verification)
+        elif stored.get("archive_sha256") != verification["archive_sha256"]:
+            raise RefusalError(
+                f"{eid}'s archive changed after it was verified: the retained receipt "
+                f"certifies {str(stored.get('archive_sha256'))[:12]} but the file on disk "
+                f"digests to {verification['archive_sha256'][:12]}. Nothing may be "
+                "recorded from an archive that moved under its own certificate."
+            )
     artifact_execution = artifact_fields_from_execution(execution)
-    cells = cells_from(archive, recipe) if archive.exists() else []
+    cells = cells_from(archive, recipe)
     verdict = decide(h, cells)
     cell_list = ", ".join(str(c.n) for c in cells) or str(recipe["cells"][0])
 
@@ -1181,6 +1244,26 @@ def record(eid: str, *, operator: str) -> str:
             "role": "outcome",
         }
     ]
+    if verification is not None:
+        # The guard row is the point of the repair: the round says, in the record, that
+        # its geometry was re-derived by another process and which bytes were checked.
+        results.append(
+            {
+                "shape": "determination",
+                "question": (
+                    f"did all {verification['poses_checked']} archived poses verify "
+                    "independently as unit squares inside the reported side with "
+                    "pairwise disjoint interiors"
+                ),
+                "role": "guard",
+                "outcome": "criterion_met",
+                "checked_by": (
+                    f"{verification['verifier']} in a separate process, tolerance "
+                    f"{verification['tolerance']:g}, archive sha256 "
+                    f"{verification['archive_sha256'][:16]}"
+                ),
+            }
+        )
 
     fm = {
         "title": f"{eid} — {hid} at n = {cell_list}",
@@ -1201,8 +1284,14 @@ def record(eid: str, *, operator: str) -> str:
                 "assurance": "numerically-checked",
                 "method": "numerical-f64",
                 "precision": {"binary_bits": 53, "rounding": "nearest-even"},
-                "tolerance": "0 (engine-reported overlap must equal zero)",
-                "host_system": socket.gethostname(), "selftest_passed": True,
+                "tolerance": (
+                    f"engine-reported overlap 0; independent pose re-check at "
+                    f"{POSE_TOLERANCE:g}"
+                ),
+                "host_system": socket.gethostname(),
+                # Derived from an executed gate whose binary digest still matches the
+                # engine on disk. Never a literal (D-044).
+                "selftest_passed": gate_passed,
             },
             "instance": {"axis": "n", "point": cells[0].n if cells else recipe["cells"][0]},
             "method": {
@@ -1243,6 +1332,25 @@ def record(eid: str, *, operator: str) -> str:
         f"| {c.n} | `{c.best:.12f}` | `{c.median:.12f}` | `{c.gap:+.4e}` | {len(c.sides)} |"
         for c in cells
     )
+    provenance = (
+        (
+            f"The {verification['poses_checked']} archived poses were rebuilt into corner "
+            f"geometry and re-checked for containment and pairwise separation by "
+            f"`{verification['verifier']}` in a separate process, at tolerance "
+            f"`{verification['tolerance']:g}`, over archive `sha256:"
+            f"{verification['archive_sha256'][:16]}` (D-044). That is a numerical "
+            f"re-derivation, not a proof: it can refute a forged pose and cannot promote "
+            f"this round beyond `numerically-checked`. The engine gate ran as "
+            f"`{shlex.join(selftest['argv'])}` and exited "
+            f"{selftest['exit_status']}; the binary that passed it digests to `sha256:"
+            f"{str(selftest['engine_sha256'])[:16]}`."
+        )
+        if verification is not None
+        else (
+            "No result line survived the harness contract, so there is no geometry to "
+            "verify and nothing here may be read as a measurement."
+        )
+    )
     body = f"""# {eid} — {hid} at n = {cell_list}
 
 {h.get("claim", "").strip()}
@@ -1267,6 +1375,8 @@ Every number is read from [`{archive.name}`](../results/{archive.name}), which a
 every line the command printed, so the configurations behind these sides can be re-read
 without re-running anything (D-006). The overlap of every result line was asserted zero
 by the harness contract rather than by the experiment that produced it (D-009).
+
+{provenance}
 """
     write_atomic(
         path,
@@ -1275,10 +1385,7 @@ by the harness contract rather than by the experiment that produced it (D-009).
         + "---\n"
         + body,
     )
-    regen = subprocess.run(
-        [sys.executable, "-m", "sqpack.campaign.ledger", "render"],
-        cwd=ROOT, capture_output=True, text=True, check=False,
-    )  # fmt: skip
+    regen = regenerate()
     if regen.returncode:
         # The round is written; only the views are stale. Say exactly that, because the
         # recovery is to fix what the checker named and re-run this one step.
@@ -1286,20 +1393,9 @@ by the harness contract rather than by the experiment that produced it (D-009).
             f"{eid} is written but the campaign ledger refused it:\n"
             f"{regen.stdout}{regen.stderr}\nFix that, then: packing-campaign record {eid}"
         )
-    git("add", "-A", str(CAMPAIGN))
-    subprocess.run(
-        [
-            "git",
-            "commit",
-            "-q",
-            "-m",
-            f"round: {eid} {verdict['decision']} ({hid})",
-            "--no-verify",
-        ],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=False,
+    commit_paths(
+        [path, archive, CAMPAIGN / "ledger.md"],
+        f"round: {eid} {verdict['decision']} ({hid})",
     )
     return verdict["decision"]
 
@@ -1316,8 +1412,7 @@ def release(eid: str, why: str) -> None:
     """
     refuse_if_gate_running()
     path, stub = find_round(eid)
-    if stub["verdict"]["decision"] != "in-progress":
-        raise RefusalError(f"{eid} is {stub['verdict']['decision']}, not in-progress")
+    require_in_progress(eid, stub, "release")
     hid = stub["hypotheses"][0]
     recipe = hypothesis(hid)["runner"]
     archive = archive_of(path)
@@ -1361,7 +1456,11 @@ Nothing may be concluded from this round. `{hid}` returns to the queue, and a su
 starts from nothing — no budget was spent that a later round can resume from.
 """,
     )
-    regenerate()
+    # A release is a state transition like any other, so it is regenerated and committed
+    # rather than left on disk. An unattended session that released a round and then died
+    # used to leave no durable trace of the transition at all (D-046).
+    require_regenerated("release", eid)
+    commit_paths([path, archive, CAMPAIGN / "ledger.md"], f"round: {eid} released ({hid})")
     print(f"{eid} released; {hid} returns to the queue")
 
 
