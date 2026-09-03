@@ -151,8 +151,18 @@ paths, which is what closed the earlier provenance caveat.
 The instrument has changed since that build, but only in provenance metadata, to
 implement the reviewer’s one residual recommendation: the current build `bd450cb6`
 differs from the reviewed one in four leaves under `/claim_boundary/provenance` and in
-no package code, and is not itself claimed to be reviewed.
-The full review history, that change and the named limitations are recorded in
+no package code. That difference is no longer only the lane’s own account of itself.
+`BC-153` replayed the current build — from clean roots, under normal and optimized
+Python — and leaf-diffed its own certificate against the author’s current certificate
+(**one** differing leaf, `/claim_boundary/provenance/pinned_commit`) and against the
+instrument reviewer’s replay of the reviewed build (differences only under
+`/claim_boundary/provenance`, and in no margin, count, row, jet, control verdict or
+determination leaf).
+So the readiness `PASS` earned at `743fd18a…` carries over to the build now in the tree
+on an independent replay rather than on an assertion.
+What that does not do is add a second readiness review: `BC-153` reviewed the proof, and
+the instrument-readiness classification remains the one earned at `743fd18a…`. The full
+review history, that change and the named limitations are recorded in
 [`exp-058`](../series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md).
 
 **No target determination ran at that checkpoint, and H-060 stayed unresolved through

@@ -391,7 +391,8 @@ imported, and the `tree_matches` dirty check was widened to that same set — ha
 inputs while checking only the package would have let `tree_matches: True` stand over a
 modified input. The hashed set went from 9 files to 12.
 
-The current build is therefore **not** the reviewed build, and is not claimed to be:
+The current build is therefore **not** the reviewed build, and carries no readiness
+review of its own:
 
 |  | reviewed | current |
 | --- | --- | --- |
@@ -410,6 +411,18 @@ and the clean linters from the reviewed round remain current.
 landed between runs.
 That is the documented sensitivity of the observing mechanism, not an instrument change;
 `source_digest` is the leaf that moved for a substantive reason.
+
+**Replayed since, by `BC-153` (§6.3).** This paragraph first said only that the current
+build is not claimed to be reviewed, which now understates what has been done to it.
+The `BC-153` reviewer replayed *this* build — not the reviewed one — from clean roots
+under both interpreters, reproduced every count, margin, row, jet and control verdict,
+and leaf-diffed his certificate against the author’s current certificate (exactly
+**one** differing leaf, `/claim_boundary/provenance/pinned_commit`, `15ebfa98` →
+`ceff4400`, an unrelated commit landing between runs) and against the instrument
+reviewer’s replay of the reviewed build (differences only under
+`/claim_boundary/provenance`). That confirms the four-leaf difference above from outside
+the lane, so the readiness `PASS` at `743fd18a…` carries over to the current build.
+It is still not a second readiness review, and none is claimed.
 
 Two limitations stay named rather than fixed:
 

@@ -110,7 +110,7 @@ experiment:
       and optimized Python, and 39 focused tests passed.
   verdict:
     decision: accepted
-    needs_review: true
+    needs_review: false
     primary_criterion: >-
       Accept H-052 only if all 181 paired rows agree exactly, both 181-row
       CertificateManifest summaries agree on every atom and direction hash, total weight,
@@ -123,7 +123,17 @@ experiment:
       All 181 paired direction cells agree exactly, both complete certificate summaries
       are identical with global minimum 1/1, every instrument guard holds and the
       decision derives to accepted from the emitted evidence, so the registered
-      criterion is met at its declared scope.
+      criterion is met at its declared scope. BC-149's independent review, 2026-09-03,
+      returned an exact PASS: every reported figure reproduced, the whole admission
+      boundary replayed, the decision was re-derived from the emitted bytes in a separate
+      process, and a third implementation importing nothing from this repository
+      reproduced all 181 rows. needs_review was cleared on that review, which is the
+      transition it authorised and nothing more; the decision, its reason and the claim
+      boundary are unchanged by it. What is established remains implementation agreement
+      over the same event-cell reduction for one fixed certificate -- not proof-method
+      independence, not adoption of 4.5058, and no cross-n claim. The review's three
+      limitations are recorded in the Amendment below and one of them, the validator
+      gap, is filed as D-428.
     commit: 2f112f4c+sha256-ab4dd8fe66b15e8f7
   complexity:
     lines_changed: 3696
@@ -214,10 +224,22 @@ Exactly two shapes may be published, and the assembler routes to one of them or 
 direction hashes, total weight, every one of the 181 row minima, and the global minimum
 — plus the explicit `global_minimum` comparison and `exact_manifest_agreement`. The
 validator rebuilds the entire 181-link hash chain from the two summaries alone, anchored
-at the genesis binding hash, and requires it to reproduce the emitted chain spine, the
-carried boundary `8947b38e…` at ordinal 169, and the last row hash.
-An altered manifest therefore cannot survive: it breaks the chain that must still
-terminate on exp-056’s verified boundary.
+at the genesis binding hash, and requires it to reproduce the emitted chain spine and
+the last row hash; separately, it requires the emitted `carried_boundary` field to echo
+exp-056’s last row hash `8947b38e…` at ordinal 169.
+
+**What that refuses, and what it does not — corrected after `BC-149`.** This record
+first said that an altered manifest “therefore cannot survive”.
+That is true of the *executed* admission boundary and false of `validate_result` alone.
+`_validate_rows` ties the retained prefix to exp-056 on disk before assembly, so the
+process that produced this result would have refused an altered carried row; but the
+reviewer altered carried row 5 identically in both summaries, rebuilt the spine and
+`last_row_hash`, left `carried_boundary` untouched, and `validate_result` accepted the
+record although `spine[169]` no longer equalled `8947b38e…`. The rebuilt spine is never
+compared with the carried boundary, so record self-consistency alone does not terminate
+the chain on exp-056’s verified boundary.
+The published record does satisfy the tie and the reviewer checked it directly.
+The gap is recorded as [`D-428`](../../../../../defects.md) and is not repaired here.
 
 **Early disagreement** requires the verified contiguous prefix through the discrepant
 pair, the discrepant pair’s exact payload with both manifests and its named differing
@@ -343,6 +365,55 @@ The process stops, retains its checkpoint and records why when any of these hold
 
 A time-limited partial chain is process evidence, not a negative result, and
 `assemble_result` refuses to publish one.
+
+## Amendment — the `BC-149` Independent Review and the Cleared Flag
+
+`BC-149` reviewed this round on 2026-09-03 and returned **PASS**. The reviewer authored
+none of this record, the successor driver or its fixtures, wrote only to their own
+scratchpad, and edited no repository file.
+Every reported figure reproduced exactly, the whole admission boundary replayed, the
+decision was re-derived from the emitted bytes in a separate process, and a third
+implementation written by the reviewer — importing nothing from this repository —
+reproduced all 181 rows (`x_events`, `y_events`, `event_cell_count`, `minimum`,
+`witness`) in 7.5 s. The review is installed at
+[`review-2026-09-03-bc149-h052-agreement-independent-review.md`](../../../../../docs/project/reviews/review-2026-09-03-bc149-h052-agreement-independent-review.md).
+
+**What the pass moved, and it is the complete list.** `needs_review` is cleared on this
+round, which is the one transition the reviewer authorised.
+The decision `accepted`, its reason and the claim boundary stand unchanged; the reviewer
+altered nothing. `H-052` is resolved on this pass at the scope its registered notes
+already fix: implementation agreement for one fixed certificate.
+Nothing here is a proof method, an adoption of `4.5058`, or a frontier change; the
+separate source-adoption route is `BC-150` and `BC-151`, and it rests on the published
+argument rather than on this agreement.
+
+**The three limitations the reviewer named, none of which prevented clearance.**
+
+1. **The validator does not tie the rebuilt spine to the carried boundary.**
+   Demonstrated by altering carried row 5 identically in both summaries, rebuilding the
+   spine and `last_row_hash`, and leaving `carried_boundary` untouched:
+   `validate_result` accepted the record.
+   Recorded as [`D-428`](../../../../../defects.md); this record’s *Two Terminal
+   Schemas* section is corrected above, and the repair — one comparison of
+   `spine[first_new_ordinal - 1]` against the immediate parent’s last row hash — is not
+   applied here.
+2. **No assembly path from a retained disagreement, and a relaunch spoils it.** The
+   wiring omission already recorded under *Named Instrument Limitation*, with the
+   reviewer’s addition that re-issuing the identical command after an exit 3 continues
+   past the retained disagreement rather than refusing, so the readiness report’s
+   “re-issue the identical command” applies to interruptions only.
+3. **Independence is at the accumulation level over a shared reduction.** Within
+   `H-052`’s registered regime and a scope statement rather than a defect.
+   Of a `DirectionManifest`’s ten fields, eight are outputs of the shared
+   `reduce_event_cells` and are equal by construction; only `minimum` and `witness` come
+   from different code, and the two paths also share the fixture, the model, the
+   preconditions and the mutation guards.
+   The registered criterion’s phrase “event-cell reductions” is frozen and is not
+   edited; read here and in every downstream record as **over the same event-cell
+   reduction**.
+
+None of the three bears on the 181-cell agreement itself, and none is closed by this
+amendment.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -271,7 +271,7 @@ session:
       Repaired both critical defects with regressions and a mutation harness proving each guard load-bearing, then took an independent review that returned a bounded caveat on both. Four clauses of the source findings had never reached the records and so were never repaired, so the repair is incomplete rather than merely unproven, and both defects are recorded as contained.
     evidence:
     - '61 trust-boundary tests, guards proven load-bearing by reverting each repair in a copy'
-    - 'the search engine is not built here, so no live round ran and the end-to-end test used a fixture engine'
+    - 'no live round ran and the end-to-end test used a fixture engine. The premise recorded here at the time, that the search engine is not built in this environment, went stale at 10:30Z on 2026-09-03 when a release binary appeared at packing/sqsearch/target/release/sqsearch (ELF x86-64, 617,520 bytes, untracked); nothing was executed against it and nothing was recorded through the unattended runner, so the conclusion stands on its own evidence'
     files:
     - 'packing/src/sqpack/campaign/runner.py'
     - 'packing/tests/test_campaign_runner_trust_boundary.py'

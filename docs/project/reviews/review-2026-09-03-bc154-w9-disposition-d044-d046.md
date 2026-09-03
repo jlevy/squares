@@ -16,6 +16,17 @@ citation, recommendation or claim boundary, and none may be altered here. Refere
 the form `scratchpad/...` in the body below are the reviewer's own record of what was
 read and where it was written at review time, and are left as written.
 
+**One premise in the body went stale after the review was written, and the body is still
+left as written.** In three places the reviewer records that `sqsearch` is not built in
+this environment. That was true for the whole of the review, which began at 08:46Z on
+2026-09-03 and took its measurements after the quiet lease released at 09:36Z. A release
+binary appeared at `packing/sqsearch/target/release/sqsearch` at 10:30Z the same day --
+ELF x86-64, 617,520 bytes, untracked under that package's own `.gitignore` -- and nothing
+has been executed against it. The conclusion the reviewer draws from the premise is
+unaffected and rests on its own evidence: no live round ran, nothing was recorded through
+the unattended runner, and the end-to-end coverage uses a fixture engine. Recorded here, in the
+installation preface, because the review's findings may not be altered.
+
 * * *
 
 Reviewer: independent, no W9 authorship on this lane.

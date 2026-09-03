@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 427
+count: 428
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -1207,6 +1207,16 @@ defects:
     contained and not fixed because a status is a claim about the finding, not about the
     row that summarises it, and against the finding the repair is incomplete.
 
+    The reviewer recommended the other label, and it is recorded here so a reader of this
+    row sees the disagreement and not only the outcome. The review says in terms: "the
+    repair is real and substantial and should not be reverted or downgraded to
+    'contained'", and that "'Fixed, with the following named and tracked residuals' is the
+    honest disposition; 'fixed' unqualified is not." The coordinator chose `contained` on
+    the reasoning above -- that a status is a claim about the finding rather than about the
+    row summarising it. Both readings are defensible and neither hides anything: the
+    residuals below are the same list under either label, and the review is installed at
+    docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md.
+
     The unrepaired clause. This record summarises finding F-02 of the PR #14 review and the
     repair was written against the summary. F-02's fifth clause -- "exact zero is not
     required at the float screen; independently bounded non-overlap is" -- was never
@@ -1263,8 +1273,12 @@ defects:
     the tests, which is not hypothetical -- two of the twelve were tautologies on the first
     pass.
 
-    No live round is covered: sqsearch is not built in this environment, so the
-    end-to-end round runs a fixture engine. Three things therefore remain inferred rather
+    No live round is covered, and the reason is now narrower than this entry first gave.
+    "sqsearch is not built in this environment" was true when written and went stale at
+    10:30Z on 2026-09-03, when a release binary appeared at
+    packing/sqsearch/target/release/sqsearch (ELF x86-64, 617,520 bytes, untracked). It has
+    not been executed, nothing has been recorded through the unattended runner, and the
+    end-to-end round still runs a fixture engine. Three things therefore remain inferred rather
     than executed -- that the real producer satisfies the new contract end to end, that the
     round artifact record now writes validates against the enforced Experiment/v2 schema
     (no test checks this; the fixture stubs regenerate), and the engine gate's real cost
@@ -1343,6 +1357,17 @@ defects:
     without a permanent mutation proof: each was reverted in a copy and every one turns the
     suite red, so the twelve-guard claim is verified in full. That is why this is contained
     and not outstanding.
+
+    The reviewer recommended the other label, and it is recorded here so a reader of this
+    row sees the disagreement and not only the outcome. The review says in terms: "the
+    repair is real and substantial and should not be reverted or downgraded to
+    'contained'", and that "'Fixed, with the following named and tracked residuals' is the
+    honest disposition; 'fixed' unqualified is not." The coordinator chose `contained` on
+    the reasoning above -- that a status is a claim about the source finding rather than
+    about the summary of it in this record, and three of F-04's clauses never reached that
+    summary. Both readings are defensible and neither hides anything: the
+    residuals below are the same list under either label, and the review is installed at
+    docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md.
 
     The three unrepaired clauses. This record's `what` summarises finding F-04 of the PR #14
     review, and three clauses present in F-04 did not reach the summary and so were never
@@ -12872,9 +12897,15 @@ defects:
     fixed side -- registers the instrument-ready transition as a reviewed precondition, and
     `exp-058` reopens its round only when the instrument "refuses all eight controls
     substantively" -- a qualifier that round's record did not carry until this was found.
-    `H-060` still carries `instrument_ready: false` and no receipt has been retained, so
-    nothing downstream had consumed the claim. Unread, two tautologies would have been
-    discharged as evidence at exactly the step where a claimed new theorem is promoted.
+    When this was found, `H-060` carried `instrument_ready: false` and no receipt had been
+    retained, so nothing downstream had yet consumed the claim. That is no longer the
+    state, and the order is what keeps the entry bounded: the repair landed at `609e7392`
+    *before* either transition, the readiness review passed on the repaired controls at
+    payload digest `743fd18a...`, and only then did `H-060` move to `instrument_ready:
+    true` with the current build's receipt `f8262c77...` retained in `exp-058`'s result
+    record and `T-014` registered. So what the downstream records consumed is the repaired
+    instrument, not the two decorations. Unread, two tautologies would have been discharged
+    as evidence at exactly the step where a claimed new theorem is promoted.
   fix: >-
     Both controls now mutate a real `ConstraintSystem` and hand it back to the instrument.
     `with_active_pair` and `with_forged_active_wall` build the mutant; C1 applies each of
@@ -13047,10 +13078,17 @@ defects:
     rounds are evidence of, which is the flattering direction, and it is precisely the
     unattended failure mode the trust-boundary block exists to close.
 
-    Nothing has been recorded through it. `sqsearch` is not built in this environment, no
-    live round has run, and `SYNOPSIS.md:87` carries the numerical runner as NO-GO for
-    unattended execution. The exposure is what a future unattended session would do, not a
-    result already taken.
+    Nothing has been recorded through it, and that conclusion is unchanged by the
+    correction that follows: no live round has run, nothing has been recorded through the
+    unattended runner, and `SYNOPSIS.md:87` carries the numerical runner as NO-GO for
+    unattended execution. The premise this entry first gave for that -- "`sqsearch` is not built in
+    this environment" -- was true when written and went stale at 10:30Z on 2026-09-03, when
+    a release binary appeared at `packing/sqsearch/target/release/sqsearch` (ELF x86-64,
+    617,520 bytes, untracked under the package's own `.gitignore`). Nothing has been
+    executed against that binary, and the end-to-end coverage still runs a fixture engine,
+    so what the absence of a built engine was standing in for remains true on its own
+    evidence. The exposure is what a future unattended session would do, not a result
+    already taken.
   fix: >-
     None yet, and none here: Agenda 016's W9 lane is bounded to D-044 and D-046 as scoped
     and may not widen to a finding adjacent to them.
@@ -13158,3 +13196,73 @@ defects:
   recurrence_of: D-413
   bead: think-xdly
   recorded_in: packing/devtools/run_negative_controls.py
+- id: D-428
+  title: The n = 17 successor validator never ties the rebuilt chain spine to the carried boundary
+  date: '2026-09-03'
+  layer: verifier
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one round and one review, from the successor's registration at 2f112f4c to the BC-149 reviewer's demonstration the same day; the record's overstatement then stood uncorrected until this entry
+  severity: medium
+  status: outstanding
+  what: >-
+    `validate_result` in `packing/cases/n17_weighted_certificate_successor/run.py` is a
+    self-consistency check over the emitted record. For the complete-agreement schema it
+    calls `_validate_agreement_body` (line 1453), which rebuilds all 181 hash-chain links
+    from the two `CertificateManifest` summaries alone, anchored at the genesis binding
+    hash (line 1491), and then compares the rebuild against `chain_spine`, `row_count` and
+    `last_row_hash`. It never compares any link of that rebuild with `carried_boundary`.
+    `validate_result` separately requires `carried_boundary.row_hash` to equal
+    `binding.immediate_parent.last_row_hash` (line 1627), but that check reads the record's
+    own boundary field and not the chain the summaries generate, so the two are never
+    joined: a summary edit inside the carried prefix moves the rebuilt spine and leaves the
+    boundary field standing.
+
+    Demonstrated by the BC-149 reviewer, who altered carried row 5 identically in both
+    summaries, rebuilt the spine and `last_row_hash`, left `carried_boundary` untouched,
+    and had `validate_result` accept the record although `spine[169]` no longer equalled
+    `8947b38e...`. Reproduced independently here on 2026-09-03 against the published
+    exp-059 result: the unmodified record validates; with `evaluated_state_count` at
+    ordinal 5 changed in both summaries and only `chain_spine` and `last_row_hash`
+    recomputed, the rebuilt `spine[169]` is `3ae844bc...` while `carried_boundary` still
+    reads `8947b38e...`, and `validate_result` accepts.
+
+    The executed admission boundary does refuse this. `_validate_rows` ties the retained
+    prefix to exp-056's checkpoint on disk before assembly, so the process that produced
+    the published result could not have carried an altered row through. The gap is
+    between what that process refuses and what the validator alone refuses, and the
+    record claimed the stronger of the two.
+  consequence: >-
+    Nothing retained is wrong: the published exp-059 result satisfies the tie, the
+    reviewer checked it directly and so did this reproduction, and H-052's acceptance
+    rests on the executed run rather than on the validator.
+
+    What it cost is a claim. `exp-059` asserted that the validator "requires it to
+    reproduce ... the carried boundary `8947b38e...` at ordinal 169" and that "an altered
+    manifest therefore cannot survive". A reader taking `validate_result` as sufficient
+    evidence -- which is exactly what a later replay of the retained bytes would do, since
+    the second frontier evidence entry for T-015 and T-016 verifies the retained hash chain
+    rather than recomputing masses -- would be relying on a check that is not there. That
+    is the flattering direction. `exp-059` is corrected in this pass; the code is not.
+  fix: >-
+    none yet. The record was corrected and the validator was left as it is, because this
+    pass was bounded to the record.
+
+    The repair the reviewer named is one comparison and one guard in
+    `_validate_agreement_body`: require `spine[binding.first_new_ordinal - 1]["row_hash"]`
+    to equal `binding.immediate_parent.last_row_hash`, and refuse otherwise. The same
+    function could also pin `frozen_expectations` against `PRODUCTION_EXPECTATIONS` when
+    the binding names exp-059, which closes the second of the three anchors the reviewer
+    found the validator does not tie to the world; the third, comparing the binding's
+    ancestor digests against disk, is a separate change because it needs a filesystem read
+    the validator otherwise does not make.
+  regression: >-
+    none. The successor carries 115 named self-test guards, and one of them
+    (`run.py:2828`) zeroes `carried_boundary.row_hash` and requires a refusal -- which is
+    the check in the opposite direction, catching a boundary field that disagrees with the
+    binding rather than a spine that disagrees with the boundary. No guard alters a carried
+    summary row and rebuilds the chain around it, which is the mutation that passes. The
+    repair above should land with exactly that mutation as its test.
+  bead: think-5j8d
+  recorded_in: packing/cases/n17_weighted_certificate_successor/run.py

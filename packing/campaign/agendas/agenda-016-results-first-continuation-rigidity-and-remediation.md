@@ -75,6 +75,45 @@ agenda:
       refusal, the coordinator runs no target, atomically marks BC-148 through BC-154
       never-opened with the preflight reason, satisfies their tbd closeout dependencies,
       and opens BC-155 on that failed-preflight packet.
+    outcomes:
+    - scope: launch packet freeze and independent frozen-binding readmission
+      classification: achieved
+      result: >-
+        The 06:48:00Z wall start was recorded, the absent toolchain was repaired
+        (uv 0.12.9, CPython 3.14.7, frozen environment), the records tier passed 26 of 58
+        named-tier steps at f099267, and all twelve Agenda 016 bead records were read from
+        origin/tbd-sync. An independent verifier readmitted the frozen binding on all five
+        checks: the declared exp-056 checkpoint 0d39a7e7, progress 0875f31f and row-169
+        hash 8947b38e each reproduced with the row hash recomputed from its payload rather
+        than read back, the bytes are canonical under the repository's own serializer, 170
+        contiguous all-agreeing rows hold over a 181-direction fixture, and the exp-052
+        genesis and exp-056 immediate parent are mutually non-substitutable under four
+        refusal probes. exp-059 was allocated with needs_review true, as the exit requires,
+        and no target command ran in the block.
+      evidence:
+      - >-
+        session-083 phase 1 and delegation 1, elapsed_seconds 1830, elapsed_quality
+        platform_measured.
+      - >-
+        The readmission's two caveats -- FORBIDDEN_SLUGS not covering exp-056, and
+        run_target guarding only the result path -- are both closed by the successor's
+        extended forbidden set and its refusal test, recorded in exp-059.
+      disposition: retire-success
+      follow_up: null
+    - scope: tbd bead reconciliation at preflight
+      classification: technical-failure
+      result: >-
+        The tbd CLI is absent from PATH, from the Python and npm registries and from a
+        direct Git install, so the block's bead-reconciliation obligation -- think-ldq2
+        rerouted through think-modk -- was performed read-only against the ULID-addressed
+        records on origin/tbd-sync. Short display ids are derived by the CLI and cannot be
+        resolved locally, so every think-* id in these outcome rows is a declared id and
+        not a verified one. Re-checked at closeout and still absent.
+      evidence:
+      - session-083 Declared Deviations, deviation D2.
+      - The `which tbd` probe returns nothing in this environment, re-run during closeout.
+      disposition: fix-and-rerun
+      follow_up: think-xycf
   - id: BC-148
     purpose: measurement_validation
     owner_focus: correctness
@@ -143,6 +182,43 @@ agenda:
       BC-149 reviews every terminal outcome. Only a complete, instrument-valid,
       all-agree result may route BC-150; every other outcome receives its own repair,
       continuation, or discrepancy disposition.
+    outcomes:
+    - scope: exp-059 canonical result for all 181 exact direction pairs
+      classification: achieved
+      result: >-
+        The writer replayed the retained 170-row prefix, recomputed the interrupted ordinal
+        170 rather than promoting it, and completed ordinals 170--180 in 1991 s inside a
+        3600 s lease, releasing 21 minutes early. All 181 paired cells agree exactly and
+        both CertificateManifest summaries are byte-identical: atom count 168 and atom hash
+        37d35da0, direction count 181 and direction hash cc789e1a, total weight 203/12,
+        every row minimum exactly 1/1 and global minimum 1/1 against the frozen 576/576.
+        Result 438dfc1f, checkpoint bb45ed2a. 115 named self-test guards with zero skips,
+        normal and -O receipts byte-identical, 39 focused tests passing. The round closed
+        needs_review true as the exit requires, and its claim boundary is implementation
+        agreement only -- not an independent proof method, not source adoption, not a
+        frontier change.
+      evidence:
+      - >-
+        packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-059-h-052-n17-fresh-successor-completion.md
+        and its result, checkpoint and progress records.
+      - packing/cases/n17_weighted_certificate_successor/ and tests/test_n17_weighted_certificate_successor.py.
+      disposition: retire-success
+      follow_up: null
+    - scope: the two successor instrument limitations the review named
+      classification: never-opened
+      result: >-
+        Neither repair was opened in this agenda. validate_result still does not tie the
+        rebuilt chain spine to carried_boundary -- reproduced again at closeout against the
+        published record, where altering a carried row in both summaries and rebuilding the
+        spine leaves the boundary field standing and the record accepted -- and there is
+        still no assembly path from a retained checkpoint disagreement, with a relaunch
+        continuing past the disagreement rather than refusing. Neither bears on the
+        181-cell agreement.
+      evidence:
+      - D-428 in packing/defects.yaml, filed at closeout for the validator gap.
+      - exp-059 Named Instrument Limitation and its BC-149 amendment.
+      disposition: defer-dependency
+      follow_up: think-5j8d
   - id: BC-149
     purpose: measurement_validation
     owner_focus: correctness
@@ -182,6 +258,43 @@ agenda:
       the coordinator atomically marks BC-150 and BC-151 never-opened with the inherited
       reason, satisfies their closeout dependencies without running them, and gives
       BC-155 the typed outcome and follow-up.
+    outcomes:
+    - scope: independent determination on the H-052 agreement result
+      classification: achieved
+      result: >-
+        PASS. Every reported figure reproduced exactly, the whole admission boundary
+        replayed, the decision was re-derived from the emitted bytes in a separate process,
+        and a third implementation written by the reviewer -- importing nothing from this
+        repository -- reproduced all 181 rows (x_events, y_events, event_cell_count,
+        minimum, witness) in 7.5 s. Independence was characterised precisely rather than
+        claimed: accumulation-level over a shared reduction, with eight of a
+        DirectionManifest's ten fields equal by construction. Three limitations were
+        recorded, none of them bearing on the 181-cell agreement. The pass opened BC-150.
+      evidence:
+      - docs/project/reviews/review-2026-09-03-bc149-h052-agreement-independent-review.md
+      - >-
+        The reviewer's measured discrimination check -- two of three injected sweep defects
+        detected, the third invisible because it only raises non-minimizing cells.
+      disposition: retire-success
+      follow_up: null
+    - scope: the record transition the pass authorised
+      classification: achieved
+      result: >-
+        Performed at closeout rather than on the pass, and the interval is the finding:
+        needs_review stood true on exp-059 from 09:36Z while T-015 and T-016 were
+        registered citing that round and the ledger reported H-052 unresolved. It is now
+        cleared, H-052 carries a Resolution section at implementation-agreement scope, and
+        the ledger derives the hypothesis as confirmed at that scope. The reviewer's
+        required correction for limitation 1 is applied to exp-059 -- the claim that an
+        altered manifest cannot survive is true of the executed admission boundary and
+        false of validate_result alone -- and the underlying validator gap is filed as
+        D-428. Nothing else moved: the decision, its reason and the claim boundary are
+        unchanged, and no bound moved.
+      evidence:
+      - exp-059 verdict needs_review false, and its BC-149 amendment.
+      - packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md Resolution.
+      disposition: retire-success
+      follow_up: null
   - id: BC-150
     purpose: research
     owner_focus: correctness
@@ -224,6 +337,37 @@ agenda:
       BC-151 independently reviews and, only on an exact pass of an adoption
       recommendation, applies the frozen patch. Otherwise BC-151 records never-opened
       application and BC-155 preserves the named reason.
+    outcomes:
+    - scope: the 4.5058 source-adoption packet
+      classification: achieved
+      result: >-
+        ADOPTION recommended at source-backed scope. Eleven lemmas of the published
+        argument were written out and discharged; a fourth implementation importing nothing
+        from this repository or from the source reproduced all 181 rows and found minimum
+        exactly 1 for the true unit square at 380 off-net angles; checker status,
+        assurance versus adoption, and monotone consequences were kept as three separate
+        determinations; and a frontier patch was frozen and deliberately not applied. No
+        frontier or result-registry file changed in the block, which its exit forbids.
+      evidence:
+      - The packet, SHA-256 d88d47b3, with its independent audit and cross-check records.
+      - >-
+        BC-151 read and re-derived the packet independently and applied the frozen patch,
+        which is the durable trace of it.
+      disposition: retire-success
+      follow_up: null
+    - scope: installing the adoption packet as repository evidence
+      classification: never-opened
+      result: >-
+        The packet exists only in the session's container-local scratchpad and was not
+        installed under docs/project/reviews/, while packing/frontier/results.yaml cites
+        the BC-150 adoption packet in the basis for T-015's and T-016's significance. When
+        the container ends, the cited artifact ceases to exist and the citation cannot be
+        followed.
+      evidence:
+      - docs/project/reviews/ contains no BC-150 file.
+      - packing/frontier/results.yaml T-015 and T-016.
+      disposition: defer-dependency
+      follow_up: think-xycf
   - id: BC-151
     purpose: research
     owner_focus: correctness
@@ -260,6 +404,54 @@ agenda:
       BC-155 reports the adoption at its honest source-backed scope or routes the named
       blocker. Reusable weighted-certificate extraction remains separate work and does
       not delay this fixed-certificate decision.
+    outcomes:
+    - scope: adoption review and the frontier patch at n = 17, 18 and 19
+      classification: achieved
+      result: >-
+        PASS with the patch applied. A fifth implementation -- different cell-selection
+        rule, a separating-axis test of the open event cell against the closed
+        centre-domain polygon, and a different membership rule -- agreed on every row and
+        added two tests the packet did not run: orientations in (pi/4, pi/2), and 30,000
+        random poses with no cell machinery. Verified lower bounds moved 4426213/1000000 to
+        22529/5000 at n = 17 and 18, and 1 + sqrt(12) to 22529/5000 at n = 19; n = 20 is
+        unchanged. Registered at rung V4/C3 with novelty previously-published. C3 and
+        deliberately not C4: every implementation on the record sweeps event cells over one
+        shared reduction, so the two evidence entries are one method family.
+        reported_lower_bound was left at Nagamochi at those three cases because the source
+        is not in their named source sets, so the verified lane now sits above the reported
+        lane there -- a disclosed judgement, not an oversight.
+      evidence:
+      - packing/frontier/results.yaml T-015 and T-016, and the two evidence.yaml entries.
+      - packing/frontier/n-017.md, n-018.md and n-019.md.
+      disposition: retire-success
+      follow_up: null
+    - scope: the consumers the adoption changed
+      classification: technical-failure
+      result: >-
+        The adoption landed at 6734476d without the regressions it required.
+        check_nagamochi_bounds moved from 86 covered cases to 85 and dropped n = 19, which
+        broke two tests in packing/tests/test_nagamochi_bounds.py -- one pinning 86, and
+        one poisoning n = 19, which the checker no longer reads, so a negative control
+        silently lost its subject. Repaired in the following commit a6301fe8, after which
+        the file passes 17 of 17. TUTORIAL.md and docs/project/ were named by the review
+        itself as not inspected for stale n = 17--19 bounds and have still not been
+        surveyed.
+      evidence:
+      - Commits 6734476d and a6301fe8, and packing/tests/test_nagamochi_bounds.py.
+      disposition: fix-and-rerun
+      follow_up: think-xycf
+    - scope: installing the BC-151 review as repository evidence
+      classification: never-opened
+      result: >-
+        packing/frontier/results.yaml cites the review as a repository artifact, in the
+        words "BC-151 independent review of the BC-150 adoption packet (repository)", but
+        the review exists only in the session's container-local scratchpad and was not
+        installed.
+      evidence:
+      - docs/project/reviews/ contains no BC-151 file.
+      - packing/frontier/results.yaml T-015 and T-016 evidence blocks.
+      disposition: defer-dependency
+      follow_up: think-xycf
   - id: BC-152
     purpose: research
     owner_focus: correctness
@@ -316,6 +508,101 @@ agenda:
     next_evidence: >-
       BC-153 independently reviews every terminal outcome. Only an exact pass may
       promote fixed-side local rigidity and register a new frontier result.
+    outcomes:
+    - scope: the H-060 chart, constraint accounting and order-2m coefficient proof
+      classification: achieved
+      result: >-
+        A 925-line frozen packet, SHA-256 28343b74: an injective half-angle chart on all of
+        R^15 with denominators 1 + t_i^2 at least 1; the complete exact accounting of all
+        400 elementary inequalities, 16 active and 64 inactive walls, 4 touching and 6
+        noncontact pairs, confirmed against the agenda with no discrepancy; a neighbourhood
+        N cut by 128 strict sign conditions on which the local system is exactly the 20
+        active rows; the T-012 transfer A_chart = A_geo J, q_chart = 4 q_geo, w . q_chart =
+        -2 sqrt(2); the order-2m coefficient induction; and a corroborating
+        second-order-sufficiency proof explicitly not on the acceptance route. The
+        determination was left review-pending, which is what the exit asks for.
+      evidence:
+      - >-
+        packing/campaign/explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md
+      - >-
+        packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md
+      disposition: retire-success
+      follow_up: null
+    - scope: the W7 rigidity instrument and its readiness review
+      classification: achieved
+      result: >-
+        sqpack.local_rigidity reproduces every agenda count from the pose rather than
+        adopting it: denominator positivity by literal sum of squares, chart injectivity
+        and image as exact polynomial identities, a 20-row active system, all 400 support
+        feature margins exact over Q(sqrt(2)), U cut by 100 positive and 28 negative strict
+        conditions, the T-012 binding holding, and normal and -O output byte-identical. The
+        readiness review took three rounds -- BOUNDED-CAVEAT, repair, BOUNDED-CAVEAT, then
+        PASS at payload digest 743fd18a over source digest 9382bae1 -- and the two
+        tautological controls it found are recorded as D-424 and repaired at 609e7392,
+        verified by removal, before instrument_ready moved. The instrument decides nothing
+        about H-060 and cannot: isolation_decided is False by construction. One design
+        deviation is disclosed rather than silent -- the agenda asks to extend
+        packing/devtools/assess_n5_rigidity.py, and what was built is a new package that
+        binds to it.
+      evidence:
+      - packing/src/sqpack/local_rigidity/instrument.py and controls.py, packing/tests/test_n5_local_rigidity.py.
+      - docs/project/reviews/review-2026-09-03-bc152-n5-rigidity-instrument-readiness.md
+      - D-424 in packing/defects.yaml, including the residual that the by-removal demonstration is not automated.
+      disposition: retire-success
+      follow_up: null
+    - scope: the H-060 prior-art and novelty survey
+      classification: achieved
+      result: >-
+        All three named gaps were closed with primary texts in hand. Goebel 1979 proves the
+        bound only; "rigid" and "unique" occur zero times in the 21-page extraction.
+        Kingbird asserts exactly this property at n = 5 under a definition coinciding with
+        H-060's, with no method anywhere on the site. No stated structural-rigidity or
+        jamming theorem covers polygon contact systems. The admissible claim is capped at
+        S3, not S4, and the survey's own residual OPEN items are named: Connelly 2008 not
+        read in print, the Nocedal-Wright and Fiacco-McCormick numbering cited from memory,
+        and Kingbird's method unknown. The clause about rigidity theorems is carried
+        outside the novelty claim as an unverified survey assertion.
+      evidence:
+      - docs/project/reviews/review-2026-09-03-bc152-h060-prior-art-survey.md
+      - X-012 sections 7.4 and 8.5, where the demoted clause is carried.
+      disposition: retire-success
+      follow_up: null
+    - scope: curve-selection source verification against the printed text
+      classification: technical-failure
+      result: >-
+        The verdict on the statement is YES -- as used, it follows from Bochnak-Coste-Roy
+        Proposition 8.1.13, and X-012 section 4 is sound as written, with Milnor's Lemma
+        3.1 shown not to give the statement as written. But the obligation as registered
+        was to read the printed page, and no lane reached it: Springer redirects to an IdP,
+        De Gruyter and Princeton return 405 or empty, the Google Books quota is 0,
+        perso.univ-rennes1.fr returns 403, neither book is readable on archive.org or
+        HathiTrust, and a post-lease widening attempt returned a negative result. Milnor
+        p. 25 was not reached either. A primary-text bridge -- Basu-Pollack-Roy Theorem
+        3.22 plus the one-variable Puiseux fact through s = u^N -- is installed in X-012, so
+        section 4 no longer rests on the unopened page, but the page is still unread.
+      evidence:
+      - docs/project/reviews/review-2026-09-03-bc152-curve-selection-source-verification.md
+      - X-012 lines 41 and 1257, where the installed bridge is written out.
+      disposition: fix-and-rerun
+      follow_up: think-pssq
+    - scope: factual review of the H-060 records against their sources
+      classification: achieved
+      result: >-
+        Run as an ad-hoc block recorded as BC-158, outside this agenda's item list, and it
+        found overstatements including one material misstatement: the round records stated
+        as fact that the instrument, its receipt and its eight controls do not exist when
+        all three had been committed sixteen minutes earlier. Four further findings, a
+        withdrawn secondary source still counted, a denied citation edit, a restored
+        over-attribution to Milnor, and a survey clause sitting inside the novelty claim.
+        Evidential status and every substantive number passed. F1-F5, F7 and F8 are
+        remediated, and X-012's five stale instrument_ready false statements are corrected.
+        The one residue it left, D-424's stale present-tense consequence clause, is
+        corrected in this closeout.
+      evidence:
+      - docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md
+      - D-424 in packing/defects.yaml, consequence field.
+      disposition: retire-success
+      follow_up: null
   - id: BC-153
     purpose: measurement_validation
     owner_focus: correctness
@@ -360,6 +647,69 @@ agenda:
       BC-155 reports a new first-party theorem only if this block passes and every
       generated consumer agrees. Otherwise it preserves the smallest unresolved proof
       obligation and ranks the follow-up against the remaining portfolio.
+    outcomes:
+    - scope: independent review of the H-060 proof
+      classification: achieved
+      result: >-
+        PASS, earned on the mathematics and on the replay. Every step was re-derived; the
+        cone was derived by hand and by exact rational LP plus 28 hand-built Farkas
+        certificates; the self-stress was summed by hand; Lemma 8 was checked on random
+        arcs at m = 2 and 3; quotations were verified first-hand from the extractions; and
+        the section 6 replay ran 09:40:19Z to 09:41:30Z in three layers -- the reviewer's
+        sympy-only reconstruction, the packet's own scripts, and the instrument from clean
+        roots under normal and -O -- all passing. Eleven gaps are named in section 5, none
+        of them a condition of the pass. Recommendation 1, installing the BPR-to-Nash
+        bridge as the fallback derivation, has been applied.
+      evidence:
+      - docs/project/reviews/review-2026-09-03-bc153-h060-proof-independent-review.md
+      - X-012 lines 41 and 1257.
+      disposition: retire-success
+      follow_up: null
+    - scope: T-014 registration and publication
+      classification: achieved
+      result: >-
+        Registered V3 / C5 / S3 / apparently-novel at 7b4ff870 and published to the
+        reader-facing prose at 3018f454, moving the n = 5 frontier rigidity property to
+        locally rigid at fixed side on a second first-party evidence record. C5 is C3 plus
+        a mapped non-superseded review artifact, and the register's composition field
+        grounds it on that artifact. C4 -- confirmed by distinct methods -- is not claimed
+        and must not be reported anywhere, notwithstanding that the two cited evidence
+        entries carry different method values; they support different claims.
+      evidence:
+      - packing/frontier/results.yaml T-014, RESULTS.md, n-005.md and the evidence entry.
+      - docs/project/document-map.yaml, where the review artifact is mapped as retained.
+      disposition: retire-success
+      follow_up: null
+    - scope: independent audit of the T-014 registration itself
+      classification: technical-failure
+      result: >-
+        Nothing usable. The dispatched audit produced only regenerated comparison outputs
+        -- 303 expected-n-* files plus three manifests, all stamped 10:29 -- and no report,
+        no verdict and no finding. The agent was terminated mid-task by an infrastructure
+        rate limit at about 10:45Z and was deliberately not redispatched. This is a
+        reduction in scope, not a completed check: T-014 is registered and published
+        without an independent audit of the registration, which rests on the review of the
+        proof, a different object.
+      evidence:
+      - The audit directory holds comparison outputs only and no report deliverable.
+      - >-
+        The commit record shows the largest inter-commit gap on the branch, 77 minutes,
+        consistent with the loss and with no declared cause.
+      disposition: fix-and-rerun
+      follow_up: think-xycf
+    - scope: the reviewer's recommendations 3 and 4
+      classification: never-opened
+      result: >-
+        Recommendation 1 is applied. Recommendation 3, the one sentence taking the supremum
+        of the interval in X-012 section 1.3 (i), and recommendation 4, archiving
+        Kingbird's rigid page under packing/resources/, are not. The second leaves the
+        thirteen-versus-four list tension uncheckable from anything in this repository; it
+        is non-load-bearing because n = 5 is on both lists.
+      evidence:
+      - X-012 section 1.3 (i), recorded as terse and not patched.
+      - packing/resources/ carries the archived Kingbird main page and not the rigid page.
+      disposition: defer-dependency
+      follow_up: think-pssq
   - id: BC-154
     purpose: tool_validation
     owner_focus: correctness
@@ -412,6 +762,71 @@ agenda:
       BC-155 records each defect's terminal disposition. A fixed or contained runner
       may reenter future generic search agendas only at the scope its regressions prove;
       unresolved defects remain named blockers rather than an implied safe surface.
+    outcomes:
+    - scope: D-044 and D-046 repairs against the attacks the records name
+      classification: achieved
+      result: >-
+        D-044: every scored line must now carry x, y and t of length n, poses and archive
+        content are content-addressed, verification re-runs on every record in a separate
+        process that re-reads the file and re-decides geometry, the engine self-test is
+        executed and the binary re-hashed at record time, and a result line is bound to the
+        invoking cell and seed. The detection floor was measured rather than asserted:
+        1e-12 and 1e-10 forgeries accepted, 2e-9 and above refused. D-046: all twelve
+        clauses closed in code, each with a named regression, and accepted remains
+        unreachable from every path. 61 trust-boundary tests, and the reviewer reverted all
+        seven un-pinned guards in copies with every one turning the suite red. Both records
+        are contained rather than fixed, and the reviewer's contrary recommendation against
+        that label is now recorded in both entries.
+      evidence:
+      - packing/defects.yaml D-044 and D-046, and packing/src/sqpack/campaign/runner.py.
+      - packing/tests/test_campaign_runner_trust_boundary.py
+      disposition: retire-success
+      follow_up: null
+    - scope: independent review of both dispositions
+      classification: achieved
+      result: >-
+        Complete, and BOUNDED-CAVEAT on both rather than PASS. The mutation harness was
+        judged sound and non-circular, each of five permanent mutations was read against
+        its target, and ten findings, one withdrawn, plus eleven required record
+        corrections and six measured checks were returned. The review also recorded a
+        sequencing error it did not cause: both records were set to fixed at 08:25:56Z,
+        twenty-one minutes before the gating review began at 08:46Z, and were reopened to
+        contained at 7b4ff870 only after it finished.
+      evidence:
+      - docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md
+      disposition: retire-success
+      follow_up: null
+    - scope: the source-finding clauses that never reached either record
+      classification: never-opened
+      result: >-
+        Four clauses of the PR 14 source findings were never carried into the summaries and
+        so were never repaired: F-02's "exact zero is not required at the float screen"
+        (validated_record still refuses any overlap that is not exactly 0.0, measured
+        against a 1e-18 overlap that the identical geometry verifies), and three of F-04 --
+        pre-run engine dirtiness captured after the claim stub so method.dirty is
+        unconditionally true, per-cell timebox semantics that the schema, the runbook and
+        the code state three different ways, and a report that can omit runnable-but-unrun
+        work. Three further residuals on the archive boundary, undisclosed by the lane and
+        found by the reviewer, share one precondition and one remedy. All reproduced
+        2026-09-03; none is repaired, and all are conservative in direction.
+      evidence:
+      - packing/defects.yaml D-044 and D-046, where all four clauses and three residuals are named.
+      - D-426 and D-427 in packing/defects.yaml, recorded separately from this block.
+      disposition: defer-dependency
+      follow_up: think-ldq2
+    - scope: the reviewer's eleven required record corrections
+      classification: technical-failure
+      result: >-
+        Corrections 0, 1 and 11 are applied. Correction 3, the three-way timebox contract
+        drift, is not. Corrections 4, 6, 7, 8, 9 and 10 are edits to the W9 disposition
+        document, which is container-local and was never installed in the repository, so
+        they cannot be applied to any repository record at all -- they are corrections to a
+        document that will cease to exist.
+      evidence:
+      - The review's Required corrections section.
+      - packing/campaign/schemas/hypothesis.schema.yaml, packing/campaign/README.md and runner.py still disagree on timebox.
+      disposition: fix-and-rerun
+      follow_up: think-modk
   - id: BC-155
     purpose: research
     owner_focus: process
@@ -462,6 +877,60 @@ agenda:
       The selected post-agenda bead and workflow become the only next handoff. A new
       agenda may be drafted after operator confirmation or the declared autonomous
       fallback, but it does not begin inside this closeout.
+    outcomes:
+    - scope: closeout evidence assembly and the record corrections it identified
+      classification: achieved
+      result: >-
+        A read-only inventory audited every result, limit, deviation and self-inflicted
+        defect of the run against its deliverables and found nine places where a record and
+        a deliverable disagree. The corrections applied from it: exp-059's claim that an
+        altered manifest cannot survive is scoped to the executed admission boundary and
+        the validator gap is filed as D-428, reproduced independently rather than taken on
+        report; needs_review is cleared on exp-059 and H-052 carries a Resolution at
+        implementation-agreement scope; D-424's consequence clause is moved out of the
+        present tense; the stale premise that the search engine is not built here is
+        corrected in D-044, D-426, session-083, SYNOPSIS.md and, as an installation note,
+        the BC-154 review; the W9 reviewer's recommendation against contained is recorded
+        in D-044 and D-046; the two understatements about the current instrument build are
+        corrected in H-060 and exp-058; and these outcome rows are written.
+      evidence:
+      - packing/defects.yaml D-428, and the corrected D-044, D-046, D-424 and D-426 entries.
+      - exp-059, H-052, H-060 and exp-058 records, and SYNOPSIS.md.
+      disposition: retire-success
+      follow_up: null
+    - scope: the closeout obligations still owed
+      classification: never-opened
+      result: >-
+        Not started at the time these rows were written: installing the BC-150 adoption
+        packet and the BC-151 review, which results.yaml cites and which do not survive the
+        container; settling the timebox contract across schema, runbook and code;
+        reconciling the two-versus-three declared-deviation count between session-083's
+        phase-1 outcome and the launch packet; recording the 10:45Z interruption in
+        session-083; live bead reconciliation, which the absent CLI blocks; generating the
+        resource rollups, declaring them and closing both AgentSessions; and rendering the
+        PR cost block, which must print both ends of the attribution interval rather than
+        collapsing it to one number.
+      evidence:
+      - session-083 and session-084 are status in_progress with resource_rollups empty.
+      - docs/project/reviews/ contains no BC-150 or BC-151 file.
+      disposition: defer-dependency
+      follow_up: think-xycf
+    - scope: the required validation tiers at HEAD
+      classification: technical-failure
+      result: >-
+        No full tier has passed today. The last recorded packing-validate run returned exit
+        1 on two steps, one of them the fast behavioural tier, which timed out after its
+        own 900-second budget and so never completed; the full pytest taken alongside it
+        ran across a moving tree while a patch and two commits landed underneath it and is
+        void as a measurement of any single tree state. The records tier is the one that
+        has been run against this closeout's edits.
+      evidence:
+      - The retained gate and suite logs are container-local and do not survive the session.
+      - >-
+        The branch must not be reported as green on this evidence; the records tier result
+        is reported at the scope it covers.
+      disposition: fix-and-rerun
+      follow_up: think-xycf
 ---
 # Agenda 016 — Results-First Continuation, Rigidity, and Remediation
 

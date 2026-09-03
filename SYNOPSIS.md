@@ -86,9 +86,9 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives five confirmed hypotheses, six refuted
+The generated ledger currently derives six confirmed hypotheses, six refuted
 hypotheses, one open hypothesis, seven open questions, and thirty-five blocked
-hypotheses. No hypothesis waits on review and six are unresolved.
+hypotheses. No hypothesis waits on review and five are unresolved.
 The set includes one claim whose formal prerequisite is missing, H-044 whose registered
 calibration-only amendment keeps the hypothesis undisposed — its first scored round
 (exp-046) missed the criterion determinately under both denominator readings, the review
@@ -2497,7 +2497,7 @@ round that names the hypothesis, control roles included.
 | [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov’s decomposition | 0 | — |
 | [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent’s 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
 | [H-051](packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md) | blocked | A blinded tier-S n = 68 public-parent surgery pilot matches the released child under the frozen grammar | 0 | — |
-| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | unresolved | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 4 | 139.6m agent + 495.6m wall |
+| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | confirmed | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 4 | 139.6m agent + 495.6m wall |
 | [H-053](packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md) | blocked | Each fixed UnitSquare `n = 68, 69` parent-child pair admits compatible rigid poses under at least one declared serialization model | 2 | 114m agent + 107.2m wall |
 | [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | unresolved | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 2 | 38m agent + 30.0m wall |
 | [H-055](packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md) | blocked | If selected, the `n = 54` witness admits complete exact promotion in the reported nested-radical field | 0 | — |
@@ -2654,8 +2654,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | claimed by a session | 55 | 14,495 | 8,351 | 164 | 1,637 | 72.04 h |
-| claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **65** | **15,955** | **9,229** | **196** | **1,810** | **78.91 h** |
+| claimed by none | 46 | 8,163 | 4,574 | 82 | 547 | 30.75 h |
+| **measured** | **101** | **22,658** | **12,925** | **246** | **2,184** | **102.79 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3091,13 +3091,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 427 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 428 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
-| validity | 114 | was correct, but the measurement did not bear on the question |
+| validity | 115 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 155 | recorded something its own evidence contradicts |
 | robustness | 52 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
@@ -3108,7 +3108,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-one defects in 427, and no soundness defect
+**The automated gate has caught sixty-one defects in 428, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3118,7 +3118,7 @@ test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
-The generated log currently has 59 open entries: 36 `outstanding` and 23 `contained`.
+The generated log currently has 61 open entries: 38 `outstanding` and 23 `contained`.
 The W9 candidate `think-cyko` owns their systematic risk ordering and bounded repair
 waves; the synopsis names the cases that matter to current claims rather than pretending
 the examples below are the whole backlog.
@@ -3182,8 +3182,12 @@ receipt written by `execute` and compared by `record`. [D-426](defects.md) is th
 finding that review turned up on D-046’s own edge: a control-cell breach is a declared
 stop condition that the session does not honour, because `run` resets its failure count
 on the breached round and continues on the same suspect instrument.
-Nothing has been recorded through any of this — the search engine is not built here, no
-live round has run, and the numerical runner stays **NO-GO**.
+Nothing has been recorded through any of this — no live round has run, nothing has been
+recorded through the unattended runner, and the numerical runner stays **NO-GO**.
+An earlier form of that sentence gave the reason as the search engine not being built
+here; a release binary was built at `packing/sqsearch/target/release/sqsearch` at 10:30Z
+on 2026-09-03, nothing has been executed against it, and the conclusion rests on the
+absence of a recorded round rather than on the absence of a binary.
 
 [D-427](defects.md) came out of the same day's work on the control harness and is the
 weakest in degree of the three, and the broadest in reach.
@@ -3196,6 +3200,18 @@ score a pass with empty detail.
 `D-413` is the same mechanism having already happened once; its fix pinned a green
 baseline for one of the forty distinct control commands, and the general form stayed
 open.
+
+[D-428](defects.md) is a record claiming a check that is not there.
+The `n = 17` successor's `validate_result` rebuilds all 181 hash-chain links from the two
+certificate summaries and compares them with the emitted spine, but never compares that
+rebuild with the carried boundary it is supposed to terminate on, so a carried row
+altered identically in both summaries — with the spine and last row hash recomputed
+around it — is accepted.
+The round record asserted the stronger claim, that an altered manifest cannot survive;
+that holds for the executed admission boundary, which ties the retained prefix to
+`exp-056` on disk before assembly, and not for the validator alone.
+The published result satisfies the tie and the record has been corrected; the code has
+not.
 
 [D-393](defects.md) is the same run being wrong about its own gate.
 `D-381` established `--edit` as the pre-push floor, and that floor does not run tests:
