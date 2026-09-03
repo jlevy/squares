@@ -133,7 +133,7 @@ session:
     - 'exp-056 checkpoint 0d39a7e7, progress 0875f31f, row 169 8947b38e, all reproduced'
     - 'four ancestry refusal probes each rejected the substituted binding'
     files:
-    - 'scratchpad/bc147/frozen-binding-verification.md'
+    - 'scratchpad/bc147/frozen-binding-verification.md -- container-local reviewer directory, not retained in the repository; its determinations are summarised in the outcome and evidence above'
     checks:
     - 'sha256sum against committed git blobs agrees on all four frozen artifacts'
     uncertainty: >-
@@ -158,17 +158,22 @@ session:
       result schemas and the full refusal-test battery, without editing exp-052 or
       exp-056.
     operator: Claude Opus, maximum thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Reached complete agreement on all 181 exact direction cells. The writer replayed the retained 170-row prefix, recomputed the interrupted ordinal 170, and completed ordinals 170 through 180 in 1991 seconds inside a 3600-second lease, releasing it twenty-one minutes early. BC-149's independent review returned an exact pass and wrote a third from-scratch implementation that reproduced every row.
+    evidence:
+    - 'result 438dfc1f, checkpoint bb45ed2a, 181 rows, every row minimum exactly 1/1'
+    - 'BC-149 pass: accumulation-level independence over a shared reduction'
+    files:
+    - 'packing/campaign/series/series-000-smoke-and-calibration/results/exp-059-h-052-n17-fresh-successor-completion.json'
+    checks:
+    - 'decision re-derived from the published bytes in a separate process'
     uncertainty: >-
       Whether the retained assembler's omissions can be repaired in a fresh successor
       inside the lane budget, and the true runtime of ordinals 170 through 180.
-    elapsed_seconds: null
-    elapsed_quality: null
+    elapsed_seconds: 12000
+    elapsed_quality: platform_measured
     next_action: Schedule the exact writer inside the 08:58Z--09:58Z process lease.
     phase: 2
     budget_minutes: 210
@@ -198,7 +203,7 @@ session:
     - 'verify_chart.py, midpoint_check.py, c8_side_check.py, sosc_check.py, control_exp034.py all pass'
     - 'exp-034 is disjoint from the fixed-side feasible set by exactly 3*sqrt(2)/4 - 1, so it does not refute H-060'
     files:
-    - 'scratchpad/bc152/h060-chart-and-proof.md'
+    - 'packing/campaign/explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md -- the installed form of the frozen packet, per the installed_as field of results/exp-058-h-060-n5-chart-and-proof.json; the scratchpad original scratchpad/bc152/h060-chart-and-proof.md is not retained'
     checks:
     - 'all seven replay scripts rerun clean after the packet was amended'
     uncertainty: >-
@@ -236,7 +241,7 @@ session:
     - 'Kingbird rigid-page definition retrieved 2026-09-03; page not archived'
     - 'Connelly-Whiteley 1996 is point-pair distances; disk jamming needs a non-negative quadratic term, false here at q = -1/2; Donev et al. 2007 defer sharp corners and flat edges'
     files:
-    - 'scratchpad/bc152-novelty/h060-prior-art.md'
+    - 'docs/project/reviews/review-2026-09-03-bc152-h060-prior-art-survey.md -- installed from scratchpad/bc152-novelty/h060-prior-art.md'
     checks:
     - 'every verdict cited to a repository path or a retrieved primary text'
     uncertainty: >-
@@ -260,17 +265,23 @@ session:
       BC-154 — one W9 wave over D-044 and D-046, the two critical defects sharing the
       campaign runner's result-validity and lifecycle trust boundary.
     operator: Claude Opus, maximum thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Repaired both critical defects with regressions and a mutation harness proving each guard load-bearing, then took an independent review that returned a bounded caveat on both. Four clauses of the source findings had never reached the records and so were never repaired, so the repair is incomplete rather than merely unproven, and both defects are recorded as contained.
+    evidence:
+    - '61 trust-boundary tests, guards proven load-bearing by reverting each repair in a copy'
+    - 'the search engine is not built here, so no live round ran and the end-to-end test used a fixture engine'
+    files:
+    - 'packing/src/sqpack/campaign/runner.py'
+    - 'packing/tests/test_campaign_runner_trust_boundary.py'
+    checks:
+    - 'independent review 2026-09-03: bounded caveat on D-044 and on D-046'
     uncertainty: >-
       Whether one common repair covers both defects, or whether the unsafe unattended
       route must be mechanically closed instead.
-    elapsed_seconds: null
-    elapsed_quality: null
+    elapsed_seconds: 19000
+    elapsed_quality: platform_measured
     next_action: Route both dispositions to an independent reviewer with no W9 authorship.
     phase: 2
     budget_minutes: 450

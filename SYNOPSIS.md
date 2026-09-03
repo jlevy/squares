@@ -204,6 +204,13 @@ case or experiment separately.
 | [Agenda 015 Ten-Hour Synthesis](docs/project/reviews/review-2026-09-02-agenda015-ten-hour-synthesis.md) | dated review record | record | retained | — |
 | [Design Note: `n = 50` Manifest and Sentinel Contract](docs/project/reviews/review-2026-09-02-n50-manifest-and-sentinel-design.md) | dated review record | record | retained | — |
 | [Agenda 013 Overnight Synthesis: Controls, Mechanisms, and the Next Research Queue](docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md) | dated review record | record | retained | — |
+| [BC-149 — Independent Review of the H-052 Complete Agreement (exp-059)](docs/project/reviews/review-2026-09-03-bc149-h052-agreement-independent-review.md) | dated review record | record | retained | — |
+| [BC-152 — Curve Selection Lemma: Source Verification for H-060](docs/project/reviews/review-2026-09-03-bc152-curve-selection-source-verification.md) | dated review record | record | retained | — |
+| [H-060 prior-art survey — BC-152 W1/W2 (agenda 016)](docs/project/reviews/review-2026-09-03-bc152-h060-prior-art-survey.md) | dated review record | record | retained | — |
+| [BC-152 instrument-readiness review — H-060 half-angle chart (independent)](docs/project/reviews/review-2026-09-03-bc152-n5-rigidity-instrument-readiness.md) | dated review record | record | retained | — |
+| [BC-153 — Independent review of the H-060 proof (Goebel `n = 5`, fixed-side local rigidity)](docs/project/reviews/review-2026-09-03-bc153-h060-proof-independent-review.md) | dated review record | record | retained | — |
+| [BC-154 — independent review of the W9 disposition for D-044 and D-046](docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md) | dated review record | record | retained | — |
+| [BC-158 — factual review of the H-060 / exp-058 records against their sources](docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |

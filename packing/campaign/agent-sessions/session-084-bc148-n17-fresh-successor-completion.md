@@ -52,7 +52,8 @@ session:
     outcome: >-
       Artifact: cases/n17_weighted_certificate_successor/ and
       tests/test_n17_weighted_certificate_successor.py, with the readiness report at
-      scratchpad/bc148/h052-successor-readiness.md. Result: 115 named self-test guards
+      scratchpad/bc148/h052-successor-readiness.md -- a container-local directory, not
+      retained in the repository. Result: 115 named self-test guards
       pass with zero skips and byte-identical normal and optimized receipts, 17 focused
       controls pass, and both terminal schemas derive all six decision-bearing fields
       rather than asserting them. Two pre-writer confirmations ran against the real
