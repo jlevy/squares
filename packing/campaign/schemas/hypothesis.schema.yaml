@@ -141,10 +141,33 @@ properties:
           wrong and the contract is what to fix.
 
           The contract, enforced by the harness on every round: print JSON Lines to
-          stdout; carry `best_side` on every result line; carry `overlap` (or
-          `best_overlap`) on those same lines and have it be exactly 0; exit 0. The
-          seed's result is the minimum `best_side` over its lines, which needs no
-          agreement about which line is the summary.
+          stdout; carry `best_side`, `n` and `seed` on every result line, and the `n` and
+          `seed` the harness actually invoked, because a result may not be filed under a
+          cell or seed other than the one that produced it; carry `overlap` (or
+          `best_overlap`) on those same lines and have it be exactly 0; carry the full
+          pose on them as equal-length `x`, `y` and `t` arrays of length `n`; pass the
+          engine gate the harness runs before the round; and exit 0. The seed's result is
+          the minimum `best_side` over its lines, which needs no agreement about which
+          line is the summary.
+
+          A scalar the producer prints is not evidence about the producer, which is what
+          D-044 records. The pose is the part that can be checked without trusting it:
+          `record` rebuilds every archived pose into corner geometry and re-decides
+          containment and pairwise separation in a separate `sqpack.verify` process
+          before it writes anything. A command may not print the harness's own reserved
+          receipt fields, which are how the round carries its execution, self-test and
+          verification provenance.
+      selftest:
+        type: string
+        minLength: 1
+        description: >-
+          How to run the engine's own gate, when it is not the default. The harness
+          executes that gate before taking any measurement and refuses the round if it
+          fails, so `subject.selftest_passed` is an executed result rather than a literal.
+          The default is argv[0] of `command` with `--selftest`, which is what every
+          recipe here wants; declare this only for an engine whose gate is invoked some
+          other way. The binary that is hashed is argv[0] of `command` either way, so an
+          override cannot point the digest at a file other than the one that ran.
       cells:
         type: array
         minItems: 1

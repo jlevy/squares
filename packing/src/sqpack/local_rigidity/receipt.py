@@ -710,6 +710,14 @@ def render_markdown(payload: dict[str, Any], expected: dict[str, int]) -> str:
             "the driver is a complete replay."
         )
     out.append("")
+    out.append(
+        "One consequence, stated so it cannot surprise a replayer: the observed commit is "
+        "inside the digested payload, so the payload digest moves when an unrelated "
+        "commit lands even though this instrument is unchanged. The **source digest** is "
+        "the stable identity -- compare that to decide whether the instrument itself "
+        "differs, and the payload digest to decide whether the record does."
+    )
+    out.append("")
     out.extend(
         _table(
             ["source file", "sha256"],

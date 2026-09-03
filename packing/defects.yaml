@@ -1165,7 +1165,7 @@ defects:
   direction: flattering
   detected_by: review
   severity: critical
-  status: outstanding
+  status: fixed
   what: >-
     The runner contract requires only a scalar overlap field emitted by the same command
     that proposes the result; quench output stores no complete pose. It also hardcodes
@@ -1176,10 +1176,35 @@ defects:
     binary can pass the archive boundary. Later exact promotion is impossible when the
     pose that must be checked was discarded.
   fix: >-
-    none yet. Require a full pose or content-addressed pose artifact, independently
-    verify it in a separate sqpack process, bind the verifier result to the row digest,
-    and derive self-test status from an executed binary hash and exit status.
-  regression: none
+    Every scored line must now carry the full pose as equal-length x, y and t arrays of
+    length n. Each pose and the archive as a whole are content-addressed by sha256, and a
+    retained certificate is refused once the archive under it has moved. record rebuilds
+    every archived pose into corner geometry and re-checks containment and pairwise
+    separation through sqpack.verify in a separate process, translating to the
+    bounding-box origin because the producer's required_side is translation-invariant.
+    The engine self-test is executed before any measurement is taken and the binary that
+    passed it is hashed, so subject.selftest_passed is derived from an exit status and a
+    digest that still matches the file on disk rather than written as a literal. The same
+    repair closed one hole this record did not name: a result line is bound to the n and
+    seed the harness invoked, so a command run for one cell can no longer score into
+    another. The re-check is float arithmetic at 1e-9; it can refute a forged pose and
+    never promotes a round past numerically-checked. Nothing in the campaign's accept
+    rule, thresholds, controls or verdicts changed -- campaign/README.md already declared
+    the self-test a guard, so executing it enforces a criterion that was already written
+    down.
+  regression: >-
+    tests/test_campaign_runner_trust_boundary.py, 61 tests over the result-line contract,
+    the independent oracle, the executed engine gate, and the digest that binds a verdict
+    to the bytes it was taken over. A scored line with no pose, a pose whose length
+    disagrees with n, a non-finite coordinate, a fabricated zero overlap, a side the pose
+    cannot support, a truncated archive, an archive edited after it was verified, a
+    producer writing a reserved receipt, an engine swapped after its self-test, and a
+    result attributed to another cell are each refused; one test walks record's AST so
+    the verdict can only come from the child process, and one pins the oracle's detection
+    floor five orders below the 1e-4 basin threshold. The pose and attribution guards are
+    each shown load-bearing against a copy of the module with that one repair reverted.
+    No live round is covered: sqsearch is not built in this environment, so the
+    end-to-end round runs a fixture engine.
   bead: think-ldq2
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 - id: D-045
@@ -1214,7 +1239,7 @@ defects:
   class: robustness
   detected_by: review
   severity: critical
-  status: outstanding
+  status: fixed
   what: >-
     Queueing ignores prerequisites; execute and record do not require an in-progress
     state; one deadline is shared across cells and may exceed the lease or session;
@@ -1227,11 +1252,33 @@ defects:
     against the wrong time, and a scientific success can be reported without durable
     persistence. These failures are worst during unattended operation.
   fix: >-
-    none yet. Encode and enforce every transition, prerequisite, lease and deadline;
-    check narrow git operations; recompute the queue after transitions; and make any
-    execution, validation, or persistence failure a durable non-scientific terminal
-    state.
-  regression: none
+    The lifecycle is now a closed machine. execute, record and release each refuse a
+    round that is not in-progress, so a terminal round cannot be rewritten; the queue and
+    claim both refuse a hypothesis whose declared prerequisites have not been accepted,
+    with a prose prerequisite counted as unmet rather than waved through; and the queue is
+    recomputed after every transition. The lease claim writes is now read: parsed as an
+    instant, with a naive stamp taken as UTC and an offset converted rather than
+    stripped, refused once expired, and used to cap the round's budget, which is then
+    split into an equal share per cell instead of one deadline the first cell could spend
+    in full. Persistence is checked: staging names the round's artifact, its archive and
+    the regenerated ledger rather than the whole campaign directory, the commit's exit
+    status is read, and HEAD must move before the round is called durable. Every
+    execution, validation or persistence failure now ends the round in the same durable
+    non-scientific state, and the session reports what state each round actually reached.
+    --no-verify is retained deliberately: the pre-commit hook formats the whole tree and
+    re-stages it, which would sweep other lanes' files into the round's commit and defeat
+    the narrow pathspec this defect asked for.
+  regression: >-
+    tests/test_campaign_runner_trust_boundary.py covers the lifecycle guards. execute,
+    record and release each refuse a terminal round and recording the same round twice is
+    refused; the queue skips and claim refuses a hypothesis whose prerequisites have not
+    landed; a lease offset is converted rather than stripped; an expired lease refuses
+    execute; the timebox is capped by the remaining lease and shared between cells;
+    commit_paths refuses an empty stage and a commit that does not move HEAD, and stages
+    only the paths it was given; and run releases the round, reports the state it truly
+    reached, and still writes its report when a step refuses before or after the verdict.
+    The lease-expiry, terminal-round and prerequisite guards are each shown load-bearing
+    against a copy of the module with that one repair reverted.
   bead: think-ldq2
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 - id: D-047
