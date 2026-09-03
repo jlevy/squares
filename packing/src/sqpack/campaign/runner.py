@@ -455,7 +455,11 @@ def execution_metadata(archive: Path) -> dict[str, Any] | None:
     or a second coordination file. Ordinary non-result provenance lines remain allowed
     by the harness contract; the reserved records are the only ones the runner reads.
     """
-    receipt = scan_archive(archive)[1][EXECUTION_METADATA]
+    return validated_execution(scan_archive(archive)[1][EXECUTION_METADATA])
+
+
+def validated_execution(receipt: dict[str, Any] | None) -> dict[str, Any] | None:
+    """Check one already-extracted execution receipt."""
     if receipt is None:
         return None
     wall_seconds = receipt.get("wall_seconds")
@@ -616,6 +620,39 @@ def archive_digest(results: list[dict[str, Any]]) -> str:
     """
     joined = "\n".join(pose_digest(rec) for rec in results)
     return hashlib.sha256(joined.encode("utf-8")).hexdigest()
+
+
+def grid_pose(n: int) -> tuple[list[float], list[float], list[float], float]:
+    """The trivial axis-aligned grid packing of `n` unit squares, and the side it needs.
+
+    A real configuration with no search behind it. `preflight` and the regressions need
+    geometry that genuinely verifies, so the independent oracle is shown accepting what
+    it should and not only refusing what it should.
+    """
+    columns = math.ceil(math.sqrt(n))
+    rows = math.ceil(n / columns)
+    x = [0.5 + float(i % columns) for i in range(n)]
+    y = [0.5 + float(i // columns) for i in range(n)]
+    return x, y, [0.0] * n, float(max(columns, rows))
+
+
+def grid_result_line(
+    n: int, seed: int, side: float | None = None, *, overlap: float = 0.0
+) -> str:
+    """One contract-shaped result line carrying a real `n`-square pose."""
+    x, y, t, needed = grid_pose(n)
+    return json.dumps(
+        {
+            "n": n,
+            "seed": seed,
+            "best_side": needed if side is None else side,
+            "overlap": overlap,
+            "x": x,
+            "y": y,
+            "t": t,
+        },
+        sort_keys=True,
+    )
 
 
 def file_digest(path: Path) -> str:
@@ -992,10 +1029,11 @@ def execute(eid: str) -> None:
     require_in_progress(eid, e, "execute")
     recipe = hypothesis(e["hypotheses"][0])["runner"]
     archive = archive_of(path)
-    # The lease is the only durable bound on an unattended round, so it is read before
-    # anything is spent and it caps the timebox. A timebox longer than the lease used to
-    # mean the round could outlive the claim that authorised it (D-046).
-    lease_left = lease_seconds_remaining(eid, e)
+    # The lease is the only durable bound on an unattended round. Check it before
+    # spending anything, and read it again below so the gate's own cost comes out of the
+    # round's budget: a timebox longer than the lease used to mean the round could
+    # outlive the claim that authorised it (D-046).
+    lease_seconds_remaining(eid, e)
     # Fire the engine's own gate before taking a single measurement, and refuse the round
     # if it fails: an untested binary must not be able to reach the archive (D-044).
     selftest = run_engine_selftest(recipe)
@@ -1009,24 +1047,24 @@ def execute(eid: str) -> None:
         archive.write_text("")
         archive_ready = True
         append_receipt(archive, SELFTEST_METADATA, selftest)
-        budget = min(duration(recipe["timebox"]), lease_left)
+        budget = min(duration(recipe["timebox"]), lease_seconds_remaining(eid, e))
         if budget < duration(recipe["timebox"]):
             print(f"   lease caps this round at {budget / 60:.1f}m of {recipe['timebox']}")
-        session_deadline = time.monotonic() + budget
+        round_deadline = time.monotonic() + budget
         cells = list(recipe["cells"])
 
         for index, n in enumerate(cells):
             # Each cell gets an equal share of whatever is left, rather than one deadline
             # the first cell could spend in full (D-046). Unused time is reclaimed by the
             # cells that follow, and no cell can ever run past the lease.
-            remaining = session_deadline - time.monotonic()
+            remaining = round_deadline - time.monotonic()
             if remaining <= 0:
                 print(f"   n={n}: session deadline reached before the cell started")
                 break
             cell_deadline = time.monotonic() + remaining / (len(cells) - index)
             with archive.open("a") as fh:
                 for seed in recipe["seeds"]:
-                    if session_deadline - time.monotonic() <= 0:
+                    if round_deadline - time.monotonic() <= 0:
                         print(f"   n={n}: TIMEBOX reached, {recipe['timebox']} spent")
                         return
                     if (left := cell_deadline - time.monotonic()) <= 0:
@@ -1180,7 +1218,7 @@ def record(eid: str, *, operator: str) -> str:
             f"{eid} has no archive; run `packing-campaign execute {eid}` before recording"
         )
     archived, receipts = scan_archive(archive)
-    execution = execution_metadata(archive)
+    execution = validated_execution(receipts[EXECUTION_METADATA])
     if execution is None:
         raise RefusalError(
             f"{eid} has no execution receipt; "
@@ -1416,7 +1454,13 @@ def release(eid: str, why: str) -> None:
     hid = stub["hypotheses"][0]
     recipe = hypothesis(hid)["runner"]
     archive = archive_of(path)
-    execution = execution_metadata(archive) if archive.exists() else None
+    try:
+        execution = execution_metadata(archive) if archive.exists() else None
+    except GuardError:
+        # Recovery must never be blocked by the thing it is recovering from. A round is
+        # often released precisely because its archive was refused, and an unreadable
+        # archive must not also make the round unreleasable.
+        execution = None
 
     stub.pop("lease", None)
     stub["effort"] = {
@@ -1517,7 +1561,7 @@ def preflight() -> int:
 
     guard_refuses(
         "a non-zero overlap is refused",
-        '{"n": 11, "seed": 1, "best_side": 3.9, "overlap": 1e-9}',
+        grid_result_line(11, 1, 3.9, overlap=1e-9),
     )
     guard_refuses(
         "a result line with no overlap is refused",
@@ -1529,21 +1573,48 @@ def preflight() -> int:
     )
     guard_refuses("a non-JSON line is refused", "not json at all")
     guard_refuses(
-        "producer output cannot spoof the execution receipt",
-        '{"campaign_runner_execution": '
-        '{"wall_seconds": 0, "commit": "spoofed", "dirty": false}}',
+        "a result line with no pose is refused",
+        '{"n": 11, "seed": 1, "best_side": 3.9, "overlap": 0}',
     )
+    guard_refuses(
+        "a pose whose length disagrees with n is refused",
+        json.dumps(
+            {
+                "n": 11,
+                "seed": 1,
+                "best_side": 3.9,
+                "overlap": 0,
+                "x": [0.5, 1.5],
+                "y": [0.5, 1.5],
+                "t": [0.0, 0.0],
+            }
+        ),
+    )
+    for reserved in RESERVED_RECEIPTS:
+        guard_refuses(
+            f"producer output cannot spoof the {reserved} receipt",
+            json.dumps({reserved: {"verified": True, "commit": "spoofed"}}),
+        )
 
     best = read_lines(
-        '{"n": 11, "seed": 1, "best_side": 3.9, "overlap": 0}\n'
-        '{"n": 11, "seed": 1, "best_side": 3.7, "overlap": 0}',
+        grid_result_line(11, 1, 3.9) + "\n" + grid_result_line(11, 1, 3.7),
         Sink(),
     )
     checks.append(("a seed's result is the min over its lines", best == 3.7, f"got {best}"))
 
+    moved = json.loads(grid_result_line(11, 1, 3.9))
+    shifted = dict(moved, x=[moved["x"][0] + 1e-9, *moved["x"][1:]])
+    checks.append(
+        (
+            "the pose digest moves when a single coordinate moves",
+            pose_digest(moved) != pose_digest(shifted),
+            f"{pose_digest(moved)[:12]} vs {pose_digest(shifted)[:12]}",
+        )
+    )
+
     with tempfile.TemporaryDirectory() as tmp:
         bad_archive = Path(tmp) / "bad.jsonl"
-        bad_archive.write_text('{"n": 11, "seed": 1, "best_side": 3.7, "overlap": 0.001}\n')
+        bad_archive.write_text(grid_result_line(11, 1, 3.7, overlap=0.001) + "\n")
         try:
             cells_from(bad_archive, {"cells": [11], "seeds": [1]})
             replay_refused, replay_detail = False, "the tampered archive was accepted"
@@ -1556,7 +1627,7 @@ def preflight() -> int:
     with tempfile.TemporaryDirectory() as tmp:
         timed_archive = Path(tmp) / "timed.jsonl"
         timed_archive.write_text(
-            '{"n": 11, "seed": 1, "best_side": 3.7, "overlap": 0}\n'
+            grid_result_line(11, 1, 3.7) + "\n"
             '{"campaign_runner_execution": '
             '{"wall_seconds": 12.5, "commit": "execution-sha", "dirty": true}}\n'
         )
@@ -1614,7 +1685,7 @@ def preflight() -> int:
 
     with tempfile.TemporaryDirectory() as tmp:
         wrong_cell = Path(tmp) / "wrong-cell.jsonl"
-        wrong_cell.write_text('{"n": 12, "seed": 1, "best_side": 4.0, "overlap": 0}\n')
+        wrong_cell.write_text(grid_result_line(12, 1, 4.0) + "\n")
         try:
             cells_from(wrong_cell, {"cells": [11], "seeds": [1]})
             recipe_refused, recipe_detail = False, "the undeclared cell was accepted"
@@ -1623,6 +1694,106 @@ def preflight() -> int:
     checks.append(
         ("record replay enforces the declared cells and seeds", recipe_refused, recipe_detail)
     )
+
+    # Lifecycle. Every transition D-046 named, fired on purpose rather than trusted.
+    for step, decision in (("execute", "rejected"), ("record", "unresolved")):
+        try:
+            require_in_progress("exp-000", {"verdict": {"decision": decision}}, step)
+            refused, detail = False, f"a {decision} round was accepted"
+        except RefusalError as exc:
+            refused, detail = True, str(exc)
+        checks.append((f"{step} refuses a terminal round", refused, detail))
+
+    unmet = unmet_prereqs({"prereqs": ["H-011", "a verified n = 17 pose"]}, [])
+    checks.append(
+        (
+            "an unmet prerequisite keeps a hypothesis out of the queue",
+            len(unmet) == 2,
+            "; ".join(unmet) or "nothing was reported unmet",
+        )
+    )
+    checks.append(
+        (
+            "an empty prereqs list does not block a hypothesis",
+            not unmet_prereqs({"prereqs": []}, []),
+            "an empty list was treated as unmet",
+        )
+    )
+
+    west = {"lease": {"expires": "2026-01-01T00:00:00-07:00"}}
+    checks.append(
+        (
+            "a lease offset is converted to UTC rather than stripped",
+            lease_expiry("exp-000", west) == datetime(2026, 1, 1, 7, 0, tzinfo=UTC),
+            f"got {lease_expiry('exp-000', west).isoformat()}",
+        )
+    )
+    try:
+        lease_seconds_remaining(
+            "exp-000", {"lease": {"expires": (now() - timedelta(minutes=1)).isoformat()}}
+        )
+        lease_refused, lease_detail = False, "an expired lease was accepted"
+    except RefusalError as exc:
+        lease_refused, lease_detail = True, str(exc)
+    checks.append(("an expired lease is refused", lease_refused, lease_detail))
+
+    # The independent oracle, actually spawned. This is the guard D-044 asked for, so
+    # preflight pays for two real child processes rather than asserting an import works.
+    with tempfile.TemporaryDirectory() as tmp:
+        honest = Path(tmp) / "honest.jsonl"
+        honest.write_text(grid_result_line(4, 1) + "\n")
+        try:
+            report = verify_archive_in_separate_process(honest)
+            accepted, accept_detail = True, f"{report['poses_checked']} pose(s) verified"
+        except (GuardError, RefusalError) as exc:
+            accepted, accept_detail = False, str(exc)
+        checks.append(
+            ("a separate process verifies a genuinely valid pose", accepted, accept_detail)
+        )
+
+        x, y, t, side = grid_pose(4)
+        forged = Path(tmp) / "forged.jsonl"
+        forged.write_text(
+            json.dumps({
+                "n": 4, "seed": 1, "best_side": side, "overlap": 0,
+                # Squares 0 and 1 stacked exactly, with a zero overlap asserted anyway.
+                "x": [x[0], x[0], x[2], x[3]], "y": [y[0], y[0], y[2], y[3]], "t": t,
+            })
+            + "\n"
+        )  # fmt: skip
+        try:
+            verify_archive_in_separate_process(forged)
+            forge_refused, forge_detail = False, "the fabricated overlap was accepted"
+        except (GuardError, RefusalError) as exc:
+            forge_refused, forge_detail = True, str(exc)
+        checks.append(
+            (
+                "a separate process refuses a fabricated zero overlap",
+                forge_refused,
+                forge_detail,
+            )
+        )
+
+        understated = Path(tmp) / "understated.jsonl"
+        understated.write_text(grid_result_line(4, 1, 1.5) + "\n")
+        under = verify_archive_poses(understated)
+        checks.append(
+            (
+                "a best_side smaller than the pose needs is refused",
+                not under["verified"],
+                "; ".join(under["failures"]) or "the understated side was accepted",
+            )
+        )
+
+        empty = Path(tmp) / "empty.jsonl"
+        empty.write_text("")
+        checks.append(
+            (
+                "an archive with no scored line certifies nothing",
+                not verify_archive_poses(empty)["verified"],
+                "an empty archive was reported verified",
+            )
+        )
 
     breach = control_breaches([Cell(16, [3.9])])
     checks.append(
@@ -1669,46 +1840,107 @@ def preflight() -> int:
 # Run the three middle steps in a loop
 
 
+def safe_release(eid: str, why: str) -> str:
+    """Free a round after a failure and return the state it actually ended in.
+
+    The recovery path must not be able to replace the failure that caused it, and it
+    must not report a state the round is not in. A failure *after* `record` wrote the
+    verdict leaves a terminal round that was merely not committed; a failure before it
+    leaves a claim to release; a failure of the release itself leaves a stale claim the
+    ledger will surface. Each of those is said out loud rather than flattened to one
+    optimistic word.
+    """
+    try:
+        _, e = find_round(eid)
+    except RefusalError as error:
+        print(f"   {eid} cannot be read back: {error}")
+        return "unknown"
+    decision = str((e.get("verdict") or {}).get("decision"))
+    if decision != IN_PROGRESS:
+        print(f"   {eid} is already {decision}: the failure came after the verdict.")
+        return decision
+    try:
+        release(eid, why)
+    except (RefusalError, GuardError, OSError) as error:
+        print(f"   RELEASE FAILED for {eid}: {error}")
+        print(f"   {eid} remains claimed and will show as a stale claim until recovered.")
+        return IN_PROGRESS
+    return "unresolved"
+
+
 def run(operator: str, hours: float) -> int:
     """claim / execute / record over the queue. Nothing here that a step cannot do."""
     started, failures, done = now(), 0, []
-    runnable, skipped = queue()
+    deadline = started + timedelta(hours=hours)
+    _, skipped = queue()
     show_status()
+    attempted: set[str] = set()
+    abnormal = False
 
-    for hid, _ in runnable:
-        if (now() - started).total_seconds() > hours * 3600:
-            print("\nsession budget exhausted")
-            break
-        eid = claim(hid, operator, hours)
-        print(f"\n== {eid}: {hid} ==")
-        try:
-            execute(eid)
-            decision = record(eid, operator=operator)
-            failures = 0
-        except GuardError as e:
-            failures += 1
-            print(f"   GUARD REFUSED: {e}")
-            release(eid, f"guard refused the measurement: {e}")
-            decision = "unresolved"
-        done.append((eid, hid, decision))
-        print(f"   -> {decision}")
-        if failures >= MAX_CONSECUTIVE_FAILURES:
-            print(f"\n{failures} consecutive guard refusals: the instrument is suspect")
-            write_report(
-                started,
-                operator,
-                hours,
-                done=done,
-                skipped=skipped,
-                failures=failures,
-                abnormal=True,
-            )
-            return 1
+    try:
+        while True:
+            remaining = (deadline - now()).total_seconds()
+            # A lease shorter than a minute buys a round that `execute` would refuse as
+            # already expired, which would spend a failure on the clock rather than on
+            # the instrument.
+            if remaining < 60:
+                print("\nsession budget exhausted")
+                break
+            # Recompute the queue after every transition. A recorded round can resolve a
+            # hypothesis, reach the cap, or satisfy a prerequisite, and a list computed
+            # once at the top of the night does not know any of that (D-046).
+            runnable, skipped = queue()
+            hid = next((h for h, _ in runnable if h not in attempted), None)
+            if hid is None:
+                break
+            attempted.add(hid)
+            # The lease carries the session deadline into `execute`, which is what stops
+            # the last round of a night from overrunning by a whole timebox.
+            eid = claim(hid, operator, remaining / 3600)
+            print(f"\n== {eid}: {hid} ==")
+            try:
+                execute(eid)
+                decision = record(eid, operator=operator)
+                failures = 0
+            except GateRunningError:
+                # The gate owns the machine now. Free the round and stop the session
+                # rather than fighting it for the CPU.
+                abnormal = True
+                done.append(
+                    (
+                        eid,
+                        hid,
+                        safe_release(eid, "the validation gate started during the round"),
+                    )
+                )
+                raise
+            except (GuardError, RefusalError, OSError) as error:
+                # Every failure is terminal for the round and non-scientific: a guard
+                # refusal, a refused ledger, a failed commit, and an unreadable archive
+                # all leave the same durable state. Only a GuardError used to be caught
+                # here, so a refusal escaped the loop, wrote no report, and left the
+                # round claimed (D-046).
+                failures += 1
+                print(f"   REFUSED: {error}")
+                decision = safe_release(eid, f"the round did not complete: {error}")
+            done.append((eid, hid, decision))
+            print(f"   -> {decision}")
+            if failures >= MAX_CONSECUTIVE_FAILURES:
+                print(f"\n{failures} consecutive refusals: the instrument is suspect")
+                abnormal = True
+                break
+    finally:
+        write_report(
+            started,
+            operator,
+            hours,
+            done=done,
+            skipped=skipped,
+            failures=failures,
+            abnormal=abnormal,
+        )
 
-    write_report(
-        started, operator, hours, done=done, skipped=skipped, failures=failures, abnormal=False
-    )
-    return 0
+    return 1 if abnormal else 0
 
 
 def write_report(
@@ -1753,7 +1985,9 @@ def write_report(
         "",
         "## Health",
         "",
-        f"- Guard refusals: **{failures}** (the stop fires at {MAX_CONSECUTIVE_FAILURES}).",
+        f"- Consecutive refusals: **{failures}** (the stop fires at "
+        f"{MAX_CONSECUTIVE_FAILURES}). A guard, a refused ledger, a failed commit and an "
+        "unreadable archive all count here: each ends the round without a measurement.",
         f"- Exit: **{'abnormal, non-zero' if abnormal else 'clean'}**.",
         "",
     ]
@@ -1768,9 +2002,15 @@ def main(arguments: list[str] | None = None) -> int:
     )
     parser.add_argument("step", choices=[
         "status", "preflight", "queue", "claim", "execute", "record", "release", "run",
+        "verify-archive",
     ])  # fmt: skip
     parser.add_argument(
-        "target", nargs="?", help="H-id for claim; exp-id for execute/record/release"
+        "target",
+        nargs="?",
+        help=(
+            "H-id for claim; exp-id for execute/record/release; "
+            "archive path for verify-archive"
+        ),
     )
     parser.add_argument("--operator", default="local-agent")
     parser.add_argument("--session-hours", type=float, default=8.0)
@@ -1778,6 +2018,11 @@ def main(arguments: list[str] | None = None) -> int:
     options = parser.parse_args(arguments)
 
     try:
+        # The verifier is the child half of the independent check and works on an
+        # absolute archive path. It must not need the checkout, so that a `record`
+        # running against any layout can still reach an oracle process.
+        if options.step == "verify-archive":
+            return verify_archive_command(options.target)
         require_project_root(ROOT)
         if options.step in {"status", "queue"}:
             show_status()

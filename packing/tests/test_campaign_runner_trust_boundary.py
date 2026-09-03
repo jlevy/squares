@@ -1,0 +1,704 @@
+"""The unattended runner's result-validity and lifecycle trust boundary.
+
+Regressions for D-044 (validity and self-test status were assertions made by the thing
+under test) and D-046 (the runner was not a closed, checked state machine). Both defects
+name `sqpack/campaign/runner.py`, and both are worst exactly when nobody is watching, so
+each guard here is fired on purpose rather than assumed.
+
+The adversarial fixtures are the ten the remediation block named: fabricated overlap
+zero, a fabricated side, truncated output, a stale self-test, an unmet prerequisite, an
+expired or offset lease, a terminal rewrite, a deadline overrun, a process crash, a
+persistence failure, and broad staging.
+"""
+
+from __future__ import annotations
+
+import json
+import os
+import stat
+import subprocess
+import sys
+from collections.abc import Iterator
+from dataclasses import dataclass
+from itertools import count
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
+from typing import Any
+
+import pytest
+
+from sqpack.campaign import runner
+
+# The engine stand-in. `runner.engine_path` takes argv[0] of the declared command, so the
+# fixture engine has to be a real executable file: a self-test that can pass or fail, and
+# a producer whose output shape is chosen by the environment.
+ENGINE_SOURCE = """#!{interpreter}
+import json, math, os, sys
+
+mode = os.environ.get("RUNNER_FIXTURE_MODE", "ok")
+
+if "--selftest" in sys.argv:
+    if mode == "selftest-fail":
+        print("SELFTEST FAILED")
+        sys.exit(1)
+    print("SELFTEST PASSED")
+    sys.exit(0)
+
+n = int(sys.argv[sys.argv.index("--n") + 1])
+seed = int(sys.argv[sys.argv.index("--seed") + 1])
+columns = math.ceil(math.sqrt(n))
+rows = math.ceil(n / columns)
+x = [0.5 + float(i % columns) for i in range(n)]
+y = [0.5 + float(i // columns) for i in range(n)]
+t = [0.0] * n
+side = float(max(columns, rows))
+
+if mode == "forged-overlap":
+    x[1], y[1] = x[0], y[0]
+if mode == "forged-side":
+    side = 1.5
+if mode == "no-pose":
+    print(json.dumps({{"n": n, "seed": seed, "best_side": side, "overlap": 0}}))
+    sys.exit(0)
+if mode == "producer-crash":
+    sys.exit(3)
+if mode == "slow":
+    import time
+    time.sleep(30)
+
+print(json.dumps({{"n": n, "seed": seed, "best_side": side, "overlap": 0,
+                   "x": x, "y": y, "t": t}}))
+"""
+
+SERIES_README = """---
+series:
+  id: s-fixture
+  status: open
+---
+# fixture series
+"""
+
+HYPOTHESIS = """---
+hypothesis:
+  id: {hid}
+  claim: A fixture claim.
+  criterion: {{shape: record, metric: best_side, direction: lower, threshold: 1e-4}}
+  instrument_ready: true
+  priority: 1
+  prereqs: [{prereqs}]
+  sweep: {{axis: n, points: [{cells}]}}
+  runner:
+    command: '{command}'
+    cells: [{cells}]
+    seeds: [{seeds}]
+    timebox: {timebox}
+---
+# {hid}
+"""
+
+FRONTIER = """---
+packing:
+  upper_bound:
+    value: {value}
+    found_by: [fixture]
+    found_year: 2026
+---
+# n = {n}
+"""
+
+
+@dataclass
+class Tree:
+    """An isolated campaign checkout with a real git repository behind it."""
+
+    root: Path
+    engine: Path
+    series: Path
+
+    @property
+    def experiments(self) -> Path:
+        return self.series / "experiments"
+
+    def round_path(self, eid: str) -> Path:
+        return next(self.experiments.glob(f"{eid}-*.md"))
+
+    def archive(self, eid: str) -> Path:
+        return runner.archive_of(self.round_path(eid))
+
+
+def _git(tree: Tree, *args: str) -> str:
+    completed = subprocess.run(
+        ["git", *args], cwd=tree.root, capture_output=True, text=True, check=True
+    )
+    return completed.stdout.strip()
+
+
+def _write_hypothesis(
+    tree: Tree,
+    hid: str = "H-900",
+    *,
+    cells: str = "4",
+    seeds: str = "1",
+    timebox: str = "5m",
+    prereqs: str = "",
+    command: str | None = None,
+) -> None:
+    (tree.root / "campaign" / "hypotheses" / f"{hid}-fixture.md").write_text(
+        HYPOTHESIS.format(
+            hid=hid,
+            cells=cells,
+            seeds=seeds,
+            timebox=timebox,
+            prereqs=prereqs,
+            command=command or f"{tree.engine} --n {{n}} --seed {{seed}}",
+        )
+    )
+
+
+@pytest.fixture
+def tree(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Tree]:
+    """Point the runner's module paths at a throwaway campaign and git repository."""
+    root = tmp_path / "packing"
+    campaign = root / "campaign"
+    series = campaign / "series" / "s-fixture"
+    for directory in (
+        series / "experiments",
+        series / "results",
+        campaign / "hypotheses",
+        root / "frontier",
+        root / "cases",
+        root / "devtools",
+    ):
+        directory.mkdir(parents=True, exist_ok=True)
+    (root / "pyproject.toml").write_text("[project]\nname = 'fixture'\n")
+    (series / "README.md").write_text(SERIES_README)
+    (campaign / "ledger.md").write_text("# fixture ledger\n")
+    for n, value in ((4, 2.0), (9, 3.0)):
+        (root / "frontier" / f"n-{n:03d}.md").write_text(FRONTIER.format(n=n, value=value))
+
+    engine = root / "fake-engine"
+    engine.write_text(ENGINE_SOURCE.format(interpreter=sys.executable))
+    engine.chmod(engine.stat().st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
+
+    subprocess.run(["git", "init", "-q"], cwd=root, check=True)
+    subprocess.run(["git", "config", "user.email", "fixture@example.invalid"], cwd=root, check=True)
+    subprocess.run(["git", "config", "user.name", "fixture"], cwd=root, check=True)
+    subprocess.run(["git", "add", "-A"], cwd=root, check=True)
+    subprocess.run(
+        ["git", "commit", "-qm", "fixture", "--no-verify"], cwd=root, check=True
+    )
+
+    monkeypatch.setattr(runner, "ROOT", root)
+    monkeypatch.setattr(runner, "CAMPAIGN", campaign)
+    monkeypatch.setattr(runner, "SERIES", campaign / "series")
+    monkeypatch.setattr(runner, "REPORT", campaign / "session-report.md")
+    monkeypatch.setattr(runner, "GATE_MARKER", root / ".gate-running")
+    # The ledger is a separate module with its own whole-set checker and its own tests.
+    # Here it stands in as a step that either succeeds or fails, so the runner's response
+    # to each is what is under test. It rewrites the view on every call, as the real one
+    # does, which is what puts `ledger.md` into a round's commit.
+    renders = count()
+
+    def render_stub() -> subprocess.CompletedProcess[str]:
+        (campaign / "ledger.md").write_text(f"# fixture ledger\nrender {next(renders)}\n")
+        return subprocess.CompletedProcess(args=["render"], returncode=0, stdout="", stderr="")
+
+    monkeypatch.setattr(runner, "regenerate", render_stub)
+    monkeypatch.setenv("RUNNER_FIXTURE_MODE", "ok")
+
+    built = Tree(root=root, engine=engine, series=series)
+    _write_hypothesis(built)
+    yield built
+
+
+def _terminal_round(tree: Tree, decision: str = "rejected") -> str:
+    """Write a round that has already reached a terminal decision."""
+    (tree.experiments / "exp-500-terminal.md").write_text(
+        "---\n"
+        "experiment:\n"
+        "  id: exp-500\n"
+        "  series: s-fixture\n"
+        "  date: '2026-01-01'\n"
+        "  hypotheses: [H-900]\n"
+        f"  verdict: {{decision: {decision}, primary_criterion: best_side, reason: done}}\n"
+        "---\n# exp-500\n"
+    )
+    return "exp-500"
+
+
+# --- the result-line contract (D-044) ---------------------------------------------
+
+
+def test_a_scored_line_without_a_pose_is_refused() -> None:
+    with pytest.raises(runner.GuardError, match="no pose"):
+        runner.validated_record('{"n": 11, "seed": 1, "best_side": 3.9, "overlap": 0}')
+
+
+@pytest.mark.parametrize("field", runner.POSE_FIELDS)
+def test_a_pose_array_must_have_exactly_n_entries(field: str) -> None:
+    rec = json.loads(runner.grid_result_line(4, 1))
+    rec[field] = rec[field][:-1]
+    with pytest.raises(runner.GuardError, match=f"pose field '{field}' of length 3"):
+        runner.validated_record(json.dumps(rec))
+
+
+def test_a_non_finite_pose_coordinate_is_refused() -> None:
+    rec = json.loads(runner.grid_result_line(4, 1))
+    rec["x"][0] = float("inf")
+    with pytest.raises(runner.GuardError, match="non-finite"):
+        runner.validated_record(json.dumps(rec))
+
+
+def test_the_pose_digest_moves_when_one_coordinate_moves() -> None:
+    rec = json.loads(runner.grid_result_line(4, 1))
+    moved = dict(rec, x=[rec["x"][0] + 1e-12, *rec["x"][1:]])
+
+    assert runner.pose_digest(rec) != runner.pose_digest(moved)
+
+
+def test_the_archive_digest_is_sensitive_to_order_and_content() -> None:
+    first = json.loads(runner.grid_result_line(4, 1))
+    second = json.loads(runner.grid_result_line(4, 2))
+
+    assert runner.archive_digest([first, second]) != runner.archive_digest([second, first])
+    assert runner.archive_digest([first]) != runner.archive_digest([first, second])
+
+
+@pytest.mark.parametrize("reserved", runner.RESERVED_RECEIPTS)
+def test_a_producer_may_not_write_a_reserved_receipt(reserved: str) -> None:
+    with pytest.raises(runner.GuardError, match="reserved"):
+        runner.validated_record(json.dumps({reserved: {"verified": True}}))
+
+
+# --- the independent oracle, in another process (D-044) ---------------------------
+
+
+def test_a_separate_process_verifies_a_genuinely_valid_pose(tmp_path: Path) -> None:
+    archive = tmp_path / "honest.jsonl"
+    archive.write_text(runner.grid_result_line(9, 1) + "\n")
+
+    report = runner.verify_archive_in_separate_process(archive)
+
+    assert report["verified"] is True
+    assert report["poses_checked"] == 1
+    assert report["verifier"] == "sqpack.verify.verify_packing"
+    assert report["archive_sha256"] == runner.archive_digest(
+        [json.loads(runner.grid_result_line(9, 1))]
+    )
+
+
+def test_a_fabricated_zero_overlap_is_refused_by_the_oracle(tmp_path: Path) -> None:
+    x, y, t, side = runner.grid_pose(4)
+    archive = tmp_path / "forged.jsonl"
+    archive.write_text(
+        json.dumps(
+            {
+                "n": 4,
+                "seed": 1,
+                "best_side": side,
+                "overlap": 0,
+                "x": [x[0], x[0], x[2], x[3]],
+                "y": [y[0], y[0], y[2], y[3]],
+                "t": t,
+            }
+        )
+        + "\n"
+    )
+
+    with pytest.raises(runner.GuardError, match="overlap"):
+        runner.verify_archive_in_separate_process(archive)
+
+
+def test_a_side_the_pose_cannot_support_is_refused(tmp_path: Path) -> None:
+    """The n=17 fabrication D-044 describes: a record-beating side over a 5x5 grid."""
+    archive = tmp_path / "fabricated-side.jsonl"
+    archive.write_text(runner.grid_result_line(17, 1, 3.7) + "\n")
+
+    with pytest.raises(runner.GuardError, match="the pose needs side 5"):
+        runner.verify_archive_in_separate_process(archive)
+
+
+def test_a_truncated_archive_certifies_nothing(tmp_path: Path) -> None:
+    empty = tmp_path / "empty.jsonl"
+    empty.write_text("")
+    partial = tmp_path / "partial.jsonl"
+    partial.write_text(runner.grid_result_line(4, 1)[:-12])
+
+    assert runner.verify_archive_poses(empty)["verified"] is False
+    with pytest.raises(runner.GuardError, match="non-JSON line"):
+        runner.verify_archive_poses(partial)
+
+
+def test_the_verify_archive_step_exits_non_zero_on_a_forged_pose(tmp_path: Path) -> None:
+    archive = tmp_path / "forged.jsonl"
+    archive.write_text(runner.grid_result_line(4, 1, 1.5) + "\n")
+
+    assert runner.main(["verify-archive", str(archive)]) == 1
+    good = tmp_path / "good.jsonl"
+    good.write_text(runner.grid_result_line(4, 1) + "\n")
+    assert runner.main(["verify-archive", str(good)]) == 0
+
+
+# --- the engine gate is executed, never asserted (D-044) --------------------------
+
+
+def test_execute_refuses_when_the_engine_selftest_fails(
+    tree: Tree, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("RUNNER_FIXTURE_MODE", "selftest-fail")
+    eid = runner.claim("H-900", "fixture", 1.0)
+
+    with pytest.raises(runner.GuardError, match="self-test failed with exit 1"):
+        runner.execute(eid)
+
+    assert not tree.archive(eid).exists()
+
+
+def test_execute_refuses_when_the_engine_is_missing(tree: Tree) -> None:
+    tree.engine.unlink()
+    eid = runner.claim("H-900", "fixture", 1.0)
+
+    with pytest.raises(runner.GuardError, match="does not exist"):
+        runner.execute(eid)
+
+
+def test_record_refuses_when_the_engine_changed_after_its_selftest(tree: Tree) -> None:
+    eid = runner.claim("H-900", "fixture", 1.0)
+    runner.execute(eid)
+    tree.engine.write_text(tree.engine.read_text() + "\n# swapped after the gate ran\n")
+
+    with pytest.raises(runner.RefusalError, match="does not certify the engine"):
+        runner.record(eid, operator="fixture")
+
+
+def test_the_selftest_receipt_binds_the_binary_digest(tree: Tree) -> None:
+    eid = runner.claim("H-900", "fixture", 1.0)
+    runner.execute(eid)
+
+    receipt = runner.scan_archive(tree.archive(eid))[1][runner.SELFTEST_METADATA]
+
+    assert receipt is not None
+    assert receipt["exit_status"] == 0
+    assert receipt["engine_sha256"] == runner.file_digest(tree.engine)
+    assert receipt["argv"][-1] == "--selftest"
+
+
+# --- archive digests bind validity to an immutable object (D-044) -----------------
+
+
+def test_record_refuses_an_archive_edited_after_it_was_verified(tree: Tree) -> None:
+    eid = runner.claim("H-900", "fixture", 1.0)
+    runner.execute(eid)
+    archive = tree.archive(eid)
+    runner.append_receipt(
+        archive,
+        runner.VERIFICATION_METADATA,
+        {"verified": True, "archive_sha256": "0" * 64, "poses_checked": 1},
+    )
+
+    with pytest.raises(runner.RefusalError, match="changed after it was verified"):
+        runner.record(eid, operator="fixture")
+
+
+def test_record_refuses_a_forged_result_line(
+    tree: Tree, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("RUNNER_FIXTURE_MODE", "forged-overlap")
+    eid = runner.claim("H-900", "fixture", 1.0)
+    runner.execute(eid)
+
+    with pytest.raises(runner.GuardError, match="independent pose verification refused"):
+        runner.record(eid, operator="fixture")
+
+    assert runner.front(tree.round_path(eid))["experiment"]["verdict"]["decision"] == (
+        "in-progress"
+    )
+
+
+def test_execute_refuses_a_producer_that_prints_no_pose(
+    tree: Tree, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("RUNNER_FIXTURE_MODE", "no-pose")
+    eid = runner.claim("H-900", "fixture", 1.0)
+
+    with pytest.raises(runner.GuardError, match="no pose"):
+        runner.execute(eid)
+
+
+# --- the lifecycle is closed and checked (D-046) ----------------------------------
+
+
+def test_execute_refuses_a_terminal_round(tree: Tree) -> None:
+    eid = _terminal_round(tree)
+
+    with pytest.raises(runner.RefusalError, match="not in-progress"):
+        runner.execute(eid)
+
+
+def test_record_refuses_a_terminal_round(tree: Tree) -> None:
+    eid = _terminal_round(tree, "unresolved")
+    before = tree.round_path(eid).read_text()
+
+    with pytest.raises(runner.RefusalError, match="not in-progress"):
+        runner.record(eid, operator="fixture")
+
+    assert tree.round_path(eid).read_text() == before
+
+
+def test_release_refuses_a_terminal_round(tree: Tree) -> None:
+    eid = _terminal_round(tree, "abandoned")
+
+    with pytest.raises(runner.RefusalError, match="not in-progress"):
+        runner.release(eid, "recovery")
+
+
+def test_the_queue_skips_a_hypothesis_whose_prereqs_have_not_landed(tree: Tree) -> None:
+    _write_hypothesis(tree, "H-901", prereqs="H-011")
+    _write_hypothesis(tree, "H-902", prereqs="a verified n = 17 pose")
+
+    runnable, skipped = runner.queue()
+    reasons = dict(skipped)
+
+    assert [hid for hid, _ in runnable] == ["H-900"]
+    assert "H-011 has not been accepted" in reasons["H-901"]
+    assert "not a hypothesis id this runner can check" in reasons["H-902"]
+
+
+def test_claim_enforces_prereqs_even_when_driven_by_hand(tree: Tree) -> None:
+    _write_hypothesis(tree, "H-901", prereqs="H-011")
+
+    with pytest.raises(runner.RefusalError, match="prerequisites that have not landed"):
+        runner.claim("H-901", "fixture", 1.0)
+
+
+def test_a_lease_offset_is_converted_to_utc_not_stripped() -> None:
+    west = {"lease": {"expires": "2026-01-01T00:00:00-07:00"}}
+    naive = {"lease": {"expires": "2026-01-01T00:00:00"}}
+
+    assert runner.lease_expiry("exp-1", west) == datetime(2026, 1, 1, 7, 0, tzinfo=UTC)
+    assert runner.lease_expiry("exp-1", naive) == datetime(2026, 1, 1, 0, 0, tzinfo=UTC)
+
+
+def test_execute_refuses_an_expired_lease(tree: Tree) -> None:
+    eid = runner.claim("H-900", "fixture", 1.0)
+    path = tree.round_path(eid)
+    stale = (runner.now() - timedelta(minutes=5)).replace(microsecond=0).isoformat()
+    # Rewrite the parsed artifact rather than editing the text, so it stays parseable.
+    front = runner.front(path)
+    front["experiment"]["lease"]["expires"] = stale
+    path.write_text("---\n" + json.dumps(front) + "\n---\n# stale\n")
+
+    with pytest.raises(runner.RefusalError, match="lease expired"):
+        runner.execute(eid)
+
+
+def test_execute_caps_the_timebox_at_the_remaining_lease(
+    tree: Tree, capsys: pytest.CaptureFixture[str]
+) -> None:
+    _write_hypothesis(tree, "H-900", timebox="8h")
+    eid = runner.claim("H-900", "fixture", 0.05)  # a three-minute lease
+
+    runner.execute(eid)
+
+    assert "lease caps this round" in capsys.readouterr().out
+
+
+def test_each_cell_gets_its_own_share_of_the_timebox(
+    tree: Tree, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A slow first cell must not be able to spend the whole round's budget."""
+    _write_hypothesis(tree, "H-900", cells="4, 9", seeds="1", timebox="4s")
+    monkeypatch.setenv("RUNNER_FIXTURE_MODE", "slow")
+    eid = runner.claim("H-900", "fixture", 1.0)
+
+    runner.execute(eid)
+    out = capsys.readouterr().out
+
+    # The first cell is cut off at its share and the second cell still gets a turn.
+    assert "n=4: cell share reached mid-seed" in out
+    assert "n=9" in out
+
+
+# --- failures are durable and non-scientific (D-046) ------------------------------
+
+
+def test_commit_paths_refuses_when_nothing_was_staged(tree: Tree) -> None:
+    with pytest.raises(runner.RefusalError, match="not durably persisted"):
+        runner.commit_paths([tree.root / "pyproject.toml"], "no change here")
+
+
+def test_commit_paths_moves_head_and_stages_only_what_it_was_given(tree: Tree) -> None:
+    unrelated = tree.root / "campaign" / "unrelated-lane.md"
+    unrelated.write_text("another lane was mid-edit\n")
+    mine = tree.root / "campaign" / "ledger.md"
+    mine.write_text("# regenerated\n")
+    before = _git(tree, "rev-parse", "HEAD")
+
+    runner.commit_paths([mine], "round: narrow")
+
+    assert _git(tree, "rev-parse", "HEAD") != before
+    assert _git(tree, "show", "--name-only", "--format=", "HEAD").split() == [
+        "campaign/ledger.md"
+    ]
+    assert "unrelated-lane.md" in _git(tree, "status", "--porcelain")
+
+
+def test_record_refuses_when_the_ledger_refuses(
+    tree: Tree, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    eid = runner.claim("H-900", "fixture", 1.0)
+    runner.execute(eid)
+    monkeypatch.setattr(
+        runner,
+        "regenerate",
+        lambda: subprocess.CompletedProcess(
+            args=["render"], returncode=1, stdout="FAIL stale\n", stderr=""
+        ),
+    )
+
+    with pytest.raises(runner.RefusalError, match="campaign ledger refused"):
+        runner.record(eid, operator="fixture")
+
+
+def test_run_releases_the_round_and_still_reports_when_a_step_refuses(
+    tree: Tree, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A RefusalError used to escape `run`, leaving a claim and writing no report."""
+
+    def refuse(eid: str, *, operator: str) -> str:
+        raise runner.RefusalError("the ledger would not render")
+
+    monkeypatch.setattr(runner, "record", refuse)
+
+    assert runner.run("fixture", 0.5) == 0
+
+    rounds = [e for _, e in runner.all_rounds()]
+    assert [e["verdict"]["decision"] for e in rounds] == ["unresolved"]
+    assert rounds[0]["effort"]["stopped_by"] == "error"
+    assert runner.REPORT.exists()
+    assert "the ledger would not render" in runner.REPORT.read_text()
+
+
+def test_a_refused_line_never_reaches_the_archive(
+    tree: Tree, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`read_lines` validates before it writes, so a refusal leaves no usable evidence."""
+    monkeypatch.setenv("RUNNER_FIXTURE_MODE", "no-pose")
+    eid = runner.claim("H-900", "fixture", 1.0)
+
+    with pytest.raises(runner.GuardError, match="no pose"):
+        runner.execute(eid)
+
+    archived, receipts = runner.scan_archive(tree.archive(eid))
+    assert archived == []
+    assert receipts[runner.EXECUTION_METADATA] is not None
+
+
+def test_release_survives_an_archive_it_cannot_read(tree: Tree) -> None:
+    """Recovery must not be blocked by the archive it is recovering from."""
+    eid = runner.claim("H-900", "fixture", 1.0)
+    runner.execute(eid)
+    archive = tree.archive(eid)
+    # An archive edited on disk after the fact: a scored line with its pose stripped.
+    archive.write_text(
+        '{"n": 4, "seed": 1, "best_side": 2.0, "overlap": 0}\n' + archive.read_text()
+    )
+    with pytest.raises(runner.GuardError, match="no pose"):
+        runner.execution_metadata(archive)
+
+    runner.release(eid, "the archive was edited under the round")
+
+    experiment = runner.front(tree.round_path(eid))["experiment"]
+    assert experiment["verdict"]["decision"] == "unresolved"
+    assert experiment["effort"]["wall_seconds"] == 0
+
+
+def test_run_reports_the_true_state_when_a_step_fails_after_the_verdict(
+    tree: Tree, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A failed commit leaves a terminal round; the session must not call it released."""
+
+    def refuse(paths: list[Path], message: str) -> str:
+        raise runner.RefusalError("git commit failed with exit 128")
+
+    monkeypatch.setattr(runner, "commit_paths", refuse)
+
+    assert runner.run("fixture", 0.5) == 0
+    out = capsys.readouterr().out
+
+    assert "is already unresolved: the failure came after the verdict" in out
+    assert runner.front(tree.round_path("exp-001"))["experiment"]["verdict"][
+        "decision"
+    ] == "unresolved"
+
+
+def test_run_recomputes_the_queue_between_rounds(tree: Tree) -> None:
+    _write_hypothesis(tree, "H-901")
+
+    assert runner.run("fixture", 0.5) == 0
+
+    decisions = {e["hypotheses"][0] for _, e in runner.all_rounds()}
+    assert decisions == {"H-900", "H-901"}
+
+
+def test_a_released_round_is_committed(tree: Tree) -> None:
+    eid = runner.claim("H-900", "fixture", 1.0)
+    before = _git(tree, "rev-parse", "HEAD")
+
+    runner.release(eid, "the operator gave up")
+
+    assert _git(tree, "rev-parse", "HEAD") != before
+    assert "released" in _git(tree, "show", "--format=%s", "--name-only", "HEAD")
+
+
+# --- one supervised successful round ----------------------------------------------
+
+
+def test_a_supervised_round_records_a_verified_verdict(tree: Tree) -> None:
+    """claim, execute, record: end to end, with every new guard in the path."""
+    eid = runner.claim("H-900", "fixture", 1.0)
+    stub = runner.front(tree.round_path(eid))["experiment"]
+    assert stub["verdict"]["decision"] == "in-progress"
+    assert stub["subject"]["selftest_passed"] is False
+    assert stub["lease"]["pid"] == os.getpid()
+
+    runner.execute(eid)
+    decision = runner.record(eid, operator="fixture")
+
+    assert decision == "unresolved"  # within the basin; clause 5 is held for review
+    experiment = runner.front(tree.round_path(eid))["experiment"]
+    assert experiment["subject"]["selftest_passed"] is True
+    assert experiment["subject"]["assurance"] == "numerically-checked"
+    assert "lease" not in experiment
+
+    guard = [r for r in experiment["results"] if r["shape"] == "determination"]
+    assert len(guard) == 1
+    assert guard[0]["role"] == "guard"
+    assert "sqpack.verify.verify_packing in a separate process" in guard[0]["checked_by"]
+
+    receipts = runner.scan_archive(tree.archive(eid))[1]
+    verification: dict[str, Any] | None = receipts[runner.VERIFICATION_METADATA]
+    assert verification is not None
+    assert verification["verified"] is True
+    assert verification["poses_checked"] == 1
+    assert verification["archive_sha256"][:16] in guard[0]["checked_by"]
+
+    committed = _git(tree, "show", "--name-only", "--format=", "HEAD").split()
+    assert sorted(committed) == sorted(
+        [
+            str(tree.round_path(eid).relative_to(tree.root)),
+            str(tree.archive(eid).relative_to(tree.root)),
+            "campaign/ledger.md",
+        ]
+    )
+
+
+def test_recording_the_same_round_twice_is_refused(tree: Tree) -> None:
+    eid = runner.claim("H-900", "fixture", 1.0)
+    runner.execute(eid)
+    runner.record(eid, operator="fixture")
+
+    with pytest.raises(runner.RefusalError, match="not in-progress"):
+        runner.record(eid, operator="fixture")
+    with pytest.raises(runner.RefusalError, match="not in-progress"):
+        runner.execute(eid)
