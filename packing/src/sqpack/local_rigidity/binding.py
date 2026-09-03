@@ -106,8 +106,15 @@ class T012System:
     """Free-direction name -> the scaled `q` vector `T-012` runs its Farkas test on."""
 
 
-def contact_key(kind: str, moving: int, corner: int, host: int | None, edge: int | None,
-                wall: str | None) -> str:
+def contact_key(
+    kind: str,
+    moving: int,
+    corner: int,
+    *,
+    host: int | None,
+    edge: int | None,
+    wall: str | None,
+) -> str:
     """One name for a contact, shared by both instruments, so rows match by identity.
 
     Matching by *position* would silently pass whenever both enumerations happened to
@@ -157,19 +164,20 @@ def load_t012_system() -> T012System:
     for name in free:
         index = names.index(name)
         unit = [
-            pose.field.rational(1 if position == index else 0)
-            for position in range(len(names))
+            pose.field.rational(1 if position == index else 0) for position in range(len(names))
         ]
         terms = second_order_terms(pose, contacts, unit)
-        second[name] = tuple(
-            term * scale for term, scale in zip(terms, scales, strict=True)
-        )
+        second[name] = tuple(term * scale for term, scale in zip(terms, scales, strict=True))
     return T012System(
         field=pose.field,
         contact_keys=tuple(
             contact_key(
-                contact.kind, contact.moving, contact.corner, contact.host, contact.edge,
-                contact.wall,
+                contact.kind,
+                contact.moving,
+                contact.corner,
+                host=contact.host,
+                edge=contact.edge,
+                wall=contact.wall,
             )
             for contact in contacts
         ),
@@ -241,17 +249,11 @@ class BindingCertificate:
             and self.free_variables_correspond
             and all(row.scalar_is_positive for row in self.rows)
             and all(row.gradient_matches for row in self.rows)
-            and all(
-                matched
-                for row in self.rows
-                for matched in row.second_jet_matches.values()
-            )
+            and all(matched for row in self.rows for matched in row.second_jet_matches.values())
         )
 
 
-def bind(
-    chart: Chart, system: ConstraintSystem, t012: T012System
-) -> BindingCertificate:
+def bind(chart: Chart, system: ConstraintSystem, t012: T012System) -> BindingCertificate:
     """Certify, exactly, that the chart's jets are `T-012`'s rows and `q` rescaled."""
     count = chart.pose.count
     field = chart.field
@@ -313,10 +315,13 @@ def bind(
             for polynomial in active.values()
         )
     )
-    corresponds = tuple(
-        name.replace("w", "u", 1) if name.startswith("w") else name
-        for name in t012.free_names
-    ) == chart_free
+    corresponds = (
+        tuple(
+            name.replace("w", "u", 1) if name.startswith("w") else name
+            for name in t012.free_names
+        )
+        == chart_free
+    )
     return BindingCertificate(
         transform=transform_matrix_description(count),
         rows=tuple(rows),
@@ -336,6 +341,4 @@ def _denominator_at_base(chart: Chart, key: str, origin: list[FieldElement]) -> 
     if parts[0] == "wall":
         return chart.denominator(int(parts[1])).evaluate(origin)
     host, moving = int(parts[1]), int(parts[3])
-    return chart.denominator(host).evaluate(origin) * chart.denominator(moving).evaluate(
-        origin
-    )
+    return chart.denominator(host).evaluate(origin) * chart.denominator(moving).evaluate(origin)

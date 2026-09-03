@@ -24,7 +24,10 @@ from fractions import Fraction
 from typing import Any
 
 from sqpack.field import FieldElement
-from sqpack.local_rigidity.instrument import Determination
+from sqpack.local_rigidity.instrument import (
+    DECLARED_MATHEMATICAL_INPUTS,
+    Determination,
+)
 from sqpack.local_rigidity.system import ConstraintSystem
 
 
@@ -128,9 +131,7 @@ def build_payload(
             {
                 "key": report.key,
                 "status": report.status,
-                "active_branch": (
-                    report.active_branch.key if report.active_branch else None
-                ),
+                "active_branch": (report.active_branch.key if report.active_branch else None),
                 "active_constraint": (
                     report.active_constraint.key if report.active_constraint else None
                 ),
@@ -203,9 +204,7 @@ def build_payload(
                 "missing_from_t012": list(determination.binding.missing_from_t012),
                 "chart_free_variables": list(determination.binding.chart_free_variables),
                 "t012_free_variables": list(determination.binding.t012_free_variables),
-                "free_variables_correspond": (
-                    determination.binding.free_variables_correspond
-                ),
+                "free_variables_correspond": (determination.binding.free_variables_correspond),
                 "directions": list(determination.binding.directions),
                 "rows": [
                     {
@@ -229,6 +228,19 @@ def build_payload(
             ],
             "caveat": determination.probe.probe_is_not_a_proof,
         },
+        "reduction_audit": (
+            None
+            if determination.audit is None
+            else {
+                "points_tested": determination.audit.points_tested,
+                "points_inside_neighborhood": determination.audit.points_inside,
+                "agreements": determination.audit.agreements,
+                "counterexamples": list(determination.audit.counterexamples),
+                "consistent": determination.audit.consistent,
+                "caveat": determination.audit.audit_is_not_a_proof,
+            }
+        ),
+        "declared_mathematical_inputs": [dict(entry) for entry in DECLARED_MATHEMATICAL_INPUTS],
         "controls": controls or [],
         "determination": {
             "instrument_ready": determination.instrument_ready,
@@ -274,8 +286,16 @@ def render_markdown(payload: dict[str, Any], expected: dict[str, int]) -> str:
     out.append(f"- Pose: `{subject['pose']}`, container side `{subject['side']}`, fixed")
     out.append(f"- Chart: `{subject['chart']}`, {len(subject['chart_variables'])} variables")
     out.append(f"- Instrument ready: **{determination['instrument_ready']}**")
-    out.append(f"- Isolation decided by this instrument: **{determination['isolation_decided']}**")
+    out.append(
+        f"- Isolation decided by this instrument: **{determination['isolation_decided']}**"
+    )
     out.append(f"- Refusals: {determination['refusals'] or 'none'}")
+    disagreements = payload.get("count_disagreements")
+    if disagreements is not None:
+        out.append(
+            f"- Agenda count disagreements: "
+            f"{disagreements if disagreements else 'none — every agenda figure reproduced'}"
+        )
     out.append("")
     out.append(f"Scope: {determination['scope']}.")
     out.append("")
@@ -405,16 +425,20 @@ def render_markdown(payload: dict[str, Any], expected: dict[str, int]) -> str:
     out.append("")
     out.extend(
         _table(
-            ["pair", "status", "active branch", "active inequality", "witness branch",
-             "witness margin"],
+            [
+                "pair",
+                "status",
+                "active branch",
+                "active inequality",
+                "witness branch",
+                "witness margin",
+            ],
             [
                 [
                     f"`{entry['key']}`",
                     entry["status"],
                     f"`{entry['active_branch']}`" if entry["active_branch"] else "--",
-                    f"`{entry['active_constraint']}`"
-                    if entry["active_constraint"]
-                    else "--",
+                    f"`{entry['active_constraint']}`" if entry["active_constraint"] else "--",
                     f"`{entry['witness_branch']}`" if entry["witness_branch"] else "--",
                     f"`{entry['witness_margin']}`" if entry["witness_margin"] else "--",
                 ]
@@ -427,8 +451,14 @@ def render_markdown(payload: dict[str, Any], expected: dict[str, int]) -> str:
     out.append("")
     out.extend(
         _table(
-            ["pair", "branch", "axis / orientation", "least feature", "least margin",
-             "sign"],
+            [
+                "pair",
+                "branch",
+                "axis / orientation",
+                "least feature",
+                "least margin",
+                "sign",
+            ],
             [
                 [
                     f"`{pair['key']}`",
@@ -513,14 +543,19 @@ def render_markdown(payload: dict[str, Any], expected: dict[str, int]) -> str:
     else:
         transform = binding["transform"]
         out.append(f"- Transform: `{transform['name']}` — {transform['shape']}")
-        out.append(f"- `{transform['chart_order']}` to `{transform['target_order']}`, "
-                   f"because {transform['reason']}")
+        out.append(
+            f"- `{transform['chart_order']}` to `{transform['target_order']}`, "
+            f"because {transform['reason']}"
+        )
         out.append(f"- Binding holds: **{binding['holds']}**")
-        out.append(f"- Active keys agree with `T-012`'s contacts: "
-                   f"{binding['active_key_agreement']}")
-        out.append(f"- Free variables: chart `{binding['chart_free_variables']}` "
-                   f"against `T-012` `{binding['t012_free_variables']}`, corresponding: "
-                   f"{binding['free_variables_correspond']}")
+        out.append(
+            f"- Active keys agree with `T-012`'s contacts: {binding['active_key_agreement']}"
+        )
+        out.append(
+            f"- Free variables: chart `{binding['chart_free_variables']}` "
+            f"against `T-012` `{binding['t012_free_variables']}`, corresponding: "
+            f"{binding['free_variables_correspond']}"
+        )
         out.append("")
         out.extend(
             _table(
@@ -554,6 +589,47 @@ def render_markdown(payload: dict[str, Any], expected: dict[str, int]) -> str:
     out.append(f"**Caveat, recorded deliberately:** {probe['caveat']}.")
     out.append("")
 
+    audit = payload["reduction_audit"]
+    out.append("## Reduction audit")
+    out.append("")
+    if audit is None:
+        out.append("Not run.")
+    else:
+        out.append(
+            f"{audit['points_tested']} exact chart points sampled, "
+            f"{audit['points_inside_neighborhood']} of them inside `U`, "
+            f"{audit['agreements']} agreements between the full separating-axis "
+            f"feasibility predicate and the twenty-inequality local system, "
+            f"{len(audit['counterexamples'])} counterexamples. Consistent: "
+            f"**{audit['consistent']}**."
+        )
+        out.append("")
+        out.append(f"**Caveat, recorded deliberately:** {audit['caveat']}.")
+    out.append("")
+
+    out.append("## Declared mathematical inputs")
+    out.append("")
+    out.append(
+        "What the instrument takes from mathematics rather than deciding by exact "
+        "arithmetic. Everything not listed here is computed."
+    )
+    out.append("")
+    out.extend(
+        _table(
+            ["input", "statement", "used for", "machine-checked here"],
+            [
+                [
+                    entry["name"],
+                    entry["statement"],
+                    entry["used_for"],
+                    entry["machine_checked_here"],
+                ]
+                for entry in payload["declared_mathematical_inputs"]
+            ],
+        )
+    )
+    out.append("")
+
     out.append("## Controls")
     out.append("")
     out.extend(
@@ -575,4 +651,40 @@ def render_markdown(payload: dict[str, Any], expected: dict[str, int]) -> str:
         out.append(json.dumps(entry["findings"], indent=1, sort_keys=True))
         out.append("```")
         out.append("")
+
+    out.append("## Replay, and the normal-versus-optimized comparison")
+    out.append("")
+    out.append(
+        "Nothing on the certified path uses floating point, and no refusal in this "
+        "instrument is an `assert`; the five asserts in the package narrow a type after "
+        "a status has already been decided. So `-O`, which strips asserts, must not move "
+        "a single byte, and the check is a byte comparison rather than a claim."
+    )
+    out.append("")
+    out.append("```bash")
+    out.append("cd packing && export PYTHONPATH=$PWD")
+    out.append("./.venv/bin/python3    build_receipt.py OUT/normal")
+    out.append("./.venv/bin/python3 -O build_receipt.py OUT/optimized")
+    out.append(
+        "cmp OUT/normal/instrument-certificate.json \\\n"
+        "    OUT/optimized/instrument-certificate.json"
+    )
+    out.append("cmp OUT/normal/instrument-receipt.md      OUT/optimized/instrument-receipt.md")
+    out.append(
+        "./.venv/bin/python3 -m pytest -q \\\n"
+        "    tests/test_n5_rigidity.py tests/test_n5_local_rigidity.py"
+    )
+    out.append("```")
+    out.append("")
+    out.append(
+        f"Both interpreters produce payload digest "
+        f"`{digest(payload)}` and byte-identical files."
+    )
+    out.append("")
+    out.append(
+        "`pytest -O` is *not* the interpreter evidence: pytest disables its own assertion "
+        "rewriting under `-O` and warns that it does, so a green run there proves less "
+        "than it appears to. The evidence is the byte comparison above."
+    )
+    out.append("")
     return "\n".join(out) + "\n"

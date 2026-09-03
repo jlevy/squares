@@ -120,11 +120,17 @@ FORBIDDEN_SLUGS = (
 OUTPUT_ROOT = Path("campaign/series/series-000-smoke-and-calibration/results")
 
 # --- Allocated identity -------------------------------------------------------------
-# These two lines are the coordinator's to confirm against the record it allocates for
+# These two lines are the coordinator's to confirm against the records it allocates for
 # BC-148.  Changing either changes SUCCESSOR_DRIVER_SHA256 and therefore the binding, so
 # both must be settled before the writer opens a chain.
-EXPERIMENT_ID = "exp-058"
-SESSION_ID = "session-083"
+#
+# SESSION_ID names the *lane's* session, not the coordinator's, exactly as exp-056 named
+# session-079 rather than agenda-015's coordinator session.  session-083 is Agenda 016's
+# coordinator, so the next free lane session is session-084.  exp-058 was taken by the
+# concurrent n = 5 lane while this package was being built, so the next free experiment
+# is exp-059.  Both are contested ids: confirm them against the allocated records.
+EXPERIMENT_ID = "exp-059"
+SESSION_ID = "session-084"
 
 HYPOTHESIS_ID = "H-052"
 SLUG = f"{EXPERIMENT_ID}-h-052-n17-fresh-successor-completion"

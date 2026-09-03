@@ -75,11 +75,7 @@ class HalfAngleTransform:
         u = Poly.variable(field, arity, index)
         one = Poly.constant(field, arity, field.one)
         c0, c1, c2 = (field.rational(value) for value in self.denominator_coefficients)
-        return (
-            one.scale(c0)
-            + u.scale(c1)
-            + (u * u).scale(c2)
-        )
+        return one.scale(c0) + u.scale(c1) + (u * u).scale(c2)
 
     def matrix(self, field: NumberField, arity: int, index: int) -> tuple[Poly, ...]:
         """`(m00, m01, m10, m11)` of the cleared rotation matrix."""
@@ -277,9 +273,7 @@ class Chart:
             checks.append(
                 IdentityCheck(
                     name=f"orthogonality/square-{square}",
-                    statement=(
-                        f"M(u{square})^T M(u{square}) = D{square}^2 * I over Q(sqrt 2)"
-                    ),
+                    statement=(f"M(u{square})^T M(u{square}) = D{square}^2 * I over Q(sqrt 2)"),
                     holds=(
                         m00 * m00 + m10 * m10 == squared
                         and m01 * m01 + m11 * m11 == squared
@@ -340,13 +334,13 @@ class Chart:
         one2 = Poly.constant(field, two, field.one)
         relation = s * s + c * c - one2
         # (1 + c)^2 + s^2 = 2(1 + c) modulo c^2 + s^2 = 1.
-        inclusion_denominator = ((one2 + c) * (one2 + c) + s * s) - (
-            one2 + c
-        ).scale(field.rational(2))
+        inclusion_denominator = ((one2 + c) * (one2 + c) + s * s) - (one2 + c).scale(
+            field.rational(2)
+        )
         # (1 + c)^2 - s^2 = 2c(1 + c) modulo c^2 + s^2 = 1.
-        inclusion_numerator = ((one2 + c) * (one2 + c) - s * s) - (
-            c * (one2 + c)
-        ).scale(field.rational(2))
+        inclusion_numerator = ((one2 + c) * (one2 + c) - s * s) - (c * (one2 + c)).scale(
+            field.rational(2)
+        )
         return [
             IdentityCheck(
                 name="injectivity/equal-cosine-forces-equal-squares",

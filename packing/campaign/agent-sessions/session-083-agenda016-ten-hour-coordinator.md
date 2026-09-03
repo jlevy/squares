@@ -125,18 +125,24 @@ session:
       170-row chain, ancestry distinction and package immutability against the agenda's
       declared hashes.
     operator: Claude Opus, maximum thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      All five checks passed. The declared checkpoint, progress and row-169 digests reproduce exactly; the on-disk bytes are canonical under the repository's own serializer; the retained chain is 170 contiguous rows with a live ordinal-170 marker; exp-052 genesis and exp-056 immediate parent are distinguishable and non-substitutable under four refusal probes.
+    evidence:
+    - 'exp-056 checkpoint 0d39a7e7, progress 0875f31f, row 169 8947b38e, all reproduced'
+    - 'four ancestry refusal probes each rejected the substituted binding'
+    files:
+    - 'scratchpad/bc147/frozen-binding-verification.md'
+    checks:
+    - 'sha256sum against committed git blobs agrees on all four frozen artifacts'
     uncertainty: >-
       Whether the on-disk bytes are canonical under the repository's own definition, and
       whether the declared hashes reproduce exactly.
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Admit or refuse dispatch on the returned verdict.
+    elapsed_seconds: 1830
+    elapsed_quality: platform_measured
+    next_action: >-
+      Two guard caveats were routed into BC-148: the forbidden-slug set does not cover exp-056, and re-invoking the exp-056 driver would overwrite the frozen checkpoint because run_target guards only on the result path.
     phase: 1
     budget_minutes: 30
     started_at: '2026-09-03T06:51:00Z'
@@ -184,18 +190,24 @@ session:
       accounting, the cited curve-selection transfer and the order-2m coefficient
       induction against T-012.
     operator: Claude Fable, maximum thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Froze a 925-line proof packet, sha256 28343b743e689fc99968d589a542d9022d061de8ec3ae5100bf4ef4930e40b6b, with seven passing replay scripts. The chart, the full constraint accounting, the T-012 transfer and the order-2m coefficient induction are written out; a second-order sufficiency proof is recorded separately as corroboration, explicitly not the acceptance route.
+    evidence:
+    - 'verify_chart.py, midpoint_check.py, c8_side_check.py, sosc_check.py, control_exp034.py all pass'
+    - 'exp-034 is disjoint from the fixed-side feasible set by exactly 3*sqrt(2)/4 - 1, so it does not refute H-060'
+    files:
+    - 'scratchpad/bc152/h060-chart-and-proof.md'
+    checks:
+    - 'all seven replay scripts rerun clean after the packet was amended'
     uncertainty: >-
       Whether the curve-selection hypotheses reduce to this chart, and whether the
       second-order contradiction closes without an unproved tensegrity appeal.
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Route the frozen packet to an independent reviewer in BC-153.
+    elapsed_seconds: 4900
+    elapsed_quality: platform_measured
+    next_action: >-
+      Independent review in BC-153 after the instrument-ready checkpoint; the curve-selection primary-text obligation remains open.
     phase: 2
     budget_minutes: 360
     started_at: '2026-09-03T06:51:00Z'
@@ -215,20 +227,25 @@ session:
       BC-152 W1 — close H-060's named structural-rigidity, Goebel and Kingbird prior-art
       gaps so the eventual result can be classified honestly.
     operator: Claude Fable, maximum thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Closed all three named gaps. Goebel proved only the bound and his text contains no rigidity or uniqueness claim. Kingbird asserts exactly this property for n = 5 with no method anywhere on the site, so the statement is not novel but a proof is. No stated structural-rigidity theorem applies, though the closing principle is the classical second-order sufficiency condition and must not be claimed as new.
+    evidence:
+    - "goebel1979 text layer extracted: 'rigid' and 'unique' occur zero times"
+    - 'Kingbird rigid-page definition retrieved 2026-09-03; page not archived'
+    - 'Connelly-Whiteley 1996 is point-pair distances; disk jamming needs a non-negative quadratic term, false here at q = -1/2; Donev et al. 2007 defer sharp corners and flat edges'
+    files:
+    - 'scratchpad/bc152-novelty/h060-prior-art.md'
+    checks:
+    - 'every verdict cited to a repository path or a retrieved primary text'
     uncertainty: >-
       Whether the retained literature archive is sufficient to settle novelty, or whether
       an unheld source is required.
-    elapsed_seconds: null
-    elapsed_quality: null
+    elapsed_seconds: 4400
+    elapsed_quality: platform_measured
     next_action: >-
-      Supply the novelty basis BC-153 must independently accept before any result-register
-      entry.
+      The admissible claim is capped at S3 as first exact proof, not first statement; BC-153 must independently accept that novelty basis before any result-register entry.
     phase: 2
     budget_minutes: 120
     started_at: '2026-09-03T06:55:00Z'

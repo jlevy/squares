@@ -36,7 +36,6 @@ from sqpack.local_rigidity.polynomial import Poly
 from sqpack.local_rigidity.receipt import build_payload, digest, element_algebraic
 from sqpack.local_rigidity.system import (
     DisjunctiveTouchError,
-    build_book,
     build_neighborhood,
     build_system,
     is_feasible,
@@ -64,6 +63,13 @@ def system(chart: Chart):
 @pytest.fixture(scope="module")
 def t012():
     return load_t012_system()
+
+
+@pytest.fixture(scope="module")
+def determination(chart: Chart, t012):
+    """Built once: the reduction audit evaluates several hundred exact chart points."""
+    built, _ = assess(chart, t012)
+    return built
 
 
 # -- the chart's own algebra -------------------------------------------------
@@ -157,9 +163,7 @@ def test_every_touching_pair_touches_along_exactly_one_support_feature(system) -
             branch for branch in report.branches if branch.minimum().margin.sign() == 0
         ]
         assert len(zero_branches) == 1
-        zeros = [
-            one for one in zero_branches[0].constraints if one.margin.sign() == 0
-        ]
+        zeros = [one for one in zero_branches[0].constraints if one.margin.sign() == 0]
         assert len(zeros) == 1
         assert sum(1 for branch in report.branches if branch.minimum().margin.sign() < 0) == 7
 
@@ -346,9 +350,8 @@ def test_an_edge_flush_touch_is_refused_rather_than_intersected() -> None:
         build_system(Chart(pose))
 
 
-def test_every_control_rejects(chart: Chart, system, t012) -> None:
+def test_every_control_rejects(chart: Chart, system, t012, determination) -> None:
     """A certificate that cannot fail is not evidence. All eight must refuse."""
-    determination, _ = assess(chart, t012)
     outcomes = controls.run_all(chart, system, determination, t012)
     assert [one.name for one in outcomes] == [
         "changed_feature",
@@ -364,9 +367,8 @@ def test_every_control_rejects(chart: Chart, system, t012) -> None:
     assert not failed, f"controls that failed to reject: {failed}"
 
 
-def test_the_determination_never_claims_isolation(chart: Chart, t012) -> None:
+def test_the_determination_never_claims_isolation(determination) -> None:
     """The instrument builds the object the proof needs; it does not prove the theorem."""
-    determination, _ = assess(chart, t012)
     assert determination.instrument_ready
     assert determination.isolation_decided is False
     assert determination.probe.tested == 180
@@ -374,14 +376,47 @@ def test_the_determination_never_claims_isolation(chart: Chart, t012) -> None:
     assert "isolation" in determination.probe.probe_is_not_a_proof.lower()
 
 
-def test_the_receipt_digest_is_stable_and_moves_under_drift(chart: Chart, t012) -> None:
+def test_the_receipt_digest_is_stable_and_moves_under_drift(determination, system) -> None:
     """Replayability, as a byte comparison rather than a claim."""
-    determination, system = assess(chart, t012)
     payload = build_payload(determination, system)
     assert digest(payload) == digest(build_payload(determination, system))
     outcome = controls.certificate_drift(determination, system)
     assert outcome.rejected
     assert outcome.findings["digest"] != outcome.findings["after_margin_mutation"]
+
+
+def test_the_local_reduction_agrees_with_full_feasibility_inside_the_neighborhood(
+    system, determination
+) -> None:
+    """The reduction is a statement about `U`, so it is checked as one.
+
+    At every sampled chart point that lies inside `U`, the full eight-branch
+    separating-axis predicate and the twenty-inequality local system must return the same
+    verdict. One disagreement would mean the reduction as written is false; agreement is
+    corroboration of the statement, and the continuity argument remains the proof.
+    """
+    audit = determination.audit
+    assert audit is not None
+    assert audit.consistent
+    assert audit.counterexamples == ()
+    assert audit.points_inside > 0
+    assert audit.agreements == audit.points_inside
+    assert "corroborates" in audit.audit_is_not_a_proof
+
+
+def test_the_mathematical_inputs_are_declared_rather_than_implied(determination) -> None:
+    """The boundary between what is computed and what is cited is written down."""
+    from sqpack.local_rigidity.instrument import (  # noqa: PLC0415 - record, not behaviour
+        DECLARED_MATHEMATICAL_INPUTS,
+    )
+
+    names = {entry["name"] for entry in DECLARED_MATHEMATICAL_INPUTS}
+    assert "separating-axis theorem for convex polygons" in names
+    assert "continuity of polynomials" in names
+    assert all(
+        set(entry) == {"name", "statement", "used_for", "machine_checked_here"}
+        for entry in DECLARED_MATHEMATICAL_INPUTS
+    )
 
 
 # -- the polynomial engine ---------------------------------------------------
@@ -392,20 +427,25 @@ def test_the_polynomial_engine_differentiates_and_restricts_exactly() -> None:
     field = build()[2]
     x = Poly.variable(field, 2, 0)
     y = Poly.variable(field, 2, 1)
-    polynomial = (x * x).scale(field.rational(3)) + x * y - Poly.constant(
-        field, 2, field.alpha
-    )
+    polynomial = (x * x).scale(field.rational(3)) + x * y - Poly.constant(field, 2, field.alpha)
     assert polynomial.degree() == 2
     assert polynomial.support() == (0, 1)
-    assert element_algebraic(
-        polynomial.evaluate([field.rational(1), field.rational(2)])
-    ) == "5 - sqrt(2)"
-    assert element_algebraic(
-        polynomial.derivative(0).evaluate([field.rational(1), field.rational(1)])
-    ) == "7"
+    assert (
+        element_algebraic(polynomial.evaluate([field.rational(1), field.rational(2)]))
+        == "5 - sqrt(2)"
+    )
+    assert (
+        element_algebraic(
+            polynomial.derivative(0).evaluate([field.rational(1), field.rational(1)])
+        )
+        == "7"
+    )
     jet = polynomial.restrict_to_line([field.rational(1), field.rational(1)])
     assert element_algebraic(jet[0]) == "-sqrt(2)"
     assert element_algebraic(jet[2]) == "4"
-    assert element_algebraic(
-        polynomial.second_derivative_along([field.rational(1), field.rational(1)])
-    ) == "8"
+    assert (
+        element_algebraic(
+            polynomial.second_derivative_along([field.rational(1), field.rational(1)])
+        )
+        == "8"
+    )

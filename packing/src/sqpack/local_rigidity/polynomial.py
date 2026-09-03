@@ -110,10 +110,7 @@ class Poly:
     def support(self) -> tuple[int, ...]:
         """The variables this polynomial actually mentions, ascending."""
         used = {
-            index
-            for exponents in self.terms
-            for index, power in enumerate(exponents)
-            if power
+            index for exponents in self.terms for index, power in enumerate(exponents) if power
         }
         return tuple(sorted(used))
 
@@ -124,9 +121,7 @@ class Poly:
         combined = dict(self.terms)
         for exponents, coefficient in other.terms.items():
             combined[exponents] = (
-                combined[exponents] + coefficient
-                if exponents in combined
-                else coefficient
+                combined[exponents] + coefficient if exponents in combined else coefficient
             )
         return Poly.from_terms(self.field, self.arity, combined)
 
@@ -145,9 +140,7 @@ class Poly:
         product: dict[Exponents, FieldElement] = {}
         for left_exponents, left in self.terms.items():
             for right_exponents, right in other.terms.items():
-                key = tuple(
-                    a + b for a, b in zip(left_exponents, right_exponents, strict=True)
-                )
+                key = tuple(a + b for a, b in zip(left_exponents, right_exponents, strict=True))
                 value = left * right
                 product[key] = product[key] + value if key in product else value
         return Poly.from_terms(self.field, self.arity, product)

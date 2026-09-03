@@ -60,7 +60,6 @@ from sqpack.local_rigidity.system import (
     Neighborhood,
     StrictCondition,
     build_book,
-    build_neighborhood,
     build_system,
     is_feasible,
 )
@@ -89,9 +88,7 @@ class ControlOutcome:
 # -- C1 changed feature ------------------------------------------------------
 
 
-def changed_feature(
-    chart: Chart, system: ConstraintSystem, t012: T012System
-) -> ControlOutcome:
+def changed_feature(chart: Chart, system: ConstraintSystem, t012: T012System) -> ControlOutcome:
     """Rename each contact onto every sibling support feature of its own branch.
 
     Twelve substitutions at `n = 5`: four touching pairs, three siblings each. Every one
@@ -114,18 +111,14 @@ def changed_feature(
         contact = report.active_constraint
         position = t012.contact_keys.index(contact.key)
         scale = embed(field, t012.scales[position])
-        transported = [
-            embed(field, target) for target in t012.rational_rows[position]
-        ]
+        transported = [embed(field, target) for target in t012.rational_rows[position]]
         for substitute in report.active_branch.constraints:
             if substitute.key == contact.key:
                 continue
             gradient = substitute.polynomial.gradient()
             differs = any(
                 (value * scale - (target * two if index % DOF == 2 else target)).sign() != 0
-                for index, (value, target) in enumerate(
-                    zip(gradient, transported, strict=True)
-                )
+                for index, (value, target) in enumerate(zip(gradient, transported, strict=True))
             )
             claimed = (active_keys - {contact.key}) | {substitute.key}
             substitutions.append(
@@ -368,9 +361,7 @@ def wrong_chart(pose: BasePose) -> ControlOutcome:
 # -- C7 certificate drift ----------------------------------------------------
 
 
-def certificate_drift(
-    determination: Determination, system: ConstraintSystem
-) -> ControlOutcome:
+def certificate_drift(determination: Determination, system: ConstraintSystem) -> ControlOutcome:
     """Change one retained margin and require the digest to move."""
     payload = build_payload(determination, system)
     before = digest(payload)
@@ -382,7 +373,7 @@ def certificate_drift(
     third = digest(second)
     return ControlOutcome(
         name="certificate_drift",
-        rejected=(before != after) and (before != third) and digest(payload) == before,
+        rejected=before not in (after, third) and digest(payload) == before,
         mechanism="SHA-256 over canonical sorted JSON of the exact record",
         detail=(
             "mutating one wall margin and, separately, one neighborhood condition's "

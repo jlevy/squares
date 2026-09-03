@@ -702,3 +702,77 @@ def test_recording_the_same_round_twice_is_refused(tree: Tree) -> None:
         runner.record(eid, operator="fixture")
     with pytest.raises(runner.RefusalError, match="not in-progress"):
         runner.execute(eid)
+
+
+def test_a_result_may_not_be_attributed_to_another_cell(tmp_path: Path) -> None:
+    """A command run for one declared cell must not score against a different one."""
+    sink = tmp_path / "archive.jsonl"
+    with sink.open("w") as fh:
+        with pytest.raises(runner.GuardError, match="claims n=9 but the command was run"):
+            runner.read_lines(runner.grid_result_line(9, 1), fh, expect_n=4, expect_seed=1)
+        with pytest.raises(runner.GuardError, match="claims seed=2 but the command was run"):
+            runner.read_lines(runner.grid_result_line(4, 2), fh, expect_n=4, expect_seed=1)
+
+    assert sink.read_text() == ""
+
+
+def test_a_matching_line_is_still_archived(tmp_path: Path) -> None:
+    sink = tmp_path / "archive.jsonl"
+    with sink.open("w") as fh:
+        best = runner.read_lines(runner.grid_result_line(4, 1), fh, expect_n=4, expect_seed=1)
+
+    assert best == 2.0
+    assert len(sink.read_text().splitlines()) == 1
+
+
+def _pose_line(*, overlap_depth: float = 0.0, understate: float = 0.0) -> str:
+    """A grid pose, optionally pushed into itself or given a side it cannot support."""
+    x, y, t, side = runner.grid_pose(4)
+    x = list(x)
+    x[1] -= overlap_depth
+    return json.dumps(
+        {
+            "n": 4,
+            "seed": 1,
+            "best_side": side - understate,
+            "overlap": 0,
+            "x": x,
+            "y": y,
+            "t": t,
+        }
+    )
+
+
+@pytest.mark.parametrize("depth", [2e-9, 1e-8, 1e-6, 1e-3])
+def test_the_oracle_refuses_an_overlap_above_the_declared_tolerance(
+    tmp_path: Path, depth: float
+) -> None:
+    archive = tmp_path / "a.jsonl"
+    archive.write_text(_pose_line(overlap_depth=depth) + "\n")
+
+    assert runner.verify_archive_poses(archive)["verified"] is False
+
+
+@pytest.mark.parametrize("shortfall", [2e-9, 1e-8, 1e-6, 1e-3])
+def test_the_oracle_refuses_a_side_understated_above_the_declared_tolerance(
+    tmp_path: Path, shortfall: float
+) -> None:
+    archive = tmp_path / "a.jsonl"
+    archive.write_text(_pose_line(understate=shortfall) + "\n")
+
+    assert runner.verify_archive_poses(archive)["verified"] is False
+
+
+def test_the_detection_floor_is_far_below_the_decision_threshold(tmp_path: Path) -> None:
+    """What the tolerance costs, stated as a measurement rather than an assurance.
+
+    A fabrication small enough to slip past the oracle is 1e-9-ish, five orders of
+    magnitude below the 1e-4 basin gap the campaign actually decides on, so no evadable
+    forgery can manufacture a basin hit or a record. This pins that ratio: if the
+    tolerance is ever loosened towards the decision threshold, this fails.
+    """
+    below = tmp_path / "below.jsonl"
+    below.write_text(_pose_line(overlap_depth=1e-10) + "\n")
+
+    assert runner.verify_archive_poses(below)["verified"] is True
+    assert runner.POSE_TOLERANCE <= runner.REACHED_BASIN / 1e4

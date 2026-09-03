@@ -253,9 +253,11 @@ class ConstraintSystem:
         rows: list[tuple[str, Poly]] = [
             (constraint.key, constraint.polynomial) for constraint in self.active_walls
         ]
-        for report in self.touching_pairs:
-            assert report.active_constraint is not None
-            rows.append((report.active_constraint.key, report.active_constraint.polynomial))
+        rows.extend(
+            (report.active_constraint.key, report.active_constraint.polynomial)
+            for report in self.touching_pairs
+            if report.active_constraint is not None
+        )
         return tuple(rows)
 
     def counts(self) -> dict[str, int]:
@@ -318,11 +320,7 @@ def _pair_polynomial(chart: Chart, host: int, edge: int, moving: int, corner: in
     hx, hy = chart.centre(host)
     shifted_x = px - moving_denominator * hx
     shifted_y = py - moving_denominator * hy
-    return (
-        nx * shifted_x
-        + ny * shifted_y
-        - (host_denominator * moving_denominator).scale(half)
-    )
+    return nx * shifted_x + ny * shifted_y - (host_denominator * moving_denominator).scale(half)
 
 
 def build_book(chart: Chart) -> InequalityBook:
@@ -351,10 +349,11 @@ def build_book(chart: Chart) -> InequalityBook:
                     )
                 )
 
-    pairs: list[tuple[PairBranch, ...]] = []
-    for first in range(pose.count):
-        for second in range(first + 1, pose.count):
-            pairs.append(_pair_branches(chart, first, second, origin))
+    pairs: list[tuple[PairBranch, ...]] = [
+        _pair_branches(chart, first, second, origin)
+        for first in range(pose.count)
+        for second in range(first + 1, pose.count)
+    ]
     return InequalityBook(chart=chart, walls=tuple(walls), pairs=tuple(pairs))
 
 
@@ -375,9 +374,7 @@ def build_system(chart: Chart) -> ConstraintSystem:
                 "margin; the declared base pose is not a packing"
             )
     reports = tuple(_pair_report(chart, group) for group in book.pairs)
-    return ConstraintSystem(
-        chart=chart, walls=book.walls, pairs=reports, book=book
-    )
+    return ConstraintSystem(chart=chart, walls=book.walls, pairs=reports, book=book)
 
 
 def _pair_branches(
@@ -444,9 +441,7 @@ def _pair_report(chart: Chart, branches: tuple[PairBranch, ...]) -> PairReport:
         )
     active_branch = zero_branches[0]
     zero_corners = [
-        constraint
-        for constraint in active_branch.constraints
-        if constraint.margin.sign() == 0
+        constraint for constraint in active_branch.constraints if constraint.margin.sign() == 0
     ]
     if len(zero_corners) != 1:
         raise DisjunctiveTouchError(
@@ -523,30 +518,29 @@ def build_neighborhood(system: ConstraintSystem) -> Neighborhood:
     hold. The pair step is the separating-axis theorem: with seven branches refuted, the
     disjunction collapses to the eighth.
     """
-    conditions: list[StrictCondition] = []
-    for constraint in system.inactive_walls:
-        conditions.append(
-            StrictCondition(
-                key=constraint.key,
-                role="inactive-wall-stays-slack",
-                sense="positive",
-                margin=constraint.margin,
-                polynomial=constraint.polynomial,
-            )
+    conditions: list[StrictCondition] = [
+        StrictCondition(
+            key=constraint.key,
+            role="inactive-wall-stays-slack",
+            sense="positive",
+            margin=constraint.margin,
+            polynomial=constraint.polynomial,
         )
+        for constraint in system.inactive_walls
+    ]
     for report in system.pairs:
         if report.status == "noncontact":
             assert report.witness_branch is not None
-            for constraint in report.witness_branch.constraints:
-                conditions.append(
-                    StrictCondition(
-                        key=constraint.key,
-                        role="noncontact-pair-stays-separated",
-                        sense="positive",
-                        margin=constraint.margin,
-                        polynomial=constraint.polynomial,
-                    )
+            conditions.extend(
+                StrictCondition(
+                    key=constraint.key,
+                    role="noncontact-pair-stays-separated",
+                    sense="positive",
+                    margin=constraint.margin,
+                    polynomial=constraint.polynomial,
                 )
+                for constraint in report.witness_branch.constraints
+            )
             continue
         assert report.active_branch is not None
         assert report.active_constraint is not None
@@ -609,7 +603,8 @@ def is_feasible(book: InequalityBook, point: list[FieldElement]) -> bool:
 
 
 def chart_point(
-    chart: Chart, displacements: dict[int, tuple[FieldElement, FieldElement]],
+    chart: Chart,
+    displacements: dict[int, tuple[FieldElement, FieldElement]],
     angles: dict[int, FieldElement],
 ) -> list[FieldElement]:
     """Assemble a chart point from per-square displacements and half-angle parameters."""

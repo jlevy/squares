@@ -388,7 +388,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 57 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 58 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -453,13 +453,14 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | H-057 | unresolved | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 1 | 107.833m agent + 12.3m wall |
 | H-058 | unresolved | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 2 | 115.667m agent + 115.7m wall |
 | H-059 | confirmed | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 1 | 92m agent + 1s wall |
-| H-060 | blocked | proof | At the exact container side 2 + sqrt(2)/2, Goebel's exact n = 5 packin |  | 0 |  |
+| H-060 | needs review | proof | At the exact container side 2 + sqrt(2)/2, Goebel's exact n = 5 packin |  | 1 | 11s wall |
 
 ## Needs review — held for a human, not decided
 
 | id | hypotheses | decision | why it was not decided |
 | --- | --- | --- | --- |
 | exp-050 | H-054 | unresolved | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
+| exp-058 | H-060 | unresolved | Both accept conditions are unmet and both reject conditions are absent, so the only honest disposition is unresolved. The chart is not CHECKED in the criterion's sense -- every number in it was computed by scratchpad sympy, not by a repository instrument, and the W7 tool, its neighbourhood receipt and the eight rejecting controls C1-C8 do not exist, which is why H-060 keeps instrument_ready false. The argument is not REVIEWED -- BC-153 has not run -- and its curve-selection step rests on two independent secondary quotations rather than on BCR Proposition 8.1.13 itself. The corroborating second-order-sufficiency proof recorded in the artifact reaches the same conclusion from strictly weaker hypotheses, but acceptance was preregistered on the curve-selection route, so it discharges nothing. What this round does establish is that the mathematics of the registered route is complete on paper and replays exactly, that the agenda's constraint counts are confirmed with no discrepancy, and that the one known nonconstant feasible arc lives at a different container side |
 
 ## Rounds
 
@@ -478,7 +479,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | exp-037 | series-000 | 29 | openai-codex | H-042 | The retained serialization has six numerical orientation classes, with minimum class gap 0.296067 degrees against a 1e-90 degree interval radius. |
 | exp-041 | series-000 | 5 | openai-codex | H-023 | The frozen complete-zero-inventory clause is false: one additional owner axis is zero only at the positive endpoint, while independent control review also found mutation-reason and partial-disposition guards that remain unfinished. |
 
-### unresolved (13)
+### unresolved (14)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -495,6 +496,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | exp-054 | series-000 | 68 | openai-codex | H-058 | The target-blind adapter passed its complete author-side and different-lane W2 admission gates, so H-058's instrument is ready for a separately preregistered target phase. This round opened no network or target source and created no exp-054 result, so it supplies no H-058 sample and cannot accept or reject the claim. Whole-result verification shares the frozen refusal.verify proof-replay kernel with the producer path, although its shape, binding and publication checks are separate. The reported side token also remains intentionally unbound; the production path therefore yields three typed `serialization-refusal` outcomes until a later preregistration supplies admissible exact or directional semantics. |
 | exp-056 | series-000 | 17 | claude-opus-5 then openai-codex-max-equivalent coordinator | H-052 | The fixed 11:23Z timebox ended before all 181 paired rows completed. The retained 170-row prefix is valid process evidence, every completed pair agrees exactly and the interrupted ordinal was not appended, but a prefix does not satisfy H-052's all-direction criterion. No canonical result exists, so H-052 remains neither accepted nor rejected and the terminal decision stays review-pending for BC-145. |
 | exp-057 | series-000 | 68 | claude-opus-5 | H-058 | The release supports the literal printed-rational point model but supplies no provenance for applying either six-decimal coordinate rule to its fourteen-digit side token, so the conjunctive binding stops before BC-139 and H-058 remains unmeasured. |
+| exp-058 | series-000 | 5 | Claude (agent), BC-152 n = 5 proof lane of agenda-016, bead think-760r | H-060 | Both accept conditions are unmet and both reject conditions are absent, so the only honest disposition is unresolved. The chart is not CHECKED in the criterion's sense -- every number in it was computed by scratchpad sympy, not by a repository instrument, and the W7 tool, its neighbourhood receipt and the eight rejecting controls C1-C8 do not exist, which is why H-060 keeps instrument_ready false. The argument is not REVIEWED -- BC-153 has not run -- and its curve-selection step rests on two independent secondary quotations rather than on BCR Proposition 8.1.13 itself. The corroborating second-order-sufficiency proof recorded in the artifact reaches the same conclusion from strictly weaker hypotheses, but acceptance was preregistered on the curve-selection route, so it discharges nothing. What this round does establish is that the mathematics of the registered route is complete on paper and replays exactly, that the agenda's constraint counts are confirmed with no discrepancy, and that the one known nonconstant feasible arc lives at a different container side |
 
 ### blocked (6)
 
@@ -556,10 +558,11 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | exp-049 | H-052 | 65.3333m agent + 65.3m wall | timebox | Frozen package-manifest SHA-256 309ec24158f73dd2e9b837c773b1 |  |
 | exp-052 | H-052 | 74.2667m agent + 74.3m wall | timebox | Canonical checkpoint SHA-256 db5c156959b6de4e6f2c9be283454d0 |  |
 | exp-056 | H-052 | 356.0m wall | timebox | Canonical child checkpoint SHA-256 0d39a7e734e8afc62fda914fd |  |
+| exp-058 | H-060 | 11s wall | dependency | the frozen packet installed as X-012, SHA-256 28343b743e689f | the W7 instrument emits a neighbourhood receipt for this cha |
 
 ## Effort
 
-57 rounds, 1738.1 agent-minutes, 791.6 wall-minutes.
+58 rounds, 1738.1 agent-minutes, 791.8 wall-minutes.
 
 ## Exploration reports not yet codified
 
@@ -568,6 +571,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 - X-006 — The candidate discriminating control at n = 5 is the one D-034 has been quoting
 - X-008 — The shapes the grammar cannot express are the ones that are not tilted
 - X-010 — Two lanes, two ladders — focusing the campaign on first-party theorems
+- X-012 — One chart, four hundred inequalities, and an order-2m contradiction
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -1,0 +1,228 @@
+{
+  "contract": "packing.squares:LocalRigidityProofPacket/v1",
+  "schema_version": 1,
+  "experiment": "exp-058",
+  "hypothesis": "H-060",
+  "commitment": "BC-152",
+  "agenda": "agenda-016",
+  "bead": "think-760r",
+  "date": "2026-09-03",
+  "instance": {
+    "axis": "n",
+    "point": 5
+  },
+  "disposition": {
+    "hypothesis_status": "unresolved",
+    "instrument_ready": false,
+    "review_state": "review-pending",
+    "reviewed_by": null,
+    "next_review": "BC-153",
+    "frontier_change": null,
+    "note": "The mathematics of the registered acceptance route is complete on paper and replayed exactly here, but the W7 repository instrument, its receipt and the eight rejecting controls do not exist, and the curve-selection citation is not confirmed against a primary text. H-060 is therefore unresolved and remains instrument_ready: false. No frontier or result-register change is implied."
+  },
+  "environment": {
+    "interpreter": "packing/.venv/bin/python3",
+    "python": "3.14.7",
+    "sympy": "1.14.0",
+    "arithmetic": "exact over Q(sqrt 2) via sympy, independent of sqpack.field",
+    "repository_access": "read-only; no repository file was modified by the packet lane"
+  },
+  "frozen_packet": {
+    "installed_as": "packing/campaign/explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md",
+    "source_name": "h060-chart-and-proof.md",
+    "sha256": "28343b743e689fc99968d589a542d9022d061de8ec3ae5100bf4ef4930e40b6b",
+    "bytes": 53646,
+    "lines": 926,
+    "note": "The installed exploration report reproduces this packet's content. It is reformatted to house Markdown conventions and carries an installation preface and the common-doc footer, so its bytes differ from the frozen source; no mathematical statement, number, count, citation or claim boundary was altered. This sha256 identifies the frozen source, not the installed file."
+  },
+  "replay_scripts": {
+    "retained_as": "verbatim source text in this record",
+    "installed_as_repository_code": false,
+    "reason": "The campaign tree holds records, not code: no .py file exists anywhere under packing/campaign/. The executable form of this mathematics is the W7 extension of devtools.assess_n5_rigidity, which is owned by a separate lane and does not exist yet, so promoting these scratchpad scripts to repository tooling would both cross that lane's boundary and leave a measurement in one-off code (OR-1). Their bytes and hashes are retained here as the round's raw run data so the replay stays checkable.",
+    "scripts": [
+      {
+        "name": "verify_chart.py",
+        "sha256": "937f5f4dfa3367353804492fda11a9640018c1a4fbbfeb9d46735da66a7a2aad",
+        "bytes": 10558,
+        "replays": "Pose read corner-for-corner from cases.gobel5; all 80 wall-corner and 320 pair elementary margins classified by exact sign; the 20 cleared chart polynomials and their 2-jets; A_chart = A_geo J, H_chart = J^T H_geo J, q_chart = 4 q_geo; the 28 T-012 Farkas certificates and the self-stress replayed on S A_chart; each pair polynomial restricted to the flex line equal to -t4^2.",
+        "invocation": "packing/.venv/bin/python3 verify_chart.py",
+        "replayed_2026_09_03": true,
+        "source": "\"\"\"Independent sympy check of the H-060 chart, constraint accounting and T-012 transfer.\n\nRuns read-only against the repository (PYTHONPATH=packing). Writes nothing outside stdout.\n\"\"\"\nimport itertools, json, sys, re\nimport sympy as sp\nfrom sympy import sqrt, Rational as Q, Matrix, symbols, pi, cos, sin, simplify, expand\n\nr2 = sqrt(2)\ns = 2 + r2/2\n\n# ---- pose in (centre, angle) coordinates, corner ordering as in cases.gobel5 -----------\ncentres0 = [(Q(1,2), Q(1,2)), (s-Q(1,2), Q(1,2)), (Q(1,2), s-Q(1,2)), (s-Q(1,2), s-Q(1,2)), (s/2, s/2)]\nthetas0 = [0, 0, 0, 0, pi/4]\nR_BODY = [(Q(-1,2),Q(-1,2)), (Q(1,2),Q(-1,2)), (Q(1,2),Q(1,2)), (Q(-1,2),Q(1,2))]\nNU = [(0,-1),(1,0),(0,1),(-1,0)]  # body-frame outward normals, edge e = corner e -> e+1\n\ndef rot(th):\n    return Matrix([[cos(th), -sin(th)],[sin(th), cos(th)]])\n\ndef corner_geo(c, th, k):\n    v = rot(th) * Matrix(R_BODY[k])\n    return (c[0] + v[0], c[1] + v[1])\n\ndef normal_geo(th, e):\n    v = rot(th) * Matrix(NU[e])\n    return (v[0], v[1])\n\ndef S(x):  # exact simplification of Q(sqrt2) expressions\n    return sp.nsimplify(sp.simplify(sp.expand(x)), [r2])\n\n# check the pose corners equal cases.gobel5 corners\nsys.path.insert(0, '/home/user/squares/packing')\nfrom cases.gobel5.packing import build\nsquares_f, side_f, field = build()\ndef fe(x):  # FieldElement -> sympy\n    a, b = x.coeffs\n    return Q(a) + Q(b)*r2\nfor i in range(5):\n    for k in range(4):\n        px, py = corner_geo(centres0[i], thetas0[i], k)\n        fx, fy = squares_f[i][k]\n        assert S(px - fe(fx)) == 0 and S(py - fe(fy)) == 0, (i, k)\nassert S(s - fe(side_f)) == 0\nprint(\"pose matches cases.gobel5 corner-for-corner\")\n\n# ---- (b) wall accounting: 80 inequalities ---------------------------------------------\nWALLS = {\"left\": lambda p: p[0], \"bottom\": lambda p: p[1], \"right\": lambda p: s - p[0], \"top\": lambda p: s - p[1]}\nwall_active, wall_inactive = [], []\nfor i in range(5):\n    for k in range(4):\n        p = corner_geo(centres0[i], thetas0[i], k)\n        for w, f in WALLS.items():\n            m = S(f(p))\n            assert m >= 0\n            (wall_active if m == 0 else wall_inactive).append(((i, k, w), m))\nprint(f\"wall: {len(wall_active)} active, {len(wall_inactive)} inactive; min inactive margin = {min(m for _, m in wall_inactive)} = {float(min(m for _, m in wall_inactive)):.6f}\")\nassert len(wall_active) == 16 and len(wall_inactive) == 64\n\n# ---- (b) pair accounting: 10 pairs x 8 (owner,edge) branches x 4 corners ---------------\ndef branch_margins(owner, other, e):\n    n = normal_geo(thetas0[owner], e)\n    out = []\n    for k in range(4):\n        p = corner_geo(centres0[other], thetas0[other], k)\n        out.append(S((p[0]-centres0[owner][0])*n[0] + (p[1]-centres0[owner][1])*n[1] - Q(1,2)))\n    return out\n\ntouching, nontouching = {}, {}\nfor i, j in itertools.combinations(range(5), 2):\n    branches = {}\n    for owner, other in ((i, j), (j, i)):\n        for e in range(4):\n            branches[(owner, e)] = branch_margins(owner, other, e)\n    satisfied = {b: ms for b, ms in branches.items() if all(m >= 0 for m in ms)}\n    strict = {b: ms for b, ms in satisfied.items() if all(m > 0 for m in ms)}\n    violated = {b: ms for b, ms in branches.items() if any(m < 0 for m in ms)}\n    assert len(satisfied) + len(violated) == 8, \"every branch must be classified by strict sign\"\n    if strict:\n        best = max(strict.items(), key=lambda kv: min(kv[1]))\n        nontouching[(i, j)] = best\n    else:\n        assert len(satisfied) == 1, (i, j, satisfied)\n        (b, ms), = satisfied.items()\n        zeros = [k for k, m in enumerate(ms) if m == 0]\n        assert len(zeros) == 1, (i, j, ms)\n        # every other branch strictly violated: record most negative corner\n        witnesses = {bb: min(mm) for bb, mm in violated.items()}\n        assert all(v < 0 for v in witnesses.values())\n        touching[(i, j)] = (b, zeros[0], ms, witnesses)\nprint(f\"pairs: {len(touching)} touching, {len(nontouching)} non-touching\")\nfor pr, (b, k, ms, wit) in touching.items():\n    print(f\"  touching {pr}: separating branch owner={b[0]} edge={b[1]}, active corner={k}, corner margins={ms}\")\n    print(f\"     violated-branch witnesses (owner,edge)->min corner margin: { {bb: str(v) for bb, v in wit.items()} }\")\nfor pr, (b, ms) in nontouching.items():\n    print(f\"  non-touching {pr}: witness branch owner={b[0]} edge={b[1]}, corner margins={ms}\")\nassert len(touching) == 4 and len(nontouching) == 6\n\n# ---- (a),(d) half-angle chart polynomials and 2-jets ------------------------------------\nZ = []\nfor i in range(5):\n    Z += list(symbols(f\"dx{i} dy{i} t{i}\"))\ndef chart_rot(i):\n    t = Z[3*i+2]\n    return rot(thetas0[i]) * Matrix([[1-t**2, -2*t],[2*t, 1-t**2]])   # times 1/(1+t^2)\ndef chart_corner_num(i, k):  # numerator of corner; denominator (1+t_i^2)\n    t = Z[3*i+2]\n    c = (centres0[i][0] + Z[3*i], centres0[i][1] + Z[3*i+1])\n    v = chart_rot(i) * Matrix(R_BODY[k])\n    return (c[0]*(1+t**2) + v[0], c[1]*(1+t**2) + v[1])\ndef chart_normal_num(h, e):\n    v = chart_rot(h) * Matrix(NU[e])\n    return (v[0], v[1])\n\ndef wall_poly(i, k, w):\n    t = Z[3*i+2]\n    px, py = chart_corner_num(i, k)\n    return {\"left\": px, \"bottom\": py, \"right\": s*(1+t**2) - px, \"top\": s*(1+t**2) - py}[w]\ndef pair_poly(i, k, h, e):\n    ti, th = Z[3*i+2], Z[3*h+2]\n    px, py = chart_corner_num(i, k)          # over (1+ti^2)\n    nx, ny = chart_normal_num(h, e)          # over (1+th^2)\n    cx, cy = centres0[h][0] + Z[3*h], centres0[h][1] + Z[3*h+1]\n    # ((p - c_h).n - 1/2) * (1+ti^2)(1+th^2)\n    return (px - cx*(1+ti**2))*nx + (py - cy*(1+ti**2))*ny - Q(1,2)*(1+ti**2)*(1+th**2)\n\n# the 20 active constraints, in the order of the retained record\nfrom devtools.assess_n5_rigidity import load_pose, active_contacts, constraint_rows, row_scales, second_order_terms, variable_names\npose = load_pose(); contacts = active_contacts(pose)\npolys = []\nfor c in contacts:\n    if c.kind == \"wall\":\n        polys.append(wall_poly(c.moving, c.corner, c.wall))\n    else:\n        polys.append(pair_poly(c.moving, c.corner, c.host, c.edge))\nzero = {z: 0 for z in Z}\nfor g in polys:\n    assert S(g.subs(zero)) == 0\nprint(\"all 20 chart polynomials vanish at the origin\")\n\nA_chart = Matrix([[S(sp.diff(g, z).subs(zero)) for z in Z] for g in polys])\nH_chart = [Matrix([[S(sp.diff(g, a, b).subs(zero)) for b in Z] for a in Z]) for g in polys]\n\n# T-012 rows, transferred through J = diag(1,1,2)\nraw = constraint_rows(pose, contacts)\nA_geo = Matrix([[fe(x) for x in row] for row in raw])\nJ = sp.diag(*([1,1,2]*5))\nassert (A_chart - A_geo*J).applyfunc(S) == sp.zeros(20, 15)\nprint(\"A_chart == A_geo * J  (J = diag(1,1,2) per square): first-order transfer verified\")\n\n# independent geo-coordinate 2-jet check (no chart): Hessian of the raw gap in (c, theta)\nW = []\nfor i in range(5):\n    W += list(symbols(f\"cx{i} cy{i} th{i}\"))\ndef geo_gap(c):\n    ci = (centres0[c.moving][0] + W[3*c.moving], centres0[c.moving][1] + W[3*c.moving+1])\n    p = corner_geo(ci, thetas0[c.moving] + W[3*c.moving+2], c.corner)\n    if c.kind == \"wall\":\n        return {\"left\": p[0], \"bottom\": p[1], \"right\": s - p[0], \"top\": s - p[1]}[c.wall]\n    ch = (centres0[c.host][0] + W[3*c.host], centres0[c.host][1] + W[3*c.host+1])\n    n = normal_geo(thetas0[c.host] + W[3*c.host+2], c.edge)\n    return (p[0]-ch[0])*n[0] + (p[1]-ch[1])*n[1] - Q(1,2)\nzeroW = {w: 0 for w in W}\nfor idx, c in enumerate(contacts):\n    G = geo_gap(c)\n    grad = Matrix([[S(sp.diff(G, w).subs(zeroW)) for w in W]])\n    assert (grad - A_geo[idx, :]).applyfunc(S) == sp.zeros(1, 15), idx\n    Hg = Matrix([[S(sp.diff(G, a, b).subs(zeroW)) for b in W] for a in W])\n    assert (H_chart[idx] - J.T*Hg*J).applyfunc(S) == sp.zeros(15, 15), idx\nprint(\"H_chart == J^T H_geo J for all 20 rows: second-jet transfer verified (chart has no 2nd-order angle correction)\")\n\n# q along the free direction\nnames = variable_names(5); iw4 = names.index(\"w4\")\ne_t4 = sp.zeros(15, 1); e_t4[iw4] = 1\nq_chart = [S((e_t4.T*H*e_t4)[0]) for H in H_chart]\nunit = [pose.field.rational(1 if p == iw4 else 0) for p in range(15)]\nq_geo_tool = [fe(x) for x in second_order_terms(pose, contacts, unit)]\nassert all(S(a - 4*b) == 0 for a, b in zip(q_chart, q_geo_tool))\nprint(\"q_chart == 4 * q_geo (tool):\", [str(x) for x in q_chart])\n\n# exact gap along pure rotation of square 4 in the chart\nt4 = Z[14]\nfor idx, c in enumerate(contacts):\n    if c.kind == \"pair\":\n        g_rot = S(polys[idx].subs({z: 0 for z in Z if z != t4}))\n        assert g_rot == -t4**2, g_rot\nprint(\"each pair polynomial restricted to the flex line is exactly -t4^2\")\n\n# column of the free coordinate is identically zero\nassert all(S(x) == 0 for x in A_chart[:, iw4])\nprint(\"column t4 of A_chart is zero: the flex is in ker A\")\n\n# ---- T-012 certificates, replayed exactly on the chart rows ------------------------------\nrec = json.load(open('/home/user/squares/packing/campaign/series/series-000-smoke-and-calibration/results/bc-049-n5-rigidity-certificates.json'))\ndesc = [c.describe() for c in contacts]\nscales = [fe(x) for x in row_scales(pose, raw)]           # sqrt2 on pair rows, 1 on walls\nA_tilde = sp.diag(*scales) * A_chart                        # rationalized rows, in the chart\ndef parse(entries):\n    w = [0]*20\n    for e in entries:\n        d, val = e.rsplit(\" x \", 1)\n        w[desc.index(d)] = Q(val)\n    return Matrix([w])\npinned = 0\nfor entry in rec[\"first_order_cone\"][\"pinned\"]:\n    k = names.index(entry[\"coordinate\"])\n    for sign_name, sign in ((\"positive\", 1), (\"negative\", -1)):\n        w = parse(entry[\"farkas\"][sign_name])\n        assert all(x >= 0 for x in w)\n        target = sp.zeros(1, 15); target[k] = sign * J[k, k]\n        assert ((w*A_tilde) - target).applyfunc(S) == sp.zeros(1, 15), (entry[\"coordinate\"], sign_name)\n    pinned += 1\nprint(f\"{pinned} coordinates pinned: every retained Farkas certificate replays on the chart rows (targets scaled by J_kk)\")\n\nss = rec[\"second_order\"][\"directions\"][0][\"certificate\"][\"self_stress\"]\nw = parse(ss)\nassert all(x >= 0 for x in w)\nassert (w*A_tilde).applyfunc(S) == sp.zeros(1, 15)\nq_tilde = Matrix([S(a*b) for a, b in zip(scales, q_chart)])\nwq = S((w*q_tilde)[0])\nprint(\"self-stress replays on chart rows: w.A_tilde = 0, w.q_tilde =\", wq, \"<0:\", wq < 0)\nassert wq < 0\n# and as weights on the unscaled chart rows: w_j * scale_j\nw_un = Matrix([[S(a*b) for a, b in zip(list(w), scales)]])\nassert (w_un*A_chart).applyfunc(S) == sp.zeros(1, 15)\nprint(\"unscaled self-stress weights:\", [str(x) for x in w_un if x != 0], \" w.q_chart =\", S((w_un*Matrix(q_chart))[0]))\nprint(\"ALL CHECKS PASSED\")\n"
+      },
+      {
+        "name": "print_polys.py",
+        "sha256": "e551cb3462c9955476745bf837cc239aafc34b2aa89e7f0712e3d5a9cd2263b6",
+        "bytes": 765,
+        "replays": "Prints the 20 cleared polynomials, their gradient rows at the origin, and q_chart (the table of packet section 2.5). Takes verify_chart.py as its argument.",
+        "invocation": "packing/.venv/bin/python3 print_polys.py verify_chart.py",
+        "replayed_2026_09_03": true,
+        "source": "import sys; sys.path.insert(0,'/home/user/squares/packing')\nexec(open(sys.argv[1]).read().split(\"# the 20 active constraints\")[0])  # reuse definitions from verify_chart.py\nfrom devtools.assess_n5_rigidity import load_pose, active_contacts\npose = load_pose(); contacts = active_contacts(pose)\nzero = {z: 0 for z in Z}\nfor idx, c in enumerate(contacts):\n    g = wall_poly(c.moving, c.corner, c.wall) if c.kind == \"wall\" else pair_poly(c.moving, c.corner, c.host, c.edge)\n    g = sp.expand(g)\n    grad = [S(sp.diff(g, z).subs(zero)) for z in Z]\n    nz = {str(z): str(v) for z, v in zip(Z, grad) if v != 0}\n    t4 = Z[14]\n    q = S(sp.diff(g, t4, t4).subs(zero))\n    print(f\"[{idx:2d}] {c.describe()}\\n      g = {sp.collect(g, Z)}\\n      grad(0) = {nz}   q_t4 = {q}\")\n"
+      },
+      {
+        "name": "margins.py",
+        "sha256": "9331844deb0bbd67cf85e856fa87508a5ee960367e156b096e6ae69f1c4842cf",
+        "bytes": 1107,
+        "replays": "The multiset of the 64 strictly positive wall-corner margins and its per-square split (the table of packet section 3.3).",
+        "invocation": "packing/.venv/bin/python3 margins.py",
+        "replayed_2026_09_03": true,
+        "source": "import sympy as sp, itertools\nfrom collections import Counter\nfrom sympy import sqrt, Rational as Q, pi, cos, sin, Matrix\nr2=sqrt(2); s=2+r2/2\ncentres0=[(Q(1,2),Q(1,2)),(s-Q(1,2),Q(1,2)),(Q(1,2),s-Q(1,2)),(s-Q(1,2),s-Q(1,2)),(s/2,s/2)]\nthetas0=[0,0,0,0,pi/4]\nR_BODY=[(Q(-1,2),Q(-1,2)),(Q(1,2),Q(-1,2)),(Q(1,2),Q(1,2)),(Q(-1,2),Q(1,2))]\ndef rot(th): return Matrix([[cos(th),-sin(th)],[sin(th),cos(th)]])\ndef corner(i,k):\n    v=rot(thetas0[i])*Matrix(R_BODY[k]); return (centres0[i][0]+v[0], centres0[i][1]+v[1])\nS=lambda x: sp.nsimplify(sp.simplify(sp.expand(x)),[r2])\ncnt=Counter(); per_square=Counter()\nfor i in range(5):\n    for k in range(4):\n        p=corner(i,k)\n        for w,val in ((\"left\",p[0]),(\"bottom\",p[1]),(\"right\",s-p[0]),(\"top\",s-p[1])):\n            m=S(val)\n            if m!=0: cnt[str(m)]+=1; per_square[(i,str(m))]+=1\nprint(\"inactive wall margins multiset:\", dict(cnt), \"total\", sum(cnt.values()))\nprint(\"per square:\", dict(per_square))\n# corners of square 4 vs walls explicitly\nfor k in range(4):\n    p=corner(4,k); print(\"sq4 corner\",k, [str(S(v)) for v in (p[0],p[1],s-p[0],s-p[1])])\n"
+      },
+      {
+        "name": "midpoint_check.py",
+        "sha256": "14f98cc590fc2baa6d9c1bb48d3fbc2923ddf416d14360395addf5c6777a9b10",
+        "bytes": 721,
+        "replays": "Each of the four active pair corners has along-edge parameter exactly 1/2, so no D-390 endpoint incidence occurs.",
+        "invocation": "packing/.venv/bin/python3 midpoint_check.py",
+        "replayed_2026_09_03": true,
+        "source": "\"\"\"D-390 check: each active pair contact's corner lies at along-edge parameter exactly 1/2.\"\"\"\nimport sys; sys.path.insert(0, '/home/user/squares/packing')\nfrom devtools.assess_n5_rigidity import load_pose, active_contacts\npose = load_pose()\nfor c in active_contacts(pose):\n    if c.kind != \"pair\": continue\n    (ax, ay), (bx, by) = pose.edge(c.host, c.edge)\n    px, py = pose.squares[c.moving][c.corner]\n    along = ((px - ax) * (bx - ax) + (py - ay) * (by - ay)) / ((bx - ax) * (bx - ax) + (by - ay) * (by - ay))\n    print(c.describe(), \"-> along-edge parameter =\", along.text())\n    assert (along - pose.field.rational(1) / pose.field.rational(2)).sign() == 0\nprint(\"all four active corners are exact edge midpoints\")\n"
+      },
+      {
+        "name": "control_exp034.py",
+        "sha256": "0ca24178be28e94479a4044c71faa77c4e4b3be8aec3d6052829fb8ecf0bd0db",
+        "bytes": 3369,
+        "replays": "Pre-run of control C8: the exp-034 pose through the T-012 machinery, showing an open first-order cone and that vx0, vy0, w0 appear in no row.",
+        "invocation": "packing/.venv/bin/python3 control_exp034.py",
+        "replayed_2026_09_03": true,
+        "source": "\"\"\"Pre-run of the exp-034 negative control through the T-012 machinery (read-only).\"\"\"\nimport sys\nsys.path.insert(0, '/home/user/squares/packing')\nfrom fractions import Fraction\nfrom cases.n5 import equal_side_face as face\nfrom cases.n5.angle_sheet import oriented_square\nfrom devtools.assess_n5_rigidity import (Pose, active_contacts, incident_contacts, disjunctive_pairs,\n    constraint_rows, row_scales, gap_rate, unconstrained, variable_names, certify, second_order_terms)\nfrom sqpack.verify import verify_packing, exact_sign\n\nfield = face.make_field()\nq = field.rational; r = field.alpha\ndata = face.exact_data(field)\nside = data[\"side\"]; delta = data[\"delta\"]\nfixed = data[\"a\"][1:]\nprint(\"side =\", side.text(), \"delta =\", delta.text())\n\ndef make_pose(u, t):\n    den = q(1) + t*t\n    cosine = (q(1) - t*t)/den; sine = 2*t/den\n    c0 = (q(1)/2 + u, q(5)/2 - r/4 + u)\n    squares = [oriented_square(field, c0, cosine, sine),\n               face.square(field, fixed[0], diagonal=False),\n               face.square(field, fixed[1], diagonal=False),\n               face.square(field, fixed[2], diagonal=True),\n               face.square(field, fixed[3], diagonal=True)]\n    return Pose(field, side, tuple(tuple(sq) for sq in squares))\n\nfor label, u, t in ((\"endpoint A (u=0,t=0)\", q(0), q(0)), (\"interior (u=delta/2,t=0)\", delta/2, q(0)), (\"interior tilted (u=delta/2,t=1/200)\", delta/2, q(Fraction(1,200)))):\n    pose = make_pose(u, t)\n    rep = verify_packing([list(sq) for sq in pose.squares], side, sign=exact_sign)\n    contacts = active_contacts(pose)\n    inc = incident_contacts(pose)\n    dis = disjunctive_pairs(pose, contacts)\n    print(f\"\\n== {label}: valid={rep.valid} touching_pairs={rep.touching_pairs} container_contacts={rep.container_contacts}\")\n    print(f\"   incidences={len(inc)} active contacts={len(contacts)} (wall {sum(c.kind=='wall' for c in contacts)}, pair {sum(c.kind=='pair' for c in contacts)}), disjunctive pairs={[sorted(p) for p in dis]}\")\n    for c in contacts:\n        print(\"     \", c.describe())\n    if dis:\n        print(\"   -> the T-012 assessor would REFUSE this pose (DisjunctiveContactError)\")\n    rows = constraint_rows(pose, contacts)\n    names = variable_names(5)\n    # does the exp-034 slide direction (dx0=dy0=1) and the rotation w0 lie in the cone two-sidedly?\n    for dname, vec in ((\"slide +\", {\"vx0\": 1, \"vy0\": 1}), (\"slide -\", {\"vx0\": -1, \"vy0\": -1}), (\"rot +\", {\"w0\": 1}), (\"rot -\", {\"w0\": -1})):\n        x = [q(vec.get(n, 0)) for n in names]\n        rates = [gap_rate(row, x) for row in rows]\n        ok = all(v.sign() >= 0 for v in rates)\n        print(f\"   {dname}: in first-order cone = {ok}; min rate = {min((v for v in rates), key=lambda v: float(v.coeffs[0]) + 1.4142135623730951*float(v.coeffs[1])).text()}\")\n    free = [n for i, n in enumerate(names) if unconstrained(rows, i)]\n    print(\"   coordinates absent from every row:\", free)\n    try:\n        pins = {}\n        for i, n in enumerate(names):\n            if n in free: continue\n            pins[n] = (certify(pose, rows, i, 1) is not None, certify(pose, rows, i, -1) is not None)\n        print(\"   pinned (both signs certified):\", [n for n, (a, b) in pins.items() if a and b])\n        print(\"   NOT pinned:\", [n for n, (a, b) in pins.items() if not (a and b)] + free)\n    except Exception as e:\n        print(\"   certify raised:\", type(e).__name__, e)\n"
+      },
+      {
+        "name": "c8_side_check.py",
+        "sha256": "234c14bd22c76d1acd14d037a616e9b90e56e9537bc4e744562f6aefc11f28fb",
+        "bytes": 2676,
+        "replays": "Exact proof that the exp-034 family sits at container side 1 + 5*sqrt(2)/4, is invalid at Goebel's side 2 + sqrt(2)/2, and is therefore disjoint from Feas(s).",
+        "invocation": "packing/.venv/bin/python3 c8_side_check.py",
+        "replayed_2026_09_03": true,
+        "source": "\"\"\"Exact check: exp-034's family is at side 1+5*sqrt(2)/4, not Goebel's 2+sqrt(2)/2, and is infeasible at Goebel's side.\"\"\"\nimport sys; sys.path.insert(0, '/home/user/squares/packing')\nfrom cases.n5 import equal_side_face as face\nfrom cases.n5.angle_sheet import oriented_square\nfrom cases.gobel5.packing import build\nfrom sqpack.verify import verify_packing, exact_sign\nfrom sqpack.field import NumberField\n\ngob_squares, s_goebel, field = build()          # Goebel: s = 2 + sqrt2/2\nq = field.rational; r = field.alpha\ndata = face.exact_data(field)                   # exp-033/034 data, same field object\nS_exp = data[\"side\"]; delta = data[\"delta\"]; fixed = data[\"a\"][1:]\nprint(\"Goebel side s   =\", s_goebel.text(), \"~\", field.decimal(s_goebel, 12))\nprint(\"exp-034 side S  =\", S_exp.text(),    \"~\", field.decimal(S_exp, 12))\nprint(\"S - s           =\", (S_exp - s_goebel).text(), \"~\", field.decimal(S_exp - s_goebel, 12), \" sign:\", (S_exp - s_goebel).sign())\n\ndef exp034_pose(u, t):\n    den = q(1) + t*t; cosine = (q(1) - t*t)/den; sine = 2*t/den\n    c0 = (q(1)/2 + u, q(5)/2 - r/4 + u)\n    return [list(oriented_square(field, c0, cosine, sine)),\n            list(face.square(field, fixed[0], diagonal=False)),\n            list(face.square(field, fixed[1], diagonal=False)),\n            list(face.square(field, fixed[2], diagonal=True)),\n            list(face.square(field, fixed[3], diagonal=True))]\n\nfor label, u in ((\"u = delta/2\", delta/2), (\"u = 0\", q(0)), (\"u = delta\", delta)):\n    sq = exp034_pose(u, q(0))\n    at_S = verify_packing(sq, S_exp, sign=exact_sign)\n    at_s = verify_packing(sq, s_goebel, sign=exact_sign)\n    print(f\"\\n{label}, t = 0:  valid at S (exp-034 side) = {at_S.valid};  valid at s (Goebel side) = {at_s.valid}\")\n    for kind, detail in at_s.failures[:3]:\n        print(\"   failure at Goebel side:\", kind, detail)\n    # the decisive number: square 1's right edge vs Goebel's wall\n    x_right_sq1 = max(p[0] for p in sq[1])\n    print(\"   square 1 right edge x =\", x_right_sq1.text(), \"; overshoot past Goebel wall = (x - s) =\", (x_right_sq1 - s_goebel).text(), \"~\", field.decimal(x_right_sq1 - s_goebel, 10))\n\n# distance from Goebel's labeled pose: centre of square 1, and orientation pattern\ngob_c1 = (sum(p[0] for p in gob_squares[1]) / q(4), sum(p[1] for p in gob_squares[1]) / q(4))\nprint(\"\\nGoebel square-1 centre =\", gob_c1[0].text(), gob_c1[1].text(), \" exp-034 square-1 centre =\", fixed[0][0].text(), fixed[0][1].text())\nprint(\"x-difference =\", (fixed[0][0] - gob_c1[0]).text(), \"~\", field.decimal(fixed[0][0] - gob_c1[0], 10))\nprint(\"orientation pattern: Goebel = axis,axis,axis,axis,diagonal ; exp-034 = axis,axis,axis,diagonal,diagonal\")\n"
+      },
+      {
+        "name": "sosc_check.py",
+        "sha256": "8743b1ffe3be32a093493f756fbf9dd01edef192f0f1d527d1d730ac353f20b5",
+        "bytes": 1957,
+        "replays": "The numbers of packet section 5.7: w.q_geo = -sqrt(2)/2, w.q_chart = -2*sqrt(2), the mu = 1 signs in both normalizations, and the threshold mu > 2/(-w.q).",
+        "invocation": "packing/.venv/bin/python3 sosc_check.py",
+        "replayed_2026_09_03": true,
+        "source": "\"\"\"Replay of the numbers quoted in section 5.7 (second, corroborating SOSC route).\"\"\"\nimport sys; sys.path.insert(0, '/home/user/squares/packing')\nimport sympy as sp\nfrom sympy import sqrt, Rational as Q\nfrom devtools.assess_n5_rigidity import load_pose, active_contacts, constraint_rows, row_scales, second_order_terms, variable_names\nr2 = sqrt(2)\npose = load_pose(); contacts = active_contacts(pose)\nfe = lambda x: Q(x.coeffs[0]) + Q(x.coeffs[1]) * r2\nnames = variable_names(5); iw4 = names.index(\"w4\")\nunit = [pose.field.rational(1 if p == iw4 else 0) for p in range(15)]\nq_geo = [fe(x) for x in second_order_terms(pose, contacts, unit)]\nscales = [fe(x) for x in row_scales(pose, constraint_rows(pose, contacts))]\ndesc = [c.describe() for c in contacts]\nstress_rows = [\"square 1 corner 0 on the bottom wall\", \"square 1 corner 2 on the right wall\",\n               \"square 1 corner 3 on square 4 edge 0\", \"square 2 corner 0 on the left wall\",\n               \"square 2 corner 1 on square 4 edge 2\", \"square 2 corner 2 on the top wall\"]\nw_tilde = [Q(1, 2) if d in stress_rows else 0 for d in desc]           # T-012 weights on rationalized rows\nw_geo = [sp.nsimplify(a * b, [r2]) for a, b in zip(w_tilde, scales)]   # unscaled weights S w~\nwq_geo = sp.nsimplify(sum(a * b for a, b in zip(w_geo, q_geo)), [r2])\nwq_chart = sp.nsimplify(4 * wq_geo, [r2])                               # q_chart = 4 q_geo\nprint(\"w.q_geo   =\", wq_geo,   \"  (expected -sqrt(2)/2)\")\nprint(\"w.q_chart =\", wq_chart, \"  (expected -2*sqrt(2))\")\nfor label, wq in ((\"chart\", wq_chart), (\"(c,theta)\", wq_geo)):\n    mu1 = sp.nsimplify(-2 - wq, [r2])\n    thr = sp.nsimplify(2 / (-wq), [r2])\n    print(f\"{label:9s}: -2 - w.q at mu=1 = {mu1} ~ {float(mu1):+.4f}  -> SOSC with mu=1 {'holds' if mu1 > 0 else 'FAILS'}; threshold mu > 2/(-w.q) = {thr} ~ {float(thr):.4f}\")\nassert wq_geo == -r2/2 and wq_chart == -2*r2\nassert (-2 - wq_chart) > 0 and (-2 - wq_geo) < 0\nprint(\"SOSC numbers replay\")\n"
+      }
+    ]
+  },
+  "replayed_quantities": {
+    "wall_corner_functions": 80,
+    "wall_corner_active": 16,
+    "wall_corner_strictly_positive": 64,
+    "minimum_inactive_wall_margin": "1 - sqrt(2)/4",
+    "pair_functions": 320,
+    "pairs": 10,
+    "touching_pairs": 4,
+    "noncontact_pairs": 6,
+    "elementary_functions_total": 400,
+    "active_rows": 20,
+    "neighborhood_strict_sign_conditions": 128,
+    "violated_branch_witnesses": 28,
+    "least_negative_witness_margin": "-sqrt(2)/4",
+    "chart_jacobian": "J = diag(1, 1, 2) per square",
+    "second_order_angle_correction": "none; Hess Phi(0) = 0",
+    "cleared_denominators": "1 + t_i^2 >= 1 on all of R^15",
+    "first_order_transfer": "A_chart == A_geo * J",
+    "second_order_transfer": "H_chart == J^T H_geo J on all 20 rows",
+    "q_chart": "-2 on the four pair rows, 0 on the sixteen wall rows",
+    "q_geo": "-1/2 on the four pair rows, 0 on the sixteen wall rows",
+    "flex_line_restricted_pair_gap": "-t4^2",
+    "farkas_certificates_replayed": 28,
+    "pinned_coordinates": 14,
+    "self_stress_weights_unscaled": [
+      "1/2",
+      "1/2",
+      "sqrt(2)/2",
+      "1/2",
+      "sqrt(2)/2",
+      "1/2"
+    ],
+    "self_stress_rows": [
+      5,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "w_dot_q_chart": "-2*sqrt(2)",
+    "w_dot_q_geo": "-sqrt(2)/2",
+    "sosc_mu1_chart": "-2 + 2*sqrt(2) > 0",
+    "sosc_mu1_c_theta": "-2 + sqrt(2)/2 < 0",
+    "sosc_multiplier_threshold": "mu > 2/(-w.q)",
+    "active_pair_corner_along_edge_parameter": "1/2 for all four contacts",
+    "goebel_side": "2 + sqrt(2)/2",
+    "exp034_side": "1 + 5*sqrt(2)/4",
+    "side_gap": "3*sqrt(2)/4 - 1"
+  },
+  "agenda_count_confirmation": {
+    "declared_wall_split": "16 active / 64 inactive",
+    "observed_wall_split": "16 active / 64 inactive",
+    "declared_pair_split": "4 touching / 6 noncontact",
+    "observed_pair_split": "4 touching / 6 noncontact",
+    "discrepancy": null
+  },
+  "controls": {
+    "declared": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8"
+    ],
+    "run_here": [
+      "C8 (pre-run only)"
+    ],
+    "not_run": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7"
+    ],
+    "note": "The eight rejecting controls are specified in the proof artifact but belong to the W7 instrument phase. Only the C8 pre-run was executed here, and it confirms exp-034 is not a refutation of H-060 rather than exercising an instrument refusal."
+  },
+  "open_obligations": [
+    {
+      "id": "O1",
+      "obligation": "The W7 executable instrument, its exact neighbourhood receipt, and the eight rejecting controls C1-C8.",
+      "owner": "a separate lane (sqpack.local_rigidity / devtools.assess_n5_rigidity)",
+      "blocks": "instrument_ready: true, and therefore any accept determination"
+    },
+    {
+      "id": "O2",
+      "obligation": "Primary-text confirmation of the curve-selection statement (BCR Proposition 8.1.13, equivalently Milnor 1968 Lemma 3.1). Currently supported only by two independent secondary sources quoted verbatim.",
+      "owner": "a separate lane; to be confirmed by the BC-153 reviewer",
+      "blocks": "completeness of the registered acceptance route, which is preregistered on curve selection and is not discharged by the corroborating second proof"
+    }
+  ],
+  "novelty": {
+    "score": "S3",
+    "claimed": "The first exact proof that Goebel's n = 5 optimum is locally rigid at fixed side, a property asserted without proof by Kingbird, not stated by Goebel or Friedman, and not covered by any stated rigidity theorem for polygon contacts.",
+    "not_claimed_as_new": [
+      "the statement itself, which Kingbird asserts",
+      "the closing principle, which is the classical second-order sufficient optimality condition",
+      "the Puiseux and curve-selection proof shape, which matches Connelly-Whiteley 1996 Theorem 4.3.1",
+      "the half-angle rationalization",
+      "the separating-axis accounting",
+      "Farkas certification"
+    ],
+    "status": "asserted by this lane, not independently reviewed; BC-153 owns it"
+  },
+  "not_established": [
+    "a numerical isolation radius",
+    "rigidity when the container side is free, which X-007 measured to be false",
+    "global uniqueness of the n = 5 optimum",
+    "rigidity of any other n = 5 optimal family",
+    "applicability of the Connelly-Whiteley theorem as stated",
+    "any novelty beyond the S3 claim above"
+  ],
+  "recommendations": [
+    "Archive the Kingbird rigid-packings page under packing/resources/web/, which the packet notes is cited but not retained. Not done here: the resources archive is outside this round's write scope."
+  ]
+}

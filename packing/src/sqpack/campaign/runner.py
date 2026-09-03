@@ -24,7 +24,8 @@ An experiment is a COMMAND declared in its hypothesis artifact; the harness subs
 `{n}` and `{seed}`, runs it, archives what it prints, and enforces one contract:
 
   1. print JSON Lines to stdout;
-  2. carry `best_side`, `n` and `seed` on every result line;
+  2. carry `best_side`, `n` and `seed` on every result line, and the `n` and `seed` the
+     harness invoked -- a result may not be filed under a different cell;
   3. carry `overlap` (or `best_overlap`) on those lines, and it must be exactly 0;
   4. carry the FULL POSE on those lines as equal-length `x`, `y` and `t` arrays of
      length `n` -- the centres and angles of every square;
@@ -621,6 +622,11 @@ def archive_digest(results: list[dict[str, Any]]) -> str:
     """
     joined = "\n".join(pose_digest(rec) for rec in results)
     return hashlib.sha256(joined.encode("utf-8")).hexdigest()
+
+
+def plural(count: int, noun: str) -> str:
+    """`3 archived poses` / `1 archived pose`, for prose that lands in the record."""
+    return f"{count} {noun}" if count == 1 else f"{count} {noun}s"
 
 
 def grid_pose(n: int) -> tuple[list[float], list[float], list[float], float]:
@@ -1306,9 +1312,9 @@ def record(eid: str, *, operator: str) -> str:
             {
                 "shape": "determination",
                 "question": (
-                    f"did all {verification['poses_checked']} archived poses verify "
-                    "independently as unit squares inside the reported side with "
-                    "pairwise disjoint interiors"
+                    f"did the {plural(verification['poses_checked'], 'archived pose')} "
+                    "verify independently as unit squares inside the reported side "
+                    "with pairwise disjoint interiors"
                 ),
                 "role": "guard",
                 "outcome": "criterion_met",
@@ -1389,8 +1395,9 @@ def record(eid: str, *, operator: str) -> str:
     )
     provenance = (
         (
-            f"The {verification['poses_checked']} archived poses were rebuilt into corner "
-            f"geometry and re-checked for containment and pairwise separation by "
+            f"The {plural(verification['poses_checked'], 'archived pose')} "
+            f"{'was' if verification['poses_checked'] == 1 else 'were'} rebuilt into "
+            f"corner geometry and re-checked for containment and pairwise separation by "
             f"`{verification['verifier']}` in a separate process, at tolerance "
             f"`{verification['tolerance']:g}`, over archive `sha256:"
             f"{verification['archive_sha256'][:16]}` (D-044). That is a numerical "
@@ -1428,8 +1435,9 @@ Run by `packing-campaign` under [the runbook](../../../README.md):
 
 Every number is read from [`{archive.name}`](../results/{archive.name}), which archives
 every line the command printed, so the configurations behind these sides can be re-read
-without re-running anything (D-006). The overlap of every result line was asserted zero
-by the harness contract rather than by the experiment that produced it (D-009).
+without re-running anything (D-006). The overlap on every result line was checked by the
+harness contract rather than trusted from the experiment that produced it (D-009), and the
+geometry behind it was re-derived independently, as below.
 
 {provenance}
 """
