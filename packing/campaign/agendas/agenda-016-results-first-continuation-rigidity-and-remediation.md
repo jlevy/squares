@@ -1123,10 +1123,16 @@ agenda:
     - scope: step-budget-measurements
       status: passed
       evidence: >-
-        `fast behavioral tests` measured 1210.79 s, confirming the 1187 s figure the
-        new 1800 s step budget was set from; `negative controls` measured 620.41 s
-        against its own 1800 s budget; and the full 155-negative-control suite ran to
-        completion for the first time on this branch (D-422).
+        `fast behavioral tests` measured 1210.79 s green at 1607 passing tests, and
+        1234.67 s in the later gate; `negative controls` measured 620.41 s. Both sit
+        under the 1800 s budgets declared for them, and both would have died on the
+        900 s shared cap. The 1187 s figure the budget was originally argued from is a
+        floor rather than a measurement -- it was read off a run with 38 failures, and a
+        failing test does not run the rest of its body -- so the argument is restated on
+        the green reading and the old number is kept named rather than deleted. The full
+        155-negative-control suite ran to completion for the first time on this branch
+        (D-422); its cap has since been re-breached by build caches, which is that
+        defect's surviving half and is reported under local-full-gate.
     replanning:
       candidates:
       - bead: think-ldq2
