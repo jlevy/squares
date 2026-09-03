@@ -367,6 +367,22 @@ Status: **completed**. Run an exact ten-hour unattended campaign from agenda-014
 | BC-145 | measurement_validation | 17, 54, 68 | complete | 0 | think-rh18 | Three fresh Max reviews passed and were reconciled at 162d0bea. Only exp-056 and exp-057 cleared needs_review; no result, hypothesis, instrument, bound, frontier or route changed. |
 | BC-146 | research | 17, 54, 68 | stopped | 0 | think-8epx | BC-146 stopped at the hard wall. Post-wall work repairs the publication guards, validates and pushes the exact tree, and requires PR #75's current head to be hosted-green before think-5j8d becomes the next scientific entry. |
 
+### [agenda-016](agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md) — Results-First Continuation, Rigidity, and Remediation
+
+Status: **active**. Run one ten-hour autonomous session from Agenda 015's completed W10 closeout and the operator's revised priority order. Three disjoint lanes begin after a thirty-minute coordinator preflight. The first completes H-052 through a fresh successor that replays the retained 170-row chain and emits the complete result envelope the exp-056 child assembler lacks; an exact pass opens a separate source and adoption route for the reported 4.5058 lower bound at n = 17--19. The second tests the prospectively registered H-060 fixed-side local-rigidity theorem at n = 5, the strongest near-term route to genuinely new first-party mathematics. The third executes one W9 wave over D-044 and D-046, the two critical defects sharing the generic campaign-runner trust boundary. The research wall is 600 elapsed minutes, with the final 120 reserved for W10 disposition, documentation review, validation, publication, and replanning. Mechanical closeout continues after the research wall if a gate or hosted check is still running, records that time separately, and starts no new research.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-147 | tool_validation | 5, 17 | ready | 0 | think-a0h6 | A passed launch packet opens BC-148, BC-152 and BC-154 concurrently. On any refusal, the coordinator runs no target, atomically marks BC-148 through BC-154 never-opened with the preflight reason, satisfies their tbd closeout dependencies, and opens BC-155 on that failed-preflight packet. |
+| BC-148 | measurement_validation | 17 | blocked | 0 | think-5j8d | BC-149 reviews every terminal outcome. Only a complete, instrument-valid, all-agree result may route BC-150; every other outcome receives its own repair, continuation, or discrepancy disposition. |
+| BC-149 | measurement_validation | 17 | blocked | 0 | think-sapq | A pass opens the source-adoption proposal in BC-150. On every other determination, the coordinator atomically marks BC-150 and BC-151 never-opened with the inherited reason, satisfies their closeout dependencies without running them, and gives BC-155 the typed outcome and follow-up. |
+| BC-150 | research | 17, 18, 19 | blocked | 0 | think-6q88 | BC-151 independently reviews and, only on an exact pass of an adoption recommendation, applies the frozen patch. Otherwise BC-151 records never-opened application and BC-155 preserves the named reason. |
+| BC-151 | research | 17, 18, 19 | blocked | 0 | think-bagn | BC-155 reports the adoption at its honest source-backed scope or routes the named blocker. Reusable weighted-certificate extraction remains separate work and does not delay this fixed-certificate decision. |
+| BC-152 | research | 5 | blocked | 0 | think-760r | BC-153 independently reviews every terminal outcome. Only an exact pass may promote fixed-side local rigidity and register a new frontier result. |
+| BC-153 | measurement_validation | 5 | blocked | 0 | think-pssq | BC-155 reports a new first-party theorem only if this block passes and every generated consumer agrees. Otherwise it preserves the smallest unresolved proof obligation and ranks the follow-up against the remaining portfolio. |
+| BC-154 | tool_validation | 5, 11, 17 | blocked | 1 | think-modk | BC-155 records each defect's terminal disposition. A fixed or contained runner may reenter future generic search agendas only at the scope its regressions prove; unresolved defects remain named blockers rather than an implied safe surface. |
+| BC-155 | research | 5, 17, 18, 19 | blocked | 0 | think-xycf | The selected post-agenda bead and workflow become the only next handoff. A new agenda may be drafted after operator confirmation or the declared autonomous fallback, but it does not begin inside this closeout. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
@@ -436,6 +452,7 @@ Status: **completed**. Run an exact ten-hour unattended campaign from agenda-014
 | H-057 | unresolved | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 1 | 107.833m agent + 12.3m wall |
 | H-058 | unresolved | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 2 | 115.667m agent + 115.7m wall |
 | H-059 | confirmed | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 1 | 92m agent + 1s wall |
+| H-060 | blocked | proof | At the exact container side 2 + sqrt(2)/2, Goebel's exact n = 5 packin |  | 0 |  |
 
 ## Needs review — held for a human, not decided
 
@@ -548,7 +565,6 @@ Status: **completed**. Run an exact ten-hour unattended campaign from agenda-014
 - X-004 — An exact algebraic characterization of the n = 29 record
 - X-005 — The relation the atlas should count, and why its acceptance rule could not test one
 - X-006 — The candidate discriminating control at n = 5 is the one D-034 has been quoting
-- X-007 — The n = 5 optimum flexes in exactly one direction, and that direction curves shut
 - X-008 — The shapes the grammar cannot express are the ones that are not tilted
 - X-010 — Two lanes, two ladders — focusing the campaign on first-party theorems
 

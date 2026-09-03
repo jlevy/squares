@@ -46,7 +46,7 @@ exploration:
   - packing/cases/gobel5/packing.py
   - packing/cases/gobel40/packing.py
   - defects.md
-  proposes: []
+  proposes: [H-060]
 ---
 # X-007 — The `n = 5` Optimum Flexes in Exactly One Direction, and That Direction Curves Shut
 

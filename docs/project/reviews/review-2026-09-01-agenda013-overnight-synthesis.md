@@ -28,8 +28,8 @@ The best next work is mechanism-first rather than size-first:
   buying another long target wall;
 - make the literal `n = 68` production command reachable and independently guarded
   before retrieving or fitting a parent;
-- prospectively bind and test the producer-ordering contract in a new target-blind `n =
-  50` round, without changing exp-050; and
+- prospectively bind and test the producer-ordering contract in a new target-blind
+  `n = 50` round, without changing exp-050; and
 - audit the primary source and formula path for the `n = 19 -> 54` diagonal-strip
   mechanism while reconstruction remains gated.
 

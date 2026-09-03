@@ -2,7 +2,7 @@
 
 # Agenda map
 
-146 agenda commitments across 15 agendas, as declared in each agenda's own frontmatter.
+155 agenda commitments across 16 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **7** ready, **3** tentative, **14** blocked, **24** stopped, **98** complete.
+- **8** ready, **3** tentative, **22** blocked, **24** stopped, **98** complete.
 
 - **5 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -30,6 +30,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-010 | `BC-104` | 2 | insight | research | Does the stage-1 pipeline -- enumerator, glued rows, class-angle sweep -- reproduce the proved controls… | `think-sfzh` |
 | agenda-010 | `BC-097` | 3 | process | tool_validation | Is the queue readable -- the gap ranking on a durable surface, and the 25 stale in_progress beads reconciled? | `think-6z95` |
 | agenda-010 | `BC-105` | 3 | correctness | research | Can a restricted-class optimality statement at n = 11 -- no packing of at most K chunks with at most two tilt… | `think-dbtx` |
+| agenda-016 | `BC-147` | 0 | process | tool_validation | Can the merged Agenda 015 handoff, H-052 chain, H-060 criterion, W9 inventory, lane ownership, clocks, and… | `think-a0h6` |
 
 ## Blocked, and on what
 
@@ -51,6 +52,14 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-003 | `BC-033` | 2 | — | no | Two things, neither expressible as a `depends_on` edge here. First, a measurement contract that does not call endpoint… |
 | agenda-005 | `BC-050` | 2 | — | no | Witnesses for n = 68 and n = 69 whose squares are unit squares to the residual the screens require. The retained ones… |
 | agenda-012 | `BC-115` | 2 | `BC-112` | no | BC-120 must clear and BC-121 must apply BC-112's adoption recommendation, and a second fixed-certificate consumer must… |
+| agenda-016 | `BC-148` | 0 | `BC-147` | no | — |
+| agenda-016 | `BC-149` | 0 | `BC-148` | no | — |
+| agenda-016 | `BC-150` | 0 | `BC-149` | no | — |
+| agenda-016 | `BC-151` | 0 | `BC-150` | no | — |
+| agenda-016 | `BC-152` | 0 | `BC-147` | no | — |
+| agenda-016 | `BC-153` | 0 | `BC-152` | no | — |
+| agenda-016 | `BC-155` | 0 | `BC-149`, `BC-151`, `BC-153`, `BC-154` | no | — |
+| agenda-016 | `BC-154` | 1 | `BC-147` | no | — |
 
 ## Discharged elsewhere
 
@@ -86,6 +95,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-013 | completed |  |  |  | 1 | 6 | 7 |
 | agenda-014 | completed |  |  |  | 7 | 7 | 14 |
 | agenda-015 | completed |  |  |  | 6 | 4 | 10 |
+| agenda-016 | active | 1 |  | 8 |  |  | 9 |
 
 ## What the states mean
 

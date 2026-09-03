@@ -44,11 +44,10 @@ Any other determination leaves `needs_review: true`. Each reviewer returns **Art
 Result, Guard, Next** and names every mismatch.
 
 Before replay, confirm that
-`git diff --exit-code 313624cc08650bb9054e969da9cfd91ad83e2125 -- <packet executable,
-checkpoint, progress and test paths>` is empty.
-The coordinator session is expected to gain BC-144 through BC-146 state after the
-freeze; inspect its frozen form with `git show`, not as a worktree-equality condition.
-The hashes below are SHA-256 values of bytes at the full frozen revision.
+`git diff --exit-code 313624cc08650bb9054e969da9cfd91ad83e2125 -- <packet executable, checkpoint, progress and test paths>`
+is empty. The coordinator session is expected to gain BC-144 through BC-146 state after
+the freeze; inspect its frozen form with `git show`, not as a worktree-equality
+condition. The hashes below are SHA-256 values of bytes at the full frozen revision.
 
 ## Packet A: n = 17 / H-052
 
