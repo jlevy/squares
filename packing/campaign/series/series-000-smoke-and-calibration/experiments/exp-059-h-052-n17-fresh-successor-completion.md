@@ -117,8 +117,7 @@ It changes no mathematical input and no criterion.
 
 The successor records exp-056 as its **immediate parent checkpoint** and exp-052 as its
 **carried-chain genesis**, in two separate binding blocks that each carry their own
-literal role.
-One cannot stand in for the other.
+literal role. One cannot stand in for the other.
 
 | Binding | Immediate parent | Carried-chain genesis |
 | --- | --- | --- |
@@ -132,22 +131,22 @@ One cannot stand in for the other.
 | Marker | ordinal 170, `independent_started` | ordinal 33, `independent_started` |
 
 The two are cross-checked against each other rather than merely verified side by side.
-Row 0's `previous_row_hash` must equal the genesis binding hash, which is what makes
-exp-052 the genesis rather than just an ancestor; row 32's hash must equal the genesis
-last row hash; the parent's first 33 rows must reproduce the genesis rows exactly; and
+Row 0’s `previous_row_hash` must equal the genesis binding hash, which is what makes
+exp-052 the genesis rather than just an ancestor; row 32’s hash must equal the genesis
+last row hash; the parent’s first 33 rows must reproduce the genesis rows exactly; and
 the genesis must be a *proper* prefix.
 A mismatch in any of them refuses the run before a single direction is evaluated.
 
 Verification of the immediate parent is read-only.
 It never constructs a writable store over the frozen paths, so no code path in it can
 publish, truncate or resume the retained artifact.
-It also requires exp-056's declared result path to still be absent.
+It also requires exp-056’s declared result path to still be absent.
 
 ## Ordinal 170 Is Recomputed, Not Promoted
 
-Exp-056's marker sits at ordinal 170 in stage `independent_started`.
-A progress marker carries no payload, so nothing about that interrupted calculation is
-retained and nothing about it may be inherited.
+Exp-056’s marker sits at ordinal 170 in stage `independent_started`. A progress marker
+carries no payload, so nothing about that interrupted calculation is retained and
+nothing about it may be inherited.
 The successor recomputes ordinal 170 from both accumulators, and `append_pair` refuses
 any ordinal below the first new one.
 
@@ -166,7 +165,7 @@ carrying the `exp-052` or `exp-056` slug, and every path resolving inside
 `cases/n17_weighted_certificate`, `cases/n17_weighted_certificate_resume` or
 `cases/n17_weighted_certificate_child`.
 
-BC-147 found that the exp-056 child driver's own forbidden set named only `exp-052` and
+BC-147 found that the exp-056 child driver’s own forbidden set named only `exp-052` and
 the resume package, so it would have accepted an exp-056 output path.
 The successor closes that gap by name, and a refusal test pins it.
 
@@ -176,15 +175,15 @@ Exactly two shapes may be published, and the assembler routes to one of them or 
 
 **Complete agreement** requires both 181-row `CertificateManifest` summaries — atom and
 direction hashes, total weight, every one of the 181 row minima, and the global minimum
-— plus the explicit `global_minimum` comparison and `exact_manifest_agreement`.
-The validator rebuilds the entire 181-link hash chain from the two summaries alone,
-anchored at the genesis binding hash, and requires it to reproduce the emitted chain
-spine, the carried boundary `8947b38e…` at ordinal 169, and the last row hash.
+— plus the explicit `global_minimum` comparison and `exact_manifest_agreement`. The
+validator rebuilds the entire 181-link hash chain from the two summaries alone, anchored
+at the genesis binding hash, and requires it to reproduce the emitted chain spine, the
+carried boundary `8947b38e…` at ordinal 169, and the last row hash.
 An altered manifest therefore cannot survive: it breaks the chain that must still
-terminate on exp-056's verified boundary.
+terminate on exp-056’s verified boundary.
 
 **Early disagreement** requires the verified contiguous prefix through the discrepant
-pair, the discrepant pair's exact payload with both manifests and its named differing
+pair, the discrepant pair’s exact payload with both manifests and its named differing
 fields, the first-disagreement decision, and six **explicit absences**, each with a
 reason: the suffix rows, both full certificate manifests, the row minima, the global
 minimum and manifest-level agreement.
@@ -192,11 +191,11 @@ Declaring an absence while the field is present is refused, and so is carrying e
 full summary.
 
 Both schemas carry the shrink-and-scaling preconditions, every frozen mutation result,
-`all_mutations_rejected` and `instrument_valid`.
-The decision is **derived** from those fields rather than asserted beside them: the
-assembler builds the record without the six decision-bearing fields, canonicalizes it,
-and only then derives each one from what was emitted.
-The validator re-derives all six from the record alone and refuses on any mismatch.
+`all_mutations_rejected` and `instrument_valid`. The decision is **derived** from those
+fields rather than asserted beside them: the assembler builds the record without the six
+decision-bearing fields, canonicalizes it, and only then derives each one from what was
+emitted. The validator re-derives all six from the record alone and refuses on any
+mismatch.
 
 ## Instrument Hashes
 
@@ -226,7 +225,7 @@ and the agreement state without loading the retained fixture.
 Two checks were run against the real retained data before the lease, and both are
 reproducible:
 
-1. Recomputing retained ordinal 169 from scratch on this host, through the successor's
+1. Recomputing retained ordinal 169 from scratch on this host, through the successor’s
    own accumulators, reproduced the retained row hash
    `8947b38e0351048c3a67d914f2b8449185686d920913f5a2404898bdeca4c0b6` exactly.
 2. Feeding the 170 retained source and independent manifests to the same chain-rebuild
@@ -244,7 +243,7 @@ This round can produce all 181 exact pairs or the first exact disagreement.
 Agreement alone moves no bound: it establishes implementation agreement for one fixed
 certificate, and it is neither an independent proof method, nor adoption of the retained
 `4.5058` as a reviewed lower bound, nor any cross-`n` or LP-generalization claim.
-A disagreement rejects the agreement claim only, at H-052's registered scope, and leaves
+A disagreement rejects the agreement claim only, at H-052’s registered scope, and leaves
 the mathematical lower bound for independent adjudication.
 The separate adoption gate remains untouched either way.
 
@@ -254,7 +253,7 @@ The process stops, retains its checkpoint and records why when any of these hold
 
 1. **Boundary stop.** The fixed 2026-09-03T09:58:00Z lease boundary arrives, whatever
    the row count.
-2. **Disagreement.** A direction's two manifests differ exactly; the row is kept and the
+2. **Disagreement.** A direction’s two manifests differ exactly; the row is kept and the
    process stops.
 3. **Drift.** A frozen input, ancestry hash, package manifest or chain link fails
    verification, in which case nothing is written at all.

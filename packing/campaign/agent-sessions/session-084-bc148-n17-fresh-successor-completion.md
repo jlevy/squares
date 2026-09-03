@@ -168,7 +168,7 @@ anything.
 
 The exp-056 child result carries the chain and nothing else.
 The exp-059 successor result carries, in both of its terminal schemas, the evidence
-H-052's criterion actually names: both 181-row `CertificateManifest` summaries with
+H-052’s criterion actually names: both 181-row `CertificateManifest` summaries with
 their atom and direction hashes, total weight, every row minimum and the global minimum;
 the shrink-and-scaling preconditions; all five frozen mutation results;
 `all_mutations_rejected`; and `instrument_valid` — with the decision derived from those
@@ -184,22 +184,25 @@ substituted for the other.
 
 Three deviations are worth recording rather than smoothing over.
 
-**No sub-agents were run.** OR-2 asks for three to five. This lane's work was a single
-serial build against one frozen boundary, inside a window that ends in a
-repository-wide process-exclusive lease; a fan-out would have contended for the very
-CPU the calibration was measuring, and the runtime estimate is evidence here. The lane
-agent was itself the delegated sub-agent under the coordinator's BC-148 delegation.
+**No sub-agents were run.** OR-2 asks for three to five.
+This lane’s work was a single serial build against one frozen boundary, inside a window
+that ends in a repository-wide process-exclusive lease; a fan-out would have contended
+for the very CPU the calibration was measuring, and the runtime estimate is evidence
+here. The lane agent was itself the delegated sub-agent under the coordinator’s BC-148
+delegation.
 
 **Two identifier collisions were caught, not avoided.** `session-083` turned out to be
-the coordinator's own session rather than a free lane id, and `exp-058` was claimed by
-the concurrent `n = 5` lane while this package was being built. Both were found by
-checking the working tree and the gate output rather than by trusting the highest id
-seen at the start of the session. The round is exp-059 in session-084.
+the coordinator’s own session rather than a free lane id, and `exp-058` was claimed by
+the concurrent `n = 5` lane while this package was being built.
+Both were found by checking the working tree and the gate output rather than by trusting
+the highest id seen at the start of the session.
+The round is exp-059 in session-084.
 
-**The package sits in `packing/cases/`, not `packing/src/sqpack/`.** The lane's declared
-write scope named the latter. A library module under `src/sqpack/` importing `cases.*`
-would invert the layering, and the successor's three siblings all live in `cases/`. The
-coordinator confirmed the placement.
+**The package sits in `packing/cases/`, not `packing/src/sqpack/`.** The lane’s declared
+write scope named the latter.
+A library module under `src/sqpack/` importing `cases.*` would invert the layering, and
+the successor’s three siblings all live in `cases/`. The coordinator confirmed the
+placement.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

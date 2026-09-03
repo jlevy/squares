@@ -2449,7 +2449,7 @@ round that names the hypothesis, control roles included.
 | [H-049](packing/campaign/hypotheses/H-049-squeezable-20-in-4x6.md) | blocked | Twenty unit squares pack squeezably in a 4 by 6 rectangle, opening s(90) < 10 via Arslanov’s decomposition | 0 | — |
 | [H-050](packing/campaign/hypotheses/H-050-n71-angle-split-load-bearing.md) | blocked | The n = 71 incumbent’s 0.0358-degree angle split survives a bracketed single-angle LP sweep | 0 | — |
 | [H-051](packing/campaign/hypotheses/H-051-n68-blinded-surgery-calibration.md) | blocked | A blinded tier-S n = 68 public-parent surgery pilot matches the released child under the frozen grammar | 0 | — |
-| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | unresolved | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 3 | 139.6m agent + 139.6m wall |
+| [H-052](packing/campaign/hypotheses/H-052-n17-independent-certificate-agreement.md) | unresolved | The fixed retained `n = 17`, `L = 4.5058` certificate agrees under an independently written exact accumulator | 4 | 139.6m agent + 495.6m wall |
 | [H-053](packing/campaign/hypotheses/H-053-unitsquare-rigid-pose-serialization.md) | blocked | Each fixed UnitSquare `n = 68, 69` parent-child pair admits compatible rigid poses under at least one declared serialization model | 2 | 114m agent + 107.2m wall |
 | [H-054](packing/campaign/hypotheses/H-054-n50-exact-rational-reconstruction.md) | unresolved | The reported `n = 50`, `L = 53/7` construction admits a complete exact rational reconstruction | 2 | 38m agent + 30.0m wall |
 | [H-055](packing/campaign/hypotheses/H-055-n54-nested-radical-promotion.md) | blocked | If selected, the `n = 54` witness admits complete exact promotion in the reported nested-radical field | 0 | — |
@@ -2666,9 +2666,11 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 58 terminal rounds registered in `series-000`.
+There are 59 terminal rounds registered in `series-000`.
 
 They record 1738.1 agent-minutes and 791.8 wall-minutes.
+One of the 59, exp-059, is still in progress under a lease and has no effort block, so
+it contributes nothing to those totals yet.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
 result; exp-057 stopped before target access; exp-058 stopped on a missing dependency.
 Exp-058 records no agent-minutes at all, because the lane that produced its mathematics
@@ -2762,6 +2764,7 @@ archive beside it.
 | [exp-056](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-056-h-052-n17-sequential-larger-prefix.md) | 17 | calibration | H-052 | parent-bound child chain over the unchanged exp-052 driver | fixed timebox retained 170/181 contiguous agreeing rows through ordinal 169; canonical result absent | **unresolved** |
 | [exp-057](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md) | 68 | calibration | H-058 | side-semantics binding over the unchanged exp-054 adapter | literal point model retained; six-decimal side provenance absent; no target access | **unresolved** |
 | [exp-058](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md) | 5 | target | H-060 | scratchpad sympy chart-and-proof replay set, read-only; no repository instrument | all 400 elementary inequalities classified exactly and the 16/64 and 4/6 counts confirmed; `w · q_chart = -2√2 < 0`; no instrument receipt and no reviewed argument, so isolation is not decided | **unresolved** |
+| [exp-059](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-059-h-052-n17-fresh-successor-completion.md) | 17 | target | H-052 | fresh successor driver over the frozen exp-056 parent checkpoint and exp-052 chain genesis | preregistered and self-tested under 115 named guards on synthetic directions; no target direction evaluated yet | in-progress |
 
 ### Cost and provenance
 
@@ -2825,10 +2828,11 @@ archive beside it.
 | exp-056 | one fixed 356-minute elapsed lease | 21,360 s | — | timebox | `11ce70ee+sha256-f45227508b28f377` |
 | exp-057 | one 150-minute target-blind BC-138 lane | 1,000 s | 16.6667 m | guard | `11ce70ee` |
 | exp-058 | the 360-minute BC-152 `n = 5` lane of agenda-016 | 11.33 s | — | dependency | — (no engine; exact sympy replay) |
+| exp-059 | one fixed BC-148 process-exclusive lease, 08:58Z–09:58Z | — | — | — (running) | `2f112f4c` |
 
-### What the 58 rounds jointly establish
+### What the 59 rounds jointly establish
 
-The 58 rounds use 1738.1 agent-minutes and 791.8 wall-minutes under the campaign’s
+The 59 rounds use 1738.1 agent-minutes and 791.8 wall-minutes under the campaign’s
 retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
