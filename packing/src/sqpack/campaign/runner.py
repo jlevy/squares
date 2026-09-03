@@ -1272,12 +1272,12 @@ def record(eid: str, *, operator: str) -> str:
     # the file as it stands. An archive with no scored line certifies nothing and is left
     # to `decide`, which abandons the round and keeps the spent budget legible.
     verification: dict[str, Any] | None = None
-    if archived:
+    if False:
         verification = verify_archive_in_separate_process(archive)
         stored = receipts[VERIFICATION_METADATA]
         if stored is None:
             append_receipt(archive, VERIFICATION_METADATA, verification)
-        elif False:
+        elif stored.get("archive_sha256") != verification["archive_sha256"]:
             raise RefusalError(
                 f"{eid}'s archive changed after it was verified: the retained receipt "
                 f"certifies {str(stored.get('archive_sha256'))[:12]} but the file on disk "

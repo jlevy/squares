@@ -513,16 +513,22 @@ def test_each_cell_gets_its_own_share_of_the_timebox(
     of the two cut-off messages a loaded machine happens to print, and kept to a two
     second timebox so the guard costs the suite a second per cell rather than four.
     """
-    _write_hypothesis(tree, "H-900", cells="4, 9", seeds="1", timebox="2s")
+    _write_hypothesis(tree, "H-900", cells="4, 9", seeds="1", timebox="3s")
     monkeypatch.setenv("RUNNER_FIXTURE_MODE", "slow")
     eid = runner.claim("H-900", "fixture", 1.0)
 
     runner.execute(eid)
     out = capsys.readouterr().out
 
-    # Both cells were reached, and neither produced a measurement.
-    assert "n=4" in out
-    assert "n=9" in out
+    # The discriminating assertion is that the SECOND cell was actually invoked and cut
+    # off at a share of its own. Asserting only that "n=9" appears is a tautology: with
+    # one deadline shared across cells, the second cell still prints a line -- it just
+    # says the deadline was gone before it started. Mutation-checked against
+    # `cell_deadline = round_deadline`, which this now fails on and the weaker form did
+    # not.
+    assert "n=4: cell share reached mid-seed" in out
+    assert "n=9: cell share reached mid-seed" in out
+    assert "before the cell started" not in out
     assert runner.scan_archive(tree.archive(eid))[0] == []
 
 
@@ -548,6 +554,34 @@ def test_commit_paths_moves_head_and_stages_only_what_it_was_given(tree: Tree) -
         "campaign/ledger.md"
     ]
     assert "unrelated-lane.md" in _git(tree, "status", "--porcelain")
+
+
+def test_commit_paths_refuses_a_commit_that_does_not_move_head(
+    tree: Tree, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A commit that exits 0 without producing an object is the false success D-046 names.
+
+    The other two persistence branches are reachable with a real repository; this one is
+    not, so git is stubbed to report success while `HEAD` stays put. Without the stub the
+    guard would be untested code, and untested code is what the defect was.
+    """
+
+    def fake_git(*args: str) -> str:
+        if args[0] == "rev-parse":
+            return "same-sha"
+        if args[0] == "diff":
+            return "campaign/ledger.md"
+        return ""
+
+    monkeypatch.setattr(runner, "git", fake_git)
+    monkeypatch.setattr(
+        runner.subprocess,
+        "run",
+        lambda *a, **k: subprocess.CompletedProcess(args=a, returncode=0, stdout="", stderr=""),
+    )
+
+    with pytest.raises(runner.RefusalError, match="HEAD did not move"):
+        runner.commit_paths([tree.root / "pyproject.toml"], "round: no-op")
 
 
 def test_record_refuses_when_the_ledger_refuses(
