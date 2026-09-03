@@ -2541,8 +2541,8 @@ at `n=12`.
 open and demoted behind a short response curve.
 It is operationally shaped, and D-044 — the boundary that made it inadmissible
 unattended — is now fixed.
-No live round has passed through the repaired boundary, so admitting it unattended
-is still a review decision rather than a settled one.
+No live round has passed through the repaired boundary, so admitting it unattended is
+still a review decision rather than a settled one.
 
 The [idea board](packing/campaign/ideas.md) carries the full registered portfolio
 alongside raw ideas and dead ends.
@@ -2913,10 +2913,9 @@ and replays, all 6,631 fixed-point evaluations settle, and the maximum proved-si
 is `2.221e-15`. This is a local known-answer control, not a random-search or component
 claim. The exact small-moduli controls remain valid; component identity is the next
 blocked layer. The `n=12` calibration returns exactly `4.0`, but that is not a
-known-answer guard.
-The runner’s full-pose independent verification boundary is now closed
-under [D-044](defects.md): a scored line must carry the pose, and `record` re-checks
-the archived geometry in a separate process before writing a round.
+known-answer guard. The runner’s full-pose independent verification boundary is now
+closed under [D-044](defects.md): a scored line must carry the pose, and `record`
+re-checks the archived geometry in a separate process before writing a round.
 A producer-reported overlap scalar never closed it, and still does not.
 
 **Trump’s exact pose is locally isolated.** Exp-013 retains all 512 raw active-feature
@@ -3262,8 +3261,8 @@ rejected rank-free rigidity and dimension claims; and D-042 exposed `n = 12` as 
 target masquerading as a negative control.
 
 The systematic crosswalk then records every remaining technical finding from the PR #14
-review. D-043 closes the archive-before-validation path; D-044 now closes independent pose
-validity; D-045 tracks criterion-specific evaluators; D-046 now closes the runner
+review. D-043 closes the archive-before-validation path; D-044 now closes independent
+pose validity; D-045 tracks criterion-specific evaluators; D-046 now closes the runner
 state machine; D-047 closes contact-key reflection; D-048 retains unstable
 tolerance/equality semantics; D-049 tracks factorial canonicalization; D-050 and D-051
 separate observation promotion from regime-safe merging; D-052 narrows quench

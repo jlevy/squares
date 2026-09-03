@@ -507,9 +507,9 @@ those lines as equal-length `x`, `y` and `t` arrays of length `n`; and it must e
 The seed’s result is the *minimum* `best_side` over its lines, so nothing has to agree
 about which line is the summary.
 The pose is what keeps the round checkable rather than asserted: before writing a round,
-`record` rebuilds every archived pose into corner geometry and re-decides containment and
-pairwise separation in a separate `sqpack.verify` process, over a `sha256` of the result
-lines actually on disk.
+`record` rebuilds every archived pose into corner geometry and re-decides containment
+and pairwise separation in a separate `sqpack.verify` process, over a `sha256` of the
+result lines actually on disk.
 That is a numerical re-derivation and not a proof; it refutes a forged pose and promotes
 nothing.
 

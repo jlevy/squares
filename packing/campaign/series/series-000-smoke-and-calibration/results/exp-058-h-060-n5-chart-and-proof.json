@@ -18,7 +18,7 @@
     "reviewed_by": null,
     "next_review": "BC-153",
     "frontier_change": null,
-    "note": "The mathematics of the registered acceptance route is complete on paper and replayed exactly here, but the W7 repository instrument, its receipt and the eight rejecting controls do not exist, and the curve-selection citation is not confirmed against a primary text. H-060 is therefore unresolved and remains instrument_ready: false. No frontier or result-register change is implied."
+    "note": "The mathematics of the registered acceptance route is complete on paper and replayed exactly here, but no repository instrument checked it and the curve-selection citation is not confirmed against a primary text. A W7 instrument was built after this packet was frozen (see the instrument block below); it self-reports ready with isolation_decided false, and its independent readiness review returned BOUNDED-CAVEAT rather than a pass, twice. H-060 is therefore unresolved and remains instrument_ready: false -- because that review has not passed, not because nothing was built. No frontier or result-register change is implied."
   },
   "environment": {
     "interpreter": "packing/.venv/bin/python3",
@@ -32,13 +32,13 @@
     "source_name": "h060-chart-and-proof.md",
     "sha256": "28343b743e689fc99968d589a542d9022d061de8ec3ae5100bf4ef4930e40b6b",
     "bytes": 53646,
-    "lines": 926,
-    "note": "The installed exploration report reproduces this packet's content. It is reformatted to house Markdown conventions and carries an installation preface and the common-doc footer, so its bytes differ from the frozen source; no mathematical statement, number, count, citation or claim boundary was altered. This sha256 identifies the frozen source, not the installed file."
+    "lines": 925,
+    "note": "The installed exploration report reproduces this packet's content, but is not byte-identical to it. At installation it was reformatted to house Markdown conventions and given a preface and the common-doc footer; a later disclosed provenance pass then rewrote the citation apparatus of its section 4.1, withdrawing one citation (arXiv:2301.00128, an over-attribution of the arbitrary-semialgebraic statement to Milnor), de-flagging the Milnor statement from 'from memory', and adding the nonconstancy clause and hypothesis inventory to 4.2. No mathematical statement, number, count, margin, inequality, proof step or claim boundary was altered in either pass; the citation apparatus was. This sha256 identifies the frozen source, not the installed file."
   },
   "replay_scripts": {
     "retained_as": "verbatim source text in this record",
     "installed_as_repository_code": false,
-    "reason": "The campaign tree holds records, not code: no .py file exists anywhere under packing/campaign/. The executable form of this mathematics is the W7 extension of devtools.assess_n5_rigidity, which is owned by a separate lane and does not exist yet, so promoting these scratchpad scripts to repository tooling would both cross that lane's boundary and leave a measurement in one-off code (OR-1). Their bytes and hashes are retained here as the round's raw run data so the replay stays checkable.",
+    "reason": "The campaign tree holds records, not code: no .py file exists anywhere under packing/campaign/. The executable form of this mathematics was built after this packet was frozen, as packing/src/sqpack/local_rigidity/ binding to devtools.assess_n5_rigidity rather than extending it as W7 asks, so promoting these scratchpad scripts to repository tooling would both duplicate that package and leave a measurement in one-off code (OR-1). Their bytes and hashes are retained here as the round's raw run data so the replay stays checkable.",
     "scripts": [
       {
         "name": "verify_chart.py",
@@ -185,25 +185,56 @@
       "C6",
       "C7"
     ],
-    "note": "The eight rejecting controls are specified in the proof artifact but belong to the W7 instrument phase. Only the C8 pre-run was executed here, and it confirms exp-034 is not a refutation of H-060 rather than exercising an instrument refusal."
+    "note": "The eight rejecting controls are specified in the proof artifact but belong to the W7 instrument phase. Only the C8 pre-run was executed here, and it confirms exp-034 is not a refutation of H-060 rather than exercising an instrument refusal. The instrument built after this freeze does exercise all eight; see the instrument block for where its review stands."
+  },
+  "instrument": {
+    "exists": true,
+    "built_at_commit": "6580a9fd",
+    "package": "packing/src/sqpack/local_rigidity/",
+    "deviation_from_w7": "a new package binding to devtools.assess_n5_rigidity, not an extension of it as H-060's instrument text says",
+    "self_report": "instrument_ready true, isolation_decided false; all eight controls C1-C8 exercised",
+    "review_state": "BOUNDED-CAVEAT, not a pass",
+    "reviewed_builds": [
+      {
+        "commit": "2f112f4c",
+        "payload_digest": "1ab2708623cf4dd077a0f125ba81cf3777088ea8e4d750a56d1dc3f55f807978",
+        "classification": "BOUNDED-CAVEAT",
+        "caveat": "two of the eight registered controls, C1 changed_feature and C4 invented_contact, were structurally incapable of failing and never reached the binding's refusal path, so 'all eight controls reject' overstated the evidence for the one refusal the instrument exists to make"
+      },
+      {
+        "commit": "609e7392",
+        "payload_digest": "ba99ccccd7303f260f48c62a10fb9b6dc43ca3e8ff804646ef5de89a48967971",
+        "classification": "BOUNDED-CAVEAT",
+        "caveat": "the C1/C4 repair was verified by removal and holds, but the digested payload pins commit 2f112f4c, whose code cannot produce that payload, so a replayer following the pin gets CANNOT-REPRODUCE; the re-review's verdict becomes PASS only on that mechanical closure"
+      }
+    ],
+    "unreviewed": "any build after 609e7392; no statement in this record refers to one",
+    "declared_boundaries": [
+      "four mathematical inputs are cited, not machine-checked: the separating-axis theorem for convex polygons; the topological half of u -> 2 atan(u) being a homeomorphism onto (-pi, pi), the polynomial injectivity being verified and the topology cited; containment of a convex square in a convex rectangle reducing to its four corners; and continuity of polynomials, which is what makes U open",
+      "the binding compares a restricted second jet along one chart ray only -- the image of T-012's single free direction, e_u4 halved -- not the full chart Hessian; directions outside the first-order cone are not compared because T-012 supplies no q for them",
+      "classification covers single-support-feature touches only; edge-flush and corner-on-corner touches are refused rather than classified",
+      "the reduction audit compares only at sampled points inside U, on a fixed grid rather than a search towards U's boundary; points outside U are counted and skipped, so the filter is exercised, but no sampled point sits near the boundary by construction"
+    ],
+    "note": "This block records the instrument's state, not this round's evidence. Every quantity in this record was computed by the scratchpad sympy scripts above, before the instrument existed. The frozen packet is not subject to the restricted-jet limitation: verify_chart.py compares H_chart against J^T H_geo J on all twenty rows."
   },
   "open_obligations": [
     {
       "id": "O1",
-      "obligation": "The W7 executable instrument, its exact neighbourhood receipt, and the eight rejecting controls C1-C8.",
-      "owner": "a separate lane (sqpack.local_rigidity / devtools.assess_n5_rigidity)",
+      "obligation": "A W7 instrument whose readiness review passes. The instrument, its neighbourhood receipt and the eight rejecting controls C1-C8 were built after this packet was frozen, at 6580a9fd; the open obligation is the review, which returned BOUNDED-CAVEAT at 2f112f4c and again, after the C1/C4 repair, at 609e7392.",
+      "owner": "a separate lane (sqpack.local_rigidity, binding to devtools.assess_n5_rigidity rather than extending it as W7 asks)",
       "blocks": "instrument_ready: true, and therefore any accept determination"
     },
     {
       "id": "O2",
-      "obligation": "Primary-text confirmation of the curve-selection statement (BCR Proposition 8.1.13, equivalently Milnor 1968 Lemma 3.1). Currently supported only by two independent secondary sources quoted verbatim.",
+      "obligation": "Primary-text confirmation of the curve-selection statement (BCR Proposition 8.1.13; or Milnor 1968 Lemma 3.1 together with the finite-union reduction of X-012 section 4.1, which is what puts the set into Milnor's narrower class of real algebraic sets cut by strict inequalities -- the two are not equivalent as stated). Currently supported by a verbatim quotation from one of BCR's own authors, in notes he describes as provisional, plus four verbatim uses of the proposition by a single author group. The packet's second secondary source was withdrawn from X-012 as an over-attribution, so no independent corroborating source stands behind the citation.",
       "owner": "a separate lane; to be confirmed by the BC-153 reviewer",
       "blocks": "completeness of the registered acceptance route, which is preregistered on curve selection and is not discharged by the corroborating second proof"
     }
   ],
   "novelty": {
     "score": "S3",
-    "claimed": "The first exact proof that Goebel's n = 5 optimum is locally rigid at fixed side, a property asserted without proof by Kingbird, not stated by Goebel or Friedman, and not covered by any stated rigidity theorem for polygon contacts.",
+    "claimed": "The first exact proof that Goebel's n = 5 optimum is locally rigid at fixed side, a property asserted without proof by Kingbird and not stated by Goebel or Friedman.",
+    "carried_outside_the_claim": "The coordinator's prior-art survey reports that no theorem stated in the structural-rigidity or jamming literature covers polygon contact systems. That is an unverified survey assertion, not part of the claim: the instrument review directed it be carried this way, no lane checked it against the primary texts, and it is narrower than 'no stated rigidity theorem covers this' -- the same survey records that the classical second-order sufficiency theorems have no failing hypothesis once the system is reduced to the local twenty inequalities.",
     "not_claimed_as_new": [
       "the statement itself, which Kingbird asserts",
       "the closing principle, which is the classical second-order sufficient optimality condition",
@@ -223,6 +254,6 @@
     "any novelty beyond the S3 claim above"
   ],
   "recommendations": [
-    "Archive the Kingbird rigid-packings page under packing/resources/web/, which the packet notes is cited but not retained. Not done here: the resources archive is outside this round's write scope."
+    "Archive the Kingbird rigid-packings page under packing/resources/web/, which the packet notes is cited but not retained. Not done here: the resources archive is outside this round's write scope. It is also the only way to settle a live discrepancy: X-012 section 7.3 lists thirteen rigid entries from that unarchived page, of which n = 5, 11, 18, 28, 40 and 52 are at n <= 100, while the archived main page carries exactly four Rigid. annotations at n <= 100 (n = 5, 11, 28, 40), which is what the prior-art survey reports. The two are reconcilable if rigid-but-inoptimal entries are not annotated on the main list, as the rigid page's own preamble suggests, but nothing in the repository lets a reader check the list of thirteen."
   ]
 }

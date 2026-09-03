@@ -37,7 +37,8 @@ experiment:
       cases/gobel5; the C8 exp-034 specificity control, pre-run here through the T-012
       machinery and then decided exactly on container side; and the seven remaining
       declared controls C1-C7, which are specified in the proof artifact and belong to the
-      unbuilt W7 instrument phase rather than to this round
+      W7 instrument phase rather than to this round. That instrument was built after this
+      packet was frozen and exercises all eight there; its readiness review has not passed
     candidate: >-
       an intrinsic half-angle chart Phi on R^15, injective everywhere, with cleared
       denominators 1 + t_i^2 >= 1 and second-jet transform J = diag(1, 1, 2) per square; a
@@ -51,9 +52,11 @@ experiment:
     entry_point: >-
       campaign/series/series-000-smoke-and-calibration/results/exp-058-h-060-n5-chart-and-proof.json,
       whose replay_scripts block holds the verbatim source and SHA-256 of the seven scripts
-      this round built. The round built no repository code: the executable form of this
-      mathematics is the unbuilt W7 extension of devtools/assess_n5_rigidity.py, which
-      another lane owns
+      this round built. The round built no repository code. The executable form of this
+      mathematics was built after the freeze, at 6580a9fd, as the package
+      src/sqpack/local_rigidity/, which binds to devtools/assess_n5_rigidity.py rather than
+      extending it as W7's text asks; it is not this round's evidence, and its readiness
+      review has not passed
     command: >-
       cd packing && mkdir -p /tmp/replay058 && .venv/bin/python3 -c "import json,pathlib;
       r=json.loads(pathlib.Path('campaign/series/series-000-smoke-and-calibration/results/exp-058-h-060-n5-chart-and-proof.json').read_text());
@@ -141,8 +144,9 @@ experiment:
       disjunction arises
   - shape: determination
     question: >-
-      Given the Nash curve selection lemma as quoted verbatim by two independent secondary
-      sources, does the order-2m coefficient induction close?
+      Given the Nash curve selection lemma as cited -- quoted verbatim in the words of one
+      of BCR's own authors, in notes he describes as provisional, and applied verbatim in
+      four papers by a single author group -- does the order-2m coefficient induction close?
     role: mechanism
     outcome: criterion_met
     checked_by: >-
@@ -178,11 +182,22 @@ experiment:
     reason: >-
       Both accept conditions are unmet and both reject conditions are absent, so the only
       honest disposition is unresolved. The chart is not CHECKED in the criterion's sense --
-      every number in it was computed by scratchpad sympy, not by a repository instrument,
-      and the W7 tool, its neighbourhood receipt and the eight rejecting controls C1-C8 do
-      not exist, which is why H-060 keeps instrument_ready false. The argument is not
-      REVIEWED -- BC-153 has not run -- and its curve-selection step rests on two
-      independent secondary quotations rather than on BCR Proposition 8.1.13 itself. The
+      every number in it was computed by scratchpad sympy, not by a repository instrument.
+      A W7 instrument was built after this packet was frozen, at 6580a9fd, as the package
+      sqpack.local_rigidity binding to devtools.assess_n5_rigidity rather than extending it;
+      it self-reports instrument_ready with isolation_decided false and it does exercise the
+      eight controls C1-C8. Its independent readiness review returned BOUNDED-CAVEAT and not
+      a pass, because two of the eight registered controls, C1 changed_feature and C4
+      invented_contact, could not fail and never reached the refusal path; the repair landed
+      at 609e7392, a re-review verified it by removal and returned BOUNDED-CAVEAT again, a
+      pass conditional on one unclosed provenance item -- the digested payload pins commit
+      2f112f4c, which cannot produce the recorded digest. So H-060 keeps instrument_ready
+      false because that review has not passed, not because nothing was built. The argument
+      is not REVIEWED -- BC-153 has not run -- and its curve-selection step rests on
+      quotations rather than on BCR Proposition 8.1.13 itself: one of BCR's own authors, in
+      self-described provisional notes, plus four verbatim uses by a single author group.
+      The packet's second secondary source was withdrawn from X-012 as an over-attribution,
+      so no independent corroborating source stands behind the citation. The
       corroborating second-order-sufficiency proof recorded in the artifact reaches the
       same conclusion from strictly weaker hypotheses, but acceptance was preregistered on
       the curve-selection route, so it discharges nothing. What this round does establish
@@ -190,9 +205,10 @@ experiment:
       exactly, that the agenda's constraint counts are confirmed with no discrepancy, and
       that the one known nonconstant feasible arc lives at a different container side
     reopen_when: >-
-      the W7 instrument emits a neighbourhood receipt for this chart and refuses all eight
-      controls, and a reviewer confirms the curve-selection statement against a primary
-      text; either alone leaves the round where it is
+      the W7 instrument's readiness review passes -- it emits a neighbourhood receipt for
+      this chart, refuses all eight controls substantively, and pins the commit that
+      produces its digest -- and a reviewer confirms the curve-selection statement against a
+      primary text; either alone leaves the round where it is
     resume_from: >-
       the frozen packet installed as X-012, SHA-256
       28343b743e689fc99968d589a542d9022d061de8ec3ae5100bf4ef4930e40b6b, together with the
@@ -247,13 +263,18 @@ The registered criterion accepts only on a *checked* chart and a *reviewed* argu
 neither adjective applies yet.
 Two obligations are open and both belong to other lanes:
 
-1. The `W7` executable instrument, its exact neighbourhood receipt, and the eight
-   rejecting controls `C1`–`C8`. Only `C8` was pre-run here, and only to confirm that
-   `exp-034` is not a refutation — not to exercise an instrument refusal.
-2. Primary-text confirmation of the curve-selection statement, `BCR` Proposition 8.1.13 or
-   equivalently Milnor 1968 Lemma 3.1. The printed text was unavailable in this
-   environment; two independent secondary sources are quoted verbatim in the artifact, and
-   they agree, but a secondary quotation is not a reading.
+1. A `W7` instrument whose readiness review passes. Only `C8` was pre-run here, and only
+   to confirm that `exp-034` is not a refutation — not to exercise an instrument refusal.
+   An instrument was built after this packet was frozen; where its review stands is below.
+2. Primary-text confirmation of the curve-selection statement, `BCR` Proposition 8.1.13 —
+   or Milnor 1968 Lemma 3.1 *together with* the finite-union reduction of `X-012` §4.1,
+   which is what puts the set into Milnor's narrower class of real algebraic sets cut by
+   strict inequalities. The printed text was unavailable in this environment. What is
+   quoted verbatim in the artifact is one of `BCR`'s own authors, in notes he describes as
+   provisional, plus four uses of the proposition by a single author group; the packet's
+   second secondary source has since been withdrawn there as an over-attribution. That is
+   author-written and single-group attestation, not independent corroboration, and a
+   quotation is not a reading.
 
 The artifact’s second proof, by the classical second-order sufficiency principle, reaches
 the same conclusion from strictly weaker hypotheses and is recorded because an error in
@@ -266,6 +287,63 @@ At `mu = 1` the sufficiency inequality reads `-2 + 2 sqrt 2 > 0` and holds in th
 normalization, but reads `-2 + sqrt(2)/2 < 0` and *fails* in the `(c, theta)`
 normalization; the threshold is `mu > 2/(-w . q)`.
 
+## Where the `W7` Instrument Stands
+
+This round's mathematics was frozen before any instrument existed, and the instrument that
+was then built is not this round's evidence.
+It is recorded here because the round's disposition turns on its review state, and because
+a reader who is told only that the chart is unchecked would infer that nothing was built.
+
+Built at `6580a9fd`, sixteen minutes before this record was registered, as the package
+`src/sqpack/local_rigidity/`. It binds to
+[`devtools/assess_n5_rigidity.py`](../../../../devtools/assess_n5_rigidity.py) rather than
+extending it, which is a deviation from `W7`'s registered instrument text.
+It self-reports `instrument_ready` with `isolation_decided` false — it does not decide
+isolation — and it exercises all eight controls `C1`–`C8`, matching the artifact's table
+one for one.
+
+Its readiness review has **not** passed, and that, not absence, is why `H-060` keeps
+`instrument_ready: false`:
+
+- Reviewed build: payload digest
+  `1ab2708623cf4dd077a0f125ba81cf3777088ea8e4d750a56d1dc3f55f807978` at commit `2f112f4c`.
+  Classification **BOUNDED-CAVEAT**, not a pass.
+  Every mathematical and computational claim reproduced, but two of the eight registered
+  controls — `C1` `changed_feature` and `C4` `invented_contact` — were structurally
+  incapable of failing and never reached the binding's refusal path, so “all eight controls
+  reject” overstated the evidence for the one refusal the instrument exists to make.
+- Repaired at `609e7392`; digest
+  `ba99ccccd7303f260f48c62a10fb9b6dc43ca3e8ff804646ef5de89a48967971`.
+  The re-review verified the repair by removal — neutering the guard or the binding makes
+  both controls stop rejecting — and returned **BOUNDED-CAVEAT** again: a pass conditional
+  on one unclosed provenance item, since the digested payload pins commit `2f112f4c`, whose
+  code cannot produce that payload, so a replayer following the pin gets CANNOT-REPRODUCE.
+- Any build after `609e7392` is unreviewed. No statement here refers to one.
+
+The instrument's own declared boundaries, none of which this record could state while it
+denied the instrument existed:
+
+- **Four mathematical inputs are cited, not machine-checked**: the separating-axis theorem
+  for convex polygons; the topological half of `u -> 2 atan(u)` being a homeomorphism onto
+  `(-pi, pi)` (the polynomial injectivity is verified, the topology is cited); containment
+  of a convex square in a convex rectangle reducing to its four corners; and continuity of
+  polynomials, which is what makes `U` open.
+- **The binding compares a restricted second jet**, along one chart ray only — the image of
+  `T-012`'s single free direction, `e_u4` halved — not the full chart Hessian.
+  Directions outside the first-order cone are not compared, because `T-012` supplies no `q`
+  for them.
+- **Classification covers single-support-feature touches only**; edge-flush and
+  corner-on-corner touches are refused rather than classified.
+- **The reduction audit samples only inside `U`**, on a fixed grid rather than a search
+  towards `U`'s boundary, which is where a reduction argument is most likely to fail.
+  Points outside `U` are counted and skipped, so the filter is exercised, but no sampled
+  point sits near the boundary by construction.
+
+The frozen packet itself is not subject to the restricted-jet limitation: `verify_chart.py`
+compares `H_chart` against `J^T H_geo J` on all twenty rows.
+The limitation belongs to the instrument's binding, and the difference is exactly the kind
+of gap between a paper proof and an instrument that a round record exists to state.
+
 ## Reading `assurance: verified` Correctly
 
 The subject declares `assurance: verified` with `method: exact-algebraic`, which is the
@@ -275,7 +353,8 @@ It describes the arithmetic, not the hypothesis.
 It does **not** mean `H-060` is verified, and the verdict is the field that says so.
 Every quantity here was computed by scratchpad sympy scripts run read-only against the
 repository, independently of `sqpack.field`; none of it came from a repository instrument,
-because the instrument does not exist.
+because the `W7` instrument was built only after this packet was frozen and its readiness
+review has not passed.
 
 `selftest_passed` is `false` for the same reason: there is no engine gate to run.
 
@@ -302,16 +381,22 @@ has cost.
 The proof went in as an exploration report rather than as a new document kind, because
 that is the campaign’s slot for a long-form research document and the only one the
 document map already covers.
-Its mathematical body is byte-identical to the frozen packet, whose SHA-256 is
-`28343b743e689fc99968d589a542d9022d061de8ec3ae5100bf4ef4930e40b6b`.
+That SHA-256 — `28343b743e689fc99968d589a542d9022d061de8ec3ae5100bf4ef4930e40b6b` — names
+the frozen source and not the installed file, and the installed body is **not**
+byte-identical to it.
+It was reformatted to house Markdown conventions at installation, and a later disclosed
+provenance pass rewrote the citation apparatus of `X-012` §4.1, withdrawing one citation.
+No statement, number, count, margin, inequality, proof step or claim boundary changed in
+either pass; the citation apparatus did.
 
 The seven replay scripts are retained verbatim, with their sizes and digests, in
 [this round’s results record](../results/exp-058-h-060-n5-chart-and-proof.json) rather than
 installed as repository code.
 Nothing under `campaign/` is code — the campaign tree holds records — and the executable
-form of this mathematics is the `W7` extension of
-[`devtools/assess_n5_rigidity.py`](../../../../devtools/assess_n5_rigidity.py), which
-another lane owns.
+form of this mathematics was built after the freeze as
+[`src/sqpack/local_rigidity/`](../../../../src/sqpack/local_rigidity/), which binds to
+[`devtools/assess_n5_rigidity.py`](../../../../devtools/assess_n5_rigidity.py) rather than
+extending it as `W7`'s text asks.
 Installing seven one-off scripts as tooling would cross that boundary and preserve a
 measurement in one-off code.
 The `command` above extracts them from the record and re-runs all seven; that extraction
@@ -323,8 +408,16 @@ digest.
 The admissible claim is the first exact proof that Goebel’s `n = 5` optimum is locally
 rigid at fixed side — a property Kingbird asserts with no method anywhere on the site, that
 Goebel’s 1979 paper does not state (the words “rigid” and “unique” occur zero times in it),
-that Friedman’s survey does not annotate, and that no stated rigidity theorem for polygon
-contacts covers.
+and that Friedman’s survey does not annotate.
+Carried *outside* the claim, as an unverified survey assertion: the coordinator's prior-art
+survey reports that no theorem stated in the structural-rigidity or jamming literature
+covers polygon contact systems.
+That is the survey's wording and its scope, it was not verified against the primary texts
+by any lane, and the instrument review directed that it be carried this way rather than
+inside the claim.
+It is narrower than “no stated rigidity theorem covers this”: the same survey records that
+the classical second-order sufficiency theorems have no failing hypothesis here once the
+system is reduced, so a stated theorem does cover the reduced system.
 Score **S3, not S4**. The closing principle is the classical second-order sufficient
 optimality condition and the curve-selection proof shape matches Connelly–Whiteley 1996
 Theorem 4.3.1; **neither is claimed as new**, nor is the half-angle rationalization, the

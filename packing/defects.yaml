@@ -1188,10 +1188,11 @@ defects:
     repair closed one hole this record did not name: a result line is bound to the n and
     seed the harness invoked, so a command run for one cell can no longer score into
     another. The re-check is float arithmetic at 1e-9; it can refute a forged pose and
-    never promotes a round past numerically-checked. Nothing in the campaign's accept
-    rule, thresholds, controls or verdicts changed -- campaign/README.md already declared
-    the self-test a guard, so executing it enforces a criterion that was already written
-    down.
+    never promotes a round past numerically-checked. No criterion, threshold, control or
+    verdict changed: the campaign's accept rule already required, in clauses 3 and 4,
+    that the engine self-test passed in the same invocation and that every stored pose
+    pass an independent geometry check. The runner satisfied neither, and both now run,
+    so this enforces the rule as written rather than rewriting it.
   regression: >-
     tests/test_campaign_runner_trust_boundary.py, 61 tests over the result-line contract,
     the independent oracle, the executed engine gate, and the digest that binds a verdict
@@ -1200,9 +1201,10 @@ defects:
     cannot support, a truncated archive, an archive edited after it was verified, a
     producer writing a reserved receipt, an engine swapped after its self-test, and a
     result attributed to another cell are each refused; one test walks record's AST so
-    the verdict can only come from the child process, and one pins the oracle's detection
-    floor five orders below the 1e-4 basin threshold. The pose and attribution guards are
-    each shown load-bearing against a copy of the module with that one repair reverted.
+    the verdict can only come from the child process, and one holds the oracle's
+    tolerance at least four orders of magnitude below the 1e-4 basin threshold, where it
+    currently sits five below. The pose and attribution guards are each shown
+    load-bearing against a copy of the module with that one repair reverted.
     No live round is covered: sqsearch is not built in this environment, so the
     end-to-end round runs a fixture engine.
   bead: think-ldq2

@@ -63,7 +63,11 @@ independent review, and no frontier or result-register change follows from this 
 
 **Owns:** The mathematics of `BC-152` phase 0–105 at `n = 5`. It owns no code: the `W7`
 executable instrument, its receipt and the eight rejecting controls of §6 belong to a
-separate lane and do not exist yet.
+separate lane.
+That lane built them after this packet was frozen, at `6580a9fd`, as the package
+`src/sqpack/local_rigidity/`; their readiness review returned BOUNDED-CAVEAT rather than a
+pass, twice, so `instrument_ready` stays false because the review has not passed and not
+because nothing exists (§8.4).
 
 ## Provenance and installation
 
@@ -105,11 +109,23 @@ record’s brief. No statement, number, count, margin, inequality, proof step or
 boundary changed; `H-060` stays unresolved, `instrument_ready` stays false, and the
 printed BCR page is still unread.
 
+**Correction pass, 2026-09-03.** A second later pass, following an independent factual
+review of the round records against the artifacts they rest on, corrected four
+overstatements in this document: the “do not exist yet” description of the instrument
+above and in §8.4, which was false when written; the “equivalently Milnor 1968 Lemma 3.1”
+clause in the closing obligation, which restores exactly the over-attribution §4.1
+withdraws a citation for; the survey clause “not covered by any stated rigidity theorem for
+polygon contacts”, which is demoted out of the novelty claim in §7.4 and §8.5; and §7.3's
+list of thirteen rigid `n`, which is now recorded as in tension with the archived page.
+No statement, number, count, margin, inequality or proof step changed, and every correction
+makes this record weaker.
+
 The packet’s replay scripts are **not** installed as repository code.
 Nothing under `campaign/` is code — the campaign tree holds records — and the executable
-form of this mathematics is the `W7` extension of
-[`devtools/assess_n5_rigidity.py`](../../devtools/assess_n5_rigidity.py), which another
-lane owns and which does not exist yet.
+form of this mathematics was built after this packet was frozen, as
+`src/sqpack/local_rigidity/`, which binds to
+[`devtools/assess_n5_rigidity.py`](../../devtools/assess_n5_rigidity.py) rather than
+extending it as `W7`'s text asks.
 Promoting seven scratchpad scripts to tooling would cross that boundary and leave a
 measurement in one-off code.
 Their verbatim source, sizes and SHA-256 digests are retained instead as the round’s raw
@@ -1031,6 +1047,20 @@ valid packing without changing the size of its enclosing square.”
 It lists as rigid `n = 5, 11, 18, 28, 40, 52, 149, 296, 493, 740, 1037, 1384, 1781`,
 defines “semi-rigid” by example (`n = 28`: a carousel-like sliding group), and **states
 no method** of determination.
+**This list is uncorroborated and in tension with the archived page**, which is stated
+rather than resolved here: the rigid page is not under `packing/resources/`, and the
+archived main page
+([`kingbird-squares-in-squares.md`](../../resources/web/kingbird-squares-in-squares.md))
+carries exactly four “Rigid.”
+annotations at `n <= 100` — `n = 5, 11, 28, 40`, lines 44, 80, 163, 224 — which is what the
+coordinator's prior-art survey reports, and which agrees with that page's schema comment
+“all but four packings at n <= 100”. The thirteen-entry list adds `n = 18` and `n = 52`
+below 100.
+The two are reconcilable if rigid-but-inoptimal entries are simply not annotated on the
+main list, which the rigid page's own preamble allows (“in cases where they are inoptimal,
+they are shown alongside the best known”), but no reader can check that from anything in
+this repository until the rigid page is archived.
+Only the `n = 5` entry is used below, and it is corroborated on the archived page.
 So the catalogue’s “Rigid.”
 for `n = 5` is an assertion under a definition that coincides with H-060’s fixed-side
 notion (§1.3), without argument.
@@ -1048,12 +1078,20 @@ H-060 supplies the proof; it does not supply a *new* claim.
 - **Structural rigidity:** the closing principle is classical (SOSC) and is not claimed
   as new; the Puiseux/curve-selection proof shape matches [CW96] Theorem 4.3.1 and is
   not presented as new.
-  No stated rigidity theorem for polygon contacts applies (§7.1).
+  The coordinator's survey reports that no theorem stated in the structural-rigidity or
+  jamming literature covers polygon contact systems (§7.1); that is an unverified survey
+  assertion, carried outside the claim below rather than inside it.
 
 **Admissible claim:** the first exact proof that Goebel’s `n = 5` optimum is locally
-rigid at fixed side — a property asserted without proof by Kingbird, not stated by
-Goebel or Friedman, and not covered by any stated rigidity theorem for polygon contacts.
-**Novelty score S3, not S4.** Nothing in the method (chart, SAT accounting, coefficient
+rigid at fixed side — a property asserted without proof by Kingbird and not stated by
+Goebel or Friedman.
+**Novelty score S3, not S4.**
+Carried *outside* the claim: the survey's finding that no theorem stated in the
+structural-rigidity or jamming literature covers polygon contact systems.
+It is unverified against the primary texts by any lane, and it is narrower than “no stated
+rigidity theorem covers this” — the same survey records that the classical second-order
+sufficiency theorems have no failing hypothesis once the system is reduced to the local
+twenty inequalities. Nothing in the method (chart, SAT accounting, coefficient
 induction, SOSC) is claimed as new.
 
 * * *
@@ -1117,15 +1155,28 @@ Paper proofs, with every exact quantity replayed by an independent sympy impleme
 The 400 margins, the 2-jet binding and the certificate replay were computed by
 scratchpad sympy scripts, not by the repository instrument.
 The W7 instrument, its receipt, and the eight controls of §6 are not written by this
-lane; H-060 therefore remains `instrument_ready: false` and **unresolved** at the end of
-this phase, as the agenda requires.
+lane. A separate lane wrote them after this packet was frozen, at `6580a9fd`, as
+`src/sqpack/local_rigidity/` — a new package binding to `devtools.assess_n5_rigidity`
+rather than an extension of it, which is a deviation from `W7`'s registered text.
+It self-reports ready with `isolation_decided` false.
+Its independent readiness review returned **BOUNDED-CAVEAT** at `2f112f4c` (payload digest
+`1ab27086…`), because two of the eight controls could not fail; after the repair at
+`609e7392` (digest `ba99cccc…`) the re-review verified the repair by removal and returned
+BOUNDED-CAVEAT again, a pass conditional on one unclosed provenance item.
+H-060 therefore remains `instrument_ready: false` and **unresolved** at the end of this
+phase — because the review has not passed, not because the instrument is missing — as the
+agenda requires.
 
 ### 8.5 What is claimed as new, and what is not (governing novelty scoping)
 
 - **Claimed:** the first exact proof that Goebel’s `n = 5` optimum is locally rigid at
-  fixed side — a property asserted without proof by Kingbird, not stated by Goebel or
-  Friedman, and not covered by any stated rigidity theorem for polygon contacts.
-  Novelty score **S3, not S4**.
+  fixed side — a property asserted without proof by Kingbird and not stated by Goebel or
+  Friedman. Novelty score **S3, not S4**.
+- **Carried outside the claim, unverified:** the coordinator's survey finding that no
+  theorem stated in the structural-rigidity or jamming literature covers polygon contact
+  systems. No lane checked it against the primary texts, and it is narrower than “no stated
+  rigidity theorem covers this”: the same survey records that the classical second-order
+  sufficiency theorems have no failing hypothesis once the system is reduced.
 - **Not claimed as new:** the statement itself (Kingbird asserts it); the closing
   principle (classical second-order sufficiency, McCormick 1967 / Fiacco–McCormick
   1968); the Puiseux/curve-selection proof shape (it matches [CW96] Theorem 4.3.1); the
@@ -1156,8 +1207,10 @@ candidates at all.
 **The curve-selection citation, on the acceptance route.** Every other step of the
 primary route is either proved above or exactly replayed.
 The one step this lane could not check against a primary source is the statement of BCR
-Proposition 8.1.13 (equivalently Milnor 1968 Lemma 3.1): that for an arbitrary
-semialgebraic `A ⊂ R^n` (not assumed open, closed, or of any dimension) and `x ∈ Cl(A)`,
+Proposition 8.1.13 — or Milnor 1968 Lemma 3.1 *with the finite-union reduction of §4.1*,
+which is a different route and not an equivalent statement, since Milnor's “semi-algebraic”
+means a real algebraic set intersected with finitely many **strict** polynomial
+inequalities: that for an arbitrary semialgebraic `A ⊂ R^n` (not assumed open, closed, or of any dimension) and `x ∈ Cl(A)`,
 there exists a *real-analytic* arc `gamma` with `gamma(0) = x` and `gamma((0, ε)) ⊂ A`.
 The BC-153 reviewer should confirm this against the printed text; the second proof of
 §5.7 does not remove this obligation, because acceptance is preregistered on the
