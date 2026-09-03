@@ -97,6 +97,8 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-080](agent-sessions/session-080-bc138-n68-side-semantics-binding.md) | completed | contemporaneous | `insight-iteration` (correctness) | `factual-review` (correctness) | 4 | think-ymjp | Retain the literal point-model instrument and the typed refusal. Do not open BC-139; a future literal-only route requires a new prospectively frozen hypothesis and experiment. |
 | [session-081](agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `factual-review` (process) | 4 | think-hrw2 | Return the readmitted n = 54 subset to BC-143 under think-8hcp for the frozen routing decision; track the eight missing bound controls under D-418 / think-ifgr. |
 | [session-082](agent-sessions/session-082-bc141-n54-source-contract.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 1 | think-pkgx | At the fixed 11:23Z wave boundary, open BC-144 under think-2tol, freeze the terminal wave evidence and prepare only the bounded independent-review packets it earns. |
+| [session-083](agent-sessions/session-083-agenda016-ten-hour-coordinator.md) | completed | contemporaneous | `process-review` (process) | `review-planning-oversight` (process) | 3 | think-a0h6 | think-5j8d is the discharged marker for where this run stopped. The recommended next entry is think-ldq2 under think-modk: repair the four unrepaired D-044/D-046 source-finding clauses, one of which needs a reviewer because it loosens an acceptance screen. |
+| [session-084](agent-sessions/session-084-bc148-n17-fresh-successor-completion.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (process) | 3 | think-5j8d | think-5j8d is the marker Agenda 016's closeout selected for where this run's chain stopped, not a recommendation to continue it here; the coordinator's separately selected follow-up is recorded in the agenda's own closeout block. |
 
 ### Workflow summary
 
@@ -107,11 +109,12 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-survey` | 1 | 0 | 12 | 0 |
 | `factual-review` | 3 | 0 | 40 | 2 |
 | `insight-iteration` | 17 | 1 | 56 | 2 |
-| `process-review` | 13 | 4 | 61 | 6 |
+| `process-review` | 14 | 4 | 62 | 6 |
 | `efficiency-loop` | 9 | 0 | 27 | 0 |
-| `research-loop` | 8 | 4 | 43 | 7 |
-| `pipeline-improvement` | 20 | 0 | 101 | 0 |
-| `documentation-pass` | 1 | 0 | 2 | 0 |
+| `research-loop` | 8 | 4 | 45 | 7 |
+| `pipeline-improvement` | 21 | 0 | 102 | 0 |
+| `documentation-pass` | 1 | 0 | 3 | 0 |
+| `review-planning-oversight` | 0 | 0 | 1 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas
@@ -369,25 +372,25 @@ Status: **completed**. Run an exact ten-hour unattended campaign from agenda-014
 
 ### [agenda-016](agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md) — Results-First Continuation, Rigidity, and Remediation
 
-Status: **active**. Run one ten-hour autonomous session from Agenda 015's completed W10 closeout and the operator's revised priority order. Three disjoint lanes begin after a thirty-minute coordinator preflight. The first completes H-052 through a fresh successor that replays the retained 170-row chain and emits the complete result envelope the exp-056 child assembler lacks; an exact pass opens a separate source and adoption route for the reported 4.5058 lower bound at n = 17--19. The second tests the prospectively registered H-060 fixed-side local-rigidity theorem at n = 5, the strongest near-term route to genuinely new first-party mathematics. The third executes one W9 wave over D-044 and D-046, the two critical defects sharing the generic campaign-runner trust boundary. The research wall is 600 elapsed minutes, with the final 120 reserved for W10 disposition, documentation review, validation, publication, and replanning. Mechanical closeout continues after the research wall if a gate or hosted check is still running, records that time separately, and starts no new research.
+Status: **completed**. Run one ten-hour autonomous session from Agenda 015's completed W10 closeout and the operator's revised priority order. Three disjoint lanes begin after a thirty-minute coordinator preflight. The first completes H-052 through a fresh successor that replays the retained 170-row chain and emits the complete result envelope the exp-056 child assembler lacks; an exact pass opens a separate source and adoption route for the reported 4.5058 lower bound at n = 17--19. The second tests the prospectively registered H-060 fixed-side local-rigidity theorem at n = 5, the strongest near-term route to genuinely new first-party mathematics. The third executes one W9 wave over D-044 and D-046, the two critical defects sharing the generic campaign-runner trust boundary. The research wall is 600 elapsed minutes, with the final 120 reserved for W10 disposition, documentation review, validation, publication, and replanning. Mechanical closeout continues after the research wall if a gate or hosted check is still running, records that time separately, and starts no new research.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-147 | tool_validation | 5, 17 | ready | 0 | think-a0h6 | A passed launch packet opens BC-148, BC-152 and BC-154 concurrently. On any refusal, the coordinator runs no target, atomically marks BC-148 through BC-154 never-opened with the preflight reason, satisfies their tbd closeout dependencies, and opens BC-155 on that failed-preflight packet. |
-| BC-148 | measurement_validation | 17 | blocked | 0 | think-5j8d | BC-149 reviews every terminal outcome. Only a complete, instrument-valid, all-agree result may route BC-150; every other outcome receives its own repair, continuation, or discrepancy disposition. |
-| BC-149 | measurement_validation | 17 | blocked | 0 | think-sapq | A pass opens the source-adoption proposal in BC-150. On every other determination, the coordinator atomically marks BC-150 and BC-151 never-opened with the inherited reason, satisfies their closeout dependencies without running them, and gives BC-155 the typed outcome and follow-up. |
-| BC-150 | research | 17, 18, 19 | blocked | 0 | think-6q88 | BC-151 independently reviews and, only on an exact pass of an adoption recommendation, applies the frozen patch. Otherwise BC-151 records never-opened application and BC-155 preserves the named reason. |
-| BC-151 | research | 17, 18, 19 | blocked | 0 | think-bagn | BC-155 reports the adoption at its honest source-backed scope or routes the named blocker. Reusable weighted-certificate extraction remains separate work and does not delay this fixed-certificate decision. |
-| BC-152 | research | 5 | blocked | 0 | think-760r | BC-153 independently reviews every terminal outcome. Only an exact pass may promote fixed-side local rigidity and register a new frontier result. |
-| BC-153 | measurement_validation | 5 | blocked | 0 | think-pssq | BC-155 reports a new first-party theorem only if this block passes and every generated consumer agrees. Otherwise it preserves the smallest unresolved proof obligation and ranks the follow-up against the remaining portfolio. |
-| BC-154 | tool_validation | 5, 11, 17 | blocked | 1 | think-modk | BC-155 records each defect's terminal disposition. A fixed or contained runner may reenter future generic search agendas only at the scope its regressions prove; unresolved defects remain named blockers rather than an implied safe surface. |
-| BC-155 | research | 5, 17, 18, 19 | blocked | 0 | think-xycf | The selected post-agenda bead and workflow become the only next handoff. A new agenda may be drafted after operator confirmation or the declared autonomous fallback, but it does not begin inside this closeout. |
+| BC-147 | tool_validation | 5, 17 | stopped | 0 | think-a0h6 | A passed launch packet opens BC-148, BC-152 and BC-154 concurrently. On any refusal, the coordinator runs no target, atomically marks BC-148 through BC-154 never-opened with the preflight reason, satisfies their tbd closeout dependencies, and opens BC-155 on that failed-preflight packet. |
+| BC-148 | measurement_validation | 17 | stopped | 0 | think-5j8d | BC-149 reviews every terminal outcome. Only a complete, instrument-valid, all-agree result may route BC-150; every other outcome receives its own repair, continuation, or discrepancy disposition. |
+| BC-149 | measurement_validation | 17 | complete | 0 | think-sapq | A pass opens the source-adoption proposal in BC-150. On every other determination, the coordinator atomically marks BC-150 and BC-151 never-opened with the inherited reason, satisfies their closeout dependencies without running them, and gives BC-155 the typed outcome and follow-up. |
+| BC-150 | research | 17, 18, 19 | stopped | 0 | think-6q88 | BC-151 independently reviews and, only on an exact pass of an adoption recommendation, applies the frozen patch. Otherwise BC-151 records never-opened application and BC-155 preserves the named reason. |
+| BC-151 | research | 17, 18, 19 | stopped | 0 | think-bagn | BC-155 reports the adoption at its honest source-backed scope or routes the named blocker. Reusable weighted-certificate extraction remains separate work and does not delay this fixed-certificate decision. |
+| BC-152 | research | 5 | stopped | 0 | think-760r | BC-153 independently reviews every terminal outcome. Only an exact pass may promote fixed-side local rigidity and register a new frontier result. |
+| BC-153 | measurement_validation | 5 | stopped | 0 | think-pssq | BC-155 reports a new first-party theorem only if this block passes and every generated consumer agrees. Otherwise it preserves the smallest unresolved proof obligation and ranks the follow-up against the remaining portfolio. |
+| BC-154 | tool_validation | 5, 11, 17 | stopped | 1 | think-modk | BC-155 records each defect's terminal disposition. A fixed or contained runner may reenter future generic search agendas only at the scope its regressions prove; unresolved defects remain named blockers rather than an implied safe surface. |
+| BC-155 | research | 5, 17, 18, 19 | stopped | 0 | think-xycf | The selected post-agenda bead and workflow become the only next handoff. A new agenda may be drafted after operator confirmation or the declared autonomous fallback, but it does not begin inside this closeout. |
 
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 57 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 59 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -444,7 +447,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | H-049 | blocked | search | delta((4,6), 20) > 0: twenty unit squares pack into a 4 by 6 rectangle |  | 0 |  |
 | H-050 | blocked | search | The n = 71 incumbent's split of sixteen oblique squares across two ang |  | 0 |  |
 | H-051 | blocked | search | Starting only from the hash-verified public n = 68 parent, a proposer  |  | 0 |  |
-| H-052 | unresolved | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 3 | 139.6m agent + 495.6m wall |
+| H-052 | confirmed | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 4 | 304.6m agent + 528.8m wall |
 | H-053 | blocked | search | For each fixed UnitSquare Release 1 parent-child pair at n = 68 and n  |  | 2 | 114m agent + 107.2m wall |
 | H-054 | unresolved | search | The retained source facts for the reported n = 50 construction at side |  | 2 | 38m agent + 30.0m wall |
 | H-055 | blocked | search | If BC-111 selects n = 54, the fixed retained witness at reported side  |  | 0 |  |
@@ -452,7 +455,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | H-057 | unresolved | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 1 | 107.833m agent + 12.3m wall |
 | H-058 | unresolved | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 2 | 115.667m agent + 115.7m wall |
 | H-059 | confirmed | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 1 | 92m agent + 1s wall |
-| H-060 | blocked | proof | At the exact container side 2 + sqrt(2)/2, Goebel's exact n = 5 packin |  | 0 |  |
+| H-060 | confirmed | proof | At the exact container side 2 + sqrt(2)/2, Goebel's exact n = 5 packin |  | 1 | 11s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -506,7 +509,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | exp-047 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `interval-enclosure`: the numerical prototype's selftest and synthetic controls pass, but a float midpoint fit with fixed tolerance and heuristic radii does not prove a nonempty compatible-pose enclosure or outward- rounded wall and pair signs, and the preregistered command lacks a complete post- authorization runner. No parent retrieval, target parse or target fit ran, so H-053 remains unresolved. |
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
 
-### accepted (17)
+### accepted (19)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -527,6 +530,8 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 | exp-042 | series-000 | 5 | openai-codex | H-023 | All six unchanged paths have exact universal feasibility certificates with the frozen base, open-interval, and endpoint inventories, and both owner branches have exact positive first-order stress certificates. Generation and replay agree, all twenty production-path controls reject with their expected identifiers, and the stress-only control retains feasibility while making the combined verdict unresolved. The result is pathwise only and refuses every broader H-023 claim. |
 | exp-045 | series-000 | 5 | openai-codex | H-023 | Accepted 2026-08-31 by the owner in session-050, after the independent post-change audit that was the sixth admission condition. The round's content is unchanged from session-033: both declared determinations report criterion_met -- canonical pure -W is excluded at A, the interior, and B, and the -W coefficients equal the separately derived +W values -- with twelve mutation controls, thirteen refusal records, and deterministic record-and-replay agreement, all independently replayed by the auditor (a perturbed artifact is refused with replay.drift). The audit raised three findings, resolved in the Amendment section below rather than glossed: the registration's mutation vocabulary differs from the implemented twelve (mapped and explained there, per session-032's reachability derivation), the driver did not route through the accepted production helpers, and its docstring still described the exp-043 draft (D-404). The decisive resolution is devtools.check_minus_w_bridge: the accepted row-jet, stress, scale, and owner-4 helpers, run on the actual -W direction, independently rebuild all fifteen owner-3 scale records and all three owner-4 records with strict exact contradictions and +W/-W coefficients equal -- two independently written implementations deciding the same question the same way, held in place by tests/test_minus_w_bridge.py. Acceptance widens nothing: every broader claim remains refused -- no whole-component identity, no A-to-B stationary connection, no local isolation, no terminality, and no H-023 disposition beyond the excluded direction. |
 | exp-055 | series-000 | 50 | openai-codex | H-059 | The one authorized process produced the exact same existing-result refusal and canonical zero-call trace under normal and optimized Python, every sentinel was independently calibrated, every registered mutation rejected, exp-050 remained byte-identical and the no-import verifier accepted the immutable result. This accepts only H-059's prospective protocol claim; independent campaign review is still required. |
+| exp-058 | series-000 | 5 | Claude (agent), BC-152 n = 5 proof lane of agenda-016, bead think-760r | H-060 | Accepted 2026-09-03 on BC-153's independent review, which returned PASS. The registered criterion is frozen, was not amended for this round or for the review, and was met as written: the chart is CHECKED -- the reviewer replayed the W7 instrument from clean roots under normal and optimized Python and its neighbourhood receipt is this chart's N exactly, 128 strict conditions in the same four roles and counts, with every gradient and restricted second jet matching and all eight controls rejecting -- and the argument is REVIEWED, by a reviewer who authored none of the packet, the instrument, X-012 or this record, who rebuilt every exact quantity from scratch in sympy sharing no code with the author (the 400 margins, the 28 witnesses, the 20 active rows, -t4^2, q = -2, the displayed g-tilde_3, the midpoints, 28 hand-built Farkas certificates plus T-012's 28 stored ones and its self-stress, and Lemma 8 on random arcs), replayed the packet's five scripts to digests equal to this record's, and accepted every logical step from nonisolation to the second-order contradiction. What is accepted is exactly this: for s = 2 + sqrt(2)/2 and Goebel's labeled pose P0 in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) (closed unit squares in [0, s]^2, pairwise disjoint interiors); equivalently there is no nonconstant continuous feasible path from P0 and no sequence of distinct feasible poses converging to it; hence Kingbird-rigid at fixed side. Acceptance widens nothing else: no isolation radius, nothing with the side free (which is false, X-007), no global uniqueness, no other n = 5 optimum, no applicability of Connelly-Whiteley as stated, and no method novelty -- the closing principle is classical and the CW96 Theorem 4.3.1 proof shape is not new. The review names six gaps carried from the record plus one new minor one, none of them a condition of the pass; they are listed in the Amendment below and none of them is closed by this acceptance. This round's own account of what it did and did not do is unchanged above: its numbers still came from scratchpad sympy, and what the review adds is the instrument replay and the independent reconstruction that the criterion's two adjectives require |
+| exp-059 | series-000 | 17 | claude-opus-5 | H-052 | All 181 paired direction cells agree exactly, both complete certificate summaries are identical with global minimum 1/1, every instrument guard holds and the decision derives to accepted from the emitted evidence, so the registered criterion is met at its declared scope. BC-149's independent review, 2026-09-03, returned an exact PASS: every reported figure reproduced, the whole admission boundary replayed, the decision was re-derived from the emitted bytes in a separate process, and a third implementation importing nothing from this repository reproduced all 181 rows. needs_review was cleared on that review, which is the transition it authorised and nothing more; the decision, its reason and the claim boundary are unchanged by it. What is established remains implementation agreement over the same event-cell reduction for one fixed certificate -- not proof-method independence, not adoption of 4.5058, and no cross-n claim. The review's three limitations are recorded in the Amendment below and one of them, the validator gap, is filed as D-428. |
 
 ### baseline (11)
 
@@ -558,7 +563,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 
 ## Effort
 
-57 rounds, 1738.1 agent-minutes, 791.6 wall-minutes.
+59 rounds, 1903.1 agent-minutes, 825.0 wall-minutes.
 
 ## Exploration reports not yet codified
 
@@ -567,6 +572,7 @@ Status: **active**. Run one ten-hour autonomous session from Agenda 015's comple
 - X-006 — The candidate discriminating control at n = 5 is the one D-034 has been quoting
 - X-008 — The shapes the grammar cannot express are the ones that are not tilted
 - X-010 — Two lanes, two ladders — focusing the campaign on first-party theorems
+- X-012 — One chart, four hundred inequalities, and an order-2m contradiction
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

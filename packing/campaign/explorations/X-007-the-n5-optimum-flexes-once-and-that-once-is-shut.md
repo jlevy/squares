@@ -298,8 +298,14 @@ on intersecting the half-spaces at every pose — which is [`D-391`](../../../de
 that fails it, and `test_n5_has_no_disjunctive_pair` holds the exemption claimed here.
 The cost of leaving it as prose was not hypothetical: at `n = 40`, 42 of 98 touching
 pairs are corner-to-corner, and intersecting them reports that packing rigid when it is
-not. So the curve selection lemma gives a semi-algebraic arc into the set, and Puiseux
-gives `gamma(s) = p + sum_{k >= m} a_k s^k` with `a_m != 0`. Then:
+not. So the curve selection lemma, applied to the feasible set *with the pose removed*,
+gives a semi-algebraic arc into it — one avoiding `p` at every positive parameter value,
+hence nonconstant.
+Puiseux gives that arc an expansion in fractional powers `s^(k/N)` for
+some positive integer `N`, so the substitution `s = u^N` comes first: it clears the
+fractional exponents, keeps the arc inside the set (`u > 0` exactly when `s > 0`), and
+leaves an analytic arc, whose parameter is written `s` again below, with
+`gamma(s) = p + sum_{k >= m} a_k s^k` and `a_m != 0`. Then:
 
 - The `s^m` coefficient of `g_j(gamma(s))` is `a_j . a_m`, so feasibility forces
   `a_j . a_m >= 0` for every `j`: `a_m` lies in the first-order cone, hence
@@ -314,6 +320,31 @@ gives `gamma(s) = p + sum_{k >= m} a_k s^k` with `a_m != 0`. Then:
 
 So no such arc exists and the pose is isolated: the packing is locally rigid at fixed
 side.
+
+**Correction (2026-09-03, `BC-152` source verification).** The reparametrisation above
+was missing when this was written.
+The step read “the curve selection lemma gives a semi-algebraic arc into the set, and
+Puiseux gives `gamma(s) = p + sum_{k >= m} a_k s^k` with `a_m != 0`”, which skips one:
+what Puiseux supplies for a merely continuous semi-algebraic arc is an expansion in
+*fractional* powers, and `s = u^N` has to clear them before a coefficient induction can
+run at all. The step is written in above, and no other step of the induction changes.
+**The same edit closed a second, independent gap**, which is worth its own sentence
+because it is not the same repair: the lemma is now applied to the feasible set *with
+the pose removed*, so the arc it returns avoids `p` at every positive parameter value
+and is therefore nonconstant.
+As written before, the lemma was applied to the set itself, and under `x` in the closure
+alone it is entitled to hand back the constant arc — on which the coefficient induction
+has nothing to bite.
+The source verification calls that omission the trap for this proof and the step most
+likely to be skipped;
+[X-012](X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md) §4.2
+treats it at length.
+The route that avoids the reparametrisation entirely is the *Nash* form of the curve
+selection lemma (Bochnak–Coste–Roy, *Real Algebraic Geometry*, Proposition 8.1.13),
+whose arc is real-analytic as well as semi-algebraic, so its expansion is in integer
+powers from the start.
+[X-012](X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md) §4
+takes that route and its §4.1 records what the citation rests on.
 
 **That argument is not what this record claims**, and the distinction is deliberate.
 Everything up to and including the self-stress is computed and verified in the field,
@@ -351,6 +382,16 @@ It is worth measuring precisely because “rigid” said without a container con
 be false, and the distance between the two readings is the whole sixteen dimensions.
 
 ## What Moves in the Record, and What Deliberately Does Not
+
+*Note, 2026-09-03: this section describes what this round moved, and it is left as
+written. The property it deliberately did not move has since moved: the prose step below
+was written out in full as
+[X-012](X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md),
+checked against an exact accounting of all 400 local inequalities, independently
+reviewed under `BC-153`, and registered as `T-014`, so the `n = 5` block now reads
+`property: locally-rigid` at fixed side on a second first-party evidence record.
+The reasoning below for why it could not move then is unchanged and is why the later
+move needed a proof.*
 
 The frontier `rigidity` block for `n = 5` keeps `property: undetermined`, and everything
 else about it changes.

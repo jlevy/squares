@@ -8,6 +8,19 @@ from `packing/`.
 Keep Claude and Codex measurements separate when their intervals can overlap.
 -->
 
+## New Results and Their Significance
+
+<!-- Omit this section entirely when the branch registered or re-scored no result.
+Where it applies it is generated, not written: `devtools.render_pr_rollup --agenda
+agenda-NNN` joins `frontier/results.yaml` to the agenda's wall and emits the rungs
+with the significance rubric's own wording from `epistemics.md`.
+
+It sits here, above the dispositions, because the dispositions are keyed on
+commitments and a result is a different object. Agenda 016 is why the section
+exists: it registered three results, scored all three, and published a description
+that gave a significance rating for one of them.
+-->
+
 ## Results and Dispositions
 
 <!-- Lead with what the work established, not its agenda chronology.

@@ -501,9 +501,17 @@ An experiment is one durable `exp-NNN` record for one round.
 Its executable recipe is a **command** declared in the hypothesis.
 The harness invokes that command once per `{n}` and `{seed}`; each invocation is a run
 inside the experiment.
-It must print JSON Lines carrying `best_side` and an `overlap` of exactly zero on every
-result line, and exit 0. The seed’s result is the *minimum* `best_side` over its lines,
-so nothing has to agree about which line is the summary.
+It must print JSON Lines carrying `best_side`, the `n` and `seed` it was invoked for,
+and an `overlap` of exactly zero on every result line; it must carry the full pose on
+those lines as equal-length `x`, `y` and `t` arrays of length `n`; and it must exit 0.
+The seed’s result is the *minimum* `best_side` over its lines, so nothing has to agree
+about which line is the summary.
+The pose is what keeps the round checkable rather than asserted: before writing a round,
+`record` rebuilds every archived pose into corner geometry and re-decides containment
+and pairwise separation in a separate `sqpack.verify` process, over a `sha256` of the
+result lines actually on disk.
+That is a numerical re-derivation and not a proof; it refutes a forged pose and promotes
+nothing.
 
 Adding an experiment therefore never edits the campaign runner.
 Writing new experiment code is expected; writing new harness code per round is the

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 421
+count: 429
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -1165,7 +1165,7 @@ defects:
   direction: flattering
   detected_by: review
   severity: critical
-  status: outstanding
+  status: contained
   what: >-
     The runner contract requires only a scalar overlap field emitted by the same command
     that proposes the result; quench output stores no complete pose. It also hardcodes
@@ -1176,10 +1176,113 @@ defects:
     binary can pass the archive boundary. Later exact promotion is impossible when the
     pose that must be checked was discarded.
   fix: >-
-    none yet. Require a full pose or content-addressed pose artifact, independently
-    verify it in a separate sqpack process, bind the verifier result to the row digest,
-    and derive self-test status from an executed binary hash and exit status.
-  regression: none
+    Repaired against the producer, independently reviewed, and `contained` rather than
+    `fixed`: the attack this record names is closed and reproduced, and one clause of the
+    source finding plus three residuals on the same boundary are named below and are not.
+
+    What the repair does. Every scored line must now carry the full pose as equal-length
+    x, y and t arrays of length n. Each pose and the archive as a whole are
+    content-addressed by sha256, and a retained certificate is refused once the archive
+    under it has moved. record rebuilds every archived pose into corner geometry and
+    re-checks containment and pairwise separation through sqpack.verify in a separate
+    process, translating to the bounding-box origin because the producer's required_side
+    is translation-invariant. The engine self-test is executed before any measurement is
+    taken and the binary that passed it is hashed, so subject.selftest_passed is derived
+    from an exit status and a digest that still matches the file on disk rather than
+    written as a literal. The same repair closed one hole this record did not name: a
+    result line is bound to the n and seed the harness invoked, so a command run for one
+    cell can no longer score into another. The re-check is float arithmetic at 1e-9; it
+    can refute a forged pose and never promotes a round past numerically-checked. No
+    criterion, threshold, control or verdict changed: the campaign's accept rule already
+    required, in clauses 3 and 4, that the engine self-test passed in the same invocation
+    and that every stored pose pass an independent geometry check. The runner satisfied
+    neither, and both now run, so this enforces the rule as written rather than rewriting
+    it.
+
+    The independent review, 2026-09-03, returned BOUNDED-CAVEAT. The producer-side attack
+    this record names -- a fabricated side, a fabricated zero overlap, an untested binary
+    -- is genuinely closed, and the reviewer reproduced every refusal against the code
+    rather than against the summary of it. That is why this is contained and not
+    outstanding: none of what follows is unproven, and none of it flatters a result. It is
+    contained and not fixed because a status is a claim about the finding, not about the
+    row that summarises it, and against the finding the repair is incomplete.
+
+    The reviewer recommended the other label, and it is recorded here so a reader of this
+    row sees the disagreement and not only the outcome. The review says in terms: "the
+    repair is real and substantial and should not be reverted or downgraded to
+    'contained'", and that "'Fixed, with the following named and tracked residuals' is the
+    honest disposition; 'fixed' unqualified is not." The coordinator chose `contained` on
+    the reasoning above -- that a status is a claim about the finding rather than about the
+    row summarising it. Both readings are defensible and neither hides anything: the
+    residuals below are the same list under either label, and the review is installed at
+    docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md.
+
+    The unrepaired clause. This record summarises finding F-02 of the PR #14 review and the
+    repair was written against the summary. F-02's fifth clause -- "exact zero is not
+    required at the float screen; independently bounded non-overlap is" -- was never
+    carried into this record and so was never implemented. validated_record
+    (packing/src/sqpack/campaign/runner.py:587) still refuses any line whose overlap is not
+    exactly 0.0. Measured 2026-09-03: an overlap of 1e-18 is refused outright while the
+    identical geometry verifies. The engine's own notion of feasible is a bound and not an
+    exact zero -- sqsearch's self-test accepts best_overlap <= FEASIBLE_EPS -- so a round in
+    which the engine reports a genuinely tiny non-zero overlap is refused before the oracle
+    that now exists to decide it is ever consulted. The repair added the independent bound
+    and kept the screen F-02 asked to drop. Conservative in direction, and unrecorded until
+    now. Close it by requiring overlap to be finite and <= POSE_TOLERANCE and letting the
+    geometric check decide, or by recording why the stricter screen was kept.
+
+    Three residuals the lane did not disclose, all on the boundary this defect names. They
+    share one precondition -- write access to the archive between execute and record, which
+    the producer does not have -- and one remedy. (1) record never binds the lines it scores
+    to the bytes the child verified: it reads the archive three times, through scan_archive,
+    the child's own read, and cells_from, and never compares archive_digest(archived) with
+    the child's archive_sha256; the stored-receipt comparison fires only when a receipt
+    already exists. (2) Only record writes a verification receipt, so on a first record
+    there is no execute-to-record binding at all and clause 44.6's archive-digest refusal is
+    unreachable in the unattended loop -- the test that covers it plants the receipt by
+    hand, because nothing else puts one there in time. (3) One genuinely valid scored line
+    duplicated under the other declared seeds manufactures the declared seed count: every
+    copy verifies because the geometry is real, so decide's evidence-sufficiency clause
+    turns a round that should be abandoned into unresolved, in the flattering direction,
+    and the geometric oracle structurally cannot object. All three were reproduced on
+    2026-09-03. Having execute append the archive digest of what it produced, and record
+    compare it, closes all three together.
+
+    Not repaired here. Agenda 016's W9 lane is bounded to D-044 and D-046 as scoped and this
+    branch does not have room to widen; all four items above are carried on think-ldq2.
+  regression: >-
+    tests/test_campaign_runner_trust_boundary.py, 61 tests over the result-line contract,
+    the independent oracle, the executed engine gate, and the digest that binds a verdict
+    to the bytes it was taken over. A scored line with no pose, a pose whose length
+    disagrees with n, a non-finite coordinate, a fabricated zero overlap, a side the pose
+    cannot support, a truncated archive, an archive edited after it was verified, a
+    producer writing a reserved receipt, an engine swapped after its self-test, and a
+    result attributed to another cell are each refused; one test walks record's AST so
+    the verdict can only come from the child process, and one holds the oracle's
+    tolerance at least four orders of magnitude below the 1e-4 basin threshold, where it
+    currently sits five below. The pose and attribution guards are each shown
+    load-bearing against a copy of the module with that one repair reverted.
+
+    Two bounds on that list, both established by the 2026-09-03 review rather than asserted
+    here. The AST test collects only ast.Call nodes whose func is an ast.Name, so it catches
+    the naive edit that optimises the subprocess away and would not see an attribute or
+    aliased call; it is behavioural coverage of the containment property, not a structural
+    proof of it. And the seven guards left without a permanent mutation proof were each
+    reverted in a copy and re-run: every one turns the suite red, so the twelve-guard claim
+    is verified in full. What those seven lack is protection against a future weakening of
+    the tests, which is not hypothetical -- two of the twelve were tautologies on the first
+    pass.
+
+    No live round is covered, and the reason is now narrower than this entry first gave.
+    "sqsearch is not built in this environment" was true when written and went stale at
+    10:30Z on 2026-09-03, when a release binary appeared at
+    packing/sqsearch/target/release/sqsearch (ELF x86-64, 617,520 bytes, untracked). It has
+    not been executed, nothing has been recorded through the unattended runner, and the
+    end-to-end round still runs a fixture engine. Three things therefore remain inferred rather
+    than executed -- that the real producer satisfies the new contract end to end, that the
+    round artifact record now writes validates against the enforced Experiment/v2 schema
+    (no test checks this; the fixture stubs regenerate), and the engine gate's real cost
+    against the round budget. SYNOPSIS.md's NO-GO for unattended execution stands.
   bead: think-ldq2
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 - id: D-045
@@ -1214,7 +1317,7 @@ defects:
   class: robustness
   detected_by: review
   severity: critical
-  status: outstanding
+  status: contained
   what: >-
     Queueing ignores prerequisites; execute and record do not require an in-progress
     state; one deadline is shared across cells and may exceed the lease or session;
@@ -1227,11 +1330,98 @@ defects:
     against the wrong time, and a scientific success can be reported without durable
     persistence. These failures are worst during unattended operation.
   fix: >-
-    none yet. Encode and enforce every transition, prerequisite, lease and deadline;
-    check narrow git operations; recompute the queue after transitions; and make any
-    execution, validation, or persistence failure a durable non-scientific terminal
-    state.
-  regression: none
+    Every clause of this record is closed in code, independently reviewed, and `contained`
+    rather than `fixed`: three clauses of the source finding never reached this record's
+    summary and so were never repaired, and two residuals sit on the same lifecycle.
+
+    What the repair does. The lifecycle is now a closed machine. execute, record and release
+    each refuse a
+    round that is not in-progress, so a terminal round cannot be rewritten; the queue and
+    claim both refuse a hypothesis whose declared prerequisites have not been accepted,
+    with a prose prerequisite counted as unmet rather than waved through; and the queue is
+    recomputed after every transition. The lease claim writes is now read: parsed as an
+    instant, with a naive stamp taken as UTC and an offset converted rather than
+    stripped, refused once expired, and used to cap the round's budget, which is then
+    split into an equal share per cell instead of one deadline the first cell could spend
+    in full. Persistence is checked: staging names the round's artifact, its archive and
+    the regenerated ledger rather than the whole campaign directory, the commit's exit
+    status is read, and HEAD must move before the round is called durable. Every
+    execution, validation or persistence failure now ends the round in the same durable
+    non-scientific state, and the session reports what state each round actually reached.
+    --no-verify is retained deliberately: the pre-commit hook formats the whole tree and
+    re-stages it, which would sweep other lanes' files into the round's commit and defeat
+    the narrow pathspec this defect asked for.
+
+    The independent review, 2026-09-03, returned BOUNDED-CAVEAT. All twelve clauses of this
+    record were read against the code and measured, including the seven guards the lane left
+    without a permanent mutation proof: each was reverted in a copy and every one turns the
+    suite red, so the twelve-guard claim is verified in full. That is why this is contained
+    and not outstanding.
+
+    The reviewer recommended the other label, and it is recorded here so a reader of this
+    row sees the disagreement and not only the outcome. The review says in terms: "the
+    repair is real and substantial and should not be reverted or downgraded to
+    'contained'", and that "'Fixed, with the following named and tracked residuals' is the
+    honest disposition; 'fixed' unqualified is not." The coordinator chose `contained` on
+    the reasoning above -- that a status is a claim about the source finding rather than
+    about the summary of it in this record, and three of F-04's clauses never reached that
+    summary. Both readings are defensible and neither hides anything: the
+    residuals below are the same list under either label, and the review is installed at
+    docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md.
+
+    The three unrepaired clauses. This record's `what` summarises finding F-04 of the PR #14
+    review, and three clauses present in F-04 did not reach the summary and so were never
+    repaired. (1) "Record pre-run engine dirtiness before campaign writes." execute
+    (packing/src/sqpack/campaign/runner.py:1071) captures git status --porcelain after claim
+    has written the in-progress stub and re-rendered campaign/ledger.md, neither committed.
+    Measured 2026-09-03 from a verifiably clean tree, the recorded method.dirty is True: the
+    field is unconditionally True on every unattended round, carries no information about
+    the engine's starting tree, and is copied into subject and method by
+    artifact_fields_from_execution. Capture it in claim, before the stub write. (2) Per-cell
+    timeboxes. campaign/schemas/hypothesis.schema.yaml:187-193 and F-04 itself say the
+    timebox bounds one cell; campaign/README.md:390 says per round; execute takes the round
+    budget and divides it by the cell count, which no document states. Latent only because
+    both live recipes declare one cell, where the split is the identity, so the semantics
+    now live in the code alone and the code holds the casting vote. Decide it and write it
+    in the schema, the runbook and this record; if per-cell wins it is a code change, not a
+    doc change. (3) "The report can omit runnable-but-unrun work." Half repaired: safe_release
+    and the report's Health section now make the what-moved / what-died distinction, which
+    was the substantive part. A hypothesis that was runnable and simply not reached, because
+    the session budget ran out before its turn, still appears in neither done nor skipped,
+    because skipped holds only what queue filtered out. All three are conservative or merely
+    uninformative -- none flatters a result -- which is why this is a caveat and not a
+    discrepancy.
+
+    Two residuals on this lifecycle. run's failure policy is not total: a KeyError, TypeError
+    or YAML error from a malformed recipe or artifact escapes the
+    (GuardError, RefusalError, OSError) clause, so the finally still writes the report but
+    the round is neither released nor counted toward MAX_CONSECUTIVE_FAILURES. And the three
+    archive residuals recorded under D-044 are closed from here rather than there: they need
+    execute to append the digest of what it produced and record to compare it, which is a
+    change on this defect's own execute-to-record edge.
+
+    Not repaired here, and carried on think-ldq2. Agenda 016's W9 lane is bounded to D-044
+    and D-046 as scoped. A control-cell breach failing to stop the session is a separate
+    declared stop condition rather than a clause of this defect, and is recorded as D-426.
+  regression: >-
+    tests/test_campaign_runner_trust_boundary.py covers the lifecycle guards. execute,
+    record and release each refuse a terminal round and recording the same round twice is
+    refused; the queue skips and claim refuses a hypothesis whose prerequisites have not
+    landed; a lease offset is converted rather than stripped; an expired lease refuses
+    execute; the timebox is capped by the remaining lease and shared between cells;
+    commit_paths refuses an empty stage and a commit that does not move HEAD, and stages
+    only the paths it was given; and run releases the round, reports the state it truly
+    reached, and still writes its report when a step refuses before or after the verdict.
+    The lease-expiry, terminal-round and prerequisite guards are each shown load-bearing
+    against a copy of the module with that one repair reverted.
+
+    Two properties of that list, established by the 2026-09-03 review. Every one of the
+    twelve guards, including the seven with no permanent mutation proof, turns the suite red
+    when reverted in a copy, so the coverage claim holds. And
+    test_each_cell_gets_its_own_share_of_the_timebox is timing-sensitive: with a three-second
+    round budget over two cells, a loaded machine that overruns the first cell's share pushes
+    the second past its own start and fails the test. The stricter assertion that made the
+    test load-bearing also made it fragile, in a suite already at its 900-second step budget.
   bead: think-ldq2
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 - id: D-047
@@ -12446,3 +12636,699 @@ defects:
   regression: none
   bead: think-mlwo
   recorded_in: packing/devtools/render_wave_efficiency.py
+- id: D-422
+  title: Build caches are still copied into every worker, and the cap is held by a per-file prune
+  date: '2026-09-03'
+  layer: tooling
+  class: robustness
+  detected_by: inspection
+  latent_for: >-
+    the breach, from before this branch's base until the same day it was recorded; the
+    copied build caches, for as long as the portable fallback has bulk-copied the tree
+  severity: high
+  status: outstanding
+  what: >-
+    Recorded as "the snapshot cap refuses all 155 negative controls, and build caches are
+    what breach it", against a live measurement of 67,823,986 bytes and a 64 MiB cap. Both
+    halves have since moved, in opposite directions, and this entry is retitled to the half
+    that survives. The refusal is discharged; the diagnosis was superseded by a later
+    commit, which is a different thing from having been wrong, and both are kept because
+    the second is what a reader needs and the first is what this log is for.
+
+    Correct when written, re-measured rather than taken on report. Replaying
+    `snapshot_source_bytes()`'s accounting over `git ls-tree` at `609e7392`, the commit
+    that recorded this entry -- counted over the git tree, so no build cache can enter the
+    figure -- the tracked counted surface was 56,903,590 bytes against the 67,108,864 cap,
+    10,205,274 under it. The live measurement was over only because 11,095,141 bytes of
+    `__pycache__`, `.pytest_cache` and `.ruff_cache` were counted with it, and the
+    untracked non-cache remainder was zero. (The entry's own figure, 56,735,348, differs by
+    168,242 -- the copy-back term its script priced from the live tree -- and the
+    conclusion is the same either way.)
+
+    Superseded by a commit, on 2026-09-03. `ceff4400` committed exp-059's completion record
+    (10,923,451 bytes) and its checkpoint (10,947,228), 21,870,679 together. Counted the
+    same way over the git tree, the surface went from 56,965,725 at its parent `2796174b`
+    to 78,841,684 at `ceff4400`: 11,732,820 over the cap with zero caches present. From
+    that commit the breach was record-caused, and no cache exclusion would have cleared it.
+
+    What survives, all measured at `3018f454` on 2026-09-03. First, the build caches are
+    still counted and still bulk-copied by `_clone_into` into each of the four private
+    worker trees: 11,819,796 bytes, 20.8% of the 56,898,058-byte live surface, and no
+    control names a `.pyc`. They sit in `tests/` (4,362,514), `cases/` (3,019,649),
+    `devtools/` (2,263,035), `src/` (1,942,655), `.pytest_cache` (160,825) and
+    `.ruff_cache` (71,118). Second, the measurement is still a property of a used checkout
+    rather than of the commit: it moved 678,914 bytes inside this one session, from
+    56,219,144 when the fix below was measured to 56,898,058 now, with no commit between
+    them and nothing but `__pycache__` to explain it. Live minus caches is 45,078,262,
+    exactly the tracked surface at HEAD, so the caches remain the whole of the drift.
+    Third, the fix that cleared the cap names four files, and the headroom now standing
+    behind that list -- 10,210,806 bytes -- is smaller than the single pair of artifacts
+    that consumed the last of it. The next result the size of exp-059's breaks the cap
+    again.
+  consequence: >-
+    Discharged 2026-09-03, with evidence. The suite ran, for the first time on this branch:
+    `155 negative controls fire as expected`, exit 0, no failures, and no control failing
+    for the wrong reason. Three runs -- two in the session that applied the fix, the second
+    of them after two concurrent commits had landed, and one more at `3018f454` for this
+    entry.
+
+    That is the first direct evidence on this branch that the repository's guards catch
+    what they were written for, as opposed to that their anchors still resolve. The
+    adjacency this entry was written about is closed with it: `check_control_anchors`
+    reports "155 negative control anchors each match their file exactly once" and its own
+    docstring says it "deliberately does NOT check that a control still *catches* what it
+    was written for", so until this ran, that green count stood beside a suite in which
+    nothing had ever fired.
+
+    What the surviving half costs. About a fifth of every private worker tree is build
+    detritus, copied four times over for a suite that mutates source. Worse than the waste
+    is that the guard's subject is not the commit: the same tree measures 45,078,262 bytes
+    on a fresh checkout and 56,898,058 here, so the cap fires for one person and not
+    another on identical code. And the cap now stands on a list of four file names. When it
+    is next breached the suite stops running in the full gate again -- and that much is not
+    silent, because `tests/test_negative_controls.py` asserts
+    `snapshot_source_bytes() < SNAPSHOT_MAX_BYTES` and rides the `fast behavioral tests`
+    step, which is `fast=True`. What stays silent is everything finer: `Step("negative
+    controls", ...)` still carries neither `fast` nor `records`, so the pull-request surface
+    can say that the snapshot is too big and can never say that a control has stopped
+    catching what it was written for.
+
+    The prediction above came true inside the same session, and not the way it was
+    written. This entry expected the next breach to be record-caused -- "the next result
+    the size of exp-059's breaks the cap again". What actually broke it was the caches
+    alone, on a commit that added 40 KB of prose. The full gate at `d2d0ba4f` measured
+    68,007,522 bytes against the 67,108,864 cap, 898,658 over, and the decomposition is
+    that the walk carries 11,164,000 bytes of `__pycache__`, `.pytest_cache` and
+    `.ruff_cache` -- without them the surface is 56,843,522, comfortably under. So the
+    sequence is: run the gate, the gate writes bytecode, the bytecode is counted, and the
+    next run of the same gate on the same commit fails the cap. Hosted CI passed the
+    identical tree at the same revision, on a clone with no caches, which is the
+    "fires for one person and not another on identical code" claim of this entry
+    reproduced as an actual red gate rather than as a projection. Two of the three failed
+    steps in that run -- `negative controls` and `fast behavioral tests` -- are this one
+    assertion, counted twice; the suite's other 1,606 tests passed.
+  fix: >-
+    Applied at `a478744a`, and deliberately narrow. Four file names joined `PRUNE` --
+    exp-059's result and checkpoint, plus the exp-052 and exp-056 checkpoints, which
+    predate this branch and are the same class rather than the next thing to trip the cap
+    -- 34,109,196 bytes together. The live counted surface went 90,031,065 to 56,219,144,
+    16.2% under the cap at the time, and the suite ran. The artifacts stay committed: they
+    are exp-059's evidence. What changed is that a throwaway mutation sandbox no longer
+    carries 34 MB of solver state in order to corrupt one line of a Python file. Pruning by
+    file rather than by directory is not durable and was not meant to be, which makes the
+    structural options below more urgent rather than less.
+
+    Three directions remain, and the fourth has been withdrawn. (1) Exclude the build
+    caches from the counted surface and from `_clone_into`. Still the smallest change,
+    still 11.8 MB of pure detritus, and it is the only one of these that makes the
+    measurement a property of the commit instead of the checkout. (2) Content-address the
+    large checkpoints so a worker links rather than copies them. (3) Raising the cap again
+    is still the weakest: `D-371` raised it from 40 to 64 MiB on the reasoning that it
+    "exists to stop someone checking in a gigabyte of data, not to track the record's
+    ordinary growth", and the growth has consumed that headroom twice in the five days
+    since -- once with the caches counted, and once in the record alone.
+
+    Withdrawn: pruning `campaign/series/*/results` wholesale, which this entry previously
+    proposed. It is wrong, and silently so. `devtools.check_canonical` reads
+    `exp-003-baseline-n11-target.jsonl` from that directory for the wrong-basin `n = 11`
+    packing; `archived_n11()` returns `None` when the archive is absent and the caller does
+    not skip -- it records `FAIL  Trump's basin differs from the annealer's  [no archive]`
+    and the checker exits 1 before any mutation is applied. Since a control is scored on
+    "exited non-zero and printed its expect string", with no green baseline demanded, all
+    four canonical controls go on passing over a checker that was already red, and the
+    `n = 11` basin discrimination the checker exists for is silently not performed.
+    Demonstrated rather than argued: in a cloned worker with that one archive removed, the
+    checker exits 1 unmutated and `run_one` scores all four controls PASS. That scoring gap
+    is `D-427`. The prune also buys almost nothing -- 1,072,797 bytes beyond the four files,
+    because the linked- and registered-target rules pull 6,790,030 bytes of the directory
+    straight back.
+
+    One residual of the applied prune, recorded so it is not rediscovered as a surprise.
+    `devtools.check_instrument_normalization` globs `campaign/series/*/results/*.json` for
+    instrument bindings, and inside a worker it now finds 8 of the 11 the real tree has. The
+    three it loses are the three carried by the pruned checkpoints and result, all naming
+    the same file, `resources/web/n17-lower-bounds-2026/massaccesi-verify-n17-lower-bound-4_5058.py`,
+    which lives under the already-pruned `resources/` tree. They cost nothing, and the
+    reason is worth knowing: the checker classifies a bound path as `excluded` before it
+    tests whether the file exists, and `tool.ruff` `extend-exclude` covers `resources`, so
+    those three were `excluded` in the real tree too and were never inspected. Nothing in
+    `controls.yaml` invokes this checker and its only test asserts `bound_python_files > 0`,
+    so the real-tree check is unaffected. Had the same prune removed a binding whose path
+    was not excluded, its status would have been `missing`, which is a violation, and this
+    checker would have been red in every worker -- the `D-427` shape one file over.
+  regression: >-
+    none for either surviving half, and one correction to what this entry first said. The
+    cap does have a check: `tests/test_negative_controls.py::test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots`
+    asserts `snapshot_source_bytes() < SNAPSHOT_MAX_BYTES`, and the step that runs it is
+    `fast=True`, so a fresh checkout at `ceff4400`, where the surface was 78,841,684, fails
+    on the pull-request surface and not only in the full gate. What has no check at all is
+    the cache accounting: nothing refuses a snapshot that is a fifth detritus, nothing makes
+    two runs on one commit agree, and nothing says that the headroom is now smaller than the
+    last artifact that consumed it.
+  recurrence_of: D-371
+  bead: think-c46d
+  recorded_in: packing/devtools/run_negative_controls.py
+- id: D-423
+  title: The cover certificate's Lemma 4 boundary is non-strict in two sources and strict in a third, unrecorded
+  date: '2026-09-03'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: since the green17 certificate was retained on 2026-08-31
+  severity: medium
+  status: outstanding
+  what: >-
+    The lemma that closes the top strips of the Green17 cover certificate is printed with
+    two different strictnesses, and the repository holds both. All three statements were
+    checked against the archive rather than taken on report.
+
+    Non-strict, twice. `[Stromquist 2003]` Lemma 3: "Let a and b satisfy a <= 1, b <= 1,
+    and a + 2b <= 2 sqrt 2. Then any box whose center is in the rectangle [0,a] x [0,b]
+    must intersect the x-axis, the point (0,b), or the point (a,b)"
+    (`packing/resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md:52`,
+    confirmed against the byte-level extraction at `.raw.md:161`). `[Bentz 2010]` Lemma 4,
+    attributed to Friedman and Stromquist, repeats it with `a + 2b <= 2 sqrt 2`
+    (`packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:55`, confirmed at
+    `.raw.md:93`).
+
+    Strict, once. Friedman's Dynamic Survey DS7 Lemma 2: "Let 0 < x <= 1, 0 < y <= 1, and
+    x + 2y < 2 sqrt 2" -- strict on that hypothesis alone while the other two stay
+    non-strict (`packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md:153`,
+    and independently in the separately extracted HTML at
+    `packing/resources/web/friedman-ds7-survey-2009-html.md:231`).
+
+    The two readings agree everywhere except at `a + 2b = 2 sqrt 2`, and that boundary is
+    exactly the case the certificate's ceiling argument uses.
+    `packing/cases/green17/verify_cover.py` says so in its own words: the certified side
+    "sits within 6 * 10^-7 of the set's exact ceiling 753/250 + sqrt 2 (the top strips'
+    a + 2b <= 2 sqrt 2 becoming equality)". `packing/frontier/RESULTS.md` T-003 carries the
+    same non-strict form into a retained apparently-novel result, "the top strips'
+    a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2)".
+    Under Friedman's strict form the lemma does not apply at that equality at all.
+
+    A second, smaller divergence sits in the same pair of statements and is recorded here
+    because it is the same unperformed collation: Stromquist's conclusion names the point
+    `(0, b)` where Bentz's names `(0, a)`, on a rectangle `[0,a] x [0,b]`. Bentz's `.md`
+    transcription and its `.raw.md` ground truth agree with each other, so this is a
+    difference between the printed sources and not a transcription error introduced here.
+    Which one is right is part of the same reconciliation and is not settled by this entry.
+  consequence: >-
+    Bounded, and worth stating precisely so this is not read as a refutation. The retained
+    numerical claim is untouched: the certificate proves `s(17), s(18) >= 4426213/1000000`,
+    and at that side the top strips satisfy `a + 2b < 2 sqrt 2` strictly, roughly 6e-7
+    inside the boundary, so the strict and non-strict readings give the same verdict there
+    and both formal legs -- the exact cell certifier and the interval branch-and-bound in
+    `packing/cases/green17/interval_audit.py` -- stand.
+
+    What is affected is the exact-ceiling follow-on. Nothing has been computed or retained
+    at `753/250 + sqrt(2)`: T-003 brackets the ceiling in
+    `[4426213/1000000, 4427/1000)` with a certification at the left endpoint and an exact
+    escaping pose at the right, and the ceiling value sits strictly inside that bracket
+    with only prose attached. So the boundary case has never been exercised at the value
+    in question, and the lemma form that would license it is the one the sources dispute.
+    A reader of T-003 meets the non-strict hypothesis presented as governing, with no
+    indication that a third printed source withholds it at exactly that point. Left
+    unrecorded, the obligation is invisible to whoever later tries to promote the ceiling
+    from bracketed to established.
+  fix: >-
+    None yet, and none here: Agenda 016's W9 lane is bounded to D-044 and D-046 and may not
+    substitute a backlog item, and this branch establishes no Green17 result.
+
+    The remedy is a short written reconciliation, not a recomputation. Decide, against the
+    three printed statements and their proofs, whether the boundary `a + 2b = 2 sqrt 2` is
+    covered -- Friedman's DS7 proof of the strict form derives the escape condition from
+    `f(theta) = cos + sin - x sin cos > y` with a minimum at `theta = 45 deg`, so whether
+    the inequality closes at equality is decidable from the printed argument -- then record
+    the verdict where the certificate and T-003 can cite it, and qualify the exact-ceiling
+    follow-on on `think-iye2` accordingly. If the strict reading wins, the ceiling claim
+    needs a different closing mechanism at `753/250 + sqrt(2)`; if the non-strict reading
+    wins, the note is what makes the existing prose load-bearing. Either way nothing about
+    `4426213/1000000` moves.
+  regression: >-
+    none. The frontier's source-availability and evidence records track whether a source is
+    held and whether it was reviewed, not whether two held sources state the same lemma the
+    same way, so nothing in the gate would have raised this.
+  bead: think-iye2
+  recorded_in: packing/cases/green17/verify_cover.py
+- id: D-424
+  title: Two of the eight n = 5 rigidity controls adjudicated themselves and called nothing
+  date: '2026-09-03'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: forty-six minutes and six commits, from the controls' first appearance at e25d17ab to the BC-153 repair at 609e7392
+  severity: high
+  status: fixed
+  what: >-
+    `controls.changed_feature` (C1) and `controls.invented_contact` (C4) computed their
+    own verdicts inline. Neither built a mutated system and neither called `bind` or any
+    guard: `invented_contact` never named `bind`, and the only name `changed_feature` took
+    from `sqpack.local_rigidity.binding` was `embed`, a field-embedding helper.
+
+    C1, for each of the four touching pairs and each of the three sibling support features
+    of its active branch, formed `claimed = (active_keys - {contact.key}) |
+    {substitute.key}` and recorded `active_key_agreement_breaks = claimed != t012_keys`.
+    C4 took `system.inactive_walls[0]`, formed `claimed = active_keys | {invented.key}`,
+    and recorded `agrees = claimed == set(t012.contact_keys)`. In both, the key put into
+    the set was chosen *because* it is not one of T-012's contacts, so the comparison could
+    not have come out the other way. The other conjunct in each verdict -- that the
+    sibling's margin is nonzero, that the invented wall's margin is not zero -- is a true
+    fact about the pose, but it is a fact the control read off the unmutated system for
+    itself. No mutated object was ever handed to anything that could refuse it. C1 also
+    computed whether the sibling's gradient differs from the contact's, and no verdict read
+    it.
+
+    Checked rather than argued: run at `2f112f4c`, both controls return `rejected=True`,
+    and neither verdict expression references a function of the instrument.
+  consequence: >-
+    The receipt's control table and `test_every_control_rejects` said eight of eight
+    refuse. Six did. The other two restated their own premises, so the evidence behind the
+    single refusal this instrument exists to make was six controls and two decorations, and
+    nothing in any view distinguished them.
+
+    What that overstated is a readiness gate rather than a retained result, and the entry
+    is bounded accordingly. `H-060` -- Goebel's exact `n = 5` optimum is locally rigid at
+    fixed side -- registers the instrument-ready transition as a reviewed precondition, and
+    `exp-058` reopens its round only when the instrument "refuses all eight controls
+    substantively" -- a qualifier that round's record did not carry until this was found.
+    When this was found, `H-060` carried `instrument_ready: false` and no receipt had been
+    retained, so nothing downstream had yet consumed the claim. That is no longer the
+    state, and the order is what keeps the entry bounded: the repair landed at `609e7392`
+    *before* either transition, the readiness review passed on the repaired controls at
+    payload digest `743fd18a...`, and only then did `H-060` move to `instrument_ready:
+    true` with the current build's receipt `f8262c77...` retained in `exp-058`'s result
+    record and `T-014` registered. So what the downstream records consumed is the repaired
+    instrument, not the two decorations. Unread, two tautologies would have been discharged
+    as evidence at exactly the step where a claimed new theorem is promoted.
+  fix: >-
+    Both controls now mutate a real `ConstraintSystem` and hand it back to the instrument.
+    `with_active_pair` and `with_forged_active_wall` build the mutant; C1 applies each of
+    the twelve substitutions twice, once renaming the contact onto the sibling and once
+    keeping the contact's name and its cached margin while swapping in the sibling's
+    polynomial; C4 forges a zero margin onto a slack wall inequality. Each verdict is now
+    the conjunction of a guard refusal and `bind` refusing.
+
+    The guard is new and its recomputation is the whole mechanism.
+    `system.require_active_margins_zero` re-evaluates every active polynomial at
+    `chart.origin()` instead of reading its stored `margin`, because both forgeries leave a
+    plausible cached margin behind, and it is called from `instrument.assess` before the
+    neighborhood is built -- so it guards the path the receipt is built on and not only the
+    controls. Its finding: against the key-preserving forgery the recomputing guard catches
+    all twelve substitutions while `bind`'s gradient check catches eight, the four it
+    misses being gradient-degenerate against the contact they replace.
+  regression: >-
+    Four retained tests, and they pin the mechanism rather than the verdict, which is what
+    the first version would have passed.
+    `test_a_changed_support_feature_is_refused_by_the_instrument_itself` and
+    `test_an_invented_contact_is_refused_by_the_guard_and_by_the_binding` assert, per
+    substitution, that the guard refused and that the binding does not hold;
+    `test_the_active_margin_guard_recomputes_rather_than_trusting_the_record` requires
+    `ActiveMarginError` on both mutation shapes; `test_every_control_rejects` holds the
+    suite at eight.
+
+    The standard that settled it is the part worth keeping, because it is what separates a
+    control from a decoration: the reviewer confirmed the repair *by removal*, not by
+    reading. Reproduced here against the working tree at HEAD -- baseline `(True, True)`;
+    with `require_active_margins_zero` replaced by a no-op, `(False, False)`; with `bind`
+    replaced by a certificate that always holds, `(False, False)`. That demonstration is
+    not itself automated, and until it is, a future control could be re-tautologised in a
+    way the four tests above would still have to be edited to accept.
+  recurrence_of: D-144
+  recorded_in: packing/src/sqpack/local_rigidity/controls.py
+- id: D-425
+  title: A commit titled "restore" shipped the widest disabled runner guard to a shared branch
+  date: '2026-09-03'
+  layer: tooling
+  class: robustness
+  detected_by: inspection
+  latent_for: two commits and five minutes of shared-branch time, 08:10:31Z to 08:15:50Z, both pushed
+  severity: medium
+  status: fixed
+  what: >-
+    The W9 lane was mutation-testing `record()`'s guards by editing
+    `packing/src/sqpack/campaign/runner.py` in the shared working tree, and two commits
+    carrying a live mutant reached the shared branch. Only one of the two is a snapshot,
+    and the distinction is the entry: the wider hole was shipped by a hand-written repair.
+
+    The two commits do not carry the same mutation. `f8ccd541`, the coordinator's
+    work-in-progress snapshot, captured the lane's narrow mutant: the inner digest
+    comparison `elif stored.get("archive_sha256") != verification["archive_sha256"]:`
+    short-circuited to `elif False:`. `a9c5fdcc` is not a snapshot. Its subject is "fix:
+    restore the archive-moved refusal the previous snapshot disabled", it is the commit that
+    shipped `if False:` over the whole archive-verification block, and it is the only commit
+    on the branch that ever carried that state: its diff restores the inner `elif` and in
+    the same hunk turns the enclosing `if archived:` into `if False:`, trading a narrow
+    mutation for the widest one available while its message said the guard was back. The
+    next commit's own subject -- "re-enable the archive verification block, this time
+    completely" -- admits it. That is the shape a shared tree produces: the lane had moved
+    its mutation between 08:10:31Z and 08:13:00Z, and a repair written against the file
+    rather than against the diff swept up whatever was live. `7d24225a` restores
+    `if archived:`, and `runner.py` is byte-identical to `6309e1f4` from there on.
+
+    Two claims in those messages do not survive checking, and they are recorded here
+    because this log is also where a message is held to its tree. `7d24225a` says both
+    mutations were cleared, "the engine self-test is the real call rather than a stubbed
+    receipt": `selftest = run_engine_selftest(recipe)` is present and unaltered in every
+    commit from `bf75ce0c` onward, so no commit ever carried a stubbed self-test and the
+    count of captures is two, not three. `a9c5fdcc` says "ruff, ruff format and
+    basedpyright clean on both files", and they are not -- dropping `if archived:` leaves
+    `archived` bound and never read, which `ruff check` reports as `RUF059` and
+    basedpyright as `reportUnusedVariable` on the committed file, under this repository's
+    own configuration.
+  consequence: >-
+    With `if archived:` dead, `record()` performs no archive re-verification at all:
+    `verification` stays `None`, `verify_archive_in_separate_process` is never called, the
+    retained certificate is never compared against the archive on disk, and the guard row
+    that states the geometry was re-derived in another process is never written into the
+    round. A round could then be recorded from an archive that moved under its own
+    certificate -- the `D-044` trust boundary the W9 lane exists to repair. `f8ccd541`'s
+    narrower `elif False:` is the same hole one step further in: the archive is
+    re-verified and the answer discarded.
+
+    Nothing was recorded through either, and the entry is scoped to that. Between
+    `609e7392` and HEAD only `runner.py` and its test file change; no ledger entry, series
+    record or archive moves, and no round was recorded in the five minutes concerned. What
+    did happen is that both commits reached
+    `origin/claude/squares-pr76-overnight-run-tpc888`, so anyone who took the branch in
+    that window held a runner whose archive check was dead. That exposure, not a corrupted
+    result, is what this is worth.
+  fix: >-
+    Mutation testing moved out of the shared tree in `1e5c116f`. `MUTATIONS` and
+    `_unrepaired` in `packing/tests/test_campaign_runner_trust_boundary.py` copy the module
+    into `tmp_path`, revert exactly one repair in the copy, import it under a name that is
+    removed again immediately, and show the copy accepting what the module refuses. Five
+    repairs are covered -- pose validation, cell and seed attribution, lease expiry, legal
+    transitions, prerequisites -- and the archive re-verification is not among them. The
+    guards themselves are restored at HEAD.
+
+    Not done here, and named so it is not mistaken for done: nothing in the repository
+    gates a commit against a disabled branch. The scan of diffs and files for
+    disabled-branch shapes that `7d24225a`'s message describes is a coordinator practice,
+    not an artifact -- `packing/devtools/` holds no such check.
+  regression: >-
+    The detector already existed, took under nine seconds, and was not run. Measured on
+    2026-09-03 by extracting each commit into a scratch tree and running that commit's own
+    trust-boundary file against that commit's own runner: `f8ccd541` gives 1 failed and 54
+    passed in 7.40s, on
+    `test_record_refuses_an_archive_edited_after_it_was_verified`; `a9c5fdcc` gives 3 failed
+    and 53 passed in 7.58s, adding `test_record_refuses_a_forged_result_line` and
+    `test_a_supervised_round_records_a_verified_verdict` -- the exact three a mutation
+    analysis of `if archived:` predicts, since with the block dead no verification receipt is
+    appended and no guard row is written. So `packing-validate --push`, which runs the tests,
+    would have refused both, and so would the one file on its own.
+
+    That is the lesson, and it is not the one first drawn. The first version of this entry
+    said the finding was that `ruff`, `ruff format` and `basedpyright` are clean on a guard
+    short-circuited to `if False:` because a dead branch is syntactically perfect. That
+    remains true and is incidental: the actionable failure is an ordering one, in that a
+    commit went out red on the one guard the whole block is about while the suite that
+    catches it in eight seconds had just been written by the same lane and was not run
+    before committing. The linter observation survives only as a bound on the cheaper tier:
+    checked here, `ruff` is clean on `f8ccd541`'s narrow mutation and reports `RUF059` on
+    `a9c5fdcc`, whose dead branch orphans the `archived` binding -- which that commit's
+    message denied. Nothing added here closes the gap between the tier that would have
+    caught this and the tier that ran.
+  recorded_in: packing/tests/test_campaign_runner_trust_boundary.py
+- id: D-426
+  title: A control-cell breach does not stop the unattended session
+  date: '2026-09-03'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: ten days and one repair of the loop itself, from the runner's first session loop at 8f53f8e3 on 2026-08-24
+  severity: high
+  status: outstanding
+  what: >-
+    `packing/campaign/README.md:393` declares the session stop conditions: "Stop, do not
+    adapt, on: budget exhausted; queue empty; three consecutive guard refusals or crashes;
+    a control cell breaching; any invariant check failing; or a decision that needs a
+    human." The runner does not honour the control-cell clause.
+
+    A breach reaches `decide` (`packing/src/sqpack/campaign/runner.py:1202`), which returns
+    `rejected` with `stopped_by: "guard"` and says why in its own reason string -- "the
+    instrument is suspect rather than the strategy good ... Clause 4 rejects regardless of
+    outcome". `record` then returns that decision through the ordinary path, so back in
+    `run` the round counts as completed: `failures` is reset to 0 and the loop proceeds to
+    the next hypothesis, on the same instrument the round just declared suspect. `run` never
+    reads `stopped_by`, so a guard breach is indistinguishable there from an ordinary
+    rejection. `abnormal` is set only by `GateRunningError` or by
+    `MAX_CONSECUTIVE_FAILURES`, so the session also exits 0.
+
+    Checked rather than argued, 2026-09-03: `control_breaches([Cell(16, [3.9])])` is
+    non-empty, `decide` returns `rejected` with `stopped_by: "guard"`, and `run`'s body
+    contains no reference to `stopped_by`.
+
+    The declared rule says stop; the runner adapts. This is not a clause of D-046 -- neither
+    that record nor its source finding F-04 names it -- and it is recorded separately so the
+    log keeps one date, one detector and one latency per finding.
+  consequence: >-
+    Bounded today and not bounded by design. `queue` will skip the breached hypothesis,
+    because its decision is now terminal, but nothing stops the other queued hypotheses from
+    running against the instrument whose control just failed. Their rounds are then recorded
+    through the ordinary path and reach a reviewer as ordinary measurements, the strongest
+    of them `unresolved` -- clauses 1-4 passed, held for review -- with nothing in the round
+    or the session report marking them as taken after a breach. That overstates what those
+    rounds are evidence of, which is the flattering direction, and it is precisely the
+    unattended failure mode the trust-boundary block exists to close.
+
+    Nothing has been recorded through it, and that conclusion is unchanged by the
+    correction that follows: no live round has run, nothing has been recorded through the
+    unattended runner, and `SYNOPSIS.md:87` carries the numerical runner as NO-GO for
+    unattended execution. The premise this entry first gave for that -- "`sqsearch` is not built in
+    this environment" -- was true when written and went stale at 10:30Z on 2026-09-03, when
+    a release binary appeared at `packing/sqsearch/target/release/sqsearch` (ELF x86-64,
+    617,520 bytes, untracked under the package's own `.gitignore`). Nothing has been
+    executed against that binary, and the end-to-end coverage still runs a fixture engine,
+    so what the absence of a built engine was standing in for remains true on its own
+    evidence. The exposure is what a future unattended session would do, not a result
+    already taken.
+  fix: >-
+    None yet, and none here: Agenda 016's W9 lane is bounded to D-044 and D-046 as scoped
+    and may not widen to a finding adjacent to them.
+
+    The remedy is small and belongs with the rest of the lifecycle work on `think-ldq2`:
+    have `run` read the decision's `stopped_by`, and treat a `guard` stop the way it already
+    treats `GateRunningError` -- release the round, set `abnormal`, and break -- so the
+    session ends non-zero on the declared condition instead of continuing. Whether an
+    invariant-check failure, the other clause of the same sentence, needs the same treatment
+    should be settled at the same time.
+  regression: >-
+    none. The breach itself is well covered -- `control_breaches` and `decide` are both
+    tested -- and nothing tests what the session does next, which is where the declared rule
+    lives. The D-046 repair rewrote this exact loop's failure policy, widening its `except`
+    clause and adding `safe_release`, and left the breach path as it was, so a repair pass
+    over the surrounding code is not a detector for this class either.
+  bead: think-ldq2
+  recorded_in: packing/campaign/README.md
+- id: D-427
+  title: Controls are scored on the mutated run alone, so one can pass over an already-red checker
+  date: '2026-09-03'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: inspection
+  latent_for: >-
+    since the harness's first commit, 8f53f8e3 on 2026-08-24, with the scoring rule
+    unchanged since; the one occurrence, D-413 on 2026-08-31, went the conservative way
+    and was fixed for a single checker
+  severity: medium
+  status: outstanding
+  what: >-
+    `run_one` (`run_negative_controls.py:434`) writes the mutation into a private worker,
+    runs the control's command once, and scores it: pass if the command did not time out,
+    exited non-zero, and printed the control's `expect` string. The command is never run on
+    the unmutated snapshot. Nothing in the suite therefore establishes that the refusal it
+    reports was caused by the mutation. What 155 passing controls demonstrate is "after
+    this edit the command fails with this message", not "this edit is what makes it fail",
+    and the difference is the whole content of a negative control.
+
+    The gap opens whenever a checker fails inside a worker for a reason unrelated to the
+    mutation -- a pruned input, a dead link, an absent environment. Three such conditions
+    have already occurred, in `D-407`, `D-409` and `D-413`, and all three happened to be
+    conservative: the checker's own failure message was not the `expect` string, so the
+    control failed loudly and was found. Nothing makes that the direction.
+
+    Demonstrated rather than argued, at `3018f454`. `devtools.check_canonical` reads
+    `exp-003-baseline-n11-target.jsonl` for the wrong-basin `n = 11` packing that its
+    central discrimination turns on; `archived_n11()` returns `None` when that archive is
+    absent, and the caller does not skip -- it records `FAIL  Trump's basin differs from the
+    annealer's  [no archive]` and the checker exits 1. Clone a worker the way the harness
+    does, remove that one file the way pruning `campaign/series/*/results` would, and the
+    unmutated checker goes from exit 0 to exit 1; hand the four canonical controls to
+    `run_one` against that worker and all four are scored PASS, with empty detail. Their
+    `expect` strings are their own mutations' `FAIL` lines, so each still requires its own
+    message -- what none of them requires, and none of them notices, is that the checker
+    was refusing before it was touched, and that the one discrimination the checker exists
+    for was not performed in any of the four runs.
+
+    One command of the forty distinct `run:` commands in `controls.yaml` is protected by
+    hand. `tests/test_negative_controls.py::test_unmutated_results_checker_is_green_inside_a_worker`,
+    added for `D-413`, clones a worker and requires `devtools.check_results` to exit 0
+    unmutated. The mechanism is right and its scope is one checker; the other thirty-nine
+    commands, over 50 mutation targets, have nothing.
+  consequence: >-
+    `155 negative controls fire as expected` is the only direct evidence this repository
+    has that its guards catch what they were written for -- `check_control_anchors` is
+    explicit that it checks only that anchors still resolve -- and that number is read as
+    coverage. A control scored over a red baseline adds to it while establishing nothing
+    about its guard, and does so invisibly: the runner prints the same line for it as for a
+    control that fired.
+
+    Bounded honestly: no control is currently known to be scored that way. The four
+    canonical controls pass over a green checker in the real snapshot, which is why this is
+    recorded outstanding rather than as a live miscount. What makes it worth an entry now
+    is that the trigger is routine. Keeping the worker snapshot under its cap means pruning
+    it, `D-422` is open on exactly that, and the direction `D-422` proposed first --
+    pruning the results directory wholesale -- is the trigger. A fix chosen for one defect
+    would have blinded four controls under the other, and the suite would have gone on
+    reporting 155 of 155.
+
+    The failure shape is one this log has now recorded at three levels: `D-144`, a checker
+    comparing two copies of the same tuple; `D-424`, two rigidity controls computing their
+    own verdicts without ever calling the instrument; and here the harness itself, scoring
+    a refusal it never showed the mutation caused. This one is
+    the weakest of the three in degree -- these controls can come out the other way, and do
+    -- and the broadest in reach, because it applies to all 155 at once.
+  fix: >-
+    none yet. Recorded and left open; this session's mandate was the record, not the
+    harness.
+
+    The direction, and the cheaper of the two forms is the sharper one. Requiring the
+    unmutated command to exit 0 catches a checker that has been degraded inside a worker,
+    which is what `D-407`, `D-409` and `D-413` each were. But the condition that actually
+    separates a caused refusal from a coincident one is weaker and more exact: the `expect`
+    string must be absent from the unmutated run. Both want the same baseline run, so the
+    honest version asserts both and reports them separately.
+
+    Cost is why it was not free to begin with. The suite already takes about half an hour
+    and a per-control baseline doubles it. It does not have to be per control: the 155
+    controls share 40 distinct `run:` commands, so one baseline per command, cached across
+    the controls that share it and taken once per worker, is 40 extra runs rather than 155.
+    That is the shape worth pricing before anything is built.
+  regression: none
+  recurrence_of: D-413
+  bead: think-xdly
+  recorded_in: packing/devtools/run_negative_controls.py
+- id: D-428
+  title: The n = 17 successor validator never ties the rebuilt chain spine to the carried boundary
+  date: '2026-09-03'
+  layer: verifier
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one round and one review, from the successor's registration at 2f112f4c to the BC-149 reviewer's demonstration the same day; the record's overstatement then stood uncorrected until this entry
+  severity: medium
+  status: outstanding
+  what: >-
+    `validate_result` in `packing/cases/n17_weighted_certificate_successor/run.py` is a
+    self-consistency check over the emitted record. For the complete-agreement schema it
+    calls `_validate_agreement_body` (line 1453), which rebuilds all 181 hash-chain links
+    from the two `CertificateManifest` summaries alone, anchored at the genesis binding
+    hash (line 1491), and then compares the rebuild against `chain_spine`, `row_count` and
+    `last_row_hash`. It never compares any link of that rebuild with `carried_boundary`.
+    `validate_result` separately requires `carried_boundary.row_hash` to equal
+    `binding.immediate_parent.last_row_hash` (line 1627), but that check reads the record's
+    own boundary field and not the chain the summaries generate, so the two are never
+    joined: a summary edit inside the carried prefix moves the rebuilt spine and leaves the
+    boundary field standing.
+
+    Demonstrated by the BC-149 reviewer, who altered carried row 5 identically in both
+    summaries, rebuilt the spine and `last_row_hash`, left `carried_boundary` untouched,
+    and had `validate_result` accept the record although `spine[169]` no longer equalled
+    `8947b38e...`. Reproduced independently here on 2026-09-03 against the published
+    exp-059 result: the unmodified record validates; with `evaluated_state_count` at
+    ordinal 5 changed in both summaries and only `chain_spine` and `last_row_hash`
+    recomputed, the rebuilt `spine[169]` is `3ae844bc...` while `carried_boundary` still
+    reads `8947b38e...`, and `validate_result` accepts.
+
+    The executed admission boundary does refuse this. `_validate_rows` ties the retained
+    prefix to exp-056's checkpoint on disk before assembly, so the process that produced
+    the published result could not have carried an altered row through. The gap is
+    between what that process refuses and what the validator alone refuses, and the
+    record claimed the stronger of the two.
+  consequence: >-
+    Nothing retained is wrong: the published exp-059 result satisfies the tie, the
+    reviewer checked it directly and so did this reproduction, and H-052's acceptance
+    rests on the executed run rather than on the validator.
+
+    What it cost is a claim. `exp-059` asserted that the validator "requires it to
+    reproduce ... the carried boundary `8947b38e...` at ordinal 169" and that "an altered
+    manifest therefore cannot survive". A reader taking `validate_result` as sufficient
+    evidence -- which is exactly what a later replay of the retained bytes would do, since
+    the second frontier evidence entry for T-015 and T-016 verifies the retained hash chain
+    rather than recomputing masses -- would be relying on a check that is not there. That
+    is the flattering direction. `exp-059` is corrected in this pass; the code is not.
+  fix: >-
+    none yet. The record was corrected and the validator was left as it is, because this
+    pass was bounded to the record.
+
+    The repair the reviewer named is one comparison and one guard in
+    `_validate_agreement_body`: require `spine[binding.first_new_ordinal - 1]["row_hash"]`
+    to equal `binding.immediate_parent.last_row_hash`, and refuse otherwise. The same
+    function could also pin `frozen_expectations` against `PRODUCTION_EXPECTATIONS` when
+    the binding names exp-059, which closes the second of the three anchors the reviewer
+    found the validator does not tie to the world; the third, comparing the binding's
+    ancestor digests against disk, is a separate change because it needs a filesystem read
+    the validator otherwise does not make.
+  regression: >-
+    none. The successor carries 115 named self-test guards, and one of them
+    (`run.py:2828`) zeroes `carried_boundary.row_hash` and requires a refusal -- which is
+    the check in the opposite direction, catching a boundary field that disagrees with the
+    binding rather than a spine that disagrees with the boundary. No guard alters a carried
+    summary row and rebuilds the chain around it, which is the mutation that passes. The
+    repair above should land with exactly that mutation as its test.
+  bead: think-5j8d
+  recorded_in: packing/cases/n17_weighted_certificate_successor/run.py
+- id: D-429
+  title: The generated-view comparison folds an ellipsis but not the space the formatter puts before it
+  date: '2026-09-03'
+  layer: tooling
+  class: robustness
+  detected_by: inspection
+  latent_for: >-
+    since `fold` was written; no generated cell has carried an ellipsis until now, so the
+    bug has never fired and is recorded before it does rather than after
+  severity: low
+  status: outstanding
+  what: >-
+    `fold` in `packing/devtools/render_research_tables.py` exists so a generated block's
+    `--check` compares what a line *says* rather than its bytes, letting flowmark own the
+    typography inside generated blocks without the renderer and the formatter overwriting
+    each other on every run. Its `_FOLD` table maps `…` back to `...`, but flowmark
+    does not only substitute the character: it inserts a space before it. `fold` then
+    normalises runs of whitespace, so the formatter's ` …` folds to ` ...` while the
+    renderer's source is `...` with no space, and the two never compare equal.
+
+    The consequence is not a missed drift but an unresolvable one: a generated cell
+    containing an ellipsis would report drift on every `--check`, a render would rewrite
+    it, the formatter would rewrite it back at the next commit, and the pair would fight
+    forever. That is the `ledger.md` / `defects.md` churn `.flowmarkignore` was written to
+    stop, reappearing inside a block the formatter is allowed to touch.
+
+    Found while adding the synopsis results headline, whose `T-011` row carries
+    `3.877083590022814...`. Measured against the pinned flowmark-rs 0.3.2, which also
+    curls the apostrophe in 8 of that block's 16 rows -- the reason that block compares by
+    meaning rather than bytes in the first place.
+  consequence: >-
+    No view is currently wrong, because no other generated cell contains an ellipsis. The
+    new headline renderer works around it locally by emitting the formatter's own ` …`
+    form, so the block is a fixed point and its `--check` folds the space itself. That
+    workaround is the evidence the shared helper is the wrong place for this to be solved,
+    and it should be deleted when the helper is fixed.
+  fix: >-
+    One `.replace(" ...", "...")` inside `fold`, after the translation and before the
+    whitespace normalisation, with a test that a cell rendered as `x...` still compares
+    equal after the formatter has written `x …`. Deliberately not applied here: the
+    helper backs the `--check` of several generated views, and a change to a shared
+    comparison guard made unreviewed at the end of an unattended session is the shape of
+    D-425. Recorded with its measurement so the fix is a five-minute job for a reviewed
+    change rather than a rediscovery.
+  regression: >-
+    A test that renders a cell whose text ends in `...`, applies the pinned flowmark to
+    the document, and asserts `--check` still reports the block current. Written against
+    the formatter rather than against a hard-coded ` …`, so a future flowmark that stops
+    inserting the space does not leave a test asserting the old behaviour.
+  bead: think-c46d
+  recorded_in: packing/devtools/render_research_tables.py

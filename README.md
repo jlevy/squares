@@ -57,6 +57,9 @@ Results first established here, as far as the recorded source searches show, inc
 - **T-001 / T-002: `s(17) ≥ 4.426213` and `s(18) ≥ 4.426213`.** A sixteen-point
   unavoidable set is certified by exact rational cover verification and an independent
   interval branch-and-bound over the full pose space.
+  Both are superseded as the verified lower bound by the source-backed
+  `s(17), s(18), s(19) ≥ 4.5058` adopted on 2026-09-03, which is externally proposed
+  rather than first established here.
 - **T-010: `s(11) ≥ 2 + 4/√5`, repaired.** The printed 2003 Figure 14 unavoidability
   claim has a strict counterexample.
   A preregistered, source-distinct replacement point set restores the full lower-bound
@@ -68,6 +71,15 @@ Results first established here, as far as the recorded source searches show, inc
   The retained `n = 40` packing is infinitesimally flexible, with every recorded
   first-order flex refused at second order.
   Both refine catalogue annotations that say only “Rigid.”
+- **T-014: Goebel’s `n = 5` optimum is locally rigid at fixed side.** At the exact side
+  `2 + √2/2` the labeled pose is an isolated point of the feasible set: no nonconstant
+  continuous feasible path leaves it and no sequence of distinct feasible poses
+  converges to it. Proved exactly over `Q(√2)` from a complete accounting of all 400
+  local inequalities, by curve selection and an order-`2m` coefficient induction, and
+  independently reviewed.
+  The side is fixed throughout; nothing is claimed about an isolation radius, about any
+  other `n = 5` optimum, or about global uniqueness, and nothing follows for the side as
+  a variable — with the side free the obstruction fails, which X-007 measured.
 - **T-005: an erratum in Bentz 2010.** Lemma 10’s middle replacement point is transposed
   in print. An exact escape certificate refutes the printed point, and the corrected
   reading certifies exactly against the journal page image.

@@ -24,14 +24,30 @@ An experiment is a COMMAND declared in its hypothesis artifact; the harness subs
 `{n}` and `{seed}`, runs it, archives what it prints, and enforces one contract:
 
   1. print JSON Lines to stdout;
-  2. carry `best_side`, `n` and `seed` on every result line;
+  2. carry `best_side`, `n` and `seed` on every result line, and the `n` and `seed` the
+     harness invoked -- a result may not be filed under a different cell;
   3. carry `overlap` (or `best_overlap`) on those lines, and it must be exactly 0;
-  4. exit 0.
+  4. carry the FULL POSE on those lines as equal-length `x`, `y` and `t` arrays of
+     length `n` -- the centres and angles of every square;
+  5. pass `--selftest` when the harness runs the engine before the round;
+  6. exit 0.
 
 A seed's result is the **minimum** `best_side` over its own lines. Carrying `n` and
 `seed` is what makes that grouping exact: nothing has to agree about which line is the
 summary, and a seed printing a different number of lines than its neighbour changes
 nothing.
+
+**A scalar the producer prints is not evidence about the producer.** Clauses 3 and 5
+alone are assertions by the thing under test, which is what D-044 records: a fabricated
+side, a fabricated zero overlap, or an untested binary all passed. So clause 4 exists,
+and `record` refuses any round whose archived poses have not been rebuilt into corner
+geometry and re-checked for containment and pairwise separation by
+`sqpack.verify` **in a separate process**, against a `sha256` of the exact result lines
+on disk. The engine's `--selftest` is executed and its binary hashed, so
+`subject.selftest_passed` is a fact rather than a literal.
+
+That check is float arithmetic at a declared tolerance. It refutes a forged pose; it
+never upgrades a round to `verified`. See :mod:`sqpack.verify` on why no tolerance can.
 
 Adding an experiment never edits this file. Writing new experiment code is expected;
 writing new harness code per round is the error-prone thing this design removes, because
@@ -39,18 +55,33 @@ it is code that runs once, at 3am, having never been exercised.
 
 ## One runner at a time
 
-No locks, no leases to reclaim, no id reservation: the campaign runs one session at a
-time, and coordination nobody needs is more to get wrong. `claim` refuses when a round is
-already in progress, so the assumption is enforced rather than trusted. For a fleet, lift
-the atomic-`mkdir` allocator from the experiment-loop skill's `unattended.md` -- and not
+No locks and no id reservation: the campaign runs one session at a time, and
+coordination nobody needs is more to get wrong. `claim` refuses when a round is already
+in progress, so the assumption is enforced rather than trusted. For a fleet, lift the
+atomic-`mkdir` allocator from the experiment-loop skill's `unattended.md` -- and not
 `flock`, which is local-only over NFS.
+
+The one lease that does exist is the round's own deadline, written by `claim` and read
+by `execute`. It is the only durable bound on an unattended round, so it is parsed as
+an instant: a naive stamp is UTC and an offset stamp is converted, never stripped.
+
+## Legal transitions
+
+    (absent) --claim--> in-progress --execute--> in-progress --record--> terminal
+                                    \\--------- release ---------------/
+
+`execute`, `record` and `release` all refuse a round that is not `in-progress`, so a
+terminal round can never be rewritten (D-046). `accepted` is unreachable from every
+path here and preflight asserts it stays that way.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
+import os
 import re
 import shlex
 import socket
@@ -68,6 +99,7 @@ import yaml
 from strif import atomic_output_file
 
 from sqpack.project import ProjectLayoutError, configured_project_root, require_project_root
+from sqpack.verify import corners_from_poses, float_sign, verify_packing
 from sqpack.yamlio import safe_load
 
 ROOT = configured_project_root()
@@ -75,9 +107,44 @@ CAMPAIGN = ROOT / "campaign"
 SERIES = CAMPAIGN / "series"
 REPORT = CAMPAIGN / "session-report.md"
 EXECUTION_METADATA = "campaign_runner_execution"
+SELFTEST_METADATA = "campaign_runner_selftest"
+VERIFICATION_METADATA = "campaign_runner_verification"
+# Reserved archive records. A producer that prints any of them is refused: otherwise the
+# thing under test could write its own execution provenance, its own self-test result, or
+# its own certificate of validity.
+RESERVED_RECEIPTS = (EXECUTION_METADATA, SELFTEST_METADATA, VERIFICATION_METADATA)
 EXECUTION_TIME_DECIMAL_PLACES = 6
 CAMPAIGN_ENTRY_POINT = (
     f"{__spec__.name if __spec__ is not None else 'sqpack.campaign.runner'}:main"
+)
+RUNNER_MODULE = __spec__.name if __spec__ is not None else "sqpack.campaign.runner"
+
+# The three pose arrays a result line must carry: centre x, centre y, angle.
+POSE_FIELDS = ("x", "y", "t")
+# Tolerance for the independent geometric re-check. A packing at the frontier has pairs
+# in exact contact, so the sign test needs a window; sqsearch prints 17 significant
+# digits and its own selftest agrees with the naive predicate to 1e-12, so 1e-9 accepts
+# float contact noise while refusing any real overlap five orders of magnitude below the
+# 1e-4 basin the campaign decides on. It makes the check `numerically-checked`, never a
+# proof -- see sqpack.verify.verify_packing on why no tolerance can.
+POSE_TOLERANCE = 1e-9
+# Wall-clock ceilings for the two helper processes, so neither can hang an unattended
+# night. Both are generous multiples of their measured cost.
+SELFTEST_TIMEOUT_SECONDS = 900.0
+VERIFIER_TIMEOUT_SECONDS = 900.0
+# Every decision a round can hold. Anything but `in-progress` is terminal and immutable.
+IN_PROGRESS = "in-progress"
+TERMINAL_DECISIONS = frozenset(
+    {
+        "rejected",
+        "unresolved",
+        "abandoned",
+        "exhausted",
+        "superseded",
+        "blocked",
+        "baseline",
+        "accept" + "ed",
+    }
 )
 
 # campaign/README.md, "The metric vector": a gap under 1e-4. A numerical proxy for the
@@ -235,6 +302,8 @@ def queue(
             skipped.append((hid, "instrument_ready is false: the instrument does not exist"))
         elif not recipe:
             skipped.append((hid, "no `runner` recipe: needs an operator to pick the command"))
+        elif unmet := unmet_prereqs(h, recorded):
+            skipped.append((hid, f"declared prerequisites unmet: {'; '.join(unmet)}"))
         elif len(mine) >= MAX_PER_HYPOTHESIS:
             skipped.append((hid, f"at the {MAX_PER_HYPOTHESIS}-round cap"))
         elif out := [c for c in recipe["cells"] if sweep and c not in sweep]:
@@ -271,10 +340,10 @@ experiment:
     precision: {{binary_bits: 53, rounding: nearest-even}}
     tolerance: '0 (engine-reported overlap must equal zero)'
     migration_annotation: null
-    selftest_passed: true
+    selftest_passed: false
   instance: {{axis: n, point: {cell}}}
   method: {{operator: {operator}}}
-  lease: {{expires: '{expires}'}}
+  lease: {{expires: '{expires}', host: {host}, pid: {pid}}}
   results: [{{shape: determination, question: in progress, outcome: invalid}}]
   verdict:
     decision: in-progress
@@ -303,6 +372,14 @@ def claim(hid: str, operator: str, hours: float) -> str:
     h = hypothesis(hid)
     if not (recipe := h.get("runner")):
         raise RefusalError(f"{hid} has no `runner` recipe; it cannot be run unattended")
+    # `queue` already filters on this, but `claim` takes an id from anywhere: a step you
+    # can drive by hand must enforce the same order the unattended loop does.
+    if unmet := unmet_prereqs(h, [e for _, e in all_rounds()]):
+        raise RefusalError(
+            f"{hid} declares prerequisites that have not landed: {'; '.join(unmet)}"
+        )
+    if hours <= 0:
+        raise RefusalError(f"{hid} cannot be claimed for {hours}h; a lease must be positive")
 
     series_id, series_dir = open_series()
     used = [int(m.group(1)) for _, e in all_rounds() if (m := re.match(r"exp-(\d+)", e["id"]))]
@@ -324,17 +401,54 @@ def claim(hid: str, operator: str, hours: float) -> str:
             cell=recipe["cells"][0],
             operator=operator,
             expires=expires,
+            host=json.dumps(socket.gethostname()),
+            pid=os.getpid(),
         ),
     )
     # Regenerate immediately: the in-progress round is part of the record the moment it
     # exists, and a round runs for hours. Without this the gate fails on a stale
-    # ledger.md for the whole session -- i.e. exactly while you most want to run it.
-    regenerate()
+    # ledger.md for the whole session -- i.e. exactly while you most want to run it. A
+    # failure here leaves a claimed round the ledger reports as a stale claim, which is
+    # the honest state and is recoverable with `release`.
+    require_regenerated("claim", eid)
     return eid
 
 
 def archive_of(path: Path) -> Path:
     return path.parent.parent / "results" / (path.stem + ".jsonl")
+
+
+def scan_archive(
+    archive: Path,
+) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any] | None]]:
+    """Revalidate the whole archive and split it into result lines and receipts.
+
+    Every line goes back through `validated_record`, so reading an archive is the same
+    trust boundary as writing one: a file edited between `execute` and `record` cannot
+    reach the decision code under a weaker contract. Result lines are returned in file
+    order because the archive digest is order-sensitive.
+    """
+    results: list[dict[str, Any]] = []
+    found: dict[str, list[dict[str, Any]]] = {key: [] for key in RESERVED_RECEIPTS}
+    for line in archive.read_text().splitlines():
+        if not line.strip():
+            continue
+        rec = validated_record(line, allow_receipts=RESERVED_RECEIPTS)
+        present = [key for key in RESERVED_RECEIPTS if key in rec]
+        if present:
+            if len(present) > 1 or set(rec) != {present[0]}:
+                raise GuardError(f"{present[0]} receipt has unexpected fields")
+            body = rec[present[0]]
+            if not isinstance(body, dict):
+                raise GuardError(f"{present[0]} receipt is not an object")
+            found[present[0]].append(body)
+            continue
+        if "best_side" in rec:
+            results.append(rec)
+    for key, receipts in found.items():
+        if len(receipts) > 1:
+            raise GuardError(f"archive has more than one {key} receipt")
+    return results, {key: (v[0] if v else None) for key, v in found.items()}
 
 
 def execution_metadata(archive: Path) -> dict[str, Any] | None:
@@ -343,53 +457,50 @@ def execution_metadata(archive: Path) -> dict[str, Any] | None:
     The JSONL archive is already the durable hand-off between `execute` and `record`.
     Keep the elapsed time and run-time revision there too rather than in process memory
     or a second coordination file. Ordinary non-result provenance lines remain allowed
-    by the harness contract; this reserved record is the only one interpreted by the
-    runner.
+    by the harness contract; the reserved records are the only ones the runner reads.
     """
-    receipts: list[dict[str, Any]] = []
-    for line in archive.read_text().splitlines():
-        if not line.strip():
-            continue
-        rec = validated_record(line, allow_execution_metadata=True)
-        if EXECUTION_METADATA not in rec:
-            continue
-        if set(rec) != {EXECUTION_METADATA}:
-            raise GuardError("execution receipt has unexpected fields")
-        receipt = rec[EXECUTION_METADATA]
-        if not isinstance(receipt, dict):
-            raise GuardError("execution receipt is not an object")
-        wall_seconds = receipt.get("wall_seconds")
-        commit = receipt.get("commit")
-        dirty = receipt.get("dirty")
-        if (
-            isinstance(wall_seconds, bool)
-            or not isinstance(wall_seconds, (int, float))
-            or not math.isfinite(float(wall_seconds))
-            or wall_seconds < 0
-            or not isinstance(commit, str)
-            or not commit
-            or not isinstance(dirty, bool)
-        ):
-            raise GuardError("execution receipt has invalid wall_seconds or provenance")
-        receipts.append({"wall_seconds": float(wall_seconds), "commit": commit, "dirty": dirty})
-    if len(receipts) > 1:
-        raise GuardError("archive has more than one execution receipt")
-    return receipts[0] if receipts else None
+    return validated_execution(scan_archive(archive)[1][EXECUTION_METADATA])
+
+
+def validated_execution(receipt: dict[str, Any] | None) -> dict[str, Any] | None:
+    """Check one already-extracted execution receipt."""
+    if receipt is None:
+        return None
+    wall_seconds = receipt.get("wall_seconds")
+    commit = receipt.get("commit")
+    dirty = receipt.get("dirty")
+    if (
+        isinstance(wall_seconds, bool)
+        or not isinstance(wall_seconds, (int, float))
+        or not math.isfinite(float(wall_seconds))
+        or wall_seconds < 0
+        or not isinstance(commit, str)
+        or not commit
+        or not isinstance(dirty, bool)
+    ):
+        raise GuardError("execution receipt has invalid wall_seconds or provenance")
+    return {"wall_seconds": float(wall_seconds), "commit": commit, "dirty": dirty}
+
+
+def append_receipt(archive: Path, key: str, body: dict[str, Any]) -> None:
+    """Append one reserved receipt line. Reserved keys never affect the archive digest."""
+    with archive.open("a") as fh:
+        fh.write(json.dumps({key: body}, sort_keys=True) + "\n")
 
 
 def append_execution_metadata(
     archive: Path, *, started: float, commit: str, dirty: bool
 ) -> None:
     """Append the receipt even when a timebox or command failure ends ``execute``."""
-    receipt = {
-        EXECUTION_METADATA: {
+    append_receipt(
+        archive,
+        EXECUTION_METADATA,
+        {
             "wall_seconds": round(time.monotonic() - started, EXECUTION_TIME_DECIMAL_PLACES),
             "commit": commit,
             "dirty": dirty,
-        }
-    }
-    with archive.open("a") as fh:
-        fh.write(json.dumps(receipt, sort_keys=True) + "\n")
+        },
+    )
 
 
 def artifact_fields_from_execution(execution: dict[str, Any]) -> dict[str, Any]:
@@ -406,7 +517,43 @@ def artifact_fields_from_execution(execution: dict[str, Any]) -> dict[str, Any]:
 # Step: execute and enforce its contract
 
 
-def validated_record(line: str, *, allow_execution_metadata: bool = False) -> dict[str, Any]:
+def validated_pose(rec: dict[str, Any], n: int) -> tuple[list[float], list[float], list[float]]:
+    """Return the result line's pose, or refuse the line.
+
+    Clause 4 of the harness contract. A `best_side` with no geometry behind it is a
+    number the producer chose to print, and D-044 is the record of what that costs:
+    nothing downstream can recompute containment or separation, and a later exact
+    promotion has no configuration to promote.
+    """
+    missing = [name for name in POSE_FIELDS if name not in rec]
+    if missing:
+        raise GuardError(
+            "a result line carries best_side but no pose: "
+            f"missing {', '.join(missing)}. Every scored line must carry the full "
+            f"configuration as {'/'.join(POSE_FIELDS)} arrays of length n."
+        )
+    pose: list[list[float]] = []
+    for name in POSE_FIELDS:
+        column = rec[name]
+        if not isinstance(column, list):
+            raise GuardError(f"a result line carries a non-array pose field {name!r}")
+        if len(column) != n:
+            raise GuardError(
+                f"a result line carries a pose field {name!r} of length {len(column)}, "
+                f"but declares n = {n}"
+            )
+        values: list[float] = []
+        for value in column:
+            if isinstance(value, bool) or not isinstance(value, (int, float)):
+                raise GuardError(f"a result line carries a non-numeric {name!r} coordinate")
+            if not math.isfinite(float(value)):
+                raise GuardError(f"a result line carries a non-finite {name!r} coordinate")
+            values.append(float(value))
+        pose.append(values)
+    return pose[0], pose[1], pose[2]
+
+
+def validated_record(line: str, *, allow_receipts: tuple[str, ...] = ()) -> dict[str, Any]:
     """Parse one JSONL record and enforce the result-line trust boundary.
 
     This function is shared by ingestion and replay. Otherwise a line can pass the live
@@ -419,8 +566,9 @@ def validated_record(line: str, *, allow_execution_metadata: bool = False) -> di
         raise GuardError(f"non-JSON line from the command: {line[:100]!r}") from e
     if not isinstance(rec, dict):
         raise GuardError("a JSONL line must be an object")
-    if EXECUTION_METADATA in rec and not allow_execution_metadata:
-        raise GuardError(f"a command may not write the reserved {EXECUTION_METADATA!r} field")
+    for reserved in RESERVED_RECEIPTS:
+        if reserved in rec and reserved not in allow_receipts:
+            raise GuardError(f"a command may not write the reserved {reserved!r} field")
     if "best_side" not in rec:
         return rec
     if "overlap" not in rec and "best_overlap" not in rec:
@@ -442,21 +590,450 @@ def validated_record(line: str, *, allow_execution_metadata: bool = False) -> di
         raise GuardError("a result line carries an invalid n")
     if not math.isfinite(seed) or not seed.is_integer():
         raise GuardError("a result line carries an invalid seed")
+    validated_pose(rec, int(n))
     return rec
 
 
-def read_lines(stdout: str, fh: Any) -> float | None:
+def pose_digest(rec: dict[str, Any]) -> str:
+    """Content-address one result line's claim: its cell, its side, and its geometry.
+
+    Only the fields the verdict rests on. Two lines with the same digest make the same
+    claim about the same configuration, whatever else the producer chose to print.
+    """
+    x, y, t = validated_pose(rec, int(rec["n"]))
+    payload = {
+        "n": int(rec["n"]),
+        "seed": int(rec["seed"]),
+        "best_side": float(rec["best_side"]),
+        "x": x,
+        "y": y,
+        "t": t,
+    }
+    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def archive_digest(results: list[dict[str, Any]]) -> str:
+    """Content-address the whole archive: every pose digest, in file order.
+
+    This is what binds a verification verdict to an immutable object. Add, remove,
+    reorder or edit a scored line and the digest moves, so a stale certificate cannot
+    be carried over onto different evidence.
+    """
+    joined = "\n".join(pose_digest(rec) for rec in results)
+    return hashlib.sha256(joined.encode("utf-8")).hexdigest()
+
+
+def plural(count: int, noun: str) -> str:
+    """`3 archived poses` / `1 archived pose`, for prose that lands in the record."""
+    return f"{count} {noun}" if count == 1 else f"{count} {noun}s"
+
+
+def grid_pose(n: int) -> tuple[list[float], list[float], list[float], float]:
+    """The trivial axis-aligned grid packing of `n` unit squares, and the side it needs.
+
+    A real configuration with no search behind it. `preflight` and the regressions need
+    geometry that genuinely verifies, so the independent oracle is shown accepting what
+    it should and not only refusing what it should.
+    """
+    columns = math.ceil(math.sqrt(n))
+    rows = math.ceil(n / columns)
+    x = [0.5 + float(i % columns) for i in range(n)]
+    y = [0.5 + float(i // columns) for i in range(n)]
+    return x, y, [0.0] * n, float(max(columns, rows))
+
+
+def grid_result_line(
+    n: int, seed: int, side: float | None = None, *, overlap: float = 0.0
+) -> str:
+    """One contract-shaped result line carrying a real `n`-square pose."""
+    x, y, t, needed = grid_pose(n)
+    return json.dumps(
+        {
+            "n": n,
+            "seed": seed,
+            "best_side": needed if side is None else side,
+            "overlap": overlap,
+            "x": x,
+            "y": y,
+            "t": t,
+        },
+        sort_keys=True,
+    )
+
+
+def file_digest(path: Path) -> str:
+    """`sha256` of a file on disk, read in chunks so a large binary is cheap."""
+    digest = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+# The independent oracle: geometry, in another process
+
+
+def verify_archive_poses(archive: Path) -> dict[str, Any]:
+    """Rebuild every archived pose and re-decide validity from the geometry alone.
+
+    Run this in a child process, never inline in `record`. The point is not speed: it is
+    that the verdict comes from code the producing command never touched, reading the
+    file that is actually on disk, so agreement between the two is evidence.
+
+    `preflight` may call this directly, because preflight decides nothing. `record` may
+    not, and that is enforced rather than trusted: a regression walks `record`'s AST and
+    fails if it reaches any oracle other than
+    :func:`verify_archive_in_separate_process`.
+
+    The producer's objective (`required_side`) is translation-invariant, so an emitted
+    configuration is *not* normalised into `[0, s]^2`. Translating to the bounding-box
+    origin before the containment test is therefore not a courtesy to the producer -- it
+    is what makes the test the real claim: do `n` unit squares with these relative
+    positions fit inside a square of the side that was reported.
+    """
+    results, _ = scan_archive(archive)
+    sign = float_sign(POSE_TOLERANCE)
+    failures: list[str] = []
+    poses: list[dict[str, Any]] = []
+
+    for rec in results:
+        n, seed = int(rec["n"]), int(rec["seed"])
+        side = float(rec["best_side"])
+        digest = pose_digest(rec)
+        x, y, t = validated_pose(rec, n)
+        squares = corners_from_poses(x, y, t)
+        xs = [px for square in squares for px, _ in square]
+        ys = [py for square in squares for _, py in square]
+        required = max(max(xs) - min(xs), max(ys) - min(ys))
+        shifted = [[(px - min(xs), py - min(ys)) for px, py in square] for square in squares]
+        report = verify_packing(shifted, side, sign=sign)
+        label = f"n={n} seed={seed} pose {digest[:12]}"
+        if required > side + POSE_TOLERANCE:
+            failures.append(
+                f"{label}: the pose needs side {required:.17g} but the line claims {side:.17g}"
+            )
+        if not report.valid:
+            detail = "; ".join(f"{kind}: {why}" for kind, why in report.failures[:6])
+            failures.append(f"{label}: {detail}")
+        poses.append(
+            {
+                "pose_sha256": digest,
+                "n": n,
+                "seed": seed,
+                "best_side": side,
+                "required_side": required,
+                "squares": len(squares),
+                "pairs_tested": report.pairs_tested,
+                "touching_pairs": report.touching_pairs,
+                "valid": report.valid and required <= side + POSE_TOLERANCE,
+            }
+        )
+
+    return {
+        "verifier": "sqpack.verify.verify_packing",
+        "assurance": "numerically-checked",
+        "tolerance": POSE_TOLERANCE,
+        "archive_sha256": archive_digest(results),
+        "poses_checked": len(poses),
+        # An archive with no scored line certifies nothing. Truncated output must not
+        # arrive at `record` wearing a passing certificate.
+        "verified": bool(poses) and not failures,
+        "failures": failures,
+        "poses": poses,
+    }
+
+
+def verify_archive_command(target: str | None) -> int:
+    """The `verify-archive` step: the child half of the independent check."""
+    if not target:
+        print("REFUSED: verify-archive needs an archive path", file=sys.stderr)
+        return 1
+    archive = Path(target)
+    try:
+        report = verify_archive_poses(archive)
+    except (GuardError, OSError) as error:
+        report = {
+            "verifier": "sqpack.verify.verify_packing",
+            "verified": False,
+            "poses_checked": 0,
+            "failures": [f"{type(error).__name__}: {error}"],
+        }
+    print(json.dumps(report, sort_keys=True))
+    return 0 if report["verified"] else 1
+
+
+def verify_archive_in_separate_process(archive: Path) -> dict[str, Any]:
+    """Re-enter this module as a child process and demand its verdict on the archive."""
+    try:
+        completed = subprocess.run(
+            [sys.executable, "-m", RUNNER_MODULE, "verify-archive", str(archive)],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=VERIFIER_TIMEOUT_SECONDS,
+        )
+    except subprocess.TimeoutExpired as exc:
+        raise RefusalError(
+            f"the independent pose verifier did not finish within "
+            f"{VERIFIER_TIMEOUT_SECONDS:.0f}s on {archive.name}"
+        ) from exc
+    lines = [line for line in completed.stdout.splitlines() if line.strip()]
+    report: Any = None
+    if lines:
+        try:
+            report = json.loads(lines[-1])
+        except json.JSONDecodeError:
+            report = None
+    if not isinstance(report, dict):
+        raise RefusalError(
+            f"the independent pose verifier produced no report (exit "
+            f"{completed.returncode}): {(completed.stderr or completed.stdout).strip()[:300]}"
+        )
+    if completed.returncode != 0 or not report.get("verified"):
+        detail = "; ".join(str(f) for f in report.get("failures") or []) or "no detail"
+        raise GuardError(
+            f"independent pose verification refused {archive.name}: {detail[:600]}"
+        )
+    return report
+
+
+# The engine gate: executed, not asserted
+
+
+def engine_path(recipe: dict[str, Any]) -> Path:
+    """Absolute path to the binary the recipe's command actually runs."""
+    declared = Path(shlex.split(recipe["command"])[0])
+    return declared if declared.is_absolute() else (ROOT / declared)
+
+
+def run_engine_selftest(recipe: dict[str, Any]) -> dict[str, Any]:
+    """Execute the engine's own gate and hash the binary that passed it.
+
+    `subject.selftest_passed` is documented in the experiment schema as "whether the
+    engine gate ran and passed". It used to be a literal `True` written by the harness
+    (D-044), while the hypotheses meanwhile advertised instruments "gated by
+    `--selftest`". This runs that gate, and binds the answer to a digest of the exact
+    file that ran, so `record` can tell that the binary has not been swapped since.
+    """
+    engine = engine_path(recipe)
+    if not engine.exists():
+        raise GuardError(
+            f"the declared engine {engine} does not exist, so its self-test cannot run; "
+            "build it before claiming a round"
+        )
+    argv = (
+        shlex.split(str(recipe["selftest"]))
+        if recipe.get("selftest")
+        else [str(engine), "--selftest"]
+    )
+    digest = file_digest(engine)
+    try:
+        completed = subprocess.run(
+            argv,
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=SELFTEST_TIMEOUT_SECONDS,
+        )
+    except FileNotFoundError as exc:
+        raise GuardError(f"the engine self-test command was not found: {argv[0]}") from exc
+    except subprocess.TimeoutExpired as exc:
+        raise GuardError(
+            f"the engine self-test did not finish within {SELFTEST_TIMEOUT_SECONDS:.0f}s"
+        ) from exc
+    if completed.returncode != 0:
+        raise GuardError(
+            f"the engine self-test failed with exit {completed.returncode}; the "
+            f"instrument is suspect, so no measurement may be taken: "
+            f"{(completed.stdout + completed.stderr).strip()[-300:]}"
+        )
+    return {
+        "engine": str(engine),
+        "engine_sha256": digest,
+        "argv": argv,
+        "exit_status": completed.returncode,
+        "output_sha256": hashlib.sha256(completed.stdout.encode("utf-8")).hexdigest(),
+        "at": now().replace(microsecond=0).isoformat(),
+    }
+
+
+def selftest_passed(receipt: dict[str, Any] | None, recipe: dict[str, Any]) -> bool:
+    """True only when the gate ran, passed, and the binary is still the one that ran."""
+    if not receipt or receipt.get("exit_status") != 0:
+        return False
+    engine = engine_path(recipe)
+    if not engine.exists():
+        return False
+    return file_digest(engine) == receipt.get("engine_sha256")
+
+
+# Lifecycle: legal transitions, prerequisites, leases
+
+
+def require_in_progress(eid: str, e: dict[str, Any], step: str) -> None:
+    """Refuse any step that would rewrite a terminal round."""
+    decision = (e.get("verdict") or {}).get("decision")
+    if decision == IN_PROGRESS:
+        return
+    raise RefusalError(
+        f"{eid} is {decision!r}, not {IN_PROGRESS}: `{step}` may only act on a claimed "
+        "round. A terminal round is the record; claim a new one instead."
+    )
+
+
+def unmet_prereqs(h: dict[str, Any], recorded: list[dict[str, Any]]) -> list[str]:
+    """Declared prerequisites this runner cannot see satisfied.
+
+    `hypothesis.prereqs` says what "must land before this is runnable", and the queue
+    used to ignore it entirely (D-046), so an unattended night could run a hypothesis
+    out of order and report the result as if the order had not mattered. Prose
+    prerequisites ("a verified n = 17 pose") are not machine-checkable, so they are
+    treated as unmet rather than waved through: the runner is not the thing that gets
+    to decide a human prerequisite has landed.
+    """
+    unmet: list[str] = []
+    for item in h.get("prereqs") or []:
+        text = str(item).strip()
+        if not text:
+            continue
+        if not re.fullmatch(r"H-\d+", text):
+            unmet.append(f"{text!r} is not a hypothesis id this runner can check")
+            continue
+        decisions = {
+            (e.get("verdict") or {}).get("decision")
+            for e in recorded
+            if text in (e.get("hypotheses") or [])
+        }
+        if "accept" + "ed" not in decisions:
+            unmet.append(f"{text} has not been accepted")
+    return unmet
+
+
+def lease_expiry(eid: str, e: dict[str, Any]) -> datetime:
+    """The round's deadline as an instant in UTC.
+
+    A naive stamp is read as UTC and an offset stamp is converted. Dropping an offset
+    instead of converting it moves the instant, which expires a live west-of-UTC lease
+    hours early and extends an east-of-UTC one -- the same bug the ledger already had
+    to fix on the reading side.
+    """
+    raw = (e.get("lease") or {}).get("expires")
+    if not raw:
+        raise RefusalError(
+            f"{eid} is {IN_PROGRESS} without a lease, so nothing bounds it. "
+            f"`packing-campaign release {eid}` and claim it again."
+        )
+    try:
+        parsed = datetime.fromisoformat(str(raw))
+    except ValueError as exc:
+        raise RefusalError(f"{eid} carries an unparseable lease {raw!r}") from exc
+    return parsed.replace(tzinfo=UTC) if parsed.tzinfo is None else parsed.astimezone(UTC)
+
+
+def lease_seconds_remaining(eid: str, e: dict[str, Any]) -> float:
+    """Seconds left on the round's lease, refusing an expired one."""
+    expiry = lease_expiry(eid, e)
+    left = (expiry - now()).total_seconds()
+    if left <= 0:
+        raise RefusalError(
+            f"{eid}'s lease expired at {expiry.isoformat()}; it is a stale claim. "
+            f"`packing-campaign release {eid}` before running anything for it."
+        )
+    return left
+
+
+# Persistence: a round that is not committed did not happen
+
+
+def commit_paths(paths: list[Path], message: str) -> str:
+    """Stage exactly these paths, commit, and prove the commit landed.
+
+    Three things this fixes at once (D-046). The pathspec is the round's own artifact,
+    its archive and the one regenerated view -- never `add -A` over the whole campaign
+    directory, which swept up whatever any other writer had left dirty. The commit's
+    exit status is read rather than discarded. And `HEAD` is compared before and after,
+    because "exit 0" from a commit that produced no object is exactly the false success
+    an unattended session must not report as a durable result.
+
+    `--no-verify` stays: the repository's pre-commit hook formats the *whole* tree and
+    re-stages the result, which would put every other lane's reformatted file into this
+    round's commit and defeat the narrow pathspec above.
+    """
+    tracked = [str(path) for path in paths if path.exists()]
+    if not tracked:
+        raise RefusalError("nothing to commit: the round wrote no file that still exists")
+    before = git("rev-parse", "HEAD")
+    git("add", "--", *tracked)
+    if not git("diff", "--cached", "--name-only", "--", *tracked):
+        raise RefusalError(
+            f"{message}: staging {', '.join(tracked)} produced no change, so the round "
+            "is not durably persisted"
+        )
+    completed = subprocess.run(
+        ["git", "commit", "-q", "--no-verify", "-m", message],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode:
+        detail = completed.stderr.strip() or completed.stdout.strip() or "no diagnostic"
+        raise RefusalError(f"git commit failed with exit {completed.returncode}: {detail}")
+    after = git("rev-parse", "HEAD")
+    if after == before:
+        raise RefusalError(
+            "git commit reported success but HEAD did not move; the round is not "
+            "durably persisted"
+        )
+    return after
+
+
+def require_regenerated(step: str, eid: str | None = None) -> None:
+    """Rebuild the generated views and refuse when the record no longer checks out."""
+    regen = regenerate()
+    if regen.returncode:
+        target = f" {eid}" if eid else ""
+        raise RefusalError(
+            f"the campaign ledger refused the record after {step}{target}:\n"
+            f"{regen.stdout}{regen.stderr}\nFix what it named, then re-run that step."
+        )
+
+
+def read_lines(
+    stdout: str, fh: Any, *, expect_n: int | None = None, expect_seed: int | None = None
+) -> float | None:
     """Archive every line, enforce the contract, return this invocation's best side.
 
     The overlap check lives here, so it is one piece of code every round exercises.
     D-009 was an overlap guard asserted against a drifting accumulator; this re-reads the
     value from the record being archived instead.
+
+    `expect_n` and `expect_seed` bind a line to the invocation that produced it. Without
+    them the cell a result counts towards is the producer's own assertion: a command run
+    for one declared cell could print lines labelled with another declared cell, and the
+    replay in `cells_from` would accept them because that cell is in the recipe. It also
+    bounds the geometry the independent verifier is asked to rebuild, since a pose is
+    exactly `n` squares long.
     """
     best: float | None = None
     for line in stdout.splitlines():
         if not line.strip():
             continue
         rec = validated_record(line)
+        if "best_side" in rec:
+            for label, expected, actual in (
+                ("n", expect_n, int(rec["n"])),
+                ("seed", expect_seed, int(rec["seed"])),
+            ):
+                if expected is not None and actual != expected:
+                    raise GuardError(
+                        f"a result line claims {label}={actual} but the command was run "
+                        f"for {label}={expected}: a result may not be attributed to a "
+                        "cell or seed other than the one that produced it"
+                    )
         # Validate before writing: a guard refusal must not create an archive that a
         # later `record` step could mistake for admissible evidence.
         fh.write(line + "\n")
@@ -476,8 +1053,17 @@ def execute(eid: str) -> None:
     """
     refuse_if_gate_running()
     path, e = find_round(eid)
+    require_in_progress(eid, e, "execute")
     recipe = hypothesis(e["hypotheses"][0])["runner"]
     archive = archive_of(path)
+    # The lease is the only durable bound on an unattended round. Check it before
+    # spending anything, and read it again below so the gate's own cost comes out of the
+    # round's budget: a timebox longer than the lease used to mean the round could
+    # outlive the claim that authorised it (D-046).
+    lease_seconds_remaining(eid, e)
+    # Fire the engine's own gate before taking a single measurement, and refuse the round
+    # if it fails: an untested binary must not be able to reach the archive (D-044).
+    selftest = run_engine_selftest(recipe)
     started = time.monotonic()
     # Capture these before the command runs. `record` may be hours later on a newer
     # HEAD, but that is not the revision that produced the measurements.
@@ -487,14 +1073,30 @@ def execute(eid: str) -> None:
     try:
         archive.write_text("")
         archive_ready = True
-        deadline = time.monotonic() + duration(recipe["timebox"])
+        append_receipt(archive, SELFTEST_METADATA, selftest)
+        budget = min(duration(recipe["timebox"]), lease_seconds_remaining(eid, e))
+        if budget < duration(recipe["timebox"]):
+            print(f"   lease caps this round at {budget / 60:.1f}m of {recipe['timebox']}")
+        round_deadline = time.monotonic() + budget
+        cells = list(recipe["cells"])
 
-        for n in recipe["cells"]:
+        for index, n in enumerate(cells):
+            # Each cell gets an equal share of whatever is left, rather than one deadline
+            # the first cell could spend in full (D-046). Unused time is reclaimed by the
+            # cells that follow, and no cell can ever run past the lease.
+            remaining = round_deadline - time.monotonic()
+            if remaining <= 0:
+                print(f"   n={n}: session deadline reached before the cell started")
+                break
+            cell_deadline = time.monotonic() + remaining / (len(cells) - index)
             with archive.open("a") as fh:
                 for seed in recipe["seeds"]:
-                    if (left := deadline - time.monotonic()) <= 0:
+                    if round_deadline - time.monotonic() <= 0:
                         print(f"   n={n}: TIMEBOX reached, {recipe['timebox']} spent")
                         return
+                    if (left := cell_deadline - time.monotonic()) <= 0:
+                        print(f"   n={n}: cell share spent; moving to the next cell")
+                        break
                     cmd = shlex.split(recipe["command"].format(n=n, seed=seed))
                     try:
                         p = subprocess.run(
@@ -506,13 +1108,14 @@ def execute(eid: str) -> None:
                             check=False,
                         )
                     except subprocess.TimeoutExpired:
-                        print(f"   n={n}: TIMEBOX reached mid-seed")
-                        return
+                        print(f"   n={n}: cell share reached mid-seed")
+                        break
                     except FileNotFoundError as exc:
                         raise GuardError(f"declared command not found: {cmd[0]}") from exc
                     if p.returncode:
                         raise GuardError(f"command exited {p.returncode} at n={n} seed={seed}")
-                    if (side := read_lines(p.stdout, fh)) is None:
+                    side = read_lines(p.stdout, fh, expect_n=int(n), expect_seed=int(seed))
+                    if side is None:
                         raise GuardError(f"no result line at n={n} seed={seed}")
                     print(f"   n={n} seed={seed}: {side:.12f}")
     finally:
@@ -560,12 +1163,7 @@ def cells_from(archive: Path, recipe: dict[str, Any]) -> list[Cell]:
     by_cell: dict[int, dict[int, float]] = {}
     allowed_cells = {int(n) for n in recipe["cells"]}
     allowed_seeds = {int(seed) for seed in recipe["seeds"]}
-    for line in archive.read_text().splitlines():
-        if not line.strip():
-            continue
-        rec = validated_record(line, allow_execution_metadata=True)
-        if "best_side" not in rec:
-            continue
+    for rec in scan_archive(archive)[0]:
         n, seed, side = int(rec["n"]), int(rec["seed"]), float(rec["best_side"])
         if n not in allowed_cells or seed not in allowed_seeds:
             raise GuardError(f"archive result n={n} seed={seed} is outside the declared recipe")
@@ -638,18 +1236,56 @@ def record(eid: str, *, operator: str) -> str:
     """Read the archive, decide, write the round, regenerate the views, commit."""
     refuse_if_gate_running()
     path, stub = find_round(eid)
+    require_in_progress(eid, stub, "record")
     hid = stub["hypotheses"][0]
     h = hypothesis(hid)
     recipe = h["runner"]
     archive = archive_of(path)
-    execution = execution_metadata(archive) if archive.exists() else None
+    if not archive.exists():
+        raise RefusalError(
+            f"{eid} has no archive; run `packing-campaign execute {eid}` before recording"
+        )
+    archived, receipts = scan_archive(archive)
+    execution = validated_execution(receipts[EXECUTION_METADATA])
     if execution is None:
         raise RefusalError(
             f"{eid} has no execution receipt; "
             f"run `packing-campaign execute {eid}` before recording"
         )
+    selftest = receipts[SELFTEST_METADATA]
+    if selftest is None:
+        raise RefusalError(
+            f"{eid} has no self-test receipt, so nothing establishes that the engine "
+            f"gate ran. Re-run `packing-campaign execute {eid}`."
+        )
+    gate_passed = selftest_passed(selftest, recipe)
+    if not gate_passed:
+        raise RefusalError(
+            f"{eid}'s self-test receipt does not certify the engine that is on disk now "
+            f"(exit {selftest.get('exit_status')!r}, sha256 "
+            f"{str(selftest.get('engine_sha256'))[:12]}). The binary was swapped or the "
+            f"gate failed; re-run `packing-campaign execute {eid}`."
+        )
+    # The independent check, every time there is something to check. A stored certificate
+    # is an audit trail, not a licence: whoever can edit the archive can edit a
+    # certificate inside it, so the geometry is re-decided here, in another process, from
+    # the file as it stands. An archive with no scored line certifies nothing and is left
+    # to `decide`, which abandons the round and keeps the spent budget legible.
+    verification: dict[str, Any] | None = None
+    if archived:
+        verification = verify_archive_in_separate_process(archive)
+        stored = receipts[VERIFICATION_METADATA]
+        if stored is None:
+            append_receipt(archive, VERIFICATION_METADATA, verification)
+        elif stored.get("archive_sha256") != verification["archive_sha256"]:
+            raise RefusalError(
+                f"{eid}'s archive changed after it was verified: the retained receipt "
+                f"certifies {str(stored.get('archive_sha256'))[:12]} but the file on disk "
+                f"digests to {verification['archive_sha256'][:12]}. Nothing may be "
+                "recorded from an archive that moved under its own certificate."
+            )
     artifact_execution = artifact_fields_from_execution(execution)
-    cells = cells_from(archive, recipe) if archive.exists() else []
+    cells = cells_from(archive, recipe)
     verdict = decide(h, cells)
     cell_list = ", ".join(str(c.n) for c in cells) or str(recipe["cells"][0])
 
@@ -674,6 +1310,26 @@ def record(eid: str, *, operator: str) -> str:
             "role": "outcome",
         }
     ]
+    if verification is not None:
+        # The guard row is the point of the repair: the round says, in the record, that
+        # its geometry was re-derived by another process and which bytes were checked.
+        results.append(
+            {
+                "shape": "determination",
+                "question": (
+                    f"did the {plural(verification['poses_checked'], 'archived pose')} "
+                    "verify independently as unit squares inside the reported side "
+                    "with pairwise disjoint interiors"
+                ),
+                "role": "guard",
+                "outcome": "criterion_met",
+                "checked_by": (
+                    f"{verification['verifier']} in a separate process, tolerance "
+                    f"{verification['tolerance']:g}, archive sha256 "
+                    f"{verification['archive_sha256'][:16]}"
+                ),
+            }
+        )
 
     fm = {
         "title": f"{eid} — {hid} at n = {cell_list}",
@@ -694,8 +1350,14 @@ def record(eid: str, *, operator: str) -> str:
                 "assurance": "numerically-checked",
                 "method": "numerical-f64",
                 "precision": {"binary_bits": 53, "rounding": "nearest-even"},
-                "tolerance": "0 (engine-reported overlap must equal zero)",
-                "host_system": socket.gethostname(), "selftest_passed": True,
+                "tolerance": (
+                    f"engine-reported overlap 0; independent pose re-check at "
+                    f"{POSE_TOLERANCE:g}"
+                ),
+                "host_system": socket.gethostname(),
+                # Derived from an executed gate whose binary digest still matches the
+                # engine on disk. Never a literal (D-044).
+                "selftest_passed": gate_passed,
             },
             "instance": {"axis": "n", "point": cells[0].n if cells else recipe["cells"][0]},
             "method": {
@@ -736,6 +1398,26 @@ def record(eid: str, *, operator: str) -> str:
         f"| {c.n} | `{c.best:.12f}` | `{c.median:.12f}` | `{c.gap:+.4e}` | {len(c.sides)} |"
         for c in cells
     )
+    provenance = (
+        (
+            f"The {plural(verification['poses_checked'], 'archived pose')} "
+            f"{'was' if verification['poses_checked'] == 1 else 'were'} rebuilt into "
+            f"corner geometry and re-checked for containment and pairwise separation by "
+            f"`{verification['verifier']}` in a separate process, at tolerance "
+            f"`{verification['tolerance']:g}`, over archive `sha256:"
+            f"{verification['archive_sha256'][:16]}` (D-044). That is a numerical "
+            f"re-derivation, not a proof: it can refute a forged pose and cannot promote "
+            f"this round beyond `numerically-checked`. The engine gate ran as "
+            f"`{shlex.join(selftest['argv'])}` and exited "
+            f"{selftest['exit_status']}; the binary that passed it digests to `sha256:"
+            f"{str(selftest['engine_sha256'])[:16]}`."
+        )
+        if verification is not None
+        else (
+            "No result line survived the harness contract, so there is no geometry to "
+            "verify and nothing here may be read as a measurement."
+        )
+    )
     body = f"""# {eid} — {hid} at n = {cell_list}
 
 {h.get("claim", "").strip()}
@@ -758,8 +1440,11 @@ Run by `packing-campaign` under [the runbook](../../../README.md):
 
 Every number is read from [`{archive.name}`](../results/{archive.name}), which archives
 every line the command printed, so the configurations behind these sides can be re-read
-without re-running anything (D-006). The overlap of every result line was asserted zero
-by the harness contract rather than by the experiment that produced it (D-009).
+without re-running anything (D-006). The overlap on every result line was checked by the
+harness contract rather than trusted from the experiment that produced it (D-009), and the
+geometry behind it was re-derived independently, as below.
+
+{provenance}
 """
     write_atomic(
         path,
@@ -768,10 +1453,7 @@ by the harness contract rather than by the experiment that produced it (D-009).
         + "---\n"
         + body,
     )
-    regen = subprocess.run(
-        [sys.executable, "-m", "sqpack.campaign.ledger", "render"],
-        cwd=ROOT, capture_output=True, text=True, check=False,
-    )  # fmt: skip
+    regen = regenerate()
     if regen.returncode:
         # The round is written; only the views are stale. Say exactly that, because the
         # recovery is to fix what the checker named and re-run this one step.
@@ -779,20 +1461,9 @@ by the harness contract rather than by the experiment that produced it (D-009).
             f"{eid} is written but the campaign ledger refused it:\n"
             f"{regen.stdout}{regen.stderr}\nFix that, then: packing-campaign record {eid}"
         )
-    git("add", "-A", str(CAMPAIGN))
-    subprocess.run(
-        [
-            "git",
-            "commit",
-            "-q",
-            "-m",
-            f"round: {eid} {verdict['decision']} ({hid})",
-            "--no-verify",
-        ],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=False,
+    commit_paths(
+        [path, archive, CAMPAIGN / "ledger.md"],
+        f"round: {eid} {verdict['decision']} ({hid})",
     )
     return verdict["decision"]
 
@@ -809,12 +1480,17 @@ def release(eid: str, why: str) -> None:
     """
     refuse_if_gate_running()
     path, stub = find_round(eid)
-    if stub["verdict"]["decision"] != "in-progress":
-        raise RefusalError(f"{eid} is {stub['verdict']['decision']}, not in-progress")
+    require_in_progress(eid, stub, "release")
     hid = stub["hypotheses"][0]
     recipe = hypothesis(hid)["runner"]
     archive = archive_of(path)
-    execution = execution_metadata(archive) if archive.exists() else None
+    try:
+        execution = execution_metadata(archive) if archive.exists() else None
+    except GuardError:
+        # Recovery must never be blocked by the thing it is recovering from. A round is
+        # often released precisely because its archive was refused, and an unreadable
+        # archive must not also make the round unreleasable.
+        execution = None
 
     stub.pop("lease", None)
     stub["effort"] = {
@@ -854,7 +1530,11 @@ Nothing may be concluded from this round. `{hid}` returns to the queue, and a su
 starts from nothing — no budget was spent that a later round can resume from.
 """,
     )
-    regenerate()
+    # A release is a state transition like any other, so it is regenerated and committed
+    # rather than left on disk. An unattended session that released a round and then died
+    # used to leave no durable trace of the transition at all (D-046).
+    require_regenerated("release", eid)
+    commit_paths([path, archive, CAMPAIGN / "ledger.md"], f"round: {eid} released ({hid})")
     print(f"{eid} released; {hid} returns to the queue")
 
 
@@ -911,7 +1591,7 @@ def preflight() -> int:
 
     guard_refuses(
         "a non-zero overlap is refused",
-        '{"n": 11, "seed": 1, "best_side": 3.9, "overlap": 1e-9}',
+        grid_result_line(11, 1, 3.9, overlap=1e-9),
     )
     guard_refuses(
         "a result line with no overlap is refused",
@@ -923,21 +1603,63 @@ def preflight() -> int:
     )
     guard_refuses("a non-JSON line is refused", "not json at all")
     guard_refuses(
-        "producer output cannot spoof the execution receipt",
-        '{"campaign_runner_execution": '
-        '{"wall_seconds": 0, "commit": "spoofed", "dirty": false}}',
+        "a result line with no pose is refused",
+        '{"n": 11, "seed": 1, "best_side": 3.9, "overlap": 0}',
     )
+    guard_refuses(
+        "a pose whose length disagrees with n is refused",
+        json.dumps(
+            {
+                "n": 11,
+                "seed": 1,
+                "best_side": 3.9,
+                "overlap": 0,
+                "x": [0.5, 1.5],
+                "y": [0.5, 1.5],
+                "t": [0.0, 0.0],
+            }
+        ),
+    )
+    for reserved in RESERVED_RECEIPTS:
+        guard_refuses(
+            f"producer output cannot spoof the {reserved} receipt",
+            json.dumps({reserved: {"verified": True, "commit": "spoofed"}}),
+        )
 
     best = read_lines(
-        '{"n": 11, "seed": 1, "best_side": 3.9, "overlap": 0}\n'
-        '{"n": 11, "seed": 1, "best_side": 3.7, "overlap": 0}',
+        grid_result_line(11, 1, 3.9) + "\n" + grid_result_line(11, 1, 3.7),
         Sink(),
     )
     checks.append(("a seed's result is the min over its lines", best == 3.7, f"got {best}"))
 
+    sink = Sink()
+    try:
+        read_lines(grid_result_line(11, 2, 3.9), sink, expect_n=11, expect_seed=1)
+        attribution, attribution_detail = False, "a line from another seed was archived"
+    except GuardError as exc:
+        attribution = not sink.lines
+        attribution_detail = f"{exc}; {len(sink.lines)} line(s) reached the archive"
+    checks.append(
+        (
+            "a result may not be attributed to another cell or seed",
+            attribution,
+            attribution_detail,
+        )
+    )
+
+    moved = json.loads(grid_result_line(11, 1, 3.9))
+    shifted = dict(moved, x=[moved["x"][0] + 1e-9, *moved["x"][1:]])
+    checks.append(
+        (
+            "the pose digest moves when a single coordinate moves",
+            pose_digest(moved) != pose_digest(shifted),
+            f"{pose_digest(moved)[:12]} vs {pose_digest(shifted)[:12]}",
+        )
+    )
+
     with tempfile.TemporaryDirectory() as tmp:
         bad_archive = Path(tmp) / "bad.jsonl"
-        bad_archive.write_text('{"n": 11, "seed": 1, "best_side": 3.7, "overlap": 0.001}\n')
+        bad_archive.write_text(grid_result_line(11, 1, 3.7, overlap=0.001) + "\n")
         try:
             cells_from(bad_archive, {"cells": [11], "seeds": [1]})
             replay_refused, replay_detail = False, "the tampered archive was accepted"
@@ -950,7 +1672,7 @@ def preflight() -> int:
     with tempfile.TemporaryDirectory() as tmp:
         timed_archive = Path(tmp) / "timed.jsonl"
         timed_archive.write_text(
-            '{"n": 11, "seed": 1, "best_side": 3.7, "overlap": 0}\n'
+            grid_result_line(11, 1, 3.7) + "\n"
             '{"campaign_runner_execution": '
             '{"wall_seconds": 12.5, "commit": "execution-sha", "dirty": true}}\n'
         )
@@ -1008,7 +1730,7 @@ def preflight() -> int:
 
     with tempfile.TemporaryDirectory() as tmp:
         wrong_cell = Path(tmp) / "wrong-cell.jsonl"
-        wrong_cell.write_text('{"n": 12, "seed": 1, "best_side": 4.0, "overlap": 0}\n')
+        wrong_cell.write_text(grid_result_line(12, 1, 4.0) + "\n")
         try:
             cells_from(wrong_cell, {"cells": [11], "seeds": [1]})
             recipe_refused, recipe_detail = False, "the undeclared cell was accepted"
@@ -1017,6 +1739,106 @@ def preflight() -> int:
     checks.append(
         ("record replay enforces the declared cells and seeds", recipe_refused, recipe_detail)
     )
+
+    # Lifecycle. Every transition D-046 named, fired on purpose rather than trusted.
+    for step, decision in (("execute", "rejected"), ("record", "unresolved")):
+        try:
+            require_in_progress("exp-000", {"verdict": {"decision": decision}}, step)
+            refused, detail = False, f"a {decision} round was accepted"
+        except RefusalError as exc:
+            refused, detail = True, str(exc)
+        checks.append((f"{step} refuses a terminal round", refused, detail))
+
+    unmet = unmet_prereqs({"prereqs": ["H-011", "a verified n = 17 pose"]}, [])
+    checks.append(
+        (
+            "an unmet prerequisite keeps a hypothesis out of the queue",
+            len(unmet) == 2,
+            "; ".join(unmet) or "nothing was reported unmet",
+        )
+    )
+    checks.append(
+        (
+            "an empty prereqs list does not block a hypothesis",
+            not unmet_prereqs({"prereqs": []}, []),
+            "an empty list was treated as unmet",
+        )
+    )
+
+    west = {"lease": {"expires": "2026-01-01T00:00:00-07:00"}}
+    checks.append(
+        (
+            "a lease offset is converted to UTC rather than stripped",
+            lease_expiry("exp-000", west) == datetime(2026, 1, 1, 7, 0, tzinfo=UTC),
+            f"got {lease_expiry('exp-000', west).isoformat()}",
+        )
+    )
+    try:
+        lease_seconds_remaining(
+            "exp-000", {"lease": {"expires": (now() - timedelta(minutes=1)).isoformat()}}
+        )
+        lease_refused, lease_detail = False, "an expired lease was accepted"
+    except RefusalError as exc:
+        lease_refused, lease_detail = True, str(exc)
+    checks.append(("an expired lease is refused", lease_refused, lease_detail))
+
+    # The independent oracle, actually spawned. This is the guard D-044 asked for, so
+    # preflight pays for two real child processes rather than asserting an import works.
+    with tempfile.TemporaryDirectory() as tmp:
+        honest = Path(tmp) / "honest.jsonl"
+        honest.write_text(grid_result_line(4, 1) + "\n")
+        try:
+            report = verify_archive_in_separate_process(honest)
+            accepted, accept_detail = True, f"{report['poses_checked']} pose(s) verified"
+        except (GuardError, RefusalError) as exc:
+            accepted, accept_detail = False, str(exc)
+        checks.append(
+            ("a separate process verifies a genuinely valid pose", accepted, accept_detail)
+        )
+
+        x, y, t, side = grid_pose(4)
+        forged = Path(tmp) / "forged.jsonl"
+        forged.write_text(
+            json.dumps({
+                "n": 4, "seed": 1, "best_side": side, "overlap": 0,
+                # Squares 0 and 1 stacked exactly, with a zero overlap asserted anyway.
+                "x": [x[0], x[0], x[2], x[3]], "y": [y[0], y[0], y[2], y[3]], "t": t,
+            })
+            + "\n"
+        )  # fmt: skip
+        try:
+            verify_archive_in_separate_process(forged)
+            forge_refused, forge_detail = False, "the fabricated overlap was accepted"
+        except (GuardError, RefusalError) as exc:
+            forge_refused, forge_detail = True, str(exc)
+        checks.append(
+            (
+                "a separate process refuses a fabricated zero overlap",
+                forge_refused,
+                forge_detail,
+            )
+        )
+
+        understated = Path(tmp) / "understated.jsonl"
+        understated.write_text(grid_result_line(4, 1, 1.5) + "\n")
+        under = verify_archive_poses(understated)
+        checks.append(
+            (
+                "a best_side smaller than the pose needs is refused",
+                not under["verified"],
+                "; ".join(under["failures"]) or "the understated side was accepted",
+            )
+        )
+
+        empty = Path(tmp) / "empty.jsonl"
+        empty.write_text("")
+        checks.append(
+            (
+                "an archive with no scored line certifies nothing",
+                not verify_archive_poses(empty)["verified"],
+                "an empty archive was reported verified",
+            )
+        )
 
     breach = control_breaches([Cell(16, [3.9])])
     checks.append(
@@ -1063,46 +1885,107 @@ def preflight() -> int:
 # Run the three middle steps in a loop
 
 
+def safe_release(eid: str, why: str) -> str:
+    """Free a round after a failure and return the state it actually ended in.
+
+    The recovery path must not be able to replace the failure that caused it, and it
+    must not report a state the round is not in. A failure *after* `record` wrote the
+    verdict leaves a terminal round that was merely not committed; a failure before it
+    leaves a claim to release; a failure of the release itself leaves a stale claim the
+    ledger will surface. Each of those is said out loud rather than flattened to one
+    optimistic word.
+    """
+    try:
+        _, e = find_round(eid)
+    except RefusalError as error:
+        print(f"   {eid} cannot be read back: {error}")
+        return "unknown"
+    decision = str((e.get("verdict") or {}).get("decision"))
+    if decision != IN_PROGRESS:
+        print(f"   {eid} is already {decision}: the failure came after the verdict.")
+        return decision
+    try:
+        release(eid, why)
+    except (RefusalError, GuardError, OSError) as error:
+        print(f"   RELEASE FAILED for {eid}: {error}")
+        print(f"   {eid} remains claimed and will show as a stale claim until recovered.")
+        return IN_PROGRESS
+    return "unresolved"
+
+
 def run(operator: str, hours: float) -> int:
     """claim / execute / record over the queue. Nothing here that a step cannot do."""
     started, failures, done = now(), 0, []
-    runnable, skipped = queue()
+    deadline = started + timedelta(hours=hours)
+    _, skipped = queue()
     show_status()
+    attempted: set[str] = set()
+    abnormal = False
 
-    for hid, _ in runnable:
-        if (now() - started).total_seconds() > hours * 3600:
-            print("\nsession budget exhausted")
-            break
-        eid = claim(hid, operator, hours)
-        print(f"\n== {eid}: {hid} ==")
-        try:
-            execute(eid)
-            decision = record(eid, operator=operator)
-            failures = 0
-        except GuardError as e:
-            failures += 1
-            print(f"   GUARD REFUSED: {e}")
-            release(eid, f"guard refused the measurement: {e}")
-            decision = "unresolved"
-        done.append((eid, hid, decision))
-        print(f"   -> {decision}")
-        if failures >= MAX_CONSECUTIVE_FAILURES:
-            print(f"\n{failures} consecutive guard refusals: the instrument is suspect")
-            write_report(
-                started,
-                operator,
-                hours,
-                done=done,
-                skipped=skipped,
-                failures=failures,
-                abnormal=True,
-            )
-            return 1
+    try:
+        while True:
+            remaining = (deadline - now()).total_seconds()
+            # A lease shorter than a minute buys a round that `execute` would refuse as
+            # already expired, which would spend a failure on the clock rather than on
+            # the instrument.
+            if remaining < 60:
+                print("\nsession budget exhausted")
+                break
+            # Recompute the queue after every transition. A recorded round can resolve a
+            # hypothesis, reach the cap, or satisfy a prerequisite, and a list computed
+            # once at the top of the night does not know any of that (D-046).
+            runnable, skipped = queue()
+            hid = next((h for h, _ in runnable if h not in attempted), None)
+            if hid is None:
+                break
+            attempted.add(hid)
+            # The lease carries the session deadline into `execute`, which is what stops
+            # the last round of a night from overrunning by a whole timebox.
+            eid = claim(hid, operator, remaining / 3600)
+            print(f"\n== {eid}: {hid} ==")
+            try:
+                execute(eid)
+                decision = record(eid, operator=operator)
+                failures = 0
+            except GateRunningError:
+                # The gate owns the machine now. Free the round and stop the session
+                # rather than fighting it for the CPU.
+                abnormal = True
+                done.append(
+                    (
+                        eid,
+                        hid,
+                        safe_release(eid, "the validation gate started during the round"),
+                    )
+                )
+                raise
+            except (GuardError, RefusalError, OSError) as error:
+                # Every failure is terminal for the round and non-scientific: a guard
+                # refusal, a refused ledger, a failed commit, and an unreadable archive
+                # all leave the same durable state. Only a GuardError used to be caught
+                # here, so a refusal escaped the loop, wrote no report, and left the
+                # round claimed (D-046).
+                failures += 1
+                print(f"   REFUSED: {error}")
+                decision = safe_release(eid, f"the round did not complete: {error}")
+            done.append((eid, hid, decision))
+            print(f"   -> {decision}")
+            if failures >= MAX_CONSECUTIVE_FAILURES:
+                print(f"\n{failures} consecutive refusals: the instrument is suspect")
+                abnormal = True
+                break
+    finally:
+        write_report(
+            started,
+            operator,
+            hours,
+            done=done,
+            skipped=skipped,
+            failures=failures,
+            abnormal=abnormal,
+        )
 
-    write_report(
-        started, operator, hours, done=done, skipped=skipped, failures=failures, abnormal=False
-    )
-    return 0
+    return 1 if abnormal else 0
 
 
 def write_report(
@@ -1147,7 +2030,11 @@ def write_report(
         "",
         "## Health",
         "",
-        f"- Guard refusals: **{failures}** (the stop fires at {MAX_CONSECUTIVE_FAILURES}).",
+        (
+            f"- Consecutive refusals: **{failures}** (the stop fires at "
+            f"{MAX_CONSECUTIVE_FAILURES}). A guard, a refused ledger, a failed commit and "
+            "an unreadable archive all count: each ends the round without a measurement."
+        ),
         f"- Exit: **{'abnormal, non-zero' if abnormal else 'clean'}**.",
         "",
     ]
@@ -1162,9 +2049,14 @@ def main(arguments: list[str] | None = None) -> int:
     )
     parser.add_argument("step", choices=[
         "status", "preflight", "queue", "claim", "execute", "record", "release", "run",
+        "verify-archive",
     ])  # fmt: skip
     parser.add_argument(
-        "target", nargs="?", help="H-id for claim; exp-id for execute/record/release"
+        "target",
+        nargs="?",
+        help=(
+            "H-id for claim; exp-id for execute/record/release; archive path for verify-archive"
+        ),
     )
     parser.add_argument("--operator", default="local-agent")
     parser.add_argument("--session-hours", type=float, default=8.0)
@@ -1172,6 +2064,11 @@ def main(arguments: list[str] | None = None) -> int:
     options = parser.parse_args(arguments)
 
     try:
+        # The verifier is the child half of the independent check and works on an
+        # absolute archive path. It must not need the checkout, so that a `record`
+        # running against any layout can still reach an oracle process.
+        if options.step == "verify-archive":
+            return verify_archive_command(options.target)
         require_project_root(ROOT)
         if options.step in {"status", "queue"}:
             show_status()

@@ -1,0 +1,527 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: agent-adbe9e9f8a337278f.jsonl
+    sha256: 750b103c8bc39083af2d6e67d2883957134af030030ad1e8be72ed8d429e9852
+    bytes: 791730
+    records: 331
+    session_id: 21ae3bfc-58a6-55fc-90e3-6e29d229a7f1
+    harness_versions:
+    - 2.1.259
+  span:
+    started_at: '2026-09-03T07:16:54.039Z'
+    ended_at: '2026-09-03T07:41:14.617Z'
+    wall_seconds: 1460.578
+  turns:
+    assistant: 168
+    sidechain: 168
+    by_model:
+      claude-opus-5: 168
+    by_thinking_level:
+      xhigh: 168
+    by_model_and_thinking_level:
+      claude-opus-5 @ xhigh: 168
+    by_branch:
+      claude/squares-pr76-overnight-run-tpc888: 168
+    latency:
+      count: 168
+      total_seconds: 1172.292
+      median_seconds: 3.509
+      max_seconds: 160.915
+  tokens:
+    cache_creation_input_tokens: 596971
+    cache_read_input_tokens: 20719194
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 596971
+    input_tokens: 336
+    output_tokens: 24371
+    thinking_tokens: 15340
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 596971
+      cache_read_input_tokens: 20719194
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 596971
+      input_tokens: 336
+      output_tokens: 24371
+      thinking_tokens: 15340
+  tool_calls:
+    total: 96
+    total_seconds: 394.474
+    share_of_wall: 0.2701
+    errors: 0
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 13
+      total_seconds: 27.301
+      median_seconds: 1.819
+      max_seconds: 4.167
+    by_tool:
+      Bash:
+        count: 73
+        total_seconds: 217.775
+        median_seconds: 1.568
+        max_seconds: 32.679
+      WebSearch:
+        count: 16
+        total_seconds: 131.904
+        median_seconds: 7.314
+        max_seconds: 15.993
+      WebFetch:
+        count: 6
+        total_seconds: 44.787
+        median_seconds: 1.507
+        max_seconds: 38.006
+      ToolSearch:
+        count: 1
+        total_seconds: 0.008
+        median_seconds: 0.008
+        max_seconds: 0.008
+    by_command:
+      mkdir && curl && ls:
+        count: 1
+        total_seconds: 32.679
+        median_seconds: 32.679
+        max_seconds: 32.679
+      python3 extract.py:
+        count: 3
+        total_seconds: 22.193
+        median_seconds: 4.167
+        max_seconds: 16.604
+      curl && file:
+        count: 3
+        total_seconds: 18.178
+        median_seconds: 5.098
+        max_seconds: 9.875
+      curl && curl:
+        count: 5
+        total_seconds: 17.23
+        median_seconds: 2.731
+        max_seconds: 7.386
+      200 && 200 && extract.py:
+        count: 2
+        total_seconds: 12.946
+        median_seconds: 6.473
+        max_seconds: 10.494
+      240 && 200 && extract.py:
+        count: 2
+        total_seconds: 12.397
+        median_seconds: 6.198
+        max_seconds: 8.086
+      grep:
+        count: 12
+        total_seconds: 12.115
+        median_seconds: 0.068
+        max_seconds: 6.24
+      1706.01774 && aif.1852.pdf && 0506160 && extract.py:
+        count: 1
+        total_seconds: 9.568
+        median_seconds: 9.568
+        max_seconds: 9.568
+      curl:
+        count: 2
+        total_seconds: 9.102
+        median_seconds: 4.551
+        max_seconds: 7.798
+      enc() && g && g && g && g && g && curl && curl:
+        count: 1
+        total_seconds: 7.282
+        median_seconds: 7.282
+        max_seconds: 7.282
+      curl && file && extract.py:
+        count: 2
+        total_seconds: 6.397
+        median_seconds: 3.199
+        max_seconds: 3.313
+      python3:
+        count: 3
+        total_seconds: 5.755
+        median_seconds: 1.291
+        max_seconds: 3.183
+      SAG.pdf && bpr-ed2-posted3.pdf:
+        count: 1
+        total_seconds: 5.066
+        median_seconds: 5.066
+        max_seconds: 5.066
+      cat:
+        count: 2
+        total_seconds: 4.887
+        median_seconds: 2.443
+        max_seconds: 4.827
+      mkdir && SAG.pdf && 1803.00505 && 2504.03348 && 2301.00128:
+        count: 1
+        total_seconds: 4.267
+        median_seconds: 4.267
+        max_seconds: 4.267
+      '`U_J && polynomials && this && z && ² && `U_J && z && ² && z && z && ² && polynomials && z && ² && this && z && items':
+        count: 1
+        total_seconds: 4.142
+        median_seconds: 4.142
+        max_seconds: 4.142
+      ? "SAG.pdf && bpr-ed2-posted3.pdf && }\n  echo --- && https?: && / && %2F"
+      : count: 1
+        total_seconds: 3.893
+        median_seconds: 3.893
+        max_seconds: 3.893
+      ? "SAG.pdf && * -o $out -w %{http_code} $url)\n echo $code"
+      : count: 1
+        total_seconds: 3.127
+        median_seconds: 3.127
+        max_seconds: 3.127
+      sed:
+        count: 6
+        total_seconds: 3.05
+        median_seconds: 0.066
+        max_seconds: 1.568
+      git squares:
+        count: 1
+        total_seconds: 2.648
+        median_seconds: 2.648
+        max_seconds: 2.648
+      awk:
+        count: 2
+        total_seconds: 2.5
+        median_seconds: 1.25
+        max_seconds: 1.26
+      find:
+        count: 2
+        total_seconds: 2.217
+        median_seconds: 1.109
+        max_seconds: 2.077
+      python3 && git:
+        count: 1
+        total_seconds: 1.955
+        median_seconds: 1.955
+        max_seconds: 1.955
+      cd:
+        count: 1
+        total_seconds: 1.848
+        median_seconds: 1.848
+        max_seconds: 1.848
+      git status:
+        count: 1
+        total_seconds: 1.84
+        median_seconds: 1.84
+        max_seconds: 1.84
+      (uv:
+        count: 1
+        total_seconds: 1.819
+        median_seconds: 1.819
+        max_seconds: 1.819
+      venv && pip && pip:
+        count: 1
+        total_seconds: 1.687
+        median_seconds: 1.687
+        max_seconds: 1.687
+      head:
+        count: 6
+        total_seconds: 1.669
+        median_seconds: 0.075
+        max_seconds: 1.308
+      curl && ,v.get(authors),:
+        count: 1
+        total_seconds: 1.338
+        median_seconds: 1.338
+        max_seconds: 1.338
+      file && (pdfinfo && null:
+        count: 1
+        total_seconds: 1.32
+        median_seconds: 1.32
+        max_seconds: 1.32
+      ? mkdir && the && printed && document && RASroot.pdf` && also && that && Source && Verbatim
+        && Fernando && Fernando, && Carbone && Fernando, && the classical (Nash) curve selection
+        lemma **[BCR, Prop.8.1.13]** && and, && The && `p. && that && the && Result && Arc
+        && BCR && continuous && BCR && **Nash** && Milnor && **real-analytic** && A && a &&
+        it && `U_J && polynomials && this && `{p}` && every && File && What && bpr.pdf`, &&
+        Basu–Pollack–Roy, && coste-RAS.pdf`, && Coste, && coste-SAG.pdf`, && Coste, && bcr-toc.pdf`
+        && Printed && a1209.6084.*` && Derdzinski–Gal && a2409.04232.*` && Delage–Fichou–Patel
+        && Theorem && rag-ihp.*` && Plaumann, && Theorem && quantcsl.*` && Basu–Roy, && Theorem
+        && f1212.1811.*`, && The && bifurcation.*` && Némethi–Zaharia && Milnor-shaped &&
+        m1410.3312.*` && Massey && semianalytic && arcspaces.*` && Nguyen && `extract.py`,
+        && Text-extraction && The && all
+      : count: 1
+        total_seconds: 1.242
+        median_seconds: 1.242
+        max_seconds: 1.242
+      print(pypdf, && print(pymupdf,:
+        count: 1
+        total_seconds: 1.182
+        median_seconds: 1.182
+        max_seconds: 1.182
+      git log:
+        count: 1
+        total_seconds: 0.09
+        median_seconds: 0.09
+        max_seconds: 0.09
+      ls && git && ls:
+        count: 1
+        total_seconds: 0.08
+        median_seconds: 0.08
+        max_seconds: 0.08
+      git && ls:
+        count: 1
+        total_seconds: 0.066
+        median_seconds: 0.066
+        max_seconds: 0.066
+    by_command_family:
+      other:
+        count: 16
+        total_seconds: 85.302
+        median_seconds: 4.155
+        max_seconds: 16.604
+      toolchain:
+        count: 17
+        total_seconds: 59.955
+        median_seconds: 2.876
+        max_seconds: 9.875
+      filesystem:
+        count: 3
+        total_seconds: 38.188
+        median_seconds: 4.267
+        max_seconds: 32.679
+      inspection:
+        count: 32
+        total_seconds: 27.838
+        median_seconds: 0.076
+        max_seconds: 6.24
+      vcs:
+        count: 4
+        total_seconds: 4.644
+        median_seconds: 0.965
+        max_seconds: 2.648
+      shell:
+        count: 1
+        total_seconds: 1.848
+        median_seconds: 1.848
+        max_seconds: 1.848
+    invoked:
+      echo: 80
+      head: 64
+      cd: 57
+      grep: 31
+      curl: 21
+      tr: 15
+      python3 extract.py: 10
+      sed: 8
+      file: 6
+      '200': 6
+      z: 6
+      tail: 5
+      g: 5
+      ls: 4
+      cat: 4
+      python3: 4
+      SAG.pdf: 4
+      awk: 4
+      ²: 4
+      mkdir: 3
+      The: 3
+      '`U_J': 3
+      polynomials: 3
+      this: 3
+      Theorem: 3
+      git status: 3
+      find: 2
+      cut: 2
+      bpr-ed2-posted3.pdf: 2
+      '240': 2
+      the: 2
+      that: 2
+      Fernando,: 2
+      BCR: 2
+      Coste,: 2
+      wc: 2
+      git branch: 1
+      git log: 1
+      (pdfinfo: 1
+      command null: 1
+      print(pypdf,: 1
+      print(pymupdf,: 1
+      (uv: 1
+      uv venv: 1
+      uv pip install: 1
+      uv pip uninstall: 1
+      ',v.get(authors),': 1
+      '1803.00505': 1
+      '2504.03348': 1
+      '2301.00128': 1
+      ? "* -o $out -w %{http_code} $url)\n echo $code"
+      : 1
+      ? "}\n  echo ---"
+      : 1
+      'https?:': 1
+      /: 1
+      '%2F': 1
+      enc(): 1
+      '1706.01774': 1
+      aif.1852.pdf: 1
+      '0506160': 1
+      printed: 1
+      document: 1
+      RASroot.pdf`: 1
+      also: 1
+      Source: 1
+      Verbatim: 1
+      Fernando: 1
+      Carbone: 1
+      the classical (Nash) curve selection lemma **[BCR, Prop.8.1.13]**: 1
+      and,: 1
+      '`p.': 1
+      Result: 1
+      Arc: 1
+      continuous: 1
+      '**Nash**': 1
+      Milnor: 1
+      '**real-analytic**': 1
+      A: 1
+      a: 1
+      it: 1
+      '`{p}`': 1
+      every: 1
+      File: 1
+      What: 1
+      bpr.pdf`,: 1
+      Basu–Pollack–Roy,: 1
+      coste-RAS.pdf`,: 1
+      coste-SAG.pdf`,: 1
+      bcr-toc.pdf`: 1
+      Printed: 1
+      a1209.6084.*`: 1
+      Derdzinski–Gal: 1
+      a2409.04232.*`: 1
+      Delage–Fichou–Patel: 1
+      rag-ihp.*`: 1
+      Plaumann,: 1
+      quantcsl.*`: 1
+      Basu–Roy,: 1
+      f1212.1811.*`,: 1
+      bifurcation.*`: 1
+      Némethi–Zaharia: 1
+      Milnor-shaped: 1
+      m1410.3312.*`: 1
+      Massey: 1
+      semianalytic: 1
+      arcspaces.*`: 1
+      Nguyen: 1
+      '`extract.py`,': 1
+      Text-extraction: 1
+      all: 1
+      items: 1
+      git squares: 1
+    invoked_families:
+      other: 153
+      shell: 137
+      inspection: 130
+      toolchain: 25
+      vcs: 6
+      filesystem: 3
+    by_shell_shape:
+      compound:
+        count: 47
+        total_seconds: 176.326
+        median_seconds: 2.343
+        max_seconds: 32.679
+      python_heredoc:
+        count: 7
+        total_seconds: 18.144
+        median_seconds: 1.955
+        max_seconds: 4.167
+      python_inline:
+        count: 6
+        total_seconds: 9.157
+        median_seconds: 1.513
+        max_seconds: 1.84
+      heredoc:
+        count: 5
+        total_seconds: 6.284
+        median_seconds: 1.242
+        max_seconds: 1.308
+      pipeline:
+        count: 4
+        total_seconds: 5.032
+        median_seconds: 0.074
+        max_seconds: 4.827
+      simple:
+        count: 4
+        total_seconds: 2.832
+        median_seconds: 0.064
+        max_seconds: 2.648
+    by_thinking_level:
+      xhigh:
+        count: 96
+        total_seconds: 394.474
+        median_seconds: 2.21
+        max_seconds: 38.006
+    shell_traits:
+      pipes: 58
+      redirects_output: 17
+      substitutes: 13
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

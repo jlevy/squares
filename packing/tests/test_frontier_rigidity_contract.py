@@ -167,10 +167,16 @@ def test_catalogue_rigid_is_a_transcription_and_carries_no_judgement() -> None:
                 f"n={n}: claims rigidity the catalogue does not state, without a "
                 f"verified first-party argument"
             )
-    # And a source that DOES say rigid still never supplies the finding.
-    for n in (5, 28, 40):
+    # And a source that DOES say rigid still never supplies the finding. n = 5 is now
+    # `locally-rigid`, and the clause above is what holds it honest: the catalogue says
+    # "Rigid." for it, so the claim is admissible only on a `verified` first-party
+    # argument, which is T-014's exact order-2m proof, independently reviewed.
+    for n in (28, 40):
         assert _case(n)["reported_upper_bound"]["catalogue_rigid"] == "rigid"
         assert _case(n)["rigidity"]["property"] == "undetermined"
+    assert _case(5)["reported_upper_bound"]["catalogue_rigid"] == "rigid"
+    assert _case(5)["rigidity"]["property"] == "locally-rigid"
+    assert _case(5)["rigidity"]["assurance"] == "verified"
 
 
 def test_the_first_party_finding_for_n11_is_carried_with_its_assurance() -> None:

@@ -36,10 +36,10 @@
     <text x="998.1255" y="2540" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">only known numerically (5)</text>
     <rect data-feature="evidence-badge" data-evidence="rigid (established here)" x="1276.0285" y="2525" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="1285.5285" y="2539" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">R</text>
-    <text x="1303.0285" y="2540" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">rigid (established here) (11)</text>
+    <text x="1303.0285" y="2540" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">rigid (established here) (12)</text>
     <rect data-feature="evidence-badge" data-evidence="annotated rigid by the catalogue" x="1585.1495" y="2525" width="19" height="19" rx="4.5" fill="none" stroke="#5c6673" stroke-width="1.2" />
     <text x="1594.6495" y="2539" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#5c6673">R</text>
-    <text x="1612.1495" y="2540" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">annotated rigid by the catalogue (3)</text>
+    <text x="1612.1495" y="2540" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">annotated rigid by the catalogue (2)</text>
     <rect data-feature="legend-swatch" x="737.905" y="2557" width="19" height="19" fill="#4b9582" stroke="#000000" stroke-width="0.8" />
     <rect data-feature="legend-swatch" x="756.905" y="2557" width="19" height="19" fill="#c1c13c" stroke="#000000" stroke-width="0.8" />
     <rect data-feature="legend-swatch" x="775.905" y="2557" width="19" height="19" fill="#cb5698" stroke="#000000" stroke-width="0.8" />
@@ -117,8 +117,8 @@
     <polygon data-feature="square-fill" data-square="n-005-square-004" data-hue-index="0" data-shade-index="2" data-contact-sides="2" data-orientation-radians="0.0" points="1095.635106122135573958666688,322 1154,322 1154,263.6351061221355739586666883 1095.635106122135573958666688,263.6351061221355739586666883" fill="#4b9582" stroke="#000000" stroke-width="0.42" stroke-linejoin="round" vector-effect="non-scaling-stroke" data-angle-class="0" />
     <polygon data-feature="square-fill" data-square="n-005-square-005" data-hue-index="1" data-shade-index="4" data-contact-sides="0" data-orientation-radians="0.7853981633974483096156608458198757210492923498437764552" points="1075,284.2702122442711479173333767 1116.270212244271147917333377,243 1075,201.7297877557288520826666233 1033.729787755728852082666623,243" fill="#e8e868" stroke="#000000" stroke-width="0.42" stroke-linejoin="round" vector-effect="non-scaling-stroke" data-angle-class="1" />
     <text data-feature="packing-label" x="996" y="355" font-family="Helvetica, Arial, sans-serif" font-size="29" font-weight="700" letter-spacing="-0.5" fill="#17202a">5</text>
-    <rect data-feature="evidence-badge" data-evidence="annotated rigid by the catalogue" x="1135" y="334.7" width="19" height="19" rx="4.5" fill="none" stroke="#5c6673" stroke-width="1.2" />
-    <text x="1144.5" y="348.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#5c6673">R</text>
+    <rect data-feature="evidence-badge" data-evidence="rigid (established here)" x="1135" y="334.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
+    <text x="1144.5" y="348.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">R</text>
     <rect data-feature="evidence-badge" data-evidence="exact value known" x="1112" y="334.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="1121.5" y="348.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <rect data-feature="evidence-badge" data-evidence="proved optimal" x="1089" y="334.7" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />

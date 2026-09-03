@@ -1,0 +1,619 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: agent-a885d46a3f6296e8b.jsonl
+    sha256: 9a9cce0444498200e8763efdfd2dd3d2f507fbf1101bb327a9f28ada7e7e1a18
+    bytes: 857923
+    records: 263
+    session_id: 21ae3bfc-58a6-55fc-90e3-6e29d229a7f1
+    harness_versions:
+    - 2.1.259
+  span:
+    started_at: '2026-09-03T11:46:16.210Z'
+    ended_at: '2026-09-03T12:08:39.040Z'
+    wall_seconds: 1342.83
+  turns:
+    assistant: 129
+    sidechain: 129
+    by_model:
+      claude-fable-5-1: 129
+    by_thinking_level:
+      xhigh: 129
+    by_model_and_thinking_level:
+      claude-fable-5-1 @ xhigh: 129
+    by_branch:
+      claude/squares-pr76-overnight-run-tpc888: 129
+    latency:
+      count: 129
+      total_seconds: 1228.872
+      median_seconds: 1.513
+      max_seconds: 153.755
+  tokens:
+    cache_creation_input_tokens: 1775391
+    cache_read_input_tokens: 20183382
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 1775391
+    input_tokens: 11460
+    output_tokens: 33452
+    thinking_tokens: 16846
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 1775391
+      cache_read_input_tokens: 20183382
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 1775391
+      input_tokens: 11460
+      output_tokens: 33452
+      thinking_tokens: 16846
+  tool_calls:
+    total: 84
+    total_seconds: 397.311
+    share_of_wall: 0.2959
+    errors: 2
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 6
+      total_seconds: 33.852
+      median_seconds: 2.622
+      max_seconds: 21.635
+    by_tool:
+      Bash:
+        count: 83
+        total_seconds: 397.297
+        median_seconds: 1.481
+        max_seconds: 21.635
+      ToolSearch:
+        count: 1
+        total_seconds: 0.014
+        median_seconds: 0.014
+        max_seconds: 0.014
+    by_command:
+      sed:
+        count: 15
+        total_seconds: 38.084
+        median_seconds: 0.165
+        max_seconds: 20.35
+      cat:
+        count: 10
+        total_seconds: 33.087
+        median_seconds: 0.178
+        max_seconds: 18.762
+      uv run packing-validate:
+        count: 2
+        total_seconds: 28.688
+        median_seconds: 14.344
+        max_seconds: 14.403
+      ? nproc && free && a && * && * && * && * && M && B && T && SCALE && NGRID && LAST &&
+        F(int(m[1]), && {p && {p && {p && {p && V && Vw && su0 && sup).all()) && n && bc151_own_check.py
+      : count: 1
+        total_seconds: 21.635
+        median_seconds: 21.635
+        max_seconds: 21.635
+      time uv run python massaccesi-verify-n17-lower-bound-4_5058.py:
+        count: 1
+        total_seconds: 21.307
+        median_seconds: 21.307
+        max_seconds: 21.307
+      find:
+        count: 2
+        total_seconds: 18.568
+        median_seconds: 9.284
+        max_seconds: 18.311
+      ^ && ls:
+        count: 1
+        total_seconds: 16.046
+        median_seconds: 16.046
+        max_seconds: 16.046
+      git && git && git && git:
+        count: 3
+        total_seconds: 14.913
+        median_seconds: 1.623
+        max_seconds: 11.823
+      packing-validate && PASSED && FAILED && synopsis:
+        count: 1
+        total_seconds: 14.409
+        median_seconds: 14.409
+        max_seconds: 14.409
+      flowmark && sha256sum && ls:
+        count: 1
+        total_seconds: 14.044
+        median_seconds: 14.044
+        max_seconds: 14.044
+      make format-check:
+        count: 1
+        total_seconds: 13.538
+        median_seconds: 13.538
+        max_seconds: 13.538
+      devtools.check_nagamochi_bounds && devtools.check_basic_bounds:
+        count: 1
+        total_seconds: 13.398
+        median_seconds: 13.398
+        max_seconds: 13.398
+      ls:
+        count: 2
+        total_seconds: 12.491
+        median_seconds: 6.245
+        max_seconds: 12.382
+      ruff && ruff:
+        count: 1
+        total_seconds: 12.464
+        median_seconds: 12.464
+        max_seconds: 12.464
+      uv run python -m devtools.validate_schemas:
+        count: 1
+        total_seconds: 11.677
+        median_seconds: 11.677
+        max_seconds: 11.677
+      git && git:
+        count: 2
+        total_seconds: 11.311
+        median_seconds: 5.656
+        max_seconds: 9.57
+      uv run python -m devtools.render_research_tables:
+        count: 1
+        total_seconds: 10.962
+        median_seconds: 10.962
+        max_seconds: 10.962
+      uv run python -m devtools.render_results:
+        count: 1
+        total_seconds: 10.85
+        median_seconds: 10.85
+        max_seconds: 10.85
+      mkdir && sha256sum && massaccesi-verify-n17-lower-bound-4_5058.py && python3:
+        count: 1
+        total_seconds: 10.506
+        median_seconds: 10.506
+        max_seconds: 10.506
+      uv run python -m devtools.render_evidence_inventory:
+        count: 1
+        total_seconds: 10.278
+        median_seconds: 10.278
+        max_seconds: 10.278
+      uv run python -m devtools.check_results:
+        count: 1
+        total_seconds: 10.144
+        median_seconds: 10.144
+        max_seconds: 10.144
+      git && flowmark && devtools.render_research_tables && devtools.validate_schemas && (make && git && git:
+        count: 1
+        total_seconds: 9.054
+        median_seconds: 9.054
+        max_seconds: 9.054
+      sha256sum && bc151:
+        count: 1
+        total_seconds: 8.165
+        median_seconds: 8.165
+        max_seconds: 8.165
+      git && git && git:
+        count: 4
+        total_seconds: 5.867
+        median_seconds: 1.501
+        max_seconds: 1.561
+      grep:
+        count: 5
+        total_seconds: 3.972
+        median_seconds: 0.939
+        max_seconds: 1.497
+      ? the && n && the && 4.45058) && none && the && the && the && full && and && no && an
+        && at && the && T-015 && a && certifying && the && certifying && it && it && observed
+      : count: 1
+        total_seconds: 3.908
+        median_seconds: 3.908
+        max_seconds: 3.908
+      sha256sum && python3 && cases.n17_weighted_certificate_successor.run:
+        count: 1
+        total_seconds: 3.5
+        median_seconds: 3.5
+        max_seconds: 3.5
+      git log:
+        count: 1
+        total_seconds: 2.118
+        median_seconds: 2.118
+        max_seconds: 2.118
+      ? 'mkdir && bare && its && the && my && Check && Result && Retained && the && Parts
+        && E && exp-059 && hashes && `decision: && Proposed && `all_agree`, && Frontier &&
+        `validate.py` && **`bc151_own_check.py` && see && ### && record && mass && minimum
+        && closed && midpoint && exact-meets && slab && none && additivity && applying &&
+        the && U && 2` && V && 2`: && a && it && that && the && `17 && its && my && `n &&
+        an && the && a && `last_reviewed` && regenerated && `n` && verified && verified &&
+        change && reported && 17 && 1000000 && 5000 && 1000000 && Nagamochi && 18 && 1000000`
+        && 5000` && `+0.079587` && Nagamochi && 19 && `1 && 5000` && `+0.0416983849…` && Nagamochi
+        && 20 && `1 && unchanged && none && Nagamochi && Gaps && its && 4.45058) && full &&
+        every && L3–L4 && no && `SYNOPSIS.md` && append && Path && Purpose && retained-verifier-replay.log`
+        && source && bc150_independent_audit_copy.py`, && BC-150 && bc151_own_check.py`, &&
+        own && `apply_patch.py` && the && ` && logs && `bc151-review.md` && this && <!--'
+      : count: 1
+        total_seconds: 1.743
+        median_seconds: 1.743
+        max_seconds: 1.743
+      ls && find:
+        count: 2
+        total_seconds: 1.674
+        median_seconds: 0.837
+        max_seconds: 1.506
+      python3 && the && second && s*flowmark && sha256sum:
+        count: 1
+        total_seconds: 1.63
+        median_seconds: 1.63
+        max_seconds: 1.63
+      mkdir && apply_patch.py && git:
+        count: 1
+        total_seconds: 1.612
+        median_seconds: 1.612
+        max_seconds: 1.612
+      ? python3 && Step && Result && `devtools.validate_schemas` && 100 && `devtools.render_research_tables`,
+        && STATUS.md, && `devtools.check_results` && 16 && RESULTS.md && T-015 && `devtools.check_nagamochi_bounds`
+        && 85 && `devtools.check_basic_bounds` && 81 && `packing-validate && 100 && formal
+        && reported && **60 && exit && `packing-validate && 25 && `ruff && all && 761 && Declared
+        && 9.0 && Declared && `all_agree`, && `make && `n-017.md`, && reformatted && not &&
+        A && flowmark && `last_reviewed` && regenerated && `last_reviewed` && it && the &&
+        whoever && `apply_patch.py` && the && ` && logs && `bc151-review.md` && this && ,  &&
+        `apply_patch.py` && the && `patch-receipt.diff` && the && ` && logs && `bc151-review.md`
+        && this && SHA-256
+      : count: 1
+        total_seconds: 1.436
+        median_seconds: 1.436
+        max_seconds: 1.436
+      sha256sum:
+        count: 2
+        total_seconds: 1.412
+        median_seconds: 0.706
+        max_seconds: 1.325
+      cp && sha256sum && bc150_independent_audit_copy.py:
+        count: 1
+        total_seconds: 1.231
+        median_seconds: 1.231
+        max_seconds: 1.231
+      head:
+        count: 3
+        total_seconds: 0.673
+        median_seconds: 0.281
+        max_seconds: 0.297
+      ^ && ^:
+        count: 1
+        total_seconds: 0.229
+        median_seconds: 0.229
+        max_seconds: 0.229
+      tail:
+        count: 2
+        total_seconds: 0.198
+        median_seconds: 0.099
+        max_seconds: 0.178
+      'Traceback && Error && ^Q: && ^R: && ^done && Traceback':
+        count: 1
+        total_seconds: 0.146
+        median_seconds: 0.146
+        max_seconds: 0.146
+      sha256sum && ls:
+        count: 1
+        total_seconds: 0.133
+        median_seconds: 0.133
+        max_seconds: 0.133
+    by_command_family:
+      project:
+        count: 9
+        total_seconds: 110.406
+        median_seconds: 11.677
+        max_seconds: 14.409
+      inspection:
+        count: 43
+        total_seconds: 108.943
+        median_seconds: 0.194
+        max_seconds: 20.35
+      other:
+        count: 11
+        total_seconds: 76.481
+        median_seconds: 3.5
+        max_seconds: 21.635
+      vcs:
+        count: 11
+        total_seconds: 43.263
+        median_seconds: 1.623
+        max_seconds: 11.823
+      toolchain:
+        count: 5
+        total_seconds: 43.112
+        median_seconds: 12.464
+        max_seconds: 14.044
+      filesystem:
+        count: 4
+        total_seconds: 15.092
+        median_seconds: 1.678
+        max_seconds: 10.506
+    invoked:
+      echo: 76
+      head: 50
+      grep: 44
+      cd: 35
+      sed: 30
+      tail: 27
+      cat: 19
+      git diff: 18
+      the: 18
+      tee: 15
+      sha256sum: 9
+      git status: 7
+      ls: 7
+      date: 5
+      git log: 4
+      find: 4
+      python3: 4
+      a: 4
+      '*': 4
+      '{p': 4
+      it: 4
+      Nagamochi: 4
+      wc: 3
+      mkdir: 3
+      cut: 3
+      ^: 3
+      none: 3
+      its: 3
+      '`last_reviewed`': 3
+      '`apply_patch.py`': 3
+      '`': 3
+      logs: 3
+      '`bc151-review.md`': 3
+      this: 3
+      uv run packing-validate: 3
+      V: 2
+      n: 2
+      sleep: 2
+      Traceback: 2
+      4.45058): 2
+      full: 2
+      'no': 2
+      an: 2
+      T-015: 2
+      certifying: 2
+      my: 2
+      Result: 2
+      '`all_agree`,': 2
+      regenerated: 2
+      verified: 2
+      reported: 2
+      '1000000': 2
+      5000`: 2
+      '`1': 2
+      uv run python -m devtools.validate_schemas: 2
+      uv run python -m devtools.render_research_tables: 2
+      git checkout: 2
+      uvx flowmark: 2
+      '100': 2
+      '`packing-validate': 2
+      Declared: 2
+      git branch: 1
+      time python3 massaccesi-verify-n17-lower-bound-4_5058.py: 1
+      cp: 1
+      nohup python3 bc150_independent_audit_copy.py: 1
+      time uv run python -m cases.n17_weighted_certificate_successor.run: 1
+      nproc: 1
+      free: 1
+      M: 1
+      B: 1
+      T: 1
+      SCALE: 1
+      NGRID: 1
+      LAST: 1
+      F(int(m[1]),: 1
+      Vw: 1
+      su0: 1
+      sup).all()): 1
+      nohup python3 bc151_own_check.py: 1
+      Error: 1
+      '^Q:': 1
+      '^R:': 1
+      ^done: 1
+      and: 1
+      at: 1
+      observed: 1
+      ps: 1
+      bare: 1
+      Check: 1
+      Retained: 1
+      Parts: 1
+      E: 1
+      exp-059: 1
+      hashes: 1
+      '`decision:': 1
+      Proposed: 1
+      Frontier: 1
+      '`validate.py`': 1
+      '**`bc151_own_check.py`': 1
+      see: 1
+      '###': 1
+      record: 1
+      mass: 1
+      minimum: 1
+      closed: 1
+      midpoint: 1
+      exact-meets: 1
+      slab: 1
+      additivity: 1
+      applying: 1
+      U: 1
+      2`: 1
+      '2`:': 1
+      that: 1
+      '`17': 1
+      '`n': 1
+      '`n`': 1
+      change: 1
+      '17': 1
+      '5000': 1
+      '18': 1
+      1000000`: 1
+      '`+0.079587`': 1
+      '19': 1
+      '`+0.0416983849…`': 1
+      '20': 1
+      unchanged: 1
+      Gaps: 1
+      every: 1
+      L3–L4: 1
+      '`SYNOPSIS.md`': 1
+      append: 1
+      Path: 1
+      Purpose: 1
+      retained-verifier-replay.log`: 1
+      source: 1
+      bc150_independent_audit_copy.py`,: 1
+      BC-150: 1
+      bc151_own_check.py`,: 1
+      own: 1
+      <!--: 1
+      python3 apply_patch.py: 1
+      git squares: 1
+      uv run python -m devtools.render_results: 1
+      uv run python -m devtools.render_evidence_inventory: 1
+      uv run python -m devtools.check_results: 1
+      uv run python -m devtools.check_nagamochi_bounds: 1
+      uv run python -m devtools.check_basic_bounds: 1
+      uv run ruff check: 1
+      uv run ruff format: 1
+      time uv run python massaccesi-verify-n17-lower-bound-4_5058.py: 1
+      make format-check: 1
+      (make: 1
+      bc151: 1
+      Step: 1
+      '`devtools.validate_schemas`': 1
+      '`devtools.render_research_tables`,': 1
+      STATUS.md,: 1
+      '`devtools.check_results`': 1
+      '16': 1
+      RESULTS.md: 1
+      '`devtools.check_nagamochi_bounds`': 1
+      '85': 1
+      '`devtools.check_basic_bounds`': 1
+      '81': 1
+      formal: 1
+      '**60': 1
+      exit: 1
+      '25': 1
+      '`ruff': 1
+      all: 1
+      '761': 1
+      '9.0': 1
+      '`make': 1
+      '`n-017.md`,': 1
+      reformatted: 1
+      not: 1
+      A: 1
+      flowmark: 1
+      whoever: 1
+      ', ': 1
+      '`patch-receipt.diff`': 1
+      SHA-256: 1
+      PASSED: 1
+      FAILED: 1
+      synopsis: 1
+      second: 1
+      s*flowmark: 1
+    invoked_families:
+      other: 247
+      inspection: 185
+      shell: 118
+      vcs: 33
+      project: 13
+      toolchain: 10
+      filesystem: 4
+    by_shell_shape:
+      compound:
+        count: 66
+        total_seconds: 311.127
+        median_seconds: 1.488
+        max_seconds: 21.307
+      simple:
+        count: 10
+        total_seconds: 52.072
+        median_seconds: 0.153
+        max_seconds: 20.35
+      python_heredoc:
+        count: 6
+        total_seconds: 33.852
+        median_seconds: 2.622
+        max_seconds: 21.635
+      pipeline:
+        count: 1
+        total_seconds: 0.246
+        median_seconds: 0.246
+        max_seconds: 0.246
+    by_thinking_level:
+      xhigh:
+        count: 84
+        total_seconds: 397.311
+        median_seconds: 1.474
+        max_seconds: 21.635
+    shell_traits:
+      pipes: 53
+      redirects_output: 8
+      substitutes: 2
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

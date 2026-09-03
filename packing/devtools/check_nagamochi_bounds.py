@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Re-derive every lower bound the register attributes to [Nagamochi 2005].
 
-`E-nagamochi-lower` supplies the verified lower bound for 86 of the hundred frontier
+`E-nagamochi-lower` supplies the verified lower bound for 85 of the hundred frontier
 cases (88 until 2026-08-31, when the first-party green17 certificate took over `n = 17`
 and `n = 18`). The next most-cited evidence record carries two. Nothing checked that the
 recorded values were what the theorem gives: `assurance.py` verifies that a bound cites
 verified evidence of the right claim and scope, which is a statement about the citation
-and not about the arithmetic. A transcription slip in any one of the 86 would have
+and not about the arithmetic. A transcription slip in any one of the 85 would have
 passed.
 
 Theorem 2, as the evidence record states it and as re-derived here from Theorem 1

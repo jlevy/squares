@@ -419,8 +419,12 @@ def test_a_catalogue_annotation_is_shown_but_never_counted() -> None:
     """Dropping the annotation would lose a fact; merging it was the defect.
 
     The figure keeps it, as a muted badge on a `not-established` entry, and the totals
-    count the two separately. `n = 5` is the case that makes this earn its keep: `X-007`
-    establishes more about it than the catalogue ever said, and still not local rigidity.
+    count the two separately. `n = 5` was the case that made this earn its keep, because
+    `X-007` established more about it than the catalogue ever said and still not local
+    rigidity. It left the annotated set on 2026-09-03, when `T-014` proved local rigidity
+    at fixed side and moved the entry to a first-party basis, which is the transition
+    this separation exists to make visible: the catalogue's claim is still carried on the
+    entry, and it is still not what the total counts.
     """
     record = json.loads(
         (ROOT / "atlas/known-best/composite-figure.json").read_text(encoding="utf-8")
@@ -430,9 +434,9 @@ def test_a_catalogue_annotation_is_shown_but_never_counted() -> None:
         n for n, e in entries.items() if e["rigidity"]["basis"] == "catalogue-annotation"
     )
 
-    assert annotated == [5, 28, 40]
+    assert annotated == [28, 40]
     assert record["figure"]["totals"]["rigidity_catalogue_annotated"] == len(annotated)
-    assert record["figure"]["totals"]["rigidity_established"] == 11
+    assert record["figure"]["totals"]["rigidity_established"] == 12
     for n in annotated:
         entry = entries[n]
         assert entry["rigidity"]["state"] == "not-established"

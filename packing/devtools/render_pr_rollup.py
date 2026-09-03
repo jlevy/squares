@@ -28,6 +28,13 @@ For a terminal research agenda, add `--agenda agenda-NNN`. The cost block remain
 the result, stop-reason, disposition, grouped-change, validation, documentation, and
 replanning sections come from the agenda's checked W10 closeout rather than from a
 hand-written PR chronology.
+
+Between those two comes what the run established. A closeout is keyed on commitments and
+a result is a different object in a different register, so the frontier results scored
+inside the run's wall are joined in from `frontier/results.yaml` with the significance
+rubric `epistemics.md` defines for them. Agenda 016 is why: it registered `T-014`,
+`T-015` and `T-016`, scored all three, and published a description that carried one score
+incidentally and the other two not at all.
 """
 
 from __future__ import annotations
@@ -36,11 +43,12 @@ import argparse
 import subprocess
 import sys
 from collections import Counter, defaultdict
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 
 import yaml
 
+from devtools import significance
 from devtools.check_session_rollups import codex_branch_claims
 from devtools.codex_task_tree_delta import validate_delta_document
 from sqpack.yamlio import safe_load
@@ -478,6 +486,15 @@ def _cell(value: object) -> str:
     return " ".join(str(value).split()).replace("|", "\\|")
 
 
+def _prose(value: object) -> str:
+    """A folded YAML block as one paragraph, with its pipes left alone.
+
+    `_cell` escapes `|` because a table row would otherwise break at one. Outside a
+    table that escape is visible damage to a quoted assessment, so the two differ.
+    """
+    return " ".join(str(value).split())
+
+
 def agenda_payload(agenda_id: str) -> dict:
     """Load exactly one agenda by stable id and require its W10 closeout."""
     matches = []
@@ -497,6 +514,134 @@ def agenda_payload(agenda_id: str) -> dict:
     if not isinstance(agenda.get("closeout"), dict):
         raise TypeError(f"{agenda_id} has no W10 closeout")
     return agenda
+
+
+def _as_date(value: object) -> date:
+    """The day a record names, whether it wrote a date or a timestamp."""
+    if isinstance(value, datetime):
+        return value.date()
+    if isinstance(value, date):
+        return value
+    return datetime.fromisoformat(str(value).replace("Z", "+00:00")).date()
+
+
+def agenda_window(agenda: dict) -> tuple[date, date]:
+    """The days this agenda's run occupied, reconstructed because none are recorded.
+
+    **The agenda record carries no wall window, so this is a rule rather than a
+    field.** Its one date is `updated`, "ISO date of the latest priority review",
+    which on a terminal agenda is the day the closeout was written; agenda-016's
+    600-minute wall is a sentence in `objective` and its 06:48:00Z start a sentence
+    inside an outcome, and neither is readable as data. Inventing a field to hold
+    them would be a schema change this renderer has no standing to make.
+
+    So the window is joined over the one structural edge between an agenda and a
+    clock: an item's `bead` names a commitment, an AgentSession's `primary_bead`
+    names the session that executed one, and that session declares `started_at` and
+    `deadline_at`. A bead can be carried into a later agenda -- `think-eb29` sits in
+    both agenda-006 and agenda-007 -- so only sessions whose wall was open on
+    `updated` are taken, which is this agenda's run rather than an earlier one that
+    shared the commitment.
+
+    `updated` is therefore always inside the window, because scoring happens with the
+    closeout; the sessions are what widen it across a run that straddles midnight
+    UTC, as session-061 did. The case this still misses is a closeout finished after
+    a midnight the wall itself did not cross, which would leave that last scoring day
+    outside the window; the section prints the dates it selected on, so the gap is
+    readable rather than silent.
+    """
+    reviewed = _as_date(agenda["updated"])
+    start = end = reviewed
+    beads = {item["bead"] for item in agenda.get("items") or [] if item.get("bead")}
+    for payload in session_payloads():
+        if payload.get("primary_bead") not in beads:
+            continue
+        if not (payload.get("started_at") and payload.get("deadline_at")):
+            continue
+        opened, closed = _as_date(payload["started_at"]), _as_date(payload["deadline_at"])
+        if opened <= reviewed <= closed:
+            start, end = min(start, opened), max(end, closed)
+    return start, end
+
+
+def render_agenda_results(agenda: dict) -> str:
+    """What the run established, between what it cost and what it committed to.
+
+    The dispositions table below is keyed on `BC-NNN` commitments and a result is a
+    `T-NNN` in a different register, so it can present one only by accident. That is
+    exactly what agenda-016 published: `T-014`'s `V3/C5/S3` reached the reader
+    because a `BC-153` row happened to mention it, and `T-015` and `T-016` reached
+    the reader with no significance at all. The join is on `significance.scored`
+    inside the run's wall, and the rubric wording comes from `epistemics.md` through
+    `devtools/significance.py` rather than from a copy in this file, which would be
+    free to drift from the policy it claims to quote.
+
+    A run that registered nothing renders nothing: an empty table under a heading
+    reads as a claim that results were looked for and reported, which is a stronger
+    statement than the record supports.
+    """
+    start, end = agenda_window(agenda)
+    found = significance.scored_within(significance.load(), start, end)
+    if not found:
+        return ""
+
+    when = (
+        f"on {start.isoformat()}"
+        if start == end
+        else f"between {start.isoformat()} and {end.isoformat()}"
+    )
+    lines = [
+        "## New Results and Their Significance",
+        "",
+        (
+            f"Results registered or re-scored inside this run's wall, {when}, ordered as "
+            "[`RESULTS.md`](packing/frontier/RESULTS.md) orders them: significance "
+            "first, then confirmation. `V` is the highest verification rung the cited "
+            "evidence supports and `C` what this repository has itself recorded or "
+            "performed, both defined in [`epistemics.md`](epistemics.md)."
+        ),
+        "",
+        (
+            "**A significance score is a judged reading order and never a gate.** "
+            "[`epistemics.md`](epistemics.md): "
+            '"The score guides reading order and never changes validation behavior." '
+            "Nothing below is admitted, refused, or promoted by its `S`."
+        ),
+        "",
+        "| Result | `n` | `V` | `C` | `S` | Novelty | What it establishes |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
+    ]
+    lines.extend(
+        f"| `{record['id']}` | {significance.scope_label(record)} "
+        f"| `{record['verification']}` | `{record['confirmation']}` "
+        f"| `S{record['significance']['score']}` | `{record['novelty']}` "
+        f"| {_cell(significance.headline(record))} |"
+        for record in found
+    )
+
+    lines += [
+        "",
+        (
+            "The rubric anchor for each score, then the assessment the reviewer "
+            "recorded in [`results.yaml`](packing/frontier/results.yaml):"
+        ),
+    ]
+    for record in found:
+        scored = record["significance"]
+        score = int(scored["score"])
+        lines += [
+            "",
+            (
+                f"**`{record['id']}` — `S{score}`: "
+                f"{significance.anchor_for(score)}.** "
+                f"Scored {_as_date(scored['scored']).isoformat()} by "
+                f"{_prose(scored['by'])}."
+            ),
+            "",
+            f"> {_prose(scored['rationale'])}",
+        ]
+    lines.append("")
+    return "\n".join(lines) + "\n"
 
 
 STOP_EXPLANATIONS = {
@@ -616,12 +761,19 @@ def render_agenda_closeout(agenda: dict) -> str:
 
 
 def render_description(branch: str, agenda_id: str, session_id: str | None = None) -> str:
-    """The complete cost-first PR description for a terminal agenda."""
+    """The complete cost-first PR description for a terminal agenda.
+
+    The order is the reader's rather than the record's, and it is fixed. `OR-9` puts
+    what the branch cost first and nothing displaces it; what the run established
+    comes next, because that is the question a merge decision turns on; the agenda's
+    per-commitment dispositions follow as the accounting behind it.
+    """
     if session_id is not None:
         # Validate the explicit Codex declaration without narrowing the PR's cumulative
         # branch receipt to that one session.
         render(branch, session_id)
-    return render(branch) + render_agenda_closeout(agenda_payload(agenda_id))
+    agenda = agenda_payload(agenda_id)
+    return render(branch) + render_agenda_results(agenda) + render_agenda_closeout(agenda)
 
 
 def branches() -> list[str]:
@@ -645,7 +797,10 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--agenda",
-        help="terminal agenda whose checked W10 closeout follows the cost block",
+        help=(
+            "terminal agenda whose registered results and checked W10 closeout "
+            "follow the cost block"
+        ),
     )
     parser.add_argument(
         "--check",
@@ -667,6 +822,7 @@ def main(argv: list[str] | None = None) -> int:
                 document = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])
                 agenda = document.get("agenda") if isinstance(document, dict) else None
                 if isinstance(agenda, dict) and isinstance(agenda.get("closeout"), dict):
+                    render_agenda_results(agenda)
                     render_agenda_closeout(agenda)
         else:
             branch = args.branch or current_branch()

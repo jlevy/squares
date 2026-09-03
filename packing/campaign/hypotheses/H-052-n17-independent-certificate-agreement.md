@@ -94,6 +94,67 @@ Any later lower-bound adoption requires separate source review and disposition.
 The experiment cannot establish a distinct proof method, certificate uniqueness, or
 transfer to another value of `n`.
 
+## Resolution — Confirmed at Implementation-Agreement Scope, 2026-09-03
+
+**Confirmed, and the scope in the heading is the whole of it.**
+[`exp-059`](../series/series-000-smoke-and-calibration/experiments/exp-059-h-052-n17-fresh-successor-completion.md)
+is `accepted` on `BC-149`’s independent review, which returned **PASS**; `needs_review`
+is cleared on that review and nothing else moved with it.
+The criterion above is **frozen and byte-unchanged** — written before the target work,
+never amended for the round or the review, and met as registered.
+
+**What is established.** For the fixed retained Massaccesi `n = 17` certificate, two
+separately authored exact accumulation paths agree on every one of the 181 rational
+direction cells. Both 181-row `CertificateManifest` summaries are byte-identical: atom
+count 168 and atom hash `37d35da0…`, direction count 181 and direction hash `cc789e1a…`,
+total weight `203/12`, every one of the 181 row minima exactly `1/1`, and the global
+minimum `1/1`, which is the frozen expectation `576/576`. The shrink-and-scaling
+preconditions hold, all five frozen mutations are rejected, all twelve frozen
+certificate invariants are true, and every decision-bearing field is derived from the
+emitted bytes rather than asserted beside them.
+The completion ran 08:59:33Z–09:32:44Z, recomputing the interrupted ordinal 170 rather
+than promoting it and appending eleven new rows to the 170 carried ones.
+
+**This is assurance evidence, and it is not mathematics.** The registered notes already
+fix the scope and the resolution does not widen it: acceptance establishes
+implementation agreement for one fixed certificate.
+It is **not** proof-method independence, **not** adoption of `4.5058` as a reviewed
+lower bound, **not** a certificate-uniqueness claim, and **not** any cross-`n` or
+LP-generalization claim; acceptance alone moves no bound.
+What did move the verified lower bound at `n = 17, 18, 19` is the separate
+source-adoption route, `BC-150` and `BC-151`, resting on the published argument and its
+own from-scratch replays rather than on this agreement.
+This round is retained beside that route as `E-n017-massaccesi-h052-agreement`, one of
+the two frontier evidence entries behind `T-015`; both entries are exact-algebraic
+event-cell sweeps over the same reduction, which is why the confidence rung there is
+`C3` and not `C4`.
+
+**How independent, exactly.** Accumulation-level, over a *shared* reduction.
+Of a `DirectionManifest`’s ten fields, eight — `label`, `direction`, `x_events`,
+`y_events`, both event hashes, `event_cell_count` and `evaluated_state_count` — are
+outputs of the shared `reduce_event_cells` and are equal by construction; only `minimum`
+and `witness` come from different code.
+The two paths also share the fixture, the canonical model, the preconditions and the
+mutation guards, so an error in the reduction, the fixture reconstruction, the
+projection convention, the preconditions or the guards would appear in both paths
+identically. The criterion’s frozen phrase “event-cell reductions” is not edited; read
+it, here and downstream, as **over the same event-cell reduction**.
+
+**What the residual comparison can and cannot catch**, measured rather than argued.
+The reviewer injected three defects into a copy of the sweep and compared against the
+frozen independent path on the real direction 0: dropping the second cumulative pass and
+flipping the sign on one difference-array corner were both detected; extending every
+rectangle’s top edge by one event was **not**. A defect that only raises masses at
+non-minimizing cells is invisible to a comparison of minima, which is a scope statement
+rather than a flaw — and every lower-bound check in this lane inherits it.
+
+**Three limitations carried, none of which prevented clearance**, all recorded in
+`exp-059`’s amendment: `validate_result` does not tie the rebuilt chain spine to the
+carried boundary, now filed as [`D-428`](../../../defects.md); there is no assembly path
+from a retained disagreement, and re-issuing the identical command after an exit 3
+continues past it rather than refusing; and the independence is the accumulation-level
+independence described above.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

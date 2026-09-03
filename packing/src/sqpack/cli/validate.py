@@ -694,9 +694,10 @@ def _frontier_rigidity(context: Context) -> str:
     Two records are excluded here because a stronger first-party argument owns them, and
     the exclusion is keyed on the evidence id rather than on a list of n: n=11 from the
     tangent-cone work, and n=5 from `X-007`'s exact first- and second-order certificates.
-    n=5 still *reads* `undetermined` -- second-order rigidity is not local rigidity and the
-    schema has no word for it -- so it leaves the assessed bucket while keeping the same
-    property, which is why both numbers here moved by one at once.
+    n=5 left the assessed bucket while still *reading* `undetermined` -- second-order
+    rigidity is not local rigidity -- which is why both numbers here moved by one at once;
+    it reads `locally-rigid` since 2026-09-03 (`T-014`), and because the exclusion is by
+    evidence id rather than by property, the counts below did not move again with it.
 
     n=40 moved the same way on 2026-08-30 and for the opposite finding. It is
     infinitesimally *flexible* over `Q(sqrt 2)`, with seven retained directions each refused
@@ -995,10 +996,12 @@ def _frontier_corpus(context: Context) -> str:
         )
     # 61 since 2026-08-31: the green17 certificate took over the verified lower
     # bounds at n = 17 and n = 18, so two open cases stopped citing Nagamochi.
-    if (formal_open, reported_open, nagamochi_count) != (65, 65, 61):
+    # 60 since 2026-09-03: the adopted Massaccesi certificate took over the verified
+    # lower bound at n = 19 by monotonicity (T-016), so a third case stopped citing it.
+    if (formal_open, reported_open, nagamochi_count) != (65, 65, 60):
         raise StepFailureError(
             "frontier corpus counts drifted: expected 65 formal-open, 65 reported-open, "
-            f"and 61 Nagamochi-bounded; observed {formal_open}, {reported_open}, "
+            f"and 60 Nagamochi-bounded; observed {formal_open}, {reported_open}, "
             f"and {nagamochi_count}"
         )
 
@@ -1221,6 +1224,14 @@ def _results_register(context: Context) -> str:
     first = _module(context, "devtools.check_results")
     second = _module(context, "devtools.render_results", "--check")
     return f"{first}\n{second}"
+
+
+def _results_headline(context: Context) -> str:
+    # Sub-second: one register, one document, one rubric. Records tier because it checks
+    # presentation of the record -- that every registered result reaches the section a
+    # reader arrives at, in the register's own order. Agenda 016 scored three results and
+    # published a synopsis naming none of them, which no other step here would notice.
+    return _module(context, "devtools.render_results_headline", "--check")
 
 
 def _certificate_citations(context: Context) -> str:
@@ -1510,7 +1521,24 @@ STEPS: tuple[Step, ...] = (
         _independent_lp,
         touches=(*_CORE, "packing/cases/trump11/*"),
     ),
-    Step("fast behavioral tests", _fast_tests, fast=True, broad=True),
+    # 1209s measured on 2026-09-03 at 1607 passing tests, in the full gate at 13:47Z,
+    # against the 900s shared cap the step had been dying on. The 1187s reading this
+    # comment first cited is a floor and not the measurement: it was taken at 1533 passing
+    # tests on a red tree -- 38 failures, 33 of them the four n = 17 packages an edit broke
+    # and the same commit reverted -- and a test that fails does not run the rest of its
+    # body. It is left named rather than deleted, because a budget argued from a number
+    # nobody can find again is not an argument. Two earlier readings disagree and the
+    # disagreement is left visible rather than averaged away: 880s on 2026-09-03 at 07:35Z
+    # when the step still passed, and 910s reported by the W9 lane the same morning. CI
+    # supplies only a floor too, because it kills the step at the cap rather than timing
+    # it. The suite grew by roughly a hundred tests during that window -- the n = 5
+    # rigidity instrument and the runner trust boundary -- which accounts for the direction
+    # but not the whole spread; the local readings were taken with other work in flight.
+    #
+    # The budget is the measurement plus room for that uncertainty and for growth, not a
+    # number chosen to make today's run pass. A suite that reaches this ceiling should be
+    # re-argued, not re-padded, and the step still fails if it exceeds what it asked for.
+    Step("fast behavioral tests", _fast_tests, fast=True, broad=True, budget_seconds=1800),
     Step("exhaustive exact behavioral tests", _exhaustive_exact_tests),
     Step(
         "bead tree",
@@ -1858,6 +1886,21 @@ STEPS: tuple[Step, ...] = (
         # attribution selects this subsecond step for every change, so a rename or
         # deletion cannot evade its existence checks.
         touches=(),
+    ),
+    Step(
+        "the synopsis headline carries every result",
+        _results_headline,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "SYNOPSIS.md",
+            "epistemics.md",
+            "packing/frontier/results.yaml",
+            "packing/devtools/render_results_headline.py",
+            "packing/devtools/render_research_tables.py",
+            "packing/devtools/significance.py",
+        ),
     ),
     Step(
         "exact certificates are named by their records",

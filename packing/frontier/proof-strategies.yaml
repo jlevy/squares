@@ -168,8 +168,10 @@ strategies:
     Applied in the August 2026 Burns and Massaccesi proposed computer-assisted lower
     bounds for s(17): rational weighted atoms form a fractional hitting certificate,
     and Massaccesi uses LP to generate the fixed certificate. The exact source verifier
-    replays, but the 4.5058 proposal is not yet independently implemented or adopted by
-    this repository.
+    replays, and on 2026-09-03 the repository adopted the 4.5058 proposal at
+    source-backed scope after an independent replay, a lemma audit and two reviews.
+    The record stays externally proposed: one method family carries it, and no
+    method-distinct certificate exists.
   refs:
   - Burns–Massaccesi n17
 - id: 23

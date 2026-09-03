@@ -3,7 +3,7 @@ softschema:
   schema: document-map.schema.yaml
   status: enforced
 
-last_reviewed: '2026-09-02'
+last_reviewed: '2026-09-03'
 scope: >
   Durable Markdown owned by packing. Source-faithful archive content is
   excluded because its role and lifecycle come from resources/README.md rather than
@@ -158,6 +158,46 @@ documents:
     authority: record
     lifecycle: retained
   - path: docs/project/reviews/review-2026-09-01-agenda013-overnight-synthesis.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-03-bc149-h052-agreement-independent-review.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-03-bc152-curve-selection-source-verification.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-03-bc152-h060-prior-art-survey.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-03-bc152-n5-rigidity-instrument-readiness.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-03-bc153-h060-proof-independent-review.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-03-bc153-t014-registration-audit.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-03-bc150-4-5058-adoption-packet.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-03-bc151-4-5058-adoption-independent-review.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md
     role: review
     authority: record
     lifecycle: retained
