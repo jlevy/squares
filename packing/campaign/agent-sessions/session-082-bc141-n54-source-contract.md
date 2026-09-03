@@ -1038,9 +1038,8 @@ The exact top-level keys are `schema`, `scope`, `fixture_sha256`,
 - `scope`: `synthetic-structure-only`;
 - `fixture_sha256`: `92ef9c467564f651efc561d69005c3b0cb847d13f4766ce0e16f365bde791de3`;
 - the already frozen field-receipt and witness SHA-256 values;
-- `claim_boundary`: `Prospective synthetic source-cell contract only; this establishes
-  no source fidelity, actual row correspondence, precision cells, wall or pairwise
-  geometry, feasibility, optimality or packing bound; H-055 remains instrument-unready.`
+- `claim_boundary`:
+  `Prospective synthetic source-cell contract only; this establishes no source fidelity, actual row correspondence, precision cells, wall or pairwise geometry, feasibility, optimality or packing bound; H-055 remains instrument-unready.`
 
 `d4` has exact keys `action`, `elements`, `products`, `associativity_checks` and
 `homomorphism_checks`, with values `r2`, 8, 64, 512 and 64. `assignments` contains the
@@ -1057,9 +1056,10 @@ frozen `FULL_LABELS` order, the only compatibility edge under `r2` joins that la
 
 `mutations` has exact keys `missing_structural_inventory` and `correspondence_swap`.
 Each value has exact keys `rejected` and `reason`; `rejected` is `true`. The ordinary
-refusal reasons are `missing or unexpected synthetic source endpoint` and `synthetic
-structural-tag drift`. The swap exchanges the `w00` and `w01` compatibility endpoints
-while retaining their original tags, so it remains bijective but violates structure.
+refusal reasons are `missing or unexpected synthetic source endpoint` and
+`synthetic structural-tag drift`. The swap exchanges the `w00` and `w01` compatibility
+endpoints while retaining their original tags, so it remains bijective but violates
+structure.
 
 The author CLI emits this result to stdout only under normal and optimized Python and
 must produce byte-identical output.

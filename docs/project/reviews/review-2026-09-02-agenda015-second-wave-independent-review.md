@@ -26,12 +26,12 @@ frontier fact.
 | C: BC-141, n = 54 / H-055 | **pass** | 14 frozen hashes; byte-identical author output; 79 tests; both exact exit mutations; canonical JSON rules; standard-library-only independent import closure; no retained result | Record the pass only; H-055 has no review-flag transition and remains `instrument_ready: false` |
 
 No reviewer reported a mismatch, bounded caveat or cannot-reproduce condition.
-The existing instrument states remain unchanged: H-052 and H-058 are `instrument_ready:
-true`, while H-055 is `instrument_ready: false`. The packet file remained byte-identical
-at SHA-256 `67206898214e49250f559be57694633b920eb927ebf09650e76b79eb7727f0de`; the
-packet commit is `9d3ea64d6131439993d26dabea63bdbf209044ce`, and the raw reviewer
-receipts are retained in session-078 at commit
-`c0433f3807c16f30d14147691b53a6c73b42064e`.
+The existing instrument states remain unchanged: H-052 and H-058 are
+`instrument_ready: true`, while H-055 is `instrument_ready: false`. The packet file
+remained byte-identical at SHA-256
+`67206898214e49250f559be57694633b920eb927ebf09650e76b79eb7727f0de`; the packet commit is
+`9d3ea64d6131439993d26dabea63bdbf209044ce`, and the raw reviewer receipts are retained
+in session-078 at commit `c0433f3807c16f30d14147691b53a6c73b42064e`.
 
 ## Packet A: exp-056
 

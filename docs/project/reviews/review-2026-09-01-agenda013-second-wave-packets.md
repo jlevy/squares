@@ -39,9 +39,10 @@ instrument state.
 Any other determination leaves `needs_review: true`. Each response uses
 the four campaign fields: **Artifact, Result, Guard, Next**.
 
-Before a lane replay, confirm that `git diff --exit-code 529b6729 -- <listed evidence
-paths>` is empty. The packet’s hashes are SHA-256 values of bytes at the full frozen
-revision, not claims about later working-tree bytes.
+Before a lane replay, confirm that
+`git diff --exit-code 529b6729 -- <listed evidence paths>` is empty.
+The packet’s hashes are SHA-256 values of bytes at the full frozen revision, not claims
+about later working-tree bytes.
 
 ## Packet A: n = 17 / H-052
 
@@ -235,9 +236,8 @@ Pass exp-048 only if the evidence establishes a premeasurement source-semantics
 dependency and no geometry work.
 For exp-050, reproduce the executed E1 result and then judge the frozen
 producer-provenance omission.
-The expected determination is `bounded
-caveat`: retained bytes support the reason-3 refusal, but do not durably bind the runner
-whose ordering is part of the claim.
+The expected determination is `bounded caveat`: retained bytes support the reason-3
+refusal, but do not durably bind the runner whose ordering is part of the claim.
 A different determination must name exact contrary evidence.
 Review does not rerun n = 19 geometry and cannot promote n = 50.
 

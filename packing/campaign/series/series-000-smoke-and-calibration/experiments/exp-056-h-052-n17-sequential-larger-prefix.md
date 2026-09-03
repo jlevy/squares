@@ -157,8 +157,7 @@ Recorded at registration, before the process was launched:
 
 Thirty-six named guards pass with zero skips over synthetic directions only.
 Boundary observation uses
-`uv run --frozen python -m cases.n17_weighted_certificate_child.run --status
-campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.checkpoint.json`,
+`uv run --frozen python -m cases.n17_weighted_certificate_child.run --status campaign/series/series-000-smoke-and-calibration/results/exp-056-h-052-n17-sequential-larger-prefix.checkpoint.json`,
 which reports the row count, last ordinal, last row hash and agreement state without
 loading the retained fixture.
 

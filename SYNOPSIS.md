@@ -87,7 +87,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives four confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-five blocked
+hypotheses, one open hypothesis, seven open questions, and thirty-six blocked
 hypotheses. No hypothesis waits on review and six are unresolved.
 The set includes one claim whose formal prerequisite is missing, H-044 whose registered
 calibration-only amendment keeps the hypothesis undisposed — its first scored round
@@ -355,56 +355,65 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-[Agenda-015](packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md)
-and its coordinating
-[session-078](packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md)
-are terminal. The exact ten-hour wall ran from `05:03Z` through `15:03Z` on 2026-09-02.
-BC-146 stopped at that wall after the complete local gate reached 57 of 58 steps and
-failed only Ruff formatting; no agenda-015 publication revision was pushed inside the
-wall. Later formatting, independent audits and validation are recorded separately as
-post-wall publication remediation and do not change the historical phase states or
-times.
+[Agenda 016](packing/campaign/agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md)
+is the active, operator-confirmed program around the scientific successor selected by
+Agenda 015’s completed W10 closeout and terminal
+[session-078](packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md).
+It has not begun.
 
-Agenda 015’s W10 closeout makes the stop reasons and follow-ups explicit.
-It found no new mathematical result and no completed bounded-negative search.
-Exp-056 was time-limited and continues only as the fresh `think-5j8d` round; exp-057 and
-the full bound, equivalence, and W5 comparisons were correctly guard-refused and defer
-to their named dependencies; BC-139 never opened; the synthetic contract, narrow smoke
-tests, typed freezes, and independent reviews achieved their declared scopes; and the
-BC-146 publication failure was technical, then fixed and rerun after the wall.
+**Selected next entry:** `think-5j8d`, the fresh H-052 continuation owned by BC-148.
+Start only after the Agenda 016 planning revision is merged and hosted-green.
+BC-147 on `think-a0h6` first freezes the 600-minute wall, allocates complete next-free
+session and H-052 experiment records, replays the retained evidence and dispatches
+`think-5j8d` beside the H-060 and W9 lanes.
 
-The retained scientific outcomes are narrower than the work completed:
+The agenda separates three kinds of progress that the prior closeout showed must not be
+collapsed:
 
-- exp-056 stopped with 170 of 181 verified agreeing rows through ordinal 169, progress
-  at ordinal 170 `independent_started` and no canonical result.
-  H-052 remains unresolved.
-- exp-057 retained the literal printed-rational point model but refused its two
-  six-decimal models for lack of source provenance.
-  BC-139 never opened, no source or network access occurred, and H-058 remains
-  unmeasured.
-- BC-141 completed the synthetic n = 54 parser and labeled-correspondence contract.
-  Its frozen review passed 79 tests; the current author and independent pair passes 80.
-  No live-source fidelity, witness correspondence, precision cells or geometry was
-  established, so H-055 remains instrument-unready.
-- BC-140 and BC-142 stopped partially complete.
-  Eight discovered bounds remain allowlisted under `think-ifgr`, while the 13-of-115
-  reachable-test selection lacks an exact-set oracle under `think-mo7r`. Both W5 slices
-  retained typed `no-change` receipts.
+- **Assurance and possible adoption.** `think-5j8d` continues H-052 in a fresh result
+  path from exp-056’s verified 170-row prefix.
+  The new package must fully readmit the progress marker, distinguish exp-056’s
+  immediate parent binding from exp-052’s chain genesis, and carry separate terminal
+  schemas: full certificate summaries and global minima on agreement, or the exact
+  discrepant prefix with declared suffix and manifest absences.
+  Both paths require the frozen preconditions, mutation decisions and `instrument_valid`
+  boundary. A Max review follows.
+  Only an exact pass opens a new source-adoption decision for the reported 4.5058 lower
+  bound at `n = 17, 18, 19`; H-052 agreement itself is neither first-party mathematics
+  nor frontier adoption.
+- **A genuinely new theorem route.**
+  [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md) preregisters
+  fixed-side local rigidity of Goebel’s exact `n = 5` pose.
+  T-012’s exact first- and second-order certificates already exist.
+  The agenda must build an injective half-angle chart, account for every inactive wall
+  and pair constraint before reducing locally to the twenty active inequalities, bind
+  that chart’s first two jets to T-012, and freeze an independently reviewed
+  instrument-ready transition before evaluating the curve-selection argument.
+  A lone feasible point at positive distance cannot refute isolation; rejection requires
+  an arc through the pose or an exact accumulating family.
+  A separate H-060 prior-art survey is required before calling a successful first-party
+  proof apparently novel.
+- **A bounded W9 wave.** `think-modk` selects only D-044 and D-046, the two critical
+  defects sharing the generic campaign runner’s validity, archive, lifecycle and
+  persistence boundary.
+  It runs in parallel because neither defect blocks the two exact scientific lanes.
+  Each defect must finish fixed, contained, rerouted or explicitly blocked; the wave
+  cannot substitute easier backlog items.
 
-Three fresh Max reviews reproduced all frozen packets.
-They authorized only the `needs_review` clears for exp-056 and exp-057; no result,
-hypothesis, instrument, bound, frontier fact or route changed.
-Post-wall review also repaired a module-collision defect in the declared-bound evidence
-checker without changing the n = 54 contract or verifier implementations.
+Elapsed hours eight through ten are reserved for `think-xycf` and W10. Every attempted
+scope receives an outcome classification, evidence, stop reason, disposition and named
+follow-up. Generated views and live tbd are reconciled; README, tutorial, conventions,
+development guidance and operating rules each receive an explicit update-or-current
+decision; and exactly one successor is selected without being executed inside the
+closeout. If validation or hosted checks extend beyond the research wall, only the same
+mechanical closeout continues and its post-wall duration is reported separately.
 
-**Selected next entry:** `think-5j8d`, a freshly preregistered n = 17 continuation from
-the retained exp-056 chain.
-It stays gated until PR #75’s current head is hosted-green.
-Exp-056 itself never resumes, and an all-direction agreement would still require the
-separate adoption gate before any bound or frontier change.
-The W9 candidate `think-cyko` is ranked next for systematic waves over the 56 open
-defects (35 outstanding and 21 contained); it does not displace the selected P0
-scientific handoff without another W10 or operator reprioritization.
+The Green17 exact ceiling (`think-iye2`) is the first bounded fallback; bespoke `n = 12`
+work remains the next larger theorem campaign.
+The `n = 68` and `n = 54` source routes stay parked behind their provenance and
+instrument-readiness defects.
+Actual Agenda 016 outcomes, rather than this initial ranking, control the next W10
+handoff.
 
 ### Handoff Record
 
@@ -2448,6 +2457,7 @@ round that names the hypothesis, control roles included.
 | [H-057](packing/campaign/hypotheses/H-057-n17-parent-bound-parallel-speedup.md) | unresolved | A parent-bound three-process runner preserves exact output and reaches the fixed useful-speedup threshold on three exp-052 ordinals | 1 | — |
 | [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | unresolved | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 2 | — |
 | [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | confirmed | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 1 | — |
+| [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md) | blocked | Goebel’s exact `n = 5` optimum is locally rigid when the container side is fixed | 0 | — |
 
 ### Confirmed
 

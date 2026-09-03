@@ -24,6 +24,7 @@ Generated from [`operating-rules.md`](operating-rules.md), which carries the evi
 for each rule. Edit there, not here.
 
 <!-- BEGIN OPERATING RULES SUMMARY -->
+
 - **OR-1:** Build the tool; never leave a measurement in one-off code.
 - **OR-2:** Run three to five sub-agents, at a thinking level matched to the task.
 - **OR-3:** Never wait on a gate with nothing else in flight.
@@ -35,6 +36,7 @@ for each rule. Edit there, not here.
 - **OR-9:** A pull request leads with what the branch cost.
 - **OR-10:** Treat matched agent and host handoffs as continuation, not a reset.
 - **OR-11:** Close an agenda through disposition and reprioritization.
+
 <!-- END OPERATING RULES SUMMARY -->
 
 ## Build & Test

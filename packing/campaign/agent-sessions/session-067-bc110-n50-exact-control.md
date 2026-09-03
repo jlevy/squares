@@ -247,9 +247,9 @@ Those ids do not assume the same labels as the witness rows.
    source cell for that row.
    Require a perfect matching.
 4. **Tie-breaking:** among all passing receipts choose the lexicographically first tuple
-   `(global-D4-index, witness-row vector ordered by certificate id, quarter-turn vector,
-   winding-bit vector)`. Never select a symmetry or matching from geometric slack or a
-   favorable H-054 outcome.
+   `(global-D4-index, witness-row vector ordered by certificate id, quarter-turn vector, winding-bit vector)`.
+   Never select a symmetry or matching from geometric slack or a favorable H-054
+   outcome.
 5. **Source cells:** each retained row requires closed cells for center `x`, center `y`
    and the stored orientation observation.
    A source-declared exact token yields a singleton; declared nearest rounding at `d`
