@@ -13,12 +13,13 @@
   },
   "disposition": {
     "hypothesis_status": "unresolved",
-    "instrument_ready": false,
+    "instrument_ready": true,
     "review_state": "review-pending",
     "reviewed_by": null,
     "next_review": "BC-153",
     "frontier_change": null,
-    "note": "The mathematics of the registered acceptance route is complete on paper and replayed exactly here, but no repository instrument checked it and the curve-selection citation is not confirmed against a primary text. A W7 instrument was built after this packet was frozen (see the instrument block below); it self-reports ready with isolation_decided false, and its independent readiness review returned BOUNDED-CAVEAT rather than a pass, twice. H-060 is therefore unresolved and remains instrument_ready: false -- because that review has not passed, not because nothing was built. No frontier or result-register change is implied."
+    "note": "The mathematics of the registered acceptance route is complete on paper and replayed exactly here, but no repository instrument checked it and the curve-selection citation is not confirmed against a primary text. The W7 instrument built after this packet was frozen has now passed its independent readiness review (payload digest 743fd18a), which is why H-060 moves to instrument_ready true. That checkpoint is about the instrument only: no target determination ran, the instrument sets isolation_decided false unconditionally and cannot decide isolation even in principle, and this round's numbers still came from scratchpad sympy rather than from it. H-060 therefore remains unresolved, its registered criterion is unamended, needs_review stays true, and no frontier property, result-register entry or novelty classification changed -- those belong to BC-153, which has not run.",
+    "target_determination_ran": false
   },
   "environment": {
     "interpreter": "packing/.venv/bin/python3",
@@ -193,7 +194,7 @@
     "package": "packing/src/sqpack/local_rigidity/",
     "deviation_from_w7": "a new package binding to devtools.assess_n5_rigidity, not an extension of it as H-060's instrument text says",
     "self_report": "instrument_ready true, isolation_decided false; all eight controls C1-C8 exercised",
-    "review_state": "BOUNDED-CAVEAT, not a pass",
+    "review_state": "PASS on the third round, at payload digest 743fd18a. The pass certifies the instrument, not H-060: no target determination ran and the instrument sets isolation_decided false unconditionally.",
     "reviewed_builds": [
       {
         "commit": "2f112f4c",
@@ -206,29 +207,56 @@
         "payload_digest": "ba99ccccd7303f260f48c62a10fb9b6dc43ca3e8ff804646ef5de89a48967971",
         "classification": "BOUNDED-CAVEAT",
         "caveat": "the C1/C4 repair was verified by removal and holds, but the digested payload pins commit 2f112f4c, whose code cannot produce that payload, so a replayer following the pin gets CANNOT-REPRODUCE; the re-review's verdict becomes PASS only on that mechanical closure"
+      },
+      {
+        "commit": "d45a3269",
+        "payload_digest": "743fd18a839fbc3dc566b5e622f688c5745845573414eea40ebf52d620d2cc67",
+        "source_digest": "9382bae12976bc1225382ef79ab4a777d5982cbc6b04a47dfbdba51d22c36357",
+        "classification": "PASS",
+        "replayed_from": "a clean root at fe8bccde, one commit past the author's observed d45a3269, with the instrument package untouched between the two",
+        "evidence": "normal and optimized Python byte-identical; 46 tests pass; the reviewer reproduced source_digest independently from the recipe; leaf diff against the author's final certificate shows exactly one differing leaf, /claim_boundary/provenance/pinned_commit, with tree_matches True and paths_differing empty, which closes the provenance item the second round left open",
+        "controls": "the C1/C4 repair re-verified by removal: replacing the guard with a no-op stops both controls rejecting",
+        "constant": "G''(e_u4) = -2(m+1) exactly on all 16 support features; the reviewer's earlier -(m + 1/2) was the geometric gap's second derivative rather than the cleared chart polynomial's. The structural conclusion is unchanged and now machine-checked: the restricted second jet is an affine function of the support feature's own base margin and is NOT an independent identifier"
       }
     ],
-    "unreviewed": "any build after 609e7392; no statement in this record refers to one",
     "declared_boundaries": [
       "four mathematical inputs are cited, not machine-checked: the separating-axis theorem for convex polygons; the topological half of u -> 2 atan(u) being a homeomorphism onto (-pi, pi), the polynomial injectivity being verified and the topology cited; containment of a convex square in a convex rectangle reducing to its four corners; and continuity of polynomials, which is what makes U open",
       "the binding compares a restricted second jet along one chart ray only -- the image of T-012's single free direction, e_u4 halved -- not the full chart Hessian; directions outside the first-order cone are not compared because T-012 supplies no q for them",
       "classification covers single-support-feature touches only; edge-flush and corner-on-corner touches are refused rather than classified",
-      "the reduction audit compares only at sampled points inside U, on a fixed grid rather than a search towards U's boundary; points outside U are counted and skipped, so the filter is exercised, but no sampled point sits near the boundary by construction"
+      "the reduction audit compares only at sampled points inside U, on a fixed grid rather than a search towards U's boundary; points outside U are counted and skipped, so the filter is exercised, but no sampled point sits near the boundary by construction",
+      "certificate_drift computes its recorded digest over a reduced payload, built without the controls list and without provenance, so that field does not equal the shipped payload digest. It remains a sound drift test -- the digest moves under two independent mutations and is stable on rebuild -- but a reader who expects it to match the headline digest will not find a match. Known cosmetic discrepancy, disclosed by the lane and deliberately left in place."
     ],
-    "note": "This block records the instrument's state, not this round's evidence. Every quantity in this record was computed by the scratchpad sympy scripts above, before the instrument existed. The frozen packet is not subject to the restricted-jet limitation: verify_chart.py compares H_chart against J^T H_geo J on all twenty rows."
+    "note": "This block records the instrument's state, not this round's evidence. Every quantity in this record was computed by the scratchpad sympy scripts above, before the instrument existed. The frozen packet is not subject to the restricted-jet limitation: verify_chart.py compares H_chart against J^T H_geo J on all twenty rows.",
+    "current_build": {
+      "reviewed": false,
+      "commit_observed": "15ebfa98d66a",
+      "payload_digest": "bd450cb610a866972043a98a04673d6a9d75acd78642b658b9dccb098a18b26e",
+      "source_digest": "ad32062e5a01",
+      "receipt_sha256": "f8262c77",
+      "certificate_sha256": "f3b0c2d6",
+      "tree_matches": true,
+      "paths_differing": [],
+      "optimized_python_identical": true,
+      "change": "implements the reviewer's one residual recommendation, which was not a condition of the pass: the three inputs the instrument reads are now hashed into source_digest, the hashed set is derived from the imported module objects rather than a path list so it cannot drift from what the driver imported, and the tree_matches dirty check was widened to the same set. Hashed set 9 files -> 12.",
+      "leaf_diff_against_reviewed_build": "exactly four leaves, all under /claim_boundary/provenance: note, pinned_commit, source_digest, and the length of source_files. No package code changed, so the reviewed round's 46 passing tests and clean linters remain current.",
+      "pinned_commit_note": "pinned_commit moved from d45a3269 to 15ebfa98 only because an unrelated commit landed between runs -- the documented sensitivity of the observing mechanism, not an instrument change. source_digest is the leaf that moved for a substantive reason.",
+      "status": "not reviewed. The review passed on 743fd18a; this build is a provenance-metadata successor to it and is not claimed to carry the review."
+    }
   },
   "open_obligations": [
     {
       "id": "O1",
-      "obligation": "A W7 instrument whose readiness review passes. The instrument, its neighbourhood receipt and the eight rejecting controls C1-C8 were built after this packet was frozen, at 6580a9fd; the open obligation is the review, which returned BOUNDED-CAVEAT at 2f112f4c and again, after the C1/C4 repair, at 609e7392.",
+      "obligation": "A W7 instrument whose readiness review passes. DISCHARGED on 2026-09-03: the review returned BOUNDED-CAVEAT at 2f112f4c, the C1/C4 repair landed at 609e7392 and was verified by removal, a re-review returned BOUNDED-CAVEAT on one provenance item, and the third round returned PASS at payload digest 743fd18a with the provenance item closed. Discharging it makes the instrument usable; it does not make this round's chart CHECKED in the criterion's sense, because this round's quantities were computed by scratchpad sympy before the instrument existed.",
       "owner": "a separate lane (sqpack.local_rigidity, binding to devtools.assess_n5_rigidity rather than extending it as W7 asks)",
-      "blocks": "instrument_ready: true, and therefore any accept determination"
+      "blocks": "nothing further; instrument_ready is now true. Any accept determination still requires the criterion's checked chart and reviewed argument.",
+      "status": "discharged"
     },
     {
       "id": "O2",
       "obligation": "Primary-text confirmation of the curve-selection statement (BCR Proposition 8.1.13; or Milnor 1968 Lemma 3.1 together with the finite-union reduction of X-012 section 4.1, which is what puts the set into Milnor's narrower class of real algebraic sets cut by strict inequalities -- the two are not equivalent as stated). Currently supported by a verbatim quotation from one of BCR's own authors, in notes he describes as provisional, plus four verbatim uses of the proposition by a single author group. The packet's second secondary source was withdrawn from X-012 as an over-attribution, so no independent corroborating source stands behind the citation.",
       "owner": "a separate lane; to be confirmed by the BC-153 reviewer",
-      "blocks": "completeness of the registered acceptance route, which is preregistered on curve selection and is not discharged by the corroborating second proof"
+      "blocks": "completeness of the registered acceptance route, which is preregistered on curve selection and is not discharged by the corroborating second proof",
+      "status": "open"
     }
   ],
   "novelty": {
@@ -254,6 +282,7 @@
     "any novelty beyond the S3 claim above"
   ],
   "recommendations": [
-    "Archive the Kingbird rigid-packings page under packing/resources/web/, which the packet notes is cited but not retained. Not done here: the resources archive is outside this round's write scope. It is also the only way to settle a live discrepancy: X-012 section 7.3 lists thirteen rigid entries from that unarchived page, of which n = 5, 11, 18, 28, 40 and 52 are at n <= 100, while the archived main page carries exactly four Rigid. annotations at n <= 100 (n = 5, 11, 28, 40), which is what the prior-art survey reports. The two are reconcilable if rigid-but-inoptimal entries are not annotated on the main list, as the rigid page's own preamble suggests, but nothing in the repository lets a reader check the list of thirteen."
+    "Archive the Kingbird rigid-packings page under packing/resources/web/, which the packet notes is cited but not retained. Not done here: the resources archive is outside this round's write scope. It is also the only way to settle a live discrepancy: X-012 section 7.3 lists thirteen rigid entries from that unarchived page, of which n = 5, 11, 18, 28, 40 and 52 are at n <= 100, while the archived main page carries exactly four Rigid. annotations at n <= 100 (n = 5, 11, 28, 40), which is what the prior-art survey reports. The two are reconcilable if rigid-but-inoptimal entries are not annotated on the main list, as the rigid page's own preamble suggests, but nothing in the repository lets a reader check the list of thirteen.",
+    "Reviewer's residual recommendation from the passing round, carried as a recommendation and not as a condition of the pass: source_digest covered the instrument package and its driver but not the three inputs the instrument reads -- sqpack/field.py, cases/gobel5/packing.py and devtools/assess_n5_rigidity.py -- so a change to any of them would alter what the instrument computes while leaving source_digest unchanged. Replayability is unaffected while tree_matches is true, since the pinned commit then fixes those files. Implemented after the pass in the unreviewed successor build bd450cb6; see instrument.current_build."
   ]
 }

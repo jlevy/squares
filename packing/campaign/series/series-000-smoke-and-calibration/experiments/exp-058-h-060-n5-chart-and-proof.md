@@ -281,8 +281,8 @@ One of the two obligations below is now discharged; the other is open, and both 
 other lanes:
 
 1. **Discharged.** A `W7` instrument whose readiness review passes — it passed on the
-   third round, at final payload digest `743fd18a`; the history and the reviewer's one
-   residual recommendation are below.
+   third round, at final payload digest `743fd18a`; the history, the reviewer's one
+   residual recommendation and what the lane changed after the pass are below.
    That does not make *this* round's chart checked: only `C8` was pre-run here, and only
    to confirm that `exp-034` is not a refutation — not to exercise an instrument refusal,
    and every number in this record still comes from scratchpad sympy.
@@ -358,18 +358,55 @@ to `instrument_ready: true`:
   jet is an affine function of the support feature's own base margin, and is **not** an
   independent identifier.
 
-The reviewer carried one residual **recommendation**, which is not a condition of the pass
-and does not qualify it. It is recorded here as an open, named limitation:
+### What Changed After the Pass, and What It Does Not Change
 
-- **`source_digest` does not cover the instrument's inputs.** It covers the instrument
-  package and its driver, but not the three files the instrument reads —
-  [`sqpack/field.py`](../../../../src/sqpack/field.py),
-  [`cases/gobel5/packing.py`](../../../../cases/gobel5/packing.py) and
-  [`devtools/assess_n5_rigidity.py`](../../../../devtools/assess_n5_rigidity.py).
-  A change to any of those would alter what the instrument computes while leaving
-  `source_digest` unchanged.
-  Replayability is unaffected while `tree_matches` is true, since the pinned commit then
-  fixes those files as well; the gap is in what the digest alone attests.
+The reviewer carried one residual **recommendation**, explicitly not a condition of the
+pass: `source_digest` covered the instrument package and its driver but not the three
+files the instrument reads —
+[`sqpack/field.py`](../../../../src/sqpack/field.py),
+[`cases/gobel5/packing.py`](../../../../cases/gobel5/packing.py) and
+[`devtools/assess_n5_rigidity.py`](../../../../devtools/assess_n5_rigidity.py).
+A change to any of those would have altered what the instrument computes while leaving
+`source_digest` unchanged.
+
+The lane has since implemented it.
+The three inputs are hashed, the hashed set is derived from the **imported module
+objects** rather than from a path list, so it cannot drift from what the driver actually
+imported, and the `tree_matches` dirty check was widened to that same set — hashing the
+inputs while checking only the package would have let `tree_matches: True` stand over a
+modified input. The hashed set went from 9 files to 12.
+
+The current build is therefore **not** the reviewed build, and is not claimed to be:
+
+| | reviewed | current |
+| --- | --- | --- |
+| payload digest | `743fd18a…` | `bd450cb610a866972043a98a04673d6a9d75acd78642b658b9dccb098a18b26e` |
+| source digest | `9382bae1…` | `ad32062e5a01…` |
+| observed commit | `d45a3269…` | `15ebfa98d66a…` |
+
+The current build carries receipt `f8262c77…` and certificate `f3b0c2d6…`, is
+byte-identical under normal and optimized Python, and reports `tree_matches: True` with no
+differing paths.
+Its leaf diff against the reviewed build is exactly four leaves, all under
+`/claim_boundary/provenance`: `note`, `pinned_commit`, `source_digest`, and the length of
+`source_files`. **No package code changed**, which is why the 46 passing tests and the
+clean linters from the reviewed round remain current.
+
+`pinned_commit` moved from `d45a3269…` to `15ebfa98…` only because an unrelated commit
+landed between runs. That is the documented sensitivity of the observing mechanism, not an
+instrument change; `source_digest` is the leaf that moved for a substantive reason.
+
+Two limitations stay named rather than fixed:
+
+- **`certificate_drift` digests a reduced payload.** It computes its recorded digest
+  without the controls list and without provenance, so that field does not equal the
+  shipped payload digest and a reader who expects it to match will be surprised.
+  It remains a sound drift test — the digest moves under two independent mutations and is
+  stable on rebuild — so this is a known cosmetic discrepancy, disclosed by the lane
+  unprompted and deliberately left in place.
+- **Replayability rests on `tree_matches`, not on the digest alone.** With the widened
+  hashed set the digest now covers the inputs, but what a replayer follows is still the
+  pinned commit, and that pin is what fixes the whole tree.
 
 The instrument's own declared boundaries, none of which this record could state while it
 denied the instrument existed:

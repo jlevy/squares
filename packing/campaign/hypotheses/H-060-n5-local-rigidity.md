@@ -100,7 +100,11 @@ The reviewed build's payload digest is
 from the author's certificate in exactly one leaf,
 `/claim_boundary/provenance/pinned_commit`, with `tree_matches` true and no differing
 paths, which is what closed the earlier provenance caveat.
-The full review history and the reviewer's one residual recommendation are recorded in
+The instrument has changed since that build, but only in provenance metadata, to
+implement the reviewer's one residual recommendation: the current build `bd450cb6` differs
+from the reviewed one in four leaves under `/claim_boundary/provenance` and in no package
+code, and is not itself claimed to be reviewed.
+The full review history, that change and the named limitations are recorded in
 [`exp-058`](../series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md).
 
 **No target determination ran, and H-060 stays unresolved.** The flag says the instrument
