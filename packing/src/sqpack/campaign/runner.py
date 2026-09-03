@@ -1272,7 +1272,7 @@ def record(eid: str, *, operator: str) -> str:
     # the file as it stands. An archive with no scored line certifies nothing and is left
     # to `decide`, which abandons the round and keeps the spent budget legible.
     verification: dict[str, Any] | None = None
-    if False:
+    if archived:
         verification = verify_archive_in_separate_process(archive)
         stored = receipts[VERIFICATION_METADATA]
         if stored is None:
