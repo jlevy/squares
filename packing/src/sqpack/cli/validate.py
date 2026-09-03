@@ -1513,14 +1513,19 @@ STEPS: tuple[Step, ...] = (
         _independent_lp,
         touches=(*_CORE, "packing/cases/trump11/*"),
     ),
-    # 1187s measured on 2026-09-03 at 1533 passing tests, against the 900s shared cap
-    # the step had been dying on. Two earlier readings disagree and the disagreement is
-    # left visible rather than averaged away: 880s on 2026-09-03 at 07:35Z when the step
-    # still passed, and 910s reported by the W9 lane the same morning. CI supplies only a
-    # floor, because it kills the step at the cap rather than timing it. The suite grew
-    # by roughly a hundred tests during that window -- the n = 5 rigidity instrument and
-    # the runner trust boundary -- which accounts for the direction but not the whole
-    # spread; the local readings were taken with other work in flight.
+    # 1209s measured on 2026-09-03 at 1607 passing tests, in the full gate at 13:47Z,
+    # against the 900s shared cap the step had been dying on. The 1187s reading this
+    # comment first cited is a floor and not the measurement: it was taken at 1533 passing
+    # tests on a red tree -- 38 failures, 33 of them the four n = 17 packages an edit broke
+    # and the same commit reverted -- and a test that fails does not run the rest of its
+    # body. It is left named rather than deleted, because a budget argued from a number
+    # nobody can find again is not an argument. Two earlier readings disagree and the
+    # disagreement is left visible rather than averaged away: 880s on 2026-09-03 at 07:35Z
+    # when the step still passed, and 910s reported by the W9 lane the same morning. CI
+    # supplies only a floor too, because it kills the step at the cap rather than timing
+    # it. The suite grew by roughly a hundred tests during that window -- the n = 5
+    # rigidity instrument and the runner trust boundary -- which accounts for the direction
+    # but not the whole spread; the local readings were taken with other work in flight.
     #
     # The budget is the measurement plus room for that uncertainty and for growth, not a
     # number chosen to make today's run pass. A suite that reaches this ceiling should be

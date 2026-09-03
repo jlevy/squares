@@ -1,6 +1,6 @@
 # Synopsis: The `s(n)` Program
 
-**Date:** 2026-08-31
+**Date:** 2026-09-03
 
 **Status:** Living document, revised whenever a result lands.
 
@@ -402,7 +402,7 @@ into each other:
   replayed exp-056’s verified 170-row prefix, recomputed rather than promoted the
   interrupted ordinal, and completed all 181 direction cells with both certificate
   summaries, the global minima, every frozen precondition and mutation decision, and
-  `instrument_valid` all present. An independent Max review (`BC-149`) passed the round
+  `instrument_valid` all present. An independent review (`BC-149`) passed the round
   at implementation-agreement scope only, which then opened source adoption:
   `BC-150`/`BC-151` audited the published Massaccesi argument, an independently written
   fifth implementation reproduced every row, and the verified lower bound rose to
@@ -426,12 +426,16 @@ into each other:
   in-run, and `D-427`, still open.
 
 The closeout (`BC-155`, `think-xycf`) added an outcome, stop reason, disposition and
-follow-up to all nine commitments, including three defects the run created (`D-424`,
+follow-up to all nine commitments, including four defects the run recorded (`D-424`,
 `D-425`, `D-427`, `D-428`) and three inaccurate commit messages it found and corrected.
 Generated views and live tbd were reconciled — read-only, since `tbd` stayed absent;
 README, tutorial and SYNOPSIS were updated, and conventions, development guidance and
-operating rules were checked and found current. The records tier passed 26 of 58
-named-tier steps; the full 58-step local gate passed 57 of 58, its sole failure the
+operating rules were checked and found current, though the pass behind those entries was
+itself interrupted: an infrastructure rate limit at about 10:45Z ended six in-flight
+agents and left the closeout documentation and de-slop pass partially finished, which
+session-083 records as an interruption rather than a deviation. The records tier passed
+26 of 58 named-tier steps; the full 58-step local gate passed 57 of 58, its sole failure
+the
 shallow-checkout provenance artifact rather than a repository defect; hosted validate,
 packing-required and macos-portability passed at `3100fb02`, with a re-run in flight on
 the branch’s later head.
@@ -605,7 +609,7 @@ codified that distinction as `BC-107` under `think-n8vl` in
 `V0`–`V5`, `C0`–`C5` with structural promotion checks, anchored significance that never
 gates, and a scoped novelty classification — and the results register
 ([`packing/frontier/results.yaml`](packing/frontier/results.yaml), rendered as
-[`RESULTS.md`](packing/frontier/RESULTS.md)) declares the whole results `T-001`–`T-014`,
+[`RESULTS.md`](packing/frontier/RESULTS.md)) declares the whole results `T-001`–`T-016`,
 whose declared rungs `devtools/check_results.py` checks against cited evidence, required
 notes, and review metadata on every validation run.
 Unsupported promotion and unexplained understatement fail the build.
@@ -1414,9 +1418,11 @@ That field changes no assurance and promotes no method — a published proof pro
 claim whether or not we read it, and reading one is a careful human act, not the machine
 check `proof-assistant-checked` names.
 What it changes is whether a reader can tell the two apart.
-All six external proofs the register carries are `not-reviewed`, including
-[Nagamochi 2005], which supplies the lower bound for every `n` from 4 to 100 and is
-therefore the most load-bearing argument here and the least examined.
+Four of the six external proofs the register carries are `not-reviewed`. The two that
+have been read are [Nagamochi 2005], the register's most load-bearing external argument,
+read on 2026-08-30 and recorded `informally-verified`, and [Bentz 2010], recorded
+`defect-found` after the machine audit found Lemma 10's replacement point transposed in
+print.
 The distinction is not hypothetical: [Stromquist 2003]'s `n = 11` argument needed a
 source-distinct repair, which `E-n011-repaired-lower` supplies without repairing the
 printed proof. An external certificate and a repository replay remain separate evidence
@@ -1430,8 +1436,9 @@ on.
 That last column is the one worth reading, and it needs its qualifier: the most-cited
 record overall is the Kingbird register at 98, which is the catalogue everyone reports
 from and is labelled `reported`. The dependency that matters is the most-cited argument
-this repository did not produce — `E-nagamochi-lower`, carrying the verified lower bound
-for 88 of the hundred.
+this repository did not produce — `E-nagamochi-lower`, cited by 88 of the hundred cases
+and carrying the verified lower bound in 85 of them, since the 4.5058 adoption moved
+`n = 17`–`19` onto the Massaccesi certificate.
 Being cited that heavily is a reason to open an argument, not a reason to trust it, so
 it was read here on 2026-08-30; its record carries what was re-derived and the four
 things that were not.
@@ -1983,7 +1990,8 @@ selection on the punctured feasible set and an induction on a putative arc’s T
 coefficients that the self-stress contradicts at order `2m`. It is registered at
 `V3`/`C5` — the exact quantities are machine-confirmed here, the two steps that close
 the argument are an audited proof, no instrument decides isolation, and that `C3` is
-raised one rung by the mapped review artifact below, not by a second method — and
+raised to `C5` by the mapped review artifact below, rather than to `C4` by a second
+method — and
 `apparently-novel` at `S3` on
 [`BC-153`](packing/campaign/agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md)’s
 independent review, which rebuilt every exact quantity from scratch in code sharing
@@ -3176,14 +3184,16 @@ bounded inclusion and refusal, not exact reachable-set equivalence.
 [D-421](defects.md) records that the wave-efficiency renderer accepts Codex receipts but
 not the Claude receipts retained by this bridged wave, so BC-143 keeps a typed
 no-change/refusal instead of hand-computing incomparable telemetry.
-[D-422](defects.md) records that the snapshot cap refuses all 155 negative controls
-before one of them runs, and that untracked build caches, not the record, are what
-breach it. A checkout that has never run pytest or ruff measures under the cap and the
-suite starts; the first full validation run puts it over, so every session reaches the
-failing state by doing the ordinary thing.
-The adjacency is the point: the anchor check is a `--records` step and reports all 155
-anchors matching, so the log shows a passing 155-anchor check beside a suite in which no
-control has fired. [D-423](defects.md) records that the lemma closing the Green17 cover
+[D-422](defects.md) began as the snapshot cap refusing all 155 negative controls before
+one of them ran, and that half is discharged: pruning four large result files at
+`a478744a` took the counted surface from 90,031,065 to 56,219,144 bytes, and the suite
+then ran three times on this branch with all 155 controls firing as expected — the first
+direct evidence here that the controls catch what they were written for rather than only
+that their anchors resolve. What stays open is the diagnosis that replaced it, and the
+entry is retitled to it: the portable fallback still copies untracked build caches into
+every worker, and the cap is held by a per-file prune that was never meant to be durable.
+The cap itself is checked on the pull-request surface; the cache accounting is checked by
+nothing. [D-423](defects.md) records that the lemma closing the Green17 cover
 certificate’s top strips is printed non-strict in Stromquist 2003 and Bentz 2010 and
 strict in Friedman’s DS7, and that the repository holds all three.
 The readings agree everywhere except on the boundary the certificate uses, so the
@@ -3631,7 +3641,7 @@ and a result that changes a decision.
 launch is not yet authorized.** At that checkpoint the tree passed all 31 normal-gate
 steps in 97.68 wall-seconds, including seven exact small-`n` replays, 59 pytest
 contracts, and all 62 mutation controls.
-The gate has since grown to 57 steps, of which the pull-request tier runs 33; the
+The gate has since grown to 58 steps, of which the pull-request tier runs 34; the
 sentence is dated rather than restated because no check guards this number, so a
 current-tense figure here silently goes stale.
 The first deep regeneration had reproduced one unsettled `n=4` proposal and an `n=10`

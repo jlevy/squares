@@ -77,8 +77,9 @@ Results first established here, as far as the recorded source searches show, inc
   converges to it. Proved exactly over `Q(√2)` from a complete accounting of all 400
   local inequalities, by curve selection and an order-`2m` coefficient induction, and
   independently reviewed.
-  The side is fixed throughout; nothing is claimed about an isolation radius, about the
-  side as a variable, or about global uniqueness.
+  The side is fixed throughout; nothing is claimed about an isolation radius, about any
+  other `n = 5` optimum, or about global uniqueness, and nothing follows for the side as
+  a variable — with the side free the obstruction fails, which X-007 measured.
 - **T-005: an erratum in Bentz 2010.** Lemma 10’s middle replacement point is transposed
   in print. An exact escape certificate refutes the printed point, and the corrected
   reading certifies exactly against the journal page image.

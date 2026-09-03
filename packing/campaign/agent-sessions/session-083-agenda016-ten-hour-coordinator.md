@@ -161,7 +161,7 @@ session:
       transition pending, publish the validated revision and do not extend the wall.
     outcome: >-
       Added one or more outcome rows to every one of the nine commitments at the
-      smallest honest scope, including three defects this run itself created (D-424,
+      smallest honest scope, including four defects this run itself recorded (D-424,
       D-425, D-427, D-428) and three inaccurate commit messages the closeout audit
       found and corrected. Regenerated the ledger, agenda map and synopsis views. The
       `tbd` CLI remained absent from PATH, npm and a direct Git install through
@@ -504,8 +504,9 @@ specifies, so it is declared here rather than left in a phase field.
 
 **An API rate limit at about 10:45Z terminated six in-flight agents.** The session hit an
 infrastructure rate limit that ended six subagents mid-task and did not clear until
-11:40Z. The cost is visible in the commit record as the largest inter-commit gap on the
-branch, 77 minutes. What it took: the first dispatch of the T-014 registration audit,
+11:40Z. The cost is visible in the commit record as the largest inter-commit gap of the
+run, 77 minutes between 10:29Z and 11:46Z. What it took: the first dispatch of the T-014
+registration audit,
 which left only regenerated comparison outputs and no verdict (redispatched in the
 closeout window and completed at 14:24Z -- see
 [the installed report](../../../docs/project/reviews/review-2026-09-03-bc153-t014-registration-audit.md));

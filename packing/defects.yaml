@@ -12712,6 +12712,21 @@ defects:
     controls", ...)` still carries neither `fast` nor `records`, so the pull-request surface
     can say that the snapshot is too big and can never say that a control has stopped
     catching what it was written for.
+
+    The prediction above came true inside the same session, and not the way it was
+    written. This entry expected the next breach to be record-caused -- "the next result
+    the size of exp-059's breaks the cap again". What actually broke it was the caches
+    alone, on a commit that added 40 KB of prose. The full gate at `d2d0ba4f` measured
+    68,007,522 bytes against the 67,108,864 cap, 898,658 over, and the decomposition is
+    that the walk carries 11,164,000 bytes of `__pycache__`, `.pytest_cache` and
+    `.ruff_cache` -- without them the surface is 56,843,522, comfortably under. So the
+    sequence is: run the gate, the gate writes bytecode, the bytecode is counted, and the
+    next run of the same gate on the same commit fails the cap. Hosted CI passed the
+    identical tree at the same revision, on a clone with no caches, which is the
+    "fires for one person and not another on identical code" claim of this entry
+    reproduced as an actual red gate rather than as a projection. Two of the three failed
+    steps in that run -- `negative controls` and `fast behavioral tests` -- are this one
+    assertion, counted twice; the suite's other 1,606 tests passed.
   fix: >-
     Applied at `a478744a`, and deliberately narrow. Four file names joined `PRUNE` --
     exp-059's result and checkpoint, plus the exp-052 and exp-056 checkpoints, which

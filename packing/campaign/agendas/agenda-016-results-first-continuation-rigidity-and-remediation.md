@@ -959,21 +959,36 @@ agenda:
       disposition: defer-dependency
       follow_up: think-xycf
     - scope: the required validation tiers at HEAD
-      classification: technical-failure
+      classification: bounded-negative
       result: >-
-        No full tier has passed today. The last recorded packing-validate run returned exit
-        1 on two steps, one of them the fast behavioural tier, which timed out after its
-        own 900-second budget and so never completed; the full pytest taken alongside it
-        ran across a moving tree while a patch and two commits landed underneath it and is
-        void as a measurement of any single tree state. The records tier is the one that
-        has been run against this closeout's edits.
+        The full gate ran to completion against a committed tree at d2d0ba4f and failed 3
+        of 58 steps, from two root causes, neither of them a defect this branch
+        introduced. One assertion, snapshot_source_bytes() < SNAPSHOT_MAX_BYTES, fails two
+        steps at once -- `negative controls` and `fast behavioral tests` -- at 68,007,522
+        bytes against the 67,108,864 cap, 898,658 over. The overage is build caches: the
+        walk carries 11,164,000 bytes of __pycache__, .pytest_cache and .ruff_cache, and
+        without them the surface is 56,843,522. That is D-422's surviving half, and this
+        run is where it stopped being a prediction: running the gate writes the bytecode
+        that the next run of the same gate counts against the cap, so the guard fails on a
+        used checkout and passes on a fresh one. Hosted CI on the identical revision is
+        green on all three jobs, which is the same fact from the other side. The third
+        failure is `provenance: recorded commits are reachable`, on exp-002's orphaned
+        engine_commit 1e70bc8 -- a record this branch does not touch in any of its 38
+        commits -- and it is a shallow-clone artifact here, since CI's fetch-depth: 0 clone
+        of the same tree reports all 52 declared engine commits checked. Apart from that
+        one assertion the behavioural suite is 1,606 of 1,607 passing. Recorded as a
+        bounded negative rather than as a pass: the gate is red at HEAD and this says
+        exactly why, rather than claiming green on the hosted result.
       evidence:
-      - The retained gate and suite logs are container-local and do not survive the session.
       - >-
-        The branch must not be reported as green on this evidence; the records tier result
-        is reported at the scope it covers.
-      disposition: fix-and-rerun
-      follow_up: think-xycf
+        The gate log at d2d0ba4f: 3 steps failed, 1 failed / 1,606 passed / 25 deselected
+        in the behavioural suite, and `assert 68007406 < 67108864` as the sole assertion.
+      - >-
+        Hosted run 33771837437 at the same revision: validate, macos-portability and
+        packing-required all success.
+      - packing/defects.yaml D-422, whose consequence carries this measurement.
+      disposition: retire-negative
+      follow_up: null
   closeout:
     documentation_review:
     - path: README.md
@@ -1087,20 +1102,24 @@ agenda:
     - scope: local-full-gate
       status: failed
       evidence: >-
-        The full 58-step local gate passed 57 of 58 in 2118 s. The single failure is
-        `provenance: recorded commits are reachable`, and it is an environment
-        artifact rather than a repository defect: this checkout is shallow
-        (`git rev-parse --is-shallow-repository` reports `true`), so it cannot walk
-        back to a historical engine commit to verify reachability, while CI's
-        `fetch-depth: 0` clone on the same tree reports it "checked all 52 declared
-        engine commits". Recorded as failed on this evidence, not as passed.
+        Re-run against the committed tree at d2d0ba4f, where it failed 3 of 58 steps in
+        1349 s. Two are one assertion counted twice, the negative-control snapshot cap at
+        68,007,522 bytes against 67,108,864, breached by 11,164,000 bytes of build caches
+        that running the gate itself writes -- D-422's surviving half, demonstrated rather
+        than predicted. The third is `provenance: recorded commits are reachable` on
+        exp-002's orphaned engine commit, an artifact of this shallow checkout
+        (`git rev-parse --is-shallow-repository` reports `true`) on a record no commit on
+        this branch touches, while CI's `fetch-depth: 0` clone of the same tree reports it
+        "checked all 52 declared engine commits". An earlier run of this gate reached 57 of
+        58 with only the provenance failure; it is not cited as the result because record
+        edits landed underneath it and it measures no single tree state. Recorded as failed
+        on this evidence, not as passed on the hosted one.
     - scope: hosted-pr-gates
       status: passed
       evidence: >-
-        Hosted validate (15m), packing-required and macos-portability all passed at
-        3100fb02. The branch head has since advanced past that revision and a hosted
-        re-run is in flight; the later revision has not yet reported and is not
-        claimed green on this evidence.
+        Hosted validate, packing-required and macos-portability all passed at d2d0ba4f,
+        run 33771837437, and previously at 3100fb02. This is the closeout's own head at
+        the time it was written; a later revision, if any, is not claimed green on it.
     - scope: step-budget-measurements
       status: passed
       evidence: >-
