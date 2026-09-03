@@ -644,9 +644,9 @@ reduction below is required rather than decorative.
 Derdzinski–Gal define, verbatim: “By a *semi-algebraic set* in `S` one means the
 intersection of an algebraic set with `⋂_{j=1}^{k} f_j^{−1}((0, ∞))`, where `k ≥ 1` and
 `f_1, ..., f_k` are polynomial functions `S → R`” — finitely many **strict**
-inequalities.
-`F \ {0}` is outside that class on two independent counts: its inequalities
-are non-strict, and it has a point removed.
+inequalities. `F \ {0}` is outside that class on two counts before its per-pair
+disjunctions are even considered: its inequalities are non-strict, and it has a point
+removed.
 
 To apply it, write `F \ {0}` as a finite union of sets of the form
 `{ f = 0 for f in Z } ∩ { f > 0 for f in P } ∩ { |z|^2 > 0 }`, obtained by choosing one
@@ -707,11 +707,12 @@ the argument does not depend on which formulation a reviewer reaches for:
   Bounded Semi-algebraic Sets” is the *title* of BCR §2.5, not a hypothesis, and Coste’s
   proof of Theorem 1.14 opens by *reducing* to the bounded case (“Replacing `S` with its
   intersection with a ball with center `x` and radius 1, we can assume `S` bounded”). It
-  is free here in any case: intersecting `A` with an open ball `{ rho^2 - |z|^2 > 0 }`
-  about the pose is one more strict polynomial inequality, which preserves
-  semialgebraicity, local closedness and membership in Milnor’s class, leaves
-  `0 ∈ Cl(A)` undisturbed because closure membership is local, and costs nothing because
-  isolation is local. It is not done above only because nothing above needs it.
+  is free here in any case: intersecting `A` with the open unit ball `{ 1 - |z|^2 > 0 }`
+  about the pose — Coste’s own reduction — is one more strict polynomial inequality,
+  which preserves semialgebraicity, local closedness and membership in Milnor’s class,
+  leaves `0 ∈ Cl(A)` undisturbed because closure membership is local, and costs nothing
+  because isolation is local.
+  It is not done above only because nothing above needs it.
 
 **Corollary 4.3.** If `P^0` is not isolated in `Feas(s)`, there is a real-analytic
 `gamma : (-1,1) -> R^15` with `gamma(0) = 0`, `gamma((0,1)) ⊂ F \ {0}`; writing its
