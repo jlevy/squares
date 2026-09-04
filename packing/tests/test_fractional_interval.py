@@ -37,7 +37,7 @@ from tests.test_fractional_certificate import retained_certificate
 
 # A sub-net of the doubled net that touches both ends, the middle, and the
 # reflected half. It decides a weaker statement than the full net and is used
-# only to keep the fast tier fast; the full-net decisions carry the marker.
+# only to keep the quick tests quick; the full-net decisions follow below.
 SUB_NET = ("0", "1", "45", "90", "135", "180", "1'", "90'", "180'")
 
 C4 = "C4 every admissible centre covers mass 1"
@@ -252,7 +252,6 @@ def test_the_retained_n11_certificate_is_accepted_on_the_sub_net() -> None:
     assert verdict.total_mass == Fraction(43391, 4000)
 
 
-@pytest.mark.exhaustive_exact
 def test_the_retained_n12_certificate_is_accepted_on_the_full_doubled_net() -> None:
     """The interval-certified decision of s(12) >= 393/100, every direction."""
     certificate = load_n12()
@@ -264,7 +263,6 @@ def test_the_retained_n12_certificate_is_accepted_on_the_full_doubled_net() -> N
     assert certificate.bounded_side == Fraction(393, 100)
 
 
-@pytest.mark.exhaustive_exact
 def test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net() -> None:
     """The interval-certified decision of s(11) >= 19/5, every direction."""
     certificate = load_n11()
@@ -297,7 +295,6 @@ def test_massaccesi_n17_reproduces_the_published_bound_on_the_sub_net() -> None:
     assert enclosure[0] <= 1 <= enclosure[1]
 
 
-@pytest.mark.exhaustive_exact
 def test_massaccesi_n17_reproduces_the_published_bound_on_the_full_doubled_net() -> None:
     verdict = verify_by_intervals(retained_certificate(), enclose=True)
     assert verdict.accepted, verdict.failures
@@ -475,6 +472,48 @@ def test_half_tangents_reaching_one_are_refused_before_any_search() -> None:
 
 
 # --- the limit of the method ---------------------------------------------------
+
+
+def _seams(certificate: Certificate, rotation: tuple[Fraction, Fraction]) -> int:
+    """Exact coincidences the interval search cannot close at one direction.
+
+    A leave-edge of one region on the enter-edge of another (``u_j - u_i = B``
+    in either axis) or a region edge through a domain corner. Exact arithmetic,
+    because this is a census of the data, not a decision of the theorem.
+    """
+    cosine, sine = rotation
+    rotated = _rotated(certificate, rotation)
+    side = certificate.square_side
+    half = side / 2
+    h = side * (cosine + sine) / 2
+    far = certificate.outer_side - h
+    seams = 0
+    for axis in (0, 1):
+        positions = {atom[axis] for atom in rotated}
+        seams += sum(1 for atom in rotated if atom[axis] + side in positions)
+        edges = {atom[axis] + half for atom in rotated} | {
+            atom[axis] - half for atom in rotated
+        }
+        for x, y in ((h, h), (far, h), (h, far), (far, far)):
+            corner = cosine * x + sine * y if axis == 0 else cosine * y - sine * x
+            seams += corner in edges
+    return seams
+
+
+def test_the_retained_certificates_have_no_seam_the_method_cannot_close() -> None:
+    """The precondition for the searches above to terminate, checked on the data.
+
+    The full-net runs report zero stalled boxes; this says why, on a sample of
+    directions including reflected ones, and would flag a future certificate
+    that happened to land on a seam.
+    """
+    for certificate in (load_n12(), load_n11(), retained_certificate()):
+        for index, reflected in ((0, False), (1, False), (57, True), (90, False), (180, True)):
+            cosine, sine = _exact_rotation(certificate.half_tangents[index])
+            rotation = (sine, cosine) if reflected else (cosine, sine)
+            assert _seams(certificate, rotation) == 0
+    assert _seams(_grid_certificate(Fraction(1, 2)), (Fraction(1), Fraction(0))) > 0
+    assert _seams(_grid_certificate(Fraction(51, 100)), (Fraction(1), Fraction(0))) == 0
 
 
 def _grid_certificate(square_side: Fraction) -> Certificate:
