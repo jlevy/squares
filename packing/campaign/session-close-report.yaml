@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 84
+count: 85
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 40
+  sessions_measured: 41
   sessions_unmeasured: 44
   attributed:
-    rollups: 91
-    turns: 21198
-    tool_calls: 12047
-    tool_errors: 214
-    one_off_code: 2011
-    wall_hours: 95.92
+    rollups: 114
+    turns: 28689
+    tool_calls: 16232
+    tool_errors: 327
+    one_off_code: 2712
+    wall_hours: 151.73
   unattributed:
     rollups: 10
     turns: 1460
@@ -28,12 +28,12 @@ totals:
     one_off_code: 173
     wall_hours: 6.87
   measured:
-    rollups: 101
-    turns: 22658
-    tool_calls: 12925
-    tool_errors: 246
-    one_off_code: 2184
-    wall_hours: 102.79
+    rollups: 124
+    turns: 30149
+    tool_calls: 17110
+    tool_errors: 359
+    one_off_code: 2885
+    wall_hours: 158.6
 codex_receipts:
   attributed: 16
   unattributed: 0
@@ -1276,11 +1276,11 @@ sessions:
   - packing/campaign/resource-usage/agent-ae3907a8c08e88a87.yaml
   - packing/campaign/resource-usage/agent-af4c73dcce4198571.yaml
   - packing/campaign/resource-usage/agent-afa589637108483de.yaml
-  turns: 6374
-  tool_calls: 3530
-  tool_errors: 50
-  one_off_code: 340
-  wall_hours: 21.14
+  turns: 10621
+  tool_calls: 5914
+  tool_errors: 118
+  one_off_code: 768
+  wall_hours: 54.86
   codex_receipts: []
 - id: session-084
   title: "BC-148 n = 17 fresh successor completion"
@@ -1295,4 +1295,41 @@ sessions:
   tool_errors: 0
   one_off_code: 34
   wall_hours: 2.74
+  codex_receipts: []
+- id: session-085
+  title: "Agenda 017 continuation and the W5 efficiency block"
+  status: completed
+  primary_bead: think-uqgp
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/21ae3bfc-58a6-55fc-90e3-6e29d229a7f1.yaml
+  - packing/campaign/resource-usage/agent-a046eb1f2ce695424.yaml
+  - packing/campaign/resource-usage/agent-a069142925bcad602.yaml
+  - packing/campaign/resource-usage/agent-a0fb0642982272ded.yaml
+  - packing/campaign/resource-usage/agent-a1406370ce8ad7f7a.yaml
+  - packing/campaign/resource-usage/agent-a14867dfcd89a69c2.yaml
+  - packing/campaign/resource-usage/agent-a3f30e5ab2b0488a9.yaml
+  - packing/campaign/resource-usage/agent-a4d91eccaa1a7c1a4.yaml
+  - packing/campaign/resource-usage/agent-a5468237a9b6a51b8.yaml
+  - packing/campaign/resource-usage/agent-a587ee224010e94b2.yaml
+  - packing/campaign/resource-usage/agent-a7e296c28af127587.yaml
+  - packing/campaign/resource-usage/agent-a8183c5a7cbf8292a.yaml
+  - packing/campaign/resource-usage/agent-a911143bb96f57d46.yaml
+  - packing/campaign/resource-usage/agent-a983accbcf4dec34e.yaml
+  - packing/campaign/resource-usage/agent-a99c7dd46230e70ac.yaml
+  - packing/campaign/resource-usage/agent-aa151b341a1282a9c.yaml
+  - packing/campaign/resource-usage/agent-ab5dc622f5e3cd4f1.yaml
+  - packing/campaign/resource-usage/agent-abbc02d152a69365e.yaml
+  - packing/campaign/resource-usage/agent-ac3b7b42eccbc6c1d.yaml
+  - packing/campaign/resource-usage/agent-ac6696e121f49c162.yaml
+  - packing/campaign/resource-usage/agent-aeb058fb0c1d2f3c5.yaml
+  - packing/campaign/resource-usage/agent-aef67a6b900e0380b.yaml
+  - packing/campaign/resource-usage/agent-af0384c2dcfbb0dbd.yaml
+  - packing/campaign/resource-usage/agent-afa3beed39454290e.yaml
+  turns: 8468
+  tool_calls: 4625
+  tool_errors: 120
+  one_off_code: 736
+  wall_hours: 61.79
   codex_receipts: []

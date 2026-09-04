@@ -195,13 +195,6 @@ agenda:
         from packing/, reported verbatim in the closing session.
     replanning:
       candidates:
-      - bead: think-5j8d
-        workflow: research-loop
-        priority: 0
-        rationale: >-
-          Canonical continuity marker only: session-084 discharged this bead's scope,
-          and no work is queued on it. It remains the selected handoff until a newer
-          terminal research session records a successor.
       - bead: think-ji0r
         workflow: efficiency-loop
         priority: 0
@@ -230,13 +223,12 @@ agenda:
           before the run; still blocked on a target and a priced cost model from
           BC-191 and BC-192.
       selected:
-        bead: think-5j8d
-        workflow: research-loop
+        bead: think-ji0r
+        workflow: efficiency-loop
         rationale: >-
-          This after-the-fact record does not create a newer terminal research session.
-          The canonical handoff therefore remains the marker on which session-084
-          stopped. BC-191 on think-ji0r is the highest-ranked prospective efficiency
-          candidate, but it is not a replacement terminal-session marker.
+          Row generation's cost as a function of container side is what every later
+          commitment needs priced, and it is the one candidate whose measurement this
+          block did not already change the terms of.
       operator_input:
         status: confirmed
         note: >-
@@ -373,12 +365,9 @@ candidate unless both method-distinct routes accept it and agree on the value.
 The integer path changes the exact route’s implementation, not the theorem or its
 evidence threshold.
 
-The highest-ranked prospective efficiency follow-up is `BC-191` (`think-ji0r`), paired
-with the rebased `BC-190`, because the search and decision costs as functions of side
-have not been measured under the current implementation.
-The canonical handoff remains `think-5j8d`, the marker on which the latest terminal
-research session stopped; this after-the-fact closeout does not create a newer terminal
-session.
+Selected next is `BC-191` (`think-ji0r`), paired with the rebased `BC-190`, because the
+search and decision costs as functions of side have not been measured under the current
+implementation.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

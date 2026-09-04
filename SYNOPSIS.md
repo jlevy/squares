@@ -415,124 +415,73 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-[Agenda 016](packing/campaign/agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md)
-is complete: the scientific successor selected by Agenda 015’s W10 closeout, coordinated
-by terminal
-[session-083](packing/campaign/agent-sessions/session-083-agenda016-ten-hour-coordinator.md)
-and its n = 17 lane
-[session-084](packing/campaign/agent-sessions/session-084-bc148-n17-fresh-successor-completion.md).
-It ran the full ten-hour wall on 2026-09-03, and every one of its nine commitments is
-terminal with an outcome, stop reason, disposition and follow-up.
-H-052 reached complete agreement on all 181 exact direction cells and is confirmed at
-implementation-agreement scope; `T-014` proved fixed-side local rigidity at `n = 5` at
-`V3`/`C5`/`S3` — `C4` is not claimed; the source-backed 4.5058 bound was adopted at
-`n = 17`--`19` as `T-015`/`T-016`; and the W9 wave left D-044 and D-046 contained rather
-than fixed, with four of the source findings’ own clauses still unrepaired on the
-reviewer’s recorded dissent from that label.
-The entry condition was waived by the operator rather than satisfied: the planning
-revision was never merged or hosted-green before the run began.
-The `tbd` CLI was absent throughout, so bead reconciliation stayed read-only rather than
-a satisfied obligation.
+[Agenda 017](packing/campaign/agendas/agenda-017-six-hour-generator-rigidity-ceilings-and-w9-block.md)
+ran far past its declared 360-minute wall — the first commit on this branch lands at
+`00:35:17Z` on 2026-09-04 and the last one plainly in its scope lands past `21:56Z` the
+same day, with no deadline honoured along the way.
+No `session-NNN` record was opened while it ran; it is recorded retrospectively, at the
+closing milestone, as terminal
+[session-085](packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md),
+which says so in its own words rather than pretending contemporaneity.
+Of the agenda’s four lanes, only Lane A — the first-party weighted fractional
+unavoidable-set certificate generator — left a trace in this branch’s history; Lane B
+(the general rigidity theorem, the Stromquist Theorem 3 audit), Lane C (ten
+verified-upper-bound promotions and `T-009`’s raise to `C4`) and Lane D (the
+`think-ldq2` W9 handoff) do not appear in it.
 
-**What is planned next, and ready.** The operator asked for the next research to be
-mapped strategically in two blocks — six hours to be reviewed the same evening, then ten
-hours overnight — and this planning revision writes both:
-[Agenda 017](packing/campaign/agendas/agenda-017-six-hour-generator-rigidity-ceilings-and-w9-block.md),
-active, whose `BC-159` preflight is the only takeable entry, and
-[Agenda 018](packing/campaign/agendas/agenda-018-ten-hour-continuation-ladders-theorems-and-wave-two.md),
-paused until Agenda 017 has closed and the operator has reviewed its pull request.
-Agenda 017 runs four lanes: a first-party generator for weighted fractional
-unavoidable-set certificates aimed at the first `n = 12`-specific lower bound
-([H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md),
-side fixed at `19/5` before any target command); the general rigidity theorem behind
-`T-014` written out with the `n = 40` stress question decided exactly, then an audit of
-Stromquist’s Theorem 3 at `n = 11`; the ten decimal records whose verified ceiling still
-sits at the grid, every one of which the shipped rational promotion certifies at a side
-within `8 × 10⁻²⁹` of the reported decimal; and the selected handoff, three of
-`think-ldq2`’s clauses under a reviewer, then the two gate defects that made the last
-full local gate red on a used checkout.
-Agenda 018 climbs the `n = 12` ladder, takes the `n = 11` shot, generalises the rigidity
-instrument and proves an explicit isolation radius at Trump’s packing, runs `H-049` at
-the `s(30) < 6` bar its corrected framing sets, and finishes the W9 wave.
-The planning revision also restored the `tbd` CLI under Node 22, unshallowed the clone
-so the provenance step can pass locally, resolved every follow-up bead Agenda 016 had
-declared unverified and re-routed the four that resolved wrong, recorded `D-430`,
-`D-431` and `D-432`, and passed the plan through three independent reviews — of its
-scientific contracts, its launchability, and a rehearsal of its first ninety minutes —
-whose findings are folded into both agendas before launch.
-The marker below is unchanged, because it names where the last terminal session stopped;
-the next entry that actually runs is `BC-159` on `think-uqgp`.
+Lane A retained four results, all `V4`/`C4`, across seven distinct cases: `T-018` raises
+`s(11) >= 381/100`, the smallest open case moving for the first time since Stromquist
+stated `2 + 4/√5` in 2003; `T-017` raises `s(12) >= 99/25`, the first bound specific to
+`n = 12` in the retained corpus, climbed across eight rungs from
+[H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md)’s
+fixed `19/5` threshold; `T-019` raises `s(17)`, `s(18) >= 459/100`, displacing
+Massaccesi’s published `22529/5000`; and `T-020` raises `s(19)`, `s(20)`,
+`s(21) >= 24/5`, the first bound of any kind proved about twenty or twenty-one squares
+rather than read off Nagamochi’s 2005 closed form — `T-019` is superseded at `n = 19`
+and keeps both its claim and its rungs.
+Fourteen defects were filed (`D-430` through `D-443`); thirteen are fixed and one,
+`D-431` (`T-009`’s significance rationale compared its interval certificate against a
+rational certificate on a different `n = 29` packing), is outstanding.
+Two searches stopped on cost rather than an answer, not as negatives: `n = 18` at side
+`4.68` (three site sets converged to exactly `18.000000` without separating a genuine
+covering-value plateau from a degenerate vertex) and `n = 11` at side `3.82` (the
+rejection route’s exact maximum depth caps the feasible total well short of the eleven a
+ceiling needs). Full detail is in
+[the block-close handoff](docs/project/handoff-2026-09-04-block-close.md).
 
-**Selected next entry:** `think-5j8d`, the bead the last terminal session closed on.
-Its own scope is discharged — H-052 is confirmed at implementation-agreement scope and
-`exp-059` is terminal — so this marker records where the run stopped rather than work
-still owed on it; the residual attached to it is `D-428`, a gap the successor’s own
-validator has and the executed run does not.
+The same evening, entered directly on the operator’s own direction rather than drawn
+from a queued candidate,
+[Agenda 020](packing/campaign/agendas/agenda-020-efficiency-block-the-exact-sweep.md)
+recorded a separate, complete W5 efficiency-loop block: the exact event-cell sweep that
+decides **Condition 5** at the retention gate now decides in integers on the atom
+weights’ minimal common denominator, holds reachable cells as spans, and uses a bounded
+process pool. Independent span/integer and cell/Fraction reductions agree on declared
+tractable guard cases, and the method-distinct interval route still confirms full
+certificates. Pre-integration operator reports suggested `68×` to `183×`, but they
+predate the final worker cap and lack retained benchmark conditions.
+No bound, verdict, or certificate moved.
+[Agenda 019](packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md),
+the standing queue, holds the two efficiency-loop entries this retires or re-bases:
+`BC-191`, pricing row generation’s own cost against the container side — `79`–`94%` of
+every round, site density never set as a function of side, an untuned grid costing
+`8.8×` at `n = 20`’s own side — and `BC-190`, whether the generator’s accept-or-reject
+decision belongs on the interval route, now re-based on the integer sweep rather than
+the Fraction sweep it was drafted against.
+[X-013](packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md)
+reads what three certificates actually attained against their reach ceiling
+(`0.98171`–`0.98270`, mean `0.98229`) and recommends `n = 26` next, once `BC-191` and
+`BC-192`/`BC-194` price it.
 
-The recommended follow-up is the four unrepaired clauses of D-044 and D-046, carried on
-`think-ldq2` under `think-modk`. They are clauses of those defects’ own source findings
-rather than new scope, and one of them loosens an acceptance screen, which needs a
-reviewer the closing run no longer had.
+**Selected next entry:** `think-ji0r`, `BC-191` in Agenda 019 — Agenda 020’s own
+closeout selects it directly, as the one candidate whose measurement Agenda 020 did not
+already change the terms of.
+`think-jgeg` (`BC-190`) follows once `BC-191` lands.
+`think-5j8d` remains the marker Agenda 016’s closeout discharged and is not this
+session’s selection.
 
-The agenda separated three kinds of progress, and the closeout kept them from collapsing
-into each other:
-
-- **Assurance and adoption, not new mathematics.** `think-5j8d`’s fresh successor
-  replayed exp-056’s verified 170-row prefix, recomputed rather than promoted the
-  interrupted ordinal, and completed all 181 direction cells with both certificate
-  summaries, the global minima, every frozen precondition and mutation decision, and
-  `instrument_valid` all present.
-  An independent review (`BC-149`) passed the round at implementation-agreement scope
-  only, which then opened source adoption: `BC-150`/`BC-151` audited the published
-  Massaccesi argument, an independently written fifth implementation reproduced every
-  row, and the verified lower bound rose to `22529/5000` at `n = 17`--`19`. Neither step
-  is first-party mathematics.
-- **A genuinely new theorem, at a fixed scope.**
-  [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md)’s fixed-side local
-  rigidity of Goebel’s exact `n = 5` pose passed an independent review (`BC-153`) of its
-  injective half-angle chart, complete constraint accounting, `T-012` transfer and
-  order-`2m` coefficient induction, and is registered as `T-014` at `V3`/`C5`/`S3`. `C5`
-  is `C3` plus a mapped review artifact; `C4` — confirmed by distinct methods — is not
-  claimed and is not supported, though the cited evidence entries carry different method
-  values for different claims.
-  Isolation radius, side-free rigidity, global uniqueness and other `n = 5` optima
-  remain outside this result.
-- **A bounded W9 wave, contained rather than fixed.** `think-modk`’s repair of D-044 and
-  D-046 passed a mutation harness that reverted each guard in copies and found every one
-  load-bearing, but the review (`BC-154`) found four clauses of the two defects’ own
-  source findings — one loosening an acceptance screen — that never reached either
-  record and so were never repaired.
-  Both defects are recorded `contained`, and the reviewer’s recommendation against that
-  label over `fixed` stands in both entries.
-  The wave also produced three new defects of its own: `D-424` and `D-425`, both fixed
-  in-run, and `D-427`, still open.
-
-The closeout (`BC-155`, `think-xycf`) added an outcome, stop reason, disposition and
-follow-up to all nine commitments, including four defects the run recorded (`D-424`,
-`D-425`, `D-427`, `D-428`) and three inaccurate commit messages it found and corrected.
-Generated views and live tbd were reconciled — read-only, since `tbd` stayed absent;
-README, tutorial and SYNOPSIS were updated, and conventions, development guidance and
-operating rules were checked and found current, though the pass behind those entries was
-itself interrupted: an infrastructure rate limit at about 10:45Z ended six in-flight
-agents and left the closeout documentation and de-slop pass partially finished, which
-session-083 records as an interruption rather than a deviation.
-The records tier passed its named steps; the full local gate ended red, failing 3 steps
-from two causes, neither a defect this branch introduced — the negative-control snapshot
-cap, breached by the build caches that running the gate itself writes, counted twice
-because one assertion rides two steps, and the shallow-checkout provenance artifact on a
-record no commit here touches.
-Apart from that cap the behavioural suite was 1,606 of 1,607 passing.
-Hosted validate, packing-required and macos-portability passed on every revision they
-ran on, including the branch’s final head, which is the same fact from the other side:
-CI clones fresh, so it carries no caches.
-
-The Green17 exact ceiling (`think-iye2`) is the first bounded numeric fallback once
-adoption settled, still not ready; bespoke `n = 12` work (`think-0z9b`) remains the next
-larger theorem campaign, also not ready.
-The `n = 68` and `n = 54` source routes stay parked behind their provenance and
-instrument-readiness defects.
-Agenda 016’s actual outcomes, rather than the prior ranking, now control this handoff,
-and the closeout ranked `think-ldq2`’s remediation above both.
+The recommended follow-up beyond `BC-191` is the same retarget the reach table already
+ranks: `BC-192` and `BC-194` at `n = 26`, blocked on `BC-191` pricing what a run at a
+larger side actually costs.
 
 ### Handoff Record
 
@@ -2768,9 +2717,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 91 | 21,198 | 12,047 | 214 | 2,011 | 95.92 h |
+| claimed by a session | 114 | 28,689 | 16,232 | 327 | 2,712 | 151.73 h |
 | claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **101** | **22,658** | **12,925** | **246** | **2,184** | **102.79 h** |
+| **measured** | **124** | **30,149** | **17,110** | **359** | **2,885** | **158.6 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -2796,9 +2745,10 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-079](packing/campaign/agent-sessions/session-079-bc137-n17-sequential-larger-prefix.md) | 3 | 1 | 78 | 46 | 0 | 0.23 h |
 | [session-080](packing/campaign/agent-sessions/session-080-bc138-n68-side-semantics-binding.md) | 4 | 1 | 115 | 77 | 1 | 0.28 h |
 | [session-081](packing/campaign/agent-sessions/session-081-bc140-target-blind-guard-repairs.md) | 4 | 1 | 87 | 49 | 0 | 0.24 h |
-| [session-083](packing/campaign/agent-sessions/session-083-agenda016-ten-hour-coordinator.md) | 3 | 35 | 6,374 | 3,530 | 50 | 21.14 h |
+| [session-083](packing/campaign/agent-sessions/session-083-agenda016-ten-hour-coordinator.md) | 3 | 34 | 5,397 | 3,090 | 43 | 15.16 h |
 | [session-084](packing/campaign/agent-sessions/session-084-bc148-n17-fresh-successor-completion.md) | 3 | 1 | 329 | 166 | 0 | 2.74 h |
-| *shared by 24 sessions* | — | 4 | 10,375 | 5,737 | 129 | 62.26 h |
+| [session-085](packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md) | 4 | 23 | 3,244 | 1,801 | 45 | 22.09 h |
+| *shared by 25 sessions* | — | 5 | 15,599 | 8,561 | 204 | 101.96 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -2821,9 +2771,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 40 |
+| measured | 41 |
 | closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **84** |
+| **total** | **85** |
 
 <!-- END GENERATED: session-close-report -->
 

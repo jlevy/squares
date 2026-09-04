@@ -64,8 +64,10 @@ DECLARED_CONSUMER_TREES = {
 
 DECLARED_CONSUMERS = {
     "packing/devtools/check_case_prose.py": (
-        "compares reader-facing case prose with the structured bound field and therefore "
-        "treats it as the certified ceiling"
+        "reads the field as the ceiling the case's own front matter declares, only to "
+        "hold that case's prose to it: a body that quotes an upper bound must quote the "
+        "one its record carries (D-442). It takes the field to mean exactly what the "
+        "front matter means and asserts nothing about s(n)"
     ),
     "packing/devtools/check_basic_bounds.py": (
         "checks the ceiling really is the certifiable grid bound"
@@ -75,8 +77,9 @@ DECLARED_CONSUMERS = {
         "carries one; it asserts nothing about the bound's value"
     ),
     "packing/tests/test_case_prose.py": (
-        "exercises the case-prose checker's interpretation of the field as the certified "
-        "ceiling"
+        "names the field in fixtures that give check_case_prose a front matter and a "
+        "body to compare; the values are synthetic and prove the detector fires, not "
+        "anything about a bound"
     ),
     "packing/devtools/render_evidence_inventory.py": (
         "names the field only as one of the case blocks that can carry evidence ids, so "

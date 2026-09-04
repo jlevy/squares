@@ -3,7 +3,7 @@
 **Review date:** 2026-09-04\
 **Pull request:** [#78](https://github.com/jlevy/squares/pull/78)\
 **Original reviewed parent head:** `719c2a170a1ac8bbd4cddfd353645b6d70651c45`\
-**Latest reconciled parent head:** `353998ac27523d20ba51db3ab4c756062a391ece`\
+**Latest reconciled parent head:** `a159eb28fad4be00c2c522b572ac2aab4d564c33`\
 **Base:** `9d5eae0f5ecfcf3cd417a345eb6c55b1f9ac4def` (`main`)\
 **Remediation branch:** `codex/pr78-s11-adversarial-review`\
 **Certificate SHA-256:**
@@ -62,6 +62,10 @@ parallel exact-sweep optimization, its timing claims, and its generated planning
 records. Those changes do not alter the T-018 certificate or theorem.
 They do alter the code path that replays T-018, so F36--F42 record the defects found and
 repaired before accepting the optimized path as an equivalent implementation.
+The last parent update through `a159eb28` closes Agenda 017, records session-085, and
+updates the frontier-corpus tripwire.
+It does not change the T-018 bytes or proof; this stack corrects the proof-condition
+notation reintroduced by that retrospective record.
 
 The audit was pre-registered under `think-tukn` with five falsifiable hypotheses.
 Two proof-validation lanes were kept separate from the coordinator’s main review:
