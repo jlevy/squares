@@ -5,13 +5,13 @@ title: "Spike: minimal exact checker for n=11 fractional certificate"
 kind: task
 status: closed
 priority: 2
-version: 3
+version: 6
 labels: []
 dependencies: []
 created_at: 2026-09-04T08:47:17.106Z
-updated_at: 2026-09-04T08:53:44.276Z
-closed_at: 2026-09-04T08:53:44.267Z
-close_reason: "Spike complete: exact standalone checker reproduced the 90,546,593-cell minimum and refused a D4-preserving mutation"
+updated_at: 2026-09-04T08:57:12.653Z
+closed_at: 2026-09-04T08:57:12.647Z
+close_reason: Promoted vetted standalone checker to thirdparty/minimal_verify.py; Ruff, BasedPyright, full 181-direction replay, and D4-preserving negative mutation pass
 resolution: null
 duplicate_of: null
 ---
