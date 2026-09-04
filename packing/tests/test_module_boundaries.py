@@ -309,8 +309,11 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
         # The full 181-direction exact decision of the retained n = 12 certificate:
         # about 25 s on an idle core, and the coarse-net version in the same file
         # carries the same claim for the fast tier.
+        # And the 708-atom n = 17 certificate over the same net, about thirteen
+        # minutes: the fast test beside it pins every number its record claims.
         "test_fractional_certificate.py": {
             "test_the_full_retained_certificate_is_accepted",
+            "test_the_n17_certificate_is_accepted",
         },
         "test_exact_jets.py": {
             "test_n5_wall_and_contact_gradients_match_authoritative_source_rows",

@@ -158,7 +158,16 @@ exclude = [
 
 [tool.basedpyright]
 include = ["src/sqpack", "cases", "devtools", "benchmarks", "tests"]
-exclude = ["**/__pycache__", "resources", ".venv"]
+exclude = [
+    "**/__pycache__",
+    "resources",
+    ".venv",
+    # Retained verbatim as third-party evidence: an independent reviewer's verifier
+    # and the stdlib-only package an outside reader runs. Editing either to satisfy a
+    # checker would void what they are, so both are excluded here as they are from ruff.
+    "cases/n12_fractional_certificate/independent_verify.py",
+    "cases/n11_fractional_certificate/thirdparty",
+]
 pythonVersion = "3.14"
 typeCheckingMode = "standard"
 reportMissingImports = "error"
