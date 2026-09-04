@@ -1,4 +1,4 @@
-# Adversarial review of PR 78 — the `s(11) ≥ 381/100` claim
+# Adversarial review of PR 78: the `s(11) ≥ 381/100` claim
 
 **Review date:** 2026-09-04\
 **Pull request:** [#78](https://github.com/jlevy/squares/pull/78)\
@@ -45,22 +45,21 @@ The later `n = 17`--`19` frontier movement was outside this review’s mathemati
 except where the earlier published-value `n = 17` certificate served as a control.
 
 The audit was pre-registered under `think-tukn` with five falsifiable hypotheses.
-Three delegates worked from separated evidence:
+Two delegated lanes were kept separate from the coordinator’s main review:
 
-- a proof-only reader received the theorem presentation without the implementation;
-- a clean-room checker author received an anonymous theorem packet and certificate, but
-  no project verification code; and
-- a literature reviewer searched independently of the PR’s novelty narrative.
+- a proof/minimal-checker lane challenged the short implication and current certificate,
+  then ran the standalone exact verifier; and
+- a formalization lane assessed the Lean boundary and independently reran the complete
+  interval decision.
 
-The coordinator then replayed the project verifier, ran the retained independent
-verifier against the `n = 11` bytes, executed the newly added standalone verifier, and
-constructed negative controls.
+The coordinator separately searched the literature, replayed the project verifier,
+reconciled the retained artifacts, and constructed negative controls.
 Runtime agreement alone was not an acceptance rule: the proof implication and every
 implicit premise had to survive as well.
 
 ## Findings
 
-### F1 — Blocker in the parent, fixed here: signed weights make the theorem false
+### F1: Blocker in the parent, fixed here: signed weights make the theorem false
 
 At the reviewed parent, the proof in
 [`certificate.py`](../../../packing/src/sqpack/fractional/certificate.py) says that no
@@ -118,7 +117,7 @@ the boundary reduction depends on monotonicity, and retains the exact five-atom 
 certificate as a must-refuse regression.
 D-435 records the defect.
 
-### F2 — High in the parent, fixed here: the validation surface was not clean
+### F2: High in the parent, fixed here: the validation surface was not clean
 
 At `34d19470`, `.venv/bin/basedpyright` reports **26 errors**:
 
@@ -145,7 +144,7 @@ certificate decision into the existing `exhaustive_exact` tier.
 Fast sub-net and must-refuse controls remain in the ordinary gate.
 D-441 records the classification failure; the final gate results appear below.
 
-### F3 — Medium in the parent, fixed here: “third-party check” overstated independence
+### F3: Medium in the parent, fixed here: “third-party check” overstated independence
 
 The new package is titled “Third-Party Check,” and the evidence register says it permits
 checking without trusting the repository.
@@ -176,7 +175,7 @@ The README and evidence entry distinguish portability from independent authorshi
 describe the control as a reconstruction, and record the Göbel–Nagamochi–Bentz resource
 lineage before the Burns/ChatGPT and Massaccesi implementation line.
 
-### F4 — Medium in the parent, fixed here: retained declarations did not govern acceptance
+### F4: Medium in the parent, fixed here: retained declarations did not govern acceptance
 
 The primary `n = 11` replay checks the declared `total_mass`, but not the declared
 `least_cell_mass`, at
@@ -200,7 +199,7 @@ tests cover both paths; and the complete source-distinct `n = 11` decision is a 
 `exhaustive_exact` test.
 D-438 records the defect.
 
-### F5 — Low in the parent, fixed here: one scope disclaimer was false by monotonicity
+### F5: Low in the parent, fixed here: one scope disclaimer was false by monotonicity
 
 The standalone README said the result was “not a bound for any other `n`.” Since `s(n)`
 is nondecreasing, `s(11) ≥ 381/100` also implies `s(n) ≥ 381/100` for every `n ≥ 11`.
@@ -209,7 +208,7 @@ higher-`n` bound.
 
 The standalone README and T-018’s composition record now say exactly that.
 
-### F6 — Blocker in the interval checkpoint, fixed here: a direction sample could accept
+### F6: Blocker in the interval checkpoint, fixed here: a direction sample could accept
 
 The later `interval.py` checkpoint added a valuable method-distinct decision: directed-
 rounding interval arithmetic and branch and bound over centre boxes, on a doubled net
@@ -228,7 +227,7 @@ and decisive refutations, but an all-certified sample is `undecided`; only the c
 doubled net can establish C4. The tests require both sides of this contract.
 D-439 records the defect.
 
-### F7 — Blocker in the interval checkpoint, fixed here: integer mass could overflow
+### F7: Blocker in the interval checkpoint, fixed here: integer mass could overflow
 
 The checkpoint scaled rational weights into `numpy.int64`, summed them there for C1, and
 used them in Boolean-matrix products for C4. It bounded `n × scale`, but a candidate is
@@ -243,7 +242,7 @@ Every later matrix product is a nonnegative subset sum below that exact total.
 A positive-weight `2^63 + 1` regression exercises the public path.
 D-440 records the defect.
 
-### F8 — High and medium package gaps, fixed here: falsification and hostile inputs
+### F8: High and medium package gaps, fixed here: falsification and hostile inputs
 
 The standalone falsifier originally had no expected verdicts: it printed a convincing
 mutation table and returned success regardless of whether a mutation was accepted or a
@@ -261,7 +260,7 @@ and duplicate-free, malformed input becomes a clean refusal, an empty placement 
 is treated as vacuous, and a singleton closed placement is evaluated directly.
 D-436 and D-437 record these defects; focused tests cover each case.
 
-### F9 — Blocker in the interval checkpoint, fixed here: enclosure mode could certify failure
+### F9: Blocker in the interval checkpoint, fixed here: enclosure mode could certify failure
 
 The interval verifier has two modes.
 Its ordinary mode stops once each direction has a lower bound of one; `enclose=True`
@@ -281,7 +280,7 @@ acceptance rechecks every direction.
 The former `[0,0]` acceptance is a must-refuse regression.
 D-442 records the defect.
 
-### F10 — High in the interval checkpoint, fixed here: an exact seam made refusal infeasible
+### F10: High in the interval checkpoint, fixed here: an exact seam made refusal infeasible
 
 Outward-rounded boxes cannot close a coverage seam where one atom region’s leave-edge is
 exactly another’s enter-edge.
@@ -296,7 +295,7 @@ sampled point already refutes C4. The exact-seam regression now finishes in unde
 second. None of the three full retained controls stalls or exhausts the budget.
 D-443 records the defect.
 
-### F11 — Medium in the shared sweep, fixed here: a reported minimum centre could be infeasible
+### F11: Medium in the shared sweep, fixed here: a reported minimum centre could be infeasible
 
 The exact sweep correctly includes an open event cell when it intersects the rotated
 feasible-centre polygon, but it returned the midpoint of the whole cell.
@@ -314,7 +313,7 @@ returns the average of that convex polygon’s vertices, and checks strict membe
 the open cell. The fixture now maps to the feasible centre `(13/18,43/60)`. D-444 and a
 focused regression record the repair.
 
-### F12 — High provenance defect, fixed here: the new commit names the wrong certificate hash
+### F12: High provenance defect, fixed here: the new commit names the wrong certificate hash
 
 Commit `6fc71ce9` says its exact and interval decisions read frozen certificate bytes
 with SHA-256 `503c7d154d36ae1e16d3002ab3c5b003316fc47c14718cf65b3dbc43af4d7cd6`. The
@@ -444,7 +443,7 @@ This is a successful feasibility result, not a formal proof of `s(11) ≥ 381/10
 does not yet define oriented squares or `s(n)`, prove the nearest-angle geometry, load
 the 1,121 atoms, or prove C4. The remaining ordinary geometry is plausibly several
 focused days. Formalizing arrangement correctness and the full C4 computation is the
-dominant project, plausibly one to three or more weeks.
+largest remaining task, plausibly one to three or more weeks.
 Direct kernel reduction of 567,130,649 rational cells would be a poor design.
 
 The promising full-formalization route is a proof-producing per-direction certificate:
