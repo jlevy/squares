@@ -13850,19 +13850,30 @@ defects:
     fixed and quotes figures it re-derives from that name, never at or from whatever
     currently sits at the frontier. Retention ladders here supply both kinds --
     `certificate-19-5.json` never changes, `certificate.json` changes on every rung -- so
-    prose that cites a hash or a mass must cite the first kind. The detector this argues
-    for, and which does not exist: every mass, atom count and margin quoted in a result's
-    prose fields should be checkable against the artifact the same result names, the way
-    the synopsis check already recomputes its counts.
+    prose that cites a hash or a mass must cite the first kind.
+    The detector this argued for was then built, the same day, and is
+    `devtools.check_rung_figures` in the records tier. It recomputes each result's
+    certificates from their own atoms -- side, atom count, total mass and margin, all
+    exact, never the file's stored summary -- and checks the result's prose against that.
+    Two classes: every `a/b = d.ddd` anywhere in results.yaml, evidence.yaml and
+    defects.yaml must be arithmetically true, and a quoted total, margin or atom count
+    is compared only where a rung reference anchors it to one of that result's own
+    artifacts, so a figure cited for contrast is left alone rather than guessed at. It
+    refuses the reconstructed 0.0042 and the 451/100 total and margin, and it found
+    nothing else in the tree.
   regression: >-
-    None automated, and that is the honest state: all three were found by reading the
-    records against the artifacts, which is what caught them and what would catch the
-    next one. The adversarial review that read the package line by line
+    tests/test_rung_figures.py, fourteen nodes, including both reconstructed T-019
+    figures and a false positive the first draft produced -- T-017's claim states its
+    single rung twice for two purposes, which a naive "two fractions means a movement
+    claim" gate misreads, so the gate requires the two to be distinct.
+    One part stays uncovered and is not claimed: the package's byte-identity error is
+    about a file hash rather than a quoted figure, and the checker reads no hashes.
+    The class is worth the check because it is invisible at review. The adversarial
+    review that read the package line by line
     (docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) ran twenty-one
-    attacks and missed its instance, because at the time the sentence was true. That is
-    the defining feature of this class: it is invisible at review and appears later,
-    without an edit, which is why it wants a check that re-derives rather than a reviewer
-    who re-reads.
+    attacks and missed its instance, because at the time the sentence was true; the
+    error appears later, without an edit, which is why it wants a check that re-derives
+    rather than a reviewer who re-reads.
   status: fixed
   recorded_in: packing/frontier/results.yaml
 - id: D-440
