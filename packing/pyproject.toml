@@ -65,7 +65,7 @@ packages = ["src/sqpack"]
 [tool.ruff]
 line-length = 96
 target-version = "py314"
-extend-exclude = ["resources"]
+extend-exclude = ["resources", "cases/n12_fractional_certificate/independent_verify.py"]
 
 [tool.ruff.lint]
 select = [
