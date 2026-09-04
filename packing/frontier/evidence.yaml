@@ -520,7 +520,7 @@ evidence:
       searched: >-
         every corpus file matching 'rigid', then the full tree for 'second-order', 'second order', 'infinitesimal', 'Farkas', 'self-stress' and 'tangent cone'. The last six return zero files: the corpus asserts rigidity in places and contains none of the machinery for deciding it. The Kingbird catalogue annotates n = 5 'Rigid.' with no definition and no argument, and [Friedman DS7] does not annotate n = 5 at all. Neither states the first-order cone is one-dimensional, names the motion, or refuses it at second order. An assertion of rigidity and a proof of second-order rigidity are different claims
       gaps: >-
-        Kingbird's own 'Rigid packings' page, which defines the annotation it applies, was never archived, so what the catalogue means by 'Rigid.' is unknown here. [Goebel 1979] is a PDF with no transcription. Trump's personal site is not retained. The structural rigidity literature (Connelly, Whiteley and successors) is absent from this corpus entirely -- it is the body of work a refutation would most plausibly come from, and it is the largest known hole.
+        Kingbird's own 'Rigid packings' page, which defines the annotation it applies, was never archived, so what the catalogue means by 'Rigid.' is unknown here. [Goebel 1979] is a PDF with no transcription. Trump's 2023 author note is retained; the original 1979 communication is not. The structural rigidity literature (Connelly, Whiteley and successors) is absent from this corpus entirely -- it is the body of work a refutation would most plausibly come from, and it is the largest known hole.
     limitations: >-
       Second-order and at fixed side. Exactly, over Q(sqrt 2), at Goebel's exact construction
       rather than the retained decimal witness: the cone of infinitesimal motions is exactly
@@ -725,7 +725,7 @@ evidence:
       searched: >-
         every corpus file matching 'rigid', then the full tree for 'second-order', 'infinitesimal', 'Farkas', 'self-stress', 'tangent cone' and 'branchwise'. All return zero files. Three sources assert this packing is rigid and none proves it. Trump 2023 is the strongest -- 'The geometrical object is absolutely rigid, no unit square can be rotated or translated' -- but his 'as shown on page 2' is the algebraic derivation of the pose, which establishes that the contact graph determines it and not that no continuous deformation exists. Zero algebraic degrees of freedom is weaker than local rigidity: it does not exclude a branching motion through a corner-to-corner contact, which is exactly what enumerating all 128 branchwise cones addresses. [Friedman DS7] and the Kingbird SVG assert it bare
       gaps: >-
-        Kingbird's own 'Rigid packings' page, which defines the annotation it applies, was never archived, so what the catalogue means by 'Rigid.' is unknown here. [Goebel 1979] is a PDF with no transcription. Trump's personal site is not retained. The structural rigidity literature (Connelly, Whiteley and successors) is absent from this corpus entirely -- it is the body of work a refutation would most plausibly come from, and it is the largest known hole.
+        Kingbird's own 'Rigid packings' page, which defines the annotation it applies, was never archived, so what the catalogue means by 'Rigid.' is unknown here. [Goebel 1979] is a PDF with no transcription. Trump's 2023 author note is retained; the original 1979 communication is not. The structural rigidity literature (Connelly, Whiteley and successors) is absent from this corpus entirely -- it is the body of work a refutation would most plausibly come from, and it is the largest known hole.
     limitations: First-order and local. All 128 derivative-distinct branchwise linearized cones at the exact fixed-side pose are the zero cone, which with a finite-branch subsequence argument gives local isolation and strict local side optimality in the anchored pose-side chart. No neighborhood radius is quantified and nothing here bears on global optimality. It is a repository result about the packing, not a transcription of the catalogue's unqualified Rigid annotation.
 
   - id: E-n011-repaired-lower
@@ -745,11 +745,12 @@ evidence:
       corpus: >-
         packing/resources/ as retained on 2026-08-30: 27 papers (pdf plus faithful .raw.md transcription) and 22 archived web sources
       novel_object: >-
-        A correct proof of a bound stated in 1979 and cited as proved since, whose printed argument does not close
+        A correct proof of a bound asserted without proof in Stromquist's 1984 Memo III,
+        published in 2003, and cited as proved since, whose printed argument does not close
       searched: >-
         Searched the corpus for prior repairs of Stromquist's Theorem 2 argument. The value 2 + 4/sqrt(5) was STATED in [Stromquist 2003] and has been cited as proved for 23 years; what was missing is a correct proof, since the printed Figure 14 cover admits an escaping box (D-152). Bentz 2010 footnote 1 does note an error in Stromquist's Lemma 4, but a different one -- the root selection, 'the minimum values in some of our cases corresponds to the second largest positive root' -- not the cover defect, and Bentz does not use or question Theorem 2. Bentz 2016 and [Friedman DS7] cite the bound as established. No alternative correct proof appears in the corpus. So the novel object is the certified proof and not the result, which is what source_key and limitations already say
       gaps: >-
-        Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's personal site and the unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
+        Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's 2023 author note is retained; the original 1979 communication and other unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
     limitations: Proves the lower bound with a source-distinct repair; it does not repair the printed source proof.
     source_reviewed: '2026-08-24'
 
@@ -876,7 +877,7 @@ evidence:
       searched: >-
         Searched the corpus for interval certification of square-in-square packing. Interval branch-and-bound appears for adjacent problems -- Montanher 2018 for unit squares in a circle, Markot 2021 for circles in a square -- and not for this geometry. The UnitSquare 2026 release describes outward-rounded interval validation but publishes no certificates, boxes or replayable checker, which is why its own record carries replay_status: public-certificate-missing. The novel object is the certificate, not the packing, which is [Kingbird]'s
       gaps: >-
-        Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's personal site and the unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
+        Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's 2023 author note is retained; the original 1979 communication and other unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
     limitations: >-
       Proves s(29) <= 5.93383346267692918974379895098 at a declared relaxation of 1e-20,
       on outward-rounded enclosures rather than exact values. It is not the optimum, not an
@@ -912,7 +913,7 @@ evidence:
       searched: >-
         Searched the corpus for any formal certificate of an n = 29 upper bound. None exists. Gensane-Ryckelynck 2005 reached an earlier n = 29 packing and stated plainly that 'the algebraic models for the dense packings of 29 and 37 squares are too complex to be numerically solved', verifying their bound only to sufficient accuracy. The novel object is the rational certificate, not the pose, which is Schadt's
       gaps: >-
-        Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's personal site and the unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
+        Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's 2023 author note is retained; the original 1979 communication and other unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
     limitations: Proves a rational construction at a side about 4.93e-31 larger than the source decimal; it does not certify the source pose exactly or prove optimality.
     source_reviewed: '2026-08-25'
 
@@ -938,7 +939,7 @@ evidence:
       searched: >-
         Searched the corpus for systematic screens of translational freedom. The phrase 'translation escape' returns zero files, and no bulk screen appears anywhere. The concept is NOT new, and the record should be read accordingly: Gensane-Ryckelynck 2005 observe of one packing that 'six squares are isolated and six can be displaced by small translations', the Kingbird catalogue annotates individual cases 'Rigid.', and [Friedman DS7] and Trump 2023 assert rigidity case by case. What is novel is the systematic application across 98 retained configurations with replayable certificates, not the idea of checking whether a square can slide. This is the thinnest novelty claim in the register
       gaps: >-
-        Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's personal site and the unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
+        Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's 2023 author note is retained; the original 1979 communication and other unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
     limitations: 'Sound in one direction only. A hit exhibits a square, a direction and a distance, and every constraint is exactly affine in the slide parameter, so it certifies that the retained configuration admits a non-trivial feasible motion: 84 of the 98 screened records are not rigid on this evidence. A miss is weak and never establishes rigidity, because rotation and coordinated multi-square motion are outside the screen. Coordinates are the witness''s own finite-precision transcription, so every finding is about the retained configuration rather than the true optimum; the smallest certified slide is 2.03e-4 against witness coordinates carrying at least 28 digits. n=68 and n=69 are excluded by shape residual. Rigidity and optimality are independent and nothing here bears on the latter.'
     source_reviewed: '2026-08-28'
 
@@ -1186,35 +1187,36 @@ evidence:
       novel_object: >-
         The certificate and the bound it carries, not the method. The weighted
         fractional unavoidable-set technique is Burns's, with Massaccesi's
-        parameters; what is new here is a first-party certificate instance at
-        n = 12 and side 19/5, and the generator that produced it. Anyone holding
-        Burns's note could have run this search.
+        parameters; what is new here is the first-party certificate ladder at n = 12,
+        now reaching 99/25, and the generator that produced it. The first instance was
+        retained at 19/5. Anyone holding Burns's note could have run this search.
     certificate: cases/n12_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras python -m cases.n12_fractional_certificate
     replay_status: passed
     limitations: >-
-      Decides five conditions in exact rational arithmetic over the retained
-      681-atom certificate: the atom multiset is closed under the container's D4
-      group (checked, not inferred from the orbit construction that built it), the
-      total mass is 479713/40000 and so strictly below 12, the 181-direction net reaches
-      pi/4, the containment B(1 + D) < 1 holds at B = 9973/10000, and every
-      reachable event cell at every net direction carries mass at least 1, with the
-      least 100003/100000. The bound proved is the container side itself, 197/50, and not
-      L/B; the shrunken square lies inside a unit square in the same container and
-      absorbs the net's angular gap rather than rescaling anything.
-      Independence is partial. The generator that proposed the weights (a float
-      covering LP by row generation) and the verifier that accepted them (exact
-      Fractions over a polygon-clipped centre domain) are separate implementations
-      with separate arithmetic, and a brute-force membership scan over 48,400
-      placements per direction agrees with the sweep at seven sampled directions.
-      But both live in sqpack.fractional and share the projection convention and
-      the coverage predicate, so their agreement cannot detect an error there. No
-      second party has checked this certificate; that review is outstanding and is
-      why this entry is scored no higher than it is.
-      The same instrument reached 19/5 first, with 68 atoms and mass 58/5; that
-      certificate is retained beside this one and replayed by the same command. At
-      side 39/10 the covering program lands on exactly 12 over the settings tried,
-      so 77/20 is where this setting family stops, not where the method does.
+      Decides five conditions in exact rational arithmetic over the retained 2,097-atom
+      certificate: the atom multiset is closed under the container's D4 group (checked,
+      not inferred from the orbit construction that built it), the total mass is
+      149987/12500 and so strictly below 12, the 181-direction net reaches pi/4,
+      containment B(1 + D) < 1 holds at B = 9977/10000, and every reachable event cell
+      at every net direction carries mass at least 1, with least mass 12501/12500. The
+      bound proved is the container side itself, 99/25, and not L/B; the shrunken square
+      lies inside a unit square in the same container and absorbs the net's angular gap
+      rather than rescaling anything.
+      Independence is partial. The generator that proposed the weights (a float covering
+      LP by row generation) and the verifier that accepted them (exact Fractions over a
+      polygon-clipped centre domain) are separate implementations with separate
+      arithmetic, but they share the projection convention and coverage predicate. The
+      source-distinct exact verifier retained as E-n012-independent-verifier checked the
+      historical 19/5 and 77/20 rungs, not this 99/25 certificate. The current second
+      method is E-fractional-interval-decision, which checks all 361 doubled-net
+      directions by directed-rounding branch and bound and agrees at 12501/12500.
+      Eight rungs are retained from 19/5 through 99/25. The exact verifier decided the
+      current bytes in 4,866 seconds; the interval route decided them in 4,448,751 boxes
+      and about 110 seconds. Those same-run wall times are reported by the introducing
+      commit, but no raw timing transcript, hardware description, or load trace is
+      retained; they are planning baselines to reproduce rather than portable
+      benchmarks. The tight current mass slack is 13/12500.
       The instrument reproduces Massaccesi's published n = 17 optimum exactly
       (16.916667 = 203/12, found from zero weights without being given the target)
       and refuses the falsifying control: at n = 12 and side 401/100, where twelve
@@ -1239,33 +1241,33 @@ evidence:
       searched: The corpus search is E-n012-fractional-certificate's, not repeated here.
       novel_object: >-
         Nothing new in this entry -- it is a second, independent decision of the
-        certificate the first entry registers.
+        historical 77/20 rung and its 19/5 calibration certificate.
     source_key: "[T-017]"
-    certificate: cases/n12_fractional_certificate/certificate.json
-    replay: uv run --frozen --all-extras python cases/n12_fractional_certificate/independent_verify.py cases/n12_fractional_certificate/certificate.json
+    certificate: cases/n12_fractional_certificate/certificate-77-20.json
+    replay: uv run --frozen --all-extras python cases/n12_fractional_certificate/independent_verify.py cases/n12_fractional_certificate/certificate-77-20.json
     replay_status: passed
     limitations: >-
-      A second exact decision of the same five conditions by a verifier written
-      from the theorem statement alone, by a reviewer who was given the two
-      certificate files and denied the project's implementation. It shares no code
-      with sqpack.fractional: it works in an integer-scaled rotated frame, enumerates
-      every piece of the edge arrangement (open intervals and the breakpoints
-      themselves) in both axes, sums masses directly over atoms with no prefix
-      sums or difference array, and decides the admissible-centre set by exact
-      polygon clipping, reporting a lower and an upper bound on the continuum
-      minimum that coincide at every one of the 181 directions for both
-      certificates. Least covered mass exactly 1 at direction 0 for each; C0 to C3
-      agree with E-n012-fractional-certificate to the digit. Break tests refuse a
+      A second exact decision of the same five conditions at the historical 19/5 and
+      77/20 rungs, by a verifier written from the theorem statement alone and a reviewer
+      who was given those two certificate files but denied the project's implementation.
+      It shares no code with sqpack.fractional: it works in an integer-scaled rotated
+      frame, enumerates every piece of the edge arrangement (open intervals and the
+      breakpoints themselves) in both axes, sums masses directly over atoms with no
+      prefix sums or difference array, and decides the admissible-centre set by exact
+      polygon clipping. Its lower and upper bounds on the continuum minimum coincide at
+      every one of the 181 directions for both historical certificates. Least covered
+      mass is exactly 1 at direction 0 for each. Break tests refuse a
       weight lowered by 1/10000, a dropped atom and a shifted atom, each by the
       condition that ought to catch it. Run unchanged on Massaccesi's published n = 17
       certificate, rebuilt from the primary source's data, it returns the published
       bound with total exactly 203/12 and least covered mass exactly 1 over all 181
       directions in 30 s -- the control that shows the verifier is right, as distinct
       from agreeing with the certificate. Same method family (exact-algebraic) as the
-      first entry, so together they support C3 and not C4, which by the rung
-      definition needs a different method value; the reviewer's proof check is
-      retained in docs/project/reviews/ and is the review artifact C5 asks for,
-      pending the operator's reading of it.
+      historical first entry, so together they support C3 at those rungs and not C4,
+      which by definition needs a different method value. This evidence does not decide
+      the current 99/25 bytes and is not cited for that bound; its current method-distinct
+      confirmation is E-fractional-interval-decision. The historical reviewer's proof
+      check remains retained in docs/project/reviews/.
     source_reviewed: '2026-09-04'
   - id: E-n011-fractional-certificate
     claim: lower-bound
@@ -1282,7 +1284,9 @@ evidence:
       corpus: >-
         The retained literature archive under packing/resources/, the frontier source
         register, current public record catalogues, and online scholarly indexes searched
-        through 2026-09-04. The local corpus includes Stromquist 2003 (Theorem 2 and the
+        through 2026-09-04, with the durable query and source receipt at
+        resources/web/s11-lower-bound-literature-audit-2026/README.md. The local corpus
+        includes Stromquist 2003 (Theorem 2 and the
         Figure 14 cover this project refuted as D-152), the exp-017 repaired certificate,
         Trump's 1979 packing, Nagamochi 2005 and Friedman's record tables.
       searched: >-
@@ -1293,11 +1297,14 @@ evidence:
         381/100, 100/381, 110000/145161, 19/5, 5/19 and 275/361. No public lower bound above Stromquist's
         2 + 4/sqrt(5) = 3.788854 was located.
       novel_object: >-
-        The certificate and the bound. The weighted-resource lineage predates 2026;
-        this certificate uses the exact-rational, pure-atomic direction-net architecture
+        The certificate and the bound. The resource lineage runs through Göbel's
+        integral unavoidable points, Kearney and Shiu's dual lattices, Nagamochi's
+        weighted points, segments and area, and Bentz's resource-starvation account.
+        This certificate uses the exact-rational, pure-atomic direction-net architecture
         posted by Burns from a note bylined ChatGPT and then developed by Massaccesi,
         while the generator is this project's. What is new is an instance at n = 11 and
-        side 381/100, the first located improvement to this case's lower bound since 2003.
+        side 381/100, the first located public improvement to this case's lower bound
+        since 2003.
       gaps: >-
         This does not exhaust subscription-only MathSciNet or zbMATH full text, every
         thesis or proceedings volume, non-English or unindexed sources, private
@@ -1440,7 +1447,7 @@ evidence:
     relationship_to_generator: independent-implementation
     origin: audited-here
     novelty: previously-published
-    source_key: "[Burns n17]"
+    source_key: '[Burns–Massaccesi n17]'
     certificate: cases/n11_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras --group dev pytest tests/test_fractional_interval.py
     replay_status: passed
@@ -1464,7 +1471,7 @@ evidence:
       establish the equality C0 asserts.
       Results, 361 of 361 directions certified in every case and none stalled. The three
       retained top rungs, decided from their frozen bytes: n = 17 at 459/100, 1184 atoms,
-      3,683,951 boxes; n = 12 at 79/20, 969 atoms, 2,666,151 boxes; n = 11 at 381/100,
+      3,683,951 boxes; n = 12 at 99/25, 2097 atoms, 4,448,751 boxes; n = 11 at 381/100,
       1121 atoms, 1,570,831 boxes. Lower rungs and the control: n = 17 at 229/50 in
       2,653,407 boxes, n = 11 at 19/5 in
       1,195,755 boxes, n = 12 at 197/50 in 1,846,439 and at 393/100 in 1,486,159, and
@@ -1474,7 +1481,7 @@ evidence:
       because every one of these runs shared a contended machine.
       In minimisation mode every enclosure of the least covered mass has width zero and
       equals the exact verifier's value to the digit: 4001/4000 at n = 11's top rung,
-      20001/20000 at n = 12's and 200009/200000 at n = 17's, each matching the
+      12501/12500 at n = 12's and 200009/200000 at n = 17's, each matching the
       least_cell_mass its own certificate declares, and 12501/12500 at the 229/50 rung,
       50003/50000 and 100003/100000 at the earlier n = 11 and n = 12 rungs. Refusals: the n = 12 atoms in a
       side-4 container are refuted at direction 0 after 407 boxes, and an atom lowered by

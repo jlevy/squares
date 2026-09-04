@@ -1,9 +1,9 @@
 # The Three-Lane Research Method
 
-How the 2026-09-04 block produced `T-017` and `T-018` — the first movement of `s(11)`
-since 2003 — in about six hours, after the preceding three and a half hours of planning
-produced nothing. Written so the next agent can run the same loop rather than rediscover
-it.
+How the 2026-09-04 block produced `T-017` and `T-018` — including the first public
+movement of `s(11)` located by the recorded search since 2003 — in about six hours,
+after the preceding three and a half hours of planning produced nothing.
+Written so the next agent can run the same loop rather than rediscover it.
 
 ## The finding that motivates all of it
 

@@ -359,7 +359,10 @@ def resolve_target(
 ) -> CertificateFigures | None:
     """Which of this result's own certificates `figure` is a claim about, if any.
 
-    An explicit side beats everything. Failing that, any *other* rung token still in the
+    An explicit side beats everything. An explicit ``retained certificate`` or
+    ``this certificate`` anchor then selects the moving top-rung pointer even when the
+    same sentence later compares it with a historical rung. Failing those anchors, any
+    *other* rung token still in the
     sentence makes the reference ambiguous rather than a vote for the retained rung --
     T-019's own next_rung cites n = 12's ladder (`197/50`, `79/20`) in the same field, and
     neither belongs to T-019's own artifacts, so a figure sitting near them must be left
@@ -371,6 +374,9 @@ def resolve_target(
     if figure.side is not None:
         return sides.get(figure.side)
     start, end = figure.span
+    prefix = sentence[max(0, start - 160) : start].lower().replace("\u2019", "'")
+    if re.search(r"\b(?:the\s+)?(?:retained|this)\s+certificate(?:'s)?\b", prefix):
+        return retained
     others = [
         _fraction(match.group(1), match.group(2))
         for match in _SIDE_TOKEN.finditer(sentence)

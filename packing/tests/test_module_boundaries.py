@@ -309,9 +309,11 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
         # Full 181-direction exact decisions. Cost scales with the atom count, and
         # the certificates grew by an order of magnitude as the ladders were climbed:
         # Massaccesi's 168-atom fixture is about 25 s, the 373-atom calibration rung a
-        # few minutes, and the 969-, 1121- and 1184-atom retained certificates run from
-        # a quarter of an hour to about 25 minutes each. Together they exceeded the CI
-        # budget for the fast tier, which is why they are here. Every one has a fast
+        # few minutes, and the historical 969-atom n = 12 rung and current 1,121- and
+        # 1,184-atom certificates run from a quarter of an hour to about 25 minutes each.
+        # The current 2,097-atom n = 12
+        # certificate was reported at 4,866 s. Together they exceed the CI budget for
+        # the fast tier, which is why they are here. Every one has a fast
         # counterpart in the same file that pins what its record claims, or decides it
         # on a coarse net.
         "test_fractional_certificate.py": {

@@ -18,15 +18,16 @@ the unrestricted covering value at its side:
 | ---: | ---: | --- |
 | 3.82 | 11.0000 | result narrative; no raw run |
 | 3.95 | 11.9706 | frozen 969-atom certificate; feasible mass, not a proved optimum |
-| 3.96 | 11.9936 | no raw run |
+| 3.96 | 11.9936 | reported objective has no raw run; frozen 2,097-atom certificate has feasible mass 11.998960 |
 | 4.58 | 16.9628 | no raw run; frozen candidate mass 16.965735 |
 | 4.59 | 16.9303 | no raw run; frozen candidate mass 16.933080 |
 | 4.68 | 18.0000 | three site sets reported; no raw run |
 
-Only the displayed 3.95 value is recomputable from a tracked artifact, and even
-there the artifact proves a feasible mass rather than optimality. The nearby
-frozen candidates at 4.58 and 4.59 corroborate scale, not the reported objective
-values. The other figures survive only in repository narrative and commit
+Only the displayed 3.95 value is itself recomputable from a tracked artifact,
+and even there the artifact proves a feasible mass rather than optimality. At
+3.96, 4.58 and 4.59, frozen candidates corroborate scale with different feasible
+masses; they do not reproduce the reported objective values. The other figures
+survive only in repository narrative and commit
 history, without their raw run logs or checkpoints. The six points are consistent
 with a quadratic in the side, but that fit is planning conjecture, not independently
 verified measurement. Rank on `prize` to choose where to look; measure and retain
@@ -104,8 +105,8 @@ case is open and its conjectured value is that bound.
 | 11 | 4 | 3.8100 | 3.8771 | 3.9908 | packing | +0.0671 |
 | 61 | 8 | 7.9282 | 8.0000 | 7.9816 | ceiling | +0.0534 |
 | 78 | 9 | 8.9373 | 9.0000 | 8.9793 | ceiling | +0.0421 |
-| 12 | 4 | 3.9500 | 4.0000 | 3.9908 | ceiling | +0.0408 |
 | 97 | 10 | 9.9443 | 10.0000 | 9.9770 | ceiling | +0.0328 |
+| 12 | 4 | 3.9600 | 4.0000 | 3.9908 | ceiling | +0.0308 |
 | 5 | 3 | 2.7071 | 2.7071 | 2.9931 | packing | -0.0000 |
 | 10 | 4 | 3.7071 | 3.7071 | 3.9908 | packing | -0.0000 |
 

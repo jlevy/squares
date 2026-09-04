@@ -229,13 +229,14 @@ single argument that the lower-bound side has room its practitioners have not us
 
 Counts below are computed from the artifacts, not asserted.
 
-**The lower-bound frontier is one theorem.** Of the 65 open cases, **60** have
+**The lower-bound frontier is mostly one theorem.** Of the 65 open cases, **60** have
 Nagamochi’s general closed form as their best proved lower bound.
-Five are governed by anything bespoke: `n = 11` and `n = 12` trace to Stromquist’s
-single 2003 argument, in the repaired form `T-010` certifies, and `n = 17`, `18` and
-`19` carry Massaccesi’s 2026 fractional certificate, adopted here at source-backed scope
-(`T-015`, `T-016`). Until that adoption nothing in this table had been improved since
-2005, and the sixty still have not been.
+Five now carry bespoke first-party fractional certificates: `T-018` proves
+`s(11) >= 381/100`, `T-017` proves `s(12) >= 99/25`, and `T-019` proves
+`s(n) >= 459/100` directly for `n = 17`, `18`, and `19`. The older Stromquist,
+repaired-Stromquist, and Burns–Massaccesi bounds remain in the result and evidence
+registers as displaced results rather than being rewritten away.
+The sixty cases still governed by Nagamochi have not moved.
 The count is checked against the case records by `devtools.check_nagamochi_bounds`
 (`D-430`), because the earlier figure of sixty-three outlived the adoption by a day.
 
@@ -258,8 +259,8 @@ Ranked by gap, the four smallest open cases at `n ≤ 100` are:
 | --- | --- | --- | --- |
 | 97 | 0.0557 | grid | `10² − 3` |
 | 78 | 0.0627 | grid | `9² − 3` |
+| 11 | 0.0671 | Trump 1979 | the famous case |
 | 61 | 0.0718 | grid | `8² − 3` |
-| 11 | 0.0882 | Trump 1979 | the famous case |
 
 Three of the four are consecutive unproved members of the family `s(m² − 3) = m`, which
 is **proved exactly for `m = 3, 4, 5, 6, 7`** (that is
@@ -271,9 +272,9 @@ for.
 They are, on this evidence, the most tractable unproved cases in the table, and they are
 essentially undiscussed in the literature.
 
-`n = 11` is the smallest gap among cases with a *non-trivial* record, and it is not
-close: the next such case is `n = 19` at `0.4215`, nearly five times wider.
-That is the correct form of a claim the research document originally overstated.
+`n = 11` remains the smallest gap among cases with a *non-grid* upper record.
+The next three such gaps in the current register are `n = 17` at about `0.0855`,
+`n = 18` at about `0.2329`, and `n = 19` at about `0.2956`.
 
 ## Cross-References
 

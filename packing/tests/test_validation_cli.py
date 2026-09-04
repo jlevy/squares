@@ -787,7 +787,9 @@ def test_only_measured_whole_suite_steps_have_budgets() -> None:
 
     The exhaustive exact step is the third whole-suite exception. It deliberately runs
     every complete finite certificate decision deferred out of the fast tier by D-438;
-    D-451 records why their aggregate cannot inherit the fifteen-minute default. A
+    D-451 records why their aggregate cannot inherit the fifteen-minute default, and
+    D-471 rebudgets the aggregate after the current n = 12 decision grew to 4,866 seconds.
+    A
     fourth budgeted step would mean the shared cap is wrong rather than that another
     step is special, and should trigger a redesign instead of extending this set.
 
@@ -800,7 +802,7 @@ def test_only_measured_whole_suite_steps_have_budgets() -> None:
     assert budgeted == {
         "negative controls": 1800,
         "fast behavioral tests": 1800,
-        "exhaustive exact behavioral tests": 7200,
+        "exhaustive exact behavioral tests": 14400,
     }
 
 

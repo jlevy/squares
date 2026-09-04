@@ -125,6 +125,11 @@ the labels underneath give their exact values.
 This is a fractional version of an unavoidable point set.
 An ordinary unavoidable set asks every admissible square to contain a marked point.
 Here several atoms may contribute fractional weights that add to at least one.
+The idea has a longer history than this certificate: Göbel used integral unavoidable
+points; Kearney and Shiu used two unavoidable lattices; Nagamochi combined weighted
+points, line segments, and area; and Bentz called the wider family resource-starvation
+arguments. Burns and Massaccesi supplied the recent exact-rational, pure-atomic
+direction-net architecture used here.
 That flexibility lets a covering linear program search for the weights, but the final
 proof uses only the frozen rational atoms, the nonnegativity premise, and five exact
 conditions:
@@ -1197,12 +1202,21 @@ the rarity premise rests on.
 [`resources/`](packing/resources/README.md) and is greppable, with two exceptions: the
 two record constructions survive through the archived survey and record-table captures
 rather than papers of their own.
-Trump’s 1979 packing is documented there and by this directory’s exact certificate—his
-2023 writeup was not retrievable, which the archive README records—and Bidwell’s 1998
-record likewise:
+Trump’s 1979 packing is documented there and by this directory’s exact certificate.
+His 2023 author writeup is now retained with a faithful extraction; the original 1979
+communication is not.
+Bidwell’s 1998 record likewise has no retained first-party document:
 
 - Stromquist (2003), *Packing 10 or 11 unit squares in a square*—the `s(10)` proof, the
   `s(11)` lower-bound value, and the `0°`/`45°` class bound
+- Göbel (1979), *Geometrical Packing and Covering Problems*—the integral unavoidable
+  point-set precursor
+- Kearney and Shiu (2002), *Efficient packing of unit squares in a square*—two
+  unavoidable lattices and a dual counting argument
+- Bentz (2016), *Optimal Packings of 22 and 33 Unit Squares in a Square*—the
+  resource-starvation account and continuously varying unavoidable families
+- Burns and Massaccesi (2026)—the pure-atomic exact-rational direction-net certificate
+  architecture and LP-generated weights used by the retained `n = 17` control
 - Trump (1979), the `n = 11` construction that is still the standing upper bound
 - Friedman, *Packing Unit Squares in Squares: A Survey and New Results* (DS7)—the survey
   the frontier corpus is checked against

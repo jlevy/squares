@@ -115,8 +115,8 @@ RESOLUTION_FLOOR = 1e-12
 BATCH = 4096
 
 # Refuse a direction rather than let an unresolvable seam tile a continuum down
-# to RESOLUTION_FLOOR. Retained-certificate directions currently need at most
-# 10,751 boxes, leaving nearly an order of magnitude of diagnostic headroom.
+# to RESOLUTION_FLOOR. The budget is a per-direction diagnostic limit; retained
+# certificates remain below it, and the validator records the total boxes examined.
 BOX_BUDGET = 100_000
 
 # Every NumPy mass operation is an int64 sum of a subset of the atom masses.
@@ -124,9 +124,10 @@ BOX_BUDGET = 100_000
 # each such accumulation safe, with room below the signed-int64 boundary.
 INT64_MASS_LIMIT = 2**62
 
-# Each search batch materialises boxes-by-atoms masks. The retained maximum is 1,184;
-# 4,096 leaves more than threefold research headroom while keeping one such mask near
-# 16 MiB instead of permitting an input-driven multi-gigabyte allocation.
+# Each search batch materialises boxes-by-atoms masks. The retained maximum is 2,097,
+# whose 4,096-by-2,097 boolean mask is about 8.2 MiB. The hard 4,096-atom limit leaves
+# nearly twofold research headroom and caps one such mask at 16 MiB rather than allowing
+# an input-driven multi-gigabyte allocation.
 MAX_INTERVAL_ATOMS = 4096
 
 

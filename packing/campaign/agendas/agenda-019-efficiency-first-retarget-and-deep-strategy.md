@@ -19,8 +19,9 @@ agenda:
     that is a limit on the method; all of it is a limit on how many rungs a block can
     climb.
     This agenda buys throughput before it buys bounds, in that order, because the reach
-    table now says the cases worth attacking are two to three times the container side of
-    the ones just climbed, and cost grows with the square of the side or worse. Two
+    table now says the cases worth attacking sit at substantially larger container sides
+    than the ones just climbed, while cost as a function of side has not yet been
+    measured. Two
     efficiency-loop commitments carry measured baselines from Agenda 017's own logs and a
     named target each. Two insight-iteration sessions then ask the mathematical questions
     the ceiling proof opened, which is what should choose the next targets rather than
@@ -37,22 +38,25 @@ agenda:
     priority: 0
     question: >-
       The interval route decides more directions on fewer hypotheses than the exact sweep
-      and did so between nineteen and seventy-eight times faster on identical frozen
-      bytes, with the ratio widening as certificates grow. Can the generator's own
+      and did so between 22.7 and 44.2 times faster at the two largest identically timed
+      atom counts, with the ratio widening between those measurements. Can the generator's own
       accept-or-reject decision move to it, keeping the exact sweep for retention and the
       exhaustive tier, and what does that do to the tail of a run?
     budget: >-
       120 elapsed minutes, Opus at maximum thinking, efficiency-loop throughout.
-      The baseline is already measured and is the entry condition, not the first task:
+      The baseline is already reported and is the entry condition, not a conclusion:
       on the same frozen bytes, 425 atoms took the exact sweep 181 s against the interval
-      route's 9.4 s; 1184 atoms took 1473 s against 65 s; 2097 atoms took about 13000 s
-      against 167 s. Nineteen, twenty-three and seventy-eight times, so the gap is not a
-      constant -- it widens with the atom count, which is the direction the certificates
-      are moving.
+      route's 9.4 s; 1184 atoms took 1473 s against 65 s; and 2097 atoms took 4866 s
+      against 110 s. The last two pairs were timed together and give ratios of 22.7 and
+      44.2. Their two-point effective exponents are 2.09 for the exact sweep and 0.92 for
+      the interval route. Those are empirical slopes between two certificates, not
+      asymptotic complexity results.
+      The introducing commit retains the last pair and the evidence entry retains its
+      values, but no raw timing transcript, hardware description, or load trace survives;
+      reproduce all three pairs before treating them as benchmark-quality measurements.
       0--30 profile the exact sweep at four atom counts spanning 168 to 2097 and fit the
-      exponent, so the shape is measured rather than asserted; the three points above are
-      consistent with anything between quadratic and cubic and that range is too wide to
-      plan on. Record which phase dominates -- event-cell construction, the prefix sum,
+      exponent, so the shape is measured rather than asserted. Record which phase
+      dominates -- event-cell construction, the prefix sum,
       or the per-direction sweep -- because an algorithmic win is only available if one
       of them does.
       30--80 change the generator's decision to the interval route and measure the tail
@@ -64,8 +68,10 @@ agenda:
       80--120 measure what the change buys on a case that could not be afforded before,
       and record the benchmark whether the answer is good or bad.
     entry: >-
-      Agenda 017's run logs and the three paired measurements above are in the record,
-      devtools.decide_certificate is the retention gate, and the fractional tier is green.
+      Agenda 017's run logs and certificate artifacts are retained. The newest paired
+      times survive only in the introducing commit and evidence prose, so BC-190 begins
+      by reproducing them. devtools.decide_certificate is the retention gate, and the
+      fractional tier is green.
     exit: >-
       A benchmark record with the fitted cost exponent for the exact sweep, a named
       dominant phase, the measured end-to-end delta from moving the generator's decision,
@@ -102,8 +108,10 @@ agenda:
       8.8 times, found by accident, on a parameter tuned when the sides were near 3.9.
       Third, rationalisation. The rounding loss is at most atoms/scale, and at n = 12,
       side 99/25, scale 200,000 and 2097 atoms it was 0.005314 -- five times the 0.001040
-      margin the certificate ended with. The rung survived by luck. At scale 4,000,000 the
-      loss would be about 0.00027 and the atom count does not change with the scale.
+      margin the certificate ended with. The rung survived by luck. At scale 4,000,000 a
+      simple inverse-scale estimate is about 0.000266 and the worst-case atoms/scale bound
+      is 0.00052425; ceiling effects mean the actual loss must be measured. The atom count
+      does not change with the scale.
       0--40 measure whether solve_rows re-solves from scratch each round or warm-starts,
       and what max_rounds and rows_per_direction actually cost at three sides. 40--80
       measure the site-density trade properly: denser grids buy fewer rows and cost more
@@ -300,14 +308,16 @@ That ordering is the agenda’s whole argument.
 ## Why efficiency before bounds
 
 Agenda 017 moved five registered cases in a day.
-It also spent its time like this, and the figures are from its own logs rather than from
-recollection:
+It also spent its time like this.
+Most figures are from its own logs; the 2,097-atom pair is an operator-reported same-run
+measurement preserved in the introducing commit and evidence prose, without its raw
+transcript:
 
 | Where the time went | Measured |
 | --- | --- |
 | Exact sweep, 425 atoms | `181 s` — against the interval route’s `9.4 s` on identical bytes |
 | Exact sweep, 1184 atoms | `1473 s` — against `65 s` |
-| Exact sweep, 2097 atoms | about `13000 s` — against `167 s` |
+| Exact sweep, 2097 atoms | `4866 s` — against `110 s`; raw timing transcript not retained |
 | Row generation, share of a round | `79%` to `94%` at every side measured |
 | `n = 20` round 0, grids `(23, 31, 39)` | over `3300 s`, did not finish |
 | `n = 20` round 0, grids `(29, 39, 49)` | `376 s` |
@@ -318,11 +328,14 @@ Three of those are not close calls.
 
 The interval route decides **361 directions where the exact sweep decides 181**, needs
 one fewer hypothesis — deciding on the doubled net it never invokes the `D4` reflection,
-so it does not need `C0` at all — and ran between nineteen and seventy-eight times
-faster on the same frozen bytes.
-The ratio *widens* with the atom count, which is the direction the certificates are
-moving. The exact sweep belongs at the retention gate, where correctness is the only
-thing that matters and an hour is affordable.
+so it does not need `C0` at all — and ran 22.7 and 44.2 times faster at the two largest
+identically timed atom counts.
+The ratio widened between those two measurements, which is the direction the
+certificates are moving.
+Their effective exponents, 2.09 and 0.92, describe this pair of runs only; `BC-190`
+exists to determine whether that scaling persists.
+The exact sweep belongs at the retention gate, where correctness is the only thing that
+matters and a long checkpoint is affordable.
 Whether it belongs in the generator’s inner loop is a question nobody has asked, and
 `BC-190` asks it.
 
@@ -335,9 +348,8 @@ accident while diagnosing a run that appeared wedged.
 
 The rationalisation scale nearly cost a rung.
 At `n = 12`, side `99/25`, the rounding loss was five times the margin the certificate
-ended with.
-Raising the scale twentyfold costs nothing measurable and does not change the
-atom count.
+ended with. Raising the scale twentyfold does not change the atom count, but its actual
+rounding and verification costs have not been measured; that is part of `BC-191`.
 
 ## Why the retarget needs a strategy session and not a sort
 
@@ -382,8 +394,8 @@ placement, and the loop’s final least covered mass is still reported beside th
 objective.
 
 And rule seven still holds: read the evidence, not a reconstruction of it.
-Every figure in this agenda is from a log or an artifact, and the one estimate — a round
-at `5.5` — is labelled as an estimate and written down before the run so the run can
+The one pair without a retained raw transcript is labelled above, and the estimate of a
+round at `5.5` is labelled as an estimate and written down before the run so the run can
 contradict it.
 
 <!-- This document follows common-doc-guidelines.md.

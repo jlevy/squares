@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-09-03'
+last_reviewed: '2026-09-04'
 results:
   - id: T-001
     claim: >-
@@ -289,8 +289,9 @@ results:
       score: 4
       rationale: >-
         Resolves the proof status of the subject's flagship case: the n = 11
-        lower bound was stated in 1979 and cited as proved since, its printed
-        argument was falsified here, and this restores it with a
+        lower bound was asserted without proof in Stromquist's 1984 Memo III and
+        published in 2003, its printed argument was later cited as established and was
+        falsified here, and this restores the value with a
         source-distinct repair.
       scored: '2026-08-31'
       by: session-061 review (repository)
@@ -571,17 +572,17 @@ results:
 
   - id: T-017
     claim: >-
-      s(12) >= 79/20, by a first-party weighted fractional unavoidable-set
-      certificate at container side 79/20 = 3.95. This is the first lower bound
+      s(12) >= 99/25, by a first-party weighted fractional unavoidable-set
+      certificate at container side 99/25 = 3.96. This is the first lower bound
       specific to n = 12 in the retained corpus: the case previously held
       2 + 4/sqrt(5) = 3.788854..., which is Stromquist's s(11) bound inherited by
       monotonicity and says nothing about twelve squares in particular. The
-      movement is +0.161146, and the case stays open against its conjectured
-      optimum of 4, now by 0.05. The 197/50 rung it reached first is retained
-      below it.
-      It also separates the two cases for the first time. 79/20 = 3.95 exceeds
+      movement is +0.171146, and the case stays open against its conjectured
+      optimum of 4, now by 0.04. Seven rungs are retained below it, 19/5 through
+      79/20.
+      It also separates the two cases for the first time. The retained side exceeds
       Trump's 1979 packing of eleven squares at 3.877084, so s(12) > s(11) strictly,
-      by at least 0.072916. Monotonicity gives only s(12) >= s(11); the strict
+      by at least 0.082916. Monotonicity gives only s(12) >= s(11); the strict
       inequality did not follow from anything on record before, because n = 12's
       previous lower bound was s(11)'s own 3.788854 and sat below Trump's packing.
     scope:
@@ -593,30 +594,30 @@ results:
       score: 4
       rationale: >-
         Scored against the rubric's anchor for S4, "a reusable technique, bound
-        family, or resolved disputed value". What is retained is not one bound but a
-        six-rung ladder -- 19/5, 77/20, 97/25, 39/10, 393/100, 197/50 -- produced by a
-        generator that applies at every n and that has since produced the n = 11
+        family, or resolved disputed value". What is retained is not one bound but an
+        eight-rung ladder -- 19/5, 77/20, 97/25, 39/10, 393/100, 197/50, 79/20,
+        99/25 -- by a generator that applies at every n and that has since produced the n = 11
         result as well, so this is a bound family rather than a case result. It is
         also the first bound of any kind proved about n = 12 rather than inherited
         from n = 11: the frontier case body had recorded that nothing specific to
         n = 12 had ever been proved.
         Held below S5 because n = 12 is not the central open case, the method is
-        Burns's and Massaccesi's rather than this project's, the second exact check
-        shares a method family with the first, and the gap to the conjectured 4 is
-        0.07, which this approach does not close.
+        Burns's and Massaccesi's rather than this project's, both current decisions are
+        repository-internal, and the gap to the conjectured 4 is 0.04, which this
+        approach does not close.
       scored: '2026-09-04'
-      by: BC-161 (repository; independent evaluator confirmed C4, no external review)
+      by: BC-161 continuation (repository; method-distinct C4, no external review)
     novelty: apparently-novel
     composition: >-
-      Primary: one certificate, one verifier, one accepted verdict. The bound is
-      the certificate's container side directly, with no monotonicity or
-      composition step between the artifact and the claim.
+      Primary: one certificate and two method-distinct accepted decisions. The bound is
+      the certificate's container side directly, with no monotonicity or composition
+      step between the artifact and the claim.
     evidence:
       - E-n012-fractional-certificate
-      - E-n012-independent-verifier
       - E-fractional-interval-decision
     artifacts:
       - packing/cases/n12_fractional_certificate/certificate.json
+      - packing/cases/n12_fractional_certificate/certificate-79-20.json
       - packing/cases/n12_fractional_certificate/certificate-197-50.json
       - packing/cases/n12_fractional_certificate/certificate-19-5.json
       - packing/cases/n12_fractional_certificate/certificate-77-20.json
@@ -634,20 +635,35 @@ results:
       directed rounding. It shares the Certificate representation and C1-C3 premises
       with the sweep but makes a method-distinct C4 decision. C5
       needs a review artifact by someone outside the project. The bound
-      itself: the ladder 19/5, 77/20, 97/25, 39/10, 393/100, 197/50, 79/20 was climbed
-      once the separation oracle was corrected to score the cells the verifier decides
-      (D-434), and every rung is retained.
-      The retained certificate's total is 1197059/100000 = 11.970590, leaving 0.029410
-      below twelve. Margin does not shrink monotonically as the ladder climbs -- the
-      197/50 rung below this one has only 0.007175, four times less at a lower side --
-      because the site set matters at least as much as the side, so a tight rung is
-      evidence about that run and not about how much room is left.
+      itself: the ladder 19/5, 77/20, 97/25, 39/10, 393/100, 197/50, 79/20, 99/25 was
+      climbed once the separation oracle was corrected to score the cells the verifier
+      decides (D-434), and every rung is retained.
+      The retained certificate's total is 149987/12500 = 11.998960, leaving 0.001040
+      below twelve -- about 6.9 times tighter than the previous-smallest retained
+      n = 12 margin, 0.007175 at 197/50. It survived on the sign of a rounding rather
+      than by design.
+      Rationalisation rounds each orbit up to a multiple of 1/scale, so its cost is at
+      most atoms/scale; at 2097 atoms and scale 200,000 it took 0.005314, five times what
+      remained. A naive inverse-scale projection at scale 4,000,000 is about 0.000266,
+      while the ceiling bound is 2097/4000000 = 0.00052425; ceiling effects mean the
+      actual cost still has to be measured. The atom count does not depend on that scale.
+      That is a defaults question and it is BC-191's.
+      Margin does not shrink monotonically as the ladder climbs -- the
+      197/50 rung two below this one has 0.007175 and 79/20 has 0.029410, so a tight
+      rung is evidence about that run and not about how much room is left.
+      This rung also costs the exhaustive tier: 2097 atoms is the largest retained
+      certificate, about 1.77 times the next-largest 1184-atom one. The introducing
+      commit records a same-run decision in 4866 s by the exact sweep and 110 s by the
+      interval route, but retains no raw timing transcript. Paired with its reported
+      1184-atom measurements (1473 s and 65 s), those two points give effective exponents
+      2.09 and 0.92; they are measurements to reproduce, not asymptotic complexity
+      proofs. BC-195 owns whether the tier can still afford what it holds.
       What is left is bounded, though, and by the method rather than by the search.
       A certificate for n cannot exist above ceil(sqrt(n)) * B, since a container wider
       than that holds ceil(sqrt(n))^2 pairwise disjoint axis-parallel B-squares, each
       carrying mass at least 1 by C4, which forces the total past n and breaks C1.
       Here that ceiling is 4B = 3.9908, and 4/(1 + D) = 3.990816 over every shrink the
-      181-direction net admits, so 79/20 has 0.0408 of runway left.
+      181-direction net admits, so 99/25 has 0.0308 of runway left.
       The consequence for this case is structural but finite in scope: the grid packing
       gives s(12) <= 4, and no single certificate on a finite net can certify the
       conjectured endpoint 4. This does not exclude a proved family of certificates with
@@ -704,6 +720,7 @@ results:
       - packing/cases/n11_fractional_certificate/minimal_verify.py
       - packing/cases/n11_fractional_certificate/lean-spike/Kernel.lean
       - packing/cases/n11_fractional_certificate/lean-spike/README.md
+      - packing/resources/web/s11-lower-bound-literature-audit-2026/README.md
       - packing/src/sqpack/fractional/colgen.py
       - packing/src/sqpack/fractional/interval.py
       - docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md

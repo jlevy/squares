@@ -1,6 +1,6 @@
 # Synopsis: The `s(n)` Program
 
-**Date:** 2026-09-03
+**Date:** 2026-09-04
 
 **Status:** Living document, revised whenever a result lands.
 
@@ -70,7 +70,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | Result | `n` | [`V`](epistemics.md#verification) | [`C`](epistemics.md#confirmation) | [`S`](epistemics.md#significance-and-novelty) | [Novelty](epistemics.md#significance-and-novelty) | What it establishes |
 | --- | --- | --- | --- | --- | --- | --- |
 | [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
-| [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 79/20, by a first-party weighted fractional unavoidable-set certificate at container side 79/20 = 3.95. |
+| [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 99/25, by a first-party weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
 | [T-014](packing/frontier/RESULTS.md) | 5 | `V3` | `C5` | `S3` | `apparently-novel` | For s = 2 + sqrt(2)/2 and Goebel’s labeled pose P0 in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) -- closed unit squares in [0, s]^2, pairwise disjoint interiors -- equivalently there is no nonconstant continuous feasible path from P0 and no sequence of distinct feasible poses converging to it; hence the n = 5 optimum is rigid at fixed side in the catalogue’s sense. |
@@ -1889,13 +1889,14 @@ For most `n` the answer is uninteresting: `s(m²) = m` by the grid.
 It becomes interesting just above a perfect square, where the leftovers must be tilted
 in.
 
-At `n = 11` the two ends of the interval have barely moved in a generation:
+At `n = 11` the upper construction has stood for a generation, while the lower endpoint
+moved on 2026-09-04:
 
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
-| Best certified lower bound | `2 + 4/√5 = 3.788854382…` | exp-017 exact source-distinct repair; value stated by Stromquist 2003, whose printed proof has gap D-152 |
-| Published gap | `0.088229208023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+| Best certified lower bound | `381/100 = 3.81` | T-018 first-party fractional certificate, exact and interval-checked; apparently novel under the recorded public-source audit |
+| Current gap | `0.067083590023` | the third-smallest open gap at `n ≤ 100` in this corpus |
 
 ![Walter Trump’s exact eleven-square packing.](packing/atlas/rendering/trump11-overview.svg)
 
@@ -3203,16 +3204,16 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 469 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 474 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 98 | asserted something false about the mathematics |
 | validity | 121 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 167 | recorded something its own evidence contradicts |
+| bookkeeping | 171 | recorded something its own evidence contradicts |
 | robustness | 62 | did not finish, or finished only by luck |
-| performance | 21 | worked, but cost far more than it should |
+| performance | 22 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
@@ -3220,7 +3221,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-eight defects in 469, and no soundness defect
+**The automated gate has caught sixty-eight defects in 474, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3682,11 +3683,11 @@ agrees, and new components inheriting the perimeter—that apply to code not yet
 and it is not the cartography spine.** A weighted fractional unavoidable-set certificate
 — Burns’s and Massaccesi’s theorem, this project’s instances and generator — moved five
 registered cases in one day.
-`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first movement of that
-bound since Stromquist stated `2 + 4/sqrt(5)` in 2003 and the only S5 result in the
-register, `n = 11` being the smallest open case.
-`s(12) >= 79/20` is [T-017](packing/frontier/RESULTS.md), the first bound ever proved
-about twelve squares rather than inherited from eleven.
+`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first public movement of
+that bound located by the recorded search after Stromquist stated `2 + 4/sqrt(5)` in
+2003 and the only S5 result in the register, `n = 11` being the smallest open case.
+`s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound located that
+was proved about twelve squares rather than inherited from eleven.
 `s(17) >= 459/100`, and `n = 18` and `n = 19` at the same side without a monotonicity
 step, is [T-019](packing/frontier/RESULTS.md) and displaces Massaccesi’s published
 `4.5058` by `0.0842` — the only value in print this project has replaced.
@@ -3726,7 +3727,7 @@ For `n = 12`, the retained shrink gives `4B = 3.9908` and the fixed 181-directio
 permits at most `4/(1+D) = 3.990816…`; no single certificate on a finite net can certify
 the conjectured endpoint `4`. This does not exclude a proved family with sides tending
 to `4` and a separate limit argument.
-The retained `79/20` certificate has exactly `0.0408` of runway at its fixed `B`.
+The retained `99/25` certificate has exactly `0.0308` of runway at its fixed `B`.
 `n = 11` and `n = 17` are not foreclosed: their runways are `0.1808` and `0.3985`, and
 both truths sit below their grid bounds.
 

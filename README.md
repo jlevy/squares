@@ -1,13 +1,14 @@
 # Square Packing
 
 This repository has moved the lower bound on `s(11)`, the smallest square-packing case
-still open, for the first time since Stromquist set it in 2003. A first-party
-unavoidable-set certificate proves `s(11) ≥ 381/100 = 3.81`, narrowing the gap to
-Trump’s 1979 packing from `0.088230` to `0.067084`; the case stays open.
-The same certificate technique produced the first lower bound ever proved specifically
-for twelve squares, `s(12) ≥ 79/20`, and a bound of `459/100` for `n = 17`, `18`, and
-`19` that displaces a previously published value by `0.0842`. Each is checked twice
-against its own frozen certificate.
+still open. A first-party unavoidable-set certificate proves `s(11) ≥ 381/100 = 3.81`,
+narrowing the gap to Trump’s 1979 packing from `0.088230` to `0.067084`; the case stays
+open. The recorded public-source search found no earlier movement beyond the value
+Stromquist stated in 2003, so the result is `apparently-novel`, not a claim of absolute
+priority. The same certificate technique produced the first located lower bound proved
+specifically for twelve squares, `s(12) ≥ 99/25`, and a bound of `459/100` for `n = 17`,
+`18`, and `19` that displaces a previously published value by `0.0842`. Each is checked
+twice against its own frozen certificate.
 The methods share the certificate representation and C1-C3 premises, but decide C4
 differently.
 
@@ -52,10 +53,10 @@ Results first established here, as far as the recorded source searches show:
 
 ### Notable results (`S4`–`S5`)
 
-- **T-018: `s(11) ≥ 381/100`, the first movement of the smallest open case since 2003
-  (`S5`).** `s(11)` is the case this project exists for, and its lower bound had been
-  Stromquist’s `2 + 4/√5 = 3.788854` since he stated it.
-  A first-party weighted fractional unavoidable-set certificate — 1121 weighted atoms,
+- **T-018: `s(11) ≥ 381/100`, the first movement of the smallest open case located since
+  2003 (`S5`).** `s(11)` is the case this project exists for, and the recorded public
+  search found no stronger lower bound after Stromquist stated `2 + 4/√5 = 3.788854`. A
+  first-party weighted fractional unavoidable-set certificate — 1121 weighted atoms,
   total mass `434547/40000`, every placement of a shrunken square covering mass at least
   `1` — proves that eleven unit squares do not fit in a container of side `3.81`. The
   interval narrows from `0.088230` to `0.067084`; the gap is not closed.
@@ -72,13 +73,13 @@ Results first established here, as far as the recorded source searches show:
   One certificate covers all three sizes without a monotonicity step: only `C1` mentions
   `n`, so an atom set certifies its side for every integer above its own mass.
   It does not improve `n = 20`, where Nagamochi’s `1 + √13 = 4.6055…` is larger.
-- **T-017: `s(12) ≥ 79/20`, from nothing case-specific at all (`S4`).** `n = 12` had
+- **T-017: `s(12) ≥ 99/25`, from nothing case-specific at all (`S4`).** `n = 12` had
   only the `n = 11` bound inherited by monotonicity; the frontier record said in as many
   words that nothing specific to `n = 12` had ever been proved.
-  A seven-rung ladder — `19/5`, `77/20`, `97/25`, `39/10`, `393/100`, `197/50`, `79/20`
-  — is retained, all from one generator that applies at every `n`, which is why this is
-  scored `S4` as a bound family rather than a case result.
-  At `79/20 = 3.95` it also separates the cases: `s(12) > s(11)`, since Trump’s 1979
+  An eight-rung ladder — `19/5`, `77/20`, `97/25`, `39/10`, `393/100`, `197/50`,
+  `79/20`, `99/25` — is retained, all from one generator that applies at every `n`,
+  which is why this is scored `S4` as a bound family rather than a case result.
+  At `99/25 = 3.96` it also separates the cases: `s(12) > s(11)`, since Trump’s 1979
   packing puts `s(11) ≤ 3.877084`. That did not follow from anything on record before.
 - **T-010: `s(11) ≥ 2 + 4/√5`, repaired (`S4`).** The printed 2003 Figure 14
   unavoidability claim has a strict counterexample, so the literature’s standing `s(11)`
@@ -142,8 +143,9 @@ Its source is one schema-validated case file under
 [status table](packing/frontier/STATUS.md) is the reader view, and the atlas above
 renders every retained known-best packing.
 
-The [literature archive](packing/resources/README.md) retains each primary source, a
-cleaned Markdown transcription, and the unedited extraction used to check it.
+The [literature archive](packing/resources/README.md) retains each available primary
+source and documents which sources also have a cleaned Markdown transcription and an
+unedited extraction used to check it.
 The generated [evidence inventory](packing/frontier/INVENTORY.md) shows what each
 recorded claim rests on, who performed the work, and how far it has been checked.
 

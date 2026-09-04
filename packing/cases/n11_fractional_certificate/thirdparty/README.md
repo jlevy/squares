@@ -99,8 +99,10 @@ contended one.
 
 The argument belongs to the resource-starvation lineage for square packing.
 Göbel used finite unavoidable point sets in 1979
-([paper](https://ir.cwi.nl/pub/12685/12685D.pdf)). Nagamochi assigned scores to weighted
-points, line segments, and area in 2005
+([paper](https://ir.cwi.nl/pub/12685/12685D.pdf)). Kearney and Shiu combined two
+unavoidable lattices in a dual counting argument in 2002
+([paper](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v9i1r14)).
+Nagamochi assigned scores to weighted points, line segments, and area in 2005
 ([paper](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v12i1r37));
 Bentz’s 2016 account describes these earlier methods as numerical resources consumed by
 each packed square ([paper](https://arxiv.org/abs/1606.03746)). These are antecedents of

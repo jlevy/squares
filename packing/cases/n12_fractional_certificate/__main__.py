@@ -1,4 +1,4 @@
-"""Replay both retained n = 12 certificates and report every condition.
+"""Replay the first and current n = 12 certificates and report every condition.
 
 Exits non-zero if any condition fails, so the replay is a gate and not a
 report. Run as ``python -m cases.n12_fractional_certificate``.
@@ -39,7 +39,7 @@ def replay(path: Path) -> int:
 
 
 def main() -> int:
-    """Both retained certificates must replay; the weaker rung is not optional."""
+    """Both endpoint certificates must replay; the first rung is not optional."""
     return max(replay(FIRST_RUNG_PATH), replay(CERTIFICATE_PATH))
 
 

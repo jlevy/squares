@@ -14782,3 +14782,157 @@ defects:
     constructs both dynamic selector outcomes and pins their distinct budgets; the final
     pre-push receipt records completion under the default invocation.
   recorded_in: packing/src/sqpack/cli/validate.py
+- id: D-470
+  title: The n = 12 top rung moved while its evidence and explanation stayed on predecessors
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  recurrence_of: D-467
+  latent_for: one parent revision
+  severity: high
+  status: fixed
+  what: >-
+    PR 78 advanced the retained n = 12 certificate from 79/20 to 99/25 and replaced its
+    atom set, but several durable surfaces still described earlier rungs. The result
+    significance text called the ladder seven rungs, the frontier body still reported
+    77/20 and 113 atoms, the primary evidence entry reported 197/50 and 681 atoms, and
+    the source-distinct historical verifier was still cited as though it decided the
+    current bytes. The replay module also said that only two rungs were retained.
+  consequence: >-
+    The certificate itself remained valid, but readers and automated assurance consumers
+    could attribute the current 99/25 claim to figures and an independent decision that
+    belonged to superseded certificates. In particular, the record overstated the method
+    support for the new bytes while understating the ladder and the cost of deciding it.
+  fix: >-
+    Reconcile the README, T-017 result, n = 12 case, evidence entries, and replay prose to
+    the 2,097-atom 99/25 certificate. Cite the exact and interval decisions for the current
+    bound, and retain the independent exact verifier explicitly as historical evidence for
+    19/5 and 77/20 only.
+  regression: >-
+    packing/tests/test_rung_figures.py::test_t017_current_rung_is_bound_to_its_record_and_explanations
+    pins the live certificate figures, current evidence pair, historical verifier scope,
+    case explanation, README headline, and replay orientation to the same retained rung.
+  recorded_in: packing/frontier/results.yaml
+- id: D-471
+  title: The exhaustive exact suite outgrew its declared ceiling when n = 12 tripled
+  date: '2026-09-04'
+  layer: tooling
+  class: performance
+  detected_by: review
+  recurrence_of: D-451
+  latent_for: one parent revision
+  severity: high
+  status: fixed
+  what: >-
+    The exhaustive exact suite had a 7,200-second budget justified by a 4,826.82-second
+    37-test run. The new retained n = 12 certificate has 2,097 atoms and its exact replay
+    alone takes 4,866 seconds, replacing a predecessor whose recorded ceiling was 1,500
+    seconds. Even the conservative replacement arithmetic puts the unchanged suite above
+    8,192 seconds before its other growth, so the declared 7,200-second ceiling can no
+    longer contain the work assigned to it.
+  consequence: >-
+    Full validation would kill a healthy complete-certificate suite after two hours and
+    report the research gate red even if every mathematical decision passed. The failure
+    would be conservative, but it would make the documented merge checkpoint impossible
+    on the current retained artifacts.
+  fix: >-
+    Give the exhaustive exact suite a 14,400-second local ceiling, with the measured old
+    aggregate and replacement cost recorded beside it. Keep ordinary and short steps on
+    their existing tighter guards; reaching the new ceiling requires redesign rather than
+    another unexplained increase.
+  regression: >-
+    packing/tests/test_validation_cli.py::test_only_measured_whole_suite_steps_have_budgets
+    pins the exhaustive suite to the separately justified 14,400-second ceiling.
+  recorded_in: packing/src/sqpack/cli/validate.py
+- id: D-472
+  title: A recovered Trump source remained described as unavailable
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  recurrence_of: D-332
+  latent_for: eight days after source recovery
+  severity: medium
+  status: fixed
+  what: >-
+    The archive recovered Trump's 2023 author note on 2026-08-27, but the tutorial and
+    six evidence-gap statements still said that the writeup or Trump's personal site was
+    not retained. The original 1979 communication remains unavailable; the later author
+    note does not.
+  consequence: >-
+    Readers were directed away from a primary source the repository actually carries,
+    and novelty-gap prose understated the local corpus while trying to qualify it. The
+    error did not change the certified upper or lower bound.
+  fix: >-
+    Distinguish the retained 2023 author note from the unretained 1979 communication in
+    the tutorial and evidence register, and carry the distinction into the new s(11)
+    literature-reconciliation receipt.
+  regression: >-
+    packing/tests/test_rung_figures.py::test_recovered_trump_note_is_not_described_as_missing
+    requires the retained PDF and refuses the two stale availability claims.
+  recorded_in: TUTORIAL.md
+- id: D-473
+  title: The new n = 12 record overstated comparison factors and two-point timing slopes
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: one parent revision
+  severity: high
+  status: fixed
+  what: >-
+    The 99/25 result called its 0.001040 mass margin twenty-eight times tighter than any
+    retained rung although 0.007175/0.001040 is about 6.9; called 2,097 atoms three times
+    every other retained certificate although 2,097/1,184 is about 1.77; projected
+    rationalisation loss under a larger scale as a result rather than an estimate; and
+    described effective exponents from two timed certificates as general quadratic and
+    linear complexity. Agenda 019 also retained a superseded contended estimate of
+    13,000/167 seconds after the introducing commit reported 4,866/110 seconds.
+  consequence: >-
+    The mathematical certificate stayed valid, but the planning record exaggerated its
+    exceptional scale and promoted a two-observation slope into an algorithmic law. It
+    also claimed the newest timings came from retained logs although no raw transcript,
+    machine description, or load trace survives.
+  fix: >-
+    Correct the arithmetic comparisons, state both the inverse-scale estimate and the
+    worst-case atoms/scale bound, label the 2.09 and 0.92 exponents as two-point effective
+    slopes, preserve the 4,866/110 pair as operator-reported planning evidence, and make
+    Agenda 019 begin by reproducing it before optimization.
+  regression: >-
+    packing/tests/test_rung_figures.py::test_t017_current_rung_is_bound_to_its_record_and_explanations
+    pins the corrected comparison factors, paired times, and missing-transcript warning.
+  recorded_in: packing/frontier/results.yaml
+- id: D-474
+  title: The s(11) literature surfaces overstated provenance and omitted a retained source
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: one parent revision plus earlier survey prose
+  severity: medium
+  status: fixed
+  what: >-
+    The literature archive retained Göbel's 1979 PDF but omitted it from the paper index
+    and universalized the archive's three-file convention despite that PDF having no
+    transcription. The n = 11 case and survey called Gensane and Ryckelynck's 2005 work
+    the first exact algebraic characterization although Trump's retained 2023 note
+    reproduces an implicit equation he says he sent in 1979. Two records also dated
+    Stromquist's unrestricted lower bound to 1979 instead of distinguishing its
+    unsupported 1984 memo assertion from the published 2003 paper, and reader prose
+    stated T-018's priority without the search boundary.
+  consequence: >-
+    The numerical theorem was unaffected, but the repository overstated both archive
+    completeness and historical priority while underreporting the method's antecedents.
+  fix: >-
+    Index Göbel and document the PDF-only exception; distinguish Trump's retrospective
+    provenance from the first located published polynomial elimination; correct the
+    Stromquist chronology; use first-located-public wording for T-018; and fold the
+    Göbel, Kearney--Shiu, Nagamochi, Bentz, Burns and Massaccesi lineage into the
+    tutorial, strategy catalogue, case record, review and durable literature receipt.
+  regression: >-
+    packing/tests/test_rung_figures.py::test_t018_literature_receipt_is_folded_into_canonical_surfaces
+    pins the source index, exception, chronology, provenance wording and method-lineage
+    references to their canonical records.
+  recorded_in: packing/resources/README.md

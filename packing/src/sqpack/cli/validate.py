@@ -55,6 +55,7 @@ BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
 PROCESS_TERMINATION_GRACE_SECONDS = 1.0
 DEFAULT_TIMEOUT_SECONDS = 900.0
 ORDINARY_TEST_SUITE_BUDGET_SECONDS = 1800.0
+EXHAUSTIVE_EXACT_SUITE_BUDGET_SECONDS = 14400.0
 
 
 class _ProcessRegistry:
@@ -1562,13 +1563,16 @@ STEPS: tuple[Step, ...] = (
         budget_seconds=ORDINARY_TEST_SUITE_BUDGET_SECONDS,
     ),
     # This is intentionally a whole suite of complete finite certificate decisions, not
-    # an ordinary behavioural-test step. At discovery, 36 tests were still running after
-    # 4100s on 2026-09-04; D-451 records the exact elapsed time. Keep the exceptional
-    # ceiling local so the 900s hang guard remains meaningful for short steps.
+    # an ordinary behavioural-test step. D-451 records the original 4,826.82-second
+    # 37-test suite. The current n = 12 exact decision then replaced a <= 1,500-second
+    # predecessor with a measured 4,866-second run, putting the same suite above 8,192
+    # seconds before any other growth (D-471). The 14,400-second ceiling preserves room
+    # for that measured composition without weakening the 900-second guard on short
+    # steps; another approach to this ceiling needs a redesign, not another silent pad.
     Step(
         "exhaustive exact behavioral tests",
         _exhaustive_exact_tests,
-        budget_seconds=7200,
+        budget_seconds=EXHAUSTIVE_EXACT_SUITE_BUDGET_SECONDS,
     ),
     Step(
         "bead tree",

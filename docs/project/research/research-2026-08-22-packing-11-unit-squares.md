@@ -1,11 +1,11 @@
 # Research: Packing 11 Unit Squares in a Square
 
-**Date:** 2026-08-22 (last updated 2026-08-25)
+**Date:** 2026-08-22 (last updated 2026-09-04)
 
 **Author:** Claude (agent), for mailto:samanthadrakova@gmail.com
 
-**Status:** Complete as of 2026-08-25, with a dated addendum below for what this project
-established afterwards
+**Status:** Historical literature survey complete as of 2026-08-25, with dated project
+updates below
 
 ## How to read the citations
 
@@ -14,9 +14,10 @@ Claims in this document carry an inline key in bold brackets, e.g.
 
 1. The [References](#references) section below, with full bibliographic detail and a
    URL.
-2. **A local copy** in [`resources/`](../../../packing/resources/README.md) — the
-   original PDF, a cleaned Markdown transcription, and the unedited extraction it was
-   cleaned from.
+2. **A local copy** in [`resources/`](../../../packing/resources/README.md) whenever one
+   was retrievable. The archive documents which sources have the normal three-part set of
+   original PDF, cleaned Markdown transcription, and unedited extraction, and which have
+   a stated exception.
 
 So every cited source can be read and grepped locally without re-fetching:
 
@@ -63,11 +64,42 @@ precisely. See [Corrections to Common Summaries](#corrections-to-common-summarie
 
 ## What This Project Established at `n = 11` After This Report
 
-**Added 2026-08-30.** Everything above this section states what was known on 2026-08-25
-and is left as written.
-The results below postdate it and are the project’s own; they do not alter the
-literature findings above, and none of them moves `s(11)`, which remains open with the
-same gap.
+Everything above this section states the 2026-08-25 survey snapshot and is left as
+written. These dated entries record later first-party results; a later entry supersedes
+an earlier entry’s statement of the live frontier without rewriting the historical
+survey.
+
+### 2026-09-04: the lower bound moved to `381/100`
+
+[`T-018`](../../../packing/frontier/RESULTS.md) proves `s(11) >= 381/100 = 3.81` with a
+nonnegative 1,121-atom fractional unavoidable-set certificate.
+Exact event-cell enumeration and a method-distinct interval branch-and-bound decide the
+same retained bytes, both obtaining minimum covered mass `4001/4000`; the certificate’s
+total mass is `434547/40000 < 11`. The concise argument, standard-library checker,
+visual explanation, Lean feasibility spike, and adversarial review are linked from
+[`t-018-proof.md`](../../../packing/cases/n11_fractional_certificate/t-018-proof.md).
+
+This moves the verified lower endpoint beyond every public bound found by the recorded
+search after Stromquist stated `2 + 4/sqrt(5) = 3.788854...` in 2003. The case remains
+open against Trump’s 1979 packing at approximately `3.877083590022814`, now with gap
+`0.067084`. A bounded source search found no public intervening lower bound and no
+earlier `3.81` claim, so the result is recorded as **apparently novel**, not as proof of
+absolute priority. The repeatable query and source reconciliation is retained at
+[`s11-lower-bound-literature-audit-2026`](../../../packing/resources/web/s11-lower-bound-literature-audit-2026/README.md).
+
+The literature also changes how the method should be attributed.
+Göbel’s unavoidable points and Kearney--Shiu’s dual lattice counting are integral
+precursors; Nagamochi assigns numerical scores to points, segments, and area; Bentz
+describes this family as resource starvation.
+Burns and Massaccesi supplied the recent pure-atomic rational direction-net and LP
+implementation line.
+The apparently new object is the `n = 11` certificate and generator, not weighted
+resource counting in general.
+
+### 2026-08-30: exact-route snapshot, now superseded
+
+At this date, the results below postdated the original survey but did not move `s(11)`.
+They are preserved as the state of the project before `T-018`.
 
 **The exact route now closes end to end, and the difference is exactly zero.**
 `discharge` stops at the side, which is a claim about a *number*. The round trip carries
@@ -98,9 +130,9 @@ This matters at `n = 29`, where no float solver produces a feasible vertex to be
 from; `n = 11` is the case where the answer is known and the method could therefore be
 checked.
 
-**What has not changed.** `s(11)` is unsolved.
-The upper bound is still Trump’s 1979 packing, the lower bound still `2 + 4/√5`, and
-roughly `0.088` still separates them.
+**What had not changed on 2026-08-30.** `s(11)` was unsolved.
+The upper bound was still Trump’s 1979 packing, the lower bound was still `2 + 4/√5`,
+and roughly `0.088` still separated them.
 The [synopsis](../../../SYNOPSIS.md#what-is-built) carries the current state of every
 capability named here; this section records only which of this report’s open items the
 project has since answered for itself.
@@ -202,8 +234,10 @@ The reported high-precision value of the tilt is
 40.18193729032971646523034236806062154252265849634355838751445324…°
 ```
 
-Trump reportedly computed this in 1979 on a Hewlett-Packard HP-67 programmable RPN
-pocket calculator and sent the result to Martin Gardner.
+Trump’s retained 2023 note says he calculated the value in 1979 on a Hewlett-Packard
+HP-67 programmable RPN pocket calculator and sent the result, including an implicit tilt
+equation, to Martin Gardner.
+The original 1979 communication is not retained here.
 
 **Exact side length.** The container side length is the algebraic number
 
@@ -311,11 +345,11 @@ separating, because conflating the two is the source of the “Gensane–Ryckely
   discovery* “has been incorrectly attributed to Gustafson and Thule,” i.e. priority is
   Trump’s and theirs was a rediscovery.
   Friedman also notes many independent rediscoveries generally.
-- **Before 19 May 2004 — Gensane and Ryckelynck** compute the first *exact algebraic*
-  solution, in the DCG paper (p. 10 of 13). They eliminate using a system of **14
-  equations**. They do not publish `s` in reduced root form: only the cosine of one
-  angle (offset by 45°), with a formula in terms of that root given for `2/s` rather
-  than `s`, though presented as a formula for `s`.
+- **Before 19 May 2004 — Gensane and Ryckelynck** compute the first located *published
+  polynomial elimination* of the configuration, in the DCG paper (p. 10 of 13). They
+  eliminate using a system of **14 equations**. They do not publish `s` in reduced root
+  form: only the cosine of one angle (offset by 45°), with a formula in terms of that
+  root given for `2/s` rather than `s`, though presented as a formula for `s`.
 - **4 June 2023 — David Ellsworth** obtains the reduced root form — the degree-8 minimal
   polynomial recorded throughout this document — and shows the elimination needs only
   **two** equations rather than fourteen.
@@ -540,7 +574,7 @@ must consume a fixed quantum of it:
 | A finite point set, each point worth 1 | 1 point | The classical unavoidable-points method: **[Friedman DS7]**, **[Stromquist 2003]** |
 | A point set with one **sliding point** on a segment | 1 point, for every placement of the slider | **[Bentz 2010]** |
 | **Line segments, measured by length of intersection** | A minimum intersection length | **[Bentz 2010]**, Corollary 7 |
-| **Weighted points, segments, and a rectangular area combined** | A weighted quantum | A “more complex configuration” cited by **[Bentz 2016]** |
+| **Weighted points, segments, and a rectangular area combined** | A weighted quantum | **[Nagamochi 2005]**, summarized by **[Bentz 2016]** |
 | A **continuously varying family** of point sets | 1 point, uniformly along the family | **[Bentz 2016]**, Theorem 8 |
 
 The progression is a steady weakening of the discreteness assumption, and it matters for
@@ -1055,13 +1089,13 @@ successive papers refining rather than replacing it.
 | # | Strategy | Family | Mechanism | Used on this problem? |
 | --- | --- | --- | --- | --- |
 | 1 | Area counting | elementary | `s(n) ≥ √n` | Yes — trivially, never tight for non-squares |
-| 2 | Unavoidable point sets | unavoidable points | Place `n−1` points every unit square must hit; pigeonhole | Yes — the workhorse for nearly every proved case |
+| 2 | Unavoidable point sets | unavoidable points | Place `n−1` points every unit square must hit; pigeonhole | Yes — Göbel 1979 is the integral precursor; the method is the workhorse for nearly every proved case |
 | 3 | Nonavoidance lemmas | unavoidable points | Geometric sublemmas certifying a set is unavoidable | Yes — Friedman’s Lemmas 1–3; Stromquist’s 1–6 |
 | 4 | The “box” relaxation | unavoidable points | Use squares of side strictly `>1` so conditions are open | Yes — Stromquist’s framing device |
-| 5 | Duality / lattice rotation | unavoidable points | Rotate the unavoidable lattice a quarter turn; colour argument | Yes — Kearney–Shiu, for `s(6) = s(7) = 3` |
+| 5 | Duality / lattice rotation | unavoidable points | Rotate the unavoidable lattice a quarter turn; colour argument | Yes — Kearney–Shiu combine two unavoidable lattices in a dual counting argument for `s(6) = s(7) = 3` |
 | 6 | “Almost unavoidable” sets + forcing | unavoidable points | Force squares into positions, then derive further points | Yes — Friedman, for the harder `n = 7, 14` |
 | 7 | Continuously varying families | unavoidable points | Replace a fixed point set by a parametrised family | Yes — Bentz 2016, for `s(22)=5`, `s(33)=6` |
-| 8 | Generalised unavoidable points | unavoidable points | Nagamochi’s extension of the method | Yes — `s(m²−1) = s(m²−2) = m` |
+| 8 | Generalised unavoidable points | unavoidable points | Assign nonnegative scores to points, segments, and area so every unit square consumes more than one unit | Yes — Nagamochi 2005, including `s(m²−1) = s(m²−2) = m` |
 | 9 | Restricted-orientation analysis | unavoidable points | Prove a bound for a *subclass* of packings | Yes — Stromquist Thm 3 (0°/45°), settling Gardner |
 | 10 | Exhaustive case analysis | unavoidable points | Enumerate combinatorial configurations | Yes — inside most of the above |
 | 11 | Symmetry reduction | unavoidable points | Quotient the search by the container’s symmetry group | Yes — standard within case analyses |
@@ -1070,12 +1104,12 @@ successive papers refining rather than replacing it.
 | 14 | “Good square” reduction | asymptotic | Show near-axis-aligned squares suffice asymptotically | Yes — asymptotic only (arXiv:2504.09489) |
 | 15 | Interval arithmetic + branch and bound | modern machinery | Rigorously exclude all configurations numerically | Yes for circles (n≤33); yes for unit squares with rotation but only n=3 |
 | 16 | SOS / Positivstellensatz certificates | modern machinery | Certify semialgebraic infeasibility via SDP | No application to `s(n)` was found in the retrieved corpus |
-| 17 | LP/SDP relaxation with dual certificates | modern machinery | Bound via a relaxation’s dual solution | No application to `s(n)` was found in the retrieved corpus |
+| 17 | Global pose-space LP/SDP relaxations with dual certificates | modern machinery | Bound the full packing-feasibility problem via a relaxation’s dual solution | No global pose-space application to `s(n)` was found; the fractional hitting LP is strategy 22 |
 | 18 | Machine-checked formal proof | modern machinery | Verify a case analysis in Lean/HOL Light/Isabelle | No machine-checked `s(n)` proof was found in the retrieved corpus; adjacent precedents include Flyspeck (2014) and sphere packing in dimension 8 (Feb 2026) |
 | 19 | Electrical-network / Kirchhoff methods | dissection tradition | Linear circuit laws on a dissection graph | Not applicable — see below |
 | 20 | Graph encodings of dissections (c-nets) | dissection tradition | Enumerate planar graphs of a tiling | Not applicable — dissection-only |
 | 21 | Transversal / hitting-set theory | transversal and wider | `τ ≥ ν`; bound the piercing number | Applied explicitly by Bašić–Slivková (2018), who study the piercing number of all unit-square poses in a square, connect it to s(n), and derive a specialized n=61 lower bound. Classical unavoidable-point proofs are the integral special case. |
-| 22 | Fractional transversals and LP duality | transversal and wider | Relax piercing to an LP; use the dual fractional packing | Applied in the August 2026 Burns and Massaccesi proposed computer-assisted lower bounds for s(17): rational weighted atoms form a fractional hitting certificate, and Massaccesi uses LP to generate the fixed certificate. The exact source verifier replays, and on 2026-09-03 the repository adopted the 4.5058 proposal at source-backed scope after an independent replay, a lemma audit and two reviews. The record stays externally proposed: one method family carries it, and no method-distinct certificate exists. |
+| 22 | Fractional transversals and LP duality | transversal and wider | Relax piercing to an LP; use the dual fractional packing | Burns’s August 2026 n=17 note gives the pure-atomic, exact-rational direction-net architecture; Massaccesi uses LP to generate fixed weights. The repository replays that certificate as T-015 and uses the same architecture for the first-party T-018 and T-019 certificates. T-018’s finite coverage decision is also checked by a method-distinct interval branch-and-bound. This is a modern implementation of the older resource-starvation lineage, not a new fractional-cover principle. |
 | 23 | Integrality-gap bounds (Wegner-type) | transversal and wider | Bound `τ/ν` for families of squares | Bounds exist for squares [Caoduro–Sebő]; no connection to `s(n)` was found in the retrieved corpus |
 | 24 | Gallai- and Helly-type theorems | transversal and wider | Structural results forcing small transversals | No application to `s(n)` was found in the retrieved corpus |
 | 25 | Delsarte/Cohn–Elkies LP bounds | transversal and wider | Auxiliary functions certifying density bounds | Powerful for lattice sphere packing; no bounded-container `s(n)` analogue was found in the retrieved corpus |
@@ -1613,7 +1647,7 @@ worth recording so they are not propagated.
 | `n = 11` is “the smallest example where the best known packing contains squares at three different angles” | **False** | That is `n = 17` (Bidwell, 1998). `n = 11` uses two orientation classes: axis-aligned and `≈ 40.182°`. |
 | The Trinity Four “discovered the first Perfect Squared Squares” | **Misattributed** | Roland Sprague published the first perfect squared square (order 55, side 4205) in 1939, ahead of Brooks–Smith–Stone–Tutte. The Cambridge group built the theory. |
 | Kirchhoff’s-law / Smith-diagram methods are a promising route to new bounds here | **False** | The method requires a gapless tiling by distinct axis-aligned squares and yields rational answers by construction. All four conditions fail for `s(11)`. See the dedicated section. |
-| Gensane and Ryckelynck (2004/05) improved the `n = 11` packing | **False** | They computed its first *exact algebraic solution*, not a denser packing. The 1979 configuration is unchanged. |
+| Gensane and Ryckelynck (2004/05) improved the `n = 11` packing | **False** | They published the first located polynomial elimination of the same configuration, not a denser packing. Trump’s 2023 retrospective reproduces an implicit equation he says he sent in 1979; that original communication is not retained, so computational priority is not verified here. |
 | *Our own earlier draft:* rigorous interval branch-and-bound is “the most plausible untried line of attack” | **Wrong — corrected** | It is not untried. It has been applied to rotating unit squares (Montanher et al. 2018) and rigorously reaches `n = 3`. It is the most *developed* modern approach and falls far short of `n = 11`. |
 | *Our own earlier draft:* the Roth–Vaughan bound is `W(x) ≥ 10⁻¹⁰⁰√(x·\|x − ⌊x⌋ + 1/2\|)`, “stated precisely in [Friedman DS7]” | **Wrong — corrected against the primary** | The theorem is `w(α) ≫ (‖α‖ α)^{1/2}` under `α(α − [α]) > 1/6`. The bound uses distance to the **nearest integer**; the side condition uses the **fractional part**; and there is **no explicit constant at all**. |
 | **[Friedman DS7]** and **[McClenagan 2026]**: the Roth–Vaughan bound carries an explicit `10⁻¹⁰⁰` | **False** | No such constant appears anywhere in Roth and Vaughan. The relation is Vinogradov `≫`, whose implied constant is never evaluated. Two independent secondary sources carry the same phantom number. |
@@ -1887,8 +1921,8 @@ Every item in the proof lane above exists because of this.
   branch-and-bound over contact classes, as used for rigorous circle packing in a
   circle) close the gap?
   This has been done for related packing problems but no attempt on `s(11)` was found.
-- [x] ~~Verify the Gensane–Ryckelynck `n = 11` entry~~ — **resolved**: they produced the
-  first exact algebraic solution of Trump’s packing (14-equation elimination, publishing
+- [x] ~~Verify the Gensane–Ryckelynck `n = 11` entry~~ — **resolved**: they published
+  the first located polynomial elimination of Trump’s packing (14 equations, publishing
   a formula for `2/s`), not an improved packing.
   Nothing was retracted; the secondary literature mis-described an exact-solution result
   as a record improvement.
@@ -2230,8 +2264,11 @@ instead have explicitly bounded reading aids and unedited raw OCR.
   independent proofs establish the values.
 - **[Trump 2023]** — Walter Trump, “Packing of 11 unit squares in a square with minimum
   size.” [Author page](https://trump.de/square-packing/index.htm) · local
-  `papers/trump-2023-packing-11-unit-squares`. The retained author copy describes the
-  displayed arrangement’s local rigidity; it does not establish global optimality.
+  `papers/trump-2023-packing-11-unit-squares`. The retained author copy reproduces an
+  implicit tilt equation Trump says he sent to Gardner in 1979 and says the numerical
+  calculation was done on an HP-67. The original communication is not retained.
+  The note describes the displayed arrangement’s local rigidity; it does not establish
+  global optimality.
 - **[Gardner 1979]** — Martin Gardner, “Mathematical Games,” *Scientific American*,
   October 1979 (also Nov 1979, Mar 1980, Nov 1980). Origin of the conjecture.
   **[not retrieved]** — print.

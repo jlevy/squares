@@ -235,18 +235,18 @@ def test_the_retained_n12_certificate_replays() -> None:
     """
     certificate = load()
     assert certificate.n == 12
-    assert certificate.bounded_side == Fraction(79, 20)
-    assert certificate.total_mass == Fraction(1197059, 100000)
+    assert certificate.bounded_side == Fraction(99, 25)
+    assert certificate.total_mass == Fraction(149987, 12500)
     assert certificate.total_mass < 12
 
     record = declared()
-    assert record["claim"] == "s(12) >= 79/20"
+    assert record["claim"] == "s(12) >= 99/25"
     assert record["total_mass"] == str(certificate.total_mass)
 
 
 @pytest.mark.exhaustive_exact
 def test_the_retained_n12_certificate_is_accepted() -> None:
-    """The 969-atom certificate over 181 directions, decided exactly."""
+    """The 2,097-atom certificate over 181 directions, decided exactly."""
     certificate = load()
     verdict = verify(certificate)
     assert verdict.accepted, verdict.failures
@@ -267,7 +267,7 @@ def test_the_first_rung_at_19_5_still_replays() -> None:
 
 
 def test_the_n12_certificate_improves_the_inherited_bound() -> None:
-    """79/20 beats 2 + 4/sqrt(5), which n = 12 only held by monotonicity."""
+    """99/25 beats 2 + 4/sqrt(5), which n = 12 only held by monotonicity."""
     bound = load().bounded_side
     # L > 2 + 4/sqrt(5) iff (L - 2) > 4/sqrt(5) iff (L - 2)^2 * 5 > 16,
     # both sides being positive. Decided in exact rationals, not in floats.
@@ -520,6 +520,7 @@ def test_every_retained_n12_rung_still_verifies() -> None:
         "certificate-39-10.json": Fraction(39, 10),
         "certificate-393-100.json": Fraction(393, 100),
         "certificate-197-50.json": Fraction(197, 50),
+        "certificate-79-20.json": Fraction(79, 20),
     }
     for name, side in rungs.items():
         rung = load(package / name)
@@ -638,7 +639,7 @@ def test_the_refuting_grid_fits_and_one_of_its_squares_starves() -> None:
     Widen the container just past ``4 B`` and lay the sixteen separated
     ``B``-squares the ceiling argument builds. They must all lie inside the
     container and be pairwise disjoint; and since the certificate carries mass
-    11.97, well under sixteen, at least one of them must cover less than 1 --
+    11.998960, well under sixteen, at least one of them must cover less than 1 --
     which is C4 failing, exactly as the argument says it must.
     """
     certificate = load()

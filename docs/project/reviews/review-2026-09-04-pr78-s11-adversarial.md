@@ -2,7 +2,7 @@
 
 **Review date:** 2026-09-04\
 **Pull request:** [#78](https://github.com/jlevy/squares/pull/78)\
-**Reviewed parent head:** `4a0c213a6f037829f5f6dfd2d339e9c730e1d271`\
+**Reviewed parent head:** `9d90aabe6aed36486cfa7c801e3099a47c6476f4`\
 **Base:** `9d5eae0f5ecfcf3cd417a345eb6c55b1f9ac4def` (`main`)\
 **Remediation branch:** `codex/pr78-s11-adversarial-review`\
 **Certificate SHA-256:**
@@ -37,9 +37,9 @@ It checked the mathematical implication, the exact bytes retained for `n = 11`, 
 continuum-to-finite reduction, replay and validation boundaries, method provenance, and
 the novelty claim. The PR advanced repeatedly during the audit, from `9b85236b` through
 `bdf63b21`, `6fc71ce9`, `31775018`, `b77e78d2`, `9134ee41`, `430e7e09`, `6196480d`,
-`44e9c4b4`, `10cf6479`, `fbe01c49`, and `d1e873a0`, ending at `4a0c213a`. Commit
-`6fc71ce9` replaced the `19/5` target artifact with a larger `381/100` certificate, so
-the concrete validation restarted on the new bytes.
+`44e9c4b4`, `10cf6479`, `fbe01c49`, `d1e873a0`, and `4a0c213a`, ending at `9d90aabe`.
+Commit `6fc71ce9` replaced the `19/5` target artifact with a larger `381/100`
+certificate, so the concrete validation restarted on the new bytes.
 The later commits strengthened the separate `n = 12` and `n = 17` results, supplied the
 missing full-net `n = 17` interval control, added a finite-certificate reach theorem and
 generated reach table, amended the project process document, and added a general
@@ -49,14 +49,16 @@ overstated a finite-certificate ceiling as a method-wide impossibility; F14 reco
 correction. The self-contained verification package, interval-certified branch-and-bound
 checkpoint, retained `n = 17` certificates, and late retention command were included
 before the verdict was frozen.
-The final reconciliation also audited the moving parent’s new `4.59` certificate and
-`4.68` run narrative for branch consistency; those claims did not alter the T-018 proof,
-but F25-F30 record defects that would otherwise have shipped beside it.
+The final reconciliation also audited the moving parent’s new `4.59` and `99/25`
+certificates and `4.68` run narrative for branch consistency; those claims did not alter
+the T-018 proof, but F25-F33 record defects that would otherwise have shipped beside it.
+F34 and F35 record the literature-source drift found while folding this review back into
+the canonical resource and frontier tiers.
 The other `n = 17`--`19` frontier movement was outside this review’s mathematical scope
 except where the earlier published-value `n = 17` certificate served as a control.
 
 The audit was pre-registered under `think-tukn` with five falsifiable hypotheses.
-Two delegated lanes were kept separate from the coordinator’s main review:
+Two proof-validation lanes were kept separate from the coordinator’s main review:
 
 - a proof/minimal-checker lane challenged the short implication and current certificate,
   then ran the standalone exact verifier; and
@@ -65,8 +67,10 @@ Two delegated lanes were kept separate from the coordinator’s main review:
 
 The coordinator separately searched the literature, replayed the project verifier,
 reconciled the retained artifacts, and constructed negative controls.
-Runtime agreement alone was not an acceptance rule: the proof implication and every
-implicit premise had to survive as well.
+Later blind-priority and parent-integration lanes independently challenged the
+literature scope and the final `n = 12` reconciliation without using the review’s
+conclusions. Runtime agreement alone was not an acceptance rule: the proof implication
+and every implicit premise had to survive as well.
 
 ## Findings
 
@@ -172,11 +176,12 @@ the `n = 11` certificate.
 
 The method attribution should preserve the historical layers.
 Göbel’s 1979 unavoidable points are the integral precursor.
-Nagamochi’s 2005 “resource starvation” argument already assigns nonnegative resources to
+Nagamochi’s 2005 weighted-resource argument already assigns nonnegative resources to
 points, segments, and area and compares the amount every unit square consumes with the
-total available. Burns’s August 2026 post and proof note supply the recent pure-atomic,
-rational direction-net implementation; Massaccesi’s August 2026 work supplies the
-LP-generated `n = 17` instance and parameters.
+total available; Bentz’s 2016 account supplies the “resource starvation” label.
+Burns’s August 2026 post and proof note supply the recent pure-atomic, rational
+direction-net implementation; Massaccesi’s August 2026 work supplies the LP-generated
+`n = 17` instance and parameters.
 The apparently novel contribution here is the `n = 11` atomic instance, not the general
 weighted-cover principle.
 
@@ -614,6 +619,92 @@ in 2.90 s. They do not explain the timeout.
 A regression exercises both selector outcomes.
 D-469 records the recurrence of D-438.
 
+### F31: High parent-integration drift, fixed here: the new `n = 12` rung inherited old evidence
+
+Commit `9d90aabe` advanced the moving `n = 12` certificate to `99/25` and 2,097 atoms.
+Its result and case still cited the source-distinct independent verifier even though
+that program and its review decide only the historical `19/5` and `77/20` files.
+The primary evidence entry still described an intermediate `197/50`, 681-atom
+certificate, while the case body described `77/20` and 113 atoms.
+The README and replay prose likewise stopped before the eighth rung.
+
+**Resolution:** all reader, frontier, evidence, and replay surfaces now bind to the
+current `99/25` certificate and its exact and interval decisions.
+The independent exact verifier is pinned to `certificate-77-20.json`, retained as
+historical evidence, and explicitly excluded from support for the current bytes.
+A cross-record regression pins the current certificate figures, evidence pair, case,
+README, and replay orientation together.
+D-470 records the recurrence of D-467.
+
+### F32: High gate-performance recurrence, fixed here: the new exact decision outgrew the exhaustive budget
+
+The pre-parent exhaustive suite took 4,826.82 seconds for 37 tests.
+The new current `n = 12` exact decision is reported at 4,866 seconds, replacing a
+predecessor whose recorded ceiling was 1,500 seconds.
+Even conservative replacement arithmetic puts the current suite above 8,192 seconds, so
+its 7,200-second declared ceiling could no longer contain the assigned work.
+
+**Resolution:** the exhaustive exact step now has a separately justified 14,400-second
+ceiling, while ordinary and short steps keep their tighter guards.
+The validation registry pins the exceptional step and its budget.
+Another approach to this ceiling requires redesign rather than an unexplained increase.
+D-471 records the recurrence of D-451.
+
+### F33: High quantitative record defects, fixed here: two measurements became complexity laws
+
+The same parent called a `0.001040` margin twenty-eight times tighter than every
+retained rung, although the previous-smallest margin is `0.007175`, a factor of about
+6.9. It called 2,097 atoms three times every other retained certificate, although the
+next largest has 1,184 atoms, a factor of about 1.77. It also projected rationalisation
+loss across a twentyfold scale without labeling ceiling effects, and promoted effective
+exponents from two certificate sizes to general quadratic and linear complexity.
+Agenda 019 retained the superseded contended estimate `13,000/167 s` after the parent
+reported `4,866/110 s`, while saying every figure had a retained log.
+
+**Resolution:** the comparison arithmetic is corrected; the rationalisation passage
+states both its inverse-scale estimate and worst-case bound; the 2.09 and 0.92 exponents
+are labeled two-point effective slopes; and the 4,866/110 pair is preserved as an
+operator-reported planning baseline without a raw timing transcript, hardware
+description, or load trace.
+Agenda 019 now begins by reproducing it.
+D-473 records the defect.
+
+### F34: Medium literature-record recurrence, fixed here: a recovered source remained unavailable in prose
+
+The resource archive recovered Trump’s 2023 author note on 2026-08-27. The tutorial and
+six evidence-gap statements nevertheless continued to say that the writeup or Trump’s
+personal site was not retained.
+That conflated the available 2023 paper with the still-unretained original 1979
+communication.
+
+**Resolution:** those surfaces now distinguish the two, and the complete `s(11)`
+priority and method search is retained as a resource receipt, indexed from the resource
+page and linked from the `n = 11` case, T-018 artifacts, evidence entry, and historical
+survey addendum. D-472 records the recurrence of D-332.
+
+### F35: Medium literature-provenance drift, fixed here: priority and archive claims outran the sources
+
+The archive retained Göbel’s 1979 PDF but omitted it from the paper index and said every
+paper had a cleaned and raw transcription, although that source is PDF-only.
+The `n = 11` case and historical survey called Gensane and Ryckelynck’s 2005 elimination
+the first exact algebraic characterization even though Trump’s retained 2023 note
+reproduces an implicit equation he says he sent to Gardner in 1979; the original
+communication is unavailable, so the repository cannot settle that computational
+priority. Two canonical records also dated Stromquist’s unrestricted lower bound to 1979
+rather than its unsupported 1984 memo assertion and published 2003 proof.
+Several reader surfaces described T-018 as an absolute first instead of the first public
+improvement located by the recorded search.
+
+**Resolution:** the archive indexes Göbel and documents its PDF-only status; the survey
+calls the 2005 work the first located published polynomial elimination and separates it
+from Trump’s retrospective account; the Stromquist chronology is corrected; and every
+T-018 priority statement carries the public-search boundary.
+The method catalogue and tutorial now name Göbel, Kearney--Shiu, Nagamochi, Bentz,
+Burns, and Massaccesi in their distinct historical roles.
+A blind search also found a refereed 2024 paper that still calls the eleven-square
+optimum unknown; the durable receipt records it as status corroboration, not theorem
+evidence. D-474 records the finding.
+
 ## Frozen hypotheses and outcomes
 
 | ID | Pre-registered hypothesis | Outcome |
@@ -869,8 +960,12 @@ Stromquist 2003, as of 2026-09-04.”
 The proof is an instance of fractional hitting-set weak duality:
 
 - Göbel’s 1979 unavoidable points supply the integral hitting-set precursor.
+- Kearney and Shiu’s 2002 dual-lattice proof counts two unavoidable point systems
+  simultaneously, an integral multi-cover precursor.
 - Nagamochi 2005 uses nonnegative point, segment, and area resources—the substantive
   weighted-resource antecedent.
+- Bentz 2016 names this family “resource starvation” and summarizes the point, segment,
+  area, and continuously moving resource variants.
 - Burns’s
   [August 2026 post](https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/)
   and linked proof note give the recent pure-atomic rational orientation-net form.
@@ -880,6 +975,24 @@ The proof is an instance of fractional hitting-set weak duality:
 
 “Burns–Massaccesi certificate” is reasonable shorthand for that recent implementation
 line. It should not imply that weighted resource counting itself began in 2026.
+
+### Reconciliation into the source and frontier records
+
+The bounded search is now retained at
+[`s11-lower-bound-literature-audit-2026`](../../../packing/resources/web/s11-lower-bound-literature-audit-2026/README.md),
+not only narrated in this review.
+The resource index lists it; the `n = 11` case names it as context and carries a
+2026-09-04 source-review date; T-018 lists it among its artifacts; and
+`E-n011-fractional-certificate` points to it as the receipt behind the novelty scope.
+The 2026-08-22 `s(11)` survey now has a dated addendum for `381/100`, preserving its
+older historical snapshot instead of silently rewriting it.
+
+No source found in this reconciliation changes another frontier endpoint.
+The current public catalogues still carry Stromquist’s lower value and Trump’s upper
+construction; they corroborate the search result but are not evidence for the new
+theorem. The recovered Trump 2023 author note strengthens upper-bound provenance only.
+The method sources change attribution, not the validity or priority of the concrete
+`n = 11` certificate.
 
 ## Further formalities, in assurance order
 

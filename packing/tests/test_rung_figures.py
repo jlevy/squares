@@ -43,6 +43,11 @@ def _result(result_id: str) -> dict:
     return next(r for r in document["results"] if r["id"] == result_id)
 
 
+def _evidence(evidence_id: str) -> dict:
+    document = safe_load(EVIDENCE.read_text(encoding="utf-8"))
+    return next(e for e in document["evidence"] if e["id"] == evidence_id)
+
+
 def test_the_check_passes_on_the_retained_tree() -> None:
     assert main() == 0
 
@@ -53,13 +58,13 @@ def test_the_reach_table_distinguishes_reports_from_retained_measurements() -> N
     expected_rows = (
         "| 3.82 | 11.0000 | result narrative; no raw run |",
         "| 3.95 | 11.9706 | frozen 969-atom certificate; feasible mass, not a proved optimum |",
-        "| 3.96 | 11.9936 | no raw run |",
+        "| 3.96 | 11.9936 | reported objective has no raw run; frozen 2,097-atom certificate has feasible mass 11.998960 |",
         "| 4.58 | 16.9628 | no raw run; frozen candidate mass 16.965735 |",
         "| 4.59 | 16.9303 | no raw run; frozen candidate mass 16.933080 |",
         "| 4.68 | 18.0000 | three site sets reported; no raw run |",
     )
     assert all(row in text for row in expected_rows)
-    assert "Only the displayed 3.95 value is recomputable from a tracked artifact" in text
+    assert "Only the displayed 3.95 value is itself recomputable from a tracked artifact" in text
     assert "the artifact proves a feasible mass rather than optimality" in text
 
 
@@ -79,6 +84,123 @@ def test_t019_case_pages_bind_the_current_direct_certificate() -> None:
         assert "459/100 = 4.59" in body
         if n > 17:
             assert "direct" in body
+
+
+def test_t017_current_rung_is_bound_to_its_record_and_explanations() -> None:
+    """D-470: advancing the pointer must advance every claim about that pointer.
+
+    The retained n = 12 certificate moved from 79/20 to 99/25 while its result headline,
+    evidence figures, case body, and replay orientation remained on older rungs. Numeric
+    certificate checks cannot detect prose that truthfully describes the wrong artifact,
+    so this narrow cross-record contract pins the live pointer and the surfaces that tell
+    a reader what it means.
+    """
+    repo = RESULTS.parents[2]
+    case_dir = repo / "packing/cases/n12_fractional_certificate"
+    certificate = json.loads((case_dir / "certificate.json").read_text(encoding="utf-8"))
+    assert certificate["claim"] == "s(12) >= 99/25"
+    assert certificate["outer_side"] == "99/25"
+    assert certificate["total_mass"] == "149987/12500"
+    assert certificate["least_cell_mass"] == "12501/12500"
+    assert len(certificate["atoms"]) == 2097
+
+    result = _result("T-017")
+    assert "s(12) >= 99/25" in result["claim"]
+    assert set(result["evidence"]) == {
+        "E-n012-fractional-certificate",
+        "E-fractional-interval-decision",
+    }
+    assert "eight-rung ladder" in result["significance"]["rationale"]
+    assert "149987/12500 = 11.998960" in result["next_rung"]
+    assert "about 6.9 times tighter" in result["next_rung"]
+    assert "about 1.77 times the next-largest" in result["next_rung"]
+
+    primary = _evidence("E-n012-fractional-certificate")
+    assert primary["certificate"] == "cases/n12_fractional_certificate/certificate.json"
+    assert "2,097-atom" in primary["limitations"]
+    assert "12501/12500" in primary["limitations"]
+    historical = _evidence("E-n012-independent-verifier")
+    assert historical["certificate"].endswith("certificate-77-20.json")
+    assert "does not decide the current 99/25 bytes" in historical["limitations"]
+
+    case_text = (repo / "packing/frontier/n-012.md").read_text(encoding="utf-8")
+    readme = (repo / "README.md").read_text(encoding="utf-8")
+    replay = (case_dir / "replay.py").read_text(encoding="utf-8")
+    assert "verified lower bound is `99/25 = 3.96`" in case_text
+    assert "2,097 weighted atoms" in case_text
+    assert "T-017: `s(12) ≥ 99/25`" in readme
+    assert "Eight rungs are retained" in replay
+
+    agenda = (
+        repo
+        / "packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md"
+    ).read_text(encoding="utf-8")
+    assert "2097 atoms took 4866 s" in agenda
+    assert "raw timing transcript" in agenda
+    assert "2097 atoms took about 13000 s" not in agenda
+
+
+def test_retained_figure_anchor_beats_a_later_comparison_rung() -> None:
+    """A historical comparison later in one sentence must not retarget the top-rung figures."""
+    problems, _ = check_result(_result("T-017"))
+    assert problems == []
+
+
+def test_t018_literature_receipt_is_folded_into_canonical_surfaces() -> None:
+    """The novelty audit must live in the source and frontier tiers, not only a review."""
+    repo = RESULTS.parents[2]
+    receipt = "packing/resources/web/s11-lower-bound-literature-audit-2026/README.md"
+    assert (repo / receipt).is_file()
+    assert receipt in _result("T-018")["artifacts"]
+    assert receipt.removeprefix("packing/") in _evidence(
+        "E-n011-fractional-certificate"
+    )["novelty_basis"]["corpus"]
+
+    case_text = (repo / "packing/frontier/n-011.md").read_text(encoding="utf-8")
+    _, frontmatter, _ = case_text.split("---", 2)
+    packing = safe_load(frontmatter)["packing"]
+    locals_ = {resource.get("local") for resource in packing["resources"]}
+    assert "web/s11-lower-bound-literature-audit-2026/README.md" in locals_
+    assert str(packing["source_reviewed"]) == "2026-09-04"
+
+    survey = (
+        repo / "docs/project/research/research-2026-08-22-packing-11-unit-squares.md"
+    ).read_text(encoding="utf-8")
+    assert "2026-09-04: the lower bound moved to `381/100`" in survey
+    assert "s11-lower-bound-literature-audit-2026" in survey
+
+    resources = (repo / "packing/resources/README.md").read_text(encoding="utf-8")
+    assert "[Göbel 1979]" in resources
+    assert "gobel-1979-geometrical-packing-and-covering-problems` is **PDF-only**" in resources
+    assert "Every paper is stored three ways" not in resources
+    assert "first *exact algebraic* solution" not in survey
+    assert "first exact algebraic solution" not in survey
+
+    repaired = _result("T-010")["significance"]["rationale"]
+    assert "Stromquist's 1984 Memo III" in repaired
+    assert "lower bound was stated in 1979" not in repaired
+
+    strategies = safe_load(
+        (repo / "packing/frontier/proof-strategies.yaml").read_text(encoding="utf-8")
+    )["strategies"]
+    by_id = {strategy["id"]: strategy for strategy in strategies}
+    assert "Göbel 1979" in by_id[2]["refs"]
+    assert "Kearney–Shiu 2002" in by_id[5]["refs"]
+    assert "Nagamochi 2005" in by_id[8]["refs"]
+    assert "T-018" in by_id[22]["note"]
+
+
+def test_recovered_trump_note_is_not_described_as_missing() -> None:
+    """D-472: recovery of a source must retire the old acquisition disclaimer."""
+    repo = RESULTS.parents[2]
+    assert (
+        repo / "packing/resources/papers/trump-2023-packing-11-unit-squares.pdf"
+    ).is_file()
+    tutorial = (repo / "TUTORIAL.md").read_text(encoding="utf-8")
+    evidence = EVIDENCE.read_text(encoding="utf-8")
+    assert "His 2023 author writeup is now retained" in tutorial
+    assert "2023 writeup was not retrievable" not in tutorial
+    assert "Trump's personal site is not retained" not in evidence
 
 
 def test_t019_control_has_no_disagreement() -> None:
@@ -183,7 +305,7 @@ def test_resolves_an_explicitly_named_secondary_rung() -> None:
 def test_repeating_the_same_rung_twice_does_not_trip_the_movement_gate() -> None:
     """The movement gate requires two *distinct* fraction-equals-decimal figures.
 
-    `T-017`'s own claim restates its one rung (`79/20 = 3.95`) twice, once for its own
+    `T-017`'s own claim restates its one rung (`99/25 = 3.96`) twice, once for its own
     container side and once compared against a published packing -- the same value, not
     a displaced prior one -- and must not be read as a movement claim just because a
     `movement is` phrase sits elsewhere in the same result.
