@@ -19,14 +19,14 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`9`](n-009.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`10`](n-010.md) | `3 + (1/2)√2` | `3 + (1/2)√2` | `3.707106781187` | `3 + (1/2)√2` | proved | replayed here, external proof | — | 2026-08-25 |
 | [`11`](n-011.md) | `3.87708359002281` | `root(P_trump11, 3.87708359002281417730789706010096)` | `2 + 4/√5` | `381/100` | open | replayed here, audited here | formal lower differs from report | 2026-08-24 |
-| [`12`](n-012.md) | `4` | `4` | `2 + 4/√5` | `197/50` | open | replayed here, audited here | formal lower differs from report | 2026-08-24 |
+| [`12`](n-012.md) | `4` | `4` | `2 + 4/√5` | `79/20` | open | replayed here, audited here | formal lower differs from report | 2026-08-24 |
 | [`13`](n-013.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-25 |
 | [`14`](n-014.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`15`](n-015.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`16`](n-016.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-24 |
-| [`17`](n-017.md) | `4.67553009360455` | `5` | `4.162277660168` | `451/100` | open | replayed here, audited here | formal upper trails report; formal lower differs from report | 2026-08-24 |
-| [`18`](n-018.md) | `(7/2) + (1/2)√7` | `(7/2) + (1/2)√7` | `4.316624790355` | `451/100` | open | replayed here, audited here | formal lower differs from report | 2026-08-24 |
-| [`19`](n-019.md) | `3 + (4/3)√2` | `3 + (4/3)√2` | `4.464101615138` | `451/100` | open | replayed here, audited here | formal lower differs from report | 2026-08-24 |
+| [`17`](n-017.md) | `4.67553009360455` | `5` | `4.162277660168` | `229/50` | open | replayed here, audited here | formal upper trails report; formal lower differs from report | 2026-08-24 |
+| [`18`](n-018.md) | `(7/2) + (1/2)√7` | `(7/2) + (1/2)√7` | `4.316624790355` | `229/50` | open | replayed here, audited here | formal lower differs from report | 2026-08-24 |
+| [`19`](n-019.md) | `3 + (4/3)√2` | `3 + (4/3)√2` | `4.464101615138` | `229/50` | open | replayed here, audited here | formal lower differs from report | 2026-08-24 |
 | [`20`](n-020.md) | `5` | `5` | `4.605551275464` | `1 + √13` | open | replayed here, external proof | — | 2026-08-24 |
 | [`21`](n-021.md) | `5` | `5` | `4.741657386774` | `1 + √14` | open | replayed here, external proof | — | 2026-08-24 |
 | [`22`](n-022.md) | `5` | `5` | `5.0` | `5` | proved | replayed here, external proof | — | 2026-08-25 |

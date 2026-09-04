@@ -570,13 +570,14 @@ results:
 
   - id: T-017
     claim: >-
-      s(12) >= 197/50, by a first-party weighted fractional unavoidable-set
-      certificate at container side 197/50 = 3.94. This is the first lower bound
+      s(12) >= 79/20, by a first-party weighted fractional unavoidable-set
+      certificate at container side 79/20 = 3.95. This is the first lower bound
       specific to n = 12 in the retained corpus: the case previously held
       2 + 4/sqrt(5) = 3.788854..., which is Stromquist's s(11) bound inherited by
       monotonicity and says nothing about twelve squares in particular. The
-      movement is +0.151146, and the case stays open against its conjectured
-      optimum of 4.
+      movement is +0.161146, and the case stays open against its conjectured
+      optimum of 4, now by 0.05. The 197/50 rung it reached first is retained
+      below it.
     scope:
       n_values:
         - 12
@@ -610,6 +611,7 @@ results:
       - E-fractional-interval-decision
     artifacts:
       - packing/cases/n12_fractional_certificate/certificate.json
+      - packing/cases/n12_fractional_certificate/certificate-197-50.json
       - packing/cases/n12_fractional_certificate/certificate-19-5.json
       - packing/cases/n12_fractional_certificate/certificate-77-20.json
       - packing/cases/n12_fractional_certificate/certificate-97-25.json
@@ -707,11 +709,12 @@ results:
       nothing on its own; the loop's stopping condition is the thing to read.
   - id: T-019
     claim: >-
-      s(17) >= 451/100, and s(18) >= 451/100 and s(19) >= 451/100 by monotonicity, from a
+      s(17) >= 229/50, and s(18) >= 229/50 and s(19) >= 229/50 by monotonicity, from a
       first-party weighted fractional unavoidable-set certificate at container side
-      451/100 = 4.51. This displaces Massaccesi's 22529/5000 = 4.5058 (T-015) and the two
+      229/50 = 4.58. This displaces Massaccesi's 22529/5000 = 4.5058 (T-015) and the two
       cases T-016 carried from it, all three of which had held that value since its
-      adoption on 2026-09-03. The movement is +0.0042 at each of the three sizes. It does
+      adoption on 2026-09-03. The movement is +0.0742 at each of the three sizes, and the
+      451/100 rung this result first reached is retained below it. It does
       not reach n = 20, where Nagamochi's 1 + sqrt(13) = 4.6055... is larger.
     scope:
       n_values:
@@ -744,6 +747,7 @@ results:
       - E-fractional-interval-decision
     artifacts:
       - packing/cases/n17_fractional_certificate/certificate.json
+      - packing/cases/n17_fractional_certificate/certificate-451-100.json
       - packing/src/sqpack/fractional/colgen.py
     controls:
       - packing/tests/test_fractional_certificate.py

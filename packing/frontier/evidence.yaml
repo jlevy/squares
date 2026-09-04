@@ -1396,26 +1396,28 @@ evidence:
     replay: uv run --frozen --all-extras python -m cases.n17_fractional_certificate
     replay_status: passed
     limitations: >-
-      Decides five conditions in exact rational arithmetic over 708 atoms on a
+      Decides five conditions in exact rational arithmetic over 1173 atoms on a
       D4-symmetric site set: the atom multiset is closed under the container's D4 group,
-      the total mass is 829681/50000 = 16.59362 and so strictly below 17, the
+      the total mass is 3393147/200000 = 16.965735 and so strictly below 17, the
       181-direction net reaches pi/4, containment B(1 + D) < 1 holds at B = 9977/10000,
       and every reachable event cell at every net direction carries mass at least 1, the
-      least being 200017/200000. The bound proved is the container side itself, 451/100.
+      least being 12501/12500. The bound proved is the container side itself, 229/50.
       It displaces a published value rather than an inherited or closed-form one, so it
-      was decided three times: by the generator's own exact finish, by the coordinator
-      re-loading the file from disk, and by the evaluator written independently from the
-      theorem statement with the implementation withheld -- which took 2709 s summing
-      masses directly over 181 directions and returned the same least covered mass,
-      200017/200000, exactly. That evaluator reproduces Massaccesi's own published
-      22529/5000 from his constants as its control.
+      was decided from its bytes by two verifiers that fail differently: the exact
+      event-cell sweep and the interval branch and bound, which agree on the least
+      covered mass exactly. The rung below it, 451/100, is retained and carries a third
+      decision -- the evaluator written independently from the theorem statement with the
+      implementation withheld, which took 2709 s summing masses directly over 181
+      directions and returned 200017/200000 exactly, and which reproduces Massaccesi's
+      own published 22529/5000 from his constants as its control.
       Scope note: n = 18 and n = 19 are carried by monotonicity, since a packing of
       n >= 17 unit squares contains a packing of 17. Both previously held 4.5058
       inherited the same way from T-015, so the same single certificate moves all three.
       It does not reach n = 20, whose 1 + sqrt(13) = 4.6055 from Nagamochi's closed form
       is larger.
-      Not independent by method: all three decisions are exact-algebraic, so this
-      supports C3 and not C4.
+      This entry is the exact-algebraic decision; C4 rests on
+      E-fractional-interval-decision, which decides the same bytes by a different
+      method.
     source_reviewed: '2026-09-04'
   - id: E-fractional-interval-decision
     claim: lower-bound
