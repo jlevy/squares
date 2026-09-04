@@ -69,10 +69,10 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 
 | Result | `n` | [`V`](epistemics.md#verification) | [`C`](epistemics.md#confirmation) | [`S`](epistemics.md#significance-and-novelty) | [Novelty](epistemics.md#significance-and-novelty) | What it establishes |
 | --- | --- | --- | --- | --- | --- | --- |
-| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S5` | `apparently-novel` | s(11) >= 19/5, by a first-party weighted fractional unavoidable-set certificate at container side 19/5 = 3.8. |
+| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 19/5, by a first-party weighted fractional unavoidable-set certificate at container side 19/5 = 3.8. |
+| [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 197/50, by a first-party weighted fractional unavoidable-set certificate at container side 197/50 = 3.94. |
+| [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 451/100, and s(18) >= 451/100 and s(19) >= 451/100 by monotonicity, from a first-party weighted fractional unavoidable-set certificate at container side 451/100 = 4.51. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
-| [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C3` | `S4` | `apparently-novel` | s(12) >= 197/50, by a first-party weighted fractional unavoidable-set certificate at container side 197/50 = 3.94. |
-| [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C3` | `S4` | `apparently-novel` | s(17) >= 451/100, and s(18) >= 451/100 and s(19) >= 451/100 by monotonicity, from a first-party weighted fractional unavoidable-set certificate at container side 451/100 = 4.51. |
 | [T-014](packing/frontier/RESULTS.md) | 5 | `V3` | `C5` | `S3` | `apparently-novel` | For s = 2 + sqrt(2)/2 and Goebel’s labeled pose P0 in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) -- closed unit squares in [0, s]^2, pairwise disjoint interiors -- equivalently there is no nonconstant continuous feasible path from P0 and no sequence of distinct feasible poses converging to it; hence the n = 5 optimum is rigid at fixed side in the catalogue’s sense. |
 | [T-001](packing/frontier/RESULTS.md) | 17 | `V4` | `C4` | `S3` | `apparently-novel` | Sixteen points make [0, 4426213/1000000]^2 unavoidable for open squares of side above one, so s(17) >= 4426213/1000000 = 4.426213. |
 | [T-002](packing/frontier/RESULTS.md) | 18 | `V4` | `C4` | `S3` | `apparently-novel` | s(18) >= 4426213/1000000, by monotonicity from T-001 (a packing of 18 unit squares contains a packing of 17). |
@@ -3198,12 +3198,12 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 434 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 435 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 91 | asserted something false about the mathematics |
+| soundness | 92 | asserted something false about the mathematics |
 | validity | 116 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 157 | recorded something its own evidence contradicts |
 | robustness | 55 | did not finish, or finished only by luck |
@@ -3211,11 +3211,11 @@ and checked in the gate.
 
 Two observations the log exists to make.
 
-**Seventy-two of the ninety-one soundness defects pointed in the *flattering*
+**Seventy-three of the ninety-two soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-two defects in 434, and no soundness defect
+**The automated gate has caught sixty-two defects in 435, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3225,7 +3225,7 @@ test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
-The generated log currently has 64 open entries: 41 `outstanding` and 23 `contained`.
+The generated log currently has 63 open entries: 40 `outstanding` and 23 `contained`.
 The W9 candidate `think-cyko` owns their systematic risk ordering and bounded repair
 waves; the synopsis names the cases that matter to current claims rather than pretending
 the examples below are the whole backlog.

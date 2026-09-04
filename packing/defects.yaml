@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 434
+count: 435
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13602,3 +13602,49 @@ defects:
   status: fixed
   bead: think-yw5g
   recorded_in: packing/src/sqpack/fractional/generate.py
+- id: D-435
+  title: An enclosing interval run accepted a certificate whose least mass it had pinned below one
+  date: '2026-09-04'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: inspection
+  latent_for: >-
+    since sqpack.fractional.interval was written on 2026-09-04, about three hours; found
+    by reading the acceptance path before registering the verifier as C4 evidence, not by
+    any test
+  severity: high
+  what: >-
+    `interval.verify_by_intervals` decided C4 from the branch-and-bound status alone:
+    `holds` when every direction came back `certified`. But `certified` means only that
+    the search resolved every box against the threshold it was run with, and the two
+    modes run different thresholds. Without `enclose` the threshold is mass 1, so
+    `certified` does mean C4. With `enclose` the threshold is the best point value seen
+    so far, which the search keeps lowering, so `certified` means the minimum was pinned
+    exactly and says nothing about whether the pinned value reaches 1.
+  consequence: >-
+    An enclosing run over the retained n = 12 atoms with one atom lightened by 1/10000
+    returned `accepted` with a width-zero enclosure at 99993/100000 -- the true minimum,
+    correctly measured, and below 1. The measurement was never wrong; the verdict drawn
+    from it was. No retained claim rested on this: every full-net test also asserts the
+    enclosure value, and all three are at or above 1 (50003/50000 at n = 11, 100003/100000
+    at n = 12, exactly 1 for the Massaccesi control), while the sub-net acceptance tests
+    run the mass-1 threshold. The exact verifier is untouched and decides every retained
+    certificate independently. But the gap was in the property whose name is the whole
+    contract, and a future certificate checked only by an enclosing run would have been
+    accepted on a false verdict.
+  fix: >-
+    Fixed on 2026-09-04. `verify_by_intervals` now requires, on top of every direction
+    certifying, that each direction's certified lower bound reach mass 1, and reports
+    `fails` rather than `holds` when a pinned minimum falls short -- an exactly enclosed
+    minimum below 1 is a refutation, not an open question. The comparison is `>=` on the
+    integer mass scale, so the Massaccesi control at exactly 1 still passes, which is the
+    boundary the fix had to preserve.
+  regression: >-
+    `tests/test_fractional_interval.py::test_an_enclosed_run_refuses_a_minimum_it_pinned_below_one`
+    runs the lightened certificate under `enclose` and asserts the direction still comes
+    back `certified`, the enclosure is still the true 99993/100000, and the verdict
+    refuses on C4 -- so it pins the distinction rather than the outcome. The lightened
+    fixture both refusal tests share is now one helper.
+  status: fixed
+  recorded_in: packing/src/sqpack/fractional/interval.py

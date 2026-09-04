@@ -425,12 +425,14 @@ class DirectionSearch:
 
         A box fails to certify because some regions cover only part of it, so the
         useful split is the one that separates their edges: an axis with no edge
-        strictly inside the box is not split, because both children would count
-        exactly the atoms the parent did. The exception is a box not yet provably
-        inside the domain, whose children can still be tightened or dropped. A
+        strictly inside the box is never split, because both children would count
+        exactly the atoms the parent did. That holds at the domain boundary too --
+        the intersection with the domain is handled by ``tighten``, and a strip
+        along the boundary with no edge inside already carries its cell's mass. A
         box that can be split along neither axis is stalled: it is thinner than
         the resolution floor across every seam it straddles, and returned as
-        undecided rather than sliced along its length forever.
+        undecided rather than sliced along its length forever, which an earlier
+        version of this rule did at a boundary that coincided with a region edge.
         """
         # Inner edges, because those are the ones a child must clear to count an
         # atom the parent could not; the outer ones matter only to point bounds.
@@ -438,16 +440,10 @@ class DirectionSearch:
         a, b, c, d = (boxes[:, i : i + 1] for i in range(4))
         u_edges = (((a < ulo) & (ulo < b)) | ((a < uhi) & (uhi < b))).sum(axis=1)
         v_edges = (((c < vlo) & (vlo < d)) | ((c < vhi) & (vhi < d))).sum(axis=1)
-        inside = (
-            self.admissible(boxes[:, 0], boxes[:, 2])
-            & self.admissible(boxes[:, 1], boxes[:, 2])
-            & self.admissible(boxes[:, 0], boxes[:, 3])
-            & self.admissible(boxes[:, 1], boxes[:, 3])
-        )
         width_u = boxes[:, 1] - boxes[:, 0]
         width_v = boxes[:, 3] - boxes[:, 2]
-        can_u = (width_u > RESOLUTION_FLOOR) & ((u_edges > 0) | ~inside)
-        can_v = (width_v > RESOLUTION_FLOOR) & ((v_edges > 0) | ~inside)
+        can_u = (width_u > RESOLUTION_FLOOR) & (u_edges > 0)
+        can_v = (width_v > RESOLUTION_FLOOR) & (v_edges > 0)
         prefer_u = (u_edges > v_edges) | ((u_edges == v_edges) & (width_u >= width_v))
         along_u = can_u & (prefer_u | ~can_v)
         along_v = can_v & ~along_u
@@ -486,7 +482,7 @@ class DirectionSearch:
         upper: int | None = None
         witness: tuple[float, float] | None = None
         boxes = 0
-        stalled = 0
+        stuck_bounds: list[int] = []
         while pending:
             batch = pending.pop()
             if len(batch) > BATCH:
@@ -508,6 +504,7 @@ class DirectionSearch:
                     upper = int(high[best])
                     witness = (float(cu[admissible][best]), float(cv[admissible][best]))
                     if prune_at is not None and upper < prune_at:
+                        stalled = sum(1 for value in stuck_bounds if value < prune_at)
                         return DirectionOutcome(
                             self.label, "refuted", None, upper, witness, boxes, stalled
                         )
@@ -520,11 +517,17 @@ class DirectionSearch:
                 lower = least if lower is None else min(lower, least)
             children, stuck = self._split(tight[~settled])
             if len(stuck):
-                stalled += len(stuck)
-                least = int(self.lower_bound(stuck).min())
-                lower = least if lower is None else min(lower, least)
+                stuck_bounds.extend(int(value) for value in self.lower_bound(stuck))
             if len(children):
                 pending.append(children)
+        if stuck_bounds:
+            lower = min(stuck_bounds) if lower is None else min(lower, *stuck_bounds)
+        # A box stalls against the threshold in force when it is reached; without
+        # ``prune_at`` that threshold is the best point value so far, which the
+        # search keeps lowering. Judged against the final one, a box whose bound
+        # already reaches it cannot hide a smaller value and is no stall at all.
+        final = prune_at if prune_at is not None else upper
+        stalled = sum(1 for value in stuck_bounds if final is None or value < final)
         status: Literal["certified", "undecided"] = "certified" if stalled == 0 else "undecided"
         return DirectionOutcome(self.label, status, lower, upper, witness, boxes, stalled)
 
@@ -659,10 +662,18 @@ def verify_by_intervals(
         if outcomes[-1].status == "refuted":
             break
     statuses = {o.status for o in outcomes}
+    # Certified means only that the search resolved every box against the
+    # threshold it was run with, and under ``enclose`` that threshold is the
+    # minimum itself: it pins the least mass exactly without ever asking whether
+    # the value it pinned reaches 1. Ask here, so that acceptance means the same
+    # thing in both modes. Without this an enclosed run accepted the retained
+    # atoms with one lightened by 1/10000, reporting the true 99993/100000 as a
+    # width-zero enclosure and calling it a pass (D-435).
+    reaches_one = all(o.lower is not None and o.lower >= atoms.scale for o in outcomes)
     if "refuted" in statuses:
         status: Status = "fails"
     elif statuses == {"certified"}:
-        status = "holds"
+        status = "holds" if reaches_one else "fails"
     else:
         status = "undecided"
     worst = min(

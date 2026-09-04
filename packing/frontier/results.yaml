@@ -581,7 +581,7 @@ results:
       n_values:
         - 12
     verification: V4
-    confirmation: C3
+    confirmation: C4
     significance:
       score: 4
       rationale: >-
@@ -607,6 +607,7 @@ results:
     evidence:
       - E-n012-fractional-certificate
       - E-n012-independent-verifier
+      - E-fractional-interval-decision
     artifacts:
       - packing/cases/n12_fractional_certificate/certificate.json
       - packing/cases/n12_fractional_certificate/certificate-19-5.json
@@ -619,10 +620,11 @@ results:
     controls:
       - packing/tests/test_fractional_certificate.py
     next_rung: >-
-      C4 needs a check by a different method value -- the independent
-      re-derivation is done and agrees, but it is exact-algebraic like the first,
-      so an interval-certified decision would be the one that moves the rung. C5
-      needs the operator to read the retained independent review. The bound
+      C4 is reached. The independent re-derivation agrees but is
+      exact-algebraic like the first; what moved the rung is the interval-certified
+      decision, which bounds coverage by branch and bound over boxes of centres with
+      directed rounding and shares no modelling assumption with the sweep. C5
+      needs a review artifact by someone outside the project. The bound
       itself: the ladder 19/5, 77/20, 97/25, 39/10, 393/100, 197/50 was climbed once the
       separation oracle was corrected to score the cells the verifier decides
       (D-434), and every rung is retained. The hard ceiling from the shrink at 181
@@ -641,7 +643,7 @@ results:
       n_values:
         - 11
     verification: V4
-    confirmation: C3
+    confirmation: C4
     significance:
       score: 5
       rationale: >-
@@ -665,6 +667,7 @@ results:
       It raises no other case: every n > 11 already carries a larger verified bound.
     evidence:
       - E-n011-fractional-certificate
+      - E-fractional-interval-decision
     artifacts:
       - packing/cases/n11_fractional_certificate/certificate.json
       - packing/cases/n11_fractional_certificate/certificate-189-50.json
@@ -672,11 +675,16 @@ results:
     controls:
       - packing/tests/test_fractional_certificate.py
     next_rung: >-
-      C4 needs a decision by a different method value, an interval-certified one rather
-      than a second exact-algebraic pass. C5 needs a review artifact by someone outside
-      the project. The bound itself: the covering value at 3.81 sat at 11.000 and at
-      3.83 at 11.105, both still descending when the block ended, so the next rung is a
-      search question and not a rung change.
+      C4 is reached by the interval-certified decision, which is independent in method
+      and, deciding coverage on the doubled net, never invokes the D4 reflection and so
+      does not need C0 at all. C5 needs a review artifact by someone outside the project.
+      The bound itself: 3.81 is the live rung and is not settled either way. With the
+      corrected oracle and a 25022-row program the covering value there came down to
+      10.8603, well below eleven, but the row loop was still finding violated placements
+      when it stopped, so that number is an estimate from below and not the restricted
+      optimum. The rationalised candidate was refused by the exact sweep at directions 55
+      to 63, least cell 199531/200000 -- the row loop's own unconverged margin showing up
+      where it had not looked. Whether 3.81 converges below eleven is the open question.
   - id: T-019
     claim: >-
       s(17) >= 451/100, and s(18) >= 451/100 and s(19) >= 451/100 by monotonicity, from a
@@ -691,7 +699,7 @@ results:
         - 18
         - 19
     verification: V4
-    confirmation: C3
+    confirmation: C4
     significance:
       score: 4
       rationale: >-
@@ -713,14 +721,15 @@ results:
       rungs.
     evidence:
       - E-n017-fractional-certificate
+      - E-fractional-interval-decision
     artifacts:
       - packing/cases/n17_fractional_certificate/certificate.json
       - packing/src/sqpack/fractional/colgen.py
     controls:
       - packing/tests/test_fractional_certificate.py
     next_rung: >-
-      C4 needs a decision by a different method value, an interval-certified one; all
-      three decisions here are exact-algebraic. C5 needs a review artifact by someone
+      C4 is reached by the interval-certified decision, the first here that is not
+      exact-algebraic. C5 needs a review artifact by someone
       outside the project. The bound itself: Massaccesi's own atoms give a covering value
       of 203/12 at 4.5058, so the headroom below seventeen was 0.083 of mass and 451/100
       spends most of it -- the certificate's total is 16.5936, leaving 0.406. Further

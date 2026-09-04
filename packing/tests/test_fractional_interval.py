@@ -20,6 +20,7 @@ import pytest
 
 from cases.n11_fractional_certificate.replay import load as load_n11
 from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH
+from cases.n12_fractional_certificate.replay import declared as declared_n12
 from cases.n12_fractional_certificate.replay import load as load_n12
 from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.interval import (
@@ -41,6 +42,10 @@ from tests.test_fractional_certificate import retained_certificate
 SUB_NET = ("0", "1", "45", "90", "135", "180", "1'", "90'", "180'")
 
 C4 = "C4 every admissible centre covers mass 1"
+
+# The n = 12 case file moves as the ladder climbs; the 393/100 rung this verifier was
+# asked to decide is retained under its own name, and both are decided below.
+RETAINED_393_100 = FIRST_RUNG_PATH.with_name("certificate-393-100.json")
 
 
 def _exact_rotation(tangent: Fraction) -> tuple[Fraction, Fraction]:
@@ -238,12 +243,13 @@ def test_a_provably_admissible_centre_is_exactly_admissible() -> None:
 # --- acceptance ---------------------------------------------------------------
 
 
-def test_the_retained_n12_certificate_is_accepted_on_the_sub_net() -> None:
-    verdict = verify_by_intervals(load_n12(), directions=SUB_NET)
-    assert verdict.accepted, verdict.failures
-    assert len(verdict.directions) == len(SUB_NET)
-    assert all(outcome.status == "certified" for outcome in verdict.directions)
-    assert sum(outcome.stalled for outcome in verdict.directions) == 0
+def test_both_n12_certificates_are_accepted_on_the_sub_net() -> None:
+    for certificate in (load_n12(RETAINED_393_100), load_n12()):
+        verdict = verify_by_intervals(certificate, directions=SUB_NET)
+        assert verdict.accepted, verdict.failures
+        assert len(verdict.directions) == len(SUB_NET)
+        assert all(outcome.status == "certified" for outcome in verdict.directions)
+        assert sum(outcome.stalled for outcome in verdict.directions) == 0
 
 
 def test_the_retained_n11_certificate_is_accepted_on_the_sub_net() -> None:
@@ -252,15 +258,29 @@ def test_the_retained_n11_certificate_is_accepted_on_the_sub_net() -> None:
     assert verdict.total_mass == Fraction(43391, 4000)
 
 
-def test_the_retained_n12_certificate_is_accepted_on_the_full_doubled_net() -> None:
+def test_the_393_100_certificate_is_accepted_on_the_full_doubled_net() -> None:
     """The interval-certified decision of s(12) >= 393/100, every direction."""
-    certificate = load_n12()
+    certificate = load_n12(RETAINED_393_100)
     verdict = verify_by_intervals(certificate, enclose=True)
     assert verdict.accepted, verdict.failures
     assert len(verdict.directions) == 361
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
     assert verdict.enclosure == (Fraction(100003, 100000), Fraction(100003, 100000))
     assert certificate.bounded_side == Fraction(393, 100)
+
+
+def test_the_live_n12_certificate_is_accepted_on_the_full_doubled_net() -> None:
+    """Whatever rung certificate.json holds, decided in full against its own record."""
+    certificate = load_n12()
+    record = declared_n12()
+    verdict = verify_by_intervals(certificate, enclose=True)
+    assert verdict.accepted, verdict.failures
+    assert len(verdict.directions) == 361
+    assert sum(outcome.stalled for outcome in verdict.directions) == 0
+    assert record["claim"] == f"s(12) >= {certificate.bounded_side}"
+    enclosure = verdict.enclosure
+    assert enclosure is not None
+    assert str(enclosure[0]) == str(enclosure[1]) == record["least_cell_mass"]
 
 
 def test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net() -> None:
@@ -347,7 +367,7 @@ def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> No
     recomputed in rational arithmetic and must be below 1, so the interval
     refusal is not taken on trust either.
     """
-    certificate = load_n12()
+    certificate = load_n12(RETAINED_393_100)
     too_large = Certificate(
         n=certificate.n,
         outer_side=Fraction(4),
@@ -370,11 +390,9 @@ def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> No
     assert _exact_mass(too_large, rotation, point) < 1
 
 
-def test_lowering_one_atom_by_a_ten_thousandth_is_refused() -> None:
-    """C4 is tight at 1.00003, so a tenth of a thousandth off any atom over the
-    tightest cell is visible. Symmetry is not what catches it here: this
-    verifier never checks C0, so the refusal has to come from coverage."""
-    certificate = load_n12()
+def _lightened_n12() -> Certificate:
+    """The 393/100 certificate with one atom over the tightest cell 1/10000 light."""
+    certificate = load_n12(RETAINED_393_100)
     upright = Direction("0", Fraction(1), Fraction(0), Fraction(0), Fraction(1))
     _, (u, v) = minimum_covered_mass(
         certificate.atoms, upright, certificate.outer_side, certificate.square_side
@@ -388,19 +406,43 @@ def test_lowering_one_atom_by_a_ten_thousandth_is_refused() -> None:
     atoms = list(certificate.atoms)
     atom = atoms[index]
     atoms[index] = Atom(atom.label, atom.x, atom.y, atom.weight - Fraction(1, 10000))
-    thin = Certificate(
+    return Certificate(
         n=certificate.n,
         outer_side=certificate.outer_side,
         square_side=certificate.square_side,
         atoms=tuple(atoms),
         half_tangents=certificate.half_tangents,
     )
-    verdict = verify_by_intervals(thin)
+
+
+def test_lowering_one_atom_by_a_ten_thousandth_is_refused() -> None:
+    """C4 is tight at 1.00003, so a tenth of a thousandth off any atom over the
+    tightest cell is visible. Symmetry is not what catches it here: this
+    verifier never checks C0, so the refusal has to come from coverage."""
+    verdict = verify_by_intervals(_lightened_n12())
     assert verdict.failures == (C4,)
     assert verdict.directions[-1].status == "refuted"
     upper = verdict.directions[-1].upper
     assert upper is not None
     assert Fraction(upper, verdict.scale) == Fraction(100003, 100000) - Fraction(1, 10000)
+
+
+def test_an_enclosed_run_refuses_a_minimum_it_pinned_below_one() -> None:
+    """Enclosing the minimum is not the same question as whether it reaches 1.
+
+    Under ``enclose`` a box is settled against the best point value seen rather
+    than against mass 1, so a search over lightened atoms resolves every box,
+    reports a width-zero enclosure at the true 99993/100000, and has decided
+    nothing about C4. The verdict must still refuse it (D-435).
+    """
+    verdict = verify_by_intervals(_lightened_n12(), enclose=True, directions=("0",))
+    assert verdict.failures == (C4,)
+    assert not verdict.accepted
+    assert verdict.directions[-1].status == "certified"
+    assert verdict.enclosure == (
+        Fraction(100003, 100000) - Fraction(1, 10000),
+        Fraction(100003, 100000) - Fraction(1, 10000),
+    )
 
 
 def test_mass_reaching_n_is_refused() -> None:
@@ -507,7 +549,8 @@ def test_the_retained_certificates_have_no_seam_the_method_cannot_close() -> Non
     directions including reflected ones, and would flag a future certificate
     that happened to land on a seam.
     """
-    for certificate in (load_n12(), load_n11(), retained_certificate()):
+    certificates = (load_n12(RETAINED_393_100), load_n12(), load_n11(), retained_certificate())
+    for certificate in certificates:
         for index, reflected in ((0, False), (1, False), (57, True), (90, False), (180, True)):
             cosine, sine = _exact_rotation(certificate.half_tangents[index])
             rotation = (sine, cosine) if reflected else (cosine, sine)

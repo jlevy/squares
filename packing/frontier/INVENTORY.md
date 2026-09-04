@@ -8,7 +8,7 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **47** evidence records. **38** are formal; **32** of those were established here.
+- **48** evidence records. **39** are formal; **33** of those were established here.
 - **6** rest on an argument made elsewhere, of which **4** have been read by nobody here.
 - **13** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -67,12 +67,13 @@ results, it is a statement about what this repository has itself examined.
 | `E-n012-independent-verifier` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n011-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n017-fractional-certificate` | 3 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-fractional-interval-decision` | 5 | lower-bound | verified | strict inequalities only | here | - | previously-published |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 5, verified 38
-- **method**: exact-algebraic 29, interval-certified 2, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 5
-- **novelty**: apparently-novel 13, common-knowledge 4, not assessed 4, previously-published 26
+- **assurance**: numerically-checked 4, reported 5, verified 39
+- **method**: exact-algebraic 29, interval-certified 3, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 5
+- **novelty**: apparently-novel 13, common-knowledge 4, not assessed 4, previously-published 27
 
 The `cases` column is how many of the hundred frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited by ninety-eight cases is the catalogue everyone reports from and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

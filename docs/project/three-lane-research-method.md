@@ -60,7 +60,7 @@ declare target ──► lane runs ──► coordinator verifies FROM DISK ─�
       └──── redirect on refuted premise ◄─── control fails
 ```
 
-Four rules make it work.
+Six rules make it work.
 
 **Run the control before the target.** The generator reproduced Massaccesi’s published
 `n = 17` optimum (203/12, from zero weights, never told the answer) before any new bound
@@ -87,6 +87,34 @@ That pattern — converged, then refused narrowly — is the signature of the se
 optimising against a weaker constraint set than the verifier enforces.
 It was, and fixing it (`D-434`) unlocked four rungs and the `n = 11` result within the
 hour.
+
+**Check what the loop stopped on before diagnosing why the verifier refused.** That
+signature has a twin which looks identical from outside and means the opposite.
+At `n = 11`, side `3.81`, a program with 25,022 rows reported an objective of `10.8603`
+— comfortably below eleven — and the exact sweep refused it at directions 55 to 63,
+least cell `199531/200000`. Converged, then refused by a hair: the `D-434` pattern
+exactly.
+Except the row loop’s own last line read `least 0.9999`, so it was still finding
+violated placements when it stopped.
+The objective was an estimate from below rather than the restricted optimum, and the
+verifier was deciding cells the loop had not finished covering.
+Neither component was wrong; the run was simply unfinished.
+A candidate is a candidate only when the row loop stopped because it could find no
+violated placement. Report the loop’s final `least` alongside its objective — an
+objective below `n` with `least` short of `1` is not a result.
+
+**A verdict must mean one thing in every mode the verifier runs in.** The interval
+verifier decides coverage by branch and bound against a threshold it takes from its
+mode: mass `1` when asked whether the certificate holds, the best value seen so far when
+asked to enclose the minimum.
+Both are right. Reading the same `certified` status out of both was not.
+Under enclosure that status says the minimum was pinned, not that the pinned value
+reaches `1` — so the verifier accepted atoms whose least covered mass it had itself
+measured, correctly, at `99993/100000` (`D-435`). The defect sat in the property whose
+name is the whole contract, and no test caught it, because every retained certificate
+passes under either reading.
+Read the acceptance path itself before registering an instrument as evidence; passing
+tests only show that the instrument agrees with the cases you already believed.
 
 ## Guards for unattended running
 

@@ -1388,3 +1388,64 @@ evidence:
       Not independent by method: all three decisions are exact-algebraic, so this
       supports C3 and not C4.
     source_reviewed: '2026-09-04'
+  - id: E-fractional-interval-decision
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+        - 12
+        - 17
+        - 18
+        - 19
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    novelty: previously-published
+    source_key: "[Burns n17]"
+    certificate: cases/n11_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras --group dev pytest tests/test_fractional_interval.py
+    replay_status: passed
+    limitations: >-
+      A second decision of the same certificates by interval arithmetic with directed
+      rounding, existing so that the two decisions can fail differently. Every operation
+      steps one ulp outward after a correctly rounded double operation, with no interval
+      library; rationals enter at one boundary where exact comparison happens, and atom
+      masses are exact integers on the certificate's own weight scale, so the sums round
+      nothing.
+      It is independent in method, not merely in code. C4 is decided by branch and bound
+      over boxes of centres -- for a box, an atom counts only if its coverage rectangle
+      contains the whole box, which is a lower bound by construction and is tested
+      against the inner enclosure of that rectangle so an unresolved atom is dropped
+      rather than assumed. There is no event grid, no difference array and no polygon
+      clipping, so it shares no modelling assumption with the exact route.
+      It also rests on fewer hypotheses. C4 is decided on the doubled net -- theta_k and
+      pi/2 - theta_k, 361 directions -- so the D4 reflection argument is never invoked
+      and C0 is not needed at all, which matters because interval arithmetic cannot
+      establish the equality C0 asserts.
+      Results, 361 of 361 directions certified in each case: n = 11 at 19/5 in 1,195,755
+      boxes and 12.2 s; n = 12 at 197/50 in 1,846,439 boxes and 18.9 s, and at 393/100 in
+      1,486,159 and 13.3 s; Massaccesi's published n = 17 certificate, the control that
+      tests the verifier rather than the certificate, in 966,903 boxes and 5.7 s,
+      returning 22529/5000. In minimisation mode every enclosure of the least covered
+      mass has width zero and equals the exact verifier's value to the digit:
+      50003/50000 at n = 11, 100003/100000 at n = 12. Refusals: the n = 12 atoms in a
+      side-4 container are refuted at direction 0 after 407 boxes, and an atom lowered by
+      1/10000 after 127.
+      What it does not add: no new bound, and no protection against a wrong theorem
+      statement, which both routes share. Its own failure mode is exhibited rather than
+      claimed -- a leave-edge exactly on another's enter-edge stalls at the 1e-12 floor
+      and is reported undecided, never accepted, demonstrated on a tiled grid where 2,868
+      boxes stall and perturbing the seams by 1/100 certifies in 1,351. An exact census
+      confirms no such seam occurs in any retained certificate.
+      Its acceptance path was audited before this entry was written, and one gap was
+      found and closed: enclosing runs settled boxes against the best point value rather
+      than against mass 1, so they pinned the minimum exactly and then read `certified`
+      as though it answered C4. The lightened-atom fixture was accepted that way at a
+      correctly measured 99993/100000 (D-435). The figures above were measured before the
+      fix and none of them moves: it changes only the verdict drawn when a pinned minimum
+      falls short of 1, and every enclosure here is at or above 1. The verdict now
+      requires the certified lower bound to reach mass 1 in both modes, and the retained
+      certificates are re-decided under it by the replay this entry names.
+    source_reviewed: '2026-09-04'
