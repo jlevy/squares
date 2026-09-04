@@ -150,8 +150,8 @@ def test_the_retained_n12_certificate_replays_and_is_accepted() -> None:
     """
     certificate = load()
     assert certificate.n == 12
-    assert certificate.bounded_side == Fraction(39, 10)
-    assert certificate.total_mass == Fraction(470993, 40000)
+    assert certificate.bounded_side == Fraction(393, 100)
+    assert certificate.total_mass == Fraction(1194221, 100000)
     assert certificate.total_mass < 12
 
     verdict = verify(certificate)
@@ -159,7 +159,7 @@ def test_the_retained_n12_certificate_replays_and_is_accepted() -> None:
     assert verdict.minimum_cell_mass >= 1
 
     record = declared()
-    assert record["claim"] == "s(12) >= 39/10"
+    assert record["claim"] == "s(12) >= 393/100"
     assert record["total_mass"] == str(certificate.total_mass)
     assert record["least_cell_mass"] == str(verdict.minimum_cell_mass)
 
@@ -176,7 +176,7 @@ def test_the_first_rung_at_19_5_still_replays() -> None:
 
 
 def test_the_n12_certificate_improves_the_inherited_bound() -> None:
-    """39/10 beats 2 + 4/sqrt(5), which n = 12 only held by monotonicity."""
+    """393/100 beats 2 + 4/sqrt(5), which n = 12 only held by monotonicity."""
     bound = load().bounded_side
     # L > 2 + 4/sqrt(5) iff (L - 2) > 4/sqrt(5) iff (L - 2)^2 * 5 > 16,
     # both sides being positive. Decided in exact rationals, not in floats.
@@ -329,3 +329,32 @@ def test_the_n11_calibration_rung_below_stromquist_also_verifies() -> None:
     assert certificate.bounded_side == Fraction(189, 50)
     assert (certificate.bounded_side - 2) ** 2 * 5 < 16
     assert verify(certificate).accepted
+
+
+def test_every_retained_n12_rung_still_verifies() -> None:
+    """The ladder is evidence, not clutter: each rung must still be true.
+
+    Kept cheap by deciding each rung on a coarse sub-net; the full 181-direction
+    decision for the top rung is the exhaustive_exact test above.
+    """
+    package = Path(__file__).parents[1] / "cases/n12_fractional_certificate"
+    rungs = {
+        "certificate-19-5.json": Fraction(19, 5),
+        "certificate-77-20.json": Fraction(77, 20),
+        "certificate-97-25.json": Fraction(97, 25),
+        "certificate-39-10.json": Fraction(39, 10),
+    }
+    for name, side in rungs.items():
+        rung = load(package / name)
+        assert rung.bounded_side == side
+        assert rung.total_mass < 12
+        coarse = Certificate(
+            n=rung.n,
+            outer_side=rung.outer_side,
+            square_side=rung.square_side,
+            atoms=rung.atoms,
+            half_tangents=rung.half_tangents[::30],
+        )
+        verdict = verify(coarse)
+        assert verdict.minimum_cell_mass is not None
+        assert verdict.minimum_cell_mass >= 1, f"{name} lost coverage"
