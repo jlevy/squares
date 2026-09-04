@@ -1158,3 +1158,66 @@ evidence:
       end to end, replayable per direction with --calibrate ORDINAL. Same method
       family as E-n017-massaccesi-source-replay, so together they support C3, not C4.
     source_reviewed: '2026-09-03'
+  - id: E-n012-fractional-certificate
+    claim: lower-bound
+    scope:
+      n_values:
+        - 12
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained literature archive under packing/resources/ and the frontier
+        source register, reviewed for n = 12 lower bounds on 2026-08-24 and again
+        when this entry was written. The archive holds Stromquist 2003, Bentz 2010,
+        Nagamochi 2005, Friedman's record tables and the Burns--Massaccesi n = 17
+        note. It does not hold a systematic sweep of recent arXiv preprints, which
+        is the known hole and the place a refutation would come from.
+      searched: >-
+        The corpus was searched for any lower bound specific to n = 12 rather than
+        inherited from n = 11 by monotonicity. The frontier case body records the
+        result of that search in its own words: "Nothing specific to n = 12 has
+        ever been proved." No source in the corpus states a bound above
+        2 + 4/sqrt(5) = 3.788854 for this case.
+      novel_object: >-
+        The certificate and the bound it carries, not the method. The weighted
+        fractional unavoidable-set technique is Burns's, with Massaccesi's
+        parameters; what is new here is a first-party certificate instance at
+        n = 12 and side 19/5, and the generator that produced it. Anyone holding
+        Burns's note could have run this search.
+    certificate: cases/n12_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras python -m cases.n12_fractional_certificate
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over the retained
+      113-atom certificate: the atom multiset is closed under the container's D4
+      group (checked, not inferred from the orbit construction that built it), the
+      total mass is 191/16 and so strictly below 12, the 181-direction net reaches
+      pi/4, the containment B(1 + D) < 1 holds at B = 9973/10000, and every
+      reachable event cell at every net direction carries mass at least 1, with the
+      least exactly 1. The bound proved is the container side itself, 77/20, and not
+      L/B; the shrunken square lies inside a unit square in the same container and
+      absorbs the net's angular gap rather than rescaling anything.
+      Independence is partial. The generator that proposed the weights (a float
+      covering LP by row generation) and the verifier that accepted them (exact
+      Fractions over a polygon-clipped centre domain) are separate implementations
+      with separate arithmetic, and a brute-force membership scan over 48,400
+      placements per direction agrees with the sweep at seven sampled directions.
+      But both live in sqpack.fractional and share the projection convention and
+      the coverage predicate, so their agreement cannot detect an error there. No
+      second party has checked this certificate; that review is outstanding and is
+      why this entry is scored no higher than it is.
+      The same instrument reached 19/5 first, with 68 atoms and mass 58/5; that
+      certificate is retained beside this one and replayed by the same command. At
+      side 39/10 the covering program lands on exactly 12 over the settings tried,
+      so 77/20 is where this setting family stops, not where the method does.
+      The instrument reproduces Massaccesi's published n = 17 optimum exactly
+      (16.916667 = 203/12, found from zero weights without being given the target)
+      and refuses the falsifying control: at n = 12 and side 401/100, where twelve
+      unit squares demonstrably fit, the same pipeline converges to exactly 16 on
+      all four settings tried and certifies nothing.
+    source_reviewed: '2026-09-04'

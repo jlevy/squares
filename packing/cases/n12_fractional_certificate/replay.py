@@ -1,8 +1,12 @@
-"""Load the retained n = 12 certificate and hand it to the exact verifier.
+"""Load the retained n = 12 certificates and hand them to the exact verifier.
 
-The JSON carries exact rationals as strings, so a replay reconstructs the same
-object the generator proposed. Nothing here decides anything: the verdict comes
-from `sqpack.fractional.certificate.verify`, and this module only feeds it.
+Two certificates are retained. `certificate.json` carries the bound the case
+holds, s(12) >= 77/20; `certificate-19-5.json` is the first rung the same
+instrument reached, kept because it is a smaller object (68 atoms against 113)
+and the one the discovery commit cites. The JSON carries exact rationals as
+strings, so a replay reconstructs the same object the generator proposed.
+Nothing here decides anything: the verdict comes from
+`sqpack.fractional.certificate.verify`, and this module only feeds it.
 """
 
 from __future__ import annotations
@@ -15,6 +19,7 @@ from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.model import Atom
 
 CERTIFICATE_PATH = Path(__file__).with_name("certificate.json")
+FIRST_RUNG_PATH = Path(__file__).with_name("certificate-19-5.json")
 
 
 def load(path: Path = CERTIFICATE_PATH) -> Certificate:

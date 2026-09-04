@@ -497,7 +497,7 @@ Status: **paused**. Run one ten-hour autonomous block after the operator has rev
 | H-058 | unresolved | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 2 | 115.667m agent + 115.7m wall |
 | H-059 | confirmed | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 1 | 92m agent + 1s wall |
 | H-060 | confirmed | proof | At the exact container side 2 + sqrt(2)/2, Goebel's exact n = 5 packin |  | 1 | 11s wall |
-| H-061 | blocked | proof | There is a finite measure of rational-weight point atoms in [0, 19/5]^ |  | 0 |  |
+| H-061 | open | proof | There is a finite measure of rational-weight point atoms in [0, 19/5]^ |  | 0 |  |
 
 ## Needs review — held for a human, not decided
 

@@ -64,14 +64,19 @@ hypothesis:
     ten points alone are avoidable by construction, so they are not a certificate at any
     mass. The instrument is frozen and reviewed target-blind before this hypothesis is
     evaluated.
-  instrument_ready: false
+  instrument_ready: true
   regime: >-
     twelve closed unit squares with pairwise disjoint interiors in the closed square
     [0, 19/5]^2 at every orientation; exact rational arithmetic over Q throughout; the
     finite direction set and shrunken side declared in the certificate and covered by
     the shrink-and-scaling lemma the BC-150 packet writes out -- with 181 directions
-    and B = 9973/10000 the certificate is a unit-square certificate at the effective
-    side 38000/9973, about 0.0103 above 19/5; no numerical tolerance enters the decision
+    and B = 9973/10000 the bound proved is the container side itself, 19/5, and not
+    L/B: the shrunken square sits inside a unit square in the same container and exists
+    only to absorb the net's angular gap, so it rescales nothing. This corrects the
+    registration, which read the effective side as 38000/9973 and would have claimed
+    0.0103 more than the certificate carries; measured against the retained n = 17
+    certificate, L is exactly Massaccesi's published 4.5058 where L/B gives 4.51799.
+    No numerical tolerance enters the decision
   instance: {axis: n, point: 12}
   priority: 1
   cost_estimate: >-

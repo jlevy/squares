@@ -13,7 +13,7 @@ from fractions import Fraction
 
 import pytest
 
-from cases.n12_fractional_certificate.replay import declared, load
+from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH, declared, load
 from cases.n17_weighted_certificate.fixture import load_retained_fixture
 from sqpack.fractional.certificate import Certificate, verify
 from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
@@ -136,14 +136,14 @@ def test_the_retained_n12_certificate_replays_and_is_accepted() -> None:
     """The n = 12 result, replayed from its retained file and re-decided.
 
     This is the whole claim in one assertion: a certificate whose atoms carry
-    D4 symmetry, whose mass is 58/5 and so strictly under 12, and whose least
+    D4 symmetry, whose mass is 191/16 and so strictly under 12, and whose least
     covered mass is exactly 1, proves that twelve unit squares do not fit in a
-    container of side 19/5.
+    container of side 77/20.
     """
     certificate = load()
     assert certificate.n == 12
-    assert certificate.bounded_side == Fraction(19, 5)
-    assert certificate.total_mass == Fraction(58, 5)
+    assert certificate.bounded_side == Fraction(77, 20)
+    assert certificate.total_mass == Fraction(191, 16)
     assert certificate.total_mass < 12
 
     verdict = verify(certificate)
@@ -151,15 +151,26 @@ def test_the_retained_n12_certificate_replays_and_is_accepted() -> None:
     assert verdict.minimum_cell_mass == 1
 
     record = declared()
-    assert record["claim"] == "s(12) >= 19/5"
+    assert record["claim"] == "s(12) >= 77/20"
     assert record["total_mass"] == str(certificate.total_mass)
     assert record["least_cell_mass"] == str(verdict.minimum_cell_mass)
 
 
+def test_the_first_rung_at_19_5_still_replays() -> None:
+    """The smaller certificate the instrument found first is kept and stays true."""
+    certificate = load(FIRST_RUNG_PATH)
+    assert certificate.bounded_side == Fraction(19, 5)
+    assert certificate.total_mass == Fraction(58, 5)
+    assert len(certificate.atoms) == 68
+    verdict = verify(certificate)
+    assert verdict.accepted, verdict.failures
+    assert declared(FIRST_RUNG_PATH)["claim"] == "s(12) >= 19/5"
+
+
 def test_the_n12_certificate_improves_the_inherited_bound() -> None:
-    """19/5 beats 2 + 4/sqrt(5), which n = 12 only held by monotonicity."""
+    """77/20 beats 2 + 4/sqrt(5), which n = 12 only held by monotonicity."""
     bound = load().bounded_side
-    # 19/5 > 2 + 4/sqrt(5) iff (19/5 - 2) > 4/sqrt(5) iff (19/5 - 2)^2 * 5 > 16,
+    # L > 2 + 4/sqrt(5) iff (L - 2) > 4/sqrt(5) iff (L - 2)^2 * 5 > 16,
     # both sides being positive. Decided in exact rationals, not in floats.
     assert bound > 2
     assert (bound - 2) ** 2 * 5 > 16

@@ -559,3 +559,52 @@ results:
     next_rung: >-
       Rises with T-015; a bespoke n = 18 or n = 19 certificate stronger than the
       inherited bound would be a new result, not a rung change.
+  - id: T-017
+    claim: >-
+      s(12) >= 77/20, by a first-party weighted fractional unavoidable-set
+      certificate at container side 77/20 = 3.85. This is the first lower bound
+      specific to n = 12 in the retained corpus: the case previously held
+      2 + 4/sqrt(5) = 3.788854..., which is Stromquist's s(11) bound inherited by
+      monotonicity and says nothing about twelve squares in particular. The
+      movement is +0.061146, and the case stays open against its conjectured
+      optimum of 4.
+    scope:
+      n_values:
+        - 12
+    verification: V4
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        First movement of this case's verified lower bound, and the first bound of
+        any kind proved about n = 12 rather than inherited from n = 11 -- the
+        frontier case body had recorded that nothing specific to n = 12 had ever
+        been proved. Held down from higher by three things: the method is Burns's
+        and Massaccesi's, not this project's, so what is new is an instance and a
+        generator rather than a technique; the certificate has not been checked by
+        a second party; and the gap to the conjectured 4 is 0.15, which this
+        approach does not close. The generator is the more durable half of the
+        result, since it applies at every n.
+      scored: '2026-09-04'
+      by: BC-161 (repository; no independent review yet)
+    novelty: apparently-novel
+    composition: >-
+      Primary: one certificate, one verifier, one accepted verdict. The bound is
+      the certificate's container side directly, with no monotonicity or
+      composition step between the artifact and the claim.
+    evidence:
+      - E-n012-fractional-certificate
+    artifacts:
+      - packing/cases/n12_fractional_certificate/certificate.json
+      - packing/cases/n12_fractional_certificate/certificate-19-5.json
+      - packing/src/sqpack/fractional/certificate.py
+      - packing/src/sqpack/fractional/generate.py
+    controls:
+      - packing/tests/test_fractional_certificate.py
+    next_rung: >-
+      C4 needs a second exact check by a different method -- an independent
+      re-derivation of the covering condition, not another run of this sweep. C5
+      needs a review artifact by someone who did not write the generator. The bound
+      itself: at side 39/10 the covering program reaches exactly 12 on every grid
+      tried, so the next movement needs a finer site grid, a bisection between
+      77/20 and 39/10, or a different shrink -- a search question, not a rung.

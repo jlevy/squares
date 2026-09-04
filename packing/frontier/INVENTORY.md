@@ -8,9 +8,9 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **43** evidence records. **34** are formal; **28** of those were established here.
+- **44** evidence records. **35** are formal; **29** of those were established here.
 - **6** rest on an argument made elsewhere, of which **4** have been read by nobody here.
-- **9** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
+- **10** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
 claim whether or not we read it. The count above is not a doubt about those
@@ -63,12 +63,13 @@ results, it is a statement about what this repository has itself examined.
 | `E-green17-interval-audit` | 0 | lower-bound | verified | strict inequalities only | here | - | *not assessed* |
 | `E-n017-massaccesi-source-replay` | 3 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
 | `E-n017-massaccesi-h052-agreement` | 3 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-n012-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 5, verified 34
-- **method**: exact-algebraic 25, interval-certified 2, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 5
-- **novelty**: apparently-novel 9, common-knowledge 4, not assessed 4, previously-published 26
+- **assurance**: numerically-checked 4, reported 5, verified 35
+- **method**: exact-algebraic 26, interval-certified 2, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 5
+- **novelty**: apparently-novel 10, common-knowledge 4, not assessed 4, previously-published 26
 
 The `cases` column is how many of the hundred frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited by ninety-eight cases is the catalogue everyone reports from and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -83,6 +84,7 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | `E-n005-second-order-rigidity` | 5 | That n = 5 is not infinitesimally rigid but is second-order rigid, proved exactly; the catalogue asserts 'Rigid.' without defining or arguing it | 1 | verified |
 | `E-n011-repaired-lower` | 11 | A correct proof of a bound stated in 1979 and cited as proved since, whose printed argument does not close | 1 | verified |
 | `E-n011-trump-local-rigidity` | 11 | Local rigidity proved by exhausting all 128 branchwise cones; sources assert rigidity, and zero algebraic freedom does not exclude a branching motion | 1 | verified |
+| `E-n012-fractional-certificate` | 12 | The certificate and the bound it carries, not the method. The weighted fractional unavoidable-set technique is Burns's, with Massaccesi's parameters; what is new here is a first-party certificate instance at n = 12 and side 19/5, and the generator that produced it. Anyone holding Burns's note could have run this search. | 1 | verified |
 | `E-n029-interval-certified-upper` | 29 | An interval certificate for a square-in-square bound; the packing is Kingbird's | 1 | verified |
 | `E-n040-first-order-flexibility` | 40 | That the tilted block turns at first order and every turn is refused at second; DS7 asserts n = 40 is rigid and this refines rather than contradicts it | 1 | verified |
 | `E-green17-sixteen-point-lower` | 17, 18 | The certified object: sixteen rational points unavoidable in [0, 4426213/1000000]^2, every decision an exact rational sign. The bound's value sits below Green's reported number, so what is new is the verified certificate, not the frontier of reported claims. | 0 | verified |
