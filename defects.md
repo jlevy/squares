@@ -674,7 +674,7 @@ This is the actionable list.
 | [D-436](docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) | 2026-09-04 | verifier | bookkeeping |  | `review` | medium | fixed | The third-party package misnamed its own control and refused malformed files by traceback |
 | [D-437](packing/tests/test_fractional_generate.py) | 2026-09-04 | tooling | robustness |  | `gate` | high | fixed | A strong-duality test asserted float equality and failed on half of CI runs |
 | [D-438](packing/tests/test_module_boundaries.py) | 2026-09-04 | tooling | performance |  | `gate` | high | fixed | The fast test tier outgrew its budget as the certificates grew, and hid a failure |
-| [D-439](packing/cases/n11_fractional_certificate/thirdparty/README.md) | 2026-09-04 | docs | bookkeeping |  | `inspection` | medium | fixed | A shipped package named the top rung, and the name moved out from under it |
+| [D-439](packing/frontier/results.yaml) | 2026-09-04 | docs | bookkeeping |  | `inspection` | medium | fixed | Three records described the top rung, and the top rung moved out from under them |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

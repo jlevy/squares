@@ -13790,7 +13790,7 @@ defects:
   status: fixed
   recorded_in: packing/tests/test_module_boundaries.py
 - id: D-439
-  title: A shipped package named the top rung, and the name moved out from under it
+  title: Three records described the top rung, and the top rung moved out from under them
   date: '2026-09-04'
   layer: docs
   class: bookkeeping
@@ -13801,35 +13801,67 @@ defects:
     review that read the file line by line and did not catch it
   severity: medium
   what: >-
-    The third-party package's file table described its own `certificate.json` as
+    Three statements in durable records described "the top rung" and were left behind
+    when the ladder advanced past them. All three were true when written and none was
+    edited; what changed was the thing they pointed at.
+    First, the third-party package's file table described its own `certificate.json` as
     "byte-identical to `../certificate.json`" and printed the SHA-256 to let a reader
-    check it. That was true when written. `../certificate.json` is the case's *top* rung
-    by construction -- retention replaces it each time the ladder advances -- so when
-    n = 11 moved from 19/5 to 381/100 the sibling became a different file with a
-    different hash, and the package's own copy stayed where it was. The statement
-    inverted from true to false with no edit to either file.
+    check it. `../certificate.json` is the case's top rung by construction -- retention
+    replaces it each time the ladder advances -- so when n = 11 moved from 19/5 to
+    381/100 the sibling became a different file with a different hash, and the package's
+    own copy stayed where it was.
+    Second, T-019's significance rationale gave the movement past Massaccesi as 0.0042.
+    That is 451/100 - 22529/5000, the first rung's movement; the retained value is
+    229/50 and the movement is 0.0742, as the claim body two fields above it correctly
+    says. The record contradicted itself across two fields.
+    Third, T-019's next_rung described the headroom below seventeen using 451/100's
+    figures -- "the certificate's total is 16.5936, leaving 0.406" -- as though they were
+    the retained certificate's. The retained total is 3393147/200000 = 16.965735 and the
+    margin is 0.034265, an order of magnitude smaller, so the field understated by ten
+    times how tight the case had become. That passage also inferred a rate of ascent
+    ("about 0.075 per 0.01 of side") from two points on different site sets, which the
+    ladder does not support: margin is not monotone in the side, and n = 12 moves the
+    other way over its top two rungs, 0.007175 at 197/50 then 0.029410 at 79/20.
   consequence: >-
-    Documentation only, and the package itself was unaffected: `check.py`, `verify.py`
-    and `falsify.py` read nothing outside their own directory, so a stranger running the
-    package got the right answer throughout. What broke was the one claim in the file a
-    sceptical reader is most likely to test first, in a document whose entire purpose is
-    to be checkable without trusting this project. `sha256sum` on the two files disagrees
-    in the first byte; a reader who ran the check the file invites would have found the
-    package contradicting itself and had no way to tell a stale pointer from a swapped
-    certificate.
+    Records only; no bound, certificate or verdict is affected, and the package itself
+    was never at risk, since `check.py`, `verify.py` and `falsify.py` read nothing
+    outside their own directory and a stranger running it got the right answer
+    throughout. The costs are of two kinds.
+    The package broke the one claim in the file a sceptical reader tests first, in a
+    document whose entire purpose is to be checkable without trusting this project.
+    `sha256sum` on the two files disagrees in the first byte, so a reader who ran the
+    check the file invites would have found the package contradicting itself with no way
+    to tell a stale pointer from a swapped certificate.
+    The two T-019 fields are worse in a quieter way. Nothing about them looks wrong: both
+    are exact figures about real artifacts, they simply describe a rung that is no longer
+    the top one. The next_rung error in particular would have steered the next session
+    away from n = 17 -- 0.406 of headroom invites another rung, 0.034 says the case is
+    nearly spent -- and the invented rate of ascent would have made the misreading look
+    quantitative.
   fix: >-
-    Fixed on 2026-09-04. The table now names `../certificate-19-5.json`, the immutable
-    rung file, which is what the hash was always of, and says in the same cell that
-    `../certificate.json` is the moving top-rung pointer and now carries 381/100.
-    The general rule the miss teaches: a cross-reference in a durable document points at
-    a name whose meaning is fixed, never at one that tracks the frontier. Retention
-    ladders here have both -- `certificate-19-5.json` never changes, `certificate.json`
-    changes on every rung -- and prose that cites a hash must cite the first kind.
+    Fixed on 2026-09-04. The package table now names `../certificate-19-5.json`, the
+    immutable rung file, which is what the hash was always of, and says in the same cell
+    that `../certificate.json` is the moving top-rung pointer and now carries 381/100.
+    T-019's rationale now reads 0.0742, and its next_rung is rewritten around the
+    retained certificate's own total and margin, both recomputed from the artifact rather
+    than carried over; the unsupported rate is gone, replaced by the non-monotonicity the
+    two ladders actually show.
+    The general rule the miss teaches: a durable record points at a name whose meaning is
+    fixed and quotes figures it re-derives from that name, never at or from whatever
+    currently sits at the frontier. Retention ladders here supply both kinds --
+    `certificate-19-5.json` never changes, `certificate.json` changes on every rung -- so
+    prose that cites a hash or a mass must cite the first kind. The detector this argues
+    for, and which does not exist: every mass, atom count and margin quoted in a result's
+    prose fields should be checkable against the artifact the same result names, the way
+    the synopsis check already recomputes its counts.
   regression: >-
-    None automated. The adversarial review that read this package line by line
+    None automated, and that is the honest state: all three were found by reading the
+    records against the artifacts, which is what caught them and what would catch the
+    next one. The adversarial review that read the package line by line
     (docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) ran twenty-one
-    attacks and missed this one, because at the time the sentence was true; the class of
-    error only appears later, which is what makes a checked-in hash beside a moving name
-    worth a rule rather than a test.
+    attacks and missed its instance, because at the time the sentence was true. That is
+    the defining feature of this class: it is invisible at review and appears later,
+    without an edit, which is why it wants a check that re-derives rather than a reviewer
+    who re-reads.
   status: fixed
-  recorded_in: packing/cases/n11_fractional_certificate/thirdparty/README.md
+  recorded_in: packing/frontier/results.yaml

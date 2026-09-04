@@ -740,9 +740,9 @@ results:
         replaces a published value rather than an inherited or closed-form one -- the
         only bound this project has displaced that someone else had put in print. Held
         below S5 because none of n = 17, 18, 19 is the central open case, the movement is
-        0.0042 rather than a qualitative change, the method and its parametrisation are
-        Burns's and Massaccesi's own, and all three decisions of this certificate are
-        exact-algebraic.
+        0.0742 rather than a qualitative change, the method and its parametrisation are
+        Burns's and Massaccesi's own, and the case does not change character at the new
+        value.
       scored: '2026-09-04'
       by: BC-161 continuation (repository; independent evaluator confirmed C4, no external review)
     novelty: apparently-novel
@@ -763,8 +763,18 @@ results:
     next_rung: >-
       C4 is reached by the interval-certified decision, the first here that is not
       exact-algebraic. C5 needs a review artifact by someone
-      outside the project. The bound itself: Massaccesi's own atoms give a covering value
-      of 203/12 at 4.5058, so the headroom below seventeen was 0.083 of mass and 451/100
-      spends most of it -- the certificate's total is 16.5936, leaving 0.406. Further
-      rungs are a search question at a side where the covering value rises about 0.075
-      per 0.01 of side.
+      outside the project. The bound itself: the retained certificate's total is
+      3393147/200000 = 16.965735, leaving 0.034265 below seventeen, and that margin is
+      what a further rung has to be found inside.
+      One figure from the ladder is worth carrying, because it contradicts the obvious
+      reading. Margin is not monotone in the side. The 451/100 rung below this one has
+      total 16.593620 and margin 0.406380 -- an order of magnitude more headroom at a
+      side 0.07 lower -- so the covering value at a given side is set by the site set at
+      least as much as by the side itself, and a better site set at a higher side can
+      open the margin back up rather than close it. The n = 12 ladder shows the same
+      shape in the same direction: margin 0.007175 at 197/50, then 0.029410 at the
+      higher 79/20. Massaccesi's own atoms are the reference point and not a limit: they
+      give a covering value of 203/12 at 4.5058, tight by construction, which bounds
+      nothing about what a different site set reaches at a larger side.
+      A further rung is therefore a search question, and the quantity to read is the
+      restricted optimum a converged run reaches, never an extrapolated rate.
