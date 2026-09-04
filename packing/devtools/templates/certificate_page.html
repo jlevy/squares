@@ -48,7 +48,6 @@
   text-transform: var(--kpress-caps-transform);
 }
 .section-head { margin-block-end: 0.9rem; }
-.section-head .caps { display: block; margin-block-end: 0.45rem; }
 
 .hero { padding-block-start: calc(var(--kpress-font-size-base) * 3); }
 /* The heading is set in caps by kpress; s(n) is notation and keeps its case. */
@@ -71,7 +70,18 @@
   margin-block-start: 0.15rem;
   text-transform: none;
 }
-.tabs-note { color: var(--kpress-doc-muted); font-size: var(--kpress-font-size-small); margin-block-start: 0.9rem; }
+.tabs-note { color: var(--kpress-doc-muted); font-size: var(--kpress-font-size-small); }
+.intro { margin-block-start: 1.6rem; }
+.intro-grid { align-items: start; display: grid; gap: 1.4rem 2rem; grid-template-columns: minmax(0, 1.7fr) minmax(13rem, 1fr); }
+@media (max-width: 44rem) { .intro-grid { grid-template-columns: minmax(0, 1fr); } }
+/* The atlas rendering is inlined: its ground and strokes take the page's
+   theme, and its own caption is replaced by the figure's. */
+.cert-page figure.trump { margin: 0; max-width: none; }
+.trump a { display: block; padding: 0.6rem; }
+.trump svg { display: block; height: auto; width: 100%; }
+.trump svg rect[fill="#ffffff"] { fill: var(--kpress-doc-bg); }
+.trump svg [stroke="#000000"] { stroke: var(--kpress-doc-text); }
+.trump svg text { display: none; }
 .cert-article[hidden] { display: none; }
 .cert-claim { margin-block-start: 0.2rem; }
 .claim { margin-block: 1.5rem 1.3rem; }
@@ -85,11 +95,7 @@
   margin-block-start: 1.3rem;
 }
 
-.line-fig {
-  border-block: 1px solid var(--kpress-doc-border);
-  margin-block-start: 2rem;
-  padding-block: 1.3rem 0.4rem;
-}
+.line-fig { padding: 1.3rem 1.1rem 0.4rem; }
 /* `.kpress-diagram svg` sets display, height and centring; these figures also
    need full width and labels allowed outside the viewBox. */
 .line-fig svg, .chart svg { overflow: visible; width: 100%; }
@@ -136,26 +142,7 @@
 }
 
 /* The mass budget. */
-.budget { padding: 1.4rem 1.1rem 1.1rem; }
-.bar {
-  background: var(--kpress-doc-code-bg);
-  border: 1px solid var(--kpress-doc-border);
-  height: 2.6rem;
-  position: relative;
-}
-.bar .fill {
-  background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
-  border-inline-end: 2px solid var(--kpress-doc-accent);
-  inset: 0 auto 0 0;
-  position: absolute;
-}
-.bar .need {
-  background: var(--cert-probe);
-  inset-block: -0.5rem;
-  position: absolute;
-  width: 2px;
-}
-.bar-labels {
+.mass-line {
   color: var(--kpress-doc-muted);
   display: flex;
   flex-wrap: wrap;
@@ -165,7 +152,7 @@
   justify-content: space-between;
   margin-block-start: 1rem;
 }
-.bar-labels .v { display: block; margin-block-start: 0.15rem; }
+.mass-line .v { display: block; margin-block-start: 0.15rem; }
 
 /* The two interactive stages. */
 .split { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(15rem, 1fr); }
@@ -333,17 +320,38 @@
   <h1><span class="symbol">s({{N}}) ≥ {{HEADLINE_L_FRAC}}</span>: A New Lower Bound on the Square Packing Problem</h1>
   <p class="subtitle">Eleven unit squares, free to rotate, do not fit in a square of side {{HEADLINE_L_DEC}}.
   The proof is a weighted point set and a pigeonhole. It is the first movement of the smallest open case in
-  {{YEARS_SINCE_PRIOR}} years; the previous bound was {{PRIOR_LOWER}} ({{PRIOR_SOURCE}}).</p>
+  {{YEARS_SINCE_PRIOR}} years; the previous bound was {{PRIOR_LOWER}} (<a href="{{PRIOR_URL}}">{{PRIOR_SOURCE}}</a>).</p>
   <div class="cert-tabs kpress-tab-list" role="tablist" aria-label="Certificate">
     <!--BEGIN:TAB--><button type="button" class="kpress-tab-button" role="tab" id="tab-{{SLUG}}"
       data-cert="{{SLUG}}" aria-controls="cert-{{SLUG}}" aria-selected="false" tabindex="-1">{{L_FRAC}} = {{L_DEC}}<span
       class="tab-note">{{N_ATOMS}} atoms · {{TAB_ROLE}}</span></button>
     <!--END:TAB-->
   </div>
-  <p class="tabs-note">Two certificates, decided by the same five conditions, give two rungs of the bound.
-  The {{DEFAULT_L_FRAC}} certificate is shown by default: it is smaller, and its numbers are easier to follow.
-  The {{HEADLINE_L_FRAC}} certificate is the bound the title states.</p>
 </header>
+
+<section class="col kpress-prose intro">
+  <div class="intro-grid">
+    <div>
+      <p><a href="{{PROBLEM_URL}}">Packing unit squares in a square</a> asks, for each <span class="tex">n</span>, for
+      <span class="tex">s(n)</span>: the side of the smallest square that holds <span class="tex">n</span> unit
+      squares with disjoint interiors, the unit squares free to rotate. The value is known for every
+      <span class="tex">n \le 10</span>; <span class="tex">s(10) = 3 + 1/\sqrt{2}</span> was the last, settled by
+      Stromquist in 2003, and <span class="tex">s(11)</span> is the smallest case still open. The best packing
+      known, <a href="{{BEST_URL}}">found by Walter Trump in 1979</a>, fits eleven squares in side
+      {{BEST_PACKING}}…, so <span class="tex">s(11) \le {{BEST_PACKING}}</span>; whether a smaller container works
+      is the open question. The certificates on this page show it cannot be as small as {{DEFAULT_L_DEC}}, and then
+      not as small as {{HEADLINE_L_DEC}}.</p>
+      <p class="tabs-note">Two certificates, decided by the same five conditions, give the two rungs. The
+      {{DEFAULT_L_FRAC}} certificate is shown by default: it is smaller, and its numbers are easier to follow. The
+      {{HEADLINE_L_FRAC}} certificate is the bound the title states.</p>
+    </div>
+    <figure class="trump">
+      <a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a>
+      <figcaption class="kpress-figcaption">Trump’s packing of eleven unit squares in side {{BEST_PACKING}}…, the
+      best known: the project’s own rendering, from the retained witness.</figcaption>
+    </figure>
+  </div>
+</section>
 
 <!--BEGIN:ARTICLE-->
 <article class="cert-article" id="cert-{{SLUG}}" data-cert="{{SLUG}}" role="tabpanel" aria-labelledby="tab-{{SLUG}}" hidden>
@@ -357,7 +365,12 @@
   </div>
 </div>
 
-<div class="line-fig col kpress-diagram">
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 1</span>
+    <span class="fig-title">Bounds on <span class="tex">s({{N}})</span></span>
+  </div>
+  <div class="line-fig kpress-diagram">
   <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER}}, the new bound {{L_DEC}}, and the best known packing at {{BEST_PACKING}}">
     <rect x="{{BOUND_X}}" y="45" width="{{BAND_W}}" height="13" fill="var(--cert-accent-wash)"/>
     <line x1="20" y1="51.5" x2="680" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1"/>
@@ -383,15 +396,13 @@
     <text x="{{BOUND_X}}" y="88" dx="11" font-size="11"
       font-weight="550" fill="var(--cert-probe)">{{L_FRAC}} = {{L_DEC}}, this certificate</text>
   </svg>
-</div>
-<p class="col sans-text kpress-prose" style="font-size:var(--fs-tiny);color:var(--kpress-doc-muted);margin-top:0.7rem">
-  The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. It is
-  <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span>.
-</p>
+  </div>
+  <figcaption class="kpress-figcaption">The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. It is
+  <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span>.</figcaption>
+</figure>
 
 <section class="col kpress-prose">
   <div class="section-head">
-    <span class="caps">The argument</span>
     <h2>Atoms, Mass, and the Budget</h2>
   </div>
   <p>Place finitely many points in the container and give each a positive weight. Each weighted point is an
@@ -409,28 +420,8 @@
   <p>The rest of the proof makes the first condition finite to check.</p>
 </section>
 
-<figure>
-  <div class="fig-head">
-    <span class="caps">Figure 1</span><span class="tag">Condition 2</span>
-    <span class="fig-title">The budget, and the shortfall</span>
-  </div>
-  <div class="budget">
-    <div class="bar">
-      <div class="fill" style="width:{{FILL_PCT}}%"></div>
-      <div class="need" style="left:calc(100% - 1px)"></div>
-    </div>
-    <div class="bar-labels">
-      <div>Total mass on the board<span class="v tex">\mu\!\left([0,L]^2\right) = {{TOTAL_TEX}} = {{TOTAL_DEC}}</span></div>
-      <div style="text-align:right">Mass eleven disjoint squares would need<span class="v tex">{{N}}</span></div>
-    </div>
-  </div>
-  <figcaption class="kpress-figcaption">The shortfall is <strong>{{SHORTFALL}}</strong>. Everything right of the orange line is mass eleven
-  squares would need and the board does not hold. <strong>Condition 2</strong> is this comparison.</figcaption>
-</figure>
-
 <section class="col kpress-prose">
   <div class="section-head">
-    <span class="caps">The object</span>
     <h2>The Atom Set</h2>
   </div>
   <p>The certificate holds {{N_ATOMS}} atoms in {{N_ORBITS}} orbits of the container’s eightfold symmetry group
@@ -442,19 +433,24 @@
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 2</span><span class="tag">Condition 1</span>
+    <span class="caps">Figure 2</span><span class="tag">Conditions 1 and 2</span>
     <span class="fig-title">The atom field</span>
   </div>
   <div class="stage stage-tip"><canvas id="field-{{SLUG}}" width="1040" height="1040"></canvas>
       <div class="tip" id="field-tip-{{SLUG}}" hidden></div></div>
+  <div class="mass-line">
+    <div>Total mass on the board<span class="v tex">\mu\!\left([0,L]^2\right) = {{TOTAL_TEX}} = {{TOTAL_DEC}}</span></div>
+    <div>Mass eleven disjoint unit squares would need<span class="v tex">{{N}}</span></div>
+    <div>Shortfall<span class="v tex">{{SHORTFALL}}</span></div>
+  </div>
   <figcaption class="kpress-figcaption">Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
   corners, where a square has least room to move, and thins in the middle. The sites and weights are the optimum
-  of a covering linear program, rationalised.</figcaption>
+  of a covering linear program, rationalised. The board holds less mass than eleven disjoint unit squares would
+  need; <strong>Condition 2</strong> is that comparison.</figcaption>
 </figure>
 
 <section class="col kpress-prose">
   <div class="section-head">
-    <span class="caps">The covering condition</span>
     <h2>Every Placement Covers Mass at Least One</h2>
   </div>
   <p><strong>Condition 5</strong> is the claim that every placement covers mass at least
@@ -509,7 +505,6 @@
 
 <section class="col kpress-prose">
   <div class="section-head">
-    <span class="caps">The angle net</span>
     <h2>From a Continuum of Angles to {{N_DIRECTIONS}}</h2>
   </div>
   <p>The angles cannot all be checked, so {{N_DIRECTIONS}} are checked and the gaps are covered by shrinking. Given a unit
@@ -580,7 +575,6 @@
 <!--BEGIN:COARSENING-->
 <section class="col kpress-prose">
   <div class="section-head">
-    <span class="caps">The cost of a coarser net</span>
     <h2>Why the Net Has {{N_DIRECTIONS}} Directions</h2>
   </div>
   <p>The direction count is measurable. Hold the {{N_ATOMS}} atoms fixed, coarsen the net, set
@@ -626,7 +620,6 @@
 
 <section class="col kpress-prose">
   <div class="section-head">
-    <span class="caps">The close</span>
     <h2>The Contradiction</h2>
   </div>
   <div class="boxed">
@@ -646,7 +639,6 @@
 
 <section class="col kpress-prose">
   <div class="section-head">
-    <span class="caps">Where the search is</span>
     <h2>Generator and Verifier</h2>
   </div>
   <p>The atoms are not designed; they are solved for. The certificate is a rationalised optimum of a covering
@@ -659,18 +651,20 @@
   <span class="tex">n</span>; <span class="tex">n</span> enters only in that comparison. A run converging to a
   round number is therefore a signature of a bug, not a result.</p>
   <p>All of that search runs in floating point, because it is a search. None of it is in the proof: the
-  generator emits a file, and the verifier re-decides <strong>Conditions 1 through 5</strong> on that
-  file in exact rational arithmetic. A wrong linear program yields a rejected certificate, never a false
-  theorem.</p>
+  <a href="{{GENERATOR_URL}}">generator</a> emits a file, and the <a href="{{VERIFIER_URL}}">verifier</a> re-decides
+  <strong>Conditions 1 through 5</strong> on that file in exact rational arithmetic. A wrong linear program yields a rejected certificate, never a false
+  theorem. A <a href="{{THIRDPARTY_URL}}">self-contained third-party check</a>, one file on the standard library
+  alone, decides the {{DEFAULT_L_FRAC}} certificate without trusting this repository.</p>
 </section>
 
 <footer class="col kpress-prose">
-  Certificate <code>{{ID}}</code>: {{N_ATOMS}} atoms, side <span class="tex">L = {{L_FRAC}}</span>, shrink
+  Certificate <a href="{{CERT_URL}}"><code>{{ID}}</code></a>: {{N_ATOMS}} atoms, side <span class="tex">L = {{L_FRAC}}</span>, shrink
   <span class="tex">B = {{B_FRAC}}</span>, a net of {{N_DIRECTIONS}} rational half-tangents reaching
   <span class="tex">\tan(\pi/8)</span>. Total mass <span class="tex">{{TOTAL_TEX}}</span>; least covered cell mass
   <span class="tex">{{LEAST_TEX}}</span> at direction <span class="tex">k=0</span>, centre
-  <span class="tex">{{WITNESS_TEX}}</span>. Every figure is computed from the certificate’s own atom list. Prior lower bound <span class="tex">2 + 4/\sqrt{5}</span>, {{PRIOR_SOURCE}}; best known packing
-  <span class="tex">{{BEST_PACKING}}\ldots</span>, {{BEST_SOURCE}}. Typography follows the kpress design system. PT Serif,
+  <span class="tex">{{WITNESS_TEX}}</span>. Every figure is <a href="{{RENDERER_URL}}">computed</a> from the certificate’s own atom list. Prior lower bound
+  <span class="tex">2 + 4/\sqrt{5}</span>, <a href="{{PRIOR_URL}}">{{PRIOR_SOURCE}}</a>; best known packing
+  <span class="tex">{{BEST_PACKING}}\ldots</span>, <a href="{{BEST_URL}}">{{BEST_SOURCE}}</a>. Typography follows the kpress design system. PT Serif,
   Source Sans 3 and KaTeX are embedded; the page loads no external resources.
 </footer>
 

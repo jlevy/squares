@@ -66,6 +66,24 @@ BEST_SOURCE = "Trump 1979 packing"
 PRIOR_YEAR = 2003
 RESULT_YEAR = 2026
 
+# Where the page sends a reader for more: the sources the n = 11 record cites
+# (frontier/n-011.md, keys [Friedman DS7], [Kingbird] and [Stromquist 2003]) and
+# the repository files behind the words, linked on `main`, which is what the
+# page deploys from.
+PROBLEM_URL = "https://erich-friedman.github.io/papers/squares/squares.html"
+BEST_URL = "https://kingbird.myphotos.cc/packing/squares_in_squares.html"
+PRIOR_URL = "https://www.combinatorics.org/ojs/index.php/eljc/article/view/v10i1r8"
+REPO_URL = "https://github.com/jlevy/squares"
+BEST_RENDERING = PACKING / "atlas" / "known-best" / "rendering" / "n-011.svg"
+VERIFIER = PACKING / "src" / "sqpack" / "fractional" / "certificate.py"
+GENERATOR = PACKING / "src" / "sqpack" / "fractional" / "generate.py"
+THIRDPARTY = CASE / "thirdparty" / "README.md"
+
+
+def repo_file(path: Path) -> str:
+    return f"{REPO_URL}/blob/main/{path.relative_to(REPO).as_posix()}"
+
+
 # The certificates the page walks through, in tab order. The first is shown by
 # default because it is the smaller one and its numbers are easier to follow;
 # the headline bound is the largest outer side among them, whichever that is.
@@ -186,6 +204,7 @@ class Facts:
     """Everything the page states about one certificate, derived from its file."""
 
     identifier: str
+    source: Path
     n: int
     outer_side: Fraction
     square_side: Fraction
@@ -272,6 +291,7 @@ def derive(path: Path, *, full_sweep: bool = False) -> Facts:
 
     return Facts(
         identifier=record["id"],
+        source=path,
         n=certificate.n,
         outer_side=certificate.outer_side,
         square_side=certificate.square_side,
@@ -326,6 +346,31 @@ def atom_array(facts: Facts) -> str:
         "const ATOM_Q=[" + ",".join(rows) + "];\n"
         "const ATOMS=ATOM_Q.map(([xn,xd,yn,yd,w])=>[xn/xd,yn/yd,w]);"
     )
+
+
+def best_packing_svg() -> str:
+    """The atlas rendering of the best packing known, cropped to the container.
+
+    Inlined rather than linked so the page stays self-contained. The prolog and
+    the provenance metadata go, and the viewBox is cut to the container's
+    outline plus a margin; the file's own caption and ground are restyled by
+    the page's CSS rather than edited here.
+    """
+    svg = BEST_RENDERING.read_text(encoding="utf-8")
+    svg = re.sub(r"<\?xml[^>]*\?>\s*", "", svg)
+    svg = re.sub(r"<metadata>.*?</metadata>\s*", "", svg, flags=re.DOTALL)
+    outline = re.search(
+        r'data-feature="container-outline" x="([\d.]+)" y="([\d.]+)" width="([\d.]+)"', svg
+    )
+    if outline is None:
+        raise SystemExit(f"{BEST_RENDERING.name} has no container outline to crop to")
+    x, y, side = (round(float(v)) for v in outline.groups())
+    margin = 12
+    box = f'viewBox="{x - margin} {y - margin} {side + 2 * margin} {side + 2 * margin}"'
+    svg, count = re.subn(r'width="\d+" height="\d+" viewBox="[^"]*"', box, svg, count=1)
+    if count != 1:
+        raise SystemExit(f"{BEST_RENDERING.name} root has no width/height/viewBox to replace")
+    return svg
 
 
 def coarsening_rows(facts: Facts) -> list[CoarseningRow] | None:
@@ -420,13 +465,22 @@ def shared_substitutions(static: Path, headline: Facts, default: Facts) -> dict[
         "HEADLINE_L_FRAC": f"{headline.outer_side.numerator}/{headline.outer_side.denominator}",
         "HEADLINE_L_DEC": decimal(headline.outer_side),
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
+        "DEFAULT_L_DEC": decimal(default.outer_side),
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "PRIOR_LOWER": PRIOR_LOWER,
         "PRIOR_SOURCE": PRIOR_SOURCE,
+        "PRIOR_URL": PRIOR_URL,
+        "PROBLEM_URL": PROBLEM_URL,
+        "BEST_PACKING": BEST_PACKING,
+        "BEST_URL": BEST_URL,
+        "BEST_RENDER_URL": repo_file(BEST_RENDERING),
+        "TRUMP_SVG": best_packing_svg(),
     }
 
 
-def certificate_substitutions(facts: Facts, *, headline: Facts) -> dict[str, str]:
+def certificate_substitutions(
+    facts: Facts, *, headline: Facts, default: Facts
+) -> dict[str, str]:
     """Values for one certificate's article, tab and script."""
     n = facts.n
     total = facts.total_mass
@@ -467,7 +521,6 @@ def certificate_substitutions(facts: Facts, *, headline: Facts) -> dict[str, str
         "TOTAL_TEX": frac_tex(total),
         "TOTAL_DEC": decimal(total),
         "SHORTFALL": decimal(shortfall),
-        "FILL_PCT": f"{float(total / n) * 100:.4f}",
         "LEAST_TEX": frac_tex(facts.least_mass),
         "LEAST_TEX_PLAIN": f"{facts.least_mass.numerator}/{facts.least_mass.denominator}",
         "LEAST_DEC": decimal(facts.least_mass),
@@ -484,8 +537,16 @@ def certificate_substitutions(facts: Facts, *, headline: Facts) -> dict[str, str
         "WITNESS_Y_JS": f"{facts.witness[1].numerator}/{facts.witness[1].denominator}",
         "PRIOR_LOWER": PRIOR_LOWER,
         "PRIOR_SOURCE": PRIOR_SOURCE,
+        "PRIOR_URL": PRIOR_URL,
         "BEST_PACKING": BEST_PACKING,
         "BEST_SOURCE": BEST_SOURCE,
+        "BEST_URL": BEST_URL,
+        "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
+        "CERT_URL": repo_file(facts.source.resolve()),
+        "RENDERER_URL": repo_file(Path(__file__).resolve()),
+        "VERIFIER_URL": repo_file(VERIFIER),
+        "GENERATOR_URL": repo_file(GENERATOR),
+        "THIRDPARTY_URL": repo_file(THIRDPARTY),
         "MOVEMENT": decimal(movement),
         "GAP_NOW": decimal(gap_now),
         "GAP_BEFORE": decimal(gap_before),
@@ -542,7 +603,9 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
     if len({slug(f) for f in facts}) != len(facts):
         raise SystemExit("two certificates share an outer side; their ids would collide")
     headline = max(facts, key=lambda f: f.outer_side)
-    per_certificate = [certificate_substitutions(f, headline=headline) for f in facts]
+    per_certificate = [
+        certificate_substitutions(f, headline=headline, default=facts[0]) for f in facts
+    ]
 
     page = TEMPLATE.read_text(encoding="utf-8")
     for name in ("TAB", "ARTICLE", "SCRIPT"):
