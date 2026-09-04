@@ -81,7 +81,7 @@
         "name": "control_exp034.py",
         "sha256": "0ca24178be28e94479a4044c71faa77c4e4b3be8aec3d6052829fb8ecf0bd0db",
         "bytes": 3369,
-        "replays": "Pre-run of control C8: the exp-034 pose through the T-012 machinery, showing an open first-order cone and that vx0, vy0, w0 appear in no row.",
+        "replays": "Pre-run of Control 8: the exp-034 pose through the T-012 machinery, showing an open first-order cone and that vx0, vy0, w0 appear in no row.",
         "invocation": "packing/.venv/bin/python3 control_exp034.py",
         "replayed_2026_09_03": true,
         "source": "\"\"\"Pre-run of the exp-034 negative control through the T-012 machinery (read-only).\"\"\"\nimport sys\nsys.path.insert(0, '/home/user/squares/packing')\nfrom fractions import Fraction\nfrom cases.n5 import equal_side_face as face\nfrom cases.n5.angle_sheet import oriented_square\nfrom devtools.assess_n5_rigidity import (Pose, active_contacts, incident_contacts, disjunctive_pairs,\n    constraint_rows, row_scales, gap_rate, unconstrained, variable_names, certify, second_order_terms)\nfrom sqpack.verify import verify_packing, exact_sign\n\nfield = face.make_field()\nq = field.rational; r = field.alpha\ndata = face.exact_data(field)\nside = data[\"side\"]; delta = data[\"delta\"]\nfixed = data[\"a\"][1:]\nprint(\"side =\", side.text(), \"delta =\", delta.text())\n\ndef make_pose(u, t):\n    den = q(1) + t*t\n    cosine = (q(1) - t*t)/den; sine = 2*t/den\n    c0 = (q(1)/2 + u, q(5)/2 - r/4 + u)\n    squares = [oriented_square(field, c0, cosine, sine),\n               face.square(field, fixed[0], diagonal=False),\n               face.square(field, fixed[1], diagonal=False),\n               face.square(field, fixed[2], diagonal=True),\n               face.square(field, fixed[3], diagonal=True)]\n    return Pose(field, side, tuple(tuple(sq) for sq in squares))\n\nfor label, u, t in ((\"endpoint A (u=0,t=0)\", q(0), q(0)), (\"interior (u=delta/2,t=0)\", delta/2, q(0)), (\"interior tilted (u=delta/2,t=1/200)\", delta/2, q(Fraction(1,200)))):\n    pose = make_pose(u, t)\n    rep = verify_packing([list(sq) for sq in pose.squares], side, sign=exact_sign)\n    contacts = active_contacts(pose)\n    inc = incident_contacts(pose)\n    dis = disjunctive_pairs(pose, contacts)\n    print(f\"\\n== {label}: valid={rep.valid} touching_pairs={rep.touching_pairs} container_contacts={rep.container_contacts}\")\n    print(f\"   incidences={len(inc)} active contacts={len(contacts)} (wall {sum(c.kind=='wall' for c in contacts)}, pair {sum(c.kind=='pair' for c in contacts)}), disjunctive pairs={[sorted(p) for p in dis]}\")\n    for c in contacts:\n        print(\"     \", c.describe())\n    if dis:\n        print(\"   -> the T-012 assessor would REFUSE this pose (DisjunctiveContactError)\")\n    rows = constraint_rows(pose, contacts)\n    names = variable_names(5)\n    # does the exp-034 slide direction (dx0=dy0=1) and the rotation w0 lie in the cone two-sidedly?\n    for dname, vec in ((\"slide +\", {\"vx0\": 1, \"vy0\": 1}), (\"slide -\", {\"vx0\": -1, \"vy0\": -1}), (\"rot +\", {\"w0\": 1}), (\"rot -\", {\"w0\": -1})):\n        x = [q(vec.get(n, 0)) for n in names]\n        rates = [gap_rate(row, x) for row in rows]\n        ok = all(v.sign() >= 0 for v in rates)\n        print(f\"   {dname}: in first-order cone = {ok}; min rate = {min((v for v in rates), key=lambda v: float(v.coeffs[0]) + 1.4142135623730951*float(v.coeffs[1])).text()}\")\n    free = [n for i, n in enumerate(names) if unconstrained(rows, i)]\n    print(\"   coordinates absent from every row:\", free)\n    try:\n        pins = {}\n        for i, n in enumerate(names):\n            if n in free: continue\n            pins[n] = (certify(pose, rows, i, 1) is not None, certify(pose, rows, i, -1) is not None)\n        print(\"   pinned (both signs certified):\", [n for n, (a, b) in pins.items() if a and b])\n        print(\"   NOT pinned:\", [n for n, (a, b) in pins.items() if not (a and b)] + free)\n    except Exception as e:\n        print(\"   certify raised:\", type(e).__name__, e)\n"
@@ -165,48 +165,48 @@
   },
   "controls": {
     "declared": [
-      "C1",
-      "C2",
-      "C3",
-      "C4",
-      "C5",
-      "C6",
-      "C7",
-      "C8"
+      "Control 1",
+      "Control 2",
+      "Control 3",
+      "Control 4",
+      "Control 5",
+      "Control 6",
+      "Control 7",
+      "Control 8"
     ],
     "run_here": [
-      "C8 (pre-run only)"
+      "Control 8 (pre-run only)"
     ],
     "not_run": [
-      "C1",
-      "C2",
-      "C3",
-      "C4",
-      "C5",
-      "C6",
-      "C7"
+      "Control 1",
+      "Control 2",
+      "Control 3",
+      "Control 4",
+      "Control 5",
+      "Control 6",
+      "Control 7"
     ],
-    "note": "The eight rejecting controls are specified in the proof artifact but belong to the W7 instrument phase. Only the C8 pre-run was executed here, and it confirms exp-034 is not a refutation of H-060 rather than exercising an instrument refusal. The instrument built after this freeze does exercise all eight; see the instrument block for where its review stands."
+    "note": "The eight rejecting controls are specified in the proof artifact but belong to the W7 instrument phase. Only the Control 8 pre-run was executed here, and it confirms exp-034 is not a refutation of H-060 rather than exercising an instrument refusal. The instrument built after this freeze does exercise all eight; see the instrument block for where its review stands. Human-facing labels were normalized on 2026-09-04 from their legacy compact form to Control 1-Control 8; historical hashes, replay-script bytes and literal filenames are unchanged."
   },
   "instrument": {
     "exists": true,
     "built_at_commit": "6580a9fd",
     "package": "packing/src/sqpack/local_rigidity/",
     "deviation_from_w7": "a new package binding to devtools.assess_n5_rigidity, not an extension of it as H-060's instrument text says",
-    "self_report": "instrument_ready true, isolation_decided false; all eight controls C1-C8 exercised",
+    "self_report": "instrument_ready true, isolation_decided false; all eight Controls 1-8 exercised",
     "review_state": "PASS on the third round, at payload digest 743fd18a. The pass certifies the instrument, not H-060: no target determination ran and the instrument sets isolation_decided false unconditionally.",
     "reviewed_builds": [
       {
         "commit": "2f112f4c",
         "payload_digest": "1ab2708623cf4dd077a0f125ba81cf3777088ea8e4d750a56d1dc3f55f807978",
         "classification": "BOUNDED-CAVEAT",
-        "caveat": "two of the eight registered controls, C1 changed_feature and C4 invented_contact, were structurally incapable of failing and never reached the binding's refusal path, so 'all eight controls reject' overstated the evidence for the one refusal the instrument exists to make"
+        "caveat": "two of the eight registered controls, Control 1 changed_feature and Control 4 invented_contact, were structurally incapable of failing and never reached the binding's refusal path, so 'all eight controls reject' overstated the evidence for the one refusal the instrument exists to make"
       },
       {
         "commit": "609e7392",
         "payload_digest": "ba99ccccd7303f260f48c62a10fb9b6dc43ca3e8ff804646ef5de89a48967971",
         "classification": "BOUNDED-CAVEAT",
-        "caveat": "the C1/C4 repair was verified by removal and holds, but the digested payload pins commit 2f112f4c, whose code cannot produce that payload, so a replayer following the pin gets CANNOT-REPRODUCE; the re-review's verdict becomes PASS only on that mechanical closure"
+        "caveat": "the repair to Controls 1 and 4 was verified by removal and holds, but the digested payload pins commit 2f112f4c, whose code cannot produce that payload, so a replayer following the pin gets CANNOT-REPRODUCE; the re-review's verdict becomes PASS only on that mechanical closure"
       },
       {
         "commit": "d45a3269",
@@ -215,7 +215,7 @@
         "classification": "PASS",
         "replayed_from": "a clean root at fe8bccde, one commit past the author's observed d45a3269, with the instrument package untouched between the two",
         "evidence": "normal and optimized Python byte-identical; 46 tests pass; the reviewer reproduced source_digest independently from the recipe; leaf diff against the author's final certificate shows exactly one differing leaf, /claim_boundary/provenance/pinned_commit, with tree_matches True and paths_differing empty, which closes the provenance item the second round left open",
-        "controls": "the C1/C4 repair re-verified by removal: replacing the guard with a no-op stops both controls rejecting",
+        "controls": "the repair to Controls 1 and 4 re-verified by removal: replacing the guard with a no-op stops both controls rejecting",
         "constant": "G''(e_u4) = -2(m+1) exactly on all 16 support features; the reviewer's earlier -(m + 1/2) was the geometric gap's second derivative rather than the cleared chart polynomial's. The structural conclusion is unchanged and now machine-checked: the restricted second jet is an affine function of the support feature's own base margin and is NOT an independent identifier"
       }
     ],
@@ -246,7 +246,7 @@
   "open_obligations": [
     {
       "id": "O1",
-      "obligation": "A W7 instrument whose readiness review passes. DISCHARGED on 2026-09-03: the review returned BOUNDED-CAVEAT at 2f112f4c, the C1/C4 repair landed at 609e7392 and was verified by removal, a re-review returned BOUNDED-CAVEAT on one provenance item, and the third round returned PASS at payload digest 743fd18a with the provenance item closed. Discharging it makes the instrument usable; it does not make this round's chart CHECKED in the criterion's sense, because this round's quantities were computed by scratchpad sympy before the instrument existed.",
+      "obligation": "A W7 instrument whose readiness review passes. DISCHARGED on 2026-09-03: the review returned BOUNDED-CAVEAT at 2f112f4c, the repair to Controls 1 and 4 landed at 609e7392 and was verified by removal, a re-review returned BOUNDED-CAVEAT on one provenance item, and the third round returned PASS at payload digest 743fd18a with the provenance item closed. Discharging it makes the instrument usable; it does not make this round's chart CHECKED in the criterion's sense, because this round's quantities were computed by scratchpad sympy before the instrument existed.",
       "owner": "a separate lane (sqpack.local_rigidity, binding to devtools.assess_n5_rigidity rather than extending it as W7 asks)",
       "blocks": "nothing further; instrument_ready is now true. Any accept determination still requires the criterion's checked chart and reviewed argument.",
       "status": "discharged"

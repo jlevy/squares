@@ -2,7 +2,8 @@
 
 **Review date:** 2026-09-04\
 **Pull request:** [#78](https://github.com/jlevy/squares/pull/78)\
-**Reviewed parent head:** `719c2a170a1ac8bbd4cddfd353645b6d70651c45`\
+**Original reviewed parent head:** `719c2a170a1ac8bbd4cddfd353645b6d70651c45`\
+**Latest reconciled parent head:** `353998ac27523d20ba51db3ab4c756062a391ece`\
 **Base:** `9d5eae0f5ecfcf3cd417a345eb6c55b1f9ac4def` (`main`)\
 **Remediation branch:** `codex/pr78-s11-adversarial-review`\
 **Certificate SHA-256:**
@@ -23,7 +24,7 @@ Those are different decisions:
 | Does a method-distinct computation confirm **Condition 5**? | **Accept on this stack** | The interval branch-and-bound certifies all 361 directions with no stalled or budget-exhausted box and encloses the minimum exactly at `4001/4000`. Samples, unsafe integer magnitudes, and below-one enclosures cannot produce acceptance. |
 | Is the historical claim established? | **Apparently novel, high confidence** | The search found no public lower bound after Stromquist 2003 that reaches `381/100`, but it cannot establish absolute priority over unindexed or unpublished work. |
 | Are the upstream commit’s frozen-byte claims reliable? | **No; repaired here** | The retained file hashes to `b121…e6a`, not the `503c…7cd6` named in the introducing commit. Both full decisions were rerun against `b121…e6a`; the old attestation is discarded. |
-| Is the reviewed parent ready to merge unchanged? | **Request changes** | Its generic and interval verifier boundaries, retained declarations, retention gate, falsification gate, provenance language, and validation classification all needed repairs. This stacked branch supplies them and records the result at C5 after validation. |
+| Is the reviewed parent ready to merge unchanged? | **Request changes** | Its generic and interval verifier boundaries, retained declarations, retention gate, falsification gate, provenance language, and validation classification all needed repairs. This stacked branch supplies them and records the result at epistemic `C5` after validation. |
 
 The most important distinction is between the parent implementation and the concrete
 instance. The generic implementation was unsound; the specific instance was sound.
@@ -56,6 +57,11 @@ shipped beside it. F34 and F35 record the literature-source drift found while fo
 this review back into the canonical resource and frontier tiers.
 The other `n = 17`--`19` frontier movement was outside this review’s mathematical scope
 except where the earlier published-value `n = 17` certificate served as a control.
+The final reconciliation through `353998ac` additionally audited T-020, the integer and
+parallel exact-sweep optimization, its timing claims, and its generated planning
+records. Those changes do not alter the T-018 certificate or theorem.
+They do alter the code path that replays T-018, so F36--F42 record the defects found and
+repaired before accepting the optimized path as an equivalent implementation.
 
 The audit was pre-registered under `think-tukn` with five falsifiable hypotheses.
 Two proof-validation lanes were kept separate from the coordinator’s main review:
@@ -717,6 +723,118 @@ Burns, and Massaccesi in their distinct historical roles.
 A blind search also found a refereed 2024 paper that still calls the eleven-square
 optimum unknown; the durable receipt records it as status corroboration, not theorem
 evidence. D-474 records the finding.
+
+### F36: Blocker in the optimized sweep, fixed here: its equivalence check compared one implementation with itself
+
+The final parent replaced the exact verifier’s expanded cell list with one reachable
+span per event-grid column.
+That is the right optimization, but it also redefined the supposedly retained
+`reduce_to_cells` reference as `reduce_to_spans` followed by tuple expansion.
+The test that said the two reductions agreed therefore held by construction.
+A shared off-by-one error in span construction would have passed every claimed
+cell-for-cell equivalence check.
+
+**Resolution:** the pre-optimization cell reducer is restored as an independent
+implementation. It clips each slab and computes its reachable row indices directly; the
+optimized span reducer shares neither that reachability loop nor the Fraction arithmetic
+used after it.
+Retained-rung tests compare the two event sets, cell sets, minimum values,
+and witnesses. D-483 records the collapsed oracle.
+
+### F37: Blocker in the optimized sweep, fixed here: its public integer entry point could bypass the overflow proof
+
+The ordinary dispatcher proved that the scaled total mass was below its signed `int64`
+limit before calling the integer sweep.
+The integer function itself was public, however, and accepted a caller-supplied scale
+without repeating that proof.
+Individual weights could fit in `int64` while their coincident prefix sum overflowed, or
+a non-integral scaled weight could reach NumPy through an unsupported call path.
+
+**Resolution:** the public integer entry point now independently requires nonnegative
+weights, a positive integer scale, integral scaled weights, and an exact scaled total
+below the conservative limit before allocating its grid.
+A direct-call regression with two coincident `2^62` weights must refuse.
+D-484 records the trust-boundary gap.
+
+### F38: High resource-safety defect, fixed here: parallel replay scaled memory with the host’s CPU count
+
+The optimized verifier defaulted to `os.cpu_count()` workers and allocated one dense
+event grid per worker.
+On a high-core host that can turn a valid replay into tens of gigabytes of transient
+memory. The Linux path also forced `fork` to make stdin callers work, which is unsafe as
+a library default in a threaded host and does not address the same importability problem
+on other platforms.
+
+**Resolution:** worker selection uses the process-available CPU count and is capped by
+four workers, the number of directions, and a conservative 512 MiB concurrent-grid
+budget. A certificate whose one supported grid exceeds that parallelism budget runs in
+one process rather than multiplying the allocation.
+Non-importable `__main__` contexts, including missing paths, `<stdin>`, and `<string>`,
+use the serial path; no platform forces `fork`. D-485 and focused scheduling controls
+record the boundary.
+
+### F39: Medium witness recurrence, fixed here: the integer route restored an infeasible midpoint
+
+F11 and D-448 had already established that the midpoint of a reachable event cell need
+not lie in the rotated feasible-centre polygon.
+The new integer route returned exactly that midpoint, even though the Fraction route had
+been repaired to return a point from the clipped intersection.
+Its minimum remained correct, but its displayed witness could again fail its own
+placement constraints.
+
+**Resolution:** both routes use the exact clipped-cell witness constructor.
+Their agreement tests therefore bind a feasible witness as well as the minimum.
+D-486 records the recurrence.
+
+### F40: High evidence drift, fixed here: operator timings became current benchmarks and complexity laws
+
+The optimization commit reported substantial speedups, but the retained numbers were
+operator observations without raw timing receipts; some were taken while the old
+Fraction replay was still consuming the same machine.
+They also precede the worker and memory caps added here.
+Agenda and handoff prose nevertheless promoted them to current measurements, treated two
+or three sizes as a settled cost law, and concluded that the retention gate no longer
+bound the workflow.
+
+**Resolution:** the record preserves the observations as pre-cap operator reports and
+does not call them benchmarks for the corrected implementation.
+Agenda 019 first measures the current exact and interval routes before retargeting;
+Agenda 020 no longer infers a general complexity law or current gate ranking from the
+old points. The duplicate full-certificate test was removed from the ordinary tier
+because the existing exhaustive node already owns that decision.
+D-487 records the evidence promotion.
+
+### F41: High drift-detector regression, fixed here: a missing live certificate could silently select history
+
+The rung-figure checker defined the current artifact as the file literally named
+`certificate.json`, but the final parent fell back to the first resolved historical
+certificate when that pointer was absent.
+A result could therefore lose its live artifact and still have unqualified prose checked
+against whichever old rung happened to be listed first.
+The same change redefined every unqualified `margin` as distance to `floor(mass) + 1`,
+even when the certificate’s declared target was larger; for T-020 that silently changed
+“margin” from the recorded `n = 20` target to `n = 19`.
+
+**Resolution:** a certificate-bearing result must resolve exactly one live
+`certificate.json`; no historical fallback exists.
+Unqualified margin means the certificate’s declared target, while prose such as “margin
+below nineteen” is parsed and checked against that explicit integer.
+Missing, duplicate, and swapped-target controls all fail.
+D-488 records the detector regression.
+
+### F42: Medium terminology defect, fixed here: proof conditions reused the confirmation ladder
+
+The fractional-certificate proof, portable checkers, Lean report, and several historical
+records called their five local hypotheses C₀ through C₄. Elsewhere the repository uses
+`C0` through `C5` exclusively for epistemic confirmation levels, so a sentence such as
+“the interval route decides C₄” was genuinely ambiguous: it could mean the fifth proof
+condition or distinct-method confirmation.
+
+**Resolution:** the proof contract and every maintained output now say **Condition 1**
+through **Condition 5**. Adversarial tests use **Control 1**, **Control 2**, and so on;
+external mathematical labels use typographic subscripts where they must be preserved.
+`conventions.md` makes the reservation explicit.
+D-489 records the collision.
 
 ## Frozen hypotheses and outcomes
 

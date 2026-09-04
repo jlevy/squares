@@ -87,9 +87,7 @@ def test_ceiling_limited_certificate_is_excluded_from_the_mean() -> None:
     assert n12["binds"] == "ceiling"
 
     mean_without = mean_packing_ratio(measured)
-    changed_n12 = [
-        {**row, "ratio": 100.0} if row["n"] == 12 else row for row in measured
-    ]
+    changed_n12 = [{**row, "ratio": 100.0} if row["n"] == 12 else row for row in measured]
     assert mean_packing_ratio(changed_n12) == pytest.approx(mean_without)
 
 

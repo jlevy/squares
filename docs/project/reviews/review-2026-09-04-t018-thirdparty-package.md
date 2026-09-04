@@ -15,12 +15,13 @@ weaker, the certificate is accepted with the numbers the README states, the cont
 reproduces Massaccesi’s published value by an implementation that did not see his code,
 every perturbation in the package’s falsifier and every perturbation of my own is
 refused for the right reason or accepted because it is in fact a valid certificate, and
-an independent implementation of C4 agrees with the verifier to the last cell.
+an independent implementation of **Condition 5** agrees with the verifier to the last
+cell.
 
 The verdict rests on two things the package cannot supply and says so: CPython’s
 arbitrary-precision integers and `fractions` module, and the reader’s own reading of the
-six-step proof and of the finite reduction behind C4. I did both readings from scratch;
-they are in sections 1 and 2.
+six-step proof and of the finite reduction behind **Condition 5**. I did both readings
+from scratch; they are in sections 1 and 2.
 
 **No defect found threatens the result.** Three defects affect the packaging (a
 misattributed sentence about the control, tracebacks where a labelled refusal is
@@ -56,21 +57,21 @@ The three points the assignment singled out:
 squares with disjoint interiors fit in `[0, L]²`”, and the shrunken side `B` never
 touches the container.
 `B` is spent entirely on orientation: a unit square at an arbitrary angle contains a
-concentric `B`-square at the nearest net angle, and C4 speaks only about `B`-squares *at
-net angles*. A bound `L/B` would need the scaled statement “no `n` `B`-squares at *any*
-angle fit in `[0, L]²`”, which C4 does not give, because a `B`-square between net angles
-contains no `B`-square at a net angle.
+concentric `B`-square at the nearest net angle, and **Condition 5** speaks only about
+`B`-squares *at net angles*. A bound `L/B` would need the scaled statement “no `n`
+`B`-squares at *any* angle fit in `[0, L]²`”, which **Condition 5** does not give,
+because a `B`-square between net angles contains no `B`-square at a net angle.
 The control makes the point numerically: `L/B` would read `4.517999` for Massaccesi’s
 certificate, which is not his published `4.5058`, and `3.808760` here.
 Massaccesi’s own source prints `s(17) >= {L}` (section 4), so the published value is `L`
 under the same reading.
 
-**Why strictness in C3 gives disjointness.** Step 3 puts `Q` in the *open* interior of
-`S'_j`: for each edge normal of `S'_j` the support of `Q` is `(B/2)(cos d + sin d)`, and
-`B(cos d + sin d) = B cos d (1 + tan d) ≤ B(1 + D) < 1`. So `P_j ⊂ int(S_j)`, the
-interiors are pairwise disjoint by hypothesis, hence the `P_j` are pairwise disjoint.
-An atom on the boundary of the closed `Q` is therefore in `int(S_j)` and in no other
-`int(S_k)`, so it is counted once.
+**Why strictness in Condition 4 gives disjointness.** Step 3 puts `Q` in the *open*
+interior of `S'_j`: for each edge normal of `S'_j` the support of `Q` is
+`(B/2)(cos d + sin d)`, and `B(cos d + sin d) = B cos d (1 + tan d) ≤ B(1 + D) < 1`. So
+`P_j ⊂ int(S_j)`, the interiors are pairwise disjoint by hypothesis, hence the `P_j` are
+pairwise disjoint. An atom on the boundary of the closed `Q` is therefore in `int(S_j)`
+and in no other `int(S_k)`, so it is counted once.
 Without strictness `Q` could reach `∂S_j`, and an atom on an edge shared by two packed
 squares would be counted twice, which is exactly the double count that the counting step
 forbids. (Strictness is sufficient rather than necessary: with `B(1 + D) = 1` one still
@@ -80,24 +81,25 @@ form, which is the safe side.)
 
 **Whether the net covers every real orientation.** Orientation is defined modulo a
 quarter turn, so `φ ∈ [0, π/2)`. For `φ ∈ [0, π/4]` the net covers directly: `t₀ = 0`
-(precondition P3) and C2 give `[0, π/4] ⊆ [θ₀, θ_K]`, so `φ` lies in a closed gap
-`[θ_k, θ_{k+1}]`, and the worst case is the midpoint, where `d` equals the half-gap and
-`tan d = (t_{k+1} − t_k)/(1 + t_k t_{k+1}) ≤ D` exactly, the tangent subtraction formula
-being valid because each half-gap is below `π/2`. There is no seam.
+(precondition P3) and **Condition 3** give `[0, π/4] ⊆ [θ₀, θ_K]`, so `φ` lies in a
+closed gap `[θ_k, θ_{k+1}]`, and the worst case is the midpoint, where `d` equals the
+half-gap and `tan d = (t_{k+1} − t_k)/(1 + t_k t_{k+1}) ≤ D` exactly, the tangent
+subtraction formula being valid because each half-gap is below `π/2`. There is no seam.
 For `φ ∈ (π/4, π/2)` the diagonal reflection `R` gives orientation `π/2 − φ ∈ (0, π/4)`;
 `R(Q)` is not at a net direction and need not be, because only `mass(R(Q)) = mass(Q)` is
-used, and that follows from C0 (`R` is one of the eight maps the verifier checks, and
-invariance of the aggregated weight function under `R` is what `condition_c0` decides).
-The direction net is not uniform in angle; `D` is the maximum over gaps and is attained
-at `k = 0`, where `D = T/K = 207107/90000000`, which I recomputed.
+used, and that follows from **Condition 1** (`R` is one of the eight maps the verifier
+checks, and invariance of the aggregated weight function under `R` is what `condition_1`
+decides). The direction net is not uniform in angle; `D` is the maximum over gaps and is
+attained at `k = 0`, where `D = T/K = 207107/90000000`, which I recomputed.
 
 Two further checks on the statement.
-C1 must be strict, and is: with `Σw = n` step 6 gives `n ≤ n`, no contradiction (the
-falsifier’s eighth row shows the verifier refusing exactly this).
-C4 may be non-strict, and is: `mass(Q) ≥ 1` is all step 6 needs (my attack 2 in section
-5 shows the verifier accepting a certificate whose least covered weight is exactly `1`,
-correctly). The closing infimum argument is right: the set of feasible sides is upward
-closed, so a container of side exactly `L` failing gives `s(n) ≥ L`.
+**Condition 2** must be strict, and is: with `Σw = n` step 6 gives `n ≤ n`, no
+contradiction (the falsifier’s eighth row shows the verifier refusing exactly this).
+**Condition 5** may be non-strict, and is: `mass(Q) ≥ 1` is all step 6 needs (my attack
+2 in section 5 shows the verifier accepting a certificate whose least covered weight is
+exactly `1`, correctly).
+The closing infimum argument is right: the set of feasible sides is upward closed, so a
+container of side exactly `L` failing gives `s(n) ≥ L`.
 
 ## 2. `verify.py` Implements That Theorem, Not a Weaker Cousin
 
@@ -110,21 +112,22 @@ Read line by line against the README.
 - **P1 to P5** are the shape the theorem assumes: `n ≥ 1`, positive sides, non-negative
   weights and at least one atom, `t₀ = 0` with a strictly increasing net of at least two
   terms, triples, and the `claim` string equal to `s(n) >= L` for the parsed `n` and
-  `L`. A failing precondition returns before C0 to C4, which is reasonable but
-  contradicts the README’s “nothing short-circuits” (defect D3).
-- **C0** aggregates weight by site and requires, for every site and each of the eight
-  maps, that the image site carries the same total weight.
+  `L`. A failing precondition returns before **Condition 1** through **Condition 5**,
+  which is reasonable but contradicts the README’s “nothing short-circuits” (defect D3).
+- **Condition 1** aggregates weight by site and requires, for every site and each of the
+  eight maps, that the image site carries the same total weight.
   Because each map’s inverse is in the group and the check runs over every site, this is
   full invariance of the weight function on the plane, including that the support maps
   onto itself. It is the reflection `(x, y) ↦ (y, x)` the proof needs, plus seven maps it
   does not, which is the safe direction.
-- **C1, C2, C3** are the closed-form tests of the README, in the same rationals.
-  C3 computes `D` as the maximum of `(b − a)/(1 + ab)` over adjacent pairs, which is the
-  tangent of the half-gap, as the README’s remark says.
-- **C4** decides, for each direction, the exact minimum of the covered weight over the
-  closed set `F` of admissible centres, `h ≤ X, Y ≤ L − h` with `h = B(|c| + |s|)/2`.
-  That is “every closed `B`-square at angle `θ_k` inside `K`”, closed containment, a
-  superset of the placements the proof meets.
+- **Condition 2**, **Condition 3**, and **Condition 4** are the closed-form tests of the
+  README, in the same rationals.
+  **Condition 4** computes `D` as the maximum of `(b − a)/(1 + ab)` over adjacent pairs,
+  which is the tangent of the half-gap, as the README’s remark says.
+- **Condition 5** decides, for each direction, the exact minimum of the covered weight
+  over the closed set `F` of admissible centres, `h ≤ X, Y ≤ L − h` with
+  `h = B(|c| + |s|)/2`. That is “every closed `B`-square at angle `θ_k` inside `K`”,
+  closed containment, a superset of the placements the proof meets.
   The reduction to open grid cells is the one place the verifier could be subtly weaker
   than the theorem, so I re-derived its five claims (the comment block at lines 201 to
   233): (a) the covered weight is constant on an open cell because every atom box is
@@ -160,10 +163,11 @@ Read line by line against the README.
   dictionary, and the printed conclusion uses the parsed `n` and `L`. The `total_mass`
   and `least_cell_mass` fields are compared and reported as `info`/`NOTE` only.
 
-Where the verifier is stricter than the theorem it is always on the safe side: C0 checks
-the full group; a zero-weight atom at an asymmetric site is refused (defect D6); a
-direction at which no `B`-square fits with room raises instead of being treated as
-vacuous. I found no place where it is weaker.
+Where the verifier is stricter than the theorem it is always on the safe side:
+**Condition 1** checks the full group; a zero-weight atom at an asymmetric site is
+refused (defect D6); a direction at which no `B`-square fits with room raises instead of
+being treated as vacuous.
+I found no place where it is weaker.
 
 ## 3. Runs: Observed Numbers
 
@@ -174,14 +178,15 @@ from other work.
 | Run | Interpreter | Result |
 | --- | --- | --- |
 | `check.py` | CPython 3.14.7 (project venv, invoked by absolute path) | control rebuilt identical; certificate `VERIFIED: s(11) >= 19/5`, least covered weight `50003/50000` at direction 0, centre `(53/100, 53/100)`, `90546593` cells over 181 directions in 25.4 s; control `VERIFIED: s(17) >= 22529/5000`, least covered weight `1`, centre `(364907/560000, 364907/560000)`, `16562293` cells in 7.4 s; bounded negative-weight control refused; `all four steps passed`; exit 0 |
-| `check.py` (the README’s stranger run) | `/usr/bin/python3` = CPython 3.11.15 | identical numbers; C4 33.3 s and 10.0 s; real 43.7 s; exit 0 |
+| `check.py` (the README’s stranger run) | `/usr/bin/python3` = CPython 3.11.15 | identical numbers; **Condition 5** 33.3 s and 10.0 s; real 43.7 s; exit 0 |
 | `verify.py control-n17-massaccesi.json` | CPython 3.10.20 | `VERIFIED`, least covered weight `1`, `16562293` cells in 9.3 s; exit 0 |
 | `verify.py certificate.json --audit 3` | CPython 3.14.7 | `VERIFIED`, same numbers, 30.7 s; exit 0 |
 | `falsify.py` | CPython 3.14.7 | ten rows, every cell identical to the README’s table; real 4 m 21.6 s; exit 0 |
 
-The ten falsifier rows as observed (C4 column is the recomputed least covered weight):
+The ten falsifier rows as observed (the **Condition 5** column is the recomputed least
+covered weight):
 
-| Perturbation | C0 | C1 | C2 | C3 | C4 | Verdict |
+| Perturbation | **Condition 1** | **Condition 2** | **Condition 3** | **Condition 4** | **Condition 5** | Verdict |
 | --- | --- | --- | --- | --- | --- | --- |
 | tight atom’s weight −1/10000 | FAIL | PASS | PASS | PASS | FAIL `24999/25000` | REFUSED |
 | its orbit’s weights −1/10000 | PASS | PASS | PASS | PASS | FAIL `49993/50000` | REFUSED |
@@ -197,15 +202,15 @@ The ten falsifier rows as observed (C4 column is the recomputed least covered we
 The README’s side arithmetic also checks: `(19/5 − 2)²·5 = 81/5 > 16`, the movement
 `19/5 − (2 + 4/√5) = 0.0111456…`, Trump’s polynomial has its real root at
 `3.8770835900…`, `B(1 + D) = 899996306539/900000000000` with margin `4.10 × 10⁻⁶`, the
-C2 slack `309449/250000000000`, and `K = 180` is the least net size for this `B`
-(`K > BT/(1 − B) = 179.68`; at `K = 179` C3 fails, section 5).
+**Condition 3** slack `309449/250000000000`, and `K = 180` is the least net size for
+this `B` (`K > BT/(1 − B) = 179.68`; at `K = 179` **Condition 4** fails, section 5).
 
 ## 4. Independent Cross-Checks
 
-**An independent implementation of C4.** I wrote one from the theorem and the reduction,
-sharing no code with `verify.py`: per-strip one-dimensional difference arrays instead of
-a 2D prefix sum, the `V`-range of `F` within a strip from `F`’s vertices and edge
-crossings instead of Sutherland-Hodgman clipping, cell selection by linear counting
+**An independent implementation of Condition 5.** I wrote one from the theorem and the
+reduction, sharing no code with `verify.py`: per-strip one-dimensional difference arrays
+instead of a 2D prefix sum, the `V`-range of `F` within a strip from `F`’s vertices and
+edge crossings instead of Sutherland-Hodgman clipping, cell selection by linear counting
 instead of `bisect`, and rank arithmetic for the cells.
 Over all 181 directions it reports least covered weight `50003/50000` at direction 0 and
 `90546593` cells, both equal to the verifier’s, and its per-direction cell counts agree
@@ -244,25 +249,25 @@ should trip, with the numbers to match.
 
 | Input | Observed | Right reason |
 | --- | --- | --- |
-| 1. Whole orbit of the tight atom `(1/2, 29/30)` moved to `x − 1`, outside the container, symmetry kept | C0 PASS; C4 FAIL `387/400 = 0.9675`; `all atoms lie in [0, L]^2: no`; REFUSED | Yes: an outside atom is never covered, so the value equals the orbit-dropped row |
-| 2. Orbit weights lowered by exactly `3/100000` each | C4 PASS, least covered weight exactly `1`; total `1084751/100000 < 11`; VERIFIED | Yes: `mass(Q) ≥ 1` is the hypothesis, and this is a valid certificate of the same bound |
-| 3. Orbit weights lowered by `3/100000 + 10⁻¹⁵` each | C4 FAIL `499999999999999/500000000000000`; REFUSED | Yes: the drop is exactly `2 × 10⁻¹⁵`, two orbit members in the tight cell; the boundary is decided exactly |
-| 4. One direction fewer, `K = 179` (closed-form) | C3 FAIL `B(1 + D) = 895007806539/895000000000 = 1.0000087` | Yes |
-| 5. `K = 90` (closed-form) | C3 FAIL `1.0022918` | Yes |
-| 6. `K = 90` with `B = 995/1000` so C3 passes (`0.99958`) | C4 FAIL `17771/20000 = 0.88855` at direction 50; REFUSED | Yes: a thinner net bought with a smaller square covers less |
-| 7. Container `381/100`, atoms scaled by `L'/L` | C0 PASS; C4 FAIL `17771/20000` at direction 101; REFUSED | Yes |
-| 8. Container `381/100`, atoms translated by `1/200` | C0 PASS; C4 FAIL `22443/25000 = 0.89772` at direction 0, centre `≈ (0.49992, 0.49992)`; REFUSED | Yes |
-| 9. Container `19/5 + 10⁻⁶`, atoms translated by `5 × 10⁻⁷` | C0 PASS; C4 PASS `50003/50000`, `90546641` cells; VERIFIED `s(11) >= 3800001/1000000` | Yes, and see below |
-| 10. Orbit of the tight atom shifted by `+1/1000` in `x` on all eight images | C0 PASS; C4 PASS `50003/50000`, `90547389` cells; VERIFIED `s(11) >= 19/5` | Yes: a different, equally valid certificate |
+| 1. Whole orbit of the tight atom `(1/2, 29/30)` moved to `x − 1`, outside the container, symmetry kept | **Condition 1** PASS; **Condition 5** FAIL `387/400 = 0.9675`; `all atoms lie in [0, L]^2: no`; REFUSED | Yes: an outside atom is never covered, so the value equals the orbit-dropped row |
+| 2. Orbit weights lowered by exactly `3/100000` each | **Condition 5** PASS, least covered weight exactly `1`; total `1084751/100000 < 11`; VERIFIED | Yes: `mass(Q) ≥ 1` is the hypothesis, and this is a valid certificate of the same bound |
+| 3. Orbit weights lowered by `3/100000 + 10⁻¹⁵` each | **Condition 5** FAIL `499999999999999/500000000000000`; REFUSED | Yes: the drop is exactly `2 × 10⁻¹⁵`, two orbit members in the tight cell; the boundary is decided exactly |
+| 4. One direction fewer, `K = 179` (closed-form) | **Condition 4** FAIL `B(1 + D) = 895007806539/895000000000 = 1.0000087` | Yes |
+| 5. `K = 90` (closed-form) | **Condition 4** FAIL `1.0022918` | Yes |
+| 6. `K = 90` with `B = 995/1000` so **Condition 4** passes (`0.99958`) | **Condition 5** FAIL `17771/20000 = 0.88855` at direction 50; REFUSED | Yes: a thinner net bought with a smaller square covers less |
+| 7. Container `381/100`, atoms scaled by `L'/L` | **Condition 1** PASS; **Condition 5** FAIL `17771/20000` at direction 101; REFUSED | Yes |
+| 8. Container `381/100`, atoms translated by `1/200` | **Condition 1** PASS; **Condition 5** FAIL `22443/25000 = 0.89772` at direction 0, centre `≈ (0.49992, 0.49992)`; REFUSED | Yes |
+| 9. Container `19/5 + 10⁻⁶`, atoms translated by `5 × 10⁻⁷` | **Condition 1** PASS; **Condition 5** PASS `50003/50000`, `90546641` cells; VERIFIED `s(11) >= 3800001/1000000` | Yes, and see below |
+| 10. Orbit of the tight atom shifted by `+1/1000` in `x` on all eight images | **Condition 1** PASS; **Condition 5** PASS `50003/50000`, `90547389` cells; VERIFIED `s(11) >= 19/5` | Yes: a different, equally valid certificate |
 | 11. `claim` changed to `s(11) >= 4`, `L` unchanged (closed-form) | P5 FAIL | Yes |
-| 12. `L = 4`, `claim` unchanged (closed-form) | P5 FAIL and C0 FAIL (`(7/2, 29/30)` has no weight) | Yes |
-| 13. `n = 12`, `claim` `s(12) >= 19/5` (closed-form) | all pass | Correct: `Σw < 12` and the same C4 prove the weaker `s(12) ≥ 19/5` |
+| 12. `L = 4`, `claim` unchanged (closed-form) | P5 FAIL and **Condition 1** FAIL (`(7/2, 29/30)` has no weight) | Yes |
+| 13. `n = 12`, `claim` `s(12) >= 19/5` (closed-form) | all pass | Correct: `Σw < 12` and the same **Condition 5** prove the weaker `s(12) ≥ 19/5` |
 | 14. `outer_side` written `38/10` (closed-form) | P5 PASS: `Fraction` normalises | Correct |
 | 15. Float weight `0.01628`; decimal string `"0.01628"`; `direction_steps = 0` | `ValueError` / `ValueError` / `ZeroDivisionError` tracebacks, exit 1 | Refused, but by traceback (defect D2) |
-| 16. `angle_limit` negated | P3 FAIL, C2 FAIL (C3 passes with `D < 0`; irrelevant, refused) | Yes |
-| 17. `B = 1` | C3 FAIL `1.0023` | Yes: `B < 1` is forced by C3 whenever `D > 0` |
-| 18. Negative weight `−100` at `(−5, −5)` | P2 FAIL and C0 FAIL | Yes |
-| 19. Zero-weight atom at an asymmetric site | C0 FAIL | Conservative (defect D6) |
+| 16. `angle_limit` negated | P3 FAIL, **Condition 3** FAIL (**Condition 4** passes with `D < 0`; irrelevant, refused) | Yes |
+| 17. `B = 1` | **Condition 4** FAIL `1.0023` | Yes: `B < 1` is forced by **Condition 4** whenever `D > 0` |
+| 18. Negative weight `−100` at `(−5, −5)` | P2 FAIL and **Condition 1** FAIL | Yes |
+| 19. Zero-weight atom at an asymmetric site | **Condition 1** FAIL | Conservative (defect D6) |
 | 20. Tight atom split into two entries at the same site | all pass, `426 atoms on 425 distinct sites` | Correct: weights aggregate by site |
 | 21. `n = 11.9` | `int()` truncates to 11; verdict printed for `n = 11` | Cannot mislead, but lenient (defect D4) |
 
@@ -325,8 +330,9 @@ verdict changes):
   Exit status is 1, so no false acceptance is possible and `check.py` still reports the
   step as failed, but the README’s “the verifier refuses any other form” promises a
   labelled refusal that does not happen.
-- **D3. “Nothing short-circuits” overstated.** True of C0 to C4; a failing precondition
-  P1 to P5 returns before them (`decide`, line 454). The README should say so.
+- **D3. “Nothing short-circuits” overstated.** True of **Condition 1** through
+  **Condition 5**; a failing precondition P1 to P5 returns before them (`decide`, line
+  454). The README should say so.
 
 **Cosmetic:**
 
@@ -335,7 +341,7 @@ verdict changes):
   mislead, but a strict integer check is cheap.
 - **D5.** The `claim` must spell `L` in lowest terms (`19/5`); `s(11) >= 38/10` is
   refused at P5 although `outer_side` may be written `38/10`. A false refusal only.
-- **D6.** A zero-weight atom at a site without a full orbit fails C0
+- **D6.** A zero-weight atom at a site without a full orbit fails **Condition 1**
   (`None != Fraction(0)`). Harmless conservatism.
 - **D7.** Timing prose disagrees: README “Expect about a minute”, `check.py` docstring
   “Expect about half a minute”.
@@ -368,8 +374,8 @@ not survive the session; every number it produced is in this document.
 The project interpreter `packing/.venv/bin/python3` (3.14.7) was used for all work on
 repository code; the system interpreters 3.10 and 3.11 were used only for the package’s
 own portability claim, on the copy outside the repository.
-Total compute: about eleven full C4 decisions plus two runs of the independent
-implementation, under fifteen CPU minutes.
+Total compute: about eleven full **Condition 5** decisions plus two runs of the
+independent implementation, under fifteen CPU minutes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

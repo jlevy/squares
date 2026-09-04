@@ -18,6 +18,12 @@ number, citation, recommendation or claim boundary, and none may be altered here
 References of the form `scratchpad/...` in the body below are the reviewer’s own record
 of what was read and where it was written at review time, and are left as written.
 
+On 2026-09-04, human-facing adversarial-control labels were normalized from their legacy
+compact form to **Control 1**–**Control 8**, reserving `C0`–`C5` for epistemic
+confirmation levels.
+The source hash retains the historical wording; no finding, verdict or claim boundary
+changed.
+
 * * *
 
 - Reviewer: independent Max reviewer for the 220–245 readiness checkpoint of BC-152,
@@ -131,7 +137,7 @@ A missing constraint was the danger; the reviewer’s enumeration is from the po
 combinatorics (4 walls × 4 corners × 5 squares; per pair, both hosts × 4 edges × 4
 corners) and matches the instrument’s on every key.
 The instrument’s own cardinality guard (`expected_cardinality` recomputed from the pose)
-is the right shape and is exercised by control C3.
+is the right shape and is exercised by Control 3.
 
 Geometric preconditions the instrument does **not** machine-check but which the SAT
 encoding needs: counter-clockwise corner order (so `(dy, −dx)` is outward), right
@@ -192,26 +198,27 @@ rows bound, `holds = False`).
 
 ## 7. The controls, and the caveat
 
-Genuine perturbation controls (each could fail if the instrument were wrong): C3
-`omitted_constraint` (prunes a branch, cardinality guard raises), C5 `side_release`
-(exhibits exact feasible neighbours at side + 1/1000 and none at the fixed side), C6
-`wrong_chart` (three impostors refused by the chart’s own identities), C7
-`certificate_drift` (digest moves), C8 `exp034_angle_and_slide` (feasibility predicate
-finds exp-034’s real family at side `1 + 5√2/4` — a positive control — and none of it at
-Goebel’s side; sides differ by `3√2/4 − 1 > 0`). C2 `zero_margin` is a thin but real
-unit test of `holds_at_base` strictness.
+Genuine perturbation controls (each could fail if the instrument were wrong): Control 3
+`omitted_constraint` (prunes a branch, cardinality guard raises), Control 5
+`side_release` (exhibits exact feasible neighbours at side + 1/1000 and none at the
+fixed side), Control 6 `wrong_chart` (three impostors refused by the chart’s own
+identities), Control 7 `certificate_drift` (digest moves), Control 8
+`exp034_angle_and_slide` (feasibility predicate finds exp-034’s real family at side
+`1 + 5√2/4` — a positive control — and none of it at Goebel’s side; sides differ by
+`3√2/4 − 1 > 0`). Control 2 `zero_margin` is a thin but real unit test of
+`holds_at_base` strictness.
 
 Tautological (cannot fail once `build_system` has succeeded, and do not call `bind`):
 
-- C1 `changed_feature`:
+- Control 1 `changed_feature`:
   `rejected = all(margin_is_nonzero and active_key_agreement_breaks)`. The siblings’
   nonzero margins are guaranteed by the classification that already ran (`_pair_report`
   raises `DisjunctiveTouchError` on a second zero corner), and `claimed != t012_keys` is
   true whenever `substitute != contact`. Its only non-trivial output is the
   informational `gradient_indistinguishable = 4`.
-- C4 `invented_contact`: `invented = inactive_walls[0]`, whose margin is positive by the
-  property’s definition; `claimed != t012_keys` is true whenever the added key is not
-  already active.
+- Control 4 `invented_contact`: `invented = inactive_walls[0]`, whose margin is positive
+  by the property’s definition; `claimed != t012_keys` is true whenever the added key is
+  not already active.
 
 The binding’s refusal — the certificate this instrument exists to produce — has no
 negative coverage in the author’s suite or tests.
@@ -241,7 +248,7 @@ Author-disclosed, checked accurate:
 
 Undisclosed, found by this review:
 
-5. **C1 and C4 are tautological** (§7). Material for readiness; bounded fix (§9).
+5. **Controls 1 and 4 are tautological** (§7). Material for readiness; bounded fix (§9).
 6. Unchecked geometric preconditions (CCW order, right angles, inradius 1/2) behind the
    SAT constant and the outward-normal convention — verified true by me; should be
    machine-checked or declared alongside the four cited inputs.
@@ -264,10 +271,10 @@ criterion, or that changes any exact quantity.
 
 ## 9. What converts this to PASS
 
-1. Replace C1 and C4 with controls that perturb T-012’s contact list and call `bind`:
-   rename one contact key onto its gradient-degenerate sibling (require `holds = False`,
-   `missing_from_chart`/`missing_from_t012` non-empty), and append one inactive wall key
-   (require `holds = False`). `refusal_paths.py` is a template.
+1. Replace Controls 1 and 4 with controls that perturb T-012’s contact list and call
+   `bind`: rename one contact key onto its gradient-degenerate sibling (require
+   `holds = False`, `missing_from_chart`/`missing_from_t012` non-empty), and append one
+   inactive wall key (require `holds = False`). `refusal_paths.py` is a template.
    Keep the degeneracy finding as a recorded finding, not as the control’s rejection
    mechanism.
 2. Add the same two cases to `tests/test_n5_local_rigidity.py`.
@@ -323,7 +330,7 @@ first exact one, and no method novelty is claimed.
 
 * * *
 
-# Re-review of the C1/C4 repair (commit `609e7392`), 08:08Z–08:14Z
+# Re-review of the Controls 1 and 4 repair (commit `609e7392`), 08:08Z–08:14Z
 
 Narrow scope as directed: the mathematics was not re-derived.
 Package hashes at `609e7392` are in `rereview-file-hashes.txt` and were verified
@@ -346,9 +353,9 @@ current one *only* in `pinned_commit` (the digest will move).
 On that byte-level confirmation this re-review’s verdict is PASS; nothing else needs my
 eyes again.
 
-## 1. C1 and C4 now bite — verified by removal (`guard_is_load_bearing.py`, `.out`)
+## 1. Controls 1 and 4 now bite — verified by removal (`guard_is_load_bearing.py`, `.out`)
 
-| configuration | C1 rejected | C4 rejected |
+| configuration | Control 1 rejected | Control 4 rejected |
 | --- | --- | --- |
 | guard and `bind` intact | True | True |
 | `require_active_margins_zero` replaced by a no-op | **False** | **False** |
@@ -357,11 +364,12 @@ eyes again.
 
 Both refusal paths are load-bearing for both controls; neither control can reject
 without the instrument refusing.
-C1’s predicate requires `key_swapped_guard_refused`, `key_swapped_binding_refused` and
-`forgery_guard_refused` for all 12 substitutions (`forgery_binding_refused` is recorded,
-not required — correct, since the gradient alone misses four).
-C4 requires the guard, `not certificate.holds`, and the invented key in
-`missing_from_t012`; the mutated active set has 21 members.
+Control 1’s predicate requires `key_swapped_guard_refused`,
+`key_swapped_binding_refused` and `forgery_guard_refused` for all 12 substitutions
+(`forgery_binding_refused` is recorded, not required — correct, since the gradient alone
+misses four).
+Control 4 requires the guard, `not certificate.holds`, and the invented key
+in `missing_from_t012`; the mutated active set has 21 members.
 
 ## 2. The guard is on the real path, and recomputation is what sees the forgery
 
@@ -503,8 +511,8 @@ cannot lose a character; the working tree’s unrelated uncommitted `defects.md`
 
 ## 4. What changed since the re-reviewed revision (leaf-diff `ba99cccc` → final)
 
-Five changed leaves (C1’s `detail` and `finding` wording; C7’s three derived drift
-digests), the new provenance block, and the affine-law fields.
+Five changed leaves (Control 1’s `detail` and `finding` wording; Control 7’s three
+derived drift digests), the new provenance block, and the affine-law fields.
 No margin, count, certificate, binding row, or control verdict moved.
 The narrow scope is confirmed by the diff itself.
 

@@ -96,7 +96,7 @@ def test_the_gate_describes_its_independence_boundary() -> None:
         ).split()
     )
     assert "Certificate" in words
-    assert "C1-C3 premises" in words
+    assert "Conditions 2--4" in words
     assert "share no modelling assumption" not in words
     assert "share no modeling assumption" not in words
     assert "share the certificate and theorem contract" not in words
@@ -118,7 +118,7 @@ def test_a_side_above_the_ceiling_is_refused_before_any_sweep_runs(
     capsys: pytest.CaptureFixture[str],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Four B-squares across fit at 4, so C4 would force the mass past eleven."""
+    """Four B-squares across fit at 4, so Condition 5 forces mass past eleven."""
 
     def widen(record: dict) -> None:
         record["outer_side"] = "4"
@@ -143,18 +143,18 @@ def test_a_mass_that_does_not_fall_below_n_is_refused(
     no_sweeps(monkeypatch)
     path = write(tmp_path, heavy)
     assert decide(path, quick=True) is False
-    assert "C1 total mass below n failed" in capsys.readouterr().err
+    assert "Condition 2: total mass below n failed" in capsys.readouterr().err
 
 
 @pytest.mark.parametrize(
     "case",
     [
-        ("symmetry", "bogus", "C0"),
-        ("angle_limit", "2/5", "C2"),
-        ("square_side", "1", "C3"),
+        ("symmetry", "bogus", "Condition 1"),
+        ("angle_limit", "2/5", "Condition 3"),
+        ("square_side", "1", "Condition 4"),
     ],
 )
-def test_closed_form_failures_are_refused_before_any_c4_sweep(
+def test_closed_form_failures_are_refused_before_any_condition_5_sweep(
     tmp_path: Path,
     capsys: pytest.CaptureFixture[str],
     monkeypatch: pytest.MonkeyPatch,
@@ -164,7 +164,7 @@ def test_closed_form_failures_are_refused_before_any_c4_sweep(
     no_sweeps(monkeypatch)
     path = write(tmp_path, lambda record: record.__setitem__(field, value))
     assert decide(path, quick=False) is False
-    assert f"{condition} " in capsys.readouterr().err
+    assert f"{condition}: " in capsys.readouterr().err
 
 
 def test_a_false_declared_claim_is_refused_before_any_sweep(
@@ -477,7 +477,9 @@ def test_an_interval_refusal_stops_before_the_exact_sweep(
     monkeypatch.setattr(
         retention,
         "verify_by_intervals",
-        lambda *_args, **_kwargs: FakeIntervalVerdict(accepted=False, failures=("C4",)),
+        lambda *_args, **_kwargs: FakeIntervalVerdict(
+            accepted=False, failures=("Condition 5",)
+        ),
     )
     monkeypatch.setattr(retention, "verify", bomb)
     assert decide(RUNG, quick=False) is False
@@ -552,7 +554,7 @@ def test_an_exact_refusal_is_verdict_bearing(
     monkeypatch.setattr(
         retention,
         "verify",
-        lambda _certificate: FakeExactVerdict(accepted=False, failures=("C4",)),
+        lambda _certificate: FakeExactVerdict(accepted=False, failures=("Condition 5",)),
     )
     assert decide(RUNG, quick=False) is False
     assert "exact sweep refused" in capsys.readouterr().err
@@ -765,7 +767,7 @@ def test_batch_decision_diagnostics_name_the_failing_equal_basename(
     def decide_in_order(*_args: object, **_kwargs: object) -> FakeIntervalVerdict:
         nonlocal calls
         calls += 1
-        return FakeIntervalVerdict(accepted=calls != 1, failures=("C4",))
+        return FakeIntervalVerdict(accepted=calls != 1, failures=("Condition 5",))
 
     monkeypatch.setattr(retention, "verify_by_intervals", decide_in_order)
     monkeypatch.setattr(retention, "verify", bomb)

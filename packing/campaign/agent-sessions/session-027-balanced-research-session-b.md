@@ -503,7 +503,7 @@ session:
     - D-346 records printed o1 versus the o4 premises and has an executable typed source-label refusal.
     - D-347 records undefined i while the packet retains only a separately tagged midpoint candidate with exact symmetry and mutation controls.
     - The research note, synopsis, agenda state, generated defect report, and think-trkj note all name D-344 through D-347 and keep the complete replay blocked.
-    - The first unresolved incidence is the undeveloped deduction from C4 containing a-prime and avoiding two open triangles to containment in polygon (a a1 p b2 e f1 r a2).
+    - The first unresolved incidence is the undeveloped deduction from source square C₄ containing a-prime and avoiding two open triangles to containment in polygon (a a1 p b2 e f1 r a2).
     - The defect source now contains 347 entries; 100 Markdown frontmatters and 225 YAML datasets validate, synopsis and six generated report tables reconcile, and 21 focused tests plus Ruff and BasedPyright are green.
     - Disk reports about 11 GiB free; no long gate or hosted CI poll ran.
     stop_reason: >-

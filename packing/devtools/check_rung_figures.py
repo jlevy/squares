@@ -155,14 +155,12 @@ class CertificateFigures:
 
     @property
     def margin(self) -> Fraction:
-        """Headroom below the least integer size this atom mass certifies directly.
+        """Headroom below the target ``n`` recorded in the certificate."""
+        return self.n - self.mass
 
-        A certificate recorded with a larger target ``n`` may reach earlier cases too.
-        Unqualified reach-margin prose is therefore measured from ``floor(mass) + 1``,
-        not from the target field stored in the JSON.
-        """
-        least_n = self.mass.numerator // self.mass.denominator + 1
-        return least_n - self.mass
+    def margin_below(self, n: int) -> Fraction:
+        """Headroom below an explicitly named integer reached by this certificate."""
+        return n - self.mass
 
 
 #: The retained certificate (or None), a side -> certificate index, and every resolved
@@ -233,13 +231,35 @@ def pick_retained(resolved: list[CertificateFigures]) -> CertificateFigures | No
     `certificate.json` by this repository's own naming convention (D-439's fix:
     `certificate.json` is the moving top-rung pointer, `certificate-A-B.json` an
     immutable historical rung) -- independent of declaration order, so a result listing
-    its artifacts in some other sequence still resolves the right one as primary. Falls
-    back to the first resolved certificate if none carries that exact basename.
+    its artifacts in some other sequence still resolves the right one as primary. There
+    is deliberately no historical-rung fallback: losing the moving pointer is itself the
+    stale-record failure this checker exists to catch.
     """
-    exact = next((c for c in resolved if Path(c.path).name == "certificate.json"), None)
-    if exact is not None:
-        return exact
-    return resolved[0] if resolved else None
+    exact = [c for c in resolved if Path(c.path).name == "certificate.json"]
+    return exact[0] if len(exact) == 1 else None
+
+
+def retained_pointer_problems(result_id: str, resolved: list[CertificateFigures]) -> list[str]:
+    """A certificate-bearing result has exactly one live ``certificate.json`` pointer."""
+    if not resolved:
+        return []
+    pointers = [c for c in resolved if Path(c.path).name == "certificate.json"]
+    if len(pointers) == 1:
+        return []
+    if not pointers:
+        return [
+            (
+                f"{result_id}: certificate artifacts include only historical rungs; "
+                "exactly one moving certificate.json pointer is required"
+            )
+        ]
+    paths = ", ".join(c.path for c in pointers)
+    return [
+        (
+            f"{result_id}: certificate artifacts declare {len(pointers)} moving "
+            f"certificate.json pointers ({paths}); exactly one is required"
+        )
+    ]
 
 
 def resolve_certificates(result: dict) -> ResolvedCertificates:
@@ -279,21 +299,19 @@ class QuotedFigure:
     """The rung side this specific pattern captured alongside the figure, if any."""
     span: tuple[int, int]
     """Character span of the whole match, so the side-token scan can exclude it."""
+    below_n: int | None = None
+    """The integer named by ``below N`` margin prose, when the pattern carries one."""
 
 
-# Seven deliberately narrow, keyword-anchored patterns rather than one generic
+# Eight deliberately narrow, keyword-anchored patterns rather than one generic
 # number-near-a-fraction rule: a bare decimal near a rung reference is often something
 # else entirely (T-019's own next_rung sits a "the movement is +0.0742" a few words from
 # "451/100" with no relation between them), so the keyword requirement is what keeps this
 # from crying wolf. Under-matching a rewording is the safe failure; over-matching is not.
 _TOTAL_IS = re.compile(r"\btotal(?:\s+mass)?\s+is\s+(?:\d+/\d+\s*=\s*)?(\d+\.\d+)\b")
 _MARGIN_IS = re.compile(r"\bmargin\s+is\s+(\d+\.\d+)\b")
-_LEAVING_BELOW = re.compile(r"\bleaving\s+(\d+\.\d+)\s+below\b")
 _ATOMS_COUNT = re.compile(r"\b(\d[\d,]*)\s+atoms\b")
 _MARGIN_AT_SIDE = re.compile(r"\bmargin\s+(\d+\.\d+)\s+at\s+(\d+)/(\d+)\b")
-_MARGIN_BELOW_AT_SIDE_IS = re.compile(
-    r"\bmargin\s+below\s+\w+\s+at\s+(\d+)/(\d+)\s+is\s+(?:already\s+)?(\d+\.\d+)"
-)
 _RUNG_HAS_TOTAL_AND_MARGIN = re.compile(
     r"\b(\d+)/(\d+)\s+rung\b.{0,60}?\bhas\s+total\s+(\d+\.\d+)\s+and\s+margin\s+(\d+\.\d+)",
     re.DOTALL,
@@ -301,6 +319,72 @@ _RUNG_HAS_TOTAL_AND_MARGIN = re.compile(
 _CERTIFICATE_REACH_MASS = re.compile(
     r"\b(?:this|the|retained)\s+certificate(?:'s|\u2019s)\s+(\d+\.\d+)\s+reaching\b"
 )
+
+
+def _integer_names() -> dict[str, int]:
+    """English names used by case prose, from zero through one hundred."""
+    small = {
+        0: "zero",
+        1: "one",
+        2: "two",
+        3: "three",
+        4: "four",
+        5: "five",
+        6: "six",
+        7: "seven",
+        8: "eight",
+        9: "nine",
+        10: "ten",
+        11: "eleven",
+        12: "twelve",
+        13: "thirteen",
+        14: "fourteen",
+        15: "fifteen",
+        16: "sixteen",
+        17: "seventeen",
+        18: "eighteen",
+        19: "nineteen",
+    }
+    tens = {
+        20: "twenty",
+        30: "thirty",
+        40: "forty",
+        50: "fifty",
+        60: "sixty",
+        70: "seventy",
+        80: "eighty",
+        90: "ninety",
+    }
+    names = {name: value for value, name in small.items()}
+    for value, name in tens.items():
+        names[name] = value
+        for unit in range(1, 10):
+            names[f"{name}-{small[unit]}"] = value + unit
+            names[f"{name} {small[unit]}"] = value + unit
+    names["one hundred"] = 100
+    return names
+
+
+_INTEGER_NAMES = _integer_names()
+_INTEGER_NAME_TOKEN = "|".join(
+    re.escape(name) for name in sorted(_INTEGER_NAMES, key=len, reverse=True)
+)
+_INTEGER_TOKEN = rf"(?:\d+|{_INTEGER_NAME_TOKEN})"
+_LEAVING_BELOW = re.compile(
+    rf"\bleaving\s+(?P<value>\d+\.\d+)\s+below\s+(?P<target>{_INTEGER_TOKEN})\b",
+    re.IGNORECASE,
+)
+_MARGIN_BELOW_AT_SIDE_IS = re.compile(
+    rf"\bmargin\s+below\s+(?P<target>{_INTEGER_TOKEN})\s+at\s+"
+    r"(?P<numerator>\d+)/(?P<denominator>\d+)\s+is\s+"
+    r"(?:already\s+)?(?P<value>\d+\.\d+)",
+    re.IGNORECASE,
+)
+
+
+def _named_integer(token: str) -> int:
+    """Parse a decimal integer or one of the bounded English names above."""
+    return int(token) if token.isdigit() else _INTEGER_NAMES[token.lower()]
 
 
 def _rung_pair(sentence: str) -> list[QuotedFigure]:
@@ -314,7 +398,7 @@ def _rung_pair(sentence: str) -> list[QuotedFigure]:
 
 
 def quoted_figures(sentence: str) -> list[QuotedFigure]:
-    """Every figure one of the seven anchored patterns recognises in `sentence`."""
+    """Every figure one of the eight anchored patterns recognises in `sentence`."""
     return (
         [
             QuotedFigure("total", match.group(1), None, match.span())
@@ -325,7 +409,13 @@ def quoted_figures(sentence: str) -> list[QuotedFigure]:
             for match in _MARGIN_IS.finditer(sentence)
         ]
         + [
-            QuotedFigure("margin", match.group(1), None, match.span())
+            QuotedFigure(
+                "margin",
+                match.group("value"),
+                None,
+                match.span(),
+                below_n=_named_integer(match.group("target")),
+            )
             for match in _LEAVING_BELOW.finditer(sentence)
         ]
         + [
@@ -344,9 +434,10 @@ def quoted_figures(sentence: str) -> list[QuotedFigure]:
         + [
             QuotedFigure(
                 "margin",
-                match.group(3),
-                _fraction(match.group(1), match.group(2)),
+                match.group("value"),
+                _fraction(match.group("numerator"), match.group("denominator")),
                 match.span(),
+                below_n=_named_integer(match.group("target")),
             )
             for match in _MARGIN_BELOW_AT_SIDE_IS.finditer(sentence)
         ]
@@ -420,11 +511,19 @@ def figure_problems(
                     f"{label} has {artifact.atom_count}"
                 )
             continue
-        value = artifact.mass if figure.kind == "total" else artifact.margin
+        if figure.kind == "total":
+            value = artifact.mass
+            figure_label = figure.kind
+        elif figure.below_n is not None:
+            value = artifact.margin_below(figure.below_n)
+            figure_label = f"margin below {figure.below_n}"
+        else:
+            value = artifact.margin
+            figure_label = figure.kind
         if not decimal_matches(value, figure.text):
             digits = len(figure.text.split(".", 1)[1])
             problems.append(
-                f"{result_id} [{field}]: prose says {figure.kind} {figure.text}, "
+                f"{result_id} [{field}]: prose says {figure_label} {figure.text}, "
                 f"{label} gives {round_to(value, digits)} (exact {value})"
             )
     return problems
@@ -477,6 +576,7 @@ def check_result(result: dict) -> tuple[list[str], int]:
     retained, sides, resolved = resolve_certificates(result)
 
     problems: list[str] = []
+    problems.extend(retained_pointer_problems(result_id, resolved))
     for cert in resolved:
         problems.extend(certificate_consistency_problems(cert))
 

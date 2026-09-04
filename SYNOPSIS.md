@@ -3123,7 +3123,7 @@ Not claimed: an isolation radius, the side as a variable (false, X-007), global
 uniqueness, any other `n = 5` optimum, applicability of Connelly–Whiteley as stated, or
 novelty of method. Exp-034’s two-parameter feasible family is not a counterexample: it
 lives at side `1 + 5√2/4`, disjoint from the feasible set at Goebel’s side, and X-012
-runs it as the `C8` control on which the instrument must refuse a receipt.
+runs it as Control 8, on which the instrument must refuse a receipt.
 Six gaps stay named and none is a condition of the pass — the printed BCR page behind
 the curve-selection citation is still unread, and the review replaces it with a
 derivation from primary-text Basu–Pollack–Roy plus the one-variable Puiseux fact rather
@@ -3205,27 +3205,27 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 481 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 489 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 99 | asserted something false about the mathematics |
-| validity | 121 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 176 | recorded something its own evidence contradicts |
-| robustness | 62 | did not finish, or finished only by luck |
+| soundness | 100 | asserted something false about the mathematics |
+| validity | 123 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 180 | recorded something its own evidence contradicts |
+| robustness | 63 | did not finish, or finished only by luck |
 | performance | 23 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Seventy-nine of the ninety-nine soundness defects pointed in the *flattering*
-direction**, where the error looks like a success.
+**Eighty of the 100 soundness defects pointed in the *flattering* direction**, where the
+error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy defects in 481, and no soundness defect ever.**
-Every soundness failure was found by a control cell whose answer was known in advance, a
-rule written down before the measurement, a generated view contradicting its source, or
-someone reading carefully.
+**The automated gate has caught seventy-one defects in 489, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Gate-detected entries here are mechanical process, implementation, or
 test-validity failures, found by contiguity, integration, mutation-anchor,

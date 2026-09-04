@@ -533,7 +533,7 @@ def validate_k4_actions(actions: tuple[tuple[str, bool, bool], ...]) -> dict[str
         raise ValueError("K4 actions are not faithful")
     return {
         "order": 4,
-        "group": "C2 x C2 (horizontal and vertical centerline reflections)",
+        "group": "C₂ \u00d7 C₂ (horizontal and vertical centerline reflections)",
         "actions": [name for name, _, _ in actions],
     }
 

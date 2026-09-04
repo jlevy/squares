@@ -154,11 +154,12 @@ nothing about it, and the covering linear program the search actually solves (mi
 total mass subject to every admissible `B`-square carrying mass at least 1) does not
 contain `n` either. It is a question about `L`, `B`, and the net alone.
 So one atom set proves `s(n) ≥ L` for every integer `n` above its own mass, not only the
-one its record happens to name, and a larger `n` is strictly easier to certify at the
-same side.
-This is the exact mechanism behind the `n = 20`-targeted run’s direct reach to
-`n = 19` and its untargeted carry to `n = 21`, and it is why `T-019`’s 1184 atoms
-reached `n = 17`, `18` and `19` without a monotonicity step.
+one its record happens to name.
+As `n` increases, **Condition 2** becomes strictly weaker; the other feasibility
+conditions remain unchanged.
+This is the exact mechanism behind the `n = 20`-targeted run’s direct reach to `n = 19`
+and its untargeted carry to `n = 21`, and it is why `T-019`’s 1184 atoms reached
+`n = 17`, `18` and `19` without a monotonicity step.
 
 Together these separate the mathematical payoff from the computational bill.
 At fixed `L`, `B`, net, and site universe, the covering program does not depend on `n`;
@@ -210,10 +211,10 @@ For `T-018` (`n = 11`, `381/100`), the result narrative reports that one finite-
 row-generation loop ended after three row rounds and `25,318` rows, with final oracle
 least covered mass exactly `1` at every direction.
 No raw run or checkpoint survives.
-`T-020` (`n = 19`–`21`, `24/5`) carries an operator report in the other direction: the
-column generation stopped at round 9 with a reported restricted optimum of `18.916941`,
-because four further rounds were projected to cost about `3.75 h`. No raw run or
-checkpoint is retained for that statement.
+The `n = 20`-targeted build behind `T-020` (`n = 19`–`21`, `24/5`) carries an operator
+report in the other direction: column generation stopped at round 9 with a reported
+restricted optimum of `18.916941`, because four further rounds were projected to cost
+about `3.75 h`. No raw run or checkpoint is retained for that statement.
 The frozen certificate’s feasible mass, `18.922620`, is replayable; the stop reason,
 restricted optimum, and projection are not.
 `T-019` (`n = 17`, `459/100`) is the one case where the record does not narrate its own
@@ -224,8 +225,8 @@ to 27,516 while the restricted optimum remained `18.000000`. The record states t
 run was stopped for its cost rather than for its answer.
 An earlier generated paragraph read this pattern as two cost stops and one converged
 run. The sources support a narrower statement: one `n = 11` finite-site row loop is
-reported as converged, `n = 19` has a qualified operator report of a cost stop, and
-`n = 17` has no recorded stop reason for the measured build.
+reported as converged, the `n = 20`-targeted build has a qualified operator report of a
+cost stop, and `n = 17` has no recorded stop reason for the measured build.
 `D-481` records and corrects that drift.
 A ratio built partly from where a search may have stopped, rather than entirely from
 what a better search may reach, is not a rate to spend a rung’s confidence on.
@@ -263,71 +264,53 @@ Every predicted gain (`0.34`–`0.40`) is larger than the register’s largest p
 single-case movement (`T-001` at about `+0.263935`), by roughly `1.3×` to `1.5×`. These
 remain extrapolated prizes, not achieved movements.
 
-**The cost objection, stated quantitatively.** Atom counts grow with the container’s
-area, at least as a first approximation: the four existing certificates give
-`atoms / side²` of `77.2` (`n = 11`), `133.7` (`n = 12`), `56.2` (`n = 17`) and `98.1`
-(`n = 20`) — already a `2.4×` spread inside the tiny `3.81`–`4.80` band, which is the
-first caveat on everything that follows.
-Using it anyway as an order-of-magnitude heuristic: a run at the predicted side for
-`n = 51` (`7.5644`) against `n = 20`’s `4.80` baseline is `(7.5644 / 4.80)² ≈ 2.48`
-times the atoms — matching the `≈2.4` a side of `~7.5` gives by the same reasoning.
-Three operator-reported exact-sweep timings associated with frozen certificates —
-`1473 s` at 1184 atoms, `4866 s` at 2097, and `5378 s` at 2260 — have no retained raw
-timing transcripts or machine/load records.
-A least-squares log-log fit gives exponent `2.04`; the endpoint slope from 1184 to 2260
-atoms is `2.00`. Combined with the rough area-scaling atom-count model, this suggests a
-*time* cost near `side⁴`, not a measured complexity law.
-The table uses that rounded fourth-power heuristic:
+**The cost objection, stated as far as the evidence permits.** A simple area heuristic
+predicts more atoms at larger sides, but the four retained certificates already range
+from `56.2` to `133.7` atoms per unit area — a `2.4×` spread inside the narrow
+`3.81`–`4.80` band. The heuristic can rank rough scale; it cannot price a run.
 
-| `n` | predicted side | side ÷ 4.80 | atoms × | est. atoms | gate time × | gate time (h) |
-| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 38 | 6.5883 | 1.373 | 1.88 | ~4,260 | 3.55 | 5.3 |
-| 39 | 6.6901 | 1.394 | 1.94 | ~4,390 | 3.77 | 5.6 |
-| 66 | 8.5036 | 1.772 | 3.14 | ~7,090 | 9.85 | 14.7 |
-| 68 | 8.6475 | 1.802 | 3.25 | ~7,340 | 10.53 | 15.7 |
-| 51 | 7.5644 | 1.576 | 2.48 | ~5,610 | 6.17 | 9.2 |
-| 84 | 9.5352 | 1.986 | 3.95 | ~8,920 | 15.57 | 23.3 |
-| 86 | 9.6489 | 2.010 | 4.04 | ~9,130 | 16.33 | 24.4 |
+The historical exact sweep has three unretained operator reports: `1473 s` at 1184
+atoms, `4866 s` at 2097, and `5378 s` at 2260. Their least-squares log-log exponent is
+`2.04`; `2.00` is only the endpoint slope.
+The gate has since been rewritten with exact integer arithmetic, span geometry, and a
+bounded process pool.
+Pre-integration operator reports gave `21.8 s` at 1184 atoms and `38.7 s` or `29.4 s` at
+2260, but those runs lack raw timing and environment records and predate the integrated
+worker-memory cap. They do not justify dividing projected costs by a fixed speedup, and
+the current implementation has no retained benchmark.
 
-This is only the *one-time* retention-gate cost of deciding a single frozen candidate —
-and given the `2.4×` variance already observed in `atoms / side²` inside the existing
-band, the honest range for `n = 51` is closer to “four to twenty-some hours of gate time
-alone” than a single point estimate.
-It is also not the dominant cost of a whole run: row generation, not the exact sweep, is
-`79%`–`94%` of every measured round (agenda-019’s own `BC-191` baseline), and it has
-never been measured as a function of side at all.
-The one existing case study of what an untuned parameter does at a larger side is not
-reassuring: at `n = 20`’s own `4.80`, one site-grid choice cost over `3300 s` without
-finishing round `0`, where a better-tuned grid finished the same round in `376 s` — an
-`8.8×` factor from a single constant, found by accident.
+Search cost is less settled still.
+Operator reports put row generation at `79%`–`94%` of measured rounds, but no retained
+end-to-end comparison establishes what now dominates or how cost changes with side.
+One site-grid choice at side `4.80` reportedly ran for over `3300 s` without finishing
+round 0, while another finished in `376 s`; that single `8.8×` contrast is a warning
+about tuning, not a cost law.
 
 **What has to be true before a run at the top of the reach table is worth starting.**
 Two things, and both are already registered rather than newly proposed here.
-First, `BC-190`’s move — decide accept/reject inside the search with the faster reported
-interval route, keeping the exact sweep only at the final retention gate — has to be
-adopted and verified equivalence-safe; today the exact sweep sits inside the generator’s
-own loop, so every *rejected* trial along the way pays the same tax the final retained
-candidate does, at a side where that tax alone is projected in hours.
+First, `BC-190` must compare the current integer sweep with the interval route inside
+the generator; old interval-to-Fraction ratios do not answer that question.
+Retention must continue to require both method-distinct decisions, regardless of which
+route is used in the search loop.
 Second, `BC-191`’s site-density-as-a-function-of-container-side rule has to exist and be
 applied, because the one clean lesson available — the `8.8×` cost of an untuned grid at
-`n = 20`’s own side — already dwarfs anything the approximate quadratic fit predicts on
-its own. Neither is optional, and both already gate `BC-194` by name in agenda-019.
+`n = 20`’s own side — makes untuned extrapolation unsafe.
+Both measurements already gate `BC-194` by name in agenda-019.
 
 ## Three Proposals, Each With a Falsifier
 
-**1. Adopt `BC-190` — argued on the numbers, not restated.** The interval route decides
-*more* (`361` doubled-net directions against the exact sweep’s `181`) with *fewer*
-hypotheses (it never needs **Condition 1**, since deciding on the doubled net never
-invokes the `D4` reflection).
-The three largest operator-reported paired timings give speed ratios of `22.7×`,
-`44.2×`, and `31.1×` at 1184, 2097, and 2260 atoms; they are nonmonotone and lack raw
-timing or load records.
+**1. Re-run `BC-190` against the current baseline.** The interval route decides *more*
+(`361` doubled-net directions against the exact sweep’s `181`) with *fewer* hypotheses
+(it never needs **Condition 1**, since deciding on the doubled net never invokes the
+`D4` reflection). The three largest historical operator-reported pairs give speed ratios
+of `22.7×`, `44.2×`, and `31.1×` against the former Fraction sweep at 1184, 2097, and
+2260 atoms; they are nonmonotone and lack raw timing or load records.
 A three-point log-log fit gives exponents near `2.04` for the exact route and `1.29` for
 the interval route; the earlier `0.92` interval figure was only the 1184-to-2097
 two-point slope. None is an asymptotic law.
-The correctness argument is untouched: nothing is retained unless both routes agree on
-the value, so the change moves what pays the exact-sweep tax on every rejected trial,
-not what is finally trusted.
+They do not compare the interval route with the current integer sweep.
+The correctness argument is unchanged: nothing is retained unless both method-distinct
+routes agree on the value.
 **Falsifier:** if reproduced, controlled end-to-end runs show that using the interval
 decision in the inner loop does not reduce elapsed search time, the operational case for
 the change fails regardless of these sparse fits.
@@ -338,10 +321,11 @@ independent of speed.
 **2. Point the next search at `n = 26`, side `5.5218` — not `n = 51` despite its higher
 raw prize.** `n = 26`’s predicted gain (`+0.3987`) differs numerically by only `0.0013`
 from `n = 51`’s (`+0.4000`) and by `0.0001` from `n = 39`’s (`+0.3986`) — a near-tie in
-the top of the full predicted-gain table — yet `n = 26` costs an estimated `1.32×` the
-atoms and roughly `1.75×` the retention-gate exact-sweep time of `n = 20`’s already-run
-`4.80` baseline (about `2.6 h`), against `n = 51`’s estimated `2.48×` atoms and `6.17×`
-gate time (`~9.2 h`, plausibly `4`–`22 h` given the observed variance).
+the top of the full predicted-gain table.
+Its predicted side, `5.5218`, is the smallest among those near-tied candidates, so the
+area heuristic makes it the least ambitious first test.
+No retained cost model establishes its atom count, gate time, or full-run cost; `BC-190`
+and `BC-191` must do that before the run starts.
 `n = 26` is also already on this agenda’s own candidate list — both `BC-192` and
 `BC-194` name it first among their instances — so this is a sharpening of the existing
 plan by its own numbers, not a new direction.
@@ -371,18 +355,17 @@ outside that band by a margin wider than the band itself.
 A genuinely converged eighth restricted-program point anywhere past `~5.5` (which
 proposal 2’s run would supply) would be the first retained raw measurement outside this
 narrow cluster. It would test, but not settle, whether the chosen finite-site programs
-continue the loosely quadratic shape the reported points suggest.
+exhibit any coherent trend outside the current band.
 No curve is fit here past what seven clustered and incompletely retained reports can
 support; the generated reach table presents that limitation directly.
 
 ## If This Argument Is Wrong
 
-The strongest case against going large is that the covering value’s true growth rate in
-the side is faster than the container’s area — faster than the roughly quadratic shape
-the reported points are loosely consistent with.
-If so, the `0.982` ratio observed in the narrow `3.8`–`4.8` band is a coincidence of
-that band rather than a stable fraction of the packing, and it would collapse well
-before reaching the sides the reach table’s top prizes occupy.
+The strongest case against going large is that the `0.982` ratio is local to the present
+sides and site universes.
+The heterogeneous program reports support no growth law for the unrestricted covering
+value. If the ratio is a coincidence of the narrow `3.8`–`4.8` band, it may collapse
+before the sides occupied by the reach table’s top prizes.
 
 Where this would show up, roughly in order of how early it would be visible:
 

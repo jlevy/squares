@@ -41,7 +41,7 @@ exploration:
     primary-text Basu-Pollack-Roy plus the one-variable Puiseux fact. The
     admissible novelty claim is S3, not S4. The closing principle is classical and the
     curve-selection proof shape matches Connelly-Whiteley 1996 Theorem 4.3.1; neither is
-    claimed as new. Control C8 confirms exp-034's family is not a refutation: it sits at
+    claimed as new. Control 8 confirms exp-034's family is not a refutation: it sits at
     container side 1 + 5 sqrt 2 / 4, exactly 3 sqrt 2 / 4 - 1 above Goebel's side, so the
     two feasible sets are disjoint. Reviewed and passed; the frontier and result-register
     changes that followed are T-014 and the n = 5 rigidity property, and they were made by
@@ -138,6 +138,12 @@ of that interval — and adding it would put a new proof step into a frozen pack
 It is recorded as a gap in `exp-058`’s amendment instead, where the review’s other six
 gaps are, and the conclusion it supports is unaffected.
 
+**Terminology pass, 2026-09-04.** Human-facing adversarial-control labels were
+normalized from their legacy compact form to **Control 1**–**Control 8**, reserving
+`C0`–`C5` for epistemic confirmation levels.
+The frozen packet hash above and the literal filename `c8_side_check.py` retain their
+historical values. No mathematical statement, result or claim boundary changed.
+
 The packet’s replay scripts are **not** installed as repository code.
 Nothing under `campaign/` is code — the campaign tree holds records — and the executable
 form of this mathematics was built after this packet was frozen, as
@@ -166,7 +172,7 @@ and digests are in the results record named above.
 | `margins.py` | the multiset of the 64 inactive wall margins (table in §3.3) |
 | `midpoint_check.py` | each active pair corner has along-edge parameter exactly `1/2` (no D-390 endpoint incidence) |
 | `control_exp034.py` | pre-run of the exp-034 negative control through the T-012 machinery (§6) |
-| `c8_side_check.py` | exact proof that the exp-034 family is at side `1 + 5√2/4 ≠ 2 + √2/2`, infeasible at Goebel’s side, and at positive distance from `P^0` (§6, C8 note) |
+| `c8_side_check.py` | exact proof that the exp-034 family is at side `1 + 5√2/4 ≠ 2 + √2/2`, infeasible at Goebel’s side, and at positive distance from `P^0` (§6, Control 8 note) |
 | `sosc_check.py` | the numbers of §5.7: `w · q_geo = -√2/2`, `w · q_chart = -2√2`, the `mu = 1` signs in both normalizations, the threshold `mu > 2/(-w · q)` |
 
 The packet also drew on text extractions of `gobel-1979`, the Whiteley handbook chapter,
@@ -880,7 +886,7 @@ The consequences are §1.3. □
   only ever evaluated on `e_{t4}`.
 - **Fixed side is load-bearing.** With `s` a 16th variable the cone opens and
   `A y >= -q` becomes feasible (X-007’s measurement); nothing here survives.
-  This is control C5.
+  This is Control 5.
 - **Nothing is claimed about a numerical isolation radius**, about other optimal `n = 5`
   packings, about global uniqueness, or about the container growing.
 
@@ -964,25 +970,25 @@ receipt. A control “rejects” when the instrument refuses to emit a passing r
 
 | id | control | mutation | check that must refuse | expected refusal |
 | --- | --- | --- | --- | --- |
-| C1 | changed feature | replace “sq0 c2 on sq4 e3” by “sq0 c1 on sq4 e3” in the declared active list | step 2: declared active row must vanish; true zero must be declared | declared row has value `r/2 != 0`; the actual zero (c2) is undeclared |
-| C2 | zero margin | (a) receipt mutation: one strict margin overwritten by `0`; (b) declare row 3 inactive | step 2: strict-sign check | (a) sign 0 fails `> 0`; (b) an inactive-classified function vanishes |
-| C3 | omitted constraint | drop “sq1 c0 on the bottom wall” (row 5, carried by the self-stress) from the declared list; variant: drop it from the certificate step only | step 2 (undeclared zero) / step 4 (`w^T A != 0`) | refuse; and the self-stress no longer verifies |
-| C4 | invented contact | add “sq4 c1 on the right wall” (margin `1 - r/4 > 0`) as active; variant: a D-390-style endpoint incidence injected as a pair row | step 2 | declared row nonzero; the endpoint incidence fails the separating test |
-| C5 | side release | add `s` as a 16th coordinate (`ds`) to every wall row and the chart | steps 3–4: cone certificates | the 14 certificates no longer pin (X-007: the cone opens to 16 dimensions and `A y >= -q` becomes feasible); no receipt |
-| C6 | wrong chart | (a) declare `J = I` with the half-angle polynomials; (b) declare `theta = theta^0 + t` but keep the cleared polynomials; (c) declare a denominator `1 - t^2` | step 1/3: `A_chart = A_geo J` binding; denominator positivity | (a),(b) the `t_i` columns differ by the factor 2; (c) `1 - t^2` has a zero |
-| C7 | certificate drift | perturb one self-stress weight by `1/1000`; flip the sign of one Farkas weight; set `q_3 = +2` | step 4 | `w^T A != 0`; negative weight; `w · q >= 0` |
-| C8 | exp-034 family (true negative) | run the instrument on the exp-033/034 pose at side `1 + 5r/4`, square 0 at `u = delta/2 = 3r/4 - 1`, `t = 0` (and `t = 1/200`) | steps 3–4 | the cone is not a line; certificates for `vx0, vy0, w0` (at least) do not exist; no receipt. Exp-034’s exact two-parameter family is a **verified nonconstant feasible arc** through that pose, so a “locally rigid” receipt there would be a false positive |
+| Control 1 | changed feature | replace “sq0 c2 on sq4 e3” by “sq0 c1 on sq4 e3” in the declared active list | step 2: declared active row must vanish; true zero must be declared | declared row has value `r/2 != 0`; the actual zero (c2) is undeclared |
+| Control 2 | zero margin | (a) receipt mutation: one strict margin overwritten by `0`; (b) declare row 3 inactive | step 2: strict-sign check | (a) sign 0 fails `> 0`; (b) an inactive-classified function vanishes |
+| Control 3 | omitted constraint | drop “sq1 c0 on the bottom wall” (row 5, carried by the self-stress) from the declared list; variant: drop it from the certificate step only | step 2 (undeclared zero) / step 4 (`w^T A != 0`) | refuse; and the self-stress no longer verifies |
+| Control 4 | invented contact | add “sq4 c1 on the right wall” (margin `1 - r/4 > 0`) as active; variant: a D-390-style endpoint incidence injected as a pair row | step 2 | declared row nonzero; the endpoint incidence fails the separating test |
+| Control 5 | side release | add `s` as a 16th coordinate (`ds`) to every wall row and the chart | steps 3–4: cone certificates | the 14 certificates no longer pin (X-007: the cone opens to 16 dimensions and `A y >= -q` becomes feasible); no receipt |
+| Control 6 | wrong chart | (a) declare `J = I` with the half-angle polynomials; (b) declare `theta = theta^0 + t` but keep the cleared polynomials; (c) declare a denominator `1 - t^2` | step 1/3: `A_chart = A_geo J` binding; denominator positivity | (a),(b) the `t_i` columns differ by the factor 2; (c) `1 - t^2` has a zero |
+| Control 7 | certificate drift | perturb one self-stress weight by `1/1000`; flip the sign of one Farkas weight; set `q_3 = +2` | step 4 | `w^T A != 0`; negative weight; `w · q >= 0` |
+| Control 8 | exp-034 family (true negative) | run the instrument on the exp-033/034 pose at side `1 + 5r/4`, square 0 at `u = delta/2 = 3r/4 - 1`, `t = 0` (and `t = 1/200`) | steps 3–4 | the cone is not a line; certificates for `vx0, vy0, w0` (at least) do not exist; no receipt. Exp-034’s exact two-parameter family is a **verified nonconstant feasible arc** through that pose, so a “locally rigid” receipt there would be a false positive |
 
-Pre-run evidence for C8 (`control_exp034.py`, read-only, T-012 machinery): at
+Pre-run evidence for Control 8 (`control_exp034.py`, read-only, T-012 machinery): at
 `(u, t) = (delta/2, 0)` the pose is valid with 15 active contacts and no disjunctive
 pair; the slide `+-(dx0, dy0) = +-(1,1)` and the rotation `+-w0` all lie in the
 first-order cone; `w0` appears in no row; only `vx2, vy2, w2, vx3, vy3` are pinned.
 At the endpoint `u = 0` the slide is one-sided and rotation is refused at first order
-(rate `-1/2`), which is consistent with exp-034’s boundary `u >= e(t)`. So C8’s expected
-outcome is fixed: refusal by an open cone, never a receipt.
+(rate `-1/2`), which is consistent with exp-034’s boundary `u >= e(t)`. So Control 8’s
+expected outcome is fixed: refusal by an open cone, never a receipt.
 
-**C8 does not touch H-060’s target, and is not a rejection witness.** The exp-034 family
-lives at side `S = 1 + 5√2/4 ≈ 2.7678`, not at Goebel’s `s = 2 + √2/2 ≈ 2.7071`
+**Control 8 does not touch H-060’s target, and is not a rejection witness.** The exp-034
+family lives at side `S = 1 + 5√2/4 ≈ 2.7678`, not at Goebel’s `s = 2 + √2/2 ≈ 2.7071`
 (`S − s = 3√2/4 − 1 ≈ 0.0607 > 0` exactly), with squares 3 and 4 diagonal rather than
 square 4 alone, and its square 1 centred at `(1/2 + 5√2/4, 1/2)` versus Goebel’s
 `(3/2 + √2/2, 1/2)`. `c8_side_check.py` (exact, `sqpack.verify`) shows every point of
@@ -990,12 +996,12 @@ the family at `u ∈ {0, δ/2, δ}` is valid at side `S` and **invalid at side `
 1’s right edge sits at `x = S`, overshooting Goebel’s wall by exactly `3√2/4 − 1`. So
 the family is a subset of `Feas(S)`, disjoint from `Feas(s)`, and at positive distance
 from `P^0`; it is consistent with Theorem 10 because the two statements concern
-different sets. C8 is a specificity control: a pose where a nonconstant feasible arc is
-known to exist (at its own fixed side) at which the instrument must refuse a
+different sets. Control 8 is a specificity control: a pose where a nonconstant feasible
+arc is known to exist (at its own fixed side) at which the instrument must refuse a
 local-rigidity receipt.
 
 All controls are to be run under normal and optimized Python per the agenda; none was
-run here except the C8 pre-run above.
+run here except the Control 8 pre-run above.
 
 * * *
 

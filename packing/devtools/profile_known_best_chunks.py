@@ -76,9 +76,9 @@ def _text(
 def _partition_label(partition: dict[str, Any]) -> str:
     status = partition["status"]
     if status == "established":
-        return f"fit C{partition['selected_chunk_count']}"
+        return f"{partition['selected_chunk_count']} chunks"
     if status == "outside-registered-budget":
-        return f">budget C{partition['selected_chunk_count']}"
+        return f">budget ({partition['selected_chunk_count']} chunks)"
     if status == "not-established-search-limit":
         return "search cap"
     return "none"

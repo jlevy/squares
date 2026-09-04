@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:sqpack="https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1" width="1100" height="720" viewBox="0 0 1100 720" role="img" aria-labelledby="figure-title figure-description">
   <title id="figure-title">How the T-018 weighted-atom lower-bound certificate works</title>
-  <desc id="figure-description">The left panel plots all 1,121 rationally weighted atoms in the side-381/100 container. A grey pin marks every atom site; coloured disk area is proportional to exact weight. Orange identifies the 84 atoms in an exact side-9977/10000 C4 witness centred at 27/50 in both coordinates, whose mass is 4001/4000. The right panel is an explicitly enlarged schematic of the concentric shrink-and-snap step, followed by the exact containment inequality.</desc>
+  <desc id="figure-description">The left panel plots all 1,121 rationally weighted atoms in the side-381/100 container. A grey pin marks every atom site; coloured disk area is proportional to exact weight. Orange identifies the 84 atoms in an exact side-9977/10000 Condition 5 witness centred at 27/50 in both coordinates, whose mass is 4001/4000. The right panel is an explicitly enlarged schematic of the concentric shrink-and-snap step, followed by the exact containment inequality.</desc>
   <metadata>
     <sqpack:profile version="7">
       <sqpack:coordinates>left panel mathematical-y-up; right panel explanatory schematic</sqpack:coordinates>
@@ -26,7 +26,7 @@
   <text x="36" y="72" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="14" fill="#47525f">A finite weighted covering certificate turns every possible unit square into a mass budget.</text>
   <g data-panel="weighted atoms">
     <rect x="30" y="95" width="625" height="555" rx="14" fill="#f7f8fa" stroke="#5c6673" stroke-width="1.5" />
-    <text x="54" y="128" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="17" fill="#17202a" font-weight="650">Weighted atoms and one exact C4 witness</text>
+    <text x="54" y="128" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="17" fill="#17202a" font-weight="650">Weighted atoms and one exact Condition 5 witness</text>
     <text x="54" y="151" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="13" fill="#47525f">K = [0,381/100]²; each coloured disk's area is proportional to weight.</text>
     <rect x="74.64422572178477690288713911" y="482.7544619422572178477690288" width="112.6013123359580052493438321" height="112.6013123359580052493438321" fill="#c8654b" fill-opacity="0.12" stroke="none" data-feature="c4-witness-fill" />
     <g data-layer="atom-sites" aria-hidden="true">

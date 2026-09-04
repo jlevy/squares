@@ -4,7 +4,7 @@
 This is the retention gate. A rung joins the record only when the bytes on disk
 -- not an object in memory, not a lane's report -- are accepted by the exact
 event-cell sweep and by the interval branch and bound. The two routes share the
-``Certificate`` representation and the C1-C3 premises but decide C4 by different
+``Certificate`` representation and Conditions 2--4 but decide Condition 5 by different
 methods with different failure modes. Reading the file back is half the point: a
 generator that rewrites its own output between verification and retention has
 happened here, turning 1032 atoms into 1121 under a path someone was about to

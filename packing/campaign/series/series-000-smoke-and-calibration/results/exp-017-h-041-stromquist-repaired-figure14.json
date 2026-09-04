@@ -679,7 +679,7 @@
         "reflect_y",
         "reflect_xy"
       ],
-      "group": "C2 x C2 (horizontal and vertical centerline reflections)",
+      "group": "C₂ × C₂ (horizontal and vertical centerline reflections)",
       "order": 4
     }
   },

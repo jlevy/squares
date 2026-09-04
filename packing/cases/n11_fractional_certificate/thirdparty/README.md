@@ -381,11 +381,11 @@ certificate C-n011-fractional-19-5
   PASS  P3 net starts at 0 and is strictly increasing | t_0 = 0, K = 180, t_K = 207107/500000
   PASS  P4 every atom is an (x, y, weight) triple | 425 atoms
   PASS  P5 the declared claim is the theorem's conclusion | declared 's(11) >= 19/5', theorem gives 's(11) >= 19/5'
-  PASS  C0 atoms invariant under the container's symmetries | 425 atoms on 425 distinct sites, all eight maps preserve the weights
-  PASS  C1 total weight below n | total 43391/4000 = 10.847750 against n = 11
-  PASS  C2 net reaches pi/4 | t_K = 207107/500000, t_K^2 + 2 t_K - 1 = 309449/250000000000
-  PASS  C3 containment B(1 + D) < 1 | D = 207107/90000000, B(1 + D) = 899996306539/900000000000 = 0.999995896154
-  C4: sweeping every net direction
+  PASS  Condition 1: atoms invariant under the container's symmetries | 425 atoms on 425 distinct sites, all eight maps preserve the weights
+  PASS  Condition 2: total weight below n | total 43391/4000 = 10.847750 against n = 11
+  PASS  Condition 3: net reaches pi/4 | t_K = 207107/500000, t_K^2 + 2 t_K - 1 = 309449/250000000000
+  PASS  Condition 4: containment B(1 + D) < 1 | D = 207107/90000000, B(1 + D) = 899996306539/900000000000 = 0.999995896154
+  Condition 5: sweeping every net direction
     direction   0/180  t = 0                  cells   34969  least weight 50003/50000 = 1.000060  running least 50003/50000
     direction  30/180  t = 207107/3000000     cells  503177  least weight 50003/50000 = 1.000060  running least 50003/50000
     direction  60/180  t = 207107/1500000     cells  512197  least weight 50003/50000 = 1.000060  running least 50003/50000
@@ -393,7 +393,7 @@ certificate C-n011-fractional-19-5
     direction 120/180  t = 207107/750000      cells  505529  least weight 50003/50000 = 1.000060  running least 50003/50000
     direction 150/180  t = 207107/600000      cells  501069  least weight 50003/50000 = 1.000060  running least 50003/50000
     direction 180/180  t = 207107/500000      cells  499545  least weight 50003/50000 = 1.000060  running least 50003/50000
-  PASS  C4 every admissible placement covers weight >= 1 | least covered weight 50003/50000 = 1.000060 at direction 0 (t = 0), centre (53/100, 53/100) ~ (0.530000, 0.530000); 90546593 regions over 181 directions (0 vacuous) in 34.1 s
+  PASS  Condition 5: every admissible placement covers weight >= 1 | least covered weight 50003/50000 = 1.000060 at direction 0 (t = 0), centre (53/100, 53/100) ~ (0.530000, 0.530000); 90546593 regions over 181 directions (0 vacuous) in 34.1 s
   info  declared total_mass 43391/4000 == recomputed 43391/4000
   info  declared least_cell_mass 50003/50000 == recomputed 50003/50000
   info  all atoms lie in [0, L]^2: yes (not a condition; an outside atom only wastes weight)
@@ -406,11 +406,11 @@ certificate control-n17-massaccesi-4.5058
   PASS  P3 net starts at 0 and is strictly increasing | t_0 = 0, K = 180, t_K = 207107/500000
   PASS  P4 every atom is an (x, y, weight) triple | 168 atoms
   PASS  P5 the declared claim is the theorem's conclusion | declared 's(17) >= 22529/5000', theorem gives 's(17) >= 22529/5000'
-  PASS  C0 atoms invariant under the container's symmetries | 168 atoms on 168 distinct sites, all eight maps preserve the weights
-  PASS  C1 total weight below n | total 203/12 = 16.916667 against n = 17
-  PASS  C2 net reaches pi/4 | t_K = 207107/500000, t_K^2 + 2 t_K - 1 = 309449/250000000000
-  PASS  C3 containment B(1 + D) < 1 | D = 207107/90000000, B(1 + D) = 899635478111/900000000000 = 0.999594975679
-  C4: sweeping every net direction
+  PASS  Condition 1: atoms invariant under the container's symmetries | 168 atoms on 168 distinct sites, all eight maps preserve the weights
+  PASS  Condition 2: total weight below n | total 203/12 = 16.916667 against n = 17
+  PASS  Condition 3: net reaches pi/4 | t_K = 207107/500000, t_K^2 + 2 t_K - 1 = 309449/250000000000
+  PASS  Condition 4: containment B(1 + D) < 1 | D = 207107/90000000, B(1 + D) = 899635478111/900000000000 = 0.999594975679
+  Condition 5: sweeping every net direction
     direction   0/180  t = 0                  cells    2025  least weight 1 = 1.000000  running least 1
     direction  30/180  t = 207107/3000000     cells   92781  least weight 1 = 1.000000  running least 1
     direction  60/180  t = 207107/1500000     cells   94145  least weight 1 = 1.000000  running least 1
@@ -418,7 +418,7 @@ certificate control-n17-massaccesi-4.5058
     direction 120/180  t = 207107/750000      cells   91589  least weight 1 = 1.000000  running least 1
     direction 150/180  t = 207107/600000      cells   90869  least weight 1 = 1.000000  running least 1
     direction 180/180  t = 207107/500000      cells   90221  least weight 1 = 1.000000  running least 1
-  PASS  C4 every admissible placement covers weight >= 1 | least covered weight 1 = 1.000000 at direction 0 (t = 0), centre (364907/560000, 364907/560000) ~ (0.651620, 0.651620); 16562293 regions over 181 directions (0 vacuous) in 10.4 s
+  PASS  Condition 5: every admissible placement covers weight >= 1 | least covered weight 1 = 1.000000 at direction 0 (t = 0), centre (364907/560000, 364907/560000) ~ (0.651620, 0.651620); 16562293 regions over 181 directions (0 vacuous) in 10.4 s
   info  declared total_mass 203/12 == recomputed 203/12
   info  all atoms lie in [0, L]^2: yes (not a condition; an outside atom only wastes weight)
 VERIFIED: s(17) >= 22529/5000 = 4.505800

@@ -161,7 +161,7 @@ def test_singleton_domain_is_evaluated_directly_and_closed() -> None:
     minimum, centre, regions = verify.least_covered_weight(cert, c, s, [1], 1)
     assert (minimum, centre, regions) == (Fraction(1), (Fraction(1, 2), Fraction(1, 2)), 1)
 
-    (_name, detail, holds), worst = verify.condition_c4(cert, log=lambda *_args: None)
+    (_name, detail, holds), worst = verify.condition_5(cert, log=lambda *_args: None)
     assert holds is True
     assert worst == (Fraction(1), 0, Fraction(0), (Fraction(1, 2), Fraction(1, 2)))
     assert "1 vacuous" in detail
@@ -177,7 +177,7 @@ def test_empty_feasible_domain_is_vacuously_true() -> None:
     c, s = verify.direction(Fraction(0))
     assert verify.least_covered_weight(cert, c, s, [1], 1) == (None, None, 0)
 
-    (_name, detail, holds), worst = verify.condition_c4(cert, log=lambda *_args: None)
+    (_name, detail, holds), worst = verify.condition_5(cert, log=lambda *_args: None)
     assert holds is True
     assert worst is None
     assert "universal condition is vacuous" in detail
@@ -213,8 +213,10 @@ def test_degenerate_cli_case_has_no_traceback(tmp_path: Path) -> None:
         capture_output=True,
         text=True,
     )
-    assert completed.returncode == 1  # C0 and C3 fail, but C4 is decided.
-    assert "PASS  C4 every admissible placement covers weight >= 1" in completed.stdout
+    assert completed.returncode == 1  # Conditions 1 and 4 fail, but Condition 5 is decided.
+    assert (
+        "PASS  Condition 5: every admissible placement covers weight >= 1" in completed.stdout
+    )
     assert "Traceback" not in completed.stdout + completed.stderr
 
 
@@ -282,7 +284,7 @@ def test_minimal_checker_replays_every_cell_and_its_mutation() -> None:
         timeout=240,
     )
     assert completed.returncode == 0, completed.stdout + completed.stderr
-    assert "C4     PASS  minimum 4001/4000" in completed.stdout
+    assert "Condition 5  PASS  minimum 4001/4000" in completed.stdout
     assert "567130649 cells" in completed.stdout
     assert "VERIFIED s(11) >= 381/100" in completed.stdout
     assert "MUTATION REFUSED" in completed.stdout

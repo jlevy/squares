@@ -49,9 +49,7 @@ def snapshot(path: Path = CERTIFICATE_PATH) -> tuple[Certificate, dict[str, str]
 
     data = path.read_bytes()
     record = json.loads(data)
-    declarations = {
-        key: str(record[key]) for key in ("claim", "total_mass", "least_cell_mass")
-    }
+    declarations = {key: str(record[key]) for key in ("claim", "total_mass", "least_cell_mass")}
     return _from_record(record), declarations, data
 
 

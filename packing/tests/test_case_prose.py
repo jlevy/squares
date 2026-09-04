@@ -161,10 +161,7 @@ def test_historical_mention_of_a_weaker_value_is_allowed_only_when_marked(
         "n-later-marker.md",
         20,
         bounds,
-        (
-            "# case\n\nA candidate says `s(20) ≥ 4.4641`. "
-            "The old method was useful.\n"
-        ),
+        ("# case\n\nA candidate says `s(20) ≥ 4.4641`. The old method was useful.\n"),
     )
     findings = check_case_file(marker_in_later_sentence)
     assert len(findings) == 1

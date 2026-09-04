@@ -21,6 +21,8 @@ import json
 from fractions import Fraction
 from pathlib import Path
 
+import pytest
+
 from devtools.check_rung_figures import (
     DEFECTS,
     EVIDENCE,
@@ -132,7 +134,7 @@ def test_t017_current_rung_is_bound_to_its_record_and_explanations() -> None:
     assert "eight-rung ladder" in result["significance"]["rationale"]
     assert "149987/12500 = 11.998960" in result["next_rung"]
     assert "about 6.9 times tighter" in result["next_rung"]
-    assert "about 1.77 times the next-largest" in result["next_rung"]
+    assert "about 1.77 times the 1184-atom n = 17 certificate" in result["next_rung"]
 
     primary = _evidence("E-n012-fractional-certificate")
     assert primary["certificate"] == "cases/n12_fractional_certificate/certificate.json"
@@ -290,7 +292,7 @@ def test_catches_d439_second_instance_a_superseded_rungs_total_and_margin() -> N
     assert "T-019 [next_rung]" in joined
     assert "total 16.5936" in joined
     assert "16.9331" in joined
-    assert "margin 0.406" in joined
+    assert "margin below 17 0.406" in joined
     assert "0.067 (exact" in joined  # 0.066920 rounded to the three places "0.406" states
 
 
@@ -393,8 +395,8 @@ def test_certificate_figures_are_recomputed_from_atoms_not_trusted_from_the_file
     assert certificate_consistency_problems(agreeing) == []
 
 
-def test_reach_margin_uses_the_first_integer_above_mass_not_the_recorded_target() -> None:
-    """T-020 is stored at n=20 but directly reaches n=19, where its margin is 0.077380."""
+def test_certificate_exposes_target_margin_and_explicit_reach_margin() -> None:
+    """T-020 is stored at n=20 but also reaches n=19, and both margins are meaningful."""
     figures = CertificateFigures(
         path="cases/n20_fractional_certificate/certificate.json",
         n=20,
@@ -403,7 +405,79 @@ def test_reach_margin_uses_the_first_integer_above_mass_not_the_recorded_target(
         mass=Fraction(946131, 50000),
         stored_mass=Fraction(946131, 50000),
     )
-    assert figures.margin == Fraction(3869, 50000)
+    assert figures.margin == Fraction(53869, 50000)
+    assert figures.margin_below(19) == Fraction(3869, 50000)
+
+
+@pytest.mark.parametrize(
+    ("stated", "target"),
+    (("0.077380", "nineteen"), ("1.077380", "twenty"), ("0.077380", "19")),
+)
+def test_qualified_reach_and_target_margins_are_checked_against_the_named_integer(
+    stated: str, target: str
+) -> None:
+    probe = copy.deepcopy(_result("T-020"))
+    probe["claim"] = ""
+    probe["significance"]["rationale"] = ""
+    probe["composition"] = ""
+    probe["next_rung"] = (
+        f"The retained certificate's total is 18.922620, leaving {stated} below {target}."
+    )
+
+    problems, _ = check_result(probe)
+    assert problems == []
+
+
+@pytest.mark.parametrize(
+    ("stated", "target"), (("0.077380", "twenty"), ("1.077380", "nineteen"))
+)
+def test_swapping_reach_and_target_margins_is_refused(stated: str, target: str) -> None:
+    probe = copy.deepcopy(_result("T-020"))
+    probe["claim"] = ""
+    probe["significance"]["rationale"] = ""
+    probe["composition"] = ""
+    probe["next_rung"] = f"The retained certificate is leaving {stated} below {target}."
+
+    problems, _ = check_result(probe)
+    assert len(problems) == 1
+    assert f"margin below {20 if target == 'twenty' else 19} {stated}" in problems[0]
+
+
+@pytest.mark.parametrize(("stated", "problem_count"), (("1.077380", 0), ("0.077380", 1)))
+def test_unqualified_margin_still_uses_the_certificates_recorded_target(
+    stated: str, problem_count: int
+) -> None:
+    """A reach margin is valid only when prose names its lower integer explicitly."""
+    probe = copy.deepcopy(_result("T-020"))
+    probe["claim"] = ""
+    probe["significance"]["rationale"] = ""
+    probe["composition"] = ""
+    probe["next_rung"] = f"The retained certificate's margin is {stated}."
+
+    problems, _ = check_result(probe)
+    assert len(problems) == problem_count
+    if problems:
+        assert f"prose says margin {stated}" in problems[0]
+        assert "gives 1.077380" in problems[0]
+
+
+@pytest.mark.parametrize(
+    ("stated", "target", "problem_count"),
+    (("0.077380", "nineteen", 0), ("0.077380", "twenty", 1)),
+)
+def test_named_margin_at_an_explicit_side_uses_the_named_integer(
+    stated: str, target: str, problem_count: int
+) -> None:
+    probe = copy.deepcopy(_result("T-020"))
+    probe["claim"] = ""
+    probe["significance"]["rationale"] = ""
+    probe["composition"] = ""
+    probe["next_rung"] = f"The margin below {target} at 24/5 is already {stated}."
+
+    problems, _ = check_result(probe)
+    assert len(problems) == problem_count
+    if problems:
+        assert f"margin below 20 {stated}" in problems[0]
 
 
 def test_a_non_certificate_artifact_is_silently_skipped(tmp_path: Path) -> None:
@@ -451,8 +525,8 @@ def test_retained_is_the_file_literally_named_certificate_json() -> None:
     assert pick_retained([historical, retained_figures]) is retained_figures
     assert pick_retained([retained_figures, historical]) is retained_figures
 
-    # No file is literally named certificate.json: fall back to the first resolved.
-    assert pick_retained([historical]) is historical
+    # No file is literally named certificate.json: never reinterpret history as current.
+    assert pick_retained([historical]) is None
     assert pick_retained([]) is None
 
 
@@ -465,6 +539,34 @@ def test_resolve_certificates_reads_real_repository_relative_artifacts() -> None
     assert retained.path == "packing/cases/n17_fractional_certificate/certificate.json"
     assert Fraction(451, 100) in sides
     assert len(resolved) == 3
+
+
+def test_a_result_with_only_historical_rungs_is_refused() -> None:
+    """Dropping the moving pointer must not retarget unqualified prose to old bytes."""
+    probe = copy.deepcopy(_result("T-019"))
+    probe["artifacts"] = [
+        artifact
+        for artifact in probe["artifacts"]
+        if not artifact.endswith("/certificate.json")
+    ]
+
+    problems, checked = check_result(probe)
+    assert checked == 2
+    assert len(problems) == 1
+    assert "only historical rungs" in problems[0]
+    assert "exactly one moving certificate.json pointer is required" in problems[0]
+
+
+def test_a_result_with_two_moving_pointers_is_refused() -> None:
+    """A second live basename is ambiguous rather than silently winning by order."""
+    probe = copy.deepcopy(_result("T-020"))
+    probe["artifacts"].append("packing/cases/n17_fractional_certificate/certificate.json")
+
+    problems, checked = check_result(probe)
+    assert checked == 2
+    assert len(problems) == 1
+    assert "declare 2 moving certificate.json pointers" in problems[0]
+    assert "exactly one is required" in problems[0]
 
 
 def test_repo_wide_fraction_equals_decimal_catches_wrong_arithmetic() -> None:

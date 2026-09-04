@@ -96,18 +96,19 @@ Results first established here, as far as the recorded source searches show:
   prediction, and refining the net changes it.
   At `n = 19`, the known packing binds first, only `0.0856` above the new lower bound.
   [Reach analysis](packing/frontier/CERTIFICATE-REACH.md)
-- **T-017: `s(12) ≥ 99/25`, from nothing case-specific at all (`S4`).**
-  [`n = 12`](packing/frontier/n-012.md) had only the `n = 11` bound inherited by
-  monotonicity; the frontier record said in as many words that nothing specific to
-  `n = 12` had ever been proved.
+- **T-017: `s(12) ≥ 99/25`, from no case-specific bound located in the retained corpus
+  (`S4`).** [`n = 12`](packing/frontier/n-012.md) had only the `n = 11` bound inherited
+  by monotonicity; neither the retained literature corpus nor the frontier record
+  supplied a stronger case-specific proof.
   An eight-rung ladder — `19/5`, `77/20`, `97/25`, `39/10`, `393/100`, `197/50`,
   `79/20`, `99/25` — is retained, all from one generator that applies at every `n`,
   which is why this is scored `S4` as a bound family rather than a case result.
   At `99/25 = 3.96` it also separates the cases: `s(12) > s(11)`, since Trump’s 1979
   packing puts `s(11) ≤ 3.877084`. That did not follow from anything on record before.
-  The case is now `0.04` from its conjectured optimum of `4`, and that gap is where this
-  method stops: no certificate for twelve squares can exist above `3.990816`, which is
-  proved here and is below the conjectured value.
+  The case is now `0.04` from its conjectured optimum of `4`. The current 181-direction
+  finite-net instance stops below `3.990816`: no single certificate on that net can
+  exceed this proved ceiling.
+  A refined-net family plus a separate limiting argument is not excluded.
 - **T-010: `s(11) ≥ 2 + 4/√5`, repaired (`S4`).** The printed 2003 Figure 14
   unavoidability claim has a strict counterexample, so the literature’s standing `s(11)`
   bound rested on a broken step — the

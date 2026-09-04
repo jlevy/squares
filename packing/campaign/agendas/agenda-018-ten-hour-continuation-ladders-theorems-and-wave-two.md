@@ -183,7 +183,8 @@ agenda:
       that a value below 13 at side 4 would be a machine-checked fractional reproof of
       s(13) = 4. That question is now settled analytically and the fifty minutes are
       free. A certificate cannot exist above ceil(sqrt(n)) * B, since a wider container
-      holds ceil(sqrt(n))^2 pairwise disjoint axis-parallel B-squares whose masses C4
+      holds ceil(sqrt(n))^2 pairwise disjoint axis-parallel B-squares whose masses
+      **Condition 5**
       forces past n; for n = 13 that ceiling is 4B = 3.9908, below the case's own lower
       bound of 4. So the probe at 399/100 can only report the ceiling it is looking for,
       and the hoped-for second outcome is impossible outright: at side 4 the refuting
@@ -268,11 +269,11 @@ agenda:
       the uniform-stress check as an LP proposal verified by exact LDL. 120--180
       performance: sparse polynomial keys or per-pair sub-arity polynomials and
       bucketed feasibility so the n = 40 book builds under ten minutes and the n = 11
-      chart over Q(u) evaluates exactly. 180--225 controls: C9 the exact n = 10 pose,
+      chart over Q(u) evaluates exactly. 180--225 controls: Control 9, the exact n = 10 pose,
       whose axis and diagonal slides the probe must exhibit and the stress test must
-      report unrefused; C10 the exact n = 3 side-2 family, which must not certify
-      isolation; C11 the n = 5 known answer, reproducing T-014's counts, rows, jets and
-      all eight control verdicts through the generalised path; C12 Trump's 128 zero
+      report unrefused; Control 10, the exact n = 3 side-2 family, which must not certify
+      isolation; Control 11, the n = 5 known answer, reproducing T-014's counts, rows, jets and
+      all eight control verdicts through the generalised path; Control 12, Trump's 128 zero
       branch cones as exp-013 found them. 225--240 freeze at a target-blind readiness
       review by the Lane D reviewer. Kill: a chart book over ten minutes, or a control
       that cannot fail.

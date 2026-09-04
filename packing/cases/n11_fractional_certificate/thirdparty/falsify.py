@@ -16,7 +16,7 @@ verifier's preconditions, so it is suitable for a fast required gate.
 The perturbed atom is chosen from the verifier's own witness: the first atom
 covered by the least-covered placement of the unperturbed certificate, so a
 lowered weight or a dropped atom is guaranteed to touch the tight cell and
-show up in C4, not only in the symmetry condition C0.
+show up in Condition 5, not only in the symmetry Condition 1.
 """
 
 import json
@@ -32,11 +32,19 @@ TINY = Fraction(1, 10000)
 ABSENT = object()
 
 
-def expected(c0, c1, c2, c3, c4, minimum):
+def expected(
+    condition_1, condition_2, condition_3, condition_4, condition_5, minimum
+):
     """The complete oracle for one published perturbation."""
     return {
         "accepted": False,
-        "conditions": {"C0": c0, "C1": c1, "C2": c2, "C3": c3, "C4": c4},
+        "conditions": {
+            "Condition 1": condition_1,
+            "Condition 2": condition_2,
+            "Condition 3": condition_3,
+            "Condition 4": condition_4,
+            "Condition 5": condition_5,
+        },
         "minimum": minimum,
     }
 
@@ -181,7 +189,9 @@ def expectation_errors(accepted, results, oracle):
     wanted_minimum = oracle["minimum"]
     if wanted_minimum is ABSENT:
         if "minimum" in results:
-            errors.append("minimum was %s, expected no C4 result" % results["minimum"])
+            errors.append(
+                "minimum was %s, expected no Condition 5 result" % results["minimum"]
+            )
     elif results.get("minimum", ABSENT) != wanted_minimum:
         actual = results.get("minimum", "missing")
         errors.append("minimum was %s, expected %s" % (actual, wanted_minimum))
@@ -208,18 +218,18 @@ def run(record, name, oracle):
         minimum, float(minimum))
     row = "| %s | %s (%s) | %s (%s) | %s (%s) | %s (%.9f) | %s (%s) | %s |" % (
         name,
-        mark("C0"), "%d atoms" % len(cert["atoms"]),
-        mark("C1"), total,
-        mark("C2"), last * last + 2 * last - 1,
-        mark("C3"), float(product),
-        mark("C4"), minimum_text,
+        mark("Condition 1"), "%d atoms" % len(cert["atoms"]),
+        mark("Condition 2"), total,
+        mark("Condition 3"), last * last + 2 * last - 1,
+        mark("Condition 4"), float(product),
+        mark("Condition 5"), minimum_text,
         "accepted" if accepted else "REFUSED",
     )
     return row, expectation_errors(accepted, results, oracle)
 
 
 def quick_negative_weight(record):
-    """A cheap mutation that must be refused by P2 before the C4 sweep."""
+    """A cheap mutation that must be refused by P2 before the Condition 5 sweep."""
     changed = json.loads(json.dumps(record))
     atoms = changed.get("atoms")
     if not isinstance(atoms, list) or not atoms:
@@ -231,7 +241,10 @@ def quick_negative_weight(record):
 
 
 def print_table_header():
-    print("| perturbation | C0 | C1 total | C2 slack | C3 B(1+D) | C4 least covered weight | verdict |")
+    print(
+        "| perturbation | Condition 1 | Condition 2 total | Condition 3 slack | "
+        "Condition 4 B(1+D) | Condition 5 least covered weight | verdict |"
+    )
     print("| --- | --- | --- | --- | --- | --- | --- |")
 
 

@@ -2,7 +2,7 @@
 """Render the weighted-atom and shrink-and-snap visual for result T-018.
 
 The figure is derived from the retained ``n = 11`` certificate.  Its left panel
-draws every atom and recomputes the direction-zero C4 witness; its right panel
+draws every atom and recomputes the direction-zero Condition 5 witness; its right panel
 shows the geometric containment step whose exact bound lets an arbitrary unit
 square snap to the certificate's finite angle net.
 
@@ -105,7 +105,7 @@ GUIDE_COLOR = PAPER_THEME.muted
 
 @dataclass(frozen=True, slots=True)
 class C4Witness:
-    """One exact square attaining the retained direction-zero C4 minimum."""
+    """One exact square attaining the retained direction-zero Condition 5 minimum."""
 
     direction: Direction
     centre: tuple[Fraction, Fraction]
@@ -179,7 +179,9 @@ def load_visual_data() -> ProofVisualData:
     direction = directions[EXPECTED_WITNESS_DIRECTION]
     mass, centre = sweep_direction_minimum(certificate, direction)
     if centre != EXPECTED_WITNESS_CENTRE:
-        raise ValueError(f"direction-zero C4 witness moved from {EXPECTED_WITNESS_CENTRE}")
+        raise ValueError(
+            f"direction-zero Condition 5 witness moved from {EXPECTED_WITNESS_CENTRE}"
+        )
     witness_atoms = _covered_atoms(
         certificate.atoms, direction, certificate.square_side, centre
     )
@@ -299,7 +301,7 @@ def _draw_atom_field(panel: ET.Element, data: ProofVisualData) -> None:
 
     _text(
         panel,
-        "Weighted atoms and one exact C4 witness",
+        "Weighted atoms and one exact Condition 5 witness",
         LEFT_PANEL_X + PANEL_INSET,
         PANEL_TITLE_Y,
         size=PANEL_TITLE_SIZE,
@@ -808,7 +810,8 @@ def render_visual(data: ProofVisualData | None = None) -> str:
             "The left panel plots all 1,121 rationally weighted atoms in the side-381/100 "
             "container. A grey pin marks every atom site; coloured disk area is proportional "
             "to exact weight. Orange identifies the 84 atoms in an exact side-9977/10000 "
-            "C4 witness centred at 27/50 in both coordinates, whose mass is 4001/4000. "
+            "Condition 5 witness centred at 27/50 in both coordinates, whose mass is "
+            "4001/4000. "
             "The right panel is an explicitly enlarged schematic of the concentric shrink-"
             "and-snap step, followed by the exact containment inequality."
         ),

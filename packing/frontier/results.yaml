@@ -653,13 +653,14 @@ results:
       Margin does not shrink monotonically as the ladder climbs -- the
       197/50 rung two below this one has 0.007175 and 79/20 has 0.029410, so a tight
       rung is evidence about that run and not about how much room is left.
-      This rung also costs the exhaustive tier: 2097 atoms is the largest retained
-      certificate, about 1.77 times the next-largest 1184-atom one. The introducing
-      commit records a same-run decision in 4866 s by the exact sweep and 110 s by the
-      interval route, but retains no raw timing transcript. Paired with its reported
-      1184-atom measurements (1473 s and 65 s), those two points give effective exponents
-      2.09 and 0.92; they are measurements to reproduce, not asymptotic complexity
-      proofs. BC-195 owns whether the tier can still afford what it holds.
+      This rung also cost the exhaustive tier when retained: 2097 atoms is about 1.77
+      times the 1184-atom n = 17 certificate. Unretained operator reports give 4866 s
+      for the former Fraction sweep and 110 s for the interval route. The sweep was
+      rewritten the same day to decide on the weights' minimal common denominator in a
+      bounded direction pool; controls compare it with the independently retained
+      Fraction reduction and arithmetic. Reported sub-minute replays predate the final
+      worker cap and are planning evidence, not timings for the corrected implementation.
+      BC-195 owns tier placement.
       What is left is bounded, though, and by the method rather than by the search.
       A certificate for n cannot exist above ceil(sqrt(n)) * B, since a container wider
       than that holds ceil(sqrt(n))^2 pairwise disjoint axis-parallel B-squares, each
@@ -783,7 +784,8 @@ results:
       above ceil(sqrt(n)) * B, because a wider container holds ceil(sqrt(n))^2 pairwise
       disjoint axis-parallel B-squares whose masses **Condition 5** forces past n; for n = 11 that is
       4B = 3.9908, leaving 0.1808 of runway above the retained 381/100. The wall at 3.82
-      is a covering wall, met far below where the method stops working.
+      belongs only to the two tested finite site sets; it does not locate the unrestricted
+      covering value or show where the method stops working.
       If tau*(3.82) is exactly eleven then this is the one configuration where neither
       pre-registered route can close, since a certificate needs mass below n and a
       ceiling needs the scaled dual to reach n, and both fail by an infinitesimal at
@@ -882,7 +884,7 @@ results:
       On the same evidence boundary, the reported cost was about two hours for the round
       that did not move. The operator stopped it for cost rather than for its answer, and
       the side remains available to a later block that retains its run artifacts.
-      The method's own ceiling is not close here. A certificate for n cannot exist above
+      The current fixed-net ceiling is not close here. A certificate for n cannot exist above
       ceil(sqrt(n)) * B, a wider container holding ceil(sqrt(n))^2 pairwise disjoint
       axis-parallel B-squares whose masses **Condition 5** forces past n; for n = 17 that is
       5B = 4.9885, so 459/100 still has 0.3985 of runway. Unlike n = 12, where the
@@ -894,15 +896,18 @@ results:
       carrying mass at least 1 is a question about L, B and the net. So one atom set
       proves s(n) >= L for every integer n above its mass, this certificate's 16.933080
       reaching 17, 18 and 19 directly rather than through the monotonicity step the
-      composition field records, and a larger n is strictly easier at the same side.
+      composition field records. As n increases, **Condition 2** becomes strictly weaker;
+      the other feasibility conditions do not change.
       The headroom said the rest, when this was written. n = 17 had 0.0855 to its best
       known packing at 4.675530; n = 18 had 0.2329 to 4.822876 and n = 19 had 0.2956 to
       4.885618. The retained DS7 survey also reports older case-listed bounds for n = 19
       and n = 20, but both are weaker than the verified values under discussion. At
       n = 20 the register's verified baseline was Nagamochi's closed form
-      1 + sqrt(13) = 4.605551, with 0.3944 to the trivial upper bound 5. A run at a side whose covering
-      value lands between 17 and 18 would raise n = 18 and leave n = 17 where it is; one
-      landing between 19 and 20 would displace a published closed form.
+      1 + sqrt(13) = 4.605551, with 0.3944 to the trivial upper bound 5. A run that
+      retains feasible mass between 17 and 18 would raise n = 18 and leave n = 17 where
+      it is; one that retains feasible mass between 19 and 20 would displace a published
+      closed form. A finite-site restricted objective is useful search evidence but is not
+      itself the unrestricted covering value.
       The second target was run the same day and is registered as T-020, at side 24/5.
       The n = 20-targeted run returned a frozen feasible mass of 18.922620, below
       nineteen, so its certificate directly moves n = 19, n = 20, and n = 21; an
@@ -1012,8 +1017,10 @@ results:
       would contradict the retained n = 19 packing and is a refutation to look for rather
       than a rung to expect; a run between 4.80 and 4.9885 that succeeds moves n = 20 and
       n = 21 and stops at n = 19. The quantity to read is the restricted optimum a
-      converged run reaches, never an extrapolated rate. An operator report preserved
-      with the introducing work gives 5378 s for the exact sweep at 2260 atoms and 173 s
-      for the interval route on the same bytes; no raw timing transcript or machine/load
-      record is retained, so those figures are planning evidence rather than independently
-      auditable benchmarks.
+      converged run reaches, never an extrapolated rate. Unretained operator reports give
+      5378 s for the former Fraction sweep, 173 s for the interval route, and 38.7 s and
+      29.4 s for two integer/parallel replays that returned the same least covered mass.
+      The integer runs predate the final worker-memory cap. No raw timing transcript,
+      machine description, or load record is retained, so none is a benchmark for the
+      corrected implementation. The code's exact equivalence and bounded-worker controls
+      are retained separately from timing.

@@ -2,7 +2,7 @@
 
 # Agenda map
 
-188 agenda commitments across 19 agendas, as declared in each agenda's own frontmatter.
+189 agenda commitments across 20 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **10** ready, **5** tentative, **42** blocked, **32** stopped, **99** complete.
+- **10** ready, **5** tentative, **42** blocked, **32** stopped, **100** complete.
 
 - **6 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -33,7 +33,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-017 | `BC-159` | 0 | process | tool_validation | Can the merged Agenda 016 handoff, the frozen lane inputs, the live tbd graph, the H-061 registration, the… | `think-uqgp` |
 | agenda-018 | `BC-183` | 2 | insight | research | Can the n = 40 admissible cone be characterised on the disjunctive system, so that Goebel's n = 40 packing's… | `think-3yxk` |
 | agenda-018 | `BC-184` | 2 | efficiency | tool_validation | Can the generic interval certifier be wired end to end and reproduce T-009's n = 29 bound through the generic… | `think-4f4d` |
-| agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so between 22.7… | `think-jgeg` |
+| agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and was reported faster… | `think-jgeg` |
 | agenda-019 | `BC-191` | 0 | efficiency | tool_validation | Row generation is between 79 and 94 per cent of every round, the site grids do not scale with the container,… | `think-ji0r` |
 
 ## Blocked, and on what
@@ -123,6 +123,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-017 | active | 1 |  | 10 |  |  | 11 |
 | agenda-018 | paused |  | 2 | 14 |  |  | 16 |
 | agenda-019 | paused | 2 |  | 4 |  |  | 6 |
+| agenda-020 | completed |  |  |  |  | 1 | 1 |
 
 ## What the states mean
 

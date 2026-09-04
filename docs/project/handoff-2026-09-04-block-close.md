@@ -51,10 +51,11 @@ fixed-net ceiling does.
 
 **n-independence.** Only **Condition 2** mentions `n`, and the covering program behind
 the search does not contain `n` at all.
-One atom set certifies its side for every integer above its own mass, so a larger `n` is
-strictly easier at the same side.
-`T-020` illustrates this directly: it was generated for `n = 20`, its atoms are too
-heavy for `n = 18`, and their mass below 19 certifies `n = 19`, `20`, and `21` directly.
+One atom set certifies its side for every integer above its own mass, so **Condition 2**
+becomes strictly weaker as `n` increases; the other feasibility conditions do not
+change. `T-020` illustrates this directly: it was generated for `n = 20`, its atoms are
+too heavy for `n = 18`, and their mass below 19 certifies `n = 19`, `20`, and `21`
+directly.
 
 Together they produce
 [`CERTIFICATE-REACH.md`](../../packing/frontier/CERTIFICATE-REACH.md), which ranks all
@@ -71,17 +72,18 @@ raw restricted-program measurement outside the `3.82`–`4.80` band.
 
 ## Where the next rungs are, and why not yet
 
-- **The retention gate is a large projected one-time cost.** Three operator-reported
-  exact-sweep timings — `1473 s` at 1184 atoms, `4866 s` at 2097, and `5378 s` at 2260 —
-  have no retained raw timing transcripts or machine/load records.
-  Their least-squares log-log exponent is `2.04`; the 1184-to-2260 endpoint slope is
-  `2.00`. A three-point fit for the interval route gives `1.29`; `0.92` is only its
-  1184-to-2097 slope. These are planning fits, not complexity results, and whole-run
-  dominance is unmeasured.
-  `BC-190` (move the generator’s accept/reject to the interval route, keep the exact
-  sweep at the gate) and `BC-191` (row generation is 79–94% of every round; site density
-  as a function of side; one untuned grid cost `8.8×` at `n = 20`’s own side) come
-  before any retarget, and Agenda 019 is ordered that way.
+- **The retention gate was rewritten, but its present cost is not yet measured.** Three
+  operator-reported Fraction-sweep timings — `1473 s` at 1184 atoms, `4866 s` at 2097,
+  and `5378 s` at 2260 — have no retained raw timing transcripts or machine/load
+  records. Their least-squares log-log exponent is `2.04`; the 1184-to-2260 endpoint
+  slope is `2.00`. The new integer-and-span implementation produced operator-reported
+  pre-integration times of `21.8 s` at 1184 atoms and `38.7 s` or `29.4 s` at 2260, but
+  those runs predate the integrated worker-memory cap and are not benchmarks for the
+  current code. Correctness is guarded separately by the independent legacy cell/Fraction
+  reduction, serial/parallel comparisons, and the unchanged interval decision.
+  `BC-190` must now measure the integer and interval routes end to end; `BC-191` must
+  measure row generation, site density, and rationalisation cost.
+  Neither is yet proved to dominate a complete run.
 - **`n = 18` at `117/25 = 4.68`** is open.
   An unretained operator report says three site sets returned exactly `18.000000`, the
   third after 157 row-generation rounds and 7056 s; there is no raw log, checkpoint, or

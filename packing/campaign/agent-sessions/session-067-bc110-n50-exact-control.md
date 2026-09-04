@@ -342,14 +342,14 @@ They do not supply an n = 50 pose or authorize target measurement.
 - **G1 geometry mutation:** after a candidate certificate is immutable, replace pose 50
   with an exact duplicate of pose 1. Both independent geometry checkers must reject the
   resulting coincident pair.
-- **C1 compatibility mutation:** duplicate the first witness-row id in the frozen
+- **Control 1 compatibility mutation:** duplicate the first witness-row id in the frozen
   certificate-to-witness mapping while leaving the certificate and cell claims
   unchanged. The compatibility checker must reject the nonbijective receipt before
   geometry status is considered.
-- **C2 source-cell parser control:** reverse the endpoints of the first declared
+- **Control 2 source-cell parser control:** reverse the endpoints of the first declared
   center-x cell. The manifest parser must reject the empty interval before matching.
 
-G1 and at least one of C1/C2 must fire in the experiment.
+G1 and at least one of **Control 1** or **Control 2** must fire in the experiment.
 None may be chosen from a target-specific weak predicate.
 
 ### Proposed Exact Instrument
@@ -371,7 +371,7 @@ W7 may build, but not yet run on n = 50, the following separated components:
    deterministic tie-breaking, then emits a hash-bound receipt.
 
 W7 readiness requires both exact-field controls, the rational control, source refusal,
-G1 and C1/C2 to pass without reading n = 50 target output.
+G1 and **Controls 1–2** to pass without reading n = 50 target output.
 Only then may the lane update H-054’s instrument description, set
 `instrument_ready: true`, record the readiness evidence in its coordinator-assigned
 experiment, and enter W6.

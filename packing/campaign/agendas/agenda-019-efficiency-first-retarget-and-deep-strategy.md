@@ -12,9 +12,9 @@ agenda:
   status: paused
   objective: >-
     Agenda 017's block moved seven registered cases and then hit a wall that is not
-    mathematical. Reported exact-sweep timings rose superlinearly over the observed atom
-    counts until
-    a single decision cost hours, one search spent fifty-five minutes failing to finish
+    mathematical. The former Fraction sweep had reported multi-hour decisions before
+    Agenda 020 replaced its implementation; the corrected integer sweep is not yet
+    benchmark-quality evidence. One search spent fifty-five minutes failing to finish
     its first round on a parameter that was tuned two container sides ago, and four lanes
     were run on four cores with no budget until the load average reached 10.6. None of
     that is a limit on the method; all of it is a limit on how many rungs a block can
@@ -38,14 +38,14 @@ agenda:
     state: ready
     priority: 0
     question: >-
-      The interval route decides more directions on fewer hypotheses than the exact sweep
-      and was reported 22.7, 44.2, and 31.1 times faster at the three largest paired atom
-      counts. The nonmonotone ratios lack raw timing and load records. Can the generator's own
-      accept-or-reject decision move to it, keeping the exact sweep for retention and the
-      exhaustive tier, and what does that do to the tail of a run?
+      The interval route decides more directions on fewer hypotheses than the exact
+      sweep and was reported faster than the former Fraction implementation. The exact
+      route now uses integer arithmetic and bounded parallelism. Which route is faster in
+      the generator today, and can its accept-or-reject decision move without changing
+      the two-route retention gate?
     budget: >-
       120 elapsed minutes, Opus at maximum thinking, efficiency-loop throughout.
-      The baseline is already reported and is the entry condition, not a conclusion:
+      The historical baseline is reported, not retained as a benchmark:
       on the same frozen bytes, 425 atoms took the exact sweep 181 s against the interval
       route's 9.4 s; 1184 atoms took 1473 s against 65 s; 2097 atoms took 4866 s against
       110 s; and 2260 atoms took 5378 s against 173 s. The three largest pairs give ratios
@@ -53,13 +53,13 @@ agenda:
       2.04 for the exact route and 1.29 for the interval route; 0.92 is only the
       1184-to-2097 interval slope. These are sparse operator reports, not asymptotic
       complexity results. No raw timing transcript, hardware description, or load trace
-      survives; reproduce the pairs before treating them as benchmark-quality measurements.
-      0--30 profile the exact sweep at four atom counts spanning 168 to 2097 and fit the
-      exponent, so the shape is measured rather than asserted. Record which phase
-      dominates -- event-cell construction, the prefix sum,
-      or the per-direction sweep -- because an algorithmic win is only available if one
-      of them does.
-      30--80 change the generator's decision to the interval route and measure the tail
+      survives. Agenda 020 then recorded pre-integration integer-sweep reports of 21.8 s
+      at 1184 atoms and 38.7 s or 29.4 s at 2260; those runs predate the integrated
+      worker-memory cap. 0--40 benchmark the corrected integer and interval routes on
+      frozen bytes under one recorded environment, including peak memory and worker
+      count. Record which phase dominates rather than fitting a complexity law to three
+      points. 40--80 change the generator's decision only if the controlled measurement
+      supports it, and measure the tail
       of a full run end to end against Agenda 017's recorded runs at the same sides.
       The equivalence guard is not optional and is the whole of the correctness argument:
       every certificate the interval decision accepts must still pass
@@ -73,15 +73,15 @@ agenda:
       reproducing them. devtools.decide_certificate is the retention gate, and the
       fractional tier is green.
     exit: >-
-      A benchmark record with the fitted cost exponent for the exact sweep, a named
-      dominant phase, the measured end-to-end delta from moving the generator's decision,
+      A retained benchmark record for the corrected integer and interval routes, a named
+      dominant phase, the measured end-to-end delta from any generator decision change,
       and either the change with its equivalence guard intact or a written rejection with
       the number that killed it.
     bead: think-jgeg
     workflows: [efficiency-loop]
     depends_on: []
     next_evidence: >-
-      Whether the decision path is still the tail of a run, which decides whether BC-194
+      Whether the decision path is a material part of a run, which decides whether BC-194
       is affordable at the side it names.
   - id: BC-191
     purpose: tool_validation
@@ -97,7 +97,7 @@ agenda:
     budget: >-
       120 elapsed minutes, Opus at maximum thinking, efficiency-loop, in parallel with
       BC-190 on a separate core.
-      Three measured baselines, all from Agenda 017's logs.
+      Three operator-reported baselines from Agenda 017; their raw logs are not retained.
       First, round composition: at n = 12 a late round spent 1261 s in row generation
       against 86 s pricing; at n = 17, 472 to 761 s against 87 to 124 s; at n = 20, 500
       to 1158 s against 85 to 106 s. Row generation is the round.
@@ -277,9 +277,11 @@ agenda:
       preserve -- retention through the gate, both routes agreeing on the value, the
       exhaustive tier still deciding what it decided.
       One question this closeout owns specifically: whether the exhaustive tier is still
-      affordable. It held eleven marked nodes at the end of Agenda 017 and a single
-      2097-atom certificate would add hours to it. D-438 was the same problem one tier
-      down and it hid a real failure for hours.
+      affordable. It held eleven marked nodes at the end of Agenda 017 and a 2097-atom
+      certificate formerly took hours under the Fraction implementation. The integer
+      path changes that premise, but its corrected worker cap and current tier cost still
+      need retained measurement. D-438 was the same problem one tier down and it hid a
+      real failure for hours.
     entry: >-
       BC-190 through BC-194 are terminal or explicitly stopped.
     exit: >-
@@ -353,12 +355,17 @@ This does not show that certificates fill the runway or exclude a refined-net fa
 plus a separate limiting argument.
 At `n = 11`, `17`, `18`, and `19`, the recorded packings bind before this ceiling.
 
-**What the next block must not skip.** `BC-190` and `BC-191` come first because the
-retention gate is a large projected one-time cost: one unretained operator report gives
-`5378 s` at 2260 atoms.
-Row generation took 79–94% of measured rounds, and whole-run dominance as a function of
-side is unmeasured. Reproduce the measurements and reduce avoidable decision cost before
-committing a block to larger certificates.
+**What the next block must not skip.** The exact sweep now uses integer arithmetic, span
+geometry, and a bounded direction pool.
+Operator-reported pre-integration runs took `21.8 s` at 1184 atoms and `38.7 s` or
+`29.4 s` at 2260, but they lack raw timing and environment records and predate the
+integrated worker-memory cap.
+They are planning evidence, not a benchmark for the current implementation.
+`BC-190` must compare the current integer sweep with the interval route inside a full
+run; `BC-191` must measure row generation, site density, and rationalisation cost.
+Whole-run dominance as a function of side remains unmeasured, and the single
+untuned-grid `8.8×` report is an observation, not a cost law.
+Do not commit a block to larger certificates until those costs are reproduced.
 
 ## Why efficiency before bounds
 
@@ -367,12 +374,16 @@ It also spent its time like this.
 All timing pairs below are operator reports preserved in prose without raw timing
 transcripts, machine descriptions, or load traces:
 
-| Where the time went | Measured |
+| Where the time went | Operator report |
 | --- | --- |
 | Exact sweep, 425 atoms | `181 s` — against the interval route’s `9.4 s` on identical bytes |
 | Exact sweep, 1184 atoms | `1473 s` — against `65 s` |
 | Exact sweep, 2097 atoms | `4866 s` — against `110 s`; raw timing transcript not retained |
 | Exact sweep, 2260 atoms | `5378 s` — against `173 s`; raw timing transcript not retained |
+| Integer sweep before the integrated worker cap, 1184 atoms | `21.8 s`; same declared verdict |
+| Integer sweep before the integrated worker cap, 2260 atoms | `38.7 s` loaded and `29.4 s` later; same declared verdict |
+| Three-point fitted exponent, Fraction sweep | `2.04`; endpoint slope alone is `2.00` |
+| Three-point fitted exponent, interval route | `1.29`; 1184-to-2097 slope alone is `0.92` |
 | Row generation, share of a round | `79%` to `94%` at every side measured |
 | `n = 20` round 0, grids `(23, 31, 39)` | over `3300 s`, did not finish |
 | `n = 20` round 0, grids `(29, 39, 49)` | `376 s` |
@@ -385,13 +396,15 @@ The interval route decides **361 directions where the exact sweep decides 181**,
 one fewer hypothesis — deciding on the doubled net it never invokes the `D4` reflection,
 so it does not need **Condition 1** at all — and ran 22.7, 44.2, and 31 times faster in
 the three reported pairs at 1184, 2097, and 2260 atoms.
-The ratios are neither monotone nor controlled for machine load.
-The effective slopes that can be fitted to these few observations describe those reports
-only; `BC-190` exists to reproduce them and determine whether any scaling pattern
-persists. The exact sweep belongs at the retention gate, where correctness is the only
-thing that matters and a long checkpoint is affordable.
-Whether it belongs in the generator’s inner loop is a question nobody has asked, and
-`BC-190` asks it.
+Those ratios compare the interval route with the former Fraction sweep.
+They are neither monotone nor controlled for machine load, and do not price the current
+integer sweep.
+The effective slopes that can be fitted to these few observations describe
+those reports only; `BC-190` exists to reproduce them and determine whether any scaling
+pattern persists. The exact sweep belongs at the retention gate, where correctness is
+decisive.
+Whether either exact or interval decision belongs in the generator’s inner loop
+is now a measurement question, and `BC-190` asks it.
 
 The site grids do not scale with the container.
 `build_site_grid` places a fixed *count* of points across the side, so at `4.80` the
@@ -419,10 +432,10 @@ checkpoints, and several frozen candidate masses differ from the reported object
 These values do not justify a growth trend or an unrestricted covering-value fit.
 No rung on this branch was ever claimed from one.
 
-And cost grows with the container.
-The high-prize cases sit at sides `5.1` to `7.2` against the `3.8` to `4.8` band every
+The high-prize cases sit at sides `5.1` to `7.2`, outside the `3.8` to `4.8` band every
 retained rung occupies.
-A round at `4.8` cost up to `1158 s`; nobody has measured a round at `5.5`.
+An operator report puts one round at `4.8` as high as `1158 s`; nobody has retained a
+comparable measurement at `5.5`, so the side-cost relationship is unknown.
 
 `BC-192` is the session that turns a ranking into a plan, and it runs *after* the two
 efficiency commitments precisely so that it can price its candidates.
@@ -438,9 +451,9 @@ mistakes, and none of it is on the table here.
 
 Retention still means freezing the candidate before deciding it, deciding the frozen
 bytes through `devtools.decide_certificate`, and retaining only when both routes accept
-**and agree on the value**. `BC-190` moves the exact sweep out of the generator’s inner
-loop and not out of the gate; the equivalence guard is the whole correctness argument
-and its absence is a reason to reject the change.
+**and agree on the value**. If `BC-190` moves the exact sweep out of the generator’s
+inner loop, it does not move it out of the gate; the equivalence guard is the whole
+correctness argument and its absence is a reason to reject the change.
 
 A candidate still counts only when its row loop stopped for want of a violated
 placement, and the loop’s final least covered mass is still reported beside the

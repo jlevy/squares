@@ -304,12 +304,13 @@ def verify(path):
         fail(f"least cell mass {worst}, declared {declared_minimum}")
 
     print(f"SHA256 PASS  {SHA256}")
-    print(f"C0/C1  PASS  {len(atoms)} atoms, D4 invariant, total mass {total} < 11")
-    print(f"C2     PASS  endpoint slack {endpoint}")
-    print(f"C3     PASS  D = {gap}; B(1+D) = {containment} < 1")
+    print(f"Condition 1  PASS  {len(atoms)} atoms, D4 invariant")
+    print(f"Condition 2  PASS  total mass {total} < 11")
+    print(f"Condition 3  PASS  endpoint slack {endpoint}")
+    print(f"Condition 4  PASS  D = {gap}; B(1+D) = {containment} < 1")
     index, centre = worst_record
     print(
-        f"C4     PASS  minimum {worst} at direction {index}, "
+        f"Condition 5  PASS  minimum {worst} at direction {index}, "
         f"centre ({centre[0]}, {centre[1]}); {cell_count} cells"
     )
     print(f"VERIFIED {record['claim']}")
@@ -328,8 +329,8 @@ def must_refuse(atoms, side, square_side, tangents, worst_record):
     if witness_mass >= 1:
         fail("must-refuse mutation was not refuted")
     print(
-        f"MUTATION REFUSED  scaling every weight by {factor} leaves C0-C3 valid "
-        f"but gives C4 witness mass {witness_mass} < 1"
+        f"MUTATION REFUSED  scaling every weight by {factor} leaves Conditions 1-4 valid "
+        f"but gives a Condition 5 witness mass {witness_mass} < 1"
     )
 
 

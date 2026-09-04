@@ -19,6 +19,12 @@ number, citation, recommendation or claim boundary, and none may be altered here
 References of the form `scratchpad/...` in the body below are the reviewer’s own record
 of what was read and where it was written at review time, and are left as written.
 
+On 2026-09-04, human-facing adversarial-control labels were normalized from their legacy
+compact form to **Control 1**–**Control 8**, reserving `C0`–`C5` for epistemic
+confirmation levels.
+The source hash retains the historical wording; no finding, verdict or claim boundary
+changed.
+
 * * *
 
 - Reviewer: independent record reviewer.
@@ -51,7 +57,7 @@ F10 is X-007. F11–F12 are the checks that pass.
 **The records say:**
 
 > exp-058 `verdict.reason`: “the W7 tool, its neighbourhood receipt and the eight
-> rejecting controls C1-C8 **do not exist**, which is why H-060 keeps instrument_ready
+> rejecting Controls 1–8 **do not exist**, which is why H-060 keeps instrument_ready
 > false”
 
 > exp-058 results JSON, `disposition.note`: “the W7 repository instrument, its receipt
@@ -61,8 +67,8 @@ F10 is X-007. F11–F12 are the checks that pass.
 > repository instrument, **because the instrument does not exist**.”
 
 > exp-058 body, *What This Round Does Not Establish*: “The `W7` executable instrument,
-> its exact neighbourhood receipt, and the eight rejecting controls `C1`–`C8`. Only `C8`
-> was pre-run here”
+> its exact neighbourhood receipt, and the eight rejecting **Controls 1–8**. Only
+> **Control 8** was pre-run here”
 
 > X-012 preface, **Owns:** “the `W7` executable instrument, its receipt and the eight
 > rejecting controls of §6 belong to a separate lane and **do not exist yet**.”
@@ -88,7 +94,7 @@ exp-058 and X-012 — already contains `__init__.py`, `binding.py`, `chart.py`,
 `git show 2f112f4c:packing/src/sqpack/local_rigidity/controls.py` defines, by name:
 `changed_feature`, `zero_margin`, `omitted_constraint`, `invented_contact`,
 `side_release`, `wrong_chart`, `certificate_drift`, `exp034_angle_and_slide` — a
-one-to-one match, in order, with X-012 §6’s table of `C1`–`C8`. The same commit’s
+one-to-one match, in order, with X-012 §6’s table of **Controls 1–8**. The same commit’s
 `instrument.py` carries `isolation_decided: bool = False` and an `instrument_ready`
 property.
 
@@ -119,7 +125,7 @@ The narrow defence available is that the agenda’s `W7` asks to *extend*
 package (`sqpack.local_rigidity`) binding to `devtools.assess_n5_rigidity`, not an
 extension of it as the hypothesis’s instrument text says”). That defence covers the
 words “the W7 extension”; it does not cover “its exact neighbourhood receipt, and the
-eight rejecting controls `C1`–`C8` do not exist”, which existed and ran.
+eight rejecting Controls 1–8 do not exist”, which existed and ran.
 
 Note also that the agenda assigns `W7` to `BC-152` itself, not to another lane —
 agenda-016, BC-152 budget: “45--105 W7 extend the existing rigidity tool with a locally

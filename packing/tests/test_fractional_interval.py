@@ -51,7 +51,7 @@ from tests.test_fractional_certificate import retained_certificate
 # only to keep the quick tests quick; the full-net decisions follow below.
 SUB_NET = ("0", "1", "45", "90", "135", "180", "1'", "90'", "180'")
 
-C4 = "C4 every admissible centre covers mass 1"
+CONDITION_5 = "Condition 5: every admissible centre covers mass 1"
 
 # The n = 12 case file moves as the ladder climbs; the 393/100 rung this verifier was
 # asked to decide is retained under its own name, and both are decided below.
@@ -265,8 +265,10 @@ def test_both_n12_sub_nets_are_diagnostic_not_theorem_acceptance() -> None:
     for certificate in (load_n12(RETAINED_393_100), load_n12()):
         verdict = verify_by_intervals(certificate, directions=SUB_NET)
         assert not verdict.accepted
-        assert verdict.failures == (C4,)
-        condition = next(condition for condition in verdict.conditions if condition.name == C4)
+        assert verdict.failures == (CONDITION_5,)
+        condition = next(
+            condition for condition in verdict.conditions if condition.name == CONDITION_5
+        )
         assert condition.status == "undecided"
         assert "restricted diagnostic" in condition.detail
         assert len(verdict.directions) == len(SUB_NET)
@@ -277,8 +279,10 @@ def test_both_n12_sub_nets_are_diagnostic_not_theorem_acceptance() -> None:
 def test_the_retained_n11_sub_net_is_diagnostic_not_theorem_acceptance() -> None:
     verdict = verify_by_intervals(load_n11(), directions=SUB_NET)
     assert not verdict.accepted
-    assert verdict.failures == (C4,)
-    condition = next(condition for condition in verdict.conditions if condition.name == C4)
+    assert verdict.failures == (CONDITION_5,)
+    condition = next(
+        condition for condition in verdict.conditions if condition.name == CONDITION_5
+    )
     assert condition.status == "undecided"
     assert "restricted diagnostic" in condition.detail
     assert all(outcome.status == "certified" for outcome in verdict.directions)
@@ -392,7 +396,7 @@ def test_massaccesi_n17_reproduces_the_published_bound_on_a_diagnostic_sub_net()
     certificate = retained_certificate()
     verdict = verify_by_intervals(certificate, directions=SUB_NET, enclose=True)
     assert not verdict.accepted
-    assert verdict.failures == (C4,)
+    assert verdict.failures == (CONDITION_5,)
     assert all(outcome.status == "certified" for outcome in verdict.directions)
     assert certificate.bounded_side == Fraction(22529, 5000)
     assert float(certificate.bounded_side) == pytest.approx(4.5058)
@@ -503,7 +507,7 @@ def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> No
     )
     verdict = verify_by_intervals(too_large)
     assert not verdict.accepted
-    assert verdict.failures == (C4,)
+    assert verdict.failures == (CONDITION_5,)
     refuted = verdict.directions[-1]
     assert refuted.status == "refuted"
     assert refuted.upper is not None and refuted.upper < verdict.scale
@@ -542,11 +546,11 @@ def _lightened_n12() -> Certificate:
 
 
 def test_lowering_one_atom_by_a_ten_thousandth_is_refused() -> None:
-    """C4 is tight at 1.00003, so a tenth of a thousandth off any atom over the
+    """Condition 5 is tight at 1.00003, so changing an atom over the
     tightest cell is visible. Symmetry is not what catches it here: this
-    verifier never checks C0, so the refusal has to come from coverage."""
+    verifier never checks Condition 1, so the refusal has to come from coverage."""
     verdict = verify_by_intervals(_lightened_n12())
-    assert verdict.failures == (C4,)
+    assert verdict.failures == (CONDITION_5,)
     assert verdict.directions[-1].status == "refuted"
     upper = verdict.directions[-1].upper
     assert upper is not None
@@ -559,10 +563,10 @@ def test_an_enclosed_run_refuses_a_minimum_it_pinned_below_one() -> None:
     Under ``enclose`` a box is settled against the best point value seen rather
     than against mass 1, so a search over lightened atoms resolves every box,
     reports a width-zero enclosure at the true 99993/100000, and has decided
-    nothing about C4. The verdict must still refuse it (D-435).
+    nothing about Condition 5. The verdict must still refuse it (D-435).
     """
     verdict = verify_by_intervals(_lightened_n12(), enclose=True, directions=("0",))
-    assert verdict.failures == (C4,)
+    assert verdict.failures == (CONDITION_5,)
     assert not verdict.accepted
     assert verdict.directions[-1].status == "refuted"
     assert verdict.enclosure == (
@@ -582,7 +586,7 @@ def test_mass_reaching_n_is_refused() -> None:
         half_tangents=base.half_tangents,
     )
     verdict = verify_by_intervals(heavy, directions=("0",))
-    assert "C1 total mass below n" in verdict.failures
+    assert "Condition 2: total mass below n" in verdict.failures
 
 
 def test_a_net_short_of_an_eighth_turn_is_refused() -> None:
@@ -595,12 +599,12 @@ def test_a_net_short_of_an_eighth_turn_is_refused() -> None:
         half_tangents=tuple(Fraction(41, 100) * k / 6 for k in range(7)),
     )
     verdict = verify_by_intervals(short, directions=("0",))
-    assert "C2 net reaches pi/4" in verdict.failures
+    assert "Condition 3: net reaches pi/4" in verdict.failures
 
 
 def test_a_net_too_coarse_for_containment_is_refused() -> None:
     verdict = verify_by_intervals(retained_certificate(steps=2), directions=("0",))
-    assert "C3 containment B(1 + D) < 1" in verdict.failures
+    assert "Condition 4: containment B(1 + D) < 1" in verdict.failures
 
 
 def test_containment_at_exactly_one_is_undecided_and_therefore_not_accepted() -> None:
@@ -620,7 +624,7 @@ def test_containment_at_exactly_one_is_undecided_and_therefore_not_accepted() ->
         half_tangents=base.half_tangents,
     )
     verdict = verify_by_intervals(touching, directions=("0",))
-    containment = next(c for c in verdict.conditions if c.name.startswith("C3"))
+    containment = next(c for c in verdict.conditions if c.name.startswith("Condition 4"))
     assert containment.status == "undecided"
     assert not verdict.accepted
 
@@ -705,7 +709,7 @@ def _grid_certificate(square_side: Fraction) -> Certificate:
 def test_enclosure_mode_refutes_an_exact_minimum_below_one() -> None:
     verdict = verify_by_intervals(_grid_certificate(Fraction(1, 10)), enclose=True)
     assert not verdict.accepted
-    assert verdict.failures == (C4,)
+    assert verdict.failures == (CONDITION_5,)
     assert verdict.enclosure == (Fraction(0), Fraction(0))
     assert verdict.directions[0].status == "refuted"
 
@@ -731,15 +735,17 @@ def test_perturbing_the_coincidence_away_lets_the_same_search_certify() -> None:
     verdict = verify_by_intervals(_grid_certificate(Fraction(51, 100)), directions=("0",))
     outcome = verdict.directions[0]
     assert not verdict.accepted
-    assert verdict.failures == (C4,)
+    assert verdict.failures == (CONDITION_5,)
     assert outcome.status == "certified"
     assert not outcome.budget_exhausted
     assert outcome.stalled == 0
 
 
-def test_a_restricted_direction_can_still_refute_c4() -> None:
+def test_a_restricted_direction_can_still_refute_condition_5() -> None:
     verdict = verify_by_intervals(_grid_certificate(Fraction(1, 10)), directions=("0",))
-    condition = next(condition for condition in verdict.conditions if condition.name == C4)
+    condition = next(
+        condition for condition in verdict.conditions if condition.name == CONDITION_5
+    )
     assert condition.status == "fails"
-    assert verdict.failures == (C4,)
+    assert verdict.failures == (CONDITION_5,)
     assert verdict.directions[0].status == "refuted"

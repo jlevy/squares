@@ -161,9 +161,7 @@ _NAGAMOCHI_GENERAL = re.compile(r"Nagamochi[\u2019']s general\s*`(?:[^`]*?≈\s*
 # The one remaining unambiguous bare-field shape in the corpus: "the verified `4.59`
 # bound" in a lower-bound history paragraph. It is deliberately narrow; an unqualified
 # bare value still carries too little information for this checker to infer a field.
-_VERIFIED_BARE_LOWER = re.compile(
-    r"\bverified\s+`(-?\d+(?:\.\d+)?)`\s+bound\b", re.IGNORECASE
-)
+_VERIFIED_BARE_LOWER = re.compile(r"\bverified\s+`(-?\d+(?:\.\d+)?)`\s+bound\b", re.IGNORECASE)
 
 #: "`verified_upper_bound` for this case is `5`" -- the ceiling-disclaimer's own explicit
 #: claim, naming the front-matter field it is about, so it is checked against that field

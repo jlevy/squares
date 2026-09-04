@@ -156,7 +156,7 @@ def prove_case1_minimum_repair(
     if required_contributions != 3:
         raise ElMoumniSourceControlError(
             "case-1-contribution-count",
-            "Case 1 needs the C1 term, C3 term, and the two-line C2 sum",
+            "Case 1 needs the C₁ term, C₃ term, and the two-line C₂ sum",
         )
 
     field = _sqrt2_field()
@@ -205,7 +205,7 @@ def transcribe_printed_figure4_length() -> None:
 
 
 def transcribe_printed_figure4_line_center() -> None:
-    """Refuse printed ``o1`` before any ``C4`` chord incidence is encoded."""
+    """Refuse printed ``o1`` before any source-figure ``C₄`` chord is encoded."""
     raise ElMoumniSourceControlError(
         "wrong-source-center",
         "printed Delta passes through o1 although its distance premises concern o4",

@@ -53,7 +53,7 @@
   <text x="478" y="264" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">2</text>
   <text x="520" y="264" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">3</text>
   <text x="570" y="264" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">5</text>
-  <text x="622" y="264" fill="#1faa8e" font-size="11" font-weight="400" text-anchor="start">fit C3</text>
+  <text x="622" y="264" fill="#1faa8e" font-size="11" font-weight="400" text-anchor="start">3 chunks</text>
   <text x="706" y="264" fill="#1faa8e" font-size="11" font-weight="700" text-anchor="start">yes</text>
   <rect x="40" y="285" width="700" height="40" rx="7" fill="#f7f8fa" stroke="#e1e5ea" stroke-width="1" />
   <circle cx="116" cy="305" r="5" fill="#1faa8e" />
@@ -118,7 +118,7 @@
   <text x="478" y="494" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">1</text>
   <text x="520" y="494" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">9</text>
   <text x="570" y="494" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">14</text>
-  <text x="622" y="494" fill="#1faa8e" font-size="11" font-weight="400" text-anchor="start">fit C6</text>
+  <text x="622" y="494" fill="#1faa8e" font-size="11" font-weight="400" text-anchor="start">6 chunks</text>
   <text x="706" y="494" fill="#1faa8e" font-size="11" font-weight="700" text-anchor="start">yes</text>
   <rect x="40" y="515" width="700" height="40" rx="7" fill="#ffffff" stroke="#e1e5ea" stroke-width="1" />
   <circle cx="116" cy="535" r="5" fill="#1faa8e" />
@@ -131,7 +131,7 @@
   <text x="478" y="540" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">2</text>
   <text x="520" y="540" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">10</text>
   <text x="570" y="540" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">16</text>
-  <text x="622" y="540" fill="#1faa8e" font-size="11" font-weight="400" text-anchor="start">fit C5</text>
+  <text x="622" y="540" fill="#1faa8e" font-size="11" font-weight="400" text-anchor="start">5 chunks</text>
   <text x="706" y="540" fill="#1faa8e" font-size="11" font-weight="700" text-anchor="start">yes</text>
   <rect x="40" y="561" width="700" height="40" rx="7" fill="#f7f8fa" stroke="#e1e5ea" stroke-width="1" />
   <circle cx="116" cy="581" r="5" fill="#1faa8e" />
@@ -183,7 +183,7 @@
   <text x="478" y="724" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">2</text>
   <text x="520" y="724" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">15</text>
   <text x="570" y="724" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">21</text>
-  <text x="622" y="724" fill="#d95f02" font-size="11" font-weight="400" text-anchor="start">&gt;budget C7</text>
+  <text x="622" y="724" fill="#d95f02" font-size="11" font-weight="400" text-anchor="start">&gt;budget (7 chunks)</text>
   <text x="706" y="724" fill="#1faa8e" font-size="11" font-weight="700" text-anchor="start">yes</text>
   <rect x="40" y="745" width="700" height="40" rx="7" fill="#f7f8fa" stroke="#e1e5ea" stroke-width="1" />
   <circle cx="116" cy="765" r="5" fill="#1faa8e" />
@@ -209,7 +209,7 @@
   <text x="478" y="816" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">0</text>
   <text x="520" y="816" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">16</text>
   <text x="570" y="816" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">22</text>
-  <text x="622" y="816" fill="#d95f02" font-size="11" font-weight="400" text-anchor="start">&gt;budget C9</text>
+  <text x="622" y="816" fill="#d95f02" font-size="11" font-weight="400" text-anchor="start">&gt;budget (9 chunks)</text>
   <text x="706" y="816" fill="#1faa8e" font-size="11" font-weight="700" text-anchor="start">yes</text>
   <rect x="40" y="837" width="700" height="40" rx="7" fill="#f7f8fa" stroke="#e1e5ea" stroke-width="1" />
   <circle cx="116" cy="857" r="5" fill="#1faa8e" />

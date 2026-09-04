@@ -73,7 +73,7 @@ session:
       from the cited atoms: inflation fails, unexplained understatement
       fails, C3-or-better requires named adversarial controls, V0/V2 are
       declared-not-derived and require notes. The generated RESULTS.md view,
-      a firing negative control (a C4 claimed past its atoms), five pytest
+      a firing negative control (an epistemic `C4` claimed past its evidence atoms), five pytest
       cases, and the gate step 'results rungs are earned and the view agrees'
       are all in the records tier. Two candidate register entries were
       deferred rather than force-fitted, exactly per the kill condition: the

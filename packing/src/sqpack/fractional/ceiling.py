@@ -26,13 +26,13 @@ Two regimes are decided, and the verdict names which applies:
           ceiling holds for this ``B`` and every net containing those angles.
 ``unit``  every placement has side at least 1 and an angle in ``[0, pi/4]``.
           A unit square at any such angle contains a ``B``-square at a net
-          angle whenever ``B (1 + D) < 1`` -- condition ``C3`` -- so the
+          angle whenever ``B (1 + D) < 1`` -- **Condition 4** -- so the
           ceiling holds for *every* ``(B, net)`` the method can use at all.
           This is the rejection route `H-061` registered.
 
 A placement whose angle is the mirror image of an admissible one -- half-tangent
 ``(1 - t) / (1 + t)`` for an admissible ``t`` -- is admissible only against
-D4-symmetric measures, which is what condition ``C0`` demands of a certificate
+D4-symmetric measures, which is what **Condition 1** demands of a certificate
 anyway. The verdict records whether that weaker form was needed.
 
 Depth is a finite sum of indicators of closed convex sets, so it is upper
@@ -181,7 +181,7 @@ class CeilingVerdict:
         measures = "D4-symmetric measure" if self.symmetric_only else "measure"
         if self.regime == "unit":
             scope = (
-                "for every shrunken side B and direction net satisfying C2 and C3, "
+                "for every shrunken side B and direction net satisfying Conditions 3 and 4, "
                 "every closed unit square in the container"
             )
         else:

@@ -33,9 +33,10 @@ The conclusion, stated up front so the rest can justify it:
 - **The new fractional lower bound for the open `n = 11` case is formalizable in
   layers.** The proof found on 2026-09-04 changes this report’s original premise.
   A bounded Lean 4.32.1 spike now checks the finite nonnegative counting kernel, its
-  set-based wrapper, the support-radius inequality, and the exact C1-C3 arithmetic.
-  The 90.5-million-cell C4 decision remains the expensive layer and is currently clearer
-  as a small exact Python checker plus a method-distinct interval confirmation.
+  set-based wrapper, the support-radius inequality, and the exact arithmetic for
+  **Conditions 2–4**. The 90.5-million-cell **Condition 5** decision remains the
+  expensive layer and is currently clearer as a small exact Python checker plus a
+  method-distinct interval confirmation.
   This is a property of the mathematics, not of Lean.
 - **The lemma layer of the *solved* cases is formalizable now**, and is the natural
   first target — Flyspeck’s pattern exactly.
@@ -316,10 +317,10 @@ The retained
 [`lean-spike`](../../../packing/cases/n11_fractional_certificate/lean-spike/README.md)
 pins the exact toolchain and dependencies and publishes its axiom audit.
 
-The remaining C4 fact says every contained side-`9977/10000` square at 181 exact
-rational directions covers atom mass at least `4001/4000`. The retained exact checker
-reduces that continuum to 567,130,649 event cells; a separate interval branch-and-bound
-confirms it on a doubled net.
+The remaining **Condition 5** fact says every contained side-`9977/10000` square at 181
+exact rational directions covers atom mass at least `4001/4000`. The retained exact
+checker reduces that continuum to 567,130,649 event cells; a separate interval
+branch-and-bound confirms it on a doubled net.
 Formalizing the reduction and checking a compact partition receipt is feasible in
 principle, but importing the whole computation directly would currently make the
 assurance surface larger and less readable than the 346-line theorem-specific Python
@@ -414,14 +415,14 @@ Where each layer of assurance stands, for a claim of the form “this packing is
 | Exact arithmetic in `ℚ(α)` | Yes | Only if you read our code | Low | 0.35 s (Python) | **Implemented and passing** |
 | Two independent exact implementations | Yes | Partly — a shared bug is unlikely | Medium | Seconds | **Achieved once**, Rust vs Python |
 | Lean proof, `native_decide` | Yes | Weakly — trusts the compiler | Medium | Fast | Deliberately not used |
-| **Lean proof, kernel-checked** | **Yes** | **Yes** | Small for the theorem kernel; large for C4 | Seconds for the current kernel | **Kernel and C1-C3 spiked; C4 remains** |
+| **Lean proof, kernel-checked** | **Yes** | **Yes** | Small for the theorem kernel; large for **Condition 5** | Seconds for the current kernel | Kernel and **Conditions 2–4** spiked; **Condition 5** remains |
 
 ## Recommendations
 
 Ordered by value per unit of effort, and deliberately small at the start.
 
-1. **Design a compact proof-producing C4 receipt.** The new `s(11) ≥ 381/100` result
-   already has a one-minute implication and a kernel-checked counting lemma.
+1. **Design a compact proof-producing Condition 5 receipt.** The new `s(11) ≥ 381/100`
+   result already has a one-minute implication and a kernel-checked counting lemma.
    Its remaining trust surface is the event-cell coverage computation.
    A partition or range-sum receipt that Lean can check is now the most direct
    formal-assurance target.
@@ -475,8 +476,8 @@ is what makes a search’s output a measurement, at a speed Lean will never matc
 - [ ] Could the Gauss-style autoformalization agents that finished dimension 8 be
   pointed at the lemma layer, and at what cost?
 - [ ] What is the smallest partition or range-sum receipt that lets Lean check the full
-  `n = 11` C4 coverage fact without replaying the search algorithm or trusting
-  `native_decide`?
+  `n = 11` **Condition 5** coverage fact without replaying the search algorithm or
+  trusting `native_decide`?
 - [ ] Does the 3,000× Flyspeck figure still hold in Lean 4 with modern interval tooling,
   or has it improved? It is a 2013-era measurement on HOL Light.
 
@@ -508,7 +509,7 @@ The 57 ns and 23.6 s figures used in the slowdown table are from the
 measurements and the record page respectively.
 
 **Not established.** The bounded kernel spike was written and run, but no complete Lean
-formalization of C4 or of the headline `s(11)` result was attempted.
+formalization of **Condition 5** or of the headline `s(11)` result was attempted.
 Every estimate of that remaining formalization effort is therefore a judgement, not a
 measurement — the “weeks, not days” figure for the `s(11)` upper bound especially.
 The claim that no formal theorem about `s(n)` exists for non-trivial `n` is a negative

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 481
+count: 489
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9116,24 +9116,25 @@ defects:
   severity: high
   status: contained
   what: >-
-    Theorem 1, Case 1 on printed page 287 assumes that the center `o4` of `C4` lies in
-    the named pentagon and gives both half-distance bounds from `o4` to `[a1,p]` and
+    Theorem 1, Case 1 on printed page 287 assumes that the center `o4` of source square
+    `C₄` lies in the named pentagon and gives both half-distance bounds from `o4` to `[a1,p]` and
     `[a2,r]`. The next sentence instead draws the parallel line `Delta` through `o1`
     before naming its intersections `p''` and `r''`. Center `o1` belongs to the earlier
-    square `C1`, not `C4`.
+    source square `C₁`, not `C₄`.
   consequence: >-
     The preceding distance bounds and claimed chord inequality `|p''r''| >= 1` concern
-    `C4` and do not transfer to a line through the unrelated center `o1`. The printed
+    source square `C₄` and do not transfer to a line through the unrelated center
+    `o1`. The printed
     exclusion of polygon `(p' p r r')` cannot be replayed verbatim; changing `o1` to
     `o4` is plausible from context but is a source-distinct repair.
   fix: >-
     Keep the printed Cases 2 and 3 route blocked. Refuse `o1` as the chord-line center
     and treat `o4` only as a candidate correction requiring an independent square-chord
-    argument. The current Figure 4 packet supplies no `C4` geometry, incidence, or
+    argument. The current Figure 4 packet supplies no `C₄` geometry, incidence, or
     feasibility conclusion.
   regression: >-
     test_printed_figure4_line_center_is_typed_source_blocker rejects the printed `o1`
-    label before any `C4` chord or polygon-exclusion argument can be encoded.
+    label before any `C₄` chord or polygon-exclusion argument can be encoded.
   bead: think-trkj
   recorded_in: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
 - id: D-347
@@ -12921,21 +12922,25 @@ defects:
   severity: high
   status: fixed
   what: >-
-    `controls.changed_feature` (C1) and `controls.invented_contact` (C4) computed their
-    own verdicts inline. Neither built a mutated system and neither called `bind` or any
+    `controls.changed_feature` (**Control 1**) and `controls.invented_contact`
+    (**Control 4**) computed their own verdicts inline. Neither built a mutated system
+    and neither called `bind` or any
     guard: `invented_contact` never named `bind`, and the only name `changed_feature` took
     from `sqpack.local_rigidity.binding` was `embed`, a field-embedding helper.
 
-    C1, for each of the four touching pairs and each of the three sibling support features
+    **Control 1**, for each of the four touching pairs and each of the three sibling
+    support features
     of its active branch, formed `claimed = (active_keys - {contact.key}) |
     {substitute.key}` and recorded `active_key_agreement_breaks = claimed != t012_keys`.
-    C4 took `system.inactive_walls[0]`, formed `claimed = active_keys | {invented.key}`,
+    **Control 4** took `system.inactive_walls[0]`, formed
+    `claimed = active_keys | {invented.key}`,
     and recorded `agrees = claimed == set(t012.contact_keys)`. In both, the key put into
     the set was chosen *because* it is not one of T-012's contacts, so the comparison could
     not have come out the other way. The other conjunct in each verdict -- that the
     sibling's margin is nonzero, that the invented wall's margin is not zero -- is a true
     fact about the pose, but it is a fact the control read off the unmutated system for
-    itself. No mutated object was ever handed to anything that could refuse it. C1 also
+    itself. No mutated object was ever handed to anything that could refuse it.
+    **Control 1** also
     computed whether the sibling's gradient differs from the contact's, and no verdict read
     it.
 
@@ -12963,10 +12968,12 @@ defects:
     as evidence at exactly the step where a claimed new theorem is promoted.
   fix: >-
     Both controls now mutate a real `ConstraintSystem` and hand it back to the instrument.
-    `with_active_pair` and `with_forged_active_wall` build the mutant; C1 applies each of
+    `with_active_pair` and `with_forged_active_wall` build the mutant; **Control 1**
+    applies each of
     the twelve substitutions twice, once renaming the contact onto the sibling and once
     keeping the contact's name and its cached margin while swapping in the sibling's
-    polynomial; C4 forges a zero margin onto a slack wall inequality. Each verdict is now
+    polynomial; **Control 4** forges a zero margin onto a slack wall inequality. Each
+    verdict is now
     the conjunction of a guard refusal and `bind` refusing.
 
     The guard is new and its recomputation is the whole mechanism.
@@ -13560,7 +13567,8 @@ defects:
   what: >-
     `generate._worst_cells` and `colgen.placement_cells` score an event cell when the
     cell's centre, rotated back, lies in the admissible centre domain. `sweep.reduce_to_cells`,
-    which `certificate.verify` uses to decide C4, scores every cell whose v-range meets the
+    which `certificate.verify` uses to decide **Condition 5**, scores every cell whose
+    v-range meets the
     domain's v-extent within the u-slab. The second set strictly contains the first.
     Measured on the retained 113-atom certificate at L = 77/20: identical at directions 0
     and 1, and 432, 452 and 456 extra cells at directions 45, 90 and 180 -- 1.1 to 1.2 per
@@ -13568,7 +13576,8 @@ defects:
     instance at L = 11/5 where the oracle reports 2.125 and the sweep 2.
   consequence: >-
     The linear program converges with every placement it can see at mass 1 and is then
-    refused by C4 on a placement it was never shown. Both n = 12 pushes to side 39/10 died
+    refused by **Condition 5** on a placement it was never shown. Both n = 12 pushes to
+    side 39/10 died
     this way with margin in hand: 11.921565 refused at least cell mass 3395/3456, and
     11.869187 refused at 3083/3125 after column generation. The direction matters and is
     the reason this is filed conservative rather than flattering: the oracle never invents
@@ -13578,7 +13587,8 @@ defects:
   fix: >-
     Fixed on 2026-09-04, in the oracle, after the prior question this entry raised was
     settled the other way: the verifier is right. `sweep.reduce_to_cells` scores exactly
-    the event cells whose open interior meets the closed centre domain, which is what C4
+    the event cells whose open interior meets the closed centre domain, which is what
+    **Condition 5**
     must quantify over -- coverage by closed squares is upper semicontinuous, so the open
     and closed domains share an infimum and that infimum is attained on an open cell
     meeting the domain, and the per-slab v-extent is exact by convexity. Checked in exact
@@ -13611,15 +13621,18 @@ defects:
   detected_by: inspection
   latent_for: >-
     since sqpack.fractional.interval was written on 2026-09-04, about three hours; found
-    by reading the acceptance path before registering the verifier as C4 evidence, not by
+    by reading the acceptance path before registering the verifier as support for
+    epistemic `C4`, not by
     any test
   severity: high
   what: >-
-    `interval.verify_by_intervals` decided C4 from the branch-and-bound status alone:
+    `interval.verify_by_intervals` decided **Condition 5** from the branch-and-bound
+    status alone:
     `holds` when every direction came back `certified`. But `certified` means only that
     the search resolved every box against the threshold it was run with, and the two
     modes run different thresholds. Without `enclose` the threshold is mass 1, so
-    `certified` does mean C4. With `enclose` the threshold is the best point value seen
+    `certified` does mean **Condition 5**. With `enclose` the threshold is the best point
+    value seen
     so far, which the search keeps lowering, so `certified` means the minimum was pinned
     exactly and says nothing about whether the pinned value reaches 1.
   consequence: >-
@@ -13644,7 +13657,8 @@ defects:
     `tests/test_fractional_interval.py::test_an_enclosed_run_refuses_a_minimum_it_pinned_below_one`
     runs the lightened certificate under `enclose` and asserts the direction still comes
     back `certified`, the enclosure is still the true 99993/100000, and the verdict
-    refuses on C4 -- so it pins the distinction rather than the outcome. The lightened
+    refuses on **Condition 5** -- so it pins the distinction rather than the outcome.
+    The lightened
     fixture both refusal tests share is now one helper.
   status: fixed
   recorded_in: packing/src/sqpack/fractional/interval.py
@@ -13669,7 +13683,8 @@ defects:
     one. Second, the README promised a labelled refusal for any file not of the expected
     form, but a float where an exact rational was required, a zero direction_steps, or an
     atom row with fewer than three entries raised ValueError, ZeroDivisionError or
-    IndexError instead. Third, "nothing short-circuits" was true of C0 to C4 but not of
+    IndexError instead. Third, "nothing short-circuits" was true of **Conditions 1–5**
+    but not of
     the preconditions, which return before them.
   consequence: >-
     None of it can change a verdict, and the review that found them says so: exit status
@@ -13690,7 +13705,8 @@ defects:
     refusal. The short-circuit sentence now distinguishes the conditions from the
     preconditions. Four cosmetic findings in the same review were left as they are and are
     recorded in it: a claim string that must be in lowest terms, a zero-weight asymmetric
-    atom refused by C0, a degenerate direction that raises where it would be vacuous, and
+    atom refused by **Condition 1**, a degenerate direction that raises where it would be
+    vacuous, and
     disagreeing timing prose, which was aligned.
   regression: >-
     The four malformed files the review named -- a decimal outer_side, direction_steps
@@ -13780,8 +13796,9 @@ defects:
     One of those fast counterparts was wrong on the first attempt and the way it was wrong
     is worth keeping: deciding the calibration rung on a coarse net by slicing the
     half-tangents asserted the whole verdict, which fails, because a net that coarse fails
-    C3 by construction -- D grows with the gap and B(1 + D) then exceeds 1. The rung test
-    beside it had solved this already by asserting C4's value rather than the verdict.
+    **Condition 4** by construction -- D grows with the gap and B(1 + D) then exceeds 1.
+    The rung test beside it had solved this already by asserting **Condition 5**'s value
+    rather than the verdict.
     Coverage is the claim a coarse decision can carry; containment is not.
   regression: >-
     The fractional tier runs 85 tests in 176 s with 9 deselected, and the whole
@@ -13933,7 +13950,7 @@ defects:
     `Certificate` and the theorem presentation placed no sign restriction on atom
     weights. The proof's final inequality and the open-cell boundary reduction both
     require a nonnegative measure. An exact five-atom D4-symmetric object with weight 2
-    at the centre and weight -1 at each corner satisfies the encoded C0-C4 conditions for
+    at the centre and weight -1 at each corner satisfies the encoded **Conditions 1–5** for
     n = 1, L = 11/10 and B = 3/5, and the verifier accepted it even though s(1) = 1.
   consequence: >-
     The generic verifier could print an accepted square-packing lower bound that is
@@ -13973,7 +13990,8 @@ defects:
     package check and the falsification program green. The existing table happened to be
     correct, but nothing executable required it to remain correct.
   fix: >-
-    Give every full mutation an exact oracle for the verdict, C0-C4 outcomes and minimum;
+    Give every full mutation an exact oracle for the verdict, **Conditions 1–5** outcomes,
+    and minimum;
     return nonzero on disagreement; add a bounded signed-weight must-refuse mode; and run
     that negative control from `check.py` after the two positive controls.
   regression: >-
@@ -13995,7 +14013,8 @@ defects:
   what: >-
     D-436 made malformed records fail cleanly, but the loader still applied `int(...)`
     to `n` and `direction_steps`, silently accepting JSON decimals, Booleans and
-    string lookalikes; it also accepted duplicate object keys. The C4 search raised on
+    string lookalikes; it also accepted duplicate object keys. The **Condition 5** search
+    raised on
     every domain with `2h >= L`, conflating an empty feasible set with the singleton
     closed placement at equality.
   consequence: >-
@@ -14056,7 +14075,8 @@ defects:
   status: fixed
   what: >-
     `verify_by_intervals(..., directions=SUBSET)` searched only the named directions but
-    marked C4 as holding whenever all selected outcomes certified. `IntervalVerdict.accepted`
+    marked **Condition 5** as holding whenever all selected outcomes certified.
+    `IntervalVerdict.accepted`
     then returned true, and the tests described three such sub-net decisions as accepted
     certificates even though unsearched orientations remained unconstrained.
   consequence: >-
@@ -14065,9 +14085,11 @@ defects:
     in-progress checkpoint and nothing imported it outside its tests when the review found
     the defect.
   fix: >-
-    A restricted run may still refute C4 and reports every selected outcome and enclosure,
+    A restricted run may still refute **Condition 5** and reports every selected outcome
+    and enclosure,
     but it marks a wholly certified sample `undecided`; only an omitted `directions`
-    argument, which runs the complete doubled net, can establish C4 and yield acceptance.
+    argument, which runs the complete doubled net, can establish **Condition 5** and yield
+    acceptance.
   regression: >-
     The three sub-net controls in `tests/test_fractional_interval.py` now require a useful
     diagnostic with certified per-direction outcomes and a non-accepted theorem verdict;
@@ -14075,7 +14097,7 @@ defects:
     outcome.
   recorded_in: packing/src/sqpack/fractional/interval.py
 - id: D-446
-  title: Interval-verifier integer masses could overflow before C1 was decided
+  title: Interval-verifier integer masses could overflow before Condition 2 was decided
   date: '2026-09-04'
   layer: verifier
   class: soundness
@@ -14089,10 +14111,12 @@ defects:
   what: >-
     `AtomData.of` bounded `n * scale` but cast each arbitrary atom weight to `numpy.int64`
     and computed totals and coverage products there. A certificate may carry nonnegative
-    weights far above n before C1 rejects it, so the cast, sum or matrix product could wrap
+    weights far above n before **Condition 2** rejects it, so the cast, sum or matrix
+    product could wrap
     and make both the total and box masses meaningless.
   consequence: >-
-    Wrapped arithmetic could make a C1 failure look smaller than n or alter a C4 decision,
+    Wrapped arithmetic could make a **Condition 2** failure look smaller than n or alter
+    a **Condition 5** decision,
     producing a false interval-certified verdict. The retained n = 11, n = 12 and control
     certificates are far inside the safe range and no evidence entry yet used this code.
   fix: >-
@@ -14131,7 +14155,8 @@ defects:
   fix: >-
     Cap each direction at 100,000 processed boxes and return an explicit
     `budget_exhausted=True`, lower bound zero and `undecided` verdict unless an admissible
-    sampled point has already refuted C4. Nonnegative weights make zero a sound lower bound
+    sampled point has already refuted **Condition 5**. Nonnegative weights make zero a
+    sound lower bound
     for every abandoned box.
   regression: >-
     `tests/test_fractional_interval.py::test_an_exact_edge_coincidence_is_reported_undecided_never_accepted`
@@ -14158,7 +14183,8 @@ defects:
     is zero but the returned midpoint mapped to (19/25, 17/25), below the feasible y
     margin 7/10.
   consequence: >-
-    C4 decisions and every retained bound remained correct because the mass is constant
+    **Condition 5** decisions and every retained bound remained correct because the mass
+    is constant
     on the whole open cell and some feasible point exists there. The reported centre was
     not always a genuine placement, so it could mislead a direct-witness audit or a
     downstream negative control.
@@ -14299,7 +14325,8 @@ defects:
     the weak lower bound 4 even though no member attained the endpoint.
   consequence: >-
     The overstatement could terminate a legitimate limiting-family research route and
-    confused an upper bound allowed by C1 and C3 with the unknown supremum of sides at
+    confused an upper bound allowed by **Condition 2** and **Condition 4** with the
+    unknown supremum of sides at
     which actual certificates exist. It does not affect any retained certificate or the
     accepted s(11) >= 381/100 result.
   fix: >-
@@ -14324,7 +14351,8 @@ defects:
   severity: low
   status: fixed
   what: >-
-    The renderer said 207107/500000 rounded tan(pi/8) down. Its exact C2 slack is
+    The renderer said 207107/500000 rounded tan(pi/8) down. Its exact **Condition 3**
+    slack is
     309449/250000000000 > 0, so the rational is strictly above the positive root
     sqrt(2) - 1 = tan(pi/8). A downward endpoint would stop the net short of pi/4 and
     fail the theorem premise.
@@ -14333,8 +14361,8 @@ defects:
     but the source comment taught the opposite of the exact endpoint condition and could
     cause a later net generator to choose an invalid endpoint.
   fix: >-
-    Say that the rational endpoint lies just above tan(pi/8), matching the exact C2
-    inequality used by every verifier.
+    Say that the rational endpoint lies just above tan(pi/8), matching the exact
+    **Condition 3** inequality used by every verifier.
   regression: >-
     `tests/test_n11_thirdparty_verify.py::test_minimal_checker_binds_the_retained_bytes_and_closed_form_facts`
     fixes the positive exact slack and therefore the direction of the comparison.
@@ -14451,7 +14479,8 @@ defects:
   what: >-
     The command accumulated invalid mass and impossible-side failures but invoked the
     exact and interval verifiers before printing them. Unsupported symmetry and failed
-    C2 or C3 conditions were not preflighted at all, and even an interval point enclosure
+    **Condition 3** or **Condition 4** were not preflighted at all, and even an interval
+    point enclosure
     that already contradicted `least_cell_mass` still launched the exact sweep. A test
     titled "before any sweep" checked only the final text, not whether either verifier
     ran.
@@ -14459,13 +14488,13 @@ defects:
     An invalid candidate could consume minutes or hours after the command already knew it
     was unusable, defeating the reason the retention gate exists as a separate tool.
   fix: >-
-    Reuse the exact verifier's shared C0-C3 condition function and return immediately
+    Reuse the exact verifier's shared **Conditions 1–4** function and return immediately
     after any cheap refusal. In full mode run the interval rejection route first and
     invoke the exact event sweep only after the interval result is fit for comparison and
     agrees with the declared least mass.
   regression: >-
     tests/test_decide_certificate.py patches both routes to raise for declaration,
-    ceiling and C0-C3 preflights, then patches the exact route to raise after interval
+    ceiling and **Conditions 1–4** preflights, then patches the exact route to raise after
     refusal, unusable enclosure or declared-minimum disagreement
   recorded_in: packing/devtools/decide_certificate.py
 - id: D-458
@@ -14514,7 +14543,7 @@ defects:
   regression: none
   recorded_in: packing/defects.yaml
 - id: D-460
-  title: The retention gate called two C4 implementations independent mathematical models
+  title: The retention gate called two Condition 5 implementations independent mathematical models
   date: '2026-09-04'
   layer: docs
   class: validity
@@ -14525,15 +14554,17 @@ defects:
   status: fixed
   what: >-
     The module said the exact and interval routes shared no modelling assumption. They
-    share the Certificate representation and C1-C3 premises; what differs is the C4
-    decision method. The interval route does not require C0 because it checks the doubled
+    share the Certificate representation and **Conditions 2–4** premises; what differs is
+    the **Condition 5** decision method. The interval route does not require
+    **Condition 1** because it checks the doubled
     net directly.
   consequence: >-
     Readers could mistake useful implementation diversity for fully source-distinct
     mathematical validation.
   fix: >-
     State the shared contract and limit the independence claim to the event-cell and
-    interval branch-and-bound C4 implementations and their different failure modes in
+    interval branch-and-bound **Condition 5** implementations and their different failure
+    modes in
     both the command and the synopsis.
   regression: tests/test_decide_certificate.py::test_the_gate_describes_its_independence_boundary
   recorded_in: packing/devtools/decide_certificate.py
@@ -14714,7 +14745,8 @@ defects:
     current result, while some current evidence links did not establish the value they
     were attached to.
   fix: >-
-    State the 4.59 first-party certificate, current gaps and direct C1 composition in all
+    State the 4.59 first-party certificate, current gaps and direct **Condition 2**
+    composition in all
     three case bodies; attach only its exact and interval evidence to the current bound;
     and correct historical successor, n = 20 and test descriptions without erasing the
     earlier results.
@@ -15218,3 +15250,238 @@ defects:
     this one.
   status: fixed
   recorded_in: packing/devtools/render_certificate_reach.py
+- id: D-482
+  title: Three tests pinned the Nagamochi count, and the poisoned control went blind a second time
+  date: '2026-09-04'
+  layer: verifier
+  class: bookkeeping
+  detected_by: gate
+  latent_for: >-
+    from the T-020 retention at about 20:35 UTC until the pre-push tier reached the test
+    file at about 21:55; two pushes went out in between, on the strength of the records
+    tier and a pre-push tier that timed out before it got there
+  severity: medium
+  what: >-
+    tests/test_nagamochi_bounds.py held three expectations as literals about the record
+    rather than as relations read from it. test_it_covers_the_cases_it_claims_to asserted
+    that exactly 85 cases cite E-nagamochi-lower; test_a_stale_readme_count_is_refused
+    asserted the checker would answer a stale README with "60 of 65"; and
+    test_a_wrong_value_is_refused poisoned n = 20's verified lower bound with "4.8" to
+    prove the checker bites. T-020 moved n = 19, 20 and 21 off the closed form the same
+    evening, so the count became 83 and 58, and the first two literals were simply
+    stale.
+    The third is the finding. Its own comment records that its original target, n = 19,
+    stopped reaching the checker when T-016 took that case over on 2026-09-03, so the
+    control "passed without biting" and the target was moved to n = 20. On 2026-09-04
+    T-020 gave n = 20 a real verified lower bound of exactly 24/5 = 4.8 with evidence
+    that no longer names the theorem. The poison became the truth, the poisoned case
+    stopped reaching the checker, and the control went blind again by exactly the
+    mechanism its comment describes -- this time it failed only because a second
+    assertion, main() == 1, had nothing left to bite on.
+  consequence: >-
+    No bound and no record was wrong. The checker itself (devtools.check_nagamochi_bounds)
+    read the corpus correctly throughout and passed in the records tier. What was wrong
+    was the test of the checker, and for one push cycle the register carried a test that
+    could not tell a biting control from a blind one.
+    The process cost is the part to keep. The records tier does not run pytest, and the
+    pre-push tier's whole-suite step timed out at 900 s on this box and 1800 s on the CI
+    runner before reaching this file -- so two commits were pushed with a red test that
+    only the full suite reveals, past a gate that exists because that has happened twice
+    before today. That the suite was too slow to reach its own failures is D-369's
+    mechanism; the same evening's integer sweep (agenda-020) is what brings the suite back
+    under the timeout, and this is the first defect the restored gate caught.
+  fix: >-
+    Fixed on 2026-09-04. None of the three tests pins a number now. The coverage test
+    reads the retained certificate packages, computes each one's reach from its side and
+    mass (least_size_certified upward, wherever Theorem 2's value is below the side), and
+    asserts that no reached case still cites the theorem and that every citing case
+    carries the theorem's own value. The stale-README test derives the corpus figure the
+    way the checker does. The poisoned control chooses its target from the record -- the
+    largest citing case with at least 0.3 of room under its reported upper bound -- and
+    poisons by 0.2 above the recorded value, so it can neither be taken over by a result
+    nor fall inside the checker's last-place tolerance.
+  regression: packing/tests/test_nagamochi_bounds.py
+  status: fixed
+  recorded_in: packing/tests/test_nagamochi_bounds.py
+- id: D-483
+  title: The optimized span sweep tested its reachability geometry against itself
+  date: '2026-09-04'
+  layer: verifier
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one parent revision
+  severity: high
+  status: fixed
+  what: >-
+    The integer optimization replaced the legacy cell reducer with `reduce_to_spans`
+    followed by tuple expansion, then described equality between the two as an
+    independent cell-for-cell guard. Any shared reachability or endpoint error would
+    therefore pass the comparison by construction.
+  consequence: >-
+    The optimized exact route could have skipped a placement while its advertised
+    reference test stayed green. No such mismatch was found after restoring the real
+    reference, so the retained certificate verdicts do not move.
+  fix: >-
+    Restore the pre-optimization cell-reduction loop independently of the span loop and
+    compare its events, reachable cells, exact minima, and feasible witnesses with the
+    optimized route.
+  regression: packing/tests/test_fractional_sweep_integer.py::test_the_span_reduction_matches_the_independent_legacy_cell_reduction
+  recorded_in: packing/src/sqpack/fractional/sweep.py
+- id: D-484
+  title: The public integer sweep could bypass its int64 overflow premise
+  date: '2026-09-04'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one parent revision
+  severity: critical
+  status: fixed
+  what: >-
+    The ordinary dispatcher bounded the scaled total before entering the NumPy route,
+    but public `minimum_covered_mass_integer` trusted its caller. Individually
+    representable weights could have a coincident prefix sum outside signed int64, and a
+    caller-supplied scale could fail to represent the weights integrally.
+  consequence: >-
+    A wrapped subset sum could report a false minimum through a supported public entry
+    point, even though all retained certificate calls happened to enter through the
+    guarded dispatcher.
+  fix: >-
+    Require nonnegative weights, a positive integer scale, integral scaled weights, and
+    a scaled total below the conservative int64 limit inside the public function before
+    allocating any NumPy array.
+  regression: packing/tests/test_fractional_sweep_integer.py::test_the_public_integer_entry_point_refuses_an_overflowing_scaled_total
+  recorded_in: packing/src/sqpack/fractional/sweep.py
+- id: D-485
+  title: Exact-sweep parallelism multiplied dense grids by the host CPU count
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: one parent revision
+  severity: high
+  status: fixed
+  what: >-
+    The optimized verifier defaulted to every host CPU and allocated one dense int64
+    event grid per worker. A high-core host could therefore turn one valid replay into a
+    multi-gigabyte allocation. The Linux path also forced `fork` from library code to
+    accommodate stdin, which is unsafe in a threaded host and did not solve the same
+    importability boundary on other platforms.
+  consequence: >-
+    A verification could exhaust memory or inherit an unsafe process state. This was a
+    resource-risk finding, not the source of the unrelated 40 GiB process observed by
+    the operator during the review.
+  fix: >-
+    Cap workers by process-available CPUs, four processes, direction count, and a 512 MiB
+    concurrent-grid estimate; run one worker when one supported grid exceeds that
+    parallelism budget; preserve the platform start method; and use serial execution
+    whenever the caller's main module is not importable.
+  regression: >-
+    packing/tests/test_fractional_sweep_integer.py covers CPU and memory caps, a
+    single-grid budget, serial and parallel agreement, and missing, stdin, and string
+    main-module paths.
+  recorded_in: packing/src/sqpack/fractional/certificate.py
+- id: D-486
+  title: The integer sweep repeated the infeasible midpoint witness defect
+  date: '2026-09-04'
+  layer: verifier
+  class: validity
+  direction: neutral
+  detected_by: review
+  recurrence_of: D-448
+  latent_for: one parent revision
+  severity: medium
+  status: fixed
+  what: >-
+    The optimized route returned the midpoint of the whole minimizing event cell. D-448
+    had already shown that a reachable cell can meet the rotated feasible-centre polygon
+    while its midpoint lies outside it.
+  consequence: >-
+    The minimum value stayed exact, but the optimized route could display a point that
+    was not a legal placement and disagree with the repaired reference witness.
+  fix: >-
+    Reuse the exact clipped-cell witness constructor in both arithmetic routes and keep
+    route agreement on the witness as well as the value.
+  regression: >-
+    packing/tests/test_fractional_certificate.py::test_minimum_mass_witness_lies_in_feasible_part_of_event_cell and packing/tests/test_fractional_sweep_integer.py
+  recorded_in: packing/src/sqpack/fractional/sweep.py
+- id: D-487
+  title: Pre-cap operator timings became current benchmarks and complexity laws
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: one parent revision
+  severity: high
+  status: fixed
+  what: >-
+    Agenda and handoff prose promoted unretained optimization timings to current
+    measurements, although some were observed under concurrent load and all preceded
+    the worker and memory caps. Two or three certificate sizes were also treated as a
+    settled cost law and as proof that the retention gate no longer bound the workflow.
+  consequence: >-
+    The mathematical decisions were unchanged, but later planning could rely on a speed
+    and scaling model that had never been measured for the corrected implementation.
+  fix: >-
+    Preserve the figures only as pre-cap operator reports, remove the inferred general
+    law and current bottleneck claim, require fresh comparative measurement before
+    retargeting, and remove the duplicate full-certificate decision from the ordinary
+    test tier.
+  regression: none; a new controlled benchmark receipt is the missing evidence
+  recorded_in: packing/campaign/agendas/agenda-020-efficiency-block-the-exact-sweep.md
+- id: D-488
+  title: The rung checker could replace a missing live certificate with an old rung
+  date: '2026-09-04'
+  layer: tooling
+  class: bookkeeping
+  detected_by: review
+  recurrence_of: D-439
+  latent_for: one parent revision
+  severity: high
+  status: fixed
+  what: >-
+    When no artifact was literally named `certificate.json`, the rung-figure checker
+    silently treated the first historical certificate as current. It also interpreted
+    every unqualified margin relative to the first integer above the mass rather than
+    the certificate's declared target, conflating T-020's n = 19 reach margin with its
+    n = 20 target margin.
+  consequence: >-
+    Deleting the live pointer could leave stale prose checks green against whichever
+    historical rung appeared first, and an ambiguous margin could be validated against
+    the wrong theorem target.
+  fix: >-
+    Require exactly one live `certificate.json` for a certificate-bearing result. Check
+    an unqualified margin against the declared target and parse an explicitly named
+    “below N” margin against that integer.
+  regression: >-
+    packing/tests/test_rung_figures.py covers missing and duplicate live pointers,
+    target and reach margins, English and numeric integers, and swapped-target failures.
+  recorded_in: packing/devtools/check_rung_figures.py
+- id: D-489
+  title: Proof conditions reused the result-confirmation ladder's names
+  date: '2026-09-04'
+  layer: docs
+  class: bookkeeping
+  detected_by: review
+  latent_for: the lifetime of the fractional-certificate proof package
+  severity: medium
+  status: fixed
+  what: >-
+    The fractional proof and related checkers gave their five hypotheses abbreviated
+    letter-C labels zero through four, while `epistemics.md` already assigned `C0`
+    through `C5` to result-confirmation levels. Historical control labels and a few
+    source-geometry labels added more incompatible meanings.
+  consequence: >-
+    Statements about deciding or failing the fourth or fifth item were ambiguous between
+    a local proof obligation, an adversarial control, a source figure, and the
+    repository's assurance classification.
+  fix: >-
+    Reserve `C0` through `C5` for epistemic confirmation. Spell the proof obligations
+    **Condition 1** through **Condition 5**, spell adversarial checks **Control N**, and
+    preserve external mathematical labels only with typographic subscripts.
+  regression: >-
+    conventions.md owns the naming rule; focused verifier and control tests pin the
+    human-visible names, and the review closeout includes a repository-wide terminology
+    scan.
+  recorded_in: conventions.md
