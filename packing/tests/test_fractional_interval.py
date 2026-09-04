@@ -1,0 +1,518 @@
+"""Controls for the interval-certified decision of fractional certificates.
+
+The exact verifier and this one must agree on the retained certificates, but
+agreement alone is not the control: two decisions that could only fail the
+same way would agree while both wrong. So the tests check the interval
+primitives against exact rational arithmetic directly, check the box bounds
+against exact covered masses at sampled points, reproduce a published bound the
+verifier was not built against, and exercise both refusal paths. The
+coincidence test at the end pins down the one thing this method cannot decide
+and confirms it is reported as undecided rather than accepted.
+"""
+
+from __future__ import annotations
+
+import random
+from fractions import Fraction
+
+import numpy as np
+import pytest
+
+from cases.n11_fractional_certificate.replay import load as load_n11
+from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH
+from cases.n12_fractional_certificate.replay import load as load_n12
+from sqpack.fractional.certificate import Certificate
+from sqpack.fractional.interval import (
+    AtomData,
+    DirectionSearch,
+    Interval,
+    doubled_net,
+    rotation_from_half_tangent,
+    searches,
+    verify_by_intervals,
+)
+from sqpack.fractional.model import Atom, Direction
+from sqpack.fractional.sweep import minimum_covered_mass
+from tests.test_fractional_certificate import retained_certificate
+
+# A sub-net of the doubled net that touches both ends, the middle, and the
+# reflected half. It decides a weaker statement than the full net and is used
+# only to keep the fast tier fast; the full-net decisions carry the marker.
+SUB_NET = ("0", "1", "45", "90", "135", "180", "1'", "90'", "180'")
+
+C4 = "C4 every admissible centre covers mass 1"
+
+
+def _exact_rotation(tangent: Fraction) -> tuple[Fraction, Fraction]:
+    denominator = 1 + tangent * tangent
+    return (1 - tangent * tangent) / denominator, 2 * tangent / denominator
+
+
+def _rotated(
+    certificate: Certificate, rotation: tuple[Fraction, Fraction]
+) -> list[tuple[Fraction, Fraction, Fraction]]:
+    """The atoms in the rotated frame, exactly, so many points can be scored."""
+    cosine, sine = rotation
+    return [
+        (cosine * atom.x + sine * atom.y, cosine * atom.y - sine * atom.x, atom.weight)
+        for atom in certificate.atoms
+    ]
+
+
+def _exact_mass(
+    certificate: Certificate,
+    rotation: tuple[Fraction, Fraction],
+    point: tuple[Fraction, Fraction],
+    rotated: list[tuple[Fraction, Fraction, Fraction]] | None = None,
+) -> Fraction:
+    """Mass of the closed B-square centred at ``point`` in the rotated frame."""
+    u, v = point
+    half = certificate.square_side / 2
+    atoms = _rotated(certificate, rotation) if rotated is None else rotated
+    return sum(
+        (weight for au, av, weight in atoms if abs(au - u) <= half and abs(av - v) <= half),
+        start=Fraction(0),
+    )
+
+
+def _exactly_admissible(
+    certificate: Certificate,
+    rotation: tuple[Fraction, Fraction],
+    point: tuple[Fraction, Fraction],
+) -> bool:
+    cosine, sine = rotation
+    u, v = point
+    x, y = cosine * u - sine * v, sine * u + cosine * v
+    h = certificate.square_side * (cosine + sine) / 2
+    return h <= x <= certificate.outer_side - h and h <= y <= certificate.outer_side - h
+
+
+def _search(certificate: Certificate, label: str) -> DirectionSearch:
+    for search in searches(certificate, AtomData.of(certificate)):
+        if search.label == label:
+            return search
+    raise KeyError(label)
+
+
+# --- the arithmetic ---------------------------------------------------------
+
+
+def test_rational_enclosures_bracket_the_rational_and_dyadics_are_points() -> None:
+    for value in (
+        Fraction(1, 3),
+        Fraction(207107, 500000),
+        Fraction(-7, 11),
+        Fraction(22529, 5000),
+    ):
+        enclosure = Interval.of(value)
+        assert Fraction(enclosure.lo) <= value <= Fraction(enclosure.hi)
+        assert enclosure.lo != enclosure.hi
+    assert Interval.of(Fraction(3, 8)).width == 0
+    assert Interval.of(5).width == 0
+
+
+def test_every_operation_rounds_outward_around_the_exact_result() -> None:
+    """The one property everything else rests on, checked against Fractions.
+
+    ``Fraction(float)`` is exact, so the exact result of each operation on the
+    sampled floats is known and must lie inside the enclosure.
+    """
+    rng = random.Random(20260904)
+    for _ in range(400):
+        a = Fraction(rng.uniform(-5, 5)) if rng.random() < 0.5 else Fraction(rng.randint(-9, 9))
+        b = Fraction(rng.uniform(0.01, 5))
+        ia, ib = Interval.of(a), Interval.of(b)
+        for exact, enclosure in (
+            (a + b, ia + ib),
+            (a - b, ia - ib),
+            (a * b, ia * ib),
+            (a / b, ia / ib),
+        ):
+            assert Fraction(enclosure.lo) <= exact <= Fraction(enclosure.hi)
+
+
+def test_division_refuses_a_divisor_that_may_be_zero() -> None:
+    with pytest.raises(ZeroDivisionError):
+        _ = Interval(1.0, 2.0) / Interval(0.0, 1.0)
+
+
+def test_rotation_enclosures_contain_the_exact_rotation() -> None:
+    certificate = load_n12()
+    for index in (0, 1, 57, 180):
+        tangent = certificate.half_tangents[index]
+        cosine, sine = _exact_rotation(tangent)
+        rotation = rotation_from_half_tangent(str(index), tangent)
+        assert Fraction(rotation.cosine.lo) <= cosine <= Fraction(rotation.cosine.hi)
+        assert Fraction(rotation.sine.lo) <= sine <= Fraction(rotation.sine.hi)
+        assert rotation.cosine.width < 1e-14
+    assert rotation_from_half_tangent("0", Fraction(0)).sine.lo == 0
+
+
+def test_the_doubled_net_reflects_every_direction_but_the_upright_one() -> None:
+    tangents = load_n12().half_tangents
+    net = doubled_net(tangents)
+    assert len(net) == 2 * len(tangents) - 1
+    forward = {rotation.label: rotation for rotation in net[: len(tangents)]}
+    for rotation in net[len(tangents) :]:
+        source = forward[rotation.label.rstrip("'")]
+        assert rotation.cosine == source.sine
+        assert rotation.sine == source.cosine
+    with pytest.raises(ValueError, match=r"outside \[0, 1\)"):
+        rotation_from_half_tangent("bad", Fraction(1))
+
+
+# --- the bounds, against exact arithmetic ----------------------------------
+
+
+def test_box_bounds_bracket_the_exact_mass_at_sampled_centres() -> None:
+    """A lower bound over a box and an upper bound at a point, both exact-checked.
+
+    The sampled points are floats, so their exact positions are known and the
+    exact covered mass there is a Fraction sum. The interval lower bound of any
+    small box around the point must not exceed it, and the point upper bound
+    must not fall below it.
+    """
+    certificate = load_n12()
+    rng = np.random.default_rng(17)
+    for label, index in (("57", 57), ("57'", 57), ("0", 0)):
+        search = _search(certificate, label)
+        tangent = certificate.half_tangents[index]
+        cosine, sine = _exact_rotation(tangent)
+        rotation = (sine, cosine) if label.endswith("'") else (cosine, sine)
+        rotated = _rotated(certificate, rotation)
+        lo = search.initial[0]
+        us = rng.uniform(lo[0], lo[1], 200)
+        vs = rng.uniform(lo[2], lo[3], 200)
+        radius = rng.uniform(0, 0.01, 200)
+        boxes = np.stack([us - radius, us + radius, vs - radius, vs + radius], axis=1)
+        lower = search.lower_bound(boxes)
+        upper = search.upper_bound_at(us, vs)
+        for k in range(200):
+            point = (Fraction(us[k]), Fraction(vs[k]))
+            exact = _exact_mass(certificate, rotation, point, rotated)
+            assert Fraction(int(lower[k]), search.scale) <= exact
+            assert exact <= Fraction(int(upper[k]), search.scale)
+
+
+def test_tightening_never_loses_an_admissible_centre() -> None:
+    """The domain step encloses ``box intersect domain``; check it on exact points."""
+    certificate = load_n12()
+    rng = np.random.default_rng(5)
+    for label, index in (("57", 57), ("1'", 1), ("0", 0)):
+        search = _search(certificate, label)
+        tangent = certificate.half_tangents[index]
+        cosine, sine = _exact_rotation(tangent)
+        rotation = (sine, cosine) if label.endswith("'") else (cosine, sine)
+        lo = search.initial[0]
+        kept = 0
+        for _ in range(60):
+            a, b = sorted(rng.uniform(lo[0], lo[1], 2))
+            c, d = sorted(rng.uniform(lo[2], lo[3], 2))
+            tight = search.tighten(np.array([[a, b, c, d]]))[0]
+            for _ in range(20):
+                point = (Fraction(rng.uniform(a, b)), Fraction(rng.uniform(c, d)))
+                if not _exactly_admissible(certificate, rotation, point):
+                    continue
+                kept += 1
+                assert Fraction(tight[0]) <= point[0] <= Fraction(tight[1])
+                assert Fraction(tight[2]) <= point[1] <= Fraction(tight[3])
+        assert kept > 100
+
+
+def test_a_provably_admissible_centre_is_exactly_admissible() -> None:
+    certificate = load_n12()
+    rng = np.random.default_rng(3)
+    search = _search(certificate, "120")
+    cosine, sine = _exact_rotation(certificate.half_tangents[120])
+    lo = search.initial[0]
+    us = rng.uniform(lo[0], lo[1], 2000)
+    vs = rng.uniform(lo[2], lo[3], 2000)
+    admissible = search.admissible(us, vs)
+    assert 0 < admissible.sum() < 2000
+    for k in np.flatnonzero(admissible):
+        assert _exactly_admissible(
+            certificate, (cosine, sine), (Fraction(us[k]), Fraction(vs[k]))
+        )
+
+
+# --- acceptance ---------------------------------------------------------------
+
+
+def test_the_retained_n12_certificate_is_accepted_on_the_sub_net() -> None:
+    verdict = verify_by_intervals(load_n12(), directions=SUB_NET)
+    assert verdict.accepted, verdict.failures
+    assert len(verdict.directions) == len(SUB_NET)
+    assert all(outcome.status == "certified" for outcome in verdict.directions)
+    assert sum(outcome.stalled for outcome in verdict.directions) == 0
+
+
+def test_the_retained_n11_certificate_is_accepted_on_the_sub_net() -> None:
+    verdict = verify_by_intervals(load_n11(), directions=SUB_NET)
+    assert verdict.accepted, verdict.failures
+    assert verdict.total_mass == Fraction(43391, 4000)
+
+
+@pytest.mark.exhaustive_exact
+def test_the_retained_n12_certificate_is_accepted_on_the_full_doubled_net() -> None:
+    """The interval-certified decision of s(12) >= 393/100, every direction."""
+    certificate = load_n12()
+    verdict = verify_by_intervals(certificate, enclose=True)
+    assert verdict.accepted, verdict.failures
+    assert len(verdict.directions) == 361
+    assert sum(outcome.stalled for outcome in verdict.directions) == 0
+    assert verdict.enclosure == (Fraction(100003, 100000), Fraction(100003, 100000))
+    assert certificate.bounded_side == Fraction(393, 100)
+
+
+@pytest.mark.exhaustive_exact
+def test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net() -> None:
+    """The interval-certified decision of s(11) >= 19/5, every direction."""
+    certificate = load_n11()
+    verdict = verify_by_intervals(certificate, enclose=True)
+    assert verdict.accepted, verdict.failures
+    assert len(verdict.directions) == 361
+    assert sum(outcome.stalled for outcome in verdict.directions) == 0
+    assert verdict.enclosure == (Fraction(50003, 50000), Fraction(50003, 50000))
+    assert certificate.bounded_side == Fraction(19, 5)
+
+
+# --- the published-value control ----------------------------------------------
+
+
+def test_massaccesi_n17_reproduces_the_published_bound_on_the_sub_net() -> None:
+    """A result this verifier was not built against: s(17) >= 4.5058.
+
+    Accepting it is what shows the verifier works, as distinct from agreeing
+    with the certificates it was written alongside. The published least covered
+    mass is exactly 1, and the enclosure must contain it.
+    """
+    certificate = retained_certificate()
+    verdict = verify_by_intervals(certificate, directions=SUB_NET, enclose=True)
+    assert verdict.accepted, verdict.failures
+    assert certificate.bounded_side == Fraction(22529, 5000)
+    assert float(certificate.bounded_side) == pytest.approx(4.5058)
+    assert verdict.total_mass == Fraction(203, 12)
+    enclosure = verdict.enclosure
+    assert enclosure is not None
+    assert enclosure[0] <= 1 <= enclosure[1]
+
+
+@pytest.mark.exhaustive_exact
+def test_massaccesi_n17_reproduces_the_published_bound_on_the_full_doubled_net() -> None:
+    verdict = verify_by_intervals(retained_certificate(), enclose=True)
+    assert verdict.accepted, verdict.failures
+    assert len(verdict.directions) == 361
+    assert verdict.enclosure == (Fraction(1), Fraction(1))
+
+
+# --- agreement with the exact decision ------------------------------------------
+
+
+def test_the_enclosure_contains_the_exact_minimum_direction_by_direction() -> None:
+    """Where both verifiers accept, the interval enclosure must contain the
+    exact rational minimum the sweep reports, including at reflected directions.
+
+    Run on the 68-atom first rung, where the exact sweep is quick at oblique
+    directions; the retained certificates are held to the exact verifier's
+    registered minima by the full-net tests above.
+    """
+    certificate = load_n12(FIRST_RUNG_PATH)
+    assert len(certificate.atoms) == 68
+    for label, index in (("0", 0), ("57", 57), ("57'", 57), ("180'", 180)):
+        search = _search(certificate, label)
+        outcome = search.search(prune_at=None)
+        assert outcome.status == "certified"
+        assert outcome.lower is not None and outcome.upper is not None
+        cosine, sine = _exact_rotation(certificate.half_tangents[index])
+        if label.endswith("'"):
+            cosine, sine = sine, cosine
+        direction = Direction(label, cosine, sine, -sine, cosine)
+        exact, _ = minimum_covered_mass(
+            certificate.atoms, direction, certificate.outer_side, certificate.square_side
+        )
+        lower, upper = (
+            Fraction(outcome.lower, search.scale),
+            Fraction(outcome.upper, search.scale),
+        )
+        assert lower <= exact <= upper
+        assert upper - lower <= Fraction(1, search.scale), (
+            "the enclosure should pin the minimum"
+        )
+
+
+# --- refusals -------------------------------------------------------------------
+
+
+def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> None:
+    """The must-refuse fixture: the n = 12 atoms in a container of side 4.
+
+    The refutation witness is a concrete centre; its exact covered mass is
+    recomputed in rational arithmetic and must be below 1, so the interval
+    refusal is not taken on trust either.
+    """
+    certificate = load_n12()
+    too_large = Certificate(
+        n=certificate.n,
+        outer_side=Fraction(4),
+        square_side=certificate.square_side,
+        atoms=certificate.atoms,
+        half_tangents=certificate.half_tangents,
+    )
+    verdict = verify_by_intervals(too_large)
+    assert not verdict.accepted
+    assert verdict.failures == (C4,)
+    refuted = verdict.directions[-1]
+    assert refuted.status == "refuted"
+    assert refuted.upper is not None and refuted.upper < verdict.scale
+    assert refuted.witness is not None
+    index = int(refuted.label.rstrip("'"))
+    cosine, sine = _exact_rotation(too_large.half_tangents[index])
+    rotation = (sine, cosine) if refuted.label.endswith("'") else (cosine, sine)
+    point = (Fraction(refuted.witness[0]), Fraction(refuted.witness[1]))
+    assert _exactly_admissible(too_large, rotation, point)
+    assert _exact_mass(too_large, rotation, point) < 1
+
+
+def test_lowering_one_atom_by_a_ten_thousandth_is_refused() -> None:
+    """C4 is tight at 1.00003, so a tenth of a thousandth off any atom over the
+    tightest cell is visible. Symmetry is not what catches it here: this
+    verifier never checks C0, so the refusal has to come from coverage."""
+    certificate = load_n12()
+    upright = Direction("0", Fraction(1), Fraction(0), Fraction(0), Fraction(1))
+    _, (u, v) = minimum_covered_mass(
+        certificate.atoms, upright, certificate.outer_side, certificate.square_side
+    )
+    half = certificate.square_side / 2
+    index = next(
+        i
+        for i, atom in enumerate(certificate.atoms)
+        if abs(atom.x - u) <= half and abs(atom.y - v) <= half
+    )
+    atoms = list(certificate.atoms)
+    atom = atoms[index]
+    atoms[index] = Atom(atom.label, atom.x, atom.y, atom.weight - Fraction(1, 10000))
+    thin = Certificate(
+        n=certificate.n,
+        outer_side=certificate.outer_side,
+        square_side=certificate.square_side,
+        atoms=tuple(atoms),
+        half_tangents=certificate.half_tangents,
+    )
+    verdict = verify_by_intervals(thin)
+    assert verdict.failures == (C4,)
+    assert verdict.directions[-1].status == "refuted"
+    upper = verdict.directions[-1].upper
+    assert upper is not None
+    assert Fraction(upper, verdict.scale) == Fraction(100003, 100000) - Fraction(1, 10000)
+
+
+def test_mass_reaching_n_is_refused() -> None:
+    base = retained_certificate(steps=6)
+    inflated = Fraction(17, len(base.atoms))
+    heavy = Certificate(
+        n=17,
+        outer_side=base.outer_side,
+        square_side=base.square_side,
+        atoms=tuple(Atom(a.label, a.x, a.y, inflated) for a in base.atoms),
+        half_tangents=base.half_tangents,
+    )
+    verdict = verify_by_intervals(heavy, directions=("0",))
+    assert "C1 total mass below n" in verdict.failures
+
+
+def test_a_net_short_of_an_eighth_turn_is_refused() -> None:
+    base = retained_certificate(steps=6)
+    short = Certificate(
+        n=17,
+        outer_side=base.outer_side,
+        square_side=base.square_side,
+        atoms=base.atoms,
+        half_tangents=tuple(Fraction(41, 100) * k / 6 for k in range(7)),
+    )
+    verdict = verify_by_intervals(short, directions=("0",))
+    assert "C2 net reaches pi/4" in verdict.failures
+
+
+def test_a_net_too_coarse_for_containment_is_refused() -> None:
+    verdict = verify_by_intervals(retained_certificate(steps=2), directions=("0",))
+    assert "C3 containment B(1 + D) < 1" in verdict.failures
+
+
+def test_containment_at_exactly_one_is_undecided_and_therefore_not_accepted() -> None:
+    """Strictness, interval-style: an enclosure straddling 1 proves neither side.
+
+    The exact verifier refuses this by equality; this one cannot see equality
+    and refuses it by declining to decide, which is the same verdict reached
+    for a different reason.
+    """
+    base = retained_certificate(steps=180)
+    gap = base.largest_half_gap_tangent
+    touching = Certificate(
+        n=17,
+        outer_side=base.outer_side,
+        square_side=1 / (1 + gap),
+        atoms=base.atoms,
+        half_tangents=base.half_tangents,
+    )
+    verdict = verify_by_intervals(touching, directions=("0",))
+    containment = next(c for c in verdict.conditions if c.name.startswith("C3"))
+    assert containment.status == "undecided"
+    assert not verdict.accepted
+
+
+def test_half_tangents_reaching_one_are_refused_before_any_search() -> None:
+    base = retained_certificate(steps=6)
+    with pytest.raises(ValueError, match="below 1"):
+        verify_by_intervals(
+            Certificate(
+                n=17,
+                outer_side=base.outer_side,
+                square_side=base.square_side,
+                atoms=base.atoms,
+                half_tangents=(Fraction(0), Fraction(1)),
+            )
+        )
+
+
+# --- the limit of the method ---------------------------------------------------
+
+
+def _grid_certificate(square_side: Fraction) -> Certificate:
+    """Unit weights on a half-spaced grid in a side-3 container, one direction."""
+    coordinates = [Fraction(k, 2) for k in range(1, 6)]
+    atoms = tuple(
+        Atom(f"{i},{j}", x, y, Fraction(1))
+        for i, x in enumerate(coordinates)
+        for j, y in enumerate(coordinates)
+    )
+    return Certificate(
+        n=26,
+        outer_side=Fraction(3),
+        square_side=square_side,
+        atoms=atoms,
+        half_tangents=(Fraction(0), Fraction(1, 2)),
+    )
+
+
+def test_an_exact_edge_coincidence_is_reported_undecided_never_accepted() -> None:
+    """Regions of side 1/2 on a grid of spacing 1/2 tile the upright domain:
+    every point is covered by mass exactly 1, but each region's leave-edge is
+    another's enter-edge to the digit, and no enclosure can close that seam.
+    The search must reach its floor and say so."""
+    verdict = verify_by_intervals(_grid_certificate(Fraction(1, 2)), directions=("0",))
+    assert not verdict.accepted
+    outcome = verdict.directions[0]
+    assert outcome.status == "undecided"
+    assert outcome.stalled > 0
+    assert outcome.lower == 0
+    assert outcome.upper == 1
+
+
+def test_perturbing_the_coincidence_away_lets_the_same_search_certify() -> None:
+    """Widen the regions to 51/100 and the seams become overlaps of width 1/100,
+    which the boxes resolve without difficulty."""
+    verdict = verify_by_intervals(_grid_certificate(Fraction(51, 100)), directions=("0",))
+    outcome = verdict.directions[0]
+    assert outcome.status == "certified"
+    assert outcome.stalled == 0
+    assert verdict.failures == ()
