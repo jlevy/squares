@@ -255,7 +255,7 @@ def test_both_n12_certificates_are_accepted_on_the_sub_net() -> None:
 def test_the_retained_n11_certificate_is_accepted_on_the_sub_net() -> None:
     verdict = verify_by_intervals(load_n11(), directions=SUB_NET)
     assert verdict.accepted, verdict.failures
-    assert verdict.total_mass == Fraction(43391, 4000)
+    assert verdict.total_mass == Fraction(434547, 40000)
 
 
 def test_the_393_100_certificate_is_accepted_on_the_full_doubled_net() -> None:
@@ -284,14 +284,14 @@ def test_the_live_n12_certificate_is_accepted_on_the_full_doubled_net() -> None:
 
 
 def test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net() -> None:
-    """The interval-certified decision of s(11) >= 19/5, every direction."""
+    """The interval-certified decision of s(11) >= 381/100, every direction."""
     certificate = load_n11()
     verdict = verify_by_intervals(certificate, enclose=True)
     assert verdict.accepted, verdict.failures
     assert len(verdict.directions) == 361
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
-    assert verdict.enclosure == (Fraction(50003, 50000), Fraction(50003, 50000))
-    assert certificate.bounded_side == Fraction(19, 5)
+    assert verdict.enclosure == (Fraction(4001, 4000), Fraction(4001, 4000))
+    assert certificate.bounded_side == Fraction(381, 100)
 
 
 # --- the published-value control ----------------------------------------------

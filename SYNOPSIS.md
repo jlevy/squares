@@ -69,7 +69,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 
 | Result | `n` | [`V`](epistemics.md#verification) | [`C`](epistemics.md#confirmation) | [`S`](epistemics.md#significance-and-novelty) | [Novelty](epistemics.md#significance-and-novelty) | What it establishes |
 | --- | --- | --- | --- | --- | --- | --- |
-| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 19/5, by a first-party weighted fractional unavoidable-set certificate at container side 19/5 = 3.8. |
+| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 197/50, by a first-party weighted fractional unavoidable-set certificate at container side 197/50 = 3.94. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 451/100, and s(18) >= 451/100 and s(19) >= 451/100 by monotonicity, from a first-party weighted fractional unavoidable-set certificate at container side 451/100 = 4.51. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |

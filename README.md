@@ -54,14 +54,16 @@ it is not a claim of priority.
 
 Results first established here, as far as the recorded source searches show, include:
 
-- **T-018: `s(11) ≥ 19/5`, the first movement of the smallest open case since 2003.**
+- **T-018: `s(11) ≥ 381/100`, the first movement of the smallest open case since 2003.**
   `s(11)` is the case this project exists for, and its lower bound had been Stromquist’s
   `2 + 4/√5 = 3.788854` since he stated it.
-  A first-party weighted fractional unavoidable-set certificate — 425 weighted atoms,
-  total mass `43391/4000`, every placement of a shrunken square covering mass at least
-  `1` — proves that eleven unit squares do not fit in a container of side `3.8`. The
-  interval narrows from `0.088230` to `0.077084`; the gap is not closed.
-  Scored `S5`, the rubric’s anchor for movement on a central open case.
+  A first-party weighted fractional unavoidable-set certificate — 1121 weighted atoms,
+  total mass `434547/40000`, every placement of a shrunken square covering mass at least
+  `1` — proves that eleven unit squares do not fit in a container of side `3.81`. The
+  interval narrows from `0.088230` to `0.067084`; the gap is not closed.
+  Two rungs are retained below it: `19/5`, the value that first passed Stromquist, and
+  `189/50`, the calibration rung below him that was run first on purpose and proves
+  nothing new. Scored `S5`, the rubric’s anchor for movement on a central open case.
 - **T-019: `s(17), s(18), s(19) ≥ 451/100`, displacing the published value.** The
   adopted bound for these three cases was Massaccesi’s `4.5058`, taken from a source
   rather than proved here.

@@ -633,12 +633,13 @@ results:
       well as a finer site set.
   - id: T-018
     claim: >-
-      s(11) >= 19/5, by a first-party weighted fractional unavoidable-set certificate
-      at container side 19/5 = 3.8. This is the first movement of this case's lower
-      bound since Stromquist stated 2 + 4/sqrt(5) = 3.788854... in 2003, and n = 11 is
-      the smallest open case. The movement is +0.011146, and the case stays open
-      against Trump's 1979 packing at 3.877084: the interval narrows from 0.088230 to
-      0.077084.
+      s(11) >= 381/100, by a first-party weighted fractional unavoidable-set
+      certificate at container side 381/100 = 3.81. This is the first movement of this
+      case's lower bound since Stromquist stated 2 + 4/sqrt(5) = 3.788854... in 2003,
+      and n = 11 is the smallest open case. The movement is +0.021146, and the case
+      stays open against Trump's 1979 packing at 3.877084: the interval narrows from
+      0.088230 to 0.067084. Two rungs are retained below it -- 19/5, the value that
+      first passed Stromquist, and the 189/50 calibration rung below him.
     scope:
       n_values:
         - 11
@@ -654,8 +655,7 @@ results:
         literature rather than an inherited or closed-form one.
         What S5 does not claim: the method is Burns's and Massaccesi's rather than
         this project's, so what is new is an instance and the generator that found it;
-        both exact decisions are the same method family, which is why confirmation
-        stays at C3; and the remaining gap to Trump's 1979 packing is 0.077, which this
+        and the remaining gap to Trump's 1979 packing is 0.067, which this
         approach does not close. The calibration rung at 189/50, below Stromquist's
         bound, was run first by design and is retained.
       scored: '2026-09-04'
@@ -670,6 +670,7 @@ results:
       - E-fractional-interval-decision
     artifacts:
       - packing/cases/n11_fractional_certificate/certificate.json
+      - packing/cases/n11_fractional_certificate/certificate-19-5.json
       - packing/cases/n11_fractional_certificate/certificate-189-50.json
       - packing/src/sqpack/fractional/colgen.py
     controls:
@@ -678,13 +679,15 @@ results:
       C4 is reached by the interval-certified decision, which is independent in method
       and, deciding coverage on the doubled net, never invokes the D4 reflection and so
       does not need C0 at all. C5 needs a review artifact by someone outside the project.
-      The bound itself: 3.81 is the live rung and is not settled either way. With the
-      corrected oracle and a 25022-row program the covering value there came down to
-      10.8603, well below eleven, but the row loop was still finding violated placements
-      when it stopped, so that number is an estimate from below and not the restricted
-      optimum. The rationalised candidate was refused by the exact sweep at directions 55
-      to 63, least cell 199531/200000 -- the row loop's own unconverged margin showing up
-      where it had not looked. Whether 3.81 converges below eleven is the open question.
+      The bound itself: 3.81 converged with margin -- objective 10.8603 against eleven,
+      rationalised to 434547/40000 = 10.863675 -- so the next rung is a search question
+      rather than a limit of the method. Getting there took two attempts at the same
+      side, and the difference between them is worth keeping. The first stopped with its
+      row loop still finding violated placements (final least 0.9764) and was refused by
+      the exact sweep at directions 55 to 63, least cell 199531/200000. The second ran
+      the loop to convergence -- three row rounds, 25318 rows, final oracle least mass
+      exactly 1 -- and was accepted at every direction. An objective below n proves
+      nothing on its own; the loop's stopping condition is the thing to read.
   - id: T-019
     claim: >-
       s(17) >= 451/100, and s(18) >= 451/100 and s(19) >= 451/100 by monotonicity, from a

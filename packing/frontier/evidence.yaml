@@ -1293,47 +1293,59 @@ evidence:
       novel_object: >-
         The certificate and the bound. The method is Burns's with Massaccesi's
         parameters and the generator is this project's; what is new is an instance at
-        n = 11 and side 19/5, which is the first movement of this case's lower bound
+        n = 11 and side 381/100, which is the first movement of this case's lower bound
         since 2003.
     certificate: cases/n11_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras python -m cases.n11_fractional_certificate
     replay_status: passed
     limitations: >-
-      Decides five conditions in exact rational arithmetic over 425 atoms on a
+      Decides five conditions in exact rational arithmetic over 1121 atoms on a
       D4-symmetric site set: the atom multiset is closed under the container's D4 group,
-      the total mass is 43391/4000 = 10.84775 and so strictly below 11, the 181-direction
-      net reaches pi/4, containment B(1 + D) < 1 holds at B = 9977/10000, and every
-      reachable event cell at every net direction carries mass at least 1, the least
-      being 50003/50000. The bound proved is the container side itself, 19/5, and the
-      shrunken square rescales nothing.
+      the total mass is 434547/40000 = 10.863675 and so strictly below 11, the
+      181-direction net reaches pi/4, containment B(1 + D) < 1 holds at B = 9977/10000,
+      and every reachable event cell at every net direction carries mass at least 1, the
+      least being 4001/4000. The bound proved is the container side itself, 381/100, and
+      the shrunken square rescales nothing.
       The certificate was found by column generation over D4 orbits after the separation
       oracle was corrected to score the same cells the verifier decides (D-434); before
       that correction the same search stalled above 11. It was re-decided from its file
-      on disk rather than in memory, and an independent evaluator -- the one written from
-      the theorem statement for T-017, which reproduces Massaccesi's published n = 17
-      bound as its own control -- confirmed C4 at 50003/50000, exact, at the upright
-      direction. The retained file's bytes were checksummed against the file that
-      evaluator read.
+      on disk rather than in memory: the coordinator froze the generator's output to an
+      immutable path and decided those bytes, which matters here because the generator
+      overwrote the same filename with a different certificate between the two attempts
+      at this side. The interval verifier accepted the frozen bytes over all 361
+      directions of the doubled net in 1,570,831 boxes with none stalled, returning a
+      width-zero enclosure at 4001/4000 -- the same value the exact sweep reports.
       A calibration rung is retained beside it at side 189/50 = 3.78, below Stromquist's
       bound, where the certificate proves nothing new. That run was made first and on
       purpose: it is the diagnostic the project registered in advance to test the
       approach honestly, and it is evidence that the instrument returns sane values below
       the frontier as well as above it.
-      Not independent by method: both decisions are exact-algebraic, so this supports C3
-      and not C4.
-      A self-contained third-party package ships beside the certificate at
+      This entry is the exact-algebraic decision; C4 rests on
+      E-fractional-interval-decision, which decides the same bytes by a different method.
+      A self-contained third-party package ships beside the certificates at
       cases/n11_fractional_certificate/thirdparty/: the theorem written out for a reader
-      with no context, the certificate as plain data, and a single-file verifier that
+      with no context, a certificate as plain data, and a single-file verifier that
       imports nothing outside the Python standard library and nothing from this
-      repository. Run as a stranger would -- copied outside the checkout, under
+      repository. It carries the 19/5 rung rather than the top one, so a stranger
+      running it decides s(11) >= 19/5 -- still a movement past Stromquist, and still
+      the claim it was built to make checkable, but one rung below what this entry now
+      certifies. Run as a stranger would -- copied outside the checkout, under
       `env -i`, on the system interpreter -- it decides all five conditions and reports
-      the same least covered weight, 50003/50000, over 90,546,593 cells and 181
+      the least covered weight of that rung, 50003/50000, over 90,546,593 cells and 181
       directions in about 34 s; the same verifier, unchanged, returns Massaccesi's
       published 22529/5000 from his own constants, which is the control that tests the
       verifier rather than the certificate. Ten perturbations are refused and tabulated
       with the condition each breaks. The package is a third exact-rational
       implementation of the same reduction, so it does not move the confirmation rung;
       what it buys is that the claim can be checked without trusting this project.
+      It was then read as a hostile third party would read it, and the review is retained
+      at docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md. That review
+      re-derived the theorem from the shipped words alone -- including the step this
+      branch had to correct once, that the bound is the container side and not L/B -- ran
+      twenty-one attacks of its own, and found nothing that threatens the result. Three
+      packaging defects it did find are fixed (D-436). It is not an external review and
+      does not reach C5: the reviewer is an agent of this project working from the
+      package rather than from the implementation.
     source_reviewed: '2026-09-04'
   - id: E-n017-fractional-certificate
     claim: lower-bound

@@ -17,6 +17,7 @@ import numpy as np
 import pytest
 
 from cases.n11_fractional_certificate.replay import FIRST_RUNG_PATH as N11_FIRST_RUNG
+from cases.n11_fractional_certificate.replay import STROMQUIST_RUNG_PATH
 from cases.n11_fractional_certificate.replay import declared as n11_declared
 from cases.n11_fractional_certificate.replay import load as n11_load
 from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH, declared, load
@@ -304,25 +305,46 @@ def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> No
 
 
 def test_the_n11_certificate_beats_stromquists_2003_bound() -> None:
-    """s(11) >= 19/5, replayed from its own file and re-decided.
+    """s(11) >= 381/100, read from its own file.
 
     2 + 4/sqrt(5) = 3.788854 had stood since Stromquist 2003 and was the only
-    bound n = 11 had. The comparison is decided in exact rationals: 19/5 > 2 +
-    4/sqrt(5) iff (19/5 - 2)^2 * 5 > 16, both sides being positive.
+    bound n = 11 had. The comparison is decided in exact rationals: L > 2 +
+    4/sqrt(5) iff (L - 2)^2 * 5 > 16, both sides being positive.
+
+    What the certificate claims is checked here; that a verifier accepts it is
+    the exhaustive test below.
     """
 
     certificate = n11_load()
     assert certificate.n == 11
-    assert certificate.bounded_side == Fraction(19, 5)
-    assert certificate.total_mass == Fraction(43391, 4000)
+    assert certificate.bounded_side == Fraction(381, 100)
+    assert certificate.total_mass == Fraction(434547, 40000)
     assert certificate.total_mass < 11
     assert (certificate.bounded_side - 2) ** 2 * 5 > 16
 
+    record = n11_declared()
+    assert record["claim"] == "s(11) >= 381/100"
+    assert record["total_mass"] == str(certificate.total_mass)
+
+
+@pytest.mark.exhaustive_exact
+def test_the_n11_certificate_is_accepted() -> None:
+    """The 1121-atom certificate over 181 directions, decided exactly."""
+    certificate = n11_load()
     verdict = verify(certificate)
     assert verdict.accepted, verdict.failures
     assert verdict.minimum_cell_mass is not None
     assert verdict.minimum_cell_mass >= 1
-    assert n11_declared()["claim"] == "s(11) >= 19/5"
+    assert n11_declared()["least_cell_mass"] == str(verdict.minimum_cell_mass)
+
+
+def test_the_n11_rung_at_19_5_still_replays() -> None:
+    """The value that first passed Stromquist is kept and stays true."""
+    certificate = n11_load(STROMQUIST_RUNG_PATH)
+    assert certificate.bounded_side == Fraction(19, 5)
+    assert certificate.total_mass == Fraction(43391, 4000)
+    assert len(certificate.atoms) == 425
+    assert n11_declared(STROMQUIST_RUNG_PATH)["claim"] == "s(11) >= 19/5"
 
 
 def test_the_n11_calibration_rung_below_stromquist_also_verifies() -> None:

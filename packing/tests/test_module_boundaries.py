@@ -314,6 +314,7 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
         "test_fractional_certificate.py": {
             "test_the_full_retained_certificate_is_accepted",
             "test_the_n17_certificate_is_accepted",
+            "test_the_n11_certificate_is_accepted",
         },
         "test_exact_jets.py": {
             "test_n5_wall_and_contact_gradients_match_authoritative_source_rows",
