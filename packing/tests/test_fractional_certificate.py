@@ -159,12 +159,12 @@ def test_the_retained_n12_certificate_replays() -> None:
     """
     certificate = load()
     assert certificate.n == 12
-    assert certificate.bounded_side == Fraction(79, 20)
-    assert certificate.total_mass == Fraction(1197059, 100000)
+    assert certificate.bounded_side == Fraction(99, 25)
+    assert certificate.total_mass == Fraction(149987, 12500)
     assert certificate.total_mass < 12
 
     record = declared()
-    assert record["claim"] == "s(12) >= 79/20"
+    assert record["claim"] == "s(12) >= 99/25"
     assert record["total_mass"] == str(certificate.total_mass)
 
 

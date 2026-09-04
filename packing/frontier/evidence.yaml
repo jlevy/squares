@@ -1445,7 +1445,7 @@ evidence:
       establish the equality C0 asserts.
       Results, 361 of 361 directions certified in every case and none stalled. The three
       retained top rungs, decided from their frozen bytes: n = 17 at 459/100, 1184 atoms,
-      3,683,951 boxes; n = 12 at 79/20, 969 atoms, 2,666,151 boxes; n = 11 at 381/100,
+      3,683,951 boxes; n = 12 at 99/25, 2097 atoms, 4,448,751 boxes; n = 11 at 381/100,
       1121 atoms, 1,570,831 boxes. Lower rungs and the control: n = 17 at 229/50 in
       2,653,407 boxes, n = 11 at 19/5 in
       1,195,755 boxes, n = 12 at 197/50 in 1,846,439 and at 393/100 in 1,486,159, and
@@ -1455,7 +1455,7 @@ evidence:
       because every one of these runs shared a contended machine.
       In minimisation mode every enclosure of the least covered mass has width zero and
       equals the exact verifier's value to the digit: 4001/4000 at n = 11's top rung,
-      20001/20000 at n = 12's and 200009/200000 at n = 17's, each matching the
+      12501/12500 at n = 12's and 200009/200000 at n = 17's, each matching the
       least_cell_mass its own certificate declares, and 12501/12500 at the 229/50 rung,
       50003/50000 and 100003/100000 at the earlier n = 11 and n = 12 rungs. Refusals: the n = 12 atoms in a
       side-4 container are refuted at direction 0 after 407 boxes, and an atom lowered by

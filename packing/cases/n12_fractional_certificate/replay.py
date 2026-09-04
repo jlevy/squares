@@ -19,6 +19,7 @@ from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.model import Atom
 
 CERTIFICATE_PATH = Path(__file__).with_name("certificate.json")
+PREVIOUS_RUNG_PATH = Path(__file__).with_name("certificate-79-20.json")
 FIRST_RUNG_PATH = Path(__file__).with_name("certificate-19-5.json")
 
 
