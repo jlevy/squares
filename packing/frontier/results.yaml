@@ -646,10 +646,12 @@ results:
       Margin does not shrink monotonically as the ladder climbs -- the
       197/50 rung two below this one has 0.007175 and 79/20 has 0.029410, so a tight
       rung is evidence about that run and not about how much room is left.
-      This rung also costs the exhaustive tier: 2097 atoms is three times any other
-      retained certificate and the exact sweep is quadratic in the atom count, so
-      deciding it takes 4866 s where the interval route takes 110 s. BC-195 owns whether
-      the tier can still afford what it holds.
+      This rung also cost the exhaustive tier, when it was retained: 2097 atoms is three
+      times any other retained certificate and the exact sweep is quadratic in the atom
+      count, so deciding it took 4866 s where the interval route took 110 s. The sweep
+      was rewritten the same day to decide in integers on the weights' common scale, in
+      parallel over directions, and returns the same verdict in well under a minute;
+      BC-195 owns whether the tier can still afford what it holds.
       What is left is bounded, though, and by the method rather than by the search.
       A certificate for n cannot exist above ceil(sqrt(n)) * B, since a container wider
       than that holds ceil(sqrt(n))^2 pairwise disjoint axis-parallel B-squares, each
@@ -959,6 +961,8 @@ results:
       would contradict the retained n = 19 packing and is a refutation to look for rather
       than a rung to expect; a run between 4.80 and 4.9885 that succeeds moves n = 20 and
       n = 21 and stops at n = 19. The quantity to read is the restricted optimum a
-      converged run reaches, never an extrapolated rate, and the cost is the exhaustive
+      converged run reaches, never an extrapolated rate, and the cost was the exhaustive
       tier: this certificate's exact sweep took 5378 s at 2260 atoms, against 173 s for
-      the interval route on the same bytes.
+      the interval route on the same bytes. The same evening the sweep was rewritten to
+      decide in integers on the weights' common scale, in parallel over directions, and
+      returns the same least covered mass in 38.7 s on the same box.

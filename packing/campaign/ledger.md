@@ -628,6 +628,7 @@ Status: **paused**. Agenda 017's block moved seven registered cases and then hit
 - X-008 — The shapes the grammar cannot express are the ones that are not tilted
 - X-010 — Two lanes, two ladders — focusing the campaign on first-party theorems
 - X-012 — One chart, four hundred inequalities, and an order-2m contradiction
+- X-013 — Where the certificate should go next
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

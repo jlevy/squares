@@ -287,6 +287,14 @@ reassuring: at `n = 20`’s own `4.80`, one site-grid choice cost over `3300 s` 
 finishing round `0`, where a better-tuned grid finished the same round in `376 s` — an
 `8.8×` factor from a single constant, found by accident.
 
+*Note, later the same day.* The gate-time column above was computed from the `Fraction`
+sweep, and that sweep has since been replaced at the gate by an integer one that returns
+the same verdicts at `68×` and `139×` on the two largest certificates (`21.8 s` and
+`38.7 s` against `1473 s` and `5378 s`). Divide the column by roughly a hundred.
+The argument of this section does not change, because its second half never rested on
+the gate: row generation and the untuned-grid `8.8×` are untouched, and `BC-191` is
+still what has to land first.
+
 **What has to be true before a run at the top of the reach table is worth starting.**
 Two things, and both are already registered rather than newly proposed here.
 First, `BC-190`’s move — decide accept/reject inside the search with the linear-scaling

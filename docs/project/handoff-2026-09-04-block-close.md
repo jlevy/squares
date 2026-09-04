@@ -62,14 +62,17 @@ every existing point sits in.
 
 ## Where the next rungs are, and why not yet
 
-- **The retention gate is the dominant cost.** The exact sweep is measured at
-  `atoms^2.00` over three paired runs on frozen bytes — `1473 s` at 1184 atoms, `4866 s`
-  at 2097, `5378 s` at 2260 — while the interval route is roughly linear.
-  A run at a large-`n` prize would spend more on the gate than on the search.
-  `BC-190` (move the generator’s accept/reject to the interval route, keep the exact
-  sweep at the gate) and `BC-191` (row generation is 79–94% of every round; site density
-  as a function of side; one untuned grid cost `8.8×` at `n = 20`’s own side) come
-  before any retarget, and Agenda 019 is ordered that way.
+- **The retention gate was the dominant cost, and is not now.** The exact sweep was
+  measured at `atoms^2.00` over three paired runs on frozen bytes — `1473 s` at 1184
+  atoms, `4866 s` at 2097, `5378 s` at 2260. The same evening it was rewritten to decide
+  in `int64` on the weights’ common scale, with spans in place of expanded cells and the
+  directions in parallel: `21.8 s` and `38.7 s` on the same box, same verdicts, the
+  `Fraction` route kept as the reference and matched cell for cell.
+  What still binds is the search itself: row generation is 79–94% of every round, site
+  density has never been set as a function of side, and one untuned grid cost `8.8×` at
+  `n = 20`’s own side.
+  That is `BC-191`, and it comes before any retarget; `BC-190` now starts from the
+  integer sweep as its baseline.
 - **`n = 18` at `117/25 = 4.68`** is open with the evidence gathered: three site sets
   returned exactly `18.000000`, the third after 157 rounds and 7056 s. Either the
   covering value is at or above eighteen, or the optimum sits on a degenerate vertex;

@@ -331,11 +331,25 @@ because the checkpoints and the readings are in the record.
 nearer. `n = 11`, `17`, `18` and `19` are limited by their best known packings rather
 than by the ceiling.
 
-**What the next block must not skip.** `BC-190` and `BC-191` come first because the
-retention gate is now the dominant cost: one exact sweep is `5378 s` at 2260 atoms and
-scales as `atoms^2.00`, so the next rung at any size costs more to retain than to find.
-Do not point a run at a larger case before that is addressed — the reach table says the
-prizes are there, and the cost law says the gate will eat the block.
+**What the next block must not skip.** `BC-191` first, and `BC-190` on its measured
+premise rather than its original one.
+When this agenda was drafted the retention gate was the dominant cost: one exact sweep
+was `5378 s` at 2260 atoms and scaled as `atoms^2.00`. That was addressed the same
+evening, before the agenda opened, as a W5 slice against that baseline: the sweep now
+decides in `int64` on the weights’ common scale (every retained certificate’s weights
+are multiples of `1/200000`, so the arithmetic is integer and exact), the reachable
+cells are held as one span per column instead of sixteen million tuples, and the 181
+directions run in parallel.
+Measured on the same box, with the `Fraction` reference still running beside it:
+`n = 17` in `21.8 s` against `1473 s`, `n = 20` in `38.7 s` against `5378 s` — `68×` and
+`139×` — returning the declared least covered mass in both, with the `Fraction` route
+retained unchanged as the reference and held to the integer route cell for cell on 181
+directions of the 373-atom rung with no mismatch.
+`BC-190`’s question — whether the generator’s inner loop should decide by the interval
+route — is therefore no longer a question about the gate’s cost; it is a question about
+the inner loop’s, and its entry baseline is now the integer sweep, not the `Fraction`
+one. Do not point a run at a larger case before `BC-191` — the reach table says the
+prizes are there, and the untuned-grid `8.8×` is the cost law that still stands.
 
 ## Why efficiency before bounds
 
@@ -348,6 +362,8 @@ recollection:
 | Exact vs interval, 1184 atoms | `1473 s` against `65 s`, both timed in one run |
 | Exact vs interval, 2097 atoms | `4866 s` against `110 s`, both timed in one run |
 | Exact vs interval, 2260 atoms | `5378 s` against `173 s`, on a contended machine |
+| Exact sweep after the W5 slice, 1184 atoms | `21.8 s`, same box, same verdict — `68×` |
+| Exact sweep after the W5 slice, 2260 atoms | `38.7 s`, same box, same verdict — `139×` |
 | Fitted exponent, exact sweep | `atoms^2.00` over the full 1184-to-2260 range — quadratic |
 | Fitted exponent, interval route | `atoms^0.92` on the one uncontended pair — linear |
 | Row generation, share of a round | `79%` to `94%` at every side measured |
