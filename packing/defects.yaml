@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 448
+count: 449
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14299,3 +14299,45 @@ defects:
     one.
   status: fixed
   recorded_in: packing/frontier/results.yaml
+- id: D-449
+  title: The exact sweep's reported witness centre lies outside the admissible domain on most directions
+  date: '2026-09-04'
+  layer: verifier
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: >-
+    since the sweep's first commit on 2026-09-04; found by PR 80's review (its F11) as a
+    possibility and measured on this branch's head by the code lane of the review of that
+    review: 158 of 181 directions at n = 11 and 159 of 181 at n = 17
+  severity: low
+  what: >-
+    minimum_covered_mass reports, beside the least covered mass, a witness centre for it:
+    the midpoint of the event cell that attains the minimum. The reachable cells are the
+    event cells that meet the admissible centre domain, and most of them meet it only in
+    part, so the midpoint of the cell is usually outside the domain -- a point at which no
+    B-square is admissible at all. The value is right: the mass is constant on the cell
+    and the cell does meet the domain. The point reported as attaining it is not a point
+    where anything attains it.
+  consequence: >-
+    No verdict and no bound is affected; the least covered mass, which is what
+    Condition 5 decides on and what every record quotes, is computed over the right
+    cells. What is wrong is a diagnostic that presents itself as a witness: a reader who
+    took the printed centre and placed a B-square there would find the placement
+    inadmissible. Two independent instruments -- the exact sweep and the interval branch
+    and bound -- agree on the value to the digit, and neither has ever been asked to
+    agree on the witness.
+  fix: >-
+    Outstanding; bead think-xyt1 under the port epic think-pev1. PR 80's _cell_witness
+    picks a point strictly inside the cell's intersection with the domain; ported onto
+    this branch it must go into a helper both the integer and the Fraction routes call
+    (the stack's patch reaches only the Fraction reference path after a merge, and the
+    value-and-witness equality test then fails on five of six directions), and it must
+    be exhausted on all 181 directions of all four retained certificates on the integer
+    route, because the strict-inside check is a new hard-error path.
+  regression: >-
+    None yet; the port adds a test that every reported witness is admissible, on every
+    direction of every retained certificate.
+  status: outstanding
+  recorded_in: packing/src/sqpack/fractional/sweep.py
+  bead: think-xyt1

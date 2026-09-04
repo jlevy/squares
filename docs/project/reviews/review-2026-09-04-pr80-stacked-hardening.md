@@ -142,20 +142,26 @@ Each of these adds weight the result does not need, or adds it in the wrong plac
   the artifacts that decide the theorem.
   Move the source to the research note or a clearly labelled unvalidated spike
   directory; do not ship it in the case package.
-- **A second standalone verifier.** `minimal_verify.py` (346 lines) sits beside
-  `thirdparty/verify.py`, which already decides the same certificate with the standard
-  library under `env -i` and was itself adversarially reviewed on this branch.
-  Two self-contained checkers of one file, in one directory, each claiming to be the one
-  a stranger should run, is one more than a stranger needs.
-  Keep whichever the review lanes find cleaner and fold the other’s distinct checks into
-  it.
-- **The hostile-input matrix for the retention gate.** `decide_certificate.py` grows by
-  313 lines and its tests by 731 to refuse duplicate JSON keys, decimals, overlong
-  rationals, coercive integers and malformed atom rows.
-  The command is an internal gate run on files the generator wrote minutes earlier; the
-  binding it actually needed — the claim and the mass matched to the reconstructed
-  object, and the bytes hashed across the two routes (F17’s useful half and F24) — is a
-  few dozen lines. Keep those; trim the matrix to one malformed-file refusal per class.
+- **A second standalone verifier, partly.** `minimal_verify.py` (346 lines) sits beside
+  `thirdparty/verify.py`. The code lane found them less redundant than they look: the
+  package verifier is general-purpose, runs on CPython 3.8, and ships against the `19/5`
+  rung; the new one is pinned by SHA-256 to the retained `381/100` bytes, checks every
+  declared field, and cross-checks the prefix-sum minimum against a direct summation at
+  each direction’s witness.
+  That is a legitimate second decision.
+  What is excess is the eighty percent of algorithm they share, and that the file is the
+  seventh copy of one SHA-256 on the stack, of which two are recomputed.
+  Keep it; pin the hash in one place.
+- **The retention gate’s loader, less than it looks.** `decide_certificate.py` grows by
+  313 lines and its tests by 731. The code lane calls the result the strongest part of
+  the stack — `claim` and `least_cell_mass` required and compared against *both* routes,
+  Conditions 1–4 refused before the sweep, a bounded read, the SHA-256 of the re-read
+  bytes printed on acceptance — and measured the tests at 52 in 186 s, of which 173 s is
+  one correctly marked exhaustive node; the fast tier pays about 13 s, 12.4 s of it in
+  one unmarked test that runs the real interval route beside its exhaustive twin.
+  All four retained records already satisfy every new requirement.
+  So: port it, mark that one test, and leave `REFUSED` on stdout unless the stderr split
+  is wanted.
 - **Thirty-three new defects.** entry 456 of #80’s log through entry 463 of #80’s log
   are eight entries about one command’s robustness; several others record a finding the
   parent had already fixed independently before the stack merged it (see **Must
@@ -243,6 +249,18 @@ Each of these adds weight the result does not need, or adds it in the wrong plac
   “three words carry controlled multiple senses” are now false.
   The `μ` → `f` rename of the minimal polynomial is self-consistent but unannounced.
   Put the terms in the synopsis, or mark them local, and amend the cell rule.
+- **A status change reworded away.** `pyproject.toml`’s comment excluding the
+  third-party package and the independent verifier from the type floor said they were
+  “retained verbatim as third-party evidence — editing either to satisfy a checker would
+  void what they are”.
+  The stack rewrites that to “source-distinct evidence with deliberately separate
+  compatibility contracts”, in the same diff that edits those files by some four hundred
+  lines. Editing them may be right; the change of status should be stated as one, not
+  reworded.
+- **A public default flipped with one test.** `generate_adaptive(decide=)` moves from
+  `True` to `False` to enforce freeze-then-decide.
+  The direction is right — it is this branch’s own rule — but a default on a public
+  generator function is a behaviour change and one test guards it.
 - **One stale figure the stack introduces.** The Lean research note says “the
   90.5-million-cell C4 decision remains the expensive layer” and “do not begin by
   replaying 90.5 million raw cells” — the `19/5` rung’s cell count — while the same file
@@ -261,7 +279,7 @@ and the following are not reflected in the stack.
 | **D-442** (five case bodies stale against their front matter) and `devtools.check_case_prose` | The stack’s F28 / entry 467 of #80’s log is the same finding and its entry 466 of #80’s log the same possessive-mass instance; the parent’s rewrites of `n-017`–`n-019` are the ones to keep (the stack’s drop the green17 / T-001 passage and the Massaccesi provenance the parent preserves). Record concurrent discovery once and keep the parent’s detector, which reads every case body against its own front matter. |
 | **`frontier/README.md` says 58 of 65** open cases rest on Nagamochi | The stack still says 60; its corpus tripwire and case bodies move with it. |
 | **D-441’s consequence field corrected** on the parent | The stack’s F20 / entry 460 of #80’s log fixes the same sentence. Duplicate. |
-| **The integer sweep (agenda-020, `d8733ad0`)**: `sweep.py` rewritten around an int64 grid and spans, `verify()` parallel, exact decisions 68–183× faster | The stack’s edits to `sweep.py` (F11, the witness centre) and `certificate.py` conflict textually and must be re-applied on the new code; F11’s witness fix applies to both routes now. The 14,400 s and 2,700 s budgets (F13, F30, F32; entry 451 of #80’s log, entry 470 of #80’s log, entry 471 of #80’s log) were sized for the old cost. |
+| **The integer sweep (agenda-020, `d8733ad0`)**: `sweep.py` rewritten around an int64 grid and spans, `verify()` parallel, exact decisions 68–183× faster | `certificate.py` and `test_module_boundaries.py` conflict outright; `sweep.py` merges *silently and wrongly* — F11’s witness fix lands in the Fraction reference path and the integer path keeps the infeasible midpoint, breaking the value-and-witness equality test. Re-apply F11 in a helper both routes call. The 14,400 s and 2,700 s budgets (F13, F30, F32; entries 451, 470 and 471 of #80’s log) were sized for a cost that is now 25–29 s. |
 | **agenda-019 cost figures corrected** (a third paired point; contention noted; 13,000 s figure retracted) | F33’s complaint about the two-point exponents is partly addressed; what remains is the two comparison factors above. |
 | **The reach table gained the attainment ratio and a predicted-gain ranking** | F26’s evidence-status column has to be re-applied on the new renderer. |
 | **Agenda-017 closed (W10), agenda-020, session-085, the cold-start handoff** now select `BC-191`/`think-ji0r` | The stack’s agenda-019 edits (+65/−48) predate the handoff section and the BC-190 re-basing. |
@@ -289,6 +307,68 @@ standalone package name stays at five.
 
 ### Code and tests
 
+Reviewed read-only against the stack’s head, with the stack’s `interval.py` run on all
+four retained certificates (all accepted; every enclosure equal to the declared least
+covered mass; none stalled) and the five-atom counterexample run against the parent’s
+verifier at `719c2a17` (accepted, total mass −2, `bounded_side` 11/10 — the exact
+reproduction). Per file:
+
+- `model.py`, `certificate.py`: the nonnegativity helper is one exact check shared by
+  every entry point, and `closed_form_conditions` lets the gate refuse Conditions 1–4
+  before paying for the sweep; `float(product):.9f` in the containment detail becomes
+  the exact product. `certificate.py` conflicts textually with this branch’s parallel
+  `verify()` (d8733ad0) and needs a hand merge.
+  Ported in substance already.
+- `sweep.py` — **F11 is real and larger than the stack says.** On this branch’s head,
+  158 of 181 directions at n = 11 and 159 of 181 at n = 17 report a witness centre
+  outside the admissible domain: the midpoint of an event cell that the domain polygon
+  only partly covers. The verdict is unaffected (the value is right; the point is not a
+  witness). The stack’s `_cell_witness` fixes it — and, merged onto this branch,
+  `sweep.py` auto-merges silently with the fix landing only in the Fraction reference
+  path, while the integer path that actually runs keeps the midpoint.
+  The port has to go into a helper both routes call, keep the value-and-witness equality
+  test, and exhaust all 181 directions of all four certificates on the integer route,
+  which is now cheap, because the strict-inside check is a new hard-error path the lane
+  could sample only. Recorded on this branch as D-449, outstanding, with the port as its
+  fix.
+- `interval.py`: the overflow hardening is clean and the four verdicts are unchanged;
+  `directions=` no longer yields a verdict, which this branch has adopted.
+  The new `BOX_BUDGET` of 100,000 boxes per direction fails safe but has 3.2× headroom
+  at the n = 17 top rung (31,103 boxes measured) and its comment already names the wrong
+  largest certificate (2,097; it is 2,260). Raise it or derive it from the net.
+- `colgen.py`: the `decide=` default flip, above.
+- `decide_certificate.py` and its tests: port, as above.
+- `thirdparty/verify.py`: preconditions including nonnegativity, typed load errors,
+  singleton and empty domains handled — and one policy change: a `B`-square that does
+  not fit the container (`2h ≥ L`) no longer raises, so an all-vacuous Condition 5
+  *accepts*. That is sound (a unit square containing such a `B`-square does not fit
+  either) but it is acceptance on vacuity in a checker whose value was refusing what it
+  cannot handle; port with the soundness note written down.
+  `decide()` now folds declaration mismatches into `failures` directly under a comment
+  saying it keeps them separate.
+  `falsify.py`’s oracles are hard-coded to the `19/5` file while its usage line
+  advertises any certificate; a non-shipped path should be refused explicitly.
+- `cli/validate.py`: the 1,800 → 2,700 s fast-tier budget rests on a 1,791 s measurement
+  that d8733ad0 invalidated (the lane measured the n = 12 and n = 20 exact decisions at
+  25.5 s and 28.4 s against the 4,866 s the exhaustive budget cites), and 2,700 s sits
+  *above* CI’s 1,800 s, so the local gate could pass while CI times out.
+  Drop both numbers; port only the push-step `budget_seconds` line, at 1,800, which is
+  the fix D-432 already prescribes.
+- `test_rung_figures.py` (+193): the cross-record contract is right; the literals are
+  not — six reach-table rows, “about 6.9 times tighter”, “about 1.77 times”, “2097 atoms
+  took 4866 s”, “Eight rungs are retained”, three `exact_form == "459/100"` — every one
+  hand-written in a test that already opens the artifact it could derive them from.
+  As written, four new instances of D-439. Port the mechanism, derive the figures.
+- `test_fractional_interval.py`: honest renames that strengthen; one assertion pins an
+  implementation-defined box count (2,666,151).
+- `minimal_verify.py`: above — keep, and stop being the seventh copy of the hash.
+- Cost: about 13 s added to the fast tier and about 373 s to the exhaustive tier; the
+  fast tier on the stack’s tree could not be timed meaningfully because that tree lacks
+  the integer sweep.
+- Not verified by the lane: the exact sweep under the stack’s own `sweep.py` on n = 12
+  and n = 17 (hours at Fraction speed; the four verdicts were confirmed on this branch
+  instead), and the devtools renderers, which the records lane covered.
+
 ### Records and prose
 
 Reviewed under its own brief against a `git archive` of the stack’s head; no file was
@@ -314,22 +394,38 @@ takes as its own defect.
 
 ## Disposition
 
-- **Adopt on the parent now**, as one small PR: F1 with its counterexample fixture, F6,
-  F7, F24 with the hash verified at retention, F3, F4, F14’s wording, F26’s evidence
-  column, F33’s two factors, the `n-011.md` body and the detector gap behind it, the
-  T-017 evidence repointing, the source-key fix, the literature audit with its scoped
-  novelty language, the proof note and its figure, and the C5 promotion of T-018 with
-  the parent’s own C5 wording corrected.
+The operator’s decision, taken on this review: merge PR #78 at the next opportunity,
+then port the valid improvements one at a time onto a branch off `main`, each as its own
+commit. The ports are tracked as beads under the epic `think-pev1`, whose prerequisite
+`think-xcuv` is the branch and a re-measurement of the suite budgets on `main`; the
+first slice — the nonnegativity precondition, the sample verdict, the ceiling and factor
+corrections, the `n = 11` body and its detector, the C5 wording — landed on #78 itself
+as `580efe58` because two of them close soundness gaps in the verifier as a tool.
+
+- **Landed on #78 as `580efe58`**: F1 with its counterexample fixture, F6, F14’s
+  wording, F33’s two factors, the `n-011.md` body and the detector gap behind it, and
+  the C5 wording, with D-445–D-448 recorded and D-449 opened for F11.
+- **Port, one bead each under `think-pev1`**: F7 and F29 (`think-612b`), F17’s useful
+  half and F24 with the hash verified at retention and the loader as measured
+  (`think-e6xe`), F11 in a helper both routes call (`think-xyt1`), F10 (`think-nb9d`),
+  F3 and F4 (`think-o2lo`), F26’s evidence column on the new renderer (`think-k581`),
+  the T-017 evidence repointing (`think-rjaj`), the literature audit with its scoped
+  novelty language (`think-rl03`), the proof note and its figure, registered in the
+  document map (`think-rph2`), the C5 review artifact for T-018 (`think-pm1e`), the
+  tutorial’s vocabulary against the synopsis (`think-fz5x`), F27 (`think-t1an`), F12
+  (`think-4ax1`), `minimal_verify.py` with its hash pinned once (`think-4iej`), the
+  `test_rung_figures` mechanism with its figures derived (`think-3v1e`), the third-party
+  package’s policy changes with the vacuity note written down (`think-qpjx`), and the
+  `decide=` default with a second guard (`think-nuhr`).
 - **Drop or move**: the Lean lake project (to a research note, and out of T-018’s
-  artifact list), one of the two standalone verifiers, the bulk of the hostile-input
-  matrix, the budget raises as measured (re-measure on the current head), the
-  typographic edits to five dated reviews and the rewritten observation in the sixth,
-  the D-439 regression, entry 469 of #80’s log, and the renumbering of the parent’s
-  D-441.
-- **Fix on the stack**: the tutorial’s vocabulary against the synopsis, the
-  `90.5 million` figure, the T-018 proof note’s document-map registration.
+  artifact list), the budget raises as measured (re-measure on `main`; `think-xcuv`),
+  the typographic edits to five dated reviews and the rewritten observation in the
+  sixth, the D-439 regression as written, entry 469 of #80’s log, and the renumbering of
+  the parent’s D-441.
+- **Fix on the stack**, whatever else happens to it: the `90.5 million` figure and the
+  T-018 proof note’s document-map registration.
 - **Re-grade**: F6, F9, F17.
-- **Renumber and dedupe** the defects against D-442–D-444 and the parent’s later fixes.
+- **Renumber and dedupe** the defects against D-442–D-449 and the parent’s later fixes.
 
 The concrete claim — that the retained certificate proves `s(11) ≥ 381/100` — was never
 in question on either branch, and #80’s independent decisions of the same bytes are

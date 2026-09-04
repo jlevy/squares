@@ -3151,13 +3151,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 448 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 449 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 93 | asserted something false about the mathematics |
-| validity | 116 | was correct, but the measurement did not bear on the question |
+| validity | 117 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 166 | recorded something its own evidence contradicts |
 | robustness | 57 | did not finish, or finished only by luck |
 | performance | 16 | worked, but cost far more than it should |
@@ -3168,7 +3168,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-five defects in 448, and no soundness defect
+**The automated gate has caught sixty-five defects in 449, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3308,6 +3308,10 @@ Nagamochi’s closed form a day after the 4.5058 adoption made it sixty; the REA
 sixty-seven case bodies were corrected, and `check_nagamochi_bounds` refuses any prose
 count that disagrees with the case records — which is why the same sixty-seven bodies
 now read fifty-eight, `T-020` having taken two more cases off the closed form.
+[D-449](defects.md) is open: the exact sweep reports, beside the least covered mass, a
+witness centre at the midpoint of the attaining event cell, and on most directions that
+midpoint lies outside the admissible domain; the value is right, the point is not a
+witness, and the fix is bead `think-xyt1` under the port epic.
 [D-431](defects.md) is open: `T-009`’s significance rationale compares its `n = 29`
 interval certificate against a rational certificate on Schadt’s packing rather than
 Kingbird’s, and the shipped rational promotion run on the Kingbird witness lands about
