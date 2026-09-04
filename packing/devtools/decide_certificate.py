@@ -70,7 +70,8 @@ def decide(path: Path, *, quick: bool) -> bool:
     side = certificate.outer_side
     print(
         f"{path.name}: n = {certificate.n}, L = {side} = {float(side):.6f}, "
-        f"{len(certificate.atoms)} atoms, mass {mass} = {float(mass):.6f}"
+        f"{len(certificate.atoms)} atoms, mass {mass} = {float(mass):.6f}",
+        flush=True,
     )
 
     problems: list[str] = []
@@ -81,7 +82,7 @@ def decide(path: Path, *, quick: bool) -> bool:
     if side > ceiling:
         problems.append(f"side {side} is above the ceiling {ceiling} = ceil(sqrt(n)) * B")
     reach = least_size_certified(mass)
-    print(f"  ceiling {float(ceiling):.6f}, certifies every n >= {reach}")
+    print(f"  ceiling {float(ceiling):.6f}, certifies every n >= {reach}", flush=True)
     if reach > certificate.n:
         problems.append(f"mass {mass} does not fall below the declared n = {certificate.n}")
 
@@ -128,12 +129,18 @@ def decide(path: Path, *, quick: bool) -> bool:
 
     if problems:
         for problem in problems:
-            print(f"  REFUSED: {problem}")
+            print(f"  REFUSED: {problem}", flush=True)
         return False
     if exact is None:
-        print("  the interval route accepts. NOT ENOUGH TO RETAIN: run without --quick.")
+        print(
+            "  the interval route accepts. NOT ENOUGH TO RETAIN: run without --quick.",
+            flush=True,
+        )
         return True
-    print(f"  RETAINABLE: both routes accept and agree at {exact.minimum_cell_mass}")
+    print(
+        f"  RETAINABLE: both routes accept and agree at {exact.minimum_cell_mass}",
+        flush=True,
+    )
     return True
 
 
