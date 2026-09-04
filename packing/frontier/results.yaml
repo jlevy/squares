@@ -690,6 +690,23 @@ results:
       the loop to convergence -- three row rounds, 25318 rows, final oracle least mass
       exactly 1 -- and was accepted at every direction. An objective below n proves
       nothing on its own; the loop's stopping condition is the thing to read.
+      Where it stops: 3.82 was then attacked from both sides and neither route closes.
+      The covering LP was run twice on independent site sets -- one seeded from this
+      certificate's own 1121 atoms, reaching 24069 sites and 27440 rows, and one built
+      from grids, reaching 6041 sites -- and both converged to an objective of exactly
+      11.000000, approaching it from above and never crossing. A certificate needs mass
+      strictly below eleven, so neither yields one. The rejection route does not close
+      either: the second run's dual carries a maximum pointwise depth of 12/11, so the
+      depth-scaled total that H-061's ceiling object requires is 121/12 = 10.0833
+      against the eleven it needs, and across rounds that figure read 5.46, 8.72, 8.85,
+      9.26, 9.59, 10.05, 10.07, 10.58, 10.53, 10.08 without approaching it.
+      If tau*(3.82) is exactly eleven then this is the one configuration where neither
+      pre-registered route can close, since a certificate needs mass below n and a
+      ceiling needs the scaled dual to reach n, and both fail by an infinitesimal at
+      exactly n. That is a limit on the reach of the rejection route rather than a
+      stalled search. It is recorded as measurement: two LP runs agreeing to six
+      decimals is evidence about the restricted optima, not a proof that tau* equals
+      eleven, and nothing here rules out a site set neither run found.
   - id: T-019
     claim: >-
       s(17) >= 229/50, and s(18) >= 229/50 and s(19) >= 229/50 by monotonicity, from a
