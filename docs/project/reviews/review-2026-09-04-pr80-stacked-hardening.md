@@ -8,7 +8,9 @@ the second reader the stack has not yet had.
 The question asked was not “is the review right” but “which of its changes are clean
 improvements, which are excessive, and which should be objected to” — and, because the
 stack was reconciled to a parent that has since moved by twelve commits, what on it is
-now out of date.
+now out of date. The stack has since moved to `04127189`, four merge commits on and
+reconciled to the parent’s `a159eb28`; where that head already answers a finding below,
+the finding says so.
 
 Two review lanes ran beside this document under their own briefs — one over the code and
 tests, one over the records and prose — and their findings are folded in below with
@@ -25,12 +27,11 @@ thirty-three new defects of which several are duplicates of what the parent foun
 fixed on its own, and severity labels that call three parent-fixed or
 non-verdict-bearing items “Blocker”.
 Its suite budgets are justified by measurements the parent has since made obsolete, and
-its defect numbering collides with the parent’s on three ids.
+its defect numbering collides with the parent’s on nine ids, D-441 through D-449.
 
-The recommended path is a short PR onto the current #78 head carrying the seven items
-listed under **Adopt**, with the rest either dropped or moved out of the validated tree.
-If #80 is to merge as a stack instead, the **Must update** list is what has to change
-first.
+The path taken on this review: PR #78 merges first, and the valid improvements are
+ported one bead at a time onto a branch off `main` (**Disposition**). If #80 were to
+merge as a stack instead, the **Must update** list is what would have to change first.
 
 | Question | Answer |
 | --- | --- |
@@ -38,7 +39,7 @@ first.
 | Is the nonnegativity finding (F1) real? | Yes, and it is the most valuable thing on the stack. The parent’s `verify()` never required `weight ≥ 0`; the counting step needs it. No retained certificate is affected — every weight is an LP output with `w ≥ 0` — but the verifier as a tool accepted a false theorem. |
 | Are the six “Blocker” labels earned? | Four are (F1, F6, F7, F24) — F1 and F6 were reproduced live on the parent’s current head by the records lane. F9 is the parent’s own D-435, found and fixed there before #80 merged it. F17 concerns a path no evidence ever cited and is hardening, not soundness. |
 | Is the T-018 promotion from C4 to C5 legitimate? | Yes. `epistemics.md` defines C5 as *review-ready* — C3 or C4 plus an existing `review_artifact` mapped as a non-superseded review — not as external review. The parent’s own prose (“C5 needs a review by someone outside the project”) misstates the rubric and is the parent’s to fix. |
-| Is the stack current with #78? | No. It predates T-020, the integer sweep, D-442–D-444, the case-body rewrites, the attainment ratio, agenda-020, session-085 and the closeout; see **Must update**. |
+| Is the stack current with #78? | At `28990b00`, no: it predates T-020, the integer sweep, D-442–D-444, the case-body rewrites, the attainment ratio, agenda-020, session-085 and the closeout. `04127189` has merged `a159eb28` and applies the witness fix on both sweep routes; the budgets, the rung-figure literals, the Lean project and the defect numbering stand. See **Must update**. |
 
 ## What PR #80 gets right
 
@@ -169,8 +170,9 @@ Each of these adds weight the result does not need, or adds it in the wrong plac
   harder to read than the record it is meant to protect.
   Merge the per-command robustness entries into one, and drop the duplicates.
 - **The suite budgets.** The fast suite’s cap moves from 1,800 s to 2,700 s and the
-  exhaustive tier’s from 900 s to 14,400 s, each justified by a measurement — 1,789 s
-  for the ordinary suite, 4,866 s for one exact decision.
+  exhaustive tier’s from 900 s to 14,400 s (21,600 s at `04127189`, under a comment that
+  still argues for 14,400), each justified by a measurement — 1,789 s for the ordinary
+  suite, 4,866 s for one exact decision.
   Both measurements are of the Fraction sweep the parent replaced the same evening: the
   ordinary suite now runs in 1,031 s on four cores and the n = 20 exact decision in 29
   s. The 900 s cap on the pre-push whole-suite step is a real problem the parent
@@ -269,21 +271,22 @@ Each of these adds weight the result does not need, or adds it in the wrong plac
 
 ## Must update: where the stack is behind the parent
 
-PR #80 was reconciled to `719c2a17`. The parent is now at `a159eb28`, twelve commits on,
-and the following are not reflected in the stack.
+PR #80 at `28990b00` was reconciled to `719c2a17`, with the parent at `a159eb28`, twelve
+commits on. Its `04127189` head has since merged `a159eb28`; the rows below say which of
+these that merge settled and which stand.
 
 | Parent change since `719c2a17` | What it means for #80 |
 | --- | --- |
 | **T-020**: `s(19), s(20), s(21) ≥ 24/5`, a fourth certificate package, `n = 19`–`21` case files rewritten, Nagamochi’s closed form now holds 58 of 65 open cases, not 60 | Every count, case body and evidence entry the stack touches for n = 17–19 has moved again; `n-019.md` in particular now carries T-020, not T-019. The frontier-corpus tripwire is 58. |
-| **Defects D-442, D-443, D-444** recorded on the parent | The stack numbers its own defects D-442–entry 474 of #80’s log. Three ids collide with different content. The parent’s ids stand; the stack renumbers from entry 445 of #80’s log. |
+| **Defects D-441–D-449** recorded on the parent | At `04127189` the stack numbers its own entries 441 through 489 of its log and moves the parent’s D-442, D-443 and D-444 to entries 475, 481 and 482 of its log. Nine ids collide with different content. The parent’s ids stand; the stack’s entries renumber from entry 450 and the parent’s return to their ids. |
 | **D-442** (five case bodies stale against their front matter) and `devtools.check_case_prose` | The stack’s F28 / entry 467 of #80’s log is the same finding and its entry 466 of #80’s log the same possessive-mass instance; the parent’s rewrites of `n-017`–`n-019` are the ones to keep (the stack’s drop the green17 / T-001 passage and the Massaccesi provenance the parent preserves). Record concurrent discovery once and keep the parent’s detector, which reads every case body against its own front matter. |
 | **`frontier/README.md` says 58 of 65** open cases rest on Nagamochi | The stack still says 60; its corpus tripwire and case bodies move with it. |
 | **D-441’s consequence field corrected** on the parent | The stack’s F20 / entry 460 of #80’s log fixes the same sentence. Duplicate. |
-| **The integer sweep (agenda-020, `d8733ad0`)**: `sweep.py` rewritten around an int64 grid and spans, `verify()` parallel, exact decisions 68–183× faster | `certificate.py` and `test_module_boundaries.py` conflict outright; `sweep.py` merges *silently and wrongly* — F11’s witness fix lands in the Fraction reference path and the integer path keeps the infeasible midpoint, breaking the value-and-witness equality test. Re-apply F11 in a helper both routes call. The 14,400 s and 2,700 s budgets (F13, F30, F32; entries 451, 470 and 471 of #80’s log) were sized for a cost that is now 25–29 s. |
+| **The integer sweep (agenda-020, `d8733ad0`)**: `sweep.py` rewritten around an int64 grid and spans, `verify()` parallel, exact decisions 68–183× faster | Settled at `04127189`, and well: `verify()` stays parallel, `_cell_witness` is applied on both the integer and the Fraction routes, `minimum_covered_mass_integer` checks its own preconditions, and `reduce_to_cells` is re-implemented independently of `reduce_to_spans`, so the reference no longer shares the optimised route’s geometry. (At `28990b00` a plain merge left the witness fix in the Fraction path only.) What stands: the 2,700 s and 21,600 s budgets (F13, F30, F32; entries 451, 470 and 471 of #80’s log) were sized for a cost that is now 25–29 s, and the exhaustive constant’s comment still argues for 14,400. |
 | **agenda-019 cost figures corrected** (a third paired point; contention noted; 13,000 s figure retracted) | F33’s complaint about the two-point exponents is partly addressed; what remains is the two comparison factors above. |
 | **The reach table gained the attainment ratio and a predicted-gain ranking** | F26’s evidence-status column has to be re-applied on the new renderer. |
 | **Agenda-017 closed (W10), agenda-020, session-085, the cold-start handoff** now select `BC-191`/`think-ji0r` | The stack’s agenda-019 edits (+65/−48) predate the handoff section and the BC-190 re-basing. |
-| **The certificate conditions are being renamed** on both branches from `C0`–`C4` to Condition 1–Condition 5 | Both sides must use the same table (below), or the merge will carry two vocabularies. |
+| **The certificate conditions are being renamed** on both branches from `C0`–`C4` to Condition 1–Condition 5 | Aligned at `04127189`: the stack’s `results.yaml` spells the obligations Condition 1–5 and keeps `C0`–`C5` for the rungs, as in the table below. |
 
 The condition rename, so that the two branches align:
 
@@ -323,14 +326,16 @@ reproduction). Per file:
   158 of 181 directions at n = 11 and 159 of 181 at n = 17 report a witness centre
   outside the admissible domain: the midpoint of an event cell that the domain polygon
   only partly covers. The verdict is unaffected (the value is right; the point is not a
-  witness). The stack’s `_cell_witness` fixes it — and, merged onto this branch,
-  `sweep.py` auto-merges silently with the fix landing only in the Fraction reference
-  path, while the integer path that actually runs keeps the midpoint.
-  The port has to go into a helper both routes call, keep the value-and-witness equality
-  test, and exhaust all 181 directions of all four certificates on the integer route,
-  which is now cheap, because the strict-inside check is a new hard-error path the lane
-  could sample only. Recorded on this branch as D-449, outstanding, with the port as its
-  fix.
+  witness). The stack’s `_cell_witness` fixes it.
+  At `28990b00`, merged onto this branch, `sweep.py` auto-merged silently with the fix
+  landing only in the Fraction reference path while the integer path that actually runs
+  kept the midpoint; `04127189` has done that merge by hand, applies the helper on both
+  routes, and re-implements `reduce_to_cells` independently of the spans, which is the
+  better reference. The port takes that code as it stands, keeps the value-and-witness
+  equality test, and exhausts all 181 directions of all four certificates on the integer
+  route, which is now cheap, because the strict-inside check is a new hard-error path
+  the lane could sample only.
+  Recorded on this branch as D-449, outstanding, with the port as its fix.
 - `interval.py`: the overflow hardening is clean and the four verdicts are unchanged;
   `directions=` no longer yields a verdict, which this branch has adopted.
   The new `BOX_BUDGET` of 100,000 boxes per direction fails safe but has 3.2× headroom
@@ -344,16 +349,17 @@ reproduction). Per file:
   *accepts*. That is sound (a unit square containing such a `B`-square does not fit
   either) but it is acceptance on vacuity in a checker whose value was refusing what it
   cannot handle; port with the soundness note written down.
-  `decide()` now folds declaration mismatches into `failures` directly under a comment
-  saying it keeps them separate.
+  At `28990b00`, `decide()` folded declaration mismatches into `failures` under a
+  comment saying it keeps them separate; `04127189` keeps them in their own list.
   `falsify.py`’s oracles are hard-coded to the `19/5` file while its usage line
   advertises any certificate; a non-shipped path should be refused explicitly.
 - `cli/validate.py`: the 1,800 → 2,700 s fast-tier budget rests on a 1,791 s measurement
   that d8733ad0 invalidated (the lane measured the n = 12 and n = 20 exact decisions at
   25.5 s and 28.4 s against the 4,866 s the exhaustive budget cites), and 2,700 s sits
   *above* CI’s 1,800 s, so the local gate could pass while CI times out.
-  Drop both numbers; port only the push-step `budget_seconds` line, at 1,800, which is
-  the fix D-432 already prescribes.
+  At `04127189` the exhaustive constant is 21,600 s while its comment still argues for
+  14,400. Drop both numbers; port only the push-step `budget_seconds` line, at 1,800,
+  which is the fix D-432 already prescribes.
 - `test_rung_figures.py` (+193): the cross-record contract is right; the literals are
   not — six reach-table rows, “about 6.9 times tighter”, “about 1.77 times”, “2097 atoms
   took 4866 s”, “Eight rungs are retained”, three `exact_form == "459/100"` — every one
@@ -422,10 +428,13 @@ as `580efe58` because two of them close soundness gaps in the verifier as a tool
   the typographic edits to five dated reviews and the rewritten observation in the
   sixth, the D-439 regression as written, entry 469 of #80’s log, and the renumbering of
   the parent’s D-441.
-- **Fix on the stack**, whatever else happens to it: the `90.5 million` figure and the
-  T-018 proof note’s document-map registration.
+- **Fix on the stack**, whatever else happens to it: the `90.5 million` figure (the
+  proof note’s document-map registration is done at `04127189`), the exhaustive budget’s
+  14,400 comment against its 21,600 constant, and the `BOX_BUDGET` comment that names
+  2,097 atoms as the largest retained certificate.
 - **Re-grade**: F6, F9, F17.
-- **Renumber and dedupe** the defects against D-442–D-449 and the parent’s later fixes.
+- **Renumber and dedupe** the defects: the stack’s entries 441–489 of its log from entry
+  450, against the parent’s D-441–D-449 and its later fixes.
 
 The concrete claim — that the retained certificate proves `s(11) ≥ 381/100` — was never
 in question on either branch, and #80’s independent decisions of the same bytes are

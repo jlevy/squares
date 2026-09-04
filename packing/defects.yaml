@@ -14331,8 +14331,10 @@ defects:
     Outstanding; bead think-xyt1 under the port epic think-pev1. PR 80's _cell_witness
     picks a point strictly inside the cell's intersection with the domain; ported onto
     this branch it must go into a helper both the integer and the Fraction routes call
-    (the stack's patch reaches only the Fraction reference path after a merge, and the
-    value-and-witness equality test then fails on five of six directions), and it must
+    (the stack's 28990b00 head merged onto this branch left the fix in the Fraction
+    reference path only, failing the value-and-witness equality test on five of six
+    directions; its 04127189 head applies the helper on both routes and is the code
+    to port), and it must
     be exhausted on all 181 directions of all four retained certificates on the integer
     route, because the strict-inside check is a new hard-error path.
   regression: >-
