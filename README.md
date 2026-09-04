@@ -57,8 +57,7 @@ Results first established here, as far as the recorded source searches show:
 - **[T-018](packing/frontier/RESULTS.md): `s(11) ≥ 381/100`, the first movement of the
   smallest open case located since 2003 (`S5`).** [`s(11)`](packing/frontier/n-011.md)
   is the case this project exists for, and the recorded public search found no stronger
-  lower bound after Stromquist published `2 + 4/√5 = 3.788854` in 2003.
-  A first-party
+  lower bound after Stromquist published `2 + 4/√5 = 3.788854` in 2003. A first-party
   [weighted fractional unavoidable-set certificate](packing/cases/n11_fractional_certificate/)
   — 1121 weighted atoms, total mass `434547/40000`, every placement of a shrunken square
   covering mass at least `1` — proves that eleven unit squares do not fit in a container
@@ -77,27 +76,26 @@ Results first established here, as far as the recorded source searches show:
   against `n = 17`, least covered mass `200009/200000` — so the repository now carries a
   first-party certificate `0.0842` above the number it had adopted, with the `229/50`
   and `451/100` rungs it climbed through retained below.
-  One certificate covers all three sizes without a monotonicity step: only
-  **Condition 2**, total mass below `n`, mentions `n`, so an atom set certifies its side
-  for every integer above its own mass.
+  One certificate covers all three sizes without a monotonicity step: only **Condition
+  2**, total mass below `n`, mentions `n`, so an atom set certifies its side for every
+  integer above its own mass.
   `T-020` has since carried `n = 19` past it; `n = 17` and `n = 18` are this result’s
   alone, being too small for the heavier atom set that moved the other three.
 - **T-020: `s(19), s(20), s(21) ≥ 24/5`, raising three verified floors (`S4`).** Before
   this result the verified register held `4.59` at n = 19 and Nagamochi’s 2005 general
-  formula at n = 20 and n = 21, namely `1 + √13 = 4.6055…` and
-  `1 + √14 = 4.7416…`. A
+  formula at n = 20 and n = 21, namely `1 + √13 = 4.6055…` and `1 + √14 = 4.7416…`. A
   [certificate at `4.80`](packing/cases/n20_fractional_certificate/) — 2260 atoms, total
   mass `946131/50000`, least covered mass `50007/50000` — moves
   [`n = 20`](packing/frontier/n-020.md) by `0.194449`, `n = 21` by `0.058343`, and
   `n = 19` by `0.21` against those verified baselines.
   Friedman’s DS7 survey had already listed `6√2 − 4` for n = 19–20 and an unexplained
   `≈ 4.7438` for n = 21 by 2000; the last makes the improvement past the strongest
-  located report approximately `0.0562`.
-  The three sizes again follow directly from **Condition 2**.
-  On the current 181-direction net, a single certificate has a `4.9885` ceiling at
-  `n = 20` and `n = 21`; that is a necessary limit, not an attainable prediction, and
-  refining the net changes it. At `n = 19`, the known packing binds first, only `0.0856`
-  above the new lower bound. [Reach analysis](packing/frontier/CERTIFICATE-REACH.md)
+  located report approximately `0.0562`. The three sizes again follow directly from
+  **Condition 2**. On the current 181-direction net, a single certificate has a `4.9885`
+  ceiling at `n = 20` and `n = 21`; that is a necessary limit, not an attainable
+  prediction, and refining the net changes it.
+  At `n = 19`, the known packing binds first, only `0.0856` above the new lower bound.
+  [Reach analysis](packing/frontier/CERTIFICATE-REACH.md)
 - **T-017: `s(12) ≥ 99/25`, from nothing case-specific at all (`S4`).**
   [`n = 12`](packing/frontier/n-012.md) had only the `n = 11` bound inherited by
   monotonicity; the frontier record said in as many words that nothing specific to

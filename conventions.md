@@ -282,7 +282,7 @@ re-derived on every validation run.
 
 **Reserve `C0`–`C5` for confirmation levels.** [convention] Numbered hypotheses or
 checks inside a proof are written as **Condition 1**, **Condition 2**, and so on, never
-as `C1`, `C2`, etc. This keeps local proof notation from colliding with the repository's
+as `C1`, `C2`, etc. This keeps local proof notation from colliding with the repository’s
 result-level confirmation ladder.
 
 **Budgets are in pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`. [convention]

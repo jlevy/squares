@@ -72,10 +72,10 @@ python3 ../minimal_verify.py ../certificate.json
 ```
 
 That command checks the current 381/100 certificate in roughly one to three minutes on
-one core and ends with the exact minimum and an explicit **Condition 5**-refuting mutation.
-The minimal checker recognizes only that one hash-bound certificate; `verify.py` is the
-larger general checker with reusable schema and degenerate-domain handling and is what
-checks this package’s 19/5 artifact.
+one core and ends with the exact minimum and an explicit **Condition 5**-refuting
+mutation. The minimal checker recognizes only that one hash-bound certificate;
+`verify.py` is the larger general checker with reusable schema and degenerate-domain
+handling and is what checks this package’s 19/5 artifact.
 
 One command, with whatever `python3` is on your `PATH` (CPython 3.8 or later, tested
 with 3.10 through 3.14, nothing installed):
@@ -91,9 +91,9 @@ Each positive run prints every condition with its numbers and ends in `VERIFIED`
 `REFUSED`; the script exits non-zero on a refused positive control, a wrongly accepted
 negative control, or a mismatched expected condition.
 Expect about a minute.
-**Condition 5** took 22 to 27 s on the certificate and 7 to 8 s on the control with CPython 3.10
-through 3.14 on an idle core, and 34.1 s and 10.4 s in the recorded run below on a
-contended one.
+**Condition 5** took 22 to 27 s on the certificate and 7 to 8 s on the control with
+CPython 3.10 through 3.14 on an idle core, and 34.1 s and 10.4 s in the recorded run
+below on a contended one.
 
 ## The Theorem
 
@@ -129,22 +129,22 @@ coordinates and rational weights `w_i ≥ 0`. For a set `Q` in the plane write
 
 **Hypotheses.**
 
-- **Condition 1.** The weighted atom set is invariant under the eight symmetries of `K`: for
-  every atom, each of the eight images of its site under
+- **Condition 1.** The weighted atom set is invariant under the eight symmetries of `K`:
+  for every atom, each of the eight images of its site under
   `(x, y) ↦ (x, y), (L−x, y), (x, L−y), (L−x, L−y), (y, x), (L−y, x), (y, L−x), (L−y, L−x)`
   is a site of the same total weight.
   (The proof uses only the reflection `(x, y) ↦ (y, x)`; the certificate declares the
   full group, and checking it is a stronger hypothesis, hence safe.)
 - **Condition 2.** `Σ w_i < n`.
-- **Condition 3.** `θ_K ≥ π/4`. Since `tan(π/8) = √2 − 1` is the positive root of `t² + 2t − 1`
-  and that polynomial increases for `t ≥ 0`, this is exactly `t_K² + 2t_K − 1 ≥ 0`, a
-  rational inequality.
-- **Condition 4.** `B(1 + D) < 1`, where `D = max_k (t_{k+1} − t_k) / (1 + t_k t_{k+1})`. Since
-  `θ = 2 arctan t`, half the gap between adjacent net angles is
-  `arctan(t_{k+1}) − arctan(t_k)`, whose tangent is exactly that quotient; so `D` is the
-  tangent of the largest *half*-gap.
-- **Condition 5.** For every `k` and every closed square `Q` of side `B` whose edges make angle
-  `θ_k` with the axes and which lies inside `K`: `mass(Q) ≥ 1`.
+- **Condition 3.** `θ_K ≥ π/4`. Since `tan(π/8) = √2 − 1` is the positive root of
+  `t² + 2t − 1` and that polynomial increases for `t ≥ 0`, this is exactly
+  `t_K² + 2t_K − 1 ≥ 0`, a rational inequality.
+- **Condition 4.** `B(1 + D) < 1`, where
+  `D = max_k (t_{k+1} − t_k) / (1 + t_k t_{k+1})`. Since `θ = 2 arctan t`, half the gap
+  between adjacent net angles is `arctan(t_{k+1}) − arctan(t_k)`, whose tangent is
+  exactly that quotient; so `D` is the tangent of the largest *half*-gap.
+- **Condition 5.** For every `k` and every closed square `Q` of side `B` whose edges
+  make angle `θ_k` with the axes and which lies inside `K`: `mass(Q) ≥ 1`.
 
 **Conclusion.** `n` unit squares with pairwise disjoint interiors do not fit in `K`;
 hence `s(n) ≥ L`.
@@ -160,9 +160,9 @@ We derive `n ≤ Σ w_i`, contradicting **Condition 2**.
    sends a direction at angle `α` to angle `π/2 − α`, so `R(S_j)` is a unit square in
    `K` with orientation `π/2 − φ ∈ (0, π/4)`. Write `S'_j` for `S_j` or `R(S_j)`,
    whichever has orientation `φ' ∈ [0, π/4]`.
-2. **A net angle nearby.** By **Condition 3** and `t₀ = 0`, the net angles run from `0` to at least
-   `π/4`, so `φ'` lies in some `[θ_k, θ_{k+1}]`, and the nearer endpoint `θ` satisfies
-   `d := |φ' − θ| ≤ (θ_{k+1} − θ_k)/2`. Since `tan` increases on `[0, π/2)`,
+2. **A net angle nearby.** By **Condition 3** and `t₀ = 0`, the net angles run from `0`
+   to at least `π/4`, so `φ'` lies in some `[θ_k, θ_{k+1}]`, and the nearer endpoint `θ`
+   satisfies `d := |φ' − θ| ≤ (θ_{k+1} − θ_k)/2`. Since `tan` increases on `[0, π/2)`,
    `tan d ≤ D`.
 3. **A concentric shrunken square.** Let `Q` be the closed square of side `B`, centred
    at the centre of `S'_j`, with orientation `θ`. Its support function in the direction
@@ -171,12 +171,12 @@ We derive `n ≤ Σ w_i`, contradicting **Condition 2**.
    as `B(cos d + sin d) < 1`. Now
    `cos d + sin d = cos d · (1 + tan d) ≤ 1 + tan d ≤ 1 + D`, and **Condition 4** gives
    `B(1 + D) < 1`. Hence `Q ⊂ int(S'_j) ⊂ K`, strictly inside.
-4. **Condition 5 applies.** `Q` is a closed `B`-square at the net angle `θ` lying inside `K`, so
-   `mass(Q) ≥ 1`.
+4. **Condition 5 applies.** `Q` is a closed `B`-square at the net angle `θ` lying inside
+   `K`, so `mass(Q) ≥ 1`.
 5. **Pull back.** Let `P_j = Q` if `S'_j = S_j`, and `P_j = R(Q)` otherwise.
-   Then `P_j ⊂ int(S_j)`, and `mass(P_j) = mass(Q) ≥ 1` because by **Condition 1** the weighted atom
-   set is invariant under `R` (the atoms inside `R(Q)` are the images of the atoms
-   inside `Q`, with the same weights).
+   Then `P_j ⊂ int(S_j)`, and `mass(P_j) = mass(Q) ≥ 1` because by **Condition 1** the
+   weighted atom set is invariant under `R` (the atoms inside `R(Q)` are the images of
+   the atoms inside `Q`, with the same weights).
 6. **Count.** The interiors of the `S_j` are pairwise disjoint, so the `P_j` are
    pairwise disjoint and each atom lies in at most one of them.
    With `w_i ≥ 0`, `n ≤ Σ_j mass(P_j) ≤ Σ_i w_i < n`. Contradiction.
@@ -186,11 +186,11 @@ gives a packing in some square of side `L' < L`, which sits inside `[0, L]²`; t
 `s(n) ≥ L`.
 
 Two remarks a careful reader will want settled.
-First, `Q` is closed and **Condition 5** counts atoms on its boundary; this never double-counts,
-because step 3 puts `Q` strictly inside the interior of one unit square.
-Second, **Condition 5** quantifies over every `B`-square inside `K` at a net angle, a superset of the
-squares the proof meets; a stronger hypothesis can only make the theorem harder to
-apply, never unsound.
+First, `Q` is closed and **Condition 5** counts atoms on its boundary; this never
+double-counts, because step 3 puts `Q` strictly inside the interior of one unit square.
+Second, **Condition 5** quantifies over every `B`-square inside `K` at a net angle, a
+superset of the squares the proof meets; a stronger hypothesis can only make the theorem
+harder to apply, never unsound.
 
 ## The Certificate
 
@@ -208,8 +208,9 @@ apply, never unsound.
 | Total weight | `43391/4000 = 10.84775 < 11` |
 | Least covered weight | `50003/50000 = 1.00006`, attained at direction 0 by the square centred at `(53/100, 53/100)`; over all 181 directions, 90,546,593 cells decided |
 
-The margin in **Condition 5** is `6/100000`, and the margin in **Condition 4** is `4.1 × 10⁻⁶`. Both are decided
-exactly; a floating-point check would have no business here.
+The margin in **Condition 5** is `6/100000`, and the margin in **Condition 4** is
+`4.1 × 10⁻⁶`. Both are decided exactly; a floating-point check would have no business
+here.
 
 **Schema.** A JSON object with the fields below.
 Every rational is a string matching `-?[0-9]+(/[1-9][0-9]*)?`; the verifier refuses any
@@ -235,17 +236,19 @@ coercing them or failing partway through the decision.
 `../minimal_verify.py` is the current theorem-specific audit kernel described above.
 `verify.py` reads the file strictly, checks the shape the theorem assumes (`n ≥ 1`,
 positive sides, non-negative weights, a net that starts at 0 and increases, the declared
-claim equal to the theorem’s conclusion), then decides **Condition 1** to **Condition 5** in that order and prints
-each with its numbers.
-Once the preconditions pass, nothing short-circuits: a file failing **Condition 2** still has its **Condition 5**
-minimum computed, so a refusal names every failing condition.
-The preconditions are different — a file that fails one of those is refused there and
-the conditions are not reached, because a malformed file has no conditions to decide.
-Every quantity is a `fractions.Fraction`; floats appear only in printed approximations
-beside the exact value.
+claim equal to the theorem’s conclusion), then decides **Condition 1** to **Condition
+5** in that order and prints each with its numbers.
+Once the preconditions pass, nothing short-circuits: a file failing **Condition 2**
+still has its **Condition 5** minimum computed, so a refusal names every failing
+condition. The preconditions are different — a file that fails one of those is refused
+there and the conditions are not reached, because a malformed file has no conditions to
+decide. Every quantity is a `fractions.Fraction`; floats appear only in printed
+approximations beside the exact value.
 
-**Condition 1** to **Condition 4** are closed-form rational tests and can be read off the code in a minute.
-**Condition 5** is the substance, and it is decided over the continuum of placements, not sampled:
+**Condition 1** to **Condition 4** are closed-form rational tests and can be read off
+the code in a minute.
+**Condition 5** is the substance, and it is decided over the continuum of placements,
+not sampled:
 
 - Fix a net direction with exact cosine `c = (1 − t²)/(1 + t²)` and sine
   `s = 2t/(1 + t²)`, so `c² + s² = 1` exactly.
@@ -268,8 +271,8 @@ beside the exact value.
 - Whether an open cell `(a, b) × (c′, d)` meets `F` is decided exactly by clipping the
   polygon `F` to the strip `a ≤ U ≤ b` (exact rational Sutherland-Hodgman clipping),
   reading off the `V`-range `[lo, hi]` of the clipped polygon, and testing `c′ < hi` and
-  `lo < d`; the **Condition 5** comment block in `verify.py` proves this test is exact for the open
-  cell, not just its closure.
+  `lo < d`; the **Condition 5** comment block in `verify.py` proves this test is exact
+  for the open cell, not just its closure.
 - The weight on every cell is computed by a two-dimensional prefix sum over integer
   weights (the rational weights times their common denominator).
   The minimising cell’s weight is then recomputed by direct summation over the atoms, at
@@ -277,9 +280,9 @@ beside the exact value.
   disagreement aborts the run.
   `--audit N` re-sums `N` further random admissible cells per direction the same way.
 
-If the admissible-centre domain at a direction is empty, **Condition 5** there is vacuous; if it is a
-single point, the verifier evaluates that closed placement directly rather than applying
-the open-cell argument outside its hypotheses.
+If the admissible-centre domain at a direction is empty, **Condition 5** there is
+vacuous; if it is a single point, the verifier evaluates that closed placement directly
+rather than applying the open-cell argument outside its hypotheses.
 If the certificate declares `total_mass` or `least_cell_mass`, disagreement with the
 recomputed value is a refusal, not an informational note.
 
@@ -321,8 +324,8 @@ compares the verdict, every named condition, and the exact minimum against a fix
 oracle. It exits non-zero on any disagreement; merely printing a plausible table is not
 success. `python3 falsify.py --quick` runs only the signed-weight must-refuse case used
 by `check.py`. The perturbed atom is chosen from the verifier’s own witness: the first
-atom covered by the least-covered placement, so a change to it must show in **Condition 5**. Real
-output of `python3 falsify.py` (about four minutes):
+atom covered by the least-covered placement, so a change to it must show in **Condition
+5**. Real output of `python3 falsify.py` (about four minutes):
 
 ```
 baseline: deciding the unperturbed certificate to locate its tight placement
@@ -345,15 +348,16 @@ perturbed site: atom 0 at (1/2, 29/30), weight 407/25000
 
 Read the rows as demonstrations of the verifier, not of the certificate.
 Every condition is seen refusing something.
-**Condition 5** moves by exactly what was taken from the tight placement: one atom lowered by
-`1/10000` lowers the least covered weight from `50003/50000` to `24999/25000`, a drop of
-`1/10000`; lowering its whole orbit lowers it by `2/10000`, because the corner placement
-covers two members of the orbit, the atom and its mirror image across the diagonal;
-dropping the atom removes its `407/25000`. The shifted atom leaves **Condition 5** at its old value
-and is caught by the symmetry condition alone, which is why **Condition 1** is a condition and not a
-label. The container of side 4 with the atoms recentred is refused by **Condition 5** alone, with
-every other condition passing and a least covered weight of `0`: a square in the widened
-margin covers nothing, and the verifier scores those placements.
+**Condition 5** moves by exactly what was taken from the tight placement: one atom
+lowered by `1/10000` lowers the least covered weight from `50003/50000` to
+`24999/25000`, a drop of `1/10000`; lowering its whole orbit lowers it by `2/10000`,
+because the corner placement covers two members of the orbit, the atom and its mirror
+image across the diagonal; dropping the atom removes its `407/25000`. The shifted atom
+leaves **Condition 5** at its old value and is caught by the symmetry condition alone,
+which is why **Condition 1** is a condition and not a label.
+The container of side 4 with the atoms recentred is refused by **Condition 5** alone,
+with every other condition passing and a least covered weight of `0`: a square in the
+widened margin covers nothing, and the verifier scores those placements.
 
 ## Output of the Stranger Run
 
@@ -474,14 +478,14 @@ exit status 0
   Three agreeing implementations of one reduction test the code and not the reduction,
   which is why this objection was worth stating.
   It has since been answered, though not by anything in this directory.
-  The repository now also decides **Condition 5** by interval arithmetic with directed rounding —
-  branch and bound over boxes of centres, where an atom counts for a box only if its
-  coverage rectangle contains the whole box, so the count is a lower bound by
+  The repository now also decides **Condition 5** by interval arithmetic with directed
+  rounding — branch and bound over boxes of centres, where an atom counts for a box only
+  if its coverage rectangle contains the whole box, so the count is a lower bound by
   construction. There is no event grid, no difference array and no polygon clipping.
-  It shares the `Certificate` representation and **Conditions 2–4** with the sweep but makes
-  a method-distinct **Condition 5** decision, and it decides **Condition 5** on the doubled net (`θ_k` and
-  `π/2 − θ_k`, 361 directions), which means it never invokes the reflection argument of
-  step 1 and does not need **Condition 1** at all.
+  It shares the `Certificate` representation and **Conditions 2–4** with the sweep but
+  makes a method-distinct **Condition 5** decision, and it decides **Condition 5** on
+  the doubled net (`θ_k` and `π/2 − θ_k`, 361 directions), which means it never invokes
+  the reflection argument of step 1 and does not need **Condition 1** at all.
   Run on *this file’s bytes* — SHA-256
   `60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`, the hash in the
   table above — it certifies all 361 directions in 1,195,755 boxes with none stalled, in
@@ -497,10 +501,10 @@ exit status 0
   wrong statement of the theorem, which both share; a proof-assistant formalisation of
   the theorem and of one of the two reductions is still the check nobody has done.
 - **The reduction is proved on paper.** The argument that finitely many open cells
-  decide the continuum lives in the **Condition 5** comment block of `verify.py` and in the section
-  above. It is elementary, but it is the place where a wrong verifier would be wrong; the
-  falsification row that enlarges the container shows cells beyond the atoms’ reach are
-  scored, and the cell counts are printed, but neither is a proof.
+  decide the continuum lives in the **Condition 5** comment block of `verify.py` and in
+  the section above. It is elementary, but it is the place where a wrong verifier would
+  be wrong; the falsification row that enlarges the container shows cells beyond the
+  atoms’ reach are scored, and the cell counts are printed, but neither is a proof.
 - **Trust in the interpreter.** The decision rests on CPython’s arbitrary-precision
   integers and the `fractions` module.
   They are widely used and not formally verified.
@@ -511,9 +515,9 @@ exit status 0
   support-function inequality in step 3 and the invariance argument in step 5 are the
   two places to read slowly.
   No formal proof exists.
-- **Tightness.** The **Condition 5** margin is `6/100000`. Exact arithmetic makes the size of the
-  margin irrelevant to validity, but a reader should know the certificate is delicate:
-  any rounding, in either direction, would change the verdict.
+- **Tightness.** The **Condition 5** margin is `6/100000`. Exact arithmetic makes the
+  size of the margin irrelevant to validity, but a reader should know the certificate is
+  delicate: any rounding, in either direction, would change the verdict.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

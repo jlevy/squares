@@ -1371,7 +1371,7 @@ evidence:
       current artifact, cases/n11_fractional_certificate/minimal_verify.py is a 346-line,
       standard-library-only audit kernel bound to the actual b121...e6a SHA-256. It
       checks 567,130,649 exact event cells, reports minimum 4001/4000, and requires a
-      uniform positive-weight mutation to fail C4 at 3999/4000.
+      uniform positive-weight mutation to fail **Condition 5** at 3999/4000.
     source_reviewed: '2026-09-04'
   - id: E-n017-fractional-certificate
     claim: lower-bound
@@ -1398,9 +1398,11 @@ evidence:
         The known hole is the one every entry in this family names -- no systematic sweep
         of recent preprints, and Massaccesi's note is not peer-reviewed.
       novel_object: >-
-        The certificate and the side. The method is Burns's and the parametrisation is
-        Massaccesi's own; what is new is a denser certificate at a larger side than his,
-        found by this project's generator once its separation oracle was corrected.
+        The certificate and the side. Weighted resource counting predates Burns and
+        Massaccesi; the recent pure-atomic rational direction-net architecture follows
+        Burns, and the LP instance and parameter line follows Massaccesi. What is new is
+        a denser certificate at a larger side than his, found by this project's generator
+        once its separation oracle was corrected.
     certificate: cases/n17_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras python -m cases.n17_fractional_certificate
     replay_status: passed
@@ -1488,10 +1490,11 @@ evidence:
         above 24/5 and found none. This was not a systematic sweep of recent preprints,
         so the result remains `apparently-novel`, not an absolute priority claim.
       novel_object: >-
-        The certificate and the side. The method is Burns's and the parametrisation is
-        Massaccesi's; what is apparently new within the recorded search is a certificate
-        at a side no retained source reaches at any of these three sizes, found by this
-        project's generator.
+        The certificate and the side. Weighted resource counting predates Burns and
+        Massaccesi; the recent pure-atomic rational direction-net architecture follows
+        Burns, and the LP instance and parameter line follows Massaccesi. What is
+        apparently new within the recorded search is a certificate at a side no retained
+        source reaches at any of these three sizes, found by this project's generator.
     certificate: cases/n20_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras python -m cases.n20_fractional_certificate
     replay_status: passed
@@ -1538,6 +1541,9 @@ evidence:
     performed_by: repository
     relationship_to_generator: independent-implementation
     origin: audited-here
+    novelty: previously-published
+    source_key: '[Burns–Massaccesi n17]'
+    certificate: cases/n11_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras --group dev pytest tests/test_fractional_interval.py
     replay_status: passed
     limitations: >-
@@ -1586,7 +1592,7 @@ evidence:
       Its acceptance path was audited before this entry was written, and one gap was
       found and closed: enclosing runs settled boxes against the best point value rather
       than against mass 1, so they pinned the minimum exactly and then read `certified`
-      as though it answered C4. The lightened-atom fixture was accepted that way at a
+      as though it answered **Condition 5**. The lightened-atom fixture was accepted that way at a
       correctly measured 99993/100000 (D-435). The figures above were measured before the
       fix and none of them moves: it changes only the verdict drawn when a pinned minimum
       falls short of 1, and every enclosure here is at or above 1. The verdict now

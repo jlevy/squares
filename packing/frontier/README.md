@@ -230,8 +230,7 @@ single argument that the lower-bound side has room its practitioners have not us
 Counts below are computed from the artifacts, not asserted.
 
 **The lower-bound frontier is still dominated by one theorem.** Of the 65 open cases,
-**58** have
-Nagamochi’s general closed form as their best proved lower bound.
+**58** have Nagamochi’s general closed form as their best proved lower bound.
 Seven are governed by anything bespoke, and every one of the seven is a weighted
 fractional unavoidable-set certificate held in this repository: `n = 11` at `381/100`
 and `n = 12` at `99/25` (`T-018`, `T-017`), `n = 17` and `n = 18` at `459/100`

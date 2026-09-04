@@ -25,7 +25,7 @@ reach: the three packing-limited current certificates land within 0.001 of the s
 fraction of their cases' best known packings. The fourth current certificate is
 ceiling-limited and is excluded from that comparison. The apparent regularity is
 measured, not proved, and the document says so plainly where it appears -- see
-`measured_attainment` and `predict_reach` for where the two figures it produces,
+`measured_attainment` and `predicted_reach` for where the two figures it produces,
 `ratio` and `predicted`, come from.
 
 Usage:
@@ -86,9 +86,9 @@ def cases() -> list[dict]:
         if ceiling <= low:
             verdict, prize = "foreclosed", 0.0
         elif up is not None and ceiling >= up:
-            verdict, prize = "packing", up - low
+            verdict, prize = "packing", max(up - low, 0.0)
         else:
-            verdict, prize = "ceiling", ceiling - low
+            verdict, prize = "ceiling", max(ceiling - low, 0.0)
         rows.append(
             {
                 "n": n,
@@ -126,8 +126,12 @@ def retained_certificates() -> list[dict]:
         total_mass = Fraction(str(record["total_mass"]))
         atom_mass = sum((Fraction(str(atom[2])) for atom in record["atoms"]), Fraction())
         if atom_mass != total_mass:
+            try:
+                display_path = path.relative_to(ROOT)
+            except ValueError:
+                display_path = path
             raise ValueError(
-                f"{path.relative_to(ROOT)}: declared total_mass {total_mass} "
+                f"{display_path}: declared total_mass {total_mass} "
                 f"does not equal atom sum {atom_mass}"
             )
         outer_side = Fraction(str(record["outer_side"]))
@@ -222,15 +226,16 @@ def render(rows: list[dict]) -> str:
     out = [BANNER, "", "# Where the fractional certificate can still go", ""]
     out += [
         "The most a weighted fractional unavoidable-set certificate could add to each",
-        "case's lower bound, at the 181-direction net every retained certificate uses.",
+        "case's verified lower bound in this register, at the 181-direction net every",
+        "retained certificate uses.",
         "`ceiling` is `ceil(sqrt(n)) / (1 + D)`, proved in",
         "`sqpack.fractional.certificate.ceiling_side`.",
         "",
         "**`prize` is what the ceiling allows, not what a search will reach.** The real",
         "limit is the covering value: a certificate exists at side `L` only where the",
         "least total mass that covers every admissible `B`-square falls below `n`, and",
-        "that value is well below the ceiling wherever the ceiling is loose. Six",
-        "side-level program values have been reported, each at most an upper bound on",
+        "that value can bind below the ceiling. Seven restricted-program values have",
+        "been reported, each at most an upper bound on",
         "the unrestricted covering value at its side:",
         "",
         "| side | reported value | evidence retained here |",
@@ -254,7 +259,7 @@ def render(rows: list[dict]) -> str:
         "different feasible masses; they do not reproduce the reported objective values.",
         "The other figures",
         "survive only in repository narrative and commit",
-        "history, without their raw run logs or checkpoints. The six points are consistent",
+        "history, without their raw run logs or checkpoints. The seven points are consistent",
         "with a quadratic in the side, but that fit is planning conjecture, not independently",
         "verified measurement. Rank on `prize` to choose where to look; measure and retain",
         "the run before believing any extrapolation.",
@@ -291,8 +296,7 @@ def render(rows: list[dict]) -> str:
         "whichever of the two `limited by` names -- the only honest denominator, since",
         "the other one was never in reach.",
         "",
-        "| n | package | retained lower bound | best packing | ceiling",
-        "| limited by | ratio |",
+        "| n | package | retained lower bound | best packing | ceiling | limited by | ratio |",
         "| ---: | --- | ---: | ---: | ---: | --- | ---: |",
     ]
     for r in measured:
@@ -307,19 +311,24 @@ def render(rows: list[dict]) -> str:
         "**This is an extrapolation from three points, not a measurement.** The three",
         "packing-limited rows above -- n = 11, n = 17, n = 19 -- land inside a band",
         "0.001 wide, and their mean is the `ratio` this section's numbers all come",
-        f"from: `{ratio:.5f}`. That the three numbers are exact rationals decided by",
+        f"from: `{ratio:.5f}`. That the three certificate sides are exact rationals decided by",
         "an exact verifier does not make their mean a rate. No rung in this register",
         "has ever been claimed from a fitted curve, and this one is not the exception:",
         "it is offered here as a place to look, not as a result.",
         "",
         "The ratio is also not purely about how good a covering value the method can",
         "reach -- it is an observation about where searches were stopped as much as",
-        "about where they could go. Two of the three runs behind it were halted on",
-        "projected cost before they answered whether their side could be pushed",
-        "higher; only one ran its covering search to a converged optimum (see each",
-        "case's `next_rung` in `frontier/results.yaml`). A ratio built half from where",
-        "searches were stopped and half from where they could go is not a rate to",
-        "spend a rung's confidence on.",
+        "about where they could go. The three runs behind it stopped for three",
+        "different reasons, and only one of them is a statement about the method.",
+        "An operator report says one n = 11 finite-site row loop converged to restricted",
+        "optimum 11; no raw run or checkpoint survives. Another report says T-020's",
+        "n = 20-targeted build stopped at round 9 on",
+        "projected cost, four rounds short of its planned stopping point. n = 17 has",
+        "no stop reason recorded for its own build at all --",
+        "the stop narrated in its `next_rung` belongs to an adjacent probe at",
+        "n = 18, not to the certificate this row measures. A ratio built from three",
+        "runs, one of which is reported to have completed its restricted row loop, is not a rate",
+        "to spend a rung's confidence on (`D-481`).",
         "",
         "`predicted` below is `min(ratio * best_packing, ceiling)` and `predicted",
         "gain` is `predicted - lower`, clamped at zero. Read them as where to look",
@@ -329,8 +338,10 @@ def render(rows: list[dict]) -> str:
         "",
         "## Ranked by predicted gain",
         "",
-        "| n | m | lower | best packing | ceiling | limited by | prize | predicted",
-        "| predicted gain |",
+        (
+            "| n | m | lower | best packing | ceiling | limited by | prize | predicted"
+            " | predicted gain |"
+        ),
         "| ---: | ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: |",
     ]
     for r in sorted(predicted_reach(live, ratio), key=lambda r: -r["predicted_gain"]):

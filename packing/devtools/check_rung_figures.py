@@ -155,7 +155,14 @@ class CertificateFigures:
 
     @property
     def margin(self) -> Fraction:
-        return self.n - self.mass
+        """Headroom below the least integer size this atom mass certifies directly.
+
+        A certificate recorded with a larger target ``n`` may reach earlier cases too.
+        Unqualified reach-margin prose is therefore measured from ``floor(mass) + 1``,
+        not from the target field stored in the JSON.
+        """
+        least_n = self.mass.numerator // self.mass.denominator + 1
+        return least_n - self.mass
 
 
 #: The retained certificate (or None), a side -> certificate index, and every resolved

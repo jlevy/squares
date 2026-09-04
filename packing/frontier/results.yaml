@@ -568,7 +568,7 @@ results:
       inherited bound would be a new result, not a rung change.
       Superseded as the verified lower bound on 2026-09-04 by T-019, whose 459/100
       certificate proves n = 18 and n = 19 directly because its mass is below 17 and
-      only C1 depends on n. Monotonicity gives the same bounds but is not T-019's
+      only **Condition 2** depends on n. Monotonicity gives the same bounds but is not T-019's
       recorded composition step. This result stays true as stated and keeps its rungs.
 
   - id: T-017
@@ -599,13 +599,14 @@ results:
         eight-rung ladder -- 19/5, 77/20, 97/25, 39/10, 393/100, 197/50, 79/20,
         99/25 -- by a generator that applies at every n and that has since produced the n = 11
         result as well, so this is a bound family rather than a case result. It is
-        also the first bound of any kind proved about n = 12 rather than inherited
-        from n = 11: the frontier case body had recorded that nothing specific to
-        n = 12 had ever been proved.
-        Held below S5 because n = 12 is not the central open case, the method is
-        Burns's and Massaccesi's rather than this project's, both current decisions are
-        repository-internal, and the gap to the conjectured 4 is 0.04, which this
-        approach does not close.
+        also the first bound located in the retained corpus that is proved about n = 12
+        rather than inherited from n = 11: the frontier case body had recorded that
+        nothing specific to n = 12 had been proved there.
+        Held below S5 because n = 12 is not the central open case, weighted resource
+        counting predates this project, the recent pure-atomic rational direction-net
+        architecture follows Burns, the LP parameter line follows Massaccesi, both
+        current decisions are repository-internal, and the gap to the conjectured 4 is
+        0.04, which this approach does not close.
       scored: '2026-09-04'
       by: BC-161 continuation (repository; method-distinct C4, no external review)
     novelty: apparently-novel
@@ -633,9 +634,9 @@ results:
       C4 is reached. The independent re-derivation agrees but is
       exact-algebraic like the first; what moved the rung is the interval-certified
       decision, which bounds coverage by branch and bound over boxes of centres with
-      directed rounding. It shares the Certificate representation and C1-C3 premises
-      with the sweep but makes a method-distinct C4 decision. C5
-      needs a review artifact by someone outside the project. The bound
+      directed rounding. It shares the Certificate representation and **Conditions 2–4**
+      premises with the sweep but makes a method-distinct **Condition 5** decision.
+      Result confirmation C5 needs a mapped, non-superseded review artifact. The bound
       itself: the ladder 19/5, 77/20, 97/25, 39/10, 393/100, 197/50, 79/20, 99/25 was
       climbed once the separation oracle was corrected to score the cells the verifier
       decides (D-434), and every rung is retained.
@@ -662,7 +663,8 @@ results:
       What is left is bounded, though, and by the method rather than by the search.
       A certificate for n cannot exist above ceil(sqrt(n)) * B, since a container wider
       than that holds ceil(sqrt(n))^2 pairwise disjoint axis-parallel B-squares, each
-      carrying mass at least 1 by C4, which forces the total past n and breaks C1.
+      carrying mass at least 1 by **Condition 5**, which forces the total past n and
+      breaks **Condition 2**.
       Here that ceiling is 4B = 3.9908, and 4/(1 + D) = 3.990816 over every shrink the
       181-direction net admits, so 99/25 has 0.0308 of runway left.
       The consequence for this case is structural but finite in scope: the grid packing
@@ -816,12 +818,14 @@ results:
       rationale: >-
         Scored against the rubric's anchor for S4, "a reusable technique, bound family,
         or resolved disputed value". One certificate moves three registered cases, and it
-        replaces a published value rather than an inherited or closed-form one -- the
-        only bound this project has displaced that someone else had put in print. Held
+        replaces a published value rather than an inherited or closed-form one. At the
+        time it was scored, it was the only such displacement in this project; T-020
+        later displaced published values at n = 19--21. Held
         below S5 because none of n = 17, 18, 19 is the central open case, the movement is
-        0.0842 rather than a qualitative change, the method and its parametrisation are
-        Burns's and Massaccesi's own, and the case does not change character at the new
-        value.
+        0.0842 rather than a qualitative change, weighted resource counting predates this
+        project, the recent pure-atomic rational direction-net architecture follows
+        Burns, the LP parameter line follows Massaccesi, and the case does not change
+        character at the new value.
       scored: '2026-09-04'
       by: BC-161 continuation (repository; independent evaluator confirmed C4, no external review)
     novelty: apparently-novel
@@ -842,20 +846,20 @@ results:
       - packing/tests/test_fractional_certificate.py
     next_rung: >-
       C4 is reached by the interval-certified decision, the first here that is not
-      exact-algebraic. C5 needs a review artifact by someone
-      outside the project. The bound itself: the retained certificate's total is
+      exact-algebraic. C5 needs a mapped, non-superseded review artifact. The bound
+      itself: the retained certificate's total is
       423327/25000 = 16.933080, leaving 0.066920 below seventeen, and that margin is
       what a further rung has to be found inside.
       One figure from the ladder is worth carrying, because it contradicts the obvious
       reading. Margin is not monotone in the side. The 451/100 rung two below this one
       has total 16.593620 and margin 0.406380 -- an order of magnitude more headroom at a
       side 0.08 lower -- and the 229/50 rung between them has margin 0.034265, half of
-      what 459/100 has at a higher side. So the covering value at a given side is set by
-      the site set at least as much as by the side itself, and a better site set at a
-      higher side can open the margin back up rather than close it. The n = 12 ladder
+      what 459/100 has at a higher side. So the retained feasible mass and restricted
+      optimum depend on the chosen site set, and a better site set at a higher side can
+      open the margin back up rather than close it. The n = 12 ladder
       shows the same shape in the same direction: margin 0.007175 at 197/50, then
       0.029410 at the higher 79/20. Massaccesi's own atoms are the reference point and not a limit: they
-      give a covering value of 203/12 at 4.5058, tight by construction, which bounds
+      give a feasible mass of 203/12 at 4.5058, tight by construction, which bounds
       nothing about what a different site set reaches at a larger side.
       A further rung is therefore a search question, and the quantity to read is the
       restricted optimum a converged run reaches, never an extrapolated rate.
@@ -867,11 +871,12 @@ results:
       after 157 row-generation rounds that grew the row set from 15888 to 27516 and cost
       7056 s. If accurate, adding sites did not move the restricted optimum across those
       three sets, although adding sites can only lower it.
-      Two readings are open and the run did not separate them. Either the covering value
-      at that side is at or above eighteen, in which case no certificate exists there;
-      or the site sets are still short of it and the optimum is sitting on a degenerate
-      vertex, which the collapse of pricing from 90 s to 1--3 s suggests -- a dual that
-      sparse is what a degenerate basis looks like. Exactly round values are the known
+      Several readings are open and the report does not separate them. The unrestricted
+      covering value could be at or above eighteen; alternatively, the tested site sets
+      could remain short of it, whether or not their restricted optima sit on degenerate
+      vertices. The reported collapse of pricing from 90 s to 1--3 s is consistent with
+      a sparse, degenerate basis but does not establish the global alternative. Exactly
+      round values are the known
       artefact signature in this pipeline, 18.0 having been one for n = 17's grid-31
       optima, so the second reading cannot be dismissed.
       On the same evidence boundary, the reported cost was about two hours for the round
@@ -898,9 +903,11 @@ results:
       1 + sqrt(13) = 4.605551, with 0.3944 to the trivial upper bound 5. A run at a side whose covering
       value lands between 17 and 18 would raise n = 18 and leave n = 17 where it is; one
       landing between 19 and 20 would displace a published closed form.
-      The second of those was run the same day and is registered as T-020, at side 24/5
-      with a covering value between nineteen and twenty. It supersedes this result at
-      n = 19 and moves n = 20 and n = 21 as well. What this result still holds alone is
+      The second target was run the same day and is registered as T-020, at side 24/5.
+      The n = 20-targeted run returned a frozen feasible mass of 18.922620, below
+      nineteen, so its certificate directly moves n = 19, n = 20, and n = 21; an
+      unretained operator report gives a restricted optimum of 18.916941, not an
+      unrestricted covering value. What this result still holds alone is
       n = 17 and n = 18: T-020's atoms are too heavy for either, which is the reach rule
       above read in the other direction. This result stays true as stated at all three
       of its sizes and keeps its rungs.
@@ -920,16 +927,17 @@ results:
       report is slightly stronger than Nagamochi, so the movement past the strongest
       located published report there is approximately 0.0562, not 0.058343. DS7 does
       not supply a proof or reproducible artifact for that decimal in the retained
-      source. The 24/5 certificate is therefore a new independently replayable direct
-      bound for all three cases; the record does not claim the first case-specific bound.
+      source. The 24/5 certificate is therefore a newly retained, replayable direct bound
+      for all three cases; apparent priority is bounded to the recorded search, and the
+      record does not claim the first case-specific bound.
       The three sizes take no monotonicity step. Only **Condition 2**, total mass below
       n, mentions n among the five conditions, so an atom set of mass 946131/50000 certifies the side for every
       integer strictly above that mass, which is 19 and upward. From n = 22 on the
       register already holds 5, so the certificate is true there and weaker; these three
       are where it moves anything.
-      One rung is retained rather than a ladder. The side was reached in a single
-      resumed column-generation run, not climbed to, so there is no weaker certificate
-      at this size to compare it against.
+      One rung is retained rather than a ladder. An unretained operator report says the
+      side was reached in a single resumed column-generation run rather than climbed to;
+      no weaker rung from the T-020/n20 run was retained.
     scope:
       n_values:
         - 19
@@ -949,8 +957,9 @@ results:
         peer-reviewed closed form. The retained DS7 survey's case-listed n = 21 report
         narrows the literature comparison to approximately +0.0562.
         Held below S5 for the reasons T-019 was: none of the three is the central open
-        case, the method and its parametrisation are Burns's and Massaccesi's, and no
-        case changes character at the new value.
+        case, the weighted-resource lineage predates this project, the pure-atomic
+        rational direction-net architecture follows Burns, the LP parameter line follows
+        Massaccesi, and no case changes character at the new value.
         A calibration note for whoever scores the next one. This is the fourth result
         from one instrument in a day, and the S4 anchor is being carried here by the
         displacement rather than by the technique, which T-017 already banked. Further
@@ -975,6 +984,7 @@ results:
       - packing/cases/n20_fractional_certificate/certificate.json
       - packing/src/sqpack/fractional/colgen.py
       - packing/src/sqpack/fractional/interval.py
+      - packing/resources/web/n19-n21-lower-bound-literature-audit-2026/README.md
     controls:
       - packing/tests/test_fractional_certificate.py
       - packing/tests/test_fractional_interval.py
@@ -982,13 +992,13 @@ results:
       The retained certificate's total is 946131/50000 = 18.922620, leaving 0.077380
       below nineteen, and that margin is where a further rung has to be found. It is a
       wide margin by this register's standards -- n = 17's top rung has 0.066920 and
-      n = 12's has 0.001040 -- which says the side was not pushed to where the covering
-      value stops it, only to where the run was stopped.
+      n = 12's has 0.001040 -- which says the retained candidate was not pushed to the
+      n = 19 mass threshold. It does not locate the unrestricted covering value.
       That is the honest reading of how this one was obtained. An operator report for
       which no raw run or checkpoint was retained says the column generation was halted
       at round 9 with a restricted optimum of 18.916941, because four more rounds were
       projected to cost about 3.75 h to buy margin nothing needed. The side above it was
-      never attempted. The frozen certificate's feasible mass is independently replayable;
+      never attempted. The frozen certificate's feasible mass is replayable;
       the restricted optimum and projection are not.
       Where the ceiling sits differs across the three sizes and it matters. A certificate
       for n cannot exist above ceil(sqrt(n)) * B, which for all three is 5B = 4.9885, so

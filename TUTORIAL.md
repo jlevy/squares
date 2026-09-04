@@ -143,12 +143,11 @@ conditions:
 | **Condition 5** | Every admissible side-`B` square at every net direction covers mass at least `4001/4000` | Give each inner square more than one unit of mass |
 
 **The counting contradiction.** Suppose eleven unit squares fit in `K` with disjoint
-interiors. Inside each one, put the side-`B` square supplied by **Conditions 3 and 4**. The inner
-squares are closed but lie strictly inside their parent interiors, so they are pairwise
-disjoint and no atom belongs to two of them.
+interiors. Inside each one, put the side-`B` square supplied by **Conditions 3 and 4**.
+The inner squares are closed but lie strictly inside their parent interiors, so they are
+pairwise disjoint and no atom belongs to two of them.
 **Condition 5** gives each inner square mass at least `4001/4000`. Nonnegativity and
-**Condition 2** would then
-force the impossible chain
+**Condition 2** would then force the impossible chain
 
 ```text
 μ(K) ≥ μ(P₁) + ··· + μ(P₁₁) ≥ 11 × 4001/4000 > 11,
@@ -160,9 +159,8 @@ container would also fit inside `K`, so `s(11) ≥ 381/100`.
 
 **How 181 directions cover every orientation.** A square is unchanged by a quarter turn,
 and diagonal reflection reduces its angle to `[0,π/4]` while **Condition 1** preserves
-mass.
-The net directions are `θᵣ = 2 arctan(tᵣ)`, represented by rational half-angle tangents
-so their sines and cosines are rational too.
+mass. The net directions are `θᵣ = 2 arctan(tᵣ)`, represented by rational half-angle
+tangents so their sines and cosines are rational too.
 For an arbitrary reduced angle, choose the nearer endpoint of the net interval that
 contains it and call the angular error `d`. The net gives the exact bound `tan(d) ≤ D`.
 A side-`B` square at that nearby direction extends, along either axis of the unit
@@ -199,8 +197,7 @@ could reduce the score, and negative mass outside the eleven inner squares could
 the container’s total misleadingly small.
 
 The proof and the computation meet at **Condition 5**. The symmetry, total-mass,
-net-endpoint and
-shrink checks are short rational calculations.
+net-endpoint and shrink checks are short rational calculations.
 **Condition 5** is the large finite lemma: the theorem-specific, standard-library-only
 [`minimal_verify.py`](packing/cases/n11_fractional_certificate/minimal_verify.py) binds
 the certificate’s hash, examines 567,130,649 feasible event cells, and recomputes the

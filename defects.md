@@ -2,7 +2,7 @@
 
 # Defect log
 
-480 defects recorded across the packing toolchain.
+481 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
-| `review` | 297 | a human or agent reading the work against a checklist |
+| `review` | 298 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
 | `inspection` | 50 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 70 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 70 of 480, and none of the 99 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 70 of 481, and none of the 99 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 70 of 480, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 13 |
-| record | 146 |
+| record | 147 |
 | tooling | 176 |
 | docs | 111 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 70 of 480, and none of
 | --- | ---: |
 | soundness | 99 |
 | validity | 121 |
-| bookkeeping | 175 |
+| bookkeeping | 176 |
 | robustness | 62 |
 | performance | 23 |
 
@@ -717,6 +717,7 @@ This is the actionable list.
 | [D-478](packing/src/sqpack/cli/validate.py) | 2026-09-04 | tooling | performance | conservative | `review` | high | fixed | The n = 20 exact replay consumed the exhaustive suite's safety margin |
 | [D-479](packing/frontier/CERTIFICATE-REACH.md) | 2026-09-04 | record | bookkeeping | neutral | `gate` | medium | fixed | The certificate-reach report omitted sections its own renderer required |
 | [D-480](packing/src/sqpack/cli/validate.py) | 2026-09-04 | tooling | bookkeeping | conservative | `gate` | high | fixed | Frontier count gates stayed at sixty Nagamochi cases after T-020 reduced them to fifty-eight |
+| [D-481](packing/devtools/render_certificate_reach.py) | 2026-09-04 | record | bookkeeping |  | `review` | low | fixed | A generated document counted stop reasons its own sources do not record |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

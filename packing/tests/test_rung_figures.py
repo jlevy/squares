@@ -65,12 +65,14 @@ def test_the_reach_table_distinguishes_reports_from_retained_measurements() -> N
         "| 4.58 | 16.9628 | no raw run; frozen candidate mass 16.965735 |",
         "| 4.59 | 16.9303 | no raw run; frozen candidate mass 16.933080 |",
         "| 4.68 | 18.0000 | three site sets reported; no raw run |",
+        (
+            "| 4.80 | 18.916941 | no raw run; frozen 2,260-atom certificate has "
+            "feasible mass 18.922620 |"
+        ),
     )
     assert all(row in text for row in expected_rows)
-    assert (
-        "Only the displayed 3.95 value is itself recomputable from a tracked artifact" in text
-    )
-    assert "the artifact proves a feasible mass rather than optimality" in text
+    assert "The frozen artifacts at 3.95 and 4.80 recompute feasible masses" in text
+    assert "frozen candidates corroborate scale with" in text
 
 
 def test_t019_case_pages_bind_the_current_direct_certificate() -> None:
@@ -79,7 +81,7 @@ def test_t019_case_pages_bind_the_current_direct_certificate() -> None:
         "E-fractional-interval-decision",
     }
     frontier = RESULTS.parent
-    for n in (17, 18, 19):
+    for n in (17, 18):
         text = (frontier / f"n-{n:03d}.md").read_text(encoding="utf-8")
         _, frontmatter, body = text.split("---", 2)
         packing = safe_load(frontmatter)["packing"]
@@ -89,6 +91,18 @@ def test_t019_case_pages_bind_the_current_direct_certificate() -> None:
         assert "459/100 = 4.59" in body
         if n > 17:
             assert "direct" in body
+
+    t020_evidence = {
+        "E-n020-fractional-certificate",
+        "E-fractional-interval-decision",
+    }
+    for n in (19, 20, 21):
+        text = (frontier / f"n-{n:03d}.md").read_text(encoding="utf-8")
+        _, frontmatter, body = text.split("---", 2)
+        bound = safe_load(frontmatter)["packing"]["verified_lower_bound"]
+        assert str(bound["exact_form"]) == "24/5"
+        assert set(bound["evidence"]) == t020_evidence
+        assert "24/5 = 4.8" in body
 
 
 def test_t017_current_rung_is_bound_to_its_record_and_explanations() -> None:
@@ -210,7 +224,8 @@ def test_t018_literature_receipt_is_folded_into_canonical_surfaces() -> None:
     assert "Göbel 1979" in by_id[2]["refs"]
     assert "Kearney\u2013Shiu 2002" in by_id[5]["refs"]
     assert "Nagamochi 2005" in by_id[8]["refs"]
-    assert "T-018" in by_id[22]["note"]
+    assert "T-017 through T-020" in by_id[22]["note"]
+    assert "n = 11" in by_id[22]["note"]
 
 
 def test_recovered_trump_note_is_not_described_as_missing() -> None:
@@ -376,6 +391,19 @@ def test_certificate_figures_are_recomputed_from_atoms_not_trusted_from_the_file
     agreeing = copy.deepcopy(figures)
     object.__setattr__(agreeing, "stored_mass", Fraction(3, 2))
     assert certificate_consistency_problems(agreeing) == []
+
+
+def test_reach_margin_uses_the_first_integer_above_mass_not_the_recorded_target() -> None:
+    """T-020 is stored at n=20 but directly reaches n=19, where its margin is 0.077380."""
+    figures = CertificateFigures(
+        path="cases/n20_fractional_certificate/certificate.json",
+        n=20,
+        outer_side=Fraction(24, 5),
+        atom_count=2260,
+        mass=Fraction(946131, 50000),
+        stored_mass=Fraction(946131, 50000),
+    )
+    assert figures.margin == Fraction(3869, 50000)
 
 
 def test_a_non_certificate_artifact_is_silently_skipped(tmp_path: Path) -> None:

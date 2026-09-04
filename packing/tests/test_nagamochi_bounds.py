@@ -90,7 +90,7 @@ def test_a_wrong_value_is_refused(monkeypatch: pytest.MonkeyPatch) -> None:
         # Poison a case this record still carries. The value must stay under its reported
         # upper bound so the checker reports the intended arithmetic mismatch rather than
         # an inversion.
-        found[26]["verified_lower_bound"]["value"] = "5.1"
+        found[26]["verified_lower_bound"]["value"] = "5.5"
         return found
 
     monkeypatch.setattr(nagamochi, "cases", poisoned)

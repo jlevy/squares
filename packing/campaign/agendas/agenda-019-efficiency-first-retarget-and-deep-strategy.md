@@ -12,7 +12,8 @@ agenda:
   status: paused
   objective: >-
     Agenda 017's block moved seven registered cases and then hit a wall that is not
-    mathematical. The exact event-cell sweep grew superlinearly with the atom count until
+    mathematical. Reported exact-sweep timings rose superlinearly over the observed atom
+    counts until
     a single decision cost hours, one search spent fifty-five minutes failing to finish
     its first round on a parameter that was tuned two container sides ago, and four lanes
     were run on four cores with no budget until the load average reached 10.6. None of
@@ -22,7 +23,7 @@ agenda:
     table now says the cases worth attacking sit at substantially larger container sides
     than the ones just climbed, while cost as a function of side has not yet been
     measured. Two
-    efficiency-loop commitments carry measured baselines from Agenda 017's own logs and a
+    efficiency-loop commitments carry reported baselines from Agenda 017's narrative and a
     named target each. Two insight-iteration sessions then ask the mathematical questions
     the ceiling proof opened, which is what should choose the next targets rather than
     the ladder's momentum. One research-loop commitment spends the throughput on the
@@ -38,22 +39,21 @@ agenda:
     priority: 0
     question: >-
       The interval route decides more directions on fewer hypotheses than the exact sweep
-      and did so between 22.7 and 44.2 times faster at the two largest identically timed
-      atom counts, with the ratio widening between those measurements. Can the generator's own
+      and was reported 22.7, 44.2, and 31.1 times faster at the three largest paired atom
+      counts. The nonmonotone ratios lack raw timing and load records. Can the generator's own
       accept-or-reject decision move to it, keeping the exact sweep for retention and the
       exhaustive tier, and what does that do to the tail of a run?
     budget: >-
       120 elapsed minutes, Opus at maximum thinking, efficiency-loop throughout.
       The baseline is already reported and is the entry condition, not a conclusion:
       on the same frozen bytes, 425 atoms took the exact sweep 181 s against the interval
-      route's 9.4 s; 1184 atoms took 1473 s against 65 s; and 2097 atoms took 4866 s
-      against 110 s. The last two pairs were timed together and give ratios of 22.7 and
-      44.2. Their two-point effective exponents are 2.09 for the exact sweep and 0.92 for
-      the interval route. Those are empirical slopes between two certificates, not
-      asymptotic complexity results.
-      The introducing commit retains the last pair and the evidence entry retains its
-      values, but no raw timing transcript, hardware description, or load trace survives;
-      reproduce all three pairs before treating them as benchmark-quality measurements.
+      route's 9.4 s; 1184 atoms took 1473 s against 65 s; 2097 atoms took 4866 s against
+      110 s; and 2260 atoms took 5378 s against 173 s. The three largest pairs give ratios
+      of 22.7, 44.2, and 31.1. A three-point log-log fit over those pairs gives exponents
+      2.04 for the exact route and 1.29 for the interval route; 0.92 is only the
+      1184-to-2097 interval slope. These are sparse operator reports, not asymptotic
+      complexity results. No raw timing transcript, hardware description, or load trace
+      survives; reproduce the pairs before treating them as benchmark-quality measurements.
       0--30 profile the exact sweep at four atom counts spanning 168 to 2097 and fit the
       exponent, so the shape is measured rather than asserted. Record which phase
       dominates -- event-cell construction, the prefix sum,
@@ -68,9 +68,9 @@ agenda:
       80--120 measure what the change buys on a case that could not be afforded before,
       and record the benchmark whether the answer is good or bad.
     entry: >-
-      Agenda 017's run logs and certificate artifacts are retained. The newest paired
-      times survive only in the introducing commit and evidence prose, so BC-190 begins
-      by reproducing them. devtools.decide_certificate is the retention gate, and the
+      Agenda 017's certificate artifacts are retained. Its run and timing claims survive
+      only in narrative and evidence prose without raw logs, so BC-190 begins by
+      reproducing them. devtools.decide_certificate is the retention gate, and the
       fractional tier is green.
     exit: >-
       A benchmark record with the fitted cost exponent for the exact sweep, a named
@@ -120,8 +120,9 @@ agenda:
       it returns. 110--120 record a core budget: four lanes ran on four cores at load 10.6
       and everything ran about two and a half times slower than it needed to.
     entry: >-
-      The run logs for n = 12, 17, 18 and 20 at the sides named, and the two n = 20 runs
-      at different grids, are retained and comparable.
+      Narrative reports for n = 12, 17, 18 and 20, including the two n = 20 grid choices,
+      are available but their raw logs are not retained. Reproduce them under one recorded
+      environment before comparison.
     exit: >-
       A benchmark record for each of the three, a site-density rule expressed as a
       function of the container side rather than a constant, a decision on the default
@@ -148,18 +149,17 @@ agenda:
       90 elapsed minutes, Opus at maximum thinking, insight-iteration. No experiment runs
       inside this commitment and no hypothesis is certified in it.
       The material is in the record: frontier/CERTIFICATE-REACH.md, the ceiling derivation
-      in sqpack.fractional.certificate, and the six side-level program values reported
+      in sqpack.fractional.certificate, and the seven side-level program values reported
       for planning -- 11.0000 at 3.82, 11.9706 at 3.95, 11.9936 at 3.96, 16.9628 at
-      4.58, 16.9303 at 4.59, and 18.0000 at 4.68. Only the 3.95 value is exactly
-      reproducible from a retained artifact, where it is a feasible mass rather than a
-      proved optimum; the reach table states the weaker evidence behind the other rows.
-      The session's first duty is to be honest about that curve. The five values reported
-      before the 4.68 run were described as consistent with a quadratic, but the raw runs
-      are not all retained and the sixth value cannot simply be folded into that fit. No
+      4.58, 16.9303 at 4.59, 18.0000 at 4.68, and 18.916941 at 4.80. The 3.95 and
+      4.80 frozen artifacts recompute feasible masses, not optima; frozen candidates at
+      3.96, 4.58, and 4.59 carry different feasible masses. The raw objective runs are not
+      retained. The session's first duty is to be honest about that heterogeneous record:
+      it does not support a growth trend or unrestricted covering-value fit. No
       rung has ever been claimed from an extrapolation, and the reach table's prize column
       is what the ceiling allows rather than what a search reaches. If the session's
-      conclusion depends on a fit, it must say so and name the retained measurement that
-      would settle it.
+      conclusion depends on a fit, it must say so and name the retained restricted-program
+      measurement that would test it.
       Questions worth the time: whether the covering value's growth has a derivation
       rather than a fit; whether a certificate found at one side transfers to a nearby
       side or to a larger n as a warm start, given that the covering program does not
@@ -325,40 +325,47 @@ methods that fail differently and agreed on the least covered mass to the digit.
 | `n = 19`, `20`, `21` | `24/5` | `T-020` | `S4` |
 
 **Open, with different evidence boundaries.** Two sides were attacked and neither
-settled. The n = 11 artifacts are retained; the n = 18 figures are an operator report
-without its raw log, checkpoint, or candidate, so that run must be reproduced before
-its details can be treated as validated measurements.
+settled. The n = 11 exact rejection object is retained, but its covering-LP histories
+survive only in narrative.
+The n = 18 figures are an operator report without a raw log, checkpoint, or candidate.
+Reproduce either run before treating its execution details as validated measurements.
 
 - `n = 18` at `117/25 = 4.68`. Three site sets, 538, 578 and 618 orbits, all returned a
   restricted optimum of exactly `18.000000`, the third after 157 row rounds and 7056 s.
-  Adding sites can only lower a restricted optimum and it did not move.
-  Either the covering value is at or above eighteen, or the optimum sits on a degenerate
-  vertex. `T-019`’s `next_rung` carries both readings and the evidence for each.
-- `n = 11` at `19/5 + 1/100 = 3.82`. Two independent site sets stop at exactly eleven,
-  and the rejection route is far from closing: the exact maximum pointwise depth is
+  Adding sites can only lower a restricted optimum and the reported value did not move.
+  The report does not separate a genuinely high unrestricted covering value from tested
+  site sets that remain short of it or a restricted optimum on a degenerate vertex.
+  `T-019`’s `next_rung` carries the evidence boundary.
+- `n = 11` at `19/5 + 1/100 = 3.82`. The result narrative reports that two site sets
+  reached restricted objective eleven; one row loop converged and the other stopped with
+  violated placements.
+  The rejection route is far from closing: the exact maximum pointwise depth is
   `1925/1152`, which caps the feasible total at `1152/175` against the eleven a ceiling
   needs. `T-018`’s `next_rung` has the full account.
 
-**Where the method stops, which is now proved rather than guessed.** No certificate for
-`n` exists above `ceil(sqrt(n)) * B`. `n = 12` is foreclosed against its conjectured
-`4`. At `n = 20` and `n = 21`, the ceiling leaves `0.1885` above the current result and
-prevents this method from reaching within less than `0.0115` of the upper bound; it does
-not show that certificates fill that runway. `n = 11`, `17`, `18` and `19` are limited
-by their best known packings rather than by the ceiling.
+**Where one fixed-net certificate stops, which is now proved rather than guessed.** No
+certificate for `n` on a fixed finite net exists above `ceil(sqrt(n)) / (1 + D)` over
+the permitted shrink.
+The current 181-direction net is foreclosed against `n = 12`’s conjectured `4`; at
+`n = 20` and `n = 21` its ceiling leaves `0.1885` above the current result and sits
+`0.0115` below the upper bound.
+This does not show that certificates fill the runway or exclude a refined-net family
+plus a separate limiting argument.
+At `n = 11`, `17`, `18`, and `19`, the recorded packings bind before this ceiling.
 
 **What the next block must not skip.** `BC-190` and `BC-191` come first because the
-retention gate is now the dominant observed cost: one operator report gives `5378 s` at
-2260 atoms. The few retained timing reports suggest steep growth but do not establish a
-complexity law. Reproduce the measurements and reduce the gate cost before committing a
-block to larger certificates.
+retention gate is a large projected one-time cost: one unretained operator report gives
+`5378 s` at 2260 atoms.
+Row generation took 79–94% of measured rounds, and whole-run dominance as a function of
+side is unmeasured. Reproduce the measurements and reduce avoidable decision cost before
+committing a block to larger certificates.
 
 ## Why efficiency before bounds
 
 Agenda 017 moved seven registered cases in a day.
 It also spent its time like this.
-The 2,097- and 2,260-atom pairs are operator-reported same-run measurements preserved
-in introducing prose without raw timing transcripts, machine descriptions, or load
-traces:
+All timing pairs below are operator reports preserved in prose without raw timing
+transcripts, machine descriptions, or load traces:
 
 | Where the time went | Measured |
 | --- | --- |
@@ -378,11 +385,11 @@ The interval route decides **361 directions where the exact sweep decides 181**,
 one fewer hypothesis — deciding on the doubled net it never invokes the `D4` reflection,
 so it does not need **Condition 1** at all — and ran 22.7, 44.2, and 31 times faster in
 the three reported pairs at 1184, 2097, and 2260 atoms.
-The ratios are neither monotone nor controlled for machine load. The effective slopes
-that can be fitted to these few observations describe those reports only; `BC-190`
-exists to reproduce them and determine whether any scaling pattern persists.
-The exact sweep belongs at the retention gate, where correctness is the only thing that
-matters and a long checkpoint is affordable.
+The ratios are neither monotone nor controlled for machine load.
+The effective slopes that can be fitted to these few observations describe those reports
+only; `BC-190` exists to reproduce them and determine whether any scaling pattern
+persists. The exact sweep belongs at the retention gate, where correctness is the only
+thing that matters and a long checkpoint is affordable.
 Whether it belongs in the generator’s inner loop is a question nobody has asked, and
 `BC-190` asks it.
 
@@ -405,12 +412,11 @@ rounding and verification costs have not been measured; that is part of `BC-191`
 It is not one, for two reasons the table itself states.
 
 The prize column is what the **ceiling** allows.
-The real limit is the covering value at that side, and six side-level program values
-have been reported.
-Only the displayed 3.95 value is exactly reproducible from a retained
-artifact; the other run objectives lack raw logs or checkpoints here.
-The first five were described as consistent with a quadratic, but incomplete retention
-and the later 4.68 report make even that fit planning conjecture.
+The real limit is the covering value at that side, and seven heterogeneous side-level
+restricted-program values have been reported through 4.80. The frozen 3.95 and 4.80
+artifacts reproduce feasible masses, not optima; other run objectives lack raw logs or
+checkpoints, and several frozen candidate masses differ from the reported objectives.
+These values do not justify a growth trend or an unrestricted covering-value fit.
 No rung on this branch was ever claimed from one.
 
 And cost grows with the container.
@@ -441,9 +447,9 @@ placement, and the loop’s final least covered mass is still reported beside th
 objective.
 
 And rule seven still holds: read the evidence, not a reconstruction of it.
-The one pair without a retained raw transcript is labelled above, and the estimate of a
-round at `5.5` is labelled as an estimate and written down before the run so the run can
-contradict it.
+The timing pairs without retained raw transcripts are labelled above, and the estimate
+of a round at `5.5` is labelled as an estimate and written down before the run so the
+run can contradict it.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

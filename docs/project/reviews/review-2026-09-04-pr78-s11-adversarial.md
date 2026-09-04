@@ -229,9 +229,9 @@ The later `interval.py` checkpoint added a valuable method-distinct decision: di
 rounding interval arithmetic and branch and bound over centre boxes, on a doubled net
 that does not rely on D4 symmetry.
 Its public `directions=` argument was documented as a control-only restriction, but the
-implementation marked **Condition 5** as holding whenever every selected direction certified.
-The resulting `IntervalVerdict.accepted` was true even if 358 of 361 directions had not
-been searched, and the tests explicitly required this outcome.
+implementation marked **Condition 5** as holding whenever every selected direction
+certified. The resulting `IntervalVerdict.accepted` was true even if 358 of 361
+directions had not been searched, and the tests explicitly required this outcome.
 
 This is a direct sampled-to-universal soundness failure.
 It did not affect T-018 because the checkpoint was not yet cited by any evidence entry,
@@ -239,14 +239,15 @@ but a future caller could have promoted a diagnostic to a false theorem verdict.
 
 **Resolution:** a restricted run still reports per-direction certificates, enclosures,
 and decisive refutations, but an all-certified sample is `undecided`; only the complete
-doubled net can establish **Condition 5**. The tests require both sides of this contract.
-D-445 records the defect.
+doubled net can establish **Condition 5**. The tests require both sides of this
+contract. D-445 records the defect.
 
 ### F7: Blocker in the interval checkpoint, fixed here: integer mass could overflow
 
-The checkpoint scaled rational weights into `numpy.int64`, summed them there for **Condition 2**, and
-used them in Boolean-matrix products for **Condition 5**. It bounded `n × scale`, but a candidate is
-allowed to carry an arbitrarily large nonnegative total before **Condition 2** rejects it.
+The checkpoint scaled rational weights into `numpy.int64`, summed them there for
+**Condition 2**, and used them in Boolean-matrix products for **Condition 5**. It
+bounded `n × scale`, but a candidate is allowed to carry an arbitrarily large
+nonnegative total before **Condition 2** rejects it.
 A large weight, total, or subset sum could therefore wrap before the rejection and
 corrupt both conditions.
 
@@ -290,8 +291,8 @@ one—but it made the stronger-looking public mode logically weaker than the ord
 
 **Resolution:** every direction is certified only when all boxes close and its lower
 bound reaches the exact unit mass scale.
-A sampled upper bound below one refutes **Condition 5** in either mode, and whole-certificate
-acceptance rechecks every direction.
+A sampled upper bound below one refutes **Condition 5** in either mode, and
+whole-certificate acceptance rechecks every direction.
 The former `[0,0]` acceptance is a must-refuse regression.
 D-435 records the defect.
 
@@ -306,8 +307,8 @@ Measurements grew from 4,631 boxes at `10⁻²`, to 274,303 at `10⁻⁴`, to 33
 
 **Resolution:** each direction has a conservative 100,000-box work budget.
 Exhaustion returns lower bound zero and an explicit non-acceptance unless an admissible
-sampled point already refutes **Condition 5**. The exact-seam regression now finishes in under a
-second. None of the three full retained controls stalls or exhausts the budget.
+sampled point already refutes **Condition 5**. The exact-seam regression now finishes in
+under a second. None of the three full retained controls stalls or exhausts the budget.
 D-447 records the defect.
 
 ### F11: Medium in the shared sweep, fixed here: a reported minimum centre could be infeasible
@@ -367,9 +368,9 @@ replay raise the current inventory to 38; the same explicit budget covers them.
 
 The late parent correctly proves that a certificate with `m = ceil(sqrt(n))` must
 satisfy `L ≤ mB < m`: if `L > mB`, the container holds `m²` pairwise disjoint closed
-axis-parallel `B`-squares, and **Condition 2** contradicts the mass that **Condition 5** assigns them.
-It then says the method can never settle a case such as `n = 12` whose value is the grid
-bound `m = 4`.
+axis-parallel `B`-squares, and **Condition 2** contradicts the mass that **Condition 5**
+assigns them. It then says the method can never settle a case such as `n = 12` whose
+value is the grid bound `m = 4`.
 
 That last inference is too strong.
 For the uniform half-tangent net with endpoint `T` and `K` gaps, `D = T/K` and the
@@ -387,13 +388,13 @@ D-452 records the distinction.
 ### F15: Low in the late parent, fixed here: the net endpoint was described as rounded down
 
 The new certificate-reach renderer says `207107/500000` rounds `tan(π/8)` down.
-Its exact **Condition 3** slack is `T² + 2T − 1 = 309449/250000000000 > 0`, so `T` is strictly above
-the positive root `sqrt(2) − 1 = tan(π/8)`. Rounding it down would make the direction
-net stop short of `π/4` and fail the theorem’s endpoint premise.
+Its exact **Condition 3** slack is `T² + 2T − 1 = 309449/250000000000 > 0`, so `T` is
+strictly above the positive root `sqrt(2) − 1 = tan(π/8)`. Rounding it down would make
+the direction net stop short of `π/4` and fail the theorem’s endpoint premise.
 
 **Resolution:** the comment now says that `T` is the rational endpoint just above
-`tan(π/8)`. The existing exact **Condition 3** regression pins the direction of the inequality; D-453
-records the prose error.
+`tan(π/8)`. The existing exact **Condition 3** regression pins the direction of the
+inequality; D-453 records the prose error.
 No certificate value or computation changed.
 
 ### F16: High integration defect, fixed here: the moving parent reused D-441
@@ -476,12 +477,12 @@ D-459 records the narrative correction.
 
 The retention-command docstring said the exact and interval routes “share no modelling
 assumption.” Both consume the same `Certificate` representation and implement
-**Conditions 2–4**.
-Their valuable independence is narrower: event-cell enumeration and interval
-branch-and-bound make method-distinct **Condition 5** decisions with different failure modes.
+**Conditions 2–4**. Their valuable independence is narrower: event-cell enumeration and
+interval branch-and-bound make method-distinct **Condition 5** decisions with different
+failure modes.
 
-**Resolution:** the docstring now states both the shared contract and the distinct **Condition 5**
-methods, and a regression pins that boundary.
+**Resolution:** the docstring now states both the shared contract and the distinct
+**Condition 5** methods, and a regression pins that boundary.
 D-460 records the overstatement.
 
 ### F22: Low robustness defect, fixed here: two long phase results were still buffered
@@ -578,8 +579,8 @@ The `n = 18` and `n = 19` bound fields also cited historical evidence that prove
 current certificate did not reach `n = 20`, although its mass below 17 makes it directly
 valid there—it simply does not improve Nagamochi’s stronger bound.
 
-**Resolution:** the case bodies now state the current first-party certificate, direct **Condition 2**
-composition, and correct gaps.
+**Resolution:** the case bodies now state the current first-party certificate, direct
+**Condition 2** composition, and correct gaps.
 Current bound fields cite only the exact and interval certificate evidence; historical
 results remain labeled as predecessors.
 A cross-page regression binds all three frontmatter records and bodies; D-467 records
@@ -798,14 +799,15 @@ An honest proof must either rerun an exhaustive finite reduction or carry a
 proof-producing partition receipt; a table of 181 reported minima is not enough.
 
 The smallest practical audit surface is therefore a combination: the one-minute proof,
-the exact **Condition 5** formula printed in `t-018-proof.md`, the immutable certificate hash, and a
-theorem-specific standard-library checker.
-Its proof-critical **Condition 5** geometry, scoring, and driver occupy about 156 lines; the whole
-executable is 346 lines including strict input, declaration, checksum, symmetry,
-arithmetic, output, and mutation checks.
-It recomputes 567,130,649 cells and the exact minimum, then demonstrates a **Condition 5** failure
-after multiplying every weight by `3999/4001`. This is materially smaller than the
-general 650-line portable verifier without hiding the continuum step in an assertion.
+the exact **Condition 5** formula printed in `t-018-proof.md`, the immutable certificate
+hash, and a theorem-specific standard-library checker.
+Its proof-critical **Condition 5** geometry, scoring, and driver occupy about 156 lines;
+the whole executable is 346 lines including strict input, declaration, checksum,
+symmetry, arithmetic, output, and mutation checks.
+It recomputes 567,130,649 cells and the exact minimum, then demonstrates a **Condition
+5** failure after multiplying every weight by `3999/4001`. This is materially smaller
+than the general 650-line portable verifier without hiding the continuum step in an
+assertion.
 
 The companion
 [`t-018-proof-visual.svg`](../../../packing/cases/n11_fractional_certificate/t-018-proof-visual.svg)
@@ -837,8 +839,9 @@ pins both direct and transitive dependencies and states its non-goals beside the
 
 This is a successful feasibility result, not a formal proof of `s(11) ≥ 381/100`. It
 does not yet define oriented squares or `s(n)`, prove the nearest-angle geometry, load
-the 1,121 atoms, or prove **Condition 5**. The remaining ordinary geometry is plausibly several
-focused days. Formalizing arrangement correctness and the full **Condition 5** computation is the
+the 1,121 atoms, or prove **Condition 5**. The remaining ordinary geometry is plausibly
+several focused days.
+Formalizing arrangement correctness and the full **Condition 5** computation is the
 largest remaining task, plausibly one to three or more weeks.
 Direct kernel reduction of 567,130,649 rational cells would be a poor design.
 
@@ -853,8 +856,8 @@ compiler-trusting axiom, which defeats the strongest third-party-verification go
 **Disposition:** full Lean formalization is feasible, but the one-minute proof plus the
 346-line exact checker is presently simpler and more compelling.
 Keep the compiled Lean kernel as a formal audit of the load-bearing inequality and as
-the starting point for a future proof-producing **Condition 5** receipt; do not present it as
-validation of the headline claim.
+the starting point for a future proof-producing **Condition 5** receipt; do not present
+it as validation of the headline claim.
 
 ## Exact certificate facts
 
@@ -870,10 +873,10 @@ validation of the headline claim.
 | containment product | `899996306539/900000000000` | **Condition 4** slack `3693461/900000000000` |
 | global covered-mass minimum | `4001/4000` | **Condition 5** slack `1/4000`; first attained at direction zero and centre `(27/50,27/50)` |
 
-The small **Condition 4** and **Condition 5** margins do not create a numerical problem because every deciding
-operation is exact.
-They do make decimal transcription or floating-point reimplementation
-an inappropriate trust path.
+The small **Condition 4** and **Condition 5** margins do not create a numerical problem
+because every deciding operation is exact.
+They do make decimal transcription or floating-point reimplementation an inappropriate
+trust path.
 
 ## Independent validation
 
@@ -911,8 +914,8 @@ below-one interval enclosure, and an exact unresolvable interval seam.
 The repaired shared and standalone entry points refuse the signed object before
 verification.
 
-The interval lane supplies decision-method diversity for **Condition 5**, but not outside authorship
-or proof-assistant verification.
+The interval lane supplies decision-method diversity for **Condition 5**, but not
+outside authorship or proof-assistant verification.
 Every positive decision still relies on the rational direction-net containment lemma,
 and every checker was produced within the project.
 The frozen `19/5` third-party bundle separately reproduces Massaccesi’s `n = 17` result
@@ -1027,7 +1030,8 @@ The method sources change attribution, not the validity or priority of the concr
    essential before sending a reader to the proof and checker.
 8. The late parent’s general retention command now binds exact JSON types and every
    declared theorem value, refuses before expensive work where possible, requires both
-   **Condition 5** routes in full mode, and has negative controls for every decision edge.
+   **Condition 5** routes in full mode, and has negative controls for every decision
+   edge.
 
 ### Stronger evidence after this review
 
@@ -1039,12 +1043,13 @@ The method sources change attribution, not the validity or priority of the concr
    hashes they checked.
    This would turn code-level diversity into reviewer independence.
 3. **Formalize the stable kernel, selectively.** The Lean spike above shows that the
-   nonnegative finite-measure counting lemma and rational **Conditions 1–4** arithmetic are small.
-   Formalizing rotated-square containment and the full 567-million-cell **Condition 5** decision is
-   feasible in principle but is not currently the simplest audit surface.
-4. **Use proof-producing verification for Condition 5.** Have the enumerator emit a compact,
-   versioned arrangement certificate and let a much smaller checker validate every
-   feasibility interval and cell lower bound.
+   nonnegative finite-measure counting lemma and rational **Conditions 1–4** arithmetic
+   are small. Formalizing rotated-square containment and the full 567-million-cell
+   **Condition 5** decision is feasible in principle but is not currently the simplest
+   audit surface.
+4. **Use proof-producing verification for Condition 5.** Have the enumerator emit a
+   compact, versioned arrangement certificate and let a much smaller checker validate
+   every feasibility interval and cell lower bound.
    The goal is to reduce trust in a 500-line search program, not to add another copy of
    it.
 5. **Add a second proof-producing method if assurance must rise further.** The interval-

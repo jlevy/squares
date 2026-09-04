@@ -1,11 +1,11 @@
 # Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate
 
 This directory is a feasibility spike.
-It does not prove **Condition 5**, replay the 1,121-atom certificate, or prove the headline
-theorem `s(11) ≥ 381/100`. Its Lean source contains no `sorry` terms, custom axioms, or
-uses of `native_decide`. The spike was checked with Lean 4.32.1 and Mathlib 4.32.1. The
-complete local toolchain and Mathlib cache occupied approximately 10 GB; after the cache
-was present, `Kernel.lean` checked in 3.6–4.6 seconds in the prototype.
+It does not prove **Condition 5**, replay the 1,121-atom certificate, or prove the
+headline theorem `s(11) ≥ 381/100`. Its Lean source contains no `sorry` terms, custom
+axioms, or uses of `native_decide`. The spike was checked with Lean 4.32.1 and Mathlib
+4.32.1. The complete local toolchain and Mathlib cache occupied approximately 10 GB;
+after the cache was present, `Kernel.lean` checked in 3.6–4.6 seconds in the prototype.
 Two clean project builds using the populated dependency cache took 5.7 and 9.4 seconds;
 their axiom audits took 2.6–2.7 seconds on the development machine.
 The [one-minute proof](../t-018-proof.md) and
@@ -22,7 +22,8 @@ It proves:
 - the set-based form that derives a unique atom owner from pairwise-disjoint membership;
 - preservation of atomic mass under an involution represented by a permutation of the
   atoms;
-- the certificate’s exact **Condition 2**, **Condition 3**, and **Condition 4** scalar inequalities; and
+- the certificate’s exact **Condition 2**, **Condition 3**, and **Condition 4** scalar
+  inequalities; and
 - the final algebraic inequality used in the support-function containment step.
 
 The counting core is the contradiction
@@ -64,8 +65,9 @@ above. `.lake/` contains downloaded and built files and is not part of this pack
 
 The spike does not define oriented squares, packings, or the infimum `s(n)`. It also
 does not prove the diagonal-reflection orientation reduction, nearest-angle lemma,
-half-angle tangent formula, or continuum-to-finite arrangement reduction used by **Condition 5**. It
-contains no certificate data and performs no 181-direction computation.
+half-angle tangent formula, or continuum-to-finite arrangement reduction used by
+**Condition 5**. It contains no certificate data and performs no 181-direction
+computation.
 
 A complete Lean proof would need a proof-producing **Condition 5** checker.
 Direct kernel evaluation of the Python verifier’s 567,130,649 rational placement cells

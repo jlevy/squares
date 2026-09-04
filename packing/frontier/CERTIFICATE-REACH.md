@@ -3,15 +3,16 @@
 # Where the fractional certificate can still go
 
 The most a weighted fractional unavoidable-set certificate could add to each
-case's lower bound, at the 181-direction net every retained certificate uses.
+case's verified lower bound in this register, at the 181-direction net every
+retained certificate uses.
 `ceiling` is `ceil(sqrt(n)) / (1 + D)`, proved in
 `sqpack.fractional.certificate.ceiling_side`.
 
 **`prize` is what the ceiling allows, not what a search will reach.** The real
 limit is the covering value: a certificate exists at side `L` only where the
 least total mass that covers every admissible `B`-square falls below `n`, and
-that value is well below the ceiling wherever the ceiling is loose. Six
-side-level program values have been reported, each at most an upper bound on
+that value can bind below the ceiling. Seven restricted-program values have
+been reported, each at most an upper bound on
 the unrestricted covering value at its side:
 
 | side | reported value | evidence retained here |
@@ -29,7 +30,7 @@ optima. At 3.96, 4.58 and 4.59, frozen candidates corroborate scale with
 different feasible masses; they do not reproduce the reported objective values.
 The other figures
 survive only in repository narrative and commit
-history, without their raw run logs or checkpoints. The six points are consistent
+history, without their raw run logs or checkpoints. The seven points are consistent
 with a quadratic in the side, but that fit is planning conjecture, not independently
 verified measurement. Rank on `prize` to choose where to look; measure and retain
 the run before believing any extrapolation.
@@ -108,8 +109,8 @@ case is open and its conjectured value is that bound.
 | 78 | 9 | 8.9373 | 9.0000 | 8.9793 | ceiling | +0.0421 |
 | 97 | 10 | 9.9443 | 10.0000 | 9.9770 | ceiling | +0.0328 |
 | 12 | 4 | 3.9600 | 4.0000 | 3.9908 | ceiling | +0.0308 |
-| 5 | 3 | 2.7071 | 2.7071 | 2.9931 | packing | -0.0000 |
-| 10 | 4 | 3.7071 | 3.7071 | 3.9908 | packing | -0.0000 |
+| 5 | 3 | 2.7071 | 2.7071 | 2.9931 | packing | +0.0000 |
+| 10 | 4 | 3.7071 | 3.7071 | 3.9908 | packing | +0.0000 |
 
 ## Measured attainment
 
@@ -118,8 +119,7 @@ best packing and ceiling. `ratio` is the retained lower bound divided by
 whichever of the two `limited by` names -- the only honest denominator, since
 the other one was never in reach.
 
-| n | package | retained lower bound | best packing | ceiling
-| limited by | ratio |
+| n | package | retained lower bound | best packing | ceiling | limited by | ratio |
 | ---: | --- | ---: | ---: | ---: | --- | ---: |
 | 11 | n11_fractional_certificate | 3.8100 | 3.8771 | 3.9908 | packing | 0.98270 |
 | 12 | n12_fractional_certificate | 3.9600 | 4.0000 | 3.9908 | ceiling | 0.99228 |
@@ -131,19 +131,24 @@ the other one was never in reach.
 **This is an extrapolation from three points, not a measurement.** The three
 packing-limited rows above -- n = 11, n = 17, n = 19 -- land inside a band
 0.001 wide, and their mean is the `ratio` this section's numbers all come
-from: `0.98229`. That the three numbers are exact rationals decided by
+from: `0.98229`. That the three certificate sides are exact rationals decided by
 an exact verifier does not make their mean a rate. No rung in this register
 has ever been claimed from a fitted curve, and this one is not the exception:
 it is offered here as a place to look, not as a result.
 
 The ratio is also not purely about how good a covering value the method can
 reach -- it is an observation about where searches were stopped as much as
-about where they could go. Two of the three runs behind it were halted on
-projected cost before they answered whether their side could be pushed
-higher; only one ran its covering search to a converged optimum (see each
-case's `next_rung` in `frontier/results.yaml`). A ratio built half from where
-searches were stopped and half from where they could go is not a rate to
-spend a rung's confidence on.
+about where they could go. The three runs behind it stopped for three
+different reasons, and only one of them is a statement about the method.
+An operator report says one n = 11 finite-site row loop converged to restricted
+optimum 11; no raw run or checkpoint survives. Another report says T-020's
+n = 20-targeted build stopped at round 9 on
+projected cost, four rounds short of its planned stopping point. n = 17 has
+no stop reason recorded for its own build at all --
+the stop narrated in its `next_rung` belongs to an adjacent probe at
+n = 18, not to the certificate this row measures. A ratio built from three
+runs, one of which is reported to have completed its restricted row loop, is not a rate
+to spend a rung's confidence on (`D-481`).
 
 `predicted` below is `min(ratio * best_packing, ceiling)` and `predicted
 gain` is `predicted - lower`, clamped at zero. Read them as where to look
@@ -153,8 +158,7 @@ reaches, not this extrapolation.
 
 ## Ranked by predicted gain
 
-| n | m | lower | best packing | ceiling | limited by | prize | predicted
-| predicted gain |
+| n | m | lower | best packing | ceiling | limited by | prize | predicted | predicted gain |
 | ---: | ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: |
 | 51 | 8 | 7.1644 | 7.7008 | 7.9816 | packing | +0.5364 | 7.5644 | +0.4000 |
 | 26 | 6 | 5.1231 | 5.6213 | 5.9862 | packing | +0.4982 | 5.5218 | +0.3987 |
@@ -212,8 +216,8 @@ reaches, not this extrapolation.
 | 76 | 9 | 8.8102 | 9.0000 | 8.9793 | ceiling | +0.1691 | 8.8406 | +0.0304 |
 | 17 | 5 | 4.5900 | 4.6755 | 4.9885 | packing | +0.0855 | 4.5927 | +0.0027 |
 | 60 | 8 | 7.8557 | 8.0000 | 7.9816 | ceiling | +0.1260 | 7.8583 | +0.0027 |
-| 5 | 3 | 2.7071 | 2.7071 | 2.9931 | packing | -0.0000 | 2.6592 | +0.0000 |
-| 10 | 4 | 3.7071 | 3.7071 | 3.9908 | packing | -0.0000 | 3.6415 | +0.0000 |
+| 5 | 3 | 2.7071 | 2.7071 | 2.9931 | packing | +0.0000 | 2.6592 | +0.0000 |
+| 10 | 4 | 3.7071 | 3.7071 | 3.9908 | packing | +0.0000 | 3.6415 | +0.0000 |
 | 11 | 4 | 3.8100 | 3.8771 | 3.9908 | packing | +0.0671 | 3.8084 | +0.0000 |
 | 12 | 4 | 3.9600 | 4.0000 | 3.9908 | ceiling | +0.0308 | 3.9292 | +0.0000 |
 | 19 | 5 | 4.8000 | 4.8856 | 4.9885 | packing | +0.0856 | 4.7991 | +0.0000 |

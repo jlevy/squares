@@ -3205,14 +3205,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 480 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 481 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 99 | asserted something false about the mathematics |
 | validity | 121 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 175 | recorded something its own evidence contradicts |
+| bookkeeping | 176 | recorded something its own evidence contradicts |
 | robustness | 62 | did not finish, or finished only by luck |
 | performance | 23 | worked, but cost far more than it should |
 
@@ -3222,10 +3222,10 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy defects in 480, and no soundness defect
-ever.** Every soundness failure was found by a control cell whose answer was known in
-advance, a rule written down before the measurement, a generated view contradicting its
-source, or someone reading carefully.
+**The automated gate has caught seventy defects in 481, and no soundness defect ever.**
+Every soundness failure was found by a control cell whose answer was known in advance, a
+rule written down before the measurement, a generated view contradicting its source, or
+someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Gate-detected entries here are mechanical process, implementation, or
 test-validity failures, found by contiguity, integration, mutation-anchor,
@@ -3682,9 +3682,10 @@ agrees, and new components inheriting the perimeter—that apply to code not yet
 ## Where This Stands
 
 **As of 2026-09-04 the project’s largest live result is the fractional lower-bound lane,
-and it is not the cartography spine.** A weighted fractional unavoidable-set certificate
-— Burns’s and Massaccesi’s theorem, this project’s instances and generator — moved seven
-registered cases in one day.
+and it is not the cartography spine.** Its weighted-resource lineage runs through Göbel,
+Kearney–Shiu, Nagamochi, and Bentz; the recent pure-atomic rational direction-net
+architecture follows Burns, and the LP instance and parameter line follows Massaccesi.
+This project’s instances and generator moved seven registered cases in one day.
 `s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first public movement of
 that bound located by the recorded search after Stromquist stated `2 + 4/sqrt(5)` in
 2003 and the only S5 result in the register, `n = 11` being the smallest open case.
@@ -3695,20 +3696,19 @@ step, is [T-019](packing/frontier/RESULTS.md) and displaces Massaccesi’s publi
 `4.5058` by `0.0842`. `s(19)`, `s(20)` and `s(21) >= 24/5` is
 [T-020](packing/frontier/RESULTS.md), which carries `n = 19` past `T-019` the same
 evening and displaces Nagamochi’s 2005 closed form at the other two — `1 + sqrt(13)` and
-`1 + sqrt(14)` — by `0.194449` and `0.058343` against the verified baselines. Friedman’s
-DS7 had already reported `6sqrt(2)-4` for `n = 19–20` and approximately `4.7438` for
-`n = 21` by 2000; the last makes the movement past the strongest located report about
-`0.0562`. No retained source reaches `4.8`.
-All four stand at V4 and at least C4: each was decided twice from frozen bytes by an
-exact event-cell sweep and by an interval branch and bound with directed rounding.
+`1 + sqrt(14)` — by `0.194449` and `0.058343` against the verified baselines.
+Friedman’s DS7 had already reported `6sqrt(2)-4` for `n = 19–20` and approximately
+`4.7438` for `n = 21` by 2000; the last makes the movement past the strongest located
+report about `0.0562`. No retained source reaches `4.8`. All four stand at V4 and at
+least C4: each was decided twice from frozen bytes by an exact event-cell sweep and by
+an interval branch and bound with directed rounding.
 T-018 reaches C5 on the mapped adversarial review retained here; T-017, T-019, and T-020
 remain at C4. The methods share the `Certificate` representation and **Conditions 2–4**
 but make method-distinct **Condition 5** decisions with different failure modes,
-agreeing exactly on the least covered mass. No one outside the project has reviewed any
-of them; a
-self-contained third-party package ships at
-`packing/cases/n11_fractional_certificate/thirdparty/` so that a stranger can decide the
-`19/5` rung without trusting this repository.
+agreeing exactly on the least covered mass.
+No one outside the project has reviewed any of them; a self-contained third-party
+package ships at `packing/cases/n11_fractional_certificate/thirdparty/` so that a
+stranger can decide the `19/5` rung without trusting this repository.
 
 **That lane also has a measured edge, which is the more useful thing to carry.**
 `n = 11` at `3.82` was tested against both pre-registered routes, and neither produced a
@@ -3724,12 +3724,12 @@ method at `3.82` and not a claim about `tau*`; another site set remains possible
 **Each finite certificate also has a ceiling that is structural rather than measured.**
 No certificate for `n` can exist at a container side above `ceil(sqrt(n)) * B`: a wider
 container holds `ceil(sqrt(n))^2` pairwise disjoint axis-parallel `B`-squares, direction
-`0` is always in the net, so **Condition 5** gives each of them mass at least `1` and the
-total passes `n`, which **Condition 2** forbids.
-With **Condition 4** bounding `B` below `1 / (1 + D)`, the ceiling over every shrink a net admits
-is `ceil(sqrt(n)) / (1 + D)`, and refining the net raises it only as fast as `D` falls —
-about `T / K`, so twice the directions for half the gap, and twice the cost of every
-decision taken over them.
+`0` is always in the net, so **Condition 5** gives each of them mass at least `1` and
+the total passes `n`, which **Condition 2** forbids.
+With **Condition 4** bounding `B` below `1 / (1 + D)`, the ceiling over every shrink a
+net admits is `ceil(sqrt(n)) / (1 + D)`, and refining the net raises it only as fast as
+`D` falls — about `T / K`, so twice the directions for half the gap, and twice the cost
+of every decision taken over them.
 Since the grid packing gives `s(n) <= ceil(sqrt(n))` for free, every individual
 finite-net certificate sits strictly below that trivial upper bound.
 For `n = 12`, the retained shrink gives `4B = 3.9908` and the fixed 181-direction net
@@ -3740,33 +3740,32 @@ The retained `99/25` certificate has exactly `0.0308` of runway at its fixed `B`
 `n = 11` and `n = 17` are not foreclosed: their runways are `0.1808` and `0.3985`, and
 both truths sit below their grid bounds.
 At `n = 19`, `20` and `21` the fixed-net ceiling is `5B = 4.9885`, an upper limit on
-possible improvement rather than an attainable prediction. At nineteen the best known
-packing binds first and leaves only `0.0856`; at twenty and twenty-one the fixed-net
-ceiling is `0.1885` above T-020, while a refined-net family plus a limit remains a
-separate possibility.
+possible improvement rather than an attainable prediction.
+At nineteen the best known packing binds first and leaves only `0.0856`; at twenty and
+twenty-one the fixed-net ceiling is `0.1885` above T-020, while a refined-net family
+plus a limit remains a separate possibility.
 
 **Joining that ceiling against the register says the lane has been looking in the wrong
 place.** [`CERTIFICATE-REACH.md`](packing/frontier/CERTIFICATE-REACH.md) ranks all 100
 cases by the most a certificate could add.
-The two this program has spent itself on are near the bottom: `n = 11` has `+0.0671` to
-Trump’s packing and `n = 17` has `+0.0855`. The largest are all just above a perfect
-square, where the lower bound is Nagamochi’s closed form and the gap to the best known
-packing runs near half a unit — eleven cases above `+0.49`, headed by `n = 51` at
-`+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`, `83`, `37`, `53` and `26`. Two
-cautions travel with that ranking.
+Some earlier targets are near the bottom: `n = 11` has `+0.0671` to Trump’s packing and
+`n = 17` has `+0.0855`; the later `n = 20`-targeted run has a ceiling-limited `+0.1885`.
+The largest are all just above a perfect square, where the lower bound is Nagamochi’s
+closed form and the gap to the best known packing runs near half a unit — eleven cases
+above `+0.49`, headed by `n = 51` at `+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`,
+`83`, `37`, `53` and `26`. Two cautions travel with that ranking.
 The prize is what the *ceiling* allows; the real limit is the covering value at that
 side.
-Six side-level program values are reported from `3.82` through `4.68`, but only the
-displayed `3.95` value is recomputable from a tracked artifact, and that is a feasible
-certificate mass rather than a proved optimum.
-The `4.58` and `4.59` frozen candidates corroborate the scale of nearby values, not the
-unretained run objectives.
-The remaining raw logs and checkpoints were not retained.
-The first five figures were described as consistent with a quadratic; incomplete
-retention and the later `4.68` report make that fit an unverified planning conjecture.
-And the cost of a run grows with the container: the site set, the row set and the exact
-sweep all scale with `L²` or worse, so a case at `n = 51` is not an `n = 12` run with a
-different constant.
+Seven side-level restricted-program values are reported from `3.82` through `4.80`,
+but none has a retained raw objective run.
+Frozen artifacts at `3.95` and `4.80` recompute feasible masses rather than optima;
+frozen candidates at `3.96`, `4.58`, and `4.59` carry different feasible masses from the
+reported objectives.
+The heterogeneous site universes and missing histories do not support a covering-value
+growth trend. Cost is not a function of side alone: it also depends on the net and site
+grids, atoms, rationalisation, implementation, machine, and load.
+Sparse atom and timing reports provide planning heuristics, while row generation has not
+been measured as a function of side.
 
 The middle tier is built and works within the explicit boundaries above.
 Two instruments now agree on the cell decomposition to `4.4e-16` and on the corner’s

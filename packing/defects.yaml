@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 480
+count: 481
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15164,3 +15164,57 @@ defects:
     control to a case the theorem still carries.
   regression: packing/tests/test_nagamochi_bounds.py
   recorded_in: packing/src/sqpack/cli/validate.py
+- id: D-481
+  title: A generated document counted stop reasons its own sources do not record
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    about an hour, from the commit that generated the section to the sub-agent report
+    that checked it against the record
+  severity: low
+  what: >-
+    frontier/CERTIFICATE-REACH.md's new attainment section hedges its own extrapolation,
+    and one of the hedges was itself unchecked. It said two of the three runs behind the
+    ratio were halted on projected cost and only one ran its covering search to a
+    converged optimum. The record says otherwise, and says it plainly in the three
+    results' own next_rung fields: T-018's n = 11 run "ran the loop to convergence --
+    three row rounds, 25318 rows, final oracle least mass exactly 1"; T-020 carries an
+    operator report, without a retained raw run or checkpoint, that its n = 20-targeted
+    4.80 build underlying the n = 19 ratio row stopped at round 9 because four more rounds
+    were projected to cost about 3.75 h; and
+    T-019's n = 17 build has no stop reason recorded at all -- the stop its next_rung
+    narrates belongs to an adjacent probe at n = 18, at a different side, on a different
+    site set. So the count was wrong in both halves: one run is recorded as converged,
+    one has only a qualified operator report of a cost stop, and one has no recorded stop
+    reason.
+  consequence: >-
+    Nothing downstream depends on it. The ratio, the mean, the predicted column and the
+    ranking are all derived arithmetic and are unaffected; what was wrong is a sentence
+    about provenance, in the paragraph whose whole job is to stop a reader trusting the
+    ratio too far. That is the part worth recording. A hedge that misstates its own
+    evidence is worse than no hedge, because it reads as though the limitation has been
+    measured.
+    The origin is the more useful half. The figure was not read off the record; it was
+    supplied to a sub-agent in a task brief by the coordinator, from memory, and written
+    faithfully. That is rule seven of the method document -- read the evidence, not a
+    reconstruction of it -- broken in the same session that recorded two other instances
+    of the same class as D-439 and D-475. It was caught by a second sub-agent that had
+    been told to verify every number in its own brief against the repository before
+    writing it, which is the only reason it did not stand.
+  fix: >-
+    Fixed on 2026-09-04 in devtools/render_certificate_reach.py, which owns the prose.
+    The section now names each of the three runs and what actually stopped it, including
+    that one of them has no recorded stop reason and that the stop narrated nearby
+    belongs to a different side.
+  regression: >-
+    None automated. The claim is about which sentence in a result's next_rung describes
+    which run, and no checker resolves that -- check_rung_figures recomputes quoted
+    quantities from artifacts and check_case_prose compares a case body against its own
+    front matter, but neither reads a narrative back to the run it narrates. The durable
+    control is procedural and is already in force: a sub-agent brief must require every
+    figure in it to be re-derived from the repository before use, which is what caught
+    this one.
+  status: fixed
+  recorded_in: packing/devtools/render_certificate_reach.py
