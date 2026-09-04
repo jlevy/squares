@@ -58,14 +58,10 @@
    documents, so they are hidden outright. */
 .cert-toggle { display: inline-flex; gap: 0.3rem; margin-inline-start: auto; }
 .cert-toggle button { white-space: nowrap; }
-.tabs-note { color: var(--kpress-doc-muted); font-size: var(--kpress-font-size-small); }
 .intro { margin-block-start: 1.6rem; }
-.intro-grid { align-items: start; display: grid; gap: 1.4rem 2rem; grid-template-columns: minmax(0, 1.7fr) minmax(13rem, 1fr); }
-@media (max-width: 44rem) { .intro-grid { grid-template-columns: minmax(0, 1fr); } }
 /* The atlas rendering is inlined: its ground and strokes take the page's
    theme, and its own caption is replaced by the figure's. */
-.cert-page figure.trump { margin: 0; max-width: none; }
-.trump a { display: block; padding: 0.6rem; }
+.trump a { display: block; width: min(100%, 24rem); }
 .trump svg { display: block; height: auto; width: 100%; }
 .trump svg rect[fill="#ffffff"] { fill: var(--kpress-doc-bg); }
 .trump svg [stroke="#000000"] { stroke: var(--kpress-doc-text); }
@@ -315,29 +311,30 @@
   <div class="section-head">
     <h2>The Square Packing Problem</h2>
   </div>
-  <div class="intro-grid">
-    <div>
-      <p><a href="{{PROBLEM_URL}}">Packing unit squares in a square</a> asks, for each <span class="tex">n</span>, for
-      <span class="tex">s(n)</span>: the side of the smallest square that holds <span class="tex">n</span> unit
-      squares with disjoint interiors, the unit squares free to rotate. The value is known for every
-      <span class="tex">n \le 10</span>; <span class="tex">s(10) = 3 + 1/\sqrt{2}</span> was the last, settled by
-      Stromquist in 2003, and <span class="tex">s(11)</span> is the smallest case still open. The best packing
-      known, <a href="{{BEST_URL}}">found by Walter Trump in 1979</a>, fits eleven squares in side
-      {{BEST_PACKING}}…, so <span class="tex">s(11) \le {{BEST_PACKING}}</span>; whether a smaller container works
-      is the open question. The certificates on this page show it cannot be as small as {{DEFAULT_L_DEC}}, and then
-      not as small as {{HEADLINE_L_DEC}}.</p>
-      <p class="tabs-note">Two certificates, decided by the same five conditions, give the two rungs. The
-      {{DEFAULT_L_FRAC}} certificate is shown first: it is smaller, and its numbers are easier to follow. The
-      {{HEADLINE_L_FRAC}} certificate is the bound the title states. The switch beside each figure changes every
-      figure and number on the page to the other certificate.</p>
-    </div>
-    <figure class="trump">
-      <a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a>
-      <figcaption class="kpress-figcaption">Trump’s packing of eleven unit squares in side {{BEST_PACKING}}…, the
-      best known: the project’s own rendering, from the retained witness.</figcaption>
-    </figure>
-  </div>
+    <p><a href="{{PROBLEM_URL}}">Packing unit squares in a square</a> asks, for each <span class="tex">n</span>, for
+    <span class="tex">s(n)</span>: the side of the smallest square that holds <span class="tex">n</span> unit
+    squares with disjoint interiors, the unit squares free to rotate. The value is known for every
+    <span class="tex">n \le 10</span>; <span class="tex">s(10) = 3 + 1/\sqrt{2}</span> was the last, settled by
+    Stromquist in 2003, and <span class="tex">s(11)</span> is the smallest case still open. The best packing
+    known, <a href="{{BEST_URL}}">found by Walter Trump in 1979</a>, fits eleven squares in side
+    {{BEST_PACKING}}…, so <span class="tex">s(11) \le {{BEST_PACKING}}</span>; whether a smaller container works
+    is the open question. The certificates on this page show it cannot be as small as {{DEFAULT_L_DEC}}, and then
+    not as small as {{HEADLINE_L_DEC}}.</p>
+    <p>Two certificates, decided by the same five conditions, give the two rungs. The
+    {{DEFAULT_L_FRAC}} certificate is shown first: it is smaller, and its numbers are easier to follow. The
+    {{HEADLINE_L_FRAC}} certificate is the bound the title states. The switch beside each figure changes every
+    figure and number on the page to the other certificate.</p>
 </section>
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 1</span>
+    <span class="fig-title">The best packing known</span>
+  </div>
+  <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
+  <figcaption class="kpress-figcaption">Trump’s 1979 packing of eleven unit squares in side {{BEST_PACKING}}…, the best known,
+  so <span class="tex">s(11) \le {{BEST_PACKING}}</span>. The project’s own rendering, from the retained witness.</figcaption>
+</figure>
 
 <!--BEGIN:ARTICLE-->
 <article class="cert-article" id="cert-{{SLUG}}" data-cert="{{SLUG}}" hidden>
@@ -353,7 +350,7 @@
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 1</span>
+    <span class="caps">Figure 2</span>
     <span class="fig-title">Bounds on <span class="tex">s({{N}})</span></span>
     {{CERT_TOGGLE}}
   </div>
@@ -420,7 +417,7 @@
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 2</span><span class="tag">Conditions 1 and 2</span>
+    <span class="caps">Figure 3</span><span class="tag">Conditions 1 and 2</span>
     <span class="fig-title">The atom field</span>
     {{CERT_TOGGLE}}
   </div>
@@ -455,7 +452,7 @@
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 3</span><span class="tag">Condition 5</span>
+    <span class="caps">Figure 4</span><span class="tag">Condition 5</span>
     <span class="fig-title">The prover: drag the square, watch the mass</span>
     {{CERT_TOGGLE}}
   </div>
@@ -520,7 +517,7 @@
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 4</span><span class="tag">Condition 4</span>
+    <span class="caps">Figure 5</span><span class="tag">Condition 4</span>
     <span class="fig-title">The shrink that buys the finite net</span>
     {{CERT_TOGGLE}}
   </div>
@@ -575,7 +572,7 @@
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 5</span><span class="tag">Condition 4 → Condition 5</span>
+    <span class="caps">Figure 6</span><span class="tag">Condition 4 → Condition 5</span>
     <span class="fig-title">Least covered mass, as the net is coarsened</span>
     {{CERT_TOGGLE}}
   </div>
@@ -712,7 +709,7 @@ function inset() { return B * (Math.abs(cs) + Math.abs(sn)) / 2; }
 function admissible(x, y) { const h = inset();
   return x >= h - 1e-12 && x <= L - h + 1e-12 && y >= h - 1e-12 && y <= L - h + 1e-12; }
 
-/* ---------- Figure 2: the atom field ---------- */
+/* ---------- Figure 3: the atom field ---------- */
 const fc = document.getElementById('field-{{SLUG}}'), fg = fc.getContext('2d');
 const FS = fc.width, FM = FS * 0.055, FPX = FS - 2 * FM, FSC = FPX / L;
 const MAXW = Math.max(...ATOMS.map(a => a[2]));
@@ -778,7 +775,7 @@ fc.addEventListener('pointerleave', () => {
   fieldTip.hidden = true;
 });
 
-/* ---------- Figure 3 ---------- */
+/* ---------- Figure 4 ---------- */
 const pv = document.getElementById('prove-{{SLUG}}'), pg = pv.getContext('2d');
 const PS = pv.width, PM = PS * 0.06, PPX = PS - 2 * PM, PSC = PPX / L;
 const RES = 230, TIGHT = 1.12;
@@ -995,7 +992,7 @@ document.getElementById('btn-heat-{{SLUG}}').addEventListener('click', e => {
   drawProver();
 });
 
-/* ---------- Figure 4 ---------- */
+/* ---------- Figure 5 ---------- */
 let KNET = 3;
 const sk = document.getElementById('shrink-{{SLUG}}'), skg = sk.getContext('2d');
 const SKS = sk.width, SKC = SKS / 2, SKSIDE = SKS * 0.62, SKGAP = SKS * 0.055;
