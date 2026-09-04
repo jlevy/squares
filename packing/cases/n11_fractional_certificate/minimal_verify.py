@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact, theorem-specific verifier for the retained s(11) >= 19/5 certificate.
+"""Exact, theorem-specific verifier for the retained s(11) >= 381/100 certificate.
 
 At a fixed direction, rotate square centres to (U,V).  Each atom is then
 covered on a closed axis-aligned rectangle.  Its four edge coordinates cut
@@ -24,17 +24,17 @@ from pathlib import Path
 from typing import NoReturn
 
 Q = Fraction
-SHA256 = "60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055"
+SHA256 = "b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a"
 DECLARED = {
-    "id": "C-n011-fractional-19-5",
+    "id": "C-n011-fractional-381-100",
     "n": 11,
-    "claim": "s(11) >= 19/5",
-    "outer_side": "19/5",
+    "claim": "s(11) >= 381/100",
+    "outer_side": "381/100",
     "square_side": "9977/10000",
     "angle_limit": "207107/500000",
     "direction_steps": 180,
-    "total_mass": "43391/4000",
-    "least_cell_mass": "50003/50000",
+    "total_mass": "434547/40000",
+    "least_cell_mass": "4001/4000",
     "symmetry": "D4",
 }
 RATIONAL = re.compile(r"^-?[0-9]+(?:/[1-9][0-9]*)?$")
@@ -78,8 +78,8 @@ def load(path):
         if record.get(key) != expected:
             fail(f"declaration {key!r} is {record.get(key)!r}, expected {expected!r}")
     rows = record.get("atoms")
-    if not isinstance(rows, list) or len(rows) != 425:
-        fail("expected exactly 425 atoms")
+    if not isinstance(rows, list) or len(rows) != 1121:
+        fail("expected exactly 1121 atoms")
     atoms = []
     for row in rows:
         if not isinstance(row, list) or len(row) != 3:
@@ -304,7 +304,7 @@ def verify(path):
         fail(f"least cell mass {worst}, declared {declared_minimum}")
 
     print(f"SHA256 PASS  {SHA256}")
-    print(f"C0/C1  PASS  425 atoms, D4 invariant, total mass {total} < 11")
+    print(f"C0/C1  PASS  {len(atoms)} atoms, D4 invariant, total mass {total} < 11")
     print(f"C2     PASS  endpoint slack {endpoint}")
     print(f"C3     PASS  D = {gap}; B(1+D) = {containment} < 1")
     index, centre = worst_record
@@ -319,26 +319,17 @@ def verify(path):
 def must_refuse(atoms, side, square_side, tangents, worst_record):
     index, centre = worst_record
     cosine, sine = rotation(tangents[index])
-    covered = []
-    half = square_side / 2
-    for x, y, _ in atoms:
-        along = cosine * (x - centre[0]) + sine * (y - centre[1])
-        across = -sine * (x - centre[0]) + cosine * (y - centre[1])
-        if -half <= along <= half and -half <= across <= half:
-            covered.append((x, y))
-    if not covered:
-        fail("minimum witness covers no atoms")
-    point = covered[0]
-    orbit = images(point[0], point[1], side)
-    delta = Q(13, 200000)
-    mutated = [(x, y, weight - delta if (x, y) in orbit else weight) for x, y, weight in atoms]
+    # Scaling every weight keeps D4 and all geometric conditions intact, preserves
+    # nonnegativity, and drives either retained certificate's tight cell below one.
+    factor = Q(3999, 4001)
+    mutated = [(x, y, weight * factor) for x, y, weight in atoms]
     check_measure(mutated, side)
     witness_mass = mass_at(mutated, cosine, sine, square_side, centre)
     if witness_mass >= 1:
         fail("must-refuse mutation was not refuted")
     print(
-        "MUTATION REFUSED  subtracting 13/200000 from one D4 weight orbit "
-        f"leaves C0-C3 valid but gives C4 witness mass {witness_mass} < 1"
+        f"MUTATION REFUSED  scaling every weight by {factor} leaves C0-C3 valid "
+        f"but gives C4 witness mass {witness_mass} < 1"
     )
 
 

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 444
+count: 445
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13649,7 +13649,7 @@ defects:
   what: >-
     `falsify.py` printed the conditions and verdict for ten mutations but carried no
     expected verdicts and returned success even if a mutation was accepted or a condition
-    changed unexpectedly. `check.sh` did not invoke the falsifier, so the package's one
+    changed unexpectedly. The package's one-command check did not invoke the falsifier, so it
     command exercised only positive cases while its README presented the mutation table
     as evidence that every condition was live.
   consequence: >-
@@ -13659,14 +13659,14 @@ defects:
   fix: >-
     Give every full mutation an exact oracle for the verdict, C0-C4 outcomes and minimum;
     return nonzero on disagreement; add a bounded signed-weight must-refuse mode; and run
-    that negative control from `check.sh` after the two positive controls.
+    that negative control from `check.py` after the two positive controls.
   regression: >-
     `tests/test_n11_thirdparty_verify.py::test_falsification_oracle_detects_wrong_verdict_and_condition`
     injects a wrong result, and `test_quick_negative_control_is_bounded_and_assertive`
     requires the package gate to observe the expected P2 refusal.
   recorded_in: packing/cases/n11_fractional_certificate/thirdparty/falsify.py
 - id: D-437
-  title: The standalone verifier coerced hostile JSON and left degenerate C4 domains undefined
+  title: The standalone package mishandled hostile inputs and misdescribed its controls
   date: '2026-09-04'
   layer: verifier
   class: robustness
@@ -13681,20 +13681,26 @@ defects:
     decimals and accepting Boolean or string lookalikes; duplicate object keys were
     accepted; malformed atoms could escape as `IndexError`. The C4 search also raised on
     every domain with `2h >= L`, conflating an empty feasible set with the singleton
-    closed placement at equality.
+    closed placement at equality. The README twice called the side-4 falsification row
+    "the control", although the actual known-answer control is Massaccesi's published
+    n = 17 certificate, and its claim that nothing short-circuits failed to distinguish
+    the theorem preconditions from C0-C4.
   consequence: >-
     The shipped certificates still parsed and verified exactly, but the purportedly
-    portable trust boundary behaved unpredictably on malformed input and failed to decide
-    two elementary geometric edge cases.
+    portable trust boundary behaved unpredictably on malformed input, failed to decide
+    two elementary geometric edge cases, and gave a hostile reader inaccurate directions
+    for interpreting its own output.
   fix: >-
     Parse duplicate-free JSON with exact field types and rational strings, validate atom
-    triples before indexing them, turn format errors into a clean refusal, treat an empty
-    feasible domain as vacuous, and evaluate a singleton feasible domain directly under
-    the closed-square convention.
+    triples before indexing them, turn format errors into a clean refusal while reserving
+    exit 2 for an unreadable path, treat an empty feasible domain as vacuous, and evaluate
+    a singleton feasible domain directly under the closed-square convention. Correct the
+    README's control terminology and distinguish precondition refusal from condition
+    evaluation.
   regression: >-
     `tests/test_n11_thirdparty_verify.py` carries duplicate-key, lossy-integer,
-    non-string-number, malformed-atom, traceback-free CLI, empty-domain and singleton-
-    domain controls.
+    non-string-number, malformed-atom, traceback-free CLI, unreadable-path, empty-domain
+    and singleton-domain controls; the hostile package review checks the corrected prose.
   recorded_in: packing/cases/n11_fractional_certificate/thirdparty/verify.py
 - id: D-438
   title: Retained certificate declarations did not all participate in acceptance
@@ -13920,3 +13926,38 @@ defects:
     retains the corner cell, proves its former midpoint infeasible, and checks the new
     exact witness against both the event cell and the original container margins.
   recorded_in: packing/src/sqpack/fractional/sweep.py
+- id: D-445
+  title: The introducing commit named the wrong SHA-256 for the retained 381/100 certificate
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: >-
+    since commit 6fc71ce9 introduced the 381/100 rung; found during the same day's
+    adversarial review by hashing the retained file before trusting the commit narrative
+  severity: high
+  status: fixed
+  what: >-
+    The commit message says the exact and interval verifiers read frozen bytes with
+    SHA-256 503c7d154d36ae1e16d3002ab3c5b003316fc47c14718cf65b3dbc43af4d7cd6.
+    The certificate.json bytes retained by that commit and by its tree instead hash to
+    b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a. Neither digest
+    was recorded in the evidence entry, so the immutable message could not be reconciled
+    with the artifact it purported to identify.
+  consequence: >-
+    A commit message is not part of the mathematical proof, and fresh decisions of the
+    retained bytes can still establish the result. The mismatch nevertheless breaks the
+    claimed provenance link: the earlier transcript cannot prove which byte sequence it
+    decided, and a reviewer could accidentally validate a semantically similar file while
+    reporting that the retained artifact itself had been checked.
+  fix: >-
+    Treat the message's attestation as unusable, bind the fast regression, minimal checker,
+    evidence record and adversarial review to the actual b121...e6a digest, and rerun the
+    exact and interval decisions from the retained path. Preserve the discrepancy in the
+    review rather than rewriting history.
+  regression: >-
+    `tests/test_fractional_certificate.py::test_the_n11_certificate_beats_stromquists_2003_bound`
+    hashes certificate.json from disk and requires the retained b121...e6a bytes before
+    checking their declarations and exact comparison with Stromquist's value.
+  recorded_in: docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md

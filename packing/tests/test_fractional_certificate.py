@@ -9,6 +9,7 @@ reading of the theorem divided by the shrunken side and would have claimed
 
 from __future__ import annotations
 
+import hashlib
 import json
 import runpy
 from fractions import Fraction
@@ -20,9 +21,12 @@ import pytest
 from cases.n11_fractional_certificate.__main__ import replay as replay_n11
 from cases.n11_fractional_certificate.replay import CERTIFICATE_PATH as N11_CERTIFICATE_PATH
 from cases.n11_fractional_certificate.replay import FIRST_RUNG_PATH as N11_FIRST_RUNG
+from cases.n11_fractional_certificate.replay import STROMQUIST_RUNG_PATH
 from cases.n11_fractional_certificate.replay import declared as n11_declared
 from cases.n11_fractional_certificate.replay import load as n11_load
 from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH, declared, load
+from cases.n17_fractional_certificate.replay import declared as n17_declared
+from cases.n17_fractional_certificate.replay import load as n17_load
 from cases.n17_weighted_certificate.fixture import load_retained_fixture
 from sqpack.fractional.certificate import Certificate, verify
 from sqpack.fractional.generate import build_site_grid, rationalise
@@ -304,8 +308,8 @@ def test_the_independent_verifier_agrees_on_the_full_n11_certificate() -> None:
         brute_check=3,
     )
     assert accepted, report
-    assert report["info"]["min_lower"] == Fraction(50003, 50000)
-    assert report["info"]["min_rep"] == Fraction(50003, 50000)
+    assert report["info"]["min_lower"] == Fraction(4001, 4000)
+    assert report["info"]["min_rep"] == Fraction(4001, 4000)
 
 
 def test_containment_at_exactly_one_is_refused() -> None:
@@ -427,30 +431,53 @@ def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> No
     assert verdict.minimum_cell_mass < 1
 
 
-@pytest.mark.exhaustive_exact
 def test_the_n11_certificate_beats_stromquists_2003_bound() -> None:
-    """s(11) >= 19/5, replayed from its own file and re-decided.
+    """s(11) >= 381/100, read from its own file.
 
     2 + 4/sqrt(5) = 3.788854 had stood since Stromquist 2003 and was the only
-    bound n = 11 had. The comparison is decided in exact rationals: 19/5 > 2 +
-    4/sqrt(5) iff (19/5 - 2)^2 * 5 > 16, both sides being positive.
+    bound n = 11 had. The comparison is decided in exact rationals: L > 2 +
+    4/sqrt(5) iff (L - 2)^2 * 5 > 16, both sides being positive.
+
+    What the certificate claims is checked here; that a verifier accepts it is
+    the exhaustive test below.
     """
 
     certificate = n11_load()
     assert certificate.n == 11
-    assert certificate.bounded_side == Fraction(19, 5)
-    assert certificate.total_mass == Fraction(43391, 4000)
+    assert certificate.bounded_side == Fraction(381, 100)
+    assert certificate.total_mass == Fraction(434547, 40000)
     assert certificate.total_mass < 11
     assert (certificate.bounded_side - 2) ** 2 * 5 > 16
 
+    record = n11_declared()
+    assert record["claim"] == "s(11) >= 381/100"
+    assert record["total_mass"] == str(certificate.total_mass)
+    assert hashlib.sha256(N11_CERTIFICATE_PATH.read_bytes()).hexdigest() == (
+        "b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a"
+    )
+
+
+@pytest.mark.exhaustive_exact
+def test_the_n11_certificate_is_accepted() -> None:
+    """The 1121-atom certificate over 181 directions, decided exactly."""
+    certificate = n11_load()
     verdict = verify(certificate)
     assert verdict.accepted, verdict.failures
     assert verdict.minimum_cell_mass is not None
     assert verdict.minimum_cell_mass >= 1
     record = n11_declared()
-    assert record["claim"] == "s(11) >= 19/5"
+    assert record["claim"] == "s(11) >= 381/100"
     assert record["total_mass"] == str(certificate.total_mass)
     assert record["least_cell_mass"] == str(verdict.minimum_cell_mass)
+
+
+def test_the_n11_rung_at_19_5_still_replays() -> None:
+    """The value that first passed Stromquist is kept and stays true."""
+    certificate = n11_load(STROMQUIST_RUNG_PATH)
+    assert certificate.bounded_side == Fraction(19, 5)
+    assert certificate.total_mass == Fraction(43391, 4000)
+    assert len(certificate.atoms) == 425
+    assert n11_declared(STROMQUIST_RUNG_PATH)["claim"] == "s(11) >= 19/5"
 
 
 @pytest.mark.exhaustive_exact
@@ -491,3 +518,52 @@ def test_every_retained_n12_rung_still_verifies() -> None:
         verdict = verify(coarse)
         assert verdict.minimum_cell_mass is not None
         assert verdict.minimum_cell_mass >= 1, f"{name} lost coverage"
+
+
+def test_the_n17_certificate_displaces_massaccesis_published_bound() -> None:
+    """s(17) >= 451/100 beats the published value, decided from the file.
+
+    22529/5000 = 4.5058 is Massaccesi's published value, adopted here as T-015
+    and carried to n = 18 and n = 19 as T-016. This certificate is denser and
+    sits at a larger side, so one object moves all three cases. The comparison
+    is decided in exact rationals.
+
+    What the certificate claims is checked here; that a verifier accepts it is
+    the exhaustive test below, which costs a quarter of an hour.
+    """
+    certificate = n17_load()
+    assert certificate.n == 17
+    assert certificate.bounded_side == Fraction(451, 100)
+    assert certificate.bounded_side > Fraction(22529, 5000)
+    assert certificate.total_mass == Fraction(829681, 50000)
+    assert certificate.total_mass < 17
+
+    record = n17_declared()
+    assert record["claim"] == "s(17) >= 451/100"
+    assert record["total_mass"] == str(certificate.total_mass)
+
+
+@pytest.mark.exhaustive_exact
+def test_the_n17_certificate_is_accepted() -> None:
+    """The 708-atom certificate over 181 directions, decided exactly.
+
+    Marked exhaustive: this is a thirteen-minute sweep, and the fast test above
+    already pins every number the record claims about the same file.
+    """
+    certificate = n17_load()
+    verdict = verify(certificate)
+    assert verdict.accepted, verdict.failures
+    assert verdict.minimum_cell_mass is not None
+    assert verdict.minimum_cell_mass >= 1
+    assert n17_declared()["least_cell_mass"] == str(verdict.minimum_cell_mass)
+
+
+def test_the_n17_certificate_does_not_reach_n20() -> None:
+    """The scope claim: 451/100 lifts n = 17, 18 and 19, and not n = 20.
+
+    Monotonicity carries a bound upward, so n = 20 would inherit 451/100 too --
+    but Nagamochi's closed form already gives it 1 + sqrt(13), which is larger.
+    Decided in integers: 1 + sqrt(13) > 451/100 iff 13 * 100^2 > (451 - 100)^2.
+    """
+    assert 13 * 100**2 > (451 - 100) ** 2
+    assert n17_load().bounded_side == Fraction(451, 100)

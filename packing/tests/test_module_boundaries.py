@@ -143,16 +143,14 @@ def test_no_python_implementation_remains_in_ambiguous_legacy_locations() -> Non
     assert [path.relative_to(PROJECT_ROOT) for path in legacy] == []
 
 
-def test_only_the_portable_thirdparty_package_has_a_shell_entry_point() -> None:
+def test_python_is_the_only_portable_thirdparty_entry_point() -> None:
     scripts = [
         path
         for pattern in ("*.sh", "*.bash")
         for path in PROJECT_ROOT.rglob(pattern)
         if not any(part.startswith(".") for part in path.relative_to(PROJECT_ROOT).parts)
     ]
-    assert [path.relative_to(PROJECT_ROOT) for path in scripts] == [
-        Path("cases/n11_fractional_certificate/thirdparty/check.sh")
-    ]
+    assert [path.relative_to(PROJECT_ROOT) for path in scripts] == []
 
 
 def test_readme_inventory_ignores_cache_only_legacy_directories(tmp_path: Path) -> None:
@@ -308,6 +306,11 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
 def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> None:
     expected = {
+        # The full 181-direction exact decision of the retained n = 12 certificate:
+        # about 25 s on an idle core, and the coarse-net version in the same file
+        # carries the same claim for the fast tier.
+        # And the 708-atom n = 17 certificate over the same net, about thirteen
+        # minutes: the fast test beside it pins every number its record claims.
         "test_exact_jets.py": {
             "test_n5_wall_and_contact_gradients_match_authoritative_source_rows",
         },
@@ -315,13 +318,15 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
             "test_the_full_retained_certificate_is_accepted",
             "test_the_independent_verifier_agrees_on_the_full_n11_certificate",
             "test_the_n11_calibration_rung_below_stromquist_also_verifies",
-            "test_the_n11_certificate_beats_stromquists_2003_bound",
+            "test_the_n11_certificate_is_accepted",
+            "test_the_n17_certificate_is_accepted",
             "test_the_retained_n12_certificate_replays_and_is_accepted",
         },
         "test_fractional_interval.py": {
             "test_massaccesi_n17_reproduces_the_published_bound_on_the_full_doubled_net",
+            "test_the_393_100_certificate_is_accepted_on_the_full_doubled_net",
+            "test_the_live_n12_certificate_is_accepted_on_the_full_doubled_net",
             "test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net",
-            "test_the_retained_n12_certificate_is_accepted_on_the_full_doubled_net",
         },
         "test_n11_thirdparty_verify.py": {
             "test_minimal_checker_replays_every_cell_and_its_mutation",

@@ -47,30 +47,31 @@ inequality `s(11) > 19/5` also follows (by compactness), but the claim is the we
 
 | File | What it is |
 | --- | --- |
-| `certificate.json` | The `n = 11` certificate, plain data, byte-identical to `../certificate.json` (SHA-256 `60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`). Not regenerated for this package. |
-| `minimal_verify.py` | The shortest theorem-specific checker: 355 lines, of which 139 implement event geometry and scoring. It binds this exact SHA-256, recomputes C0-C4 and the minimum, and runs one must-refuse orbit mutation. |
+| `certificate.json` | The `n = 11` certificate, plain data, byte-identical to `../certificate-19-5.json` (SHA-256 `60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`). Not regenerated for this package. |
+| `../minimal_verify.py` | The shortest checker for the current 381/100 result: a stdlib-only event sweep beside the current certificate that binds its exact hash, recomputes C0-C4 and the minimum, and runs one must-refuse weight-scaling mutation. It is not part of this frozen 19/5 package. |
 | `verify.py` | The verifier: one file, standard library only, exact rational arithmetic, no imports from the rest of this repository. |
 | `control-n17-massaccesi.json` | A reconstruction, in this package’s schema, of Gustavo Massaccesi’s publicly posted `n = 17` verifier constants. |
 | `build_n17_control.py` | Rebuilds the control file from Massaccesi’s public constants; `--check` confirms that the shipped reconstruction matches. |
 | `falsify.py` | Applies the perturbations in the falsification table and prints what the verifier refuses. |
-| `check.sh` | The whole check in one command. |
+| `check.py` | The whole check in one command. |
 
 For the smallest audit surface, run only the theorem-specific checker:
 
 ```shell
-python3 minimal_verify.py certificate.json
+python3 ../minimal_verify.py ../certificate.json
 ```
 
-It takes roughly 30 to 50 seconds on one core and ends with the exact minimum and an
-explicit C4-refuting mutation.
-It deliberately handles only this immutable certificate; `verify.py` is the larger
-general checker with reusable schema and degenerate-domain handling.
+That command checks the current 381/100 certificate in roughly one to three minutes on
+one core and ends with the exact minimum and an explicit C4-refuting mutation.
+The minimal checker recognizes only that one hash-bound certificate; `verify.py` is the
+larger general checker with reusable schema and degenerate-domain handling and is what
+checks this package’s 19/5 artifact.
 
 One command, with whatever `python3` is on your `PATH` (CPython 3.8 or later, tested
 with 3.10 through 3.14, nothing installed):
 
 ```shell
-sh check.sh
+python3 check.py
 ```
 
 It rebuilds the control data and compares it to the shipped file, runs `verify.py` on
@@ -219,13 +220,15 @@ coercing them or failing partway through the decision.
 
 ## The Verifier
 
-`minimal_verify.py` is the theorem-specific audit kernel described above.
+`../minimal_verify.py` is the current theorem-specific audit kernel described above.
 `verify.py` reads the file strictly, checks the shape the theorem assumes (`n ≥ 1`,
 positive sides, non-negative weights, a net that starts at 0 and increases, the declared
 claim equal to the theorem’s conclusion), then decides C0 to C4 in that order and prints
 each with its numbers.
 Once the preconditions pass, nothing short-circuits: a file failing C1 still has its C4
 minimum computed, so a refusal names every failing condition.
+The preconditions are different — a file that fails one of those is refused there and
+the conditions are not reached, because a malformed file has no conditions to decide.
 Every quantity is a `fractions.Fraction`; floats appear only in printed approximations
 beside the exact value.
 
@@ -271,8 +274,12 @@ recomputed value is a refusal, not an informational note.
 The verifier reports the exact least covered weight, the direction and the centre of a
 square that attains it, and the number of cells decided.
 The count is worth reading: a verifier that quietly decides fewer placements makes every
-certificate easier to accept, and the control below (a container too large for its
-atoms) shows this one scores the cells beyond the atoms’ reach.
+certificate easier to accept.
+The falsification row below that enlarges the container to side 4 is what shows this one
+scores the cells beyond the atoms’ reach — its least covered weight is `0`, found in a
+corner no atom can reach.
+That is not the control; the control is Massaccesi’s `n = 17` certificate, whose least
+covered weight is exactly `1`.
 
 ## The Control: A Reconstruction from Massaccesi’s Public n = 17 Constants
 
@@ -301,7 +308,7 @@ earlier reading of the theorem in this project divided by `B` and would have rep
 compares the verdict, every named condition, and the exact minimum against a fixed
 oracle. It exits non-zero on any disagreement; merely printing a plausible table is not
 success. `python3 falsify.py --quick` runs only the signed-weight must-refuse case used
-by `check.sh`. The perturbed atom is chosen from the verifier’s own witness: the first
+by `check.py`. The perturbed atom is chosen from the verifier’s own witness: the first
 atom covered by the least-covered placement, so a change to it must show in C4. Real
 output of `python3 falsify.py` (about four minutes):
 
@@ -339,7 +346,7 @@ margin covers nothing, and the verifier scores those placements.
 ## Output of the Stranger Run
 
 Run from a copy of this directory outside the repository, with an empty environment
-(`env -i PATH=/usr/bin:/bin bash -c 'time sh check.sh'`, so `python3` is the system
+(`env -i PATH=/usr/bin:/bin bash -c 'time python3 check.py'`, so `python3` is the system
 interpreter and nothing from this project is importable).
 Representative successful output from the stranger run (the shell’s clock lines are
 omitted):
@@ -348,7 +355,7 @@ omitted):
 $ which python3; python3 --version
 /usr/bin/python3
 Python 3.11.15
-$ time sh check.sh
+$ time python3 check.py
 control data rebuilt from the published constants: identical to control-n17-massaccesi.json
 python 3.11.15
 certificate C-n011-fractional-19-5
@@ -404,7 +411,7 @@ quick negative-weight control: atom 0 weight replaced by -1
 | --- | --- | --- | --- | --- | --- | --- |
 | negative weight | - (425 atoms) | - (983147/100000) | - (309449/250000000000) | - (0.999995896) | - (-) | REFUSED |
 quick negative control: expected refusal and P2 result confirmed
-check.sh: all four steps passed
+check.py: all four steps passed
 
 exit status 0
 ```
@@ -456,7 +463,7 @@ exit status 0
 - **The reduction is proved on paper.** The argument that finitely many open cells
   decide the continuum lives in the C4 comment block of `verify.py` and in the section
   above. It is elementary, but it is the place where a wrong verifier would be wrong; the
-  control on a container too large for its atoms shows cells beyond the atoms’ reach are
+  falsification row that enlarges the container shows cells beyond the atoms’ reach are
   scored, and the cell counts are printed, but neither is a proof.
 - **Trust in the interpreter.** The decision rests on CPython’s arbitrary-precision
   integers and the `fractions` module.

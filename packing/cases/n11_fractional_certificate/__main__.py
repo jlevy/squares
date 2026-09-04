@@ -1,4 +1,4 @@
-"""Replay both retained n = 11 certificates and report every condition.
+"""Replay all three retained n = 11 certificates and report every condition.
 
 Exits non-zero if any condition fails, so the replay is a gate and not a
 report. Run as ``python -m cases.n11_fractional_certificate``.
@@ -12,6 +12,7 @@ from pathlib import Path
 from cases.n11_fractional_certificate.replay import (
     CERTIFICATE_PATH,
     FIRST_RUNG_PATH,
+    STROMQUIST_RUNG_PATH,
     declared,
     load,
 )
@@ -46,8 +47,12 @@ def replay(path: Path) -> int:
 
 
 def main() -> int:
-    """Both retained certificates must replay; the weaker rung is not optional."""
-    return max(replay(FIRST_RUNG_PATH), replay(CERTIFICATE_PATH))
+    """Every retained rung must replay; the weaker rungs are not optional."""
+    return max(
+        replay(FIRST_RUNG_PATH),
+        replay(STROMQUIST_RUNG_PATH),
+        replay(CERTIFICATE_PATH),
+    )
 
 
 if __name__ == "__main__":

@@ -308,7 +308,7 @@ plausible route to a new bound.
 #### 4. A lower bound for an open case — available now, but layered
 
 On 2026-09-04 this project found an exact fractional unavoidable-set certificate for
-`s(11) ≥ 19/5`. Its human implication is short: nonnegative symmetric atom mass below
+`s(11) ≥ 381/100`. Its human implication is short: nonnegative symmetric atom mass below
 eleven cannot give mass above one to eleven disjoint inner squares.
 The direction-net and strict-containment facts are rational inequalities.
 A Lean 4.32.1/Mathlib 4.32.1 spike formalizes those layers directly.
@@ -317,12 +317,12 @@ The retained
 pins the exact toolchain and dependencies and publishes its axiom audit.
 
 The remaining C4 fact says every contained side-`9977/10000` square at 181 exact
-rational directions covers atom mass at least `50003/50000`. The retained exact checker
-reduces that continuum to 90,546,593 event cells; a separate interval branch-and-bound
+rational directions covers atom mass at least `4001/4000`. The retained exact checker
+reduces that continuum to 567,130,649 event cells; a separate interval branch-and-bound
 confirms it on a doubled net.
 Formalizing the reduction and checking a compact partition receipt is feasible in
 principle, but importing the whole computation directly would currently make the
-assurance surface larger and less readable than the 355-line theorem-specific Python
+assurance surface larger and less readable than the 346-line theorem-specific Python
 checker. Lean is no longer blocked by missing mathematics here; it is an engineering and
 certificate-design choice.
 
@@ -420,7 +420,7 @@ Where each layer of assurance stands, for a claim of the form “this packing is
 
 Ordered by value per unit of effort, and deliberately small at the start.
 
-1. **Design a compact proof-producing C4 receipt.** The new `s(11) ≥ 19/5` result
+1. **Design a compact proof-producing C4 receipt.** The new `s(11) ≥ 381/100` result
    already has a one-minute implication and a kernel-checked counting lemma.
    Its remaining trust surface is the event-cell coverage computation.
    A partition or range-sum receipt that Lean can check is now the most direct
@@ -507,9 +507,10 @@ The 57 ns and 23.6 s figures used in the slowdown table are from the
 [infrastructure study’s](research-2026-08-22-infrastructure-for-packing-exploration.md)
 measurements and the record page respectively.
 
-**Not established.** No Lean code was written or run in this session, so every estimate
-of formalization effort is a judgement, not a measurement — the “weeks, not days” figure
-for the `s(11)` upper bound especially.
+**Not established.** The bounded kernel spike was written and run, but no complete Lean
+formalization of C4 or of the headline `s(11)` result was attempted.
+Every estimate of that remaining formalization effort is therefore a judgement, not a
+measurement — the “weeks, not days” figure for the `s(11)` upper bound especially.
 The claim that no formal theorem about `s(n)` exists for non-trivial `n` is a negative
 result from search and is weak in the usual way: nothing was found, which is not the
 same as nothing existing.

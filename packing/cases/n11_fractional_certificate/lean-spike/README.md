@@ -1,14 +1,14 @@
-# Lean Feasibility Spike for the `s(11) ≥ 19/5` Certificate
+# Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate
 
 This directory is a feasibility spike.
-It does not prove condition C4, replay the 425-atom certificate, or prove the headline
-theorem `s(11) ≥ 19/5`. Its Lean source contains no `sorry` terms, custom axioms, or
+It does not prove condition C4, replay the 1,121-atom certificate, or prove the headline
+theorem `s(11) ≥ 381/100`. Its Lean source contains no `sorry` terms, custom axioms, or
 uses of `native_decide`. The spike was checked with Lean 4.32.1 and Mathlib 4.32.1. The
 complete local toolchain and Mathlib cache occupied approximately 10 GB; after the cache
 was present, `Kernel.lean` checked in 3.6–4.6 seconds in the prototype.
 Two clean project builds using the populated dependency cache took 5.7 and 9.4 seconds;
 their axiom audits took 2.6–2.7 seconds on the development machine.
-The [one-minute proof](../PROOF.md) and [exact Python package](../thirdparty/README.md)
+The [one-minute proof](../PROOF.md) and [minimal exact checker](../minimal_verify.py)
 remain the recommended primary presentation because together they are complete and the
 checker is self-contained, uses only Python’s standard library, and decides every
 condition from C0 through C4.
@@ -28,7 +28,7 @@ It proves:
 The counting core is the contradiction
 
 ```text
-11 ≤ Σⱼ μ(Qⱼ) ≤ μ(K) = 43391/4000 < 11.
+11 ≤ Σⱼ μ(Qⱼ) ≤ μ(K) = 434547/40000 < 11.
 ```
 
 The exact C3 value checked by Lean is
@@ -68,11 +68,12 @@ half-angle tangent formula, or continuum-to-finite arrangement reduction used by
 contains no certificate data and performs no 181-direction computation.
 
 A complete Lean proof would need a proof-producing C4 checker.
-Direct kernel evaluation of the Python verifier’s 90,546,593 rational placement cells is
-unlikely to be practical.
+Direct kernel evaluation of the Python verifier’s 567,130,649 rational placement cells
+is unlikely to be practical.
 A smaller certificate could record the feasible vertical interval and range minimum for
-each breakpoint row, reducing the retained obligations to roughly 181 times 851 rows.
-Lean would still need a proof that those row certificates cover every admissible center.
+each breakpoint row, reducing the retained obligations to at most roughly 181 times
+2,243 rows. Lean would still need a proof that those row certificates cover every
+admissible center.
 
 `native_decide` could run a larger executable check, but Lean admits its result through
 a compiler-trusting axiom.
@@ -81,11 +82,12 @@ this spike does not use it.
 
 ## Why the Python Proof Remains Primary
 
-The Python package states the whole theorem, carries the certificate, and decides all
-five conditions with exact rational arithmetic.
-A reader can copy one directory and run it with CPython 3.8 or later without installing
-dependencies. This Lean spike proves that the short mathematical kernel formalizes
-cleanly; it does not yet replace the complete certificate replay.
+The Python checker sits beside the certificate and decides all five conditions with
+exact rational arithmetic.
+A reader can copy those two files and run them with CPython 3.8 or later without
+installing dependencies.
+This Lean spike proves that the short mathematical kernel formalizes cleanly; it does
+not yet replace the complete certificate replay.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

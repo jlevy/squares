@@ -1,9 +1,11 @@
 """Load the retained n = 11 certificates and hand them to the exact verifier.
 
-Two certificates are retained. `certificate.json` carries the bound the case
-holds, s(11) >= 19/5; `certificate-189-50.json` is the calibration rung below
-Stromquist's bound: it proves nothing new, and that is the point -- it is the
-diagnostic the project registered in advance to test the approach honestly.
+Three certificates are retained. `certificate.json` carries the bound the case
+holds, s(11) >= 381/100; `certificate-19-5.json` is the rung below it, the first
+value that moved this case past Stromquist; and `certificate-189-50.json` is the
+calibration rung below Stromquist's bound, which proves nothing new, and that is
+the point -- it is the diagnostic the project registered in advance to test the
+approach honestly.
 
 The JSON carries exact rationals as strings, so a replay reconstructs the same
 object the generator proposed.
@@ -22,6 +24,7 @@ from sqpack.fractional.model import Atom
 
 CERTIFICATE_PATH = Path(__file__).with_name("certificate.json")
 FIRST_RUNG_PATH = Path(__file__).with_name("certificate-189-50.json")
+STROMQUIST_RUNG_PATH = Path(__file__).with_name("certificate-19-5.json")
 
 
 def load(path: Path = CERTIFICATE_PATH) -> Certificate:

@@ -123,7 +123,7 @@ theorem finite_nonnegative_mass_bound {X : Type*}
 
 /-! The exact scalar checks for the retained `n = 11` certificate. -/
 
-theorem n11_total_mass : (43391 : ℚ) / 4000 < 11 := by norm_num
+theorem n11_total_mass : (434547 : ℚ) / 40000 < 11 := by norm_num
 
 theorem n11_net_reaches_pi_over_four :
     let t : ℚ := 207107 / 500000

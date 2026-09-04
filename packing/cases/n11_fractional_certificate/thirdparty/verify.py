@@ -118,7 +118,7 @@ def load(path):
             )
     except CertificateFormatError:
         raise
-    except (OSError, UnicodeError, ValueError, RecursionError) as error:
+    except (UnicodeError, ValueError, RecursionError) as error:
         raise CertificateFormatError(str(error)) from None
     if not isinstance(record, dict):
         raise CertificateFormatError("top-level JSON value must be an object")
@@ -634,10 +634,15 @@ def main(argv):
             return 2
     print("python %s" % sys.version.split()[0])
     try:
-        accepted, _ = decide(load(argv[1]), audit=audit, verbose=verbose)
+        cert = load(argv[1])
+    except OSError as error:
+        # Not a refusal: the file was never read. Usage status, not verdict status.
+        print("could not open %s: %s" % (argv[1], error))
+        return 2
     except CertificateFormatError as error:
         print("REFUSED: malformed certificate: %s" % error)
         return 1
+    accepted, _ = decide(cert, audit=audit, verbose=verbose)
     return 0 if accepted else 1
 
 

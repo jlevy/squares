@@ -15,9 +15,10 @@ THIRDPARTY = (
     Path(__file__).resolve().parents[1] / "cases" / "n11_fractional_certificate" / "thirdparty"
 )
 VERIFY_PATH = THIRDPARTY / "verify.py"
-MINIMAL_VERIFY_PATH = THIRDPARTY / "minimal_verify.py"
+MINIMAL_VERIFY_PATH = THIRDPARTY.parent / "minimal_verify.py"
 FALSIFY_PATH = THIRDPARTY / "falsify.py"
 CERTIFICATE_PATH = THIRDPARTY / "certificate.json"
+CURRENT_CERTIFICATE_PATH = THIRDPARTY.parent / "certificate.json"
 
 
 def load_script(name: str, path: Path):
@@ -132,6 +133,22 @@ def test_cli_refuses_malformed_input_without_traceback(tmp_path: Path) -> None:
     assert "Traceback" not in completed.stdout + completed.stderr
 
 
+def test_cli_distinguishes_an_unreadable_path_from_a_mathematical_refusal(
+    tmp_path: Path,
+) -> None:
+    missing = tmp_path / "missing.json"
+    completed = subprocess.run(
+        [sys.executable, str(VERIFY_PATH), str(missing)],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 2
+    assert "could not open" in completed.stdout
+    assert "REFUSED" not in completed.stdout
+    assert "Traceback" not in completed.stdout + completed.stderr
+
+
 def test_singleton_domain_is_evaluated_directly_and_closed() -> None:
     cert = {
         "L": Fraction(1),
@@ -224,11 +241,11 @@ def test_quick_negative_control_is_bounded_and_assertive() -> None:
 
 
 def test_minimal_checker_binds_the_retained_bytes_and_closed_form_facts() -> None:
-    record, atoms = minimal_verify.load(CERTIFICATE_PATH)
+    record, atoms = minimal_verify.load(CURRENT_CERTIFICATE_PATH)
     side = minimal_verify.rational(record["outer_side"])
     assert minimal_verify.check_measure(
         atoms, side, minimal_verify.rational(record["total_mass"])
-    ) == Fraction(43391, 4000)
+    ) == Fraction(434547, 40000)
     limit = minimal_verify.rational(record["angle_limit"])
     assert limit * limit + 2 * limit - 1 == Fraction(309449, 250000000000)
 
@@ -236,14 +253,14 @@ def test_minimal_checker_binds_the_retained_bytes_and_closed_form_facts() -> Non
 @pytest.mark.exhaustive_exact
 def test_minimal_checker_replays_every_cell_and_its_mutation() -> None:
     completed = subprocess.run(
-        [sys.executable, str(MINIMAL_VERIFY_PATH), str(CERTIFICATE_PATH)],
+        [sys.executable, str(MINIMAL_VERIFY_PATH), str(CURRENT_CERTIFICATE_PATH)],
         check=False,
         capture_output=True,
         text=True,
-        timeout=120,
+        timeout=240,
     )
     assert completed.returncode == 0, completed.stdout + completed.stderr
-    assert "C4     PASS  minimum 50003/50000" in completed.stdout
-    assert "90546593 cells" in completed.stdout
-    assert "VERIFIED s(11) >= 19/5" in completed.stdout
+    assert "C4     PASS  minimum 4001/4000" in completed.stdout
+    assert "567130649 cells" in completed.stdout
+    assert "VERIFIED s(11) >= 381/100" in completed.stdout
     assert "MUTATION REFUSED" in completed.stdout

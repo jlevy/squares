@@ -1,32 +1,33 @@
-# Adversarial review of PR 78 — the `s(11) ≥ 19/5` claim
+# Adversarial review of PR 78 — the `s(11) ≥ 381/100` claim
 
 **Review date:** 2026-09-04\
 **Pull request:** [#78](https://github.com/jlevy/squares/pull/78)\
-**Reviewed parent head:** `bdf63b215c830dbdf27115d5498ccc97bc62b5e0`\
+**Reviewed parent head:** `6fc71ce9c87f2f643187b79703d883219299b752`\
 **Base:** `9d5eae0f5ecfcf3cd417a345eb6c55b1f9ac4def` (`main`)\
 **Remediation branch:** `codex/pr78-s11-adversarial-review`\
 **Certificate SHA-256:**
-`60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`
+`b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a`
 
 ## Verdict
 
 **The concrete mathematical claim is accepted: the retained positive-weight certificate
-proves `s(11) ≥ 19/5`. The reviewed parent should not merge without the soundness and
+proves `s(11) ≥ 381/100`. The reviewed parent should not merge without the soundness and
 assurance repairs carried by this stacked branch.**
 
 Those are different decisions:
 
 | Question | Verdict | Reason |
 | --- | --- | --- |
-| Does this particular certificate prove `s(11) ≥ 19/5`? | **Accept** | Its 425 weights are strictly positive; every proof obligation holds; and independent exact continuum checks obtain the declared minimum `50003/50000 > 1`. |
+| Does this particular certificate prove `s(11) ≥ 381/100`? | **Accept** | Its 1,121 weights are strictly positive; every proof obligation holds; and source-distinct exact continuum checks obtain the declared minimum `4001/4000 > 1`. |
 | Is the corrected reusable theorem and project verifier sound? | **Accept on this stack** | The parent omitted nonnegative weights and accepted an exact certificate for the false bound `s(1) ≥ 11/10`. This branch makes nonnegativity a shared precondition and retains that object as a must-refuse regression. |
-| Does a method-distinct computation confirm C4? | **Accept on this stack** | The interval branch-and-bound certifies all 361 directions with no stalled or budget-exhausted box and encloses the minimum exactly at `50003/50000`. Samples, unsafe integer magnitudes, and below-one enclosures cannot produce acceptance. |
-| Is the historical claim established? | **Apparently novel, high confidence** | The search found no public lower bound after Stromquist 2003 that reaches `19/5`, but it cannot establish absolute priority over unindexed or unpublished work. |
+| Does a method-distinct computation confirm C4? | **Accept on this stack** | The interval branch-and-bound certifies all 361 directions with no stalled or budget-exhausted box and encloses the minimum exactly at `4001/4000`. Samples, unsafe integer magnitudes, and below-one enclosures cannot produce acceptance. |
+| Is the historical claim established? | **Apparently novel, high confidence** | The search found no public lower bound after Stromquist 2003 that reaches `381/100`, but it cannot establish absolute priority over unindexed or unpublished work. |
+| Are the upstream commit’s frozen-byte claims reliable? | **No; repaired here** | The retained file hashes to `b121…e6a`, not the `503c…7cd6` named in the introducing commit. Both full decisions were rerun against `b121…e6a`; the old attestation is discarded. |
 | Is the reviewed parent ready to merge unchanged? | **Request changes** | Its generic and interval verifier boundaries, retained declarations, falsification gate, provenance language, and validation classification all needed repairs. This stacked branch supplies them and records the result at C5 after validation. |
 
 The most important distinction is between the parent implementation and the concrete
 instance. The generic implementation was unsound; the specific instance was sound.
-Adding the missing premise does not change the retained certificate: all 425 of its
+Adding the missing premise does not change the retained certificate: all 1,121 of its
 weights were already strictly positive.
 
 ## Scope and adversarial method
@@ -34,9 +35,12 @@ weights were already strictly positive.
 This review concentrates on T-018, not PR 78’s separate `n = 12` result.
 It checked the mathematical implication, the exact bytes retained for `n = 11`, the
 continuum-to-finite reduction, replay and validation boundaries, method provenance, and
-the novelty claim. The PR advanced from `9b85236b` to `bdf63b21` during the audit.
-The self-contained verification package, interval-certified branch-and-bound checkpoint,
-and later retained `n = 17` certificates were included before the verdict was frozen.
+the novelty claim. The PR advanced repeatedly during the audit, from `9b85236b` through
+`bdf63b21` and finally to `6fc71ce9`; the last update replaced the `19/5` target
+artifact with a larger `381/100` certificate, so the concrete validation restarted on
+the new bytes. The self-contained verification package, interval-certified
+branch-and-bound checkpoint, and later retained `n = 17` certificates were included
+before the verdict was frozen.
 The later `n = 17`--`19` frontier movement was outside this review’s mathematical scope
 except where the earlier published-value `n = 17` certificate served as a control.
 
@@ -198,10 +202,10 @@ D-438 records the defect.
 
 ### F5 — Low in the parent, fixed here: one scope disclaimer was false by monotonicity
 
-The standalone README says the result is “not a bound for any other `n`.” Since `s(n)`
-is nondecreasing, `s(11) ≥ 19/5` also implies `s(n) ≥ 19/5` for every `n ≥ 11`. The
-intended and defensible statement is that it improves no currently recorded higher-`n`
-bound.
+The standalone README said the result was “not a bound for any other `n`.” Since `s(n)`
+is nondecreasing, `s(11) ≥ 381/100` also implies `s(n) ≥ 381/100` for every `n ≥ 11`.
+The intended and defensible statement is that it improves no currently recorded
+higher-`n` bound.
 
 The standalone README and T-018’s composition record now say exactly that.
 
@@ -243,7 +247,7 @@ D-440 records the defect.
 
 The standalone falsifier originally had no expected verdicts: it printed a convincing
 mutation table and returned success regardless of whether a mutation was accepted or a
-condition changed. The package’s `check.sh` did not run it.
+condition changed. The package’s original one-command check did not run it.
 Separately, the verifier silently coerced JSON decimals, strings, and Booleans through
 `int(...)`, accepted duplicate keys, indexed malformed atom records before validating
 them, and raised on both empty and singleton feasible domains.
@@ -252,7 +256,7 @@ None changes the shipped certificate’s arithmetic.
 They do matter to the package’s claim to be a compact trust boundary.
 
 **Resolution:** every full mutation now has an exact oracle for its verdict, conditions,
-and minimum, and a quick signed-weight refusal runs in `check.sh`. The loader is strict
+and minimum, and a quick signed-weight refusal runs in `check.py`. The loader is strict
 and duplicate-free, malformed input becomes a clean refusal, an empty placement domain
 is treated as vacuous, and a singleton closed placement is evaluated directly.
 D-436 and D-437 record these defects; focused tests cover each case.
@@ -310,14 +314,31 @@ returns the average of that convex polygon’s vertices, and checks strict membe
 the open cell. The fixture now maps to the feasible centre `(13/18,43/60)`. D-444 and a
 focused regression record the repair.
 
+### F12 — High provenance defect, fixed here: the new commit names the wrong certificate hash
+
+Commit `6fc71ce9` says its exact and interval decisions read frozen certificate bytes
+with SHA-256 `503c7d154d36ae1e16d3002ab3c5b003316fc47c14718cf65b3dbc43af4d7cd6`. The
+`certificate.json` blob in that commit and at the reviewed head instead hashes to
+`b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a`. The advertised
+digest occurs nowhere in the tree.
+
+This discrepancy is not a mathematical counterexample, but it severs the commit
+message’s claimed link between transcript and artifact.
+The original exact/interval run cannot establish which bytes it read merely because its
+reported rational values agree.
+
+**Resolution:** this review discards the old attestation, binds the actual retained hash
+in a fast test and the theorem-specific checker, and reruns both full decisions from the
+retained path. D-445 preserves the mismatch rather than rewriting history.
+
 ## Frozen hypotheses and outcomes
 
 | ID | Pre-registered hypothesis | Outcome |
 | --- | --- | --- |
-| H1 | C0-C4, exactly as first stated, imply that eleven unit squares cannot fit at side `19/5`. | **Refuted as stated.** Signed weights are a counterexample. **Pass after repair:** add `w_i ≥ 0`, as the later standalone theorem does. |
-| H2 | The retained bytes satisfy every explicit and implicit proof premise. | **Pass.** All 425 weights are strictly positive, in addition to C0-C4. |
-| H3 | A clean-room exact checker obtains mass at least one over all centres and all 181 net directions. | **Pass.** It obtains `50003/50000` exactly. |
-| H4 | The declared literature search finds no lower bound after Stromquist 2003 that reaches `19/5`. | **Pass at apparent-novelty scope.** No stronger public result was located; absolute priority remains unproved. |
+| H1 | C0-C4, exactly as first stated, imply that eleven unit squares cannot fit at the certificate’s side (originally `19/5`, repeated at `381/100`). | **Refuted as stated.** Signed weights are a counterexample. **Pass after repair:** require `w_i ≥ 0`; the implication then applies unchanged to the new rung. |
+| H2 | The retained bytes satisfy every explicit and implicit proof premise. | **Pass.** All 1,121 current weights are strictly positive, in addition to C0-C4. |
+| H3 | A source-distinct exact checker obtains mass at least one over all centres and all 181 net directions. | **Pass.** It obtains `4001/4000` exactly on the current bytes. |
+| H4 | The declared literature search finds no lower bound after Stromquist 2003 that reaches the proposed value. | **Pass at apparent-novelty scope.** Searches for both `19/5` and `381/100` located no stronger public result; absolute priority remains unproved. |
 | H5 | Replay and validation gates bind the retained claims and refuse targeted corruptions. | **Fail on the parent; pass after remediation.** The stack refuses signed weights and partial-net or below-one interval verdicts, bounds interval work and integer arithmetic, binds all retained declarations, gives falsifications executable oracles, strictly parses the portable record, and separates exhaustive decisions from the fast tier. |
 
 The mathematical claim met the acceptance rule only after the missing nonnegative
@@ -358,16 +379,16 @@ statement `s(n) > L`, not for the claimed weak inequality.
 
 | Obligation | Result | Evidence |
 | --- | --- | --- |
-| Finite nonnegative atomic measure | **Parent fail; stack pass** | 425 finite, strictly positive weights; this stack adds the missing shared guard as well as the standalone theorem premise. |
-| Atoms and exact arithmetic | **Pass** | 425 distinct rational sites; all quantities parsed as rational numbers; certificate copies byte-identical. |
+| Finite nonnegative atomic measure | **Parent fail; stack pass** | 1,121 finite, strictly positive weights; this stack adds the missing shared guard as well as the standalone theorem premise. |
+| Atoms and exact arithmetic | **Pass** | 1,121 distinct rational sites; all deciding quantities are rational. The fast regression and minimal checker bind the actual digest; every complete run named that same retained path. |
 | Symmetry used for orientation reduction | **Pass** | Exact D4 closure; the proof needs only diagonal reflection. |
-| C1 total mass below 11 | **Pass** | `43391/4000 = 10.84775`; slack `609/4000`. |
+| C1 total mass below 11 | **Pass** | `434547/40000 = 10.863675`; slack `5453/40000`. |
 | Net starts at zero, increases, and reaches `π/4` | **Pass** | Uniform `t_k = (207107/500000)k/180`; C2 slack `309449/250000000000`. |
 | Nearest-net containment | **Pass** | `D = 207107/90000000`; `B(1+D) = 899996306539/900000000000 < 1`. |
-| Every net-direction placement has mass at least one | **Pass** | Independent exact minima agree at `50003/50000`; no sampling or floating-point decision. |
+| Every net-direction placement has mass at least one | **Pass** | Source-distinct exact minima agree at `4001/4000`; no sampling or floating-point decision. |
 | Closed-boundary convention | **Pass for this certificate** | With nonnegative weights, event-cell boundaries can only add mass; strict C3 puts every closed inner square inside one packed square’s open interior. |
 | Pullback and disjoint-mass sum | **Pass after explicit nonnegativity** | D4 invariance preserves mass; inner squares lie in disjoint interiors; monotonicity is then valid. |
-| Conclusion `s(11) ≥ 19/5` | **Pass** | No-fit at `L` also rules out every smaller container by embedding. |
+| Conclusion `s(11) ≥ 381/100` | **Pass** | No-fit at `L` also rules out every smaller container by embedding. |
 
 ## Minimal distillation
 
@@ -393,12 +414,13 @@ proof-producing partition receipt; a table of 181 reported minima is not enough.
 The smallest practical audit surface is therefore a combination: the one-minute proof,
 the exact C4 formula printed in `PROOF.md`, the immutable certificate hash, and a
 theorem-specific standard-library checker.
-Its event-cell geometry and scoring core is 139 lines; the whole executable is 355 lines
-including strict input, declaration, checksum, symmetry, arithmetic, output, and
-mutation checks. It recomputes 90,546,593 cells and the exact minimum, then demonstrates
-a C4 failure after lowering one complete D4 orbit.
-This is materially smaller than the general 645-line portable verifier without hiding
-the continuum step in an assertion.
+Its event-cell geometry and scoring core is about 140 lines; the whole executable is 346
+lines including strict input, declaration, checksum, symmetry, arithmetic, output, and
+mutation checks.
+It recomputes 567,130,649 cells and the exact minimum, then demonstrates
+a C4 failure after multiplying every weight by `3999/4001`. This is materially smaller
+than the general 645-line portable verifier without hiding the continuum step in an
+assertion.
 
 ## Lean feasibility spike
 
@@ -418,23 +440,23 @@ The vendor-free
 [`lean-spike`](../../../packing/cases/n11_fractional_certificate/lean-spike/README.md)
 pins both direct and transitive dependencies and states its non-goals beside the source.
 
-This is a successful feasibility result, not a formal proof of `s(11) ≥ 19/5`. It does
-not yet define oriented squares or `s(n)`, prove the nearest-angle geometry, load the
-425 atoms, or prove C4. The remaining ordinary geometry is plausibly several focused
-days. Formalizing arrangement correctness and the full C4 computation is the dominant
-project, plausibly one to three or more weeks.
-Direct kernel reduction of 90,546,593 rational cells would be a poor design.
+This is a successful feasibility result, not a formal proof of `s(11) ≥ 381/100`. It
+does not yet define oriented squares or `s(n)`, prove the nearest-angle geometry, load
+the 1,121 atoms, or prove C4. The remaining ordinary geometry is plausibly several
+focused days. Formalizing arrangement correctness and the full C4 computation is the
+dominant project, plausibly one to three or more weeks.
+Direct kernel reduction of 567,130,649 rational cells would be a poor design.
 
 The promising full-formalization route is a proof-producing per-direction certificate:
-record exact feasible row intervals and range minima—at most roughly 181 × 851 rows for
-this data—and prove a small Lean checker sound.
+record exact feasible row intervals and range minima—at most roughly 181 × 2,243 rows
+for this data—and prove a small Lean checker sound.
 That would shrink the trusted computation without asking the kernel to repeat the
 search.
 `native_decide` would make a direct replay shorter, but Lean implements it with a
 compiler-trusting axiom, which defeats the strongest third-party-verification goal.
 
 **Disposition:** full Lean formalization is feasible, but the one-minute proof plus the
-355-line exact checker is presently simpler and more compelling.
+346-line exact checker is presently simpler and more compelling.
 Keep the compiled Lean kernel as a formal audit of the load-bearing inequality and as
 the starting point for a future proof-producing C4 receipt; do not present it as
 validation of the headline claim.
@@ -444,14 +466,14 @@ validation of the headline claim.
 | Quantity | Exact value | Margin or note |
 | --- | --- | --- |
 | `n` | `11` | — |
-| `L` | `19/5` | `3.8` |
+| `L` | `381/100` | `3.81` |
 | `B` | `9977/10000` | `0.9977` |
-| atoms | `425` | 425 distinct coordinates; every weight `> 0` |
-| total mass | `43391/4000` | C1 slack `609/4000` |
+| atoms | `1,121` | 1,121 distinct coordinates; every weight `> 0`; minimum `3/40000` |
+| total mass | `434547/40000` | C1 slack `5453/40000` |
 | terminal half-tangent | `207107/500000` | C2 slack `309449/250000000000` |
 | largest half-gap tangent | `207107/90000000` | 180 uniform gaps |
 | containment product | `899996306539/900000000000` | C3 slack `3693461/900000000000` |
-| global covered-mass minimum | `50003/50000` | C4 slack `3/50000`; first attained at direction zero and centre `(53/100,53/100)` |
+| global covered-mass minimum | `4001/4000` | C4 slack `1/4000`; first attained at direction zero and centre `(27/50,27/50)` |
 
 The small C3 and C4 margins do not create a numerical problem because every deciding
 operation is exact.
@@ -460,22 +482,27 @@ an inappropriate trust path.
 
 ## Independent validation
 
-Five complete executions were reconciled against the retained bytes.
-Four use exact event arrangements; the fifth covers centre boxes by directed-rounding
+Four complete decisions were reconciled against the retained `b121…e6a` bytes.
+Three use exact event arrangements; the fourth covers centre boxes by directed-rounding
 intervals and does not use the certificate’s symmetry premise for C4.
 
 | Lane | Independence boundary | Result |
 | --- | --- | --- |
-| Project replay | Primary `sqpack.fractional` implementation | C0-C4 pass; minimum `50003/50000`; both `n = 11` rungs replay. |
-| Retained independent verifier | The theorem-derived verifier retained for `n = 12`, pointed at the `n = 11` JSON | All 181 directions pass; closure lower bound equals representative upper bound at `50003/50000`; three cells per direction re-summed directly. |
-| Review clean room | New standard-library checker written from an anonymous theorem packet, with no project imports | 142,931 feasible slabs and 91,080,421 open-cell intersections checked; direct axis enumeration checked 34,969 cells; minimum `50003/50000`. Checker SHA-256 `e591989b7f84cafadf20ef35aa918ffb960a71fa1858b7da1346c932c6202c8a`. |
-| PR’s self-contained package | Newly added standard-library checker, run directly on its duplicate certificate | 90,546,593 open cells over 181 directions; minimum `50003/50000`; exact declaration matches. The same executable reconstructs and verifies the `n = 17` control at `22529/5000`, with minimum exactly one. |
-| Interval branch and bound | NumPy implementation using outward-rounded region and domain boxes, direct centre-box coverage bounds, and the reflected half of the net instead of D4 reduction | All 361 directions certify; no stalled or budget-exhausted box; global enclosure `[50003/50000,50003/50000]`. The same code obtains one-point enclosures for the retained `n = 12` certificate and the published-value `n = 17` reconstruction. |
+| Project replay | Primary `sqpack.fractional` prefix-sum implementation | C0-C4 pass over all 181 directions and 567,130,649 feasible event cells; minimum `4001/4000`. All three retained `n = 11` rungs replay. |
+| Standalone general verifier | A standard-library implementation with its own strict loader and exact event sweep, pointed explicitly at the current JSON | All 181 directions pass at `4001/4000`; three minimizing cells per direction are re-summed directly; runtime 88.47 s in the independent review lane. |
+| Minimal theorem-specific checker | A 346-line standard-library program with no project imports, bound to the actual certificate SHA-256 | All 567,130,649 feasible event cells pass at minimum `4001/4000`; direct summation confirms the witness at `(27/50,27/50)`; uniform weight scaling produces a genuine below-one refusal. |
+| Interval branch and bound | NumPy implementation using outward-rounded region and domain boxes, direct centre-box coverage bounds, and the reflected half of the net instead of D4 reduction | All 361 directions certify in 1,570,831 boxes; no stalled or budget-exhausted box; global enclosure `[4001/4000,4001/4000]`. The same code obtains one-point enclosures for the retained `n = 12` certificate and the published-value `n = 17` reconstruction. |
 
 The different cell counts reflect different conservative feasibility and boundary
 enumerations; they do not represent skipped directions.
 Every complete path agrees on the exact minimum and a direct witness.
-The two certificate copies have the same SHA-256 and compare byte for byte.
+Every path reads the same repository file; the fast test and minimal checker require its
+actual SHA-256 before interpreting it.
+
+A further run of the NumPy verifier originally written independently for `n = 12` was
+stopped after 501 seconds without reaching a verdict on the larger 1,121-atom instance.
+That is a performance result, not mathematical evidence either way, and it is not
+counted among the complete decisions above.
 
 Negative controls included broken D4 orbits, reduced weights, removed atoms, an enlarged
 container, a too-short angular net, non-strict containment, declared-value mutations,
@@ -488,8 +515,10 @@ The interval lane supplies decision-method diversity for C4, but not outside aut
 or proof-assistant verification.
 Every positive decision still relies on the rational direction-net containment lemma,
 and every checker was produced within the project.
-The Massaccesi control anchors a known value and catches scaling errors; it is recent,
-reconstructed, and not peer reviewed.
+The frozen `19/5` third-party bundle separately reproduces Massaccesi’s `n = 17` result
+as a known-answer scaling control.
+It raises confidence in the shared theorem and the older verifier, but it does not
+validate the extra `1/100` in the current certificate.
 
 ## Literature and novelty audit
 
@@ -503,16 +532,16 @@ states the unrestricted lower bound
 s(11) ≥ 2 + 2√(4/5) = 2 + 4/√5 = 3.7888543819… .
 ```
 
-The new rational value exceeds it exactly because `5(19/5-2)² = 81/5 > 16`. The
-improvement is about `0.011145618`, or `0.294%` of the old lower bound.
+The new rational value exceeds it exactly because `5(381/100-2)² = 32761/2000 > 16`. The
+improvement is about `0.021145618`, or `0.558%` of the old lower bound.
 Against Trump’s best-known packing at approximately `3.877083590022814`, it closes about
-`12.63%` of the previously open interval.
+`23.97%` of the previously open interval.
 It does not determine `s(11)`.
 
 The current
 [Leaps in Bounds entry](https://leapsinbounds.org/constants/square-packing-in-square-11/)
 and Friedman’s
-[*Packing Unit Squares in Squares: A Survey and New Results*](https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7)
+[*Packing Unit Squares in Squares* survey page](https://erich-friedman.github.io/papers/squares/squares.html)
 still report the Stromquist lower bound.
 Trump’s page identifies his 1979 construction as the
 [best-known packing](https://trump.de/square-packing/index.htm).
@@ -524,11 +553,11 @@ gives only `1 + √6 ≈ 3.449` when specialized to `n = 11`.
 
 The clean literature lane searched through 2026-09-04 for “unit,” “equal,” and
 “congruent” squares packed in a square; `s(11)` and `s_11`; eleven-square lower bounds;
-the exact constants `19/5`, `5/19`, and `275/361`; and weighted, fractional, resource,
-and unavoidable-set formulations.
-It checked the local source corpus, arXiv title and full-text results, Crossref,
-OpenAlex, Semantic Scholar citation chains, author pages, public packing catalogues, and
-recent fixed-`n` and asymptotic papers.
+the exact constants `381/100`, `100/381`, and `110000/145161`, as well as the earlier
+`19/5`, `5/19`, and `275/361`; and weighted, fractional, resource, and unavoidable-set
+formulations. It checked the local source corpus, arXiv title and full-text results,
+Crossref, OpenAlex, Semantic Scholar citation chains, author pages, public packing
+catalogues, and recent fixed-`n` and asymptotic papers.
 No later public lower bound above Stromquist’s value was found.
 
 The search is not a proof of priority.
@@ -583,7 +612,7 @@ line. It should not imply that weighted resource counting itself began in 2026.
    This would turn code-level diversity into reviewer independence.
 3. **Formalize the stable kernel, selectively.** The Lean spike above shows that the
    nonnegative finite-measure counting lemma and rational C0-C3 arithmetic are small.
-   Formalizing rotated-square containment and the full 90.5-million-cell C4 decision is
+   Formalizing rotated-square containment and the full 567-million-cell C4 decision is
    feasible in principle but is not currently the simplest audit surface.
 4. **Use proof-producing C4 verification.** Have the enumerator emit a compact,
    versioned arrangement certificate and let a much smaller checker validate every
@@ -604,31 +633,15 @@ All project commands used the repository’s Python 3.14 environment from `packi
 
 | Command or check | Result |
 | --- | --- |
-| `.venv/bin/python3 -m cases.n11_fractional_certificate` | Both retained `n = 11` rungs accepted; target minimum `50003/50000`. |
-| retained independent verifier on `cases/n11_fractional_certificate/certificate.json`, all directions, `brute_check=3` | Accepted; exact lower and representative minima both `50003/50000`. |
-| review clean-room checker | Accepted concrete certificate; 181 directions; minimum `50003/50000`; exact mutation suite behaved as declared. |
-| `thirdparty/check.sh` | All four steps passed: the `n = 11` certificate in 24.2 s, the reconstructed published-value `n = 17` control in 7.4 s, deterministic reconstruction, and the negative-weight refusal. |
-| retained `n = 11` and `n = 12` full-certificate tests | **2 passed** in 645.39 s. |
-| `n = 11` target and below-Stromquist calibration tests | **2 passed** in 422.51 s. |
-| retained independent `n = 11` verifier plus `minimal_verify.py` | **2 passed** in 323.04 s. |
-| all complete interval confirmations | **3 passed**, 25 deselected, in 41.68 s; `n = 11`, `n = 12`, and the `n = 17` control each produced a one-point enclosure. |
-| theorem-specific minimal-checker test | **1 passed** in 26.78 s; 90,546,593 cells and the symmetry-preserving failing mutation both checked. |
-| repaired fast review subset | **76 passed**, 9 deselected, in 146.63 s. |
+| `.venv/bin/python3 -m cases.n11_fractional_certificate` | Accepted all three retained rungs: `189/50`, `19/5`, and the current `381/100`; the current exact minimum is `4001/4000`. |
+| `thirdparty/verify.py` on the current certificate, `--audit 3` | Accepted all 181 directions and 567,130,649 regions at minimum `4001/4000`; three cells per direction were directly re-summed; C4 took 88.3 s. |
+| `minimal_verify.py` on the current certificate | Hash, C0-C4, 567,130,649 cells, minimum `4001/4000`, and the `3999/4001` scaling refusal all passed in 83.522 s. |
+| `thirdparty/check.py` | All four frozen-package steps passed: reconstruct the published-value `n = 17` control, verify the `19/5` rung, verify the control, and require a labeled negative-weight refusal. |
+| complete current interval confirmation | **1 passed** in 19.14 s; all 361 directions certified, with enclosure `[4001/4000, 4001/4000]`. |
+| repaired focused regressions | **56 passed**, 5 exhaustive tests deselected, in 6.01 s. |
 | exact five-atom signed certificate through `sqpack.fractional.verify` | **Incorrectly accepted**, proving F1. |
 | `.venv/bin/basedpyright` at the reviewed head | **Failed: 26 errors**, proving F2. |
-| repaired Ruff, Ruff format, and BasedPyright floors | Passed; BasedPyright reports **0 errors, 0 warnings, 0 notes**. |
-| `packing-validate --records` | All 27 selected record checks passed in 7.64 s. |
-| `packing-validate --edit` | All 33 selected edit checks passed in 38.40 s. |
-| unsandboxed `packing-validate --push` | All 34 selected steps passed; **1,716 passed**, 34 exhaustive tests deselected, in 1,022.71 s. |
-| full checkpoint, then isolated retries of its two incomplete steps | The full run passed 57 of 59 steps; the exact group timed out under contention and a restricted PATH hid `uv` from negative-control workers. On the unchanged tree with the corrected PATH, all **155 negative controls** fired and all **34 exhaustive exact tests passed** in 1,549.14 s. |
-| Rust search-engine self-test, Clippy, and rustfmt | Passed in a focused rerun after restoring Cargo to PATH. |
 | fresh-copy Lean build and axiom audit | `lake build Kernel` passed in 9.38 s; the audit passed in 2.55 s and reported only `propext`, `Classical.choice`, and `Quot.sound`. |
-
-The first pre-push attempt ran inside a filesystem sandbox and reached the entire test
-suite, but five unrelated service and process-tree tests received `PermissionError` for
-loopback binding or `ps`. The identical unsandboxed rerun passed.
-The failed full-gate attempt and its two successful focused retries are recorded
-separately rather than collapsed into an unqualified single-command pass.
 
 ## Residual risk
 
@@ -644,7 +657,7 @@ instance.
 That is strong evidence for a computer-assisted result, but not formal verification or
 external peer review.
 The responsible conclusion is therefore specific: **the certificate establishes
-`s(11) ≥ 19/5`; the result appears to improve the public record; and the repaired
+`s(11) ≥ 381/100`; the result appears to improve the public record; and the repaired
 stacked branch, not the reviewed parent alone, is the finished local research artifact.
 External mathematical review and an archival release remain the most valuable next
 formalities.**

@@ -69,10 +69,10 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 
 | Result | `n` | [`V`](epistemics.md#verification) | [`C`](epistemics.md#confirmation) | [`S`](epistemics.md#significance-and-novelty) | [Novelty](epistemics.md#significance-and-novelty) | What it establishes |
 | --- | --- | --- | --- | --- | --- | --- |
-| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 19/5, by a first-party weighted fractional unavoidable-set certificate at container side 19/5 = 3.8. |
+| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
+| [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 197/50, by a first-party weighted fractional unavoidable-set certificate at container side 197/50 = 3.94. |
+| [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 451/100, and s(18) >= 451/100 and s(19) >= 451/100 by monotonicity, from a first-party weighted fractional unavoidable-set certificate at container side 451/100 = 4.51. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
-| [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C3` | `S4` | `apparently-novel` | s(12) >= 197/50, by a first-party weighted fractional unavoidable-set certificate at container side 197/50 = 3.94. |
-| [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C3` | `S4` | `apparently-novel` | s(17) >= 451/100, and s(18) >= 451/100 and s(19) >= 451/100 by monotonicity, from a first-party weighted fractional unavoidable-set certificate at container side 451/100 = 4.51. |
 | [T-014](packing/frontier/RESULTS.md) | 5 | `V3` | `C5` | `S3` | `apparently-novel` | For s = 2 + sqrt(2)/2 and Goebel’s labeled pose P0 in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) -- closed unit squares in [0, s]^2, pairwise disjoint interiors -- equivalently there is no nonconstant continuous feasible path from P0 and no sequence of distinct feasible poses converging to it; hence the n = 5 optimum is rigid at fixed side in the catalogue’s sense. |
 | [T-001](packing/frontier/RESULTS.md) | 17 | `V4` | `C4` | `S3` | `apparently-novel` | Sixteen points make [0, 4426213/1000000]^2 unavoidable for open squares of side above one, so s(17) >= 4426213/1000000 = 4.426213. |
 | [T-002](packing/frontier/RESULTS.md) | 18 | `V4` | `C4` | `S3` | `apparently-novel` | s(18) >= 4426213/1000000, by monotonicity from T-001 (a packing of 18 unit squares contains a packing of 17). |
@@ -255,12 +255,13 @@ case or experiment separately.
 | [BC-154 — independent review of the W9 disposition for D-044 and D-046](docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md) | dated review record | record | retained | — |
 | [BC-158 — factual review of the H-060 / exp-058 records against their sources](docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — independent verification of T-017 (s(12) ≥ 77/20)](docs/project/reviews/review-2026-09-04-t017-independent-verification.md) | dated review record | record | retained | — |
-| [Adversarial review of PR 78 — the `s(11) ≥ 19/5` claim](docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md) | dated review record | record | retained | — |
+| [Adversarial review of PR 78 — the `s(11) ≥ 381/100` claim](docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md) | dated review record | record | retained | — |
+| [Review 2026-09-04 — Hostile Third-Party Check of the s(11) ≥ 19/5 Package (T-018)](docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
-| [One-minute proof that `s(11) ≥ 19/5`](packing/cases/n11_fractional_certificate/PROOF.md) | component scope and use | definitive | maintained | — |
-| [Lean Feasibility Spike for the `s(11) ≥ 19/5` Certificate](packing/cases/n11_fractional_certificate/lean-spike/README.md) | typed idea provenance | supporting | retained | — |
+| [One-minute proof that `s(11) ≥ 381/100`](packing/cases/n11_fractional_certificate/PROOF.md) | component scope and use | definitive | maintained | — |
+| [Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate](packing/cases/n11_fractional_certificate/lean-spike/README.md) | typed idea provenance | supporting | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
@@ -2617,7 +2618,7 @@ round that names the hypothesis, control roles included.
 | [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | unresolved | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 2 | — |
 | [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | confirmed | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 1 | — |
 | [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md) | confirmed | Goebel’s exact `n = 5` optimum is locally rigid when the container side is fixed | 1 | 11s wall |
-| [H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md) | open | A first-party fractional unavoidable-set certificate at side `19/5` proves `s(12) ≥ 3.8`, the first `n = 12`-specific bound; carried well past its own claim to `393/100` ([T-017](packing/frontier/RESULTS.md)) and to `s(11) ≥ 19/5` ([T-018](packing/frontier/RESULTS.md)), with the whole ladder retained and verified, and the round that closes the hypothesis is not yet written | 0 | — |
+| [H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md) | open | A first-party fractional unavoidable-set certificate at side `19/5` proves `s(12) ≥ 3.8`, the first `n = 12`-specific bound; carried well past its own claim to `197/50` ([T-017](packing/frontier/RESULTS.md)) and to `s(11) ≥ 381/100` ([T-018](packing/frontier/RESULTS.md)), with the whole ladder retained and verified, and the round that closes the hypothesis is not yet written | 0 | — |
 
 ### Confirmed
 
@@ -3201,14 +3202,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 444 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 445 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 95 | asserted something false about the mathematics |
 | validity | 118 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 158 | recorded something its own evidence contradicts |
+| bookkeeping | 159 | recorded something its own evidence contradicts |
 | robustness | 56 | did not finish, or finished only by luck |
 | performance | 17 | worked, but cost far more than it should |
 
@@ -3218,7 +3219,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-four defects in 444, and no soundness defect
+**The automated gate has caught sixty-four defects in 445, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

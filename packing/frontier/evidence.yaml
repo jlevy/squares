@@ -1290,14 +1290,14 @@ evidence:
         citation chains, author pages and public packing catalogues for unrestricted
         packing of eleven unit, equal or congruent squares; s(11) and s_11; lower bounds;
         weighted, fractional, resource and unavoidable-set methods; and the exact values
-        19/5, 5/19 and 275/361. No public lower bound above Stromquist's
+        381/100, 100/381, 110000/145161, 19/5, 5/19 and 275/361. No public lower bound above Stromquist's
         2 + 4/sqrt(5) = 3.788854 was located.
       novel_object: >-
         The certificate and the bound. The weighted-resource lineage predates 2026;
         this certificate uses the exact-rational, pure-atomic direction-net architecture
         posted by Burns from a note bylined ChatGPT and then developed by Massaccesi,
         while the generator is this project's. What is new is an instance at n = 11 and
-        side 19/5, the first located improvement to this case's lower bound since 2003.
+        side 381/100, the first located improvement to this case's lower bound since 2003.
       gaps: >-
         This does not exhaust subscription-only MathSciNet or zbMATH full text, every
         thesis or proceedings volume, non-English or unindexed sources, private
@@ -1307,86 +1307,62 @@ evidence:
     replay: uv run --frozen --all-extras python -m cases.n11_fractional_certificate
     replay_status: passed
     limitations: >-
-      Decides five conditions in exact rational arithmetic over 425 atoms on a
+      Decides five conditions in exact rational arithmetic over 1121 atoms on a
       D4-symmetric site set: the atom multiset is closed under the container's D4 group,
-      the total mass is 43391/4000 = 10.84775 and so strictly below 11, the 181-direction
-      net reaches pi/4, containment B(1 + D) < 1 holds at B = 9977/10000, and every
-      reachable event cell at every net direction carries mass at least 1, the least
-      being 50003/50000. The bound proved is the container side itself, 19/5, and the
-      shrunken square rescales nothing.
+      the total mass is 434547/40000 = 10.863675 and so strictly below 11, the
+      181-direction net reaches pi/4, containment B(1 + D) < 1 holds at B = 9977/10000,
+      and every reachable event cell at every net direction carries mass at least 1, the
+      least being 4001/4000. The bound proved is the container side itself, 381/100, and
+      the shrunken square rescales nothing.
       The certificate was found by column generation over D4 orbits after the separation
       oracle was corrected to score the same cells the verifier decides (D-434); before
       that correction the same search stalled above 11. It was re-decided from its file
-      on disk rather than in memory, and an independent evaluator -- the one written from
-      the theorem statement for T-017, which reproduces Massaccesi's publicly posted
-      n = 17 bound as its own control -- confirmed all 181 directions and obtained the
-      exact global minimum 50003/50000, first at the upright direction. The retained
-      file's bytes were checksummed against the file that evaluator read.
+      on disk rather than in memory: the coordinator froze the generator's output to an
+      immutable path and decided the retained file, which matters here because the generator
+      overwrote the same filename with a different certificate between the two attempts
+      at this side. The retained bytes have SHA-256
+      b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a. The introducing
+      commit message names a different hash for what it calls the same frozen bytes;
+      D-445 records that provenance error, so no conclusion here relies on the message's
+      attestation. The interval verifier accepted the retained bytes over all 361
+      directions of the doubled net in 1,570,831 boxes with none stalled, returning a
+      width-zero enclosure at 4001/4000 -- the same value the exact sweep reports.
       A calibration rung is retained beside it at side 189/50 = 3.78, below Stromquist's
       bound, where the certificate proves nothing new. That run was made first and on
       purpose: it is the diagnostic the project registered in advance to test the
       approach honestly, and it is evidence that the instrument returns sane values below
       the frontier as well as above it.
-      Not independent by method: both decisions are exact-algebraic, so this supports C3
-      and not C4.
-      A self-contained package for third-party checking ships beside the certificate at
+      This entry is the exact-algebraic decision; C4 rests on
+      E-fractional-interval-decision, which decides the same bytes by a different method.
+      A self-contained package for third-party checking ships beside the certificates at
       cases/n11_fractional_certificate/thirdparty/: the theorem written out for a reader
       with no context, the certificate as plain data, and a single-file verifier that
       imports nothing outside the Python standard library or from the rest of this
-      repository. Copied outside the checkout and run under `env -i` on the system
-      interpreter, it decides all five conditions and reports the same least covered
-      weight, 50003/50000, over 90,546,593 cells and 181 directions in about 34 s. The
+      repository. The package carries the 19/5 rung rather than the top one, so its
+      one-command check proves s(11) >= 19/5. Copied outside the checkout and run under
+      `env -i` on the system interpreter, it decides all five conditions and reports the
+      least covered weight 50003/50000 over 90,546,593 cells and 181 directions. The
       same verifier, unchanged, returns Massaccesi's publicly posted 22529/5000 from a
       reconstruction of his constants, which provides an external known-answer control
-      for the verifier rather than evidence about this certificate. Ten perturbations
+      for the verifier rather than evidence about the n = 11 certificate. Ten perturbations
       are refused and tabulated with the condition each breaks. The package is a third
       exact-rational implementation of the same reduction, so it does not move the
-      confirmation rung. It permits replay without importing code from the rest of the
-      project or installing its dependencies, but it was written inside the project and
-      no one outside the project has reviewed the result yet.
-      A theorem-specific 355-line audit kernel sits beside it. Its 139-line geometry and
-      scoring core checks the same 90,546,593 cells, binds the exact certificate SHA-256,
-      and runs a full-orbit mutation that preserves C0-C3 and exhibits a C4 witness below
-      one. It narrows applicability rather than hiding generic cases, and is the smallest
-      retained executable recommended for a reader auditing only this theorem.
-    source_reviewed: '2026-09-04'
-  - id: E-n011-fractional-interval-confirmation
-    claim: lower-bound
-    scope:
-      n_values:
-        - 11
-    assurance: verified
-    method: interval-certified
-    performed_by: repository
-    relationship_to_generator: independent-implementation
-    origin: audited-here
-    certificate: cases/n11_fractional_certificate/certificate.json
-    replay: uv run --frozen --all-extras --group dev pytest -q tests/test_fractional_interval.py::test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net
-    replay_status: passed
-    limitations: >-
-      Confirms the same n = 11 certificate by a different decision method. Directed-
-      rounding floating-point intervals enclose every atom region, and branch and bound
-      covers boxes of admissible centres directly rather than constructing the exact
-      event-cell arrangement. It checks the 181 rational net directions and their 180
-      distinct diagonal reflections, so it does not use D4 symmetry to reduce C4. All 361
-      searches certify with no stalled or budget-exhausted box, and the global mass enclosure collapses to
-      [50003/50000, 50003/50000], matching the exact-algebraic verifier.
-      The same implementation accepts the retained n = 12 certificate and reconstructs
-      Massaccesi's publicly posted n = 17 value as known-answer controls. It refuses the
-      too-large-container and lowered-weight fixtures; an exact region-edge coincidence
-      is retained as an undecided-not-accepted control. The adversarial review found and
-      fixed three pre-registration soundness defects: a restricted direction sample could
-      report theorem acceptance (D-439), unchecked integer masses could overflow NumPy
-      int64 before C1 rejected them (D-440), and enclosure mode could accept a computed
-      minimum below one (D-442). Restricted samples are now diagnostic only, exact
-      Python-integer preflight bounds every later subset sum below 2^62, and acceptance
-      independently requires every full-net lower bound to reach one.
-      This is method-distinct computation inside the claiming repository, not a proof-
-      assistant derivation or an outside review. It trusts CPython, NumPy, IEEE-754
-      directed widening by `nextafter`, and the written branch-and-bound argument; an
-      unresolved interval seam is conservatively reported as undecided. A per-direction
-      work cap makes that refusal operationally bounded (D-443); no retained full-net
-      control exhausts it.
+      confirmation rung. What it buys is replay without importing this project's Python
+      package or any of its dependencies.
+      It was then read as a hostile third party would read it, and the review is retained
+      at docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md. That review
+      re-derived the theorem from the shipped words alone -- including the step this
+      branch had to correct once, that the bound is the container side and not L/B -- ran
+      twenty-one attacks of its own, and found nothing that threatens the result. Three
+      package defects it did find are fixed (D-436 and D-437). It is not an external review and
+      the reviewer is an agent of this project working from the package rather than from
+      the implementation. The broader adversarial review at
+      docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md covers the current
+      381/100 artifact and supplies the mapped review artifact used for C5. For that
+      current artifact, cases/n11_fractional_certificate/minimal_verify.py is a 346-line,
+      standard-library-only audit kernel bound to the actual b121...e6a SHA-256. It
+      checks 567,130,649 exact event cells, reports minimum 4001/4000, and requires a
+      uniform positive-weight mutation to fail C4 at 3999/4000.
     source_reviewed: '2026-09-04'
   - id: E-n017-fractional-certificate
     claim: lower-bound
@@ -1440,4 +1416,70 @@ evidence:
       is larger.
       Not independent by method: all three decisions are exact-algebraic, so this
       supports C3 and not C4.
+    source_reviewed: '2026-09-04'
+  - id: E-fractional-interval-decision
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+        - 12
+        - 17
+        - 18
+        - 19
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    novelty: previously-published
+    source_key: "[Burns n17]"
+    certificate: cases/n11_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras --group dev pytest tests/test_fractional_interval.py
+    replay_status: passed
+    limitations: >-
+      A second decision of the same certificates by interval arithmetic with directed
+      rounding, existing so that the two decisions can fail differently. Every operation
+      steps one ulp outward after a correctly rounded double operation, with no interval
+      library; rationals enter at one boundary where exact comparison happens, and atom
+      masses are exact integers on the certificate's own weight scale, so the sums round
+      nothing.
+      It is independent in method, not merely in code. C4 is decided by branch and bound
+      over boxes of centres -- for a box, an atom counts only if its coverage rectangle
+      contains the whole box, which is a lower bound by construction and is tested
+      against the inner enclosure of that rectangle so an unresolved atom is dropped
+      rather than assumed. There is no event grid, no difference array and no polygon
+      clipping, so it shares no modelling assumption with the exact route.
+      It also rests on fewer hypotheses. C4 is decided on the doubled net -- theta_k and
+      pi/2 - theta_k, 361 directions -- so the D4 reflection argument is never invoked
+      and C0 is not needed at all, which matters because interval arithmetic cannot
+      establish the equality C0 asserts.
+      Results, 361 of 361 directions certified in each case: n = 11 at 381/100 in
+      1,570,831 boxes; n = 12 at 197/50 in 1,846,439 boxes and at 393/100 in 1,486,159;
+      Massaccesi's published n = 17 certificate, the control that tests the verifier
+      rather than the certificate, in 966,903 boxes, returning 22529/5000. In
+      minimisation mode every enclosure of the least covered mass has width zero and
+      equals the exact verifier's value: 4001/4000 at n = 11 and 100003/100000 at n = 12.
+      Refusals: the n = 12 atoms in a
+      side-4 container are refuted at direction 0 after 407 boxes, and an atom lowered by
+      1/10000 after 127.
+      What it does not add: no new bound, and no protection against a wrong theorem
+      statement, which both routes share. Its own failure mode is exhibited rather than
+      claimed -- a leave-edge exactly on another's enter-edge stalls at the 1e-12 floor
+      and is reported undecided, never accepted, demonstrated on a tiled grid where 2,868
+      boxes stall and perturbing the seams by 1/100 certifies in 1,351. An exact census
+      confirms no such seam occurs in any retained certificate.
+      Its acceptance path was audited before this entry was written, and one gap was
+      found and closed: enclosing runs settled boxes against the best point value rather
+      than against mass 1, so they pinned the minimum exactly and then read `certified`
+      as though it answered C4. The lightened-atom fixture was accepted that way at a
+      correctly measured 99993/100000 (D-442). The figures above were measured before the
+      fix and none of them moves: it changes only the verdict drawn when a pinned minimum
+      falls short of 1, and every enclosure here is at or above 1. The verdict now
+      requires the certified lower bound to reach mass 1 in both modes, and the retained
+      certificates are re-decided under it by the replay this entry names. The adversarial
+      review also closed acceptance paths for restricted direction samples (D-439),
+      negative or int64-overflowing weights (D-435 and D-440), and an unbounded exact-seam
+      split (D-443). A restricted sample is now diagnostic only, all NumPy subset sums are
+      preflight-bounded in exact Python integers, and unresolved or budget-exhausted boxes
+      can only refute or return undecided.
     source_reviewed: '2026-09-04'
