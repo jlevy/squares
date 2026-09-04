@@ -320,15 +320,27 @@ def sweep_direction_minimum(
     )
 
 
-def verify(certificate: Certificate) -> Verdict:
-    """Decide all four conditions. Exact, and never short-circuits C1 to C3."""
+def conditions_without_sweep(certificate: Certificate) -> tuple[ConditionReport, ...]:
+    """``C0`` to ``C3``: every condition decidable without sweeping a direction.
 
-    conditions = [
+    Split out because these cost four exact rational comparisons while ``C4``
+    costs a sweep per direction. A caller that only needs to know whether a
+    candidate is worth sweeping -- or a consumer of a certificate whose ``C4``
+    some other gate already decided -- can stop here rather than pay for the
+    sweep twice. ``verify`` remains the whole decision.
+    """
+    return (
         _condition_symmetric_atoms(certificate),
         _condition_mass_below_n(certificate),
         _condition_arc_reaches_eighth_turn(certificate),
         _condition_containment(certificate),
-    ]
+    )
+
+
+def verify(certificate: Certificate) -> Verdict:
+    """Decide all four conditions. Exact, and never short-circuits C1 to C3."""
+
+    conditions = list(conditions_without_sweep(certificate))
     worst: Fraction | None = None
     worst_label: str | None = None
     for direction in certificate.directions:

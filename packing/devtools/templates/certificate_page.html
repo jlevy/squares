@@ -1,0 +1,804 @@
+<title>Eleven Squares, {{N_ATOMS}} Atoms</title>
+
+<style>
+{{FONTS}}
+{{KATEX_CSS}}
+
+/* ============================================================
+   Tokens — kpress conventions: one type knob, ratios are design.
+   ============================================================ */
+:root{
+  --fs-base:1rem;
+  --fs-large:calc(var(--fs-base)*1.2);
+  --fs-normal:var(--fs-base);
+  --fs-small:calc(var(--fs-base)*0.95);
+  --fs-smaller:calc(var(--fs-base)*0.9);
+  --fs-tiny:calc(var(--fs-base)*0.85);
+  --fs-mono:calc(var(--fs-base)*0.82);
+  --fs-h1:calc(var(--fs-base)*1.6);
+  --fs-h2:calc(var(--fs-base)*1.32);
+  --fs-h3:calc(var(--fs-base)*1.15);
+
+  --lh-normal:1.5;
+  --lh-tight:1.2;
+  --w-light:370; --w-medium:550; --w-bold:650;
+  --caps-spacing:0.021em;
+  --measure:calc(var(--fs-base)*45);
+
+  --font-prose:"PT Serif",Georgia,"Times New Roman",serif;
+  --font-sans:"Source Sans 3 Variable",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+  --doc-bg:oklch(100% 0 0);
+  --doc-text:oklch(21.01% 0.0318 264.7);
+  --doc-muted:oklch(50.06% 0.025 259.2);
+  --doc-border:oklch(89.90% 0.0151 260.7);
+  --doc-border-hairline:oklch(42.00% 0.006 260.7);
+  --doc-link:oklch(45.76% 0.1445 254.7);
+  --doc-code-bg:oklch(97.85% 0.0045 258.3);
+  --doc-accent:oklch(51.09% 0.0861 186.4);
+  --doc-accent-wash:oklch(95.5% 0.022 186.4);
+  --doc-probe:oklch(55% 0.145 52);
+  --doc-probe-wash:oklch(95% 0.035 52);
+  --doc-success:oklch(52.73% 0.1371 150.1);
+  --doc-danger:oklch(50.03% 0.1821 29.5);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --doc-bg:oklch(18.98% 0.0094 255.6);
+    --doc-text:oklch(94.40% 0.0097 252.8);
+    --doc-muted:oklch(76.58% 0.0205 252.9);
+    --doc-border:oklch(33.73% 0.0207 254.1);
+    --doc-border-hairline:oklch(80.00% 0.008 254.1);
+    --doc-link:oklch(76.68% 0.1208 255.4);
+    --doc-code-bg:oklch(24.16% 0.0153 256.8);
+    --doc-accent:oklch(74% 0.09 186.4);
+    --doc-accent-wash:oklch(28% 0.035 186.4);
+    --doc-probe:oklch(76% 0.13 60);
+    --doc-probe-wash:oklch(30% 0.05 60);
+    --doc-success:oklch(72.27% 0.192 149.6);
+    --doc-danger:oklch(59.30% 0.128 29);
+  }
+}
+:root[data-theme="dark"]{
+  --doc-bg:oklch(18.98% 0.0094 255.6);
+  --doc-text:oklch(94.40% 0.0097 252.8);
+  --doc-muted:oklch(76.58% 0.0205 252.9);
+  --doc-border:oklch(33.73% 0.0207 254.1);
+  --doc-border-hairline:oklch(80.00% 0.008 254.1);
+  --doc-link:oklch(76.68% 0.1208 255.4);
+  --doc-code-bg:oklch(24.16% 0.0153 256.8);
+  --doc-accent:oklch(74% 0.09 186.4);
+  --doc-accent-wash:oklch(28% 0.035 186.4);
+  --doc-probe:oklch(76% 0.13 60);
+  --doc-probe-wash:oklch(30% 0.05 60);
+  --doc-success:oklch(72.27% 0.192 149.6);
+  --doc-danger:oklch(59.30% 0.128 29);
+}
+
+/* ============================================================
+   Base — serif reading face, sans for UI voice, mono for code only.
+   ============================================================ */
+*{box-sizing:border-box}
+body{
+  background:var(--doc-bg); color:var(--doc-text);
+  font-family:var(--font-prose); font-size:var(--fs-normal); line-height:var(--lh-normal);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+.page{max-width:calc(var(--measure) + 14rem);margin:0 auto;padding:0 1.5rem 6rem}
+.col{max-width:var(--measure);margin-inline:auto}
+
+h1,h2,h3{margin:0;font-family:var(--font-sans);text-wrap:balance}
+h2{font-size:var(--fs-h2);font-weight:var(--w-medium);line-height:var(--lh-tight)}
+h3{font-size:var(--fs-h3);font-weight:var(--w-medium);line-height:var(--lh-tight)}
+p{margin:0.85rem 0}
+em{font-style:italic}
+strong{font-weight:700}
+code{font-family:var(--font-mono);font-size:var(--fs-mono);
+  background:var(--doc-code-bg);padding:0.08em 0.32em;border-radius:2px}
+
+/* A sans region: front matter and UI-voiced passages. */
+.sans-text{font-family:var(--font-sans)}
+.sans-text p{margin-block:0.8rem}
+
+.caps{font-family:var(--font-sans);font-size:var(--fs-smaller);
+  text-transform:uppercase;letter-spacing:var(--caps-spacing);
+  font-weight:var(--w-medium);color:var(--doc-muted)}
+.caps .katex{text-transform:none;letter-spacing:0;font-size:1em}
+.fig-title .katex,.legend .katex,.hint .katex{text-transform:none}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero{padding:4rem 0 0}
+.hero h1{
+  font-size:var(--fs-h1);font-weight:var(--w-medium);letter-spacing:0.03em;
+  line-height:1.05;margin-block:1rem 0;text-transform:uppercase;
+}
+.hero h1 i{font-family:var(--font-prose);font-size:calc(var(--fs-base)*1.5);
+  font-style:italic;letter-spacing:0;text-transform:none}
+.claim{margin:1.6rem 0 1.4rem}
+.subtitle{font-family:var(--font-prose);font-size:var(--fs-normal);font-style:italic;
+  max-width:52ch;margin:0}
+.frontmatter{margin-top:1.4rem;font-family:var(--font-sans);font-size:var(--fs-tiny);
+  color:var(--doc-muted);display:flex;flex-wrap:wrap;gap:0.2rem 1.6rem}
+
+/* ============================================================
+   Sections
+   ============================================================ */
+section{margin-top:3.4rem}
+.section-head{margin-bottom:0.9rem}
+.section-head .caps{display:block;margin-bottom:0.45rem}
+ul{margin:0.85rem 0;padding-left:0;list-style:none}
+ul li{position:relative;padding-left:1.3rem;margin:0.5rem 0}
+ul li::before{content:"";position:absolute;left:0.15rem;top:0.72em;
+  width:0.42rem;height:0.42rem;background:var(--doc-accent)}
+
+/* A box the author drew reads as drawn — kpress boxed-text. */
+.boxed{border:1px solid var(--doc-border-hairline);margin:1.4rem 0;padding:0.2rem 1.1rem}
+
+/* ============================================================
+   Figures
+   ============================================================ */
+figure{margin:1.8rem 0 0;border:1px solid var(--doc-border)}
+.fig-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:0.5rem 0.9rem;
+  padding:0.7rem 1.1rem;border-bottom:1px solid var(--doc-border)}
+.fig-head .caps{font-size:var(--fs-tiny)}
+.fig-title{font-family:var(--font-sans);font-size:var(--fs-small);
+  font-weight:var(--w-medium);flex:1 1 14rem}
+.tag{font-family:var(--font-sans);font-size:var(--fs-tiny);font-weight:var(--w-medium);
+  letter-spacing:var(--caps-spacing);color:var(--doc-accent);
+  background:var(--doc-accent-wash);padding:0.05rem 0.4rem;border-radius:2px}
+figcaption{padding:0.85rem 1.1rem 1rem;border-top:1px solid var(--doc-border);
+  font-family:var(--font-sans);font-size:var(--fs-tiny);line-height:1.55;color:var(--doc-muted)}
+figcaption strong{color:var(--doc-text);font-weight:var(--w-medium)}
+
+/* budget bar */
+.budget{padding:1.4rem 1.1rem 1.1rem}
+.bar{position:relative;height:2.6rem;background:var(--doc-code-bg);border:1px solid var(--doc-border)}
+.bar .fill{position:absolute;inset:0 auto 0 0;background:var(--doc-accent-wash);
+  border-right:2px solid var(--doc-accent)}
+.bar .need{position:absolute;top:-0.5rem;bottom:-0.5rem;width:2px;background:var(--doc-probe)}
+.bar-labels{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  margin-top:1rem;font-family:var(--font-sans);font-size:var(--fs-tiny);color:var(--doc-muted)}
+.bar-labels .v{display:block;margin-top:0.15rem}
+
+/* interactive stages */
+.split{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(15rem,1fr)}
+@media (max-width:52rem){.split{grid-template-columns:1fr}}
+.stage{padding:1.1rem;display:flex;align-items:center;justify-content:center;
+  background:var(--doc-code-bg)}
+.stage canvas{width:100%;height:auto;max-width:32rem;display:block;cursor:grab;touch-action:none}
+.stage canvas:active{cursor:grabbing}
+.panel{padding:1.1rem;border-left:1px solid var(--doc-border);
+  display:flex;flex-direction:column;gap:1.1rem;font-family:var(--font-sans)}
+@media (max-width:52rem){.panel{border-left:0;border-top:1px solid var(--doc-border)}}
+
+.readout{border:1px solid var(--doc-border);padding:0.85rem 0.9rem}
+.readout .caps{font-size:var(--fs-tiny);display:block;margin-bottom:0.5rem}
+.mass-val{font-size:calc(var(--fs-base)*1.9);line-height:1.1;min-height:2.4em;
+  display:flex;align-items:center}
+.mass-val .katex{font-size:1em}
+.mass-dec{font-family:var(--font-sans);font-size:var(--fs-tiny);color:var(--doc-muted);
+  margin-top:0.2rem}
+.verdict{display:inline-block;margin-top:0.6rem;font-family:var(--font-sans);
+  font-size:var(--fs-tiny);font-weight:var(--w-medium);letter-spacing:var(--caps-spacing);
+  text-transform:uppercase;padding:0.1rem 0.4rem;border-radius:2px}
+.verdict.ok{color:var(--doc-accent);background:var(--doc-accent-wash)}
+.verdict.no{color:var(--doc-danger);background:var(--doc-probe-wash)}
+.verdict.out{color:var(--doc-muted);background:var(--doc-code-bg)}
+
+.ctl{display:flex;flex-direction:column;gap:0.4rem}
+.ctl .caps{font-size:var(--fs-tiny)}
+input[type=range]{width:100%;accent-color:var(--doc-accent);margin:0}
+.ctl .val{font-size:var(--fs-tiny);color:var(--doc-text);line-height:1.6}
+.btns{display:flex;flex-wrap:wrap;gap:0.4rem}
+button{font-family:var(--font-sans);font-size:var(--fs-tiny);color:var(--doc-text);
+  background:var(--doc-bg);border:1px solid var(--doc-border-hairline);
+  padding:0.3rem 0.55rem;cursor:pointer;border-radius:2px}
+button:hover{background:var(--doc-accent-wash)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--doc-link);outline-offset:2px}
+button[aria-pressed=true]{background:var(--doc-accent-wash);border-color:var(--doc-accent);
+  color:var(--doc-accent)}
+.hint{font-size:var(--fs-tiny);color:var(--doc-muted);line-height:1.55;margin:0}
+.legend{display:flex;flex-direction:column;gap:0.3rem;font-size:var(--fs-tiny);color:var(--doc-muted)}
+.legend span{display:flex;align-items:center;gap:0.5rem}
+.legend i{width:0.9rem;height:0.7rem;flex:none;display:block}
+
+.kv{display:grid;grid-template-columns:auto 1fr;gap:0.3rem 0.9rem;
+  font-size:var(--fs-tiny);align-items:baseline}
+.kv dt{color:var(--doc-muted)}
+.kv dd{margin:0;text-align:right}
+.kv dd.hi{color:var(--doc-probe)}
+
+.chart{padding:1.4rem 1.1rem 0.6rem}
+.chart svg,.line-fig svg{width:100%;height:auto;display:block;overflow:visible}
+.line-fig{max-width:var(--measure);margin:2.2rem auto 0;padding:1.4rem 0 0.4rem;
+  border-top:1px solid var(--doc-border);border-bottom:1px solid var(--doc-border)}
+
+footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--doc-border);
+  font-family:var(--font-sans);font-size:var(--fs-tiny);color:var(--doc-muted);line-height:1.7}
+
+/* KaTeX: hold math until typeset so no raw TeX flashes. */
+.tex,.tex-d{visibility:hidden}
+:root.math-ready .tex,:root.math-ready .tex-d{visibility:visible}
+.tex-d{margin:1.1rem 0;overflow-x:auto;overflow-y:hidden}
+.katex{font-size:1.04em}
+.tex-d .katex-display{margin:0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="page">
+
+<header class="hero sans-text col">
+  <span class="caps">Square packing · lower-bound certificate</span>
+  <h1>Eleven squares, <i>{{N_ATOMS}} atoms</i></h1>
+  <div class="claim tex-d">s({{N}}) \;\ge\; {{L_TEX}} \;=\; {{L_DEC}}</div>
+  <p class="subtitle">Eleven unit squares, free to rotate, do not fit in a square of side {{L_DEC}}.
+  The proof is a weighted point set and a pigeonhole.</p>
+  <div class="frontmatter">
+    <span>{{N_ATOMS}} atoms · {{N_DIRECTIONS}} directions · {{N_ORBITS}} orbits of <span class="tex">\mathbf{D}_4</span></span>
+    <span>all arithmetic exact</span>
+  </div>
+</header>
+
+<div class="line-fig col">
+  <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER}}, the new bound {{L_DEC}}, and the best known packing at {{BEST_PACKING}}">
+    <rect x="{{BOUND_X}}" y="45" width="{{BAND_W}}" height="13" fill="var(--doc-accent-wash)"/>
+    <line x1="20" y1="51.5" x2="680" y2="51.5" stroke="var(--doc-border-hairline)" stroke-width="1"/>
+    <g stroke="var(--doc-border-hairline)" stroke-width="1">
+      <line x1="20" y1="47" x2="20" y2="56"/><line x1="460" y1="47" x2="460" y2="56"/>
+      <line x1="680" y1="47" x2="680" y2="56"/>
+    </g>
+    <g font-family="Source Sans 3 Variable, sans-serif" font-size="10" fill="var(--doc-muted)" text-anchor="middle">
+      <text x="20" y="72">3.75</text><text x="460" y="72">3.85</text><text x="680" y="72">3.90</text>
+    </g>
+    <line x1="{{PRIOR_X}}" y1="30" x2="{{PRIOR_X}}" y2="51.5" stroke="var(--doc-muted)" stroke-width="1.25"/>
+    <circle cx="{{PRIOR_X}}" cy="51.5" r="3.2" fill="var(--doc-muted)"/>
+    <g font-family="Source Sans 3 Variable, sans-serif" text-anchor="middle">
+      <text x="{{PRIOR_X}}" y="24" font-size="10.5" fill="var(--doc-text)">{{PRIOR_LOWER}}</text>
+      <text x="{{PRIOR_X}}" y="12" font-size="9.5" fill="var(--doc-muted)">{{PRIOR_SOURCE}}</text>
+      <text x="{{BEST_X}}" y="24" font-size="10.5" fill="var(--doc-text)">{{BEST_PACKING}}</text>
+      <text x="{{BEST_X}}" y="12" font-size="9.5" fill="var(--doc-muted)">{{BEST_SOURCE}}</text>
+    </g>
+    <line x1="{{BEST_X}}" y1="30" x2="{{BEST_X}}" y2="51.5" stroke="var(--doc-muted)" stroke-width="1.25"/>
+    <circle cx="{{BEST_X}}" cy="51.5" r="3.2" fill="var(--doc-muted)"/>
+    <line x1="{{BOUND_X}}" y1="51.5" x2="{{BOUND_X}}" y2="84" stroke="var(--doc-probe)" stroke-width="2"/>
+    <circle cx="{{BOUND_X}}" cy="51.5" r="4.4" fill="var(--doc-probe)"/>
+    <text x="{{BOUND_X}}" y="88" dx="11" font-family="Source Sans 3 Variable, sans-serif" font-size="11"
+      font-weight="550" fill="var(--doc-probe)">{{L_FRAC}} = {{L_DEC}}, this certificate</text>
+  </svg>
+</div>
+<p class="col sans-text" style="font-size:var(--fs-tiny);color:var(--doc-muted);margin-top:0.7rem">
+  The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. It is
+  <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span>.
+</p>
+
+<section class="col">
+  <div class="section-head">
+    <span class="caps">The argument</span>
+    <h2>Atoms, Mass, and the Budget</h2>
+  </div>
+  <p>Place finitely many points in the container and give each a positive weight. Each weighted point is an
+  <strong>atom</strong>; the <strong>mass</strong> <span class="tex">\mu(R)</span> of a region is the sum of the
+  weights inside it. Every weight is rational, so every mass is a finite exact sum.</p>
+  <p>Suppose eleven unit squares fit in the side-{{L_DEC}} container. Choose atoms so that both of these hold:</p>
+  <ul>
+    <li>every unit square you could possibly place covers mass at least <span class="tex">1</span>;</li>
+    <li>the total mass of all {{N_ATOMS}} atoms is below <span class="tex">{{N}}</span>.</li>
+  </ul>
+  <div class="tex-d">\sum_a w_a \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}}</div>
+  <p>The eleven squares are disjoint, so no atom is counted twice and together they cover at least
+  <span class="tex">{{N}}</span>. The board holds <span class="tex">{{TOTAL_DEC}}</span>. The second condition is a
+  property of the certificate rather than of packing, so the first must fail: eleven such squares do not exist.</p>
+  <p>The rest of the proof makes the first condition finite to check.</p>
+</section>
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 1</span><span class="tag">C1</span>
+    <span class="fig-title">The budget, and the shortfall</span>
+  </div>
+  <div class="budget">
+    <div class="bar">
+      <div class="fill" style="width:{{FILL_PCT}}%"></div>
+      <div class="need" style="left:calc(100% - 1px)"></div>
+    </div>
+    <div class="bar-labels">
+      <div>Total mass on the board<span class="v tex">\mu\!\left([0,L]^2\right) = {{TOTAL_TEX}} = {{TOTAL_DEC}}</span></div>
+      <div style="text-align:right">Mass eleven disjoint squares would need<span class="v tex">{{N}}</span></div>
+    </div>
+  </div>
+  <figcaption>The shortfall is <strong>{{SHORTFALL}}</strong>. Everything right of the orange line is mass eleven
+  squares would need and the board does not hold. Condition <strong>C1</strong> is this comparison.</figcaption>
+</figure>
+
+<section class="col">
+  <div class="section-head">
+    <span class="caps">The object</span>
+    <h2>The Atom Set</h2>
+  </div>
+  <p>The certificate holds {{N_ATOMS}} atoms in {{N_ORBITS}} orbits of the container’s eightfold symmetry group
+  <span class="tex">\mathbf{D}_4</span>, carrying {{N_WEIGHTS}} distinct weights between
+  <span class="tex">{{WEIGHT_MIN}}</span> and <span class="tex">{{WEIGHT_MAX}}</span>. That symmetry is condition
+  <strong>C0</strong>. It lets the proof check angles only up to <span class="tex">\pi/4</span> and reflect
+  every other orientation onto that arc.</p>
+</section>
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 2</span><span class="tag">C0</span>
+    <span class="fig-title">The atom field</span>
+  </div>
+  <div class="stage"><canvas id="field" width="1040" height="1040"></canvas></div>
+  <figcaption>Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
+  corners, where a square has least room to move, and thins in the middle. The sites and weights are the optimum
+  of a covering linear program, rationalised.</figcaption>
+</figure>
+
+<section class="col">
+  <div class="section-head">
+    <span class="caps">The covering condition</span>
+    <h2>Every Placement Covers Mass at Least One</h2>
+  </div>
+  <p>Condition <strong>C4</strong> is the claim that every placement covers mass at least
+  <span class="tex">1</span>. A placement has three continuous parameters, two of position and one of angle, so
+  the placements cannot be enumerated. The proof makes them finite twice over: the angle is snapped to a net of
+  {{N_DIRECTIONS}} rational directions, and for each direction the position collapses to a finite grid of cells, because the
+  set of atoms under the square changes only when one crosses an edge.</p>
+  <p>The figure below evaluates that condition. Every weight is a whole multiple of
+  <span class="tex">{{SCALE}}</span>, so the covered mass is an integer count of those units and the readout
+  rounds nothing. The least covered mass, over every placement and all {{N_DIRECTIONS}} directions, is</p>
+  <div class="tex-d">\mu(Q) \;=\; {{LEAST_TEX}} \;=\; {{LEAST_DEC}},</div>
+  <p>{{LEAST_MARGIN}} parts in {{SCALE_JS}} above the threshold.</p>
+</section>
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 3</span><span class="tag">C4</span>
+    <span class="fig-title">The prover: drag the square, watch the mass</span>
+  </div>
+  <div class="split">
+    <div class="stage"><canvas id="prove" width="1000" height="1000"></canvas></div>
+    <div class="panel">
+      <div class="readout">
+        <span class="caps">Mass covered</span>
+        <div class="mass-val" id="mv"></div>
+        <div class="mass-dec" id="md">= 1.000060</div>
+        <span class="verdict ok" id="vd">Covers ≥ 1</span>
+      </div>
+      <div class="ctl">
+        <span class="caps">Direction <span class="tex">k</span> of the {{N_DIRECTIONS}}-point net</span>
+        <input type="range" id="kslider" min="0" max="{{N_DIRECTIONS_MAX}}" value="0" step="1" aria-label="Net direction index">
+        <div class="val" id="kval"></div>
+      </div>
+      <div class="btns">
+        <button id="btn-tight">Tightest placement</button>
+        <button id="btn-scan">Scan this direction</button>
+        <button id="btn-heat" aria-pressed="true">Field</button>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--doc-probe)"></i>within 12% of the limit</span>
+        <span><i style="background:var(--doc-accent)"></i>comfortably above</span>
+        <span><i style="background:var(--doc-danger)"></i>below 1, which never occurs</span>
+      </div>
+      <p class="hint" id="hint">The shaded background is the covered mass at every centre position, recomputed
+      for the direction you choose. The dashed outline is where the square’s centre is allowed to be. Outside
+      it the square hangs out of the container, and the proof makes no claim.</p>
+    </div>
+  </div>
+  <figcaption>Inside the dashed domain the field never drops below <strong>1</strong>, at any of the {{N_DIRECTIONS}}
+  directions. Outside it the mass falls away at once, which is why the atoms crowd the boundary.</figcaption>
+</figure>
+
+<section class="col">
+  <div class="section-head">
+    <span class="caps">The angle net</span>
+    <h2>From a Continuum of Angles to {{N_DIRECTIONS}}</h2>
+  </div>
+  <p>The angles cannot all be checked, so {{N_DIRECTIONS}} are checked and the gaps are covered by shrinking. Given a unit
+  square at any angle <span class="tex">\varphi</span>, take the nearest net angle <span class="tex">\theta</span> and place a
+  slightly smaller square, side <span class="tex">B</span>, concentric inside it at angle
+  <span class="tex">\theta</span>. If the small square fits, proving the covering property for small squares at
+  net angles proves it for unit squares at every angle. It fits exactly when</p>
+  <div class="tex-d">B\,(\cos d + \sin d) \;\le\; 1,</div>
+  <p>where <span class="tex">d</span> is the angular mismatch. Since
+  <span class="tex">\cos d + \sin d \le 1 + \tan d</span> on <span class="tex">[0,\pi/4)</span>, it is enough
+  that</p>
+  <div class="tex-d">B\,(1 + D) \;\lt\; 1, \qquad D \;=\; \max_k \frac{t_{k+1}-t_k}{1+t_k t_{k+1}} \;=\; \max_k \tan\frac{\theta_{k+1}-\theta_k}{2}.</div>
+  <p>That is condition <strong>C3</strong>, and it couples the two parameters: a coarser net gives a larger
+  <span class="tex">d</span>, hence a smaller <span class="tex">B</span>, hence less mass covered, hence a
+  harder <strong>C4</strong>.</p>
+  <p>The net stays rational because the angles are carried as half-tangents,
+  <span class="tex">\theta_k = 2\arctan t_k</span>, so that</p>
+  <div class="tex-d">\cos\theta = \frac{1-t^2}{1+t^2}, \qquad \sin\theta = \frac{2t}{1+t^2}</div>
+  <p>are exact rationals. No angle in the certificate is a floating-point number. The net has to reach
+  <span class="tex">\pi/4</span>, and since <span class="tex">\tan(\pi/8) = \sqrt{2}-1</span> is irrational,
+  even that is tested in an exact rational form:</p>
+  <div class="tex-d">t_K^{\,2} + 2t_K - 1 \;\ge\; 0 \quad\Longleftrightarrow\quad t_K \;\ge\; \tan\frac{\pi}{8}.</div>
+</section>
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 4</span><span class="tag">C3</span>
+    <span class="fig-title">The shrink that buys the finite net</span>
+  </div>
+  <div class="split">
+    <div class="stage"><canvas id="shrink" width="800" height="800"></canvas></div>
+    <div class="panel">
+      <div class="ctl">
+        <span class="caps">Unit square’s angle <span class="tex">\varphi</span></span>
+        <input type="range" id="phi" min="0" max="450" value="196" step="1" aria-label="Unit square angle">
+      </div>
+      <div class="ctl">
+        <span class="caps">Net size <span class="tex">K</span></span>
+        <div class="btns">
+          <button class="knet" data-k="10" aria-pressed="true">10</button>
+          <button class="knet" data-k="30">30</button>
+          <button class="knet" data-k="180">180, the real net</button>
+        </div>
+      </div>
+      <dl class="kv">
+        <dt><span class="tex">\varphi</span></dt><dd id="s-phi"></dd>
+        <dt>nearest <span class="tex">\theta</span></dt><dd id="s-theta"></dd>
+        <dt>mismatch <span class="tex">d</span></dt><dd id="s-d"></dd>
+        <dt>largest <span class="tex">D</span></dt><dd id="s-D"></dd>
+        <dt><span class="tex">B</span> admitted</dt><dd id="s-B"></dd>
+        <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod"></dd>
+      </dl>
+      <p class="hint">Opens at <span class="tex">K = 10</span>, where the shrink is visible. At
+      <span class="tex">K = 180</span>, the net the certificate uses, the two squares are
+      indistinguishable.</p>
+    </div>
+  </div>
+  <figcaption>The dark outline is the unit square at angle <span class="tex">\varphi</span>; orange is the
+  side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
+  <strong>The last quantity must stay below 1.</strong> At <span class="tex">K = 180</span> it is
+  <span class="tex">0.999996</span>.</figcaption>
+</figure>
+
+<!--BEGIN:COARSENING-->
+<section class="col">
+  <div class="section-head">
+    <span class="caps">The cost of a coarser net</span>
+    <h2>Why the Net Has {{N_DIRECTIONS}} Directions</h2>
+  </div>
+  <p>The direction count is measurable. Hold the {{N_ATOMS}} atoms fixed, coarsen the net, set
+  <span class="tex">B</span> to the largest value <strong>C3</strong> then admits, and re-decide
+  <strong>C4</strong>. Halving the net shrinks <span class="tex">B</span> by a quarter of one percent and costs
+  nine percent of the least covered mass.</p>
+</section>
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 5</span><span class="tag">C3 → C4</span>
+    <span class="fig-title">Least covered mass, as the net is coarsened</span>
+  </div>
+  <div class="chart">
+    <svg viewBox="0 0 700 250" role="img" aria-label="{{COARSEN_ALT}}">
+      <g font-family="Source Sans 3 Variable, sans-serif" font-size="10" fill="var(--doc-muted)">
+        <line x1="76" y1="30" x2="76" y2="190" stroke="var(--doc-border-hairline)"/>
+        <line x1="76" y1="190" x2="664" y2="190" stroke="var(--doc-border-hairline)"/>
+        <line x1="76" y1="30" x2="664" y2="30" stroke="var(--doc-probe)" stroke-dasharray="4 4" opacity=".8"/>
+        <text x="68" y="34" text-anchor="end">1.0</text>
+        <text x="68" y="114" text-anchor="end">0.5</text>
+        <text x="68" y="194" text-anchor="end">0</text>
+        <text x="670" y="34" fill="var(--doc-probe)">C4 threshold</text>
+      </g>
+      <g>
+        {{COARSEN_BARS}}
+      </g>
+      <g font-family="Source Sans 3 Variable, sans-serif" font-size="10.5" fill="var(--doc-text)" text-anchor="middle">
+        {{COARSEN_VALUES}}
+      </g>
+      <g font-family="Source Sans 3 Variable, sans-serif" font-size="10.5" fill="var(--doc-muted)" text-anchor="middle">
+        {{COARSEN_LABELS}}
+      </g>
+      <text x="76" y="246" font-family="Source Sans 3 Variable, sans-serif" font-size="10" fill="var(--doc-muted)">
+        Only the last bar clears the threshold. Measured on the retained atoms, optimised against the full net.
+      </text>
+    </svg>
+  </div>
+  <figcaption>This shows the retained certificate is tight against its own net, not that no coarser certificate
+  exists. It measures the slope of the trade.</figcaption>
+</figure>
+<!--END:COARSENING-->
+
+<section class="col">
+  <div class="section-head">
+    <span class="caps">The close</span>
+    <h2>The Contradiction</h2>
+  </div>
+  <div class="boxed">
+    <p>Take any packing of eleven unit squares in the side-{{L_DEC}} container. Each square, whatever its angle,
+    contains a side-<span class="tex">B</span> square <span class="tex">Q_i</span> at one of the {{N_DIRECTIONS}} net angles,
+    which is <strong>C3</strong>. Because <strong>C3</strong> is a <em>strict</em> inequality, each
+    <span class="tex">Q_i</span> sits strictly inside its unit square’s interior, so the eleven are disjoint and
+    no atom is counted twice. Each covers mass at least <span class="tex">1</span>, which is
+    <strong>C4</strong>. Then</p>
+    <div class="tex-d">{{N}} \;\le\; \sum_{i=1}^{{{N}}} \mu(Q_i) \;\le\; \mu\!\left([0,L]^2\right) \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}},</div>
+    <p>which is false. There is no such packing, and <span class="tex">s({{N}}) \gt {{L_FRAC}}</span>.</p>
+  </div>
+  <p>The strict inequality in <strong>C3</strong> is what makes the <span class="tex">Q_i</span> disjoint. With
+  <span class="tex">\le</span> in its place, two shrunken squares could share a boundary atom, the double
+  counting returns, and the sum never reaches <span class="tex">{{N}}</span>.</p>
+</section>
+
+<section class="col">
+  <div class="section-head">
+    <span class="caps">Where the search is</span>
+    <h2>Generator and Verifier</h2>
+  </div>
+  <p>The atoms are not designed; they are solved for. The certificate is a rationalised optimum of a covering
+  linear program,</p>
+  <div class="tex-d">\tau^*(L,B) \;=\; \min_{w \,\ge\, 0}\; \sum_a w_a \quad\text{subject to}\quad \sum_{a \in Q} w_a \;\ge\; 1 \;\;\text{ for every placement } Q,</div>
+  <p>which has one constraint per placement, a continuum, so the rows are generated rather than enumerated, with
+  the same event-cell sweep acting as the separation oracle. A certificate exists exactly when
+  <span class="tex">\tau^* \lt n</span>. Note that <span class="tex">\tau^*</span> depends on
+  <span class="tex">L</span> and <span class="tex">B</span> alone and never on
+  <span class="tex">n</span>; <span class="tex">n</span> enters only in that comparison. A run converging to a
+  round number is therefore a signature of a bug, not a result.</p>
+  <p>All of that search runs in floating point, because it is a search. None of it is in the proof: the
+  generator emits a file, and the verifier re-decides <strong>C0</strong> through <strong>C4</strong> on that
+  file in exact rational arithmetic. A wrong linear program yields a rejected certificate, never a false
+  theorem.</p>
+</section>
+
+<footer class="col">
+  Certificate <code>{{ID}}</code>: {{N_ATOMS}} atoms, side <span class="tex">L = {{L_FRAC}}</span>, shrink
+  <span class="tex">B = {{B_FRAC}}</span>, a net of {{N_DIRECTIONS}} rational half-tangents reaching
+  <span class="tex">\tan(\pi/8)</span>. Total mass <span class="tex">{{TOTAL_TEX}}</span>; least covered cell mass
+  <span class="tex">{{LEAST_TEX}}</span> at direction <span class="tex">k=0</span>, centre
+  <span class="tex">{{WITNESS_TEX}}</span>. Every figure is computed from the certificate’s own atom list. Prior lower bound <span class="tex">2 + 4/\sqrt{5}</span>, {{PRIOR_SOURCE}}; best known packing
+  <span class="tex">{{BEST_PACKING}}\ldots</span>, {{BEST_SOURCE}}. Typography follows the kpress design system. PT Serif,
+  Source Sans 3 and KaTeX are embedded; the page loads no external resources.
+</footer>
+
+</div>
+
+<script>{{KATEX_JS}}</script>
+<script>
+{{ATOMS}}
+const SCALE = {{SCALE_JS}}, L = {{L_JS}}, B = {{B_JS}}, HALF = B / 2;
+const LIMIT = 207107 / 500000, STEPS = {{N_DIRECTIONS_MAX}};
+
+const gcd = (a, b) => b ? gcd(b, a % b) : a;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const tex = (el, s, d) => { try { katex.render(s, el, { displayMode: !!d, throwOnError: false }); }
+                            catch (e) { el.textContent = s; } };
+
+function rot(t) { const d = 1 + t * t; return [(1 - t * t) / d, 2 * t / d]; }
+function netT(k) { return LIMIT * k / STEPS; }
+
+let sorted = [], cs = 1, sn = 0;
+function setDir(k) {
+  [cs, sn] = rot(netT(k));
+  sorted = ATOMS.map(a => [cs * a[0] + sn * a[1], -sn * a[0] + cs * a[1], a[2]])
+                .sort((p, q) => p[0] - q[0]);
+}
+function lowerBound(u) { let lo = 0, hi = sorted.length;
+  while (lo < hi) { const m = (lo + hi) >> 1; if (sorted[m][0] < u) lo = m + 1; else hi = m; } return lo; }
+
+function massAt(x, y) {
+  const u = cs * x + sn * y, v = -sn * x + cs * y;
+  let i = lowerBound(u - HALF), tot = 0;
+  for (; i < sorted.length && sorted[i][0] <= u + HALF; i++) {
+    const dv = sorted[i][1] - v;
+    if (dv >= -HALF && dv <= HALF) tot += sorted[i][2];
+  }
+  return tot;
+}
+function inset() { return B * (cs + sn) / 2; }
+function admissible(x, y) { const h = inset();
+  return x >= h - 1e-12 && x <= L - h + 1e-12 && y >= h - 1e-12 && y <= L - h + 1e-12; }
+
+/* ---------- Figure 2 ---------- */
+function drawField() {
+  const c = document.getElementById('field'), g = c.getContext('2d'), S = c.width, m = S * 0.055;
+  const px = S - 2 * m, sc = px / L;
+  g.clearRect(0, 0, S, S);
+  g.fillStyle = css('--doc-bg'); g.fillRect(0, 0, S, S);
+  g.strokeStyle = css('--doc-border'); g.lineWidth = 1; g.setLineDash([4, 6]);
+  for (let i = 1; i <= 3; i++) { const p = m + px * i / L;
+    g.beginPath(); g.moveTo(p, m); g.lineTo(p, m + px); g.moveTo(m, p); g.lineTo(m + px, p); g.stroke(); }
+  g.setLineDash([]);
+  g.strokeStyle = css('--doc-border-hairline'); g.lineWidth = 2; g.strokeRect(m, m, px, px);
+  const maxw = Math.max(...ATOMS.map(a => a[2]));
+  g.fillStyle = css('--doc-accent');
+  for (const [x, y, w] of ATOMS) {
+    const r = Math.sqrt(w / maxw) * sc * 0.115 + sc * 0.008;
+    g.globalAlpha = 0.35 + 0.55 * Math.sqrt(w / maxw);
+    g.beginPath(); g.arc(m + x * sc, m + (L - y) * sc, r, 0, 6.2832); g.fill();
+  }
+  g.globalAlpha = 1;
+}
+
+/* ---------- Figure 3 ---------- */
+const pv = document.getElementById('prove'), pg = pv.getContext('2d');
+const PS = pv.width, PM = PS * 0.06, PPX = PS - 2 * PM, PSC = PPX / L;
+const RES = 230, TIGHT = 1.12;
+let probe = [{{WITNESS_X_JS}}, {{WITNESS_Y_JS}}], curK = 0, showHeat = true, heat = null;
+
+function buildHeat() {
+  const img = pg.createImageData(RES, RES), d = img.data;
+  const parse = v => { const m = document.createElement('canvas').getContext('2d');
+    m.fillStyle = v; m.fillRect(0, 0, 1, 1); return Array.from(m.getImageData(0, 0, 1, 1).data).slice(0, 3); };
+  const cLo = parse(css('--doc-danger')), cTight = parse(css('--doc-probe')),
+        cA = parse(css('--doc-accent-wash')), cB = parse(css('--doc-accent')), cOut = parse(css('--doc-border'));
+  const h = inset();
+  const vals = new Float32Array(RES * RES); let hi = 1;
+  for (let j = 0; j < RES; j++) { const y = L * (RES - 1 - j) / (RES - 1);
+    for (let i = 0; i < RES; i++) { const x = L * i / (RES - 1), m = massAt(x, y) / SCALE;
+      vals[j * RES + i] = m;
+      if (x >= h && x <= L - h && y >= h && y <= L - h && m > hi) hi = m; } }
+  const span = Math.max(hi - TIGHT, 0.25);
+  for (let j = 0; j < RES; j++) { const y = L * (RES - 1 - j) / (RES - 1);
+    for (let i = 0; i < RES; i++) {
+      const x = L * i / (RES - 1), o = 4 * (j * RES + i), m = vals[j * RES + i];
+      let col, a;
+      if (!(x >= h && x <= L - h && y >= h && y <= L - h)) { col = cOut; a = 45; }
+      else if (m < 1) { col = cLo; a = 235; }
+      else if (m < TIGHT) { col = cTight; a = 155; }
+      else { const t = Math.sqrt(Math.min(1, (m - TIGHT) / span));
+             col = [cA[0] + (cB[0] - cA[0]) * t, cA[1] + (cB[1] - cA[1]) * t, cA[2] + (cB[2] - cA[2]) * t];
+             a = 70 + 165 * t; }
+      d[o] = col[0]; d[o + 1] = col[1]; d[o + 2] = col[2]; d[o + 3] = a;
+    } }
+  const off = document.createElement('canvas'); off.width = off.height = RES;
+  off.getContext('2d').putImageData(img, 0, 0);
+  heat = off;
+}
+
+function drawProver() {
+  pg.clearRect(0, 0, PS, PS);
+  pg.fillStyle = css('--doc-bg'); pg.fillRect(0, 0, PS, PS);
+  const X = x => PM + x * PSC, Y = y => PM + (L - y) * PSC;
+  if (showHeat && heat) pg.drawImage(heat, PM, PM, PPX, PPX);
+  pg.strokeStyle = css('--doc-border-hairline'); pg.lineWidth = 2; pg.strokeRect(PM, PM, PPX, PPX);
+  const h = inset();
+  pg.strokeStyle = css('--doc-muted'); pg.lineWidth = 1.5; pg.setLineDash([7, 6]);
+  pg.strokeRect(X(h), Y(L - h), (L - 2 * h) * PSC, (L - 2 * h) * PSC);
+  pg.setLineDash([]);
+  const maxw = Math.max(...ATOMS.map(a => a[2]));
+  const pu = cs * probe[0] + sn * probe[1], pvv = -sn * probe[0] + cs * probe[1];
+  for (const [x, y, w] of ATOMS) {
+    const u = cs * x + sn * y, v = -sn * x + cs * y;
+    const hit = Math.abs(u - pu) <= HALF && Math.abs(v - pvv) <= HALF;
+    pg.fillStyle = hit ? css('--doc-probe') : css('--doc-accent');
+    pg.globalAlpha = hit ? 1 : 0.42;
+    const r = Math.sqrt(w / maxw) * PSC * 0.1 + PSC * 0.007;
+    pg.beginPath(); pg.arc(X(x), Y(y), r, 0, 6.2832); pg.fill();
+  }
+  pg.globalAlpha = 1;
+  pg.save();
+  pg.translate(X(probe[0]), Y(probe[1])); pg.rotate(-Math.atan2(sn, cs));
+  pg.strokeStyle = css('--doc-probe'); pg.lineWidth = 2.5;
+  pg.strokeRect(-HALF * PSC, -HALF * PSC, B * PSC, B * PSC);
+  pg.restore();
+}
+
+function updateReadout() {
+  const m = massAt(probe[0], probe[1]);
+  const g0 = gcd(m, SCALE) || 1;
+  tex(document.getElementById('mv'), m === 0 ? '0' : `\\frac{${m / g0}}{${SCALE / g0}}`);
+  document.getElementById('md').textContent = '= ' + (m / SCALE).toFixed(6);
+  const vd = document.getElementById('vd');
+  if (!admissible(probe[0], probe[1])) { vd.className = 'verdict out'; vd.textContent = 'Outside the domain'; }
+  else if (m >= SCALE) { vd.className = 'verdict ok'; vd.textContent = 'Covers ≥ 1'; }
+  else { vd.className = 'verdict no'; vd.textContent = 'Below 1, breaks C4'; }
+}
+function updateK() {
+  const t = netT(curK), th = 2 * Math.atan(t) * 180 / Math.PI;
+  tex(document.getElementById('kval'),
+      `k = ${curK}, \\quad t = ${curK === 0 ? '0' : `\\tfrac{${207107 * curK}}{90000000}`},` +
+      `\\quad \\theta = ${th.toFixed(4)}^{\\circ}`);
+}
+function refresh(rebuild) {
+  setDir(curK);
+  const h = inset();
+  probe[0] = Math.min(L - h, Math.max(h, probe[0]));
+  probe[1] = Math.min(L - h, Math.max(h, probe[1]));
+  if (rebuild && showHeat) buildHeat();
+  drawProver(); updateReadout(); updateK();
+}
+
+let dragging = false;
+function place(e) {
+  const r = pv.getBoundingClientRect();
+  const x = ((e.clientX - r.left) / r.width * PS - PM) / PSC;
+  const y = L - ((e.clientY - r.top) / r.height * PS - PM) / PSC;
+  probe = [Math.min(L, Math.max(0, x)), Math.min(L, Math.max(0, y))];
+  drawProver(); updateReadout();
+}
+pv.addEventListener('pointerdown', e => { dragging = true; pv.setPointerCapture(e.pointerId); place(e); });
+pv.addEventListener('pointermove', e => { if (dragging) place(e); });
+pv.addEventListener('pointerup', () => { dragging = false; });
+pv.addEventListener('pointercancel', () => { dragging = false; });
+
+document.getElementById('kslider').addEventListener('input', e => { curK = +e.target.value; refresh(true); });
+document.getElementById('btn-tight').addEventListener('click', () => {
+  curK = 0; document.getElementById('kslider').value = 0;
+  probe = [{{WITNESS_X_JS}}, {{WITNESS_Y_JS}}]; refresh(true);
+  document.getElementById('hint').textContent =
+    'The tightest placement in the whole certificate: direction k = 0, covering {{LEAST_TEX_PLAIN}}.';
+});
+document.getElementById('btn-scan').addEventListener('click', () => {
+  const h = inset(); let best = Infinity, bx = 0, by = 0, N = 300;
+  for (let j = 0; j <= N; j++) { const y = h + (L - 2 * h) * j / N;
+    for (let i = 0; i <= N; i++) { const x = h + (L - 2 * h) * i / N;
+      const m = massAt(x, y); if (m < best) { best = m; bx = x; by = y; } } }
+  probe = [bx, by]; drawProver(); updateReadout();
+  document.getElementById('hint').textContent =
+    'Raster scan of direction k = ' + curK + ': lowest sampled mass ' + (best / SCALE).toFixed(6) +
+    '. A raster only samples; the exact sweep decides every cell of the arrangement.';
+});
+document.getElementById('btn-heat').addEventListener('click', e => {
+  showHeat = !showHeat; e.currentTarget.setAttribute('aria-pressed', String(showHeat));
+  if (showHeat && !heat) buildHeat();
+  drawProver();
+});
+
+/* ---------- Figure 4 ---------- */
+let KNET = 10;
+function shrinkDraw() {
+  const c = document.getElementById('shrink'), g = c.getContext('2d'), S = c.width;
+  const phi = (+document.getElementById('phi').value / 10) * Math.PI / 180;
+  let bestK = 0, bestD = Infinity;
+  for (let k = 0; k <= KNET; k++) { const th = 2 * Math.atan(LIMIT * k / KNET);
+    if (Math.abs(th - phi) < bestD) { bestD = Math.abs(th - phi); bestK = k; } }
+  const theta = 2 * Math.atan(LIMIT * bestK / KNET), d = Math.abs(theta - phi);
+  let D = 0;
+  for (let k = 0; k < KNET; k++) { const a = LIMIT * k / KNET, b2 = LIMIT * (k + 1) / KNET;
+    D = Math.max(D, (b2 - a) / (1 + a * b2)); }
+  const Bk = Math.floor(1e7 / (1 + D) - 1) / 1e7;
+  const prod = Bk * (Math.cos(d) + Math.sin(d));
+
+  g.clearRect(0, 0, S, S);
+  g.fillStyle = css('--doc-bg'); g.fillRect(0, 0, S, S);
+  const sc = S * 0.62;
+  g.save(); g.translate(S / 2, S / 2);
+  g.save(); g.rotate(-phi);
+  g.strokeStyle = css('--doc-border-hairline'); g.lineWidth = 3;
+  g.strokeRect(-sc / 2, -sc / 2, sc, sc);
+  g.restore();
+  g.save(); g.rotate(-theta);
+  g.fillStyle = css('--doc-probe-wash'); g.globalAlpha = .8;
+  g.fillRect(-Bk * sc / 2, -Bk * sc / 2, Bk * sc, Bk * sc); g.globalAlpha = 1;
+  g.strokeStyle = css('--doc-probe'); g.lineWidth = 3;
+  g.strokeRect(-Bk * sc / 2, -Bk * sc / 2, Bk * sc, Bk * sc);
+  g.restore(); g.restore();
+
+  const deg = r => (r * 180 / Math.PI).toFixed(3);
+  tex(document.getElementById('s-phi'), `${deg(phi)}^{\\circ}`);
+  tex(document.getElementById('s-theta'), `${deg(theta)}^{\\circ}`);
+  tex(document.getElementById('s-d'), `${(d * 180 / Math.PI).toFixed(4)}^{\\circ}`);
+  tex(document.getElementById('s-D'), D.toFixed(7));
+  tex(document.getElementById('s-B'), Bk.toFixed(6));
+  const pe = document.getElementById('s-prod');
+  tex(pe, `${prod.toFixed(6)} ${prod < 1 ? '\\lt' : '\\ge'} 1`);
+  pe.style.color = prod < 1 ? '' : css('--doc-danger');
+}
+document.getElementById('phi').addEventListener('input', shrinkDraw);
+document.querySelectorAll('.knet').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.knet').forEach(o => o.setAttribute('aria-pressed', 'false'));
+  b.setAttribute('aria-pressed', 'true'); KNET = +b.dataset.k; shrinkDraw();
+}));
+
+/* ---------- boot ---------- */
+function typesetStatic() {
+  document.querySelectorAll('.tex').forEach(el => {
+    if (!el.dataset.done && !el.querySelector('.katex')) { el.dataset.done = '1'; tex(el, el.textContent, false); }
+  });
+  document.querySelectorAll('.tex-d').forEach(el => {
+    if (!el.dataset.done) { el.dataset.done = '1'; tex(el, el.textContent, true); }
+  });
+  document.documentElement.classList.add('math-ready');
+}
+function boot() { drawField(); refresh(true); shrinkDraw(); }
+typesetStatic();
+boot();
+if (window.matchMedia) {
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  if (mq.addEventListener) mq.addEventListener('change', () => { heat = null; boot(); });
+}
+</script>

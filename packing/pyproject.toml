@@ -29,6 +29,12 @@ packing-witness = "sqpack.cli.witness:main"
 symbolic = ["sympy>=1.13"]
 
 [dependency-groups]
+# Rendering the certificate explainer page. kpress supplies the design tokens,
+# the reading faces and the KaTeX distribution, all inlined into one file.
+# Pinned exactly and to a release past the 14-day cool-off rather than to the
+# newest: `tbd guidelines supply-chain-hardening`. 0.3.3 was 19 days old on the
+# day this landed; 0.3.4 and 0.3.5 were still inside the window.
+site = ["kpress==0.3.3"]
 dev = [
     "basedpyright>=1.31",
     # Vector PDF export of the known-best composite. Emits no timestamps, so the
