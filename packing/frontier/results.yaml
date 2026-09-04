@@ -696,10 +696,19 @@ results:
       from grids, reaching 6041 sites -- and both converged to an objective of exactly
       11.000000, approaching it from above and never crossing. A certificate needs mass
       strictly below eleven, so neither yields one. The rejection route does not close
-      either: the second run's dual carries a maximum pointwise depth of 12/11, so the
-      depth-scaled total that H-061's ceiling object requires is 121/12 = 10.0833
-      against the eleven it needs, and across rounds that figure read 5.46, 8.72, 8.85,
-      9.26, 9.59, 10.05, 10.07, 10.58, 10.53, 10.08 without approaching it.
+      either, and it is much further from closing than the search's own progress
+      figures suggest. H-061's object was built and decided exactly: the converged dual
+      is 76 squares, 608 after the D4 images, with a raw total of exactly 11, and
+      sqpack.fractional.ceiling checked all 1650944 vertices of their arrangement,
+      272244 of them in exact arithmetic. The maximum pointwise depth is 1925/1152 =
+      1.671007, so the feasible total -- the raw total scaled to make the family a
+      packing -- is 1152/175 = 6.5829 against the eleven a ceiling needs.
+      The gap between that and the search's running estimate is the thing to carry
+      forward. Column generation prices against a grid sample and reported a depth of
+      12/11 = 1.0909, which would have made the feasible total 121/12 = 10.08. The exact
+      maximum is 53 per cent higher, because depth peaks at vertices of the arrangement
+      that no grid samples. A ceiling must therefore be judged on the exact check and
+      never on the sampled depth, which flatters it.
       If tau*(3.82) is exactly eleven then this is the one configuration where neither
       pre-registered route can close, since a certificate needs mass below n and a
       ceiling needs the scaled dual to reach n, and both fail by an infinitesimal at
