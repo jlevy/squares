@@ -127,9 +127,11 @@ least `1`; its value is the covering value `τ*(L)`. Its dual is the **fractiona
 program**: non-negative weights on admissible placements whose depth — the weighted
 number of placements containing a point — is at most `1` everywhere, with value `ν*(L)`.
 Weak duality, proved in one line in the docstring of
-[`ceiling.py`](../../src/sqpack/fractional/ceiling.py), gives `ν*(L) ≤ τ*(L)`. A
-certificate exists at side `L` if and only if `τ*(L) < 11`, and a fractional packing of
-value at least `11` proves that none does.
+[`ceiling.py`](../../src/sqpack/fractional/ceiling.py), gives `ν*(L) ≤ τ*(L)`. Over
+`D4`-symmetric measures — equivalently over all measures with the doubled net — a
+certificate exists at side `L` when `τ*(L) < 11`, up to the discretisation into finitely
+many rational atoms that the search performs, and a fractional packing of value at least
+`11` proves that none does.
 
 A packing of eleven unit squares is a fractional packing of value `11` with all weights
 equal to `1`: each unit square contains a `B`-square at a net direction or a `D4` image
@@ -191,8 +193,9 @@ shape will ever close.
 That is where the owner’s question begins in earnest, and the rest of this report
 assumes the answer is that such an `L` exists somewhere in `(3.81, U)`. If it does not —
 if `τ*(L) < 11` all the way to the shrink cap `3.868983` — the ladder alone proves
-`s(11) ≥ 3.868983` in finitely many rungs, a finer net moves the cap toward `U` without
-reaching it, and the perturbation lemma of the section after next is all that is left.
+`s(11) ≥ L` for every rational `L` below the cap, a finer net moves the cap toward `U`
+without reaching it, and the perturbation lemma of the section after next is all that is
+left.
 
 The literature the archive holds is consistent with a gap but does not decide one.
 Caoduro–Sebő prove that the piercing-to-packing ratio of families of unit squares under
@@ -243,12 +246,13 @@ all, and the cores’ enclosing unit squares are pairwise interior-disjoint insi
 container. If no such partition exists, no packing exists at side `L`, even though
 `M ≥ 11`.
 
-This is a finite combinatorial question about one atom set, and it addresses the
-configuration `T-018` records as the one neither pre-registered route can close:
-`τ*(3.82) = 11` exactly.
-There, a certificate fails by an infinitesimal and a ceiling fails by an infinitesimal,
-but the packing that would have to exist is pinned to an exact cover of the heavy atoms
-by eleven cores of mass one, and exact cover is decidable.
+This is a finite question about one atom set, and it addresses the configuration `T-018`
+records as the one neither pre-registered route can close if it holds: `τ*(3.82) = 11`
+exactly. There, a certificate fails by an infinitesimal and a ceiling fails by an
+infinitesimal, but the packing that would have to exist is pinned to an exact cover of
+the heavy atoms by eleven cores of mass one: finitely many assignments of atoms to cells
+and directions, each with a semialgebraic feasibility check in the free centres and
+angles, so decidable, if not purely combinatorial.
 The skeleton is not the whole atom set: the retained `3.81` certificate has `1121` atoms
 with weights from `3/40000` to `917/6250`, read from the file, and of those `649` weigh
 more than `1/200` and carry `9.97` of its `10.86` units of mass, `289` weigh more than
@@ -277,8 +281,9 @@ everywhere constrains nothing.
 `μ` speaks about `B`-squares at net directions; a packing consists of unit squares at
 arbitrary angles. Lemma 1 bridges them through `C3`, and the price is that the case
 analysis in Corollary 1a runs over cores rather than over squares: a group of atoms must
-fit in a `B`-square whose enclosing unit square, at any angle within the half-gap of the
-net direction, is what must be disjoint from its neighbours.
+fit in a `B`-square, concentric with its unit square as Lemma 1 constructs it, whose
+enclosing unit square, at some angle within the half-gap of the net direction, is what
+must be disjoint from its neighbours.
 Disjointness of the unit squares is strictly stronger than disjointness of the cores,
 and it is the stronger condition the exact-cover search must use; eleven disjoint cores
 alone would only say that eleven `B`-squares fit, which at `3.82` would give
@@ -295,11 +300,13 @@ the unconditional argument.
 
 **Lemma 2 (conditional certificate).** Let `b` be a set of placements of one unit square
 (a box in `(x, y, θ)`), and let `I_b = ⋂_{Q ∈ b} Q` be the region every placement in the
-box occupies. Take a net that spans a full quarter turn, and let `Λ_b` be the admissible
-`B`-square placements at net directions that are disjoint from `I_b`. Suppose a finite
-atom measure `μ` of total mass `M < 11` gives mass at least `1` to every member of `Λ_b`
-and to every `B`-square at a net direction that lies inside some placement in `b`. Then
-no packing of eleven unit squares in `[0, L]²` has a square in `b`.
+box occupies. Take a net that spans a full quarter turn and satisfies `C3` — its
+half-gaps are those of the eighth-turn net, so the same `B` serves — and let `Λ_b` be
+the admissible `B`-square placements at net directions that are disjoint from `I_b`.
+Suppose a finite atom measure `μ` of total mass `M < 11` gives mass at least `1` to
+every member of `Λ_b` and to every `B`-square at a net direction that lies inside some
+placement in `b`. Then no packing of eleven unit squares in `[0, L]²` has a square in
+`b`.
 
 *Proof.* If `Q_k ∈ b`, its core `P_k` is a `B`-square at a net direction inside a
 placement in `b`, so `μ(P_k) ≥ 1`; each other square `Q_i` has a core `P_i ⊂ int Q_i` at
@@ -317,24 +324,44 @@ container’s `D4` symmetry and `C0` can no longer fold angles onto the shorter 
 interval route already decides on a doubled net, so this costs a factor of two in
 directions and no new idea.
 
-**Lemma 3 (class certificate).** Partition the directions into `D4`-closed classes `Θ₀`
-and `Θ₁` and fix counts `n₀ + n₁ = 11`. Suppose weights `w₀, w₁ ≥ 0` and a
-`D4`-symmetric measure `μ` of total mass `M` satisfy: every admissible core at a
-direction in `Θ₀` has mass at least `w₀`, every admissible core at a direction in `Θ₁`
-has mass at least `w₁`, and `M < n₀ w₀ + n₁ w₁`. Then no packing has exactly `n₀`
-squares with directions in `Θ₀` and `n₁` in `Θ₁`.
+The same count boxes several squares at once.
+For boxes `b₁, …, b_k` with cores `I₁, …, I_k`, require mass at least `1` on every
+`B`-square at a net direction that lies inside some placement in `b_i` and is disjoint
+from every `I_j` with `j ≠ i`, for each `i`, on every admissible `B`-square disjoint
+from all the `I_j` for the free squares, and `M < 11`; then no packing has `Q_i ∈ b_i`
+for every `i`. Each boxed square gets its own non-convex admissible set, which is what
+the fifth measurement below would have to build.
 
-*Proof.* The cores are disjoint and each contributes at least its class weight.
+**Lemma 3 (class certificate).** Partition the net directions into `D4`-closed classes
+`Θ₀` and `Θ₁`, each a union of the net’s half-gap cells, the arcs bounded by the
+midpoints between consecutive net angles; a square belongs to the class of the net
+direction `C3` assigns it, the one whose cell contains its angle.
+Fix counts `n₀ + n₁ = 11`. Suppose weights `w₀, w₁ ≥ 0` and a `D4`-symmetric measure `μ`
+of total mass `M` satisfy: every admissible core at a direction in `Θ₀` has mass at
+least `w₀`, every admissible core at a direction in `Θ₁` has mass at least `w₁`, and
+`M < n₀ w₀ + n₁ w₁`. Then no packing has exactly `n₀` squares with directions in `Θ₀`
+and `n₁` in `Θ₁`.
+
+*Proof.* Each square’s core is at the net direction of its own class, the cores are
+disjoint, and each contributes at least its class weight.
 ∎
+
+The cell condition is not decoration: a square at `4.9°` on the retained net lies in the
+cell of the direction at `5.007°` and contains no `B`-square at the direction below it,
+so a class cut at a geometric angle rather than at a cell boundary would count it
+wrongly.
 
 The constraints are linear in `(μ, w₀, w₁)` and the objective `M − n₀ w₀ − n₁ w₁` is
 homogeneous, so the class certificate is one linear program per composition, decided by
 the sign of its optimum under a normalisation.
 It is the two-threshold form of `C4`, and it prices what everyone in this subject knows
 informally — a tilted square costs more room than an aligned one — as a dual variable
-instead of a lemma. Stromquist’s Theorem 3 is exactly a class certificate: the class is
-`{0°, 45°}`, both weights are `1`, and the strengthened Lemmas 7 and 8 of his paper are
-the covering condition restricted to that class.
+instead of a lemma.
+Stromquist’s Theorem 3 is a class certificate with one more step: the
+class is `{0°, 45°}`, the strengthened Lemmas 7 and 8 of his paper are the covering
+condition restricted to that class, and his twelve points — one more than eleven, so the
+count alone proves nothing — are closed by a step of Corollary 1a’s kind, a box forced
+to swallow three of them at once.
 Its bound, `2 + (4/3)√2 ≈ 3.885618`, sits above Trump’s value, which is what settles
 Gardner’s conjecture and also what shows the shape is the right one: the class that does
 not contain Trump’s packing is closed above `U` by a certificate conditioned on the
@@ -346,23 +373,24 @@ step. A unit square tilted by `θ` contains an axis-parallel square of side
 `1 / (cos θ + sin θ)` about its centre, and nine points on a grid of pitch `s/4` pierce
 every axis-parallel square of side at least `s/4` inside `[0, s]²`, because an interval
 of that length inside `[0, s]` contains a multiple of `s/4` other than `0` and `s`. So
-at side `s` at most nine squares of any packing are within `θ₀(s)` of axis-parallel,
-where `cos θ₀ + sin θ₀ = 4/s`: `1.85°` at `U` and `2.77°` at `3.82`. At every side below
-`U`, then, at least two squares are tilted by more than `1.85°`, and the compositions
-`n₁ ≤ 1` for a near-axis class of half-width `1.85°` are closed by nine points.
-Trump’s packing has five such squares, so the fact is consistent rather than sharp; its
-value is as the template, since a class certificate is a covering condition restricted
-to a class and the classical lemmas are the special case where the covering is by
-points.
+at side `s` at most nine squares of any packing are tilted by less than `θ₀(s)`, where
+`cos θ₀ + sin θ₀ = 4/s`: `1.85°` at `U` and `2.77°` at `3.82`. At every side below `U`,
+then, at least two squares are tilted by `1.85°` or more, and the compositions `n₁ ≤ 1`
+are closed by nine points for every near-axis class contained in the tilts below
+`1.85°`. Trump’s packing has five such squares, so the fact is consistent rather than
+sharp; its value is as the template, since a class certificate is a covering condition
+restricted to a class and the classical lemmas are the special case where the covering
+is by points.
 
 The branching order this suggests is the chunking the owner described, made discrete:
 
 1. **Composition.** Twelve class certificates, one per `n₁ = 0, …, 11` tilted squares
-   for a near-axis class `Θ₀` of half-width `α`. Nine points close `n₁ ≤ 1` at every
-   side below `U` for half-width `1.85°`; the grid that proves the ceiling caps every
-   near-axis class at `4B`; Stromquist’s Theorem 3 is the evidence that compositions far
-   from Trump’s close above `U`; the compositions near Trump’s, with five squares tilted
-   near `40°`, cannot close and are refined.
+   for a near-axis class `Θ₀` that is a union of half-gap cells of half-width about `α`.
+   Nine points close `n₁ ≤ 1` at every side below `U` for any such class inside the
+   tilts below `1.85°`; the grid that proves the ceiling caps every near-axis class at
+   `4B`; Stromquist’s Theorem 3 is the evidence that compositions far from Trump’s close
+   above `U`; the compositions near Trump’s, with five squares tilted near `40°`, cannot
+   close and are refined.
 2. **Angle bins.** Within a surviving composition, the tilted class is split into bins;
    every bin that does not contain `40.18°` is a class certificate again, and the bins
    that do are refined.
@@ -376,16 +404,19 @@ None of this is implemented.
 The codebase inventory on which this report rests found no admissibility hook in
 `sqpack.fractional`: the admissible centre domain is hard-coded as the rotated container
 square in `sweep.centre_domain`, in the float mirror in `generate.py`, and in the four
-half-planes `interval.DirectionSearch` propagates, and each of the three assumes that
-domain is convex, which a container minus `I_b` is not.
-Lemma 3 needs none of that — it changes the right-hand sides and the objective of the
-covering program and nothing geometric — which is why the composition step is the cheap
-one and the place to test whether conditioning buys anything at all.
+half-planes `interval.DirectionSearch` propagates; each of the three assumes that domain
+is convex, which a container minus `I_b` is not, and the column generator routes its
+oracle through the second.
+Lemma 3 needs none of that — it changes the covering program’s thresholds and objective,
+adding two variables and one normalisation row, and nothing geometric — which is why the
+composition step is the cheap one and the place to test whether conditioning buys
+anything at all.
 
 The symmetry bookkeeping is standard.
-A minimal packing has a square touching each container wall, or the container could
-shrink; labels are broken by ordering the squares, and the container’s eight symmetries
-by fixing which wall the lowest square touches.
+A minimal packing spans the container in at least one direction, or the container could
+shrink, so after a translation it touches both walls of one pair of opposite sides;
+labels are broken by ordering the squares, and the container’s symmetries by fixing the
+spanning direction and the wall the lowest square touches.
 Montanher and co-authors do this for squares in a circle by tiling the centre domain
 into isosceles triangles of base below `1`, each holding at most one centre, and
 iterating over tile combinations one square at a time so that infeasible small
@@ -436,12 +467,15 @@ reads `a_j · v + σ e_j + R_j(v) ≥ 0`, where `e_j` is `1` on the two far wall
 elsewhere and `|R_j(v)| ≤ (K/2) ‖v‖²`. Since `σ e_j ≤ 0`, every row has
 `a_j · v ≥ −(K/2) ‖v‖²`, while the modulus supplies a row with `a_j · v ≤ −κ_b ‖v‖`; so
 `v = 0` or `‖v‖ ≥ 2 κ_b / K`, and at `v = 0` a far-wall row reads `σ ≥ 0`. Hence in the
-open ball of radius `ρ₀ = min_b 2 κ_b / K` the only packing at side at most `U` is
-Trump’s pose at side exactly `U`. The finitely many `D4` images and relabellings of the
-pose are excluded by shrinking `ρ₀` below half the distance to the nearest of them, and
-the selection of a branch is sound for the reason exp-013 gives: a feature with a
-strictly negative gap at the pose cannot separate a pair nearby, so a nearby packing is
-separated by features active at the pose, which is one of the `512` raw selections.
+open ball of radius `ρ₀ = min_b 2 κ_b / K` — capped also by `g_min / Lip`, the radius on
+which every strictly satisfied constraint stays satisfied, with `g_min` the least
+nonzero gap at the pose and `Lip` a Lipschitz constant of the gaps — the only packing at
+side at most `U` is Trump’s pose at side exactly `U`. The finitely many `D4` images and
+relabellings of the pose are excluded by shrinking `ρ₀` below half the distance to the
+nearest distinct one, and the selection of a branch is sound on that same ball for the
+reason exp-013 gives: a feature with a strictly negative gap at the pose cannot separate
+a pair nearby, so a nearby packing is separated by features active at the pose, which is
+one of the `512` raw selections.
 Inside the ball the side grows linearly, `σ ≥ κ_b ‖v‖ − (K/2) ‖v‖²` along every feasible
 direction, which is what `T-3`’s kink already showed on one slice, with one-sided slopes
 `0.175` and `0.384` at the record tilt.
@@ -489,32 +523,39 @@ What is specific here is which tool works at which scale.
 
 | Scale | Tool | Status here |
 | --- | --- | --- |
-| Coarse: composition, angle bins, forced regions | Class certificates (Lemma 3), conditional certificates (Lemma 2), tight-core census (Corollary 1b) | Unconditional certificates retained; Lemma 3 is a right-hand-side change; Lemma 2 needs the domain generalised in four files |
+| Coarse: composition, angle bins, forced regions | Class certificates (Lemma 3), conditional certificates (Lemma 2), tight-core census (Corollary 1b) | Unconditional certificates retained; Lemma 3 is a threshold change; Lemma 2 needs the domain generalised in the sweep, the generator, the interval route and the column generator |
 | Intermediate: boxes near Trump’s pose larger than `ρ₀` | Fixed-angle cell LP (`T-2`) over angle boxes, with interval propagation on the 34-variable system | The cell LP exists exactly; the interval propagation exists only in Montanher’s `n = 3` code, not here |
-| Fine: the box of radius `max(ρ₀, (η / C)^{1/2})` at target side `U − η` | Quantified modulus and stress lemmas above | First-order certificates and stresses retained; `ρ₀` and `C` not computed |
+| Fine: the box of radius `max(ρ₀, (η / C)^{1/2})` at a rung below `U`, and the `ρ₀`-ball at the run above it | Quantified modulus and stress lemmas above | First-order certificates and stresses retained; `ρ₀` and `C` not computed |
 
 The narrow gap enters in a way the question did not anticipate: it is produced, not
 assumed. Run the tree at side `L₁` slightly above the ladder’s top and it proves
 `s(11) ≥ L₁`; at `L₂ > L₁` it proves more and costs more, because the `ε`-tight sets
 fatten and the near-Trump band widens while the discard radius `(η / C)^{1/2}` shrinks
-toward its floor `ρ₀`; the last rung, at `U − η` for small `η`, is where the modulus
-lemma carries the whole local weight, and it is the one that reaches `U` exactly and
-proves uniqueness on the way — every packing at side `U` lies in the box, and in the box
-the pose is isolated.
-Each rung is a publishable bound, exactly as each certificate rung is now.
+toward its floor `ρ₀`. Each rung is a publishable bound, exactly as each certificate
+rung is now, and no rung below `U` reaches `U`: a certificate at side `L` says nothing
+about sides above `L`. Equality and uniqueness need one run of a different kind, at a
+rational side `L₁` just above `U`, in which the certificate half closes every box whose
+poses lie outside the `ρ₀`-ball and the modulus lemma closes the ball for every side
+below `U` at once. If that run succeeds, every packing at side at most `L₁` lies in the
+ball, none of them has side below `U`, and the only one at `U` is Trump’s. It succeeds
+only if no other arrangement has side at most `L₁` — the competitor question below — and
+it is the run in which the certificate half has the least help, because the modulus
+lemma’s margin `κ_b ‖v‖ − (K/2) ‖v‖²` falls to zero at the ball’s edge, so the boxes
+just outside it are refuted at `L₁` by the covering program alone or not at all.
 
 Where it would be expensive is the intermediate scale, and that is where the estimate is
 least certain.
 
-- **The band between the tools.** At side `U − η`, a box at pose-distance just above the
-  discard radius `(η / C)^{1/2}` contains configurations whose side the stress bound
-  allows to come within `η` of the target; the covering program sees such a box as
-  nearly feasible, and whether its conditional value crosses `11` there is exactly the
-  question no run has asked.
-  If the certificate half reaches down to `10⁻¹` and the local lemmas reach up to
-  `10⁻³`, the band between them is two orders of magnitude of pose scale in a
-  34-dimensional chart, and the cell LP with interval propagation is what would have to
-  fill it. If the two meet, the middle tier is empty and the proof is the coarse tree
+- **The band between the tools.** At a rung `U − η`, a box at pose-distance just above
+  the discard radius `(η / C)^{1/2}` contains configurations whose side the stress bound
+  allows to come within `η` of the target, and at the run above `U` a box just outside
+  the `ρ₀`-ball contains configurations whose side the modulus lemma allows to come
+  within `L₁ − U` of it; either way the covering program sees such a box as nearly
+  feasible, and whether its conditional value crosses `11` there is exactly the question
+  no run has asked. If the certificate half reaches down to `10⁻¹` and the local lemmas
+  reach up to `10⁻³`, the band between them is two orders of magnitude of pose scale in
+  a 34-dimensional chart, and the cell LP with interval propagation is what would have
+  to fill it. If the two meet, the middle tier is empty and the proof is the coarse tree
   plus one lemma.
 - **Other near-optimal arrangements.** Every local minimum of the side within the band
   the certificate cannot see needs its own box and its own local lemma.
@@ -526,10 +567,10 @@ least certain.
   certifies nothing, and this is the second-largest unknown in the cost.
 - **Rotational degrees of freedom.** Markót’s interval method proves circle packings
   optimal at `n = 31, 32, 33` in `26`, `61` and `13` CPU hours on a laptop, with
-  tile-pattern filtering over about `10¹²` tile combinations; the only rigorous result
-  for rotating unit squares in any container is Montanher and co-authors' `n = 3`, and
-  the `n = 11` report in this repository correctly calibrates against it: “do not target
-  `s(11)` with a rigorous solver.”
+  tile-pattern filtering over about `10¹²` tile combinations; the only computer-assisted
+  optimality proof for rotating unit squares in any container is Montanher and
+  co-authors’ `n = 3`, and the `n = 11` report in this repository correctly calibrates
+  against it: “do not target `s(11)` with a rigorous solver.”
   The one thing that changes that calibration is that the covering program is a bound
   the interval solvers lack: it prunes coarse boxes by a global counting argument rather
   than by local propagation, and the ratio band `[0.98171, 0.98270]` of
@@ -569,15 +610,23 @@ what a method that escapes the ceiling would look like, and Lemma 1 suggests the
 drop the shrink, put `B = 1`, and decide `C4` over the continuum of directions by an
 interval branch and bound in the three parameters of one placement — the decision
 problem the `n = 11` report already lists as “well inside the reach of interval
-branch-and-bound.” With `B = 1` the refuting grid needs side exactly `4`, the ceiling
-becomes the grid bound itself, and the only obstruction left is whether the covering
-value at `4 − δ` sits below `12`, which is the `n = 12` instance of the first
+branch-and-bound.” Two things change with the shrink gone.
+Closed unit squares with disjoint interiors share edges, so the cores of Lemma 1 are no
+longer disjoint closed sets: the covering condition must be stated on open placements,
+`μ(int Q) ≥ 1`, whose infimum over centres sits on the event grid’s lines rather than in
+its open cells, and the sweep’s cell semantics change with it.
+And sixteen closed unit squares tile the side-`4` container, so the refuting grid needs
+a side strictly above `4`: the ceiling becomes the grid bound as a supremum, which for
+`n = 12` is the conjectured value itself, and the only obstruction left is whether the
+covering value at `4 − δ` sits below `12`, which is the `n = 12` instance of the first
 measurement below.
 
-The natural first test at `n = 12` is to mechanise one of Bentz’s own cases: box the two
-corner-restricted squares of his non-adjacent configuration at a side just below `4`,
-take their forced points as cores, and ask the conditional program to close the case —
-the sixth measurement below.
+The natural calibration is to mechanise one of Bentz’s own cases at `n = 13`, where he
+closes it by hand: box the two corner-restricted squares of his non-adjacent
+configuration at a rational side just below `4`, take their forced points as cores, and
+ask the conditional program to close the case — the sixth measurement below.
+At `n = 12` the same configuration is not a calibration but the open problem: Bentz’s
+argument there ends at “a maximum of twelve” and is consistent with twelve fitting.
 
 ## Verdict
 
@@ -593,11 +642,11 @@ Two of the three are an afternoon’s computation each.
 | # | Measurement | Instrument | Kills the idea if |
 | --- | --- | --- | --- |
 | 1 | `ν*(L)` at `L ∈ {3.82, 3.85, 3.87}`: a fractional packing with depth at most `1` at every arrangement vertex, by cutting planes on the `3.82` dual | `sqpack.fractional.ceiling` as the depth oracle; the column generator’s site loop in reverse | Nothing kills it; either outcome sets the ladder’s top and the tree’s working side |
-| 2 | `κ_b` and `Λ_b / ‖λ_b‖₁` for all `128` branches, a curvature bound `K`, and the resulting `ρ₀` and `C` | `cases.trump11.tangent_cones` for the matrices; `66` linear programs per branch; exact confirmation | `ρ₀` below `10⁻⁶` in the chart: the local box is too small for any tree to reach |
+| 2 | `κ_b` and `Λ_b / ‖λ_b‖₁` for all `128` branches, a curvature bound `K`, the least nonzero gap and its Lipschitz constant, and the resulting `ρ₀` and `C` | `cases.trump11.tangent_cones` for the matrices; `66` linear programs per branch; exact confirmation | `ρ₀` below `10⁻⁶` in the chart: the local box is too small for any tree to reach |
 | 3 | Census of event cells with mass at most `1 + ε`, `ε ∈ {0, 0.01, 0.05, 0.1}`, per direction, on the retained `381/100` certificate and on the `3.82` atom set once regenerated | A per-cell readout of the mass grid `sweep.minimum_covered_mass` already fills | The tight set at `ε = 0.05` covers most of the centre domain: the mass gap constrains nothing enumerable |
-| 4 | Twelve class certificates at side `U`, one per composition `n₁`, near-axis half-width `α = 5°` | Lemma 3 as a right-hand-side change to the covering program; no geometry changes | The `n₁ = 0` class fails to certify above `U`: conditioning on direction buys too little |
-| 5 | The handshake: one conditional certificate at side `U − 0.01` with all eleven squares boxed at radius `0.05` about Trump’s pose | Lemma 2 after the domain generalisation; time one node first with a coarse net, since a tree of nodes that cost hours each is not a plan | The conditional value stays at or above `11`: the certificate cannot reach down to where the modulus lemma reaches up, and the middle tier is not empty |
-| 6 | The `n = 12` analogue: Bentz’s non-adjacent corner-restricted configuration at side `399/100`, with the two corner-restricted squares boxed and their forced points as cores, as a conditional certificate | Lemma 2 after the domain generalisation | The boxed case still returns mass at or above `12`: conditioning cannot close even a case the classical method closes by hand |
+| 4 | Twelve class certificates at a rational side just above `U`, one per composition `n₁`, with the near-axis class the union of the net’s first nineteen half-gap cells, half-width `4.875°` | Lemma 3 as a threshold change to the covering program; no geometry changes | The `n₁ = 0` class fails to certify above `U`: conditioning on direction buys too little |
+| 5 | The handshake: one conditional certificate at side `U − 0.01` with all eleven squares boxed at radius `0.05` about Trump’s pose | The multi-box form of Lemma 2 after the domain generalisation; time one node first with a coarse net, since a tree of nodes that cost hours each is not a plan | The conditional value stays at or above `11`: the certificate cannot reach down to where the modulus lemma reaches up, and the middle tier is not empty |
+| 6 | The `n = 13` calibration: Bentz’s non-adjacent corner-restricted configuration at side `399/100`, with the two corner-restricted squares boxed and their forced points as cores, as a conditional certificate | The multi-box form of Lemma 2 after the domain generalisation | The boxed case still returns mass at or above `13`: conditioning cannot close even a case the classical method closes by hand |
 
 The order is the order of cost, and the first three need no new soundness surface: the
 first is the ceiling instrument run to convergence, the second is exact linear algebra
@@ -636,7 +685,8 @@ an integrality gap looks like from the inside, and is itself worth knowing.
 No bound is proved, proposed, or estimated beyond arithmetic on recorded constants.
 The three lemmas are elementary consequences of the certificate conditions and are
 proved here; nothing built on them exists.
-The modulus lemma’s derivation is sketched and its constants are not computed.
+The modulus lemma’s derivation is sketched and its constants are not computed, and the
+run above `U` that equality and uniqueness would need is described, not costed.
 The tree’s size is not estimated because the three numbers that would set it are not
 measured, and the ratio band of X-013 is quoted as the record’s own extrapolation, with
 that report’s qualifications attached.
