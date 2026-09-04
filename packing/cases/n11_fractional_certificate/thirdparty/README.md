@@ -47,13 +47,13 @@ inequality `s(11) > 19/5` also follows (by compactness), but the claim is the we
 | `control-n17-massaccesi.json` | Gustavo Massaccesi’s published `n = 17` certificate, rebuilt as data in the same schema. |
 | `build_n17_control.py` | Rebuilds the control file from the constants of its published source; `--check` confirms the shipped file matches. |
 | `falsify.py` | Applies the perturbations in the falsification table and prints what the verifier refuses. |
-| `check.sh` | The whole check in one command. |
+| `check.py` | The whole check in one command. |
 
 One command, with whatever `python3` is on your `PATH` (CPython 3.8 or later, tested
 with 3.10 through 3.14, nothing installed):
 
 ```shell
-sh check.sh
+python3 check.py
 ```
 
 It rebuilds the control data and compares it to the shipped file, then runs `verify.py`
@@ -294,7 +294,7 @@ margin covers nothing, and the verifier scores those placements.
 ## Output of the Stranger Run
 
 Run from a copy of this directory outside the repository, with an empty environment
-(`env -i PATH=/usr/bin:/bin bash -c 'time sh check.sh'`, so `python3` is the system
+(`env -i PATH=/usr/bin:/bin bash -c 'time python3 check.py'`, so `python3` is the system
 interpreter and nothing from this project is importable).
 Verbatim:
 
@@ -302,7 +302,7 @@ Verbatim:
 $ which python3; python3 --version
 /usr/bin/python3
 Python 3.11.15
-$ time sh check.sh
+$ time python3 check.py
 control data rebuilt from the published constants: identical to control-n17-massaccesi.json
 python 3.11.15
 certificate C-n011-fractional-19-5
@@ -353,7 +353,7 @@ certificate control-n17-massaccesi-4.5058
   info  declared total_mass 203/12 == recomputed 203/12
   info  all atoms lie in [0, L]^2: yes (not a condition; an outside atom only wastes weight)
 VERIFIED: s(17) >= 22529/5000 = 4.505800
-check.sh: all three steps passed
+check.py: all three steps passed
 
 real	0m52.422s
 user	0m34.333s

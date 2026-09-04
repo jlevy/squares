@@ -306,6 +306,12 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
 def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> None:
     expected = {
+        # The full 181-direction exact decision of the retained n = 12 certificate:
+        # about 25 s on an idle core, and the coarse-net version in the same file
+        # carries the same claim for the fast tier.
+        "test_fractional_certificate.py": {
+            "test_the_full_retained_certificate_is_accepted",
+        },
         "test_exact_jets.py": {
             "test_n5_wall_and_contact_gradients_match_authoritative_source_rows",
         },
