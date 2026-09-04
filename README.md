@@ -1,8 +1,20 @@
 # Square Packing
 
-This repository combines an offline square-packing literature archive, a per-case
-frontier for `n ≤ 100`, exact and numerical verification tools, search code, and a
-replayable experiment record.
+This repository has moved the lower bound on `s(11)`, the smallest square-packing case
+still open, for the first time since Stromquist set it in 2003. A first-party
+unavoidable-set certificate proves `s(11) ≥ 381/100 = 3.81`, narrowing the gap to
+Trump’s 1979 packing from `0.088230` to `0.067084`; the case stays open.
+The same certificate technique produced the first lower bound ever proved specifically
+for twelve squares, `s(12) ≥ 79/20`, and a bound of `459/100` for `n = 17`, `18`, and
+`19` that displaces a previously published value by `0.0842`. All three are checked
+twice, by independent methods that share no modeling assumption, against the same frozen
+certificate.
+
+Around those results is a survey of every case `n = 1…100` that keeps the bound a source
+*reports* separate from the bound this repository has *verified*, with provenance for
+each, an offline archive of the primary literature whose transcriptions are checked
+against unedited extractions, and machine audits that have found errata in published
+proofs. The tools, the search code and the experiment record are all replayable from it.
 
 [![One hundred known-best square packings arranged from n equals one through one hundred.](packing/atlas/known-best/known-best-1-100.png)](packing/atlas/known-best/known-best-1-100.svg)
 
@@ -12,34 +24,12 @@ Select the image for the zoomable SVG or use the
 [print-ready PDF](packing/atlas/known-best/known-best-1-100.pdf).*
 
 `s(n)` is the side of the smallest square that holds `n` non-overlapping unit squares.
-The problem is elementary to state and open even at small `n`: for `n = 11`, the best
-known packing dates from 1979 and remains about `0.088` above the best proved lower
-bound.
+The problem is elementary to state and remains open even at small `n`.
 
-[Survey](#survey) · [New Results](#new-results) · [What Is Here](#what-is-here) ·
+[New Results](#new-results) · [Survey](#survey) · [What Is Here](#what-is-here) ·
 [Getting Started](#getting-started) · [Reports](#reports) ·
 [Autonomous Research Process](#autonomous-research-process) ·
 [Conventions](#conventions) · [Layout](#layout)
-
-## Survey
-
-The survey records the best known packing and best proved lower bound for every
-`n ≤ 100`, with provenance and separate reported and formally verified lanes.
-Its source is one schema-validated case file under
-[`packing/frontier/`](packing/frontier/README.md); the generated
-[status table](packing/frontier/STATUS.md) is the reader view, and the atlas above
-renders every retained known-best packing.
-
-The [literature archive](packing/resources/README.md) retains each primary source, a
-cleaned Markdown transcription, and the unedited extraction used to check it.
-The generated [evidence inventory](packing/frontier/INVENTORY.md) shows what each
-recorded claim rests on, who performed the work, and how far it has been checked.
-
-The survey audits rather than merely transcribes.
-For example, the earliest published proof of `s(7) = 3` carries four recorded defects in
-its printed route, so the case’s proved status rests on independent later proofs.
-The [`n = 7` case](packing/frontier/n-007.md) states that disposition and links the
-relevant source audit.
 
 ## New Results
 
@@ -141,6 +131,26 @@ The complete statements, scopes, evidence, limitations, classifications, and nex
 actions live in the register.
 Results that still rest on a source read rather than a machine check are labeled there
 accordingly.
+
+## Survey
+
+The survey records the best known packing and best proved lower bound for every
+`n ≤ 100`, with provenance and separate reported and formally verified lanes.
+Its source is one schema-validated case file under
+[`packing/frontier/`](packing/frontier/README.md); the generated
+[status table](packing/frontier/STATUS.md) is the reader view, and the atlas above
+renders every retained known-best packing.
+
+The [literature archive](packing/resources/README.md) retains each primary source, a
+cleaned Markdown transcription, and the unedited extraction used to check it.
+The generated [evidence inventory](packing/frontier/INVENTORY.md) shows what each
+recorded claim rests on, who performed the work, and how far it has been checked.
+
+The survey audits rather than merely transcribes.
+For example, the earliest published proof of `s(7) = 3` carries four recorded defects in
+its printed route, so the case’s proved status rests on independent later proofs.
+The [`n = 7` case](packing/frontier/n-007.md) states that disposition and links the
+relevant source audit.
 
 ## What Is Here
 
