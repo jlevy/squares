@@ -205,6 +205,10 @@ documents:
     role: review
     authority: record
     lifecycle: retained
+  - path: docs/project/three-lane-research-method.md
+    role: component-guide
+    authority: record
+    lifecycle: retained
   - path: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
     role: handoff
     authority: record

@@ -60,6 +60,20 @@ Results first established here, as far as the recorded source searches show, inc
   Both are superseded as the verified lower bound by the source-backed
   `s(17), s(18), s(19) ≥ 4.5058` adopted on 2026-09-03, which is externally proposed
   rather than first established here.
+- **T-018: `s(11) ≥ 19/5`, the first movement of the smallest open case since 2003.**
+  `s(11)` is the case this project exists for, and its lower bound had been Stromquist’s
+  `2 + 4/√5 = 3.788854` since he stated it.
+  A first-party weighted fractional unavoidable-set certificate — 425 weighted atoms,
+  total mass `43391/4000`, every placement of a shrunken square covering mass at least
+  `1` — proves that eleven unit squares do not fit in a container of side `3.8`. The
+  interval narrows from `0.088230` to `0.077084`; the gap is not closed.
+  Scored `S5`, the rubric’s anchor for movement on a central open case.
+- **T-017: `s(12) ≥ 393/100`, from nothing case-specific at all.** `n = 12` had only the
+  `n = 11` bound inherited by monotonicity; the frontier record said in as many words
+  that nothing specific to `n = 12` had ever been proved.
+  A five-rung ladder — `19/5`, `77/20`, `97/25`, `39/10`, `393/100` — is retained, all
+  from one generator that applies at every `n`, which is why this is scored `S4` as a
+  bound family rather than a case result.
 - **T-010: `s(11) ≥ 2 + 4/√5`, repaired.** The printed 2003 Figure 14 unavoidability
   claim has a strict counterexample.
   A preregistered, source-distinct replacement point set restores the full lower-bound

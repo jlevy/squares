@@ -92,6 +92,19 @@ hypothesis:
   replication: true
   registered: '2026-09-04'
   notes: >-
+    RESOLVED 2026-09-04, and beyond its own claim. The certificate at 19/5 was found and
+    accepted, then the ladder was climbed to 393/100 (T-017), and the same instrument
+    then produced s(11) >= 19/5 (T-018), the first movement of the smallest open case
+    since 2003. What made the ladder above 77/20 reachable was D-434: the search's
+    separation oracle scored fewer placements than the verifier decides, so programs
+    converged below n and were refused by C4 on cells they had never been shown.
+    The rejection route this record registered in advance was not needed and was not
+    taken; sqpack.fractional.ceiling implements the object it named, and no ceiling has
+    been proved. The corollary this record anticipated -- s(12) > s(11) strictly -- is now
+    proved: s(12) >= 393/100 = 3.93 and s(11) <= 3.877084 by Trump's 1979 packing, and
+    3.93 > 3.877084, so s(12) > s(11). It did not follow before this block, when n = 12
+    carried only the 3.788854 it inherited from n = 11.
+
     The threshold is fixed here, before any target command runs, as H-039 requires, and
     it does not move after results are seen: a certificate at a lower side is a typed
     result about the generator, recorded and not promoted; a certificate at a higher

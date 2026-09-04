@@ -574,19 +574,22 @@ results:
     verification: V4
     confirmation: C3
     significance:
-      score: 3
+      score: 4
       rationale: >-
-        First movement of this case's verified lower bound, and the first bound of
-        any kind proved about n = 12 rather than inherited from n = 11 -- the
-        frontier case body had recorded that nothing specific to n = 12 had ever
-        been proved. Held down from higher by three things: the method is Burns's
-        and Massaccesi's, not this project's, so what is new is an instance and a
-        generator rather than a technique; the certificate has not been checked by
-        a second party; and the gap to the conjectured 4 is 0.07, which this
-        approach does not close. The generator is the more durable half of the
-        result, since it applies at every n.
+        Scored against the rubric's anchor for S4, "a reusable technique, bound
+        family, or resolved disputed value". What is retained is not one bound but a
+        five-rung ladder -- 19/5, 77/20, 97/25, 39/10, 393/100 -- produced by a
+        generator that applies at every n and that has since produced the n = 11
+        result as well, so this is a bound family rather than a case result. It is
+        also the first bound of any kind proved about n = 12 rather than inherited
+        from n = 11: the frontier case body had recorded that nothing specific to
+        n = 12 had ever been proved.
+        Held below S5 because n = 12 is not the central open case, the method is
+        Burns's and Massaccesi's rather than this project's, the second exact check
+        shares a method family with the first, and the gap to the conjectured 4 is
+        0.07, which this approach does not close.
       scored: '2026-09-04'
-      by: BC-161 (repository; no independent review yet)
+      by: BC-161 (repository; independent evaluator confirmed C4, no external review)
     novelty: apparently-novel
     composition: >-
       Primary: one certificate, one verifier, one accepted verdict. The bound is
@@ -629,16 +632,19 @@ results:
     verification: V4
     confirmation: C3
     significance:
-      score: 4
+      score: 5
       rationale: >-
-        The smallest open case, and the only bound this instrument has moved that
-        displaces a value from the refereed literature rather than an inherited or
-        closed-form one. Scored above T-017 for that reason and held below the top by
-        the same three limits: the method is Burns's and Massaccesi's rather than this
-        project's, so what is new is an instance and the generator that found it; both
-        exact decisions are the same method family; and the remaining gap to the known
-        packing is 0.077, which this approach does not close. The calibration rung at
-        189/50, below Stromquist's bound, was run first by design and is retained.
+        Scored against the rubric's own anchor for S5, "movement on a central open
+        case". s(11) is the smallest open case and the one the frontier record calls
+        the problem this project exists for; its lower bound had not moved since
+        Stromquist stated it in 2003, and this displaces a value from the refereed
+        literature rather than an inherited or closed-form one.
+        What S5 does not claim: the method is Burns's and Massaccesi's rather than
+        this project's, so what is new is an instance and the generator that found it;
+        both exact decisions are the same method family, which is why confirmation
+        stays at C3; and the remaining gap to Trump's 1979 packing is 0.077, which this
+        approach does not close. The calibration rung at 189/50, below Stromquist's
+        bound, was run first by design and is retained.
       scored: '2026-09-04'
       by: BC-161 continuation (repository; independent evaluator confirmed C4, no external review)
     novelty: apparently-novel
