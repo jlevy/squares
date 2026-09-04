@@ -2,7 +2,7 @@
 
 # Agenda map
 
-188 agenda commitments across 19 agendas, as declared in each agenda's own frontmatter.
+189 agenda commitments across 20 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **10** ready, **5** tentative, **42** blocked, **32** stopped, **99** complete.
+- **10** ready, **5** tentative, **42** blocked, **32** stopped, **100** complete.
 
 - **6 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -123,6 +123,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-017 | active | 1 |  | 10 |  |  | 11 |
 | agenda-018 | paused |  | 2 | 14 |  |  | 16 |
 | agenda-019 | paused | 2 |  | 4 |  |  | 6 |
+| agenda-020 | completed |  |  |  |  | 1 | 1 |
 
 ## What the states mean
 
