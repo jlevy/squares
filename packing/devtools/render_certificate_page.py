@@ -468,6 +468,7 @@ def shared_substitutions(static: Path, headline: Facts, default: Facts) -> dict[
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
         "DEFAULT_L_DEC": decimal(default.outer_side),
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
+        "PRIOR_YEAR": str(PRIOR_YEAR),
         "PRIOR_LOWER": PRIOR_LOWER,
         "PRIOR_SOURCE": PRIOR_SOURCE,
         "PRIOR_URL": PRIOR_URL,
