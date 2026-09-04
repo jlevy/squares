@@ -2,7 +2,7 @@
 
 # Agenda map
 
-181 agenda commitments across 18 agendas, as declared in each agenda's own frontmatter.
+182 agenda commitments across 18 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **8** ready, **5** tentative, **37** blocked, **32** stopped, **99** complete.
+- **8** ready, **5** tentative, **38** blocked, **32** stopped, **99** complete.
 
 - **6 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -68,7 +68,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-018 | `BC-171` | 0 | `BC-170` | no | — |
 | agenda-018 | `BC-172` | 0 | `BC-170` | no | — |
 | agenda-018 | `BC-174` | 0 | `BC-171`, `BC-172`, `BC-173` | no | — |
-| agenda-018 | `BC-182` | 0 | `BC-174`, `BC-177`, `BC-178`, `BC-179`, `BC-180`, `BC-181` | no | — |
+| agenda-018 | `BC-182` | 0 | `BC-174`, `BC-177`, `BC-178`, `BC-179`, `BC-180`, `BC-181`, `BC-185` | no | — |
 | agenda-018 | `BC-173` | 1 | `BC-170` | no | — |
 | agenda-018 | `BC-175` | 1 | `BC-170` | no | — |
 | agenda-018 | `BC-176` | 1 | `BC-175` | no | — |
@@ -76,6 +76,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-018 | `BC-178` | 1 | `BC-170` | no | — |
 | agenda-018 | `BC-179` | 1 | `BC-170` | no | — |
 | agenda-018 | `BC-181` | 1 | `BC-170` | no | — |
+| agenda-018 | `BC-185` | 1 | `BC-170` | no | — |
 | agenda-018 | `BC-180` | 2 | `BC-179` | no | — |
 
 ## Discharged elsewhere
@@ -114,7 +115,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-015 | completed |  |  |  | 6 | 4 | 10 |
 | agenda-016 | completed |  |  |  | 8 | 1 | 9 |
 | agenda-017 | active | 1 |  | 10 |  |  | 11 |
-| agenda-018 | paused |  | 2 | 13 |  |  | 15 |
+| agenda-018 | paused |  | 2 | 14 |  |  | 16 |
 
 ## What the states mean
 

@@ -16,15 +16,16 @@ agenda:
     reviewing at the wall before the ten-hour Agenda 018. Four disjoint lanes open
     after a twenty-minute coordinator preflight. Lane A builds, freezes and reviews a
     first-party generator for weighted fractional unavoidable-set certificates -- the
-    architecture behind the adopted 4.5058 bound -- and then certifies the first
-    n = 12-specific lower bound in the problem's history at H-061's prospectively fixed
-    threshold. Lane B writes the general fixed-side local-rigidity theorem that T-014's
+    architecture behind the adopted 4.5058 bound -- and then tests H-061, whose success
+    would be the first n = 12-specific lower bound in the retained corpus, at its
+    prospectively fixed threshold. Lane B writes the general fixed-side local-rigidity theorem that T-014's
     method proves and decides from T-013's retained evidence whether the n = 40 route is
     open, then audits Stromquist's Theorem 3 at n = 11 to a determination. Lane C
     records what the planning survey found already within reach: the shipped rational
-    promotion certifies every one of the ten decimal records whose verified ceiling
-    still sits at the grid, moving the verified upper bounds by 1.830 in total, and the
-    same command reaches T-009's next rung. Lane D executes the selected handoff --
+    promotion returned a certificate for every one of the ten decimal records whose
+    verified ceiling still sits at the grid, all ten verified first-hand in the launch
+    rehearsal, and recording them would move the verified upper bounds by about 1.83 in
+    total; the same command reaches T-009's next rung. Lane D executes the selected handoff --
     three of think-ldq2's unrepaired D-044/D-046 clauses under an independent reviewer,
     the fourth and the archive residuals deferred by measured size -- and then makes the
     negative-control snapshot cap a property of the commit rather than the checkout. The research wall is 285 elapsed
@@ -49,16 +50,18 @@ agenda:
       declared before dispatch, and arm the recurring 30-minute continuity trigger.
       5--12 confirm the toolchain the last two agendas lacked: the tbd CLI under Node 22
       (create, close and sync must each succeed on a throwaway probe that is closed
-      again), a non-shallow clone, the frozen uv environment and a passing records
-      tier; then reconcile live tbd -- name one writer for think-ldq2 and unpause it,
-      confirm the four re-routed defect beads (D-422 and D-429 on think-ahyr, D-427 and
-      D-428 on think-g4qi) and close nothing that is not settled. 12--18 freeze the lane
-      inputs by SHA-256: devtools/pierce_pilot.py, the n17_weighted_certificate package
-      and the BC-150 adoption packet for Lane A; X-012, the T-012 and T-013 evidence and
-      cases/stromquist for Lane B; the ten known-best witnesses, the n = 11 rational
-      control and both retained n = 29 certificates for Lane C; runner.py and its
-      trust-boundary tests for Lane D. Confirm H-061 is registered
-      with its threshold fixed before any Lane A command runs. 18--20 freeze one
+      before the sync, so no stray ready bead reaches the closeout's ranking), a
+      non-shallow clone, the frozen uv environment and a passing records tier; dry-run
+      the closeout's own calls, `tbd show think-2r1q --json` and `tbd ready --json`,
+      since that path never ran in Agenda 016; then reconcile live tbd -- name one
+      writer for think-ldq2, unpause it and repoint its spec to this agenda, confirm the
+      four re-routed defect beads (D-422 and D-429 on think-ahyr, D-427 and D-428 on
+      think-g4qi), note that think-g4qi's parent is the standing W9 epic by design, and
+      close nothing that is not settled. 12--18 freeze the lane inputs by SHA-256, the
+      one list the Launch Checklist's step 4 gives, which is the union the rehearsal
+      hashed. Confirm H-061 is registered with its threshold fixed before any Lane A
+      command runs, and record that the frozen environment offers scipy's linprog and
+      no other LP solver, since it cannot gain a dependency mid-block. 18--20 freeze one
       revision-keyed launch packet naming the four lanes, models, reviewer rotation,
       output paths, safe commands, the concurrency cap of five sub-agents, and typed
       stop rules. Refuse dispatch on any drift, duplicate id, missing record, or
@@ -72,8 +75,9 @@ agenda:
       One launch packet naming the 360-minute wall, four lane owners, the reviewer
       rotation, exact input hashes, output paths, safe commands, the concurrency cap
       and typed stop rules; session-085 complete enough to render a resource receipt;
-      think-ldq2 unpaused under one named writer; the continuity trigger armed; and no
-      target command run.
+            think-ldq2 unpaused under one named writer; the continuity trigger armed; and no
+      target command run. Lanes may read their frozen inputs from 00:05 and may run
+      nothing and write nothing before the packet is admitted.
     bead: think-uqgp
     depends_on: []
     parallel_group: agenda017-coordinator
@@ -122,12 +126,21 @@ agenda:
       recorded as the method's boundary, not as a failure; negative: total mass reaching
       n, one atom lightened, a dropped bracketing direction and separately a dropped
       interior direction, B pushed past the containment condition, the certificate at
-      451/100, an atom outside the container, a broken symmetry, and every refusal
-      identical under -O. Stromquist's ten-point set is not used as a control: read as
-      a measure it has mass exactly eleven and lives in Q(sqrt 5), which this lane does
-      not build. 115--135 freeze the package at a revision and hand it to a target-blind
-      readiness reviewer who authored none of it. No command in this block names a
-      target side above 2 + 4/sqrt(5) at n = 12.
+      451/100 -- an expected refusal at Massaccesi's own search boundary, typed so that
+      an acceptance there is a candidate n = 17 result to review and not a control
+      failure -- an atom outside the container, a broken symmetry, and every refusal
+      identical under -O; generator-level negative: the full pipeline at n = 12 and at
+      n = 16, both at side 401/100, where the side-4 grid packs and so no accepted
+      certificate with mass below n can exist, must end in a typed stop, and an
+      acceptance is unresolved-invalid-instrument. Stromquist's Figure 13 set is not a control in this lane: its
+      coordinates live in Q(sqrt 5), which the rational verifier does not carry, and the
+      ten points alone are avoidable by construction, so they are not a certificate at
+      any mass. 115--125 freeze the package at a revision and hand it to a target-blind
+      readiness reviewer who authored none of it; 125--135 answer that reviewer's
+      questions read-only while the review runs, changing nothing under it. No command
+      in this block names a target side above 2 + 4/sqrt(5) at n = 12 other than the
+      impossible-side negative control at 401/100, which can produce no registrable
+      result.
     entry: >-
       BC-159 passed and the Lane A inputs are frozen by hash. The writer owns only the
       new package, its tests and its scratch directory; it may not edit the frozen
@@ -154,11 +167,12 @@ agenda:
     priority: 0
     question: >-
       Does the frozen generator produce an exact certificate that s(12) is at least
-      19/5, the first lower bound specific to n = 12 -- or an exact ceiling showing
-      that no fractional certificate can?
+      19/5, which would be the first lower bound specific to n = 12 in the retained
+      corpus -- or an exact ceiling showing that no fractional certificate can?
     hypotheses: [H-061]
     budget: >-
-      105 elapsed minutes in the Lane A writer, after BC-160's freeze. 0--10 replay the
+      105 elapsed minutes in the Lane A writer, from 02:40, after BC-160's readiness
+      review returns and the coordinator flips H-061 to instrument-ready. 0--10 replay the
       frozen instrument's controls from a clean output root and record the revision.
       10--80 run the generator at n = 12, side 19/5, on the registered site ladder
       (grid 29, then at most two column-generation refinements) with 181 directions
@@ -208,9 +222,13 @@ agenda:
       clean output root under normal and -O Python and re-derive the decision from the
       emitted bytes in a separate process. 15--30 write a from-scratch whole-check
       evaluator that imports nothing from the lane and evaluates captured mass for the
-      true unit square at a few hundred random poses plus every event-cell minimiser,
-      and audit the lemma chain: closed versus open squares, the shrink-and-scaling
-      step, strictness of total mass below 12, and finitely many directions. 30--45
+      true unit square at every event-cell minimiser, with a few hundred random poses
+      as a diagnostic that is never counted as evidence, and audit the lemma chain:
+      closed versus open squares, the shrink-and-scaling step, strictness of total mass
+      below 12, and finitely many directions; for a ceiling, re-derive in the same
+      evaluator that every listed pose is contained in the container, that the depth
+      bound holds at every vertex of the full arrangement, and that the scaled weights
+      sum to at least 12 exactly. 30--45
       classify pass, bounded caveat, discrepancy, cannot-reproduce or invalid; only on
       an exact pass clear needs_review, register the next-free T-result at V4/C3 with
       a novelty basis that names Burns and Massaccesi's published architecture -- whose
@@ -218,10 +236,10 @@ agenda:
       certificate as first-party, move the n = 12 verified lower bound, score
       significance under the rubric with the reasoning written down (the survey reads
       the case at S3, the amount of movement being 0.011, and the instrument at S4 only
-      once a second case lands), and regenerate every consumer. If BC-161 closes late, this review may run inside the
-      closeout window, but registration must be complete before the pull request is
-      rendered or the result is reported needs_review true and registration is
-      deferred to Agenda 018.
+      once a second case lands), and regenerate every consumer. This review runs from 04:25 and its last 25 minutes
+      fall inside the closeout window by design; registration must be complete before
+      the pull request is rendered, and a pass that lands after 05:20 is reported
+      needs_review true with registration deferred to Agenda 018.
     entry: >-
       BC-161 is terminal and its writer has stopped; the packet binds every input,
       output, command, decision and declared absence at one revision.
@@ -279,9 +297,11 @@ agenda:
     exit: >-
       X-013 frozen with the general theorem, the replayable n = 40 tool, the uniform-
       stress determination with its certificate or failing cell, the obligation list
-      and the known-answer negative control (the exact n = 10 pose's axis and
-      diagonal slides, and the n = 3 side-2 family, must not certify isolation); or
-      a typed stop naming the smallest unresolved question.
+      and the negative control this block's own step can run -- the uniform-stress
+      step applied to the exact n = 10 pose's slide directions returns not-refused,
+      since every curvature vanishes along a translation -- while the probe-level
+      slides and the n = 3 side-2 family are Agenda 018's C9 and C10; or a typed stop
+      naming the smallest unresolved question.
     bead: think-87gh
     depends_on: [BC-159]
     parallel_group: agenda017-lane-b
@@ -305,20 +325,27 @@ agenda:
     hypotheses: []
     budget: >-
       165 elapsed minutes, Fable at maximum thinking, in the Lane B agent after
-      BC-163 freezes. 0--20 run search_escape over the twelve printed points at side
-      2 + (4/3) sqrt 2 restricted to theta in {0, pi/4}, because the printed
-      G = (0.8, s - 2) has the shape of the Theorem 2 point that D-152 showed escapes;
-      an exact escape is a determination on its own and is certified before anything
-      else. 20--120 reconstruct the region decompositions on the repaired-cover
-      machinery in cases/stromquist over Q(sqrt 2), proving Lemmas 7 and 8 finitely
-      for the two orientations rather than citing them, and deciding the zero-margin
-      Lemma 7 premise exactly. 120--150 controls: a displaced point, a removed face and
-      a widened region must each be refused. 150--165 freeze the packet with its claim
-      boundary. Stop at the first typed proof gap or at the wall; a partial cover is
-      process evidence and not a negative result.
+      BC-163 freezes. 0--10 transcribe Theorem 3's point sets from the frozen raw
+      extraction, since cases/stromquist carries only Theorem 2's Figure 14 set over
+      Q(sqrt 5): the ten Figure 13 points and the twelve Theorem 3 points, all over
+      Q(sqrt 2) at s = 2 + (4/3) sqrt 2, with the closed-box convention declared.
+      10--25 run search_escape with theta_steps = 2 and refine_top = 0, the supported
+      call that sweeps exactly {0, pi/4}, on the ten Figure 13 points at 0 degrees --
+      which is how the paper proves that case -- and on the twelve at 45 degrees; the
+      rehearsal measured the twelve at 45 degrees unavoidable by a margin near 1.1e-3
+      and the 0-degree case decided only by the closed-box convention, so an exact
+      escape here is a determination on its own and is certified before anything else.
+      25--120 reconstruct the region decompositions on the repaired-cover machinery
+      over Q(sqrt 2), proving Lemmas 7 and 8 finitely for the two orientations rather
+      than citing them, and deciding the zero-margin Lemma 7 premise exactly. 120--150
+      controls: a displaced point, a removed face and a widened region must each be
+      refused. 150--165 freeze the packet with its claim boundary. Stop at the first
+      typed proof gap or at the wall; a partial cover is process evidence and not a
+      negative result.
     entry: >-
       BC-163 is frozen and the Lane B agent is free; cases/stromquist and the
-      Stromquist 2003 extraction are frozen by hash. The lane writes only its new case
+      Stromquist 2003 raw extraction, which is where Theorem 3's points are printed,
+      are frozen by hash. The lane writes only its new case
       directory, tests and scratch directory; no frontier or result-register change.
     exit: >-
       An exact cover certificate for Theorem 3 as printed, or an exact escape
@@ -330,10 +357,12 @@ agenda:
     parallel_group: agenda017-lane-b
     workflows: [factual-review, research-loop]
     next_evidence: >-
-      A certificate as printed is a machine audit at V4/C3, previously-published, S3;
-      an exact refutation with a repair is S4 on the T-010 precedent. Either opens
-      H-036's neighbourhood theorem as an Agenda 018 candidate; neither is registered
-      without the review.
+      A certificate as printed is a machine audit at V4/C3, previously-published; the
+      survey reads it at S3, and an exact refutation with a repair at S4 on the T-010
+      precedent, for the reviewer to score. Its independent review and registration
+      are Agenda 018's BC-185, in the Fable agent's free hour before the Trump radius
+      opens; nothing is registered without it. Either outcome opens H-036's
+      neighbourhood theorem as a later candidate.
   - id: BC-165
     purpose: research
     owner_focus: correctness
@@ -349,23 +378,35 @@ agenda:
       180 elapsed minutes, Opus at maximum thinking. 0--20 replay the sweep the
       planning survey ran -- packing-witness promote --strategy robust-rational
       --max-side-increase 1e-6 on the known-best witnesses at n = 37, 39, 41, 51, 55,
-      70, 71, 83, 87 and 88 -- into fresh witness files, and verify each with
-      packing-witness verify from a clean root; the survey measured every case at
-      certificate-produced with a side above the reported decimal by between 5.6e-31
-      and 7.9e-29, and the coordinator reproduced n = 29 and n = 37 first-hand before
-      dispatch. 20--40 run the calibration controls: the retained n = 11 rational
+      70, 71, 83, 87 and 88 -- writing each certificate straight to its final
+      packing-relative path, witnesses/known-best-n0NN-rational.yaml beside the
+      retained n = 11 control and not under witnesses/known-best/, which the atlas
+      builder treats as generated; the certificate's replay command embeds the output
+      path verbatim, so a scratch path would bake into the record. Verify each with
+      packing-witness verify from a clean root; the rehearsal produced and verified all
+      ten in 24 seconds with side increases between 5.8e-31 and 7.9e-29 and every
+      certified pose touching the container exactly, which the claim boundary states. 20--40 run the calibration controls: the retained n = 11 rational
       control, and n = 29 against both retained certificates, where the rational
       certificate on the Kingbird witness lands about 5.43e-20 below T-009's interval
       bound. 40--70 draft one evidence family, the ten witness records and the ten
       frontier field changes, with the claim boundary written verbatim: a bound at the
       certified side, which is the reported decimal plus the stated increase, not at
       the decimal, not on the source pose, and nothing about optimality; the reported
-      upper bound stays uncertified. 70--140 run the declared-bound, results,
-      certificate-citation and records gates and repair what they name. 140--170
+      upper bound stays uncertified. 70--140 run the gates that read the moved fields -- check_basic_bounds inside the
+      exact-verification step, whose grid replay is conditional on the E-basic-grid-upper
+      evidence id each move replaces and so must be re-pointed rather than silently
+      dropped, check_results, check_certificate_citations, which does not see
+      witness-file certificates and is kept for the frontier records it does read, and
+      the records tier -- and repair what they name; add the in-lane refusal control,
+      one coordinate of one certificate mutated and verify recording the refusal, so
+      the family names a control path. 140--170
       register the n = 29 rational certificate as its own evidence entry, rewrite the
-      interval entry's limitations and T-009's rationale to compare the two routes on
-      the same packing (D-431), and propose T-009's raise to C4 through the results
-      checker. 170--180 freeze the packet for the reviewer. Any case whose verify does
+      interval entry's limitations -- including its sentence that the verified upper
+      bound has not been moved to it, which n-029.md contradicts -- and T-009's
+      rationale to compare the two routes on the same packing (D-431), restate T-009's
+      claim method-neutrally so the evidence carries the routes, and propose the raise
+      to C4 through the results checker, noting that the rational route certifies a
+      dilated neighbour of the pose and not the source pose. 170--180 freeze the packet for the reviewer. Any case whose verify does
       not pass is dropped from the batch and typed, not debugged in-lane.
     entry: >-
       BC-159 passed and the Lane C inputs are frozen by hash. The lane writes only new
@@ -482,7 +523,8 @@ agenda:
     hypotheses: []
     budget: >-
       65 elapsed minutes for the writer, Opus at extra-high thinking, in the Lane D
-      writer once the BC-167 packet is with its reviewer, then 30 for the same reviewer.
+      writer from 02:45, once the BC-167 reviewer has returned, so that a reviewer
+      replaces a writer rather than adding to it; then 30 for the same reviewer.
       0--10 measure the current tree: snapshot_source_bytes() with and without
       __pycache__, .pytest_cache and .ruff_cache -- the planning survey measured
       68,224,754 bytes against the 67,108,864 cap on this checkout, 11,318,965 of them
@@ -498,7 +540,7 @@ agenda:
       each repair in a copy; both touch shared guards, which is why neither lands
       unreviewed.
     entry: >-
-      BC-167's packet is with its reviewer; run_negative_controls.py,
+      BC-167's reviewer has returned its determination; run_negative_controls.py,
       render_research_tables.py and render_results_headline.py are frozen by hash.
     exit: >-
       D-422 and D-429 fixed with regressions and a before/after byte measurement, or a
@@ -524,29 +566,36 @@ agenda:
       which one entry runs next after the operator's review?
     hypotheses: [H-061]
     budget: >-
-      75 elapsed minutes reserved from 04:45 through 06:00. 0--10 stop every writer
-      and process and freeze evidence, including partial LP state and declared
-      absences. 10--30 add outcome rows to every commitment at the smallest honest
-      scope with classification, evidence, disposition and follow-up, and update the
-      D-044, D-046, D-422 and D-429 records. 30--45 regenerate the ledger, agenda map,
-      session-close, synopsis, results-headline, defect and document views; reconcile
-      live tbd with the CLI, closing settled beads and syncing. 45--55 review
-      README.md, SYNOPSIS.md, TUTORIAL.md, conventions.md, development.md and
-      operating-rules.md with an explicit decision each; run the documentation and
-      de-slop pass over the documents this block created. 55--65 pass the records
-      tier and the push tier, commit and push so hosted CI starts while the full local
-      gate runs. 65--75 render the pull-request description leading with cost, then
-      with every result scored inside the wall and its significance in the rubric's
-      own words, then stop reasons, dispositions, file changes, validation and
-      limitations; record operator input as unavailable if the wall closes before
-      the review, and select Agenda 018's BC-170 as the one next entry without
-      executing it. If the full gate outlasts 06:00, record the research wall as
-      complete and continue only the same mechanical closeout, reporting that
-      post-wall time separately.
+      75 elapsed minutes reserved from 04:45 through 06:00, with two pieces pre-staged
+      during the 04:00--04:45 freeze because Agenda 016 needed 120 minutes for nine
+      commitments and this block has eleven: the outcome-row skeleton for every
+      commitment is drafted before 04:45 so the closeout fills it rather than writes
+      it, and the six-document review is taken as a fallback card at 04:00 by an agent
+      whose lane is terminal. 0--10 stop every writer and process and freeze evidence,
+      including partial LP state and declared absences. 10--25 complete the outcome
+      rows at the smallest honest scope with classification, evidence, disposition and
+      follow-up, and update the D-044, D-046, D-422 and D-429 records. 25--40 close
+      think-tkwj and sync first, because close_session --agenda refuses while the
+      selected next bead is blocked on it; then regenerate the ledger, agenda map,
+      session-close, synopsis, results-headline, defect and document views in that one
+      call, and reconcile live tbd, closing settled beads. 40--55 pass the records tier
+      and the push tier, commit and push so hosted CI starts while the full local gate
+      runs; any registration BC-162 or BC-166 landed regenerates the results headline
+      before this step or the records tier is red. 55--70 render the pull-request
+      description leading with cost, then with every result scored inside the wall and
+      its significance in the rubric's own words, then stop reasons, dispositions, file
+      changes, validation and limitations; record operator input as unavailable if the
+      wall closes before the review, and select Agenda 018's BC-170 as the one next
+      entry without executing it. 70--75 the documentation and de-slop pass over the
+      documents this block created. If the full gate outlasts 06:00, record the
+      research wall as complete and continue only the same mechanical closeout,
+      reporting that post-wall time separately.
     entry: >-
-      BC-162, BC-164, BC-166, BC-167 and BC-168 are terminal, including never-opened
-      branches; every lane writer has stopped; the coordinator owns the only
-      shared-record, tbd, Git, generated-view and pull-request writes.
+      BC-164, BC-166, BC-167 and BC-168 are terminal, including never-opened branches,
+      and every lane writer has stopped; BC-162 is the one review the plan expects to
+      run inside the closeout window, and its registration must complete before the
+      pull request is rendered. The coordinator owns the only shared-record, tbd, Git,
+      generated-view and pull-request writes.
     exit: >-
       Agenda 017 and session-085 terminal; every attempted scope carries an outcome,
       stop reason, evidence, disposition and follow-up; every generated and
@@ -564,7 +613,7 @@ agenda:
       order; BC-170 begins only after that review or the declared autonomous fallback,
       never inside this closeout.
 ---
-# Agenda 017 — Six-Hour Block: the Certificate Generator, Rigidity Readiness, a Construction Round, and the W9 Handoff
+# Agenda 017 — Six-Hour Block: the Certificate Generator, Rigidity Readiness, Ten Exact Ceilings, and the W9 Handoff
 
 ## Workflow Entry Point
 
@@ -591,12 +640,12 @@ request; lane authors write only their declared packages, tests, experiment and 
 artifacts; reviewers rotate so no author clears that author’s own result.
 
 **Model assignment**, under `OR-2` and `OR-10`: Claude Fable at maximum thinking for the
-mathematics and every independent review of a scientific result — `BC-162`, `BC-163`,
-`BC-164`, and `BC-166` on a positive; Claude Opus at maximum thinking for the Lane A
-build and round, the Lane C round and the `BC-167` reviewer; Claude Opus at extra-high
-thinking for the Lane D writer, `BC-168`, the readiness reviewer and mechanical
-integration. Codex Max corresponds to Fable and Codex High or Extra High to Opus where a
-matched handoff applies.
+mathematics and every independent review of a scientific result — `BC-162`, `BC-163` and
+`BC-164`; Claude Opus at maximum thinking for the Lane A build and round, the Lane C
+sweep and the `BC-167` reviewer; Claude Opus at extra-high thinking for the Lane D
+writer, `BC-166`, `BC-168`, the readiness reviewer and mechanical integration.
+Codex Max corresponds to Fable and Codex High or Extra High to Opus where a matched
+handoff applies.
 
 ## Launch Checklist
 
@@ -605,31 +654,57 @@ and refuses dispatch at the first failure.
 
 1. Record the wall start in `session-085` and arm the recurring 30-minute continuity
    trigger; under `OR-8` only the operator deletes it.
+   If the harness refuses a sub-hourly cadence, arm it hourly and keep a one-shot chain
+   beside it, never the chain alone.
 2. Toolchain: `tbd prime` must run from the session script.
    This planning session installed the pinned `get-tbd@0.8.0` under `/opt/node22` and a
    launcher at `~/.local/bin/tbd` that puts Node 22 first, because the script’s own
    `PATH` line finds Node 20 first -- the reason the last two agendas ran without the
    CLI. On a fresh container repeat that install before anything else;
    `close_session --agenda` hard-requires the binary.
-   Create, close and sync one throwaway probe bead.
-   `git rev-parse --is-shallow-repository` must print `false`; if it prints `true`,
-   `git fetch --unshallow origin` before the gate, or the provenance step fails on a
-   record no commit here touches.
+   Create, close and sync one throwaway probe bead, closing it before the sync, and
+   dry-run `tbd show think-2r1q --json` and `tbd ready --json`, the calls the closeout
+   depends on. `git rev-parse --is-shallow-repository` must print `false`; if it prints
+   `true`, `git fetch --unshallow origin` before the gate, or the provenance step fails
+   on a record no commit here touches.
 3. `cd packing && uv run --frozen --all-extras --group dev packing-validate --records`
    must pass; note the step count it prints rather than restating one.
-4. Freeze inputs by `sha256sum` into the launch packet:
-   `packing/devtools/pierce_pilot.py`, `packing/cases/n17_weighted_certificate/`, the
-   BC-150 packet under `docs/project/reviews/`, `X-012`, the T-012 and T-013 evidence
-   entries, `packing/cases/stromquist/`, `packing/cases/gobel_family/`,
-   `packing/src/sqpack/campaign/runner.py` and
-   `packing/tests/test_campaign_runner_trust_boundary.py`.
+4. Freeze inputs by `sha256sum` into the launch packet, one list for the agenda and the
+   packet: `packing/devtools/pierce_pilot.py`; all five
+   `packing/cases/n17_weighted_certificate*` packages; the retained Burns verifier under
+   `packing/resources/web/n17-lower-bounds-2026/`; the BC-150 packet at
+   `docs/project/reviews/review-2026-09-03-bc150-4-5058-adoption-packet.md`; `X-012`;
+   the `E-n005-second-order-rigidity` and `E-n040-first-order-flexibility` entries
+   extracted from `packing/frontier/evidence.yaml`, since they are entries and not
+   files; `packing/cases/stromquist/` and the Stromquist 2003 raw extraction under
+   `packing/resources/papers/`; the ten known-best witnesses,
+   `packing/witnesses/known-best-n011-rational-control.yaml`,
+   `packing/witnesses/kingbird-n029-2026-interval.yaml` and
+   `packing/witnesses/schadt-n029-2025-rational.yaml`;
+   `packing/src/sqpack/campaign/runner.py`,
+   `packing/tests/test_campaign_runner_trust_boundary.py`,
+   `packing/devtools/run_negative_controls.py`,
+   `packing/devtools/render_research_tables.py` and
+   `packing/devtools/render_results_headline.py`. The rehearsal hashed this union and
+   found every path.
 5. Confirm `H-061` is registered at its fixed threshold with `instrument_ready: false`,
-   and allocate `exp-060` (Lane A) and `exp-061` (Lane C) with fresh result and receipt
-   paths; no placeholder reserves an id.
-6. Unpause `think-ldq2` under one named writer; confirm the four re-routed defect beads.
-7. Dispatch the four lanes with the concurrency cap of five sub-agents in flight,
-   reviewers included, staggered so no two hour-scale exact processes start in the same
-   minute.
+   and allocate `exp-060` for Lane A with fresh result and receipt paths, in the
+   experiment schema’s day-one shape: `hypotheses: [H-061]`, `primary_criterion` copied
+   verbatim from H-061’s threshold, `results: []`, `decision: in-progress`, a lease, and
+   no `effort` until terminal.
+   Lane C allocates no experiment: it records witness files, evidence entries and
+   frontier fields, and the ledger refuses a round that tests no hypothesis.
+   `session-085` carries every required phase field from the start, with outcome and
+   evidence written as the declared expectation and rewritten at close.
+   No placeholder reserves an id.
+6. Unpause `think-ldq2` under one named writer and repoint its spec to this agenda;
+   confirm the four re-routed defect beads, and note in the packet that `think-g4qi`’s
+   parent is the standing W9 epic `think-cyko` by design, so `BC-170` does not repair
+   it.
+7. Dispatch the four lanes three minutes apart from 00:20, with the concurrency cap of
+   five sub-agents in flight, reviewers included; a ten-minute stagger would push Lane
+   C’s review out of the wall, so the stagger is short and the harness’s usage is read
+   at every 30-minute reminder instead.
 
 ## Why These Lanes Are Next
 
@@ -640,9 +715,9 @@ that turns “every unit square captures mass at least one” into finitely many
 directions and cells.
 The generation side of that architecture does not exist here.
 Building it is the most valuable instrument the program can add: the same LP that
-produced the `n = 17` certificate can produce certificates at every size whose proved
-lower bound is still Nagamochi’s 2005 closed form — sixty of the sixty-five open cases —
-and at the two sizes that matter most.
+produced the `n = 17` certificate can produce certificates at the sizes the survey
+priced as reachable, `n = 20` to `32`, where the proved lower bound is still Nagamochi’s
+2005 closed form, and at the two sizes that matter most.
 The first target is `n = 12`, where the standing lower bound is Stromquist’s `n = 11`
 bound `2 + 4/√5 ≈ 3.7889` inherited by monotonicity and nothing specific to `n = 12` has
 ever been proved. `H-061` fixes the threshold before synthesis, as `H-039` requires, and
@@ -709,23 +784,23 @@ own output (`D-429`) — so that this agenda’s own closeout gate can pass wher
 
 | Elapsed | Coordinator | Lane A (`n = 12`) | Lane B (rigidity, Theorem 3) | Lane C (ten ceilings) | Lane D (W9, gate) |
 | --- | --- | --- | --- | --- | --- |
-| 00:00--00:20 | `BC-159` preflight and dispatch | read-only design from 00:05 | read-only | read-only | inventory snapshot |
+| 00:00--00:20 | `BC-159` preflight; lanes read frozen inputs from 00:05 and run nothing | read-only design from 00:05 | read-only | read-only | inventory snapshot, read-only |
 | 00:20--01:50 | observe, integrate only frozen packets | `BC-160` build | `BC-163` theorem and `n = 40` decision | `BC-165` sweep, controls, records | `BC-167` writer |
-| 01:50--02:35 | dispatch the readiness reviewer at 02:20 | `BC-160` controls and freeze | `BC-164` escape search, then cover | `BC-165` continues | `BC-167` writer to 02:00; reviewer 02:00--02:45; writer opens `BC-168` at 02:00 |
-| 02:35--04:00 | integrate reviews | `BC-161` target round to 04:20 | `BC-164` continues | `BC-165` gates to 03:20; `BC-166` review 03:20--03:50 | `BC-168` writer to 03:05; reviewer 03:05--03:35 |
-| 04:00--04:45 | freeze lanes | `BC-162` review from 04:20, into the closeout window if needed | `BC-164` freezes by 04:35 | registration and consumers by 04:20 | integration and hand-back |
+| 01:50--02:35 | dispatch the readiness reviewer at 02:25 | `BC-160` controls, freeze at 02:25, answers read-only to 02:35 | `BC-164` transcription, escape search, then cover | `BC-165` continues | `BC-167` writer to 02:00; reviewer 02:00--02:45 |
+| 02:35--04:00 | integrate reviews; flip `H-061` instrument-ready at 02:40 | `BC-161` target round 02:40--04:25 | `BC-164` continues | `BC-165` gates to 03:20; `BC-166` review 03:20--03:50 | `BC-168` writer 02:45--03:50; reviewer 03:50--04:20 |
+| 04:00--04:45 | freeze lanes; draft the outcome-row skeleton; six-document review as a card | `BC-162` review from 04:25, its last 25 minutes inside the closeout by design | `BC-164` freezes by 04:35 | registration and consumers by 04:20 | integration and hand-back to 04:20 |
 | 04:45--06:00 | `BC-169` W10 closeout with all lanes | closeout support | closeout support | closeout support | closeout support |
 
-Peak concurrency is five sub-agents, at 02:20--02:35 when the readiness reviewer joins
+Peak concurrency is five sub-agents, at 02:25--02:40 when the readiness reviewer joins
 four lanes, and otherwise four; a reviewer replaces its lane’s writer rather than adding
-to it.
-The planning survey measured Agenda 016’s interruption as a rate, not a count: the
-limit at about 10:45Z followed four consecutive hours above 170 million tokens per hour
-at 57 million per agent-hour, while the run’s peak of seven concurrent agents did not
-trip it. Four sustained sits inside the band that produced it, so the coordinator
-staggers dispatch by ten minutes, never opens three fresh agents in the same minute, and
-on the first rate-limit signal pauses Lane C -- the most self-contained lane -- until
-another lane hands off.
+to it, which is why `BC-168` opens only when the `BC-167` reviewer has returned.
+The planning survey measured Agenda 016’s interruption as a rate, not a count: the limit
+at about 10:45Z followed four consecutive hours above 170 million tokens per hour at 57
+million per agent-hour, while the run’s peak of seven concurrent agents did not trip it.
+Four sustained sits inside the band that produced it, so the coordinator staggers the
+four dispatches three minutes apart, never opens three fresh agents in the same minute,
+reads the harness’s usage at every 30-minute reminder, and on the first rate-limit
+signal pauses Lane C -- the most self-contained lane -- until another lane hands off.
 The two measured wastes are ruled out in advance: no agent blocks on a gate or a poll
 for more than 120 seconds (the last run spent 89 minutes, 34.9% of its tool time,
 watching gates), and the third one-off measurement of the same thing becomes a
@@ -770,9 +845,11 @@ agent’s own work.
    `753/250 + √2` evidence; list the exact obligations without changing code.
 4. **Stale-count sweep, 20 minutes.** The frontier prose said sixty-three open cases
    rest on Nagamochi’s closed form when the count is sixty; this planning revision
-   corrected it and filed `D-430`. Sweep `docs/project/` and `TUTORIAL.md` for the same
-   figure and for stale `n = 17`--`19` lower bounds the adoption review named as
-   unsurveyed.
+   corrected it and filed `D-430`, and the launchability review found the figure
+   surviving at line 933 of the 2026-08-22 research report on eleven squares.
+   Sweep `docs/project/` and `TUTORIAL.md` for that figure and for stale `n = 17`--`19`
+   lower bounds the adoption review named as unsurveyed; a dated report is appended to,
+   not rewritten.
 
 If no eligible card remains, the agent assists `BC-169` with read-only evidence
 assembly. No card becomes an undeclared fifth research lane.

@@ -442,9 +442,12 @@ instrument and proves an explicit isolation radius at Trump’s packing, runs `H
 the `s(30) < 6` bar its corrected framing sets, and finishes the W9 wave.
 The planning revision also restored the `tbd` CLI under Node 22, unshallowed the clone
 so the provenance step can pass locally, resolved every follow-up bead Agenda 016 had
-declared unverified and re-routed the four that resolved wrong, and recorded `D-430` and
-`D-431`. The marker below is unchanged, because it names where the last terminal session
-stopped; the next entry that actually runs is `BC-159` on `think-uqgp`.
+declared unverified and re-routed the four that resolved wrong, recorded `D-430`,
+`D-431` and `D-432`, and passed the plan through three independent reviews — of its
+scientific contracts, its launchability, and a rehearsal of its first ninety minutes —
+whose findings are folded into both agendas before launch.
+The marker below is unchanged, because it names where the last terminal session stopped;
+the next entry that actually runs is `BC-159` on `think-uqgp`.
 
 **Selected next entry:** `think-5j8d`, the bead the last terminal session closed on.
 Its own scope is discharged — H-052 is confirmed at implementation-agreement scope and
@@ -3187,7 +3190,7 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 431 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 432 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -3195,7 +3198,7 @@ and checked in the gate.
 | soundness | 91 | asserted something false about the mathematics |
 | validity | 115 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 157 | recorded something its own evidence contradicts |
-| robustness | 53 | did not finish, or finished only by luck |
+| robustness | 54 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -3204,7 +3207,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-one defects in 431, and no soundness defect
+**The automated gate has caught sixty-two defects in 432, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3214,7 +3217,7 @@ test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
-The generated log currently has 63 open entries: 40 `outstanding` and 23 `contained`.
+The generated log currently has 64 open entries: 41 `outstanding` and 23 `contained`.
 The W9 candidate `think-cyko` owns their systematic risk ordering and bounded repair
 waves; the synopsis names the cases that matter to current claims rather than pretending
 the examples below are the whole backlog.
@@ -3337,6 +3340,10 @@ Kingbird’s, and the shipped rational promotion run on the Kingbird witness lan
 `5.4 × 10⁻²⁰` below the interval bound, the opposite of what the rationale says.
 Agenda 017’s `BC-165` registers that certificate, rewrites the comparison on one
 packing, and takes `T-009` to `C4` through the results checker.
+[D-432](defects.md) was found by the same branch’s own pre-push tier: when the change
+set touches a file that configures the suite, the tier falls back to the whole suite
+under a 900-second cap the full-suite steps no longer use, dies at 84%, and names no
+failing test; it is owned by Agenda 018’s gate-speed block.
 
 [D-393](defects.md) is the same run being wrong about its own gate.
 `D-381` established `--edit` as the pre-push floor, and that floor does not run tests:

@@ -11,9 +11,9 @@ hypothesis:
   claim: >-
     There is a finite measure of rational-weight point atoms in [0, 19/5]^2 with total
     mass strictly below 12 such that every closed unit square contained in [0, 19/5]^2,
-    at every orientation, captures mass at least 1; hence s(12) >= 19/5 = 3.8, the
-    first lower bound specific to n = 12, above the inherited 2 + 4/sqrt(5) =
-    3.788854... that Stromquist's n = 11 argument supplies by monotonicity.
+    at every orientation, captures mass at least 1; hence s(12) >= 19/5 = 3.8, above the
+    inherited 2 + 4/sqrt(5) = 3.788854... that Stromquist's n = 11 argument supplies by
+    monotonicity.
   lane: proof
   derived_from: [X-010, X-011]
   strategy_refs: ['proof:17', 'proof:21', 'proof:22']
@@ -29,12 +29,19 @@ hypothesis:
       replays it and re-derives the decision from the emitted bytes with a from-scratch
       evaluator, and the lemma chain (closed versus open squares, shrink and scaling,
       strictness of total mass below 12, finitely many directions) is audited; rejected
-      only by an exact ceiling certificate -- a converged dual re-solved for true unit
-      squares and scaled by its exact maximum depth, proving by weak duality that the
-      fractional piercing value at side 19/5 is at least 12, so that no such measure
-      exists; a restricted optimum at or above 12 - 1/500 on the declared site grid
-      without a converged dual is a bounded negative for that grid and leaves the
-      hypothesis unresolved
+      only by an exact ceiling certificate: a finite list of closed unit-square poses,
+      each contained in [0, 19/5]^2, with non-negative rational weights, whose depth --
+      the weighted count of listed squares containing a point -- is at most 1 at every
+      point of the container, certified exactly at every vertex of the arrangement of
+      the squares' edges and the container boundary (closed squares make depth upper
+      semicontinuous, so the vertices carry the maximum), and whose total weight is at
+      least 12; by weak duality no measure of mass below 12 then pierces every unit
+      square at side 19/5, and by monotonicity of the piercing value none does at any
+      larger side. How the list was found -- a converged LP dual re-solved for true unit
+      squares and scaled by its maximum depth -- is provenance, not a condition. A
+      restricted optimum at or above 12 - 1/500 on the declared site grid without such
+      a certificate is a bounded negative for that grid and leaves the hypothesis
+      unresolved
     threshold: exact certificate at side 19/5 with total mass strictly below 12
   instrument: >-
     A first-party generator on the Burns--Massaccesi architecture: an LP over candidate
@@ -52,9 +59,11 @@ hypothesis:
     lightened, a dropped bracketing and a dropped interior direction, the shrunken
     side pushed past the containment condition, the certificate at 451/100, an atom
     outside the container, and a broken symmetry, each refused identically under
-    optimized Python. Stromquist's ten-point set is not a control: read as a measure it
-    has mass exactly eleven and lives in Q(sqrt 5). The instrument is frozen and
-    reviewed target-blind before this hypothesis is evaluated.
+    optimized Python. Stromquist's Figure 13 set is not a control in this lane: its
+    coordinates live in Q(sqrt 5), which the rational verifier does not carry, and the
+    ten points alone are avoidable by construction, so they are not a certificate at any
+    mass. The instrument is frozen and reviewed target-blind before this hypothesis is
+    evaluated.
   instrument_ready: false
   regime: >-
     twelve closed unit squares with pairwise disjoint interiors in the closed square
@@ -71,7 +80,9 @@ hypothesis:
     certificate's 168 atoms and 181 directions
   prereqs:
   - the general exact event-cell verifier, frozen and reviewed target-blind (BC-160)
-  - the two positive controls and three negative controls passing at the frozen revision
+    - the four positive controls, the green17 limitation control and the eight negative
+    controls named in the instrument passing at the frozen revision, each refusal
+    identical under optimized Python
   - an independent reviewer with no authorship in the generator (BC-162)
   replication: true
   registered: '2026-09-04'
@@ -79,12 +90,13 @@ hypothesis:
     The threshold is fixed here, before any target command runs, as H-039 requires, and
     it does not move after results are seen: a certificate at a lower side is a typed
     result about the generator, recorded and not promoted; a certificate at a higher
-    side is registered at its actual side only if 19/5 is also certified, since the
-    hypothesis names 19/5. The value was chosen from the uncertified pierce pilot of
+    side yields one at 19/5 by restriction to the corner sub-container, which the
+    verifier replays, so the hypothesis is decided at 19/5 and the higher side is
+    registered beside it. The value was chosen from the uncertified pierce pilot of
     2026-08-31, whose restricted fractional value was about 10.67 at side 3.80, 11.0 at
     3.83 and 12.53 at 3.86 -- neither an upper nor a lower bound on the true value --
     so 19/5 leaves margin below 12 while any success is the first n = 12-specific bound
-    in the problem's history -- by 0.011, which the record says plainly. The planning
+    in the retained corpus -- by 0.011, which the record says plainly. The planning
     survey's own reading confirms the choice: 19/5 exceeds 2 + 4/sqrt(5) exactly, since
     (9/5)^2 = 81/25 > 16/5; at the effective side the pilot interpolates to about 10.8,
     the largest margin of any candidate above the inherited bound; and the value is
@@ -94,7 +106,11 @@ hypothesis:
     side 4 itself with mass below 12 would prove s(12) = 4 outright, since the scaling
     lemma needs only a strictly smaller side. A success is previously-published
     in architecture and first-party in the certificate; it claims V4/C3 at most, one
-    method family, and never C4. The same certificate at any side above 2 + 4/sqrt(5)
+    method family, and never C4. In the retained corpus -- Friedman DS7, Kingbird,
+    Stromquist 2003, Bentz 2010 and 2016, Nagamochi 2005 and the two 2026 posts -- no
+    lower bound specific to n = 12 appears, and no arXiv or MathOverflow search is on
+    record, so a success is apparently-novel with that gap stated rather than a claim of
+    priority. The same certificate at any side above 2 + 4/sqrt(5)
     with total mass strictly below 11 would improve s(11); that is H-063's separate
     claim and is not this one.
 ---

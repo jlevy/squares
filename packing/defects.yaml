@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 431
+count: 432
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13422,3 +13422,46 @@ defects:
     (same source witness id), so a cross-packing comparison is refused at registration.
   bead: think-stb5
   recorded_in: packing/frontier/evidence.yaml
+- id: D-432
+  title: The push tier keeps the 900-second cap when its selector picks the whole suite
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: >-
+    since BC-086 made `--push` select reachable tests, with the whole-suite fallback
+    inheriting the shared subprocess cap; it first fired on 2026-09-04 when a change set
+    touching the pull-request template made the selector choose everything
+  severity: medium
+  status: outstanding
+  what: >-
+    `packing-validate --push` runs `devtools.reachable_tests --run --since origin/main`,
+    which selects the tests a change can reach and falls back to the whole
+    non-exhaustive suite when a file that configures the suite changed. The fallback
+    ran under the step's default 900-second subprocess cap and was killed at 84% with
+    the summary "command timed out after 900 seconds"; the full suite measured 1,210 s
+    green on 2026-09-03 and the two full-suite steps of the complete gate were given
+    1,800-second budgets that day, while this step kept the shared default. On the
+    Agenda 017 planning branch the change set included `.github/PULL_REQUEST_TEMPLATE.md`,
+    which the selector reports as "configures the suite", so the tier could not finish
+    on two consecutive runs of about 917 s each, and the one failing test it did reach
+    could not be named from its own output.
+  consequence: >-
+    The pre-push floor is unusable as a floor for exactly the change sets that most
+    need it -- anything touching a suite-configuring file -- and a coordinator who
+    reads "1 STEP FAILED" learns neither which test failed nor whether the suite would
+    have passed. On this branch the one failure that did surface before the kill was
+    D-422's snapshot-cap assertion, which is red on any used checkout and green on a
+    fresh clone; the tier gave no way to tell that from a regression.
+  fix: >-
+    Give the reachable-tests step the same 1,800-second budget the full-suite steps
+    carry when its selector reports everything, or make the whole-suite fallback run
+    the fast behavioral step's own configuration; and print the failing test ids in
+    the step's summary regardless of how the run ended, so a killed run still names
+    what it saw. Owned by Agenda 018's gate-speed block, which measures the suite first.
+  regression: >-
+    A test that drives `reachable_tests --run` with a selector reporting everything and
+    asserts the step's budget is the full-suite budget and that a failing test id
+    appears in the summary when the run is interrupted.
+  bead: think-jzqi
+  recorded_in: packing/devtools/reachable_tests.py
