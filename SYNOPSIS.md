@@ -3200,7 +3200,7 @@ and checked in the gate.
 | soundness | 91 | asserted something false about the mathematics |
 | validity | 115 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 157 | recorded something its own evidence contradicts |
-| robustness | 54 | did not finish, or finished only by luck |
+| robustness | 55 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
 Two observations the log exists to make.

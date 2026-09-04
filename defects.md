@@ -45,9 +45,8 @@ The line worth reading twice: **the automated gate caught 62 of 433, and none of
 | soundness | 91 |
 | validity | 115 |
 | bookkeeping | 157 |
-| robustness | 54 |
+| robustness | 55 |
 | performance | 15 |
-| correctness | 1 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -670,7 +669,7 @@ This is the actionable list.
 | [D-430](packing/devtools/check_nagamochi_bounds.py) | 2026-09-04 | docs | bookkeeping |  | `review` | low | fixed | The frontier prose kept saying sixty-three open cases rest on Nagamochi after the adoption made it sixty |
 | [D-431](packing/frontier/evidence.yaml) | 2026-09-04 | record | bookkeeping |  | `review` | medium | outstanding | T-009's significance rationale compares its interval certificate against a different packing |
 | [D-432](packing/devtools/reachable_tests.py) | 2026-09-04 | tooling | robustness |  | `gate` | medium | outstanding | The push tier keeps the 900-second cap when its selector picks the whole suite |
-| [D-433](packing/src/sqpack/fractional/generate.py) | 2026-09-04 | tooling | correctness |  | `review` | medium | fixed | The certificate rationaliser floored its weights while its docstring said it rounded up |
+| [D-433](packing/src/sqpack/fractional/generate.py) | 2026-09-04 | tooling | robustness |  | `review` | medium | fixed | The certificate rationaliser floored its weights while its docstring said it rounded up |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

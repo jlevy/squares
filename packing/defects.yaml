@@ -13483,7 +13483,7 @@ defects:
   title: The certificate rationaliser floored its weights while its docstring said it rounded up
   date: '2026-09-04'
   layer: tooling
-  class: correctness
+  class: robustness
   detected_by: review
   latent_for: >-
     since sqpack.fractional.generate was written on 2026-09-04, about four hours; found
