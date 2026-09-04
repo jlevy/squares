@@ -175,18 +175,32 @@ agenda:
     hypotheses: [H-061]
     budget: >-
       150 elapsed minutes, Opus at maximum thinking, in the Lane A writer after BC-172,
-      conditional on the generator's measured cost per size. 0--50 the probe
-      against a proved theorem: n = 13 at 399/100 and at 4; a restricted value at or
-      above 13 at 399/100 is either grid coarseness or a genuine fractional ceiling,
-      and only a ceiling certificate at B = 1 distinguishes them -- a ceiling there is a
-      result about the method's reach against Bentz's theorem, not a defect -- while a
-      value below 13 at side 4 is a machine-checked fractional reproof of s(13) = 4, a
-      result in its own right. 50--150 n = 20 at H-064's fixed side
+      conditional on the generator's measured cost per size.
+      SUPERSEDED IN PART on 2026-09-04, before this agenda ran. The n = 13 probe was
+      planned as 0--50: n = 13 at 399/100 and at 4, on the reading that a restricted
+      value at or above 13 at 399/100 would be either grid coarseness or a genuine
+      fractional ceiling, distinguishable only by a ceiling certificate at B = 1, and
+      that a value below 13 at side 4 would be a machine-checked fractional reproof of
+      s(13) = 4. That question is now settled analytically and the fifty minutes are
+      free. A certificate cannot exist above ceil(sqrt(n)) * B, since a wider container
+      holds ceil(sqrt(n))^2 pairwise disjoint axis-parallel B-squares whose masses C4
+      forces past n; for n = 13 that ceiling is 4B = 3.9908, below the case's own lower
+      bound of 4. So the probe at 399/100 can only report the ceiling it is looking for,
+      and the hoped-for second outcome is impossible outright: at side 4 the refuting
+      grid forces mass to sixteen, so no fractional reproof of s(13) = 4 exists at any
+      net. See frontier/CERTIFICATE-REACH.md, which does this for all 100 cases.
+      50--150 n = 20 at H-064's fixed side
       above 1 + sqrt(13), where the n = 17 calibration suggests a certificate near
       4.75 to 4.85 against a gap of 0.4; the survey sized generation at half an hour
       to five hours on four cores, so a round that does not close is time-limited and
       continues in the next agenda. n = 21 opens only if n = 20 closes early; n = 26
       onward are two lanes each and wait.
+      The reach table also reorders what waits. n = 26 onward are not the tail of this
+      lane but its largest prizes: eleven cases above +0.49, headed by n = 51 at
+      +0.5364, against +0.0671 at n = 11 and +0.0955 at n = 17. Whether the covering
+      value permits any of it is unmeasured -- four restricted optima are the whole of
+      what is known -- and measuring one is the first thing the successor agenda should
+      buy with the fifty minutes this correction returns.
     entry: >-
       BC-172 is terminal, H-064 is registered, and the generator's per-size cost from
       the n = 12 and n = 11 rounds fits the budget.
