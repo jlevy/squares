@@ -998,10 +998,14 @@ def _frontier_corpus(context: Context) -> str:
     # bounds at n = 17 and n = 18, so two open cases stopped citing Nagamochi.
     # 60 since 2026-09-03: the adopted Massaccesi certificate took over the verified
     # lower bound at n = 19 by monotonicity (T-016), so a third case stopped citing it.
-    if (formal_open, reported_open, nagamochi_count) != (65, 65, 60):
+    # 58 since 2026-09-04: T-020's certificate at 24/5 took n = 20 and n = 21 off the
+    # closed form, the first bounds specific to either size. This constant is a
+    # tripwire, not a derivation -- check_nagamochi_bounds reads the count from the
+    # record; this line exists so the record cannot move without someone saying so.
+    if (formal_open, reported_open, nagamochi_count) != (65, 65, 58):
         raise StepFailureError(
             "frontier corpus counts drifted: expected 65 formal-open, 65 reported-open, "
-            f"and 60 Nagamochi-bounded; observed {formal_open}, {reported_open}, "
+            f"and 58 Nagamochi-bounded; observed {formal_open}, {reported_open}, "
             f"and {nagamochi_count}"
         )
 
