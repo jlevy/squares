@@ -637,6 +637,7 @@ Status: **completed**. A one-block W5 efficiency-loop commitment, entered direct
 - X-010 — Two lanes, two ladders — focusing the campaign on first-party theorems
 - X-012 — One chart, four hundred inequalities, and an order-2m contradiction
 - X-013 — Where the certificate should go next
+- X-014 — Closing from both ends: what a narrow gap buys at n = 11, and what it cannot
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
