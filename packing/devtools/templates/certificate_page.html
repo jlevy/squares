@@ -496,7 +496,7 @@
       <div class="legend">
         <span><i style="background:var(--cert-near)"></i>within 12% of the limit</span>
         <span><i style="background:var(--kpress-doc-accent)"></i>comfortably above</span>
-        <span><i style="background:var(--cert-below)"></i>below 1, which never occurs</span>
+        <span><i style="background:var(--cert-below)"></i>below 1, which never occurs at a net direction</span>
       </div>
       <p class="hint" id="hint-{{SLUG}}">The shaded background is the covered mass at every centre position, recomputed
       for the direction you choose. The dashed outline is where the square’s centre is allowed to be. Outside
@@ -698,11 +698,18 @@ const tex = (el, s, d) => { try { katex.render(s, el, { displayMode: !!d, throwO
 function rot(t) { const d = 1 + t * t; return [(1 - t * t) / d, 2 * t / d]; }
 function netT(k) { return LIMIT * k / STEPS; }
 
-let sorted = [], cs = 1, sn = 0;
-function setDir(k) {
-  [cs, sn] = rot(netT(k));
+/* The direction the figure is computing at. The slider sets a net direction,
+   exactly, from its half-tangent; the handle sets any angle at all. Everything
+   downstream reads cs and sn only, so a direction off the net costs nothing. */
+let sorted = [], cs = 1, sn = 0, angle = 0, onNet = true;
+function resort() {
   sorted = ATOMS.map(a => [cs * a[0] + sn * a[1], -sn * a[0] + cs * a[1], a[2]])
                 .sort((p, q) => p[0] - q[0]);
+}
+function setDir(k) { curK = k; onNet = true; [cs, sn] = rot(netT(k)); angle = Math.atan2(sn, cs); resort(); }
+function setAngle(a) {
+  const TAU = 2 * Math.PI;
+  angle = ((a % TAU) + TAU) % TAU; onNet = false; cs = Math.cos(angle); sn = Math.sin(angle); resort();
 }
 function lowerBound(u) { let lo = 0, hi = sorted.length;
   while (lo < hi) { const m = (lo + hi) >> 1; if (sorted[m][0] < u) lo = m + 1; else hi = m; } return lo; }
@@ -716,7 +723,7 @@ function massAt(x, y) {
   }
   return tot;
 }
-function inset() { return B * (cs + sn) / 2; }
+function inset() { return B * (Math.abs(cs) + Math.abs(sn)) / 2; }
 function admissible(x, y) { const h = inset();
   return x >= h - 1e-12 && x <= L - h + 1e-12 && y >= h - 1e-12 && y <= L - h + 1e-12; }
 
@@ -867,11 +874,12 @@ function handlePoint() {
   return [probe[0] - sn * (HALF + HGAP), probe[1] + cs * (HALF + HGAP)];
 }
 
-/* A square at any angle reduces onto the net's arc by the container's own
-   symmetry, which is the reduction Condition 1 pays for; the handle does it live, so a
-   drag past 45 degrees folds back rather than leaving the net. */
-function nearestNet(angle) {
-  let a = ((angle % (Math.PI / 2)) + Math.PI / 2) % (Math.PI / 2);
+/* Any direction reduces onto the net's arc [0, pi/4] by the container's own
+   symmetry, which is the reduction Condition 1 pays for. This names the net
+   direction nearest to that reduced angle; the readout reports it and the
+   slider follows it, while the square itself stays exactly where it was put. */
+function nearestNet(phi) {
+  let a = ((phi % (Math.PI / 2)) + Math.PI / 2) % (Math.PI / 2);
   if (a > Math.PI / 4) a = Math.PI / 2 - a;
   let best = 0, bestGap = Infinity;
   for (let k = 0; k <= STEPS; k++) {
@@ -891,16 +899,23 @@ function updateReadout() {
   const vd = document.getElementById('vd-{{SLUG}}');
   if (!admissible(probe[0], probe[1])) { vd.className = 'verdict out'; vd.textContent = 'Outside the domain'; }
   else if (m >= SCALE) { vd.className = 'verdict ok'; vd.textContent = 'Covers ≥ 1'; }
-  else { vd.className = 'verdict no'; vd.textContent = 'Below 1, breaks Condition 5'; }
+  else if (onNet) { vd.className = 'verdict no'; vd.textContent = 'Below 1, breaks Condition 5'; }
+  else { vd.className = 'verdict no'; vd.textContent = 'Below 1, off the net (see Condition 4)'; }
 }
 function updateK() {
-  const t = netT(curK), th = 2 * Math.atan(t) * 180 / Math.PI;
-  tex(document.getElementById('kval-{{SLUG}}'),
-      `k = ${curK}, \\quad t = ${curK === 0 ? '0' : `\\tfrac{${207107 * curK}}{90000000}`},` +
-      `\\quad \\theta = ${th.toFixed(4)}^{\\circ}`);
+  const deg = a => (a * 180 / Math.PI).toFixed(4);
+  const el = document.getElementById('kval-{{SLUG}}');
+  if (onNet) {
+    tex(el, `k = ${curK}, \\quad t = ${curK === 0 ? '0' : `\\tfrac{${207107 * curK}}{90000000}`},` +
+            `\\quad \\theta = ${deg(2 * Math.atan(netT(curK)))}^{\\circ}`);
+  } else {
+    const k = nearestNet(angle);
+    tex(el, `\\varphi = ${deg(angle)}^{\\circ}, \\quad \\text{reduces toward } k = ${k},` +
+            `\\; \\theta = ${deg(2 * Math.atan(netT(k)))}^{\\circ}`);
+  }
 }
 function refresh(rebuild) {
-  setDir(curK);
+  if (onNet) setDir(curK); else setAngle(angle);
   const h = inset();
   probe[0] = Math.min(L - h, Math.max(h, probe[0]));
   probe[1] = Math.min(L - h, Math.max(h, probe[1]));
@@ -918,11 +933,9 @@ function place(x, y) {
   drawProver(); updateReadout();
 }
 function rotateTo(x, y) {
-  const k = nearestNet(Math.atan2(-(x - probe[0]), y - probe[1]));
-  if (k === curK) { drawProver(); return; }
-  curK = k;
-  document.getElementById('kslider-{{SLUG}}').value = String(k);
-  setDir(k);
+  setAngle(Math.atan2(-(x - probe[0]), y - probe[1]));
+  curK = nearestNet(angle);
+  document.getElementById('kslider-{{SLUG}}').value = String(curK);
   drawProver(); updateReadout(); updateK();
 }
 function overHandle(x, y) {
@@ -958,9 +971,9 @@ pv.addEventListener('pointerleave', () => {
   if (handleShown) { handleShown = false; handleHot = false; drawProver(); }
 });
 
-document.getElementById('kslider-{{SLUG}}').addEventListener('input', e => { curK = +e.target.value; refresh(true); });
+document.getElementById('kslider-{{SLUG}}').addEventListener('input', e => { setDir(+e.target.value); refresh(true); });
 document.getElementById('btn-tight-{{SLUG}}').addEventListener('click', () => {
-  curK = 0; document.getElementById('kslider-{{SLUG}}').value = 0;
+  setDir(0); document.getElementById('kslider-{{SLUG}}').value = 0;
   probe = [{{WITNESS_X_JS}}, {{WITNESS_Y_JS}}]; refresh(true);
   document.getElementById('hint-{{SLUG}}').textContent =
     'The tightest placement in the whole certificate: direction k = 0, covering {{LEAST_TEX_PLAIN}}.';
