@@ -208,6 +208,7 @@ case or experiment separately.
 | [Current Square-Packing Frontier](packing/frontier/STATUS.md) | generated status view | generated | generated | — |
 | [Evidence inventory](packing/frontier/INVENTORY.md) | generated status view | generated | generated | — |
 | [Results](packing/frontier/RESULTS.md) | generated status view | generated | generated | — |
+| [Where the fractional certificate can still go](packing/frontier/CERTIFICATE-REACH.md) | generated status view | generated | generated | — |
 | [Research Resources: Square Packing](packing/resources/README.md) | source retention and archive policy | definitive | maintained | — |
 | [Defect log](defects.md) | generated status view | generated | generated | — |
 | [FrankenSim probes](packing/frankensim-probe/README.md) | component scope and use | supporting | maintained | — |

@@ -1031,7 +1031,13 @@ def _frontier_corpus(context: Context) -> str:
 
 
 def _generated_tables(context: Context) -> str:
-    return _module(context, "devtools.render_research_tables", "--check")
+    return _commands(
+        context,
+        (
+            (sys.executable, "-m", "devtools.render_research_tables", "--check"),
+            (sys.executable, "-m", "devtools.render_certificate_reach", "--check"),
+        ),
+    )
 
 
 def _strategy_catalogues(_context: Context) -> str:
@@ -1240,6 +1246,15 @@ def _certificate_citations(context: Context) -> str:
     # this repository holds is named by the frontier record it bears on. See D-398, where
     # three records declared a mathematics blocker while their certificate ran in this gate.
     return _module(context, "devtools.check_certificate_citations")
+
+
+def _rung_figures(context: Context) -> str:
+    # Sub-second: it sums a few dozen certificate atoms in exact Fraction arithmetic and
+    # regex-scans results.yaml, evidence.yaml, and defects.yaml. Records tier because it
+    # checks the record against the artifact, not the mathematics of either -- D-439 found
+    # three durable statements describing a rung the ladder had already moved past, every
+    # figure exact and real, each simply about the wrong file.
+    return _module(context, "devtools.check_rung_figures")
 
 
 def _session_rollups(context: Context) -> str:
@@ -1658,6 +1673,8 @@ STEPS: tuple[Step, ...] = (
             *_CORE,
             "packing/frontier/*",
             "packing/devtools/render_research_tables.py",
+            "packing/devtools/render_certificate_reach.py",
+            "packing/src/sqpack/fractional/certificate.py",
             # `MAIN` is the n=11 research report, read and compared cell by cell; the
             # step exists to catch a hand-edited table in exactly that file.
             "docs/*",
@@ -1913,6 +1930,20 @@ STEPS: tuple[Step, ...] = (
             "packing/cases/*/verify_exact.py",
             "packing/frontier/n-*.md",
             "packing/frontier/evidence.yaml",
+        ),
+    ),
+    Step(
+        "rung figures agree with their certificates",
+        _rung_figures,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/devtools/check_rung_figures.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/evidence.yaml",
+            "packing/defects.yaml",
         ),
     ),
     Step(
