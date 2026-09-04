@@ -20,6 +20,7 @@ the only thing that decides anything.
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 from fractions import Fraction
 
@@ -82,11 +83,15 @@ def build_site_grid(outer_side: Fraction, count: int, inset: Fraction) -> SiteGr
     return SiteGrid(outer_side, coordinates, tuple(orbits))
 
 
-def _net(limit: Fraction, steps: int) -> tuple[Fraction, ...]:
+def net_half_tangents(limit: Fraction, steps: int) -> tuple[Fraction, ...]:
+    """The uniform half-angle net: ``steps`` equal steps up to ``limit``."""
+
     return tuple(limit * index / steps for index in range(steps + 1))
 
 
-def _rotations(half_tangents: tuple[Fraction, ...]) -> tuple[Direction, ...]:
+def direction_net(half_tangents: tuple[Fraction, ...]) -> tuple[Direction, ...]:
+    """The net as exact unit rotations."""
+
     return tuple(
         rotation_from_half_tangent(str(index), tangent)
         for index, tangent in enumerate(half_tangents)
@@ -197,7 +202,7 @@ def solve_covering_lp(
         membership[cursor : cursor + len(orbit)] = index
         cursor += len(orbit)
 
-    directions = _rotations(half_tangents)
+    directions = direction_net(half_tangents)
     outer = float(grid.outer_side)
     side = float(square_side)
     rows: list[np.ndarray] = []
@@ -267,9 +272,13 @@ def rationalise(
         raw = Fraction(weights[index]).limit_denominator(10**9) * bump
         if raw <= 0:
             continue
-        units = -((-raw * scale).__ceil__())
-        units = max(units, 1) if raw > 0 else 0
-        weight = Fraction(units, scale)
+        # Round UP. ``-ceil(-x)`` is ``floor(x)``, and floor is exactly wrong
+        # here: every row is a ``>= 1`` constraint that the solver leaves tight,
+        # so shaving any weight drops a tight cell below 1 and the exact verifier
+        # refuses a certificate the program had found. The first version of this
+        # line did that (D-433), and the ``max(units, 1)`` guard below hid it.
+        units = math.ceil(raw * scale)
+        weight = Fraction(max(units, 1), scale)
         for i, j in orbit:
             atoms.append(
                 Atom(f"{i:03d},{j:03d}", grid.coordinates[i], grid.coordinates[j], weight)
@@ -292,7 +301,7 @@ def generate(
     """Search for a certificate at one setting, then decide it exactly."""
 
     grid = build_site_grid(outer_side, grid_count, inset)
-    half_tangents = _net(angle_limit, direction_steps)
+    half_tangents = net_half_tangents(angle_limit, direction_steps)
     weights, log = solve_covering_lp(grid, square_side, half_tangents, max_rounds=max_rounds)
     if not log.stopped.startswith("converged"):
         return None, log, log.objective
@@ -315,7 +324,9 @@ __all__ = [
     "GenerationLog",
     "SiteGrid",
     "build_site_grid",
+    "direction_net",
     "generate",
+    "net_half_tangents",
     "rationalise",
     "solve_covering_lp",
     "verify",

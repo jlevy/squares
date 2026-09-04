@@ -18,6 +18,7 @@ import pytest
 from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH, declared, load
 from cases.n17_weighted_certificate.fixture import load_retained_fixture
 from sqpack.fractional.certificate import Certificate, verify
+from sqpack.fractional.generate import build_site_grid, rationalise
 from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
 
 MASSACCESI_LIMIT = Fraction(207107, 500000)
@@ -221,3 +222,23 @@ def test_containment_at_exactly_one_is_refused() -> None:
     )
     assert touching.square_side * (1 + gap) == 1
     assert "C3 containment B(1 + D) < 1" in verify(touching).failures
+
+
+def test_rationalise_rounds_weights_up_never_down() -> None:
+    """D-433: the rounding step floored while its docstring said ceil.
+
+    Every coverage row the solver leaves tight sits exactly at 1, so any downward
+    rounding refuses a certificate the program had found. Weights that are not
+    multiples of 1/scale must land on the next multiple above, never below.
+    """
+    grid = build_site_grid(Fraction(4), 3, Fraction(1, 2))
+    weights = np.array([5.3 / 576, 0.5 / 576, 1000.001 / 576][: len(grid.orbits)])
+    atoms = rationalise(grid, weights, scale=576, bump=Fraction(1))
+    by_orbit = {}
+    for atom in atoms:
+        by_orbit.setdefault(atom.weight, 0)
+        by_orbit[atom.weight] += 1
+    assert Fraction(6, 576) in by_orbit
+    assert Fraction(1, 576) in by_orbit
+    assert Fraction(1001, 576) in by_orbit
+    assert all(w * 576 >= 1 for w in by_orbit)
