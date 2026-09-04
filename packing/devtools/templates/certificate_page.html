@@ -1,236 +1,290 @@
+<!doctype html>
+<html lang="en" data-kpress-theme="system" data-kpress-resolved-theme="light"
+      data-kpress-palette="neutral" data-kpress-prose-font="serif">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="generator" content="kpress">
 <title>Eleven Squares, {{N_ATOMS}} Atoms</title>
-
+<meta name="description" content="How a weighted point set and a pigeonhole prove s({{N}}) &gt;= {{L_FRAC}}.">
+<style>{{KPRESS_CSS}}</style>
+<script>{{THEME_BOOTSTRAP}}</script>
 <style>
-{{FONTS}}
-{{KATEX_CSS}}
-
 /* ============================================================
-   Tokens — kpress conventions: one type knob, ratios are design.
+   This page on top of the kpress design system.
+
+   Everything typographic -- the reading measure, the type ramp, headings,
+   lists, code, the colour roles and both themes -- comes from the kpress
+   stylesheets above. What follows is only what kpress has no component for:
+   the certificate's figures and the two interactive panels. Every value here
+   is a kpress token, so the figures move with the system rather than beside
+   it.
    ============================================================ */
-:root{
-  --fs-base:1rem;
-  --fs-large:calc(var(--fs-base)*1.2);
-  --fs-normal:var(--fs-base);
-  --fs-small:calc(var(--fs-base)*0.95);
-  --fs-smaller:calc(var(--fs-base)*0.9);
-  --fs-tiny:calc(var(--fs-base)*0.85);
-  --fs-mono:calc(var(--fs-base)*0.82);
-  --fs-h1:calc(var(--fs-base)*1.6);
-  --fs-h2:calc(var(--fs-base)*1.32);
-  --fs-h3:calc(var(--fs-base)*1.15);
 
-  --lh-normal:1.5;
-  --lh-tight:1.2;
-  --w-light:370; --w-medium:550; --w-bold:650;
-  --caps-spacing:0.021em;
-  --measure:calc(var(--fs-base)*45);
-
-  --font-prose:"PT Serif",Georgia,"Times New Roman",serif;
-  --font-sans:"Source Sans 3 Variable",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-
-  --doc-bg:oklch(100% 0 0);
-  --doc-text:oklch(21.01% 0.0318 264.7);
-  --doc-muted:oklch(50.06% 0.025 259.2);
-  --doc-border:oklch(89.90% 0.0151 260.7);
-  --doc-border-hairline:oklch(42.00% 0.006 260.7);
-  --doc-link:oklch(45.76% 0.1445 254.7);
-  --doc-code-bg:oklch(97.85% 0.0045 258.3);
-  --doc-accent:oklch(51.09% 0.0861 186.4);
-  --doc-accent-wash:oklch(95.5% 0.022 186.4);
-  --doc-probe:oklch(55% 0.145 52);
-  --doc-probe-wash:oklch(95% 0.035 52);
-  --doc-success:oklch(52.73% 0.1371 150.1);
-  --doc-danger:oklch(50.03% 0.1821 29.5);
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --doc-bg:oklch(18.98% 0.0094 255.6);
-    --doc-text:oklch(94.40% 0.0097 252.8);
-    --doc-muted:oklch(76.58% 0.0205 252.9);
-    --doc-border:oklch(33.73% 0.0207 254.1);
-    --doc-border-hairline:oklch(80.00% 0.008 254.1);
-    --doc-link:oklch(76.68% 0.1208 255.4);
-    --doc-code-bg:oklch(24.16% 0.0153 256.8);
-    --doc-accent:oklch(74% 0.09 186.4);
-    --doc-accent-wash:oklch(28% 0.035 186.4);
-    --doc-probe:oklch(76% 0.13 60);
-    --doc-probe-wash:oklch(30% 0.05 60);
-    --doc-success:oklch(72.27% 0.192 149.6);
-    --doc-danger:oklch(59.30% 0.128 29);
-  }
-}
-:root[data-theme="dark"]{
-  --doc-bg:oklch(18.98% 0.0094 255.6);
-  --doc-text:oklch(94.40% 0.0097 252.8);
-  --doc-muted:oklch(76.58% 0.0205 252.9);
-  --doc-border:oklch(33.73% 0.0207 254.1);
-  --doc-border-hairline:oklch(80.00% 0.008 254.1);
-  --doc-link:oklch(76.68% 0.1208 255.4);
-  --doc-code-bg:oklch(24.16% 0.0153 256.8);
-  --doc-accent:oklch(74% 0.09 186.4);
-  --doc-accent-wash:oklch(28% 0.035 186.4);
-  --doc-probe:oklch(76% 0.13 60);
-  --doc-probe-wash:oklch(30% 0.05 60);
-  --doc-success:oklch(72.27% 0.192 149.6);
-  --doc-danger:oklch(59.30% 0.128 29);
+.cert-page {
+  padding-block-end: calc(var(--kpress-font-size-base) * 6);
 }
 
-/* ============================================================
-   Base — serif reading face, sans for UI voice, mono for code only.
-   ============================================================ */
-*{box-sizing:border-box}
-body{
-  background:var(--doc-bg); color:var(--doc-text);
-  font-family:var(--font-prose); font-size:var(--fs-normal); line-height:var(--lh-normal);
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+/* Prose keeps the kpress measure; figures are allowed a wider track. */
+.col {
+  margin-inline: auto;
+  max-width: calc(var(--kpress-measure) + 2 * var(--kpress-column-inset));
 }
-.page{max-width:calc(var(--measure) + 14rem);margin:0 auto;padding:0 1.5rem 6rem}
-.col{max-width:var(--measure);margin-inline:auto}
-
-h1,h2,h3{margin:0;font-family:var(--font-sans);text-wrap:balance}
-h2{font-size:var(--fs-h2);font-weight:var(--w-medium);line-height:var(--lh-tight)}
-h3{font-size:var(--fs-h3);font-weight:var(--w-medium);line-height:var(--lh-tight)}
-p{margin:0.85rem 0}
-em{font-style:italic}
-strong{font-weight:700}
-code{font-family:var(--font-mono);font-size:var(--fs-mono);
-  background:var(--doc-code-bg);padding:0.08em 0.32em;border-radius:2px}
-
-/* A sans region: front matter and UI-voiced passages. */
-.sans-text{font-family:var(--font-sans)}
-.sans-text p{margin-block:0.8rem}
-
-.caps{font-family:var(--font-sans);font-size:var(--fs-smaller);
-  text-transform:uppercase;letter-spacing:var(--caps-spacing);
-  font-weight:var(--w-medium);color:var(--doc-muted)}
-.caps .katex{text-transform:none;letter-spacing:0;font-size:1em}
-.fig-title .katex,.legend .katex,.hint .katex{text-transform:none}
-
-/* ============================================================
-   Hero
-   ============================================================ */
-.hero{padding:4rem 0 0}
-.hero h1{
-  font-size:var(--fs-h1);font-weight:var(--w-medium);letter-spacing:0.03em;
-  line-height:1.05;margin-block:1rem 0;text-transform:uppercase;
+.cert-page figure {
+  margin-inline: auto;
+  margin-block: calc(var(--kpress-font-size-base) * 1.8) 0;
+  max-width: calc(var(--kpress-measure) + 14rem);
+  border: 1px solid var(--kpress-doc-border);
 }
-.hero h1 i{font-family:var(--font-prose);font-size:calc(var(--fs-base)*1.5);
-  font-style:italic;letter-spacing:0;text-transform:none}
-.claim{margin:1.6rem 0 1.4rem}
-.subtitle{font-family:var(--font-prose);font-size:var(--fs-normal);font-style:italic;
-  max-width:52ch;margin:0}
-.frontmatter{margin-top:1.4rem;font-family:var(--font-sans);font-size:var(--fs-tiny);
-  color:var(--doc-muted);display:flex;flex-wrap:wrap;gap:0.2rem 1.6rem}
 
-/* ============================================================
-   Sections
-   ============================================================ */
-section{margin-top:3.4rem}
-.section-head{margin-bottom:0.9rem}
-.section-head .caps{display:block;margin-bottom:0.45rem}
-ul{margin:0.85rem 0;padding-left:0;list-style:none}
-ul li{position:relative;padding-left:1.3rem;margin:0.5rem 0}
-ul li::before{content:"";position:absolute;left:0.15rem;top:0.72em;
-  width:0.42rem;height:0.42rem;background:var(--doc-accent)}
+/* A section label, in the kpress caps idiom. */
+.caps {
+  color: var(--kpress-doc-muted);
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-caps-label-size);
+  font-weight: var(--kpress-font-weight-sans-medium);
+  letter-spacing: var(--kpress-caps-spacing);
+  text-transform: var(--kpress-caps-transform);
+}
+.section-head { margin-block-end: 0.9rem; }
+.section-head .caps { display: block; margin-block-end: 0.45rem; }
 
-/* A box the author drew reads as drawn — kpress boxed-text. */
-.boxed{border:1px solid var(--doc-border-hairline);margin:1.4rem 0;padding:0.2rem 1.1rem}
+.hero { padding-block-start: calc(var(--kpress-font-size-base) * 3); }
+.claim { margin-block: 1.5rem 1.3rem; }
+.frontmatter {
+  color: var(--kpress-doc-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  gap: 0.2rem 1.6rem;
+  margin-block-start: 1.3rem;
+}
 
-/* ============================================================
-   Figures
-   ============================================================ */
-figure{margin:1.8rem 0 0;border:1px solid var(--doc-border)}
-.fig-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:0.5rem 0.9rem;
-  padding:0.7rem 1.1rem;border-bottom:1px solid var(--doc-border)}
-.fig-head .caps{font-size:var(--fs-tiny)}
-.fig-title{font-family:var(--font-sans);font-size:var(--fs-small);
-  font-weight:var(--w-medium);flex:1 1 14rem}
-.tag{font-family:var(--font-sans);font-size:var(--fs-tiny);font-weight:var(--w-medium);
-  letter-spacing:var(--caps-spacing);color:var(--doc-accent);
-  background:var(--doc-accent-wash);padding:0.05rem 0.4rem;border-radius:2px}
-figcaption{padding:0.85rem 1.1rem 1rem;border-top:1px solid var(--doc-border);
-  font-family:var(--font-sans);font-size:var(--fs-tiny);line-height:1.55;color:var(--doc-muted)}
-figcaption strong{color:var(--doc-text);font-weight:var(--w-medium)}
+.line-fig {
+  border-block: 1px solid var(--kpress-doc-border);
+  margin-block-start: 2rem;
+  padding-block: 1.3rem 0.4rem;
+}
+.line-fig svg, .chart svg { display: block; height: auto; overflow: visible; width: 100%; }
+.line-fig svg text, .chart svg text {
+  fill: var(--kpress-doc-muted);
+  font-family: var(--kpress-font-sans);
+}
 
-/* budget bar */
-.budget{padding:1.4rem 1.1rem 1.1rem}
-.bar{position:relative;height:2.6rem;background:var(--doc-code-bg);border:1px solid var(--doc-border)}
-.bar .fill{position:absolute;inset:0 auto 0 0;background:var(--doc-accent-wash);
-  border-right:2px solid var(--doc-accent)}
-.bar .need{position:absolute;top:-0.5rem;bottom:-0.5rem;width:2px;background:var(--doc-probe)}
-.bar-labels{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
-  margin-top:1rem;font-family:var(--font-sans);font-size:var(--fs-tiny);color:var(--doc-muted)}
-.bar-labels .v{display:block;margin-top:0.15rem}
+/* Figure chrome. */
+.fig-head {
+  align-items: baseline;
+  border-block-end: 1px solid var(--kpress-doc-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.9rem;
+  padding: 0.7rem 1.1rem;
+}
+.fig-title {
+  flex: 1 1 14rem;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-small);
+  font-weight: var(--kpress-font-weight-sans-medium);
+}
+.tag {
+  background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
+  border-radius: var(--kpress-radius-sm);
+  color: var(--kpress-doc-accent);
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  font-weight: var(--kpress-font-weight-sans-medium);
+  letter-spacing: var(--kpress-caps-spacing);
+  padding: 0.05rem 0.4rem;
+}
+.cert-page figcaption {
+  border-block-start: 1px solid var(--kpress-doc-border);
+  color: var(--kpress-doc-muted);
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  line-height: 1.55;
+  padding: 0.85rem 1.1rem 1rem;
+}
+.cert-page figcaption strong {
+  color: var(--kpress-doc-text);
+  font-weight: var(--kpress-font-weight-sans-medium);
+}
 
-/* interactive stages */
-.split{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(15rem,1fr)}
-@media (max-width:52rem){.split{grid-template-columns:1fr}}
-.stage{padding:1.1rem;display:flex;align-items:center;justify-content:center;
-  background:var(--doc-code-bg)}
-.stage canvas{width:100%;height:auto;max-width:32rem;display:block;cursor:grab;touch-action:none}
-.stage canvas:active{cursor:grabbing}
-.panel{padding:1.1rem;border-left:1px solid var(--doc-border);
-  display:flex;flex-direction:column;gap:1.1rem;font-family:var(--font-sans)}
-@media (max-width:52rem){.panel{border-left:0;border-top:1px solid var(--doc-border)}}
+/* The mass budget. */
+.budget { padding: 1.4rem 1.1rem 1.1rem; }
+.bar {
+  background: var(--kpress-doc-code-bg);
+  border: 1px solid var(--kpress-doc-border);
+  height: 2.6rem;
+  position: relative;
+}
+.bar .fill {
+  background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
+  border-inline-end: 2px solid var(--kpress-doc-accent);
+  inset: 0 auto 0 0;
+  position: absolute;
+}
+.bar .need {
+  background: var(--cert-probe);
+  inset-block: -0.5rem;
+  position: absolute;
+  width: 2px;
+}
+.bar-labels {
+  color: var(--kpress-doc-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  gap: 1rem;
+  justify-content: space-between;
+  margin-block-start: 1rem;
+}
+.bar-labels .v { display: block; margin-block-start: 0.15rem; }
 
-.readout{border:1px solid var(--doc-border);padding:0.85rem 0.9rem}
-.readout .caps{font-size:var(--fs-tiny);display:block;margin-bottom:0.5rem}
-.mass-val{font-size:calc(var(--fs-base)*1.9);line-height:1.1;min-height:2.4em;
-  display:flex;align-items:center}
-.mass-val .katex{font-size:1em}
-.mass-dec{font-family:var(--font-sans);font-size:var(--fs-tiny);color:var(--doc-muted);
-  margin-top:0.2rem}
-.verdict{display:inline-block;margin-top:0.6rem;font-family:var(--font-sans);
-  font-size:var(--fs-tiny);font-weight:var(--w-medium);letter-spacing:var(--caps-spacing);
-  text-transform:uppercase;padding:0.1rem 0.4rem;border-radius:2px}
-.verdict.ok{color:var(--doc-accent);background:var(--doc-accent-wash)}
-.verdict.no{color:var(--doc-danger);background:var(--doc-probe-wash)}
-.verdict.out{color:var(--doc-muted);background:var(--doc-code-bg)}
+/* The two interactive stages. */
+.split { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(15rem, 1fr); }
+.stage {
+  align-items: center;
+  background: var(--kpress-doc-code-bg);
+  display: flex;
+  justify-content: center;
+  padding: 1.1rem;
+}
+.stage canvas {
+  cursor: grab;
+  display: block;
+  height: auto;
+  max-width: 32rem;
+  touch-action: none;
+  width: 100%;
+}
+.stage canvas:active { cursor: grabbing; }
+.panel {
+  border-inline-start: 1px solid var(--kpress-doc-border);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--kpress-font-sans);
+  gap: 1.1rem;
+  padding: 1.1rem;
+}
+@media (max-width: 52rem) {
+  .split { grid-template-columns: 1fr; }
+  .panel { border-block-start: 1px solid var(--kpress-doc-border); border-inline-start: 0; }
+}
 
-.ctl{display:flex;flex-direction:column;gap:0.4rem}
-.ctl .caps{font-size:var(--fs-tiny)}
-input[type=range]{width:100%;accent-color:var(--doc-accent);margin:0}
-.ctl .val{font-size:var(--fs-tiny);color:var(--doc-text);line-height:1.6}
-.btns{display:flex;flex-wrap:wrap;gap:0.4rem}
-button{font-family:var(--font-sans);font-size:var(--fs-tiny);color:var(--doc-text);
-  background:var(--doc-bg);border:1px solid var(--doc-border-hairline);
-  padding:0.3rem 0.55rem;cursor:pointer;border-radius:2px}
-button:hover{background:var(--doc-accent-wash)}
-button:focus-visible,input:focus-visible{outline:2px solid var(--doc-link);outline-offset:2px}
-button[aria-pressed=true]{background:var(--doc-accent-wash);border-color:var(--doc-accent);
-  color:var(--doc-accent)}
-.hint{font-size:var(--fs-tiny);color:var(--doc-muted);line-height:1.55;margin:0}
-.legend{display:flex;flex-direction:column;gap:0.3rem;font-size:var(--fs-tiny);color:var(--doc-muted)}
-.legend span{display:flex;align-items:center;gap:0.5rem}
-.legend i{width:0.9rem;height:0.7rem;flex:none;display:block}
+.readout { border: 1px solid var(--kpress-doc-border); padding: 0.85rem 0.9rem; }
+.readout .caps { display: block; margin-block-end: 0.5rem; }
+.mass-val {
+  align-items: center;
+  display: flex;
+  font-size: calc(var(--kpress-font-size-base) * 1.9);
+  line-height: 1.1;
+  min-height: 2.4em;
+}
+.mass-val .katex { font-size: 1em; }
+.mass-dec {
+  color: var(--kpress-doc-muted);
+  font-size: var(--kpress-font-size-tiny);
+  margin-block-start: 0.2rem;
+}
+.verdict {
+  border-radius: var(--kpress-radius-sm);
+  display: inline-block;
+  font-size: var(--kpress-font-size-tiny);
+  font-weight: var(--kpress-font-weight-sans-medium);
+  letter-spacing: var(--kpress-caps-spacing);
+  margin-block-start: 0.6rem;
+  padding: 0.1rem 0.4rem;
+  text-transform: var(--kpress-caps-transform);
+}
+.verdict.ok {
+  background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
+  color: var(--kpress-doc-accent);
+}
+.verdict.no {
+  background: color-mix(in srgb, var(--kpress-doc-danger) 12%, transparent);
+  color: var(--kpress-doc-danger);
+}
+.verdict.out { background: var(--kpress-doc-code-bg); color: var(--kpress-doc-muted); }
 
-.kv{display:grid;grid-template-columns:auto 1fr;gap:0.3rem 0.9rem;
-  font-size:var(--fs-tiny);align-items:baseline}
-.kv dt{color:var(--doc-muted)}
-.kv dd{margin:0;text-align:right}
-.kv dd.hi{color:var(--doc-probe)}
+.ctl { display: flex; flex-direction: column; gap: 0.4rem; }
+.ctl .val {
+  color: var(--kpress-doc-text);
+  font-size: var(--kpress-font-size-tiny);
+  line-height: 1.6;
+}
+.cert-page input[type="range"] { accent-color: var(--kpress-doc-accent); margin: 0; width: 100%; }
+.btns { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.cert-page button {
+  background: var(--kpress-doc-bg);
+  border: 1px solid var(--kpress-doc-border-hairline);
+  border-radius: var(--kpress-radius-sm);
+  color: var(--kpress-doc-text);
+  cursor: pointer;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  padding: 0.3rem 0.55rem;
+}
+.cert-page button:hover { background: var(--kpress-doc-surface-hover); }
+.cert-page button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
+  border-color: var(--kpress-doc-accent);
+  color: var(--kpress-doc-accent);
+}
+.hint {
+  color: var(--kpress-doc-muted);
+  font-size: var(--kpress-font-size-tiny);
+  line-height: 1.55;
+  margin: 0;
+}
+.legend {
+  color: var(--kpress-doc-muted);
+  display: flex;
+  flex-direction: column;
+  font-size: var(--kpress-font-size-tiny);
+  gap: 0.3rem;
+}
+.legend span { align-items: center; display: flex; gap: 0.5rem; }
+.legend i { display: block; flex: none; height: 0.7rem; width: 0.9rem; }
 
-.chart{padding:1.4rem 1.1rem 0.6rem}
-.chart svg,.line-fig svg{width:100%;height:auto;display:block;overflow:visible}
-.line-fig{max-width:var(--measure);margin:2.2rem auto 0;padding:1.4rem 0 0.4rem;
-  border-top:1px solid var(--doc-border);border-bottom:1px solid var(--doc-border)}
+.kv {
+  align-items: baseline;
+  display: grid;
+  font-size: var(--kpress-font-size-tiny);
+  gap: 0.3rem 0.9rem;
+  grid-template-columns: auto 1fr;
+}
+.kv dt { color: var(--kpress-doc-muted); }
+.kv dd { margin: 0; text-align: end; }
+.kv dd.hi { color: var(--cert-probe); }
 
-footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--doc-border);
-  font-family:var(--font-sans);font-size:var(--fs-tiny);color:var(--doc-muted);line-height:1.7}
+.chart { padding: 1.4rem 1.1rem 0.6rem; }
 
-/* KaTeX: hold math until typeset so no raw TeX flashes. */
-.tex,.tex-d{visibility:hidden}
-:root.math-ready .tex,:root.math-ready .tex-d{visibility:visible}
-.tex-d{margin:1.1rem 0;overflow-x:auto;overflow-y:hidden}
-.katex{font-size:1.04em}
-.tex-d .katex-display{margin:0}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* One role kpress has no token for: the square the reader drags, which must
+   read as a separate instrument from the mass it measures. */
+:root {
+  --cert-probe: oklch(55% 0.145 52);
+  --cert-probe-wash: color-mix(in srgb, var(--cert-probe) 14%, transparent);
+  --cert-accent-wash: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
+}
+:root:where([data-kpress-resolved-theme="dark"]) { --cert-probe: oklch(76% 0.13 60); }
+
+/* Math is held until KaTeX has typeset it, so no raw TeX flashes. */
+.tex, .tex-d { visibility: hidden; }
+.math-ready .tex, .math-ready .tex-d { visibility: visible; }
+.tex-d { margin-block: 1.1rem; overflow-x: auto; overflow-y: hidden; }
+.tex-d .katex-display { margin: 0; }
+.caps .katex, .fig-title .katex, .legend .katex, .hint .katex { text-transform: none; }
+.caps .katex { font-size: 1em; letter-spacing: 0; }
 </style>
+</head>
+<body class="kpress-frame" data-kpress-frame>
+<main class="kpress-page-main kpress-viewport" data-kpress-viewport>
+<article class="kpress kpress-doc cert-page">
 
-<div class="page">
-
-<header class="hero sans-text col">
+<header class="hero sans-text col kpress-prose">
   <span class="caps">Square packing · lower-bound certificate</span>
   <h1>Eleven squares, <i>{{N_ATOMS}} atoms</i></h1>
   <div class="claim tex-d">s({{N}}) \;\ge\; {{L_TEX}} \;=\; {{L_DEC}}</div>
@@ -244,37 +298,37 @@ footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--doc-border)
 
 <div class="line-fig col">
   <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER}}, the new bound {{L_DEC}}, and the best known packing at {{BEST_PACKING}}">
-    <rect x="{{BOUND_X}}" y="45" width="{{BAND_W}}" height="13" fill="var(--doc-accent-wash)"/>
-    <line x1="20" y1="51.5" x2="680" y2="51.5" stroke="var(--doc-border-hairline)" stroke-width="1"/>
-    <g stroke="var(--doc-border-hairline)" stroke-width="1">
+    <rect x="{{BOUND_X}}" y="45" width="{{BAND_W}}" height="13" fill="var(--cert-accent-wash)"/>
+    <line x1="20" y1="51.5" x2="680" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1"/>
+    <g stroke="var(--kpress-doc-muted)" stroke-width="1">
       <line x1="20" y1="47" x2="20" y2="56"/><line x1="460" y1="47" x2="460" y2="56"/>
       <line x1="680" y1="47" x2="680" y2="56"/>
     </g>
-    <g font-family="Source Sans 3 Variable, sans-serif" font-size="10" fill="var(--doc-muted)" text-anchor="middle">
+    <g font-size="10" fill="var(--kpress-doc-muted)" text-anchor="middle">
       <text x="20" y="72">3.75</text><text x="460" y="72">3.85</text><text x="680" y="72">3.90</text>
     </g>
-    <line x1="{{PRIOR_X}}" y1="30" x2="{{PRIOR_X}}" y2="51.5" stroke="var(--doc-muted)" stroke-width="1.25"/>
-    <circle cx="{{PRIOR_X}}" cy="51.5" r="3.2" fill="var(--doc-muted)"/>
-    <g font-family="Source Sans 3 Variable, sans-serif" text-anchor="middle">
-      <text x="{{PRIOR_X}}" y="24" font-size="10.5" fill="var(--doc-text)">{{PRIOR_LOWER}}</text>
-      <text x="{{PRIOR_X}}" y="12" font-size="9.5" fill="var(--doc-muted)">{{PRIOR_SOURCE}}</text>
-      <text x="{{BEST_X}}" y="24" font-size="10.5" fill="var(--doc-text)">{{BEST_PACKING}}</text>
-      <text x="{{BEST_X}}" y="12" font-size="9.5" fill="var(--doc-muted)">{{BEST_SOURCE}}</text>
+    <line x1="{{PRIOR_X}}" y1="30" x2="{{PRIOR_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
+    <circle cx="{{PRIOR_X}}" cy="51.5" r="3.2" fill="var(--kpress-doc-muted)"/>
+    <g text-anchor="middle">
+      <text x="{{PRIOR_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{PRIOR_LOWER}}</text>
+      <text x="{{PRIOR_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{PRIOR_SOURCE}}</text>
+      <text x="{{BEST_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{BEST_PACKING}}</text>
+      <text x="{{BEST_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{BEST_SOURCE}}</text>
     </g>
-    <line x1="{{BEST_X}}" y1="30" x2="{{BEST_X}}" y2="51.5" stroke="var(--doc-muted)" stroke-width="1.25"/>
-    <circle cx="{{BEST_X}}" cy="51.5" r="3.2" fill="var(--doc-muted)"/>
-    <line x1="{{BOUND_X}}" y1="51.5" x2="{{BOUND_X}}" y2="84" stroke="var(--doc-probe)" stroke-width="2"/>
-    <circle cx="{{BOUND_X}}" cy="51.5" r="4.4" fill="var(--doc-probe)"/>
-    <text x="{{BOUND_X}}" y="88" dx="11" font-family="Source Sans 3 Variable, sans-serif" font-size="11"
-      font-weight="550" fill="var(--doc-probe)">{{L_FRAC}} = {{L_DEC}}, this certificate</text>
+    <line x1="{{BEST_X}}" y1="30" x2="{{BEST_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
+    <circle cx="{{BEST_X}}" cy="51.5" r="3.2" fill="var(--kpress-doc-muted)"/>
+    <line x1="{{BOUND_X}}" y1="51.5" x2="{{BOUND_X}}" y2="84" stroke="var(--cert-probe)" stroke-width="2"/>
+    <circle cx="{{BOUND_X}}" cy="51.5" r="4.4" fill="var(--cert-probe)"/>
+    <text x="{{BOUND_X}}" y="88" dx="11" font-size="11"
+      font-weight="550" fill="var(--cert-probe)">{{L_FRAC}} = {{L_DEC}}, this certificate</text>
   </svg>
 </div>
-<p class="col sans-text" style="font-size:var(--fs-tiny);color:var(--doc-muted);margin-top:0.7rem">
+<p class="col sans-text kpress-prose" style="font-size:var(--fs-tiny);color:var(--kpress-doc-muted);margin-top:0.7rem">
   The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. It is
   <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span>.
 </p>
 
-<section class="col">
+<section class="col kpress-prose">
   <div class="section-head">
     <span class="caps">The argument</span>
     <h2>Atoms, Mass, and the Budget</h2>
@@ -313,7 +367,7 @@ footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--doc-border)
   squares would need and the board does not hold. Condition <strong>C1</strong> is this comparison.</figcaption>
 </figure>
 
-<section class="col">
+<section class="col kpress-prose">
   <div class="section-head">
     <span class="caps">The object</span>
     <h2>The Atom Set</h2>
@@ -336,7 +390,7 @@ footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--doc-border)
   of a covering linear program, rationalised.</figcaption>
 </figure>
 
-<section class="col">
+<section class="col kpress-prose">
   <div class="section-head">
     <span class="caps">The covering condition</span>
     <h2>Every Placement Covers Mass at Least One</h2>
@@ -378,9 +432,9 @@ footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--doc-border)
         <button id="btn-heat" aria-pressed="true">Field</button>
       </div>
       <div class="legend">
-        <span><i style="background:var(--doc-probe)"></i>within 12% of the limit</span>
-        <span><i style="background:var(--doc-accent)"></i>comfortably above</span>
-        <span><i style="background:var(--doc-danger)"></i>below 1, which never occurs</span>
+        <span><i style="background:var(--cert-probe)"></i>within 12% of the limit</span>
+        <span><i style="background:var(--kpress-doc-accent)"></i>comfortably above</span>
+        <span><i style="background:var(--kpress-doc-danger)"></i>below 1, which never occurs</span>
       </div>
       <p class="hint" id="hint">The shaded background is the covered mass at every centre position, recomputed
       for the direction you choose. The dashed outline is where the square’s centre is allowed to be. Outside
@@ -391,7 +445,7 @@ footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--doc-border)
   directions. Outside it the mass falls away at once, which is why the atoms crowd the boundary.</figcaption>
 </figure>
 
-<section class="col">
+<section class="col kpress-prose">
   <div class="section-head">
     <span class="caps">The angle net</span>
     <h2>From a Continuum of Angles to {{N_DIRECTIONS}}</h2>
@@ -458,7 +512,7 @@ footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--doc-border)
 </figure>
 
 <!--BEGIN:COARSENING-->
-<section class="col">
+<section class="col kpress-prose">
   <div class="section-head">
     <span class="caps">The cost of a coarser net</span>
     <h2>Why the Net Has {{N_DIRECTIONS}} Directions</h2>
@@ -476,25 +530,25 @@ footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--doc-border)
   </div>
   <div class="chart">
     <svg viewBox="0 0 700 250" role="img" aria-label="{{COARSEN_ALT}}">
-      <g font-family="Source Sans 3 Variable, sans-serif" font-size="10" fill="var(--doc-muted)">
-        <line x1="76" y1="30" x2="76" y2="190" stroke="var(--doc-border-hairline)"/>
-        <line x1="76" y1="190" x2="664" y2="190" stroke="var(--doc-border-hairline)"/>
-        <line x1="76" y1="30" x2="664" y2="30" stroke="var(--doc-probe)" stroke-dasharray="4 4" opacity=".8"/>
+      <g font-size="10" fill="var(--kpress-doc-muted)">
+        <line x1="76" y1="30" x2="76" y2="190" stroke="var(--kpress-doc-muted)"/>
+        <line x1="76" y1="190" x2="664" y2="190" stroke="var(--kpress-doc-muted)"/>
+        <line x1="76" y1="30" x2="664" y2="30" stroke="var(--cert-probe)" stroke-dasharray="4 4" opacity=".8"/>
         <text x="68" y="34" text-anchor="end">1.0</text>
         <text x="68" y="114" text-anchor="end">0.5</text>
         <text x="68" y="194" text-anchor="end">0</text>
-        <text x="670" y="34" fill="var(--doc-probe)">C4 threshold</text>
+        <text x="670" y="34" fill="var(--cert-probe)">C4 threshold</text>
       </g>
       <g>
         {{COARSEN_BARS}}
       </g>
-      <g font-family="Source Sans 3 Variable, sans-serif" font-size="10.5" fill="var(--doc-text)" text-anchor="middle">
+      <g font-size="10.5" fill="var(--kpress-doc-text)" text-anchor="middle">
         {{COARSEN_VALUES}}
       </g>
-      <g font-family="Source Sans 3 Variable, sans-serif" font-size="10.5" fill="var(--doc-muted)" text-anchor="middle">
+      <g font-size="10.5" fill="var(--kpress-doc-muted)" text-anchor="middle">
         {{COARSEN_LABELS}}
       </g>
-      <text x="76" y="246" font-family="Source Sans 3 Variable, sans-serif" font-size="10" fill="var(--doc-muted)">
+      <text x="76" y="246" font-size="10" fill="var(--kpress-doc-muted)">
         Only the last bar clears the threshold. Measured on the retained atoms, optimised against the full net.
       </text>
     </svg>
@@ -504,7 +558,7 @@ footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--doc-border)
 </figure>
 <!--END:COARSENING-->
 
-<section class="col">
+<section class="col kpress-prose">
   <div class="section-head">
     <span class="caps">The close</span>
     <h2>The Contradiction</h2>
@@ -524,7 +578,7 @@ footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--doc-border)
   counting returns, and the sum never reaches <span class="tex">{{N}}</span>.</p>
 </section>
 
-<section class="col">
+<section class="col kpress-prose">
   <div class="section-head">
     <span class="caps">Where the search is</span>
     <h2>Generator and Verifier</h2>
@@ -544,7 +598,7 @@ footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--doc-border)
   theorem.</p>
 </section>
 
-<footer class="col">
+<footer class="col kpress-prose">
   Certificate <code>{{ID}}</code>: {{N_ATOMS}} atoms, side <span class="tex">L = {{L_FRAC}}</span>, shrink
   <span class="tex">B = {{B_FRAC}}</span>, a net of {{N_DIRECTIONS}} rational half-tangents reaching
   <span class="tex">\tan(\pi/8)</span>. Total mass <span class="tex">{{TOTAL_TEX}}</span>; least covered cell mass
@@ -554,8 +608,8 @@ footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--doc-border)
   Source Sans 3 and KaTeX are embedded; the page loads no external resources.
 </footer>
 
-</div>
-
+</article>
+</main>
 <script>{{KATEX_JS}}</script>
 <script>
 {{ATOMS}}
@@ -597,14 +651,14 @@ function drawField() {
   const c = document.getElementById('field'), g = c.getContext('2d'), S = c.width, m = S * 0.055;
   const px = S - 2 * m, sc = px / L;
   g.clearRect(0, 0, S, S);
-  g.fillStyle = css('--doc-bg'); g.fillRect(0, 0, S, S);
-  g.strokeStyle = css('--doc-border'); g.lineWidth = 1; g.setLineDash([4, 6]);
+  g.fillStyle = css('--kpress-doc-bg'); g.fillRect(0, 0, S, S);
+  g.strokeStyle = css('--kpress-doc-border'); g.lineWidth = 1; g.setLineDash([4, 6]);
   for (let i = 1; i <= 3; i++) { const p = m + px * i / L;
     g.beginPath(); g.moveTo(p, m); g.lineTo(p, m + px); g.moveTo(m, p); g.lineTo(m + px, p); g.stroke(); }
   g.setLineDash([]);
-  g.strokeStyle = css('--doc-border-hairline'); g.lineWidth = 2; g.strokeRect(m, m, px, px);
+  g.strokeStyle = css('--kpress-doc-border-hairline'); g.lineWidth = 2; g.strokeRect(m, m, px, px);
   const maxw = Math.max(...ATOMS.map(a => a[2]));
-  g.fillStyle = css('--doc-accent');
+  g.fillStyle = css('--kpress-doc-accent');
   for (const [x, y, w] of ATOMS) {
     const r = Math.sqrt(w / maxw) * sc * 0.115 + sc * 0.008;
     g.globalAlpha = 0.35 + 0.55 * Math.sqrt(w / maxw);
@@ -623,8 +677,8 @@ function buildHeat() {
   const img = pg.createImageData(RES, RES), d = img.data;
   const parse = v => { const m = document.createElement('canvas').getContext('2d');
     m.fillStyle = v; m.fillRect(0, 0, 1, 1); return Array.from(m.getImageData(0, 0, 1, 1).data).slice(0, 3); };
-  const cLo = parse(css('--doc-danger')), cTight = parse(css('--doc-probe')),
-        cA = parse(css('--doc-accent-wash')), cB = parse(css('--doc-accent')), cOut = parse(css('--doc-border'));
+  const cLo = parse(css('--kpress-doc-danger')), cTight = parse(css('--cert-probe')),
+        cA = parse(css('--cert-accent-wash')), cB = parse(css('--kpress-doc-accent')), cOut = parse(css('--kpress-doc-border'));
   const h = inset();
   const vals = new Float32Array(RES * RES); let hi = 1;
   for (let j = 0; j < RES; j++) { const y = L * (RES - 1 - j) / (RES - 1);
@@ -651,12 +705,12 @@ function buildHeat() {
 
 function drawProver() {
   pg.clearRect(0, 0, PS, PS);
-  pg.fillStyle = css('--doc-bg'); pg.fillRect(0, 0, PS, PS);
+  pg.fillStyle = css('--kpress-doc-bg'); pg.fillRect(0, 0, PS, PS);
   const X = x => PM + x * PSC, Y = y => PM + (L - y) * PSC;
   if (showHeat && heat) pg.drawImage(heat, PM, PM, PPX, PPX);
-  pg.strokeStyle = css('--doc-border-hairline'); pg.lineWidth = 2; pg.strokeRect(PM, PM, PPX, PPX);
+  pg.strokeStyle = css('--kpress-doc-border-hairline'); pg.lineWidth = 2; pg.strokeRect(PM, PM, PPX, PPX);
   const h = inset();
-  pg.strokeStyle = css('--doc-muted'); pg.lineWidth = 1.5; pg.setLineDash([7, 6]);
+  pg.strokeStyle = css('--kpress-doc-muted'); pg.lineWidth = 1.5; pg.setLineDash([7, 6]);
   pg.strokeRect(X(h), Y(L - h), (L - 2 * h) * PSC, (L - 2 * h) * PSC);
   pg.setLineDash([]);
   const maxw = Math.max(...ATOMS.map(a => a[2]));
@@ -664,7 +718,7 @@ function drawProver() {
   for (const [x, y, w] of ATOMS) {
     const u = cs * x + sn * y, v = -sn * x + cs * y;
     const hit = Math.abs(u - pu) <= HALF && Math.abs(v - pvv) <= HALF;
-    pg.fillStyle = hit ? css('--doc-probe') : css('--doc-accent');
+    pg.fillStyle = hit ? css('--cert-probe') : css('--kpress-doc-accent');
     pg.globalAlpha = hit ? 1 : 0.42;
     const r = Math.sqrt(w / maxw) * PSC * 0.1 + PSC * 0.007;
     pg.beginPath(); pg.arc(X(x), Y(y), r, 0, 6.2832); pg.fill();
@@ -672,7 +726,7 @@ function drawProver() {
   pg.globalAlpha = 1;
   pg.save();
   pg.translate(X(probe[0]), Y(probe[1])); pg.rotate(-Math.atan2(sn, cs));
-  pg.strokeStyle = css('--doc-probe'); pg.lineWidth = 2.5;
+  pg.strokeStyle = css('--cert-probe'); pg.lineWidth = 2.5;
   pg.strokeRect(-HALF * PSC, -HALF * PSC, B * PSC, B * PSC);
   pg.restore();
 }
@@ -754,17 +808,17 @@ function shrinkDraw() {
   const prod = Bk * (Math.cos(d) + Math.sin(d));
 
   g.clearRect(0, 0, S, S);
-  g.fillStyle = css('--doc-bg'); g.fillRect(0, 0, S, S);
+  g.fillStyle = css('--kpress-doc-bg'); g.fillRect(0, 0, S, S);
   const sc = S * 0.62;
   g.save(); g.translate(S / 2, S / 2);
   g.save(); g.rotate(-phi);
-  g.strokeStyle = css('--doc-border-hairline'); g.lineWidth = 3;
+  g.strokeStyle = css('--kpress-doc-border-hairline'); g.lineWidth = 3;
   g.strokeRect(-sc / 2, -sc / 2, sc, sc);
   g.restore();
   g.save(); g.rotate(-theta);
-  g.fillStyle = css('--doc-probe-wash'); g.globalAlpha = .8;
+  g.fillStyle = css('--cert-probe-wash'); g.globalAlpha = .8;
   g.fillRect(-Bk * sc / 2, -Bk * sc / 2, Bk * sc, Bk * sc); g.globalAlpha = 1;
-  g.strokeStyle = css('--doc-probe'); g.lineWidth = 3;
+  g.strokeStyle = css('--cert-probe'); g.lineWidth = 3;
   g.strokeRect(-Bk * sc / 2, -Bk * sc / 2, Bk * sc, Bk * sc);
   g.restore(); g.restore();
 
@@ -776,7 +830,7 @@ function shrinkDraw() {
   tex(document.getElementById('s-B'), Bk.toFixed(6));
   const pe = document.getElementById('s-prod');
   tex(pe, `${prod.toFixed(6)} ${prod < 1 ? '\\lt' : '\\ge'} 1`);
-  pe.style.color = prod < 1 ? '' : css('--doc-danger');
+  pe.style.color = prod < 1 ? '' : css('--kpress-doc-danger');
 }
 document.getElementById('phi').addEventListener('input', shrinkDraw);
 document.querySelectorAll('.knet').forEach(b => b.addEventListener('click', () => {
@@ -802,3 +856,5 @@ if (window.matchMedia) {
   if (mq.addEventListener) mq.addEventListener('change', () => { heat = null; boot(); });
 }
 </script>
+</body>
+</html>

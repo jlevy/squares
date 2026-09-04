@@ -74,13 +74,15 @@ LATIN_RANGE = (
     "U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
 )
 
-READING_FACES = (
-    ("PT Serif", "normal", "400", "pt-serif-latin-400-normal.woff2"),
-    ("PT Serif", "italic", "400", "pt-serif-latin-400-italic.woff2"),
-    ("PT Serif", "normal", "700", "pt-serif-latin-700-normal.woff2"),
-    ("PT Serif", "italic", "700", "pt-serif-latin-700-italic.woff2"),
-    ("Source Sans 3 Variable", "normal", "200 900", "source-sans-3-latin-wght-normal.woff2"),
-    ("Source Sans 3 Variable", "italic", "200 900", "source-sans-3-latin-wght-italic.woff2"),
+# The kpress stylesheet chain, in the order `kpress.format.assets` loads it.
+# page-reset first (it owns html/body for the standalone shell), print last.
+KPRESS_STYLESHEETS = (
+    "page-reset.css",
+    "style-tokens.css",
+    "syntax.css",
+    "document.css",
+    "components.css",
+    "print.css",
 )
 
 
@@ -107,17 +109,34 @@ def data_uri(path: Path) -> str:
     return f"data:font/woff2;base64,{base64.b64encode(path.read_bytes()).decode()}"
 
 
-def reading_font_css(static: Path) -> str:
-    """`@font-face` blocks for the kpress reading faces, fonts inlined."""
-    blocks = []
-    for family, style, weight, filename in READING_FACES:
-        blocks.append(
-            f'@font-face{{font-family:"{family}";font-style:{style};'
-            f"font-weight:{weight};font-display:block;"
-            f'src:url("{data_uri(static / "fonts" / filename)}") format("woff2");'
-            f"unicode-range:{LATIN_RANGE};}}"
-        )
-    return "".join(blocks)
+def inline_font_urls(css: str, fonts: Path) -> str:
+    """Rewrite `url("../fonts/x.woff2")` to a data URI, so the page fetches nothing."""
+
+    def rewrite(match: re.Match[str]) -> str:
+        name = match.group(1)
+        return f'url("{data_uri(fonts / name)}")'
+
+    return re.sub(r'url\("\.\./fonts/([A-Za-z0-9_.-]+)"\)', rewrite, css)
+
+
+def kpress_css(static: Path) -> str:
+    """The kpress design system as one stylesheet, its webfonts inlined.
+
+    Taken whole rather than reimplemented: the reading measure, the type ramp,
+    the heading and list treatments, the colour roles and both themes are the
+    system's to define, and a page that re-declared a subset of them would drift
+    from it silently. This page adds only what kpress has no component for.
+    """
+    parts = []
+    for name in KPRESS_STYLESHEETS:
+        parts.append(f"/* kpress: {name} */")
+        parts.append((static / "css" / name).read_text(encoding="utf-8"))
+    return inline_font_urls("\n".join(parts), static / "fonts")
+
+
+def theme_bootstrap(static: Path) -> str:
+    """kpress's pre-paint theme resolution, so light and dark match the system."""
+    return (static / "js" / "theme-bootstrap.js").read_text(encoding="utf-8")
 
 
 def katex_css(static: Path) -> str:
@@ -354,8 +373,8 @@ def substitutions(facts: Facts, static: Path) -> dict[str, str]:
     else:
         bars = values = labels = alt = ""
     values_map = {
-        "FONTS": reading_font_css(static),
-        "KATEX_CSS": katex_css(static),
+        "KPRESS_CSS": kpress_css(static) + katex_css(static),
+        "THEME_BOOTSTRAP": theme_bootstrap(static),
         "KATEX_JS": (static / "katex" / "katex.min.js").read_text(encoding="utf-8"),
         "ATOMS": atom_array(facts),
         "ID": facts.identifier,
