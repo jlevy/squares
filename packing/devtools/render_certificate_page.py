@@ -37,6 +37,7 @@ from sqpack.fractional.certificate import (
 )
 from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass
+from sqpack.render.style import SQUARE_HUE_PALETTE
 
 PACKING = Path(__file__).resolve().parents[1]
 REPO = PACKING.parent
@@ -44,6 +45,22 @@ CASE = PACKING / "cases" / "n11_fractional_certificate"
 TEMPLATE = Path(__file__).with_name("templates") / "certificate_page.html"
 COARSENING = CASE / "net-coarsening.json"
 OUTPUT = PACKING / "site" / "index.html"
+
+# The one region the prover must separate from the probe: the probe is a warm
+# orange, and a red near it reads as the same instrument at a glance. Taken from
+# the project's own square-hue palette rather than picked, and asserted rather
+# than indexed so a reordered palette fails here instead of quietly restyling
+# the figure.
+# Four colours have to stay apart in the prover: the mass comfortably above the
+# threshold, the mass near it, the mass below it (a region that never occurs
+# inside the domain), and the square the reader drags, which is an instrument
+# rather than a measurement. All three data colours come from the project's own
+# square-hue palette, asserted rather than indexed so a reordered palette fails
+# here instead of quietly restyling the figure.
+BELOW_ONE = "#e26e82"
+NEAR_LIMIT = "#c9a13a"
+for _colour in (BELOW_ONE, NEAR_LIMIT):
+    assert _colour in SQUARE_HUE_PALETTE, f"{_colour} is no longer in the square-hue palette"
 
 # The prior state of the case, which the page reports next to the new bound.
 PRIOR_LOWER = "3.788854"
@@ -291,13 +308,26 @@ def decimal(value: Fraction, places: int = 6) -> str:
 
 
 def atom_array(facts: Facts) -> str:
-    """`[x, y, weight x scale]` per atom: the page sums integers, not floats."""
+    """The atoms as exact integers: numerator and denominator per coordinate.
+
+    The page sums weights as integer multiples of `1 / weight_scale`, so the
+    covered mass it reports is exact rather than a float total. Coordinates go
+    the same way so a hovered atom can name the rational the certificate holds
+    rather than a rounding of it; the float pair every draw call needs is
+    derived once at load.
+    """
     rows = []
     for atom in facts.atoms:
         weight = atom.weight * facts.weight_scale
         assert weight.denominator == 1
-        rows.append(f"[{float(atom.x):.9g},{float(atom.y):.9g},{weight.numerator}]")
-    return "const ATOMS=[" + ",".join(rows) + "];"
+        rows.append(
+            f"[{atom.x.numerator},{atom.x.denominator},"
+            f"{atom.y.numerator},{atom.y.denominator},{weight.numerator}]"
+        )
+    return (
+        "const ATOM_Q=[" + ",".join(rows) + "];\n"
+        "const ATOMS=ATOM_Q.map(([xn,xd,yn,yd,w])=>[xn/xd,yn/yd,w]);"
+    )
 
 
 def coarsening_rows() -> list[CoarseningRow] | None:
@@ -435,6 +465,8 @@ def substitutions(facts: Facts, static: Path) -> dict[str, str]:
         "GAP_BEFORE": decimal(gap_before),
         "HALVING_B_DROP": halving_b,
         "HALVING_MASS_DROP": halving_mass,
+        "BELOW_ONE": BELOW_ONE,
+        "NEAR_LIMIT": NEAR_LIMIT,
         "COARSEN_ALT": alt,
         "COARSEN_BARS": bars,
         "COARSEN_VALUES": values,

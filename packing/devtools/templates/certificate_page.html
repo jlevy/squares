@@ -162,6 +162,22 @@
   width: 100%;
 }
 .stage canvas:active { cursor: grabbing; }
+.stage-tip { position: relative; }
+.tip {
+  background: var(--kpress-doc-bg);
+  border: 1px solid var(--kpress-doc-border-hairline);
+  border-radius: var(--kpress-radius-sm);
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  line-height: 1.35;
+  padding: 0.3rem 0.45rem;
+  pointer-events: none;
+  position: absolute;
+  transform: translate(-50%, -125%);
+  white-space: nowrap;
+  z-index: 2;
+}
+.tip .tip-w { color: var(--kpress-doc-muted); display: block; margin-block-start: 0.1rem; }
 .panel {
   border-inline-start: 1px solid var(--kpress-doc-border);
   display: flex;
@@ -186,9 +202,9 @@
 }
 .mass-val .katex { font-size: 1em; }
 .mass-dec {
-  color: var(--kpress-doc-muted);
-  font-size: var(--kpress-font-size-tiny);
-  margin-block-start: 0.2rem;
+  color: var(--kpress-doc-text);
+  font-size: var(--kpress-font-size-large);
+  margin-block-start: 0.35rem;
 }
 .verdict {
   border-radius: var(--kpress-radius-sm);
@@ -205,8 +221,8 @@
   color: var(--kpress-doc-accent);
 }
 .verdict.no {
-  background: color-mix(in srgb, var(--kpress-doc-danger) 12%, transparent);
-  color: var(--kpress-doc-danger);
+  background: color-mix(in srgb, var(--cert-below) 16%, transparent);
+  color: var(--cert-below);
 }
 .verdict.out { background: var(--kpress-doc-code-bg); color: var(--kpress-doc-muted); }
 
@@ -267,6 +283,8 @@
    read as a separate instrument from the mass it measures. */
 :root {
   --cert-probe: oklch(55% 0.145 52);
+  --cert-below: {{BELOW_ONE}};
+  --cert-near: {{NEAR_LIMIT}};
   --cert-probe-wash: color-mix(in srgb, var(--cert-probe) 14%, transparent);
   --cert-accent-wash: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
 }
@@ -385,7 +403,8 @@
     <span class="caps">Figure 2</span><span class="tag">C0</span>
     <span class="fig-title">The atom field</span>
   </div>
-  <div class="stage"><canvas id="field" width="1040" height="1040"></canvas></div>
+  <div class="stage stage-tip"><canvas id="field" width="1040" height="1040"></canvas>
+      <div class="tip" id="field-tip" hidden></div></div>
   <figcaption class="kpress-figcaption">Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
   corners, where a square has least room to move, and thins in the middle. The sites and weights are the optimum
   of a covering linear program, rationalised.</figcaption>
@@ -419,7 +438,7 @@
       <div class="readout">
         <span class="caps">Mass covered</span>
         <div class="mass-val" id="mv"></div>
-        <div class="mass-dec" id="md">= 1.000060</div>
+        <div class="mass-dec" id="md"></div>
         <span class="verdict ok" id="vd">Covers ≥ 1</span>
       </div>
       <div class="ctl">
@@ -433,9 +452,9 @@
         <button id="btn-heat" aria-pressed="true">Field</button>
       </div>
       <div class="legend">
-        <span><i style="background:var(--cert-probe)"></i>within 12% of the limit</span>
+        <span><i style="background:var(--cert-near)"></i>within 12% of the limit</span>
         <span><i style="background:var(--kpress-doc-accent)"></i>comfortably above</span>
-        <span><i style="background:var(--kpress-doc-danger)"></i>below 1, which never occurs</span>
+        <span><i style="background:var(--cert-below)"></i>below 1, which never occurs</span>
       </div>
       <p class="hint" id="hint">The shaded background is the covered mass at every centre position, recomputed
       for the direction you choose. The dashed outline is where the square’s centre is allowed to be. Outside
@@ -488,7 +507,8 @@
       <div class="ctl">
         <span class="caps">Net size <span class="tex">K</span></span>
         <div class="btns">
-          <button class="knet" data-k="10" aria-pressed="true">10</button>
+          <button class="knet" data-k="3" aria-pressed="true">3</button>
+          <button class="knet" data-k="10">10</button>
           <button class="knet" data-k="30">30</button>
           <button class="knet" data-k="180">180, the real net</button>
         </div>
@@ -501,7 +521,10 @@
         <dt><span class="tex">B</span> admitted</dt><dd id="s-B"></dd>
         <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod"></dd>
       </dl>
-      <p class="hint">Opens at <span class="tex">K = 10</span>, where the shrink is visible. At
+      <p class="hint">Opens at <span class="tex">K = 3</span>, the coarsest net that still reaches
+      <span class="tex">\pi/4</span>, where <strong>C3</strong> admits only
+      <span class="tex">B \lt 0.8787</span> and the shrink is unmistakable. Drag either square by its
+      handle. At
       <span class="tex">K = 180</span>, the net the certificate uses, the two squares are
       indistinguishable.</p>
     </div>
@@ -618,6 +641,8 @@ const SCALE = {{SCALE_JS}}, L = {{L_JS}}, B = {{B_JS}}, HALF = B / 2;
 const LIMIT = 207107 / 500000, STEPS = {{N_DIRECTIONS_MAX}};
 
 const gcd = (a, b) => b ? gcd(b, a % b) : a;
+const reduce = (n, d) => { const g = gcd(n, d) || 1; return [n / g, d / g]; };
+const fracTex = (n, d) => (d === 1 ? String(n) : `\\tfrac{${n}}{${d}}`);
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const tex = (el, s, d) => { try { katex.render(s, el, { displayMode: !!d, throwOnError: false }); }
                             catch (e) { el.textContent = s; } };
@@ -647,38 +672,86 @@ function inset() { return B * (cs + sn) / 2; }
 function admissible(x, y) { const h = inset();
   return x >= h - 1e-12 && x <= L - h + 1e-12 && y >= h - 1e-12 && y <= L - h + 1e-12; }
 
-/* ---------- Figure 2 ---------- */
+/* ---------- Figure 2: the atom field ---------- */
+const fc = document.getElementById('field'), fg = fc.getContext('2d');
+const FS = fc.width, FM = FS * 0.055, FPX = FS - 2 * FM, FSC = FPX / L;
+const MAXW = Math.max(...ATOMS.map(a => a[2]));
+const fieldTip = document.getElementById('field-tip');
+let hovered = -1;
+
 function drawField() {
-  const c = document.getElementById('field'), g = c.getContext('2d'), S = c.width, m = S * 0.055;
-  const px = S - 2 * m, sc = px / L;
-  g.clearRect(0, 0, S, S);
-  g.fillStyle = css('--kpress-doc-bg'); g.fillRect(0, 0, S, S);
-  g.strokeStyle = css('--kpress-doc-border'); g.lineWidth = 1; g.setLineDash([4, 6]);
-  for (let i = 1; i <= 3; i++) { const p = m + px * i / L;
-    g.beginPath(); g.moveTo(p, m); g.lineTo(p, m + px); g.moveTo(m, p); g.lineTo(m + px, p); g.stroke(); }
-  g.setLineDash([]);
-  g.strokeStyle = css('--kpress-doc-border-hairline'); g.lineWidth = 2; g.strokeRect(m, m, px, px);
-  const maxw = Math.max(...ATOMS.map(a => a[2]));
-  g.fillStyle = css('--kpress-doc-accent');
-  for (const [x, y, w] of ATOMS) {
-    const r = Math.sqrt(w / maxw) * sc * 0.115 + sc * 0.008;
-    g.globalAlpha = 0.35 + 0.55 * Math.sqrt(w / maxw);
-    g.beginPath(); g.arc(m + x * sc, m + (L - y) * sc, r, 0, 6.2832); g.fill();
-  }
-  g.globalAlpha = 1;
+  fg.clearRect(0, 0, FS, FS);
+  fg.fillStyle = css('--kpress-doc-bg'); fg.fillRect(0, 0, FS, FS);
+  fg.strokeStyle = css('--kpress-doc-border'); fg.lineWidth = 1; fg.setLineDash([4, 6]);
+  for (let i = 1; i <= 3; i++) { const p = FM + FPX * i / L;
+    fg.beginPath(); fg.moveTo(p, FM); fg.lineTo(p, FM + FPX); fg.moveTo(FM, p); fg.lineTo(FM + FPX, p); fg.stroke(); }
+  fg.setLineDash([]);
+  fg.strokeStyle = css('--kpress-doc-border-hairline'); fg.lineWidth = 2; fg.strokeRect(FM, FM, FPX, FPX);
+  ATOMS.forEach(([x, y, w], i) => {
+    const share = Math.sqrt(w / MAXW);
+    const r = share * FSC * 0.115 + FSC * 0.008;
+    const on = i === hovered;
+    fg.fillStyle = on ? css('--cert-probe') : css('--kpress-doc-accent');
+    fg.globalAlpha = on ? 1 : 0.35 + 0.55 * share;
+    fg.beginPath(); fg.arc(FM + x * FSC, FM + (L - y) * FSC, on ? r + FSC * 0.012 : r, 0, 6.2832); fg.fill();
+  });
+  fg.globalAlpha = 1;
 }
+
+/* The atom under the pointer, or -1. Ties go to the heavier one, since a small
+   atom drawn on top of a large one is the harder of the two to aim at. */
+function atomAt(cx, cy) {
+  let best = -1, bestScore = Infinity;
+  for (let i = 0; i < ATOMS.length; i++) {
+    const [x, y, w] = ATOMS[i];
+    const dx = FM + x * FSC - cx, dy = FM + (L - y) * FSC - cy;
+    const d = Math.hypot(dx, dy);
+    const r = Math.sqrt(w / MAXW) * FSC * 0.115 + FSC * 0.008;
+    const reach = Math.max(r, FSC * 0.035);
+    if (d <= reach && d - r < bestScore) { best = i; bestScore = d - r; }
+  }
+  return best;
+}
+
+function showAtomTip(i, clientX, clientY) {
+  const [xn, xd, yn, yd, w] = ATOM_Q[i];
+  const [wn, wd] = reduce(w, SCALE);
+  const box = fc.getBoundingClientRect();
+  fieldTip.style.left = `${clientX - box.left}px`;
+  fieldTip.style.top = `${clientY - box.top}px`;
+  fieldTip.innerHTML = '<span class="tip-xy"></span><span class="tip-w"></span>';
+  tex(fieldTip.querySelector('.tip-xy'), `(${fracTex(xn, xd)},\\; ${fracTex(yn, yd)})`);
+  tex(fieldTip.querySelector('.tip-w'), `w = ${fracTex(wn, wd)}`);
+  fieldTip.hidden = false;
+}
+
+fc.addEventListener('pointermove', e => {
+  const box = fc.getBoundingClientRect();
+  const cx = (e.clientX - box.left) / box.width * FS, cy = (e.clientY - box.top) / box.height * FS;
+  const i = atomAt(cx, cy);
+  fc.style.cursor = i < 0 ? 'default' : 'crosshair';
+  if (i !== hovered) { hovered = i; drawField(); }
+  if (i < 0) fieldTip.hidden = true; else showAtomTip(i, e.clientX, e.clientY);
+});
+fc.addEventListener('pointerleave', () => {
+  if (hovered !== -1) { hovered = -1; drawField(); }
+  fieldTip.hidden = true;
+});
 
 /* ---------- Figure 3 ---------- */
 const pv = document.getElementById('prove'), pg = pv.getContext('2d');
 const PS = pv.width, PM = PS * 0.06, PPX = PS - 2 * PM, PSC = PPX / L;
 const RES = 230, TIGHT = 1.12;
 let probe = [{{WITNESS_X_JS}}, {{WITNESS_Y_JS}}], curK = 0, showHeat = true, heat = null;
+/* Handle geometry in container units, so it scales with the drawing. */
+const HGAP = 0.3, HR = 0.075;
+let mode = 'none', handleShown = false, handleHot = false;
 
 function buildHeat() {
   const img = pg.createImageData(RES, RES), d = img.data;
   const parse = v => { const m = document.createElement('canvas').getContext('2d');
     m.fillStyle = v; m.fillRect(0, 0, 1, 1); return Array.from(m.getImageData(0, 0, 1, 1).data).slice(0, 3); };
-  const cLo = parse(css('--kpress-doc-danger')), cTight = parse(css('--cert-probe')),
+  const cLo = parse(css('--cert-below')), cTight = parse(css('--cert-near')),
         cA = parse(css('--cert-accent-wash')), cB = parse(css('--kpress-doc-accent')), cOut = parse(css('--kpress-doc-border'));
   const h = inset();
   const vals = new Float32Array(RES * RES); let hi = 1;
@@ -730,13 +803,43 @@ function drawProver() {
   pg.strokeStyle = css('--cert-probe'); pg.lineWidth = 2.5;
   pg.strokeRect(-HALF * PSC, -HALF * PSC, B * PSC, B * PSC);
   pg.restore();
+
+  if (handleShown) {
+    const [hx, hy] = handlePoint();
+    const ex = probe[0] - sn * HALF, ey = probe[1] + cs * HALF;
+    pg.strokeStyle = css('--cert-probe'); pg.lineWidth = 1.5;
+    pg.beginPath(); pg.moveTo(X(ex), Y(ey)); pg.lineTo(X(hx), Y(hy)); pg.stroke();
+    pg.fillStyle = handleHot || mode === 'rotate' ? css('--cert-probe') : css('--kpress-doc-bg');
+    pg.beginPath(); pg.arc(X(hx), Y(hy), HR * PSC, 0, 6.2832); pg.fill(); pg.stroke();
+  }
+}
+
+/* The rotation handle sits off the square's own top edge, so it turns with it. */
+function handlePoint() {
+  return [probe[0] - sn * (HALF + HGAP), probe[1] + cs * (HALF + HGAP)];
+}
+
+/* A square at any angle reduces onto the net's arc by the container's own
+   symmetry, which is the reduction C0 pays for; the handle does it live, so a
+   drag past 45 degrees folds back rather than leaving the net. */
+function nearestNet(angle) {
+  let a = ((angle % (Math.PI / 2)) + Math.PI / 2) % (Math.PI / 2);
+  if (a > Math.PI / 4) a = Math.PI / 2 - a;
+  let best = 0, bestGap = Infinity;
+  for (let k = 0; k <= STEPS; k++) {
+    const gap = Math.abs(2 * Math.atan(netT(k)) - a);
+    if (gap < bestGap) { bestGap = gap; best = k; }
+  }
+  return best;
 }
 
 function updateReadout() {
   const m = massAt(probe[0], probe[1]);
-  const g0 = gcd(m, SCALE) || 1;
-  tex(document.getElementById('mv'), m === 0 ? '0' : `\\frac{${m / g0}}{${SCALE / g0}}`);
-  document.getElementById('md').textContent = '= ' + (m / SCALE).toFixed(6);
+  /* Always over SCALE, never reduced: the denominator is the unit the whole
+     certificate is counted in, and a reduced one would change under the reader
+     as they drag, which is the opposite of what the readout is for. */
+  tex(document.getElementById('mv'), `\\frac{${m}}{${SCALE}}`);
+  tex(document.getElementById('md'), `= ${(m / SCALE).toFixed(6)}`);
   const vd = document.getElementById('vd');
   if (!admissible(probe[0], probe[1])) { vd.className = 'verdict out'; vd.textContent = 'Outside the domain'; }
   else if (m >= SCALE) { vd.className = 'verdict ok'; vd.textContent = 'Covers ≥ 1'; }
@@ -757,18 +860,55 @@ function refresh(rebuild) {
   drawProver(); updateReadout(); updateK();
 }
 
-let dragging = false;
-function place(e) {
-  const r = pv.getBoundingClientRect();
-  const x = ((e.clientX - r.left) / r.width * PS - PM) / PSC;
-  const y = L - ((e.clientY - r.top) / r.height * PS - PM) / PSC;
+function toWorld(e) {
+  const box = pv.getBoundingClientRect();
+  return [((e.clientX - box.left) / box.width * PS - PM) / PSC,
+          L - ((e.clientY - box.top) / box.height * PS - PM) / PSC];
+}
+function place(x, y) {
   probe = [Math.min(L, Math.max(0, x)), Math.min(L, Math.max(0, y))];
   drawProver(); updateReadout();
 }
-pv.addEventListener('pointerdown', e => { dragging = true; pv.setPointerCapture(e.pointerId); place(e); });
-pv.addEventListener('pointermove', e => { if (dragging) place(e); });
-pv.addEventListener('pointerup', () => { dragging = false; });
-pv.addEventListener('pointercancel', () => { dragging = false; });
+function rotateTo(x, y) {
+  const k = nearestNet(Math.atan2(-(x - probe[0]), y - probe[1]));
+  if (k === curK) { drawProver(); return; }
+  curK = k;
+  document.getElementById('kslider').value = String(k);
+  setDir(k);
+  drawProver(); updateReadout(); updateK();
+}
+function overHandle(x, y) {
+  const [hx, hy] = handlePoint();
+  return Math.hypot(x - hx, y - hy) <= HR * 1.9;
+}
+
+pv.addEventListener('pointerdown', e => {
+  const [x, y] = toWorld(e);
+  mode = overHandle(x, y) ? 'rotate' : 'move';
+  pv.setPointerCapture(e.pointerId);
+  if (mode === 'move') place(x, y); else drawProver();
+});
+pv.addEventListener('pointermove', e => {
+  const [x, y] = toWorld(e);
+  if (mode === 'move') { place(x, y); return; }
+  if (mode === 'rotate') { rotateTo(x, y); return; }
+  const hot = overHandle(x, y);
+  if (hot !== handleHot || !handleShown) { handleHot = hot; handleShown = true; drawProver(); }
+  pv.style.cursor = hot ? 'grab' : 'crosshair';
+});
+function endDrag() {
+  /* The field is a function of the direction, so a rotation invalidates it. It
+     is rebuilt on release rather than per frame: the rebuild is 53,000 cells. */
+  const wasRotating = mode === 'rotate';
+  mode = 'none';
+  if (wasRotating && showHeat) { buildHeat(); drawProver(); }
+}
+pv.addEventListener('pointerup', endDrag);
+pv.addEventListener('pointercancel', endDrag);
+pv.addEventListener('pointerleave', () => {
+  if (mode !== 'none') return;
+  if (handleShown) { handleShown = false; handleHot = false; drawProver(); }
+});
 
 document.getElementById('kslider').addEventListener('input', e => { curK = +e.target.value; refresh(true); });
 document.getElementById('btn-tight').addEventListener('click', () => {
@@ -794,10 +934,55 @@ document.getElementById('btn-heat').addEventListener('click', e => {
 });
 
 /* ---------- Figure 4 ---------- */
-let KNET = 10;
+let KNET = 3;
+const sk = document.getElementById('shrink'), skg = sk.getContext('2d');
+const SKS = sk.width, SKC = SKS / 2, SKSIDE = SKS * 0.62, SKGAP = SKS * 0.055;
+const SKHR = SKS * 0.028;
+let phiMode = 'none', phiShown = false, phiHot = false;
+
+const phiInput = () => document.getElementById('phi');
+const phiNow = () => (+phiInput().value / 10) * Math.PI / 180;
+/* The handle rides the square's own top edge, so it turns with it. */
+function phiHandlePoint(phi) {
+  const r = SKSIDE / 2 + SKGAP;
+  return [SKC - r * Math.sin(phi), SKC - r * Math.cos(phi)];
+}
+function skToCanvas(e) {
+  const box = sk.getBoundingClientRect();
+  return [(e.clientX - box.left) / box.width * SKS, (e.clientY - box.top) / box.height * SKS];
+}
+function overPhiHandle(cx, cy) {
+  const [hx, hy] = phiHandlePoint(phiNow());
+  return Math.hypot(cx - hx, cy - hy) <= SKHR * 2;
+}
+function setPhi(cx, cy) {
+  /* Clamped to the arc the net covers: past 45 degrees the container's symmetry
+     reflects a square back onto it, so there is nothing beyond to show here. */
+  const phi = Math.min(Math.PI / 4, Math.max(0, Math.atan2(SKC - cx, SKC - cy)));
+  phiInput().value = String(Math.round(phi * 180 / Math.PI * 10));
+  shrinkDraw();
+}
+sk.addEventListener('pointerdown', e => {
+  const [cx, cy] = skToCanvas(e);
+  if (!overPhiHandle(cx, cy)) return;
+  phiMode = 'rotate'; sk.setPointerCapture(e.pointerId); setPhi(cx, cy);
+});
+sk.addEventListener('pointermove', e => {
+  const [cx, cy] = skToCanvas(e);
+  if (phiMode === 'rotate') { setPhi(cx, cy); return; }
+  const hot = overPhiHandle(cx, cy);
+  if (hot !== phiHot || !phiShown) { phiHot = hot; phiShown = true; shrinkDraw(); }
+  sk.style.cursor = hot ? 'grab' : 'default';
+});
+sk.addEventListener('pointerup', () => { phiMode = 'none'; });
+sk.addEventListener('pointercancel', () => { phiMode = 'none'; });
+sk.addEventListener('pointerleave', () => {
+  if (phiMode !== 'none') return;
+  if (phiShown) { phiShown = false; phiHot = false; shrinkDraw(); }
+});
 function shrinkDraw() {
-  const c = document.getElementById('shrink'), g = c.getContext('2d'), S = c.width;
-  const phi = (+document.getElementById('phi').value / 10) * Math.PI / 180;
+  const c = sk, g = skg, S = SKS;
+  const phi = phiNow();
   let bestK = 0, bestD = Infinity;
   for (let k = 0; k <= KNET; k++) { const th = 2 * Math.atan(LIMIT * k / KNET);
     if (Math.abs(th - phi) < bestD) { bestD = Math.abs(th - phi); bestK = k; } }
@@ -822,6 +1007,16 @@ function shrinkDraw() {
   g.strokeStyle = css('--cert-probe'); g.lineWidth = 3;
   g.strokeRect(-Bk * sc / 2, -Bk * sc / 2, Bk * sc, Bk * sc);
   g.restore(); g.restore();
+
+  if (phiShown) {
+    const [hx, hy] = phiHandlePoint(phi);
+    const ex = SKC - (SKSIDE / 2) * Math.sin(phi), ey = SKC - (SKSIDE / 2) * Math.cos(phi);
+    g.strokeStyle = css('--kpress-doc-border-hairline'); g.lineWidth = 2;
+    g.beginPath(); g.moveTo(ex, ey); g.lineTo(hx, hy); g.stroke();
+    g.fillStyle = phiHot || phiMode === 'rotate'
+      ? css('--kpress-doc-border-hairline') : css('--kpress-doc-bg');
+    g.beginPath(); g.arc(hx, hy, SKHR, 0, 6.2832); g.fill(); g.stroke();
+  }
 
   const deg = r => (r * 180 / Math.PI).toFixed(3);
   tex(document.getElementById('s-phi'), `${deg(phi)}^{\\circ}`);
