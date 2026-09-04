@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 436
+count: 438
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13701,3 +13701,91 @@ defects:
     16,562,293, both VERIFIED, check.py exit 0.
   status: fixed
   recorded_in: docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md
+- id: D-437
+  title: A strong-duality test asserted float equality and failed on half of CI runs
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: >-
+    since tests/test_fractional_generate.py was written on 2026-09-04, about eight hours,
+    of which roughly a third of the block was spent chasing it
+  severity: high
+  what: >-
+    `test_the_dual_of_a_converged_solve_matches_its_objective` asserted strong duality as
+    an exact float comparison, `float(solution.duals.sum()) == np.float64(solution.objective)`.
+    Strong duality is exact over the rationals, but both sides are float sums the LP solver
+    accumulates in an order it chooses, and the two orders need not agree to the last bit.
+    CI failed it at 4.000000000000001 against 4.0 -- one ulp.
+  consequence: >-
+    It passed locally every time and failed on roughly half of CI runs: red at 4482cf7a,
+    green at 31775018, red again at 2cd9d7ef on a commit that changed one README. The
+    alternation was misread as a real failure that some intervening change had fixed,
+    which is worse than a test that fails every time, because it invites a causal story
+    about the commits either side of it.
+    The cost was not the defect but the search. It sat behind the 1800 s timeout (D-438's
+    subject) until the fast tier was trimmed, and after that it was in every failing log
+    -- as `command exited 1`, the assertion text, and a `FAILED tests/...` line -- about
+    640 lines from the end of a 748-line file. Four log fetches read the tail and stopped
+    short of it. Two causes were proposed from reasoning instead and both were wrong, and
+    a third, that packing-validate hides pytest output, was wrong too and had to be
+    retracted from the pull request body. `_run` appends a failed subprocess's output to
+    its failure detail; the record was complete throughout.
+  fix: >-
+    Fixed on 2026-09-04. The comparison is now scale-relative, `abs(dual_total - objective)
+    <= 1e-9 * max(1, abs(objective))`, with the failure message printing both values and
+    the gap. A duality gap that meant anything would be many orders of magnitude larger
+    than that tolerance, so the test gives up nothing and stops depending on which order
+    HiGHS happened to sum in.
+  regression: >-
+    The test passes in 0.51 s and the whole of tests/test_fractional_generate.py in 72 s.
+    The tolerance is relative to the objective's scale, so it holds at the larger
+    objectives the n = 12 and n = 17 ladders reach rather than only at the value 4 this
+    fixture produces.
+  status: fixed
+  recorded_in: packing/tests/test_fractional_generate.py
+- id: D-438
+  title: The fast test tier outgrew its budget as the certificates grew, and hid a failure
+  date: '2026-09-04'
+  layer: tooling
+  class: performance
+  detected_by: gate
+  latent_for: >-
+    accumulated across the block as the ladders were climbed; first fatal once the
+    certificates passed roughly 600 atoms
+  severity: high
+  what: >-
+    `packing-validate`'s `fast behavioral tests` step consumed its entire 1800 s cap:
+    1801.01 s against a 1801.84 s total, while every other step in the tier ran in under
+    40 s. The cost scales with the atom count, and the certificates grew by an order of
+    magnitude during the block -- Massaccesi's 168-atom fixture decides in about 25 s,
+    which is why full 181-direction decisions looked affordable when these tests were
+    written, but the retained n = 12 certificate reached 681 atoms and n = 11's
+    calibration rung 373, both still deciding on the full net in the fast tier. Measured
+    against the n = 17 pair at 708 atoms, which takes about thirteen minutes, those two
+    alone accounted for most of the budget; four full doubled-net interval runs at 361
+    directions each finished it off.
+  consequence: >-
+    Two costs, and the second was the larger. CI was red, and the timeout truncated pytest
+    before it printed a summary, so the genuine test failure underneath it (D-437) had no
+    name for hours. Every run either timed out without naming a test or was cancelled by a
+    push. Fixing the budget did not fix CI; it made CI able to say what was wrong, which
+    is a different thing and was reported as such.
+  fix: >-
+    Fixed on 2026-09-04 in 4482cf7a. Nine full-net decisions moved behind the
+    `exhaustive_exact` marker -- five exact sweeps and four interval doubled-net runs --
+    each declared in the registry with what it costs. Nothing is lost: every one keeps a
+    fast counterpart in the same file that pins what its record claims, or decides it on a
+    coarse net. The tier went 1801 s to 1101 s to 948 s.
+    One of those fast counterparts was wrong on the first attempt and the way it was wrong
+    is worth keeping: deciding the calibration rung on a coarse net by slicing the
+    half-tangents asserted the whole verdict, which fails, because a net that coarse fails
+    C3 by construction -- D grows with the gap and B(1 + D) then exceeds 1. The rung test
+    beside it had solved this already by asserting C4's value rather than the verdict.
+    Coverage is the claim a coarse decision can carry; containment is not.
+  regression: >-
+    The fractional tier runs 85 tests in 176 s with 9 deselected, and the whole
+    non-exhaustive suite 1699 tests in 831 s locally. The marker registry test pins every
+    marked node by name, so a future slow decision cannot join the fast tier silently.
+  status: fixed
+  recorded_in: packing/tests/test_module_boundaries.py

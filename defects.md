@@ -2,7 +2,7 @@
 
 # Defect log
 
-436 defects recorded across the packing toolchain.
+438 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -23,9 +23,9 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `inspection` | 46 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 62 | the automated test suite |
+| `gate` | 64 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 62 of 436, and none of the 92 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 64 of 438, and none of the 92 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 62 of 436, and none of
 | quench | 23 |
 | verifier | 7 |
 | record | 132 |
-| tooling | 156 |
+| tooling | 158 |
 | docs | 107 |
 
 ## By kind
@@ -45,8 +45,8 @@ The line worth reading twice: **the automated gate caught 62 of 436, and none of
 | soundness | 92 |
 | validity | 116 |
 | bookkeeping | 158 |
-| robustness | 55 |
-| performance | 15 |
+| robustness | 56 |
+| performance | 16 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -672,6 +672,8 @@ This is the actionable list.
 | [D-434](packing/src/sqpack/fractional/generate.py) | 2026-09-04 | tooling | validity | conservative | `inspection` | high | fixed | The covering LP's separation oracle sees fewer placements than the verifier decides |
 | [D-435](packing/src/sqpack/fractional/interval.py) | 2026-09-04 | verifier | soundness | flattering | `inspection` | high | fixed | An enclosing interval run accepted a certificate whose least mass it had pinned below one |
 | [D-436](docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) | 2026-09-04 | verifier | bookkeeping |  | `review` | medium | fixed | The third-party package misnamed its own control and refused malformed files by traceback |
+| [D-437](packing/tests/test_fractional_generate.py) | 2026-09-04 | tooling | robustness |  | `gate` | high | fixed | A strong-duality test asserted float equality and failed on half of CI runs |
+| [D-438](packing/tests/test_module_boundaries.py) | 2026-09-04 | tooling | performance |  | `gate` | high | fixed | The fast test tier outgrew its budget as the certificates grew, and hid a failure |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
