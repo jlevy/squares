@@ -301,7 +301,7 @@ def test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net() -> N
 
 @pytest.mark.exhaustive_exact
 def test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net() -> None:
-    """The interval-certified decision of s(17) >= 229/50, every direction.
+    """The interval-certified decision of s(17) >= 459/100, every direction.
 
     T-019 stands at C4 on the strength of this route, and until this test the
     only n = 17 certificate it decided here was Massaccesi's published control.
@@ -313,9 +313,9 @@ def test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net() -> N
     assert len(verdict.directions) == 361
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
     enclosure = verdict.enclosure
-    assert enclosure == (Fraction(12501, 12500), Fraction(12501, 12500))
+    assert enclosure == (Fraction(200009, 200000), Fraction(200009, 200000))
     assert enclosure is not None
-    assert certificate.bounded_side == Fraction(229, 50)
+    assert certificate.bounded_side == Fraction(459, 100)
     assert declared_n17()["least_cell_mass"] == str(enclosure[0])
 
 

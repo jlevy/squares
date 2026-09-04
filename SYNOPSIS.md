@@ -71,7 +71,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | --- | --- | --- | --- | --- | --- | --- |
 | [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 79/20, by a first-party weighted fractional unavoidable-set certificate at container side 79/20 = 3.95. |
-| [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 229/50, and s(18) >= 229/50 and s(19) >= 229/50 by monotonicity, from a first-party weighted fractional unavoidable-set certificate at container side 229/50 = 4.58. |
+| [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
 | [T-014](packing/frontier/RESULTS.md) | 5 | `V3` | `C5` | `S3` | `apparently-novel` | For s = 2 + sqrt(2)/2 and Goebel’s labeled pose P0 in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) -- closed unit squares in [0, s]^2, pairwise disjoint interiors -- equivalently there is no nonconstant continuous feasible path from P0 and no sequence of distinct feasible poses converging to it; hence the n = 5 optimum is rigid at fixed side in the catalogue’s sense. |
 | [T-001](packing/frontier/RESULTS.md) | 17 | `V4` | `C4` | `S3` | `apparently-novel` | Sixteen points make [0, 4426213/1000000]^2 unavoidable for open squares of side above one, so s(17) >= 4426213/1000000 = 4.426213. |
@@ -3684,9 +3684,9 @@ bound since Stromquist stated `2 + 4/sqrt(5)` in 2003 and the only S5 result in 
 register, `n = 11` being the smallest open case.
 `s(12) >= 79/20` is [T-017](packing/frontier/RESULTS.md), the first bound ever proved
 about twelve squares rather than inherited from eleven.
-`s(17) >= 229/50`, with `n = 18` and `n = 19` by monotonicity, is
-[T-019](packing/frontier/RESULTS.md) and displaces Massaccesi’s published `4.5058`, the
-only value in print this project has replaced.
+`s(17) >= 459/100`, and `n = 18` and `n = 19` at the same side without a monotonicity
+step, is [T-019](packing/frontier/RESULTS.md) and displaces Massaccesi’s published
+`4.5058` by `0.0842` — the only value in print this project has replaced.
 All three stand at V4/C4: each was decided twice from frozen bytes by an exact
 event-cell sweep and by an interval branch and bound with directed rounding, methods
 that share no modelling assumption and fail differently, agreeing on the least covered
@@ -3721,7 +3721,7 @@ reach it. For `n = 12` that is decisive rather than academic.
 The ceiling is `4B = 3.9908`, the conjectured value is `4`, and so no certificate of
 this shape will ever settle twelve squares, however fine the net or the site set —
 `79/20` has `0.0408` of runway and that is all there is.
-`n = 11` and `n = 17` are not foreclosed: their runways are `0.1808` and `0.4085`, and
+`n = 11` and `n = 17` are not foreclosed: their runways are `0.1808` and `0.3985`, and
 both truths sit below their grid bounds.
 
 **Joining that ceiling against the register says the lane has been looking in the wrong

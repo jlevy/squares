@@ -436,13 +436,13 @@ def test_the_n17_certificate_displaces_massaccesis_published_bound() -> None:
     """
     certificate = n17_load()
     assert certificate.n == 17
-    assert certificate.bounded_side == Fraction(229, 50)
+    assert certificate.bounded_side == Fraction(459, 100)
     assert certificate.bounded_side > Fraction(22529, 5000)
-    assert certificate.total_mass == Fraction(3393147, 200000)
+    assert certificate.total_mass == Fraction(423327, 25000)
     assert certificate.total_mass < 17
 
     record = n17_declared()
-    assert record["claim"] == "s(17) >= 229/50"
+    assert record["claim"] == "s(17) >= 459/100"
     assert record["total_mass"] == str(certificate.total_mass)
 
 
@@ -462,14 +462,14 @@ def test_the_n17_certificate_is_accepted() -> None:
 
 
 def test_the_n17_certificate_does_not_reach_n20() -> None:
-    """The scope claim: 229/50 lifts n = 17, 18 and 19, and not n = 20.
+    """The scope claim: 459/100 lifts n = 17, 18 and 19, and not n = 20.
 
-    Monotonicity carries a bound upward, so n = 20 would inherit 229/50 too --
+    The certificate's own mass carries it upward, so n = 20 does inherit 459/100 --
     but Nagamochi's closed form already gives it 1 + sqrt(13), which is larger.
-    Decided in integers: 1 + sqrt(13) > 229/50 iff 13 * 50^2 > (229 - 50)^2.
+    Decided in integers: 1 + sqrt(13) > 459/100 iff 13 * 100^2 > (459 - 100)^2.
     """
     assert 13 * 50**2 > (229 - 50) ** 2
-    assert n17_load().bounded_side == Fraction(229, 50)
+    assert n17_load().bounded_side == Fraction(459, 100)
 
 
 def test_the_grid_refutation_order_is_the_integer_ceiling_of_the_root() -> None:

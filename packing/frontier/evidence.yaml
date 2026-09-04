@@ -1379,20 +1379,25 @@ evidence:
     replay: uv run --frozen --all-extras python -m cases.n17_fractional_certificate
     replay_status: passed
     limitations: >-
-      Decides five conditions in exact rational arithmetic over 1173 atoms on a
+      Decides five conditions in exact rational arithmetic over 1184 atoms on a
       D4-symmetric site set: the atom multiset is closed under the container's D4 group,
-      the total mass is 3393147/200000 = 16.965735 and so strictly below 17, the
+      the total mass is 423327/25000 = 16.933080 and so strictly below 17, the
       181-direction net reaches pi/4, containment B(1 + D) < 1 holds at B = 9977/10000,
       and every reachable event cell at every net direction carries mass at least 1, the
-      least being 12501/12500. The bound proved is the container side itself, 229/50.
+      least being 200009/200000. The bound proved is the container side itself, 459/100.
       It displaces a published value rather than an inherited or closed-form one, so it
       was decided from its bytes by two verifiers that fail differently: the exact
-      event-cell sweep and the interval branch and bound, which agree on the least
-      covered mass exactly. The rung below it, 451/100, is retained and carries a third
-      decision -- the evaluator written independently from the theorem statement with the
-      implementation withheld, which took 2709 s summing masses directly over 181
-      directions and returned 200017/200000 exactly, and which reproduces Massaccesi's
-      own published 22529/5000 from his constants as its control.
+      event-cell sweep, which accepted in 1473 s at 200009/200000, and the interval
+      branch and bound, which certified all 361 doubled-net directions in 3,683,951
+      boxes with none stalled and enclosed the same value with width zero. Both ran
+      through devtools.decide_certificate, which reads the file back and refuses unless
+      the two agree on the value and not merely on the verdict.
+      Two rungs are retained below it. 229/50 carries the same pair of decisions.
+      451/100 carries a third -- the evaluator written independently from the theorem
+      statement with the implementation withheld, which took 2709 s summing masses
+      directly over 181 directions and returned 200017/200000 exactly, and which
+      reproduces Massaccesi's own published 22529/5000 from his constants as its
+      control.
       Scope note: n = 18 and n = 19 are carried by monotonicity, since a packing of
       n >= 17 unit squares contains a packing of 17. Both previously held 4.5058
       inherited the same way from T-015, so the same single certificate moves all three.
@@ -1439,9 +1444,10 @@ evidence:
       and C0 is not needed at all, which matters because interval arithmetic cannot
       establish the equality C0 asserts.
       Results, 361 of 361 directions certified in every case and none stalled. The three
-      retained top rungs, decided from their frozen bytes: n = 17 at 229/50, 1173 atoms,
-      2,653,407 boxes; n = 12 at 79/20, 969 atoms, 2,666,151 boxes; n = 11 at 381/100,
-      1121 atoms, 1,570,831 boxes. Lower rungs and the control: n = 11 at 19/5 in
+      retained top rungs, decided from their frozen bytes: n = 17 at 459/100, 1184 atoms,
+      3,683,951 boxes; n = 12 at 79/20, 969 atoms, 2,666,151 boxes; n = 11 at 381/100,
+      1121 atoms, 1,570,831 boxes. Lower rungs and the control: n = 17 at 229/50 in
+      2,653,407 boxes, n = 11 at 19/5 in
       1,195,755 boxes, n = 12 at 197/50 in 1,846,439 and at 393/100 in 1,486,159, and
       Massaccesi's published n = 17 certificate -- the control that tests the verifier
       rather than the certificate -- in 966,903 boxes, returning 22529/5000. Box counts
@@ -1449,9 +1455,9 @@ evidence:
       because every one of these runs shared a contended machine.
       In minimisation mode every enclosure of the least covered mass has width zero and
       equals the exact verifier's value to the digit: 4001/4000 at n = 11's top rung,
-      20001/20000 at n = 12's and 12501/12500 at n = 17's, each matching the
-      least_cell_mass its own certificate declares, and 50003/50000 and 100003/100000 at
-      the earlier n = 11 and n = 12 rungs. Refusals: the n = 12 atoms in a
+      20001/20000 at n = 12's and 200009/200000 at n = 17's, each matching the
+      least_cell_mass its own certificate declares, and 12501/12500 at the 229/50 rung,
+      50003/50000 and 100003/100000 at the earlier n = 11 and n = 12 rungs. Refusals: the n = 12 atoms in a
       side-4 container are refuted at direction 0 after 407 boxes, and an atom lowered by
       1/10000 after 127.
       What it does not add: no new bound, and no protection against a wrong theorem

@@ -1,9 +1,12 @@
 """Load the retained n = 17 certificates and hand them to the exact verifier.
 
-Two certificates are retained. `certificate.json` carries the bound the case
-holds; `certificate-451-100.json` is the rung below it, the first value that
-displaced Massaccesi's published 22529/5000 = 4.5058. Both lift n = 18 and
-n = 19 with them by monotonicity.
+Three certificates are retained. `certificate.json` carries the bound the case
+holds; `certificate-229-50.json` and `certificate-451-100.json` are the rungs
+below it, the second of them the first value that displaced Massaccesi's
+published 22529/5000 = 4.5058.
+All three lift n = 18 and n = 19 with them, and not by monotonicity: only C1
+mentions n, so an atom set certifies its side for every integer above its own
+mass, which for each of these is 17 and upward.
 
 The JSON carries exact rationals as strings, so a replay reconstructs the same
 object the generator proposed.
@@ -21,6 +24,7 @@ from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.model import Atom
 
 CERTIFICATE_PATH = Path(__file__).with_name("certificate.json")
+SECOND_RUNG_PATH = Path(__file__).with_name("certificate-229-50.json")
 FIRST_RUNG_PATH = Path(__file__).with_name("certificate-451-100.json")
 
 

@@ -751,13 +751,18 @@ results:
       eleven, and nothing here rules out a site set neither run found.
   - id: T-019
     claim: >-
-      s(17) >= 229/50, and s(18) >= 229/50 and s(19) >= 229/50 by monotonicity, from a
-      first-party weighted fractional unavoidable-set certificate at container side
-      229/50 = 4.58. This displaces Massaccesi's 22529/5000 = 4.5058 (T-015) and the two
-      cases T-016 carried from it, all three of which had held that value since its
-      adoption on 2026-09-03. The movement is +0.0742 at each of the three sizes, and the
-      451/100 rung this result first reached is retained below it. It does
-      not reach n = 20, where Nagamochi's 1 + sqrt(13) = 4.6055... is larger.
+      s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party
+      weighted fractional unavoidable-set certificate at container side 459/100 = 4.59.
+      This displaces Massaccesi's 22529/5000 = 4.5058 (T-015) and the two cases T-016
+      carried from it, all three of which had held that value until 2026-09-04. The
+      movement past the published value is +0.0842 at each of the three sizes. Two rungs
+      are retained below it, 451/100 and 229/50.
+      The three sizes do not need a monotonicity step. Only C1 mentions n among the five
+      conditions, so an atom set of mass 423327/25000 certifies the side for every
+      integer above it, which is 17 and upward; monotonicity would give the same thing
+      and is not what is used.
+      It does not improve n = 20, where Nagamochi's 1 + sqrt(13) = 4.6055... is larger --
+      the certificate does prove s(20) >= 459/100, but that is the weaker statement.
     scope:
       n_values:
         - 17
@@ -773,7 +778,7 @@ results:
         replaces a published value rather than an inherited or closed-form one -- the
         only bound this project has displaced that someone else had put in print. Held
         below S5 because none of n = 17, 18, 19 is the central open case, the movement is
-        0.0742 rather than a qualitative change, the method and its parametrisation are
+        0.0842 rather than a qualitative change, the method and its parametrisation are
         Burns's and Massaccesi's own, and the case does not change character at the new
         value.
       scored: '2026-09-04'
@@ -789,6 +794,7 @@ results:
       - E-fractional-interval-decision
     artifacts:
       - packing/cases/n17_fractional_certificate/certificate.json
+      - packing/cases/n17_fractional_certificate/certificate-229-50.json
       - packing/cases/n17_fractional_certificate/certificate-451-100.json
       - packing/src/sqpack/fractional/colgen.py
     controls:
@@ -797,16 +803,17 @@ results:
       C4 is reached by the interval-certified decision, the first here that is not
       exact-algebraic. C5 needs a review artifact by someone
       outside the project. The bound itself: the retained certificate's total is
-      3393147/200000 = 16.965735, leaving 0.034265 below seventeen, and that margin is
+      423327/25000 = 16.933080, leaving 0.066920 below seventeen, and that margin is
       what a further rung has to be found inside.
       One figure from the ladder is worth carrying, because it contradicts the obvious
-      reading. Margin is not monotone in the side. The 451/100 rung below this one has
-      total 16.593620 and margin 0.406380 -- an order of magnitude more headroom at a
-      side 0.07 lower -- so the covering value at a given side is set by the site set at
-      least as much as by the side itself, and a better site set at a higher side can
-      open the margin back up rather than close it. The n = 12 ladder shows the same
-      shape in the same direction: margin 0.007175 at 197/50, then 0.029410 at the
-      higher 79/20. Massaccesi's own atoms are the reference point and not a limit: they
+      reading. Margin is not monotone in the side. The 451/100 rung two below this one
+      has total 16.593620 and margin 0.406380 -- an order of magnitude more headroom at a
+      side 0.08 lower -- and the 229/50 rung between them has margin 0.034265, half of
+      what 459/100 has at a higher side. So the covering value at a given side is set by
+      the site set at least as much as by the side itself, and a better site set at a
+      higher side can open the margin back up rather than close it. The n = 12 ladder
+      shows the same shape in the same direction: margin 0.007175 at 197/50, then
+      0.029410 at the higher 79/20. Massaccesi's own atoms are the reference point and not a limit: they
       give a covering value of 203/12 at 4.5058, tight by construction, which bounds
       nothing about what a different site set reaches at a larger side.
       A further rung is therefore a search question, and the quantity to read is the
@@ -814,9 +821,9 @@ results:
       The method's own ceiling is not close here. A certificate for n cannot exist above
       ceil(sqrt(n)) * B, a wider container holding ceil(sqrt(n))^2 pairwise disjoint
       axis-parallel B-squares whose masses C4 forces past n; for n = 17 that is
-      5B = 4.9885, so 229/50 still has 0.4085 of runway. Unlike n = 12, where the ceiling
-      sits below the conjectured value and forecloses the case, nothing structural stops
-      this one.
+      5B = 4.9885, so 459/100 still has 0.3985 of runway. Unlike n = 12, where the
+      ceiling sits below the conjectured value and forecloses the case, nothing
+      structural stops this one.
       Where the next rung is worth spending on, though, is not n = 17. Of the five
       conditions only C1 mentions n, and the covering program behind the search does not
       contain n at all -- minimising total mass subject to every admissible B-square
@@ -824,9 +831,9 @@ results:
       proves s(n) >= L for every integer n above its mass, this certificate's 16.965735
       reaching 17, 18 and 19 directly rather than through the monotonicity step the
       composition field records, and a larger n is strictly easier at the same side.
-      The headroom says the rest. n = 17 has 0.0956 to its best known packing at
-      4.675530; n = 18 has 0.2429 to 4.822876 and n = 19 has 0.3056 to 4.885618, both
-      still carrying this certificate's 4.58 with nothing case-specific ever proved for
+      The headroom says the rest. n = 17 has 0.0855 to its best known packing at
+      4.675530; n = 18 has 0.2329 to 4.822876 and n = 19 has 0.2956 to 4.885618, both
+      still carrying this certificate's side with nothing case-specific ever proved for
       either; and n = 20 has 0.3944 to the trivial 5, holding Nagamochi's closed-form
       1 + sqrt(13) = 4.605551. A run at a side whose covering value lands between 17 and
       18 raises n = 18 and leaves n = 17 where it is; one landing between 19 and 20
