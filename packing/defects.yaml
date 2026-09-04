@@ -13550,17 +13550,29 @@ defects:
     accepted stands, `T-017` included. What the gap costs is candidates, not correctness --
     the search optimises against a weaker constraint set than the verifier enforces.
   fix: >-
-    Outstanding, and owned by the overnight Lane A, which is first deciding which cell set
-    the theorem actually requires. That question is open in a way worth stating: if
-    `reduce_to_cells` is itself a strict superset of the placements C4 needs -- cells that
-    only touch the domain, or lie partly outside it -- then the verifier is refusing
-    certificates it should accept, and the repair is to the verifier rather than to the
-    oracle. Either way the two must decide the same set, with the exact sweep remaining the
-    only decider.
+    Fixed on 2026-09-04, in the oracle, after the prior question this entry raised was
+    settled the other way: the verifier is right. `sweep.reduce_to_cells` scores exactly
+    the event cells whose open interior meets the closed centre domain, which is what C4
+    must quantify over -- coverage by closed squares is upper semicontinuous, so the open
+    and closed domains share an infimum and that infimum is attained on an open cell
+    meeting the domain, and the per-slab v-extent is exact by convexity. Checked in exact
+    arithmetic on the retained 113-atom certificate: the sweep's cell set equals the
+    "open cell meets the domain" set, decided independently by polygon clipping and
+    positive area, at directions 0, 1, 45, 90 and 180. `sweep.py` and `certificate.py`
+    were not touched.
+    What changed is `generate.py`'s oracle: a float mirror of the reduction that decides
+    reachability from the domain's edge lines per slab and, crucially, emits each row at a
+    point inside cell-intersect-domain rather than at a cell centre that can lie outside
+    the container. That last detail is why an earlier "meets the domain" attempt reported
+    13.5 and 15.4 on a configuration whose accepted certificate carries 11.9375.
+    The decisive check: on the reproduced old-oracle candidate the old oracle reports
+    1.000025 and sees no violation, while the new one reports 0.945515 at direction 67 --
+    the sweep's own exact value.
   regression: >-
-    A test asserting, on at least three configurations including a diagonal direction, that
-    the oracle's cell set contains the sweep's and its reported minimum never exceeds the
-    sweep's.
-  status: outstanding
+    `tests/test_fractional_generate.py` asserts on three configurations, all including
+    diagonal directions, that the oracle's minimum equals the sweep's and that its cell
+    set contains the sweep's, and that generated rows land inside the domain. The refused
+    candidate the bug produced is retained as a must-refuse fixture.
+  status: fixed
   bead: think-yw5g
   recorded_in: packing/src/sqpack/fractional/generate.py
