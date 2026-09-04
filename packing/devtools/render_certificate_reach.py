@@ -24,7 +24,7 @@ A second join adds what the record now shows about that gap between prize and
 reach: every retained certificate lands within 0.001 of the same fraction of its
 case's best known packing. That regularity is measured from three points, not
 proved, and the document says so plainly where it appears -- see
-`measured_attainment` and `predict_reach` for where the two figures it produces,
+`measured_attainment` and `predicted_reach` for where the two figures it produces,
 `ratio` and `predicted`, come from.
 
 Usage:
@@ -271,8 +271,7 @@ def render(rows: list[dict]) -> str:
         "whichever of the two `limited by` names -- the only honest denominator, since",
         "the other one was never in reach.",
         "",
-        "| n | package | retained lower bound | best packing | ceiling",
-        "| limited by | ratio |",
+        "| n | package | retained lower bound | best packing | ceiling | limited by | ratio |",
         "| ---: | --- | ---: | ---: | ---: | --- | ---: |",
     ]
     for r in measured:
@@ -284,7 +283,7 @@ def render(rows: list[dict]) -> str:
         "",
         "## What three points would predict, if the ratio held",
         "",
-        f"**This is an extrapolation from three points, not a measurement.** The three",
+        "**This is an extrapolation from three points, not a measurement.** The three",
         "packing-limited rows above -- n = 11, n = 17, n = 19 -- land inside a band",
         "0.001 wide, and their mean is the `ratio` this section's numbers all come",
         f"from: `{ratio:.5f}`. That the three numbers are exact rationals decided by",
@@ -309,8 +308,10 @@ def render(rows: list[dict]) -> str:
         "",
         "## Ranked by predicted gain",
         "",
-        "| n | m | lower | best packing | ceiling | limited by | prize | predicted",
-        "| predicted gain |",
+        (
+            "| n | m | lower | best packing | ceiling | limited by | prize | predicted"
+            " | predicted gain |"
+        ),
         "| ---: | ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: |",
     ]
     for r in sorted(predicted_reach(live, ratio), key=lambda r: -r["predicted_gain"]):

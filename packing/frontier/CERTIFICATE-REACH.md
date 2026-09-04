@@ -104,6 +104,117 @@ case is open and its conjectured value is that bound.
 | 5 | 3 | 2.7071 | 2.7071 | 2.9931 | packing | -0.0000 |
 | 10 | 4 | 3.7071 | 3.7071 | 3.9908 | packing | -0.0000 |
 
+## Measured attainment
+
+Every retained first-party fractional certificate, joined against its case's
+best packing and ceiling. `ratio` is the retained lower bound divided by
+whichever of the two `limited by` names -- the only honest denominator, since
+the other one was never in reach.
+
+| n | package | retained lower bound | best packing | ceiling | limited by | ratio |
+| ---: | --- | ---: | ---: | ---: | --- | ---: |
+| 11 | n11_fractional_certificate | 3.8100 | 3.8771 | 3.9908 | packing | 0.98270 |
+| 12 | n12_fractional_certificate | 3.9600 | 4.0000 | 3.9908 | ceiling | 0.99228 |
+| 17 | n17_fractional_certificate | 4.5900 | 4.6755 | 4.9885 | packing | 0.98171 |
+| 19 | n20_fractional_certificate | 4.8000 | 4.8856 | 4.9885 | packing | 0.98248 |
+
+## What three points would predict, if the ratio held
+
+**This is an extrapolation from three points, not a measurement.** The three
+packing-limited rows above -- n = 11, n = 17, n = 19 -- land inside a band
+0.001 wide, and their mean is the `ratio` this section's numbers all come
+from: `0.98229`. That the three numbers are exact rationals decided by
+an exact verifier does not make their mean a rate. No rung in this register
+has ever been claimed from a fitted curve, and this one is not the exception:
+it is offered here as a place to look, not as a result.
+
+The ratio is also not purely about how good a covering value the method can
+reach -- it is an observation about where searches were stopped as much as
+about where they could go. Two of the three runs behind it were halted on
+projected cost before they answered whether their side could be pushed
+higher; only one ran its covering search to a converged optimum (see each
+case's `next_rung` in `frontier/results.yaml`). A ratio built half from where
+searches were stopped and half from where they could go is not a rate to
+spend a rung's confidence on.
+
+`predicted` below is `min(ratio * best_packing, ceiling)` and `predicted
+gain` is `predicted - lower`, clamped at zero. Read them as where to look
+next, never as a result standing in for one: the number to act on when a
+case is actually run is still the restricted optimum a converged search
+reaches, not this extrapolation.
+
+## Ranked by predicted gain
+
+| n | m | lower | best packing | ceiling | limited by | prize | predicted | predicted gain |
+| ---: | ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: |
+| 51 | 8 | 7.1644 | 7.7008 | 7.9816 | packing | +0.5364 | 7.5644 | +0.4000 |
+| 26 | 6 | 5.1231 | 5.6213 | 5.9862 | packing | +0.4982 | 5.5218 | +0.3987 |
+| 39 | 7 | 6.2915 | 6.8107 | 6.9839 | packing | +0.5192 | 6.6901 | +0.3986 |
+| 38 | 7 | 6.1962 | 6.7071 | 6.9839 | packing | +0.5110 | 6.5883 | +0.3922 |
+| 37 | 7 | 6.0990 | 6.5986 | 6.9839 | packing | +0.4996 | 6.4818 | +0.3828 |
+| 68 | 9 | 8.2801 | 8.8034 | 8.9793 | packing | +0.5233 | 8.6475 | +0.3674 |
+| 27 | 6 | 5.2426 | 5.7071 | 5.9862 | packing | +0.4645 | 5.6061 | +0.3634 |
+| 28 | 6 | 5.3589 | 5.8244 | 5.9862 | packing | +0.4655 | 5.7213 | +0.3624 |
+| 66 | 9 | 8.1414 | 8.6569 | 8.9793 | packing | +0.5154 | 8.5036 | +0.3621 |
+| 53 | 8 | 7.3246 | 7.8229 | 7.9816 | packing | +0.4983 | 7.6844 | +0.3598 |
+| 29 | 6 | 5.4721 | 5.9338 | 5.9862 | packing | +0.4617 | 5.8288 | +0.3566 |
+| 50 | 8 | 7.0828 | 7.5714 | 7.9816 | packing | +0.4887 | 7.4374 | +0.3546 |
+| 84 | 10 | 9.1854 | 9.7071 | 9.9770 | packing | +0.5218 | 9.5352 | +0.3499 |
+| 86 | 10 | 9.3066 | 9.8229 | 9.9770 | packing | +0.5163 | 9.6489 | +0.3423 |
+| 67 | 9 | 8.2111 | 8.7071 | 8.9793 | packing | +0.4960 | 8.5529 | +0.3418 |
+| 83 | 10 | 9.1240 | 9.6348 | 9.9770 | packing | +0.5108 | 9.4642 | +0.3402 |
+| 41 | 7 | 6.4772 | 6.9267 | 6.9839 | packing | +0.4495 | 6.8040 | +0.3268 |
+| 52 | 8 | 7.2450 | 7.7071 | 7.9816 | packing | +0.4621 | 7.5706 | +0.3256 |
+| 55 | 8 | 7.4807 | 7.9458 | 7.9816 | packing | +0.4650 | 7.8051 | +0.3243 |
+| 85 | 10 | 9.2462 | 9.7426 | 9.9770 | packing | +0.4964 | 9.5701 | +0.3239 |
+| 69 | 9 | 8.3485 | 8.8272 | 8.9793 | packing | +0.4787 | 8.6709 | +0.3224 |
+| 40 | 7 | 6.3852 | 6.8284 | 6.9839 | packing | +0.4433 | 6.7075 | +0.3224 |
+| 65 | 9 | 8.0711 | 8.5355 | 8.9793 | packing | +0.4645 | 8.3844 | +0.3133 |
+| 30 | 6 | 5.5826 | 6.0000 | 5.9862 | ceiling | +0.4036 | 5.8938 | +0.3112 |
+| 42 | 7 | 6.5678 | 7.0000 | 6.9839 | ceiling | +0.4162 | 6.8761 | +0.3083 |
+| 70 | 9 | 8.4162 | 8.8817 | 8.9793 | packing | +0.4655 | 8.7244 | +0.3082 |
+| 54 | 8 | 7.4031 | 7.8467 | 7.9816 | packing | +0.4435 | 7.7077 | +0.3046 |
+| 82 | 10 | 9.0623 | 9.5355 | 9.9770 | packing | +0.4733 | 9.3667 | +0.3044 |
+| 71 | 9 | 8.4833 | 8.9441 | 8.9793 | packing | +0.4608 | 8.7857 | +0.3024 |
+| 56 | 8 | 7.5574 | 8.0000 | 7.9816 | ceiling | +0.4242 | 7.8583 | +0.3009 |
+| 87 | 10 | 9.3666 | 9.8388 | 9.9770 | packing | +0.4722 | 9.6646 | +0.2980 |
+| 72 | 9 | 8.5498 | 9.0000 | 8.9793 | ceiling | +0.4295 | 8.8406 | +0.2908 |
+| 89 | 10 | 9.4853 | 9.9497 | 9.9770 | packing | +0.4645 | 9.7736 | +0.2883 |
+| 88 | 10 | 9.4261 | 9.8882 | 9.9770 | packing | +0.4620 | 9.7131 | +0.2869 |
+| 90 | 10 | 9.5440 | 10.0000 | 9.9770 | ceiling | +0.4330 | 9.8229 | +0.2789 |
+| 57 | 8 | 7.6332 | 8.0000 | 7.9816 | ceiling | +0.3484 | 7.8583 | +0.2251 |
+| 73 | 9 | 8.6158 | 9.0000 | 8.9793 | ceiling | +0.3636 | 8.8406 | +0.2249 |
+| 91 | 10 | 9.6023 | 10.0000 | 9.9770 | ceiling | +0.3747 | 9.8229 | +0.2206 |
+| 43 | 7 | 6.6569 | 7.0000 | 6.9839 | ceiling | +0.3271 | 6.8761 | +0.2192 |
+| 31 | 6 | 5.6904 | 6.0000 | 5.9862 | ceiling | +0.2958 | 5.8938 | +0.2033 |
+| 92 | 10 | 9.6603 | 10.0000 | 9.9770 | ceiling | +0.3168 | 9.8229 | +0.1627 |
+| 74 | 9 | 8.6811 | 9.0000 | 8.9793 | ceiling | +0.2982 | 8.8406 | +0.1595 |
+| 58 | 8 | 7.7082 | 8.0000 | 7.9816 | ceiling | +0.2734 | 7.8583 | +0.1501 |
+| 18 | 5 | 4.5900 | 4.8229 | 4.9885 | packing | +0.2329 | 4.7375 | +0.1475 |
+| 44 | 7 | 6.7446 | 7.0000 | 6.9839 | ceiling | +0.2394 | 6.8761 | +0.1315 |
+| 20 | 5 | 4.8000 | 5.0000 | 4.9885 | ceiling | +0.1885 | 4.9115 | +0.1115 |
+| 21 | 5 | 4.8000 | 5.0000 | 4.9885 | ceiling | +0.1885 | 4.9115 | +0.1115 |
+| 93 | 10 | 9.7178 | 10.0000 | 9.9770 | ceiling | +0.2592 | 9.8229 | +0.1051 |
+| 32 | 6 | 5.7958 | 6.0000 | 5.9862 | ceiling | +0.1904 | 5.8938 | +0.0979 |
+| 75 | 9 | 8.7460 | 9.0000 | 8.9793 | ceiling | +0.2334 | 8.8406 | +0.0947 |
+| 59 | 8 | 7.7823 | 8.0000 | 7.9816 | ceiling | +0.1993 | 7.8583 | +0.0760 |
+| 94 | 10 | 9.7750 | 10.0000 | 9.9770 | ceiling | +0.2021 | 9.8229 | +0.0480 |
+| 45 | 7 | 6.8310 | 7.0000 | 6.9839 | ceiling | +0.1530 | 6.8761 | +0.0451 |
+| 76 | 9 | 8.8102 | 9.0000 | 8.9793 | ceiling | +0.1691 | 8.8406 | +0.0304 |
+| 17 | 5 | 4.5900 | 4.6755 | 4.9885 | packing | +0.0855 | 4.5927 | +0.0027 |
+| 60 | 8 | 7.8557 | 8.0000 | 7.9816 | ceiling | +0.1260 | 7.8583 | +0.0027 |
+| 5 | 3 | 2.7071 | 2.7071 | 2.9931 | packing | -0.0000 | 2.6592 | +0.0000 |
+| 10 | 4 | 3.7071 | 3.7071 | 3.9908 | packing | -0.0000 | 3.6415 | +0.0000 |
+| 11 | 4 | 3.8100 | 3.8771 | 3.9908 | packing | +0.0671 | 3.8084 | +0.0000 |
+| 12 | 4 | 3.9600 | 4.0000 | 3.9908 | ceiling | +0.0308 | 3.9292 | +0.0000 |
+| 19 | 5 | 4.8000 | 4.8856 | 4.9885 | packing | +0.0856 | 4.7991 | +0.0000 |
+| 61 | 8 | 7.9282 | 8.0000 | 7.9816 | ceiling | +0.0534 | 7.8583 | +0.0000 |
+| 77 | 9 | 8.8740 | 9.0000 | 8.9793 | ceiling | +0.1053 | 8.8406 | +0.0000 |
+| 78 | 9 | 8.9373 | 9.0000 | 8.9793 | ceiling | +0.0421 | 8.8406 | +0.0000 |
+| 95 | 10 | 9.8318 | 10.0000 | 9.9770 | ceiling | +0.1453 | 9.8229 | +0.0000 |
+| 96 | 10 | 9.8882 | 10.0000 | 9.9770 | ceiling | +0.0888 | 9.8229 | +0.0000 |
+| 97 | 10 | 9.9443 | 10.0000 | 9.9770 | ceiling | +0.0328 | 9.8229 | +0.0000 |
+
 ## Foreclosed
 
 | n | m | lower | ceiling |
