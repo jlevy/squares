@@ -1555,8 +1555,8 @@ STEPS: tuple[Step, ...] = (
     # re-argued, not re-padded, and the step still fails if it exceeds what it asked for.
     Step("fast behavioral tests", _fast_tests, fast=True, broad=True, budget_seconds=1800),
     # This is intentionally a whole suite of complete finite certificate decisions, not
-    # an ordinary behavioural-test step. At 37 tests it was still running after 4100s on
-    # 2026-09-04; the exact elapsed time is recorded by D-450. Keep the exceptional
+    # an ordinary behavioural-test step. At discovery, 36 tests were still running after
+    # 4100s on 2026-09-04; D-451 records the exact elapsed time. Keep the exceptional
     # ceiling local so the 900s hang guard remains meaningful for short steps.
     Step(
         "exhaustive exact behavioral tests",

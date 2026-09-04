@@ -70,8 +70,8 @@ structurally unlike the small proved tilted cases at `n = 5` and `n = 10`. Every
 |  | value | status |
 | --- | --- | --- |
 | best known packing (upper bound) | `3.87708359002281417730789706010096…` | Trump 1979, a construction |
-| best lower bound | `2 + 4/√5 = 3.788854382…` | see the note below |
-| bound gap | `0.088229208023` | open since 2003 |
+| best lower bound | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), a verified computer-assisted certificate |
+| bound gap | `0.067083590023` | open |
 
 Two different quantities get called a gap in this subject, and this document keeps them
 apart. The **bound gap** above is the distance between the best upper and lower bounds,
@@ -81,21 +81,126 @@ the best one anybody has published, and it is what [§3](#3-cells-basins-and-two
 onward measures. The first is a property of the problem; the second is a property of a
 run.
 
-**The lower bound carries a story this project produced.** Stromquist’s 2003 Theorem 2
-is the published source, and this repository found that its printed proof is **false as
-printed**: an exact open box of side `10001/10000` fits the claimed container and
-strictly avoids all twelve printed Figure 14 points.
+**The previous lower bound carries a story this project produced.** Stromquist’s 2003
+Theorem 2 was the published source for `2 + 4/√5`, and this repository found that its
+printed proof is **false as printed**: an exact open box of side `10001/10000` fits the
+claimed container and strictly avoids all twelve printed Figure 14 points.
 A separately preregistered, source-distinct repair—moving one point from `(.8, 1.85)` to
 `(.79, 1.85)`—restores the whole argument and certifies the same inequality exactly
 ([exp-016](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md),
 [exp-017](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md)).
-The inequality stands; the printed derivation of it does not.
-The synopsis records the repair as **T-4** and the falsification as the round that
-terminally refuted the hypothesis it was registered against.
+The repaired inequality is **T-010**; the printed derivation does not establish it.
+The synopsis records the falsification as the round that terminally refuted the
+hypothesis it was registered against.
 
 Two lessons in that episode generalize: **a published proof is a source, not an
 oracle**, and **the cheapest way to learn something is to try to break a thing you
 believe.**
+
+### How a weighted atomic lower-bound proof works
+
+T-018 proves the new lower bound with a finite distribution of bookkeeping mass inside
+the candidate container `K = [0,L]²`, where `L = 381/100`. An **atom** is an exact point
+`z` together with a nonnegative rational **weight** `w(z)`. It has no width and does not
+block a packed square.
+For any region `Q`, the **atomic measure** `μ` assigns the mass
+
+```text
+μ(Q) = Σ { w(z) : the atom z lies in Q }.
+```
+
+A closed square therefore **covers mass** `m` when the weights of the atoms on or inside
+it sum to `m`. Here *atomic* means that all the mass sits at the certificate’s finitely
+many points rather than being spread continuously over the container.
+The T-018 certificate has 1,121 distinct rational sites with varying positive weights.
+If the atoms are sketched as different-sized dots, only each dot’s centre is its
+geometric location; the displayed size merely encodes its weight.
+
+![Weighted atoms for the T-018 certificate and the shrink-and-snap geometry](packing/cases/n11_fractional_certificate/t-018-proof-visual.svg)
+
+The left panel shows every atom and the exact 84-atom square where the covered mass is
+smallest. The right panel enlarges the otherwise invisible angular error and clearance;
+the labels underneath give their exact values.
+
+This is a fractional version of an unavoidable point set.
+An ordinary unavoidable set asks every admissible square to contain a marked point.
+Here several atoms may contribute fractional weights that add to at least one.
+That flexibility lets a covering linear program search for the weights, but the final
+proof uses only the frozen rational atoms, the nonnegativity premise, and five exact
+conditions:
+
+| Condition | Exact fact in T-018 | Its job in the proof |
+| --- | --- | --- |
+| `C0` | The weighted atoms have the square container’s symmetries | Reflect an orientation without changing covered mass |
+| `C1` | `μ(K) = 434547/40000 = 10.863675 < 11` | Supply less total mass than eleven packed squares would require |
+| `C2` | A net of 181 directions reaches `π/4` | Put every reduced square orientation between two checked directions |
+| `C3` | For `B = 9977/10000`, `B(1 + D) < 1` | Fit a closed side-`B` square at a nearby net direction strictly inside each unit square |
+| `C4` | Every admissible side-`B` square at every net direction covers mass at least `4001/4000` | Give each inner square more than one unit of mass |
+
+**The counting contradiction.** Suppose eleven unit squares fit in `K` with disjoint
+interiors. Inside each one, put the side-`B` square supplied by C2 and C3. The inner
+squares are closed but lie strictly inside their parent interiors, so they are pairwise
+disjoint and no atom belongs to two of them.
+C4 gives each inner square mass at least `4001/4000`. Nonnegativity and C1 would then
+force the impossible chain
+
+```text
+μ(K) ≥ μ(P₁) + ··· + μ(P₁₁) ≥ 11 × 4001/4000 > 11,
+but μ(K) = 434547/40000 < 11.
+```
+
+Thus eleven unit squares do not fit at side `381/100`. A packing in any smaller
+container would also fit inside `K`, so `s(11) ≥ 381/100`.
+
+**How 181 directions cover every orientation.** A square is unchanged by a quarter turn,
+and diagonal reflection reduces its angle to `[0,π/4]` while C0 preserves mass.
+The net directions are `θᵣ = 2 arctan(tᵣ)`, represented by rational half-angle tangents
+so their sines and cosines are rational too.
+For an arbitrary reduced angle, choose the nearer endpoint of the net interval that
+contains it and call the angular error `d`. The net gives the exact bound `tan(d) ≤ D`.
+A side-`B` square at that nearby direction extends, along either axis of the unit
+square, by at most
+
+```text
+(B/2)(cos d + sin d) ≤ (B/2)(1 + D) < 1/2.
+```
+
+It therefore fits strictly inside the unit square.
+The shrink is the geometric bridge from a continuum of possible orientations to the
+finite net; the proof does not assume that an unchecked orientation behaves like a
+sampled one.
+
+**How event cells cover every centre.** Even at one fixed direction, the inner square
+can have continuously many centres.
+Rotate the coordinate frame to align with that square.
+For one atom, the set of centres whose closed side-`B` square covers it is then a closed
+axis-aligned rectangle.
+The edges of all 1,121 rectangles cut the feasible-centre region into finitely many open
+**event cells**. Within one event cell, exactly the same atoms are covered, so the mass
+is constant.
+On a cell boundary a closed square can only gain atoms; because every weight
+is nonnegative, its mass cannot fall.
+Scoring every reachable open cell therefore finds the true minimum over every centre,
+not a grid sample.
+
+**Why nonnegativity is essential.** It is used twice.
+First, a subset cannot have more mass than the whole container, which justifies the
+counting inequality above.
+Second, adding boundary atoms cannot lower an event-cell score.
+With negative weights, both monotonicity statements fail: an atom gained on a boundary
+could reduce the score, and negative mass outside the eleven inner squares could make
+the container’s total misleadingly small.
+
+The proof and the computation meet at C4. The symmetry, total-mass, net-endpoint and
+shrink checks are short rational calculations.
+C4 is the large finite lemma: the theorem-specific, standard-library-only
+[`minimal_verify.py`](packing/cases/n11_fractional_certificate/minimal_verify.py) binds
+the certificate’s hash, examines 567,130,649 feasible event cells, and recomputes the
+exact minimum `4001/4000`. It also scales the weights down to exhibit a placement below
+mass one that the checker must refuse.
+The [one-minute proof](packing/cases/n11_fractional_certificate/t-018-proof.md) gives
+the human implication and states the finite lemma precisely; the checker establishes
+that lemma for the retained atoms.
 
 ## 2. The Configuration Space
 
@@ -513,17 +618,17 @@ number `α` to the rationals.
 The procedure:
 
 1. **Recover the field.** Put the configuration in `ℚ(α)` for a single **primitive
-   element** `α`, with a known minimal polynomial `μ` and an isolating interval that
-   contains the intended real root of `μ` and no other.
-2. **Represent** elements as polynomials in `α` of degree `< deg μ` with rational
-   coefficients, reduced modulo `μ`. Arithmetic is exact.
+   element** `α`, with a known minimal polynomial `f` and an isolating interval that
+   contains the intended real root of `f` and no other.
+2. **Represent** elements as polynomials in `α` of degree `< deg f` with rational
+   coefficients, reduced modulo `f`. Arithmetic is exact.
 3. **Decide equality exactly.** For an element `β`, `β = 0` exactly when its reduced
    representative is the zero polynomial.
    *This is where touching contacts get certified.*
 4. **Decide sign exactly**—evaluate that representative on the isolating interval with
    rational interval arithmetic, bisecting when the enclosure straddles zero.
-   This terminates because a nonzero representative of degree `< deg μ` cannot vanish at
-   `α`, since `μ` is the minimal polynomial.
+   This terminates because a nonzero representative of degree `< deg f` cannot vanish at
+   `α`, since `f` is the minimal polynomial.
 5. **Run separation and containment** using only those two decisions.
    No floating point appears anywhere.
 
@@ -543,7 +648,7 @@ simple, since characteristic zero makes every finite extension separable.
 So however many algebraic coordinates a packing has, each with its own degree, there is
 a single `α` whose powers express all of them, and every coordinate becomes a polynomial
 in `α` with rational coefficients.
-Only one *root* of `μ` is the intended one, which is why an isolating interval is part
+Only one *root* of `f` is the intended one, which is why an isolating interval is part
 of the field data rather than an optimisation.
 
 **Of what degree, though, is not bounded.** The theorem gives no bound; the degree is
@@ -686,13 +791,16 @@ what any result can claim.
 irreducibility and unique-root checks, rational and algebraic separating-axis
 verification, negative controls, the independently rebuilt LP, the numerical
 class-bracketing quench, the Rust screening annealer, and the registered repository gate
-all exist. `packing-validate --list` is the authoritative inventory.
-Formal results built on the proof instruments include the lower-bound falsification and
-repair, the optimal configuration spaces at `n = 3` and `n = 4`, and the local-isolation
-theorem for Trump’s pose—this project’s results rather than published theorems, with
-[§8](#8-what-is-known-and-what-is-not) marking which claims confirm the literature and
-which are new here. The quench and annealer remain numerical instruments; listing them
-here does not promote their outputs to verified.
+all exist. The fractional-certificate generator, the exact event-cell sweep, and a
+method-distinct interval verifier also exist.
+`packing-validate --list` is the authoritative inventory.
+Formal results built on the proof instruments include the T-018 weighted lower bound,
+the earlier lower-bound falsification and repair, the optimal configuration spaces at
+`n = 3` and `n = 4`, and the local-isolation theorem for Trump’s pose—this project’s
+results rather than published theorems, with [§8](#8-what-is-known-and-what-is-not)
+marking which claims confirm the literature and which are new here.
+The quench and annealer remain numerical instruments; listing them here does not promote
+their outputs to verified.
 
 **The generic witness boundary and robust rational promotion are built.** One
 `Witness/v2` file can be inspected, numerically checked, or exactly verified without
@@ -887,6 +995,7 @@ definition and the one-place list of apparently novel results.
 | --- | --- | --- |
 | Fixing the angles and every pair’s separating axis makes minimising `s` a linear program | proved | Nothing about *which* cell is best; that choice is the combinatorial hard part |
 | Trump’s 1979 packing is valid, over `ℚ(u)` of degree 8, with 14 pairs at exactly zero separation | verified (`exact-algebraic`); a published construction, confirmed here | Nothing about optimality; it is an upper bound |
+| [`s(11) ≥ 381/100`](packing/cases/n11_fractional_certificate/t-018-proof.md) | verified (`exact-algebraic`), with a method-distinct `interval-certified` confirmation; apparently novel here | It does not determine `s(11)`, close the gap to Trump, or carry external peer review |
 | [`s(11) ≥ 2 + 4/√5`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | verified (`exact-algebraic`) | Not attributed to Stromquist, not externally peer-reviewed, and it does not close the gap to Trump |
 | [Stromquist’s *printed* 2003 argument fails](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md): an exact **open** box of side `10001/10000` fits the claimed container and avoids all twelve printed Figure 14 points | verified (`exact-algebraic`) | It refutes the printed derivation, not the inequality, which the repaired cover independently certifies. This project’s finding, like the repair beside it |
 | [Trump’s pose is locally isolated](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Not global optimality, and not an explicit isolation radius. It holds in the anchored pose-side chart, modulo finite symmetries. Apparently novel here, not externally peer-reviewed |
@@ -917,10 +1026,10 @@ throughput.
 `4.6755`. What is unknown is whether the named alternatives, none of which is built,
 would do better.
 
-**4. What `s(11)` actually is.** The interval `[3.788854, 3.877084]` has stood since
-2003 and neither end is known to be tight.
-The upper bound is a construction nobody has beaten; the lower bound is now certified
-here but is not claimed to be sharp.
+**4. What `s(11)` actually is.** The current interval is `[3.81, 3.877084]`, and neither
+end is known to be tight.
+The upper bound is a construction nobody has beaten; the lower bound is certified here
+but is not claimed to be sharp.
 
 **5. What a floating LP result means below `1e-11`.** The floor comes from HiGHS’s own
 feasibility tolerance—pinned at `1e-10`, the strictest value it accepts—under which
@@ -958,6 +1067,11 @@ Three words carry controlled multiple senses, and the rule for each is given wit
 | --- | --- |
 | **configuration** | A placement of all `n` squares plus the container: `3n + 1` coordinates |
 | **cell** | A choice of separating axis and order for every pair. Always the configuration-space object; write *instance cell* for a sweep position, never bare “cell” |
+| **atom** / **weight** | An exact point in a candidate container and the nonnegative rational amount of bookkeeping mass assigned to it. An atom has no area and is not a packed square |
+| **atomic measure** / **mass** | The rule that assigns a region the sum of the weights of its atoms, including atoms on the region’s boundary |
+| **weighted fractional unavoidable-set certificate** | A finite weighted atom set with total mass below `n` but mass at least one in every prescribed inner square; the direction and shrink conditions turn that tension into a lower bound for `s(n)` |
+| **direction net** | A finite set of exact square orientations. A strict shrink condition lets a nearby net direction stand inside a unit square at any orientation |
+| **event cell** | One open region of possible square centres on which the covered atom set is constant. Distinct from a configuration-space cell |
 | **quench** | The map sending a configuration to the local optimum a deterministic refinement carries it to, and this project’s implementation of it. Write *quench map* where the distinction matters. Includes the angle half |
 | **basin** / **point-basin** | The set of configurations one quench carries to a single returned pose. Defined relative to that quench, so a different refiner gives a different decomposition; too fine when one terminal component is a family |
 | **polish** | Refinement within the basin you are in. This is what the quench does, and all it does |
@@ -983,14 +1097,25 @@ Three words carry controlled multiple senses, and the rule for each is given wit
 
 Symbols, in the order the document introduces them.
 A subscript `i` always picks out one square; a bare letter is the whole `n`-vector.
-`i` and `j` index squares and have no row below; `k` and `l`, which index the four
-corners of one square, get one because they appear inside `oᵢₖ`.
+`i` and `j` index squares and `r` indexes net directions; none has a row below.
+`k` and `l`, which index the four corners of one square, get one because they appear
+inside `oᵢₖ`.
 
 | Symbol | Type | Means |
 | --- | --- | --- |
 | `n` | integer | How many unit squares are being packed |
 | `s(n)` | real | The optimal side: the smallest container that fits `n` unit squares |
 | `m` | integer | A perfect-square root, in `s(m²) = m` |
+| `K` | square | The candidate container `[0,L]²` in the weighted lower-bound proof |
+| `L` | positive rational | The candidate container side that the lower-bound certificate proves impossible for `n` squares; `381/100` in T-018 |
+| `z`, `w(z)` | point, nonnegative rational | An atom’s location and its weight |
+| `Q` | region | A region whose atomic mass is being measured; often a closed side-`B` square |
+| `μ` | atomic measure | `μ(Q)` is the sum of `w(z)` over atoms `z` in `Q` |
+| `B` | positive rational | The shrunken square side in a weighted certificate; `9977/10000` in T-018 |
+| `Pⱼ` | square | The closed side-`B` square placed strictly inside packed unit square `j` in the counting contradiction |
+| `tᵣ`, `θᵣ` | rational, angle | Half-angle tangent and corresponding direction in the finite net: `θᵣ = 2 arctan(tᵣ)` |
+| `d` | angle | The absolute difference between a packed square’s reduced orientation and its nearest net direction |
+| `D` | nonnegative rational | The largest tangent of a half-gap between adjacent net directions |
 | `k`, `l` | integer | Corner indices, `1…4`, as in `oᵢₖ` and `oⱼₗ` |
 | `s` | real, variable | The container side being minimised. Distinct from `s(n)`, which is the answer; `s` is what the program solves for |
 | `(xᵢ, yᵢ)` | `ℝ²` per square | The centre of square `i` |
@@ -1010,8 +1135,8 @@ corners of one square, get one because they appear inside `oᵢₖ`.
 | `S₃`, `D₄` | groups | The six relabellings of three squares, and the eight symmetries of the square container |
 | `λ` | `[0, 1/2]` | The `n = 3` family’s coordinate after both quotients: `λ = min(t − 1/2, 3/2 − t)` |
 | `α` | algebraic | A primitive element: the single number generating a packing’s field `ℚ(α)` |
-| `μ` | polynomial | The minimal polynomial of `α`; `deg μ` is the field’s degree |
-| `β` | element of `ℚ(α)` | An arbitrary field element, represented by a polynomial in `α` of degree `< deg μ` |
+| `f` | polynomial | The minimal polynomial of `α`; `deg f` is the field’s degree |
+| `β` | element of `ℚ(α)` | An arbitrary field element, represented by a polynomial in `α` of degree `< deg f` |
 | `u` | algebraic | The primitive element for Trump’s packing, `u = tan(a/2)`, of degree 8 |
 | `δ` | real | Slack in a container-inflation ladder |
 | `p` | real | The exponent of a superdisk relaxation |
@@ -1114,6 +1239,7 @@ computer algebra system, and this one does not.
 | --- | --- |
 | the state of the program, and every result with its status | [`SYNOPSIS.md`](SYNOPSIS.md)—**start here after this page** |
 | what is in the directory and how to run it | [`README.md`](README.md) |
+| the short proof of the `3.81` lower bound and its smallest exact checker | [One-minute T-018 proof](packing/cases/n11_fractional_certificate/t-018-proof.md) and [`minimal_verify.py`](packing/cases/n11_fractional_certificate/minimal_verify.py) |
 | every rule the directory runs on, and which are machine-checked | [`conventions.md`](conventions.md) |
 | the mutable size-by-size experiment priority queue | [Basin confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |
 | what has gone wrong and what now stops it recurring | [`defects.md`](defects.md) |

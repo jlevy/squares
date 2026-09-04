@@ -320,7 +320,7 @@ def must_refuse(atoms, side, square_side, tangents, worst_record):
     index, centre = worst_record
     cosine, sine = rotation(tangents[index])
     # Scaling every weight keeps D4 and all geometric conditions intact, preserves
-    # nonnegativity, and drives either retained certificate's tight cell below one.
+    # nonnegativity, and drives the retained certificate's tight cell below one.
     factor = Q(3999, 4001)
     mutated = [(x, y, weight * factor) for x, y, weight in atoms]
     check_measure(mutated, side)

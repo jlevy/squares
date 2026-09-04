@@ -1323,7 +1323,7 @@ evidence:
       at this side. The retained bytes have SHA-256
       b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a. The introducing
       commit message names a different hash for what it calls the same frozen bytes;
-      D-448 records that provenance error, so no conclusion here relies on the message's
+      D-449 records that provenance error, so no conclusion here relies on the message's
       attestation. The interval verifier accepted the retained bytes over all 361
       directions of the doubled net in 1,570,831 boxes with none stalled, returning a
       width-zero enclosure at 4001/4000 -- the same value the exact sweep reports.
@@ -1486,9 +1486,9 @@ evidence:
       falls short of 1, and every enclosure here is at or above 1. The verdict now
       requires the certified lower bound to reach mass 1 in both modes, and the retained
       certificates are re-decided under it by the replay this entry names. The adversarial
-      review also closed acceptance paths for restricted direction samples (D-444),
-      negative or int64-overflowing weights (D-440 and D-445), and an unbounded exact-seam
-      split (D-446). A restricted sample is now diagnostic only, all NumPy subset sums are
+      review also closed acceptance paths for restricted direction samples (D-445),
+      negative or int64-overflowing weights (D-441 and D-446), and an unbounded exact-seam
+      split (D-447). A restricted sample is now diagnostic only, all NumPy subset sums are
       preflight-bounded in exact Python integers, and unresolved or budget-exhausted boxes
       can only refute or return undecided.
     source_reviewed: '2026-09-04'

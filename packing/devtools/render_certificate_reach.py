@@ -47,8 +47,8 @@ BANNER = (
 )
 
 # Massaccesi's net, which every retained certificate uses: 181 half-tangents from 0 to
-# a rational just above tan(pi/8). D is about T / K, so refining the net raises the ceiling only
-# as fast as K grows.
+# a rational just above tan(pi/8). D is about T / K, so refining the net raises the
+# ceiling only as fast as K grows.
 ANGLE_LIMIT = Fraction(207107, 500000)
 DIRECTION_STEPS = 180
 NET = tuple(ANGLE_LIMIT * k / DIRECTION_STEPS for k in range(DIRECTION_STEPS + 1))

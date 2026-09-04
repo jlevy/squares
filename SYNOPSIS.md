@@ -261,7 +261,7 @@ case or experiment separately.
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
-| [One-minute proof that `s(11) ≥ 381/100`](packing/cases/n11_fractional_certificate/PROOF.md) | component scope and use | definitive | maintained | — |
+| [One-minute proof that `s(11) ≥ 381/100`](packing/cases/n11_fractional_certificate/t-018-proof.md) | component scope and use | definitive | maintained | — |
 | [Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate](packing/cases/n11_fractional_certificate/lean-spike/README.md) | typed idea provenance | supporting | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -3710,21 +3710,21 @@ That is a limit on the method’s reach at that side, recorded as measurement an
 claim about `tau*`.
 
 **Each finite certificate also has a ceiling that is structural rather than measured.**
-No certificate for `n` can exist at a
-container side above `ceil(sqrt(n)) * B`: a wider container holds `ceil(sqrt(n))^2`
-pairwise disjoint axis-parallel `B`-squares, direction `0` is always in the net, so `C4`
-gives each of them mass at least `1` and the total passes `n`, which `C1` forbids.
+No certificate for `n` can exist at a container side above `ceil(sqrt(n)) * B`: a wider
+container holds `ceil(sqrt(n))^2` pairwise disjoint axis-parallel `B`-squares, direction
+`0` is always in the net, so `C4` gives each of them mass at least `1` and the total
+passes `n`, which `C1` forbids.
 With `C3` bounding `B` below `1 / (1 + D)`, the ceiling over every shrink a net admits
 is `ceil(sqrt(n)) / (1 + D)`, and refining the net raises it only as fast as `D` falls —
 about `T / K`, so twice the directions for half the gap, and twice the cost of every
 decision taken over them.
 Since the grid packing gives `s(n) <= ceil(sqrt(n))` for free, every individual
-finite-net certificate sits strictly below that trivial upper bound. For `n = 12`, the
-retained shrink gives `4B = 3.9908` and the fixed 181-direction net permits at most
-`4/(1+D) = 3.990816…`; no single certificate on a finite net can certify the conjectured
-endpoint `4`. This does not exclude a proved family with sides tending to `4` and a
-separate limit argument. The retained `79/20` certificate has exactly `0.0408` of runway
-at its fixed `B`.
+finite-net certificate sits strictly below that trivial upper bound.
+For `n = 12`, the retained shrink gives `4B = 3.9908` and the fixed 181-direction net
+permits at most `4/(1+D) = 3.990816…`; no single certificate on a finite net can certify
+the conjectured endpoint `4`. This does not exclude a proved family with sides tending
+to `4` and a separate limit argument.
+The retained `79/20` certificate has exactly `0.0408` of runway at its fixed `B`.
 `n = 11` and `n = 17` are not foreclosed: their runways are `0.1808` and `0.4085`, and
 both truths sit below their grid bounds.
 

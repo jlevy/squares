@@ -114,6 +114,11 @@ The id in the filename must equal the id in the frontmatter.
 Research documents and reviews keep the repository’s dated form:
 `research-YYYY-MM-DD-topic.md`, `review-YYYY-MM-DD-topic.md`.
 
+**Case-local documents for a registered theoretical result use the lowercase result id
+and a descriptive kebab-case suffix, for example `t-018-proof.md`.** [convention] This
+is a filename convention only: prose and structured records keep the canonical uppercase
+id `T-018`. `README.md` remains the exception for a directory’s orientation page.
+
 Use [`repren`](https://github.com/jlevy/repren) for renames—it moves files and rewrites
 references in one pass, which is what keeps the two in step.
 

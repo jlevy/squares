@@ -8,9 +8,9 @@ it instantiates with its proof, a single-file verifier that uses only Python’s
 library, a control reconstructed from another author’s public result, and the
 perturbations the verifier refuses.
 
-For the shortest presentation, start with the parent case’s [`PROOF.md`](../PROOF.md): a
-one-minute argument, four exact certificate facts, and the finite formula that the
-checker decides.
+For the shortest presentation, start with the parent case’s
+[`t-018-proof.md`](../t-018-proof.md): a one-minute argument, four exact certificate
+facts, and the finite formula that the checker decides.
 
 ## The Claim
 

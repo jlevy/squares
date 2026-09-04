@@ -2,7 +2,7 @@
 
 **Review date:** 2026-09-04\
 **Pull request:** [#78](https://github.com/jlevy/squares/pull/78)\
-**Reviewed parent head:** `9134ee419c7fa4bc350eb19f028fbf01735dfc07`\
+**Reviewed parent head:** `430e7e09fa65bef8d5ea32e59caee180ed4f4bf1`\
 **Base:** `9d5eae0f5ecfcf3cd417a345eb6c55b1f9ac4def` (`main`)\
 **Remediation branch:** `codex/pr78-s11-adversarial-review`\
 **Certificate SHA-256:**
@@ -36,16 +36,19 @@ This review concentrates on T-018, not PR 78’s separate `n = 12` result.
 It checked the mathematical implication, the exact bytes retained for `n = 11`, the
 continuum-to-finite reduction, replay and validation boundaries, method provenance, and
 the novelty claim. The PR advanced repeatedly during the audit, from `9b85236b` through
-`bdf63b21`, `6fc71ce9`, `31775018`, and `b77e78d2`, ending at `9134ee41`. Commit
-`6fc71ce9` replaced the `19/5` target artifact with a larger `381/100` certificate, so
-the concrete validation restarted on the new bytes.
-The later commits strengthened the separate `n = 12` and `n = 17` results and amended
-the project process document; they did not change the reviewed `n = 11` bytes or
-argument. The self-contained verification package, interval-certified branch-and-bound
-checkpoint, and later retained `n = 17` certificates were included before the verdict
-was frozen. The later `n = 17`--`19` frontier movement was outside this review’s
-mathematical scope except where the earlier published-value `n = 17` certificate served
-as a control.
+`bdf63b21`, `6fc71ce9`, `31775018`, `b77e78d2`, and `9134ee41`, ending at `430e7e09`.
+Commit `6fc71ce9` replaced the `19/5` target artifact with a larger `381/100`
+certificate, so the concrete validation restarted on the new bytes.
+The later commits strengthened the separate `n = 12` and `n = 17` results, supplied the
+missing full-net `n = 17` interval control, added a finite-certificate reach theorem and
+generated reach table, and amended the project process document; they did not change the
+reviewed `n = 11` bytes or its core argument.
+The reach theorem was in scope because its first prose interpretation overstated a
+finite-certificate ceiling as a method-wide impossibility; F14 records the correction.
+The self-contained verification package, interval-certified branch-and-bound checkpoint,
+and retained `n = 17` certificates were included before the verdict was frozen.
+The other `n = 17`--`19` frontier movement was outside this review’s mathematical scope
+except where the earlier published-value `n = 17` certificate served as a control.
 
 The audit was pre-registered under `think-tukn` with five falsifiable hypotheses.
 Two delegated lanes were kept separate from the coordinator’s main review:
@@ -118,7 +121,7 @@ the primary replay path.
 and checked core precondition, applies the guard to direct sweep calls, documents that
 the boundary reduction depends on monotonicity, and retains the exact five-atom false
 certificate as a must-refuse regression.
-D-440 records the defect.
+D-441 records the defect.
 
 ### F2: High in the parent, fixed here: the validation surface was not clean
 
@@ -185,8 +188,7 @@ The primary `n = 11` replay checks the declared `total_mass`, but not the declar
 [`__main__.py:34-37`](../../../packing/cases/n11_fractional_certificate/__main__.py).
 The `n = 11` test checks only that the computed minimum is at least one and that the
 claim string matches; it does not require the exact declared minimum.
-The neighbouring `n =
-12` test does make that exact comparison
+The neighbouring `n = 12` test does make that exact comparison
 ([`test_fractional_certificate.py:161-164`](../../../packing/tests/test_fractional_certificate.py)).
 
 The standalone verifier improves visibility by recomputing both fields, but a mismatch
@@ -200,7 +202,7 @@ would not necessarily be refused by the paths that claim to bind the record.
 standalone verifier treats every present declaration as verdict-bearing; exact mutation
 tests cover both paths; and the complete source-distinct `n = 11` decision is a named
 `exhaustive_exact` test.
-D-443 records the defect.
+D-444 records the defect.
 
 ### F5: Low in the parent, fixed here: one scope disclaimer was false by monotonicity
 
@@ -228,7 +230,7 @@ but a future caller could have promoted a diagnostic to a false theorem verdict.
 **Resolution:** a restricted run still reports per-direction certificates, enclosures,
 and decisive refutations, but an all-certified sample is `undecided`; only the complete
 doubled net can establish C4. The tests require both sides of this contract.
-D-444 records the defect.
+D-445 records the defect.
 
 ### F7: Blocker in the interval checkpoint, fixed here: integer mass could overflow
 
@@ -243,7 +245,7 @@ Negative values are refused defensively, and totals at or above `2^62` are refus
 before any NumPy array is constructed.
 Every later matrix product is a nonnegative subset sum below that exact total.
 A positive-weight `2^63 + 1` regression exercises the public path.
-D-445 records the defect.
+D-446 records the defect.
 
 ### F8: High and medium package gaps, fixed here: falsification and hostile inputs
 
@@ -261,7 +263,7 @@ They do matter to the package’s claim to be a compact trust boundary.
 and minimum, and a quick signed-weight refusal runs in `check.py`. The loader is strict
 and duplicate-free, malformed input becomes a clean refusal, an empty placement domain
 is treated as vacuous, and a singleton closed placement is evaluated directly.
-D-436, D-441, and D-442 record these defects; focused tests cover each case.
+D-436, D-442, and D-443 record these defects; focused tests cover each case.
 
 ### F9: Blocker in the interval checkpoint, fixed here: enclosure mode could certify failure
 
@@ -296,7 +298,7 @@ Measurements grew from 4,631 boxes at `10⁻²`, to 274,303 at `10⁻⁴`, to 33
 Exhaustion returns lower bound zero and an explicit non-acceptance unless an admissible
 sampled point already refutes C4. The exact-seam regression now finishes in under a
 second. None of the three full retained controls stalls or exhausts the budget.
-D-446 records the defect.
+D-447 records the defect.
 
 ### F11: Medium in the shared sweep, fixed here: a reported minimum centre could be infeasible
 
@@ -313,7 +315,7 @@ The bug made the displayed witness untrustworthy.
 
 **Resolution:** the sweep now clips the exact feasible polygon to the minimizing cell,
 returns the average of that convex polygon’s vertices, and checks strict membership in
-the open cell. The fixture now maps to the feasible centre `(13/18,43/60)`. D-447 and a
+the open cell. The fixture now maps to the feasible centre `(13/18,43/60)`. D-448 and a
 focused regression record the repair.
 
 ### F12: High provenance defect, fixed here: the new commit names the wrong certificate hash
@@ -331,12 +333,12 @@ reported rational values agree.
 
 **Resolution:** this review discards the old attestation, binds the actual retained hash
 in a fast test and the theorem-specific checker, and reruns both full decisions from the
-retained path. D-448 preserves the mismatch rather than rewriting history.
+retained path. D-449 preserves the mismatch rather than rewriting history.
 
 ### F13: High in the full gate, fixed here: the exhaustive suite could not finish under its timeout
 
 D-438 correctly moved complete finite certificate decisions out of the fast test tier.
-The full validator then collected all 37 marked tests in one pytest step, but left that
+The full validator then collected all 36 marked tests in one pytest step, but left that
 step on the shared 900-second timeout.
 During this review it was still running after 4,100 seconds under an explicit two-hour
 measurement override.
@@ -346,8 +348,43 @@ completion.
 **Resolution:** only the exhaustive exact step now has a 7,200-second declared ceiling.
 The shared 900-second hang guard remains in force for short checks, and a tighter
 timeout typed by an operator still takes precedence.
-D-450 records the mismatch and the budget registry test fixes the complete three-step
+D-451 records the mismatch and the budget registry test fixes the complete three-step
 exception set.
+The late full-net `n = 17` control raises the current inventory to 37; the
+same explicit budget covers it.
+
+### F14: Medium in the late parent, fixed here: a finite-certificate ceiling became a method-impossibility claim
+
+The late parent correctly proves that a certificate with `m = ceil(sqrt(n))` must
+satisfy `L ≤ mB < m`: if `L > mB`, the container holds `m²` pairwise disjoint closed
+axis-parallel `B`-squares, and C1 contradicts the mass that C4 assigns them.
+It then says the method can never settle a case such as `n = 12` whose value is the grid
+bound `m = 4`.
+
+That last inference is too strong.
+For the uniform half-tangent net with endpoint `T` and `K` gaps, `D = T/K` and the
+ceiling is `m/(1+T/K)`, which tends to `m`. A proved family of valid certificates with
+sides tending to `m` would establish the weak lower bound `s(n) ≥ m` even though no
+finite member attained `m`. The ceiling rules out one finite certificate at the grid
+bound; by itself it does not rule out a certified family plus a limit argument.
+
+**Resolution:** the affected prose now states the finite scope and names the separate
+limiting-family possibility.
+An exact regression pins that the uniform-net ceilings are strictly below, but
+arbitrarily approach, the grid bound.
+D-452 records the distinction.
+
+### F15: Low in the late parent, fixed here: the net endpoint was described as rounded down
+
+The new certificate-reach renderer says `207107/500000` rounds `tan(π/8)` down.
+Its exact C2 slack is `T² + 2T − 1 = 309449/250000000000 > 0`, so `T` is strictly above
+the positive root `sqrt(2) − 1 = tan(π/8)`. Rounding it down would make the direction
+net stop short of `π/4` and fail the theorem’s endpoint premise.
+
+**Resolution:** the comment now says that `T` is the rational endpoint just above
+`tan(π/8)`. The existing exact C2 regression pins the direction of the inequality; D-453
+records the prose error.
+No certificate value or computation changed.
 
 ## Frozen hypotheses and outcomes
 
@@ -411,8 +448,8 @@ statement `s(n) > L`, not for the claimed weak inequality.
 ## Minimal distillation
 
 The shortest honest presentation is the one-minute implication in
-[`PROOF.md`](../../../packing/cases/n11_fractional_certificate/PROOF.md), followed by
-four exact facts about the retained data.
+[`t-018-proof.md`](../../../packing/cases/n11_fractional_certificate/t-018-proof.md),
+followed by four exact facts about the retained data.
 Its mathematical core is:
 
 ```text
@@ -430,15 +467,24 @@ An honest proof must either rerun an exhaustive finite reduction or carry a
 proof-producing partition receipt; a table of 181 reported minima is not enough.
 
 The smallest practical audit surface is therefore a combination: the one-minute proof,
-the exact C4 formula printed in `PROOF.md`, the immutable certificate hash, and a
+the exact C4 formula printed in `t-018-proof.md`, the immutable certificate hash, and a
 theorem-specific standard-library checker.
-Its event-cell geometry and scoring core is about 140 lines; the whole executable is 346
-lines including strict input, declaration, checksum, symmetry, arithmetic, output, and
-mutation checks.
-It recomputes 567,130,649 cells and the exact minimum, then demonstrates
-a C4 failure after multiplying every weight by `3999/4001`. This is materially smaller
-than the general 645-line portable verifier without hiding the continuum step in an
-assertion.
+Its proof-critical C4 geometry, scoring, and driver occupy about 156 lines; the whole
+executable is 346 lines including strict input, declaration, checksum, symmetry,
+arithmetic, output, and mutation checks.
+It recomputes 567,130,649 cells and the exact minimum, then demonstrates a C4 failure
+after multiplying every weight by `3999/4001`. This is materially smaller than the
+general 650-line portable verifier without hiding the continuum step in an assertion.
+
+The companion
+[`t-018-proof-visual.svg`](../../../packing/cases/n11_fractional_certificate/t-018-proof-visual.svg)
+is derived from the same frozen bytes.
+It plots every atom, makes colored disk area proportional to weight, and outlines the
+exact direction-zero witness: 84 atoms centered at `(27/50,27/50)` with mass
+`4001/4000`. Its second panel magnifies the angle and clearance so they are visible
+while printing the exact containment values underneath.
+It is an explanation, not another proof route; the deterministic renderer recomputes the
+displayed witness and refuses declaration drift.
 
 ## Lean feasibility spike
 
@@ -525,7 +571,7 @@ That is a performance result, not mathematical evidence either way, and it is no
 counted among the complete decisions above.
 The complete standalone general verifier, which finishes in under two minutes, is the
 retained source-distinct exhaustive test instead.
-D-449 records that gate repair.
+D-450 records that gate repair.
 
 Negative controls included broken D4 orbits, reduced weights, removed atoms, an enlarged
 container, a too-short angular net, non-strict containment, declared-value mutations,
@@ -622,7 +668,10 @@ line. It should not imply that weighted resource counting itself began in 2026.
 5. Independence, control provenance, method lineage, monotonicity, and apparent-novelty
    language now match the evidence.
 6. A one-minute implication and the exact finite C4 lemma are isolated in
-   [`PROOF.md`](../../../packing/cases/n11_fractional_certificate/PROOF.md).
+   [`t-018-proof.md`](../../../packing/cases/n11_fractional_certificate/t-018-proof.md).
+7. [`TUTORIAL.md`](../../../TUTORIAL.md) now introduces atoms, weighted mass, the
+   counting contradiction, both finite reductions, and the two places nonnegativity is
+   essential before sending a reader to the proof and checker.
 
 ### Stronger evidence after this review
 
@@ -659,13 +708,17 @@ All project commands used the repository’s Python 3.14 environment from `packi
 | `.venv/bin/python3 -m cases.n11_fractional_certificate` | Accepted all three retained rungs: `189/50`, `19/5`, and the current `381/100`; the current exact minimum is `4001/4000`. |
 | `thirdparty/verify.py` on the current certificate, `--audit 3` | Accepted all 181 directions and 567,130,649 regions at minimum `4001/4000`; three cells per direction were directly re-summed; C4 took 88.3 s. |
 | `minimal_verify.py` on the current certificate | Hash, C0-C4, 567,130,649 cells, minimum `4001/4000`, and the `3999/4001` scaling refusal all passed in 83.522 s. |
+| final blind proof-only audit and minimal-checker reruns | **Accepted with no finding** in a lane that did not read this review or the PR discussion; two fresh runs passed in 87.42 s and 90.72 s, and a direct re-sum found 84 atoms of total mass `4001/4000` at `(27/50,27/50)`. |
+| deterministic T-018 proof visual | The certificate-driven renderer’s `--check` passed; the repository SVG checker passed all **86 controls**, including byte determinism and artifact ownership. |
 | `thirdparty/check.py` | All four frozen-package steps passed: reconstruct the published-value `n = 17` control, verify the `19/5` rung, verify the control, and require a labeled negative-weight refusal. |
 | complete current interval confirmation | **1 passed** in 19.14 s; all 361 directions certified, with enclosure `[4001/4000, 4001/4000]`. |
+| original exhaustive exact suite at the repaired timeout | **36 passed**, 1,724 ordinary tests deselected, in 4,228.18 s. |
+| late parent’s full-net `n = 17` interval control | **1 passed** in 33.22 s; all 361 directions certified in 2,653,407 boxes. |
 | repaired focused regressions | **56 passed**, 5 exhaustive tests deselected, in 6.01 s. |
 | `packing-validate --edit` on the integrated stack | **33 of 59 steps passed**; Ruff checked and formatted 793 files, BasedPyright reported zero errors, and all schema, generated-record, provenance, and edit-tier checks passed in 29.16 s. |
 | `packing-validate --push` on the integrated stack | **34 of 59 steps passed**; the reachable behavioral suite reported **1,724 passed, 36 exhaustive tests deselected** in 879.26 s; the complete gate took 882.61 s. |
 | exact five-atom signed certificate through `sqpack.fractional.verify` | **Incorrectly accepted**, proving F1. |
-| `.venv/bin/basedpyright` at the reviewed head | **Failed: 26 errors**, proving F2. |
+| `.venv/bin/basedpyright` at finding head `34d19470` | **Failed: 26 errors**, proving F2. |
 | fresh-copy Lean build and axiom audit | `lake build Kernel` passed in 9.38 s; the audit passed in 2.55 s and reported only `propext`, `Classical.choice`, and `Quot.sound`. |
 
 ## Residual risk
@@ -676,8 +729,8 @@ The argument was read from first principles.
 The exact decision was independently reimplemented, checked on a published-value
 control, and attacked with mutations; a method-distinct interval search covers a doubled
 net and agrees exactly.
-No contradiction or unexamined boundary case remains in the concrete positive-weight
-instance.
+The review found no contradiction or remaining identified boundary gap in the concrete
+positive-weight instance.
 
 That is strong evidence for a computer-assisted result, but not formal verification or
 external peer review.

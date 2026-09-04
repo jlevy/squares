@@ -8,10 +8,10 @@ complete local toolchain and Mathlib cache occupied approximately 10 GB; after t
 was present, `Kernel.lean` checked in 3.6–4.6 seconds in the prototype.
 Two clean project builds using the populated dependency cache took 5.7 and 9.4 seconds;
 their axiom audits took 2.6–2.7 seconds on the development machine.
-The [one-minute proof](../PROOF.md) and [minimal exact checker](../minimal_verify.py)
-remain the recommended primary presentation because together they are complete and the
-checker is self-contained, uses only Python’s standard library, and decides every
-condition from C0 through C4.
+The [one-minute proof](../t-018-proof.md) and
+[minimal exact checker](../minimal_verify.py) remain the recommended primary
+presentation because together they are complete and the checker is self-contained, uses
+only Python’s standard library, and decides every condition from C0 through C4.
 
 ## What the Spike Proves
 

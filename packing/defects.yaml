@@ -14256,11 +14256,12 @@ defects:
   severity: high
   status: fixed
   what: >-
-    The full validator runs every `exhaustive_exact` test in one pytest step. The suite
-    now contains 37 complete certificate decisions and was still running after 4,100
-    seconds during the review, but the step had no declared budget and therefore
-    inherited the validator's 900-second default. The explicit two-hour override used to
-    measure the review run hid what the ordinary scheduled command would do.
+    The full validator runs every `exhaustive_exact` test in one pytest step. At
+    discovery, the suite contained 36 complete certificate decisions and was still
+    running after 4,100 seconds during the review, but the step had no declared budget
+    and therefore inherited the validator's 900-second default. The explicit two-hour
+    override used to measure the review run hid what the ordinary scheduled command
+    would do.
   consequence: >-
     The default full gate could not finish even when every mathematical decision passed:
     it would kill the aggregate step after fifteen minutes and report a process failure.
@@ -14273,7 +14274,8 @@ defects:
   regression: >-
     `tests/test_validation_cli.py::test_only_measured_whole_suite_steps_have_budgets`
     fixes the complete three-step exception set and its ceilings; the final full-gate run
-    records the 37-test suite's actual elapsed time below the declared limit.
+    records the current 37-test exhaustive suite's actual elapsed time below the declared
+    limit.
   recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-452
   title: A finite-certificate ceiling was promoted to a method-wide impossibility
