@@ -31,10 +31,13 @@ symbolic = ["sympy>=1.13"]
 [dependency-groups]
 # Rendering the certificate explainer page. kpress supplies the design tokens,
 # the reading faces and the KaTeX distribution, all inlined into one file.
-# Pinned exactly and to a release past the 14-day cool-off rather than to the
-# newest: `tbd guidelines supply-chain-hardening`. 0.3.3 was 19 days old on the
-# day this landed; 0.3.4 and 0.3.5 were still inside the window.
-site = ["kpress==0.3.3"]
+# Pinned exactly, and to the newest release. The 14-day cool-off in
+# `tbd guidelines supply-chain-hardening` guards against a compromised upload of
+# a package this project does not control. First-party packages -- every
+# jlevy-owned dependency, kpress among them -- are exempt: the threat it guards
+# against does not apply, and the delay has a real cost, since a fix would sit
+# unusable for two weeks.
+site = ["kpress==0.3.5"]
 dev = [
     "basedpyright>=1.31",
     # Vector PDF export of the known-best composite. Emits no timestamps, so the
