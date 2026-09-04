@@ -440,6 +440,14 @@ Status: **paused**. Agenda 017's block moved seven registered cases and then hit
 | BC-194 | research | 26, 30, 37, 51 | blocked | 1 | think-48p0 | The first measurement of what the generator costs and reaches outside the 3.8 to 4.8 band every retained rung sits in. |
 | BC-195 | tool_validation | 11, 12, 17, 26 | blocked | 3 | think-kibo | Whether the research bottleneck has moved off the decision path, which is what W5's contract says decides when it hands back to W6. |
 
+### [agenda-020](agendas/agenda-020-efficiency-block-the-exact-sweep.md) — Efficiency Block — the Exact Event-Cell Sweep Decides in Integers
+
+Status: **completed**. A one-block W5 efficiency-loop commitment, entered directly on the operator's direction rather than drawn from agenda-019's queued candidates, and recorded here after the fact at the operator's further direction to track and capture it as its own efficiency block. All four things W5 asks for at entry were already on record before any change: a measured baseline (the exact event-cell sweep that decides C4 at the retention gate fits atoms^2.00 and cost 5378 s on the largest retained certificate), a profile (one direction of that certificate spends 39.35 s in a dense Fraction grid against 2.29 s reducing the atoms to their reachable cells), a target (at least 10x, the operator's own figure being under 100 s for the n = 20 decision), and a guard (the identical least covered mass on every retained certificate, with the Fraction sweep kept unchanged as the reference). The change is exact rather than approximate -- an integer difference array on the weights' common scale, reachable cells held as spans instead of expanded tuples, and the 181 directions decided in parallel -- and is checked against the unchanged Fraction route cell for cell, never substituting for it. The measured result is 68x to roughly 183x depending on machine load, comfortably past the target, with no bound, verdict, or artifact changed and the interval route untouched as the independent second decision on every retained certificate. What moves is agenda-019's BC-190: its premise was that the retention gate was the dominant cost, and that premise is now gone; its baseline is the integer sweep. BC-191's row-generation and site-density costs are untouched and are now what binds.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-196 | tool_validation | 11, 12, 17, 18, 19, 20, 21 | complete | 0 | think-yrh5 | Whether BC-191's row-generation and site-density costs, now the binding cost with the gate an order of magnitude cheaper, move by a comparable factor once measured the same way; and whether BC-190's premise -- that the generator's own accept/reject decision should move to the interval route -- still holds now that its baseline is the integer sweep rather than the Fraction one. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
