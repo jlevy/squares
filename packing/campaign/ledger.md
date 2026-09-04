@@ -427,6 +427,19 @@ Status: **paused**. Run one ten-hour autonomous block after the operator has rev
 | BC-183 | research | 40 | tentative | 2 | think-3yxk | A pinned cone makes the n = 40 theorem the next Lane B target; a conditional theorem is retained as the smallest unresolved obligation. |
 | BC-184 | tool_validation | 11, 17, 29, 37, 39 | tentative | 2 | think-4f4d | A reproduced n = 29 makes H-056 instrument-ready; the S4 technique claim waits for an independent review in a later agenda. |
 
+### [agenda-019](agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md) — Efficiency First — the Decision Path, the Retarget, and Two Deep Strategy Sessions
+
+Status: **paused**. Agenda 017's block moved five registered cases and then hit a wall that is not mathematical. The exact event-cell sweep grew superlinearly with the atom count until a single decision cost hours, one search spent fifty-five minutes failing to finish its first round on a parameter that was tuned two container sides ago, and four lanes were run on four cores with no budget until the load average reached 10.6. None of that is a limit on the method; all of it is a limit on how many rungs a block can climb. This agenda buys throughput before it buys bounds, in that order, because the reach table now says the cases worth attacking are two to three times the container side of the ones just climbed, and cost grows with the square of the side or worse. Two efficiency-loop commitments carry measured baselines from Agenda 017's own logs and a named target each. Two insight-iteration sessions then ask the mathematical questions the ceiling proof opened, which is what should choose the next targets rather than the ladder's momentum. One research-loop commitment spends the throughput on the first high-prize case with a cost model recorded before the run, not after. The research wall is 480 elapsed minutes. The efficiency work is first because everything after it is measured in units the efficiency work changes.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-190 | tool_validation | 11, 12, 17, 20 | ready | 0 | think-jgeg | Whether the decision path is still the tail of a run, which decides whether BC-194 is affordable at the side it names. |
+| BC-191 | tool_validation | 12, 17, 18, 20 | ready | 0 | think-ji0r | The cost per round as a function of the container side, which is the input BC-194's cost model needs and which nobody has yet measured across sides. |
+| BC-192 | research | 11, 12, 17, 26, 51 | blocked | 1 | think-9pfw | A target ranking that accounts for cost as well as prize, which the reach table deliberately does not. |
+| BC-193 | research | 11, 12 | blocked | 2 | think-z8ck | Whether the frontier beyond the ceiling is a research direction or a closed door, which decides whether any later agenda spends a block on it. |
+| BC-194 | research | 26, 30, 37, 51 | blocked | 1 | think-48p0 | The first measurement of what the generator costs and reaches outside the 3.8 to 4.8 band every retained rung sits in. |
+| BC-195 | tool_validation | 11, 12, 17, 26 | blocked | 3 | think-kibo | Whether the research bottleneck has moved off the decision path, which is what W5's contract says decides when it hands back to W6. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
