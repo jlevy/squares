@@ -205,7 +205,7 @@ PRUNE = frozenset(
 # The set is the three kinds this repository's toolchain actually writes, measured
 # rather than guessed. Adding a fourth is cheap and should still be done against a
 # measurement, not a precaution.
-BUILD_CACHES = frozenset({"__pycache__", ".pytest_cache"})
+BUILD_CACHES = frozenset({"__pycache__", ".pytest_cache", ".ruff_cache"})
 LINK_BACK = (Path(".venv"), Path("sqsearch/target"))
 COPY_SEPARATELY = (ROOT / "resources/README.md", REPO / ".flowmarkignore")
 # The reader-facing documents live at the repository root now, and the controls reach
@@ -241,6 +241,11 @@ ROOT_DOCUMENTS = (
 # worker count, so 64 MiB across three private trees is still bounded. `atlas/` is
 # 18.16 MiB of the total; pruning what no control reads is the alternative to raising
 # this again, and it belongs with the tier work rather than here.
+#
+# Read `BUILD_CACHES` before raising it a second time. When this next fired, on
+# 2026-09-04, 12 MB of the breach was bytecode the gate had itself written into the tree
+# it was measuring, so the cap was reporting a fact about the checkout; a higher number
+# would have postponed that rather than fixed it (D-422).
 SNAPSHOT_MAX_BYTES = 64 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
