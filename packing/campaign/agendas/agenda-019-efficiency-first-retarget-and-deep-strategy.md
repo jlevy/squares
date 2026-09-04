@@ -11,7 +11,7 @@ agenda:
   updated: '2026-09-04'
   status: paused
   objective: >-
-    Agenda 017's block moved five registered cases and then hit a wall that is not
+    Agenda 017's block moved seven registered cases and then hit a wall that is not
     mathematical. The exact event-cell sweep grew superlinearly with the atom count until
     a single decision cost hours, one search spent fifty-five minutes failing to finish
     its first round on a parameter that was tuned two container sides ago, and four lanes
@@ -295,9 +295,51 @@ Begin at `BC-190` and `BC-191` together, on separate cores, both under
 else depends on at least one of them.
 That ordering is the agenda’s whole argument.
 
+## State at handoff
+
+Written for whoever picks this up cold, so that nothing below has to be reconstructed
+from the pull request.
+
+**Retained and closed.** Seven registered cases carry a first-party weighted fractional
+unavoidable-set certificate, and every one was decided twice from frozen bytes by two
+methods that fail differently and agreed on the least covered mass to the digit.
+
+| Case | Side | Result | `S` |
+| --- | --- | --- | --- |
+| `n = 11` | `381/100` | `T-018` | `S5` |
+| `n = 12` | `99/25` | `T-017` | `S4` |
+| `n = 17`, `18` | `459/100` | `T-019` | `S4` |
+| `n = 19`, `20`, `21` | `24/5` | `T-020` | `S4` |
+
+**Open, with the evidence already gathered.** Two sides were attacked and neither
+settled, both stopped on cost rather than on an answer, and both are cheap to resume
+because the checkpoints and the readings are in the record.
+
+- `n = 18` at `117/25 = 4.68`. Three site sets, 538, 578 and 618 orbits, all returned a
+  restricted optimum of exactly `18.000000`, the third after 157 row rounds and 7056 s.
+  Adding sites can only lower a restricted optimum and it did not move.
+  Either the covering value is at or above eighteen, or the optimum sits on a degenerate
+  vertex. `T-019`’s `next_rung` carries both readings and the evidence for each.
+- `n = 11` at `19/5 + 1/100 = 3.82`. Two independent site sets stop at exactly eleven,
+  and the rejection route is far from closing: the exact maximum pointwise depth is
+  `1925/1152`, which caps the feasible total at `1152/175` against the eleven a ceiling
+  needs. `T-018`’s `next_rung` has the full account.
+
+**Where the method stops, which is now proved rather than guessed.** No certificate for
+`n` exists above `ceil(sqrt(n)) * B`. `n = 12` is foreclosed against its conjectured
+`4`. `n = 20` and `n = 21` can be brought to within `0.0115` of their upper bound and no
+nearer. `n = 11`, `17`, `18` and `19` are limited by their best known packings rather
+than by the ceiling.
+
+**What the next block must not skip.** `BC-190` and `BC-191` come first because the
+retention gate is now the dominant cost: one exact sweep is `5378 s` at 2260 atoms and
+scales as `atoms^2.00`, so the next rung at any size costs more to retain than to find.
+Do not point a run at a larger case before that is addressed — the reach table says the
+prizes are there, and the cost law says the gate will eat the block.
+
 ## Why efficiency before bounds
 
-Agenda 017 moved five registered cases in a day.
+Agenda 017 moved seven registered cases in a day.
 It also spent its time like this, and the figures are from its own logs rather than from
 recollection:
 
@@ -305,7 +347,9 @@ recollection:
 | --- | --- |
 | Exact vs interval, 1184 atoms | `1473 s` against `65 s`, both timed in one run |
 | Exact vs interval, 2097 atoms | `4866 s` against `110 s`, both timed in one run |
-| Fitted exponents | exact `atoms^2.09`, interval `atoms^0.92` — quadratic against linear |
+| Exact vs interval, 2260 atoms | `5378 s` against `173 s`, on a contended machine |
+| Fitted exponent, exact sweep | `atoms^2.00` over the full 1184-to-2260 range — quadratic |
+| Fitted exponent, interval route | `atoms^0.92` on the one uncontended pair — linear |
 | Row generation, share of a round | `79%` to `94%` at every side measured |
 | `n = 20` round 0, grids `(23, 31, 39)` | over `3300 s`, did not finish |
 | `n = 20` round 0, grids `(29, 39, 49)` | `376 s` |
@@ -316,13 +360,22 @@ Three of those are not close calls.
 
 The interval route decides **361 directions where the exact sweep decides 181**, needs
 one fewer hypothesis — deciding on the doubled net it never invokes the `D4` reflection,
-so it does not need `C0` at all — and ran `22.7×` faster at 1184 atoms and `44.2×` at
-2097\. The ratio widens because the two scale differently, quadratic against linear, and
-the certificates are growing.
-The exact sweep belongs at the retention gate, where correctness is the only thing that
-matters and an hour is affordable.
-Whether it belongs in the generator’s inner loop is a question nobody has asked, and
-`BC-190` asks it.
+so it does not need `C0` at all — and ran `22.7×` faster at 1184 atoms, `44.2×` at 2097
+and `31×` at 2260. The ratio widens because the two scale differently, quadratic against
+linear, and the certificates are growing.
+Read the 2260 pair with its caveat.
+That certificate is `T-020`, decided after this agenda was drafted; its exact sweep had
+the machine largely to itself and its interval run did not, so the `31×` understates the
+gap and the exponent it implies for the interval route is not usable.
+The exact side is the trustworthy half, and it holds: three points from 1184 to 2260
+atoms fit `atoms^2.00`, so the retention gate’s cost is quadratic in the certificate and
+the certificates are getting larger every rung.
+The one figure to compare across runs is the box count, which is deterministic:
+`3,683,951` at 1184 atoms, `4,448,751` at 2097, `5,638,343` at 2260. The exact sweep
+belongs at the retention gate, where correctness is the only thing that matters and an
+hour is affordable.
+Whether it belongs in the generator’s inner loop is a question nobody
+has asked, and `BC-190` asks it.
 
 The site grids do not scale with the container.
 `build_site_grid` places a fixed *count* of points across the side, so at `4.80` the

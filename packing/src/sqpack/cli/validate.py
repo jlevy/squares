@@ -1257,6 +1257,15 @@ def _rung_figures(context: Context) -> str:
     return _module(context, "devtools.check_rung_figures")
 
 
+def _case_prose(context: Context) -> str:
+    # Sub-second: it regex-scans a hundred case bodies against their own front matter and
+    # reuses check_rung_figures's exact-arithmetic rule. Records tier because it checks the
+    # record against itself, not the mathematics -- n-017, n-018, and n-019 all stated a
+    # verified lower bound in prose that the front matter above it had already moved past,
+    # and stayed that way for six hours; check_rung_figures never reads a case body.
+    return _module(context, "devtools.check_case_prose")
+
+
 def _session_rollups(context: Context) -> str:
     # Sub-second: it reads frontmatter and stats files. Records-tier because that is exactly
     # what it checks -- that a terminal session names what it cost and the record is there.
@@ -1944,6 +1953,18 @@ STEPS: tuple[Step, ...] = (
             "packing/frontier/results.yaml",
             "packing/frontier/evidence.yaml",
             "packing/defects.yaml",
+        ),
+    ),
+    Step(
+        "case prose agrees with its own front matter",
+        _case_prose,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/check_case_prose.py",
+            "packing/devtools/check_rung_figures.py",
+            "packing/frontier/n-*.md",
         ),
     ),
     Step(

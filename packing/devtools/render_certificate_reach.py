@@ -20,6 +20,13 @@ The figure to rank on is the last column, which is the most a certificate could 
 to the case's lower bound. It is an upper bound on the prize and not a forecast: what
 a search actually reaches is set by the covering value at that side, which is lower.
 
+A second join adds what the record now shows about that gap between prize and
+reach: every retained certificate lands within 0.001 of the same fraction of its
+case's best known packing. That regularity is measured from three points, not
+proved, and the document says so plainly where it appears -- see
+`measured_attainment` and `predict_reach` for where the two figures it produces,
+`ratio` and `predicted`, come from.
+
 Usage:
     uv run --frozen python -m devtools.render_certificate_reach
     uv run --frozen python -m devtools.render_certificate_reach --check
@@ -28,6 +35,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import json
 import pathlib
 import re
 import sys
@@ -35,10 +43,15 @@ from fractions import Fraction
 
 from strif import atomic_output_file
 
-from sqpack.fractional.certificate import ceiling_side_for_net, grid_refutation_order
+from sqpack.fractional.certificate import (
+    ceiling_side_for_net,
+    grid_refutation_order,
+    least_size_certified,
+)
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
+CASES = ROOT / "cases"
 OUT = FRONTIER / "CERTIFICATE-REACH.md"
 
 BANNER = (
@@ -89,6 +102,115 @@ def cases() -> list[dict]:
     return rows
 
 
+def retained_certificates() -> list[dict]:
+    """Every retained first-party certificate, found by globbing the case packages.
+
+    A case package's own ``__main__.py`` always replays ``certificate.json`` as the
+    rung currently in force -- every package's ``replay.py`` sets
+    ``CERTIFICATE_PATH = Path(__file__).with_name("certificate.json")``, and a
+    package that also keeps a weaker historical rung stores it under a different
+    filename (``certificate-<side>.json``), never this one. So globbing straight to
+    that filename, rather than importing each package's Python, finds exactly the
+    rungs the register currently holds.
+
+    The row is keyed by ``least_size_certified``, not by the JSON's own ``n`` field:
+    the package named ``n20_fractional_certificate`` carries a certificate recorded
+    at ``n = 20``, but its mass of 946131/50000 = 18.922620 certifies every integer
+    above that, so the case it moves first -- and the one this document keys it to
+    -- is ``n = 19``.
+    """
+    rows = []
+    for path in sorted(CASES.glob("n*_fractional_certificate/certificate.json")):
+        record = json.loads(path.read_text())
+        total_mass = Fraction(str(record["total_mass"]))
+        outer_side = Fraction(str(record["outer_side"]))
+        rows.append(
+            {
+                "package": path.parent.name,
+                "n": least_size_certified(total_mass),
+                "lower": float(outer_side),
+            }
+        )
+    return rows
+
+
+def measured_attainment(rows: list[dict]) -> list[dict]:
+    """Join every retained certificate against its case's ceiling and best packing.
+
+    ``rows`` is `cases`'s output. A retained certificate's own target ``n`` (from
+    `retained_certificates`) picks the row that carries its ceiling and best known
+    packing, exactly as every other figure in this document is derived rather than
+    looked up by hand. ``binds`` names whichever of the two is the tighter cap, and
+    ``ratio`` is the retained lower bound divided by that binding value -- against
+    the best packing where the packing binds, against the ceiling where it does not.
+    """
+    by_n = {row["n"]: row for row in rows}
+    out = []
+    for cert in retained_certificates():
+        case = by_n[cert["n"]]
+        best_packing = case["upper"]
+        ceiling = case["ceiling"]
+        lower = cert["lower"]
+        if best_packing is None:
+            raise ValueError(f"n = {cert['n']}: retained certificate has no best packing")
+        if ceiling >= best_packing:
+            binds, ratio = "packing", lower / best_packing
+        else:
+            binds, ratio = "ceiling", lower / ceiling
+        out.append(
+            {
+                "n": cert["n"],
+                "package": cert["package"],
+                "lower": lower,
+                "best_packing": best_packing,
+                "ceiling": ceiling,
+                "binds": binds,
+                "ratio": ratio,
+            }
+        )
+    return sorted(out, key=lambda r: r["n"])
+
+
+def mean_packing_ratio(measured: list[dict]) -> float:
+    """The mean ``ratio`` over certificates the best packing binds, not the ceiling.
+
+    ``n = 12`` is the case this excludes: its ceiling sits below its best packing, so
+    its ratio measures how close the certificate came to the method's own ceiling,
+    not to a packing, and averaging it in would mix two different questions.
+    """
+    packing_bound = [row["ratio"] for row in measured if row["binds"] == "packing"]
+    if not packing_bound:
+        raise ValueError("no packing-limited retained certificates to average")
+    return sum(packing_bound) / len(packing_bound)
+
+
+def predicted_reach(rows: list[dict], ratio: float) -> list[dict]:
+    """Every live row plus what the mean packing ratio would extrapolate to.
+
+    ``predicted`` is ``min(ratio * best_packing, ceiling)`` -- the mean ratio applied
+    to the case's own best packing, capped at the method's own ceiling so the
+    extrapolation never claims more than `ceiling_side_for_net` allows. ``predicted
+    gain`` is ``predicted - lower``, clamped at zero: a case already past its
+    prediction (as a case with no prize at all would be) gets no negative row.
+    A row with no recorded best packing is dropped rather than given a fabricated
+    prediction; every live case in the retained register carries one today.
+    """
+    out = []
+    for row in rows:
+        best_packing = row["upper"]
+        if best_packing is None:
+            continue
+        predicted = min(ratio * best_packing, row["ceiling"])
+        out.append(
+            {
+                **row,
+                "predicted": predicted,
+                "predicted_gain": max(predicted - row["lower"], 0.0),
+            }
+        )
+    return out
+
+
 def render(rows: list[dict]) -> str:
     out = [BANNER, "", "# Where the fractional certificate can still go", ""]
     out += [
@@ -136,6 +258,67 @@ def render(rows: list[dict]) -> str:
         out.append(
             f"| {r['n']} | {r['order']} | {r['lower']:.4f} | {upper} | "
             f"{r['ceiling']:.4f} | {r['verdict']} | {r['prize']:+.4f} |"
+        )
+
+    measured = measured_attainment(rows)
+    ratio = mean_packing_ratio(measured)
+    out += [
+        "",
+        "## Measured attainment",
+        "",
+        "Every retained first-party fractional certificate, joined against its case's",
+        "best packing and ceiling. `ratio` is the retained lower bound divided by",
+        "whichever of the two `limited by` names -- the only honest denominator, since",
+        "the other one was never in reach.",
+        "",
+        "| n | package | retained lower bound | best packing | ceiling",
+        "| limited by | ratio |",
+        "| ---: | --- | ---: | ---: | ---: | --- | ---: |",
+    ]
+    for r in measured:
+        out.append(
+            f"| {r['n']} | {r['package']} | {r['lower']:.4f} | {r['best_packing']:.4f} | "
+            f"{r['ceiling']:.4f} | {r['binds']} | {r['ratio']:.5f} |"
+        )
+    out += [
+        "",
+        "## What three points would predict, if the ratio held",
+        "",
+        f"**This is an extrapolation from three points, not a measurement.** The three",
+        "packing-limited rows above -- n = 11, n = 17, n = 19 -- land inside a band",
+        "0.001 wide, and their mean is the `ratio` this section's numbers all come",
+        f"from: `{ratio:.5f}`. That the three numbers are exact rationals decided by",
+        "an exact verifier does not make their mean a rate. No rung in this register",
+        "has ever been claimed from a fitted curve, and this one is not the exception:",
+        "it is offered here as a place to look, not as a result.",
+        "",
+        "The ratio is also not purely about how good a covering value the method can",
+        "reach -- it is an observation about where searches were stopped as much as",
+        "about where they could go. Two of the three runs behind it were halted on",
+        "projected cost before they answered whether their side could be pushed",
+        "higher; only one ran its covering search to a converged optimum (see each",
+        "case's `next_rung` in `frontier/results.yaml`). A ratio built half from where",
+        "searches were stopped and half from where they could go is not a rate to",
+        "spend a rung's confidence on.",
+        "",
+        "`predicted` below is `min(ratio * best_packing, ceiling)` and `predicted",
+        "gain` is `predicted - lower`, clamped at zero. Read them as where to look",
+        "next, never as a result standing in for one: the number to act on when a",
+        "case is actually run is still the restricted optimum a converged search",
+        "reaches, not this extrapolation.",
+        "",
+        "## Ranked by predicted gain",
+        "",
+        "| n | m | lower | best packing | ceiling | limited by | prize | predicted",
+        "| predicted gain |",
+        "| ---: | ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: |",
+    ]
+    for r in sorted(predicted_reach(live, ratio), key=lambda r: -r["predicted_gain"]):
+        upper = f"{r['upper']:.4f}" if r["upper"] is not None else "—"
+        out.append(
+            f"| {r['n']} | {r['order']} | {r['lower']:.4f} | {upper} | "
+            f"{r['ceiling']:.4f} | {r['verdict']} | {r['prize']:+.4f} | "
+            f"{r['predicted']:.4f} | {r['predicted_gain']:+.4f} |"
         )
     out += ["", "## Foreclosed", ""]
     out += ["| n | m | lower | ceiling |", "| ---: | ---: | ---: | ---: |"]

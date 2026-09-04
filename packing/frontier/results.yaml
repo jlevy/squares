@@ -854,13 +854,111 @@ results:
       conditions only C1 mentions n, and the covering program behind the search does not
       contain n at all -- minimising total mass subject to every admissible B-square
       carrying mass at least 1 is a question about L, B and the net. So one atom set
-      proves s(n) >= L for every integer n above its mass, this certificate's 16.965735
+      proves s(n) >= L for every integer n above its mass, this certificate's 16.933080
       reaching 17, 18 and 19 directly rather than through the monotonicity step the
       composition field records, and a larger n is strictly easier at the same side.
-      The headroom says the rest. n = 17 has 0.0855 to its best known packing at
-      4.675530; n = 18 has 0.2329 to 4.822876 and n = 19 has 0.2956 to 4.885618, both
-      still carrying this certificate's side with nothing case-specific ever proved for
-      either; and n = 20 has 0.3944 to the trivial 5, holding Nagamochi's closed-form
-      1 + sqrt(13) = 4.605551. A run at a side whose covering value lands between 17 and
-      18 raises n = 18 and leaves n = 17 where it is; one landing between 19 and 20
-      displaces a published closed form.
+      The headroom said the rest, when this was written. n = 17 had 0.0855 to its best
+      known packing at 4.675530; n = 18 had 0.2329 to 4.822876 and n = 19 had 0.2956 to
+      4.885618, both still carrying this certificate's side with nothing case-specific
+      ever proved for either; and n = 20 had 0.3944 to the trivial 5, holding
+      Nagamochi's closed-form 1 + sqrt(13) = 4.605551. A run at a side whose covering
+      value lands between 17 and 18 would raise n = 18 and leave n = 17 where it is; one
+      landing between 19 and 20 would displace a published closed form.
+      The second of those was run the same day and is registered as T-020, at side 24/5
+      with a covering value between nineteen and twenty. It supersedes this result at
+      n = 19 and moves n = 20 and n = 21 as well. What this result still holds alone is
+      n = 17 and n = 18: T-020's atoms are too heavy for either, which is the reach rule
+      above read in the other direction. This result stays true as stated at all three
+      of its sizes and keeps its rungs.
+      For n = 17 the reading is unchanged and the runway is 0.3985 to the ceiling and
+      0.0855 to the packing. For n = 18 the open question is the one the 117/25 run left
+      open above.
+
+  - id: T-020
+    claim: >-
+      s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted
+      fractional unavoidable-set certificate at container side 24/5 = 4.80. Two of the
+      three cases had held nothing but a general closed form since 2005 -- Nagamochi's
+      min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1), which gives
+      1 + sqrt(13) = 4.6055... at n = 20 and 1 + sqrt(14) = 4.7416... at n = 21 -- and
+      the third held the 459/100 = 4.59 this project certified earlier the same day as
+      T-019. The movement is +0.21 at n = 19, +0.194449 at n = 20 and +0.058343 at
+      n = 21, and this is the first lower bound of any kind proved about twenty or
+      twenty-one squares in particular rather than read off a formula.
+      The three sizes take no monotonicity step. Only C1 mentions n among the five
+      conditions, so an atom set of mass 946131/50000 certifies the side for every
+      integer strictly above that mass, which is 19 and upward. From n = 22 on the
+      register already holds 5, so the certificate is true there and weaker; these three
+      are where it moves anything.
+      One rung is retained rather than a ladder. The side was reached in a single
+      resumed column-generation run, not climbed to, so there is no weaker certificate
+      at this size to compare it against.
+    scope:
+      n_values:
+        - 19
+        - 20
+        - 21
+    verification: V4
+    confirmation: C4
+    significance:
+      score: 4
+      rationale: >-
+        Scored against the rubric's anchor for S4, "a reusable technique, bound family,
+        or resolved disputed value", and by parity with T-019, which has the same shape:
+        one certificate moving three registered cases and displacing a published value.
+        This one displaces more. The movement is +0.21 at n = 19 against T-019's
+        +0.0842, the largest single-case movement in the register; and at n = 20 and
+        n = 21 it displaces a peer-reviewed closed form that has stood since 2005, where
+        no bound specific to either size had ever been proved.
+        Held below S5 for the reasons T-019 was: none of the three is the central open
+        case, the method and its parametrisation are Burns's and Massaccesi's, and no
+        case changes character at the new value.
+        A calibration note for whoever scores the next one. This is the fourth result
+        from one instrument in a day, and the S4 anchor is being carried here by the
+        displacement rather than by the technique, which T-017 already banked. Further
+        sizes from the same generator, absent a new technique or a case that changes
+        character, belong at S3.
+      scored: '2026-09-04'
+      by: BC-161 continuation (repository; no independent evaluator, see composition)
+    novelty: apparently-novel
+    composition: >-
+      Primary at all three sizes: one certificate, one accepted verdict, the bound being
+      the container side directly. There is no monotonicity or composition step anywhere
+      between the artifact and the claim -- the three sizes come out of C1, which is the
+      only condition that mentions n.
+      C4 is earned by two evidence entries whose method values differ, the exact
+      event-cell sweep and the interval branch and bound, both run in this repository.
+      Unlike T-017 and T-019 no independent evaluator reviewed the scoring, and there is
+      no external review, so C5 is as far away here as there.
+    evidence:
+      - E-n020-fractional-certificate
+      - E-fractional-interval-decision
+    artifacts:
+      - packing/cases/n20_fractional_certificate/certificate.json
+      - packing/src/sqpack/fractional/colgen.py
+    controls:
+      - packing/tests/test_fractional_certificate.py
+    next_rung: >-
+      The retained certificate's total is 946131/50000 = 18.922620, leaving 0.077380
+      below nineteen, and that margin is where a further rung has to be found. It is a
+      wide margin by this register's standards -- n = 17's top rung has 0.066920 and
+      n = 12's has 0.001040 -- which says the side was not pushed to where the covering
+      value stops it, only to where the run was stopped.
+      That is the honest reading of how this one was obtained. The column generation was
+      halted at round 9 with a restricted optimum of 18.916941, because four more rounds
+      would have cost about 3.75 h to buy margin nothing needed. The side above it was
+      never attempted.
+      Where the ceiling sits differs across the three sizes and it matters. A certificate
+      for n cannot exist above ceil(sqrt(n)) * B, which for all three is 5B = 4.9885, so
+      0.1885 of structural runway remains. But at n = 19 the best known packing is
+      4.885618, and no certificate can exceed a side a packing achieves, so the real
+      runway there is 0.085618. At n = 20 and n = 21 the best known packing is the
+      trivial 5, so the ceiling binds first: the method could in principle close either
+      to within 0.0115 of the upper bound and can never reach it.
+      That asymmetry is the targeting instruction. A run above 4.885618 that succeeded
+      would contradict the retained n = 19 packing and is a refutation to look for rather
+      than a rung to expect; a run between 4.80 and 4.9885 that succeeds moves n = 20 and
+      n = 21 and stops at n = 19. The quantity to read is the restricted optimum a
+      converged run reaches, never an extrapolated rate, and the cost is the exhaustive
+      tier: this certificate's exact sweep took 5378 s at 2260 atoms, against 173 s for
+      the interval route on the same bytes.

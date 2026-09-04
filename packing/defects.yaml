@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 441
+count: 442
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13979,8 +13979,9 @@ defects:
     Freezing first is not a weaker check. The reload was already there and already decided
     the bytes; what changed is that the bytes now exist whether or not the decision
     finishes.
-    The two drivers that lost candidates carried the old ordering because they predate the
-    parametrised one and were not touched by the first fix. They are superseded rather
+    The two drivers that were briefly reported as having lost candidates carried the old
+    ordering because they predate the parametrised one and were not touched by the first
+    fix; neither in fact lost anything. They are superseded rather
     than patched: recovery from a checkpoint now goes through the rescale driver, which
     freezes each candidate to its own path before deciding it and hands the file to
     `devtools.decide_certificate`. A driver that cannot produce a file for that tool is a
@@ -13992,3 +13993,65 @@ defects:
     rule; the driver now hands it a file.
   status: fixed
   recorded_in: packing/devtools/decide_certificate.py
+- id: D-442
+  title: A case body kept quoting a bound its own front matter had already moved past
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    six hours at n = 17, n = 18 and n = 19, from the T-019 retention on 2026-09-04 until
+    the T-020 retention the same evening went to update the same files; and, in the
+    second instance below, from the T-019 retention until the same read
+  severity: medium
+  what: >-
+    A frontier case file is two records in one document: YAML front matter, which is
+    machine-checked, and hand-written Markdown prose below it, which is not. Retaining a
+    result updates `verified_lower_bound` in the front matter of every case it moves. It
+    does not update the prose, and nothing checked that the two agree.
+    So after T-019 moved n = 17, n = 18 and n = 19 to 459/100, all three bodies still
+    opened by telling the reader the verified lower bound was 22529/5000 = 4.5058, with
+    n = 18's and n = 19's still explaining that the bound is inherited by monotonicity
+    from a certificate they no longer depend on. The front matter said one thing and the
+    sentence a human reads first said another.
+    Two further instances of the same class were found in the same read, in places the
+    existing detector does not look. `T-019`'s own `next_rung` described "this
+    certificate's 16.965735" -- the mass of the 229/50 rung, quoted as the retained
+    459/100 rung's, whose mass is 423327/25000 = 16.933080. `check_rung_figures` covers
+    exactly this and missed it, because it recognises a total written as "the total is
+    X" and not one written as a possessive. And `test_the_n17_certificate_does_not_reach_
+    n20` had a docstring naming 459/100 over an assertion testing 229/50; both integer
+    comparisons are true, so no test failed when the rung moved underneath it.
+    A fourth instance was found by the detector itself, on its first run over the live
+    corpus, in a case nobody in this session had touched: n-029's opening paragraph
+    reported the verified upper bound as 5.93388579981302587863645209, the ceiling that
+    case held before T-009 replaced it with 5.93383346267692918974379895098 -- a value
+    the very next section of the same document states correctly. The paragraph also
+    explained a discrepancy that no longer exists, the two bounds now differing by
+    9.18974379895098E-15 rather than by the fifth decimal.
+  consequence: >-
+    No bound is wrong and no verdict changes. Every affected statement was true when it
+    was written and each named a real, correctly computed figure; what drifted is which
+    object the figure describes. The cost is to a reader, and it is not small: the case
+    body is the document a person opens to learn what is known about a size, and for six
+    hours it under-reported three cases by 0.0842 and attributed them to the wrong
+    certificate.
+    This is `D-439` recurring, six hours after `D-439` was recorded and its detector
+    built. That is the finding worth keeping. The detector answered the surface the defect
+    was found on -- the results register -- and the same failure simply moved to the two
+    surfaces beside it, the case bodies and the tests. A durable record has more than one
+    place to describe a rung, and each one needs its own check or it will be the next one
+    to go stale.
+  fix: >-
+    Fixed on 2026-09-04. The six affected case bodies (n = 17 through n = 21, and
+    n = 29) are rewritten against their own front matter, with the displaced bounds kept
+    as history and marked as displaced rather than deleted. T-019's possessive figure is corrected to
+    the retained certificate's own mass, and the n = 17 test's assertion is brought onto
+    the rung its docstring names.
+    The durable part is `devtools/check_case_prose.py`, which reads every case file's
+    front matter and its prose and refuses any quoted bound on that file's own n that
+    disagrees with the record, allowing a weaker figure only where the sentence marks it
+    as history.
+  regression: packing/tests/test_case_prose.py
+  status: fixed
+  recorded_in: packing/devtools/check_case_prose.py
