@@ -21,6 +21,16 @@ argument shows the infimum is attained, but nothing below needs that.)
 
 **Claim.** `s(11) ≥ 19/5 = 3.8`.
 
+This package checks that claim, and everything below is about it.
+The repository has since certified a larger value for the same case,
+`s(11) ≥ 381/100 = 3.81`, retained at `../certificate.json` and decided by two verifiers
+that fail differently.
+The package deliberately still carries `19/5`: it is the artifact an adversarial review
+read line by line, and its pasted numbers are that review’s observations.
+Nothing here is stale — `19/5` is a retained rung and the argument for it is the
+argument for the larger value — but a reader who wants the repository’s current best
+bound should read the case record rather than this file.
+
 What it displaces: the lower bound `2 + 4/√5 = 3.788854…` stated by Walter Stromquist,
 *Packing 10 or 11 unit squares in a square*, Electronic Journal of Combinatorics 10
 (2003), R8
