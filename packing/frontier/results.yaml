@@ -690,11 +690,12 @@ results:
       nothing on its own; the loop's stopping condition is the thing to read.
   - id: T-019
     claim: >-
-      s(17) >= 451/100, and s(18) >= 451/100 and s(19) >= 451/100 by monotonicity, from a
+      s(17) >= 229/50, and s(18) >= 229/50 and s(19) >= 229/50 by monotonicity, from a
       first-party weighted fractional unavoidable-set certificate at container side
-      451/100 = 4.51. This displaces Massaccesi's 22529/5000 = 4.5058 (T-015) and the two
+      229/50 = 4.58. This displaces Massaccesi's 22529/5000 = 4.5058 (T-015) and the two
       cases T-016 carried from it, all three of which had held that value since its
-      adoption on 2026-09-03. The movement is +0.0042 at each of the three sizes. It does
+      adoption on 2026-09-03. The movement is +0.0742 at each of the three sizes, and the
+      451/100 rung this result first reached is retained below it. It does
       not reach n = 20, where Nagamochi's 1 + sqrt(13) = 4.6055... is larger.
     scope:
       n_values:
@@ -727,6 +728,7 @@ results:
       - E-fractional-interval-decision
     artifacts:
       - packing/cases/n17_fractional_certificate/certificate.json
+      - packing/cases/n17_fractional_certificate/certificate-451-100.json
       - packing/src/sqpack/fractional/colgen.py
     controls:
       - packing/tests/test_fractional_certificate.py

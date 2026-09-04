@@ -64,12 +64,12 @@ Results first established here, as far as the recorded source searches show, inc
   Two rungs are retained below it: `19/5`, the value that first passed Stromquist, and
   `189/50`, the calibration rung below him that was run first on purpose and proves
   nothing new. Scored `S5`, the rubric’s anchor for movement on a central open case.
-- **T-019: `s(17), s(18), s(19) ≥ 451/100`, displacing the published value.** The
-  adopted bound for these three cases was Massaccesi’s `4.5058`, taken from a source
-  rather than proved here.
-  The same generator returns `4.51` — 708 atoms, total mass `829681/50000 = 16.5936`
-  against `n = 17`, least covered mass `200017/200000` — so the repository now carries a
-  first-party certificate above the number it had adopted.
+- **T-019: `s(17), s(18), s(19) ≥ 229/50`, displacing the published value.** The adopted
+  bound for these three cases was Massaccesi’s `4.5058`, taken from a source rather than
+  proved here. The same generator returns `4.58` — 1173 atoms, total mass
+  `3393147/200000 = 16.9657` against `n = 17`, least covered mass `12501/12500` — so the
+  repository now carries a first-party certificate `0.0742` above the number it had
+  adopted, and the `451/100` rung it reached first is retained below.
   It stops at `n = 19` because `n = 20` already carries more: Nagamochi’s
   `1 + √13 = 4.6055…` is the larger bound there.
 - **T-017: `s(12) ≥ 197/50`, from nothing case-specific at all.** `n = 12` had only the

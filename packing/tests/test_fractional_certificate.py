@@ -399,19 +399,19 @@ def test_the_n17_certificate_displaces_massaccesis_published_bound() -> None:
     """
     certificate = n17_load()
     assert certificate.n == 17
-    assert certificate.bounded_side == Fraction(451, 100)
+    assert certificate.bounded_side == Fraction(229, 50)
     assert certificate.bounded_side > Fraction(22529, 5000)
-    assert certificate.total_mass == Fraction(829681, 50000)
+    assert certificate.total_mass == Fraction(3393147, 200000)
     assert certificate.total_mass < 17
 
     record = n17_declared()
-    assert record["claim"] == "s(17) >= 451/100"
+    assert record["claim"] == "s(17) >= 229/50"
     assert record["total_mass"] == str(certificate.total_mass)
 
 
 @pytest.mark.exhaustive_exact
 def test_the_n17_certificate_is_accepted() -> None:
-    """The 708-atom certificate over 181 directions, decided exactly.
+    """The 1173-atom certificate over 181 directions, decided exactly.
 
     Marked exhaustive: this is a thirteen-minute sweep, and the fast test above
     already pins every number the record claims about the same file.
@@ -425,11 +425,11 @@ def test_the_n17_certificate_is_accepted() -> None:
 
 
 def test_the_n17_certificate_does_not_reach_n20() -> None:
-    """The scope claim: 451/100 lifts n = 17, 18 and 19, and not n = 20.
+    """The scope claim: 229/50 lifts n = 17, 18 and 19, and not n = 20.
 
-    Monotonicity carries a bound upward, so n = 20 would inherit 451/100 too --
+    Monotonicity carries a bound upward, so n = 20 would inherit 229/50 too --
     but Nagamochi's closed form already gives it 1 + sqrt(13), which is larger.
-    Decided in integers: 1 + sqrt(13) > 451/100 iff 13 * 100^2 > (451 - 100)^2.
+    Decided in integers: 1 + sqrt(13) > 229/50 iff 13 * 50^2 > (229 - 50)^2.
     """
-    assert 13 * 100**2 > (451 - 100) ** 2
-    assert n17_load().bounded_side == Fraction(451, 100)
+    assert 13 * 50**2 > (229 - 50) ** 2
+    assert n17_load().bounded_side == Fraction(229, 50)
