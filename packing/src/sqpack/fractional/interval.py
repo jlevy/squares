@@ -66,8 +66,9 @@ What this method cannot do. A leave-edge of one region lying *exactly* on the
 enter-edge of another, or a region edge passing exactly through a domain corner,
 leaves a sliver no enclosure can close; the search then reaches its resolution
 floor with the box still undecided and reports it as such, which is a refusal
-to accept and never an acceptance. The census in the report that introduced
-this module found no such coincidence in the retained certificates.
+to accept and never an acceptance. The seam census in
+``tests/test_fractional_interval.py`` finds no such coincidence in the retained
+certificates, and the full-net searches report no stalled box.
 """
 
 from __future__ import annotations
@@ -322,7 +323,7 @@ class DirectionSearch:
 
     Boxes live in the rotated ``(u, v)`` frame, where every coverage region is
     axis-aligned; the admissible domain is the rotated container square, met
-    through the bound propagation in ``_tighten``.
+    through the bound propagation in ``tighten``.
     """
 
     def __init__(
@@ -423,18 +424,30 @@ class DirectionSearch:
         """Bisect each box across the axis with more region edges inside it.
 
         A box fails to certify because some regions cover only part of it, so the
-        useful split is the one that separates their edges. Splitting the longer
-        side instead would slice a long thin box along its length forever.
-        Boxes below the resolution floor on both axes are returned as stalled.
+        useful split is the one that separates their edges: an axis with no edge
+        strictly inside the box is not split, because both children would count
+        exactly the atoms the parent did. The exception is a box not yet provably
+        inside the domain, whose children can still be tightened or dropped. A
+        box that can be split along neither axis is stalled: it is thinner than
+        the resolution floor across every seam it straddles, and returned as
+        undecided rather than sliced along its length forever.
         """
-        ulo, uhi, vlo, vhi = self.outer
+        # Inner edges, because those are the ones a child must clear to count an
+        # atom the parent could not; the outer ones matter only to point bounds.
+        ulo, uhi, vlo, vhi = self.inner
         a, b, c, d = (boxes[:, i : i + 1] for i in range(4))
         u_edges = (((a < ulo) & (ulo < b)) | ((a < uhi) & (uhi < b))).sum(axis=1)
         v_edges = (((c < vlo) & (vlo < d)) | ((c < vhi) & (vhi < d))).sum(axis=1)
+        inside = (
+            self.admissible(boxes[:, 0], boxes[:, 2])
+            & self.admissible(boxes[:, 1], boxes[:, 2])
+            & self.admissible(boxes[:, 0], boxes[:, 3])
+            & self.admissible(boxes[:, 1], boxes[:, 3])
+        )
         width_u = boxes[:, 1] - boxes[:, 0]
         width_v = boxes[:, 3] - boxes[:, 2]
-        can_u = width_u > RESOLUTION_FLOOR
-        can_v = width_v > RESOLUTION_FLOOR
+        can_u = (width_u > RESOLUTION_FLOOR) & ((u_edges > 0) | ~inside)
+        can_v = (width_v > RESOLUTION_FLOOR) & ((v_edges > 0) | ~inside)
         prefer_u = (u_edges > v_edges) | ((u_edges == v_edges) & (width_u >= width_v))
         along_u = can_u & (prefer_u | ~can_v)
         along_v = can_v & ~along_u
