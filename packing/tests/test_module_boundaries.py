@@ -306,27 +306,33 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
 def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> None:
     expected = {
-        # Full 181-direction exact decisions. Cost scales with the atom count, and
-        # the certificates grew by an order of magnitude as the ladders were climbed:
-        # Massaccesi's 168-atom fixture is about 25 s, the 373-atom calibration rung a
-        # few minutes, and the 681-, 1121- and 1173-atom retained certificates run to a
-        # quarter of an hour each. Together they exceeded the whole CI budget for the
-        # fast tier, which is why they are here. Every one has a fast counterpart in
-        # the same file that pins what its record claims, or decides it on a coarse net.
+        # Full 181-direction exact decisions. Until 2026-09-04 these ran to a quarter
+        # of an hour each on the Fraction sweep and together exceeded the CI budget
+        # for the fast tier. Agenda 020's integer sweep brought the retained
+        # certificates to 14-39 s apiece on four cores (n = 17 in 21.8 s, n = 20 in
+        # 38.7 s), which is still above the bar this registry has always applied --
+        # Massaccesi's 168-atom fixture at about 25 s -- and together they are still
+        # two to four minutes on a two-core runner whose whole fast tier has a
+        # 1800 s budget. Re-pricing them into the fast tier is BC-195's call, with
+        # the measurement now in hand. Every one has a fast counterpart in the same
+        # file that pins what its record claims, or decides it on a coarse net.
         "test_fractional_certificate.py": {
             "test_the_full_retained_certificate_is_accepted",
             "test_the_retained_n12_certificate_is_accepted",
             "test_the_n11_calibration_rung_verifies_on_the_full_net",
             "test_the_n11_certificate_is_accepted",
             "test_the_n17_certificate_is_accepted",
+            "test_the_n20_certificate_is_accepted",
         },
-        # The interval route over the doubled net, 361 directions and one to three
-        # million boxes each. The sub-net acceptance tests beside them stay fast.
+        # The interval route over the doubled net, 361 directions and one to six
+        # million boxes each; untouched by the integer sweep, and still minutes each.
+        # The sub-net acceptance tests beside them stay fast.
         "test_fractional_interval.py": {
             "test_the_393_100_certificate_is_accepted_on_the_full_doubled_net",
             "test_the_live_n12_certificate_is_accepted_on_the_full_doubled_net",
             "test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net",
             "test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net",
+            "test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net",
             "test_massaccesi_n17_reproduces_the_published_bound_on_the_full_doubled_net",
         },
         # The retention gate's own positive control: both routes on a retained rung,
