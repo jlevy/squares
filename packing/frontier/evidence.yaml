@@ -1267,3 +1267,58 @@ evidence:
       retained in docs/project/reviews/ and is the review artifact C5 asks for,
       pending the operator's reading of it.
     source_reviewed: '2026-09-04'
+  - id: E-n011-fractional-certificate
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained literature archive under packing/resources/ and the frontier source
+        register, which for n = 11 hold Stromquist 2003 (Theorem 2 and the Figure 14
+        cover this project refuted as D-152), the exp-017 repaired certificate, Trump's
+        1979 packing, Nagamochi 2005 and Friedman's record tables.
+      searched: >-
+        Searched for any lower bound on s(11) above 2 + 4/sqrt(5) = 3.788854. The corpus
+        holds none: that value has been the best since 2003 and the case body describes
+        the interval [3.788854, 3.877084] as the problem the project exists for. The
+        known hole is the same one E-n012-fractional-certificate names -- no systematic
+        sweep of recent preprints.
+      novel_object: >-
+        The certificate and the bound. The method is Burns's with Massaccesi's
+        parameters and the generator is this project's; what is new is an instance at
+        n = 11 and side 19/5, which is the first movement of this case's lower bound
+        since 2003.
+    certificate: cases/n11_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras python -m cases.n11_fractional_certificate
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over 425 atoms on a
+      D4-symmetric site set: the atom multiset is closed under the container's D4 group,
+      the total mass is 43391/4000 = 10.84775 and so strictly below 11, the 181-direction
+      net reaches pi/4, containment B(1 + D) < 1 holds at B = 9977/10000, and every
+      reachable event cell at every net direction carries mass at least 1, the least
+      being 50003/50000. The bound proved is the container side itself, 19/5, and the
+      shrunken square rescales nothing.
+      The certificate was found by column generation over D4 orbits after the separation
+      oracle was corrected to score the same cells the verifier decides (D-434); before
+      that correction the same search stalled above 11. It was re-decided from its file
+      on disk rather than in memory, and an independent evaluator -- the one written from
+      the theorem statement for T-017, which reproduces Massaccesi's published n = 17
+      bound as its own control -- confirmed C4 at 50003/50000, exact, at the upright
+      direction. The retained file's bytes were checksummed against the file that
+      evaluator read.
+      A calibration rung is retained beside it at side 189/50 = 3.78, below Stromquist's
+      bound, where the certificate proves nothing new. That run was made first and on
+      purpose: it is the diagnostic the project registered in advance to test the
+      approach honestly, and it is evidence that the instrument returns sane values below
+      the frontier as well as above it.
+      Not independent by method: both decisions are exact-algebraic, so this supports C3
+      and not C4.
+    source_reviewed: '2026-09-04'

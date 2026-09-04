@@ -561,12 +561,12 @@ results:
       inherited bound would be a new result, not a rung change.
   - id: T-017
     claim: >-
-      s(12) >= 77/20, by a first-party weighted fractional unavoidable-set
-      certificate at container side 77/20 = 3.85. This is the first lower bound
+      s(12) >= 39/10, by a first-party weighted fractional unavoidable-set
+      certificate at container side 39/10 = 3.9. This is the first lower bound
       specific to n = 12 in the retained corpus: the case previously held
       2 + 4/sqrt(5) = 3.788854..., which is Stromquist's s(11) bound inherited by
       monotonicity and says nothing about twelve squares in particular. The
-      movement is +0.061146, and the case stays open against its conjectured
+      movement is +0.111146, and the case stays open against its conjectured
       optimum of 4.
     scope:
       n_values:
@@ -582,7 +582,7 @@ results:
         been proved. Held down from higher by three things: the method is Burns's
         and Massaccesi's, not this project's, so what is new is an instance and a
         generator rather than a technique; the certificate has not been checked by
-        a second party; and the gap to the conjectured 4 is 0.15, which this
+        a second party; and the gap to the conjectured 4 is 0.1, which this
         approach does not close. The generator is the more durable half of the
         result, since it applies at every n.
       scored: '2026-09-04'
@@ -598,6 +598,8 @@ results:
     artifacts:
       - packing/cases/n12_fractional_certificate/certificate.json
       - packing/cases/n12_fractional_certificate/certificate-19-5.json
+      - packing/cases/n12_fractional_certificate/certificate-77-20.json
+      - packing/cases/n12_fractional_certificate/certificate-97-25.json
       - packing/src/sqpack/fractional/certificate.py
       - packing/src/sqpack/fractional/generate.py
     controls:
@@ -607,6 +609,52 @@ results:
       re-derivation is done and agrees, but it is exact-algebraic like the first,
       so an interval-certified decision would be the one that moves the rung. C5
       needs the operator to read the retained independent review. The bound
-      itself: at side 39/10 the covering program reaches exactly 12 on every grid
-      tried, so the next movement needs a finer site grid, a bisection between
-      77/20 and 39/10, or a different shrink -- a search question, not a rung.
+      itself: 39/10 was reached once the separation oracle was corrected to score
+      the cells the verifier decides (D-434); the ladder at 97/25, 77/20 and 19/5 is
+      retained beneath it. The hard ceiling from the shrink at 181 directions is
+      3.99082, so what remains is a search question, not a rung change.
+  - id: T-018
+    claim: >-
+      s(11) >= 19/5, by a first-party weighted fractional unavoidable-set certificate
+      at container side 19/5 = 3.8. This is the first movement of this case's lower
+      bound since Stromquist stated 2 + 4/sqrt(5) = 3.788854... in 2003, and n = 11 is
+      the smallest open case. The movement is +0.011146, and the case stays open
+      against Trump's 1979 packing at 3.877084: the interval narrows from 0.088230 to
+      0.077084.
+    scope:
+      n_values:
+        - 11
+    verification: V4
+    confirmation: C3
+    significance:
+      score: 4
+      rationale: >-
+        The smallest open case, and the only bound this instrument has moved that
+        displaces a value from the refereed literature rather than an inherited or
+        closed-form one. Scored above T-017 for that reason and held below the top by
+        the same three limits: the method is Burns's and Massaccesi's rather than this
+        project's, so what is new is an instance and the generator that found it; both
+        exact decisions are the same method family; and the remaining gap to the known
+        packing is 0.077, which this approach does not close. The calibration rung at
+        189/50, below Stromquist's bound, was run first by design and is retained.
+      scored: '2026-09-04'
+      by: BC-161 continuation (repository; independent evaluator confirmed C4, no external review)
+    novelty: apparently-novel
+    composition: >-
+      Primary: one certificate, one verifier, one accepted verdict. The bound is the
+      certificate's container side directly, with no monotonicity or composition step.
+      It raises no other case: every n > 11 already carries a larger verified bound.
+    evidence:
+      - E-n011-fractional-certificate
+    artifacts:
+      - packing/cases/n11_fractional_certificate/certificate.json
+      - packing/cases/n11_fractional_certificate/certificate-189-50.json
+      - packing/src/sqpack/fractional/colgen.py
+    controls:
+      - packing/tests/test_fractional_certificate.py
+    next_rung: >-
+      C4 needs a decision by a different method value, an interval-certified one rather
+      than a second exact-algebraic pass. C5 needs a review artifact by someone outside
+      the project. The bound itself: the covering value at 3.81 sat at 11.000 and at
+      3.83 at 11.105, both still descending when the block ended, so the next rung is a
+      search question and not a rung change.

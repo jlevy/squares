@@ -16,6 +16,9 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from cases.n11_fractional_certificate.replay import FIRST_RUNG_PATH as N11_FIRST_RUNG
+from cases.n11_fractional_certificate.replay import declared as n11_declared
+from cases.n11_fractional_certificate.replay import load as n11_load
 from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH, declared, load
 from cases.n17_weighted_certificate.fixture import load_retained_fixture
 from sqpack.fractional.certificate import Certificate, verify
@@ -147,16 +150,16 @@ def test_the_retained_n12_certificate_replays_and_is_accepted() -> None:
     """
     certificate = load()
     assert certificate.n == 12
-    assert certificate.bounded_side == Fraction(77, 20)
-    assert certificate.total_mass == Fraction(191, 16)
+    assert certificate.bounded_side == Fraction(39, 10)
+    assert certificate.total_mass == Fraction(470993, 40000)
     assert certificate.total_mass < 12
 
     verdict = verify(certificate)
     assert verdict.accepted, verdict.failures
-    assert verdict.minimum_cell_mass == 1
+    assert verdict.minimum_cell_mass >= 1
 
     record = declared()
-    assert record["claim"] == "s(12) >= 77/20"
+    assert record["claim"] == "s(12) >= 39/10"
     assert record["total_mass"] == str(certificate.total_mass)
     assert record["least_cell_mass"] == str(verdict.minimum_cell_mass)
 
@@ -173,7 +176,7 @@ def test_the_first_rung_at_19_5_still_replays() -> None:
 
 
 def test_the_n12_certificate_improves_the_inherited_bound() -> None:
-    """77/20 beats 2 + 4/sqrt(5), which n = 12 only held by monotonicity."""
+    """39/10 beats 2 + 4/sqrt(5), which n = 12 only held by monotonicity."""
     bound = load().bounded_side
     # L > 2 + 4/sqrt(5) iff (L - 2) > 4/sqrt(5) iff (L - 2)^2 * 5 > 16,
     # both sides being positive. Decided in exact rationals, not in floats.
@@ -257,7 +260,9 @@ def test_the_sweep_scores_every_cell_it_scored_before() -> None:
     deciding fewer placements than it used to, and the results registered
     against it no longer mean what they said.
     """
-    certificate = load()
+    certificate = load(
+        Path(__file__).parents[1] / "cases/n12_fractional_certificate/certificate-77-20.json"
+    )
     expected = {0: 1225, 1: 36481, 45: 38733, 90: 37733, 180: 36837}
     for index, count in expected.items():
         direction = rotation_from_half_tangent(str(index), certificate.half_tangents[index])
@@ -293,3 +298,34 @@ def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> No
     assert "C4 every reachable cell carries mass 1" in verdict.failures
     assert verdict.minimum_cell_mass is not None
     assert verdict.minimum_cell_mass < 1
+
+
+def test_the_n11_certificate_beats_stromquists_2003_bound() -> None:
+    """s(11) >= 19/5, replayed from its own file and re-decided.
+
+    2 + 4/sqrt(5) = 3.788854 had stood since Stromquist 2003 and was the only
+    bound n = 11 had. The comparison is decided in exact rationals: 19/5 > 2 +
+    4/sqrt(5) iff (19/5 - 2)^2 * 5 > 16, both sides being positive.
+    """
+
+    certificate = n11_load()
+    assert certificate.n == 11
+    assert certificate.bounded_side == Fraction(19, 5)
+    assert certificate.total_mass == Fraction(43391, 4000)
+    assert certificate.total_mass < 11
+    assert (certificate.bounded_side - 2) ** 2 * 5 > 16
+
+    verdict = verify(certificate)
+    assert verdict.accepted, verdict.failures
+    assert verdict.minimum_cell_mass is not None
+    assert verdict.minimum_cell_mass >= 1
+    assert n11_declared()["claim"] == "s(11) >= 19/5"
+
+
+def test_the_n11_calibration_rung_below_stromquist_also_verifies() -> None:
+    """189/50 proves nothing new, which is exactly why it was run first."""
+
+    certificate = n11_load(N11_FIRST_RUNG)
+    assert certificate.bounded_side == Fraction(189, 50)
+    assert (certificate.bounded_side - 2) ** 2 * 5 < 16
+    assert verify(certificate).accepted

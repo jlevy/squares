@@ -18,8 +18,8 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`8`](n-008.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`9`](n-009.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`10`](n-010.md) | `3 + (1/2)√2` | `3 + (1/2)√2` | `3.707106781187` | `3 + (1/2)√2` | proved | replayed here, external proof | — | 2026-08-25 |
-| [`11`](n-011.md) | `3.87708359002281` | `root(P_trump11, 3.87708359002281417730789706010096)` | `2 + 4/√5` | `2 + 4/√5` | open | replayed here | — | 2026-08-24 |
-| [`12`](n-012.md) | `4` | `4` | `2 + 4/√5` | `77/20` | open | replayed here, audited here | formal lower differs from report | 2026-08-24 |
+| [`11`](n-011.md) | `3.87708359002281` | `root(P_trump11, 3.87708359002281417730789706010096)` | `2 + 4/√5` | `19/5` | open | replayed here, audited here | formal lower differs from report | 2026-08-24 |
+| [`12`](n-012.md) | `4` | `4` | `2 + 4/√5` | `39/10` | open | replayed here, audited here | formal lower differs from report | 2026-08-24 |
 | [`13`](n-013.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-25 |
 | [`14`](n-014.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`15`](n-015.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-24 |
