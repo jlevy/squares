@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 443
+count: 444
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14107,3 +14107,56 @@ defects:
     this one.
   status: fixed
   recorded_in: packing/devtools/render_certificate_reach.py
+- id: D-444
+  title: Three tests pinned the Nagamochi count, and the poisoned control went blind a second time
+  date: '2026-09-04'
+  layer: verifier
+  class: bookkeeping
+  detected_by: gate
+  latent_for: >-
+    from the T-020 retention at about 20:35 UTC until the pre-push tier reached the test
+    file at about 21:55; two pushes went out in between, on the strength of the records
+    tier and a pre-push tier that timed out before it got there
+  severity: medium
+  what: >-
+    tests/test_nagamochi_bounds.py held three expectations as literals about the record
+    rather than as relations read from it. test_it_covers_the_cases_it_claims_to asserted
+    that exactly 85 cases cite E-nagamochi-lower; test_a_stale_readme_count_is_refused
+    asserted the checker would answer a stale README with "60 of 65"; and
+    test_a_wrong_value_is_refused poisoned n = 20's verified lower bound with "4.8" to
+    prove the checker bites. T-020 moved n = 19, 20 and 21 off the closed form the same
+    evening, so the count became 83 and 58, and the first two literals were simply
+    stale.
+    The third is the finding. Its own comment records that its original target, n = 19,
+    stopped reaching the checker when T-016 took that case over on 2026-09-03, so the
+    control "passed without biting" and the target was moved to n = 20. On 2026-09-04
+    T-020 gave n = 20 a real verified lower bound of exactly 24/5 = 4.8 with evidence
+    that no longer names the theorem. The poison became the truth, the poisoned case
+    stopped reaching the checker, and the control went blind again by exactly the
+    mechanism its comment describes -- this time it failed only because a second
+    assertion, main() == 1, had nothing left to bite on.
+  consequence: >-
+    No bound and no record was wrong. The checker itself (devtools.check_nagamochi_bounds)
+    read the corpus correctly throughout and passed in the records tier. What was wrong
+    was the test of the checker, and for one push cycle the register carried a test that
+    could not tell a biting control from a blind one.
+    The process cost is the part to keep. The records tier does not run pytest, and the
+    pre-push tier's whole-suite step timed out at 900 s on this box and 1800 s on the CI
+    runner before reaching this file -- so two commits were pushed with a red test that
+    only the full suite reveals, past a gate that exists because that has happened twice
+    before today. That the suite was too slow to reach its own failures is D-369's
+    mechanism; the same evening's integer sweep (agenda-020) is what brings the suite back
+    under the timeout, and this is the first defect the restored gate caught.
+  fix: >-
+    Fixed on 2026-09-04. None of the three tests pins a number now. The coverage test
+    reads the retained certificate packages, computes each one's reach from its side and
+    mass (least_size_certified upward, wherever Theorem 2's value is below the side), and
+    asserts that no reached case still cites the theorem and that every citing case
+    carries the theorem's own value. The stale-README test derives the corpus figure the
+    way the checker does. The poisoned control chooses its target from the record -- the
+    largest citing case with at least 0.3 of room under its reported upper bound -- and
+    poisons by 0.2 above the recorded value, so it can neither be taken over by a result
+    nor fall inside the checker's last-place tolerance.
+  regression: packing/tests/test_nagamochi_bounds.py
+  status: fixed
+  recorded_in: packing/tests/test_nagamochi_bounds.py

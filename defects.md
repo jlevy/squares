@@ -2,7 +2,7 @@
 
 # Defect log
 
-443 defects recorded across the packing toolchain.
+444 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -23,9 +23,9 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `inspection` | 50 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 64 | the automated test suite |
+| `gate` | 65 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 64 of 443, and none of the 92 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 65 of 444, and none of the 92 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -33,7 +33,7 @@ The line worth reading twice: **the automated gate caught 64 of 443, and none of
 | --- | ---: |
 | engine | 11 |
 | quench | 23 |
-| verifier | 7 |
+| verifier | 8 |
 | record | 135 |
 | tooling | 159 |
 | docs | 108 |
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 64 of 443, and none of
 | --- | ---: |
 | soundness | 92 |
 | validity | 116 |
-| bookkeeping | 162 |
+| bookkeeping | 163 |
 | robustness | 57 |
 | performance | 16 |
 
@@ -679,6 +679,7 @@ This is the actionable list.
 | [D-441](packing/devtools/decide_certificate.py) | 2026-09-04 | tooling | robustness |  | `inspection` | medium | fixed | The generator decided its candidate before writing it, so a kill lost the candidate |
 | [D-442](packing/devtools/check_case_prose.py) | 2026-09-04 | record | bookkeeping |  | `inspection` | medium | fixed | A case body kept quoting a bound its own front matter had already moved past |
 | [D-443](packing/devtools/render_certificate_reach.py) | 2026-09-04 | record | bookkeeping |  | `review` | low | fixed | A generated document counted stop reasons its own sources do not record |
+| [D-444](packing/tests/test_nagamochi_bounds.py) | 2026-09-04 | verifier | bookkeeping |  | `gate` | medium | fixed | Three tests pinned the Nagamochi count, and the poisoned control went blind a second time |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
