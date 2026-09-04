@@ -37,24 +37,26 @@ agenda:
     priority: 0
     question: >-
       The interval route decides more directions on fewer hypotheses than the exact sweep
-      and did so between nineteen and seventy-eight times faster on identical frozen
-      bytes, with the ratio widening as certificates grow. Can the generator's own
+      and did so 22.7 times faster at 1184 atoms and 44.2 at 2097 on identical frozen
+      bytes, the ratio widening because the two scale differently. Can the generator's own
       accept-or-reject decision move to it, keeping the exact sweep for retention and the
       exhaustive tier, and what does that do to the tail of a run?
     budget: >-
       120 elapsed minutes, Opus at maximum thinking, efficiency-loop throughout.
-      The baseline is already measured and is the entry condition, not the first task:
-      on the same frozen bytes, 425 atoms took the exact sweep 181 s against the interval
-      route's 9.4 s; 1184 atoms took 1473 s against 65 s; 2097 atoms took about 13000 s
-      against 167 s. Nineteen, twenty-three and seventy-eight times, so the gap is not a
-      constant -- it widens with the atom count, which is the direction the certificates
-      are moving.
-      0--30 profile the exact sweep at four atom counts spanning 168 to 2097 and fit the
-      exponent, so the shape is measured rather than asserted; the three points above are
-      consistent with anything between quadratic and cubic and that range is too wide to
-      plan on. Record which phase dominates -- event-cell construction, the prefix sum,
-      or the per-direction sweep -- because an algorithmic win is only available if one
-      of them does.
+      The baseline is already measured and is the entry condition, not the first task.
+      Two runs of devtools.decide_certificate timed both routes back to back on the same
+      frozen bytes, which is the only comparison worth quoting: earlier figures taken from
+      separate runs hours apart under different loads were wrong by nearly a factor of
+      three, and one of them was read off elapsed wall time while four lanes contended for
+      four cores rather than measured at all.
+      Paired, 1184 atoms took the exact sweep 1473 s against the interval route's 65 s,
+      and 2097 atoms took 4866 s against 110 s. That fixes both exponents: the exact sweep
+      scales as atoms^2.09 and the interval route as atoms^0.92, quadratic against linear,
+      which is why the ratio widens -- 22.7 times at 1184 atoms, 44.2 at 2097.
+      0--30 confirm both exponents at two further atom counts, since two points fix a line
+      and three test it, and record which phase of the sweep dominates -- event-cell
+      construction, the prefix sum, or the per-direction pass -- because an algorithmic
+      win is only available if one of them does.
       30--80 change the generator's decision to the interval route and measure the tail
       of a full run end to end against Agenda 017's recorded runs at the same sides.
       The equivalence guard is not optional and is the whole of the correctness argument:
@@ -301,9 +303,9 @@ recollection:
 
 | Where the time went | Measured |
 | --- | --- |
-| Exact sweep, 425 atoms | `181 s` — against the interval route’s `9.4 s` on identical bytes |
-| Exact sweep, 1184 atoms | `1473 s` — against `65 s` |
-| Exact sweep, 2097 atoms | about `13000 s` — against `167 s` |
+| Exact vs interval, 1184 atoms | `1473 s` against `65 s`, both timed in one run |
+| Exact vs interval, 2097 atoms | `4866 s` against `110 s`, both timed in one run |
+| Fitted exponents | exact `atoms^2.09`, interval `atoms^0.92` — quadratic against linear |
 | Row generation, share of a round | `79%` to `94%` at every side measured |
 | `n = 20` round 0, grids `(23, 31, 39)` | over `3300 s`, did not finish |
 | `n = 20` round 0, grids `(29, 39, 49)` | `376 s` |
@@ -314,11 +316,11 @@ Three of those are not close calls.
 
 The interval route decides **361 directions where the exact sweep decides 181**, needs
 one fewer hypothesis — deciding on the doubled net it never invokes the `D4` reflection,
-so it does not need `C0` at all — and ran between nineteen and seventy-eight times
-faster on the same frozen bytes.
-The ratio *widens* with the atom count, which is the direction the certificates are
-moving. The exact sweep belongs at the retention gate, where correctness is the only
-thing that matters and an hour is affordable.
+so it does not need `C0` at all — and ran `22.7×` faster at 1184 atoms and `44.2×` at
+2097\. The ratio widens because the two scale differently, quadratic against linear, and
+the certificates are growing.
+The exact sweep belongs at the retention gate, where correctness is the only thing that
+matters and an hour is affordable.
 Whether it belongs in the generator’s inner loop is a question nobody has asked, and
 `BC-190` asks it.
 

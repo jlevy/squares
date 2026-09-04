@@ -33,7 +33,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-017 | `BC-159` | 0 | process | tool_validation | Can the merged Agenda 016 handoff, the frozen lane inputs, the live tbd graph, the H-061 registration, the… | `think-uqgp` |
 | agenda-018 | `BC-183` | 2 | insight | research | Can the n = 40 admissible cone be characterised on the disjunctive system, so that Goebel's n = 40 packing's… | `think-3yxk` |
 | agenda-018 | `BC-184` | 2 | efficiency | tool_validation | Can the generic interval certifier be wired end to end and reproduce T-009's n = 29 bound through the generic… | `think-4f4d` |
-| agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so between… | `think-jgeg` |
+| agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so 22.7 times… | `think-jgeg` |
 | agenda-019 | `BC-191` | 0 | efficiency | tool_validation | Row generation is between 79 and 94 per cent of every round, the site grids do not scale with the container,… | `think-ji0r` |
 
 ## Blocked, and on what
