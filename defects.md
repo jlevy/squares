@@ -10,7 +10,7 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 
 - **91 soundness defects** — the system asserting something false about the mathematics. 72 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
 - **108 fixes left no regression check behind.** That list is the best predictor of what comes back; recorded recurrences are D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267, D-282 repeats D-264, D-312 repeats D-309, D-313 repeats D-259, D-315 repeats D-295, D-318 repeats D-308, D-321 repeats D-317, D-323 repeats D-022, D-324 repeats D-320, D-325 repeats D-319, D-326 repeats D-305, D-327 repeats D-301, D-334 repeats D-028, D-337 repeats D-107, D-339 repeats D-155, D-340 repeats D-163, D-386 repeats D-358, D-395 repeats D-358, D-397 repeats D-358, D-400 repeats D-398, D-422 repeats D-371, D-424 repeats D-144, D-427 repeats D-413.
-- **64 are still open** (outstanding or contained), every one carrying a bead.
+- **63 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -224,7 +224,6 @@ This is the actionable list.
 | D-419 | outstanding | high | Exp-057 applied six-decimal coordinate semantics to a fourteen-digit side token | `think-lvqx` |
 | D-420 | outstanding | high | The BC-142 reachable-tests control did not prove exact selection equivalence | `think-mo7r` |
 | D-421 | outstanding | medium | The wave-efficiency renderer refused the mixed Claude-to-Codex agenda lanes | `think-mlwo` |
-| D-422 | outstanding | high | Build caches are still copied into every worker, and the cap is held by a per-file prune | `think-ahyr` |
 | D-423 | outstanding | medium | The cover certificate's Lemma 4 boundary is non-strict in two sources and strict in a third, unrecorded | `think-iye2` |
 | D-426 | outstanding | high | A control-cell breach does not stop the unattended session | `think-ldq2` |
 | D-427 | outstanding | medium | Controls are scored on the mutated run alone, so one can pass over an already-red checker | `think-g4qi` |
@@ -658,7 +657,7 @@ This is the actionable list.
 | [D-419](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md) | 2026-09-01 | record | validity | flattering | `review` | high | outstanding | Exp-057 applied six-decimal coordinate semantics to a fourteen-digit side token |
 | [D-420](packing/devtools/reachable_tests.py) | 2026-09-01 | tooling | validity | flattering | `review` | high | outstanding | The BC-142 reachable-tests control did not prove exact selection equivalence |
 | [D-421](packing/devtools/render_wave_efficiency.py) | 2026-09-01 | tooling | robustness |  | `gate` | medium | outstanding | The wave-efficiency renderer refused the mixed Claude-to-Codex agenda lanes |
-| [D-422](packing/devtools/run_negative_controls.py) | 2026-09-03 | tooling | robustness |  | `inspection` | high | outstanding | Build caches are still copied into every worker, and the cap is held by a per-file prune |
+| [D-422](packing/devtools/run_negative_controls.py) | 2026-09-03 | tooling | robustness |  | `inspection` | high | fixed | Build caches are still copied into every worker, and the cap is held by a per-file prune |
 | [D-423](packing/cases/green17/verify_cover.py) | 2026-09-03 | record | bookkeeping |  | `review` | medium | outstanding | The cover certificate's Lemma 4 boundary is non-strict in two sources and strict in a third, unrecorded |
 | [D-424](packing/src/sqpack/local_rigidity/controls.py) | 2026-09-03 | tooling | validity | flattering | `review` | high | fixed | Two of the eight n = 5 rigidity controls adjudicated themselves and called nothing |
 | [D-425](packing/tests/test_campaign_runner_trust_boundary.py) | 2026-09-03 | tooling | robustness |  | `inspection` | medium | fixed | A commit titled "restore" shipped the widest disabled runner guard to a shared branch |

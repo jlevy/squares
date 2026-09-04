@@ -12646,7 +12646,7 @@ defects:
     the breach, from before this branch's base until the same day it was recorded; the
     copied build caches, for as long as the portable fallback has bulk-copied the tree
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     Recorded as "the snapshot cap refuses all 155 negative controls, and build caches are
     what breach it", against a live measurement of 67,823,986 bytes and a 64 MiB cap. Both
@@ -12752,7 +12752,27 @@ defects:
     file rather than by directory is not durable and was not meant to be, which makes the
     structural options below more urgent rather than less.
 
-    Three directions remain, and the fourth has been withdrawn. (1) Exclude the build
+    APPLIED 2026-09-04, as direction (1), and the entry is discharged. Before:
+    69,569,514 bytes against the 67,108,864 cap, 2,460,650 over, of which 11,994,514
+    (17.2 per cent) was build cache -- `__pycache__` 11,660,736, `.pytest_cache` 176,516,
+    `.ruff_cache` 157,262 -- in the same six locations this entry names. After: 57,626,070
+    bytes, 9,482,794 of headroom. The count is now byte-identical across deleting every
+    cache and a fresh pytest-and-ruff run that wrote 130,487 bytes, so the drift this entry
+    was retitled around is gone and the measurement is a property of the commit.
+    Two things the prescription below got wrong, neither fatal. It is incomplete rather
+    than mistaken: excluding caches from `_clone_into` alone still leaves nested ones in a
+    worker, because everything that routine does not descend into crosses in a single
+    `cp -R`, which has no exclude option -- so `clone_tree` needs a sweep afterwards. It
+    also omits `ROOT_DOCUMENTS`, whose rglob can reach a cache, since `.agents` carries a
+    Python file. And its safety argument was weaker than the truth: it reasoned that no
+    control names a `.pyc`, when in fact `run_one` sets a fresh `PYTHONPYCACHEPREFIX` per
+    command, so Python resolves bytecode in a mirror tree and cannot read the co-located
+    `__pycache__` at all. The copied caches were provably dead weight, verified by
+    importing a same-size mutated module past a stale `.pyc`.
+    The suite is unaffected: 155 negative controls fire as expected, exit 0, and
+    `check_control_anchors` reports 155 of 155.
+
+    The other three directions are recorded as they stood. (1) Exclude the build
     caches from the counted surface and from `_clone_into`. Still the smallest change,
     still 11.8 MB of pure detritus, and it is the only one of these that makes the
     measurement a property of the commit instead of the checkout. (2) Content-address the
@@ -12791,7 +12811,13 @@ defects:
     was not excluded, its status would have been `missing`, which is a violation, and this
     checker would have been red in every worker -- the `D-427` shape one file over.
   regression: >-
-    none for either surviving half, and one correction to what this entry first said. The
+    `tests/test_negative_controls.py::test_build_caches_leave_the_counted_surface_and_the_worker_trees`
+    plants 1,000,003 bytes in each of four caches -- the three names plus one four levels
+    deep -- alongside one non-cache probe file, then asserts the counted total moved by
+    exactly the probe, so an over-broad exclusion that counts nothing fails the test too,
+    and that no cache directory survives anywhere in a cloned worker while the probe does.
+    Each of the four exclusion sites was ablated separately and each ablation fails it.
+    The older note, kept because it is what this entry was for: The
     cap does have a check: `tests/test_negative_controls.py::test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots`
     asserts `snapshot_source_bytes() < SNAPSHOT_MAX_BYTES`, and the step that runs it is
     `fast=True`, so a fresh checkout at `ceff4400`, where the surface was 78,841,684, fails

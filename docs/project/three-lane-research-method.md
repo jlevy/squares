@@ -159,6 +159,33 @@ reaches for first:
 - **Every number is exact and reproducible from the artifact alone**, including the
   quantities that make the claim tight.
 
+## Committing while lanes are live
+
+The coordinator owns the record, which makes it the one that commits — and that is
+exactly where it can damage a lane’s work.
+Committing with a wholesale `git add -A` while agents are editing captures whatever
+half-finished state happens to be on disk.
+It happened in the founding block: a coordinator commit captured a lane’s file
+mid-ablation, with one entry missing from a set it was deliberately testing, in a state
+whose own test fails.
+The lane noticed; nothing broke; it easily could have.
+
+Two rules, both learned the hard way:
+
+- **Stage paths, not the tree.** Add the files you changed.
+  A lane’s files get committed when that lane reports, or as an explicitly labelled
+  checkpoint after its tests, lint and type floors pass — never as a side effect of
+  committing something else.
+- **A checkpoint commit says so.** If a lane’s work is committed while it is still
+  working, the message must say it is in progress and what was and was not verified, so
+  the history does not read as a completed change.
+
+The corresponding failure in the other direction is refusing to commit at all.
+Test the state before assuming it is broken: in the founding block the coordinator
+declined three times to commit an agent’s in-flight files, and when it finally ran the
+tests they were green.
+A feature branch loses nothing by carrying an honest checkpoint.
+
 ## What to avoid
 
 - **Do not sweep incomparable settings.** Grid counts and insets explored as a product
