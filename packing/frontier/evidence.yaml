@@ -1257,7 +1257,11 @@ evidence:
       certificates. Least covered mass exactly 1 at direction 0 for each; C0 to C3
       agree with E-n012-fractional-certificate to the digit. Break tests refuse a
       weight lowered by 1/10000, a dropped atom and a shifted atom, each by the
-      condition that ought to catch it. Same method family (exact-algebraic) as the
+      condition that ought to catch it. Run unchanged on Massaccesi's published n = 17
+      certificate, rebuilt from the primary source's data, it returns the published
+      bound with total exactly 203/12 and least covered mass exactly 1 over all 181
+      directions in 30 s -- the control that shows the verifier is right, as distinct
+      from agreeing with the certificate. Same method family (exact-algebraic) as the
       first entry, so together they support C3 and not C4, which by the rung
       definition needs a different method value; the reviewer's proof check is
       retained in docs/project/reviews/ and is the review artifact C5 asks for,

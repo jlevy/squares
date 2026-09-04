@@ -209,6 +209,45 @@ Working with the closed container rather than the open one is the conservative c
    needed. This is a strengthening, so it is sound; it is also what makes the condition
    checkable without reference to any particular packing.
 
+## The n = 17 control, run afterwards
+
+The same verifier, unchanged, on Massaccesi’s published n = 17 certificate rebuilt from
+the primary source’s data (not its verification logic).
+The reviewer’s note, unedited.
+
+**Provenance note, stated first because it changes what this control proves.** The
+export at `indep/n17-massaccesi.json` did not exist.
+I rebuilt it (`make_n17.py`) from the published primary source in the literature
+archive,
+`packing/resources/web/n17-lower-bounds-2026/massaccesi-verify-n17-lower-bound-4_5058.py`,
+taking only its certificate *data* — `L`, `M`, `B`, `T`, `KMAX`, `WEIGHT_SCALE`, the 23
+D4-orbit representatives, and the grid definition `coord[i] = M/2 + i(L-M)/28` on a
+29x29 grid. None of that file’s verification logic was read past `build_atoms`, and none
+was used; `verify.py` did all the checking.
+The reconstruction reproduces all three independently supplied checksums exactly — **168
+atoms, total mass 203/12, L = 22529/5000** — so the transcription is confirmed.
+
+**Result: ACCEPT.** All 181 directions (k = 0..180), no subsetting.
+
+| condition | value | verdict |
+| --- | --- | --- |
+| C0 D4-invariance | all 8 maps exact | PASS |
+| C1 `sum w < 17` | **203/12** = 16.9166666 … | PASS (slack 1/12) |
+| C2 `t_K^2 + 2 t_K - 1` | 309449/250000000000 > 0 | PASS |
+| C3 `B(1+D)` | D = 207107/90000000; B(1+D) = 899635478111/900000000000 = 0.999594975679 | PASS |
+| C4 exact min covered mass | **1 exactly**, at k = 0 (t = 0), centre (10341/16000, 10341/16000) ≈ (0.6463125, 0.6463125) | PASS |
+
+Cell-lower bound and representative-point bound agreed (`exact=True`) at every
+direction, so the continuum minimum is pinned, not bracketed.
+4,525 randomly sampled cells were re-summed atom-by-atom by brute force and matched.
+C4 runtime **30.1 s** for 168 atoms x 181 directions (675 arrangement pieces per axis);
+whole-certificate runtime 30.4 s.
+
+Conclusion: `s(17) >= 22529/5000 = 4.5058`, matching the published bound.
+The verifier reproduces a published result it was not built against, with the expected
+total (203/12) and the expected tight least covered mass (1) — so the n = 12 verdicts
+above are the verifier working, not the verifier agreeing with itself.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
