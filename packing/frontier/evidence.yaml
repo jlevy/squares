@@ -1321,4 +1321,17 @@ evidence:
       the frontier as well as above it.
       Not independent by method: both decisions are exact-algebraic, so this supports C3
       and not C4.
+      A self-contained third-party package ships beside the certificate at
+      cases/n11_fractional_certificate/thirdparty/: the theorem written out for a reader
+      with no context, the certificate as plain data, and a single-file verifier that
+      imports nothing outside the Python standard library and nothing from this
+      repository. Run as a stranger would -- copied outside the checkout, under
+      `env -i`, on the system interpreter -- it decides all five conditions and reports
+      the same least covered weight, 50003/50000, over 90,546,593 cells and 181
+      directions in about 34 s; the same verifier, unchanged, returns Massaccesi's
+      published 22529/5000 from his own constants, which is the control that tests the
+      verifier rather than the certificate. Ten perturbations are refused and tabulated
+      with the condition each breaks. The package is a third exact-rational
+      implementation of the same reduction, so it does not move the confirmation rung;
+      what it buys is that the claim can be checked without trusting this project.
     source_reviewed: '2026-09-04'
