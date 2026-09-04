@@ -24,6 +24,8 @@ from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH, declared, l
 from cases.n17_fractional_certificate.replay import declared as n17_declared
 from cases.n17_fractional_certificate.replay import load as n17_load
 from cases.n17_weighted_certificate.fixture import load_retained_fixture
+from cases.n20_fractional_certificate.replay import declared as n20_declared
+from cases.n20_fractional_certificate.replay import load as n20_load
 from sqpack.fractional.certificate import (
     Certificate,
     ceiling_side,
@@ -466,11 +468,85 @@ def test_the_n17_certificate_does_not_reach_n20() -> None:
     """The scope claim: 459/100 lifts n = 17, 18 and 19, and not n = 20.
 
     The certificate's own mass carries it upward, so n = 20 does inherit 459/100 --
-    but Nagamochi's closed form already gives it 1 + sqrt(13), which is larger.
-    Decided in integers: 1 + sqrt(13) > 459/100 iff 13 * 100^2 > (459 - 100)^2.
+    but it improved nothing there, because Nagamochi's closed form already gave
+    n = 20 the larger 1 + sqrt(13). Decided in integers, on the retained rung:
+    1 + sqrt(13) > 459/100 iff 13 * 100^2 > (459 - 100)^2.
+    n = 20 has since moved to 24/5 by a different certificate (T-020), which is
+    larger again; that does not change what this one reaches.
     """
-    assert 13 * 50**2 > (229 - 50) ** 2
+    assert 13 * 100**2 > (459 - 100) ** 2
     assert n17_load().bounded_side == Fraction(459, 100)
+    assert n20_load().bounded_side > Fraction(459, 100)
+
+
+def test_the_n20_certificate_displaces_nagamochis_closed_form() -> None:
+    """s(19), s(20) and s(21) >= 24/5, decided from the file.
+
+    Nagamochi's 2005 closed form gave n = 20 and n = 21 their whole lower bound
+    until 2026-09-04: 1 + sqrt(13) and 1 + sqrt(14). Both comparisons are decided
+    in integers -- 1 + sqrt(k) < 24/5 iff 25k < 19^2 -- so no float square root
+    stands between the record and the claim.
+
+    What the certificate claims is checked here; that a verifier accepts it is
+    the exhaustive test below, which costs an hour and a half.
+    """
+    certificate = n20_load()
+    assert certificate.n == 20
+    assert certificate.bounded_side == Fraction(24, 5)
+    assert certificate.total_mass == Fraction(946131, 50000)
+    assert len(certificate.atoms) == 2260
+
+    assert 25 * 13 < 19**2, "1 + sqrt(13) < 24/5 at n = 20"
+    assert 25 * 14 < 19**2, "1 + sqrt(14) < 24/5 at n = 21"
+
+    record = n20_declared()
+    assert record["claim"] == "s(20) >= 24/5"
+    assert record["total_mass"] == str(certificate.total_mass)
+    assert record["least_cell_mass"] == "50007/50000"
+
+
+@pytest.mark.exhaustive_exact
+def test_the_n20_certificate_is_accepted() -> None:
+    """The 2260-atom certificate over 181 directions, decided exactly.
+
+    Marked exhaustive: this took 5378 s on the machine that retained it, the
+    largest exact decision in the corpus, and the fast tests around it already
+    pin every number the record claims about the same file.
+    """
+    certificate = n20_load()
+    verdict = verify(certificate)
+    assert verdict.accepted, verdict.failures
+    assert verdict.minimum_cell_mass is not None
+    assert verdict.minimum_cell_mass >= 1
+    assert n20_declared()["least_cell_mass"] == str(verdict.minimum_cell_mass)
+
+
+def test_the_n20_certificate_carries_19_20_and_21_and_stops_there() -> None:
+    """Three sizes out of Condition 2, and the exact point where the reach runs out.
+
+    The register already holds 5 from n = 22 on, so the certificate is true
+    there and weaker. Below, n = 18 is out of reach in the other direction:
+    these atoms are heavier than eighteen, so Condition 2 refuses them at that size --
+    which is why T-019 still holds n = 17 and n = 18 alone.
+    """
+    certificate = n20_load()
+    assert least_size_certified(certificate.total_mass) == 19
+    for size in (19, 20, 21):
+        assert certificate.total_mass < size
+    assert certificate.total_mass > 18, "Condition 2 refuses these atoms at n = 18"
+    assert certificate.bounded_side < 5, "n >= 22 already holds the trivial 5"
+
+
+def test_the_n20_certificate_does_not_contradict_the_n19_packing() -> None:
+    """No certificate can exceed a side an actual packing achieves.
+
+    Wainwright's packing gives s(19) <= 3 + (4/3) sqrt(2). If a certificate
+    certified a side above it, one of the two would be wrong, so this is a check
+    on the record and not only on the arithmetic. Decided in integers:
+    24/5 < 3 + 4 sqrt(2) / 3 iff 27 < 20 sqrt(2) iff 729 < 800.
+    """
+    assert 27**2 < 800, "24/5 sits below the retained n = 19 packing"
+    assert n20_load().bounded_side == Fraction(24, 5)
 
 
 def test_the_grid_refutation_order_is_the_integer_ceiling_of_the_root() -> None:
@@ -488,7 +564,7 @@ def test_every_retained_certificate_sits_below_its_own_ceiling() -> None:
     A retained certificate above its ceiling would mean one of the two is wrong,
     so this is a check on the record and not only on the arithmetic.
     """
-    for certificate in (n11_load(), load(), n17_load()):
+    for certificate in (n11_load(), load(), n17_load(), n20_load()):
         ceiling = ceiling_side(certificate.n, certificate.square_side)
         assert certificate.outer_side <= ceiling, (
             f"n = {certificate.n} claims {certificate.outer_side} above its ceiling {ceiling}"

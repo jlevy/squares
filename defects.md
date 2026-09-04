@@ -2,7 +2,7 @@
 
 # Defect log
 
-441 defects recorded across the packing toolchain.
+444 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
-| `review` | 265 | a human or agent reading the work against a checklist |
+| `review` | 266 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
-| `inspection` | 49 | reading the code or the design with intent |
+| `inspection` | 50 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 64 | the automated test suite |
+| `gate` | 65 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 64 of 441, and none of the 92 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 65 of 444, and none of the 92 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -33,8 +33,8 @@ The line worth reading twice: **the automated gate caught 64 of 441, and none of
 | --- | ---: |
 | engine | 11 |
 | quench | 23 |
-| verifier | 7 |
-| record | 133 |
+| verifier | 8 |
+| record | 135 |
 | tooling | 159 |
 | docs | 108 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 64 of 441, and none of
 | --- | ---: |
 | soundness | 92 |
 | validity | 116 |
-| bookkeeping | 160 |
+| bookkeeping | 163 |
 | robustness | 57 |
 | performance | 16 |
 
@@ -677,6 +677,9 @@ This is the actionable list.
 | [D-439](packing/frontier/results.yaml) | 2026-09-04 | docs | bookkeeping |  | `inspection` | medium | fixed | Three records described the top rung, and the top rung moved out from under them |
 | [D-440](packing/tests/test_fractional_interval.py) | 2026-09-04 | record | bookkeeping |  | `inspection` | medium | fixed | A confirmation rung rested on a decision no control ever made |
 | [D-441](packing/devtools/decide_certificate.py) | 2026-09-04 | tooling | robustness |  | `inspection` | medium | fixed | The generator decided its candidate before writing it, so a kill lost the candidate |
+| [D-442](packing/devtools/check_case_prose.py) | 2026-09-04 | record | bookkeeping |  | `inspection` | medium | fixed | A case body kept quoting a bound its own front matter had already moved past |
+| [D-443](packing/devtools/render_certificate_reach.py) | 2026-09-04 | record | bookkeeping |  | `review` | low | fixed | A generated document counted stop reasons its own sources do not record |
+| [D-444](packing/tests/test_nagamochi_bounds.py) | 2026-09-04 | verifier | bookkeeping |  | `gate` | medium | fixed | Three tests pinned the Nagamochi count, and the poisoned control went blind a second time |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -83,6 +83,17 @@ DECLARED_CONSUMERS = {
     "packing/devtools/check_golden_basins.py": (
         "reads the ceiling as an upper limit on a basin side"
     ),
+    "packing/devtools/check_case_prose.py": (
+        "reads the field as the ceiling the case's own front matter declares, only to "
+        "hold that case's prose to it: a body that quotes an upper bound must quote the "
+        "one its record carries (D-442). It takes the field to mean exactly what the "
+        "front matter means and asserts nothing about s(n)"
+    ),
+    "packing/tests/test_case_prose.py": (
+        "names the field in fixtures that give check_case_prose a front matter and a "
+        "body to compare; the values are synthetic and prove the detector fires, not "
+        "anything about a bound"
+    ),
     "packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md": (
         "sequences the research blocks by how far each could move the ceiling; it treats "
         "the field as the certified ceiling throughout and states that every move of it "

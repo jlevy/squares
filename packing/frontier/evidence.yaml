@@ -1407,6 +1407,63 @@ evidence:
       E-fractional-interval-decision, which decides the same bytes by a different
       method.
     source_reviewed: '2026-09-04'
+  - id: E-n020-fractional-certificate
+    claim: lower-bound
+    scope:
+      n_values:
+        - 19
+        - 20
+        - 21
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained literature archive under packing/resources/ and the frontier source
+        register, which for n = 19, 20 and 21 hold Nagamochi's 2005 closed form, Bentz's
+        2016 proof at n = 22, Friedman's record tables, and this project's own T-019 at
+        459/100. No source in the corpus states a bound specific to any of these three
+        sizes: each has held a general formula since 2005.
+      searched: >-
+        Searched for any lower bound on s(19), s(20) or s(21) above the closed form
+        min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). The corpus holds none at
+        any of the three. The known hole is the one every entry in this family names --
+        no systematic sweep of recent preprints.
+      novel_object: >-
+        The certificate and the side. The method is Burns's and the parametrisation is
+        Massaccesi's; what is new is a certificate at a side no published bound reaches
+        at any of these three sizes, found by this project's generator.
+    certificate: cases/n20_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras python -m cases.n20_fractional_certificate
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over 2260 atoms on a
+      D4-symmetric site set: the atom multiset is closed under the container's D4 group,
+      the total mass is 946131/50000 = 18.922620, the 181-direction net reaches pi/4,
+      containment B(1 + D) < 1 holds at B = 9977/10000, and every reachable event cell at
+      every net direction carries mass at least 1, the least being 50007/50000. The bound
+      proved is the container side itself, 24/5.
+      Three sizes, and none of them by monotonicity. Only C1 mentions n among the five
+      conditions, so this atom set certifies its side for every integer strictly above its
+      own mass, which is 19 and upward. The register already holds 5 from n = 22 on, so
+      the certificate is true there and weaker; where it moves the register is n = 19,
+      n = 20 and n = 21.
+      It was decided from its bytes by two verifiers that fail differently. The exact
+      event-cell sweep accepted in 5378 s at 50007/50000; the interval branch and bound
+      certified all 361 doubled-net directions in 5,638,343 boxes with none stalled and
+      enclosed the same value with width zero, in 173 s. The exact decision was made by
+      the generator's own rescale driver, which freezes a candidate to its path and then
+      re-reads it, so both routes decided the same bytes on disk rather than an object in
+      memory; the interval decision was made twice, once through
+      devtools.decide_certificate on the frozen file and once through the install guard on
+      the installed one.
+      One rung, no ladder: the side was reached in a single resumed column-generation run
+      rather than climbed, so there is no weaker retained certificate at this size to
+      compare against.
+    source_reviewed: '2026-09-04'
   - id: E-fractional-interval-decision
     claim: lower-bound
     scope:
@@ -1416,6 +1473,8 @@ evidence:
         - 17
         - 18
         - 19
+        - 20
+        - 21
     assurance: verified
     method: interval-certified
     performed_by: repository
@@ -1443,8 +1502,9 @@ evidence:
       pi/2 - theta_k, 361 directions -- so the D4 reflection argument is never invoked
       and C0 is not needed at all, which matters because interval arithmetic cannot
       establish the equality C0 asserts.
-      Results, 361 of 361 directions certified in every case and none stalled. The three
-      retained top rungs, decided from their frozen bytes: n = 17 at 459/100, 1184 atoms,
+      Results, 361 of 361 directions certified in every case and none stalled. The four
+      retained top rungs, decided from their frozen bytes: n = 20 at 24/5, 2260 atoms,
+      5,638,343 boxes; n = 17 at 459/100, 1184 atoms,
       3,683,951 boxes; n = 12 at 99/25, 2097 atoms, 4,448,751 boxes; n = 11 at 381/100,
       1121 atoms, 1,570,831 boxes. Lower rungs and the control: n = 17 at 229/50 in
       2,653,407 boxes, n = 11 at 19/5 in
@@ -1455,7 +1515,7 @@ evidence:
       because every one of these runs shared a contended machine.
       In minimisation mode every enclosure of the least covered mass has width zero and
       equals the exact verifier's value to the digit: 4001/4000 at n = 11's top rung,
-      12501/12500 at n = 12's and 200009/200000 at n = 17's, each matching the
+      12501/12500 at n = 12's, 200009/200000 at n = 17's and 50007/50000 at n = 20's, each matching the
       least_cell_mass its own certificate declares, and 12501/12500 at the 229/50 rung,
       50003/50000 and 100003/100000 at the earlier n = 11 and n = 12 rungs. Refusals: the n = 12 atoms in a
       side-4 container are refuted at direction 0 after 407 boxes, and an atom lowered by

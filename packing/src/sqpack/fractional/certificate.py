@@ -34,8 +34,13 @@ here rounds, samples an angle, or compares against a tolerance.
 from __future__ import annotations
 
 import math
+import multiprocessing as mp
+import os
+import sys
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, field
 from fractions import Fraction
+from functools import partial
 from itertools import pairwise
 
 from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
@@ -322,6 +327,46 @@ def sweep_direction_minimum(
     )
 
 
+#: Below this many atoms one direction costs milliseconds and a worker pool costs
+#: more to start than it saves; the small fixtures the fast tests decide stay in
+#: process, where a failure's traceback is also the caller's own.
+_PARALLEL_ATOMS = 400
+
+
+def _direction_minimum(certificate: Certificate, direction: Direction) -> tuple[Fraction, str]:
+    return sweep_direction_minimum(certificate, direction)[0], direction.label
+
+
+def sweep_all_directions(
+    certificate: Certificate, *, workers: int | None = None
+) -> tuple[tuple[Fraction, str], ...]:
+    """The least covered mass at every net direction, in net order.
+
+    Directions are independent, so they are decided in parallel processes;
+    ``workers`` defaults to the machine's core count, or to this process alone
+    below ``_PARALLEL_ATOMS`` atoms, and ``1`` runs them in this process. An
+    explicit count always gets a pool, so the two schedules can be compared on
+    a certificate small enough to compare them quickly. The result is ordered
+    by direction whichever way it ran, so the reduction that follows -- first
+    direction attaining the minimum wins -- does not depend on the schedule.
+    """
+
+    directions = certificate.directions
+    count = (os.cpu_count() or 1) if workers is None else max(1, workers)
+    small = workers is None and len(certificate.atoms) < _PARALLEL_ATOMS
+    if count == 1 or len(directions) < 2 or small:
+        return tuple(_direction_minimum(certificate, d) for d in directions)
+    # Python 3.14 starts workers by forkserver on Linux, which re-imports the
+    # caller's ``__main__``; a caller run from stdin or a REPL has none, and the
+    # pool dies with a connection reset. Forking inherits the parent instead and
+    # asks nothing of it. Elsewhere the platform default stands.
+    context = mp.get_context("fork") if sys.platform.startswith("linux") else None
+    with ProcessPoolExecutor(
+        max_workers=min(count, len(directions)), mp_context=context
+    ) as pool:
+        return tuple(pool.map(partial(_direction_minimum, certificate), directions))
+
+
 def conditions_without_sweep(certificate: Certificate) -> tuple[ConditionReport, ...]:
     """Conditions 1 to 4: every condition decidable without sweeping a direction.
 
@@ -339,16 +384,15 @@ def conditions_without_sweep(certificate: Certificate) -> tuple[ConditionReport,
     )
 
 
-def verify(certificate: Certificate) -> Verdict:
+def verify(certificate: Certificate, *, workers: int | None = None) -> Verdict:
     """Decide all four conditions. Exact, and never short-circuits Conditions 2 to 4."""
 
     conditions = list(conditions_without_sweep(certificate))
     worst: Fraction | None = None
     worst_label: str | None = None
-    for direction in certificate.directions:
-        minimum, _ = sweep_direction_minimum(certificate, direction)
+    for minimum, label in sweep_all_directions(certificate, workers=workers):
         if worst is None or minimum < worst:
-            worst, worst_label = minimum, direction.label
+            worst, worst_label = minimum, label
     conditions.append(
         ConditionReport(
             "Condition 5: every reachable cell carries mass 1",

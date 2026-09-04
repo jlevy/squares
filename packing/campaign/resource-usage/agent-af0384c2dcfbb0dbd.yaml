@@ -1,0 +1,415 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: af0384c2dcfbb0dbd.output
+    sha256: 8beba6414f0152d097940d2f5f2ab35b497472d95ba541e635330e8a26dab061
+    bytes: 519476
+    records: 175
+    session_id: 21ae3bfc-58a6-55fc-90e3-6e29d229a7f1
+    harness_versions:
+    - 2.1.260
+  span:
+    started_at: '2026-09-04T03:51:15.509Z'
+    ended_at: '2026-09-04T04:28:30.885Z'
+    wall_seconds: 2235.376
+  turns:
+    assistant: 83
+    sidechain: 83
+    by_model:
+      claude-opus-5: 83
+    by_thinking_level:
+      high: 75
+      xhigh: 8
+    by_model_and_thinking_level:
+      claude-opus-5 @ high: 75
+      claude-opus-5 @ xhigh: 8
+    by_branch:
+      claude/agenda-017-plan-and-run: 83
+    latency:
+      count: 83
+      total_seconds: 1003.516
+      median_seconds: 4.153
+      max_seconds: 101.413
+  tokens:
+    cache_creation_input_tokens: 1317116
+    cache_read_input_tokens: 8533178
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 1317116
+    input_tokens: 166
+    output_tokens: 20468
+    thinking_tokens: 11260
+  tokens_by_thinking_level:
+    high:
+      cache_creation_input_tokens: 882102
+      cache_read_input_tokens: 7586754
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 882102
+      input_tokens: 150
+      output_tokens: 18467
+      thinking_tokens: 10993
+    xhigh:
+      cache_creation_input_tokens: 435014
+      cache_read_input_tokens: 946424
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 435014
+      input_tokens: 16
+      output_tokens: 2001
+      thinking_tokens: 267
+  tool_calls:
+    total: 41
+    total_seconds: 455.376
+    share_of_wall: 0.2037
+    errors: 1
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 12
+      total_seconds: 309.46
+      median_seconds: 2.032
+      max_seconds: 101.486
+    by_tool:
+      Bash:
+        count: 35
+        total_seconds: 454.949
+        median_seconds: 1.29
+        max_seconds: 121.291
+      Monitor:
+        count: 5
+        total_seconds: 0.414
+        median_seconds: 0.074
+        max_seconds: 0.148
+      ToolSearch:
+        count: 1
+        total_seconds: 0.013
+        median_seconds: 0.013
+        max_seconds: 0.013
+    by_command:
+      (timeout && support && ^ && [$cfg] && wait:
+        count: 1
+        total_seconds: 121.291
+        median_seconds: 121.291
+        max_seconds: 121.291
+      cat:
+        count: 9
+        total_seconds: 105.977
+        median_seconds: 0.236
+        max_seconds: 101.486
+      (p[0]+t*(q[0]-p[0]),p[1]+t*(q[1]-p[1])) && not && cur:
+        count: 1
+        total_seconds: 66.73
+        median_seconds: 66.73
+        max_seconds: 66.73
+      p:
+        count: 1
+        total_seconds: 65.258
+        median_seconds: 65.258
+        max_seconds: 65.258
+      ? x,y && i,o && r && di,d && mass,cov && np.add.at(row,memb[cov],1.0) && sys.exit()
+        && use && rows.append(row) && meta.append((di,cos,sin,uu,vv)) && y.npy,y) && meta.pkl,wb))
+        && np.array([[cos*u-sin*v,
+      : count: 1
+        total_seconds: 62.072
+        median_seconds: 62.072
+        max_seconds: 62.072
+      ls:
+        count: 1
+        total_seconds: 12.01
+        median_seconds: 12.01
+        max_seconds: 12.01
+      sed:
+        count: 5
+        total_seconds: 2.582
+        median_seconds: 0.065
+        max_seconds: 2.319
+      'python3 && m.group(1) && m.group(1).strip() && try:':
+        count: 1
+        total_seconds: 2.574
+        median_seconds: 2.574
+        max_seconds: 2.574
+      verified_upper_bound && reported_upper_bound && exact_form && kind && note:
+        count: 1
+        total_seconds: 2.237
+        median_seconds: 2.237
+        max_seconds: 2.237
+      print(list(d)[:20]):
+        count: 1
+        total_seconds: 1.956
+        median_seconds: 1.956
+        max_seconds: 1.956
+      nproc && ps:
+        count: 1
+        total_seconds: 1.861
+        median_seconds: 1.861
+        max_seconds: 1.861
+      ? x,y && i,o && def && np.add.at(g,(l,b),w) && np.add.at(g,(r,b),-w) && np.add.at(g,(l,t),-w)
+        && np.add.at(g,(r,t),w) && idx && out.append((float(fl[idx]),cov,(cos,sin,cu_,cv_)))
+        && r && d && np.add.at(row,memb[cov],1.0) && meta.append(pl) && print(obj,float(sizes@w),dual,y.sum())
+        && a && 2}  max overlap area {mx:.6f}  total {tot:.6f})
+      : count: 1
+        total_seconds: 1.819
+        median_seconds: 1.819
+        max_seconds: 1.819
+      (timeout:
+        count: 1
+        total_seconds: 1.44
+        median_seconds: 1.44
+        max_seconds: 1.44
+      uptime:
+        count: 1
+        total_seconds: 1.433
+        median_seconds: 1.433
+        max_seconds: 1.433
+      ps:
+        count: 2
+        total_seconds: 1.395
+        median_seconds: 0.697
+        max_seconds: 1.3
+      python3:
+        count: 1
+        total_seconds: 1.282
+        median_seconds: 1.282
+        max_seconds: 1.282
+      ls && ls && ls:
+        count: 1
+        total_seconds: 0.552
+        median_seconds: 0.552
+        max_seconds: 0.552
+      head:
+        count: 2
+        total_seconds: 0.237
+        median_seconds: 0.118
+        max_seconds: 0.155
+      REFUSED && FAIL && Error && Traceback:
+        count: 1
+        total_seconds: 0.148
+        median_seconds: 0.148
+        max_seconds: 0.148
+      Error && support && overlapping:
+        count: 1
+        total_seconds: 0.088
+        median_seconds: 0.088
+        max_seconds: 0.088
+      REFUSED:
+        count: 1
+        total_seconds: 0.074
+        median_seconds: 0.074
+        max_seconds: 0.074
+      wc:
+        count: 1
+        total_seconds: 0.072
+        median_seconds: 0.072
+        max_seconds: 0.072
+      ls && ls:
+        count: 1
+        total_seconds: 0.064
+        median_seconds: 0.064
+        max_seconds: 0.064
+      REFUSED && FAIL && Traceback:
+        count: 1
+        total_seconds: 0.054
+        median_seconds: 0.054
+        max_seconds: 0.054
+      b7xzdy9vv.output:
+        count: 1
+        total_seconds: 0.05
+        median_seconds: 0.05
+        max_seconds: 0.05
+    by_command_family:
+      other:
+        count: 15
+        total_seconds: 326.511
+        median_seconds: 1.819
+        max_seconds: 121.291
+      inspection:
+        count: 22
+        total_seconds: 122.889
+        median_seconds: 0.129
+        max_seconds: 101.486
+      toolchain:
+        count: 2
+        total_seconds: 3.856
+        median_seconds: 1.928
+        max_seconds: 2.574
+    invoked:
+      cat: 29
+      echo: 26
+      sed: 9
+      head: 8
+      tail: 8
+      grep: 7
+      sleep: 7
+      ls: 6
+      ps: 3
+      REFUSED: 3
+      python3: 2
+      x,y: 2
+      i,o: 2
+      r: 2
+      np.add.at(row,memb[cov],1.0): 2
+      cd: 2
+      (timeout: 2
+      support: 2
+      FAIL: 2
+      Error: 2
+      Traceback: 2
+      awk: 2
+      wc: 1
+      verified_upper_bound: 1
+      reported_upper_bound: 1
+      exact_form: 1
+      kind: 1
+      note: 1
+      m.group(1): 1
+      m.group(1).strip(): 1
+      'try:': 1
+      print(list(d)[:20]): 1
+      di,d: 1
+      mass,cov: 1
+      sys.exit(): 1
+      use: 1
+      rows.append(row): 1
+      meta.append((di,cos,sin,uu,vv)): 1
+      y.npy,y): 1
+      meta.pkl,wb)): 1
+      np.array([[cos*u-sin*v,: 1
+      def: 1
+      np.add.at(g,(l,b),w): 1
+      np.add.at(g,(r,b),-w): 1
+      np.add.at(g,(l,t),-w): 1
+      np.add.at(g,(r,t),w): 1
+      idx: 1
+      out.append((float(fl[idx]),cov,(cos,sin,cu_,cv_))): 1
+      d: 1
+      meta.append(pl): 1
+      print(obj,float(sizes@w),dual,y.sum()): 1
+      a: 1
+      2}  max overlap area {mx:.6f}  total {tot:.6f}): 1
+      (p[0]+t*(q[0]-p[0]),p[1]+t*(q[1]-p[1])): 1
+      not: 1
+      cur: 1
+      p: 1
+      ^: 1
+      '[$cfg]': 1
+      wait: 1
+      b7xzdy9vv.output: 1
+      nproc: 1
+      overlapping: 1
+      uptime: 1
+    invoked_families:
+      inspection: 73
+      other: 62
+      shell: 35
+      toolchain: 2
+    by_shell_shape:
+      python_heredoc:
+        count: 7
+        total_seconds: 301.372
+        median_seconds: 62.072
+        max_seconds: 101.486
+      compound:
+        count: 20
+        total_seconds: 140.471
+        median_seconds: 0.11
+        max_seconds: 121.291
+      python_inline:
+        count: 5
+        total_seconds: 8.088
+        median_seconds: 1.443
+        max_seconds: 2.107
+      simple:
+        count: 6
+        total_seconds: 4.01
+        median_seconds: 0.067
+        max_seconds: 2.319
+      heredoc:
+        count: 1
+        total_seconds: 1.29
+        median_seconds: 1.29
+        max_seconds: 1.29
+      pipeline:
+        count: 1
+        total_seconds: 0.132
+        median_seconds: 0.132
+        max_seconds: 0.132
+    by_thinking_level:
+      high:
+        count: 38
+        total_seconds: 452.587
+        median_seconds: 0.394
+        max_seconds: 121.291
+      xhigh:
+        count: 3
+        total_seconds: 2.789
+        median_seconds: 1.282
+        max_seconds: 1.433
+    shell_traits:
+      pipes: 25
+      redirects_output: 11
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'
