@@ -33,6 +33,7 @@ here rounds, samples an angle, or compares against a tolerance.
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 from fractions import Fraction
 from itertools import pairwise
@@ -137,6 +138,61 @@ class Certificate:
         return max(
             (right - left) / (1 + left * right) for left, right in pairwise(self.half_tangents)
         )
+
+
+def grid_refutation_order(n: int) -> int:
+    """The least ``m`` with ``m * m >= n``: the grid that refutes a certificate.
+
+    ``m`` axis-parallel ``B``-squares fit across a container whose side exceeds
+    ``m B``, so ``m * m`` of them fit inside it, and the least such ``m`` with
+    ``m * m >= n`` is the one that matters. This is ``ceil(sqrt(n))``, written
+    with ``isqrt`` so that no float decides an integer.
+    """
+
+    root = math.isqrt(n)
+    return root if root * root >= n else root + 1
+
+
+def ceiling_side(n: int, square_side: Fraction) -> Fraction:
+    """``ceil(sqrt(n)) * B``: the largest ``L`` at which a certificate can exist.
+
+    The method has a ceiling, and it is elementary. Write ``m = ceil(sqrt(n))``
+    and suppose ``L > m B``. Set ``g = (L - m B) / (m + 1) > 0`` and place
+    ``m * m`` closed ``B``-squares axis-parallel on a lattice of pitch ``B + g``
+    starting at ``(g, g)``. The far edge sits at ``m B + m g < L``, so every
+    square lies inside the container; consecutive squares are separated by ``g``,
+    so they are pairwise disjoint as closed sets and no atom lies in two of them.
+    Direction ``0`` is always a net direction because ``t_0 = 0``, so ``C4``
+    applies to each and gives it mass at least ``1``; with non-negative weights
+    the total mass is then at least ``m * m >= n``, and ``C1`` forbids that.
+
+    So a certificate for ``n`` forces ``L <= m B``, and ``C3`` forces
+    ``B < 1 / (1 + D)`` -- see ``ceiling_side_for_net``, which takes the
+    supremum over the shrinks a net admits.
+
+    The consequence worth carrying: ``s(n) <= ceil(sqrt(n))`` holds trivially by
+    grid packing, and this ceiling sits strictly below ``ceil(sqrt(n))``. The
+    method can therefore approach the grid bound but never reach it, and can
+    never close a case whose value *is* the grid bound. ``n = 12`` is exactly
+    such a case: ``s(12) <= 4`` and 4 is the conjectured value, so no certificate
+    of this shape will ever settle it, however fine the net or the site set.
+    """
+
+    return grid_refutation_order(n) * square_side
+
+
+def ceiling_side_for_net(n: int, half_tangents: tuple[Fraction, ...]) -> Fraction:
+    """``ceil(sqrt(n)) / (1 + D)``: the ceiling over every shrink this net admits.
+
+    ``C3`` is strict, so this value is a supremum and not attained; a real
+    certificate sits below it by whatever margin its own ``B`` leaves. Refining
+    the net is what raises it, and only slowly -- ``D`` is about ``T / K`` at the
+    axis-parallel end, so halving the gap costs twice the directions and twice
+    the cost of every decision made over them.
+    """
+
+    gap = max((right - left) / (1 + left * right) for left, right in pairwise(half_tangents))
+    return Fraction(grid_refutation_order(n)) / (1 + gap)
 
 
 def _condition_mass_below_n(certificate: Certificate) -> ConditionReport:

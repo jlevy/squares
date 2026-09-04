@@ -3705,6 +3705,24 @@ needs. Where the two routes fail by an infinitesimal at the same value, neither 
 That is a limit on the method’s reach at that side, recorded as measurement and not as a
 claim about `tau*`.
 
+**The method also has a ceiling that is structural rather than measured, and it
+forecloses one of the three cases outright.** No certificate for `n` can exist at a
+container side above `ceil(sqrt(n)) * B`: a wider container holds `ceil(sqrt(n))^2`
+pairwise disjoint axis-parallel `B`-squares, direction `0` is always in the net, so `C4`
+gives each of them mass at least `1` and the total passes `n`, which `C1` forbids.
+With `C3` bounding `B` below `1 / (1 + D)`, the ceiling over every shrink a net admits
+is `ceil(sqrt(n)) / (1 + D)`, and refining the net raises it only as fast as `D` falls —
+about `T / K`, so twice the directions for half the gap, and twice the cost of every
+decision taken over them.
+Since the grid packing gives `s(n) <= ceil(sqrt(n))` for free, this ceiling always sits
+strictly below the trivial upper bound: the method can approach the grid value and never
+reach it. For `n = 12` that is decisive rather than academic.
+The ceiling is `4B = 3.9908`, the conjectured value is `4`, and so no certificate of
+this shape will ever settle twelve squares, however fine the net or the site set —
+`79/20` has `0.0408` of runway and that is all there is.
+`n = 11` and `n = 17` are not foreclosed: their runways are `0.1808` and `0.4085`, and
+both truths sit below their grid bounds.
+
 The middle tier is built and works within the explicit boundaries above.
 Two instruments now agree on the cell decomposition to `4.4e-16` and on the corner’s
 slopes to three decimals.
