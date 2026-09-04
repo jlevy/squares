@@ -818,6 +818,22 @@ results:
       nothing about what a different site set reaches at a larger side.
       A further rung is therefore a search question, and the quantity to read is the
       restricted optimum a converged run reaches, never an extrapolated rate.
+      One such question was asked and answered on 2026-09-04, at n = 18 and side
+      117/25 = 4.68, and it is recorded here as measurement rather than as a claim about
+      tau*. Three site sets in succession -- 538, 578 and 618 orbits -- returned a
+      restricted optimum of exactly 18.000000, the third of them after 157 row-generation
+      rounds that grew the row set from 15888 to 27516 and cost 7056 s. Adding sites can
+      only lower a restricted optimum, and across those three it did not move at all.
+      Two readings are open and the run did not separate them. Either the covering value
+      at that side is at or above eighteen, in which case no certificate exists there;
+      or the site sets are still short of it and the optimum is sitting on a degenerate
+      vertex, which the collapse of pricing from 90 s to 1--3 s suggests -- a dual that
+      sparse is what a degenerate basis looks like. Exactly round values are the known
+      artefact signature in this pipeline, 18.0 having been one for n = 17's grid-31
+      optima, so the second reading cannot be dismissed.
+      What is not in doubt is the cost of settling it: two hours for the round that did
+      not move. The run was stopped for that reason rather than for its answer, and the
+      side is available to a later block with a cheaper decision path.
       The method's own ceiling is not close here. A certificate for n cannot exist above
       ceil(sqrt(n)) * B, a wider container holding ceil(sqrt(n))^2 pairwise disjoint
       axis-parallel B-squares whose masses C4 forces past n; for n = 17 that is
