@@ -3260,9 +3260,13 @@ What stays open is the diagnosis that replaced it, and the entry is retitled to 
 portable fallback still copies untracked build caches into every worker, and the cap is
 held by a per-file prune that was never meant to be durable.
 The cap itself is checked on the pull-request surface; the cache accounting is checked
-by nothing. [D-423](defects.md) records that the lemma closing the Green17 cover
-certificate’s top strips is printed non-strict in Stromquist 2003 and Bentz 2010 and
-strict in Friedman’s DS7, and that the repository holds all three.
+by nothing. Hosted CI is now red on that same assertion: the planning branch’s
+pull-request surface failed it at 67,173,741 bytes on 2026-09-04 and main’s post-merge
+run at `9d5eae0f` fails the same step, so the repair scheduled as BC-168 is what turns
+the hosted gate green as well.
+[D-423](defects.md) records that the lemma closing the Green17 cover certificate’s top
+strips is printed non-strict in Stromquist 2003 and Bentz 2010 and strict in Friedman’s
+DS7, and that the repository holds all three.
 The readings agree everywhere except on the boundary the certificate uses, so the
 boundary case is an unrecorded source obligation rather than a settled step.
 

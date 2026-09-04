@@ -528,7 +528,10 @@ agenda:
       0--10 measure the current tree: snapshot_source_bytes() with and without
       __pycache__, .pytest_cache and .ruff_cache -- the planning survey measured
       68,224,754 bytes against the 67,108,864 cap on this checkout, 11,318,965 of them
-      caches, so the guard is red today. 10--45 D-422: a CACHE_DIRS set pruned from the
+      caches, so the guard is red today. It is red on the hosted runner too: the
+      pull-request surface at dd458471 failed this assertion at 67,173,741 bytes and main
+      at 9d5eae0f fails the same step, so this repair is also what turns hosted CI green
+      for every branch. 10--45 D-422: a CACHE_DIRS set pruned from the
       walk and from the root-document glob in snapshot_source_bytes(), the two top-level
       caches added to PRUNE so _clone_into skips them, and every nested __pycache__
       removed from a cloned worker after the copy; the control plants a cache file of

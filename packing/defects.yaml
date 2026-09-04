@@ -12727,6 +12727,20 @@ defects:
     reproduced as an actual red gate rather than as a projection. Two of the three failed
     steps in that run -- `negative controls` and `fast behavioral tests` -- are this one
     assertion, counted twice; the suite's other 1,606 tests passed.
+
+    Hosted CI is red on it too, as of 2026-09-04, so the "clone with no caches" the
+    paragraph above credits no longer exists on a runner either. The pull-request surface
+    at `dd458471` (PR #78, a planning branch that adds 145,323 tracked bytes under
+    `packing/`) failed exactly this assertion at 67,173,741 bytes, 64,877 over the cap; the
+    tracked, pruned-target and root-document terms at that revision sum to 57,057,956, so
+    the remaining 10.1 MB is the bytecode pytest had written under `tests/`, `devtools/`
+    and `src/` by the time the assertion ran at 53% of the suite. `main` at `9d5eae0f`,
+    the merge of PR #77, fails the same `fast behavioral tests` step in its post-merge run
+    while its previous merge at `bc6d4a87` passed, which dates the hosted red to the
+    record growth between them. Every pull request against `main` is red on this
+    assertion until the caches leave the count, which makes direction (1) below the
+    repair that turns the hosted gate green, not only the used local checkout, and it is
+    scheduled as BC-168 in Agenda 017.
   fix: >-
     Applied at `a478744a`, and deliberately narrow. Four file names joined `PRUNE` --
     exp-059's result and checkpoint, plus the exp-052 and exp-056 checkpoints, which
