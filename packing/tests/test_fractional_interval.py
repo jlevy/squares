@@ -312,9 +312,11 @@ def test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net() -> N
     assert verdict.accepted, verdict.failures
     assert len(verdict.directions) == 361
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
-    assert verdict.enclosure == (Fraction(12501, 12500), Fraction(12501, 12500))
+    enclosure = verdict.enclosure
+    assert enclosure == (Fraction(12501, 12500), Fraction(12501, 12500))
+    assert enclosure is not None
     assert certificate.bounded_side == Fraction(229, 50)
-    assert declared_n17()["least_cell_mass"] == str(verdict.enclosure[0])
+    assert declared_n17()["least_cell_mass"] == str(enclosure[0])
 
 
 # --- the published-value control ----------------------------------------------

@@ -130,7 +130,7 @@ def decide(path: Path, *, quick: bool) -> bool:
         for problem in problems:
             print(f"  REFUSED: {problem}")
         return False
-    if quick:
+    if exact is None:
         print("  the interval route accepts. NOT ENOUGH TO RETAIN: run without --quick.")
         return True
     print(f"  RETAINABLE: both routes accept and agree at {exact.minimum_cell_mass}")
