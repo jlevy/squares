@@ -69,8 +69,8 @@ Results first established here, as far as the recorded source searches show:
   against `n = 17`, least covered mass `200009/200000` — so the repository now carries a
   first-party certificate `0.0842` above the number it had adopted, with the `229/50`
   and `451/100` rungs it climbed through retained below.
-  One certificate covers all three sizes without a monotonicity step: only `C1` mentions
-  `n`, so an atom set certifies its side for every integer above its own mass.
+  One certificate covers all three sizes without a monotonicity step: only Condition 2
+  mentions `n`, so an atom set certifies its side for every integer above its own mass.
   It does not improve `n = 20`, where Nagamochi’s `1 + √13 = 4.6055…` is larger.
 - **T-017: `s(12) ≥ 79/20`, from nothing case-specific at all (`S4`).** `n = 12` had
   only the `n = 11` bound inherited by monotonicity; the frontier record said in as many

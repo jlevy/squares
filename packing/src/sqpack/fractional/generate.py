@@ -197,10 +197,10 @@ class EventGrid:
 
     ``mass[i, j]`` is what the open cell ``(u_events[i], u_events[i+1]) x
     (v_events[j], v_events[j+1])`` covers, and ``reachable[i, j]`` says whether
-    that open cell meets the centre domain -- the cell set the theorem's C4
-    quantifies over, and the one the exact sweep scores. ``lows`` and ``highs``
-    are the domain's v-extent within each u-slab, kept because a row has to be
-    generated at a point of the cell's overlap with the domain.
+    that open cell meets the centre domain -- the cell set Condition 5 of the
+    theorem quantifies over, and the one the exact sweep scores. ``lows`` and
+    ``highs`` are the domain's v-extent within each u-slab, kept because a row
+    has to be generated at a point of the cell's overlap with the domain.
     """
 
     u: np.ndarray
@@ -228,7 +228,7 @@ def event_grid(
     read per u-slab as the sweep reads it. That is the set the theorem needs
     (D-434 records the derivation), and the earlier rule -- the cell's centre
     inside the domain -- missed about one cell in ninety away from the axes,
-    which is why programs converged and were then refused at C4.
+    which is why programs converged and were then refused at Condition 5.
 
     The event grid is built from the sites that carry weight, not from all of
     them: mass is constant between those, so the cells are coarser but the

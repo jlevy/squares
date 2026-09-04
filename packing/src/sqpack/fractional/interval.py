@@ -2,8 +2,8 @@
 
 This is the second decision procedure for the Burns--Massaccesi certificate, and
 it exists to differ from ``sqpack.fractional.certificate`` in *method*, not only
-in code. The exact verifier decides ``C4`` by an event-cell decomposition in
-rational arithmetic; a modelling error there -- a wrong cell set, a wrong
+in code. The exact verifier decides Condition 5 by an event-cell decomposition
+in rational arithmetic; a modelling error there -- a wrong cell set, a wrong
 domain polygon -- reproduces itself exactly on every replay. This module
 decides the same theorem by branch and bound over boxes of square centres in
 floating-point interval arithmetic with directed rounding, whose failure modes
@@ -14,23 +14,23 @@ wrong direction. Two methods that could only fail in the same way are what the
 What is decided. With ``n``, container side ``L``, shrink ``B``, a rational
 half-tangent net ``0 = t_0 < ... < t_K < 1`` and rational-weight atoms:
 
-``C1``  total atom mass is strictly below ``n``;
-``C2``  the net reaches pi/4, i.e. ``t_K^2 + 2 t_K - 1 >= 0``;
-``C3``  ``B (1 + D) < 1`` for ``D`` the largest half-gap tangent;
-``C4``  every closed ``B``-square at a net direction lying inside ``[0, L]^2``
-        covers atom mass at least 1 -- decided here over the *doubled* net,
-        the ``K + 1`` directions ``theta_k`` and their reflections
-        ``pi/2 - theta_k``.
+Condition 2  total atom mass is strictly below ``n``;
+Condition 3  the net reaches pi/4, i.e. ``t_K^2 + 2 t_K - 1 >= 0``;
+Condition 4  ``B (1 + D) < 1`` for ``D`` the largest half-gap tangent;
+Condition 5  every closed ``B``-square at a net direction lying inside
+             ``[0, L]^2`` covers atom mass at least 1 -- decided here over the
+             *doubled* net, the ``K + 1`` directions ``theta_k`` and their
+             reflections ``pi/2 - theta_k``.
 
-``C0`` (D4 invariance of the atom multiset) is not decided, and not because it
-was skipped: an equality of rationals is exactly what interval arithmetic can
-never establish. It is not needed either. The exact proof uses ``C0`` only to
-reflect a square at an angle past pi/4 onto the net's arc; deciding ``C4`` on
-the doubled net covers every orientation in ``[0, pi/2)`` directly, so the
-symmetry reduction is never invoked and the conclusion rests on strictly fewer
-hypotheses. For a certificate that is D4-symmetric the two conditions coincide
-in strength; for one that is not, this decision is the one that is still
-sound.
+Condition 1 (D4 invariance of the atom multiset) is not decided, and not
+because it was skipped: an equality of rationals is exactly what interval
+arithmetic can never establish. It is not needed either. The exact proof uses
+Condition 1 only to reflect a square at an angle past pi/4 onto the net's arc;
+deciding Condition 5 on the doubled net covers every orientation in
+``[0, pi/2)`` directly, so the symmetry reduction is never invoked and the
+conclusion rests on strictly fewer hypotheses. For a certificate that is
+D4-symmetric the two conditions coincide in strength; for one that is not,
+this decision is the one that is still sound.
 
 Why the lower bound is a lower bound. Fix a direction with rotation ``(c, s)``
 and write ``u = c x + s y``, ``v = -s x + c y`` for the rotated frame. A closed
@@ -582,7 +582,7 @@ class IntervalVerdict:
 def _condition_mass_below_n(certificate: Certificate, atoms: AtomData) -> IntervalCondition:
     total = atoms.total
     return IntervalCondition(
-        "C1 total mass below n",
+        "Condition 2: total mass below n",
         f"total {Fraction(total, atoms.scale)} against n = {certificate.n}, exact integers",
         status="holds" if total < certificate.n * atoms.scale else "fails",
     )
@@ -604,7 +604,7 @@ def _condition_net_reaches_eighth_turn(certificate: Certificate) -> IntervalCond
     last = Interval.of(certificate.half_tangents[-1])
     slack = last * last + TWO * last - ONE
     return IntervalCondition(
-        "C2 net reaches pi/4",
+        "Condition 3: net reaches pi/4",
         f"t_K^2 + 2 t_K - 1 in [{slack.lo:.3e}, {slack.hi:.3e}]",
         status=_strict_sign(slack, want_positive=True),
     )
@@ -620,7 +620,7 @@ def _condition_containment(certificate: Certificate) -> IntervalCondition:
     largest = Interval(max(g.lo for g in gaps), max(g.hi for g in gaps))
     product = Interval.of(certificate.square_side) * (ONE + largest)
     return IntervalCondition(
-        "C3 containment B(1 + D) < 1",
+        "Condition 4: containment B(1 + D) < 1",
         f"B(1 + D) in [{product.lo:.12f}, {product.hi:.12f}]",
         status=_strict_sign(product - ONE, want_positive=False),
     )
@@ -641,7 +641,7 @@ def verify_by_intervals(
 ) -> IntervalVerdict:
     """Decide the certificate; ``enclose`` also pins the least covered mass.
 
-    ``directions`` restricts ``C4`` to the named labels of the doubled net (a
+    ``directions`` restricts Condition 5 to the named labels of the doubled net (a
     sub-net decides a weaker statement and is for controls, not for claims).
     """
     if any(t >= 1 for t in certificate.half_tangents):
@@ -686,7 +686,9 @@ def verify_by_intervals(
     if worst is not None and worst.upper is not None:
         detail += f"; least point mass {Fraction(worst.upper, atoms.scale)} at {worst.label}"
     conditions.append(
-        IntervalCondition("C4 every admissible centre covers mass 1", detail, status=status)
+        IntervalCondition(
+            "Condition 5: every admissible centre covers mass 1", detail, status=status
+        )
     )
     return IntervalVerdict(
         tuple(conditions), tuple(outcomes), atoms.scale, Fraction(atoms.total, atoms.scale)

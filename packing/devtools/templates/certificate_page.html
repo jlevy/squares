@@ -369,7 +369,7 @@
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 1</span><span class="tag">C1</span>
+    <span class="caps">Figure 1</span><span class="tag">Condition 2</span>
     <span class="fig-title">The budget, and the shortfall</span>
   </div>
   <div class="budget">
@@ -383,7 +383,7 @@
     </div>
   </div>
   <figcaption class="kpress-figcaption">The shortfall is <strong>{{SHORTFALL}}</strong>. Everything right of the orange line is mass eleven
-  squares would need and the board does not hold. Condition <strong>C1</strong> is this comparison.</figcaption>
+  squares would need and the board does not hold. <strong>Condition 2</strong> is this comparison.</figcaption>
 </figure>
 
 <section class="col kpress-prose">
@@ -394,13 +394,13 @@
   <p>The certificate holds {{N_ATOMS}} atoms in {{N_ORBITS}} orbits of the container’s eightfold symmetry group
   <span class="tex">\mathbf{D}_4</span>, carrying {{N_WEIGHTS}} distinct weights between
   <span class="tex">{{WEIGHT_MIN}}</span> and <span class="tex">{{WEIGHT_MAX}}</span>. That symmetry is condition
-  <strong>C0</strong>. It lets the proof check angles only up to <span class="tex">\pi/4</span> and reflect
+  <strong>Condition 1</strong>. It lets the proof check angles only up to <span class="tex">\pi/4</span> and reflect
   every other orientation onto that arc.</p>
 </section>
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 2</span><span class="tag">C0</span>
+    <span class="caps">Figure 2</span><span class="tag">Condition 1</span>
     <span class="fig-title">The atom field</span>
   </div>
   <div class="stage stage-tip"><canvas id="field" width="1040" height="1040"></canvas>
@@ -415,7 +415,7 @@
     <span class="caps">The covering condition</span>
     <h2>Every Placement Covers Mass at Least One</h2>
   </div>
-  <p>Condition <strong>C4</strong> is the claim that every placement covers mass at least
+  <p><strong>Condition 5</strong> is the claim that every placement covers mass at least
   <span class="tex">1</span>. A placement has three continuous parameters, two of position and one of angle, so
   the placements cannot be enumerated. The proof makes them finite twice over: the angle is snapped to a net of
   {{N_DIRECTIONS}} rational directions, and for each direction the position collapses to a finite grid of cells, because the
@@ -429,7 +429,7 @@
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 3</span><span class="tag">C4</span>
+    <span class="caps">Figure 3</span><span class="tag">Condition 5</span>
     <span class="fig-title">The prover: drag the square, watch the mass</span>
   </div>
   <div class="split">
@@ -480,9 +480,9 @@
   <span class="tex">\cos d + \sin d \le 1 + \tan d</span> on <span class="tex">[0,\pi/4)</span>, it is enough
   that</p>
   <div class="tex-d">B\,(1 + D) \;\lt\; 1, \qquad D \;=\; \max_k \frac{t_{k+1}-t_k}{1+t_k t_{k+1}} \;=\; \max_k \tan\frac{\theta_{k+1}-\theta_k}{2}.</div>
-  <p>That is condition <strong>C3</strong>, and it couples the two parameters: a coarser net gives a larger
+  <p>That is <strong>Condition 4</strong>, and it couples the two parameters: a coarser net gives a larger
   <span class="tex">d</span>, hence a smaller <span class="tex">B</span>, hence less mass covered, hence a
-  harder <strong>C4</strong>.</p>
+  harder <strong>Condition 5</strong>.</p>
   <p>The net stays rational because the angles are carried as half-tangents,
   <span class="tex">\theta_k = 2\arctan t_k</span>, so that</p>
   <div class="tex-d">\cos\theta = \frac{1-t^2}{1+t^2}, \qquad \sin\theta = \frac{2t}{1+t^2}</div>
@@ -494,7 +494,7 @@
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 4</span><span class="tag">C3</span>
+    <span class="caps">Figure 4</span><span class="tag">Condition 4</span>
     <span class="fig-title">The shrink that buys the finite net</span>
   </div>
   <div class="split">
@@ -522,7 +522,7 @@
         <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod"></dd>
       </dl>
       <p class="hint">Opens at <span class="tex">K = 3</span>, the coarsest net that still reaches
-      <span class="tex">\pi/4</span>, where <strong>C3</strong> admits only
+      <span class="tex">\pi/4</span>, where <strong>Condition 4</strong> admits only
       <span class="tex">B \lt 0.8787</span> and the shrink is unmistakable. Drag either square by its
       handle. At
       <span class="tex">K = 180</span>, the net the certificate uses, the two squares are
@@ -542,14 +542,14 @@
     <h2>Why the Net Has {{N_DIRECTIONS}} Directions</h2>
   </div>
   <p>The direction count is measurable. Hold the {{N_ATOMS}} atoms fixed, coarsen the net, set
-  <span class="tex">B</span> to the largest value <strong>C3</strong> then admits, and re-decide
-  <strong>C4</strong>. Halving the net shrinks <span class="tex">B</span> by {{HALVING_B_DROP}} and costs
+  <span class="tex">B</span> to the largest value <strong>Condition 4</strong> then admits, and re-decide
+  <strong>Condition 5</strong>. Halving the net shrinks <span class="tex">B</span> by {{HALVING_B_DROP}} and costs
   {{HALVING_MASS_DROP}} of the least covered mass.</p>
 </section>
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 5</span><span class="tag">C3 → C4</span>
+    <span class="caps">Figure 5</span><span class="tag">Condition 4 → Condition 5</span>
     <span class="fig-title">Least covered mass, as the net is coarsened</span>
   </div>
   <div class="chart kpress-diagram">
@@ -561,7 +561,7 @@
         <text x="68" y="34" text-anchor="end">1.0</text>
         <text x="68" y="114" text-anchor="end">0.5</text>
         <text x="68" y="194" text-anchor="end">0</text>
-        <text x="670" y="34" fill="var(--cert-probe)">C4 threshold</text>
+        <text x="670" y="34" fill="var(--cert-probe)">Condition 5 threshold</text>
       </g>
       <g>
         {{COARSEN_BARS}}
@@ -590,14 +590,14 @@
   <div class="boxed">
     <p>Take any packing of eleven unit squares in the side-{{L_DEC}} container. Each square, whatever its angle,
     contains a side-<span class="tex">B</span> square <span class="tex">Q_i</span> at one of the {{N_DIRECTIONS}} net angles,
-    which is <strong>C3</strong>. Because <strong>C3</strong> is a <em>strict</em> inequality, each
+    which is <strong>Condition 4</strong>. Because <strong>Condition 4</strong> is a <em>strict</em> inequality, each
     <span class="tex">Q_i</span> sits strictly inside its unit square’s interior, so the eleven are disjoint and
     no atom is counted twice. Each covers mass at least <span class="tex">1</span>, which is
-    <strong>C4</strong>. Then</p>
+    <strong>Condition 5</strong>. Then</p>
     <div class="tex-d">{{N}} \;\le\; \sum_{i=1}^{{{N}}} \mu(Q_i) \;\le\; \mu\!\left([0,L]^2\right) \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}},</div>
     <p>which is false. There is no such packing, and <span class="tex">s({{N}}) \gt {{L_FRAC}}</span>.</p>
   </div>
-  <p>The strict inequality in <strong>C3</strong> is what makes the <span class="tex">Q_i</span> disjoint. With
+  <p>The strict inequality in <strong>Condition 4</strong> is what makes the <span class="tex">Q_i</span> disjoint. With
   <span class="tex">\le</span> in its place, two shrunken squares could share a boundary atom, the double
   counting returns, and the sum never reaches <span class="tex">{{N}}</span>.</p>
 </section>
@@ -617,7 +617,7 @@
   <span class="tex">n</span>; <span class="tex">n</span> enters only in that comparison. A run converging to a
   round number is therefore a signature of a bug, not a result.</p>
   <p>All of that search runs in floating point, because it is a search. None of it is in the proof: the
-  generator emits a file, and the verifier re-decides <strong>C0</strong> through <strong>C4</strong> on that
+  generator emits a file, and the verifier re-decides <strong>Conditions 1 through 5</strong> on that
   file in exact rational arithmetic. A wrong linear program yields a rejected certificate, never a false
   theorem.</p>
 </section>
@@ -820,7 +820,7 @@ function handlePoint() {
 }
 
 /* A square at any angle reduces onto the net's arc by the container's own
-   symmetry, which is the reduction C0 pays for; the handle does it live, so a
+   symmetry, which is the reduction Condition 1 pays for; the handle does it live, so a
    drag past 45 degrees folds back rather than leaving the net. */
 function nearestNet(angle) {
   let a = ((angle % (Math.PI / 2)) + Math.PI / 2) % (Math.PI / 2);
@@ -843,7 +843,7 @@ function updateReadout() {
   const vd = document.getElementById('vd');
   if (!admissible(probe[0], probe[1])) { vd.className = 'verdict out'; vd.textContent = 'Outside the domain'; }
   else if (m >= SCALE) { vd.className = 'verdict ok'; vd.textContent = 'Covers ≥ 1'; }
-  else { vd.className = 'verdict no'; vd.textContent = 'Below 1, breaks C4'; }
+  else { vd.className = 'verdict no'; vd.textContent = 'Below 1, breaks Condition 5'; }
 }
 function updateK() {
   const t = netT(curK), th = 2 * Math.atan(t) * 180 / Math.PI;

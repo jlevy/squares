@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Measure what a coarser direction net costs the retained certificate.
 
-`C3` ties the net to the shrink: with `D` the largest half-gap tangent, the
+Condition 4 ties the net to the shrink: with `D` the largest half-gap tangent, the
 shrunken square may have side at most `1 / (1 + D)`, so a coarser net forces a
 smaller `B`, and a smaller `B` covers less mass. This holds the atoms fixed,
-coarsens the net, gives `B` the largest value `C3` then admits, and re-decides
-`C4`. The result is the slope of that trade at one point, not a claim that no
+coarsens the net, gives `B` the largest value Condition 4 then admits, and re-decides
+Condition 5. The result is the slope of that trade at one point, not a claim that no
 coarser certificate exists: these atoms were optimised against the full net.
 
 The full-net row is the retained certificate's own value and doubles as the
@@ -35,7 +35,7 @@ CASE = PACKING / "cases" / "n11_fractional_certificate"
 DEFAULT_NETS = (10, 30, 60, 90, 180)
 
 # B is reported to this many places; the value used is the largest multiple of
-# 10^-DENOM strictly below 1 / (1 + D), so `C3` holds with room to state it.
+# 10^-DENOM strictly below 1 / (1 + D), so Condition 4 holds with room to state it.
 DENOM = 10**7
 
 

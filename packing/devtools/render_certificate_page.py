@@ -212,14 +212,14 @@ def load_certificate(path: Path) -> tuple[Certificate, dict[str, str]]:
 def derive(path: Path, *, full_sweep: bool = False) -> Facts:
     """Read a certificate and compute what the page reports, deciding it first.
 
-    `C0` through `C3` are re-decided on every render: they are exact rational
+    Conditions 1 through 4 are re-decided on every render: they are exact rational
     comparisons costing microseconds, and a page explaining a proof should not be
-    renderable from a file those conditions refuse. `C4` is the expensive one, a
+    renderable from a file those conditions refuse. Condition 5 is the expensive one, a
     sweep over every direction and minutes at this atom count, and the case
     already owns a replay gate that decides it, so re-deciding it here would buy
     a second copy of one verdict at the price of the build. The upright direction
     is swept regardless: the page marks its witness, and it bounds the record's
-    declared least covered mass from below. `--verify-c4` runs the whole sweep.
+    declared least covered mass from below. `--verify-condition-5` runs the whole sweep.
     """
     certificate, record = load_certificate(path)
     refused = [report for report in conditions_without_sweep(certificate) if not report.holds]
@@ -495,14 +495,14 @@ def main(argv: list[str] | None = None) -> int:
         help="exit non-zero if the committed page differs from a fresh render",
     )
     parser.add_argument(
-        "--verify-c4",
+        "--verify-condition-5",
         action="store_true",
         help="sweep every direction before rendering; the case replay gate decides the same "
         "condition, so this is for a release build rather than an edit loop",
     )
     args = parser.parse_args(argv)
 
-    page = render(args.certificate, full_sweep=args.verify_c4)
+    page = render(args.certificate, full_sweep=args.verify_condition_5)
     if args.check:
         if not args.output.is_file():
             print(f"{args.output.relative_to(REPO)} has not been rendered", file=sys.stderr)

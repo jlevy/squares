@@ -3709,12 +3709,13 @@ claim about `tau*`.
 **The method also has a ceiling that is structural rather than measured, and it
 forecloses one of the three cases outright.** No certificate for `n` can exist at a
 container side above `ceil(sqrt(n)) * B`: a wider container holds `ceil(sqrt(n))^2`
-pairwise disjoint axis-parallel `B`-squares, direction `0` is always in the net, so `C4`
-gives each of them mass at least `1` and the total passes `n`, which `C1` forbids.
-With `C3` bounding `B` below `1 / (1 + D)`, the ceiling over every shrink a net admits
-is `ceil(sqrt(n)) / (1 + D)`, and refining the net raises it only as fast as `D` falls —
-about `T / K`, so twice the directions for half the gap, and twice the cost of every
-decision taken over them.
+pairwise disjoint axis-parallel `B`-squares, direction `0` is always in the net, so
+Condition 5 gives each of them mass at least `1` and the total passes `n`, which
+Condition 2 forbids.
+With Condition 4 bounding `B` below `1 / (1 + D)`, the ceiling over every shrink a net
+admits is `ceil(sqrt(n)) / (1 + D)`, and refining the net raises it only as fast as `D`
+falls — about `T / K`, so twice the directions for half the gap, and twice the cost of
+every decision taken over them.
 Since the grid packing gives `s(n) <= ceil(sqrt(n))` for free, this ceiling always sits
 strictly below the trivial upper bound: the method can approach the grid value and never
 reach it. For `n = 12` that is decisive rather than academic.
