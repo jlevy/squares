@@ -594,6 +594,7 @@ results:
       composition step between the artifact and the claim.
     evidence:
       - E-n012-fractional-certificate
+      - E-n012-independent-verifier
     artifacts:
       - packing/cases/n12_fractional_certificate/certificate.json
       - packing/cases/n12_fractional_certificate/certificate-19-5.json
@@ -602,9 +603,10 @@ results:
     controls:
       - packing/tests/test_fractional_certificate.py
     next_rung: >-
-      C4 needs a second exact check by a different method -- an independent
-      re-derivation of the covering condition, not another run of this sweep. C5
-      needs a review artifact by someone who did not write the generator. The bound
+      C4 needs a check by a different method value -- the independent
+      re-derivation is done and agrees, but it is exact-algebraic like the first,
+      so an interval-certified decision would be the one that moves the rung. C5
+      needs the operator to read the retained independent review. The bound
       itself: at side 39/10 the covering program reaches exactly 12 on every grid
       tried, so the next movement needs a finer site grid, a bisection between
       77/20 and 39/10, or a different shrink -- a search question, not a rung.

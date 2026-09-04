@@ -2,7 +2,7 @@
 
 A certificate is the Burns--Massaccesi object: an outer side ``L``, a shrunken
 square side ``B``, rational-weight atoms in the container, and a rational
-direction net reaching pi/4. It proves ``s(n) >= L / B`` when four conditions
+direction net reaching pi/4. It proves ``s(n) >= L`` when five conditions
 hold together, so the conditions are named here rather than left to a caller:
 
 ``C1``  the total atom mass is strictly below ``n``.
@@ -14,10 +14,18 @@ hold together, so the conditions are named here rather than left to a caller:
 ``C4``  every event cell the ``B``-square sweep can reach, at every net
         direction, carries mass at least 1.
 
-Given all four: ``n`` disjoint unit squares would contain ``n`` disjoint
-``B``-squares at net angles, each covering mass at least 1 by ``C4``, for a
-total of at least ``n`` -- which ``C1`` forbids. So ``n`` unit squares do not
-fit in a container of side ``L / B``.
+``C0``  the atom multiset is invariant under the container's D4 group, which is
+        what lets a square at an angle past pi/4 be reflected onto the net's arc
+        without changing the mass it covers.
+
+Given all five: each of ``n`` interior-disjoint unit squares contains, about
+its own centre, a closed ``B``-square at some net angle. That ``B``-square lies
+*strictly* inside the unit square's interior because ``C3`` is strict --
+``B (1 + D) < 1`` leaves room -- so the ``n`` shrunken squares are pairwise
+disjoint as closed sets and no atom is counted twice. Each covers mass at least
+1 by ``C4``, for a total of at least ``n``, which ``C1`` forbids. So ``n`` unit
+squares do not fit in a container of side ``L``, and ``s(n) > L``. The bound is
+``L`` itself; ``B`` rescales nothing (see ``Certificate.bounded_side``).
 
 The arithmetic is exact throughout. Every quantity is a ``Fraction``; nothing
 here rounds, samples an angle, or compares against a tolerance.
@@ -31,9 +39,6 @@ from itertools import pairwise
 
 from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
 from sqpack.fractional.sweep import minimum_covered_mass
-
-#: tan(pi/8), the half-angle tangent at pi/4. A net reaching this reaches pi/4.
-HALF_ANGLE_LIMIT_SQUARED = Fraction(2)
 
 
 @dataclass(frozen=True, slots=True)
@@ -120,13 +125,14 @@ class Certificate:
 
     @property
     def largest_half_gap_tangent(self) -> Fraction:
-        """``D``: the largest ``tan`` of a half-gap between adjacent net angles.
+        """``D``: the largest tangent of a half-gap between adjacent net angles.
 
-        With ``t = tan(theta / 2)``, the angle between two net directions has
-        ``tan = (t2 - t1) / (1 + t1 t2)``, which stays rational; the half-gap is
-        half of an adjacent pair's separation, so the tangent of the half-gap is
-        that same expression on the pair's midpoint split. Taking the whole gap
-        is the conservative choice and is what this returns.
+        With ``t = tan(theta / 2)`` the net angle is ``2 arctan t``, so half the
+        gap between adjacent directions is ``arctan(t2) - arctan(t1)``, whose
+        tangent is ``(t2 - t1) / (1 + t1 t2)`` -- rational, and exactly what the
+        containment step needs, not a bound on it. (An earlier docstring called
+        this a conservative full-gap value; the independent review of T-017
+        corrected that reading.)
         """
         return max(
             (right - left) / (1 + left * right) for left, right in pairwise(self.half_tangents)

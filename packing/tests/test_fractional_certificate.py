@@ -9,7 +9,9 @@ reading of the theorem divided by the shrunken side and would have claimed
 
 from __future__ import annotations
 
+import runpy
 from fractions import Fraction
+from pathlib import Path
 
 import pytest
 
@@ -187,3 +189,35 @@ def test_breaking_the_symmetry_of_the_n12_atoms_is_refused() -> None:
         half_tangents=certificate.half_tangents[:4],
     )
     assert "C0 atoms carry the declared symmetry" in verify(maimed).failures
+
+
+def test_the_independent_verifier_agrees_on_the_first_rung() -> None:
+    """The reviewer's from-the-theorem verifier, on two directions of the 19/5 rung.
+
+    Kept fast by restricting to the first and last net directions; the full
+    181-direction agreement is recorded in the evidence register.
+    """
+    package = Path(__file__).parents[1] / "cases/n12_fractional_certificate"
+    module = runpy.run_path(
+        str(package / "independent_verify.py"), run_name="independent_verify"
+    )
+    certificate = module["load"](str(FIRST_RUNG_PATH))
+    accepted, report = module["verify"](certificate, ks=[0, 180], label="19/5")
+    assert accepted, report
+    assert report["info"]["min_rep"] == Fraction(1)
+
+
+def test_containment_at_exactly_one_is_refused() -> None:
+    """C3 must be strict: equality leaves the shrunken squares able to touch,
+    and touching closed squares can share an atom, which breaks the count."""
+    base = retained_certificate(steps=180)
+    gap = base.largest_half_gap_tangent
+    touching = Certificate(
+        n=17,
+        outer_side=base.outer_side,
+        square_side=1 / (1 + gap),
+        atoms=base.atoms,
+        half_tangents=base.half_tangents,
+    )
+    assert touching.square_side * (1 + gap) == 1
+    assert "C3 containment B(1 + D) < 1" in verify(touching).failures
