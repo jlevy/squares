@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 433
+count: 434
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13517,5 +13517,50 @@ defects:
     `tests/test_fractional_certificate.py::test_rationalise_rounds_weights_up_never_down`
     feeds three weights the floor gets wrong (5.3, 0.5 and 1000.001 units) and asserts
     each lands on the next multiple above.
+  bead: think-yw5g
+  recorded_in: packing/src/sqpack/fractional/generate.py
+- id: D-434
+  title: The covering LP's separation oracle sees fewer placements than the verifier decides
+  date: '2026-09-04'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: inspection
+  latent_for: >-
+    since sqpack.fractional.generate was written on 2026-09-04, about five hours; found
+    twice in one hour, independently, by a measurement here and by the column-generation
+    lane's own test
+  severity: high
+  what: >-
+    `generate._worst_cells` and `colgen.placement_cells` score an event cell when the
+    cell's centre, rotated back, lies in the admissible centre domain. `sweep.reduce_to_cells`,
+    which `certificate.verify` uses to decide C4, scores every cell whose v-range meets the
+    domain's v-extent within the u-slab. The second set strictly contains the first.
+    Measured on the retained 113-atom certificate at L = 77/20: identical at directions 0
+    and 1, and 432, 452 and 456 extra cells at directions 45, 90 and 180 -- 1.1 to 1.2 per
+    cent. The column-generation lane found the same thing from the other side, on a small
+    instance at L = 11/5 where the oracle reports 2.125 and the sweep 2.
+  consequence: >-
+    The linear program converges with every placement it can see at mass 1 and is then
+    refused by C4 on a placement it was never shown. Both n = 12 pushes to side 39/10 died
+    this way with margin in hand: 11.921565 refused at least cell mass 3395/3456, and
+    11.869187 refused at 3083/3125 after column generation. The direction matters and is
+    the reason this is filed conservative rather than flattering: the oracle never invents
+    a violation, so every row it does emit is sound and every certificate the exact verifier
+    accepted stands, `T-017` included. What the gap costs is candidates, not correctness --
+    the search optimises against a weaker constraint set than the verifier enforces.
+  fix: >-
+    Outstanding, and owned by the overnight Lane A, which is first deciding which cell set
+    the theorem actually requires. That question is open in a way worth stating: if
+    `reduce_to_cells` is itself a strict superset of the placements C4 needs -- cells that
+    only touch the domain, or lie partly outside it -- then the verifier is refusing
+    certificates it should accept, and the repair is to the verifier rather than to the
+    oracle. Either way the two must decide the same set, with the exact sweep remaining the
+    only decider.
+  regression: >-
+    A test asserting, on at least three configurations including a diagonal direction, that
+    the oracle's cell set contains the sweep's and its reported minimum never exceeds the
+    sweep's.
+  status: outstanding
   bead: think-yw5g
   recorded_in: packing/src/sqpack/fractional/generate.py

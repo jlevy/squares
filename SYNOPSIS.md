@@ -3192,13 +3192,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 433 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 434 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
-| validity | 115 | was correct, but the measurement did not bear on the question |
+| validity | 116 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 157 | recorded something its own evidence contradicts |
 | robustness | 55 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
@@ -3209,7 +3209,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-two defects in 433, and no soundness defect
+**The automated gate has caught sixty-two defects in 434, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3262,13 +3262,21 @@ What stays open is the diagnosis that replaced it, and the entry is retitled to 
 portable fallback still copies untracked build caches into every worker, and the cap is
 held by a per-file prune that was never meant to be durable.
 The cap itself is checked on the pull-request surface; the cache accounting is checked
-by nothing. Hosted CI is now red on that same assertion: the planning branch’s
-pull-request surface failed it at 67,173,741 bytes on 2026-09-04 and main’s post-merge
-run at `9d5eae0f` fails the same step, so the repair scheduled as BC-168 is what turns
-the hosted gate green as well.
-[D-423](defects.md) records that the lemma closing the Green17 cover certificate’s top
-strips is printed non-strict in Stromquist 2003 and Bentz 2010 and strict in Friedman’s
-DS7, and that the repository holds all three.
+by nothing. [D-434](defects.md) is the one an overnight run should know about: the
+covering program’s separation oracle scores a placement cell by its centre, while the
+exact sweep that decides the certificate scores every cell whose slab meets the
+admissible domain — 1.1 to 1.2 per cent more cells away from the axes.
+The search therefore optimises against a weaker constraint set than the verifier
+enforces, and two `n = 12` pushes to side `39/10` converged below twelve and were then
+refused on placements they were never shown.
+The gap is one-sided, so every accepted certificate stands and
+[`T-017`](packing/frontier/RESULTS.md) is untouched; what it costs is candidates.
+Hosted CI is now red on that same assertion: the planning branch’s pull-request surface
+failed it at 67,173,741 bytes on 2026-09-04 and main’s post-merge run at `9d5eae0f`
+fails the same step, so the repair scheduled as BC-168 is what turns the hosted gate
+green as well. [D-423](defects.md) records that the lemma closing the Green17 cover
+certificate’s top strips is printed non-strict in Stromquist 2003 and Bentz 2010 and
+strict in Friedman’s DS7, and that the repository holds all three.
 The readings agree everywhere except on the boundary the certificate uses, so the
 boundary case is an unrecorded source obligation rather than a settled step.
 
