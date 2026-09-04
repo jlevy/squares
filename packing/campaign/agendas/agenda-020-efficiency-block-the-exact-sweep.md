@@ -15,7 +15,7 @@ agenda:
     direction rather than drawn from agenda-019's queued candidates, and recorded here
     after the fact at the operator's further direction to track and capture it as its
     own efficiency block. All four things W5 asks for at entry were already on record
-    before any change: a measured baseline (the exact event-cell sweep that decides C4
+    before any change: a measured baseline (the exact event-cell sweep that decides Condition 5
     at the retention gate fits atoms^2.00 and cost 5378 s on the largest retained
     certificate), a profile (one direction of that certificate spends 39.35 s in a
     dense Fraction grid against 2.29 s reducing the atoms to their reachable cells), a
@@ -40,7 +40,7 @@ agenda:
     state: complete
     priority: 0
     question: >-
-      Can the exact event-cell sweep that decides C4 at the retention gate be made at
+      Can the exact event-cell sweep that decides Condition 5 at the retention gate be made at
       least ten times faster without changing what it decides -- the same least
       covered mass on every retained certificate, with the Fraction sweep still the
       reference it is checked against, cell for cell?
@@ -116,7 +116,7 @@ agenda:
       accept/reject decision should move to the interval route -- still holds now that
       its baseline is the integer sweep rather than the Fraction one.
     outcomes:
-    - scope: the exact event-cell sweep's C4 decision at the retention gate
+    - scope: the exact event-cell sweep's Condition 5 decision at the retention gate
       classification: achieved
       result: >-
         The sweep now decides in int64 on the weights' common scale, holds reachable
@@ -171,7 +171,7 @@ agenda:
     changes:
     - name: integer-event-cell-sweep
       result: >-
-        sweep.py decides C4 in int64 on the weights' common scale, holds reachable
+        sweep.py decides Condition 5 in int64 on the weights' common scale, holds reachable
         cells as one span per column, and certificate.py's verify runs the 181
         directions in a process pool; the change is checked cell for cell against the
         unchanged Fraction route rather than replacing it.
@@ -270,7 +270,7 @@ section.
 open: a measured baseline, a profile, a target metric, and an equivalence or validity
 guard. All four were on record before this block touched a line of code.
 
-**Baseline.** The exact event-cell sweep that decides condition C4 at the retention gate
+**Baseline.** The exact event-cell sweep that decides Condition 5 at the retention gate
 — every retained certificate’s least covered mass — was measured on three paired runs
 against frozen bytes, the only comparison this record trusts:
 

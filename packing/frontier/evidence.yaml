@@ -1254,7 +1254,7 @@ evidence:
       sums or difference array, and decides the admissible-centre set by exact
       polygon clipping, reporting a lower and an upper bound on the continuum
       minimum that coincide at every one of the 181 directions for both
-      certificates. Least covered mass exactly 1 at direction 0 for each; C0 to C3
+      certificates. Least covered mass exactly 1 at direction 0 for each; Condition 1 to Condition 4
       agree with E-n012-fractional-certificate to the digit. Break tests refuse a
       weight lowered by 1/10000, a dropped atom and a shifted atom, each by the
       condition that ought to catch it. Run unchanged on Massaccesi's published n = 17
@@ -1446,7 +1446,7 @@ evidence:
       containment B(1 + D) < 1 holds at B = 9977/10000, and every reachable event cell at
       every net direction carries mass at least 1, the least being 50007/50000. The bound
       proved is the container side itself, 24/5.
-      Three sizes, and none of them by monotonicity. Only C1 mentions n among the five
+      Three sizes, and none of them by monotonicity. Only Condition 2 mentions n among the five
       conditions, so this atom set certifies its side for every integer strictly above its
       own mass, which is 19 and upward. The register already holds 5 from n = 22 on, so
       the certificate is true there and weaker; where it moves the register is n = 19,
@@ -1492,16 +1492,16 @@ evidence:
       library; rationals enter at one boundary where exact comparison happens, and atom
       masses are exact integers on the certificate's own weight scale, so the sums round
       nothing.
-      It is independent in method, not merely in code. C4 is decided by branch and bound
+      It is independent in method, not merely in code. Condition 5 is decided by branch and bound
       over boxes of centres -- for a box, an atom counts only if its coverage rectangle
       contains the whole box, which is a lower bound by construction and is tested
       against the inner enclosure of that rectangle so an unresolved atom is dropped
       rather than assumed. There is no event grid, no difference array and no polygon
       clipping, so it shares no modelling assumption with the exact route.
-      It also rests on fewer hypotheses. C4 is decided on the doubled net -- theta_k and
+      It also rests on fewer hypotheses. Condition 5 is decided on the doubled net -- theta_k and
       pi/2 - theta_k, 361 directions -- so the D4 reflection argument is never invoked
-      and C0 is not needed at all, which matters because interval arithmetic cannot
-      establish the equality C0 asserts.
+      and Condition 1 is not needed at all, which matters because interval arithmetic cannot
+      establish the equality Condition 1 asserts.
       Results, 361 of 361 directions certified in every case and none stalled. The four
       retained top rungs, decided from their frozen bytes: n = 20 at 24/5, 2260 atoms,
       5,638,343 boxes; n = 17 at 459/100, 1184 atoms,
@@ -1529,7 +1529,7 @@ evidence:
       Its acceptance path was audited before this entry was written, and one gap was
       found and closed: enclosing runs settled boxes against the best point value rather
       than against mass 1, so they pinned the minimum exactly and then read `certified`
-      as though it answered C4. The lightened-atom fixture was accepted that way at a
+      as though it answered Condition 5. The lightened-atom fixture was accepted that way at a
       correctly measured 99993/100000 (D-435). The figures above were measured before the
       fix and none of them moves: it changes only the verdict drawn when a pinned minimum
       falls short of 1, and every enclosure here is at or above 1. The verdict now

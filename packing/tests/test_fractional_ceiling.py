@@ -137,8 +137,8 @@ def test_a_mirrored_net_angle_is_admissible_only_against_symmetric_measures() ->
 
 
 def test_a_unit_square_at_any_angle_within_pi_over_4_bounds_every_valid_net() -> None:
-    """The unit regime needs Conditions 3 and 4 of the net it bounds, and refuses
-    otherwise."""
+    """The unit regime needs Condition 3 and Condition 4 of the net it bounds,
+    and refuses otherwise."""
     square = Placement(Fraction(1, 5), Fraction(1), Fraction(1), Fraction(1), Fraction(1))
     fine = verify_ceiling(CeilingCertificate(1, TWO, B, NET, (square,)))
     assert fine.proved, fine.failures

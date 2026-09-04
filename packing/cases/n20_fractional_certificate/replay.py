@@ -1,7 +1,7 @@
 """Load the retained n = 20 certificate and hand it to the exact verifier.
 
 One certificate is retained, at container side 24/5. Its atoms carry three
-registered cases rather than one: only C1 mentions n among the five conditions,
+registered cases rather than one: only Condition 2 mentions n among the five conditions,
 so a set of total mass 946131/50000 certifies its side for every integer above
 that mass, which is 19 and upward. At n = 19 and n = 20 the side improves the
 register directly; at n = 21 it improves Nagamochi's closed form as well; from

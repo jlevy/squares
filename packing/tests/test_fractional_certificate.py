@@ -93,7 +93,7 @@ def test_mass_reaching_n_is_refused() -> None:
         half_tangents=base.half_tangents,
     )
     assert heavy.total_mass == 17
-    assert "Condition 2: total mass below n" in verify(heavy).failures
+    assert "Condition 2 total mass below n" in verify(heavy).failures
 
 
 def test_a_net_short_of_an_eighth_turn_is_refused() -> None:
@@ -106,13 +106,13 @@ def test_a_net_short_of_an_eighth_turn_is_refused() -> None:
         atoms=base.atoms,
         half_tangents=tuple(Fraction(41, 100) * k / 6 for k in range(7)),
     )
-    assert "Condition 3: net reaches pi/4" in verify(short).failures
+    assert "Condition 3 net reaches pi/4" in verify(short).failures
 
 
 def test_a_net_too_coarse_for_containment_is_refused() -> None:
     """Condition 4: with few directions the angular gap outgrows the shrink."""
     base = retained_certificate(steps=2)
-    assert "Condition 4: containment B(1 + D) < 1" in verify(base).failures
+    assert "Condition 4 containment B(1 + D) < 1" in verify(base).failures
 
 
 def test_a_lightened_atom_breaks_the_covering_condition() -> None:
@@ -132,7 +132,7 @@ def test_a_lightened_atom_breaks_the_covering_condition() -> None:
     verdict = verify(thin)
     assert verdict.minimum_cell_mass is not None
     assert verdict.minimum_cell_mass < 1
-    assert "Condition 5: every reachable cell carries mass 1" in verdict.failures
+    assert "Condition 5 every reachable cell carries mass 1" in verdict.failures
 
 
 def test_the_half_angle_parametrisation_is_exactly_unit_length() -> None:
@@ -211,7 +211,7 @@ def test_breaking_the_symmetry_of_the_n12_atoms_is_refused() -> None:
         atoms=certificate.atoms[1:],
         half_tangents=certificate.half_tangents[:4],
     )
-    assert "Condition 1: atoms carry the declared symmetry" in verify(maimed).failures
+    assert "Condition 1 atoms carry the declared symmetry" in verify(maimed).failures
 
 
 def test_the_independent_verifier_agrees_on_the_first_rung() -> None:
@@ -243,7 +243,7 @@ def test_containment_at_exactly_one_is_refused() -> None:
         half_tangents=base.half_tangents,
     )
     assert touching.square_side * (1 + gap) == 1
-    assert "Condition 4: containment B(1 + D) < 1" in verify(touching).failures
+    assert "Condition 4 containment B(1 + D) < 1" in verify(touching).failures
 
 
 def test_rationalise_rounds_weights_up_never_down() -> None:
@@ -269,9 +269,9 @@ def test_rationalise_rounds_weights_up_never_down() -> None:
 def test_the_sweep_scores_every_cell_it_scored_before() -> None:
     """A guard against the verifier being "repaired" by narrowing its cell set.
 
-    Condition 5 is only as strong as the set of placements it quantifies over,
-    and a change that drops cells makes every certificate easier to accept
-    while every retained certificate still passes -- so the retained ones cannot
+    Condition 5 is only as strong as the set of placements it quantifies over, and a
+    change that drops cells makes every certificate easier to accept while
+    every retained certificate still passes -- so the retained ones cannot
     catch it. These counts are the exact cell sets the accepted n = 12
     certificate was decided on. If a change lowers one, the verifier is
     deciding fewer placements than it used to, and the results registered
@@ -312,7 +312,7 @@ def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> No
     )
     verdict = verify(too_large)
     assert not verdict.accepted
-    assert "Condition 5: every reachable cell carries mass 1" in verdict.failures
+    assert "Condition 5 every reachable cell carries mass 1" in verdict.failures
     assert verdict.minimum_cell_mass is not None
     assert verdict.minimum_cell_mass < 1
 
@@ -372,9 +372,8 @@ def test_the_n11_calibration_rung_below_stromquist_also_verifies() -> None:
     certificate = n11_load(N11_FIRST_RUNG)
     assert certificate.bounded_side == Fraction(189, 50)
     assert (certificate.bounded_side - 2) ** 2 * 5 < 16
-    # Condition 5's value, not the whole verdict: a net this coarse fails
-    # Condition 4 by construction, since D grows with the gap and B(1 + D)
-    # then exceeds 1.
+    # Condition 5's value, not the whole verdict: a net this coarse fails Condition 4 by
+    # construction, since D grows with the gap and B(1 + D) then exceeds 1.
     # What the coarse decision shows is coverage, which is the claim here.
     coarse = Certificate(
         n=certificate.n,
@@ -626,8 +625,7 @@ def test_the_refuting_grid_fits_and_one_of_its_squares_starves() -> None:
 
 
 def test_one_atom_set_certifies_every_size_above_its_mass() -> None:
-    """``n`` lives only in Condition 2, so a certificate is not tied to the ``n``
-    it declares.
+    """``n`` lives only in Condition 2, so a certificate is not tied to the ``n`` it declares.
 
     The n = 17 record reaches n = 18 and n = 19 through the monotonicity step
     T-016 records, but it does not need it: its own mass is under both, so the

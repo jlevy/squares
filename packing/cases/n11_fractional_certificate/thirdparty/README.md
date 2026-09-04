@@ -71,9 +71,9 @@ on the certificate and on the control.
 Each run prints every condition with its numbers and ends in `VERIFIED` or `REFUSED`;
 the script exits non-zero on any refusal.
 Expect about half a minute.
-C4 took 22 to 27 s on the certificate and 7 to 8 s on the control with CPython 3.10
-through 3.14 on an idle core, and 39 s and 14 s in the pasted run below, on a contended
-one. The outputs are pasted verbatim below.
+Condition 5 took 22 to 27 s on the certificate and 7 to 8 s on the control with CPython
+3.10 through 3.14 on an idle core, and 39 s and 14 s in the pasted run below, on a
+contended one. The outputs are pasted verbatim below.
 
 ## The Theorem
 
@@ -96,22 +96,22 @@ coordinates and rational weights `w_i ≥ 0`. For a set `Q` in the plane write
 
 **Hypotheses.**
 
-- **C0.** The weighted atom set is invariant under the eight symmetries of `K`: for
-  every atom, each of the eight images of its site under
+- **Condition 1.** The weighted atom set is invariant under the eight symmetries of `K`:
+  for every atom, each of the eight images of its site under
   `(x, y) ↦ (x, y), (L−x, y), (x, L−y), (L−x, L−y), (y, x), (L−y, x), (y, L−x), (L−y, L−x)`
   is a site of the same total weight.
   (The proof uses only the reflection `(x, y) ↦ (y, x)`; the certificate declares the
   full group, and checking it is a stronger hypothesis, hence safe.)
-- **C1.** `Σ w_i < n`.
-- **C2.** `θ_K ≥ π/4`. Since `tan(π/8) = √2 − 1` is the positive root of `t² + 2t − 1`
-  and that polynomial increases for `t ≥ 0`, this is exactly `t_K² + 2t_K − 1 ≥ 0`, a
-  rational inequality.
-- **C3.** `B(1 + D) < 1`, where `D = max_k (t_{k+1} − t_k) / (1 + t_k t_{k+1})`. Since
-  `θ = 2 arctan t`, half the gap between adjacent net angles is
-  `arctan(t_{k+1}) − arctan(t_k)`, whose tangent is exactly that quotient; so `D` is the
-  tangent of the largest *half*-gap.
-- **C4.** For every `k` and every closed square `Q` of side `B` whose edges make angle
-  `θ_k` with the axes and which lies inside `K`: `mass(Q) ≥ 1`.
+- **Condition 2.** `Σ w_i < n`.
+- **Condition 3.** `θ_K ≥ π/4`. Since `tan(π/8) = √2 − 1` is the positive root of
+  `t² + 2t − 1` and that polynomial increases for `t ≥ 0`, this is exactly
+  `t_K² + 2t_K − 1 ≥ 0`, a rational inequality.
+- **Condition 4.** `B(1 + D) < 1`, where
+  `D = max_k (t_{k+1} − t_k) / (1 + t_k t_{k+1})`. Since `θ = 2 arctan t`, half the gap
+  between adjacent net angles is `arctan(t_{k+1}) − arctan(t_k)`, whose tangent is
+  exactly that quotient; so `D` is the tangent of the largest *half*-gap.
+- **Condition 5.** For every `k` and every closed square `Q` of side `B` whose edges
+  make angle `θ_k` with the axes and which lies inside `K`: `mass(Q) ≥ 1`.
 
 **Conclusion.** `n` unit squares with pairwise disjoint interiors do not fit in `K`;
 hence `s(n) ≥ L`.
@@ -119,7 +119,7 @@ hence `s(n) ≥ L`.
 ## The Proof
 
 Suppose closed unit squares `S₁, …, S_n ⊂ K` have pairwise disjoint interiors.
-We derive `n ≤ Σ w_i`, contradicting C1.
+We derive `n ≤ Σ w_i`, contradicting Condition 2.
 
 1. **Orientation reduction.** A square is unchanged by a quarter turn, so its
    orientation `φ` (the angle its edges make with the axes) may be taken in `[0, π/2)`.
@@ -127,23 +127,23 @@ We derive `n ≤ Σ w_i`, contradicting C1.
    sends a direction at angle `α` to angle `π/2 − α`, so `R(S_j)` is a unit square in
    `K` with orientation `π/2 − φ ∈ (0, π/4)`. Write `S'_j` for `S_j` or `R(S_j)`,
    whichever has orientation `φ' ∈ [0, π/4]`.
-2. **A net angle nearby.** By C2 and `t₀ = 0`, the net angles run from `0` to at least
-   `π/4`, so `φ'` lies in some `[θ_k, θ_{k+1}]`, and the nearer endpoint `θ` satisfies
-   `d := |φ' − θ| ≤ (θ_{k+1} − θ_k)/2`. Since `tan` increases on `[0, π/2)`,
+2. **A net angle nearby.** By Condition 3 and `t₀ = 0`, the net angles run from `0` to
+   at least `π/4`, so `φ'` lies in some `[θ_k, θ_{k+1}]`, and the nearer endpoint `θ`
+   satisfies `d := |φ' − θ| ≤ (θ_{k+1} − θ_k)/2`. Since `tan` increases on `[0, π/2)`,
    `tan d ≤ D`.
 3. **A concentric shrunken square.** Let `Q` be the closed square of side `B`, centred
    at the centre of `S'_j`, with orientation `θ`. Its support function in the direction
    of any edge normal of `S'_j` is `(B/2)(cos d + sin d)`, while `S'_j` extends `1/2`
    from its centre in that direction; so `Q` lies in the open interior of `S'_j` as soon
    as `B(cos d + sin d) < 1`. Now
-   `cos d + sin d = cos d · (1 + tan d) ≤ 1 + tan d ≤ 1 + D`, and C3 gives
+   `cos d + sin d = cos d · (1 + tan d) ≤ 1 + tan d ≤ 1 + D`, and Condition 4 gives
    `B(1 + D) < 1`. Hence `Q ⊂ int(S'_j) ⊂ K`, strictly inside.
-4. **C4 applies.** `Q` is a closed `B`-square at the net angle `θ` lying inside `K`, so
-   `mass(Q) ≥ 1`.
+4. **Condition 5 applies.** `Q` is a closed `B`-square at the net angle `θ` lying inside
+   `K`, so `mass(Q) ≥ 1`.
 5. **Pull back.** Let `P_j = Q` if `S'_j = S_j`, and `P_j = R(Q)` otherwise.
-   Then `P_j ⊂ int(S_j)`, and `mass(P_j) = mass(Q) ≥ 1` because by C0 the weighted atom
-   set is invariant under `R` (the atoms inside `R(Q)` are the images of the atoms
-   inside `Q`, with the same weights).
+   Then `P_j ⊂ int(S_j)`, and `mass(P_j) = mass(Q) ≥ 1` because by Condition 1 the
+   weighted atom set is invariant under `R` (the atoms inside `R(Q)` are the images of
+   the atoms inside `Q`, with the same weights).
 6. **Count.** The interiors of the `S_j` are pairwise disjoint, so the `P_j` are
    pairwise disjoint and each atom lies in at most one of them.
    With `w_i ≥ 0`, `n ≤ Σ_j mass(P_j) ≤ Σ_i w_i < n`. Contradiction.
@@ -153,11 +153,11 @@ gives a packing in some square of side `L' < L`, which sits inside `[0, L]²`; t
 `s(n) ≥ L`.
 
 Two remarks a careful reader will want settled.
-First, `Q` is closed and C4 counts atoms on its boundary; this never double-counts,
-because step 3 puts `Q` strictly inside the interior of one unit square.
-Second, C4 quantifies over every `B`-square inside `K` at a net angle, a superset of the
-squares the proof meets; a stronger hypothesis can only make the theorem harder to
-apply, never unsound.
+First, `Q` is closed and Condition 5 counts atoms on its boundary; this never
+double-counts, because step 3 puts `Q` strictly inside the interior of one unit square.
+Second, Condition 5 quantifies over every `B`-square inside `K` at a net angle, a
+superset of the squares the proof meets; a stronger hypothesis can only make the theorem
+harder to apply, never unsound.
 
 ## The Certificate
 
@@ -175,8 +175,8 @@ apply, never unsound.
 | Total weight | `43391/4000 = 10.84775 < 11` |
 | Least covered weight | `50003/50000 = 1.00006`, attained at direction 0 by the square centred at `(53/100, 53/100)`; over all 181 directions, 90,546,593 cells decided |
 
-The margin in C4 is `6/100000`, and the margin in C3 is `4.1 × 10⁻⁶`. Both are decided
-exactly; a floating-point check would have no business here.
+The margin in Condition 5 is `6/100000`, and the margin in Condition 4 is `4.1 × 10⁻⁶`.
+Both are decided exactly; a floating-point check would have no business here.
 
 **Schema.** A JSON object with the fields below.
 Every rational is a string matching `-?[0-9]+(/[1-9][0-9]*)?`; the verifier refuses any
@@ -192,22 +192,24 @@ other form, so a decimal or a float cannot enter and be rounded.
 | `atoms` | array of `[x, y, w]` | rational site coordinates and weight |
 | `claim` | string | must read `s(n) >= L` for the file’s own `n` and `L`; the verifier checks this so the label cannot mislead |
 | `total_mass`, `least_cell_mass` | rational | the record’s own bookkeeping; recomputed and compared, never trusted |
-| `id`, `symmetry` | string | labels; C0 checks the symmetry regardless of what is declared |
+| `id`, `symmetry` | string | labels; Condition 1 checks the symmetry regardless of what is declared |
 
 ## The Verifier
 
 `verify.py` reads the file, checks the shape the theorem assumes (`n ≥ 1`, positive
 sides, non-negative weights, a net that starts at 0 and increases, the declared claim
-equal to the theorem’s conclusion), then decides C0 to C4 in that order and prints each
-with its numbers. None of C0 to C4 short-circuits: a file failing C1 still has its C4
-minimum computed, so a refusal names every failing condition among them.
+equal to the theorem’s conclusion), then decides Condition 1 to Condition 5 in that
+order and prints each with its numbers.
+None of Condition 1 to Condition 5 short-circuits: a file failing Condition 2 still has
+its Condition 5 minimum computed, so a refusal names every failing condition among them.
 The preconditions are different — a file that fails one of those is refused there and
 the conditions are not reached, because a malformed file has no conditions to decide.
 Every quantity is a `fractions.Fraction`; floats appear only in printed approximations
 beside the exact value.
 
-C0 to C3 are closed-form rational tests and can be read off the code in a minute.
-C4 is the substance, and it is decided over the continuum of placements, not sampled:
+Condition 1 to Condition 4 are closed-form rational tests and can be read off the code
+in a minute. Condition 5 is the substance, and it is decided over the continuum of
+placements, not sampled:
 
 - Fix a net direction with exact cosine `c = (1 − t²)/(1 + t²)` and sine
   `s = 2t/(1 + t²)`, so `c² + s² = 1` exactly.
@@ -230,8 +232,8 @@ C4 is the substance, and it is decided over the continuum of placements, not sam
 - Whether an open cell `(a, b) × (c′, d)` meets `F` is decided exactly by clipping the
   polygon `F` to the strip `a ≤ U ≤ b` (exact rational Sutherland-Hodgman clipping),
   reading off the `V`-range `[lo, hi]` of the clipped polygon, and testing `c′ < hi` and
-  `lo < d`; the C4 comment block in `verify.py` proves this test is exact for the open
-  cell, not just its closure.
+  `lo < d`; the Condition 5 comment block in `verify.py` proves this test is exact for
+  the open cell, not just its closure.
 - The weight on every cell is computed by a two-dimensional prefix sum over integer
   weights (the rational weights times their common denominator).
   The minimising cell’s weight is then recomputed by direct summation over the atoms, at
@@ -273,7 +275,7 @@ overstating a published result; the control is what catches that kind of error.
 
 `falsify.py` perturbs the certificate and runs the full decision on each variant.
 The perturbed atom is chosen from the verifier’s own witness: the first atom covered by
-the least-covered placement, so a change to it must show in C4. Real output of
+the least-covered placement, so a change to it must show in Condition 5. Real output of
 `python3 falsify.py` (about four minutes):
 
 ```
@@ -282,7 +284,7 @@ least covered weight 50003/50000 at direction 0, centre (53/100, 53/100)
 perturbed site: atom 0 at (1/2, 29/30), weight 407/25000
 ```
 
-| Perturbation | C0 | C1 total | C2 slack | C3 B(1+D) | C4 least covered weight | Verdict |
+| Perturbation | Condition 1 | Condition 2 total | Condition 3 slack | Condition 4 B(1+D) | Condition 5 least covered weight | Verdict |
 | --- | --- | --- | --- | --- | --- | --- |
 | weight of that atom lowered by 1/10000 | FAIL (425 atoms) | PASS (216953/20000) | PASS (309449/250000000000) | PASS (0.999995896) | FAIL (24999/25000 = 0.999960) | REFUSED |
 | weights of its whole orbit (8 atoms) lowered by 1/10000 | PASS (425 atoms) | PASS (216939/20000) | PASS (309449/250000000000) | PASS (0.999995896) | FAIL (49993/50000 = 0.999860) | REFUSED |
@@ -297,13 +299,14 @@ perturbed site: atom 0 at (1/2, 29/30), weight 407/25000
 
 Read the rows as demonstrations of the verifier, not of the certificate.
 Every condition is seen refusing something.
-C4 moves by exactly what was taken from the tight placement: one atom lowered by
-`1/10000` lowers the least covered weight from `50003/50000` to `24999/25000`, a drop of
-`1/10000`; lowering its whole orbit lowers it by `2/10000`, because the corner placement
-covers two members of the orbit, the atom and its mirror image across the diagonal;
-dropping the atom removes its `407/25000`. The shifted atom leaves C4 at its old value
-and is caught by the symmetry condition alone, which is why C0 is a condition and not a
-label. The container of side 4 with the atoms recentred is refused by C4 alone, with
+Condition 5 moves by exactly what was taken from the tight placement: one atom lowered
+by `1/10000` lowers the least covered weight from `50003/50000` to `24999/25000`, a drop
+of `1/10000`; lowering its whole orbit lowers it by `2/10000`, because the corner
+placement covers two members of the orbit, the atom and its mirror image across the
+diagonal; dropping the atom removes its `407/25000`. The shifted atom leaves Condition 5
+at its old value and is caught by the symmetry condition alone, which is why Condition 1
+is a condition and not a label.
+The container of side 4 with the atoms recentred is refused by Condition 5 alone, with
 every other condition passing and a least covered weight of `0`: a square in the widened
 margin covers nothing, and the verifier scores those placements.
 
@@ -328,11 +331,11 @@ certificate C-n011-fractional-19-5
   PASS  P3 net starts at 0 and is strictly increasing | t_0 = 0, K = 180, t_K = 207107/500000
   PASS  P4 every atom is an (x, y, weight) triple | 425 atoms
   PASS  P5 the declared claim is the theorem's conclusion | declared 's(11) >= 19/5', theorem gives 's(11) >= 19/5'
-  PASS  C0 atoms invariant under the container's symmetries | 425 atoms on 425 distinct sites, all eight maps preserve the weights
-  PASS  C1 total weight below n | total 43391/4000 = 10.847750 against n = 11
-  PASS  C2 net reaches pi/4 | t_K = 207107/500000, t_K^2 + 2 t_K - 1 = 309449/250000000000
-  PASS  C3 containment B(1 + D) < 1 | D = 207107/90000000, B(1 + D) = 899996306539/900000000000 = 0.999995896154
-  C4: sweeping every net direction
+  PASS  Condition 1 atoms invariant under the container's symmetries | 425 atoms on 425 distinct sites, all eight maps preserve the weights
+  PASS  Condition 2 total weight below n | total 43391/4000 = 10.847750 against n = 11
+  PASS  Condition 3 net reaches pi/4 | t_K = 207107/500000, t_K^2 + 2 t_K - 1 = 309449/250000000000
+  PASS  Condition 4 containment B(1 + D) < 1 | D = 207107/90000000, B(1 + D) = 899996306539/900000000000 = 0.999995896154
+  Condition 5: sweeping every net direction
     direction   0/180  t = 0                  cells   34969  least weight 50003/50000 = 1.000060  running least 50003/50000
     direction  30/180  t = 207107/3000000     cells  503177  least weight 50003/50000 = 1.000060  running least 50003/50000
     direction  60/180  t = 207107/1500000     cells  512197  least weight 50003/50000 = 1.000060  running least 50003/50000
@@ -340,7 +343,7 @@ certificate C-n011-fractional-19-5
     direction 120/180  t = 207107/750000      cells  505529  least weight 50003/50000 = 1.000060  running least 50003/50000
     direction 150/180  t = 207107/600000      cells  501069  least weight 50003/50000 = 1.000060  running least 50003/50000
     direction 180/180  t = 207107/500000      cells  499545  least weight 50003/50000 = 1.000060  running least 50003/50000
-  PASS  C4 every admissible placement covers weight >= 1 | least covered weight 50003/50000 = 1.000060 at direction 0 (t = 0), centre (53/100, 53/100) ~ (0.530000, 0.530000); 90546593 cells over 181 directions in 38.7 s
+  PASS  Condition 5 every admissible placement covers weight >= 1 | least covered weight 50003/50000 = 1.000060 at direction 0 (t = 0), centre (53/100, 53/100) ~ (0.530000, 0.530000); 90546593 cells over 181 directions in 38.7 s
   info  declared total_mass 43391/4000 == recomputed 43391/4000
   info  declared least_cell_mass 50003/50000 == recomputed 50003/50000
   info  all atoms lie in [0, L]^2: yes (not a condition; an outside atom only wastes weight)
@@ -353,11 +356,11 @@ certificate control-n17-massaccesi-4.5058
   PASS  P3 net starts at 0 and is strictly increasing | t_0 = 0, K = 180, t_K = 207107/500000
   PASS  P4 every atom is an (x, y, weight) triple | 168 atoms
   PASS  P5 the declared claim is the theorem's conclusion | declared 's(17) >= 22529/5000', theorem gives 's(17) >= 22529/5000'
-  PASS  C0 atoms invariant under the container's symmetries | 168 atoms on 168 distinct sites, all eight maps preserve the weights
-  PASS  C1 total weight below n | total 203/12 = 16.916667 against n = 17
-  PASS  C2 net reaches pi/4 | t_K = 207107/500000, t_K^2 + 2 t_K - 1 = 309449/250000000000
-  PASS  C3 containment B(1 + D) < 1 | D = 207107/90000000, B(1 + D) = 899635478111/900000000000 = 0.999594975679
-  C4: sweeping every net direction
+  PASS  Condition 1 atoms invariant under the container's symmetries | 168 atoms on 168 distinct sites, all eight maps preserve the weights
+  PASS  Condition 2 total weight below n | total 203/12 = 16.916667 against n = 17
+  PASS  Condition 3 net reaches pi/4 | t_K = 207107/500000, t_K^2 + 2 t_K - 1 = 309449/250000000000
+  PASS  Condition 4 containment B(1 + D) < 1 | D = 207107/90000000, B(1 + D) = 899635478111/900000000000 = 0.999594975679
+  Condition 5: sweeping every net direction
     direction   0/180  t = 0                  cells    2025  least weight 1 = 1.000000  running least 1
     direction  30/180  t = 207107/3000000     cells   92781  least weight 1 = 1.000000  running least 1
     direction  60/180  t = 207107/1500000     cells   94145  least weight 1 = 1.000000  running least 1
@@ -365,7 +368,7 @@ certificate control-n17-massaccesi-4.5058
     direction 120/180  t = 207107/750000      cells   91589  least weight 1 = 1.000000  running least 1
     direction 150/180  t = 207107/600000      cells   90869  least weight 1 = 1.000000  running least 1
     direction 180/180  t = 207107/500000      cells   90221  least weight 1 = 1.000000  running least 1
-  PASS  C4 every admissible placement covers weight >= 1 | least covered weight 1 = 1.000000 at direction 0 (t = 0), centre (364907/560000, 364907/560000) ~ (0.651620, 0.651620); 16562293 cells over 181 directions in 13.5 s
+  PASS  Condition 5 every admissible placement covers weight >= 1 | least covered weight 1 = 1.000000 at direction 0 (t = 0), centre (364907/560000, 364907/560000) ~ (0.651620, 0.651620); 16562293 cells over 181 directions in 13.5 s
   info  declared total_mass 203/12 == recomputed 203/12
   info  all atoms lie in [0, L]^2: yes (not a condition; an outside atom only wastes weight)
 VERIFIED: s(17) >= 22529/5000 = 4.505800
@@ -415,13 +418,13 @@ exit status 0
   Three agreeing implementations of one reduction test the code and not the reduction,
   which is why this objection was worth stating.
   It has since been answered, though not by anything in this directory.
-  The repository now also decides C4 by interval arithmetic with directed rounding —
-  branch and bound over boxes of centres, where an atom counts for a box only if its
-  coverage rectangle contains the whole box, so the count is a lower bound by
+  The repository now also decides Condition 5 by interval arithmetic with directed
+  rounding — branch and bound over boxes of centres, where an atom counts for a box only
+  if its coverage rectangle contains the whole box, so the count is a lower bound by
   construction. There is no event grid, no difference array and no polygon clipping, so
-  it shares no modelling assumption with the sweep, and it decides C4 on the doubled net
-  (`θ_k` and `π/2 − θ_k`, 361 directions), which means it never invokes the reflection
-  argument of step 1 and does not need C0 at all.
+  it shares no modelling assumption with the sweep, and it decides Condition 5 on the
+  doubled net (`θ_k` and `π/2 − θ_k`, 361 directions), which means it never invokes the
+  reflection argument of step 1 and does not need Condition 1 at all.
   Run on *this file’s bytes* — SHA-256
   `60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`, the hash in the
   table above — it certifies all 361 directions in 1,195,755 boxes with none stalled, in
@@ -437,10 +440,10 @@ exit status 0
   wrong statement of the theorem, which both share; a proof-assistant formalisation of
   the theorem and of one of the two reductions is still the check nobody has done.
 - **The reduction is proved on paper.** The argument that finitely many open cells
-  decide the continuum lives in the C4 comment block of `verify.py` and in the section
-  above. It is elementary, but it is the place where a wrong verifier would be wrong; the
-  falsification row that enlarges the container shows cells beyond the atoms’ reach are
-  scored, and the cell counts are printed, but neither is a proof.
+  decide the continuum lives in the Condition 5 comment block of `verify.py` and in the
+  section above. It is elementary, but it is the place where a wrong verifier would be
+  wrong; the falsification row that enlarges the container shows cells beyond the atoms’
+  reach are scored, and the cell counts are printed, but neither is a proof.
 - **Trust in the interpreter.** The decision rests on CPython’s arbitrary-precision
   integers and the `fractions` module.
   They are widely used and not formally verified.
@@ -451,9 +454,9 @@ exit status 0
   support-function inequality in step 3 and the invariance argument in step 5 are the
   two places to read slowly.
   No formal proof exists.
-- **Tightness.** The C4 margin is `6/100000`. Exact arithmetic makes the size of the
-  margin irrelevant to validity, but a reader should know the certificate is delicate:
-  any rounding, in either direction, would change the verdict.
+- **Tightness.** The Condition 5 margin is `6/100000`. Exact arithmetic makes the size
+  of the margin irrelevant to validity, but a reader should know the certificate is
+  delicate: any rounding, in either direction, would change the verdict.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

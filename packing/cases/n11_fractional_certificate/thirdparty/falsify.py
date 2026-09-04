@@ -13,7 +13,7 @@ verify.py from its own directory and nothing else.
 The perturbed atom is chosen from the verifier's own witness: the first atom
 covered by the least-covered placement of the unperturbed certificate, so a
 lowered weight or a dropped atom is guaranteed to touch the tight cell and
-show up in C4, not only in the symmetry condition C0.
+show up in Condition 5, not only in the symmetry condition, Condition 1.
 """
 
 import json
@@ -144,11 +144,11 @@ def run(record, name):
     minimum = results.get("minimum")
     return "| %s | %s (%s) | %s (%s) | %s (%s) | %s (%.9f) | %s (%s = %.6f) | %s |" % (
         name,
-        mark("C0"), "%d atoms" % len(cert["atoms"]),
-        mark("C1"), total,
-        mark("C2"), last * last + 2 * last - 1,
-        mark("C3"), float(product),
-        mark("C4"), minimum, float(minimum),
+        mark("Condition 1"), "%d atoms" % len(cert["atoms"]),
+        mark("Condition 2"), total,
+        mark("Condition 3"), last * last + 2 * last - 1,
+        mark("Condition 4"), float(product),
+        mark("Condition 5"), minimum, float(minimum),
         "accepted" if accepted else "REFUSED",
     )
 
@@ -170,7 +170,8 @@ def main(argv):
     site, table = perturbations(record, cert, results["witness"])
     print("perturbed site: %s" % site)
     print()
-    print("| perturbation | C0 | C1 total | C2 slack | C3 B(1+D) | C4 least covered weight | verdict |")
+    print("| perturbation | Condition 1 | Condition 2 total | Condition 3 slack"
+          " | Condition 4 B(1+D) | Condition 5 least covered weight | verdict |")
     print("| --- | --- | --- | --- | --- | --- | --- |")
     for index, (name, make) in enumerate(table):
         if selected and index not in selected:

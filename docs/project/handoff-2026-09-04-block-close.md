@@ -34,14 +34,14 @@ directed rounding, and the two agree on the least covered mass to the digit.
 
 **The ceiling.** No certificate for `n` exists above `⌈√n⌉ · B`: a wider container holds
 `⌈√n⌉²` pairwise disjoint axis-parallel `B`-squares, direction `0` is always in the net,
-`C4` gives each mass at least `1`, and `C1` forbids the total.
+`Condition 5` gives each mass at least `1`, and `Condition 2` forbids the total.
 Over every shrink a net admits the ceiling is `⌈√n⌉ / (1 + D)`. `n = 12` is foreclosed
 against its conjectured `4`; `n = 20` and `n = 21` can be brought to within `0.0115` of
 their upper bound and no nearer; `n = 11`, `17`, `18` and `19` are limited by their best
 known packings, which bind before the ceiling does.
 
-**n-independence.** Only `C1` mentions `n`, and the covering program behind the search
-does not contain `n` at all.
+**n-independence.** Only `Condition 2` mentions `n`, and the covering program behind the
+search does not contain `n` at all.
 One atom set certifies its side for every integer above its own mass, so a larger `n` is
 strictly easier at the same side.
 `T-020` is the first result to spend this deliberately: its atoms are too heavy for
@@ -88,11 +88,11 @@ every existing point sits in.
 
 ## The instrument
 
-`packing/src/sqpack/fractional/` — `certificate.py` (five conditions `C0`–`C4`, the
-verifier, the ceiling family, `least_size_certified`), `sweep.py` (the exact event-cell
-reduction), `interval.py` (the second decision), `generate.py` (covering LP by row
-generation), `colgen.py` (dual-driven column generation), `ceiling.py` (the fractional
-packing dual).
+`packing/src/sqpack/fractional/` — `certificate.py` (five conditions `Condition 1` to
+`Condition 5`, the verifier, the ceiling family, `least_size_certified`), `sweep.py`
+(the exact event-cell reduction), `interval.py` (the second decision), `generate.py`
+(covering LP by row generation), `colgen.py` (dual-driven column generation),
+`ceiling.py` (the fractional packing dual).
 
 Certificates live under `packing/cases/n{11,12,17,20}_fractional_certificate/`, each
 with a replay gate, e.g.

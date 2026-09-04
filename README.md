@@ -75,8 +75,8 @@ Results first established here, as far as the recorded source searches show:
   against `n = 17`, least covered mass `200009/200000` — so the repository now carries a
   first-party certificate `0.0842` above the number it had adopted, with the `229/50`
   and `451/100` rungs it climbed through retained below.
-  One certificate covers all three sizes without a monotonicity step: only Condition 2 mentions
-  `n`, so an atom set certifies its side for every integer above its own mass.
+  One certificate covers all three sizes without a monotonicity step: only `Condition 2`
+  mentions `n`, so an atom set certifies its side for every integer above its own mass.
   `T-020` has since carried `n = 19` past it; `n = 17` and `n = 18` are this result’s
   alone, being too small for the heavier atom set that moved the other three.
 - **T-020: `s(19), s(20), s(21) ≥ 24/5`, displacing a closed form that stood for twenty
@@ -86,7 +86,7 @@ Results first established here, as far as the recorded source searches show:
   — 2260 atoms, total mass `946131/50000`, least covered mass `50007/50000` — moves
   [`n = 20`](packing/frontier/n-020.md) by `0.194449`, `n = 21` by `0.058343`, and
   `n = 19` by `0.21`, the largest single-case movement in the register.
-  The three sizes again come out of Condition 2 alone.
+  The three sizes again come out of `Condition 2` alone.
   Above them the method has `0.1885` of room at `n = 20` and `n = 21` before
   [its own ceiling](packing/frontier/CERTIFICATE-REACH.md), and `0.0856` at `n = 19`
   before it would contradict the best known packing.

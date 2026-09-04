@@ -197,10 +197,10 @@ class EventGrid:
 
     ``mass[i, j]`` is what the open cell ``(u_events[i], u_events[i+1]) x
     (v_events[j], v_events[j+1])`` covers, and ``reachable[i, j]`` says whether
-    that open cell meets the centre domain -- the cell set Condition 5 of the
-    theorem quantifies over, and the one the exact sweep scores. ``lows`` and
-    ``highs`` are the domain's v-extent within each u-slab, kept because a row
-    has to be generated at a point of the cell's overlap with the domain.
+    that open cell meets the centre domain -- the cell set the theorem's Condition 5
+    quantifies over, and the one the exact sweep scores. ``lows`` and ``highs``
+    are the domain's v-extent within each u-slab, kept because a row has to be
+    generated at a point of the cell's overlap with the domain.
     """
 
     u: np.ndarray
