@@ -5,7 +5,7 @@ title: "Review PR #78 and publish an explainer for the s(11) >= 19/5 certificate
 kind: epic
 status: open
 priority: 1
-version: 11
+version: 12
 labels: []
 dependencies: []
 child_order_hints:
@@ -19,6 +19,7 @@ child_order_hints:
   - is-01m1pnqb02fe1zd9h7ymrn1f4d
   - is-01m1q0p63s2evef5mhkyn16e41
   - is-01m1q30dk5zktcpnwsxf9cbged
+  - is-01m1q3fmvn9py28rcm0q3jadvk
 created_at: 2026-09-04T16:58:25.014Z
-updated_at: 2026-09-04T20:50:48.549Z
+updated_at: 2026-09-04T22:33:11.978Z
 ---
