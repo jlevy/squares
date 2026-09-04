@@ -54,7 +54,7 @@ SUPPORTED_PYTHON = (3, 14)
 BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
 PROCESS_TERMINATION_GRACE_SECONDS = 1.0
 DEFAULT_TIMEOUT_SECONDS = 900.0
-ORDINARY_TEST_SUITE_BUDGET_SECONDS = 1800.0
+ORDINARY_TEST_SUITE_BUDGET_SECONDS = 2700.0
 EXHAUSTIVE_EXACT_SUITE_BUDGET_SECONDS = 14400.0
 
 
@@ -1552,9 +1552,11 @@ STEPS: tuple[Step, ...] = (
     # rigidity instrument and the runner trust boundary -- which accounts for the direction
     # but not the whole spread; the local readings were taken with other work in flight.
     #
-    # The budget is the measurement plus room for that uncertainty and for growth, not a
-    # number chosen to make today's run pass. A suite that reaches this ceiling should be
-    # re-argued, not re-padded, and the step still fails if it exceeds what it asked for.
+    # The integrated 1,810-test suite then passed in 1,788.95s on 2026-09-04; the validator
+    # measured the step at 1,791.00s, only nine seconds below the former 1,800s ceiling.
+    # The 2,700s budget gives that measured run 50% headroom for host contention and growth.
+    # A suite that reaches the new ceiling should be re-argued, not silently re-padded, and
+    # the step still fails if it exceeds what it asked for.
     Step(
         "fast behavioral tests",
         _fast_tests,
@@ -1565,10 +1567,10 @@ STEPS: tuple[Step, ...] = (
     # This is intentionally a whole suite of complete finite certificate decisions, not
     # an ordinary behavioural-test step. D-451 records the original 4,826.82-second
     # 37-test suite. The current n = 12 exact decision then replaced a <= 1,500-second
-    # predecessor with a measured 4,866-second run, putting the same suite above 8,192
-    # seconds before any other growth (D-471). The 14,400-second ceiling preserves room
-    # for that measured composition without weakening the 900-second guard on short
-    # steps; another approach to this ceiling needs a redesign, not another silent pad.
+    # predecessor with an operator-reported 4,866-second run, putting the same suite
+    # above 8,192 seconds before any other growth (D-471). The 14,400-second ceiling
+    # preserves room for that reported composition without weakening the 900-second guard
+    # on short steps; another approach to this ceiling needs a redesign, not another silent pad.
     Step(
         "exhaustive exact behavioral tests",
         _exhaustive_exact_tests,

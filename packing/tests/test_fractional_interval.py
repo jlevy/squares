@@ -21,7 +21,7 @@ import numpy as np
 import pytest
 
 from cases.n11_fractional_certificate.replay import load as load_n11
-from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH
+from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH, PREVIOUS_RUNG_PATH
 from cases.n12_fractional_certificate.replay import declared as declared_n12
 from cases.n12_fractional_certificate.replay import load as load_n12
 from cases.n17_fractional_certificate.replay import declared as declared_n17
@@ -293,6 +293,19 @@ def test_the_393_100_certificate_is_accepted_on_the_full_doubled_net() -> None:
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
     assert verdict.enclosure == (Fraction(100003, 100000), Fraction(100003, 100000))
     assert certificate.bounded_side == Fraction(393, 100)
+
+
+@pytest.mark.exhaustive_exact
+def test_the_archived_79_20_certificate_is_accepted_on_the_full_doubled_net() -> None:
+    """The former live n = 12 rung remains a complete interval control."""
+    certificate = load_n12(PREVIOUS_RUNG_PATH)
+    verdict = verify_by_intervals(certificate, enclose=True)
+    assert verdict.accepted, verdict.failures
+    assert len(verdict.directions) == 361
+    assert sum(outcome.stalled for outcome in verdict.directions) == 0
+    assert sum(outcome.boxes for outcome in verdict.directions) == 2_666_151
+    assert verdict.enclosure == (Fraction(20001, 20000), Fraction(20001, 20000))
+    assert certificate.bounded_side == Fraction(79, 20)
 
 
 @pytest.mark.exhaustive_exact

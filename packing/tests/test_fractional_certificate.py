@@ -25,6 +25,7 @@ from cases.n11_fractional_certificate.replay import FIRST_RUNG_PATH as N11_FIRST
 from cases.n11_fractional_certificate.replay import STROMQUIST_RUNG_PATH
 from cases.n11_fractional_certificate.replay import declared as n11_declared
 from cases.n11_fractional_certificate.replay import load as n11_load
+from cases.n12_fractional_certificate.__main__ import replay as replay_n12
 from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH, declared, load
 from cases.n17_fractional_certificate.replay import declared as n17_declared
 from cases.n17_fractional_certificate.replay import load as n17_load
@@ -167,6 +168,43 @@ def test_n11_replay_refuses_declared_value_drift(
     path.write_text(json.dumps(record), encoding="utf-8")
 
     assert replay_n11(path) == 1
+    assert message in capsys.readouterr().out
+
+
+@pytest.mark.parametrize(
+    ("field", "wrong", "message"),
+    [
+        ("claim", "s(2) >= 2", "retained claim disagrees"),
+        ("total_mass", "0", "retained total mass disagrees"),
+        ("least_cell_mass", "2", "retained least cell mass disagrees"),
+    ],
+)
+def test_n12_replay_refuses_declared_value_drift(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    field: str,
+    wrong: str,
+    message: str,
+) -> None:
+    """The moving n = 12 pointer may not verify stale declared figures."""
+    record = {
+        "id": "small-replay-control",
+        "n": 2,
+        "outer_side": "1",
+        "square_side": "3/5",
+        "angle_limit": "1/2",
+        "direction_steps": 1,
+        "symmetry": "D4",
+        "claim": "s(2) >= 1",
+        "total_mass": "1",
+        "least_cell_mass": "1",
+        "atoms": [["1/2", "1/2", "1"]],
+    }
+    record[field] = wrong
+    path = tmp_path / "certificate.json"
+    path.write_text(json.dumps(record), encoding="utf-8")
+
+    assert replay_n12(path) == 1
     assert message in capsys.readouterr().out
 
 
@@ -506,11 +544,12 @@ def test_the_n11_calibration_rung_verifies_on_the_full_net() -> None:
     assert verify(n11_load(N11_FIRST_RUNG)).accepted
 
 
-def test_every_retained_n12_rung_still_verifies() -> None:
-    """The ladder is evidence, not clutter: each rung must still be true.
+def test_each_retained_n12_rung_preserves_declared_figures_and_sampled_coverage() -> None:
+    """The ladder keeps its declared side and mass and covers a coarse subnet.
 
-    Kept cheap by deciding each rung on a coarse sub-net; the full 181-direction
-    decision for the top rung is the exhaustive_exact test above.
+    This is not a complete decision of any rung. The exhaustive exact test above
+    decides the live top rung over all 181 directions; separately retained full-net
+    tests cover selected historical rungs.
     """
     package = Path(__file__).parents[1] / "cases/n12_fractional_certificate"
     rungs = {

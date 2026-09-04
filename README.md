@@ -1,22 +1,23 @@
 # Square Packing
 
-This repository has moved the lower bound on `s(11)`, the smallest square-packing case
-still open. A first-party unavoidable-set certificate proves `s(11) ≥ 381/100 = 3.81`,
-narrowing the gap to Trump’s 1979 packing from `0.088230` to `0.067084`; the case stays
-open. The recorded public-source search found no earlier movement beyond the value
-Stromquist stated in 2003, so the result is `apparently-novel`, not a claim of absolute
-priority. The same certificate technique produced the first located lower bound proved
-specifically for twelve squares, `s(12) ≥ 99/25`, and a bound of `459/100` for `n = 17`,
-`18`, and `19` that displaces a previously published value by `0.0842`. Each is checked
-twice against its own frozen certificate.
-The methods share the certificate representation and C1-C3 premises, but decide C4
-differently.
+Three things here, and each is a reason to look:
 
-Around those results is a survey of every case `n = 1…100` that keeps the bound a source
-*reports* separate from the bound this repository has *verified*, with provenance for
-each, an offline archive of the primary literature whose transcriptions are checked
-against unedited extractions, and machine audits that have found errata in published
-proofs. The tools, the search code and the experiment record are all replayable from it.
+- **New results.** A first-party certificate proves `s(11) ≥ 381/100 = 3.81`, narrowing
+  the smallest open case’s gap from `0.088230` to `0.067084`. The recorded public search
+  found no stronger lower bound after Stromquist’s 2003 value, so the result is
+  `apparently-novel`, not a claim of absolute priority.
+  The same technique gives the first located case-specific bound for twelve squares,
+  `s(12) ≥ 99/25`, and `s(n) ≥ 459/100` for `n = 17`, `18`, and `19`, displacing a
+  published value. [Details below](#new-results).
+- **A survey of the whole problem in one place.** Every case `n = 1…100`, the primary
+  literature retained locally with transcription gaps explicit, and the bound a source
+  *reports* kept apart from the bound this repository has *verified* — the most
+  comprehensive single-source treatment of square packing we are aware of.
+  [Details below](#survey).
+- **An automated research workflow underneath all of it.** The results and the survey
+  are produced and checked by AI agents running a recorded process — hypotheses
+  registered before measurement, every claim graded, every defect logged.
+  [Details below](#autonomous-research-process).
 
 [![One hundred known-best square packings arranged from n equals one through one hundred.](packing/atlas/known-best/known-best-1-100.png)](packing/atlas/known-best/known-best-1-100.svg)
 

@@ -58,13 +58,18 @@ def test_the_reach_table_distinguishes_reports_from_retained_measurements() -> N
     expected_rows = (
         "| 3.82 | 11.0000 | result narrative; no raw run |",
         "| 3.95 | 11.9706 | frozen 969-atom certificate; feasible mass, not a proved optimum |",
-        "| 3.96 | 11.9936 | reported objective has no raw run; frozen 2,097-atom certificate has feasible mass 11.998960 |",
+        (
+            "| 3.96 | 11.9936 | reported objective has no raw run; frozen 2,097-atom "
+            "certificate has feasible mass 11.998960 |"
+        ),
         "| 4.58 | 16.9628 | no raw run; frozen candidate mass 16.965735 |",
         "| 4.59 | 16.9303 | no raw run; frozen candidate mass 16.933080 |",
         "| 4.68 | 18.0000 | three site sets reported; no raw run |",
     )
     assert all(row in text for row in expected_rows)
-    assert "Only the displayed 3.95 value is itself recomputable from a tracked artifact" in text
+    assert (
+        "Only the displayed 3.95 value is itself recomputable from a tracked artifact" in text
+    )
     assert "the artifact proves a feasible mass rather than optimality" in text
 
 
@@ -142,7 +147,24 @@ def test_t017_current_rung_is_bound_to_its_record_and_explanations() -> None:
 
 def test_retained_figure_anchor_beats_a_later_comparison_rung() -> None:
     """A historical comparison later in one sentence must not retarget the top-rung figures."""
-    problems, _ = check_result(_result("T-017"))
+    corrupted = copy.deepcopy(_result("T-017"))
+    corrupted["next_rung"] = (
+        "The retained certificate's total is 11.000000, leaving 1.000000 below twelve "
+        "-- compared with margin 0.007175 at 197/50."
+    )
+
+    problems, _ = check_result(corrupted)
+    assert len(problems) == 2
+    assert all("certificate.json" in problem for problem in problems)
+    assert all("certificate-197-50.json" not in problem for problem in problems)
+
+
+def test_two_in_scope_rungs_without_an_anchor_are_left_ambiguous() -> None:
+    """A figure beside two of the result's own rungs must not be guessed onto either."""
+    ambiguous = copy.deepcopy(_result("T-017"))
+    ambiguous["next_rung"] = "The total is 1.000000 between the 197/50 and 79/20 rungs."
+
+    problems, _ = check_result(ambiguous)
     assert problems == []
 
 
@@ -152,9 +174,10 @@ def test_t018_literature_receipt_is_folded_into_canonical_surfaces() -> None:
     receipt = "packing/resources/web/s11-lower-bound-literature-audit-2026/README.md"
     assert (repo / receipt).is_file()
     assert receipt in _result("T-018")["artifacts"]
-    assert receipt.removeprefix("packing/") in _evidence(
-        "E-n011-fractional-certificate"
-    )["novelty_basis"]["corpus"]
+    assert (
+        receipt.removeprefix("packing/")
+        in _evidence("E-n011-fractional-certificate")["novelty_basis"]["corpus"]
+    )
 
     case_text = (repo / "packing/frontier/n-011.md").read_text(encoding="utf-8")
     _, frontmatter, _ = case_text.split("---", 2)
@@ -185,7 +208,7 @@ def test_t018_literature_receipt_is_folded_into_canonical_surfaces() -> None:
     )["strategies"]
     by_id = {strategy["id"]: strategy for strategy in strategies}
     assert "Göbel 1979" in by_id[2]["refs"]
-    assert "Kearney–Shiu 2002" in by_id[5]["refs"]
+    assert "Kearney\u2013Shiu 2002" in by_id[5]["refs"]
     assert "Nagamochi 2005" in by_id[8]["refs"]
     assert "T-018" in by_id[22]["note"]
 
@@ -193,9 +216,7 @@ def test_t018_literature_receipt_is_folded_into_canonical_surfaces() -> None:
 def test_recovered_trump_note_is_not_described_as_missing() -> None:
     """D-472: recovery of a source must retire the old acquisition disclaimer."""
     repo = RESULTS.parents[2]
-    assert (
-        repo / "packing/resources/papers/trump-2023-packing-11-unit-squares.pdf"
-    ).is_file()
+    assert (repo / "packing/resources/papers/trump-2023-packing-11-unit-squares.pdf").is_file()
     tutorial = (repo / "TUTORIAL.md").read_text(encoding="utf-8")
     evidence = EVIDENCE.read_text(encoding="utf-8")
     assert "His 2023 author writeup is now retained" in tutorial

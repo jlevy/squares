@@ -108,7 +108,10 @@ def render(rows: list[dict]) -> str:
         "| ---: | ---: | --- |",
         "| 3.82 | 11.0000 | result narrative; no raw run |",
         "| 3.95 | 11.9706 | frozen 969-atom certificate; feasible mass, not a proved optimum |",
-        "| 3.96 | 11.9936 | reported objective has no raw run; frozen 2,097-atom certificate has feasible mass 11.998960 |",
+        (
+            "| 3.96 | 11.9936 | reported objective has no raw run; frozen 2,097-atom "
+            "certificate has feasible mass 11.998960 |"
+        ),
         "| 4.58 | 16.9628 | no raw run; frozen candidate mass 16.965735 |",
         "| 4.59 | 16.9303 | no raw run; frozen candidate mass 16.933080 |",
         "| 4.68 | 18.0000 | three site sets reported; no raw run |",

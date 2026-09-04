@@ -2,7 +2,7 @@
 
 **Review date:** 2026-09-04\
 **Pull request:** [#78](https://github.com/jlevy/squares/pull/78)\
-**Reviewed parent head:** `9d90aabe6aed36486cfa7c801e3099a47c6476f4`\
+**Reviewed parent head:** `719c2a170a1ac8bbd4cddfd353645b6d70651c45`\
 **Base:** `9d5eae0f5ecfcf3cd417a345eb6c55b1f9ac4def` (`main`)\
 **Remediation branch:** `codex/pr78-s11-adversarial-review`\
 **Certificate SHA-256:**
@@ -37,23 +37,23 @@ It checked the mathematical implication, the exact bytes retained for `n = 11`, 
 continuum-to-finite reduction, replay and validation boundaries, method provenance, and
 the novelty claim. The PR advanced repeatedly during the audit, from `9b85236b` through
 `bdf63b21`, `6fc71ce9`, `31775018`, `b77e78d2`, `9134ee41`, `430e7e09`, `6196480d`,
-`44e9c4b4`, `10cf6479`, `fbe01c49`, `d1e873a0`, and `4a0c213a`, ending at `9d90aabe`.
-Commit `6fc71ce9` replaced the `19/5` target artifact with a larger `381/100`
-certificate, so the concrete validation restarted on the new bytes.
-The later commits strengthened the separate `n = 12` and `n = 17` results, supplied the
-missing full-net `n = 17` interval control, added a finite-certificate reach theorem and
-generated reach table, amended the project process document, and added a general
-certificate-retention command; they did not change the reviewed `n = 11` bytes or its
-core argument. The reach theorem was in scope because its first prose interpretation
-overstated a finite-certificate ceiling as a method-wide impossibility; F14 records the
-correction. The self-contained verification package, interval-certified branch-and-bound
-checkpoint, retained `n = 17` certificates, and late retention command were included
-before the verdict was frozen.
-The final reconciliation also audited the moving parent’s new `4.59` and `99/25`
-certificates and `4.68` run narrative for branch consistency; those claims did not alter
-the T-018 proof, but F25-F33 record defects that would otherwise have shipped beside it.
-F34 and F35 record the literature-source drift found while folding this review back into
-the canonical resource and frontier tiers.
+`44e9c4b4`, `10cf6479`, `fbe01c49`, `d1e873a0`, `4a0c213a`, `9d90aabe`, `d3d9c7cb`, and
+`719c2a17`, ending at `719c2a17`. Commit `6fc71ce9` replaced the `19/5` target artifact
+with a larger `381/100` certificate, so the concrete validation restarted on the new
+bytes. The later commits strengthened the separate `n = 12` and `n = 17` results,
+supplied the missing full-net `n = 17` interval control, added a finite-certificate
+reach theorem and generated reach table, amended the project process document, and added
+a general certificate-retention command; they did not change the reviewed `n = 11` bytes
+or its core argument.
+The reach theorem was in scope because its first prose interpretation overstated a
+finite-certificate ceiling as a method-wide impossibility; F14 records the correction.
+The self-contained verification package, interval-certified branch-and-bound checkpoint,
+retained `n = 17` certificates, and late retention command were included before the
+verdict was frozen. The final reconciliation also audited the moving parent’s new `4.59`
+and `99/25` certificates and `4.68` run narrative for branch consistency; those claims
+did not alter the T-018 proof, but F25-F33 record defects that would otherwise have
+shipped beside it. F34 and F35 record the literature-source drift found while folding
+this review back into the canonical resource and frontier tiers.
 The other `n = 17`--`19` frontier movement was outside this review’s mathematical scope
 except where the earlier published-value `n = 17` certificate served as a control.
 
@@ -604,7 +604,7 @@ D-468 records the recurrence.
 
 ### F30: High gate-performance recurrence, fixed here: the pre-push suite lost its measured timeout
 
-The validator already gives the complete ordinary behavioral suite a 1,800-second
+The validator initially gave the complete ordinary behavioral suite a 1,800-second
 budget, based on a 1,209-second clean run.
 The `--push` entry point constructs a separate reachable-test step dynamically.
 When conservative selection expanded that step to the complete ordinary suite, it still
@@ -613,20 +613,28 @@ Three failures printed earlier in that run were separately reduced to the local
 sandbox’s refusal to bind loopback ports; all three passed together outside the sandbox
 in 2.90 s. They do not explain the timeout.
 
-**Resolution:** a whole-suite `--push` decision now reuses the same measured
-1,800-second budget as `fast behavioral tests`; a genuinely reachable subset keeps the
-900-second hang guard, and an explicit operator timeout still wins.
+**Resolution:** a whole-suite `--push` decision now reuses the same measured budget as
+`fast behavioral tests`; a genuinely reachable subset keeps the 900-second hang guard,
+and an explicit operator timeout still wins.
+The final 1,810-test pass took 1,788.95 seconds and the validator measured its step at
+1,791.00 seconds, leaving about nine seconds under 1,800. The shared whole-suite ceiling
+is therefore 2,700 seconds, 50% above the observed step time, rather than a cap already
+at 99.5% utilization.
 A regression exercises both selector outcomes.
 D-469 records the recurrence of D-438.
 
 ### F31: High parent-integration drift, fixed here: the new `n = 12` rung inherited old evidence
 
-Commit `9d90aabe` advanced the moving `n = 12` certificate to `99/25` and 2,097 atoms.
+Commit `9d90aabe` advanced the moving `n = 12` certificate to `99/25` and 2,097 atoms;
+the parent then advanced through `719c2a17` with agenda and README edits.
 Its result and case still cited the source-distinct independent verifier even though
 that program and its review decide only the historical `19/5` and `77/20` files.
 The primary evidence entry still described an intermediate `197/50`, 681-atom
 certificate, while the case body described `77/20` and 113 atoms.
 The README and replay prose likewise stopped before the eighth rung.
+Replay also bound its VERIFIED result only to total mass, so stale claim and
+least-cell-mass declarations could survive, and moving the live pointer silently removed
+the former `79/20` rung’s complete interval control.
 
 **Resolution:** all reader, frontier, evidence, and replay surfaces now bind to the
 current `99/25` certificate and its exact and interval decisions.
@@ -634,13 +642,16 @@ The independent exact verifier is pinned to `certificate-77-20.json`, retained a
 historical evidence, and explicitly excluded from support for the current bytes.
 A cross-record regression pins the current certificate figures, evidence pair, case,
 README, and replay orientation together.
+Declaration-mutation tests bind all three replay fields, the archived `79/20` full
+interval decision is restored, and the ladder-wide coarse test is labeled as sampled
+coverage rather than verification.
 D-470 records the recurrence of D-467.
 
 ### F32: High gate-performance recurrence, fixed here: the new exact decision outgrew the exhaustive budget
 
 The pre-parent exhaustive suite took 4,826.82 seconds for 37 tests.
-The new current `n = 12` exact decision is reported at 4,866 seconds, replacing a
-predecessor whose recorded ceiling was 1,500 seconds.
+The introducing commit reports 4,866 seconds for the new current `n = 12` exact
+decision, replacing a predecessor whose recorded ceiling was 1,500 seconds.
 Even conservative replacement arithmetic puts the current suite above 8,192 seconds, so
 its 7,200-second declared ceiling could no longer contain the assigned work.
 
@@ -1058,11 +1069,15 @@ All project commands used the repository’s Python 3.14 environment from `packi
 | complete current T-018 interval confirmation | **1 passed** in 22.23 s; all 361 directions certified, with enclosure `[4001/4000, 4001/4000]`. |
 | pre-latest-parent exhaustive exact suite at the repaired timeout (`0883f28e`) | **37 passed**, 1,744 ordinary tests deselected, in 4,826.82 s. The later parent adds one exhaustive `n = 17` control, which was run separately below. |
 | current T-019 full-net `n = 17` interval control | **1 passed** in 44.64 s; all 361 directions certified in 3,683,951 boxes, with enclosure `[200009/200000, 200009/200000]`. |
-| current exhaustive collection | **1,838 tests collected:** 1,800 ordinary and 38 `exhaustive_exact`; collection took 4.53 s. |
-| current focused parent-integration matrix | **155 passed**, 11 exhaustive tests deselected, in 218.90 s across the retention gate, generator, exact and interval certificate, module-boundary, and rung-figure suites. |
+| final-parent T-017 interval rerun | The current `99/25` bytes passed all 361 directions in 4,448,751 boxes with no stalls and enclosure `[12501/12500, 12501/12500]`. |
+| restored historical T-017 interval control | **1 passed** in 31.37 s; the archived `79/20` bytes passed all 361 directions in 2,666,151 boxes with no stalls and enclosure `[20001/20000, 20001/20000]`. |
+| current exhaustive collection | **1,849 tests collected:** 1,810 ordinary and 39 `exhaustive_exact`; collection took 4.65 s. |
+| pre-final focused parent-integration matrix | **155 passed**, 11 exhaustive tests deselected, in 218.90 s across the retention gate, generator, exact and interval certificate, module-boundary, and rung-figure suites. |
+| final moving-pointer regressions | **8 passed** in 70.04 s: declaration mutations, sampled ladder coverage, marker registration, ambiguous-rung handling, and timeout provenance. |
 | current positive full two-route retention gate | **1 passed** in 170.83 s; the gate required both complete decision routes on unchanged `n = 11` bytes. |
-| final integrated `packing-validate --push` | **35 of 60 selected steps passed** in 1,007.47 s under the plain command; the whole reachable suite reported **1,802 passed, 38 exhaustive tests deselected** in 1,001.42 s. Its clean completion beyond 900 s directly verifies the D-469 budget repair. |
-| current `packing-validate --edit` | **34 of 60 selected steps passed** in 31.64 s; Ruff checked and formatted 801 files, BasedPyright reported zero errors and warnings, and all schema, generated-record, provenance, and edit-tier checks passed. |
+| full integrated `packing-validate --push` | **35 of 60 selected steps passed** in 1,794.95 s; the whole reachable suite reported **1,810 passed, 39 exhaustive tests deselected** in 1,788.95 s. The validator measured the step at 1,791.00 s, prompting the budget-only 2,700-second headroom correction recorded in F30. |
+| post-measurement budget regressions | **3 passed** in 0.11 s; the whole-suite entry points receive 2,700 seconds, subsets stay on the 900-second guard, and an explicit operator limit still overrides either. |
+| final `packing-validate --edit` | **34 of 60 selected steps passed**; Ruff checked and formatted 801 files, BasedPyright reported zero errors and warnings, and all schema, generated-record, provenance, and edit-tier checks passed. |
 | earlier integrated `packing-validate --push` at `0883f28e` | **34 of 59 selected steps passed**; the then-current behavioral suite reported **1,724 passed, 36 exhaustive tests deselected** in 879.26 s; the complete gate took 882.61 s. This receipt predates F23-F30 and is retained only as provenance for that snapshot. |
 | exact five-atom signed certificate through `sqpack.fractional.verify` | **Incorrectly accepted**, proving F1. |
 | `.venv/bin/basedpyright` at finding head `34d19470` | **Failed: 26 errors**, proving F2. |

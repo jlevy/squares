@@ -327,6 +327,7 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
         # million boxes each. The sub-net acceptance tests beside them stay fast.
         "test_fractional_interval.py": {
             "test_the_393_100_certificate_is_accepted_on_the_full_doubled_net",
+            "test_the_archived_79_20_certificate_is_accepted_on_the_full_doubled_net",
             "test_the_live_n12_certificate_is_accepted_on_the_full_doubled_net",
             "test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net",
             "test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net",

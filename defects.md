@@ -707,7 +707,7 @@ This is the actionable list.
 | [D-468](packing/src/sqpack/fractional/interval.py) | 2026-09-04 | tooling | robustness |  | `review` | medium | fixed | A restricted interval search leaked overflow warnings after finite input conversion |
 | [D-469](packing/src/sqpack/cli/validate.py) | 2026-09-04 | tooling | performance |  | `gate` | high | fixed | The pre-push whole-suite test step discarded the measured suite budget |
 | [D-470](packing/frontier/results.yaml) | 2026-09-04 | record | bookkeeping |  | `review` | high | fixed | The n = 12 top rung moved while its evidence and explanation stayed on predecessors |
-| [D-471](packing/src/sqpack/cli/validate.py) | 2026-09-04 | tooling | performance |  | `review` | high | fixed | The exhaustive exact suite outgrew its declared ceiling when n = 12 tripled |
+| [D-471](packing/src/sqpack/cli/validate.py) | 2026-09-04 | tooling | performance |  | `review` | high | fixed | The exhaustive exact suite outgrew its ceiling when the n = 12 replay more than tripled |
 | [D-472](TUTORIAL.md) | 2026-09-04 | record | bookkeeping |  | `review` | medium | fixed | A recovered Trump source remained described as unavailable |
 | [D-473](packing/frontier/results.yaml) | 2026-09-04 | record | bookkeeping |  | `review` | high | fixed | The new n = 12 record overstated comparison factors and two-point timing slopes |
 | [D-474](packing/resources/README.md) | 2026-09-04 | record | bookkeeping | flattering | `review` | medium | fixed | The s(11) literature surfaces overstated provenance and omitted a retained source |

@@ -384,9 +384,9 @@ def resolve_target(
     ]
     if not others:
         return retained
-    for side in others:
-        if side in sides:
-            return sides[side]
+    in_scope = {sides[side].path: sides[side] for side in others if side in sides}
+    if len(in_scope) == 1:
+        return next(iter(in_scope.values()))
     return None
 
 

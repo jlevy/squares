@@ -788,7 +788,8 @@ def test_only_measured_whole_suite_steps_have_budgets() -> None:
     The exhaustive exact step is the third whole-suite exception. It deliberately runs
     every complete finite certificate decision deferred out of the fast tier by D-438;
     D-451 records why their aggregate cannot inherit the fifteen-minute default, and
-    D-471 rebudgets the aggregate after the current n = 12 decision grew to 4,866 seconds.
+    D-471 rebudgets the aggregate after the introducing commit reported 4,866 seconds
+    for the current n = 12 decision; no raw timing transcript was retained.
     A
     fourth budgeted step would mean the shared cap is wrong rather than that another
     step is special, and should trigger a redesign instead of extending this set.
@@ -801,14 +802,14 @@ def test_only_measured_whole_suite_steps_have_budgets() -> None:
     }
     assert budgeted == {
         "negative controls": 1800,
-        "fast behavioral tests": 1800,
+        "fast behavioral tests": 2700,
         "exhaustive exact behavioral tests": 14400,
     }
 
 
 @pytest.mark.parametrize(
     ("summary", "expected_scope", "expected_budget"),
-    (("everything", "whole", 1800), ("7 tests", "subset", None)),
+    (("everything", "whole", 2700), ("7 tests", "subset", None)),
 )
 def test_push_tests_reuse_the_whole_suite_budget_only_when_needed(
     monkeypatch: pytest.MonkeyPatch,
@@ -819,8 +820,9 @@ def test_push_tests_reuse_the_whole_suite_budget_only_when_needed(
     """Changing the entry point must not discard the suite's measured ceiling.
 
     D-469 reached the same ordinary test suite through `--push`, but the dynamically
-    built step lost the 1,800-second budget declared by `fast behavioral tests` and died
-    at the shared 900-second cap. A selected subset remains on the tighter shared guard.
+    built step lost the full-suite budget declared by `fast behavioral tests` and died at
+    the shared 900-second cap. The current 2,700-second value gives the measured
+    1,791-second suite 50% headroom; a selected subset remains on the tighter shared guard.
     """
 
     def probe(*args: object, **kwargs: object) -> subprocess.CompletedProcess[str]:

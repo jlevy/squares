@@ -1474,18 +1474,18 @@ evidence:
       3,683,951 boxes; n = 12 at 99/25, 2097 atoms, 4,448,751 boxes; n = 11 at 381/100,
       1121 atoms, 1,570,831 boxes. Lower rungs and the control: n = 17 at 229/50 in
       2,653,407 boxes, n = 11 at 19/5 in
-      1,195,755 boxes, n = 12 at 197/50 in 1,846,439 and at 393/100 in 1,486,159, and
-      Massaccesi's published n = 17 certificate -- the control that tests the verifier
-      rather than the certificate -- in 966,903 boxes, returning 22529/5000. Box counts
-      are deterministic and are the figure to compare; the wall times are not quoted
-      because every one of these runs shared a contended machine.
+      1,195,755 boxes, n = 12 at 197/50 in 1,846,439, at 79/20 in 2,666,151, and at
+      393/100 in 1,486,159, and Massaccesi's published n = 17 certificate -- the control
+      that tests the verifier rather than the certificate -- in 966,903 boxes, returning
+      22529/5000. Box counts are deterministic and are the figure to compare; the wall
+      times are not quoted because every one of these runs shared a contended machine.
       In minimisation mode every enclosure of the least covered mass has width zero and
       equals the exact verifier's value to the digit: 4001/4000 at n = 11's top rung,
       12501/12500 at n = 12's and 200009/200000 at n = 17's, each matching the
       least_cell_mass its own certificate declares, and 12501/12500 at the 229/50 rung,
-      50003/50000 and 100003/100000 at the earlier n = 11 and n = 12 rungs. Refusals: the n = 12 atoms in a
-      side-4 container are refuted at direction 0 after 407 boxes, and an atom lowered by
-      1/10000 after 127.
+      50003/50000 at the earlier n = 11 rung, and 100003/100000 and 20001/20000 at the
+      earlier n = 12 rungs. Refusals: the n = 12 atoms in a side-4 container are refuted
+      at direction 0 after 407 boxes, and an atom lowered by 1/10000 after 127.
       What it does not add: no new bound, and no protection against a wrong theorem
       statement, which both routes share. Its own failure mode is exhibited rather than
       claimed -- a leave-edge exactly on another's enter-edge stalls at the 1e-12 floor

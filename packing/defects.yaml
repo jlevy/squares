@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 469
+count: 474
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14760,23 +14760,26 @@ defects:
   severity: high
   status: fixed
   what: >-
-    The complete ordinary behavioral suite has a 1,800-second declared budget, justified
+    The complete ordinary behavioral suite had a 1,800-second declared budget, justified
     by a 1,209-second clean run. The `--push` path reaches the same suite through a
     dynamically constructed `reachable behavioral tests` step when conservative selection
     expands to everything, but that step carried no budget and inherited the shared
     900-second cap. The final stacked-branch gate was killed at 88% completion after 900
     seconds. Three failures printed earlier were separately reduced to the local sandbox's
     refusal to bind loopback ports and passed together outside it in 2.90 seconds; they
-    were not the timeout's cause.
+    were not the timeout's cause. After that first repair, the final 1,810-test stack
+    passed in 1,788.95 seconds and the validator measured the step at 1,791.00 seconds,
+    leaving only about nine seconds of operational headroom under the inherited ceiling.
   consequence: >-
     The documented command required before a push could not complete on the same ordinary
     suite that the wider validation entry point had already measured and budgeted. The
     failure was conservative, not mathematical, but it blocked publication and made the
     healthy suite look hung.
   fix: >-
-    Reuse the ordinary suite's 1,800-second declared ceiling when the push selector says
-    `everything`. Keep a true reachable subset on the shared 900-second hang guard, and
-    preserve the rule that an explicit operator timeout overrides either ceiling.
+    Give the measured whole ordinary suite a 2,700-second ceiling, 50% above the final
+    observed step time, and reuse it when the push selector says `everything`. Keep a true
+    reachable subset on the shared 900-second hang guard, and preserve the rule that an
+    explicit operator timeout overrides either ceiling.
   regression: >-
     packing/tests/test_validation_cli.py::test_push_tests_reuse_the_whole_suite_budget_only_when_needed
     constructs both dynamic selector outcomes and pins their distinct budgets; the final
@@ -14798,7 +14801,10 @@ defects:
     significance text called the ladder seven rungs, the frontier body still reported
     77/20 and 113 atoms, the primary evidence entry reported 197/50 and 681 atoms, and
     the source-distinct historical verifier was still cited as though it decided the
-    current bytes. The replay module also said that only two rungs were retained.
+    current bytes. The replay module also said that only two rungs were retained and
+    could print VERIFIED when the declared claim or least cell mass was stale. Moving
+    the live pointer also removed the former 79/20 rung from the full interval-test set,
+    while a coarse-subnet ladder test described its sampled coverage as verification.
   consequence: >-
     The certificate itself remained valid, but readers and automated assurance consumers
     could attribute the current 99/25 claim to figures and an independent decision that
@@ -14806,16 +14812,20 @@ defects:
     support for the new bytes while understating the ladder and the cost of deciding it.
   fix: >-
     Reconcile the README, T-017 result, n = 12 case, evidence entries, and replay prose to
-    the 2,097-atom 99/25 certificate. Cite the exact and interval decisions for the current
-    bound, and retain the independent exact verifier explicitly as historical evidence for
-    19/5 and 77/20 only.
+    the 2,097-atom 99/25 certificate. Bind replay success to the claim, total, and least
+    cell mass in the retained record; restore the full 79/20 interval decision; describe
+    the ladder-wide coarse test as sampled coverage; cite the exact and interval
+    decisions for the current bound; and retain the independent exact verifier explicitly
+    as historical evidence for 19/5 and 77/20 only.
   regression: >-
     packing/tests/test_rung_figures.py::test_t017_current_rung_is_bound_to_its_record_and_explanations
     pins the live certificate figures, current evidence pair, historical verifier scope,
     case explanation, README headline, and replay orientation to the same retained rung.
+    The n = 12 declaration-mutation tests pin all three replay fields, and the exhaustive
+    interval marker registry pins the archived 79/20 decision.
   recorded_in: packing/frontier/results.yaml
 - id: D-471
-  title: The exhaustive exact suite outgrew its declared ceiling when n = 12 tripled
+  title: The exhaustive exact suite outgrew its ceiling when the n = 12 replay more than tripled
   date: '2026-09-04'
   layer: tooling
   class: performance
@@ -14826,11 +14836,11 @@ defects:
   status: fixed
   what: >-
     The exhaustive exact suite had a 7,200-second budget justified by a 4,826.82-second
-    37-test run. The new retained n = 12 certificate has 2,097 atoms and its exact replay
-    alone takes 4,866 seconds, replacing a predecessor whose recorded ceiling was 1,500
-    seconds. Even the conservative replacement arithmetic puts the unchanged suite above
-    8,192 seconds before its other growth, so the declared 7,200-second ceiling can no
-    longer contain the work assigned to it.
+    37-test run. The introducing commit reports 4,866 seconds for the new retained n = 12
+    certificate's 2,097-atom exact replay, replacing a predecessor whose recorded ceiling
+    was 1,500 seconds. Even the conservative replacement arithmetic puts the unchanged
+    suite above 8,192 seconds before its other growth, so the declared 7,200-second
+    ceiling can no longer contain the work assigned to it.
   consequence: >-
     Full validation would kill a healthy complete-certificate suite after two hours and
     report the research gate red even if every mathematical decision passed. The failure
@@ -14838,9 +14848,9 @@ defects:
     on the current retained artifacts.
   fix: >-
     Give the exhaustive exact suite a 14,400-second local ceiling, with the measured old
-    aggregate and replacement cost recorded beside it. Keep ordinary and short steps on
-    their existing tighter guards; reaching the new ceiling requires redesign rather than
-    another unexplained increase.
+    aggregate and operator-reported replacement cost recorded beside it. Keep ordinary
+    and short steps on their existing tighter guards; reaching the new ceiling requires
+    redesign rather than another unexplained increase.
   regression: >-
     packing/tests/test_validation_cli.py::test_only_measured_whole_suite_steps_have_budgets
     pins the exhaustive suite to the separately justified 14,400-second ceiling.
