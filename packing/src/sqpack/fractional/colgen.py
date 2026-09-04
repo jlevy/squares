@@ -49,7 +49,13 @@ import numpy as np
 from scipy.optimize import linprog
 
 from sqpack.fractional.certificate import Certificate, d4_images, verify
-from sqpack.fractional.generate import build_site_grid, direction_net, net_half_tangents
+from sqpack.fractional.generate import (
+    LP_FEASIBILITY,
+    build_site_grid,
+    direction_net,
+    net_half_tangents,
+    placement_cells,
+)
 from sqpack.fractional.model import Atom, Direction
 
 # The eight orthogonal maps of the container's D4 group, as matrices acting on
@@ -295,112 +301,6 @@ class Rows:
         self.keys = {row.tobytes() for row in self.matrix}
 
 
-def placement_cells(
-    points: np.ndarray,
-    weights: np.ndarray,
-    direction: Direction,
-    outer_side: float,
-    square_side: float,
-    *,
-    keep: int,
-) -> list[tuple[float, float, float, np.ndarray]]:
-    """Least-mass placements at one direction: ``(mass, u, v, covering mask)``.
-
-    Two departures from `generate._worst_cells`, both forced by the site set
-    growing past a few hundred points. The event grid is built from the sites
-    that carry weight, not from all of them: mass is constant between those, so
-    the cells are coarser but the minimum is the same, and the grid stays
-    quadratic in the support rather than in the site count. And a cell counts
-    as reachable when it *meets* the centre domain rather than when its centre
-    lies inside -- with coarse cells the corner placements, which are the ones
-    that bind, sit in cells whose centres fall outside. That second rule is
-    also what `sweep.reduce_to_cells` does, so the search and the verifier
-    agree on which cells exist; a row can then be marginally stronger than any
-    single placement demands, which costs mass and never soundness.
-    """
-
-    cosine, sine = float(direction.ux), float(direction.uy)
-    half = square_side / 2
-    u = points[:, 0] * cosine + points[:, 1] * sine
-    v = -points[:, 0] * sine + points[:, 1] * cosine
-
-    extent = square_side * (cosine + sine) / 2
-    low, high = extent, outer_side - extent
-    corner_x = np.array([low, high, high, low])
-    corner_y = np.array([low, low, high, high])
-    corner_u = corner_x * cosine + corner_y * sine
-    corner_v = -corner_x * sine + corner_y * cosine
-
-    live = weights > 0
-    if not live.any():
-        # With nothing weighted, the only events are the domain's own extremes,
-        # and the single cell they leave is wider than any square: no site
-        # contains it, so the first round would report that the sites cannot
-        # cover. Stride through them instead. The mass is zero either way; this
-        # only makes the first round's rows fine enough to be worth keeping.
-        live = np.zeros(points.shape[0], dtype=bool)
-        live[:: max(1, points.shape[0] // 600)] = True
-    live_u, live_v, live_w = u[live], v[live], weights[live]
-    # Only the extremes of the centre domain join the site events, because that
-    # is the grid `sweep.reduce_to_cells` builds. The other two corner
-    # projections would leave the mass unchanged but split the slabs finer than
-    # the verifier splits them, and the slab is what reachability is read from.
-    u_events = np.unique(
-        np.concatenate([live_u - half, live_u + half, [corner_u.min(), corner_u.max()]])
-    )
-    v_events = np.unique(
-        np.concatenate([live_v - half, live_v + half, [corner_v.min(), corner_v.max()]])
-    )
-    grid = np.zeros((u_events.size, v_events.size))
-    left = np.searchsorted(u_events, live_u - half)
-    right = np.searchsorted(u_events, live_u + half)
-    bottom = np.searchsorted(v_events, live_v - half)
-    top = np.searchsorted(v_events, live_v + half)
-    np.add.at(grid, (left, bottom), live_w)
-    np.add.at(grid, (right, bottom), -live_w)
-    np.add.at(grid, (left, top), -live_w)
-    np.add.at(grid, (right, top), live_w)
-    mass = np.cumsum(np.cumsum(grid, axis=1), axis=0)[:-1, :-1]
-
-    # Reachability is read at the cell centre, which is what
-    # `generate._worst_cells` does and what makes a row the true constraint at
-    # a placement that exists. Two looser rules were tried and both cost more
-    # than they bought: counting a cell that merely meets the domain generates
-    # rows for centres outside the container, and the verifier's own per-slab
-    # v-extent -- exact on its fine grid -- sweeps in whole bands of them when
-    # the slab is as wide as a sparse support makes it. On the configuration
-    # whose accepted certificate carries 11.9375 they reported optima of 13.5
-    # and 15.4; this rule reproduces `generate` to the last digit.
-    u_mid = (u_events[:-1] + u_events[1:]) / 2
-    v_mid = (v_events[:-1] + v_events[1:]) / 2
-    back_x = u_mid[:, None] * cosine - v_mid[None, :] * sine
-    back_y = u_mid[:, None] * sine + v_mid[None, :] * cosine
-    reachable = (back_x >= low) & (back_x <= high) & (back_y >= low) & (back_y <= high)
-
-    scored = np.where(reachable, mass, np.inf)
-    flat = scored.ravel()
-    if flat.size == 0:
-        return []
-    take = min(keep, flat.size - 1) if flat.size > 1 else 0
-    order = np.argpartition(flat, take)[: take + 1]
-    order = order[np.isfinite(flat[order])]
-
-    found: list[tuple[float, float, float, np.ndarray]] = []
-    for index in order[np.argsort(flat[order])]:
-        i, j = divmod(int(index), v_events.size - 1)
-        # The cell centre, not a point projected into the domain. No event lies
-        # strictly inside a cell, so a site either covers the whole cell or
-        # misses its interior, and the mask read at the centre is the cell's own
-        # -- which is the mass the difference array holds and, more to the
-        # point, the mass the exact verifier reads for the same cell. Projecting
-        # instead lands in a neighbouring cell whose mass is higher, and a
-        # violation the verifier will find gets scored as satisfied.
-        cu, cv = float(u_mid[i]), float(v_mid[j])
-        covers = (np.abs(u - cu) <= half) & (np.abs(v - cv) <= half)
-        found.append((float(flat[index]), cu, cv, covers))
-    return found
-
-
 @dataclass(slots=True)
 class LpSolution:
     """One row-generation run to convergence, and the dual it ended on."""
@@ -487,9 +387,13 @@ def solve_rows(
         # earlier site set already holds most of what the oracle finds, so
         # counting additions would read "nothing new" as "nothing violated"
         # and return the seed weights as an optimum of zero. A violated
-        # placement always yields a row the set does not hold -- a held row is
-        # satisfied by LP feasibility -- so the loop still terminates.
+        # placement yields a row the set does not hold -- a held row is
+        # satisfied by LP feasibility, up to the solver's own tolerance, which
+        # is the one case the guard below has to close -- so the loop still
+        # terminates.
         violated = 0
+        added = 0
+        least = float("inf")
         for index, direction in enumerate(directions):
             for mass, cu, cv, covers in placement_cells(
                 points, site_weights, direction, outer, side, keep=rows_per_direction
@@ -502,11 +406,21 @@ def solve_rows(
                     solution.stopped = "a placement covers no site: the sites cannot cover"
                     return solution
                 violated += 1
-                rows.add(index, (cu, cv), row)
+                least = min(least, mass)
+                added += rows.add(index, (cu, cv), row)
         solution.rows = len(rows)
-        if violated == 0:
+        if violated == 0 or (added == 0 and least >= 1 - LP_FEASIBILITY):
+            # Nothing violated, or every violation is a row already held and
+            # missed by no more than the solver's feasibility tolerance, which
+            # the rationaliser's bump absorbs. Re-solving the same rows would
+            # return the same point, and the loop would spend its rounds on it.
             solution.objective = float(sizes @ weights)
             solution.stopped = "converged: every placement covers mass 1"
+            return solution
+        if added == 0:
+            solution.stopped = (
+                f"a held row is violated by {1 - least:.3e}: the solver's point is off"
+            )
             return solution
 
         solved = solve_lp(sites, rows)
@@ -910,6 +824,7 @@ def generate_adaptive(
     columns_per_round: int = 1,
     rows_per_direction: int = 3,
     support_cap: int = 32,
+    settle: float = 0.0,
     log_path: Path | None = None,
     decide: bool = True,
 ) -> tuple[Certificate | None, AdaptiveLog]:
@@ -918,7 +833,10 @@ def generate_adaptive(
     The loop alternates: rows until every placement is covered, then the dual,
     then the one site orbit whose reduced cost is most negative. Sites only
     ever get added, so the optimum is non-increasing across rounds and the row
-    set carries over intact.
+    set carries over intact. It stops when no orbit is worth adding, when the
+    deepest candidate's averaged depth is within ``settle`` of 1 -- the dual
+    has settled and a further column buys hundredths -- or at the round cap,
+    which is a budget and not a convergence criterion.
 
     ``decide`` runs the exact verifier on the rationalised candidate, which is
     what turns a search result into a bound. It is separable only because the
@@ -987,7 +905,12 @@ def generate_adaptive(
             # Stop before extending on the last round: the weights that get
             # rationalised below are the ones the LP just returned, and a site
             # set carrying a column those weights do not have is not a solution.
-            if not solution.converged or not found or index + 1 == column_rounds:
+            if (
+                not solution.converged
+                or not found
+                or found[0].averaged_depth <= 1 + settle
+                or index + 1 == column_rounds
+            ):
                 break
             sites = SiteSet(outer_side, (*sites.orbits, *(c.orbit for c in found)))
             for candidate in found:

@@ -14,12 +14,19 @@ from __future__ import annotations
 from fractions import Fraction
 
 import numpy as np
+import pytest
 
+from cases.n12_fractional_certificate.replay import load
 from sqpack.fractional import colgen
 from sqpack.fractional.certificate import verify
-from sqpack.fractional.generate import direction_net, net_half_tangents
-from sqpack.fractional.model import Atom, rotation_from_half_tangent
-from sqpack.fractional.sweep import minimum_covered_mass
+from sqpack.fractional.generate import (
+    direction_net,
+    event_grid,
+    net_half_tangents,
+    placement_cells,
+)
+from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
+from sqpack.fractional.sweep import minimum_covered_mass, reduce_to_cells
 
 UPRIGHT = rotation_from_half_tangent("0", Fraction(0))
 
@@ -113,41 +120,110 @@ def test_adding_a_site_orbit_never_raises_the_optimum_on_the_rows_held() -> None
     assert solved[2] <= solution.objective + 1e-9
 
 
-def test_the_float_oracle_never_reports_less_than_the_exact_sweep() -> None:
-    """One-sided, because the two do not agree, and the gap is the instrument's.
+def _oracle_against_sweep(
+    atoms: tuple[Atom, ...],
+    direction: Direction,
+    outer: Fraction,
+    side: Fraction,
+) -> tuple[float, float, int]:
+    """The oracle's least mass, the sweep's, and how many sweep cells the oracle lacks.
 
-    `placement_cells` calls a cell reachable when its centre lies in the centre
-    domain, which is what `generate._worst_cells` has always done.
-    `sweep.reduce_to_cells` calls it reachable when its v-range meets the
-    domain's v-extent within the u-slab, which is a strictly larger set. So the
-    oracle can miss a cell the verifier weighs -- here it reports 2.125 where
-    the sweep finds 2.0 -- and it never invents one, which is the direction
-    that matters: a row it generates is a real placement's constraint. The
-    consequence is not academic. A solve that converges by this oracle can
-    still be refused by C4, and at L = 39/10 for n = 12 it was, by 1.6%.
+    A sweep cell is matched by its midpoint: the oracle's events are the same
+    rationals in floats, so the float cell holding a midpoint is the same cell
+    or, where two exact events fell an ulp apart, the wide half of it.
     """
-    outer, side = Fraction(11, 5), Fraction(24, 25)
-    tangents = net_half_tangents(Fraction(207107, 500000), 12)
-    sites = colgen.site_set_from_grids(outer, (9,), Fraction(1, 2))
-    positions = sites.positions()
+
+    exact, _ = minimum_covered_mass(atoms, direction, outer, side)
+    reduction = reduce_to_cells(atoms, direction, outer, side)
+    points = np.array([[float(atom.x), float(atom.y)] for atom in atoms])
+    weights = np.array([float(atom.weight) for atom in atoms])
+    grid = event_grid(points, weights, direction, float(outer), float(side))
+    found = placement_cells(points, weights, direction, float(outer), float(side), keep=3)
+    lacking = 0
+    for i, j in reduction.cells:
+        u_mid = float((reduction.u_events[i] + reduction.u_events[i + 1]) / 2)
+        v_mid = float((reduction.v_events[j] + reduction.v_events[j + 1]) / 2)
+        cell = (
+            int(np.searchsorted(grid.u_events, u_mid)) - 1,
+            int(np.searchsorted(grid.v_events, v_mid)) - 1,
+        )
+        lacking += not grid.reachable[cell]
+    return min(mass for mass, _, _, _ in found), float(exact), lacking
+
+
+def _patterned_atoms(outer: Fraction, counts: tuple[int, ...]) -> tuple[Atom, ...]:
+    positions = colgen.site_set_from_grids(outer, counts, Fraction(1, 2)).positions()
     pattern = [Fraction((index * 5) % 4, 8) for index in range(len(positions))]
-    atoms = tuple(
+    return tuple(
         Atom(str(index), x, y, pattern[index])
         for index, (x, y) in enumerate(positions)
         if pattern[index] > 0
     )
-    weights = np.array([float(weight) for weight in pattern])
-    points = sites.points()
-    gaps = []
-    for direction in direction_net(tangents):
-        exact, _ = minimum_covered_mass(atoms, direction, outer, side)
-        cells = colgen.placement_cells(
-            points, weights, direction, float(outer), float(side), keep=3
+
+
+def test_the_float_oracle_scores_every_cell_the_exact_sweep_scores() -> None:
+    """D-434's regression: the oracle and the verifier must decide one cell set.
+
+    The oracle used to call a cell reachable when its centre lay in the centre
+    domain, which misses a cell that straddles the domain's tilted edge with
+    its centre outside -- about one cell in ninety away from the axes. The
+    sweep's rule is the theorem's: the open cell meets the closed domain. So
+    the oracle's cell set has to contain the sweep's, and its least mass can
+    never exceed the sweep's; on the small instance it once reported 2.125
+    where the sweep found 2. Three configurations, and every one runs the
+    diagonal direction, which is where the straddling cells are.
+    """
+
+    limit = Fraction(207107, 500000)
+    small = Fraction(11, 5), Fraction(24, 25), net_half_tangents(limit, 12)
+    wide = Fraction(3), Fraction(49, 50), net_half_tangents(limit, 6)
+    configurations = [
+        (_patterned_atoms(small[0], (9,)), small[0], small[1], direction_net(small[2])),
+        (_patterned_atoms(wide[0], (5, 7)), wide[0], wide[1], direction_net(wide[2])),
+    ]
+    retained = load()
+    configurations.append(
+        (
+            retained.atoms,
+            retained.outer_side,
+            retained.square_side,
+            tuple(retained.directions[k] for k in (45, 90, 180)),
         )
-        least = min(mass for mass, _, _, _ in cells)
-        assert least >= float(exact) - 1e-9
-        gaps.append(least - float(exact))
-    assert max(gaps) > 0, "the gap this test documents has closed; tighten it"
+    )
+    for atoms, outer, side, directions in configurations:
+        for direction in directions:
+            oracle, exact, lacking = _oracle_against_sweep(atoms, direction, outer, side)
+            assert lacking == 0, f"direction {direction.label} lacks {lacking} sweep cells"
+            assert oracle <= exact + 1e-9, f"direction {direction.label}: {oracle} > {exact}"
+            assert oracle >= exact - 1e-9, f"direction {direction.label}: {oracle} < {exact}"
+
+
+def test_a_row_is_generated_at_a_placement_that_exists() -> None:
+    """Every row's centre must lie in the centre domain, or it constrains nothing real.
+
+    With the grid built on the weighted sites only, a reachable cell can be
+    wider than the domain's overlap with it, and the cell centre can hang
+    outside the container. The row is read at a point of the overlap instead.
+    """
+
+    outer, side = Fraction(11, 5), Fraction(24, 25)
+    atoms = _patterned_atoms(outer, (9,))
+    sites = colgen.site_set_from_grids(outer, (9,), Fraction(1, 2))
+    points = sites.points()
+    weights = np.zeros(len(points))
+    live = {(atom.x, atom.y): float(atom.weight) for atom in atoms}
+    for index, position in enumerate(sites.positions()):
+        weights[index] = live.get(position, 0.0)
+    for direction in direction_net(net_half_tangents(Fraction(207107, 500000), 12)):
+        extent = float(side) * (float(direction.ux) + float(direction.uy)) / 2
+        for mass, cu, cv, covers in colgen.placement_cells(
+            points, weights, direction, float(outer), float(side), keep=3
+        ):
+            x = cu * float(direction.ux) - cv * float(direction.uy)
+            y = cu * float(direction.uy) + cv * float(direction.ux)
+            assert extent - 1e-9 <= x <= float(outer) - extent + 1e-9
+            assert extent - 1e-9 <= y <= float(outer) - extent + 1e-9
+            assert mass == pytest.approx(float(weights[covers].sum()))
 
 
 def test_the_ceiling_refuses_a_dual_that_covers_a_point_twice() -> None:
