@@ -578,6 +578,11 @@ results:
       movement is +0.161146, and the case stays open against its conjectured
       optimum of 4, now by 0.05. The 197/50 rung it reached first is retained
       below it.
+      It also separates the two cases for the first time. 79/20 = 3.95 exceeds
+      Trump's 1979 packing of eleven squares at 3.877084, so s(12) > s(11) strictly,
+      by at least 0.072916. Monotonicity gives only s(12) >= s(11); the strict
+      inequality did not follow from anything on record before, because n = 12's
+      previous lower bound was s(11)'s own 3.788854 and sat below Trump's packing.
     scope:
       n_values:
         - 12

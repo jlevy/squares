@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 439
+count: 440
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13865,3 +13865,55 @@ defects:
     who re-reads.
   status: fixed
   recorded_in: packing/frontier/results.yaml
+- id: D-440
+  title: A confirmation rung rested on a decision no control ever made
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    from the moment T-019 was raised to C4 on 2026-09-04 until the same day, a few hours,
+    and found only because an unrelated claim in SYNOPSIS.md was being checked against
+    its evidence rather than taken on the record's word
+  severity: medium
+  what: >-
+    T-019 stands at C4, and C4 requires two evidence entries with different method
+    values. Its second is E-fractional-interval-decision, whose scope lists n = 17, 18
+    and 19. But the entry's own results list decided no first-party n = 17 certificate:
+    it named n = 11 at 19/5, n = 12 at 197/50 and 393/100, and Massaccesi's published
+    n = 17 certificate, which is the control that tests the verifier and not this
+    project's bound. The replay command the entry names,
+    `pytest tests/test_fractional_interval.py`, matched that -- the only n = 17 nodes in
+    the file decided Massaccesi's control on the sub-net and on the full doubled net.
+    Nothing decided the retained 229/50 certificate by the interval route, and nothing
+    would have noticed if the claim had been false.
+  consequence: >-
+    None to the bound, as it happens. Running the decision settles it: the retained
+    n = 17 certificate is accepted on all 361 doubled-net directions in 2,653,407 boxes
+    with none stalled, and its enclosure of the least covered mass has width zero at
+    12501/12500, exactly the least_cell_mass the certificate declares. So the C4 rung was
+    earned; it simply was not checked.
+    The cost is what an unchecked rung is worth. A confirmation level is a claim about
+    evidence, and the whole point of recording it is that a reader need not re-derive it.
+    Two other results were pinned by exhaustive nodes and this one was not, so the
+    difference was invisible from the register: three results at C4, two of them guarded.
+  fix: >-
+    Fixed on 2026-09-04.
+    `test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net` decides the
+    retained certificate on every direction and asserts the enclosure against the
+    least_cell_mass its own record declares, matching the shape of the n = 11 and n = 12
+    nodes beside it; it is registered in the exhaustive_exact marker registry, which now
+    pins ten nodes. E-fractional-interval-decision's results list is rewritten around the
+    three retained top rungs rather than the lower ones it had been left describing --
+    n = 17 at 229/50 in 2,653,407 boxes, n = 12 at 79/20 in 2,666,151, n = 11 at 381/100
+    in 1,570,831 -- with the earlier rungs and the control kept below them. Wall times are
+    dropped from the entry: box counts are deterministic and comparable, and every one of
+    these runs shared a contended machine.
+  regression: >-
+    The marker registry test pins the new node by name, so it cannot leave the exhaustive
+    tier silently. What has no check is the general shape: an evidence entry whose scope
+    claims an n its replay never decides. The narrower rule that would have caught this
+    one -- every n in an evidence entry's scope should be decided by something the entry's
+    own replay runs -- is worth building and is not built.
+  status: fixed
+  recorded_in: packing/tests/test_fractional_interval.py

@@ -22,6 +22,8 @@ from cases.n11_fractional_certificate.replay import load as load_n11
 from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH
 from cases.n12_fractional_certificate.replay import declared as declared_n12
 from cases.n12_fractional_certificate.replay import load as load_n12
+from cases.n17_fractional_certificate.replay import declared as declared_n17
+from cases.n17_fractional_certificate.replay import load as load_n17
 from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.interval import (
     AtomData,
@@ -295,6 +297,24 @@ def test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net() -> N
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
     assert verdict.enclosure == (Fraction(4001, 4000), Fraction(4001, 4000))
     assert certificate.bounded_side == Fraction(381, 100)
+
+
+@pytest.mark.exhaustive_exact
+def test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net() -> None:
+    """The interval-certified decision of s(17) >= 229/50, every direction.
+
+    T-019 stands at C4 on the strength of this route, and until this test the
+    only n = 17 certificate it decided here was Massaccesi's published control.
+    A confirmation rung that no control pins is a claim, not a check.
+    """
+    certificate = load_n17()
+    verdict = verify_by_intervals(certificate, enclose=True)
+    assert verdict.accepted, verdict.failures
+    assert len(verdict.directions) == 361
+    assert sum(outcome.stalled for outcome in verdict.directions) == 0
+    assert verdict.enclosure == (Fraction(12501, 12500), Fraction(12501, 12500))
+    assert certificate.bounded_side == Fraction(229, 50)
+    assert declared_n17()["least_cell_mass"] == str(verdict.enclosure[0])
 
 
 # --- the published-value control ----------------------------------------------
