@@ -25,10 +25,20 @@ hypothesis:
       with a typed refusal per structure
     direction: either determination ends the question; only delta > 0 opens n = 90
   instrument: >-
-    The exact construction layer over a named field for candidate structures, the
-    fixed-angle LP for squeeze measurement, and the promote or interval pipeline for
-    certification; Arslanov's own delta((4,8), 26) primitive is the template and the
-    calibration case.
+    The exact construction layer over a named field for candidate structures, a squeeze
+    measurement, and the promote or interval pipeline for certification; Arslanov's own
+    delta((4,8), 26) primitive is the template and the calibration case. Amended
+    2026-09-04, before any measurement: the fixed-angle LP, the quench and the exact
+    verifier are square-container only, so the squeeze is measured either by the
+    zero-code encoding that Arslanov's inequality (2) licenses -- fix the ten grid squares
+    of a 2 x 5 block at rational coordinates inside a square container of side 6 - delta
+    and let twenty squares float, a slight relaxation whose refusal refuses the true
+    question and whose success needs one extra check that nothing crosses x = 4 - delta
+    -- or by a delta column in fixed_cell_lp with the two wall row families changed.
+    Controls: the (4,8)/26 primitive must certify at delta = 0.0177702 and refuse at
+    delta = 0.02, the paper's own two-sided pair; the area-impossible delta = 0.42 must
+    refuse; the 4 x 5 grid at delta = 0 must certify; and any positive must survive
+    padding to thirty squares in (6 - delta)^2 under the square-container verifier.
   instrument_ready: false
   regime: >-
     exact or interval-certified only; a floating squeeze below the 1e-11 solver floor
@@ -47,7 +57,20 @@ hypothesis:
     reason the n = 90 grid stands, not an impression. The positive must carry the
     novelty basis of a first-party result and the standing rule applies: an unattended
     runner records it unresolved with needs_review, and a human makes the accept
-    decision.
+    decision. Amended 2026-09-04 at Agenda 017 planning, before any measurement, with
+    what a positive actually implies: Arslanov, Mustafin and Shangitbayev's inequality
+    (2), delta((Rx, Ry), m) <= delta((Rx + 1, Ry), m + Ry - 1), applied twice gives
+    delta((4,6), 20) <= delta((5,6), 25) <= delta((6,6), 30), so a squeezable (4,6)/20
+    primitive packs thirty unit squares into a square of side below 6 and settles the
+    m = 6 instance of s(m^2 - m) = m at the smallest and most-searched size in that
+    family, where no arrangement has ever beaten the grid. A positive is therefore
+    reviewed at that bar. The same reading prices the prior: every retained squeezable
+    primitive has waste Rx Ry - m of at least six and this one asks for four; the forced
+    stack tilt (15/17, 8/17) admits three (4,1) stacks in height six against five in
+    height eight; and area alone caps delta at 5 - sqrt(21). A negative closes only the
+    declared structure class and never the whole decomposition route, since the paper's
+    own m = 12 case used a bespoke hybrid rather than four rectangle-local primitives.
+
 ---
 # H-049 — Do 20 Unit Squares Pack Squeezably in a 4 by 6 Rectangle?
 

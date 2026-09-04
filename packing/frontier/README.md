@@ -229,11 +229,15 @@ single argument that the lower-bound side has room its practitioners have not us
 
 Counts below are computed from the artifacts, not asserted.
 
-**The lower-bound frontier is one theorem.** Of the 65 open cases, **63** have
+**The lower-bound frontier is one theorem.** Of the 65 open cases, **60** have
 Nagamochi’s general closed form as their best proved lower bound.
-Exactly two — `n = 11` and `n = 12` — are governed by anything bespoke, and both trace
-to Stromquist’s single 2003 argument.
-Nothing in this table has been improved since 2005.
+Five are governed by anything bespoke: `n = 11` and `n = 12` trace to Stromquist’s
+single 2003 argument, in the repaired form `T-010` certifies, and `n = 17`, `18` and
+`19` carry Massaccesi’s 2026 fractional certificate, adopted here at source-backed scope
+(`T-015`, `T-016`). Until that adoption nothing in this table had been improved since
+2005, and the sixty still have not been.
+The count is checked against the case records by `devtools.check_nagamochi_bounds`
+(`D-430`), because the earlier figure of sixty-three outlived the adoption by a day.
 
 **The search frontier is much healthier.** Of the 65 open cases, 31 are still held by
 the trivial grid, but the remaining 34 carry real constructions: 14 hand-built, 10 from

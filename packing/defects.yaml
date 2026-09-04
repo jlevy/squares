@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 429
+count: 431
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -12786,7 +12786,7 @@ defects:
     two runs on one commit agree, and nothing says that the headroom is now smaller than the
     last artifact that consumed it.
   recurrence_of: D-371
-  bead: think-c46d
+  bead: think-ahyr
   recorded_in: packing/devtools/run_negative_controls.py
 - id: D-423
   title: The cover certificate's Lemma 4 boundary is non-strict in two sources and strict in a third, unrecorded
@@ -13209,7 +13209,7 @@ defects:
     That is the shape worth pricing before anything is built.
   regression: none
   recurrence_of: D-413
-  bead: think-xdly
+  bead: think-g4qi
   recorded_in: packing/devtools/run_negative_controls.py
 - id: D-428
   title: The n = 17 successor validator never ties the rebuilt chain spine to the carried boundary
@@ -13279,7 +13279,7 @@ defects:
     binding rather than a spine that disagrees with the boundary. No guard alters a carried
     summary row and rebuilds the chain around it, which is the mutation that passes. The
     repair above should land with exactly that mutation as its test.
-  bead: think-5j8d
+  bead: think-g4qi
   recorded_in: packing/cases/n17_weighted_certificate_successor/run.py
 - id: D-429
   title: The generated-view comparison folds an ellipsis but not the space the formatter puts before it
@@ -13330,5 +13330,95 @@ defects:
     the document, and asserts `--check` still reports the block current. Written against
     the formatter rather than against a hard-coded ` …`, so a future flowmark that stops
     inserting the space does not leave a test asserting the old behaviour.
-  bead: think-c46d
+  bead: think-ahyr
   recorded_in: packing/devtools/render_research_tables.py
+- id: D-430
+  title: The frontier prose kept saying sixty-three open cases rest on Nagamochi after the adoption made it sixty
+  date: '2026-09-04'
+  layer: docs
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    one day: from the 4.5058 adoption at 6734476d on 2026-09-03, which moved n = 17, 18
+    and 19 off the closed form, until the Agenda 017 planning survey counted the cases
+  severity: low
+  status: fixed
+  what: >-
+    `packing/frontier/README.md` said that sixty-three of the sixty-five open cases carry
+    Nagamochi's general closed form as their best proved lower bound and that exactly two
+    are bespoke, and sixty-seven generated case bodies repeated "63 of the 65 open cases".
+    The case records say sixty: the green17 certificate took n = 17 and n = 18 on
+    2026-08-31 and the adopted Massaccesi certificate took n = 19 on 2026-09-03, and
+    `validate.py`'s corpus-count step was updated to 60 with the adoption while the prose
+    that quotes the number was not. The README's own heading says its counts are computed
+    from the artifacts, and this one was typed. A dated review note on
+    `E-nagamochi-lower` still says eighty-eight of the hundred, which was true when it was
+    written and is left as the dated record it is; the checker's docstring carries the
+    current eighty-five and the history.
+  consequence: >-
+    A reader of the front door of the frontier folder was told the adoption had not
+    happened. No verified bound was wrong; the sentence describing which theorem carries
+    them was, in the direction of understating what the repository had established.
+  fix: >-
+    The README states sixty and names the five bespoke cases; the sixty-seven case bodies
+    say sixty; and `devtools.check_nagamochi_bounds` now reads both prose shapes and
+    refuses any figure that disagrees with the count over the case records, so the next
+    adoption that moves a case off the closed form fails the gate until the prose moves
+    with it.
+  regression: >-
+    `check_nagamochi_bounds.prose_counts` compares the README sentence and every case
+    body's "N of the M open cases" against the corpus, run inside the checker's gate step;
+    `tests/test_nagamochi_bounds.py` plants a README with the stale figure and asserts the
+    refusal names it.
+  bead: think-tkwj
+  recorded_in: packing/devtools/check_nagamochi_bounds.py
+- id: D-431
+  title: T-009's significance rationale compares its interval certificate against a different packing
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    since 2026-08-29, when the n = 29 interval certificate was registered with its
+    comparative rationale, until the Agenda 017 planning survey re-ran the rational
+    promotion on the Kingbird witness
+  severity: medium
+  status: outstanding
+  what: >-
+    The limitations of `E-n029-interval-certified-upper` in `packing/frontier/evidence.yaml`
+    say the Krawczyk certificate is "tighter than E-n029-schadt-rational-upper by 5.2337e-5,
+    which is the price each arithmetic regime charges for a certificate rather than a
+    difference in the packing: robust rational promotion had to relax by 5.2e-5 to reach
+    rational coordinates, this route by 5.4e-20", and T-009's significance rationale
+    repeats the comparison. The two certificates are on different packings: the Schadt
+    entry certifies Schadt's n = 29 packing at side 5.933885799813..., whose own
+    limitations record a relaxation of about 4.93e-31 over its source decimal, while the
+    interval certificate is on Kingbird's packing at 5.933833462676.... The 5.2337e-5 is
+    the gap between two packings, not the price of an arithmetic regime. Re-running the
+    shipped robust-rational promotion on the Kingbird witness (`packing-witness promote
+    --strategy robust-rational --max-side-increase 1e-6`) during planning produced an exact
+    rational certificate at side 5.933833462676929189689460616..., which is about 5.43e-20
+    below the interval certificate's 5.93383346267692918974379895098 -- the rational
+    route on the same packing is the tighter of the two, the opposite of what the
+    rationale says.
+  consequence: >-
+    T-009's claim and its V4 rung stand: the interval certificate is a valid bound on
+    s(29). What is wrong is the stated reason it is significant, and a reader comparing
+    the two routes from the record would conclude the interval regime pays 5.4e-20 where
+    rational promotion pays 5.2e-5, when on this packing both pay under 1e-19 and the
+    rational one pays less. The same finding reaches T-009's declared next rung: the
+    rational certificate is repository-origin exact-algebraic evidence by a different
+    method, so registering it raises T-009 to C4 by the register's own definition.
+  fix: >-
+    Register the Kingbird rational certificate as its own evidence entry, rewrite the
+    interval entry's limitations and T-009's rationale to compare the two routes on the
+    same packing with both relaxations stated, and raise T-009 to C4 through the results
+    checker rather than by hand. Deferred to BC-165 of Agenda 017, which records the
+    same command's certificates at ten further sizes and owns the evidence family they
+    join.
+  regression: >-
+    A results-checker rule that a `next_rung` or significance rationale naming a second
+    evidence entry as a comparator must cite an entry whose witness is the same packing
+    (same source witness id), so a cross-packing comparison is refused at registration.
+  bead: think-stb5
+  recorded_in: packing/frontier/evidence.yaml

@@ -69,22 +69,22 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 
 | Result | `n` | [`V`](epistemics.md#verification) | [`C`](epistemics.md#confirmation) | [`S`](epistemics.md#significance-and-novelty) | [Novelty](epistemics.md#significance-and-novelty) | What it establishes |
 | --- | --- | --- | --- | --- | --- | --- |
-| [T-010](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003's Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
-| [T-014](packing/frontier/RESULTS.md) | 5 | `V3` | `C5` | `S3` | `apparently-novel` | For s = 2 + sqrt(2)/2 and Goebel's labeled pose P0 in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) -- closed unit squares in [0, s]^2, pairwise disjoint interiors -- equivalently there is no nonconstant continuous feasible path from P0 and no sequence of distinct feasible poses converging to it; hence the n = 5 optimum is rigid at fixed side in the catalogue's sense. |
+| [T-010](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
+| [T-014](packing/frontier/RESULTS.md) | 5 | `V3` | `C5` | `S3` | `apparently-novel` | For s = 2 + sqrt(2)/2 and Goebel’s labeled pose P0 in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) -- closed unit squares in [0, s]^2, pairwise disjoint interiors -- equivalently there is no nonconstant continuous feasible path from P0 and no sequence of distinct feasible poses converging to it; hence the n = 5 optimum is rigid at fixed side in the catalogue’s sense. |
 | [T-001](packing/frontier/RESULTS.md) | 17 | `V4` | `C4` | `S3` | `apparently-novel` | Sixteen points make [0, 4426213/1000000]^2 unavoidable for open squares of side above one, so s(17) >= 4426213/1000000 = 4.426213. |
 | [T-002](packing/frontier/RESULTS.md) | 18 | `V4` | `C4` | `S3` | `apparently-novel` | s(18) >= 4426213/1000000, by monotonicity from T-001 (a packing of 18 unit squares contains a packing of 17). |
 | [T-004](packing/frontier/RESULTS.md) | 46 | `V4` | `C3` | `S3` | `previously-published` | Bentz 2010, Theorem 8: the printed 45-point unavoidable-set argument for s(46) >= 7 is correct as printed, machine-audited in full. |
-| [T-008](packing/frontier/RESULTS.md) | 46 | `V4` | `C3` | `S3` | `previously-published` | s(46) = 7: the lower half by T-004's audited unavoidable set, the upper half by the exact 7 x 7 grid packing of 46 squares. |
+| [T-008](packing/frontier/RESULTS.md) | 46 | `V4` | `C3` | `S3` | `previously-published` | s(46) = 7: the lower half by T-004’s audited unavoidable set, the upper half by the exact 7 x 7 grid packing of 46 squares. |
 | [T-009](packing/frontier/RESULTS.md) | 29 | `V4` | `C3` | `S3` | `apparently-novel` | s(29) <= 5.93383346267692918974379895098, by a Krawczyk interval certificate over the retained rational 29-square witness at a declared relaxation of 1e-20. |
-| [T-012](packing/frontier/RESULTS.md) | 5 | `V4` | `C3` | `S3` | `apparently-novel` | Goebel's n = 5 optimal packing is not infinitesimally rigid but is second-order rigid at fixed side: the cone of infinitesimal motions is exactly the middle square's rotation about its own centre, and that one direction is refused at second order by a verified non-negative self-stress, all exactly over Q(sqrt 2). |
-| [T-013](packing/frontier/RESULTS.md) | 40 | `V4` | `C3` | `S3` | `apparently-novel` | Goebel's n = 40 packing is infinitesimally flexible -- seven verified independent first-order flexes turn the sixteen-square tilted block -- and every retained flex is refused at second order by a verified non-negative self-stress, exactly over Q(sqrt 2), so no first-order argument can establish rigidity here. |
-| [T-015](packing/frontier/RESULTS.md) | 17 | `V4` | `C3` | `S3` | `previously-published` | s(17) >= 22529/5000 = 4.5058, by Massaccesi's 168-atom fractional unavoidable-set certificate (2026) on Burns's architecture: total mass 203/12 < 17 and mass at least 1 in every closed unit square of [0, 22529/5000]^2, reduced exactly to 181 rational directions and finitely many event cells, replayed here by the source verifier and by an accumulation-independent repository instrument. |
+| [T-012](packing/frontier/RESULTS.md) | 5 | `V4` | `C3` | `S3` | `apparently-novel` | Goebel’s n = 5 optimal packing is not infinitesimally rigid but is second-order rigid at fixed side: the cone of infinitesimal motions is exactly the middle square’s rotation about its own centre, and that one direction is refused at second order by a verified non-negative self-stress, all exactly over Q(sqrt 2). |
+| [T-013](packing/frontier/RESULTS.md) | 40 | `V4` | `C3` | `S3` | `apparently-novel` | Goebel’s n = 40 packing is infinitesimally flexible -- seven verified independent first-order flexes turn the sixteen-square tilted block -- and every retained flex is refused at second order by a verified non-negative self-stress, exactly over Q(sqrt 2), so no first-order argument can establish rigidity here. |
+| [T-015](packing/frontier/RESULTS.md) | 17 | `V4` | `C3` | `S3` | `previously-published` | s(17) >= 22529/5000 = 4.5058, by Massaccesi’s 168-atom fractional unavoidable-set certificate (2026) on Burns’s architecture: total mass 203/12 < 17 and mass at least 1 in every closed unit square of [0, 22529/5000]^2, reduced exactly to 181 rational directions and finitely many event cells, replayed here by the source verifier and by an accumulation-independent repository instrument. |
 | [T-016](packing/frontier/RESULTS.md) | 18, 19 | `V4` | `C3` | `S3` | `previously-published` | s(18) >= 22529/5000 and s(19) >= 22529/5000, by monotonicity from T-015 (a packing of n >= 17 unit squares contains a packing of 17). |
 | [T-006](packing/frontier/RESULTS.md) | 13 | `V3` | `C1` | `S3` | `previously-published` | s(13) = 4 (Bentz 2010, Theorem 9). |
 | [T-007](packing/frontier/RESULTS.md) | 4-100 | `V3` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 100, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
-| [T-003](packing/frontier/RESULTS.md) | 17, 18 | `V4` | `C3` | `S2` | `apparently-novel` | The sixteen-point set's unavoidability ceiling lies in [4426213/1000000, 4427/1000): certification at the left endpoint, an exact escaping pose at the right, with the top strips' a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2), inside the bracket. |
+| [T-003](packing/frontier/RESULTS.md) | 17, 18 | `V4` | `C3` | `S2` | `apparently-novel` | The sixteen-point set’s unavoidability ceiling lies in [4426213/1000000, 4427/1000): certification at the left endpoint, an exact escaping pose at the right, with the top strips’ a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2), inside the bracket. |
 | [T-005](packing/frontier/RESULTS.md) | 13 | `V4` | `C3` | `S2` | `apparently-novel` | Bentz 2010, Lemma 10 is false as printed -- the middle replacement point (1, 1.74) is refuted by an exact escape certificate, and the published page image carries the same transposed text -- and true under the corrected reading (1.74, 1), with all three corrected replacement covers certified exactly. |
-| [T-011](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S2` | `previously-published` | Trump's 1979 packing is exactly valid: 11 unit squares in a square of side the published degree-8 algebraic number 3.877083590022814 …, with 14 of 55 pairs in exact zero-separation contact and 20 corner coordinates exactly on the boundary, so s(11) <= that side. |
+| [T-011](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S2` | `previously-published` | Trump’s 1979 packing is exactly valid: 11 unit squares in a square of side the published degree-8 algebraic number 3.877083590022814 …, with 14 of 55 pairs in exact zero-separation contact and 20 corner coordinates exactly on the boundary, so s(11) <= that side. |
 
 | Significance | What [`epistemics.md`](epistemics.md#significance-and-novelty) anchors it to |
 | --- | --- |
@@ -122,9 +122,9 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives six confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-five blocked
-hypotheses. No hypothesis waits on review and five are unresolved.
+The generated ledger currently derives six confirmed hypotheses, six refuted hypotheses,
+one open hypothesis, seven open questions, and thirty-six blocked hypotheses.
+No hypothesis waits on review and five are unresolved.
 The set includes one claim whose formal prerequisite is missing, H-044 whose registered
 calibration-only amendment keeps the hypothesis undisposed — its first scored round
 (exp-046) missed the criterion determinately under both denominator readings, the review
@@ -420,6 +420,32 @@ revision was never merged or hosted-green before the run began.
 The `tbd` CLI was absent throughout, so bead reconciliation stayed read-only rather than
 a satisfied obligation.
 
+**What is planned next, and ready.** The operator asked for the next research to be
+mapped strategically in two blocks — six hours to be reviewed the same evening, then ten
+hours overnight — and this planning revision writes both:
+[Agenda 017](packing/campaign/agendas/agenda-017-six-hour-generator-rigidity-ceilings-and-w9-block.md),
+active, whose `BC-159` preflight is the only takeable entry, and
+[Agenda 018](packing/campaign/agendas/agenda-018-ten-hour-continuation-ladders-theorems-and-wave-two.md),
+paused until Agenda 017 has closed and the operator has reviewed its pull request.
+Agenda 017 runs four lanes: a first-party generator for weighted fractional
+unavoidable-set certificates aimed at the first `n = 12`-specific lower bound
+([H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md),
+side fixed at `19/5` before any target command); the general rigidity theorem behind
+`T-014` written out with the `n = 40` stress question decided exactly, then an audit of
+Stromquist’s Theorem 3 at `n = 11`; the ten decimal records whose verified ceiling still
+sits at the grid, every one of which the shipped rational promotion certifies at a side
+within `8 × 10⁻²⁹` of the reported decimal; and the selected handoff, three of
+`think-ldq2`’s clauses under a reviewer, then the two gate defects that made the last
+full local gate red on a used checkout.
+Agenda 018 climbs the `n = 12` ladder, takes the `n = 11` shot, generalises the rigidity
+instrument and proves an explicit isolation radius at Trump’s packing, runs `H-049` at
+the `s(30) < 6` bar its corrected framing sets, and finishes the W9 wave.
+The planning revision also restored the `tbd` CLI under Node 22, unshallowed the clone
+so the provenance step can pass locally, resolved every follow-up bead Agenda 016 had
+declared unverified and re-routed the four that resolved wrong, and recorded `D-430` and
+`D-431`. The marker below is unchanged, because it names where the last terminal session
+stopped; the next entry that actually runs is `BC-159` on `think-uqgp`.
+
 **Selected next entry:** `think-5j8d`, the bead the last terminal session closed on.
 Its own scope is discharged — H-052 is confirmed at implementation-agreement scope and
 `exp-059` is terminal — so this marker records where the run stopped rather than work
@@ -427,7 +453,7 @@ still owed on it; the residual attached to it is `D-428`, a gap the successor’
 validator has and the executed run does not.
 
 The recommended follow-up is the four unrepaired clauses of D-044 and D-046, carried on
-`think-ldq2` under `think-modk`. They are clauses of those defects' own source findings
+`think-ldq2` under `think-modk`. They are clauses of those defects’ own source findings
 rather than new scope, and one of them loosens an acceptance screen, which needs a
 reviewer the closing run no longer had.
 
@@ -438,11 +464,12 @@ into each other:
   replayed exp-056’s verified 170-row prefix, recomputed rather than promoted the
   interrupted ordinal, and completed all 181 direction cells with both certificate
   summaries, the global minima, every frozen precondition and mutation decision, and
-  `instrument_valid` all present. An independent review (`BC-149`) passed the round
-  at implementation-agreement scope only, which then opened source adoption:
-  `BC-150`/`BC-151` audited the published Massaccesi argument, an independently written
-  fifth implementation reproduced every row, and the verified lower bound rose to
-  `22529/5000` at `n = 17`--`19`. Neither step is first-party mathematics.
+  `instrument_valid` all present.
+  An independent review (`BC-149`) passed the round at implementation-agreement scope
+  only, which then opened source adoption: `BC-150`/`BC-151` audited the published
+  Massaccesi argument, an independently written fifth implementation reproduced every
+  row, and the verified lower bound rose to `22529/5000` at `n = 17`--`19`. Neither step
+  is first-party mathematics.
 - **A genuinely new theorem, at a fixed scope.**
   [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md)’s fixed-side local
   rigidity of Goebel’s exact `n = 5` pose passed an independent review (`BC-153`) of its
@@ -450,15 +477,17 @@ into each other:
   order-`2m` coefficient induction, and is registered as `T-014` at `V3`/`C5`/`S3`. `C5`
   is `C3` plus a mapped review artifact; `C4` — confirmed by distinct methods — is not
   claimed and is not supported, though the cited evidence entries carry different method
-  values for different claims. Isolation radius, side-free rigidity, global uniqueness
-  and other `n = 5` optima remain outside this result.
+  values for different claims.
+  Isolation radius, side-free rigidity, global uniqueness and other `n = 5` optima
+  remain outside this result.
 - **A bounded W9 wave, contained rather than fixed.** `think-modk`’s repair of D-044 and
   D-046 passed a mutation harness that reverted each guard in copies and found every one
   load-bearing, but the review (`BC-154`) found four clauses of the two defects’ own
   source findings — one loosening an acceptance screen — that never reached either
-  record and so were never repaired. Both defects are recorded `contained`, and the
-  reviewer’s recommendation against that label over `fixed` stands in both entries. The
-  wave also produced three new defects of its own: `D-424` and `D-425`, both fixed
+  record and so were never repaired.
+  Both defects are recorded `contained`, and the reviewer’s recommendation against that
+  label over `fixed` stands in both entries.
+  The wave also produced three new defects of its own: `D-424` and `D-425`, both fixed
   in-run, and `D-427`, still open.
 
 The closeout (`BC-155`, `think-xycf`) added an outcome, stop reason, disposition and
@@ -469,15 +498,16 @@ README, tutorial and SYNOPSIS were updated, and conventions, development guidanc
 operating rules were checked and found current, though the pass behind those entries was
 itself interrupted: an infrastructure rate limit at about 10:45Z ended six in-flight
 agents and left the closeout documentation and de-slop pass partially finished, which
-session-083 records as an interruption rather than a deviation. The records tier passed
-its named steps; the full local gate ended red, failing 3 steps from two causes, neither
-a defect this branch introduced — the negative-control snapshot cap, breached by the
-build caches that running the gate itself writes, counted twice because one assertion
-rides two steps, and the shallow-checkout provenance artifact on a record no commit here
-touches. Apart from that cap the behavioural suite was 1,606 of 1,607 passing. Hosted
-validate, packing-required and macos-portability passed on every revision they ran on,
-including the branch’s final head, which is the same fact from the other side: CI clones
-fresh, so it carries no caches.
+session-083 records as an interruption rather than a deviation.
+The records tier passed its named steps; the full local gate ended red, failing 3 steps
+from two causes, neither a defect this branch introduced — the negative-control snapshot
+cap, breached by the build caches that running the gate itself writes, counted twice
+because one assertion rides two steps, and the shallow-checkout provenance artifact on a
+record no commit here touches.
+Apart from that cap the behavioural suite was 1,606 of 1,607 passing.
+Hosted validate, packing-required and macos-portability passed on every revision they
+ran on, including the branch’s final head, which is the same fact from the other side:
+CI clones fresh, so it carries no caches.
 
 The Green17 exact ceiling (`think-iye2`) is the first bounded numeric fallback once
 adoption settled, still not ready; bespoke `n = 12` work (`think-0z9b`) remains the next
@@ -766,19 +796,18 @@ The frontier property stayed `undetermined` then, and the reason is worth carryi
 forward: second-order rigidity is not local rigidity, the step that would close the gap
 is a curve-selection argument that `X-007` writes out as prose and no replay checks, and
 the property enum has no word for what was actually established.
-What did change is everything
-saying why — `verified` rather than `numerically-checked`, `exact-algebraic` rather than
-`numerical-multiprecision`, and a first-party evidence id in place of the screen’s —
-which takes `n = 5` out of the assessment tool’s ownership, so it joins `n = 11` as left
-to a stronger argument.
+What did change is everything saying why — `verified` rather than `numerically-checked`,
+`exact-algebraic` rather than `numerical-multiprecision`, and a first-party evidence id
+in place of the screen’s — which takes `n = 5` out of the assessment tool’s ownership,
+so it joins `n = 11` as left to a stronger argument.
 Both `D-354` guards stayed green without being edited, which was the test the change was
 held to.
 
-For `n = 5` that stronger argument arrived on 2026-09-03.
-`BC-152` wrote the curve-selection step out in full and checked it against an exact
-accounting of all 400 local inequalities, `BC-153` reviewed it independently, and the
-property now reads `locally-rigid` at fixed side on a second first-party evidence record
-— see [`T-014`](#results-established-here).
+For `n = 5` that stronger argument arrived on 2026-09-03. `BC-152` wrote the
+curve-selection step out in full and checked it against an exact accounting of all 400
+local inequalities, `BC-153` reviewed it independently, and the property now reads
+`locally-rigid` at fixed side on a second first-party evidence record — see
+[`T-014`](#results-established-here).
 
 **Read [`OR-4`](operating-rules.md) before trusting any older queue.** `BC-081` found
 that agenda-005 was advertising four commitments as takeable which agenda-006 had
@@ -1458,12 +1487,11 @@ claim whether or not we read it, and reading one is a careful human act, not the
 check `proof-assistant-checked` names.
 What it changes is whether a reader can tell the two apart.
 Four of the six external proofs the register carries are `not-reviewed`. The two that
-have been read are [Nagamochi 2005], the register's most load-bearing external argument,
+have been read are [Nagamochi 2005], the register’s most load-bearing external argument,
 read on 2026-08-30 and recorded `informally-verified`, and [Bentz 2010], recorded
-`defect-found` after the machine audit found Lemma 10's replacement point transposed in
-print.
-The distinction is not hypothetical: [Stromquist 2003]'s `n = 11` argument needed a
-source-distinct repair, which `E-n011-repaired-lower` supplies without repairing the
+`defect-found` after the machine audit found Lemma 10’s replacement point transposed in
+print. The distinction is not hypothetical: [Stromquist 2003]'s `n = 11` argument needed
+a source-distinct repair, which `E-n011-repaired-lower` supplies without repairing the
 printed proof. An external certificate and a repository replay remain separate evidence
 records. Running the generator’s own checker is not an independent implementation.
 A page that says “interval verified” but publishes no certificate or replayable checker
@@ -2030,8 +2058,7 @@ coefficients that the self-stress contradicts at order `2m`. It is registered at
 `V3`/`C5` — the exact quantities are machine-confirmed here, the two steps that close
 the argument are an audited proof, no instrument decides isolation, and that `C3` is
 raised to `C5` by the mapped review artifact below, rather than to `C4` by a second
-method — and
-`apparently-novel` at `S3` on
+method — and `apparently-novel` at `S3` on
 [`BC-153`](packing/campaign/agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md)’s
 independent review, which rebuilt every exact quantity from scratch in code sharing
 nothing with the author, replayed the instrument from clean roots, and accepted the
@@ -2576,6 +2603,7 @@ round that names the hypothesis, control roles included.
 | [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | unresolved | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 2 | — |
 | [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | confirmed | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 1 | — |
 | [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md) | confirmed | Goebel’s exact `n = 5` optimum is locally rigid when the container side is fixed | 1 | 11s wall |
+| [H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md) | blocked | A first-party fractional unavoidable-set certificate at side `19/5` proves `s(12) ≥ 3.8`, the first `n = 12`-specific bound; the generator does not exist yet | 0 | — |
 
 ### Confirmed
 
@@ -2659,10 +2687,9 @@ at `n=12`.
 open and demoted behind a short response curve.
 It is operationally shaped, and D-044 — the boundary that made it inadmissible
 unattended — is repaired against the producer and independently reviewed.
-D-044 stands `contained` rather than fixed:
-the review of 2026-09-03 returned BOUNDED-CAVEAT, and one
-clause of the defect’s source finding plus three residuals on the same archive boundary
-are named in the record and not closed.
+D-044 stands `contained` rather than fixed: the review of 2026-09-03 returned
+BOUNDED-CAVEAT, and one clause of the defect’s source finding plus three residuals on
+the same archive boundary are named in the record and not closed.
 No live round has passed through the repaired boundary, so admitting it unattended is
 still a review decision rather than a settled one.
 
@@ -3053,14 +3080,13 @@ local side optimality in the anchored pose–side chart, modulo finite symmetrie
 It does not prove global optimality or give an explicit isolation radius.
 
 **Goebel’s `n = 5` optimum is locally rigid at fixed side, and that is a first-party
-result.**
-Exp-058 registers the BC-152 proof packet: an intrinsic half-angle chart injective on
-all of `R^15`, all 400 elementary wall-corner and pair inequalities classified by exact
-sign (confirming the agenda’s 16/64 and 4/6 counts with no discrepancy), a neighbourhood
-cut out by 128 strict sign conditions on which the local feasible system is exactly the
-twenty active rows, T-012’s 28 Farkas certificates and self-stress replaying on the
-chart with `w · q_chart = -2√2 < 0`, and an order-`2m` coefficient induction that
-contradicts a nonconstant analytic feasible arc.
+result.** Exp-058 registers the BC-152 proof packet: an intrinsic half-angle chart
+injective on all of `R^15`, all 400 elementary wall-corner and pair inequalities
+classified by exact sign (confirming the agenda’s 16/64 and 4/6 counts with no
+discrepancy), a neighbourhood cut out by 128 strict sign conditions on which the local
+feasible system is exactly the twenty active rows, T-012’s 28 Farkas certificates and
+self-stress replaying on the chart with `w · q_chart = -2√2 < 0`, and an order-`2m`
+coefficient induction that contradicts a nonconstant analytic feasible arc.
 `H-060` is **confirmed** on `BC-153`’s independent review, which returned PASS on
 2026-09-03 against a criterion frozen before the target work and met as written: the
 reviewer replayed the instrument from clean roots under both interpreters and got this
@@ -3077,17 +3103,15 @@ argument are an audited proof, and no instrument decides isolation — `isolatio
 is false unconditionally, by design.
 Not claimed: an isolation radius, the side as a variable (false, X-007), global
 uniqueness, any other `n = 5` optimum, applicability of Connelly–Whiteley as stated, or
-novelty of method.
-Exp-034’s two-parameter feasible family is not a counterexample: it lives at side
-`1 + 5√2/4`, disjoint from the feasible set at Goebel’s side, and X-012 runs it as the
-`C8` control on which the instrument must refuse a receipt.
-Six gaps stay named and none is a condition of the pass — the printed
-BCR page behind the curve-selection citation is still unread, and the review replaces it
-with a derivation from primary-text Basu–Pollack–Roy plus the one-variable Puiseux fact
-rather than closing it.
-The corroborating second-order-sufficiency proof in the packet reaches the same
-conclusion from weaker hypotheses and discharges nothing, because acceptance was
-preregistered on the curve-selection route.
+novelty of method. Exp-034’s two-parameter feasible family is not a counterexample: it
+lives at side `1 + 5√2/4`, disjoint from the feasible set at Goebel’s side, and X-012
+runs it as the `C8` control on which the instrument must refuse a receipt.
+Six gaps stay named and none is a condition of the pass — the printed BCR page behind
+the curve-selection citation is still unread, and the review replaces it with a
+derivation from primary-text Basu–Pollack–Roy plus the one-variable Puiseux fact rather
+than closing it. The corroborating second-order-sufficiency proof in the packet reaches
+the same conclusion from weaker hypotheses and discharges nothing, because acceptance
+was preregistered on the curve-selection route.
 
 **The optimal configuration spaces at `n = 3,4` are now exact controls.** Exp-014 proves
 that `F_3(2)` is two labelled circles, its `S3` quotient is one circle, and its
@@ -3163,14 +3187,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 429 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 431 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 91 | asserted something false about the mathematics |
 | validity | 115 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 155 | recorded something its own evidence contradicts |
+| bookkeeping | 157 | recorded something its own evidence contradicts |
 | robustness | 53 | did not finish, or finished only by luck |
 | performance | 15 | worked, but cost far more than it should |
 
@@ -3180,7 +3204,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-one defects in 429, and no soundness defect
+**The automated gate has caught sixty-one defects in 431, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3190,7 +3214,7 @@ test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
-The generated log currently has 61 open entries: 38 `outstanding` and 23 `contained`.
+The generated log currently has 63 open entries: 40 `outstanding` and 23 `contained`.
 The W9 candidate `think-cyko` owns their systematic risk ordering and bounded repair
 waves; the synopsis names the cases that matter to current claims rather than pretending
 the examples below are the whole backlog.
@@ -3228,11 +3252,12 @@ one of them ran, and that half is discharged: pruning four large result files at
 `a478744a` took the counted surface from 90,031,065 to 56,219,144 bytes, and the suite
 then ran three times on this branch with all 155 controls firing as expected — the first
 direct evidence here that the controls catch what they were written for rather than only
-that their anchors resolve. What stays open is the diagnosis that replaced it, and the
-entry is retitled to it: the portable fallback still copies untracked build caches into
-every worker, and the cap is held by a per-file prune that was never meant to be durable.
-The cap itself is checked on the pull-request surface; the cache accounting is checked by
-nothing. [D-423](defects.md) records that the lemma closing the Green17 cover
+that their anchors resolve.
+What stays open is the diagnosis that replaced it, and the entry is retitled to it: the
+portable fallback still copies untracked build caches into every worker, and the cap is
+held by a per-file prune that was never meant to be durable.
+The cap itself is checked on the pull-request surface; the cache accounting is checked
+by nothing. [D-423](defects.md) records that the lemma closing the Green17 cover
 certificate’s top strips is printed non-strict in Stromquist 2003 and Bentz 2010 and
 strict in Friedman’s DS7, and that the repository holds all three.
 The readings agree everywhere except on the boundary the certificate uses, so the
@@ -3257,13 +3282,13 @@ finding that review turned up on D-046’s own edge: a control-cell breach is a 
 stop condition that the session does not honour, because `run` resets its failure count
 on the breached round and continues on the same suspect instrument.
 Nothing has been recorded through any of this — no live round has run, nothing has been
-recorded through the unattended runner, and the numerical runner stays **NO-GO**.
-An earlier form of that sentence gave the reason as the search engine not being built
-here; a release binary was built at `packing/sqsearch/target/release/sqsearch` at 10:30Z
-on 2026-09-03, nothing has been executed against it, and the conclusion rests on the
+recorded through the unattended runner, and the numerical runner stays **NO-GO**. An
+earlier form of that sentence gave the reason as the search engine not being built here;
+a release binary was built at `packing/sqsearch/target/release/sqsearch` at 10:30Z on
+2026-09-03, nothing has been executed against it, and the conclusion rests on the
 absence of a recorded round rather than on the absence of a binary.
 
-[D-427](defects.md) came out of the same day's work on the control harness and is the
+[D-427](defects.md) came out of the same day’s work on the control harness and is the
 weakest in degree of the three, and the broadest in reach.
 `run_one` scores a control on its mutated run alone — non-zero exit plus the expected
 string — and never requires the unmutated checker to have been green, so a control can
@@ -3276,9 +3301,9 @@ baseline for one of the forty distinct control commands, and the general form st
 open.
 
 [D-428](defects.md) is a record claiming a check that is not there.
-The `n = 17` successor's `validate_result` rebuilds all 181 hash-chain links from the two
-certificate summaries and compares them with the emitted spine, but never compares that
-rebuild with the carried boundary it is supposed to terminate on, so a carried row
+The `n = 17` successor’s `validate_result` rebuilds all 181 hash-chain links from the
+two certificate summaries and compares them with the emitted spine, but never compares
+that rebuild with the carried boundary it is supposed to terminate on, so a carried row
 altered identically in both summaries — with the spine and last row hash recomputed
 around it — is accepted.
 The round record asserted the stronger claim, that an altered manifest cannot survive;
@@ -3288,16 +3313,30 @@ The published result satisfies the tie and the record has been corrected; the co
 not.
 
 [D-429](defects.md) is a guard that would have fought the formatter forever, recorded
-before it ever fired. Generated blocks inside formatted documents are compared by what a
-line *says* rather than by its bytes, so flowmark may own the typography inside them; the
-fold that makes that comparison work maps `…` back to `...` but not the space flowmark
-inserts before it. No generated cell has carried an ellipsis until the results headline,
-whose `n = 17` row does, so the failure has never happened — a render and the formatter
-would have rewritten each other on every commit, which is the churn `.flowmarkignore`
-exists to stop, reappearing inside a block the formatter is allowed to touch. The
-headline works around it locally and the shared fix is deliberately unapplied: a
+before it ever fired.
+Generated blocks inside formatted documents are compared by what a line *says* rather
+than by its bytes, so flowmark may own the typography inside them; the fold that makes
+that comparison work maps `…` back to `...` but not the space flowmark inserts before
+it. No generated cell has carried an ellipsis until the results headline, whose `n = 17`
+row does, so the failure has never happened — a render and the formatter would have
+rewritten each other on every commit, which is the churn `.flowmarkignore` exists to
+stop, reappearing inside a block the formatter is allowed to touch.
+The headline works around it locally and the shared fix is deliberately unapplied: a
 one-line change to a comparison guard backing several views, made unreviewed at the end
 of an unattended session, is the shape of `D-425`.
+
+Two entries were added while planning Agenda 017, both found by re-running what the
+record already said.
+[D-430](defects.md) is the frontier prose saying sixty-three open cases rest on
+Nagamochi’s closed form a day after the 4.5058 adoption made it sixty; the README and
+sixty-seven case bodies now say sixty, and `check_nagamochi_bounds` refuses any prose
+count that disagrees with the case records.
+[D-431](defects.md) is open: `T-009`’s significance rationale compares its `n = 29`
+interval certificate against a rational certificate on Schadt’s packing rather than
+Kingbird’s, and the shipped rational promotion run on the Kingbird witness lands about
+`5.4 × 10⁻²⁰` below the interval bound, the opposite of what the rationale says.
+Agenda 017’s `BC-165` registers that certificate, rewrites the comparison on one
+packing, and takes `T-009` to `C4` through the results checker.
 
 [D-393](defects.md) is the same run being wrong about its own gate.
 `D-381` established `--edit` as the pre-push floor, and that floor does not run tests:

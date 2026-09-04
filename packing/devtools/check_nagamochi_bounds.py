@@ -31,6 +31,7 @@ Usage, from `packing/`:
 from __future__ import annotations
 
 import math
+import re
 import sys
 from decimal import Decimal, localcontext
 from pathlib import Path
@@ -40,6 +41,12 @@ from sqpack.yamlio import safe_load
 ROOT = Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
 RECORD = "E-nagamochi-lower"
+#: The reader-facing prose that quotes the corpus count, in its two shapes. Both are
+#: checked against the case records because the figure was typed once and outlived the
+#: 4.5058 adoption by a day (D-430): the README said sixty-three when the corpus said sixty.
+README = FRONTIER / "README.md"
+_README_COUNT = re.compile(r"Of the (\d+) open cases, \*\*(\d+)\*\* have\s+Nagamochi")
+_BODY_COUNT = re.compile(r"(\d+) of the (\d+) open cases at\s+`n ≤ 100` are governed by it")
 
 #: Enough to compare against any decimal the register carries, and pinned rather than
 #: inherited: `decimal`'s context is process-global (see `think-iskp`).
@@ -65,12 +72,43 @@ def cases() -> dict[int, dict]:
     return found
 
 
+def prose_counts(found: dict[int, dict]) -> list[str]:
+    """Every sentence that quotes the count must quote the corpus, not a memory of it."""
+    open_cases = [case for case in found.values() if case.get("status") == "open"]
+    nagamochi_open = sum(
+        RECORD in ((case.get("verified_lower_bound") or {}).get("evidence") or [])
+        for case in open_cases
+    )
+    corpus = (nagamochi_open, len(open_cases))
+    problems: list[str] = []
+    match = _README_COUNT.search(README.read_text(encoding="utf-8"))
+    if match is None:
+        problems.append(
+            f"{README.name}: no 'Of the N open cases, **M** have Nagamochi' sentence to check"
+        )
+    elif (int(match.group(2)), int(match.group(1))) != corpus:
+        problems.append(
+            f"{README.name} says {match.group(2)} of {match.group(1)} open cases rest on "
+            f"Nagamochi; the case records say {corpus[0]} of {corpus[1]}"
+        )
+    for path in sorted(FRONTIER.glob("n-*.md")):
+        problems.extend(
+            f"{path.name} says {match.group(1)} of {match.group(2)} open cases; "
+            f"the case records say {corpus[0]} of {corpus[1]}"
+            for match in _BODY_COUNT.finditer(path.read_text(encoding="utf-8"))
+            if (int(match.group(1)), int(match.group(2))) != corpus
+        )
+    return problems
+
+
 def main() -> int:
     problems: list[str] = []
     checked = 0
     inversions: list[str] = []
+    found = cases()
+    prose = prose_counts(found)
 
-    for n, case in sorted(cases().items()):
+    for n, case in sorted(found.items()):
         lower = case.get("verified_lower_bound") or {}
         if RECORD not in (lower.get("evidence") or []):
             continue
@@ -113,7 +151,16 @@ def main() -> int:
             print(f"  {line}")
         return 1
 
-    print(f"{checked} lower bounds re-derived from Theorem 2, all agreeing, none inverted")
+    if prose:
+        print(f"{len(prose)} prose count(s) disagree with the case records (D-430):")
+        for line in prose:
+            print(f"  {line}")
+        return 1
+
+    print(
+        f"{checked} lower bounds re-derived from Theorem 2, all agreeing, none inverted; "
+        "the README and case-body counts agree with the records"
+    )
     return 0
 
 

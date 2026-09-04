@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """The register's most load-bearing citation is checked as arithmetic, not just as a link.
 
-`E-nagamochi-lower` carries the verified lower bound for 86 of the hundred cases (88
+`E-nagamochi-lower` carries the verified lower bound for 85 of the hundred cases (88
 until 2026-08-31, when the first-party green17 certificate took over `n = 17` and
-`n = 18`); the next most-cited evidence record carries two. `assurance.py` checks that
+`n = 18`, then 85 when the adopted 4.5058 bound took `n = 19` on 2026-09-03); the
+next most-cited evidence record carries two. `assurance.py` checks that
 such a bound cites verified evidence of the right claim and scope, which is a statement
-about the citation. A transcription slip in any one of the 86 values would have passed
+about the citation. A transcription slip in any one of the 85 values would have passed
 every existing check.
 """
 
@@ -17,7 +18,7 @@ from decimal import Decimal, localcontext
 import pytest
 
 import devtools.check_nagamochi_bounds as nagamochi
-from devtools.check_nagamochi_bounds import RECORD, cases, main, theorem_two
+from devtools.check_nagamochi_bounds import RECORD, cases, main, prose_counts, theorem_two
 
 
 def citing() -> dict[int, dict]:
@@ -96,3 +97,24 @@ def test_a_wrong_value_is_refused(monkeypatch: pytest.MonkeyPatch) -> None:
 
     monkeypatch.setattr(nagamochi, "cases", poisoned)
     assert nagamochi.main() == 1
+
+
+def test_the_prose_counts_agree_with_the_records() -> None:
+    """The README and the case bodies quote the corpus, not a memory of it (D-430)."""
+    assert prose_counts(cases()) == []
+
+
+def test_a_stale_readme_count_is_refused(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: pytest.TempPathFactory
+) -> None:
+    """The figure that outlived the 4.5058 adoption by a day would now fail the gate."""
+    stale = tmp_path / "README.md"  # type: ignore[operator]
+    stale.write_text(
+        "Of the 65 open cases, **63** have\nNagamochi\u2019s general closed form.\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(nagamochi, "README", stale)
+    problems = prose_counts(cases())
+    assert len(problems) == 1
+    assert "63 of 65" in problems[0]
+    assert "60 of 65" in problems[0]
