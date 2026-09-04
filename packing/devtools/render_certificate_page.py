@@ -74,16 +74,12 @@ LATIN_RANGE = (
     "U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
 )
 
-# The kpress stylesheet chain, in the order `kpress.format.assets` loads it.
-# page-reset first (it owns html/body for the standalone shell), print last.
-KPRESS_STYLESHEETS = (
-    "page-reset.css",
-    "style-tokens.css",
-    "syntax.css",
-    "document.css",
-    "components.css",
-    "print.css",
-)
+# `page-reset.css` is not in kpress's DEFAULT_CSS_ASSETS: kpress inlines it
+# separately, render-blocking, because it owns html/body for a standalone shell
+# and an embedded fragment must not carry it. This page is standalone, so it
+# goes first. The rest of the order is kpress's own, imported rather than
+# copied, so a stylesheet added upstream is picked up here without an edit.
+PAGE_RESET = "css/page-reset.css"
 
 
 def kpress_static() -> Path:
@@ -127,10 +123,12 @@ def kpress_css(static: Path) -> str:
     system's to define, and a page that re-declared a subset of them would drift
     from it silently. This page adds only what kpress has no component for.
     """
+    from kpress.format.assets import DEFAULT_CSS_ASSETS  # noqa: PLC0415
+
     parts = []
-    for name in KPRESS_STYLESHEETS:
+    for name in (PAGE_RESET, *DEFAULT_CSS_ASSETS):
         parts.append(f"/* kpress: {name} */")
-        parts.append((static / "css" / name).read_text(encoding="utf-8"))
+        parts.append((static / name).read_text(encoding="utf-8"))
     return inline_font_urls("\n".join(parts), static / "fonts")
 
 

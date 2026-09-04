@@ -67,7 +67,9 @@
   margin-block-start: 2rem;
   padding-block: 1.3rem 0.4rem;
 }
-.line-fig svg, .chart svg { display: block; height: auto; overflow: visible; width: 100%; }
+/* `.kpress-diagram svg` sets display, height and centring; these figures also
+   need full width and labels allowed outside the viewBox. */
+.line-fig svg, .chart svg { overflow: visible; width: 100%; }
 .line-fig svg text, .chart svg text {
   fill: var(--kpress-doc-muted);
   font-family: var(--kpress-font-sans);
@@ -98,15 +100,14 @@
   letter-spacing: var(--kpress-caps-spacing);
   padding: 0.05rem 0.4rem;
 }
-.cert-page figcaption {
+/* `.kpress-figcaption` carries the voice; a bordered figure needs the rule and
+   the padding, which the component leaves to the container. */
+.cert-page .kpress-figcaption {
   border-block-start: 1px solid var(--kpress-doc-border);
-  color: var(--kpress-doc-muted);
-  font-family: var(--kpress-font-sans);
-  font-size: var(--kpress-font-size-tiny);
-  line-height: 1.55;
+  margin-block-start: 0;
   padding: 0.85rem 1.1rem 1rem;
 }
-.cert-page figcaption strong {
+.cert-page .kpress-figcaption strong {
   color: var(--kpress-doc-text);
   font-weight: var(--kpress-font-weight-sans-medium);
 }
@@ -296,7 +297,7 @@
   </div>
 </header>
 
-<div class="line-fig col">
+<div class="line-fig col kpress-diagram">
   <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER}}, the new bound {{L_DEC}}, and the best known packing at {{BEST_PACKING}}">
     <rect x="{{BOUND_X}}" y="45" width="{{BAND_W}}" height="13" fill="var(--cert-accent-wash)"/>
     <line x1="20" y1="51.5" x2="680" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1"/>
@@ -363,7 +364,7 @@
       <div style="text-align:right">Mass eleven disjoint squares would need<span class="v tex">{{N}}</span></div>
     </div>
   </div>
-  <figcaption>The shortfall is <strong>{{SHORTFALL}}</strong>. Everything right of the orange line is mass eleven
+  <figcaption class="kpress-figcaption">The shortfall is <strong>{{SHORTFALL}}</strong>. Everything right of the orange line is mass eleven
   squares would need and the board does not hold. Condition <strong>C1</strong> is this comparison.</figcaption>
 </figure>
 
@@ -385,7 +386,7 @@
     <span class="fig-title">The atom field</span>
   </div>
   <div class="stage"><canvas id="field" width="1040" height="1040"></canvas></div>
-  <figcaption>Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
+  <figcaption class="kpress-figcaption">Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
   corners, where a square has least room to move, and thins in the middle. The sites and weights are the optimum
   of a covering linear program, rationalised.</figcaption>
 </figure>
@@ -441,7 +442,7 @@
       it the square hangs out of the container, and the proof makes no claim.</p>
     </div>
   </div>
-  <figcaption>Inside the dashed domain the field never drops below <strong>1</strong>, at any of the {{N_DIRECTIONS}}
+  <figcaption class="kpress-figcaption">Inside the dashed domain the field never drops below <strong>1</strong>, at any of the {{N_DIRECTIONS}}
   directions. Outside it the mass falls away at once, which is why the atoms crowd the boundary.</figcaption>
 </figure>
 
@@ -505,7 +506,7 @@
       indistinguishable.</p>
     </div>
   </div>
-  <figcaption>The dark outline is the unit square at angle <span class="tex">\varphi</span>; orange is the
+  <figcaption class="kpress-figcaption">The dark outline is the unit square at angle <span class="tex">\varphi</span>; orange is the
   side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
   <strong>The last quantity must stay below 1.</strong> At <span class="tex">K = 180</span> it is
   <span class="tex">0.999996</span>.</figcaption>
@@ -528,7 +529,7 @@
     <span class="caps">Figure 5</span><span class="tag">C3 → C4</span>
     <span class="fig-title">Least covered mass, as the net is coarsened</span>
   </div>
-  <div class="chart">
+  <div class="chart kpress-diagram">
     <svg viewBox="0 0 700 250" role="img" aria-label="{{COARSEN_ALT}}">
       <g font-size="10" fill="var(--kpress-doc-muted)">
         <line x1="76" y1="30" x2="76" y2="190" stroke="var(--kpress-doc-muted)"/>
@@ -553,7 +554,7 @@
       </text>
     </svg>
   </div>
-  <figcaption>This shows the retained certificate is tight against its own net, not that no coarser certificate
+  <figcaption class="kpress-figcaption">This shows the retained certificate is tight against its own net, not that no coarser certificate
   exists. It measures the slope of the trade.</figcaption>
 </figure>
 <!--END:COARSENING-->
