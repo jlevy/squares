@@ -13957,18 +13957,19 @@ defects:
   consequence: >-
     No retained bound is affected: every certificate in the record was decided from frozen
     bytes by the reload step that followed, and the reload is what the record cites.
-    What it cost was measured about forty minutes after this entry was written, when the
-    container hosting the session restarted and took every running process with it. Two
-    lanes were inside the exact sweep at that moment, both running drivers this fix had
-    not yet reached, and both candidates went with them: n = 12 at 99/25, 2097 atoms and
-    mass 149987/12500, about three and a half hours in; and n = 17 at 459/100, 1184 atoms
-    and mass 423327/25000, whose margin of 0.066920 below seventeen made it all but
-    certain to verify. Neither had a file. The two lanes that survived the same restart
-    with nothing lost were the two whose checkpoints are written every round.
-    Recovery cost one linear-programming solve per lane from the surviving checkpoint --
-    the site set and rows are checkpointed, the weights are not -- to arrive again at
-    numbers both processes had already computed. That is the whole of the defect: not a
-    wrong answer, a recomputation nobody needed to do.
+    The cost is in what cannot be done while a sweep runs, and it has not yet been paid in
+    lost work. An earlier revision of this entry said it had: about forty minutes after
+    the entry was written the session's container restarted, the harness reported every
+    background task stopped, and this was recorded as having taken two candidates with it
+    -- n = 12 at 99/25, 2097 atoms, and n = 17 at 459/100, 1184 atoms. That was wrong and
+    is corrected here. What the restart stopped were the harness's own watchers; the four
+    solver processes were never children of the session and kept running throughout, and
+    `ps` showed all four still accumulating processor time. Four duplicate lanes were
+    launched against the survivors before that was checked, and were stopped.
+    The exposure the entry describes is real and unchanged: nothing is written until the
+    sweep has already passed, so a process that does die inside it loses its candidate,
+    and the cheap interval route cannot pre-screen a file that does not exist. What is not
+    yet demonstrated is a loss, and the entry should not have claimed one.
   fix: >-
     Fixed on 2026-09-04 in the parametrised driver. The candidate is written the moment it
     is rationalised, before any decision, and the exact sweep then runs on the reloaded
