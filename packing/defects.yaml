@@ -13956,11 +13956,19 @@ defects:
     atoms into 1121 under a path someone was about to read.
   consequence: >-
     No retained bound is affected: every certificate in the record was decided from frozen
-    bytes by the reload step that followed, and the reload is what the record cites. The
-    cost was in what could not be done. The n = 12 candidate at 99/25, 2097 atoms and a
-    sweep of roughly two hours, was unrecoverable for its whole duration while three other
-    lanes wanted the core; there was no way to ask the interval route whether it was worth
-    the wait.
+    bytes by the reload step that followed, and the reload is what the record cites.
+    What it cost was measured about forty minutes after this entry was written, when the
+    container hosting the session restarted and took every running process with it. Two
+    lanes were inside the exact sweep at that moment, both running drivers this fix had
+    not yet reached, and both candidates went with them: n = 12 at 99/25, 2097 atoms and
+    mass 149987/12500, about three and a half hours in; and n = 17 at 459/100, 1184 atoms
+    and mass 423327/25000, whose margin of 0.066920 below seventeen made it all but
+    certain to verify. Neither had a file. The two lanes that survived the same restart
+    with nothing lost were the two whose checkpoints are written every round.
+    Recovery cost one linear-programming solve per lane from the surviving checkpoint --
+    the site set and rows are checkpointed, the weights are not -- to arrive again at
+    numbers both processes had already computed. That is the whole of the defect: not a
+    wrong answer, a recomputation nobody needed to do.
   fix: >-
     Fixed on 2026-09-04 in the parametrised driver. The candidate is written the moment it
     is rationalised, before any decision, and the exact sweep then runs on the reloaded
@@ -13970,6 +13978,12 @@ defects:
     Freezing first is not a weaker check. The reload was already there and already decided
     the bytes; what changed is that the bytes now exist whether or not the decision
     finishes.
+    The two drivers that lost candidates carried the old ordering because they predate the
+    parametrised one and were not touched by the first fix. They are superseded rather
+    than patched: recovery from a checkpoint now goes through the rescale driver, which
+    freezes each candidate to its own path before deciding it and hands the file to
+    `devtools.decide_certificate`. A driver that cannot produce a file for that tool is a
+    driver that should not be run.
   regression: >-
     None automated -- this is a driver in the session scratchpad, not repository code, and
     the repository's own retention path is devtools.decide_certificate, which takes a path
