@@ -140,6 +140,30 @@ class Certificate:
         )
 
 
+def least_size_certified(total_mass: Fraction) -> int:
+    """The smallest ``n`` a set of atoms of this mass can certify: ``floor(mass) + 1``.
+
+    ``n`` appears in exactly one of the five conditions. ``C0``, ``C2``, ``C3``
+    and ``C4`` say nothing about it, and the covering linear program behind the
+    search does not contain it either: minimising total mass subject to every
+    admissible ``B``-square carrying mass at least 1 is a question about ``L``,
+    ``B`` and the net alone. ``C1`` is where ``n`` enters, and it only asks that
+    the mass fall below it.
+
+    So one atom set proves ``s(n) >= L`` for *every* integer ``n`` above its
+    mass, not just the one its record happens to declare, and a larger ``n`` is
+    strictly easier at the same side. That is the lever for the cases above
+    ``n = 17``: a run at a side whose covering value lands between 17 and 18
+    raises ``n = 18`` and leaves ``n = 17`` where it was.
+
+    The claim stays consistent with ``ceiling_side`` automatically. If
+    ``L > ceil(sqrt(n)) B`` then ``C4`` forces the mass to ``ceil(sqrt(n))^2 >= n``,
+    which is exactly what this function then refuses to certify.
+    """
+
+    return math.floor(total_mass) + 1
+
+
 def grid_refutation_order(n: int) -> int:
     """The least ``m`` with ``m * m >= n``: the grid that refutes a certificate.
 

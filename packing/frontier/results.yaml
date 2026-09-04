@@ -817,3 +817,17 @@ results:
       5B = 4.9885, so 229/50 still has 0.4085 of runway. Unlike n = 12, where the ceiling
       sits below the conjectured value and forecloses the case, nothing structural stops
       this one.
+      Where the next rung is worth spending on, though, is not n = 17. Of the five
+      conditions only C1 mentions n, and the covering program behind the search does not
+      contain n at all -- minimising total mass subject to every admissible B-square
+      carrying mass at least 1 is a question about L, B and the net. So one atom set
+      proves s(n) >= L for every integer n above its mass, this certificate's 16.965735
+      reaching 17, 18 and 19 directly rather than through the monotonicity step the
+      composition field records, and a larger n is strictly easier at the same side.
+      The headroom says the rest. n = 17 has 0.0956 to its best known packing at
+      4.675530; n = 18 has 0.2429 to 4.822876 and n = 19 has 0.3056 to 4.885618, both
+      still carrying this certificate's 4.58 with nothing case-specific ever proved for
+      either; and n = 20 has 0.3944 to the trivial 5, holding Nagamochi's closed-form
+      1 + sqrt(13) = 4.605551. A run at a side whose covering value lands between 17 and
+      18 raises n = 18 and leaves n = 17 where it is; one landing between 19 and 20
+      displaces a published closed form.

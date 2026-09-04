@@ -29,6 +29,7 @@ from sqpack.fractional.certificate import (
     ceiling_side,
     ceiling_side_for_net,
     grid_refutation_order,
+    least_size_certified,
     verify,
 )
 from sqpack.fractional.generate import build_site_grid, rationalise
@@ -543,3 +544,27 @@ def test_the_refuting_grid_fits_and_one_of_its_squares_starves() -> None:
     assert sum(covered) <= certificate.total_mass
     assert certificate.total_mass < order * order
     assert min(covered) < 1, "C4 would have to hold on all sixteen for the mass to reach n"
+
+
+def test_one_atom_set_certifies_every_size_above_its_mass() -> None:
+    """``n`` lives only in C1, so a certificate is not tied to the ``n`` it declares.
+
+    The n = 17 record reaches n = 18 and n = 19 through the monotonicity step
+    T-016 records, but it does not need it: its own mass is under both, so the
+    same atoms decide those cases directly. The operational consequence is the
+    one worth pinning -- a run whose covering value lands between 17 and 18
+    raises n = 18 and leaves n = 17 where it was.
+    """
+    certificate = n17_load()
+    assert least_size_certified(certificate.total_mass) == 17
+    for size in (17, 18, 19):
+        assert certificate.total_mass < size
+    # C1 is strict, so mass exactly n certifies n + 1 and not n.
+    assert least_size_certified(Fraction(17)) == 18
+    assert least_size_certified(Fraction(203, 12)) == 17
+
+    # And the two limits agree without being made to. A side above the ceiling
+    # forces the mass past n by C4, which is exactly the size this then refuses.
+    for n in (11, 12, 17, 20):
+        assert grid_refutation_order(n) ** 2 >= n
+        assert least_size_certified(Fraction(grid_refutation_order(n) ** 2)) > n
