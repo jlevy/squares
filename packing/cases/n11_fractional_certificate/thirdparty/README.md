@@ -60,7 +60,7 @@ It rebuilds the control data and compares it to the shipped file, then runs `ver
 on the certificate and on the control.
 Each run prints every condition with its numbers and ends in `VERIFIED` or `REFUSED`;
 the script exits non-zero on any refusal.
-Expect about a minute.
+Expect about half a minute.
 C4 took 22 to 27 s on the certificate and 7 to 8 s on the control with CPython 3.10
 through 3.14 on an idle core, and 39 s and 14 s in the pasted run below, on a contended
 one. The outputs are pasted verbatim below.
@@ -189,8 +189,10 @@ other form, so a decimal or a float cannot enter and be rounded.
 `verify.py` reads the file, checks the shape the theorem assumes (`n ≥ 1`, positive
 sides, non-negative weights, a net that starts at 0 and increases, the declared claim
 equal to the theorem’s conclusion), then decides C0 to C4 in that order and prints each
-with its numbers. Nothing short-circuits: a file failing C1 still has its C4 minimum
-computed, so a refusal names every failing condition.
+with its numbers. None of C0 to C4 short-circuits: a file failing C1 still has its C4
+minimum computed, so a refusal names every failing condition among them.
+The preconditions are different — a file that fails one of those is refused there and
+the conditions are not reached, because a malformed file has no conditions to decide.
 Every quantity is a `fractions.Fraction`; floats appear only in printed approximations
 beside the exact value.
 
@@ -230,8 +232,12 @@ C4 is the substance, and it is decided over the continuum of placements, not sam
 The verifier reports the exact least covered weight, the direction and the centre of a
 square that attains it, and the number of cells decided.
 The count is worth reading: a verifier that quietly decides fewer placements makes every
-certificate easier to accept, and the control below (a container too large for its
-atoms) shows this one scores the cells beyond the atoms’ reach.
+certificate easier to accept.
+The falsification row below that enlarges the container to side 4 is what shows this one
+scores the cells beyond the atoms’ reach — its least covered weight is `0`, found in a
+corner no atom can reach.
+That is not the control; the control is Massaccesi’s `n = 17` certificate, whose least
+covered weight is exactly `1`.
 
 ## The Control: Massaccesi’s Published n = 17 Certificate
 
@@ -399,7 +405,7 @@ exit status 0
 - **The reduction is proved on paper.** The argument that finitely many open cells
   decide the continuum lives in the C4 comment block of `verify.py` and in the section
   above. It is elementary, but it is the place where a wrong verifier would be wrong; the
-  control on a container too large for its atoms shows cells beyond the atoms’ reach are
+  falsification row that enlarges the container shows cells beyond the atoms’ reach are
   scored, and the cell counts are printed, but neither is a proof.
 - **Trust in the interpreter.** The decision rests on CPython’s arbitrary-precision
   integers and the `fractions` module.

@@ -5,7 +5,8 @@
 
 Any CPython 3.8 or later, nothing installed, no project environment. Exits
 non-zero if the control data does not match its published constants or if
-either certificate is refused. Expect about half a minute.
+either certificate is refused. Expect about half a minute on an idle core, and up
+to a minute on a contended one.
 
 Three steps, and the middle one is not the interesting one. Step 1 rebuilds the
 n = 17 control from the constants printed in Massaccesi's own source and checks

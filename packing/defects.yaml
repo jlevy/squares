@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 435
+count: 436
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13648,3 +13648,56 @@ defects:
     fixture both refusal tests share is now one helper.
   status: fixed
   recorded_in: packing/src/sqpack/fractional/interval.py
+- id: D-436
+  title: The third-party package misnamed its own control and refused malformed files by traceback
+  date: '2026-09-04'
+  layer: verifier
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    since the package shipped in c68c1616 on 2026-09-04, about two hours; found by an
+    adversarial review commissioned to read it as a hostile third party would
+  severity: medium
+  what: >-
+    Three statements the package made about itself were wrong. Its README twice called
+    the enlarged-container falsification row "the control" -- once when explaining why
+    the printed cell count is worth reading, once in the objections section -- but the
+    control is Massaccesi's published n = 17 certificate, whose least covered weight is
+    exactly 1. The row that demonstrates cells beyond the atoms' reach are scored is the
+    side-4 falsification, whose least weight is 0. A reader taking "control" in the
+    README's own defined sense would look for a 0 in the control's output and not find
+    one. Second, the README promised a labelled refusal for any file not of the expected
+    form, but a float where an exact rational was required, a zero direction_steps, or an
+    atom row with fewer than three entries raised ValueError, ZeroDivisionError or
+    IndexError instead. Third, "nothing short-circuits" was true of C0 to C4 but not of
+    the preconditions, which return before them.
+  consequence: >-
+    None of it can change a verdict, and the review that found them says so: exit status
+    was already 1 on every malformed file, so no false acceptance was possible, and
+    check.py still reported the step as failed. What it costs is the thing the package
+    exists for. The package's whole claim is that a stranger can decide s(11) >= 19/5
+    without trusting this project, and a stranger who reads a promise about behaviour and
+    then sees a traceback has been given a reason to doubt the parts they cannot check as
+    easily. A misnamed control is worse still, because the control is the one artifact
+    that tests the verifier rather than the certificate.
+  fix: >-
+    Fixed on 2026-09-04, in the package rather than in the prose alone. Both README
+    sentences now name the falsification row and say what the control actually is. The
+    verifier validates the atom shape and the wholeness of n and direction_steps where
+    the file is read, and its entry point catches the parse and shape errors and prints
+    "REFUSED: not a certificate of the expected shape" with the offending value; a file
+    that cannot be opened at all reports a usage error and exits 2, because that is not a
+    refusal. The short-circuit sentence now distinguishes the conditions from the
+    preconditions. Four cosmetic findings in the same review were left as they are and are
+    recorded in it: a claim string that must be in lowest terms, a zero-weight asymmetric
+    atom refused by C0, a degenerate direction that raises where it would be vacuous, and
+    disagreeing timing prose, which was aligned.
+  regression: >-
+    The four malformed files the review named -- a decimal outer_side, direction_steps
+    zero, a two-entry atom row, and n = 11.9 -- each return exit 1 with a labelled REFUSED
+    naming the field, and a missing file returns exit 2. Re-run as a stranger would, from
+    a copy outside the checkout under `env -i`, the package still verifies: the
+    certificate at 50003/50000 over 90,546,593 cells and the control at exactly 1 over
+    16,562,293, both VERIFIED, check.py exit 0.
+  status: fixed
+  recorded_in: docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md

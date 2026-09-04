@@ -64,20 +64,44 @@ def rational(text):
     return Fraction(text)
 
 
+def whole(value, field):
+    """`int()` truncates, and a truncated n or K would decide a different theorem.
+
+    A file saying `"n": 11.9` must be refused, not quietly read as eleven.
+    """
+    number = rational(value) if isinstance(value, str) else value
+    if number != int(number):
+        raise ValueError("%s must be a whole number, got %r" % (field, value))
+    return int(number)
+
+
+def atom_of(atom, index):
+    """An atom is exactly three exact rationals: x, y and weight.
+
+    Checked here rather than where it is unpacked, so a short row is refused by
+    name instead of raising from inside a condition.
+    """
+    if not isinstance(atom, (list, tuple)) or len(atom) != 3:
+        raise ValueError("atom %d must be three rationals, got %r" % (index, atom))
+    return tuple(rational(value) for value in atom)
+
+
 def load(path):
     with open(path) as handle:
         record = json.load(handle)
-    steps = int(record["direction_steps"])
+    steps = whole(record["direction_steps"], "direction_steps")
+    if steps < 1:
+        raise ValueError("direction_steps must be at least 1, got %r" % (steps,))
     limit = rational(record["angle_limit"])
     return {
         "id": str(record.get("id", "?")),
-        "n": int(record["n"]),
+        "n": whole(record["n"], "n"),
         "L": rational(record["outer_side"]),
         "B": rational(record["square_side"]),
         # The net is fixed by two numbers, T and K: t_k = T k / K. That is
         # Massaccesi's parametrisation, and it keeps every direction rational.
         "tangents": [limit * k / steps for k in range(steps + 1)],
-        "atoms": [tuple(rational(v) for v in atom) for atom in record["atoms"]],
+        "atoms": [atom_of(atom, index) for index, atom in enumerate(record["atoms"])],
         "declared": record,
     }
 
@@ -498,7 +522,20 @@ def main(argv):
             print("unknown option %s" % flag)
             return 2
     print("python %s" % sys.version.split()[0])
-    accepted, _ = decide(load(argv[1]), audit=audit, verbose=verbose)
+    try:
+        cert = load(argv[1])
+    except OSError as error:
+        # Not a refusal: the file was never read. Usage status, not verdict status.
+        print("could not open %s: %s" % (argv[1], error))
+        return 2
+    except (ValueError, TypeError, KeyError, IndexError, ArithmeticError) as error:
+        # A malformed rational, a zero `direction_steps` and a short atom row all
+        # arrive here. This file promises a labelled refusal for any form other than
+        # the one the theorem assumes, and a traceback is not one.
+        print("REFUSED: not a certificate of the expected shape: %s: %s"
+              % (type(error).__name__, error))
+        return 1
+    accepted, _ = decide(cert, audit=audit, verbose=verbose)
     return 0 if accepted else 1
 
 
