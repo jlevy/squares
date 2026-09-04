@@ -399,17 +399,18 @@ def coarsening_svg(rows: list[CoarseningRow]) -> tuple[str, str, str]:
         mass = float(row["least_mass"])
         height = min(mass, 1.0) * (base - top)
         passes = bool(row["passes"])
-        fill = 'fill="var(--doc-accent)"' if passes else 'fill="var(--doc-accent)" opacity=".3"'
+        accent = 'fill="var(--kpress-doc-accent)"'
+        fill = accent if passes else f'{accent} opacity=".3"'
         bars.append(
             f'<rect x="{x:.0f}" y="{base - height:.0f}" width="{width:.0f}" '
             f'height="{height:.0f}" {fill}/>'
         )
-        emphasis = ' fill="var(--doc-accent)" font-weight="650"' if passes else ""
+        emphasis = ' fill="var(--kpress-doc-accent)" font-weight="650"' if passes else ""
         values.append(
             f'<text x="{x + width / 2:.0f}" y="{base - height - 6:.0f}"{emphasis}>'
-            f"{mass:.4f}</text>".replace(">0.0000<", ">0<")
+            f"{mass:.5f}</text>".replace(">0.00000<", ">0<")
         )
-        tone = ' fill="var(--doc-text)"' if passes else ""
+        tone = ' fill="var(--kpress-doc-text)"' if passes else ""
         labels.append(
             f'<text x="{x + width / 2:.0f}" y="210"{tone}>K = {row["K"]}</text>'
             f'<text x="{x + width / 2:.0f}" y="226" font-size="9.5">B {row["B"]}</text>'
