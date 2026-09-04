@@ -2,7 +2,7 @@
 
 # Defect log
 
-432 defects recorded across the packing toolchain.
+433 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
-| `review` | 263 | a human or agent reading the work against a checklist |
+| `review` | 264 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
 | `inspection` | 44 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 62 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 62 of 432, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 62 of 433, and none of the 91 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 62 of 432, and none of
 | quench | 23 |
 | verifier | 5 |
 | record | 132 |
-| tooling | 154 |
+| tooling | 155 |
 | docs | 107 |
 
 ## By kind
@@ -47,6 +47,7 @@ The line worth reading twice: **the automated gate caught 62 of 432, and none of
 | bookkeeping | 157 |
 | robustness | 54 |
 | performance | 15 |
+| correctness | 1 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -669,6 +670,7 @@ This is the actionable list.
 | [D-430](packing/devtools/check_nagamochi_bounds.py) | 2026-09-04 | docs | bookkeeping |  | `review` | low | fixed | The frontier prose kept saying sixty-three open cases rest on Nagamochi after the adoption made it sixty |
 | [D-431](packing/frontier/evidence.yaml) | 2026-09-04 | record | bookkeeping |  | `review` | medium | outstanding | T-009's significance rationale compares its interval certificate against a different packing |
 | [D-432](packing/devtools/reachable_tests.py) | 2026-09-04 | tooling | robustness |  | `gate` | medium | outstanding | The push tier keeps the 900-second cap when its selector picks the whole suite |
+| [D-433](packing/src/sqpack/fractional/generate.py) | 2026-09-04 | tooling | correctness |  | `review` | medium | fixed | The certificate rationaliser floored its weights while its docstring said it rounded up |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

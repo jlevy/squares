@@ -13,6 +13,7 @@ import runpy
 from fractions import Fraction
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH, declared, load

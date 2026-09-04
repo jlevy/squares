@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 432
+count: 433
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13479,3 +13479,43 @@ defects:
     appears in the summary when the run is interrupted.
   bead: think-jzqi
   recorded_in: packing/devtools/reachable_tests.py
+- id: D-433
+  title: The certificate rationaliser floored its weights while its docstring said it rounded up
+  date: '2026-09-04'
+  layer: tooling
+  class: correctness
+  detected_by: review
+  latent_for: >-
+    since sqpack.fractional.generate was written on 2026-09-04, about four hours; found
+    the same day by the strategy review reading the function against its docstring
+  severity: medium
+  status: fixed
+  what: >-
+    `rationalise` in `packing/src/sqpack/fractional/generate.py` computed each atom's
+    integer weight as `-((-raw * scale).__ceil__())`, which is `floor(raw * scale)`, three
+    lines under a docstring that says "round up to a multiple of 1/scale" and explains
+    that rounding up "is what keeps the coverage rows valid after rationalisation". The
+    `max(units, 1)` guard beneath it masked the error on small weights, which is how it
+    survived the n = 12 certifications at 19/5 and 77/20: those happened to land on
+    weights the floor did not move.
+  consequence: >-
+    No retained result is wrong. The exact verifier decided every accepted certificate
+    and is unaffected; the bug could only weaken a candidate, never strengthen one. What
+    it did was refuse certificates the program had found. The n = 12 candidate at side
+    39/10 converged at 11.921565 with 0.078 of margin, rationalised to 20591/1728 =
+    11.916088 -- below the linear program's own optimum, which is the signature -- and
+    was refused at least cell mass 3395/3456 = 0.98235, the whole deficit being
+    round-down loss. The n = 17, 18 and 20 searches launched with the flawed step were
+    stopped and relaunched after the fix rather than read as negatives.
+  fix: >-
+    `units = math.ceil(raw * scale)`, with the comment stating why floor is exactly
+    wrong here: every coverage row the solver leaves tight sits at exactly 1. Committed
+    with the strategy review's finding the same hour. A first attempt at the same fix,
+    made from the n = 12 run's own refusal at scale 576 earlier in the day, printed its
+    success and never reached the committed file; the review found the line unchanged.
+  regression: >-
+    `tests/test_fractional_certificate.py::test_rationalise_rounds_weights_up_never_down`
+    feeds three weights the floor gets wrong (5.3, 0.5 and 1000.001 units) and asserts
+    each lands on the next multiple above.
+  bead: think-yw5g
+  recorded_in: packing/src/sqpack/fractional/generate.py
