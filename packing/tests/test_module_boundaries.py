@@ -329,6 +329,12 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
             "test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net",
             "test_massaccesi_n17_reproduces_the_published_bound_on_the_full_doubled_net",
         },
+        # The retention gate's own positive control: both routes on a retained rung,
+        # which is the exact sweep's cost plus the interval route's. Its refusals run
+        # in the fast tier beside it, since a refusal is decided before either sweep.
+        "test_decide_certificate.py": {
+            "test_a_retained_rung_passes_both_routes_and_they_agree",
+        },
         "test_exact_jets.py": {
             "test_n5_wall_and_contact_gradients_match_authoritative_source_rows",
         },
