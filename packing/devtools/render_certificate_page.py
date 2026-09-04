@@ -478,10 +478,27 @@ def shared_substitutions(static: Path, headline: Facts, default: Facts) -> dict[
     }
 
 
+def certificate_switch(facts: list[Facts], headline: Facts) -> str:
+    """The switch every figure head carries: one button per certificate."""
+    buttons = []
+    for f in facts:
+        rank = "Tighter" if f is headline else "Looser"
+        bound = f"{f.outer_side.numerator}/{f.outer_side.denominator}"
+        buttons.append(
+            f'<button type="button" data-cert="{slug(f)}" aria-pressed="false">'
+            f"{rank}: s({f.n}) ≥ {bound}</button>"
+        )
+    return (
+        '<span class="cert-toggle" role="group" aria-label="Certificate">'
+        + "".join(buttons)
+        + "</span>"
+    )
+
+
 def certificate_substitutions(
-    facts: Facts, *, headline: Facts, default: Facts
+    facts: Facts, *, headline: Facts, default: Facts, toggle: str
 ) -> dict[str, str]:
-    """Values for one certificate's article, tab and script."""
+    """Values for one certificate's article, switch and script."""
     n = facts.n
     total = facts.total_mass
     shortfall = n - total
@@ -501,7 +518,7 @@ def certificate_substitutions(
         halving_b = halving_mass = ""
     values_map = {
         "SLUG": slug(facts),
-        "TAB_ROLE": "tighter" if facts is headline else "simpler",
+        "CERT_TOGGLE": toggle,
         "ATOMS": atom_array(facts),
         "ID": facts.identifier,
         "N": str(n),
@@ -574,7 +591,7 @@ def fill(block: str, values: dict[str, str], *, where: str) -> str:
 def expand(template: str, name: str, per_certificate: list[dict[str, str]]) -> str:
     """Repeat a marked block once per certificate, in order, filled for each.
 
-    The article, its script and its tab are each one block in the template,
+    The article and its script are each one block in the template,
     written once with `{{SLUG}}` in every id, and this stamps them out.
     """
     pattern = re.compile(rf"<!--BEGIN:{name}-->(.*?)<!--END:{name}-->", re.DOTALL)
@@ -603,12 +620,14 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
     if len({slug(f) for f in facts}) != len(facts):
         raise SystemExit("two certificates share an outer side; their ids would collide")
     headline = max(facts, key=lambda f: f.outer_side)
+    toggle = certificate_switch(facts, headline)
     per_certificate = [
-        certificate_substitutions(f, headline=headline, default=facts[0]) for f in facts
+        certificate_substitutions(f, headline=headline, default=facts[0], toggle=toggle)
+        for f in facts
     ]
 
     page = TEMPLATE.read_text(encoding="utf-8")
-    for name in ("TAB", "ARTICLE", "SCRIPT"):
+    for name in ("ARTICLE", "SCRIPT"):
         page = expand(page, name, per_certificate)
     return fill(page, shared_substitutions(kpress_static(), headline, facts[0]), where="page")
 
