@@ -2,7 +2,7 @@
 
 **Review date:** 2026-09-04\
 **Pull request:** [#78](https://github.com/jlevy/squares/pull/78)\
-**Reviewed parent head:** `430e7e09fa65bef8d5ea32e59caee180ed4f4bf1`\
+**Reviewed parent head:** `44e9c4b40f8c670522b8294780f40f7d7660a92d`\
 **Base:** `9d5eae0f5ecfcf3cd417a345eb6c55b1f9ac4def` (`main`)\
 **Remediation branch:** `codex/pr78-s11-adversarial-review`\
 **Certificate SHA-256:**
@@ -23,7 +23,7 @@ Those are different decisions:
 | Does a method-distinct computation confirm C4? | **Accept on this stack** | The interval branch-and-bound certifies all 361 directions with no stalled or budget-exhausted box and encloses the minimum exactly at `4001/4000`. Samples, unsafe integer magnitudes, and below-one enclosures cannot produce acceptance. |
 | Is the historical claim established? | **Apparently novel, high confidence** | The search found no public lower bound after Stromquist 2003 that reaches `381/100`, but it cannot establish absolute priority over unindexed or unpublished work. |
 | Are the upstream commit’s frozen-byte claims reliable? | **No; repaired here** | The retained file hashes to `b121…e6a`, not the `503c…7cd6` named in the introducing commit. Both full decisions were rerun against `b121…e6a`; the old attestation is discarded. |
-| Is the reviewed parent ready to merge unchanged? | **Request changes** | Its generic and interval verifier boundaries, retained declarations, falsification gate, provenance language, and validation classification all needed repairs. This stacked branch supplies them and records the result at C5 after validation. |
+| Is the reviewed parent ready to merge unchanged? | **Request changes** | Its generic and interval verifier boundaries, retained declarations, retention gate, falsification gate, provenance language, and validation classification all needed repairs. This stacked branch supplies them and records the result at C5 after validation. |
 
 The most important distinction is between the parent implementation and the concrete
 instance. The generic implementation was unsound; the specific instance was sound.
@@ -36,17 +36,18 @@ This review concentrates on T-018, not PR 78’s separate `n = 12` result.
 It checked the mathematical implication, the exact bytes retained for `n = 11`, the
 continuum-to-finite reduction, replay and validation boundaries, method provenance, and
 the novelty claim. The PR advanced repeatedly during the audit, from `9b85236b` through
-`bdf63b21`, `6fc71ce9`, `31775018`, `b77e78d2`, and `9134ee41`, ending at `430e7e09`.
-Commit `6fc71ce9` replaced the `19/5` target artifact with a larger `381/100`
-certificate, so the concrete validation restarted on the new bytes.
+`bdf63b21`, `6fc71ce9`, `31775018`, `b77e78d2`, `9134ee41`, `430e7e09`, and `6196480d`,
+ending at `44e9c4b4`. Commit `6fc71ce9` replaced the `19/5` target artifact with a
+larger `381/100` certificate, so the concrete validation restarted on the new bytes.
 The later commits strengthened the separate `n = 12` and `n = 17` results, supplied the
 missing full-net `n = 17` interval control, added a finite-certificate reach theorem and
-generated reach table, and amended the project process document; they did not change the
-reviewed `n = 11` bytes or its core argument.
-The reach theorem was in scope because its first prose interpretation overstated a
-finite-certificate ceiling as a method-wide impossibility; F14 records the correction.
-The self-contained verification package, interval-certified branch-and-bound checkpoint,
-and retained `n = 17` certificates were included before the verdict was frozen.
+generated reach table, amended the project process document, and added a general
+certificate-retention command; they did not change the reviewed `n = 11` bytes or its
+core argument. The reach theorem was in scope because its first prose interpretation
+overstated a finite-certificate ceiling as a method-wide impossibility; F14 records the
+correction. The self-contained verification package, interval-certified branch-and-bound
+checkpoint, retained `n = 17` certificates, and late retention command were included
+before the verdict was frozen.
 The other `n = 17`--`19` frontier movement was outside this review’s mathematical scope
 except where the earlier published-value `n = 17` certificate served as a control.
 
@@ -386,6 +387,100 @@ net stop short of `π/4` and fail the theorem’s endpoint premise.
 records the prose error.
 No certificate value or computation changed.
 
+### F16: High integration defect, fixed here: the moving parent reused D-441
+
+The parent added a candidate-retention defect as D-441 after this stack had already
+accepted D-441 through D-453. A literal merge produced two meanings for one stable
+identifier and incompatible generated counts.
+
+**Resolution:** the older stack identifiers remain stable and the newer parent entry is
+D-454, as [`conventions.md`](../../../conventions.md) requires for a merge collision.
+The source and generated views were regenerated from the combined 461-entry log.
+D-455 records the collision itself.
+
+### F17: Critical in the late parent, fixed here: RETAINABLE did not bind the declared theorem
+
+The new `decide_certificate` command recomputed the certificate geometry, but it never
+inspected `claim`, allowed `total_mass` and `least_cell_mass` to be absent, and parsed
+`n` and `direction_steps` with `int(...)`. A file whose only change was
+`"claim": "s(11) >= 4"`, one with deleted summaries, or one containing values such as
+`11.9` and `180.9` could reach `RETAINABLE`. Malformed input escaped by traceback and
+stopped the remaining paths in the batch.
+
+This is verdict-bearing declaration drift: the two expensive computations can decide one
+certificate while the retained bytes tell a reader they prove another theorem.
+
+**Resolution:** the loader now rejects duplicate keys, JSON decimals, non-string
+rationals, coercive integer types, malformed atom rows, and missing required fields.
+It requires the canonical claim and total mass to match the reconstructed object,
+requires the least mass in full mode, and converts each malformed path into a refusal
+without aborting later paths.
+D-456 and the hostile loader matrix record the repair.
+
+### F18: High in the late parent, fixed here: known preflight failures still ran both sweeps
+
+The command accumulated an impossible-side or excessive-mass failure, then ran the exact
+event sweep and interval branch-and-bound before printing the refusal.
+Two small known failures each took about eight seconds; the exact route on larger
+candidates can take hours.
+The test named “before any sweep runs” asserted only output text.
+
+**Resolution:** every preflight problem now returns before either route.
+A full decision runs the interval rejection route first and starts the exact sweep only
+after receiving an accepted, unstalled, point enclosure.
+The regressions replace both route functions with exceptions on preflight and replace
+the exact route with an exception on interval refusal or an unusable enclosure.
+D-457 records the cost defect.
+
+### F19: Medium in the late parent, fixed here: the two-route conjunction lacked negative controls
+
+The only full-mode test was a positive retained certificate.
+Deleting the interval refusal, exact refusal, missing-enclosure, nonzero-width,
+route-disagreement, declared- minimum, or multi-path exit-status branches left that test
+green.
+
+**Resolution:** injected negative verdicts now exercise every branch, including an
+interval refusal that must prevent the exact route from starting and a malformed first
+path that must not hide a second refusal.
+D-458 records the control gap.
+
+### F20: Medium record contradiction, fixed here: the retention defect claimed a loss it disproved
+
+The corrected parent narrative explains that the solver processes survived a container
+restart, yet its title still said a kill “lost the candidate” and its fix still referred
+to “the two drivers that lost candidates.”
+It also claimed corrected scratchpad-driver wiring that is not retained in the
+repository.
+
+**Resolution:** D-454 now describes the loss conditionally and separates the
+uninspectable scratchpad change from the durable repository containment: retained work
+must first write a file and pass that path to the retention command.
+D-459 records the narrative correction.
+
+### F21: Low assurance overstatement, fixed here: the retention routes were called model-independent
+
+The retention-command docstring said the exact and interval routes “share no modelling
+assumption.” Both consume the same `Certificate` representation and implement the same
+C1-C3 theorem contract.
+Their valuable independence is narrower: event-cell enumeration and interval
+branch-and-bound make method-distinct C4 decisions with different failure modes.
+
+**Resolution:** the docstring now states both the shared contract and the distinct C4
+methods, and a regression pins that boundary.
+D-460 records the overstatement.
+
+### F22: Low robustness defect, fixed here: two long phase results were still buffered
+
+The final parent commit added `flush=True` to most progress output but missed the exact
+and interval result lines.
+Under captured stdout a finished phase could therefore remain invisible throughout the
+next multi-minute computation, contrary to the commit’s claim that every decision-path
+print flushed.
+
+**Resolution:** every status and verdict print now flushes, and a fake positive full run
+records every print call and requires the flag.
+D-461 records the repair.
+
 ## Frozen hypotheses and outcomes
 
 | ID | Pre-registered hypothesis | Outcome |
@@ -394,7 +489,7 @@ No certificate value or computation changed.
 | H2 | The retained bytes satisfy every explicit and implicit proof premise. | **Pass.** All 1,121 current weights are strictly positive, in addition to C0-C4. |
 | H3 | A source-distinct exact checker obtains mass at least one over all centres and all 181 net directions. | **Pass.** It obtains `4001/4000` exactly on the current bytes. |
 | H4 | The declared literature search finds no lower bound after Stromquist 2003 that reaches the proposed value. | **Pass at apparent-novelty scope.** Searches for both `19/5` and `381/100` located no stronger public result; absolute priority remains unproved. |
-| H5 | Replay and validation gates bind the retained claims and refuse targeted corruptions. | **Fail on the parent; pass after remediation.** The stack refuses signed weights and partial-net or below-one interval verdicts, bounds interval work and integer arithmetic, binds all retained declarations, gives falsifications executable oracles, strictly parses the portable record, and separates exhaustive decisions from the fast tier. |
+| H5 | Replay and validation gates bind the retained claims and refuse targeted corruptions. | **Fail on the parent; pass after remediation.** The stack refuses signed weights and partial-net or below-one interval verdicts, bounds interval work and integer arithmetic, binds all retained and retention-command declarations, gives falsifications executable oracles, strictly parses portable records, and separates exhaustive decisions from the fast tier. |
 
 The mathematical claim met the acceptance rule only after the missing nonnegative
 premise was made explicit and checked against the concrete bytes.
@@ -672,6 +767,9 @@ line. It should not imply that weighted resource counting itself began in 2026.
 7. [`TUTORIAL.md`](../../../TUTORIAL.md) now introduces atoms, weighted mass, the
    counting contradiction, both finite reductions, and the two places nonnegativity is
    essential before sending a reader to the proof and checker.
+8. The late parent’s general retention command now binds exact JSON types and every
+   declared theorem value, refuses before expensive work where possible, requires both
+   C4 routes in full mode, and has negative controls for every decision edge.
 
 ### Stronger evidence after this review
 

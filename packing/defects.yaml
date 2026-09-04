@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 453
+count: 461
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14339,3 +14339,225 @@ defects:
     `tests/test_n11_thirdparty_verify.py::test_minimal_checker_binds_the_retained_bytes_and_closed_form_facts`
     fixes the positive exact slack and therefore the direction of the comparison.
   recorded_in: packing/devtools/render_certificate_reach.py
+- id: D-454
+  title: The generator could lose a candidate by deciding it before writing it
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: inspection
+  latent_for: >-
+    from the first generator run on 2026-09-04 through every rung this block climbed;
+    noticed only when a candidate appeared whose exact decision would take about two
+    hours and the question "what happens if I stop this" had an answer nobody wanted
+  severity: medium
+  what: >-
+    The column-generation drivers rationalised their solution, ran the exact event-cell
+    sweep on the in-memory object, and wrote the JSON only inside `if v.accepted`. So the
+    bytes existed only after the most expensive step in the pipeline had already passed.
+    Two consequences follow from that ordering and neither is about correctness.
+    A run killed inside the sweep loses the candidate outright -- the site set survives in
+    the checkpoint, but recovering the atoms means re-solving the linear program, twenty
+    minutes or more, to arrive at weights the process had already computed.
+    And the cheap route cannot run first. The interval decision settles a certificate in
+    tens of seconds where the exact sweep takes minutes to hours, and it is enough to
+    reject; but it needs a file, and there was no file until the slow route had finished.
+    The ordering also contradicted the project's own retention rule, which says to freeze
+    the bytes and decide those, never the object in memory -- the rule that exists because
+    a generator once rewrote its output between verification and retention, turning 1032
+    atoms into 1121 under a path someone was about to read.
+  consequence: >-
+    No retained bound is affected: every certificate in the record was decided from frozen
+    bytes by the reload step that followed, and the reload is what the record cites.
+    The cost is in what cannot be done while a sweep runs, and it has not yet been paid in
+    lost work. An earlier revision of this entry said it had: about forty minutes after
+    the entry was written the session's container restarted, the harness reported every
+    background task stopped, and this was recorded as having taken two candidates with it
+    -- n = 12 at 99/25, 2097 atoms, and n = 17 at 459/100, 1184 atoms. That was wrong and
+    is corrected here. What the restart stopped were the harness's own watchers; the four
+    solver processes were never children of the session and kept running throughout, and
+    `ps` showed all four still accumulating processor time. Four duplicate lanes were
+    launched against the survivors before that was checked, and were stopped.
+    The exposure the entry describes is real and unchanged: nothing is written until the
+    sweep has already passed, so a process that does die inside it loses its candidate,
+    and the cheap interval route cannot pre-screen a file that does not exist. What is not
+    yet demonstrated is a loss, and the entry should not have claimed one.
+  fix: >-
+    Fixed on 2026-09-04 in the parametrised driver. The candidate is written the moment it
+    is rationalised, before any decision, and the exact sweep then runs on the reloaded
+    file rather than on the object; `least_cell_mass` is added to the record afterwards,
+    when there is a verdict to record. The run prints the frozen path and points at
+    `devtools.decide_certificate`, which is the gate the file then has to pass.
+    Freezing first is not a weaker check. The reload was already there and already decided
+    the bytes; what changed is that the bytes now exist whether or not the decision
+    finishes.
+    The older scratchpad drivers carried the old ordering because they predated the
+    parametrised one. They were not retained in this repository, so their wiring cannot
+    be verified here. The durable containment is the repository gate: retained work must
+    freeze each candidate to its own path and hand that path to
+    `devtools.decide_certificate`. A driver that cannot produce a file for that tool is a
+    driver that should not be used for retained work.
+  regression: >-
+    None automated -- this is a driver in the session scratchpad, not repository code, and
+    the repository's own retention path is devtools.decide_certificate, which takes a path
+    and cannot be handed an in-memory object at all. That tool is the durable form of the
+    rule; the driver now hands it a file.
+  status: fixed
+  recorded_in: packing/devtools/decide_certificate.py
+- id: D-455
+  title: The moving parent and its stacked review assigned D-441 to different defects
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: drift_check
+  latent_for: minutes
+  severity: high
+  status: fixed
+  what: >-
+    The parent branch added a new D-441 while this stacked review had already recorded
+    D-441 through D-453. A literal merge produced two definitions for the same stable
+    identifier.
+  consequence: >-
+    Generated counts and links could refer to the wrong defect, and either side's history
+    would become ambiguous after merge.
+  fix: >-
+    Preserve the older accepted stack identifiers and renumber the newer parent entry to
+    D-454, following the collision rule in conventions.md. Regenerate every derived view.
+  regression: packing/src/sqpack/cli/validate.py checks defect identity, count and generated views
+  recorded_in: conventions.md
+- id: D-456
+  title: The retention gate could label bytes RETAINABLE without validating their declared theorem
+  date: '2026-09-04'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one parent delta
+  severity: critical
+  status: fixed
+  what: >-
+    `decide_certificate` coerced `n` and `direction_steps`, ignored `claim`, and treated
+    `total_mass` and `least_cell_mass` as optional. Changing only the claim to
+    `s(11) >= 4`, deleting summaries, or supplying lossy numeric types could still end in
+    `RETAINABLE`; malformed JSON escaped by traceback and aborted a multi-file batch.
+  consequence: >-
+    The expensive geometric routes could decide one object while the frozen file told a
+    reader it established a different theorem. This recreated the declaration-drift
+    boundary already closed in the case-specific replay.
+  fix: >-
+    Parse duplicate-key-free JSON with exact rational strings and genuine JSON integers;
+    require and compare the theorem claim and total mass, require the least mass in full
+    mode, and turn per-path format errors into refusal while continuing the batch.
+  regression: >-
+    tests/test_decide_certificate.py covers false and missing declarations, duplicate
+    keys, lossy integers, malformed multi-path input and declared-value disagreement
+  recorded_in: packing/devtools/decide_certificate.py
+- id: D-457
+  title: Decisive retention preflight failures still paid for both certificate sweeps
+  date: '2026-09-04'
+  layer: tooling
+  class: performance
+  detected_by: review
+  latent_for: one parent delta
+  severity: high
+  status: fixed
+  what: >-
+    The command accumulated invalid mass and impossible-side failures but invoked the
+    exact and interval verifiers before printing them. A test titled "before any sweep"
+    checked only the final text, not whether either verifier ran.
+  consequence: >-
+    An invalid candidate could consume minutes or hours after the command already knew it
+    was unusable, defeating the reason the retention gate exists as a separate tool.
+  fix: >-
+    Return immediately after preflight refusal. In full mode run the interval rejection
+    route first and invoke the exact event sweep only after the interval result is fit for
+    comparison.
+  regression: >-
+    tests/test_decide_certificate.py patches both routes to raise on preflight and patches
+    the exact route to raise after interval refusal or an unusable enclosure
+  recorded_in: packing/devtools/decide_certificate.py
+- id: D-458
+  title: The two-route retention gate had no negative wiring controls
+  date: '2026-09-04'
+  layer: tooling
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: one parent delta
+  severity: medium
+  status: fixed
+  what: >-
+    Its only two-route test was a positive retained rung. Removing the exact refusal,
+    interval refusal, missing or wide enclosure, disagreement, or CLI aggregation branch
+    left the suite green.
+  consequence: >-
+    The gate's central conjunction could silently weaken even while its expensive
+    positive control continued to pass.
+  fix: >-
+    Add injected negative verdicts for every branch and exercise mixed malformed paths
+    through the command entry point.
+  regression: tests/test_decide_certificate.py::test_an_interval_refusal_stops_before_the_exact_sweep and adjacent decision-matrix tests
+  recorded_in: packing/tests/test_decide_certificate.py
+- id: D-459
+  title: The candidate-retention defect said work was lost after documenting that it survived
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: two revisions of one parent defect
+  severity: medium
+  status: fixed
+  what: >-
+    D-454's corrected consequence said all solver processes survived, while its title and
+    fix still called them "the two drivers that lost candidates" and claimed unretained
+    scratchpad wiring as a repository-verifiable repair.
+  consequence: >-
+    The log contradicted its own evidence and overstated what a reviewer could reproduce
+    from the repository.
+  fix: >-
+    Describe the loss as conditional, remove the contradictory phrase, and distinguish
+    the manually changed scratchpad from the durable path-based repository gate.
+  regression: none -- this is a corrected historical narrative
+  recorded_in: packing/defects.yaml
+- id: D-460
+  title: The retention gate called two C4 implementations independent mathematical models
+  date: '2026-09-04'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one parent delta
+  severity: low
+  status: fixed
+  what: >-
+    The module said the exact and interval routes shared no modelling assumption. They
+    share the Certificate representation and C1-C3 theorem contract; what differs is the
+    C4 decision method.
+  consequence: >-
+    Readers could mistake useful implementation diversity for fully source-distinct
+    mathematical validation.
+  fix: >-
+    State the shared contract and limit the independence claim to the event-cell and
+    interval branch-and-bound C4 implementations and their different failure modes.
+  regression: tests/test_decide_certificate.py::test_the_gate_describes_its_independence_boundary
+  recorded_in: packing/devtools/decide_certificate.py
+- id: D-461
+  title: Two long retention-gate phases could still leave piped output buffered
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: one parent commit
+  severity: low
+  status: fixed
+  what: >-
+    A follow-up parent commit flushed most status lines but omitted the exact and interval
+    result prints. With stdout captured, a completed phase could remain invisible during
+    the next multi-minute computation.
+  consequence: >-
+    A healthy gate remained indistinguishable from a wedged process at the two messages
+    that mattered most.
+  fix: >-
+    Flush every decision-path print, including both verifier result lines.
+  regression: tests/test_decide_certificate.py::test_every_positive_decision_message_is_flushed
+  recorded_in: packing/devtools/decide_certificate.py

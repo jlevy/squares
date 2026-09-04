@@ -118,7 +118,7 @@ tests only show that the instrument agrees with the cases you already believed.
 
 **Read the evidence, not a reconstruction of it.** Every error this method has recorded
 is a variant of one move: substituting a plausible reading for the number that was
-available. Three from a single block, none of them subtle in hindsight.
+available. Four from a single block, none of them subtle in hindsight.
 
 A certificate’s mass was read as the covering value at its side.
 It is only an upper bound on it — a better certificate carries less, which is what
@@ -138,11 +138,29 @@ long log, while the end carries only the step name.
 Every fetch was a tail.
 Hours went to guessing at a failing test whose name was in the file the whole time.
 
-The tell is the same in all three: a number was *inferred* when it could have been
-*read*. Before asserting what a run showed, what a check did, or what a value means,
-find the line that says it.
+A fourth, from the same block, is the one that got furthest before it was caught.
+The harness reported that the session’s container had restarted and that every
+background task was stopped.
+That was read as the four solver lanes having died — plausible, and false.
+The lanes were never children of the session: what stopped were the harness’s own
+watchers, and `ps` would have shown all four still accumulating processor time.
+Instead, four duplicate lanes were launched against the survivors, a defect entry was
+amended to say two candidates had been lost, and the amendment was committed and pushed
+before anyone ran the one command that could have checked it.
+The block’s own standing instructions said, in as many words, that an agent dying does
+not kill its compute and to check `ps` before assuming anything is lost.
+
+The tell is the same in all four: a number or a fact was *inferred* when it could have
+been *read*. Before asserting what a run showed, what a check did, what a value means,
+or what is still alive, find the line that says it.
 When the line is missing, say the thing is unknown rather than supplying the most likely
 version of it — an unknown is cheap to carry and a wrong reconstruction costs the block.
+
+The fourth adds a rider the first three did not need.
+A report about *the machinery* is not a report about the work: a watcher, a monitor, a
+task list and a process are four different things, and the one that told you it stopped
+is rarely the one you care about.
+When a status message and a `ps` line disagree, the `ps` line wins.
 
 ## Guards for unattended running
 
