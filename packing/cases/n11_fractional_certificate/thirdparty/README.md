@@ -475,10 +475,11 @@ exit status 0
   The repository now also decides C4 by interval arithmetic with directed rounding —
   branch and bound over boxes of centres, where an atom counts for a box only if its
   coverage rectangle contains the whole box, so the count is a lower bound by
-  construction. There is no event grid, no difference array and no polygon clipping, so
-  it shares no modelling assumption with the sweep, and it decides C4 on the doubled net
-  (`θ_k` and `π/2 − θ_k`, 361 directions), which means it never invokes the reflection
-  argument of step 1 and does not need C0 at all.
+  construction. There is no event grid, no difference array and no polygon clipping.
+  It shares the `Certificate` representation and C1-C3 premises with the sweep but makes
+  a method-distinct C4 decision, and it decides C4 on the doubled net (`θ_k` and
+  `π/2 − θ_k`, 361 directions), which means it never invokes the reflection argument of
+  step 1 and does not need C0 at all.
   Run on *this file’s bytes* — SHA-256
   `60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`, the hash in the
   table above — it certifies all 361 directions in 1,195,755 boxes with none stalled, in

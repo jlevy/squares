@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 461
+count: 463
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14396,20 +14396,16 @@ defects:
     freeze each candidate to its own path and hand that path to
     `devtools.decide_certificate`. A driver that cannot produce a file for that tool is a
     driver that should not be used for retained work.
-  regression: >-
-    None automated -- this is a driver in the session scratchpad, not repository code, and
-    the repository's own retention path is devtools.decide_certificate, which takes a path
-    and cannot be handed an in-memory object at all. That tool is the durable form of the
-    rule; the driver now hands it a file.
+  regression: none
   status: fixed
-  recorded_in: packing/devtools/decide_certificate.py
+  recorded_in: docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md
 - id: D-455
   title: The moving parent and its stacked review assigned D-441 to different defects
   date: '2026-09-04'
   layer: record
   class: bookkeeping
   direction: neutral
-  detected_by: drift_check
+  detected_by: review
   latent_for: minutes
   severity: high
   status: fixed
@@ -14439,7 +14435,9 @@ defects:
     `decide_certificate` coerced `n` and `direction_steps`, ignored `claim`, and treated
     `total_mass` and `least_cell_mass` as optional. Changing only the claim to
     `s(11) >= 4`, deleting summaries, or supplying lossy numeric types could still end in
-    `RETAINABLE`; malformed JSON escaped by traceback and aborted a multi-file batch.
+    `RETAINABLE`; malformed or oversized exact inputs could escape by traceback,
+    diagnostic float formatting could overflow before a refusal was printed, and an
+    unbounded direction count could allocate a tuple before any gate ran.
   consequence: >-
     The expensive geometric routes could decide one object while the frozen file told a
     reader it established a different theorem. This recreated the declaration-drift
@@ -14447,10 +14445,13 @@ defects:
   fix: >-
     Parse duplicate-key-free JSON with exact rational strings and genuine JSON integers;
     require and compare the theorem claim and total mass, require the least mass in full
-    mode, and turn per-path format errors into refusal while continuing the batch.
+    mode, bound rational text and collection counts before expansion, keep diagnostic
+    floats non-verdict-bearing, and turn every per-path format error into refusal while
+    continuing the batch.
   regression: >-
     tests/test_decide_certificate.py covers false and missing declarations, duplicate
-    keys, lossy integers, malformed multi-path input and declared-value disagreement
+    keys, lossy integers, oversized rationals and diagnostics, bounded direction counts,
+    malformed multi-path input and declared-value disagreement
   recorded_in: packing/devtools/decide_certificate.py
 - id: D-457
   title: Decisive retention preflight failures still paid for both certificate sweeps
@@ -14463,18 +14464,23 @@ defects:
   status: fixed
   what: >-
     The command accumulated invalid mass and impossible-side failures but invoked the
-    exact and interval verifiers before printing them. A test titled "before any sweep"
-    checked only the final text, not whether either verifier ran.
+    exact and interval verifiers before printing them. Unsupported symmetry and failed
+    C2 or C3 conditions were not preflighted at all, and even an interval point enclosure
+    that already contradicted `least_cell_mass` still launched the exact sweep. A test
+    titled "before any sweep" checked only the final text, not whether either verifier
+    ran.
   consequence: >-
     An invalid candidate could consume minutes or hours after the command already knew it
     was unusable, defeating the reason the retention gate exists as a separate tool.
   fix: >-
-    Return immediately after preflight refusal. In full mode run the interval rejection
-    route first and invoke the exact event sweep only after the interval result is fit for
-    comparison.
+    Reuse the exact verifier's shared C0-C3 condition function and return immediately
+    after any cheap refusal. In full mode run the interval rejection route first and
+    invoke the exact event sweep only after the interval result is fit for comparison and
+    agrees with the declared least mass.
   regression: >-
-    tests/test_decide_certificate.py patches both routes to raise on preflight and patches
-    the exact route to raise after interval refusal or an unusable enclosure
+    tests/test_decide_certificate.py patches both routes to raise for declaration,
+    ceiling and C0-C3 preflights, then patches the exact route to raise after interval
+    refusal, unusable enclosure or declared-minimum disagreement
   recorded_in: packing/devtools/decide_certificate.py
 - id: D-458
   title: The two-route retention gate had no negative wiring controls
@@ -14494,9 +14500,11 @@ defects:
     The gate's central conjunction could silently weaken even while its expensive
     positive control continued to pass.
   fix: >-
-    Add injected negative verdicts for every branch and exercise mixed malformed paths
-    through the command entry point.
-  regression: tests/test_decide_certificate.py::test_an_interval_refusal_stops_before_the_exact_sweep and adjacent decision-matrix tests
+    Add injected negative verdicts for the core conjunction branches and exercise mixed
+    malformed paths through the command entry point.
+  regression: >-
+    tests/test_decide_certificate.py::test_an_interval_refusal_stops_before_the_exact_sweep
+    and adjacent decision-matrix tests
   recorded_in: packing/tests/test_decide_certificate.py
 - id: D-459
   title: The candidate-retention defect said work was lost after documenting that it survived
@@ -14517,7 +14525,7 @@ defects:
   fix: >-
     Describe the loss as conditional, remove the contradictory phrase, and distinguish
     the manually changed scratchpad from the durable path-based repository gate.
-  regression: none -- this is a corrected historical narrative
+  regression: none
   recorded_in: packing/defects.yaml
 - id: D-460
   title: The retention gate called two C4 implementations independent mathematical models
@@ -14531,14 +14539,16 @@ defects:
   status: fixed
   what: >-
     The module said the exact and interval routes shared no modelling assumption. They
-    share the Certificate representation and C1-C3 theorem contract; what differs is the
-    C4 decision method.
+    share the Certificate representation and C1-C3 premises; what differs is the C4
+    decision method. The interval route does not require C0 because it checks the doubled
+    net directly.
   consequence: >-
     Readers could mistake useful implementation diversity for fully source-distinct
     mathematical validation.
   fix: >-
     State the shared contract and limit the independence claim to the event-cell and
-    interval branch-and-bound C4 implementations and their different failure modes.
+    interval branch-and-bound C4 implementations and their different failure modes in
+    both the command and the synopsis.
   regression: tests/test_decide_certificate.py::test_the_gate_describes_its_independence_boundary
   recorded_in: packing/devtools/decide_certificate.py
 - id: D-461
@@ -14560,4 +14570,57 @@ defects:
   fix: >-
     Flush every decision-path print, including both verifier result lines.
   regression: tests/test_decide_certificate.py::test_every_positive_decision_message_is_flushed
+  recorded_in: packing/devtools/decide_certificate.py
+- id: D-462
+  title: An interval-domain refusal could abort the retention batch by exception
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: one parent delta
+  severity: medium
+  status: fixed
+  what: >-
+    The interval verifier deliberately raised ordinary ValueError exceptions on unsafe
+    integer scales and invalid certificate domains. The retention command either let
+    those expected non-decisions abort a batch or had to catch a built-in class also used
+    by internal programming errors.
+  consequence: >-
+    One unusable candidate could terminate a multi-file retention run before later paths
+    were examined, despite the command otherwise aggregating per-path verdicts.
+  fix: >-
+    Give documented interval input failures their own IntervalInputError type, translate
+    exact-to-float overflow at the input-enclosure boundary, and convert only that type
+    into a labeled refusal. Unexpected ValueError and OverflowError exceptions from
+    either implementation remain visible as programming failures.
+  regression: >-
+    tests/test_decide_certificate.py::test_an_interval_decision_error_is_a_refusal_before_exact,
+    test_out_of_range_coordinates_are_a_per_path_interval_refusal, and
+    test_an_unexpected_interval_error_remains_visible
+  recorded_in: packing/devtools/decide_certificate.py
+- id: D-463
+  title: RETAINABLE was not bound to the bytes still present after the sweeps
+  date: '2026-09-04'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one parent delta
+  severity: critical
+  status: fixed
+  what: >-
+    The command read a mutable path once and then spent minutes or hours deciding the
+    resulting in-memory certificate. If another process rewrote that path during either
+    sweep, it could print RETAINABLE although the current bytes had never been checked.
+  consequence: >-
+    This reopened the generator-rewrite boundary the command's own docstring said it
+    closed: a pathname could appear approved while naming a different claim or atom set.
+  fix: >-
+    Retain the initial bytes, reread the path after the interval decision and again after
+    the exact decision, refuse any change or failed reread, and print the SHA-256 of the
+    unchanged accepted bytes so the verdict has an immutable identity.
+  regression: >-
+    tests/test_decide_certificate.py::test_rewriting_the_path_during_a_sweep_prevents_retention,
+    test_rewriting_the_path_during_the_exact_sweep_prevents_retention, and
+    test_a_positive_full_decision_prints_the_accepted_digest
   recorded_in: packing/devtools/decide_certificate.py

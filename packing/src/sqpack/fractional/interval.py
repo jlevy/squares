@@ -97,6 +97,10 @@ Ints = NDArray[np.int64]
 
 Status = Literal["holds", "fails", "undecided"]
 
+
+class IntervalInputError(ValueError):
+    """The certificate lies outside the interval verifier's safe input domain."""
+
 # Boxes narrower than this in both axes are not split further. Region edges are
 # enclosed to a few ulps of their magnitude (about 1e-15 here); a box thinner than
 # the fuzz cannot be told apart from the edge it straddles, so splitting it would
@@ -118,6 +122,11 @@ BOX_BUDGET = 100_000
 # Keeping the exact Python-integer total below this conservative limit makes
 # each such accumulation safe, with room below the signed-int64 boundary.
 INT64_MASS_LIMIT = 2**62
+
+# Each search batch materialises boxes-by-atoms masks. The retained maximum is 1,173;
+# 4,096 leaves more than threefold research headroom while keeping one such mask near
+# 16 MiB instead of permitting an input-driven multi-gigabyte allocation.
+MAX_INTERVAL_ATOMS = 4096
 
 
 # ---------------------------------------------------------------------------
@@ -189,12 +198,27 @@ class Interval:
         rationals and has to be enclosed before interval arithmetic can start.
         """
         exact = Fraction(value)
-        nearest = float(exact)
+        try:
+            nearest = float(exact)
+        except OverflowError:
+            raise IntervalInputError(
+                "exact certificate input is outside the finite float range"
+            ) from None
+        if not math.isfinite(nearest):
+            raise IntervalInputError(
+                "exact certificate input is outside the finite float range"
+            )
         if Fraction(nearest) == exact:
-            return cls(nearest, nearest)
-        if Fraction(nearest) < exact:
-            return cls(nearest, math.nextafter(nearest, math.inf))
-        return cls(math.nextafter(nearest, -math.inf), nearest)
+            lo, hi = nearest, nearest
+        elif Fraction(nearest) < exact:
+            lo, hi = nearest, math.nextafter(nearest, math.inf)
+        else:
+            lo, hi = math.nextafter(nearest, -math.inf), nearest
+        if not (math.isfinite(lo) and math.isfinite(hi)):
+            raise IntervalInputError(
+                "exact certificate input cannot be enclosed by finite floats"
+            )
+        return cls(lo, hi)
 
     def arrays(self) -> tuple[Floats, Floats]:
         return np.array([self.lo]), np.array([self.hi])
@@ -245,13 +269,15 @@ class Rotation:
 
     def __post_init__(self) -> None:
         if self.cosine.lo <= 0 or self.sine.lo < 0:
-            raise ValueError(f"direction {self.label} is outside the first quadrant")
+            raise IntervalInputError(
+                f"direction {self.label} is outside the first quadrant"
+            )
 
 
 def rotation_from_half_tangent(label: str, tangent: Fraction) -> Rotation:
     """``theta = 2 arctan t``: cos = (1 - t^2) / (1 + t^2), sin = 2t / (1 + t^2)."""
     if tangent < 0 or tangent >= 1:
-        raise ValueError(f"half-tangent {tangent} is outside [0, 1)")
+        raise IntervalInputError(f"half-tangent {tangent} is outside [0, 1)")
     t = Interval.of(tangent)
     square = t * t
     denominator = ONE + square
@@ -314,19 +340,11 @@ class AtomData:
 
     @classmethod
     def of(cls, certificate: Certificate) -> AtomData:
-        scale = 1
-        for atom in certificate.atoms:
-            scale = math.lcm(scale, atom.weight.denominator)
-        if certificate.n * scale >= INT64_MASS_LIMIT:
-            raise ValueError("the weight scale is too large for exact integer masses")
-        scaled_mass = [int(atom.weight * scale) for atom in certificate.atoms]
-        if any(mass < 0 for mass in scaled_mass):
-            raise ValueError("the interval verifier requires nonnegative atom weights")
-        total = sum(scaled_mass)
-        if total >= INT64_MASS_LIMIT:
-            raise ValueError(
-                "the total scaled atom mass is too large for safe int64 arithmetic"
+        if len(certificate.atoms) > MAX_INTERVAL_ATOMS:
+            raise IntervalInputError(
+                f"the interval verifier supports at most {MAX_INTERVAL_ATOMS} atoms"
             )
+        scale, scaled_mass, total = scaled_atom_masses(certificate)
         xs = [Interval.of(atom.x) for atom in certificate.atoms]
         ys = [Interval.of(atom.y) for atom in certificate.atoms]
         return cls(
@@ -338,6 +356,27 @@ class AtomData:
             scale=scale,
             total=total,
         )
+
+
+def scaled_atom_masses(certificate: Certificate) -> tuple[int, list[int], int]:
+    """Return exact integer masses, refusing before a common scale can explode."""
+
+    scale = 1
+    for atom in certificate.atoms:
+        scale = math.lcm(scale, atom.weight.denominator)
+        if certificate.n * scale >= INT64_MASS_LIMIT:
+            raise IntervalInputError(
+                "the weight scale is too large for exact integer masses"
+            )
+    scaled_mass = [int(atom.weight * scale) for atom in certificate.atoms]
+    if any(mass < 0 for mass in scaled_mass):
+        raise IntervalInputError("the interval verifier requires nonnegative atom weights")
+    total = sum(scaled_mass)
+    if total >= INT64_MASS_LIMIT:
+        raise IntervalInputError(
+            "the total scaled atom mass is too large for safe int64 arithmetic"
+        )
+    return scale, scaled_mass, total
 
 
 class DirectionSearch:
@@ -378,7 +417,9 @@ class DirectionSearch:
         self.margin = square_side * (rotation.cosine + rotation.sine) / TWO
         self.far = outer_side - self.margin
         if self.far.lo <= self.margin.hi:
-            raise ValueError("the square does not fit the container at this direction")
+            raise IntervalInputError(
+                "the square does not fit the container at this direction"
+            )
         h, far = self.margin, self.far
         # Its bounding box in the rotated frame: with both rotation components
         # non-negative, u is extreme at the near and far corners and v at the
@@ -694,9 +735,10 @@ def verify_by_intervals(
     ``C4``, and certified outcomes and enclosures describe those directions.
     It cannot establish ``C4`` or produce an accepted theorem verdict; omit
     ``directions`` to decide the full doubled net.
+
     """
     if any(t >= 1 for t in certificate.half_tangents):
-        raise ValueError(
+        raise IntervalInputError(
             "half-tangents must stay below 1 so the net stays inside a quarter turn"
         )
     atoms = AtomData.of(certificate)

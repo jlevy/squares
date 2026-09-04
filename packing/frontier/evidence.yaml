@@ -1450,7 +1450,8 @@ evidence:
       contains the whole box, which is a lower bound by construction and is tested
       against the inner enclosure of that rectangle so an unresolved atom is dropped
       rather than assumed. There is no event grid, no difference array and no polygon
-      clipping, so it shares no modelling assumption with the exact route.
+      clipping. It shares the Certificate representation and C1-C3 premises with the
+      exact route, but its C4 decision has different modelling and failure modes.
       It also rests on fewer hypotheses. C4 is decided on the doubled net -- theta_k and
       pi/2 - theta_k, 361 directions -- so the D4 reflection argument is never invoked
       and C0 is not needed at all, which matters because interval arithmetic cannot

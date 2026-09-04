@@ -3203,24 +3203,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 461 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 463 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 97 | asserted something false about the mathematics |
+| soundness | 98 | asserted something false about the mathematics |
 | validity | 120 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 165 | recorded something its own evidence contradicts |
-| robustness | 59 | did not finish, or finished only by luck |
+| robustness | 60 | did not finish, or finished only by luck |
 | performance | 20 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Seventy-seven of the ninety-seven soundness defects pointed in the *flattering*
+**Seventy-eight of the ninety-eight soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-seven defects in 461, and no soundness defect
+**The automated gate has caught sixty-seven defects in 463, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3507,7 +3507,7 @@ It is contained rather than fixed — such delegations are recorded on completio
 `read_only` flag is better than permitting an empty list that would be ambiguous between
 “writes nothing” and “nobody filled this in”.
 
-108 fixes left no regression check behind.
+110 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
@@ -3690,13 +3690,15 @@ about twelve squares rather than inherited from eleven.
 `s(17) >= 229/50`, with `n = 18` and `n = 19` by monotonicity, is
 [T-019](packing/frontier/RESULTS.md) and displaces Massaccesi’s published `4.5058`, the
 only value in print this project has replaced.
-All three stand at V4/C4: each was decided twice from frozen bytes by an exact
-event-cell sweep and by an interval branch and bound with directed rounding, methods
-that share no modelling assumption and fail differently, agreeing on the least covered
-mass to the digit. None reaches C5, because no one outside the project has reviewed any
-of them; a self-contained third-party package ships at
-`packing/cases/n11_fractional_certificate/thirdparty/` so that a stranger can decide the
-`19/5` rung without trusting this repository.
+All three stand at V4 and at least C4: each was decided twice from frozen bytes by an
+exact event-cell sweep and by an interval branch and bound with directed rounding.
+T-018 reaches C5 on the mapped adversarial review retained in this repository; T-017 and
+T-019 remain at C4. The methods share the `Certificate` representation and the C1-C3
+premises but make method-distinct C4 decisions with different failure modes, agreeing
+exactly on the least covered mass.
+No one outside the project has reviewed any of them; a self-contained third-party
+package ships at `packing/cases/n11_fractional_certificate/thirdparty/` so that a
+stranger can decide the `19/5` rung without trusting this repository.
 
 **That lane also has a measured edge, which is the more useful thing to carry.**
 `n = 11` at `3.82` is closed to both pre-registered routes and the closure was checked

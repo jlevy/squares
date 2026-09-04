@@ -351,8 +351,8 @@ The shared 900-second hang guard remains in force for short checks, and a tighte
 timeout typed by an operator still takes precedence.
 D-451 records the mismatch and the budget registry test fixes the complete three-step
 exception set.
-The late full-net `n = 17` control raises the current inventory to 37; the
-same explicit budget covers it.
+The late full-net `n = 17` control and the retention gate’s full two-route
+replay raise the current inventory to 38; the same explicit budget covers them.
 
 ### F14: Medium in the late parent, fixed here: a finite-certificate ceiling became a method-impossibility claim
 
@@ -395,10 +395,10 @@ identifier and incompatible generated counts.
 
 **Resolution:** the older stack identifiers remain stable and the newer parent entry is
 D-454, as [`conventions.md`](../../../conventions.md) requires for a merge collision.
-The source and generated views were regenerated from the combined 461-entry log.
+The source and generated views were regenerated from the combined 463-entry log.
 D-455 records the collision itself.
 
-### F17: Critical in the late parent, fixed here: RETAINABLE did not bind the declared theorem
+### F17: Blocker in the late parent, fixed here: RETAINABLE did not bind the declared theorem
 
 The new `decide_certificate` command recomputed the certificate geometry, but it never
 inspected `claim`, allowed `total_mass` and `least_cell_mass` to be absent, and parsed
@@ -410,11 +410,14 @@ stopped the remaining paths in the batch.
 This is verdict-bearing declaration drift: the two expensive computations can decide one
 certificate while the retained bytes tell a reader they prove another theorem.
 
-**Resolution:** the loader now rejects duplicate keys, JSON decimals, non-string
-rationals, coercive integer types, malformed atom rows, and missing required fields.
+**Resolution:** the loader now rejects duplicate keys, JSON decimals, non-string or
+overlong rationals, coercive integer types, malformed atom rows, unsupported direction
+or atom counts, and missing required fields.
+Before formatting exact mass it bounds the common denominator and integer total at the
+interval verifier’s arithmetic limit.
 It requires the canonical claim and total mass to match the reconstructed object,
-requires the least mass in full mode, and converts each malformed path into a refusal
-without aborting later paths.
+requires the least mass in full mode, and converts each malformed or unsupported path
+into a refusal without aborting later paths.
 D-456 and the hostile loader matrix record the repair.
 
 ### F18: High in the late parent, fixed here: known preflight failures still ran both sweeps
@@ -436,12 +439,13 @@ D-457 records the cost defect.
 
 The only full-mode test was a positive retained certificate.
 Deleting the interval refusal, exact refusal, missing-enclosure, nonzero-width,
-route-disagreement, declared- minimum, or multi-path exit-status branches left that test
+route-disagreement, declared-minimum, or multi-path exit-status branches left that test
 green.
 
-**Resolution:** injected negative verdicts now exercise every branch, including an
-interval refusal that must prevent the exact route from starting and a malformed first
-path that must not hide a second refusal.
+**Resolution:** injected negative verdicts now exercise every core conjunction branch,
+including stalled interval boxes, a missing exact minimum, an interval refusal that must
+prevent the exact route from starting, a failed final reread, and a malformed first path
+that must not hide a second refusal.
 D-458 records the control gap.
 
 ### F20: Medium record contradiction, fixed here: the retention defect claimed a loss it disproved
@@ -460,8 +464,7 @@ D-459 records the narrative correction.
 ### F21: Low assurance overstatement, fixed here: the retention routes were called model-independent
 
 The retention-command docstring said the exact and interval routes “share no modelling
-assumption.” Both consume the same `Certificate` representation and implement the same
-C1-C3 theorem contract.
+assumption.” Both consume the same `Certificate` representation and implement C1-C3.
 Their valuable independence is narrower: event-cell enumeration and interval
 branch-and-bound make method-distinct C4 decisions with different failure modes.
 
@@ -481,6 +484,33 @@ print flushed.
 records every print call and requires the flag.
 D-461 records the repair.
 
+### F23: Medium robustness defect, fixed here: an interval input refusal could abort a batch
+
+The interval route intentionally refuses an unsafe integer scale, an angle outside its
+certified domain, or an exact certificate coordinate outside the finite-float range.
+Those input-domain non-decisions previously escaped as built-in exceptions, so one
+unusable path could prevent all later paths from receiving a verdict.
+
+**Resolution:** documented input-domain failures now have the narrow
+`IntervalInputError` type and become labeled per-path refusals.
+The exact-to-float input conversion translates its overflow at that boundary.
+Unexpected `ValueError` and `OverflowError` exceptions from either verifier remain
+visible as implementation bugs.
+A real huge-coordinate record proves the batch continues; D-462 records the boundary.
+
+### F24: Blocker soundness defect, fixed here: RETAINABLE named mutable, possibly replaced bytes
+
+The command read a certificate path once, then spent minutes or hours deciding the
+in-memory object. Another process could replace the path during either sweep and the
+command would still print `RETAINABLE`, apparently approving bytes it had never read.
+This is the same generator-rewrite boundary the command was introduced to close.
+
+**Resolution:** the gate freezes the initial bytes, checks that the path still contains
+them after the interval decision (before paying for the exact sweep), checks again after
+the exact decision, and prints their SHA-256 in the positive verdict.
+Regressions rewrite the path during each route and require refusal; D-463 records the
+defect.
+
 ## Frozen hypotheses and outcomes
 
 | ID | Pre-registered hypothesis | Outcome |
@@ -489,7 +519,7 @@ D-461 records the repair.
 | H2 | The retained bytes satisfy every explicit and implicit proof premise. | **Pass.** All 1,121 current weights are strictly positive, in addition to C0-C4. |
 | H3 | A source-distinct exact checker obtains mass at least one over all centres and all 181 net directions. | **Pass.** It obtains `4001/4000` exactly on the current bytes. |
 | H4 | The declared literature search finds no lower bound after Stromquist 2003 that reaches the proposed value. | **Pass at apparent-novelty scope.** Searches for both `19/5` and `381/100` located no stronger public result; absolute priority remains unproved. |
-| H5 | Replay and validation gates bind the retained claims and refuse targeted corruptions. | **Fail on the parent; pass after remediation.** The stack refuses signed weights and partial-net or below-one interval verdicts, bounds interval work and integer arithmetic, binds all retained and retention-command declarations, gives falsifications executable oracles, strictly parses portable records, and separates exhaustive decisions from the fast tier. |
+| H5 | Replay and validation gates bind the retained claims and refuse targeted corruptions. | **Fail on the parent; pass after remediation.** The stack refuses signed weights and partial-net or below-one interval verdicts, bounds interval work and integer arithmetic, binds all retained and retention-command declarations to unchanged bytes and a printed digest, gives falsifications executable oracles, strictly parses portable records, and separates exhaustive decisions from the fast tier. |
 
 The mathematical claim met the acceptance rule only after the missing nonnegative
 premise was made explicit and checked against the concrete bytes.

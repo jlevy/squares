@@ -13,6 +13,7 @@ and confirms it is reported as undecided rather than accepted.
 from __future__ import annotations
 
 import random
+from dataclasses import replace
 from fractions import Fraction
 
 import numpy as np
@@ -28,9 +29,11 @@ from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.interval import (
     BATCH,
     BOX_BUDGET,
+    MAX_INTERVAL_ATOMS,
     AtomData,
     DirectionSearch,
     Interval,
+    IntervalInputError,
     doubled_net,
     rotation_from_half_tangent,
     searches,
@@ -143,6 +146,14 @@ def test_every_operation_rounds_outward_around_the_exact_result() -> None:
 def test_division_refuses_a_divisor_that_may_be_zero() -> None:
     with pytest.raises(ZeroDivisionError):
         _ = Interval(1.0, 2.0) / Interval(0.0, 1.0)
+
+
+def test_atom_data_refuses_a_boxes_by_atoms_allocation_above_its_limit() -> None:
+    certificate = load_n11()
+    copies = MAX_INTERVAL_ATOMS // len(certificate.atoms) + 1
+    oversized = replace(certificate, atoms=certificate.atoms * copies)
+    with pytest.raises(IntervalInputError, match="supports at most"):
+        AtomData.of(oversized)
 
 
 def test_rotation_enclosures_contain_the_exact_rotation() -> None:

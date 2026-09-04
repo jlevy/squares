@@ -318,8 +318,19 @@ def _condition_containment(certificate: Certificate) -> ConditionReport:
     product = certificate.square_side * (1 + gap)
     return ConditionReport(
         "C3 containment B(1 + D) < 1",
-        f"B = {certificate.square_side}, D = {gap}, B(1 + D) = {float(product):.9f}",
+        f"B = {certificate.square_side}, D = {gap}, B(1 + D) = {product}",
         holds=product < 1,
+    )
+
+
+def closed_form_conditions(certificate: Certificate) -> tuple[ConditionReport, ...]:
+    """Decide C0--C3 without paying for the event-cell C4 sweep."""
+
+    return (
+        _condition_symmetric_atoms(certificate),
+        _condition_mass_below_n(certificate),
+        _condition_arc_reaches_eighth_turn(certificate),
+        _condition_containment(certificate),
     )
 
 
@@ -336,12 +347,7 @@ def sweep_direction_minimum(
 def verify(certificate: Certificate) -> Verdict:
     """Decide C0--C4 after ``Certificate`` has enforced their preconditions."""
 
-    conditions = [
-        _condition_symmetric_atoms(certificate),
-        _condition_mass_below_n(certificate),
-        _condition_arc_reaches_eighth_turn(certificate),
-        _condition_containment(certificate),
-    ]
+    conditions = list(closed_form_conditions(certificate))
     worst: Fraction | None = None
     worst_label: str | None = None
     for direction in certificate.directions:
