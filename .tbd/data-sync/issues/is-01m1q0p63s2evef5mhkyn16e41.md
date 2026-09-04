@@ -3,9 +3,9 @@ type: is
 id: is-01m1q0p63s2evef5mhkyn16e41
 title: Render the certificate page from the certificate and deploy via GitHub Pages
 kind: feature
-status: open
+status: closed
 priority: 1
-version: 6
+version: 7
 labels: []
 dependencies: []
 parent_id: is-01m1pnpwvpjydts81pffmp1nt7
@@ -16,5 +16,9 @@ child_order_hints:
   - is-01m1q7tdecqsw4j2007eke0bek
   - is-01m1q7tdv63h6rejzsfzefgr96
 created_at: 2026-09-04T20:10:16.043Z
-updated_at: 2026-09-04T22:14:55.077Z
+updated_at: 2026-09-04T22:41:05.057Z
+closed_at: 2026-09-04T22:39:14.606Z
+close_reason: The page renders from the certificate and the Pages workflow is wired and green on a hosted runner; deployment itself waits on reaching main
+resolution: null
+duplicate_of: null
 ---
