@@ -470,7 +470,7 @@ def test_an_enclosed_run_refuses_a_minimum_it_pinned_below_one() -> None:
     Under ``enclose`` a box is settled against the best point value seen rather
     than against mass 1, so a search over lightened atoms resolves every box,
     reports a width-zero enclosure at the true 99993/100000, and has decided
-    nothing about C4. The verdict must still refuse it (D-442).
+    nothing about C4. The verdict must still refuse it (D-435).
     """
     verdict = verify_by_intervals(_lightened_n12(), enclose=True, directions=("0",))
     assert verdict.failures == (C4,)

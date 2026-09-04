@@ -1539,7 +1539,15 @@ STEPS: tuple[Step, ...] = (
     # number chosen to make today's run pass. A suite that reaches this ceiling should be
     # re-argued, not re-padded, and the step still fails if it exceeds what it asked for.
     Step("fast behavioral tests", _fast_tests, fast=True, broad=True, budget_seconds=1800),
-    Step("exhaustive exact behavioral tests", _exhaustive_exact_tests),
+    # This is intentionally a whole suite of complete finite certificate decisions, not
+    # an ordinary behavioural-test step. At 37 tests it was still running after 4100s on
+    # 2026-09-04; the exact elapsed time is recorded by D-450. Keep the exceptional
+    # ceiling local so the 900s hang guard remains meaningful for short steps.
+    Step(
+        "exhaustive exact behavioral tests",
+        _exhaustive_exact_tests,
+        budget_seconds=7200,
+    ),
     Step(
         "bead tree",
         _bead_tree,

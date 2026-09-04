@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 446
+count: 450
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13603,6 +13603,269 @@ defects:
   bead: think-yw5g
   recorded_in: packing/src/sqpack/fractional/generate.py
 - id: D-435
+  title: An enclosing interval run accepted a certificate whose least mass it had pinned below one
+  date: '2026-09-04'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: inspection
+  latent_for: >-
+    since sqpack.fractional.interval was written on 2026-09-04, about three hours; found
+    by reading the acceptance path before registering the verifier as C4 evidence, not by
+    any test
+  severity: high
+  what: >-
+    `interval.verify_by_intervals` decided C4 from the branch-and-bound status alone:
+    `holds` when every direction came back `certified`. But `certified` means only that
+    the search resolved every box against the threshold it was run with, and the two
+    modes run different thresholds. Without `enclose` the threshold is mass 1, so
+    `certified` does mean C4. With `enclose` the threshold is the best point value seen
+    so far, which the search keeps lowering, so `certified` means the minimum was pinned
+    exactly and says nothing about whether the pinned value reaches 1.
+  consequence: >-
+    An enclosing run over the retained n = 12 atoms with one atom lightened by 1/10000
+    returned `accepted` with a width-zero enclosure at 99993/100000 -- the true minimum,
+    correctly measured, and below 1. The measurement was never wrong; the verdict drawn
+    from it was. No retained claim rested on this: every full-net test also asserts the
+    enclosure value, and all three are at or above 1 (50003/50000 at n = 11, 100003/100000
+    at n = 12, exactly 1 for the Massaccesi control), while the sub-net acceptance tests
+    run the mass-1 threshold. The exact verifier is untouched and decides every retained
+    certificate independently. But the gap was in the property whose name is the whole
+    contract, and a future certificate checked only by an enclosing run would have been
+    accepted on a false verdict.
+  fix: >-
+    Fixed on 2026-09-04. `verify_by_intervals` now requires, on top of every direction
+    certifying, that each direction's certified lower bound reach mass 1, and reports
+    `fails` rather than `holds` when a pinned minimum falls short -- an exactly enclosed
+    minimum below 1 is a refutation, not an open question. The comparison is `>=` on the
+    integer mass scale, so the Massaccesi control at exactly 1 still passes, which is the
+    boundary the fix had to preserve.
+  regression: >-
+    `tests/test_fractional_interval.py::test_an_enclosed_run_refuses_a_minimum_it_pinned_below_one`
+    runs the lightened certificate under `enclose` and asserts the direction still comes
+    back `certified`, the enclosure is still the true 99993/100000, and the verdict
+    refuses on C4 -- so it pins the distinction rather than the outcome. The lightened
+    fixture both refusal tests share is now one helper.
+  status: fixed
+  recorded_in: packing/src/sqpack/fractional/interval.py
+- id: D-436
+  title: The third-party package misnamed its own control and refused malformed files by traceback
+  date: '2026-09-04'
+  layer: verifier
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    since the package shipped in c68c1616 on 2026-09-04, about two hours; found by an
+    adversarial review commissioned to read it as a hostile third party would
+  severity: medium
+  what: >-
+    Three statements the package made about itself were wrong. Its README twice called
+    the enlarged-container falsification row "the control" -- once when explaining why
+    the printed cell count is worth reading, once in the objections section -- but the
+    control is Massaccesi's published n = 17 certificate, whose least covered weight is
+    exactly 1. The row that demonstrates cells beyond the atoms' reach are scored is the
+    side-4 falsification, whose least weight is 0. A reader taking "control" in the
+    README's own defined sense would look for a 0 in the control's output and not find
+    one. Second, the README promised a labelled refusal for any file not of the expected
+    form, but a float where an exact rational was required, a zero direction_steps, or an
+    atom row with fewer than three entries raised ValueError, ZeroDivisionError or
+    IndexError instead. Third, "nothing short-circuits" was true of C0 to C4 but not of
+    the preconditions, which return before them.
+  consequence: >-
+    None of it can change a verdict, and the review that found them says so: exit status
+    was already 1 on every malformed file, so no false acceptance was possible, and
+    check.py still reported the step as failed. What it costs is the thing the package
+    exists for. The package's whole claim is that a stranger can decide s(11) >= 19/5
+    without trusting this project, and a stranger who reads a promise about behaviour and
+    then sees a traceback has been given a reason to doubt the parts they cannot check as
+    easily. A misnamed control is worse still, because the control is the one artifact
+    that tests the verifier rather than the certificate.
+  fix: >-
+    Fixed on 2026-09-04, in the package rather than in the prose alone. Both README
+    sentences now name the falsification row and say what the control actually is. The
+    verifier validates the atom shape and the wholeness of n and direction_steps where
+    the file is read, and its entry point catches the parse and shape errors and prints
+    "REFUSED: not a certificate of the expected shape" with the offending value; a file
+    that cannot be opened at all reports a usage error and exits 2, because that is not a
+    refusal. The short-circuit sentence now distinguishes the conditions from the
+    preconditions. Four cosmetic findings in the same review were left as they are and are
+    recorded in it: a claim string that must be in lowest terms, a zero-weight asymmetric
+    atom refused by C0, a degenerate direction that raises where it would be vacuous, and
+    disagreeing timing prose, which was aligned.
+  regression: >-
+    The four malformed files the review named -- a decimal outer_side, direction_steps
+    zero, a two-entry atom row, and n = 11.9 -- each return exit 1 with a labelled REFUSED
+    naming the field, and a missing file returns exit 2. Re-run as a stranger would, from
+    a copy outside the checkout under `env -i`, the package still verifies: the
+    certificate at 50003/50000 over 90,546,593 cells and the control at exactly 1 over
+    16,562,293, both VERIFIED, check.py exit 0.
+  status: fixed
+  recorded_in: docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md
+- id: D-437
+  title: A strong-duality test asserted float equality and failed on half of CI runs
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: >-
+    since tests/test_fractional_generate.py was written on 2026-09-04, about eight hours,
+    of which roughly a third of the block was spent chasing it
+  severity: high
+  what: >-
+    `test_the_dual_of_a_converged_solve_matches_its_objective` asserted strong duality as
+    an exact float comparison, `float(solution.duals.sum()) == np.float64(solution.objective)`.
+    Strong duality is exact over the rationals, but both sides are float sums the LP solver
+    accumulates in an order it chooses, and the two orders need not agree to the last bit.
+    CI failed it at 4.000000000000001 against 4.0 -- one ulp.
+  consequence: >-
+    It passed locally every time and failed on roughly half of CI runs: red at 4482cf7a,
+    green at 31775018, red again at 2cd9d7ef on a commit that changed one README. The
+    alternation was misread as a real failure that some intervening change had fixed,
+    which is worse than a test that fails every time, because it invites a causal story
+    about the commits either side of it.
+    The cost was not the defect but the search. It sat behind the 1800 s timeout (D-438's
+    subject) until the fast tier was trimmed, and after that it was in every failing log
+    -- as `command exited 1`, the assertion text, and a `FAILED tests/...` line -- about
+    640 lines from the end of a 748-line file. Four log fetches read the tail and stopped
+    short of it. Two causes were proposed from reasoning instead and both were wrong, and
+    a third, that packing-validate hides pytest output, was wrong too and had to be
+    retracted from the pull request body. `_run` appends a failed subprocess's output to
+    its failure detail; the record was complete throughout.
+  fix: >-
+    Fixed on 2026-09-04. The comparison is now scale-relative, `abs(dual_total - objective)
+    <= 1e-9 * max(1, abs(objective))`, with the failure message printing both values and
+    the gap. A duality gap that meant anything would be many orders of magnitude larger
+    than that tolerance, so the test gives up nothing and stops depending on which order
+    HiGHS happened to sum in.
+  regression: >-
+    The test passes in 0.51 s and the whole of tests/test_fractional_generate.py in 72 s.
+    The tolerance is relative to the objective's scale, so it holds at the larger
+    objectives the n = 12 and n = 17 ladders reach rather than only at the value 4 this
+    fixture produces.
+  status: fixed
+  recorded_in: packing/tests/test_fractional_generate.py
+- id: D-438
+  title: The fast test tier outgrew its budget as the certificates grew, and hid a failure
+  date: '2026-09-04'
+  layer: tooling
+  class: performance
+  detected_by: gate
+  latent_for: >-
+    accumulated across the block as the ladders were climbed; first fatal once the
+    certificates passed roughly 600 atoms
+  severity: high
+  what: >-
+    `packing-validate`'s `fast behavioral tests` step consumed its entire 1800 s cap:
+    1801.01 s against a 1801.84 s total, while every other step in the tier ran in under
+    40 s. The cost scales with the atom count, and the certificates grew by an order of
+    magnitude during the block -- Massaccesi's 168-atom fixture decides in about 25 s,
+    which is why full 181-direction decisions looked affordable when these tests were
+    written, but the retained n = 12 certificate reached 681 atoms and n = 11's
+    calibration rung 373, both still deciding on the full net in the fast tier. Measured
+    against the n = 17 pair at 708 atoms, which takes about thirteen minutes, those two
+    alone accounted for most of the budget; four full doubled-net interval runs at 361
+    directions each finished it off.
+  consequence: >-
+    Two costs, and the second was the larger. CI was red, and the timeout truncated pytest
+    before it printed a summary, so the genuine test failure underneath it (D-437) had no
+    name for hours. Every run either timed out without naming a test or was cancelled by a
+    push. Fixing the budget did not fix CI; it made CI able to say what was wrong, which
+    is a different thing and was reported as such.
+  fix: >-
+    Fixed on 2026-09-04 in 4482cf7a. Nine full-net decisions moved behind the
+    `exhaustive_exact` marker -- five exact sweeps and four interval doubled-net runs --
+    each declared in the registry with what it costs. Nothing is lost: every one keeps a
+    fast counterpart in the same file that pins what its record claims, or decides it on a
+    coarse net. The tier went 1801 s to 1101 s to 948 s.
+    One of those fast counterparts was wrong on the first attempt and the way it was wrong
+    is worth keeping: deciding the calibration rung on a coarse net by slicing the
+    half-tangents asserted the whole verdict, which fails, because a net that coarse fails
+    C3 by construction -- D grows with the gap and B(1 + D) then exceeds 1. The rung test
+    beside it had solved this already by asserting C4's value rather than the verdict.
+    Coverage is the claim a coarse decision can carry; containment is not.
+  regression: >-
+    The fractional tier runs 85 tests in 176 s with 9 deselected, and the whole
+    non-exhaustive suite 1699 tests in 831 s locally. The marker registry test pins every
+    marked node by name, so a future slow decision cannot join the fast tier silently.
+  status: fixed
+  recorded_in: packing/tests/test_module_boundaries.py
+- id: D-439
+  title: Three records described the top rung, and the top rung moved out from under them
+  date: '2026-09-04'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    from c68c1616, when the package shipped against a top rung of 19/5, until the ladder
+    advanced to 381/100 later the same day -- about six hours, spanning one adversarial
+    review that read the file line by line and did not catch it
+  severity: medium
+  what: >-
+    Three statements in durable records described "the top rung" and were left behind
+    when the ladder advanced past them. All three were true when written and none was
+    edited; what changed was the thing they pointed at.
+    First, the third-party package's file table described its own `certificate.json` as
+    "byte-identical to `../certificate.json`" and printed the SHA-256 to let a reader
+    check it. `../certificate.json` is the case's top rung by construction -- retention
+    replaces it each time the ladder advances -- so when n = 11 moved from 19/5 to
+    381/100 the sibling became a different file with a different hash, and the package's
+    own copy stayed where it was.
+    Second, T-019's significance rationale gave the movement past Massaccesi as 0.0042.
+    That is 451/100 - 22529/5000, the first rung's movement; the retained value is
+    229/50 and the movement is 0.0742, as the claim body two fields above it correctly
+    says. The record contradicted itself across two fields.
+    Third, T-019's next_rung described the headroom below seventeen using 451/100's
+    figures -- "the certificate's total is 16.5936, leaving 0.406" -- as though they were
+    the retained certificate's. The retained total is 3393147/200000 = 16.965735 and the
+    margin is 0.034265, an order of magnitude smaller, so the field understated by ten
+    times how tight the case had become. That passage also inferred a rate of ascent
+    ("about 0.075 per 0.01 of side") from two points on different site sets, which the
+    ladder does not support: margin is not monotone in the side, and n = 12 moves the
+    other way over its top two rungs, 0.007175 at 197/50 then 0.029410 at 79/20.
+  consequence: >-
+    Records only; no bound, certificate or verdict is affected, and the package itself
+    was never at risk, since `check.py`, `verify.py` and `falsify.py` read nothing
+    outside their own directory and a stranger running it got the right answer
+    throughout. The costs are of two kinds.
+    The package broke the one claim in the file a sceptical reader tests first, in a
+    document whose entire purpose is to be checkable without trusting this project.
+    `sha256sum` on the two files disagrees in the first byte, so a reader who ran the
+    check the file invites would have found the package contradicting itself with no way
+    to tell a stale pointer from a swapped certificate.
+    The two T-019 fields are worse in a quieter way. Nothing about them looks wrong: both
+    are exact figures about real artifacts, they simply describe a rung that is no longer
+    the top one. The next_rung error in particular would have steered the next session
+    away from n = 17 -- 0.406 of headroom invites another rung, 0.034 says the case is
+    nearly spent -- and the invented rate of ascent would have made the misreading look
+    quantitative.
+  fix: >-
+    Fixed on 2026-09-04. The package table now names `../certificate-19-5.json`, the
+    immutable rung file, which is what the hash was always of, and says in the same cell
+    that `../certificate.json` is the moving top-rung pointer and now carries 381/100.
+    T-019's rationale now reads 0.0742, and its next_rung is rewritten around the
+    retained certificate's own total and margin, both recomputed from the artifact rather
+    than carried over; the unsupported rate is gone, replaced by the non-monotonicity the
+    two ladders actually show.
+    The general rule the miss teaches: a durable record points at a name whose meaning is
+    fixed and quotes figures it re-derives from that name, never at or from whatever
+    currently sits at the frontier. Retention ladders here supply both kinds --
+    `certificate-19-5.json` never changes, `certificate.json` changes on every rung -- so
+    prose that cites a hash or a mass must cite the first kind. The detector this argues
+    for, and which does not exist: every mass, atom count and margin quoted in a result's
+    prose fields should be checkable against the artifact the same result names, the way
+    the synopsis check already recomputes its counts.
+  regression: >-
+    None automated, and that is the honest state: all three were found by reading the
+    records against the artifacts, which is what caught them and what would catch the
+    next one. The adversarial review that read the package line by line
+    (docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) ran twenty-one
+    attacks and missed its instance, because at the time the sentence was true. That is
+    the defining feature of this class: it is invisible at review and appears later,
+    without an edit, which is why it wants a check that re-derives rather than a reviewer
+    who re-reads.
+  status: fixed
+  recorded_in: packing/frontier/results.yaml
+- id: D-440
   title: The fractional-certificate theorem and verifier accepted signed atom weights
   date: '2026-09-04'
   layer: verifier
@@ -13622,9 +13885,10 @@ defects:
     n = 1, L = 11/10 and B = 3/5, and the verifier accepted it even though s(1) = 1.
   consequence: >-
     The generic verifier could print an accepted square-packing lower bound that is
-    mathematically false. The retained n = 11 certificate is unaffected because all 425
-    of its weights are strictly positive, but its acceptance did not establish that the
-    reusable trust boundary was sound.
+    mathematically false. Every retained n = 11 certificate is unaffected because its
+    weights are strictly positive; the current 381/100 file has 1,121 positive atoms.
+    Before this repair, however, acceptance did not establish that the reusable trust
+    boundary was sound.
   fix: >-
     State nonnegative mass as an explicit theorem precondition, enforce it when a
     `Certificate` is constructed and when the event-cell sweep is called directly, and
@@ -13634,7 +13898,7 @@ defects:
     retains the exact false n = 1 object and requires both public entry points to refuse
     it.
   recorded_in: packing/src/sqpack/fractional/certificate.py
-- id: D-436
+- id: D-441
   title: The standalone falsifier displayed mutations without enforcing their expected outcomes
   date: '2026-09-04'
   layer: tooling
@@ -13649,9 +13913,9 @@ defects:
   what: >-
     `falsify.py` printed the conditions and verdict for ten mutations but carried no
     expected verdicts and returned success even if a mutation was accepted or a condition
-    changed unexpectedly. The package's one-command check did not invoke the falsifier, so it
-    command exercised only positive cases while its README presented the mutation table
-    as evidence that every condition was live.
+    changed unexpectedly. The package's one-command check did not invoke the falsifier,
+    so it exercised only positive cases while its README presented the mutation table as
+    evidence that every condition was live.
   consequence: >-
     A regression that made a corrupt certificate pass could leave both the advertised
     package check and the falsification program green. The existing table happened to be
@@ -13665,44 +13929,38 @@ defects:
     injects a wrong result, and `test_quick_negative_control_is_bounded_and_assertive`
     requires the package gate to observe the expected P2 refusal.
   recorded_in: packing/cases/n11_fractional_certificate/thirdparty/falsify.py
-- id: D-437
-  title: The standalone package mishandled hostile inputs and misdescribed its controls
+- id: D-442
+  title: The standalone package accepted lossy JSON types and mishandled degenerate domains
   date: '2026-09-04'
   layer: verifier
   class: robustness
   detected_by: review
   latent_for: >-
     since the self-contained n = 11 package was added on 2026-09-04; found the same day
-    with malformed-record and exact-boundary controls
+    by extending the package review with hostile type and exact-boundary controls
   severity: medium
   status: fixed
   what: >-
-    The loader applied `int(...)` to `n` and `direction_steps`, silently truncating JSON
-    decimals and accepting Boolean or string lookalikes; duplicate object keys were
-    accepted; malformed atoms could escape as `IndexError`. The C4 search also raised on
+    D-436 made malformed records fail cleanly, but the loader still applied `int(...)`
+    to `n` and `direction_steps`, silently accepting JSON decimals, Booleans and
+    string lookalikes; it also accepted duplicate object keys. The C4 search raised on
     every domain with `2h >= L`, conflating an empty feasible set with the singleton
-    closed placement at equality. The README twice called the side-4 falsification row
-    "the control", although the actual known-answer control is Massaccesi's published
-    n = 17 certificate, and its claim that nothing short-circuits failed to distinguish
-    the theorem preconditions from C0-C4.
+    closed placement at equality.
   consequence: >-
-    The shipped certificates still parsed and verified exactly, but the purportedly
-    portable trust boundary behaved unpredictably on malformed input, failed to decide
-    two elementary geometric edge cases, and gave a hostile reader inaccurate directions
-    for interpreting its own output.
+    The shipped certificates still parsed and verified exactly, but semantically
+    different hostile files could be coerced into the accepted schema, and two elementary
+    geometric boundary cases had no theorem verdict. This extends rather than replaces
+    D-436: its traceback and documentation repairs remain independently recorded.
   fix: >-
-    Parse duplicate-free JSON with exact field types and rational strings, validate atom
-    triples before indexing them, turn format errors into a clean refusal while reserving
-    exit 2 for an unreadable path, treat an empty feasible domain as vacuous, and evaluate
-    a singleton feasible domain directly under the closed-square convention. Correct the
-    README's control terminology and distinguish precondition refusal from condition
-    evaluation.
+    Parse duplicate-free JSON with exact field types and rational strings, reject Boolean
+    and lossy numeric lookalikes, treat an empty feasible domain as vacuous, and evaluate
+    a singleton feasible domain directly under the closed-square convention.
   regression: >-
     `tests/test_n11_thirdparty_verify.py` carries duplicate-key, lossy-integer,
-    non-string-number, malformed-atom, traceback-free CLI, unreadable-path, empty-domain
-    and singleton-domain controls; the hostile package review checks the corrected prose.
+    Boolean, non-string-number, empty-domain and singleton-domain controls alongside
+    D-436's malformed-shape and traceback controls.
   recorded_in: packing/cases/n11_fractional_certificate/thirdparty/verify.py
-- id: D-438
+- id: D-443
   title: Retained certificate declarations did not all participate in acceptance
   date: '2026-09-04'
   layer: record
@@ -13732,7 +13990,7 @@ defects:
     `tests/test_n11_thirdparty_verify.py::test_declared_value_mismatch_is_verdict_bearing`
     covers both standalone numeric declarations.
   recorded_in: packing/cases/n11_fractional_certificate/__main__.py
-- id: D-439
+- id: D-444
   title: A restricted interval-verifier direction sample could report theorem acceptance
   date: '2026-09-04'
   layer: verifier
@@ -13764,7 +14022,7 @@ defects:
     `test_a_restricted_direction_can_still_refute_c4` preserves the one decisive partial
     outcome.
   recorded_in: packing/src/sqpack/fractional/interval.py
-- id: D-440
+- id: D-445
   title: Interval-verifier integer masses could overflow before C1 was decided
   date: '2026-09-04'
   layer: verifier
@@ -13795,70 +14053,7 @@ defects:
     constructs a positive-weight total of 2^63 + 1 and requires both the data conversion
     and the public verifier to refuse it before NumPy arithmetic.
   recorded_in: packing/src/sqpack/fractional/interval.py
-- id: D-441
-  title: Full certificate decisions were left in the fast behavioral test tier
-  date: '2026-09-04'
-  layer: tooling
-  class: performance
-  detected_by: gate
-  latent_for: >-
-    hours; the n = 11 and n = 12 exact sweeps entered the fast suite with the results, and
-    the three full doubled-net interval decisions joined them in a later checkpoint
-  severity: high
-  status: fixed
-  what: >-
-    Complete 181-direction exact sweeps and 361-direction interval searches were ordinary
-    tests despite taking tens to hundreds of seconds apiece. They therefore ran in the
-    already long `not exhaustive_exact` tier; the hosted validation reached its 30-minute
-    boundary while the PR narrative still described the type and test gates as clean.
-  consequence: >-
-    The merge gate could time out without distinguishing a mathematical failure from an
-    intentionally exhaustive replay, encouraging either repeated wasted runs or removal
-    of valuable assurance tests.
-  fix: >-
-    Mark the complete n = 11 and n = 12 sweeps, including the n = 11 calibration rung,
-    the full source-distinct and minimal n = 11 replays, and all three complete interval
-    decisions as `exhaustive_exact`. Keep fast sub-net, counterexample and mutation
-    controls in the ordinary tier, and list every slow node in the architecture inventory.
-  regression: >-
-    `tests/test_module_boundaries.py::test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes`
-    fixes the named exhaustive inventory, while validation's existing selector tests
-    require the fast tier to exclude that marker and the full tier to include it.
-  recorded_in: packing/tests/test_fractional_certificate.py
-- id: D-442
-  title: Interval enclosure mode accepted a computed C4 minimum below one
-  date: '2026-09-04'
-  layer: verifier
-  class: soundness
-  direction: flattering
-  detected_by: review
-  latent_for: >-
-    minutes; found while adversarially reading the interval-verifier checkpoint before
-    any retained result cited it
-  severity: critical
-  status: fixed
-  what: >-
-    `verify_by_intervals(..., enclose=True)` ran each direction without the early C4
-    threshold, then treated any completed search with no stalled box as certified. It did
-    not require the returned lower bound to reach the unit mass scale. A tiny exact grid
-    certificate whose global enclosure is [0, 0] therefore returned `accepted=True` with
-    no failed condition.
-  consequence: >-
-    Any caller requesting the stronger minimum enclosure could receive a theorem verdict
-    that contradicted the enclosure printed beside it. The retained n = 11 enclosure is
-    [50003/50000, 50003/50000] and is unaffected, but the public mode was an unsound trust
-    boundary.
-  fix: >-
-    Classify a direction as certified only when it closes every box and its lower bound is
-    at least the exact mass scale; classify any admissible point with upper mass below the
-    scale as a refutation in either search mode; and make whole-certificate acceptance
-    independently recheck every direction's status and lower bound.
-  regression: >-
-    `tests/test_fractional_interval.py::test_enclosure_mode_refutes_an_exact_minimum_below_one`
-    requires the former accepted fixture to fail C4 while preserving its exact [0, 0]
-    enclosure.
-  recorded_in: packing/src/sqpack/fractional/interval.py
-- id: D-443
+- id: D-446
   title: An exact interval seam expanded in proportion to the resolution floor
   date: '2026-09-04'
   layer: verifier
@@ -13891,7 +14086,7 @@ defects:
     reaches the conservative budget result in under a second; the full retained searches
     assert zero exhausted directions.
   recorded_in: packing/src/sqpack/fractional/interval.py
-- id: D-444
+- id: D-447
   title: The exact event sweep returned a centre outside the feasible polygon
   date: '2026-09-04'
   layer: verifier
@@ -13926,7 +14121,7 @@ defects:
     retains the corner cell, proves its former midpoint infeasible, and checks the new
     exact witness against both the event cell and the original container margins.
   recorded_in: packing/src/sqpack/fractional/sweep.py
-- id: D-445
+- id: D-448
   title: The introducing commit named the wrong SHA-256 for the retained 381/100 certificate
   date: '2026-09-04'
   layer: record
@@ -13961,7 +14156,7 @@ defects:
     hashes certificate.json from disk and requires the retained b121...e6a bytes before
     checking their declarations and exact comparison with Stromquist's value.
   recorded_in: docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md
-- id: D-446
+- id: D-449
   title: Dense direct-summation replay could not finish within the full-gate timeout
   date: '2026-09-04'
   layer: tooling
@@ -13997,3 +14192,34 @@ defects:
     fixes that test and the minimal checker in the exhaustive inventory without naming
     the infeasible dense invocation.
   recorded_in: packing/tests/test_n11_thirdparty_verify.py
+- id: D-450
+  title: The full gate's exhaustive-certificate suite inherited a fifteen-minute timeout
+  date: '2026-09-04'
+  layer: tooling
+  class: performance
+  detected_by: gate
+  latent_for: >-
+    since D-438 moved the complete finite decisions out of the fast tier earlier on
+    2026-09-04; found on the first adversarial-review run of the full gate
+  severity: high
+  status: fixed
+  what: >-
+    The full validator runs every `exhaustive_exact` test in one pytest step. The suite
+    now contains 37 complete certificate decisions and was still running after 4,100
+    seconds during the review, but the step had no declared budget and therefore
+    inherited the validator's 900-second default. The explicit two-hour override used to
+    measure the review run hid what the ordinary scheduled command would do.
+  consequence: >-
+    The default full gate could not finish even when every mathematical decision passed:
+    it would kill the aggregate step after fifteen minutes and report a process failure.
+    Moving expensive decisions out of the fast tier therefore repaired pull-request
+    latency while silently making the research-checkpoint gate operationally impossible.
+  fix: >-
+    Give only `exhaustive exact behavioral tests` a 7,200-second declared ceiling. Keep
+    the shared 900-second hang guard for short steps and preserve the rule that an
+    explicitly tighter operator timeout still wins over every step budget.
+  regression: >-
+    `tests/test_validation_cli.py::test_only_measured_whole_suite_steps_have_budgets`
+    fixes the complete three-step exception set and its ceilings; the final full-gate run
+    records the 37-test suite's actual elapsed time below the declared limit.
+  recorded_in: packing/src/sqpack/cli/validate.py

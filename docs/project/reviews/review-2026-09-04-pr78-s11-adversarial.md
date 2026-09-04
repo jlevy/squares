@@ -2,7 +2,7 @@
 
 **Review date:** 2026-09-04\
 **Pull request:** [#78](https://github.com/jlevy/squares/pull/78)\
-**Reviewed parent head:** `b77e78d2bcfcfa06cccfaac91110140edac1758d`\
+**Reviewed parent head:** `9134ee419c7fa4bc350eb19f028fbf01735dfc07`\
 **Base:** `9d5eae0f5ecfcf3cd417a345eb6c55b1f9ac4def` (`main`)\
 **Remediation branch:** `codex/pr78-s11-adversarial-review`\
 **Certificate SHA-256:**
@@ -36,9 +36,9 @@ This review concentrates on T-018, not PR 78’s separate `n = 12` result.
 It checked the mathematical implication, the exact bytes retained for `n = 11`, the
 continuum-to-finite reduction, replay and validation boundaries, method provenance, and
 the novelty claim. The PR advanced repeatedly during the audit, from `9b85236b` through
-`bdf63b21`, `6fc71ce9`, `31775018`, and finally `b77e78d2`. Commit `6fc71ce9` replaced
-the `19/5` target artifact with a larger `381/100` certificate, so the concrete
-validation restarted on the new bytes.
+`bdf63b21`, `6fc71ce9`, `31775018`, and `b77e78d2`, ending at `9134ee41`. Commit
+`6fc71ce9` replaced the `19/5` target artifact with a larger `381/100` certificate, so
+the concrete validation restarted on the new bytes.
 The later commits strengthened the separate `n = 12` and `n = 17` results and amended
 the project process document; they did not change the reviewed `n = 11` bytes or
 argument. The self-contained verification package, interval-certified branch-and-bound
@@ -118,7 +118,7 @@ the primary replay path.
 and checked core precondition, applies the guard to direct sweep calls, documents that
 the boundary reduction depends on monotonicity, and retains the exact five-atom false
 certificate as a must-refuse regression.
-D-435 records the defect.
+D-440 records the defect.
 
 ### F2: High in the parent, fixed here: the validation surface was not clean
 
@@ -145,7 +145,7 @@ BasedPyright under the same explicit evidence-preservation rationale already use
 Ruff, fixes the project-owned optional-value error, and moves every measured full
 certificate decision into the existing `exhaustive_exact` tier.
 Fast sub-net and must-refuse controls remain in the ordinary gate.
-D-441 records the classification failure; the final gate results appear below.
+D-438 records the classification failure; the final gate results appear below.
 
 ### F3: Medium in the parent, fixed here: “third-party check” overstated independence
 
@@ -200,7 +200,7 @@ would not necessarily be refused by the paths that claim to bind the record.
 standalone verifier treats every present declaration as verdict-bearing; exact mutation
 tests cover both paths; and the complete source-distinct `n = 11` decision is a named
 `exhaustive_exact` test.
-D-438 records the defect.
+D-443 records the defect.
 
 ### F5: Low in the parent, fixed here: one scope disclaimer was false by monotonicity
 
@@ -228,7 +228,7 @@ but a future caller could have promoted a diagnostic to a false theorem verdict.
 **Resolution:** a restricted run still reports per-direction certificates, enclosures,
 and decisive refutations, but an all-certified sample is `undecided`; only the complete
 doubled net can establish C4. The tests require both sides of this contract.
-D-439 records the defect.
+D-444 records the defect.
 
 ### F7: Blocker in the interval checkpoint, fixed here: integer mass could overflow
 
@@ -243,7 +243,7 @@ Negative values are refused defensively, and totals at or above `2^62` are refus
 before any NumPy array is constructed.
 Every later matrix product is a nonnegative subset sum below that exact total.
 A positive-weight `2^63 + 1` regression exercises the public path.
-D-440 records the defect.
+D-445 records the defect.
 
 ### F8: High and medium package gaps, fixed here: falsification and hostile inputs
 
@@ -261,7 +261,7 @@ They do matter to the package’s claim to be a compact trust boundary.
 and minimum, and a quick signed-weight refusal runs in `check.py`. The loader is strict
 and duplicate-free, malformed input becomes a clean refusal, an empty placement domain
 is treated as vacuous, and a singleton closed placement is evaluated directly.
-D-436 and D-437 record these defects; focused tests cover each case.
+D-436, D-441, and D-442 record these defects; focused tests cover each case.
 
 ### F9: Blocker in the interval checkpoint, fixed here: enclosure mode could certify failure
 
@@ -281,7 +281,7 @@ bound reaches the exact unit mass scale.
 A sampled upper bound below one refutes C4 in either mode, and whole-certificate
 acceptance rechecks every direction.
 The former `[0,0]` acceptance is a must-refuse regression.
-D-442 records the defect.
+D-435 records the defect.
 
 ### F10: High in the interval checkpoint, fixed here: an exact seam made refusal infeasible
 
@@ -296,7 +296,7 @@ Measurements grew from 4,631 boxes at `10⁻²`, to 274,303 at `10⁻⁴`, to 33
 Exhaustion returns lower bound zero and an explicit non-acceptance unless an admissible
 sampled point already refutes C4. The exact-seam regression now finishes in under a
 second. None of the three full retained controls stalls or exhausts the budget.
-D-443 records the defect.
+D-446 records the defect.
 
 ### F11: Medium in the shared sweep, fixed here: a reported minimum centre could be infeasible
 
@@ -313,7 +313,7 @@ The bug made the displayed witness untrustworthy.
 
 **Resolution:** the sweep now clips the exact feasible polygon to the minimizing cell,
 returns the average of that convex polygon’s vertices, and checks strict membership in
-the open cell. The fixture now maps to the feasible centre `(13/18,43/60)`. D-444 and a
+the open cell. The fixture now maps to the feasible centre `(13/18,43/60)`. D-447 and a
 focused regression record the repair.
 
 ### F12: High provenance defect, fixed here: the new commit names the wrong certificate hash
@@ -331,7 +331,23 @@ reported rational values agree.
 
 **Resolution:** this review discards the old attestation, binds the actual retained hash
 in a fast test and the theorem-specific checker, and reruns both full decisions from the
-retained path. D-445 preserves the mismatch rather than rewriting history.
+retained path. D-448 preserves the mismatch rather than rewriting history.
+
+### F13: High in the full gate, fixed here: the exhaustive suite could not finish under its timeout
+
+D-438 correctly moved complete finite certificate decisions out of the fast test tier.
+The full validator then collected all 37 marked tests in one pytest step, but left that
+step on the shared 900-second timeout.
+During this review it was still running after 4,100 seconds under an explicit two-hour
+measurement override.
+The default full command would therefore kill a healthy exact-decision suite long before
+completion.
+
+**Resolution:** only the exhaustive exact step now has a 7,200-second declared ceiling.
+The shared 900-second hang guard remains in force for short checks, and a tighter
+timeout typed by an operator still takes precedence.
+D-450 records the mismatch and the budget registry test fixes the complete three-step
+exception set.
 
 ## Frozen hypotheses and outcomes
 
@@ -509,7 +525,7 @@ That is a performance result, not mathematical evidence either way, and it is no
 counted among the complete decisions above.
 The complete standalone general verifier, which finishes in under two minutes, is the
 retained source-distinct exhaustive test instead.
-D-446 records that gate repair.
+D-449 records that gate repair.
 
 Negative controls included broken D4 orbits, reduced weights, removed atoms, an enlarged
 container, a too-short angular net, non-strict containment, declared-value mutations,

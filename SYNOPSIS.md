@@ -3202,16 +3202,16 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 446 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 450 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 95 | asserted something false about the mathematics |
 | validity | 118 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 159 | recorded something its own evidence contradicts |
-| robustness | 56 | did not finish, or finished only by luck |
-| performance | 18 | worked, but cost far more than it should |
+| bookkeeping | 161 | recorded something its own evidence contradicts |
+| robustness | 57 | did not finish, or finished only by luck |
+| performance | 19 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
@@ -3219,7 +3219,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-five defects in 446, and no soundness defect
+**The automated gate has caught sixty-seven defects in 450, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3676,6 +3676,37 @@ relative to what they govern, a discovery treated as a defect until an independe
 agrees, and new components inheriting the perimeter—that apply to code not yet written.
 
 ## Where This Stands
+
+**As of 2026-09-04 the project’s largest live result is the fractional lower-bound lane,
+and it is not the cartography spine.** A weighted fractional unavoidable-set certificate
+— Burns’s and Massaccesi’s theorem, this project’s instances and generator — moved five
+registered cases in one day.
+`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first movement of that
+bound since Stromquist stated `2 + 4/sqrt(5)` in 2003 and the only S5 result in the
+register, `n = 11` being the smallest open case.
+`s(12) >= 79/20` is [T-017](packing/frontier/RESULTS.md), the first bound ever proved
+about twelve squares rather than inherited from eleven.
+`s(17) >= 229/50`, with `n = 18` and `n = 19` by monotonicity, is
+[T-019](packing/frontier/RESULTS.md) and displaces Massaccesi’s published `4.5058`, the
+only value in print this project has replaced.
+All three stand at V4/C4: each was decided twice from frozen bytes by an exact
+event-cell sweep and by an interval branch and bound with directed rounding, methods
+that share no modelling assumption and fail differently, agreeing on the least covered
+mass to the digit. None reaches C5, because no one outside the project has reviewed any
+of them; a self-contained third-party package ships at
+`packing/cases/n11_fractional_certificate/thirdparty/` so that a stranger can decide the
+`19/5` rung without trusting this repository.
+
+**That lane also has a measured edge, which is the more useful thing to carry.**
+`n = 11` at `3.82` is closed to both pre-registered routes and the closure was checked
+rather than assumed.
+The covering LP was run on two independent site sets and both converged to an objective
+of exactly `11.000000` from above, where a certificate needs mass strictly below eleven;
+the rejection route was then built and decided exactly, and its maximum pointwise depth
+of `1925/1152` caps the feasible total at `1152/175 = 6.58` against the eleven a ceiling
+needs. Where the two routes fail by an infinitesimal at the same value, neither closes.
+That is a limit on the method’s reach at that side, recorded as measurement and not as a
+claim about `tau*`.
 
 The middle tier is built and works within the explicit boundaries above.
 Two instruments now agree on the cell decomposition to `4.4e-16` and on the corner’s

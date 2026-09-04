@@ -254,14 +254,27 @@ def test_the_ceiling_accepts_a_dual_of_disjoint_placements() -> None:
 
 
 def test_the_dual_of_a_converged_solve_matches_its_objective() -> None:
-    """Strong duality on the generated rows, which is what prices the columns."""
+    """Strong duality on the generated rows, which is what prices the columns.
+
+    Compared to a tolerance, not for equality. Strong duality is exact over the
+    rationals, but both sides here are float sums the LP solver accumulates in an
+    order it chooses, and the two orders need not agree to the last bit. Asserting
+    equality made this test fail on roughly half of CI runs at
+    `4.000000000000001 == 4.0` -- one ulp -- while passing locally every time.
+    A duality gap that mattered would be many orders of magnitude larger than the
+    scale-relative tolerance below, so nothing is given up by measuring it this way.
+    """
     outer, side = Fraction(11, 5), Fraction(24, 25)
     tangents = net_half_tangents(Fraction(207107, 500000), 12)
     sites = colgen.site_set_from_grids(outer, (7,), Fraction(1, 2))
     rows = colgen.Rows()
     solution = colgen.solve_rows(sites, side, tangents, rows, rows_per_direction=2)
     assert solution.converged, solution.stopped
-    assert float(solution.duals.sum()) == np.float64(solution.objective).astype(float)
+    dual_total = float(solution.duals.sum())
+    objective = float(solution.objective)
+    assert abs(dual_total - objective) <= 1e-9 * max(1.0, abs(objective)), (
+        f"duality gap {dual_total - objective!r} between {dual_total!r} and {objective!r}"
+    )
 
 
 def test_a_union_of_grids_is_closed_under_d4_and_holds_both_grids() -> None:

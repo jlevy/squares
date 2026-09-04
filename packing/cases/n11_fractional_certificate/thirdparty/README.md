@@ -57,11 +57,11 @@ inequality `s(11) > 19/5` also follows (by compactness), but the claim is the we
 
 | File | What it is |
 | --- | --- |
-| `certificate.json` | The `n = 11` certificate, plain data, byte-identical to `../certificate-19-5.json` (SHA-256 `60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`). Not regenerated for this package. |
-| `../minimal_verify.py` | The shortest checker for the current 381/100 result: a stdlib-only event sweep beside the current certificate that binds its exact hash, recomputes C0-C4 and the minimum, and runs one must-refuse weight-scaling mutation. It is not part of this frozen 19/5 package. |
-| `verify.py` | The verifier: one file, standard library only, exact rational arithmetic, no imports from the rest of this repository. |
-| `control-n17-massaccesi.json` | A reconstruction, in this package’s schema, of Gustavo Massaccesi’s publicly posted `n = 17` verifier constants. |
-| `build_n17_control.py` | Rebuilds the control file from Massaccesi’s public constants; `--check` confirms that the shipped reconstruction matches. |
+| `certificate.json` | The `n = 11` certificate at `19/5`, plain data, byte-identical to `../certificate-19-5.json` (SHA-256 `60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`). Not regenerated for this package. `../certificate.json` is the case’s *top* rung and now carries `381/100`, a different file with a different hash; see the note under the claim. |
+| `../minimal_verify.py` | The shortest checker for the current 381/100 result: a standard-library-only event sweep beside the current certificate that binds its exact hash, recomputes C0-C4 and the minimum, and runs one must-refuse weight-scaling mutation. It is not part of this frozen 19/5 package. |
+| `verify.py` | The verifier: one file, standard library only, exact rational arithmetic, no imports from this repository. |
+| `control-n17-massaccesi.json` | Gustavo Massaccesi’s published `n = 17` certificate, rebuilt as data in the same schema. |
+| `build_n17_control.py` | Rebuilds the control file from the constants of its published source; `--check` confirms the shipped file matches. |
 | `falsify.py` | Applies the perturbations in the falsification table and prints what the verifier refuses. |
 | `check.py` | The whole check in one command. |
 
@@ -449,9 +449,10 @@ exit status 0
 - **Who checked it.** The project’s own verifier accepted the certificate; a reviewer
   inside the project wrote a second verifier from the theorem statement with the
   implementation withheld, reproduced the `n = 17` value as a control, and accepted the
-  `n = 12` certificates from the same generator.
-  This package contains a third implementation, written inside the project from the
-  theorem for use by outside readers, with the same control.
+  `n = 12` certificates from the same generator; this package is a third implementation,
+  written from the theorem for a reader outside the project, with the same control.
+  A fourth decision has since been made by a different method rather than a different
+  implementation — see the first objection below.
   No one outside the project has reviewed the result yet.
 - **A calibration rung exists.** Before this certificate, the same generator was run at
   side `189/50 = 3.78`, below Stromquist’s bound, where a certificate proves nothing
@@ -465,11 +466,33 @@ exit status 0
 
 ## What a Sceptic Could Still Object To
 
-- **Same method family, three implementations.** All three verifiers implement the same
-  reduction: an exact event-cell sweep over a rational direction net.
-  A method-distinct check, such as an interval-arithmetic branch and bound over the true
-  unit square, or a proof-assistant formalisation of the theorem and this reduction,
-  would be stronger evidence than another implementation.
+- **Same method family, three times — but no longer only that.** This verifier and the
+  project’s two exact ones are independent implementations of the same reduction: an
+  exact event-cell sweep over a rational direction net.
+  Three agreeing implementations of one reduction test the code and not the reduction,
+  which is why this objection was worth stating.
+  It has since been answered, though not by anything in this directory.
+  The repository now also decides C4 by interval arithmetic with directed rounding —
+  branch and bound over boxes of centres, where an atom counts for a box only if its
+  coverage rectangle contains the whole box, so the count is a lower bound by
+  construction. There is no event grid, no difference array and no polygon clipping, so
+  it shares no modelling assumption with the sweep, and it decides C4 on the doubled net
+  (`θ_k` and `π/2 − θ_k`, 361 directions), which means it never invokes the reflection
+  argument of step 1 and does not need C0 at all.
+  Run on *this file’s bytes* — SHA-256
+  `60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`, the hash in the
+  table above — it certifies all 361 directions in 1,195,755 boxes with none stalled, in
+  about ten seconds, and its enclosure of the least covered weight has width zero at
+  `50003/50000`: the value printed in the run above, to the digit, from arithmetic that
+  rounds outward at every step.
+  It returns Massaccesi’s `22529/5000` on the same control.
+  Two things a reader should hold onto.
+  That check is not shipped here: this package is standard-library-only and
+  self-contained, so a stranger running `check.py` still gets one method, and the
+  interval route has to be taken on this project’s word or read in the repository at
+  `packing/src/sqpack/fractional/interval.py`. And neither route protects against a
+  wrong statement of the theorem, which both share; a proof-assistant formalisation of
+  the theorem and of one of the two reductions is still the check nobody has done.
 - **The reduction is proved on paper.** The argument that finitely many open cells
   decide the continuum lives in the C4 comment block of `verify.py` and in the section
   above. It is elementary, but it is the place where a wrong verifier would be wrong; the

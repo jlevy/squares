@@ -2,7 +2,7 @@
 
 # Defect log
 
-446 defects recorded across the packing toolchain.
+450 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
 | `review` | 273 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
-| `inspection` | 45 | reading the code or the design with intent |
+| `inspection` | 47 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 65 | the automated test suite |
+| `gate` | 67 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 65 of 446, and none of the 95 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 67 of 450, and none of the 95 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -33,10 +33,10 @@ The line worth reading twice: **the automated gate caught 65 of 446, and none of
 | --- | ---: |
 | engine | 11 |
 | quench | 23 |
-| verifier | 12 |
+| verifier | 13 |
 | record | 134 |
-| tooling | 159 |
-| docs | 107 |
+| tooling | 161 |
+| docs | 108 |
 
 ## By kind
 
@@ -44,9 +44,9 @@ The line worth reading twice: **the automated gate caught 65 of 446, and none of
 | --- | ---: |
 | soundness | 95 |
 | validity | 118 |
-| bookkeeping | 159 |
-| robustness | 56 |
-| performance | 18 |
+| bookkeeping | 161 |
+| robustness | 57 |
+| performance | 19 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -670,18 +670,22 @@ This is the actionable list.
 | [D-432](packing/devtools/reachable_tests.py) | 2026-09-04 | tooling | robustness |  | `gate` | medium | outstanding | The push tier keeps the 900-second cap when its selector picks the whole suite |
 | [D-433](packing/src/sqpack/fractional/generate.py) | 2026-09-04 | tooling | robustness |  | `review` | medium | fixed | The certificate rationaliser floored its weights while its docstring said it rounded up |
 | [D-434](packing/src/sqpack/fractional/generate.py) | 2026-09-04 | tooling | validity | conservative | `inspection` | high | fixed | The covering LP's separation oracle sees fewer placements than the verifier decides |
-| [D-435](packing/src/sqpack/fractional/certificate.py) | 2026-09-04 | verifier | soundness | flattering | `review` | critical | fixed | The fractional-certificate theorem and verifier accepted signed atom weights |
-| [D-436](packing/cases/n11_fractional_certificate/thirdparty/falsify.py) | 2026-09-04 | tooling | validity | flattering | `review` | high | fixed | The standalone falsifier displayed mutations without enforcing their expected outcomes |
-| [D-437](packing/cases/n11_fractional_certificate/thirdparty/verify.py) | 2026-09-04 | verifier | robustness |  | `review` | medium | fixed | The standalone package mishandled hostile inputs and misdescribed its controls |
-| [D-438](packing/cases/n11_fractional_certificate/__main__.py) | 2026-09-04 | record | bookkeeping |  | `review` | medium | fixed | Retained certificate declarations did not all participate in acceptance |
-| [D-439](packing/src/sqpack/fractional/interval.py) | 2026-09-04 | verifier | soundness | flattering | `review` | critical | fixed | A restricted interval-verifier direction sample could report theorem acceptance |
-| [D-440](packing/src/sqpack/fractional/interval.py) | 2026-09-04 | verifier | soundness | flattering | `review` | critical | fixed | Interval-verifier integer masses could overflow before C1 was decided |
-| [D-441](packing/tests/test_fractional_certificate.py) | 2026-09-04 | tooling | performance |  | `gate` | high | fixed | Full certificate decisions were left in the fast behavioral test tier |
-| [D-442](packing/src/sqpack/fractional/interval.py) | 2026-09-04 | verifier | soundness | flattering | `review` | critical | fixed | Interval enclosure mode accepted a computed C4 minimum below one |
-| [D-443](packing/src/sqpack/fractional/interval.py) | 2026-09-04 | verifier | performance |  | `gate` | high | fixed | An exact interval seam expanded in proportion to the resolution floor |
-| [D-444](packing/src/sqpack/fractional/sweep.py) | 2026-09-04 | verifier | validity | neutral | `review` | medium | fixed | The exact event sweep returned a centre outside the feasible polygon |
-| [D-445](docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md) | 2026-09-04 | record | bookkeeping | neutral | `review` | high | fixed | The introducing commit named the wrong SHA-256 for the retained 381/100 certificate |
-| [D-446](packing/tests/test_n11_thirdparty_verify.py) | 2026-09-04 | tooling | performance |  | `gate` | high | fixed | Dense direct-summation replay could not finish within the full-gate timeout |
+| [D-435](packing/src/sqpack/fractional/interval.py) | 2026-09-04 | verifier | soundness | flattering | `inspection` | high | fixed | An enclosing interval run accepted a certificate whose least mass it had pinned below one |
+| [D-436](docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) | 2026-09-04 | verifier | bookkeeping |  | `review` | medium | fixed | The third-party package misnamed its own control and refused malformed files by traceback |
+| [D-437](packing/tests/test_fractional_generate.py) | 2026-09-04 | tooling | robustness |  | `gate` | high | fixed | A strong-duality test asserted float equality and failed on half of CI runs |
+| [D-438](packing/tests/test_module_boundaries.py) | 2026-09-04 | tooling | performance |  | `gate` | high | fixed | The fast test tier outgrew its budget as the certificates grew, and hid a failure |
+| [D-439](packing/frontier/results.yaml) | 2026-09-04 | docs | bookkeeping |  | `inspection` | medium | fixed | Three records described the top rung, and the top rung moved out from under them |
+| [D-440](packing/src/sqpack/fractional/certificate.py) | 2026-09-04 | verifier | soundness | flattering | `review` | critical | fixed | The fractional-certificate theorem and verifier accepted signed atom weights |
+| [D-441](packing/cases/n11_fractional_certificate/thirdparty/falsify.py) | 2026-09-04 | tooling | validity | flattering | `review` | high | fixed | The standalone falsifier displayed mutations without enforcing their expected outcomes |
+| [D-442](packing/cases/n11_fractional_certificate/thirdparty/verify.py) | 2026-09-04 | verifier | robustness |  | `review` | medium | fixed | The standalone package accepted lossy JSON types and mishandled degenerate domains |
+| [D-443](packing/cases/n11_fractional_certificate/__main__.py) | 2026-09-04 | record | bookkeeping |  | `review` | medium | fixed | Retained certificate declarations did not all participate in acceptance |
+| [D-444](packing/src/sqpack/fractional/interval.py) | 2026-09-04 | verifier | soundness | flattering | `review` | critical | fixed | A restricted interval-verifier direction sample could report theorem acceptance |
+| [D-445](packing/src/sqpack/fractional/interval.py) | 2026-09-04 | verifier | soundness | flattering | `review` | critical | fixed | Interval-verifier integer masses could overflow before C1 was decided |
+| [D-446](packing/src/sqpack/fractional/interval.py) | 2026-09-04 | verifier | performance |  | `gate` | high | fixed | An exact interval seam expanded in proportion to the resolution floor |
+| [D-447](packing/src/sqpack/fractional/sweep.py) | 2026-09-04 | verifier | validity | neutral | `review` | medium | fixed | The exact event sweep returned a centre outside the feasible polygon |
+| [D-448](docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md) | 2026-09-04 | record | bookkeeping | neutral | `review` | high | fixed | The introducing commit named the wrong SHA-256 for the retained 381/100 certificate |
+| [D-449](packing/tests/test_n11_thirdparty_verify.py) | 2026-09-04 | tooling | performance |  | `gate` | high | fixed | Dense direct-summation replay could not finish within the full-gate timeout |
+| [D-450](packing/src/sqpack/cli/validate.py) | 2026-09-04 | tooling | performance |  | `gate` | high | fixed | The full gate's exhaustive-certificate suite inherited a fifteen-minute timeout |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

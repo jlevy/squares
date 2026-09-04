@@ -1323,7 +1323,7 @@ evidence:
       at this side. The retained bytes have SHA-256
       b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a. The introducing
       commit message names a different hash for what it calls the same frozen bytes;
-      D-445 records that provenance error, so no conclusion here relies on the message's
+      D-448 records that provenance error, so no conclusion here relies on the message's
       attestation. The interval verifier accepted the retained bytes over all 361
       directions of the doubled net in 1,570,831 boxes with none stalled, returning a
       width-zero enclosure at 4001/4000 -- the same value the exact sweep reports.
@@ -1353,8 +1353,8 @@ evidence:
       at docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md. That review
       re-derived the theorem from the shipped words alone -- including the step this
       branch had to correct once, that the bound is the container side and not L/B -- ran
-      twenty-one attacks of its own, and found nothing that threatens the result. Three
-      package defects it did find are fixed (D-436 and D-437). It is not an external review and
+      twenty-one attacks of its own, and found nothing that threatens the result. The
+      package defect it found is fixed (D-436). It is not an external review and
       the reviewer is an agent of this project working from the package rather than from
       the implementation. The broader adversarial review at
       docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md covers the current
@@ -1474,14 +1474,14 @@ evidence:
       found and closed: enclosing runs settled boxes against the best point value rather
       than against mass 1, so they pinned the minimum exactly and then read `certified`
       as though it answered C4. The lightened-atom fixture was accepted that way at a
-      correctly measured 99993/100000 (D-442). The figures above were measured before the
+      correctly measured 99993/100000 (D-435). The figures above were measured before the
       fix and none of them moves: it changes only the verdict drawn when a pinned minimum
       falls short of 1, and every enclosure here is at or above 1. The verdict now
       requires the certified lower bound to reach mass 1 in both modes, and the retained
       certificates are re-decided under it by the replay this entry names. The adversarial
-      review also closed acceptance paths for restricted direction samples (D-439),
-      negative or int64-overflowing weights (D-435 and D-440), and an unbounded exact-seam
-      split (D-443). A restricted sample is now diagnostic only, all NumPy subset sums are
+      review also closed acceptance paths for restricted direction samples (D-444),
+      negative or int64-overflowing weights (D-440 and D-445), and an unbounded exact-seam
+      split (D-446). A restricted sample is now diagnostic only, all NumPy subset sums are
       preflight-bounded in exact Python integers, and unresolved or budget-exhausted boxes
       can only refute or return undecided.
     source_reviewed: '2026-09-04'
