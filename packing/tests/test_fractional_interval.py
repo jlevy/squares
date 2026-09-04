@@ -26,6 +26,8 @@ from cases.n12_fractional_certificate.replay import declared as declared_n12
 from cases.n12_fractional_certificate.replay import load as load_n12
 from cases.n17_fractional_certificate.replay import declared as declared_n17
 from cases.n17_fractional_certificate.replay import load as load_n17
+from cases.n20_fractional_certificate.replay import declared as declared_n20
+from cases.n20_fractional_certificate.replay import load as load_n20
 from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.interval import (
     BATCH,
@@ -353,6 +355,28 @@ def test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net() -> N
     assert enclosure is not None
     assert certificate.bounded_side == Fraction(459, 100)
     assert declared_n17()["least_cell_mass"] == str(enclosure[0])
+
+
+@pytest.mark.exhaustive_exact
+def test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net() -> None:
+    """The interval-certified decision of s(19), s(20), s(21) >= 24/5.
+
+    T-020 stands at C4 on the strength of this route. Operator reports put the
+    exact event-cell sweep at 5378 s and this route at 173 s on the same bytes;
+    no timing transcript is retained. The deterministic box count -- 5,638,343
+    here, the largest in the corpus -- is the comparison that survives machines.
+    """
+    certificate = load_n20()
+    verdict = verify_by_intervals(certificate, enclose=True)
+    assert verdict.accepted, verdict.failures
+    assert len(verdict.directions) == 361
+    assert sum(outcome.stalled for outcome in verdict.directions) == 0
+    assert sum(outcome.boxes for outcome in verdict.directions) == 5_638_343
+    enclosure = verdict.enclosure
+    assert enclosure == (Fraction(50007, 50000), Fraction(50007, 50000))
+    assert enclosure is not None
+    assert certificate.bounded_side == Fraction(24, 5)
+    assert declared_n20()["least_cell_mass"] == str(enclosure[0])
 
 
 # --- the published-value control ----------------------------------------------

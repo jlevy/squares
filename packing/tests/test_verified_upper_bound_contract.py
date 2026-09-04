@@ -63,12 +63,20 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/devtools/check_case_prose.py": (
+        "compares reader-facing case prose with the structured bound field and therefore "
+        "treats it as the certified ceiling"
+    ),
     "packing/devtools/check_basic_bounds.py": (
         "checks the ceiling really is the certifiable grid bound"
     ),
     "packing/tests/test_certificate_citations.py": (
         "names the field in a fixture proving evidence refs are found in every block that "
         "carries one; it asserts nothing about the bound's value"
+    ),
+    "packing/tests/test_case_prose.py": (
+        "exercises the case-prose checker's interpretation of the field as the certified "
+        "ceiling"
     ),
     "packing/devtools/render_evidence_inventory.py": (
         "names the field only as one of the case blocks that can carry evidence ids, so "

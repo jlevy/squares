@@ -311,8 +311,8 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
         # Massaccesi's 168-atom fixture is about 25 s, the 373-atom calibration rung a
         # few minutes, and the historical 969-atom n = 12 rung and current 1,121- and
         # 1,184-atom certificates run from a quarter of an hour to about 25 minutes each.
-        # The current 2,097-atom n = 12
-        # certificate was reported at 4,866 s. Together they exceed the CI budget for
+        # The current 2,097-atom n = 12 certificate was reported at 4,866 s, and the
+        # 2,260-atom n = 20 certificate at 5,378 s. Together they exceed the CI budget for
         # the fast tier, which is why they are here. Every one has a fast
         # counterpart in the same file that pins what its record claims, or decides it
         # on a coarse net.
@@ -322,15 +322,17 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
             "test_the_n11_calibration_rung_verifies_on_the_full_net",
             "test_the_n11_certificate_is_accepted",
             "test_the_n17_certificate_is_accepted",
+            "test_the_n20_certificate_is_accepted",
         },
         # The interval route over the doubled net, 361 directions and one to three
-        # million boxes each. The sub-net acceptance tests beside them stay fast.
+        # 5.64 million boxes each. The sub-net acceptance tests beside them stay fast.
         "test_fractional_interval.py": {
             "test_the_393_100_certificate_is_accepted_on_the_full_doubled_net",
             "test_the_archived_79_20_certificate_is_accepted_on_the_full_doubled_net",
             "test_the_live_n12_certificate_is_accepted_on_the_full_doubled_net",
             "test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net",
             "test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net",
+            "test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net",
             "test_massaccesi_n17_reproduces_the_published_bound_on_the_full_doubled_net",
         },
         # The retention gate's own positive control: both routes on a retained rung,

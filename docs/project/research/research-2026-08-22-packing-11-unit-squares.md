@@ -96,6 +96,14 @@ implementation line.
 The apparently new object is the `n = 11` certificate and generator, not weighted
 resource counting in general.
 
+The same first-party instrument also moved `n = 12` and `n = 17–21` on 2026-09-04.
+Those sibling results do not change the `n = 11` argument, but their literature check
+corrected the wider frontier history: Friedman's DS7 already listed `6√2 − 4` for
+`n = 19–20` and approximately `4.7438` for `n = 21` by its July 2000 version. The new
+`24/5` certificate still exceeds every located value, but it is not the first
+case-listed lower bound for those sizes. The versioned source receipt is
+[`n19-n21-lower-bound-literature-audit-2026`](../../../packing/resources/web/n19-n21-lower-bound-literature-audit-2026/README.md).
+
 ### 2026-08-30: exact-route snapshot, now superseded
 
 At this date, the results below postdated the original survey but did not move `s(11)`.
@@ -817,11 +825,15 @@ Upper bounds are the best known packings from **[Kingbird]**; `grid` in the *how
 marks an `n` the catalogue does not picture, where the trivial `⌈√n⌉` packing is still
 the best known. `deg` is the algebraic degree of the conjectured optimum where the
 catalogue records a minimal polynomial.
-Lower bounds are the strongest of four sources: the area bound `√n`, Nagamochi’s general
-closed form, monotonicity from the largest proved `m ≤ n`, and the value stated in
-Stromquist’s Theorem 2 for `n ≥ 11`. Exp-017 now supplies an exact source-distinct
-certificate for the last value; D-152 still requires every provenance display to say
-that the published Figure 14 proof is false as printed.
+The reported lower-bound column preserves the strongest literal source claim recorded
+on each case page. Its recurring inputs are the area bound `√n`, Nagamochi’s general
+closed form, monotonicity from a smaller proved case, Stromquist’s Theorem 2 for
+`n ≥ 11`, and case-specific DS7 or author reports. It is intentionally separate from
+the repository's verified lower-bound column in
+[`frontier/STATUS.md`](../../../packing/frontier/STATUS.md), where T-017 through T-020
+now move `n = 11–12` and `n = 17–21`. Exp-017 supplies an exact source-distinct
+certificate for Stromquist’s value; D-152 still requires every provenance display to
+say that the published Figure 14 proof is false as printed.
 
 This table and the solved-case table below are **generated** from
 [`packing/frontier/`](../../../packing/frontier/README.md), where the same facts live as
@@ -838,11 +850,11 @@ Use the structured form to query or plot; use these tables to read.
 | --- | --- | --- | --- | --- | --- | --- |
 | 11 | 3.87708359 | hand | 8 | 3.788854 | unavoidable points | 0.0882 |
 | 12 | 4 | grid | — | 3.788854 | monotone from `s(11)` | 0.2111 |
-| 17 | 4.67553009 | hand | 18 | 4.162278 | Nagamochi | 0.5133 |
-| 18 | `(7/2) + (1/2)√7` = 4.82287566 | hand | — | 4.316625 | Nagamochi | 0.5063 |
-| 19 | `3 + (4/3)√2` = 4.88561808 | hand | — | 4.464102 | Nagamochi | 0.4215 |
+| 17 | 4.67553009 | hand | 18 | 4.5058 | unavoidable points | 0.1697 |
+| 18 | `(7/2) + (1/2)√7` = 4.82287566 | hand | — | 4.5058 | monotone | 0.3171 |
+| 19 | `3 + (4/3)√2` = 4.88561808 | hand | — | 4.5058 | monotone | 0.3798 |
 | 20 | 5 | grid | — | 4.605551 | Nagamochi | 0.3944 |
-| 21 | 5 | grid | — | 4.741657 | Nagamochi | 0.2583 |
+| 21 | 5 | grid | — | 4.7438 | source report | 0.2562 |
 | 26 | `(7/2) + (3/2)√2` = 5.62132034 | extension | — | 5.123106 | Nagamochi | 0.4982 |
 | 27 | `5 + (1/2)√2` = 5.70710678 | strip | — | 5.242641 | Nagamochi | 0.4645 |
 | 28 | 5.82444462 | annealing | 6 | 5.358899 | Nagamochi | 0.4655 |
@@ -1109,7 +1121,7 @@ successive papers refining rather than replacing it.
 | 19 | Electrical-network / Kirchhoff methods | dissection tradition | Linear circuit laws on a dissection graph | Not applicable — see below |
 | 20 | Graph encodings of dissections (c-nets) | dissection tradition | Enumerate planar graphs of a tiling | Not applicable — dissection-only |
 | 21 | Transversal / hitting-set theory | transversal and wider | `τ ≥ ν`; bound the piercing number | Applied explicitly by Bašić–Slivková (2018), who study the piercing number of all unit-square poses in a square, connect it to s(n), and derive a specialized n=61 lower bound. Classical unavoidable-point proofs are the integral special case. |
-| 22 | Fractional transversals and LP duality | transversal and wider | Relax piercing to an LP; use the dual fractional packing | Burns’s August 2026 n=17 note gives the pure-atomic, exact-rational direction-net architecture; Massaccesi uses LP to generate fixed weights. The repository replays that certificate as T-015 and uses the same architecture for the first-party T-018 and T-019 certificates. T-018’s finite coverage decision is also checked by a method-distinct interval branch-and-bound. This is a modern implementation of the older resource-starvation lineage, not a new fractional-cover principle. |
+| 22 | Fractional transversals and LP duality | transversal and wider | Relax piercing to an LP; use the dual fractional packing | Integral unavoidable points, Kearney--Shiu's dual counting, Nagamochi's scored point/segment/area resources, and Bentz's resource-starvation framing form the older lineage. Burns's August 2026 n=17 note gives the pure-atomic, exact-rational direction-net architecture; Massaccesi uses LP to generate fixed weights. The repository replays that certificate as T-015, supplies a reusable generator, and retains first-party instances T-017 through T-020 at n = 11, 12, 17--21. Their finite coverage decisions are checked both by exact event-cell sweeps and by a method-distinct interval branch-and-bound. The certificates are new instances of an established fractional-cover principle, not a new principle. |
 | 23 | Integrality-gap bounds (Wegner-type) | transversal and wider | Bound `τ/ν` for families of squares | Bounds exist for squares [Caoduro–Sebő]; no connection to `s(n)` was found in the retrieved corpus |
 | 24 | Gallai- and Helly-type theorems | transversal and wider | Structural results forcing small transversals | No application to `s(n)` was found in the retrieved corpus |
 | 25 | Delsarte/Cohn–Elkies LP bounds | transversal and wider | Auxiliary functions certifying density bounds | Powerful for lattice sphere packing; no bounded-container `s(n)` analogue was found in the retrieved corpus |

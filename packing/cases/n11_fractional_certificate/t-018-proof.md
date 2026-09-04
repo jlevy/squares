@@ -27,7 +27,7 @@ contrary to `μ(K) = 434547/40000 < 11`. Thus no packing fits in `K`; any smalle
 container embeds in `K`, so `s(11) ≥ 381/100`. Only coordinate-swap invariance is used;
 full D4 invariance is stronger than necessary, and no compactness claim is needed.
 
-![The T-018 weighted atoms, a tight C4 witness, and the shrink-and-snap containment step](t-018-proof-visual.svg)
+![The T-018 weighted atoms, a tight Condition 5 witness, and the shrink-and-snap containment step](t-018-proof-visual.svg)
 
 ## The four exact facts
 
@@ -80,7 +80,7 @@ with integer prefix sums.
 It binds the retained file’s SHA-256
 `b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a`, examines 567,130,649
 feasible cells, recomputes the minimum `4001/4000`, and scales every weight by
-`3999/4001` to exhibit a must-refuse C4 witness at `3999/4000`. The larger
+`3999/4001` to exhibit a must-refuse **Condition 5** witness at `3999/4000`. The larger
 self-contained verifier in [`thirdparty/verify.py`](thirdparty/verify.py), when pointed
 explicitly at the current certificate, independently obtains the same minimum, directly
 re-summing each direction’s minimizing witness and any requested sampled feasible cells.

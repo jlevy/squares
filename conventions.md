@@ -280,6 +280,11 @@ results) is defined there and only there, and the results register at
 `packing/frontier/results.yaml` is where a whole result’s rungs are declared and
 re-derived on every validation run.
 
+**Reserve `C0`–`C5` for confirmation levels.** [convention] Numbered hypotheses or
+checks inside a proof are written as **Condition 1**, **Condition 2**, and so on, never
+as `C1`, `C2`, etc. This keeps local proof notation from colliding with the repository's
+result-level confirmation ladder.
+
 **Budgets are in pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`. [convention]
 Machine-independent, and comparable across proposers whose move semantics differ.
 Wall clock is reported alongside as a courtesy, never as the budget.

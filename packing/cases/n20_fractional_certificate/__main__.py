@@ -1,7 +1,7 @@
-"""Replay the retained top n = 17 certificate and report every condition.
+"""Replay the retained n = 20 certificate and report every condition.
 
 Exits non-zero if any condition fails, so the replay is a gate and not a
-report. Run as ``python -m cases.n17_fractional_certificate``.
+report. Run as ``python -m cases.n20_fractional_certificate``.
 """
 
 from __future__ import annotations
@@ -9,8 +9,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from cases.n17_fractional_certificate.replay import CERTIFICATE_PATH, snapshot
-from sqpack.fractional.certificate import verify
+from cases.n20_fractional_certificate.replay import CERTIFICATE_PATH, snapshot
+from sqpack.fractional.certificate import least_size_certified, verify
 
 
 def replay(path: Path) -> int:
@@ -42,7 +42,8 @@ def replay(path: Path) -> int:
     if str(verdict.minimum_cell_mass) != record["least_cell_mass"]:
         print("REFUSED: the retained least cell mass disagrees with the replay")
         return 1
-    print(f"VERIFIED: s({certificate.n}) >= {certificate.bounded_side}")
+    least = least_size_certified(certificate.total_mass)
+    print(f"VERIFIED: s(m) >= {certificate.bounded_side} for every m >= {least}")
     return 0
 
 

@@ -789,7 +789,8 @@ def test_only_measured_whole_suite_steps_have_budgets() -> None:
     every complete finite certificate decision deferred out of the fast tier by D-438;
     D-451 records why their aggregate cannot inherit the fifteen-minute default, and
     D-471 rebudgets the aggregate after the introducing commit reported 4,866 seconds
-    for the current n = 12 decision; no raw timing transcript was retained.
+    for the current n = 12 decision, and D-478 restores the margin after the n = 20
+    exact replay added a reported 5,378 seconds; no raw timing transcripts were retained.
     A
     fourth budgeted step would mean the shared cap is wrong rather than that another
     step is special, and should trigger a redesign instead of extending this set.
@@ -803,7 +804,7 @@ def test_only_measured_whole_suite_steps_have_budgets() -> None:
     assert budgeted == {
         "negative controls": 1800,
         "fast behavioral tests": 2700,
-        "exhaustive exact behavioral tests": 14400,
+        "exhaustive exact behavioral tests": 21600,
     }
 
 

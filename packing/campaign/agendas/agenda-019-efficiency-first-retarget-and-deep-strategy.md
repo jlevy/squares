@@ -11,7 +11,7 @@ agenda:
   updated: '2026-09-04'
   status: paused
   objective: >-
-    Agenda 017's block moved five registered cases and then hit a wall that is not
+    Agenda 017's block moved seven registered cases and then hit a wall that is not
     mathematical. The exact event-cell sweep grew superlinearly with the atom count until
     a single decision cost hours, one search spent fifty-five minutes failing to finish
     its first round on a parameter that was tuned two container sides ago, and four lanes
@@ -188,18 +188,21 @@ agenda:
     state: blocked
     priority: 2
     question: >-
-      No certificate of this shape exists above ceil(sqrt(n)) * B, so the method
-      approaches the grid bound and never reaches it, and n = 12 is foreclosed against its
-      conjectured 4. What would a method that escapes that ceiling have to look like?
+      No single certificate on a fixed finite direction net exists above
+      ceil(sqrt(n)) * B, so n = 12 is foreclosed on the current net against its
+      conjectured 4. A refined-net family plus a limit is not excluded. What would a
+      method that escapes the finite-net ceiling have to look like?
     budget: >-
       90 elapsed minutes, Opus at maximum thinking, insight-iteration, after BC-192.
       The ceiling has one mechanism and it is worth attacking directly: above
       ceil(sqrt(n)) * B a grid of ceil(sqrt(n))^2 pairwise disjoint axis-parallel
-      B-squares fits inside the container, C4 gives each of them mass at least 1, and the
+      B-squares fits inside the container, **Condition 5** gives each of them mass at
+      least 1, and the
       total passes n. Every step of that is cheap, which is why the ceiling is sharp.
       Directions worth an hour and a half. The refuting grid is axis-parallel and uses
       direction 0 only; a condition that treated directions unequally would not be refuted
-      by it, but C3's containment argument is what forces every direction to be covered,
+      by it, but **Condition 4**'s containment argument is what forces every direction
+      to be covered,
       so the question is whether a weaker containment step exists. The shrink B is already
       maximal for its net, so raising it needs a finer net and the ceiling rises only as
       fast as D falls, which is about T/K. Whether an unavoidable set of shapes other than
@@ -305,19 +308,64 @@ Begin at `BC-190` and `BC-191` together, on separate cores, both under
 else depends on at least one of them.
 That ordering is the agenda’s whole argument.
 
+## State at handoff
+
+Written for whoever picks this up cold, so that nothing below has to be reconstructed
+from the pull request.
+
+**Retained and closed.** Seven registered cases carry a first-party weighted fractional
+unavoidable-set certificate, and every one was decided twice from frozen bytes by two
+methods that fail differently and agreed on the least covered mass to the digit.
+
+| Case | Side | Result | `S` |
+| --- | --- | --- | --- |
+| `n = 11` | `381/100` | `T-018` | `S5` |
+| `n = 12` | `99/25` | `T-017` | `S4` |
+| `n = 17`, `18` | `459/100` | `T-019` | `S4` |
+| `n = 19`, `20`, `21` | `24/5` | `T-020` | `S4` |
+
+**Open, with different evidence boundaries.** Two sides were attacked and neither
+settled. The n = 11 artifacts are retained; the n = 18 figures are an operator report
+without its raw log, checkpoint, or candidate, so that run must be reproduced before
+its details can be treated as validated measurements.
+
+- `n = 18` at `117/25 = 4.68`. Three site sets, 538, 578 and 618 orbits, all returned a
+  restricted optimum of exactly `18.000000`, the third after 157 row rounds and 7056 s.
+  Adding sites can only lower a restricted optimum and it did not move.
+  Either the covering value is at or above eighteen, or the optimum sits on a degenerate
+  vertex. `T-019`’s `next_rung` carries both readings and the evidence for each.
+- `n = 11` at `19/5 + 1/100 = 3.82`. Two independent site sets stop at exactly eleven,
+  and the rejection route is far from closing: the exact maximum pointwise depth is
+  `1925/1152`, which caps the feasible total at `1152/175` against the eleven a ceiling
+  needs. `T-018`’s `next_rung` has the full account.
+
+**Where the method stops, which is now proved rather than guessed.** No certificate for
+`n` exists above `ceil(sqrt(n)) * B`. `n = 12` is foreclosed against its conjectured
+`4`. At `n = 20` and `n = 21`, the ceiling leaves `0.1885` above the current result and
+prevents this method from reaching within less than `0.0115` of the upper bound; it does
+not show that certificates fill that runway. `n = 11`, `17`, `18` and `19` are limited
+by their best known packings rather than by the ceiling.
+
+**What the next block must not skip.** `BC-190` and `BC-191` come first because the
+retention gate is now the dominant observed cost: one operator report gives `5378 s` at
+2260 atoms. The few retained timing reports suggest steep growth but do not establish a
+complexity law. Reproduce the measurements and reduce the gate cost before committing a
+block to larger certificates.
+
 ## Why efficiency before bounds
 
-Agenda 017 moved five registered cases in a day.
+Agenda 017 moved seven registered cases in a day.
 It also spent its time like this.
-Most figures are from its own logs; the 2,097-atom pair is an operator-reported same-run
-measurement preserved in the introducing commit and evidence prose, without its raw
-transcript:
+The 2,097- and 2,260-atom pairs are operator-reported same-run measurements preserved
+in introducing prose without raw timing transcripts, machine descriptions, or load
+traces:
 
 | Where the time went | Measured |
 | --- | --- |
 | Exact sweep, 425 atoms | `181 s` — against the interval route’s `9.4 s` on identical bytes |
 | Exact sweep, 1184 atoms | `1473 s` — against `65 s` |
 | Exact sweep, 2097 atoms | `4866 s` — against `110 s`; raw timing transcript not retained |
+| Exact sweep, 2260 atoms | `5378 s` — against `173 s`; raw timing transcript not retained |
 | Row generation, share of a round | `79%` to `94%` at every side measured |
 | `n = 20` round 0, grids `(23, 31, 39)` | over `3300 s`, did not finish |
 | `n = 20` round 0, grids `(29, 39, 49)` | `376 s` |
@@ -328,12 +376,11 @@ Three of those are not close calls.
 
 The interval route decides **361 directions where the exact sweep decides 181**, needs
 one fewer hypothesis — deciding on the doubled net it never invokes the `D4` reflection,
-so it does not need `C0` at all — and ran 22.7 and 44.2 times faster at the two largest
-identically timed atom counts.
-The ratio widened between those two measurements, which is the direction the
-certificates are moving.
-Their effective exponents, 2.09 and 0.92, describe this pair of runs only; `BC-190`
-exists to determine whether that scaling persists.
+so it does not need **Condition 1** at all — and ran 22.7, 44.2, and 31 times faster in
+the three reported pairs at 1184, 2097, and 2260 atoms.
+The ratios are neither monotone nor controlled for machine load. The effective slopes
+that can be fitted to these few observations describe those reports only; `BC-190`
+exists to reproduce them and determine whether any scaling pattern persists.
 The exact sweep belongs at the retention gate, where correctness is the only thing that
 matters and a long checkpoint is affordable.
 Whether it belongs in the generator’s inner loop is a question nobody has asked, and

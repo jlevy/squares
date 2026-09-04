@@ -13,12 +13,16 @@ import hashlib
 import json
 import math
 import runpy
+from collections.abc import Callable
 from fractions import Fraction
 from pathlib import Path
+from types import ModuleType
 
 import numpy as np
 import pytest
 
+import cases.n17_fractional_certificate.__main__ as n17_entrypoint
+import cases.n20_fractional_certificate.__main__ as n20_entrypoint
 from cases.n11_fractional_certificate.__main__ import replay as replay_n11
 from cases.n11_fractional_certificate.replay import CERTIFICATE_PATH as N11_CERTIFICATE_PATH
 from cases.n11_fractional_certificate.replay import FIRST_RUNG_PATH as N11_FIRST_RUNG
@@ -27,11 +31,16 @@ from cases.n11_fractional_certificate.replay import declared as n11_declared
 from cases.n11_fractional_certificate.replay import load as n11_load
 from cases.n12_fractional_certificate.__main__ import replay as replay_n12
 from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH, declared, load
+from cases.n17_fractional_certificate.__main__ import replay as replay_n17
 from cases.n17_fractional_certificate.replay import declared as n17_declared
 from cases.n17_fractional_certificate.replay import load as n17_load
 from cases.n17_weighted_certificate.fixture import load_retained_fixture
+from cases.n20_fractional_certificate.__main__ import replay as replay_n20
+from cases.n20_fractional_certificate.replay import declared as n20_declared
+from cases.n20_fractional_certificate.replay import load as n20_load
 from sqpack.fractional.certificate import (
     Certificate,
+    Verdict,
     ceiling_side,
     ceiling_side_for_net,
     grid_refutation_order,
@@ -206,6 +215,84 @@ def test_n12_replay_refuses_declared_value_drift(
 
     assert replay_n12(path) == 1
     assert message in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("replay", [replay_n17, replay_n20], ids=["n17", "n20"])
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        ("claim", "s(2) >= 2", "retained claim disagrees"),
+        ("total_mass", "0", "retained total mass disagrees"),
+        ("least_cell_mass", "2", "retained least cell mass disagrees"),
+    ],
+)
+def test_n17_and_n20_replays_refuse_declared_value_drift(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    replay: Callable[[Path], int],
+    mutation: tuple[str, str, str],
+) -> None:
+    """Every named retained replay binds its reader-visible theorem declarations."""
+    field, wrong, message = mutation
+    record = {
+        "id": "small-replay-control",
+        "n": 2,
+        "outer_side": "1",
+        "square_side": "3/5",
+        "angle_limit": "1/2",
+        "direction_steps": 1,
+        "symmetry": "D4",
+        "claim": "s(2) >= 1",
+        "total_mass": "1",
+        "least_cell_mass": "1",
+        "atoms": [["1/2", "1/2", "1"]],
+    }
+    record[field] = wrong
+    path = tmp_path / "certificate.json"
+    path.write_text(json.dumps(record), encoding="utf-8")
+
+    assert replay(path) == 1
+    assert message in capsys.readouterr().out
+
+
+@pytest.mark.parametrize(
+    "entrypoint",
+    [n17_entrypoint, n20_entrypoint],
+    ids=["n17", "n20"],
+)
+def test_n17_and_n20_replays_refuse_a_file_changed_during_verification(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+    entrypoint: ModuleType,
+) -> None:
+    """A long replay may report only on the same bytes it parsed."""
+    record = {
+        "id": "small-replay-control",
+        "n": 2,
+        "outer_side": "1",
+        "square_side": "3/5",
+        "angle_limit": "1/2",
+        "direction_steps": 1,
+        "symmetry": "D4",
+        "claim": "s(2) >= 1",
+        "total_mass": "1",
+        "least_cell_mass": "1",
+        "atoms": [["1/2", "1/2", "1"]],
+    }
+    path = tmp_path / "certificate.json"
+    path.write_text(json.dumps(record), encoding="utf-8")
+    real_verify: Callable[[Certificate], Verdict] = entrypoint.verify
+
+    def mutate_path(certificate: Certificate) -> Verdict:
+        verdict = real_verify(certificate)
+        changed = record | {"claim": "s(2) >= 2"}
+        path.write_text(json.dumps(changed), encoding="utf-8")
+        return verdict
+
+    monkeypatch.setattr(entrypoint, "verify", mutate_path)
+    assert entrypoint.replay(path) == 1
+    assert "changed during replay" in capsys.readouterr().out
 
 
 def test_a_net_short_of_an_eighth_turn_is_refused() -> None:
@@ -619,11 +706,85 @@ def test_the_n17_certificate_does_not_improve_n20() -> None:
     """The scope claim: 459/100 lifts n = 17, 18 and 19, and not n = 20.
 
     The certificate's own mass carries it upward, so n = 20 does inherit 459/100 --
-    but Nagamochi's closed form already gives it 1 + sqrt(13), which is larger.
-    Decided in integers: 1 + sqrt(13) > 459/100 iff 13 * 100^2 > (459 - 100)^2.
+    but it improved nothing there, because Nagamochi's closed form already gave
+    n = 20 the larger 1 + sqrt(13). Decided in integers, on the retained rung:
+    1 + sqrt(13) > 459/100 iff 13 * 100^2 > (459 - 100)^2.
+    n = 20 has since moved to 24/5 by a different certificate (T-020), which is
+    larger again; that does not change what this one reaches.
     """
     assert 13 * 100**2 > (459 - 100) ** 2
     assert n17_load().bounded_side == Fraction(459, 100)
+    assert n20_load().bounded_side > Fraction(459, 100)
+
+
+def test_the_n20_certificate_displaces_nagamochis_closed_form() -> None:
+    """s(19), s(20) and s(21) >= 24/5, decided from the file.
+
+    Nagamochi's 2005 closed form gave n = 20 and n = 21 their whole lower bound
+    until 2026-09-04: 1 + sqrt(13) and 1 + sqrt(14). Both comparisons are decided
+    in integers -- 1 + sqrt(k) < 24/5 iff 25k < 19^2 -- so no float square root
+    stands between the record and the claim.
+
+    What the certificate claims is checked here; that a verifier accepts it is
+    the exhaustive test below, which costs an hour and a half.
+    """
+    certificate = n20_load()
+    assert certificate.n == 20
+    assert certificate.bounded_side == Fraction(24, 5)
+    assert certificate.total_mass == Fraction(946131, 50000)
+    assert len(certificate.atoms) == 2260
+
+    assert 25 * 13 < 19**2, "1 + sqrt(13) < 24/5 at n = 20"
+    assert 25 * 14 < 19**2, "1 + sqrt(14) < 24/5 at n = 21"
+
+    record = n20_declared()
+    assert record["claim"] == "s(20) >= 24/5"
+    assert record["total_mass"] == str(certificate.total_mass)
+    assert record["least_cell_mass"] == "50007/50000"
+
+
+@pytest.mark.exhaustive_exact
+def test_the_n20_certificate_is_accepted() -> None:
+    """The 2260-atom certificate over 181 directions, decided exactly.
+
+    Marked exhaustive: this took 5378 s on the machine that retained it, the
+    largest exact decision in the corpus, and the fast tests around it already
+    pin every number the record claims about the same file.
+    """
+    certificate = n20_load()
+    verdict = verify(certificate)
+    assert verdict.accepted, verdict.failures
+    assert verdict.minimum_cell_mass is not None
+    assert verdict.minimum_cell_mass >= 1
+    assert n20_declared()["least_cell_mass"] == str(verdict.minimum_cell_mass)
+
+
+def test_the_n20_certificate_starts_at_19_and_moves_only_19_20_21() -> None:
+    """The certificate applies from 19 upward and improves exactly three records.
+
+    The register already holds 5 from n = 22 on, so the certificate is true
+    there and weaker. Below, n = 18 is out of reach in the other direction:
+    these atoms are heavier than eighteen, so the total-mass condition refuses them --
+    which is why T-019 still holds n = 17 and n = 18 alone.
+    """
+    certificate = n20_load()
+    assert least_size_certified(certificate.total_mass) == 19
+    for size in (19, 20, 21):
+        assert certificate.total_mass < size
+    assert certificate.total_mass > 18, "the total-mass condition refuses n = 18"
+    assert certificate.bounded_side < 5, "n >= 22 already holds the trivial 5"
+
+
+def test_the_n20_certificate_does_not_contradict_the_n19_packing() -> None:
+    """No certificate can exceed a side an actual packing achieves.
+
+    Wainwright's packing gives s(19) <= 3 + (4/3) sqrt(2). If a certificate
+    certified a side above it, one of the two would be wrong, so this is a check
+    on the record and not only on the arithmetic. Decided in integers:
+    24/5 < 3 + 4 sqrt(2) / 3 iff 27 < 20 sqrt(2) iff 729 < 800.
+    """
+    assert 27**2 < 800, "24/5 sits below the retained n = 19 packing"
+    assert n20_load().bounded_side == Fraction(24, 5)
 
 
 def test_the_grid_refutation_order_is_the_integer_ceiling_of_the_root() -> None:
@@ -641,7 +802,7 @@ def test_every_retained_certificate_sits_below_its_own_ceiling() -> None:
     A retained certificate above its ceiling would mean one of the two is wrong,
     so this is a check on the record and not only on the arithmetic.
     """
-    for certificate in (n11_load(), load(), n17_load()):
+    for certificate in (n11_load(), load(), n17_load(), n20_load()):
         ceiling = ceiling_side(certificate.n, certificate.square_side)
         assert certificate.outer_side <= ceiling, (
             f"n = {certificate.n} claims {certificate.outer_side} above its ceiling {ceiling}"

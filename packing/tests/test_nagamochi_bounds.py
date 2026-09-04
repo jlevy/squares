@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """The register's most load-bearing citation is checked as arithmetic, not just as a link.
 
-`E-nagamochi-lower` carries the verified lower bound for 85 of the hundred cases (88
+`E-nagamochi-lower` carries the verified lower bound for 83 of the hundred cases (88
 until 2026-08-31, when the first-party green17 certificate took over `n = 17` and
-`n = 18`, then 85 when the adopted 4.5058 bound took `n = 19` on 2026-09-03); the
+`n = 18`, 85 when the adopted 4.5058 bound took `n = 19` on 2026-09-03, then 83 when
+T-020 moved n = 20 and n = 21 on 2026-09-04); the
 next most-cited evidence record carries two. `assurance.py` checks that
 such a bound cites verified evidence of the right claim and scope, which is a statement
-about the citation. A transcription slip in any one of the 85 values would have passed
+about the citation. A transcription slip in any one of the 83 values would have passed
 every existing check.
 """
 
@@ -34,9 +35,9 @@ def test_the_recorded_bounds_re_derive() -> None:
 
 
 def test_it_covers_the_cases_it_claims_to() -> None:
-    """Eighty-five, and none outside the record's declared scope of 4 to 100."""
+    """Eighty-three, and none outside the record's declared scope of 4 to 100."""
     covered = citing()
-    assert len(covered) == 85
+    assert len(covered) == 83
     assert min(covered) >= 4
     assert max(covered) <= 100
     # The two cases the green17 certificate took over cite it no longer.
@@ -45,6 +46,8 @@ def test_it_covers_the_cases_it_claims_to() -> None:
     # `n = 19` left on 2026-09-03, when `T-016` adopted the source-backed 4.5058
     # bound and beat Theorem 2's `1 + sqrt(12)` there.
     assert 19 not in covered
+    assert 20 not in covered
+    assert 21 not in covered
 
 
 @pytest.mark.parametrize("n", [4, 7, 8, 9, 14, 15, 16, 99, 100])
@@ -84,15 +87,10 @@ def test_a_wrong_value_is_refused(monkeypatch: pytest.MonkeyPatch) -> None:
 
     def poisoned() -> dict[int, dict]:
         found = real()
-        # Poison a case this record still carries. `n = 19` was the target until
-        # `T-016` took it over on 2026-09-03, at which point poisoning it stopped
-        # reaching the checker at all and this control passed without biting.
-        # The value has to miss by more than one unit in its own last place: the
-        # tolerance is `10 ** -places`, so against `n = 20`'s `4.6055...` both `4.6`
-        # and `4.7` are accepted at one decimal place, and only `4.8` disagrees.
-        # It also has to stay under the reported upper bound of 5.0, or the checker
-        # reports an inversion instead and the control passes for the wrong reason.
-        found[20]["verified_lower_bound"]["value"] = "4.8"
+        # Poison a case this record still carries. The value must stay under its reported
+        # upper bound so the checker reports the intended arithmetic mismatch rather than
+        # an inversion.
+        found[26]["verified_lower_bound"]["value"] = "5.1"
         return found
 
     monkeypatch.setattr(nagamochi, "cases", poisoned)
@@ -117,4 +115,4 @@ def test_a_stale_readme_count_is_refused(
     problems = prose_counts(cases())
     assert len(problems) == 1
     assert "63 of 65" in problems[0]
-    assert "60 of 65" in problems[0]
+    assert "58 of 65" in problems[0]

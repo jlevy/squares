@@ -136,17 +136,18 @@ conditions:
 
 | Condition | Exact fact in T-018 | Its job in the proof |
 | --- | --- | --- |
-| `C0` | The weighted atoms have the square container’s symmetries | Reflect an orientation without changing covered mass |
-| `C1` | `μ(K) = 434547/40000 = 10.863675 < 11` | Supply less total mass than eleven packed squares would require |
-| `C2` | A net of 181 directions reaches `π/4` | Put every reduced square orientation between two checked directions |
-| `C3` | For `B = 9977/10000`, `B(1 + D) < 1` | Fit a closed side-`B` square at a nearby net direction strictly inside each unit square |
-| `C4` | Every admissible side-`B` square at every net direction covers mass at least `4001/4000` | Give each inner square more than one unit of mass |
+| **Condition 1** | The weighted atoms have the square container’s symmetries | Reflect an orientation without changing covered mass |
+| **Condition 2** | `μ(K) = 434547/40000 = 10.863675 < 11` | Supply less total mass than eleven packed squares would require |
+| **Condition 3** | A net of 181 directions reaches `π/4` | Put every reduced square orientation between two checked directions |
+| **Condition 4** | For `B = 9977/10000`, `B(1 + D) < 1` | Fit a closed side-`B` square at a nearby net direction strictly inside each unit square |
+| **Condition 5** | Every admissible side-`B` square at every net direction covers mass at least `4001/4000` | Give each inner square more than one unit of mass |
 
 **The counting contradiction.** Suppose eleven unit squares fit in `K` with disjoint
-interiors. Inside each one, put the side-`B` square supplied by C2 and C3. The inner
+interiors. Inside each one, put the side-`B` square supplied by **Conditions 3 and 4**. The inner
 squares are closed but lie strictly inside their parent interiors, so they are pairwise
 disjoint and no atom belongs to two of them.
-C4 gives each inner square mass at least `4001/4000`. Nonnegativity and C1 would then
+**Condition 5** gives each inner square mass at least `4001/4000`. Nonnegativity and
+**Condition 2** would then
 force the impossible chain
 
 ```text
@@ -158,7 +159,8 @@ Thus eleven unit squares do not fit at side `381/100`. A packing in any smaller
 container would also fit inside `K`, so `s(11) ≥ 381/100`.
 
 **How 181 directions cover every orientation.** A square is unchanged by a quarter turn,
-and diagonal reflection reduces its angle to `[0,π/4]` while C0 preserves mass.
+and diagonal reflection reduces its angle to `[0,π/4]` while **Condition 1** preserves
+mass.
 The net directions are `θᵣ = 2 arctan(tᵣ)`, represented by rational half-angle tangents
 so their sines and cosines are rational too.
 For an arbitrary reduced angle, choose the nearer endpoint of the net interval that
@@ -196,9 +198,10 @@ With negative weights, both monotonicity statements fail: an atom gained on a bo
 could reduce the score, and negative mass outside the eleven inner squares could make
 the container’s total misleadingly small.
 
-The proof and the computation meet at C4. The symmetry, total-mass, net-endpoint and
+The proof and the computation meet at **Condition 5**. The symmetry, total-mass,
+net-endpoint and
 shrink checks are short rational calculations.
-C4 is the large finite lemma: the theorem-specific, standard-library-only
+**Condition 5** is the large finite lemma: the theorem-specific, standard-library-only
 [`minimal_verify.py`](packing/cases/n11_fractional_certificate/minimal_verify.py) binds
 the certificate’s hash, examines 567,130,649 feasible event cells, and recomputes the
 exact minimum `4001/4000`. It also scales the weights down to exhibit a placement below

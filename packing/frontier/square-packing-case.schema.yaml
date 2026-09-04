@@ -253,7 +253,7 @@ $defs:
       value: {type: string, minLength: 1}
       exact_form: {type: [string, 'null']}
       kind:
-        enum: [area, perfect-square, nagamochi, monotonicity, unavoidable-points, counting]
+        enum: [area, perfect-square, nagamochi, monotonicity, unavoidable-points, counting, source-report]
       proved_by: {type: array, items: {type: string}, default: []}
       proved_year: {type: [integer, 'null']}
       source_key: {type: [string, 'null']}

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 474
+count: 480
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14946,3 +14946,221 @@ defects:
     pins the source index, exception, chronology, provenance wording and method-lineage
     references to their canonical records.
   recorded_in: packing/resources/README.md
+- id: D-475
+  title: A case body kept quoting a bound its own front matter had already moved past
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: inspection
+  recurrence_of: D-467
+  latent_for: >-
+    six hours at n = 17, n = 18 and n = 19, from the T-019 retention on 2026-09-04 until
+    the T-020 retention the same evening went to update the same files; and, in the
+    second instance below, from the T-019 retention until the same read
+  severity: medium
+  what: >-
+    A frontier case file is two records in one document: YAML front matter, which is
+    machine-checked, and hand-written Markdown prose below it, which is not. Retaining a
+    result updates `verified_lower_bound` in the front matter of every case it moves. It
+    does not update the prose, and nothing checked that the two agree.
+    So after T-019 moved n = 17, n = 18 and n = 19 to 459/100, all three bodies still
+    opened by telling the reader the verified lower bound was 22529/5000 = 4.5058, with
+    n = 18's and n = 19's still explaining that the bound is inherited by monotonicity
+    from a certificate they no longer depend on. The front matter said one thing and the
+    sentence a human reads first said another.
+    Two further instances of the same class were found in the same read, in places the
+    existing detector does not look. `T-019`'s own `next_rung` described "this
+    certificate's 16.965735" -- the mass of the 229/50 rung, quoted as the retained
+    459/100 rung's, whose mass is 423327/25000 = 16.933080. `check_rung_figures` covers
+    exactly this and missed it, because it recognises a total written as "the total is
+    X" and not one written as a possessive. And `test_the_n17_certificate_does_not_reach_
+    n20` had a docstring naming 459/100 over an assertion testing 229/50; both integer
+    comparisons are true, so no test failed when the rung moved underneath it.
+    A fourth instance was found by the detector itself, on its first run over the live
+    corpus, in a case nobody in this session had touched: n-029's opening paragraph
+    reported the verified upper bound as 5.93388579981302587863645209, the ceiling that
+    case held before T-009 replaced it with 5.93383346267692918974379895098 -- a value
+    the very next section of the same document states correctly. The paragraph also
+    explained a discrepancy that no longer exists, the two bounds now differing by
+    9.18974379895098E-15 rather than by the fifth decimal.
+    The first detector draft then repeated the semantic problem in reverse: even when a
+    sentence explicitly said "verified lower bound", it allowed the figure to match the
+    weaker `reported_lower_bound` fallback. A stale verified claim could therefore pass.
+  consequence: >-
+    No bound is wrong and no verdict changes. Every affected statement was true when it
+    was written and each named a real, correctly computed figure; what drifted is which
+    object the figure describes. The cost is to a reader, and it is not small: the case
+    body is the document a person opens to learn what is known about a size, and for six
+    hours it under-reported three cases by 0.0842 and attributed them to the wrong
+    certificate.
+    This is `D-439` recurring, six hours after `D-439` was recorded and its detector
+    built. That is the finding worth keeping. The detector answered the surface the defect
+    was found on -- the results register -- and the same failure simply moved to the two
+    surfaces beside it, the case bodies and the tests. A durable record has more than one
+    place to describe a rung, and each one needs its own check or it will be the next one
+    to go stale.
+  fix: >-
+    Fixed on 2026-09-04. The six affected case bodies (n = 17 through n = 21, and
+    n = 29) are rewritten against their own front matter, with the displaced bounds kept
+    as history and marked as displaced rather than deleted. T-019's possessive figure is corrected to
+    the retained certificate's own mass, and the n = 17 test's assertion is brought onto
+    the rung its docstring names.
+    The durable part is `devtools/check_case_prose.py`, which reads every case file's
+    front matter and its prose and refuses any quoted bound on that file's own n that
+    disagrees with the record, allowing a displaced figure only where the same sentence
+    marks it as history. It parses exact rationals, associates a figure with its nearest
+    bound anchor, keeps verified and reported provenance distinct, and applies
+    directionally safe rounding: lower-bound decimals may round down and upper-bound
+    decimals may round up, never the reverse. Its reusable repair mode corrected 56
+    pre-existing decimal renderings to that convention. Claims explicitly anchored as
+    verified, best proved, or best known must match the corresponding field and cannot
+    fall back to a weaker or differently sourced value.
+  regression: >-
+    packing/tests/test_case_prose.py covers provenance, exact fractions, sentence-scoped
+    history, nearest-anchor selection, bare verified phrases, and both unsafe rounding
+    directions; the validator runs the checker over all one hundred case files.
+  status: fixed
+  recorded_in: packing/devtools/check_case_prose.py
+- id: D-476
+  title: Two case replays could print VERIFIED while their declarations described another theorem
+  date: '2026-09-04'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  recurrence_of: D-444
+  latent_for: one parent revision at n = 20 and the lifetime of the n = 17 wrapper
+  severity: critical
+  status: fixed
+  what: >-
+    The n = 17 and n = 20 package entry points checked geometric acceptance and declared
+    total mass, but printed the file's claim before comparing it with the reconstructed
+    theorem and never compared `least_cell_mass` with the exact sweep. Mutating either
+    declaration could therefore leave the package's named replay green and end in
+    `VERIFIED`, even though the verifier had decided different data. Each wrapper also
+    read the certificate and declarations from the path separately and did not check the
+    bytes again after the sweep. A concurrent replacement during n = 20's roughly
+    ninety-minute exact replay could therefore combine one certificate with another
+    declaration or report success after the named path had changed.
+  consequence: >-
+    The retained certificates were unchanged and are independently valid, but a primary
+    replay command cited by the evidence record did not bind all reader-visible theorem
+    declarations to its computation.
+  fix: >-
+    Give both wrappers the declaration checks already used by the n = 11 and n = 12
+    wrappers: reconstruct and compare the claim, compare total mass, and compare the
+    computed exact least-cell mass before printing `VERIFIED`. Parse the certificate and
+    declarations from one byte snapshot, then compare the path with that snapshot after
+    verification and refuse if it changed or disappeared.
+  regression: >-
+    packing/tests/test_fractional_certificate.py mutates claim, total mass, and least cell
+    mass for both wrappers and requires a typed refusal for each mutation; a stubbed
+    verifier also changes the source path during the sweep and both wrappers must refuse.
+  recorded_in: packing/cases/n20_fractional_certificate/__main__.py
+- id: D-477
+  title: The n = 19--21 result erased lower bounds already listed in the retained DS7 survey
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  recurrence_of: D-474
+  latent_for: one parent revision
+  severity: high
+  status: fixed
+  what: >-
+    T-020 and its case pages said n = 20 and n = 21 had never had case-specific lower
+    bounds and compared 24/5 only with Nagamochi's closed form. The repository's retained
+    2009 Friedman DS7 survey explicitly lists 6*sqrt(2)-4 for n = 19--20 and about 4.7438
+    for n = 21. The n = 21 figure is stronger than Nagamochi's 4.741657, so the stated
+    +0.058343 literature movement was about 0.0021 too large. The same novelty evidence
+    also said no case-specific result existed at n = 19 while naming T-019 in the prior
+    sentence.
+  consequence: >-
+    The 24/5 certificate and all three inequalities remain valid. The error concerned
+    priority and comparison: it erased located prior reports and conflated movement from
+    the repository's verified baseline with movement past the strongest published report.
+  fix: >-
+    Record DS7's table as reported, not independently verified, evidence; update the n =
+    19--21 case records, result, README, synopsis, frontier survey, and novelty basis;
+    distinguish the three verified-baseline movements from the approximately 0.0562
+    n = 21 literature movement; and retain bounded `apparently-novel` wording for 24/5.
+  regression: >-
+    packing/tests/test_rung_figures.py pins the DS7 evidence and forbids the superseded
+    first-of-any-kind and Nagamochi-only history claims on the canonical surfaces.
+  recorded_in: packing/frontier/results.yaml
+- id: D-478
+  title: The n = 20 exact replay consumed the exhaustive suite's safety margin
+  date: '2026-09-04'
+  layer: tooling
+  class: performance
+  direction: conservative
+  detected_by: review
+  recurrence_of: D-471
+  latent_for: one parent revision
+  severity: high
+  status: fixed
+  what: >-
+    The exhaustive suite's 14,400-second ceiling was set from a conservative lower bound
+    above 8,192 seconds for the previously retained exact decisions. T-020 added an
+    operator-reported 5,378-second exact sweep, leaving less than 830 seconds, or about
+    six percent, under the ceiling before collection and other suite growth. That no
+    longer met the 50-percent operational margin used for the ordinary suite.
+  consequence: >-
+    A healthy complete research gate could be killed late in a multi-hour run and report
+    a conservative failure, making the documented merge checkpoint unreliable.
+  fix: >-
+    Raise only the exhaustive-exact suite ceiling to 21,600 seconds, more than 50 percent
+    over the conservative 13,570-second aggregate; keep ordinary and subset guards at
+    their tighter budgets. Re-measure and redesign rather than raising it again.
+  regression: packing/tests/test_validation_cli.py::test_only_measured_whole_suite_steps_have_budgets
+  recorded_in: packing/src/sqpack/cli/validate.py
+- id: D-479
+  title: The certificate-reach report omitted sections its own renderer required
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: one parent revision
+  severity: medium
+  status: fixed
+  what: >-
+    The reach renderer began emitting measured-attainment and explicitly speculative
+    extrapolation sections, but the committed generated report ended before both. Its
+    hard-coded observation table also said it held four measurements after T-020 supplied
+    a fifth retained side and mass.
+  consequence: >-
+    The renderer's `--check` failed, and the canonical research page did not show the
+    evidence boundary or the newest retained observation used by planning prose.
+  fix: >-
+    Add the 24/5 retained certificate as the fifth observation, keep operator-reported
+    optima and timings labelled as such, and regenerate the report from the corrected
+    renderer.
+  regression: packing/devtools/render_certificate_reach.py --check
+  recorded_in: packing/frontier/CERTIFICATE-REACH.md
+- id: D-480
+  title: Frontier count gates stayed at sixty Nagamochi cases after T-020 reduced them to fifty-eight
+  date: '2026-09-04'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  recurrence_of: D-430
+  latent_for: one parent revision
+  severity: high
+  status: fixed
+  what: >-
+    T-020 moved n = 20 and n = 21 off the verified Nagamochi baseline, but the validator
+    still required sixty open cases to cite that evidence and the dedicated tests still
+    expected eighty-five citations across all one hundred cases. Their negative control
+    also poisoned n = 20, which the checker no longer visits.
+  consequence: >-
+    The parent branch's own gate failed despite internally consistent current case
+    records, while the negative test could cease exercising its intended failure path.
+  fix: >-
+    Derive the current expectations as 58 of 65 open cases and 83 of 100 total cases,
+    assert that n = 20 and n = 21 have left the evidence set, and move the mutation
+    control to a case the theorem still carries.
+  regression: packing/tests/test_nagamochi_bounds.py
+  recorded_in: packing/src/sqpack/cli/validate.py

@@ -200,8 +200,8 @@ results:
     significance:
       score: 3
       rationale: >-
-        The workhorse lower bound: it carried 88 of the hundred cases until
-        2026-08-31 and still carries 86.
+        The workhorse lower bound: 88 of the hundred case records cite it, and it
+        currently supplies 83 operative verified lower bounds.
       scored: '2026-08-31'
       by: session-061 review (repository)
     novelty: previously-published
@@ -212,8 +212,9 @@ results:
       - packing/devtools/check_nagamochi_bounds.py
     next_rung: >-
       The proof itself is C1 with four named unverified items in the read;
-      the 86 recorded values are separately re-derived in the gate (a C2 fact
-      about the transcriptions). C3 means machine-checking Theorem 1's
+      the 83 current verified-field values are separately re-derived in the gate (a C2
+      fact about the transcriptions), while the other five citations are historical or
+      reported context. C3 means machine-checking Theorem 1's
       unavoidable-set capacity argument.
   - id: T-008
     claim: >-
@@ -730,9 +731,10 @@ results:
       - packing/tests/test_n11_thirdparty_verify.py
     review_artifact: docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md
     next_rung: >-
-      V5 still requires a proof-assistant check of the complete theorem and finite C4
+      V5 still requires a proof-assistant check of the complete theorem and finite
+      **Condition 5**
       decision. The retained Lean spike checks the counting, reflection, support and
-      C1-C3 kernel without `sorry` or `native_decide`, but explicitly does not prove the
+      **Conditions 2--4** kernel without `sorry` or `native_decide`, but explicitly does not prove the
       headline claim. A compact proof-producing arrangement receipt is the next formal
       step. An outside mathematical review and an archival release would strengthen trust
       and the priority record without changing the repository's completed C5 rung.
@@ -777,7 +779,7 @@ results:
       never on the sampled depth, which flatters it.
       One thing 3.82 is not: the method's ceiling. A certificate for n cannot exist
       above ceil(sqrt(n)) * B, because a wider container holds ceil(sqrt(n))^2 pairwise
-      disjoint axis-parallel B-squares whose masses C4 forces past n; for n = 11 that is
+      disjoint axis-parallel B-squares whose masses **Condition 5** forces past n; for n = 11 that is
       4B = 3.9908, leaving 0.1808 of runway above the retained 381/100. The wall at 3.82
       is a covering wall, met far below where the method stops working.
       If tau*(3.82) is exactly eleven then this is the one configuration where neither
@@ -795,8 +797,9 @@ results:
       carried from it, all three of which had held that value until 2026-09-04. The
       movement past the published value is +0.0842 at each of the three sizes. Two rungs
       are retained below it, 451/100 and 229/50.
-      The three sizes do not need a monotonicity step. Only C1 mentions n among the five
-      conditions, so an atom set of mass 423327/25000 certifies the side for every
+      The three sizes do not need a monotonicity step. Only **Condition 2**, total mass
+      below n, mentions n among the five conditions, so an atom set of mass 423327/25000
+      certifies the side for every
       integer above it, which is 17 and upward; monotonicity would give the same thing
       and is not what is used.
       It does not improve n = 20, where Nagamochi's 1 + sqrt(13) = 4.6055... is larger --
@@ -825,7 +828,7 @@ results:
     composition: >-
       One certificate and two method-distinct accepted decisions establish the container
       side directly at n = 17. The same certificate establishes n = 18 and n = 19
-      directly because only C1 depends on n and its mass is already below 17;
+      directly because only **Condition 2** depends on n and its mass is already below 17;
       monotonicity gives the same bounds but is not the recorded composition step.
     evidence:
       - E-n017-fractional-certificate
@@ -876,21 +879,131 @@ results:
       the side remains available to a later block that retains its run artifacts.
       The method's own ceiling is not close here. A certificate for n cannot exist above
       ceil(sqrt(n)) * B, a wider container holding ceil(sqrt(n))^2 pairwise disjoint
-      axis-parallel B-squares whose masses C4 forces past n; for n = 17 that is
+      axis-parallel B-squares whose masses **Condition 5** forces past n; for n = 17 that is
       5B = 4.9885, so 459/100 still has 0.3985 of runway. Unlike n = 12, where the
       same lemma prevents any single finite certificate from attaining the conjectured
       grid endpoint, this ceiling does not constrain the next useful n = 17 rungs.
       Where the next rung is worth spending on, though, is not n = 17. Of the five
-      conditions only C1 mentions n, and the covering program behind the search does not
+      conditions only **Condition 2** mentions n, and the covering program behind the search does not
       contain n at all -- minimising total mass subject to every admissible B-square
       carrying mass at least 1 is a question about L, B and the net. So one atom set
       proves s(n) >= L for every integer n above its mass, this certificate's 16.933080
-      reaching 17, 18 and 19 directly, and a larger n is strictly easier at the same
-      side.
-      The headroom says the rest. n = 17 has 0.0855 to its best known packing at
-      4.675530; n = 18 has 0.2329 to 4.822876 and n = 19 has 0.2956 to 4.885618, both
-      still carrying this certificate's side with nothing case-specific ever proved for
-      either; and n = 20 has 0.3944 to the trivial 5, holding Nagamochi's closed-form
-      1 + sqrt(13) = 4.605551. A run at a side whose covering value lands between 17 and
-      18 raises n = 18 and leaves n = 17 where it is; one landing between 19 and 20
-      displaces a published closed form.
+      reaching 17, 18 and 19 directly rather than through the monotonicity step the
+      composition field records, and a larger n is strictly easier at the same side.
+      The headroom said the rest, when this was written. n = 17 had 0.0855 to its best
+      known packing at 4.675530; n = 18 had 0.2329 to 4.822876 and n = 19 had 0.2956 to
+      4.885618. The retained DS7 survey also reports older case-listed bounds for n = 19
+      and n = 20, but both are weaker than the verified values under discussion. At
+      n = 20 the register's verified baseline was Nagamochi's closed form
+      1 + sqrt(13) = 4.605551, with 0.3944 to the trivial upper bound 5. A run at a side whose covering
+      value lands between 17 and 18 would raise n = 18 and leave n = 17 where it is; one
+      landing between 19 and 20 would displace a published closed form.
+      The second of those was run the same day and is registered as T-020, at side 24/5
+      with a covering value between nineteen and twenty. It supersedes this result at
+      n = 19 and moves n = 20 and n = 21 as well. What this result still holds alone is
+      n = 17 and n = 18: T-020's atoms are too heavy for either, which is the reach rule
+      above read in the other direction. This result stays true as stated at all three
+      of its sizes and keeps its rungs.
+      For n = 17 the reading is unchanged and the runway is 0.3985 to the ceiling and
+      0.0855 to the packing. For n = 18 the open question is the one the 117/25 run left
+      open above.
+
+  - id: T-020
+    claim: >-
+      s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted
+      fractional unavoidable-set certificate at container side 24/5 = 4.80. Immediately
+      before this result, the verified register held T-019's 459/100 at n = 19 and
+      Nagamochi's general closed form at n = 20 and n = 21. Against those verified
+      baselines the movements are +0.21, +0.194449 and +0.058343 respectively.
+      Friedman's retained 2009 DS7 survey also reports case-listed lower bounds
+      6*sqrt(2)-4 at n = 19 and n = 20 and approximately 4.7438 at n = 21. The n = 21
+      report is slightly stronger than Nagamochi, so the movement past the strongest
+      located published report there is approximately 0.0562, not 0.058343. DS7 does
+      not supply a proof or reproducible artifact for that decimal in the retained
+      source. The 24/5 certificate is therefore a new independently replayable direct
+      bound for all three cases; the record does not claim the first case-specific bound.
+      The three sizes take no monotonicity step. Only **Condition 2**, total mass below
+      n, mentions n among the five conditions, so an atom set of mass 946131/50000 certifies the side for every
+      integer strictly above that mass, which is 19 and upward. From n = 22 on the
+      register already holds 5, so the certificate is true there and weaker; these three
+      are where it moves anything.
+      One rung is retained rather than a ladder. The side was reached in a single
+      resumed column-generation run, not climbed to, so there is no weaker certificate
+      at this size to compare it against.
+    scope:
+      n_values:
+        - 19
+        - 20
+        - 21
+    verification: V4
+    confirmation: C4
+    significance:
+      score: 4
+      rationale: >-
+        Scored against the rubric's anchor for S4, "a reusable technique, bound family,
+        or resolved disputed value", and by parity with T-019, which has the same shape:
+        one certificate moving three registered cases and displacing a published value.
+        This one displaces more. The movement is +0.21 at n = 19 against T-019's
+        +0.0842; at
+        n = 20 and n = 21 it improves the verified baseline supplied by Nagamochi's
+        peer-reviewed closed form. The retained DS7 survey's case-listed n = 21 report
+        narrows the literature comparison to approximately +0.0562.
+        Held below S5 for the reasons T-019 was: none of the three is the central open
+        case, the method and its parametrisation are Burns's and Massaccesi's, and no
+        case changes character at the new value.
+        A calibration note for whoever scores the next one. This is the fourth result
+        from one instrument in a day, and the S4 anchor is being carried here by the
+        displacement rather than by the technique, which T-017 already banked. Further
+        sizes from the same generator, absent a new technique or a case that changes
+        character, belong at S3.
+      scored: '2026-09-04'
+      by: BC-161 continuation (repository; no independent evaluator, see composition)
+    novelty: apparently-novel
+    composition: >-
+      Primary at all three sizes: one certificate and two method-distinct accepted
+      decisions establish the container side directly. There is no monotonicity or composition step anywhere
+      between the artifact and the claim -- the three sizes come out of **Condition 2**,
+      total mass below n, which is the only condition that mentions n.
+      C4 is earned by two evidence entries whose method values differ, the exact
+      event-cell sweep and the interval branch and bound, both run in this repository.
+      Unlike T-017 and T-019 no independent evaluator reviewed the scoring, and there is
+      no external review, so C5 is as far away here as there.
+    evidence:
+      - E-n020-fractional-certificate
+      - E-fractional-interval-decision
+    artifacts:
+      - packing/cases/n20_fractional_certificate/certificate.json
+      - packing/src/sqpack/fractional/colgen.py
+      - packing/src/sqpack/fractional/interval.py
+    controls:
+      - packing/tests/test_fractional_certificate.py
+      - packing/tests/test_fractional_interval.py
+    next_rung: >-
+      The retained certificate's total is 946131/50000 = 18.922620, leaving 0.077380
+      below nineteen, and that margin is where a further rung has to be found. It is a
+      wide margin by this register's standards -- n = 17's top rung has 0.066920 and
+      n = 12's has 0.001040 -- which says the side was not pushed to where the covering
+      value stops it, only to where the run was stopped.
+      That is the honest reading of how this one was obtained. An operator report for
+      which no raw run or checkpoint was retained says the column generation was halted
+      at round 9 with a restricted optimum of 18.916941, because four more rounds were
+      projected to cost about 3.75 h to buy margin nothing needed. The side above it was
+      never attempted. The frozen certificate's feasible mass is independently replayable;
+      the restricted optimum and projection are not.
+      Where the ceiling sits differs across the three sizes and it matters. A certificate
+      for n cannot exist above ceil(sqrt(n)) * B, which for all three is 5B = 4.9885, so
+      0.1885 of structural runway remains. But at n = 19 the best known packing is
+      4.885618, and no certificate can exceed a side a packing achieves, so the real
+      runway there is 0.085618. At n = 20 and n = 21 the retained catalogue gives the
+      trivial 5, so this fixed 181-direction net has a ceiling 0.0115 below it. The
+      ceiling is necessary, not evidence that 4.9885 is attainable, and it does not rule
+      out a refined-net family plus a limiting argument at 5.
+      That asymmetry is the targeting instruction. A run above 4.885618 that succeeded
+      would contradict the retained n = 19 packing and is a refutation to look for rather
+      than a rung to expect; a run between 4.80 and 4.9885 that succeeds moves n = 20 and
+      n = 21 and stops at n = 19. The quantity to read is the restricted optimum a
+      converged run reaches, never an extrapolated rate. An operator report preserved
+      with the introducing work gives 5378 s for the exact sweep at 2260 atoms and 173 s
+      for the interval route on the same bytes; no raw timing transcript or machine/load
+      record is retained, so those figures are planning evidence rather than independently
+      auditable benchmarks.

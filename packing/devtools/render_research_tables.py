@@ -74,6 +74,7 @@ LB_LABEL = {
     "monotonicity": "monotone",
     "unavoidable-points": "unavoidable points",
     "counting": "elementary",
+    "source-report": "source report",
 }
 UB_LABEL = {
     "trivial-grid": "grid",

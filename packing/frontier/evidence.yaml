@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-08-25'
+last_reviewed: '2026-09-04'
 evidence:
   - id: E-kingbird-upper-register
     claim: upper-bound
@@ -87,10 +87,10 @@ evidence:
       date: '2026-08-30'
       reviewed_by: repository
       note: >-
-        Read here because the inventory's own arithmetic named it: this record carries the
-        verified lower bound for 88 of the hundred cases and the next most-cited carries
-        two, so it was simultaneously the most load-bearing external argument in the
-        register and the only one nobody had opened. The argument closes. Theorem 1 is the
+        Read here because the inventory's own arithmetic named it: 88 of the hundred case
+        records cite this result, and it currently supplies the operative verified lower
+        bound in 83 of them. It was therefore the most load-bearing external argument in
+        the register and the only one nobody had opened. The argument closes. Theorem 1 is the
         substantive part -- an upper bound on how many unit squares fit strictly inside an
         a-by-b rectangle, proved by an explicit unavoidable set whose capacity is computed
         rather than asserted, with Lemmas 2 through 7 proved in the paper and only an
@@ -113,9 +113,11 @@ evidence:
         lambda = 1 to estimate the minimum". That last is geometrically evident and is the
         only place the argument leans on something unargued. This promotes nothing: the
         method stays `published-proof`, and `proof-assistant-checked` is a different thing.
-        Separately `devtools/check_nagamochi_bounds.py` re-derives all 88 recorded values
-        from Theorem 2 in the gate, so a transcription slip is caught even though the proof
-        behind them is not machine-checked.
+        Separately `devtools/check_nagamochi_bounds.py` re-derives the 83 operative
+        verified-field values from Theorem 2 in the gate. The other five citations retain
+        historical or reported context; the citation count is not presented as a count of
+        current bounds. A transcription slip in the current values is therefore caught even
+        though the proof behind them is not machine-checked.
     limitations: External published proof; its arithmetic is not independently replayed here.
     source_reviewed: '2026-08-24'
 
@@ -1423,7 +1425,8 @@ evidence:
       reproduces Massaccesi's own published 22529/5000 from his constants as its
       control.
       Scope note: the same certificate proves the claim directly for n = 18 and n = 19,
-      because only C1 depends on n and its mass is already below 17. Monotonicity gives
+      because only **Condition 2**, total mass below n, depends on n and its mass is
+      already below 17. Monotonicity gives
       the same bounds, but is not the recorded composition step. Both cases previously
       held 4.5058 inherited from T-015, so one certificate still moves all three.
       It also proves s(20) >= 459/100 directly, but does not improve that case because
@@ -1431,6 +1434,93 @@ evidence:
       This entry is the exact-algebraic decision; C4 rests on
       E-fractional-interval-decision, which decides the same bytes by a different
       method.
+    source_reviewed: '2026-09-04'
+  - id: E-friedman-ds7-lower-table
+    claim: lower-bound
+    scope:
+      n_values:
+        - 19
+        - 20
+        - 21
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: source-author
+    novelty: previously-published
+    relationship_to_generator: not-applicable
+    source_key: '[Friedman DS7]'
+    replay_status: public-certificate-missing
+    limitations: >-
+      Table 2 of the retained 2009 survey reports 6*sqrt(2)-4 for n = 19--20 and
+      approximately 4.7438 for n = 21 as the best known non-trivial lower bounds. The
+      n = 19 section includes a graphical unavoidable-set proof sketch (Figure 34), and
+      n = 20 follows by monotonicity; neither has retained coordinates or a repository
+      replay. The n = 21 value is only a four-decimal table report, with no figure,
+      derivation, exact form, or underlying citation located. This entry records history
+      and comparison, not repository verification.
+    blocker:
+      kind: source-evidence
+      detail: Locate the underlying arguments or certificates before promoting either report to verified.
+    source_reviewed: '2026-09-04'
+  - id: E-n020-fractional-certificate
+    claim: lower-bound
+    scope:
+      n_values:
+        - 19
+        - 20
+        - 21
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained literature archive under packing/resources/ and the frontier source
+        register, which hold Nagamochi's 2005 closed form, Bentz's 2016 proof at n = 22,
+        Friedman's DS7 table entries 6*sqrt(2)-4 at n = 19--20 and approximately 4.7438
+        at n = 21, and this project's own T-019 at 459/100 for n = 19. None of the
+        retained sources reaches 24/5 at any of the three sizes. The versioned source
+        check and evidential classification are retained in
+        packing/resources/web/n19-n21-lower-bound-literature-audit-2026/README.md.
+      searched: >-
+        Searched the retained corpus for any lower bound on s(19), s(20) or s(21) at or
+        above 24/5 and found none. This was not a systematic sweep of recent preprints,
+        so the result remains `apparently-novel`, not an absolute priority claim.
+      novel_object: >-
+        The certificate and the side. The method is Burns's and the parametrisation is
+        Massaccesi's; what is apparently new within the recorded search is a certificate
+        at a side no retained source reaches at any of these three sizes, found by this
+        project's generator.
+    certificate: cases/n20_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras python -m cases.n20_fractional_certificate
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over 2260 atoms on a
+      D4-symmetric site set: the atom multiset is closed under the container's D4 group,
+      the total mass is 946131/50000 = 18.922620, the 181-direction net reaches pi/4,
+      containment B(1 + D) < 1 holds at B = 9977/10000, and every reachable event cell at
+      every net direction carries mass at least 1, the least being 50007/50000. The bound
+      proved is the container side itself, 24/5.
+      Three sizes, and none of them by monotonicity. Only **Condition 2**, total mass
+      below n, mentions n among the five conditions, so this atom set certifies its side
+      for every integer strictly above its
+      own mass, which is 19 and upward. The register already holds 5 from n = 22 on, so
+      the certificate is true there and weaker; where it moves the register is n = 19,
+      n = 20 and n = 21.
+      It was decided from its bytes by two verifiers that fail differently. The exact
+      event-cell sweep accepted at 50007/50000; the interval branch and bound certified
+      all 361 doubled-net directions in 5,638,343 boxes with none stalled and enclosed
+      the same value with width zero. Operator reports give 5378 s and 173 s respectively,
+      but no raw timing transcript or machine/load record is retained. The exact decision was made by
+      the generator's own rescale driver, which freezes a candidate to its path and then
+      re-reads it, so both routes decided the same bytes on disk rather than an object in
+      memory; the interval decision was made twice, once through
+      devtools.decide_certificate on the frozen file and once through the install guard on
+      the installed one.
+      One rung, no ladder: the side was reached in a single resumed column-generation run
+      rather than climbed, so there is no weaker retained certificate at this size to
+      compare against.
     source_reviewed: '2026-09-04'
   - id: E-fractional-interval-decision
     claim: lower-bound
@@ -1441,14 +1531,13 @@ evidence:
         - 17
         - 18
         - 19
+        - 20
+        - 21
     assurance: verified
     method: interval-certified
     performed_by: repository
     relationship_to_generator: independent-implementation
     origin: audited-here
-    novelty: previously-published
-    source_key: '[Burns–Massaccesi n17]'
-    certificate: cases/n11_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras --group dev pytest tests/test_fractional_interval.py
     replay_status: passed
     limitations: >-
@@ -1458,19 +1547,21 @@ evidence:
       library; rationals enter at one boundary where exact comparison happens, and atom
       masses are exact integers on the certificate's own weight scale, so the sums round
       nothing.
-      It is independent in method, not merely in code. C4 is decided by branch and bound
+      It is independent in method, not merely in code. **Condition 5** is decided by branch and bound
       over boxes of centres -- for a box, an atom counts only if its coverage rectangle
       contains the whole box, which is a lower bound by construction and is tested
       against the inner enclosure of that rectangle so an unresolved atom is dropped
       rather than assumed. There is no event grid, no difference array and no polygon
-      clipping. It shares the Certificate representation and C1-C3 premises with the
-      exact route, but its C4 decision has different modelling and failure modes.
-      It also rests on fewer hypotheses. C4 is decided on the doubled net -- theta_k and
+      clipping. It shares the Certificate representation and **Conditions 2--4** premises
+      with the exact route, but its **Condition 5** decision has different modelling and
+      failure modes.
+      It also rests on fewer hypotheses. **Condition 5** is decided on the doubled net -- theta_k and
       pi/2 - theta_k, 361 directions -- so the D4 reflection argument is never invoked
-      and C0 is not needed at all, which matters because interval arithmetic cannot
-      establish the equality C0 asserts.
-      Results, 361 of 361 directions certified in every case and none stalled. The three
-      retained top rungs, decided from their frozen bytes: n = 17 at 459/100, 1184 atoms,
+      and **Condition 1** is not needed at all, which matters because interval arithmetic
+      cannot establish the equality **Condition 1** asserts.
+      Results, 361 of 361 directions certified in every case and none stalled. The four
+      retained top rungs, decided from their frozen bytes: n = 20 at 24/5, 2260 atoms,
+      5,638,343 boxes; n = 17 at 459/100, 1184 atoms,
       3,683,951 boxes; n = 12 at 99/25, 2097 atoms, 4,448,751 boxes; n = 11 at 381/100,
       1121 atoms, 1,570,831 boxes. Lower rungs and the control: n = 17 at 229/50 in
       2,653,407 boxes, n = 11 at 19/5 in
@@ -1481,7 +1572,7 @@ evidence:
       times are not quoted because every one of these runs shared a contended machine.
       In minimisation mode every enclosure of the least covered mass has width zero and
       equals the exact verifier's value to the digit: 4001/4000 at n = 11's top rung,
-      12501/12500 at n = 12's and 200009/200000 at n = 17's, each matching the
+      12501/12500 at n = 12's, 200009/200000 at n = 17's and 50007/50000 at n = 20's, each matching the
       least_cell_mass its own certificate declares, and 12501/12500 at the 229/50 rung,
       50003/50000 at the earlier n = 11 rung, and 100003/100000 and 20001/20000 at the
       earlier n = 12 rungs. Refusals: the n = 12 atoms in a side-4 container are refuted

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Re-derive every lower bound the register attributes to [Nagamochi 2005].
 
-`E-nagamochi-lower` supplies the verified lower bound for 85 of the hundred frontier
-cases (88 until 2026-08-31, when the first-party green17 certificate took over `n = 17`
-and `n = 18`). The next most-cited evidence record carries two. Nothing checked that the
+`E-nagamochi-lower` supplies the verified lower bound for 83 of the hundred frontier
+cases (88 until 2026-08-31, then 85 after n = 17--19 moved, and 83 after T-020 moved
+n = 20 and n = 21). The next most-cited evidence record carries two. Nothing checked that the
 recorded values were what the theorem gives: `assurance.py` verifies that a bound cites
 verified evidence of the right claim and scope, which is a statement about the citation
-and not about the arithmetic. A transcription slip in any one of the 85 would have
+and not about the arithmetic. A transcription slip in any one of the 83 would have
 passed.
 
 Theorem 2, as the evidence record states it and as re-derived here from Theorem 1
@@ -44,8 +44,9 @@ RECORD = "E-nagamochi-lower"
 #: The reader-facing prose that quotes the corpus count, in its two shapes. Both are
 #: checked against the case records because the figure was typed once and outlived the
 #: 4.5058 adoption by a day (D-430): the README said sixty-three when the corpus said sixty.
+#: T-020 has since reduced the live count to fifty-eight (D-480).
 README = FRONTIER / "README.md"
-_README_COUNT = re.compile(r"Of the (\d+) open cases, \*\*(\d+)\*\* have\s+Nagamochi")
+_README_COUNT = re.compile(r"Of the (\d+) open cases,\s+\*\*(\d+)\*\* have\s+Nagamochi")
 _BODY_COUNT = re.compile(r"(\d+) of the (\d+) open cases at\s+`n ≤ 100` are governed by it")
 
 #: Enough to compare against any decimal the register carries, and pinned rather than

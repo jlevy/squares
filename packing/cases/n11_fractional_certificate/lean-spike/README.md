@@ -1,7 +1,7 @@
 # Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate
 
 This directory is a feasibility spike.
-It does not prove condition C4, replay the 1,121-atom certificate, or prove the headline
+It does not prove **Condition 5**, replay the 1,121-atom certificate, or prove the headline
 theorem `s(11) ≥ 381/100`. Its Lean source contains no `sorry` terms, custom axioms, or
 uses of `native_decide`. The spike was checked with Lean 4.32.1 and Mathlib 4.32.1. The
 complete local toolchain and Mathlib cache occupied approximately 10 GB; after the cache
@@ -11,7 +11,7 @@ their axiom audits took 2.6–2.7 seconds on the development machine.
 The [one-minute proof](../t-018-proof.md) and
 [minimal exact checker](../minimal_verify.py) remain the recommended primary
 presentation because together they are complete and the checker is self-contained, uses
-only Python’s standard library, and decides every condition from C0 through C4.
+only Python’s standard library, and decides **Conditions 1–5**.
 
 ## What the Spike Proves
 
@@ -22,7 +22,7 @@ It proves:
 - the set-based form that derives a unique atom owner from pairwise-disjoint membership;
 - preservation of atomic mass under an involution represented by a permutation of the
   atoms;
-- the certificate’s exact C1, C2, and C3 scalar inequalities; and
+- the certificate’s exact **Condition 2**, **Condition 3**, and **Condition 4** scalar inequalities; and
 - the final algebraic inequality used in the support-function containment step.
 
 The counting core is the contradiction
@@ -31,7 +31,7 @@ The counting core is the contradiction
 11 ≤ Σⱼ μ(Qⱼ) ≤ μ(K) = 434547/40000 < 11.
 ```
 
-The exact C3 value checked by Lean is
+The exact **Condition 4** value checked by Lean is
 
 ```text
 (9977/10000) · (1 + 207107/90000000)
@@ -64,10 +64,10 @@ above. `.lake/` contains downloaded and built files and is not part of this pack
 
 The spike does not define oriented squares, packings, or the infimum `s(n)`. It also
 does not prove the diagonal-reflection orientation reduction, nearest-angle lemma,
-half-angle tangent formula, or continuum-to-finite arrangement reduction used by C4. It
+half-angle tangent formula, or continuum-to-finite arrangement reduction used by **Condition 5**. It
 contains no certificate data and performs no 181-direction computation.
 
-A complete Lean proof would need a proof-producing C4 checker.
+A complete Lean proof would need a proof-producing **Condition 5** checker.
 Direct kernel evaluation of the Python verifier’s 567,130,649 rational placement cells
 is unlikely to be practical.
 A smaller certificate could record the feasible vertical interval and range minimum for

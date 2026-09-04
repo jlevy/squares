@@ -170,12 +170,15 @@ strategies:
   mechanism: Relax piercing to an LP; use the dual fractional packing
   status: used
   note: >-
-    Burns's August 2026 n=17 note gives the pure-atomic, exact-rational direction-net
-    architecture; Massaccesi uses LP to generate fixed weights. The repository replays
-    that certificate as T-015 and uses the same architecture for the first-party T-018
-    and T-019 certificates. T-018's finite coverage decision is also checked by a
-    method-distinct interval branch-and-bound. This is a modern implementation of the
-    older resource-starvation lineage, not a new fractional-cover principle.
+    Integral unavoidable points, Kearney--Shiu's dual counting, Nagamochi's scored
+    point/segment/area resources, and Bentz's resource-starvation framing form the older
+    lineage. Burns's August 2026 n=17 note gives the pure-atomic, exact-rational
+    direction-net architecture; Massaccesi uses LP to generate fixed weights. The
+    repository replays that certificate as T-015, supplies a reusable generator, and
+    retains first-party instances T-017 through T-020 at n = 11, 12, 17--21. Their
+    finite coverage decisions are checked both by exact event-cell sweeps and by a
+    method-distinct interval branch-and-bound. The certificates are new instances of an
+    established fractional-cover principle, not a new principle.
   refs:
   - Burns–Massaccesi n17
   - Göbel 1979

@@ -1,12 +1,11 @@
-"""Load the retained n = 17 certificates and hand them to the exact verifier.
+"""Load the retained n = 20 certificate and hand it to the exact verifier.
 
-Three certificates are retained. `certificate.json` carries the bound the case
-holds; `certificate-229-50.json` and `certificate-451-100.json` are the rungs
-below it, the second of them the first value that displaced Massaccesi's
-published 22529/5000 = 4.5058.
-All three lift n = 18 and n = 19 with them, and not by monotonicity: only
-Condition 2 mentions n, so an atom set certifies its side for every integer
-above its own mass, which for each of these is 17 and upward.
+One certificate is retained, at container side 24/5. Its atoms carry three
+registered cases rather than one: only Condition 2, total mass below n, mentions
+n among the five conditions, so a set of total mass 946131/50000 certifies its
+side for every integer from 19 upward. It improves the verified register at
+n = 19, n = 20, and n = 21; from n = 22 on the register already holds 5, so the
+certificate is true there and weaker.
 
 The JSON carries exact rationals as strings, so a replay reconstructs the same
 object the generator proposed.
@@ -24,8 +23,6 @@ from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.model import Atom
 
 CERTIFICATE_PATH = Path(__file__).with_name("certificate.json")
-SECOND_RUNG_PATH = Path(__file__).with_name("certificate-229-50.json")
-FIRST_RUNG_PATH = Path(__file__).with_name("certificate-451-100.json")
 
 
 def _from_record(record: dict) -> Certificate:
@@ -36,7 +33,7 @@ def _from_record(record: dict) -> Certificate:
         outer_side=Fraction(record["outer_side"]),
         square_side=Fraction(record["square_side"]),
         atoms=tuple(
-            Atom(f"{index:03d}", Fraction(x), Fraction(y), Fraction(weight))
+            Atom(f"{index:04d}", Fraction(x), Fraction(y), Fraction(weight))
             for index, (x, y, weight) in enumerate(record["atoms"])
         ),
         half_tangents=tuple(limit * k / steps for k in range(steps + 1)),

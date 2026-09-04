@@ -6,9 +6,9 @@ Three things here, and each is a reason to look:
   the smallest open case’s gap from `0.088230` to `0.067084`. The recorded public search
   found no stronger lower bound after Stromquist’s 2003 value, so the result is
   `apparently-novel`, not a claim of absolute priority.
-  The same technique gives the first located case-specific bound for twelve squares,
-  `s(12) ≥ 99/25`, and `s(n) ≥ 459/100` for `n = 17`, `18`, and `19`, displacing a
-  published value. [Details below](#new-results).
+  The same technique gives a first located case-specific bound for twelve squares and
+  stronger direct bounds from `n = 17` through `n = 21` that displace prior verified
+  values. [Details below](#new-results).
 - **A survey of the whole problem in one place.** Every case `n = 1…100`, the primary
   literature retained locally with transcription gaps explicit, and the bound a source
   *reports* kept apart from the bound this repository has *verified* — the most
@@ -54,37 +54,67 @@ Results first established here, as far as the recorded source searches show:
 
 ### Notable results (`S4`–`S5`)
 
-- **T-018: `s(11) ≥ 381/100`, the first movement of the smallest open case located since
-  2003 (`S5`).** `s(11)` is the case this project exists for, and the recorded public
-  search found no stronger lower bound after Stromquist stated `2 + 4/√5 = 3.788854`. A
-  first-party weighted fractional unavoidable-set certificate — 1121 weighted atoms,
-  total mass `434547/40000`, every placement of a shrunken square covering mass at least
-  `1` — proves that eleven unit squares do not fit in a container of side `3.81`. The
-  interval narrows from `0.088230` to `0.067084`; the gap is not closed.
-  Two rungs are retained below it: `19/5`, the value that first passed Stromquist, and
-  `189/50`, the calibration rung below him that was run first on purpose and proves
-  nothing new. Scored `S5`, the rubric’s anchor for movement on a central open case.
+- **[T-018](packing/frontier/RESULTS.md): `s(11) ≥ 381/100`, the first movement of the
+  smallest open case located since 2003 (`S5`).** [`s(11)`](packing/frontier/n-011.md)
+  is the case this project exists for, and the recorded public search found no stronger
+  lower bound after Stromquist published `2 + 4/√5 = 3.788854` in 2003.
+  A first-party
+  [weighted fractional unavoidable-set certificate](packing/cases/n11_fractional_certificate/)
+  — 1121 weighted atoms, total mass `434547/40000`, every placement of a shrunken square
+  covering mass at least `1` — proves that eleven unit squares do not fit in a container
+  of side `3.81`. The interval narrows from `0.088230` to `0.067084`; the gap is not
+  closed. Two rungs are retained below it: `19/5`, the value that first passed
+  Stromquist, and `189/50`, the calibration rung below him that was run first on purpose
+  and proves nothing new.
+  Scored `S5`, the rubric’s anchor for movement on a central open case.
+  A
+  [self-contained third-party package](packing/cases/n11_fractional_certificate/thirdparty/)
+  ships with it, so the `19/5` rung can be decided without trusting anything else here.
 - **T-019: `s(17), s(18), s(19) ≥ 459/100`, displacing the published value (`S4`).** The
-  adopted bound for these three cases was Massaccesi’s `4.5058`, taken from a source
-  rather than proved here.
+  adopted bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s
+  `4.5058`, taken from a source rather than proved here.
   The same generator returns `4.59` — 1184 atoms, total mass `423327/25000 = 16.9331`
   against `n = 17`, least covered mass `200009/200000` — so the repository now carries a
   first-party certificate `0.0842` above the number it had adopted, with the `229/50`
   and `451/100` rungs it climbed through retained below.
-  One certificate covers all three sizes without a monotonicity step: only `C1` mentions
-  `n`, so an atom set certifies its side for every integer above its own mass.
-  It does not improve `n = 20`, where Nagamochi’s `1 + √13 = 4.6055…` is larger.
-- **T-017: `s(12) ≥ 99/25`, from nothing case-specific at all (`S4`).** `n = 12` had
-  only the `n = 11` bound inherited by monotonicity; the frontier record said in as many
-  words that nothing specific to `n = 12` had ever been proved.
+  One certificate covers all three sizes without a monotonicity step: only
+  **Condition 2**, total mass below `n`, mentions `n`, so an atom set certifies its side
+  for every integer above its own mass.
+  `T-020` has since carried `n = 19` past it; `n = 17` and `n = 18` are this result’s
+  alone, being too small for the heavier atom set that moved the other three.
+- **T-020: `s(19), s(20), s(21) ≥ 24/5`, raising three verified floors (`S4`).** Before
+  this result the verified register held `4.59` at n = 19 and Nagamochi’s 2005 general
+  formula at n = 20 and n = 21, namely `1 + √13 = 4.6055…` and
+  `1 + √14 = 4.7416…`. A
+  [certificate at `4.80`](packing/cases/n20_fractional_certificate/) — 2260 atoms, total
+  mass `946131/50000`, least covered mass `50007/50000` — moves
+  [`n = 20`](packing/frontier/n-020.md) by `0.194449`, `n = 21` by `0.058343`, and
+  `n = 19` by `0.21` against those verified baselines.
+  Friedman’s DS7 survey had already listed `6√2 − 4` for n = 19–20 and an unexplained
+  `≈ 4.7438` for n = 21 by 2000; the last makes the improvement past the strongest
+  located report approximately `0.0562`.
+  The three sizes again follow directly from **Condition 2**.
+  On the current 181-direction net, a single certificate has a `4.9885` ceiling at
+  `n = 20` and `n = 21`; that is a necessary limit, not an attainable prediction, and
+  refining the net changes it. At `n = 19`, the known packing binds first, only `0.0856`
+  above the new lower bound. [Reach analysis](packing/frontier/CERTIFICATE-REACH.md)
+- **T-017: `s(12) ≥ 99/25`, from nothing case-specific at all (`S4`).**
+  [`n = 12`](packing/frontier/n-012.md) had only the `n = 11` bound inherited by
+  monotonicity; the frontier record said in as many words that nothing specific to
+  `n = 12` had ever been proved.
   An eight-rung ladder — `19/5`, `77/20`, `97/25`, `39/10`, `393/100`, `197/50`,
   `79/20`, `99/25` — is retained, all from one generator that applies at every `n`,
   which is why this is scored `S4` as a bound family rather than a case result.
   At `99/25 = 3.96` it also separates the cases: `s(12) > s(11)`, since Trump’s 1979
   packing puts `s(11) ≤ 3.877084`. That did not follow from anything on record before.
+  The case is now `0.04` from its conjectured optimum of `4`, and that gap is where this
+  method stops: no certificate for twelve squares can exist above `3.990816`, which is
+  proved here and is below the conjectured value.
 - **T-010: `s(11) ≥ 2 + 4/√5`, repaired (`S4`).** The printed 2003 Figure 14
   unavoidability claim has a strict counterexample, so the literature’s standing `s(11)`
-  bound rested on a broken step.
+  bound rested on a broken step — the
+  [case report](docs/project/research/research-2026-08-22-packing-11-unit-squares.md)
+  walks through what survived it.
   A preregistered, source-distinct replacement point set restores the full lower-bound
   argument and certifies exactly.
   `T-018` has since passed the repaired value, but the repair is what made it a value

@@ -72,6 +72,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 99/25, by a first-party weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
+| [T-020](packing/frontier/RESULTS.md) | 19, 20, 21 | `V4` | `C4` | `S4` | `apparently-novel` | s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted fractional unavoidable-set certificate at container side 24/5 = 4.80. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
 | [T-014](packing/frontier/RESULTS.md) | 5 | `V3` | `C5` | `S3` | `apparently-novel` | For s = 2 + sqrt(2)/2 and Goebel’s labeled pose P0 in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) -- closed unit squares in [0, s]^2, pairwise disjoint interiors -- equivalently there is no nonconstant continuous feasible path from P0 and no sequence of distinct feasible poses converging to it; hence the n = 5 optimum is rigid at fixed side in the catalogue’s sense. |
 | [T-001](packing/frontier/RESULTS.md) | 17 | `V4` | `C4` | `S3` | `apparently-novel` | Sixteen points make [0, 4426213/1000000]^2 unavoidable for open squares of side above one, so s(17) >= 4426213/1000000 = 4.426213. |
@@ -1520,11 +1521,11 @@ That last column is the one worth reading, and it needs its qualifier: the most-
 record overall is the Kingbird register at 98, which is the catalogue everyone reports
 from and is labelled `reported`. The dependency that matters is the most-cited argument
 this repository did not produce — `E-nagamochi-lower`, cited by 88 of the hundred cases
-and carrying the verified lower bound in 85 of them, since the 4.5058 adoption moved
-`n = 17`–`19` onto the Massaccesi certificate.
-Being cited that heavily is a reason to open an argument, not a reason to trust it, so
-it was read here on 2026-08-30; its record carries what was re-derived and the four
-things that were not.
+and carrying the verified lower bound in 83 of them, the difference being the cases this
+project’s own certificates have since taken off it: `n = 11`, `n = 12`, and `n = 17`
+through `n = 21`. Being cited that heavily is a reason to open an argument, not a reason
+to trust it, so it was read here on 2026-08-30; its record carries what was re-derived
+and the four things that were not.
 
 Novelty—whose result this is—is a further separate fact.
 Its values differ in what they oblige, which is why each is recorded explicitly rather
@@ -1967,7 +1968,7 @@ Where the program has spent effort, and what came of it.
 | 16 | proved, `4` | `4` | proved not-below control | The valid replacement for the old `n=12` guard: any reported side below `4` is known to be invalid |
 | 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°`, `+39.80496°`, and `−36.62379°`. One round: [exp-011](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) reports `5.0`, the trivial `5×5` grid, on all five binary64 screening seeds |
 | 61, 78, 97 | open, `m² − 3` | `8`, `9`, `10` (grids) | opportunistic slot | The narrowest gaps in the table. An analytic Cleemann-style attempt at `arctan(3/4)` is registered and **not yet made** |
-| 1–100 | 35 proved, 65 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](packing/frontier/README.md); 60 of the 65 open cases are bounded below by Nagamochi’s general theorem |
+| 1–100 | 35 proved, 65 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](packing/frontier/README.md); 58 of the 65 open cases are bounded below by Nagamochi’s general theorem |
 
 Three facts about this table drive the strategy.
 
@@ -3204,24 +3205,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 474 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 480 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 98 | asserted something false about the mathematics |
+| soundness | 99 | asserted something false about the mathematics |
 | validity | 121 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 171 | recorded something its own evidence contradicts |
+| bookkeeping | 175 | recorded something its own evidence contradicts |
 | robustness | 62 | did not finish, or finished only by luck |
-| performance | 22 | worked, but cost far more than it should |
+| performance | 23 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Seventy-eight of the ninety-eight soundness defects pointed in the *flattering*
+**Seventy-nine of the ninety-nine soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-eight defects in 474, and no soundness defect
+**The automated gate has caught seventy defects in 480, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3358,8 +3359,9 @@ Two entries were added while planning Agenda 017, both found by re-running what 
 record already said.
 [D-430](defects.md) is the frontier prose saying sixty-three open cases rest on
 Nagamochi’s closed form a day after the 4.5058 adoption made it sixty; the README and
-sixty-seven case bodies now say sixty, and `check_nagamochi_bounds` refuses any prose
-count that disagrees with the case records.
+sixty-seven case bodies were corrected, and `check_nagamochi_bounds` refuses any prose
+count that disagrees with the case records — which is why the same sixty-seven bodies
+now read fifty-eight, `T-020` having taken two more cases off the closed form.
 [D-431](defects.md) is open: `T-009`’s significance rationale compares its `n = 29`
 interval certificate against a rational certificate on Schadt’s packing rather than
 Kingbird’s, and the shipped rational promotion run on the Kingbird witness lands about
@@ -3681,7 +3683,7 @@ agrees, and new components inheriting the perimeter—that apply to code not yet
 
 **As of 2026-09-04 the project’s largest live result is the fractional lower-bound lane,
 and it is not the cartography spine.** A weighted fractional unavoidable-set certificate
-— Burns’s and Massaccesi’s theorem, this project’s instances and generator — moved five
+— Burns’s and Massaccesi’s theorem, this project’s instances and generator — moved seven
 registered cases in one day.
 `s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first public movement of
 that bound located by the recorded search after Stromquist stated `2 + 4/sqrt(5)` in
@@ -3690,16 +3692,23 @@ that bound located by the recorded search after Stromquist stated `2 + 4/sqrt(5)
 was proved about twelve squares rather than inherited from eleven.
 `s(17) >= 459/100`, and `n = 18` and `n = 19` at the same side without a monotonicity
 step, is [T-019](packing/frontier/RESULTS.md) and displaces Massaccesi’s published
-`4.5058` by `0.0842` — the only value in print this project has replaced.
-All three stand at V4 and at least C4: each was decided twice from frozen bytes by an
+`4.5058` by `0.0842`. `s(19)`, `s(20)` and `s(21) >= 24/5` is
+[T-020](packing/frontier/RESULTS.md), which carries `n = 19` past `T-019` the same
+evening and displaces Nagamochi’s 2005 closed form at the other two — `1 + sqrt(13)` and
+`1 + sqrt(14)` — by `0.194449` and `0.058343` against the verified baselines. Friedman’s
+DS7 had already reported `6sqrt(2)-4` for `n = 19–20` and approximately `4.7438` for
+`n = 21` by 2000; the last makes the movement past the strongest located report about
+`0.0562`. No retained source reaches `4.8`.
+All four stand at V4 and at least C4: each was decided twice from frozen bytes by an
 exact event-cell sweep and by an interval branch and bound with directed rounding.
-T-018 reaches C5 on the mapped adversarial review retained in this repository; T-017 and
-T-019 remain at C4. The methods share the `Certificate` representation and the C1-C3
-premises but make method-distinct C4 decisions with different failure modes, agreeing
-exactly on the least covered mass.
-No one outside the project has reviewed any of them; a self-contained third-party
-package ships at `packing/cases/n11_fractional_certificate/thirdparty/` so that a
-stranger can decide the `19/5` rung without trusting this repository.
+T-018 reaches C5 on the mapped adversarial review retained here; T-017, T-019, and T-020
+remain at C4. The methods share the `Certificate` representation and **Conditions 2–4**
+but make method-distinct **Condition 5** decisions with different failure modes,
+agreeing exactly on the least covered mass. No one outside the project has reviewed any
+of them; a
+self-contained third-party package ships at
+`packing/cases/n11_fractional_certificate/thirdparty/` so that a stranger can decide the
+`19/5` rung without trusting this repository.
 
 **That lane also has a measured edge, which is the more useful thing to carry.**
 `n = 11` at `3.82` was tested against both pre-registered routes, and neither produced a
@@ -3715,9 +3724,9 @@ method at `3.82` and not a claim about `tau*`; another site set remains possible
 **Each finite certificate also has a ceiling that is structural rather than measured.**
 No certificate for `n` can exist at a container side above `ceil(sqrt(n)) * B`: a wider
 container holds `ceil(sqrt(n))^2` pairwise disjoint axis-parallel `B`-squares, direction
-`0` is always in the net, so `C4` gives each of them mass at least `1` and the total
-passes `n`, which `C1` forbids.
-With `C3` bounding `B` below `1 / (1 + D)`, the ceiling over every shrink a net admits
+`0` is always in the net, so **Condition 5** gives each of them mass at least `1` and the
+total passes `n`, which **Condition 2** forbids.
+With **Condition 4** bounding `B` below `1 / (1 + D)`, the ceiling over every shrink a net admits
 is `ceil(sqrt(n)) / (1 + D)`, and refining the net raises it only as fast as `D` falls —
 about `T / K`, so twice the directions for half the gap, and twice the cost of every
 decision taken over them.
@@ -3730,6 +3739,11 @@ to `4` and a separate limit argument.
 The retained `99/25` certificate has exactly `0.0308` of runway at its fixed `B`.
 `n = 11` and `n = 17` are not foreclosed: their runways are `0.1808` and `0.3985`, and
 both truths sit below their grid bounds.
+At `n = 19`, `20` and `21` the fixed-net ceiling is `5B = 4.9885`, an upper limit on
+possible improvement rather than an attainable prediction. At nineteen the best known
+packing binds first and leaves only `0.0856`; at twenty and twenty-one the fixed-net
+ceiling is `0.1885` above T-020, while a refined-net family plus a limit remains a
+separate possibility.
 
 **Joining that ceiling against the register says the lane has been looking in the wrong
 place.** [`CERTIFICATE-REACH.md`](packing/frontier/CERTIFICATE-REACH.md) ranks all 100
@@ -3963,7 +3977,7 @@ Each entry names what this project relies on it for.
 - Erdős, P. and Graham, R. L. (1975). *On packing squares with equal squares.* The
   asymptotic waste line of work.
 - Nagamochi, H. (2005). *Packing unit squares in a rectangle.* The general lower bound
-  covering 60 of the 65 open cases in the corpus.
+  covering 58 of the 65 open cases in the corpus.
 - Montanher, T. et al.
   (2018). *Rigorous packing of unit squares into a circle.* The only rigorous
   computer-assisted optimality proof for rotatable unit squares in any container, and
