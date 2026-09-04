@@ -1194,12 +1194,12 @@ evidence:
     replay_status: passed
     limitations: >-
       Decides five conditions in exact rational arithmetic over the retained
-      549-atom certificate: the atom multiset is closed under the container's D4
+      681-atom certificate: the atom multiset is closed under the container's D4
       group (checked, not inferred from the orbit construction that built it), the
-      total mass is 1194221/100000 and so strictly below 12, the 181-direction net reaches
+      total mass is 479713/40000 and so strictly below 12, the 181-direction net reaches
       pi/4, the containment B(1 + D) < 1 holds at B = 9973/10000, and every
       reachable event cell at every net direction carries mass at least 1, with the
-      least 100003/100000. The bound proved is the container side itself, 393/100, and not
+      least 100003/100000. The bound proved is the container side itself, 197/50, and not
       L/B; the shrunken square lies inside a unit square in the same container and
       absorbs the net's angular gap rather than rescaling anything.
       Independence is partial. The generator that proposed the weights (a float

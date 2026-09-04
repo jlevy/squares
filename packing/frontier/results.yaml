@@ -561,12 +561,12 @@ results:
       inherited bound would be a new result, not a rung change.
   - id: T-017
     claim: >-
-      s(12) >= 393/100, by a first-party weighted fractional unavoidable-set
-      certificate at container side 393/100 = 3.93. This is the first lower bound
+      s(12) >= 197/50, by a first-party weighted fractional unavoidable-set
+      certificate at container side 197/50 = 3.94. This is the first lower bound
       specific to n = 12 in the retained corpus: the case previously held
       2 + 4/sqrt(5) = 3.788854..., which is Stromquist's s(11) bound inherited by
       monotonicity and says nothing about twelve squares in particular. The
-      movement is +0.141146, and the case stays open against its conjectured
+      movement is +0.151146, and the case stays open against its conjectured
       optimum of 4.
     scope:
       n_values:
@@ -578,7 +578,7 @@ results:
       rationale: >-
         Scored against the rubric's anchor for S4, "a reusable technique, bound
         family, or resolved disputed value". What is retained is not one bound but a
-        five-rung ladder -- 19/5, 77/20, 97/25, 39/10, 393/100 -- produced by a
+        six-rung ladder -- 19/5, 77/20, 97/25, 39/10, 393/100, 197/50 -- produced by a
         generator that applies at every n and that has since produced the n = 11
         result as well, so this is a bound family rather than a case result. It is
         also the first bound of any kind proved about n = 12 rather than inherited
@@ -604,6 +604,7 @@ results:
       - packing/cases/n12_fractional_certificate/certificate-77-20.json
       - packing/cases/n12_fractional_certificate/certificate-97-25.json
       - packing/cases/n12_fractional_certificate/certificate-39-10.json
+      - packing/cases/n12_fractional_certificate/certificate-393-100.json
       - packing/src/sqpack/fractional/certificate.py
       - packing/src/sqpack/fractional/generate.py
     controls:
@@ -613,11 +614,12 @@ results:
       re-derivation is done and agrees, but it is exact-algebraic like the first,
       so an interval-certified decision would be the one that moves the rung. C5
       needs the operator to read the retained independent review. The bound
-      itself: the ladder 19/5, 77/20, 97/25, 39/10, 393/100 was climbed once the
+      itself: the ladder 19/5, 77/20, 97/25, 39/10, 393/100, 197/50 was climbed once the
       separation oracle was corrected to score the cells the verifier decides
       (D-434), and every rung is retained. The hard ceiling from the shrink at 181
-      directions is 3.99082, so only 0.06 of headroom remains and a further rung
-      needs a finer net as well as a finer site set.
+      directions is 3.99082, so only 0.05 of headroom remains; the margin below
+      twelve at 197/50 is already 0.0072, so a further rung needs a finer net as
+      well as a finer site set.
   - id: T-018
     claim: >-
       s(11) >= 19/5, by a first-party weighted fractional unavoidable-set certificate
