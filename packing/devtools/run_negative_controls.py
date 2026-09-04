@@ -173,6 +173,39 @@ PRUNE = frozenset(
         ROOT / "witnesses/prospective",
     }
 )
+# Build caches: excluded from the counted surface and from every worker tree, by
+# NAME at any depth. Not a prune, and the distinction is the point. Every entry in
+# `PRUNE` is a committed path that a worker does not need; these are generated
+# bytecode and tool state that no commit contains at all, they appear wherever their
+# tool has been run, and on 2026-09-04 they sat two to five levels down -- in `tests/`,
+# `cases/`, `devtools/` and `src/` -- so a rule that only looked at the top level would
+# have missed almost all of them.
+#
+# This is a correctness fix wearing a saving's clothes (D-422). `snapshot_source_bytes`
+# guards the source the harness copies, and until now its answer described the checkout
+# rather than the commit: of 69,569,514 bytes measured here, 11,994,514 were
+# `__pycache__` (11,660,736), `.pytest_cache` (176,516) and `.ruff_cache` (157,262),
+# and the same tree measures 57,575,000 with none written. That is how hosted CI came
+# to fail the cap on a tree that passes it from a fresh clone: the gate runs pytest,
+# pytest writes bytecode into the tree it is measuring, the bytecode is counted, and
+# `tests/test_negative_controls.py` fails the cap later in that same run -- so every
+# pull request went red on a number no commit could change. Raising the cap does not
+# fix that, because the number would still not be a property of the commit; D-371
+# raised it once, from 40 to 64 MiB, and the reasoning at `SNAPSHOT_MAX_BYTES` is why
+# that is the weakest of the available moves rather than the first.
+#
+# It cannot blind a control, and that was checked rather than assumed. No `file:`
+# target in `controls.yaml` names a `.pyc` or a cache directory, and no control command
+# can read one: `run_one` gives every command a fresh `PYTHONPYCACHEPREFIX`, under
+# which Python resolves cached bytecode in a mirror tree instead of the co-located
+# `__pycache__` -- confirmed by importing a mutated module of identical size with a
+# stale co-located `.pyc` in place and getting the mutation, not the cache. The copies
+# were dead weight in every worker, about a fifth of each tree.
+#
+# The set is the three kinds this repository's toolchain actually writes, measured
+# rather than guessed. Adding a fourth is cheap and should still be done against a
+# measurement, not a precaution.
+BUILD_CACHES = frozenset({"__pycache__", ".pytest_cache"})
 LINK_BACK = (Path(".venv"), Path("sqsearch/target"))
 COPY_SEPARATELY = (ROOT / "resources/README.md", REPO / ".flowmarkignore")
 # The reader-facing documents live at the repository root now, and the controls reach
@@ -276,6 +309,37 @@ def run_control_command(
     return CommandOutcome(process.returncode, stdout, stderr)
 
 
+def _inside_build_cache(path: Path, *, below: Path) -> bool:
+    """Whether `path` lies inside a build cache directory somewhere below `below`.
+
+    Relative to `below` deliberately: whether a file is build detritus is a fact about
+    where it sits in the repository, not about what the directories ABOVE the checkout
+    happen to be called. A clone living under a path with `__pycache__` in it would
+    otherwise measure as entirely cache and count nothing at all.
+    """
+    return not BUILD_CACHES.isdisjoint(path.relative_to(below).parts)
+
+
+def _strip_build_caches(root: Path) -> None:
+    """Remove every build cache directory from a finished worker tree.
+
+    `_clone_into` already drops the caches it enumerates, and that is not enough on its
+    own: everything it does not have to descend into crosses in one `cp -R`, which has
+    no exclude option on either platform, and the root documents cross via
+    `shutil.copytree` whole. So the exhaustive step is a sweep of the finished tree,
+    which has the property the per-entry skips do not -- it can be checked by walking
+    the result, and `tests/test_negative_controls.py` walks it.
+
+    `followlinks` stays at its default. `.venv` and the cargo target are symlinked back
+    into the tree, and their caches belong to the real checkout, not to this clone.
+    """
+    for parent, names, _files in os.walk(root):
+        caches = [name for name in names if name in BUILD_CACHES]
+        names[:] = [name for name in names if name not in caches]
+        for name in caches:
+            shutil.rmtree(Path(parent) / name)
+
+
 def _clone_into(src: Path, dst: Path) -> None:
     """Clone `src` to `dst`, descending only where a prune target lives below.
 
@@ -287,7 +351,7 @@ def _clone_into(src: Path, dst: Path) -> None:
     dst.mkdir(parents=True, exist_ok=True)
     bulk: list[str] = []
     for entry in src.iterdir():
-        if entry in PRUNE:
+        if entry in PRUNE or entry.name in BUILD_CACHES:
             continue
         if entry in DESCEND:
             _clone_into(entry, dst / entry.name)
@@ -368,17 +432,27 @@ def snapshot_pruned_targets() -> list[Path]:
 
 
 def snapshot_source_bytes() -> int:
-    """Bytes copied by the portable fallback, excluding linked build products."""
+    """Bytes copied by the portable fallback, excluding build products and caches."""
     total = sum(path.stat().st_size for path in COPY_SEPARATELY)
     total += sum(target.stat().st_size for target in snapshot_pruned_targets())
     for document in ROOT_DOCUMENTS:
         if document.is_dir():
-            total += sum(path.stat().st_size for path in document.rglob("*") if path.is_file())
+            # `.agents` carries a Python file (`skills/experiment-loop/assets/ledger.py`),
+            # so this glob can reach a `__pycache__` the moment anything runs it. It holds
+            # none today; the exclusion is here so the count does not start drifting on
+            # the day something does.
+            total += sum(
+                path.stat().st_size
+                for path in document.rglob("*")
+                if path.is_file() and not _inside_build_cache(path, below=document)
+            )
         elif document.is_file():
             total += document.stat().st_size
     for directory, names, files in os.walk(ROOT):
         parent = Path(directory)
-        names[:] = [name for name in names if parent / name not in PRUNE]
+        names[:] = [
+            name for name in names if name not in BUILD_CACHES and parent / name not in PRUNE
+        ]
         for name in files:
             path = parent / name
             if path in PRUNE or path.is_symlink():
@@ -406,6 +480,11 @@ def clone_tree(dest: Path) -> None:
             shutil.copytree(document, dest / document.name, dirs_exist_ok=True)
         elif document.is_file():
             shutil.copy2(document, dest / document.name)
+
+    # After every copier and before the symlinks, so the sweep sees the whole tree and
+    # none of the real checkout: `.venv` alone holds 147 `__pycache__` directories that
+    # are not this clone's to delete.
+    _strip_build_caches(dest)
 
     for rel in LINK_BACK:
         source = ROOT / rel
