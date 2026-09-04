@@ -298,10 +298,10 @@ Checked by me:
 
 Qualifications:
 
-1. The clause “not covered by any stated rigidity theorem for polygon contacts” ([CW96]
-   Theorem 4.3.1 shape match, the disk-jamming sign requirement, Donev et al.
-   2007\) is, by X-012’s own §7.1 and §8.3, the coordinator’s survey finding, unverified
-   against the primary texts by the lane — and not by me.
+1. The clause “not covered by any stated rigidity theorem for polygon contacts”—based on
+   the [CW96] Theorem 4.3.1 shape match, the disk-jamming sign requirement, and Donev et
+   al. 2007—is, by X-012’s own §7.1 and §8.3, the coordinator’s survey finding,
+   unverified against the primary texts by the lane — and not by me.
    It is not needed for S3 ("first exact proof of a property Kingbird asserts without
    proof; closing principle and Connelly–Whiteley proof shape excluded from the claim")
    and should be carried as an unverified survey assertion, not as part of the claim.

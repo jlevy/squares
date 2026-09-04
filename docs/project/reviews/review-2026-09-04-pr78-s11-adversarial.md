@@ -2,7 +2,7 @@
 
 **Review date:** 2026-09-04\
 **Pull request:** [#78](https://github.com/jlevy/squares/pull/78)\
-**Reviewed parent head:** `6fc71ce9c87f2f643187b79703d883219299b752`\
+**Reviewed parent head:** `b77e78d2bcfcfa06cccfaac91110140edac1758d`\
 **Base:** `9d5eae0f5ecfcf3cd417a345eb6c55b1f9ac4def` (`main`)\
 **Remediation branch:** `codex/pr78-s11-adversarial-review`\
 **Certificate SHA-256:**
@@ -36,13 +36,16 @@ This review concentrates on T-018, not PR 78’s separate `n = 12` result.
 It checked the mathematical implication, the exact bytes retained for `n = 11`, the
 continuum-to-finite reduction, replay and validation boundaries, method provenance, and
 the novelty claim. The PR advanced repeatedly during the audit, from `9b85236b` through
-`bdf63b21` and finally to `6fc71ce9`; the last update replaced the `19/5` target
-artifact with a larger `381/100` certificate, so the concrete validation restarted on
-the new bytes. The self-contained verification package, interval-certified
-branch-and-bound checkpoint, and later retained `n = 17` certificates were included
-before the verdict was frozen.
-The later `n = 17`--`19` frontier movement was outside this review’s mathematical scope
-except where the earlier published-value `n = 17` certificate served as a control.
+`bdf63b21`, `6fc71ce9`, `31775018`, and finally `b77e78d2`. Commit `6fc71ce9` replaced
+the `19/5` target artifact with a larger `381/100` certificate, so the concrete
+validation restarted on the new bytes.
+The later commits strengthened the separate `n = 12` and `n = 17` results and amended
+the project process document; they did not change the reviewed `n = 11` bytes or
+argument. The self-contained verification package, interval-certified branch-and-bound
+checkpoint, and later retained `n = 17` certificates were included before the verdict
+was frozen. The later `n = 17`--`19` frontier movement was outside this review’s
+mathematical scope except where the earlier published-value `n = 17` certificate served
+as a control.
 
 The audit was pre-registered under `think-tukn` with five falsifiable hypotheses.
 Two delegated lanes were kept separate from the coordinator’s main review:
@@ -638,6 +641,8 @@ All project commands used the repository’s Python 3.14 environment from `packi
 | `thirdparty/check.py` | All four frozen-package steps passed: reconstruct the published-value `n = 17` control, verify the `19/5` rung, verify the control, and require a labeled negative-weight refusal. |
 | complete current interval confirmation | **1 passed** in 19.14 s; all 361 directions certified, with enclosure `[4001/4000, 4001/4000]`. |
 | repaired focused regressions | **56 passed**, 5 exhaustive tests deselected, in 6.01 s. |
+| `packing-validate --edit` on the integrated stack | **33 of 59 steps passed**; Ruff checked and formatted 793 files, BasedPyright reported zero errors, and all schema, generated-record, provenance, and edit-tier checks passed in 29.16 s. |
+| `packing-validate --push` on the integrated stack | **34 of 59 steps passed**; the reachable behavioral suite reported **1,724 passed, 36 exhaustive tests deselected** in 879.26 s; the complete gate took 882.61 s. |
 | exact five-atom signed certificate through `sqpack.fractional.verify` | **Incorrectly accepted**, proving F1. |
 | `.venv/bin/basedpyright` at the reviewed head | **Failed: 26 errors**, proving F2. |
 | fresh-copy Lean build and axiom audit | `lake build Kernel` passed in 9.38 s; the audit passed in 2.55 s and reported only `propext`, `Classical.choice`, and `Quot.sound`. |

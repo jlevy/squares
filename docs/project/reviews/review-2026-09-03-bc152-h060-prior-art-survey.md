@@ -148,9 +148,9 @@ Relevant results, quoted:
   then G(p) is second-order rigid and, by Theorem 4.3.1, G(p) is rigid.
   However, the present proof is much simpler since it is a direct application of the
   energy principle.”
-- Definition 4.1.1 (second-order flex): for a strut, “either (p_i - p_j).(p’_i - p’_j) >
-  0 or (p_i - p_j).(p’_i - p’_j) = 0 and |p’_i - p’_j|^2 + (p_i - p_j).(p''_i - p''_j)
-  > = 0”.
+- Definition 4.1.1 (second-order flex): for a strut, “either
+  `(p_i - p_j).(p’_i - p’_j) > 0` or `(p_i - p_j).(p’_i - p’_j) = 0` and
+  `|p’_i - p’_j|^2 + (p_i - p_j).(p''_i - p''_j) >= 0`”.
 - Theorem 4.3.1 (p. 474): “If a tensegrity framework G(p) is second-order rigid, then it
   is rigid.” The preceding paragraph states the difficulty exactly as X-007 does: “The
   natural idea is to take the first and second derivatives of the analytic flex
