@@ -49,10 +49,10 @@ OUTPUT = PACKING / "site" / "index.html"
 
 # Four colours have to stay apart in the prover: the mass comfortably above the
 # threshold, the mass near it, the mass below it (a region that never occurs
-# inside the domain), and the square the reader drags, which is an instrument
-# rather than a measurement. All three data colours come from the project's own
-# square-hue palette, asserted rather than indexed so a reordered palette fails
-# here instead of quietly restyling the figure.
+# inside the domain at a net direction), and the square the reader drags,
+# which is an instrument rather than a measurement. All three data colours
+# come from the project's own square-hue palette, asserted rather than indexed
+# so a reordered palette fails here instead of quietly restyling the figure.
 BELOW_ONE = "#e26e82"
 NEAR_LIMIT = "#c9a13a"
 for _colour in (BELOW_ONE, NEAR_LIMIT):
@@ -190,6 +190,7 @@ class Facts:
     outer_side: Fraction
     square_side: Fraction
     steps: int
+    angle_limit: Fraction
     atoms: tuple[Atom, ...]
     total_mass: Fraction
     least_mass: Fraction
@@ -275,6 +276,7 @@ def derive(path: Path, *, full_sweep: bool = False) -> Facts:
         outer_side=certificate.outer_side,
         square_side=certificate.square_side,
         steps=int(record["direction_steps"]),
+        angle_limit=Fraction(record["angle_limit"]),
         atoms=certificate.atoms,
         total_mass=certificate.total_mass,
         least_mass=least,
@@ -453,6 +455,8 @@ def certificate_substitutions(facts: Facts, *, headline: Facts) -> dict[str, str
         "N_ORBITS": str(facts.orbits),
         "N_DIRECTIONS": str(facts.steps + 1),
         "N_DIRECTIONS_MAX": str(facts.steps),
+        "LIMIT_NUM": str(facts.angle_limit.numerator),
+        "LIMIT_DEN": str(facts.angle_limit.denominator),
         "N_WEIGHTS": str(facts.distinct_weights),
         "L_TEX": frac_tex(facts.outer_side),
         "L_FRAC": f"{facts.outer_side.numerator}/{facts.outer_side.denominator}",

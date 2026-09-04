@@ -686,7 +686,7 @@
 /* Certificate {{ID}} */
 {{ATOMS}}
 const SCALE = {{SCALE_JS}}, L = {{L_JS}}, B = {{B_JS}}, HALF = B / 2;
-const LIMIT = 207107 / 500000, STEPS = {{N_DIRECTIONS_MAX}};
+const LIMIT_N = {{LIMIT_NUM}}, LIMIT_D = {{LIMIT_DEN}}, LIMIT = LIMIT_N / LIMIT_D, STEPS = {{N_DIRECTIONS_MAX}};
 
 const gcd = (a, b) => b ? gcd(b, a % b) : a;
 const reduce = (n, d) => { const g = gcd(n, d) || 1; return [n / g, d / g]; };
@@ -898,20 +898,24 @@ function updateReadout() {
   tex(document.getElementById('md-{{SLUG}}'), `= ${(m / SCALE).toFixed(6)}`);
   const vd = document.getElementById('vd-{{SLUG}}');
   if (!admissible(probe[0], probe[1])) { vd.className = 'verdict out'; vd.textContent = 'Outside the domain'; }
-  else if (m >= SCALE) { vd.className = 'verdict ok'; vd.textContent = 'Covers ≥ 1'; }
+  else if (m >= SCALE) { vd.className = 'verdict ok'; vd.textContent = onNet ? 'Covers ≥ 1' : 'Covers ≥ 1 (off the net)'; }
   else if (onNet) { vd.className = 'verdict no'; vd.textContent = 'Below 1, breaks Condition 5'; }
-  else { vd.className = 'verdict no'; vd.textContent = 'Below 1, off the net (see Condition 4)'; }
+  else { vd.className = 'verdict out'; vd.textContent = 'Below 1, off the net: no condition tested'; }
 }
 function updateK() {
   const deg = a => (a * 180 / Math.PI).toFixed(4);
   const el = document.getElementById('kval-{{SLUG}}');
   if (onNet) {
-    tex(el, `k = ${curK}, \\quad t = ${curK === 0 ? '0' : `\\tfrac{${207107 * curK}}{90000000}`},` +
+    tex(el, `k = ${curK}, \\quad t = ${curK === 0 ? '0' : fracTex(...reduce(LIMIT_N * curK, LIMIT_D * STEPS))},` +
             `\\quad \\theta = ${deg(2 * Math.atan(netT(curK)))}^{\\circ}`);
   } else {
+    /* The square at theta is the square at theta mod 90 degrees; past 45 the
+       diagonal reflection carries it to one below 45 at the mirrored centre. */
+    const psi = angle % (Math.PI / 2), mirrored = psi > Math.PI / 4;
     const k = nearestNet(angle);
-    tex(el, `\\varphi = ${deg(angle)}^{\\circ}, \\quad \\text{reduces toward } k = ${k},` +
-            `\\; \\theta = ${deg(2 * Math.atan(netT(k)))}^{\\circ}`);
+    tex(el, `\\theta = ${deg(angle)}^{\\circ} \\equiv ${deg(psi)}^{\\circ} \\pmod{90^{\\circ}}` +
+            (mirrored ? `, \\text{ diagonal image } ${deg(Math.PI / 2 - psi)}^{\\circ}` : '') +
+            `; \\text{ nearest net } k = ${k} \\text{ at } ${deg(2 * Math.atan(netT(k)))}^{\\circ}`);
   }
 }
 function refresh(rebuild) {
@@ -984,9 +988,12 @@ document.getElementById('btn-scan-{{SLUG}}').addEventListener('click', () => {
     for (let i = 0; i <= N; i++) { const x = h + (L - 2 * h) * i / N;
       const m = massAt(x, y); if (m < best) { best = m; bx = x; by = y; } } }
   probe = [bx, by]; drawProver(); updateReadout();
-  document.getElementById('hint-{{SLUG}}').textContent =
-    'Raster scan of direction k = ' + curK + ': lowest sampled mass ' + (best / SCALE).toFixed(6) +
-    '. A raster only samples; the exact sweep decides every cell of the arrangement.';
+  const lowest = (best / SCALE).toFixed(6);
+  document.getElementById('hint-{{SLUG}}').textContent = onNet
+    ? 'Raster scan of direction k = ' + curK + ': lowest sampled mass ' + lowest +
+      '. A raster only samples; the exact sweep decides every cell of the arrangement.'
+    : 'Raster scan at ' + (angle * 180 / Math.PI).toFixed(4) + '°, off the net: lowest sampled mass ' + lowest +
+      '. The certificate sweeps no angle off the net; Condition 5 is decided at the {{N_DIRECTIONS}} net directions only.';
 });
 document.getElementById('btn-heat-{{SLUG}}').addEventListener('click', e => {
   showHeat = !showHeat; e.currentTarget.setAttribute('aria-pressed', String(showHeat));
