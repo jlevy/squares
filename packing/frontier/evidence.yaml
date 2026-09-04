@@ -1335,3 +1335,56 @@ evidence:
       implementation of the same reduction, so it does not move the confirmation rung;
       what it buys is that the claim can be checked without trusting this project.
     source_reviewed: '2026-09-04'
+  - id: E-n017-fractional-certificate
+    claim: lower-bound
+    scope:
+      n_values:
+        - 17
+        - 18
+        - 19
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained literature archive under packing/resources/ and the frontier source
+        register, which for n = 17 hold Burns's fractional unavoidable-set note (4.4811),
+        Massaccesi's 2026 certificate (4.5058, adopted here as T-015 and carried to
+        n = 18 and n = 19 as T-016), Nagamochi 2005 and Friedman's record tables.
+      searched: >-
+        Searched for any lower bound on s(17) above 22529/5000 = 4.5058. The corpus holds
+        none: that value is the strongest in the register and is itself only months old.
+        The known hole is the one every entry in this family names -- no systematic sweep
+        of recent preprints, and Massaccesi's note is not peer-reviewed.
+      novel_object: >-
+        The certificate and the side. The method is Burns's and the parametrisation is
+        Massaccesi's own; what is new is a denser certificate at a larger side than his,
+        found by this project's generator once its separation oracle was corrected.
+    certificate: cases/n17_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras python -m cases.n17_fractional_certificate
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over 708 atoms on a
+      D4-symmetric site set: the atom multiset is closed under the container's D4 group,
+      the total mass is 829681/50000 = 16.59362 and so strictly below 17, the
+      181-direction net reaches pi/4, containment B(1 + D) < 1 holds at B = 9977/10000,
+      and every reachable event cell at every net direction carries mass at least 1, the
+      least being 200017/200000. The bound proved is the container side itself, 451/100.
+      It displaces a published value rather than an inherited or closed-form one, so it
+      was decided three times: by the generator's own exact finish, by the coordinator
+      re-loading the file from disk, and by the evaluator written independently from the
+      theorem statement with the implementation withheld -- which took 2709 s summing
+      masses directly over 181 directions and returned the same least covered mass,
+      200017/200000, exactly. That evaluator reproduces Massaccesi's own published
+      22529/5000 from his constants as its control.
+      Scope note: n = 18 and n = 19 are carried by monotonicity, since a packing of
+      n >= 17 unit squares contains a packing of 17. Both previously held 4.5058
+      inherited the same way from T-015, so the same single certificate moves all three.
+      It does not reach n = 20, whose 1 + sqrt(13) = 4.6055 from Nagamochi's closed form
+      is larger.
+      Not independent by method: all three decisions are exact-algebraic, so this
+      supports C3 and not C4.
+    source_reviewed: '2026-09-04'

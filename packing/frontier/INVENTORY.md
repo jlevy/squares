@@ -8,9 +8,9 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **46** evidence records. **37** are formal; **31** of those were established here.
+- **47** evidence records. **38** are formal; **32** of those were established here.
 - **6** rest on an argument made elsewhere, of which **4** have been read by nobody here.
-- **12** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
+- **13** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
 claim whether or not we read it. The count above is not a doubt about those
@@ -61,17 +61,18 @@ results, it is a statement about what this repository has itself examined.
 | `E-bentz13-figure2-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-green17-sixteen-point-lower` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-green17-interval-audit` | 0 | lower-bound | verified | strict inequalities only | here | - | *not assessed* |
-| `E-n017-massaccesi-source-replay` | 3 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
-| `E-n017-massaccesi-h052-agreement` | 3 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-n017-massaccesi-source-replay` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
+| `E-n017-massaccesi-h052-agreement` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n012-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n012-independent-verifier` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n011-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n017-fractional-certificate` | 3 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 5, verified 37
-- **method**: exact-algebraic 28, interval-certified 2, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 5
-- **novelty**: apparently-novel 12, common-knowledge 4, not assessed 4, previously-published 26
+- **assurance**: numerically-checked 4, reported 5, verified 38
+- **method**: exact-algebraic 29, interval-certified 2, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 5
+- **novelty**: apparently-novel 13, common-knowledge 4, not assessed 4, previously-published 26
 
 The `cases` column is how many of the hundred frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited by ninety-eight cases is the catalogue everyone reports from and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -82,6 +83,7 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | result | n | what is new | cases | assurance |
 | --- | --- | --- | ---: | --- |
 | `E-translation-escape-not-rigid` | 89 sizes | A systematic screen over 98 configurations with replayable certificates; the idea of checking a slide is not new | 87 | numerically-checked |
+| `E-n017-fractional-certificate` | 17, 18, 19 | The certificate and the side. The method is Burns's and the parametrisation is Massaccesi's own; what is new is a denser certificate at a larger side than his, found by this project's generator once its separation oracle was corrected. | 3 | verified |
 | `E-n005-fixed-side-local-rigidity` | 5 | The first exact PROOF that Goebel's n = 5 optimum is locally rigid at fixed side -- a property ASSERTED WITHOUT PROOF by Kingbird (archived main page, line 44, "Rigid." with a link and no argument), not stated by Goebel 1979 (zero occurrences of "rigid" or "uniqu" in the extraction) and not annotated by Friedman DS7, whose Theorem 2 is a lower bound only and analyses no equality case | 1 | verified |
 | `E-n005-second-order-rigidity` | 5 | That n = 5 is not infinitesimally rigid but is second-order rigid, proved exactly; the catalogue asserts 'Rigid.' without defining or arguing it | 1 | verified |
 | `E-n011-fractional-certificate` | 11 | The certificate and the bound. The method is Burns's with Massaccesi's parameters and the generator is this project's; what is new is an instance at n = 11 and side 19/5, which is the first movement of this case's lower bound since 2003. | 1 | verified |

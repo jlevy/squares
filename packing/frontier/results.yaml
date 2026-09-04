@@ -523,6 +523,11 @@ results:
       BC-150 or BC-151 scratch evaluators) as a repository case with a replay so the
       reduction is no longer single-sourced on the record. V5 by a proof-assistant
       port of the eleven-lemma argument in the BC-150 packet.
+      Superseded as the verified lower bound on 2026-09-04 by T-019, which
+      certifies 451/100 at n = 17 with a denser first-party certificate. This result
+      stays true as stated and keeps its rungs; what changed is that the register no
+      longer reads 22529/5000 as the strongest available at this size.
+
   - id: T-016
     claim: >-
       s(18) >= 22529/5000 and s(19) >= 22529/5000, by monotonicity from T-015 (a
@@ -559,6 +564,10 @@ results:
     next_rung: >-
       Rises with T-015; a bespoke n = 18 or n = 19 certificate stronger than the
       inherited bound would be a new result, not a rung change.
+      Superseded as the verified lower bound on 2026-09-04 by T-019, which carries
+      451/100 to n = 18 and n = 19 by the same monotonicity step this result uses,
+      from a larger base. This result stays true as stated and keeps its rungs.
+
   - id: T-017
     claim: >-
       s(12) >= 197/50, by a first-party weighted fractional unavoidable-set
@@ -668,3 +677,52 @@ results:
       the project. The bound itself: the covering value at 3.81 sat at 11.000 and at
       3.83 at 11.105, both still descending when the block ended, so the next rung is a
       search question and not a rung change.
+  - id: T-019
+    claim: >-
+      s(17) >= 451/100, and s(18) >= 451/100 and s(19) >= 451/100 by monotonicity, from a
+      first-party weighted fractional unavoidable-set certificate at container side
+      451/100 = 4.51. This displaces Massaccesi's 22529/5000 = 4.5058 (T-015) and the two
+      cases T-016 carried from it, all three of which had held that value since its
+      adoption on 2026-09-03. The movement is +0.0042 at each of the three sizes. It does
+      not reach n = 20, where Nagamochi's 1 + sqrt(13) = 4.6055... is larger.
+    scope:
+      n_values:
+        - 17
+        - 18
+        - 19
+    verification: V4
+    confirmation: C3
+    significance:
+      score: 4
+      rationale: >-
+        Scored against the rubric's anchor for S4, "a reusable technique, bound family,
+        or resolved disputed value". One certificate moves three registered cases, and it
+        replaces a published value rather than an inherited or closed-form one -- the
+        only bound this project has displaced that someone else had put in print. Held
+        below S5 because none of n = 17, 18, 19 is the central open case, the movement is
+        0.0042 rather than a qualitative change, the method and its parametrisation are
+        Burns's and Massaccesi's own, and all three decisions of this certificate are
+        exact-algebraic.
+      scored: '2026-09-04'
+      by: BC-161 continuation (repository; independent evaluator confirmed C4, no external review)
+    novelty: apparently-novel
+    composition: >-
+      Primary at n = 17: one certificate, one accepted verdict, the bound being the
+      container side directly. Derived at n = 18 and n = 19: the monotonicity step that
+      T-016 already records, applied to a larger base, which is one line and inherits the
+      rungs.
+    evidence:
+      - E-n017-fractional-certificate
+    artifacts:
+      - packing/cases/n17_fractional_certificate/certificate.json
+      - packing/src/sqpack/fractional/colgen.py
+    controls:
+      - packing/tests/test_fractional_certificate.py
+    next_rung: >-
+      C4 needs a decision by a different method value, an interval-certified one; all
+      three decisions here are exact-algebraic. C5 needs a review artifact by someone
+      outside the project. The bound itself: Massaccesi's own atoms give a covering value
+      of 203/12 at 4.5058, so the headroom below seventeen was 0.083 of mass and 451/100
+      spends most of it -- the certificate's total is 16.5936, leaving 0.406. Further
+      rungs are a search question at a side where the covering value rises about 0.075
+      per 0.01 of side.
