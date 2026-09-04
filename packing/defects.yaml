@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 440
+count: 441
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13928,3 +13928,52 @@ defects:
     own replay runs -- is worth building and is not built.
   status: fixed
   recorded_in: packing/tests/test_fractional_interval.py
+- id: D-441
+  title: The generator decided its candidate before writing it, so a kill lost the candidate
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: inspection
+  latent_for: >-
+    from the first generator run on 2026-09-04 through every rung this block climbed;
+    noticed only when a candidate appeared whose exact decision would take about two
+    hours and the question "what happens if I stop this" had an answer nobody wanted
+  severity: medium
+  what: >-
+    The column-generation drivers rationalised their solution, ran the exact event-cell
+    sweep on the in-memory object, and wrote the JSON only inside `if v.accepted`. So the
+    bytes existed only after the most expensive step in the pipeline had already passed.
+    Two consequences follow from that ordering and neither is about correctness.
+    A run killed inside the sweep loses the candidate outright -- the site set survives in
+    the checkpoint, but recovering the atoms means re-solving the linear program, twenty
+    minutes or more, to arrive at weights the process had already computed.
+    And the cheap route cannot run first. The interval decision settles a certificate in
+    tens of seconds where the exact sweep takes minutes to hours, and it is enough to
+    reject; but it needs a file, and there was no file until the slow route had finished.
+    The ordering also contradicted the project's own retention rule, which says to freeze
+    the bytes and decide those, never the object in memory -- the rule that exists because
+    a generator once rewrote its output between verification and retention, turning 1032
+    atoms into 1121 under a path someone was about to read.
+  consequence: >-
+    No retained bound is affected: every certificate in the record was decided from frozen
+    bytes by the reload step that followed, and the reload is what the record cites. The
+    cost was in what could not be done. The n = 12 candidate at 99/25, 2097 atoms and a
+    sweep of roughly two hours, was unrecoverable for its whole duration while three other
+    lanes wanted the core; there was no way to ask the interval route whether it was worth
+    the wait.
+  fix: >-
+    Fixed on 2026-09-04 in the parametrised driver. The candidate is written the moment it
+    is rationalised, before any decision, and the exact sweep then runs on the reloaded
+    file rather than on the object; `least_cell_mass` is added to the record afterwards,
+    when there is a verdict to record. The run prints the frozen path and points at
+    `devtools.decide_certificate`, which is the gate the file then has to pass.
+    Freezing first is not a weaker check. The reload was already there and already decided
+    the bytes; what changed is that the bytes now exist whether or not the decision
+    finishes.
+  regression: >-
+    None automated -- this is a driver in the session scratchpad, not repository code, and
+    the repository's own retention path is devtools.decide_certificate, which takes a path
+    and cannot be handed an in-memory object at all. That tool is the durable form of the
+    rule; the driver now hands it a file.
+  status: fixed
+  recorded_in: packing/devtools/decide_certificate.py
