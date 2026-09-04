@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m1mv6zm9cmtzc23nbzvfp4hs
-title: "Agenda 018: ten-hour continuation -- certificate ladders, the n = 40 theorem, and W9 wave two"
+title: "Agenda 018: ten-hour continuation -- certificate ladders, the Trump radius, and W9 wave two"
 kind: epic
 status: open
 priority: 0
-version: 15
+version: 17
 spec_path: packing/campaign/agendas/agenda-018-ten-hour-continuation-ladders-theorems-and-wave-two.md
 labels:
   - packing
@@ -26,7 +26,8 @@ child_order_hints:
   - is-01m1mvfp32w9tap1eaj0d71phc
   - is-01m1mw35n0zgtabbppm94b90g5
   - is-01m1mw5z51sj2fv3q53mtk8f62
+  - is-01m1n03ns3gpy04660xmpzgzfw
 created_at: 2026-09-03T23:56:06.153Z
-updated_at: 2026-09-04T00:13:01.473Z
+updated_at: 2026-09-04T01:21:41.914Z
 ---
-Umbrella for Agenda 018, the ten-hour autonomous block that follows the operator's review of Agenda 017. Lane A climbs the n = 12 certificate ladder at a higher prospectively fixed threshold, takes the n = 11 shot (a fractional certificate with total mass below 11 above 2 + 4/sqrt(5)), and sweeps the generator over Nagamochi-only sizes as a bound family; Lane B generalises the local-rigidity instrument to arbitrary n and proves fixed-side local rigidity of Goebel's n = 40 packing by the T-014 route under independent review; Lane C continues the construction or certification route Agenda 017 left ready; Lane D runs W9 wave two over D-426, D-427 and D-428 and measures the gate's slowest step. A 120-minute W10 closeout ends the block.
+Umbrella for Agenda 018, the ten-hour autonomous block that follows the operator's review of Agenda 017. Lane A climbs the n = 12 certificate ladder at a higher prospectively fixed threshold, takes the n = 11 shot (a fractional certificate with total mass below 11 above 2 + 4/sqrt(5)) after its diagnostic, and calibrates the generator against s(13) = 4 before n = 20; Lane B reviews Agenda 017's Theorem 3 audit, generalises the local-rigidity instrument to arbitrary poses and proves an explicit isolation radius at Trump's n = 11 packing, with the n = 40 cone characterisation tentative; Lane C runs H-049 at the s(30) < 6 bar its corrected framing sets and then, tentatively, the generic interval certifier; Lane D runs W9 wave two over the deferred D-044/D-046 units and D-426, D-427 and D-428, spikes Nagamochi's lambda = 1 step, and measures the gate's slowest step. A 120-minute W10 closeout ends the block.

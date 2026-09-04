@@ -5,8 +5,8 @@ title: Repair the campaign trust boundary and run lifecycle
 kind: bug
 status: open
 priority: 0
-version: 12
-spec_path: packing/campaign/agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md
+version: 13
+spec_path: packing/campaign/agendas/agenda-017-six-hour-generator-rigidity-ceilings-and-w9-block.md
 labels:
   - packing
   - review
@@ -27,7 +27,7 @@ dependencies:
 parent_id: is-01m1jv8hm5xka6ytdtjs47tb0a
 hold: paused
 created_at: 2026-08-23T18:21:27.845Z
-updated_at: 2026-09-03T23:58:02.908Z
+updated_at: 2026-09-04T01:21:42.991Z
 ---
 Category: technical errors. The PR runner writes JSONL before validating overlap, records guard-invalid archives through the normal success path, trusts proposer-reported overlap, hardcodes selftest_passed, permits terminal rounds to be rewritten, ignores git failures, and does not enforce prerequisites or remaining deadlines. Build one checked state machine and one validation boundary shared by execute and record. Invalid output must be quarantined atomically and must never enter result cells.
 
