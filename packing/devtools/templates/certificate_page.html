@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <meta name="generator" content="kpress">
-<title>Eleven Squares, {{N_ATOMS}} Atoms</title>
-<meta name="description" content="How a weighted point set and a pigeonhole prove s({{N}}) &gt;= {{L_FRAC}}.">
+<title>s({{N}}) ≥ {{HEADLINE_L_FRAC}}: A New Lower Bound on the Square Packing Problem</title>
+<meta name="description" content="How a weighted point set and a pigeonhole prove s({{N}}) &gt;= {{HEADLINE_L_FRAC}}.">
 <style>{{KPRESS_CSS}}</style>
 <script>{{THEME_BOOTSTRAP}}</script>
 <style>
@@ -51,6 +51,29 @@
 .section-head .caps { display: block; margin-block-end: 0.45rem; }
 
 .hero { padding-block-start: calc(var(--kpress-font-size-base) * 3); }
+/* The heading is set in caps by kpress; s(n) is notation and keeps its case. */
+.hero h1 .symbol { text-transform: none; }
+.subtitle { margin-block-end: 0; }
+
+/* The certificate picker: kpress's tab list and buttons, with a second line
+   on each tab for the size and the role. The articles are whole documents,
+   so they are hidden outright rather than through the kpress panel, which is
+   sized for a short in-page panel. */
+.cert-tabs { margin-block: 1.6rem 0; }
+.cert-tabs .kpress-tab-button { flex: 0 1 auto; padding: 0.55rem 1rem 0.5rem; text-align: left; }
+.cert-tabs .tab-note {
+  color: var(--kpress-doc-muted);
+  display: block;
+  font-size: var(--kpress-font-size-tiny);
+  font-variant-caps: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-block-start: 0.15rem;
+  text-transform: none;
+}
+.tabs-note { color: var(--kpress-doc-muted); font-size: var(--kpress-font-size-small); margin-block-start: 0.9rem; }
+.cert-article[hidden] { display: none; }
+.cert-claim { margin-block-start: 0.2rem; }
 .claim { margin-block: 1.5rem 1.3rem; }
 .frontmatter {
   color: var(--kpress-doc-muted);
@@ -282,6 +305,9 @@
 /* One role kpress has no token for: the square the reader drags, which must
    read as a separate instrument from the mass it measures. */
 :root {
+  /* kpress derives every size from this one token, so the page reads larger
+     everywhere without any element being restyled. */
+  --kpress-host-font-size-base: 18px;
   --cert-probe: oklch(55% 0.145 52);
   --cert-below: {{BELOW_ONE}};
   --cert-near: {{NEAR_LIMIT}};
@@ -301,19 +327,35 @@
 </head>
 <body class="kpress-frame" data-kpress-frame>
 <main class="kpress-page-main kpress-viewport" data-kpress-viewport>
-<article class="kpress kpress-doc cert-page">
+<div class="kpress kpress-doc cert-page">
 
 <header class="hero sans-text col kpress-prose">
-  <span class="caps">Square packing · lower-bound certificate</span>
-  <h1>Eleven squares, <i>{{N_ATOMS}} atoms</i></h1>
+  <h1><span class="symbol">s({{N}}) ≥ {{HEADLINE_L_FRAC}}</span>: A New Lower Bound on the Square Packing Problem</h1>
+  <p class="subtitle">Eleven unit squares, free to rotate, do not fit in a square of side {{HEADLINE_L_DEC}}.
+  The proof is a weighted point set and a pigeonhole. It is the first movement of the smallest open case in
+  {{YEARS_SINCE_PRIOR}} years; the previous bound was {{PRIOR_LOWER}} ({{PRIOR_SOURCE}}).</p>
+  <div class="cert-tabs kpress-tab-list" role="tablist" aria-label="Certificate">
+    <!--BEGIN:TAB--><button type="button" class="kpress-tab-button" role="tab" id="tab-{{SLUG}}"
+      data-cert="{{SLUG}}" aria-controls="cert-{{SLUG}}" aria-selected="false" tabindex="-1">{{L_FRAC}} = {{L_DEC}}<span
+      class="tab-note">{{N_ATOMS}} atoms · {{TAB_ROLE}}</span></button>
+    <!--END:TAB-->
+  </div>
+  <p class="tabs-note">Two certificates, decided by the same five conditions, give two rungs of the bound.
+  The {{DEFAULT_L_FRAC}} certificate is shown by default: it is smaller, and its numbers are easier to follow.
+  The {{HEADLINE_L_FRAC}} certificate is the bound the title states.</p>
+</header>
+
+<!--BEGIN:ARTICLE-->
+<article class="cert-article" id="cert-{{SLUG}}" data-cert="{{SLUG}}" role="tabpanel" aria-labelledby="tab-{{SLUG}}" hidden>
+
+<div class="cert-claim sans-text col kpress-prose">
   <div class="claim tex-d">s({{N}}) \;\ge\; {{L_TEX}} \;=\; {{L_DEC}}</div>
-  <p class="subtitle">Eleven unit squares, free to rotate, do not fit in a square of side {{L_DEC}}.
-  The proof is a weighted point set and a pigeonhole.</p>
   <div class="frontmatter">
+    <span>certificate <code>{{ID}}</code></span>
     <span>{{N_ATOMS}} atoms · {{N_DIRECTIONS}} directions · {{N_ORBITS}} orbits of <span class="tex">\mathbf{D}_4</span></span>
     <span>all arithmetic exact</span>
   </div>
-</header>
+</div>
 
 <div class="line-fig col kpress-diagram">
   <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER}}, the new bound {{L_DEC}}, and the best known packing at {{BEST_PACKING}}">
@@ -403,8 +445,8 @@
     <span class="caps">Figure 2</span><span class="tag">Condition 1</span>
     <span class="fig-title">The atom field</span>
   </div>
-  <div class="stage stage-tip"><canvas id="field" width="1040" height="1040"></canvas>
-      <div class="tip" id="field-tip" hidden></div></div>
+  <div class="stage stage-tip"><canvas id="field-{{SLUG}}" width="1040" height="1040"></canvas>
+      <div class="tip" id="field-tip-{{SLUG}}" hidden></div></div>
   <figcaption class="kpress-figcaption">Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
   corners, where a square has least room to move, and thins in the middle. The sites and weights are the optimum
   of a covering linear program, rationalised.</figcaption>
@@ -433,30 +475,30 @@
     <span class="fig-title">The prover: drag the square, watch the mass</span>
   </div>
   <div class="split">
-    <div class="stage"><canvas id="prove" width="1000" height="1000"></canvas></div>
+    <div class="stage"><canvas id="prove-{{SLUG}}" width="1000" height="1000"></canvas></div>
     <div class="panel">
       <div class="readout">
         <span class="caps">Mass covered</span>
-        <div class="mass-val" id="mv"></div>
-        <div class="mass-dec" id="md"></div>
-        <span class="verdict ok" id="vd">Covers ≥ 1</span>
+        <div class="mass-val" id="mv-{{SLUG}}"></div>
+        <div class="mass-dec" id="md-{{SLUG}}"></div>
+        <span class="verdict ok" id="vd-{{SLUG}}">Covers ≥ 1</span>
       </div>
       <div class="ctl">
         <span class="caps">Direction <span class="tex">k</span> of the {{N_DIRECTIONS}}-point net</span>
-        <input type="range" id="kslider" min="0" max="{{N_DIRECTIONS_MAX}}" value="0" step="1" aria-label="Net direction index">
-        <div class="val" id="kval"></div>
+        <input type="range" id="kslider-{{SLUG}}" min="0" max="{{N_DIRECTIONS_MAX}}" value="0" step="1" aria-label="Net direction index">
+        <div class="val" id="kval-{{SLUG}}"></div>
       </div>
       <div class="btns">
-        <button id="btn-tight">Tightest placement</button>
-        <button id="btn-scan">Scan this direction</button>
-        <button id="btn-heat" aria-pressed="true">Field</button>
+        <button id="btn-tight-{{SLUG}}">Tightest placement</button>
+        <button id="btn-scan-{{SLUG}}">Scan this direction</button>
+        <button id="btn-heat-{{SLUG}}" aria-pressed="true">Field</button>
       </div>
       <div class="legend">
         <span><i style="background:var(--cert-near)"></i>within 12% of the limit</span>
         <span><i style="background:var(--kpress-doc-accent)"></i>comfortably above</span>
         <span><i style="background:var(--cert-below)"></i>below 1, which never occurs</span>
       </div>
-      <p class="hint" id="hint">The shaded background is the covered mass at every centre position, recomputed
+      <p class="hint" id="hint-{{SLUG}}">The shaded background is the covered mass at every centre position, recomputed
       for the direction you choose. The dashed outline is where the square’s centre is allowed to be. Outside
       it the square hangs out of the container, and the proof makes no claim.</p>
     </div>
@@ -498,11 +540,11 @@
     <span class="fig-title">The shrink that buys the finite net</span>
   </div>
   <div class="split">
-    <div class="stage"><canvas id="shrink" width="800" height="800"></canvas></div>
+    <div class="stage"><canvas id="shrink-{{SLUG}}" width="800" height="800"></canvas></div>
     <div class="panel">
       <div class="ctl">
         <span class="caps">Unit square’s angle <span class="tex">\varphi</span></span>
-        <input type="range" id="phi" min="0" max="450" value="196" step="1" aria-label="Unit square angle">
+        <input type="range" id="phi-{{SLUG}}" min="0" max="450" value="196" step="1" aria-label="Unit square angle">
       </div>
       <div class="ctl">
         <span class="caps">Net size <span class="tex">K</span></span>
@@ -514,12 +556,12 @@
         </div>
       </div>
       <dl class="kv">
-        <dt><span class="tex">\varphi</span></dt><dd id="s-phi"></dd>
-        <dt>nearest <span class="tex">\theta</span></dt><dd id="s-theta"></dd>
-        <dt>mismatch <span class="tex">d</span></dt><dd id="s-d"></dd>
-        <dt>largest <span class="tex">D</span></dt><dd id="s-D"></dd>
-        <dt><span class="tex">B</span> admitted</dt><dd id="s-B"></dd>
-        <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod"></dd>
+        <dt><span class="tex">\varphi</span></dt><dd id="s-phi-{{SLUG}}"></dd>
+        <dt>nearest <span class="tex">\theta</span></dt><dd id="s-theta-{{SLUG}}"></dd>
+        <dt>mismatch <span class="tex">d</span></dt><dd id="s-d-{{SLUG}}"></dd>
+        <dt>largest <span class="tex">D</span></dt><dd id="s-D-{{SLUG}}"></dd>
+        <dt><span class="tex">B</span> admitted</dt><dd id="s-B-{{SLUG}}"></dd>
+        <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod-{{SLUG}}"></dd>
       </dl>
       <p class="hint">Opens at <span class="tex">K = 3</span>, the coarsest net that still reaches
       <span class="tex">\pi/4</span>, where <strong>Condition 4</strong> admits only
@@ -633,9 +675,15 @@
 </footer>
 
 </article>
+<!--END:ARTICLE-->
+
+</div>
 </main>
 <script>{{KATEX_JS}}</script>
+<!--BEGIN:SCRIPT-->
 <script>
+(() => {
+/* Certificate {{ID}} */
 {{ATOMS}}
 const SCALE = {{SCALE_JS}}, L = {{L_JS}}, B = {{B_JS}}, HALF = B / 2;
 const LIMIT = 207107 / 500000, STEPS = {{N_DIRECTIONS_MAX}};
@@ -673,10 +721,10 @@ function admissible(x, y) { const h = inset();
   return x >= h - 1e-12 && x <= L - h + 1e-12 && y >= h - 1e-12 && y <= L - h + 1e-12; }
 
 /* ---------- Figure 2: the atom field ---------- */
-const fc = document.getElementById('field'), fg = fc.getContext('2d');
+const fc = document.getElementById('field-{{SLUG}}'), fg = fc.getContext('2d');
 const FS = fc.width, FM = FS * 0.055, FPX = FS - 2 * FM, FSC = FPX / L;
 const MAXW = Math.max(...ATOMS.map(a => a[2]));
-const fieldTip = document.getElementById('field-tip');
+const fieldTip = document.getElementById('field-tip-{{SLUG}}');
 let hovered = -1;
 
 function drawField() {
@@ -739,7 +787,7 @@ fc.addEventListener('pointerleave', () => {
 });
 
 /* ---------- Figure 3 ---------- */
-const pv = document.getElementById('prove'), pg = pv.getContext('2d');
+const pv = document.getElementById('prove-{{SLUG}}'), pg = pv.getContext('2d');
 const PS = pv.width, PM = PS * 0.06, PPX = PS - 2 * PM, PSC = PPX / L;
 const RES = 230, TIGHT = 1.12;
 let probe = [{{WITNESS_X_JS}}, {{WITNESS_Y_JS}}], curK = 0, showHeat = true, heat = null;
@@ -838,16 +886,16 @@ function updateReadout() {
   /* Always over SCALE, never reduced: the denominator is the unit the whole
      certificate is counted in, and a reduced one would change under the reader
      as they drag, which is the opposite of what the readout is for. */
-  tex(document.getElementById('mv'), `\\frac{${m}}{${SCALE}}`);
-  tex(document.getElementById('md'), `= ${(m / SCALE).toFixed(6)}`);
-  const vd = document.getElementById('vd');
+  tex(document.getElementById('mv-{{SLUG}}'), `\\frac{${m}}{${SCALE}}`);
+  tex(document.getElementById('md-{{SLUG}}'), `= ${(m / SCALE).toFixed(6)}`);
+  const vd = document.getElementById('vd-{{SLUG}}');
   if (!admissible(probe[0], probe[1])) { vd.className = 'verdict out'; vd.textContent = 'Outside the domain'; }
   else if (m >= SCALE) { vd.className = 'verdict ok'; vd.textContent = 'Covers ≥ 1'; }
   else { vd.className = 'verdict no'; vd.textContent = 'Below 1, breaks Condition 5'; }
 }
 function updateK() {
   const t = netT(curK), th = 2 * Math.atan(t) * 180 / Math.PI;
-  tex(document.getElementById('kval'),
+  tex(document.getElementById('kval-{{SLUG}}'),
       `k = ${curK}, \\quad t = ${curK === 0 ? '0' : `\\tfrac{${207107 * curK}}{90000000}`},` +
       `\\quad \\theta = ${th.toFixed(4)}^{\\circ}`);
 }
@@ -873,7 +921,7 @@ function rotateTo(x, y) {
   const k = nearestNet(Math.atan2(-(x - probe[0]), y - probe[1]));
   if (k === curK) { drawProver(); return; }
   curK = k;
-  document.getElementById('kslider').value = String(k);
+  document.getElementById('kslider-{{SLUG}}').value = String(k);
   setDir(k);
   drawProver(); updateReadout(); updateK();
 }
@@ -910,24 +958,24 @@ pv.addEventListener('pointerleave', () => {
   if (handleShown) { handleShown = false; handleHot = false; drawProver(); }
 });
 
-document.getElementById('kslider').addEventListener('input', e => { curK = +e.target.value; refresh(true); });
-document.getElementById('btn-tight').addEventListener('click', () => {
-  curK = 0; document.getElementById('kslider').value = 0;
+document.getElementById('kslider-{{SLUG}}').addEventListener('input', e => { curK = +e.target.value; refresh(true); });
+document.getElementById('btn-tight-{{SLUG}}').addEventListener('click', () => {
+  curK = 0; document.getElementById('kslider-{{SLUG}}').value = 0;
   probe = [{{WITNESS_X_JS}}, {{WITNESS_Y_JS}}]; refresh(true);
-  document.getElementById('hint').textContent =
+  document.getElementById('hint-{{SLUG}}').textContent =
     'The tightest placement in the whole certificate: direction k = 0, covering {{LEAST_TEX_PLAIN}}.';
 });
-document.getElementById('btn-scan').addEventListener('click', () => {
+document.getElementById('btn-scan-{{SLUG}}').addEventListener('click', () => {
   const h = inset(); let best = Infinity, bx = 0, by = 0, N = 300;
   for (let j = 0; j <= N; j++) { const y = h + (L - 2 * h) * j / N;
     for (let i = 0; i <= N; i++) { const x = h + (L - 2 * h) * i / N;
       const m = massAt(x, y); if (m < best) { best = m; bx = x; by = y; } } }
   probe = [bx, by]; drawProver(); updateReadout();
-  document.getElementById('hint').textContent =
+  document.getElementById('hint-{{SLUG}}').textContent =
     'Raster scan of direction k = ' + curK + ': lowest sampled mass ' + (best / SCALE).toFixed(6) +
     '. A raster only samples; the exact sweep decides every cell of the arrangement.';
 });
-document.getElementById('btn-heat').addEventListener('click', e => {
+document.getElementById('btn-heat-{{SLUG}}').addEventListener('click', e => {
   showHeat = !showHeat; e.currentTarget.setAttribute('aria-pressed', String(showHeat));
   if (showHeat && !heat) buildHeat();
   drawProver();
@@ -935,12 +983,12 @@ document.getElementById('btn-heat').addEventListener('click', e => {
 
 /* ---------- Figure 4 ---------- */
 let KNET = 3;
-const sk = document.getElementById('shrink'), skg = sk.getContext('2d');
+const sk = document.getElementById('shrink-{{SLUG}}'), skg = sk.getContext('2d');
 const SKS = sk.width, SKC = SKS / 2, SKSIDE = SKS * 0.62, SKGAP = SKS * 0.055;
 const SKHR = SKS * 0.028;
 let phiMode = 'none', phiShown = false, phiHot = false;
 
-const phiInput = () => document.getElementById('phi');
+const phiInput = () => document.getElementById('phi-{{SLUG}}');
 const phiNow = () => (+phiInput().value / 10) * Math.PI / 180;
 /* The handle rides the square's own top edge, so it turns with it. */
 function phiHandlePoint(phi) {
@@ -1019,38 +1067,71 @@ function shrinkDraw() {
   }
 
   const deg = r => (r * 180 / Math.PI).toFixed(3);
-  tex(document.getElementById('s-phi'), `${deg(phi)}^{\\circ}`);
-  tex(document.getElementById('s-theta'), `${deg(theta)}^{\\circ}`);
-  tex(document.getElementById('s-d'), `${(d * 180 / Math.PI).toFixed(4)}^{\\circ}`);
-  tex(document.getElementById('s-D'), D.toFixed(7));
-  tex(document.getElementById('s-B'), Bk.toFixed(6));
-  const pe = document.getElementById('s-prod');
+  tex(document.getElementById('s-phi-{{SLUG}}'), `${deg(phi)}^{\\circ}`);
+  tex(document.getElementById('s-theta-{{SLUG}}'), `${deg(theta)}^{\\circ}`);
+  tex(document.getElementById('s-d-{{SLUG}}'), `${(d * 180 / Math.PI).toFixed(4)}^{\\circ}`);
+  tex(document.getElementById('s-D-{{SLUG}}'), D.toFixed(7));
+  tex(document.getElementById('s-B-{{SLUG}}'), Bk.toFixed(6));
+  const pe = document.getElementById('s-prod-{{SLUG}}');
   tex(pe, `${prod.toFixed(6)} ${prod < 1 ? '\\lt' : '\\ge'} 1`);
   pe.style.color = prod < 1 ? '' : css('--kpress-doc-danger');
 }
-document.getElementById('phi').addEventListener('input', shrinkDraw);
+document.getElementById('phi-{{SLUG}}').addEventListener('input', shrinkDraw);
 document.querySelectorAll('.knet').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('.knet').forEach(o => o.setAttribute('aria-pressed', 'false'));
   b.setAttribute('aria-pressed', 'true'); KNET = +b.dataset.k; shrinkDraw();
 }));
 
 /* ---------- boot ---------- */
-function typesetStatic() {
-  document.querySelectorAll('.tex').forEach(el => {
-    if (!el.dataset.done && !el.querySelector('.katex')) { el.dataset.done = '1'; tex(el, el.textContent, false); }
-  });
-  document.querySelectorAll('.tex-d').forEach(el => {
-    if (!el.dataset.done) { el.dataset.done = '1'; tex(el, el.textContent, true); }
-  });
-  document.documentElement.classList.add('math-ready');
-}
 function boot() { drawField(); refresh(true); shrinkDraw(); }
-typesetStatic();
 boot();
 if (window.matchMedia) {
   const mq = window.matchMedia('(prefers-color-scheme: dark)');
   if (mq.addEventListener) mq.addEventListener('change', () => { heat = null; boot(); });
 }
+})();
+</script>
+<!--END:SCRIPT-->
+<script>
+/* ---------- shared: static math, then the certificate picker ---------- */
+(() => {
+  const render = (el, s, d) => { try { katex.render(s, el, { displayMode: !!d, throwOnError: false }); }
+                                 catch (e) { el.textContent = s; } };
+  document.querySelectorAll('.tex').forEach(el => {
+    if (!el.dataset.done && !el.querySelector('.katex')) { el.dataset.done = '1'; render(el, el.textContent, false); }
+  });
+  document.querySelectorAll('.tex-d').forEach(el => {
+    if (!el.dataset.done) { el.dataset.done = '1'; render(el, el.textContent, true); }
+  });
+  document.documentElement.classList.add('math-ready');
+
+  /* One article per certificate; the picker shows one and records it in the
+     hash, so a link can open the page on either. Unknown hash: the default. */
+  const tabs = [...document.querySelectorAll('.cert-tabs [role="tab"]')];
+  const articles = [...document.querySelectorAll('.cert-article')];
+  const slugs = articles.map(a => a.dataset.cert);
+  function show(slug, record) {
+    if (!slugs.includes(slug)) slug = slugs[0];
+    for (const a of articles) a.hidden = a.dataset.cert !== slug;
+    for (const t of tabs) {
+      const on = t.dataset.cert === slug;
+      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+    }
+    if (record && location.hash !== '#' + slug) history.replaceState(null, '', '#' + slug);
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => show(t.dataset.cert, true));
+    t.addEventListener('keydown', e => {
+      const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!step) return;
+      e.preventDefault();
+      const next = tabs[(i + step + tabs.length) % tabs.length];
+      show(next.dataset.cert, true); next.focus();
+    });
+  });
+  window.addEventListener('hashchange', () => show(location.hash.slice(1), false));
+  show(location.hash.slice(1), false);
+})();
 </script>
 </body>
 </html>

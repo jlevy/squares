@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Render the standalone explainer page for a retained fractional certificate.
 
-Every quantity the page states is read or derived from the certificate file, so
-the page cannot drift from the bound it explains. When a rung moves, rerunning
-this is the whole update: no number is typed twice.
+The page carries one article per retained certificate and a picker to choose
+between them, and every quantity each article states is read or derived from
+its certificate file, so the page cannot drift from the bounds it explains.
+When a rung moves, rerunning this is the whole update: no number is typed twice.
 
 The page is one self-contained file. Typography follows the kpress design
 system, and the kpress distribution also supplies the reading faces and KaTeX,
@@ -62,6 +63,13 @@ PRIOR_LOWER = "3.788854"
 PRIOR_SOURCE = "Stromquist 2003"
 BEST_PACKING = "3.877084"
 BEST_SOURCE = "Trump 1979 packing"
+PRIOR_YEAR = 2003
+RESULT_YEAR = 2026
+
+# The certificates the page walks through, in tab order. The first is shown by
+# default because it is the smaller one and its numbers are easier to follow;
+# the headline bound is the largest outer side among them, whichever that is.
+WALKTHROUGH = (CASE / "certificate-19-5.json", CASE / "certificate.json")
 
 # Only the KaTeX faces this page can reach. The rest of the distribution's
 # @font-face blocks are dropped rather than inlined; every one costs 30-40 KB.
@@ -318,16 +326,19 @@ def atom_array(facts: Facts) -> str:
     )
 
 
-def coarsening_rows() -> list[CoarseningRow] | None:
-    """The retained net-coarsening measurement, or None when it has not been run.
+def coarsening_rows(facts: Facts) -> list[CoarseningRow] | None:
+    """The retained net-coarsening measurement for this certificate, or None.
 
-    The measurement costs minutes per net and belongs to one certificate, so a
-    certificate that has not been measured yet renders without that figure
-    rather than blocking on it or, worse, reusing another certificate's numbers.
+    The measurement costs minutes per net and belongs to one certificate, which
+    the file names, so a certificate that has not been measured yet renders
+    without that figure rather than blocking on it or, worse, borrowing another
+    certificate's numbers.
     """
     if not COARSENING.is_file():
         return None
     payload = json.loads(COARSENING.read_text(encoding="utf-8"))
+    if payload.get("certificate_id") != facts.identifier:
+        return None
     return payload["rows"]
 
 
@@ -390,7 +401,31 @@ def number_line(facts: Facts) -> dict[str, str]:
     }
 
 
-def substitutions(facts: Facts, static: Path) -> dict[str, str]:
+def slug(facts: Facts) -> str:
+    """The certificate's outer side as an id fragment and hash: `19-5`, `381-100`."""
+    return f"{facts.outer_side.numerator}-{facts.outer_side.denominator}"
+
+
+def shared_substitutions(static: Path, headline: Facts, default: Facts) -> dict[str, str]:
+    """Values for the page shell: the assets, the headline bound and the deck line."""
+    return {
+        "KPRESS_CSS": kpress_css(static) + katex_css(static),
+        "THEME_BOOTSTRAP": theme_bootstrap(static),
+        "KATEX_JS": (static / "katex" / "katex.min.js").read_text(encoding="utf-8"),
+        "BELOW_ONE": BELOW_ONE,
+        "NEAR_LIMIT": NEAR_LIMIT,
+        "N": str(headline.n),
+        "HEADLINE_L_FRAC": f"{headline.outer_side.numerator}/{headline.outer_side.denominator}",
+        "HEADLINE_L_DEC": decimal(headline.outer_side),
+        "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
+        "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
+        "PRIOR_LOWER": PRIOR_LOWER,
+        "PRIOR_SOURCE": PRIOR_SOURCE,
+    }
+
+
+def certificate_substitutions(facts: Facts, *, headline: Facts) -> dict[str, str]:
+    """Values for one certificate's article, tab and script."""
     n = facts.n
     total = facts.total_mass
     shortfall = n - total
@@ -398,7 +433,7 @@ def substitutions(facts: Facts, static: Path) -> dict[str, str]:
     gap_before = Fraction(BEST_PACKING) - Fraction(PRIOR_LOWER)
     movement = facts.outer_side - Fraction(PRIOR_LOWER)
     margin = facts.least_mass - 1
-    rows = coarsening_rows()
+    rows = coarsening_rows(facts)
     if rows:
         bars, values, labels = coarsening_svg(rows)
         alt = "Least covered mass against net size: " + ", ".join(
@@ -409,9 +444,8 @@ def substitutions(facts: Facts, static: Path) -> dict[str, str]:
         bars = values = labels = alt = ""
         halving_b = halving_mass = ""
     values_map = {
-        "KPRESS_CSS": kpress_css(static) + katex_css(static),
-        "THEME_BOOTSTRAP": theme_bootstrap(static),
-        "KATEX_JS": (static / "katex" / "katex.min.js").read_text(encoding="utf-8"),
+        "SLUG": slug(facts),
+        "TAB_ROLE": "tighter" if facts is headline else "simpler",
         "ATOMS": atom_array(facts),
         "ID": facts.identifier,
         "N": str(n),
@@ -453,8 +487,6 @@ def substitutions(facts: Facts, static: Path) -> dict[str, str]:
         "GAP_BEFORE": decimal(gap_before),
         "HALVING_B_DROP": halving_b,
         "HALVING_MASS_DROP": halving_mass,
-        "BELOW_ONE": BELOW_ONE,
-        "NEAR_LIMIT": NEAR_LIMIT,
         "COARSEN_ALT": alt,
         "COARSEN_BARS": bars,
         "COARSEN_VALUES": values,
@@ -464,20 +496,54 @@ def substitutions(facts: Facts, static: Path) -> dict[str, str]:
     return values_map
 
 
-def render(certificate_path: Path, *, full_sweep: bool = False) -> str:
-    facts = derive(certificate_path, full_sweep=full_sweep)
-    template = TEMPLATE.read_text(encoding="utf-8")
-    if coarsening_rows() is None:
-        template = re.sub(
-            r"<!--BEGIN:COARSENING-->.*?<!--END:COARSENING-->", "", template, flags=re.DOTALL
-        )
-    values = substitutions(facts, kpress_static())
-    missing = {m.group(1) for m in re.finditer(r"\{\{([A-Z_]+)\}\}", template)} - values.keys()
+def fill(block: str, values: dict[str, str], *, where: str) -> str:
+    """Substitute every placeholder in a block, refusing one that has no value."""
+    missing = {m.group(1) for m in re.finditer(r"\{\{([A-Z_]+)\}\}", block)} - values.keys()
     if missing:
-        raise SystemExit(f"template placeholders with no value: {sorted(missing)}")
+        raise SystemExit(f"{where}: template placeholders with no value: {sorted(missing)}")
     for key, value in values.items():
-        template = template.replace(f"{{{{{key}}}}}", value)
-    return template
+        block = block.replace(f"{{{{{key}}}}}", value)
+    return block
+
+
+def expand(template: str, name: str, per_certificate: list[dict[str, str]]) -> str:
+    """Repeat a marked block once per certificate, in order, filled for each.
+
+    The article, its script and its tab are each one block in the template,
+    written once with `{{SLUG}}` in every id, and this stamps them out.
+    """
+    pattern = re.compile(rf"<!--BEGIN:{name}-->(.*?)<!--END:{name}-->", re.DOTALL)
+    match = pattern.search(template)
+    if match is None:
+        raise SystemExit(f"template has no {name} block")
+    block = match.group(1)
+    copies = []
+    for values in per_certificate:
+        copy = block
+        if name == "ARTICLE" and not values["COARSEN_BARS"]:
+            copy = re.sub(
+                r"<!--BEGIN:COARSENING-->.*?<!--END:COARSENING-->", "", copy, flags=re.DOTALL
+            )
+        copies.append(fill(copy, values, where=f"{name} {values['SLUG']}"))
+    return template[: match.start()] + "".join(copies) + template[match.end() :]
+
+
+def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> str:
+    """One page for every certificate given, the first shown by default."""
+    if not certificate_paths:
+        raise SystemExit("no certificate to render")
+    facts = [derive(path, full_sweep=full_sweep) for path in certificate_paths]
+    if len({f.n for f in facts}) != 1:
+        raise SystemExit("the certificates on one page must all be for the same n")
+    if len({slug(f) for f in facts}) != len(facts):
+        raise SystemExit("two certificates share an outer side; their ids would collide")
+    headline = max(facts, key=lambda f: f.outer_side)
+    per_certificate = [certificate_substitutions(f, headline=headline) for f in facts]
+
+    page = TEMPLATE.read_text(encoding="utf-8")
+    for name in ("TAB", "ARTICLE", "SCRIPT"):
+        page = expand(page, name, per_certificate)
+    return fill(page, shared_substitutions(kpress_static(), headline, facts[0]), where="page")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -485,8 +551,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--certificate",
         type=Path,
-        default=CASE / "certificate.json",
-        help="the certificate to explain (default: the retained n = 11 bound)",
+        action="append",
+        help="a certificate to explain; repeatable, first is shown by default "
+        "(default: the retained 19/5 and 381/100 certificates for n = 11)",
     )
     parser.add_argument("--output", type=Path, default=OUTPUT)
     parser.add_argument(
@@ -502,7 +569,8 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
 
-    page = render(args.certificate, full_sweep=args.verify_condition_5)
+    certificates = tuple(args.certificate) if args.certificate else WALKTHROUGH
+    page = render(certificates, full_sweep=args.verify_condition_5)
     if args.check:
         if not args.output.is_file():
             print(f"{args.output.relative_to(REPO)} has not been rendered", file=sys.stderr)
