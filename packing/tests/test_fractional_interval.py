@@ -258,6 +258,7 @@ def test_the_retained_n11_certificate_is_accepted_on_the_sub_net() -> None:
     assert verdict.total_mass == Fraction(434547, 40000)
 
 
+@pytest.mark.exhaustive_exact
 def test_the_393_100_certificate_is_accepted_on_the_full_doubled_net() -> None:
     """The interval-certified decision of s(12) >= 393/100, every direction."""
     certificate = load_n12(RETAINED_393_100)
@@ -269,6 +270,7 @@ def test_the_393_100_certificate_is_accepted_on_the_full_doubled_net() -> None:
     assert certificate.bounded_side == Fraction(393, 100)
 
 
+@pytest.mark.exhaustive_exact
 def test_the_live_n12_certificate_is_accepted_on_the_full_doubled_net() -> None:
     """Whatever rung certificate.json holds, decided in full against its own record."""
     certificate = load_n12()
@@ -283,6 +285,7 @@ def test_the_live_n12_certificate_is_accepted_on_the_full_doubled_net() -> None:
     assert str(enclosure[0]) == str(enclosure[1]) == record["least_cell_mass"]
 
 
+@pytest.mark.exhaustive_exact
 def test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net() -> None:
     """The interval-certified decision of s(11) >= 381/100, every direction."""
     certificate = load_n11()
@@ -315,6 +318,7 @@ def test_massaccesi_n17_reproduces_the_published_bound_on_the_sub_net() -> None:
     assert enclosure[0] <= 1 <= enclosure[1]
 
 
+@pytest.mark.exhaustive_exact
 def test_massaccesi_n17_reproduces_the_published_bound_on_the_full_doubled_net() -> None:
     verdict = verify_by_intervals(retained_certificate(), enclose=True)
     assert verdict.accepted, verdict.failures

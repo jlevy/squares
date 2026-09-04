@@ -143,13 +143,12 @@ def test_the_largest_half_gap_tangent_is_exact_on_a_uniform_net() -> None:
     assert certificate.largest_half_gap_tangent == MASSACCESI_LIMIT / 180
 
 
-def test_the_retained_n12_certificate_replays_and_is_accepted() -> None:
-    """The n = 12 result, replayed from its retained file and re-decided.
+def test_the_retained_n12_certificate_replays() -> None:
+    """The n = 12 result, read from its retained file and checked against its record.
 
-    This is the whole claim in one assertion: a certificate whose atoms carry
-    D4 symmetry, whose mass is 191/16 and so strictly under 12, and whose least
-    covered mass is exactly 1, proves that twelve unit squares do not fit in a
-    container of side 77/20.
+    What the certificate claims is checked here; that a verifier accepts it is
+    the exhaustive test below, and the coarse-net rung test covers the same
+    ladder cheaply.
     """
     certificate = load()
     assert certificate.n == 12
@@ -157,15 +156,20 @@ def test_the_retained_n12_certificate_replays_and_is_accepted() -> None:
     assert certificate.total_mass == Fraction(479713, 40000)
     assert certificate.total_mass < 12
 
+    record = declared()
+    assert record["claim"] == "s(12) >= 197/50"
+    assert record["total_mass"] == str(certificate.total_mass)
+
+
+@pytest.mark.exhaustive_exact
+def test_the_retained_n12_certificate_is_accepted() -> None:
+    """The 681-atom certificate over 181 directions, decided exactly."""
+    certificate = load()
     verdict = verify(certificate)
     assert verdict.accepted, verdict.failures
     assert verdict.minimum_cell_mass is not None
     assert verdict.minimum_cell_mass >= 1
-
-    record = declared()
-    assert record["claim"] == "s(12) >= 197/50"
-    assert record["total_mass"] == str(certificate.total_mass)
-    assert record["least_cell_mass"] == str(verdict.minimum_cell_mass)
+    assert declared()["least_cell_mass"] == str(verdict.minimum_cell_mass)
 
 
 def test_the_first_rung_at_19_5_still_replays() -> None:
@@ -348,12 +352,37 @@ def test_the_n11_rung_at_19_5_still_replays() -> None:
 
 
 def test_the_n11_calibration_rung_below_stromquist_also_verifies() -> None:
-    """189/50 proves nothing new, which is exactly why it was run first."""
+    """189/50 proves nothing new, which is exactly why it was run first.
+
+    Decided on a coarse net here. What this rung is evidence for -- that the
+    instrument returns sane values below the frontier as well as above it --
+    does not need all 181 directions to show, and the full decision is the
+    exhaustive test below.
+    """
 
     certificate = n11_load(N11_FIRST_RUNG)
     assert certificate.bounded_side == Fraction(189, 50)
     assert (certificate.bounded_side - 2) ** 2 * 5 < 16
-    assert verify(certificate).accepted
+    # C4's value, not the whole verdict: a net this coarse fails C3 by
+    # construction, since D grows with the gap and B(1 + D) then exceeds 1.
+    # What the coarse decision shows is coverage, which is the claim here.
+    coarse = Certificate(
+        n=certificate.n,
+        outer_side=certificate.outer_side,
+        square_side=certificate.square_side,
+        atoms=certificate.atoms,
+        half_tangents=certificate.half_tangents[::30],
+        symmetry=certificate.symmetry,
+    )
+    verdict = verify(coarse)
+    assert verdict.minimum_cell_mass is not None
+    assert verdict.minimum_cell_mass >= 1
+
+
+@pytest.mark.exhaustive_exact
+def test_the_n11_calibration_rung_verifies_on_the_full_net() -> None:
+    """The 373-atom calibration rung over all 181 directions."""
+    assert verify(n11_load(N11_FIRST_RUNG)).accepted
 
 
 def test_every_retained_n12_rung_still_verifies() -> None:
