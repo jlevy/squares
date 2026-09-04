@@ -2,7 +2,7 @@
 
 # Defect log
 
-442 defects recorded across the packing toolchain.
+443 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
-| `review` | 265 | a human or agent reading the work against a checklist |
+| `review` | 266 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
 | `inspection` | 50 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 64 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 64 of 442, and none of the 92 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 64 of 443, and none of the 92 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 64 of 442, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 7 |
-| record | 134 |
+| record | 135 |
 | tooling | 159 |
 | docs | 108 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 64 of 442, and none of
 | --- | ---: |
 | soundness | 92 |
 | validity | 116 |
-| bookkeeping | 161 |
+| bookkeeping | 162 |
 | robustness | 57 |
 | performance | 16 |
 
@@ -678,6 +678,7 @@ This is the actionable list.
 | [D-440](packing/tests/test_fractional_interval.py) | 2026-09-04 | record | bookkeeping |  | `inspection` | medium | fixed | A confirmation rung rested on a decision no control ever made |
 | [D-441](packing/devtools/decide_certificate.py) | 2026-09-04 | tooling | robustness |  | `inspection` | medium | fixed | The generator decided its candidate before writing it, so a kill lost the candidate |
 | [D-442](packing/devtools/check_case_prose.py) | 2026-09-04 | record | bookkeeping |  | `inspection` | medium | fixed | A case body kept quoting a bound its own front matter had already moved past |
+| [D-443](packing/devtools/render_certificate_reach.py) | 2026-09-04 | record | bookkeeping |  | `review` | low | fixed | A generated document counted stop reasons its own sources do not record |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

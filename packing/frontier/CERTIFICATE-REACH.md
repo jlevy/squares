@@ -130,12 +130,15 @@ it is offered here as a place to look, not as a result.
 
 The ratio is also not purely about how good a covering value the method can
 reach -- it is an observation about where searches were stopped as much as
-about where they could go. Two of the three runs behind it were halted on
-projected cost before they answered whether their side could be pushed
-higher; only one ran its covering search to a converged optimum (see each
-case's `next_rung` in `frontier/results.yaml`). A ratio built half from where
-searches were stopped and half from where they could go is not a rate to
-spend a rung's confidence on.
+about where they could go. The three runs behind it stopped for three
+different reasons, and only one of them is a statement about the method.
+n = 11 ran its covering search to a converged optimum. n = 19 was halted at
+round 9 on projected cost, four rounds short of where it would have stopped
+on its own. n = 17 has no stop reason recorded for its own build at all --
+the stop narrated in its `next_rung` belongs to an adjacent probe at
+n = 18, not to the certificate this row measures. A ratio built from three
+runs, one of which is known to have gone as far as it could, is not a rate
+to spend a rung's confidence on (`D-443`).
 
 `predicted` below is `min(ratio * best_packing, ceiling)` and `predicted
 gain` is `predicted - lower`, clamped at zero. Read them as where to look
