@@ -12,7 +12,8 @@ wrong direction. Two methods that could only fail in the same way are what the
 ``C4`` confirmation rung exists to rule out.
 
 What is decided. With ``n``, container side ``L``, shrink ``B``, a rational
-half-tangent net ``0 = t_0 < ... < t_K < 1`` and rational-weight atoms:
+half-tangent net ``0 = t_0 < ... < t_K < 1`` and nonnegative rational-weight
+atoms:
 
 ``C1``  total atom mass is strictly below ``n``;
 ``C2``  the net reaches pi/4, i.e. ``t_K^2 + 2 t_K - 1 >= 0``;
@@ -40,10 +41,11 @@ For a box of centres ``X``, the covered mass at *every* ``p`` in ``X`` is at
 least ``sum(w_i : R_i contains X)``, because a region containing the whole box
 contains each of its points. Each ``R_i`` is known only as an enclosure, so the
 test is made against the *inner* box ``[hi(u_i - B/2), lo(u_i + B/2)] x ...``
-that surely lies inside ``R_i``; a region failing that test simply does not
-count, which can only lower the bound. Masses are exact integers on a common
-scale, so the sum itself rounds nothing. The bound is therefore below the true
-covered mass at every centre of the box, with no assumption on the box's size.
+that surely lies inside ``R_i``. Because every weight is nonnegative, omitting a
+region that fails that test can only lower the bound. Masses are exact
+nonnegative integers on a common scale, so the sum itself rounds nothing. The
+bound is therefore below the true covered mass at every centre of the box, with
+no assumption on the box's size.
 
 Why the domain is handled soundly. The admissible centres are ``[h, L - h]^2``
 in container coordinates, ``h = B (c + s) / 2``, which is a rotated square in
@@ -62,13 +64,18 @@ enclosures of its container coordinates lie inside ``[h, L - h]``. A box centre
 that passes both tests with mass below 1 is a genuine placement the certificate
 does not cover.
 
+The upper bound used for refutation has the same dependency: the regions whose
+outer boxes contain ``p`` are a superset of the regions that truly contain it,
+and summing a superset is an upper bound only for nonnegative weights.
+
 What this method cannot do. A leave-edge of one region lying *exactly* on the
 enter-edge of another, or a region edge passing exactly through a domain corner,
 leaves a sliver no enclosure can close; the search then reaches its resolution
-floor with the box still undecided and reports it as such, which is a refusal
-to accept and never an acceptance. The seam census in
-``tests/test_fractional_interval.py`` finds no such coincidence in the retained
-certificates, and the full-net searches report no stalled box.
+floor or its conservative work budget with boxes still undecided and reports
+that explicitly, which is a refusal to accept and never an acceptance. The seam
+census in ``tests/test_fractional_interval.py`` finds no such coincidence in the
+retained certificates, and the full-net searches report no stalled box or
+exhausted budget.
 """
 
 from __future__ import annotations
@@ -101,6 +108,16 @@ RESOLUTION_FLOOR = 1e-12
 # operation per batch. The size trades Python overhead against memory: each
 # batch holds a boxes-by-atoms boolean mask.
 BATCH = 4096
+
+# Refuse a direction rather than let an unresolvable seam tile a continuum down
+# to RESOLUTION_FLOOR. Retained-certificate directions currently need at most
+# 10,751 boxes, leaving nearly an order of magnitude of diagnostic headroom.
+BOX_BUDGET = 100_000
+
+# Every NumPy mass operation is an int64 sum of a subset of the atom masses.
+# Keeping the exact Python-integer total below this conservative limit makes
+# each such accumulation safe, with room below the signed-int64 boundary.
+INT64_MASS_LIMIT = 2**62
 
 
 # ---------------------------------------------------------------------------
@@ -280,6 +297,7 @@ class DirectionOutcome:
     witness: tuple[float, float] | None
     boxes: int
     stalled: int
+    budget_exhausted: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -292,14 +310,23 @@ class AtomData:
     yhi: Floats
     mass: Ints
     scale: int
+    total: int
 
     @classmethod
     def of(cls, certificate: Certificate) -> AtomData:
         scale = 1
         for atom in certificate.atoms:
             scale = math.lcm(scale, atom.weight.denominator)
-        if certificate.n * scale >= 2**62:
+        if certificate.n * scale >= INT64_MASS_LIMIT:
             raise ValueError("the weight scale is too large for exact integer masses")
+        scaled_mass = [int(atom.weight * scale) for atom in certificate.atoms]
+        if any(mass < 0 for mass in scaled_mass):
+            raise ValueError("the interval verifier requires nonnegative atom weights")
+        total = sum(scaled_mass)
+        if total >= INT64_MASS_LIMIT:
+            raise ValueError(
+                "the total scaled atom mass is too large for safe int64 arithmetic"
+            )
         xs = [Interval.of(atom.x) for atom in certificate.atoms]
         ys = [Interval.of(atom.y) for atom in certificate.atoms]
         return cls(
@@ -307,15 +334,10 @@ class AtomData:
             xhi=np.array([x.hi for x in xs]),
             ylo=np.array([y.lo for y in ys]),
             yhi=np.array([y.hi for y in ys]),
-            mass=np.array(
-                [int(atom.weight * scale) for atom in certificate.atoms], dtype=np.int64
-            ),
+            mass=np.array(scaled_mass, dtype=np.int64),
             scale=scale,
+            total=total,
         )
-
-    @property
-    def total(self) -> int:
-        return int(self.mass.sum())
 
 
 class DirectionSearch:
@@ -479,7 +501,10 @@ class DirectionSearch:
         With ``prune_at`` given, a box is settled once its lower bound reaches
         it, which decides ``mass >= prune_at`` everywhere and stops early on a
         counterexample. Without it, boxes are settled against the best point
-        value seen so far, which encloses the minimum itself.
+        value seen so far, which encloses the minimum itself. Exhausting the
+        work budget returns a conservative ``undecided`` outcome with lower
+        bound zero, unless an admissible sampled point already refutes ``C4``.
+        Nonnegative weights make zero valid for every abandoned box.
         """
         pending: list[Floats] = [self.initial]
         lower: int | None = None
@@ -518,14 +543,34 @@ class DirectionSearch:
             if settled.any():
                 least = int(low[settled].min())
                 lower = least if lower is None else min(lower, least)
-            children, stuck = self._split(tight[~settled])
+            unresolved = tight[~settled]
+            if boxes >= BOX_BUDGET and (len(unresolved) or pending):
+                budget_status: Literal["refuted", "undecided"] = (
+                    "refuted" if upper is not None and upper < self.scale else "undecided"
+                )
+                return DirectionOutcome(
+                    self.label,
+                    budget_status,
+                    0,
+                    upper,
+                    witness,
+                    boxes,
+                    stalled,
+                    budget_exhausted=True,
+                )
+            children, stuck = self._split(unresolved)
             if len(stuck):
                 stalled += len(stuck)
                 least = int(self.lower_bound(stuck).min())
                 lower = least if lower is None else min(lower, least)
             if len(children):
                 pending.append(children)
-        status: Literal["certified", "undecided"] = "certified" if stalled == 0 else "undecided"
+        if upper is not None and upper < self.scale:
+            status: Literal["certified", "refuted", "undecided"] = "refuted"
+        elif stalled == 0 and lower is not None and lower >= self.scale:
+            status = "certified"
+        else:
+            status = "undecided"
         return DirectionOutcome(self.label, status, lower, upper, witness, boxes, stalled)
 
 
@@ -638,8 +683,11 @@ def verify_by_intervals(
 ) -> IntervalVerdict:
     """Decide the certificate; ``enclose`` also pins the least covered mass.
 
-    ``directions`` restricts ``C4`` to the named labels of the doubled net (a
-    sub-net decides a weaker statement and is for controls, not for claims).
+    ``directions`` restricts the searches to named labels of the doubled net.
+    Such a run remains a useful diagnostic: a selected direction can refute
+    ``C4``, and certified outcomes and enclosures describe those directions.
+    It cannot establish ``C4`` or produce an accepted theorem verdict; omit
+    ``directions`` to decide the full doubled net.
     """
     if any(t >= 1 for t in certificate.half_tangents):
         raise ValueError(
@@ -658,10 +706,22 @@ def verify_by_intervals(
         outcomes.append(search.search(prune_at=None if enclose else atoms.scale))
         if outcomes[-1].status == "refuted":
             break
-    statuses = {o.status for o in outcomes}
-    if "refuted" in statuses:
+    if any(
+        outcome.status == "refuted"
+        or (outcome.upper is not None and outcome.upper < atoms.scale)
+        for outcome in outcomes
+    ):
         status: Status = "fails"
-    elif statuses == {"certified"}:
+    elif (
+        directions is None
+        and outcomes
+        and all(
+            outcome.status == "certified"
+            and outcome.lower is not None
+            and outcome.lower >= atoms.scale
+            for outcome in outcomes
+        )
+    ):
         status = "holds"
     else:
         status = "undecided"
@@ -670,10 +730,13 @@ def verify_by_intervals(
     )
     detail = (
         f"{len(outcomes)} directions, {sum(o.boxes for o in outcomes)} boxes, "
-        f"{sum(o.stalled for o in outcomes)} stalled"
+        f"{sum(o.stalled for o in outcomes)} stalled, "
+        f"{sum(o.budget_exhausted for o in outcomes)} budget-exhausted"
     )
     if worst is not None and worst.upper is not None:
         detail += f"; least point mass {Fraction(worst.upper, atoms.scale)} at {worst.label}"
+    if directions is not None:
+        detail += "; restricted diagnostic, full doubled net not decided"
     conditions.append(
         IntervalCondition("C4 every admissible centre covers mass 1", detail, status=status)
     )

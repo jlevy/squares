@@ -1,11 +1,16 @@
-# Third-Party Check of s(11) ≥ 19/5
+# Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5
 
-Everything needed to check, with your own tools and without trusting this repository,
-that eleven unit squares do not fit in a square of side 3.8. The directory is
-self-contained: a certificate as plain data, the theorem it instantiates written out
-with its proof, a single-file verifier that uses only Python’s standard library, a
-control on a published result by other authors, and the perturbations the verifier
-refuses.
+This directory contains everything needed to replay and inspect the check with your own
+tools.
+It can be copied outside the checkout and run without importing code from the rest
+of the project or installing its dependencies: a certificate as plain data, the theorem
+it instantiates with its proof, a single-file verifier that uses only Python’s standard
+library, a control reconstructed from another author’s public result, and the
+perturbations the verifier refuses.
+
+For the shortest presentation, start with the parent case’s [`PROOF.md`](../PROOF.md): a
+one-minute argument, four exact certificate facts, and the finite formula that the
+checker decides.
 
 ## The Claim
 
@@ -43,11 +48,23 @@ inequality `s(11) > 19/5` also follows (by compactness), but the claim is the we
 | File | What it is |
 | --- | --- |
 | `certificate.json` | The `n = 11` certificate, plain data, byte-identical to `../certificate.json` (SHA-256 `60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`). Not regenerated for this package. |
-| `verify.py` | The verifier: one file, standard library only, exact rational arithmetic, no imports from this repository. |
-| `control-n17-massaccesi.json` | Gustavo Massaccesi’s published `n = 17` certificate, rebuilt as data in the same schema. |
-| `build_n17_control.py` | Rebuilds the control file from the constants of its published source; `--check` confirms the shipped file matches. |
+| `minimal_verify.py` | The shortest theorem-specific checker: 355 lines, of which 139 implement event geometry and scoring. It binds this exact SHA-256, recomputes C0-C4 and the minimum, and runs one must-refuse orbit mutation. |
+| `verify.py` | The verifier: one file, standard library only, exact rational arithmetic, no imports from the rest of this repository. |
+| `control-n17-massaccesi.json` | A reconstruction, in this package’s schema, of Gustavo Massaccesi’s publicly posted `n = 17` verifier constants. |
+| `build_n17_control.py` | Rebuilds the control file from Massaccesi’s public constants; `--check` confirms that the shipped reconstruction matches. |
 | `falsify.py` | Applies the perturbations in the falsification table and prints what the verifier refuses. |
 | `check.sh` | The whole check in one command. |
+
+For the smallest audit surface, run only the theorem-specific checker:
+
+```shell
+python3 minimal_verify.py certificate.json
+```
+
+It takes roughly 30 to 50 seconds on one core and ends with the exact minimum and an
+explicit C4-refuting mutation.
+It deliberately handles only this immutable certificate; `verify.py` is the larger
+general checker with reusable schema and degenerate-domain handling.
 
 One command, with whatever `python3` is on your `PATH` (CPython 3.8 or later, tested
 with 3.10 through 3.14, nothing installed):
@@ -56,26 +73,39 @@ with 3.10 through 3.14, nothing installed):
 sh check.sh
 ```
 
-It rebuilds the control data and compares it to the shipped file, then runs `verify.py`
-on the certificate and on the control.
-Each run prints every condition with its numbers and ends in `VERIFIED` or `REFUSED`;
-the script exits non-zero on any refusal.
+It rebuilds the control data and compares it to the shipped file, runs `verify.py` on
+the certificate and on the control, and runs a bounded negative-weight mutation that
+must be refused at the theorem preconditions.
+Each positive run prints every condition with its numbers and ends in `VERIFIED` or
+`REFUSED`; the script exits non-zero on a refused positive control, a wrongly accepted
+negative control, or a mismatched expected condition.
 Expect about a minute.
 C4 took 22 to 27 s on the certificate and 7 to 8 s on the control with CPython 3.10
-through 3.14 on an idle core, and 39 s and 14 s in the pasted run below, on a contended
-one. The outputs are pasted verbatim below.
+through 3.14 on an idle core, and 34.1 s and 10.4 s in the recorded run below on a
+contended one.
 
 ## The Theorem
 
-The argument is a weighted, fractional form of the classical *unavoidable set* argument
-for square packing. Sam Burns published it in August 2026 for `n = 17`
-([post](https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/)),
-and Gustavo Massaccesi improved the `n = 17` bound the same month with a certificate
-found by linear programming, in the shape used here
-([post](https://gus-massa.blogspot.com/2026/08/another-better-lower-bound-for-n17.html),
+The argument belongs to the resource-starvation lineage for square packing.
+Göbel used finite unavoidable point sets in 1979
+([paper](https://ir.cwi.nl/pub/12685/12685D.pdf)). Nagamochi assigned scores to weighted
+points, line segments, and area in 2005
+([paper](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v12i1r37));
+Bentz’s 2016 account describes these earlier methods as numerical resources consumed by
+each packed square ([paper](https://arxiv.org/abs/1606.03746)). These are antecedents of
+the broad fractional-cover principle used here.
+
+Sam Burns published a pure-atomic, exact-rational direction-net certificate for `n = 17`
+in August 2026
+([post](https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/)).
+Its accompanying proof note is bylined ChatGPT (GPT-5.6 Pro, OpenAI)
+([note](https://sam-burns.com/downloads/n17-square-packing/n17-lower-bound-4_4811.md)).
+Gustavo Massaccesi then used linear programming to find new weights and improved the
+posted `n = 17` bound in the same month
+([result](https://gus-massa.blogspot.com/2026/08/another-better-lower-bound-for-n17.html),
 [method](https://gus-massa.blogspot.com/2026/08/linear-programing-for-square-packing.html)).
-Neither the theorem nor the certificate shape is this project’s; the `n = 11` instance
-is.
+This package uses that exact-rational, pure-atomic direction-net architecture.
+The `n = 11` atoms and weights are this project’s.
 
 **Data.** An integer `n ≥ 1`; rationals `L > 0` (the container side) and `B > 0` (the
 shrunken side); a *direction net* of rationals `0 = t₀ < t₁ < … < t_K`, standing for the
@@ -171,6 +201,9 @@ exactly; a floating-point check would have no business here.
 **Schema.** A JSON object with the fields below.
 Every rational is a string matching `-?[0-9]+(/[1-9][0-9]*)?`; the verifier refuses any
 other form, so a decimal or a float cannot enter and be rounded.
+It also refuses duplicate object keys, non-integer or Boolean values for `n` and
+`direction_steps`, malformed atom triples, and missing required fields rather than
+coercing them or failing partway through the decision.
 
 | Field | Type | Meaning |
 | --- | --- | --- |
@@ -186,11 +219,13 @@ other form, so a decimal or a float cannot enter and be rounded.
 
 ## The Verifier
 
-`verify.py` reads the file, checks the shape the theorem assumes (`n ≥ 1`, positive
-sides, non-negative weights, a net that starts at 0 and increases, the declared claim
-equal to the theorem’s conclusion), then decides C0 to C4 in that order and prints each
-with its numbers. Nothing short-circuits: a file failing C1 still has its C4 minimum
-computed, so a refusal names every failing condition.
+`minimal_verify.py` is the theorem-specific audit kernel described above.
+`verify.py` reads the file strictly, checks the shape the theorem assumes (`n ≥ 1`,
+positive sides, non-negative weights, a net that starts at 0 and increases, the declared
+claim equal to the theorem’s conclusion), then decides C0 to C4 in that order and prints
+each with its numbers.
+Once the preconditions pass, nothing short-circuits: a file failing C1 still has its C4
+minimum computed, so a refusal names every failing condition.
 Every quantity is a `fractions.Fraction`; floats appear only in printed approximations
 beside the exact value.
 
@@ -227,38 +262,48 @@ C4 is the substance, and it is decided over the continuum of placements, not sam
   disagreement aborts the run.
   `--audit N` re-sums `N` further random admissible cells per direction the same way.
 
+If the admissible-centre domain at a direction is empty, C4 there is vacuous; if it is a
+single point, the verifier evaluates that closed placement directly rather than applying
+the open-cell argument outside its hypotheses.
+If the certificate declares `total_mass` or `least_cell_mass`, disagreement with the
+recomputed value is a refusal, not an informational note.
+
 The verifier reports the exact least covered weight, the direction and the centre of a
 square that attains it, and the number of cells decided.
 The count is worth reading: a verifier that quietly decides fewer placements makes every
 certificate easier to accept, and the control below (a container too large for its
 atoms) shows this one scores the cells beyond the atoms’ reach.
 
-## The Control: Massaccesi’s Published n = 17 Certificate
+## The Control: A Reconstruction from Massaccesi’s Public n = 17 Constants
 
-A verifier that has only ever confirmed its own project’s results has confirmed nothing.
-`control-n17-massaccesi.json` is the certificate Gustavo Massaccesi published in August
-2026 for `s(17) ≥ 4.5058`, rebuilt as plain data by `build_n17_control.py` from the
-constants of his published verifier: `L = 45058/10000`, empty border `M = 15513/10000`,
-`B = 9973/10000`, `T = 207107/500000`, `K = 180`, weight scale `576`, a `29 × 29` grid
-with `coord[i] = M/2 + i(L − M)/28`, and 23 orbit representatives `(i, j, w)` each
-giving weight `w/576` to every distinct image of grid point `(i, j)` under the
-container’s symmetries.
+The control checks whether this verifier reproduces a publicly posted result from
+outside the project.
+`control-n17-massaccesi.json` reconstructs, in this package’s schema, the constants
+Gustavo Massaccesi posted in August 2026 for `s(17) ≥ 4.5058`. `build_n17_control.py`
+reads `L = 45058/10000`, empty border `M = 15513/10000`, `B = 9973/10000`,
+`T = 207107/500000`, `K = 180`, weight scale `576`, a `29 × 29` grid with
+`coord[i] = M/2 + i(L − M)/28`, and 23 orbit representatives `(i, j, w)`. Each
+representative gives weight `w/576` to every distinct image of grid point `(i, j)` under
+the container’s symmetries.
 None of his verification logic is reused.
-The rebuild reproduces the three checksums his source states: 168 atoms, total weight
-`9744/576 = 203/12`, and `L = 22529/5000 = 4.5058`.
+The reconstruction reproduces the three summary values his source states: 168 atoms,
+total weight `9744/576 = 203/12`, and `L = 22529/5000 = 4.5058`.
 
 The same `verify.py`, unchanged, accepts it and reports the bound `22529/5000`, the
-published value, with least covered weight exactly `1` (the published certificate is
-tight) and `B(1 + D) = 899635478111/900000000000`. The value matters: an earlier reading
-of the theorem in this project divided by `B` and would have reported `4.51799`,
-overstating a published result; the control is what catches that kind of error.
+publicly posted value, with least covered weight exactly `1` (the reconstructed
+certificate is tight) and `B(1 + D) = 899635478111/900000000000`. The value matters: an
+earlier reading of the theorem in this project divided by `B` and would have reported
+`4.51799`, overstating Massaccesi’s result; the control catches that kind of error.
 
 ## Falsification
 
-`falsify.py` perturbs the certificate and runs the full decision on each variant.
-The perturbed atom is chosen from the verifier’s own witness: the first atom covered by
-the least-covered placement, so a change to it must show in C4. Real output of
-`python3 falsify.py` (about four minutes):
+`falsify.py` perturbs the certificate, runs the full decision on each variant, and
+compares the verdict, every named condition, and the exact minimum against a fixed
+oracle. It exits non-zero on any disagreement; merely printing a plausible table is not
+success. `python3 falsify.py --quick` runs only the signed-weight must-refuse case used
+by `check.sh`. The perturbed atom is chosen from the verifier’s own witness: the first
+atom covered by the least-covered placement, so a change to it must show in C4. Real
+output of `python3 falsify.py` (about four minutes):
 
 ```
 baseline: deciding the unperturbed certificate to locate its tight placement
@@ -296,7 +341,8 @@ margin covers nothing, and the verifier scores those placements.
 Run from a copy of this directory outside the repository, with an empty environment
 (`env -i PATH=/usr/bin:/bin bash -c 'time sh check.sh'`, so `python3` is the system
 interpreter and nothing from this project is importable).
-Verbatim:
+Representative successful output from the stranger run (the shell’s clock lines are
+omitted):
 
 ```
 $ which python3; python3 --version
@@ -324,7 +370,7 @@ certificate C-n011-fractional-19-5
     direction 120/180  t = 207107/750000      cells  505529  least weight 50003/50000 = 1.000060  running least 50003/50000
     direction 150/180  t = 207107/600000      cells  501069  least weight 50003/50000 = 1.000060  running least 50003/50000
     direction 180/180  t = 207107/500000      cells  499545  least weight 50003/50000 = 1.000060  running least 50003/50000
-  PASS  C4 every admissible placement covers weight >= 1 | least covered weight 50003/50000 = 1.000060 at direction 0 (t = 0), centre (53/100, 53/100) ~ (0.530000, 0.530000); 90546593 cells over 181 directions in 38.7 s
+  PASS  C4 every admissible placement covers weight >= 1 | least covered weight 50003/50000 = 1.000060 at direction 0 (t = 0), centre (53/100, 53/100) ~ (0.530000, 0.530000); 90546593 regions over 181 directions (0 vacuous) in 34.1 s
   info  declared total_mass 43391/4000 == recomputed 43391/4000
   info  declared least_cell_mass 50003/50000 == recomputed 50003/50000
   info  all atoms lie in [0, L]^2: yes (not a condition; an outside atom only wastes weight)
@@ -349,53 +395,64 @@ certificate control-n17-massaccesi-4.5058
     direction 120/180  t = 207107/750000      cells   91589  least weight 1 = 1.000000  running least 1
     direction 150/180  t = 207107/600000      cells   90869  least weight 1 = 1.000000  running least 1
     direction 180/180  t = 207107/500000      cells   90221  least weight 1 = 1.000000  running least 1
-  PASS  C4 every admissible placement covers weight >= 1 | least covered weight 1 = 1.000000 at direction 0 (t = 0), centre (364907/560000, 364907/560000) ~ (0.651620, 0.651620); 16562293 cells over 181 directions in 13.5 s
+  PASS  C4 every admissible placement covers weight >= 1 | least covered weight 1 = 1.000000 at direction 0 (t = 0), centre (364907/560000, 364907/560000) ~ (0.651620, 0.651620); 16562293 regions over 181 directions (0 vacuous) in 10.4 s
   info  declared total_mass 203/12 == recomputed 203/12
   info  all atoms lie in [0, L]^2: yes (not a condition; an outside atom only wastes weight)
 VERIFIED: s(17) >= 22529/5000 = 4.505800
-check.sh: all three steps passed
+quick negative-weight control: atom 0 weight replaced by -1
+| perturbation | C0 | C1 total | C2 slack | C3 B(1+D) | C4 least covered weight | verdict |
+| --- | --- | --- | --- | --- | --- | --- |
+| negative weight | - (425 atoms) | - (983147/100000) | - (309449/250000000000) | - (0.999995896) | - (-) | REFUSED |
+quick negative control: expected refusal and P2 result confirmed
+check.sh: all four steps passed
 
-real	0m52.422s
-user	0m34.333s
-sys	0m1.510s
 exit status 0
 ```
 
 ## Provenance, and What Is Not Claimed
 
-- **The method is not this project’s.** The theorem and the certificate architecture are
-  Burns’s and Massaccesi’s (August 2026, blog posts, not peer reviewed).
-  Their work aimed at `n = 17`. What is new here is the `n = 11` instance: the 425 atoms
-  and their weights, found on 2026-09-04 by a linear program with column generation on a
-  symmetric site grid, rationalised to exact weights.
+- **The `n = 11` instance is this project’s.** The broad weighted-resource principle has
+  the earlier lineage described above.
+  The exact-rational, pure-atomic direction-net architecture follows the Burns/ChatGPT
+  and Massaccesi posts from August 2026, which are public but not peer reviewed.
+  Their work aimed at `n = 17`. This project found the 425 atoms and their weights on
+  2026-09-04 by linear programming with column generation on a symmetric site grid, then
+  rationalised the weights exactly.
   How the certificate was found has no bearing on whether it is valid; the search code
   is deliberately not part of this package.
 - **The novelty claim rests on a bounded search.** The project’s record marks the result
-  *apparently novel* relative to the corpus it holds: Friedman’s survey, the Kingbird
-  catalogue of records, Stromquist 2003, Bentz 2010 and 2016, Nagamochi 2005, and the
-  two 2026 posts. No systematic arXiv or preprint sweep and no MathOverflow search is on
-  record. “First movement since 2003” is a statement about that corpus.
+  *apparently novel*. A review through 2026-09-04 checked the local source corpus,
+  arXiv, Crossref, OpenAlex, Semantic Scholar citation chains, author pages, and public
+  packing catalogues; it searched the exact bound and reciprocal/density forms as well
+  as the method vocabulary, and found no public post-2003 lower bound reaching `19/5`.
+  It did not exhaust subscription-only MathSciNet or zbMATH full text, every thesis or
+  proceedings volume, non-English or unindexed sources, private correspondence, or
+  unpublished work. “First located public improvement since 2003” is the strongest
+  supported wording.
 - **Who checked it.** The project’s own verifier accepted the certificate; a reviewer
   inside the project wrote a second verifier from the theorem statement with the
   implementation withheld, reproduced the `n = 17` value as a control, and accepted the
-  `n = 12` certificates from the same generator; this package is a third implementation,
-  written from the theorem for a reader outside the project, with the same control.
+  `n = 12` certificates from the same generator.
+  This package contains a third implementation, written inside the project from the
+  theorem for use by outside readers, with the same control.
   No one outside the project has reviewed the result yet.
 - **A calibration rung exists.** Before this certificate, the same generator was run at
   side `189/50 = 3.78`, below Stromquist’s bound, where a certificate proves nothing
   new; it was found and verified, and is retained as `../certificate-189-50.json`. The
   comparison `(189/50 − 2)² · 5 = 7921/500 < 16` confirms it sits below.
-- **What is claimed is exactly `s(11) ≥ 19/5`.** Not a value of `s(11)`, not optimality
-  of Trump’s packing, not a bound for any other `n` (every `n > 11` already carries a
-  larger bound in the literature or in the project’s record).
+- **The claim is exactly `s(11) ≥ 19/5`.** The package does not establish the value of
+  `s(11)` or the optimality of Trump’s packing.
+  Monotonicity also gives `s(n) ≥ 19/5` for every `n > 11`, but each such case already
+  carries a larger bound in the literature or in the project’s record, so this
+  certificate does not improve any recorded higher-`n` bound.
 
 ## What a Sceptic Could Still Object To
 
-- **Same method family, twice.** This verifier and the project’s are independent
-  implementations of the same reduction (an exact event-cell sweep over a rational
-  direction net). A method-distinct check, such as an interval-arithmetic branch and
-  bound over the true unit square, or a proof-assistant formalisation of the theorem and
-  of this reduction, would be stronger evidence than a third implementation.
+- **Same method family, three implementations.** All three verifiers implement the same
+  reduction: an exact event-cell sweep over a rational direction net.
+  A method-distinct check, such as an interval-arithmetic branch and bound over the true
+  unit square, or a proof-assistant formalisation of the theorem and this reduction,
+  would be stronger evidence than another implementation.
 - **The reduction is proved on paper.** The argument that finitely many open cells
   decide the continuum lives in the C4 comment block of `verify.py` and in the section
   above. It is elementary, but it is the place where a wrong verifier would be wrong; the
@@ -406,7 +463,7 @@ exit status 0
   They are widely used and not formally verified.
 - **Authorship.** The package was written by the project that claims the result, on the
   day the result was found.
-  The published `n = 17` value is its only anchor outside the project.
+  The publicly posted `n = 17` value is its only anchor outside the project.
 - **The theorem itself.** Steps 1 to 6 above are short and can be checked by hand; the
   support-function inequality in step 3 and the invariance argument in step 5 are the
   two places to read slowly.

@@ -1,9 +1,13 @@
 """Weighted fractional unavoidable-set certificates for square packing.
 
 A certificate is the Burns--Massaccesi object: an outer side ``L``, a shrunken
-square side ``B``, rational-weight atoms in the container, and a rational
+square side ``B``, nonnegative rational-weight atoms in the container, and a rational
 direction net reaching pi/4. It proves ``s(n) >= L`` when five conditions
 hold together, so the conditions are named here rather than left to a caller:
+
+Before those conditions, nonnegative atom weights are a theorem precondition.
+They make mass monotone under inclusion, and they ensure that moving from an
+open sweep cell onto a closed-square event boundary cannot lower covered mass.
 
 ``C1``  the total atom mass is strictly below ``n``.
 ``C2``  the direction net reaches pi/4, which the container's D4 symmetry needs
@@ -23,9 +27,12 @@ its own centre, a closed ``B``-square at some net angle. That ``B``-square lies
 *strictly* inside the unit square's interior because ``C3`` is strict --
 ``B (1 + D) < 1`` leaves room -- so the ``n`` shrunken squares are pairwise
 disjoint as closed sets and no atom is counted twice. Each covers mass at least
-1 by ``C4``, for a total of at least ``n``, which ``C1`` forbids. So ``n`` unit
-squares do not fit in a container of side ``L``, and ``s(n) > L``. The bound is
-``L`` itself; ``B`` rescales nothing (see ``Certificate.bounded_side``).
+1 by ``C4``, for a total of at least ``n``. Nonnegativity makes the mass of
+their union at most the total atom mass, which ``C1`` says is below ``n``. So
+``n`` unit squares do not fit in a container of side ``L``, and ``s(n) >= L``:
+any packing in a smaller container would also fit in this one. The bound is
+``L`` itself; ``B`` rescales nothing (see
+``Certificate.bounded_side``).
 
 The arithmetic is exact throughout. Every quantity is a ``Fraction``; nothing
 here rounds, samples an angle, or compares against a tolerance.
@@ -37,7 +44,12 @@ from dataclasses import dataclass, field
 from fractions import Fraction
 from itertools import pairwise
 
-from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
+from sqpack.fractional.model import (
+    Atom,
+    Direction,
+    require_nonnegative_atom_weights,
+    rotation_from_half_tangent,
+)
 from sqpack.fractional.sweep import minimum_covered_mass
 
 
@@ -82,6 +94,7 @@ class Certificate:
     symmetry: str = "D4"
 
     def __post_init__(self) -> None:
+        require_nonnegative_atom_weights(self.atoms)
         if self.n < 1:
             raise ValueError("n must be positive")
         if self.outer_side <= 0 or self.square_side <= 0:
@@ -106,8 +119,9 @@ class Certificate:
         sits *inside* a unit square that is itself inside the side-``L``
         container, and it exists only so that ``C3`` can absorb the net's
         angular gap. So the contradiction is about ``n`` unit squares in side
-        ``L``, and what the certificate proves is ``s(n) > L``. Reported as
-        ``>= L``, which is what a bound register carries.
+        ``L``. It directly proves the registered statement ``s(n) >= L`` because
+        any packing in a smaller container embeds in this one. Compactness also
+        gives the stronger strict inequality, but the bound does not need it.
 
         Checked against the retained n = 17 certificate: ``L = 22529/5000`` is
         exactly Massaccesi's published 4.5058, while ``L / B`` would claim
@@ -241,7 +255,7 @@ def sweep_direction_minimum(
 
 
 def verify(certificate: Certificate) -> Verdict:
-    """Decide all four conditions. Exact, and never short-circuits C1 to C3."""
+    """Decide C0--C4 after ``Certificate`` has enforced their preconditions."""
 
     conditions = [
         _condition_symmetric_atoms(certificate),

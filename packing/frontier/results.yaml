@@ -632,51 +632,68 @@ results:
   - id: T-018
     claim: >-
       s(11) >= 19/5, by a first-party weighted fractional unavoidable-set certificate
-      at container side 19/5 = 3.8. This is the first movement of this case's lower
-      bound since Stromquist stated 2 + 4/sqrt(5) = 3.788854... in 2003, and n = 11 is
-      the smallest open case. The movement is +0.011146, and the case stays open
-      against Trump's 1979 packing at 3.877084: the interval narrows from 0.088230 to
-      0.077084.
+      at container side 19/5 = 3.8. It is the first public movement of this case's lower
+      bound located by the recorded search since Stromquist stated
+      2 + 4/sqrt(5) = 3.788854... in 2003, and n = 11 is the smallest open case. The
+      movement is +0.011146, and the case stays open against Trump's 1979 packing at
+      3.877084: the interval narrows from 0.088230 to 0.077084.
     scope:
       n_values:
         - 11
     verification: V4
-    confirmation: C3
+    confirmation: C5
     significance:
       score: 5
       rationale: >-
         Scored against the rubric's own anchor for S5, "movement on a central open
         case". s(11) is the smallest open case and the one the frontier record calls
-        the problem this project exists for; its lower bound had not moved since
-        Stromquist stated it in 2003, and this displaces a value from the refereed
+        the problem this project exists for; the recorded public search found no movement
+        after Stromquist's 2003 value, and this displaces a bound from the refereed
         literature rather than an inherited or closed-form one.
-        What S5 does not claim: the method is Burns's and Massaccesi's rather than
-        this project's, so what is new is an instance and the generator that found it;
-        both exact decisions are the same method family, which is why confirmation
-        stays at C3; and the remaining gap to Trump's 1979 packing is 0.077, which this
-        approach does not close. The calibration rung at 189/50, below Stromquist's
-        bound, was run first by design and is retained.
+        What S5 does not claim: the weighted-resource lineage predates this project and
+        the pure-atomic direction-net architecture follows Burns/ChatGPT and Massaccesi,
+        so what is new is an instance and the generator that found it; apparent novelty
+        is not absolute priority; and the remaining gap to Trump's 1979 packing is 0.077,
+        which this approach does not close. Confirmation reaches C5 through exact-
+        algebraic and interval-certified decisions plus the mapped adversarial review,
+        not through an outside peer review. The calibration rung at 189/50, below
+        Stromquist's bound, was run first by design and is retained.
       scored: '2026-09-04'
       by: BC-161 continuation (repository; independent evaluator confirmed C4, no external review)
     novelty: apparently-novel
     composition: >-
-      Primary: one certificate, one verifier, one accepted verdict. The bound is the
-      certificate's container side directly, with no monotonicity or composition step.
-      It raises no other case: every n > 11 already carries a larger verified bound.
+      Primary: one certificate and two method-distinct accepted decisions. The bound is
+      the certificate's container side directly, with no monotonicity or composition step.
+      Monotonicity also implies s(n) >= 19/5 for every n > 11, but it improves no such
+      case because every one already carries a larger verified bound.
     evidence:
       - E-n011-fractional-certificate
+      - E-n011-fractional-interval-confirmation
     artifacts:
       - packing/cases/n11_fractional_certificate/certificate.json
       - packing/cases/n11_fractional_certificate/certificate-189-50.json
+      - packing/cases/n11_fractional_certificate/PROOF.md
+      - packing/cases/n11_fractional_certificate/thirdparty/minimal_verify.py
+      - packing/cases/n11_fractional_certificate/lean-spike/Kernel.lean
+      - packing/cases/n11_fractional_certificate/lean-spike/README.md
       - packing/src/sqpack/fractional/colgen.py
+      - packing/src/sqpack/fractional/interval.py
+      - docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md
     controls:
       - packing/tests/test_fractional_certificate.py
+      - packing/tests/test_fractional_interval.py
+      - packing/tests/test_n11_thirdparty_verify.py
+    review_artifact: docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md
     next_rung: >-
-      C4 needs a decision by a different method value, an interval-certified one rather
-      than a second exact-algebraic pass. C5 needs a review artifact by someone outside
-      the project. The bound itself: the covering value at 3.81 sat at 11.000 and at
-      3.83 at 11.105, both still descending when the block ended, so the next rung is a
-      search question and not a rung change.
+      V5 still requires a proof-assistant check of the complete theorem and finite C4
+      decision. The retained Lean spike checks the counting, reflection, support and
+      C1-C3 kernel without `sorry` or `native_decide`, but explicitly does not prove the
+      headline claim. A compact proof-producing arrangement receipt is the next formal
+      step. An outside mathematical review and an archival release would strengthen trust
+      and the priority record without changing the repository's completed C5 rung.
+      The bound itself: the covering value at 3.81 sat at 11.000 and at 3.83 at 11.105,
+      both still descending when the block ended, so the next numerical rung is a search
+      question rather than a confirmation change.
   - id: T-019
     claim: >-
       s(17) >= 451/100, and s(18) >= 451/100 and s(19) >= 451/100 by monotonicity, from a

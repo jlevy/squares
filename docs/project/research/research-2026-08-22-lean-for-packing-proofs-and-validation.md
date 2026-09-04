@@ -1,6 +1,6 @@
 # Research: Lean for Square-Packing Proofs and Validation
 
-**Date:** 2026-08-22 (last updated 2026-08-22)
+**Date:** 2026-08-22 (last updated 2026-09-04)
 
 **Author:** Claude (agent), for samanthadrakova@gmail.com
 
@@ -30,8 +30,12 @@ The conclusion, stated up front so the rest can justify it:
   finitely many polynomial inequalities over one number field.
   That is squarely inside what Lean does well, and it would be, as far as this research
   found, the **first formal theorem about `s(n)` for any non-trivial `n`**.
-- **The lower bound for an open case is not formalizable, for the same reason it is not
-  provable**: there is no informal proof to formalize.
+- **The new fractional lower bound for the open `n = 11` case is formalizable in
+  layers.** The proof found on 2026-09-04 changes this report’s original premise.
+  A bounded Lean 4.32.1 spike now checks the finite nonnegative counting kernel, its
+  set-based wrapper, the support-radius inequality, and the exact C1-C3 arithmetic.
+  The 90.5-million-cell C4 decision remains the expensive layer and is currently clearer
+  as a small exact Python checker plus a method-distinct interval confirmation.
   This is a property of the mathematics, not of Lean.
 - **The lemma layer of the *solved* cases is formalizable now**, and is the natural
   first target — Flyspeck’s pattern exactly.
@@ -301,15 +305,26 @@ would let existing lower-bound proofs be machine-checked, and — more interesti
 [`n = 11` report](research-2026-08-22-packing-11-unit-squares.md) identifies as the
 plausible route to a new bound.
 
-#### 4. A lower bound for an open case — blocked, and not by Lean
+#### 4. A lower bound for an open case — available now, but layered
 
-There is no informal computer-assisted proof of `s(11)`, `s(12)`, or any open case to
-formalize. Lean cannot supply one.
-The nearest reachable target is the family the frontier corpus surfaced:
-`n = 97, 78, 61` are `10² − 3`, `9² − 3`, `8² − 3`, the next unproved members of a
-family proved for `m = 3…7`, with **integer** conjectured optima and the narrowest gaps
-in the table. If a computer-assisted proof of one of those were produced by any means,
-the `K₈(4,2) = 23` pattern says how to make it checkable.
+On 2026-09-04 this project found an exact fractional unavoidable-set certificate for
+`s(11) ≥ 19/5`. Its human implication is short: nonnegative symmetric atom mass below
+eleven cannot give mass above one to eleven disjoint inner squares.
+The direction-net and strict-containment facts are rational inequalities.
+A Lean 4.32.1/Mathlib 4.32.1 spike formalizes those layers directly.
+The retained
+[`lean-spike`](../../../packing/cases/n11_fractional_certificate/lean-spike/README.md)
+pins the exact toolchain and dependencies and publishes its axiom audit.
+
+The remaining C4 fact says every contained side-`9977/10000` square at 181 exact
+rational directions covers atom mass at least `50003/50000`. The retained exact checker
+reduces that continuum to 90,546,593 event cells; a separate interval branch-and-bound
+confirms it on a doubled net.
+Formalizing the reduction and checking a compact partition receipt is feasible in
+principle, but importing the whole computation directly would currently make the
+assurance surface larger and less readable than the 355-line theorem-specific Python
+checker. Lean is no longer blocked by missing mathematics here; it is an engineering and
+certificate-design choice.
 
 ### What a third-party-verifiable certificate would look like
 
@@ -375,8 +390,8 @@ The
 6. **Formalization has stopped being only transcription, and our other documents needed
    updating.** AlphaProof Nexus resolved 9 open Erdős problems and 44 OEIS conjectures
    autonomously at a few hundred dollars each.
-   This does not put `s(11)` in reach, but it retires the blanket claim that
-   formalization never discovers anything.
+   It did not itself produce the later `s(11)` certificate, but it retires the blanket
+   claim that formalization never discovers anything.
 7. **The lemma layer is the highest-value small target, because it is load-bearing and
    unchecked.** Every proved value of `s(n)` rests on nonavoidance lemmas verified only
    by human referees, and this repository has already found one misreading in that
@@ -384,8 +399,9 @@ The
 8. **Flyspeck’s three moves map one-to-one onto this problem.** Nonlinear inequalities
    by interval arithmetic; relaxation to an infeasible LP; a pre-classified
    combinatorial archive imported rather than re-derived.
-   The [`n = 11` report’s](research-2026-08-22-packing-11-unit-squares.md) untaken
-   “fractional LP certificate” is Flyspeck’s second move, waiting.
+   The [`n = 11` report’s](research-2026-08-22-packing-11-unit-squares.md) proposed
+   “fractional LP certificate” produced the `19/5` lower bound on 2026-09-04; its next
+   Flyspeck-like move is a compact, formally checked coverage receipt.
 
 ## Comparison Matrix
 
@@ -397,42 +413,49 @@ Where each layer of assurance stands, for a claim of the form “this packing is
 | Interval arithmetic | No (proves `>`, never `=`) | No | Low | Milliseconds | Implemented in the FrankenSim probe |
 | Exact arithmetic in `ℚ(α)` | Yes | Only if you read our code | Low | 0.35 s (Python) | **Implemented and passing** |
 | Two independent exact implementations | Yes | Partly — a shared bug is unlikely | Medium | Seconds | **Achieved once**, Rust vs Python |
-| Lean proof, `native_decide` | Yes | Weakly — trusts the compiler | Medium | Fast | Not attempted |
-| **Lean proof, kernel-checked** | **Yes** | **Yes** | Weeks, once | Minutes | **Not attempted — the gap** |
+| Lean proof, `native_decide` | Yes | Weakly — trusts the compiler | Medium | Fast | Deliberately not used |
+| **Lean proof, kernel-checked** | **Yes** | **Yes** | Small for the theorem kernel; large for C4 | Seconds for the current kernel | **Kernel and C1-C3 spiked; C4 remains** |
 
 ## Recommendations
 
 Ordered by value per unit of effort, and deliberately small at the start.
 
-1. **Make the verifier emit a certificate rather than a boolean.** Free, immediate, and
-   a prerequisite for everything below: record the separating axis and its sign for each
-   of the strictly separated pairs, and the exact-zero witness for each contact.
-   This is a change to `Certified`’s payload in the infrastructure plan, not a new
-   project.
-2. **Formalize the nonavoidance lemma layer** — Friedman’s Lemmas 1–3, Stromquist’s 1–6.
+1. **Design a compact proof-producing C4 receipt.** The new `s(11) ≥ 19/5` result
+   already has a one-minute implication and a kernel-checked counting lemma.
+   Its remaining trust surface is the event-cell coverage computation.
+   A partition or range-sum receipt that Lean can check is now the most direct
+   formal-assurance target.
+2. **Make packing verifiers emit certificates rather than booleans.** For upper bounds,
+   record the separating axis and its sign for each strictly separated pair and the
+   exact-zero witness for each contact.
+   For lower bounds, record the coverage partition and each leaf’s mass inequality.
+3. **Formalize the nonavoidance lemma layer** — Friedman’s Lemmas 1–3, Stromquist’s 1–6.
    Small, self-contained, single-variable, and load-bearing for every proved value of
    `s(n)`. Treat it as diagnostic: the interesting outcome is a gap, not a green check.
-3. **Formalize `s(11) ≤ 3.877084…` from the exact witness.** The first formal theorem
-   about `s(n)`, and the artifact that satisfies the third-party-verifiability
-   requirement. Scope it as one packing first; if it works, the record corpus becomes a
-   theorem per analytically-optimized entry.
-4. **Then `s(10) = 3 + ½√2`**, Stromquist’s Theorem 1 — a complete published optimality
+4. **Formalize `s(11) ≤ 3.877084…` from the exact witness.** The first formal
+   upper-bound theorem about `s(n)`, and the artifact that satisfies the
+   third-party-verifiability requirement.
+   Scope it as one packing first; if it works, the record corpus becomes a theorem per
+   analytically-optimized entry.
+5. **Then `s(10) = 3 + ½√2`**, Stromquist’s Theorem 1 — a complete published optimality
    proof at human scale, and the first formalized.
    This is where the lemma layer pays off.
-5. **Evaluate `LeanCert` and `ComputableReal` on one nonavoidance lemma** before
+6. **Evaluate `LeanCert` and `ComputableReal` on one nonavoidance lemma** before
    committing to the unavoidable-set decision procedure.
    Both are young; a single lemma is a cheap probe of whether the interval-arithmetic
    layer is ready.
-6. **Keep an LLM-plus-Lean loop in view for the lemma layer, not for the open cases.**
-   The AlphaProof Nexus result suggests this is now the cheapest way to formalize many
+7. **Keep an LLM-plus-Lean loop in view for the lemma layer and receipt checker.** The
+   AlphaProof Nexus result suggests this is now the cheapest way to formalize many
    small, independently-stated lemmas — which is exactly the shape of item 2.
 
 **What not to do.** Do not put Lean anywhere near the search loop.
 Do not reach for `native_decide` on a result meant to be third-party verifiable.
-Do not start with a lower bound for an open case — the obstacle is mathematical and Lean
-does not move it. And do not treat formalization as a substitute for the exact verifier:
-the verifier is what makes a search’s output a measurement, at a speed Lean will never
-match.
+The original 2026-08-22 warning against starting with an open-case lower bound is now
+obsolete: the fractional-certificate mathematics exists.
+The current warning is more specific—do not begin by replaying 90.5 million raw cells in
+the kernel. Design the receipt first.
+Do not treat formalization as a substitute for the exact verifier either; the verifier
+is what makes a search’s output a measurement, at a speed Lean will never match.
 
 ## Open Questions
 
@@ -451,6 +474,9 @@ match.
   object?
 - [ ] Could the Gauss-style autoformalization agents that finished dimension 8 be
   pointed at the lemma layer, and at what cost?
+- [ ] What is the smallest partition or range-sum receipt that lets Lean check the full
+  `n = 11` C4 coverage fact without replaying the search algorithm or trusting
+  `native_decide`?
 - [ ] Does the 3,000× Flyspeck figure still hold in Lean 4 with modern interval tooling,
   or has it improved? It is a 2013-era measurement on HOL Light.
 
@@ -458,6 +484,13 @@ match.
 
 Conducted 2026-08-22 by web research plus analysis against this repository’s existing
 documents and code.
+
+Updated 2026-09-04 after the fractional certificate was found.
+The update installed Elan 4.2.1, Lean 4.32.1, and Mathlib 4.32.1 in an isolated
+temporary directory; compiled the 149-line kernel and its axiom audit; and measured a
+roughly 10 GB cold toolchain and cache footprint with four-second warm checks.
+The complete commands, lockfile, trust boundary, and non-goals are retained with the
+spike.
 
 **Sources consulted directly.** The sphere-packing formalization project pages and
 arXiv:2604.23468; the Flyspeck literature, principally the Taylor-interval verification

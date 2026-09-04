@@ -2,7 +2,11 @@
 
 Coverage is piecewise constant in the placed square's centre, and it can only
 change where a site enters or leaves. Those coordinates are the event grid, so
-a finite sweep over its cells decides a continuum of placements exactly.
+a finite sweep over its open cells decides a continuum of placements exactly.
+The placed square is closed, so an event boundary includes every atom covered
+by either adjacent cell. With nonnegative weights this can only raise mass;
+therefore a minimum occurs in an open cell and the sweep may omit boundaries.
+Signed weights reverse that implication, so sweep entry points reject them.
 """
 
 from __future__ import annotations
@@ -12,7 +16,7 @@ from dataclasses import dataclass
 from fractions import Fraction
 from itertools import pairwise
 
-from sqpack.fractional.model import Atom, Direction
+from sqpack.fractional.model import Atom, Direction, require_nonnegative_atom_weights
 
 
 @dataclass(frozen=True, slots=True)
@@ -67,6 +71,35 @@ def centre_domain(
     return tuple((cosine * x + sine * y, -sine * x + cosine * y) for x, y in corners)
 
 
+def _cell_witness(
+    domain: tuple[tuple[Fraction, Fraction], ...],
+    u_low: Fraction,
+    u_high: Fraction,
+    v_low: Fraction,
+    v_high: Fraction,
+) -> tuple[Fraction, Fraction]:
+    """An exact point in an open event cell intersected with the centre domain.
+
+    The closed intersection is convex. Its vertex average remains in the centre
+    domain, and a strict check against all four cell edges ensures the point is
+    also in the open event cell where the sweep's score applies.
+    """
+    clipped = _clip(_clip(domain, u_low, keep_greater=True), u_high, keep_greater=False)
+    transposed = tuple((v, u) for u, v in clipped)
+    transposed = _clip(_clip(transposed, v_low, keep_greater=True), v_high, keep_greater=False)
+    clipped = tuple((u, v) for v, u in transposed)
+    if not clipped:
+        raise ValueError("reachable event cell has no feasible witness")
+    count = len(clipped)
+    witness = (
+        sum((u for u, _ in clipped), start=Fraction(0)) / count,
+        sum((v for _, v in clipped), start=Fraction(0)) / count,
+    )
+    if not (u_low < witness[0] < u_high and v_low < witness[1] < v_high):
+        raise ValueError("reachable event cell has no interior feasible witness")
+    return witness
+
+
 def reduce_to_cells(
     atoms: tuple[Atom, ...],
     direction: Direction,
@@ -75,6 +108,7 @@ def reduce_to_cells(
 ) -> Reduction:
     """Event grid, per-site coverage rectangles, and the reachable cells."""
 
+    require_nonnegative_atom_weights(atoms)
     half = square_side / 2
     domain = centre_domain(outer_side, square_side, direction)
     u_low = min(u for u, _ in domain)
@@ -142,15 +176,20 @@ def minimum_covered_mass(
             current[j] += previous[j]
 
     best: Fraction | None = None
-    witness: tuple[Fraction, Fraction] | None = None
+    best_cell: tuple[int, int] | None = None
     for i, j in reduction.cells:
         score = grid[i][j]
         if best is None or score < best:
             best = score
-            witness = (
-                (reduction.u_events[i] + reduction.u_events[i + 1]) / 2,
-                (reduction.v_events[j] + reduction.v_events[j + 1]) / 2,
-            )
-    if best is None or witness is None:  # pragma: no cover - reduce_to_cells raises first
+            best_cell = (i, j)
+    if best is None or best_cell is None:  # pragma: no cover - reduce_to_cells raises first
         raise ValueError("the sweep produced no reachable cell")
+    i, j = best_cell
+    witness = _cell_witness(
+        centre_domain(outer_side, square_side, direction),
+        reduction.u_events[i],
+        reduction.u_events[i + 1],
+        reduction.v_events[j],
+        reduction.v_events[j + 1],
+    )
     return best, witness

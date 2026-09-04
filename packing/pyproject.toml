@@ -158,7 +158,15 @@ exclude = [
 
 [tool.basedpyright]
 include = ["src/sqpack", "cases", "devtools", "benchmarks", "tests"]
-exclude = ["**/__pycache__", "resources", ".venv"]
+exclude = [
+  "**/__pycache__",
+  "resources",
+  ".venv",
+  # Retained source-distinct verification programs are executed as evidence but
+  # deliberately remain in their authors' style rather than joining the typed package.
+  "cases/n12_fractional_certificate/independent_verify.py",
+  "cases/n11_fractional_certificate/thirdparty",
+]
 pythonVersion = "3.14"
 typeCheckingMode = "standard"
 reportMissingImports = "error"

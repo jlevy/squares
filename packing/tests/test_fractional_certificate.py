@@ -9,6 +9,7 @@ reading of the theorem divided by the shrunken side and would have claimed
 
 from __future__ import annotations
 
+import json
 import runpy
 from fractions import Fraction
 from pathlib import Path
@@ -16,6 +17,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from cases.n11_fractional_certificate.__main__ import replay as replay_n11
+from cases.n11_fractional_certificate.replay import CERTIFICATE_PATH as N11_CERTIFICATE_PATH
 from cases.n11_fractional_certificate.replay import FIRST_RUNG_PATH as N11_FIRST_RUNG
 from cases.n11_fractional_certificate.replay import declared as n11_declared
 from cases.n11_fractional_certificate.replay import load as n11_load
@@ -24,7 +27,7 @@ from cases.n17_weighted_certificate.fixture import load_retained_fixture
 from sqpack.fractional.certificate import Certificate, verify
 from sqpack.fractional.generate import build_site_grid, rationalise
 from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
-from sqpack.fractional.sweep import reduce_to_cells
+from sqpack.fractional.sweep import minimum_covered_mass, reduce_to_cells
 
 MASSACCESI_LIMIT = Fraction(207107, 500000)
 
@@ -84,6 +87,77 @@ def test_mass_reaching_n_is_refused() -> None:
     assert "C1 total mass below n" in verify(heavy).failures
 
 
+def test_signed_weight_counterexample_is_refused_before_verification() -> None:
+    """Signed mass satisfies C0--C4 here even though one unit square fits.
+
+    The centre has weight 2 and the four corners weight -1. Every contained
+    side-3/5 square at the two net directions covers mass at least 1, while the
+    total is -2. Nonnegative weights must therefore be a construction
+    precondition, before either the verifier or its open-cell sweep can run.
+    """
+    outer_side = Fraction(11, 10)
+    atoms = (
+        Atom("centre", Fraction(11, 20), Fraction(11, 20), Fraction(2)),
+        Atom("lower-left", Fraction(0), Fraction(0), Fraction(-1)),
+        Atom("lower-right", outer_side, Fraction(0), Fraction(-1)),
+        Atom("upper-left", Fraction(0), outer_side, Fraction(-1)),
+        Atom("upper-right", outer_side, outer_side, Fraction(-1)),
+    )
+
+    with pytest.raises(ValueError, match="atom weights must be nonnegative"):
+        Certificate(
+            n=1,
+            outer_side=outer_side,
+            square_side=Fraction(3, 5),
+            atoms=atoms,
+            half_tangents=(Fraction(0), Fraction(1, 2)),
+        )
+    with pytest.raises(ValueError, match="atom weights must be nonnegative"):
+        reduce_to_cells(
+            atoms,
+            rotation_from_half_tangent("counterexample", Fraction(0)),
+            outer_side,
+            Fraction(3, 5),
+        )
+
+
+@pytest.mark.parametrize(
+    ("field", "wrong", "message"),
+    [
+        ("claim", "s(2) >= 2", "retained claim disagrees"),
+        ("total_mass", "0", "retained total mass disagrees"),
+        ("least_cell_mass", "2", "retained least cell mass disagrees"),
+    ],
+)
+def test_n11_replay_refuses_declared_value_drift(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    field: str,
+    wrong: str,
+    message: str,
+) -> None:
+    """A retained record may not print VERIFIED under stale bookkeeping."""
+    record = {
+        "id": "small-replay-control",
+        "n": 2,
+        "outer_side": "1",
+        "square_side": "3/5",
+        "angle_limit": "1/2",
+        "direction_steps": 1,
+        "symmetry": "D4",
+        "claim": "s(2) >= 1",
+        "total_mass": "1",
+        "least_cell_mass": "1",
+        "atoms": [["1/2", "1/2", "1"]],
+    }
+    record[field] = wrong
+    path = tmp_path / "certificate.json"
+    path.write_text(json.dumps(record), encoding="utf-8")
+
+    assert replay_n11(path) == 1
+    assert message in capsys.readouterr().out
+
+
 def test_a_net_short_of_an_eighth_turn_is_refused() -> None:
     """C2: the D4 reduction needs the arc to reach pi/4, and 0.41 does not."""
     base = retained_certificate(steps=6)
@@ -140,13 +214,14 @@ def test_the_largest_half_gap_tangent_is_exact_on_a_uniform_net() -> None:
     assert certificate.largest_half_gap_tangent == MASSACCESI_LIMIT / 180
 
 
+@pytest.mark.exhaustive_exact
 def test_the_retained_n12_certificate_replays_and_is_accepted() -> None:
     """The n = 12 result, replayed from its retained file and re-decided.
 
     This is the whole claim in one assertion: a certificate whose atoms carry
-    D4 symmetry, whose mass is 191/16 and so strictly under 12, and whose least
-    covered mass is exactly 1, proves that twelve unit squares do not fit in a
-    container of side 77/20.
+    D4 symmetry, whose mass is 479713/40000 and so strictly under 12, and whose
+    least covered mass is 100003/100000, proves that twelve unit squares do not
+    fit in a container of side 197/50.
     """
     certificate = load()
     assert certificate.n == 12
@@ -156,6 +231,7 @@ def test_the_retained_n12_certificate_replays_and_is_accepted() -> None:
 
     verdict = verify(certificate)
     assert verdict.accepted, verdict.failures
+    assert verdict.minimum_cell_mass is not None
     assert verdict.minimum_cell_mass >= 1
 
     record = declared()
@@ -211,6 +287,25 @@ def test_the_independent_verifier_agrees_on_the_first_rung() -> None:
     accepted, report = module["verify"](certificate, ks=[0, 180], label="19/5")
     assert accepted, report
     assert report["info"]["min_rep"] == Fraction(1)
+
+
+@pytest.mark.exhaustive_exact
+def test_the_independent_verifier_agrees_on_the_full_n11_certificate() -> None:
+    """A source-distinct exact decision over all 181 directions of the new bound."""
+    package = Path(__file__).parents[1] / "cases/n12_fractional_certificate"
+    module = runpy.run_path(
+        str(package / "independent_verify.py"), run_name="independent_verify"
+    )
+    certificate = module["load"](str(N11_CERTIFICATE_PATH))
+    accepted, report = module["verify"](
+        certificate,
+        ks=None,
+        label="independent n=11 full net",
+        brute_check=3,
+    )
+    assert accepted, report
+    assert report["info"]["min_lower"] == Fraction(50003, 50000)
+    assert report["info"]["min_rep"] == Fraction(50003, 50000)
 
 
 def test_containment_at_exactly_one_is_refused() -> None:
@@ -277,6 +372,38 @@ def test_the_sweep_scores_every_cell_it_scored_before() -> None:
         )
 
 
+def test_minimum_mass_witness_lies_in_feasible_part_of_event_cell() -> None:
+    """The raw midpoint of a reachable corner cell can hang outside the container."""
+    direction = Direction(
+        "three-four-five",
+        Fraction(3, 5),
+        Fraction(4, 5),
+        Fraction(-4, 5),
+        Fraction(3, 5),
+    )
+    atoms = (Atom("cut", Fraction(14, 125), Fraction(227, 125), Fraction(1)),)
+    outer_side = Fraction(2)
+    square_side = Fraction(1)
+
+    reduction = reduce_to_cells(atoms, direction, outer_side, square_side)
+    assert reduction.cells[0] == (0, 0)
+    raw_midpoint = (Fraction(1), Fraction(-1, 5))
+    raw_y = direction.uy * raw_midpoint[0] + direction.vy * raw_midpoint[1]
+    margin = square_side * (direction.ux + direction.uy) / 2
+    assert raw_y == Fraction(17, 25) < margin
+
+    mass, witness = minimum_covered_mass(atoms, direction, outer_side, square_side)
+    assert mass == 0
+    assert witness != raw_midpoint
+    i, j = reduction.cells[0]
+    assert reduction.u_events[i] < witness[0] < reduction.u_events[i + 1]
+    assert reduction.v_events[j] < witness[1] < reduction.v_events[j + 1]
+    x = direction.ux * witness[0] + direction.vx * witness[1]
+    y = direction.uy * witness[0] + direction.vy * witness[1]
+    assert margin <= x <= outer_side - margin
+    assert margin <= y <= outer_side - margin
+
+
 def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> None:
     """The must-refuse fixture: same atoms, a container too large for them.
 
@@ -300,6 +427,7 @@ def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> No
     assert verdict.minimum_cell_mass < 1
 
 
+@pytest.mark.exhaustive_exact
 def test_the_n11_certificate_beats_stromquists_2003_bound() -> None:
     """s(11) >= 19/5, replayed from its own file and re-decided.
 
@@ -319,9 +447,13 @@ def test_the_n11_certificate_beats_stromquists_2003_bound() -> None:
     assert verdict.accepted, verdict.failures
     assert verdict.minimum_cell_mass is not None
     assert verdict.minimum_cell_mass >= 1
-    assert n11_declared()["claim"] == "s(11) >= 19/5"
+    record = n11_declared()
+    assert record["claim"] == "s(11) >= 19/5"
+    assert record["total_mass"] == str(certificate.total_mass)
+    assert record["least_cell_mass"] == str(verdict.minimum_cell_mass)
 
 
+@pytest.mark.exhaustive_exact
 def test_the_n11_calibration_rung_below_stromquist_also_verifies() -> None:
     """189/50 proves nothing new, which is exactly why it was run first."""
 

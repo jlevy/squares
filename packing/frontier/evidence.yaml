@@ -1280,21 +1280,29 @@ evidence:
     novelty: apparently-novel
     novelty_basis:
       corpus: >-
-        The retained literature archive under packing/resources/ and the frontier source
-        register, which for n = 11 hold Stromquist 2003 (Theorem 2 and the Figure 14
-        cover this project refuted as D-152), the exp-017 repaired certificate, Trump's
-        1979 packing, Nagamochi 2005 and Friedman's record tables.
+        The retained literature archive under packing/resources/, the frontier source
+        register, current public record catalogues, and online scholarly indexes searched
+        through 2026-09-04. The local corpus includes Stromquist 2003 (Theorem 2 and the
+        Figure 14 cover this project refuted as D-152), the exp-017 repaired certificate,
+        Trump's 1979 packing, Nagamochi 2005 and Friedman's record tables.
       searched: >-
-        Searched for any lower bound on s(11) above 2 + 4/sqrt(5) = 3.788854. The corpus
-        holds none: that value has been the best since 2003 and the case body describes
-        the interval [3.788854, 3.877084] as the problem the project exists for. The
-        known hole is the same one E-n012-fractional-certificate names -- no systematic
-        sweep of recent preprints.
+        Searched the local full-text corpus, arXiv, Crossref, OpenAlex, Semantic Scholar
+        citation chains, author pages and public packing catalogues for unrestricted
+        packing of eleven unit, equal or congruent squares; s(11) and s_11; lower bounds;
+        weighted, fractional, resource and unavoidable-set methods; and the exact values
+        19/5, 5/19 and 275/361. No public lower bound above Stromquist's
+        2 + 4/sqrt(5) = 3.788854 was located.
       novel_object: >-
-        The certificate and the bound. The method is Burns's with Massaccesi's
-        parameters and the generator is this project's; what is new is an instance at
-        n = 11 and side 19/5, which is the first movement of this case's lower bound
-        since 2003.
+        The certificate and the bound. The weighted-resource lineage predates 2026;
+        this certificate uses the exact-rational, pure-atomic direction-net architecture
+        posted by Burns from a note bylined ChatGPT and then developed by Massaccesi,
+        while the generator is this project's. What is new is an instance at n = 11 and
+        side 19/5, the first located improvement to this case's lower bound since 2003.
+      gaps: >-
+        This does not exhaust subscription-only MathSciNet or zbMATH full text, every
+        thesis or proceedings volume, non-English or unindexed sources, private
+        correspondence, or unpublished work. The claim is apparent novelty within the
+        searched public record, not absolute priority.
     certificate: cases/n11_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras python -m cases.n11_fractional_certificate
     replay_status: passed
@@ -1310,10 +1318,10 @@ evidence:
       oracle was corrected to score the same cells the verifier decides (D-434); before
       that correction the same search stalled above 11. It was re-decided from its file
       on disk rather than in memory, and an independent evaluator -- the one written from
-      the theorem statement for T-017, which reproduces Massaccesi's published n = 17
-      bound as its own control -- confirmed C4 at 50003/50000, exact, at the upright
-      direction. The retained file's bytes were checksummed against the file that
-      evaluator read.
+      the theorem statement for T-017, which reproduces Massaccesi's publicly posted
+      n = 17 bound as its own control -- confirmed all 181 directions and obtained the
+      exact global minimum 50003/50000, first at the upright direction. The retained
+      file's bytes were checksummed against the file that evaluator read.
       A calibration rung is retained beside it at side 189/50 = 3.78, below Stromquist's
       bound, where the certificate proves nothing new. That run was made first and on
       purpose: it is the diagnostic the project registered in advance to test the
@@ -1321,19 +1329,64 @@ evidence:
       the frontier as well as above it.
       Not independent by method: both decisions are exact-algebraic, so this supports C3
       and not C4.
-      A self-contained third-party package ships beside the certificate at
+      A self-contained package for third-party checking ships beside the certificate at
       cases/n11_fractional_certificate/thirdparty/: the theorem written out for a reader
       with no context, the certificate as plain data, and a single-file verifier that
-      imports nothing outside the Python standard library and nothing from this
-      repository. Run as a stranger would -- copied outside the checkout, under
-      `env -i`, on the system interpreter -- it decides all five conditions and reports
-      the same least covered weight, 50003/50000, over 90,546,593 cells and 181
-      directions in about 34 s; the same verifier, unchanged, returns Massaccesi's
-      published 22529/5000 from his own constants, which is the control that tests the
-      verifier rather than the certificate. Ten perturbations are refused and tabulated
-      with the condition each breaks. The package is a third exact-rational
-      implementation of the same reduction, so it does not move the confirmation rung;
-      what it buys is that the claim can be checked without trusting this project.
+      imports nothing outside the Python standard library or from the rest of this
+      repository. Copied outside the checkout and run under `env -i` on the system
+      interpreter, it decides all five conditions and reports the same least covered
+      weight, 50003/50000, over 90,546,593 cells and 181 directions in about 34 s. The
+      same verifier, unchanged, returns Massaccesi's publicly posted 22529/5000 from a
+      reconstruction of his constants, which provides an external known-answer control
+      for the verifier rather than evidence about this certificate. Ten perturbations
+      are refused and tabulated with the condition each breaks. The package is a third
+      exact-rational implementation of the same reduction, so it does not move the
+      confirmation rung. It permits replay without importing code from the rest of the
+      project or installing its dependencies, but it was written inside the project and
+      no one outside the project has reviewed the result yet.
+      A theorem-specific 355-line audit kernel sits beside it. Its 139-line geometry and
+      scoring core checks the same 90,546,593 cells, binds the exact certificate SHA-256,
+      and runs a full-orbit mutation that preserves C0-C3 and exhibits a C4 witness below
+      one. It narrows applicability rather than hiding generic cases, and is the smallest
+      retained executable recommended for a reader auditing only this theorem.
+    source_reviewed: '2026-09-04'
+  - id: E-n011-fractional-interval-confirmation
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    certificate: cases/n11_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras --group dev pytest -q tests/test_fractional_interval.py::test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net
+    replay_status: passed
+    limitations: >-
+      Confirms the same n = 11 certificate by a different decision method. Directed-
+      rounding floating-point intervals enclose every atom region, and branch and bound
+      covers boxes of admissible centres directly rather than constructing the exact
+      event-cell arrangement. It checks the 181 rational net directions and their 180
+      distinct diagonal reflections, so it does not use D4 symmetry to reduce C4. All 361
+      searches certify with no stalled or budget-exhausted box, and the global mass enclosure collapses to
+      [50003/50000, 50003/50000], matching the exact-algebraic verifier.
+      The same implementation accepts the retained n = 12 certificate and reconstructs
+      Massaccesi's publicly posted n = 17 value as known-answer controls. It refuses the
+      too-large-container and lowered-weight fixtures; an exact region-edge coincidence
+      is retained as an undecided-not-accepted control. The adversarial review found and
+      fixed three pre-registration soundness defects: a restricted direction sample could
+      report theorem acceptance (D-439), unchecked integer masses could overflow NumPy
+      int64 before C1 rejected them (D-440), and enclosure mode could accept a computed
+      minimum below one (D-442). Restricted samples are now diagnostic only, exact
+      Python-integer preflight bounds every later subset sum below 2^62, and acceptance
+      independently requires every full-net lower bound to reach one.
+      This is method-distinct computation inside the claiming repository, not a proof-
+      assistant derivation or an outside review. It trusts CPython, NumPy, IEEE-754
+      directed widening by `nextafter`, and the written branch-and-bound argument; an
+      unresolved interval seam is conservatively reported as undecided. A per-direction
+      work cap makes that refusal operationally bounded (D-443); no retained full-net
+      control exhausts it.
     source_reviewed: '2026-09-04'
   - id: E-n017-fractional-certificate
     claim: lower-bound

@@ -69,7 +69,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 
 | Result | `n` | [`V`](epistemics.md#verification) | [`C`](epistemics.md#confirmation) | [`S`](epistemics.md#significance-and-novelty) | [Novelty](epistemics.md#significance-and-novelty) | What it establishes |
 | --- | --- | --- | --- | --- | --- | --- |
-| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S5` | `apparently-novel` | s(11) >= 19/5, by a first-party weighted fractional unavoidable-set certificate at container side 19/5 = 3.8. |
+| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 19/5, by a first-party weighted fractional unavoidable-set certificate at container side 19/5 = 3.8. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C3` | `S4` | `apparently-novel` | s(12) >= 197/50, by a first-party weighted fractional unavoidable-set certificate at container side 197/50 = 3.94. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C3` | `S4` | `apparently-novel` | s(17) >= 451/100, and s(18) >= 451/100 and s(19) >= 451/100 by monotonicity, from a first-party weighted fractional unavoidable-set certificate at container side 451/100 = 4.51. |
@@ -255,9 +255,12 @@ case or experiment separately.
 | [BC-154 — independent review of the W9 disposition for D-044 and D-046](docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md) | dated review record | record | retained | — |
 | [BC-158 — factual review of the H-060 / exp-058 records against their sources](docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — independent verification of T-017 (s(12) ≥ 77/20)](docs/project/reviews/review-2026-09-04-t017-independent-verification.md) | dated review record | record | retained | — |
+| [Adversarial review of PR 78 — the `s(11) ≥ 19/5` claim](docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
-| [Third-Party Check of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
+| [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
+| [One-minute proof that `s(11) ≥ 19/5`](packing/cases/n11_fractional_certificate/PROOF.md) | component scope and use | definitive | maintained | — |
+| [Lean Feasibility Spike for the `s(11) ≥ 19/5` Certificate](packing/cases/n11_fractional_certificate/lean-spike/README.md) | typed idea provenance | supporting | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
@@ -3198,24 +3201,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 434 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 444 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 91 | asserted something false about the mathematics |
-| validity | 116 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 157 | recorded something its own evidence contradicts |
-| robustness | 55 | did not finish, or finished only by luck |
-| performance | 15 | worked, but cost far more than it should |
+| soundness | 95 | asserted something false about the mathematics |
+| validity | 118 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 158 | recorded something its own evidence contradicts |
+| robustness | 56 | did not finish, or finished only by luck |
+| performance | 17 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Seventy-two of the ninety-one soundness defects pointed in the *flattering*
+**Seventy-six of the ninety-five soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-two defects in 434, and no soundness defect
+**The automated gate has caught sixty-four defects in 444, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3225,7 +3228,7 @@ test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
-The generated log currently has 64 open entries: 41 `outstanding` and 23 `contained`.
+The generated log currently has 63 open entries: 40 `outstanding` and 23 `contained`.
 The W9 candidate `think-cyko` owns their systematic risk ordering and bounded repair
 waves; the synopsis names the cases that matter to current claims rather than pretending
 the examples below are the whole backlog.

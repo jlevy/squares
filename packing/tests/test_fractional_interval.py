@@ -23,6 +23,8 @@ from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH
 from cases.n12_fractional_certificate.replay import load as load_n12
 from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.interval import (
+    BATCH,
+    BOX_BUDGET,
     AtomData,
     DirectionSearch,
     Interval,
@@ -238,31 +240,39 @@ def test_a_provably_admissible_centre_is_exactly_admissible() -> None:
 # --- acceptance ---------------------------------------------------------------
 
 
-def test_the_retained_n12_certificate_is_accepted_on_the_sub_net() -> None:
+def test_the_retained_n12_sub_net_is_diagnostic_not_theorem_acceptance() -> None:
     verdict = verify_by_intervals(load_n12(), directions=SUB_NET)
-    assert verdict.accepted, verdict.failures
+    assert not verdict.accepted
+    assert verdict.failures == (C4,)
+    condition = next(condition for condition in verdict.conditions if condition.name == C4)
+    assert condition.status == "undecided"
+    assert "restricted diagnostic" in condition.detail
     assert len(verdict.directions) == len(SUB_NET)
     assert all(outcome.status == "certified" for outcome in verdict.directions)
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
 
 
-def test_the_retained_n11_certificate_is_accepted_on_the_sub_net() -> None:
+def test_the_retained_n11_sub_net_is_diagnostic_not_theorem_acceptance() -> None:
     verdict = verify_by_intervals(load_n11(), directions=SUB_NET)
-    assert verdict.accepted, verdict.failures
+    assert not verdict.accepted
+    assert verdict.failures == (C4,)
+    assert all(outcome.status == "certified" for outcome in verdict.directions)
     assert verdict.total_mass == Fraction(43391, 4000)
 
 
+@pytest.mark.exhaustive_exact
 def test_the_retained_n12_certificate_is_accepted_on_the_full_doubled_net() -> None:
-    """The interval-certified decision of s(12) >= 393/100, every direction."""
+    """The interval-certified decision of s(12) >= 197/50, every direction."""
     certificate = load_n12()
     verdict = verify_by_intervals(certificate, enclose=True)
     assert verdict.accepted, verdict.failures
     assert len(verdict.directions) == 361
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
     assert verdict.enclosure == (Fraction(100003, 100000), Fraction(100003, 100000))
-    assert certificate.bounded_side == Fraction(393, 100)
+    assert certificate.bounded_side == Fraction(197, 50)
 
 
+@pytest.mark.exhaustive_exact
 def test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net() -> None:
     """The interval-certified decision of s(11) >= 19/5, every direction."""
     certificate = load_n11()
@@ -277,16 +287,18 @@ def test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net() -> N
 # --- the published-value control ----------------------------------------------
 
 
-def test_massaccesi_n17_reproduces_the_published_bound_on_the_sub_net() -> None:
+def test_massaccesi_n17_reproduces_the_published_bound_on_a_diagnostic_sub_net() -> None:
     """A result this verifier was not built against: s(17) >= 4.5058.
 
-    Accepting it is what shows the verifier works, as distinct from agreeing
-    with the certificates it was written alongside. The published least covered
-    mass is exactly 1, and the enclosure must contain it.
+    Certifying each sampled direction is an independent control, as distinct
+    from agreeing with the certificates it was written alongside. The published
+    least covered mass is exactly 1, and the diagnostic enclosure must contain it.
     """
     certificate = retained_certificate()
     verdict = verify_by_intervals(certificate, directions=SUB_NET, enclose=True)
-    assert verdict.accepted, verdict.failures
+    assert not verdict.accepted
+    assert verdict.failures == (C4,)
+    assert all(outcome.status == "certified" for outcome in verdict.directions)
     assert certificate.bounded_side == Fraction(22529, 5000)
     assert float(certificate.bounded_side) == pytest.approx(4.5058)
     assert verdict.total_mass == Fraction(203, 12)
@@ -295,6 +307,7 @@ def test_massaccesi_n17_reproduces_the_published_bound_on_the_sub_net() -> None:
     assert enclosure[0] <= 1 <= enclosure[1]
 
 
+@pytest.mark.exhaustive_exact
 def test_massaccesi_n17_reproduces_the_published_bound_on_the_full_doubled_net() -> None:
     verdict = verify_by_intervals(retained_certificate(), enclose=True)
     assert verdict.accepted, verdict.failures
@@ -338,6 +351,26 @@ def test_the_enclosure_contains_the_exact_minimum_direction_by_direction() -> No
 
 
 # --- refusals -------------------------------------------------------------------
+
+
+def test_scaled_mass_overflow_is_refused_before_numpy_arithmetic() -> None:
+    certificate = Certificate(
+        n=1,
+        outer_side=Fraction(11, 10),
+        square_side=Fraction(3, 5),
+        atoms=(
+            Atom("centre", Fraction(11, 20), Fraction(11, 20), Fraction(1)),
+            Atom("near", Fraction(0), Fraction(0), Fraction(2**62)),
+            Atom("far", Fraction(11, 10), Fraction(11, 10), Fraction(2**62)),
+        ),
+        half_tangents=(Fraction(0), Fraction(1, 2)),
+    )
+    assert certificate.total_mass == 2**63 + 1
+
+    with pytest.raises(ValueError, match="total scaled atom mass"):
+        AtomData.of(certificate)
+    with pytest.raises(ValueError, match="total scaled atom mass"):
+        verify_by_intervals(certificate, directions=("0",))
 
 
 def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> None:
@@ -533,16 +566,25 @@ def _grid_certificate(square_side: Fraction) -> Certificate:
     )
 
 
+def test_enclosure_mode_refutes_an_exact_minimum_below_one() -> None:
+    verdict = verify_by_intervals(_grid_certificate(Fraction(1, 10)), enclose=True)
+    assert not verdict.accepted
+    assert verdict.failures == (C4,)
+    assert verdict.enclosure == (Fraction(0), Fraction(0))
+    assert verdict.directions[0].status == "refuted"
+
+
 def test_an_exact_edge_coincidence_is_reported_undecided_never_accepted() -> None:
     """Regions of side 1/2 on a grid of spacing 1/2 tile the upright domain:
     every point is covered by mass exactly 1, but each region's leave-edge is
     another's enter-edge to the digit, and no enclosure can close that seam.
-    The search must reach its floor and say so."""
+    The search must exhaust its conservative work budget and say so."""
     verdict = verify_by_intervals(_grid_certificate(Fraction(1, 2)), directions=("0",))
     assert not verdict.accepted
     outcome = verdict.directions[0]
     assert outcome.status == "undecided"
-    assert outcome.stalled > 0
+    assert outcome.budget_exhausted
+    assert BOX_BUDGET <= outcome.boxes <= BOX_BUDGET + BATCH
     assert outcome.lower == 0
     assert outcome.upper == 1
 
@@ -552,6 +594,16 @@ def test_perturbing_the_coincidence_away_lets_the_same_search_certify() -> None:
     which the boxes resolve without difficulty."""
     verdict = verify_by_intervals(_grid_certificate(Fraction(51, 100)), directions=("0",))
     outcome = verdict.directions[0]
+    assert not verdict.accepted
+    assert verdict.failures == (C4,)
     assert outcome.status == "certified"
+    assert not outcome.budget_exhausted
     assert outcome.stalled == 0
-    assert verdict.failures == ()
+
+
+def test_a_restricted_direction_can_still_refute_c4() -> None:
+    verdict = verify_by_intervals(_grid_certificate(Fraction(1, 10)), directions=("0",))
+    condition = next(condition for condition in verdict.conditions if condition.name == C4)
+    assert condition.status == "fails"
+    assert verdict.failures == (C4,)
+    assert verdict.directions[0].status == "refuted"

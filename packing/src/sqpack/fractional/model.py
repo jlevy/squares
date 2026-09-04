@@ -15,12 +15,26 @@ from fractions import Fraction
 
 @dataclass(frozen=True, slots=True)
 class Atom:
-    """A weighted site in the container. Coordinates and weight are exact."""
+    """A weighted site in the container. Coordinates and weight are exact.
+
+    This raw value type permits signed weights so proof entry points can reject
+    them with context. Fractional certificates and event-cell sweeps require
+    nonnegative weights.
+    """
 
     label: str
     x: Fraction
     y: Fraction
     weight: Fraction
+
+
+def require_nonnegative_atom_weights(atoms: tuple[Atom, ...]) -> None:
+    """Enforce the monotone measure required by the certificate proof and sweep."""
+    for atom in atoms:
+        if atom.weight < 0:
+            raise ValueError(
+                f"atom weights must be nonnegative; {atom.label!r} has weight {atom.weight}"
+            )
 
 
 @dataclass(frozen=True, slots=True)

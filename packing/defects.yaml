@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 434
+count: 444
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13602,3 +13602,321 @@ defects:
   status: fixed
   bead: think-yw5g
   recorded_in: packing/src/sqpack/fractional/generate.py
+- id: D-435
+  title: The fractional-certificate theorem and verifier accepted signed atom weights
+  date: '2026-09-04'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: >-
+    since the shared fractional-certificate verifier was introduced earlier on
+    2026-09-04; found within hours during the adversarial review of its first n = 11 use
+  severity: critical
+  status: fixed
+  what: >-
+    `Certificate` and the theorem presentation placed no sign restriction on atom
+    weights. The proof's final inequality and the open-cell boundary reduction both
+    require a nonnegative measure. An exact five-atom D4-symmetric object with weight 2
+    at the centre and weight -1 at each corner satisfies the encoded C0-C4 conditions for
+    n = 1, L = 11/10 and B = 3/5, and the verifier accepted it even though s(1) = 1.
+  consequence: >-
+    The generic verifier could print an accepted square-packing lower bound that is
+    mathematically false. The retained n = 11 certificate is unaffected because all 425
+    of its weights are strictly positive, but its acceptance did not establish that the
+    reusable trust boundary was sound.
+  fix: >-
+    State nonnegative mass as an explicit theorem precondition, enforce it when a
+    `Certificate` is constructed and when the event-cell sweep is called directly, and
+    document why the closed-boundary reduction depends on monotonicity.
+  regression: >-
+    `tests/test_fractional_certificate.py::test_signed_weight_counterexample_is_refused_before_verification`
+    retains the exact false n = 1 object and requires both public entry points to refuse
+    it.
+  recorded_in: packing/src/sqpack/fractional/certificate.py
+- id: D-436
+  title: The standalone falsifier displayed mutations without enforcing their expected outcomes
+  date: '2026-09-04'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: >-
+    since the self-contained n = 11 package was added on 2026-09-04; found the same day
+    by reading its advertised falsification surface as a gate rather than as a transcript
+  severity: high
+  status: fixed
+  what: >-
+    `falsify.py` printed the conditions and verdict for ten mutations but carried no
+    expected verdicts and returned success even if a mutation was accepted or a condition
+    changed unexpectedly. `check.sh` did not invoke the falsifier, so the package's one
+    command exercised only positive cases while its README presented the mutation table
+    as evidence that every condition was live.
+  consequence: >-
+    A regression that made a corrupt certificate pass could leave both the advertised
+    package check and the falsification program green. The existing table happened to be
+    correct, but nothing executable required it to remain correct.
+  fix: >-
+    Give every full mutation an exact oracle for the verdict, C0-C4 outcomes and minimum;
+    return nonzero on disagreement; add a bounded signed-weight must-refuse mode; and run
+    that negative control from `check.sh` after the two positive controls.
+  regression: >-
+    `tests/test_n11_thirdparty_verify.py::test_falsification_oracle_detects_wrong_verdict_and_condition`
+    injects a wrong result, and `test_quick_negative_control_is_bounded_and_assertive`
+    requires the package gate to observe the expected P2 refusal.
+  recorded_in: packing/cases/n11_fractional_certificate/thirdparty/falsify.py
+- id: D-437
+  title: The standalone verifier coerced hostile JSON and left degenerate C4 domains undefined
+  date: '2026-09-04'
+  layer: verifier
+  class: robustness
+  detected_by: review
+  latent_for: >-
+    since the self-contained n = 11 package was added on 2026-09-04; found the same day
+    with malformed-record and exact-boundary controls
+  severity: medium
+  status: fixed
+  what: >-
+    The loader applied `int(...)` to `n` and `direction_steps`, silently truncating JSON
+    decimals and accepting Boolean or string lookalikes; duplicate object keys were
+    accepted; malformed atoms could escape as `IndexError`. The C4 search also raised on
+    every domain with `2h >= L`, conflating an empty feasible set with the singleton
+    closed placement at equality.
+  consequence: >-
+    The shipped certificates still parsed and verified exactly, but the purportedly
+    portable trust boundary behaved unpredictably on malformed input and failed to decide
+    two elementary geometric edge cases.
+  fix: >-
+    Parse duplicate-free JSON with exact field types and rational strings, validate atom
+    triples before indexing them, turn format errors into a clean refusal, treat an empty
+    feasible domain as vacuous, and evaluate a singleton feasible domain directly under
+    the closed-square convention.
+  regression: >-
+    `tests/test_n11_thirdparty_verify.py` carries duplicate-key, lossy-integer,
+    non-string-number, malformed-atom, traceback-free CLI, empty-domain and singleton-
+    domain controls.
+  recorded_in: packing/cases/n11_fractional_certificate/thirdparty/verify.py
+- id: D-438
+  title: Retained certificate declarations did not all participate in acceptance
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    since the n = 11 retained replay and self-contained package were added on 2026-09-04;
+    found the same day by mutating each declared value independently
+  severity: medium
+  status: fixed
+  what: >-
+    The primary n = 11 replay checked the declared total mass but not the claim or least
+    cell mass. The self-contained verifier recomputed total and least mass but printed a
+    mismatch only as an informational note before `VERIFIED`. A stale or relabelled record
+    could therefore pass while disagreeing with the exact decision printed beside it.
+  consequence: >-
+    This did not change the theorem decision and the shipped declarations all agree, but
+    future artifact drift could be presented as a successful replay instead of a record-
+    integrity failure.
+  fix: >-
+    Make the primary replay compare the exact claim, total mass and least cell mass, make
+    every present standalone declaration verdict-bearing, and assert the n = 11 values in
+    the retained project test.
+  regression: >-
+    `tests/test_fractional_certificate.py::test_n11_replay_refuses_declared_value_drift`
+    mutates each primary declaration, and
+    `tests/test_n11_thirdparty_verify.py::test_declared_value_mismatch_is_verdict_bearing`
+    covers both standalone numeric declarations.
+  recorded_in: packing/cases/n11_fractional_certificate/__main__.py
+- id: D-439
+  title: A restricted interval-verifier direction sample could report theorem acceptance
+  date: '2026-09-04'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: >-
+    minutes; found while the interval verifier was still labelled a checkpoint and before
+    any evidence entry imported it
+  severity: critical
+  status: fixed
+  what: >-
+    `verify_by_intervals(..., directions=SUBSET)` searched only the named directions but
+    marked C4 as holding whenever all selected outcomes certified. `IntervalVerdict.accepted`
+    then returned true, and the tests described three such sub-net decisions as accepted
+    certificates even though unsearched orientations remained unconstrained.
+  consequence: >-
+    A caller could promote a sampled diagnostic to a theorem verdict and claim a false
+    lower bound. No registered result used this module: the parent branch called it an
+    in-progress checkpoint and nothing imported it outside its tests when the review found
+    the defect.
+  fix: >-
+    A restricted run may still refute C4 and reports every selected outcome and enclosure,
+    but it marks a wholly certified sample `undecided`; only an omitted `directions`
+    argument, which runs the complete doubled net, can establish C4 and yield acceptance.
+  regression: >-
+    The three sub-net controls in `tests/test_fractional_interval.py` now require a useful
+    diagnostic with certified per-direction outcomes and a non-accepted theorem verdict;
+    `test_a_restricted_direction_can_still_refute_c4` preserves the one decisive partial
+    outcome.
+  recorded_in: packing/src/sqpack/fractional/interval.py
+- id: D-440
+  title: Interval-verifier integer masses could overflow before C1 was decided
+  date: '2026-09-04'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: >-
+    minutes; found in the interval-verifier checkpoint before it was connected to any
+    retained claim
+  severity: critical
+  status: fixed
+  what: >-
+    `AtomData.of` bounded `n * scale` but cast each arbitrary atom weight to `numpy.int64`
+    and computed totals and coverage products there. A certificate may carry nonnegative
+    weights far above n before C1 rejects it, so the cast, sum or matrix product could wrap
+    and make both the total and box masses meaningless.
+  consequence: >-
+    Wrapped arithmetic could make a C1 failure look smaller than n or alter a C4 decision,
+    producing a false interval-certified verdict. The retained n = 11, n = 12 and control
+    certificates are far inside the safe range and no evidence entry yet used this code.
+  fix: >-
+    Scale weights into Python integers first, reject any negative value defensively, sum
+    the total in arbitrary precision, and refuse totals at or above a conservative 2^62
+    limit before constructing any NumPy array. Every later NumPy mass is then a subset sum
+    bounded by that exact total.
+  regression: >-
+    `tests/test_fractional_interval.py::test_scaled_mass_overflow_is_refused_before_numpy_arithmetic`
+    constructs a positive-weight total of 2^63 + 1 and requires both the data conversion
+    and the public verifier to refuse it before NumPy arithmetic.
+  recorded_in: packing/src/sqpack/fractional/interval.py
+- id: D-441
+  title: Full certificate decisions were left in the fast behavioral test tier
+  date: '2026-09-04'
+  layer: tooling
+  class: performance
+  detected_by: gate
+  latent_for: >-
+    hours; the n = 11 and n = 12 exact sweeps entered the fast suite with the results, and
+    the three full doubled-net interval decisions joined them in a later checkpoint
+  severity: high
+  status: fixed
+  what: >-
+    Complete 181-direction exact sweeps and 361-direction interval searches were ordinary
+    tests despite taking tens to hundreds of seconds apiece. They therefore ran in the
+    already long `not exhaustive_exact` tier; the hosted validation reached its 30-minute
+    boundary while the PR narrative still described the type and test gates as clean.
+  consequence: >-
+    The merge gate could time out without distinguishing a mathematical failure from an
+    intentionally exhaustive replay, encouraging either repeated wasted runs or removal
+    of valuable assurance tests.
+  fix: >-
+    Mark the complete n = 11 and n = 12 sweeps, including the n = 11 calibration rung,
+    the full source-distinct and minimal n = 11 replays, and all three complete interval
+    decisions as `exhaustive_exact`. Keep fast sub-net, counterexample and mutation
+    controls in the ordinary tier, and list every slow node in the architecture inventory.
+  regression: >-
+    `tests/test_module_boundaries.py::test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes`
+    fixes the named exhaustive inventory, while validation's existing selector tests
+    require the fast tier to exclude that marker and the full tier to include it.
+  recorded_in: packing/tests/test_fractional_certificate.py
+- id: D-442
+  title: Interval enclosure mode accepted a computed C4 minimum below one
+  date: '2026-09-04'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: >-
+    minutes; found while adversarially reading the interval-verifier checkpoint before
+    any retained result cited it
+  severity: critical
+  status: fixed
+  what: >-
+    `verify_by_intervals(..., enclose=True)` ran each direction without the early C4
+    threshold, then treated any completed search with no stalled box as certified. It did
+    not require the returned lower bound to reach the unit mass scale. A tiny exact grid
+    certificate whose global enclosure is [0, 0] therefore returned `accepted=True` with
+    no failed condition.
+  consequence: >-
+    Any caller requesting the stronger minimum enclosure could receive a theorem verdict
+    that contradicted the enclosure printed beside it. The retained n = 11 enclosure is
+    [50003/50000, 50003/50000] and is unaffected, but the public mode was an unsound trust
+    boundary.
+  fix: >-
+    Classify a direction as certified only when it closes every box and its lower bound is
+    at least the exact mass scale; classify any admissible point with upper mass below the
+    scale as a refutation in either search mode; and make whole-certificate acceptance
+    independently recheck every direction's status and lower bound.
+  regression: >-
+    `tests/test_fractional_interval.py::test_enclosure_mode_refutes_an_exact_minimum_below_one`
+    requires the former accepted fixture to fail C4 while preserving its exact [0, 0]
+    enclosure.
+  recorded_in: packing/src/sqpack/fractional/interval.py
+- id: D-443
+  title: An exact interval seam expanded in proportion to the resolution floor
+  date: '2026-09-04'
+  layer: verifier
+  class: performance
+  detected_by: gate
+  latent_for: >-
+    minutes; the first exact-seam refusal test exposed it while the interval verifier was
+    still an uncited checkpoint
+  severity: high
+  status: fixed
+  what: >-
+    A coverage leave-edge coincident with another region's enter-edge cannot be proved
+    covered by outward-rounded interval boxes. The branch-and-bound search bisected the
+    resulting seam until the global 1e-12 resolution floor along its whole length, making
+    work grow roughly as the reciprocal of that floor. Measurements rose from 4,631 boxes
+    at 1e-2 to 274,303 at 1e-4 and 33,583,223 at 1e-6; the production-floor regression was
+    operationally infeasible.
+  consequence: >-
+    A valid but exactly tiled certificate, or a hostile input, could monopolise a test or
+    verifier process instead of returning the method's intended conservative `undecided`
+    result. The retained n = 11, n = 12 and n = 17 controls contain no such seam and their
+    full searches terminate normally.
+  fix: >-
+    Cap each direction at 100,000 processed boxes and return an explicit
+    `budget_exhausted=True`, lower bound zero and `undecided` verdict unless an admissible
+    sampled point has already refuted C4. Nonnegative weights make zero a sound lower bound
+    for every abandoned box.
+  regression: >-
+    `tests/test_fractional_interval.py::test_an_exact_edge_coincidence_is_reported_undecided_never_accepted`
+    reaches the conservative budget result in under a second; the full retained searches
+    assert zero exhausted directions.
+  recorded_in: packing/src/sqpack/fractional/interval.py
+- id: D-444
+  title: The exact event sweep returned a centre outside the feasible polygon
+  date: '2026-09-04'
+  layer: verifier
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: >-
+    since the fractional event sweep was introduced earlier on 2026-09-04; found during
+    the adversarial review after separating decision correctness from witness correctness
+  severity: medium
+  status: fixed
+  what: >-
+    `minimum_covered_mass` correctly retained an event cell when its open interior met the
+    rotated feasible-centre polygon, but returned the midpoint of the whole event cell as
+    its witness. A corner cell can meet the polygon while its midpoint lies outside. At
+    direction (3/5, 4/5), L = 2 and B = 1 with one atom at (14/125, 227/125), the minimum
+    is zero but the returned midpoint mapped to (19/25, 17/25), below the feasible y
+    margin 7/10.
+  consequence: >-
+    C4 decisions and every retained bound remained correct because the mass is constant
+    on the whole open cell and some feasible point exists there. The reported centre was
+    not always a genuine placement, so it could mislead a direct-witness audit or a
+    downstream negative control.
+  fix: >-
+    Clip the exact feasible polygon against all four event-cell bounds, take the average
+    of the resulting convex polygon's vertices, and require that representative to lie
+    strictly inside the open cell before returning it. The counterexample now returns
+    (151/150, -133/900) in rotated coordinates, mapping to the feasible centre
+    (13/18, 43/60).
+  regression: >-
+    `tests/test_fractional_certificate.py::test_minimum_mass_witness_lies_in_feasible_part_of_event_cell`
+    retains the corner cell, proves its former midpoint infeasible, and checks the new
+    exact witness against both the event cell and the original container margins.
+  recorded_in: packing/src/sqpack/fractional/sweep.py
