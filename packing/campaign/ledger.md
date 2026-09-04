@@ -99,6 +99,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-082](agent-sessions/session-082-bc141-n54-source-contract.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 1 | think-pkgx | At the fixed 11:23Z wave boundary, open BC-144 under think-2tol, freeze the terminal wave evidence and prepare only the bounded independent-review packets it earns. |
 | [session-083](agent-sessions/session-083-agenda016-ten-hour-coordinator.md) | completed | contemporaneous | `process-review` (process) | `review-planning-oversight` (process) | 3 | think-a0h6 | think-5j8d is the discharged marker for where this run stopped. The recommended next entry is think-ldq2 under think-modk: repair the four unrepaired D-044/D-046 source-finding clauses, one of which needs a reviewer because it loosens an acceptance screen. |
 | [session-084](agent-sessions/session-084-bc148-n17-fresh-successor-completion.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (process) | 3 | think-5j8d | think-5j8d is the marker Agenda 016's closeout selected for where this run's chain stopped, not a recommendation to continue it here; the coordinator's separately selected follow-up is recorded in the agenda's own closeout block. |
+| [session-085](agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md) | completed | contemporaneous | `process-review` (process) | `documentation-pass` (process) | 4 | think-uqgp | Select BC-191 (`think-ji0r`), Agenda 019's efficiency-loop measurement of row generation's cost against the container side -- row generation is 79-94% of every round, site density has never been set as a function of side, and an untuned grid cost 8.8x at n = 20's own side -- now that the retention gate is off the critical path. `think-jgeg`, the sibling question of whether the generator's own accept-or-reject decision belongs on the interval route, follows once BC-191 lands, re-based on the integer sweep rather than the Fraction sweep; the retarget candidates wait on both. `think-5j8d` is the marker Agenda 016's closeout discharged and is not this session's selection. |
 
 ### Workflow summary
 
@@ -109,11 +110,11 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-survey` | 1 | 0 | 12 | 0 |
 | `factual-review` | 3 | 0 | 40 | 2 |
 | `insight-iteration` | 17 | 1 | 56 | 2 |
-| `process-review` | 14 | 4 | 62 | 6 |
-| `efficiency-loop` | 9 | 0 | 27 | 0 |
-| `research-loop` | 8 | 4 | 45 | 7 |
+| `process-review` | 15 | 4 | 63 | 6 |
+| `efficiency-loop` | 9 | 0 | 28 | 0 |
+| `research-loop` | 8 | 4 | 46 | 7 |
 | `pipeline-improvement` | 21 | 0 | 102 | 0 |
-| `documentation-pass` | 1 | 0 | 3 | 0 |
+| `documentation-pass` | 1 | 0 | 4 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 

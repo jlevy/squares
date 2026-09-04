@@ -1,0 +1,578 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: ac6696e121f49c162.output
+    sha256: b1b1aab0e97ea4011a595c115cc0cc04ae94942113031c7439b9cf28be8b7486
+    bytes: 593345
+    records: 224
+    session_id: 21ae3bfc-58a6-55fc-90e3-6e29d229a7f1
+    harness_versions:
+    - 2.1.259
+  span:
+    started_at: '2026-09-04T01:04:17.447Z'
+    ended_at: '2026-09-04T01:19:04.742Z'
+    wall_seconds: 887.295
+  turns:
+    assistant: 104
+    sidechain: 104
+    by_model:
+      claude-opus-5: 104
+    by_thinking_level:
+      xhigh: 104
+    by_model_and_thinking_level:
+      claude-opus-5 @ xhigh: 104
+    by_branch:
+      claude/agenda-017-plan-and-run: 104
+    latency:
+      count: 104
+      total_seconds: 819.177
+      median_seconds: 2.7
+      max_seconds: 109.244
+  tokens:
+    cache_creation_input_tokens: 433785
+    cache_read_input_tokens: 12148985
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 433785
+    input_tokens: 208
+    output_tokens: 17942
+    thinking_tokens: 2304
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 433785
+      cache_read_input_tokens: 12148985
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 433785
+      input_tokens: 208
+      output_tokens: 17942
+      thinking_tokens: 2304
+  tool_calls:
+    total: 64
+    total_seconds: 72.968
+    share_of_wall: 0.0822
+    errors: 0
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 15
+      total_seconds: 23.084
+      median_seconds: 1.365
+      max_seconds: 3.126
+    by_tool:
+      Bash:
+        count: 64
+        total_seconds: 72.968
+        median_seconds: 0.516
+        max_seconds: 16.383
+    by_command:
+      'tbd && ^status: && ^spec_path:':
+        count: 1
+        total_seconds: 16.383
+        median_seconds: 16.383
+        max_seconds: 16.383
+      tbd show:
+        count: 1
+        total_seconds: 11.733
+        median_seconds: 11.733
+        max_seconds: 11.733
+      tbd && Blocks && tbd && print([x[id] && print(think-uqgp ready:,:
+        count: 1
+        total_seconds: 3.126
+        median_seconds: 3.126
+        max_seconds: 3.126
+      grep:
+        count: 6
+        total_seconds: 3.033
+        median_seconds: 0.294
+        max_seconds: 1.188
+      tbd && tbd:
+        count: 1
+        total_seconds: 2.53
+        median_seconds: 2.53
+        max_seconds: 2.53
+      head:
+        count: 8
+        total_seconds: 2.463
+        median_seconds: 0.071
+        max_seconds: 1.243
+      tbd && tbd && isinstance(d,list):
+        count: 1
+        total_seconds: 2.204
+        median_seconds: 2.204
+        max_seconds: 2.204
+      python3:
+        count: 2
+        total_seconds: 2.128
+        median_seconds: 1.064
+        max_seconds: 1.077
+      '`git && `packing-validate && every && `git && `packing-validate && every && `ideas.md` && D-431 && `ideas.md`':
+        count: 1
+        total_seconds: 1.927
+        median_seconds: 1.927
+        max_seconds: 1.927
+      ls && tbd && git:
+        count: 1
+        total_seconds: 1.597
+        median_seconds: 1.597
+        max_seconds: 1.597
+      python3 && reviewer && reviewer && the && the && the:
+        count: 1
+        total_seconds: 1.525
+        median_seconds: 1.525
+        max_seconds: 1.525
+      tail:
+        count: 1
+        total_seconds: 1.495
+        median_seconds: 1.495
+        max_seconds: 1.495
+      timeout uv run python -m devtools.check_nagamochi_bounds:
+        count: 1
+        total_seconds: 1.488
+        median_seconds: 1.488
+        max_seconds: 1.488
+      D-395:
+        count: 1
+        total_seconds: 1.458
+        median_seconds: 1.458
+        max_seconds: 1.458
+      'python3 && H1: && `BC-165` && the && `BC-165`':
+        count: 1
+        total_seconds: 1.448
+        median_seconds: 1.448
+        max_seconds: 1.448
+      cd:
+        count: 2
+        total_seconds: 1.42
+        median_seconds: 0.71
+        max_seconds: 1.365
+      '**SHOULD-FIX** && **NOTE** && **SHOULD-FIX** && cap && say && note && (2) && (3) && (4) && (5) && (2) && (3) && (4)':
+        count: 1
+        total_seconds: 1.349
+        median_seconds: 1.349
+        max_seconds: 1.349
+      ls:
+        count: 2
+        total_seconds: 1.342
+        median_seconds: 0.671
+        max_seconds: 1.27
+      ? "BC-169 && BC-171 && BC-172 && BC-173 && BC-174 && BC-175 && BC-176 && BC-177 && BC-178\
+        \ && BC-179 && BC-181 && BC-180 && BC-182 && BC-169 && 03:45 && A, && 3 && 04:00–04:30\
+        \ && A, && 2 && 04:45–05:00 && BC-162 && 1 && ,\n && 03:45–04:30 && A, && 3 && )\n\
+        rep(- && the && D-427, && the && D-427, && records+push"
+      : count: 1
+        total_seconds: 1.339
+        median_seconds: 1.339
+        max_seconds: 1.339
+      ? '**SHOULD-FIX** && BC-160 && BC-161 && BC-162 && BC-163 && BC-164 && BC-165 && BC-166
+        && BC-167 && BC-168 && BC-169 && BC-171 && BC-172 && BC-173 && BC-174 && BC-175 &&
+        BC-176 && BC-177 && BC-178 && BC-179 && BC-181 && BC-180 && `BC-162` && Peak concurrency
+        is five sub-agents, at 02:20--02:35 …, and otherwise
+
+        four && Mark && In && n && 00:30–01:45 && A, && 4 && 02:00, && A(BC-160), && **5**
+        && 02:30 && those && **6** && 02:45–03:15 && A(BC-161), && 4 && 03:30 && A, && 4 &&
+        03:45 && A, && 3 && 04:00–04:30 && A, && 2 && 04:45–05:00 && BC-162 && 1 && reviewer
+        && `BC-165` && the && the && say && `git && tree && `ideas.md` && D-431 && all &&
+        `devtools.check_nagamochi_bounds` && the && the && records+push && (2) && (3) && (4)
+        && (5) && a'
+      : count: 1
+        total_seconds: 1.257
+        median_seconds: 1.257
+        max_seconds: 1.257
+      python3 && there && all && all:
+        count: 1
+        total_seconds: 1.254
+        median_seconds: 1.254
+        max_seconds: 1.254
+      '**SHOULD-FIX** && **NOTE** && **SHOULD-FIX** && **NOTE** && (5)':
+        count: 1
+        total_seconds: 1.245
+        median_seconds: 1.245
+        max_seconds: 1.245
+      timeout uv run packing-validate:
+        count: 1
+        total_seconds: 1.244
+        median_seconds: 1.244
+        max_seconds: 1.244
+      ? "BC-160 && BC-161 && BC-162 && BC-163 && BC-164 && BC-165 && BC-166 && BC-167 && BC-168\
+        \ && BC-169 && BC-171 && BC-172 && BC-173 && BC-174 && BC-175 && BC-176 && BC-177\
+        \ && BC-178 && BC-179 && BC-181 && BC-180 && BC-182 && 02:45–03:15 && A(BC-161), &&\
+        \ 4 && n && 03:30 && A, && 4 && n && 03:45 && A, && 3 && n && 04:00–04:30 && A, &&\
+        \ 2 && n && 04:45–05:00 && BC-162 && 1 && ,\n               && 02:45–03:30 && A(BC-161),\
+        \ && 4 && n && 03:45 && A, && 3 && n && 04:00–04:30 && A, && 2 && n && 04:45–05:00\
+        \ && BC-162 && 1"
+      : count: 1
+        total_seconds: 1.221
+        median_seconds: 1.221
+        max_seconds: 1.221
+      ? '`git && `packing-validate && every && the && D-427, && `ideas.md` && D-431 && all
+        && `devtools.check_nagamochi_bounds` && records+push && (2) && (3) && (4) && (5) &&
+        a'
+      : count: 1
+        total_seconds: 1.207
+        median_seconds: 1.207
+        max_seconds: 1.207
+      ls && ls && find:
+        count: 1
+        total_seconds: 1.166
+        median_seconds: 1.166
+        max_seconds: 1.166
+      tbd && node && node:
+        count: 1
+        total_seconds: 1.159
+        median_seconds: 1.159
+        max_seconds: 1.159
+      ? 'mkdir && BC-160 && BC-161 && BC-162 && BC-163 && BC-164 && BC-165 && BC-166 && BC-167
+        && BC-168 && BC-169 && BC-171 && BC-172 && BC-173 && BC-174 && BC-175 && BC-176 &&
+        BC-177 && BC-178 && BC-179 && BC-181 && BC-180 && BC-162 && `BC-162` && Peak concurrency
+        is five sub-agents, at 02:20--02:35 when the readiness
+
+        reviewer joins four lanes, and otherwise four && Mark && In && n && 00:30–01:45 &&
+        A, && 4 && 02:00, && A(BC-160), && **5** && 02:30 && the && **6** && 02:45 && A(BC-161),
+        && 4 && 03:00–03:15 && A, && 4 && 03:30 && A, && 4 && 03:45 && A, && 3 && 04:00–04:30
+        && A, && 2 && 04:45–05:00 && BC-162 && 1 && reviewer && the && the && fix && cap &&
+        no && `git && working && `think-ldq2` && all && `devtools.check_nagamochi_bounds`
+        && SYNOPSIS && ideas && D-431 && (2) && (3) && (4) && a && it'
+      : count: 1
+        total_seconds: 1.147
+        median_seconds: 1.147
+        max_seconds: 1.147
+      sed:
+        count: 12
+        total_seconds: 0.729
+        median_seconds: 0.058
+        max_seconds: 0.074
+      git && git:
+        count: 1
+        total_seconds: 0.529
+        median_seconds: 0.529
+        max_seconds: 0.529
+      ls && find:
+        count: 1
+        total_seconds: 0.254
+        median_seconds: 0.254
+        max_seconds: 0.254
+      wc:
+        count: 2
+        total_seconds: 0.126
+        median_seconds: 0.063
+        max_seconds: 0.063
+      git show:
+        count: 1
+        total_seconds: 0.105
+        median_seconds: 0.105
+        max_seconds: 0.105
+      git && git && git && git && git:
+        count: 1
+        total_seconds: 0.089
+        median_seconds: 0.089
+        max_seconds: 0.089
+      ^ && ^:
+        count: 1
+        total_seconds: 0.087
+        median_seconds: 0.087
+        max_seconds: 0.087
+      'state: && outcome':
+        count: 1
+        total_seconds: 0.085
+        median_seconds: 0.085
+        max_seconds: 0.085
+      git && ls:
+        count: 1
+        total_seconds: 0.076
+        median_seconds: 0.076
+        max_seconds: 0.076
+    by_command_family:
+      toolchain:
+        count: 11
+        total_seconds: 43.49
+        median_seconds: 1.525
+        max_seconds: 16.383
+      inspection:
+        count: 34
+        total_seconds: 12.205
+        median_seconds: 0.071
+        max_seconds: 1.597
+      other:
+        count: 10
+        total_seconds: 11.175
+        median_seconds: 1.251
+        max_seconds: 1.927
+      project:
+        count: 2
+        total_seconds: 2.732
+        median_seconds: 1.366
+        max_seconds: 1.488
+      shell:
+        count: 2
+        total_seconds: 1.42
+        median_seconds: 0.71
+        max_seconds: 1.365
+      filesystem:
+        count: 1
+        total_seconds: 1.147
+        median_seconds: 1.147
+        max_seconds: 1.147
+      vcs:
+        count: 4
+        total_seconds: 0.799
+        median_seconds: 0.097
+        max_seconds: 0.529
+    invoked:
+      cd: 52
+      head: 40
+      echo: 38
+      sed: 19
+      grep: 18
+      A,: 17
+      the: 14
+      '4': 10
+      tail: 9
+      BC-162: 9
+      n: 9
+      ls: 7
+      export: 6
+      tbd show: 6
+      '3': 6
+      python3: 5
+      cat: 5
+      BC-169: 5
+      03:45: 5
+      04:00–04:30: 5
+      '2': 5
+      04:45–05:00: 5
+      '1': 5
+      '`git': 5
+      all: 5
+      (2): 5
+      (3): 5
+      (4): 5
+      '**SHOULD-FIX**': 5
+      wc: 4
+      git rev-parse: 4
+      sort: 4
+      BC-171: 4
+      BC-172: 4
+      BC-173: 4
+      BC-174: 4
+      BC-175: 4
+      BC-176: 4
+      BC-177: 4
+      BC-178: 4
+      BC-179: 4
+      BC-181: 4
+      BC-180: 4
+      A(BC-161),: 4
+      reviewer: 4
+      D-431: 4
+      '`ideas.md`': 4
+      (5): 4
+      git show: 3
+      BC-160: 3
+      BC-161: 3
+      BC-163: 3
+      BC-164: 3
+      BC-165: 3
+      BC-166: 3
+      BC-167: 3
+      BC-168: 3
+      03:30: 3
+      '`devtools.check_nagamochi_bounds`': 3
+      a: 3
+      '`BC-165`': 3
+      records+push: 3
+      '`packing-validate': 3
+      every: 3
+      D-427,: 3
+      '**NOTE**': 3
+      awk: 2
+      uniq: 2
+      printf: 2
+      tr: 2
+      find: 2
+      tbd ready: 2
+      ^: 2
+      '`BC-162`': 2
+      Mark: 2
+      In: 2
+      00:30–01:45: 2
+      02:00,: 2
+      A(BC-160),: 2
+      '**5**': 2
+      02:30: 2
+      '**6**': 2
+      cap: 2
+      02:45–03:15: 2
+      say: 2
+      BC-182: 2
+      git log: 1
+      which: 1
+      tbd: 1
+      'true': 1
+      '^status:': 1
+      '^spec_path:': 1
+      'state:': 1
+      outcome: 1
+      isinstance(d,list): 1
+      timeout uv run python -m devtools.check_nagamochi_bounds: 1
+      git status: 1
+      git branch: 1
+      timeout uv run packing-validate: 1
+      Blocks: 1
+      print([x[id]: 1
+      print(think-uqgp ready:,: 1
+      command tbd: 1
+      command node: 1
+      node: 1
+      mkdir: 1
+      ? 'Peak concurrency is five sub-agents, at 02:20--02:35 when the readiness
+
+        reviewer joins four lanes, and otherwise four'
+      : 1
+      02:45: 1
+      03:00–03:15: 1
+      fix: 1
+      'no': 1
+      working: 1
+      '`think-ldq2`': 1
+      SYNOPSIS: 1
+      ideas: 1
+      it: 1
+      ? 'Peak concurrency is five sub-agents, at 02:20--02:35 …, and otherwise
+
+        four'
+      : 1
+      those: 1
+      tree: 1
+      cut: 1
+      ? ",\n              "
+      : 1
+      02:45–03:30: 1
+      'H1:': 1
+      note: 1
+      ? ',
+
+        '
+      : 1
+      03:45–04:30: 1
+      ? ')
+
+        rep(-'
+      : 1
+      there: 1
+      D-395: 1
+    invoked_families:
+      other: 300
+      inspection: 113
+      shell: 100
+      toolchain: 17
+      vcs: 10
+      project: 2
+      filesystem: 1
+    by_shell_shape:
+      compound:
+        count: 39
+        total_seconds: 45.861
+        median_seconds: 0.085
+        max_seconds: 16.383
+      python_heredoc:
+        count: 12
+        total_seconds: 16.677
+        median_seconds: 1.357
+        max_seconds: 1.927
+      python_inline:
+        count: 3
+        total_seconds: 6.407
+        median_seconds: 2.204
+        max_seconds: 3.126
+      heredoc:
+        count: 3
+        total_seconds: 3.611
+        median_seconds: 1.207
+        max_seconds: 1.257
+      simple:
+        count: 6
+        total_seconds: 0.355
+        median_seconds: 0.058
+        max_seconds: 0.066
+      pipeline:
+        count: 1
+        total_seconds: 0.057
+        median_seconds: 0.057
+        max_seconds: 0.057
+    by_thinking_level:
+      xhigh:
+        count: 64
+        total_seconds: 72.968
+        median_seconds: 0.516
+        max_seconds: 16.383
+    shell_traits:
+      pipes: 40
+      redirects_output: 6
+      substitutes: 2
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'
