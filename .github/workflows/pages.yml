@@ -48,11 +48,12 @@ jobs:
           enable-cache: true
           cache-dependency-glob: uv.lock
 
-      # The renderer re-decides C0 through C4 before it writes anything, so a
-      # certificate the verifier would refuse fails the build instead of being
-      # published with an explanation of a bound it does not carry.
+      # The renderer re-decides C0 through C3 before it writes anything, so a
+      # certificate those conditions refuse fails the build instead of being
+      # published with an explanation of a bound it does not carry. C4 is a
+      # sweep per direction and the case replay gate owns it.
       - name: Render the page from the retained certificate
-        run: uv run --frozen --group site python -m devtools.render_certificate_page
+        run: uv run --frozen --group dev python -m devtools.render_certificate_page
 
       - name: Check the page is one self-contained file
         run: |

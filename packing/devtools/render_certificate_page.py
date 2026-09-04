@@ -13,8 +13,8 @@ artifact host with a strict content-security policy.
 
 Usage, from `packing/`:
 
-    uv run --frozen --group site python -m devtools.render_certificate_page
-    uv run --frozen --group site python -m devtools.render_certificate_page --check
+    uv run --frozen --all-extras --group dev python -m devtools.render_certificate_page
+    uv run --frozen --all-extras --group dev python -m devtools.render_certificate_page --check
 """
 
 from __future__ import annotations
@@ -85,15 +85,15 @@ PAGE_RESET = "css/page-reset.css"
 def kpress_static() -> Path:
     """The kpress distribution's static asset root.
 
-    Imported here rather than at module scope: kpress lives in the optional
-    `site` dependency group, so importing it eagerly would make every other
-    entry point in this package fail without it.
+    Imported inside the function rather than at module scope: this renderer is
+    the only devtool that needs kpress, and a module-level import would make
+    every other entry point in this package fail if it were ever absent.
     """
     try:
         import kpress.format as kpress_format  # noqa: PLC0415
     except ModuleNotFoundError:  # pragma: no cover - a dependency-group failure
         raise SystemExit(
-            "kpress is not installed. Run with `--group site`, which pins it."
+            "kpress is not installed. Run with `--group dev`, which pins it."
         ) from None
     static = Path(kpress_format.__file__).parent / "static"
     if not (static / "katex" / "katex.min.js").is_file():

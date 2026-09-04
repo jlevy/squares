@@ -625,13 +625,11 @@ symbolic = [
 dev = [
     { name = "basedpyright" },
     { name = "cairosvg" },
+    { name = "kpress" },
     { name = "nodejs-wheel-binaries" },
     { name = "pytest" },
     { name = "ruff" },
     { name = "sympy" },
-]
-site = [
-    { name = "kpress" },
 ]
 
 [package.metadata]
@@ -651,12 +649,12 @@ provides-extras = ["symbolic"]
 dev = [
     { name = "basedpyright", specifier = ">=1.31" },
     { name = "cairosvg", specifier = ">=2.7" },
+    { name = "kpress", specifier = "==0.3.5" },
     { name = "nodejs-wheel-binaries", specifier = ">=24.16.0" },
     { name = "pytest", specifier = ">=8.3" },
     { name = "ruff", specifier = ">=0.14" },
     { name = "sympy", specifier = ">=1.13" },
 ]
-site = [{ name = "kpress", specifier = "==0.3.5" }]
 
 [[package]]
 name = "strif"
