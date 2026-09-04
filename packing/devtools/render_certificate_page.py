@@ -341,6 +341,24 @@ def coarsening_svg(rows: list[CoarseningRow]) -> tuple[str, str, str]:
     return "\n        ".join(bars), "\n        ".join(values), "\n        ".join(labels)
 
 
+def halving_cost(rows: list[CoarseningRow]) -> tuple[str, str]:
+    """What halving the finest net costs, as percentages, from the measurement.
+
+    Stated in the prose beside the figure, so it is derived rather than written:
+    the same sentence carried a figure from an earlier certificate for one
+    render, and the two nets it compares are exactly the ones the rows hold.
+    """
+    by_net = {int(row["K"]): row for row in rows}
+    finest = max(by_net)
+    half = finest // 2
+    if half not in by_net:
+        return "", ""
+    fine, coarse = by_net[finest], by_net[half]
+    b_drop = 1 - float(coarse["B"]) / float(fine["B"])
+    mass_drop = 1 - float(coarse["least_mass"]) / float(fine["least_mass"])
+    return f"{b_drop * 100:.2f}%", f"{mass_drop * 100:.0f}%"
+
+
 def number_line(facts: Facts) -> dict[str, str]:
     """Positions on the 3.75-3.90 axis the header draws."""
     low, high, x0, x1 = 3.75, 3.90, 20.0, 680.0
@@ -368,8 +386,10 @@ def substitutions(facts: Facts, static: Path) -> dict[str, str]:
         alt = "Least covered mass against net size: " + ", ".join(
             f"K={row['K']} gives {row['least_mass']}" for row in rows
         )
+        halving_b, halving_mass = halving_cost(rows)
     else:
         bars = values = labels = alt = ""
+        halving_b = halving_mass = ""
     values_map = {
         "KPRESS_CSS": kpress_css(static) + katex_css(static),
         "THEME_BOOTSTRAP": theme_bootstrap(static),
@@ -413,6 +433,8 @@ def substitutions(facts: Facts, static: Path) -> dict[str, str]:
         "MOVEMENT": decimal(movement),
         "GAP_NOW": decimal(gap_now),
         "GAP_BEFORE": decimal(gap_before),
+        "HALVING_B_DROP": halving_b,
+        "HALVING_MASS_DROP": halving_mass,
         "COARSEN_ALT": alt,
         "COARSEN_BARS": bars,
         "COARSEN_VALUES": values,
