@@ -104,17 +104,60 @@ something false. Three that earned their place:
   The replay module returns the certificate’s own declared claim and the test compares
   it to the recomputed value.
 
-## Model routing
+## Model routing, and when to spend the expensive reasoning
 
-Reasoning effort matters more than which lane is “important”.
+The coordinator runs at the strongest available orchestration setting and **stays
+orchestrating**. It does not do the mathematics; it decides what gets done, verifies
+what comes back, and owns the record.
+Its errors are recoverable because every result it accepts is re-decided from disk.
 
-- **Maximum** for anything where being wrong produces a confident wrong number: theorem
-  application, dual feasibility, deciding which constraint set is correct.
-- **High** for search driving, parameter choice, and reading results.
-- **Fast, high effort** for the coordinator: it makes many small decisions quickly and
-  its errors are recoverable.
+**Reserve maximum-reasoning delegation for two things, and be strict about it:**
 
-Delegate the mathematics; keep the verification.
+1. **Mathematical innovation** — applying or extending a theorem, deciding which
+   constraint set a condition must quantify over, establishing dual feasibility,
+   designing a new certificate object.
+   The test: *would being wrong here produce a confident wrong number rather than an
+   error?* Every real defect in the founding block was of that kind.
+   `L/B` in place of `L` would have overstated a published result; a verifier that
+   narrowed its cell set would have accepted false certificates.
+   Neither fails loudly.
+2. **Careful technical review** — an independent check written from the theorem
+   statement with the implementation withheld, required to reproduce a *published* value
+   as its own control.
+
+**Do not spend it on** parameter sweeps, driving a search whose method is settled,
+re-running a converged pipeline at a new value, records, registration, or formatting.
+That work is high-volume, its errors surface immediately, and spending deep reasoning on
+it starves the lanes that need it.
+
+The rule in one line: **delegate the mathematics and the adversarial review; keep the
+orchestration, the verification, and the record.**
+
+## Validation scales with how notable the result is
+
+A bound nobody has moved in twenty years will be checked by people who have neither this
+repository nor any wish to trust it.
+Package for them, and scale the effort to the claim:
+
+| Claim | What ships with it |
+| --- | --- |
+| Routine (`S1`–`S2`) | Exact artifact, replay command, one exact decision |
+| Substantive (`S3`–`S4`) | The above, plus a second decision by different code and a control on a published value |
+| Notable (`S5`) | The above, plus a self-contained third-party package: the certificate as plain data, the conditions written out as a checkable statement independent of this codebase, and a verifier a stranger can run against their own arithmetic |
+
+The obligations that make a package third-party checkable, in order of what a sceptic
+reaches for first:
+
+- **The artifact is plain data.** Exact rationals as strings in a documented schema — no
+  pickles, no project types, nothing that must be imported to be read.
+- **The conditions are stated, not just coded.** A reader must be able to check the
+  claim against the printed theorem without reading our implementation.
+- **A control on someone else’s published number.** A verifier that has only ever
+  confirmed our own results has confirmed nothing.
+- **Falsification is demonstrated.** Show the perturbations that are refused, and by
+  which condition.
+- **Every number is exact and reproducible from the artifact alone**, including the
+  quantities that make the claim tight.
 
 ## What to avoid
 
