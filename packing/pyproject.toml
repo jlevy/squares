@@ -65,7 +65,14 @@ packages = ["src/sqpack"]
 [tool.ruff]
 line-length = 96
 target-version = "py314"
-extend-exclude = ["resources", "cases/n12_fractional_certificate/independent_verify.py"]
+extend-exclude = [
+  "resources",
+  # Retained verbatim as third-party evidence: these are deliberately written in
+  # someone else's style, import nothing from this project, and are checked by being
+  # run rather than by being linted. Reformatting them would defeat the point.
+  "cases/n12_fractional_certificate/independent_verify.py",
+  "cases/n11_fractional_certificate/thirdparty",
+]
 
 [tool.ruff.lint]
 select = [
