@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 445
+count: 446
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13961,3 +13961,39 @@ defects:
     hashes certificate.json from disk and requires the retained b121...e6a bytes before
     checking their declarations and exact comparison with Stromquist's value.
   recorded_in: docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md
+- id: D-446
+  title: Dense direct-summation replay could not finish within the full-gate timeout
+  date: '2026-09-04'
+  layer: tooling
+  class: performance
+  detected_by: gate
+  latent_for: >-
+    minutes; the full n = 11 use was added during the adversarial review and measured
+    before the stacked branch was published
+  severity: high
+  status: fixed
+  what: >-
+    The NumPy verifier retained from the independent n = 12 review computes each
+    direction with a dense integer matrix product that directly sums every atom on every
+    arrangement piece. On the 1,121-atom n = 11 certificate, its full 181-direction test
+    produced no verdict after 3,848 seconds and was interrupted. The validator's default
+    per-step timeout is 900 seconds, so classifying this implementation as a permanent
+    exhaustive test would make the full gate fail operationally even if the mathematics
+    passed.
+  consequence: >-
+    A redundant corroboration route would add more than an hour to local review and
+    guarantee a timeout in the ordinary full gate. Its lack of a verdict supplies no
+    positive or negative evidence about the certificate.
+  fix: >-
+    Do not retain the dense full n = 11 invocation as a test. Keep its smaller-certificate
+    diagnostic, record the terminated run as a performance result, and use the
+    standard-library general verifier for the permanent source-distinct full decision:
+    all 181 directions plus three direct cell audits finish in about 87 seconds. Retain
+    the separate theorem-specific minimal checker and method-distinct interval decision.
+  regression: >-
+    `tests/test_n11_thirdparty_verify.py::test_general_checker_replays_current_certificate_with_direct_audits`
+    requires the complete practical verifier to decide the current bytes, while
+    `tests/test_module_boundaries.py::test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes`
+    fixes that test and the minimal checker in the exhaustive inventory without naming
+    the infeasible dense invocation.
+  recorded_in: packing/tests/test_n11_thirdparty_verify.py

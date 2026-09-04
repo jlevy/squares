@@ -296,25 +296,6 @@ def test_the_independent_verifier_agrees_on_the_first_rung() -> None:
     assert report["info"]["min_rep"] == Fraction(1)
 
 
-@pytest.mark.exhaustive_exact
-def test_the_independent_verifier_agrees_on_the_full_n11_certificate() -> None:
-    """A source-distinct exact decision over all 181 directions of the new bound."""
-    package = Path(__file__).parents[1] / "cases/n12_fractional_certificate"
-    module = runpy.run_path(
-        str(package / "independent_verify.py"), run_name="independent_verify"
-    )
-    certificate = module["load"](str(N11_CERTIFICATE_PATH))
-    accepted, report = module["verify"](
-        certificate,
-        ks=None,
-        label="independent n=11 full net",
-        brute_check=3,
-    )
-    assert accepted, report
-    assert report["info"]["min_lower"] == Fraction(4001, 4000)
-    assert report["info"]["min_rep"] == Fraction(4001, 4000)
-
-
 def test_containment_at_exactly_one_is_refused() -> None:
     """C3 must be strict: equality leaves the shrunken squares able to touch,
     and touching closed squares can share an atom, which breaks the count."""

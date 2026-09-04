@@ -502,9 +502,14 @@ Every path reads the same repository file; the fast test and minimal checker req
 actual SHA-256 before interpreting it.
 
 A further run of the NumPy verifier originally written independently for `n = 12` was
-stopped after 501 seconds without reaching a verdict on the larger 1,121-atom instance.
+stopped after 3,848 seconds without reaching a verdict on the larger 1,121-atom
+instance; an earlier attempt was stopped after 501 seconds.
+Its dense direct-summation matrix product is not a practical permanent gate.
 That is a performance result, not mathematical evidence either way, and it is not
 counted among the complete decisions above.
+The complete standalone general verifier, which finishes in under two minutes, is the
+retained source-distinct exhaustive test instead.
+D-446 records that gate repair.
 
 Negative controls included broken D4 orbits, reduced weights, removed atoms, an enlarged
 container, a too-short angular net, non-strict containment, declared-value mutations,

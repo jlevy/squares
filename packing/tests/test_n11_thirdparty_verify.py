@@ -251,6 +251,28 @@ def test_minimal_checker_binds_the_retained_bytes_and_closed_form_facts() -> Non
 
 
 @pytest.mark.exhaustive_exact
+def test_general_checker_replays_current_certificate_with_direct_audits() -> None:
+    """The general standalone checker decides all directions and audits witnesses."""
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(VERIFY_PATH),
+            str(CURRENT_CERTIFICATE_PATH),
+            "--audit",
+            "3",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=240,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    assert "least 4001/4000" in completed.stdout
+    assert "567130649 regions over 181 directions" in completed.stdout
+    assert "VERIFIED: s(11) >= 381/100" in completed.stdout
+
+
+@pytest.mark.exhaustive_exact
 def test_minimal_checker_replays_every_cell_and_its_mutation() -> None:
     completed = subprocess.run(
         [sys.executable, str(MINIMAL_VERIFY_PATH), str(CURRENT_CERTIFICATE_PATH)],

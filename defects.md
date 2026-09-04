@@ -2,7 +2,7 @@
 
 # Defect log
 
-445 defects recorded across the packing toolchain.
+446 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -23,9 +23,9 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `inspection` | 45 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 64 | the automated test suite |
+| `gate` | 65 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 64 of 445, and none of the 95 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 65 of 446, and none of the 95 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 64 of 445, and none of
 | quench | 23 |
 | verifier | 12 |
 | record | 134 |
-| tooling | 158 |
+| tooling | 159 |
 | docs | 107 |
 
 ## By kind
@@ -46,7 +46,7 @@ The line worth reading twice: **the automated gate caught 64 of 445, and none of
 | validity | 118 |
 | bookkeeping | 159 |
 | robustness | 56 |
-| performance | 17 |
+| performance | 18 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -681,6 +681,7 @@ This is the actionable list.
 | [D-443](packing/src/sqpack/fractional/interval.py) | 2026-09-04 | verifier | performance |  | `gate` | high | fixed | An exact interval seam expanded in proportion to the resolution floor |
 | [D-444](packing/src/sqpack/fractional/sweep.py) | 2026-09-04 | verifier | validity | neutral | `review` | medium | fixed | The exact event sweep returned a centre outside the feasible polygon |
 | [D-445](docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md) | 2026-09-04 | record | bookkeeping | neutral | `review` | high | fixed | The introducing commit named the wrong SHA-256 for the retained 381/100 certificate |
+| [D-446](packing/tests/test_n11_thirdparty_verify.py) | 2026-09-04 | tooling | performance |  | `gate` | high | fixed | Dense direct-summation replay could not finish within the full-gate timeout |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

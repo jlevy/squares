@@ -315,7 +315,6 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
         # the same file that pins what its record claims, or decides it on a coarse net.
         "test_fractional_certificate.py": {
             "test_the_full_retained_certificate_is_accepted",
-            "test_the_independent_verifier_agrees_on_the_full_n11_certificate",
             "test_the_retained_n12_certificate_is_accepted",
             "test_the_n11_calibration_rung_verifies_on_the_full_net",
             "test_the_n11_certificate_is_accepted",
@@ -333,6 +332,7 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
             "test_n5_wall_and_contact_gradients_match_authoritative_source_rows",
         },
         "test_n11_thirdparty_verify.py": {
+            "test_general_checker_replays_current_certificate_with_direct_audits",
             "test_minimal_checker_replays_every_cell_and_its_mutation",
         },
         "test_minus_w_row_jets.py": {
