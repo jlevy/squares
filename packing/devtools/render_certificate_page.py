@@ -46,11 +46,6 @@ TEMPLATE = Path(__file__).with_name("templates") / "certificate_page.html"
 COARSENING = CASE / "net-coarsening.json"
 OUTPUT = PACKING / "site" / "index.html"
 
-# The one region the prover must separate from the probe: the probe is a warm
-# orange, and a red near it reads as the same instrument at a glance. Taken from
-# the project's own square-hue palette rather than picked, and asserted rather
-# than indexed so a reordered palette fails here instead of quietly restyling
-# the figure.
 # Four colours have to stay apart in the prover: the mass comfortably above the
 # threshold, the mass near it, the mass below it (a region that never occurs
 # inside the domain), and the square the reader drags, which is an instrument
@@ -85,11 +80,6 @@ KATEX_FACES = frozenset(
     }
 )
 
-# Latin subset, as kpress declares it for its own faces.
-LATIN_RANGE = (
-    "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,"
-    "U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
-)
 
 # `page-reset.css` is not in kpress's DEFAULT_CSS_ASSETS: kpress inlines it
 # separately, render-blocking, because it owns html/body for a standalone shell
@@ -199,7 +189,6 @@ class Facts:
     orbits: int
     distinct_weights: int
     weight_scale: int
-    largest_half_gap: Fraction
 
 
 def load_certificate(path: Path) -> tuple[Certificate, dict[str, str]]:
@@ -285,7 +274,6 @@ def derive(path: Path, *, full_sweep: bool = False) -> Facts:
         orbits=len(seen),
         distinct_weights=len({atom.weight for atom in certificate.atoms}),
         weight_scale=scale,
-        largest_half_gap=certificate.largest_half_gap_tangent,
     )
 
 
