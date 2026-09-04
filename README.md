@@ -72,14 +72,14 @@ Results first established here, as far as the recorded source searches show, inc
   adopted, and the `451/100` rung it reached first is retained below.
   It stops at `n = 19` because `n = 20` already carries more: Nagamochi’s
   `1 + √13 = 4.6055…` is the larger bound there.
-- **T-017: `s(12) ≥ 197/50`, from nothing case-specific at all.** `n = 12` had only the
+- **T-017: `s(12) ≥ 79/20`, from nothing case-specific at all.** `n = 12` had only the
   `n = 11` bound inherited by monotonicity; the frontier record said in as many words
   that nothing specific to `n = 12` had ever been proved.
-  A six-rung ladder — `19/5`, `77/20`, `97/25`, `39/10`, `393/100`, `197/50` — is
-  retained, all from one generator that applies at every `n`, which is why this is
+  A seven-rung ladder — `19/5`, `77/20`, `97/25`, `39/10`, `393/100`, `197/50`, `79/20`
+  — is retained, all from one generator that applies at every `n`, which is why this is
   scored `S4` as a bound family rather than a case result.
-  At `197/50 = 3.94` it also separates the cases: `s(12) > s(11)`, which did not follow
-  from anything on record before.
+  At `79/20 = 3.95` it also separates the cases: `s(12) > s(11)`, since Trump’s 1979
+  packing puts `s(11) ≤ 3.877084`. That did not follow from anything on record before.
 - **T-001 / T-002: `s(17) ≥ 4.426213` and `s(18) ≥ 4.426213`.** A sixteen-point
   unavoidable set is certified by exact rational cover verification and an independent
   interval branch-and-bound over the full pose space.

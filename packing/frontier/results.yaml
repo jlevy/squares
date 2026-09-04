@@ -570,13 +570,14 @@ results:
 
   - id: T-017
     claim: >-
-      s(12) >= 197/50, by a first-party weighted fractional unavoidable-set
-      certificate at container side 197/50 = 3.94. This is the first lower bound
+      s(12) >= 79/20, by a first-party weighted fractional unavoidable-set
+      certificate at container side 79/20 = 3.95. This is the first lower bound
       specific to n = 12 in the retained corpus: the case previously held
       2 + 4/sqrt(5) = 3.788854..., which is Stromquist's s(11) bound inherited by
       monotonicity and says nothing about twelve squares in particular. The
-      movement is +0.151146, and the case stays open against its conjectured
-      optimum of 4.
+      movement is +0.161146, and the case stays open against its conjectured
+      optimum of 4, now by 0.05. The 197/50 rung it reached first is retained
+      below it.
     scope:
       n_values:
         - 12
@@ -610,6 +611,7 @@ results:
       - E-fractional-interval-decision
     artifacts:
       - packing/cases/n12_fractional_certificate/certificate.json
+      - packing/cases/n12_fractional_certificate/certificate-197-50.json
       - packing/cases/n12_fractional_certificate/certificate-19-5.json
       - packing/cases/n12_fractional_certificate/certificate-77-20.json
       - packing/cases/n12_fractional_certificate/certificate-97-25.json

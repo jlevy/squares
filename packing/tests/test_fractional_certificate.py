@@ -152,18 +152,18 @@ def test_the_retained_n12_certificate_replays() -> None:
     """
     certificate = load()
     assert certificate.n == 12
-    assert certificate.bounded_side == Fraction(197, 50)
-    assert certificate.total_mass == Fraction(479713, 40000)
+    assert certificate.bounded_side == Fraction(79, 20)
+    assert certificate.total_mass == Fraction(1197059, 100000)
     assert certificate.total_mass < 12
 
     record = declared()
-    assert record["claim"] == "s(12) >= 197/50"
+    assert record["claim"] == "s(12) >= 79/20"
     assert record["total_mass"] == str(certificate.total_mass)
 
 
 @pytest.mark.exhaustive_exact
 def test_the_retained_n12_certificate_is_accepted() -> None:
-    """The 681-atom certificate over 181 directions, decided exactly."""
+    """The 969-atom certificate over 181 directions, decided exactly."""
     certificate = load()
     verdict = verify(certificate)
     assert verdict.accepted, verdict.failures
@@ -184,7 +184,7 @@ def test_the_first_rung_at_19_5_still_replays() -> None:
 
 
 def test_the_n12_certificate_improves_the_inherited_bound() -> None:
-    """197/50 beats 2 + 4/sqrt(5), which n = 12 only held by monotonicity."""
+    """79/20 beats 2 + 4/sqrt(5), which n = 12 only held by monotonicity."""
     bound = load().bounded_side
     # L > 2 + 4/sqrt(5) iff (L - 2) > 4/sqrt(5) iff (L - 2)^2 * 5 > 16,
     # both sides being positive. Decided in exact rationals, not in floats.
@@ -398,6 +398,7 @@ def test_every_retained_n12_rung_still_verifies() -> None:
         "certificate-97-25.json": Fraction(97, 25),
         "certificate-39-10.json": Fraction(39, 10),
         "certificate-393-100.json": Fraction(393, 100),
+        "certificate-197-50.json": Fraction(197, 50),
     }
     for name, side in rungs.items():
         rung = load(package / name)
