@@ -76,7 +76,7 @@ session:
     objective: >-
       Build the certificate generator, then climb whatever ladder it can reach --
       starting from H-061's fixed n = 12 threshold at side 19/5, and continuing past it
-      rather than stopping there, since only C1 among the five conditions mentions n and
+      rather than stopping there, since only Condition 2 among the five conditions mentions n and
       one atom set certifies its side for every larger n. Retain every certificate the
       exact event-cell sweep and the interval branch-and-bound independently accept at
       the same value, and fix the record-integrity defects the block's own retained
@@ -164,7 +164,7 @@ session:
     recording: contemporaneous
     objective: >-
       Entered directly on the operator's direction rather than drawn from a queued
-      candidate: make the exact event-cell sweep that decides C4 at the retention gate
+      candidate: make the exact event-cell sweep that decides Condition 5 at the retention gate
       at least ten times faster, with the identical least covered mass on every retained
       certificate and the Fraction sweep kept unchanged as the reference.
     commitment: BC-196
@@ -286,7 +286,7 @@ session:
       n = 11 at 2 + 4/sqrt(5) = 3.788854 (Stromquist 2003, inherited, unmoved since
       stated); n = 12 with no bound specific to it ever proved; n = 17-19 at
       22529/5000 = 4.5058 (Massaccesi, adopted session-083/084); n = 20 and n = 21 on
-      Nagamochi's 2005 closed form only. The exact event-cell sweep that decides C4 at
+      Nagamochi's 2005 closed form only. The exact event-cell sweep that decides Condition 5 at
       the retention gate cost up to 5378 s on the largest retained certificate.
     after: >-
       Seven cases carry a first-party certificate at V4/C4: T-018 (n = 11, 381/100),
@@ -463,8 +463,8 @@ in each result’s own `next_rung` in [`results.yaml`](../../frontier/results.ya
 
 [Agenda 020](../agendas/agenda-020-efficiency-block-the-exact-sweep.md) is entered
 directly on the operator’s own direction and recorded as its own commitment rather than
-folded into Agenda 019’s `BC-190`. The exact event-cell sweep that decides `C4` at the
-retention gate now decides in `int64` on the atom weights’ common scale, holding
+folded into Agenda 019’s `BC-190`. The exact event-cell sweep that decides `Condition 5`
+at the retention gate now decides in `int64` on the atom weights’ common scale, holding
 reachable cells as spans and running the 181 directions in parallel: `68x` at `n = 17`
 and `139x` at `n = 20` on a loaded box, about `183x` on a quiet one, the identical least
 covered mass every time and the `Fraction` route kept unchanged as the reference.

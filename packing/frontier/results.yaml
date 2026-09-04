@@ -655,7 +655,7 @@ results:
       What is left is bounded, though, and by the method rather than by the search.
       A certificate for n cannot exist above ceil(sqrt(n)) * B, since a container wider
       than that holds ceil(sqrt(n))^2 pairwise disjoint axis-parallel B-squares, each
-      carrying mass at least 1 by C4, which forces the total past n and breaks C1.
+      carrying mass at least 1 by Condition 5, which forces the total past n and breaks Condition 2.
       Here that ceiling is 4B = 3.9908, and 4/(1 + D) = 3.990816 over every shrink the
       181-direction net admits, so 79/20 has 0.0408 of runway left.
       The consequence for this case is structural and worth stating plainly: the grid
@@ -709,7 +709,7 @@ results:
     next_rung: >-
       C4 is reached by the interval-certified decision, which is independent in method
       and, deciding coverage on the doubled net, never invokes the D4 reflection and so
-      does not need C0 at all. C5 needs a review artifact by someone outside the project.
+      does not need Condition 1 at all. C5 needs a review artifact by someone outside the project.
       The bound itself: 3.81 converged with margin -- objective 10.8603 against eleven,
       rationalised to 434547/40000 = 10.863675 -- so the next rung is a search question
       rather than a limit of the method. Getting there took two attempts at the same
@@ -751,7 +751,7 @@ results:
       never on the sampled depth, which flatters it.
       One thing 3.82 is not: the method's ceiling. A certificate for n cannot exist
       above ceil(sqrt(n)) * B, because a wider container holds ceil(sqrt(n))^2 pairwise
-      disjoint axis-parallel B-squares whose masses C4 forces past n; for n = 11 that is
+      disjoint axis-parallel B-squares whose masses Condition 5 forces past n; for n = 11 that is
       4B = 3.9908, leaving 0.1808 of runway above the retained 381/100. The wall at 3.82
       is a covering wall, met far below where the method stops working.
       If tau*(3.82) is exactly eleven then this is the one configuration where neither
@@ -769,7 +769,7 @@ results:
       carried from it, all three of which had held that value until 2026-09-04. The
       movement past the published value is +0.0842 at each of the three sizes. Two rungs
       are retained below it, 451/100 and 229/50.
-      The three sizes do not need a monotonicity step. Only C1 mentions n among the five
+      The three sizes do not need a monotonicity step. Only Condition 2 mentions n among the five
       conditions, so an atom set of mass 423327/25000 certifies the side for every
       integer above it, which is 17 and upward; monotonicity would give the same thing
       and is not what is used.
@@ -848,12 +848,12 @@ results:
       side is available to a later block with a cheaper decision path.
       The method's own ceiling is not close here. A certificate for n cannot exist above
       ceil(sqrt(n)) * B, a wider container holding ceil(sqrt(n))^2 pairwise disjoint
-      axis-parallel B-squares whose masses C4 forces past n; for n = 17 that is
+      axis-parallel B-squares whose masses Condition 5 forces past n; for n = 17 that is
       5B = 4.9885, so 459/100 still has 0.3985 of runway. Unlike n = 12, where the
       ceiling sits below the conjectured value and forecloses the case, nothing
       structural stops this one.
       Where the next rung is worth spending on, though, is not n = 17. Of the five
-      conditions only C1 mentions n, and the covering program behind the search does not
+      conditions only Condition 2 mentions n, and the covering program behind the search does not
       contain n at all -- minimising total mass subject to every admissible B-square
       carrying mass at least 1 is a question about L, B and the net. So one atom set
       proves s(n) >= L for every integer n above its mass, this certificate's 16.933080
@@ -887,7 +887,7 @@ results:
       T-019. The movement is +0.21 at n = 19, +0.194449 at n = 20 and +0.058343 at
       n = 21, and this is the first lower bound of any kind proved about twenty or
       twenty-one squares in particular rather than read off a formula.
-      The three sizes take no monotonicity step. Only C1 mentions n among the five
+      The three sizes take no monotonicity step. Only Condition 2 mentions n among the five
       conditions, so an atom set of mass 946131/50000 certifies the side for every
       integer strictly above that mass, which is 19 and upward. From n = 22 on the
       register already holds 5, so the certificate is true there and weaker; these three
@@ -926,7 +926,7 @@ results:
     composition: >-
       Primary at all three sizes: one certificate, one accepted verdict, the bound being
       the container side directly. There is no monotonicity or composition step anywhere
-      between the artifact and the claim -- the three sizes come out of C1, which is the
+      between the artifact and the claim -- the three sizes come out of Condition 2, which is the
       only condition that mentions n.
       C4 is earned by two evidence entries whose method values differ, the exact
       event-cell sweep and the interval branch and bound, both run in this repository.

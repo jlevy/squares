@@ -18,20 +18,20 @@ names n, a container side L, a shrunken side B, a direction net of
 half-angle tangents t_k = T k / K (k = 0..K), and weighted atoms (x, y, w).
 Write theta_k = 2 arctan(t_k). If
 
-  C0  the weighted atom set is invariant under the eight symmetries of the
+  Condition 1  the weighted atom set is invariant under the eight symmetries of the
       container [0, L]^2 (the proof uses one of them, the reflection in the
       diagonal, so this is a stronger hypothesis than needed);
-  C1  the total weight is strictly less than n;
-  C2  theta_K >= pi/4, decided as t_K^2 + 2 t_K - 1 >= 0;
-  C3  B (1 + D) < 1, where D = max_k (t_{k+1} - t_k) / (1 + t_k t_{k+1}) is
+  Condition 2  the total weight is strictly less than n;
+  Condition 3  theta_K >= pi/4, decided as t_K^2 + 2 t_K - 1 >= 0;
+  Condition 4  B (1 + D) < 1, where D = max_k (t_{k+1} - t_k) / (1 + t_k t_{k+1}) is
       the largest tangent of HALF a gap between adjacent net angles;
-  C4  every closed square of side B at a net angle theta_k that lies inside
+  Condition 5  every closed square of side B at a net angle theta_k that lies inside
       [0, L]^2 covers atoms of total weight at least 1;
 
 then n unit squares with pairwise disjoint interiors do not fit in [0, L]^2,
 and therefore s(n) >= L.
 
-RUNTIME. C4 is the only expensive condition. Measured on one idle core with
+RUNTIME. Condition 5 is the only expensive condition. Measured on one idle core with
 CPython 3.10 through 3.14: 22 to 27 s for the n = 11 certificate (425 atoms,
 181 directions, 90.5 million cells in all) and 7 to 8 s for the n = 17
 control (168 atoms, 16.6 million cells); up to about twice that on a
@@ -107,7 +107,8 @@ def load(path):
 
 
 # ---------------------------------------------------------------------------
-# Preconditions: the shape the theorem assumes before C0-C4 mean anything.
+# Preconditions: the shape the theorem assumes before Condition 1 to Condition 5
+# mean anything.
 # ---------------------------------------------------------------------------
 
 
@@ -125,7 +126,7 @@ def preconditions(cert):
                    "%d atoms, %d negative" % (len(atoms), len(negative)),
                    not negative and len(atoms) > 0))
     # The net must start at angle 0 and increase, so that every orientation
-    # in [0, pi/4] lies between two adjacent net angles (with C2 closing the
+    # in [0, pi/4] lies between two adjacent net angles (with Condition 3 closing the
     # top). Each atom triple must have exactly three entries.
     increasing = all(a < b for a, b in zip(tangents, tangents[1:]))
     checks.append(("P3 net starts at 0 and is strictly increasing",
@@ -145,7 +146,7 @@ def preconditions(cert):
 
 
 # ---------------------------------------------------------------------------
-# C0 - C3: closed-form conditions.
+# Condition 1 - Condition 4: closed-form conditions.
 # ---------------------------------------------------------------------------
 
 
@@ -155,7 +156,7 @@ def symmetry_images(x, y, L):
     return [(x, y), (fx, y), (x, fy), (fx, fy), (y, x), (fy, x), (y, fx), (fy, fx)]
 
 
-def condition_c0(cert):
+def condition_1(cert):
     L = cert["L"]
     weight = {}
     for x, y, w in cert["atoms"]:
@@ -166,28 +167,28 @@ def condition_c0(cert):
     for site, w in weight.items():
         for image in symmetry_images(site[0], site[1], L):
             if weight.get(image) != w:
-                return ("C0 atoms invariant under the container's symmetries",
+                return ("Condition 1 atoms invariant under the container's symmetries",
                         "site %s has weight %s but its image %s has %s"
                         % (site, w, image, weight.get(image)), False)
-    return ("C0 atoms invariant under the container's symmetries",
+    return ("Condition 1 atoms invariant under the container's symmetries",
             "%d atoms on %d distinct sites, all eight maps preserve the weights"
             % (len(cert["atoms"]), len(weight)), True)
 
 
-def condition_c1(cert):
+def condition_2(cert):
     total = sum((w for _, _, w in cert["atoms"]), Fraction(0))
-    return ("C1 total weight below n",
+    return ("Condition 2 total weight below n",
             "total %s = %.6f against n = %d" % (total, float(total), cert["n"]),
             total < cert["n"])
 
 
-def condition_c2(cert):
+def condition_3(cert):
     # tan(pi/8) = sqrt(2) - 1 is the positive root of t^2 + 2t - 1, and the
     # polynomial is increasing for t >= 0, so t_K >= tan(pi/8) is exactly
     # t_K^2 + 2 t_K - 1 >= 0. No irrational number is ever evaluated.
     last = cert["tangents"][-1]
     slack = last * last + 2 * last - 1
-    return ("C2 net reaches pi/4",
+    return ("Condition 3 net reaches pi/4",
             "t_K = %s, t_K^2 + 2 t_K - 1 = %s" % (last, slack),
             slack >= 0)
 
@@ -198,16 +199,16 @@ def largest_half_gap_tangent(tangents):
     return max((b - a) / (1 + a * b) for a, b in zip(tangents, tangents[1:]))
 
 
-def condition_c3(cert):
+def condition_4(cert):
     D = largest_half_gap_tangent(cert["tangents"])
     product = cert["B"] * (1 + D)
-    return ("C3 containment B(1 + D) < 1",
+    return ("Condition 4 containment B(1 + D) < 1",
             "D = %s, B(1 + D) = %s = %.12f" % (D, product, float(product)),
             product < 1)
 
 
 # ---------------------------------------------------------------------------
-# C4: the least weight any admissible placement covers, at one direction.
+# Condition 5: the least weight any admissible placement covers, at one direction.
 #
 # Fix a net direction with exact cosine c and sine s (c^2 + s^2 = 1). Rotate
 # the plane so the placed square is axis-parallel: u = c x + s y and
@@ -413,7 +414,7 @@ def least_covered_weight(cert, c, s, integer_weights, scale, audit=0, rng=None):
     return Fraction(best, scale), (X, Y), cells
 
 
-def condition_c4(cert, audit=0, verbose=False, log=print):
+def condition_5(cert, audit=0, verbose=False, log=print):
     weights = [w for _, _, w in cert["atoms"]]
     scale = 1
     for w in weights:
@@ -436,7 +437,7 @@ def condition_c4(cert, audit=0, verbose=False, log=print):
               "%d cells over %d directions in %.1f s"
               % (minimum, float(minimum), k, t, X, Y, float(X), float(Y),
                  total_cells, K + 1, time.time() - started))
-    return ("C4 every admissible placement covers weight >= 1", detail, minimum >= 1), worst
+    return ("Condition 5 every admissible placement covers weight >= 1", detail, minimum >= 1), worst
 
 
 def gcd(a, b):
@@ -453,8 +454,9 @@ def gcd(a, b):
 def decide(cert, audit=0, verbose=False, log=print):
     """Run every check, print each with its numbers, and return the outcome.
 
-    Nothing short-circuits: a certificate that fails C1 still has its C4
-    minimum computed and printed, so a refusal names every failing condition.
+    Nothing short-circuits: a certificate that fails Condition 2 still has its
+    Condition 5 minimum computed and printed, so a refusal names every failing
+    condition.
     Returns (accepted, results) where results maps a check's name to
     (detail, holds), plus the least covered weight under the key "minimum"
     and the placement that attains it, (k, t, X, Y), under "witness".
@@ -478,10 +480,10 @@ def decide(cert, audit=0, verbose=False, log=print):
     if not all(holds for _, holds in verdicts):
         log("REFUSED: the file is not a certificate of the expected shape")
         return False, results
-    for check in (condition_c0, condition_c1, condition_c2, condition_c3):
+    for check in (condition_1, condition_2, condition_3, condition_4):
         record(*check(cert))
-    log("  C4: sweeping every net direction")
-    (name, detail, holds), worst = condition_c4(cert, audit, verbose, log)
+    log("  Condition 5: sweeping every net direction")
+    (name, detail, holds), worst = condition_5(cert, audit, verbose, log)
     record(name, detail, holds)
     minimum, k, t, (X, Y) = worst
     results["minimum"] = minimum

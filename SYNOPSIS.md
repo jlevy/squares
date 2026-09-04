@@ -258,6 +258,7 @@ case or experiment separately.
 | [BC-158 — factual review of the H-060 / exp-058 records against their sources](docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — independent verification of T-017 (s(12) ≥ 77/20)](docs/project/reviews/review-2026-09-04-t017-independent-verification.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — Hostile Third-Party Check of the s(11) ≥ 19/5 Package (T-018)](docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) | dated review record | record | retained | — |
+| [Review 2026-09-04 — PR #80, the Stacked Hardening of the s(11) ≥ 381/100 Claim](docs/project/reviews/review-2026-09-04-pr80-stacked-hardening.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Third-Party Check of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
@@ -450,11 +451,12 @@ The same evening, entered directly on the operator’s own direction rather than
 from a queued candidate,
 [Agenda 020](packing/campaign/agendas/agenda-020-efficiency-block-the-exact-sweep.md)
 recorded a separate, complete W5 efficiency-loop block: the exact event-cell sweep that
-decides `C4` at the retention gate now decides in integers on the atom weights’ common
-scale, holding reachable cells as spans and running the 181 directions in parallel —
-`68×` faster at `n = 17` and `139×` at `n = 20` on a loaded box, about `183×` on a quiet
-one, the identical least covered mass every time and the `Fraction` route kept unchanged
-as the reference. No bound, verdict, or certificate moved.
+decides `Condition 5` at the retention gate now decides in integers on the atom weights’
+common scale, holding reachable cells as spans and running the 181 directions in
+parallel — `68×` faster at `n = 17` and `139×` at `n = 20` on a loaded box, about `183×`
+on a quiet one, the identical least covered mass every time and the `Fraction` route
+kept unchanged as the reference.
+No bound, verdict, or certificate moved.
 [Agenda 019](packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md),
 the standing queue, holds the two efficiency-loop entries this retires or re-bases:
 `BC-191`, pricing row generation’s own cost against the container side — `79`–`94%` of
@@ -3665,12 +3667,13 @@ claim about `tau*`.
 **The method also has a ceiling that is structural rather than measured, and it
 forecloses one of the three cases outright.** No certificate for `n` can exist at a
 container side above `ceil(sqrt(n)) * B`: a wider container holds `ceil(sqrt(n))^2`
-pairwise disjoint axis-parallel `B`-squares, direction `0` is always in the net, so `C4`
-gives each of them mass at least `1` and the total passes `n`, which `C1` forbids.
-With `C3` bounding `B` below `1 / (1 + D)`, the ceiling over every shrink a net admits
-is `ceil(sqrt(n)) / (1 + D)`, and refining the net raises it only as fast as `D` falls —
-about `T / K`, so twice the directions for half the gap, and twice the cost of every
-decision taken over them.
+pairwise disjoint axis-parallel `B`-squares, direction `0` is always in the net, so
+`Condition 5` gives each of them mass at least `1` and the total passes `n`, which
+`Condition 2` forbids.
+With `Condition 4` bounding `B` below `1 / (1 + D)`, the ceiling over every shrink a net
+admits is `ceil(sqrt(n)) / (1 + D)`, and refining the net raises it only as fast as `D`
+falls — about `T / K`, so twice the directions for half the gap, and twice the cost of
+every decision taken over them.
 Since the grid packing gives `s(n) <= ceil(sqrt(n))` for free, this ceiling always sits
 strictly below the trivial upper bound: the method can approach the grid value and never
 reach it. For `n = 12` that is decisive rather than academic.

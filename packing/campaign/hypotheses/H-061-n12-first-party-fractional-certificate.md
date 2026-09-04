@@ -97,7 +97,7 @@ hypothesis:
     then produced s(11) >= 19/5 and then 381/100 (T-018), the first movement of the
     smallest open case since 2003. What made the ladder above 77/20 reachable was D-434: the search's
     separation oracle scored fewer placements than the verifier decides, so programs
-    converged below n and were refused by C4 on cells they had never been shown.
+    converged below n and were refused by Condition 5 on cells they had never been shown.
     The rejection route this record registered in advance was not needed and was not
     taken; sqpack.fractional.ceiling implements the object it named, and no ceiling has
     been proved. The corollary this record anticipated -- s(12) > s(11) strictly -- is now

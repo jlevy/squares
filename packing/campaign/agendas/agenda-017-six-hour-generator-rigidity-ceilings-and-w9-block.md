@@ -1295,10 +1295,10 @@ certificate held here.
 Two things it learned were not on the plan.
 No certificate for `n` exists above `⌈√n⌉ · B`, which forecloses `n = 12` against its
 conjectured `4` and says the method approaches the grid value and never reaches it.
-And only `C1` mentions `n`, so one atom set certifies its side for every integer above
-its own mass — which is why one certificate at `24/5` moved three cases, and why the
-reach table now ranks cases the program has never touched above the ones it spent itself
-on.
+And only `Condition 2` mentions `n`, so one atom set certifies its side for every
+integer above its own mass — which is why one certificate at `24/5` moved three cases,
+and why the reach table now ranks cases the program has never touched above the ones it
+spent itself on.
 
 The cost of the block is in the record as 24 receipts, and the largest single cost — the
 exact sweep at the retention gate, `5378 s` at 2260 atoms — was taken down to `29 s` the

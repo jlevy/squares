@@ -183,7 +183,7 @@ agenda:
       that a value below 13 at side 4 would be a machine-checked fractional reproof of
       s(13) = 4. That question is now settled analytically and the fifty minutes are
       free. A certificate cannot exist above ceil(sqrt(n)) * B, since a wider container
-      holds ceil(sqrt(n))^2 pairwise disjoint axis-parallel B-squares whose masses C4
+      holds ceil(sqrt(n))^2 pairwise disjoint axis-parallel B-squares whose masses Condition 5
       forces past n; for n = 13 that ceiling is 4B = 3.9908, below the case's own lower
       bound of 4. So the probe at 399/100 can only report the ceiling it is looking for,
       and the hoped-for second outcome is impossible outright: at side 4 the refuting

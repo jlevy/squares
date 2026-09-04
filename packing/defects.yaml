@@ -13560,7 +13560,7 @@ defects:
   what: >-
     `generate._worst_cells` and `colgen.placement_cells` score an event cell when the
     cell's centre, rotated back, lies in the admissible centre domain. `sweep.reduce_to_cells`,
-    which `certificate.verify` uses to decide C4, scores every cell whose v-range meets the
+    which `certificate.verify` uses to decide Condition 5, scores every cell whose v-range meets the
     domain's v-extent within the u-slab. The second set strictly contains the first.
     Measured on the retained 113-atom certificate at L = 77/20: identical at directions 0
     and 1, and 432, 452 and 456 extra cells at directions 45, 90 and 180 -- 1.1 to 1.2 per
@@ -13568,7 +13568,7 @@ defects:
     instance at L = 11/5 where the oracle reports 2.125 and the sweep 2.
   consequence: >-
     The linear program converges with every placement it can see at mass 1 and is then
-    refused by C4 on a placement it was never shown. Both n = 12 pushes to side 39/10 died
+    refused by Condition 5 on a placement it was never shown. Both n = 12 pushes to side 39/10 died
     this way with margin in hand: 11.921565 refused at least cell mass 3395/3456, and
     11.869187 refused at 3083/3125 after column generation. The direction matters and is
     the reason this is filed conservative rather than flattering: the oracle never invents
@@ -13578,7 +13578,7 @@ defects:
   fix: >-
     Fixed on 2026-09-04, in the oracle, after the prior question this entry raised was
     settled the other way: the verifier is right. `sweep.reduce_to_cells` scores exactly
-    the event cells whose open interior meets the closed centre domain, which is what C4
+    the event cells whose open interior meets the closed centre domain, which is what Condition 5
     must quantify over -- coverage by closed squares is upper semicontinuous, so the open
     and closed domains share an infimum and that infimum is attained on an open cell
     meeting the domain, and the per-slab v-extent is exact by convexity. Checked in exact
@@ -13615,11 +13615,11 @@ defects:
     any test
   severity: high
   what: >-
-    `interval.verify_by_intervals` decided C4 from the branch-and-bound status alone:
+    `interval.verify_by_intervals` decided Condition 5 from the branch-and-bound status alone:
     `holds` when every direction came back `certified`. But `certified` means only that
     the search resolved every box against the threshold it was run with, and the two
     modes run different thresholds. Without `enclose` the threshold is mass 1, so
-    `certified` does mean C4. With `enclose` the threshold is the best point value seen
+    `certified` does mean Condition 5. With `enclose` the threshold is the best point value seen
     so far, which the search keeps lowering, so `certified` means the minimum was pinned
     exactly and says nothing about whether the pinned value reaches 1.
   consequence: >-
@@ -13644,7 +13644,7 @@ defects:
     `tests/test_fractional_interval.py::test_an_enclosed_run_refuses_a_minimum_it_pinned_below_one`
     runs the lightened certificate under `enclose` and asserts the direction still comes
     back `certified`, the enclosure is still the true 99993/100000, and the verdict
-    refuses on C4 -- so it pins the distinction rather than the outcome. The lightened
+    refuses on Condition 5 -- so it pins the distinction rather than the outcome. The lightened
     fixture both refusal tests share is now one helper.
   status: fixed
   recorded_in: packing/src/sqpack/fractional/interval.py
@@ -13669,7 +13669,7 @@ defects:
     one. Second, the README promised a labelled refusal for any file not of the expected
     form, but a float where an exact rational was required, a zero direction_steps, or an
     atom row with fewer than three entries raised ValueError, ZeroDivisionError or
-    IndexError instead. Third, "nothing short-circuits" was true of C0 to C4 but not of
+    IndexError instead. Third, "nothing short-circuits" was true of Condition 1 to Condition 5 but not of
     the preconditions, which return before them.
   consequence: >-
     None of it can change a verdict, and the review that found them says so: exit status
@@ -13690,7 +13690,7 @@ defects:
     refusal. The short-circuit sentence now distinguishes the conditions from the
     preconditions. Four cosmetic findings in the same review were left as they are and are
     recorded in it: a claim string that must be in lowest terms, a zero-weight asymmetric
-    atom refused by C0, a degenerate direction that raises where it would be vacuous, and
+    atom refused by Condition 1, a degenerate direction that raises where it would be vacuous, and
     disagreeing timing prose, which was aligned.
   regression: >-
     The four malformed files the review named -- a decimal outer_side, direction_steps
@@ -13780,8 +13780,8 @@ defects:
     One of those fast counterparts was wrong on the first attempt and the way it was wrong
     is worth keeping: deciding the calibration rung on a coarse net by slicing the
     half-tangents asserted the whole verdict, which fails, because a net that coarse fails
-    C3 by construction -- D grows with the gap and B(1 + D) then exceeds 1. The rung test
-    beside it had solved this already by asserting C4's value rather than the verdict.
+    Condition 4 by construction -- D grows with the gap and B(1 + D) then exceeds 1. The rung test
+    beside it had solved this already by asserting Condition 5's value rather than the verdict.
     Coverage is the claim a coarse decision can carry; containment is not.
   regression: >-
     The fractional tier runs 85 tests in 176 s with 9 deselected, and the whole

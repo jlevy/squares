@@ -129,9 +129,9 @@ free.
 certificate of this shape can exist above `⌈√n⌉ / (1 + D)`, where `D` is the largest
 half-gap tangent the direction net admits.
 The argument is four cheap steps: over that side, a lattice of `⌈√n⌉²` pairwise-disjoint
-axis-parallel `B`-squares fits inside the container with room to spare; condition `C4`
+axis-parallel `B`-squares fits inside the container with room to spare; `Condition 5`
 forces each of them to carry mass at least 1 (direction `0` is always in the net); the
-total is then at least `⌈√n⌉² ≥ n`; and condition `C1` forbids a total mass that large.
+total is then at least `⌈√n⌉² ≥ n`; and `Condition 2` forbids a total mass that large.
 `s(n) ≤ ⌈√n⌉` holds trivially by grid packing, and this ceiling sits *strictly below*
 `⌈√n⌉` — so the method can approach the grid bound and never reach it, and can never
 close a case whose true value equals the grid bound.
@@ -139,11 +139,12 @@ close a case whose true value equals the grid bound.
 conjectured and grid-verified `4`, so no certificate of this shape will ever prove
 `s(12) = 4`, however fine the net or the site set.
 
-**(b) Independence of `n`.** Of the five conditions (`C0` through `C4`), only `C1` — the
-total mass falls strictly below `n` — mentions `n` at all; `C0`, `C2`, `C3` and `C4` say
-nothing about it, and the covering linear program the search actually solves (minimise
-total mass subject to every admissible `B`-square carrying mass at least 1) does not
-contain `n` either. It is a question about `L`, `B`, and the net alone.
+**(b) Independence of `n`.** Of the five conditions (`Condition 1` through
+`Condition 5`), only `Condition 2` — the total mass falls strictly below `n` — mentions
+`n` at all; `Condition 1`, `Condition 3`, `Condition 4` and `Condition 5` say nothing
+about it, and the covering linear program the search actually solves (minimise total
+mass subject to every admissible `B`-square carrying mass at least 1) does not contain
+`n` either. It is a question about `L`, `B`, and the net alone.
 So one atom set proves `s(n) ≥ L` for every integer `n` above its own mass, not only the
 one its record happens to name, and a larger `n` is strictly easier to certify at the
 same side. This is the exact mechanism behind `n = 20` and `n = 21`’s free ride above,
@@ -311,10 +312,10 @@ Neither is optional, and both already gate `BC-194` by name in agenda-019.
 
 **1. Adopt `BC-190` — argued on the numbers, not restated.** The interval route decides
 *more* (`361` doubled-net directions against the exact sweep’s `181`) with *fewer*
-hypotheses (it never needs `C0`, since deciding on the doubled net never invokes the
-`D4` reflection), and it is already `22.7×`–`44.2×` faster on the two atom counts paired
-so far — a gap that *widens* as certificates grow (`atoms^2.00` against `atoms^0.92`),
-which is exactly the direction the top-prize cases push the search.
+hypotheses (it never needs `Condition 1`, since deciding on the doubled net never
+invokes the `D4` reflection), and it is already `22.7×`–`44.2×` faster on the two atom
+counts paired so far — a gap that *widens* as certificates grow (`atoms^2.00` against
+`atoms^0.92`), which is exactly the direction the top-prize cases push the search.
 The correctness argument is untouched: nothing is retained unless both routes agree on
 the value, so the change moves what pays the quadratic tax on every rejected trial, not
 what is finally trusted.
