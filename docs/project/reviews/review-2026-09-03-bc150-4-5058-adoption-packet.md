@@ -2,19 +2,21 @@
 
 ## Provenance and installation
 
-This document is the adoption packet of BC-150, which audited the retained Massaccesi certificate against the repository's present evidence contract and recommended adoption at source-backed scope, written on 2026-09-03 in the agenda-016 ten-hour
-run. Its author wrote only to `scratchpad/bc150/` -- a container-local directory
-outside the repository, which does not survive the session -- and modified no
-repository file beyond the frontier patch its own verdict authorised. It is installed
-here so that the evidence the records cite outlives that directory.
+This document is the adoption packet of BC-150, which audited the retained Massaccesi
+certificate against the repository’s present evidence contract and recommended adoption
+at source-backed scope, written on 2026-09-03 in the agenda-016 ten-hour run.
+Its author wrote only to `scratchpad/bc150/` -- a container-local directory outside the
+repository, which does not survive the session -- and modified no repository file beyond
+the frontier patch its own verdict authorised.
+It is installed here so that the evidence the records cite outlives that directory.
 
 The source was `836` lines with SHA-256
-`d88d47b3d0add7822f106c4d0d80af83a7bd99a8ff12f18498589d5fb57b8413`, and that hash names the
-scratchpad source rather than this file. The installation added this preface; it
-altered no classification, verdict, finding, number, citation, recommendation or claim
-boundary, and none may be altered here. References of the form `scratchpad/...` in the
-body below are the author's own record of what was read and where it was written at the
-time, and are left as written.
+`d88d47b3d0add7822f106c4d0d80af83a7bd99a8ff12f18498589d5fb57b8413`, and that hash names
+the scratchpad source rather than this file.
+The installation added this preface; it altered no classification, verdict, finding,
+number, citation, recommendation or claim boundary, and none may be altered here.
+References of the form `scratchpad/...` in the body below are the author’s own record of
+what was read and where it was written at the time, and are left as written.
 
 * * *
 

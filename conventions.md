@@ -201,13 +201,13 @@ Its procedure is the
 [review/planning/oversight runbook](packing/campaign/review-planning-oversight.md).
 
 **A registered result is presented, not just recorded.** [checked] Every result whose
-significance was scored inside an agenda's wall appears, with its `V`/`C`/`S` rungs and
-the rubric's own words for that score, in two places a reader meets first: the synopsis
+significance was scored inside an agenda’s wall appears, with its `V`/`C`/`S` rungs and
+the rubric’s own words for that score, in two places a reader meets first: the synopsis
 headline block and the pull request, above the commitment-keyed dispositions.
 The clause exists because Agenda 016 did the assessment and skipped the presentation --
-`T-014`, `T-015` and `T-016` were registered, reviewed and scored `S3`, and the published
-synopsis then mentioned no score until 400 lines in while the pull request carried none
-at all for two of the three.
+`T-014`, `T-015` and `T-016` were registered, reviewed and scored `S3`, and the
+published synopsis then mentioned no score until 400 lines in while the pull request
+carried none at all for two of the three.
 Both surfaces are generated from `results.yaml` through `devtools/significance.py`, so
 the obligation is discharged by rendering rather than by remembering, and
 `devtools.render_results_headline --check` fails when it is not.

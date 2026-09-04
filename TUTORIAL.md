@@ -379,11 +379,10 @@ phenomenon has been pinned down at a size that is not obviously degenerate.
 At `n = 5`, two retained poses with different coordinate keys turn out—after one
 symmetry action and relabelling—to share a single exact optimal face of one fixed-angle
 cell, and that face sits inside an exact two-parameter sheet of optima at a container
-side above `s(5)`.
-The first-order analysis there admits one direction leaving the sheet, and a
-second-order argument then excludes that direction from the true tangent cone.
-The remaining directions are unclassified, so this is not a connectivity proof; it is
-the strongest exact statement the project has about how sampled endpoints at one open
+side above `s(5)`. The first-order analysis there admits one direction leaving the
+sheet, and a second-order argument then excludes that direction from the true tangent
+cone. The remaining directions are unclassified, so this is not a connectivity proof; it
+is the strongest exact statement the project has about how sampled endpoints at one open
 size actually relate.
 
 The project’s term for this is a **terminal family**, and its definition is deliberately
