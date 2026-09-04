@@ -21,6 +21,7 @@ from cases.n17_weighted_certificate.fixture import load_retained_fixture
 from sqpack.fractional.certificate import Certificate, verify
 from sqpack.fractional.generate import build_site_grid, rationalise
 from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
+from sqpack.fractional.sweep import reduce_to_cells
 
 MASSACCESI_LIMIT = Fraction(207107, 500000)
 
@@ -243,3 +244,52 @@ def test_rationalise_rounds_weights_up_never_down() -> None:
     assert Fraction(1, 576) in by_orbit
     assert Fraction(1001, 576) in by_orbit
     assert all(w * 576 >= 1 for w in by_orbit)
+
+
+def test_the_sweep_scores_every_cell_it_scored_before() -> None:
+    """A guard against the verifier being "repaired" by narrowing its cell set.
+
+    C4 is only as strong as the set of placements it quantifies over, and a
+    change that drops cells makes every certificate easier to accept while
+    every retained certificate still passes -- so the retained ones cannot
+    catch it. These counts are the exact cell sets the accepted n = 12
+    certificate was decided on. If a change lowers one, the verifier is
+    deciding fewer placements than it used to, and the results registered
+    against it no longer mean what they said.
+    """
+    certificate = load()
+    expected = {0: 1225, 1: 36481, 45: 38733, 90: 37733, 180: 36837}
+    for index, count in expected.items():
+        direction = rotation_from_half_tangent(str(index), certificate.half_tangents[index])
+        reduction = reduce_to_cells(
+            certificate.atoms,
+            direction,
+            certificate.outer_side,
+            certificate.square_side,
+        )
+        assert len(reduction.cells) == count, (
+            f"direction {index}: {len(reduction.cells)} cells, was {count}"
+        )
+
+
+def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> None:
+    """The must-refuse fixture: same atoms, a container too large for them.
+
+    The independent reviewer measured least covered mass 1/10 here. A verifier
+    that accepted this would be accepting a certificate whose squares can be
+    placed where no atom reaches, which is the failure a narrowed cell set
+    produces.
+    """
+    certificate = load()
+    too_large = Certificate(
+        n=certificate.n,
+        outer_side=Fraction(4),
+        square_side=certificate.square_side,
+        atoms=certificate.atoms,
+        half_tangents=certificate.half_tangents[:8],
+    )
+    verdict = verify(too_large)
+    assert not verdict.accepted
+    assert "C4 every reachable cell carries mass 1" in verdict.failures
+    assert verdict.minimum_cell_mass is not None
+    assert verdict.minimum_cell_mass < 1
