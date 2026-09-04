@@ -99,9 +99,11 @@ Results first established here, as far as the recorded source searches show:
   which is why this is scored `S4` as a bound family rather than a case result.
   At `99/25 = 3.96` it also separates the cases: `s(12) > s(11)`, since Trump’s 1979
   packing puts `s(11) ≤ 3.877084`. That did not follow from anything on record before.
-  The case is now `0.04` from its conjectured optimum of `4`, and that gap is where this
-  method stops: no certificate for twelve squares can exist above `3.990816`, which is
-  proved here and is below the conjectured value.
+  The case is now `0.04` from its conjectured optimum of `4`, and no single certificate
+  of this shape can close it: none for twelve squares can exist above `3.990816`, which
+  is proved here and is below the conjectured value.
+  A family of certificates approaching `4` is not ruled out; whether one exists is a
+  question about the covering value.
 - **T-010: `s(11) ≥ 2 + 4/√5`, repaired (`S4`).** The printed 2003 Figure 14
   unavoidability claim has a strict counterexample, so the literature’s standing `s(11)`
   bound rested on a broken step — the

@@ -133,6 +133,18 @@ _BOUND_LE = re.compile(rf"s\((\d+)\)\s*{_OP_LE}\s*(?:s\(\d+\)\s*{_OP_LE}\s*)*{_F
 
 #: "the best proved lower bound is `9.544004`" -- the bare-decimal shape, always about this
 #: file's own `n` since nothing else is named.
+#: `` `s(11)` is pinned to `[3.81, 3.877084]` ``: an interval on this file's own `n`,
+#: read as a lower and an upper bound. The n = 11 body wrote its bound this way and
+#: stayed on the 19/5 rung for eleven hours after the front matter moved (D-445).
+_PINNED_INTERVAL = re.compile(
+    r"`?s\((\d+)\)`?\s+is pinned to\s+`?\[\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\]"
+)
+
+#: `` a gap of `0.067084` `` in the same sentence as a pinned interval: the difference of
+#: the file's own verified bounds, at the precision written. The 19/5-era n = 11 body
+#: passed the interval check at one decimal (3.8 is 3.81 truncated) and failed only here.
+_GAP_OF = re.compile(r"a gap of\s+`?(\d+\.\d+)`?")
+
 _BEST_PROVED = re.compile(r"best proved (lower|upper) bound\s+is\s+`(-?\d+(?:\.\d+)?)`")
 
 #: "Nagamochi's general `4.316625`" or "Nagamochi's general `1 + √12 ≈ 4.464102`" -- this
@@ -263,6 +275,15 @@ def bound_claims(body: str, n: int) -> list[BoundClaim]:
                     continue
                 figure = match.group(4)
                 claims.append(BoundClaim(kind, figure, start + match.start(4), sentence))
+        for match in _PINNED_INTERVAL.finditer(sentence):
+            if int(match.group(1)) != n:
+                continue
+            claims.append(BoundClaim("lower", match.group(2), start + match.start(2), sentence))
+            claims.append(BoundClaim("upper", match.group(3), start + match.start(3), sentence))
+            claims.extend(
+                BoundClaim("gap", gap.group(1), start + gap.start(1), sentence)
+                for gap in _GAP_OF.finditer(sentence)
+            )
         claims.extend(
             BoundClaim(match.group(1), match.group(2), start + match.start(2), sentence)
             for match in _BEST_PROVED.finditer(sentence)
@@ -294,12 +315,30 @@ def _is_historical_mention(sentence: str) -> bool:
     return _HISTORICAL_MARKER.search(sentence) is not None
 
 
+def _check_gap_claim(claim: BoundClaim, front_matter: CaseFrontMatter) -> str | None:
+    """A quoted gap is the difference of the file's own verified bounds, as written."""
+    digits = _digits_of(claim.figure)
+    lower = front_matter.verified_lower.decimal_at(digits + 6)
+    upper = front_matter.verified_upper.decimal_at(digits + 6)
+    if lower is None or upper is None:
+        return None
+    with localcontext() as context:
+        context.prec = _DECIMAL_PRECISION
+        stated = Decimal(claim.figure)
+        gap = (upper - lower).quantize(Decimal(1).scaleb(-digits), rounding=ROUND_HALF_UP)
+    if stated == gap:
+        return None
+    return f"prose says the gap is {claim.figure}, but the verified bounds are {gap} apart"
+
+
 def check_bound_claim(claim: BoundClaim, front_matter: CaseFrontMatter) -> str | None:
     """`None` if `claim` agrees with the front matter (directly, via the reported bound, or
     via the historical-mention exemption); otherwise a description of the disagreement.
     """
     digits = _digits_of(claim.figure)
     stated = Decimal(claim.figure)
+    if claim.kind == "gap":
+        return _check_gap_claim(claim, front_matter)
     lower = claim.kind == "lower"
     verified = front_matter.verified_lower if lower else front_matter.verified_upper
     reported = front_matter.reported_lower if lower else front_matter.reported_upper

@@ -672,6 +672,14 @@ def verify_by_intervals(
     reaches_one = all(o.lower is not None and o.lower >= atoms.scale for o in outcomes)
     if "refuted" in statuses:
         status: Status = "fails"
+    elif directions is not None:
+        # A restricted run decides the directions it was given and nothing
+        # about the rest of the net. It can refute -- one bad direction is
+        # enough -- but it cannot hold: an all-certified sample used to come
+        # back ``accepted`` after searching one direction of 361 (PR 78's
+        # adversarial review, F6). Only the full doubled net establishes
+        # Condition 5.
+        status = "undecided"
     elif statuses == {"certified"}:
         status = "holds" if reaches_one else "fails"
     else:

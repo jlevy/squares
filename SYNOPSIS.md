@@ -3151,24 +3151,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 444 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 448 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 92 | asserted something false about the mathematics |
+| soundness | 93 | asserted something false about the mathematics |
 | validity | 116 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 163 | recorded something its own evidence contradicts |
+| bookkeeping | 166 | recorded something its own evidence contradicts |
 | robustness | 57 | did not finish, or finished only by luck |
 | performance | 16 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Seventy-three of the ninety-two soundness defects pointed in the *flattering*
+**Seventy-three of the ninety-three soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-five defects in 444, and no soundness defect
+**The automated gate has caught sixty-five defects in 448, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3675,11 +3675,13 @@ admits is `ceil(sqrt(n)) / (1 + D)`, and refining the net raises it only as fast
 falls — about `T / K`, so twice the directions for half the gap, and twice the cost of
 every decision taken over them.
 Since the grid packing gives `s(n) <= ceil(sqrt(n))` for free, this ceiling always sits
-strictly below the trivial upper bound: the method can approach the grid value and never
-reach it. For `n = 12` that is decisive rather than academic.
-The ceiling is `4B = 3.9908`, the conjectured value is `4`, and so no certificate of
-this shape will ever settle twelve squares, however fine the net or the site set —
-`99/25` has `0.0308` of runway and that is all there is.
+strictly below the trivial upper bound: no single certificate of this shape certifies
+the grid value. For `n = 12` that bites: the ceiling is `4B = 3.9908`, the conjectured
+value is `4`, and `99/25` has `0.0308` of runway to the ceiling and that is all there is
+for one certificate.
+What the ceiling does not exclude is a proved family of certificates with sides tending
+to `4` and a limit argument on top of it; whether such a family exists is a question
+about the covering value, which nothing here settles.
 `n = 11` and `n = 17` are not foreclosed: their runways are `0.1808` and `0.3985`, and
 both truths sit below their grid bounds.
 At `n = 19`, `20` and `21` the ceiling is `5B = 4.9885`, so `T-020` has `0.1885` above
