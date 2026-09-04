@@ -47,41 +47,78 @@ def test_the_check_passes_on_the_retained_tree() -> None:
     assert main() == 0
 
 
+def test_the_reach_table_distinguishes_reports_from_retained_measurements() -> None:
+    reach = RESULTS.parent / "CERTIFICATE-REACH.md"
+    text = reach.read_text(encoding="utf-8")
+    expected_rows = (
+        "| 3.82 | 11.0000 | result narrative; no raw run |",
+        "| 3.95 | 11.9706 | frozen 969-atom certificate; feasible mass, not a proved optimum |",
+        "| 3.96 | 11.9936 | no raw run |",
+        "| 4.58 | 16.9628 | no raw run; frozen candidate mass 16.965735 |",
+        "| 4.59 | 16.9303 | no raw run; frozen candidate mass 16.933080 |",
+        "| 4.68 | 18.0000 | three site sets reported; no raw run |",
+    )
+    assert all(row in text for row in expected_rows)
+    assert "Only the displayed 3.95 value is recomputable from a tracked artifact" in text
+    assert "the artifact proves a feasible mass rather than optimality" in text
+
+
+def test_t019_case_pages_bind_the_current_direct_certificate() -> None:
+    expected_evidence = {
+        "E-n017-fractional-certificate",
+        "E-fractional-interval-decision",
+    }
+    frontier = RESULTS.parent
+    for n in (17, 18, 19):
+        text = (frontier / f"n-{n:03d}.md").read_text(encoding="utf-8")
+        _, frontmatter, body = text.split("---", 2)
+        packing = safe_load(frontmatter)["packing"]
+        bound = packing["verified_lower_bound"]
+        assert str(bound["exact_form"]) == "459/100"
+        assert set(bound["evidence"]) == expected_evidence
+        assert "459/100 = 4.59" in body
+        if n > 17:
+            assert "direct" in body
+
+
 def test_t019_control_has_no_disagreement() -> None:
     """The premise every perturbation below edits away from: today's record agrees."""
     problems, checked = check_result(_result("T-019"))
     assert problems == []
-    assert checked == 2  # certificate.json (229/50) and certificate-451-100.json
+    assert checked == 3  # certificate.json (459/100) and the 229/50 and 451/100 rungs
 
 
 def test_catches_d439_first_instance_the_movement_past_a_displaced_value() -> None:
     """D-439's first instance: the rationale gave the movement past Massaccesi as
     `0.0042` -- that is `451/100 - 22529/5000`, the *first* rung's own movement -- where
-    the retained rung (`229/50`) moves by `0.0742`, as the claim correctly states.
+    the rung retained at the time (`229/50`) moved by `0.0742`. The live record now
+    retains `459/100`, whose movement is `0.0842`, and states that; the reconstruction
+    below perturbs whatever the record currently claims.
     """
     corrupted = copy.deepcopy(_result("T-019"))
     rationale = corrupted["significance"]["rationale"]
-    assert "0.0742" in rationale, "premise: the live rationale states the retained movement"
-    corrupted["significance"]["rationale"] = rationale.replace("0.0742", "0.0042")
+    assert "0.0842" in rationale, "premise: the live rationale states the retained movement"
+    corrupted["significance"]["rationale"] = rationale.replace("0.0842", "0.0042")
 
     problems, _ = check_result(corrupted)
     assert len(problems) == 1
     assert "T-019 [significance.rationale]" in problems[0]
     assert "0.0042" in problems[0]
-    assert "0.0742" in problems[0]
+    assert "0.0842" in problems[0]
 
 
 def test_catches_d439_second_instance_a_superseded_rungs_total_and_margin() -> None:
     """D-439's second instance: next_rung quoted the *first* rung's (`451/100`) total and
     margin -- `16.5936` and `0.406` -- as though they belonged to the retained
-    certificate, whose actual total is `3393147/200000 = 16.965735` with margin
-    `0.034265`, an order of magnitude smaller.
+    certificate. The retained certificate is now `459/100`, total
+    `423327/25000 = 16.933080` with margin `0.066920`; the reconstruction plants the
+    superseded rung's figures over whatever the record currently states.
     """
     corrupted = copy.deepcopy(_result("T-019"))
     next_rung = corrupted["next_rung"]
     original = (
-        "the retained certificate's total is 3393147/200000 = 16.965735, "
-        "leaving 0.034265 below seventeen"
+        "the retained certificate's total is 423327/25000 = 16.933080, "
+        "leaving 0.066920 below seventeen"
     )
     assert original in next_rung, "premise: the live next_rung states the retained figures"
     corrupted["next_rung"] = next_rung.replace(
@@ -94,9 +131,23 @@ def test_catches_d439_second_instance_a_superseded_rungs_total_and_margin() -> N
     joined = " | ".join(problems)
     assert "T-019 [next_rung]" in joined
     assert "total 16.5936" in joined
-    assert "16.9657" in joined
+    assert "16.9331" in joined
     assert "margin 0.406" in joined
-    assert "0.034 (exact" in joined  # 0.034265 rounded to the three places "0.406" states
+    assert "0.067 (exact" in joined  # 0.066920 rounded to the three places "0.406" states
+
+
+def test_catches_a_bare_possessive_mass_after_the_top_rung_moves() -> None:
+    corrupted = copy.deepcopy(_result("T-019"))
+    current = "this certificate's 16.933080 reaching 17, 18 and 19 directly"
+    assert current in corrupted["next_rung"]
+    corrupted["next_rung"] = corrupted["next_rung"].replace(
+        current,
+        "this certificate's 16.965735 reaching 17, 18 and 19 directly",
+    )
+    problems, _ = check_result(corrupted)
+    assert len(problems) == 1
+    assert "prose says total 16.965735" in problems[0]
+    assert "gives 16.933080" in problems[0]
 
 
 def test_ignores_a_cross_referenced_rung_that_is_not_this_results_own() -> None:
@@ -114,10 +165,10 @@ def test_ignores_a_cross_referenced_rung_that_is_not_this_results_own() -> None:
 
 
 def test_resolves_an_explicitly_named_secondary_rung() -> None:
-    """A figure attached to `451/100` -- one of T-019's own two artifacts, not the
+    """A figure attached to `451/100` -- one of T-019's own three artifacts, not the
     retained one -- is checked against that certificate specifically."""
     t019 = _result("T-019")
-    original = "The 451/100 rung below this one has total 16.593620 and margin 0.406380"
+    original = "The 451/100 rung two below this one has total 16.593620 and margin 0.406380"
     assert original in t019["next_rung"]
     modified = copy.deepcopy(t019)
     modified["next_rung"] = modified["next_rung"].replace(
@@ -242,7 +293,7 @@ def test_resolve_certificates_reads_real_repository_relative_artifacts() -> None
     assert retained is not None
     assert retained.path == "packing/cases/n17_fractional_certificate/certificate.json"
     assert Fraction(451, 100) in sides
-    assert len(resolved) == 2
+    assert len(resolved) == 3
 
 
 def test_repo_wide_fraction_equals_decimal_catches_wrong_arithmetic() -> None:

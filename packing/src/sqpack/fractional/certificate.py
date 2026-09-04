@@ -124,9 +124,10 @@ class Certificate:
         any packing in a smaller container embeds in this one. Compactness also
         gives the stronger strict inequality, but the bound does not need it.
 
-        Checked against the retained n = 17 certificate: ``L = 22529/5000`` is
-        exactly Massaccesi's published 4.5058, while ``L / B`` would claim
-        4.51799 and overstate a published result.
+        Checked against the historical Massaccesi source-control fixture:
+        ``L = 22529/5000`` is exactly his published 4.5058, while ``L / B``
+        would claim 4.51799 and overstate that result. The retained n = 17 top
+        rung is now a separate first-party certificate at ``L = 459/100``.
         """
         return self.outer_side
 

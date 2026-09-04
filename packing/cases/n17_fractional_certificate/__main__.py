@@ -1,4 +1,4 @@
-"""Replay both retained n = 17 certificates and report every condition.
+"""Replay the retained top n = 17 certificate and report every condition.
 
 Exits non-zero if any condition fails, so the replay is a gate and not a
 report. Run as ``python -m cases.n17_fractional_certificate``.

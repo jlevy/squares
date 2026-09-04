@@ -826,9 +826,9 @@ def generate_adaptive(
     support_cap: int = 32,
     settle: float = 0.0,
     log_path: Path | None = None,
-    decide: bool = True,
+    decide: bool = False,
 ) -> tuple[Certificate | None, AdaptiveLog]:
-    """Row- and column-generate, then decide the result exactly.
+    """Row- and column-generate, then optionally decide the result exactly.
 
     The loop alternates: rows until every placement is covered, then the dual,
     then the one site orbit whose reduced cost is most negative. Sites only
@@ -838,11 +838,11 @@ def generate_adaptive(
     has settled and a further column buys hundredths -- or at the round cap,
     which is a budget and not a convergence criterion.
 
-    ``decide`` runs the exact verifier on the rationalised candidate, which is
-    what turns a search result into a bound. It is separable only because the
-    sweep is quadratic in the atom count and a caller with a large candidate
-    may want to schedule that itself; the candidate proves nothing until it
-    has been run.
+    The default returns the rationalised candidate before an expensive decision so a
+    caller can freeze it to disk first. Retained work must then pass those frozen bytes
+    to ``devtools.decide_certificate``. Setting ``decide`` runs only the in-memory exact
+    verifier; that is convenient for small exploratory calls, but it neither freezes nor
+    retains a certificate and must not be used as the retention boundary.
     """
 
     half_tangents = net_half_tangents(angle_limit, direction_steps)

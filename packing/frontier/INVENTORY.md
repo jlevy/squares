@@ -61,8 +61,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-bentz13-figure2-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-green17-sixteen-point-lower` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-green17-interval-audit` | 0 | lower-bound | verified | strict inequalities only | here | - | *not assessed* |
-| `E-n017-massaccesi-source-replay` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
-| `E-n017-massaccesi-h052-agreement` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-n017-massaccesi-source-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
+| `E-n017-massaccesi-h052-agreement` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n012-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n012-independent-verifier` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n011-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |

@@ -4,13 +4,15 @@
 `D-439`: three durable-record statements described "the top rung" and were left behind
 when the ladder advanced past them. Two were in `T-019`: the significance rationale gave
 the movement past Massaccesi as `0.0042`, the value of the *first* rung this result
-reached (`451/100`) rather than the retained one (`229/50`), whose movement is `0.0742`;
+reached (`451/100`) rather than the then-retained one (`229/50`), whose movement was
+`0.0742`;
 and `next_rung` quoted `451/100`'s own total and margin -- `16.5936` and `0.406` -- as
-though they belonged to the retained certificate, whose actual total is
-`3393147/200000 = 16.965735` with margin `0.034265`, an order of magnitude smaller. Every
-figure in both sentences was exact and real; each was simply about the wrong file. No
-existing check re-derives a result's quoted figures from the artifact it names, so nothing
-caught either until a line-by-line read did, six hours after the ladder moved
+though they belonged to that retained certificate, whose actual total was
+`3393147/200000 = 16.965735` with margin `0.034265`, an order of magnitude smaller. The
+current top rung is `459/100`, total `423327/25000 = 16.933080`. Every figure in the
+original two sentences was exact and real; each was simply about the wrong file. No
+existing check re-derived a result's quoted figures from the artifact it named, so
+nothing caught either until a line-by-line read did, six hours after the ladder moved
 (`docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md` ran twenty-one
 attacks and missed its instance, because the sentence was true when it read it).
 
@@ -25,7 +27,7 @@ cross-checked here too, not assumed), and checks two things against the recomput
    there is no reading of `a/b = d.ddd` where the two sides may differ.
 2. **Quoted artifact figures.** Where a result's prose states a total mass, atom count, or
    margin that is anchored to one of *that result's own* named artifacts -- either
-   explicitly, by an adjoining rung side (`229/50`, `451/100`, ...), or implicitly, by
+   explicitly, by an adjoining rung side (`459/100`, `229/50`, ...), or implicitly, by
    naming no rung at all, which this repository's prose uses to mean the retained
    (`certificate.json`) rung -- the figure must match what that artifact's own atoms give.
    A rung mentioned in passing that is not one of the result's own artifacts (T-019's own
@@ -272,7 +274,7 @@ class QuotedFigure:
     """Character span of the whole match, so the side-token scan can exclude it."""
 
 
-# Six deliberately narrow, keyword-anchored patterns rather than one generic
+# Seven deliberately narrow, keyword-anchored patterns rather than one generic
 # number-near-a-fraction rule: a bare decimal near a rung reference is often something
 # else entirely (T-019's own next_rung sits a "the movement is +0.0742" a few words from
 # "451/100" with no relation between them), so the keyword requirement is what keeps this
@@ -289,6 +291,9 @@ _RUNG_HAS_TOTAL_AND_MARGIN = re.compile(
     r"\b(\d+)/(\d+)\s+rung\b.{0,60}?\bhas\s+total\s+(\d+\.\d+)\s+and\s+margin\s+(\d+\.\d+)",
     re.DOTALL,
 )
+_CERTIFICATE_REACH_MASS = re.compile(
+    r"\b(?:this|the|retained)\s+certificate(?:'s|\u2019s)\s+(\d+\.\d+)\s+reaching\b"
+)
 
 
 def _rung_pair(sentence: str) -> list[QuotedFigure]:
@@ -302,7 +307,7 @@ def _rung_pair(sentence: str) -> list[QuotedFigure]:
 
 
 def quoted_figures(sentence: str) -> list[QuotedFigure]:
-    """Every figure one of the six anchored patterns recognises in `sentence`."""
+    """Every figure one of the seven anchored patterns recognises in `sentence`."""
     return (
         [
             QuotedFigure("total", match.group(1), None, match.span())
@@ -338,6 +343,10 @@ def quoted_figures(sentence: str) -> list[QuotedFigure]:
             )
             for match in _MARGIN_BELOW_AT_SIDE_IS.finditer(sentence)
         ]
+        + [
+            QuotedFigure("total", match.group(1), None, match.span())
+            for match in _CERTIFICATE_REACH_MASS.finditer(sentence)
+        ]
         + _rung_pair(sentence)
     )
 
@@ -356,7 +365,7 @@ def resolve_target(
     neither belongs to T-019's own artifacts, so a figure sitting near them must be left
     unchecked rather than compared to the wrong certificate. Only a sentence naming no
     rung at all defaults to the retained one, matching how this repository's own prose
-    reads "the retained certificate's total" or "leaving 0.034265 below seventeen" with no
+    reads "the retained certificate's total" or "leaving 0.066920 below seventeen" with no
     side mentioned anywhere in the sentence.
     """
     if figure.side is not None:
@@ -418,7 +427,7 @@ def movement_problems(result: dict) -> list[str]:
     comparison, e.g. against a published packing) -- none of which name two independent
     figures to take a difference between, so the gate does not fire for them regardless
     of what "movement is" phrase they carry elsewhere. It fires for T-019 because its
-    claim names both its own side (`229/50`) and a genuinely different displaced prior
+    claim names both its own side (`459/100`) and a genuinely different displaced prior
     value (`22529/5000`), which is exactly the shape D-439's first instance corrupted.
     """
     result_id = result["id"]

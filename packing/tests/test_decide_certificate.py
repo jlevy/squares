@@ -11,6 +11,7 @@ import hashlib
 import json
 import math
 import sys
+import warnings
 from dataclasses import dataclass
 from fractions import Fraction
 from pathlib import Path
@@ -26,6 +27,7 @@ CASES = Path(__file__).resolve().parent.parent / "cases"
 RUNG = CASES / "n11_fractional_certificate" / "certificate-19-5.json"
 REPO = CASES.parent.parent
 INDEPENDENCE_SURFACES = (
+    REPO / "README.md",
     REPO / "SYNOPSIS.md",
     REPO / "packing/frontier/results.yaml",
     REPO / "packing/frontier/evidence.yaml",
@@ -96,6 +98,7 @@ def test_the_gate_describes_its_independence_boundary() -> None:
     assert "Certificate" in words
     assert "C1-C3 premises" in words
     assert "share no modelling assumption" not in words
+    assert "share no modeling assumption" not in words
     assert "share the certificate and theorem contract" not in words
 
 
@@ -107,7 +110,7 @@ def test_a_declared_mass_that_disagrees_with_the_atoms_is_refused(
     no_sweeps(monkeypatch)
     path = write(tmp_path, lambda r: r.__setitem__("total_mass", "1/2"))
     assert decide(path, quick=True) is False
-    assert "declared total_mass" in capsys.readouterr().out
+    assert "declared total_mass" in capsys.readouterr().err
 
 
 def test_a_side_above_the_ceiling_is_refused_before_any_sweep_runs(
@@ -124,8 +127,8 @@ def test_a_side_above_the_ceiling_is_refused_before_any_sweep_runs(
     no_sweeps(monkeypatch)
     path = write(tmp_path, widen)
     assert decide(path, quick=True) is False
-    out = capsys.readouterr().out
-    assert "above the ceiling" in out
+    errors = capsys.readouterr().err
+    assert "above the ceiling" in errors
 
 
 def test_a_mass_that_does_not_fall_below_n_is_refused(
@@ -140,7 +143,7 @@ def test_a_mass_that_does_not_fall_below_n_is_refused(
     no_sweeps(monkeypatch)
     path = write(tmp_path, heavy)
     assert decide(path, quick=True) is False
-    assert "C1 total mass below n failed" in capsys.readouterr().out
+    assert "C1 total mass below n failed" in capsys.readouterr().err
 
 
 @pytest.mark.parametrize(
@@ -161,7 +164,7 @@ def test_closed_form_failures_are_refused_before_any_c4_sweep(
     no_sweeps(monkeypatch)
     path = write(tmp_path, lambda record: record.__setitem__(field, value))
     assert decide(path, quick=False) is False
-    assert f"{condition} " in capsys.readouterr().out
+    assert f"{condition} " in capsys.readouterr().err
 
 
 def test_a_false_declared_claim_is_refused_before_any_sweep(
@@ -172,7 +175,7 @@ def test_a_false_declared_claim_is_refused_before_any_sweep(
     no_sweeps(monkeypatch)
     path = write(tmp_path, lambda record: record.__setitem__("claim", "s(11) >= 4"))
     assert decide(path, quick=True) is False
-    assert "theorem conclusion" in capsys.readouterr().out
+    assert "theorem conclusion" in capsys.readouterr().err
 
 
 @pytest.mark.parametrize("field", ["claim", "total_mass"])
@@ -185,7 +188,7 @@ def test_required_declarations_cannot_be_deleted(
     no_sweeps(monkeypatch)
     path = write(tmp_path, lambda record: record.pop(field))
     assert decide(path, quick=True) is False
-    assert f"missing required field '{field}'" in capsys.readouterr().out
+    assert f"missing required field '{field}'" in capsys.readouterr().err
 
 
 def test_quick_mode_allows_an_undecided_least_mass_but_cannot_retain(
@@ -212,7 +215,7 @@ def test_full_mode_requires_the_declared_least_mass_before_any_sweep(
     no_sweeps(monkeypatch)
     path = write(tmp_path, lambda record: record.pop("least_cell_mass"))
     assert decide(path, quick=False) is False
-    assert "missing required field 'least_cell_mass'" in capsys.readouterr().out
+    assert "missing required field 'least_cell_mass'" in capsys.readouterr().err
 
 
 @pytest.mark.parametrize(
@@ -236,8 +239,8 @@ def test_integer_fields_refuse_lossy_or_coercive_types(
     no_sweeps(monkeypatch)
     path = write(tmp_path, lambda record: record.__setitem__(field, value))
     assert decide(path, quick=True) is False
-    out = capsys.readouterr().out
-    assert f"field '{field}'" in out or "inexact JSON number" in out
+    errors = capsys.readouterr().err
+    assert f"field '{field}'" in errors or "inexact JSON number" in errors
 
 
 def test_duplicate_keys_are_refused(
@@ -250,7 +253,7 @@ def test_duplicate_keys_are_refused(
     path = tmp_path / "duplicate.json"
     path.write_text(text)
     assert decide(path, quick=True) is False
-    assert "duplicate JSON object key 'n'" in capsys.readouterr().out
+    assert "duplicate JSON object key 'n'" in capsys.readouterr().err
 
 
 def test_oversized_rational_text_is_a_per_path_format_refusal(
@@ -262,7 +265,19 @@ def test_oversized_rational_text_is_a_per_path_format_refusal(
     huge = "1" + "0" * 3000
     path = write(tmp_path, lambda record: record.__setitem__("outer_side", huge))
     assert decide(path, quick=True) is False
-    assert "cannot load certificate" in capsys.readouterr().out
+    assert "cannot load certificate" in capsys.readouterr().err
+
+
+def test_file_size_is_bounded_before_json_parsing(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    no_sweeps(monkeypatch)
+    path = tmp_path / "oversized.json"
+    path.write_bytes(b" " * (retention.MAX_CERTIFICATE_BYTES + 1))
+    assert decide(path, quick=True) is False
+    assert "file exceeds" in capsys.readouterr().err
 
 
 def test_direction_count_has_a_pre_allocation_limit(
@@ -276,7 +291,7 @@ def test_direction_count_has_a_pre_allocation_limit(
         lambda record: record.__setitem__("direction_steps", 10**12),
     )
     assert decide(path, quick=True) is False
-    assert "exceeds the supported maximum" in capsys.readouterr().out
+    assert "exceeds the supported maximum" in capsys.readouterr().err
 
 
 def test_atom_count_has_a_boxes_by_atoms_memory_limit(
@@ -291,7 +306,7 @@ def test_atom_count_has_a_boxes_by_atoms_memory_limit(
 
     path = write(tmp_path, enlarge)
     assert decide(path, quick=True) is False
-    assert "field 'atoms' exceeds the supported maximum" in capsys.readouterr().out
+    assert "field 'atoms' exceeds the supported maximum" in capsys.readouterr().err
 
 
 def test_combined_weight_scale_is_refused_before_mass_formatting(
@@ -323,7 +338,7 @@ def test_combined_weight_scale_is_refused_before_mass_formatting(
     monkeypatch.setattr(retention, "verify", bomb)
     monkeypatch.setattr(retention, "verify_by_intervals", bomb)
     assert decide(path, quick=True) is False
-    assert "weight scale is too large" in capsys.readouterr().out
+    assert "weight scale is too large" in capsys.readouterr().err
     assert lcm_calls == 2
 
 
@@ -341,9 +356,9 @@ def test_diagnostic_float_overflow_cannot_abort_preflight(
 
     path = write(tmp_path, enlarge)
     assert decide(path, quick=True) is False
-    out = capsys.readouterr().out
-    assert "outside-float-range" in out
-    assert "above the ceiling" in out
+    captured = capsys.readouterr()
+    assert "outside-float-range" in captured.out
+    assert "above the ceiling" in captured.err
 
 
 @pytest.mark.parametrize(
@@ -381,10 +396,79 @@ def test_out_of_range_coordinates_are_a_per_path_interval_refusal(
     later.write_text("{}")
     monkeypatch.setattr(retention, "verify", bomb)
     assert retention.main(["--quick", str(path), str(later)]) == 1
-    out = capsys.readouterr().out
-    assert "interval route could not decide" in out
-    assert "finite float" in out
-    assert "later.json: REFUSED" in out
+    errors = capsys.readouterr().err
+    assert "interval route could not decide" in errors
+    assert "finite float" in errors
+    assert "later.json: REFUSED" in errors
+
+
+def test_finite_boundary_arithmetic_is_a_per_path_interval_refusal(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    outer = int(sys.float_info.max)
+
+    def move_to_float_boundary(record: dict[str, object]) -> None:
+        record["n"] = (2 * outer) ** 2
+        record["outer_side"] = str(outer)
+        record["square_side"] = "1/2"
+        record["angle_limit"] = "1/2"
+        record["claim"] = f"s({record['n']}) >= {outer}"
+        record["atoms"] = []
+        record["total_mass"] = "0"
+
+    path = write(tmp_path, move_to_float_boundary)
+    later = tmp_path / "later.json"
+    later.write_text("{}")
+    monkeypatch.setattr(retention, "verify", bomb)
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        assert retention.main(["--quick", str(path), str(later)]) == 1
+    assert not caught
+    errors = capsys.readouterr().err
+    assert f"{path}: REFUSED: the interval route could not decide" in errors
+    assert "finite float" in errors
+    assert f"{later}: REFUSED" in errors
+
+
+def test_finite_atom_geometry_overflow_is_a_quiet_per_path_refusal(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    side = Fraction(19, 5)
+    magnitude = Fraction.from_float(sys.float_info.max)
+
+    def add_boundary_orbit(record: dict[str, object]) -> None:
+        atoms = record["atoms"]
+        assert isinstance(atoms, list)
+        x, y = magnitude, magnitude / 2
+        far_x, far_y = side - x, side - y
+        orbit = (
+            (x, y),
+            (far_x, y),
+            (x, far_y),
+            (far_x, far_y),
+            (y, x),
+            (far_y, x),
+            (y, far_x),
+            (far_y, far_x),
+        )
+        atoms.extend([[str(a), str(b), "0"] for a, b in orbit])
+
+    path = write(tmp_path, add_boundary_orbit)
+    later = tmp_path / "later.json"
+    later.write_text("{}")
+    monkeypatch.setattr(retention, "verify", bomb)
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        assert retention.main(["--quick", str(path), str(later)]) == 1
+    assert not caught
+    errors = capsys.readouterr().err
+    assert f"{path}: REFUSED: the interval route could not decide" in errors
+    assert "finite float arithmetic" in errors
+    assert f"{later}: REFUSED" in errors
 
 
 def test_an_interval_refusal_stops_before_the_exact_sweep(
@@ -393,13 +477,11 @@ def test_an_interval_refusal_stops_before_the_exact_sweep(
     monkeypatch.setattr(
         retention,
         "verify_by_intervals",
-        lambda *_args, **_kwargs: FakeIntervalVerdict(
-            accepted=False, failures=("C4",)
-        ),
+        lambda *_args, **_kwargs: FakeIntervalVerdict(accepted=False, failures=("C4",)),
     )
     monkeypatch.setattr(retention, "verify", bomb)
     assert decide(RUNG, quick=False) is False
-    assert "interval route refused" in capsys.readouterr().out
+    assert "interval route refused" in capsys.readouterr().err
 
 
 def test_stalled_interval_boxes_stop_before_the_exact_sweep(
@@ -408,13 +490,11 @@ def test_stalled_interval_boxes_stop_before_the_exact_sweep(
     monkeypatch.setattr(
         retention,
         "verify_by_intervals",
-        lambda *_args, **_kwargs: FakeIntervalVerdict(
-            directions=(FakeDirection(stalled=1),)
-        ),
+        lambda *_args, **_kwargs: FakeIntervalVerdict(directions=(FakeDirection(stalled=1),)),
     )
     monkeypatch.setattr(retention, "verify", bomb)
     assert decide(RUNG, quick=False) is False
-    assert "boxes stalled" in capsys.readouterr().out
+    assert "boxes stalled" in capsys.readouterr().err
 
 
 def test_an_interval_decision_error_is_a_refusal_before_exact(
@@ -426,7 +506,7 @@ def test_an_interval_decision_error_is_a_refusal_before_exact(
     monkeypatch.setattr(retention, "verify_by_intervals", fail_interval)
     monkeypatch.setattr(retention, "verify", bomb)
     assert decide(RUNG, quick=False) is False
-    assert "interval route could not decide" in capsys.readouterr().out
+    assert "interval route could not decide" in capsys.readouterr().err
 
 
 def test_an_unexpected_interval_error_remains_visible(
@@ -457,8 +537,8 @@ def test_full_mode_refuses_an_unusable_interval_enclosure_before_exact(
     )
     monkeypatch.setattr(retention, "verify", bomb)
     assert decide(RUNG, quick=False) is False
-    out = capsys.readouterr().out
-    assert "no enclosure" in out or "enclosure has width" in out
+    errors = capsys.readouterr().err
+    assert "no enclosure" in errors or "enclosure has width" in errors
 
 
 def test_an_exact_refusal_is_verdict_bearing(
@@ -475,7 +555,7 @@ def test_an_exact_refusal_is_verdict_bearing(
         lambda _certificate: FakeExactVerdict(accepted=False, failures=("C4",)),
     )
     assert decide(RUNG, quick=False) is False
-    assert "exact sweep refused" in capsys.readouterr().out
+    assert "exact sweep refused" in capsys.readouterr().err
 
 
 def test_an_exact_result_without_a_minimum_is_refused(
@@ -492,7 +572,7 @@ def test_an_exact_result_without_a_minimum_is_refused(
         lambda _certificate: FakeExactVerdict(minimum_cell_mass=None),
     )
     assert decide(RUNG, quick=False) is False
-    assert "exact sweep returned no least covered mass" in capsys.readouterr().out
+    assert "exact sweep returned no least covered mass" in capsys.readouterr().err
 
 
 def test_an_unexpected_exact_error_remains_visible(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -523,7 +603,7 @@ def test_exact_and_interval_disagreement_is_verdict_bearing(
         lambda _certificate: FakeExactVerdict(minimum_cell_mass=Fraction(1)),
     )
     assert decide(RUNG, quick=False) is False
-    assert "two routes disagree" in capsys.readouterr().out
+    assert "two routes disagree" in capsys.readouterr().err
 
 
 def test_a_declared_least_mass_must_match_both_routes(
@@ -540,7 +620,7 @@ def test_a_declared_least_mass_must_match_both_routes(
     monkeypatch.setattr(retention, "verify", bomb)
     assert decide(path, quick=False) is False
     assert "declared least_cell_mass 1 != interval enclosure 50003/50000" in (
-        capsys.readouterr().out
+        capsys.readouterr().err
     )
 
 
@@ -578,7 +658,7 @@ def test_rewriting_the_path_during_a_sweep_prevents_retention(
     monkeypatch.setattr(retention, "verify_by_intervals", rewrite)
     monkeypatch.setattr(retention, "verify", bomb)
     assert decide(path, quick=False) is False
-    assert "path changed while the decision was running" in capsys.readouterr().out
+    assert "path changed while the decision was running" in capsys.readouterr().err
 
 
 def test_rewriting_the_path_during_the_exact_sweep_prevents_retention(
@@ -599,7 +679,7 @@ def test_rewriting_the_path_during_the_exact_sweep_prevents_retention(
     )
     monkeypatch.setattr(retention, "verify", rewrite)
     assert decide(path, quick=False) is False
-    assert "path changed while the decision was running" in capsys.readouterr().out
+    assert "path changed while the decision was running" in capsys.readouterr().err
 
 
 def test_a_positive_full_decision_prints_the_accepted_digest(
@@ -619,7 +699,7 @@ def test_a_positive_full_decision_prints_the_accepted_digest(
 def test_a_final_reread_failure_prevents_retention(
     capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    original_read_bytes = Path.read_bytes
+    original_read = vars(retention)["_read_bounded"]
     rung_reads = 0
 
     def fail_final_reread(path: Path) -> bytes:
@@ -628,7 +708,7 @@ def test_a_final_reread_failure_prevents_retention(
             rung_reads += 1
             if rung_reads == 3:
                 raise OSError("vanished")
-        return original_read_bytes(path)
+        return original_read(path)
 
     monkeypatch.setattr(
         retention,
@@ -636,9 +716,9 @@ def test_a_final_reread_failure_prevents_retention(
         lambda *_args, **_kwargs: FakeIntervalVerdict(),
     )
     monkeypatch.setattr(retention, "verify", lambda _certificate: FakeExactVerdict())
-    monkeypatch.setattr(Path, "read_bytes", fail_final_reread)
+    monkeypatch.setattr(retention, "_read_bounded", fail_final_reread)
     assert decide(RUNG, quick=False) is False
-    assert "cannot reread accepted path: vanished" in capsys.readouterr().out
+    assert "cannot reread accepted path: vanished" in capsys.readouterr().err
 
 
 def test_main_continues_after_a_malformed_path_and_aggregates_failure(
@@ -650,9 +730,66 @@ def test_main_continues_after_a_malformed_path_and_aggregates_failure(
     missing = tmp_path / "missing.json"
     missing.write_text("{}")
     assert retention.main(["--quick", str(broken), str(missing)]) == 1
-    out = capsys.readouterr().out
-    assert "broken.json: REFUSED" in out
-    assert "missing.json: REFUSED" in out
+    errors = capsys.readouterr().err
+    assert "broken.json: REFUSED" in errors
+    assert "missing.json: REFUSED" in errors
+
+
+def test_batch_load_diagnostics_distinguish_equal_basenames(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    no_sweeps(monkeypatch)
+    paths = (tmp_path / "a/candidate.json", tmp_path / "b/candidate.json")
+    for path in paths:
+        path.parent.mkdir()
+        path.write_text("{}")
+    assert retention.main(["--quick", *(str(path) for path in paths)]) == 1
+    errors = capsys.readouterr().err
+    assert all(f"{path}: REFUSED" in errors for path in paths)
+
+
+def test_batch_decision_diagnostics_name_the_failing_equal_basename(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = (tmp_path / "a/candidate.json", tmp_path / "b/candidate.json")
+    for path in paths:
+        path.parent.mkdir()
+        path.write_bytes(RUNG.read_bytes())
+
+    calls = 0
+
+    def decide_in_order(*_args: object, **_kwargs: object) -> FakeIntervalVerdict:
+        nonlocal calls
+        calls += 1
+        return FakeIntervalVerdict(accepted=calls != 1, failures=("C4",))
+
+    monkeypatch.setattr(retention, "verify_by_intervals", decide_in_order)
+    monkeypatch.setattr(retention, "verify", bomb)
+    assert retention.main(["--quick", *(str(path) for path in paths)]) == 1
+    captured = capsys.readouterr()
+    assert f"{paths[0]}: REFUSED: the interval route refused it" in captured.err
+    assert f"{paths[1]}: REFUSED" not in captured.err
+    assert all(str(path) in captured.out for path in paths)
+
+
+def test_main_skips_a_duplicate_path_before_any_second_decision(
+    capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    calls: list[Path] = []
+
+    def record(path: Path, *, quick: bool) -> bool:
+        assert quick is True
+        calls.append(path)
+        return True
+
+    monkeypatch.setattr(retention, "decide", record)
+    assert retention.main(["--quick", str(RUNG), str(RUNG)]) == 0
+    assert calls == [RUNG]
+    assert f"{RUNG}: SKIPPED duplicate path" in capsys.readouterr().out
 
 
 def test_quick_mode_says_it_cannot_retain(

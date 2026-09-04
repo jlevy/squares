@@ -62,6 +62,7 @@ RATIONAL = re.compile(r"^-?[0-9]+(/[1-9][0-9]*)?$")
 MAX_RATIONAL_TEXT = 512
 MAX_DIRECTION_STEPS = 10_000
 MAX_ATOMS = MAX_INTERVAL_ATOMS
+MAX_CERTIFICATE_BYTES = 8 * 1024 * 1024
 
 
 class CertificateFormatError(ValueError):
@@ -82,9 +83,7 @@ def _object_without_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str,
 
 
 def _reject_inexact_json_number(text: str) -> Never:
-    raise CertificateFormatError(
-        f"inexact JSON number {text!r}; use an exact rational string"
-    )
+    raise CertificateFormatError(f"inexact JSON number {text!r}; use an exact rational string")
 
 
 def _required(record: dict[str, object], key: str) -> object:
@@ -97,9 +96,7 @@ def _exact_integer(record: dict[str, object], key: str) -> int:
     value = _required(record, key)
     # bool is an int subclass, and int(...) would also accept strings and truncate floats.
     if type(value) is not int:
-        raise CertificateFormatError(
-            f"field {key!r} must be a JSON integer, got {value!r}"
-        )
+        raise CertificateFormatError(f"field {key!r} must be a JSON integer, got {value!r}")
     return cast(int, value)
 
 
@@ -175,15 +172,11 @@ def _load_bytes(data: bytes) -> tuple[Certificate, dict[str, object]]:
     if not isinstance(atoms_record, list):
         raise CertificateFormatError("field 'atoms' must be a JSON array")
     if len(atoms_record) > MAX_ATOMS:
-        raise CertificateFormatError(
-            f"field 'atoms' exceeds the supported maximum {MAX_ATOMS}"
-        )
+        raise CertificateFormatError(f"field 'atoms' exceeds the supported maximum {MAX_ATOMS}")
     atoms: list[Atom] = []
     for index, atom_record in enumerate(atoms_record):
         if not isinstance(atom_record, list) or len(atom_record) != 3:
-            raise CertificateFormatError(
-                f"atoms[{index}] must be a three-element JSON array"
-            )
+            raise CertificateFormatError(f"atoms[{index}] must be a three-element JSON array")
         x, y, weight = (
             _rational(value, field=f"atoms[{index}][{coordinate}]")
             for coordinate, value in enumerate(atom_record)
@@ -204,10 +197,22 @@ def _load_bytes(data: bytes) -> tuple[Certificate, dict[str, object]]:
     return certificate, record
 
 
+def _read_bounded(path: Path) -> bytes:
+    """Read one candidate without allowing its input size to drive allocation."""
+
+    with path.open("rb") as source:
+        data = source.read(MAX_CERTIFICATE_BYTES + 1)
+    if len(data) > MAX_CERTIFICATE_BYTES:
+        raise CertificateFormatError(
+            f"file exceeds the {MAX_CERTIFICATE_BYTES}-byte certificate limit"
+        )
+    return data
+
+
 def load(path: Path) -> tuple[Certificate, dict[str, object]]:
     """Rebuild a certificate from a record's own bytes, trusting none of its summary."""
 
-    return _load_bytes(path.read_bytes())
+    return _load_bytes(_read_bounded(path))
 
 
 def _approx(value: Fraction) -> str:
@@ -223,17 +228,17 @@ def _unchanged_sha256(path: Path, frozen: bytes) -> tuple[str | None, str | None
     """Bind a positive verdict to bytes that still occupy the named path."""
 
     try:
-        current = path.read_bytes()
-    except OSError as error:
+        current = _read_bounded(path)
+    except (CertificateFormatError, OSError) as error:
         return None, f"cannot reread accepted path: {error}"
     if current != frozen:
         return None, "the certificate path changed while the decision was running"
     return hashlib.sha256(frozen).hexdigest(), None
 
 
-def _print_refusals(problems: list[str]) -> bool:
+def _print_refusals(path: Path, problems: list[str]) -> bool:
     for problem in problems:
-        print(f"  REFUSED: {problem}", flush=True)
+        print(f"{path}: REFUSED: {problem}", file=sys.stderr, flush=True)
     return False
 
 
@@ -241,7 +246,7 @@ def _prepare_candidate(
     path: Path,
 ) -> tuple[bytes, Certificate, dict[str, object], Fraction]:
     try:
-        frozen = path.read_bytes()
+        frozen = _read_bounded(path)
         certificate, record = _load_bytes(frozen)
     except (CertificateFormatError, OSError) as error:
         raise CandidateRefusalError(f"cannot load certificate: {error}") from None
@@ -259,11 +264,11 @@ def decide(path: Path, *, quick: bool) -> bool:
     try:
         frozen, certificate, record, mass = _prepare_candidate(path)
     except CandidateRefusalError as error:
-        print(f"{path.name}: REFUSED: {error}", flush=True)
+        print(f"{path}: REFUSED: {error}", file=sys.stderr, flush=True)
         return False
     side = certificate.outer_side
     print(
-        f"{path.name}: n = {certificate.n}, L = {side} = {_approx(side)}, "
+        f"{path}: n = {certificate.n}, L = {side} = {_approx(side)}, "
         f"{len(certificate.atoms)} atoms, mass {mass} = {_approx(mass)}",
         flush=True,
     )
@@ -296,7 +301,7 @@ def decide(path: Path, *, quick: bool) -> bool:
     )
 
     if problems:
-        return _print_refusals(problems)
+        return _print_refusals(path, problems)
 
     start = time.time()
     interval = None
@@ -335,7 +340,7 @@ def decide(path: Path, *, quick: bool) -> bool:
         problems.append(changed_after_interval)
 
     if problems:
-        return _print_refusals(problems)
+        return _print_refusals(path, problems)
     if quick:
         print(
             "  the interval route accepts. NOT ENOUGH TO RETAIN: run without --quick.",
@@ -367,7 +372,7 @@ def decide(path: Path, *, quick: bool) -> bool:
     if changed is not None:
         problems.append(changed)
     if problems:
-        return _print_refusals(problems)
+        return _print_refusals(path, problems)
     assert digest is not None
     print(
         f"  RETAINABLE: both routes accept and agree at {exact.minimum_cell_mass}; "
@@ -385,7 +390,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
     ok = True
+    seen: set[Path] = set()
     for path in args.paths:
+        if path in seen:
+            print(f"{path}: SKIPPED duplicate path", flush=True)
+            continue
+        seen.add(path)
         ok = decide(path, quick=args.quick) and ok
     return 0 if ok else 1
 

@@ -101,6 +101,7 @@ Status = Literal["holds", "fails", "undecided"]
 class IntervalInputError(ValueError):
     """The certificate lies outside the interval verifier's safe input domain."""
 
+
 # Boxes narrower than this in both axes are not split further. Region edges are
 # enclosed to a few ulps of their magnitude (about 1e-15 here); a box thinner than
 # the fuzz cannot be told apart from the edge it straddles, so splitting it would
@@ -123,7 +124,7 @@ BOX_BUDGET = 100_000
 # each such accumulation safe, with room below the signed-int64 boundary.
 INT64_MASS_LIMIT = 2**62
 
-# Each search batch materialises boxes-by-atoms masks. The retained maximum is 1,173;
+# Each search batch materialises boxes-by-atoms masks. The retained maximum is 1,184;
 # 4,096 leaves more than threefold research headroom while keeping one such mask near
 # 16 MiB instead of permitting an input-driven multi-gigabyte allocation.
 MAX_INTERVAL_ATOMS = 4096
@@ -147,34 +148,57 @@ def _up(values: Floats) -> Floats:
     return np.nextafter(values, np.inf)
 
 
+def _require_finite(*values: Floats) -> None:
+    if not all(np.isfinite(value).all() for value in values):
+        raise IntervalInputError(
+            "interval operation cannot be enclosed by finite float arithmetic"
+        )
+
+
 def _add(alo: Floats, ahi: Floats, blo: Floats, bhi: Floats) -> tuple[Floats, Floats]:
-    return _down(alo + blo), _up(ahi + bhi)
+    with np.errstate(over="ignore", invalid="ignore"):
+        low, high = _down(alo + blo), _up(ahi + bhi)
+    _require_finite(low, high)
+    return low, high
 
 
 def _sub(alo: Floats, ahi: Floats, blo: Floats, bhi: Floats) -> tuple[Floats, Floats]:
-    return _down(alo - bhi), _up(ahi - blo)
+    with np.errstate(over="ignore", invalid="ignore"):
+        low, high = _down(alo - bhi), _up(ahi - blo)
+    _require_finite(low, high)
+    return low, high
 
 
 def _mul(alo: Floats, ahi: Floats, blo: Floats, bhi: Floats) -> tuple[Floats, Floats]:
     """Sign-agnostic: the extreme products among the four corner pairs."""
-    products = (alo * blo, alo * bhi, ahi * blo, ahi * bhi)
-    low = np.minimum(np.minimum(products[0], products[1]), np.minimum(products[2], products[3]))
-    high = np.maximum(
-        np.maximum(products[0], products[1]), np.maximum(products[2], products[3])
-    )
-    return _down(low), _up(high)
+    with np.errstate(over="ignore", invalid="ignore"):
+        products = (alo * blo, alo * bhi, ahi * blo, ahi * bhi)
+        _require_finite(*products)
+        low = np.minimum(
+            np.minimum(products[0], products[1]), np.minimum(products[2], products[3])
+        )
+        high = np.maximum(
+            np.maximum(products[0], products[1]), np.maximum(products[2], products[3])
+        )
+        low, high = _down(low), _up(high)
+    _require_finite(low, high)
+    return low, high
 
 
 def _div(alo: Floats, ahi: Floats, blo: Floats, bhi: Floats) -> tuple[Floats, Floats]:
     """Division by an interval that is strictly positive; the caller guarantees it."""
-    quotients = (alo / blo, alo / bhi, ahi / blo, ahi / bhi)
-    low = np.minimum(
-        np.minimum(quotients[0], quotients[1]), np.minimum(quotients[2], quotients[3])
-    )
-    high = np.maximum(
-        np.maximum(quotients[0], quotients[1]), np.maximum(quotients[2], quotients[3])
-    )
-    return _down(low), _up(high)
+    with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+        quotients = (alo / blo, alo / bhi, ahi / blo, ahi / bhi)
+        _require_finite(*quotients)
+        low = np.minimum(
+            np.minimum(quotients[0], quotients[1]), np.minimum(quotients[2], quotients[3])
+        )
+        high = np.maximum(
+            np.maximum(quotients[0], quotients[1]), np.maximum(quotients[2], quotients[3])
+        )
+        low, high = _down(low), _up(high)
+    _require_finite(low, high)
+    return low, high
 
 
 @dataclass(frozen=True, slots=True)
@@ -185,7 +209,11 @@ class Interval:
     hi: float
 
     def __post_init__(self) -> None:
-        if not (math.isfinite(self.lo) and math.isfinite(self.hi)) or self.lo > self.hi:
+        if not (math.isfinite(self.lo) and math.isfinite(self.hi)):
+            raise IntervalInputError(
+                "certificate arithmetic cannot be enclosed by finite floats"
+            )
+        if self.lo > self.hi:
             raise ValueError(f"not an interval: [{self.lo}, {self.hi}]")
 
     @classmethod
@@ -224,21 +252,25 @@ class Interval:
         return np.array([self.lo]), np.array([self.hi])
 
     def __add__(self, other: Interval) -> Interval:
-        lo, hi = _add(*self.arrays(), *other.arrays())
+        with np.errstate(over="ignore", invalid="ignore"):
+            lo, hi = _add(*self.arrays(), *other.arrays())
         return Interval(float(lo[0]), float(hi[0]))
 
     def __sub__(self, other: Interval) -> Interval:
-        lo, hi = _sub(*self.arrays(), *other.arrays())
+        with np.errstate(over="ignore", invalid="ignore"):
+            lo, hi = _sub(*self.arrays(), *other.arrays())
         return Interval(float(lo[0]), float(hi[0]))
 
     def __mul__(self, other: Interval) -> Interval:
-        lo, hi = _mul(*self.arrays(), *other.arrays())
+        with np.errstate(over="ignore", invalid="ignore"):
+            lo, hi = _mul(*self.arrays(), *other.arrays())
         return Interval(float(lo[0]), float(hi[0]))
 
     def __truediv__(self, other: Interval) -> Interval:
         if other.lo <= 0:
             raise ZeroDivisionError("interval division needs a strictly positive divisor")
-        lo, hi = _div(*self.arrays(), *other.arrays())
+        with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+            lo, hi = _div(*self.arrays(), *other.arrays())
         return Interval(float(lo[0]), float(hi[0]))
 
     @property
@@ -269,9 +301,7 @@ class Rotation:
 
     def __post_init__(self) -> None:
         if self.cosine.lo <= 0 or self.sine.lo < 0:
-            raise IntervalInputError(
-                f"direction {self.label} is outside the first quadrant"
-            )
+            raise IntervalInputError(f"direction {self.label} is outside the first quadrant")
 
 
 def rotation_from_half_tangent(label: str, tangent: Fraction) -> Rotation:
@@ -365,9 +395,7 @@ def scaled_atom_masses(certificate: Certificate) -> tuple[int, list[int], int]:
     for atom in certificate.atoms:
         scale = math.lcm(scale, atom.weight.denominator)
         if certificate.n * scale >= INT64_MASS_LIMIT:
-            raise IntervalInputError(
-                "the weight scale is too large for exact integer masses"
-            )
+            raise IntervalInputError("the weight scale is too large for exact integer masses")
     scaled_mass = [int(atom.weight * scale) for atom in certificate.atoms]
     if any(mass < 0 for mass in scaled_mass):
         raise IntervalInputError("the interval verifier requires nonnegative atom weights")
@@ -413,13 +441,15 @@ class DirectionSearch:
         v_high = _add(vlo, vhi, *half.arrays())
         self.inner = (u_low[1], u_high[0], v_low[1], v_high[0])
         self.outer = (u_low[0], u_high[1], v_low[0], v_high[1])
+        if not all(np.isfinite(bound).all() for bound in (*self.inner, *self.outer)):
+            raise IntervalInputError(
+                "atom geometry cannot be enclosed by finite float arithmetic"
+            )
         # The domain [h, L - h]^2 in container coordinates.
         self.margin = square_side * (rotation.cosine + rotation.sine) / TWO
         self.far = outer_side - self.margin
         if self.far.lo <= self.margin.hi:
-            raise IntervalInputError(
-                "the square does not fit the container at this direction"
-            )
+            raise IntervalInputError("the square does not fit the container at this direction")
         h, far = self.margin, self.far
         # Its bounding box in the rotated frame: with both rotation components
         # non-negative, u is extreme at the near and far corners and v at the
@@ -429,6 +459,10 @@ class DirectionSearch:
         v_min = rotation.cosine * h - rotation.sine * far
         v_max = rotation.cosine * far - rotation.sine * h
         self.initial = np.array([[u_min.lo, u_max.hi, v_min.lo, v_max.hi]])
+        if not np.isfinite(self.initial).all():
+            raise IntervalInputError(
+                "search domain cannot be enclosed by finite float arithmetic"
+            )
 
     def tighten(self, boxes: Floats) -> Floats:
         """Enclose the bounding box of each box's intersection with the domain.
@@ -555,6 +589,10 @@ class DirectionSearch:
                 pending.append(batch[BATCH:])
                 batch = batch[:BATCH]
             tight = self.tighten(batch)
+            if not np.isfinite(tight).all():
+                raise IntervalInputError(
+                    "search bounds cannot be enclosed by finite float arithmetic"
+                )
             tight = tight[(tight[:, 0] <= tight[:, 1]) & (tight[:, 2] <= tight[:, 3])]
             boxes += len(tight)
             if not len(tight):
@@ -719,7 +757,9 @@ def searches(certificate: Certificate, atoms: AtomData) -> Iterator[DirectionSea
     outer = Interval.of(certificate.outer_side)
     square = Interval.of(certificate.square_side)
     for rotation in doubled_net(certificate.half_tangents):
-        yield DirectionSearch(atoms, rotation, outer, square)
+        with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+            search = DirectionSearch(atoms, rotation, outer, square)
+        yield search
 
 
 def verify_by_intervals(
@@ -751,7 +791,9 @@ def verify_by_intervals(
     for search in searches(certificate, atoms):
         if directions is not None and search.label not in directions:
             continue
-        outcomes.append(search.search(prune_at=None if enclose else atoms.scale))
+        with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+            outcome = search.search(prune_at=None if enclose else atoms.scale)
+        outcomes.append(outcome)
         if outcomes[-1].status == "refuted":
             break
     if any(

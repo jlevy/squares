@@ -804,6 +804,36 @@ def test_only_measured_whole_suite_steps_have_budgets() -> None:
     }
 
 
+@pytest.mark.parametrize(
+    ("summary", "expected_scope", "expected_budget"),
+    (("everything", "whole", 1800), ("7 tests", "subset", None)),
+)
+def test_push_tests_reuse_the_whole_suite_budget_only_when_needed(
+    monkeypatch: pytest.MonkeyPatch,
+    summary: str,
+    expected_scope: str,
+    expected_budget: float | None,
+) -> None:
+    """Changing the entry point must not discard the suite's measured ceiling.
+
+    D-469 reached the same ordinary test suite through `--push`, but the dynamically
+    built step lost the 1,800-second budget declared by `fast behavioral tests` and died
+    at the shared 900-second cap. A selected subset remains on the tighter shared guard.
+    """
+
+    def probe(*args: object, **kwargs: object) -> subprocess.CompletedProcess[str]:
+        del args, kwargs
+        return subprocess.CompletedProcess(
+            args=("reachable-tests",), returncode=0, stdout=f"{summary}\n", stderr=""
+        )
+
+    monkeypatch.setattr(validate.subprocess, "run", probe)
+    step = validate._push_test_step("origin/main")
+
+    assert step.broad is (expected_scope == "whole")
+    assert step.budget_seconds == expected_budget
+
+
 def test_the_edit_tier_cannot_under_run() -> None:
     """Tiers must nest, or a narrower tier could contain a step a wider one lacks.
 

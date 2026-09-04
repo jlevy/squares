@@ -10,22 +10,27 @@ case's lower bound, at the 181-direction net every retained certificate uses.
 **`prize` is what the ceiling allows, not what a search will reach.** The real
 limit is the covering value: a certificate exists at side `L` only where the
 least total mass that covers every admissible `B`-square falls below `n`, and
-that value is well below the ceiling wherever the ceiling is loose. Four
-restricted optima have been measured, each an upper bound on the covering value
-at its side:
+that value is well below the ceiling wherever the ceiling is loose. Six
+side-level program values have been reported, each at most an upper bound on
+the unrestricted covering value at its side:
 
-| side | restricted optimum | from |
+| side | reported value | evidence retained here |
 | ---: | ---: | --- |
-| 3.82 | 11.0000 | converged, n = 11 |
-| 3.95 | 11.9706 | retained certificate's mass, n = 12 |
-| 3.96 | 11.9936 | converged, n = 12 |
-| 4.58 | 16.9628 | converged, n = 17 |
+| 3.82 | 11.0000 | result narrative; no raw run |
+| 3.95 | 11.9706 | frozen 969-atom certificate; feasible mass, not a proved optimum |
+| 3.96 | 11.9936 | no raw run |
+| 4.58 | 16.9628 | no raw run; frozen candidate mass 16.965735 |
+| 4.59 | 16.9303 | no raw run; frozen candidate mass 16.933080 |
+| 4.68 | 18.0000 | three site sets reported; no raw run |
 
-Those four are the whole of what is known about how the covering value grows.
-They are consistent with a quadratic in the side, which would put the reach well
-below the `packing` rows below — but four points and a fitted curve are not a
-measurement, and no rung has ever been claimed from one. Rank on `prize` to
-choose where to look; measure before believing any of it.
+Only the displayed 3.95 value is recomputable from a tracked artifact, and even
+there the artifact proves a feasible mass rather than optimality. The nearby
+frozen candidates at 4.58 and 4.59 corroborate scale, not the reported objective
+values. The other figures survive only in repository narrative and commit
+history, without their raw run logs or checkpoints. The six points are consistent
+with a quadratic in the side, but that fit is planning conjecture, not independently
+verified measurement. Rank on `prize` to choose where to look; measure and retain
+the run before believing any extrapolation.
 
 Of 100 registered cases, 33 are foreclosed and 67
 are not. Every foreclosed case sits at the grid bound `ceil(sqrt(n))`, which is
@@ -77,15 +82,15 @@ case is open and its conjectured value is that bound.
 | 57 | 8 | 7.6332 | 8.0000 | 7.9816 | ceiling | +0.3484 |
 | 43 | 7 | 6.6569 | 7.0000 | 6.9839 | ceiling | +0.3271 |
 | 92 | 10 | 9.6603 | 10.0000 | 9.9770 | ceiling | +0.3168 |
-| 19 | 5 | 4.5800 | 4.8856 | 4.9885 | packing | +0.3056 |
 | 74 | 9 | 8.6811 | 9.0000 | 8.9793 | ceiling | +0.2982 |
 | 31 | 6 | 5.6904 | 6.0000 | 5.9862 | ceiling | +0.2958 |
+| 19 | 5 | 4.5900 | 4.8856 | 4.9885 | packing | +0.2956 |
 | 58 | 8 | 7.7082 | 8.0000 | 7.9816 | ceiling | +0.2734 |
 | 93 | 10 | 9.7178 | 10.0000 | 9.9770 | ceiling | +0.2592 |
 | 21 | 5 | 4.7417 | 5.0000 | 4.9885 | ceiling | +0.2469 |
-| 18 | 5 | 4.5800 | 4.8229 | 4.9885 | packing | +0.2429 |
 | 44 | 7 | 6.7446 | 7.0000 | 6.9839 | ceiling | +0.2394 |
 | 75 | 9 | 8.7460 | 9.0000 | 8.9793 | ceiling | +0.2334 |
+| 18 | 5 | 4.5900 | 4.8229 | 4.9885 | packing | +0.2329 |
 | 94 | 10 | 9.7750 | 10.0000 | 9.9770 | ceiling | +0.2021 |
 | 59 | 8 | 7.7823 | 8.0000 | 7.9816 | ceiling | +0.1993 |
 | 32 | 6 | 5.7958 | 6.0000 | 5.9862 | ceiling | +0.1904 |
@@ -94,8 +99,8 @@ case is open and its conjectured value is that bound.
 | 95 | 10 | 9.8318 | 10.0000 | 9.9770 | ceiling | +0.1453 |
 | 60 | 8 | 7.8557 | 8.0000 | 7.9816 | ceiling | +0.1260 |
 | 77 | 9 | 8.8740 | 9.0000 | 8.9793 | ceiling | +0.1053 |
-| 17 | 5 | 4.5800 | 4.6755 | 4.9885 | packing | +0.0955 |
 | 96 | 10 | 9.8882 | 10.0000 | 9.9770 | ceiling | +0.0888 |
+| 17 | 5 | 4.5900 | 4.6755 | 4.9885 | packing | +0.0855 |
 | 11 | 4 | 3.8100 | 3.8771 | 3.9908 | packing | +0.0671 |
 | 61 | 8 | 7.9282 | 8.0000 | 7.9816 | ceiling | +0.0534 |
 | 78 | 9 | 8.9373 | 9.0000 | 8.9793 | ceiling | +0.0421 |

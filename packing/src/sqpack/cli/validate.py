@@ -54,6 +54,7 @@ SUPPORTED_PYTHON = (3, 14)
 BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
 PROCESS_TERMINATION_GRACE_SECONDS = 1.0
 DEFAULT_TIMEOUT_SECONDS = 900.0
+ORDINARY_TEST_SUITE_BUDGET_SECONDS = 1800.0
 
 
 class _ProcessRegistry:
@@ -146,9 +147,9 @@ class Context:
     environment variable, rather than taking the default.
 
     A step's `budget_seconds` may raise the default cap, because the default is a
-    project-wide guess and one step is known to exceed it. It may not raise a number a
-    person typed: someone tightening the cap is deliberately bounding this run, and a
-    step quietly opting out of that is the bug, not the feature."""
+    project-wide guess and some whole-suite steps are known to exceed it. It may not
+    raise a number a person typed: someone tightening the cap is deliberately bounding
+    this run, and a step quietly opting out of that is the bug, not the feature."""
 
     processes: _ProcessRegistry = field(
         default_factory=_ProcessRegistry, compare=False, repr=False
@@ -1553,7 +1554,13 @@ STEPS: tuple[Step, ...] = (
     # The budget is the measurement plus room for that uncertainty and for growth, not a
     # number chosen to make today's run pass. A suite that reaches this ceiling should be
     # re-argued, not re-padded, and the step still fails if it exceeds what it asked for.
-    Step("fast behavioral tests", _fast_tests, fast=True, broad=True, budget_seconds=1800),
+    Step(
+        "fast behavioral tests",
+        _fast_tests,
+        fast=True,
+        broad=True,
+        budget_seconds=ORDINARY_TEST_SUITE_BUDGET_SECONDS,
+    ),
     # This is intentionally a whole suite of complete finite certificate decisions, not
     # an ordinary behavioural-test step. At discovery, 36 tests were still running after
     # 4100s on 2026-09-04; D-451 records the exact elapsed time. Keep the exceptional
@@ -2186,6 +2193,10 @@ def _push_test_step(base: str) -> Step:
         action=action,
         fast=True,
         broad=everything,
+        # When the conservative selector expands to everything, this is the same
+        # ordinary suite as `fast behavioral tests` and needs the same measured budget.
+        # A true subset keeps the shared 900-second hang guard (D-469).
+        budget_seconds=ORDINARY_TEST_SUITE_BUDGET_SECONDS if everything else None,
     )
 
 

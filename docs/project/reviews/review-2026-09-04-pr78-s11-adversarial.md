@@ -2,7 +2,7 @@
 
 **Review date:** 2026-09-04\
 **Pull request:** [#78](https://github.com/jlevy/squares/pull/78)\
-**Reviewed parent head:** `44e9c4b40f8c670522b8294780f40f7d7660a92d`\
+**Reviewed parent head:** `4a0c213a6f037829f5f6dfd2d339e9c730e1d271`\
 **Base:** `9d5eae0f5ecfcf3cd417a345eb6c55b1f9ac4def` (`main`)\
 **Remediation branch:** `codex/pr78-s11-adversarial-review`\
 **Certificate SHA-256:**
@@ -36,9 +36,10 @@ This review concentrates on T-018, not PR 78’s separate `n = 12` result.
 It checked the mathematical implication, the exact bytes retained for `n = 11`, the
 continuum-to-finite reduction, replay and validation boundaries, method provenance, and
 the novelty claim. The PR advanced repeatedly during the audit, from `9b85236b` through
-`bdf63b21`, `6fc71ce9`, `31775018`, `b77e78d2`, `9134ee41`, `430e7e09`, and `6196480d`,
-ending at `44e9c4b4`. Commit `6fc71ce9` replaced the `19/5` target artifact with a
-larger `381/100` certificate, so the concrete validation restarted on the new bytes.
+`bdf63b21`, `6fc71ce9`, `31775018`, `b77e78d2`, `9134ee41`, `430e7e09`, `6196480d`,
+`44e9c4b4`, `10cf6479`, `fbe01c49`, and `d1e873a0`, ending at `4a0c213a`. Commit
+`6fc71ce9` replaced the `19/5` target artifact with a larger `381/100` certificate, so
+the concrete validation restarted on the new bytes.
 The later commits strengthened the separate `n = 12` and `n = 17` results, supplied the
 missing full-net `n = 17` interval control, added a finite-certificate reach theorem and
 generated reach table, amended the project process document, and added a general
@@ -48,6 +49,9 @@ overstated a finite-certificate ceiling as a method-wide impossibility; F14 reco
 correction. The self-contained verification package, interval-certified branch-and-bound
 checkpoint, retained `n = 17` certificates, and late retention command were included
 before the verdict was frozen.
+The final reconciliation also audited the moving parent’s new `4.59` certificate and
+`4.68` run narrative for branch consistency; those claims did not alter the T-018 proof,
+but F25-F30 record defects that would otherwise have shipped beside it.
 The other `n = 17`--`19` frontier movement was outside this review’s mathematical scope
 except where the earlier published-value `n = 17` certificate served as a control.
 
@@ -395,7 +399,7 @@ identifier and incompatible generated counts.
 
 **Resolution:** the older stack identifiers remain stable and the newer parent entry is
 D-454, as [`conventions.md`](../../../conventions.md) requires for a merge collision.
-The source and generated views were regenerated from the combined 463-entry log.
+The source and generated views were regenerated from the combined 468-entry log.
 D-455 records the collision itself.
 
 ### F17: Blocker in the late parent, fixed here: RETAINABLE did not bind the declared theorem
@@ -456,9 +460,11 @@ to “the two drivers that lost candidates.”
 It also claimed corrected scratchpad-driver wiring that is not retained in the
 repository.
 
-**Resolution:** D-454 now describes the loss conditionally and separates the
-uninspectable scratchpad change from the durable repository containment: retained work
-must first write a file and pass that path to the retention command.
+**Resolution:** D-454 now describes the loss conditionally.
+The repository’s `generate_adaptive` entry point defaults to returning before any exact
+decision, so its caller can freeze the candidate first; a regression fails if the
+default invokes the in-memory verifier.
+Retained work must then write a file and pass that path to the retention command.
 D-459 records the narrative correction.
 
 ### F21: Low assurance overstatement, fixed here: the retention routes were called model-independent
@@ -487,15 +493,19 @@ D-461 records the repair.
 ### F23: Medium robustness defect, fixed here: an interval input refusal could abort a batch
 
 The interval route intentionally refuses an unsafe integer scale, an angle outside its
-certified domain, or an exact certificate coordinate outside the finite-float range.
+certified domain, or certificate geometry outside safe finite-float arithmetic.
 Those input-domain non-decisions previously escaped as built-in exceptions, so one
 unusable path could prevent all later paths from receiving a verdict.
+Inputs at the largest finite float exposed a second boundary: conversion succeeded,
+later arithmetic produced infinities or NaNs, and one zero-weight orbit emitted more
+than a thousand NumPy warnings.
 
 **Resolution:** documented input-domain failures now have the narrow
 `IntervalInputError` type and become labeled per-path refusals.
-The exact-to-float input conversion translates its overflow at that boundary.
-Unexpected `ValueError` and `OverflowError` exceptions from either verifier remain
-visible as implementation bugs.
+Exact conversion, scalar enclosure arithmetic, and rotated-atom setup translate or
+detect nonfinite results at that boundary, while expected overflow warnings are
+contained. Unexpected `ValueError` and `OverflowError` exceptions from either verifier
+remain visible as implementation bugs.
 A real huge-coordinate record proves the batch continues; D-462 records the boundary.
 
 ### F24: Blocker soundness defect, fixed here: RETAINABLE named mutable, possibly replaced bytes
@@ -510,6 +520,99 @@ them after the interval decision (before paying for the exact sweep), checks aga
 the exact decision, and prints their SHA-256 in the positive verdict.
 Regressions rewrite the path during each route and require refusal; D-463 records the
 defect.
+
+### F25: Medium robustness defect, fixed here: stderr refusals lost candidate attribution
+
+The retention command sent candidate headers to stdout but post-load refusals to stderr
+as bare indented messages.
+A normal automation that captures streams separately could not tell which input failed;
+equal basenames made the earlier load-error form ambiguous as well.
+
+**Resolution:** every refusal now carries the full path on stderr, positive progress
+stays on stdout, and duplicate path arguments are skipped before a second decision.
+Two-valid-file and malformed-file regressions use equal basenames in different
+directories; D-464 records the repair.
+
+### F26: Medium evidence defect, fixed here: the reach table called unretained reports measured optima
+
+The generated reach table and synopsis called four, then five, restricted program values
+measured optima. The latest parent added a sixth report at side `4.68`, including exact
+run counts and elapsed time, but retained no raw log, checkpoint, or candidate.
+The same evidence gap applies to the displayed objectives at `3.82`, `3.96`, `4.58`, and
+`4.59`. Only the displayed `3.95` value is recomputable from a tracked artifact, and
+that artifact establishes a feasible mass, not optimality.
+Frozen certificates at `4.58` and `4.59` have nearby but different masses.
+
+**Resolution:** the renderer now places the evidence status beside every value.
+The synopsis, agenda, and T-019 narrative distinguish operator reports, retained
+feasible masses, and proved optima; the proposed quadratic is labeled an unverified
+planning conjecture.
+D-465 records the correction.
+
+### F27: High detector gap, fixed here: the live rung-drift check missed the next live rung
+
+When T-019 moved from `4.58` to `4.59`, its source still said “this certificate’s
+16.965735” rather than the new mass `16.933080`. The dedicated rung-figure detector
+passed because it recognized phrases such as “total mass” but not this possessive bare
+mass. Thus the first subsequent live update reproduced the class the detector claimed to
+close.
+
+**Resolution:** the parser recognizes the narrowly anchored “certificate’s DECIMAL
+reaching” form, its own examples name the current top rung, and the exact stale phrase
+is a must-fail regression.
+D-466 records the recurrence of D-439.
+
+### F28: High record drift, fixed here: T-019’s case pages and evidence stayed on its predecessor
+
+The latest parent changed the structured lower bounds for `n = 17`, `18`, and `19` to
+`459/100` while leaving all three case bodies at Massaccesi’s `4.5058`, with obsolete
+gaps and monotonicity composition.
+The `n = 18` and `n = 19` bound fields also cited historical evidence that proves only
+`4.5058`. Related successor notes, test prose, and evidence said `451/100` or said the
+current certificate did not reach `n = 20`, although its mass below 17 makes it directly
+valid there—it simply does not improve Nagamochi’s stronger bound.
+
+**Resolution:** the case bodies now state the current first-party certificate, direct C1
+composition, and correct gaps.
+Current bound fields cite only the exact and interval certificate evidence; historical
+results remain labeled as predecessors.
+A cross-page regression binds all three frontmatter records and bodies; D-467 records
+the repair.
+
+### F29: Medium robustness recurrence, fixed here: restricted interval search leaked overflow warnings
+
+D-462 gave interval input failures a typed refusal and contained overflow while
+constructing each direction search.
+The public verifier then called the search itself outside that containment boundary.
+A finite certificate with side `10^308`, no atoms, and one restricted near-diagonal
+direction emitted sixteen NumPy overflow warnings while tightening its first box.
+It did not produce a false acceptance, but it contradicted the documented quiet-refusal
+boundary and allowed an infinite intermediate to be intersected away before the existing
+final-result guard saw it.
+
+**Resolution:** vector interval operations now refuse nonfinite intermediate or final
+results with `IntervalInputError`; tightened search bounds have their own guard; and the
+complete direction search contains expected NumPy overflow warnings.
+The regression uses the public `verify_by_intervals` API with the exact finite
+reproducer and requires a quiet, typed refusal.
+D-468 records the recurrence.
+
+### F30: High gate-performance recurrence, fixed here: the pre-push suite lost its measured timeout
+
+The validator already gives the complete ordinary behavioral suite a 1,800-second
+budget, based on a 1,209-second clean run.
+The `--push` entry point constructs a separate reachable-test step dynamically.
+When conservative selection expanded that step to the complete ordinary suite, it still
+inherited the shared 900-second cap and was killed at 88% completion.
+Three failures printed earlier in that run were separately reduced to the local
+sandbox’s refusal to bind loopback ports; all three passed together outside the sandbox
+in 2.90 s. They do not explain the timeout.
+
+**Resolution:** a whole-suite `--push` decision now reuses the same measured
+1,800-second budget as `fast behavioral tests`; a genuinely reachable subset keeps the
+900-second hang guard, and an explicit operator timeout still wins.
+A regression exercises both selector outcomes.
+D-469 records the recurrence of D-438.
 
 ## Frozen hypotheses and outcomes
 
@@ -835,16 +938,19 @@ All project commands used the repository’s Python 3.14 environment from `packi
 | --- | --- |
 | `.venv/bin/python3 -m cases.n11_fractional_certificate` | Accepted all three retained rungs: `189/50`, `19/5`, and the current `381/100`; the current exact minimum is `4001/4000`. |
 | `thirdparty/verify.py` on the current certificate, `--audit 3` | Accepted all 181 directions and 567,130,649 regions at minimum `4001/4000`; three cells per direction were directly re-summed; C4 took 88.3 s. |
-| `minimal_verify.py` on the current certificate | Hash, C0-C4, 567,130,649 cells, minimum `4001/4000`, and the `3999/4001` scaling refusal all passed in 83.522 s. |
+| `minimal_verify.py` on the current certificate | Hash, C0-C4, 567,130,649 cells, minimum `4001/4000`, and the `3999/4001` scaling refusal all passed; the final merged-parent rerun took 88.253 s. |
 | final blind proof-only audit and minimal-checker reruns | **Accepted with no finding** in a lane that did not read this review or the PR discussion; two fresh runs passed in 87.42 s and 90.72 s, and a direct re-sum found 84 atoms of total mass `4001/4000` at `(27/50,27/50)`. |
 | deterministic T-018 proof visual | The certificate-driven renderer’s `--check` passed; the repository SVG checker passed all **86 controls**, including byte determinism and artifact ownership. |
 | `thirdparty/check.py` | All four frozen-package steps passed: reconstruct the published-value `n = 17` control, verify the `19/5` rung, verify the control, and require a labeled negative-weight refusal. |
-| complete current interval confirmation | **1 passed** in 19.14 s; all 361 directions certified, with enclosure `[4001/4000, 4001/4000]`. |
-| original exhaustive exact suite at the repaired timeout | **36 passed**, 1,724 ordinary tests deselected, in 4,228.18 s. |
-| late parent’s full-net `n = 17` interval control | **1 passed** in 33.22 s; all 361 directions certified in 2,653,407 boxes. |
-| repaired focused regressions | **56 passed**, 5 exhaustive tests deselected, in 6.01 s. |
-| `packing-validate --edit` on the integrated stack | **33 of 59 steps passed**; Ruff checked and formatted 793 files, BasedPyright reported zero errors, and all schema, generated-record, provenance, and edit-tier checks passed in 29.16 s. |
-| `packing-validate --push` on the integrated stack | **34 of 59 steps passed**; the reachable behavioral suite reported **1,724 passed, 36 exhaustive tests deselected** in 879.26 s; the complete gate took 882.61 s. |
+| complete current T-018 interval confirmation | **1 passed** in 22.23 s; all 361 directions certified, with enclosure `[4001/4000, 4001/4000]`. |
+| pre-latest-parent exhaustive exact suite at the repaired timeout (`0883f28e`) | **37 passed**, 1,744 ordinary tests deselected, in 4,826.82 s. The later parent adds one exhaustive `n = 17` control, which was run separately below. |
+| current T-019 full-net `n = 17` interval control | **1 passed** in 44.64 s; all 361 directions certified in 3,683,951 boxes, with enclosure `[200009/200000, 200009/200000]`. |
+| current exhaustive collection | **1,838 tests collected:** 1,800 ordinary and 38 `exhaustive_exact`; collection took 4.53 s. |
+| current focused parent-integration matrix | **155 passed**, 11 exhaustive tests deselected, in 218.90 s across the retention gate, generator, exact and interval certificate, module-boundary, and rung-figure suites. |
+| current positive full two-route retention gate | **1 passed** in 170.83 s; the gate required both complete decision routes on unchanged `n = 11` bytes. |
+| final integrated `packing-validate --push` | **35 of 60 selected steps passed** in 1,007.47 s under the plain command; the whole reachable suite reported **1,802 passed, 38 exhaustive tests deselected** in 1,001.42 s. Its clean completion beyond 900 s directly verifies the D-469 budget repair. |
+| current `packing-validate --edit` | **34 of 60 selected steps passed** in 31.64 s; Ruff checked and formatted 801 files, BasedPyright reported zero errors and warnings, and all schema, generated-record, provenance, and edit-tier checks passed. |
+| earlier integrated `packing-validate --push` at `0883f28e` | **34 of 59 selected steps passed**; the then-current behavioral suite reported **1,724 passed, 36 exhaustive tests deselected** in 879.26 s; the complete gate took 882.61 s. This receipt predates F23-F30 and is retained only as provenance for that snapshot. |
 | exact five-atom signed certificate through `sqpack.fractional.verify` | **Incorrectly accepted**, proving F1. |
 | `.venv/bin/basedpyright` at finding head `34d19470` | **Failed: 26 errors**, proving F2. |
 | fresh-copy Lean build and axiom audit | `lake build Kernel` passed in 9.38 s; the audit passed in 2.55 s and reported only `propext`, `Classical.choice`, and `Quot.sound`. |

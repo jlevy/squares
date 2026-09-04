@@ -287,8 +287,15 @@ def test_a_union_of_grids_is_closed_under_d4_and_holds_both_grids() -> None:
     assert union.size == sum(len(orbit) for orbit in union.orbits)
 
 
-def test_generate_adaptive_produces_a_certificate_the_exact_verifier_accepts() -> None:
+def test_generate_adaptive_returns_before_deciding_so_the_candidate_can_be_frozen(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """End to end on a bound nobody doubts: s(5) >= 11/5, well under 2.7071."""
+
+    def unexpected_in_memory_decision(_certificate: object) -> None:
+        raise AssertionError("the default decided a candidate before its bytes were frozen")
+
+    monkeypatch.setattr(colgen, "verify", unexpected_in_memory_decision)
     certificate, log = colgen.generate_adaptive(
         5,
         Fraction(11, 5),
@@ -303,6 +310,7 @@ def test_generate_adaptive_produces_a_certificate_the_exact_verifier_accepts() -
     )
     assert certificate is not None, log.stopped
     assert log.ceiling is not None
+    assert log.accepted is False
     verdict = verify(certificate)
     assert verdict.accepted, verdict.failures
     assert certificate.total_mass < 5

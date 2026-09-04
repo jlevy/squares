@@ -71,7 +71,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | --- | --- | --- | --- | --- | --- | --- |
 | [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 79/20, by a first-party weighted fractional unavoidable-set certificate at container side 79/20 = 3.95. |
-| [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 229/50, and s(18) >= 229/50 and s(19) >= 229/50 by monotonicity, from a first-party weighted fractional unavoidable-set certificate at container side 229/50 = 4.58. |
+| [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
 | [T-014](packing/frontier/RESULTS.md) | 5 | `V3` | `C5` | `S3` | `apparently-novel` | For s = 2 + sqrt(2)/2 and Goebel’s labeled pose P0 in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) -- closed unit squares in [0, s]^2, pairwise disjoint interiors -- equivalently there is no nonconstant continuous feasible path from P0 and no sequence of distinct feasible poses converging to it; hence the n = 5 optimum is rigid at fixed side in the catalogue’s sense. |
 | [T-001](packing/frontier/RESULTS.md) | 17 | `V4` | `C4` | `S3` | `apparently-novel` | Sixteen points make [0, 4426213/1000000]^2 unavoidable for open squares of side above one, so s(17) >= 4426213/1000000 = 4.426213. |
@@ -3203,16 +3203,16 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 463 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 469 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 98 | asserted something false about the mathematics |
-| validity | 120 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 165 | recorded something its own evidence contradicts |
-| robustness | 60 | did not finish, or finished only by luck |
-| performance | 20 | worked, but cost far more than it should |
+| validity | 121 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 167 | recorded something its own evidence contradicts |
+| robustness | 62 | did not finish, or finished only by luck |
+| performance | 21 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
@@ -3220,7 +3220,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-seven defects in 463, and no soundness defect
+**The automated gate has caught sixty-eight defects in 469, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3507,7 +3507,7 @@ It is contained rather than fixed — such delegations are recorded on completio
 `read_only` flag is better than permitting an empty list that would be ambiguous between
 “writes nothing” and “nobody filled this in”.
 
-110 fixes left no regression check behind.
+109 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
@@ -3687,9 +3687,9 @@ bound since Stromquist stated `2 + 4/sqrt(5)` in 2003 and the only S5 result in 
 register, `n = 11` being the smallest open case.
 `s(12) >= 79/20` is [T-017](packing/frontier/RESULTS.md), the first bound ever proved
 about twelve squares rather than inherited from eleven.
-`s(17) >= 229/50`, with `n = 18` and `n = 19` by monotonicity, is
-[T-019](packing/frontier/RESULTS.md) and displaces Massaccesi’s published `4.5058`, the
-only value in print this project has replaced.
+`s(17) >= 459/100`, and `n = 18` and `n = 19` at the same side without a monotonicity
+step, is [T-019](packing/frontier/RESULTS.md) and displaces Massaccesi’s published
+`4.5058` by `0.0842` — the only value in print this project has replaced.
 All three stand at V4 and at least C4: each was decided twice from frozen bytes by an
 exact event-cell sweep and by an interval branch and bound with directed rounding.
 T-018 reaches C5 on the mapped adversarial review retained in this repository; T-017 and
@@ -3701,15 +3701,15 @@ package ships at `packing/cases/n11_fractional_certificate/thirdparty/` so that 
 stranger can decide the `19/5` rung without trusting this repository.
 
 **That lane also has a measured edge, which is the more useful thing to carry.**
-`n = 11` at `3.82` is closed to both pre-registered routes and the closure was checked
-rather than assumed.
-The covering LP was run on two independent site sets and both converged to an objective
-of exactly `11.000000` from above, where a certificate needs mass strictly below eleven;
-the rejection route was then built and decided exactly, and its maximum pointwise depth
-of `1925/1152` caps the feasible total at `1152/175 = 6.58` against the eleven a ceiling
-needs. Where the two routes fail by an infinitesimal at the same value, neither closes.
-That is a limit on the method’s reach at that side, recorded as measurement and not as a
-claim about `tau*`.
+`n = 11` at `3.82` was tested against both pre-registered routes, and neither produced a
+closure. Of two independent covering-LP site sets, the grid-built set converged to
+`11.000000`; the certificate-seeded set stopped with violated placements still present,
+but its restricted objective already stood at eleven and adding rows could only raise
+it. Thus neither fixed site set yields the strictly sub-eleven mass a certificate needs.
+The rejection object was decided exactly, and its maximum pointwise depth of `1925/1152`
+caps its feasible total at `1152/175 = 6.58`, short of the eleven a ceiling needs.
+These are limits of the tested site sets and rejection object, not a closure of the
+method at `3.82` and not a claim about `tau*`; another site set remains possible.
 
 **Each finite certificate also has a ceiling that is structural rather than measured.**
 No certificate for `n` can exist at a container side above `ceil(sqrt(n)) * B`: a wider
@@ -3727,22 +3727,28 @@ permits at most `4/(1+D) = 3.990816…`; no single certificate on a finite net c
 the conjectured endpoint `4`. This does not exclude a proved family with sides tending
 to `4` and a separate limit argument.
 The retained `79/20` certificate has exactly `0.0408` of runway at its fixed `B`.
-`n = 11` and `n = 17` are not foreclosed: their runways are `0.1808` and `0.4085`, and
+`n = 11` and `n = 17` are not foreclosed: their runways are `0.1808` and `0.3985`, and
 both truths sit below their grid bounds.
 
 **Joining that ceiling against the register says the lane has been looking in the wrong
 place.** [`CERTIFICATE-REACH.md`](packing/frontier/CERTIFICATE-REACH.md) ranks all 100
 cases by the most a certificate could add.
 The two this program has spent itself on are near the bottom: `n = 11` has `+0.0671` to
-Trump’s packing and `n = 17` has `+0.0955`. The largest are all just above a perfect
+Trump’s packing and `n = 17` has `+0.0855`. The largest are all just above a perfect
 square, where the lower bound is Nagamochi’s closed form and the gap to the best known
 packing runs near half a unit — eleven cases above `+0.49`, headed by `n = 51` at
 `+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`, `83`, `37`, `53` and `26`. Two
 cautions travel with that ranking.
 The prize is what the *ceiling* allows; the real limit is the covering value at that
-side, and only four restricted optima have ever been measured — `11.0000` at `3.82`,
-`11.9706` at `3.95`, `11.9936` at `3.96`, `16.9628` at `4.58`. They fit a quadratic, and
-a fitted curve is not a measurement.
+side.
+Six side-level program values are reported from `3.82` through `4.68`, but only the
+displayed `3.95` value is recomputable from a tracked artifact, and that is a feasible
+certificate mass rather than a proved optimum.
+The `4.58` and `4.59` frozen candidates corroborate the scale of nearby values, not the
+unretained run objectives.
+The remaining raw logs and checkpoints were not retained.
+The first five figures were described as consistent with a quadratic; incomplete
+retention and the later `4.68` report make that fit an unverified planning conjecture.
 And the cost of a run grows with the container: the site set, the row set and the exact
 sweep all scale with `L²` or worse, so a case at `n = 51` is not an `n = 12` run with a
 different constant.

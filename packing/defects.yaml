@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 463
+count: 469
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14368,37 +14368,23 @@ defects:
   consequence: >-
     No retained bound is affected: every certificate in the record was decided from frozen
     bytes by the reload step that followed, and the reload is what the record cites.
-    The cost is in what cannot be done while a sweep runs, and it has not yet been paid in
-    lost work. An earlier revision of this entry said it had: about forty minutes after
-    the entry was written the session's container restarted, the harness reported every
-    background task stopped, and this was recorded as having taken two candidates with it
-    -- n = 12 at 99/25, 2097 atoms, and n = 17 at 459/100, 1184 atoms. That was wrong and
-    is corrected here. What the restart stopped were the harness's own watchers; the four
-    solver processes were never children of the session and kept running throughout, and
-    `ps` showed all four still accumulating processor time. Four duplicate lanes were
-    launched against the survivors before that was checked, and were stopped.
-    The exposure the entry describes is real and unchanged: nothing is written until the
-    sweep has already passed, so a process that does die inside it loses its candidate,
-    and the cheap interval route cannot pre-screen a file that does not exist. What is not
-    yet demonstrated is a loss, and the entry should not have claimed one.
+    An earlier revision said a container restart had already lost two candidates. That
+    was wrong: the harness's watchers stopped, but the four solver processes were not its
+    children and continued accumulating processor time. Four duplicate lanes were
+    launched before that was checked, then stopped. The original exposure was prospective
+    rather than an observed loss: a future process killed during its default in-memory
+    sweep could lose the rationalised candidate and could not run the cheap interval route
+    first.
   fix: >-
-    Fixed on 2026-09-04 in the parametrised driver. The candidate is written the moment it
-    is rationalised, before any decision, and the exact sweep then runs on the reloaded
-    file rather than on the object; `least_cell_mass` is added to the record afterwards,
-    when there is a verdict to record. The run prints the frozen path and points at
-    `devtools.decide_certificate`, which is the gate the file then has to pass.
-    Freezing first is not a weaker check. The reload was already there and already decided
-    the bytes; what changed is that the bytes now exist whether or not the decision
-    finishes.
-    The older scratchpad drivers carried the old ordering because they predated the
-    parametrised one. They were not retained in this repository, so their wiring cannot
-    be verified here. The durable containment is the repository gate: retained work must
-    freeze each candidate to its own path and hand that path to
-    `devtools.decide_certificate`. A driver that cannot produce a file for that tool is a
-    driver that should not be used for retained work.
-  regression: none
+    `generate_adaptive` now defaults `decide` to false and returns the rationalised
+    in-memory candidate promptly so its caller can freeze it before any expensive sweep.
+    Explicit in-memory deciding remains available for small exploratory calls but is
+    documented as non-retaining. The durable boundary is path based: retained work writes
+    the candidate and hands that frozen path to `devtools.decide_certificate`; the library
+    generator itself neither writes nor claims to retain a file.
+  regression: tests/test_fractional_generate.py::test_generate_adaptive_returns_before_deciding_so_the_candidate_can_be_frozen
   status: fixed
-  recorded_in: docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md
+  recorded_in: packing/src/sqpack/fractional/colgen.py
 - id: D-455
   title: The moving parent and its stacked review assigned D-441 to different defects
   date: '2026-09-04'
@@ -14582,22 +14568,28 @@ defects:
   status: fixed
   what: >-
     The interval verifier deliberately raised ordinary ValueError exceptions on unsafe
-    integer scales and invalid certificate domains. The retention command either let
-    those expected non-decisions abort a batch or had to catch a built-in class also used
-    by internal programming errors.
+    integer scales and invalid certificate domains. Exact inputs at the edge of the
+    finite-float range could also pass conversion and overflow during later scalar or
+    rotated-atom arithmetic, emitting hundreds of NumPy warnings before a raw ValueError.
+    The retention command either let those expected non-decisions abort a batch or had
+    to catch a built-in class also used by internal programming errors.
   consequence: >-
     One unusable candidate could terminate a multi-file retention run before later paths
     were examined, despite the command otherwise aggregating per-path verdicts.
   fix: >-
     Give documented interval input failures their own IntervalInputError type, translate
-    exact-to-float overflow at the input-enclosure boundary, and convert only that type
-    into a labeled refusal. Unexpected ValueError and OverflowError exceptions from
-    either implementation remain visible as programming failures.
+    exact-to-float and finite-arithmetic overflow at the input-enclosure boundary, reject
+    nonfinite rotated-atom geometry before search, and convert only that type into a
+    labeled refusal. Expected overflow warnings are contained. Unexpected ValueError and
+    OverflowError exceptions from either implementation remain visible as programming
+    failures.
   regression: >-
     tests/test_decide_certificate.py::test_an_interval_decision_error_is_a_refusal_before_exact,
-    test_out_of_range_coordinates_are_a_per_path_interval_refusal, and
+    test_out_of_range_coordinates_are_a_per_path_interval_refusal,
+    test_finite_boundary_arithmetic_is_a_per_path_interval_refusal,
+    test_finite_atom_geometry_overflow_is_a_quiet_per_path_refusal, and
     test_an_unexpected_interval_error_remains_visible
-  recorded_in: packing/devtools/decide_certificate.py
+  recorded_in: packing/src/sqpack/fractional/interval.py
 - id: D-463
   title: RETAINABLE was not bound to the bytes still present after the sweeps
   date: '2026-09-04'
@@ -14624,3 +14616,169 @@ defects:
     test_rewriting_the_path_during_the_exact_sweep_prevents_retention, and
     test_a_positive_full_decision_prints_the_accepted_digest
   recorded_in: packing/devtools/decide_certificate.py
+- id: D-464
+  title: Batch refusal diagnostics lost their candidate identity on stderr
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: one stacked-review revision
+  severity: medium
+  status: fixed
+  what: >-
+    After diagnostics were split by stream, the candidate header went to stdout while
+    post-load refusals went to stderr as bare indented lines. Automation that captures
+    streams separately could not attribute a refusal to its input, especially when two
+    paths shared a basename. Initial load errors also printed only a basename.
+  consequence: >-
+    A multi-candidate retention batch could fail safely but leave an operator unable to
+    tell which frozen artifact was refused, making the gate's result operationally
+    ambiguous.
+  fix: >-
+    Prefix every refusal with the full input path on stderr, keep positive progress on
+    stdout, and skip repeated path arguments before running a second decision.
+  regression: >-
+    tests/test_decide_certificate.py::test_batch_decision_diagnostics_name_the_failing_equal_basename
+    and test_batch_load_diagnostics_distinguish_equal_basenames
+  recorded_in: packing/devtools/decide_certificate.py
+- id: D-465
+  title: The reach table promoted unretained run reports to measured optima
+  date: '2026-09-04'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: two parent updates
+  severity: medium
+  status: fixed
+  what: >-
+    The generated reach table and synopsis called a changing set of four or five
+    restricted values measured optima, while the latest parent added a sixth at 4.68.
+    Only the displayed 3.95 value is exactly reconstructable from a retained artifact,
+    and even it is a feasible certificate mass rather than proof of an optimum. The 4.58
+    and 4.59 certificates have nearby but different masses; raw logs or checkpoints for
+    the reported objectives at 3.82, 3.96, 4.58, 4.59 and 4.68 are absent.
+  consequence: >-
+    A sparse, incompletely retained planning series looked independently measured and
+    could be fitted or used to rank expensive searches with more confidence than its
+    evidence supports.
+  fix: >-
+    Put the evidence status beside every reported value, distinguish feasible masses
+    from optima, qualify the unretained 4.68 operator report at its source, and describe
+    the proposed quadratic only as an unverified planning conjecture.
+  regression: packing/tests/test_rung_figures.py::test_the_reach_table_distinguishes_reports_from_retained_measurements
+  recorded_in: packing/devtools/render_certificate_reach.py
+- id: D-466
+  title: The rung-figure detector missed a live possessive mass after the top moved
+  date: '2026-09-04'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  recurrence_of: D-439
+  latent_for: one parent update
+  severity: high
+  status: fixed
+  what: >-
+    After the n = 17 top rung moved from 4.58 to 4.59, results.yaml still said "this
+    certificate's 16.965735" instead of the current 16.933080. The detector advertised
+    for this exact drift passed because it recognized keyword forms such as "total mass"
+    but not the possessive bare-mass form used by the live record.
+  consequence: >-
+    The first live rung change after the detector was introduced demonstrated a blind
+    syntax and left a stale certificate figure green.
+  fix: >-
+    Recognize the narrowly anchored "certificate's DECIMAL reaching" mass form, update
+    the detector's own examples to the current top rung, and retain the exact stale phrase
+    as a must-fail regression.
+  regression: packing/tests/test_rung_figures.py::test_catches_a_bare_possessive_mass_after_the_top_rung_moves
+  recorded_in: packing/devtools/check_rung_figures.py
+- id: D-467
+  title: The n = 17--19 case prose stayed on the superseded 4.5058 bound
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: one parent update
+  severity: high
+  status: fixed
+  what: >-
+    The latest parent moved all three frontmatter bounds to 4.59 but left their bodies at
+    Massaccesi's historical 4.5058, including old gaps and monotonicity composition.
+    The n = 18 and n = 19 bound fields also cited two historical 4.5058 evidence records
+    as support for 4.59. Related tests, evidence prose and T-015/T-016 successor notes
+    retained the superseded rung or said the current certificate did not reach n = 20.
+  consequence: >-
+    Reader-facing case pages contradicted their structured fields and understated the
+    current result, while some current evidence links did not establish the value they
+    were attached to.
+  fix: >-
+    State the 4.59 first-party certificate, current gaps and direct C1 composition in all
+    three case bodies; attach only its exact and interval evidence to the current bound;
+    and correct historical successor, n = 20 and test descriptions without erasing the
+    earlier results.
+  regression: packing/tests/test_rung_figures.py::test_t019_case_pages_bind_the_current_direct_certificate
+  recorded_in: packing/frontier/n-017.md
+- id: D-468
+  title: A restricted interval search leaked overflow warnings after finite input conversion
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  recurrence_of: D-462
+  latent_for: one stacked-review revision
+  severity: medium
+  status: fixed
+  what: >-
+    D-462 contained overflow while constructing a direction search, but the public
+    interval verifier ran the search itself outside that boundary. A finite certificate
+    with side 10^308 and a restricted near-diagonal direction emitted sixteen NumPy
+    overflow warnings while tightening its first box. The result refused rather than
+    accepting, so the concrete theorem was unaffected, but the claimed quiet finite-input
+    boundary was incomplete.
+  consequence: >-
+    Diagnostic callers could receive warning noise instead of the documented typed
+    refusal, and later arithmetic could discard an infinite intermediate by intersecting
+    it with a finite box before the existing final-result guard saw it.
+  fix: >-
+    Reject nonfinite intermediate or final vector-interval results with
+    IntervalInputError, guard tightened search bounds, and contain expected NumPy
+    overflow warnings around the complete direction search.
+  regression: packing/tests/test_fractional_interval.py::test_finite_search_arithmetic_overflow_is_a_quiet_typed_refusal
+  recorded_in: packing/src/sqpack/fractional/interval.py
+- id: D-469
+  title: The pre-push whole-suite test step discarded the measured suite budget
+  date: '2026-09-04'
+  layer: tooling
+  class: performance
+  detected_by: gate
+  recurrence_of: D-438
+  latent_for: >-
+    since the dynamic reachable-test step was added on 2026-08-30; first fatal after the
+    ordinary suite again crossed the shared 900-second cap
+  severity: high
+  status: fixed
+  what: >-
+    The complete ordinary behavioral suite has a 1,800-second declared budget, justified
+    by a 1,209-second clean run. The `--push` path reaches the same suite through a
+    dynamically constructed `reachable behavioral tests` step when conservative selection
+    expands to everything, but that step carried no budget and inherited the shared
+    900-second cap. The final stacked-branch gate was killed at 88% completion after 900
+    seconds. Three failures printed earlier were separately reduced to the local sandbox's
+    refusal to bind loopback ports and passed together outside it in 2.90 seconds; they
+    were not the timeout's cause.
+  consequence: >-
+    The documented command required before a push could not complete on the same ordinary
+    suite that the wider validation entry point had already measured and budgeted. The
+    failure was conservative, not mathematical, but it blocked publication and made the
+    healthy suite look hung.
+  fix: >-
+    Reuse the ordinary suite's 1,800-second declared ceiling when the push selector says
+    `everything`. Keep a true reachable subset on the shared 900-second hang guard, and
+    preserve the rule that an explicit operator timeout overrides either ceiling.
+  regression: >-
+    packing/tests/test_validation_cli.py::test_push_tests_reuse_the_whole_suite_budget_only_when_needed
+    constructs both dynamic selector outcomes and pins their distinct budgets; the final
+    pre-push receipt records completion under the default invocation.
+  recorded_in: packing/src/sqpack/cli/validate.py

@@ -13,6 +13,7 @@ and confirms it is reported as undecided rather than accepted.
 from __future__ import annotations
 
 import random
+import warnings
 from dataclasses import replace
 from fractions import Fraction
 
@@ -323,7 +324,7 @@ def test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net() -> N
 
 @pytest.mark.exhaustive_exact
 def test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net() -> None:
-    """The interval-certified decision of s(17) >= 229/50, every direction.
+    """The interval-certified decision of s(17) >= 459/100, every direction.
 
     T-019 stands at C4 on the strength of this route, and until this test the
     only n = 17 certificate it decided here was Massaccesi's published control.
@@ -335,9 +336,9 @@ def test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net() -> N
     assert len(verdict.directions) == 361
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
     enclosure = verdict.enclosure
-    assert enclosure == (Fraction(12501, 12500), Fraction(12501, 12500))
+    assert enclosure == (Fraction(200009, 200000), Fraction(200009, 200000))
     assert enclosure is not None
-    assert certificate.bounded_side == Fraction(229, 50)
+    assert certificate.bounded_side == Fraction(459, 100)
     assert declared_n17()["least_cell_mass"] == str(enclosure[0])
 
 
@@ -428,6 +429,24 @@ def test_scaled_mass_overflow_is_refused_before_numpy_arithmetic() -> None:
         AtomData.of(certificate)
     with pytest.raises(ValueError, match="total scaled atom mass"):
         verify_by_intervals(certificate, directions=("0",))
+
+
+def test_finite_search_arithmetic_overflow_is_a_quiet_typed_refusal() -> None:
+    outer = 10**308
+    certificate = Certificate(
+        n=(2 * outer) ** 2,
+        outer_side=Fraction(outer),
+        square_side=Fraction(1, 2),
+        atoms=(),
+        half_tangents=(Fraction(0), Fraction(207107, 500000)),
+        symmetry="D4",
+    )
+
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        with pytest.raises(IntervalInputError, match="finite float arithmetic"):
+            verify_by_intervals(certificate, enclose=True, directions=("1",))
+    assert not caught
 
 
 def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> None:
