@@ -5,7 +5,7 @@ title: Render the certificate page from the certificate and deploy via GitHub Pa
 kind: feature
 status: closed
 priority: 1
-version: 13
+version: 15
 labels: []
 dependencies: []
 parent_id: is-01m1pnpwvpjydts81pffmp1nt7
@@ -21,8 +21,10 @@ child_order_hints:
   - is-01m1q9ytn2bwh9tq2gzbq3bmf7
   - is-01m1q9yv1gamepspy7fssy1bka
   - is-01m1qcfadhxtk6wjsk4cv77gft
+  - is-01m1qch0rd3xdh7aweeay1g7kv
+  - is-01m1qch137zgmkars2kjr4738f
 created_at: 2026-09-04T20:10:16.043Z
-updated_at: 2026-09-04T23:36:14.000Z
+updated_at: 2026-09-04T23:37:09.990Z
 closed_at: 2026-09-04T22:39:14.606Z
 close_reason: The page renders from the certificate and the Pages workflow is wired and green on a hosted runner; deployment itself waits on reaching main
 resolution: null
