@@ -60,7 +60,7 @@ declare target ──► lane runs ──► coordinator verifies FROM DISK ─�
       └──── redirect on refuted premise ◄─── control fails
 ```
 
-Six rules make it work.
+Seven rules make it work.
 
 **Run the control before the target.** The generator reproduced Massaccesi’s published
 `n = 17` optimum (203/12, from zero weights, never told the answer) before any new bound
@@ -115,6 +115,34 @@ name is the whole contract, and no test caught it, because every retained certif
 passes under either reading.
 Read the acceptance path itself before registering an instrument as evidence; passing
 tests only show that the instrument agrees with the cases you already believed.
+
+**Read the evidence, not a reconstruction of it.** Every error this method has recorded
+is a variant of one move: substituting a plausible reading for the number that was
+available. Three from a single block, none of them subtle in hindsight.
+
+A certificate’s mass was read as the covering value at its side.
+It is only an upper bound on it — a better certificate carries less, which is what
+climbing a ladder *means* — so `n = 12` was declared exhausted at `3.94` on the strength
+of `11.992825` sitting `0.0072` below twelve.
+The probe built to prove the exhaustion disproved it within four rounds and produced
+`3.95`.
+
+A CI run was read as having gone 31 minutes when the clock said 20, so a push that was
+believed to follow it in fact cancelled it, and the verdict everyone was waiting for was
+lost for another cycle.
+
+A truncated log was read as the whole log.
+`packing-validate` appends a failing step’s subprocess output to its failure detail, but
+steps run concurrently, so that detail prints where the step finished — the middle of a
+long log, while the end carries only the step name.
+Every fetch was a tail.
+Hours went to guessing at a failing test whose name was in the file the whole time.
+
+The tell is the same in all three: a number was *inferred* when it could have been
+*read*. Before asserting what a run showed, what a check did, or what a value means,
+find the line that says it.
+When the line is missing, say the thing is unknown rather than supplying the most likely
+version of it — an unknown is cheap to carry and a wrong reconstruction costs the block.
 
 ## Guards for unattended running
 
