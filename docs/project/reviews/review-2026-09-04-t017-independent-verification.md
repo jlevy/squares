@@ -208,3 +208,7 @@ Working with the closed container rather than the open one is the conservative c
 2. `C4` is stated over all placements in the closed container — a superset of what is
    needed. This is a strengthening, so it is sound; it is also what makes the condition
    checkable without reference to any particular packing.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
