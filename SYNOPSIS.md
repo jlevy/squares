@@ -3724,6 +3724,23 @@ this shape will ever settle twelve squares, however fine the net or the site set
 `n = 11` and `n = 17` are not foreclosed: their runways are `0.1808` and `0.4085`, and
 both truths sit below their grid bounds.
 
+**Joining that ceiling against the register says the lane has been looking in the wrong
+place.** [`CERTIFICATE-REACH.md`](packing/frontier/CERTIFICATE-REACH.md) ranks all 100
+cases by the most a certificate could add.
+The two this program has spent itself on are near the bottom: `n = 11` has `+0.0671` to
+Trump’s packing and `n = 17` has `+0.0955`. The largest are all just above a perfect
+square, where the lower bound is Nagamochi’s closed form and the gap to the best known
+packing runs near half a unit — eleven cases above `+0.49`, headed by `n = 51` at
+`+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`, `83`, `37`, `53` and `26`. Two
+cautions travel with that ranking.
+The prize is what the *ceiling* allows; the real limit is the covering value at that
+side, and only four restricted optima have ever been measured — `11.0000` at `3.82`,
+`11.9706` at `3.95`, `11.9936` at `3.96`, `16.9628` at `4.58`. They fit a quadratic, and
+a fitted curve is not a measurement.
+And the cost of a run grows with the container: the site set, the row set and the exact
+sweep all scale with `L²` or worse, so a case at `n = 51` is not an `n = 12` run with a
+different constant.
+
 The middle tier is built and works within the explicit boundaries above.
 Two instruments now agree on the cell decomposition to `4.4e-16` and on the corner’s
 slopes to three decimals.

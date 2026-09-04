@@ -711,9 +711,9 @@ results:
       The covering LP was run on two independent site sets, and the two stop at exactly
       eleven for different reasons, which is worth separating because only one of them
       converged.
-      The grid-built set, 6041 sites, ran its row loop to convergence and finished at an
-      objective of exactly 11.000000, descending to it from 11.6 over twelve rounds and
-      never crossing below.
+      The grid-built set, 6637 sites and 14820 rows at the end, ran its row loop to
+      convergence and finished at an objective of exactly 11.000000, descending to it
+      from 11.6 over twelve rounds and never crossing below.
       The set seeded from this certificate's own 1121 atoms, 24069 sites, has not
       converged and does not need to. Its objective has stood at 11.000000 through
       twenty-four row rounds and 30240 rows while the loop's least covered mass climbed
