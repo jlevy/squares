@@ -2,7 +2,7 @@
 
 # Defect log
 
-438 defects recorded across the packing toolchain.
+439 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
 | `review` | 265 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
-| `inspection` | 46 | reading the code or the design with intent |
+| `inspection` | 47 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 64 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 64 of 438, and none of the 92 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 64 of 439, and none of the 92 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -36,7 +36,7 @@ The line worth reading twice: **the automated gate caught 64 of 438, and none of
 | verifier | 7 |
 | record | 132 |
 | tooling | 158 |
-| docs | 107 |
+| docs | 108 |
 
 ## By kind
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 64 of 438, and none of
 | --- | ---: |
 | soundness | 92 |
 | validity | 116 |
-| bookkeeping | 158 |
+| bookkeeping | 159 |
 | robustness | 56 |
 | performance | 16 |
 
@@ -674,6 +674,7 @@ This is the actionable list.
 | [D-436](docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) | 2026-09-04 | verifier | bookkeeping |  | `review` | medium | fixed | The third-party package misnamed its own control and refused malformed files by traceback |
 | [D-437](packing/tests/test_fractional_generate.py) | 2026-09-04 | tooling | robustness |  | `gate` | high | fixed | A strong-duality test asserted float equality and failed on half of CI runs |
 | [D-438](packing/tests/test_module_boundaries.py) | 2026-09-04 | tooling | performance |  | `gate` | high | fixed | The fast test tier outgrew its budget as the certificates grew, and hid a failure |
+| [D-439](packing/cases/n11_fractional_certificate/thirdparty/README.md) | 2026-09-04 | docs | bookkeeping |  | `inspection` | medium | fixed | A shipped package named the top rung, and the name moved out from under it |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

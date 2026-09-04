@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 438
+count: 439
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13789,3 +13789,47 @@ defects:
     marked node by name, so a future slow decision cannot join the fast tier silently.
   status: fixed
   recorded_in: packing/tests/test_module_boundaries.py
+- id: D-439
+  title: A shipped package named the top rung, and the name moved out from under it
+  date: '2026-09-04'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    from c68c1616, when the package shipped against a top rung of 19/5, until the ladder
+    advanced to 381/100 later the same day -- about six hours, spanning one adversarial
+    review that read the file line by line and did not catch it
+  severity: medium
+  what: >-
+    The third-party package's file table described its own `certificate.json` as
+    "byte-identical to `../certificate.json`" and printed the SHA-256 to let a reader
+    check it. That was true when written. `../certificate.json` is the case's *top* rung
+    by construction -- retention replaces it each time the ladder advances -- so when
+    n = 11 moved from 19/5 to 381/100 the sibling became a different file with a
+    different hash, and the package's own copy stayed where it was. The statement
+    inverted from true to false with no edit to either file.
+  consequence: >-
+    Documentation only, and the package itself was unaffected: `check.py`, `verify.py`
+    and `falsify.py` read nothing outside their own directory, so a stranger running the
+    package got the right answer throughout. What broke was the one claim in the file a
+    sceptical reader is most likely to test first, in a document whose entire purpose is
+    to be checkable without trusting this project. `sha256sum` on the two files disagrees
+    in the first byte; a reader who ran the check the file invites would have found the
+    package contradicting itself and had no way to tell a stale pointer from a swapped
+    certificate.
+  fix: >-
+    Fixed on 2026-09-04. The table now names `../certificate-19-5.json`, the immutable
+    rung file, which is what the hash was always of, and says in the same cell that
+    `../certificate.json` is the moving top-rung pointer and now carries 381/100.
+    The general rule the miss teaches: a cross-reference in a durable document points at
+    a name whose meaning is fixed, never at one that tracks the frontier. Retention
+    ladders here have both -- `certificate-19-5.json` never changes, `certificate.json`
+    changes on every rung -- and prose that cites a hash must cite the first kind.
+  regression: >-
+    None automated. The adversarial review that read this package line by line
+    (docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) ran twenty-one
+    attacks and missed this one, because at the time the sentence was true; the class of
+    error only appears later, which is what makes a checked-in hash beside a moving name
+    worth a rule rather than a test.
+  status: fixed
+  recorded_in: packing/cases/n11_fractional_certificate/thirdparty/README.md
