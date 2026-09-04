@@ -578,6 +578,11 @@ results:
       movement is +0.161146, and the case stays open against its conjectured
       optimum of 4, now by 0.05. The 197/50 rung it reached first is retained
       below it.
+      It also separates the two cases for the first time. 79/20 = 3.95 exceeds
+      Trump's 1979 packing of eleven squares at 3.877084, so s(12) > s(11) strictly,
+      by at least 0.072916. Monotonicity gives only s(12) >= s(11); the strict
+      inequality did not follow from anything on record before, because n = 12's
+      previous lower bound was s(11)'s own 3.788854 and sat below Trump's packing.
     scope:
       n_values:
         - 12
@@ -627,12 +632,25 @@ results:
       decision, which bounds coverage by branch and bound over boxes of centres with
       directed rounding and shares no modelling assumption with the sweep. C5
       needs a review artifact by someone outside the project. The bound
-      itself: the ladder 19/5, 77/20, 97/25, 39/10, 393/100, 197/50 was climbed once the
-      separation oracle was corrected to score the cells the verifier decides
-      (D-434), and every rung is retained. The hard ceiling from the shrink at 181
-      directions is 3.99082, so only 0.05 of headroom remains; the margin below
-      twelve at 197/50 is already 0.0072, so a further rung needs a finer net as
-      well as a finer site set.
+      itself: the ladder 19/5, 77/20, 97/25, 39/10, 393/100, 197/50, 79/20 was climbed
+      once the separation oracle was corrected to score the cells the verifier decides
+      (D-434), and every rung is retained.
+      The retained certificate's total is 1197059/100000 = 11.970590, leaving 0.029410
+      below twelve. Margin does not shrink monotonically as the ladder climbs -- the
+      197/50 rung below this one has only 0.007175, four times less at a lower side --
+      because the site set matters at least as much as the side, so a tight rung is
+      evidence about that run and not about how much room is left.
+      What is left is bounded, though, and by the method rather than by the search.
+      A certificate for n cannot exist above ceil(sqrt(n)) * B, since a container wider
+      than that holds ceil(sqrt(n))^2 pairwise disjoint axis-parallel B-squares, each
+      carrying mass at least 1 by C4, which forces the total past n and breaks C1.
+      Here that ceiling is 4B = 3.9908, and 4/(1 + D) = 3.990816 over every shrink the
+      181-direction net admits, so 79/20 has 0.0408 of runway left.
+      The consequence for this case is structural but finite in scope: the grid packing
+      gives s(12) <= 4, and no single certificate on a finite net can certify the
+      conjectured endpoint 4. This does not exclude a proved family of certificates with
+      sides tending to 4 and a separate limit argument. What remains is whether actual
+      certificates can approach the upper envelope as the net is refined.
   - id: T-018
     claim: >-
       s(11) >= 381/100, by a first-party weighted fractional unavoidable-set
@@ -708,11 +726,22 @@ results:
       exactly 1 -- and was accepted at every direction. An objective below n proves
       nothing on its own; the loop's stopping condition is the thing to read.
       Where it stops: 3.82 was then attacked from both sides and neither route closes.
-      The covering LP was run twice on independent site sets -- one seeded from this
-      certificate's own 1121 atoms, reaching 24069 sites and 27440 rows, and one built
-      from grids, reaching 6041 sites -- and both converged to an objective of exactly
-      11.000000, approaching it from above and never crossing. A certificate needs mass
-      strictly below eleven, so neither yields one. The rejection route does not close
+      The covering LP was run on two independent site sets, and the two stop at exactly
+      eleven for different reasons, which is worth separating because only one of them
+      converged.
+      The grid-built set, 6637 sites and 14820 rows at the end, ran its row loop to
+      convergence and finished at an objective of exactly 11.000000, descending to it
+      from 11.6 over twelve rounds and never crossing below.
+      The set seeded from this certificate's own 1121 atoms, 24069 sites, has not
+      converged and does not need to. Its objective has stood at 11.000000 through
+      twenty-four row rounds and 30240 rows while the loop's least covered mass climbed
+      from 0.8490 towards 1, reaching 0.9997 at the round the run was stopped -- so
+      violated placements remained and the loop had not exhausted.
+      Adding rows can only raise a restricted optimum, so the
+      optimum for that site set is at least eleven whatever the loop does next, and no
+      certificate exists on it. Reading the objective alone would have understated this:
+      the loop's stopping state is what makes the conclusion independent of finishing.
+      A certificate needs mass strictly below eleven, so neither site set yields one. The rejection route does not close
       either, and it is much further from closing than the search's own progress
       figures suggest. H-061's object was built and decided exactly: the converged dual
       is 76 squares, 608 after the D4 images, with a raw total of exactly 11, and
@@ -726,6 +755,11 @@ results:
       maximum is 53 per cent higher, because depth peaks at vertices of the arrangement
       that no grid samples. A ceiling must therefore be judged on the exact check and
       never on the sampled depth, which flatters it.
+      One thing 3.82 is not: the method's ceiling. A certificate for n cannot exist
+      above ceil(sqrt(n)) * B, because a wider container holds ceil(sqrt(n))^2 pairwise
+      disjoint axis-parallel B-squares whose masses C4 forces past n; for n = 11 that is
+      4B = 3.9908, leaving 0.1808 of runway above the retained 381/100. The wall at 3.82
+      is a covering wall, met far below where the method stops working.
       If tau*(3.82) is exactly eleven then this is the one configuration where neither
       pre-registered route can close, since a certificate needs mass below n and a
       ceiling needs the scaled dual to reach n, and both fail by an infinitesimal at
@@ -795,3 +829,23 @@ results:
       nothing about what a different site set reaches at a larger side.
       A further rung is therefore a search question, and the quantity to read is the
       restricted optimum a converged run reaches, never an extrapolated rate.
+      The method's own ceiling is not close here. A certificate for n cannot exist above
+      ceil(sqrt(n)) * B, a wider container holding ceil(sqrt(n))^2 pairwise disjoint
+      axis-parallel B-squares whose masses C4 forces past n; for n = 17 that is
+      5B = 4.9885, so 229/50 still has 0.4085 of runway. Unlike n = 12, where the same
+      lemma prevents any single finite certificate from attaining the conjectured grid
+      endpoint, this ceiling does not constrain the next useful n = 17 rungs.
+      Where the next rung is worth spending on, though, is not n = 17. Of the five
+      conditions only C1 mentions n, and the covering program behind the search does not
+      contain n at all -- minimising total mass subject to every admissible B-square
+      carrying mass at least 1 is a question about L, B and the net. So one atom set
+      proves s(n) >= L for every integer n above its mass, this certificate's 16.965735
+      reaching 17, 18 and 19 directly rather than through the monotonicity step the
+      composition field records, and a larger n is strictly easier at the same side.
+      The headroom says the rest. n = 17 has 0.0956 to its best known packing at
+      4.675530; n = 18 has 0.2429 to 4.822876 and n = 19 has 0.3056 to 4.885618, both
+      still carrying this certificate's 4.58 with nothing case-specific ever proved for
+      either; and n = 20 has 0.3944 to the trivial 5, holding Nagamochi's closed-form
+      1 + sqrt(13) = 4.605551. A run at a side whose covering value lands between 17 and
+      18 raises n = 18 and leaves n = 17 where it is; one landing between 19 and 20
+      displaces a published closed form.

@@ -208,6 +208,7 @@ case or experiment separately.
 | [Current Square-Packing Frontier](packing/frontier/STATUS.md) | generated status view | generated | generated | — |
 | [Evidence inventory](packing/frontier/INVENTORY.md) | generated status view | generated | generated | — |
 | [Results](packing/frontier/RESULTS.md) | generated status view | generated | generated | — |
+| [Where the fractional certificate can still go](packing/frontier/CERTIFICATE-REACH.md) | generated status view | generated | generated | — |
 | [Research Resources: Square Packing](packing/resources/README.md) | source retention and archive policy | definitive | maintained | — |
 | [Defect log](defects.md) | generated status view | generated | generated | — |
 | [FrankenSim probes](packing/frankensim-probe/README.md) | component scope and use | supporting | maintained | — |
@@ -3202,24 +3203,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 450 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 453 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 95 | asserted something false about the mathematics |
+| soundness | 96 | asserted something false about the mathematics |
 | validity | 118 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 161 | recorded something its own evidence contradicts |
+| bookkeeping | 163 | recorded something its own evidence contradicts |
 | robustness | 57 | did not finish, or finished only by luck |
 | performance | 19 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Seventy-six of the ninety-five soundness defects pointed in the *flattering*
+**Seventy-six of the ninety-six soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-seven defects in 450, and no soundness defect
+**The automated gate has caught sixty-seven defects in 453, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3707,6 +3708,42 @@ of `1925/1152` caps the feasible total at `1152/175 = 6.58` against the eleven a
 needs. Where the two routes fail by an infinitesimal at the same value, neither closes.
 That is a limit on the method’s reach at that side, recorded as measurement and not as a
 claim about `tau*`.
+
+**Each finite certificate also has a ceiling that is structural rather than measured.**
+No certificate for `n` can exist at a
+container side above `ceil(sqrt(n)) * B`: a wider container holds `ceil(sqrt(n))^2`
+pairwise disjoint axis-parallel `B`-squares, direction `0` is always in the net, so `C4`
+gives each of them mass at least `1` and the total passes `n`, which `C1` forbids.
+With `C3` bounding `B` below `1 / (1 + D)`, the ceiling over every shrink a net admits
+is `ceil(sqrt(n)) / (1 + D)`, and refining the net raises it only as fast as `D` falls —
+about `T / K`, so twice the directions for half the gap, and twice the cost of every
+decision taken over them.
+Since the grid packing gives `s(n) <= ceil(sqrt(n))` for free, every individual
+finite-net certificate sits strictly below that trivial upper bound. For `n = 12`, the
+retained shrink gives `4B = 3.9908` and the fixed 181-direction net permits at most
+`4/(1+D) = 3.990816…`; no single certificate on a finite net can certify the conjectured
+endpoint `4`. This does not exclude a proved family with sides tending to `4` and a
+separate limit argument. The retained `79/20` certificate has exactly `0.0408` of runway
+at its fixed `B`.
+`n = 11` and `n = 17` are not foreclosed: their runways are `0.1808` and `0.4085`, and
+both truths sit below their grid bounds.
+
+**Joining that ceiling against the register says the lane has been looking in the wrong
+place.** [`CERTIFICATE-REACH.md`](packing/frontier/CERTIFICATE-REACH.md) ranks all 100
+cases by the most a certificate could add.
+The two this program has spent itself on are near the bottom: `n = 11` has `+0.0671` to
+Trump’s packing and `n = 17` has `+0.0955`. The largest are all just above a perfect
+square, where the lower bound is Nagamochi’s closed form and the gap to the best known
+packing runs near half a unit — eleven cases above `+0.49`, headed by `n = 51` at
+`+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`, `83`, `37`, `53` and `26`. Two
+cautions travel with that ranking.
+The prize is what the *ceiling* allows; the real limit is the covering value at that
+side, and only four restricted optima have ever been measured — `11.0000` at `3.82`,
+`11.9706` at `3.95`, `11.9936` at `3.96`, `16.9628` at `4.58`. They fit a quadratic, and
+a fitted curve is not a measurement.
+And the cost of a run grows with the container: the site set, the row set and the exact
+sweep all scale with `L²` or worse, so a case at `n = 51` is not an `n = 12` run with a
+different constant.
 
 The middle tier is built and works within the explicit boundaries above.
 Two instruments now agree on the cell decomposition to `4.4e-16` and on the corner’s

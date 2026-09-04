@@ -40,6 +40,7 @@ here rounds, samples an angle, or compares against a tolerance.
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 from fractions import Fraction
 from itertools import pairwise
@@ -151,6 +152,84 @@ class Certificate:
         return max(
             (right - left) / (1 + left * right) for left, right in pairwise(self.half_tangents)
         )
+
+
+def least_size_certified(total_mass: Fraction) -> int:
+    """The smallest ``n`` a set of atoms of this mass can certify: ``floor(mass) + 1``.
+
+    ``n`` appears in exactly one of the five conditions. ``C0``, ``C2``, ``C3``
+    and ``C4`` say nothing about it, and the covering linear program behind the
+    search does not contain it either: minimising total mass subject to every
+    admissible ``B``-square carrying mass at least 1 is a question about ``L``,
+    ``B`` and the net alone. ``C1`` is where ``n`` enters, and it only asks that
+    the mass fall below it.
+
+    So one atom set proves ``s(n) >= L`` for *every* integer ``n`` above its
+    mass, not just the one its record happens to declare, and a larger ``n`` is
+    strictly easier at the same side. That is the lever for the cases above
+    ``n = 17``: a run at a side whose covering value lands between 17 and 18
+    raises ``n = 18`` and leaves ``n = 17`` where it was.
+
+    The claim stays consistent with ``ceiling_side`` automatically. If
+    ``L > ceil(sqrt(n)) B`` then ``C4`` forces the mass to ``ceil(sqrt(n))^2 >= n``,
+    which is exactly what this function then refuses to certify.
+    """
+
+    return math.floor(total_mass) + 1
+
+
+def grid_refutation_order(n: int) -> int:
+    """The least ``m`` with ``m * m >= n``: the grid that refutes a certificate.
+
+    ``m`` axis-parallel ``B``-squares fit across a container whose side exceeds
+    ``m B``, so ``m * m`` of them fit inside it, and the least such ``m`` with
+    ``m * m >= n`` is the one that matters. This is ``ceil(sqrt(n))``, written
+    with ``isqrt`` so that no float decides an integer.
+    """
+
+    root = math.isqrt(n)
+    return root if root * root >= n else root + 1
+
+
+def ceiling_side(n: int, square_side: Fraction) -> Fraction:
+    """``ceil(sqrt(n)) * B``: a necessary upper bound on a certificate's ``L``.
+
+    The method has a ceiling, and it is elementary. Write ``m = ceil(sqrt(n))``
+    and suppose ``L > m B``. Set ``g = (L - m B) / (m + 1) > 0`` and place
+    ``m * m`` closed ``B``-squares axis-parallel on a lattice of pitch ``B + g``
+    starting at ``(g, g)``. The far edge sits at ``m B + m g < L``, so every
+    square lies inside the container; consecutive squares are separated by ``g``,
+    so they are pairwise disjoint as closed sets and no atom lies in two of them.
+    Direction ``0`` is always a net direction because ``t_0 = 0``, so ``C4``
+    applies to each and gives it mass at least ``1``; with non-negative weights
+    the total mass is then at least ``m * m >= n``, and ``C1`` forbids that.
+
+    So a certificate for ``n`` forces ``L <= m B``, and ``C3`` forces
+    ``B < 1 / (1 + D)`` -- see ``ceiling_side_for_net``, which gives the
+    corresponding strict upper envelope allowed by those inequalities.
+
+    The consequence worth carrying: ``s(n) <= ceil(sqrt(n))`` holds trivially by
+    grid packing, while every individual finite-net certificate sits strictly
+    below ``ceil(sqrt(n))``. Thus no single certificate can certify that endpoint.
+    This lemma does not exclude a proved family of certificates whose sides tend
+    to the endpoint, followed by a separate limit argument.
+    """
+
+    return grid_refutation_order(n) * square_side
+
+
+def ceiling_side_for_net(n: int, half_tangents: tuple[Fraction, ...]) -> Fraction:
+    """``ceil(sqrt(n)) / (1 + D)``: the upper envelope allowed by C1 and C3.
+
+    ``C3`` is strict, so this value is not attained by any certificate on the
+    finite net. It is a necessary bound, not a claim that certificates exist
+    arbitrarily close to it. Refining the net raises the envelope, and only slowly
+    -- ``D`` is about ``T / K`` at the axis-parallel end, so halving the gap costs
+    twice the directions and twice the cost of every decision made over them.
+    """
+
+    gap = max((right - left) / (1 + left * right) for left, right in pairwise(half_tangents))
+    return Fraction(grid_refutation_order(n)) / (1 + gap)
 
 
 def _condition_mass_below_n(certificate: Certificate) -> ConditionReport:

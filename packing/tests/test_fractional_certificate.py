@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import runpy
 from fractions import Fraction
 from pathlib import Path
@@ -28,7 +29,14 @@ from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH, declared, l
 from cases.n17_fractional_certificate.replay import declared as n17_declared
 from cases.n17_fractional_certificate.replay import load as n17_load
 from cases.n17_weighted_certificate.fixture import load_retained_fixture
-from sqpack.fractional.certificate import Certificate, verify
+from sqpack.fractional.certificate import (
+    Certificate,
+    ceiling_side,
+    ceiling_side_for_net,
+    grid_refutation_order,
+    least_size_certified,
+    verify,
+)
 from sqpack.fractional.generate import build_site_grid, rationalise
 from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
 from sqpack.fractional.sweep import minimum_covered_mass, reduce_to_cells
@@ -576,3 +584,112 @@ def test_the_n17_certificate_does_not_reach_n20() -> None:
     """
     assert 13 * 50**2 > (229 - 50) ** 2
     assert n17_load().bounded_side == Fraction(229, 50)
+
+
+def test_the_grid_refutation_order_is_the_integer_ceiling_of_the_root() -> None:
+    """``m`` is decided by integers, never by a float square root."""
+    for n in range(1, 200):
+        order = grid_refutation_order(n)
+        assert order * order >= n
+        assert (order - 1) * (order - 1) < n
+    assert [grid_refutation_order(n) for n in (11, 12, 16, 17, 25, 26)] == [4, 4, 4, 5, 5, 6]
+
+
+def test_every_retained_certificate_sits_below_its_own_ceiling() -> None:
+    """``L <= ceil(sqrt(n)) B`` is forced by C1 and C4 together.
+
+    A retained certificate above its ceiling would mean one of the two is wrong,
+    so this is a check on the record and not only on the arithmetic.
+    """
+    for certificate in (n11_load(), load(), n17_load()):
+        ceiling = ceiling_side(certificate.n, certificate.square_side)
+        assert certificate.outer_side <= ceiling, (
+            f"n = {certificate.n} claims {certificate.outer_side} above its ceiling {ceiling}"
+        )
+        assert ceiling < ceiling_side_for_net(certificate.n, certificate.half_tangents)
+
+
+def test_the_n12_ceiling_is_the_figure_the_record_carries() -> None:
+    """3.99082 is ``4 / (1 + D)`` at 181 directions, not a measured quantity."""
+    certificate = load()
+    assert certificate.n == 12
+    over_the_net = ceiling_side_for_net(12, certificate.half_tangents)
+    assert float(over_the_net) == pytest.approx(3.990816, abs=5e-7)
+    assert ceiling_side(12, certificate.square_side) == Fraction(4) * certificate.square_side
+    # No individual certificate on this finite net can attain the grid endpoint.
+    assert over_the_net < 4
+
+
+def test_uniform_net_ceiling_approaches_the_grid_bound() -> None:
+    """The per-certificate ceiling does not rule out a separately proved limit family."""
+    endpoint = MASSACCESI_LIMIT
+    grid_bound = 4
+    for tolerance in (Fraction(1, 10), Fraction(1, 100), Fraction(1, 1000)):
+        steps = math.floor(grid_bound * endpoint / tolerance) + 1
+        net = tuple(endpoint * k / steps for k in range(steps + 1))
+        ceiling = ceiling_side_for_net(12, net)
+        assert ceiling == grid_bound / (1 + endpoint / steps)
+        assert grid_bound - tolerance < ceiling < grid_bound
+
+
+def test_the_refuting_grid_fits_and_one_of_its_squares_starves() -> None:
+    """The construction behind the ceiling, exhibited on the retained atoms.
+
+    Widen the container just past ``4 B`` and lay the sixteen separated
+    ``B``-squares the ceiling argument builds. They must all lie inside the
+    container and be pairwise disjoint; and since the certificate carries mass
+    11.97, well under sixteen, at least one of them must cover less than 1 --
+    which is C4 failing, exactly as the argument says it must.
+    """
+    certificate = load()
+    b = certificate.square_side
+    order = grid_refutation_order(certificate.n)
+    side = order * b + Fraction(1, 1000)
+    gap = (side - order * b) / (order + 1)
+    pitch = b + gap
+
+    corners = [(gap + i * pitch, gap + j * pitch) for j in range(order) for i in range(order)]
+    assert len(corners) == order * order == 16
+    # Inside the container, and separated: the far edge of the last square and
+    # the gap between consecutive ones are both decided exactly.
+    assert corners[-1][0] + b < side and corners[-1][1] + b < side
+    assert pitch - b == gap > 0
+
+    covered = [
+        sum(
+            (
+                atom.weight
+                for atom in certificate.atoms
+                if x <= atom.x <= x + b and y <= atom.y <= y + b
+            ),
+            start=Fraction(0),
+        )
+        for x, y in corners
+    ]
+    assert sum(covered) <= certificate.total_mass
+    assert certificate.total_mass < order * order
+    assert min(covered) < 1, "C4 would have to hold on all sixteen for the mass to reach n"
+
+
+def test_one_atom_set_certifies_every_size_above_its_mass() -> None:
+    """``n`` lives only in C1, so a certificate is not tied to the ``n`` it declares.
+
+    The n = 17 record reaches n = 18 and n = 19 through the monotonicity step
+    T-016 records, but it does not need it: its own mass is under both, so the
+    same atoms decide those cases directly. The operational consequence is the
+    one worth pinning -- a run whose covering value lands between 17 and 18
+    raises n = 18 and leaves n = 17 where it was.
+    """
+    certificate = n17_load()
+    assert least_size_certified(certificate.total_mass) == 17
+    for size in (17, 18, 19):
+        assert certificate.total_mass < size
+    # C1 is strict, so mass exactly n certifies n + 1 and not n.
+    assert least_size_certified(Fraction(17)) == 18
+    assert least_size_certified(Fraction(203, 12)) == 17
+
+    # And the two limits agree without being made to. A side above the ceiling
+    # forces the mass past n by C4, which is exactly the size this then refuses.
+    for n in (11, 12, 17, 20):
+        assert grid_refutation_order(n) ** 2 >= n
+        assert least_size_certified(Fraction(grid_refutation_order(n) ** 2)) > n

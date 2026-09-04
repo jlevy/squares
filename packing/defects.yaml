@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 450
+count: 453
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -13866,6 +13866,58 @@ defects:
   status: fixed
   recorded_in: packing/frontier/results.yaml
 - id: D-440
+  title: A confirmation rung rested on a decision no control ever made
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    from the moment T-019 was raised to C4 on 2026-09-04 until the same day, a few hours,
+    and found only because an unrelated claim in SYNOPSIS.md was being checked against
+    its evidence rather than taken on the record's word
+  severity: medium
+  what: >-
+    T-019 stands at C4, and C4 requires two evidence entries with different method
+    values. Its second is E-fractional-interval-decision, whose scope lists n = 17, 18
+    and 19. But the entry's own results list decided no first-party n = 17 certificate:
+    it named n = 11 at 19/5, n = 12 at 197/50 and 393/100, and Massaccesi's published
+    n = 17 certificate, which is the control that tests the verifier and not this
+    project's bound. The replay command the entry names,
+    `pytest tests/test_fractional_interval.py`, matched that -- the only n = 17 nodes in
+    the file decided Massaccesi's control on the sub-net and on the full doubled net.
+    Nothing decided the retained 229/50 certificate by the interval route, and nothing
+    would have noticed if the claim had been false.
+  consequence: >-
+    None to the bound, as it happens. Running the decision settles it: the retained
+    n = 17 certificate is accepted on all 361 doubled-net directions in 2,653,407 boxes
+    with none stalled, and its enclosure of the least covered mass has width zero at
+    12501/12500, exactly the least_cell_mass the certificate declares. So the C4 rung was
+    earned; it simply was not checked.
+    The cost is what an unchecked rung is worth. A confirmation level is a claim about
+    evidence, and the whole point of recording it is that a reader need not re-derive it.
+    Two other results were pinned by exhaustive nodes and this one was not, so the
+    difference was invisible from the register: three results at C4, two of them guarded.
+  fix: >-
+    Fixed on 2026-09-04.
+    `test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net` decides the
+    retained certificate on every direction and asserts the enclosure against the
+    least_cell_mass its own record declares, matching the shape of the n = 11 and n = 12
+    nodes beside it; it is registered in the exhaustive_exact marker registry, which now
+    pins ten nodes. E-fractional-interval-decision's results list is rewritten around the
+    three retained top rungs rather than the lower ones it had been left describing --
+    n = 17 at 229/50 in 2,653,407 boxes, n = 12 at 79/20 in 2,666,151, n = 11 at 381/100
+    in 1,570,831 -- with the earlier rungs and the control kept below them. Wall times are
+    dropped from the entry: box counts are deterministic and comparable, and every one of
+    these runs shared a contended machine.
+  regression: >-
+    The marker registry test pins the new node by name, so it cannot leave the exhaustive
+    tier silently. What has no check is the general shape: an evidence entry whose scope
+    claims an n its replay never decides. The narrower rule that would have caught this
+    one -- every n in an evidence entry's scope should be decided by something the entry's
+    own replay runs -- is worth building and is not built.
+  status: fixed
+  recorded_in: packing/tests/test_fractional_interval.py
+- id: D-441
   title: The fractional-certificate theorem and verifier accepted signed atom weights
   date: '2026-09-04'
   layer: verifier
@@ -13898,7 +13950,7 @@ defects:
     retains the exact false n = 1 object and requires both public entry points to refuse
     it.
   recorded_in: packing/src/sqpack/fractional/certificate.py
-- id: D-441
+- id: D-442
   title: The standalone falsifier displayed mutations without enforcing their expected outcomes
   date: '2026-09-04'
   layer: tooling
@@ -13929,7 +13981,7 @@ defects:
     injects a wrong result, and `test_quick_negative_control_is_bounded_and_assertive`
     requires the package gate to observe the expected P2 refusal.
   recorded_in: packing/cases/n11_fractional_certificate/thirdparty/falsify.py
-- id: D-442
+- id: D-443
   title: The standalone package accepted lossy JSON types and mishandled degenerate domains
   date: '2026-09-04'
   layer: verifier
@@ -13960,7 +14012,7 @@ defects:
     Boolean, non-string-number, empty-domain and singleton-domain controls alongside
     D-436's malformed-shape and traceback controls.
   recorded_in: packing/cases/n11_fractional_certificate/thirdparty/verify.py
-- id: D-443
+- id: D-444
   title: Retained certificate declarations did not all participate in acceptance
   date: '2026-09-04'
   layer: record
@@ -13990,7 +14042,7 @@ defects:
     `tests/test_n11_thirdparty_verify.py::test_declared_value_mismatch_is_verdict_bearing`
     covers both standalone numeric declarations.
   recorded_in: packing/cases/n11_fractional_certificate/__main__.py
-- id: D-444
+- id: D-445
   title: A restricted interval-verifier direction sample could report theorem acceptance
   date: '2026-09-04'
   layer: verifier
@@ -14022,7 +14074,7 @@ defects:
     `test_a_restricted_direction_can_still_refute_c4` preserves the one decisive partial
     outcome.
   recorded_in: packing/src/sqpack/fractional/interval.py
-- id: D-445
+- id: D-446
   title: Interval-verifier integer masses could overflow before C1 was decided
   date: '2026-09-04'
   layer: verifier
@@ -14053,7 +14105,7 @@ defects:
     constructs a positive-weight total of 2^63 + 1 and requires both the data conversion
     and the public verifier to refuse it before NumPy arithmetic.
   recorded_in: packing/src/sqpack/fractional/interval.py
-- id: D-446
+- id: D-447
   title: An exact interval seam expanded in proportion to the resolution floor
   date: '2026-09-04'
   layer: verifier
@@ -14086,7 +14138,7 @@ defects:
     reaches the conservative budget result in under a second; the full retained searches
     assert zero exhausted directions.
   recorded_in: packing/src/sqpack/fractional/interval.py
-- id: D-447
+- id: D-448
   title: The exact event sweep returned a centre outside the feasible polygon
   date: '2026-09-04'
   layer: verifier
@@ -14121,7 +14173,7 @@ defects:
     retains the corner cell, proves its former midpoint infeasible, and checks the new
     exact witness against both the event cell and the original container margins.
   recorded_in: packing/src/sqpack/fractional/sweep.py
-- id: D-448
+- id: D-449
   title: The introducing commit named the wrong SHA-256 for the retained 381/100 certificate
   date: '2026-09-04'
   layer: record
@@ -14156,7 +14208,7 @@ defects:
     hashes certificate.json from disk and requires the retained b121...e6a bytes before
     checking their declarations and exact comparison with Stromquist's value.
   recorded_in: docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md
-- id: D-449
+- id: D-450
   title: Dense direct-summation replay could not finish within the full-gate timeout
   date: '2026-09-04'
   layer: tooling
@@ -14192,7 +14244,7 @@ defects:
     fixes that test and the minimal checker in the exhaustive inventory without naming
     the infeasible dense invocation.
   recorded_in: packing/tests/test_n11_thirdparty_verify.py
-- id: D-450
+- id: D-451
   title: The full gate's exhaustive-certificate suite inherited a fifteen-minute timeout
   date: '2026-09-04'
   layer: tooling
@@ -14223,3 +14275,65 @@ defects:
     fixes the complete three-step exception set and its ceilings; the final full-gate run
     records the 37-test suite's actual elapsed time below the declared limit.
   recorded_in: packing/src/sqpack/cli/validate.py
+- id: D-452
+  title: A finite-certificate ceiling was promoted to a method-wide impossibility
+  date: '2026-09-04'
+  layer: docs
+  class: soundness
+  direction: conservative
+  detected_by: review
+  latent_for: >-
+    minutes; introduced in the late PR 78 ceiling analysis and challenged while that
+    moving head was being integrated into the adversarial-review stack
+  severity: medium
+  status: fixed
+  what: >-
+    The grid argument correctly proves that each finite certificate satisfies
+    L <= ceil(sqrt(n)) B and therefore L < ceil(sqrt(n))/(1 + D). The accompanying
+    prose upgraded that necessary bound to the claim that the certificate method can
+    never settle n = 12 if its value is the grid bound 4, however fine the net. For a
+    uniform half-tangent net with K gaps, however, D = T/K and these strict ceilings
+    tend to 4. A proved family of valid certificate bounds tending to 4 would establish
+    the weak lower bound 4 even though no member attained the endpoint.
+  consequence: >-
+    The overstatement could terminate a legitimate limiting-family research route and
+    confused an upper bound allowed by C1 and C3 with the unknown supremum of sides at
+    which actual certificates exist. It does not affect any retained certificate or the
+    accepted s(11) >= 381/100 result.
+  fix: >-
+    Describe `ceiling_side` as a necessary upper bound, describe
+    `ceiling_side_for_net` as the supremum allowed by the two inequalities rather than an
+    attained certificate value, and scope the n = 12 conclusion to one finite
+    certificate. Name a certified family plus a separate limit argument as the route the
+    lemma does not exclude.
+  regression: >-
+    `tests/test_fractional_certificate.py::test_uniform_net_ceiling_approaches_the_grid_bound`
+    checks in exact rationals that every sampled finite-net ceiling is below four and
+    that choosing more gaps makes it arbitrarily close according to the closed formula.
+  recorded_in: packing/src/sqpack/fractional/certificate.py
+- id: D-453
+  title: The certificate-reach renderer reversed the direction of the net endpoint rounding
+  date: '2026-09-04'
+  layer: docs
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    minutes; introduced with the generated reach table near the end of the PR 78 review
+  severity: low
+  status: fixed
+  what: >-
+    The renderer said 207107/500000 rounded tan(pi/8) down. Its exact C2 slack is
+    309449/250000000000 > 0, so the rational is strictly above the positive root
+    sqrt(2) - 1 = tan(pi/8). A downward endpoint would stop the net short of pi/4 and
+    fail the theorem premise.
+  consequence: >-
+    No computation was wrong and the retained certificates all use the correct value,
+    but the source comment taught the opposite of the exact endpoint condition and could
+    cause a later net generator to choose an invalid endpoint.
+  fix: >-
+    Say that the rational endpoint lies just above tan(pi/8), matching the exact C2
+    inequality used by every verifier.
+  regression: >-
+    `tests/test_n11_thirdparty_verify.py::test_minimal_checker_binds_the_retained_bytes_and_closed_form_facts`
+    fixes the positive exact slack and therefore the direction of the comparison.
+  recorded_in: packing/devtools/render_certificate_reach.py
