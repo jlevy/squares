@@ -40,16 +40,23 @@ TRIGGER = Trigger(kind="push", when=datetime(2026, 9, 5, tzinfo=UTC), commit="be
 WALK_DAYS = 14
 
 
-def _summary(path: Path, prices: dict[str, float], *, skipped: tuple[str, ...] = ()) -> Path:
+def _summary(
+    path: Path,
+    prices: dict[str, float],
+    *,
+    skipped: tuple[str, ...] = (),
+    failed: tuple[str, ...] = (),
+) -> Path:
+    def status(name: str) -> str:
+        if name in skipped:
+            return "skipped"
+        return "failed" if name in failed else "passed"
+
     path.write_text(
         json.dumps(
             {
                 "results": [
-                    {
-                        "name": name,
-                        "status": "skipped" if name in skipped else "passed",
-                        "seconds": seconds,
-                    }
+                    {"name": name, "status": status(name), "seconds": seconds}
                     for name, seconds in prices.items()
                 ],
                 "wall_seconds": sum(prices.values()),
@@ -88,7 +95,19 @@ def test_a_skipped_step_is_not_a_price(tmp_path: Path) -> None:
     path = _summary(tmp_path / "run.json", _unit_prices(), skipped=(skipped,))
     with pytest.raises(MeasurementError, match="recorded seconds are not its cost"):
         load_prices([path])
-    assert load_prices([path], allow_skipped=True)[skipped] == 1.0
+    assert load_prices([path], allow_unhealthy=True)[skipped] == 1.0
+
+
+def test_a_failed_step_is_not_a_price_either(tmp_path: Path) -> None:
+    """The one this module's own first run needed. A failure can be an early abort: the
+    2026-09-05 deep run recorded `negative controls` at 416.95 s where `D-366` measures
+    the step at about 1270 s, so taking the recorded figure would have understated by
+    fourteen minutes exactly the step being priced."""
+    name = STEPS[2].name
+    path = _summary(tmp_path / "run.json", _unit_prices(), failed=(name,))
+    with pytest.raises(MeasurementError, match=r"records .* as failed"):
+        load_prices([path])
+    assert load_prices([path], allow_unhealthy=True)[name] == 1.0
 
 
 def test_a_second_summary_can_price_a_step_the_first_did_not(tmp_path: Path) -> None:

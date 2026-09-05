@@ -607,7 +607,7 @@ def _slowest_call_per_function(entries: list[tuple[float, str]]) -> list[tuple[f
 
     The `slow` marker is per function -- a decorator on a `def`, so a parametrized test
     moves to the deep surface with all of its cases, which is why the registry in
-    `test_the_slow_marker_is_declared_only_by_measured_nodes` counts 61 functions and 90
+    `test_the_slow_marker_is_declared_only_by_measured_nodes` counts 62 functions and 92
     collected tests. A floor applied per *node* therefore asks a question the marker
     cannot answer: it reports the cheap case of an expensive function as a marker to
     delete, and deleting it would drag the expensive case back onto the pull-request

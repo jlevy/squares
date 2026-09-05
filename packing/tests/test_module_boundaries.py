@@ -447,8 +447,10 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
 
     Measured on 2026-09-05 (`BC-214`), one contended local box, `pytest --durations=0`
     over the whole non-exhaustive suite: 2,080 tests and 1,038s of recorded phase time,
-    of which these 61 functions carry 890s -- 86 per cent of the suite in 2.9 per cent of
-    it. The marking threshold is 2s of `call` time, which is what leaves the quick lane
+    of which 61 of these functions carry 890s -- 86 per cent of the suite in 2.9 per cent
+    of it. The sixty-second, `test_each_new_size_verifies_exactly`, was added later the
+    same day on its own CI measurement and is argued where it is marked.
+    The marking threshold is 2s of `call` time, which is what leaves the quick lane
     inside the ceiling `devtools/gate-budgets.yaml` declares for the `fast` tier -- the
     figure is not repeated here, because the register is where it is read and a second
     copy is the thing that rots. The gate's own failure threshold is higher, so ordinary
@@ -457,7 +459,7 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
     Four limits of the rule, recorded rather than smoothed over:
 
     * A marker is per function, so a parametrized test moves with all of its cases even
-      when only one case was over. The 61 functions are 90 collected tests.
+      when only one case was over. The 62 functions are 92 collected tests.
     * `call` time only. A module-scoped fixture bills its whole cost to whichever test
       triggers it first -- `test_every_control_rejects` reports 13.1s of setup that
       belongs to `determination`, which three other tests in that file also use -- so
@@ -465,23 +467,31 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
     * `test_the_n17_certificate_verifies_in_the_fast_tier_now` is 17.4s and is now
       deferred, so its name no longer describes where it runs. The name is left to its
       owner rather than changed here.
-    * A *cached build* shared between a deferred test and a retained one is the second
-      limit again, and it is worse, because the ceiling and the floor cannot both be
-      satisfied. `BC-218` measured two: `test_seed_cross_fields_...` and
+    * A *shared build* between a deferred test and a retained one is the second limit
+      again, and it is worse, because the ceiling and the floor cannot both be satisfied.
+      `BC-218` measured two: `test_seed_cross_fields_...` and
       `test_known_best_composite_png_...` each call a module-level cached builder that a
       test marked here used to trigger first, and each went from cheap to 93.86s and
-      26.83s of `call` when its neighbour was deferred. Between them they are 121s of a
-      306.4s quick lane, so the pull-request surface fails its own ceiling on them today.
-      Marking them does not fix it: run in the slow lane they cost 0.01s and 0.00s,
-      because there the neighbour pays the build again first, and the floor then fails the
-      deep surface and asks for the marker back. The same test is 93.86s in one lane and
-      0.01s in the other, and neither reading is wrong -- the cost belongs to a build, not
-      to a test, so no per-test rule can place it. What resolves it is making the cost
-      cheap rather than reclassifying it: both tests need a *valid seed* to mutate, not a
-      freshly built one, and the committed artifact is already checked against the build
-      by the deferred neighbour and by the deep surface's own atlas steps. Left for the
-      cell that owns this mechanism rather than decided here, because it changes what the
-      retained tests assert.
+      26.83s of `call` when its neighbour was deferred. Marking them does not fix it: run
+      in the slow lane they cost 0.01s and 0.00s, because there the neighbour pays the
+      build again first, and the floor then fails the deep surface and asks for the
+      marker back. The same test is 93.86s in one lane and 0.01s in the other, and
+      neither reading is wrong -- the cost belongs to a build, not to a test, so no
+      per-test rule can place it.
+
+      It is resolved rather than classified, and the resolution is what the limit is now
+      a record of. Each of those tests asks what a *valid* artifact contains, not what a
+      *freshly built* one contains, so each reads the committed file; the equality of
+      committed and built stays asserted, once in the slow lane by the neighbour that
+      already pays for the build and again in the full gate by the artifact's own
+      `--check` step. Six tests moved that way -- one in
+      `test_prospective_atlas_seed.py`, one in `test_contact_scaffold_atlas.py` (whose
+      builder is not even memoized, so every caller re-enumerated) and four composite
+      tests in `test_known_best_atlas.py`. Four of the six reported at or above the
+      ceiling on the failing run, at 124.86s, 82.00s, 78.78s and 6.04s of `call`; the
+      other two were under it only because a sibling in the same worker had already paid
+      the build. None of the six is marked here, which is the point: a shared build is a
+      signal to move the read, not a signal to move the test.
     """
     expected: dict[str, set[str]] = {
         # 18s of call time across 3.
@@ -544,13 +554,20 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_the_record_round_trips",  # 2.9s
             "test_the_new_sizes_are_built_here_and_not_merely_asserted",  # 2.6s
         },
+        # 2s of call time across 1, at its slowest parametrization. Not a shared build:
+        # `cases.gobel_family.packing.build` is not memoized, so this pays only for
+        # itself -- 3,916 exact pair decisions at (4, 7), 5.09s on CI's two-core runner.
+        "test_gobel_family_construction.py": {
+            "test_each_new_size_verifies_exactly",  # 1.7s local, 5.09s on CI
+        },
         # 6s of call time across 1.
         "test_green17.py": {
             "test_interval_audit_certifies_an_interior_side",  # 6.0s
         },
-        # 27s of call time across 1. The fourth limit below is live in this file:
-        # `test_known_best_composite_png_is_derived_from_current_svg` shares this test's
-        # cached build and now carries 26.83s of the quick lane because this one left it.
+        # 27s of call time across 1. This test also carries the pin the four composite
+        # tests in its file now stand on: it asserts the retained composite SVG is
+        # byte-identical to the one `expected_outputs()` builds, which costs nothing here
+        # because the build is already paid, and is what lets those four read the file.
         "test_known_best_atlas.py": {
             "test_known_best_composite_contains_every_case_and_square",  # 27.3s
         },
@@ -616,10 +633,10 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_promote_system_degree.py": {
             "test_promote_system_degree",  # 14.6s
         },
-        # 98s of call time across 2, and the fourth limit below is live here too:
-        # `test_seed_cross_fields_...` shares the cached `expected_outputs()` build with
-        # the first test here, and now carries 93.86s of the quick lane because that one
-        # left it.
+        # 98s of call time across 2. The first of these is also the pin
+        # `test_seed_cross_fields_...` stands on -- it asserts the retained manifest
+        # equals the built one -- which is what lets that test read the file rather than
+        # trigger this build.
         "test_prospective_atlas_seed.py": {
             "test_seed_replays_every_safe_source_and_excludes_kingbird",  # 92.5s
             "test_seed_witnesses_and_house_renderings_match_the_manifest",  # 5.7s

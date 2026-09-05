@@ -15,8 +15,9 @@ tool rather than a paragraph:
 * **Prices come from a real run, never from a guess.** `--timings` takes a
   `packing-validate --format json` summary. A step in `STEPS` the summary does not
   price, a priced step `STEPS` does not have, and a step the summary records as
-  *skipped* are each a refusal, because a step priced at zero is a step whose repetition
-  is free by arithmetic rather than by evidence.
+  anything but *passed* are each a refusal, because a step priced at zero -- or at
+  the seconds it reached before aborting -- repeats for free by arithmetic rather
+  than by evidence.
 * **The trigger points come from the workflow, not from memory.** The daily cron is
   read out of `.github/workflows/packing-validation.yml`; a schedule this module cannot
   parse is a refusal rather than an assumed one.
@@ -135,12 +136,26 @@ def _git(*args: str) -> str:
     return result.stdout
 
 
-def _read_summary(path: Path) -> tuple[dict[str, float], list[str]]:
-    """`(price by step name, names the summary recorded as skipped)` for one run."""
+def _read_summary(path: Path) -> tuple[dict[str, float], dict[str, str]]:
+    """`(price by step name, non-passing status by step name)` for one run."""
     try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, ValueError) as error:
-        raise MeasurementError(f"{path} is not a readable JSON run summary: {error}") from error
+        text = path.read_text(encoding="utf-8")
+    except OSError as error:
+        raise MeasurementError(f"{path} is not readable: {error}") from error
+    # `packing-validate --format json` prints a banner before the document when the
+    # selection takes no gate marker, so the file is not JSON from byte zero. Parse the
+    # whole thing first and fall back to the first line that opens an object; a file
+    # that is not a document either way is still a refusal.
+    for candidate in (text, text[text.find("\n{") + 1 :] if "\n{" in text else ""):
+        if not candidate:
+            continue
+        try:
+            payload = json.loads(candidate)
+        except ValueError:
+            continue
+        break
+    else:
+        raise MeasurementError(f"{path} is not a readable JSON run summary")
     if not isinstance(payload, dict) or "results" not in payload:
         raise MeasurementError(
             f"{path} is not a `packing-validate --format json` summary "
@@ -151,18 +166,19 @@ def _read_summary(path: Path) -> tuple[dict[str, float], list[str]]:
         raise MeasurementError(f"{path} has a `results` key that is not a list")
 
     prices: dict[str, float] = {}
-    skipped: list[str] = []
+    unhealthy: dict[str, str] = {}
     for entry in results:
         if not isinstance(entry, dict):
             raise MeasurementError(f"{path} has a result entry that is not an object")
         name = str(entry.get("name", ""))
         prices[name] = float(entry.get("seconds", 0.0))
-        if entry.get("status") == "skipped":
-            skipped.append(name)
-    return prices, skipped
+        status = str(entry.get("status", ""))
+        if status != "passed":
+            unhealthy[name] = status
+    return prices, unhealthy
 
 
-def load_prices(paths: Sequence[Path], *, allow_skipped: bool = False) -> dict[str, float]:
+def load_prices(paths: Sequence[Path], *, allow_unhealthy: bool = False) -> dict[str, float]:
     """Per-step seconds from one or more `packing-validate --format json` summaries.
 
     More than one is allowed, later summaries winning, for the case that produced the
@@ -176,18 +192,26 @@ def load_prices(paths: Sequence[Path], *, allow_skipped: bool = False) -> dict[s
     * a step in `STEPS` no summary prices would be repeated for free;
     * a priced step that is not in `STEPS` means the summary predates the gate it is
       being used to price, so every other price in it is suspect too;
-    * a *skipped* step costs about nothing and is not evidence of what it costs when it
-      runs. `--allow-skipped` prices those at their recorded seconds and says so.
+    * a step the summary records as anything but *passed* is not priced by that summary.
+      A skip costs about nothing. A failure is worse than that, because it can be an
+      early abort: the run this was written against recorded `negative controls` at
+      416.95 s where `D-366` measures it at about 1270 s, and taking the smaller figure
+      would have understated by fourteen minutes exactly the step whose repetition was
+      being priced. `--allow-unhealthy` takes the recorded seconds anyway and says so.
+
+    A later summary that ran the step healthily clears an earlier summary's complaint,
+    which is the point of accepting more than one.
     """
     if not paths:
         raise MeasurementError("no run summary was given, so nothing can be priced")
     prices: dict[str, float] = {}
-    skipped: set[str] = set()
+    unhealthy: dict[str, str] = {}
     for path in paths:
-        found, absent = _read_summary(path)
+        found, sick = _read_summary(path)
         prices.update(found)
-        skipped -= set(found) - set(absent)
-        skipped |= set(absent)
+        for name in found:
+            unhealthy.pop(name, None)
+        unhealthy.update(sick)
 
     declared = {step.name for step in STEPS}
     missing = sorted(declared - set(prices))
@@ -197,10 +221,10 @@ def load_prices(paths: Sequence[Path], *, allow_skipped: bool = False) -> dict[s
     problems.extend(
         f"{sources} prices {name!r}, which is not a step this gate declares" for name in extra
     )
-    if skipped and not allow_skipped:
+    if not allow_unhealthy:
         problems.extend(
-            f"{sources} records {name!r} as skipped, so its recorded seconds are not its cost"
-            for name in sorted(skipped)
+            f"{sources} records {name!r} as {status}, so its recorded seconds are not its cost"
+            for name, status in sorted(unhealthy.items())
         )
     if problems:
         raise MeasurementError("; ".join(problems))
@@ -533,9 +557,12 @@ def _parser() -> argparse.ArgumentParser:
         help="price only pushes, ignoring the workflow's daily cron",
     )
     parser.add_argument(
-        "--allow-skipped",
+        "--allow-unhealthy",
         action="store_true",
-        help="price steps the summary recorded as skipped at their recorded seconds",
+        help=(
+            "price steps the summary recorded as skipped or failed at their recorded "
+            "seconds; a failed step's seconds can be an early abort"
+        ),
     )
     parser.add_argument(
         "--attribution",
@@ -554,7 +581,7 @@ def _parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     namespace = _parser().parse_args(argv)
     try:
-        prices = load_prices(namespace.timings, allow_skipped=namespace.allow_skipped)
+        prices = load_prices(namespace.timings, allow_unhealthy=namespace.allow_unhealthy)
         rows = measure(
             prices=prices,
             ref=namespace.ref,
