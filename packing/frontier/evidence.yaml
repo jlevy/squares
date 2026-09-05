@@ -1310,9 +1310,13 @@ evidence:
       oracle was corrected to score the same cells the verifier decides (D-434); before
       that correction the same search stalled above 11. It was re-decided from its file
       on disk rather than in memory: the coordinator froze the generator's output to an
-      immutable path and decided those bytes, which matters here because the generator
-      overwrote the same filename with a different certificate between the two attempts
-      at this side. The interval verifier accepted the frozen bytes over all 361
+      immutable path and decided the retained file, which matters here because the
+      generator overwrote the same filename with a different certificate between the two
+      attempts at this side. The retained bytes have SHA-256
+      b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a. The introducing
+      commit's message names a different hash for what it calls the same frozen bytes;
+      D-450 records that provenance error, so no conclusion here relies on the message's
+      attestation. The interval verifier accepted the retained bytes over all 361
       directions of the doubled net in 1,570,831 boxes with none stalled, returning a
       width-zero enclosure at 4001/4000 -- the same value the exact sweep reports.
       A calibration rung is retained beside it at side 189/50 = 3.78, below Stromquist's
