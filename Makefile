@@ -11,7 +11,7 @@
 # re-resolves to whatever is newest on every single run, which is exactly the
 # unpinned-zero-install-runner pattern that guidelines/supply-chain-hardening.md
 # rule 6 warns against. Bumping this pin is a deliberate, reviewable act.
-FLOWMARK := uvx --from flowmark-rs==0.3.2 flowmark
+FLOWMARK := uvx --from flowmark-rs==0.4.0 flowmark
 
 .PHONY: format format-check hooks-install
 

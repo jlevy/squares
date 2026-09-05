@@ -141,7 +141,7 @@ def test_the_formatter_cannot_leave_the_block_stale(
 ) -> None:
     """The formatter owns this document, so its typography is not drift.
 
-    Measured on the pinned flowmark-rs 0.3.2: it curls the straight apostrophes these
+    Measured on the pinned flowmark-rs 0.4.0: it curls the straight apostrophes these
     claims are written with, in place, inside the generated block. Comparing bytes would
     report that as staleness forever and re-rendering would flatten it back on every run
     -- the fight `.flowmarkignore` records for `ledger.md` and `defects.md`. So a curled

@@ -37,8 +37,8 @@ The shortest complete check of that larger value is one directory up rather than
 package: `../minimal_verify.py` decides the retained `381/100` bytes the way `verify.py`
 decides these, from one file that uses Python’s standard library and nothing else, and
 `python3 minimal_verify.py certificate.json` reaches `VERIFIED s(11) >= 381/100` in
-about 47 seconds. `../PROOF-CARD.md` states that claim on one page with the constants it
-turns on.
+about 47 seconds. `../t-018-proof-card.md` states that claim on one page with the
+constants it turns on.
 
 What it displaces: the lower bound `2 + 4/√5 = 3.788854…` stated by Walter Stromquist,
 *Packing 10 or 11 unit squares in a square*, Electronic Journal of Combinatorics 10

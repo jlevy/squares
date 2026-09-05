@@ -60,7 +60,7 @@ SIGNIFICANCE = f"{POLICY}#significance-and-novelty"
 REGISTER_VIEW = "packing/frontier/RESULTS.md"
 
 # An ASCII ellipsis is the one thing a claim can carry that the formatter rewrites into a
-# form `fold` does not fold back. Measured on the pinned flowmark-rs 0.3.2, 2026-09-03:
+# form `fold` does not fold back. Measured on the pinned flowmark-rs 0.4.0, 2026-09-05:
 # `3.877083590022814...` in T-011's claim becomes the same digits, a space, and U+2026,
 # and `fold` maps that character while leaving the inserted space. Rendering the
 # formatter's own form makes the block a fixed point; `says` below folds the space away

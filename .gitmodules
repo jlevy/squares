@@ -1,0 +1,3 @@
+[submodule "vendor/kpress"]
+	path = vendor/kpress
+	url = https://github.com/jlevy/kpress
