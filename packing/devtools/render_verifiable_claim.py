@@ -119,7 +119,10 @@ def decided_here(facts: Facts, headline: Facts) -> str:
         "Condition 1 and covers every orientation directly. The retention gate, "
         f"[`decide_certificate.py`]({gate}), accepts a certificate only when both routes "
         "accept it and the interval route\u2019s enclosure of the least covered mass has "
-        "width zero and equals the sweep\u2019s value exactly, and both accepted this one."
+        "width zero and equals the sweep\u2019s value exactly, and both accepted this one. "
+        "The gate decides only unconditional certificates: a file declaring a `variant` "
+        "other than `unconditional` is refused before either route runs, as it is by the "
+        "verifier in this file, and these bytes declare none."
     )
     identity = (
         f"The certificate embedded below is the file `{facts.source.name}`, whose SHA-256 "

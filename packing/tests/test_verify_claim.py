@@ -159,6 +159,8 @@ def test_each_condition_refuses_its_own_perturbation(
         {"direction_steps": 0},
         {"atoms": [["5/8", "5/8", "-1"]]},
         {"atoms": [["5/8", "5/8"]]},
+        {"variant": "class"},  # a claim about a class of packings, not the one decided here
+        {"variant": "conditional"},
     ],
 )
 def test_a_malformed_file_is_refused_before_any_condition(

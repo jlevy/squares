@@ -77,6 +77,9 @@ def load(path, *, pinned):
     if pinned and digest != PINNED_SHA256:
         refuse(f"SHA-256 {digest} is not the pinned {PINNED_SHA256}")
     record = json.loads(raw)
+    variant = record.get("variant", "unconditional")
+    if variant != "unconditional":
+        refuse(f"variant {variant!r} declared; only unconditional certificates are decided")
     atoms = [tuple(rational(value, "atom") for value in row) for row in record["atoms"]]
     if any(len(atom) != 3 for atom in atoms):
         refuse("every atom must be exactly [x, y, weight]")

@@ -69,6 +69,10 @@ def load(path):
             raise TypeError(message)
         return Fraction(value)
 
+    variant = record.get("variant", "unconditional")
+    if variant != "unconditional":  # a class or conditional certificate claims something else
+        message = f"variant {variant!r} declared; only unconditional certificates are decided"
+        raise ValueError(message)
     n, K = record["n"], record["direction_steps"]
     if not (isinstance(n, int) and isinstance(K, int) and n >= 1 and K >= 1):
         message = "n and direction_steps must be integers, n >= 1 and direction_steps >= 1"

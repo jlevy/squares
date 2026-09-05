@@ -82,6 +82,30 @@ def test_a_single_lightened_weight_is_refused_by_condition_1(tmp_path: Path) -> 
     assert "VERIFIED" not in result.stdout
 
 
+@pytest.mark.parametrize("variant", ["class", "conditional", "anything-else"])
+def test_a_declared_variant_is_refused_before_any_condition(
+    tmp_path: Path, variant: str
+) -> None:
+    """A class or conditional certificate claims something Conditions 1 to 5 do not decide.
+
+    The retention gate refuses such a file by name before either route runs; so does this
+    verifier, so a file that declares a variant can never print VERIFIED for a claim it
+    never made. The bytes are otherwise the retained ones, so only the declaration differs.
+    """
+
+    record = json.loads(CERTIFICATE.read_text(encoding="utf-8"))
+    record["variant"] = variant
+    declared = tmp_path / "declared.json"
+    declared.write_text(json.dumps(record), encoding="utf-8")
+
+    result = run(declared, "--unpinned")
+
+    assert result.returncode == 1
+    assert result.stdout.startswith("REFUSED")
+    assert variant in result.stdout
+    assert "Condition" not in result.stdout
+
+
 def test_one_changed_byte_is_refused_by_the_pin(tmp_path: Path) -> None:
     """The digest is checked before the JSON is parsed, so nothing else is reached."""
 

@@ -159,7 +159,7 @@ the net, and the verifier refuses it, naming the condition that fails.
 
 ## How This Repository Decided It
 
-Beyond the verifier in this file, the repository decides these bytes twice more, by two methods that share no code with it or with each other. The exact event-cell sweep in [`certificate.py`](https://github.com/jlevy/squares/blob/main/packing/src/sqpack/fractional/certificate.py) does at every net direction what “Why the Sweep Is Exact” describes and reports the least covered mass $50003/50000$ at direction $0$. The interval branch and bound in [`interval.py`](https://github.com/jlevy/squares/blob/main/packing/src/sqpack/fractional/interval.py) works with directed rounding on the doubled net, the net directions and their reflections across the diagonal, so it never invokes Condition 1 and covers every orientation directly. The retention gate, [`decide_certificate.py`](https://github.com/jlevy/squares/blob/main/packing/devtools/decide_certificate.py), accepts a certificate only when both routes accept it and the interval route’s enclosure of the least covered mass has width zero and equals the sweep’s value exactly, and both accepted this one.
+Beyond the verifier in this file, the repository decides these bytes twice more, by two methods that share no code with it or with each other. The exact event-cell sweep in [`certificate.py`](https://github.com/jlevy/squares/blob/main/packing/src/sqpack/fractional/certificate.py) does at every net direction what “Why the Sweep Is Exact” describes and reports the least covered mass $50003/50000$ at direction $0$. The interval branch and bound in [`interval.py`](https://github.com/jlevy/squares/blob/main/packing/src/sqpack/fractional/interval.py) works with directed rounding on the doubled net, the net directions and their reflections across the diagonal, so it never invokes Condition 1 and covers every orientation directly. The retention gate, [`decide_certificate.py`](https://github.com/jlevy/squares/blob/main/packing/devtools/decide_certificate.py), accepts a certificate only when both routes accept it and the interval route’s enclosure of the least covered mass has width zero and equals the sweep’s value exactly, and both accepted this one. The gate decides only unconditional certificates: a file declaring a `variant` other than `unconditional` is refused before either route runs, as it is by the verifier in this file, and these bytes declare none.
 
 The certificate embedded below is the file `certificate-19-5.json`, whose SHA-256 is `60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`.
 
@@ -242,6 +242,10 @@ def load(path):
             raise TypeError(message)
         return Fraction(value)
 
+    variant = record.get("variant", "unconditional")
+    if variant != "unconditional":  # a class or conditional certificate claims something else
+        message = f"variant {variant!r} declared; only unconditional certificates are decided"
+        raise ValueError(message)
     n, K = record["n"], record["direction_steps"]
     if not (isinstance(n, int) and isinstance(K, int) and n >= 1 and K >= 1):
         message = "n and direction_steps must be integers, n >= 1 and direction_steps >= 1"
