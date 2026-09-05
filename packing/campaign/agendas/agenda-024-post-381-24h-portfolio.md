@@ -25,7 +25,7 @@ agenda:
     purpose: tool_validation
     owner_focus: process
     instances: [11]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Are the stack base, source packets, ID ranges, manager write scopes, exact
@@ -51,12 +51,34 @@ agenda:
     depends_on: []
     artifacts:
     - packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md
+    - packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md
+    - packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md
     - packing/resources/web/literature-refresh-2026-09-05/README.md
     parallel_group: agenda024-control
     program: n11-post-381-portfolio
     next_evidence: >-
       One immutable launch contract that prevents parallel agents from changing the
       theorem, criteria, source corpus, or shared record underneath one another.
+    outcomes:
+    - scope: >-
+        The post-3.81 launch base, local inputs, namespaces, ownership, transport,
+        controls, timing, dependencies, and initial agent allocation.
+      classification: achieved
+      result: >-
+        PR #83 passed its full validation and merged as 663ca37e. This branch was
+        rebased onto that origin/main commit. PR #87 was frozen at 26709263 with its
+        agenda-023 and BC-214..218 namespace disjoint. A manager-level audit and an
+        independent portfolio audit verified the local paths, commands, hashes,
+        quantitative guards, schemas, dependency graph, and four-slot schedule after
+        correcting the identified contradictions. BC-230, BC-232, BC-233, BC-240,
+        BC-242, and BC-245 are the only manager cells opened at T+0.
+      evidence:
+      - packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md
+      - packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md
+      - packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md
+      - packing/resources/web/literature-refresh-2026-09-05/README.md
+      disposition: retire-success
+      follow_up: null
   - id: BC-220
     purpose: measurement_validation
     owner_focus: correctness
@@ -324,6 +346,62 @@ When PR #83 merges, this branch is rebased or retargeted to `main` before a new 
 starts. A changed base invalidates only path hashes or assumptions that differ; the
 coordinator records the diff and reruns the preflight instead of making every manager
 rediscover the repository.
+
+## BC-219 launch snapshot
+
+The coordinator froze this snapshot at `2026-09-05T21:54:16Z` and then rebased the
+strategy stack directly onto the merged parent:
+
+- `origin/main`: `663ca37eb622508d9df00c594b8ef11d2c256f55`;
+- PR #83: merged at that commit after all required checks passed; final head
+  `927eb820f100eb155dc9799145bc47ff6db0f739`;
+- PR #87: open draft at `26709263f740f3d9aece654e0272dae3c168d18d`, owning agenda-023
+  and `BC-214..218`; and
+- this stack before the launch-gate commit: review `5389fc06`, archive `5214b57b`, and
+  strategy `d1a436de`.
+
+This portfolio owns agendas 024--026, `BC-219..225`, `BC-230..249`, `H-070..089`, and
+`exp-070..109`. `X-016` is the launch synthesis; only the coordinator may allocate
+`X-017..019`, after another upstream collision check.
+PR #87’s `H-066..069` and `exp-065..069` gap remains quarantined.
+The manager output roots are
+`packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/` and
+`packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/`; they are
+reserved paths, not evidence that a result exists.
+
+The following SHA-256 manifest binds every common strategy input and the central exact
+checkpoints. Manager-specific packets add their implementation and control hashes.
+The Git commit containing this section binds agenda-024 itself.
+
+```text
+dd03fe3d200cf9f1c2335c40103da45269716d20d7de38cd642d832205e962b2  operating-rules.md
+17df0f04d4759625d18231d5cd1fdc69872367b9d7665b25e8e4c2e76e694011  docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md
+ff5e0c07584a224ff1f28ce030388ed05692b9a5e77a20d0cd47e2628e2cf8f5  packing/resources/README.md
+8dc3dc88e04f2e6e992423136a8b0952c7cd451286dd7a834ce0cb8824d3da82  packing/resources/web/literature-refresh-2026-09-05/README.md
+a641b0e9d95ddc0e4b941eb52df302a6728353d18c82f03fd8ed40a34b3d2df3  packing/resources/web/n17-lower-bounds-2026/README.md
+78782e710ab3058b12e106721447fa2589e7cf525a9085e7ac7ddaa2b27484bf  packing/campaign/explorations/X-014-closing-from-both-ends.md
+6e49cfd993b51f350249d87d31d3d24984e0e942f7660a2e7fa209a747bbd916  packing/campaign/explorations/X-015-the-map-and-the-three-programs.md
+772452abc153410a015b3d32ae1cd9fb0323d62b04134fbee1782610a1bc8629  packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md
+5375cb548038062122dbd971b70bd124ee1f44428c99c0eb6960db08c2c7fa75  packing/campaign/agendas/agenda-021-three-numbers-and-a-wall.md
+766240b02a4bb4418c1fc0ede090867fd629849f0918a7c9930fec958cae0e6c  packing/campaign/agendas/agenda-022-the-conditional-route.md
+48a2d71ceb70599a7f24e8e1dc3b84408f5932a67f88f9532fb819c715227cc1  packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md
+0b7226eb31a59ee51d1144ef92a01e05e3a65cf763a2530bf9ba68c1421fbbcb  packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md
+3d10438c28d7a8167179a7d129dd1d0bad804b9aa85ee1c7e4cde11e4e4d5319  packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md
+5042894a870c3d1374ffbb7774eda715c0181150df8b23b422016736b80cc60f  packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-063-h-065-n11-near-tight-cell-census.md
+a0b75ac0ab2a77436d6fe9edae0d526b6fe7d06ab73459b8ee7aa6aea87da0ea  packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-064-h-063-two-threshold-class-program.md
+db124b9956d8051682388cbba3b16772e65406a0003debba1c92b915c0c489a8  packing/campaign/series/series-000-smoke-and-calibration/results/bc-199-trump-isolation-radius.json
+8df0b9aa530149b44367842a2e6389949b27189df038d68e9d1afa8fd87df8c6  packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-state-191-50.json
+84070a20d9954916260f7b2703bdec886523c7eccb912edbc110102731440219  packing/cases/n11_fractional_certificate/t-018-proof-card.md
+3b4f754b8a77c0a6edb12a8f669e705594817992f9983956d308aa7b343031b4  packing/cases/trump11/isolation_radius.py
+bc01c636302f26ce4072ee8886c83463a9648f0e35d918541377cf52559aea2c  packing/frontier/n-011.md
+```
+
+The four-slot launch is coordinator, fractional manager, closure manager, and one
+floating worker. The floating worker authors BC-240, then reviews BC-230; BC-232 and
+BC-233 run as separately pinned background processes.
+The only takeable research cells at `T+0` are BC-230, BC-232, BC-233, BC-240, BC-242,
+and BC-245. Any changed manifest byte, sibling namespace collision, or new upstream
+change to a named input returns BC-219 to preflight before another manager starts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

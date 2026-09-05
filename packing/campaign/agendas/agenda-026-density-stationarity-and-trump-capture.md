@@ -25,7 +25,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Can the existing 128-branch Trump calculation be stated as one quantitative
@@ -91,7 +91,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       What is the correct primal and weak-dual formulation for a density over full-size
@@ -190,7 +190,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [3, 4, 5, 11]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       What finite typed stationary-backbone language is complete for a minimal

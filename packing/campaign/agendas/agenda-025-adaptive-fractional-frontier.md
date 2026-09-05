@@ -24,7 +24,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       What exact containment theorem and certificate contract allow every angle cell to
@@ -90,7 +90,7 @@ agenda:
     purpose: research
     owner_focus: efficiency
     instances: [11]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Can the retained 3.82 primal/dual state be advanced to total covering mass below
@@ -125,7 +125,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11, 17]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       Does an inset-support sweep provide a better seed for n=11 only after its support
@@ -288,8 +288,8 @@ agenda:
     entry: >-
       BC-232, BC-234 or BC-236 emits a candidate and a coordinator gate diverts it here.
     exit: >-
-      A complete candidate packet accepted by both exact routes, or the smallest failing
-      premise and a refusal with no frontier change.
+      A complete candidate packet accepted by all three decision routes, or the smallest
+      failing premise and a refusal with no frontier change.
     bead: think-hjoe
     workflows: [factual-review]
     depends_on: [BC-219]

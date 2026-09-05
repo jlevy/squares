@@ -488,7 +488,7 @@ Status: **active**. Coordinate two disjoint research agendas for the next 24 hou
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-219 | tool_validation | 11 | ready | 0 | think-9pzv | One immutable launch contract that prevents parallel agents from changing the theorem, criteria, source corpus, or shared record underneath one another. |
+| BC-219 | tool_validation | 11 | complete | 0 | think-9pzv | One immutable launch contract that prevents parallel agents from changing the theorem, criteria, source corpus, or shared record underneath one another. |
 | BC-220 | measurement_validation | 11 | blocked | 0 | think-u7i4 | Whether adaptive cores, the resumed bracket, local radius packaging, and the full-size weak-dual pilot are sound enough to receive more compute. |
 | BC-221 | measurement_validation | 11 | blocked | 0 | think-gt06 | A comparable exact-yield-per-hour reading across the adaptive, bracket, radius, and density routes. |
 | BC-222 | research | 11 | blocked | 0 | think-gxcm | Whether the direct-bound route, equality-density route, or local-to-global route now has the strongest verifier-backed expected gain. |
@@ -502,10 +502,10 @@ Status: **active**. Give one managing agent a disjoint, exact program for the li
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-230 | research | 11 | blocked | 0 | think-c678 | Whether direction-dependent cores are a sound strengthening of the exact object, rather than a generator heuristic that the verifier cannot decide. |
+| BC-230 | research | 11 | ready | 0 | think-c678 | Whether direction-dependent cores are a sound strengthening of the exact object, rather than a generator heuristic that the verifier cannot decide. |
 | BC-231 | tool_validation | 11, 12, 17 | blocked | 0 | think-7mk4 | A trustworthy decision boundary on which an adaptive 3.8125 run may rely. |
-| BC-232 | research | 11 | blocked | 0 | think-gmdy | Which side of eleven the current one-body formulation reaches at 3.82, or a measured reason to stop spending on this checkpoint. |
-| BC-233 | research | 11, 17 | blocked | 1 | think-jbat | Whether Massaccesi's margin is a useful proposal distribution for this instance, not whether inset supports contain the unrestricted optimum. |
+| BC-232 | research | 11 | ready | 0 | think-gmdy | Which side of eleven the current one-body formulation reaches at 3.82, or a measured reason to stop spending on this checkpoint. |
+| BC-233 | research | 11, 17 | ready | 1 | think-jbat | Whether Massaccesi's margin is a useful proposal distribution for this instance, not whether inset supports contain the unrestricted optimum. |
 | BC-234 | research | 11 | blocked | 0 | think-1sv0 | A directly publishable rung or a quantitative verdict on adaptive witness cores. |
 | BC-235 | research | 11 | blocked | 1 | think-ay89 | Whether a strictly richer one-body witness can be represented by a small exact verifier. |
 | BC-236 | tool_validation | 11, 12 | blocked | 1 | think-yaf9 | Whether the kernel language is a certifiable instrument rather than a geometric sketch. |
@@ -519,12 +519,12 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-240 | research | 11 | blocked | 0 | think-4ln1 | A reviewable local endpoint that a later global capture argument can invoke without treating numerical rigidity as global optimality. |
+| BC-240 | research | 11 | ready | 0 | think-4ln1 | A reviewable local endpoint that a later global capture argument can invoke without treating numerical rigidity as global optimality. |
 | BC-241 | measurement_validation | 11 | blocked | 0 | think-woi0 | Whether the local endpoint is ready to serve as the last step of a global proof. |
-| BC-242 | research | 11 | blocked | 0 | think-9xxh | Whether the proposed density route has a valid lower-bound semantics before any numerical value is interpreted. |
+| BC-242 | research | 11 | ready | 0 | think-9xxh | Whether the proposed density route has a valid lower-bound semantics before any numerical value is interpreted. |
 | BC-243 | measurement_validation | 11 | blocked | 0 | think-mt6q | Whether a sharp equality measure is a plausible closure route rather than an appealing but invalid continuum analogy. |
 | BC-244 | research | 11 | blocked | 1 | think-h7kl | A possible one-body proof endpoint, or evidence that global classification must carry the closure burden. |
-| BC-245 | research | 3, 4, 5, 11 | blocked | 0 | think-do04 | A finite proof language strong enough to replace the review's unsupported generic contact-graph atlas. |
+| BC-245 | research | 3, 4, 5, 11 | ready | 0 | think-do04 | A finite proof language strong enough to replace the review's unsupported generic contact-graph atlas. |
 | BC-246 | tool_validation | 11 | blocked | 0 | think-3l93 | Whether the atlas language can join the global tree to the already-verified local neighborhood. |
 | BC-247 | tool_validation | 3, 4, 5 | blocked | 1 | think-qi66 | A measured branch price and omission control for the proposed global classifier. |
 | BC-248 | research | 11 | blocked | 2 | think-901o | Whether certificate-guided enumeration can cover the complement of the Trump neighborhood at a finite, auditable cost. |
