@@ -96,12 +96,13 @@ packages = ["src/sqpack"]
 line-length = 96
 target-version = "py314"
 extend-exclude = [
+  # The literature archive: transcribed and downloaded source, never edited to look
+  # tidy, and the two verifier scripts it holds are other authors' bytes.
   "resources",
-  # Retained verbatim as third-party evidence: these are deliberately written in
-  # someone else's style, import nothing from this project, and are checked by being
-  # run rather than by being linted. Reformatting them would defeat the point.
+  # An independent reviewer's verifier, retained verbatim as evidence: written in
+  # someone else's style, importing nothing from this project, and checked by being
+  # run rather than by being linted. Reformatting it would defeat the point.
   "cases/n12_fractional_certificate/independent_verify.py",
-  "cases/n11_fractional_certificate/thirdparty",
 ]
 
 [tool.ruff.lint]
@@ -235,13 +236,12 @@ include = [
 ]
 exclude = [
     "**/__pycache__",
+    # The literature archive, as excluded from ruff: other authors' bytes.
     "resources",
     ".venv",
-    # Retained verbatim as third-party evidence: an independent reviewer's verifier
-    # and the stdlib-only package an outside reader runs. Editing either to satisfy a
-    # checker would void what they are, so both are excluded here as they are from ruff.
+    # An independent reviewer's verifier, retained verbatim as evidence. Editing it to
+    # satisfy a checker would void what it is, so it is excluded here as it is from ruff.
     "cases/n12_fractional_certificate/independent_verify.py",
-    "cases/n11_fractional_certificate/thirdparty",
 ]
 pythonVersion = "3.14"
 typeCheckingMode = "standard"

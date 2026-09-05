@@ -134,7 +134,7 @@ at that direction. Every quantity is rational, so every score is exact.
 ## How to Check It
 
 Save this file as `{{FILE_NAME}}` and the verifier block below as `{{VERIFIER_NAME}}`,
-then run the verifier on this file with any CPython 3.10 or later.
+then run the verifier on this file with any CPython 3.12 or later.
 It needs nothing outside the standard library, and it reads the certificate out of the
 fenced `json` block at the end.
 

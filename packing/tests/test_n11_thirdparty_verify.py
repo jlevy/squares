@@ -2,7 +2,7 @@
 
 The package under `cases/n11_fractional_certificate/thirdparty/` is the one
 artifact here written to be read and run by someone who trusts nothing else in
-the repository: standard library only, CPython 3.8 or later, no import from
+the repository: standard library only, CPython 3.12 or later, no import from
 `sqpack`. Nothing in the suite decided it until this file, so a change that
 broke it would have been found by a stranger rather than by a gate.
 
