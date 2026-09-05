@@ -173,7 +173,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 12]
-    state: stopped
+    state: complete
     priority: 1
     question: >-
       Does the two-threshold form of Condition 5 -- per-direction-class thresholds as LP
@@ -244,6 +244,52 @@ agenda:
       - session-086 stop reason and its Lane A delegation
       disposition: defer-dependency
       follow_up: think-m3sx
+    - scope: >-
+        The two-threshold class-certificate program and its two controls, opened in
+        session-087 once BC-197 was terminal.
+      classification: achieved
+      result: >-
+        Built and both controls run. classcert.py partitions the net's half-gap cells into
+        classes with boundaries as exact tangents, adds w0 and w1 as LP variables under one
+        normalisation row, and decides the object exactly on the event-cell sweep; nothing
+        geometric moved, so the non-convex domain stays BC-204's.
+        Control one passes exactly: the near-axis class at 3877/1000 gives 9.000000 in
+        floats and exactly 9 in exact arithmetic from nine unit atoms, and the lane closed
+        the bound from below as well, so it is exactly nine rather than at most nine. The
+        instrument-defect clause does not fire.
+        Control two refuses, and the refusal is proved rather than observed. At Trump's
+        3.877084 the two-end-cell class gives 11885/1024 = 11.606445 against the eleven a
+        refutation needs, and six independent site sets never go below 11.6 -- but the
+        figure that settles it mentions no site set: L/B = 969271/249425 = 3.886021850
+        exceeds 2 + (4/3)sqrt(2) = 3.885618083, so eleven pairwise disjoint B-squares fit
+        and no measure of mass below eleven can cover them. The control's ceiling is
+        B(2 + (4/3)sqrt(2)) = 3.876681, 0.000403 below the side it was asked to reach: the
+        shrink costs 0.008937 of side against Stromquist's 0.008534 of headroom. It was
+        unreachable before the first command ran. H-063 is rejected on its own kill
+        condition, that conditioning on direction buys too little.
+        What conditioning does buy is measured rather than dismissed: two thresholds
+        separate once the site set is fine enough (w0 = 0.093383 against w1 = 0.079777 at
+        composition (9, 2)), and X-014's step-1 design point is reachable -- (11, 0) over
+        the leading nineteen cells at Trump's side, grid 79, exact 39123/4096 = 9.551514,
+        margin -5933/4096, refuted.
+        The price, which is what the cell existed to produce: one class LP is 14.4 ms at 78
+        orbits and 49.4 ms at 210; a whole class program over 181 directions to convergence
+        is 8.57 s at grid 23 and 27.66 s at grid 39, so twelve compositions price at about
+        5.5 minutes of one core. The LP is under two per cent of it -- separation is what a
+        composition sweep buys, which is the number BC-208 needs.
+        Nothing was retained: decide_certificate decides a five-condition Certificate and
+        not a two-threshold object.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-064-h-063-two-threshold-class-program.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-198-class-program-register.txt
+      disposition: retire-success
+      follow_up: null
+    artifacts:
+    - packing/src/sqpack/fractional/classcert.py
+    - packing/devtools/run_class_program.py
+    - packing/tests/test_fractional_classcert.py
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-064-h-063-two-threshold-class-program.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-198-class-program-register.txt
     next_evidence: >-
       Whether conditioning on direction buys anything at all, which is the premise
       BC-208's two class theorems in block two rest on entirely.

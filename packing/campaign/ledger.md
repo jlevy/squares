@@ -458,7 +458,7 @@ Status: **completed**. X-014 ends with a verdict and a bill. The two mechanisms 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-197 | research | 19, 20, 21 | complete | 0 | think-g73w | The first measurement of a covering wall above a retained rung, which BC-203's first doubling-down rule reads directly and which decides whether block two spends its leads on the endgame or on more rungs. |
-| BC-198 | tool_validation | 11, 12 | stopped | 1 | think-m3sx | Whether conditioning on direction buys anything at all, which is the premise BC-208's two class theorems in block two rest on entirely. |
+| BC-198 | tool_validation | 11, 12 | complete | 1 | think-m3sx | Whether conditioning on direction buys anything at all, which is the premise BC-208's two class theorems in block two rest on entirely. |
 | BC-211 | measurement_validation | 13 | stopped | 0 | think-2ib0 | Whether the first exact grid value by machine is one certificate away, which BC-203's fourth rule reads directly and which decides whether block two opens the B = 1 route (BC-212) ahead of the conditional route. |
 | BC-199 | research | 11 | complete | 0 | think-ljvz | Whether the local box is reachable by any tree, which BC-203's third doubling-down rule reads directly and which decides whether block two opens a conditional lead against Trump's pose at all. |
 | BC-200 | measurement_validation | 11 | complete | 1 | think-1qjs | The side every block-two n = 11 cell would have to work at, and BC-203's second doubling-down rule reads the 3.85 outcome directly. |
@@ -476,7 +476,7 @@ Status: **active**. Block two, and every cell in it is contingent. Agenda-021 me
 | BC-204 | tool_validation | 11, 13 | blocked | 1 | think-gku0 | Whether Lemma 2 is buildable at all under the existing soundness surface, which BC-205 and BC-207 both need and neither can start without. |
 | BC-205 | measurement_validation | 13 | blocked | 1 | think-9kuy | Whether the conditional route can close a known case, which is the only calibration available anywhere before it is pointed at n = 11, where no answer is known. |
 | BC-212 | tool_validation | 13, 21, 46 | blocked | 1 | think-e65r | Whether an exact grid value can be proved by one machine certificate, which is the whole of what separates the m = 4 and m = 5 endgames from n = 11's. |
-| BC-206 | research | 12, 21 | ready | 1 | think-ndp3 | How close to the ceiling the ladder actually reaches at m = 4, which is the only direct measurement anywhere of the gap between the covering value and the ceiling. |
+| BC-206 | research | 12, 21 | complete | 1 | think-ndp3 | How close to the ceiling the ladder actually reaches at m = 4, which is the only direct measurement anywhere of the gap between the covering value and the ceiling. |
 | BC-207 | research | 11 | blocked | 2 | think-0mro | Whether the mass gap is a case analysis a computer can finish, which is the last of the three unknowns X-014's verdict names. |
 | BC-208 | research | 11 | blocked | 1 | think-7nxe | How much of the composition tree closes above Trump's side, which is the coarse tier of X-014's proof shape and what decides whether the tree is finite in practice rather than only in principle. |
 | BC-209 | research | 11, 26, 38, 39, 51 | blocked | 2 | think-4in0 | Whether the reach table is a work queue or only a ranking, which is the question X-013 raised and deliberately declined to answer. |
@@ -497,7 +497,7 @@ Status: **active**. A W5 efficiency-loop block entered on the operator's directi
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 63 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 64 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -565,7 +565,7 @@ Status: **active**. A W5 efficiency-loop block entered on the operator's directi
 | H-060 | confirmed | proof | At the exact container side 2 + sqrt(2)/2, Goebel's exact n = 5 packin |  | 1 | T-014 | 11s wall |
 | H-061 | result registered | proof | There is a finite measure of rational-weight point atoms in [0, 19/5]^ |  | 0 | T-017, T-018 |  |
 | H-062 | confirmed | proof | On the retained 181-direction net at B = 9977/10000, the side at which | container side: 193/40 39/8 97/20 979/200 123/25 247/50 993/200 | 2 | T-021 | 112m agent + 109.8m wall |
-| H-063 | blocked | proof | Two statements, one instrument. First, the class certificate of X-014' | composition n1: 0 1 2 3 4 5 6 7 8 9 10 11 | 0 |  |  |
+| H-063 | refuted | proof | Two statements, one instrument. First, the class certificate of X-014' | composition n1: 0 1 2 3 4 5 6 7 8 9 10 11* | 1 |  | 25m agent + 27.8m wall |
 | H-064 | abandoned | proof | At container side 77/20 = 3.85, on the retained 181-direction net at B | container side: 191/50 77/20 387/100 | 1 |  | 96m agent + 66.0m wall |
 | H-065 | confirmed | proof | On the retained 381/100 certificate at n = 11 -- 1121 atoms, B = 9977/ | census margin epsilon: 0 0.01 0.05 0.1 | 1 |  | 16m agent + 16.1m wall |
 
@@ -577,7 +577,7 @@ Status: **active**. A W5 efficiency-loop block entered on the operator's directi
 
 ## Rounds
 
-### rejected (10)
+### rejected (11)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -591,6 +591,7 @@ Status: **active**. A W5 efficiency-loop block entered on the operator's directi
 | exp-016 | series-000 | 11 | openai-codex | H-010 | The printed Figure 14 set is avoidable, so node four and therefore the five-node conjunction fail; this rejects the proof as printed, not the numerical lower bound. |
 | exp-037 | series-000 | 29 | openai-codex | H-042 | The retained serialization has six numerical orientation classes, with minimum class gap 0.296067 degrees against a 1e-90 degree interval radius. |
 | exp-041 | series-000 | 5 | openai-codex | H-023 | The frozen complete-zero-inventory clause is false: one additional owner axis is zero only at the positive endpoint, while independent control review also found mutation-reason and partial-disposition guards that remain unfinished. |
+| exp-064 | series-000 | 11 | Claude (agent), Lane A of agenda-021 BC-198, bead think-m3sx, session-087 | H-063 | The second clause holds exactly and the first cannot, so H-063 falls to its own rejection clause -- X-014's kill condition, that conditioning on direction buys too little. What makes this a strong negative rather than a failed search is that the refusal is proved rather than observed. At Trump's side L/B = 969271/249425 = 3.886021850 exceeds 2 + (4/3)sqrt(2) = 3.885618083, decided against the surd, so eleven pairwise disjoint B-squares of the class fit inside the container and no measure of total mass below eleven can cover them -- whatever site set is used and however long the row loop runs. The control's own ceiling is B(2 + (4/3)sqrt(2)) = 3.876681, which is 0.000403 below the side it was asked to reach: the shrink costs 0.008937 of side and Stromquist's headroom above Trump is only 0.008534. The control was unreachable before the first command ran, and no amount of instrument work would have changed that. Conditioning is not worthless, and the round reports what it does buy rather than only what it does not. On one site set at Trump's side a single threshold gives margin +0.082256 where two thresholds at composition (9, 2) give +0.072368, with the LP separating them once the site set is fine enough. And X-014's own step-1 design point is reachable: composition (11, 0) over the leading nineteen cells at Trump's side and grid 79 gives exact 39123/4096 = 9.551514, margin -5933/4096, every condition holding, refuted. What the program cannot do is reach the side Stromquist's Theorem 3 reaches, because that theorem gets there by a further box step this program does not have. |
 
 ### abandoned (1)
 
@@ -685,7 +686,7 @@ Status: **active**. A W5 efficiency-loop block entered on the operator's directi
 
 ## Effort
 
-63 rounds, 2127.1 agent-minutes, 1017.0 wall-minutes.
+64 rounds, 2152.1 agent-minutes, 1044.7 wall-minutes.
 
 ## Exploration reports not yet codified
 

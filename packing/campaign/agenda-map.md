@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **11** ready, **5** tentative, **41** blocked, **42** stopped, **111** complete.
+- **10** ready, **5** tentative, **41** blocked, **41** stopped, **113** complete.
 
 - **14 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -33,7 +33,6 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-018 | `BC-183` | 2 | insight | research | Can the n = 40 admissible cone be characterised on the disjunctive system, so that Goebel's n = 40 packing's… | `think-3yxk` |
 | agenda-018 | `BC-184` | 2 | efficiency | tool_validation | Can the generic interval certifier be wired end to end and reproduce T-009's n = 29 bound through the generic… | `think-4f4d` |
 | agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so 22.7 times… | `think-jgeg` |
-| agenda-022 | `BC-206` | 1 | correctness | research | How far above 99/25 does the n = 12 ladder climb before its restricted optimum reaches twelve, given that the… | `think-ndp3` |
 | agenda-023 | `BC-214` | 0 | efficiency | tool_validation | Can the pull-request surface be brought under four minutes without deleting a check, by moving the broad… | `think-doar` |
 | agenda-023 | `BC-216` | 0 | process | tool_validation | What check would have caught the 499 s to 1370 s regression in the week it happened, and does it hold when… | `think-gy30` |
 
@@ -80,7 +79,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-022 | `BC-212` | 1 | `BC-203` | yes | BC-203's fourth doubling-down rule, which did not fire: BC-211 never converged at 399/100, so the n = 13 covering value… |
 | agenda-022 | `BC-208` | 1 | `BC-203` | yes | Agenda-021's BC-198, which never opened: the class-certificate program and its two controls are what this cell's twelve… |
 | agenda-022 | `BC-207` | 2 | `BC-203`, `BC-208` | no | BC-208's class cuts, and a wall at n = 11 for the cover to sit at. BC-200 found no wall: the cutting-plane loop stalled… |
-| agenda-022 | `BC-209` | 2 | `BC-203`, `BC-206` | no | BC-206, and a priced target. BC-202's run at 138/25 reached 26.464317 on its site set without converging its column… |
+| agenda-022 | `BC-209` | 2 | `BC-203`, `BC-206` | yes | BC-206, and a priced target. BC-202's run at 138/25 reached 26.464317 on its site set without converging its column… |
 | agenda-022 | `BC-210` | 3 | `BC-203`, `BC-204`, `BC-205`, `BC-206`, `BC-207`, `BC-208`, `BC-209`, `BC-212` | no | — |
 | agenda-023 | `BC-215` | 1 | `BC-214` | no | BC-214, which decides which surface each step belongs to. Skipping work before the two surfaces exist would be… |
 | agenda-023 | `BC-217` | 1 | `BC-214` | no | BC-214, which decides what the full gate is once the surfaces are split. Certifying a tier before its definition… |
@@ -124,8 +123,8 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-018 | paused |  | 2 | 14 |  |  | 16 |
 | agenda-019 | paused | 1 |  | 4 |  | 1 | 6 |
 | agenda-020 | completed |  |  |  |  | 1 | 1 |
-| agenda-021 | completed |  |  |  | 3 | 5 | 8 |
-| agenda-022 | active | 1 |  | 7 |  | 1 | 9 |
+| agenda-021 | completed |  |  |  | 2 | 6 | 8 |
+| agenda-022 | active |  |  | 7 |  | 2 | 9 |
 | agenda-023 | active | 2 |  | 2 |  |  | 4 |
 
 ## By program
@@ -150,18 +149,18 @@ Open frontier: `BC-214`, `BC-215`, `BC-216`, `BC-217`.
 | agenda-021 | `BC-197` | complete | Where does the restricted covering optimum at m = 5 reach twenty, and does it reach twenty-one… |
 | agenda-022 | `BC-204` | blocked | Can the covering program's admissible centre domain be generalised from the hard-coded rotated… |
 | agenda-022 | `BC-205` | blocked | Does the conditional program close a case the classical method closes by hand -- Bentz's… |
-| agenda-022 | `BC-206` | ready | How far above 99/25 does the n = 12 ladder climb before its restricted optimum reaches twelve,… |
+| agenda-022 | `BC-206` | complete | How far above 99/25 does the n = 12 ladder climb before its restricted optimum reaches twelve,… |
 | agenda-021 | `BC-211` | stopped | Does the existing generator, run unchanged at n = 13 and side 399/100, converge to a restricted… |
 | agenda-022 | `BC-212` | blocked | Can a certificate at shrink B = 1 -- closed unit-square covering with open-box counting at an… |
 | agenda-022 | `BC-213` | complete | Does the remaining rung of the m = 5 bisection, 973/200 = 4.865, certify or wall -- and so bring… |
 
-Open frontier: `BC-204`, `BC-205`, `BC-206`, `BC-212`.
+Open frontier: `BC-204`, `BC-205`, `BC-212`.
 
 ### `n11-closure`
 
 | agenda | id | state | question |
 | --- | --- | --- | --- |
-| agenda-021 | `BC-198` | stopped | Does the two-threshold form of Condition 5 -- per-direction-class thresholds as LP variables,… |
+| agenda-021 | `BC-198` | complete | Does the two-threshold form of Condition 5 -- per-direction-class thresholds as LP variables,… |
 | agenda-021 | `BC-199` | complete | What explicit isolation radius and quadratic constant follow from exp-013's 128 branch certificates… |
 | agenda-021 | `BC-200` | complete | Is the covering value at n = 11 already at or above eleven at 3.82 and at 3.85, measured from below… |
 | agenda-021 | `BC-201` | complete | How large is the near-tight set on the retained 381/100 certificate -- the reachable event cells… |

@@ -465,3 +465,192 @@ values:
       what keeps n = 19 standing at 24/5 after T-021 raised n = 20 and n = 21 to 97/20.
       The artifact named here is the immutable 24/5 rung, not the package's moving
       certificate.json pointer, which now holds the heavier 97/20 rung.
+  - n: 12
+    side: '397/100'
+    side_decimal: '3.97'
+    objective: '12.364038'
+    site_set: grid
+    sites: null
+    rows: null
+    rounds: 26
+    converged: true
+    stop_reason: >-
+      Converged at LP round 26 -- the row loop stopped for want of a violated placement --
+      at 12.364038 over 625 atoms, 117.4 s.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
+    notes: >-
+      BC-206 of agenda 022. Above twelve on a converged loop, so this site set carries no
+      certificate at 3.97; adding sites can only lower it, so the side is not barred.
+      Rationalised at scale 4,000,000 to 12364129/1000000, loss 0.000091. Frozen as a
+      refuted set and kept outside the case package.
+  - n: 12
+    side: '397/100'
+    side_decimal: '3.97'
+    objective: '12.016263'
+    site_set: certificate-seeded
+    sites: null
+    rows: null
+    rounds: 8
+    converged: false
+    stop_reason: >-
+      Crossed twelve at LP round 8 with placements still violated; the loop reached
+      12.095824 by round 14 before the cell stopped it. 213 s.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
+    notes: >-
+      BC-206 of agenda 022. The grids unioned with T-017's 2097 atoms scaled to the side.
+      Rows only raise a restricted optimum, so this site set's converged optimum is at
+      least 12.016263.
+  - n: 12
+    side: '398/100'
+    side_decimal: '3.98'
+    objective: '16.000000'
+    site_set: grid
+    sites: null
+    rows: null
+    rounds: 16
+    converged: false
+    stop_reason: >-
+      Locked at exactly 16.000000 from LP round 5 and held it to round 16; 128 s.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
+    notes: >-
+      BC-206 of agenda 022. The round value is the site set's artefact and not the
+      covering value, one order below BC-197's 25.000000 at m = 5: with
+      delta = 4B - L, a support missing all three windows [L - (4 - k)B, kB] admits
+      sixteen dual-feasible unit weights whatever the covering value is. The auto grid
+      places 43 to 44 sites per axis where those windows need hundreds to thousands.
+  - n: 12
+    side: '3985/1000'
+    side_decimal: '3.985'
+    objective: '16.000000'
+    site_set: grid
+    sites: null
+    rows: null
+    rounds: 12
+    converged: false
+    stop_reason: >-
+      Locked at exactly 16.000000 from LP round 6 and held it to round 12; 55 s.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
+    notes: >-
+      BC-206 of agenda 022. The round value is the site set's artefact and not the
+      covering value, one order below BC-197's 25.000000 at m = 5: with
+      delta = 4B - L, a support missing all three windows [L - (4 - k)B, kB] admits
+      sixteen dual-feasible unit weights whatever the covering value is. The auto grid
+      places 43 to 44 sites per axis where those windows need hundreds to thousands.
+  - n: 12
+    side: '399/100'
+    side_decimal: '3.99'
+    objective: '16.000000'
+    site_set: grid
+    sites: null
+    rows: null
+    rounds: 12
+    converged: false
+    stop_reason: >-
+      Locked at exactly 16.000000 from LP round 7 and held it to round 12; 60 s.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
+    notes: >-
+      BC-206 of agenda 022. The round value is the site set's artefact and not the
+      covering value, one order below BC-197's 25.000000 at m = 5: with
+      delta = 4B - L, a support missing all three windows [L - (4 - k)B, kB] admits
+      sixteen dual-feasible unit weights whatever the covering value is. The auto grid
+      places 43 to 44 sites per axis where those windows need hundreds to thousands.
+  - n: 12
+    side: '398/100'
+    side_decimal: '3.98'
+    objective: '12.130682'
+    site_set: certificate-seeded
+    sites: null
+    rows: null
+    rounds: 5
+    converged: false
+    stop_reason: >-
+      Crossed twelve at LP round 5 with placements still violated; the loop reached
+      12.376525 by round 13 before the cell stopped it. 165 s.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
+    notes: >-
+      BC-206 of agenda 022. Crossings arrive strictly earlier as the side rises -- rounds
+      8, 5, 3, 3 across the four sides -- so the margin non-monotonicity this ladder
+      shows below 99/25 does not reappear above it.
+  - n: 12
+    side: '3985/1000'
+    side_decimal: '3.985'
+    objective: '12.104043'
+    site_set: certificate-seeded
+    sites: null
+    rows: null
+    rounds: 3
+    converged: false
+    stop_reason: >-
+      Crossed twelve at LP round 3 with placements still violated; the loop reached
+      12.414845 by round 13 before the cell stopped it. 115 s.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
+    notes: >-
+      BC-206 of agenda 022. Crossings arrive strictly earlier as the side rises -- rounds
+      8, 5, 3, 3 across the four sides -- so the margin non-monotonicity this ladder
+      shows below 99/25 does not reappear above it.
+  - n: 12
+    side: '399/100'
+    side_decimal: '3.99'
+    objective: '12.056180'
+    site_set: certificate-seeded
+    sites: null
+    rows: null
+    rounds: 3
+    converged: false
+    stop_reason: >-
+      Crossed twelve at LP round 3 with placements still violated; the loop reached
+      12.398218 by round 8 before the cell stopped it. 150 s.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
+    notes: >-
+      BC-206 of agenda 022. Crossings arrive strictly earlier as the side rises -- rounds
+      8, 5, 3, 3 across the four sides -- so the margin non-monotonicity this ladder
+      shows below 99/25 does not reappear above it.
+  - n: 12
+    side: '397/100'
+    side_decimal: '3.97'
+    objective: '12.248227'
+    site_set: cutting-plane
+    sites: null
+    rows: null
+    rounds: null
+    converged: true
+    stop_reason: >-
+      The row LP converged at 12.248227 under devtools.run_fractional_cutting, the
+      instrument BC-200 used, with an exact depth-scaled floor beneath it.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
+    notes: >-
+      BC-206 of agenda 022, unregistered follow-up at a pre-registered side. This row is
+      the one that says where the ladder ends: with an exact floor of 10.845594 under a
+      converged 12.248227, the covering value at 3.97 is bracketed rather than guessed,
+      and against the retained 11.998960 at 3.96 the upper end gives a slope of at least
+      24.9 per unit side. The retained rung's 0.001040 of margin is spent within 0.000042
+      of side, so the ladder ends at about 3.96004 and the 0.0308 of runway T-017 recorded
+      under the ceiling 4B = 3.9908 is not runway. Twelve lies inside the bracket, so 3.97
+      is undecided rather than barred.

@@ -35,9 +35,9 @@ session:
     status: in_progress
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 180
+    budget_minutes: 240
     started_at: '2026-09-05T16:43:00Z'
-    deadline_at: '2026-09-05T19:43:00Z'
+    deadline_at: '2026-09-05T20:43:00Z'
     expected_output: >-
       Both lanes running on one core each with their register files accumulating; the
       three failing gate steps diagnosed to their causes and fixed; the local
@@ -148,24 +148,36 @@ session:
       each run. The n = 21 continuation leg is skipped because BC-203's first rule did
       not fire.
     operator: sub-agent at the thinking level BC-206 declares, one core
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
+    outcome: >-
+      The ladder does not climb. All four pre-registered sides refute on both
+      constructions and nothing was frozen; three of the four grid runs lock at exactly
+      16.000000, which is BC-197's 25.000000 one order down and has the same window
+      mechanism. Five follow-up runs at 3.97 bracket the covering value at
+      10.845594 <= nu* <= 12.248227, a slope of at least 24.9 per unit side, so the
+      retained rung's 0.001040 of margin is spent within 0.000042: the ladder ends at
+      about 3.96004 and T-017's 0.0308 of runway under 4B is not runway. Retained as nine
+      covering-value rows and the run register; no round is registered because the cell
+      declared no hypothesis, which is D-457.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
     files:
     - packing/campaign/series/series-000-smoke-and-calibration/results/
-    checks: null
     uncertainty: >-
       Margin is not monotone in the side -- this ladder has 0.007175 at 197/50 and
       0.029410 at the higher 79/20 -- so a crossing at 397/100 does not end it. The
       retained rung's margin is 0.001040 and rationalisation at scale 200,000 cost
       0.005314 on it, so the scale is the live risk, not the covering value.
-    elapsed_seconds: null
-    elapsed_quality: null
+    checks:
+    - 'devtools.decide_certificate: not run, nothing was frozen as a candidate'
+    - 'packing-ledger check: OK at 63 rounds'
+    elapsed_seconds: 6091
+    elapsed_quality: platform_measured
     next_action: >-
-      Gate any frozen rung on both routes and write exp-063; report how close to
-      4B = 3.9908 the ladder actually reached.
+      BC-209 inherits the ladder question; the three instrument findings in the register
+      -- the uv-wrapper kill, the split ceiling instrument, the short column-loop stopping
+      rule -- are the efficiency block's to take.
     phase: 1
     budget_minutes: 120
     started_at: '2026-09-05T16:52:00Z'
@@ -246,6 +258,67 @@ session:
     - packing/tests/
     - packing/campaign/series/series-000-smoke-and-calibration/results/
     excluded_commands:
+    - git commit
+    - git push
+  - task: >-
+      Lane A, agenda-021's BC-198: build X-014's Lemma 3 as per-direction-class
+      thresholds and run its two pre-registered controls at n = 11, then price one class
+      LP. Retain no class certificate.
+    operator: sub-agent at the thinking level BC-198 declares, one core
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Built, both controls run, H-063 rejected on its own kill condition. Control one is
+      exactly nine, float and exact agreeing and the bound closed from below too. Control
+      two refuses structurally: L/B = 3.886021850 exceeds 2 + (4/3)sqrt(2) = 3.885618083,
+      so eleven disjoint B-squares fit at Trump's side and no measure below eleven covers
+      them, whatever the site set. The control's ceiling B(2 + (4/3)sqrt(2)) = 3.876681
+      sits 0.000403 below the side it was asked to reach -- unreachable before the first
+      command ran. Conditioning still buys something measurable, and twelve compositions
+      price at about 5.5 minutes with the LP under two per cent of it.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-064-h-063-two-threshold-class-program.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-198-class-program-register.txt
+    files:
+    - packing/src/sqpack/fractional/classcert.py
+    - packing/devtools/run_class_program.py
+    - packing/tests/test_fractional_classcert.py
+    checks:
+    - 'pytest tests/test_fractional_classcert.py: 15 passed'
+    - 'ruff check, ruff format --check and basedpyright: clean at the lane''s report'
+    uncertainty: >-
+      The program is one-sided: a converged optimum below the threshold refutes on any
+      site set, but one at or above says only that that site set failed. And it cannot
+      recover Stromquist's Theorem 3, whose box step is a conditional certificate over the
+      non-convex domain BC-204 owns.
+    elapsed_seconds: 1665
+    elapsed_quality: platform_measured
+    next_action: >-
+      BC-208 consumes the price and the class program; the gate work for a two-threshold
+      object is where a class theorem could be registered.
+    phase: 1
+    budget_minutes: 110
+    started_at: '2026-09-05T18:07:00Z'
+    deadline_at: '2026-09-05T19:57:00Z'
+    expected_output: >-
+      A frozen class-certificate program with both controls run and their verdicts
+      recorded as numbers, the cost of one class LP at n = 11, and a written statement of
+      what the program cannot decide.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev python -m pytest -q tests/test_fractional_classcert.py
+    kill_condition: >-
+      The near-axis class program returning above nine at 3877/1000, or either control
+      disagreeing between the float proposal and the exact confirmation.
+    fallback: >-
+      Report which control refused and the figure that refused it, rather than adjusting
+      the program until it agrees.
+    write_scope:
+    - packing/src/sqpack/fractional/
+    - packing/devtools/
+    - packing/tests/
+    - packing/campaign/series/series-000-smoke-and-calibration/results/
+    excluded_commands:
+    - devtools.decide_certificate
     - git commit
     - git push
   outputs:

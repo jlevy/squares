@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 456
+count: 457
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14733,3 +14733,52 @@ defects:
     of reading an absent check as a question rather than as a wait.
   status: fixed
   recorded_in: development.md
+- id: D-457
+  title: A research cell with no hypothesis cannot produce a round, and BC-206 was written that way
+  date: '2026-09-05'
+  layer: record
+  class: bookkeeping
+  detected_by: gate
+  latent_for: >-
+    from the moment agenda-022 was drafted until its BC-206 finished and the round it had
+    produced would not validate -- about a day of drafting and a hundred minutes of
+    compute, none of it wasted, but none of it registrable as a round either.
+  severity: low
+  what: >-
+    Agenda-022's BC-206 declares `purpose: research` and carries no `hypotheses`. The
+    experiment contract requires at least one -- `hypotheses: []` is refused as empty --
+    so the cell as written could not produce a registrable round no matter what it found,
+    and the mismatch surfaced only when the experiment record was written after the work
+    was done.
+    Nothing in the agenda schema objects to a research cell without a hypothesis, and
+    nothing in the ledger's cell checks connects the two contracts, so a cell can be
+    drafted, budgeted, dispatched and completed before anything notices that its output
+    has nowhere to go.
+  consequence: >-
+    No measurement was lost and no claim is wrong. BC-206's nine covering-value rows and
+    its run register carry everything the cell produced, and recording them as data rather
+    than as a round is the more accurate description anyway: nothing was pre-registered,
+    so nothing was tested. What the register loses is the round count and the effort
+    attribution, which is how this campaign prices its own work -- a hundred minutes and
+    thirteen run blocks that the ledger's round total does not see.
+    The failure is quiet in the direction that matters least, but it is quiet: a cell
+    that cannot produce a round looks exactly like one that can until its round is
+    written.
+  fix: >-
+    BC-206's outcome records the measurements in full and says plainly that no round is
+    registered and why. The measurements are in packing/frontier/covering-values.yaml as
+    nine rows keyed by side and site set, and the per-round detail is in the run register.
+    The durable half belongs to the agenda contract rather than to this cell: a research
+    cell should either declare a hypothesis or declare that it is a measurement without
+    one, and the ledger should refuse the first shape rather than letting it through to
+    the experiment record. That is not built here.
+  regression: >-
+    None yet, and the gap is named rather than left implicit. The check to build is in the
+    ledger's per-cell rules, where `purpose: research` with an empty `hypotheses` would be
+    refused at draft time -- the point being to fail when the agenda is written, not when
+    the work is finished. Filed against the agenda schema and the ledger's cell checks;
+    until it exists, a research cell without a hypothesis is caught only by the experiment
+    schema at the end.
+  bead: think-c0qm
+  status: contained
+  recorded_in: packing/campaign/agendas/agenda-022-the-conditional-route.md

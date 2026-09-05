@@ -128,8 +128,8 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives eight confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-six blocked
+The generated ledger currently derives eight confirmed hypotheses, seven refuted
+hypotheses, one open hypothesis, seven open questions, and thirty-five blocked
 hypotheses. No hypothesis waits on review and four are unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
@@ -2589,7 +2589,7 @@ round that names the hypothesis, control roles included.
 | [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md) | confirmed | Goebel’s exact `n = 5` optimum is locally rigid when the container side is fixed | 1 | 11s wall |
 | [H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md) | result registered | A first-party fractional unavoidable-set certificate at side `19/5` proves `s(12) ≥ 3.8`, the first `n = 12`-specific bound; carried well past its own claim to `393/100` ([T-017](packing/frontier/RESULTS.md)) and to `s(11) ≥ 19/5` ([T-018](packing/frontier/RESULTS.md)), with the whole ladder retained and verified, and the round that closes the hypothesis is not yet written | 0 | — |
 | [H-062](packing/campaign/hypotheses/H-062-n20-covering-wall.md) | confirmed | The `m = 5` covering wall — the side at which a converged restricted optimum at `n = 20` first reaches twenty — lies strictly below the ceiling `5B = 4.9885`, and the pre-registered rungs bracket it to within `0.02`; accepted at `[97/20, 973/200]`, width `0.015`, by Agenda 021’s `BC-197` and Agenda 022’s `BC-213` | 2 | 109.8m wall |
-| [H-063](packing/campaign/hypotheses/H-063-n11-class-certificate.md) | blocked | A two-cell `{0°, 45°}` class certificate refutes the composition `(11, 0)` at or above Trump’s `3.877084`, and every near-axis class inside `θ₀` closes the compositions with at most one tilted square; blocked on the two-threshold program `BC-198` builds | 0 | — |
+| [H-063](packing/campaign/hypotheses/H-063-n11-class-certificate.md) | refuted | A two-cell `{0°, 45°}` class certificate refutes the composition `(11, 0)` at or above Trump’s `3.877084`, and every near-axis class inside `θ₀` closes the compositions with at most one tilted square; blocked on the two-threshold program `BC-198` builds | 1 | 27.8m wall |
 | [H-064](packing/campaign/hypotheses/H-064-n11-fractional-packing-floor.md) | abandoned | An exact-depth fractional packing at `77/20` with total weight at least eleven puts `τ*(3.85)` at or above eleven, so the `n = 11` certificate ladder’s top lies below `3.85`; registered for `BC-200` | 1 | 66m wall |
 | [H-065](packing/campaign/hypotheses/H-065-n11-near-tight-cell-census.md) | confirmed | The near-tight cells (mass at most `1 + 1/20`) on the retained `381/100` certificate are fewer than one fifth of the reachable cells — measured at `0.040754` by `BC-201`, a fifth of the registered threshold. The clause the claim attached to that number does not follow: the cover is a search, not a check | 1 | 16.1m wall |
 
@@ -2680,6 +2680,16 @@ BOUNDED-CAVEAT, and one clause of the defect’s source finding plus three resid
 the same archive boundary are named in the record and not closed.
 No live round has passed through the repaired boundary, so admitting it unattended is
 still a review decision rather than a settled one.
+
+`D-457` is the other entry standing `contained`, and it is a contract gap rather than a
+finding: agenda-022’s `BC-206` declared `purpose: research` with no hypothesis, and the
+experiment contract requires at least one, so a cell could be drafted, budgeted,
+dispatched and completed before anything noticed its output had nowhere to go.
+Its hundred minutes and thirteen run blocks are retained as nine covering-value rows and
+a run register — the more accurate description, since nothing was pre-registered and so
+nothing was tested — but the ledger’s round count and effort attribution do not see
+them. The check that would refuse the shape at draft time, rather than at the experiment
+record, is named in the entry and not built.
 
 The [idea board](packing/campaign/ideas.md) carries the full registered portfolio
 alongside raw ideas and dead ends.
@@ -2811,9 +2821,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 63 terminal rounds registered in `series-000`.
+There are 64 terminal rounds registered in `series-000`.
 
-They record 2127.1 agent-minutes and 1017.0 wall-minutes.
+They record 2152.1 agent-minutes and 1044.7 wall-minutes.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
 result; exp-057 stopped before target access; exp-058 stopped on the review it was
 waiting for, which arrived and accepted it.
@@ -2912,6 +2922,7 @@ archive beside it.
 | [exp-061](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-061-h-062-m5-covering-wall.md) | 20 | target | H-062 | pre-registered bisection of [24/5, 9977/2000], two site sets per rung, refutation on a crossing and confirmation only by a converged row loop | certificates at 97/20 (T-021) and 193/40, walls at 39/8, 979/200 and 997/200, so the m = 5 covering wall is bracketed to width 0.025 against the 0.02 registered; the exactly round 25.000000 at 997/200 is explained by the overlap-strip geometry | unresolved |
 | [exp-062](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-062-h-062-m5-midpoint-rung.md) | 20 | target | H-062 | the one remaining pre-registered rung, at the schedule’s own midpoint 973/200, on the same two site-set rules | both constructions wall — the grids at LP round 16 (20.001502, 543 violated) and the certificate-seeded set at round 34 (20.000223, 213 violated) — closing the bracket to [97/20, 973/200], width 0.015, its upper end 0.1235 below the ceiling | accepted |
 | [exp-063](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-063-h-065-n11-near-tight-cell-census.md) | 11 | target | H-065 | census the reachable event cells within four margins of covered mass one, per direction, through the same mass grid the retention decision reads | the epsilon = 1/20 tight set is 0.040754 of 567,130,649 reachable cells, a fifth of the registered 0.20 — and still a search rather than a check: positive area, a bounding box equal to the centre domain’s in all 181 directions, 22,132 extended components | accepted |
+| [exp-064](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-064-h-063-two-threshold-class-program.md) | 11 | target | H-063 | build X-014’s Lemma 3 as per-direction-class thresholds and run its two pre-registered controls | the nine-point bound is exactly nine, but the two-end-cell class cannot refute (11, 0) at Trump’s side and provably never could: `B(2 + (4/3)√2) = 3.876681` sits `0.000403` below the side the control was asked to reach | rejected |
 
 ### Cost and provenance
 
@@ -2980,10 +2991,11 @@ archive beside it.
 | exp-061 | Lane A of Agenda 021, BC-197, one core, 07:53Z–09:21Z | 5000 s | 88 m | guard | `5d07a24a` |
 | exp-062 | Lane A of Agenda 022, BC-213, one core nominally and three lanes actually, 17:00Z–17:26Z | 1590 s | 24 m | criterion | `ca51821f` |
 | exp-063 | Lane B of Agenda 021, BC-201 re-run, one core, 17:36Z–17:52Z | 967 s | 16 m | criterion | `394a0fee` |
+| exp-064 | Lane A of Agenda 021, BC-198, one core shared with two lanes, 18:07Z–18:35Z | 1,665 s | 25 m | criterion | `07155377` |
 
-### What the 63 rounds jointly establish
+### What the 64 rounds jointly establish
 
-The 63 rounds use 2127.1 agent-minutes and 1017.0 wall-minutes under the campaign’s
+The 64 rounds use 2152.1 agent-minutes and 1044.7 wall-minutes under the campaign’s
 retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
@@ -3186,14 +3198,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 456 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 457 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 94 | asserted something false about the mathematics |
 | validity | 117 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 171 | recorded something its own evidence contradicts |
+| bookkeeping | 172 | recorded something its own evidence contradicts |
 | robustness | 58 | did not finish, or finished only by luck |
 | performance | 16 | worked, but cost far more than it should |
 
@@ -3203,7 +3215,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-six defects in 456, and no soundness defect
+**The automated gate has caught sixty-seven defects in 457, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3744,17 +3756,18 @@ the best known packing runs near half a unit — eleven cases above `+0.49`, hea
 `n = 51` at `+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`, `83`, `37`, `53` and
 `26`. Two cautions travel with that ranking.
 The prize is what the *ceiling* allows; the real limit is the covering value at that
-side. 14 values have been reported for the restricted program, at sides `3.82`, `3.85`,
-`3.95`, `3.96`, `4.58`, `4.59`, `4.68`, `4.80`, `4.825`, `4.85`, `4.865`, `4.875`,
-`4.895` and `4.985` — the first eight reports, not measurements this repository can
-reproduce, since no covering-search run log or solver checkpoint was retained for any of
-them; the six added on 2026-09-05 by Agenda 021’s `BC-200` and `BC-197` and Agenda 022’s
-`BC-213` carry their logs, their resumable state and, where one exists, the frozen
-certificate the value belongs to.
-Three of the sides are reported twice, at `3.82`, at `4.85` and at `4.865`, from site
-sets built differently — which at `4.85` is the difference between a wall and the
-certificate `T-021` rests on, and at `4.865` is two independent walls, which is what
-`H-062`’s acceptance clause required.
+side. 18 values have been reported for the restricted program, at sides `3.82`, `3.85`,
+`3.95`, `3.96`, `3.97`, `3.98`, `3.985`, `3.99`, `4.58`, `4.59`, `4.68`, `4.80`,
+`4.825`, `4.85`, `4.865`, `4.875`, `4.895` and `4.985` — the first eight reports, not
+measurements this repository can reproduce, since no covering-search run log or solver
+checkpoint was retained for any of them; the ten added on 2026-09-05 by Agenda 021’s
+`BC-200` and `BC-197` and Agenda 022’s `BC-213` and `BC-206` carry their logs, their
+resumable state and, where one exists, the frozen certificate the value belongs to.
+Several sides are reported more than once from site sets built differently, which is the
+point of reporting them that way: at `4.85` the difference is between a wall and the
+certificate `T-021` rests on, at `4.865` it is two independent walls, and at `3.97` it
+is a converged grid optimum of `12.364038` above a cutting-plane row LP of `12.248227`
+with an exact floor of `10.845594` beneath it.
 
 The middle tier is built and works within the explicit boundaries above.
 Two instruments now agree on the cell decomposition to `4.4e-16` and on the corner’s

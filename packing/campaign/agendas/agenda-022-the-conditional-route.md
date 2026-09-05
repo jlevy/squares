@@ -318,7 +318,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [12, 21]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       How far above 99/25 does the n = 12 ladder climb before its restricted optimum
@@ -359,6 +359,66 @@ agenda:
     depends_on: [BC-203]
     parallel_group: agenda022-lane-c
     program: grid-frontier-exact-values
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
+    outcomes:
+    - scope: >-
+        The four pre-registered sides of the n = 12 ladder above 99/25, on two
+        constructions each, and how far the ladder reaches below 4B.
+      classification: achieved
+      result: >-
+        The ladder does not climb. All eight pre-registered runs refute and nothing was
+        frozen as a candidate: at 397/100 the grid converged at round 26 to 12.364038 and
+        the seeded set crossed twelve at round 8; at 398/100, 3985/1000 and 399/100 the
+        grid locked at exactly 16.000000 from rounds 5, 6 and 7 while the seeded sets
+        crossed at rounds 5, 3 and 3. Each refutes a site set rather than a side.
+        The cell's own warning about margin non-monotonicity did not materialise -- the
+        crossings arrive strictly earlier as the side rises, 8, 5, 3, 3 -- so whatever
+        reopens the margin below 99/25 does not operate above it.
+        The 16.000000 is BC-197's 25.000000 one order down and has the same mechanism:
+        with delta = 4B - L, a support missing all three windows [L - (4 - k)B, kB]
+        admits sixteen dual-feasible unit weights whatever the covering value is, and the
+        auto grid places 43 to 44 sites per axis where those windows need 191, 369, 687
+        and 4988. The register now carries that artefact signature at two orders, which
+        makes it a property of the construction rather than a coincidence at one size.
+        Five unregistered follow-up runs at 397/100 answer the question the cell was for.
+        A widened column step converged the column loop at 12.314708 over 830 orbits,
+        reproduced from a different start to eleven figures; run_fractional_cutting
+        converged its row LP at 12.248227 and returned an exact floor of 10.845594. So
+        10.845594 <= nu*(3.97) <= 12.248227, and against the retained 11.998960 at 3.96
+        the upper end gives a slope of at least 24.9 per unit side. The retained rung's
+        0.001040 of margin is spent within 0.000042 of side: the ladder ends at about
+        3.96004, and the 0.0308 of runway T-017 recorded under 4B = 3.9908 is not runway.
+        The covering value binds and the ceiling never gets the chance, which is the same
+        shape BC-197 found at m = 5 and the second time this project has measured that
+        difference. Two cases is not a rate and is not offered as one; it is enough to say
+        a runway figure computed from the ceiling is an upper bound on an upper bound.
+        Twelve lies inside the bracket at 3.97, so that side is undecided rather than
+        barred, and every refutation here is of a site set.
+        Rationalisation never fired the kill: three freezes lost 0.000091, 0.000088 and
+        0.000083 at scale 4,000,000, about 0.58 of the atoms-over-scale bound each. At
+        2097 atoms that scale bounds the loss at 0.000524 against 0.001040 of margin,
+        where the old 200,000 bounded it at 0.010485 -- ten times the margin, and it would
+        have fired on every rung.
+        Three instrument findings are in the register. `kill` on a uv wrapper does not
+        reach its python child, which let a converged run write a freeze into the case
+        package before it was moved out; the ceiling instrument is split so that
+        run_fractional_colgen calls check_ceiling without taking --support-cap while
+        colgen_checkpoint takes --support-cap and never calls check_ceiling, which is why
+        one run reported a floor of 8.50 under an LP holding 12.31 with nothing saying the
+        dual had been truncated; and the column loop's stopping rule halted at 12.314708
+        where the cutting loop with more sites reached a converged 12.248227 below it.
+        No round is registered for this cell and that is a defect in the cell rather than
+        in the work: it declares purpose research with no hypotheses, and the experiment
+        contract requires at least one, so it could not produce a registrable round. The
+        measurements are retained as nine covering-value register rows and the run
+        register instead, which is what they are -- data, not a test of a claim made in
+        advance. Recorded as D-457.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
+      - packing/frontier/covering-values.yaml
+      disposition: retire-success
+      follow_up: null
     next_evidence: >-
       How close to the ceiling the ladder actually reaches at m = 4, which is the only
       direct measurement anywhere of the gap between the covering value and the ceiling.
