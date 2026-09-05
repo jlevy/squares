@@ -5,11 +5,11 @@ title: "F3 and F4: the self-contained package is not a third-party check, and de
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m1qcc9devr6mz0m6erxswxjc
 created_at: 2026-09-04T23:34:38.021Z
-updated_at: 2026-09-04T23:34:38.021Z
+updated_at: 2026-09-05T00:22:52.653Z
 ---
-Rename the package and its README as PR 80 does; the n = 11 replay checks the declared least_cell_mass; the standalone verifier refuses on a declared-value mismatch instead of printing NOTE and VERIFIED. Massaccesi's control described as a reconstruction from his posted constants.
+F3 and F4 from PR 80. F3: 'Third-Party Check' overstates what a self-contained package written by the claiming project can be -- rename and reword. Also F3's sibling, the independence claim: README, SYNOPSIS, results.yaml, evidence.yaml, RESULTS.md and the thirdparty README say the two routes 'share no modelling assumption'; they share the Certificate object and Conditions 1-4 and differ in the Condition 5 method. Say that (the gate's docstring already does, ported with think-e6xe), and port PR 80's surface test over those six files. Found on the way: SYNOPSIS still says 'None reaches C5, because no one outside the project has reviewed any of them' -- a fourth D-446 sentence; fix it and add it to D-446's entry. F4: the n = 11 replay checked the declared total mass but not the declared least cell mass, and the standalone verifier printed a mismatch as a note and still ended VERIFIED; declared minima govern acceptance.
