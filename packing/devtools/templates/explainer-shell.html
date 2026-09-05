@@ -6,8 +6,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <meta name="generator" content="kpress">
-<title>s({{N}}) ≥ {{HEADLINE_L_FRAC}}: A New Lower Bound on the Square Packing Problem</title>
-<meta name="description" content="How a weighted point set and a pigeonhole prove s({{N}}) &gt;= {{HEADLINE_L_FRAC}}.">
+<title>{{PAGE_TITLE}}</title>
+<meta name="description" content="{{PAGE_DESCRIPTION}}">
+<!-- What a shared link shows. Everything the page itself loads is inlined or relative,
+     because it has to open the same way from a file, from Pages and from an artifact
+     host; these are the exception, and they are not loads. A crawler reads them off the
+     markup with no base to resolve against, so each URL is absolute, and no browser
+     fetches any of them to display the page. The image is the atlas composite served
+     beside this file: portrait, so X and Facebook crop it to a band of the grid and
+     Slack, Discord and iMessage scale all hundred packings down whole. The width and
+     height are read from that PNG, so a consumer can reserve the box before it has the
+     bytes. -->
+<link rel="canonical" href="{{CANONICAL_URL}}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{{SITE_NAME}}">
+<meta property="og:title" content="{{PAGE_TITLE}}">
+<meta property="og:description" content="{{PAGE_DESCRIPTION}}">
+<meta property="og:url" content="{{CANONICAL_URL}}">
+<meta property="og:image" content="{{CARD_IMAGE_URL}}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="{{CARD_IMAGE_WIDTH}}">
+<meta property="og:image:height" content="{{CARD_IMAGE_HEIGHT}}">
+<meta property="og:image:alt" content="{{COMPOSITE_ALT}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{PAGE_TITLE}}">
+<meta name="twitter:description" content="{{PAGE_DESCRIPTION}}">
+<meta name="twitter:image" content="{{CARD_IMAGE_URL}}">
+<meta name="twitter:image:alt" content="{{COMPOSITE_ALT}}">
 <style>{{KPRESS_CSS}}</style>
 <script>{{THEME_BOOTSTRAP}}</script>
 <style>
@@ -460,9 +485,24 @@ body {
 
   /* The panel is gone, so the figure body is a single column, and a canvas
      is capped by height rather than width so a square one fits the page with
-     its caption. Both were taller than a page before. */
+     its caption. Both were taller than a page before.
+
+     The canvas cap is 4.5in rather than 5.4in to buy back printed pages. A figure
+     is `break-inside: avoid`, so one too tall for the space left is pushed whole to
+     the next page and the current page ends early: measured, this document left
+     32.94in of premature whitespace across four pages, which reads as a break
+     arriving just after a heading even though a paragraph intervenes. It is not
+     that: no heading in the document is stranded, kpress's `break-after: avoid`
+     matches every one of them and was confirmed load-bearing by removing it. The
+     figures were simply too tall. 4.5in and 4.6in measure the same and 4.4in is
+     worse, because pagination is discrete.
+
+     The image cap stays at 7in deliberately. Taking it to 6in would close the
+     largest gap and save two more pages, but the image it caps is the hundred-cell
+     atlas, whose per-cell labels already set at about 2.4pt; the whitespace is the
+     cheaper thing to keep. */
   .split { display: block; }
-  .stage canvas { max-height: 5.4in; width: auto; max-width: 100%; margin-inline: auto; }
+  .stage canvas { max-height: 4.5in; width: auto; max-width: 100%; margin-inline: auto; }
   .cert-page figure img { max-height: 7in; width: auto; max-width: 100%; }
 
   /* Link targets are deliberately not spelled out after each link: a URL set in

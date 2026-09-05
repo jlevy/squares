@@ -34,6 +34,7 @@ import base64
 import json
 import re
 import shutil
+import struct
 import sys
 from collections.abc import Sequence
 from dataclasses import dataclass
@@ -61,6 +62,12 @@ from sqpack.yamlio import safe_load
 PACKING = Path(__file__).resolve().parents[1]
 REPO = PACKING.parent
 CASE = PACKING / "cases" / "n11_fractional_certificate"
+# The registered result these certificates belong to, lowercased as a filename
+# stem. `conventions.md` builds every document name for a result from this id --
+# `t-018-proof-card.md`, `t-018-verifiable-claim-<bound>.md`, `t-018-explainer.md` --
+# and says the published form takes the same name as the case-local one, so the
+# id is written once here and the names are derived rather than typed.
+RESULT_ID = "t-018"
 TEMPLATES = Path(__file__).with_name("templates")
 TEMPLATE = TEMPLATES / "explainer-shell.html"
 MARKDOWN = TEMPLATES / "explainer-article.md"
@@ -236,14 +243,35 @@ PROBLEM_URL = "https://erich-friedman.github.io/papers/squares/squares.html"
 BEST_URL = "https://kingbird.myphotos.cc/packing/squares_in_squares.html"
 PRIOR_URL = "https://www.combinatorics.org/ojs/index.php/eljc/article/view/v10i1r8"
 REPO_URL = "https://github.com/jlevy/squares"
+# Where the deploy serves this page: the GitHub Pages site for the repository, at
+# the project subpath, with the trailing slash the directory URL actually resolves
+# to. A link preview is the one part of the page that cannot be relative -- a
+# crawler resolves `og:image` and `og:url` on its own machine, not against the
+# document -- so the deployment's own address has to be stated somewhere, and this
+# is that one place.
+SITE_URL = "https://jlevy.github.io/squares/"
+SITE_NAME = "Squares"
 BEST_RENDERING = PACKING / "atlas" / "known-best" / "rendering" / "n-011.svg"
 # The atlas composite of every known-best packing, shown as Figure 1 and served
 # beside the page rather than inlined: the PNG is the image, the PDF the link.
 #: The composite travels with the page: the SVG the figure shows, the PDF it links for
 #: print, and the PNG for a reader whose context cannot render the vector.
-COMPOSITE_ASSETS = tuple(
-    PACKING / "atlas" / "known-best" / f"known-best-1-100.{ext}"
-    for ext in ("svg", "png", "pdf")
+COMPOSITE_STEM = PACKING / "atlas" / "known-best" / "known-best-1-100"
+COMPOSITE_ASSETS = tuple(COMPOSITE_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf"))
+#: The one of the three a link preview shows. No unfurler renders SVG and none follows a
+#: PDF, so the card names the raster, and it names the 1x rather than the committed
+#: `@2x`: 2400x2896 is inside the 4096x4096 ceiling X applies to a card image and
+#: 4800x5792 is outside it on both axes, while every consumer downscales to 600px or
+#: less anyway. The 1x is also already copied beside the page; the 2x is not, and adding
+#: it would put another 1.2 MiB in every deploy for resolution nothing displays.
+COMPOSITE_PNG = COMPOSITE_STEM.with_suffix(".png")
+#: What Figure 1 and the link preview are both a picture of, written once. The figure
+#: shows the SVG and the card the PNG, but they are the same drawing, so a reader on a
+#: screen reader and a reader seeing an unfurl get the same sentence.
+COMPOSITE_ALT = (
+    "The best known packings of one through one hundred unit squares, in a ten-by-ten "
+    "grid, each labelled with its best known upper bound and, where the value is still "
+    "open, the best proved lower bound"
 )
 VERIFIER = PACKING / "src" / "sqpack" / "fractional" / "certificate.py"
 GENERATOR = PACKING / "src" / "sqpack" / "fractional" / "generate.py"
@@ -259,6 +287,34 @@ def repo_file(path: Path) -> str:
             f"{path} is outside the repository and cannot be linked on main"
         ) from None
     return f"{REPO_URL}/blob/main/{relative.as_posix()}"
+
+
+def site_file(path: Path) -> str:
+    """The asset's absolute URL on the deployed site, for a consumer off the page.
+
+    Everything the page itself points at is relative, because the page has to open
+    the same way from a file, from Pages and from an artifact host. A link preview
+    cannot: the crawler that reads `og:image` has no base to resolve against and
+    drops a relative one, so the card states the deployed address in full.
+    """
+    return SITE_URL + path.name
+
+
+def png_size(path: Path) -> tuple[int, int]:
+    """The pixel dimensions in a PNG's IHDR, read from the file the render publishes.
+
+    `og:image:width` and `og:image:height` let a consumer reserve the card's box
+    before it has fetched the image, and a pair that disagrees with the file is worse
+    than none: the preview reflows, or is dropped. Reading them from the bytes that
+    are copied beside the page means a re-exported atlas moves the tags with it and
+    no dimension is typed twice.
+    """
+    with path.open("rb") as handle:
+        header = handle.read(24)
+    if header[:8] != b"\x89PNG\r\n\x1a\n" or header[12:16] != b"IHDR":
+        raise SystemExit(f"{path} is not a PNG; the link preview cannot state its size")
+    width, height = struct.unpack(">II", header[16:24])
+    return width, height
 
 
 # The certificates the page walks through, in tab order. The first is shown by
@@ -1013,8 +1069,21 @@ def coarsening_verdict(rows: list[CoarseningRow] | None) -> str:
     raise SystemExit("the net-coarsening rows pass in no order the figure's sentence can state")
 
 
+# The check is about fetches, not about outward addresses, and the two came apart
+# when the page gained a link preview. `rel="canonical"` is the only `<link>` a
+# browser does not act on: it is a statement to a crawler about which URL this
+# document is, read from the markup and never resolved or requested while the page
+# is being viewed, so a page carrying one still opens from a file with the network
+# off. Every other `<link ... href=>` -- a stylesheet, an icon, a preload, a
+# manifest -- is a fetch and is still refused, and the exemption is written as the
+# exact quoted form the shell emits so nothing broader slips through it. The
+# `og:*` and `twitter:*` URLs need no exemption: they are `<meta content=>`, which
+# this pattern has never matched, and are likewise read rather than fetched.
 EXTERNAL_REFERENCE = re.compile(
-    r"<script[^>]*\ssrc=|<link[^>]*\shref=|@import\b|url\((?!\s*[\"']?(?:data:|#))",
+    r"<script[^>]*\ssrc="
+    r'|<link(?![^>]*\srel="canonical")[^>]*\shref='
+    r"|@import\b"
+    r"|url\((?!\s*[\"']?(?:data:|#))",
     re.IGNORECASE,
 )
 
@@ -1026,6 +1095,10 @@ def assert_self_contained(page: str) -> None:
     meant to open from a file with the network off. A script or stylesheet element
     with a source, a CSS import, or a `url()` that is not a data URI or a fragment
     is a fetch, so the render refuses it rather than leaving it to a grep in CI.
+
+    Metadata is not a fetch. The canonical link and the link-preview `<meta>` tags
+    carry absolute URLs on purpose -- a crawler has no base to resolve a relative one
+    against -- and no browser requests any of them to display the page.
     """
     hit = EXTERNAL_REFERENCE.search(page)
     if hit:
@@ -1041,7 +1114,7 @@ def slug(facts: Facts) -> str:
 
 def claim_path(facts: Facts) -> Path:
     """The certificate's verifiable-claim document, one self-contained file beside it."""
-    return CASE / f"t-018-verifiable-claim-{slug(facts)}.md"
+    return CASE / f"{RESULT_ID}-verifiable-claim-{slug(facts)}.md"
 
 
 # The claim verifier's whole decision, `python verify_claim.py <certificate>`,
@@ -1086,6 +1159,46 @@ def claim_substitutions(headline: Facts, default: Facts) -> dict[str, str]:
     return values
 
 
+#: The deck, which the hero sets under the title and the card repeats after it.
+SUBTITLE = "A New Lower Bound on the Square Packing Problem"
+
+
+def card_substitutions(headline: Facts, headline_frac: str) -> dict[str, str]:
+    """What a link preview shows: the title, the sentence, the canonical URL, the image.
+
+    Every one of these is a string the page already states somewhere -- the title in
+    `<title>`, the sentence in `<meta name="description">`, the picture in Figure 1 --
+    and each is built here once and substituted into both places, so a shared link and
+    the page it opens cannot say different things. The bound in the title and in the
+    sentence is the headline certificate's own, like every other number on the page.
+
+    The card names the composite because that is the picture of the result: a portrait
+    at 150:181. X and Facebook centre-crop it to their landscape card and show the
+    middle four rows of the grid; Slack, Discord and iMessage scale the whole thing and
+    show all hundred packings with the title on it. Both readings are of the atlas, so
+    the aspect is left alone rather than a landscape variant being derived for the
+    croppers at the cost of the ones that do not crop.
+    """
+    width, height = png_size(COMPOSITE_PNG)
+    title = f"s({headline.n}) ≥ {headline_frac}: {SUBTITLE}"
+    description = (
+        f"How a weighted point set and a pigeonhole prove s({headline.n}) ≥ "
+        f"{headline_frac}, apparently the first improvement in "
+        f"{RESULT_YEAR - PRIOR_YEAR} years on the smallest open case of the "
+        "square packing problem."
+    )
+    return {
+        "PAGE_TITLE": title,
+        "PAGE_DESCRIPTION": description,
+        "CANONICAL_URL": SITE_URL,
+        "SITE_NAME": SITE_NAME,
+        "CARD_IMAGE_URL": site_file(COMPOSITE_PNG),
+        "CARD_IMAGE_WIDTH": str(width),
+        "CARD_IMAGE_HEIGHT": str(height),
+        "COMPOSITE_ALT": COMPOSITE_ALT,
+    }
+
+
 def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) -> dict[str, str]:
     """Values the whole page states: the headline bound, the deck, the shared axis.
 
@@ -1094,12 +1207,15 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
     the stamped article; the band it shades runs from the headline bound to the
     best packing known, which is what remains unknown after all of them.
     """
+    headline_frac = f"{headline.outer_side.numerator}/{headline.outer_side.denominator}"
     return {
         "BELOW_ONE": BELOW_ONE,
         "NEAR_LIMIT": NEAR_LIMIT,
         "N": str(headline.n),
-        "HEADLINE_L_FRAC": f"{headline.outer_side.numerator}/{headline.outer_side.denominator}",
+        "HEADLINE_L_FRAC": headline_frac,
         "HEADLINE_L_DEC": decimal(headline.outer_side),
+        "SUBTITLE": SUBTITLE,
+        **card_substitutions(headline, headline_frac),
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
         "DEFAULT_ID": default.identifier,
         # Print shows one certificate deterministically, and this names which.
@@ -1339,8 +1455,10 @@ def kerned_math_spans(source: str) -> str:
     )
 
 
-#: Where the published Markdown is written, beside the page it is the source of.
-MARKDOWN_OUTPUT = PACKING / "site" / "explainer.md"
+#: Where the published Markdown is written, beside the page it is the source of. Named
+#: for the result the way a case-local document is: what a file is called does not
+#: depend on which directory it is served from.
+MARKDOWN_OUTPUT = PACKING / "site" / f"{RESULT_ID}-explainer.md"
 
 
 def _balanced(source: str, start: int, tag: str) -> int:

@@ -13,7 +13,18 @@ import re
 
 import pytest
 
-from devtools.render_explainer import WALKTHROUGH, assert_self_contained, render
+from devtools.render_explainer import (
+    CASE,
+    COMPOSITE_ASSETS,
+    COMPOSITE_PNG,
+    MARKDOWN_OUTPUT,
+    RESULT_ID,
+    SITE_URL,
+    WALKTHROUGH,
+    assert_self_contained,
+    png_size,
+    render,
+)
 from devtools.render_explainer import load_certificate as load
 
 
@@ -46,10 +57,17 @@ def test_no_placeholder_survives_substitution(page: str) -> None:
 
 
 def test_the_page_is_self_contained(page: str) -> None:
-    """The renderer's own check passes on its own output; the workflow relies on this."""
+    """The renderer's own check passes on its own output; the workflow relies on this.
+
+    The page carries exactly one `<link>`, and it is the canonical URL. That is not a
+    fetch -- a browser reads it and does not request it -- but it is the one element in
+    the head that could become one, so it is counted rather than merely permitted: a
+    second `<link>` arriving here is a stylesheet, an icon or a preload, and the count
+    fails before the refusal has to.
+    """
 
     assert_self_contained(page)
-    assert "<link" not in page
+    assert re.findall(r"<link[^>]*>", page) == [f'<link rel="canonical" href="{SITE_URL}">']
     assert re.search(r"<script[^>]*\ssrc=", page) is None
 
 
@@ -61,6 +79,13 @@ def test_the_page_is_self_contained(page: str) -> None:
         "<style>@import url(https://example.org/a.css);</style>",
         "<style>body { background: url(https://example.org/a.png) }</style>",
         "<style>body { background: url('//example.org/a.png') }</style>",
+        # The canonical exemption is the exact quoted form the shell emits and nothing
+        # wider: every other rel is still a fetch, and a rel that merely contains the
+        # word does not buy its way past.
+        '<link rel="preload" as="font" href="https://example.org/a.woff2">',
+        '<link rel="icon" href="https://example.org/favicon.png">',
+        '<link rel="canonical stylesheet" href="https://example.org/a.css">',
+        "<link rel=canonical href=https://example.org/>",
     ],
 )
 def test_an_external_reference_is_refused(fragment: str) -> None:
@@ -74,6 +99,11 @@ def test_an_external_reference_is_refused(fragment: str) -> None:
         "<style>@font-face { src: url(data:font/woff2;base64,AAAA) }</style>",
         "<style>.a { fill: url(#gradient) }</style>",
         '<style>.b { background: url("data:image/svg+xml,%3Csvg%3E") }</style>',
+        # Metadata for a crawler, read off the markup and never requested to display
+        # the page. Both forms are outward addresses on purpose: a preview consumer
+        # resolves them on its own machine and drops a relative one.
+        '<link rel="canonical" href="https://jlevy.github.io/squares/">',
+        '<meta property="og:image" content="https://jlevy.github.io/squares/a.png">',
     ],
 )
 def test_a_data_uri_or_fragment_is_not_a_fetch(fragment: str) -> None:
@@ -127,3 +157,131 @@ def test_the_published_document_sets_mathematics_without_typesetting_kerns(
     """
     assert "mkern" not in document
     assert "$s(11)$" in document or "s(11)" in document
+
+
+#: Every `og:` and `twitter:` tag in the head, by name. Both vocabularies spell a tag
+#: the same way and differ only in the attribute that carries the name -- Open Graph is
+#: `property`, the Twitter tags are `name` -- so one pattern reads them together.
+CARD_TAG = re.compile(r'<meta (?:property|name)="((?:og|twitter):[^"]+)" content="([^"]*)"')
+
+#: What a card is: the tags without which a consumer shows something worse than the
+#: page asked for. `og:image:type` is deliberately not here -- it is a hint, and a
+#: consumer that ignores it still renders the card.
+REQUIRED_CARD_TAGS = frozenset(
+    {
+        "og:type",
+        "og:site_name",
+        "og:title",
+        "og:description",
+        "og:url",
+        "og:image",
+        "og:image:width",
+        "og:image:height",
+        "og:image:alt",
+        "twitter:card",
+        "twitter:title",
+        "twitter:description",
+        "twitter:image",
+        "twitter:image:alt",
+    }
+)
+
+
+def card_tags(page: str) -> dict[str, str]:
+    return dict(CARD_TAG.findall(page))
+
+
+def test_the_link_preview_is_complete_and_its_urls_are_absolute(page: str) -> None:
+    """A shared link previews with the atlas, or it previews with nothing.
+
+    The page shipped with four `<meta>` tags, a title and a description and no card at
+    all, so every unfurl of it -- X, Slack, Discord, Facebook, iMessage -- was a line of
+    text on a blank rectangle. What makes a card is the set together rather than any one
+    tag: a consumer that finds `og:image` and no `twitter:card` falls back to a
+    thumbnail, and one that finds a relative `og:image` drops the image outright,
+    because a crawler resolves it on its own machine and has no base to resolve
+    against. Both are pinned here, since neither failure shows up in the page itself:
+    a card is only ever seen somewhere else.
+    """
+    tags = card_tags(page)
+    assert tags.keys() >= REQUIRED_CARD_TAGS, sorted(REQUIRED_CARD_TAGS - tags.keys())
+    for key in ("og:url", "og:image", "twitter:image"):
+        assert tags[key].startswith("https://"), (key, tags[key])
+    assert f'<link rel="canonical" href="{SITE_URL}">' in page
+    assert tags["og:url"] == SITE_URL
+
+
+def test_the_card_image_is_one_the_render_serves_beside_the_page(page: str) -> None:
+    """The card names a file the deploy actually publishes, at the size it actually is.
+
+    Two ways a card breaks without the page changing at all. The image URL can name
+    something the render does not copy into the site directory, which is a 404 a
+    consumer answers by showing no image; and the declared width and height can drift
+    from the file, which reflows the preview or loses it. So the URL is checked against
+    the assets the render copies, and the dimensions against the PNG's own header --
+    the same bytes that get served -- rather than against numbers typed here.
+    """
+    tags = card_tags(page)
+    served = {asset.name for asset in COMPOSITE_ASSETS}
+    assert tags["og:image"] == SITE_URL + COMPOSITE_PNG.name
+    assert tags["og:image"].rsplit("/", 1)[-1] in served
+    assert tags["twitter:image"] == tags["og:image"]
+    width, height = png_size(COMPOSITE_PNG)
+    assert (tags["og:image:width"], tags["og:image:height"]) == (str(width), str(height))
+    # Portrait, and every consumer either crops it to a band or scales it down whole;
+    # what none of them does is render it at 4800 px, which is why the card names the
+    # 1x export and not the committed `@2x`.
+    assert width < height
+    assert max(width, height) <= 4096
+
+
+def test_the_card_and_the_page_say_the_same_thing(page: str) -> None:
+    """A preview that disagrees with the page it opens is worse than no preview.
+
+    The title and the sentence are built once in the renderer and substituted into
+    `<title>`, `<meta name="description">` and both card vocabularies, so there is one
+    string and not four. This is what would catch a later edit that retyped one of them
+    in the template instead.
+    """
+    tags = card_tags(page)
+    title = re.search(r"<title>(.*?)</title>", page)
+    assert title is not None
+    described = re.search(r'<meta name="description" content="([^"]*)"', page)
+    assert described is not None
+    assert tags["og:title"] == tags["twitter:title"] == title.group(1)
+    assert tags["og:description"] == tags["twitter:description"] == described.group(1)
+    assert tags["og:image:alt"] == tags["twitter:image:alt"]
+    # The bound is the certificate's, wherever it is stated.
+    for text in (title.group(1), described.group(1)):
+        assert "s(11) ≥ 381/100" in text
+
+
+def test_the_published_document_is_named_for_the_result(document: str) -> None:
+    """`conventions.md` names a document for the result and for what it is.
+
+    It was `explainer.md`, which says what the file is and not which result it explains;
+    the convention is `t-NNN-explainer.md`, the same name a case-local document would
+    take, because what a file is called should not depend on the directory it is served
+    from. The id is written once in the renderer and every name is derived from it, so
+    what is pinned here is the shape and the sharing: the published document and the
+    claim documents beside the certificates carry one id between them, not two.
+    """
+    assert re.fullmatch(r"t-\d{3}-explainer\.md", MARKDOWN_OUTPUT.name)
+    assert MARKDOWN_OUTPUT.name == f"{RESULT_ID}-explainer.md"
+    claims = sorted(CASE.glob("*-verifiable-claim-*.md"))
+    assert claims, "the case carries no claim document to share an id with"
+    for claim in claims:
+        assert claim.name.startswith(f"{RESULT_ID}-"), claim.name
+    # The document is what it is named after: the article, not the template.
+    assert document.startswith("# s(11)")
+
+
+def test_the_md_chip_offers_the_document_by_its_published_name(page: str) -> None:
+    """The chip is a relative link, so it resolves to a file that has to be beside it.
+
+    `SOURCE_URL` is the published document's own filename, so a rename moves both ends
+    at once. A chip left pointing at the old name is a 404 on the deployed site and
+    nothing in the render notices, which is why it is checked against the constant the
+    writer uses rather than against a name spelled out here.
+    """
+    assert f'href="{MARKDOWN_OUTPUT.name}"' in page
