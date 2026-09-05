@@ -114,6 +114,11 @@ The id in the filename must equal the id in the frontmatter.
 Research documents and reviews keep the repository’s dated form:
 `research-YYYY-MM-DD-topic.md`, `review-YYYY-MM-DD-topic.md`.
 
+**Case-local documents for a registered theoretical result use the lowercase result id
+and a descriptive kebab-case suffix, for example `t-018-proof.md`.** [convention] This
+is a filename convention only: prose and structured records keep the canonical uppercase
+id `T-018`. `README.md` remains the exception for a directory’s orientation page.
+
 Use [`repren`](https://github.com/jlevy/repren) for renames—it moves files and rewrites
 references in one pass, which is what keeps the two in step.
 
@@ -275,6 +280,15 @@ results) is defined there and only there, and the results register at
 `packing/frontier/results.yaml` is where a whole result’s rungs are declared and
 re-derived on every validation run.
 
+**Reserve `C0`–`C5` for confirmation levels.** [convention] Numbered hypotheses or
+checks inside a proof are written as **Condition 1**, **Condition 2**, and so on, never
+with abbreviated letter-C labels.
+This keeps local proof notation from colliding with the repository’s result-level
+confirmation ladder.
+Verbatim source archives and literal third-party machine identifiers may reproduce
+external letter-C notation; they are preserved evidence or syntax, not repository
+terminology.
+
 **Budgets are in pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`. [convention]
 Machine-independent, and comparable across proposers whose move semantics differ.
 Wall clock is reported alongside as a courtesy, never as the budget.
@@ -388,9 +402,12 @@ in artifacts, beads and reviews.
 Write **packing exploration** for the project directory, **exploration report** for
 `X-NNN`, and bare **exploration** for reaching another basin.
 Write **cell** alone for a cell of configuration space—a choice of separating axis and
-order for each pair—and **instance cell**, never bare “cell”, for a position in a sweep.
-The two are unrelated objects and the confusion is expensive: one is where the LP is
-solved, the other is what a round is run on.
+order for each pair—**instance cell**, never bare “cell”, for a position in a sweep, and
+**event cell**, never bare “cell”, for a region of centres on which a certificate’s
+covered mass is constant.
+The three are unrelated objects and the confusion is expensive: one is where the LP is
+solved, one is what a round is run on, and one is where a lower-bound certificate’s mass
+is decided.
 
 ## 10. Code and Docs
 

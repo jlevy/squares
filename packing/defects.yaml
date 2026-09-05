@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 450
+count: 454
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14408,3 +14408,227 @@ defects:
     evidence entry.
   status: fixed
   recorded_in: packing/frontier/evidence.yaml
+- id: D-451
+  title: Three n = 12 records described rungs the retained pointer had already climbed past
+  date: '2026-09-05'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    the case body and the replay docstrings since the ladder passed 77/20 on 2026-09-04,
+    the evidence entry since it passed 197/50 the same day; found on 2026-09-05 by the
+    port of PR 80's head 04127189, which read each record against the bytes it declares
+  severity: medium
+  what: >-
+    Three durable records about n = 12 went on describing rungs the retained pointer had
+    climbed past. `packing/frontier/evidence.yaml`'s `E-n012-fractional-certificate`
+    declares `cases/n12_fractional_certificate/certificate.json` and described a 681-atom
+    certificate at 197/50, total mass 479713/40000, least covered mass 100003/100000 and
+    B = 9973/10000 -- the figures of the rung that filename used to hold; the file it
+    declares carries 2,097 atoms at 99/25. Its `novel_object` still named side 19/5, the
+    first rung of eight. `packing/frontier/n-012.md`'s body opened "The verified lower
+    bound is 77/20 = 3.85" with 113 atoms and mass 191/16, under front matter that said
+    99/25 = 3.96, and closed by saying the covering program stops at 39/10 -- four rungs
+    below where it now stops. The case package's `replay.py` and `__main__.py` said two
+    certificates are retained and gave the bound as 77/20; eight are retained.
+  consequence: >-
+    No bound is wrong and no verdict changes. Every figure was exact and about a real
+    retained file, which is what makes this class hard to see: each sentence reads as a
+    current description of the certificate its own record points at. The cost is to a
+    reader, and to provenance -- the evidence entry is where a reviewer goes to learn
+    what was decided about the bytes the case cites, and it described a weaker
+    certificate that a different entry decides. This is `D-442` a third time and `D-439`'s
+    shape a fourth: the surface with a detector held, and the records beside it drifted.
+  fix: >-
+    Fixed on 2026-09-05. Every figure is re-derived from
+    `cases/n12_fractional_certificate/certificate.json` rather than copied from PR 80's
+    rewrite of the same records: 2,097 atoms, total mass 149987/12500, least covered mass
+    12501/12500 leaving 13/12500 of slack, B = 9977/10000, side 99/25, and eight rungs
+    from 19/5. The case body, the evidence entry's `limitations` and `novel_object`, and
+    the case package's two module docstrings are rewritten against those bytes. Two
+    detectors close the surfaces this got through. `check_case_prose` now reads "The
+    verified lower bound is X" -- the shape `n-012`'s body used, which names no `s(n)` for
+    the existing pattern to anchor on -- against `verified_lower_bound` and its
+    `exact_form`, with no reported-bound fallback and no historical exemption.
+    `check_rung_figures` now reads an evidence entry's `limitations` against the
+    certificate that entry declares, for any sentence whose rung tokens are that
+    certificate's own; a sentence ranging over other rungs is left unchecked, which is
+    what keeps it quiet on `E-fractional-interval-decision`.
+  regression: >-
+    `packing/tests/test_case_prose.py` (a verified bound named in words is held to the
+    field) and `packing/tests/test_rung_figures.py` (an evidence entry's limitations are
+    read against the certificate it names), each reconstructing this defect's own figures
+    as a perturbation of the live record and recomputing both sides from the artifacts.
+    The two module docstrings have no detector: nothing here reads a docstring against the
+    file it describes, and that gap is the honest part of this entry.
+  recurrence_of: D-442
+  status: fixed
+  recorded_in: packing/frontier/evidence.yaml
+- id: D-452
+  title: The documents a reader opens first still described the pre-T-018 n = 11 rung
+  date: '2026-09-05'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    one day, from the T-018 retention on 2026-09-04 until this read; and, for the T-017
+    figure, from that result's scoring the same day
+  severity: medium
+  recurrence_of: D-442
+  what: >-
+    T-018 moved the verified lower bound of n = 11 from Stromquist's 2 + 4/sqrt(5) to
+    381/100 = 3.81, and the front matter of packing/frontier/n-011.md was updated with
+    it. Four durable statements outside that file were not.
+    SYNOPSIS.md's n = 11 fact table still gave "Best certified lower bound |
+    2 + 4/sqrt(5) = 3.788854382..." and "Published gap | 0.088229208023", under a
+    sentence saying both ends had barely moved in a generation.
+    TUTORIAL.md's table for the same case gave "best lower bound | 2 + 4/sqrt(5)" and
+    "bound gap 0.088229208023 | open since 2003", and its open-questions section said
+    the interval [3.788854, 3.877084] "has stood since 2003" -- written the day before
+    the lower end moved.
+    packing/campaign/ideas.md pinned s(11) to [3.788854, 3.877084] and said both
+    endpoints had stood for over two decades.
+    And T-017's significance rationale in packing/frontier/results.yaml put the gap to
+    the conjectured 4 at 0.07, the distance from the 393/100 rung, where that result's
+    own claim field gives the retained rung's 0.04.
+  consequence: >-
+    No bound is wrong and no verdict changes; every figure was exact and true of the
+    object it was written about. What drifted is which object. The cost falls on the
+    reader furthest from the artifacts: the synopsis fact table and the tutorial are
+    what a newcomer reads before anything else, and for a day they reported a displaced
+    value as the current one and dated a moving interval to 2003.
+    This is D-442 recurring one day later, on the surfaces beside the ones D-442's
+    detector was built for. check_case_prose holds a case body to its own front matter
+    and check_rung_figures holds the results register to its certificates; nothing held
+    the two reader-facing documents to anything, so the class simply moved to them.
+  fix: >-
+    Fixed on 2026-09-05. Each figure is re-derived from the artifact that owns it:
+    381/100 = 3.81 and 3.87708359002281417730789706010096 from
+    packing/frontier/n-011.md's front matter, their difference 0.067083590023 at the
+    twelve decimals the rows were already written to, and, for T-017, the 0.04 that its
+    retained 99/25 rung leaves below 4. The "has stood since 2003" sentences now say
+    what is true -- the upper end has not moved since 1979, the lower end moved on
+    2026-09-04 -- and the synopsis row is relabelled "Bound gap", since the end it
+    measures from is no longer a published value. The claim that n = 11 carries the
+    fourth-smallest open gap at n <= 100 was re-derived over the sixty-five open cases
+    in the corpus and still holds.
+    The durable part is check_case_interval in packing/devtools/check_synopsis.py, which
+    holds the synopsis fact table to packing/frontier/n-011.md's front matter: the upper
+    figure must be the front matter's own digits, the lower row must state both the
+    exact form and the decimal the record carries, and the gap must equal their
+    difference at the precision it is written to.
+  regression: packing/tests/test_synopsis_handoff.py
+  status: fixed
+  recorded_in: SYNOPSIS.md
+- id: D-453
+  title: Every open case body rounded its bound to nearest, and so stated one stronger than is proved
+  date: '2026-09-05'
+  layer: record
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: >-
+    since the bodies were written -- through D-442's detector, the interval shape D-445
+    added to it, and every run of check_case_prose in between -- until the residual audit
+    of PR 80 counted the rounded figures on 2026-09-05
+  severity: low
+  what: >-
+    check_case_prose holds a bound quoted in a case body to that file's own front matter
+    by rounding the front matter's value to the number of decimals the prose wrote and
+    comparing for equality. Rounding to nearest is the wrong rule for a bound: half the
+    time it rounds the value the wrong way, and the checker then requires a lower bound
+    written above what was proved, or an upper bound written below it. n-028's body says
+    the best proved lower bound is 5.358899 under a verified_lower_bound of
+    5.35889894354, whose exact form is sqrt(19) + 1 -- a smaller number than the sentence
+    claims -- and the checker passed it, because 5.358899 is what 5.35889894354 rounds to
+    at six decimals. Across the hundred case bodies the same rule produced 54 such
+    figures in 42 files: 38 lower-bound decimals rounded up and 16 upper-bound decimals
+    rounded down.
+  consequence: >-
+    Fifty-four sentences each stating an inequality this repository cannot support, by
+    one unit in the last place the sentence chose to write. No verdict, register value or
+    certificate is touched -- every front-matter value is right, and carries the digits
+    the prose rounded away -- but the sentence a reader opens the case file for is the
+    one that was false, and it was false in the flattering direction in all 54 instances,
+    which is what a rounding rule that does not know which way a bound points will always
+    produce.
+  fix: >-
+    Fixed on 2026-09-05. check_case_prose renders a bound with ROUND_FLOOR when it is a
+    lower bound and ROUND_CEILING when it is an upper one, at the precision the prose
+    chose, for every shape it reads: the direct s(n) inequality, both endpoints of the
+    pinned interval, the bare "best proved" and Nagamochi figures, and the
+    verified_upper_bound disclaimer. A figure the value hits exactly still matches either
+    way. A --fix mode re-renders flagged figures and did, in the 42 bodies, moving only
+    the digits of a figure that is one of that file's own fields rounded to nearest -- a
+    stale rung matches neither field, so it is still reported rather than quietly
+    rewritten. The gap quoted beside a pinned interval stays on nearest rounding: a width
+    asserts no inequality, and the two endpoints it is the distance between are each
+    checked as a bound in their own right.
+  regression: packing/tests/test_case_prose.py
+  status: fixed
+  recorded_in: packing/devtools/check_case_prose.py
+- id: D-454
+  title: Four durable records described a rung, a ladder and a count that had already moved
+  date: '2026-09-05'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    the ladder length and the runway figure since the n = 12 ladder reached 99/25 on
+    2026-09-04; the superseded-by rungs since T-019 climbed past 451/100 the same day;
+    the Nagamochi count since 2026-08-31, drifting further at each of the four
+    retentions after it. Found by the residual audit of PR 80's findings, and by nothing
+    automated -- every figure named a real object and every arithmetic was exact.
+  severity: medium
+  what: >-
+    Four statements in the register described the state of a ladder from before it moved.
+    T-017's significance rationale called its ladder a seven-rung ladder and listed seven
+    sides, when eight certificates are retained and the same result's own artifact list
+    carries all eight; the same field put the gap to the conjectured 4 at 0.07, the
+    figure for the 393/100 rung three below the retained one, where 4 - 99/25 is 0.04.
+    T-017's next_rung measured the room under the method's ceiling at 79/20 rather than
+    at the retained 99/25 -- and 0.0408 is exactly right for 79/20, which is why nothing
+    objected.
+    T-015 and T-016 both recorded being superseded by T-019 "which certifies 451/100";
+    451/100 is a real certificate of T-019's and one it had already climbed past, its
+    retained rung being 459/100.
+    And the Nagamochi corpus count was carried in four places with four values:
+    check_nagamochi_bounds' docstring said 85, results.yaml said 86, evidence.yaml said
+    88, and the checker itself printed 83. Two different quantities had been collapsed
+    into one number -- 95 case records cite E-nagamochi-lower, and it supplies the
+    operative verified lower bound in 83 of them.
+  consequence: >-
+    No bound is wrong and no verdict changes; this is D-442's class, one layer further
+    out. Each figure was exact for the object it named, and what drifted is which object
+    that is. The cost falls on a reader deciding where to spend: the runway sentence
+    overstates the room left under the ceiling by a third, the ladder length understates
+    what the generator has retained, the superseded-by pointer sends a reader to a
+    certificate two rungs below the one that displaced them, and the Nagamochi count
+    made the register's most load-bearing external citation look either more or less
+    load-bearing than it is depending on which file was read.
+    The frontier README's own gap table had gone stale in the same way: it ranked n = 11
+    at 0.0882 against Stromquist's displaced bound, and did not carry n = 12, which
+    T-017 had made the narrowest open gap in the corpus at 0.0400.
+  fix: >-
+    Fixed on 2026-09-05. T-017's rationale states the eight-rung ladder and the 0.04 gap;
+    its next_rung measures 0.0308 of runway from the retained 99/25 to 4B = 3.9908, the
+    limit that binds, with 4/(1 + D) = 3.990816 above it and the grid packing's 4 above
+    both. T-015's and T-016's superseded-by sentences name 459/100. The Nagamochi prose
+    in the checker, results.yaml and evidence.yaml now separates the 95 citations from
+    the 83 operative bounds and says which is which. The frontier README's table is
+    recomputed from every open case's front matter and now leads with n = 12.
+  regression: >-
+    packing/tests/test_rung_figures.py and packing/tests/test_nagamochi_bounds.py.
+    check_rung_figures learned three shapes it could not read: a stated ladder length,
+    counted against the certificate artifacts the result declares; a runway figure, which
+    is refused when it names a rung the ladder has climbed past and otherwise recomputed
+    as ceil(sqrt(n)) * B - L from the certificate's own bytes; and a superseded-by
+    sentence, whose rung must be the live certificate.json side of the result it names --
+    a comparison only the other result's artifacts can settle, which is why no
+    single-result check could have caught it. check_nagamochi_bounds derives both corpus
+    counts from the case records and refuses prose in its own docstring, results.yaml or
+    evidence.yaml that disagrees with either, as it already did for the README's open-case
+    count.
+  recurrence_of: D-442
+  status: fixed
+  recorded_in: packing/frontier/results.yaml

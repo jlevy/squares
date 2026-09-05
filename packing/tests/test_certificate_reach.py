@@ -40,7 +40,7 @@ from devtools.render_certificate_reach import (
 )
 from devtools.validate_schemas import check as validate_artifact
 
-BAND = 0.005
+BAND = 0.001
 
 
 def test_committed_file_matches_the_renderer() -> None:
@@ -246,7 +246,7 @@ def test_an_empty_tilt_inventory_is_refused() -> None:
 
 
 def test_three_packing_limited_ratios_sit_inside_a_tight_band() -> None:
-    """n = 11, 17 and 19 are the packing-limited rows; their ratios are within 0.005."""
+    """n = 11, 17 and 19 are the packing-limited rows; the renderer says within 0.001."""
     measured = measured_attainment(cases())
     packing_limited = {row["n"]: row for row in measured if row["binds"] == "packing"}
     assert set(packing_limited) == {11, 17, 19}

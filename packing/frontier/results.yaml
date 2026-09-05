@@ -200,8 +200,9 @@ results:
     significance:
       score: 3
       rationale: >-
-        The workhorse lower bound: it carried 88 of the hundred cases until
-        2026-08-31 and still carries 86.
+        The workhorse lower bound: 95 of the hundred case records cite this result,
+        and it supplies the operative verified lower bound in 83 of them. The count was
+        88 until 2026-08-31, when first-party certificates began displacing it.
       scored: '2026-08-31'
       by: session-061 review (repository)
     novelty: previously-published
@@ -212,8 +213,9 @@ results:
       - packing/devtools/check_nagamochi_bounds.py
     next_rung: >-
       The proof itself is C1 with four named unverified items in the read;
-      the 86 recorded values are separately re-derived in the gate (a C2 fact
-      about the transcriptions). C3 means machine-checking Theorem 1's
+      the 83 operative verified-field values are separately re-derived in the gate (a C2
+      fact about the transcriptions), while the other 12 citations carry historical or
+      reported context and are not current bounds. C3 means machine-checking Theorem 1's
       unavoidable-set capacity argument.
   - id: T-008
     claim: >-
@@ -532,7 +534,7 @@ results:
       reduction is no longer single-sourced on the record. V5 by a proof-assistant
       port of the eleven-lemma argument in the BC-150 packet.
       Superseded as the verified lower bound on 2026-09-04 by T-019, which
-      certifies 451/100 at n = 17 with a denser first-party certificate. This result
+      certifies 459/100 at n = 17 with a denser first-party certificate. This result
       stays true as stated and keeps its rungs; what changed is that the register no
       longer reads 22529/5000 as the strongest available at this size.
 
@@ -576,7 +578,7 @@ results:
       Rises with T-015; a bespoke n = 18 or n = 19 certificate stronger than the
       inherited bound would be a new result, not a rung change.
       Superseded as the verified lower bound on 2026-09-04 by T-019, which carries
-      451/100 to n = 18 and n = 19 by the same monotonicity step this result uses,
+      459/100 to n = 18 and n = 19 by the same monotonicity step this result uses,
       from a larger base. This result stays true as stated and keeps its rungs.
 
   - id: T-017
@@ -603,8 +605,8 @@ results:
       score: 4
       rationale: >-
         Scored against the rubric's anchor for S4, "a reusable technique, bound
-        family, or resolved disputed value". What is retained is not one bound but a
-        seven-rung ladder -- 19/5, 77/20, 97/25, 39/10, 393/100, 197/50, 79/20 -- by a
+        family, or resolved disputed value". What is retained is not one bound but an
+        eight-rung ladder -- 19/5, 77/20, 97/25, 39/10, 393/100, 197/50, 79/20, 99/25 -- by a
         generator that applies at every n and that has since produced the n = 11
         result as well, so this is a bound family rather than a case result. It is
         also the first bound located in the retained corpus that is proved about n = 12
@@ -614,7 +616,7 @@ results:
         counting predates this project, the recent pure-atomic rational direction-net
         architecture follows Burns, the LP parameter line follows Massaccesi, the second
         exact check shares a method family with the first, and the gap to the conjectured
-        4 is 0.07, which this approach does not close.
+        4 is 0.04, which this approach does not close.
       scored: '2026-09-04'
       by: BC-161 (repository; independent evaluator confirmed C4, no external review)
     novelty: apparently-novel
@@ -674,8 +676,10 @@ results:
       A certificate for n cannot exist above ceil(sqrt(n)) * B, since a container wider
       than that holds ceil(sqrt(n))^2 pairwise disjoint axis-parallel B-squares, each
       carrying mass at least 1 by Condition 5, which forces the total past n and breaks Condition 2.
-      Here that ceiling is 4B = 3.9908, and 4/(1 + D) = 3.990816 over every shrink the
-      181-direction net admits, so 79/20 has 0.0408 of runway left.
+      Here that ceiling is 4B = 3.9908 on this certificate's own B, and it is what
+      binds: 4/(1 + D) = 3.990816 is the supremum over every shrink the 181-direction net
+      admits, and the grid packing's 4 sits above both. So the retained 99/25 has 0.0308
+      of runway left.
       The consequence for this case is structural and worth stating exactly: the grid
       packing gives s(12) <= 4, the ceiling sits strictly below 4, and 4 is the
       conjectured value -- so no single certificate of this shape certifies s(12) >= 4,

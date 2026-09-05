@@ -87,10 +87,10 @@ evidence:
       date: '2026-08-30'
       reviewed_by: repository
       note: >-
-        Read here because the inventory's own arithmetic named it: this record carries the
-        verified lower bound for 88 of the hundred cases and the next most-cited carries
-        two, so it was simultaneously the most load-bearing external argument in the
-        register and the only one nobody had opened. The argument closes. Theorem 1 is the
+        Read here because the inventory's own arithmetic named it: at the review date
+        this record carried the verified lower bound for 88 of the hundred cases and the
+        next most-cited carried two, so it was simultaneously the most load-bearing
+        external argument in the register and the only one nobody had opened. The argument closes. Theorem 1 is the
         substantive part -- an upper bound on how many unit squares fit strictly inside an
         a-by-b rectangle, proved by an explicit unavoidable set whose capacity is computed
         rather than asserted, with Lemmas 2 through 7 proved in the paper and only an
@@ -113,9 +113,12 @@ evidence:
         lambda = 1 to estimate the minimum". That last is geometrically evident and is the
         only place the argument leans on something unargued. This promotes nothing: the
         method stays `published-proof`, and `proof-assistant-checked` is a different thing.
-        Separately `devtools/check_nagamochi_bounds.py` re-derives all 88 recorded values
-        from Theorem 2 in the gate, so a transcription slip is caught even though the proof
-        behind them is not machine-checked.
+        Separately `devtools/check_nagamochi_bounds.py` re-derives the 83 operative
+        verified-field values from Theorem 2 in the gate, so a transcription slip in a
+        current bound is caught even though the proof behind them is not machine-checked.
+        95 of the hundred case records cite this record and it supplies the operative
+        verified lower bound in 83 of them; the other 12 citations are historical or
+        reported context, and a citation count is not a count of current bounds.
     limitations: External published proof; its arithmetic is not independently replayed here.
     source_reviewed: '2026-08-24'
 
@@ -1186,35 +1189,40 @@ evidence:
       novel_object: >-
         The certificate and the bound it carries, not the method. The weighted
         fractional unavoidable-set technique is Burns's, with Massaccesi's
-        parameters; what is new here is a first-party certificate instance at
-        n = 12 and side 19/5, and the generator that produced it. Anyone holding
-        Burns's note could have run this search.
+        parameters; what is new here is a first-party certificate ladder at
+        n = 12, reaching 99/25, and the generator that produced it. The first
+        instance was retained at 19/5. Anyone holding Burns's note could have run
+        this search.
     certificate: cases/n12_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras python -m cases.n12_fractional_certificate
     replay_status: passed
     limitations: >-
-      Decides five conditions in exact rational arithmetic over the retained
-      681-atom certificate: the atom multiset is closed under the container's D4
+      Decides Condition 1 to Condition 5 in exact rational arithmetic over the
+      retained certificate at 99/25, which carries 2,097 atoms.
+      The atom multiset is closed under the container's D4
       group (checked, not inferred from the orbit construction that built it), the
-      total mass is 479713/40000 and so strictly below 12, the 181-direction net reaches
-      pi/4, the containment B(1 + D) < 1 holds at B = 9973/10000, and every
+      total mass is 149987/12500 and so strictly below 12, the 181-direction net reaches
+      pi/4, the containment B(1 + D) < 1 holds at B = 9977/10000, and every
       reachable event cell at every net direction carries mass at least 1, with the
-      least 100003/100000. The bound proved is the container side itself, 197/50, and not
+      least 12501/12500, which leaves 13/12500 of slack on the total. The bound
+      proved is the container side itself, 99/25, and not
       L/B; the shrunken square lies inside a unit square in the same container and
       absorbs the net's angular gap rather than rescaling anything.
       Independence is partial. The generator that proposed the weights (a float
       covering LP by row generation) and the verifier that accepted them (exact
       Fractions over a polygon-clipped centre domain) are separate implementations
-      with separate arithmetic, and a brute-force membership scan over 48,400
-      placements per direction agrees with the sweep at seven sampled directions.
+      with separate arithmetic.
       But both live in sqpack.fractional and share the projection convention and
       the coverage predicate, so their agreement cannot detect an error there. No
       second party has checked this certificate; that review is outstanding and is
       why this entry is scored no higher than it is.
-      The same instrument reached 19/5 first, with 68 atoms and mass 58/5; that
-      certificate is retained beside this one and replayed by the same command. At
-      side 39/10 the covering program lands on exactly 12 over the settings tried,
-      so 77/20 is where this setting family stops, not where the method does.
+      The source-distinct exact verifier retained as E-n012-independent-verifier
+      decided the historical rungs and not these bytes; the method-distinct decision
+      of the current certificate is E-fractional-interval-decision, which reaches the
+      same least covered mass over all 361 doubled-net directions.
+      Eight rungs are retained by this instrument, 19/5 through 99/25.
+      The first of them has 68 atoms and mass 58/5, and the command this entry names
+      replays that rung and the retained one.
       The instrument reproduces Massaccesi's published n = 17 optimum exactly
       (16.916667 = 203/12, found from zero weights without being given the target)
       and refuses the falsifying control: at n = 12 and side 401/100, where twelve

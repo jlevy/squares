@@ -97,6 +97,16 @@ known-answer control and decides it beside the claim.
 What it carries is the retained `19/5` rung, not this one, so it is not evidence for the
 extra `1/100` proved here.
 
+The shortest complete check of the bytes this note is about is
+[`minimal_verify.py`](minimal_verify.py): one file, Python’s standard library only, no
+import from this repository and no dependency to install.
+`python3 minimal_verify.py certificate.json` prints the SHA-256 it read, one `PASS` line
+per condition with the numbers it decided on, and `VERIFIED s(11) >= 381/100`, in about
+47 seconds.
+[`PROOF-CARD.md`](PROOF-CARD.md) is the same claim on one page — the argument
+in a paragraph, every constant above in a block a reader can copy, and that command as
+the check.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

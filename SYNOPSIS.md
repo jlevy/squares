@@ -451,7 +451,9 @@ Two searches stopped on cost rather than an answer, not as negatives: `n = 18` a
 `4.68` (three site sets converged to exactly `18.000000` without separating a genuine
 covering-value plateau from a degenerate vertex) and `n = 11` at side `3.82` (the
 rejection route’s exact maximum depth caps the feasible total well short of the eleven a
-ceiling needs). Full detail is in
+ceiling needs). Both are reported covering values in
+[`CERTIFICATE-REACH.md`](packing/frontier/CERTIFICATE-REACH.md) with nothing frozen
+beside them. Full detail is in
 [the block-close handoff](docs/project/handoff-2026-09-04-block-close.md).
 
 The same evening, entered directly on the operator’s own direction rather than drawn
@@ -1632,9 +1634,12 @@ calibration.
 A **control cell** is an instance cell whose answer is known before the run,
 and a breach of one rejects the round regardless of outcome.
 
-> The two senses collide, and both appear in this document.
-> **Write “cell” for the configuration-space object and “instance cell”—never bare
-> “cell”—for a sweep position.** In running prose about a round, prefer naming the `n`.
+> Three senses collide, and all three appear in this document.
+> **Write “cell” for the configuration-space object, “instance cell” for a sweep
+> position, and “event cell” for a region of admissible centres—never bare “cell” for
+> either of the last two.** In running prose about a round, prefer naming the `n`. The
+> three are unrelated objects: one is where the LP is solved, one is what a round is run
+> on, and one is where a certificate’s covered mass is constant.
 
 **Basin (point-basin where the distinction matters).** The preimage of one pose returned
 by a deterministic quench: the set of configurations the refiner carries to that
@@ -1657,6 +1662,25 @@ independently validated connectivity rather than declare the quench map undefine
 mechanisms with closed-form optima.
 The ladder validates *machinery*: no proved case exercises an irrational oblique angle,
 so passing it says nothing about strategy at `n = 11`.
+
+### The weighted-certificate objects
+
+The lower-bound lane has its own vocabulary, and it is narrow in the same way the rest
+of this section is. Each term is defined where the conditions themselves are stated, and
+[`TUTORIAL.md`](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) develops all
+five from first principles.
+
+| Term | Controlled meaning | Where it is defined |
+| --- | --- | --- |
+| **atom** / **weight** | An exact point of a candidate container `[0, L]²`, and the nonnegative rational bookkeeping mass assigned to it. An atom has no area, blocks nothing, and is never a packed square | [`fractional.certificate`](packing/src/sqpack/fractional/certificate.py), [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+| **atomic measure** / **mass** | The rule assigning a region the sum of the weights of the atoms lying in it, boundary atoms included; a region’s *mass* is what that rule returns. *Atomic* because all of it sits at finitely many points rather than spread over the container | [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+| **direction net** | The finite set of exact square orientations a certificate checks, carried as rational half-angle tangents and reaching `π/4`. The strict shrink condition is what lets a nearby net direction stand in for an unchecked orientation, so the net is not a sample | [`fractional.certificate`](packing/src/sqpack/fractional/certificate.py), [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+| **event cell** | One open region of admissible centres, at one net direction, on which the set of atoms a shrunken square covers is constant. A third sense of *cell*, unrelated to the two under [The objects](#the-objects), and never written bare | [`fractional.sweep`](packing/src/sqpack/fractional/sweep.py), [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+| **weighted fractional unavoidable-set certificate** | A finite weighted atom set whose total mass is below `n` (`Condition 2`) but whose mass is at least one in every admissible shrunken square (`Condition 5`); with the symmetry, net and shrink conditions it proves `s(n) >= L`. Burns’s and Massaccesi’s object; the instances here are this project’s | [`fractional.certificate`](packing/src/sqpack/fractional/certificate.py), [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+
+`Condition 1` to `Condition 5` name the five conditions a certificate must satisfy and
+are stated in the module above; they are not the confirmation rungs `C0` to `C5`, which
+[`epistemics.md`](epistemics.md) owns.
 
 ### The operations
 
@@ -1860,13 +1884,14 @@ For most `n` the answer is uninteresting: `s(m²) = m` by the grid.
 It becomes interesting just above a perfect square, where the leftovers must be tilted
 in.
 
-At `n = 11` the two ends of the interval have barely moved in a generation:
+At `n = 11` the upper end has not moved since 1979, and the lower end moved on
+2026-09-04 for the first time since 2003:
 
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
-| Best certified lower bound | `2 + 4/√5 = 3.788854382…` | exp-017 exact source-distinct repair; value stated by Stromquist 2003, whose printed proof has gap D-152 |
-| Published gap | `0.088229208023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+| Best certified lower bound | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), a first-party weighted fractional unavoidable-set certificate, decided twice from its frozen bytes |
+| Bound gap | `0.067083590023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
 
 ![Walter Trump’s exact eleven-square packing.](packing/atlas/rendering/trump11-overview.svg)
 
@@ -1874,12 +1899,14 @@ At `n = 11` the two ends of the interval have barely moved in a generation:
 separated from the independently certified lower bound.
 The segment and dot contact marks are exact, not tolerance-based visual guesses.*
 
+The value `T-018` displaces is Stromquist’s `2 + 4/√5 = 3.788854382…`, and that value
+keeps its own place in the record.
 The current audit found an explicit strict box avoiding all twelve printed Figure 14
 points, so the paper’s unavoidability subclaim is false as printed
 ([D-152](defects.md)). Exp-017 independently certifies the same numerical inequality by
 moving only `G=(.8,1.85)` to the source-distinct `G'=(.79,1.85)` and replaying the
-complete finite cover and capacity argument.
-The repaired coordinate and certificate are results of this repository, not claims
+complete finite cover and capacity argument ([T-010](packing/frontier/RESULTS.md)). The
+repaired coordinate and certificate are results of this repository, not claims
 attributed to Stromquist.
 
 Trump’s packing is six axis-aligned squares plus a block of five tilted at
@@ -3179,24 +3206,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 450 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 454 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 93 | asserted something false about the mathematics |
+| soundness | 94 | asserted something false about the mathematics |
 | validity | 117 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 167 | recorded something its own evidence contradicts |
+| bookkeeping | 170 | recorded something its own evidence contradicts |
 | robustness | 57 | did not finish, or finished only by luck |
 | performance | 16 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Seventy-three of the ninety-three soundness defects pointed in the *flattering*
+**Seventy-four of the ninety-four soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-five defects in 450, and no soundness defect
+**The automated gate has caught sixty-five defects in 454, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3737,9 +3764,15 @@ the best known packing runs near half a unit — eleven cases above `+0.49`, hea
 `n = 51` at `+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`, `83`, `37`, `53` and
 `26`. Two cautions travel with that ranking.
 The prize is what the *ceiling* allows; the real limit is the covering value at that
-side, and only four restricted optima have ever been measured — `11.0000` at `3.82`,
-`11.9706` at `3.95`, `11.9936` at `3.96`, `16.9628` at `4.58`. They fit a quadratic, and
-a fitted curve is not a measurement.
+side. Seven values have been reported for the restricted program, at sides `3.82`,
+`3.95`, `3.96`, `4.58`, `4.59`, `4.68` and `4.80` — reports, not measurements this
+repository can reproduce, since no covering-search run log or solver checkpoint was
+retained for any of the seven.
+Exactly one is recomputable from a tracked artifact, at side `3.95`, and what it
+recomputes is the frozen certificate’s own feasible mass — an upper bound on the
+covering value there, not the optimum a search reported.
+Seven heterogeneous reports across a side band `0.98` wide fit a curve, and a fitted
+curve is not a measurement.
 And the cost of a run grows with the container: the site set, the row set and the exact
 sweep all scale with `L²` or worse, so a case at `n = 51` is not an `n = 12` run with a
 different constant.

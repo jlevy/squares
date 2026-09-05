@@ -4,8 +4,8 @@ Three things here, and each is a reason to look:
 
 - **New results.** The lower bound on `s(11)`, the smallest open case, has moved for the
   first time in the located public record since Stromquist set it in 2003 — and with it
-  the first bounds ever proved specifically for twelve, twenty and twenty-one squares,
-  and values from `n = 17` through `n = 21` that displace what was in print.
+  the first located public bounds specifically for twelve, twenty and twenty-one
+  squares, and values from `n = 17` through `n = 21` that displace what was in print.
   [Details below](#new-results).
 - **A survey of the whole problem in one place.** Every case `n = 1…100`, the primary
   literature retained and transcribed, and the bound a source *reports* kept apart from

@@ -49,13 +49,14 @@ Budgets are in **pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`.
 
 ## Orientation
 
-`s(11)` is pinned to `[3.788854, 3.877084]`. The upper end is Walter Trump’s 1979
-packing — six axis-aligned squares plus a tightly constrained block of five tilted at
-`≈40.1819°`; the tilt is numerically characterized through a trigonometric equation, not
-established here as an algebraic number.
-Both endpoints have stood for over two decades.
-This is the fourth-smallest open gap at `n ≤ 100`, and the smallest open gap whose
-standing record is nontrivial rather than a grid.
+`s(11)` is pinned to `[3.81, 3.877084]`. The upper end is Walter Trump’s 1979 packing —
+six axis-aligned squares plus a tightly constrained block of five tilted at `≈40.1819°`;
+the tilt is numerically characterized through a trigonometric equation, not established
+here as an algebraic number.
+That end has stood since 1979; the lower end moved on 2026-09-04, for the first time
+since Stromquist stated `2 + 4/√5 = 3.788854` in 2003. This is the fourth-smallest open
+gap at `n ≤ 100`, and the smallest open gap whose standing record is nontrivial rather
+than a grid.
 
 What the
 [baseline](series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md)

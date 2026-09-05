@@ -10,6 +10,11 @@ direction of the 2260-atom n = 20 certificate took 39.35 s by Fraction and
 0.86 s by integer; the whole verify took 5378 s and 38.7 s.
 """
 
+# The scheduling bounds are private by design and cheap only as unit contracts; their
+# public effect is a machine with more cores than this one.
+# ruff: noqa: SLF001
+# pyright: reportPrivateUsage=false
+
 from __future__ import annotations
 
 from fractions import Fraction
@@ -22,6 +27,7 @@ from cases.n12_fractional_certificate.replay import load as n12_load
 from cases.n17_fractional_certificate.replay import declared as n17_declared
 from cases.n17_fractional_certificate.replay import load as n17_load
 from cases.n20_fractional_certificate.replay import load as n20_load
+from sqpack.fractional import certificate as certificate_module
 from sqpack.fractional import sweep
 from sqpack.fractional.certificate import (
     Certificate,
@@ -228,6 +234,62 @@ def test_a_scale_too_large_for_int64_falls_back_to_fractions(
     monkeypatch.setattr(sweep, "minimum_covered_mass_integer", spy)
     assert minimum_covered_mass(*args) == expected
     assert calls == [], "the integer route ran past its own limit"
+
+
+def test_worker_counts_sit_under_the_core_worker_and_grid_caps(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """F38: a many-core host must not allocate one dense grid per core.
+
+    The pool size is the request or the core count, under the worker cap and under the
+    grid budget; a single grid over the budget runs one worker rather than refusing.
+    """
+
+    certificate = n11_load(N11_FIRST_RUNG)
+    one_grid = certificate_module._estimated_grid_bytes(len(certificate.atoms))
+    monkeypatch.setattr(certificate_module.os, "process_cpu_count", lambda: 64)
+    monkeypatch.setattr(certificate_module, "_MAX_PARALLEL_WORKERS", 8)
+    monkeypatch.setattr(certificate_module, "_PARALLEL_GRID_BUDGET_BYTES", 2 * one_grid)
+    assert certificate_module._worker_count(certificate, None) == 2
+    assert certificate_module._worker_count(certificate, 99) == 2
+    assert certificate_module._worker_count(certificate, 1) == 1
+    monkeypatch.setattr(certificate_module, "_PARALLEL_GRID_BUDGET_BYTES", one_grid - 1)
+    assert certificate_module._worker_count(certificate, 99) == 1
+    monkeypatch.setattr(certificate_module, "_PARALLEL_GRID_BUDGET_BYTES", 8 * one_grid)
+    assert certificate_module._worker_count(certificate, None) == 8
+
+
+def test_a_single_threaded_process_forks_and_a_threaded_one_without_a_main_runs_serially(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The pool's start method follows what is safe, not a fixed choice.
+
+    Fork inherits the parent and asks nothing of ``__main__``, which is what a caller
+    run from stdin needs; it is unsafe once the parent has other threads. Then the
+    platform default stands if a worker can re-import ``__main__``, and otherwise the
+    directions run in this process, which is slower and always correct.
+    """
+
+    monkeypatch.setattr(certificate_module.sys, "platform", "linux")
+    main = certificate_module.sys.modules["__main__"]
+    monkeypatch.setattr(main, "__file__", "<stdin>", raising=False)
+    monkeypatch.setattr(certificate_module.threading, "active_count", lambda: 1)
+    context = certificate_module._pool_context()
+    assert context is not None and context.get_start_method() == "fork"
+    monkeypatch.setattr(certificate_module.threading, "active_count", lambda: 2)
+    assert certificate_module._pool_context() is None
+    monkeypatch.setattr(main, "__file__", __file__)
+    context = certificate_module._pool_context()
+    assert context is not None and context.get_start_method() != "fork"
+
+    class RefusePool:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            raise AssertionError("a threaded process without an importable main started a pool")
+
+    monkeypatch.setattr(main, "__file__", "<stdin>", raising=False)
+    monkeypatch.setattr(certificate_module, "ProcessPoolExecutor", RefusePool)
+    small = _small_certificate()
+    assert sweep_all_directions(small, workers=3) == sweep_all_directions(small, workers=1)
 
 
 def test_the_parallel_direction_loop_matches_the_serial_one() -> None:

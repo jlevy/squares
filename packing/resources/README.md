@@ -179,6 +179,7 @@ Citation keys match those used in the research document.
 | **[squaring.net BSST]** | The Smith-diagram / Kirchhoff correspondence, in detail | squaring.net | `squaring-net-brooks-smith-stone-tutte-II` |
 | **[squaring.net Sprague]** | Priority for the first published perfect squared square | squaring.net | `squaring-net-sprague` |
 | **[Wikipedia]** | Square packing overview | en.wikipedia.org | `wikipedia-square-packing` |
+| **[`n = 19–21` lower-bound audit 2026]** | Versioned DS7 history, evidential status, and bounded priority check for the `24/5` certificate | combinatorics.org; retained papers and web captures | `n19-n21-lower-bound-literature-audit-2026/` |
 
 ## Special Kingbird SVG witnesses
 

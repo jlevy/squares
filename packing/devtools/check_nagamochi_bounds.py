@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """Re-derive every lower bound the register attributes to [Nagamochi 2005].
 
-`E-nagamochi-lower` supplies the verified lower bound for 85 of the hundred frontier
-cases (88 until 2026-08-31, when the first-party green17 certificate took over `n = 17`
-and `n = 18`). The next most-cited evidence record carries two. Nothing checked that the
-recorded values were what the theorem gives: `assurance.py` verifies that a bound cites
-verified evidence of the right claim and scope, which is a statement about the citation
-and not about the arithmetic. A transcription slip in any one of the 85 would have
-passed.
+`E-nagamochi-lower` is the register's most-cited evidence record, and two different
+counts describe it. 95 of the hundred case records cite this result; it supplies the
+operative verified lower bound in 83 of them. The other 12 citations are context rather
+than current bounds -- seven proved cases that never rested on the theorem, and the five
+open cases `n = 17` through `n = 21`, where first-party certificates displaced it between
+2026-08-31 (when the operative count was 88) and 2026-09-04. The next most-cited evidence
+record carries two.
+
+Nothing checked that the recorded values were what the theorem gives: `assurance.py`
+verifies that a bound cites verified evidence of the right claim and scope, which is a
+statement about the citation and not about the arithmetic. A transcription slip in any
+one of the 83 operative verified-field values would have passed.
 
 Theorem 2, as the evidence record states it and as re-derived here from Theorem 1
 (`nu(a, b) < ab - (a + 1 - ceil(a)) - (b + 1 - ceil(b))` for `a, b >= 2`):
@@ -45,8 +50,23 @@ RECORD = "E-nagamochi-lower"
 #: checked against the case records because the figure was typed once and outlived the
 #: 4.5058 adoption by a day (D-430): the README said sixty-three when the corpus said sixty.
 README = FRONTIER / "README.md"
-_README_COUNT = re.compile(r"Of the (\d+) open cases, \*\*(\d+)\*\* have\s+Nagamochi")
+_README_COUNT = re.compile(r"Of the (\d+) open cases,\s+\*\*(\d+)\*\* have\s+Nagamochi")
 _BODY_COUNT = re.compile(r"(\d+) of the (\d+) open cases at\s+`n ≤ 100` are governed by it")
+
+#: The register's own prose about this record, and the two counts it quotes. They are
+#: different numbers and were conflated: a case record that names `E-nagamochi-lower`
+#: anywhere *cites* it, while only one whose `verified_lower_bound` names it is
+#: *operative*. The docstring above said 85, `results.yaml` said 86, `evidence.yaml`
+#: said 88, and this checker printed 83 -- four figures for two quantities, none of them
+#: derived. Both are now read from the case records in the shapes the prose uses, so
+#: neither can outlive the corpus the way the README's open-case count no longer can.
+SELF = Path(__file__)
+RESULTS = FRONTIER / "results.yaml"
+EVIDENCE = FRONTIER / "evidence.yaml"
+_CITED_COUNT = re.compile(r"(\d+) of the hundred (?:frontier )?case records cite")
+_OPERATIVE_COUNT = re.compile(r"operative verified lower bound in (\d+) of them")
+_OPERATIVE_VALUES = re.compile(r"the (\d+) operative verified-field values")
+_OTHER_CITATIONS = re.compile(r"[Tt]he other (\d+) citations")
 
 #: Enough to compare against any decimal the register carries, and pinned rather than
 #: inherited: `decimal`'s context is process-global (see `think-iskp`).
@@ -70,6 +90,71 @@ def cases() -> dict[int, dict]:
         payload = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])["packing"]
         found[payload["n"]] = payload
     return found
+
+
+def cites(case: dict) -> bool:
+    """Does this case record name the record anywhere in its front matter?
+
+    The roll-up `evidence` list is meant to be exactly this set, but the question asked
+    is "does the record appear", so it is answered by walking the whole payload rather
+    than by trusting one field to be complete.
+    """
+    stack: list[object] = [case]
+    while stack:
+        node = stack.pop()
+        if isinstance(node, dict):
+            stack.extend(node.values())
+        elif isinstance(node, list):
+            stack.extend(node)
+        elif node == RECORD:
+            return True
+    return False
+
+
+def register_counts(found: dict[int, dict]) -> tuple[int, int]:
+    """Case records citing the record, and those where it is the operative bound."""
+    cited = sum(cites(case) for case in found.values())
+    operative = sum(
+        RECORD in ((case.get("verified_lower_bound") or {}).get("evidence") or [])
+        for case in found.values()
+    )
+    return cited, operative
+
+
+def register_prose_counts(found: dict[int, dict]) -> list[str]:
+    """The two register-wide counts, wherever the prose that owns them quotes either.
+
+    Read from this module's own docstring as well as `results.yaml` and `evidence.yaml`,
+    because all three carried a figure for these quantities and all three were wrong in
+    different ways. The two primary shapes must also be present: a count that is deleted
+    rather than corrected is a count nothing checks.
+    """
+    cited, operative = register_counts(found)
+    forms = (
+        (_CITED_COUNT, cited, "case records citing the record", True),
+        (_OPERATIVE_COUNT, operative, "operative verified lower bounds", True),
+        (_OPERATIVE_VALUES, operative, "operative verified-field values", False),
+        (_OTHER_CITATIONS, cited - operative, "citations that are not operative", False),
+    )
+    problems: list[str] = []
+    seen = dict.fromkeys((form[0] for form in forms), 0)
+    for source in (SELF, RESULTS, EVIDENCE):
+        text = source.read_text(encoding="utf-8")
+        for pattern, expected, description, _ in forms:
+            for match in pattern.finditer(text):
+                seen[pattern] += 1
+                if int(match.group(1)) != expected:
+                    problems.append(
+                        f"{source.name} says {match.group(1)} {description}; "
+                        f"the case records say {expected}"
+                    )
+    problems.extend(
+        f"no '{description}' sentence anywhere in "
+        f"{SELF.name}, {RESULTS.name} or {EVIDENCE.name} to check"
+        for pattern, _, description, required in forms
+        if required and not seen[pattern]
+    )
+    return problems
 
 
 def prose_counts(found: dict[int, dict]) -> list[str]:
@@ -98,6 +183,7 @@ def prose_counts(found: dict[int, dict]) -> list[str]:
             for match in _BODY_COUNT.finditer(path.read_text(encoding="utf-8"))
             if (int(match.group(1)), int(match.group(2))) != corpus
         )
+    problems.extend(register_prose_counts(found))
     return problems
 
 
@@ -157,9 +243,11 @@ def main() -> int:
             print(f"  {line}")
         return 1
 
+    cited, operative = register_counts(found)
     print(
         f"{checked} lower bounds re-derived from Theorem 2, all agreeing, none inverted; "
-        "the README and case-body counts agree with the records"
+        f"the README, case-body, citation ({cited}) and operative ({operative}) counts "
+        "agree with the records"
     )
     return 0
 

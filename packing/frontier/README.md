@@ -254,16 +254,18 @@ obstruction.
 
 ### The Next Family to Fall
 
-Ranked by gap, the four smallest open cases at `n ≤ 100` are:
+Ranked by gap — the best known packing minus the verified lower bound, which is what
+`devtools.gap_ranking` computes — the five smallest open cases at `n ≤ 100` are:
 
 | `n` | gap | record | note |
 | --- | --- | --- | --- |
+| 12 | 0.0400 | grid | `4² − 4`, carried to `99/25` by `T-017` |
 | 97 | 0.0557 | grid | `10² − 3` |
 | 78 | 0.0627 | grid | `9² − 3` |
+| 11 | 0.0671 | Trump 1979 | the famous case |
 | 61 | 0.0718 | grid | `8² − 3` |
-| 11 | 0.0882 | Trump 1979 | the famous case |
 
-Three of the four are consecutive unproved members of the family `s(m² − 3) = m`, which
+Three of the five are consecutive unproved members of the family `s(m² − 3) = m`, which
 is **proved exactly for `m = 3, 4, 5, 6, 7`** (that is
 `s(6), s(13), s(22), s(33), s(46)`) and conjectured beyond.
 Their gaps are small because Nagamochi’s bound is nearly tight there, and their
@@ -273,9 +275,10 @@ for.
 They are, on this evidence, the most tractable unproved cases in the table, and they are
 essentially undiscussed in the literature.
 
-`n = 11` is the smallest gap among cases with a *non-trivial* record, and it is not
-close: the next such case is `n = 19` at `0.4215`, nearly five times wider.
-That is the correct form of a claim the research document originally overstated.
+`n = 11` is still the smallest gap among cases with a *non-trivial* record, but it is no
+longer clear of the field: `n = 17` follows at `0.0855` and `n = 19` at `0.0856`, then
+`n = 18` at `0.2329`. The first-party certificates of 2026-09-04 moved all four, and the
+spread across them is now a factor of three and a half.
 
 ## Cross-References
 
