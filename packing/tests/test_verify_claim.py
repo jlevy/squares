@@ -10,7 +10,7 @@ verdict is read back from the lines it prints.
 Two tiers. The fast tier decides a two-atom-sized instance of the theorem (n = 2, one
 atom of weight 1 at the center of a container of side 5/4) and one perturbation per
 condition, in milliseconds, and checks the tight direction of the real 19/5 rung. The
-`exhaustive_exact` tier runs the full 181-direction decision on the rung (about 25 s in
+`exhaustive_exact` tier runs the full 181-direction decision on the rung (about 36 s in
 pure Python) and every row of `thirdparty/falsify.py`'s table, each a full decision.
 """
 

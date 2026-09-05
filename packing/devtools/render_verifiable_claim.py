@@ -19,7 +19,6 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import json
 import os
 import re
 import sys
@@ -149,17 +148,10 @@ def decided_here(facts: Facts, headline: Facts) -> str:
 def render_claim(facts: Facts, sibling: Facts, headline: Facts) -> str:
     """One document: the template filled with this certificate, its verifier and its file.
 
-    The template names the least covered mass at direction 0, so the certificate's
-    declared least has to be the upright direction's, which `derive` computed exactly;
-    a certificate whose least cell lies at another direction is refused rather than
-    described wrongly.
+    The template names the least covered mass at direction 0; `derive` has already
+    refused a certificate whose declared least is not the upright direction's, so what
+    arrives here is described rightly.
     """
-    declared = Fraction(json.loads(facts.source.read_text(encoding="utf-8"))["least_cell_mass"])
-    if facts.least_mass != declared:
-        raise SystemExit(
-            f"{facts.source.name}: the least cell is not at the upright direction "
-            f"({facts.least_mass} there, {declared} declared); the template says it is"
-        )
     values = {
         "FILE_NAME": claim_path(facts).name,
         "CERT_NAME": facts.source.name,
@@ -293,7 +285,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     stale = []
     for path, text in documents():
         if args.check:
-            if not path.is_file() or path.read_text(encoding="utf-8") != text:
+            if not path.is_file() or path.read_bytes() != text.encode("utf-8"):
                 stale.append(path)
             continue
         with atomic_output_file(path) as temporary:

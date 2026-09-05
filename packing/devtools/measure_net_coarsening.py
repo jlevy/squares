@@ -30,6 +30,8 @@ from fractions import Fraction
 from itertools import pairwise
 from pathlib import Path
 
+from strif import atomic_output_file
+
 from sqpack.fractional.certificate import Certificate, sweep_direction_minimum
 from sqpack.fractional.model import Atom
 
@@ -38,13 +40,14 @@ REPO = PACKING.parent
 CASE = PACKING / "cases" / "n11_fractional_certificate"
 DEFAULT_NETS = (10, 30, 60, 90, 180)
 
-# B is reported to this many places; the value used is the largest multiple of
-# 10^-DENOM strictly below 1 / (1 + D), so Condition 4 holds with room to state it.
+# B is reported to this many places. The value used is one 10^-DENOM step below the
+# largest multiple not above 1 / (1 + D): Condition 4 then holds strictly even when the
+# division is exact, and the page's shrink figure uses the same value.
 DENOM = 10**7
 
 
 def largest_admissible_side(half_tangents: tuple[Fraction, ...]) -> tuple[Fraction, Fraction]:
-    """`D` for this net, and the largest `B` on the grid that keeps `B(1+D) < 1`."""
+    """`D` for this net, and a grid `B` one step below the largest that keeps `B(1+D) < 1`."""
     gap = max((right - left) / (1 + left * right) for left, right in pairwise(half_tangents))
     side = Fraction((DENOM * (1 + gap).denominator) // (1 + gap).numerator - 1, DENOM)
     assert side * (1 + gap) < 1
@@ -133,7 +136,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     output_label = repository_relative(output, "output")
 
     payload["rows"] = measure(certificate, tuple(args.nets))
-    output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    with atomic_output_file(output) as temporary:
+        temporary.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     print(f"wrote {output_label}")
     return 0
 

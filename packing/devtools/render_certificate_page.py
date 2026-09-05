@@ -42,6 +42,8 @@ from math import isqrt
 from pathlib import Path
 from typing import TypedDict
 
+from strif import atomic_output_file
+
 from devtools.measure_net_coarsening import largest_admissible_side
 from sqpack.fractional.certificate import (
     Certificate,
@@ -93,6 +95,10 @@ MAX_EXACT_PLACES = 8
 # keeps the two irrational bounds one digit past the six-place forms the
 # literature quotes, so a reader can see which way the sixth place rounds.
 APPROX_PLACES = 7
+
+#: A covered mass this close to 1 is drawn as tight in Figure 5: the legend's percentage
+#: and the heat map's threshold are both this one number.
+TIGHT = Fraction(112, 100)
 
 
 def terminating_places(value: Fraction) -> int | None:
@@ -931,18 +937,73 @@ def bound_substitutions() -> dict[str, str]:
     }
 
 
-def shrink_peak_tex(facts: Facts) -> str:
+def shrink_peak_tex(facts: Facts, side: Fraction) -> str:
     """The largest value Figure 6's readout reaches on the certificate's own net.
 
-    The readout is `B_K (cos d + sin d)` for the side `B_K` the net admits and a
-    mismatch `d` up to the widest half-gap, whose tangent is `D`; `cos d + sin d`
-    grows with `d` below an eighth turn, so the peak is
-    `B_K (1 + D) / sqrt(1 + D^2)`. Irrational, so it is cut off by an integer
+    The readout is `B (cos d + sin d)` for a side `B` and a mismatch `d` up to the
+    widest half-gap, whose tangent is `D`; `cos d + sin d` grows with `d` below an
+    eighth turn, so the peak is `B (1 + D) / sqrt(1 + D^2)`. The caption states it
+    twice, for the side the figure uses (`facts.admitted_side`, one grid step below
+    the largest the net admits) and for the certificate's own `square_side`, since
+    the two differ in the sixth place. Irrational, so it is cut off by an integer
     square root and marked as cut off.
     """
-    scaled = facts.admitted_side * (1 + facts.half_gap) * 10**APPROX_PLACES
+    scaled = side * (1 + facts.half_gap) * 10**APPROX_PLACES
     cut = isqrt(int(scaled * scaled / (1 + facts.half_gap**2)))
     return truncated(Fraction(cut, 10**APPROX_PLACES), tex=True)
+
+
+def ceiled(value: Fraction, places: int) -> str:
+    """`value` rounded up to `places` decimals, as a bound that is safe to state."""
+    scale = 10**places
+    return f"{-((-value * scale) // 1) / scale:.{places}f}"
+
+
+def k3_limit_tex(facts: Facts) -> str:
+    """The side Condition 4 admits on the three-step net Figure 6 opens at, as a bound.
+
+    Figure 6 says the coarsest net it offers admits only `B` below this; the value is
+    `1/(1 + D_3)` for that net's widest half-gap, rounded up so that `B` below the stated
+    figure is what the reader needs and no more.
+    """
+    tangents = tuple(facts.angle_limit * k / 3 for k in range(4))
+    gap, _ = largest_admissible_side(tangents)
+    return ceiled(1 / (1 + gap), 4)
+
+
+def coarsening_verdict(rows: list[CoarseningRow] | None) -> str:
+    """The sentence under Figure 7's bars, read off the rows' own pass flags."""
+    if not rows:
+        return ""
+    passing = [index for index, row in enumerate(rows) if bool(row["passes"])]
+    if passing == [len(rows) - 1]:
+        return "Only the last bar clears the threshold."
+    if passing == list(range(len(rows))):
+        return "Every bar clears the threshold."
+    if passing and passing == list(range(passing[0], len(rows))):
+        return f"The bars from K = {rows[passing[0]]['K']} on clear the threshold."
+    raise SystemExit("the net-coarsening rows pass in no order the figure's sentence can state")
+
+
+EXTERNAL_REFERENCE = re.compile(
+    r"<script[^>]*\ssrc=|<link[^>]*\shref=|@import\b|url\((?!\s*[\"']?(?:data:|#))",
+    re.IGNORECASE,
+)
+
+
+def assert_self_contained(page: str) -> None:
+    """Refuse a page that would fetch anything at view time.
+
+    The page inlines kpress's faces and the KaTeX distribution as data URIs and is
+    meant to open from a file with the network off. A script or stylesheet element
+    with a source, a CSS import, or a `url()` that is not a data URI or a fragment
+    is a fetch, so the render refuses it rather than leaving it to a grep in CI.
+    """
+    hit = EXTERNAL_REFERENCE.search(page)
+    if hit:
+        start = max(hit.start() - 40, 0)
+        excerpt = page[start : hit.end() + 60]
+        raise SystemExit(f"the page is not self-contained: ...{excerpt}...")
 
 
 def slug(facts: Facts) -> str:
@@ -963,8 +1024,11 @@ MEASURED_SECONDS = {"19-5": 36, "381-100": 175}
 
 
 def runtime_phrase(facts: Facts) -> str:
-    """'about half a minute', 'about 3 minutes': loose on purpose, since the reader's
-    machine is not this one."""
+    """How long the claim verifier takes, said loosely.
+
+    'about half a minute', 'about 3 minutes': loose on purpose, since the reader's
+    machine is not this one.
+    """
     seconds = MEASURED_SECONDS.get(slug(facts))
     if seconds is None:
         raise SystemExit(f"{facts.source.name}: the minimal verifier has not been timed on it")
@@ -981,7 +1045,7 @@ def claim_substitutions(headline: Facts, default: Facts) -> dict[str, str]:
     for role, f in (("DEFAULT", default), ("HEADLINE", headline)):
         values[f"{role}_CLAIM_NAME"] = claim_path(f).name
         values[f"{role}_CLAIM_URL"] = repo_file(claim_path(f))
-        values[f"{role}_N_ATOMS"] = str(len(f.atoms))
+        values[f"{role}_N_ATOMS"] = f"{len(f.atoms):,}"
         values[f"{role}_RUNTIME"] = runtime_phrase(f)
     return values
 
@@ -1065,6 +1129,7 @@ def certificate_substitutions(facts: Facts, *, default: Facts, toggle: str) -> d
     gap_before = BEST_PACKING - PRIOR_LOWER
     margin = facts.least_mass - 1
     rows = coarsening_rows(facts)
+    verdict = coarsening_verdict(rows)
     if rows:
         bars, values, labels = coarsening_svg(rows)
         alt = "Least covered mass against net size: " + ", ".join(
@@ -1090,7 +1155,11 @@ def certificate_substitutions(facts: Facts, *, default: Facts, toggle: str) -> d
         "L_FRAC": f"{facts.outer_side.numerator}/{facts.outer_side.denominator}",
         "L_DEC": decimal(facts.outer_side),
         "L_JS": repr(float(facts.outer_side)),
-        "SHRINK_PEAK_TEX": shrink_peak_tex(facts),
+        "SHRINK_PEAK_TEX": shrink_peak_tex(facts, facts.admitted_side),
+        "SHRINK_PEAK_CERT_TEX": shrink_peak_tex(facts, facts.square_side),
+        "K3_LIMIT_TEX": k3_limit_tex(facts),
+        "TIGHT_PERCENT": str((TIGHT - 1) * 100),
+        "TIGHT_JS": decimal(TIGHT),
         "B_JS": repr(float(facts.square_side)),
         "TOTAL_TEX": frac_tex(total),
         "TOTAL_DEC": decimal(total),
@@ -1128,6 +1197,7 @@ def certificate_substitutions(facts: Facts, *, default: Facts, toggle: str) -> d
         "COARSEN_BARS": bars,
         "COARSEN_VALUES": values,
         "COARSEN_LABELS": labels,
+        "COARSEN_VERDICT": verdict,
     }
 
 
@@ -1138,6 +1208,9 @@ def fill(block: str, values: dict[str, str], *, where: str) -> str:
         raise SystemExit(f"{where}: template placeholders with no value: {sorted(missing)}")
     for key, value in values.items():
         block = block.replace(f"{{{{{key}}}}}", value)
+    left = sorted({m.group(1) for m in re.finditer(r"\{\{([A-Z_]+)\}\}", block)})
+    if left:
+        raise SystemExit(f"{where}: a value carried placeholders into the page: {left}")
     return block
 
 
@@ -1275,7 +1348,9 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
     shell = expand(
         TEMPLATE.read_text(encoding="utf-8"), "SCRIPT", per_certificate, article=False
     )
-    return fill(shell, shell_substitutions(static, shared, body), where=TEMPLATE.name)
+    page = fill(shell, shell_substitutions(static, shared, body), where=TEMPLATE.name)
+    assert_self_contained(page)
+    return page
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -1313,14 +1388,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         if not output.is_file():
             print(f"{label} has not been rendered", file=sys.stderr)
             return 1
-        if output.read_text(encoding="utf-8") != page:
+        if output.read_bytes() != page.encode("utf-8"):
             print(f"{label} is stale; rerender it", file=sys.stderr)
             return 1
         print(f"{label} is current")
         return 0
 
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(page, encoding="utf-8")
+    with atomic_output_file(output) as temporary:
+        temporary.write_text(page, encoding="utf-8")
     for asset in COMPOSITE_ASSETS:
         shutil.copyfile(asset, output.parent / asset.name)
     print(f"wrote {label} ({len(page) / 1024:.0f} KB)")

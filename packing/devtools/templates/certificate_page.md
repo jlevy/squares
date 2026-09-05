@@ -252,7 +252,7 @@ $$
         <button id="btn-heat-{{SLUG}}" aria-pressed="true">Field</button>
       </div>
       <div class="legend">
-        <span><i style="background:var(--cert-near)"></i>within 12% of the limit</span>
+        <span><i style="background:var(--cert-near)"></i>within {{TIGHT_PERCENT}}% of the limit</span>
         <span><i style="background:var(--kpress-doc-accent)"></i>comfortably above</span>
         <span><i style="background:var(--cert-below)"></i>below 1, which never occurs at a net direction</span>
       </div>
@@ -337,7 +337,7 @@ $$
         <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod-{{SLUG}}"></dd>
       </dl>
       <p class="hint">Opens at <span class="tex">K = 3</span>, the coarsest net the figure offers, where Condition 4 admits only
-      <span class="tex">B \lt 0.8787</span> and the shrink is unmistakable. Drag either square by its
+      <span class="tex">B \lt {{K3_LIMIT_TEX}}</span> and the shrink is unmistakable. Drag either square by its
       handle. At
       <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, the two squares are
       indistinguishable.</p>
@@ -346,7 +346,9 @@ $$
   <figcaption><strong>Figure 6.</strong> The shrink that buys the finite net. The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
   side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
   <strong>The last quantity must stay below 1.</strong> At <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, its
-  largest value, at the widest half-gap, is <span class="tex">{{SHRINK_PEAK_TEX}}</span>.</figcaption>
+  largest value, at the widest half-gap, is <span class="tex">{{SHRINK_PEAK_TEX}}</span> for the side the figure uses, a seven-place
+  value one step below the largest Condition 4 admits, and <span class="tex">{{SHRINK_PEAK_CERT_TEX}}</span> for the certificate’s own
+  side.</figcaption>
 </figure>
 
 <!--END:FIGURE-->
@@ -355,8 +357,9 @@ $$
 
 ## Why the Net Has {{N_DIRECTIONS}} Directions
 
-To price a coarser net, hold a certificate’s atoms fixed, coarsen the net, set $B$ to
-the largest value Condition 4 admits, and decide Condition 5 again.
+To price a coarser net, hold a certificate’s atoms fixed, coarsen the net, set $B$ to a
+seven-place value one step below the largest Condition 4 admits, and decide Condition 5
+again.
 Figure 7 does this for each certificate, and its caption says what halving the net
 costs.
 
@@ -388,7 +391,7 @@ costs.
         {{COARSEN_LABELS}}
       </g>
       <text x="76" y="246" font-size="10" fill="var(--kpress-doc-muted)">
-        Only the last bar clears the threshold. Measured on the retained atoms, optimized against the full net.
+        {{COARSEN_VERDICT}} Measured on the retained atoms, optimized against the full net.
       </text>
     </svg>
   </div>
@@ -419,7 +422,7 @@ $$
 $$
 
 where the last step is Condition 2. The two ends contradict each other, so no such
-packing exists, and $s({{N}}) \gt {{L_FRAC}}$.
+packing exists, and $s({{N}}) \ge {{L_FRAC}}$.
 
 </div>
 
