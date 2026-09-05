@@ -13,13 +13,11 @@
 #    ground truth for checking the model-assisted *.md transcriptions against.
 #    Reflowing them voids that guarantee entirely.
 #
-# 2. The cleaned *.md transcriptions carry heavy inline LaTeX, and flowmark
-#    inserts line breaks INSIDE $...$ spans when it rewraps. Measured on
-#    2026-08-22: 31 of 339 math spans broken in the Stromquist transcription,
-#    101 of 1236 in Caoduro-Sebo, 5 of 433 in the Kingbird capture. A newline
-#    mid-formula defeats grep, and searching this archive locally is the entire
-#    point of it. Some Markdown math renderers also require inline math to stay
-#    on one line.
+# 2. The cleaned *.md transcriptions are transcribed text, and formatting them
+#    would retype transcribed characters -- straight quotes, ellipses -- against
+#    the rule that archived source is never edited to look tidy. Their inline
+#    LaTeX is not the reason: the pinned flowmark-rs 0.4.0 keeps every $...$ span
+#    in the archive whole, which `devtools.check_math_spans` re-measures on a copy.
 #
 # So the whole archive stays raw. Its README.md is NOT excluded -- it is our own
 # prose and is formatted like everything else.

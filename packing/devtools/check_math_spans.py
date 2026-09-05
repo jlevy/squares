@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
 """Prove the pinned Markdown formatter keeps every math span whole.
 
-Flowmark rewraps prose, and under `flowmark-rs==0.3.2` it rewrapped *through* math:
-line breaks landed inside `$...$` spans, 605 of them across the literature archive.
-A newline mid-formula defeats `grep`, which is the entire point of keeping that archive
-locally, and several Markdown math renderers require inline math to stay on one line.
-That is why `packing/resources/` is excluded in `.flowmarkignore`, and the exclusion is
-described there and in `AGENTS.md` as evidence-based rather than precautionary.
+Flowmark rewraps prose. A rewrap that landed a line break inside a `$...$` span would
+defeat `grep`, which is the entire point of keeping the literature archive locally, and
+several Markdown math renderers require inline math to stay on one line. The pinned
+`flowmark-rs==0.4.0` keeps every one of the archive's 7,618 spans whole; the archive is
+excluded in `.flowmarkignore` for other reasons, stated there and in `AGENTS.md`, and
+every exclusion there is evidence-based rather than precautionary.
 
-Evidence-based means re-measurable. The 2026-08-22 and 2026-09-04 measurements were both
-made with a throwaway script, which is the failure mode `OR-1` names: the number outlived
-the instrument that produced it, so the next pin bump has nothing to run. This is that
-instrument. It formats a *copy* of each file with the pinned formatter and compares the
-math spans before and after, so the claim "0 of 7,618 spans break" is a command rather
-than a memory.
+Evidence-based means re-measurable, and a measurement without its instrument is the
+failure mode `OR-1` names. This is the instrument: it formats a *copy* of each file with
+the pinned formatter and compares the math spans before and after, so "0 of 7,618 spans
+break" is a command rather than a memory, and the next pin bump has something to run.
 
 What it counts, in this order, so that a delimiter is never claimed twice:
 
