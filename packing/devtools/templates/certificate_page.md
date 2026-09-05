@@ -41,10 +41,9 @@ $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 <figure>
   <div class="fig-head">
     <span class="caps">Figure 1</span>
-    <span class="fig-title">The best known packings of 1 through 100 squares</span>
   </div>
   <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.png" alt="The best known packings of one through one hundred unit squares, in a ten-by-ten grid" width="2400" height="2676"></a></div>
-  <figcaption class="kpress-figcaption">The best known packings of 1 through 100 unit squares. Each cell is the tightest
+  <figcaption class="kpress-figcaption"><strong>Figure 1.</strong> The best known packings of 1 through 100 unit squares. Each cell is the tightest
   arrangement on record for that <span class="tex">n</span>. The full
   results, with every witness and its provenance, are in
   <a href="https://github.com/jlevy/squares/blob/main/packing/atlas/known-best/">the GitHub repository</a>, and the
@@ -65,17 +64,15 @@ tighter precision so you can compare the results.)
 <figure>
   <div class="fig-head">
     <span class="caps">Figure 2</span>
-    <span class="fig-title">The best known packing of 11 squares</span>
   </div>
   <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
-  <figcaption class="kpress-figcaption">Trump’s 1979 packing of eleven unit squares shows
+  <figcaption class="kpress-figcaption"><strong>Figure 2.</strong> Trump’s 1979 packing of eleven unit squares shows
   <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>.<sup class="kpress-footnote-ref"><a href="#fn-3" id="fnref-3b" data-kpress-footnote-ref="3">3</a></sup></figcaption>
 </figure>
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 3</span>
-    <span class="fig-title">Bounds on <span class="tex">s({{N}})</span></span>
+    <span class="caps">Figure 3</span></span>
   </div>
   <div class="line-fig kpress-diagram">
   <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER_DEC}}, the bounds proved here up to {{HEADLINE_L_DEC}}, and the best known packing at {{BEST_PACKING_DEC}}">
@@ -101,7 +98,7 @@ tighter precision so you can compare the results.)
     {{NUMBER_LINE_MARKS}}
   </svg>
   </div>
-  <figcaption class="kpress-figcaption">The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. Below {{HEADLINE_L_FRAC}} it is
+  <figcaption class="kpress-figcaption"><strong>Figure 3.</strong> Bounds on <span class="tex">s(11)</span>. The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. Below {{HEADLINE_L_FRAC}} it is
   <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span>.</figcaption>
 </figure>
 
@@ -188,8 +185,7 @@ reflects onto that arc and covers the same mass.
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 4</span>
-    <span class="fig-title">The Atoms</span><span class="tag">Conditions 1 and 2</span>
+    <span class="caps">Figure 4</span><span class="tag">Conditions 1 and 2</span>
     {{CERT_TOGGLE}}
   </div>
   <div class="stage stage-tip"><canvas id="field-{{SLUG}}" width="1040" height="1040"></canvas>
@@ -199,7 +195,7 @@ reflects onto that arc and covers the same mass.
     <div>Mass eleven disjoint unit squares would need<span class="v tex">{{N}}</span></div>
     <div>Shortfall<span class="v tex">{{SHORTFALL}}</span></div>
   </div>
-  <figcaption class="kpress-figcaption">Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
+  <figcaption class="kpress-figcaption"><strong>Figure 4.</strong> The atoms. Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
   corners, where a square has least room to move, and thins in the middle. The sites and weights are the optimum
   of a covering linear program, rationalized. The board holds less mass than eleven disjoint unit squares would
   need. Condition 2 is that comparison.</figcaption>
@@ -237,8 +233,7 @@ $$
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 5</span>
-    <span class="fig-title">The prover: drag the square, watch the mass</span><span class="tag">Condition 5</span>
+    <span class="caps">Figure 5</span><span class="tag">Condition 5</span>
     {{CERT_TOGGLE}}
   </div>
   <div class="split">
@@ -272,7 +267,7 @@ $$
       it the square hangs out of the container, and the proof makes no claim.</p>
     </div>
   </div>
-  <figcaption class="kpress-figcaption">Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
+  <figcaption class="kpress-figcaption"><strong>Figure 5.</strong> The prover: drag the square, watch the mass. Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
   directions. Outside it the mass falls away at once, which is why the atoms crowd the boundary.</figcaption>
 </figure>
 
@@ -323,8 +318,7 @@ $$
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 6</span>
-    <span class="fig-title">The shrink that buys the finite net</span><span class="tag">Condition 4</span>
+    <span class="caps">Figure 6</span><span class="tag">Condition 4</span>
     {{CERT_TOGGLE}}
   </div>
   <div class="split">
@@ -359,7 +353,7 @@ $$
       indistinguishable.</p>
     </div>
   </div>
-  <figcaption class="kpress-figcaption">The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
+  <figcaption class="kpress-figcaption"><strong>Figure 6.</strong> The shrink that buys the finite net. The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
   side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
   <strong>The last quantity must stay below 1.</strong> At <span class="tex">K = 180</span> it is
   <span class="tex">\approx 0.999996</span>.</figcaption>
@@ -380,8 +374,7 @@ Halving the net shrinks $B$ by
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 7</span>
-    <span class="fig-title">Least covered mass, as the net is coarsened</span><span class="tag">Condition 4 → Condition 5</span>
+    <span class="caps">Figure 7</span><span class="tag">Condition 4 → Condition 5</span>
     {{CERT_TOGGLE}}
   </div>
   <div class="chart kpress-diagram">
@@ -409,7 +402,7 @@ Halving the net shrinks $B$ by
       </text>
     </svg>
   </div>
-  <figcaption class="kpress-figcaption">This shows these atoms are tight against their own net, not that no coarser net could be made
+  <figcaption class="kpress-figcaption"><strong>Figure 7.</strong> Least covered mass as the net is coarsened. This shows these atoms are tight against their own net, not that no coarser net could be made
   to work. It measures the slope of the trade.</figcaption>
 </figure>
 
