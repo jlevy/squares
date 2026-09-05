@@ -5,7 +5,7 @@ title: Port PR 80's improvements onto main, one at a time
 kind: epic
 status: open
 priority: 0
-version: 28
+version: 31
 labels: []
 dependencies: []
 child_order_hints:
@@ -36,8 +36,11 @@ child_order_hints:
   - is-01m1qhr7ba5zz8wbdydyvnwrzc
   - is-01m1qj43dzh7wm35py14nw38qc
   - is-01m1qma1v0vkzajnmznnkancdm
+  - is-01m1qmn4p36bkqr2c2j6wb8xq5
+  - is-01m1qmn533spag4avtvsckss5y
+  - is-01m1qmn5ff7fp42mgbbfph3jmg
 created_at: 2026-09-04T23:34:34.669Z
-updated_at: 2026-09-05T01:53:09.983Z
+updated_at: 2026-09-05T01:59:14.159Z
 ---
 PR 80 (codex/pr78-s11-adversarial-review) reviewed PR 78's s(11) >= 381/100 claim and found real things beside a great deal of weight. The operator's decision: merge PR 78, then port the valid improvements one by one onto a branch off main, each as its own commit, tracked here. The review that decides which is which is docs/project/reviews/review-2026-09-04-pr80-stacked-hardening.md; the mapping of the certificate conditions to Condition 1-5 is in it and both branches use it.
 
