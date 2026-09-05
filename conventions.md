@@ -388,9 +388,12 @@ in artifacts, beads and reviews.
 Write **packing exploration** for the project directory, **exploration report** for
 `X-NNN`, and bare **exploration** for reaching another basin.
 Write **cell** alone for a cell of configuration space—a choice of separating axis and
-order for each pair—and **instance cell**, never bare “cell”, for a position in a sweep.
-The two are unrelated objects and the confusion is expensive: one is where the LP is
-solved, the other is what a round is run on.
+order for each pair—**instance cell**, never bare “cell”, for a position in a sweep, and
+**event cell**, never bare “cell”, for a region of centres on which a certificate’s
+covered mass is constant.
+The three are unrelated objects and the confusion is expensive: one is where the LP is
+solved, one is what a round is run on, and one is where a lower-bound certificate’s mass
+is decided.
 
 ## 10. Code and Docs
 

@@ -1615,9 +1615,12 @@ calibration.
 A **control cell** is an instance cell whose answer is known before the run,
 and a breach of one rejects the round regardless of outcome.
 
-> The two senses collide, and both appear in this document.
-> **Write “cell” for the configuration-space object and “instance cell”—never bare
-> “cell”—for a sweep position.** In running prose about a round, prefer naming the `n`.
+> Three senses collide, and all three appear in this document.
+> **Write “cell” for the configuration-space object, “instance cell” for a sweep
+> position, and “event cell” for a region of admissible centres—never bare “cell” for
+> either of the last two.** In running prose about a round, prefer naming the `n`. The
+> three are unrelated objects: one is where the LP is solved, one is what a round is run
+> on, and one is where a certificate’s covered mass is constant.
 
 **Basin (point-basin where the distinction matters).** The preimage of one pose returned
 by a deterministic quench: the set of configurations the refiner carries to that
@@ -1640,6 +1643,25 @@ independently validated connectivity rather than declare the quench map undefine
 mechanisms with closed-form optima.
 The ladder validates *machinery*: no proved case exercises an irrational oblique angle,
 so passing it says nothing about strategy at `n = 11`.
+
+### The weighted-certificate objects
+
+The lower-bound lane has its own vocabulary, and it is narrow in the same way the rest
+of this section is. Each term is defined where the conditions themselves are stated, and
+[`TUTORIAL.md`](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) develops all
+five from first principles.
+
+| Term | Controlled meaning | Where it is defined |
+| --- | --- | --- |
+| **atom** / **weight** | An exact point of a candidate container `[0, L]²`, and the nonnegative rational bookkeeping mass assigned to it. An atom has no area, blocks nothing, and is never a packed square | [`fractional.certificate`](packing/src/sqpack/fractional/certificate.py), [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+| **atomic measure** / **mass** | The rule assigning a region the sum of the weights of the atoms lying in it, boundary atoms included; a region’s *mass* is what that rule returns. *Atomic* because all of it sits at finitely many points rather than spread over the container | [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+| **direction net** | The finite set of exact square orientations a certificate checks, carried as rational half-angle tangents and reaching `π/4`. The strict shrink condition is what lets a nearby net direction stand in for an unchecked orientation, so the net is not a sample | [`fractional.certificate`](packing/src/sqpack/fractional/certificate.py), [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+| **event cell** | One open region of admissible centres, at one net direction, on which the set of atoms a shrunken square covers is constant. A third sense of *cell*, unrelated to the two under [The objects](#the-objects), and never written bare | [`fractional.sweep`](packing/src/sqpack/fractional/sweep.py), [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+| **weighted fractional unavoidable-set certificate** | A finite weighted atom set whose total mass is below `n` (`Condition 2`) but whose mass is at least one in every admissible shrunken square (`Condition 5`); with the symmetry, net and shrink conditions it proves `s(n) >= L`. Burns’s and Massaccesi’s object; the instances here are this project’s | [`fractional.certificate`](packing/src/sqpack/fractional/certificate.py), [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+
+`Condition 1` to `Condition 5` name the five conditions a certificate must satisfy and
+are stated in the module above; they are not the confirmation rungs `C0` to `C5`, which
+[`epistemics.md`](epistemics.md) owns.
 
 ### The operations
 
