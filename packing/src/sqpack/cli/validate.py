@@ -113,6 +113,25 @@ EXHAUSTIVE_TESTS = "exhaustive_exact"
 #: the cost rather than remove it. A setup phase over the ceiling means the module moves,
 #: which is a judgement, not an automatic one.
 QUICK_TEST_CEILING_SECONDS = 5.0
+#: The other direction, and it exists because `OR-13` is a floor on coverage rather than a
+#: budget on time: a test leaves the pull-request surface by its own measured cost and
+#: nothing else, so a `slow` marker on a test that is no longer slow is coverage the
+#: pull-request surface has lost for no reason anybody measured. `slow behavioral tests`
+#: fails when a test it ran reports a `call` phase below this, naming it, and the fix is to
+#: delete the marker.
+#:
+#: The two numbers leave a band -- 1s to 5s -- where the gate says nothing in either
+#: direction, and the band is the point. Marking is done at 2s, in the middle of it, so a
+#: test near the boundary can move either way under ordinary runner variance without
+#: turning a passing suite red. A single number would make every borderline test a coin
+#: toss on every run; the measured distribution has 46 tests between 1s and 2s, which is
+#: exactly the population a tight cutoff would flap on.
+#:
+#: What stops the quick lane creeping upward *in aggregate*, since a test at 4s passes the
+#: ceiling, is not this pair but `devtools/gate-budgets.yaml`: the `fast` tier declares a
+#: 240s ceiling that the gate reads and enforces against its own wall. One test getting big
+#: is caught here; the tier getting big is caught there; neither is prose.
+SLOW_TEST_FLOOR_SECONDS = 1.0
 #: The budget of the exhaustive exact tier: every complete finite certificate decision
 #: the fast tier defers. Measured on 2026-09-05 at 39 tests: 892s on CI's two-core
 #: runner (run 33932095609, eight seconds under the 900s cap it had been inheriting) and
@@ -517,14 +536,26 @@ _DURATION_LINE = re.compile(
 _DURATION_HEADER = "slowest durations"
 
 
-def _calls_over_ceiling(output: str) -> list[tuple[float, str]]:
-    """Test `call` phases pytest reported at or above the quick lane's ceiling."""
-    over = [
+def _call_durations(output: str) -> list[tuple[float, str]]:
+    """Every test `call` phase pytest's durations section reported, slowest first."""
+    calls = [
         (float(match["seconds"]), match["node"])
         for line in output.splitlines()
         if (match := _DURATION_LINE.match(line.strip())) and match["phase"] == "call"
     ]
-    return sorted(over, reverse=True)
+    return sorted(calls, reverse=True)
+
+
+def _require_durations(output: str, lane: str, rule: str) -> None:
+    if _DURATION_HEADER not in output:
+        raise StepFailureError(
+            f"pytest printed no durations section for the {lane} lane, so {rule} went "
+            f"unchecked; expected {_DURATION_HEADER!r} in the output"
+        )
+
+
+def _render_durations(entries: list[tuple[float, str]]) -> str:
+    return "\n".join(f"    {seconds:7.2f}s  {node}" for seconds, node in entries)
 
 
 def _fast_tests(context: Context) -> str:
@@ -542,18 +573,12 @@ def _fast_tests(context: Context) -> str:
             f"--durations-min={QUICK_TEST_CEILING_SECONDS:g}",
         ),
     )
-    if _DURATION_HEADER not in output:
-        raise StepFailureError(
-            "pytest printed no durations section, so the pull-request surface's per-test "
-            f"ceiling of {QUICK_TEST_CEILING_SECONDS:g}s went unchecked; "
-            f"expected {_DURATION_HEADER!r} in the output"
-        )
-    over = _calls_over_ceiling(output)
+    _require_durations(output, "quick", f"the {QUICK_TEST_CEILING_SECONDS:g}s per-test ceiling")
+    over = [entry for entry in _call_durations(output) if entry[0] >= QUICK_TEST_CEILING_SECONDS]
     if over:
-        rendered = "\n".join(f"    {seconds:7.2f}s  {node}" for seconds, node in over)
         raise StepFailureError(
             f"{len(over)} test(s) ran at or above the pull-request surface's "
-            f"{QUICK_TEST_CEILING_SECONDS:g}s per-test ceiling:\n{rendered}\n"
+            f"{QUICK_TEST_CEILING_SECONDS:g}s per-test ceiling:\n{_render_durations(over)}\n"
             "  Make it faster, or mark it `slow` and declare it with its measurement in "
             "test_the_slow_marker_is_declared_only_by_measured_nodes. The marker moves "
             "the test to the deep surface; it does not stop it running."
@@ -568,7 +593,7 @@ _PYTEST_NOTHING_SELECTED = "command exited 5:"
 
 def _slow_tests(context: Context) -> str:
     try:
-        return _run(
+        output = _run(
             context,
             (
                 sys.executable,
@@ -578,6 +603,8 @@ def _slow_tests(context: Context) -> str:
                 "tests",
                 "-m",
                 SLOW_TESTS,
+                "--durations=0",
+                "--durations-min=0",
             ),
         )
     except StepFailureError as error:
@@ -588,6 +615,17 @@ def _slow_tests(context: Context) -> str:
         if _PYTEST_NOTHING_SELECTED not in str(error):
             raise
         return "  no test is deferred by the per-test ceiling; the quick lane runs them all"
+    _require_durations(output, "slow", f"the {SLOW_TEST_FLOOR_SECONDS:g}s marker floor")
+    under = [entry for entry in _call_durations(output) if entry[0] < SLOW_TEST_FLOOR_SECONDS]
+    if under:
+        raise StepFailureError(
+            f"{len(under)} deferred test(s) ran below the {SLOW_TEST_FLOOR_SECONDS:g}s floor "
+            f"a `slow` marker has to earn:\n{_render_durations(under)}\n"
+            "  Delete the marker and its registry entry. OR-13 is a floor on coverage: a "
+            "test leaves the pull-request surface by its own measured cost, and one that "
+            "no longer costs that has to come back."
+        )
+    return output
 
 
 def _exhaustive_exact_tests(context: Context) -> str:
