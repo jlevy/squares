@@ -21,10 +21,11 @@ per certificate; the prose is filled once, with the headline certificate's value
 <p class="subtitle">A New Lower Bound on the Square Packing Problem</p>
 
 <div class="credits">
-  <span>September 4, 2026</span>
+  <span>{{PUBLISHED}}</span>
   <span>Tooling and human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
   <span>Agents: <strong>Opus 5</strong>, <strong>Fable 5.1</strong>, and <strong>Codex 5.6</strong></span>
   <span>Open source at <a href="https://github.com/jlevy/squares"><strong>github.com/jlevy/squares</strong></a></span>
+  <span>{{VERSION}}, revision {{REVISION}}</span>
 </div>
 
 </div>
@@ -40,16 +41,21 @@ The previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist’s in
 
 The search, the checking and the record are the program’s own work, under human
 direction rather than human derivation.
-This is one of {{N_RESULTS}} results it has registered, and it sits inside a survey of
-the whole problem: the atlas of best known packings for every $n$ from 1 to 100 in
-Figure 1 was assembled by the same program over a few days.
-
-Most of the repository behind it is not the proof.
-It is the tooling and the workflows that make a result like this reproducible: an
-experiment ledger and a hypothesis registry, exact verifiers that decide a certificate
-in rational arithmetic, a retention gate that accepts one only when two independent
-methods agree to the digit, and a validation suite that re-derives every number these
-documents state.
+This is one of {{N_RESULTS}} results it has registered over a few days, and it sits
+inside a survey of the whole problem: the atlas of best known packings for every $n$
+from 1 to 100 in Figure 1 came from the same program, which proved {{N_STARRED}} of the
+lower bounds shown there.
+Most of the repository is not the proof but the loop that produced it: a hypothesis
+registry and an experiment ledger, exact verifiers, a retention gate that keeps a
+certificate only when two independent methods agree to the digit, and a validation suite
+that re-derives every number these documents state.
+None of that is particular to square packing.
+It is a reusable framework for iterative research on creative mathematical and technical
+problems, assembled from [tbd](https://github.com/jlevy/tbd) for issue tracking and
+guidelines, [softschema](https://github.com/jlevy/softschema) for validated records,
+[practical prose](https://github.com/jlevy/practical-prose) for the writing, and
+[flowmark](https://github.com/jlevy/flowmark) and
+[kpress](https://github.com/jlevy/kpress) for the documents and this page.
 
 ## The Square Packing Problem
 
@@ -59,7 +65,7 @@ rotate.[^survey] The value is known for every $n \le 10$. Stromquist settled
 $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 
 <figure>
-  <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.png" alt="The best known packings of one through one hundred unit squares, in a ten-by-ten grid, each labelled with its best known upper bound and, where the value is still open, the best proved lower bound" width="2400" height="2846"></a></div>
+  <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.svg" alt="The best known packings of one through one hundred unit squares, in a ten-by-ten grid, each labelled with its best known upper bound and, where the value is still open, the best proved lower bound" width="2400" height="2896"></a></div>
   <figcaption><strong>Figure 1.</strong> The best known packings of 1 through 100 unit squares. Each cell is the tightest
   arrangement on record for that <span class="tex">n</span>, with the best known upper bound beneath it and, where
   <span class="tex">s(n)</span> is not yet settled, the best proved lower bound below that. A crimson star marks a lower

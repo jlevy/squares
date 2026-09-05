@@ -54,6 +54,7 @@ from sqpack.fractional.certificate import (
 )
 from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
+from sqpack.release import PUBLICATION_DATE, PUBLICATION_REVISION, PUBLICATION_VERSION
 from sqpack.render.style import SQUARE_HUE_PALETTE
 from sqpack.yamlio import safe_load
 
@@ -238,8 +239,11 @@ REPO_URL = "https://github.com/jlevy/squares"
 BEST_RENDERING = PACKING / "atlas" / "known-best" / "rendering" / "n-011.svg"
 # The atlas composite of every known-best packing, shown as Figure 1 and served
 # beside the page rather than inlined: the PNG is the image, the PDF the link.
+#: The composite travels with the page: the SVG the figure shows, the PDF it links for
+#: print, and the PNG for a reader whose context cannot render the vector.
 COMPOSITE_ASSETS = tuple(
-    PACKING / "atlas" / "known-best" / f"known-best-1-100.{ext}" for ext in ("png", "pdf")
+    PACKING / "atlas" / "known-best" / f"known-best-1-100.{ext}"
+    for ext in ("svg", "png", "pdf")
 )
 VERIFIER = PACKING / "src" / "sqpack" / "fractional" / "certificate.py"
 GENERATOR = PACKING / "src" / "sqpack" / "fractional" / "generate.py"
@@ -1094,6 +1098,9 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "N_RESULTS": str(registered_results()),
         "N_STARRED": str(starred_lower_bounds()),
+        "PUBLISHED": PUBLICATION_DATE,
+        "VERSION": PUBLICATION_VERSION,
+        "REVISION": PUBLICATION_REVISION,
         "PRIOR_YEAR": str(PRIOR_YEAR),
         **bound_substitutions(),
         "PRIOR_SOURCE": PRIOR_SOURCE,

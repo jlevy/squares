@@ -41,6 +41,7 @@ from sqpack.known_best import (
     rational_integer,
     unitsquare_witness,
 )
+from sqpack.release import PUBLICATION_DATE, PUBLICATION_REVISION, PUBLICATION_VERSION
 from sqpack.render import render_packing_svg
 from sqpack.render.color import (
     ANGLE_CLASS_CONTRACT,
@@ -99,14 +100,14 @@ GENERATOR = "python -m devtools.build_known_best_atlas"
 USER_AGENT = "thinking-scratchpad-known-best-atlas/1.0"
 
 SUMMARY_WIDTH = 2400
-SUMMARY_HEIGHT = 2846
+SUMMARY_HEIGHT = 2896
 SUMMARY_FIRST_N = 1
 SUMMARY_LAST_N = 100
 SUMMARY_COLUMNS = 10
 SUMMARY_ROWS = 10
 SUMMARY_SQUARE_COUNT = sum(range(SUMMARY_FIRST_N, SUMMARY_LAST_N + 1))
 SUMMARY_GRID_LEFT = Decimal(60)
-SUMMARY_GRID_TOP = Decimal(152)
+SUMMARY_GRID_TOP = Decimal(174)
 SUMMARY_COLUMN_PITCH = Decimal(228)
 SUMMARY_ROW_PITCH = Decimal(252)
 SUMMARY_CARD_WIDTH = Decimal(216)
@@ -137,11 +138,14 @@ SUMMARY_STAR_POINTS = (
     (Decimal("-1.411"), Decimal("-1.942")),
 )
 SUMMARY_STAR_INSET = Decimal(6)
-SUMMARY_STAR_RISE = Decimal(4)
+#: The star's reference size: the size of the caption it was drawn for, so a star beside
+#: larger type scales by the ratio and stays the same weight against its text.
+SUMMARY_STAR_REFERENCE_SIZE = Decimal(14)
 SUMMARY_STAR_TEXT_INSET = Decimal(17)
 SUMMARY_BADGE_SIZE = Decimal(19)
-SUMMARY_EXPLAINER_BASELINE = Decimal(2784)
-SUMMARY_CREDIT_BASELINE = Decimal(2822)
+SUMMARY_EXPLAINER_BASELINE = Decimal(2806)
+SUMMARY_CREDIT_BASELINE = Decimal(2844)
+SUMMARY_STAMP_BASELINE = Decimal(2872)
 SUMMARY_EXPLAINER = (
     "s(n) is the side of the smallest square holding n unit squares; "
     "deg is the algebraic degree of that side length"
@@ -249,12 +253,20 @@ SUMMARY_BADGE_FONT_SIZE = Decimal(15)
 SUMMARY_GLYPH_BASELINE = {"O": Decimal("14.9")}
 SUMMARY_MATH_GLYPH_BASELINE = Decimal(14)
 SUMMARY_CREDIT = "Diagram by Joshua Levy with assistance from Claude and Codex"
+#: The edition stamp, last of the footer lines and in the same voice as the rest of it.
+SUMMARY_RELEASE_STAMP = f"{PUBLICATION_VERSION}, revision {PUBLICATION_REVISION}"
 SUMMARY_REPOSITORY = "github.com/jlevy/squares"
 # Set a step above the other small labels so the URL reads as part of the
 # heading block rather than as another footnote.
-SUMMARY_REPOSITORY_SIZE = "26"
-SUMMARY_SUBTITLE_BASELINE = Decimal(126)
-SUMMARY_LEGEND_BASELINE = Decimal(2710)
+#: One size for the two lines under the title: the release line and the repository.
+SUMMARY_SUBTITLE_SIZE = "26"
+SUMMARY_REPOSITORY_SIZE = SUMMARY_SUBTITLE_SIZE
+SUMMARY_RELEASE_BASELINE = Decimal(114)
+SUMMARY_RELEASE_SIZE = SUMMARY_SUBTITLE_SIZE
+SUMMARY_RELEASE_TEXT = f"Including new results ({PUBLICATION_DATE})"
+SUMMARY_RELEASE_GAP = Decimal(11)
+SUMMARY_SUBTITLE_BASELINE = Decimal(148)
+SUMMARY_LEGEND_BASELINE = Decimal(2732)
 # Helvetica, with Arial as the metric-compatible stand-in where Helvetica is
 # absent. No webfont is referenced, so nothing is fetched at render time and the
 # figure is the same family everywhere it is opened.
@@ -782,20 +794,11 @@ def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: De
         return
     text_x = left
     if entry["first_proved_here"]:
-        center_x = left + SUMMARY_STAR_INSET
-        center_y = baseline - SUMMARY_STAR_RISE
-        sub(
+        _append_star(
             card,
-            "polygon",
-            {
-                "data-feature": "first-proved-here",
-                "data-n": str(n),
-                "points": " ".join(
-                    f"{format_svg_number(center_x + dx)},{format_svg_number(center_y + dy)}"
-                    for dx, dy in SUMMARY_STAR_POINTS
-                ),
-                "fill": FIRST_PARTY_ACCENT_COLOR,
-            },
+            center_x=left + SUMMARY_STAR_INSET,
+            center_y=_star_center_y(baseline, SUMMARY_SMALL_SIZE),
+            feature="first-proved-here",
         )
         text_x = left + SUMMARY_STAR_TEXT_INSET
     lower = sub(
@@ -835,6 +838,46 @@ def _case_badges(built: BuiltCase) -> tuple[tuple[str, str, str], ...]:
     )
 
 
+def _star_center_y(baseline: Decimal, size: str) -> Decimal:
+    """Half a cap height above the baseline: where a mark sits level with its text.
+
+    Aligning by eye drifts as soon as a line changes size, so both the height and the
+    scale come from the type. Helvetica's cap height is `SUMMARY_LABEL_CAP_RATIO` of the
+    em, and a glyph reads as level with a line of capitals when its own centre is at
+    half of that above the baseline.
+    """
+    return baseline - Decimal(size) * SUMMARY_LABEL_CAP_RATIO / 2
+
+
+def _star_scale(size: str) -> Decimal:
+    """How much to grow the star for type larger than the caption it was drawn for."""
+    return Decimal(size) / SUMMARY_STAR_REFERENCE_SIZE
+
+
+def _append_star(
+    parent: ET.Element,
+    *,
+    center_x: Decimal,
+    center_y: Decimal,
+    feature: str,
+    label: str = "",
+    scale: Decimal = Decimal(1),
+) -> None:
+    """Draw the new-result star about a centre, in the figure's one accent colour."""
+    attributes = {
+        "data-feature": feature,
+        "points": " ".join(
+            f"{format_svg_number(center_x + dx * scale)},"
+            f"{format_svg_number(center_y + dy * scale)}"
+            for dx, dy in SUMMARY_STAR_POINTS
+        ),
+        "fill": FIRST_PARTY_ACCENT_COLOR,
+    }
+    if label:
+        attributes["data-evidence"] = label
+    sub(parent, "polygon", attributes)
+
+
 def _append_badge(
     parent: ET.Element, glyph: str, style: str, label: str, *, x: Decimal, top: Decimal
 ) -> None:
@@ -847,20 +890,12 @@ def _append_badge(
         # The legend's star is the same polygon the cards carry, centred in a badge box
         # so the row lays out as if it were one. `glyph` is unused: there is no star to
         # typeset, which is the point.
-        center_x = x + SUMMARY_BADGE_SIZE / 2
-        center_y = top + SUMMARY_BADGE_SIZE / 2
-        sub(
+        _append_star(
             parent,
-            "polygon",
-            {
-                "data-feature": "legend-star",
-                "data-evidence": label,
-                "points": " ".join(
-                    f"{format_svg_number(center_x + dx)},{format_svg_number(center_y + dy)}"
-                    for dx, dy in SUMMARY_STAR_POINTS
-                ),
-                "fill": FIRST_PARTY_ACCENT_COLOR,
-            },
+            center_x=x + SUMMARY_BADGE_SIZE / 2,
+            center_y=top + SUMMARY_BADGE_SIZE / 2,
+            feature="legend-star",
+            label=label,
         )
         return
     fill, stroke, glyph_fill = {
@@ -1107,6 +1142,31 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
             "fill": PAPER_THEME.ink,
         },
     ).text = "100 BEST KNOWN SQUARE PACKINGS"
+    release_width = _text_width(SUMMARY_RELEASE_TEXT, SUMMARY_RELEASE_SIZE)
+    release_scale = _star_scale(SUMMARY_RELEASE_SIZE)
+    star_span = SUMMARY_STAR_INSET * 2 * release_scale
+    group_width = star_span + SUMMARY_RELEASE_GAP + release_width
+    group_left = (Decimal(SUMMARY_WIDTH) - group_width) / 2
+    _append_star(
+        root,
+        center_x=group_left + star_span / 2,
+        center_y=_star_center_y(SUMMARY_RELEASE_BASELINE, SUMMARY_RELEASE_SIZE),
+        feature="release-star",
+        scale=release_scale,
+    )
+    sub(
+        root,
+        "text",
+        {
+            "data-feature": "release",
+            "x": format_svg_number(group_left + star_span + SUMMARY_RELEASE_GAP),
+            "y": format_svg_number(SUMMARY_RELEASE_BASELINE),
+            "font-family": SUMMARY_FONT,
+            "font-size": SUMMARY_RELEASE_SIZE,
+            "font-weight": "700",
+            "fill": PAPER_THEME.ink,
+        },
+    ).text = SUMMARY_RELEASE_TEXT
     sub(
         root,
         "text",
@@ -1151,6 +1211,20 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
             "fill": SUMMARY_SMALL_FILL,
         },
     ).text = SUMMARY_CREDIT
+    sub(
+        root,
+        "text",
+        {
+            "data-feature": "release-stamp",
+            "x": str(SUMMARY_WIDTH // 2),
+            "y": format_svg_number(SUMMARY_STAMP_BASELINE),
+            "text-anchor": "middle",
+            "font-family": SUMMARY_FONT,
+            "font-size": SUMMARY_FOOTER_SIZE,
+            "font-weight": SUMMARY_SMALL_WEIGHT,
+            "fill": SUMMARY_SMALL_FILL,
+        },
+    ).text = SUMMARY_RELEASE_STAMP
     for item in built:
         _append_summary_card(root, item, spec=spec)
     return serialize_svg(root)

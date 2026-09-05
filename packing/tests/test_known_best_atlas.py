@@ -257,14 +257,14 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
         "layout": "10 by 10, row-major n=1..100",
         "png_preview": {
             "derived_from": "atlas/known-best/known-best-1-100.svg",
-            "height": 2846,
+            "height": 2896,
             "path": "atlas/known-best/known-best-1-100.png",
             "width": 2400,
         },
         "renderer": "sqpack deterministic composite renderer",
         "square_count": 5050,
         "svg": {
-            "height": 2846,
+            "height": 2896,
             "path": "atlas/known-best/known-best-1-100.svg",
             "width": 2400,
         },
@@ -363,7 +363,7 @@ def test_known_best_composite_png_is_derived_from_current_svg() -> None:
 
     assert known_best_builder.png_summary_receipt(png) == (
         2400,
-        2846,
+        2896,
         hashlib.sha256(svg_text.encode("utf-8")).hexdigest(),
     )
 
