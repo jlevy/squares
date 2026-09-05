@@ -232,3 +232,55 @@ def test_v0_cannot_hide_machine_verification_behind_notes(
     monkeypatch.setattr(check_results, "RESULTS", poisoned)
     assert check_results.main() == 1
     assert "T-004: understates V4 as V0" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize(
+    ("kind", "value"),
+    [
+        ("hypothesis", "H-999"),
+        ("agenda_cell", "BC-999"),
+        ("session", "session-999"),
+        ("experiment", "exp-999"),
+    ],
+)
+def test_a_dangling_produced_by_id_is_refused(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    kind: str,
+    value: str,
+) -> None:
+    """The join from a result back to the campaign is a reference, so it can dangle.
+
+    Before `produced_by` existed the join ran through prose -- a `by:` line, cell ids
+    in `next_rung` -- and nothing could resolve it. A field that resolves to nothing
+    would be the same prose with a colon in front of it.
+    """
+    poisoned = _changed_result(tmp_path, "T-017", produced_by={kind: value})
+    monkeypatch.setattr(check_results, "RESULTS", poisoned)
+    assert check_results.main() == 1
+    assert f"T-017: produced_by.{kind} names {value}, which is not a recorded" in (
+        capsys.readouterr().out
+    )
+
+
+def test_produced_by_resolves_every_kind_of_campaign_record(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    known = check_results.campaign_ids()
+    assert {"H-060", "H-061"} <= known["hypothesis"]
+    assert {"BC-150", "BC-152", "BC-161"} <= known["agenda_cell"]
+    assert {"session-083", "session-085"} <= known["session"]
+    assert {"exp-058", "exp-059"} <= known["experiment"]
+    linked = _changed_result(
+        tmp_path,
+        "T-017",
+        produced_by={
+            "hypothesis": "H-061",
+            "agenda_cell": "BC-161",
+            "session": "session-085",
+            "experiment": "exp-058",
+        },
+    )
+    monkeypatch.setattr(check_results, "RESULTS", linked)
+    assert check_results.main() == 0

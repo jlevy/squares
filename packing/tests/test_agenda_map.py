@@ -18,6 +18,7 @@ from devtools.render_agenda_map import (
     STATE_ORDER,
     Commitment,
     load,
+    program_order,
     render,
     violations,
 )
@@ -233,3 +234,77 @@ def test_terminal_agenda_refuses_nonterminal_items() -> None:
 
     assert any("terminal agenda" in problem for problem in violations([terminal]))
     assert violations([replace(terminal, state="stopped")]) == []
+
+
+def _programmed(**changes: object) -> Commitment:
+    base = Commitment(
+        agenda="agenda-001",
+        agenda_status="completed",
+        doc="agenda-001-x.md",
+        id="BC-001",
+        state="complete",
+        priority=0,
+        purpose="research",
+        owner_focus="insight",
+        question="the first block of a program",
+        bead="think-aaaa",
+        depends_on=(),
+        blocked_on="",
+        discharged_by="",
+        program="exact-sweep-program",
+    )
+    return replace(base, **changes)  # type: ignore[arg-type]
+
+
+def test_the_schema_declares_program_as_a_kebab_case_slug() -> None:
+    schema = safe_load(SCHEMA.read_text())
+    program = schema["properties"]["items"]["items"]["properties"]["program"]
+    assert program["type"] == "string"
+    assert program["pattern"] == "^[a-z0-9]+(-[a-z0-9]+)*$"
+
+
+def test_a_program_lists_its_cells_across_agendas_with_the_open_frontier() -> None:
+    """A program spans agendas, so no per-agenda view can show one whole.
+
+    Two cells in two agendas carry one slug; the section lists both under it, in
+    dependency order, and names the one not yet terminal as the frontier. A cell in no
+    program stays out of it.
+    """
+    first = _programmed()
+    second = _programmed(
+        agenda="agenda-002",
+        agenda_status="active",
+        doc="agenda-002-y.md",
+        id="BC-002",
+        state="ready",
+        question="the second block of the same program",
+        bead="think-bbbb",
+        depends_on=("BC-001",),
+    )
+    unrelated = _programmed(id="BC-003", question="a cell in no program", program="")
+    text = render([first, second, unrelated])
+    section = text.split("## By program", 1)[1].split("## What the states mean", 1)[0]
+    assert "### `exact-sweep-program`" in section
+    assert "| agenda-001 | `BC-001` | complete |" in section
+    assert "| agenda-002 | `BC-002` | ready |" in section
+    assert section.index("`BC-001`") < section.index("`BC-002`")
+    assert "Open frontier: `BC-002`." in section
+    assert "`BC-003`" not in section
+
+    closed = render([first, replace(second, state="stopped")])
+    assert "Open frontier: none; every cell is terminal." in closed
+
+
+def test_a_program_is_ordered_by_dependency_then_by_id() -> None:
+    late = _programmed(id="BC-003", depends_on=("BC-009",))
+    middle = _programmed(id="BC-005")
+    early = _programmed(id="BC-009")
+    ordered = [c.id for c in program_order([late, middle, early])]
+    assert ordered == ["BC-005", "BC-009", "BC-003"]
+
+
+def test_the_program_section_is_present_when_no_cell_names_one() -> None:
+    """The map's shape must not change the day a first cell names a program."""
+    text = render([_programmed(program="")])
+    assert "## By program" in text
+    assert "No commitment names a program yet." in text

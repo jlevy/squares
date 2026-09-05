@@ -164,6 +164,17 @@ properties:
           type: string
           minLength: 1
           description: Optional disjoint lane that another agent may own concurrently.
+        program:
+          type: string
+          pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"
+          description: >-
+            Optional kebab-case slug naming the multi-block program this commitment
+            belongs to. A program's cells sit in more than one agenda, and nothing
+            joined them: `depends_on` may cross agendas and never has, so a program's
+            open frontier was reconstructed by hand from several files. The agenda map
+            lists every program's cells together, across agendas, in dependency order
+            where `depends_on` gives one and by id otherwise, and names the cells not
+            yet terminal as its open frontier.
         note: {type: string, minLength: 1}
   closeout:
     type: object

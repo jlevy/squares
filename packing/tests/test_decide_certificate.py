@@ -836,3 +836,63 @@ def test_a_retained_rung_passes_both_routes_and_they_agree(
     out = capsys.readouterr().out
     assert "RETAINABLE" in out
     assert "50003/50000" in out
+
+
+@pytest.mark.parametrize("variant", ["class", "conditional"])
+def test_a_certificate_declaring_another_variant_is_refused_by_name_before_any_sweep(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+    variant: str,
+) -> None:
+    """The gate decides the unconditional theorem and nothing else.
+
+    A class-restricted or conditional certificate that reached the routes would be
+    decided under Conditions 1--5 as stated and could print RETAINABLE for a claim it
+    never made. The refusal names the variant and says what the gate implements.
+    """
+    no_sweeps(monkeypatch)
+    path = write(tmp_path, lambda record: record.__setitem__("variant", variant))
+    assert decide(path, quick=True) is False
+    errors = capsys.readouterr().out
+    assert f"variant {variant!r}" in errors
+    assert "implements only the unconditional conditions" in errors
+
+
+@pytest.mark.parametrize("value", ["bogus", "Unconditional", 1, None])
+def test_an_unknown_variant_is_refused_rather_than_read_as_unconditional(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+    value: object,
+) -> None:
+    no_sweeps(monkeypatch)
+    path = write(tmp_path, lambda record: record.__setitem__("variant", value))
+    assert decide(path, quick=True) is False
+    assert "field 'variant' must be one of" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize(
+    "edit",
+    [
+        lambda record: record.pop("variant", None),
+        lambda record: record.__setitem__("variant", "unconditional"),
+    ],
+    ids=["absent", "unconditional"],
+)
+def test_an_absent_or_unconditional_variant_is_accepted_as_before(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    edit,
+) -> None:
+    path = write(tmp_path, edit)
+    certificate, record = load(path)
+    assert len(certificate.atoms) == 425
+    assert record.get("variant", "unconditional") == "unconditional"
+    monkeypatch.setattr(
+        retention,
+        "verify_by_intervals",
+        lambda *_args, **_kwargs: FakeIntervalVerdict(),
+    )
+    monkeypatch.setattr(retention, "verify", bomb)
+    assert decide(path, quick=True) is True
