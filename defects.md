@@ -10,7 +10,7 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 
 - **93 soundness defects** — the system asserting something false about the mathematics. 73 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
 - **108 fixes left no regression check behind.** That list is the best predictor of what comes back; recorded recurrences are D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267, D-282 repeats D-264, D-312 repeats D-309, D-313 repeats D-259, D-315 repeats D-295, D-318 repeats D-308, D-321 repeats D-317, D-323 repeats D-022, D-324 repeats D-320, D-325 repeats D-319, D-326 repeats D-305, D-327 repeats D-301, D-334 repeats D-028, D-337 repeats D-107, D-339 repeats D-155, D-340 repeats D-163, D-386 repeats D-358, D-395 repeats D-358, D-397 repeats D-358, D-400 repeats D-398, D-422 repeats D-371, D-424 repeats D-144, D-427 repeats D-413.
-- **64 are still open** (outstanding or contained), every one carrying a bead.
+- **63 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -230,7 +230,6 @@ This is the actionable list.
 | D-428 | outstanding | medium | The n = 17 successor validator never ties the rebuilt chain spine to the carried boundary | `think-g4qi` |
 | D-429 | outstanding | low | The generated-view comparison folds an ellipsis but not the space the formatter puts before it | `think-ahyr` |
 | D-431 | outstanding | medium | T-009's significance rationale compares its interval certificate against a different packing | `think-stb5` |
-| D-432 | outstanding | medium | The push tier keeps the 900-second cap when its selector picks the whole suite | `think-jzqi` |
 | D-449 | outstanding | low | The exact sweep's reported witness centre lies outside the admissible domain on most directions | `think-xyt1` |
 
 ## Every defect
@@ -668,7 +667,7 @@ This is the actionable list.
 | [D-429](packing/devtools/render_research_tables.py) | 2026-09-03 | tooling | robustness |  | `inspection` | low | outstanding | The generated-view comparison folds an ellipsis but not the space the formatter puts before it |
 | [D-430](packing/devtools/check_nagamochi_bounds.py) | 2026-09-04 | docs | bookkeeping |  | `review` | low | fixed | The frontier prose kept saying sixty-three open cases rest on Nagamochi after the adoption made it sixty |
 | [D-431](packing/frontier/evidence.yaml) | 2026-09-04 | record | bookkeeping |  | `review` | medium | outstanding | T-009's significance rationale compares its interval certificate against a different packing |
-| [D-432](packing/devtools/reachable_tests.py) | 2026-09-04 | tooling | robustness |  | `gate` | medium | outstanding | The push tier keeps the 900-second cap when its selector picks the whole suite |
+| [D-432](packing/devtools/reachable_tests.py) | 2026-09-04 | tooling | robustness |  | `gate` | medium | fixed | The push tier keeps the 900-second cap when its selector picks the whole suite |
 | [D-433](packing/src/sqpack/fractional/generate.py) | 2026-09-04 | tooling | robustness |  | `review` | medium | fixed | The certificate rationaliser floored its weights while its docstring said it rounded up |
 | [D-434](packing/src/sqpack/fractional/generate.py) | 2026-09-04 | tooling | validity | conservative | `inspection` | high | fixed | The covering LP's separation oracle sees fewer placements than the verifier decides |
 | [D-435](packing/src/sqpack/fractional/interval.py) | 2026-09-04 | verifier | soundness | flattering | `inspection` | high | fixed | An enclosing interval run accepted a certificate whose least mass it had pinned below one |

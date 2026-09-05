@@ -54,6 +54,19 @@ SUPPORTED_PYTHON = (3, 14)
 BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
 PROCESS_TERMINATION_GRACE_SECONDS = 1.0
 DEFAULT_TIMEOUT_SECONDS = 900.0
+#: The budget of the whole non-exhaustive suite, read by `fast behavioral tests` and by
+#: `--push` when its selector expands to everything (D-432). The two run the same suite
+#: through two entry points, so they carry one number; the argument for the number is
+#: written beside the `fast behavioral tests` step, where the measurements are.
+FAST_SUITE_BUDGET_SECONDS = 1800.0
+#: The budget of the exhaustive exact tier: every complete finite certificate decision
+#: the fast tier defers. Measured on 2026-09-05 at 39 tests: 892s on CI's two-core
+#: runner (run 33932095609, eight seconds under the 900s cap it had been inheriting) and
+#: 930s on four cores locally, the interval route's five full-net decisions about 370s
+#: of it. Twice the measurement, for a tier that grows by one certificate at a time; a
+#: 21,600s figure was proposed on a 4,866s exact decision the integer sweep has since
+#: made a 30s one.
+EXHAUSTIVE_SUITE_BUDGET_SECONDS = 1800.0
 
 
 class _ProcessRegistry:
@@ -146,9 +159,9 @@ class Context:
     environment variable, rather than taking the default.
 
     A step's `budget_seconds` may raise the default cap, because the default is a
-    project-wide guess and one step is known to exceed it. It may not raise a number a
-    person typed: someone tightening the cap is deliberately bounding this run, and a
-    step quietly opting out of that is the bug, not the feature."""
+    project-wide guess and the whole-suite steps are known to exceed it. It may not
+    raise a number a person typed: someone tightening the cap is deliberately bounding
+    this run, and a step quietly opting out of that is the bug, not the feature."""
 
     processes: _ProcessRegistry = field(
         default_factory=_ProcessRegistry, compare=False, repr=False
@@ -1566,8 +1579,27 @@ STEPS: tuple[Step, ...] = (
     # The budget is the measurement plus room for that uncertainty and for growth, not a
     # number chosen to make today's run pass. A suite that reaches this ceiling should be
     # re-argued, not re-padded, and the step still fails if it exceeds what it asked for.
-    Step("fast behavioral tests", _fast_tests, fast=True, broad=True, budget_seconds=1800),
-    Step("exhaustive exact behavioral tests", _exhaustive_exact_tests),
+    #
+    # Re-measured on 2026-09-05 at 1781 passing tests, after the integer sweep
+    # (d8733ad0) took the four retained certificate decisions out of the suite's critical
+    # path: 1034s on four cores, with light editing in flight; CI's `validate`
+    # job on the same tree ran in 996s on its two-core runner (run 33931098324). The 1800s
+    # budget stands at about 1.7 times the local reading. A 2700s budget was
+    # proposed on a 1791s measurement of the Fraction sweep the same day; that
+    # measurement no longer describes the suite, and 2700s sits above the 1800s CI
+    # allows the job, so a local run could pass a budget CI cannot honour.
+    Step(
+        "fast behavioral tests",
+        _fast_tests,
+        fast=True,
+        broad=True,
+        budget_seconds=FAST_SUITE_BUDGET_SECONDS,
+    ),
+    Step(
+        "exhaustive exact behavioral tests",
+        _exhaustive_exact_tests,
+        budget_seconds=EXHAUSTIVE_SUITE_BUDGET_SECONDS,
+    ),
     Step(
         "bead tree",
         _bead_tree,
@@ -2177,8 +2209,9 @@ def _push_test_step(base: str) -> Step:
     Selection happens in `devtools.reachable_tests`, which errs toward inclusion the
     same way `Step.touches` does; this wrapper only needs to know whether the answer is
     the whole suite, because that is what decides whether the run contends like a gate
-    and must take the marker. The probe is a subprocess because the selector lives in
-    `devtools`, which `sqpack` does not import.
+    and must take the marker -- and whether it carries the whole suite's budget. The
+    probe is a subprocess because the selector lives in `devtools`, which `sqpack` does
+    not import.
     """
     probe = subprocess.run(
         (sys.executable, "-m", "devtools.reachable_tests", "--summary", "--since", base),
@@ -2203,6 +2236,12 @@ def _push_test_step(base: str) -> Step:
         action=action,
         fast=True,
         broad=everything,
+        # When the selector expands to everything this is `fast behavioral tests` under
+        # another entry point, and it takes that step's budget. D-432 is the run that did
+        # not: the whole-suite fallback died at the shared 900s cap at 84%, and the
+        # failing test it had reached could not be named from what it printed. A true
+        # subset keeps the shared cap, which is the guard against one hung test.
+        budget_seconds=FAST_SUITE_BUDGET_SECONDS if everything else None,
     )
 
 

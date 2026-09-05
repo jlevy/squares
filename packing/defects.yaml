@@ -13473,7 +13473,7 @@ defects:
     inheriting the shared subprocess cap; it first fired on 2026-09-04 when a change set
     touching the pull-request template made the selector choose everything
   severity: medium
-  status: outstanding
+  status: fixed
   what: >-
     `packing-validate --push` runs `devtools.reachable_tests --run --since origin/main`,
     which selects the tests a change can reach and falls back to the whole
@@ -13494,15 +13494,26 @@ defects:
     D-422's snapshot-cap assertion, which is red on any used checkout and green on a
     fresh clone; the tier gave no way to tell that from a regression.
   fix: >-
-    Give the reachable-tests step the same 1,800-second budget the full-suite steps
-    carry when its selector reports everything, or make the whole-suite fallback run
-    the fast behavioral step's own configuration; and print the failing test ids in
-    the step's summary regardless of how the run ended, so a killed run still names
-    what it saw. Owned by Agenda 018's gate-speed block, which measures the suite first.
+    Fixed on the port branch, 2026-09-05: the step `--push` builds carries
+    FAST_SUITE_BUDGET_SECONDS -- 1,800 s, the budget `fast behavioral tests` declares,
+    now one constant both steps read -- when its selector reports everything, and keeps
+    the shared 900 s cap for a true subset. The prescription's second half, naming the
+    failing test from a killed run, is not implemented and is not needed for this
+    failure: with the budget in place the whole-suite fallback finishes. Re-measured on
+    the merged tree with the integer sweep in place (d8733ad0): 1,034 s on
+    four cores at 1,781 passing tests, 996 s on CI's two-core runner, against
+    the 1,210 s of 2026-09-03 and an 1,800 s budget. The exhaustive tier, measured
+    beside it, ran in 930 s locally and 892 s on CI's runner -- eight seconds under the
+    900 s cap it had been inheriting -- so it now carries a budget of its own, 1,800 s,
+    twice the measurement. Ported from PR 80's F13 with its 2,700 s and 21,600 s
+    dropped: the first rested on a 1,791 s measurement of the Fraction sweep the same
+    day and sits above the 1,800 s CI allows the job; the second on a 4,866 s exact
+    decision the integer sweep made a 30 s one.
   regression: >-
-    A test that drives `reachable_tests --run` with a selector reporting everything and
-    asserts the step's budget is the full-suite budget and that a failing test id
-    appears in the summary when the run is interrupted.
+    test_push_tests_take_the_whole_suite_budget_only_when_the_selector_expands, which
+    builds the push step against a selector reporting everything and against one
+    reporting a subset, and asserts the whole-suite budget on the first, the shared cap
+    on the second, and that the budget is the constant `fast behavioral tests` reads.
   bead: think-jzqi
   recorded_in: packing/devtools/reachable_tests.py
 - id: D-433

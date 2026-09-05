@@ -3321,7 +3321,8 @@ packing, and takes `T-009` to `C4` through the results checker.
 [D-432](defects.md) was found by the same branch’s own pre-push tier: when the change
 set touches a file that configures the suite, the tier falls back to the whole suite
 under a 900-second cap the full-suite steps no longer use, dies at 84%, and names no
-failing test; it is owned by Agenda 018’s gate-speed block.
+failing test; the step now takes the fast suite’s own budget when its selector expands
+to the whole suite, the first commit of the branch that ports PR #80’s findings.
 
 [D-393](defects.md) is the same run being wrong about its own gate.
 `D-381` established `--edit` as the pre-push floor, and that floor does not run tests:
