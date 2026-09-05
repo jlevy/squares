@@ -1,6 +1,6 @@
 """The explainer renders, and what it renders fetches nothing.
 
-`devtools.render_certificate_page` was exercised only by the Pages workflow, on the pull
+`devtools.render_explainer` was exercised only by the Pages workflow, on the pull
 requests whose paths its filters name; nothing in the suite rendered the page. A full
 render is under a second, so it runs here, and the two properties the workflow used to
 grep for are asserted on the string the renderer returns: no placeholder survived
@@ -13,8 +13,8 @@ import re
 
 import pytest
 
-from devtools.render_certificate_page import WALKTHROUGH, assert_self_contained, render
-from devtools.render_certificate_page import load_certificate as load
+from devtools.render_explainer import WALKTHROUGH, assert_self_contained, render
+from devtools.render_explainer import load_certificate as load
 
 
 @pytest.fixture(scope="module")

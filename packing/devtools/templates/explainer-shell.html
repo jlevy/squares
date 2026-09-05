@@ -117,9 +117,9 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
 /* The deck is a div so its footnote renders; the paragraph inside keeps its edges. */
 .cert-page .hero .deck > p { margin-block: 0; }
 
-/* The certificate switch sits in every figure head; the articles are whole
-   documents, so they are hidden outright. */
-.cert-toggle { display: inline-flex; gap: 0.3rem; margin-inline-start: auto; }
+/* The certificate switch sits at the foot of every figure it changes; the articles
+   are whole documents, so they are hidden outright. */
+.cert-toggle { display: inline-flex; gap: 0.3rem; }
 .cert-toggle button { white-space: nowrap; }
 .intro { margin-block-start: 1.6rem; }
 /* The atlas rendering is inlined: its ground and strokes take the page's
@@ -147,20 +147,15 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
   font-family: var(--kpress-font-sans);
 }
 
-/* Figure chrome. */
-.fig-head {
-  align-items: baseline;
-  border-block-end: 1px solid var(--kpress-doc-border);
+/* Figure chrome. The figure carries no title: the caption names it, and repeating
+   the number above the frame said the same thing twice. What the head did carry that
+   the caption cannot is the certificate chooser, which belongs with the diagram it
+   changes, so it sits at its foot. */
+.fig-choose {
+  border-block-start: 1px solid var(--kpress-doc-border);
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.9rem;
+  justify-content: center;
   padding: 0.7rem 1.1rem;
-}
-.fig-title {
-  flex: 1 1 14rem;
-  font-family: var(--kpress-font-sans);
-  font-size: var(--kpress-font-size-small);
-  font-weight: var(--kpress-font-weight-sans-medium);
 }
 .tag {
   background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
@@ -484,9 +479,13 @@ function showAtomTip(i) {
   tex(fieldTip.querySelector('.tip-w'), `w = ${fracTex(wn, wd)}`);
   swap(fieldTip);
 }
-const ATOM_PROMPT = 'Hover an atom for its position and weight.';
+const ATOM_PROMPT = 'Hover or tap an atom for its position and weight.';
 
-fc.addEventListener('pointermove', e => {
+/* One selection path for every pointer. A mouse selects by moving over an atom; a
+   touch has nothing to hover with, so it selects on the way down and keeps what it
+   picked, because lifting a finger destroys the pointer and fires `pointerleave`
+   at once. Clearing on leave is therefore for the mouse alone. */
+const pickAtom = e => {
   const box = fc.getBoundingClientRect();
   const cx = (e.clientX - box.left) / box.width * FS, cy = (e.clientY - box.top) / box.height * FS;
   const i = atomAt(cx, cy);
@@ -494,8 +493,11 @@ fc.addEventListener('pointermove', e => {
   if (i === hovered) return;
   hovered = i; drawField();
   if (i < 0) setText(fieldTip, ATOM_PROMPT); else showAtomTip(i);
-});
-fc.addEventListener('pointerleave', () => {
+};
+fc.addEventListener('pointermove', pickAtom);
+fc.addEventListener('pointerdown', pickAtom);
+fc.addEventListener('pointerleave', e => {
+  if (e.pointerType && e.pointerType !== 'mouse') return;
   if (hovered !== -1) { hovered = -1; drawField(); }
   setText(fieldTip, ATOM_PROMPT);
 });
@@ -904,7 +906,7 @@ if (window.matchMedia) {
   const articles = [...document.querySelectorAll('.cert-figure')];
   const slugs = [...new Set(articles.map(a => a.dataset.cert))];
   const scroller = document.querySelector('[data-kpress-viewport]') || document.scrollingElement;
-  const figureKey = el => { const f = el.closest('figure'), c = f && f.querySelector('.caps'); return c ? c.textContent : null; };
+  const figureKey = el => { const f = el.closest('figure'); return f ? f.dataset.figure || null : null; };
   function show(slug, record, from) {
     if (!slugs.includes(slug)) slug = slugs[0];
     const key = from ? figureKey(from) : null, top = from ? from.getBoundingClientRect().top : 0;

@@ -6,7 +6,7 @@ between them, and every quantity each article states is read or derived from
 its certificate file, so the page cannot drift from the bounds it explains.
 When a rung moves, rerunning this is the whole update: no number is typed twice.
 
-The prose is Markdown, in `templates/certificate_page.md`, and kpress renders it:
+The prose is Markdown, in `templates/explainer-article.md`, and kpress renders it:
 headings, lists, math and footnotes are the system's to emit, so the page cannot
 hand-roll a footnote or a heading level that the design system would set
 differently. The HTML template beside it is only the shell — head, the body
@@ -23,8 +23,8 @@ from an artifact host with a strict content-security policy.
 
 Usage, from `packing/`:
 
-    uv run --frozen --all-extras --group dev python -m devtools.render_certificate_page
-    uv run --frozen --all-extras --group dev python -m devtools.render_certificate_page --check
+    uv run --frozen --all-extras --group dev python -m devtools.render_explainer
+    uv run --frozen --all-extras --group dev python -m devtools.render_explainer --check
 """
 
 from __future__ import annotations
@@ -53,13 +53,14 @@ from sqpack.fractional.certificate import (
 from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
 from sqpack.render.style import SQUARE_HUE_PALETTE
+from sqpack.yamlio import safe_load
 
 PACKING = Path(__file__).resolve().parents[1]
 REPO = PACKING.parent
 CASE = PACKING / "cases" / "n11_fractional_certificate"
 TEMPLATES = Path(__file__).with_name("templates")
-TEMPLATE = TEMPLATES / "certificate_page.html"
-MARKDOWN = TEMPLATES / "certificate_page.md"
+TEMPLATE = TEMPLATES / "explainer-shell.html"
+MARKDOWN = TEMPLATES / "explainer-article.md"
 VERIFIER_CLAIM = CASE / "verify_claim.py"
 OUTPUT = PACKING / "site" / "index.html"
 
@@ -920,6 +921,19 @@ def number_line_marks(facts: list[Facts], headline: Facts) -> str:
     return "\n    ".join(marks)
 
 
+def registered_results() -> int:
+    """How many results the frontier register holds, counted rather than typed.
+
+    The opening says this bound is one of several the program has registered; the
+    register is the only place that number lives, so the page reads it there.
+    """
+    register = PACKING / "frontier" / "results.yaml"
+    entries = safe_load(register.read_text(encoding="utf-8"))["results"]
+    if not entries:
+        raise SystemExit(f"{register.name} lists no results; the opening states a count")
+    return len(entries)
+
+
 def bound_substitutions() -> dict[str, str]:
     """The two irrational bounds, in the forms the page is allowed to print them.
 
@@ -1067,6 +1081,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "DEFAULT_ID": default.identifier,
         "DEFAULT_CERT_URL": repo_file(default.source),
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
+        "N_RESULTS": str(registered_results()),
         "PRIOR_YEAR": str(PRIOR_YEAR),
         **bound_substitutions(),
         "PRIOR_SOURCE": PRIOR_SOURCE,
