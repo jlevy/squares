@@ -51,6 +51,7 @@ from sqpack.fractional.certificate import (
     verify,
 )
 from sqpack.fractional.interval import (
+    MAX_INTERVAL_ATOMS,
     IntervalInputError,
     scaled_atom_masses,
     verify_by_intervals,
@@ -60,11 +61,7 @@ from sqpack.fractional.model import Atom
 RATIONAL = re.compile(r"^-?[0-9]+(/[1-9][0-9]*)?$")
 MAX_RATIONAL_TEXT = 512
 MAX_DIRECTION_STEPS = 10_000
-# The largest retained certificate has 2260 atoms; the interval route's boxes-by-atoms
-# masks grow linearly in this, and a record that claims more than this many is not a
-# candidate anyone generated here. The interval route will carry its own cap once its
-# box budget is decided (bead think-05dc); until then the gate holds the line.
-MAX_ATOMS = 4096
+MAX_ATOMS = MAX_INTERVAL_ATOMS
 MAX_CERTIFICATE_BYTES = 8 * 1024 * 1024
 
 

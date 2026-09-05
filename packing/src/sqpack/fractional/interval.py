@@ -124,6 +124,25 @@ BATCH = 4096
 # 2^60 (PR 78's adversarial review, F7).
 INT64_MASS_LIMIT = 2**62
 
+# A leave-edge of one region lying exactly on the enter-edge of another is a seam no
+# outward-rounded enclosure can close, and without a cap the search bisects it down
+# to RESOLUTION_FLOOR along its whole length -- work growing as the reciprocal of the
+# floor (PR 78's adversarial review measured 4,631 boxes at 1e-2, 274,303 at 1e-4 and
+# 33.6 million at 1e-6 on a tiled grid). A direction that reaches this many boxes is
+# abandoned as `undecided` with lower bound zero, which nonnegative weights make sound
+# for every box left unresolved -- a refusal, never an acceptance -- unless a sampled
+# admissible point has already refuted Condition 5. The value is sixteen times the
+# largest per-direction count a retained certificate has needed (31,103, at the n = 17
+# top rung, measured by the review's code lane on 2026-09-04); the full-net decisions
+# of every retained certificate assert that no direction exhausts it.
+BOX_BUDGET = 500_000
+
+# Each search batch materialises a boxes-by-atoms boolean mask: BATCH rows by one
+# column per atom. The largest retained certificate has 2,260 atoms, a 9 MiB mask per
+# batch; this cap keeps one mask under 16 MiB and refuses an input-driven allocation
+# in the hundreds of megabytes before it happens.
+MAX_INTERVAL_ATOMS = 4096
+
 
 # ---------------------------------------------------------------------------
 # Scalar and vector interval arithmetic with directed rounding.
@@ -335,6 +354,7 @@ class DirectionOutcome:
     witness: tuple[float, float] | None
     boxes: int
     stalled: int
+    budget_exhausted: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -351,6 +371,10 @@ class AtomData:
 
     @classmethod
     def of(cls, certificate: Certificate) -> AtomData:
+        if len(certificate.atoms) > MAX_INTERVAL_ATOMS:
+            raise IntervalInputError(
+                f"the interval verifier supports at most {MAX_INTERVAL_ATOMS} atoms"
+            )
         scale, scaled_mass, total = scaled_atom_masses(certificate)
         xs = [Interval.of(atom.x) for atom in certificate.atoms]
         ys = [Interval.of(atom.y) for atom in certificate.atoms]
@@ -590,7 +614,28 @@ class DirectionSearch:
             if settled.any():
                 least = int(low[settled].min())
                 lower = least if lower is None else min(lower, least)
-            children, stuck = self._split(tight[~settled])
+            unresolved = tight[~settled]
+            if boxes >= BOX_BUDGET and (len(unresolved) or pending):
+                # Abandon the direction rather than tile a seam to the floor. Zero is
+                # a sound lower bound for every unresolved box because no weight is
+                # negative; a sampled point below the threshold has refuted already.
+                exhausted: Literal["refuted", "undecided"] = (
+                    "refuted" if upper is not None and upper < self.scale else "undecided"
+                )
+                abandoned = sum(
+                    1 for value in stuck_bounds if threshold is None or value < threshold
+                )
+                return DirectionOutcome(
+                    self.label,
+                    exhausted,
+                    0,
+                    upper,
+                    witness,
+                    boxes,
+                    abandoned,
+                    budget_exhausted=True,
+                )
+            children, stuck = self._split(unresolved)
             if len(stuck):
                 stuck_bounds.extend(int(value) for value in self.lower_bound(stuck))
             if len(children):
@@ -768,7 +813,8 @@ def verify_by_intervals(
     )
     detail = (
         f"{len(outcomes)} directions, {sum(o.boxes for o in outcomes)} boxes, "
-        f"{sum(o.stalled for o in outcomes)} stalled"
+        f"{sum(o.stalled for o in outcomes)} stalled, "
+        f"{sum(o.budget_exhausted for o in outcomes)} budget-exhausted"
     )
     if worst is not None and worst.upper is not None:
         detail += f"; least point mass {Fraction(worst.upper, atoms.scale)} at {worst.label}"
