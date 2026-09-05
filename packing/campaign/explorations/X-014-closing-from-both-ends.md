@@ -135,37 +135,39 @@ many rational atoms that the search performs, and a fractional packing of value 
 
 A packing of eleven unit squares is a fractional packing of value `11` with all weights
 equal to `1`: each unit square contains a `B`-square at a net direction or a `D4` image
-of one (conditions `C3` and `C0`), the eleven cores are disjoint, and their depth is at
-most `1`. So `ν*(L) ≥ 11` at every side where eleven squares fit, and the certificate’s
-reach is bounded above by `s(11)` for the trivial reason.
+of one (conditions `Condition 4` and `Condition 1`), the eleven cores are disjoint, and
+their depth is at most `1`. So `ν*(L) ≥ 11` at every side where eleven squares fit, and
+the certificate’s reach is bounded above by `s(11)` for the trivial reason.
 What the method actually reaches is the smaller of two quantities, and the record now
 lets both be stated.
 
 **Where the shrink stops it.** Scaling Trump’s packing by `λ = L / U` puts eleven
 squares of side `λ` in a container of side `L`. A square of side `λ` at angle `θ`
 contains a `B`-square at the net direction `θ_k` about the same centre whenever
-`λ ≥ B (cos δ + sin δ)` with `δ = |θ − θ_k|`, which is the containment step of `C3`.
-Trump’s six axis-aligned squares sit at direction `0`, a net direction, and need
-`λ ≥ B`; the five tilted ones, at `40.181937°`, are `0.012100°` from the nearest net
-direction, index `159` at `40.194037°`, and need `λ ≥ B (cos δ + sin δ) = 0.997911`. So
-for every `L > U × 0.997911 = 3.868983` the scaled packing contains eleven pairwise
-disjoint admissible `B`-squares at net directions — a fractional packing of value `11` —
-and no certificate exists at that `L`, whatever the site set and weights.
+`λ ≥ B (cos δ + sin δ)` with `δ = |θ − θ_k|`, which is the containment step of
+`Condition 4`. Trump’s six axis-aligned squares sit at direction `0`, a net direction,
+and need `λ ≥ B`; the five tilted ones, at `40.181937°`, are `0.012100°` from the
+nearest net direction, index `159` at `40.194037°`, and need
+`λ ≥ B (cos δ + sin δ) = 0.997911`. So for every `L > U × 0.997911 = 3.868983` the
+scaled packing contains eleven pairwise disjoint admissible `B`-squares at net
+directions — a fractional packing of value `11` — and no certificate exists at that `L`,
+whatever the site set and weights.
 That is arithmetic on three constants recorded in
 [`certificate.json`](../../cases/n11_fractional_certificate/certificate.json), the
-record’s tilt, and the formula of `C3`, not a measurement, and it is the argument of the
-ceiling theorem in [`CERTIFICATE-REACH.md`](../../frontier/CERTIFICATE-REACH.md) with
-the record packing in place of the grid: there the refuting object is the grid at
-`4B = 3.9908`; here it binds `0.1218` lower.
+record’s tilt, and the formula of `Condition 4`, not a measurement, and it is the
+argument of the ceiling theorem in
+[`CERTIFICATE-REACH.md`](../../frontier/CERTIFICATE-REACH.md) with the record packing in
+place of the grid: there the refuting object is the grid at `4B = 3.9908`; here it binds
+`0.1218` lower.
 
 Two readings follow.
 The retained instrument can never certify the last `0.0081` below `U` at `n = 11`: the
 shrink `B = 9977/10000` alone caps it at `U · B = 3.868166`, and the net’s offset from
 the record’s tilt moves the cap up by less than a thousandth.
-And the cap rises only with `B`, which `C3` ties to the net’s largest half-gap tangent
-`D` through `B (1 + D) < 1`, so halving the tax needs roughly twice the directions.
-The shrink is a fixed price of the instrument, about an eighth of the remaining side
-gap; the covering value decides how much of the rest is reachable.
+And the cap rises only with `B`, which `Condition 4` ties to the net’s largest half-gap
+tangent `D` through `B (1 + D) < 1`, so halving the tax needs roughly twice the
+directions. The shrink is a fixed price of the instrument, about an eighth of the
+remaining side gap; the covering value decides how much of the rest is reachable.
 
 **Where the covering value stops it, which is not known.** `T-018`’s own `next_rung`
 records that two independent site sets at `3.82` stop at a restricted optimum of exactly
@@ -212,20 +214,21 @@ a certificate that has stopped proving infeasibility has not stopped constrainin
 packings.
 
 **Lemma 1 (tight cores).** Let `μ` be a `D4`-symmetric finite atom measure on `[0, L]²`
-satisfying `C2`, `C3` and `C4` for `(B, net)`, with total mass `M`. Let `Q₁, …, Q₁₁` be
-closed unit squares in `[0, L]²` with pairwise disjoint interiors.
-Then there are closed `B`-squares `P_i ⊂ int Q_i`, each at a net direction or a `D4`
-image of one, pairwise disjoint, with `μ(P_i) ≥ 1` for every `i`; and consequently
+satisfying `Condition 3`, `Condition 4` and `Condition 5` for `(B, net)`, with total
+mass `M`. Let `Q₁, …, Q₁₁` be closed unit squares in `[0, L]²` with pairwise disjoint
+interiors. Then there are closed `B`-squares `P_i ⊂ int Q_i`, each at a net direction or
+a `D4` image of one, pairwise disjoint, with `μ(P_i) ≥ 1` for every `i`; and
+consequently
 
 - `M ≥ 11`;
 - `μ(P_i) ≤ 1 + (M − 11)` for every `i`; and
 - `μ([0, L]² ∖ ⋃ P_i) ≤ M − 11`.
 
-*Proof.* `C3` places a `B`-square at a net direction, or a `D4` image of one, inside
-each unit square’s interior about its centre; the interiors are disjoint, so the cores
-are disjoint as closed sets.
-`C4` with `C0` gives each core mass at least `1` (a core at an image direction covers
-the mass its reflected image covers).
+*Proof.* `Condition 4` places a `B`-square at a net direction, or a `D4` image of one,
+inside each unit square’s interior about its centre; the interiors are disjoint, so the
+cores are disjoint as closed sets.
+`Condition 5` with `Condition 1` gives each core mass at least `1` (a core at an image
+direction covers the mass its reflected image covers).
 Then `11 ≤ Σ μ(P_i) ≤ M`, and each inequality in the statement is that sum with all but
 one term bounded below by `1`. ∎
 
@@ -279,11 +282,11 @@ the form in which the case analysis would be built, because a measure that is ti
 everywhere constrains nothing.
 
 `μ` speaks about `B`-squares at net directions; a packing consists of unit squares at
-arbitrary angles. Lemma 1 bridges them through `C3`, and the price is that the case
-analysis in Corollary 1a runs over cores rather than over squares: a group of atoms must
-fit in a `B`-square, concentric with its unit square as Lemma 1 constructs it, whose
-enclosing unit square, at some angle within the half-gap of the net direction, is what
-must be disjoint from its neighbours.
+arbitrary angles. Lemma 1 bridges them through `Condition 4`, and the price is that the
+case analysis in Corollary 1a runs over cores rather than over squares: a group of atoms
+must fit in a `B`-square, concentric with its unit square as Lemma 1 constructs it,
+whose enclosing unit square, at some angle within the half-gap of the net direction, is
+what must be disjoint from its neighbours.
 Disjointness of the unit squares is strictly stronger than disjointness of the cores,
 and it is the stronger condition the exact-cover search must use; eleven disjoint cores
 alone would only say that eleven `B`-squares fit, which at `3.82` would give
@@ -300,7 +303,8 @@ the unconditional argument.
 
 **Lemma 2 (conditional certificate).** Let `b` be a set of placements of one unit square
 (a box in `(x, y, θ)`), and let `I_b = ⋂_{Q ∈ b} Q` be the region every placement in the
-box occupies. Take a net that spans a full quarter turn and satisfies `C3` — its
+box occupies.
+Take a net that spans a full quarter turn and satisfies `Condition 4` — its
 half-gaps are those of the eighth-turn net, so the same `B` serves — and let `Λ_b` be
 the admissible `B`-square placements at net directions that are disjoint from `I_b`.
 Suppose a finite atom measure `μ` of total mass `M < 11` gives mass at least `1` to
@@ -320,9 +324,9 @@ is disjoint from `I_b` by construction.
 Putting mass exactly `1` inside `I_b` and asking the rest to weigh below `10` outside it
 is one feasible point of that program, not its optimum.
 The net must span a quarter turn rather than an eighth, because a box breaks the
-container’s `D4` symmetry and `C0` can no longer fold angles onto the shorter arc; the
-interval route already decides on a doubled net, so this costs a factor of two in
-directions and no new idea.
+container’s `D4` symmetry and `Condition 1` can no longer fold angles onto the shorter
+arc; the interval route already decides on a doubled net, so this costs a factor of two
+in directions and no new idea.
 
 The same count boxes several squares at once.
 For boxes `b₁, …, b_k` with cores `I₁, …, I_k`, require mass at least `1` on every
@@ -335,7 +339,7 @@ the fifth measurement below would have to build.
 **Lemma 3 (class certificate).** Partition the net directions into `D4`-closed classes
 `Θ₀` and `Θ₁`, each a union of the net’s half-gap cells, the arcs bounded by the
 midpoints between consecutive net angles; a square belongs to the class of the net
-direction `C3` assigns it, the one whose cell contains its angle.
+direction `Condition 4` assigns it, the one whose cell contains its angle.
 Fix counts `n₀ + n₁ = 11`. Suppose weights `w₀, w₁ ≥ 0` and a `D4`-symmetric measure `μ`
 of total mass `M` satisfy: every admissible core at a direction in `Θ₀` has mass at
 least `w₀`, every admissible core at a direction in `Θ₁` has mass at least `w₁`, and
@@ -354,14 +358,14 @@ wrongly.
 The constraints are linear in `(μ, w₀, w₁)` and the objective `M − n₀ w₀ − n₁ w₁` is
 homogeneous, so the class certificate is one linear program per composition, decided by
 the sign of its optimum under a normalisation.
-It is the two-threshold form of `C4`, and it prices what everyone in this subject knows
-informally — a tilted square costs more room than an aligned one — as a dual variable
-instead of a lemma.
-Stromquist’s Theorem 3 is a class certificate with one more step: the
-class is `{0°, 45°}`, the strengthened Lemmas 7 and 8 of his paper are the covering
-condition restricted to that class, and his twelve points — one more than eleven, so the
-count alone proves nothing — are closed by a step of Corollary 1a’s kind, a box forced
-to swallow three of them at once.
+It is the two-threshold form of `Condition 5`, and it prices what everyone in this
+subject knows informally — a tilted square costs more room than an aligned one — as a
+dual variable instead of a lemma.
+Stromquist’s Theorem 3 is a class certificate with one more step: the class is
+`{0°, 45°}`, the strengthened Lemmas 7 and 8 of his paper are the covering condition
+restricted to that class, and his twelve points — one more than eleven, so the count
+alone proves nothing — are closed by a step of Corollary 1a’s kind, a box forced to
+swallow three of them at once.
 Its bound, `2 + (4/3)√2 ≈ 3.885618`, sits above Trump’s value, which is what settles
 Gardner’s conjecture and also what shows the shape is the right one: the class that does
 not contain Trump’s packing is closed above `U` by a certificate conditioned on the
@@ -607,8 +611,8 @@ to reach highest, and every other composition is a certificate conditioned on ho
 squares tilt. The last sliver is where `BC-193` of
 [agenda-019](../agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md) asks
 what a method that escapes the ceiling would look like, and Lemma 1 suggests the answer:
-drop the shrink, put `B = 1`, and decide `C4` over the continuum of directions by an
-interval branch and bound in the three parameters of one placement — the decision
+drop the shrink, put `B = 1`, and decide `Condition 5` over the continuum of directions
+by an interval branch and bound in the three parameters of one placement — the decision
 problem the `n = 11` report already lists as “well inside the reach of interval
 branch-and-bound.” Two things change with the shrink gone.
 Closed unit squares with disjoint interiors share edges, so the cores of Lemma 1 are no
