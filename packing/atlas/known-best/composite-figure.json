@@ -27,6 +27,16 @@
           "minimal_polynomial": "s - 1 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(1) ≥ 1",
+          "evidence": [
+            "E-basic-area-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "1"
+        },
         "n": 1,
         "optimality": {
           "provenance": "frontier",
@@ -66,6 +76,16 @@
           "minimal_polynomial": "s - 2 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(2) ≥ 2",
+          "evidence": [
+            "E-side2-center-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "2"
+        },
         "n": 2,
         "optimality": {
           "provenance": "frontier",
@@ -104,6 +124,16 @@
           "exact_form": "2",
           "minimal_polynomial": "s - 2 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(3) ≥ 2",
+          "evidence": [
+            "E-side2-center-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "2"
         },
         "n": 3,
         "optimality": {
@@ -149,6 +179,16 @@
           "minimal_polynomial": "s - 2 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(4) ≥ 2",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "2"
+        },
         "n": 4,
         "optimality": {
           "provenance": "frontier",
@@ -193,6 +233,16 @@
           "minimal_polynomial": "2*s**2 - 8*s + 7 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(5) ≥ 2.707106",
+          "evidence": [
+            "E-n005-gobel-proof"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "2.70710678118654752440084436210485"
+        },
         "n": 5,
         "optimality": {
           "provenance": "frontier",
@@ -231,6 +281,16 @@
           "exact_form": "3",
           "minimal_polynomial": "s - 3 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(6) ≥ 3",
+          "evidence": [
+            "E-n006-kearney-shiu-proof"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "3"
         },
         "n": 6,
         "optimality": {
@@ -271,6 +331,16 @@
           "minimal_polynomial": "s - 3 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(7) ≥ 3",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "3"
+        },
         "n": 7,
         "optimality": {
           "provenance": "frontier",
@@ -309,6 +379,16 @@
           "exact_form": "3",
           "minimal_polynomial": "s - 3 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(8) ≥ 3",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "3"
         },
         "n": 8,
         "optimality": {
@@ -354,6 +434,16 @@
           "minimal_polynomial": "s - 3 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(9) ≥ 3",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "3"
+        },
         "n": 9,
         "optimality": {
           "provenance": "frontier",
@@ -392,6 +482,16 @@
           "exact_form": "3 + (1/2)sqrt(2)",
           "minimal_polynomial": "2*s**2 - 12*s + 17 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(10) ≥ 3.707106",
+          "evidence": [
+            "E-n010-stromquist-proof"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "3.70710678118654752440084436210485"
         },
         "n": 10,
         "optimality": {
@@ -432,6 +532,17 @@
           "minimal_polynomial": "s^8 - 20s^7 + 178s^6 - 842s^5 + 1923s^4 - 496s^3 - 6754s^2 + 12420s - 6865 = 0",
           "state": "minimal-polynomial"
         },
+        "lower": {
+          "display": "s(11) ≥ 3.81",
+          "evidence": [
+            "E-fractional-interval-decision",
+            "E-n011-fractional-certificate"
+          ],
+          "first_proved_here": true,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "3.81"
+        },
         "n": 11,
         "optimality": {
           "provenance": "frontier",
@@ -465,6 +576,17 @@
           "exact_form": "4",
           "minimal_polynomial": "s - 4 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(12) ≥ 3.96",
+          "evidence": [
+            "E-fractional-interval-decision",
+            "E-n012-fractional-certificate"
+          ],
+          "first_proved_here": true,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "3.96"
         },
         "n": 12,
         "optimality": {
@@ -505,6 +627,16 @@
           "minimal_polynomial": "s - 4 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(13) ≥ 4",
+          "evidence": [
+            "E-bentz-2010-proof"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "4"
+        },
         "n": 13,
         "optimality": {
           "provenance": "frontier",
@@ -544,6 +676,16 @@
           "minimal_polynomial": "s - 4 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(14) ≥ 4",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "4"
+        },
         "n": 14,
         "optimality": {
           "provenance": "frontier",
@@ -582,6 +724,16 @@
           "exact_form": "4",
           "minimal_polynomial": "s - 4 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(15) ≥ 4",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "4"
         },
         "n": 15,
         "optimality": {
@@ -627,6 +779,16 @@
           "minimal_polynomial": "s - 4 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(16) ≥ 4",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "4"
+        },
         "n": 16,
         "optimality": {
           "provenance": "frontier",
@@ -660,6 +822,17 @@
           "exact_form": null,
           "minimal_polynomial": "4775s^{18}-190430s^{17}+3501307s^{16}-39318012s^{15}+300416928s^{14}-1640654808s^{13}+6502333062s^{12}-18310153596s^{11}+32970034584s^{10}-18522084588s^9-93528282146s^8+350268230564s^7-662986732745s^6+808819596154s^5-660388959899s^4+358189195800s^3-126167814419s^2+26662976550s-2631254953=0",
           "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(17) ≥ 4.59",
+          "evidence": [
+            "E-fractional-interval-decision",
+            "E-n017-fractional-certificate"
+          ],
+          "first_proved_here": true,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "4.59"
         },
         "n": 17,
         "optimality": {
@@ -695,6 +868,19 @@
           "minimal_polynomial": "2*s**2 - 14*s + 21 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(18) ≥ 4.59",
+          "evidence": [
+            "E-fractional-interval-decision",
+            "E-n017-fractional-certificate",
+            "E-n017-massaccesi-h052-agreement",
+            "E-n017-massaccesi-source-replay"
+          ],
+          "first_proved_here": true,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "4.59"
+        },
         "n": 18,
         "optimality": {
           "provenance": "frontier",
@@ -728,6 +914,17 @@
           "exact_form": "3 + (4/3)sqrt(2)",
           "minimal_polynomial": "9*s**2 - 54*s + 49 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(19) ≥ 4.8",
+          "evidence": [
+            "E-fractional-interval-decision",
+            "E-n020-fractional-certificate"
+          ],
+          "first_proved_here": true,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "4.8"
         },
         "n": 19,
         "optimality": {
@@ -763,6 +960,17 @@
           "minimal_polynomial": "s - 5 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(20) ≥ 4.8",
+          "evidence": [
+            "E-fractional-interval-decision",
+            "E-n020-fractional-certificate"
+          ],
+          "first_proved_here": true,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "4.8"
+        },
         "n": 20,
         "optimality": {
           "provenance": "frontier",
@@ -796,6 +1004,17 @@
           "exact_form": "5",
           "minimal_polynomial": "s - 5 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(21) ≥ 4.8",
+          "evidence": [
+            "E-fractional-interval-decision",
+            "E-n020-fractional-certificate"
+          ],
+          "first_proved_here": true,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "4.8"
         },
         "n": 21,
         "optimality": {
@@ -836,6 +1055,16 @@
           "minimal_polynomial": "s - 5 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(22) ≥ 5",
+          "evidence": [
+            "E-bentz-2016-proof"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "5"
+        },
         "n": 22,
         "optimality": {
           "provenance": "frontier",
@@ -875,6 +1104,16 @@
           "minimal_polynomial": "s - 5 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(23) ≥ 5",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "5"
+        },
         "n": 23,
         "optimality": {
           "provenance": "frontier",
@@ -913,6 +1152,16 @@
           "exact_form": "5",
           "minimal_polynomial": "s - 5 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(24) ≥ 5",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "5"
         },
         "n": 24,
         "optimality": {
@@ -958,6 +1207,16 @@
           "minimal_polynomial": "s - 5 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(25) ≥ 5",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "5"
+        },
         "n": 25,
         "optimality": {
           "provenance": "frontier",
@@ -992,6 +1251,16 @@
           "minimal_polynomial": "4*s**2 - 28*s + 31 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(26) ≥ 5.123105",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "5.12310562562"
+        },
         "n": 26,
         "optimality": {
           "provenance": "frontier",
@@ -1025,6 +1294,16 @@
           "exact_form": "5 + (1/2)sqrt(2)",
           "minimal_polynomial": "2*s**2 - 20*s + 49 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(27) ≥ 5.24264",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "5.24264068712"
         },
         "n": 27,
         "optimality": {
@@ -1065,6 +1344,16 @@
           "minimal_polynomial": "s^6-24s^5+212s^4-812s^3+1025s^2+882s-1615=0",
           "state": "minimal-polynomial"
         },
+        "lower": {
+          "display": "s(28) ≥ 5.358898",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "5.35889894354"
+        },
         "n": 28,
         "optimality": {
           "provenance": "frontier",
@@ -1098,6 +1387,16 @@
           "exact_form": null,
           "minimal_polynomial": null,
           "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(29) ≥ 5.472135",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "5.472135955"
         },
         "n": 29,
         "optimality": {
@@ -1133,6 +1432,16 @@
           "minimal_polynomial": "s - 6 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(30) ≥ 5.582575",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "5.58257569496"
+        },
         "n": 30,
         "optimality": {
           "provenance": "frontier",
@@ -1167,6 +1476,16 @@
           "minimal_polynomial": "s - 6 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(31) ≥ 5.690415",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "5.69041575982"
+        },
         "n": 31,
         "optimality": {
           "provenance": "frontier",
@@ -1200,6 +1519,16 @@
           "exact_form": "6",
           "minimal_polynomial": "s - 6 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(32) ≥ 5.795831",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "5.79583152331"
         },
         "n": 32,
         "optimality": {
@@ -1240,6 +1569,16 @@
           "minimal_polynomial": "s - 6 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(33) ≥ 6",
+          "evidence": [
+            "E-bentz-2016-proof"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "6"
+        },
         "n": 33,
         "optimality": {
           "provenance": "frontier",
@@ -1279,6 +1618,16 @@
           "minimal_polynomial": "s - 6 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(34) ≥ 6",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "6"
+        },
         "n": 34,
         "optimality": {
           "provenance": "frontier",
@@ -1317,6 +1666,16 @@
           "exact_form": "6",
           "minimal_polynomial": "s - 6 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(35) ≥ 6",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "6"
         },
         "n": 35,
         "optimality": {
@@ -1362,6 +1721,16 @@
           "minimal_polynomial": "s - 6 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(36) ≥ 6",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "6"
+        },
         "n": 36,
         "optimality": {
           "provenance": "frontier",
@@ -1395,6 +1764,16 @@
           "exact_form": null,
           "minimal_polynomial": "36s^8-2496s^7+59768s^6-733760s^5+5289248s^4-23462672s^3+63458276s^2-96673872s+64068561=0",
           "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(37) ≥ 6.099019",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "6.09901951359"
         },
         "n": 37,
         "optimality": {
@@ -1430,6 +1809,16 @@
           "minimal_polynomial": "2*s**2 - 24*s + 71 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(38) ≥ 6.196152",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "6.19615242271"
+        },
         "n": 38,
         "optimality": {
           "provenance": "frontier",
@@ -1463,6 +1852,16 @@
           "exact_form": null,
           "minimal_polynomial": "9s^5-171s^4+999s^3-1959s^2+1636s+166=0",
           "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(39) ≥ 6.291502",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "6.29150262213"
         },
         "n": 39,
         "optimality": {
@@ -1503,6 +1902,16 @@
           "minimal_polynomial": "s**2 - 8*s + 8 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(40) ≥ 6.385164",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "6.38516480713"
+        },
         "n": 40,
         "optimality": {
           "provenance": "frontier",
@@ -1536,6 +1945,16 @@
           "exact_form": null,
           "minimal_polynomial": "144s^{42}-33248s^{41}+3740531s^{40}-273229120s^{39}+14568177368s^{38}-604345329616s^{37}+20303247278518s^{36}-567715628580628s^{35}+13476130642163772s^{34}-275622556171657148s^{33}+4913118839607229315s^{32}-77021965442580593792s^{31}+1069597207525632250760s^{30}-13234280063158548374864s^{29}+146588403144234109714492s^{28}-1459056537531761947694412s^{27}+13090219490685085049164304s^{26}-106115059640167069135194108s^{25}+778709778173545540562913112s^{24}-5180160724110239826615572336s^{23}+31267085211757278545052994144s^{22}-171331300125735569491450805184s^{21}+852412555299622931388971786184s^{20}-3849639590878015114188275848896s^{19}+15771592794879254264477226832440s^{18}-58556476540137831140983424890112s^{17}+196742347065286547712609208667628s^{16}-597075318553361988026330293830592s^{15}+1632807555219691500831155576662224s^{14}-4011703707846363075271797958908992s^{13}+8823126218415607049547609565313808s^{12}-17292499393880618294971765830702496s^{11}+30033784585675389426408059928238624s^{10}-45904080196423917967770013765165584s^9+61200148145342575539111090507985440s^8-70370773645277985938951580858638528s^7+68756165329665893470887878785349152s^6-55949600498940958320310297578555360s^5+36867848125763978702951438802849616s^4-18873332426700882570902855047275200s^3+7023595398126017089078028623797120s^2-1682258751137636203725622554061120s+192930128676231207430057837613968=0",
           "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(41) ≥ 6.477225",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "6.47722557505"
         },
         "n": 41,
         "optimality": {
@@ -1571,6 +1990,16 @@
           "minimal_polynomial": "s - 7 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(42) ≥ 6.567764",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "6.56776436283"
+        },
         "n": 42,
         "optimality": {
           "provenance": "frontier",
@@ -1604,6 +2033,16 @@
           "exact_form": "7",
           "minimal_polynomial": "s - 7 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(43) ≥ 6.656854",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "6.65685424949"
         },
         "n": 43,
         "optimality": {
@@ -1639,6 +2078,16 @@
           "minimal_polynomial": "s - 7 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(44) ≥ 6.744562",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "6.74456264654"
+        },
         "n": 44,
         "optimality": {
           "provenance": "frontier",
@@ -1672,6 +2121,16 @@
           "exact_form": "7",
           "minimal_polynomial": "s - 7 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(45) ≥ 6.830951",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "6.83095189485"
         },
         "n": 45,
         "optimality": {
@@ -1712,6 +2171,17 @@
           "minimal_polynomial": "s - 7 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(46) ≥ 7",
+          "evidence": [
+            "E-bentz-2010-proof",
+            "E-bentz46-theorem8-audit"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "7"
+        },
         "n": 46,
         "optimality": {
           "provenance": "frontier",
@@ -1751,6 +2221,16 @@
           "minimal_polynomial": "s - 7 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(47) ≥ 7",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "7"
+        },
         "n": 47,
         "optimality": {
           "provenance": "frontier",
@@ -1789,6 +2269,16 @@
           "exact_form": "7",
           "minimal_polynomial": "s - 7 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(48) ≥ 7",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "7"
         },
         "n": 48,
         "optimality": {
@@ -1834,6 +2324,16 @@
           "minimal_polynomial": "s - 7 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(49) ≥ 7",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "7"
+        },
         "n": 49,
         "optimality": {
           "provenance": "frontier",
@@ -1867,6 +2367,16 @@
           "exact_form": "7 + (4/7)",
           "minimal_polynomial": "7*s - 53 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(50) ≥ 7.082762",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "7.0827625303"
         },
         "n": 50,
         "optimality": {
@@ -1902,6 +2412,16 @@
           "minimal_polynomial": "s^{12}-52s^{11}+1168s^{10}-14808s^9+116250s^8-584196s^7+1885642s^6-3878332s^5+5185145s^4-4669592s^3-1070690s^2+14600744s-1119939=0",
           "state": "minimal-polynomial"
         },
+        "lower": {
+          "display": "s(51) ≥ 7.164414",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "7.16441400297"
+        },
         "n": 51,
         "optimality": {
           "provenance": "frontier",
@@ -1935,6 +2455,16 @@
           "exact_form": "7 + (1/2)sqrt(2)",
           "minimal_polynomial": "2*s**2 - 28*s + 97 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(52) ≥ 7.244997",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "7.2449979984"
         },
         "n": 52,
         "optimality": {
@@ -1970,6 +2500,16 @@
           "minimal_polynomial": "2*s**2 - 26*s + 81 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(53) ≥ 7.324555",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "7.32455532034"
+        },
         "n": 53,
         "optimality": {
           "provenance": "frontier",
@@ -2003,6 +2543,16 @@
           "exact_form": "7 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))",
           "minimal_polynomial": "4*s**4 - 112*s**3 + 1164*s**2 - 5304*s + 8897 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(54) ≥ 7.403124",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "7.40312423743"
         },
         "n": 54,
         "optimality": {
@@ -2038,6 +2588,16 @@
           "minimal_polynomial": null,
           "state": "numeric-only"
         },
+        "lower": {
+          "display": "s(55) ≥ 7.48074",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "7.48074069841"
+        },
         "n": 55,
         "optimality": {
           "provenance": "frontier",
@@ -2071,6 +2631,16 @@
           "exact_form": "8",
           "minimal_polynomial": "s - 8 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(56) ≥ 7.557438",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "7.5574385243"
         },
         "n": 56,
         "optimality": {
@@ -2106,6 +2676,16 @@
           "minimal_polynomial": "s - 8 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(57) ≥ 7.633249",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "7.63324958071"
+        },
         "n": 57,
         "optimality": {
           "provenance": "frontier",
@@ -2139,6 +2719,16 @@
           "exact_form": "8",
           "minimal_polynomial": "s - 8 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(58) ≥ 7.708203",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "7.7082039325"
         },
         "n": 58,
         "optimality": {
@@ -2174,6 +2764,16 @@
           "minimal_polynomial": "s - 8 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(59) ≥ 7.782329",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "7.78232998313"
+        },
         "n": 59,
         "optimality": {
           "provenance": "frontier",
@@ -2208,6 +2808,16 @@
           "minimal_polynomial": "s - 8 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(60) ≥ 7.855654",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "7.8556546004"
+        },
         "n": 60,
         "optimality": {
           "provenance": "frontier",
@@ -2241,6 +2851,16 @@
           "exact_form": "8",
           "minimal_polynomial": "s - 8 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(61) ≥ 7.928203",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "7.92820323028"
         },
         "n": 61,
         "optimality": {
@@ -2281,6 +2901,16 @@
           "minimal_polynomial": "s - 8 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(62) ≥ 8",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "8"
+        },
         "n": 62,
         "optimality": {
           "provenance": "frontier",
@@ -2319,6 +2949,16 @@
           "exact_form": "8",
           "minimal_polynomial": "s - 8 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(63) ≥ 8",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "8"
         },
         "n": 63,
         "optimality": {
@@ -2364,6 +3004,16 @@
           "minimal_polynomial": "s - 8 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(64) ≥ 8",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "8"
+        },
         "n": 64,
         "optimality": {
           "provenance": "frontier",
@@ -2397,6 +3047,16 @@
           "exact_form": "5 + (5/2)sqrt(2)",
           "minimal_polynomial": "2*s**2 - 20*s + 25 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(65) ≥ 8.071067",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.07106781187"
         },
         "n": 65,
         "optimality": {
@@ -2432,6 +3092,16 @@
           "minimal_polynomial": "s**2 - 6*s - 23 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(66) ≥ 8.141428",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.14142842854"
+        },
         "n": 66,
         "optimality": {
           "provenance": "frontier",
@@ -2465,6 +3135,16 @@
           "exact_form": "8 + (1/2)sqrt(2)",
           "minimal_polynomial": "2*s**2 - 32*s + 127 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(67) ≥ 8.211102",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.21110255093"
         },
         "n": 67,
         "optimality": {
@@ -2500,6 +3180,16 @@
           "minimal_polynomial": null,
           "state": "numeric-only"
         },
+        "lower": {
+          "display": "s(68) ≥ 8.280109",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.28010988928"
+        },
         "n": 68,
         "optimality": {
           "provenance": "frontier",
@@ -2533,6 +3223,16 @@
           "exact_form": null,
           "minimal_polynomial": null,
           "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(69) ≥ 8.348469",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.34846922835"
         },
         "n": 69,
         "optimality": {
@@ -2568,6 +3268,16 @@
           "minimal_polynomial": "23s^4-742s^3+8848s^2-45876s+86229=0",
           "state": "minimal-polynomial"
         },
+        "lower": {
+          "display": "s(70) ≥ 8.416198",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.4161984871"
+        },
         "n": 70,
         "optimality": {
           "provenance": "frontier",
@@ -2601,6 +3311,16 @@
           "exact_form": null,
           "minimal_polynomial": null,
           "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(71) ≥ 8.483314",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.48331477355"
         },
         "n": 71,
         "optimality": {
@@ -2636,6 +3356,16 @@
           "minimal_polynomial": "s - 9 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(72) ≥ 8.549834",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.54983443527"
+        },
         "n": 72,
         "optimality": {
           "provenance": "frontier",
@@ -2669,6 +3399,16 @@
           "exact_form": "9",
           "minimal_polynomial": "s - 9 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(73) ≥ 8.615773",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.61577310586"
         },
         "n": 73,
         "optimality": {
@@ -2704,6 +3444,16 @@
           "minimal_polynomial": "s - 9 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(74) ≥ 8.681145",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.68114574787"
+        },
         "n": 74,
         "optimality": {
           "provenance": "frontier",
@@ -2737,6 +3487,16 @@
           "exact_form": "9",
           "minimal_polynomial": "s - 9 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(75) ≥ 8.745966",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.74596669241"
         },
         "n": 75,
         "optimality": {
@@ -2772,6 +3532,16 @@
           "minimal_polynomial": "s - 9 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(76) ≥ 8.810249",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.81024967591"
+        },
         "n": 76,
         "optimality": {
           "provenance": "frontier",
@@ -2806,6 +3576,16 @@
           "minimal_polynomial": "s - 9 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(77) ≥ 8.874007",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.87400787401"
+        },
         "n": 77,
         "optimality": {
           "provenance": "frontier",
@@ -2839,6 +3619,16 @@
           "exact_form": "9",
           "minimal_polynomial": "s - 9 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(78) ≥ 8.937253",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "8.93725393319"
         },
         "n": 78,
         "optimality": {
@@ -2879,6 +3669,16 @@
           "minimal_polynomial": "s - 9 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(79) ≥ 9",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "9"
+        },
         "n": 79,
         "optimality": {
           "provenance": "frontier",
@@ -2917,6 +3717,16 @@
           "exact_form": "9",
           "minimal_polynomial": "s - 9 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(80) ≥ 9",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "9"
         },
         "n": 80,
         "optimality": {
@@ -2962,6 +3772,16 @@
           "minimal_polynomial": "s - 9 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(81) ≥ 9",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "9"
+        },
         "n": 81,
         "optimality": {
           "provenance": "frontier",
@@ -2995,6 +3815,16 @@
           "exact_form": "6 + (5/2)sqrt(2)",
           "minimal_polynomial": "2*s**2 - 24*s + 47 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(82) ≥ 9.062257",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.0622577483"
         },
         "n": 82,
         "optimality": {
@@ -3030,6 +3860,16 @@
           "minimal_polynomial": "46438209s^{24}+1718447880s^{23}-1304818741864s^{22}+154362940868008s^{21}-10223870917986092s^{20}+463012769729234068s^{19}-15608677475881443482s^{18}+410530364971106359132s^{17}-8675319117762080311978s^{16}+150196459602374087471728s^{15}-2158879193002672091253360s^{14}+25993038455067669296355532s^{13}-263613888105247221344935027s^{12}+2258335015809616506745502008s^{11}-16347943921555337654669478150s^{10}+99786776593815833271369617220s^9-511154425074511891757096094175s^8+2180187656593439512672814134216s^7-7652314463979073976449593048904s^6+21727853135387976484209118127392s^5-48671720700899577518293563957136s^4+82801528406446840092722047620736s^3-100540002112755895115349929950336s^2+77621257841393908308227797286912s-28634116465193128516311336597248=0",
           "state": "minimal-polynomial"
         },
+        "lower": {
+          "display": "s(83) ≥ 9.124038",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.12403840464"
+        },
         "n": 83,
         "optimality": {
           "provenance": "frontier",
@@ -3063,6 +3903,16 @@
           "exact_form": "9 + (1/2)sqrt(2)",
           "minimal_polynomial": "2*s**2 - 36*s + 161 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(84) ≥ 9.185352",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.18535277187"
         },
         "n": 84,
         "optimality": {
@@ -3098,6 +3948,16 @@
           "minimal_polynomial": "4*s**2 - 44*s + 49 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(85) ≥ 9.246211",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.24621125124"
+        },
         "n": 85,
         "optimality": {
           "provenance": "frontier",
@@ -3131,6 +3991,16 @@
           "exact_form": "(17/2) + (1/2)sqrt(7)",
           "minimal_polynomial": "2*s**2 - 34*s + 141 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(86) ≥ 9.306623",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.30662386292"
         },
         "n": 86,
         "optimality": {
@@ -3166,6 +4036,16 @@
           "minimal_polynomial": "629407744s^{44}-222450679808s^{43}+38325385756672s^{42}-4288660082065408s^{41}+350399070882492416s^{40}-22278553803273224192s^{39}+1147211537906515146752s^{38}-49165134066758334425088s^{37}+1788289659043280951068608s^{36}-56019383059428524897963904s^{35}+1528333582392710799260183056s^{34}-36630930585616880256564390736s^{33}+776543722002840046363087727297s^{32}-14636706341423531247516707219912s^{31}+246257253722069243863014484299360s^{30}-3708577084615935587358116609301672s^{29}+50074372636267901037924496964125186s^{28}-606479613834953151228303026322056904s^{27}+6582752938907446459101615245660789892s^{26}-63854390288109107749984304630348881800s^{25}+550526226273592526694018724167940975017s^{24}-4175960161221920130654884897696082820472s^{23}+27333308361495923310409348740175473961584s^{22}-148034863695064180910459529146184056115272s^{21}+589148297042380492962295030591016626388382s^{20}-802163371353907808165482957048549332378608s^{19}-13170004747477877616293633845629891862121520s^{18}+167392797210322735047434221678453545578017040s^{17}-1289394300288384411131628488173364706102979582s^{16}+7787489258551633023583289334261547248712408216s^{15}-39385778676485241094858686353246027501471904572s^{14}+170965915920626557796308089870520546518118278944s^{13}-643154540172295005723535558458606455031058629500s^{12}+2101724893624280757011728452832803445528481662064s^{11}-5952381674143195979828863351096699278368526615456s^{10}+14521989109696597926922222011586158834006883331752s^9-30220186517608350885252195687799573775025255492983s^8+52871604435569645714797351939274760286735693270688s^7-76162701057186797152957613136211362895325167372620s^6+87583595303336820271204366145801190135485625910672s^5-76547308527338366706545567730043731458801541686452s^4+46512363388633322446129276907281520687047667820792s^3-15838102486745813882030359867355235545830428100484s^2+479096262707743168168387643797274914963482844224s+1204779998286697546929705082841769576290141607076=0",
           "state": "minimal-polynomial"
         },
+        "lower": {
+          "display": "s(87) ≥ 9.3666",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.36660026534"
+        },
         "n": 87,
         "optimality": {
           "provenance": "frontier",
@@ -3199,6 +4079,16 @@
           "exact_form": null,
           "minimal_polynomial": "254016s^{20}-43279488s^{19}+3506260608s^{18}-179642577984s^{17}+6530192527760s^{16}-179088304328704s^{15}+3846118270819200s^{14}-66261902137415296s^{13}+930479746642904384s^{12}-10759858027891736896s^{11}+103070340120029179008s^{10}-819709665351861223904s^9+5405590814889373243192s^8-29412949608198679086720s^7+130831566348158107359392s^6-468664620024162429231904s^5+1321046745485882223459068s^4-2825402176181244872057384s^3+4315682289270565775115128s^2-4199847844458434080013540s+1959329723251932809573425=0",
           "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(88) ≥ 9.426149",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.42614977318"
         },
         "n": 88,
         "optimality": {
@@ -3234,6 +4124,16 @@
           "minimal_polynomial": "2*s**2 - 20*s + 1 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(89) ≥ 9.485281",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.48528137424"
+        },
         "n": 89,
         "optimality": {
           "provenance": "frontier",
@@ -3267,6 +4167,16 @@
           "exact_form": "10",
           "minimal_polynomial": "s - 10 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(90) ≥ 9.544003",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.54400374532"
         },
         "n": 90,
         "optimality": {
@@ -3302,6 +4212,16 @@
           "minimal_polynomial": "s - 10 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(91) ≥ 9.602325",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.60232526704"
+        },
         "n": 91,
         "optimality": {
           "provenance": "frontier",
@@ -3335,6 +4255,16 @@
           "exact_form": "10",
           "minimal_polynomial": "s - 10 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(92) ≥ 9.660254",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.66025403784"
         },
         "n": 92,
         "optimality": {
@@ -3370,6 +4300,16 @@
           "minimal_polynomial": "s - 10 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(93) ≥ 9.717797",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.71779788708"
+        },
         "n": 93,
         "optimality": {
           "provenance": "frontier",
@@ -3403,6 +4343,16 @@
           "exact_form": "10",
           "minimal_polynomial": "s - 10 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(94) ≥ 9.774964",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.77496438739"
         },
         "n": 94,
         "optimality": {
@@ -3438,6 +4388,16 @@
           "minimal_polynomial": "s - 10 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(95) ≥ 9.83176",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.83176086633"
+        },
         "n": 95,
         "optimality": {
           "provenance": "frontier",
@@ -3472,6 +4432,16 @@
           "minimal_polynomial": "s - 10 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(96) ≥ 9.888194",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.88819441732"
+        },
         "n": 96,
         "optimality": {
           "provenance": "frontier",
@@ -3505,6 +4475,16 @@
           "exact_form": "10",
           "minimal_polynomial": "s - 10 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(97) ≥ 9.944271",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "9.94427191"
         },
         "n": 97,
         "optimality": {
@@ -3545,6 +4525,16 @@
           "minimal_polynomial": "s - 10 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(98) ≥ 10",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "10"
+        },
         "n": 98,
         "optimality": {
           "provenance": "frontier",
@@ -3583,6 +4573,16 @@
           "exact_form": "10",
           "minimal_polynomial": "s - 10 = 0",
           "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(99) ≥ 10",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "10"
         },
         "n": 99,
         "optimality": {
@@ -3628,6 +4628,16 @@
           "minimal_polynomial": "s - 10 = 0",
           "state": "closed-form"
         },
+        "lower": {
+          "display": "s(100) ≥ 10",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "10"
+        },
         "n": 100,
         "optimality": {
           "provenance": "frontier",
@@ -3664,6 +4674,7 @@
       "degree_known": 95,
       "degree_recorded_upstream": 11,
       "exact_value_known": 95,
+      "lower_bound_first_proved_here": 7,
       "only_known_numerically": 5,
       "proved_optimal": 35,
       "rigidity_catalogue_annotated": 2,

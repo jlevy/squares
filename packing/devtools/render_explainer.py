@@ -44,6 +44,7 @@ from typing import TypedDict
 
 from strif import atomic_output_file
 
+from devtools.build_composite_figure_data import load_record as load_figure_record
 from devtools.measure_net_coarsening import largest_admissible_side
 from sqpack.fractional.certificate import (
     Certificate,
@@ -922,6 +923,15 @@ def number_line_marks(facts: list[Facts], headline: Facts) -> str:
     return "\n    ".join(marks)
 
 
+def starred_lower_bounds() -> int:
+    """How many atlas cells carry a lower bound this project proved.
+
+    The composite counts them in its own legend from the figure record; the caption
+    beside the image reads the same total, so the two cannot disagree.
+    """
+    return int(load_figure_record()["totals"]["lower_bound_first_proved_here"])
+
+
 def registered_results() -> int:
     """How many results the frontier register holds, counted rather than typed.
 
@@ -1083,6 +1093,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "DEFAULT_CERT_URL": repo_file(default.source),
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "N_RESULTS": str(registered_results()),
+        "N_STARRED": str(starred_lower_bounds()),
         "PRIOR_YEAR": str(PRIOR_YEAR),
         **bound_substitutions(),
         "PRIOR_SOURCE": PRIOR_SOURCE,

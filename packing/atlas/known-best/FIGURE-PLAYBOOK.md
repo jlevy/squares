@@ -78,6 +78,8 @@ Facts about the mathematics live in `frontier/n-NNN.md`.
 | --- | --- | --- |
 | `s(n) = …` vs `s(n) ≤ …` | `packing.status` (`proved` / `open`) | 35 proved; equality only for those |
 | Side value | `reported_upper_bound.value` | Matches the witness side to its stated precision |
+| `s(n) ≥ …` second line | `verified_lower_bound.value`, shown where `status` is `open` | 65 lines; cut off rather than rounded, so the printed bound stays true |
+| ★ lower bound first proved here | `verified_lower_bound.evidence` cites first-party evidence the register scores as novel | 7 cases: `n = 11, 12, 17, 18, 19, 20, 21`; drawn as a polygon, since no figure font carries a star |
 | `=` exact value known | `exact_form`, else `minimal_polynomial` or `algebraic_degree` | Evaluate the form, compare against the witness side |
 | `≈` only known numerically | none of the three present | 5 cases: `n = 29, 55, 68, 69, 71` |
 | `deg d` | `algebraic_degree` | Present for 11 cases; absence is not a claim of low degree |
@@ -209,11 +211,12 @@ for m in build_prospective_atlas build_contact_scaffold_atlas \
 done
 ```
 
-Changing the canvas size means three edits, not one: the constants in
+Changing the canvas size means four edits, not one: the constants in
 `devtools/build_known_best_atlas.py`, the `height` constants in
-[`known-best-atlas.schema.yaml`](known-best-atlas.schema.yaml), and the expected
-dimensions in `tests/test_known_best_atlas.py`. The schema pins the height deliberately,
-so a silent resize fails the gate.
+[`known-best-atlas.schema.yaml`](known-best-atlas.schema.yaml), the expected dimensions
+in `tests/test_known_best_atlas.py`, and the `width` and `height` on the `img` tag in
+`devtools/templates/explainer-article.md`, which reserves the space the page scrolls
+past. The schema pins the height deliberately, so a silent resize fails the gate.
 
 ## Staleness cannot pass quietly
 

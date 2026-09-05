@@ -59,9 +59,11 @@ rotate.[^survey] The value is known for every $n \le 10$. Stromquist settled
 $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 
 <figure>
-  <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.png" alt="The best known packings of one through one hundred unit squares, in a ten-by-ten grid" width="2400" height="2676"></a></div>
+  <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.png" alt="The best known packings of one through one hundred unit squares, in a ten-by-ten grid, each labelled with its best known upper bound and, where the value is still open, the best proved lower bound" width="2400" height="2846"></a></div>
   <figcaption><strong>Figure 1.</strong> The best known packings of 1 through 100 unit squares. Each cell is the tightest
-  arrangement on record for that <span class="tex">n</span>. The full
+  arrangement on record for that <span class="tex">n</span>, with the best known upper bound beneath it and, where
+  <span class="tex">s(n)</span> is not yet settled, the best proved lower bound below that. A crimson star marks a lower
+  bound this project proved: {{N_STARRED}} of the hundred, this page's own among them. The full
   results, with every witness and its provenance, are in
   <a href="https://github.com/jlevy/squares/blob/main/packing/atlas/known-best/">the GitHub repository</a>, and the
   composite is <a href="known-best-1-100.pdf">available as a PDF</a>.</figcaption>

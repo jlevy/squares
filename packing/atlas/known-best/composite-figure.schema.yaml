@@ -44,6 +44,7 @@ properties:
       - only_known_numerically
       - rigidity_established
       - rigidity_catalogue_annotated
+      - lower_bound_first_proved_here
       - degree_known
       - degree_recorded_upstream
       - degree_derived_here
@@ -53,6 +54,7 @@ properties:
       only_known_numerically: {type: integer, minimum: 0, maximum: 100}
       rigidity_established: {type: integer, minimum: 0, maximum: 100}
       rigidity_catalogue_annotated: {type: integer, minimum: 0, maximum: 100}
+      lower_bound_first_proved_here: {type: integer, minimum: 0, maximum: 100}
       degree_known: {type: integer, minimum: 0, maximum: 100}
       degree_recorded_upstream: {type: integer, minimum: 0, maximum: 100}
       degree_derived_here: {type: integer, minimum: 0, maximum: 100}
@@ -67,7 +69,7 @@ $defs:
   entry:
     type: object
     additionalProperties: false
-    required: [n, side, optimality, exactness, rigidity, badges]
+    required: [n, side, lower, optimality, exactness, rigidity, badges]
     properties:
       n: {type: integer, minimum: 1, maximum: 100}
       side:
@@ -81,6 +83,29 @@ $defs:
             enum: [equality, upper-bound]
             description: equality only where optimality.status is proved.
           display: {type: string, minLength: 1}
+          provenance: {$ref: '#/$defs/provenance'}
+      lower:
+        type: object
+        additionalProperties: false
+        description: >-
+          The certified floor under the packing, and whether this project proved it.
+          `display` is cut off rather than rounded, so the printed bound stays true as
+          written; `shown` is false where optimality.status is proved and the equality
+          on the line above already says it.
+        required: [value, shown, display, first_proved_here, evidence, provenance]
+        properties:
+          value: {type: string, minLength: 1}
+          shown: {type: boolean}
+          display: {type: string, minLength: 1}
+          first_proved_here:
+            type: boolean
+            description: >-
+              True where verified_lower_bound cites first-party evidence the register
+              scores as novel. Read from evidence.yaml, never inferred from the numbers.
+          evidence:
+            type: array
+            minItems: 1
+            items: {type: string, minLength: 1}
           provenance: {$ref: '#/$defs/provenance'}
       optimality:
         type: object

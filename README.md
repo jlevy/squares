@@ -17,10 +17,12 @@ Three things here, and each is a reason to look:
   registered before measurement, every claim graded, every defect logged.
   [Details below](#autonomous-research-process).
 
-[![One hundred known-best square packings arranged from n equals one through one hundred.](packing/atlas/known-best/known-best-1-100.png)](packing/atlas/known-best/known-best-1-100.svg)
+[![One hundred known-best square packings arranged from n equals one through one hundred, each labelled with its best known upper bound and, where the value is still open, the best proved lower bound.](packing/atlas/known-best/known-best-1-100.png)](packing/atlas/known-best/known-best-1-100.svg)
 
 *The retained `n = 1…100` atlas, with each packing normalized to its own container and
-labeled by its best known side upper bound.
+labeled by its best known side upper bound and, where `s(n)` is still open, the best
+proved lower bound beneath it.
+A crimson star marks a lower bound proved here.
 Select the image for the zoomable SVG or use the
 [print-ready PDF](packing/atlas/known-best/known-best-1-100.pdf).*
 

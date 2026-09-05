@@ -7,10 +7,7 @@ import argparse
 import copy
 import hashlib
 import json
-import shutil
 import struct
-import subprocess
-import sys
 import time
 import urllib.error
 import urllib.request
@@ -24,6 +21,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as ET
 
+import cairosvg
 import mpmath as mp
 from strif import atomic_output_file
 
@@ -65,7 +63,7 @@ from sqpack.render.numbers import (
     scalar_from_decimal,
     scalar_from_fraction,
 )
-from sqpack.render.style import LABEL_MUTED_COLOR, PAPER_THEME
+from sqpack.render.style import FIRST_PARTY_ACCENT_COLOR, LABEL_MUTED_COLOR, PAPER_THEME
 from sqpack.render.svg import (
     append_metadata,
     append_title_desc,
@@ -101,7 +99,7 @@ GENERATOR = "python -m devtools.build_known_best_atlas"
 USER_AGENT = "thinking-scratchpad-known-best-atlas/1.0"
 
 SUMMARY_WIDTH = 2400
-SUMMARY_HEIGHT = 2676
+SUMMARY_HEIGHT = 2846
 SUMMARY_FIRST_N = 1
 SUMMARY_LAST_N = 100
 SUMMARY_COLUMNS = 10
@@ -110,17 +108,40 @@ SUMMARY_SQUARE_COUNT = sum(range(SUMMARY_FIRST_N, SUMMARY_LAST_N + 1))
 SUMMARY_GRID_LEFT = Decimal(60)
 SUMMARY_GRID_TOP = Decimal(152)
 SUMMARY_COLUMN_PITCH = Decimal(228)
-SUMMARY_ROW_PITCH = Decimal(235)
+SUMMARY_ROW_PITCH = Decimal(252)
 SUMMARY_CARD_WIDTH = Decimal(216)
-SUMMARY_CARD_HEIGHT = Decimal(225)
+SUMMARY_CARD_HEIGHT = Decimal(242)
 SUMMARY_PACKING_SIZE = Decimal(158)
 SUMMARY_PACKING_INSET_X = Decimal(24)
 SUMMARY_PACKING_INSET_Y = Decimal(12)
 SUMMARY_LABEL_BASELINE = Decimal(203)
 SUMMARY_BOUND_BASELINE = Decimal(220)
+# The certified floor, one line of house leading under the upper bound. The row pitch
+# above carries the extra 17px, so the whitespace between a caption and the packing
+# below it is what it always was.
+SUMMARY_LOWER_BASELINE = Decimal(237)
+# A five-pointed star, apex up, drawn as a polygon about its own centre. Not a glyph:
+# Helvetica and its metric substitutes have no star, and the PNG and PDF rasterisers
+# both render U+2605 as a replacement box, which would ship tofu in two of the three
+# formats.
+SUMMARY_STAR_POINTS = (
+    (Decimal(0), Decimal(-6)),
+    (Decimal("1.411"), Decimal("-1.942")),
+    (Decimal("5.706"), Decimal("-1.854")),
+    (Decimal("2.283"), Decimal("0.742")),
+    (Decimal("3.527"), Decimal("4.854")),
+    (Decimal(0), Decimal("2.4")),
+    (Decimal("-3.527"), Decimal("4.854")),
+    (Decimal("-2.283"), Decimal("0.742")),
+    (Decimal("-5.706"), Decimal("-1.854")),
+    (Decimal("-1.411"), Decimal("-1.942")),
+)
+SUMMARY_STAR_INSET = Decimal(6)
+SUMMARY_STAR_RISE = Decimal(4)
+SUMMARY_STAR_TEXT_INSET = Decimal(17)
 SUMMARY_BADGE_SIZE = Decimal(19)
-SUMMARY_EXPLAINER_BASELINE = Decimal(2614)
-SUMMARY_CREDIT_BASELINE = Decimal(2652)
+SUMMARY_EXPLAINER_BASELINE = Decimal(2784)
+SUMMARY_CREDIT_BASELINE = Decimal(2822)
 SUMMARY_EXPLAINER = (
     "s(n) is the side of the smallest square holding n unit squares; "
     "deg is the algebraic degree of that side length"
@@ -150,6 +171,7 @@ _HELVETICA_BOLD_WIDTHS = {
     ":": 333,
     "=": 584,
     "\u2264": 584,
+    "\u2265": 584,
     "\u2248": 584,
     "\u00b0": 400,
     "a": 556,
@@ -232,7 +254,7 @@ SUMMARY_REPOSITORY = "github.com/jlevy/squares"
 # heading block rather than as another footnote.
 SUMMARY_REPOSITORY_SIZE = "26"
 SUMMARY_SUBTITLE_BASELINE = Decimal(126)
-SUMMARY_LEGEND_BASELINE = Decimal(2540)
+SUMMARY_LEGEND_BASELINE = Decimal(2710)
 # Helvetica, with Arial as the metric-compatible stand-in where Helvetica is
 # absent. No webfont is referenced, so nothing is fetched at render time and the
 # figure is the same family everywhere it is opened.
@@ -745,6 +767,54 @@ def _append_summary_card(root: ET.Element, built: BuiltCase, *, spec: RenderSpec
             },
         ).text = f"deg {degree}"
 
+    _append_lower_bound(card, n, left=left, baseline=card_y + SUMMARY_LOWER_BASELINE)
+
+
+def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: Decimal) -> None:
+    """The certified floor, under the best known side.
+
+    A proved case says `s(n) = ...` on the line above and gets nothing here. Where the
+    project proved the floor itself, a star in the figure's one accent colour marks it,
+    and the legend counts how many there are.
+    """
+    entry = _figure_entries()[n]["lower"]
+    if not entry["shown"]:
+        return
+    text_x = left
+    if entry["first_proved_here"]:
+        center_x = left + SUMMARY_STAR_INSET
+        center_y = baseline - SUMMARY_STAR_RISE
+        sub(
+            card,
+            "polygon",
+            {
+                "data-feature": "first-proved-here",
+                "data-n": str(n),
+                "points": " ".join(
+                    f"{format_svg_number(center_x + dx)},{format_svg_number(center_y + dy)}"
+                    for dx, dy in SUMMARY_STAR_POINTS
+                ),
+                "fill": FIRST_PARTY_ACCENT_COLOR,
+            },
+        )
+        text_x = left + SUMMARY_STAR_TEXT_INSET
+    lower = sub(
+        card,
+        "text",
+        {
+            "data-feature": "lower-bound",
+            "x": format_svg_number(text_x),
+            "y": format_svg_number(baseline),
+            "font-family": SUMMARY_FONT,
+            "font-size": SUMMARY_SMALL_SIZE,
+            "font-weight": SUMMARY_SMALL_WEIGHT,
+            "fill": SUMMARY_SMALL_FILL,
+        },
+    )
+    display = entry["display"]
+    sub(lower, "tspan", {"font-style": "italic"}).text = "s"
+    sub(lower, "tspan", {}).text = display[1:]
+
 
 @cache
 def _figure_entries() -> dict[int, dict]:
@@ -773,6 +843,26 @@ def _append_badge(
     Callers position the box rather than passing a text baseline, so the card can
     sit its badges flush with the top of the big number.
     """
+    if style == "star":
+        # The legend's star is the same polygon the cards carry, centred in a badge box
+        # so the row lays out as if it were one. `glyph` is unused: there is no star to
+        # typeset, which is the point.
+        center_x = x + SUMMARY_BADGE_SIZE / 2
+        center_y = top + SUMMARY_BADGE_SIZE / 2
+        sub(
+            parent,
+            "polygon",
+            {
+                "data-feature": "legend-star",
+                "data-evidence": label,
+                "points": " ".join(
+                    f"{format_svg_number(center_x + dx)},{format_svg_number(center_y + dy)}"
+                    for dx, dy in SUMMARY_STAR_POINTS
+                ),
+                "fill": FIRST_PARTY_ACCENT_COLOR,
+            },
+        )
+        return
     fill, stroke, glyph_fill = {
         "solid": (PAPER_THEME.muted, "none", PAPER_THEME.background),
         "ink": ("none", PAPER_THEME.muted, PAPER_THEME.muted),
@@ -893,6 +983,7 @@ def _append_summary_legend(root: ET.Element, *, spec: RenderSpec) -> None:
     """Two rows: what the badges assert, then what color and shade encode."""
     totals = load_figure_record()["totals"]
     tally = {
+        "lower bound first proved here": totals["lower_bound_first_proved_here"],
         "proved optimal": totals["proved_optimal"],
         "exact value known": totals["exact_value_known"],
         "only known numerically": totals["only_known_numerically"],
@@ -914,6 +1005,7 @@ def _append_summary_legend(root: ET.Element, *, spec: RenderSpec) -> None:
         # The muted twin is the point of D-385: one glyph used to cover both, so a
         # source's annotation was rendered indistinguishable from an argument of ours.
         ("R", "muted", "annotated rigid by the catalogue"),
+        ("", "star", "lower bound first proved here"),
     ]
     _legend_row(
         legend,
@@ -965,10 +1057,11 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
         (
             "A ten-by-ten atlas of the retained best known unit-square packings for "
             "n equals 1 through 100. Each tile is normalized to its own container and "
-            "labeled with n and the best known upper bound on the container side. Badges "
-            "mark which side lengths are proved optimal, and whether a side length is "
-            "pinned exactly by a radical or a minimal polynomial rather than only by a "
-            "decimal."
+            "labeled with n, the best known upper bound on the container side and, where "
+            "the value is not yet settled, the best proved lower bound beneath it. A star "
+            "in crimson marks a lower bound first proved by this project. Badges mark "
+            "which side lengths are proved optimal, and whether a side length is pinned "
+            "exactly by a radical or a minimal polynomial rather than only by a decimal."
         ),
     )
     append_metadata(
@@ -1146,70 +1239,51 @@ def _png_matches_summary(path: Path, svg_text: str) -> bool:
     )
 
 
+def _write_png_preview(content: bytes, svg_text: str) -> None:
+    """Stamp the preview with the SVG it came from, check its size, and write it."""
+    stamped = _png_with_summary_source(
+        content, hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
+    )
+    width, height, _source_sha256 = png_summary_receipt(stamped)
+    if (width, height) != (SUMMARY_WIDTH, SUMMARY_HEIGHT):
+        raise ValueError(
+            f"PNG preview dimensions are {width}x{height}; expected "
+            f"{SUMMARY_WIDTH}x{SUMMARY_HEIGHT}"
+        )
+    with atomic_output_file(SUMMARY_PNG, make_parents=True) as temporary:
+        temporary.write_bytes(stamped)
+
+
 def _update_png_preview(svg_text: str) -> None:
+    """Draw the preview from the SVG, with the same rasteriser that draws the PDF.
+
+    ImageMagick used to draw this, and its own SVG renderer restarts each `tspan` at
+    its parent's `x`, which set the italic `s` on top of the `(` in every bound line.
+    The SVG and the PDF were always right; only the preview carried it. cairosvg is a
+    declared dependency and already draws the PDF in this same command, so the two
+    rasters of one drawing now agree, and no external tool has to be installed.
+    """
     if _png_matches_summary(SUMMARY_PNG, svg_text):
         return
-    sips = shutil.which("sips") if sys.platform == "darwin" else None
-    # `magick` is ImageMagick 7's name for the tool and `convert` is ImageMagick 6's.
-    # Probing only for `magick` made this path unavailable on every Debian and Ubuntu
-    # box, which still ship 6 -- so the tool refused to regenerate the preview on a
-    # machine that had ImageMagick installed. Both accept this invocation, and 6 renders
-    # the composite at the same 2400x2676 the receipt records.
-    renderer = sips or shutil.which("magick") or shutil.which("convert")
-    if renderer is None:
-        raise RuntimeError("PNG preview generation requires sips or ImageMagick")
-    with TemporaryDirectory() as directory:
-        temporary_png = Path(directory) / SUMMARY_PNG.name
-        if Path(renderer).name == "sips":
-            command = [
-                renderer,
-                "-s",
-                "format",
-                "png",
-                str(SUMMARY_SVG),
-                "--out",
-                str(temporary_png),
-            ]
-        else:
-            command = [
-                renderer,
-                str(SUMMARY_SVG),
-                "-background",
-                "white",
-                "-alpha",
-                "remove",
-                "-alpha",
-                "off",
-                f"PNG24:{temporary_png}",
-            ]
-        try:
-            subprocess.run(
-                command,
-                check=True,
-                capture_output=True,
-                text=True,
-                timeout=PNG_RENDER_TIMEOUT_SECONDS,
-            )
-        except subprocess.TimeoutExpired as error:
-            raise RuntimeError(
-                f"PNG preview renderer timed out after {PNG_RENDER_TIMEOUT_SECONDS} seconds"
-            ) from error
-        except subprocess.CalledProcessError as error:
-            detail = (error.stderr or error.stdout or "no diagnostic output").strip()
-            raise RuntimeError(
-                f"PNG preview renderer exited {error.returncode}: {detail[-2000:]}"
-            ) from error
-        content = _png_with_summary_source(
-            temporary_png.read_bytes(), hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
+    content = cairosvg.svg2png(
+        bytestring=svg_text.encode("utf-8"),
+        output_width=SUMMARY_WIDTH,
+        output_height=SUMMARY_HEIGHT,
+        background_color="white",
+    )
+    if not isinstance(content, bytes):  # pragma: no cover - cairosvg returns bytes here
+        raise TypeError("cairosvg returned no PNG bytes")
+    stamped = _png_with_summary_source(
+        content, hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
+    )
+    width, height, _source_sha256 = png_summary_receipt(stamped)
+    if (width, height) != (SUMMARY_WIDTH, SUMMARY_HEIGHT):
+        raise ValueError(
+            f"PNG preview dimensions are {width}x{height}; expected "
+            f"{SUMMARY_WIDTH}x{SUMMARY_HEIGHT}"
         )
-        width, height, _source_sha256 = png_summary_receipt(content)
-        if (width, height) != (SUMMARY_WIDTH, SUMMARY_HEIGHT):
-            raise ValueError(
-                f"PNG preview dimensions are {width}x{height}; expected "
-                f"{SUMMARY_WIDTH}x{SUMMARY_HEIGHT}"
-            )
-        with atomic_output_file(SUMMARY_PNG, make_parents=True) as temporary:
-            temporary.write_bytes(content)
+    with atomic_output_file(SUMMARY_PNG, make_parents=True) as temporary:
+        temporary.write_bytes(stamped)
 
 
 @cache
