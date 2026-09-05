@@ -454,7 +454,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [26]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       With row generation finally priced against the container side, does a

@@ -436,7 +436,7 @@ Status: **paused**. Agenda 017's block moved seven registered cases and then hit
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-190 | tool_validation | 11, 12, 17, 20 | ready | 0 | think-jgeg | Whether the decision path is still the tail of a run, which decides whether BC-194 is affordable at the side it names. |
-| BC-191 | tool_validation | 12, 17, 18, 20 | ready | 0 | think-ji0r | The cost per round as a function of the container side, which is the input BC-194's cost model needs and which nobody has yet measured across sides. |
+| BC-191 | tool_validation | 12, 17, 18, 20 | complete | 0 | think-ji0r | The cost per round as a function of the container side, which is the input BC-194's cost model needs and which nobody has yet measured across sides. |
 | BC-192 | research | 11, 12, 17, 26, 51 | blocked | 1 | think-9pfw | A target ranking that accounts for cost as well as prize, which the reach table deliberately does not. |
 | BC-193 | research | 11, 12 | blocked | 2 | think-z8ck | Whether the frontier beyond the ceiling is a research direction or a closed door, which decides whether any later agenda spends a block on it. |
 | BC-194 | research | 26, 30, 37, 51 | blocked | 1 | think-48p0 | The first measurement of what the generator costs and reaches outside the 3.8 to 4.8 band every retained rung sits in. |
@@ -462,7 +462,7 @@ Status: **active**. X-014 ends with a verdict and a bill. The two mechanisms the
 | BC-199 | research | 11 | complete | 0 | think-ljvz | Whether the local box is reachable by any tree, which BC-203's third doubling-down rule reads directly and which decides whether block two opens a conditional lead against Trump's pose at all. |
 | BC-200 | measurement_validation | 11 | ready | 1 | think-1qjs | The side every block-two n = 11 cell would have to work at, and BC-203's second doubling-down rule reads the 3.85 outcome directly. |
 | BC-201 | tool_validation | 11 | blocked | 2 | think-614o | Whether Corollary 1a's exact-cover step is a check or a search, which BC-207 in block two consumes directly and cannot start without. |
-| BC-202 | research | 26 | blocked | 1 | think-r58z | The first covering-value point outside the 3.82-to-4.80 band, which is what X-013's third proposal asks for and what block two's reach-table rungs are priced against. |
+| BC-202 | research | 26 | ready | 1 | think-r58z | The first covering-value point outside the 3.82-to-4.80 band, which is what X-013's third proposal asks for and what block two's reach-table rungs are priced against. |
 | BC-203 | tool_validation | 11, 20, 21, 26 | blocked | 2 | think-jv2d | Which of agenda-022's leads open, which is the whole of what every cell in that agenda is blocked on. |
 
 ### [agenda-022](agendas/agenda-022-the-conditional-route.md) — The Conditional Route — Boxed Certificates, the n = 13 Calibration, and the Class Theorems

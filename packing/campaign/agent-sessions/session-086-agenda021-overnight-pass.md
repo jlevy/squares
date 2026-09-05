@@ -179,7 +179,6 @@ session:
     - packing/tests/test_trump_isolation_radius.py
     - packing/campaign/series/series-000-smoke-and-calibration/results/bc-199-trump-isolation-radius.json
     checks:
-  - 'pytest tests/test_bench_colgen.py: 7 passed'
     - 'uv run --frozen --all-extras --group dev pytest tests/test_trump_isolation_radius.py -q: 6 passed'
     - 'ruff check, ruff format --check, basedpyright: clean on both files'
     - 'coordinator: rho_0 = 2 kappa_min / K re-derived from the reported kappa and K'
@@ -344,6 +343,7 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/bc-199-trump-isolation-radius.json
   checks:
   - 'pytest tests/test_trump_isolation_radius.py: 6 passed'
+  - 'pytest tests/test_bench_colgen.py tests/test_fractional_generate.py: 19 passed'
   resource_rollups: []
   stop_reason: null
   next_action: >-

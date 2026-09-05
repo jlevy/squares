@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **11** ready, **5** tentative, **45** blocked, **39** stopped, **105** complete.
+- **11** ready, **5** tentative, **44** blocked, **39** stopped, **106** complete.
 
 - **6 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -33,9 +33,9 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-018 | `BC-183` | 2 | insight | research | Can the n = 40 admissible cone be characterised on the disjunctive system, so that Goebel's n = 40 packing's… | `think-3yxk` |
 | agenda-018 | `BC-184` | 2 | efficiency | tool_validation | Can the generic interval certifier be wired end to end and reproduce T-009's n = 29 bound through the generic… | `think-4f4d` |
 | agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so 22.7 times… | `think-jgeg` |
-| agenda-019 | `BC-191` | 0 | efficiency | tool_validation | Row generation is between 79 and 94 per cent of every round, the site grids do not scale with the container,… | `think-ji0r` |
 | agenda-021 | `BC-211` | 0 | correctness | measurement_validation | Does the existing generator, run unchanged at n = 13 and side 399/100, converge to a restricted covering… | `think-2ib0` |
 | agenda-021 | `BC-200` | 1 | correctness | measurement_validation | Is the covering value at n = 11 already at or above eleven at 3.82 and at 3.85, measured from below by an… | `think-1qjs` |
+| agenda-021 | `BC-202` | 1 | correctness | research | With row generation finally priced against the container side, does a column-generation run at n = 26's… | `think-r58z` |
 
 ## Blocked, and on what
 
@@ -77,7 +77,6 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-019 | `BC-195` | 3 | `BC-190`, `BC-191`, `BC-192`, `BC-193`, `BC-194` | no | — |
 | agenda-021 | `BC-197` | 0 | `BC-211` | no | — |
 | agenda-021 | `BC-198` | 1 | `BC-197` | no | — |
-| agenda-021 | `BC-202` | 1 | `BC-191` | no | — |
 | agenda-021 | `BC-201` | 2 | `BC-200` | no | — |
 | agenda-021 | `BC-203` | 2 | `BC-197`, `BC-198`, `BC-199`, `BC-200`, `BC-201`, `BC-202`, `BC-211` | no | — |
 | agenda-022 | `BC-204` | 1 | `BC-203` | no | — |
@@ -126,9 +125,9 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-016 | completed |  |  |  | 8 | 1 | 9 |
 | agenda-017 | completed |  |  |  | 7 | 4 | 11 |
 | agenda-018 | paused |  | 2 | 14 |  |  | 16 |
-| agenda-019 | paused | 2 |  | 4 |  |  | 6 |
+| agenda-019 | paused | 1 |  | 4 |  | 1 | 6 |
 | agenda-020 | completed |  |  |  |  | 1 | 1 |
-| agenda-021 | active | 2 |  | 5 |  | 1 | 8 |
+| agenda-021 | active | 3 |  | 4 |  | 1 | 8 |
 | agenda-022 | paused |  |  | 8 |  |  | 8 |
 
 ## By program
@@ -165,7 +164,7 @@ Open frontier: `BC-198`, `BC-200`, `BC-201`, `BC-208`, `BC-207`.
 
 | agenda | id | state | question |
 | --- | --- | --- | --- |
-| agenda-021 | `BC-202` | blocked | With row generation finally priced against the container side, does a column-generation run at n =… |
+| agenda-021 | `BC-202` | ready | With row generation finally priced against the container side, does a column-generation run at n =… |
 | agenda-022 | `BC-209` | blocked | With row generation priced and one point outside the 3.8-to-4.8 band in hand, which reach-table… |
 
 Open frontier: `BC-202`, `BC-209`.
