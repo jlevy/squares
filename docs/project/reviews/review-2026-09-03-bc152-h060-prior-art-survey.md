@@ -150,7 +150,7 @@ Relevant results, quoted:
   energy principle.”
 - Definition 4.1.1 (second-order flex): for a strut, “either (p_i - p_j).(p’_i - p’_j) >
   0 or (p_i - p_j).(p’_i - p’_j) = 0 and |p’_i - p’_j|^2 + (p_i - p_j).(p''_i - p''_j)
-  >= 0”.
+  > = 0”.
 - Theorem 4.3.1 (p. 474): “If a tensegrity framework G(p) is second-order rigid, then it
   is rigid.” The preceding paragraph states the difficulty exactly as X-007 does: “The
   natural idea is to take the first and second derivatives of the analytic flex
@@ -225,9 +225,9 @@ the packing is second-order jammed.”
 Dual (19): `min_f Q'^T H_f Q'` over `A f = 0, e^T f = 1, f >= 0`. “If Q'^T H Q' < 0 then
 sigma* < 0 and therefore the first-order flex Q' cannot be extended into a second-order
 flex. We say that the stress matrix blocks the flex.”
-"If the matrix H_V is negative definite, than the packing is second-order jammed.
+“If the matrix H_V is negative definite, than the packing is second-order jammed.
 In Ref. [12] such packings are called prestress stable, since the self-stress f
-rigidifies the packing."
+rigidifies the packing.”
 And the same higher-order caveat X-007 raises: “If for all first-order flexes Q' at
 least one of the inequalities in Eq.
 (17) has to be an equality, then we need to consider even third- or higher-order terms,
@@ -249,7 +249,7 @@ However, it is clear that this is only a first-order approximation.
 In reality, the polygons cannot be rotated because such rotation leads to overlap in the
 extended region of contact around the point of contact.
 To calculate the amount of overlap, one must use second-order terms … Low curvature,
-that is, 'flat' contacts, block rotations of the particles.”
+that is, ‘flat’ contacts, block rotations of the particles.”
 X-007’s “turning the line can therefore only bring it nearer” is this observation at a
 corner-on-flat-edge contact.
 
@@ -449,7 +449,7 @@ lower bound.
 Friedman’s only rigidity remarks (lines 59, 71) concern `n = 40` and Trump’s
 `n = 11`; `n = 5` is not annotated.
 MathWorld’s *Square Packing* page: `n = 5` marked proven optimal; “The page contains no
-sentences with the words 'rigid' or 'unique'.” The archived Wikipedia page contains no
+sentences with the words ‘rigid’ or ‘unique’.” The archived Wikipedia page contains no
 occurrence of “rigid”.
 
 This matters because a published *uniqueness* theorem for the `n = 5` optimum (unique up
@@ -495,11 +495,11 @@ it was never archived, which T-012’s basis names as its first gap):
 > “A packing is rigid when it cannot be continuously transformed into any other valid
 > packing without changing the size of its enclosing square.”
 
-> “Where the word 'alternative' is used, this designates an alternative packing, which
+> “Where the word ‘alternative’ is used, this designates an alternative packing, which
 > is enclosed within the same-sized bounding square as another packing, but cannot be
 > reached by continuously translating and/or rotating the squares in that packing.”
-> "When the packing can be reached by such continuous transformations, the word
-> ‘rearrangement’ is used."
+> “When the packing can be reached by such continuous transformations, the word
+> ‘rearrangement’ is used.”
 
 > “The property of rigidity is rare among nontrivial best known packings.”
 
@@ -520,7 +520,7 @@ about minimising side length through contact equations and Jacobian determinants
 The `n = 11` provenance SVG
 (`packing/resources/papers/kingbird-square-11-provenance.svg` line 21) says only “Is one
 of the very few rigid packings.”
-"Semi-rigid" is used on the rigid page for `n = 28` without a definition.
+“Semi-rigid” is used on the rigid page for `n = 28` without a definition.
 
 ### 3.2 Overlap with H-060’s claim
 

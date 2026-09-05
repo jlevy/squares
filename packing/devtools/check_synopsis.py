@@ -44,11 +44,7 @@ from decimal import ROUND_HALF_UP, Decimal, InvalidOperation, localcontext
 from pathlib import Path
 
 from devtools.check_rung_figures import round_to
-from devtools.render_certificate_reach import (
-    CASES,
-    REPORTED_COVERING_VALUES,
-    load_certificate,
-)
+from devtools.render_certificate_reach import reported_covering_values
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -627,21 +623,27 @@ _QUOTED_DECIMAL = re.compile(r"`(\d+\.\d+)`")
 def reported_covering_sides() -> tuple[list[str], list[str]]:
     """Every side `CERTIFICATE-REACH.md` reports a covering value at, and the recomputable ones.
 
-    "Recomputable" is derived, not listed: a row is recomputable here when the value it
-    reports *is* its frozen artifact's own feasible mass, to the places the report writes.
-    Exactly one row is, today, and calling that one a measured optimum is the error this
-    check exists to refuse -- a feasible mass is an upper bound on the covering value at
-    that side, and the search's objective is a different number the record cannot replay.
+    Both lists are read from `frontier/covering-values.yaml` through the renderer, so a
+    side with several site sets (`3.82` has two, `4.68` three) is one side here, as the
+    prose counts it. "Recomputable" is derived, not listed: a side is recomputable when
+    some row's reported value *is* its frozen artifact's own feasible mass, to the places
+    the report writes. Exactly one side is, today, and calling that one a measured
+    optimum is the error this check exists to refuse -- a feasible mass is an upper bound
+    on the covering value at that side, and the search's objective is a different number
+    the record cannot replay.
     """
-    sides = [side for side, _, _, _ in REPORTED_COVERING_VALUES]
-    recomputable = []
-    for side, reported, artifact, _ in REPORTED_COVERING_VALUES:
-        if artifact is None:
+    sides: list[str] = []
+    recomputable: list[str] = []
+    for row in reported_covering_values():
+        if row["side"] not in sides:
+            sides.append(row["side"])
+        mass = row["mass"]
+        if mass is None:
             continue
-        _, mass = load_certificate(CASES / artifact)
+        reported = row["reported"]
         digits = len(reported.split(".", 1)[1]) if "." in reported else 0
-        if round_to(mass, digits) == Decimal(reported):
-            recomputable.append(side)
+        if round_to(mass, digits) == Decimal(reported) and row["side"] not in recomputable:
+            recomputable.append(row["side"])
     return sides, recomputable
 
 

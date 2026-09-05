@@ -1,0 +1,230 @@
+softschema:
+  contract: packing.squares:CoveringValues/v1
+  schema: covering-values.schema.yaml
+  status: enforced
+last_reviewed: '2026-09-05'
+values:
+  - n: 11
+    side: '191/50'
+    side_decimal: '3.82'
+    objective: '11.000000'
+    site_set: grid
+    sites: 6637
+    rows: 14820
+    rounds: 12
+    converged: true
+    stop_reason: >-
+      The row loop ran to convergence: the objective descended to exactly 11.000000
+      from 11.6 over twelve rounds and never crossed below it.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/frontier/results.yaml
+      - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
+      - packing/campaign/explorations/X-014-closing-from-both-ends.md
+      - docs/project/handoff-2026-09-04-block-close.md
+    notes: >-
+      Result narrative only: no run log or checkpoint was retained, and nothing was
+      frozen at this side, since an objective of exactly eleven admits no certificate.
+      The least covered mass at the stop is not recorded for this set.
+  - n: 11
+    side: '191/50'
+    side_decimal: '3.82'
+    objective: '11.000000'
+    site_set: certificate-seeded
+    sites: 24069
+    rows: 30240
+    rounds: 24
+    converged: false
+    stop_reason: >-
+      Stopped with violated placements remaining: the objective had stood at 11.000000
+      through twenty-four row rounds while the least covered mass climbed from 0.8490
+      to 0.9997, and the loop had not exhausted. It did not need to, since adding rows
+      can only raise a restricted optimum already at eleven.
+    least_covered_mass: '0.9997'
+    frozen_artifact: null
+    recorded_in:
+      - packing/frontier/results.yaml
+      - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
+      - packing/campaign/explorations/X-014-closing-from-both-ends.md
+      - docs/project/handoff-2026-09-04-block-close.md
+    notes: >-
+      Seeded from the retained 381/100 certificate's own 1121 atoms. Result narrative
+      only: no run log or checkpoint was retained and nothing was frozen at this side.
+  - n: 12
+    side: '79/20'
+    side_decimal: '3.95'
+    objective: '11.9706'
+    site_set: unrecorded
+    sites: null
+    rows: null
+    rounds: null
+    converged: true
+    stop_reason: >-
+      Counted by X-013 among the converged points; T-017's own record narrates the
+      ladder and gives no stop reason for this rung.
+    least_covered_mass: null
+    frozen_artifact: packing/cases/n12_fractional_certificate/certificate-79-20.json
+    recorded_in:
+      - packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md
+      - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
+      - SYNOPSIS.md
+    notes: >-
+      The reported value is the frozen certificate's own mass, 1197059/100000, to four
+      places, not a separately measured optimum. The record names no site set and
+      retains no site, row or round count for the run.
+  - n: 12
+    side: '99/25'
+    side_decimal: '3.96'
+    objective: '11.9936'
+    site_set: unrecorded
+    sites: null
+    rows: null
+    rounds: null
+    converged: true
+    stop_reason: >-
+      Converged toward 11.9936 before rationalisation lifted the mass to the frozen
+      certificate's 149987/12500 = 11.998960, per X-013; T-017's own record gives no
+      stop reason for this rung.
+    least_covered_mass: null
+    frozen_artifact: packing/cases/n12_fractional_certificate/certificate.json
+    recorded_in:
+      - packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md
+      - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
+      - SYNOPSIS.md
+    notes: >-
+      The reported objective has no raw run, and it is not the artifact's mass: the
+      difference is consistent with the documented rounding-up rule. The record names
+      no site set and retains no site, row or round count.
+  - n: 17
+    side: '229/50'
+    side_decimal: '4.58'
+    objective: '16.9628'
+    site_set: unrecorded
+    sites: null
+    rows: null
+    rounds: null
+    converged: true
+    stop_reason: >-
+      Reported converged by X-013. T-019's own record gives no stop reason for any of
+      its n = 17 builds; the stop its next_rung narrates belongs to the n = 18 probe at
+      117/25 (D-443).
+    least_covered_mass: null
+    frozen_artifact: packing/cases/n17_fractional_certificate/certificate-229-50.json
+    recorded_in:
+      - packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md
+      - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
+      - SYNOPSIS.md
+    notes: >-
+      The reported objective has no raw run, and it is not the artifact's mass. The
+      record names no site set and retains no site, row or round count.
+  - n: 17
+    side: '459/100'
+    side_decimal: '4.59'
+    objective: '16.9303'
+    site_set: unrecorded
+    sites: null
+    rows: null
+    rounds: null
+    converged: false
+    stop_reason: >-
+      Not recorded. Agenda-019 quotes the objective and no source says whether the run
+      converged (D-443), so the row stands as an upper bound only.
+    least_covered_mass: null
+    frozen_artifact: packing/cases/n17_fractional_certificate/certificate.json
+    recorded_in:
+      - packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md
+    notes: >-
+      The reported objective has no raw run, and it is not the artifact's mass. X-013's
+      list of six omits this side. The record names no site set and retains no site,
+      row or round count.
+  - n: 18
+    side: '117/25'
+    side_decimal: '4.68'
+    objective: '18.000000'
+    site_set: 538-orbits
+    sites: null
+    rows: null
+    rounds: null
+    converged: false
+    stop_reason: >-
+      Followed by a larger site set at the same side after returning exactly 18.000000;
+      whether its own row loop exhausted is not recorded.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/frontier/results.yaml
+      - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
+      - docs/project/handoff-2026-09-04-block-close.md
+    notes: >-
+      538 orbits under D4; the site count is not recorded, nor rows or rounds. No raw
+      run was retained and nothing was frozen: an objective of exactly eighteen admits
+      no certificate. Across the three site sets the optimum did not move at all.
+  - n: 18
+    side: '117/25'
+    side_decimal: '4.68'
+    objective: '18.000000'
+    site_set: 578-orbits
+    sites: null
+    rows: null
+    rounds: null
+    converged: false
+    stop_reason: >-
+      Followed by a larger site set at the same side after returning exactly 18.000000;
+      whether its own row loop exhausted is not recorded.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/frontier/results.yaml
+      - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
+      - docs/project/handoff-2026-09-04-block-close.md
+    notes: >-
+      578 orbits under D4; the site count is not recorded, nor rows or rounds. No raw
+      run was retained and nothing was frozen: an objective of exactly eighteen admits
+      no certificate.
+  - n: 18
+    side: '117/25'
+    side_decimal: '4.68'
+    objective: '18.000000'
+    site_set: 618-orbits
+    sites: null
+    rows: 27516
+    rounds: 157
+    converged: false
+    stop_reason: >-
+      Stopped on cost after 157 row-generation rounds and 7056 s, the last round two
+      hours, before the run could separate a covering value at or above eighteen from a
+      site set still short of one.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/frontier/results.yaml
+      - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
+      - docs/project/handoff-2026-09-04-block-close.md
+    notes: >-
+      618 orbits under D4; the site count is not recorded. The row set grew from 15888
+      to 27516 over the run. Both readings stay open, a covering value at or above
+      eighteen or an optimum on a degenerate vertex, which the collapse of pricing from
+      90 s to 1--3 s suggests. No raw run was retained and nothing was frozen.
+  - n: 20
+    side: '24/5'
+    side_decimal: '4.80'
+    objective: '18.916941'
+    site_set: unrecorded
+    sites: null
+    rows: null
+    rounds: 9
+    converged: false
+    stop_reason: >-
+      Halted at round 9 on projected cost: four more rounds would have cost about
+      3.75 h to buy margin nothing needed. The side above it was never attempted.
+    least_covered_mass: null
+    frozen_artifact: packing/cases/n20_fractional_certificate/certificate.json
+    recorded_in:
+      - packing/frontier/results.yaml
+      - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
+    notes: >-
+      A single resumed column-generation run; the record names no site set and retains
+      no site or row count. The reported objective has no raw run, and it is not the
+      artifact's mass, 946131/50000 = 18.922620, which certifies n = 19 upward and is
+      why the reach table keys this package to n = 19.

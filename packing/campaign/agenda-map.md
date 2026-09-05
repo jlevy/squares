@@ -2,7 +2,7 @@
 
 # Agenda map
 
-189 agenda commitments across 20 agendas, as declared in each agenda's own frontmatter.
+205 agenda commitments across 22 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **9** ready, **5** tentative, **32** blocked, **39** stopped, **104** complete.
+- **11** ready, **5** tentative, **46** blocked, **39** stopped, **104** complete.
 
 - **6 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -34,6 +34,8 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-018 | `BC-184` | 2 | efficiency | tool_validation | Can the generic interval certifier be wired end to end and reproduce T-009's n = 29 bound through the generic… | `think-4f4d` |
 | agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so 22.7 times… | `think-jgeg` |
 | agenda-019 | `BC-191` | 0 | efficiency | tool_validation | Row generation is between 79 and 94 per cent of every round, the site grids do not scale with the container,… | `think-ji0r` |
+| agenda-021 | `BC-211` | 0 | correctness | measurement_validation | Does the existing generator, run unchanged at n = 13 and side 399/100, converge to a restricted covering… | `think-2ib0` |
+| agenda-021 | `BC-199` | 0 | insight | research | What explicit isolation radius and quadratic constant follow from exp-013's 128 branch certificates at… | `think-ljvz` |
 
 ## Blocked, and on what
 
@@ -73,6 +75,20 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-019 | `BC-194` | 1 | `BC-190`, `BC-191`, `BC-192` | no | — |
 | agenda-019 | `BC-193` | 2 | `BC-192` | no | — |
 | agenda-019 | `BC-195` | 3 | `BC-190`, `BC-191`, `BC-192`, `BC-193`, `BC-194` | no | — |
+| agenda-021 | `BC-197` | 0 | `BC-211` | no | — |
+| agenda-021 | `BC-198` | 1 | `BC-197` | no | — |
+| agenda-021 | `BC-200` | 1 | `BC-199` | no | — |
+| agenda-021 | `BC-202` | 1 | `BC-191` | no | — |
+| agenda-021 | `BC-201` | 2 | `BC-200` | no | — |
+| agenda-021 | `BC-203` | 2 | `BC-197`, `BC-198`, `BC-199`, `BC-200`, `BC-201`, `BC-202`, `BC-211` | no | — |
+| agenda-022 | `BC-204` | 1 | `BC-203` | no | — |
+| agenda-022 | `BC-205` | 1 | `BC-203` | no | — |
+| agenda-022 | `BC-212` | 1 | `BC-203` | no | — |
+| agenda-022 | `BC-206` | 1 | `BC-203` | no | — |
+| agenda-022 | `BC-208` | 1 | `BC-203` | no | — |
+| agenda-022 | `BC-207` | 2 | `BC-203`, `BC-208` | no | — |
+| agenda-022 | `BC-209` | 2 | `BC-203`, `BC-206` | no | — |
+| agenda-022 | `BC-210` | 3 | `BC-203`, `BC-204`, `BC-205`, `BC-206`, `BC-207`, `BC-208`, `BC-209`, `BC-212` | no | — |
 
 ## Discharged elsewhere
 
@@ -113,6 +129,48 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-018 | paused |  | 2 | 14 |  |  | 16 |
 | agenda-019 | paused | 2 |  | 4 |  |  | 6 |
 | agenda-020 | completed |  |  |  |  | 1 | 1 |
+| agenda-021 | paused | 2 |  | 6 |  |  | 8 |
+| agenda-022 | paused |  |  | 8 |  |  | 8 |
+
+## By program
+
+A program is a line of work that spans agendas; its cells carry one `program` slug. Each is listed in dependency order where `depends_on` gives one and by id otherwise, and its open frontier is the cells not yet terminal.
+
+### `grid-frontier-exact-values`
+
+| agenda | id | state | question |
+| --- | --- | --- | --- |
+| agenda-022 | `BC-204` | blocked | Can the covering program's admissible centre domain be generalised from the hard-coded rotated… |
+| agenda-022 | `BC-205` | blocked | Does the conditional program close a case the classical method closes by hand -- Bentz's… |
+| agenda-022 | `BC-206` | blocked | How far above 99/25 does the n = 12 ladder climb before its restricted optimum reaches twelve,… |
+| agenda-021 | `BC-211` | ready | Does the existing generator, run unchanged at n = 13 and side 399/100, converge to a restricted… |
+| agenda-021 | `BC-197` | blocked | Where does the restricted covering optimum at m = 5 reach twenty, and does it reach twenty-one… |
+| agenda-022 | `BC-212` | blocked | Can a certificate at shrink B = 1 -- closed unit-square covering with open-box counting at an… |
+
+Open frontier: `BC-204`, `BC-205`, `BC-206`, `BC-211`, `BC-197`, `BC-212`.
+
+### `n11-closure`
+
+| agenda | id | state | question |
+| --- | --- | --- | --- |
+| agenda-021 | `BC-198` | blocked | Does the two-threshold form of Condition 5 -- per-direction-class thresholds as LP variables,… |
+| agenda-021 | `BC-199` | ready | What explicit isolation radius and quadratic constant follow from exp-013's 128 branch certificates… |
+| agenda-021 | `BC-200` | blocked | Is the covering value at n = 11 already at or above eleven at 3.82 and at 3.85, measured from below… |
+| agenda-021 | `BC-201` | blocked | How large is the near-tight set on the retained 381/100 certificate -- the reachable event cells… |
+| agenda-022 | `BC-208` | blocked | Does the class-certificate program deliver two statements about n = 11 that stand on their own --… |
+| agenda-022 | `BC-207` | blocked | At the side block one found the n = 11 wall, does an exact cover of the heavy atoms by eleven… |
+
+Open frontier: `BC-198`, `BC-199`, `BC-200`, `BC-201`, `BC-208`, `BC-207`.
+
+### `reach-table-ladder`
+
+| agenda | id | state | question |
+| --- | --- | --- | --- |
+| agenda-021 | `BC-202` | blocked | With row generation finally priced against the container side, does a column-generation run at n =… |
+| agenda-022 | `BC-209` | blocked | With row generation priced and one point outside the 3.8-to-4.8 band in hand, which reach-table… |
+
+Open frontier: `BC-202`, `BC-209`.
+
 
 ## What the states mean
 

@@ -79,8 +79,8 @@ if forced into a field.
 
 ## Every File Here Is a Soft-Schema Artifact
 
-All six data files declare a contract, point at a compiled JSON Schema, and validate at
-`status: enforced`. Nothing in this folder is structured-looking YAML that nothing
+All seven data files declare a contract, point at a compiled JSON Schema, and validate
+at `status: enforced`. Nothing in this folder is structured-looking YAML that nothing
 checks.
 
 | File(s) | Profile | Schema |

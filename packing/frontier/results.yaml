@@ -447,6 +447,11 @@ results:
       passing replay in this repository, no cited part rests on anything
       weaker, and BC-153's independent review of the proof is installed and
       mapped as a non-superseded review.
+    produced_by:
+      hypothesis: H-060
+      agenda_cell: BC-152
+      session: session-083
+      experiment: exp-058
     evidence:
       - E-n005-fixed-side-local-rigidity
       - E-n005-second-order-rigidity
@@ -500,6 +505,9 @@ results:
       scored: '2026-09-03'
       by: BC-151 independent review of the BC-150 adoption packet (repository)
     novelty: previously-published
+    produced_by:
+      agenda_cell: BC-150
+      session: session-083
     evidence:
       - E-n017-massaccesi-source-replay
       - E-n017-massaccesi-h052-agreement
@@ -554,6 +562,9 @@ results:
       Derived: the minimum over T-015 and the monotonicity step, which is one
       recorded line carried in the evidence limitations and the n-018 and n-019 case
       bodies; T-015 sits at V4/C3, so the derived claim keeps the rungs.
+    produced_by:
+      agenda_cell: BC-150
+      session: session-083
     evidence:
       - E-n017-massaccesi-source-replay
       - E-n017-massaccesi-h052-agreement
@@ -613,6 +624,10 @@ results:
       Primary: one certificate, one verifier, one accepted verdict. The bound is
       the certificate's container side directly, with no monotonicity or
       composition step between the artifact and the claim.
+    produced_by:
+      hypothesis: H-061
+      agenda_cell: BC-161
+      session: session-085
     evidence:
       - E-n012-fractional-certificate
       - E-fractional-interval-decision
@@ -709,6 +724,10 @@ results:
       Primary: one certificate, one verifier, one accepted verdict. The bound is the
       certificate's container side directly, with no monotonicity or composition step.
       It raises no other case: every n > 11 already carries a larger verified bound.
+    produced_by:
+      hypothesis: H-061
+      agenda_cell: BC-161
+      session: session-085
     evidence:
       - E-n011-fractional-certificate
       - E-fractional-interval-decision
@@ -824,6 +843,9 @@ results:
       container side directly. Derived at n = 18 and n = 19: the monotonicity step that
       T-016 already records, applied to a larger base, which is one line and inherits the
       rungs.
+    produced_by:
+      agenda_cell: BC-161
+      session: session-085
     evidence:
       - E-n017-fractional-certificate
       - E-fractional-interval-decision
@@ -957,6 +979,9 @@ results:
       Unlike T-017 and T-019 no independent evaluator reviewed the scoring, and there is
       no review artifact, so C5 -- review-ready, a mapped review -- is as far away here as
       there.
+    produced_by:
+      agenda_cell: BC-161
+      session: session-085
     evidence:
       - E-n020-fractional-certificate
       - E-fractional-interval-decision
