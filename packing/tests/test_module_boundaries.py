@@ -454,7 +454,7 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
     copy is the thing that rots. The gate's own failure threshold is higher, so ordinary
     runner variance cannot turn a passing test into a red pull request.
 
-    Three limits of the rule, recorded rather than smoothed over:
+    Four limits of the rule, recorded rather than smoothed over:
 
     * A marker is per function, so a parametrized test moves with all of its cases even
       when only one case was over. The 61 functions are 90 collected tests.
