@@ -118,14 +118,27 @@ jobs:
       # either: 121s of the 306.4s is two tests being billed for a build they share with a
       # test BC-214 deferred, they are why this step still fails its own per-test ceiling,
       # and `test_the_slow_marker_is_declared_only_by_measured_nodes` records why marking
-      # them is not the fix. And once they go, the second `--jobs` lane's ~135s becomes the
-      # wall, so `--jobs 3` is the next lever rather than a third job. It stays at 2 here
-      # because BC-218 could not clock it on CI, and an unmeasured CI change is D-380.
+      # them is not the fix.
+      #
+      # `--jobs 3`, and this is the measured step rather than the predicted one. At
+      # `--jobs 2` on 69e4d545 the tier was 170.58s of wall over 319.81s of work -- 1.87x,
+      # so the pool was already near its limit and the wall was two roughly equal lanes.
+      # Removing the shared builds takes `fast behavioral tests` from 132.04s to about
+      # 74s, which leaves ~262s of work whose largest indivisible piece is the type floor
+      # at 73.69s. A third lane brings the wall toward that floor; a fourth cannot pass it.
+      #
+      # What this trades, stated because it is the thing that could make it worse: the
+      # runner has four cpus, and `fast behavioral tests` already asks pytest for one
+      # worker per cpu, so a third concurrent step oversubscribes. `--inner-jobs 1` still
+      # caps every *other* step at one worker, so the contention is the quick lane against
+      # two single-process steps rather than a free-for-all. It is expected to pay and it
+      # is not assumed to: the next run prints the wall, and if it is not below 170.58s
+      # this goes back to 2 with the number written here.
       - name: Run the required pull-request surface
         if: "github.event_name == 'pull_request'"
         run: >-
           uv run --frozen --all-extras --group dev
-          packing-validate --fast --jobs 2 --inner-jobs 1
+          packing-validate --fast --jobs 3 --inner-jobs 1
 
       # The deep surface: no tier flag, so every declared step runs, and everything the
       # pull-request surface stopped running lands here. Do not narrow this command --
