@@ -65,6 +65,9 @@ Results first established here, as far as the recorded source searches show:
   Stromquist, and `189/50`, the calibration rung below him that was run first on purpose
   and proves nothing new.
   Scored `S5`, the rubric’s anchor for movement on a central open case.
+  The shortest complete statement of the proof, with the certificate’s hash and the one
+  command that checks it from the standard library alone, is the
+  [proof card](packing/cases/n11_fractional_certificate/PROOF-CARD.md).
   A
   [self-contained package for third-party checking](packing/cases/n11_fractional_certificate/thirdparty/)
   ships with it, so the `19/5` rung can be decided without trusting anything else here.
