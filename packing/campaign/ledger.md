@@ -456,9 +456,9 @@ Status: **active**. X-014 ends with a verdict and a bill. The two mechanisms the
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-197 | research | 19, 20, 21 | blocked | 0 | think-g73w | The first measurement of a covering wall above a retained rung, which BC-203's first doubling-down rule reads directly and which decides whether block two spends its leads on the endgame or on more rungs. |
+| BC-197 | research | 19, 20, 21 | ready | 0 | think-g73w | The first measurement of a covering wall above a retained rung, which BC-203's first doubling-down rule reads directly and which decides whether block two spends its leads on the endgame or on more rungs. |
 | BC-198 | tool_validation | 11, 12 | blocked | 1 | think-m3sx | Whether conditioning on direction buys anything at all, which is the premise BC-208's two class theorems in block two rest on entirely. |
-| BC-211 | measurement_validation | 13 | ready | 0 | think-2ib0 | Whether the first exact grid value by machine is one certificate away, which BC-203's fourth rule reads directly and which decides whether block two opens the B = 1 route (BC-212) ahead of the conditional route. |
+| BC-211 | measurement_validation | 13 | stopped | 0 | think-2ib0 | Whether the first exact grid value by machine is one certificate away, which BC-203's fourth rule reads directly and which decides whether block two opens the B = 1 route (BC-212) ahead of the conditional route. |
 | BC-199 | research | 11 | complete | 0 | think-ljvz | Whether the local box is reachable by any tree, which BC-203's third doubling-down rule reads directly and which decides whether block two opens a conditional lead against Trump's pose at all. |
 | BC-200 | measurement_validation | 11 | ready | 1 | think-1qjs | The side every block-two n = 11 cell would have to work at, and BC-203's second doubling-down rule reads the 3.85 outcome directly. |
 | BC-201 | tool_validation | 11 | blocked | 2 | think-614o | Whether Corollary 1a's exact-cover step is a check or a search, which BC-207 in block two consumes directly and cannot start without. |

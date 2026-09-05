@@ -44,7 +44,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [19, 20, 21]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Where does the restricted covering optimum at m = 5 reach twenty, and does it reach
@@ -193,7 +193,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [13]
-    state: ready
+    state: stopped
     priority: 0
     question: >-
       Does the existing generator, run unchanged at n = 13 and side 399/100, converge to a
@@ -236,6 +236,41 @@ agenda:
     depends_on: []
     parallel_group: agenda021-lane-a
     program: grid-frontier-exact-values
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-211-run-a-n13-399-100.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-211-run-a-n13-399-100.log
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-211-run-c-control-n12-99-25.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-211-run-c-control-n12-99-25.log
+    - packing/devtools/run_fractional_colgen.py
+    outcomes:
+    - scope: >-
+        The generator unchanged at n = 13, side 399/100, inside a 70-minute lane budget
+        on one core, with the n = 12 control at 99/25 the cell's reading rule requires.
+      classification: time-limited
+      result: >-
+        Neither of the cell's two readings was earned: no run at 399/100 converged, so
+        there is no restricted optimum there and nothing was frozen. Run A (grids
+        23, 31, 38 from the density rule as it stood mid-lane; 2921 sites, 400 orbits)
+        hit the 60-round limit at objective 16.000000 with least covered mass 0.929161
+        -- not an optimum, and the round number the handoff names as the artefact
+        signature; 7.72 s per row round against 3.04 s at n = 12's 99/25 with the same
+        seed. Runs B (grids 23, 31, 39, 300: 92989 sites, 11742 orbits) and D (grids
+        23, 31, 39, 100) each spent their whole budget inside one un-logged round,
+        which fired the cell's 25-minute kill; generate_adaptive writes nothing until
+        a column round returns, so both stops left no table and no resumable state.
+        The control decides what the readings may mean: at n = 12's own retained side
+        99/25 the same seed converged to 12.312896 above twelve, where the retained
+        certificate carries 149987/12500 = 11.998960 on atoms that lie on grids
+        (23, 31, 39, 297) plus seven column additions -- a seed that cannot reproduce
+        a retained rung cannot refute one, so run A does not read as "the m = 4 wall
+        sits below 3.99". The price is recorded: at the density the retained rungs
+        used, one round at 399/100 costs more than the 25 minutes the cell allows.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-211-run-a-n13-399-100.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-211-run-c-control-n12-99-25.json
+      - session-086 Lane A delegation, 3982 s platform-measured, 66 of 70 budgeted minutes plus the close-out
+      disposition: continue
+      follow_up: think-2ib0
     next_evidence: >-
       Whether the first exact grid value by machine is one certificate away, which
       BC-203's fourth rule reads directly and which decides whether block two opens the

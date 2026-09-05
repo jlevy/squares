@@ -125,20 +125,29 @@ session:
       Lane A, BC-211: the generator unchanged at n = 13, side 399/100, to convergence;
       freeze a candidate below thirteen, or confirm at or above thirteen on two site sets.
     operator: sub-agent at the thinking level BC-211 declares, one core
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Time-limited, neither reading earned: run A hit the 60-round limit at 16.000000
+      (least covered 0.929161); runs B and D each spent the budget inside one un-logged
+      round; the n = 12 control at 99/25 converged to 12.312896 above the retained
+      11.998960, so the seed cannot refute a rung. Cost 7.72 s per row round at 399/100
+      against 3.04 s at 99/25.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-211-run-a-n13-399-100.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-211-run-c-control-n12-99-25.json
+    files:
+    - packing/devtools/run_fractional_colgen.py
+    - packing/tests/test_run_fractional_colgen.py
+    checks:
+    - 'pytest tests/test_run_fractional_colgen.py: 4 passed; ruff, format and basedpyright clean'
     uncertainty: >-
       The extrapolated covering value at the ceiling (12.06 to 12.24) is a two-point
       trend; one round may cost more than the 25-minute kill.
-    elapsed_seconds: null
-    elapsed_quality: null
+    elapsed_seconds: 3982
+    elapsed_quality: platform_measured
     next_action: >-
-      Report the converged or halted optimum; the coordinator decides any frozen
-      candidate through the gate; then BC-197.
+      BC-197 dispatched on the same lane at 07:56 UTC with row-round logging required.
     phase: 2
     budget_minutes: 70
     started_at: '2026-09-05T06:46:00Z'
@@ -153,6 +162,46 @@ session:
     fallback: Stop time-limited with the checkpoint; BC-203 records the price.
     write_scope:
     - packing/cases/n13_fractional_certificate/
+    - packing/devtools/
+    - packing/tests/
+    excluded_commands:
+    - devtools.decide_certificate
+    - git commit
+    - git push
+  - task: >-
+      Lane A, BC-197: the m = 5 ladder -- one rung at 997/200 on the n = 21 reading
+      first, then the pre-registered bisection for the n = 20 wall (H-062).
+    operator: sub-agent at the thinking level BC-197 declares, one core
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: >-
+      A column round at 4.8 cost 500 to 1158 s in T-020's run; a rung's confirmation
+      may not converge inside its 60 minutes, and BC-211 showed a round can exceed the
+      25-minute kill at the densities the retained rungs used.
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: >-
+      Report per rung; the coordinator decides any frozen candidate through the gate;
+      then BC-198.
+    phase: 2
+    budget_minutes: 200
+    started_at: '2026-09-05T07:56:00Z'
+    deadline_at: '2026-09-05T11:16:00Z'
+    expected_output: >-
+      Per rung a retained candidate frozen, a refutation with the round it crossed, or
+      a time-limited checkpoint with its row-round table; the bracket the decided rungs
+      support; the cost per round against the model.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev python -m devtools.decide_certificate packing/cases/n21_fractional_certificate/certificate.json
+    kill_condition: A round costing more than 25 minutes at any rung.
+    fallback: Time-limited with the checkpoint; the bracket reported at the width the decided rungs support.
+    write_scope:
+    - packing/cases/n21_fractional_certificate/
+    - packing/cases/n20_fractional_certificate/
     - packing/devtools/
     - packing/tests/
     excluded_commands:
