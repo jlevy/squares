@@ -115,3 +115,18 @@ packing/campaign/agenda-map.md
 # module's own ceiling by devtools.render_certificate_reach, drift-checked in
 # `packing-validate --records`. Same case as RESULTS.md: two owners for one file.
 packing/frontier/CERTIFICATE-REACH.md
+
+# ---------------------------------------------------------------------------
+# Two dated reviews whose quoted sources the formatter rewrites.
+# ---------------------------------------------------------------------------
+#
+# Measured on 2026-09-05 with the pinned flowmark-rs in directory mode (the hook's
+# mode; single-file mode leaves both untouched): 9 lines change in the first and 7 in
+# the second, 3 and 6 of them inside block quotes of external sources -- straight
+# quotes retyped as curly inside material this repository never retypes -- and one
+# genuine corruption, a quoted line beginning ">= 0" read as a block-quote marker and
+# rewritten "> = 0". A dated review is an immutable determination and its quotations
+# are evidence, so the two stay raw. The drift had every commit's hook re-staging
+# them; eight sub-agent worktrees reverted it by hand on 2026-09-05 (think-thto).
+docs/project/reviews/review-2026-09-03-bc152-h060-prior-art-survey.md
+docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md
