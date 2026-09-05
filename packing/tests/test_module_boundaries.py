@@ -531,9 +531,18 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_green17.py": {
             "test_interval_audit_certifies_an_interior_side",  # 6.0s
         },
-        # 27s of call time across 1.
+        # 54s of call time across 2, and the second one for the same reason as
+        # `test_prospective_atlas_seed.py` below: `known_best_builder.expected_outputs()`
+        # builds the composite atlas once and caches it, the marked test above was the one
+        # billed for it in the undivided suite, and deferring that test handed the bill to
+        # the next caller left in the quick lane. Measured at 26.83s serially on a
+        # four-core box (`BC-218`). What still guards the receipt on every pull request is
+        # `test_known_best_composite_png_refuses_a_preview_of_the_wrong_size`, which
+        # rasterises into `tmp_path` and costs nothing; what moves to the deep surface is
+        # the comparison against the committed PNG.
         "test_known_best_atlas.py": {
             "test_known_best_composite_contains_every_case_and_square",  # 27.3s
+            "test_known_best_composite_png_is_derived_from_current_svg",  # 26.8s
         },
         # 101s of call time across 3.
         "test_minus_w_bridge.py": {

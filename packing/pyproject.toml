@@ -64,8 +64,11 @@ dev = [
     # 408.55s tier on CI (run 33985984585, job 101359470209), because `--jobs 2` already
     # hides every other step under it. A second GitHub job cannot shorten a wall that is
     # one step, so the only parallelism left to buy is inside that step, and the lane is
-    # the shape that wants it -- 2,012 tests each under a 5s ceiling, no shared writes.
-    # Measured on a four-core box: 306s serial against 135s at `-n 4`, same 2,010 passes.
+    # the shape that wants it -- around 2,000 tests, each held under a 5s ceiling by the
+    # step's own rule, none of them writing anywhere shared. Measured for `BC-218` on a
+    # four-core box at `PACK_JOBS=1`: 306.4s in one process against 135.0s at `-n 4`, and
+    # no failure that appears only under xdist. The argument for the count, and for why it
+    # is not `--inner-jobs`, is in `_pytest_workers` in `sqpack/cli/validate.py`.
     "pytest-xdist>=3.8",
     "ruff>=0.14",
     # Only derive_field.py uses SymPy, and only to re-derive a constant the verifier

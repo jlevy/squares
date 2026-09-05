@@ -634,11 +634,17 @@ def _pytest_workers() -> int:
     that already costs nothing on the clock. The only parallelism left to buy is inside
     the step.
 
-    The lane is the right shape for it: 2,012 tests, each held under
+    The lane is the right shape for it: around 2,000 tests, each held under
     `QUICK_TEST_CEILING_SECONDS` by the ceiling the step itself enforces, none of them
     writing anywhere shared. Measured on a four-core box at `PACK_JOBS=1`: 306.4s in one
-    process against 135.04s at `-n 4`, 2,010 passing either way and no failure that
-    appears only under xdist.
+    process against 135.04s at `-n 4`, with no failure that appears only under xdist.
+
+    135s was not 306/4, and the gap was the interesting part. One test carried 93.86s of
+    the serial lane and another 26.83s, so a quarter of the work could not be divided at
+    all -- and neither test had grown. Both call a cached builder, both were billed for it
+    only because BC-214's split deferred the neighbour that used to trigger the cache
+    first, and the ceiling this step enforces was already failing on them. Marked, and
+    then the lane is 56.61s at `-n 4` with nothing at or above the ceiling.
 
     The count is the machine's, not the tier's, because this step is the one thing nothing
     else is waiting behind. `-n 1` is not asked for: a single xdist worker is a subprocess

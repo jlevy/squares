@@ -357,6 +357,7 @@ def test_known_best_composite_contains_every_case_and_square() -> None:
     assert sum(" = " in bound for bound in bounds) == 35
 
 
+@pytest.mark.slow
 def test_known_best_composite_png_is_derived_from_current_svg() -> None:
     outputs, _manifest = known_best_builder.expected_outputs()
     svg_text = outputs[ATLAS / "known-best-1-100.svg"]

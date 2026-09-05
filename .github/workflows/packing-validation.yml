@@ -91,6 +91,33 @@ jobs:
       # What the split costs is stated rather than hidden: a pull request can now be green
       # while a deferred test is broken. What is deferred is the slow tail, and the honest
       # summary of it is that no failure in the last month has come from there.
+      # One job, and BC-218 priced the alternatives rather than assuming this one.
+      #
+      # The tempting read of BC-214's 409s is that it is a queue: a dozen steps of
+      # comparable cost on one runner, waiting for each other, and a fan-out of jobs would
+      # pay their maximum instead of their sum. The step table refuses it. At 88f7e5f8
+      # (run 33985984585, job 101359470209) the tier's wall was 408.55s and `fast
+      # behavioral tests` was 408.09s of it -- 99.9 per cent. `--jobs 2` had already put
+      # every other step in the second lane, where the whole visible cost was 135.17s, and
+      # they finished with the wall to spare. There was no queue. There was one step.
+      #
+      # So the shapes priced out like this, all against a measured 11s of checkout, uv
+      # install and `uv sync` that any new job repeats:
+      #
+      #   * A second job for the record checks: wall unchanged at ~425s, because the
+      #     behavioural step still runs alone for 409s of it, and +3 billed minutes for
+      #     work that was already free. Strictly worse, and rejected on the numbers.
+      #   * A matrix over the deep surface: same argument one level up. That surface's
+      #     wall is 2491.83s (run 33982793449) and `exhaustive exact behavioral tests` is
+      #     1765.82s of it, so a matrix pays N setups to arrive at a floor set by one step.
+      #   * Parallelism inside the step: 306.4s to 135.0s at `-n 4` on a four-core box,
+      #     then to 56.6s once the two shared builds the lane split had re-billed were
+      #     marked. This is the one that moves, and it is wired in `_fast_tests`.
+      #
+      # What follows from that, for whoever reads this next: the critical path has moved.
+      # The quick lane is no longer the wall, the second `--jobs` lane's ~135s is, and
+      # `--jobs 3` is the next lever rather than a third job. It is left at 2 here because
+      # BC-218 could not clock it on CI, and an unmeasured CI change is how D-380 happened.
       - name: Run the required pull-request surface
         if: "github.event_name == 'pull_request'"
         run: >-
