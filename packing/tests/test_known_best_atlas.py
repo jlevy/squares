@@ -10,6 +10,7 @@ from collections import Counter
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
+import cairosvg
 import jsonschema
 import pytest
 import yaml
@@ -256,14 +257,14 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
         "layout": "10 by 10, row-major n=1..100",
         "png_preview": {
             "derived_from": "atlas/known-best/known-best-1-100.svg",
-            "height": 2676,
+            "height": 2896,
             "path": "atlas/known-best/known-best-1-100.png",
             "width": 2400,
         },
         "renderer": "sqpack deterministic composite renderer",
         "square_count": 5050,
         "svg": {
-            "height": 2676,
+            "height": 2896,
             "path": "atlas/known-best/known-best-1-100.svg",
             "width": 2400,
         },
@@ -362,26 +363,33 @@ def test_known_best_composite_png_is_derived_from_current_svg() -> None:
 
     assert known_best_builder.png_summary_receipt(png) == (
         2400,
-        2676,
+        2896,
         hashlib.sha256(svg_text.encode("utf-8")).hexdigest(),
     )
 
 
-def test_known_best_composite_png_reports_renderer_failure(
+def test_known_best_composite_png_refuses_a_preview_of_the_wrong_size(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    summary_svg = tmp_path / "summary.svg"
-    monkeypatch.setattr(known_best_builder, "SUMMARY_SVG", summary_svg)
-    monkeypatch.setattr(known_best_builder, "SUMMARY_PNG", tmp_path / "summary.png")
-    monkeypatch.setattr(
-        known_best_builder,
-        "expected_outputs",
-        lambda: ({summary_svg: "<svg/>\n"}, {}),
-    )
-    monkeypatch.setattr(known_best_builder.shutil, "which", lambda _name: "/usr/bin/false")
+    """The receipt names the canvas, so a preview drawn at another size cannot be written.
 
-    with pytest.raises(RuntimeError, match="PNG preview renderer exited 1"):
-        known_best_builder.update()
+    The preview and the PDF are drawn from the same SVG by the same rasteriser, and the
+    only thing standing between a resized canvas and a stale preview is this check.
+    """
+    monkeypatch.setattr(known_best_builder, "SUMMARY_PNG", tmp_path / "summary.png")
+    monkeypatch.setattr(known_best_builder, "SUMMARY_WIDTH", 64)
+    monkeypatch.setattr(known_best_builder, "SUMMARY_HEIGHT", 64)
+    wrong_size = cairosvg.svg2png(
+        bytestring=b'<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"/>',
+        output_width=8,
+        output_height=8,
+        background_color="white",
+    )
+    assert isinstance(wrong_size, bytes)
+    monkeypatch.setattr(known_best_builder.cairosvg, "svg2png", lambda **_kwargs: wrong_size)
+
+    with pytest.raises(ValueError, match="PNG preview dimensions are 8x8"):
+        known_best_builder._update_png_preview("<svg/>\n")  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
 
 
 def _figure_entries() -> dict[int, dict]:

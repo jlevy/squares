@@ -21,8 +21,9 @@ source listing into geometry, or an abstract contact graph into a packing.
 [![The complete known-best atlas from n equals one through one hundred.](known-best/known-best-1-100.svg)](known-best/known-best-1-100.svg)
 
 *All 100 retained known-best constructions in row-major order.
-Each tile shows `n` and the reported side upper bound; the linked SVG remains sharp at
-any zoom level.*
+Each tile shows `n`, the reported side upper bound and, where `s(n)` is still open, the
+best proved lower bound, starred where this project proved it; the linked SVG remains
+sharp at any zoom level.*
 
 ![Audited source coverage from n equals 101 through 324.](prospective/source-coverage-101-324.svg)
 

@@ -38,6 +38,12 @@ SQUARE_FILL_OPACITY = 1.0
 # semibold, so figure labels buy their legibility from contrast rather than
 # weight; see atlas/known-best/FIGURE-PLAYBOOK.md.
 LABEL_MUTED_COLOR = "#47525f"
+# The figure's one accent: a lower bound this project proved. A step darker and more
+# saturated than any square fill, so it reads as a mark rather than as another tilt
+# family. Measured against the palette: 0.096 OkLab from the nearest of the 120 fills,
+# above the 0.035 the colour tests demand between families, and still 0.055 under
+# protanopia; 7.73:1 on the white ground the figure paints for itself.
+FIRST_PARTY_ACCENT_COLOR = "#a3123f"
 PACKING_BOUNDARY_COLOR = "#000000"
 PACKING_BOUNDARY_WIDTH = 1.25
 CONTACT_HIGHLIGHT_COLOR = "#e3c64a"

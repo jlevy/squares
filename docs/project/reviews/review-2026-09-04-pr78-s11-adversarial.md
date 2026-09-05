@@ -902,7 +902,7 @@ statement `s(n) > L`, not for the claimed weak inequality.
 ## Minimal distillation
 
 The shortest honest presentation is the one-minute implication in
-[`t-018-proof.md`](../../../packing/cases/n11_fractional_certificate/t-018-proof.md),
+[`t-018-verifiable-claim-381-100.md`](../../../packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md),
 followed by four exact facts about the retained data.
 Its mathematical core is:
 
@@ -1144,7 +1144,7 @@ The method sources change attribution, not the validity or priority of the concr
 5. Independence, control provenance, method lineage, monotonicity, and apparent-novelty
    language now match the evidence.
 6. A one-minute implication and the exact finite **Condition 5** lemma are isolated in
-   [`t-018-proof.md`](../../../packing/cases/n11_fractional_certificate/t-018-proof.md).
+   [`t-018-verifiable-claim-381-100.md`](../../../packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md).
 7. [`TUTORIAL.md`](../../../TUTORIAL.md) now introduces atoms, weighted mass, the
    counting contradiction, both finite reductions, and the two places nonnegativity is
    essential before sending a reader to the proof and checker.
