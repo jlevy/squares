@@ -2328,7 +2328,7 @@ def _execute_step(step: Step, context: Context) -> StepResult:
             seconds=time.perf_counter() - started,
             reason=str(error),
         )
-    except Exception:
+    except Exception:  # noqa: BLE001 - whatever a step raises is that step's failure, with its traceback
         return StepResult(
             name=step.name,
             status="failed",

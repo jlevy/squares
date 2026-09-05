@@ -379,7 +379,7 @@ def test_full_exhaustive_behavioral_step_selects_only_exhaustive_exact_tests(
     )
 
 
-@pytest.mark.parametrize((("inner_jobs", "expected_workers")), ((1, "1"), (4, "2")))
+@pytest.mark.parametrize((("inner_jobs", "expected_workers")), [(1, "1"), (4, "2")])
 def test_full_negative_controls_respect_the_cap_and_measured_worker_count(
     monkeypatch: pytest.MonkeyPatch,
     inner_jobs: int,
@@ -831,7 +831,7 @@ def test_only_the_whole_suite_steps_carry_budgets() -> None:
 
 @pytest.mark.parametrize(
     ("summary", "expected_scope", "expected_budget"),
-    (("everything", "whole", validate.FAST_SUITE_BUDGET_SECONDS), ("narrow 7", "subset", None)),
+    [("everything", "whole", validate.FAST_SUITE_BUDGET_SECONDS), ("narrow 7", "subset", None)],
 )
 def test_push_tests_take_the_whole_suite_budget_only_when_the_selector_expands(
     monkeypatch: pytest.MonkeyPatch,

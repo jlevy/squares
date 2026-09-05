@@ -41,8 +41,8 @@ END = "<!-- END OPERATING RULES SUMMARY -->"
 # Both patterns treat the separator as optional and the depth as a range, so an editorial
 # pass over either file cannot break the parse. A delimiter that is also a display choice
 # is a delimiter that will eventually move.
-HEADING = re.compile(r"^#{2,3} (OR-\d+):?\s+(.+?)\s*$", re.M)
-BULLET = re.compile(r"^- \*\*(OR-\d+):?\*\*:?\s+(.+?)(?=\n- |\n*\Z)", re.M | re.S)
+HEADING = re.compile(r"^#{2,3} (OR-\d+):?\s+(.+?)\s*$", re.MULTILINE)
+BULLET = re.compile(r"^- \*\*(OR-\d+):?\*\*:?\s+(.+?)(?=\n- |\n*\Z)", re.MULTILINE | re.DOTALL)
 
 
 def _statement(text: str) -> str:

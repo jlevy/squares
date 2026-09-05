@@ -35,7 +35,8 @@ def test_the_suite_is_the_size_it_claims() -> None:
 def test_every_control_has_a_two_item_replace() -> None:
     for control in controls():
         replace = control.get("replace")
-        assert isinstance(replace, list) and len(replace) == 2, control.get("name")
+        assert isinstance(replace, list), control.get("name")
+        assert len(replace) == 2, control.get("name")
         assert replace[0] != replace[1], control.get("name")
 
 

@@ -167,7 +167,8 @@ def trump_root_matches_the_published_polynomial() -> None:
 
         seed = "3.87708359002281417730789706010096270637645566846"
         result = certify(published, PoseBox.around(("s",), (seed,), "1e-20"), digits=45)
-        assert result.exists and result.unique, result.summary()
+        assert result.exists, result.summary()
+        assert result.unique, result.summary()
 
         _squares, side, field = trump11.build()
         assert trump11.side_satisfies_published_polynomial(side, field)

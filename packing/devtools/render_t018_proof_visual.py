@@ -91,10 +91,10 @@ FOOTER_SIZE = 16
 TITLE_WEIGHT = 750
 LABEL_WEIGHT = 650
 PANEL_STROKE_WIDTH = Decimal("1.5")
-SHAPE_STROKE_WIDTH = Decimal("2")
+SHAPE_STROKE_WIDTH = Decimal(2)
 GUIDE_STROKE_WIDTH = Decimal("1.25")
 ATOM_SITE_RADIUS = Decimal("0.7")
-MAX_ATOM_WEIGHT_RADIUS = Decimal("8")
+MAX_ATOM_WEIGHT_RADIUS = Decimal(8)
 FONT_FAMILY = "ui-sans-serif, system-ui, -apple-system, sans-serif"
 
 _FAMILIES = square_fill_palette(hue_count=20, shades_per_hue=5)

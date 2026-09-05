@@ -397,7 +397,8 @@ def test_the_active_margin_guard_recomputes_rather_than_trusting_the_record(
     """
     require_active_margins_zero(system)
     report = system.touching_pairs[0]
-    assert report.active_branch is not None and report.active_constraint is not None
+    assert report.active_branch is not None
+    assert report.active_constraint is not None
     substitute = next(
         one
         for one in report.active_branch.constraints
@@ -504,8 +505,9 @@ def test_the_receipt_digest_is_stable_and_moves_under_drift(determination, syste
     assert outcome.findings["digest"] != outcome.findings["after_margin_mutation"]
 
 
+@pytest.mark.usefixtures("system")
 def test_the_local_reduction_agrees_with_full_feasibility_inside_the_neighborhood(
-    system, determination
+    determination,
 ) -> None:
     """The reduction is a statement about `U`, so it is checked as one.
 
@@ -526,7 +528,8 @@ def test_the_local_reduction_agrees_with_full_feasibility_inside_the_neighborhoo
     assert "boundary" in audit.sample_is_not_adversarial
 
 
-def test_the_mathematical_inputs_are_declared_rather_than_implied(determination) -> None:
+@pytest.mark.usefixtures("determination")
+def test_the_mathematical_inputs_are_declared_rather_than_implied() -> None:
     """The boundary between what is computed and what is cited is written down."""
     from sqpack.local_rigidity.instrument import (  # noqa: PLC0415 - record, not behaviour
         DECLARED_MATHEMATICAL_INPUTS,

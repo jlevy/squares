@@ -64,7 +64,6 @@ def encode(value: FieldElement) -> list[str]:
 
 
 def oriented_square(
-    field: NumberField,
     centre: tuple[FieldElement, FieldElement],
     cosine: FieldElement,
     sine: FieldElement,
@@ -124,7 +123,7 @@ def exact_fixture(
         field, sign=sign, endpoint=endpoint, q_abs=q_abs
     )
     squares = [
-        oriented_square(field, centres[0], cosine, sine),
+        oriented_square(centres[0], cosine, sine),
         face.square(field, centres[1], diagonal=False),
         face.square(field, centres[2], diagonal=False),
         face.square(field, centres[3], diagonal=True),

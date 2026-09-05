@@ -108,7 +108,7 @@ def test_source_only_stage_is_not_a_completed_row_and_resumes(tmp_path: Path) ->
     store, atoms, outer_side, square_side = _store(tmp_path)
     calls = 0
 
-    def interrupted(*args: object) -> object:
+    def interrupted(*_args: object) -> object:
         nonlocal calls
         calls += 1
         raise RuntimeError("synthetic interruption")

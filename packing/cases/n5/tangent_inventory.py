@@ -46,11 +46,11 @@ VARIABLES = (
 )
 
 
-def rank(rows: Iterable[source.LinearRow], field: NumberField) -> int:
-    return source.exact_rank(tuple(rows), field)
+def rank(rows: Iterable[source.LinearRow]) -> int:
+    return source.exact_rank(tuple(rows))
 
 
-def coefficient_rank(vectors: list[list[FieldElement]], field: NumberField) -> int:
+def coefficient_rank(vectors: list[list[FieldElement]]) -> int:
     """Return the exact row rank for vectors of any common finite length."""
     if not vectors:
         return 0
@@ -119,9 +119,9 @@ def matrix(field: NumberField, stratum: str, owner: str) -> tuple[source.LinearR
     return (*source.wall_rows(field, stratum), *fixed, *branches[owner])
 
 
-def rref_nullity(rows: tuple[source.LinearRow, ...], field: NumberField) -> int:
+def rref_nullity(rows: tuple[source.LinearRow, ...]) -> int:
     """Exact equality lineality dimension (the kernel of the active matrix)."""
-    return source.VARIABLE_COUNT - rank(rows, field)
+    return source.VARIABLE_COUNT - rank(rows)
 
 
 def left_kernel(
@@ -181,7 +181,7 @@ def check_relation(
 
 def certificate(rows: tuple[source.LinearRow, ...], field: NumberField) -> dict[str, object]:
     basis = left_kernel(rows, field)
-    if len(basis) != len(rows) - rank(rows, field) or len(basis) != 3:
+    if len(basis) != len(rows) - rank(rows) or len(basis) != 3:
         raise ValueError("left-kernel dimension is not exactly three")
     square1 = [i for i, row in enumerate(rows) if row.label.startswith("wall:1:")]
     square2 = [i for i, row in enumerate(rows) if row.label.startswith("wall:2:")]
@@ -244,7 +244,7 @@ def certificate(rows: tuple[source.LinearRow, ...], field: NumberField) -> dict[
     }
     if forced != expected_forced or len(forced) != 9:
         raise ValueError("positive certificate does not force exactly nine slacks")
-    if coefficient_rank([*positive, survivor], field) != 3:
+    if coefficient_rank([*positive, survivor]) != 3:
         raise ValueError("the advertised relations do not exhaust the left kernel")
     survivor_by_label = {rows[i].label: value for i, value in enumerate(survivor)}
     expected_survivor = {
@@ -439,8 +439,8 @@ def ray_record(
     if positive != expected_support:
         raise ValueError(f"generator support drifted: {sorted(positive)}")
     tight = tuple(item for item, value in zip(rows, residuals, strict=True) if value.is_zero())
-    active_rank = rank(tight, field)
-    if active_rank != rank(rows, field) - 1:
+    active_rank = rank(tight)
+    if active_rank != rank(rows) - 1:
         raise ValueError("an advertised pointed ray lacks codimension-one active rank")
     return {
         **encode_vector(vector),
@@ -486,7 +486,7 @@ def build_result() -> dict[str, object]:
             field, stratum
         )
         expected_nullity = 3 if stratum == "interior" else 1
-        if coefficient_rank(list(lineality.values()), field) != expected_nullity:
+        if coefficient_rank(list(lineality.values())) != expected_nullity:
             raise ValueError("the declared lineality basis is dependent or incomplete")
         relation = add_vectors(
             field,
@@ -498,12 +498,11 @@ def build_result() -> dict[str, object]:
         )
         if any(not value.is_zero() for value in relation):
             raise ValueError("the sole transverse generator relation drifted")
-        if coefficient_rank(list(transverse_vectors.values()), field) != 5:
+        if coefficient_rank(list(transverse_vectors.values())) != 5:
             raise ValueError("the transverse generators have another linear relation")
         if (
             stratum != "interior"
-            and coefficient_rank([*transverse_vectors.values(), *sheet_vectors.values()], field)
-            != 7
+            and coefficient_rank([*transverse_vectors.values(), *sheet_vectors.values()]) != 7
         ):
             raise ValueError("the endpoint pointed quotient does not have dimension seven")
         stratum_records: list[dict[str, object]] = []
@@ -515,10 +514,10 @@ def build_result() -> dict[str, object]:
             # with a branch alternative.
             if sum(label.startswith("contact:3-4:") for label in row_labels) != 2:
                 raise ValueError("owner branch lost a tied support row")
-            matrix_rank = rank(rows, field)
+            matrix_rank = rank(rows)
             if matrix_rank != (12 if stratum == "interior" else 14):
                 raise ValueError("source branch rank drifted")
-            if rref_nullity(rows, field) != expected_nullity:
+            if rref_nullity(rows) != expected_nullity:
                 raise ValueError("source branch lineality drifted")
             for vector in lineality.values():
                 if any(not source.exact_dot(item, vector, field).is_zero() for item in rows):
@@ -786,7 +785,7 @@ def controls_for(result: dict[str, object]) -> dict[str, bool]:
     check_relation(rigid_rows, rigid_weights, field)
     negative_rigid_axis = [-value for value in rigid_axis]
     rigid_ok = (
-        rank(rigid_rows, field) == 1
+        rank(rigid_rows) == 1
         and source.exact_dot(rigid_rows[1], rigid_axis, field).sign() < 0
         and source.exact_dot(rigid_rows[0], negative_rigid_axis, field).sign() < 0
     )
@@ -807,7 +806,7 @@ def controls_for(result: dict[str, object]) -> dict[str, bool]:
     lineality_ok = (
         source.exact_dot(lineality_rows[0], lineality_vector, field).is_zero()
         and not source.exact_dot(lineality_rows[0], rigid_axis, field).is_zero()
-        and coefficient_rank([rigid_axis, lineality_vector], field) == 2
+        and coefficient_rank([rigid_axis, lineality_vector]) == 2
         and bool(
             ray_record(
                 lineality_rows,
@@ -820,14 +819,16 @@ def controls_for(result: dict[str, object]) -> dict[str, bool]:
 
     def first_matrix(trial: dict[str, object]) -> dict[str, object]:
         matrices = trial["six_matrices"]
-        assert isinstance(matrices, list) and isinstance(matrices[0], dict)
+        assert isinstance(matrices, list)
+        assert isinstance(matrices[0], dict)
         return matrices[0]
 
     def sheet_as_transverse(trial: dict[str, object]) -> None:
         first = first_matrix(trial)
         transverse = first["transverse_rays"]
         sheet = first["sheet"]
-        assert isinstance(transverse, dict) and isinstance(sheet, dict)
+        assert isinstance(transverse, dict)
+        assert isinstance(sheet, dict)
         sheet_rays = sheet["rays"]
         assert isinstance(sheet_rays, dict)
         transverse["R1"] = sheet_rays["sheet_angle_negative"]
@@ -836,7 +837,8 @@ def controls_for(result: dict[str, object]) -> dict[str, bool]:
         first = first_matrix(trial)
         transverse = first["transverse_rays"]
         sheet = first["sheet"]
-        assert isinstance(transverse, dict) and isinstance(sheet, dict)
+        assert isinstance(transverse, dict)
+        assert isinstance(sheet, dict)
         sheet_rays = sheet["rays"]
         assert isinstance(sheet_rays, dict)
         sheet_rays["sheet_angle_negative"] = transverse["R1"]

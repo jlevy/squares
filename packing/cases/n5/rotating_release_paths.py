@@ -216,7 +216,7 @@ def bernstein_coefficients(
 
 
 def subdivide_bernstein(
-    coefficients: list[FieldElement], field: NumberField
+    coefficients: list[FieldElement],
 ) -> tuple[list[FieldElement], list[FieldElement]]:
     levels = [coefficients]
     while len(levels[-1]) > 1:
@@ -232,7 +232,7 @@ def certify_nonnegative(
         return 1
     if depth >= MAX_BERNSTEIN_DEPTH:
         raise ValueError("an exact numerator remains uncertified at the subdivision limit")
-    left, right = subdivide_bernstein(coefficients, field)
+    left, right = subdivide_bernstein(coefficients)
     return certify_nonnegative(left, field, depth + 1) + certify_nonnegative(
         right, field, depth + 1
     )
@@ -253,7 +253,7 @@ def certify_strict_positive(
         return 1, minimum_exact(coefficients)
     if depth >= MAX_BERNSTEIN_DEPTH:
         raise ValueError("a strict residual remains uncertified at the subdivision limit")
-    left, right = subdivide_bernstein(coefficients, field)
+    left, right = subdivide_bernstein(coefficients)
     left_count, left_bound = certify_strict_positive(left, field, depth + 1)
     right_count, right_bound = certify_strict_positive(right, field, depth + 1)
     return left_count + right_count, minimum_exact([left_bound, right_bound])
@@ -330,7 +330,7 @@ def centres_at(
     return centres
 
 
-def source_bindings(field: NumberField) -> dict[str, object]:
+def source_bindings() -> dict[str, object]:
     regenerated = {
         "exp_033": face.build_result(),
         "exp_038": tangent_inventory.build_result(),
@@ -1278,7 +1278,7 @@ def build_result() -> dict[str, object]:
         "schema_version": SCHEMA_VERSION,
         "contract": "packing.squares:N5RotatingReleasePaths/v1",
         "field": "Q(sqrt(2)), sqrt(2) in (1,2)",
-        "sources": source_bindings(field),
+        "sources": source_bindings(),
         "baseline": baseline,
         "certificates": {
             name: require_dict(baseline[name], name)["certificate"]

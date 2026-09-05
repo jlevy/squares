@@ -419,7 +419,7 @@ def exact_dot(
     )
 
 
-def exact_rank(rows: tuple[LinearRow, ...], field: NumberField) -> int:
+def exact_rank(rows: tuple[LinearRow, ...]) -> int:
     work = [list(item.coefficients) for item in rows]
     rank = 0
     for column in range(VARIABLE_COUNT):
@@ -499,7 +499,7 @@ def build_stratum(field: NumberField, stratum: str) -> dict[str, object]:
     for branch_name in EXPECTED_CONTACT_BRANCHES:
         contact_branch = alternatives[branch_name]
         rows = (*walls, *fixed, *contact_branch)
-        rank = exact_rank(rows, field)
+        rank = exact_rank(rows)
         if exact_dot(contact_branch[0], direction, field) != field.zero:
             raise ValueError(f"the {stratum} witness left one tied support row")
         if exact_dot(contact_branch[1], direction, field) != field.zero:

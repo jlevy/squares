@@ -113,10 +113,10 @@ def test_figure4_coordinate_packet_has_literal_upper_endpoint_oracle() -> None:
 
 @pytest.mark.parametrize(
     "epsilon",
-    (
+    [
         (Fraction(0), Fraction(0)),
         (Fraction(1, 2), Fraction(0)),
-    ),
+    ],
 )
 def test_figure4_coordinate_packet_rejects_out_of_domain_epsilon(
     epsilon: tuple[Fraction, Fraction],
@@ -126,7 +126,7 @@ def test_figure4_coordinate_packet_rejects_out_of_domain_epsilon(
     assert caught.value.kind == "figure4-epsilon-domain"
 
 
-@pytest.mark.parametrize("epsilon", ((1, 0), (True, False), (0.05, 0.0)))
+@pytest.mark.parametrize("epsilon", [(1, 0), (True, False), (0.05, 0.0)])
 def test_figure4_coordinate_packet_rejects_inexact_epsilon(epsilon: object) -> None:
     with pytest.raises(ElMoumniSourceControlError) as caught:
         derive_figure4_coordinate_packet(epsilon)  # pyright: ignore[reportArgumentType]
@@ -223,7 +223,7 @@ def test_figure4_coordinate_packet_rejects_broadened_claim_boundary() -> None:
 
 @pytest.mark.parametrize(
     ("preserve_minimum", "required_contributions"),
-    ((1, 3), (True, True), (True, 3.0)),
+    [(1, 3), (True, True), (True, 3.0)],
 )
 def test_inexact_or_boolean_control_inputs_reject(
     preserve_minimum: object, required_contributions: object

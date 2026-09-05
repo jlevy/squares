@@ -142,7 +142,7 @@ def decided_here(facts: Facts, headline: Facts) -> str:
             "decides this rung with nothing outside the standard library, and rebuilds "
             "Massaccesi\u2019s $n = 17$ certificate as a known-answer control beside it."
         )
-    return "\n\n".join((routes, identity, beside))
+    return f"{routes}\n\n{identity}\n\n{beside}"
 
 
 def render_claim(facts: Facts, sibling: Facts, headline: Facts) -> str:

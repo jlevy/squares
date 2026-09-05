@@ -32,7 +32,8 @@ CERTIFICATE_PATH = THIRDPARTY / "certificate.json"
 
 def load_script(name: str, path: Path) -> ModuleType:
     specification = importlib.util.spec_from_file_location(name, path)
-    assert specification is not None and specification.loader is not None
+    assert specification is not None
+    assert specification.loader is not None
     module = importlib.util.module_from_spec(specification)
     specification.loader.exec_module(module)
     return module

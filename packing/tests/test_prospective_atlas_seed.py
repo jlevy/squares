@@ -116,10 +116,9 @@ def test_seed_cross_fields_reject_source_annotation_and_identity_mutations() -> 
         assert seed_errors(mutation)
 
 
+@pytest.mark.usefixtures("isolated_seed_build_cache")
 def test_fetch_rejects_corrupted_retained_source_before_use(
-    tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-    isolated_seed_build_cache: None,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setattr(prospective, "SOURCE_ROOT", tmp_path)
     entry = next(

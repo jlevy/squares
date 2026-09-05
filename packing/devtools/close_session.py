@@ -109,7 +109,7 @@ def rollup_span(path: Path) -> tuple[datetime | None, datetime | None]:
         if not isinstance(value, str):
             return None
         try:
-            return datetime.fromisoformat(value.replace("Z", "+00:00"))
+            return datetime.fromisoformat(value)
         except ValueError:
             return None
 
@@ -176,8 +176,8 @@ def codex_receipt_summary(path: Path) -> CodexReceiptSummary:
     delta = rollup["delta"]
     source = rollup["source"]
     responses = sum(int(model["model_response_count"]) for model in delta["models"])
-    started = datetime.fromisoformat(str(source["start_cutoff_at"]).replace("Z", "+00:00"))
-    ended = datetime.fromisoformat(str(source["end_cutoff_at"]).replace("Z", "+00:00"))
+    started = datetime.fromisoformat(str(source["start_cutoff_at"]))
+    ended = datetime.fromisoformat(str(source["end_cutoff_at"]))
     return {
         "path": path.relative_to(ROOT.parent).as_posix(),
         "model_responses": responses,

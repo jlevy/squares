@@ -69,7 +69,7 @@ SVG = b"""<svg xmlns="http://www.w3.org/2000/svg">
 
 
 def _receipt(svg: bytes = SVG) -> dict[str, object]:
-    scene = parse_svg_scene(svg, model="declared:svg-literal", side=Decimal("4"))
+    scene = parse_svg_scene(svg, model="declared:svg-literal", side=Decimal(4))
     fits = tuple(fit_rigid_pose(square) for square in scene.squares)
     return scene.receipt(fits)
 
@@ -155,14 +155,14 @@ def test_nested_transform_order_normalization_and_rigid_fit() -> None:
         </g>
       </g>
     </svg>"""
-    scene = parse_svg_scene(svg, model="declared:svg-literal", side=Decimal("4"))
+    scene = parse_svg_scene(svg, model="declared:svg-literal", side=Decimal(4))
     square = scene.squares[0]
 
     assert [(point.x.midpoint, point.y.midpoint) for point in square.vertices] == [
-        (Decimal("0"), Decimal("4")),
-        (Decimal("1"), Decimal("4")),
-        (Decimal("1"), Decimal("3")),
-        (Decimal("0"), Decimal("3")),
+        (Decimal(0), Decimal(4)),
+        (Decimal(1), Decimal(4)),
+        (Decimal(1), Decimal(3)),
+        (Decimal(0), Decimal(3)),
     ]
     fit = fit_rigid_pose(square)
     assert fit.square_id == "s"
@@ -175,7 +175,7 @@ def test_rotated_wall_tangent_interior_and_tangent_pair_controls() -> None:
       <polygon id="r" transform="translate(2.5 2.5) rotate(30)"
         points="-0.5,-0.5 0.5,-0.5 0.5,0.5 -0.5,0.5"/>
     </svg>"""
-    rotated_scene = parse_svg_scene(rotated, model="declared:svg-literal", side=Decimal("5"))
+    rotated_scene = parse_svg_scene(rotated, model="declared:svg-literal", side=Decimal(5))
     rotated_receipt = rotated_scene.receipt((fit_rigid_pose(rotated_scene.squares[0]),))
     assert verify_receipt(rotated_receipt) == []
 
@@ -184,7 +184,7 @@ def test_rotated_wall_tangent_interior_and_tangent_pair_controls() -> None:
       <polygon id="wall" points="0,2 1,2 1,3 0,3"/>
       <polygon id="interior" points="1,2 2,2 2,3 1,3"/>
     </svg>"""
-    tangent_scene = parse_svg_scene(tangent, model="declared:svg-literal", side=Decimal("3"))
+    tangent_scene = parse_svg_scene(tangent, model="declared:svg-literal", side=Decimal(3))
     tangent_receipt = tangent_scene.receipt(
         tuple(fit_rigid_pose(square) for square in tangent_scene.squares)
     )
@@ -193,7 +193,7 @@ def test_rotated_wall_tangent_interior_and_tangent_pair_controls() -> None:
 
 
 def test_cyclic_and_reversed_vertices_have_one_canonical_serialization() -> None:
-    original = parse_svg_scene(SVG, model="declared:svg-literal", side=Decimal("4"))
+    original = parse_svg_scene(SVG, model="declared:svg-literal", side=Decimal(4))
     cyclic = SVG.replace(
         b"0.25,2.75 1.25,2.75 1.25,3.75 0.25,3.75",
         b"1.25,3.75 0.25,3.75 0.25,2.75 1.25,2.75",
@@ -205,7 +205,7 @@ def test_cyclic_and_reversed_vertices_have_one_canonical_serialization() -> None
 
     documents = []
     for payload in (SVG, cyclic, reversed_svg):
-        scene = parse_svg_scene(payload, model="declared:svg-literal", side=Decimal("4"))
+        scene = parse_svg_scene(payload, model="declared:svg-literal", side=Decimal(4))
         documents.append(scene.receipt(tuple(fit_rigid_pose(s) for s in scene.squares)))
     assert canonical_bytes(documents[0]) == canonical_bytes(documents[1])
     assert canonical_bytes(documents[0]) == canonical_bytes(documents[2])
@@ -229,10 +229,10 @@ def test_independent_verifier_accepts_control_and_rejects_wall_and_overlap_mutat
 def test_every_named_parser_and_geometry_mutation_is_refused() -> None:
     duplicate = SVG.replace(b'id="square-b"', b'id="square-a"')
     with pytest.raises(PrecisionBridgeError, match="duplicate square id"):
-        parse_svg_scene(duplicate, model="declared:svg-literal", side=Decimal("4"))
+        parse_svg_scene(duplicate, model="declared:svg-literal", side=Decimal(4))
 
     malformed = SVG.replace(b"1.25,3.75", b"1.28,3.75")
-    scene = parse_svg_scene(malformed, model="declared:svg-literal", side=Decimal("4"))
+    scene = parse_svg_scene(malformed, model="declared:svg-literal", side=Decimal(4))
     changed = next(square for square in scene.squares if square.square_id == "square-a")
     with pytest.raises(PrecisionBridgeError, match="compatible rigid pose"):
         fit_rigid_pose(changed)
@@ -243,18 +243,18 @@ def test_every_named_parser_and_geometry_mutation_is_refused() -> None:
     </svg>"""
     reverse = forward.replace(b"translate(1 0) scale(2)", b"scale(2) translate(1 0)")
     forward_x = (
-        parse_svg_scene(forward, model="declared:svg-literal", side=Decimal("8"))
+        parse_svg_scene(forward, model="declared:svg-literal", side=Decimal(8))
         .squares[0]
         .vertices[0]
         .x.midpoint
     )
     reverse_x = (
-        parse_svg_scene(reverse, model="declared:svg-literal", side=Decimal("8"))
+        parse_svg_scene(reverse, model="declared:svg-literal", side=Decimal(8))
         .squares[0]
         .vertices[0]
         .x.midpoint
     )
-    assert (forward_x, reverse_x) == (Decimal("1"), Decimal("2"))
+    assert (forward_x, reverse_x) == (Decimal(1), Decimal(2))
 
 
 def test_receipt_is_sorted_stable_and_contains_no_source_bytes_or_fetch_paths() -> None:
@@ -408,7 +408,8 @@ def test_refusal_independent_verifier_rejects_named_mutations(mutation, message:
         SourceBinding.synthetic().to_document(),
         source_cells_sha256(synthetic_source_cells()),
     )
-    assert errors and message in errors[0]
+    assert errors
+    assert message in errors[0]
 
 
 def test_refusal_independent_verifier_accepts_shared_boundary_complete_cover() -> None:
@@ -545,7 +546,8 @@ def test_refusal_authorized_runner_is_ordered_sanitized_verified_and_cleaned(
     )
 
     assert response.closed
-    assert retained_view and bytes(retained_view[0]) == b"\0" * len(payload)
+    assert retained_view
+    assert bytes(retained_view[0]) == b"\0" * len(payload)
     assert len({id(evaluator) for evaluator in evaluators}) == 3
     assert events == [
         "scan",
@@ -737,7 +739,8 @@ def test_refusal_runner_rejects_child_channel_model_reordering_and_unverified_pr
         )
     assert published == []
     assert response.closed
-    assert retained_view and bytes(retained_view[0]) == b"\0" * len(payload)
+    assert retained_view
+    assert bytes(retained_view[0]) == b"\0" * len(payload)
 
 
 def test_refusal_atomic_publish_cleans_temporary_on_success_failure_and_interrupt(
@@ -753,7 +756,7 @@ def test_refusal_atomic_publish_cleans_temporary_on_success_failure_and_interrup
     target.unlink()
     original_link = os.link
 
-    def interrupted_link(source, destination):
+    def interrupted_link(_source, _destination):
         raise KeyboardInterrupt
 
     monkeypatch.setattr(os, "link", interrupted_link)
@@ -763,7 +766,7 @@ def test_refusal_atomic_publish_cleans_temporary_on_success_failure_and_interrup
     assert not list(tmp_path.glob(".result.json.*.tmp"))
     monkeypatch.setattr(os, "link", original_link)
 
-    def failed_link(source, destination):
+    def failed_link(_source, _destination):
         raise OSError("injected publication failure")
 
     monkeypatch.setattr(os, "link", failed_link)

@@ -2500,9 +2500,7 @@ def synthetic_successor_store(
     )
 
 
-def _synthetic_evidence(
-    checkpoint: SuccessorCheckpoint, *, global_minimum: Fraction
-) -> InstrumentEvidence:
+def _synthetic_evidence(*, global_minimum: Fraction) -> InstrumentEvidence:
     atoms, directions, outer_side, _ = synthetic_inputs()
     internal_side = outer_side - Fraction(1, 2)
     containment = Fraction(9, 10)
@@ -2570,7 +2568,7 @@ def assemble_synthetic_result(
     minimum = min(row.source.minimum for row in checkpoint.rows)
     return assemble_result(
         checkpoint,
-        _synthetic_evidence(checkpoint, global_minimum=minimum),
+        _synthetic_evidence(global_minimum=minimum),
         atoms=atoms,
         directions=directions,
         fixture_block=_synthetic_fixture_block(),

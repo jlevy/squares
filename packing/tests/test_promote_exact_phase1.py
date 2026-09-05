@@ -310,10 +310,12 @@ def trumps_cell_is_solved_from_its_own_coefficients_and_lands_on_the_published_s
         f"(published {read_out(field, side)})"
     )
 
-    assert start.pivots > 0 and not start.started_feasible, (
+    no_search = (
         "phase 1 reported Trump's cell already solved by its crash basis, so no search "
         "was measured"
     )
+    assert start.pivots > 0, no_search
+    assert not start.started_feasible, no_search
     assert solution.pivots > 0, (
         "phase 1 landed on the optimum itself, so phase 2 was never asked to improve the "
         "vertex it was handed"

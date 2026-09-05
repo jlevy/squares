@@ -135,7 +135,7 @@ def codex_receipts(session_id: str | None, branch: str) -> list[dict]:
     claims = codex_branch_claims(payloads, set(documents))
     conflicts = [reference for reference, branches in claims.items() if len(branches) > 1]
     if conflicts:
-        name = Path(sorted(conflicts)[0]).name
+        name = Path(min(conflicts)).name
         raise ValueError(f"{name} is attributed to more than one branch")
 
     retained = []
@@ -338,8 +338,8 @@ def section_tools(records: list[dict]) -> list[str]:
 
 
 def _window_seconds(source: dict) -> float:
-    start = datetime.fromisoformat(str(source["start_cutoff_at"]).replace("Z", "+00:00"))
-    end = datetime.fromisoformat(str(source["end_cutoff_at"]).replace("Z", "+00:00"))
+    start = datetime.fromisoformat(str(source["start_cutoff_at"]))
+    end = datetime.fromisoformat(str(source["end_cutoff_at"]))
     return max(0.0, (end - start).total_seconds())
 
 
@@ -522,7 +522,7 @@ def _as_date(value: object) -> date:
         return value.date()
     if isinstance(value, date):
         return value
-    return datetime.fromisoformat(str(value).replace("Z", "+00:00")).date()
+    return datetime.fromisoformat(str(value)).date()
 
 
 def agenda_window(agenda: dict) -> tuple[date, date]:

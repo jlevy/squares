@@ -394,9 +394,7 @@ def _bounded_affine(
     )
 
 
-def _unbounded_cusp(
-    field: NumberField, stress: minus_w_stress.StressEvaluation
-) -> UnboundedCuspData:
+def _unbounded_cusp(stress: minus_w_stress.StressEvaluation) -> UnboundedCuspData:
     tied = {row.label: row for row in stress.rows if row.label.startswith("contact:3-4:")}
     if set(tied) != {TIED_PLUS_LABEL, TIED_MINUS_LABEL}:
         raise ValueError("owner-3 tied-row inventory drifted")
@@ -451,7 +449,7 @@ def scale_records(
         active_rows=active_rows,
     )
     bounded = _bounded_affine(field, stress)
-    unbounded = _unbounded_cusp(field, stress)
+    unbounded = _unbounded_cusp(stress)
     sign_evidence = route_sign_evidence(field, stratum, stress)
     routes = validated_route_specs(selected_handlers, sign_evidence)
     records: list[ScaleRecord] = []

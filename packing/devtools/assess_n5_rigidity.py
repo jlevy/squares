@@ -227,7 +227,8 @@ def contact_axes(pose: Pose, contacts: list[Contact]) -> dict[frozenset[int], se
     for contact in contacts:
         if contact.kind != "pair":
             continue
-        assert contact.host is not None and contact.edge is not None
+        assert contact.host is not None
+        assert contact.edge is not None
         nx, ny = pose.normal(contact.host, contact.edge)
         if nx.sign() < 0 or (nx.sign() == 0 and ny.sign() < 0):
             nx, ny = -nx, -ny
@@ -299,7 +300,8 @@ def constraint_rows(pose: Pose, contacts: list[Contact]) -> list[list[FieldEleme
             row[contact.moving * DOF + 1] = my
             row[contact.moving * DOF + 2] = -ry * mx + rx * my
         else:
-            assert contact.host is not None and contact.edge is not None
+            assert contact.host is not None
+            assert contact.edge is not None
             nx, ny = pose.normal(contact.host, contact.edge)
             hx, hy = pose.centre(contact.host)
             sx, sy = px - hx, py - hy
@@ -771,7 +773,8 @@ def second_order_terms(
             mx, my = (pose.field.rational(value) for value in WALL_NORMALS[contact.wall])
             q.append(-spin * spin * (r[0] * mx + r[1] * my))
             continue
-        assert contact.host is not None and contact.edge is not None
+        assert contact.host is not None
+        assert contact.edge is not None
         n = pose.normal(contact.host, contact.edge)
         host_spin = direction[contact.host * DOF + 2]
         hx, hy = pose.centre(contact.host)

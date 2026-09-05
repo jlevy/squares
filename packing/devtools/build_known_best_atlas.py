@@ -888,9 +888,7 @@ def _legend_row(
         cursor += width + gap
 
 
-def _append_summary_legend(
-    root: ET.Element, built: list[BuiltCase], *, spec: RenderSpec
-) -> None:
+def _append_summary_legend(root: ET.Element, *, spec: RenderSpec) -> None:
     """Two rows: what the badges assert, then what color and shade encode."""
     totals = load_figure_record()["totals"]
     tally = {
@@ -1029,7 +1027,7 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
             "fill": PAPER_THEME.muted,
         },
     ).text = SUMMARY_REPOSITORY
-    _append_summary_legend(root, built, spec=spec)
+    _append_summary_legend(root, spec=spec)
     sub(
         root,
         "text",

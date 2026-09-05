@@ -420,7 +420,7 @@ def dead_links() -> list[str]:
     return problems
 
 
-def check(
+def check(  # noqa: C901 - a flat list of record invariants, each a few lines; see mccabe
     series,
     explorations,
     hypotheses,

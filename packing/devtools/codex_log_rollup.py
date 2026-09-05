@@ -170,10 +170,7 @@ class LegacyCommand:
 
 
 def _timestamp_ms(value: str) -> float:
-    return (
-        datetime.fromisoformat(value.replace("Z", "+00:00")).timestamp()
-        * MILLISECONDS_PER_SECOND
-    )
+    return datetime.fromisoformat(value).timestamp() * MILLISECONDS_PER_SECOND
 
 
 def _utc_now() -> str:

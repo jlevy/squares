@@ -27,11 +27,13 @@ WITNESSES = ROOT / "witnesses"
 def main() -> int:
     grid = load_witness(WITNESSES / "grid-n004.yaml")
     grid_result, grid_report = exact_verify(grid)
-    assert grid_report.valid and grid_result["coordinate_provenance"] == "verified"
+    assert grid_report.valid
+    assert grid_result["coordinate_provenance"] == "verified"
 
     algebraic = load_witness(WITNESSES / "rotated-n001-sqrt2.yaml")
     algebraic_result, algebraic_report = exact_verify(algebraic)
-    assert algebraic_report.valid and algebraic_result["coordinate_provenance"] == "verified"
+    assert algebraic_report.valid
+    assert algebraic_result["coordinate_provenance"] == "verified"
     assert algebraic_result["field_certificate"]["irreducible_over_q"] is True
     inspected = inspect_witness(algebraic)
     assert inspected["assurance_conclusion"] == "none"
@@ -47,10 +49,8 @@ def main() -> int:
 
     overlap = load_witness(WITNESSES / "overlap-negative-control.yaml")
     overlap_result, overlap_report = exact_verify(overlap)
-    assert (
-        not overlap_report.valid
-        and overlap_result["coordinate_provenance"] == "not-established"
-    )
+    assert not overlap_report.valid
+    assert overlap_result["coordinate_provenance"] == "not-established"
     assert not independent_check(WITNESSES / "overlap-negative-control.yaml")[
         "verification_passed"
     ]
@@ -79,7 +79,8 @@ def main() -> int:
         precision=300,
         tolerance="1e-100",
     )
-    assert numeric_report.valid and numeric["coordinate_provenance"] == "numerically-checked"
+    assert numeric_report.valid
+    assert numeric["coordinate_provenance"] == "numerically-checked"
     minimum_gap = Fraction(numeric["minimum_best_pair_gap"])
     assert Fraction(-1, 10**100) < minimum_gap < 0
     try:

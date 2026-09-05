@@ -150,7 +150,7 @@ def test_contact_scaffold_atlas_supports_direct_stable_identity_lookup() -> None
         "T5-01/3333",
         "T5-01/xxxx",
     ):
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match=r"identity|topology|representative"):
             scaffold_by_identity(atlas, invalid)
 
 

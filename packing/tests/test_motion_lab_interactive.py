@@ -101,7 +101,8 @@ process.stdout.write(JSON.stringify({
     assert cast(dict[str, object], result["probe"])["variant"] == "probe-rejected"
     playback = cast(list[int], result["playback"])
     assert len(playback) <= 160
-    assert playback[0] == 0 and playback[-1] == 2650
+    assert playback[0] == 0
+    assert playback[-1] == 2650
     assert 177 in playback
     assert cast(dict[str, int], result["windowed"]) == {"start": 1280, "end": 1321}
 
@@ -127,7 +128,8 @@ def test_general_lab_is_deterministic_shared_scenario_ui() -> None:
     assert "Reduced-motion mode advanced one retained event" in first
     assert '"scenario_id": "free-quench"' in first
     assert 'fetch("http' not in first
-    assert '<script src="http' not in first and '<link href="http' not in first
+    assert '<script src="http' not in first
+    assert '<link href="http' not in first
 
 
 def test_general_browser_javascript_parses_as_shipped() -> None:

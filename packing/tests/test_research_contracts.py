@@ -146,7 +146,8 @@ def test_n4_seed0_highs_failure_fixture_is_replayable() -> None:
         assert str(result.message) == "(HiGHS Status 4: Solve error)"
     else:
         assert result.success, (result.status, result.message)
-        assert result.x is not None and result.x.shape == (9,)
+        assert result.x is not None
+        assert result.x.shape == (9,)
         assert np.isfinite(result.x).all()
         assert np.max(a_ub @ result.x - b_ub) <= 1e-10
 
@@ -272,7 +273,8 @@ def test_solve_cell_status4_uses_one_ipm_fallback(monkeypatch: pytest.MonkeyPatc
     ]
     assert result.solver_calls == 2
     _assert_attempt_indices(result)
-    assert result.max_violation is not None and result.max_violation <= quench.LP_FEASIBLE_EPS
+    assert result.max_violation is not None
+    assert result.max_violation <= quench.LP_FEASIBLE_EPS
 
 
 def test_solve_cell_status4_ipm_failure_stays_typed(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -396,7 +398,8 @@ def test_solve_cell_ipm_bad_residual_refuses_at_total_cap(
     result = quench.solve_cell(theta, cell, 2)
 
     assert result.outcome == "postcheck_rejection"
-    assert result.max_violation is not None and result.max_violation > quench.LP_FEASIBLE_EPS
+    assert result.max_violation is not None
+    assert result.max_violation > quench.LP_FEASIBLE_EPS
     assert calls == ["highs", "highs-ipm", "highs-ipm", "highs-ipm"]
     assert [receipt.method for receipt in result.attempt_receipts] == calls
     assert result.solver_calls == len(calls) == quench.MAX_RESIDUAL_SOLVER_CALLS

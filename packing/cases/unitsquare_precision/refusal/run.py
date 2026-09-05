@@ -856,7 +856,7 @@ def _check_sanitized(value: object) -> None:
             tokens = set(re.findall(r"[a-z0-9]+", key.lower()))
             forbidden = tokens & _FORBIDDEN_RETAINED_KEYS
             if forbidden:
-                raise RunnerGuardError(f"forbidden retained key: {sorted(forbidden)[0]}")
+                raise RunnerGuardError(f"forbidden retained key: {min(forbidden)}")
             _check_sanitized(item)
         return
     if isinstance(value, list):

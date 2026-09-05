@@ -79,7 +79,7 @@ _SEMANTIC_FIELDS = frozenset(
 
 def _instant(value: str) -> datetime:
     try:
-        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        parsed = datetime.fromisoformat(value)
     except ValueError as error:
         raise ValueError(f"invalid cutoff timestamp: {value}") from error
     if parsed.tzinfo is None:
@@ -155,7 +155,7 @@ def _semantic_instant(
         problem(f"{field} is not an offset-aware timestamp")
         return None
     try:
-        instant = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        instant = datetime.fromisoformat(value)
     except OverflowError, ValueError:
         problem(f"{field} is not an offset-aware timestamp")
         return None
@@ -269,7 +269,7 @@ def _semantic_metrics(
     return {"scalars": scalars, "tools": tools, "models": models}
 
 
-def _semantic_difference(after: int | float, before: int | float) -> int | float | None:
+def _semantic_difference(after: float, before: float) -> int | float | None:
     if after < before:
         return None
     value = after - before
@@ -571,7 +571,7 @@ def _metrics(snapshot: Mapping[str, Any], root_task_id: str) -> dict[str, Any]:
     }
 
 
-def _difference(after: int | float, before: int | float, field: str) -> int | float:
+def _difference(after: float, before: float, field: str) -> int | float:
     if after < before:
         raise ValueError(f"non-monotone Codex delta field {field}: {before} -> {after}")
     value = after - before

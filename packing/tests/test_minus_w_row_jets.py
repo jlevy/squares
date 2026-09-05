@@ -10,7 +10,7 @@ from cases.n5 import minus_w_row_jets, tangent_cones, tangent_inventory
 
 @pytest.mark.parametrize(
     ("stratum", "expected_count"),
-    (("A", 17), ("interior", 15), ("B", 17)),
+    [("A", 17), ("interior", 15), ("B", 17)],
 )
 @pytest.mark.parametrize("owner", tangent_cones.EXPECTED_CONTACT_BRANCHES)
 @pytest.mark.exhaustive_exact
@@ -37,7 +37,7 @@ def test_owner_rows_match_complete_authoritative_inventory(
 
 @pytest.mark.parametrize(
     ("stratum", "expected_count"),
-    (("A", 19), ("interior", 17), ("B", 19)),
+    [("A", 19), ("interior", 17), ("B", 19)],
 )
 @pytest.mark.exhaustive_exact
 def test_active_rows_expose_both_owner_alternatives(stratum: str, expected_count: int) -> None:

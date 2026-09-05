@@ -418,7 +418,8 @@ def test_the_enclosure_contains_the_exact_minimum_direction_by_direction() -> No
         search = _search(certificate, label)
         outcome = search.search(prune_at=None)
         assert outcome.status == "certified"
-        assert outcome.lower is not None and outcome.upper is not None
+        assert outcome.lower is not None
+        assert outcome.upper is not None
         cosine, sine = _exact_rotation(certificate.half_tangents[index])
         if label.endswith("'"):
             cosine, sine = sine, cosine
@@ -572,7 +573,8 @@ def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> No
     assert verdict.failures == (CONDITION5,)
     refuted = verdict.directions[-1]
     assert refuted.status == "refuted"
-    assert refuted.upper is not None and refuted.upper < verdict.scale
+    assert refuted.upper is not None
+    assert refuted.upper < verdict.scale
     assert refuted.witness is not None
     index = int(refuted.label.rstrip("'"))
     cosine, sine = _exact_rotation(too_large.half_tangents[index])

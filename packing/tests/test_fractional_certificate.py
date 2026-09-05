@@ -706,7 +706,8 @@ def test_the_refuting_grid_fits_and_one_of_its_squares_starves() -> None:
     assert len(corners) == order * order == 16
     # Inside the container, and separated: the far edge of the last square and
     # the gap between consecutive ones are both decided exactly.
-    assert corners[-1][0] + b < side and corners[-1][1] + b < side
+    assert corners[-1][0] + b < side
+    assert corners[-1][1] + b < side
     assert pitch - b == gap > 0
 
     covered = [

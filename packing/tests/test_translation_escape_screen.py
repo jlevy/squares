@@ -115,9 +115,9 @@ def test_certified_slides_equal_their_closed_forms() -> None:
         diagonal = mp.sqrt(2) / 2
         for item in separating:
             x, y = mp.mpf(item["direction"]["x"]), mp.mpf(item["direction"]["y"])
-            assert abs(abs(x) - diagonal) < mp.mpf("1e-20") and abs(x) == abs(y), (
-                f"n={n} does not slide along a 45 degree diagonal"
-            )
+            off_diagonal = f"n={n} does not slide along a 45 degree diagonal"
+            assert abs(abs(x) - diagonal) < mp.mpf("1e-20"), off_diagonal
+            assert abs(x) == abs(y), off_diagonal
         assert {
             (mp.sign(mp.mpf(item["direction"]["x"])), mp.sign(mp.mpf(item["direction"]["y"])))
             for item in separating

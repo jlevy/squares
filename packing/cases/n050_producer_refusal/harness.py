@@ -183,7 +183,7 @@ def observe(*, root: Path = Path()) -> dict[str, Any]:
         module.run_exp050(RESULT_PATH, root=root)
     except StageSentinelError as error:
         reached_stage = error.stage
-    except Exception as error:  # The dynamically loaded frozen exception has no static type.
+    except Exception as error:  # noqa: BLE001 - the frozen module's exception has no static type
         refusal_type = type(error).__name__
         refusal_text = str(error)
     else:

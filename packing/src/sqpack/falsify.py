@@ -104,7 +104,7 @@ def feasible_center_interval(theta: float, side: float, length: float) -> tuple[
 
 
 def _clamp(value: float, low: float, high: float) -> float:
-    return low if value < low else high if value > high else value
+    return low if value < low else min(value, high)
 
 
 def search_escape(
