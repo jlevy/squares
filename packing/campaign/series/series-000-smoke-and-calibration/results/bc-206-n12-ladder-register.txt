@@ -621,6 +621,55 @@
     different drivers, which is why the floor here is 8.50 and not near 12.31.
   seconds: 227.1 wall, 8 column rounds
 
+- run: f-397-100  [NOT pre-registered: the covering value from BELOW at 3.97]
+  side: 397/100 = 3.97
+  construction: devtools.run_fractional_cutting, the packing-side cutting-plane
+    loop -- the instrument BC-200 used to raise the exact floor under the n = 11
+    covering value. It builds the dual family directly and scales it by the
+    reciprocal of its exact max pointwise depth, so every scaled_total below is a
+    proved lower bound on nu*(3.97), not a reading.
+  command: python -m devtools.run_fractional_cutting --n 12 --side 397/100
+    --minutes 34 --iterations 40 --cap 120 --support-cap 96 --rows-rounds 8
+  scale: not applicable -- this driver carries exact rationals throughout and
+    never rationalises to a scale, so there is no rationalisation loss to report
+  rationale: every other run on this ladder bounds the covering value from above.
+    None of them can bar a side. This one can: a floor above twelve at 3.97 would
+    say no certificate exists there for any site set at all.
+  # iter  orbits  support  row-LP optimum  converged  exact max depth  PROVED FLOOR
+    iter=0   orbits=511  support=48  row_lp=12.131002  conv=False  depth=1.521930  floor=7.970800
+    iter=1   orbits=631  support=85  row_lp=12.346857  conv=False  depth=1.576243  floor=7.833093
+    iter=2   orbits=751  support=95  row_lp=12.364038  conv=False  depth=1.537522  floor=8.041537
+    iter=3   orbits=871  support=94  row_lp=12.356280  conv=False  depth=1.363512  floor=9.062097
+    iter=4   orbits=991  support=96  row_lp=12.345850  conv=True   depth=1.370128  floor=8.986309
+    iter=5   orbits=1111 support=96  row_lp=12.300354  conv=True   depth=1.297116  floor=9.424465
+    iter=6   orbits=1231 support=96  row_lp=12.265405  conv=False  depth=1.191372  floor=10.031037
+    iter=7   orbits=1351 support=96  row_lp=12.248227  conv=True   depth=1.227189  floor=9.617581
+    iter=8   orbits=1471 support=96  row_lp=12.235246  conv=False  depth=1.167720  floor=10.149024
+    iter=9   orbits=1591 support=96  row_lp=12.227034  conv=False  depth=1.079646  floor=10.814018
+    iter=10  orbits=1711 support=96  row_lp=12.209716  conv=False  depth=1.070851  floor=10.764487
+  best_floor: 11675308645/1079645772 = 10.814017845, at iteration 9, exact,
+    decided at 2755560 arrangement vertices with 88 re-decided in Fraction
+    arithmetic; the scaled family has max pointwise depth exactly 1
+  verdict: proved=False, and the single failure is "K3 total weight at least n" --
+    the family is dual-feasible, it is just not heavy enough. So:
+      nu*(3.97) >= 10.814018   exactly, this run
+    which is 1.185982 short of the twelve that would bar the side. The floor was
+    still climbing when the clock ran out: 7.97, 7.83, 8.04, 9.06, 8.99, 9.42,
+    10.03, 9.62, 10.15, 10.81, 10.76 -- up 2.84 over eleven iterations, not
+    monotone, and the exact max depth fell 1.5219 -> 1.0709 towards the 1 that
+    would make the raw total the floor. At the raw totals it is carrying
+    (11.5 to 11.9) a depth of 1 would put the floor just under twelve, so this
+    instrument was not going to bar 3.97 in this budget either.
+  side effect worth recording: this run also produced the best UPPER bound on the
+    ladder. Its row LP at 1351 orbits converged at 12.248227, below the 12.314708
+    that cc-397-100's column loop stopped at with 830 orbits, and the row LP was
+    still falling at 12.209716 with 1711 orbits when the clock ran out. So
+    cc-397-100's stopping rule -- no candidate orbit has averaged depth above 1 --
+    stops short of what a denser site set reaches. That is a real qualification
+    on cc's number and it is recorded here rather than smoothed over.
+  seconds: 2054.5 wall, 11 iterations, stopped by "deadline reached before
+    iteration 11"
+
 # ---------------------------------------------------------------------------
 # The pre-registered ladder at a glance. Every entry is a restricted optimum.
 # Rows only raise one, so a value at or above twelve refutes the site set that
@@ -717,52 +766,61 @@
 #
 # What this measures about the ceiling, which is the point of the cell. The
 # covering construction is retained at 99/25 = 3.96 with total 11.998960. At
-# 397/100 = 3.97 the same generator, given a column step wide enough to matter,
-# runs its site set from 511 orbits to 830 and then stops on its own rule --
-# no candidate orbit has averaged depth above 1 -- at 12.314707522.
+# 397/100 = 3.97 the same machinery, given a column step wide enough to matter,
+# converges its row loop at 12.248227 over 1351 orbits and is still falling --
+# 12.209716 over 1711 orbits -- when the clock stops it. Two independent
+# column loops that stopped on the generator's own rule agree at 12.314708 to
+# eleven figures (cc-397-100, k-397-100); the cutting loop beats that with more
+# sites, which is a qualification on the rule, not on the number.
 #
-# So the two comparable constructions give 11.998960 at 3.96 and 12.314708 at
-# 3.97: the covering construction's value rises 0.315748 across that 0.01, a
-# slope of 31.57 per unit side. The retained rung has 0.001040 of margin. At
-# that slope the margin is spent 0.0000329 of side above 3.96 --
+# So the two comparable constructions give 11.998960 at 3.96 and, at 3.97,
+# somewhere at or below 12.248227. The covering construction's value therefore
+# rises by at least 0.249 across that 0.01 -- a slope of at least 24.9 per unit
+# side, and 31.6 if cc's stopping-rule value is the fair comparison. The
+# retained rung has 0.001040 of margin. At those slopes the margin is spent
+# between 0.000033 and 0.000042 of side above 3.96 --
 #
-#   the n = 12 ladder climbs about 3.3e-05 above 99/25, to roughly 3.960033,
-#   and the first pre-registered side above it, 3.97, is already 0.31 past the
-#   end rather than marginally past it.
+#   the n = 12 ladder climbs about 3e-05 to 4e-05 above 99/25, to roughly
+#   3.96004, and the first pre-registered side above it, 3.97, is a quarter of a
+#   unit past the end rather than marginally past it.
 #
 # That is the cell's question answered, and the answer reverses the expectation
 # it was set with. The 0.0308 of runway between the retained rung and the
-# ceiling 4B = 3.9908 is not runway. The covering value closes it at 3.96003,
-# 0.0308 below where the ceiling would have. At n = 12, m = 4, the covering
-# value binds and the ceiling never gets the chance -- the same shape BC-197
-# found at m = 5, where the wall bracket [97/20, 39/8] sits far below that
-# method's ceiling of 4.9885. The ceiling still forecloses the conjectured 4 for
-# any single certificate of this shape, as T-017 records; what this block adds
-# is that the search stops far earlier and for a different reason, so the gap to
-# the ceiling was never the binding quantity at this n.
+# ceiling 4B = 3.9908 is not runway. The covering construction closes it at
+# about 3.96004, 0.0308 below where the ceiling would have. At n = 12 and m = 4
+# the covering value binds and the ceiling never gets the chance -- the same
+# shape BC-197 found at m = 5, where the wall bracket [97/20, 39/8] sits far
+# below that method's ceiling of 4.9885. The ceiling still forecloses the
+# conjectured 4 for any single certificate of this shape, as T-017 records; what
+# this block adds is that the search stops far earlier and for an unrelated
+# reason, so the gap to the ceiling was never the binding quantity at this n.
 #
-# The eight pre-registered runs are consistent with that and add nothing to it:
-# each refutes its own site set, and a site set only raises the optimum above
-# the unrestricted covering value, so on their own they say nothing about the
-# side. What carries the conclusion is cc-397-100's column-loop convergence,
-# reproduced independently by k-397-100 from a different starting site set to
-# eleven figures -- 12.314707521999658 and 12.314707521999667.
+# How hard is any of this as a statement about nu*(3.97)? The honest answer is a
+# bracket that does not close:
 #
-# How hard is that as a bound on nu*(3.97)? The honest answer is a bracket that
-# does not close:
+#   nu*(3.97) <= 12.248227   f-397-100 iteration 7, converged row loop
+#   nu*(3.97) >= 10.814018   f-397-100 iteration 9, exact, max depth exactly 1
 #
-#   nu*(3.97) <= 12.314708   two converged column loops, agreeing
-#   nu*(3.97) >=  8.497721   k-397-100's exact ceiling decision
-#   nu*(3.97) >=  7.970800   run_fractional_cutting, iteration 0, exact
+# Twelve is inside it. So nothing here bars 3.97 outright. Barring it needs the
+# floor above twelve, and devtools.run_fractional_cutting was climbing towards
+# that -- 7.97 to 10.81 over eleven iterations, exact depth falling 1.5219 to
+# 1.0709 -- when its 34 minutes ran out. Its raw totals in the last iterations
+# are 11.5 to 11.9, so even a depth of exactly 1 would have landed just under
+# twelve. This side is close to decidable by that instrument and was not
+# decidable in this budget.
 #
-# Twelve is inside that bracket. So this block does not bar 3.97 outright; what
-# it establishes is that the generator, run to its own stopping rule, lands
-# 0.31 above twelve there, and that the retained rung's 0.001040 of margin is
-# spent within 0.000033 of side at the slope those two points define. The
-# remaining work to make it a bar is a floor above twelve, which is what
-# devtools.run_fractional_cutting exists for and what run f-397-100 attempts.
+# The eight pre-registered runs are consistent with all of it and, on their own,
+# establish less: each refutes its own site set, and a site set only raises the
+# optimum above the unrestricted covering value, so none of them speaks about a
+# side. Their value is the mechanism they expose -- the m^2 = 16 degeneracy and
+# the window arithmetic above -- not the refutations themselves.
 #
-# The best value seen below twelve above the retained rung is 11.989070, at 3.97
-# on the window construction at row 9 of an unconverged loop. It is a climbing
-# lower bound on that site set's own optimum, not a certificate and not a
-# candidate, and the loop crossed twelve on the next round.
+# The best value seen below twelve anywhere above the retained rung is
+# 11.989070, at 3.97 on the window construction at row 9 of an unconverged loop.
+# It is a climbing lower bound on that site set's own optimum, not a certificate
+# and not a candidate, and the loop crossed twelve on the next round.
+#
+# Nothing was promoted. cases/n12_fractional_certificate/ is exactly as it was
+# found; the one file a driver wrote into it, a converged freeze of mass
+# 12.364129, was moved out the moment it landed because a mass above twelve is
+# not a candidate.
