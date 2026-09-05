@@ -105,6 +105,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # Pages has to be enabled once, with GitHub Actions as its source: the
+      # action's `enablement` input would do it but needs a token other than the
+      # workflow's own, so a missing site fails here rather than being created.
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 
