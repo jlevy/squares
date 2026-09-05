@@ -5,7 +5,7 @@ title: "Certificate page: review follow-ups on PR #79"
 kind: epic
 status: open
 priority: 1
-version: 10
+version: 11
 labels:
   - explainer
   - pr-79
@@ -21,7 +21,8 @@ child_order_hints:
   - is-01m1qjfvdr6cmwbm839qn8hqqr
   - is-01m1qjhg32492484ddv952pb8p
   - is-01m1qjjjf3a0gsqxtq45vkzca3
+  - is-01m1qjs3ywaq13mdmrgq7np3vh
 created_at: 2026-09-05T00:51:11.062Z
-updated_at: 2026-09-05T01:22:51.999Z
+updated_at: 2026-09-05T01:26:26.509Z
 ---
 The review directions on PR #79 for the certificate explainer, tracked one bead each; opened because the page's feature bead (think-y3mv) was closed while review work continued.
