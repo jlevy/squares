@@ -670,6 +670,27 @@
   seconds: 2054.5 wall, 11 iterations, stopped by "deadline reached before
     iteration 11"
 
+- run: f2-397-100  [NOT pre-registered: f-397-100 warm-started, does the floor climb?]
+  side: 397/100 = 3.97
+  construction: devtools.run_fractional_cutting --warm f-397-100.state.json,
+    the driver's own continuation path, everything else unchanged
+  rationale: f-397-100 stopped on its clock with the floor at 10.814018 and still
+    moving. Whether that instrument can reach twelve at this side is the one
+    question the block leaves open, and warm-starting is the cheap way to ask it.
+  # iter  orbits  support  row-LP optimum  exact max depth  PROVED FLOOR
+    iter=0  orbits=1711 support=96  row_lp=12.209716  depth=1.096093  floor=10.463205
+    iter=1  orbits=1831 support=96  row_lp=12.209716  depth=1.096469  floor=10.845594
+  best_floor: 10.845594, exact, at iteration 1
+  verdict: the floor has flattened. It gained 2.843 over f-397-100's 34 minutes
+    and 0.032 over these 18, and the exact max depth stopped falling -- 1.070851
+    at the end of f-397-100, then 1.096093 and 1.096469 here, moving the wrong
+    way. The raw totals behind it are 11.47 and 11.89, so even a depth of exactly
+    1 would land under twelve. This instrument is not going to bar 3.97 at this
+    support cap and this cost, and recording that is worth more than another hour
+    of it.
+    Floor of record for the side: nu*(3.97) >= 10.845594, exactly.
+  seconds: about 1090 wall, 2 iterations, stopped by the lane at the cell's clock
+
 # ---------------------------------------------------------------------------
 # The pre-registered ladder at a glance. Every entry is a restricted optimum.
 # Rows only raise one, so a value at or above twelve refutes the site set that
@@ -799,15 +820,16 @@
 # bracket that does not close:
 #
 #   nu*(3.97) <= 12.248227   f-397-100 iteration 7, converged row loop
-#   nu*(3.97) >= 10.814018   f-397-100 iteration 9, exact, max depth exactly 1
+#   nu*(3.97) >= 10.845594   f2-397-100 iteration 1, exact
 #
 # Twelve is inside it. So nothing here bars 3.97 outright. Barring it needs the
-# floor above twelve, and devtools.run_fractional_cutting was climbing towards
-# that -- 7.97 to 10.81 over eleven iterations, exact depth falling 1.5219 to
-# 1.0709 -- when its 34 minutes ran out. Its raw totals in the last iterations
-# are 11.5 to 11.9, so even a depth of exactly 1 would have landed just under
-# twelve. This side is close to decidable by that instrument and was not
-# decidable in this budget.
+# floor above twelve. devtools.run_fractional_cutting climbed towards it -- 7.97
+# to 10.81 over eleven iterations, exact depth falling 1.5219 to 1.0709 -- and
+# then stopped climbing: warm-started for a further 18 minutes it gained 0.032
+# and its depth moved back up to 1.0965. Its raw totals there are 11.47 and
+# 11.89, so even a depth of exactly 1 would land under twelve. That instrument,
+# at support cap 96, does not bar 3.97, and the flattening says so rather than
+# the clock.
 #
 # The eight pre-registered runs are consistent with all of it and, on their own,
 # establish less: each refutes its own site set, and a site set only raises the
