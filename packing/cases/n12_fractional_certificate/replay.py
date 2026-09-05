@@ -1,12 +1,14 @@
-"""Load the retained n = 12 certificates and hand them to the exact verifier.
+"""Load any retained n = 12 certificate and hand it to the exact verifier.
 
-Two certificates are retained. `certificate.json` carries the bound the case
-holds, s(12) >= 77/20; `certificate-19-5.json` is the first rung the same
-instrument reached, kept because it is a smaller object (68 atoms against 113)
-and the one the discovery commit cites. The JSON carries exact rationals as
-strings, so a replay reconstructs the same object the generator proposed.
-Nothing here decides anything: the verdict comes from
-`sqpack.fractional.certificate.verify`, and this module only feeds it.
+Eight rungs are retained. `certificate.json` carries the bound the case holds,
+s(12) >= 99/25, on 2097 atoms of total mass 149987/12500;
+`certificate-79-20.json` is the rung immediately below it; and
+`certificate-19-5.json` is the first rung the same instrument reached, kept
+because it is a far smaller object (68 atoms against 2097) and the one the
+discovery commit cites. The JSON carries exact rationals as strings, so a replay
+reconstructs the same object the generator proposed. Nothing here decides
+anything: the verdict comes from `sqpack.fractional.certificate.verify`, and
+this module only feeds it.
 """
 
 from __future__ import annotations

@@ -37,6 +37,7 @@ from devtools.check_rung_figures import (
     CertificateFigures,
     certificate_consistency_problems,
     check_result,
+    evidence_limitation_problems,
     fraction_decimal_problems,
     load_certificate,
     main,
@@ -575,6 +576,51 @@ def test_the_independent_verifier_entry_names_the_side_it_does_not_decide() -> N
     assert checked.outer_side < retained.outer_side
     disclaimer = f"does not decide the current {retained.outer_side} bytes"
     assert disclaimer in historical["limitations"]
+
+
+def test_an_evidence_entrys_limitations_are_read_against_the_certificate_it_names() -> None:
+    """`D-451`: the entry pointed at `certificate.json` and described the file it used to.
+
+    The perturbation is the defect exactly as it stood -- 681 atoms, the atom count of the
+    `197/50` rung the pointer named before the ladder climbed to `99/25` -- planted over
+    whatever the live entry now says, so the control cannot go stale into agreement.
+    """
+    entry = copy.deepcopy(_evidence("E-n012-fractional-certificate"))
+    assert evidence_limitation_problems(entry) == []
+
+    retained = _figures("packing/cases/n12_fractional_certificate/certificate.json")
+    superseded = _figures("packing/cases/n12_fractional_certificate/certificate-197-50.json")
+    current = f"carries {retained.atom_count:,} atoms"
+    assert current in entry["limitations"], "premise: the entry states its own atom count"
+    entry["limitations"] = entry["limitations"].replace(
+        current, f"carries {superseded.atom_count:,} atoms"
+    )
+
+    problems = evidence_limitation_problems(entry)
+    assert len(problems) == 1
+    assert "E-n012-fractional-certificate [limitations]" in problems[0]
+    assert f"{superseded.atom_count} atoms" in problems[0]
+    assert str(retained.atom_count) in problems[0]
+
+
+def test_a_limitations_sentence_ranging_over_other_rungs_is_left_unchecked() -> None:
+    """The anchoring rule, at the entry that would otherwise cry wolf four times.
+
+    `E-fractional-interval-decision` declares one certificate and reports the atom counts
+    of four different top rungs in a single sentence. Three of them are about files it does
+    not declare, and a check that compared them to the one it does would report three
+    disagreements where the record is right.
+    """
+    entry = _evidence("E-fractional-interval-decision")
+    declared = _figures(f"packing/{entry['certificate']}")
+    others = {
+        figures.atom_count
+        for figures in _retained_certificates().values()
+        if figures.path != declared.path
+    }
+    quoted = {int(match) for match in re.findall(r"(\d+) atoms\b", entry["limitations"])}
+    assert quoted & others, "premise: the entry quotes atom counts of rungs it does not name"
+    assert evidence_limitation_problems(entry) == []
 
 
 def test_the_agenda_quotes_atom_counts_the_retained_certificates_have() -> None:

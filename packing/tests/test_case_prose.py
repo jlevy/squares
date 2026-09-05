@@ -368,3 +368,99 @@ def test_a_pinned_interval_is_read_as_a_lower_and_an_upper_bound(tmp_path: Path)
         "# case\n\nBy contrast `s(12)` is pinned to `[3.96, 4]`.\n",
     )
     assert check_case_file(other) == []
+
+
+def test_a_verified_bound_named_in_words_is_held_to_the_field(tmp_path: Path) -> None:
+    """D-451: `n-012`'s body opened "The verified lower bound is `77/20 = 3.85`" under front
+    matter that said `99/25`. Its five sibling bodies write the same sentence with an
+    `s(n) >=` inside it, which `_BOUND_GE` anchors on the `n`; this one named no `n`, so no
+    pattern reached it and the sentence stayed on a rung the ladder had climbed past.
+
+    The sentence names the field, so both halves of what it wrote are the field's: the
+    decimal, and the exact fraction when it spells one.
+    """
+    bounds: _Bounds = {
+        "verified_lower_bound": ("3.96", "99/25"),
+        "verified_upper_bound": ("4", "4"),
+        "reported_lower_bound": ("3.788854382", "2 + 4/sqrt(5)"),
+        "reported_upper_bound": ("4.0", "4"),
+    }
+    stale = make_case(
+        tmp_path,
+        "n-012-stale.md",
+        12,
+        bounds,
+        "# case\n\nThe verified lower bound is `77/20 = 3.85`, from a certificate.\n",
+    )
+    findings = check_case_file(stale)
+    assert len(findings) == 1
+    assert findings[0].check == "verified-bound-sentence"
+    assert "3.85" in findings[0].detail and "3.96" in findings[0].detail
+
+    current = make_case(
+        tmp_path,
+        "n-012-current.md",
+        12,
+        bounds,
+        "# case\n\nThe verified lower bound is `99/25 = 3.96`, from a certificate.\n",
+    )
+    assert check_case_file(current) == []
+
+    # The exact form is checked too: 396/100 and 99/25 are the same number, but a rung a
+    # hundredth away rounds alike at the two decimals a body writes, so the fraction is
+    # not left to the decimal to catch.
+    reduced = make_case(
+        tmp_path,
+        "n-012-reduced.md",
+        12,
+        bounds,
+        "# case\n\nThe verified lower bound is `396/100 = 3.96`, from a certificate.\n",
+    )
+    assert check_case_file(reduced) == []
+
+    # A bare `s(12)` later in the same sentence is not a second bound figure.
+    trailing_reference = make_case(
+        tmp_path,
+        "n-012-trailing.md",
+        12,
+        bounds,
+        "# case\n\nThe verified lower bound is `99/25 = 3.96`, and `s(12)` is open.\n",
+    )
+    assert check_case_file(trailing_reference) == []
+
+    # No reported-bound fallback and no historical exemption: the sentence is never about
+    # anything but the field it names, so Stromquist's inherited value does not save it.
+    reported = make_case(
+        tmp_path,
+        "n-012-reported.md",
+        12,
+        bounds,
+        "# case\n\nPreviously the verified lower bound is `3.788854`, was inherited.\n",
+    )
+    findings = check_case_file(reported)
+    assert len(findings) == 1
+    assert findings[0].check == "verified-bound-sentence"
+
+    # The sibling shape, "The verified lower bound is `s(18) >= ...`", is anchored by its
+    # own s(n) and must not be double-reported by this pattern.
+    sibling = make_case(
+        tmp_path,
+        "n-012-sibling.md",
+        12,
+        bounds,
+        "# case\n\nThe verified lower bound is\n`s(12) >= 99/25 = 3.96`, from a certificate.\n",
+    )
+    assert check_case_file(sibling) == []
+
+    # An upper-bound sentence in the same words is read against the upper field.
+    upper = make_case(
+        tmp_path,
+        "n-012-upper.md",
+        12,
+        bounds,
+        "# case\n\nThe verified upper bound is `5`, the trivial grid.\n",
+    )
+    findings = check_case_file(upper)
+    assert len(findings) == 1
+    assert findings[0].check == "verified-bound-sentence"
+    assert "upper" in findings[0].detail

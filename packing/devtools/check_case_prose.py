@@ -33,6 +33,19 @@ This is that detector. For every `frontier/n-*.md`, it does three things:
      `reported_upper_bound` is tighter than what this repository has itself verified says
      this, in exactly this form, and it is checked directly against `verified_upper_bound`
      with no fallback: the field is named in the sentence, so there is nothing to guess at).
+   - "`s(11)` is pinned to `[3.81, 3.877084]`, a gap of `0.067084`" -- an interval on this
+     file's own `n`, read as a lower and an upper bound, with the gap checked against their
+     difference (`D-445`, where the interval form let a body stay eleven hours on a rung the
+     front matter had left).
+   - "The verified lower bound is `99/25 = 3.96`" -- the same claim the disclaimer makes,
+     written in words rather than as a backticked field name. Five sibling bodies write this
+     sentence as "The verified lower bound is `s(18) >= 459/100 = 4.59`", which the first
+     shape above already anchors; `n-012`'s named no `n` at all, so nothing anchored it and
+     it sat on the `77/20` rung under front matter that said `99/25` (`D-451`). Like the
+     disclaimer it names the field, so it is checked against that field with no fallback and
+     no historical exemption, and where the prose spells the exact fraction as well, that is
+     checked against `exact_form` -- two rungs a hundredth apart can round alike at the two
+     decimals a body writes.
 
    A quoted figure must equal the front matter's corresponding bound, rounded
    (`ROUND_HALF_UP`, exactly as `check_rung_figures` rounds) to the number of decimal places
@@ -62,9 +75,9 @@ This is that detector. For every `frontier/n-*.md`, it does three things:
    and unrelated to which `n` a figure is about: `189/50 = 3.78` in `n-011`'s body is checked
    the same way regardless of whose bound it is illustrating.
 
-What this does **not** cover: `n-011`'s own "`s(11)` is pinned to `[3.8, 3.877084]`" range
-notation is a fourth shape this module does not recognise, so a stale figure written only
-that way would not be caught -- the corpus does not use it for any other open case, and a
+What this does **not** cover: a bound figure written in some sixth shape none of the above
+recognises. Every shape here was added after a body drifted in it -- the `s(n) >=` form for
+`D-442`, the pinned interval for `D-445`, the named-field sentence for `D-451` -- because a
 check that guesses at an unfamiliar shape risks the same false positive this module works to
 avoid elsewhere. Nor does it check the companion figure in "which is **larger** than the
 best known `X` two fields above it" (the `reported_upper_bound` restated next to the
@@ -157,6 +170,18 @@ _NAGAMOCHI_GENERAL = re.compile(r"Nagamochi[\u2019']s general\s*`(?:[^`]*?≈\s*
 #: directly with no reported-bound fallback and no historical exemption.
 _VERIFIED_FIELD = re.compile(
     r"`verified_(upper|lower)_bound`\s+for this case is\s+`(-?\d+(?:\.\d+)?)`"
+)
+
+#: "The verified lower bound is `99/25 = 3.96`" -- the same claim written in words rather
+#: than as a backticked field name, and the shape `n-012`'s body opens with. Five sibling
+#: bodies write the sentence as "The verified lower bound is `s(18) >= 459/100 = 4.59`",
+#: which `_BOUND_GE` already anchors on its own `s(n)`; this one names no `n` at all, so
+#: nothing anchored it and the sentence sat on the `77/20` rung under front matter that
+#: said `99/25` (`D-451`). Like `_VERIFIED_FIELD` it names the field, so the figure it
+#: states is the field's, with no reported-bound fallback and no historical exemption --
+#: and when the prose writes the exact fraction too, that is checked against `exact_form`.
+_VERIFIED_BOUND_SENTENCE = re.compile(
+    rf"[Tt]he verified (lower|upper) bound is\s+`?{_FIGURE}`?"
 )
 
 
@@ -311,6 +336,30 @@ def verified_field_claims(body: str) -> list[VerifiedFieldClaim]:
     ]
 
 
+@dataclass(frozen=True, slots=True)
+class VerifiedBoundSentence:
+    """ "The verified lower bound is `99/25 = 3.96`" -- the figure, and the exact form."""
+
+    kind: str
+    """"lower" or "upper"."""
+    figure: str
+    exact_form: Fraction | None
+    """The `a/b` the prose wrote before the decimal, when it wrote one."""
+    offset: int
+
+
+def verified_bound_sentences(body: str) -> list[VerifiedBoundSentence]:
+    """Every "The verified <kind> bound is <figure>" sentence, in words rather than keys."""
+    found: list[VerifiedBoundSentence] = []
+    for match in _VERIFIED_BOUND_SENTENCE.finditer(body):
+        numerator, denominator = match.group(2), match.group(3)
+        exact = Fraction(int(numerator), int(denominator)) if numerator else None
+        found.append(
+            VerifiedBoundSentence(match.group(1), match.group(4), exact, match.start(4))
+        )
+    return found
+
+
 def _is_historical_mention(sentence: str) -> bool:
     return _HISTORICAL_MARKER.search(sentence) is not None
 
@@ -383,6 +432,38 @@ def check_verified_field_claim(
     return f"prose says verified_{claim.kind}_bound is {claim.figure}, but it rounds to {value}"
 
 
+def check_verified_bound_sentence(
+    claim: VerifiedBoundSentence, front_matter: CaseFrontMatter
+) -> str | None:
+    """The sentence names the field, so it is held to the field and to nothing else.
+
+    Both halves of what the prose wrote are checked: the decimal at the precision it was
+    written to, and -- when the sentence spells the exact fraction as well -- that
+    fraction against `exact_form`. The second half is what catches two rungs that round
+    alike, which is not hypothetical on a ladder whose steps are hundredths.
+    """
+    verified = (
+        front_matter.verified_lower if claim.kind == "lower" else front_matter.verified_upper
+    )
+    digits = _digits_of(claim.figure)
+    value = verified.decimal_at(digits)
+    if value is None:
+        return f"prose states a verified {claim.kind} bound, but the field is unset"
+    if Decimal(claim.figure) != value:
+        return (
+            f"prose says the verified {claim.kind} bound is {claim.figure}, "
+            f"but verified_{claim.kind}_bound rounds to {value}"
+        )
+    exact = (verified.exact_form or "").strip()
+    rational = claim.exact_form is not None and re.fullmatch(r"-?\d+(?:/\d+)?", exact)
+    if rational and claim.exact_form != Fraction(exact):
+        return (
+            f"prose says the verified {claim.kind} bound is {claim.exact_form}, "
+            f"but exact_form is {exact}"
+        )
+    return None
+
+
 def fraction_arithmetic_problems(body: str) -> list[tuple[int, str]]:
     """Every `a/b = d.ddd` in `body`, checked by `check_rung_figures`'s own exact rule --
     imported rather than reimplemented, so the two checkers can never disagree about what
@@ -409,7 +490,8 @@ class Finding:
     path: Path
     line: int
     check: str
-    """"bound-figure", "verified-field", or "fraction-arithmetic"."""
+    """"bound-figure", "verified-field", "verified-bound-sentence", or
+    "fraction-arithmetic"."""
     detail: str
 
     def render(self) -> str:
@@ -441,6 +523,11 @@ def check_case_file(path: Path) -> list[Finding]:
         if problem is not None:
             line = _line_at(body_start_line, body, field_claim.offset)
             findings.append(Finding(path, line, "verified-field", problem))
+    for sentence_claim in verified_bound_sentences(body):
+        problem = check_verified_bound_sentence(sentence_claim, front_matter)
+        if problem is not None:
+            line = _line_at(body_start_line, body, sentence_claim.offset)
+            findings.append(Finding(path, line, "verified-bound-sentence", problem))
     for offset, message in fraction_arithmetic_problems(body):
         line = _line_at(body_start_line, body, offset)
         findings.append(Finding(path, line, "fraction-arithmetic", message))

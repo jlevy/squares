@@ -479,6 +479,44 @@ def check_result(result: dict) -> tuple[list[str], int]:
     return problems, len(resolved)
 
 
+def evidence_limitation_problems(entry: dict) -> list[str]:
+    """One evidence entry's `limitations` prose, read against the certificate it names.
+
+    `D-451`: `E-n012-fractional-certificate` pointed at `certificate.json` and described a
+    681-atom certificate at `197/50` -- the file the pointer used to name. Every figure in
+    the sentence was exact and real and about a file the entry no longer cites, which is
+    `D-439`'s shape at a record `check_result` never opens: it walks `results.yaml`, and an
+    evidence entry is a different document with a different schema.
+
+    The anchoring is stricter here than `resolve_target`'s, because an evidence entry
+    declares exactly one certificate and its `limitations` is a single folded paragraph
+    that ranges freely over others. A sentence is read only when every `a/b` token in it
+    is the declared certificate's own side -- including none at all, the unqualified case
+    this repository's prose uses to mean "the certificate this entry is about". Anything
+    else is left unchecked rather than guessed at. That is what keeps this quiet on
+    `E-fractional-interval-decision`, one of whose sentences reports the atom count and
+    box count of four different top rungs at once, only one of which it declares.
+    """
+    declared = entry.get("certificate")
+    if not isinstance(declared, str):
+        return []
+    path = _repo_relative_path(f"packing/{declared}")
+    figures = None if path is None else load_certificate(path)
+    if figures is None:
+        return []
+    sides = {figures.outer_side: figures}
+    problems: list[str] = []
+    for sentence in sentences(entry.get("limitations") or ""):
+        named = {
+            _fraction(match.group(1), match.group(2))
+            for match in _SIDE_TOKEN.finditer(sentence)
+        }
+        if not named <= {figures.outer_side}:
+            continue
+        problems.extend(figure_problems(sentence, entry["id"], "limitations", sides, figures))
+    return problems
+
+
 def fraction_decimal_problems(text: str, label: str) -> list[str]:
     """Every `a/b = d.ddd` in `text` must be arithmetically true, repository-wide.
 
@@ -510,6 +548,13 @@ def main() -> int:
         problems.extend(result_problems)
         certificates_checked += count
 
+    evidence = safe_load(EVIDENCE.read_text(encoding="utf-8"))["evidence"]
+    entries_checked = 0
+    for entry in evidence:
+        if entry.get("certificate"):
+            entries_checked += 1
+            problems.extend(evidence_limitation_problems(entry))
+
     for path, label in (
         (RESULTS, "results.yaml"),
         (EVIDENCE, "evidence.yaml"),
@@ -523,9 +568,10 @@ def main() -> int:
             print(f"  {problem}")
         return 1
     print(
-        f"  {len(results)} results checked, {certificates_checked} certificate artifacts "
-        "recomputed from their own atoms, all quoted figures and fraction-decimal "
-        "claims agree (results.yaml, evidence.yaml, defects.yaml)"
+        f"  {len(results)} results and {entries_checked} certificate-bearing evidence "
+        f"entries checked, {certificates_checked} certificate artifacts recomputed from "
+        "their own atoms, all quoted figures and fraction-decimal claims agree "
+        "(results.yaml, evidence.yaml, defects.yaml)"
     )
     return 0
 

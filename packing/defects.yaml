@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 450
+count: 451
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14406,5 +14406,61 @@ defects:
     cases/n11_fractional_certificate/minimal_verify.py; until then the check is
     `sha256sum packing/cases/n11_fractional_certificate/certificate.json` against the
     evidence entry.
+  status: fixed
+  recorded_in: packing/frontier/evidence.yaml
+- id: D-451
+  title: Three n = 12 records described rungs the retained pointer had already climbed past
+  date: '2026-09-05'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    the case body and the replay docstrings since the ladder passed 77/20 on 2026-09-04,
+    the evidence entry since it passed 197/50 the same day; found on 2026-09-05 by the
+    port of PR 80's head 04127189, which read each record against the bytes it declares
+  severity: medium
+  what: >-
+    Three durable records about n = 12 went on describing rungs the retained pointer had
+    climbed past. `packing/frontier/evidence.yaml`'s `E-n012-fractional-certificate`
+    declares `cases/n12_fractional_certificate/certificate.json` and described a 681-atom
+    certificate at 197/50, total mass 479713/40000, least covered mass 100003/100000 and
+    B = 9973/10000 -- the figures of the rung that filename used to hold; the file it
+    declares carries 2,097 atoms at 99/25. Its `novel_object` still named side 19/5, the
+    first rung of eight. `packing/frontier/n-012.md`'s body opened "The verified lower
+    bound is 77/20 = 3.85" with 113 atoms and mass 191/16, under front matter that said
+    99/25 = 3.96, and closed by saying the covering program stops at 39/10 -- four rungs
+    below where it now stops. The case package's `replay.py` and `__main__.py` said two
+    certificates are retained and gave the bound as 77/20; eight are retained.
+  consequence: >-
+    No bound is wrong and no verdict changes. Every figure was exact and about a real
+    retained file, which is what makes this class hard to see: each sentence reads as a
+    current description of the certificate its own record points at. The cost is to a
+    reader, and to provenance -- the evidence entry is where a reviewer goes to learn
+    what was decided about the bytes the case cites, and it described a weaker
+    certificate that a different entry decides. This is `D-442` a third time and `D-439`'s
+    shape a fourth: the surface with a detector held, and the records beside it drifted.
+  fix: >-
+    Fixed on 2026-09-05. Every figure is re-derived from
+    `cases/n12_fractional_certificate/certificate.json` rather than copied from PR 80's
+    rewrite of the same records: 2,097 atoms, total mass 149987/12500, least covered mass
+    12501/12500 leaving 13/12500 of slack, B = 9977/10000, side 99/25, and eight rungs
+    from 19/5. The case body, the evidence entry's `limitations` and `novel_object`, and
+    the case package's two module docstrings are rewritten against those bytes. Two
+    detectors close the surfaces this got through. `check_case_prose` now reads "The
+    verified lower bound is X" -- the shape `n-012`'s body used, which names no `s(n)` for
+    the existing pattern to anchor on -- against `verified_lower_bound` and its
+    `exact_form`, with no reported-bound fallback and no historical exemption.
+    `check_rung_figures` now reads an evidence entry's `limitations` against the
+    certificate that entry declares, for any sentence whose rung tokens are that
+    certificate's own; a sentence ranging over other rungs is left unchecked, which is
+    what keeps it quiet on `E-fractional-interval-decision`.
+  regression: >-
+    `packing/tests/test_case_prose.py` (a verified bound named in words is held to the
+    field) and `packing/tests/test_rung_figures.py` (an evidence entry's limitations are
+    read against the certificate it names), each reconstructing this defect's own figures
+    as a perturbation of the live record and recomputing both sides from the artifacts.
+    The two module docstrings have no detector: nothing here reads a docstring against the
+    file it describes, and that gap is the honest part of this entry.
+  recurrence_of: D-442
   status: fixed
   recorded_in: packing/frontier/evidence.yaml
