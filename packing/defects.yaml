@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 452
+count: 453
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14520,3 +14520,50 @@ defects:
   regression: packing/tests/test_synopsis_handoff.py
   status: fixed
   recorded_in: SYNOPSIS.md
+- id: D-453
+  title: Every open case body rounded its bound to nearest, and so stated one stronger than is proved
+  date: '2026-09-05'
+  layer: record
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: >-
+    since the bodies were written -- through D-442's detector, the interval shape D-445
+    added to it, and every run of check_case_prose in between -- until the residual audit
+    of PR 80 counted the rounded figures on 2026-09-05
+  severity: low
+  what: >-
+    check_case_prose holds a bound quoted in a case body to that file's own front matter
+    by rounding the front matter's value to the number of decimals the prose wrote and
+    comparing for equality. Rounding to nearest is the wrong rule for a bound: half the
+    time it rounds the value the wrong way, and the checker then requires a lower bound
+    written above what was proved, or an upper bound written below it. n-028's body says
+    the best proved lower bound is 5.358899 under a verified_lower_bound of
+    5.35889894354, whose exact form is sqrt(19) + 1 -- a smaller number than the sentence
+    claims -- and the checker passed it, because 5.358899 is what 5.35889894354 rounds to
+    at six decimals. Across the hundred case bodies the same rule produced 54 such
+    figures in 42 files: 38 lower-bound decimals rounded up and 16 upper-bound decimals
+    rounded down.
+  consequence: >-
+    Fifty-four sentences each stating an inequality this repository cannot support, by
+    one unit in the last place the sentence chose to write. No verdict, register value or
+    certificate is touched -- every front-matter value is right, and carries the digits
+    the prose rounded away -- but the sentence a reader opens the case file for is the
+    one that was false, and it was false in the flattering direction in all 54 instances,
+    which is what a rounding rule that does not know which way a bound points will always
+    produce.
+  fix: >-
+    Fixed on 2026-09-05. check_case_prose renders a bound with ROUND_FLOOR when it is a
+    lower bound and ROUND_CEILING when it is an upper one, at the precision the prose
+    chose, for every shape it reads: the direct s(n) inequality, both endpoints of the
+    pinned interval, the bare "best proved" and Nagamochi figures, and the
+    verified_upper_bound disclaimer. A figure the value hits exactly still matches either
+    way. A --fix mode re-renders flagged figures and did, in the 42 bodies, moving only
+    the digits of a figure that is one of that file's own fields rounded to nearest -- a
+    stale rung matches neither field, so it is still reported rather than quietly
+    rewritten. The gap quoted beside a pinned interval stays on nearest rounding: a width
+    asserts no inequality, and the two endpoints it is the distance between are each
+    checked as a bound in their own right.
+  regression: packing/tests/test_case_prose.py
+  status: fixed
+  recorded_in: packing/devtools/check_case_prose.py

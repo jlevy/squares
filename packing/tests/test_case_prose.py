@@ -22,6 +22,7 @@ from devtools.check_case_prose import (
     CaseFrontMatter,
     check_bound_claim,
     check_case_file,
+    rewrite_directionally_safe_figures,
     sentence_spans,
     split_front_matter,
 )
@@ -464,3 +465,134 @@ def test_a_verified_bound_named_in_words_is_held_to_the_field(tmp_path: Path) ->
     assert len(findings) == 1
     assert findings[0].check == "verified-bound-sentence"
     assert "upper" in findings[0].detail
+
+
+def test_decimal_bound_rendering_is_directionally_safe(tmp_path: Path) -> None:
+    """A quoted bound may be rounded only away from the value it comes from.
+
+    D-453: this module rounded a prose figure to nearest and compared, which accepts a
+    lower bound written above the value that was proved and an upper bound written below
+    it. Every open case's body did exactly that -- 38 lower-bound decimals rounded up and
+    16 upper-bound decimals rounded down -- and each one is a sentence stating an
+    inequality this repository cannot support, at the last digit it chose to write.
+    """
+    exact: _Bounds = {
+        "verified_lower_bound": ("4.8", "24/5"),
+        "verified_upper_bound": ("4.8", "24/5"),
+        "reported_lower_bound": None,
+        "reported_upper_bound": None,
+    }
+    # At nought decimals, 24/5 rounds to nearest as 5: "s(20) >= 5" is false and was
+    # accepted, while the true and weaker "s(20) >= 4" was not.
+    for figure, findings_expected in (("5", 1), ("4", 0)):
+        case = make_case(
+            tmp_path,
+            f"n-lower-{figure}.md",
+            20,
+            exact,
+            f"# case\n\nThe verified lower bound is `s(20) \u2265 {figure}`.\n",
+        )
+        assert len(check_case_file(case)) == findings_expected
+    for figure, findings_expected in (("4", 1), ("5", 0)):
+        case = make_case(
+            tmp_path,
+            f"n-upper-{figure}.md",
+            20,
+            exact,
+            f"# case\n\nThe verified upper bound is `s(20) \u2264 {figure}`.\n",
+        )
+        assert len(check_case_file(case)) == findings_expected
+
+    # The live shape, at the live precision: n = 28's Nagamochi bound is
+    # sqrt(25) + 1 = 5.35889894354..., and its body said 5.358899.
+    nagamochi: _Bounds = {
+        "verified_lower_bound": ("5.35889894354", None),
+        "verified_upper_bound": ("6", "6"),
+        "reported_lower_bound": ("5.358898943541", None),
+        "reported_upper_bound": ("5.82444461667405", None),
+    }
+    rounded_up = make_case(
+        tmp_path,
+        "n-028-rounded-up.md",
+        28,
+        nagamochi,
+        "# case\n\nThe best proved lower bound is `5.358899`.\n",
+    )
+    findings = check_case_file(rounded_up)
+    assert len(findings) == 1
+    assert findings[0].check == "bound-figure"
+    assert "renders to 5.358898" in findings[0].detail
+
+    truncated = make_case(
+        tmp_path,
+        "n-028-truncated.md",
+        28,
+        nagamochi,
+        "# case\n\nThe best proved lower bound is `5.358898`.\n",
+    )
+    assert check_case_file(truncated) == []
+
+    # The upper side, at a precision where rounding to nearest rounds *down*: the reported
+    # construction is 5.82444461667405, so a body may write 5.8244447 and not 5.8244446.
+    for figure, findings_expected in (("5.8244446", 1), ("5.8244447", 0)):
+        case = make_case(
+            tmp_path,
+            f"n-028-packing-{figure}.md",
+            28,
+            nagamochi,
+            f"# case\n\nThe best known packing gives `s(28) \u2264 {figure}`.\n",
+        )
+        assert len(check_case_file(case)) == findings_expected
+
+    # The named-field disclaimer is held to the same rule.
+    ceiling: _Bounds = dict(nagamochi, verified_upper_bound=("5.82444461667405", None))
+    for figure, findings_expected in (("5.8244446", 1), ("5.8244447", 0)):
+        case = make_case(
+            tmp_path,
+            f"n-028-ceiling-{figure}.md",
+            28,
+            ceiling,
+            f"# case\n\n`verified_upper_bound` for this case is `{figure}`.\n",
+        )
+        assert len(check_case_file(case)) == findings_expected
+
+
+def test_fix_rewrites_nearest_decimals_without_strengthening_bounds(tmp_path: Path) -> None:
+    """`--fix` re-renders a nearest-rounded figure, and leaves everything else alone."""
+    bounds: _Bounds = {
+        "verified_lower_bound": ("4.605551775464", None),
+        "verified_upper_bound": ("4.88561808316412", None),
+        "reported_lower_bound": ("4.605551775464", None),
+        "reported_upper_bound": ("4.88561808316412", None),
+    }
+    path = make_case(
+        tmp_path,
+        "n-directional-fix.md",
+        20,
+        bounds,
+        (
+            "# case\n\nThe best known packing gives `s(20) \u2264 4.88561808`, and the "
+            "best proved lower bound is `4.605552`.\n"
+        ),
+    )
+    assert len(check_case_file(path)) == 2
+    assert rewrite_directionally_safe_figures(path) == 2
+    assert check_case_file(path) == []
+    text = path.read_text(encoding="utf-8")
+    assert "s(20) \u2264 4.88561809" in text
+    assert "best proved lower bound is `4.605551`" in text
+    # Only the digits moved: the sentence around them is untouched.
+    assert "The best known packing gives" in text and "and the best proved" in text
+
+    # A figure that is neither field's nearest rendering is a stale rung, not a rounding
+    # decision, and --fix leaves it for a person to answer.
+    stale = make_case(
+        tmp_path,
+        "n-stale-rung.md",
+        20,
+        bounds,
+        "# case\n\nThe best proved lower bound is `4.5058`.\n",
+    )
+    assert len(check_case_file(stale)) == 1
+    assert rewrite_directionally_safe_figures(stale) == 0
+    assert len(check_case_file(stale)) == 1
