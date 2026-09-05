@@ -129,7 +129,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-018 | paused |  | 2 | 14 |  |  | 16 |
 | agenda-019 | paused | 2 |  | 4 |  |  | 6 |
 | agenda-020 | completed |  |  |  |  | 1 | 1 |
-| agenda-021 | paused | 2 |  | 6 |  |  | 8 |
+| agenda-021 | active | 2 |  | 6 |  |  | 8 |
 | agenda-022 | paused |  |  | 8 |  |  | 8 |
 
 ## By program

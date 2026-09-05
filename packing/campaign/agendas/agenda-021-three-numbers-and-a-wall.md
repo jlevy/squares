@@ -9,7 +9,7 @@ agenda:
   id: agenda-021
   title: "Three Numbers and a Wall — the m = 5 Ladder, the n = 11 Endgame, and a Priced Rung"
   updated: '2026-09-05'
-  status: paused
+  status: active
   objective: >-
     X-014 ends with a verdict and a bill. The two mechanisms the owner asked about are
     real -- a certificate that has stopped proving infeasibility still constrains the
