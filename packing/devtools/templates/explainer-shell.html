@@ -116,8 +116,17 @@ body {
 .section-head { margin-block: calc(var(--kpress-font-size-base) * 2.6) 0.9rem; text-align: center; }
 /* A section starts with room above its heading and a breath below it. */
 .cert-page h2 { margin-block: calc(var(--kpress-font-size-base) * 2.8) 1.3rem; text-align: center; }
-.conditions ol { margin-block: 0.6rem 0.8rem; padding-inline-start: 1.4rem; }
-.conditions li { margin-block: 0.3rem; }
+/* A box holds discrete statements rather than continuous argument, so its
+   paragraphs stand a little further apart than running prose, which kpress sets at
+   0.75rem. One rule serves both boxes on the page, the five conditions and the
+   contradiction, so they cannot drift into two rhythms.
+
+   The conditions were a bulleted list and are now paragraphs. The bold lead already
+   numbers and names each one, so a marker beside it said the same thing twice, and
+   losing the list's hanging indent lets each condition start on the measure with
+   everything else. `.conditions ol` and `.conditions li` styled an ordered list this
+   page had stopped emitting; they are gone with it. */
+.cert-page .boxed-text p { margin-block: 0.95rem; }
 .intro .section-head { margin-block-start: 0; }
 
 .hero { padding-block-start: calc(var(--kpress-font-size-base) * 3); }

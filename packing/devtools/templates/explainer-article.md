@@ -134,16 +134,20 @@ $t_k$, and a shrink $B \lt 1$, such that:
 
 <div class="conditions boxed-text">
 
-- **Condition 1.** The atom set is invariant under the container’s symmetry group
-  $\mathbf{D}_4$.
-- **Condition 2.** The total mass of the atoms, the sum of all their weights, is
-  strictly below $n$.
-- **Condition 3.** The net reaches $\pi/4$: its last half-tangent is at least
-  $\tan(\pi/8)$.
-- **Condition 4.** $B(1 + D) \lt 1$, where $D$ is the largest of the net’s half-gap
-  tangents, each the tangent of half the angle between two consecutive net directions.
-- **Condition 5.** At every net direction, every placement of a square of side $B$
-  inside the container covers mass at least $1$.
+**Condition 1.** The atom set is invariant under the container’s symmetry group
+$\mathbf{D}_4$.
+
+**Condition 2.** The total mass of the atoms, the sum of all their weights, is strictly
+below $n$.
+
+**Condition 3.** The net reaches $\pi/4$: its last half-tangent is at least
+$\tan(\pi/8)$.
+
+**Condition 4.** $B(1 + D) \lt 1$, where $D$ is the largest of the net’s half-gap
+tangents, each the tangent of half the angle between two consecutive net directions.
+
+**Condition 5.** At every net direction, every placement of a square of side $B$ inside
+the container covers mass at least $1$.
 
 </div>
 
