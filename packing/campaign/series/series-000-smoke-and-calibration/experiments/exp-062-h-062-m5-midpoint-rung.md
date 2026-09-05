@@ -162,6 +162,14 @@ the value. This is exactly the asymmetry the schedule was built to exploit — r
 early, confirmation only by convergence — and applying it here is applying the rule as
 written, not relaxing it.
 
+Both directions were checked against the program rather than against the prose that
+describes it. `sqpack.fractional.colgen.solve_lp` minimises the site sizes subject to
+`A x >= 1` with `x >= 0`, one row per held placement and one column per site orbit.
+A row is a constraint, so adding one shrinks the feasible set and the minimum can only
+rise; a site is a column, so adding one enlarges it and the minimum can only fall.
+The asymmetry `H-062` built its schedule on is a property of that formulation, not a
+convention.
+
 One boundary matters and is worth stating so no one has to re-derive it: the
 monotonicity is in **rows**, at a fixed site set.
 Adding *sites* lowers a restricted optimum.
