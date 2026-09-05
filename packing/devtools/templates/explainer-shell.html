@@ -126,6 +126,38 @@ body {
 }
 .credits strong { font-weight: var(--kpress-font-weight-sans-bold); }
 .cert-page .hero .deck { font-family: var(--kpress-font-prose); font-style: italic; margin-block: 0; }
+/* Where this page came from and how to take it away, at the top corner and out of
+   the way. Chips rather than prose: they are tools, not part of the argument. */
+.doc-links {
+  display: flex;
+  float: inline-end;
+  gap: 0.4rem;
+  margin-block-start: 0.15rem;
+  margin-inline-start: 1rem;
+}
+.doc-links .chip {
+  align-items: center;
+  border: 1px solid var(--kpress-doc-border);
+  border-radius: var(--kpress-radius-sm);
+  color: var(--kpress-doc-muted);
+  display: inline-flex;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  font-weight: var(--kpress-font-weight-sans-medium);
+  gap: 0.3rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  padding: 0.32rem 0.5rem;
+  text-decoration: none;
+}
+.doc-links .chip:hover {
+  background: var(--kpress-doc-surface-hover);
+  border-color: var(--kpress-doc-accent);
+  color: var(--kpress-doc-accent);
+}
+.doc-links .chip.icon { padding-inline: 0.42rem; }
+.doc-links .chip svg { display: block; }
+
 /* The deck is a div so its footnote renders; the paragraph inside keeps its edges. */
 .cert-page .hero .deck > p { margin-block: 0; }
 
@@ -396,17 +428,10 @@ body {
   .stage canvas { max-height: 5.4in; width: auto; max-width: 100%; margin-inline: auto; }
   .cert-page figure img { max-height: 7in; width: auto; max-width: 100%; }
 
-  /* A reader cannot follow a link on paper, and this page's whole argument is
-     that its claims can be checked, so the targets are printed. Footnote
-     markers and same-page jumps stay bare. */
-  .cert-page a[href^="http"]::after {
-    color: var(--kpress-doc-muted);
-    content: " (" attr(href) ")";
-    font-family: var(--kpress-font-sans);
-    font-size: 0.8em;
-    word-break: break-all;
-  }
-  .cert-page .kpress-footnote-ref a::after, .cert-page a[href^="#"]::after { content: none; }
+  /* Link targets are deliberately not spelled out after each link: a URL set in
+     the middle of a sentence breaks the line badly and reads worse than the
+     sentence it interrupts. The footnotes carry the sources, and the colophon
+     carries the repository. */
 
   /* kpress forces its light tokens on `:root` and `.kpress`, which leaves the
      page's own main element and this page's one extra token on their dark
@@ -433,6 +458,15 @@ body {
   /* Inline math is hidden until KaTeX finishes; on paper it should fall back
      to its source rather than to nothing. */
   .tex, .tex-d { visibility: visible; }
+
+  /* Ragged right. kpress justifies printed prose and asks for automatic
+     hyphenation to keep the lines even, but hyphenation needs dictionaries the
+     printing engine may not carry: headless Chromium has none, so `hyphens: auto`
+     is inert there and justification has nothing to stretch but the word spaces,
+     which is what made the serif text look loose. This page also prints its link
+     targets inline, and a long unbreakable URL in a justified line opens rivers.
+     Even word spacing is worth more here than a straight right edge. */
+  .kpress p, .kpress li, .kpress blockquote, .kpress dd { text-align: left; }
 }
 
 </style>
@@ -441,7 +475,7 @@ body {
 <main class="kpress-page-main kpress-viewport" data-kpress-viewport>
 <div class="kpress kpress-doc kpress-prose cert-page">
 {{BODY_HTML}}
-<p class="col colophon">Typeset with <a href="https://github.com/jlevy/kpress"><strong>KPress</strong></a></p>
+<p class="col colophon">Formatted and typeset with <a href="https://github.com/jlevy/flowmark"><strong>Flowmark</strong></a> and <a href="https://github.com/jlevy/kpress"><strong>KPress</strong></a></p>
 </div>
 
 </main>
@@ -1024,6 +1058,10 @@ window.addEventListener('afterprint', repaint);
     if (record && location.hash !== '#' + slug) history.replaceState(null, '', '#' + slug);
   }
   switches.forEach(b => b.addEventListener('click', () => show(b.dataset.cert, true, b)));
+  /* The PDF chip prints the page. The print stylesheet turns it into a document:
+     one certificate, no controls, link targets spelled out. */
+  const printer = document.querySelector('[data-print="page"]');
+  if (printer) printer.addEventListener('click', e => { e.preventDefault(); window.print(); });
   /* Only a hash naming a certificate switches the page. A footnote jump sets
      the hash too (#fn-3, #fnref-3), and it leaves the selection alone. */
   window.addEventListener('hashchange', () => {

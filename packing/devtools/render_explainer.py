@@ -1100,6 +1100,8 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "N_RESULTS": str(registered_results()),
         "N_STARRED": str(starred_lower_bounds()),
+        "SOURCE_URL": repo_file(MARKDOWN),
+        "REPO_URL": REPO_URL,
         "PUBLISHED": PUBLICATION_DATE,
         "VERSION": PUBLICATION_VERSION,
         "REVISION": PUBLICATION_REVISION,
