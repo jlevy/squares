@@ -449,6 +449,36 @@ Status: **completed**. A one-block W5 efficiency-loop commitment, entered direct
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-196 | tool_validation | 11, 12, 17, 18, 19, 20, 21 | complete | 0 | think-yrh5 | Whether BC-191's row-generation and site-density costs, now the binding cost with the gate an order of magnitude cheaper, move by a comparable factor once measured the same way; and whether BC-190's premise -- that the generator's own accept/reject decision should move to the interval route -- still holds now that its baseline is the integer sweep rather than the Fraction one. |
 
+### [agenda-021](agendas/agenda-021-three-numbers-and-a-wall.md) — Three Numbers and a Wall — the m = 5 Ladder, the n = 11 Endgame, and a Priced Rung
+
+Status: **paused**. X-014 ends with a verdict and a bill. The two mechanisms the owner asked about are real -- a certificate that has stopped proving infeasibility still constrains the packings that survive it, and the sliver below Trump's value is a computable box -- and the size of the tree between them is set by three numbers nobody has measured: where the covering value crosses eleven, how large the tight-core set is there, and how large the isolation radius is at Trump's pose. Two of the three are an afternoon's computation each. This block buys all three, and a fourth the ladder itself needs. The fourth is where the m = 5 ladder stops. n = 20 and n = 21 sit at 24/5 with the method's ceiling at 5B = 4.9885 and the trivial grid as their only upper bound, so they are the one place in the register where the instrument can be run to its own structural limit and the covering value is the only thing that could bind first. Four pre-registered rungs bisect that interval and bracket the wall to at most 0.015. Nobody has ever measured a covering wall; two site sets stopping at exactly eleven at 3.82 is the closest the record comes, and T-018 says plainly that reading it as tau* would be reading an artefact. Three lanes run concurrently on three cores. Lane A opens with a zero-build run of the generator at n = 13 -- the calibration X-015's stepping-stone pricing puts first, because the covering value extrapolated to the ceiling there sits below thirteen and its answer reorders block two -- then climbs the m = 5 ladder, reading the n = 21 criterion at every rung and one rung near the ceiling on it first, then builds the class-certificate instrument that X-014's Lemma 3 needs, which is a threshold change and nothing geometric. Lane B measures the two n = 11 endgame numbers -- the isolation radius at Trump's pose, and the covering value from below by an exact-depth fractional packing -- and then reads the near-tight census off a mass grid the sweep already fills. Lane C is the background: agenda-019's BC-191, taken as registered, and then the first covering-value point outside the 3.82-to-4.80 band. The research wall is 450 elapsed minutes with the closeout at 390. Nothing in this block promotes a bound except through the retention gate exactly as it stands.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-197 | research | 19, 20, 21 | blocked | 0 | think-g73w | The first measurement of a covering wall above a retained rung, which BC-203's first doubling-down rule reads directly and which decides whether block two spends its leads on the endgame or on more rungs. |
+| BC-198 | tool_validation | 11, 12 | blocked | 1 | think-m3sx | Whether conditioning on direction buys anything at all, which is the premise BC-208's two class theorems in block two rest on entirely. |
+| BC-211 | measurement_validation | 13 | ready | 0 | think-2ib0 | Whether the first exact grid value by machine is one certificate away, which BC-203's fourth rule reads directly and which decides whether block two opens the B = 1 route (BC-212) ahead of the conditional route. |
+| BC-199 | research | 11 | ready | 0 | think-ljvz | Whether the local box is reachable by any tree, which BC-203's third doubling-down rule reads directly and which decides whether block two opens a conditional lead against Trump's pose at all. |
+| BC-200 | measurement_validation | 11 | blocked | 1 | think-1qjs | The side every block-two n = 11 cell would have to work at, and BC-203's second doubling-down rule reads the 3.85 outcome directly. |
+| BC-201 | tool_validation | 11 | blocked | 2 | think-614o | Whether Corollary 1a's exact-cover step is a check or a search, which BC-207 in block two consumes directly and cannot start without. |
+| BC-202 | research | 26 | blocked | 1 | think-r58z | The first covering-value point outside the 3.82-to-4.80 band, which is what X-013's third proposal asks for and what block two's reach-table rungs are priced against. |
+| BC-203 | tool_validation | 11, 20, 21, 26 | blocked | 2 | think-jv2d | Which of agenda-022's leads open, which is the whole of what every cell in that agenda is blocked on. |
+
+### [agenda-022](agendas/agenda-022-the-conditional-route.md) — The Conditional Route — Boxed Certificates, the n = 13 Calibration, and the Class Theorems
+
+Status: **paused**. Block two, and every cell in it is contingent. Agenda-021 measures four numbers and its closeout, BC-203, carries three doubling-down rules written before that block opened; those rules decide which two of the three lanes below open and which stays shut. Nothing here is takeable until BC-203 has run, and that is deliberate: X-014's own reading is that the expensive half of the conditioning idea should not be built until the cheap half has said whether conditioning buys anything, and that the perturbation half should not be built at all if the isolation radius comes out too small for a tree to reach. What the block would build, if the rules select it, is the conditional route. X-014's Lemma 2 is one counting step, but it is the one that needs the admissible centre domain generalised in all four places that currently hard-code the rotated container square and assume it convex -- sweep.py, generate.py, interval.py and the column generator that routes its oracle through the second -- and it needs the net doubled to a full quarter turn, because a box breaks the container's D4 symmetry and Condition 1 can no longer fold angles onto the shorter arc. That is 180 minutes before a single case is closed, which is why it is here rather than in block one and why it is calibrated against a case the classical method already closes by hand: Bentz's non-adjacent corner-restricted configuration at n = 13, whose kill condition is stated in advance as mass at or above thirteen. A fourth rule, added with agenda-021's BC-211, can reorder that lane: if the zero-build run at n = 13 converges below thirteen, the B = 1 route -- covering over the direction continuum at an integer side, BC-212 -- is built first, in BC-204's place, and the calibration runs on it at side exactly 4, since the endgame is then one certificate's shrink tax rather than a tree. Beside it run the two cheaper leads. The class theorems at n = 11 need no geometry at all -- two variables and a normalisation row on a program agenda-021's BC-198 already froze -- and they are where Gardner's conjecture and the composition count would be mechanised with the class widened from two angles to two cells. The ladder lane keeps the register moving at m = 4 and takes the reach-table rungs BC-191 has finally priced. The exact-cover check sits at whichever wall block one found, and opens only if block one found one. The research wall is 360 elapsed minutes with the closeout at 300. Retention is exactly as strict as it is now, and a conditional certificate is a different object that the gate must decide as one.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-204 | tool_validation | 11, 13 | blocked | 1 | think-gku0 | Whether Lemma 2 is buildable at all under the existing soundness surface, which BC-205 and BC-207 both need and neither can start without. |
+| BC-205 | measurement_validation | 13 | blocked | 1 | think-9kuy | Whether the conditional route can close a known case, which is the only calibration available anywhere before it is pointed at n = 11, where no answer is known. |
+| BC-212 | tool_validation | 13, 21, 46 | blocked | 1 | think-e65r | Whether an exact grid value can be proved by one machine certificate, which is the whole of what separates the m = 4 and m = 5 endgames from n = 11's. |
+| BC-206 | research | 12, 21 | blocked | 1 | think-ndp3 | How close to the ceiling the ladder actually reaches at m = 4, which is the only direct measurement anywhere of the gap between the covering value and the ceiling. |
+| BC-207 | research | 11 | blocked | 2 | think-0mro | Whether the mass gap is a case analysis a computer can finish, which is the last of the three unknowns X-014's verdict names. |
+| BC-208 | research | 11 | blocked | 1 | think-7nxe | How much of the composition tree closes above Trump's side, which is the coarse tier of X-014's proof shape and what decides whether the tree is finite in practice rather than only in principle. |
+| BC-209 | research | 11, 26, 38, 39, 51 | blocked | 2 | think-4in0 | Whether the reach table is a work queue or only a ranking, which is the question X-013 raised and deliberately declined to answer. |
+| BC-210 | tool_validation | 11, 12, 13, 21, 26 | blocked | 3 | think-u066 | Whether the endgame at n = 11 is a research programme or a closed door, which is the question X-014 raised and which two blocks of measurement would finally have priced. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
@@ -457,69 +487,73 @@ Status: **completed**. A one-block W5 efficiency-loop commitment, entered direct
 
 ## Registry
 
-| id | status | lane | claim | sweep | rounds | spent |
-| --- | --- | --- | --- | --- | --- | --- |
-| H-001 | blocked | search | A proposer restricted to at most three learned angle classes, followed | n: 5 10 17 11 | 0 |  |
-| H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5* 10* 11* | 5 | 195m agent + 5.1m wall |
-| H-003 | blocked | search | Under one versioned proposer, quench, and terminal-component relation, | n: 5 6 7 8 9 10 11 | 0 |  |
-| H-004 | blocked | search | At n = 11, seeds constructed by adding a square to the proved n = 10 p | n: 11 | 0 |  |
-| H-005 | blocked | search | A Cleemann-style construction using a 3-4-5 tilt packs 97 unit squares | n: 78 97 | 0 |  |
-| H-006 | blocked | proof | Fractional-transversal column generation at the n = 12 side-4 boundary | n: 11 12 | 0 |  |
-| H-007 | blocked | search | For a fixed proposer, quench, and terminal-component relation, indepen | n: 5 6 7 8 9 10 11 | 0 |  |
-| H-008 | blocked | search | Under the declared search and refinement pipeline, the rate at which e | n: 5 6 7 8 9 10 11 12 17 | 0 |  |
-| H-009 | blocked | search | D4 and square-relabel canonicalization merges at least 10 percent of r | n: 3 5 6 7 8 9 10 11 | 0 |  |
-| H-010 | refuted | proof | At s = 2 + 4/sqrt(5), a checked reconstruction reproduces all five imp | n: 11* | 1 | 180m agent + 1s wall |
-| H-011 | blocked | search | Under a versioned proposer P, deterministic quench Q, and terminal-com | n: 5 6 7 8 9 10 | 0 |  |
-| H-012 | blocked | search | Under one versioned raw-coordinate multistart proposal P, deterministi | n: 10 11 | 0 |  |
-| H-013 | blocked | search | Tracking feasible configurations through a fixed-side projection famil | n: 10 11 | 0 |  |
-| H-014 | blocked | search | Continuation from circles through a preregistered superdisk-exponent l | n: 5 6 7 8 9 10 | 0 |  |
-| H-015 | blocked | search | A MAP-Elites proposer keyed by versioned tilt-class and contact-class  | n: 10 11 | 0 |  |
-| H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10* 11* 12* | 4 | 10.2m wall |
-| H-017 | open | search | The stock annealer at 100x the baseline budget (1e10 moves per chain)  | n: 11 | 0 |  |
-| H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 | 75m agent + 1.3m wall |
-| H-019 | confirmed | search | On the n=11 Trump contact cell, varying the shared tilt of its five ti | n: 11* | 1 | 10m agent + 1s wall |
-| H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
-| H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6* 7* 8* | 14 | 106m agent + 4.0m wall |
-| H-022 | open question | proof | What explicit isolation radius and side-perturbation stability can be  |  | 0 |  |
-| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 12 | 288m agent + 2.6m wall |
-| H-024 | unresolved | search | Every formally supported standing-record packing at n <= 30 uses at mo | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
-| H-025 | blocked | search | For at least 80 percent of standing-record poses at n <= 100 with publ |  | 0 |  |
-| H-026 | confirmed | proof | In open real orientation charts, Trump’s exact n = 11 pose has no nonz |  | 1 | 100m agent + 57s wall |
-| H-027 | blocked | search | In the imported reference contact cells at n = 11 and n = 17, the mini | n: 11 17 | 0 |  |
-| H-028 | blocked | search | On preregistered two-degree class-angle boxes in the imported n = 11 a | n: 11 17 | 0 |  |
-| H-029 | blocked | search | After passing exact synthetic rare-event controls, adaptive multilevel |  | 0 |  |
-| H-030 | blocked | search | Starting only from the six cited parent geometries in UnitSquare Relea |  | 0 |  |
-| H-031 | blocked | search | Under a common temperature schedule and LP-in-cell quench, a move kern | n: 10 17 | 0 |  |
-| H-032 | open question | proof | What are the connected components, dimensions, active strata, and symm | n: 3* 4* 5 6 | 2 | 35m agent + 1s wall |
-| H-033 | open question | proof | Can Bentz's moving unavoidable-resource method or a strict generalizat |  | 0 |  |
-| H-034 | blocked | proof | For the family U_s of all open unit-square poses contained in a square |  | 0 |  |
-| H-035 | blocked | search | A finite, independently and formally verified instantiation of the sta |  | 0 |  |
-| H-036 | blocked | proof | If every n = 11 square orientation modulo quarter turns lies within 0. |  | 0 |  |
-| H-037 | open question | proof | Can the gap between W(x) not in o(x^(1/2)) and W(x) = O(x^(3/5)) be na |  | 0 |  |
-| H-038 | open question | proof | Which algebraic number fields, minimal-polynomial degrees, Galois grou |  | 0 |  |
-| H-039 | open question | proof | Can a checked extension of Stromquist's conditional forcing or another |  | 0 |  |
-| H-040 | blocked | search | After a known-answer n = 5 control, pivoting across one active separat | n: 5 10 | 0 |  |
-| H-041 | confirmed | proof | At s = 2 + 4/sqrt(5), replacing the printed Figure 14 point G = (4/5,  | n: 11* | 1 | 90m agent + 1s wall |
-| H-042 | refuted | search | The retained Kingbird n = 29 SVG serialization has at most three orien | n: 29* | 1 | 15m agent + 0s wall |
-| H-043 | blocked | proof | Every one of the 128 derivative-distinct fixed-side branches at Trump' | derivative_branch: all-128-exp-013-matrices | 0 |  |
-| H-044 | unresolved | search | At least 80 percent of standing-record poses at n <= 30 with public fu | n: 5 10 11* 17 18 19 26 27 28 29 37 39 40 41 50 51 54 68 69 70 83 87 88 | 1 | 25m agent + 1s wall |
-| H-045 | blocked | search | A chunk grammar and enumeration order frozen against the proved cells  | n: 5 10 11 16 17 | 0 |  |
-| H-046 | blocked | search | Starting from the aligned form of Trump's chunk arrangement and increa | n: 11 | 0 |  |
-| H-047 | blocked | search | For at least 70 percent of imported poses at n <= 30, rounding each de | n: 5 10 11 17 18 19 28 29 | 0 |  |
-| H-048 | blocked | search | On the proved cells n = 5 and n = 10, the stratum that is optimal unde | n: 5 10 | 0 |  |
-| H-049 | blocked | search | delta((4,6), 20) > 0: twenty unit squares pack into a 4 by 6 rectangle |  | 0 |  |
-| H-050 | blocked | search | The n = 71 incumbent's split of sixteen oblique squares across two ang |  | 0 |  |
-| H-051 | blocked | search | Starting only from the hash-verified public n = 68 parent, a proposer  |  | 0 |  |
-| H-052 | confirmed | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 4 | 304.6m agent + 528.8m wall |
-| H-053 | blocked | search | For each fixed UnitSquare Release 1 parent-child pair at n = 68 and n  |  | 2 | 114m agent + 107.2m wall |
-| H-054 | unresolved | search | The retained source facts for the reported n = 50 construction at side |  | 2 | 38m agent + 30.0m wall |
-| H-055 | blocked | search | If BC-111 selects n = 54, the fixed retained witness at reported side  |  | 0 |  |
-| H-056 | blocked | search | If BC-111 selects n = 39, the fixed retained witness can be promoted t |  | 0 |  |
-| H-057 | unresolved | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 1 | 107.833m agent + 12.3m wall |
-| H-058 | unresolved | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 2 | 115.667m agent + 115.7m wall |
-| H-059 | confirmed | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 1 | 92m agent + 1s wall |
-| H-060 | confirmed | proof | At the exact container side 2 + sqrt(2)/2, Goebel's exact n = 5 packin |  | 1 | 11s wall |
-| H-061 | open | proof | There is a finite measure of rational-weight point atoms in [0, 19/5]^ |  | 0 |  |
+| id | status | lane | claim | sweep | rounds | results | spent |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| H-001 | blocked | search | A proposer restricted to at most three learned angle classes, followed | n: 5 10 17 11 | 0 |  |  |
+| H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5* 10* 11* | 5 |  | 195m agent + 5.1m wall |
+| H-003 | blocked | search | Under one versioned proposer, quench, and terminal-component relation, | n: 5 6 7 8 9 10 11 | 0 |  |  |
+| H-004 | blocked | search | At n = 11, seeds constructed by adding a square to the proved n = 10 p | n: 11 | 0 |  |  |
+| H-005 | blocked | search | A Cleemann-style construction using a 3-4-5 tilt packs 97 unit squares | n: 78 97 | 0 |  |  |
+| H-006 | blocked | proof | Fractional-transversal column generation at the n = 12 side-4 boundary | n: 11 12 | 0 |  |  |
+| H-007 | blocked | search | For a fixed proposer, quench, and terminal-component relation, indepen | n: 5 6 7 8 9 10 11 | 0 |  |  |
+| H-008 | blocked | search | Under the declared search and refinement pipeline, the rate at which e | n: 5 6 7 8 9 10 11 12 17 | 0 |  |  |
+| H-009 | blocked | search | D4 and square-relabel canonicalization merges at least 10 percent of r | n: 3 5 6 7 8 9 10 11 | 0 |  |  |
+| H-010 | refuted | proof | At s = 2 + 4/sqrt(5), a checked reconstruction reproduces all five imp | n: 11* | 1 |  | 180m agent + 1s wall |
+| H-011 | blocked | search | Under a versioned proposer P, deterministic quench Q, and terminal-com | n: 5 6 7 8 9 10 | 0 |  |  |
+| H-012 | blocked | search | Under one versioned raw-coordinate multistart proposal P, deterministi | n: 10 11 | 0 |  |  |
+| H-013 | blocked | search | Tracking feasible configurations through a fixed-side projection famil | n: 10 11 | 0 |  |  |
+| H-014 | blocked | search | Continuation from circles through a preregistered superdisk-exponent l | n: 5 6 7 8 9 10 | 0 |  |  |
+| H-015 | blocked | search | A MAP-Elites proposer keyed by versioned tilt-class and contact-class  | n: 10 11 | 0 |  |  |
+| H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10* 11* 12* | 4 |  | 10.2m wall |
+| H-017 | open | search | The stock annealer at 100x the baseline budget (1e10 moves per chain)  | n: 11 | 0 |  |  |
+| H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 |  | 75m agent + 1.3m wall |
+| H-019 | confirmed | search | On the n=11 Trump contact cell, varying the shared tilt of its five ti | n: 11* | 1 |  | 10m agent + 1s wall |
+| H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 |  | 6.6m wall |
+| H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6* 7* 8* | 14 |  | 106m agent + 4.0m wall |
+| H-022 | open question | proof | What explicit isolation radius and side-perturbation stability can be  |  | 0 |  |  |
+| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 12 |  | 288m agent + 2.6m wall |
+| H-024 | unresolved | search | Every formally supported standing-record packing at n <= 30 uses at mo | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 |  | 12m agent + 0s wall |
+| H-025 | blocked | search | For at least 80 percent of standing-record poses at n <= 100 with publ |  | 0 |  |  |
+| H-026 | confirmed | proof | In open real orientation charts, Trump’s exact n = 11 pose has no nonz |  | 1 |  | 100m agent + 57s wall |
+| H-027 | blocked | search | In the imported reference contact cells at n = 11 and n = 17, the mini | n: 11 17 | 0 |  |  |
+| H-028 | blocked | search | On preregistered two-degree class-angle boxes in the imported n = 11 a | n: 11 17 | 0 |  |  |
+| H-029 | blocked | search | After passing exact synthetic rare-event controls, adaptive multilevel |  | 0 |  |  |
+| H-030 | blocked | search | Starting only from the six cited parent geometries in UnitSquare Relea |  | 0 |  |  |
+| H-031 | blocked | search | Under a common temperature schedule and LP-in-cell quench, a move kern | n: 10 17 | 0 |  |  |
+| H-032 | open question | proof | What are the connected components, dimensions, active strata, and symm | n: 3* 4* 5 6 | 2 |  | 35m agent + 1s wall |
+| H-033 | open question | proof | Can Bentz's moving unavoidable-resource method or a strict generalizat |  | 0 |  |  |
+| H-034 | blocked | proof | For the family U_s of all open unit-square poses contained in a square |  | 0 |  |  |
+| H-035 | blocked | search | A finite, independently and formally verified instantiation of the sta |  | 0 |  |  |
+| H-036 | blocked | proof | If every n = 11 square orientation modulo quarter turns lies within 0. |  | 0 |  |  |
+| H-037 | open question | proof | Can the gap between W(x) not in o(x^(1/2)) and W(x) = O(x^(3/5)) be na |  | 0 |  |  |
+| H-038 | open question | proof | Which algebraic number fields, minimal-polynomial degrees, Galois grou |  | 0 |  |  |
+| H-039 | open question | proof | Can a checked extension of Stromquist's conditional forcing or another |  | 0 |  |  |
+| H-040 | blocked | search | After a known-answer n = 5 control, pivoting across one active separat | n: 5 10 | 0 |  |  |
+| H-041 | confirmed | proof | At s = 2 + 4/sqrt(5), replacing the printed Figure 14 point G = (4/5,  | n: 11* | 1 |  | 90m agent + 1s wall |
+| H-042 | refuted | search | The retained Kingbird n = 29 SVG serialization has at most three orien | n: 29* | 1 |  | 15m agent + 0s wall |
+| H-043 | blocked | proof | Every one of the 128 derivative-distinct fixed-side branches at Trump' | derivative_branch: all-128-exp-013-matrices | 0 |  |  |
+| H-044 | unresolved | search | At least 80 percent of standing-record poses at n <= 30 with public fu | n: 5 10 11* 17 18 19 26 27 28 29 37 39 40 41 50 51 54 68 69 70 83 87 88 | 1 |  | 25m agent + 1s wall |
+| H-045 | blocked | search | A chunk grammar and enumeration order frozen against the proved cells  | n: 5 10 11 16 17 | 0 |  |  |
+| H-046 | blocked | search | Starting from the aligned form of Trump's chunk arrangement and increa | n: 11 | 0 |  |  |
+| H-047 | blocked | search | For at least 70 percent of imported poses at n <= 30, rounding each de | n: 5 10 11 17 18 19 28 29 | 0 |  |  |
+| H-048 | blocked | search | On the proved cells n = 5 and n = 10, the stratum that is optimal unde | n: 5 10 | 0 |  |  |
+| H-049 | blocked | search | delta((4,6), 20) > 0: twenty unit squares pack into a 4 by 6 rectangle |  | 0 |  |  |
+| H-050 | blocked | search | The n = 71 incumbent's split of sixteen oblique squares across two ang |  | 0 |  |  |
+| H-051 | blocked | search | Starting only from the hash-verified public n = 68 parent, a proposer  |  | 0 |  |  |
+| H-052 | confirmed | proof | The fixed retained Massaccesi n = 17, L = 4.5058 certificate agrees on |  | 4 |  | 304.6m agent + 528.8m wall |
+| H-053 | blocked | search | For each fixed UnitSquare Release 1 parent-child pair at n = 68 and n  |  | 2 |  | 114m agent + 107.2m wall |
+| H-054 | unresolved | search | The retained source facts for the reported n = 50 construction at side |  | 2 |  | 38m agent + 30.0m wall |
+| H-055 | blocked | search | If BC-111 selects n = 54, the fixed retained witness at reported side  |  | 0 |  |  |
+| H-056 | blocked | search | If BC-111 selects n = 39, the fixed retained witness can be promoted t |  | 0 |  |  |
+| H-057 | unresolved | proof | On the same host and the fixed exp-052 inputs at ordinals 33, 107 and  |  | 1 |  | 107.833m agent + 12.3m wall |
+| H-058 | unresolved | search | The fixed UnitSquare Release 1 n = 68 parent source admits at least on |  | 2 |  | 115.667m agent + 115.7m wall |
+| H-059 | confirmed | search | For the frozen n = 50 source-semantics producer and immutable existing |  | 1 |  | 92m agent + 1s wall |
+| H-060 | confirmed | proof | At the exact container side 2 + sqrt(2)/2, Goebel's exact n = 5 packin |  | 1 | T-014 | 11s wall |
+| H-061 | result registered | proof | There is a finite measure of rational-weight point atoms in [0, 19/5]^ |  | 0 | T-017, T-018 |  |
+| H-062 | open | proof | On the retained 181-direction net at B = 9977/10000, the side at which | container side: 193/40 39/8 97/20 979/200 123/25 247/50 993/200 | 0 |  |  |
+| H-063 | blocked | proof | Two statements, one instrument. First, the class certificate of X-014' | composition n1: 0 1 2 3 4 5 6 7 8 9 10 11 | 0 |  |  |
+| H-064 | open | proof | At container side 77/20 = 3.85, on the retained 181-direction net at B | container side: 191/50 77/20 387/100 | 0 |  |  |
+| H-065 | blocked | proof | On the retained 381/100 certificate at n = 11 -- 1121 atoms, B = 9977/ | census margin epsilon: 0 0.01 0.05 0.1 | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -637,7 +671,7 @@ Status: **completed**. A one-block W5 efficiency-loop commitment, entered direct
 - X-008 — The shapes the grammar cannot express are the ones that are not tilted
 - X-010 — Two lanes, two ladders — focusing the campaign on first-party theorems
 - X-012 — One chart, four hundred inequalities, and an order-2m contradiction
-- X-013 — Where the certificate should go next
+- X-015 — The map and the three programs: where significant progress is likeliest next
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

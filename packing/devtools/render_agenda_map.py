@@ -12,6 +12,8 @@ Three cuts, each answering a different question a coordinator actually has:
   live          what may be taken now, in priority order, with its blocker if any
   by agenda     which agendas are closed and which still carry weight
   blocked       what is waiting, and on what -- the dependency edges that matter
+  by program    which cells, across agendas, make up one multi-block program, and
+                which of them are its open frontier
 
 Ordering is by agenda then declared priority, never by id: an agenda's queue owns
 priority ordering (OR-4), so a map that sorts by id would invent a different one.
@@ -69,6 +71,9 @@ STATE_MEANING = {
     "complete": "discharged",
 }
 
+# The states a cell does not leave. A program's open frontier is everything else.
+TERMINAL = frozenset({"complete", "stopped"})
+
 
 @dataclass(frozen=True, slots=True)
 class Commitment:
@@ -87,6 +92,8 @@ class Commitment:
     depends_on: tuple[str, ...]
     blocked_on: str
     discharged_by: str
+    # Optional slug of the multi-block program the cell belongs to; empty for none.
+    program: str = ""
 
     @classmethod
     def of(cls, agenda: dict, doc: str, item: dict) -> Self:
@@ -104,6 +111,7 @@ class Commitment:
             depends_on=tuple(item.get("depends_on", [])),
             blocked_on=" ".join(item.get("blocked_on", "").split()),
             discharged_by=item.get("discharged_by", ""),
+            program=item.get("program", ""),
         )
 
     @property
@@ -203,6 +211,26 @@ def truncate(text: str, width: int) -> str:
     if len(text) <= width:
         return text
     return text[:width].rsplit(" ", 1)[0] + "…"
+
+
+def program_order(cells: list[Commitment]) -> list[Commitment]:
+    """Dependency order where `depends_on` gives one, id order otherwise.
+
+    Edges to cells outside the program order nothing inside it and are ignored. A cycle
+    cannot be ordered; whatever one leaves is taken by id rather than dropped, so every
+    cell of the program is listed once.
+    """
+    by_id = {c.id: c for c in cells}
+    pending = {c.id: {d for d in c.depends_on if d in by_id} for c in cells}
+    out: list[Commitment] = []
+    while pending:
+        ready = sorted(cid for cid, deps in pending.items() if not deps) or sorted(pending)
+        head = ready[0]
+        out.append(by_id[head])
+        del pending[head]
+        for deps in pending.values():
+            deps.discard(head)
+    return out
 
 
 def render(commitments: list[Commitment]) -> str:
@@ -339,6 +367,47 @@ def render(commitments: list[Commitment]) -> str:
         per = Counter(c.state for c in rows)
         cells = " | ".join(str(per[s]) if per[s] else "" for s in STATE_ORDER)
         out.append(f"| {name} | {rows[0].agenda_status} | {cells} | {len(rows)} |")
+    out += [""]
+
+    # A program spans agendas by definition, so no per-agenda view can show one whole.
+    # The section is always present, saying so when empty, so the map's shape does not
+    # change the day a first cell names a program.
+    out += ["## By program", ""]
+    programs = sorted({c.program for c in commitments if c.program})
+    if programs:
+        out += [
+            (
+                "A program is a line of work that spans agendas; its cells carry one "
+                "`program` slug. Each is listed in dependency order where `depends_on` "
+                "gives one and by id otherwise, and its open frontier is the cells not "
+                "yet terminal."
+            ),
+            "",
+        ]
+        for slug in programs:
+            cells = program_order([c for c in commitments if c.program == slug])
+            frontier = [c for c in cells if c.state not in TERMINAL]
+            out += [f"### `{slug}`", ""]
+            out += ["| agenda | id | state | question |", "| --- | --- | --- | --- |"]
+            for c in cells:
+                out.append(
+                    f"| {c.agenda} | `{c.id}` | {c.state} | {truncate(c.question, 100)} |"
+                )
+            out += [""]
+            if frontier:
+                names = ", ".join(f"`{c.id}`" for c in frontier)
+                out += [f"Open frontier: {names}.", ""]
+            else:
+                out += ["Open frontier: none; every cell is terminal.", ""]
+    else:
+        out += [
+            (
+                "No commitment names a program yet. `program` is an optional kebab-case "
+                "slug on a cell; each slug in use is listed here with its cells across "
+                "agendas and its open frontier."
+            ),
+            "",
+        ]
     out += [""]
 
     out += ["## What the states mean", ""]

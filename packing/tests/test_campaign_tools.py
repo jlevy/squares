@@ -694,3 +694,88 @@ def test_baseline_rejects_invalid_axes_before_work_or_output(
     assert raised.value.code == 2
     assert message in capsys.readouterr().err
     assert not output.exists()
+
+
+def test_a_registered_result_stops_its_hypothesis_reading_as_untouched() -> None:
+    """The register's `produced_by` joins back to the hypothesis; the ledger shows it.
+
+    H-061 had T-017 and T-018 standing on it and read `open` with zero rounds, because
+    the only link was prose. No round is invented for it: the status says a result is
+    registered, and the `results` column names which.
+    """
+    hypothesis = {
+        "id": "H-061",
+        "kind": "hypothesis",
+        "lane": "proof",
+        "claim": "A first-party certificate proves s(12) >= 19/5.",
+        "instrument_ready": True,
+        "instrument": "A frozen generator and verifier.",
+    }
+    assert ledger.status_of(hypothesis, []) == "open"
+    assert ledger.status_of(hypothesis, [], results=["T-017"]) == "result registered"
+    reviewed = {"verdict": {"decision": "accepted", "needs_review": False}}
+    assert ledger.status_of(hypothesis, [reviewed], results=["T-017"]) == "confirmed"
+
+    results = [
+        {"id": "T-017", "produced_by": {"hypothesis": "H-061"}},
+        {"id": "T-018", "produced_by": {"hypothesis": "H-061"}},
+        {"id": "T-019", "produced_by": {"agenda_cell": "BC-161"}},
+    ]
+    assert ledger.results_of(results) == {"H-061": ["T-017", "T-018"]}
+    text = ledger.render([], [], [hypothesis], [], [], agendas=[], results=results)
+    row = next(line for line in text.splitlines() if line.startswith("| H-061 "))
+    assert "| result registered |" in row
+    assert "| 0 | T-017, T-018 |" in row
+
+
+def test_the_live_ledger_carries_the_results_column_for_h061() -> None:
+    text = ledger.LEDGER.read_text(encoding="utf-8")
+    header = next(line for line in text.splitlines() if line.startswith("| id | status | lane"))
+    assert header == "| id | status | lane | claim | sweep | rounds | results | spent |"
+    row = next(line for line in text.splitlines() if line.startswith("| H-061 "))
+    assert "T-017" in row
+
+
+def _cell(cell_id: str, state: str, depends_on: list[str]) -> dict[str, object]:
+    return {
+        "id": cell_id,
+        "state": state,
+        "hypotheses": [],
+        "depends_on": depends_on,
+        "bead": f"think-{cell_id[3:].lower()}",
+        "artifacts": ["retained evidence"] if state == "complete" else [],
+    }
+
+
+def test_depends_on_resolves_across_agendas_like_discharged_by(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A later agenda may wait on an earlier one's cell; only a missing id is refused."""
+    monkeypatch.setattr(ledger, "dead_links", list)
+    monkeypatch.setattr(ledger, "board_ids", _empty_board_ids)
+    earlier = {
+        "id": "agenda-019",
+        "_path": Path("agenda-019-contract-test.md"),
+        "status": "paused",
+        "items": [_cell("BC-901", "complete", []), _cell("BC-902", "ready", [])],
+    }
+    later = {
+        "id": "agenda-021",
+        "_path": Path("agenda-021-contract-test.md"),
+        "status": "paused",
+        "items": [
+            _cell("BC-903", "ready", ["BC-901"]),
+            _cell("BC-904", "blocked", ["BC-902"]),
+            _cell("BC-905", "blocked", ["BC-999"]),
+            _cell("BC-906", "ready", ["BC-902"]),
+        ],
+    }
+    problems = ledger.check(
+        [], [], [], [], [], agendas=[earlier, later], now=dt.datetime(2026, 9, 5, tzinfo=dt.UTC)
+    )
+    assert not any("BC-903" in problem or "BC-904" in problem for problem in problems)
+    assert any("BC-905 depends on unknown items ['BC-999']" in problem for problem in problems)
+    assert any(
+        "BC-906 is ready with incomplete dependencies ['BC-902']" in problem
+        for problem in problems
+    )

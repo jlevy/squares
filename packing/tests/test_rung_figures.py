@@ -54,7 +54,7 @@ from devtools.check_rung_figures import (
 )
 from devtools.check_synopsis import spell
 from devtools.render_certificate_reach import (
-    REPORTED_COVERING_VALUES,
+    covering_value_register,
     reported_covering_values,
 )
 from sqpack.yamlio import safe_load
@@ -574,19 +574,24 @@ def test_the_reach_tables_reported_values_carry_their_own_artifacts_figures() ->
     """
     text = REACH.read_text(encoding="utf-8")
     declared = _declared_artifacts()
-    rendered = {row["side"]: row for row in reported_covering_values()}
-    assert set(rendered) == {side for side, _, _, _ in REPORTED_COVERING_VALUES}
+    register = covering_value_register()
+    rendered = reported_covering_values()
+    assert len(rendered) == len(register)
 
     with_artifacts = 0
-    for side, reported, artifact, _ in REPORTED_COVERING_VALUES:
-        row = rendered[side]
-        assert f"| {side} | {reported} | {row['evidence']} |" in text
+    for entry, row in zip(register, rendered, strict=True):
+        assert row["side"] == entry["side_decimal"]
+        assert (
+            f"| {row['n']} | {row['side']} | {row['site_set']} | {row['reported']} | "
+            f"{'yes' if row['converged'] else 'no'} | {row['stop_reason']} | "
+            f"{row['evidence']} |"
+        ) in text
+        artifact = entry["frozen_artifact"]
         if artifact is None:
             continue
         with_artifacts += 1
-        repo_relative = f"packing/cases/{artifact}"
-        assert repo_relative in declared, f"{repo_relative} is declared by no result"
-        figures = _figures(repo_relative)
+        assert artifact in declared, f"{artifact} is declared by no result"
+        figures = _figures(artifact)
         assert f"{figures.atom_count:,}-atom" in row["evidence"]
         assert str(round_to(figures.mass, 6)) in row["evidence"]
     assert with_artifacts, "premise: some reported value has a frozen artifact beside it"
@@ -595,9 +600,15 @@ def test_the_reach_tables_reported_values_carry_their_own_artifacts_figures() ->
 def test_the_reach_table_states_how_many_values_it_lists() -> None:
     """The count its prose spells is the number of rows it renders."""
     text = REACH.read_text(encoding="utf-8")
-    rows = [line for line in text.splitlines() if re.match(r"^\| \d+\.\d+ \| ", line)]
-    assert len(rows) == len(REPORTED_COVERING_VALUES)
-    assert re.search(rf"\b{spell(len(rows))} values have been reported\b", text, re.I)
+    rows = [line for line in text.splitlines() if re.match(r"^\| \d+ \| \d+\.\d+ \| ", line)]
+    assert len(rows) == len(covering_value_register())
+    sides = {row["side"] for row in reported_covering_values()}
+    assert re.search(
+        rf"\b(?:{len(rows)}|{spell(len(rows))}) restricted optima\s+have been reported at "
+        rf"(?:{len(sides)}|{spell(len(sides))}) sides\b",
+        text,
+        re.I,
+    )
 
 
 def test_every_case_page_binds_the_certificate_its_own_evidence_names() -> None:

@@ -14,7 +14,8 @@ What it does:
     the cross-field verdict rules a soft schema cannot carry, the two-way
     reconciliation between ideas.md and the registry, and dead relative links
   * derives each hypothesis's status from the experiments referencing it -- status is
-    never a stored field
+    never a stored field -- and joins the results register back to it through
+    `produced_by`, so a hypothesis with a registered result never reads as untouched
   * renders ledger.md, which is a generated view and must never be hand-edited
 
 Usage:
@@ -29,6 +30,7 @@ import datetime as dt
 import re
 import sys
 from collections import Counter, defaultdict
+from collections.abc import Sequence
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
@@ -43,6 +45,7 @@ ROOT = PROJECT_ROOT / "campaign"
 LEDGER = ROOT / "ledger.md"
 IDEAS = ROOT / "ideas.md"
 DEFECTS = PROJECT_ROOT / "defects.yaml"
+RESULTS = PROJECT_ROOT / "frontier" / "results.yaml"
 SESSION_SCHEMA = ROOT / "schemas/agent-session.schema.yaml"
 AGENDA_SCHEMA = ROOT / "schemas/agenda.schema.yaml"
 LOGBOOK_SCHEMA = ROOT / "schemas/research-loop-log-entry.schema.yaml"
@@ -470,9 +473,12 @@ def check(
                     f"{experiment['_path'].name}: references unknown {hypothesis_id}"
                 )
 
-    # `discharged_by` is the one agenda edge that crosses agendas -- a later agenda's
-    # commitment satisfying an earlier one's exit is exactly the case it exists for -- so
-    # it is resolved against every commitment, not against the containing agenda's items.
+    # `discharged_by` and `depends_on` are the two agenda edges that cross agendas -- a
+    # later agenda's commitment satisfying an earlier one's exit, or waiting on it, is
+    # exactly the case each exists for -- so both are resolved against every commitment,
+    # not against the containing agenda's items. Until agenda-021 no `depends_on` edge
+    # ever crossed a file (189 cells, 171 edges, none across), and this check refused
+    # the first ones that did while the agenda map accepted them.
     global_state = {item["id"]: item["state"] for agenda in agendas for item in agenda["items"]}
     global_artifacts = {
         item["id"]: item.get("artifacts") or []
@@ -487,8 +493,6 @@ def check(
         duplicate_items = {item_id for item_id in item_ids if item_ids.count(item_id) > 1}
         if duplicate_items:
             problems.append(f"{name}: duplicate item ids: {sorted(duplicate_items)}")
-        known_items = set(item_ids)
-        state_by_id = {item["id"]: item["state"] for item in items}
         for item in items:
             item_id = item["id"]
             unknown_hypotheses = set(item.get("hypotheses") or []) - known
@@ -498,7 +502,7 @@ def check(
                     f"{sorted(unknown_hypotheses)}"
                 )
             dependencies = set(item["depends_on"])
-            unknown_dependencies = dependencies - known_items
+            unknown_dependencies = dependencies - set(global_state)
             if unknown_dependencies:
                 problems.append(
                     f"{name}: {item_id} depends on unknown items {sorted(unknown_dependencies)}"
@@ -509,7 +513,7 @@ def check(
                 incomplete = sorted(
                     dependency
                     for dependency in dependencies
-                    if state_by_id.get(dependency) != "complete"
+                    if global_state.get(dependency) != "complete"
                 )
                 if incomplete:
                     problems.append(
@@ -1184,14 +1188,20 @@ def check(
     return problems
 
 
-def status_of(hypothesis: dict, rounds: list[dict]) -> str:
-    """Derive status from reviewed rounds; pending decisions cannot move a claim."""
+def status_of(hypothesis: dict, rounds: list[dict], *, results: Sequence[str] = ()) -> str:
+    """Derive status from reviewed rounds; pending decisions cannot move a claim.
+
+    `results` are the register ids whose `produced_by.hypothesis` is this one. They do
+    not stand in for a round -- no verdict is derived from them -- but a hypothesis
+    with a registered result standing on it is not untouched, and reading it as `open`
+    is what H-061 did with T-017 and T-018 on the register.
+    """
     if hypothesis.get("kind") == "open_question":
         return "open question"
     if not rounds:
-        if not hypothesis.get("instrument_ready", True) or not hypothesis.get("instrument"):
-            return "blocked"
-        return "open"
+        instrumented = hypothesis.get("instrument_ready", True) and hypothesis.get("instrument")
+        untried = "open" if instrumented else "blocked"
+        return "result registered" if results else untried
     reviewed = [r for r in rounds if not (r.get("verdict") or {}).get("needs_review")]
     decisions = {r.get("verdict", {}).get("decision") for r in reviewed}
     # `rejected` outranks `accepted` on purpose. A claim stated over a sweep is
@@ -1241,6 +1251,21 @@ def spent(rounds: list[dict]) -> str:
     return " + ".join(parts)
 
 
+def results_of(results: list[dict]) -> dict[str, list[str]]:
+    """Register ids by the hypothesis their `produced_by` names, in register order."""
+    out: dict[str, list[str]] = defaultdict(list)
+    for result in results:
+        hypothesis_id = (result.get("produced_by") or {}).get("hypothesis")
+        if hypothesis_id:
+            out[hypothesis_id].append(result["id"])
+    return out
+
+
+def load_results() -> list[dict]:
+    """The results register's entries. `devtools.check_results` owns their validity."""
+    return safe_load(RESULTS.read_text(encoding="utf-8"))["results"]
+
+
 def render(
     series,
     explorations,
@@ -1250,12 +1275,14 @@ def render(
     *,
     agendas,
     logbook_entries=None,
+    results=None,
 ) -> str:
     logbook_entries = logbook_entries or []
     by_hypothesis = defaultdict(list)
     for experiment in experiments:
         for hypothesis_id in experiment.get("hypotheses") or []:
             by_hypothesis[hypothesis_id].append(experiment)
+    registered = results_of(results or [])
 
     lines = [BANNER, "", "# Experiment ledger", ""]
 
@@ -1411,17 +1438,18 @@ def render(
     lines += [
         "## Registry",
         "",
-        "| id | status | lane | claim | sweep | rounds | spent |",
-        "| --- | --- | --- | --- | --- | --- | --- |",
+        "| id | status | lane | claim | sweep | rounds | results | spent |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for hypothesis in sorted(hypotheses, key=lambda h: h["id"]):
         rounds = by_hypothesis.get(hypothesis["id"], [])
+        produced = registered.get(hypothesis["id"], [])
         claim = hypothesis["claim"].replace("\n", " ").strip()
         lines.append(
-            f"| {hypothesis['id']} | {status_of(hypothesis, rounds)} "
+            f"| {hypothesis['id']} | {status_of(hypothesis, rounds, results=produced)} "
             f"| {hypothesis.get('lane', '')} | {claim[:70]} "
             f"| {sweep_coverage(hypothesis, rounds)} | {len(rounds)} "
-            f"| {spent(rounds)} |"
+            f"| {', '.join(produced)} | {spent(rounds)} |"
         )
 
     # First, always: what the runner would not decide. The schema has carried
@@ -1542,6 +1570,7 @@ def main(arguments: list[str] | None = None) -> int:
     sessions = load(ROOT / "agent-sessions", "session", "session-*.md")
     agendas = load(ROOT / "agendas", "agenda", "agenda-*.md")
     logbook_entries = load(ROOT / "research-loop-logbook", "logbook_entry", "run-*.md")
+    results = load_results()
 
     problems = check(
         series,
@@ -1564,6 +1593,7 @@ def main(arguments: list[str] | None = None) -> int:
         sessions,
         agendas=agendas,
         logbook_entries=logbook_entries,
+        results=results,
     )
     if options.action == "check":
         current = LEDGER.read_text() if LEDGER.exists() else ""

@@ -129,8 +129,10 @@ hypothesis:
     lower bound specific to n = 12 appears, and no arXiv or MathOverflow search is on
     record, so a success is apparently-novel with that gap stated rather than a claim of
     priority. The same certificate at any side above 2 + 4/sqrt(5)
-    with total mass strictly below 11 would improve s(11); that is H-063's separate
-    claim and is not this one.
+    with total mass strictly below 11 would improve s(11); that is a separate claim
+    and is not this one (T-018 later did exactly that inside this hypothesis's own
+    ladder, and the id H-063 this note once reserved was taken by agenda-021's
+    class-certificate claim on 2026-09-05).
 ---
 # H-061 — A First-Party Fractional Certificate Proves `s(12) ≥ 19/5`
 

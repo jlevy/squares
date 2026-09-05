@@ -113,3 +113,19 @@ $defs:
         minLength: 1
         description: The next evidence-improving action, or why no independent rung change applies.
       notes: {type: string, minLength: 1}
+      produced_by:
+        type: object
+        additionalProperties: false
+        minProperties: 1
+        description: >-
+          The campaign records this result came out of, as ids the checker resolves
+          to existing records and refuses when dangling. Every key is optional: a
+          result names only the provenance the record itself states. Before this
+          field existed the join ran through prose alone -- a `by:` line inside
+          significance, cell ids inside next_rung -- which no ledger could read, so a
+          hypothesis with a registered result standing on it reported as untouched.
+        properties:
+          hypothesis: {type: string, pattern: '^H-[0-9]{3}$'}
+          agenda_cell: {type: string, pattern: '^BC-[0-9]{3}$'}
+          session: {type: string, pattern: '^session-[0-9]{3}$'}
+          experiment: {type: string, pattern: '^exp-[0-9]{3}$'}

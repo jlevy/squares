@@ -4,7 +4,8 @@
 `epistemics.md` owns the policy. This checker derives V1 and V3 through V5,
 derives C0 through C5, requires explanations for declared-only V0 and V2, and
 refuses unsupported promotion or unexplained understatement. It also resolves
-evidence and repository-file references, requires retained controls at C3 and
+evidence, repository-file and `produced_by` references -- the campaign records a
+result came out of, which must exist -- requires retained controls at C3 and
 above, restricts C5 to mapped review artifacts, and rejects unknown result ids
 in the reader tier. Human review owns evidence relevance, claim coverage,
 composition, significance, and novelty.
@@ -17,6 +18,7 @@ from __future__ import annotations
 
 import re
 import sys
+from collections.abc import Iterable
 from pathlib import Path, PurePosixPath
 
 from sqpack.assurance import EXTERNAL_ORIGINS, PROOF_METHODS
@@ -28,6 +30,14 @@ RESULTS = ROOT / "frontier" / "results.yaml"
 EVIDENCE = ROOT / "frontier" / "evidence.yaml"
 READER_TIER = (REPO / "README.md", REPO / "SYNOPSIS.md")
 DOCUMENT_MAP = REPO / "docs" / "project" / "document-map.yaml"
+CAMPAIGN = ROOT / "campaign"
+# What each `produced_by` key names, for the refusal message.
+PRODUCED_BY_NOUNS = {
+    "hypothesis": "hypothesis",
+    "agenda_cell": "agenda commitment",
+    "session": "agent session",
+    "experiment": "experiment round",
+}
 
 MACHINE_METHODS = {"exact-algebraic", "interval-certified"}
 OURS_ORIGINS = {"audited-here", "replayed-here"}
@@ -105,6 +115,39 @@ def repository_file_problem(path: str) -> str | None:
     return None
 
 
+def _frontmatter(path: Path) -> dict:
+    text = path.read_text(encoding="utf-8")
+    if not text.startswith("---\n"):
+        return {}
+    return safe_load(text[4 : text.index("\n---", 4)]) or {}
+
+
+def campaign_ids() -> dict[str, set[str]]:
+    """The ids a `produced_by` entry may name, read from the campaign record.
+
+    Hypotheses, sessions and rounds carry their id as the filename prefix, which is the
+    naming rule `packing-ledger check` enforces, so the prefix is read rather than every
+    frontmatter parsed. Agenda commitments live inside their agenda's frontmatter and
+    are read from there.
+    """
+
+    def prefixes(paths: Iterable[Path], pattern: str) -> set[str]:
+        return {match.group() for path in paths if (match := re.match(pattern, path.name))}
+
+    cells: set[str] = set()
+    for path in sorted((CAMPAIGN / "agendas").glob("agenda-*.md")):
+        agenda = _frontmatter(path).get("agenda") or {}
+        cells.update(item["id"] for item in agenda.get("items") or [])
+    return {
+        "hypothesis": prefixes((CAMPAIGN / "hypotheses").glob("H-*.md"), r"H-\d{3}"),
+        "agenda_cell": cells,
+        "session": prefixes(
+            (CAMPAIGN / "agent-sessions").glob("session-*.md"), r"session-\d{3}"
+        ),
+        "experiment": prefixes(CAMPAIGN.glob("series/*/experiments/exp-*.md"), r"exp-\d{3}"),
+    }
+
+
 def derive_verification(entries: list[dict]) -> str:
     if any(entry.get("method") == "proof-assistant-checked" for entry in entries):
         return "V5"
@@ -139,6 +182,7 @@ def main() -> int:
         for entry in safe_load(EVIDENCE.read_text(encoding="utf-8"))["evidence"]
     }
     results = register["results"]
+    known_ids = campaign_ids()
 
     expected_ids = [f"T-{index:03d}" for index in range(1, len(results) + 1)]
     actual_ids = [record["id"] for record in results]
@@ -166,6 +210,13 @@ def main() -> int:
                 for path in record.get(field) or []
                 if (problem := repository_file_problem(path))
             )
+
+        for kind, value in (record.get("produced_by") or {}).items():
+            if value not in known_ids.get(kind, set()):
+                problems.append(
+                    f"{rid}: produced_by.{kind} names {value}, which is not a recorded "
+                    f"{PRODUCED_BY_NOUNS.get(kind, kind)}"
+                )
 
         declared_c = record["confirmation"]
         review = record.get("review_artifact")
@@ -236,7 +287,8 @@ def main() -> int:
 
     print(
         f"{len(results)} registered results: every declared rung passes its "
-        "structural checks, every path resolves, every reader-tier mention exists"
+        "structural checks, every path and produced_by id resolves, every reader-tier "
+        "mention exists"
     )
     return 0
 

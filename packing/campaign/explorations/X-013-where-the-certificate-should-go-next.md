@@ -49,7 +49,7 @@ exploration:
   - packing/cases/n12_fractional_certificate/certificate.json
   - packing/cases/n17_fractional_certificate/certificate.json
   - packing/cases/n20_fractional_certificate/certificate.json
-  proposes: []
+  proposes: [H-062]
 ---
 # X-013 — Where the Certificate Should Go Next
 

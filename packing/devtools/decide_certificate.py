@@ -28,6 +28,14 @@ Usage:
 certificate and is enough to reject a candidate. It is never enough to retain
 one, and the tool says so in its own output rather than leaving the reader to
 remember.
+
+A certificate may say what it claims to be with ``variant``. ``unconditional`` -- the
+theorem as stated, Conditions 1--5 and nothing assumed -- is the default when the key
+is absent and the only value this gate decides. ``class`` (a bound restricted to a
+class of packings) and ``conditional`` (a bound under a named hypothesis) are reserved
+names: a certificate declaring either is refused before any route runs, by name,
+because this gate implements only the unconditional conditions and a verdict printed
+under the wrong ones would read as retainable. Any other string is refused as unknown.
 """
 
 from __future__ import annotations
@@ -63,6 +71,12 @@ MAX_RATIONAL_TEXT = 512
 MAX_DIRECTION_STEPS = 10_000
 MAX_ATOMS = MAX_INTERVAL_ATOMS
 MAX_CERTIFICATE_BYTES = 8 * 1024 * 1024
+# What a certificate claims to be. Only the unconditional theorem is decided here; the
+# other two names are reserved so that a certificate declaring one is refused by name
+# rather than read as unconditional and printed RETAINABLE under conditions it never
+# claimed. Neither class nor conditional checking is implemented.
+UNCONDITIONAL = "unconditional"
+CERTIFICATE_VARIANTS = (UNCONDITIONAL, "class", "conditional")
 
 
 class CertificateFormatError(ValueError):
@@ -130,6 +144,20 @@ def _exact_rational(record: dict[str, object], key: str) -> Fraction:
     return _rational(_required(record, key), field=key)
 
 
+def _require_unconditional(record: dict[str, object]) -> None:
+    """Refuse any declared variant this gate does not implement, naming it."""
+    variant = record.get("variant", UNCONDITIONAL)
+    if not isinstance(variant, str) or variant not in CERTIFICATE_VARIANTS:
+        raise CertificateFormatError(
+            f"field 'variant' must be one of {CERTIFICATE_VARIANTS}, got {variant!r}"
+        )
+    if variant != UNCONDITIONAL:
+        raise CertificateFormatError(
+            f"variant {variant!r} is declared, and this gate implements only the "
+            f"unconditional conditions; a {variant} certificate cannot be decided here"
+        )
+
+
 def _load_bytes(data: bytes) -> tuple[Certificate, dict[str, object]]:
     """Rebuild a certificate from one frozen byte string."""
     try:
@@ -165,6 +193,7 @@ def _load_bytes(data: bytes) -> tuple[Certificate, dict[str, object]]:
     _exact_string(record, "claim")
     _exact_rational(record, "total_mass")
     symmetry = _exact_string(record, "symmetry")
+    _require_unconditional(record)
     if "least_cell_mass" in record:
         _exact_rational(record, "least_cell_mass")
 

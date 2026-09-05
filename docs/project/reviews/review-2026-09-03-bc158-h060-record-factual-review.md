@@ -212,7 +212,7 @@ The word “independent” is doing work it cannot do in any of the six sentence
 
 > X-012 preface: “**Provenance pass, 2026-09-03.** One later pass has touched the body …
 > Applying them **rewrote the citation apparatus of §4.1 (including one citation
-> withdrawn)**, de-flagged the Milnor statement of §4.1 from 'from memory', added two
+> withdrawn)**, de-flagged the Milnor statement of §4.1 from ‘from memory’, added two
 > items to that route’s reduction, added the nonconstancy clause and the hypothesis
 > inventory to §4.2, and updated §8.3, the closing obligation note, the replay-artifact
 > note above and this record’s brief.”
@@ -255,7 +255,7 @@ source and not the installed file.
 
 > curve-selection-verification §0: “**Milnor’s Lemma 3.1 does not give the statement as
 > written**, and the brief’s suspicion about it is correct.
-> Milnor’s 'semi-algebraic' means *real algebraic set intersected with finitely many
+> Milnor’s ‘semi-algebraic’ means *real algebraic set intersected with finitely many
 > strict polynomial inequalities*, not an arbitrary semialgebraic set — now confirmed
 > verbatim from a peer-reviewed source that cites Milnor p. 25 (§2.6).”
 
@@ -344,7 +344,7 @@ Missing:
 - **The restricted-jet limitation.** Receipt, *Claim boundary*: “the binding compares
   the second derivative along one chart ray only -- the image of T-012’s single free
   direction, e_u4 halved -- **not the full chart Hessian**.” Review §5: “the receipt
-  should say 'restricted second jet along `e_u4`'.”
+  should say ‘restricted second jet along `e_u4`’.”
 - **Single-support-feature classification only.** Review §8 item 4:
   “Single-support-feature touches only; edge-flush and corner-on-corner refused by
   `DisjunctiveTouchError`.”
@@ -390,8 +390,8 @@ That sentence entered at `6309e1f4` (07:47:48Z). The review returned at 07:55Z:
 
 > instrument-readiness-review, *Classification*: “**BOUNDED-CAVEAT** … two of the eight
 > registered negative controls (`changed_feature`, `invented_contact`) are structurally
-> incapable of failing and never touch the binding’s refusal path, so the receipt’s 'all
-> eight controls reject' **overstates the evidence** for the one refusal the instrument
+> incapable of failing and never touch the binding’s refusal path, so the receipt’s ‘all
+> eight controls reject’ **overstates the evidence** for the one refusal the instrument
 > exists to make … this is **not an exact PASS** and does not by itself authorize
 > flipping `instrument_ready`.”
 
@@ -435,9 +435,9 @@ The JSON is the outlier by one.
 > X-012 §7.3: “It lists as rigid
 > `n = 5, 11, 18, 28, 40, 52, 149, 296, 493, 740, 1037, 1384, 1781`”
 
-> h060-prior-art §3.1: “The main page carries 'Rigid.'
+> h060-prior-art §3.1: “The main page carries ‘Rigid.’
 > on **exactly four packings at `n <= 100`: `n = 5, 11, 28, 40`** (lines 44, 80, 163,
-> 224), consistent with the schema comment 'all but four packings at n <= 100'.”
+> 224), consistent with the schema comment ‘all but four packings at n <= 100’.”
 
 I checked the archived page: `packing/resources/web/kingbird-squares-in-squares.md`
 contains exactly four `[Rigid.]` links, at lines 44, 80, 163, 224. X-012’s list adds
