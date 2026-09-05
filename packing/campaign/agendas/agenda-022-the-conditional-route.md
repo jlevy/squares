@@ -9,7 +9,7 @@ agenda:
   id: agenda-022
   title: "The Conditional Route — Boxed Certificates, the n = 13 Calibration, and the Class Theorems"
   updated: '2026-09-05'
-  status: paused
+  status: active
   objective: >-
     Block two, and every cell in it is contingent. Agenda-021 measures four numbers and
     its closeout, BC-203, carries three doubling-down rules written before that block
@@ -46,6 +46,53 @@ agenda:
     exactly as strict as it is now, and a conditional certificate is a different object
     that the gate must decide as one.
   items:
+  - id: BC-213
+    purpose: research
+    owner_focus: correctness
+    instances: [20, 21]
+    state: ready
+    priority: 0
+    question: >-
+      Does the remaining rung of the m = 5 bisection, 973/200 = 4.865, certify or wall --
+      and so bring the covering-wall bracket inside the 0.02 H-062 registered?
+    hypotheses: [H-062]
+    budget: >-
+      60 elapsed minutes, Opus at maximum thinking, research-loop. Added by agenda-021's
+      closeout as its selected next entry, and the only cell here that no doubling-down
+      rule gates.
+      The side is the schedule's own: the midpoint of the bracket agenda-021 left,
+      [97/20, 39/8], rounded to the nearest 1/200 with ties away from 24/5, which is
+      973/200. Either outcome settles H-062. A certificate leaves [973/200, 39/8], width
+      0.010; a wall on both constructions leaves [97/20, 973/200], width 0.015; both sit
+      inside the registered 0.02.
+      Two constructions as H-062 requires, in the order BC-197 measured: the uniform
+      grids at BC-191's density rule first, and -- since at 97/20 the grid walled at the
+      very side the seeded set certified -- the grids unioned with the 97/20
+      certificate's own 1680 atoms scaled by 973/970, which is now the nearer seed. The
+      cost is measured rather than modelled: a converged rung at 193/40 took 54 LP rounds
+      and 1008.6 s of wall, and the seeded convergence at 97/20 took 1616.5 s, so a rung
+      here is half an hour of run inside a one-hour cell.
+      Refutation is early and confirmation is convergence, exactly as BC-197 ran it: an
+      optimum crossing twenty with placements still violated refutes the rung on that
+      construction, and a converged optimum below twenty is frozen, rationalised at the
+      default scale and handed to the gate. The soundness alarm does not apply below
+      4.885618. Kill: a round costing more than 25 minutes.
+    entry: >-
+      Agenda-021's BC-197 is terminal with the bracket [97/20, 39/8] and both its
+      certificates retained; the drivers, the density rule and the default scale are on
+      main behind this block's own branch.
+    exit: >-
+      The rung decided on both constructions, the bracket it leaves, and H-062 resolved
+      or the reason it still is not; a frozen and gated candidate if it certifies.
+    bead: think-wufn
+    workflows: [research-loop]
+    depends_on: []
+    parallel_group: agenda022-lane-a
+    program: grid-frontier-exact-values
+    next_evidence: >-
+      Whether the first covering wall this project has bracketed can be pinned to the
+      width its hypothesis asked for, which is what tells the reach table's ranking how
+      much of a case's runway the covering value actually leaves.
   - id: BC-204
     purpose: tool_validation
     owner_focus: correctness
@@ -104,6 +151,11 @@ agenda:
     bead: think-gku0
     workflows: [pipeline-improvement, factual-review]
     depends_on: [BC-203]
+    blocked_on: >-
+      BC-203's first doubling-down rule, which did not fire: the m = 5 wall is bracketed
+      to [97/20, 39/8], far from the 0.02 of five the rule asks for, so the ladder still
+      has room at m = 5 and the endgame did not take two of block two's leads. The
+      domain generalisation opens when a rule or the operator gives it a lane.
     parallel_group: agenda022-lane-a
     program: grid-frontier-exact-values
     next_evidence: >-
@@ -156,6 +208,8 @@ agenda:
     bead: think-9kuy
     workflows: [research-loop]
     depends_on: [BC-203]
+    blocked_on: >-
+      BC-204 or BC-212, whichever opens first; neither has, for the reasons each records.
     parallel_group: agenda022-lane-a
     program: grid-frontier-exact-values
     next_evidence: >-
@@ -213,6 +267,11 @@ agenda:
     bead: think-e65r
     workflows: [pipeline-improvement, factual-review]
     depends_on: [BC-203]
+    blocked_on: >-
+      BC-203's fourth doubling-down rule, which did not fire: BC-211 never converged at
+      399/100, so the n = 13 covering value is unmeasured and the B = 1 route stays shut
+      until a converged optimum below thirteen says the m = 4 endgame is one certificate
+      away. BC-213's rung does not bear on it either way.
     parallel_group: agenda022-lane-a
     program: grid-frontier-exact-values
     next_evidence: >-
@@ -222,7 +281,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [12, 21]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       How far above 99/25 does the n = 12 ladder climb before its restricted optimum
@@ -317,6 +376,10 @@ agenda:
     bead: think-0mro
     workflows: [research-loop]
     depends_on: [BC-203, BC-208]
+    blocked_on: >-
+      BC-208's class cuts, and a wall at n = 11 for the cover to sit at. BC-200 found no
+      wall: the cutting-plane loop stalled below eleven at both 3.82 and 3.85, so the
+      side this cell would work at is still unmeasured.
     parallel_group: agenda022-lane-b
     program: n11-closure
     next_evidence: >-
@@ -372,6 +435,10 @@ agenda:
     bead: think-7nxe
     workflows: [research-loop]
     depends_on: [BC-203]
+    blocked_on: >-
+      Agenda-021's BC-198, which never opened: the class-certificate program and its two
+      controls are what this cell's twelve LPs run on, and the rate limit that ended
+      that block reached BC-198 before any command did.
     parallel_group: agenda022-lane-b
     program: n11-closure
     next_evidence: >-
@@ -420,6 +487,10 @@ agenda:
     bead: think-4in0
     workflows: [research-loop]
     depends_on: [BC-203, BC-206]
+    blocked_on: >-
+      BC-206, and a priced target. BC-202's run at 138/25 reached 26.464317 on its site
+      set without converging its column loop, so the reach table's next size is not yet
+      costed from a converged point.
     parallel_group: agenda022-lane-c
     program: reach-table-ladder
     next_evidence: >-

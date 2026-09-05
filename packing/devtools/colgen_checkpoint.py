@@ -445,6 +445,17 @@ def run(
             and progress.column_log
             and str(progress.column_log[-1]["note"]).startswith("no candidate orbit")
         )
+        # What the *record* knows, as against what this process holds. A resumed
+        # leg that runs no round of its own still carries a checkpoint whose
+        # column rounds converged, and reporting only ``converged`` would print
+        # "False" over a table of converged rounds. It cannot freeze them --
+        # the weights are not in the checkpoint, only the rows and the sites --
+        # so the two are reported as two things and never as one.
+        settled_rounds = [
+            entry
+            for entry in progress.column_log
+            if not str(entry["note"]).startswith(("deadline reached", "round limit"))
+        ]
         result: dict[str, object] = {
             "settings": settings.as_dict(),
             "seconds": seconds,
@@ -452,6 +463,10 @@ def run(
             "converged": settled is not None,
             "column_loop_converged": column_converged,
             "converged_at_column": None if settled is None else settled[2],
+            "checkpoint_column_rounds": len(settled_rounds),
+            "checkpoint_optimum": (
+                None if not settled_rounds else settled_rounds[-1]["objective"]
+            ),
             "objective": progress.objective,
             "least_covered": progress.least_covered,
             "lp_rounds": progress.lp_rounds_done,
@@ -693,7 +708,11 @@ def main(argv: list[str] | None = None) -> int:
     print(column_table(result), flush=True)
     print(
         f"stopped: {result['stopped']}\n"
-        f"converged: {result['converged']}\n"
+        f"converged here: {result['converged']} "
+        f"(this process holds the weights and can freeze)\n"
+        f"converged column rounds on record: {result['checkpoint_column_rounds']}, "
+        f"last restricted optimum {result['checkpoint_optimum']}\n"
+        f"column loop converged: {result['column_loop_converged']}\n"
         f"objective: {result['objective']}\n"
         f"least covered mass: {result['least_covered']}\n"
         f"lp rounds: {result['lp_rounds']}\n"

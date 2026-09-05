@@ -72,7 +72,7 @@ session:
       then BC-202. The coordinator holds the retention gate, the shared records, the
       commits and the PR; sub-agents hold one lane each in bounded slices.
     bead: think-db1k
-    status: in_progress
+    status: stopped
     entered_by: planned_checkpoint
     switch_reason: >-
       Dispatch complete; the block's research lanes run.
@@ -94,13 +94,30 @@ session:
     fallback: >-
       A time-limited cell keeps its checkpoint, its last value and its reason, and
       BC-203 classifies it; the lane moves to its next cell.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      Seven of the eight cells were opened and six are terminal with an outcome. Two
+      bounds moved and one instrument line was priced: T-021 raises s(20) and s(21) to
+      97/20 from a certificate the gate retained on both routes, the m = 5 covering wall
+      is bracketed to [97/20, 39/8], the exact floor under the n = 11 covering value rose
+      from 6.5829 to 9.907906, Trump's isolation radius and stress constant came out as
+      exact rationals with four corrections to the sketch that proposed them, and
+      BC-191's three baselines are measured with a site-density rule and a raised default
+      scale to show for it. Three cells stopped: BC-211 time-limited on its own
+      25-minute-round kill, and BC-201 and BC-202 by the external blocker below.
+    evidence:
+    - packing/frontier/results.yaml T-021
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-061-h-062-m5-covering-wall.md
+    - packing/campaign/agendas/agenda-021-three-numbers-and-a-wall.md closeout
+    stop_reason: >-
+      An account rate limit ended every sub-agent of the pass at 09:21 UTC and the
+      container was restarted afterwards, which is the external blocker OR-8 names rather
+      than a budget decision. The coordinator resumed, gated the two candidates the lanes
+      had frozen, registered the result and closed the block.
     next_action: >-
-      BC-203, the closeout, at minute 390.
+      BC-213, the remaining m = 5 rung at 973/200, which settles H-062 either way.
   primary_bead: think-db1k
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 600
     checkpoint_minutes: 30
@@ -119,7 +136,11 @@ session:
       0 of 8 cells terminal; agenda 021 paused; no rung above 24/5 at m = 5 and none at
       n = 13; no isolation radius computed; the 3.82 plateau undecided; BC-191's three
       baselines unmeasured.
-    after: null
+    after: >-
+      Six of eight cells terminal with outcomes and two stopped by an external blocker;
+      T-021 registered at 97/20 for n = 20 and n = 21; the m = 5 covering wall bracketed
+      to [97/20, 39/8]; nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861 exactly; rho_0
+      >= 0.0023089 and C <= 22.467763 at Trump's pose; BC-191's three baselines measured.
   delegations:
   - task: >-
       Lane A, BC-211: the generator unchanged at n = 13, side 399/100, to convergence;
@@ -172,18 +193,27 @@ session:
       Lane A, BC-197: the m = 5 ladder -- one rung at 997/200 on the n = 21 reading
       first, then the pre-registered bisection for the n = 20 wall (H-062).
     operator: sub-agent at the thinking level BC-197 declares, one core
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Five sides decided on two constructions each: certificates at 97/20 (retained as
+      T-021) and 193/40, walls at 39/8, 979/200 and 997/200, and the exactly round value
+      at 997/200 explained by the overlap-strip geometry rather than left as an artefact.
+    evidence:
+    - packing/frontier/results.yaml T-021
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-061-h-062-m5-covering-wall.md
+    files:
+    - packing/cases/n20_fractional_certificate/certificate.json
+    - packing/cases/n20_fractional_certificate/certificate-193-40.json
+    - packing/devtools/declare_least_cell_mass.py
+    checks:
+    - 'devtools.decide_certificate: RETAINABLE at 200001/200000 and at 1000003/1000000'
+    - 'coordinator: both rungs replayed through the package entry point'
     uncertainty: >-
-      A column round at 4.8 cost 500 to 1158 s in T-020's run; a rung's confirmation
-      may not converge inside its 60 minutes, and BC-211 showed a round can exceed the
-      25-minute kill at the densities the retained rungs used.
-    elapsed_seconds: null
-    elapsed_quality: null
+      The wall is bracketed to 0.025 rather than the 0.02 H-062 registered, and the
+      crossings that set its upper end are unconverged by the cell's own refutation rule.
+    elapsed_seconds: 5280
+    elapsed_quality: operator_reported_approximate
     next_action: >-
       Report per rung; the coordinator decides any frozen candidate through the gate;
       then BC-198.
@@ -309,17 +339,23 @@ session:
       Lane B, BC-201: the census of near-tight event cells on the retained 381/100
       certificate at four margins, as a devtool with a test (H-065).
     operator: sub-agent at the thinking level BC-201 declares, one core
-    status: in_progress
+    status: blocked
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Stopped with the tool half-built: the lane was refactoring the sweep to expose the
+      per-cell masses the census counts when the rate limit ended it. No census ran and
+      H-065 is untouched.
+    evidence:
+    - session-086 stop reason
+    files:
+    - packing/devtools/census_tight_cells.py
+    checks:
+    - 'coordinator: ruff and ruff format clean on the half-built tool; no test exists and no census ran, so nothing is retained from it'
     uncertainty: >-
       H-065's accept line (0.20) is declared, not derived; the first census may land in
       the inconclusive band.
-    elapsed_seconds: null
-    elapsed_quality: null
+    elapsed_seconds: 900
+    elapsed_quality: operator_reported_approximate
     next_action: >-
       Report the four summed fractions and H-065's reading; then Lane B is done for the
       block.
@@ -396,18 +432,26 @@ session:
       Lane C, BC-202: the n = 26 column-generation run at 138/25 with BC-191's density
       rule (40, 53, 66) and scale 4,000,000, carried to convergence rather than a clock.
     operator: sub-agent at the thinking level BC-202 declares, one core
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Time-limited with a measured negative: 22 column rounds and 137 LP rounds over
+      7983 s brought the restricted optimum at 138/25 to 26.464317 with the row loop
+      converged inside the last column round, above twenty-six on that site set, so no
+      certificate there and no ratio to report. The checkpoint resumes and the resume
+      path was exercised on the real artifact.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-202-n26-138-25.json
+    files:
+    - packing/devtools/colgen_checkpoint.py
+    checks:
+    - 'pytest tests/test_colgen_checkpoint.py: 8 passed, including the chunking equivalence guard'
     uncertainty: >-
-      A column round is priced at 580 to 870 s by a model fitted below this side; the
-      loop may be time-limited before it converges, which is an outcome the cell
-      names.
-    elapsed_seconds: null
-    elapsed_quality: null
+      A cold column round cost 2130.6 s against the model's 580 to 870, because the cold
+      row loop needs many more rounds and their cost grows inside the loop; warm rounds
+      averaged 244.7 s.
+    elapsed_seconds: 7983
+    elapsed_quality: platform_measured
     next_action: >-
       Report the per-round table and whether the loop converged; the coordinator
       decides any frozen candidate through the gate.
@@ -438,11 +482,19 @@ session:
   checks:
   - 'pytest tests/test_trump_isolation_radius.py: 6 passed'
   - 'pytest tests/test_bench_colgen.py tests/test_fractional_generate.py: 19 passed'
-  resource_rollups: []
-  stop_reason: null
+  resource_rollups:
+  - packing/campaign/resource-usage/f37f604c-3212-50e9-b7f7-4b00b94bfcc0.yaml
+  stop_reason: >-
+    An account rate limit ended every sub-agent of the pass at 09:21 UTC, at minute 158
+    of a 600-minute plan, and the container was restarted afterwards. That is an external
+    blocker in OR-8's sense and not a budget decision; the coordinator resumed on the
+    same branch and clock, gated the two candidates the lanes had frozen, registered
+    T-021 and ran the closeout. The continuation into agenda-022's BC-206 and BC-208 did
+    not open, and BC-203's replanning selects the cheaper rung that settles H-062
+    instead.
   next_action: >-
-    Lane checkpoints every 30 minutes; the integration checkpoint at 09:43 UTC; BC-203 at
-    13:13 UTC, then BC-206 and BC-208.
+    BC-213, the remaining m = 5 rung at 973/200 (think-wufn), as agenda-021's closeout
+    selects it.
 ---
 # session-086 — The Agenda 021 Overnight Pass
 
