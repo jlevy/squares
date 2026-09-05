@@ -137,14 +137,14 @@ A program is a line of work that spans agendas; its cells carry one `program` sl
 
 | agenda | id | state | question |
 | --- | --- | --- | --- |
+| agenda-021 | `BC-197` | ready | Where does the restricted covering optimum at m = 5 reach twenty, and does it reach twenty-one… |
 | agenda-022 | `BC-204` | blocked | Can the covering program's admissible centre domain be generalised from the hard-coded rotated… |
 | agenda-022 | `BC-205` | blocked | Does the conditional program close a case the classical method closes by hand -- Bentz's… |
 | agenda-022 | `BC-206` | blocked | How far above 99/25 does the n = 12 ladder climb before its restricted optimum reaches twelve,… |
 | agenda-021 | `BC-211` | stopped | Does the existing generator, run unchanged at n = 13 and side 399/100, converge to a restricted… |
-| agenda-021 | `BC-197` | ready | Where does the restricted covering optimum at m = 5 reach twenty, and does it reach twenty-one… |
 | agenda-022 | `BC-212` | blocked | Can a certificate at shrink B = 1 -- closed unit-square covering with open-box counting at an… |
 
-Open frontier: `BC-204`, `BC-205`, `BC-206`, `BC-197`, `BC-212`.
+Open frontier: `BC-197`, `BC-204`, `BC-205`, `BC-206`, `BC-212`.
 
 ### `n11-closure`
 

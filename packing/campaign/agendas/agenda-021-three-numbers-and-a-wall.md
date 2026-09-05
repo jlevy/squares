@@ -102,8 +102,8 @@ agenda:
       Every rung above that side must land in [19, 21), and a rung the n = 20 reading
       refutes may still be an n = 21 certificate.
     entry: >-
-      BC-211 is terminal so the lane core is free; T-020 is retained at 24/5 with total
-      946131/50000; ceiling_side gives 5B = 4.9885
+      BC-211 is terminal (time-limited, continuing under its own bead) so the lane core
+      is free; T-020 is retained at 24/5 with total 946131/50000; ceiling_side gives 5B = 4.9885
       for n = 20 and n = 21, the reach table's packing cap coincides with it there
       because the grid packing is axis-parallel and every tilt offset is zero, so one
       number is both structural limits; devtools.decide_certificate is the retention gate
@@ -119,7 +119,7 @@ agenda:
       covering value's or the ceiling's.
     bead: think-g73w
     workflows: [research-loop]
-    depends_on: [BC-211]
+    depends_on: []
     parallel_group: agenda021-lane-a
     program: grid-frontier-exact-values
     next_evidence: >-
