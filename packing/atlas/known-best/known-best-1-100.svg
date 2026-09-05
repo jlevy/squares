@@ -23,7 +23,7 @@
   </metadata>
   <rect width="2400" height="2846" fill="#ffffff" />
   <text x="1200" y="76" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="48" font-weight="700" letter-spacing="1.5" fill="#17202a">100 BEST KNOWN SQUARE PACKINGS</text>
-  <text data-feature="repository" x="1200" y="126" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700" fill="#5c6673">github.com/jlevy/squares</text>
+  <text data-feature="repository" x="1200" y="126" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700" fill="#17202a">github.com/jlevy/squares</text>
   <g data-feature="evidence-legend">
     <rect data-feature="evidence-badge" data-evidence="proved optimal" x="288.0695" y="2695" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
     <text x="297.5695" y="2709.9" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">O</text>

@@ -1118,7 +1118,8 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
             "font-family": SUMMARY_FONT,
             "font-size": SUMMARY_REPOSITORY_SIZE,
             "font-weight": "700",
-            "fill": PAPER_THEME.muted,
+            # Where the figure came from reads as part of the title, not as a caption.
+            "fill": PAPER_THEME.ink,
         },
     ).text = SUMMARY_REPOSITORY
     _append_summary_legend(root, spec=spec)

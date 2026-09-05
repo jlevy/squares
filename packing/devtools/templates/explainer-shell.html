@@ -22,11 +22,23 @@
    it.
    ============================================================ */
 
-/* Links take the page's accent, the teal its tags and switches use, rather
-   than kpress's separate link blue. The token is set on body so both themes
-   inherit it and so the footnote popovers, which kpress appends to body,
-   get it too; hover states and footnote marks follow. */
-body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(--kpress-doc-accent); }
+/* One accent, everywhere. kpress ships a separate link blue and sets it on
+   `:root`, on `.kpress`, and again per theme and palette on attribute selectors,
+   all of which outrank `body`; the popovers it appends carry `.kpress-tooltip`
+   and their own resolved-theme attribute. Anything reading the token got the
+   blue, which is why a footnote popover drew a blue rule down its edge while
+   the text beside it was teal. Redeclare the token in the same places kpress
+   does, so the page's accent is what every consumer of it resolves. */
+:root,
+.kpress,
+.kpress-page-main,
+.kpress-tooltip,
+:is(.kpress, .kpress-page-main, .kpress-tooltip)[data-kpress-resolved-theme],
+:is(.kpress, .kpress-page-main, .kpress-tooltip)[data-kpress-palette][data-kpress-resolved-theme],
+body {
+  --kpress-doc-link: var(--kpress-doc-accent);
+  --color-primary-light: var(--kpress-doc-accent);
+}
 .cert-page { padding-block-end: calc(var(--kpress-font-size-base) * 6); }
 .cert-page a, .cert-page .kpress-footnote-ref a, .cert-page a.kpress-footnote-backref,
 .cert-page a:hover, .kpress a.kpress-footnote-backref:hover,
