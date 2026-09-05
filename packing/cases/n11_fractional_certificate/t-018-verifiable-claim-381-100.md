@@ -6010,3 +6010,7 @@ conditions establish: that eleven unit squares do not fit in a square of side
 $3.81$. Nothing here depends on the correctness of any other code in the
 repository, and nothing here claims that $381/100$ is the true value of $s(11)$: the
 best known packing puts $s(11) \le 3.8770835\ldots$, and the gap is open.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
