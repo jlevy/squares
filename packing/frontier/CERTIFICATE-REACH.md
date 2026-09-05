@@ -24,8 +24,8 @@ known packing, otherwise whichever of the two the limit is.
 **`prize` is what the limit allows, not what a search will reach.** The real
 limit is the covering value: a certificate exists at side `L` only where the
 least total mass that covers every admissible `B`-square falls below `n`, and
-that value can bind well below either cap. 10 restricted optima
-have been reported at 7 sides, one per site set, and
+that value can bind well below either cap. 12 restricted optima
+have been reported at 8 sides, one per site set, and
 `frontier/covering-values.yaml` registers each with whether its row loop
 converged; every one is at best an upper bound on the unrestricted covering
 value there. What survives here beside each is a frozen certificate or nothing
@@ -35,6 +35,8 @@ at all:
 | ---: | ---: | --- | ---: | --- | --- | --- |
 | 11 | 3.82 | grid | 11.000000 | yes | The row loop ran to convergence: the objective descended to exactly 11.000000 from 11.6 over twelve rounds and never crossed below it. | nothing frozen here. Result narrative only: no run log or checkpoint was retained, and nothing was frozen at this side, since an objective of exactly eleven admits no certificate. The least covered mass at the stop is not recorded for this set. |
 | 11 | 3.82 | certificate-seeded | 11.000000 | no | Stopped with violated placements remaining: the objective had stood at 11.000000 through twenty-four row rounds while the least covered mass climbed from 0.8490 to 0.9997, and the loop had not exhausted. It did not need to, since adding rows can only raise a restricted optimum already at eleven. | nothing frozen here. Seeded from the retained 381/100 certificate's own 1121 atoms. Result narrative only: no run log or checkpoint was retained and nothing was frozen at this side. |
+| 11 | 3.82 | vertex-seeded | 11.055617 | yes | The row loop converged at cutting-plane iteration 5 (11.055617 on 12,761 sites after the arrangement vertices of the dual family were added as site orbits) and held that value through iteration 8; the cutting-plane loop itself stopped on its 36-minute wall with the exact depth-scaled total at 9.907906. | nothing frozen here. BC-200 of agenda 021 (exp-060). Sites are the grid at BC-191's density plus the violating arrangement vertices the cutting-plane loop added, which is why this site set's optimum sits above the two earlier site sets' exactly eleven: the quantity is a restricted optimum on that set, an upper bound on the covering value. The run log and the resumable state are retained beside the summary. |
+| 11 | 3.85 | vertex-seeded | 11.227631 | no | The row loop had not converged at any of the three cutting-plane iterations (the objective descended 11.429225, 11.254796, 11.227631 with placements still violated) when the 30-minute wall stopped the loop; the exact depth-scaled total stood at 9.049861. | nothing frozen here. BC-200 of agenda 021 (exp-060), warm-started from the 191/50 state. An unconverged row loop's value is an upper bound on nothing in particular: rows only raise it. Retained as a measurement of where the loop stood. |
 | 12 | 3.95 | unrecorded | 11.9706 | yes | Counted by X-013 among the converged points; T-017's own record narrates the ladder and gives no stop reason for this rung. | frozen 969-atom certificate, feasible mass 11.970590. The reported value is the frozen certificate's own mass, 1197059/100000, to four places, not a separately measured optimum. The record names no site set and retains no site, row or round count for the run. |
 | 12 | 3.96 | unrecorded | 11.9936 | yes | Converged toward 11.9936 before rationalisation lifted the mass to the frozen certificate's 149987/12500 = 11.998960, per X-013; T-017's own record gives no stop reason for this rung. | frozen 2,097-atom certificate, feasible mass 11.998960. The reported objective has no raw run, and it is not the artifact's mass: the difference is consistent with the documented rounding-up rule. The record names no site set and retains no site, row or round count. |
 | 17 | 4.58 | unrecorded | 16.9628 | yes | Reported converged by X-013. T-019's own record gives no stop reason for any of its n = 17 builds; the stop its next_rung narrates belongs to the n = 18 probe at 117/25 (D-443). | frozen 1,173-atom certificate, feasible mass 16.965735. The reported objective has no raw run, and it is not the artifact's mass. The record names no site set and retains no site, row or round count. |
@@ -53,10 +55,10 @@ the reported value the artifact's own mass; at `3.96`, `4.58`, `4.59` and `4.80`
 artifact's mass and the reported objective are different numbers.
 
 They are also reports of different kinds rather than one series measured the same
-way, and the `converged` column is where the difference lives: 4 of
-the 10 ran their row loop to convergence, and the rest stopped for the
+way, and the `converged` column is where the difference lives: 5 of
+the 12 ran their row loop to convergence, and the rest stopped for the
 reason beside each — or for none the record kept — and stand as upper bounds on
-their own site sets only. 10 heterogeneous reports across a side band
+their own site sets only. 12 heterogeneous reports across a side band
 0.98 wide do not support a growth trend or a fitted curve, and no rung in
 this register has ever been claimed from one. Rank on `prize` to choose where to
 look; measure and retain the run before believing any extrapolation.

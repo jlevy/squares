@@ -460,8 +460,8 @@ Status: **active**. X-014 ends with a verdict and a bill. The two mechanisms the
 | BC-198 | tool_validation | 11, 12 | blocked | 1 | think-m3sx | Whether conditioning on direction buys anything at all, which is the premise BC-208's two class theorems in block two rest on entirely. |
 | BC-211 | measurement_validation | 13 | stopped | 0 | think-2ib0 | Whether the first exact grid value by machine is one certificate away, which BC-203's fourth rule reads directly and which decides whether block two opens the B = 1 route (BC-212) ahead of the conditional route. |
 | BC-199 | research | 11 | complete | 0 | think-ljvz | Whether the local box is reachable by any tree, which BC-203's third doubling-down rule reads directly and which decides whether block two opens a conditional lead against Trump's pose at all. |
-| BC-200 | measurement_validation | 11 | ready | 1 | think-1qjs | The side every block-two n = 11 cell would have to work at, and BC-203's second doubling-down rule reads the 3.85 outcome directly. |
-| BC-201 | tool_validation | 11 | blocked | 2 | think-614o | Whether Corollary 1a's exact-cover step is a check or a search, which BC-207 in block two consumes directly and cannot start without. |
+| BC-200 | measurement_validation | 11 | complete | 1 | think-1qjs | The side every block-two n = 11 cell would have to work at, and BC-203's second doubling-down rule reads the 3.85 outcome directly. |
+| BC-201 | tool_validation | 11 | ready | 2 | think-614o | Whether Corollary 1a's exact-cover step is a check or a search, which BC-207 in block two consumes directly and cannot start without. |
 | BC-202 | research | 26 | ready | 1 | think-r58z | The first covering-value point outside the 3.82-to-4.80 band, which is what X-013's third proposal asks for and what block two's reach-table rungs are priced against. |
 | BC-203 | tool_validation | 11, 20, 21, 26 | blocked | 2 | think-jv2d | Which of agenda-022's leads open, which is the whole of what every cell in that agenda is blocked on. |
 
@@ -484,7 +484,7 @@ Status: **paused**. Block two, and every cell in it is contingent. Agenda-021 me
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 59 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 60 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -553,7 +553,7 @@ Status: **paused**. Block two, and every cell in it is contingent. Agenda-021 me
 | H-061 | result registered | proof | There is a finite measure of rational-weight point atoms in [0, 19/5]^ |  | 0 | T-017, T-018 |  |
 | H-062 | open | proof | On the retained 181-direction net at B = 9977/10000, the side at which | container side: 193/40 39/8 97/20 979/200 123/25 247/50 993/200 | 0 |  |  |
 | H-063 | blocked | proof | Two statements, one instrument. First, the class certificate of X-014' | composition n1: 0 1 2 3 4 5 6 7 8 9 10 11 | 0 |  |  |
-| H-064 | open | proof | At container side 77/20 = 3.85, on the retained 181-direction net at B | container side: 191/50 77/20 387/100 | 0 |  |  |
+| H-064 | abandoned | proof | At container side 77/20 = 3.85, on the retained 181-direction net at B | container side: 191/50 77/20 387/100 | 1 |  | 96m agent + 66.0m wall |
 | H-065 | blocked | proof | On the retained 381/100 certificate at n = 11 -- 1121 atoms, B = 9977/ | census margin epsilon: 0 0.01 0.05 0.1 | 0 |  |  |
 
 ## Needs review — held for a human, not decided
@@ -578,6 +578,12 @@ Status: **paused**. Block two, and every cell in it is contingent. Agenda-021 me
 | exp-016 | series-000 | 11 | openai-codex | H-010 | The printed Figure 14 set is avoidable, so node four and therefore the five-node conjunction fail; this rejects the proof as printed, not the numerical lower bound. |
 | exp-037 | series-000 | 29 | openai-codex | H-042 | The retained serialization has six numerical orientation classes, with minimum class gap 0.296067 degrees against a 1e-90 degree interval radius. |
 | exp-041 | series-000 | 5 | openai-codex | H-023 | The frozen complete-zero-inventory clause is false: one additional owner axis is zero only at the positive endpoint, while independent control review also found mutation-reason and partial-disposition guards that remain unfinished. |
+
+### abandoned (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes exactly is nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861, with the converged row loop's restricted optimum 11.055617 on 12,761 sites as the certified upper end of the 3.82 bracket. |
 
 ### unresolved (13)
 
@@ -659,10 +665,11 @@ Status: **paused**. Block two, and every cell in it is contingent. Agenda-021 me
 | exp-049 | H-052 | 65.3333m agent + 65.3m wall | timebox | Frozen package-manifest SHA-256 309ec24158f73dd2e9b837c773b1 |  |
 | exp-052 | H-052 | 74.2667m agent + 74.3m wall | timebox | Canonical checkpoint SHA-256 db5c156959b6de4e6f2c9be283454d0 |  |
 | exp-056 | H-052 | 356.0m wall | timebox | Canonical child checkpoint SHA-256 0d39a7e734e8afc62fda914fd |  |
+| exp-060 | H-064 | 96m agent + 66.0m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res | a resumed loop from the retained 191/50 state with row gener |
 
 ## Effort
 
-59 rounds, 1903.1 agent-minutes, 825.0 wall-minutes.
+60 rounds, 1999.1 agent-minutes, 891.0 wall-minutes.
 
 ## Exploration reports not yet codified
 

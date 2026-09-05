@@ -377,7 +377,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Is the covering value at n = 11 already at or above eleven at 3.82 and at 3.85,
@@ -432,6 +432,41 @@ agenda:
     depends_on: [BC-199]
     parallel_group: agenda021-lane-b
     program: n11-closure
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-family-191-50.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-family-77-20.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-summary-191-50.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-summary-77-20.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-state-191-50.json
+    - packing/src/sqpack/fractional/cutting.py
+    - packing/devtools/run_fractional_cutting.py
+    outcomes:
+    - scope: >-
+        The n = 11 covering value measured from below at 191/50 and 77/20 by an
+        exact-depth fractional packing, inside a 110-minute lane budget on one core.
+      classification: achieved
+      result: >-
+        The exit was met and the hypothesis is unresolved in its own words. At 191/50
+        nine iterations raised the exact depth-scaled total from the retained 1152/175
+        = 6.5829 to 9.907906 (2,769,100 arrangement vertices, exact maximum depth
+        1.115838 before scaling), and the row loop converged at iteration 5 to a
+        restricted optimum of 11.055617 on 12,761 sites, so 9.907906 <= nu*(3.82) <=
+        tau*(3.82) <= 11.055617. At 77/20, warm-started, three iterations reached
+        9.049861 (2,419,348 vertices, depth 1.243643) and the row loop did not converge.
+        Neither family reached eleven, so nothing was frozen under the case package;
+        both loops stopped on the cell's wall with the exact check carrying every
+        vertex. The n = 11 ladder's top is unchanged at 381/100 with 3.82 open, and the
+        record now holds nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861 exactly. The
+        loop's bottleneck moved from separation to row generation as the site support
+        grew, which a resumed run bounds.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-summary-191-50.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-summary-77-20.json
+      - session-086 Lane B delegation, 5758 s platform-measured, 96 of 110 budgeted minutes
+      disposition: continue
+      follow_up: think-1qjs
     next_evidence: >-
       The side every block-two n = 11 cell would have to work at, and BC-203's second
       doubling-down rule reads the 3.85 outcome directly.
@@ -439,7 +474,7 @@ agenda:
     purpose: tool_validation
     owner_focus: insight
     instances: [11]
-    state: blocked
+    state: ready
     priority: 2
     question: >-
       How large is the near-tight set on the retained 381/100 certificate -- the reachable

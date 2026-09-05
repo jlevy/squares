@@ -51,6 +51,54 @@ values:
     notes: >-
       Seeded from the retained 381/100 certificate's own 1121 atoms. Result narrative
       only: no run log or checkpoint was retained and nothing was frozen at this side.
+  - n: 11
+    side: '191/50'
+    side_decimal: '3.82'
+    objective: '11.055617'
+    site_set: vertex-seeded
+    sites: 12761
+    rows: 9868
+    rounds: 9
+    converged: true
+    stop_reason: >-
+      The row loop converged at cutting-plane iteration 5 (11.055617 on 12,761 sites
+      after the arrangement vertices of the dual family were added as site orbits) and
+      held that value through iteration 8; the cutting-plane loop itself stopped on its
+      36-minute wall with the exact depth-scaled total at 9.907906.
+    least_covered_mass: '1'
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-summary-191-50.json
+    notes: >-
+      BC-200 of agenda 021 (exp-060). Sites are the grid at BC-191's density plus the
+      violating arrangement vertices the cutting-plane loop added, which is why this
+      site set's optimum sits above the two earlier site sets' exactly eleven: the
+      quantity is a restricted optimum on that set, an upper bound on the covering
+      value. The run log and the resumable state are retained beside the summary.
+  - n: 11
+    side: '77/20'
+    side_decimal: '3.85'
+    objective: '11.227631'
+    site_set: vertex-seeded
+    sites: 22625
+    rows: 14215
+    rounds: 3
+    converged: false
+    stop_reason: >-
+      The row loop had not converged at any of the three cutting-plane iterations (the
+      objective descended 11.429225, 11.254796, 11.227631 with placements still
+      violated) when the 30-minute wall stopped the loop; the exact depth-scaled total
+      stood at 9.049861.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-summary-77-20.json
+    notes: >-
+      BC-200 of agenda 021 (exp-060), warm-started from the 191/50 state. An
+      unconverged row loop's value is an upper bound on nothing in particular: rows
+      only raise it. Retained as a measurement of where the loop stood.
   - n: 12
     side: '79/20'
     side_decimal: '3.95'

@@ -262,20 +262,29 @@ session:
       exact-depth fractional packing, cutting planes on arrangement vertices with the
       exact depth check (H-064).
     operator: sub-agent at the thinking level BC-200 declares, one core
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Complete at 96 of 110 minutes. nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861
+      exactly; the row loop's converged restricted optimum at 3.82 is 11.055617 on
+      12,761 sites; no family reached eleven; H-064 unresolved (exp-060, abandoned,
+      resumable from the retained 3.82 state).
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-summary-191-50.json
+    files:
+    - packing/src/sqpack/fractional/cutting.py
+    - packing/devtools/run_fractional_cutting.py
+    - packing/tests/test_fractional_cutting.py
+    checks:
+    - 'pytest tests/test_fractional_cutting.py: 8 passed; ruff, format and basedpyright clean'
     uncertainty: >-
       The exact vertex check reached 1650944 vertices on a 608-placement family at 3.82;
       the loop may pass what the check can carry inside the budget.
-    elapsed_seconds: null
-    elapsed_quality: null
+    elapsed_seconds: 5758
+    elapsed_quality: platform_measured
     next_action: >-
-      Report the depth-scaled totals; the coordinator decides any frozen ceiling through
-      verify_ceiling; then BC-201.
+      BC-201 dispatched on the same lane at 09:20 UTC.
     phase: 2
     budget_minutes: 110
     started_at: '2026-09-05T07:41:00Z'
@@ -291,6 +300,42 @@ session:
     write_scope:
     - packing/cases/n11_fractional_certificate/
     - packing/src/sqpack/fractional/
+    - packing/devtools/
+    - packing/tests/
+    excluded_commands:
+    - git commit
+    - git push
+  - task: >-
+      Lane B, BC-201: the census of near-tight event cells on the retained 381/100
+      certificate at four margins, as a devtool with a test (H-065).
+    operator: sub-agent at the thinking level BC-201 declares, one core
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: >-
+      H-065's accept line (0.20) is declared, not derived; the first census may land in
+      the inconclusive band.
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: >-
+      Report the four summed fractions and H-065's reading; then Lane B is done for the
+      block.
+    phase: 2
+    budget_minutes: 60
+    started_at: '2026-09-05T09:20:00Z'
+    deadline_at: '2026-09-05T10:20:00Z'
+    expected_output: >-
+      devtools/census_tight_cells.py with a test, the per-direction census at the four
+      margins, and the fraction of reachable cells the epsilon = 1/20 set covers over
+      the 181 directions.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev pytest packing/tests/test_census_tight_cells.py -q
+    kill_condition: None beyond the budget; the readout is a count.
+    fallback: Report the partial census with the directions covered.
+    write_scope:
     - packing/devtools/
     - packing/tests/
     excluded_commands:

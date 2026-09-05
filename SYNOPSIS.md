@@ -128,8 +128,9 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives six confirmed hypotheses, six refuted hypotheses,
-three open hypotheses, seven open questions, and thirty-seven blocked hypotheses.
-No hypothesis waits on review and five are unresolved.
+two open hypotheses, seven open questions, and thirty-seven blocked hypotheses.
+No hypothesis waits on review and five are unresolved; one, H-064, is abandoned in the
+ledger’s word — its round expired resumable with the exact floor it raised.
 One, H-061, has no round and reads `result registered`: T-017 and T-018 name it in their
 `produced_by`, and the ledger’s `results` column shows them.
 The set includes one claim whose formal prerequisite is missing, H-044 whose registered
@@ -2620,7 +2621,7 @@ round that names the hypothesis, control roles included.
 | [H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md) | result registered | A first-party fractional unavoidable-set certificate at side `19/5` proves `s(12) ≥ 3.8`, the first `n = 12`-specific bound; carried well past its own claim to `393/100` ([T-017](packing/frontier/RESULTS.md)) and to `s(11) ≥ 19/5` ([T-018](packing/frontier/RESULTS.md)), with the whole ladder retained and verified, and the round that closes the hypothesis is not yet written | 0 | — |
 | [H-062](packing/campaign/hypotheses/H-062-n20-covering-wall.md) | open | The `m = 5` covering wall — the side at which a converged restricted optimum at `n = 20` first reaches twenty — lies strictly below the ceiling `5B = 4.9885`, and four pre-registered rungs bracket it to within `0.02`; registered for Agenda 021’s `BC-197` | 0 | — |
 | [H-063](packing/campaign/hypotheses/H-063-n11-class-certificate.md) | blocked | A two-cell `{0°, 45°}` class certificate refutes the composition `(11, 0)` at or above Trump’s `3.877084`, and every near-axis class inside `θ₀` closes the compositions with at most one tilted square; blocked on the two-threshold program `BC-198` builds | 0 | — |
-| [H-064](packing/campaign/hypotheses/H-064-n11-fractional-packing-floor.md) | open | An exact-depth fractional packing at `77/20` with total weight at least eleven puts `τ*(3.85)` at or above eleven, so the `n = 11` certificate ladder’s top lies below `3.85`; registered for `BC-200` | 0 | — |
+| [H-064](packing/campaign/hypotheses/H-064-n11-fractional-packing-floor.md) | abandoned | An exact-depth fractional packing at `77/20` with total weight at least eleven puts `τ*(3.85)` at or above eleven, so the `n = 11` certificate ladder’s top lies below `3.85`; registered for `BC-200` | 1 | 66m wall |
 | [H-065](packing/campaign/hypotheses/H-065-n11-near-tight-cell-census.md) | blocked | The near-tight cells (mass at most `1 + 1/20`) on the retained `381/100` certificate are fewer than one fifth of the reachable cells, so Corollary 1a’s exact cover is a check rather than a search; blocked on the census tool `BC-201` builds | 0 | — |
 
 ### Confirmed
@@ -2839,9 +2840,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 59 terminal rounds registered in `series-000`.
+There are 60 terminal rounds registered in `series-000`.
 
-They record 1903.1 agent-minutes and 825.0 wall-minutes.
+They record 1999.1 agent-minutes and 891.0 wall-minutes.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
 result; exp-057 stopped before target access; exp-058 stopped on the review it was
 waiting for, which arrived and accepted it.
@@ -2936,6 +2937,7 @@ archive beside it.
 | [exp-057](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md) | 68 | calibration | H-058 | side-semantics binding over the unchanged exp-054 adapter | literal point model retained; six-decimal side provenance absent; no target access | **unresolved** |
 | [exp-058](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md) | 5 | target | H-060 | scratchpad sympy chart-and-proof replay set, read-only; the W7 instrument and the BC-153 reviewer’s from-scratch sympy reconstruction | all 400 elementary inequalities classified exactly and the 16/64 and 4/6 counts confirmed; `w · q_chart = -2√2 < 0`; the frozen criterion met as written on BC-153’s PASS, so the pose is isolated at fixed side | **accepted** |
 | [exp-059](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-059-h-052-n17-fresh-successor-completion.md) | 17 | target | H-052 | fresh successor driver over the frozen exp-056 parent checkpoint and exp-052 chain genesis | all 181 exact direction cells agree; both 181-row manifest summaries byte-identical, every row minimum exactly 1/1, decision derived from the preconditions, mutations and instrument validity | accepted |
+| [exp-060](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md) | 11 | target | H-064 | cutting-plane loop over exact-depth fractional packings at 191/50, then 77/20 warm-started, the exact vertex check as the separation oracle | nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861 exactly; the row loop converged at 3.82 to 11.055617 on 12,761 sites; no family reached eleven, so the claim stays unresolved and the round is resumable from the retained 3.82 state | abandoned |
 
 ### Cost and provenance
 
@@ -3000,10 +3002,11 @@ archive beside it.
 | exp-057 | one 150-minute target-blind BC-138 lane | 1,000 s | 16.6667 m | guard | `11ce70ee` |
 | exp-058 | the 360-minute BC-152 `n = 5` lane of agenda-016 | 11.33 s | — | criterion | — (no engine; exact sympy replay) |
 | exp-059 | one fixed BC-148 process-exclusive lease, 08:58Z–09:58Z | 1991 s | 33 m | criterion | `2796174b` |
+| exp-060 | Lane B of Agenda 021, BC-200, one core, 07:39Z–09:15Z | 3960 s | 96 m | timebox | `26e8a6e3` |
 
-### What the 59 rounds jointly establish
+### What the 60 rounds jointly establish
 
-The 59 rounds use 1903.1 agent-minutes and 825.0 wall-minutes under the campaign’s
+The 60 rounds use 1999.1 agent-minutes and 891.0 wall-minutes under the campaign’s
 retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
@@ -3764,12 +3767,13 @@ the best known packing runs near half a unit — eleven cases above `+0.49`, hea
 `n = 51` at `+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`, `83`, `37`, `53` and
 `26`. Two cautions travel with that ranking.
 The prize is what the *ceiling* allows; the real limit is the covering value at that
-side. Seven values have been reported for the restricted program, at sides `3.82`,
-`3.95`, `3.96`, `4.58`, `4.59`, `4.68` and `4.80` — reports, not measurements this
-repository can reproduce, since no covering-search run log or solver checkpoint was
-retained for any of the seven.
-Exactly one is recomputable from a tracked artifact, at side `3.95`, and what it
-recomputes is the frozen certificate’s own feasible mass — an upper bound on the
+side. Eight values have been reported for the restricted program, at sides `3.82`,
+`3.85`, `3.95`, `3.96`, `4.58`, `4.59`, `4.68` and `4.80` — the first seven reports, not
+measurements this repository can reproduce, since no covering-search run log or solver
+checkpoint was retained for any of them; the eighth, at `3.85`, and a third site set at
+`3.82` were measured in Agenda 021’s `BC-200` (exp-060) with their logs and resumable
+state retained. Exactly one is recomputable from a tracked artifact, at side `3.95`, and
+what it recomputes is the frozen certificate’s own feasible mass — an upper bound on the
 covering value there, not the optimum a search reported.
 Seven heterogeneous reports across a side band `0.98` wide fit a curve, and a fitted
 curve is not a measurement.
