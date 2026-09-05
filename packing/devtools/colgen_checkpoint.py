@@ -52,6 +52,7 @@ from sqpack.fractional.certificate import Certificate, verify
 from sqpack.fractional.colgen import (
     DEFAULT_SCALE,
     Candidate,
+    LpSolution,
     Rows,
     SiteSet,
     dual_squares,
@@ -328,6 +329,15 @@ def run(
         progress = Progress()
     handle = log_path.open("a") if log_path is not None else None
     solution = None
+    # The last column round whose row loop stopped for want of a violated
+    # placement, with the site set that round was solved on. A run whose clock
+    # runs out between column rounds has still *reached* a converged restricted
+    # optimum, and the weights that reached it are the candidate. Keeping only
+    # the live `solution` would discard both the moment the deadline landed,
+    # which would report a converged point as an unconverged one and freeze
+    # nothing -- the whole reason this driver exists is that a budget stop
+    # should cost the run its next round and not its last answer.
+    settled: tuple[LpSolution, SiteSet, int] | None = None
     try:
         _emit(handle, json.dumps(settings.as_dict()))
         while progress.column_index < settings.column_rounds:
@@ -403,6 +413,8 @@ def run(
             progress.stopped = solution.stopped
             progress.objective = solution.objective
             progress.least_covered = solution.least_covered
+            if solution.converged:
+                settled = (solution, sites, index)
             if checkpoint is not None:
                 save_checkpoint(checkpoint, settings, sites, rows, progress)
             if (
@@ -422,11 +434,24 @@ def run(
                 save_checkpoint(checkpoint, settings, sites, rows, progress)
 
         seconds = time.perf_counter() - started
+        # `converged` is a statement about the row loop -- that the restricted
+        # optimum reported is the site set's own and not a point the clock
+        # stopped at. Whether the *column* loop converged is the separate
+        # question of whether the dual still prices an orbit worth adding, and
+        # conflating the two is what would let a site set that is still moving
+        # be reported as a finished search.
+        column_converged = bool(
+            settled is not None
+            and progress.column_log
+            and str(progress.column_log[-1]["note"]).startswith("no candidate orbit")
+        )
         result: dict[str, object] = {
             "settings": settings.as_dict(),
             "seconds": seconds,
             "stopped": progress.stopped,
-            "converged": bool(solution is not None and solution.converged),
+            "converged": settled is not None,
+            "column_loop_converged": column_converged,
+            "converged_at_column": None if settled is None else settled[2],
             "objective": progress.objective,
             "least_covered": progress.least_covered,
             "lp_rounds": progress.lp_rounds_done,
@@ -439,8 +464,11 @@ def run(
             "least_cell_mass": None,
             "frozen": None,
         }
-        if solution is None or not solution.converged:
+        if settled is None:
             return result
+        solution, sites, _ = settled
+        result["objective"] = solution.objective
+        result["least_covered"] = solution.least_covered
 
         atoms = rationalise_sites(sites, solution.weights, scale=settings.scale)
         if not atoms:

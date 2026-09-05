@@ -160,12 +160,15 @@ def support_entries(
     support_cap: int,
     weight_denominator: int,
 ) -> tuple[SupportEntry, ...]:
-    """The heaviest ``support_cap`` rows of the dual, with exact weights."""
+    """The heaviest ``support_cap`` rows of the dual, with exact weights on a
+    common denominator."""
 
     order = [index for index in np.argsort(-duals) if duals[index] > 1e-9]
     entries: list[SupportEntry] = []
     for index in order[:support_cap]:
-        weight = Fraction(float(duals[index])).limit_denominator(weight_denominator)
+        # One common denominator for every weight, so that a depth -- a sum of
+        # weights -- stays a small rational instead of an lcm of many.
+        weight = Fraction(round(float(duals[index]) * weight_denominator), weight_denominator)
         if weight <= 0:
             continue
         direction, x, y = exact_rows[index]

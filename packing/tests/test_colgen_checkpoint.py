@@ -322,3 +322,97 @@ def test_cost_windows_split_the_loop_rather_than_averaging_it() -> None:
     assert first.split()[-5:] == ["3", "5.000", "4.000", "1.000", "0.8000"]
     assert last.split()[-5:] == ["2", "10.000", "9.000", "1.000", "0.9000"]
     assert cost_lines(Progress()) == ["cost: no row-generation round has finished"]
+
+
+def test_a_clock_stop_between_column_rounds_keeps_the_converged_optimum(tmp_path) -> None:
+    """A converged column round survives a deadline that lands after it.
+
+    The row loop converging is what makes a restricted optimum the site set's
+    own rather than a point the clock stopped at, and this driver exists so that
+    a budget stop costs a run its next round and not its last answer. So a
+    deadline arriving once some column round has converged must still report
+    ``converged``, still report *that* round's optimum, and still freeze its
+    candidate. The site set here is coarse enough that column generation has
+    real work to do -- eight column rounds, and the optimum moves at the
+    seventh -- so a fractional deadline lands mid-search rather than after it.
+    """
+
+    settings = small_settings(
+        max_rounds=40, chunk_rounds=40, column_rounds=12, grid_counts=(5,)
+    )
+    whole = run(
+        settings,
+        log_path=None,
+        checkpoint=None,
+        resume=None,
+        freeze=None,
+        deadline_seconds=None,
+        verify_serial=False,
+    )
+    full = whole["rounds"]
+    assert isinstance(full, list) and len(full) > 2
+    elapsed = whole["seconds"]
+    assert isinstance(elapsed, float)
+
+    stopped_early = False
+    for fraction in (0.2, 0.35, 0.5, 0.7):
+        freeze = tmp_path / f"certificate-{fraction}.json"
+        result = run(
+            settings,
+            log_path=None,
+            checkpoint=tmp_path / "checkpoint.npz",
+            resume=None,
+            freeze=freeze,
+            deadline_seconds=elapsed * fraction,
+            verify_serial=False,
+        )
+        rounds = result["rounds"]
+        assert isinstance(rounds, list)
+        if not rounds:
+            # Too little clock for even the first row loop: nothing converged,
+            # and the result has to say so rather than freeze anything.
+            assert result["converged"] is False and result["frozen"] is None
+            continue
+        at = result["converged_at_column"]
+        assert isinstance(at, int)
+        assert result["converged"] is True
+        assert result["objective"] == rounds[at]["objective"]
+        assert result["least_covered"] == rounds[at]["least_covered"]
+        assert freeze.exists()
+        if len(rounds) < len(full):
+            stopped_early = True
+            # Either the clock ran out inside a row loop or between two of them,
+            # and both leave the converged optimum standing.
+            assert result["stopped"] == "no clock for a single row-generation chunk" or str(
+                rounds[-1]["note"]
+            ).startswith("deadline reached")
+    assert stopped_early, "no deadline in the sweep stopped the search early"
+
+
+def test_the_two_convergences_are_reported_apart(tmp_path) -> None:
+    """A column loop that runs out of priced orbits says so; a capped one does not."""
+
+    finished = run(
+        small_settings(max_rounds=40, chunk_rounds=40, column_rounds=40),
+        log_path=None,
+        checkpoint=None,
+        resume=None,
+        freeze=None,
+        deadline_seconds=None,
+        verify_serial=False,
+    )
+    assert finished["converged"] is True
+    assert finished["column_loop_converged"] is True
+
+    capped = run(
+        small_settings(max_rounds=40, chunk_rounds=40, column_rounds=1),
+        log_path=None,
+        checkpoint=None,
+        resume=None,
+        freeze=None,
+        deadline_seconds=None,
+        verify_serial=False,
+    )
+    assert capped["converged"] is True
+    rounds = capped["rounds"]
+    assert isinstance(rounds, list) and len(rounds) == 1
