@@ -471,9 +471,11 @@ exit status 0
   side `189/50 = 3.78`, below Stromquist’s bound, where a certificate proves nothing
   new; it was found and verified, and is retained as `../certificate-189-50.json`. The
   comparison `(189/50 − 2)² · 5 = 7921/500 < 16` confirms it sits below.
-- **What is claimed is exactly `s(11) ≥ 19/5`.** Not a value of `s(11)`, not optimality
-  of Trump’s packing, not a bound for any other `n` (every `n > 11` already carries a
-  larger bound in the literature or in the project’s record).
+- **The claim is exactly `s(11) ≥ 19/5`.** The package does not establish the value of
+  `s(11)` or the optimality of Trump’s packing.
+  Monotonicity also gives `s(n) ≥ 19/5` for every `n > 11`, but each such case already
+  carries a larger bound in the literature or in the project’s record, so this
+  certificate does not improve any recorded higher-`n` bound.
 
 ## What a Sceptic Could Still Object To
 
