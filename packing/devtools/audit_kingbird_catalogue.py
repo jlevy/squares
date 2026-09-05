@@ -305,7 +305,7 @@ def audit_catalogue(
             group = future_to_group[future]
             try:
                 payloads[group.source_path] = future.result()
-            except Exception as error:
+            except Exception as error:  # noqa: BLE001 - a fetch failure of any kind is a recorded miss
                 fetch_failures[group.source_path] = f"{type(error).__name__}: {error}"
 
     sources: list[dict[str, object]] = []

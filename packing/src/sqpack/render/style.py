@@ -96,9 +96,7 @@ def evidence_style(evidence: EvidenceTier) -> tuple[str, str, str]:
     }[evidence]
 
 
-def presentation_attributes(
-    *, fill: str, stroke: str, width: int | float = 2
-) -> dict[str, str]:
+def presentation_attributes(*, fill: str, stroke: str, width: float = 2) -> dict[str, str]:
     return {
         "fill": fill,
         "stroke": stroke,

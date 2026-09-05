@@ -185,24 +185,26 @@ def test_the_assessment_is_reproducible() -> None:
 
 
 @pytest.mark.parametrize(
-    ("label", "record"),
+    "record",
     [
-        (
-            "side above k",
+        pytest.param(
             {
                 "verified_upper_bound": {"value": "3.0001"},
                 "verified_lower_bound": {"value": "3"},
             },
+            id="side above k",
         ),
-        (
-            "side below k",
+        pytest.param(
             {"verified_upper_bound": {"value": "3"}, "verified_lower_bound": {"value": "2.9"}},
+            id="side below k",
         ),
-        ("no verified bounds", {}),
-        ("reported but not verified", {"reported_upper_bound": {"value": "3.0"}}),
+        pytest.param({}, id="no verified bounds"),
+        pytest.param(
+            {"reported_upper_bound": {"value": "3.0"}}, id="reported but not verified"
+        ),
     ],
 )
-def test_the_tiling_claim_refuses_when_the_side_is_not_pinned_at_k(label, record) -> None:
+def test_the_tiling_claim_refuses_when_the_side_is_not_pinned_at_k(record) -> None:
     """The tiling argument rests on the side, not on `n`.
 
     A perfect square `n` is necessary for the tiling argument and not sufficient: what

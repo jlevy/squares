@@ -146,7 +146,7 @@ def layout_tree(text: str) -> str | None:
     # tree shifted the pairing by one and the tree was "found" mid-prose or not at all;
     # which blocks sit ahead of the tree is a presentation choice that must not decide
     # whether this check runs.
-    for block in re.findall(r"^```[^\n]*\n(.*?)^```", text, re.S | re.M):
+    for block in re.findall(r"^```[^\n]*\n(.*?)^```", text, re.DOTALL | re.MULTILINE):
         if "\u251c\u2500\u2500 " in block:
             return block
     return None
@@ -197,8 +197,8 @@ def check_layout(text: str) -> list[str]:
     # Only a branch marker declares an entry. Continuation lines carry the description
     # of the entry above and start with a bare `|` column, which is why matching "first
     # word on the line" reported a prose word as a missing file.
-    top = re.findall(r"^[├└]── ([A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*/?)", tree, re.M)
-    nested = re.findall(r"^│\s+[├└]── ([A-Za-z0-9_.-]+/?)", tree, re.M)
+    top = re.findall(r"^[├└]── ([A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*/?)", tree, re.MULTILINE)
+    nested = re.findall(r"^│\s+[├└]── ([A-Za-z0-9_.-]+/?)", tree, re.MULTILINE)
     # A top-level entry is the first path segment: `docs/project/` lives under `docs`.
     drawn_top = {name.strip("/").split("/")[0] for name in top}
     drawn_any = drawn_top | {name.strip("/") for name in top + nested}
@@ -220,7 +220,7 @@ def check_layout(text: str) -> list[str]:
 def check_reports(text: str) -> list[str]:
     """The prose count, the table, and the directory agree."""
     actual = sorted(p.name for p in RESEARCH.glob("research-*.md"))
-    rows = re.findall(r"^\| \[([^\]]+)\]\(([^)]+)\)", text, re.M)
+    rows = re.findall(r"^\| \[([^\]]+)\]\(([^)]+)\)", text, re.MULTILINE)
     linked = {Path(target).name for _, target in rows if "docs/project/research/" in target}
 
     problems = [
@@ -234,7 +234,7 @@ def check_reports(text: str) -> list[str]:
 
     n = len(actual)
     word = _SPELLED.get(n, str(n))
-    if not re.search(rf"\b({n}|{word})\s+research reports\b", text, re.I):
+    if not re.search(rf"\b({n}|{word})\s+research reports\b", text, re.IGNORECASE):
         problems.append(
             f"README.md: does not say there are {word} research reports (there are)"
         )
@@ -262,7 +262,7 @@ def check_defect_summary(text: str) -> list[str]:
         )
 
     number = r"(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten)"
-    if re.search(rf"\bgate\b[^.]*\bcaught\s+{number}\s+defects?\b", normalized, re.I):
+    if re.search(rf"\bgate\b[^.]*\bcaught\s+{number}\s+defects?\b", normalized, re.IGNORECASE):
         problems.append(
             "README.md: repeats a numeric gate-defect aggregate owned by defects.yaml"
         )
@@ -271,13 +271,13 @@ def check_defect_summary(text: str) -> list[str]:
 
 def workflow_rows(text: str) -> list[tuple[str, str]]:
     """Numbered workflow rows in a Markdown table."""
-    return re.findall(r"^\| (W\d+) \| `([^`]+)` \|", text, re.M)
+    return re.findall(r"^\| (W\d+) \| `([^`]+)` \|", text, re.MULTILINE)
 
 
 def check_retired_workflow_identifiers() -> list[str]:
     """Reject old controlled names without rewriting retained source evidence."""
     # Assemble the previous W1 slug so the guard does not preserve the token it bans.
-    retired = "-".join(("research", "pass"))
+    retired = "-".join(("research", "pass"))  # noqa: FLY002 - the literal is what this bans
     problems: list[str] = []
 
     def record_walk_error(error: OSError) -> None:
@@ -377,7 +377,7 @@ def check_work_model(text: str) -> list[str]:
     terminology = re.search(
         r"^### Work Units and Records\s*$\n(?P<body>.*?)(?=^###\s)",
         synopsis,
-        re.M | re.S,
+        re.MULTILINE | re.DOTALL,
     )
     if terminology is None:
         problems.append("SYNOPSIS.md: has no Work Units and Records section")
@@ -414,4 +414,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

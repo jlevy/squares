@@ -253,8 +253,8 @@ def reduced_direction(vector: list[FieldElement]) -> list[FieldElement]:
     ]
 
 
-def exact_rank(vectors: list[list[FieldElement]], field: NumberField) -> int:
-    return tangent_inventory.coefficient_rank(vectors, field)
+def exact_rank(vectors: list[list[FieldElement]]) -> int:
+    return tangent_inventory.coefficient_rank(vectors)
 
 
 def domain_certificate(field: NumberField, inputs: ProofInputs) -> dict[str, object]:
@@ -395,7 +395,6 @@ def domain_certificate(field: NumberField, inputs: ProofInputs) -> dict[str, obj
                 [right - left for right, left in zip(witness, base, strict=True)]
                 for witness in witnesses[1:]
             ],
-            field,
         )
         != 5
     ):
@@ -1209,4 +1208,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

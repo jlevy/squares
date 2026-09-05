@@ -43,6 +43,7 @@ import argparse
 import json
 import subprocess
 import sys
+from collections.abc import Sequence
 from datetime import datetime
 from pathlib import Path
 from typing import TypedDict
@@ -109,7 +110,7 @@ def rollup_span(path: Path) -> tuple[datetime | None, datetime | None]:
         if not isinstance(value, str):
             return None
         try:
-            return datetime.fromisoformat(value.replace("Z", "+00:00"))
+            return datetime.fromisoformat(value)
         except ValueError:
             return None
 
@@ -176,8 +177,8 @@ def codex_receipt_summary(path: Path) -> CodexReceiptSummary:
     delta = rollup["delta"]
     source = rollup["source"]
     responses = sum(int(model["model_response_count"]) for model in delta["models"])
-    started = datetime.fromisoformat(str(source["start_cutoff_at"]).replace("Z", "+00:00"))
-    ended = datetime.fromisoformat(str(source["end_cutoff_at"]).replace("Z", "+00:00"))
+    started = datetime.fromisoformat(str(source["start_cutoff_at"]))
+    ended = datetime.fromisoformat(str(source["end_cutoff_at"]))
     return {
         "path": path.relative_to(ROOT.parent).as_posix(),
         "model_responses": responses,
@@ -760,7 +761,7 @@ def _run(options: argparse.Namespace) -> int:
     return report(options.session)
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--session", help="report on one session in full")
     parser.add_argument("--log", type=Path, help="the session's harness log, to regenerate")
@@ -805,4 +806,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

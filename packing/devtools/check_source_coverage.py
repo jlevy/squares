@@ -30,9 +30,9 @@ def parse_case(path: pathlib.Path) -> dict:
 
 def parse_kingbird(path: pathlib.Path, n_min: int, n_max: int) -> dict[int, str]:
     """Read the catalogue's visible boxes, then apply its stated grid fallback."""
-    text = re.sub(r"<!--.*?-->", "", path.read_text(encoding="utf-8"), flags=re.S)
+    text = re.sub(r"<!--.*?-->", "", path.read_text(encoding="utf-8"), flags=re.DOTALL)
     blocks = re.findall(
-        r'<div class="box"><font size="\+3">(.*?)</div></div>', text, flags=re.S
+        r'<div class="box"><font size="\+3">(.*?)</div></div>', text, flags=re.DOTALL
     )
     values: dict[int, str] = {}
     for block in blocks:

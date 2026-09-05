@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import subprocess
+from collections.abc import Sequence
 from pathlib import Path
 
 from strif import atomic_output_file
@@ -35,10 +36,10 @@ def _positive(parser: argparse.ArgumentParser, name: str, value: int) -> None:
         parser.error(f"{name} must be positive")
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     """Run the declared sweep and return a process-compatible status code."""
     parser = _parser()
-    options = parser.parse_args(arguments)
+    options = parser.parse_args(argv)
     _positive(parser, "--chains", options.chains)
     _positive(parser, "--budget-moves", options.budget_moves)
     for instance in options.instances:

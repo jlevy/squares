@@ -38,7 +38,6 @@ Usage, from `packing/`:
 from __future__ import annotations
 
 import json
-import sys
 from fractions import Fraction
 from pathlib import Path
 
@@ -138,4 +137,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

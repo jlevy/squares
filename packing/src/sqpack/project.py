@@ -8,7 +8,9 @@ turns an installed command with no checkout into an actionable failure.
 
 from __future__ import annotations
 
+import argparse
 import os
+from importlib.metadata import version
 from pathlib import Path
 
 PROJECT_ROOT_ENV = "PACKING_PROJECT_ROOT"
@@ -51,3 +53,12 @@ def require_project_root(root: Path | None = None) -> Path:
             f"Run from packing or set {PROJECT_ROOT_ENV} to that directory."
         )
     return candidate
+
+
+def add_version_argument(parser: argparse.ArgumentParser) -> None:
+    """Give a project application `--version`, reporting the installed `sqpack` distribution.
+
+    Read from the metadata rather than a constant so the console scripts cannot disagree
+    with `pyproject.toml`.
+    """
+    parser.add_argument("--version", action="version", version=f"%(prog)s {version('sqpack')}")

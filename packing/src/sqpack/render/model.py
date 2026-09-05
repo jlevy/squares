@@ -186,7 +186,7 @@ class RenderSpec:
     overlays: frozenset[Overlay] = field(default_factory=lambda: frozenset({Overlay.CONTACTS}))
     title: str = "Square packing"
     description: str = "A square packing rendered with mathematical y coordinates upward."
-    duration_seconds: Decimal = Decimal("4")
+    duration_seconds: Decimal = Decimal(4)
     width: int = 960
     hue_scheme: HueScheme = HueScheme.ANGLE
     shade_scheme: ShadeScheme = ShadeScheme.CONTACTS

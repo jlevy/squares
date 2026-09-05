@@ -157,7 +157,8 @@ def test_parallel_failure_stops_children_cleans_partial_and_preserves_complete_a
     assert run_arm(tmp_path, "A", context) == serial
     assert not (tmp_path / "arm-B").exists()
     assert not list(tmp_path.glob(".arm-B.partial-*"))
-    assert escaped_path is not None and not escaped_path.exists()
+    assert escaped_path is not None
+    assert not escaped_path.exists()
     assert {process.pid for process in multiprocessing.active_children()} == before
 
 

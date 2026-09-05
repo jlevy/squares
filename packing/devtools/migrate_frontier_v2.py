@@ -383,11 +383,8 @@ def migrate_case(legacy: Mapping[str, object]) -> dict[str, object]:
         blockers.append(
             {
                 "kind": "mathematics",
-                "detail": " ".join(
-                    (
-                        "No formal certificate currently supports the tighter",
-                        "reported upper bound.",
-                    )
+                "detail": (
+                    "No formal certificate currently supports the tighter reported upper bound."
                 ),
                 "evidence": upper_report_evidence,
             }

@@ -96,12 +96,13 @@ packages = ["src/sqpack"]
 line-length = 96
 target-version = "py314"
 extend-exclude = [
+  # The literature archive: transcribed and downloaded source, never edited to look
+  # tidy, and the two verifier scripts it holds are other authors' bytes.
   "resources",
-  # Retained verbatim as third-party evidence: these are deliberately written in
-  # someone else's style, import nothing from this project, and are checked by being
-  # run rather than by being linted. Reformatting them would defeat the point.
+  # An independent reviewer's verifier, retained verbatim as evidence: written in
+  # someone else's style, importing nothing from this project, and checked by being
+  # run rather than by being linted. Reformatting it would defeat the point.
   "cases/n12_fractional_certificate/independent_verify.py",
-  "cases/n11_fractional_certificate/thirdparty",
 ]
 
 [tool.ruff.lint]
@@ -113,10 +114,16 @@ select = [
     "UP",    # pyupgrade: modern syntax for the target version
     "B",     # bugbear: real bug patterns, including B008 and loop-variable capture
     "A",     # builtin shadowing
+    "ARG",   # unused arguments, which hide a seam nobody calls
+    "BLE",   # blind except, which turns any bug into a handled case
     "C4",    # comprehension clarity
+    "C90",   # mccabe complexity, as a ratchet: see [tool.ruff.lint.mccabe]
     "DTZ",   # naive datetimes, which silently mean the wrong instant
     "EM",    # exception messages assembled outside the raise
+    "ERA",   # commented-out code, which git already keeps
     "FBT",   # boolean positional arguments, which read as noise at the call site
+    "FLY",   # f-strings over static joins
+    "FURB",  # refurb: the idioms the target version makes available
     "ICN",   # conventional import aliases
     "ISC",   # implicit string concatenation
     "LOG",   # logging misuse
@@ -124,7 +131,9 @@ select = [
     "PERF",  # obvious performance mistakes
     "PIE",   # miscellaneous lints
     "PL",    # pylint subset
+    "PT",    # pytest style: one assertion per line, typed parametrize values
     "PTH",   # pathlib over os.path, per python-rules
+    "PYI",   # stub-style annotations, here the redundant `int | float`
     "RET",   # return-statement structure
     "RSE",   # raise syntax
     "RUF",   # ruff's own rules, including mutable class defaults
@@ -135,9 +144,7 @@ select = [
     "TRY",   # exception antipatterns
 ]
 ignore = [
-    # This is a scientific codebase and a CLI toolkit: printing IS the interface
-    # for the tools, and magic numbers in geometry are the geometry.
-    "T201",     # print, which is how every tool here reports
+    # This is a scientific codebase: magic numbers in geometry are the geometry.
     "PLR2004",  # magic value comparison: 0.5 is a half-edge, not a magic number
     "PLR0912",  # branch count: the SAT and LP builders are inherently branchy
     "PLR0913",  # argument count: quench takes its knobs explicitly, by design
@@ -146,9 +153,29 @@ ignore = [
     "EM101",    # string literal in raise; paired with TRY003 above
     "EM102",
     "ISC001",   # conflicts with the formatter
+    # The tests that check a refusal do it with try/except and a bare AssertionError so
+    # they carry no pytest dependency, as python-rules asks; all fourteen files this
+    # rule fires in import no pytest, and `pytest.raises` would add one to each.
+    "PT017",
 ]
 
+[tool.ruff.lint.mccabe]
+# A ratchet, not a target. Measured on 2026-09-05: the most complex function is the
+# campaign ledger's `check` at 158, a flat list of record invariants that carries its
+# own `noqa`; the next is bentz13's `certify` at 57, which sets this ceiling. Lower it
+# as functions are split; never raise it without naming the function that needed it.
+max-complexity = 57
+
 [tool.ruff.lint.per-file-ignores]
+# Printing is the interface of a tool, so T201 is waived where the tools live and
+# nowhere else. A print in `src/sqpack` outside the console scripts is a library
+# talking to a terminal nobody may be watching; the library modules log instead.
+"devtools/*" = ["T201"]
+"cases/*" = ["T201"]
+"tests/*" = ["T201"]
+"benchmarks/*" = ["T201"]
+"frankensim-probe/*" = ["T201"]
+"src/sqpack/cli/*" = ["T201"]
 # `K` is the published symbol in the source these modules transcribe; renaming it to
 # `k` would make the code harder to check against the paper, which is the point.
 "cases/trump11/packing.py" = ["N806"]
@@ -157,12 +184,20 @@ ignore = [
 "benchmarks/exact_verification.py" = ["SLF001"]
 # The ledger and renderers build markdown a line at a time, which reads better than
 # the comprehension PERF401 would prefer.
-"src/sqpack/campaign/ledger.py" = ["PERF401"]
+"src/sqpack/campaign/ledger.py" = ["PERF401", "T201"]
+# The runner's `# Step: name` section headers read as commented-out code to ERA001.
+"src/sqpack/campaign/runner.py" = ["ERA001", "T201"]
 "devtools/render_defects.py" = ["PERF401"]
 "devtools/render_research_tables.py" = ["PERF401"]
 "devtools/check_svg_rendering.py" = ["PLC0415"]
 # CLI behavior tests exercise small internal orchestration seams without making them APIs.
 "tests/test_validation_cli.py" = ["SLF001"]
+# Content-addressed by the immutable exp-055 result, which pins these files' SHA-256s
+# (see the formatter's exclude list below): a finding here is answered in this file,
+# never by editing theirs. The harness's blind except catches whatever the dynamically
+# loaded frozen producer raises; the test's parametrize tuple is its retained shape.
+"cases/n050_producer_refusal/harness.py" = ["BLE001"]
+"tests/test_n050_producer_refusal_independent.py" = ["PT007"]
 "tests/test_reachable_tests.py" = ["SLF001"]
 
 [tool.ruff.lint.flake8-tidy-imports]
@@ -187,16 +222,26 @@ exclude = [
 # Types
 
 [tool.basedpyright]
-include = ["src/sqpack", "cases", "devtools", "benchmarks", "tests"]
+include = [
+    "src/sqpack",
+    "cases",
+    "devtools",
+    "benchmarks",
+    "tests",
+    "frankensim-probe",
+    # The hand-written skill assets at the repository root are project Python too; the
+    # gate runs from this directory, so they are reached by a parent path. `.claude/skills`
+    # is a byte-identical mirror kept by `make skills-sync`, so it is not listed twice.
+    "../.agents/skills",
+]
 exclude = [
     "**/__pycache__",
+    # The literature archive, as excluded from ruff: other authors' bytes.
     "resources",
     ".venv",
-    # Retained verbatim as third-party evidence: an independent reviewer's verifier
-    # and the stdlib-only package an outside reader runs. Editing either to satisfy a
-    # checker would void what they are, so both are excluded here as they are from ruff.
+    # An independent reviewer's verifier, retained verbatim as evidence. Editing it to
+    # satisfy a checker would void what it is, so it is excluded here as it is from ruff.
     "cases/n12_fractional_certificate/independent_verify.py",
-    "cases/n11_fractional_certificate/thirdparty",
 ]
 pythonVersion = "3.14"
 typeCheckingMode = "standard"

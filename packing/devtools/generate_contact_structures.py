@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections.abc import Sequence
 from pathlib import Path
 
 import mpmath as mp
@@ -245,7 +246,7 @@ def parser() -> argparse.ArgumentParser:
     return command
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
     if args.update:
         update()

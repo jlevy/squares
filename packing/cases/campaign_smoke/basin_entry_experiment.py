@@ -13,6 +13,7 @@ import json
 import subprocess
 import sys
 import tempfile
+from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -85,10 +86,10 @@ def _arm_command(
     return command
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     """Run all basin-entry arms and return a process-compatible status code."""
     parser = _parser()
-    options = parser.parse_args(arguments)
+    options = parser.parse_args(argv)
     if options.trials <= 0:
         parser.error("--trials must be positive")
     if options.seed < 0:

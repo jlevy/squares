@@ -79,7 +79,8 @@ def main() -> int:
     subject = require_dict(exact["subject"])
     assert subject["assurance"] == "verified"
     assert subject["method"] == "exact-algebraic"
-    assert "precision" not in subject and "tolerance" not in subject
+    assert "precision" not in subject
+    assert "tolerance" not in subject
     assert check_experiment_semantics(exact) == []
 
     false_record = deepcopy(numeric)

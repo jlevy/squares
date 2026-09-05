@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterator
 from dataclasses import replace
 
 import pytest
@@ -13,9 +12,9 @@ from sqpack.field import FieldElement, NumberField
 
 
 @pytest.fixture(scope="module")
-def owner4_control() -> Iterator[tuple[NumberField, tuple[minus_w_owner4.Owner4Record, ...]]]:
+def owner4_control() -> tuple[NumberField, tuple[minus_w_owner4.Owner4Record, ...]]:
     field = face.make_field()
-    yield field, minus_w_owner4.positive_w_control_records(field)
+    return field, minus_w_owner4.positive_w_control_records(field)
 
 
 @pytest.mark.exhaustive_exact

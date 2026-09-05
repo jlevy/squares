@@ -317,7 +317,7 @@ class MotionLabRequestHandler(BaseHTTPRequestHandler):
                 _error_record("invalid-request", str(error)),
             )
             return
-        except Exception as error:
+        except Exception as error:  # noqa: BLE001 - the handler answers 500 rather than dropping the connection
             self.log_error("numerical quench failed: %s", error)
             self._send_json(
                 HTTPStatus.INTERNAL_SERVER_ERROR,

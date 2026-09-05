@@ -35,6 +35,7 @@ import json
 import re
 import shutil
 import sys
+from collections.abc import Sequence
 from dataclasses import dataclass
 from fractions import Fraction
 from math import isqrt
@@ -1117,9 +1118,7 @@ def certificate_switch(facts: list[Facts], headline: Facts) -> str:
     )
 
 
-def certificate_substitutions(
-    facts: Facts, *, headline: Facts, default: Facts, toggle: str
-) -> dict[str, str]:
+def certificate_substitutions(facts: Facts, *, default: Facts, toggle: str) -> dict[str, str]:
     """Values for one certificate's article, switch and script."""
     n = facts.n
     total = facts.total_mass
@@ -1331,8 +1330,7 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
     headline = max(facts, key=lambda f: f.outer_side)
     toggle = certificate_switch(facts, headline)
     per_certificate = [
-        certificate_substitutions(f, headline=headline, default=facts[0], toggle=toggle)
-        for f in facts
+        certificate_substitutions(f, default=facts[0], toggle=toggle) for f in facts
     ]
 
     shared = shared_substitutions(facts, headline, facts[0])
@@ -1355,7 +1353,7 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
     return page
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--certificate",

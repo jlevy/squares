@@ -138,7 +138,8 @@ def a_wrong_generator_fails_its_own_minimal_polynomial() -> None:
         "certification cannot tell the recovered value from a nearby one"
     )
     assert not certificate.closed, "a round trip with an uncertified generator was closed"
-    assert certificate.refusal is not None and "minimal polynomial" in certificate.refusal, (
+    assert certificate.refusal is not None
+    assert "minimal polynomial" in certificate.refusal, (
         f"the refusal does not name its cause: {certificate.refusal}"
     )
 

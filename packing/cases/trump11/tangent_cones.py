@@ -373,7 +373,7 @@ def exact_solve(
     return solution
 
 
-def exact_pivot_rows(rows: tuple[LinearRow, ...], field: NumberField) -> list[int] | None:
+def exact_pivot_rows(rows: tuple[LinearRow, ...]) -> list[int] | None:
     """Select a full-rank row basis deterministically in exact arithmetic."""
     if not rows:
         return None
@@ -434,7 +434,7 @@ def positive_stress_certificate(rows: tuple[LinearRow, ...], field: NumberField)
     )
     if not numeric.success or numeric.x is None:
         return None
-    pivot_rows = exact_pivot_rows(rows, field)
+    pivot_rows = exact_pivot_rows(rows)
     if pivot_rows is None:
         return None
     free_rows = [index for index in range(row_count) if index not in set(pivot_rows)]
@@ -571,7 +571,7 @@ def exact_nonzero_direction(rows: tuple[LinearRow, ...], field: NumberField) -> 
                 right_sides.append(field.rational(1 if value > 0 else -1))
 
             equation_tuple = tuple(equations)
-            pivot_equations = exact_pivot_rows(equation_tuple, field)
+            pivot_equations = exact_pivot_rows(equation_tuple)
             if pivot_equations is None:
                 continue
             system = [list(equations[index].coefficients) for index in pivot_equations]

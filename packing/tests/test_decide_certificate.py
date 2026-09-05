@@ -382,7 +382,7 @@ def test_diagnostic_float_overflow_cannot_abort_preflight(
 
 @pytest.mark.parametrize(
     "magnitude",
-    [Fraction(10**400), Fraction.from_float(sys.float_info.max) + 1],
+    [Fraction(10**400), Fraction(sys.float_info.max) + 1],
     ids=["overflow", "nextafter-overflow"],
 )
 def test_out_of_range_coordinates_are_a_per_path_interval_refusal(
@@ -457,7 +457,7 @@ def test_finite_atom_geometry_overflow_is_a_quiet_per_path_refusal(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     side = Fraction(19, 5)
-    magnitude = Fraction.from_float(sys.float_info.max)
+    magnitude = Fraction(sys.float_info.max)
 
     def add_boundary_orbit(record: dict[str, object]) -> None:
         atoms = record["atoms"]
@@ -814,9 +814,7 @@ def test_main_skips_a_duplicate_path_before_any_second_decision(
 
 
 @pytest.mark.exhaustive_exact
-def test_quick_mode_says_it_cannot_retain(
-    tmp_path: Path, capsys: pytest.CaptureFixture[str]
-) -> None:
+def test_quick_mode_says_it_cannot_retain(capsys: pytest.CaptureFixture[str]) -> None:
     """A passing quick run must not read as a retention decision.
 
     This one runs the real interval route on the retained ``19/5`` rung, about eleven

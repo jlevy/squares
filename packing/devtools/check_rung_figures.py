@@ -78,7 +78,6 @@ from __future__ import annotations
 import json
 import math
 import re
-import sys
 from dataclasses import dataclass
 from decimal import ROUND_HALF_UP, Decimal, localcontext
 from fractions import Fraction
@@ -858,4 +857,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

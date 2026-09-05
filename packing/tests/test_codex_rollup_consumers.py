@@ -351,7 +351,7 @@ def test_close_render_uses_cumulative_branch_cost_even_with_session_detail(
     monkeypatch.setattr(closer, "SYNOPSIS", synopsis_path)
     monkeypatch.setattr(closer, "render_report", lambda: "report\n")
     monkeypatch.setattr(closer, "splice_synopsis", lambda text: text)
-    monkeypatch.setattr(closer, "report", lambda session_id: 0)
+    monkeypatch.setattr(closer, "report", lambda _session_id: 0)
     monkeypatch.setattr(closer, "current_branch", lambda: "codex/example")
     monkeypatch.setattr(
         closer,

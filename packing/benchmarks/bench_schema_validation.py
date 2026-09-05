@@ -33,6 +33,7 @@ import functools
 import pathlib
 import sys
 import time
+from collections.abc import Sequence
 from typing import Any
 
 import jsonschema_rs
@@ -90,7 +91,7 @@ def _run(
     return time.perf_counter() - start, per_file, verdicts
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--top", type=int, default=10, help="how many of the costliest artifacts to list"

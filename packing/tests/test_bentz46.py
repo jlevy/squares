@@ -54,7 +54,7 @@ def test_tiling_refuses_a_missing_face() -> None:
         validate_square_tiling(
             vertices, faces, side=field.rational(7), expected_faces=EXPECTED_FACES
         )
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="face areas do not sum to the exact container area"):
         validate_square_tiling(
             vertices, faces, side=field.rational(7), expected_faces=EXPECTED_FACES - 1
         )

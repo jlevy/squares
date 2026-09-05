@@ -150,7 +150,8 @@ def features_are_identified_and_typed() -> None:
 
     for incidence in structure.pair_contacts:
         assert incidence.contact in {"corner-edge", "edge-edge", "corner-corner"}
-        assert incidence.left_feature and incidence.right_feature
+        assert incidence.left_feature
+        assert incidence.right_feature
 
     kinds = Counter(incidence.contact for incidence in structure.pair_contacts)
     assert kinds == Counter({"edge-edge": 7, "corner-edge": 6, "corner-corner": 1}), (
@@ -244,10 +245,12 @@ def the_contact_equations_determine_the_pose() -> None:
         numbers, side_value = as_floats(field, squares, side)
         values = pose_values(system, numbers, side_value)
         info = jacobian_rank(system, values)
-        assert info["rank"] == 34 and info["shortfall"] == 0, (
+        undetermined = (
             f"the n = 11 contact Jacobian no longer determines the pose: {info}. Full "
             "rank here is what says no stationarity condition is missing at this size"
         )
+        assert info["rank"] == 34, undetermined
+        assert info["shortfall"] == 0, undetermined
 
         try:
             close(system, values)
@@ -447,10 +450,12 @@ def the_n5_closure_is_the_contact_map_differentiated_along_its_free_direction() 
         )
 
         after = jacobian_rank(closed, values)
-        assert after["rank"] == 16 and after["shortfall"] == 0, (
+        unclosed = (
             f"the n = 5 closure left the rank at {after['rank']} of {after['unknowns']}; "
             "a condition that does not raise the rank has closed nothing"
         )
+        assert after["rank"] == 16, unclosed
+        assert after["shortfall"] == 0, unclosed
 
         residuals = residual_at(closed, values)
         assert len(residuals) == closed.equation_count == 24, (

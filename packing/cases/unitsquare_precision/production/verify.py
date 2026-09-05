@@ -59,7 +59,7 @@ def _verify_sanitized(value: object) -> None:
             forbidden = tokens & _FORBIDDEN_KEYS
             if forbidden:
                 raise ResultVerificationError(
-                    f"result contains forbidden retained key: {sorted(forbidden)[0]}"
+                    f"result contains forbidden retained key: {min(forbidden)}"
                 )
             _verify_sanitized(item)
         return

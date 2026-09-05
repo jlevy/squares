@@ -11,6 +11,7 @@ import argparse
 import hashlib
 import json
 import re
+from collections.abc import Sequence
 from fractions import Fraction
 from pathlib import Path
 from typing import Any, cast
@@ -863,7 +864,7 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     arguments = _parser().parse_args(argv)
     try:
         receipt = verify_result(arguments.fixture, arguments.result)

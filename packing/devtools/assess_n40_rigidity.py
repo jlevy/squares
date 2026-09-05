@@ -121,7 +121,8 @@ def axis_groups(
     for contact in contacts:
         if contact.kind != "pair":
             continue
-        assert contact.host is not None and contact.edge is not None
+        assert contact.host is not None
+        assert contact.edge is not None
         pair = frozenset((contact.moving, contact.host))
         if pair not in disjunctive:
             continue
@@ -464,7 +465,7 @@ def wider_cone(pose: Pose, contacts: list[Contact]) -> dict[str, Any]:
         ),
         "squares_that_move_in_any": sorted(movers),
         "frame_squares_that_ever_move": sorted(index for index in movers if index < 24),
-        "rank": _rank(pose, [retained_ray(pose, entries) for entries in WIDER_RAYS]),
+        "rank": _rank([retained_ray(pose, entries) for entries in WIDER_RAYS]),
         "rays": verified,
         "what_it_settles": (
             "the first-order cone is strictly larger than the line in the null space, so no "
@@ -677,7 +678,7 @@ def cone_bound(pose: Pose, contacts: list[Contact]) -> dict[str, Any]:
     }
 
 
-def _rank(pose: Pose, vectors: list[list[FieldElement]]) -> int:
+def _rank(vectors: list[list[FieldElement]]) -> int:
     """Exact rank of a set of motions, by elimination over the field."""
     work = [list(vector) for vector in vectors]
     width = len(work[0])
@@ -914,4 +915,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

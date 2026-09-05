@@ -21,12 +21,14 @@ Expected: 168 atoms, total weight 9744/576 = 203/12, and L = 22529/5000 =
 
 import json
 import sys
-from fractions import Fraction as F
+from collections.abc import Sequence
+from fractions import Fraction
+from pathlib import Path
 
-L = F(45058, 10000)
-M = F(15513, 10000)
-B = F(9973, 10000)
-T = F(207107, 500000)
+L = Fraction(45058, 10000)
+M = Fraction(15513, 10000)
+B = Fraction(9973, 10000)
+T = Fraction(207107, 500000)
 KMAX = 180
 WEIGHT_SCALE = 576
 NGRID = 29
@@ -61,8 +63,16 @@ CERT = [
 
 def orbit(i, j):
     n = LAST
-    return {(i, j), (n - i, j), (i, n - j), (n - i, n - j),
-            (j, i), (n - j, i), (j, n - i), (n - j, n - i)}
+    return {
+        (i, j),
+        (n - i, j),
+        (i, n - j),
+        (n - i, n - j),
+        (j, i),
+        (n - j, i),
+        (j, n - i),
+        (n - j, n - i),
+    }
 
 
 def build():
@@ -72,16 +82,19 @@ def build():
     for i, j, w in CERT:
         for ij in orbit(i, j):
             if ij in by_index:
-                raise ValueError("two representatives reach grid point %s" % (ij,))
+                raise ValueError(f"two representatives reach grid point {ij}")
             by_index[ij] = w
-    atoms = [[str(coord[i]), str(coord[j]), str(F(w, WEIGHT_SCALE))]
-             for (i, j), w in sorted(by_index.items())]
-    total = sum(F(w, WEIGHT_SCALE) for _, _, w in
-                ((None, None, w) for w in by_index.values()))
+    atoms = [
+        [str(coord[i]), str(coord[j]), str(Fraction(w, WEIGHT_SCALE))]
+        for (i, j), w in sorted(by_index.items())
+    ]
+    total = sum(
+        Fraction(w, WEIGHT_SCALE) for _, _, w in ((None, None, w) for w in by_index.values())
+    )
     return {
         "id": "control-n17-massaccesi-4.5058",
         "n": 17,
-        "claim": "s(17) >= %s" % L,
+        "claim": f"s(17) >= {L}",
         "outer_side": str(L),
         "square_side": str(B),
         "angle_limit": str(T),
@@ -97,19 +110,22 @@ def render(record):
     return json.dumps(record, indent=1) + "\n"
 
 
-def main(argv):
+def main(argv: Sequence[str] | None = None) -> int:
+    arguments = list(sys.argv[1:] if argv is None else argv)
     text = render(build())
-    if len(argv) == 3 and argv[1] == "--check":
-        with open(argv[2]) as handle:
-            shipped = handle.read()
+    if len(arguments) == 2 and arguments[0] == "--check":
+        shipped = Path(arguments[1]).read_text()
         if shipped == text:
-            print("control data rebuilt from the published constants: identical to %s" % argv[2])
+            print(
+                "control data rebuilt from the published constants: "
+                f"identical to {arguments[1]}"
+            )
             return 0
-        print("MISMATCH: %s differs from the rebuilt control data" % argv[2])
+        print(f"MISMATCH: {arguments[1]} differs from the rebuilt control data")
         return 1
     sys.stdout.write(text)
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv))
+    raise SystemExit(main())

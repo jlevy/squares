@@ -67,7 +67,7 @@ class Phase:
 def _moment(value: object) -> datetime | None:
     if not isinstance(value, str) or not value:
         return None
-    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    return datetime.fromisoformat(value)
 
 
 def session_record(path: pathlib.Path) -> dict[str, object]:
@@ -142,7 +142,7 @@ def remarks(name: str, record: dict[str, object]) -> list[str]:
     return found
 
 
-def elapsed_report(name: str, record: dict[str, object], now: datetime) -> list[str]:
+def elapsed_report(record: dict[str, object], now: datetime) -> list[str]:
     """Declared budget against the elapsed time the record's own timestamps imply."""
     lines: list[str] = []
     declared = phases(record)
@@ -194,7 +194,7 @@ def audit(*, verbose: bool) -> int:
     if verbose:
         latest = paths[-1]
         print(f"  elapsed against budget in {latest.name}:")
-        for line in elapsed_report(latest.name, session_record(latest), now):
+        for line in elapsed_report(session_record(latest), now):
             print(line)
     return 0
 
@@ -208,4 +208,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

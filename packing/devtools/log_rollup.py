@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from collections.abc import Sequence
 from pathlib import Path
 
 import yaml
@@ -25,7 +26,7 @@ import yaml
 from devtools.logrollup import REGISTRY
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("logs", type=Path, nargs="+", help="agent session logs")
     parser.add_argument(
@@ -75,4 +76,4 @@ def _one(log: Path, out: Path | None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

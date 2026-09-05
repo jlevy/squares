@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 from collections import Counter
+from collections.abc import Sequence
 from pathlib import Path
 
 from strif import atomic_output_file
@@ -346,7 +347,7 @@ def parser() -> argparse.ArgumentParser:
     return command
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
     update() if args.update else check()
     return 0

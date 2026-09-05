@@ -170,10 +170,7 @@ class LegacyCommand:
 
 
 def _timestamp_ms(value: str) -> float:
-    return (
-        datetime.fromisoformat(value.replace("Z", "+00:00")).timestamp()
-        * MILLISECONDS_PER_SECOND
-    )
+    return datetime.fromisoformat(value).timestamp() * MILLISECONDS_PER_SECOND
 
 
 def _utc_now() -> str:
@@ -1796,10 +1793,10 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(arguments: Sequence[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     """Run the Codex efficiency rollup CLI."""
 
-    options = _parser().parse_args(arguments)
+    options = _parser().parse_args(argv)
     try:
         rollup = build_rollup(
             options.sessions_root,

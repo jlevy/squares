@@ -90,7 +90,7 @@ def test_a_non_literal_declaration_is_refused_not_a_crash(tmp_path: Path) -> Non
         declared_sizes(stub)
 
 
-def test_an_out_of_range_size_does_not_crash(tmp_path: Path) -> None:
+def test_an_out_of_range_size_does_not_crash() -> None:
     """A size with no frontier record is a refusal; reading n-999.md would raise."""
     assert cited_certificates(999, {}) == set()
 

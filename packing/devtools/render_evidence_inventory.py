@@ -26,8 +26,8 @@ Usage, from `packing/`:
 from __future__ import annotations
 
 import argparse
-import sys
 from collections import Counter
+from collections.abc import Sequence
 from pathlib import Path
 
 from sqpack.yamlio import safe_load
@@ -279,7 +279,7 @@ def render() -> str:
     return "\n".join(lines) + "\n"
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--update", action="store_true", help="regenerate the inventory")
@@ -305,4 +305,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

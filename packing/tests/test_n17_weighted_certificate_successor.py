@@ -141,7 +141,8 @@ def test_agreement_schema_carries_both_complete_manifests(tmp_path: Path) -> Non
     for name in ("source_faithful", "independent"):
         summary = record[name]
         assert len(summary["rows"]) == expected_rows
-        assert summary["atom_hash"] and summary["direction_hash"]
+        assert summary["atom_hash"]
+        assert summary["direction_hash"]
         assert summary["total_weight"] == record["frozen_expectations"]["total_weight"]
         assert summary["global_minimum"] == record["frozen_expectations"]["global_minimum"]
         assert record["row_minimums"][name] == [row["minimum"] for row in summary["rows"]]

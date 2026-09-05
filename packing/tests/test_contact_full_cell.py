@@ -164,7 +164,7 @@ def test_total_wall_and_pair_axis_inventories_refuse_omissions() -> None:
     assert len(replace(cell, walls=all_false_walls).walls) == 12
 
 
-@pytest.mark.parametrize("bad_id", (False, 0.0))
+@pytest.mark.parametrize("bad_id", [False, 0.0])
 def test_square_identifiers_are_exact_non_boolean_integers(bad_id: object) -> None:
     invalid = cast(int, bad_id)
     with pytest.raises(FullCellError) as part_error:
@@ -213,7 +213,7 @@ def test_axis_owner_tie_endpoint_order_and_d4_relabel_are_canonical() -> None:
 
 @pytest.mark.parametrize(
     ("symmetry", "axis", "expected_axis", "expected_positive"),
-    (
+    [
         ("identity", "u", "u", 1),
         ("identity", "v", "v", 1),
         ("rotate-90", "u", "v", 1),
@@ -230,7 +230,7 @@ def test_axis_owner_tie_endpoint_order_and_d4_relabel_are_canonical() -> None:
         ("reflect-diagonal", "v", "u", 1),
         ("reflect-antidiagonal", "u", "v", 2),
         ("reflect-antidiagonal", "v", "u", 2),
-    ),
+    ],
 )
 def test_exact_d4_axis_action_toggles_the_positive_endpoint(
     symmetry: str,

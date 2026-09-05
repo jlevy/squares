@@ -22,6 +22,7 @@ import hashlib
 import os
 import re
 import sys
+from collections.abc import Sequence
 from fractions import Fraction
 from pathlib import Path
 
@@ -141,7 +142,7 @@ def decided_here(facts: Facts, headline: Facts) -> str:
             "decides this rung with nothing outside the standard library, and rebuilds "
             "Massaccesi\u2019s $n = 17$ certificate as a known-answer control beside it."
         )
-    return "\n\n".join((routes, identity, beside))
+    return f"{routes}\n\n{identity}\n\n{beside}"
 
 
 def render_claim(facts: Facts, sibling: Facts, headline: Facts) -> str:
@@ -270,7 +271,7 @@ def documents() -> list[tuple[Path, str]]:
     return [*claims, (CARD, render_card(headline))]
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )

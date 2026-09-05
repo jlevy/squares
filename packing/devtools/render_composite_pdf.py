@@ -24,6 +24,7 @@ import argparse
 import hashlib
 import re
 import sys
+from collections.abc import Sequence
 from pathlib import Path
 
 import cairosvg
@@ -89,7 +90,7 @@ def check() -> None:
     print("composite PDF check passed: receipt matches the current composite SVG")
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--update", action="store_true", help="write the PDF")

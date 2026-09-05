@@ -20,7 +20,6 @@ import os
 import stat
 import subprocess
 import sys
-from collections.abc import Iterator
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from itertools import count
@@ -158,7 +157,7 @@ def _write_hypothesis(
 
 
 @pytest.fixture
-def tree(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Tree]:
+def tree(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Tree:
     """Point the runner's module paths at a throwaway campaign and git repository."""
     root = tmp_path / "packing"
     campaign = root / "campaign"
@@ -209,7 +208,7 @@ def tree(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Tree]:
 
     built = Tree(root=root, engine=engine, series=series)
     _write_hypothesis(built)
-    yield built
+    return built
 
 
 def _terminal_round(tree: Tree, decision: str = "rejected") -> str:
@@ -416,8 +415,9 @@ def test_record_refuses_a_forged_result_line(
     )
 
 
+@pytest.mark.usefixtures("tree")
 def test_execute_refuses_a_producer_that_prints_no_pose(
-    tree: Tree, monkeypatch: pytest.MonkeyPatch
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("RUNNER_FIXTURE_MODE", "no-pose")
     eid = runner.claim("H-900", "fixture", 1.0)
@@ -578,16 +578,17 @@ def test_commit_paths_refuses_a_commit_that_does_not_move_head(
     monkeypatch.setattr(
         runner.subprocess,
         "run",
-        lambda *a, **k: subprocess.CompletedProcess(args=a, returncode=0, stdout="", stderr=""),
+        lambda *a, **_k: subprocess.CompletedProcess(
+            args=a, returncode=0, stdout="", stderr=""
+        ),
     )
 
     with pytest.raises(runner.RefusalError, match="HEAD did not move"):
         runner.commit_paths([tree.root / "pyproject.toml"], "round: no-op")
 
 
-def test_record_refuses_when_the_ledger_refuses(
-    tree: Tree, monkeypatch: pytest.MonkeyPatch
-) -> None:
+@pytest.mark.usefixtures("tree")
+def test_record_refuses_when_the_ledger_refuses(monkeypatch: pytest.MonkeyPatch) -> None:
     eid = runner.claim("H-900", "fixture", 1.0)
     runner.execute(eid)
     monkeypatch.setattr(
@@ -602,12 +603,13 @@ def test_record_refuses_when_the_ledger_refuses(
         runner.record(eid, operator="fixture")
 
 
+@pytest.mark.usefixtures("tree")
 def test_run_releases_the_round_and_still_reports_when_a_step_refuses(
-    tree: Tree, monkeypatch: pytest.MonkeyPatch
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """A RefusalError used to escape `run`, leaving a claim and writing no report."""
 
-    def refuse(eid: str, *, operator: str) -> str:
+    def refuse(_eid: str, *, operator: str) -> str:  # noqa: ARG001 - the seam's signature
         raise runner.RefusalError("the ledger would not render")
 
     monkeypatch.setattr(runner, "record", refuse)
@@ -660,7 +662,7 @@ def test_run_reports_the_true_state_when_a_step_fails_after_the_verdict(
 ) -> None:
     """A failed commit leaves a terminal round; the session must not call it released."""
 
-    def refuse(paths: list[Path], message: str) -> str:
+    def refuse(_paths: list[Path], _message: str) -> str:
         raise runner.RefusalError("git commit failed with exit 128")
 
     monkeypatch.setattr(runner, "commit_paths", refuse)
@@ -736,7 +738,8 @@ def test_a_supervised_round_records_a_verified_verdict(tree: Tree) -> None:
     )
 
 
-def test_recording_the_same_round_twice_is_refused(tree: Tree) -> None:
+@pytest.mark.usefixtures("tree")
+def test_recording_the_same_round_twice_is_refused() -> None:
     eid = runner.claim("H-900", "fixture", 1.0)
     runner.execute(eid)
     runner.record(eid, operator="fixture")
@@ -906,7 +909,8 @@ def _unrepaired(tmp_path: Path, name: str) -> Any:
     target = tmp_path / f"unrepaired_{name}.py"
     target.write_text(source.replace(old, new, 1), encoding="utf-8")
     spec = importlib.util.spec_from_file_location(f"runner_unrepaired_{name}", target)
-    assert spec is not None and spec.loader is not None
+    assert spec is not None
+    assert spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     # `dataclasses` resolves annotations through `sys.modules[cls.__module__]`, so the
     # copy has to be registered while it executes. It is removed again immediately: the

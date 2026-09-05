@@ -38,6 +38,7 @@ exact verifier is the only thing that accepts a certificate.
 
 from __future__ import annotations
 
+import logging
 import math
 from dataclasses import dataclass, field
 from fractions import Fraction
@@ -802,8 +803,14 @@ class AdaptiveLog:
     least_cell_mass: Fraction | None = None
 
 
+logger = logging.getLogger(__name__)
+
+
 def _write(handle: TextIO | None, text: str) -> None:
-    print(text)
+    """Report one line of the adaptive run: to the log file when one was asked for, and
+    to the module logger so a caller that wants a terminal transcript configures logging
+    rather than inheriting a print."""
+    logger.info("%s", text)
     if handle is not None:
         handle.write(text + "\n")
         handle.flush()
