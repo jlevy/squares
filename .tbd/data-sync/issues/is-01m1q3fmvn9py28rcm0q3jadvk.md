@@ -5,7 +5,7 @@ title: "kpress upstream: gaps found building the certificate page"
 kind: epic
 status: open
 priority: 2
-version: 9
+version: 11
 labels: []
 dependencies: []
 parent_id: is-01m1pnpwvpjydts81pffmp1nt7
@@ -17,6 +17,8 @@ child_order_hints:
   - is-01m1q3fqyxv8v6ez73dz3p1raz
   - is-01m1qcymg4nfv2sncz0k27h99v
   - is-01m1qcymvf94m6fq8h48d63knf
+  - is-01m1qd2c9fwd6amvrxsraz7bnz
+  - is-01m1qdn2kb89asc4z98zesdzzz
 created_at: 2026-09-04T20:59:07.509Z
-updated_at: 2026-09-04T23:44:36.206Z
+updated_at: 2026-09-04T23:56:51.177Z
 ---
