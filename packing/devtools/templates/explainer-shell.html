@@ -108,18 +108,21 @@ body {
    and up to twice the ink of the digits beside it, drawn from DejaVu Sans Bold in the
    printed file while every other glyph on the line came from Source Sans 3.
 
-   Naming the weight is the whole fix. The family stays inherited: the fallback's
-   sans relation is drawn like the digits around it -- flat terminals, the same
-   geometry -- and at 400 its stroke sits close to the semibold it stands in.
-   Routing the character through the page's own KaTeX_Main instead was tried and
-   rejected on the rendering: a Computer Modern relation is a hairline beside
-   Source Sans, lighter against its neighbours than the bold was heavy, and asking
-   for KaTeX_Main at the inherited 550 only reproduces the defect one family along,
-   since KaTeX_Main ships Regular and Bold and the same upward search applies.
+   The relation is drawn from KaTeX_Main, which is already inlined in this page and
+   has the glyph. That is the point: leaving the family inherited works, and matches
+   the digits' geometry more closely, but hands the character to whatever sans the
+   reader's machine happens to supply, so the title is set differently on different
+   machines. This page is self-contained by design -- nothing is fetched at view time
+   -- and the same principle applies to a glyph resolved at read time. It also makes
+   the relation the same one KaTeX sets in the prose.
+
+   Naming the weight is not decoration. KaTeX_Main ships Regular and Bold, so at the
+   inherited 550 the same upward search that produced the original defect would pick
+   KaTeX_Main-Bold and reproduce it one family along.
 
    Every site this class marks -- the hero, the two verdict badges, the two figure
    captions -- is set at 550, so one rule serves them all. */
-.rel { font-weight: 400; }
+.rel { font-family: KaTeX_Main, serif; font-weight: 400; }
 /* Under the title: the description in sans caps, a step below the title's
    size, then the deck in the prose face, italic. */
 .cert-page .hero .subtitle {
