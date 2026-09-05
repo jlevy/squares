@@ -302,6 +302,71 @@ work did not complete, whether each block should continue, and what had been
 reprioritized. Those are not optional questions after the run; W10 makes them the
 closeout product.
 
+## OR-12: One block in four to eight is an efficiency block
+
+The cadence is counted in blocks, not in days.
+A wall-clock schedule fires when nothing has run and stays silent through a burst, and
+this campaign’s activity is bursty by construction — an overnight pass can close six
+cells while a quiet week closes none.
+So the rule is a ratio: **at least one W5 efficiency block in every four to eight blocks
+of any other kind.** Under four is usually too often to have accumulated anything worth
+measuring; over eight is where regressions start hiding.
+
+`OR-11`’s closeout is where the rule is applied, because the closeout is already the
+place a next entry is selected.
+Its replanning step counts the blocks since the last efficiency block and, at eight,
+selects a W5 regardless of what else is ranked.
+Between four and eight the closeout may select one and must say why it did not.
+
+The count is data, not memory.
+The ledger records every agenda and the workflows each of its cells declared, so “blocks
+since the last `efficiency-loop`” is computable and the closeout reads it rather than
+recalling it.
+
+Every efficiency block opens by measuring the gate — the one instrument that runs on
+every change whether or not anyone asks for it — against the ceilings its predecessors
+declared, before it takes any queued candidate.
+A tier over its ceiling becomes the block’s first cell ahead of anything else.
+
+The rule was paid for in a single afternoon.
+`validate.py` recorded its own baseline in a docstring — “Measured on 2026-08-30:
+`--fast` is 499s” — beside an 1800 s cap.
+Six days later the same tier ran 1369.60 s. Nothing objected: the number was inside the
+cap, and 499 was prose.
+Twenty-three minutes of CI on every push, for six days, found by an operator noticing
+that a wait had got long.
+The measurement that would have caught it costs about a minute
+([`agenda-023`](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md)),
+and the reason it was not taken is that nothing scheduled it.
+
+## OR-13: A block is not finished until the full gate has run on it and the session says so
+
+Three surfaces, three jobs, and only one of them is the gate.
+
+**The pull-request surface** is what CI runs on every push and it is priced to be paid
+constantly: at most four minutes, floors and record checks, no broad behavioural suite.
+**The deep surface** carries the behavioural suite and the exhaustive exact tier and
+runs where it does not block a pull request.
+**The full gate** is everything, twenty minutes and more, and it is not a thing to run
+continuously — it is the thing a block ends with.
+
+The key points are the block boundaries: the end of a research block, the closeout in
+`OR-11`, and before a pull request is marked ready for review.
+At each, the full gate runs on the commit that will be handed over.
+
+**Certification is what makes this a rule rather than an intention.** A terminal session
+record names the full-gate run in its `checks` — the tier, the commit it ran on, and its
+verdict — and a terminal session that cannot name one has not finished, whatever its
+cells say. The check is mechanical and belongs to the records gate, because a step that
+depends on someone remembering it is a step that gets skipped on the run that most
+needed it.
+
+The failure this closes is not hypothetical and not rare: it is the shape where a branch
+carries validated work, every local check a person happened to run is green, and nothing
+establishes that the whole gate ever saw the tree that was handed over.
+Twenty minutes once per block is affordable precisely because the other two surfaces
+carry the constant cost.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

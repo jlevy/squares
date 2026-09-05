@@ -167,6 +167,52 @@ agenda:
     next_evidence: >-
       Whether this campaign can hold a cost target it has written down, which every
       efficiency block so far has assumed rather than checked.
+  - id: BC-217
+    purpose: tool_validation
+    owner_focus: process
+    instances: [11]
+    state: blocked
+    priority: 1
+    question: >-
+      Can the records gate certify that the full gate actually ran on the commit a block
+      handed over, so a terminal session that cannot name one is refused?
+    budget: >-
+      60 elapsed minutes, process-review, after BC-214 has settled what the three
+      surfaces are. OR-13 states the rule; this cell is what makes it a rule rather than
+      an intention.
+      The shape: a terminal AgentSession names its full-gate run in `checks` -- the tier,
+      the commit it ran on, and the verdict -- and packing-ledger refuses a terminal
+      session that cannot. The commit matters as much as the verdict: a full gate run on
+      a tree three commits behind the handover certifies nothing about what was handed
+      over, and a check that accepts a bare "full gate: passed" is a check that will
+      accept exactly that.
+      Two negative controls, since this is a detector: a terminal session with no
+      full-gate entry must be refused, and one naming a commit that is not an ancestor of
+      the session's own branch head must be refused too.
+      The rule applies from its own introduction forward and not retrospectively: the 87
+      sessions already terminal were closed under a contract that did not ask for this,
+      and rewriting their records to satisfy a later rule would be the record disagreeing
+      with what happened. The checker names its start date and says so.
+      Kill: any design that makes the entry free-text a person composes, since that is a
+      check on prose rather than on whether the gate ran.
+    entry: >-
+      OR-13 is recorded and mirrored in AGENTS.md; BC-214 is terminal so the tiers the
+      entry names are stable.
+    exit: >-
+      A records-gate check refusing a terminal session that cannot name a full-gate run
+      on an ancestor of its own head, both negative controls firing, and the rule's start
+      date recorded so the existing corpus is not retrospectively invalid.
+    bead: think-cdf0
+    workflows: [process-review]
+    blocked_on: >-
+      BC-214, which decides what the full gate is once the surfaces are split. Certifying
+      a tier before its definition settles would pin the wrong name.
+    depends_on: [BC-214]
+    parallel_group: agenda023-gate
+    program: gate-cost
+    next_evidence: >-
+      Whether a handover can be trusted without re-running the gate to find out, which is
+      what every reviewer of every block in this campaign has had to take on faith.
 ---
 # agenda-023 — Efficiency Block: the Gate Itself
 

@@ -36,6 +36,9 @@ for each rule. Edit there, not here.
 - **OR-9:** A pull request leads with what the branch cost.
 - **OR-10:** Treat matched agent and host handoffs as continuation, not a reset.
 - **OR-11:** Close an agenda through disposition and reprioritization.
+- **OR-12:** One block in four to eight is an efficiency block.
+- **OR-13:** A block is not finished until the full gate has run on it and the session
+  says so.
 
 <!-- END OPERATING RULES SUMMARY -->
 
