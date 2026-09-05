@@ -21,11 +21,12 @@ to the case's lower bound. It is an upper bound on the prize and not a forecast:
 a search actually reaches is set by the covering value at that side, which is lower.
 
 A second join adds what the record now shows about that gap between prize and
-reach: every retained certificate lands within 0.001 of the same fraction of its
-case's best known packing. That regularity is measured from three points, not
-proved, and the document says so plainly where it appears -- see
-`measured_attainment` and `predicted_reach` for where the two figures it produces,
-`ratio` and `predicted`, come from.
+reach: the three packing-limited certificates land within 0.001 of the same fraction
+of their cases' best known packings. The fourth retained certificate is
+ceiling-limited and is excluded from that comparison. The regularity is measured
+from three points, not proved, and the document says so plainly where it appears --
+see `measured_attainment` and `predicted_reach` for where the two figures it
+produces, `ratio` and `predicted`, come from.
 
 Usage:
     uv run --frozen python -m devtools.render_certificate_reach
@@ -60,14 +61,57 @@ BANNER = (
 )
 
 # Massaccesi's net, which every retained certificate uses: 181 half-tangents from 0 to
-# tan(pi/8) rounded down. D is about T / K, so refining the net raises the ceiling only
-# as fast as K grows.
+# a rational just above tan(pi/8). D is about T / K, so refining the net raises the
+# ceiling only as fast as K grows.
 ANGLE_LIMIT = Fraction(207107, 500000)
 DIRECTION_STEPS = 180
 NET = tuple(ANGLE_LIMIT * k / DIRECTION_STEPS for k in range(DIRECTION_STEPS + 1))
 
 LOWER = re.compile(r"verified_lower_bound:\s*\n\s*value: '([^']+)'")
 UPPER = re.compile(r"reported_upper_bound:\s*\n\s*value: '([^']+)'")
+
+#: What the record reports for the covering program, in side order, and what this
+#: repository still holds beside each report. The reported values are quotations --
+#: from `results.yaml`'s own accounts of T-018 and T-020, from agenda-019's target
+#: list, and from X-013's confirmation of six of them -- and nothing here can
+#: recompute them: no covering-search run log or solver checkpoint was retained for
+#: any of the seven. What can be recomputed is the certificate frozen at that side,
+#: where one is, and that is a feasible mass rather than an optimum. The third field
+#: is that artifact's path under ``cases/``, or ``None`` where nothing was frozen.
+REPORTED_COVERING_VALUES: tuple[tuple[str, str, str | None, str], ...] = (
+    ("3.82", "11.0000", None, "result narrative only; no raw run, nothing frozen here"),
+    (
+        "3.95",
+        "11.9706",
+        "n12_fractional_certificate/certificate-79-20.json",
+        "the reported value is this mass to four places, not a separate measured optimum",
+    ),
+    (
+        "3.96",
+        "11.9936",
+        "n12_fractional_certificate/certificate.json",
+        "the reported objective itself has no raw run",
+    ),
+    (
+        "4.58",
+        "16.9628",
+        "n17_fractional_certificate/certificate-229-50.json",
+        "the reported objective itself has no raw run",
+    ),
+    (
+        "4.59",
+        "16.9303",
+        "n17_fractional_certificate/certificate.json",
+        "the reported objective itself has no raw run",
+    ),
+    ("4.68", "18.0000", None, "three site sets reported; no raw run, nothing frozen here"),
+    (
+        "4.80",
+        "18.916941",
+        "n20_fractional_certificate/certificate.json",
+        "the reported objective itself has no raw run",
+    ),
+)
 
 
 def cases() -> list[dict]:
@@ -85,9 +129,12 @@ def cases() -> list[dict]:
         if ceiling <= low:
             verdict, prize = "foreclosed", 0.0
         elif up is not None and ceiling >= up:
-            verdict, prize = "packing", up - low
+            # Clamped because the two endpoints are parsed from different records: a
+            # case whose packing sits exactly at its lower bound must read +0.0000,
+            # never a negative zero from the last bit of a float subtraction.
+            verdict, prize = "packing", max(up - low, 0.0)
         else:
-            verdict, prize = "ceiling", ceiling - low
+            verdict, prize = "ceiling", max(ceiling - low, 0.0)
         rows.append(
             {
                 "n": n,
@@ -100,6 +147,55 @@ def cases() -> list[dict]:
             }
         )
     return rows
+
+
+def load_certificate(path: pathlib.Path) -> tuple[dict, Fraction]:
+    """A certificate record and the mass recomputed from its own atoms.
+
+    The recomputation is the point: a certificate's mass is what its atoms sum to,
+    and the stored ``total_mass`` field is a convenience that can go stale against
+    them. Here it is checked rather than trusted, because every figure this document
+    keys off that mass -- which case a certificate moves first (`least_size_certified`),
+    and the feasible masses the reported-value table quotes -- would be wrong together
+    if the field and the atoms ever disagreed. `devtools.check_rung_figures` makes the
+    same check for the figures the results register quotes; this is the same rule at
+    the one other place the mass is read.
+    """
+    record = json.loads(path.read_text())
+    total_mass = Fraction(str(record["total_mass"]))
+    atom_mass = sum((Fraction(str(atom[2])) for atom in record["atoms"]), Fraction())
+    if atom_mass != total_mass:
+        try:
+            display = path.relative_to(ROOT)
+        except ValueError:
+            display = path
+        raise ValueError(
+            f"{display}: declared total_mass {total_mass} does not equal atom sum {atom_mass}"
+        )
+    return record, atom_mass
+
+
+def reported_covering_values() -> list[dict]:
+    """`REPORTED_COVERING_VALUES`, with each artifact's atom count and mass recomputed.
+
+    The masses are read out of the frozen JSON at render time rather than written into
+    the table by hand, so no row can quote a figure the artifact beside it does not
+    have. A path that no longer resolves raises rather than rendering a blank cell:
+    this table's subject is what the repository retains, and a vanished artifact is a
+    change to that answer, not a missing detail.
+    """
+    out = []
+    for side, reported, artifact, note in REPORTED_COVERING_VALUES:
+        if artifact is None:
+            evidence = note
+        else:
+            record, mass = load_certificate(CASES / artifact)
+            evidence = (
+                f"frozen {len(record['atoms']):,}-atom certificate, "
+                f"feasible mass {float(mass):.6f}; {note}"
+            )
+        out.append({"side": side, "reported": reported, "evidence": evidence})
+    return out
 
 
 def retained_certificates() -> list[dict]:
@@ -121,8 +217,7 @@ def retained_certificates() -> list[dict]:
     """
     rows = []
     for path in sorted(CASES.glob("n*_fractional_certificate/certificate.json")):
-        record = json.loads(path.read_text())
-        total_mass = Fraction(str(record["total_mass"]))
+        record, total_mass = load_certificate(path)
         outer_side = Fraction(str(record["outer_side"]))
         rows.append(
             {
@@ -222,22 +317,36 @@ def render(rows: list[dict]) -> str:
         "**`prize` is what the ceiling allows, not what a search will reach.** The real",
         "limit is the covering value: a certificate exists at side `L` only where the",
         "least total mass that covers every admissible `B`-square falls below `n`, and",
-        "that value is well below the ceiling wherever the ceiling is loose. Four",
-        "restricted optima have been measured, each an upper bound on the covering value",
-        "at its side:",
+        "that value can bind well below the ceiling. Seven values have been reported for",
+        "the restricted program, at seven sides, each at best an upper bound on the",
+        "unrestricted covering value there. What survives here beside each one is a frozen",
+        "certificate or nothing at all:",
         "",
-        "| side | restricted optimum | from |",
+        "| side | reported value | evidence retained here |",
         "| ---: | ---: | --- |",
-        "| 3.82 | 11.0000 | converged, n = 11 |",
-        "| 3.95 | 11.9706 | retained certificate's mass, n = 12 |",
-        "| 3.96 | 11.9936 | converged, n = 12 |",
-        "| 4.58 | 16.9628 | converged, n = 17 |",
+    ]
+    out += [
+        f"| {row['side']} | {row['reported']} | {row['evidence']} |"
+        for row in reported_covering_values()
+    ]
+    out += [
         "",
-        "Those four are the whole of what is known about how the covering value grows.",
-        "They are consistent with a quadratic in the side, which would put the reach well",
-        "below the `packing` rows below — but four points and a fitted curve are not a",
-        "measurement, and no rung has ever been claimed from one. Rank on `prize` to",
-        "choose where to look; measure before believing any of it.",
+        "No covering-search run log or solver checkpoint was retained for any of the",
+        "seven, so not one of the reported values can be recomputed here. What a frozen",
+        "certificate recomputes is its own feasible mass — a total that covers every",
+        "admissible `B`-square at that side, and so an upper bound on the covering value",
+        "there, rather than the objective a search reported. Only the `3.95` row's",
+        "reported value is its artifact's own mass; at `3.96`, `4.58`, `4.59` and `4.80`",
+        "the artifact's mass and the reported objective are different numbers.",
+        "",
+        "The seven are also reports of different kinds rather than one series measured",
+        "the same way. At `3.82` a grid-built site set ran its row loop to convergence; at",
+        "`4.80` the run was halted at round 9 on projected cost; at `4.68` it was stopped",
+        "before it could separate a covering value at eighteen from a site set still short",
+        "of one. Seven heterogeneous reports across a side band 0.98 wide do not support a",
+        "growth trend or a fitted curve, and no rung in this register has ever been",
+        "claimed from one. Rank on `prize` to choose where to look; measure and retain the",
+        "run before believing any extrapolation.",
         "",
     ]
     live = [r for r in rows if r["verdict"] != "foreclosed"]

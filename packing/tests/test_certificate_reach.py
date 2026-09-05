@@ -10,13 +10,22 @@ the arithmetic built on it, rather than pinning values by hand.
 
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
+import pytest
+
+import devtools.render_certificate_reach as reach
 from devtools.render_certificate_reach import (
+    CASES,
     OUT,
     cases,
+    load_certificate,
     mean_packing_ratio,
     measured_attainment,
     predicted_reach,
     render,
+    reported_covering_values,
     retained_certificates,
 )
 
@@ -39,6 +48,43 @@ def test_retained_certificates_are_found_by_globbing_the_case_packages() -> None
     }
     keyed_n = {row["package"]: row["n"] for row in retained}
     assert keyed_n["n20_fractional_certificate"] == 19
+
+
+def test_retained_certificate_mass_is_recomputed_from_its_atoms(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A stale declared mass cannot silently key a certificate to the wrong case."""
+    package = tmp_path / "n2_fractional_certificate"
+    package.mkdir()
+    (package / "certificate.json").write_text(
+        json.dumps({"outer_side": "1", "total_mass": "1", "atoms": [["0", "0", "2"]]}),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(reach, "CASES", tmp_path)
+    with pytest.raises(ValueError, match="declared total_mass 1 does not equal atom sum 2"):
+        reach.retained_certificates()
+
+
+def test_reported_rows_quote_the_mass_their_own_artifact_recomputes() -> None:
+    """The evidence column is a retention claim: every artifact it names must resolve."""
+    rows = {row["side"]: row["evidence"] for row in reported_covering_values()}
+    assert set(rows) == {"3.82", "3.95", "3.96", "4.58", "4.59", "4.68", "4.80"}
+    for side, artifact in (
+        ("3.95", "n12_fractional_certificate/certificate-79-20.json"),
+        ("4.80", "n20_fractional_certificate/certificate.json"),
+    ):
+        _, mass = load_certificate(CASES / artifact)
+        assert f"feasible mass {float(mass):.6f}" in rows[side]
+    # The two sides with no artifact say so rather than borrowing a neighbour's figure.
+    assert "nothing frozen here" in rows["3.82"]
+    assert "nothing frozen here" in rows["4.68"]
+
+
+def test_prizes_are_nonnegative_and_never_render_negative_zero() -> None:
+    """Independent float parsing cannot turn an equal endpoint into `-0.0000`."""
+    rows = cases()
+    assert all(row["prize"] >= 0.0 for row in rows)
+    assert all(f"{row['prize']:+.4f}" != "-0.0000" for row in rows)
 
 
 def test_three_packing_limited_ratios_sit_inside_a_tight_band() -> None:
