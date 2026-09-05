@@ -36,8 +36,7 @@ The previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist's in {{PRIOR_YEAR}}.[^st
 The **square packing problem** asks, for each $n$, for $s(n)$, the side of the smallest
 square that holds $n$ unit squares with disjoint interiors, the squares free to
 rotate.[^survey] The value is known for every $n \le 10$. Stromquist settled
-$s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}},[^stromquist] and $s(11)$ is the smallest
-case still open.
+$s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 
 <figure>
   <div class="fig-head">
@@ -54,6 +53,7 @@ case still open.
 
 ## Packing 11 Squares
 
+$s(11)$ is the smallest case still open.
 Trump’s 1979 packing[^trump] shows $s(11) \le {{BEST_PACKING_TEX}}$. This page proves
 $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
 
