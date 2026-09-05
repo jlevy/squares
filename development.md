@@ -581,6 +581,51 @@ s on a contended four-core box the same day.
 The target was the operator’s own: a pull-request-blocking surface of at most four
 minutes.
 
+### What a deep run repeats, and what that licenses
+
+The deep surface runs on every push to `main`, on the daily schedule and on dispatch,
+and nothing about it is scoped to the change.
+How much of it repeats work whose inputs did not move is a measurement, and it has a
+tool rather than an opinion:
+
+```shell
+uv run --frozen --all-extras --group dev packing-validate --format json > run.json
+uv run --frozen --all-extras --group dev python -m devtools.measure_gate_repetition \
+    --timings run.json --days 30 --attribution
+```
+
+It prices every deep run in a window against the run before it, taking reachability from
+`Step.touches` and seconds from a real run summary.
+A step the summary does not price, prices twice over, or records as skipped is a
+refusal, because a step priced at zero repeats for free by arithmetic rather than by
+evidence.
+
+Three of its numbers, measured on 2026-09-05 over thirty days, set the shape of any skip
+rule and none of them is about `touches`:
+
+- **13 of 70 deep runs ran against a tree that had not moved** since the run before
+  them. Every one of those repeated the whole gate.
+- **53 of 55 merges to `main` carried a tree byte-identical to the pull-request head**
+  merged, so the pull-request surface had already run against exactly those bytes.
+- **8 of the 64 steps declare no `touches` at all**, deliberately, and they are the
+  expensive ones — so `touches` cannot prune the deep surface by cost.
+  The escape hatch that protects a mis-declared pattern is reachable by 17 of 1,933
+  tracked files, 0.9 per cent, which is far less protection than its own docstring
+  assumes.
+
+**The exact content address here is the git tree id, not a pattern.** Equal tree ids
+mean equal bytes for every tracked file, including the code that does the verifying —
+which is strictly stronger than hashing the artifacts a step reads.
+**But it addresses only the tree**, and three steps in this gate answer to something
+else: `campaign record` reads the wall clock and three of its refusals become true with
+time alone (an expired lease, a passed session deadline, a passed delegation deadline),
+`bead tree` reads the bead store in `.git/tbd/data-sync-worktree`, which is not in any
+tree, and `provenance: recorded commits are reachable` reads the git graph and the clone
+depth — `D-226` is the run where CI discarded the history its own provenance gate
+needed. A rule that skips on tree identity has to keep running those three.
+`tests/test_gate_repetition.py` holds the clock counter-example as an assertion rather
+than a paragraph.
+
 ### Codex research-loop rollups
 
 Use the recursive JSONL scanner when a clocked research session is slow, after a

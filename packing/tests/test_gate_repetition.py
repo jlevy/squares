@@ -18,7 +18,6 @@ from pathlib import Path
 import pytest
 
 from devtools.measure_gate_repetition import (
-    DEFAULT_DAYS,
     MeasurementError,
     Trigger,
     attribution_reach,
@@ -30,9 +29,15 @@ from devtools.measure_gate_repetition import (
     repetition_for_changes,
     schedule_triggers,
 )
+from sqpack.campaign import ledger
 from sqpack.cli.validate import STEPS
 
 TRIGGER = Trigger(kind="push", when=datetime(2026, 9, 5, tzinfo=UTC), commit="beef")
+#: A short window for the two tests that walk the real graph. `DEFAULT_DAYS` is the
+#: reporting window; here the point is that the path works, and each extra day costs
+#: git calls that would push these toward the quick lane's per-test ceiling on a
+#: slower runner for no extra assurance.
+WALK_DAYS = 14
 
 
 def _summary(path: Path, prices: dict[str, float], *, skipped: tuple[str, ...] = ()) -> Path:
@@ -215,7 +220,7 @@ def test_a_window_with_no_interval_is_refused() -> None:
 
 def test_the_measurement_runs_over_this_repository() -> None:
     """The end-to-end path, on the real graph: every row prices the same whole gate."""
-    rows = measure(prices=_unit_prices(), days=DEFAULT_DAYS, schedule=False)
+    rows = measure(prices=_unit_prices(), days=WALK_DAYS, schedule=False)
     assert rows
     assert all(row.total_seconds == pytest.approx(float(len(STEPS))) for row in rows)
     assert all(row.repeated_seconds <= row.total_seconds for row in rows)
@@ -234,7 +239,50 @@ def test_merge_tree_identity_agrees_with_the_diff() -> None:
     """The exact content address, checked against the other way of asking. A merge whose
     tree equals its pull-request head's must also show an empty diff against it; if those
     two ever disagreed, the tree id would not be the address it is being used as."""
-    rows = merge_identity(days=DEFAULT_DAYS)
+    rows = merge_identity(days=WALK_DAYS)
     assert rows
     for row in rows:
         assert row.identical == (changed_between(row.head, row.merge) == ())
+
+
+def test_the_campaign_record_verdict_is_not_a_function_of_the_tree_alone() -> None:
+    """The counter-example that bounds every unmoved-tree skip rule, checked rather than
+    asserted.
+
+    `BC-215` measured that 13 of 70 deep runs in thirty days ran against a tree that had
+    not moved, and the obvious rule is to skip them. This is why the rule cannot be
+    "skip the run": the `campaign record` step reads the wall clock, and three of its
+    refusals are *anti*-monotone in it -- an expired lease, a passed session deadline
+    and a passed delegation deadline all become true with time alone. So a tree that
+    was green yesterday can be red today with no byte changed, and the scheduled run is
+    the only thing that would say so.
+
+    Same input, two clocks, two verdicts. The session here is synthetic so the assertion
+    does not depend on which real session happens to be open on the day.
+    """
+    session = {
+        "_path": Path("session-999-synthetic.md"),
+        "id": "session-999",
+        "status": "in_progress",
+        "started_at": "2026-09-05T00:00:00Z",
+        "deadline_at": "2026-09-05T04:00:00Z",
+        "budget": {"wall_minutes": 240},
+        "workflow_phases": [
+            {
+                "workflow": "efficiency-loop",
+                "entered_by": "session_start",
+                "status": "in_progress",
+            }
+        ],
+    }
+
+    def verdict(now: datetime) -> list[str]:
+        return ledger.check([], [], [], [], [session], agendas=[], now=now, logbook_entries=[])
+
+    passed = "session-999-synthetic.md: in-progress session deadline_at has passed"
+    # Naive UTC, because that is what `ledger.main` passes and the comparison it
+    # reaches is written against it.
+    before = datetime(2026, 9, 5, 1, tzinfo=UTC).replace(tzinfo=None)
+    after = datetime(2026, 9, 6, 1, tzinfo=UTC).replace(tzinfo=None)
+    assert passed not in verdict(before)
+    assert passed in verdict(after)
