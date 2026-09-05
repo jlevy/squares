@@ -187,7 +187,18 @@ exclude = [
 # Types
 
 [tool.basedpyright]
-include = ["src/sqpack", "cases", "devtools", "benchmarks", "tests"]
+include = [
+    "src/sqpack",
+    "cases",
+    "devtools",
+    "benchmarks",
+    "tests",
+    "frankensim-probe",
+    # The hand-written skill assets at the repository root are project Python too; the
+    # gate runs from this directory, so they are reached by a parent path. `.claude/skills`
+    # is a byte-identical mirror kept by `make skills-sync`, so it is not listed twice.
+    "../.agents/skills",
+]
 exclude = [
     "**/__pycache__",
     "resources",

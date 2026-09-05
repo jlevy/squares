@@ -178,20 +178,25 @@ So make the reservation a marker directory named for the id.
 import re
 from pathlib import Path
 
+
 def claim(experiments: Path, markers: Path, slug: str, body: str) -> Path:
     """Allocate the next free experiment id and write the claim."""
     experiments.mkdir(parents=True, exist_ok=True)
     markers.mkdir(parents=True, exist_ok=True)
 
-    seen = [int(m.group(1)) for p in experiments.glob("exp-*.md")
-            if (m := re.match(r"exp-(\d{3})-", p.name))]
-    seen += [int(m.group(1)) for d in markers.iterdir()
-             if (m := re.match(r"exp-(\d{3})$", d.name))]
+    seen = [
+        int(m.group(1))
+        for p in experiments.glob("exp-*.md")
+        if (m := re.match(r"exp-(\d{3})-", p.name))
+    ]
+    seen += [
+        int(m.group(1)) for d in markers.iterdir() if (m := re.match(r"exp-(\d{3})$", d.name))
+    ]
     nid = max(seen, default=0) + 1
 
     while True:
         try:
-            (markers / f"exp-{nid:03d}").mkdir()   # atomic; exactly one racer wins
+            (markers / f"exp-{nid:03d}").mkdir()  # atomic; exactly one racer wins
         except FileExistsError:
             nid += 1
             continue

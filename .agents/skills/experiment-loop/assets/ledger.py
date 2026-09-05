@@ -138,13 +138,10 @@ def naming(series, explorations, hypotheses, experiments) -> list[str]:
             # A series is named by its directory; everything else by its own filename.
             stem = path.parent.name if path.name == "README.md" else path.stem
             claimed = item["id"]
-            expected = claimed if not stem.startswith("series-") else claimed
-            if not stem.startswith(expected + "-"):
-                problems.append(
-                    f"{stem}: name does not start with its id {claimed!r}"
-                )
+            if not stem.startswith(claimed + "-"):
+                problems.append(f"{stem}: name does not start with its id {claimed!r}")
                 continue
-            slug = stem[len(expected) + 1:]
+            slug = stem[len(claimed) + 1 :]
             if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", slug):
                 problems.append(f"{stem}: slug {slug!r} is not kebab-case")
     return problems
@@ -188,11 +185,11 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
 
     # Every round names a series that exists, and only one series is open.
     series_ids = {s["id"] for s in series}
-    for experiment in experiments:
-        if experiment.get("series") not in series_ids:
-            problems.append(
-                f"{experiment['_path'].name}: unknown series {experiment.get('series')}"
-            )
+    problems.extend(
+        f"{experiment['_path'].name}: unknown series {experiment.get('series')}"
+        for experiment in experiments
+        if experiment.get("series") not in series_ids
+    )
     open_series = [s["id"] for s in series if s.get("status") == "open"]
     if len(open_series) > 1:
         problems.append(f"more than one open series: {', '.join(open_series)}")
@@ -202,19 +199,19 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
         referenced = experiment.get("hypotheses") or []
         if not referenced:
             problems.append(f"{experiment['_path'].name}: references no hypothesis")
-        for hypothesis_id in referenced:
-            if hypothesis_id not in known:
-                problems.append(
-                    f"{experiment['_path'].name}: references unknown {hypothesis_id}"
-                )
+        problems.extend(
+            f"{experiment['_path'].name}: references unknown {hypothesis_id}"
+            for hypothesis_id in referenced
+            if hypothesis_id not in known
+        )
 
     reports = {x["id"] for x in explorations}
     for hypothesis in hypotheses:
-        for report_id in hypothesis.get("derived_from") or []:
-            if report_id not in reports:
-                problems.append(
-                    f"{hypothesis['_path'].name}: derived_from unknown {report_id}"
-                )
+        problems.extend(
+            f"{hypothesis['_path'].name}: derived_from unknown {report_id}"
+            for report_id in hypothesis.get("derived_from") or []
+            if report_id not in reports
+        )
 
     # The board is hand-written, so it is reconciled rather than regenerated. Both
     # directions matter: a board ahead of the registry points at nothing, and a
@@ -224,24 +221,28 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
         problems.append("no ideas.md: the campaign has no orientation page")
     else:
         on_board, reserved = board
-        for hypothesis_id in sorted(on_board - known - reserved):
-            problems.append(f"ideas.md: names {hypothesis_id}, which is not in the registry")
-        for hypothesis_id in sorted(known - on_board):
-            problems.append(f"ideas.md: does not mention {hypothesis_id}")
+        problems.extend(
+            f"ideas.md: names {hypothesis_id}, which is not in the registry"
+            for hypothesis_id in sorted(on_board - known - reserved)
+        )
+        problems.extend(
+            f"ideas.md: does not mention {hypothesis_id}"
+            for hypothesis_id in sorted(known - on_board)
+        )
         # A reservation that has been fulfilled is stale and must be retired, or the
         # board keeps claiming an id is unwritten after it has been written.
-        for hypothesis_id in sorted(reserved & known):
-            problems.append(
-                f"ideas.md: {hypothesis_id} is declared reserved but is now in the registry"
-            )
+        problems.extend(
+            f"ideas.md: {hypothesis_id} is declared reserved but is now in the registry"
+            for hypothesis_id in sorted(reserved & known)
+        )
         # Reserved ids are exempt from the dangling-reference check, which means a
         # LINK to one would otherwise pass silently -- the board would assert a
         # reserved id is registered. Exempt from existence, not from being linked.
         linked = set(re.findall(r"\[(H-[0-9]{3})\]\(", IDEAS.read_text()))
-        for hypothesis_id in sorted(linked & reserved):
-            problems.append(
-                f"ideas.md: {hypothesis_id} is reserved, so it must not be a link target"
-            )
+        problems.extend(
+            f"ideas.md: {hypothesis_id} is reserved, so it must not be a link target"
+            for hypothesis_id in sorted(linked & reserved)
+        )
 
     # Cross-field verdict rules. These could be `allOf` conditionals in the schema
     # (softschema 0.8.0 lifted the old 0.6.2 refusal), and stay here by convention:
@@ -252,9 +253,11 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
         verdict = experiment.get("verdict") or {}
         decision = verdict.get("decision")
         if decision == "abandoned":
-            for field in ("budget_spent", "best_reached", "reopen_when"):
-                if not verdict.get(field):
-                    problems.append(f"{name}: abandoned without {field}")
+            problems.extend(
+                f"{name}: abandoned without {field}"
+                for field in ("budget_spent", "best_reached", "reopen_when")
+                if not verdict.get(field)
+            )
         if decision == "superseded" and not verdict.get("superseded_by"):
             problems.append(f"{name}: superseded without superseded_by")
         if decision != "in-progress":
@@ -317,14 +320,26 @@ def render(series, explorations, hypotheses, experiments) -> str:
 
     lines = [BANNER, "", "# Experiment ledger", ""]
 
-    lines += ["## Series", "", "| id | status | title | rounds | opened because |", "| --- | --- | --- | --- | --- |"]
+    lines += [
+        "## Series",
+        "",
+        "| id | status | title | rounds | opened because |",
+        "| --- | --- | --- | --- | --- |",
+    ]
     for s in sorted(series, key=lambda s: s["id"]):
         rounds = sum(1 for e in experiments if e.get("series") == s["id"])
         because = s.get("opened_because", "").replace("\n", " ").strip()
-        lines.append(f"| {s['id']} | {s['status']} | {s['title']} | {rounds} | {because[:50]} |")
+        lines.append(
+            f"| {s['id']} | {s['status']} | {s['title']} | {rounds} | {because[:50]} |"
+        )
     lines.append("")
 
-    lines += ["## Registry", "", "| id | status | lane | claim | sweep | rounds |", "| --- | --- | --- | --- | --- | --- |"]
+    lines += [
+        "## Registry",
+        "",
+        "| id | status | lane | claim | sweep | rounds |",
+        "| --- | --- | --- | --- | --- | --- |",
+    ]
     for hypothesis in sorted(hypotheses, key=lambda h: h["id"]):
         rounds = by_hypothesis.get(hypothesis["id"], [])
         claim = hypothesis["claim"].replace("\n", " ").strip()
@@ -336,18 +351,20 @@ def render(series, explorations, hypotheses, experiments) -> str:
 
     lines += ["", "## Rounds", ""]
     for decision in DECISION_ORDER:
-        matching = [
-            e for e in experiments if e.get("verdict", {}).get("decision") == decision
-        ]
+        matching = [e for e in experiments if e.get("verdict", {}).get("decision") == decision]
         if not matching:
             continue
         lines += [f"### {decision} ({len(matching)})", ""]
-        lines += ["| id | series | instance | operator | hypotheses | reason |", "| --- | --- | --- | --- | --- | --- |"]
+        lines += [
+            "| id | series | instance | operator | hypotheses | reason |",
+            "| --- | --- | --- | --- | --- | --- |",
+        ]
         for experiment in sorted(matching, key=lambda e: e["id"]):
             verdict = experiment["verdict"]
             instance = experiment.get("instance") or {}
             lines.append(
-                f"| {experiment['id']} | {experiment.get('series', '')} | {instance.get('point', '')} "
+                f"| {experiment['id']} | {experiment.get('series', '')} "
+                f"| {instance.get('point', '')} "
                 f"| {experiment.get('method', {}).get('operator', '')} "
                 f"| {', '.join(experiment.get('hypotheses') or [])} "
                 f"| {verdict['reason'].replace(chr(10), ' ').strip()} |"
@@ -364,7 +381,7 @@ def render(series, explorations, hypotheses, experiments) -> str:
 
 
 def main() -> int:
-    now = dt.datetime.now(dt.timezone.utc).replace(tzinfo=None)
+    now = dt.datetime.now(dt.UTC).replace(tzinfo=None)
     series = load(ROOT / "series", "series", "*/README.md")
     explorations = load(ROOT / "explorations", "exploration")
     hypotheses = load(ROOT / "hypotheses", "hypothesis")
