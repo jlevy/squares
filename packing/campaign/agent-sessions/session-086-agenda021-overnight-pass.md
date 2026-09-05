@@ -179,6 +179,7 @@ session:
     - packing/tests/test_trump_isolation_radius.py
     - packing/campaign/series/series-000-smoke-and-calibration/results/bc-199-trump-isolation-radius.json
     checks:
+  - 'pytest tests/test_bench_colgen.py: 7 passed'
     - 'uv run --frozen --all-extras --group dev pytest tests/test_trump_isolation_radius.py -q: 6 passed'
     - 'ruff check, ruff format --check, basedpyright: clean on both files'
     - 'coordinator: rho_0 = 2 kappa_min / K re-derived from the reported kappa and K'
@@ -253,20 +254,32 @@ session:
       rule in the container side, the default rationalisation scale with its measured
       verification cost, and the core budget.
     operator: sub-agent at the thinking level BC-191 declares, one core
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Complete at 55 of 120 minutes. No warm start exists in solve_lp; cost per LP round
+      fits 0.0189 L^3.657; the site-density rule count = round((L - 2 inset) d / B) + 1
+      with d = (8.5, 11.5, 14.25) is exposed as site_counts_for_side; DEFAULT_SCALE is
+      raised to 4,000,000 at flat verification cost; verify(workers=None) never consults
+      PACK_JOBS, which explains agenda 017's load 10.6.
+    evidence:
+    - packing/devtools/bench_colgen.py
+    - packing/tests/test_bench_colgen.py
+    files:
+    - packing/devtools/bench_colgen.py
+    - packing/tests/test_bench_colgen.py
+    - packing/src/sqpack/fractional/colgen.py
+    checks:
+    - 'pytest tests/test_bench_colgen.py: 7 passed; test_fractional_generate.py still passes'
+    - 'ruff check, ruff format --check, basedpyright: clean on the three files'
     uncertainty: >-
-      Single measurement runs are capped at ten minutes; the crossover may sit outside
-      what those runs reach at the larger sides.
-    elapsed_seconds: null
-    elapsed_quality: null
+      The cost model is fitted on four sides inside ten-minute runs; the density rule's
+      optimum was located at two sides and is applied at a third.
+    elapsed_seconds: 3258
+    elapsed_quality: platform_measured
     next_action: >-
-      Report the three benchmark records and the rule; then BC-202 at 138/25 if the
-      pricing allows.
+      BC-202 dispatched on the same lane at 07:47 UTC: the model prices a column round
+      at 580 to 870 s, inside the cell's wall, so the run opens.
     phase: 2
     budget_minutes: 120
     started_at: '2026-09-05T06:48:00Z'
@@ -286,7 +299,47 @@ session:
     excluded_commands:
     - git commit
     - git push
+  - task: >-
+      Lane C, BC-202: the n = 26 column-generation run at 138/25 with BC-191's density
+      rule (40, 53, 66) and scale 4,000,000, carried to convergence rather than a clock.
+    operator: sub-agent at the thinking level BC-202 declares, one core
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: >-
+      A column round is priced at 580 to 870 s by a model fitted below this side; the
+      loop may be time-limited before it converges, which is an outcome the cell
+      names.
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: >-
+      Report the per-round table and whether the loop converged; the coordinator
+      decides any frozen candidate through the gate.
+    phase: 2
+    budget_minutes: 170
+    started_at: '2026-09-05T07:47:00Z'
+    deadline_at: '2026-09-05T10:37:00Z'
+    expected_output: >-
+      A converged restricted optimum at 138/25 with its least covered mass and cost per
+      round, and a frozen candidate under packing/cases/n26_fractional_certificate/ if
+      the optimum is below 26; or a time-limited checkpoint with the value reached.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev python -m devtools.decide_certificate packing/cases/n26_fractional_certificate/certificate.json
+    kill_condition: The cell's own wall; a run that cannot converge is time-limited, not killed.
+    fallback: Keep the checkpoint for BC-209; report the value reached, no ratio.
+    write_scope:
+    - packing/cases/n26_fractional_certificate/
+    - packing/devtools/
+    - packing/tests/
+    excluded_commands:
+    - devtools.decide_certificate
+    - git commit
+    - git push
   outputs:
+  - packing/devtools/bench_colgen.py
   - packing/cases/trump11/isolation_radius.py
   - packing/campaign/series/series-000-smoke-and-calibration/results/bc-199-trump-isolation-radius.json
   checks:
