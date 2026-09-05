@@ -48,6 +48,7 @@ from devtools.check_rung_figures import (
     movement_problems,
     pick_retained,
     resolve_certificates,
+    retained_pointer_problems,
     round_to,
     superseded_rung_problems,
 )
@@ -390,9 +391,63 @@ def test_retained_is_the_file_literally_named_certificate_json() -> None:
     assert pick_retained([historical, retained_figures]) is retained_figures
     assert pick_retained([retained_figures, historical]) is retained_figures
 
-    # No file is literally named certificate.json: fall back to the first resolved.
-    assert pick_retained([historical]) is historical
+    # No file is literally named certificate.json: never read history as the current
+    # rung. Two live pointers are ambiguous rather than settled by declaration order.
+    assert pick_retained([historical]) is None
     assert pick_retained([]) is None
+    assert pick_retained([retained_figures, retained_figures]) is None
+
+
+def test_a_result_that_has_lost_its_live_pointer_is_refused() -> None:
+    """F41: `pick_retained` used to fall back to the first resolved certificate, so a
+    result whose `certificate.json` went missing would elect a historical rung as "the
+    retained certificate" and check every unqualified figure against it. The immutable
+    file agrees with whatever the prose said when the ladder was there, so the whole
+    result would pass against the wrong artifact. The refusal names the missing path."""
+    probe = copy.deepcopy(_result("T-019"))
+    probe["artifacts"] = [
+        artifact
+        for artifact in probe["artifacts"]
+        if not artifact.endswith("/certificate.json")
+    ]
+
+    retained, _, resolved = resolve_certificates(probe)
+    assert retained is None
+    assert len(resolved) == 2
+
+    problems, checked = check_result(probe)
+    assert checked == 2
+    # The ladder count moves with the artifact list, so it objects too; the pointer
+    # refusal is the one under test.
+    pointer = [problem for problem in problems if "no live certificate.json" in problem]
+    assert len(pointer) == 1
+    assert pointer[0].startswith("T-019: no live certificate.json")
+    assert "expected packing/cases/n17_fractional_certificate/certificate.json" in pointer[0]
+
+
+def test_a_result_declaring_two_live_pointers_is_refused() -> None:
+    """A second live basename is ambiguous, not a race the first declaration wins."""
+    probe = copy.deepcopy(_result("T-020"))
+    probe["artifacts"].append("packing/cases/n17_fractional_certificate/certificate.json")
+
+    retained, _, resolved = resolve_certificates(probe)
+    assert retained is None
+    assert len(resolved) == 2
+
+    problems, checked = check_result(probe)
+    assert checked == 2
+    pointer = [problem for problem in problems if "live certificate.json pointers" in problem]
+    assert len(pointer) == 1
+    assert pointer[0].startswith("T-020: declares 2 live certificate.json pointers")
+    assert "exactly one is required" in pointer[0]
+
+
+def test_every_certificate_bearing_result_has_its_live_pointer() -> None:
+    """The premise the two refusals above edit away from, read off the live register."""
+    document = safe_load(RESULTS.read_text(encoding="utf-8"))
+    for result in document["results"]:
+        _, _, resolved = resolve_certificates(result)
+        assert retained_pointer_problems(result["id"], resolved) == []
 
 
 def test_resolve_certificates_reads_real_repository_relative_artifacts() -> None:

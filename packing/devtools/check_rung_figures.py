@@ -56,6 +56,13 @@ them somewhere in its prose. Both orderings of the subtraction are accepted, so 
 never depends on an assumption about which side is written first; it only ever fires where
 the arithmetic disagrees with both.
 
+Underneath all of them is one requirement, and it is a refusal rather than a fallback: a
+result declaring any certificate declares exactly one live `certificate.json`. Unqualified
+prose -- "the retained certificate's total", "0.0308 of runway left" -- means that file
+and nothing else, so a missing pointer is reported with the path it should be at. Electing
+a historical rung in its place would be worse than useless: the immutable file agrees with
+the sentence that went stale when the ladder left it, and every figure would pass.
+
 What this does **not** cover: D-439's third instance was a third-party package's claim
 that one file is byte-identical to another, checked by a printed SHA-256. That is a claim
 about file identity, not a quoted mass, atom count, or margin, and nothing here reads or
@@ -89,6 +96,10 @@ DEFECTS = ROOT / "defects.yaml"
 #: The result fields this repository's prose puts numeric claims in. Named directly in
 #: the defect this module answers and in the task that specified it.
 PROSE_FIELDS = ("claim", "significance.rationale", "next_rung", "composition")
+
+#: The moving top-rung pointer's basename. A suffixed `certificate-A-B.json` beside it is
+#: an immutable historical rung, and the two are never interchangeable here.
+LIVE_CERTIFICATE = "certificate.json"
 
 #: Enough significant figures for any fraction this register carries (the largest
 #: denominators seen are in the low millions) with wide headroom; matches the pattern
@@ -261,19 +272,58 @@ def load_certificate(path: Path) -> CertificateFigures | None:
     )
 
 
+def live_pointers(resolved: list[CertificateFigures]) -> list[CertificateFigures]:
+    """Every resolved artifact whose basename is the moving top-rung pointer."""
+    return [c for c in resolved if Path(c.path).name == LIVE_CERTIFICATE]
+
+
 def pick_retained(resolved: list[CertificateFigures]) -> CertificateFigures | None:
     """Which resolved certificate is "the retained certificate" prose without a side means.
 
     `certificate.json` by this repository's own naming convention (D-439's fix:
     `certificate.json` is the moving top-rung pointer, `certificate-A-B.json` an
     immutable historical rung) -- independent of declaration order, so a result listing
-    its artifacts in some other sequence still resolves the right one as primary. Falls
-    back to the first resolved certificate if none carries that exact basename.
+    its artifacts in some other sequence still resolves the right one as primary.
+
+    There is deliberately no fallback to a historical rung. Electing one silently is the
+    exact failure this module exists to catch: every unqualified figure in the result's
+    prose would then be checked against an immutable file that is not the current one,
+    and the wrong artifact would agree with the stale prose. `retained_pointer_problems`
+    refuses the record instead.
     """
-    exact = next((c for c in resolved if Path(c.path).name == "certificate.json"), None)
-    if exact is not None:
-        return exact
-    return resolved[0] if resolved else None
+    pointers = live_pointers(resolved)
+    return pointers[0] if len(pointers) == 1 else None
+
+
+def retained_pointer_problems(result_id: str, resolved: list[CertificateFigures]) -> list[str]:
+    """A certificate-bearing result resolves exactly one live `certificate.json`.
+
+    Nothing else can stand in for it. A result that has lost its pointer -- renamed,
+    dropped from the artifact list, or deleted -- is refused with the path the pointer
+    should be at, and a result declaring two is refused as ambiguous rather than settled
+    by declaration order.
+    """
+    if not resolved:
+        return []
+    pointers = live_pointers(resolved)
+    if len(pointers) == 1:
+        return []
+    declared = ", ".join(c.path for c in resolved)
+    if not pointers:
+        expected = ", ".join(
+            sorted({str(PurePosixPath(c.path).parent / LIVE_CERTIFICATE) for c in resolved})
+        )
+        message = (
+            f"{result_id}: no live {LIVE_CERTIFICATE} among its certificate artifacts "
+            f"({declared}); expected {expected}"
+        )
+        return [message]
+    paths = ", ".join(c.path for c in pointers)
+    message = (
+        f"{result_id}: declares {len(pointers)} live {LIVE_CERTIFICATE} pointers "
+        f"({paths}); exactly one is required"
+    )
+    return [message]
 
 
 def resolve_certificates(result: dict) -> ResolvedCertificates:
@@ -696,7 +746,7 @@ def check_result(result: dict) -> tuple[list[str], int]:
     result_id = result["id"]
     retained, sides, resolved = resolve_certificates(result)
 
-    problems: list[str] = []
+    problems: list[str] = retained_pointer_problems(result_id, resolved)
     for cert in resolved:
         problems.extend(certificate_consistency_problems(cert))
 
