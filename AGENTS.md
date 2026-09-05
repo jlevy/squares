@@ -89,12 +89,17 @@ Two rules worth knowing before changing any of this:
   whole repository and exclude only what we have a tested reason to leave raw.
   Two exclusions qualify: the literature archive under `packing/resources/`, and the
   generated `SKILL.md` files.
-  The archive is excluded for measured reasons. Under flowmark-rs 0.3.2, rewrapping
-  inserted line breaks *inside* `$...$` spans — on 2026-08-22, 31 of 339 math spans in one
-  transcription and 101 of 1236 in another — and a newline mid-formula defeats `grep`,
-  which is the point of a local archive. Re-measured on 2026-09-04 under 0.4.0: 0 of 7,618
-  spans across 18 transcriptions break, against 605 under 0.3.2 on the same files. The
-  exclusion stays for the two reasons that remain: the `.raw.md` extractions are
+  The archive is excluded for measured reasons.
+  Under flowmark-rs 0.3.2, rewrapping inserted line breaks *inside* `$...$` spans — on
+  2026-08-22, 31 of 339 math spans in one transcription and 101 of 1236 in another — and
+  a newline mid-formula defeats `grep`, which is the point of a local archive.
+  Re-measured on 2026-09-04 under 0.4.0: 0 of 7,618 spans across 18 transcriptions
+  break, against 605 under 0.3.2 on the same files.
+  Re-measuring is a command rather than a script:
+  `uv run --frozen --group dev python -m devtools.check_math_spans FILE...` from
+  `packing/` formats a copy of each file with the `Makefile`’s pinned command and
+  reports every math span that changed, gained a newline, or went missing.
+  The exclusion stays for the two reasons that remain: the `.raw.md` extractions are
   byte-level ground truth and 0.4.0 still rewrites them (about 2,600 lines across two
   files), and formatting the transcriptions would change transcribed characters — smart
   quotes, ellipses — against the rule that archived source is never edited to look tidy.
