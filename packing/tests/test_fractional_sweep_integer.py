@@ -22,10 +22,13 @@ from fractions import Fraction
 import pytest
 
 from cases.n11_fractional_certificate.replay import FIRST_RUNG_PATH as N11_FIRST_RUNG
+from cases.n11_fractional_certificate.replay import declared as n11_declared
 from cases.n11_fractional_certificate.replay import load as n11_load
+from cases.n12_fractional_certificate.replay import declared as n12_declared
 from cases.n12_fractional_certificate.replay import load as n12_load
 from cases.n17_fractional_certificate.replay import declared as n17_declared
 from cases.n17_fractional_certificate.replay import load as n17_load
+from cases.n20_fractional_certificate.replay import declared as n20_declared
 from cases.n20_fractional_certificate.replay import load as n20_load
 from sqpack.fractional import certificate as certificate_module
 from sqpack.fractional import sweep
@@ -157,6 +160,7 @@ def _admissible(
     return half <= x <= far and half <= y <= far
 
 
+@pytest.mark.slow
 def test_every_reported_witness_is_an_admissible_centre_on_the_373_atom_rung() -> None:
     """D-449: the witness used to be the midpoint of the attaining event cell.
 
@@ -180,17 +184,25 @@ def test_every_reported_witness_is_an_admissible_centre_on_the_373_atom_rung() -
 def test_every_reported_witness_is_admissible_on_every_retained_certificate() -> None:
     """The strict-inside witness is a new hard-error path, so it is walked in full.
 
-    All 181 directions of all four retained certificates on the integer route: the
-    reported witness is admissible, and the value is the one the record declares.
+    All 181 directions of every retained top rung on the integer route: the reported
+    witness is admissible, and the value is the one that rung's own record declares.
+
+    The declared value is read from each artifact rather than written here. Four of them
+    were pinned by hand until 2026-09-05, when T-021 moved the n = 20 pointer to 97/20
+    and this test failed on a stale constant -- 50007/50000, the 24/5 rung's least cell
+    mass -- while every witness it checked was admissible. A figure kept beside the
+    artifact that owns it is the D-439 class, and a pointer that moves is exactly when
+    it bites.
     """
 
-    for load, declared in (
-        (n11_load, Fraction(4001, 4000)),
-        (n12_load, Fraction(12501, 12500)),
-        (n17_load, Fraction(200009, 200000)),
-        (n20_load, Fraction(50007, 50000)),
+    for load, declared_of in (
+        (n11_load, n11_declared),
+        (n12_load, n12_declared),
+        (n17_load, n17_declared),
+        (n20_load, n20_declared),
     ):
         certificate = load()
+        declared = Fraction(declared_of()["least_cell_mass"])
         least: Fraction | None = None
         for direction in certificate.directions:
             value, witness = sweep_direction_minimum(certificate, direction)
@@ -295,6 +307,7 @@ def test_a_single_threaded_process_forks_and_a_threaded_one_without_a_main_runs_
     assert sweep_all_directions(small, workers=3) == sweep_all_directions(small, workers=1)
 
 
+@pytest.mark.slow
 def test_the_parallel_direction_loop_matches_the_serial_one() -> None:
     """Same minima, same order, same first-attaining label, whatever the schedule."""
 
@@ -305,6 +318,7 @@ def test_the_parallel_direction_loop_matches_the_serial_one() -> None:
     assert [label for _, label in serial] == [d.label for d in certificate.directions]
 
 
+@pytest.mark.slow
 def test_the_n17_certificate_verifies_in_the_fast_tier_now() -> None:
     """1473 s by Fraction on 2026-09-04; 21.8 s here on a loaded four-core box.
 

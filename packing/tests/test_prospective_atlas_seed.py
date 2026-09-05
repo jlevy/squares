@@ -27,6 +27,7 @@ def isolated_seed_build_cache():
     prospective.clear_build_caches()
 
 
+@pytest.mark.slow
 def test_seed_replays_every_safe_source_and_excludes_kingbird() -> None:
     retained = json.loads(MANIFEST.read_text(encoding="utf-8"))
     _outputs, expected = expected_outputs()
@@ -52,6 +53,7 @@ def test_seed_replays_every_safe_source_and_excludes_kingbird() -> None:
     assert "kingbird-svg" not in json.dumps(entries, sort_keys=True)
 
 
+@pytest.mark.slow
 def test_seed_witnesses_and_house_renderings_match_the_manifest() -> None:
     seed = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas_seed"]
     release = json.loads(UNITSQUARE_RESULTS.read_text(encoding="utf-8"))
