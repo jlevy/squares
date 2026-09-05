@@ -9,6 +9,14 @@
         "scale": 2,
         "width": 4800
       },
+      "png_link_preview_card": {
+        "derived_from": "atlas/known-best/known-best-1-100.svg",
+        "height": 1256,
+        "path": "atlas/known-best/known-best-1-100-card.png",
+        "scale": 1,
+        "top_crop": true,
+        "width": 2400
+      },
       "png_preview": {
         "derived_from": "atlas/known-best/known-best-1-100.svg",
         "height": 2896,

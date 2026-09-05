@@ -125,9 +125,15 @@ uppercase id `T-018`. `README.md` remains the exception for a directory’s orie
 page. The kinds in use, each generated from the certificate so its figures cannot drift:
 `t-NNN-proof-card.md`, the one-page statement with every constant and the one command
 that checks it; `t-NNN-verifiable-claim-<bound>.md`, the self-contained claim with
-theorem, proof, verifier and certificate, one per retained bound; and
-`t-NNN-proof-visual.svg`, the figure.
+theorem, proof, verifier and certificate, one per retained bound;
+`t-NNN-proof-visual.svg`, the figure; and `t-NNN-explainer.md`, the article a reader is
+sent to, published beside the page it is rendered from.
 A new result takes the same names with its own id.
+
+The published form of a document is named the same way as the case-local one.
+`t-018-explainer.md` is served from the site rather than kept in the case directory, and
+it is still named for the result it explains: what a file is called should not depend on
+which directory it happens to be served from.
 
 Use [`repren`](https://github.com/jlevy/repren) for renames—it moves files and rewrites
 references in one pass, which is what keeps the two in step.

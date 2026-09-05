@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 460
+count: 465
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14681,6 +14681,11 @@ defects:
     stated over the whole result so a second vendored tree cannot slip in; and
     `.flowmarkignore` and FOREIGN_DIRECTORY_NAMES agree about `vendor`, since the two
     lists are maintained by hand in different languages.
+    The second half of the exposure closed later the same day: `deterministic SVG
+    rendering` is itself in the pull-request tier as of 2026-09-05, so the step that
+    caught this one now runs before a merge rather than three merges after it
+    (think-k4fb). The clause above about a gate that "runs only on main" describes what
+    was true when this entry was written and is no longer.
   status: fixed
   recorded_in: packing/devtools/check_svg_rendering.py
 - id: D-456
@@ -14932,3 +14937,195 @@ defects:
   bead: think-c0qm
   status: contained
   recorded_in: packing/campaign/agendas/agenda-022-the-conditional-route.md
+- id: D-461
+  title: >-
+    The Pages filter named the composite PNG and PDF but not the SVG the figure shows
+  date: '2026-09-05'
+  layer: tooling
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    since the composite was added to the page; the register and the figure record have
+    been outside the filter for as long as the renderer has read them.
+  severity: low
+  what: >-
+    The explainer republishes on a push touching any input its renderer reads, and that
+    list is written by hand in YAML while the inputs themselves are read in Python. Four
+    had drifted out of it. `known-best-1-100.svg` is what Figure 1 shows, and the filter
+    named the PNG and the PDF beside it but not the SVG; `frontier/results.yaml` is what
+    the opening counts; `composite-figure.json` and the module it is read through are
+    what the drawing is built from.
+  consequence: >-
+    Not a wrong page, a stale one, which is the harder thing to notice: the gate passes,
+    the branch merges, and the deployed site disagrees with the repository until some
+    other input happens to move and republishes everything at once. The composite SVG is
+    the entry that mattered most, being both the largest figure on the page and the file
+    the preceding commits had been changing.
+  fix: >-
+    Fixed on 2026-09-05 by declaring the inputs where the outputs are declared, as
+    RENDER_INPUTS in packing/devtools/render_explainer.py, and adding the four missing
+    patterns to both the push and the pull_request filters. The workflow comment now
+    says not to maintain the list by reading the renderer, because the test names what
+    to add.
+  regression: >-
+    test_the_pages_filter_covers_every_render_input parses the workflow, resolves both
+    filters, and requires every declared input to be matched by each. Checked against
+    the drift by deleting the composite SVG entry, which the test reports by name. A
+    companion requires every declared input to exist, so a rename cannot leave a matched
+    pair of dead entries agreeing with each other.
+  status: fixed
+  recorded_in: packing/tests/test_explainer.py
+  bead: think-bl0n
+- id: D-462
+  title: A plain git clone fails the documentation check
+  date: '2026-09-05'
+  layer: tooling
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    since the vendored exclusion was added; CI never saw it because both workflows pass
+    `submodules: true`.
+  severity: low
+  what: >-
+    The document map excluded vendored prose with the pattern `vendor/**/*.md`, and its
+    loader requires every exclusion to match at least one file. With the submodule
+    declared but not checked out the pattern matches nothing, so the check reported
+    `document exclusion is empty: vendor/**/*.md`. The same question -- which trees are
+    this repository's -- was also answered separately in `check_svg_rendering`, which
+    typed `vendor` into a frozenset of its own; the two answers were maintained by hand
+    in different languages and had already disagreed once, as D-455.
+  consequence: >-
+    A contributor cloning normally and running the documented check gets a failure about
+    a file they have not touched and cannot see, on a repository whose own gate is
+    green. Small in consequence and large in the impression it gives.
+  fix: >-
+    Fixed on 2026-09-05 by answering the question in code rather than in the map.
+    packing/devtools/repo_scope.py reads `.gitmodules`, and both sweeps use it, so the
+    vendored set comes from the declaration rather than from what is on disk and is the
+    same on a clone with submodules and one without. The map pattern is deleted and the
+    frozenset no longer names `vendor` (think-f4vl). Reproduced on a submodule-less
+    clone before the change, which failed exactly as reported, and confirmed passing
+    after.
+  regression: >-
+    test_every_map_pattern_matches_a_file_no_submodule_supplies matches each collection
+    and exclusion pattern the way the loader does and then discards the vendored files,
+    so a pattern satisfied only by a submodule fails here whether or not the submodule
+    is checked out. Matched rather than reasoned about on purpose: `vendor/**/*.md` has
+    the prefix `vendor`, which is not itself a declared submodule path, so prefix
+    arithmetic calls it clean. Checked by reinstating the pattern, which the test
+    reports by name.
+  status: fixed
+  recorded_in: packing/devtools/repo_scope.py
+  bead: think-5e7k
+- id: D-463
+  title: Three canvases took every touch, so the page could not be scrolled past them
+  date: '2026-09-05'
+  layer: tooling
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    since the figures were built; invisible on every desktop, because a mouse wheel and
+    a trackpad scroll the page whatever `touch-action` says.
+  severity: low
+  what: >-
+    `.stage canvas` carried a blanket `touch-action: none`. Measured on a 390x844
+    viewport: a 250px upward swipe starting on a canvas scrolled the page 0px, against
+    338px for the same swipe in the 26px gutter beside it and 343px on prose. Each
+    canvas is 339x339 CSS px, 40% of the viewport height, and the article has three of
+    them. Only two of the three drag at all -- `prove` and `shrink` capture the pointer;
+    the atom field only taps -- and neither drag uses the vertical axis.
+  consequence: >-
+    A reader arriving from a shared link on a phone, which is the traffic this page was
+    written for, meets three dead zones covering 40% of the screen each and can only get
+    past them through 26 pixels of gutter on either side. The page is not broken and
+    nothing it says is wrong; it simply does not scroll where a reader's thumb lands.
+  fix: >-
+    Fixed on 2026-09-05. The blanket rule is gone: the atom field restricts nothing, and
+    the two draggable canvases take `touch-action: pan-y`, which returns the vertical
+    axis to the page and keeps the drag. Re-measured after the change: the same swipe
+    scrolls 352px on the field, 246px on the prover and 345px on the shrink.
+  regression: >-
+    None added. Holding this would need a touch-capable browser in the suite, which the
+    gate does not have; the property is stated where the rule is, with the measurement
+    that decided it.
+  status: fixed
+  recorded_in: packing/devtools/templates/explainer-shell.html
+- id: D-464
+  title: Every link on the page failed contrast in dark mode
+  date: '2026-09-05'
+  layer: tooling
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    since the accent was aliased onto the link token; light mode passes at 5.47:1, so
+    the failure only ever appeared under one of the two themes.
+  severity: low
+  what: >-
+    The page sets `--kpress-doc-link: var(--kpress-doc-accent)` so links carry the
+    page's teal. kpress declares `--kpress-doc-link` per theme but declares
+    `--kpress-doc-accent` exactly once, for both, so the alias took the light teal into
+    dark as well. Measured against the dark grounds: body links, the credits, the
+    footnote links and a figure readout at 3.37:1; footnote references, backrefs and
+    inline code at 2.99:1; the pressed chooser label at 3.07:1. WCAG AA asks 4.5:1 and
+    none of these is large text.
+  consequence: >-
+    Every link on a long document is below the readability floor for the half of readers
+    whose phone is in dark mode. Nothing is unreadable outright, and the failure is
+    exactly invisible to anyone testing in light mode.
+  fix: >-
+    Fixed on 2026-09-05 by giving `--kpress-doc-accent` a dark value -- the same hue and
+    chroma at the lightness kpress's own dark link uses -- scoped on the resolver's
+    output attribute the way kpress scopes its own dark tokens. The accent is what
+    carries the alias, so fixing the accent lifts the borders, the pressed state and the
+    range control with the links rather than leaving them behind. Confirmed from
+    rendered pixels rather than computed styles, because `color-mix()` is not parseable
+    by a canvas and a script that reads it through one silently measures the previous
+    fill: links 3.37 to 8.09:1, the pressed chooser 3.07 to 7.41:1, and light mode
+    unchanged at 4.61:1 for the same button.
+  regression: >-
+    None added. A contrast assertion needs a browser to resolve `oklch()` and
+    `color-mix()`, which the gate does not have, and a hand-computed ratio in a test
+    would pin the arithmetic rather than what is drawn.
+  status: fixed
+  recorded_in: packing/devtools/templates/explainer-shell.html
+- id: D-465
+  title: The gate counted its own render output against the mutation-snapshot cap
+  date: '2026-09-05'
+  layer: tooling
+  class: bookkeeping
+  detected_by: gate
+  latent_for: >-
+    since the explainer's renderer first wrote into `packing/site/`; invisible until the
+    tree grew enough for four megabytes to be the difference.
+  severity: low
+  what: >-
+    `snapshot_source_bytes` walks the working tree rather than the git tree, and
+    `packing/site/` was not pruned. That directory is where the explainer's renderer
+    writes the page, the published Markdown and four copies of the composite on every
+    run; it is gitignored, so no clone has ever contained it and no control can name it.
+    On 2026-09-05 the snapshot measured 71,086,910 bytes against the 67,108,864 cap, and
+    `site` alone was 4,377,699 -- more than the whole 3,978,046-byte breach.
+  consequence: >-
+    The push tier failed locally on a tree whose committed content was under the cap, so
+    the failure was a fact about the checkout rather than about the change. It is D-422's
+    shape one directory over: that entry was 12 MB of bytecode the gate wrote into the
+    tree it was measuring, and this is 4 MB of render output written the same way. CI
+    never saw it, because a fresh clone has no `site/` and the validation job does not
+    render the page -- so the gate that a contributor runs and the gate that decides a
+    merge disagreed.
+  fix: >-
+    Fixed on 2026-09-05 by pruning `packing/site/`, with the measurement recorded beside
+    the exclusion. The link-preview card is pruned in the same change on the grounds its
+    three siblings already carry: a generated export of the same drawing, with the same
+    source receipt the same `--check` replays, named by no control. The cap was not
+    raised, which is what the note above `SNAPSHOT_MAX_BYTES` says to consider first --
+    a higher number would have postponed this rather than fixed it.
+  regression: >-
+    `test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots` is the
+    check, and it is the one that caught this. What it cannot hold is the headroom: the
+    snapshot is now 66,490,716 of 67,108,864, 99.1% of the cap, against a comment on
+    that constant saying a guard with 2% headroom fires for the wrong reason. The next
+    committed artifact of any size trips it. Carried as think-t1lk with the five largest
+    counted files measured, rather than answered here by raising the number again.
+  status: fixed
+  recorded_in: packing/devtools/run_negative_controls.py

@@ -264,6 +264,14 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
             "scale": 2,
             "width": 4800,
         },
+        "png_link_preview_card": {
+            "derived_from": "atlas/known-best/known-best-1-100.svg",
+            "height": 1256,
+            "path": "atlas/known-best/known-best-1-100-card.png",
+            "scale": 1,
+            "top_crop": True,
+            "width": 2400,
+        },
         "png_preview": {
             "derived_from": "atlas/known-best/known-best-1-100.svg",
             "height": 2896,
@@ -425,26 +433,36 @@ def test_known_best_composite_exports_all_carry_one_source_receipt() -> None:
     assert set(receipts) == {
         "known-best-1-100.png",
         "known-best-1-100@2x.png",
+        "known-best-1-100-card.png",
         "known-best-1-100.pdf",
     }
     assert set(receipts.values()) == {expected}
 
 
 def test_known_best_composite_rasters_scale_the_one_canvas_by_whole_numbers() -> None:
-    """Every raster is a whole multiple of the canvas, and the preview is the 1x one.
+    """Every raster is a whole multiple of the canvas, in width always and in height
+    unless it declares a crop.
 
     The dimensions are derived from `SUMMARY_WIDTH` and `SUMMARY_HEIGHT` rather than
-    stored, so a resized canvas moves every export together. This pins the two facts
-    that derivation relies on: the scales are integers, and no two exports collide on
-    one path.
+    stored, so a resized canvas moves every export together. This pins the facts that
+    derivation relies on: the scales are integers, no two exports collide on one path,
+    and a cropped export is shorter than the canvas rather than a differently scaled
+    drawing -- the link-preview card is the top of the same picture, not a second one.
     """
     exports = known_best_builder.SUMMARY_RASTERS
 
-    assert [export.scale for export in exports] == [1, 2]
+    assert sorted(export.scale for export in exports) == [1, 1, 2]
     assert len({export.path for export in exports}) == len(exports)
     for export in exports:
         assert export.width == known_best_builder.SUMMARY_WIDTH * export.scale
-        assert export.height == known_best_builder.SUMMARY_HEIGHT * export.scale
+        if export.crop_units is None:
+            assert export.height == known_best_builder.SUMMARY_HEIGHT * export.scale
+            continue
+        assert export.height == export.crop_units * export.scale
+        assert 0 < export.crop_units < known_best_builder.SUMMARY_HEIGHT
+    # Exactly one crop, and it is the card the page's link preview names.
+    cropped = [export for export in exports if export.crop_units is not None]
+    assert [export.path.name for export in cropped] == ["known-best-1-100-card.png"]
 
 
 @pytest.mark.parametrize("scale", [1, 2])
