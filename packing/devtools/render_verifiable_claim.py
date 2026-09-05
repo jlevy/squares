@@ -23,6 +23,7 @@ import json
 import os
 import re
 import sys
+from collections.abc import Sequence
 from fractions import Fraction
 from pathlib import Path
 
@@ -278,7 +279,7 @@ def documents() -> list[tuple[Path, str]]:
     return [*claims, (CARD, render_card(headline))]
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )

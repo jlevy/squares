@@ -8,7 +8,7 @@ import json
 import math
 import time
 from collections import Counter
-from collections.abc import Iterator
+from collections.abc import Iterator, Sequence
 from itertools import combinations
 from pathlib import Path
 from typing import Any
@@ -265,7 +265,7 @@ def parser() -> argparse.ArgumentParser:
     return command
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
     if args.update:
         update()

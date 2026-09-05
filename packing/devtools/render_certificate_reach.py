@@ -49,7 +49,6 @@ import argparse
 import json
 import math
 import pathlib
-import sys
 from fractions import Fraction
 from itertools import pairwise
 
@@ -660,4 +659,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

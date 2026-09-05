@@ -44,6 +44,7 @@ import argparse
 import ast
 import subprocess
 import sys
+from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -214,7 +215,7 @@ def select_tests(changed: list[str]) -> TestSelection:
     return TestSelection(everything=False, reason=reason, tests=tests)
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Select the test files a change can reach, erring toward running too many."
     )
@@ -229,7 +230,7 @@ def main(arguments: list[str] | None = None) -> int:
         action="store_true",
         help="run pytest on the selection (the whole non-exhaustive suite when everything)",
     )
-    namespace = parser.parse_args(arguments)
+    namespace = parser.parse_args(argv)
 
     selection = select_tests(changed_paths(namespace.since))
     if namespace.summary:
@@ -262,4 +263,4 @@ def main(arguments: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

@@ -21,6 +21,7 @@ import random
 import subprocess
 import sys
 import time
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
@@ -92,10 +93,10 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     """Run the H-002 arms and stream their JSONL records."""
     parser = _parser()
-    options = parser.parse_args(arguments)
+    options = parser.parse_args(argv)
     if not options.engine.is_file():
         parser.error(
             f"sqsearch executable not found at {options.engine}; "

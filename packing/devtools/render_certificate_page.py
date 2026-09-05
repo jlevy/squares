@@ -35,6 +35,7 @@ import json
 import re
 import shutil
 import sys
+from collections.abc import Sequence
 from dataclasses import dataclass
 from fractions import Fraction
 from math import isqrt
@@ -1277,7 +1278,7 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
     return fill(shell, shell_substitutions(static, shared, body), where=TEMPLATE.name)
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--certificate",

@@ -44,7 +44,6 @@ import argparse
 import hashlib
 import json
 import re
-import sys
 import time
 from collections.abc import Sequence
 from fractions import Fraction
@@ -430,4 +429,4 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

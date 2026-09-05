@@ -14,6 +14,7 @@ import argparse
 import itertools
 import json
 import math
+from collections.abc import Sequence
 from dataclasses import dataclass
 
 from cases.trump11 import packing as trump11
@@ -350,18 +351,19 @@ def build_result(branch: int, *, selftest: bool) -> dict:
     }
 
 
-def main() -> None:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--branch", type=int, required=True)
     parser.add_argument("--selftest", action="store_true")
-    arguments = parser.parse_args()
+    arguments = parser.parse_args(argv)
     result = build_result(arguments.branch, selftest=arguments.selftest)
     print(json.dumps(result, indent=2))
     if result["minimization"]["status"] != "completed":
-        raise SystemExit(2)
+        return 2
     if arguments.selftest and not all(result["selftests"].values()):
-        raise SystemExit(2)
+        return 2
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

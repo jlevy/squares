@@ -25,7 +25,6 @@ Everything printed is asserted, so this doubles as a gate.
 from __future__ import annotations
 
 import math
-import sys
 
 from scipy.optimize import linprog
 
@@ -257,4 +256,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

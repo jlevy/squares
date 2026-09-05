@@ -1793,10 +1793,10 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(arguments: Sequence[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     """Run the Codex efficiency rollup CLI."""
 
-    options = _parser().parse_args(arguments)
+    options = _parser().parse_args(argv)
     try:
         rollup = build_rollup(
             options.sessions_root,

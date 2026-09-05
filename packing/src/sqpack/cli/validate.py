@@ -36,6 +36,7 @@ from typing import Literal, Never, override
 
 from sqpack.project import (
     ProjectLayoutError,
+    add_version_argument,
     configured_project_root,
     require_project_root,
 )
@@ -2492,6 +2493,7 @@ def _parser() -> ArgumentParser:
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
+    add_version_argument(parser)
     parser.add_argument(
         "--edit",
         action="store_true",
@@ -2585,11 +2587,11 @@ def _validate_runtime() -> None:
         raise UsageError(f"Python 3.14 is required, running {sys.version.split()[0]}")
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     """Run validation and return a process-compatible status code."""
     parser = _parser()
     try:
-        namespace = parser.parse_args(arguments)
+        namespace = parser.parse_args(argv)
         strict = namespace.strict or _environment_flag("PACKING_VALIDATE_STRICT")
         deep = namespace.deep or _environment_flag("PACKING_VALIDATE_DEEP") or strict
         _validate_invocation(

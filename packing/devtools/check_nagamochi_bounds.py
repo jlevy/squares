@@ -37,7 +37,6 @@ from __future__ import annotations
 
 import math
 import re
-import sys
 from decimal import Decimal, localcontext
 from pathlib import Path
 
@@ -253,4 +252,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

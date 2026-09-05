@@ -28,6 +28,7 @@ import argparse
 import pathlib
 import re
 import sys
+from collections.abc import Sequence
 
 PACKING = pathlib.Path(__file__).resolve().parent.parent
 REPO = PACKING.parent
@@ -98,7 +99,7 @@ def apply(*, check: bool) -> int:
     return 0
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--check", action="store_true", help="report drift without writing AGENTS.md"
@@ -112,4 +113,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

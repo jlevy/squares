@@ -43,6 +43,7 @@ import argparse
 import subprocess
 import sys
 from collections import Counter, defaultdict
+from collections.abc import Sequence
 from datetime import date, datetime
 from pathlib import Path
 
@@ -788,7 +789,7 @@ def branches() -> list[str]:
     return sorted(found)
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--branch", help="branch to attribute (default: the checked-out one)")
     parser.add_argument(
@@ -856,4 +857,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

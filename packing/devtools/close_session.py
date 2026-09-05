@@ -43,6 +43,7 @@ import argparse
 import json
 import subprocess
 import sys
+from collections.abc import Sequence
 from datetime import datetime
 from pathlib import Path
 from typing import TypedDict
@@ -760,7 +761,7 @@ def _run(options: argparse.Namespace) -> int:
     return report(options.session)
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--session", help="report on one session in full")
     parser.add_argument("--log", type=Path, help="the session's harness log, to regenerate")
@@ -805,4 +806,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

@@ -15,6 +15,7 @@ import time
 import urllib.error
 import urllib.request
 import zlib
+from collections.abc import Sequence
 from dataclasses import dataclass
 from decimal import Decimal
 from fractions import Fraction
@@ -1455,7 +1456,7 @@ def parser() -> argparse.ArgumentParser:
     return command
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
     if args.refresh and not args.fetch:
         raise SystemExit("--refresh requires --fetch")

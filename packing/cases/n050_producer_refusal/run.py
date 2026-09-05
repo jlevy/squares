@@ -9,7 +9,7 @@ import os
 import subprocess
 import sys
 import tempfile
-from collections.abc import Collection
+from collections.abc import Collection, Sequence
 from copy import deepcopy
 from pathlib import Path
 from shutil import copyfile
@@ -331,7 +331,7 @@ def _publish_registered_result(path: Path, result: dict[str, Any]) -> None:
     atomic_publish_new(path, canonical_bytes(result))
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     arguments = _parser().parse_args(argv)
     try:
         result = build_result()

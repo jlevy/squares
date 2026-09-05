@@ -37,7 +37,12 @@ from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
 from sqpack.assurance import check_experiment_semantics
-from sqpack.project import ProjectLayoutError, configured_project_root, require_project_root
+from sqpack.project import (
+    ProjectLayoutError,
+    add_version_argument,
+    configured_project_root,
+    require_project_root,
+)
 from sqpack.yamlio import safe_load
 
 PROJECT_ROOT = configured_project_root()
@@ -1546,6 +1551,7 @@ def render(
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
+    add_version_argument(parser)
     parser.add_argument(
         "action",
         choices=("check", "render"),
@@ -1554,9 +1560,9 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     """Validate campaign records and check or render their generated ledger."""
-    options = _parser().parse_args(arguments)
+    options = _parser().parse_args(argv)
     try:
         require_project_root(PROJECT_ROOT)
     except ProjectLayoutError as error:

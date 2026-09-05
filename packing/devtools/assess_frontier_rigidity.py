@@ -43,6 +43,7 @@ import argparse
 import json
 import math
 import sys
+from collections.abc import Sequence
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
@@ -301,7 +302,7 @@ def review() -> None:
     print(f"  screen excluded: n = {excluded}")
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--update", action="store_true", help="write the blocks")

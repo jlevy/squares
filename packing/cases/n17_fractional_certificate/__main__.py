@@ -6,7 +6,6 @@ report. Run as ``python -m cases.n17_fractional_certificate``.
 
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 
 from cases.n17_fractional_certificate.replay import CERTIFICATE_PATH, snapshot
@@ -52,4 +51,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

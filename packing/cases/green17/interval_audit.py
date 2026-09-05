@@ -92,6 +92,7 @@ from __future__ import annotations
 import argparse
 import sys
 import time
+from collections.abc import Sequence
 from dataclasses import dataclass
 from fractions import Fraction
 
@@ -647,7 +648,7 @@ def certify(
     return stats
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--side",
@@ -657,7 +658,7 @@ def main(arguments: list[str] | None = None) -> int:
     )
     parser.add_argument("--max-boxes", type=int, default=400_000_000)
     parser.add_argument("--progress-every", type=int, default=0)
-    options = parser.parse_args(arguments)
+    options = parser.parse_args(argv)
     side = Fraction(options.side) if options.side is not None else SIDE
     started = time.monotonic()
     stats = certify(

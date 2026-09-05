@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import json
 import time
+from collections.abc import Sequence
 from fractions import Fraction
 from itertools import pairwise
 from pathlib import Path
@@ -109,7 +110,7 @@ def repository_relative(path: Path, role: str) -> str:
         raise SystemExit(f"the {role} {path} is not inside the repository") from None
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--certificate", type=Path, default=CASE / "certificate.json")
     parser.add_argument(

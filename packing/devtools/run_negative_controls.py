@@ -65,6 +65,7 @@ import signal
 import subprocess
 import sys
 import tempfile
+from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import suppress
 from dataclasses import dataclass
@@ -588,9 +589,9 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     """Run selected controls in isolated source snapshots."""
-    options = _parser().parse_args(arguments)
+    options = _parser().parse_args(argv)
     spec_path = options.spec if options.spec.is_absolute() else ROOT / options.spec
     spec = safe_load(spec_path.read_text(encoding="utf-8"))
     only = options.match
@@ -666,4 +667,4 @@ def main(arguments: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())
