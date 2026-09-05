@@ -7,10 +7,10 @@ its certificate file, so the page cannot drift from the bounds it explains.
 When a rung moves, rerunning this is the whole update: no number is typed twice.
 
 The page is one self-contained file. Typography follows the kpress design
-system, and the kpress distribution also supplies the reading faces and KaTeX,
-which are inlined as data URIs. Nothing is fetched at view time, which is what
-lets the same artifact serve from GitHub Pages, from a file:// URL, and from an
-artifact host with a strict content-security policy.
+system, and the kpress distribution also supplies the reading faces, KaTeX and
+the footnote hover previews, all inlined. Nothing is fetched at view time, which
+is what lets the same artifact serve from GitHub Pages, from a file:// URL, and
+from an artifact host with a strict content-security policy.
 
 Usage, from `packing/`:
 
@@ -47,10 +47,10 @@ TEMPLATE = Path(__file__).with_name("templates") / "certificate_page.html"
 COARSENING = CASE / "net-coarsening.json"
 OUTPUT = PACKING / "site" / "index.html"
 
-# Four colours have to stay apart in the prover: the mass comfortably above the
+# Four colors have to stay apart in the prover: the mass comfortably above the
 # threshold, the mass near it, the mass below it (a region that never occurs
 # inside the domain at a net direction), and the square the reader drags,
-# which is an instrument rather than a measurement. All three data colours
+# which is an instrument rather than a measurement. All three data colors
 # come from the project's own square-hue palette, asserted rather than indexed
 # so a reordered palette fails here instead of quietly restyling the figure.
 BELOW_ONE = "#e26e82"
@@ -152,7 +152,7 @@ def kpress_css(static: Path) -> str:
     """The kpress design system as one stylesheet, its webfonts inlined.
 
     Taken whole rather than reimplemented: the reading measure, the type ramp,
-    the heading and list treatments, the colour roles and both themes are the
+    the heading and list treatments, the color roles and both themes are the
     system's to define, and a page that re-declared a subset of them would drift
     from it silently. This page adds only what kpress has no component for.
     """
@@ -168,6 +168,161 @@ def kpress_css(static: Path) -> str:
 def theme_bootstrap(static: Path) -> str:
     """kpress's pre-paint theme resolution, so light and dark match the system."""
     return (static / "js" / "theme-bootstrap.js").read_text(encoding="utf-8")
+
+
+# kpress's hover previews live in four ES modules, listed here in dependency
+# order: each may import only from the ones before it. The page cannot load
+# them as modules — an inline `<script type="module">` would fetch
+# `./viewport.js` and its siblings at view time, which is the one thing this
+# page refuses — so they are flattened into a single classic script sharing one
+# function scope. The flattening is checked rather than assumed: every rule
+# below fails the render, so a kpress upgrade that reshapes these modules
+# breaks the build instead of quietly shipping previews that never appear.
+TOOLTIP_MODULES = ("viewport.js", "overlay.js", "runtime.js", "tooltips.js")
+
+# The only two module forms the flattener can rewrite: a named import from a
+# sibling in that list, and an `export` prefixed to a declaration. Everything
+# else — `export default`, `export { a, b }`, `export *`, a default or namespace
+# import, an aliased binding — fails to match, and a failure to match is a build
+# error rather than a silent drop.
+_IMPORT_STATEMENT = re.compile(r"^import\b[^;]*;", re.MULTILINE)
+_NAMED_IMPORT = re.compile(r'import \{ ?([^}]*?) ?\} from "\./([A-Za-z0-9_.-]+)";')
+_JS_NAME = re.compile(r"[A-Za-z_$][\w$]*")
+_EXPORT_LINE = re.compile(r"^export\b.*$", re.MULTILINE)
+_EXPORT_DECLARATION = re.compile(
+    rf"export (?:async )?(?:function|const|let|var|class) ({_JS_NAME.pattern})\b"
+)
+_EXPORT_PREFIX = re.compile(
+    r"^export (?=(?:async )?(?:function|const|let|var|class) )", re.MULTILINE
+)
+_TOP_LEVEL_DECLARATION = re.compile(
+    rf"^(?:async )?(?:function|const|let|var|class) ({_JS_NAME.pattern})\b", re.MULTILINE
+)
+# Module-only constructs a flat classic script cannot carry. Top-level `await`
+# is the sharp one: inside the wrapper's plain arrow function it is a syntax
+# error, so the page would die at parse rather than degrade. A dynamic
+# `import()` parses but would fetch at view time, against the page's own URL.
+# These are textual scans over comments as well as code, so they are written
+# literally — `import\s*\(` matched the phrase "register at import (no DOM
+# work)" in runtime.js's header comment.
+_MODULE_ONLY = (
+    (re.compile(r"\bimport\.meta\b"), "import.meta"),
+    (re.compile(r"\bimport\("), "a dynamic import()"),
+    (
+        re.compile(r"^(?:await\b|(?:const|let|var) [^;]*?\bawait\b)", re.MULTILINE),
+        "top-level await",
+    ),
+)
+
+# The two names the epilogue below reaches for, and the module each is kpress's
+# public API from. Checked against what that module exports rather than against
+# what it happens to declare: an upstream that stops exporting one of these is
+# retiring it, whatever the flattened scope would still resolve.
+TOOLTIP_API = {"runtime.js": "behaviors", "tooltips.js": "initKpressTooltips"}
+
+# What the flattened script hands the page, and why it hands over only half of
+# what kpress registers. Overriding a behavior with a no-op bind is kpress's own
+# seam (`behaviors.override`), and running it here — at script evaluation, before
+# the runtime's ready pass — is what keeps the built-in link previews from ever
+# binding.
+TOOLTIP_EPILOGUE = """
+/* This page wants footnote previews and nothing else. kpress's tooltips module
+   registers two behaviors at import — hover previews for internal links, and
+   footnote previews — and the runtime binds both once the document is ready,
+   which here would hang a preview reading "1" off every footnote's back-arrow.
+   The link behavior is overridden with a no-op bind before that pass runs; the
+   footnote one is left alone, and the page boots it explicitly as well. */
+behaviors.override("tooltip", () => undefined);
+window.kpressInitTooltips = initKpressTooltips;
+"""
+
+
+def kpress_tooltips_js(static: Path) -> str:
+    """kpress's tooltip modules as one classic script, exposing the footnote boot.
+
+    Concatenates `TOOLTIP_MODULES` in order into one IIFE, dropping the imports
+    (every name they bind is already in scope by the time it is used) and the
+    `export` keyword. Refuses to produce a bundle it cannot vouch for: an import
+    or export form it does not rewrite, an imported name the source module no
+    longer exports, a module-only construct, a `TOOLTIP_API` name that is gone,
+    or two modules declaring the same top-level name — which sharing one scope
+    would silently resolve to whichever came last.
+    """
+    exported: dict[str, set[str]] = {}
+    declared: dict[str, str] = {}
+    parts: list[str] = []
+
+    for name in TOOLTIP_MODULES:
+        path = static / "js" / name
+        if not path.is_file():
+            raise SystemExit(f"kpress has no js/{name}; the tooltip modules have moved")
+        source = path.read_text(encoding="utf-8")
+
+        names: set[str] = set()
+        for line in _EXPORT_LINE.findall(source):
+            match = _EXPORT_DECLARATION.match(line)
+            if match is None:
+                raise SystemExit(
+                    f"js/{name}: cannot flatten `{line[:60]}`; "
+                    "only `export <declaration>` is rewritten"
+                )
+            names.add(match.group(1))
+        if not names:
+            raise SystemExit(f"js/{name} exports nothing; the module shape has changed")
+        exported[name] = names
+
+        for statement in _IMPORT_STATEMENT.findall(source):
+            flat = " ".join(statement.split())
+            match = _NAMED_IMPORT.fullmatch(flat)
+            if match is None:
+                raise SystemExit(
+                    f"js/{name}: cannot flatten `{flat[:60]}`; "
+                    'only `import {…} from "./sibling.js"` is rewritten'
+                )
+            origin = match.group(2)
+            if origin not in exported:
+                raise SystemExit(
+                    f"js/{name} imports from {origin}, which is not bundled before it"
+                )
+            for binding in match.group(1).rstrip(",").split(","):
+                symbol = binding.strip()
+                if not _JS_NAME.fullmatch(symbol):
+                    raise SystemExit(f"js/{name}: cannot flatten the import binding `{symbol}`")
+                if symbol not in exported[origin]:
+                    raise SystemExit(f"js/{name} imports {symbol}, which js/{origin} lost")
+
+        body = _EXPORT_PREFIX.sub("", _IMPORT_STATEMENT.sub("", source))
+        stray = _EXPORT_LINE.search(body)
+        if stray is not None:
+            raise SystemExit(f"js/{name}: `{stray.group()[:60]}` survived the export rewrite")
+        for pattern, label in _MODULE_ONLY:
+            if pattern.search(body):
+                raise SystemExit(
+                    f"js/{name} uses {label}, which a flattened script cannot carry"
+                )
+
+        for match in _TOP_LEVEL_DECLARATION.finditer(body):
+            symbol = match.group(1)
+            owner = declared.setdefault(symbol, name)
+            if owner != name:
+                raise SystemExit(
+                    f"js/{name} declares `{symbol}`, which js/{owner} also declares; "
+                    "one scope cannot hold both"
+                )
+        parts.append(f"/* kpress: js/{name} */\n{body.strip()}\n")
+
+    for module, wanted in TOOLTIP_API.items():
+        if wanted not in exported.get(module, frozenset()):
+            raise SystemExit(
+                f"js/{module} no longer exports `{wanted}`; footnote previews cannot boot"
+            )
+
+    modules = ", ".join(f"js/{name}" for name in TOOLTIP_MODULES)
+    bundle = f"/* kpress footnote previews, flattened from {modules} */\n(() => {{\n"
+    bundle += '"use strict";\n' + "\n".join(parts) + TOOLTIP_EPILOGUE + "})();\n"
+    if re.search(r"</script", bundle, re.IGNORECASE):
+        raise SystemExit("a kpress tooltip module carries `</script`; it cannot be inlined")
+    return bundle
 
 
 def katex_css(static: Path) -> str:
@@ -460,6 +615,7 @@ def shared_substitutions(static: Path, headline: Facts, default: Facts) -> dict[
         "KPRESS_CSS": kpress_css(static) + katex_css(static),
         "THEME_BOOTSTRAP": theme_bootstrap(static),
         "KATEX_JS": (static / "katex" / "katex.min.js").read_text(encoding="utf-8"),
+        "KPRESS_TOOLTIPS_JS": kpress_tooltips_js(static),
         "BELOW_ONE": BELOW_ONE,
         "NEAR_LIMIT": NEAR_LIMIT,
         "N": str(headline.n),
@@ -539,6 +695,7 @@ def certificate_substitutions(
         "B_JS": repr(float(facts.square_side)),
         "TOTAL_TEX": frac_tex(total),
         "TOTAL_DEC": decimal(total),
+        "TOTAL_PLAIN": f"{total.numerator}/{total.denominator}",
         "SHORTFALL": decimal(shortfall),
         "LEAST_TEX": frac_tex(facts.least_mass),
         "LEAST_TEX_PLAIN": f"{facts.least_mass.numerator}/{facts.least_mass.denominator}",

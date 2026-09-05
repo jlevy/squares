@@ -15,7 +15,7 @@
    This page on top of the kpress design system.
 
    Everything typographic -- the reading measure, the type ramp, headings,
-   lists, code, the colour roles and both themes -- comes from the kpress
+   lists, code, the color roles and both themes -- comes from the kpress
    stylesheets above. What follows is only what kpress has no component for:
    the certificate's figures and the two interactive panels. Every value here
    is a kpress token, so the figures move with the system rather than beside
@@ -23,8 +23,13 @@
    ============================================================ */
 
 .cert-page {
+  /* Links take the page's accent, the teal its tags and switches use, rather
+     than kpress's separate link blue; the token is set here so both themes
+     inherit it. Footnote marks and backrefs follow. */
+  --kpress-doc-link: var(--kpress-doc-accent);
   padding-block-end: calc(var(--kpress-font-size-base) * 6);
 }
+.cert-page a, .cert-page .kpress-footnote-ref a, .cert-page a.kpress-footnote-backref { color: var(--kpress-doc-accent); }
 
 /* Prose keeps the kpress measure; figures are allowed a wider track. */
 .col {
@@ -47,13 +52,29 @@
   letter-spacing: var(--kpress-caps-spacing);
   text-transform: var(--kpress-caps-transform);
 }
-.section-head { margin-block-end: 0.9rem; }
+/* A section starts with room above its heading, so it reads as a new step. */
+.section-head { margin-block: calc(var(--kpress-font-size-base) * 2.6) 0.9rem; }
+.intro .section-head { margin-block-start: 0; }
 
 .hero { padding-block-start: calc(var(--kpress-font-size-base) * 3); }
 /* The heading is set in caps by kpress; s(n) is notation and keeps its case. */
 .hero h1 .symbol { text-transform: none; }
-.subtitle { margin-block: 0.3rem 0; }
-.hero .deck { font-family: var(--kpress-font-prose); margin-block: 1rem 0; }
+/* Under the title: the description in sans caps, a step below the title's
+   size, then the deck in the prose face, italic. */
+.cert-page .hero .subtitle {
+  color: var(--kpress-doc-text);
+  font-family: var(--kpress-font-sans);
+  font-feature-settings: var(--kpress-font-features-sans);
+  font-size: calc(var(--kpress-font-size-base) * 1.3);
+  font-style: normal;
+  font-variant-caps: var(--kpress-caps-variant);
+  font-weight: var(--kpress-font-weight-sans-medium);
+  letter-spacing: var(--kpress-caps-spacing);
+  line-height: 1.2;
+  margin-block: 0.5rem 0;
+  text-transform: var(--kpress-caps-transform);
+}
+.cert-page .hero .deck { font-family: var(--kpress-font-prose); font-style: italic; margin-block: 1.1rem 0; }
 
 /* The certificate switch sits in every figure head; the articles are whole
    documents, so they are hidden outright. */
@@ -68,6 +89,12 @@
 .trump svg [stroke="#000000"] { stroke: var(--kpress-doc-text); }
 .trump svg text { display: none; }
 .cert-article[hidden] { display: none; }
+.colophon {
+  color: var(--kpress-doc-muted);
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  margin-block: 2.5rem 0;
+}
 .cert-claim { margin-block-start: 0.2rem; }
 .claim { margin-block: 1.5rem 1.3rem; }
 .frontmatter {
@@ -163,9 +190,9 @@
   border: 1px solid var(--kpress-doc-border-hairline);
   border-radius: var(--kpress-radius-sm);
   font-family: var(--kpress-font-sans);
-  font-size: var(--kpress-font-size-tiny);
+  font-size: var(--kpress-font-size-small);
   line-height: 1.35;
-  padding: 0.3rem 0.45rem;
+  padding: 0.35rem 0.55rem;
   pointer-events: none;
   position: absolute;
   transform: translate(-50%, -125%);
@@ -173,6 +200,7 @@
   z-index: 2;
 }
 .tip .tip-w { color: var(--kpress-doc-muted); display: block; margin-block-start: 0.1rem; }
+.tip .katex { font-size: 1.15em; }
 .panel {
   border-inline-start: 1px solid var(--kpress-doc-border);
   display: flex;
@@ -196,10 +224,10 @@
   min-height: 2.4em;
 }
 .mass-val .katex { font-size: 1em; }
+.mass-row { align-items: baseline; display: flex; flex-wrap: wrap; gap: 0.15rem 0.7rem; }
 .mass-dec {
   color: var(--kpress-doc-text);
   font-size: var(--kpress-font-size-large);
-  margin-block-start: 0.35rem;
 }
 .verdict {
   border-radius: var(--kpress-radius-sm);
@@ -291,7 +319,9 @@
 /* Math is held until KaTeX has typeset it, so no raw TeX flashes. */
 .tex, .tex-d { visibility: hidden; }
 .math-ready .tex, .math-ready .tex-d { visibility: visible; }
-.tex-d { margin-block: 1.1rem; overflow-x: auto; overflow-y: hidden; }
+/* Wide equations scroll sideways; the block keeps headroom for fractions, since
+   overflow-x: auto also clips vertically and the display margin is zeroed. */
+.tex-d { margin-block: 1.1rem; overflow-x: auto; overflow-y: hidden; padding-block: 0.45rem; }
 .tex-d .katex-display { margin: 0; }
 .caps .katex, .fig-title .katex, .legend .katex, .hint .katex { text-transform: none; }
 /* KaTeX sets math at 1.21em of its surroundings, sized for Times-like faces.
@@ -303,6 +333,8 @@
 .cert-page .sans-text .katex, .cert-page .kpress-figcaption .katex, .frontmatter .katex, .kv .katex,
 .mass-line .katex, .legend .katex, .hint .katex, .fig-title .katex, .caps .katex, .tab-note .katex { font-size: 1em; }
 .caps .katex { letter-spacing: 0; }
+/* Footnotes take the small token size; kpress's 0.9em compounds under an 18px base. */
+.cert-page .kpress-footnotes { font-size: var(--kpress-font-size-small); }
 /* The claim line is the statement itself, set as display. */
 .cert-page .claim .katex { font-size: 1.25em; }
 </style>
@@ -331,12 +363,14 @@
     smallest case still open.</p>
     <p>The best packing known, found by Walter Trump in 1979,<sup class="kpress-footnote-ref"><a href="#fn-trump" id="fnref-3" data-kpress-footnote-ref="trump">3</a></sup> fits eleven squares in side
     {{BEST_PACKING}}…, so <span class="tex">s(11) \le {{BEST_PACKING}}</span>. Whether a smaller container works
-    is the open question. The certificates on this page show it cannot be as small as {{DEFAULT_L_DEC}}, and then
-    not as small as {{HEADLINE_L_DEC}}.</p>
-    <p>Two certificates, decided by the same five conditions, give the two rungs. The
-    {{DEFAULT_L_FRAC}} certificate is shown first: it is smaller, and its numbers are easier to follow. The
+    is the open question. This page shows it cannot be as small as {{DEFAULT_L_DEC}}, and then not as small as
+    {{HEADLINE_L_DEC}}.</p>
+    <p>Each of those is proved by a <strong>certificate</strong>: a finite list of weighted points in the container
+    and a finite list of angles, which, once four arithmetic checks and one exact sweep pass, rule out every packing
+    of eleven unit squares in that container. The checks are the five conditions below, and the same five decide
+    both. The {{DEFAULT_L_FRAC}} certificate is shown first: it is smaller, and its numbers are easier to follow. The
     {{HEADLINE_L_FRAC}} certificate is the bound the title states. The switch beside each figure changes every
-    figure and number on the page to the other certificate.</p>
+    figure and number on the page to the other.</p>
 </section>
 
 <figure>
@@ -391,7 +425,7 @@
     <line x1="{{BOUND_X}}" y1="51.5" x2="{{BOUND_X}}" y2="84" stroke="var(--cert-probe)" stroke-width="2"/>
     <circle cx="{{BOUND_X}}" cy="51.5" r="4.4" fill="var(--cert-probe)"/>
     <text x="{{BOUND_X}}" y="88" dx="11" font-size="11"
-      font-weight="550" fill="var(--cert-probe)">{{L_FRAC}} = {{L_DEC}}, this certificate</text>
+      font-weight="550" fill="var(--cert-probe)">{{L_FRAC}} = {{L_DEC}}, proved below</text>
   </svg>
   </div>
   <figcaption class="kpress-figcaption">The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. It is
@@ -413,7 +447,7 @@
   <div class="tex-d">\sum_a w_a \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}}</div>
   <p>The eleven squares are disjoint, so no atom is counted twice and together they cover at least
   <span class="tex">{{N}}</span>. The board holds <span class="tex">{{TOTAL_DEC}}</span>. The second condition is a
-  property of the certificate rather than of packing, so the first must fail: eleven such squares do not exist.</p>
+  property of the chosen atoms rather than of any packing, so the first must fail: eleven such squares do not exist.</p>
   <p>The rest of the proof makes the first condition finite to check.</p>
 </section>
 
@@ -421,7 +455,7 @@
   <div class="section-head">
     <h2>The Atom Set</h2>
   </div>
-  <p>The certificate holds {{N_ATOMS}} atoms in {{N_ORBITS}} orbits of the container’s eightfold symmetry group
+  <p>There are {{N_ATOMS}} atoms, in {{N_ORBITS}} orbits of the container’s eightfold symmetry group
   <span class="tex">\mathbf{D}_4</span>, carrying {{N_WEIGHTS}} distinct weights between
   <span class="tex">{{WEIGHT_MIN}}</span> and <span class="tex">{{WEIGHT_MAX}}</span>. That symmetry is condition
   <strong>Condition 1</strong>. It lets the proof check angles only up to <span class="tex">\pi/4</span> and reflect
@@ -430,20 +464,20 @@
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 3</span><span class="tag">Conditions 1 and 2</span>
-    <span class="fig-title">The atom field</span>
+    <span class="caps">Figure 3</span>
+    <span class="fig-title">The Atoms</span><span class="tag">Conditions 1 and 2</span>
     {{CERT_TOGGLE}}
   </div>
   <div class="stage stage-tip"><canvas id="field-{{SLUG}}" width="1040" height="1040"></canvas>
       <div class="tip" id="field-tip-{{SLUG}}" hidden></div></div>
   <div class="mass-line">
-    <div>Total mass on the board<span class="v tex">\mu\!\left([0,L]^2\right) = {{TOTAL_TEX}} = {{TOTAL_DEC}}</span></div>
+    <div>Total mass on the board<span class="v tex">\mu\!\left([0,L]^2\right) = {{TOTAL_PLAIN}} = {{TOTAL_DEC}}</span></div>
     <div>Mass eleven disjoint unit squares would need<span class="v tex">{{N}}</span></div>
     <div>Shortfall<span class="v tex">{{SHORTFALL}}</span></div>
   </div>
   <figcaption class="kpress-figcaption">Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
   corners, where a square has least room to move, and thins in the middle. The sites and weights are the optimum
-  of a covering linear program, rationalised. The board holds less mass than eleven disjoint unit squares would
+  of a covering linear program, rationalized. The board holds less mass than eleven disjoint unit squares would
   need. <strong>Condition 2</strong> is that comparison.</figcaption>
 </figure>
 
@@ -466,8 +500,8 @@
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 4</span><span class="tag">Condition 5</span>
-    <span class="fig-title">The prover: drag the square, watch the mass</span>
+    <span class="caps">Figure 4</span>
+    <span class="fig-title">The prover: drag the square, watch the mass</span><span class="tag">Condition 5</span>
     {{CERT_TOGGLE}}
   </div>
   <div class="split">
@@ -475,8 +509,10 @@
     <div class="panel">
       <div class="readout">
         <span class="caps">Mass covered</span>
-        <div class="mass-val" id="mv-{{SLUG}}"></div>
-        <div class="mass-dec" id="md-{{SLUG}}"></div>
+        <div class="mass-row">
+          <div class="mass-val" id="mv-{{SLUG}}"></div>
+          <div class="mass-dec" id="md-{{SLUG}}"></div>
+        </div>
         <span class="verdict ok" id="vd-{{SLUG}}">Covers ≥ 1</span>
       </div>
       <div class="ctl">
@@ -494,8 +530,8 @@
         <span><i style="background:var(--kpress-doc-accent)"></i>comfortably above</span>
         <span><i style="background:var(--cert-below)"></i>below 1, which never occurs at a net direction</span>
       </div>
-      <p class="hint" id="hint-{{SLUG}}">The shaded background is the covered mass at every centre position, recomputed
-      for the direction you choose. The dashed outline is where the square’s centre is allowed to be. Outside
+      <p class="hint" id="hint-{{SLUG}}">The shaded background is the covered mass at every center position, recomputed
+      for the direction you choose. The dashed outline is where the square’s center is allowed to be. Outside
       it the square hangs out of the container, and the proof makes no claim.</p>
     </div>
   </div>
@@ -524,7 +560,7 @@
   <p>The net stays rational because the angles are carried as half-tangents,
   <span class="tex">\theta_k = 2\arctan t_k</span>, so that</p>
   <div class="tex-d">\cos\theta = \frac{1-t^2}{1+t^2}, \qquad \sin\theta = \frac{2t}{1+t^2}</div>
-  <p>are exact rationals. No angle in the certificate is a floating-point number. The net has to reach
+  <p>are exact rationals. No angle in the net is a floating-point number. The net has to reach
   <span class="tex">\pi/4</span>, and since <span class="tex">\tan(\pi/8) = \sqrt{2}-1</span> is irrational,
   even that is tested in an exact rational form:</p>
   <div class="tex-d">t_K^{\,2} + 2t_K - 1 \;\ge\; 0 \quad\Longleftrightarrow\quad t_K \;\ge\; \tan\frac{\pi}{8}.</div>
@@ -532,8 +568,8 @@
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 5</span><span class="tag">Condition 4</span>
-    <span class="fig-title">The shrink that buys the finite net</span>
+    <span class="caps">Figure 5</span>
+    <span class="fig-title">The shrink that buys the finite net</span><span class="tag">Condition 4</span>
     {{CERT_TOGGLE}}
   </div>
   <div class="split">
@@ -564,7 +600,7 @@
       <span class="tex">\pi/4</span>, where <strong>Condition 4</strong> admits only
       <span class="tex">B \lt 0.8787</span> and the shrink is unmistakable. Drag either square by its
       handle. At
-      <span class="tex">K = 180</span>, the net the certificate uses, the two squares are
+      <span class="tex">K = 180</span>, the net the proof uses, the two squares are
       indistinguishable.</p>
     </div>
   </div>
@@ -587,8 +623,8 @@
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 6</span><span class="tag">Condition 4 → Condition 5</span>
-    <span class="fig-title">Least covered mass, as the net is coarsened</span>
+    <span class="caps">Figure 6</span>
+    <span class="fig-title">Least covered mass, as the net is coarsened</span><span class="tag">Condition 4 → Condition 5</span>
     {{CERT_TOGGLE}}
   </div>
   <div class="chart kpress-diagram">
@@ -612,12 +648,12 @@
         {{COARSEN_LABELS}}
       </g>
       <text x="76" y="246" font-size="10" fill="var(--kpress-doc-muted)">
-        Only the last bar clears the threshold. Measured on the retained atoms, optimised against the full net.
+        Only the last bar clears the threshold. Measured on the retained atoms, optimized against the full net.
       </text>
     </svg>
   </div>
-  <figcaption class="kpress-figcaption">This shows the retained certificate is tight against its own net, not that no coarser certificate
-  exists. It measures the slope of the trade.</figcaption>
+  <figcaption class="kpress-figcaption">This shows these atoms are tight against their own net, not that no coarser net could be made
+  to work. It measures the slope of the trade.</figcaption>
 </figure>
 <!--END:COARSENING-->
 
@@ -645,7 +681,7 @@
   <div class="section-head">
     <h2>Generator and Verifier</h2>
   </div>
-  <p>The atoms are not designed. They are solved for. The certificate is a rationalised optimum of a covering
+  <p>The atoms are not designed. They are solved for. The atoms and their weights are a rationalized optimum of a covering
   linear program,</p>
   <div class="tex-d">\tau^*(L,B) \;=\; \min_{w \,\ge\, 0}\; \sum_a w_a \quad\text{subject to}\quad \sum_{a \in Q} w_a \;\ge\; 1 \;\;\text{ for every placement } Q,</div>
   <p>which has one constraint per placement, a continuum, so the rows are generated rather than enumerated, with
@@ -657,8 +693,7 @@
   round number is therefore a signature of a bug, not a result.</p>
   <p>All of that search runs in floating point, because it is a search. None of it is in the proof: the
   <a href="{{GENERATOR_URL}}">generator</a> emits a file, and the <a href="{{VERIFIER_URL}}">verifier</a> re-decides
-  <strong>Conditions 1 through 5</strong> on that file in exact rational arithmetic. A wrong linear program yields a rejected certificate, never a false
-  theorem.</p>
+  <strong>Conditions 1 through 5</strong> on that file in exact rational arithmetic. A wrong linear program will be rejected by the verifier.</p>
   <p>A <a href="{{THIRDPARTY_URL}}">self-contained third-party check</a>, one file on the standard library
   alone, decides the {{DEFAULT_L_FRAC}} certificate without trusting this repository.</p>
 </section>
@@ -666,12 +701,11 @@
 <footer class="col kpress-prose">
   Certificate <a href="{{CERT_URL}}"><code>{{ID}}</code></a>: {{N_ATOMS}} atoms, side <span class="tex">L = {{L_FRAC}}</span>, shrink
   <span class="tex">B = {{B_FRAC}}</span>, a net of {{N_DIRECTIONS}} rational half-tangents reaching
-  <span class="tex">\tan(\pi/8)</span>. Total mass <span class="tex">{{TOTAL_TEX}}</span>. Least covered cell mass
-  <span class="tex">{{LEAST_TEX}}</span> at direction <span class="tex">k=0</span>, centre
-  <span class="tex">{{WITNESS_TEX}}</span>. Every figure is <a href="{{RENDERER_URL}}">computed</a> from the certificate’s own atom list. Prior lower bound
+  <span class="tex">\tan(\pi/8)</span>. Total mass <span class="tex">{{TOTAL_PLAIN}}</span>. Least covered cell mass
+  <span class="tex">{{LEAST_TEX_PLAIN}}</span> at direction <span class="tex">k=0</span>, center
+  <span class="tex">{{WITNESS_TEX}}</span>. Every figure is <a href="{{RENDERER_URL}}">computed</a> from that atom list. Prior lower bound
   <span class="tex">2 + 4/\sqrt{5}</span>.<sup class="kpress-footnote-ref"><a href="#fn-stromquist" id="fnref-1-{{SLUG}}" data-kpress-footnote-ref="stromquist">1</a></sup> Best known packing
-  <span class="tex">{{BEST_PACKING}}\ldots</span>.<sup class="kpress-footnote-ref"><a href="#fn-trump" id="fnref-3-{{SLUG}}" data-kpress-footnote-ref="trump">3</a></sup> Typography follows the kpress design system. PT Serif,
-  Source Sans 3 and KaTeX are embedded. The page loads no external resources.
+  <span class="tex">{{BEST_PACKING}}\ldots</span>.<sup class="kpress-footnote-ref"><a href="#fn-trump" id="fnref-3-{{SLUG}}" data-kpress-footnote-ref="trump">3</a></sup>
 </footer>
 
 </article>
@@ -680,18 +714,21 @@
 <section class="col kpress-prose kpress-footnotes">
 <ol>
 <li id="fn-stromquist" class="kpress-footnote-item">Walter Stromquist, <a href="{{PRIOR_URL}}">Packing 10 or 11 unit squares in a
-square</a>, Electronic Journal of Combinatorics 10 (2003), R8. <a class="kpress-footnote-backref" href="#fnref-1">↩</a></li>
+square</a>, Electronic Journal of Combinatorics 10 (2003), R8. <a href="#fnref-1" class="kpress-footnote-backref">&nbsp;↑&nbsp;</a></li>
 <li id="fn-survey" class="kpress-footnote-item">Erich Friedman, <a href="{{PROBLEM_URL}}">Packing unit squares in squares: a survey
-and new results</a>, Electronic Journal of Combinatorics, Dynamic Survey DS7. <a class="kpress-footnote-backref" href="#fnref-2">↩</a></li>
+and new results</a>, Electronic Journal of Combinatorics, Dynamic Survey DS7. <a href="#fnref-2" class="kpress-footnote-backref">&nbsp;↑&nbsp;</a></li>
 <li id="fn-trump" class="kpress-footnote-item">Walter Trump’s packing of 1979, as recorded in <a href="{{BEST_URL}}">Kingbird’s
 register of squares in squares</a>, the source the record cites. The rendering is <a href="{{BEST_RENDER_URL}}">the project’s
-own</a>, from the retained witness. <a class="kpress-footnote-backref" href="#fnref-3">↩</a></li>
+own</a>, from the retained witness. <a href="#fnref-3" class="kpress-footnote-backref">&nbsp;↑&nbsp;</a></li>
 </ol>
 </section>
+
+<p class="col colophon">Published with <a href="https://github.com/jlevy/kpress">kpress</a>.</p>
 
 </div>
 </main>
 <script>{{KATEX_JS}}</script>
+<script>{{KPRESS_TOOLTIPS_JS}}</script>
 <!--BEGIN:SCRIPT-->
 <script>
 (() => {
@@ -702,7 +739,7 @@ const LIMIT_N = {{LIMIT_NUM}}, LIMIT_D = {{LIMIT_DEN}}, LIMIT = LIMIT_N / LIMIT_
 
 const gcd = (a, b) => b ? gcd(b, a % b) : a;
 const reduce = (n, d) => { const g = gcd(n, d) || 1; return [n / g, d / g]; };
-const fracTex = (n, d) => (d === 1 ? String(n) : `\\tfrac{${n}}{${d}}`);
+const fracTex = (n, d) => (d === 1 ? String(n) : `${n}/${d}`);
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const tex = (el, s, d) => { try { katex.render(s, el, { displayMode: !!d, throwOnError: false }); }
                             catch (e) { el.textContent = s; } };
@@ -739,7 +776,7 @@ function inset() { return B * (Math.abs(cs) + Math.abs(sn)) / 2; }
 function admissible(x, y) { const h = inset();
   return x >= h - 1e-12 && x <= L - h + 1e-12 && y >= h - 1e-12 && y <= L - h + 1e-12; }
 
-/* ---------- Figure 3: the atom field ---------- */
+/* ---------- Figure 3: the atoms ---------- */
 const fc = document.getElementById('field-{{SLUG}}'), fg = fc.getContext('2d');
 const FS = fc.width, FM = FS * 0.055, FPX = FS - 2 * FM, FSC = FPX / L;
 const MAXW = Math.max(...ATOMS.map(a => a[2]));
@@ -780,12 +817,14 @@ function atomAt(cx, cy) {
   return best;
 }
 
-function showAtomTip(i, clientX, clientY) {
+function showAtomTip(i) {
   const [xn, xd, yn, yd, w] = ATOM_Q[i];
   const [wn, wd] = reduce(w, SCALE);
-  const box = fc.getBoundingClientRect();
-  fieldTip.style.left = `${clientX - box.left}px`;
-  fieldTip.style.top = `${clientY - box.top}px`;
+  /* Anchored to the atom, not the pointer: it appears above the disc and
+     holds still until another atom is hovered. */
+  const box = fc.getBoundingClientRect(), [ax, ay] = ATOMS[i];
+  fieldTip.style.left = `${(FM + ax * FSC) / FS * box.width}px`;
+  fieldTip.style.top = `${(FM + (L - ay) * FSC) / FS * box.height - 10}px`;
   fieldTip.innerHTML = '<span class="tip-xy"></span><span class="tip-w"></span>';
   tex(fieldTip.querySelector('.tip-xy'), `(${fracTex(xn, xd)},\\; ${fracTex(yn, yd)})`);
   tex(fieldTip.querySelector('.tip-w'), `w = ${fracTex(wn, wd)}`);
@@ -797,8 +836,9 @@ fc.addEventListener('pointermove', e => {
   const cx = (e.clientX - box.left) / box.width * FS, cy = (e.clientY - box.top) / box.height * FS;
   const i = atomAt(cx, cy);
   fc.style.cursor = i < 0 ? 'default' : 'crosshair';
-  if (i !== hovered) { hovered = i; drawField(); }
-  if (i < 0) fieldTip.hidden = true; else showAtomTip(i, e.clientX, e.clientY);
+  if (i === hovered) return;
+  hovered = i; drawField();
+  if (i < 0) fieldTip.hidden = true; else showAtomTip(i);
 });
 fc.addEventListener('pointerleave', () => {
   if (hovered !== -1) { hovered = -1; drawField(); }
@@ -867,16 +907,18 @@ function drawProver() {
   pg.globalAlpha = 1;
   pg.save();
   pg.translate(X(probe[0]), Y(probe[1])); pg.rotate(-Math.atan2(sn, cs));
-  pg.strokeStyle = css('--cert-probe'); pg.lineWidth = 2.5;
+  pg.strokeStyle = css('--kpress-doc-bg'); pg.lineWidth = 7;
+  pg.strokeRect(-HALF * PSC, -HALF * PSC, B * PSC, B * PSC);
+  pg.strokeStyle = css('--cert-probe'); pg.lineWidth = 4;
   pg.strokeRect(-HALF * PSC, -HALF * PSC, B * PSC, B * PSC);
   pg.restore();
 
   if (handleShown) {
     const [hx, hy] = handlePoint();
     const ex = probe[0] - sn * HALF, ey = probe[1] + cs * HALF;
-    pg.strokeStyle = css('--cert-probe'); pg.lineWidth = 1.5;
+    pg.strokeStyle = css('--cert-probe'); pg.lineWidth = 2.5;
     pg.beginPath(); pg.moveTo(X(ex), Y(ey)); pg.lineTo(X(hx), Y(hy)); pg.stroke();
-    pg.fillStyle = handleHot || mode === 'rotate' ? css('--cert-probe') : css('--kpress-doc-bg');
+    pg.fillStyle = css('--kpress-doc-bg'); pg.lineWidth = handleHot || mode === 'rotate' ? 4.5 : 2.5;
     pg.beginPath(); pg.arc(X(hx), Y(hy), HR * PSC, 0, 6.2832); pg.fill(); pg.stroke();
   }
 }
@@ -922,7 +964,7 @@ function updateK() {
             `\\quad \\theta = ${deg(2 * Math.atan(netT(curK)))}^{\\circ}`);
   } else {
     /* The square at theta is the square at theta mod 90 degrees; past 45 the
-       diagonal reflection carries it to one below 45 at the mirrored centre. */
+       diagonal reflection carries it to one below 45 at the mirrored center. */
     const psi = angle % (Math.PI / 2), mirrored = psi > Math.PI / 4;
     const k = nearestNet(angle);
     tex(el, `\\theta = ${deg(angle)}^{\\circ} \\equiv ${deg(psi)}^{\\circ} \\pmod{90^{\\circ}}` +
@@ -960,7 +1002,7 @@ function overHandle(x, y) {
 }
 
 /* Inside the square a drag holds it where it was grabbed; elsewhere a press
-   puts the centre under the pointer. */
+   puts the center under the pointer. */
 let grabOffset = [0, 0];
 function insideProbe(x, y) {
   const u = cs * x + sn * y, v = -sn * x + cs * y;
@@ -1110,8 +1152,7 @@ function shrinkDraw() {
     const ex = SKC - (SKSIDE / 2) * Math.sin(phi), ey = SKC - (SKSIDE / 2) * Math.cos(phi);
     g.strokeStyle = css('--kpress-doc-border-hairline'); g.lineWidth = 2;
     g.beginPath(); g.moveTo(ex, ey); g.lineTo(hx, hy); g.stroke();
-    g.fillStyle = phiHot || phiMode === 'rotate'
-      ? css('--kpress-doc-border-hairline') : css('--kpress-doc-bg');
+    g.fillStyle = css('--kpress-doc-bg'); g.lineWidth = phiHot || phiMode === 'rotate' ? 3.5 : 2;
     g.beginPath(); g.arc(hx, hy, SKHR, 0, 6.2832); g.fill(); g.stroke();
   }
 
@@ -1157,6 +1198,10 @@ if (window.matchMedia) {
     if (!el.dataset.done) { el.dataset.done = '1'; render(el, el.textContent, true); }
   });
   document.documentElement.classList.add('math-ready');
+
+  /* Footnote hover previews, kpress's own, bundled into this page. Booted after
+     the static math so the preview clones already carry rendered formulas. */
+  if (window.kpressInitTooltips) window.kpressInitTooltips(document, { only: "footnote" });
 
   /* One article per certificate. The switch beside every figure shows one and
      records it in the hash, so a link can open the page on either; the figure

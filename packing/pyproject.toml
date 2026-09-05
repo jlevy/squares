@@ -39,12 +39,24 @@ dev = [
     # In `dev` rather than a group of its own because the type floor covers
     # `devtools`, so a package a devtool imports has to be resolvable wherever
     # that floor runs, which is this group.
-    # Pinned exactly, and to the newest release. The 14-day cool-off in
-    # `tbd guidelines supply-chain-hardening` guards against a compromised upload
-    # of a package this project does not control; first-party packages -- every
-    # jlevy-owned dependency, kpress among them -- are exempt, and the delay has
-    # a real cost, since a fix would sit unusable for two weeks.
-    "kpress==0.3.5",
+    #
+    # Unpinned here because there is no version to pin: kpress is not resolved
+    # from an index. It is vendored as a git submodule at `vendor/kpress`, on the
+    # branch `squares/page-fixes` cut from v0.3.5, and installed from that path by
+    # the `[tool.uv.sources]` entry below. What is installed is exactly the tree
+    # the gitlink names, so the submodule commit is the pin, and `.gitmodules`
+    # plus the gitlink record it. The branch carries the two typographic fixes
+    # this page needs -- KaTeX math sized to kpress's PT Serif rather than to
+    # KaTeX's Times-tuned 1.21em default, and footnotes on the small size token
+    # instead of a compounding 0.9em.
+    #
+    # The 14-day cool-off in `tbd guidelines supply-chain-hardening` guards
+    # against a compromised upload of a package this project does not control.
+    # First-party packages -- every jlevy-owned dependency, kpress among them --
+    # are exempt, and the exemption still applies: vendoring removes the upload
+    # from the path entirely, since the source installed here is the source
+    # reviewable in this repository's own history.
+    "kpress",
     # The motion-lab contract tests execute the exact JavaScript shipped to browsers.
     "nodejs-wheel-binaries>=24.16.0",
     "pytest>=8.3",
@@ -54,6 +66,13 @@ dev = [
     # sits here so the script still type-checks.
     "sympy>=1.13",
 ]
+
+# The vendored kpress. `path` is relative to this file, so it resolves to the
+# `vendor/kpress` submodule at the repository root; `editable` means an edit on
+# the submodule branch is live in the next render without a reinstall, which is
+# the point of vendoring it rather than pinning a release.
+[tool.uv.sources]
+kpress = { path = "../vendor/kpress", editable = true }
 
 [build-system]
 requires = ["hatchling"]
