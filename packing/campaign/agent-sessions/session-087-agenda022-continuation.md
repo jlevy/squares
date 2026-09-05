@@ -32,7 +32,7 @@ session:
       behavioural tests -- so PR 83 can leave draft on a green gate rather than on an
       assurance.
     bead: think-wufn
-    status: in_progress
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 240
@@ -51,15 +51,68 @@ session:
     fallback: >-
       Land the fixes that are established, say on the PR exactly what is still failing
       and why, and leave the PR draft rather than marking a red branch ready.
-    outcome: null
+    outcome: >-
+      Met. Both lanes ran and both are terminal: BC-213 closed H-062's bracket at
+      [97/20, 973/200] and BC-206 walled the n = 12 ladder at about 3.96004. Every gate
+      step CI named was fixed, and two the branch had not yet seen were found and fixed
+      as well -- a test pinning a non-unique LP dual, and a negative control this branch
+      broke by moving a count in one of the two places that encode it. PR 83 reached a
+      fully green validate, packing-required, build and macos-portability on e032a0f6
+      with mergeable_state clean, and left draft.
     evidence:
     - 'CI run 33977875075, job validate: 3 steps failed on head 6313eee4'
+    - 'CI run 33988186764 on e032a0f6: validate, packing-required, build and
+      macos-portability all success'
     - packing/campaign/series/series-000-smoke-and-calibration/results/bc-213-m5-midpoint-register.txt
     - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
-    stop_reason: null
+    stop_reason: >-
+      The phase's own criterion was reached: the pull request is green and out of draft.
+      The work that followed is the efficiency block and the landing, which is a
+      different objective and is phase 2 rather than an overrun of this one.
     next_action: >-
       Gate each lane's frozen candidate through devtools.decide_certificate, write the
       experiment records and register rows, and take the next ready cell of agenda 022.
+  - workflow: efficiency-loop
+    focus: efficiency
+    recording: contemporaneous
+    clock_role: work
+    objective: >-
+      Run agenda-023's efficiency block to a pull-request surface inside the operator's
+      two-to-two-and-a-half-minute target, land the research on main, and encode the
+      priority so it does not depend on one agent remembering it: OR-14 on cycle time
+      and OR-15 on outcome over ceremony.
+    bead: think-doar
+    status: in_progress
+    entered_by: user_request
+    switch_reason: >-
+      Phase 1's objective was met -- the pull request is green and out of draft -- and
+      the operator directed the block to the gate's own cost, which is a different
+      objective rather than a continuation of the first.
+    budget_minutes: 240
+    started_at: '2026-09-05T20:43:00Z'
+    deadline_at: '2026-09-06T00:43:00Z'
+    expected_output: >-
+      PR 83 merged to main; the pull-request tier measured on CI at or under 150 s with
+      its ceiling set around the measurement rather than the target; BC-215 and BC-217
+      terminal; OR-14 and OR-15 recorded in operating-rules.md and mirrored into
+      AGENTS.md; and a full-gate run named in this session's checks as OR-13 requires.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev packing-validate --jobs 2 --inner-jobs 1
+    kill_condition: >-
+      The tier cannot be brought under three minutes without removing a check that
+      catches something, which OR-13 forbids -- in which case say so with the
+      measurement rather than trading coverage for time.
+    fallback: >-
+      Land the measured improvement that exists, record the remaining levers with their
+      prices in agenda-023, and leave the ceiling at the last honest measurement.
+    outcome: null
+    evidence:
+    - 'CI run 33988948116 on c1120c44: the tier at 297.87 s of a 550 s ceiling, down
+      from 1369.60 s, with five tests over the per-test ceiling'
+    stop_reason: null
+    next_action: >-
+      Merge PR 83, then merge main into the efficiency branch and finish the
+      shared-build fix that is the last thing holding the tier above target.
   primary_bead: think-wufn
   status: in_progress
   budget:

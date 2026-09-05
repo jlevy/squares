@@ -1351,7 +1351,7 @@ sessions:
   title: "The agenda 022 continuation and the PR 83 gate"
   status: in_progress
   primary_bead: think-wufn
-  phases: 1
+  phases: 2
   measured: true
   rollups:
   - packing/campaign/resource-usage/f37f604c-3212-50e9-b7f7-4b00b94bfcc0.yaml

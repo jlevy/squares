@@ -2780,7 +2780,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-084](packing/campaign/agent-sessions/session-084-bc148-n17-fresh-successor-completion.md) | 3 | 1 | 329 | 166 | 0 | 2.74 h |
 | [session-085](packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md) | 4 | 23 | 3,244 | 1,801 | 45 | 22.09 h |
 | [session-086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
-| [session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md) | 1 | 0 | 0 | 0 | 0 | 0 h |
+| [session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
 | *shared by 27 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
