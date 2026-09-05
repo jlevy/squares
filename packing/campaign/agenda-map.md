@@ -93,7 +93,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-024 | `BC-225` | 0 | `BC-224`, `BC-239`, `BC-249` | no | — |
 | agenda-025 | `BC-231` | 0 | `BC-230` | no | — |
 | agenda-025 | `BC-234` | 0 | `BC-231` | no | — |
-| agenda-025 | `BC-238` | 0 | `BC-219` | yes | A frozen candidate from BC-232, BC-234, or BC-236 and a coordinator gate that diverts it to independent exactification. |
+| agenda-025 | `BC-238` | 0 | `BC-219` | yes | A frozen lower-bound candidate from BC-232, BC-233, BC-234, or BC-236, its object-specific project and source-distinct… |
 | agenda-025 | `BC-239` | 0 | `BC-224` | no | — |
 | agenda-025 | `BC-235` | 1 | `BC-234` | no | — |
 | agenda-025 | `BC-236` | 1 | `BC-235` | no | — |

@@ -257,9 +257,11 @@ Its job is to keep theorem statements, evidence, IDs, shared files, and routing
 decisions single-owned while the two research programs work concurrently.
 
 BC-219 is a preflight outside the research clock.
-`T+0` is the coordinator commit that completes BC-219 and opens the initial six child
-cells; the hour-four gate is four hours after that commit, not four hours after the
-preflight begins.
+Its completion makes the initial six child cells takeable; it does not start their
+budgets. `T+0` is the later coordinator dispatch record that names all four live agent
+contexts, claims the six cells, and freezes the first-block experiment identities.
+The hour-four gate is four hours after that dispatch, not four hours after the BC-219
+preflight commit.
 
 The full rationale, resource packet, ownership matrix, and routing thresholds are in
 [`X-016`](../explorations/X-016-after-381-two-managers-one-proof-boundary.md).
@@ -267,20 +269,95 @@ If prose in a child agenda conflicts with X-016 or BC-219’s frozen launch pack
 the cell and ask the coordinator; a worker does not resolve a proof-boundary conflict
 locally.
 
-## Gate packet
+## Coordinator entry point
+
+PR #83 is terminal and merged as `663ca37eb622508d9df00c594b8ef11d2c256f55`. The
+portfolio branch is `codex/next-research-strategy`, carried by PR #89 against `main`;
+its merge base with the frozen `origin/main` is the same commit.
+Only the coordinator fetches or reconciles upstream state.
+Managers begin from the committed packet and do not need network access.
+
+Run these read-only checks from the repository root immediately before dispatch:
+
+```sh
+git status --short --branch
+git merge-base --is-ancestor 663ca37eb622508d9df00c594b8ef11d2c256f55 HEAD
+tbd show think-9pzv think-c678 think-gmdy think-jbat \
+  think-4ln1 think-9xxh think-do04 think-u7i4 --max-lines 40
+```
+
+The base check succeeds silently.
+The local bead graph must show BC-219 (`think-9pzv`) closed; the six initial cells open
+and unblocked; and BC-220 (`think-u7i4`) blocked by exactly those six cells.
+Do not select work from the repository-wide `tbd ready` list, which contains unrelated
+agendas.
+
+The coordinator then performs the only tbd mutation in the launch step:
+
+```sh
+tbd update think-c678 think-gmdy think-jbat think-4ln1 think-9xxh think-do04 \
+  --status in_progress
+```
+
+Before either numerical process starts, the coordinator creates the required hypothesis
+and experiment artifacts in the reserved ranges and freezes their criteria, operator,
+instance, regime, budget, and input hashes.
+BC-232 continues H-064 but still needs a new experiment record.
+BC-233 needs both a preregistered hypothesis and an experiment record.
+The theorem-drafting cells may start without placeholder experiments; any measurement
+they later trigger needs a coordinator-created record first.
+
+Do not use `packing-campaign claim` to allocate these records.
+That harness permits one in-progress round, chooses the next global experiment ID
+(`exp-065` on this base), and expects its packing-pose JSONL contract; it neither honors
+this portfolio’s reserved blocks nor represents the fractional and theorem records.
+Create hypotheses under `packing/campaign/hypotheses/` and experiments under
+`packing/campaign/series/series-000-smoke-and-calibration/experiments/` using the
+neighboring soft-schema artifacts as contracts, then run the whole-set record checks
+before dispatching their commands.
+
+Record `T+0` only after those steps pass.
+Write the dispatch record to
+`packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/launch-t-plus-00.md`.
+It carries the current branch HEAD, `origin/main`, current PR #87 head, the six tbd
+claims, allocated H/exp IDs, four agent identities, and the two manager gate paths
+below.
+
+## Gate packets and decision paths
+
+The fixed packet paths are:
+
+| Owner | Hour-NN packet |
+| --- | --- |
+| Fractional manager | `packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/gate-hour-NN.md` |
+| Closure manager | `packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/gate-hour-NN.md` |
+| Coordinator | `packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/gate-hour-NN-decision.md` |
+
+Each owner may create its reserved result directory on first write.
+These paths are planned outputs until a packet exists.
+`NN` is `04`, `08`, `12`, `16`, `20`, or `24`.
 
 Each manager submits by gate minus 15 minutes:
 
 - BC dispositions and checkpoint paths;
-- frozen base SHA, transport identity, and changed-path manifest;
+- frozen base SHA, transport identity, and a complete changed-path content manifest;
 - exact checker receipts, invalid runs, and guard refusals;
 - wall and CPU time;
 - proposed next slices and hypothesis text; and
 - shared-code or cross-program requests.
 
+In a shared checkout, the content manifest lists every modified and untracked owned path
+from `git status --short --untracked-files=all -- <owned-paths>` and gives the SHA-256
+of every listed regular file; deleted paths are marked `DELETED`. A `git diff` hash
+alone is insufficient because it omits untracked result artifacts.
+In an isolated worktree, the packet gives the local transport commit and its complete
+name-status list.
+
 The coordinator integrates fractional before closure, regenerates shared views once, and
-commits the gate. CI is not a reason for either manager to poll; disjoint theory or
-review work remains available while hosted checks run.
+records every accepted and refused path in the coordinator decision packet before
+committing the gate.
+CI is not a reason for either manager to poll; disjoint theory or review work remains
+available while hosted checks run.
 
 ## Delegation topology
 
@@ -292,6 +369,18 @@ The coordinator claims tbd cells and creates or allocates hypotheses and experim
 records before dispatch.
 A manager may update a coordinator-created experiment only inside its reserved range and
 may not change its identity or acceptance rule.
+
+The word *owns* refers to scientific work and manager-local output, not ID authority:
+
+| Surface | Reserved range | Writer or allocator |
+| --- | --- | --- |
+| Coordinator BCs | BC-219 through BC-225 | Coordinator |
+| Fractional BCs | BC-230 through BC-239 | Fractional manager; coordinator alone mutates tbd |
+| Closure BCs | BC-240 through BC-249 | Closure manager; coordinator alone mutates tbd |
+| Fractional hypotheses and experiments | H-070 through H-079; exp-070 through exp-089 | Coordinator creates and freezes identity and criterion; manager appends allocated outcomes |
+| Closure hypotheses and experiments | H-080 through H-089; exp-090 through exp-109 | Coordinator creates and freezes identity and criterion; manager appends allocated outcomes |
+| Cross-program explorations | X-017 through X-019 | Coordinator, after a fresh collision check |
+| Ledgers, maps, frontier, schemas, PR, and retention | Shared; no manager range | Coordinator |
 
 | Manager | First worker wave | Later worker wave |
 | --- | --- | --- |
@@ -307,16 +396,50 @@ A manager collects the floating worker’s terminal packet and releases the slot
 the other manager delegates.
 With more slots, add workers only to distinct BC cells; never duplicate a generator and
 its independent reviewer in the same worker context.
+Under the four-slot cap, neither manager spawns another agent in the first block.
+Delegation requests go through the coordinator, which transfers the one floating slot
+only after its prior packet is terminal.
 
 Transport is explicit.
-In a shared checkout, a manager leaves owned changes uncommitted and submits a patch
-hash plus changed-path manifest.
+In a shared checkout, a manager leaves owned changes uncommitted and submits the content
+manifest defined above.
 In an isolated worktree, a manager may make local transport commits containing only
 owned paths, but may not push, merge, rebase, or operate tbd.
 The coordinator reviews and integrates either form, creates the shared records,
 regenerates shared views, and makes the portfolio commit.
-The gate packet names the frozen base SHA and either the patch SHA-256 or the local
-commit SHA.
+The gate packet names the frozen base SHA and either the shared-checkout content
+manifest or the local commit SHA.
+
+## First four-hour dispatch
+
+The coordinator sends three bounded handoffs at `T+0` and keeps the fourth context.
+Each handoff names this agenda, X-016, the manager’s full child agenda, the frozen base,
+the owned paths, the exact BCs, and its gate packet path.
+
+| Time | Coordinator | Fractional manager | Closure manager | Floating worker |
+| --- | --- | --- | --- | --- |
+| T+0 to T+15 min | Record launch identities; watch upstream and shared paths | From `packing/`, verify the agenda-025 packet; launch the pinned BC-232 and BC-233 processes; begin BC-230 | From the repository root, verify the agenda-026 packet; begin BC-242 | Author BC-240 from the retained packet; do not rerun the radius generator |
+| T+15 to T+105 min | Reject unallocated records and cross-scope writes | Draft BC-230 while supervising the exact background processes | Finish BC-242 and begin BC-245 | Finish BC-240, run its allowed tangent replay and aggregate self-check, and return the packet |
+| T+105 to T+135 min | Hold the floating slot transfer until BC-240 paths are final | Freeze BC-230 author draft and continue supervising processes | Review BC-240 and BC-242; return concrete corrections | Move to the source-distinct BC-230 review |
+| T+135 to T+195 min | Check proposed H/exp text without allocating a new run | Reconcile concrete BC-230 blockers and supervise only the fractional processes | Finish BC-245 and map its solved controls | Complete the BC-230 theorem, seam, specialization, and refusal audit |
+| T+195 to T+225 min | Check manifests, IDs, packet completeness, and exact receipts | Reconcile BC-230, BC-232, and BC-233 dispositions | Specify BC-243 without running it; reconcile BC-240, BC-242, and BC-245 | Return terminal review; start nothing else |
+| T+225 to T+240 min | Freeze launches; accept packets only at the fixed paths | Write `gate-hour-04.md`; no new process | Write `gate-hour-04.md`; no new work | Available only for a coordinator-assigned manifest check |
+| T+240 to T+270 min | Run BC-220: validate fractional, then closure; write the central decision; regenerate shared views once; commit | Await the decision without polling CI | Await the decision without polling CI | Released |
+
+The child agendas carry the exact numerical and replay commands.
+Their working-directory declarations are binding: agenda-025 runs its research commands
+from `packing/`; agenda-026 runs from the repository root and enters `packing/` inside
+each command block. Do not transplant a command between those directories or replace the
+project Python 3.14 environment with the `python3` on `PATH`.
+
+After sequential integration at T+240, run the coordinator gate from `packing/`:
+
+```sh
+uv run --frozen --all-extras --group dev packing-validate --edit
+```
+
+This is the local gate for the commit, not permission to skip a candidate’s exact
+decision routes or a manager’s cell-specific controls.
 
 ## Default block matrix
 
@@ -339,13 +462,21 @@ accept threshold, independent decision outranks further search.
 
 ## Upstream reconciliation
 
-During the planning and launch window, the coordinator watches `origin/main`, PR #83,
-and the namespace-owning PR #87. New `main` commits are fetched and absorbed through the
-PR #83 stack while that pull request is open.
-When PR #83 merges, this branch is rebased or retargeted to `main` before a new manager
-starts. A changed base invalidates only path hashes or assumptions that differ; the
-coordinator records the diff and reruns the preflight instead of making every manager
-rediscover the repository.
+PR #83 is merged and no longer needs polling.
+During the planning and launch window, the coordinator watches `origin/main`, PR #89,
+and the namespace-owning PR #87. Managers never fetch, merge, rebase, or reinterpret an
+upstream delta. If `origin/main` moves, the coordinator freezes new launches, reconciles
+the portfolio branch, records the old and new base plus the changed paths, and reruns
+the affected preflight checks before another manager starts.
+A sibling-head change does not rewrite a historical launch snapshot.
+The coordinator logs its old and new heads, checks namespace and named-input overlap,
+and either records a no-invalidation disposition or appends a superseding manifest.
+
+The first post-freeze sibling check found one noninvalidating change:
+
+| Observed | Ref movement | Changed paths | Disposition |
+| --- | --- | --- | --- |
+| 2026-09-05 after BC-219 | PR #87: `26709263f740f3d9aece654e0272dae3c168d18d` to `3c6c5e7fc0c1662a57a1a3d06246a3a5e0730b89` | `development.md`, `packing/devtools/gate-budgets.yaml`, `packing/tests/test_module_boundaries.py` | No agenda, BC, H, exp, exploration, manager-output, or named-input collision. Preserve the frozen BC-219 row; apply the new validation-budget behavior only after PR #87 reaches `main`. |
 
 ## BC-219 launch snapshot
 
@@ -365,6 +496,7 @@ This portfolio owns agendas 024--026, `BC-219..225`, `BC-230..249`, `H-070..089`
 `X-017..019`, after another upstream collision check.
 PR #87’s `H-066..069` and `exp-065..069` gap remains quarantined.
 The manager output roots are
+`packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/`,
 `packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/` and
 `packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/`; they are
 reserved paths, not evidence that a result exists.
@@ -372,6 +504,9 @@ reserved paths, not evidence that a result exists.
 The following SHA-256 manifest binds every common strategy input and the central exact
 checkpoints. Manager-specific packets add their implementation and control hashes.
 The Git commit containing this section binds agenda-024 itself.
+The values below are the historical BC-219 snapshot and are never silently replaced.
+Accepted edits after this snapshot require a superseding dispatch manifest before `T+0`;
+the coordinator computes that manifest only after both child-agenda edits are final.
 
 ```text
 dd03fe3d200cf9f1c2335c40103da45269716d20d7de38cd642d832205e962b2  operating-rules.md
@@ -395,6 +530,24 @@ db124b9956d8051682388cbba3b16772e65406a0003debba1c92b915c0c489a8  packing/campai
 3b4f754b8a77c0a6edb12a8f669e705594817992f9983956d308aa7b343031b4  packing/cases/trump11/isolation_radius.py
 bc01c636302f26ce4072ee8886c83463a9648f0e35d918541377cf52559aea2c  packing/frontier/n-011.md
 ```
+
+### Post-BC-219 Planning-Spike Manifest
+
+The coordinator froze this amendment at `2026-09-05T23:12:46Z` after the bounded launch
+audits tracked by `think-e7si` and the strict-JSON repair tracked by `think-quwt`. It
+supersedes the two child-agenda hashes in the historical snapshot and adds the only
+implementation and test files changed by the spike:
+
+```text
+96ce2d608dd51bae6637e65b81545623315f2ffd4e597396d5cbe8c35aa70155  packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md
+3e544c5a316d57af21530a5d8269df6a87942d6bdc7537d35d128bbb30cb8b72  packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md
+8c35796d7d7d3b3dbfa8eafd29d63078131ebb9d0b921a71c178ff77530eda01  packing/devtools/run_fractional_colgen.py
+f7f87469d7ee1c3a04679cd9f58bcc032ed79baed927aaf0a7222ec6c7587e43  packing/tests/test_run_fractional_colgen.py
+```
+
+This amendment does not start `T+0`, claim a research cell, or allocate an H or exp ID.
+The launch record still rechecks these bytes against its commit and names the actual
+operators and experiment identities before either numerical lane starts.
 
 The four-slot launch is coordinator, fractional manager, closure manager, and one
 floating worker. The floating worker authors BC-240, then reviews BC-230; BC-232 and

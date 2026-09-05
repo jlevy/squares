@@ -280,13 +280,19 @@ agenda:
       source-distinct replay, and falsifying mutations?
     budget: >-
       Up to 75 percent of the block following any candidate, manager plus independent
-      reviewer, factual-review. Freeze bytes and SHA-256 before review. Decide every
-      theorem condition through the project sweep, interval route, and BC-231's
-      standard-library standalone verifier; include optimized-Python and malformed
-      object refusals; and report all shared assumptions. The coordinator alone may
-      retain or promote the result.
+      reviewer, factual-review. Freeze bytes and SHA-256 before review. Select the
+      decision routes by object: a scalar certificate from BC-232 or BC-233 uses
+      `decide_certificate` and `minimal_verify.py --unpinned`; an adaptive certificate
+      from BC-234 uses the extended project sweep, interval route, and BC-231's
+      standalone verifier; and a kernel candidate from BC-236 cannot enter until
+      BC-236 leaves both a project and source-distinct decision route. Include
+      optimized-Python and malformed-object refusals and report all shared assumptions.
+      A BC-232 packing family of weight at least 11 is a method-closure result, not a
+      lower-bound candidate for these routes. The coordinator alone may retain or
+      promote a result.
     entry: >-
-      BC-232, BC-234 or BC-236 emits a candidate and a coordinator gate diverts it here.
+      BC-232, BC-233, BC-234, or BC-236 emits a frozen lower-bound candidate with all
+      routes required by its object type, and a coordinator gate diverts it here.
     exit: >-
       A complete candidate packet accepted by all three decision routes, or the smallest
       failing premise and a refusal with no frontier change.
@@ -294,7 +300,8 @@ agenda:
     workflows: [factual-review]
     depends_on: [BC-219]
     blocked_on: >-
-      A frozen candidate from BC-232, BC-234, or BC-236 and a coordinator gate that
+      A frozen lower-bound candidate from BC-232, BC-233, BC-234, or BC-236, its
+      object-specific project and source-distinct routes, and a coordinator gate that
       diverts it to independent exactification.
     parallel_group: agenda025-exactification
     program: n11-adaptive-fractional-frontier
@@ -343,7 +350,11 @@ uv run --frozen --all-extras --group dev COMMAND
 ```
 
 Never use the `python3` on `PATH` for project code.
-Set `OMP_NUM_THREADS=1` and `OPENBLAS_NUM_THREADS=1` on each optimization runner.
+Set `OMP_NUM_THREADS=1`, `OPENBLAS_NUM_THREADS=1`, `MKL_NUM_THREADS=1`, and
+`VECLIB_MAXIMUM_THREADS=1` on each optimization runner.
+The pinned macOS NumPy build uses Accelerate, so `VECLIB_MAXIMUM_THREADS` is the
+operative BLAS limit on this host; the other variables keep the command single-threaded
+if the wheel or host changes.
 Do not run the four-worker exact sweep while the three first-block runners are live.
 
 The manager owns fractional implementation and the manager artifacts named below.
@@ -420,11 +431,15 @@ An upper endpoint counts only from an iteration whose row loop reports
 - `packing/devtools/decide_certificate.py` is the freeze-then-decide retention gate.
   It currently accepts only the unconditional scalar-`B` variant; BC-231 must extend or
   replace that decision boundary before an adaptive object can be retainable.
+- `packing/devtools/declare_least_cell_mass.py` fills a scalar candidate’s null
+  `least_cell_mass` by a one-worker exact sweep without regenerating the search.
+  BC-233 uses this bridge before the two-route decision gate.
 - `packing/cases/n11_fractional_certificate/minimal_verify.py` is the current
   standard-library scalar-`B` implementation.
-  BC-231 must add an adaptive counterpart, `adaptive_minimal_verify.py`, that reads the
-  frozen generalized object without importing `sqpack`; BC-238 uses it as the
-  source-distinct implementation route.
+  With `--unpinned`, it is the source-distinct route for a new scalar candidate from
+  BC-232 or BC-233. BC-231 must add an adaptive counterpart,
+  `adaptive_minimal_verify.py`, that reads the frozen generalized object without
+  importing `sqpack`; BC-238 uses it as the source-distinct implementation route.
 
 The current `Certificate`, exact sweep, and interval route all carry one `square_side`.
 Adaptive `B_k` is therefore a theorem, serialized-contract, loader, event-sweep,
@@ -472,16 +487,100 @@ These are retained measurements, not guarantees for an adaptive object.
 The n12 independent verifier has a historical absolute path in its CLI tail; use the
 module replay above and its imported tests until that separate defect is assigned.
 
+## Launch Audit Receipts and Open Instrument Gate
+
+The 2026-09-05 readiness audit used the BC-219 base
+`663ca37eb622508d9df00c594b8ef11d2c256f55`. The audit began with every named
+implementation, control, and checkpoint path byte-identical to that `origin/main`. It
+then repaired the strict-JSON defect in `packing/devtools/run_fractional_colgen.py` and
+added its controls in `packing/tests/test_run_fractional_colgen.py`; the superseding
+launch manifest in agenda-024 binds those new bytes.
+None of these receipts reads or depends on PR #87. The future
+`adaptive_minimal_verify.py` and the manager output root are absent as declared rather
+than dangling inputs.
+
+The cheapest checks produced these receipts from `packing/`:
+
+- the retained state hash is
+  `8df0b9aa530149b44367842a2e6389949b27189df038d68e9d1afa8fd87df8c6`; the production
+  cutting driver loaded side `191/50`, 12,761 sites, 1,657 orbits, and 9,868 rows
+  against the declared 181-direction net, then stopped at iteration cap zero;
+- the `--help` surfaces for `run_fractional_cutting`, `run_fractional_colgen`,
+  `declare_least_cell_mass`, and `decide_certificate` accept every flag used below;
+- the integrated contract-seam slice, including the declaration and strict-JSON
+  controls, passed 88 tests with two exhaustive tests deselected;
+- Massaccesi’s archived verifier returned `CERTIFICATE CONDITIONS VERIFIED` with 168
+  atoms, mass `203/12`, and least score `1`; and the source-distinct `check.py` rebuilt
+  the control bytes and accepted both its n=11 and n=17 controls;
+- `minimal_verify.py --unpinned` accepted the live 1,121-atom scalar n=11 certificate
+  with least covered mass `4001/4000` in 48.7 seconds, confirming the independent scalar
+  entry point that BC-232 and BC-233 candidates use; and
+- zero-budget colgen probes exercised both the unseeded screen and the
+  `--seed-certificate ... --seed-map centre` path.
+  They stopped before the first LP round, emitted no candidate, and the seeded probe
+  loaded 1,121 distinct seed sites.
+
+The zero-budget probes exposed a handoff defect: a deadline-stopped colgen summary
+serialized bare `Infinity` and `NaN` tokens.
+Those are not JSON numbers, and `jq` silently translated them to a maximum float and
+`null` in the audit.
+The follow-up tracked by `think-quwt` now writes `null` for the documented unavailable
+solver fields and uses `allow_nan=False` to reject any unexpected non-finite value.
+The focused driver suite passed ten tests, including the deadline CLI path and an
+unexpected-NaN refusal.
+
+A deadline-stopped BC-233 arm is now safe to preserve and hand off as strict JSON, but
+it is still time-limited and ineligible for comparison or BC-233’s scientific exit.
+Any future summary containing `Infinity` or `NaN` is a technical failure, not a result.
+
+These commands reproduce the bounded receipts without starting a production run:
+
+```bash
+shasum -a 256 \
+  campaign/series/series-000-smoke-and-calibration/results/bc-200-state-191-50.json
+uv run --frozen --all-extras --group dev python -m devtools.run_fractional_cutting --help
+uv run --frozen --all-extras --group dev python -m devtools.run_fractional_colgen --help
+uv run --frozen --all-extras --group dev python -m devtools.declare_least_cell_mass --help
+uv run --frozen --all-extras --group dev python -m devtools.decide_certificate --help
+uv run --frozen --all-extras --group dev python \
+  resources/web/n17-lower-bounds-2026/massaccesi-verify-n17-lower-bound-4_5058.py
+.venv/bin/python3 cases/n11_fractional_certificate/thirdparty/check.py
+.venv/bin/python3 cases/n11_fractional_certificate/minimal_verify.py \
+  --unpinned cases/n11_fractional_certificate/certificate.json
+```
+
+The warm-start receipt uses the production driver with no output paths and an iteration
+cap of zero. Its zero total is non-scientific; only the successful state reconstruction
+is a preflight result:
+
+```bash
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 \
+uv run --frozen --all-extras --group dev python -m devtools.run_fractional_cutting \
+  --n 11 --side 191/50 --shrink 9977/10000 \
+  --angle-limit 207107/500000 --steps 180 \
+  --minutes 0 --iterations 0 --cap 150 --support-cap 96 \
+  --rows-rounds 2 --rows-per-direction 3 \
+  --warm campaign/series/series-000-smoke-and-calibration/results/bc-200-state-191-50.json
+```
+
 ## Output and checkpoint ownership
 
-BC-219 should create or explicitly approve this manager-only root before launch:
+BC-219 reserves this manager-only root, but a Git checkout does not materialize an empty
+directory. After checking the reservation, the manager creates and tests it from
+`packing/`:
 
-```text
-packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/
+```bash
+mkdir -p campaign/series/series-000-smoke-and-calibration/results/agenda-025
+test -d campaign/series/series-000-smoke-and-calibration/results/agenda-025
+test -w campaign/series/series-000-smoke-and-calibration/results/agenda-025
 ```
 
 Inputs outside that directory are read-only.
 Never overwrite `bc-200-state-191-50.json` or a retained certificate.
+Both drivers append their progress logs, while state, summary, and candidate paths may
+be replaced. Before a launch, require every path in its output stem to be absent.
+If a stem already exists, preserve it and allocate the next two-digit leg or a new
+descriptive stem; never rerun into the old paths.
 Use these stems:
 
 | BC | Required outputs under `results/agenda-025/` |
@@ -521,7 +620,7 @@ BC-231 does not open before the theorem is reviewed and frozen at the hour-four 
 
 | Elapsed | Manager / BC-230 | BC-232 process | BC-233 processes |
 | --- | --- | --- | --- |
-| 0--15 min | Verify packet hashes, output root, accept rules, and worker write scopes. | Load the JSON state and launch leg 1. | Run the n17 source control; record that published `M` is the doubled margin. |
+| 0--15 min | Verify packet hashes, create the reserved output root, refuse reused stems, and freeze accept rules and worker write scopes. | Load the JSON state, confirm its 181-direction compatibility, and launch leg 1. | Run the n17 source control; record that published `M` is the doubled margin. Confirm the strict-JSON deadline control, while keeping every deadline stop time-limited and ineligible for comparison. |
 | 15--45 min | Draft the lemma, serialized fields, seam rules, scalar specialization, and refusal matrix. | Run leg 1. | Run the three one-round, equal-grid inset screens sequentially; choose only among candidates that were emitted. |
 | 45--87 min | Complete the contract and turn every premise into a BC-231 positive or mutation test. | Run leg 1. | Run the selected released seed and unseeded control concurrently for the same 42-minute deadline. |
 | 87--105 min | Freeze the author draft for review. | Run leg 1. | Compare only equal-status outputs; run quick refusals and reserve a full decision for any mass below 11. |
@@ -545,7 +644,7 @@ Run from `packing/`. The first leg reads the retained input and writes four fres
 outputs:
 
 ```bash
-OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 \
 uv run --frozen --all-extras --group dev python -m devtools.run_fractional_cutting \
   --n 11 --side 191/50 --shrink 9977/10000 \
   --angle-limit 207107/500000 --steps 180 \
@@ -559,11 +658,22 @@ uv run --frozen --all-extras --group dev python -m devtools.run_fractional_cutti
 ```
 
 Leg 2 changes `--warm` to the leg-01 state and every output stem to `leg-02`. After each
-leg, take the maximum exact `best_scaled_total` seen so far as the lower endpoint and
-the smallest objective from a `rows_converged: true` iteration as the reported upper
-endpoint. Preserve both evidential labels.
-Stop immediately on a verified packing family of total at least 11 or a row-converged
-objective below 11; the latter triggers the freeze-bridge request above.
+leg, require a zero exit and the fresh state, summary, family, and log paths named by
+the command. A missing output or an unreadable state is a technical failure, not a
+scientific result and not permission to rerun into the same stem.
+
+Take the maximum exact `best_scaled_total` seen so far as the lower endpoint and the
+smallest float `rows_objective` from an iteration with `rows_converged: true` as the
+computational upper endpoint.
+Preserve those different evidential labels.
+Stop immediately on a `verify_ceiling` packing family of total at least 11; that closes
+the current one-body formulation at 3.82. Also stop on a row-converged objective below
+11, preserve the state, and request the rationalize/freeze bridge; the float crossing is
+a candidate for that bridge, not a bound.
+Do not apply the width rule at the hour-four gate after only 210 CPU-minutes.
+After the frozen additional 30-minute leg, continue only if the width is at most
+`0.860783510945437`; a larger width retires this checkpoint until its recorded reopen
+condition changes.
 
 ### BC-233 launch
 
@@ -582,7 +692,7 @@ Pass the scale explicitly: this driver defaults to 200,000 even though the libra
 NPZ checkpoint driver use 4,000,000. The template is:
 
 ```bash
-OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 \
 uv run --frozen --all-extras --group dev python -m devtools.run_fractional_colgen \
   --n 11 --side 191/50 --shrink 9977/10000 \
   --grid-counts 25,34,41 --inset INSET \
@@ -595,27 +705,46 @@ uv run --frozen --all-extras --group dev python -m devtools.run_fractional_colge
   --freeze campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-233-screen-INSET.candidate.json
 ```
 
-Replace `/` in the filename stem with `-`. Select the lowest rationalized total only
-among runs that emitted a candidate; record all failures.
-Then run the selected candidate as `--seed-certificate ... --seed-map centre` with the
-control inset `1/2`, `--column-rounds 8`, and `--deadline-seconds 2520`. Run the
-unseeded control with the same arguments and deadline but no `--seed-certificate`. Use
-`released` and `control` output stems.
+Replace `/` in the filename stem with `-`. A screen is eligible only when the process
+exits zero, its summary is strict JSON, its final row loop reports convergence, and its
+candidate path exists.
+Rank eligible screens by the exact rational `total_mass` in the candidate bytes; record
+every ineligible run and stop BC-233 if none remains.
+Hash the selected candidate before using it as a seed.
+
+Run that candidate as `--seed-certificate ... --seed-map centre` with the control inset
+`1/2`, `--column-rounds 8`, and `--deadline-seconds 2520`. Run the unseeded control with
+the same arguments and deadline but no `--seed-certificate`. Use fresh `released` and
+`control` output stems.
 `centre` preserves the seed at the same side; `scale` is equivalent here but leaves the
 intent less clear.
 
-If either follow-on emits total mass below 11, rerun that exact configuration with
-`--verify-serial` to populate the declaration in fresh bytes, hash it, and decide it:
+If either follow-on emits total mass below 11, do not rerun the generator: a clocked
+rerun can stop after a different round and would no longer decide the candidate that
+crossed the threshold.
+Hash the raw candidate, fill its null `least_cell_mass` with the existing one-worker
+declaration bridge, hash the resulting bytes, and then decide that path:
 
 ```bash
+shasum -a 256 \
+  campaign/series/series-000-smoke-and-calibration/results/agenda-025/CANDIDATE.json
+uv run --frozen --all-extras --group dev python -m devtools.declare_least_cell_mass \
+  campaign/series/series-000-smoke-and-calibration/results/agenda-025/CANDIDATE.json
+shasum -a 256 \
+  campaign/series/series-000-smoke-and-calibration/results/agenda-025/CANDIDATE.json
 uv run --frozen --all-extras --group dev python -m devtools.decide_certificate \
   campaign/series/series-000-smoke-and-calibration/results/agenda-025/CANDIDATE.json
 ```
 
-The released seed continues only if it beats the equal-budget control on a fully decided
-exact mass or on the same well-defined bracket endpoints.
-A lower float LP objective, a non-converged deadline stop, or failure of an inset grid
-is not evidence for the theorem.
+Any fully decided mass below 11 routes immediately to BC-238 and outranks the seed
+comparison. Otherwise, the seed earns one continuation block only if both arms have
+strict summaries, emit candidates after the same number of completed column rounds with
+the same stopping class, and the released candidate’s exact rational `total_mass` is
+strictly smaller than the control’s. That is an exploratory search-routing result, not
+theorem evidence or a causal claim about the margin.
+Equal or larger exact mass retires the seed.
+A lower float LP objective, unequal stopping status, deadline stop, or failed inset
+screen is unresolved and earns no continuation.
 
 ## Development and gate validation
 
@@ -631,20 +760,38 @@ adaptive object independently, and must not import `sqpack` or call either proje
 decision route. A candidate cannot enter BC-238 until this command and the project sweep
 and interval routes agree on the retained positives and all adaptive mutations.
 
+For a scalar candidate from BC-232 or BC-233, the existing source-distinct route is:
+
+```bash
+.venv/bin/python3 cases/n11_fractional_certificate/minimal_verify.py \
+  --unpinned \
+  campaign/series/series-000-smoke-and-calibration/results/agenda-025/CANDIDATE.json
+```
+
+A `verify_ceiling` packing family from BC-232 does not have this schema and must not be
+sent to either certificate verifier.
+Its exact weight-at-least-11 verdict closes BC-232’s formulation, but it is not a
+lower-bound candidate and does not enter BC-238.
+
 The fast contract-seam slice is:
 
 ```bash
-.venv/bin/python3 -m pytest -q \
+uv run --frozen --all-extras --group dev python -m pytest -q \
   tests/test_fractional_classcert.py \
   tests/test_fractional_cutting.py \
   tests/test_colgen_checkpoint.py::test_a_resumed_run_continues_rather_than_restarting \
   tests/test_run_fractional_colgen.py::test_a_deadline_stop_leaves_the_table_and_no_candidate \
+  tests/test_run_fractional_colgen.py::test_deadline_before_first_round_writes_strict_json \
+  tests/test_run_fractional_colgen.py::test_summary_json_refuses_unexpected_non_finite_values \
+  tests/test_declare_least_cell_mass.py \
   tests/test_decide_certificate.py \
   -m 'not exhaustive_exact and not exhaustive_interval'
 ```
 
 The planning spike on 2026-09-05 passed 83 tests with two exhaustive tests deselected:
 1.45 seconds in pytest and 1.84 seconds wall on this checkout.
+The integrated readiness slice passed 88 tests with two exhaustive tests deselected in
+3.52 seconds of pytest time.
 This proves only that the existing seams are green; it is the baseline BC-231 must
 preserve.
 

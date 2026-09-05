@@ -363,11 +363,11 @@ The Trump radius is an existing local endpoint to package and review.
 The density route must earn weak-dual semantics before numerical optimization, and the
 stationary route must price a complete typed language before an n=11 atlas is launched.
 
-## Manager entry point
+## Manager Entry Point
 
 The workflow entry point is BC-240, BC-242, and BC-245 after the coordinator opens
 BC-219. Work from the repository root unless a command begins with `cd packing`. Before
-assigning a worker, read this agenda, X-016, and these two prior records in order:
+assigning a worker, read this agenda, X-016, and these prior records in order:
 
 1. `packing/campaign/agendas/agenda-021-three-numbers-and-a-wall.md`, especially BC-199;
 2. `packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md`;
@@ -402,9 +402,9 @@ The papers and web sources named below are local archive inputs.
 Archived PDFs, raw transcriptions, and web captures are read-only evidence and must not
 be formatted or edited.
 
-## Frozen local resource packet
+## Frozen Local Resource Packet
 
-### Trump endpoint
+### Trump Endpoint
 
 The retained theorem inputs are:
 
@@ -473,7 +473,7 @@ It does not enlarge the theorem beyond the same labelled, anchored chart.
 Neither radius proves global optimality, global uniqueness, or capture of another
 contact type.
 
-### Contact and atlas controls
+### Contact and Atlas Controls
 
 These inputs describe existing machinery; none is a typed-stationarity theorem:
 
@@ -492,7 +492,7 @@ Treat these as negative and positive controls.
 Do not rename or reinterpret them as the new stationary atlas.
 The new implementation receives its own output roots below.
 
-### Solved-case controls
+### Solved-Case Controls
 
 Use the complete exact classifications at n=3 and n=4 as completeness oracles:
 
@@ -529,7 +529,7 @@ completeness oracle.
 The historical exp-014 and exp-015 Markdown commands also name a removed script; use the
 current module commands below.
 
-### Archived method sources
+### Archived Method Sources
 
 The manager can start the rigidity and stationarity review from these local sources:
 
@@ -554,7 +554,7 @@ nonsmooth separating-axis choices.
 Every imported implication must be restated for this configuration space and proved or
 labelled as a heuristic.
 
-## First four hours
+## First Four Hours
 
 This split keeps three independent questions in flight without allowing an early
 numerical result to outrun its semantics.
@@ -575,7 +575,7 @@ closure block. BC-241 opens only after the coordinator commits BC-240 at the hou
 gate. BC-243, BC-246, BC-247, and all implementations remain closed until their
 predecessor contracts pass review.
 
-## Output ownership
+## Output Ownership
 
 The following paths are reserved for this manager.
 They are planned outputs, not proof that the corresponding artifact already exists.
@@ -598,7 +598,7 @@ containing only owned paths; in a shared checkout it returns an uncommitted patc
 The coordinator alone integrates either form into the portfolio branch.
 A new schema or a change outside these roots requires a gate request before writing.
 
-## Density proof contract
+## Density Proof Contract
 
 Let `C_L = [0,L]^2`. Let `P_L` be the compact placement space of centres and angles
 modulo each square’s quarter-turn symmetry for which the corresponding closed unit
@@ -666,7 +666,7 @@ It need not have zero unconstrained gradient.
 Piecewise densities require feature-cell branches or a stated nonsmooth Fritz-John or
 Clarke condition, with wall ties retained.
 
-## Typed-stationarity proof contract
+## Typed-Stationarity Proof Contract
 
 The global program begins with existence.
 Bound `L` by the exact candidate side, put angles on the compact quarter-turn quotient,
@@ -734,7 +734,7 @@ n=5 witness is representable, mutation controls fail for the intended reason, an
 n=11 price is derived from named measured combinatorial factors.
 The n=5 control alone cannot establish completeness.
 
-## Launch and validation commands
+## Launch and Validation Commands
 
 The following commands are read-only or write only when a future cell supplies an
 explicit manager-owned result path.
@@ -804,39 +804,84 @@ uv run --frozen --all-extras --group dev packing-validate --records
 uv run --frozen --all-extras --group dev packing-validate --push
 ```
 
-## Bounded audit spike
+## Bounded Launch Spike
 
-This planning pass ran no atlas and no radius recomputation.
-It ran two cheap checks against the current tree:
+The read-only spike ran at branch head `cdce885390cc11b0f0f36eab6ccabd7ab2313f77`
+against frozen `origin/main` `663ca37eb622508d9df00c594b8ef11d2c256f55`. Sibling PR 87
+was neither merged nor referenced, so none of these receipts depends on it.
+Every Python command used `uv run --frozen` from `packing/` and reported Python 3.14.7.
+The managed sandbox redirected only uv caches to lane-specific directories under
+`/private/tmp`; it wrote no campaign artifact, atlas, or retained result.
 
-```sh
-cd packing
-.venv/bin/python3 -m pytest -q -p no:cacheprovider \
-  tests/test_trump_isolation_radius.py
-.venv/bin/python3 -m cases.trump11.tangent_cones \
-  --replay campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json
-```
+| Check | Measured result | External wall time |
+| --- | --- | --- |
+| Exact Trump witness | Valid: 11 squares, 55 pairs, 20 boundary coordinates, 14 zero-gap pairs, and the degree-eight field identity | 0.27 s |
+| Retained Trump tangent replay | `criterion_met`; 512 raw selections, 128 derivative-distinct branches, 128 exact zero certificates, no exact nonzero direction, no unresolved cone, and seven of seven self-tests true | 12.18 s |
+| Trump isolation and exact-LP tests | 8 passed in 85.63 s with no skipped check | 86.13 s |
+| Complete n=3 replay | `criterion_met`; the record and retained SVG byte-replayed, with ten of ten self-tests true | 0.73 s |
+| Complete n=4 replay | `criterion_met`; the record replayed, with six of six self-tests true | 0.85 s |
+| Exact Göbel n=5 witness | Valid: 5 squares and 10 pairs; duplicate-square mutation rejected | 0.23 s |
+| Retained n=5 local-rigidity replay | 14 coordinates pinned, one first-order flex, and the one flex obstructed at second order | 0.74 s |
+| Focused n=5 rigidity tests | 15 passed in 3.81 s with no skipped check | 4.23 s |
+| Existing pointwise fractional-ceiling tests | 14 passed in 0.08 s with no skipped check | 0.40 s |
+| Existing contact checks | Structure, full-cell control, 21-topology and 11,013-orbit scaffold atlas, and enumeration-pricing checks passed | 1.22 s, 0.26 s, 1.93 s, and 8.69 s |
+| Existing contact test group | 62 passed in 37.86 s with no skipped check | 38.19 s |
 
-The focused test returned six passes in 7.25 wall seconds.
-The tangent replay returned 128 branches from 512 raw selections, 128 exact zero
-certificates, no exact nonzero certificate, no unresolved branch, and all seven
-self-tests true in 12.83 wall seconds.
-This establishes that the current source still replays the qualitative tangent endpoint
-after the source drift.
-It does not fill the missing per-face radius witnesses or independently reproduce
-BC-199’s quantitative calculation.
+The current hashes remain
+`60a4b7c48034b37063509a8a641974ed5eae86dccd056e9cbc6cf2fd7f2f0661` for the exp-013
+tangent record, `db124b9956d8051682388cbba3b16772e65406a0003debba1c92b915c0c489a8` for
+the BC-199 radius record, and
+`3b4eae938c37c13af6252ac5d83fa99aa95f6b1627b99920c5df8be94c56bea9` for the exact Trump
+witness. The documented semantic drift in `tangent_cones.py` remains the only mismatch
+against BC-199’s frozen input list.
+The replay therefore supports the qualitative tangent endpoint and confirms that the
+retained aggregate radius record is byte-identical; it does not independently recompute
+that record’s arithmetic, recreate the missing per-face radius witnesses, or qualify as
+an independent replay of the radius generator.
 
-A separate read-only control audit replayed both small-n classifications, the exact
-Göbel witness, and the n=5 rigidity record.
-The n=3 and n=4 replays returned `criterion_met` in 0.012 and 0.105 seconds; the witness
-verifier accepted the Göbel packing after all ten pair checks and rejected its
-duplicate-square mutation; the rigidity replay reproduced 14 pinned coordinates, one
-first-order flex, and its exact second-order obstruction.
-Its focused rigidity suite returned 46 passes in 26.69 seconds.
-These checks confirm the corrected BC-247 routing but do not upgrade n=5 to a
-completeness oracle.
+The instrument inventory gives three distinct launch states:
 
-## Gate checklist and remaining uncertainty
+| Cell | What exists now | Launch disposition |
+| --- | --- | --- |
+| BC-240 | Exact witness verification, tangent record-and-replay, the retained BC-199 aggregate record, and focused exact tests | Ready for theorem packaging from retained evidence; no generator rerun |
+| BC-242 and BC-243 | `sqpack.fractional.ceiling` verifies pointwise depth for closed squares; `sqpack.exact_lp.fixed_cell_lp` is reusable for fixed-angle cells. The proposed `packing/src/sqpack/full_size_density/`, `packing/cases/n11_full_size_density/`, and focused test roots do not exist, and no code verifies almost-everywhere depth or continuum primal coverage | BC-242 may draft the measure-theoretic contract. BC-243 remains blocked until a new guarded instrument exists |
+| BC-245 through BC-247 | The abstract contact, local-realization, structural full-cell, exact fixed-cell LP, and known-contact checks are live. The proposed `packing/src/sqpack/stationary_backbones/`, `packing/cases/stationary_backbones/`, and focused test roots do not exist. `sqpack.promote.system.close` deflates one known contact system; it does not enumerate typed KKT or abnormal Fritz-John branches | BC-245 may draft the finite-language and completeness lemmas. BC-246 and BC-247 remain blocked until a producer and exact replay guard exist |
+
+The n=3 and n=4 controls are executable completeness oracles now.
+The n=5 control is executable only as an exact witness and local second-order-rigidity
+oracle. Passing all three does not make an absent typed-backbone producer ready.
+
+## Manager Launch Sequence
+
+1. Confirm that the coordinator has claimed BC-240, BC-242, and BC-245 and has frozen
+   their criteria. Record `git rev-parse HEAD origin/main`, inspect local status, and
+   stop if a frozen input or manager-owned output has unexplained local changes.
+2. Run the hash block in **Manager Entry Point**. Accept only the frozen digests and the
+   documented `tangent_cones.py` semantic drift.
+   Any other byte drift returns all three cells to the coordinator before a worker
+   starts.
+3. Run the exact Trump, solved-case, and existing-contact blocks in **Launch and
+   Validation Commands**. A nonzero exit, skipped check, replay mismatch, unresolved
+   Trump cone, stale n=3 SVG, or failed mutation control refuses launch.
+   Do not replace a failed command with a nearby test.
+4. If step 3 passes, dispatch disjoint writing work only: the BC-240 author packages
+   retained evidence; the manager drafts BC-242’s weak-duality theorem and BC-245’s
+   typed-branch completeness lemma.
+   Do not run the radius generator, a density optimizer, or an atlas in this block.
+5. At 90 elapsed minutes, apply the decision table below and return a gate packet even
+   if every research draft is incomplete.
+   Preserve a bounded negative or missing instrument as the result; do not spend the
+   remainder building an unregistered substitute.
+
+| Work | Continue condition | Refusal condition |
+| --- | --- | --- |
+| BC-240 theorem packet | The frozen hashes, exact witness, tangent replay, and all focused tests pass; every statement stays in the anchored fixed-side chart | Any unexplained drift, replay mismatch, unresolved branch, skipped test, or claim of global capture or full radius replay |
+| BC-242 proof draft | The placement space, measure class, a.e. boundary convention, weak-duality inequality, wall strata, and finite approximation directions are explicit | Any use of sampled primal coverage as an upper bound, singular mass without its own boundary theorem, or complementary slackness before primal and dual semantics are proved |
+| BC-243 pilot | A new exact a.e.-depth verifier and a continuum primal-coverage guard each have a negative control that is observed to fail, and BC-242 has passed review | The current tree: both instruments are absent, so no numerical pilot may start |
+| BC-245 language draft | The finite chart atlas, feature owners, wall identities, active and positive-support rows, zero multipliers, rattlers, ties, and regular and abnormal FJ cases all appear in the completeness statement | A planar centre graph, one distance equation per contact, an assumed constraint qualification, or deletion of zero-multiplier and rattler variables |
+| BC-246 and BC-247 execution | A typed producer emits every declared field, an independent replay consumes each field, and BC-245 has passed review; n=3 and n=4 remain completeness controls and n=5 remains a positive local control | The current tree: the producer and replay guard are absent. Existing contact checks cannot be relabelled as stationary-backbone execution |
+
+## Gate Checklist and Remaining Uncertainty
 
 The coordinator should refuse the next stage unless its predecessor returns all of the
 following:
