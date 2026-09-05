@@ -159,7 +159,7 @@ session:
       retained rung's 0.001040 of margin is spent within 0.000042: the ladder ends at
       about 3.96004 and T-017's 0.0308 of runway under 4B is not runway. Retained as nine
       covering-value rows and the run register; no round is registered because the cell
-      declared no hypothesis, which is D-457.
+      declared no hypothesis, which is D-460.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
     files:
@@ -364,7 +364,7 @@ The lint and type floors were the census tool and three cross-module imports of 
 helpers. The fast behavioural tier was seven tests, and they were not noise: `T-021`
 moved the `n = 20` package from certifying `n = 19` to certifying `n = 20`, and six
 tests plus one register row still described the corpus as it stood before that.
-The register row is `D-455`, and it is the one that mattered — a `frozen_artifact` path
+The register row is `D-458`, and it is the one that mattered — a `frozen_artifact` path
 naming the moving `certificate.json` pointer, so a superseded rung quoted its own
 successor’s atoms.
 

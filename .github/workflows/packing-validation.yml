@@ -111,13 +111,16 @@ jobs:
       #     wall is 2491.83s (run 33982793449) and `exhaustive exact behavioral tests` is
       #     1765.82s of it, so a matrix pays N setups to arrive at a floor set by one step.
       #   * Parallelism inside the step: 306.4s to 135.0s at `-n 4` on a four-core box,
-      #     then to 56.6s once the two shared builds the lane split had re-billed were
-      #     marked. This is the one that moves, and it is wired in `_fast_tests`.
+      #     and 56.6s with two shared cached builds removed from the lane. This is the one
+      #     that moves, and the measured half of it is wired in `_fast_tests`.
       #
-      # What follows from that, for whoever reads this next: the critical path has moved.
-      # The quick lane is no longer the wall, the second `--jobs` lane's ~135s is, and
-      # `--jobs 3` is the next lever rather than a third job. It is left at 2 here because
-      # BC-218 could not clock it on CI, and an unmeasured CI change is how D-380 happened.
+      # Two things follow, for whoever reads this next. The remaining wall is not sequencing
+      # either: 121s of the 306.4s is two tests being billed for a build they share with a
+      # test BC-214 deferred, they are why this step still fails its own per-test ceiling,
+      # and `test_the_slow_marker_is_declared_only_by_measured_nodes` records why marking
+      # them is not the fix. And once they go, the second `--jobs` lane's ~135s becomes the
+      # wall, so `--jobs 3` is the next lever rather than a third job. It stays at 2 here
+      # because BC-218 could not clock it on CI, and an unmeasured CI change is D-380.
       - name: Run the required pull-request surface
         if: "github.event_name == 'pull_request'"
         run: >-

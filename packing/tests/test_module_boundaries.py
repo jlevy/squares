@@ -465,6 +465,23 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
     * `test_the_n17_certificate_verifies_in_the_fast_tier_now` is 17.4s and is now
       deferred, so its name no longer describes where it runs. The name is left to its
       owner rather than changed here.
+    * A *cached build* shared between a deferred test and a retained one is the second
+      limit again, and it is worse, because the ceiling and the floor cannot both be
+      satisfied. `BC-218` measured two: `test_seed_cross_fields_...` and
+      `test_known_best_composite_png_...` each call a module-level cached builder that a
+      test marked here used to trigger first, and each went from cheap to 93.86s and
+      26.83s of `call` when its neighbour was deferred. Between them they are 121s of a
+      306.4s quick lane, so the pull-request surface fails its own ceiling on them today.
+      Marking them does not fix it: run in the slow lane they cost 0.01s and 0.00s,
+      because there the neighbour pays the build again first, and the floor then fails the
+      deep surface and asks for the marker back. The same test is 93.86s in one lane and
+      0.01s in the other, and neither reading is wrong -- the cost belongs to a build, not
+      to a test, so no per-test rule can place it. What resolves it is making the cost
+      cheap rather than reclassifying it: both tests need a *valid seed* to mutate, not a
+      freshly built one, and the committed artifact is already checked against the build
+      by the deferred neighbour and by the deep surface's own atlas steps. Left for the
+      cell that owns this mechanism rather than decided here, because it changes what the
+      retained tests assert.
     """
     expected: dict[str, set[str]] = {
         # 18s of call time across 3.
@@ -531,18 +548,11 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_green17.py": {
             "test_interval_audit_certifies_an_interior_side",  # 6.0s
         },
-        # 54s of call time across 2, and the second one for the same reason as
-        # `test_prospective_atlas_seed.py` below: `known_best_builder.expected_outputs()`
-        # builds the composite atlas once and caches it, the marked test above was the one
-        # billed for it in the undivided suite, and deferring that test handed the bill to
-        # the next caller left in the quick lane. Measured at 26.83s serially on a
-        # four-core box (`BC-218`). What still guards the receipt on every pull request is
-        # `test_known_best_composite_png_refuses_a_preview_of_the_wrong_size`, which
-        # rasterises into `tmp_path` and costs nothing; what moves to the deep surface is
-        # the comparison against the committed PNG.
+        # 27s of call time across 1. The fourth limit below is live in this file:
+        # `test_known_best_composite_png_is_derived_from_current_svg` shares this test's
+        # cached build and now carries 26.83s of the quick lane because this one left it.
         "test_known_best_atlas.py": {
             "test_known_best_composite_contains_every_case_and_square",  # 27.3s
-            "test_known_best_composite_png_is_derived_from_current_svg",  # 26.8s
         },
         # 101s of call time across 3.
         "test_minus_w_bridge.py": {
@@ -606,19 +616,12 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_promote_system_degree.py": {
             "test_promote_system_degree",  # 14.6s
         },
-        # 192s of call time across 3, and the third is this registry's own second limit
-        # caught in the act. `expected_outputs()` builds the whole prospective seed once
-        # and caches it, so in the undivided suite its cost was billed to
-        # `test_seed_replays_...`, the first test to ask. Deferring that one did not remove
-        # the build from the quick lane -- it moved the bill to the next test in the file
-        # that calls it, and `test_seed_cross_fields_...` went from cheap to 93.86s
-        # measured serially on a four-core box (`BC-218`), 18.8x the ceiling
-        # `fast behavioral tests` enforces. That is what a shared build looks like when the
-        # lane it is shared across is cut in half, and it is why marking converges by
-        # iteration rather than in one pass.
+        # 98s of call time across 2, and the fourth limit below is live here too:
+        # `test_seed_cross_fields_...` shares the cached `expected_outputs()` build with
+        # the first test here, and now carries 93.86s of the quick lane because that one
+        # left it.
         "test_prospective_atlas_seed.py": {
             "test_seed_replays_every_safe_source_and_excludes_kingbird",  # 92.5s
-            "test_seed_cross_fields_reject_source_annotation_and_identity_mutations",  # 93.9s
             "test_seed_witnesses_and_house_renderings_match_the_manifest",  # 5.7s
         },
         # 7s of call time across 1.

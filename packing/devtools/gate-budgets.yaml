@@ -123,10 +123,11 @@ tiers:
     second job would repeat 11s of checkout, uv install and `uv sync` to run work that
     already costs nothing on the clock -- so the parallelism went inside the step instead.
     Measured on a four-core box, `PACK_JOBS=1`, over the same lane: 306.4s in one process,
-    135.0s at `-n 4`. Two tests then accounted for 121s of the remaining serial cost, both
-    of them shared builds the split had re-billed rather than tests that had grown, and
-    both are now marked. What is left is 56.6s at `-n 4`, with no test at or above the
-    per-test ceiling for the first time since the split.
+    135.0s at `-n 4`. Two tests account for 121s of what remains, both of them shared
+    cached builds that BC-214's split re-billed rather than tests that grew; with those
+    121s removed the lane measured 56.6s at `-n 4`. They are named in
+    `test_the_slow_marker_is_declared_only_by_measured_nodes` and deliberately not marked,
+    because marking moves their failure to the deep surface instead of removing it.
     That is a different tier from the one 409s described, in the way that matters here:
     its wall is no longer any single step's wall, so the next number written here should
     be read as a whole-tier figure again and the drift rule will mean what it says.

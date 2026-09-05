@@ -88,7 +88,6 @@ def test_seed_sources_retain_attribution_without_local_hashes() -> None:
     assert "sha256" not in json.dumps(seed, sort_keys=True)
 
 
-@pytest.mark.slow
 def test_seed_cross_fields_reject_source_annotation_and_identity_mutations() -> None:
     seed = expected_outputs()[1]["atlas_seed"]
     mutations = []

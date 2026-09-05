@@ -17,21 +17,20 @@ per certificate; the prose is filled once, with the headline certificate's value
 <div class="doc-links screen-only">
   <a class="chip" href="{{SOURCE_URL}}" title="The Markdown this page is rendered from">MD</a>
   <a class="chip" href="#" data-print="page" title="Print this page, or save it as a PDF">PDF</a>
-  <a class="chip icon" href="{{REPO_URL}}" title="The project on GitHub" aria-label="The project on GitHub"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+  <a class="chip" href="{{REPO_URL}}" title="The project on GitHub"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>PROJECT</a>
 </div>
 
 <div class="hero">
 
-# <span class="symbol">s({{N}}) ≥ {{HEADLINE_L_FRAC}}</span>
+# <span class="symbol">s({{N}}) <span class="rel">≥</span> {{HEADLINE_L_FRAC}}</span>
 
 <p class="subtitle">A New Lower Bound on the Square Packing Problem</p>
 
 <div class="credits">
-  <span>{{PUBLISHED}}</span>
+  <span>{{PUBLISHED}} ({{EDITION}}, revision {{REVISION}})</span>
   <span>Tooling and human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
   <span>Agents: <strong>Opus 5</strong>, <strong>Fable 5.1</strong>, and <strong>Codex 5.6</strong></span>
   <span>Open source at <a href="https://github.com/jlevy/squares"><strong>github.com/jlevy/squares</strong></a></span>
-  <span>{{VERSION}}, revision {{REVISION}}</span>
 </div>
 
 </div>
@@ -39,10 +38,12 @@ per certificate; the prose is filled once, with the headline certificate's value
 ## What Is This?
 
 A new lower bound on an open problem, found by an automated research process.
-Eleven unit squares, free to rotate, do not fit in a square of side {{HEADLINE_L_DEC}}:
-the proof is a weighted point set and a pigeonhole argument, and it appears to be the
-first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest open case.
-The previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist’s in
+The witness used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points in
+the container and takes a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized
+directions; five exact conditions on them imply that eleven disjoint unit squares, free
+to rotate, cannot fit in a ${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.
+It appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
+open case; the previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist’s in
 {{PRIOR_YEAR}}.[^stromquist]
 
 The search, the checking and the record are the program’s own work, under human
@@ -249,7 +250,7 @@ $$
           <div class="mass-val" id="mv-{{SLUG}}"></div>
           <div class="mass-dec" id="md-{{SLUG}}"></div>
         </div>
-        <span class="verdict ok" id="vd-{{SLUG}}">Covers ≥ 1</span>
+        <span class="verdict ok" id="vd-{{SLUG}}">Covers <span class="rel">≥</span> 1</span>
       </div>
       <div class="ctl">
         <span class="caps">Direction <span class="tex">k</span> of the {{N_DIRECTIONS}}-point net</span>
@@ -400,7 +401,7 @@ costs.
     </svg>
   </div>
   <div class="fig-choose">{{CERT_TOGGLE}}</div>
-  <figcaption><strong>Figure 7. Condition 4 → Condition 5.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
+  <figcaption><strong>Figure 7. Condition 4 <span class="rel">→</span> Condition 5.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
   <span class="tex">B</span> by {{HALVING_B_DROP}} and costs {{HALVING_MASS_DROP}} of the least covered mass. This shows these atoms are tight
   against their own net, not that no coarser net could be made to work. It measures the slope of the trade.</figcaption>
 </figure>

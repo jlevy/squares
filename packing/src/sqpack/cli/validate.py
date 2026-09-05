@@ -143,10 +143,32 @@ SLOW_TEST_FLOOR_SECONDS = 1.0
 #: the fast tier defers. Measured on 2026-09-05 at 39 tests: 892s on CI's two-core
 #: runner (run 33932095609, eight seconds under the 900s cap it had been inheriting) and
 #: 930s on four cores locally, the interval route's five full-net decisions about 370s
-#: of it. Twice the measurement, for a tier that grows by one certificate at a time; a
-#: 21,600s figure was proposed on a 4,866s exact decision the integer sweep has since
-#: made a 30s one.
-EXHAUSTIVE_SUITE_BUDGET_SECONDS = 1800.0
+#: of it. A 21,600s figure was proposed on a 4,866s exact decision the integer sweep has
+#: since made a 30s one.
+#:
+#: Re-measured on 2026-09-05 at 53 tests, after the tier killed itself on three
+#: consecutive merges to main: 2036s on four cores, against 930s at 39 tests when the
+#: 1800s figure was written. The budget is a hard kill, not a report -- `_execute_step`
+#: hands it to the subprocess as a deadline -- so the 1801.02s the gate printed is
+#: 1800s plus `PROCESS_TERMINATION_GRACE_SECONDS`, arithmetic rather than a reading, and
+#: the step's output died in an unflushed pipe. The fourteen tests added since cost 837s
+#: of the total: `test_verify_claim.py`'s eleven nodes 432s, the D-449 witness walk 321s,
+#: `test_minimal_verify` 56s and `test_n11_thirdparty_verify` 28s. Doubling no longer
+#: applies to a tier this size -- it would put the budget over an hour -- so this is
+#: 1.77x the measurement, the same margin the fast tier carries.
+#:
+#: One reason recorded against a budget above 1800s does not survive checking. Both the
+#: fast tier's note below and D-432 say such a figure "sits above the 1800s CI allows the
+#: job". No such limit exists or ever has: `timeout-minutes` appears nowhere in
+#: `.github/`, and `git log -S` over that path finds no commit that ever added it. The
+#: `validate` job inherits GitHub's 360-minute default. Recorded as D-456.
+#:
+#: What this does not fix is the trend. The tier has gone 21 to 25 to 39 to 53 nodes in
+#: about a week, and over 1500s of the 2036s is single-process work that no core count
+#: reduces, so a larger runner does not help. At the recent rate this buys about two
+#: weeks. The tier already runs only after merge, so the move that scales is to give it
+#: its own job rather than a larger share of this one (think-tr2z).
+EXHAUSTIVE_SUITE_BUDGET_SECONDS = 3600.0
 
 
 class _ProcessRegistry:
@@ -639,12 +661,17 @@ def _pytest_workers() -> int:
     writing anywhere shared. Measured on a four-core box at `PACK_JOBS=1`: 306.4s in one
     process against 135.04s at `-n 4`, with no failure that appears only under xdist.
 
-    135s was not 306/4, and the gap was the interesting part. One test carried 93.86s of
-    the serial lane and another 26.83s, so a quarter of the work could not be divided at
-    all -- and neither test had grown. Both call a cached builder, both were billed for it
-    only because BC-214's split deferred the neighbour that used to trigger the cache
-    first, and the ceiling this step enforces was already failing on them. Marked, and
-    then the lane is 56.61s at `-n 4` with nothing at or above the ceiling.
+    135s is not 306/4, and the gap is where the rest of this lane's cost now is. Two tests
+    carry 121s of the serial lane between them -- 93.86s and 26.83s -- so nearly a
+    quarter of the work sits in units too big to divide, and at `-n 4` the larger of them
+    is 70 per cent of the wall on its own. Neither has grown. Both call a module-level
+    cached builder that a test BC-214 deferred used to trigger first, so both are being
+    billed for a build rather than for themselves, and this step's own ceiling is failing
+    on them today. That is named where the rule lives, in
+    `test_the_slow_marker_is_declared_only_by_measured_nodes`, and it is not fixed here:
+    marking them moves the failure to the deep surface rather than removing it, because in
+    the slow lane the same two tests measure 0.01s and 0.00s. With those 121s gone the
+    lane measured 56.61s at `-n 4`, which is what this step is worth once they are.
 
     The count is the machine's, not the tier's, because this step is the one thing nothing
     else is waiting behind. `-n 1` is not asked for: a single xdist worker is a subprocess
@@ -1911,14 +1938,17 @@ STEPS: tuple[Step, ...] = (
     # job on the same tree ran in 996s on its two-core runner (run 33931098324). The 1800s
     # budget stands at about 1.7 times the local reading. A 2700s budget was
     # proposed on a 1791s measurement of the Fraction sweep the same day; that
-    # measurement no longer describes the suite, and 2700s sits above the 1800s CI
-    # allows the job, so a local run could pass a budget CI cannot honour.
-    # No `budget_seconds`. This step carried an 1800s exception to the shared 900s cap
-    # for as long as it ran every non-exhaustive test; since BC-214 split the slow ones
-    # off it does not need one, and a step that no longer needs an exception should not
-    # keep it -- the shared cap is the guard against one hung test, and this step is now
-    # ordinary enough to live under it. What the lane is allowed to *cost*, as against
-    # how long one hung subprocess may hang, is `devtools/gate-budgets.yaml`.
+    # measurement no longer describes the suite. The second half of that argument --
+    # that 2700s "sits above the 1800s CI allows the job" -- was wrong and is struck:
+    # the `validate` job declares no `timeout-minutes` and never has, so it inherits
+    # GitHub's 360-minute default and there is no such ceiling (D-456).
+    # No `budget_seconds` here either, and for a separate reason. This step carried an
+    # 1800s exception to the shared 900s cap for as long as it ran every non-exhaustive
+    # test; since BC-214 split the slow ones off it does not need one, and a step that no
+    # longer needs an exception should not keep it -- the shared cap is the guard against
+    # one hung test, and this step is now ordinary enough to live under it. What the lane
+    # is allowed to *cost*, as against how long one hung subprocess may hang, is
+    # `devtools/gate-budgets.yaml`.
     Step(
         "fast behavioral tests",
         _fast_tests,

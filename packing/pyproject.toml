@@ -67,8 +67,10 @@ dev = [
     # the shape that wants it -- around 2,000 tests, each held under a 5s ceiling by the
     # step's own rule, none of them writing anywhere shared. Measured for `BC-218` on a
     # four-core box at `PACK_JOBS=1`: 306.4s in one process against 135.0s at `-n 4`, and
-    # no failure that appears only under xdist. The argument for the count, and for why it
-    # is not `--inner-jobs`, is in `_pytest_workers` in `sqpack/cli/validate.py`.
+    # no failure that appears only under xdist -- 56.6s once two shared cached builds stop
+    # being billed to the lane. The argument for the worker count, for why it is not
+    # `--inner-jobs`, and for where the other 121s went is in `_pytest_workers` in
+    # `sqpack/cli/validate.py`.
     "pytest-xdist>=3.8",
     "ruff>=0.14",
     # Only derive_field.py uses SymPy, and only to re-derive a constant the verifier

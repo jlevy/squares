@@ -1102,7 +1102,7 @@ def test_only_the_whole_suite_steps_carry_budgets() -> None:
     assert budgeted == {
         "negative controls": 1800,
         "slow behavioral tests": 1800,
-        "exhaustive exact behavioral tests": 1800,
+        "exhaustive exact behavioral tests": 3600,
     }
 
 
