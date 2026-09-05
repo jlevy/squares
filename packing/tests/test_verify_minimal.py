@@ -1,7 +1,8 @@
 """The minimal standard-library verifier: accepted on the 19/5 rung, refused on the rest.
 
 `cases/n11_fractional_certificate/verify_minimal.py` is the verifier that
-`t-018-verifiable-claim.md` carries in full for a reader outside the project. It imports
+the `t-018-verifiable-claim-*.md` documents carry in full, each with its certificate, for a
+reader outside the project. It imports
 nothing from this project, so it is loaded from its path rather than imported, and it
 is exercised through the same `load` and `decide` calls its command line makes: the
 verdict is read back from the lines it prints.
@@ -23,10 +24,17 @@ from typing import Any
 
 import pytest
 
+from devtools.render_verifiable_claim import main as render_claims
+
 CASE = Path(__file__).parents[1] / "cases/n11_fractional_certificate"
 VERIFIER = CASE / "verify_minimal.py"
 RUNG_19_5 = CASE / "certificate-19-5.json"
-CLAIM = CASE / "t-018-verifiable-claim.md"
+RUNG_381_100 = CASE / "certificate.json"
+#: The verifiable-claim documents, each carrying the verifier and its own certificate.
+CLAIMS = {
+    RUNG_19_5: CASE / "t-018-verifiable-claim-19-5.md",
+    RUNG_381_100: CASE / "t-018-verifiable-claim-381-100.md",
+}
 THIRDPARTY = CASE / "thirdparty"
 
 #: The smallest genuine instance: n = 2, L = 5/4, B = 7/10, one net step. Two B-squares
@@ -180,12 +188,46 @@ def test_the_tight_direction_of_the_rung_covers_50003_over_50000(
     assert cells == 499545
 
 
-def test_the_claim_document_carries_the_verifier_verbatim() -> None:
-    """The pasted source in t-018-verifiable-claim.md is the file, byte for byte."""
-    text = CLAIM.read_text()
-    start = text.index("```python\n#!/usr/bin/env python3\n") + len("```python\n")
-    end = text.index("\n```\n", start)
-    assert text[start : end + 1] == VERIFIER.read_text()
+def fenced(text: str, language: str) -> str:
+    """The body of a document's four-backtick block in that language, final newline kept."""
+    start = text.index(f"````{language}\n") + len(f"````{language}\n")
+    end = text.index("\n````\n", start)
+    return text[start : end + 1]
+
+
+@pytest.mark.parametrize("certificate", CLAIMS, ids=lambda p: p.stem)
+def test_the_claim_document_carries_the_verifier_verbatim(certificate: Path) -> None:
+    """The pasted source is the file, byte for byte."""
+    assert fenced(CLAIMS[certificate].read_text(), "python") == VERIFIER.read_text()
+
+
+@pytest.mark.parametrize("certificate", CLAIMS, ids=lambda p: p.stem)
+def test_the_claim_document_carries_its_certificate_verbatim(certificate: Path) -> None:
+    """The block is the file up to its final newline, which the fence supplies."""
+    block = fenced(CLAIMS[certificate].read_text(), "json")
+    assert block.rstrip("\n") == certificate.read_text().rstrip("\n")
+
+
+@pytest.mark.parametrize("certificate", CLAIMS, ids=lambda p: p.stem)
+def test_the_verifier_reads_the_certificate_out_of_the_claim_document(
+    minimal: dict[str, Any], certificate: Path
+) -> None:
+    """One file travels: run on the document, the verifier decides the same certificate."""
+    assert minimal["load"](str(CLAIMS[certificate])) == minimal["load"](str(certificate))
+
+
+def test_a_document_without_a_certificate_is_refused(
+    minimal: dict[str, Any], tmp_path: Path
+) -> None:
+    path = tmp_path / "claim.md"
+    path.write_text("# A claim\n\nNo certificate here.\n")
+    with pytest.raises(ValueError, match="fenced json block"):
+        minimal["load"](str(path))
+
+
+def test_the_claim_documents_are_current() -> None:
+    """Regenerated from the template, the verifier and the certificates, nothing changes."""
+    assert render_claims(["--check"]) == 0
 
 
 @pytest.mark.exhaustive_exact

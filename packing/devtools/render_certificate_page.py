@@ -58,7 +58,7 @@ TEMPLATES = Path(__file__).with_name("templates")
 TEMPLATE = TEMPLATES / "certificate_page.html"
 MARKDOWN = TEMPLATES / "certificate_page.md"
 COARSENING = CASE / "net-coarsening.json"
-CLAIM = CASE / "t-018-verifiable-claim.md"
+VERIFIER_MINIMAL = CASE / "verify_minimal.py"
 OUTPUT = PACKING / "site" / "index.html"
 
 # Four colors have to stay apart in the prover: the mass comfortably above the
@@ -905,30 +905,40 @@ def slug(facts: Facts) -> str:
     return f"{facts.outer_side.numerator}-{facts.outer_side.denominator}"
 
 
-# A fenced code block ends at the first line whose backtick run is as long as
-# the fence that opened it, and the claim is shown inside one. A run at the head
-# of a line is rewritten to the tilde fence, which CommonMark reads as the same
-# construct, so the block a reader copies is still the document the file holds
-# and no fence length in the Markdown can be the wrong one.
-_LEADING_FENCE = re.compile(r"^( {0,3})(`{3,})", re.MULTILINE)
+def claim_path(facts: Facts) -> Path:
+    """The certificate's verifiable-claim document, one self-contained file beside it."""
+    return CASE / f"t-018-verifiable-claim-{slug(facts)}.md"
 
 
-def verifiable_claim() -> str | None:
-    """The standalone verifiable claim, as the body of a fenced code block.
+# The minimal verifier's whole decision, `python verify_minimal.py <certificate>`,
+# timed on 2026-09-04 on an Apple Silicon laptop under CPython 3.14: what the claim
+# documents and the page promise a reader. A certificate not measured here gets no
+# promise, and the page drops its list of claims rather than guess one.
+MEASURED_SECONDS = {"19-5": 36, "381-100": 175}
 
-    None where the file has not been written yet: the page drops that section
-    and says so, rather than failing a render over a document that is still
-    being drafted next door.
-    """
-    if not CLAIM.is_file():
-        print(f"{CLAIM.relative_to(REPO)} is not written yet; the page drops its section")
-        return None
-    text, rewritten = _LEADING_FENCE.subn(
-        lambda m: m.group(1) + "~" * len(m.group(2)), CLAIM.read_text(encoding="utf-8")
-    )
-    if rewritten:
-        print(f"{CLAIM.name}: {rewritten} backtick fences shown as tildes, to nest in one")
-    return text.strip("\n")
+
+def runtime_phrase(facts: Facts) -> str:
+    """'about half a minute', 'about 3 minutes': loose on purpose, since the reader's
+    machine is not this one."""
+    seconds = MEASURED_SECONDS.get(slug(facts))
+    if seconds is None:
+        raise SystemExit(f"{facts.source.name}: the minimal verifier has not been timed on it")
+    if seconds < 45:
+        return "about half a minute"
+    if seconds < 90:
+        return "about a minute"
+    return f"about {round(seconds / 60)} minutes"
+
+
+def claim_substitutions(headline: Facts, default: Facts) -> dict[str, str]:
+    """The page's list of claim documents: one line per certificate, in both roles."""
+    values = {}
+    for role, f in (("DEFAULT", default), ("HEADLINE", headline)):
+        values[f"{role}_CLAIM_NAME"] = claim_path(f).name
+        values[f"{role}_CLAIM_URL"] = repo_file(claim_path(f))
+        values[f"{role}_N_ATOMS"] = str(len(f.atoms))
+        values[f"{role}_RUNTIME"] = runtime_phrase(f)
+    return values
 
 
 def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) -> dict[str, str]:
@@ -947,6 +957,8 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "HEADLINE_L_DEC": decimal(headline.outer_side),
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
         "DEFAULT_L_DEC": decimal(default.outer_side),
+        "DEFAULT_ID": default.identifier,
+        "DEFAULT_CERT_URL": repo_file(default.source),
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "PRIOR_YEAR": str(PRIOR_YEAR),
         **bound_substitutions(),
@@ -956,7 +968,6 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "BEST_URL": BEST_URL,
         "BEST_SOURCE": BEST_SOURCE,
         "BEST_RENDER_URL": repo_file(BEST_RENDERING),
-        "CLAIM_URL": repo_file(CLAIM),
         "TRUMP_SVG": best_packing_svg(),
         "NUMBER_LINE_MARKS": number_line_marks(facts, headline),
         "PRIOR_X": f"{line_x(float(PRIOR_LOWER)):.0f}",
@@ -1215,12 +1226,14 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
     ]
 
     shared = shared_substitutions(facts, headline, facts[0])
-    claim = verifiable_claim()
-    if claim is not None:
-        shared["VERIFIABLE_CLAIM"] = claim
+    claimed = all(claim_path(f).is_file() and slug(f) in MEASURED_SECONDS for f in facts)
+    if claimed:
+        shared.update(claim_substitutions(headline, facts[0]))
+    else:
+        print("a certificate lacks a claim document or a timing; the page drops that section")
     static = kpress_static()
     headline_values = per_certificate[facts.index(headline)]
-    prose = markdown_body(per_certificate, headline_values, shared, claimed=claim is not None)
+    prose = markdown_body(per_certificate, headline_values, shared, claimed=claimed)
     # The sprite leads the body the way kpress's own renderer places it: the copy
     # button on a code block draws its glyph from a fragment of it.
     body = f"{icon_sprite(static)}\n{prose}"

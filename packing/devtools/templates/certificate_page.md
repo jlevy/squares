@@ -1,7 +1,7 @@
 <!--
 Contract for this file. Prose, headings, lists, math and footnotes are Markdown, rendered
 once by kpress (markdown-it: dollarmath, footnotes, block `{.class}` and span
-`[text]{.class}` attrs, `::: name` containers). Figures, the credits and the frontmatter
+`[text]{.class}` attrs, `::: name` containers). Figures and the credits
 stay raw HTML: they carry canvas, SVG, controls and layout Markdown cannot express.
 Math in Markdown text is `$…$` and `$$…$$`; math inside a raw HTML block is not seen by
 Markdown, so there it stays `<span class="tex">…</span>` for the page to typeset itself.
@@ -124,21 +124,9 @@ $t_k$, and a shrink $B \lt 1$, such that:
 
 Conditions 1 to 4 are exact rational comparisons.
 Condition 5 is one exact sweep per direction.
-Together the five prove $s(n) \ge L$.
-
-<div class="cert-claim">
-
-$$
-s({{N}}) \;\ge\; {{L_TEX}} \;=\; {{L_DEC}}
-$$
-
-</div>
-
-<div class="frontmatter">
-  <span>certificate <a href="{{CERT_URL}}"><code>{{ID}}</code></a></span>
-  <span>{{N_ATOMS}} atoms · {{N_DIRECTIONS}} directions · {{N_ORBITS}} orbits of <span class="tex">\mathbf{D}_4</span></span>
-  <span>every figure <a href="{{RENDERER_URL}}">computed</a> from the atoms</span>
-</div>
+Together the five prove $s(n) \ge L$. The two certificates are
+[`{{DEFAULT_ID}}`]({{DEFAULT_CERT_URL}}) and [`{{ID}}`]({{CERT_URL}}), and every figure
+below is [computed]({{RENDERER_URL}}) from the one it shows.
 
 ## Atoms, Mass, and the Budget
 
@@ -366,12 +354,9 @@ the largest value Condition 4 admits, and decide Condition 5 again.
 Halving the net shrinks $B$ by
 {{HALVING_B_DROP}} and costs {{HALVING_MASS_DROP}} of the least covered mass.
 
-<!--BEGIN:FIGURE-->
-
 <figure>
   <div class="fig-head">
     <span class="caps">Figure 7</span><span class="tag">Condition 4 → Condition 5</span>
-    {{CERT_TOGGLE}}
   </div>
   <div class="chart kpress-diagram">
     <svg viewBox="0 0 700 250" role="img" aria-label="{{COARSEN_ALT}}">
@@ -398,11 +383,9 @@ Halving the net shrinks $B$ by
       </text>
     </svg>
   </div>
-  <figcaption class="kpress-figcaption"><strong>Figure 7.</strong> Least covered mass as the net is coarsened. This shows these atoms are tight against their own net, not that no coarser net could be made
+  <figcaption class="kpress-figcaption"><strong>Figure 7.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. This shows these atoms are tight against their own net, not that no coarser net could be made
   to work. It measures the slope of the trade.</figcaption>
 </figure>
-
-<!--END:FIGURE-->
 
 <!--END:COARSENING-->
 
@@ -462,14 +445,14 @@ library, decides the {{DEFAULT_L_FRAC}} certificate without trusting anything el
 
 ## Verifiable Claim
 
-The claim, the theorem with its proof, and a standard-library Python verifier, as one
-file to paste into any coding agent or check by hand.
-It is [in the repository]({{CLAIM_URL}}) beside the certificates it decides.
-The copy button takes all of it.
+Each bound has one self-contained file: the claim, the theorem with its proof, a
+verifier in Python’s standard library, and the certificate it decides, to paste into any
+coding agent or check by hand.
 
-```markdown
-{{VERIFIABLE_CLAIM}}
-```
+- $s(11) \ge {{DEFAULT_L_FRAC}}$: [`{{DEFAULT_CLAIM_NAME}}`]({{DEFAULT_CLAIM_URL}}),
+  {{DEFAULT_N_ATOMS}} atoms, verified in {{DEFAULT_RUNTIME}}.
+- $s(11) \ge {{HEADLINE_L_FRAC}}$: [`{{HEADLINE_CLAIM_NAME}}`]({{HEADLINE_CLAIM_URL}}),
+  {{HEADLINE_N_ATOMS}} atoms, verified in {{HEADLINE_RUNTIME}}.
 
 <!--END:CLAIM-->
 

@@ -2,6 +2,7 @@
 """Decide a fractional unavoidable-set certificate for s(n) >= L, exactly.
 
 Usage:  python verify_minimal.py certificate.json
+        python verify_minimal.py t-018-verifiable-claim-19-5.md   (embeds the certificate)
 
 Standard library only, CPython 3.10 or later. Every decision is made in
 fractions.Fraction. One line is printed per condition, then VERIFIED or REFUSED,
@@ -30,6 +31,7 @@ squares are disjoint, so the total weight is at least n, against Condition 2.)
 # ruff: noqa: N803, N806  -- L, B, D, F, U, V, X, Y are the theorem's own symbols.
 
 import json
+import re
 import sys
 from bisect import bisect_left, bisect_right
 from fractions import Fraction
@@ -39,8 +41,21 @@ from pathlib import Path
 
 
 def load(path):
-    """The certificate as (n, L, B, tangents, atoms); any other shape is refused."""
-    record = json.loads(Path(path).read_text())
+    """The certificate as (n, L, B, tangents, atoms); any other shape is refused.
+
+    The path is the certificate's JSON file, or a Markdown document carrying it in a
+    fenced json block: each verifiable-claim document embeds the certificate it
+    decides, so the whole claim travels as one file."""
+    text = Path(path).read_text()
+    if not text.lstrip().startswith("{"):
+        fence = re.search(
+            r"^`{3,}json[ \t]*\n(.*?)^`{3,}[ \t]*$", text, re.MULTILINE | re.DOTALL
+        )
+        if fence is None:
+            message = "neither a JSON object nor a Markdown document with a fenced json block"
+            raise ValueError(message)
+        text = fence.group(1)
+    record = json.loads(text)
 
     def rational(value):
         if not isinstance(value, str):  # a JSON float would be rounded: refuse it
