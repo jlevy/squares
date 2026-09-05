@@ -54,7 +54,7 @@ $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 ## Packing 11 Squares
 
 $s(11)$ is the smallest case still open.
-Trump’s 1979 packing[^trump] shows $s(11) \le {{BEST_PACKING_TEX}}$. This page proves
+Trump’s 1979 packing shows $s(11) \le {{BEST_PACKING_TEX}}$.[^trump] This page proves
 $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
 
 The proof described here covers a bound of $s({{N}}) \ge {{HEADLINE_L_FRAC}}$. For
@@ -68,8 +68,8 @@ tighter precision so you can compare the results.
     <span class="fig-title">The best known packing of 11 squares</span>
   </div>
   <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
-  <figcaption class="kpress-figcaption">Trump’s 1979 packing of eleven unit squares<sup class="kpress-footnote-ref"><a href="#fn-3" id="fnref-3b" data-kpress-footnote-ref="3">3</a></sup> shows
-  <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>.</figcaption>
+  <figcaption class="kpress-figcaption">Trump’s 1979 packing of eleven unit squares shows
+  <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>.<sup class="kpress-footnote-ref"><a href="#fn-3" id="fnref-3b" data-kpress-footnote-ref="3">3</a></sup></figcaption>
 </figure>
 
 <figure>
