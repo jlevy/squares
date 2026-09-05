@@ -114,6 +114,8 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
 }
 .credits strong { font-weight: var(--kpress-font-weight-sans-bold); }
 .cert-page .hero .deck { font-family: var(--kpress-font-prose); font-style: italic; margin-block: 0; }
+/* The deck is a div so its footnote renders; the paragraph inside keeps its edges. */
+.cert-page .hero .deck > p { margin-block: 0; }
 
 /* The certificate switch sits in every figure head; the articles are whole
    documents, so they are hidden outright. */

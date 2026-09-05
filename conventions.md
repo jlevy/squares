@@ -435,6 +435,19 @@ The dependency rules and E0–E3 expectations are defined in
 [checked: hook] Exclusions are evidence-based, not precautionary, and each one states
 its measured reason in [`.flowmarkignore`](.flowmarkignore).
 
+**Custom formatting in a kpress-rendered document is plain HTML.** [convention] A block
+is a `<div class="…">` with a blank line after the opening tag and before the closing
+one, so the Markdown inside it still renders; an inline run is a `<span class="…">`; a
+figure is `<figure>` with a `<figcaption>`, which kpress decorates itself.
+Class names are kpress’s where it styles the block — `hero`, `subtitle`, `boxed-text`,
+`shaded-text`, `claim`, `summary`, `key-claims`, `centered-headers` — and the document’s
+own only where kpress has none.
+No attribute sugar (`{.class}`, `[text]{.class}`) and no `:::` containers: the div and
+span pass-through is the one kpress guarantees without configuration, it survives its
+sanitized mode, and GitHub renders the same blocks as plain HTML. The explainer template
+([`certificate_page.md`](packing/devtools/templates/certificate_page.md)) is the proof;
+the other documents follow in a later pass.
+
 **Relative links must resolve.** [checked] The campaign’s checker walks every relative
 Markdown link. This project has needed that twice.
 

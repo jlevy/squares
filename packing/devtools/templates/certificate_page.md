@@ -1,20 +1,24 @@
 <!--
 Contract for this file. Prose, headings, lists, math and footnotes are Markdown, rendered
-once by kpress (markdown-it: dollarmath, footnotes, block `{.class}` and span
-`[text]{.class}` attrs, `::: name` containers). Figures and the credits
-stay raw HTML: they carry canvas, SVG, controls and layout Markdown cannot express.
+once by kpress (markdown-it: dollarmath, footnotes). Everything Markdown has no syntax for
+is plain HTML, and only plain HTML: a block is a `<div class="…">` with a blank line after
+the opening tag and before the closing one, so the Markdown inside still renders; an
+inline run is a `<span class="…">`; figures are `<figure>` and `<figcaption>`, which kpress
+decorates with its own classes. Class names are kpress's where it styles the block (hero,
+subtitle, boxed-text) and the page's own only where it has none (deck, credits,
+conditions). No attribute sugar (`{.class}`), no `:::` containers. Figures and the credits
+carry canvas, SVG, controls and layout Markdown cannot express.
 Math in Markdown text is `$…$` and `$$…$$`; math inside a raw HTML block is not seen by
 Markdown, so there it stays `<span class="tex">…</span>` for the page to typeset itself.
 `{{PLACEHOLDERS}}` are substituted before rendering. Each FIGURE block is stamped once
 per certificate; the prose is filled once, with the headline certificate's values.
 -->
 
-::: hero
+<div class="hero">
 
-# [s({{N}}) ≥ {{HEADLINE_L_FRAC}}]{.symbol}
+# <span class="symbol">s({{N}}) ≥ {{HEADLINE_L_FRAC}}</span>
 
-{.subtitle}
-A New Lower Bound on the Square Packing Problem
+<p class="subtitle">A New Lower Bound on the Square Packing Problem</p>
 
 <div class="credits">
   <span>September 4, 2026</span>
@@ -23,13 +27,17 @@ A New Lower Bound on the Square Packing Problem
   <span>Open source at <a href="https://github.com/jlevy/squares"><strong>github.com/jlevy/squares</strong></a></span>
 </div>
 
-{.deck}
+<div class="deck">
+
 Eleven unit squares, free to rotate, do not fit in a square of side {{HEADLINE_L_DEC}}.
 The proof is a weighted point set and a pigeonhole argument.
 It is the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest open case.
-The previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist's in {{PRIOR_YEAR}}.[^stromquist]
+The previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist’s in
+{{PRIOR_YEAR}}.[^stromquist]
 
-:::
+</div>
+
+</div>
 
 ## The Square Packing Problem
 
@@ -43,7 +51,7 @@ $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
     <span class="caps">Figure 1</span>
   </div>
   <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.png" alt="The best known packings of one through one hundred unit squares, in a ten-by-ten grid" width="2400" height="2676"></a></div>
-  <figcaption class="kpress-figcaption"><strong>Figure 1.</strong> The best known packings of 1 through 100 unit squares. Each cell is the tightest
+  <figcaption><strong>Figure 1.</strong> The best known packings of 1 through 100 unit squares. Each cell is the tightest
   arrangement on record for that <span class="tex">n</span>. The full
   results, with every witness and its provenance, are in
   <a href="https://github.com/jlevy/squares/blob/main/packing/atlas/known-best/">the GitHub repository</a>, and the
@@ -63,7 +71,7 @@ figure lets you select the tighter precision so you can compare the results.)
     <span class="caps">Figure 2</span>
   </div>
   <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
-  <figcaption class="kpress-figcaption"><strong>Figure 2.</strong> Trump’s 1979 packing of eleven unit squares shows
+  <figcaption><strong>Figure 2.</strong> Trump’s 1979 packing of eleven unit squares shows
   <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>.</figcaption>
 </figure>
 
@@ -95,7 +103,7 @@ figure lets you select the tighter precision so you can compare the results.)
     {{NUMBER_LINE_MARKS}}
   </svg>
   </div>
-  <figcaption class="kpress-figcaption"><strong>Figure 3.</strong> Bounds on <span class="tex">s(11)</span>. The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. Below {{HEADLINE_L_FRAC}} it is
+  <figcaption><strong>Figure 3.</strong> Bounds on <span class="tex">s(11)</span>. The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. Below {{HEADLINE_L_FRAC}} it is
   <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span>.</figcaption>
 </figure>
 
@@ -106,21 +114,20 @@ finite set of weighted points in the container (the atoms), a net of directions
 $\theta_k = 2\arctan t_k$ for $k = 0, \dots, K$, each fixed by its rational half-tangent
 $t_k$, and a shrink $B \lt 1$, such that:
 
-{.conditions}
-::: boxed-text
+<div class="conditions boxed-text">
 
 - **Condition 1.** The atom set is invariant under the container’s symmetry group
   $\mathbf{D}_4$.
-- **Condition 2.** The total mass of the atoms, the sum of all their weights, is strictly
-  below $n$.
+- **Condition 2.** The total mass of the atoms, the sum of all their weights, is
+  strictly below $n$.
 - **Condition 3.** The net reaches $\pi/4$: its last half-tangent is at least
   $\tan(\pi/8)$.
 - **Condition 4.** $B(1 + D) \lt 1$, where $D$ is the largest of the net’s half-gap
   tangents, each the tangent of half the angle between two consecutive net directions.
-- **Condition 5.** At every net direction, every placement of a square of side $B$ inside
-  the container covers mass at least $1$.
+- **Condition 5.** At every net direction, every placement of a square of side $B$
+  inside the container covers mass at least $1$.
 
-:::
+</div>
 
 Conditions 1 to 4 are exact rational comparisons.
 Condition 5 is one exact sweep per direction.
@@ -183,7 +190,7 @@ reflects onto that arc and covers the same mass.
     <div>Mass eleven disjoint unit squares would need<span class="v tex">{{N}}</span></div>
     <div>Shortfall<span class="v tex">{{SHORTFALL}}</span></div>
   </div>
-  <figcaption class="kpress-figcaption"><strong>Figure 4.</strong> The atoms. Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
+  <figcaption><strong>Figure 4.</strong> The atoms. Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
   corners, where a square has least room to move, and thins in the middle. The sites and weights are the optimum
   of a covering linear program, rationalized. The board holds less mass than eleven disjoint unit squares would
   need. Condition 2 is that comparison.</figcaption>
@@ -254,7 +261,7 @@ $$
       it the square hangs out of the container, and the proof makes no claim.</p>
     </div>
   </div>
-  <figcaption class="kpress-figcaption"><strong>Figure 5.</strong> The prover: drag the square, watch the mass. Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
+  <figcaption><strong>Figure 5.</strong> The prover: drag the square, watch the mass. Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
   directions. Outside it the mass falls away at once, which is why the atoms crowd the boundary.</figcaption>
 </figure>
 
@@ -336,7 +343,7 @@ $$
       indistinguishable.</p>
     </div>
   </div>
-  <figcaption class="kpress-figcaption"><strong>Figure 6.</strong> The shrink that buys the finite net. The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
+  <figcaption><strong>Figure 6.</strong> The shrink that buys the finite net. The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
   side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
   <strong>The last quantity must stay below 1.</strong> At <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, its
   largest value, at the widest half-gap, is <span class="tex">{{SHRINK_PEAK_TEX}}</span>.</figcaption>
@@ -385,7 +392,7 @@ costs.
       </text>
     </svg>
   </div>
-  <figcaption class="kpress-figcaption"><strong>Figure 7.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
+  <figcaption><strong>Figure 7.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
   <span class="tex">B</span> by {{HALVING_B_DROP}} and costs {{HALVING_MASS_DROP}} of the least covered mass. This shows these atoms are tight
   against their own net, not that no coarser net could be made to work. It measures the slope of the trade.</figcaption>
 </figure>
@@ -396,16 +403,16 @@ costs.
 
 ## The Contradiction
 
-::: boxed-text
+<div class="boxed-text">
 
 Take any packing of eleven unit squares in the side-{{L_DEC}} container.
 Each square, whatever its angle, contains a side-$B$ square $Q_i$ with the same center
-at one of the {{N_DIRECTIONS}} net angles. That is Condition 4.
+at one of the {{N_DIRECTIONS}} net angles.
+That is Condition 4.
 
-Because Condition 4 is a *strict* inequality, each $Q_i$ sits inside its unit
-square’s interior, so the eleven are disjoint and no atom is counted twice.
-Each covers mass at least $1$, which is Condition 5.
-Then
+Because Condition 4 is a *strict* inequality, each $Q_i$ sits inside its unit square’s
+interior, so the eleven are disjoint and no atom is counted twice.
+Each covers mass at least $1$, which is Condition 5. Then
 
 $$
 {{N}} \;\le\; \sum_{i=1}^{{{N}}} \mu(Q_i) \;\le\; \mu\!\left([0,L]^2\right) \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}},
@@ -414,7 +421,7 @@ $$
 where the last step is Condition 2. The two ends contradict each other, so no such
 packing exists, and $s({{N}}) \gt {{L_FRAC}}$.
 
-:::
+</div>
 
 With $\le$ in Condition 4, two shrunken squares could share an atom on a common
 boundary, count it twice, and add up to more than the container holds.
