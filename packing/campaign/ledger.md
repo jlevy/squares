@@ -101,6 +101,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-084](agent-sessions/session-084-bc148-n17-fresh-successor-completion.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (process) | 3 | think-5j8d | think-5j8d is the marker Agenda 016's closeout selected for where this run's chain stopped, not a recommendation to continue it here; the coordinator's separately selected follow-up is recorded in the agenda's own closeout block. |
 | [session-085](agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md) | completed | contemporaneous | `process-review` (process) | `documentation-pass` (process) | 4 | think-uqgp | Select BC-191 (`think-ji0r`), Agenda 019's efficiency-loop measurement of row generation's cost against the container side -- row generation is 79-94% of every round, site density has never been set as a function of side, and an untuned grid cost 8.8x at n = 20's own side -- now that the retention gate is off the critical path. `think-jgeg`, the sibling question of whether the generator's own accept-or-reject decision belongs on the interval route, follows once BC-191 lands, re-based on the integer sweep rather than the Fraction sweep; the retarget candidates wait on both. `think-5j8d` is the marker Agenda 016's closeout discharged and is not this session's selection. |
 | [session-086](agent-sessions/session-086-agenda021-overnight-pass.md) | stopped | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 2 | think-db1k | BC-213, the remaining m = 5 rung at 973/200 (think-wufn), as agenda-021's closeout selects it. |
+| [session-087](agent-sessions/session-087-agenda022-continuation.md) | in_progress | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-wufn | Land each lane's result through the gate, then take the next ready cell of agenda 022 and keep PR 83 green. |
 
 ### Workflow summary
 
@@ -113,7 +114,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 17 | 1 | 56 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 0 | 28 | 0 |
-| `research-loop` | 8 | 4 | 47 | 7 |
+| `research-loop` | 9 | 4 | 48 | 7 |
 | `pipeline-improvement` | 21 | 0 | 102 | 0 |
 | `documentation-pass` | 1 | 0 | 4 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |

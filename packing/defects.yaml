@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 454
+count: 455
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
