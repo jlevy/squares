@@ -428,9 +428,10 @@ verified-upper-bound promotions and `T-009`’s raise to `C4`) and Lane D (the
 `think-ldq2` W9 handoff) do not appear in it.
 
 Lane A retained four results, all `V4`/`C4`, across seven distinct cases: `T-018` raises
-`s(11) >= 381/100`, the smallest open case moving for the first time since Stromquist
-stated `2 + 4/√5` in 2003; `T-017` raises `s(12) >= 99/25`, the first bound specific to
-`n = 12` in the retained corpus, climbed across eight rungs from
+`s(11) >= 381/100`, the smallest open case moving for the first time located in the
+public record since Stromquist stated `2 + 4/√5` in 2003; `T-017` raises
+`s(12) >= 99/25`, the first bound specific to `n = 12` in the retained corpus, climbed
+across eight rungs from
 [H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md)’s
 fixed `19/5` threshold; `T-019` raises `s(17)`, `s(18) >= 459/100`, displacing
 Massaccesi’s published `22529/5000`; and `T-020` raises `s(19)`, `s(20)`,
@@ -3634,14 +3635,15 @@ agrees, and new components inheriting the perimeter—that apply to code not yet
 ## Where This Stands
 
 **As of 2026-09-04 the project’s largest live result is the fractional lower-bound lane,
-and it is not the cartography spine.** A weighted fractional unavoidable-set certificate
-— Burns’s and Massaccesi’s theorem, this project’s instances and generator — moved seven
-registered cases in one day.
-`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first movement of that
-bound since Stromquist stated `2 + 4/sqrt(5)` in 2003 and the only S5 result in the
-register, `n = 11` being the smallest open case.
-`s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound ever proved
-about twelve squares rather than inherited from eleven.
+and it is not the cartography spine.** Its weighted-resource lineage runs through Göbel,
+Kearney–Shiu, Nagamochi and Bentz; the recent pure-atomic rational direction-net
+architecture follows Burns, and the LP instance and parameter line follows Massaccesi.
+This project’s instances and generator moved seven registered cases in one day.
+`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first public movement of
+that bound located by the recorded search after Stromquist stated `2 + 4/sqrt(5)` in
+2003 and the only S5 result in the register, `n = 11` being the smallest open case.
+`s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound located that
+was proved about twelve squares rather than inherited from eleven.
 `s(17) >= 459/100`, and `n = 18` and `n = 19` at the same side without a monotonicity
 step, is [T-019](packing/frontier/RESULTS.md) and displaces Massaccesi’s published
 `4.5058` by `0.0842`. `s(19)`, `s(20)` and `s(21) >= 24/5` is

@@ -1280,21 +1280,33 @@ evidence:
     novelty: apparently-novel
     novelty_basis:
       corpus: >-
-        The retained literature archive under packing/resources/ and the frontier source
-        register, which for n = 11 hold Stromquist 2003 (Theorem 2 and the Figure 14
-        cover this project refuted as D-152), the exp-017 repaired certificate, Trump's
-        1979 packing, Nagamochi 2005 and Friedman's record tables.
+        The retained literature archive under packing/resources/, the frontier source
+        register, current public record catalogues, and online scholarly indexes searched
+        through 2026-09-04, with the durable query and source receipt at
+        resources/web/s11-lower-bound-literature-audit-2026/README.md. The local corpus
+        includes Stromquist 2003 (Theorem 2 and the
+        Figure 14 cover this project refuted as D-152), the exp-017 repaired certificate,
+        Trump's 1979 packing, Nagamochi 2005 and Friedman's record tables.
       searched: >-
-        Searched for any lower bound on s(11) above 2 + 4/sqrt(5) = 3.788854. The corpus
-        holds none: that value has been the best since 2003 and the case body describes
-        the interval [3.788854, 3.877084] as the problem the project exists for. The
-        known hole is the same one E-n012-fractional-certificate names -- no systematic
-        sweep of recent preprints.
+        Searched the local full-text corpus, arXiv, Crossref, OpenAlex, Semantic Scholar
+        citation chains, author pages and public packing catalogues for unrestricted
+        packing of eleven unit, equal or congruent squares; s(11) and s_11; lower bounds;
+        weighted, fractional, resource and unavoidable-set methods; and the exact values
+        381/100, 100/381, 110000/145161, 19/5, 5/19 and 275/361. No public lower bound above Stromquist's
+        2 + 4/sqrt(5) = 3.788854 was located.
       novel_object: >-
-        The certificate and the bound. The method is Burns's with Massaccesi's
-        parameters and the generator is this project's; what is new is an instance at
-        n = 11 and side 381/100, which is the first movement of this case's lower bound
-        since 2003.
+        The certificate and the bound. The resource lineage runs through Göbel's
+        integral unavoidable points, Kearney and Shiu's dual lattices, Nagamochi's
+        weighted points, segments and area, and Bentz's resource-starvation account.
+        This certificate uses the exact-rational, pure-atomic direction-net architecture
+        posted by Burns and then developed by Massaccesi, while the generator is this
+        project's. What is new is an instance at n = 11 and side 381/100, the first
+        located public improvement to this case's lower bound since 2003.
+      gaps: >-
+        This does not exhaust subscription-only MathSciNet or zbMATH full text, every
+        thesis or proceedings volume, non-English or unindexed sources, private
+        correspondence, or unpublished work. The claim is apparent novelty within the
+        searched public record, not absolute priority.
     certificate: cases/n11_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras python -m cases.n11_fractional_certificate
     replay_status: passed

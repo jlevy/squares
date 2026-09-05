@@ -596,13 +596,14 @@ results:
         seven-rung ladder -- 19/5, 77/20, 97/25, 39/10, 393/100, 197/50, 79/20 -- by a
         generator that applies at every n and that has since produced the n = 11
         result as well, so this is a bound family rather than a case result. It is
-        also the first bound of any kind proved about n = 12 rather than inherited
-        from n = 11: the frontier case body had recorded that nothing specific to
-        n = 12 had ever been proved.
-        Held below S5 because n = 12 is not the central open case, the method is
-        Burns's and Massaccesi's rather than this project's, the second exact check
-        shares a method family with the first, and the gap to the conjectured 4 is
-        0.07, which this approach does not close.
+        also the first bound located in the retained corpus that is proved about n = 12
+        rather than inherited from n = 11: the frontier case body had recorded that
+        nothing specific to n = 12 had been proved there.
+        Held below S5 because n = 12 is not the central open case, weighted resource
+        counting predates this project, the recent pure-atomic rational direction-net
+        architecture follows Burns, the LP parameter line follows Massaccesi, the second
+        exact check shares a method family with the first, and the gap to the conjectured
+        4 is 0.07, which this approach does not close.
       scored: '2026-09-04'
       by: BC-161 (repository; independent evaluator confirmed C4, no external review)
     novelty: apparently-novel
@@ -686,13 +687,14 @@ results:
       rationale: >-
         Scored against the rubric's own anchor for S5, "movement on a central open
         case". s(11) is the smallest open case and the one the frontier record calls
-        the problem this project exists for; its lower bound had not moved since
-        Stromquist stated it in 2003, and this displaces a value from the refereed
+        the problem this project exists for; the recorded public search found no movement
+        after Stromquist's 2003 value, and this displaces a bound from the refereed
         literature rather than an inherited or closed-form one.
-        What S5 does not claim: the method is Burns's and Massaccesi's rather than
-        this project's, so what is new is an instance and the generator that found it;
-        and the remaining gap to Trump's 1979 packing is 0.067, which this
-        approach does not close. The calibration rung at 189/50, below Stromquist's
+        What S5 does not claim: the weighted-resource lineage predates this project and
+        the pure-atomic direction-net architecture follows Burns and Massaccesi, so what
+        is new is an instance and the generator that found it; apparent novelty is not
+        absolute priority; and the remaining gap to Trump's 1979 packing is 0.067, which
+        this approach does not close. The calibration rung at 189/50, below Stromquist's
         bound, was run first by design and is retained.
       scored: '2026-09-04'
       by: BC-161 continuation (repository; independent evaluator confirmed C4, no external review)
@@ -796,9 +798,10 @@ results:
         replaces a published value rather than an inherited or closed-form one -- the
         only bound this project has displaced that someone else had put in print. Held
         below S5 because none of n = 17, 18, 19 is the central open case, the movement is
-        0.0842 rather than a qualitative change, the method and its parametrisation are
-        Burns's and Massaccesi's own, and the case does not change character at the new
-        value.
+        0.0842 rather than a qualitative change, weighted resource counting predates this
+        project, the recent pure-atomic rational direction-net architecture follows
+        Burns, the LP parameter line follows Massaccesi, and the case does not change
+        character at the new value.
       scored: '2026-09-04'
       by: BC-161 continuation (repository; independent evaluator confirmed C4, no external review)
     novelty: apparently-novel
@@ -919,8 +922,9 @@ results:
         n = 21 it displaces a peer-reviewed closed form that has stood since 2005, where
         no bound specific to either size had ever been proved.
         Held below S5 for the reasons T-019 was: none of the three is the central open
-        case, the method and its parametrisation are Burns's and Massaccesi's, and no
-        case changes character at the new value.
+        case, the weighted-resource lineage predates this project, the pure-atomic
+        rational direction-net architecture follows Burns, the LP parameter line follows
+        Massaccesi, and no case changes character at the new value.
         A calibration note for whoever scores the next one. This is the fourth result
         from one instrument in a day, and the S4 anchor is being carried here by the
         displacement rather than by the technique, which T-017 already banked. Further

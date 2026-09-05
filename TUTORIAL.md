@@ -1072,9 +1072,10 @@ the rarity premise rests on.
 [`resources/`](packing/resources/README.md) and is greppable, with two exceptions: the
 two record constructions survive through the archived survey and record-table captures
 rather than papers of their own.
-Trump’s 1979 packing is documented there and by this directory’s exact certificate—his
-2023 writeup was not retrievable, which the archive README records—and Bidwell’s 1998
-record likewise:
+Trump’s 1979 packing is documented there and by this directory’s exact certificate; his
+2023 author writeup is retained with a faithful extraction, which the archive README
+records, while the original 1979 communication is not, and Bidwell’s 1998 record
+likewise has no retained first-party document:
 
 - Stromquist (2003), *Packing 10 or 11 unit squares in a square*—the `s(10)` proof, the
   `s(11)` lower-bound value, and the `0°`/`45°` class bound
