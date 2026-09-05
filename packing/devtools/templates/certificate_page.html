@@ -22,14 +22,15 @@
    it.
    ============================================================ */
 
-.cert-page {
-  /* Links take the page's accent, the teal its tags and switches use, rather
-     than kpress's separate link blue; the token is set here so both themes
-     inherit it. Footnote marks and backrefs follow. */
-  --kpress-doc-link: var(--kpress-doc-accent);
-  padding-block-end: calc(var(--kpress-font-size-base) * 6);
-}
-.cert-page a, .cert-page .kpress-footnote-ref a, .cert-page a.kpress-footnote-backref { color: var(--kpress-doc-accent); }
+/* Links take the page's accent, the teal its tags and switches use, rather
+   than kpress's separate link blue. The token is set on body so both themes
+   inherit it and so the footnote popovers, which kpress appends to body,
+   get it too; hover states and footnote marks follow. */
+body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(--kpress-doc-accent); }
+.cert-page { padding-block-end: calc(var(--kpress-font-size-base) * 6); }
+.cert-page a, .cert-page .kpress-footnote-ref a, .cert-page a.kpress-footnote-backref,
+.cert-page a:hover, .kpress a.kpress-footnote-backref:hover,
+.kpress-tooltip a, .kpress-tooltip a:hover, .kpress-tooltip .kpress-footnote-nav-link { color: var(--kpress-doc-accent); }
 
 /* Prose keeps the kpress measure; figures are allowed a wider track. */
 .col {
@@ -53,7 +54,10 @@
   text-transform: var(--kpress-caps-transform);
 }
 /* A section starts with room above its heading, so it reads as a new step. */
-.section-head { margin-block: calc(var(--kpress-font-size-base) * 2.6) 0.9rem; }
+.section-head { margin-block: calc(var(--kpress-font-size-base) * 2.6) 0.9rem; text-align: center; }
+.cert-page h2 { text-align: center; }
+.conditions ol { margin-block: 0.6rem 0.8rem; padding-inline-start: 1.4rem; }
+.conditions li { margin-block: 0.3rem; }
 .intro .section-head { margin-block-start: 0; }
 
 .hero { padding-block-start: calc(var(--kpress-font-size-base) * 3); }
@@ -74,6 +78,19 @@
   margin-block: 0.5rem 0;
   text-transform: var(--kpress-caps-transform);
 }
+/* The hero is centered: title, subtitle and credits; the deck below reads as prose. */
+.cert-page .hero h1, .cert-page .hero .subtitle, .credits { text-align: center; }
+.credits {
+  display: grid;
+  font-family: var(--kpress-font-sans);
+  font-feature-settings: var(--kpress-font-features-sans);
+  font-size: var(--kpress-font-size-normal);
+  gap: 0.2rem;
+  line-height: 1.45;
+  margin-block: 1.1rem 0;
+}
+.credits strong { font-weight: var(--kpress-font-weight-sans-bold); }
+.credits .caps { margin-block-end: 0.2rem; }
 .cert-page .hero .deck { font-family: var(--kpress-font-prose); font-style: italic; margin-block: 1.1rem 0; }
 
 /* The certificate switch sits in every figure head; the articles are whole
@@ -162,7 +179,8 @@
   font-size: var(--kpress-font-size-tiny);
   gap: 1rem;
   justify-content: space-between;
-  margin-block-start: 1rem;
+  margin-block-start: 0.6rem;
+  padding: 0 1.1rem 0.9rem;
 }
 .mass-line .v { display: block; margin-block-start: 0.15rem; }
 
@@ -200,7 +218,7 @@
   z-index: 2;
 }
 .tip .tip-w { color: var(--kpress-doc-muted); display: block; margin-block-start: 0.1rem; }
-.tip .katex { font-size: 1.15em; }
+.tip .katex { font-size: 1.1em; }
 .panel {
   border-inline-start: 1px solid var(--kpress-doc-border);
   display: flex;
@@ -214,7 +232,7 @@
   .panel { border-block-start: 1px solid var(--kpress-doc-border); border-inline-start: 0; }
 }
 
-.readout { border: 1px solid var(--kpress-doc-border); padding: 0.85rem 0.9rem; }
+.readout { padding: 0.2rem 0 0.7rem; }
 .readout .caps { display: block; margin-block-end: 0.5rem; }
 .mass-val {
   align-items: center;
@@ -324,17 +342,12 @@
 .tex-d { margin-block: 1.1rem; overflow-x: auto; overflow-y: hidden; padding-block: 0.45rem; }
 .tex-d .katex-display { margin: 0; }
 .caps .katex, .fig-title .katex, .legend .katex, .hint .katex { text-transform: none; }
-/* KaTeX sets math at 1.21em of its surroundings, sized for Times-like faces.
-   PT Serif's x-height is larger, and the sans labels are small, so math is
-   sized to the face it sits in: a touch above the prose, level with sans,
-   and a little above for display equations. */
-.cert-page .katex { font-size: 1.05em; }
-.cert-page .tex-d .katex { font-size: 1.1em; }
-.cert-page .sans-text .katex, .cert-page .kpress-figcaption .katex, .frontmatter .katex, .kv .katex,
-.mass-line .katex, .legend .katex, .hint .katex, .fig-title .katex, .caps .katex, .tab-note .katex { font-size: 1em; }
+/* kpress sizes math to the face it sits in; the page's own sans contexts take
+   kpress's sans size, and its display blocks its display size. */
+.frontmatter .katex, .kv .katex, .mass-line .katex, .legend .katex, .hint .katex, .fig-title .katex,
+.caps .katex, .tip .katex { font-size: var(--kpress-katex-size-sans); }
+.cert-page .tex-d .katex { font-size: var(--kpress-katex-size-display); }
 .caps .katex { letter-spacing: 0; }
-/* Footnotes take the small token size; kpress's 0.9em compounds under an 18px base. */
-.cert-page .kpress-footnotes { font-size: var(--kpress-font-size-small); }
 /* The claim line is the statement itself, set as display. */
 .cert-page .claim .katex { font-size: 1.25em; }
 </style>
@@ -346,9 +359,16 @@
 <header class="hero sans-text col kpress-prose">
   <h1><span class="symbol">s({{N}}) ≥ {{HEADLINE_L_FRAC}}</span></h1>
   <p class="subtitle">A New Lower Bound on the Square Packing Problem</p>
+  <div class="credits">
+    <span class="caps">An automated geometric research exploration</span>
+    <span>September 4, 2026</span>
+    <span>Tooling and human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
+    <span>Agents: <strong>Claude Opus 5, Fable 5.1 and Codex 5.6</strong></span>
+    <span>Open source at <a href="https://github.com/jlevy/squares"><strong>github.com/jlevy/squares</strong></a></span>
+  </div>
   <p class="deck">Eleven unit squares, free to rotate, do not fit in a square of side {{HEADLINE_L_DEC}}.
   The proof is a weighted point set and a pigeonhole. It is the first movement of the smallest open case in
-  {{YEARS_SINCE_PRIOR}} years. The previous bound, {{PRIOR_LOWER}}, was set by Stromquist in {{PRIOR_YEAR}}.<sup class="kpress-footnote-ref"><a href="#fn-stromquist" id="fnref-1" data-kpress-footnote-ref="stromquist">1</a></sup></p>
+  {{YEARS_SINCE_PRIOR}} years. The previous bound, {{PRIOR_LOWER_DEC}}, was set by Stromquist in {{PRIOR_YEAR}}.<sup class="kpress-footnote-ref"><a href="#fn-stromquist" id="fnref-1" data-kpress-footnote-ref="stromquist">1</a></sup></p>
 </header>
 
 <section class="col kpress-prose intro">
@@ -361,8 +381,8 @@
     <span class="tex">n \le 10</span>. The last of those, <span class="tex">s(10) = 3 + 1/\sqrt{2}</span>, was
     settled by Stromquist in {{PRIOR_YEAR}},<sup class="kpress-footnote-ref"><a href="#fn-stromquist" id="fnref-1b" data-kpress-footnote-ref="stromquist">1</a></sup> and <span class="tex">s(11)</span> is the
     smallest case still open.</p>
-    <p>The best packing known, found by Walter Trump in 1979,<sup class="kpress-footnote-ref"><a href="#fn-trump" id="fnref-3" data-kpress-footnote-ref="trump">3</a></sup> fits eleven squares in side
-    {{BEST_PACKING}}…, so <span class="tex">s(11) \le {{BEST_PACKING}}</span>. Whether a smaller container works
+    <p>The best known packing, found by Walter Trump in 1979,<sup class="kpress-footnote-ref"><a href="#fn-trump" id="fnref-3" data-kpress-footnote-ref="trump">3</a></sup> fits eleven squares in side
+    {{BEST_PACKING_DEC}}, so <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>. Whether a smaller container works
     is the open question. This page shows it cannot be as small as {{DEFAULT_L_DEC}}, and then not as small as
     {{HEADLINE_L_DEC}}.</p>
     <p>Each of those is proved by a <strong>certificate</strong>: a finite list of weighted points in the container
@@ -371,16 +391,35 @@
     both. The {{DEFAULT_L_FRAC}} certificate is shown first: it is smaller, and its numbers are easier to follow. The
     {{HEADLINE_L_FRAC}} certificate is the bound the title states. The switch beside each figure changes every
     figure and number on the page to the other.</p>
+    <div class="boxed conditions">
+      <p><strong>The five conditions.</strong> A certificate for <span class="tex">n</span> unit squares in a container of
+      side <span class="tex">L</span> is a set of weighted atoms in the container, a net of directions
+      <span class="tex">\theta_k = 2\arctan t_k</span> for <span class="tex">k = 0, \dots, K</span> with rational
+      <span class="tex">t_k</span>, and a shrink <span class="tex">B \lt 1</span>, such that:</p>
+      <ol>
+        <li><strong>Condition 1.</strong> The atom set is invariant under the container’s symmetry group
+        <span class="tex">\mathbf{D}_4</span>.</li>
+        <li><strong>Condition 2.</strong> The total mass of the atoms is strictly below <span class="tex">n</span>.</li>
+        <li><strong>Condition 3.</strong> The net reaches <span class="tex">\pi/4</span>: its last half-tangent is
+        <span class="tex">\tan(\pi/8)</span>.</li>
+        <li><strong>Condition 4.</strong> <span class="tex">B(1 + D) \lt 1</span>, where <span class="tex">D</span> is the
+        largest half-gap tangent between consecutive net directions.</li>
+        <li><strong>Condition 5.</strong> At every net direction, every placement of the side-<span class="tex">B</span>
+        square inside the container covers mass at least <span class="tex">1</span>.</li>
+      </ol>
+      <p>Conditions 1 to 4 are four exact rational comparisons. Condition 5 is one exact sweep per direction. Together
+      they prove <span class="tex">s(n) \ge L</span>.</p>
+    </div>
 </section>
 
 <figure>
   <div class="fig-head">
     <span class="caps">Figure 1</span>
-    <span class="fig-title">The best packing known</span>
+    <span class="fig-title">The best known packing of 11 squares</span>
   </div>
   <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
-  <figcaption class="kpress-figcaption">Trump’s 1979 packing of eleven unit squares in side {{BEST_PACKING}}…, the best known,<sup class="kpress-footnote-ref"><a href="#fn-trump" id="fnref-3b" data-kpress-footnote-ref="trump">3</a></sup>
-  so <span class="tex">s(11) \le {{BEST_PACKING}}</span>. The project’s own rendering, from the retained witness.</figcaption>
+  <figcaption class="kpress-figcaption">Trump’s 1979 packing of eleven unit squares in side {{BEST_PACKING_DEC}}, the best known,<sup class="kpress-footnote-ref"><a href="#fn-trump" id="fnref-3b" data-kpress-footnote-ref="trump">3</a></sup>
+  so <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>. The project’s own rendering, from the retained witness.</figcaption>
 </figure>
 
 <!--BEGIN:ARTICLE-->
@@ -402,7 +441,7 @@
     {{CERT_TOGGLE}}
   </div>
   <div class="line-fig kpress-diagram">
-  <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER}}, the new bound {{L_DEC}}, and the best known packing at {{BEST_PACKING}}">
+  <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER_DEC}}, the new bound {{L_DEC}}, and the best known packing at {{BEST_PACKING_DEC}}">
     <rect x="{{BOUND_X}}" y="45" width="{{BAND_W}}" height="13" fill="var(--cert-accent-wash)"/>
     <line x1="20" y1="51.5" x2="680" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1"/>
     <g stroke="var(--kpress-doc-muted)" stroke-width="1">
@@ -415,9 +454,9 @@
     <line x1="{{PRIOR_X}}" y1="30" x2="{{PRIOR_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
     <circle cx="{{PRIOR_X}}" cy="51.5" r="3.2" fill="var(--kpress-doc-muted)"/>
     <g text-anchor="middle">
-      <text x="{{PRIOR_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{PRIOR_LOWER}}</text>
+      <text x="{{PRIOR_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{PRIOR_LOWER_DEC}}</text>
       <text x="{{PRIOR_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{PRIOR_SOURCE}}</text>
-      <text x="{{BEST_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{BEST_PACKING}}</text>
+      <text x="{{BEST_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{BEST_PACKING_DEC}}</text>
       <text x="{{BEST_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{BEST_SOURCE}}</text>
     </g>
     <line x1="{{BEST_X}}" y1="30" x2="{{BEST_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
@@ -458,7 +497,7 @@
   <p>There are {{N_ATOMS}} atoms, in {{N_ORBITS}} orbits of the container’s eightfold symmetry group
   <span class="tex">\mathbf{D}_4</span>, carrying {{N_WEIGHTS}} distinct weights between
   <span class="tex">{{WEIGHT_MIN}}</span> and <span class="tex">{{WEIGHT_MAX}}</span>. That symmetry is condition
-  <strong>Condition 1</strong>. It lets the proof check angles only up to <span class="tex">\pi/4</span> and reflect
+  Condition 1. It lets the proof check angles only up to <span class="tex">\pi/4</span> and reflect
   every other orientation onto that arc.</p>
 </section>
 
@@ -478,14 +517,14 @@
   <figcaption class="kpress-figcaption">Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
   corners, where a square has least room to move, and thins in the middle. The sites and weights are the optimum
   of a covering linear program, rationalized. The board holds less mass than eleven disjoint unit squares would
-  need. <strong>Condition 2</strong> is that comparison.</figcaption>
+  need. Condition 2 is that comparison.</figcaption>
 </figure>
 
 <section class="col kpress-prose">
   <div class="section-head">
     <h2>Every Placement Covers Mass at Least One</h2>
   </div>
-  <p><strong>Condition 5</strong> is the claim that every placement covers mass at least
+  <p>Condition 5 is the claim that every placement covers mass at least
   <span class="tex">1</span>. A placement has three continuous parameters, two of position and one of angle, so
   the placements cannot be enumerated.</p>
   <p>The proof makes them finite twice over: the angle is snapped to a net of
@@ -535,7 +574,7 @@
       it the square hangs out of the container, and the proof makes no claim.</p>
     </div>
   </div>
-  <figcaption class="kpress-figcaption">Inside the dashed domain the field never drops below <strong>1</strong>, at any of the {{N_DIRECTIONS}}
+  <figcaption class="kpress-figcaption">Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
   directions. Outside it the mass falls away at once, which is why the atoms crowd the boundary.</figcaption>
 </figure>
 
@@ -554,9 +593,9 @@
   <span class="tex">\cos d + \sin d \le 1 + \tan d</span> on <span class="tex">[0,\pi/4)</span>, it is enough
   that</p>
   <div class="tex-d">B\,(1 + D) \;\lt\; 1, \qquad D \;=\; \max_k \frac{t_{k+1}-t_k}{1+t_k t_{k+1}} \;=\; \max_k \tan\frac{\theta_{k+1}-\theta_k}{2}.</div>
-  <p>That is <strong>Condition 4</strong>, and it couples the two parameters: a coarser net gives a larger
+  <p>That is Condition 4, and it couples the two parameters: a coarser net gives a larger
   <span class="tex">d</span>, hence a smaller <span class="tex">B</span>, hence less mass covered, hence a
-  harder <strong>Condition 5</strong>.</p>
+  harder Condition 5.</p>
   <p>The net stays rational because the angles are carried as half-tangents,
   <span class="tex">\theta_k = 2\arctan t_k</span>, so that</p>
   <div class="tex-d">\cos\theta = \frac{1-t^2}{1+t^2}, \qquad \sin\theta = \frac{2t}{1+t^2}</div>
@@ -597,7 +636,7 @@
         <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod-{{SLUG}}"></dd>
       </dl>
       <p class="hint">Opens at <span class="tex">K = 3</span>, the coarsest net that still reaches
-      <span class="tex">\pi/4</span>, where <strong>Condition 4</strong> admits only
+      <span class="tex">\pi/4</span>, where Condition 4 admits only
       <span class="tex">B \lt 0.8787</span> and the shrink is unmistakable. Drag either square by its
       handle. At
       <span class="tex">K = 180</span>, the net the proof uses, the two squares are
@@ -607,7 +646,7 @@
   <figcaption class="kpress-figcaption">The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
   side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
   <strong>The last quantity must stay below 1.</strong> At <span class="tex">K = 180</span> it is
-  <span class="tex">0.999996</span>.</figcaption>
+  <span class="tex">\approx 0.999996</span>.</figcaption>
 </figure>
 
 <!--BEGIN:COARSENING-->
@@ -616,8 +655,8 @@
     <h2>Why the Net Has {{N_DIRECTIONS}} Directions</h2>
   </div>
   <p>The direction count is measurable. Hold the {{N_ATOMS}} atoms fixed, coarsen the net, set
-  <span class="tex">B</span> to the largest value <strong>Condition 4</strong> then admits, and re-decide
-  <strong>Condition 5</strong>. Halving the net shrinks <span class="tex">B</span> by {{HALVING_B_DROP}} and costs
+  <span class="tex">B</span> to the largest value Condition 4 then admits, and re-decide
+  Condition 5. Halving the net shrinks <span class="tex">B</span> by {{HALVING_B_DROP}} and costs
   {{HALVING_MASS_DROP}} of the least covered mass.</p>
 </section>
 
@@ -664,15 +703,15 @@
   <div class="boxed">
     <p>Take any packing of eleven unit squares in the side-{{L_DEC}} container. Each square, whatever its angle,
     contains a side-<span class="tex">B</span> square <span class="tex">Q_i</span> at one of the {{N_DIRECTIONS}} net angles,
-    which is <strong>Condition 4</strong>.</p>
-    <p>Because <strong>Condition 4</strong> is a <em>strict</em> inequality, each
+    which is Condition 4.</p>
+    <p>Because Condition 4 is a <em>strict</em> inequality, each
     <span class="tex">Q_i</span> sits strictly inside its unit square’s interior, so the eleven are disjoint and
     no atom is counted twice. Each covers mass at least <span class="tex">1</span>, which is
-    <strong>Condition 5</strong>. Then</p>
+    Condition 5. Then</p>
     <div class="tex-d">{{N}} \;\le\; \sum_{i=1}^{{{N}}} \mu(Q_i) \;\le\; \mu\!\left([0,L]^2\right) \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}},</div>
     <p>which is false. There is no such packing, and <span class="tex">s({{N}}) \gt {{L_FRAC}}</span>.</p>
   </div>
-  <p>The strict inequality in <strong>Condition 4</strong> is what makes the <span class="tex">Q_i</span> disjoint. With
+  <p>The strict inequality in Condition 4 is what makes the <span class="tex">Q_i</span> disjoint. With
   <span class="tex">\le</span> in its place, two shrunken squares could share a boundary atom, the double
   counting returns, and the sum never reaches <span class="tex">{{N}}</span>.</p>
 </section>
@@ -693,7 +732,7 @@
   round number is therefore a signature of a bug, not a result.</p>
   <p>All of that search runs in floating point, because it is a search. None of it is in the proof: the
   <a href="{{GENERATOR_URL}}">generator</a> emits a file, and the <a href="{{VERIFIER_URL}}">verifier</a> re-decides
-  <strong>Conditions 1 through 5</strong> on that file in exact rational arithmetic. A wrong linear program will be rejected by the verifier.</p>
+  Conditions 1 through 5 on that file in exact rational arithmetic. A wrong linear program will be rejected by the verifier.</p>
   <p>A <a href="{{THIRDPARTY_URL}}">self-contained third-party check</a>, one file on the standard library
   alone, decides the {{DEFAULT_L_FRAC}} certificate without trusting this repository.</p>
 </section>
@@ -705,7 +744,7 @@
   <span class="tex">{{LEAST_TEX_PLAIN}}</span> at direction <span class="tex">k=0</span>, center
   <span class="tex">{{WITNESS_TEX}}</span>. Every figure is <a href="{{RENDERER_URL}}">computed</a> from that atom list. Prior lower bound
   <span class="tex">2 + 4/\sqrt{5}</span>.<sup class="kpress-footnote-ref"><a href="#fn-stromquist" id="fnref-1-{{SLUG}}" data-kpress-footnote-ref="stromquist">1</a></sup> Best known packing
-  <span class="tex">{{BEST_PACKING}}\ldots</span>.<sup class="kpress-footnote-ref"><a href="#fn-trump" id="fnref-3-{{SLUG}}" data-kpress-footnote-ref="trump">3</a></sup>
+  <span class="tex">{{BEST_PACKING_TEX}}</span>.<sup class="kpress-footnote-ref"><a href="#fn-trump" id="fnref-3-{{SLUG}}" data-kpress-footnote-ref="trump">3</a></sup>
 </footer>
 
 </article>
@@ -740,6 +779,21 @@ const LIMIT_N = {{LIMIT_NUM}}, LIMIT_D = {{LIMIT_DEN}}, LIMIT = LIMIT_N / LIMIT_
 const gcd = (a, b) => b ? gcd(b, a % b) : a;
 const reduce = (n, d) => { const g = gcd(n, d) || 1; return [n / g, d / g]; };
 const fracTex = (n, d) => (d === 1 ? String(n) : `${n}/${d}`);
+
+/* Angles are the one thing on this page that cannot be printed exactly. A net
+   angle is 2*arctan of a rational, so its degree measure is irrational, and so
+   is any angle the reader drags to; the digits a readout shows are a rounding
+   of it and say so. Zero is the one angle that prints exactly, which is why
+   the mark is conditional rather than blanket: at k = 0 the readout states the
+   angle as an equality, and means it.
+
+   `nearly` marks a value standing on its own — grouped, so KaTeX sets the sign
+   as an ordinary symbol rather than spacing it as a relation — and `degRel`
+   marks one introduced by a relation, by replacing the relation. */
+const deg = (a, places) => (a * 180 / Math.PI).toFixed(places);
+const nearly = text => `{\\approx}\\,${text}`;
+const degTex = (a, places, exact = a === 0) => (exact ? deg(a, places) : nearly(deg(a, places)));
+const degRel = (a, places, exact = a === 0) => `${exact ? '=' : '\\approx'} ${deg(a, places)}`;
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const tex = (el, s, d) => { try { katex.render(s, el, { displayMode: !!d, throwOnError: false }); }
                             catch (e) { el.textContent = s; } };
@@ -947,29 +1001,41 @@ function updateReadout() {
   const m = massAt(probe[0], probe[1]);
   /* Always over SCALE, never reduced: the denominator is the unit the whole
      certificate is counted in, and a reduced one would change under the reader
-     as they drag, which is the opposite of what the readout is for. */
+     as they drag, which is the opposite of what the readout is for. The six
+     places are exact rather than rounded, because SCALE divides a million; the
+     renderer refuses a certificate for which it does not. */
   tex(document.getElementById('mv-{{SLUG}}'), `\\frac{${m}}{${SCALE}}`);
-  tex(document.getElementById('md-{{SLUG}}'), `= ${(m / SCALE).toFixed(6)}`);
+  /* The comparison sits on the equality line; the pill speaks only when there
+     is more to say than the comparison. */
+  const covers = m >= SCALE, md = document.getElementById('md-{{SLUG}}');
+  tex(md, `= ${(m / SCALE).toFixed(6)} ${covers ? '\\ge' : '\\lt'} 1`);
+  md.style.color = covers ? css('--kpress-doc-accent') : css('--cert-below');
   const vd = document.getElementById('vd-{{SLUG}}');
+  vd.hidden = false;
   if (!admissible(probe[0], probe[1])) { vd.className = 'verdict out'; vd.textContent = 'Outside the domain'; }
-  else if (m >= SCALE) { vd.className = 'verdict ok'; vd.textContent = onNet ? 'Covers ≥ 1' : 'Covers ≥ 1 (off the net)'; }
-  else if (onNet) { vd.className = 'verdict no'; vd.textContent = 'Below 1, breaks Condition 5'; }
-  else { vd.className = 'verdict out'; vd.textContent = 'Below 1, off the net: no condition tested'; }
+  else if (covers && onNet) { vd.hidden = true; }
+  else if (covers) { vd.className = 'verdict out'; vd.textContent = 'Off the net'; }
+  else if (onNet) { vd.className = 'verdict no'; vd.textContent = 'Breaks Condition 5'; }
+  else { vd.className = 'verdict out'; vd.textContent = 'Off the net: no condition tested'; }
 }
 function updateK() {
-  const deg = a => (a * 180 / Math.PI).toFixed(4);
   const el = document.getElementById('kval-{{SLUG}}');
+  /* The half-tangent t is the exact rational the net is built from; the degree
+     measure beside it is not, so only the second one carries a mark. */
   if (onNet) {
     tex(el, `k = ${curK}, \\quad t = ${curK === 0 ? '0' : fracTex(...reduce(LIMIT_N * curK, LIMIT_D * STEPS))},` +
-            `\\quad \\theta = ${deg(2 * Math.atan(netT(curK)))}^{\\circ}`);
+            `\\quad \\theta ${degRel(2 * Math.atan(netT(curK)), 4)}^{\\circ}`);
   } else {
     /* The square at theta is the square at theta mod 90 degrees; past 45 the
-       diagonal reflection carries it to one below 45 at the mirrored center. */
+       diagonal reflection carries it to one below 45 at the mirrored center.
+       The congruence is exact between the rounded degrees printed, since they
+       differ by a whole number of right angles; what is approximate is each
+       of them separately, and each says so. */
     const psi = angle % (Math.PI / 2), mirrored = psi > Math.PI / 4;
     const k = nearestNet(angle);
-    tex(el, `\\theta = ${deg(angle)}^{\\circ} \\equiv ${deg(psi)}^{\\circ} \\pmod{90^{\\circ}}` +
-            (mirrored ? `, \\text{ diagonal image } ${deg(Math.PI / 2 - psi)}^{\\circ}` : '') +
-            `; \\text{ nearest net } k = ${k} \\text{ at } ${deg(2 * Math.atan(netT(k)))}^{\\circ}`);
+    tex(el, `\\theta ${degRel(angle, 4)}^{\\circ} \\equiv ${degTex(psi, 4)}^{\\circ} \\pmod{90^{\\circ}}` +
+            (mirrored ? `, \\text{ diagonal image } ${degTex(Math.PI / 2 - psi, 4)}^{\\circ}` : '') +
+            `; \\text{ nearest net } k = ${k} \\text{ at } ${degTex(2 * Math.atan(netT(k)), 4)}^{\\circ}`);
   }
 }
 function refresh(rebuild) {
@@ -1051,11 +1117,12 @@ document.getElementById('btn-scan-{{SLUG}}').addEventListener('click', () => {
     for (let i = 0; i <= N; i++) { const x = h + (L - 2 * h) * i / N;
       const m = massAt(x, y); if (m < best) { best = m; bx = x; by = y; } } }
   probe = [bx, by]; drawProver(); updateReadout();
+  /* Exact, like the readout above it: an integer count of 1/SCALE units. */
   const lowest = (best / SCALE).toFixed(6);
   document.getElementById('hint-{{SLUG}}').textContent = onNet
     ? 'Raster scan of direction k = ' + curK + ': lowest sampled mass ' + lowest +
       '. A raster only samples; the exact sweep decides every cell of the arrangement.'
-    : 'Raster scan at ' + (angle * 180 / Math.PI).toFixed(4) + '°, off the net: lowest sampled mass ' + lowest +
+    : 'Raster scan at ' + (angle === 0 ? '' : '≈') + deg(angle, 4) + '°, off the net: lowest sampled mass ' + lowest +
       '. The certificate sweeps no angle off the net; Condition 5 is decided at the {{N_DIRECTIONS}} net directions only.';
 });
 document.getElementById('btn-heat-{{SLUG}}').addEventListener('click', e => {
@@ -1076,6 +1143,10 @@ const phiInput = () => document.getElementById('phi-{{SLUG}}');
    through the whole circle, and the slider then shows the arc angle the
    container's symmetry reduces the square to. */
 let phiVal = (+phiInput().value / 10) * Math.PI / 180;
+/* The slider moves in tenths of a degree, so an angle it sets is an exact
+   number of degrees and the readout prints it as one; the handle turns to
+   wherever the pointer is, and from then on the degree readouts are marked. */
+let phiExact = true;
 const phiNow = () => phiVal;
 const arcOf = phi => { const psi = phi % (Math.PI / 2); return psi > Math.PI / 4 ? Math.PI / 2 - psi : psi; };
 /* The handle rides the square's own top edge, so it turns with it. */
@@ -1094,6 +1165,7 @@ function overPhiHandle(cx, cy) {
 function setPhi(cx, cy) {
   const TAU = 2 * Math.PI;
   phiVal = ((Math.atan2(SKC - cx, SKC - cy) % TAU) + TAU) % TAU;
+  phiExact = false;
   phiInput().value = String(Math.round(arcOf(phiVal) * 180 / Math.PI * 10));
   shrinkDraw();
 }
@@ -1156,19 +1228,25 @@ function shrinkDraw() {
     g.beginPath(); g.arc(hx, hy, SKHR, 0, 6.2832); g.fill(); g.stroke();
   }
 
-  const deg = r => (r * 180 / Math.PI).toFixed(3);
+  /* What each of these six can and cannot claim: phi is exact while the slider
+     owns it; theta is a net angle, exact only at zero; d is their difference,
+     exact only when both are; D is a rational whose decimal does not
+     terminate; Bk is a whole multiple of 1e-7 by construction, so seven places
+     print it in full; and the product is irrational whatever the other two are. */
+  const thetaExact = theta === 0, dExact = phiExact && thetaExact;
   tex(document.getElementById('s-phi-{{SLUG}}'),
-      `${deg(phi)}^{\\circ}` + (Math.abs(arc - phi) > 1e-9 ? ` \\equiv ${deg(arc)}^{\\circ}` : ''));
-  tex(document.getElementById('s-theta-{{SLUG}}'), `${deg(theta)}^{\\circ}`);
-  tex(document.getElementById('s-d-{{SLUG}}'), `${(d * 180 / Math.PI).toFixed(4)}^{\\circ}`);
-  tex(document.getElementById('s-D-{{SLUG}}'), D.toFixed(7));
-  tex(document.getElementById('s-B-{{SLUG}}'), Bk.toFixed(6));
+      `${degTex(phi, 3, phiExact)}^{\\circ}` +
+      (Math.abs(arc - phi) > 1e-9 ? ` \\equiv ${degTex(arc, 3, phiExact)}^{\\circ}` : ''));
+  tex(document.getElementById('s-theta-{{SLUG}}'), `${degTex(theta, 3, thetaExact)}^{\\circ}`);
+  tex(document.getElementById('s-d-{{SLUG}}'), `${degTex(d, 4, dExact)}^{\\circ}`);
+  tex(document.getElementById('s-D-{{SLUG}}'), nearly(D.toFixed(7)));
+  tex(document.getElementById('s-B-{{SLUG}}'), Bk.toFixed(7));
   const pe = document.getElementById('s-prod-{{SLUG}}');
-  tex(pe, `${prod.toFixed(6)} ${prod < 1 ? '\\lt' : '\\ge'} 1`);
+  tex(pe, `\\approx ${prod.toFixed(6)} ${prod < 1 ? '\\lt' : '\\ge'} 1`);
   pe.style.color = prod < 1 ? '' : css('--kpress-doc-danger');
 }
 document.getElementById('phi-{{SLUG}}').addEventListener('input', e => {
-  phiVal = (+e.target.value / 10) * Math.PI / 180; shrinkDraw();
+  phiVal = (+e.target.value / 10) * Math.PI / 180; phiExact = true; shrinkDraw();
 });
 const knets = document.getElementById('cert-{{SLUG}}').querySelectorAll('.knet');
 knets.forEach(b => b.addEventListener('click', () => {

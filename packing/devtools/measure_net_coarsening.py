@@ -6,7 +6,7 @@ shrunken square may have side at most `1 / (1 + D)`, so a coarser net forces a
 smaller `B`, and a smaller `B` covers less mass. This holds the atoms fixed,
 coarsens the net, gives `B` the largest value Condition 4 then admits, and re-decides
 Condition 5. The result is the slope of that trade at one point, not a claim that no
-coarser certificate exists: these atoms were optimised against the full net.
+coarser certificate exists: these atoms were optimized against the full net.
 
 The full-net row is the retained certificate's own value and doubles as the
 measurement's control. Minutes per row at the finer nets, so the result is

@@ -27,6 +27,7 @@ import re
 import sys
 from dataclasses import dataclass
 from fractions import Fraction
+from math import isqrt
 from pathlib import Path
 from typing import TypedDict
 
@@ -58,11 +59,149 @@ NEAR_LIMIT = "#c9a13a"
 for _colour in (BELOW_ONE, NEAR_LIMIT):
     assert _colour in SQUARE_HUE_PALETTE, f"{_colour} is no longer in the square-hue palette"
 
+# ---------------------------------------------------------------------------
+# Printing numbers.
+#
+# One rule, and the page keeps it everywhere: a value that has an exact decimal
+# is printed in full, and a value that has none is marked as approximate where
+# it stands. There is no third case, so there is no unmarked rounding, and a
+# reader never has to guess whether a digit is the certificate's or the
+# formatter's.
+# ---------------------------------------------------------------------------
+
+# The widest exact decimal the page prints before showing the rational instead.
+# Every weight on both certificates is a whole multiple of 1/200000, so six
+# places is what these values actually need; eight leaves a future certificate
+# room without letting a long expansion through as a wall of digits.
+MAX_EXACT_PLACES = 8
+
+# How far a value with no exact decimal is carried before it is cut off. Seven
+# keeps the two irrational bounds one digit past the six-place forms the
+# literature quotes, so a reader can see which way the sixth place rounds.
+APPROX_PLACES = 7
+
+
+def terminating_places(value: Fraction) -> int | None:
+    """The number of decimal places `value` needs written out, or None if it never ends.
+
+    A fraction in lowest terms terminates exactly when its denominator is
+    2^a * 5^b, and then it needs max(a, b) places and no fewer.
+    """
+    denominator = value.denominator
+    twos = fives = 0
+    while denominator % 2 == 0:
+        denominator //= 2
+        twos += 1
+    while denominator % 5 == 0:
+        denominator //= 5
+        fives += 1
+    return max(twos, fives) if denominator == 1 else None
+
+
+def digits(value: Fraction, places: int) -> str:
+    """`value` cut off after `places`, in integer arithmetic so nothing rounds."""
+    scaled = abs(value.numerator) * 10**places // value.denominator
+    body = str(scaled).rjust(places + 1, "0")
+    text = body if places == 0 else f"{body[:-places]}.{body[-places:]}"
+    return f"-{text}" if value < 0 else text
+
+
+def exact_decimal(value: Fraction) -> str | None:
+    """`value` written out in full, or None where no decimal of it is exact.
+
+    None covers both a decimal that never terminates and one that terminates
+    past `MAX_EXACT_PLACES`. Callers treat the two the same, because the
+    rational form serves for both.
+    """
+    places = terminating_places(value)
+    if places is None or places > MAX_EXACT_PLACES:
+        return None
+    return digits(value, places)
+
+
+def decimal(value: Fraction) -> str:
+    """`value` in full, or a refusal to render: this one never rounds.
+
+    For the places the page asserts an equality — `s(11) >= 19/5 = 3.8` — where
+    a rounded decimal would put a false statement on the page. A certificate
+    whose bound or mass has no exact decimal fails the build here rather than
+    being quietly shortened.
+    """
+    text = exact_decimal(value)
+    if text is None:
+        raise SystemExit(
+            f"{value} has no exact decimal within {MAX_EXACT_PLACES} places, and the "
+            "page states it as an equality; it cannot be printed as a decimal at all"
+        )
+    return text
+
+
+def decimal_or_rational(value: Fraction) -> str:
+    """`value` in full where it terminates, and as `n/d` where it does not.
+
+    Both forms are exact, so neither carries a mark. The slash is the project's
+    inline fraction; stacked fractions are for display math and the mass readout.
+    """
+    text = exact_decimal(value)
+    return text if text is not None else f"{value.numerator}/{value.denominator}"
+
+
+def truncated(value: Fraction, *, places: int = APPROX_PLACES, tex: bool = False) -> str:
+    """`value` cut off after `places` and marked as cut off: `3.8770835…`.
+
+    Cut off rather than rounded, which is what earns the ellipsis: every digit
+    shown is a digit of the value, and the value goes on past the last of them.
+    """
+    return digits(value, places) + ("\\ldots" if tex else "…")
+
+
+def nearly(text: str, *, tex: bool = False) -> str:
+    """Mark an already-rounded number as approximate: `≈0.23%`.
+
+    For a number no truncation can be claimed for: a percentage, cut to two
+    figures because two figures are the point of one, and a value that reaches
+    the page already rounded, which no formatter here can undo.
+    """
+    return f"\\approx {text}" if tex else f"≈{text}"
+
+
 # The prior state of the case, which the page reports next to the new bound.
-PRIOR_LOWER = "3.788854"
+# Neither number is rational, so neither has an exact decimal and neither is
+# ever printed bare. Both are carried to far more digits than the page shows,
+# so that a difference of two of them is truncated once, where it is printed,
+# rather than inheriting a rounding from a constant.
+#
+# Stromquist's bound is 2 + 4/sqrt(5), derived here from that closed form —
+# which the page's own footer states — rather than typed: 4/sqrt(5) is
+# sqrt(3.2), and 3.2 * 10^(2p) is a whole number, so an integer square root
+# gives its first p digits exactly.
+CARRIED_PLACES = 32
+PRIOR_LOWER = 2 + Fraction(isqrt(32 * 10 ** (2 * CARRIED_PLACES - 1)), 10**CARRIED_PLACES)
 PRIOR_SOURCE = "Stromquist 2003"
-BEST_PACKING = "3.877084"
+
+# Trump's packing is an algebraic number, the root in this interval of the
+# minimal polynomial the record cites (resources/web/kingbird-squares-in-squares.md).
+# The digits come from the retained witness, witnesses/known-best/n-011.yaml,
+# and are checked against that polynomial rather than trusted, because the page
+# prints them and claims with an ellipsis that they are the root's own: the
+# root lies between the constant and one unit in its last place above it.
+BEST_PACKING = Fraction("3.87708359002281417730789706010096")
+BEST_PACKING_POLYNOMIAL = (1, -20, 178, -842, 1923, -496, -6754, 12420, -6865)
 BEST_SOURCE = "Trump 1979 packing"
+
+
+def _polynomial(x: Fraction) -> Fraction:
+    value = Fraction(0)
+    for coefficient in BEST_PACKING_POLYNOMIAL:
+        value = value * x + coefficient
+    return value
+
+
+_ULP = Fraction(1, 10**CARRIED_PLACES)
+assert _polynomial(BEST_PACKING) < 0 < _polynomial(BEST_PACKING + _ULP), (
+    "the best-packing constant is no longer a truncation of its own root"
+)
+
 PRIOR_YEAR = 2003
 RESULT_YEAR = 2026
 
@@ -430,6 +569,15 @@ def derive(path: Path, *, full_sweep: bool = False) -> Facts:
     for atom in certificate.atoms:
         denominator = atom.weight.denominator
         scale = scale * denominator // _gcd(scale, denominator)
+    # The prover's readout prints its integer count of 1/scale units as a
+    # six-place decimal, and that is exact only because the scale divides a
+    # million. A certificate with a finer unit would make `= 1.000060` a
+    # rounding, which is the one thing the page does not do.
+    if 10**6 % scale:
+        raise SystemExit(
+            f"{path.name} carries weights in units of 1/{scale}, which does not divide "
+            "10^6; the page's six-place mass readout would round rather than report"
+        )
 
     declared_total = Fraction(record["total_mass"])
     if declared_total != certificate.total_mass:
@@ -472,12 +620,6 @@ def frac_tex(value: Fraction) -> str:
     if value.denominator == 1:
         return str(value.numerator)
     return f"\\frac{{{value.numerator}}}{{{value.denominator}}}"
-
-
-def decimal(value: Fraction, places: int = 6) -> str:
-    """An exact decimal where one exists, else a rounded one. No trailing zeros."""
-    text = f"{float(value):.{places}f}".rstrip("0").rstrip(".")
-    return text or "0"
 
 
 def atom_array(facts: Facts) -> str:
@@ -544,6 +686,22 @@ def coarsening_rows(facts: Facts) -> list[CoarseningRow] | None:
     return payload["rows"]
 
 
+def row_mass(row: CoarseningRow) -> Fraction:
+    """One row's least covered mass, exactly, checked against its rounded twin.
+
+    The measurement records both, and the figure prints the exact one; a file
+    whose two fields are not the same number is a stale record rather than a
+    rounding to reconcile, so it fails the render instead of being averaged over.
+    """
+    exact = Fraction(row["least_mass_exact"])
+    if abs(exact - Fraction(row["least_mass"])) > Fraction(1, 2 * 10**6):
+        raise SystemExit(
+            f"net-coarsening row K={row['K']} declares {row['least_mass']} and "
+            f"{row['least_mass_exact']}; those are not the same measurement"
+        )
+    return exact
+
+
 def coarsening_svg(rows: list[CoarseningRow]) -> tuple[str, str, str]:
     """Bars, value labels and axis labels for the net-coarsening figure."""
     left, width, gap = 100.0, 66.0, 50.0
@@ -551,8 +709,8 @@ def coarsening_svg(rows: list[CoarseningRow]) -> tuple[str, str, str]:
     bars, values, labels = [], [], []
     for index, row in enumerate(rows):
         x = left + index * (width + gap)
-        mass = float(row["least_mass"])
-        height = min(mass, 1.0) * (base - top)
+        mass = row_mass(row)
+        height = min(float(mass), 1.0) * (base - top)
         passes = bool(row["passes"])
         accent = 'fill="var(--kpress-doc-accent)"'
         fill = accent if passes else f'{accent} opacity=".3"'
@@ -561,14 +719,21 @@ def coarsening_svg(rows: list[CoarseningRow]) -> tuple[str, str, str]:
             f'height="{height:.0f}" {fill}/>'
         )
         emphasis = ' fill="var(--kpress-doc-accent)" font-weight="650"' if passes else ""
+        # The label is the measurement itself, in full: these five all
+        # terminate inside the cap, and one that did not would be labelled with
+        # its rational rather than with a rounding of it.
         values.append(
             f'<text x="{x + width / 2:.0f}" y="{base - height - 6:.0f}"{emphasis}>'
-            f"{mass:.5f}</text>".replace(">0.00000<", ">0<")
+            f"{decimal_or_rational(mass)}</text>"
         )
         tone = ' fill="var(--kpress-doc-text)"' if passes else ""
+        # The B each net admits is a whole multiple of 10^-7, and the
+        # measurement records it rounded to six places rather than exactly, so
+        # the label says as much. The mass above the bar is the exact one.
         labels.append(
             f'<text x="{x + width / 2:.0f}" y="210"{tone}>K = {row["K"]}</text>'
-            f'<text x="{x + width / 2:.0f}" y="226" font-size="9.5">B {row["B"]}</text>'
+            f'<text x="{x + width / 2:.0f}" y="226" font-size="9.5">'
+            f"B {nearly(row['B'])}</text>"
         )
     return "\n        ".join(bars), "\n        ".join(values), "\n        ".join(labels)
 
@@ -586,13 +751,20 @@ def halving_cost(rows: list[CoarseningRow]) -> tuple[str, str]:
     if half not in by_net:
         return "", ""
     fine, coarse = by_net[finest], by_net[half]
-    b_drop = 1 - float(coarse["B"]) / float(fine["B"])
-    mass_drop = 1 - float(coarse["least_mass"]) / float(fine["least_mass"])
-    return f"{b_drop * 100:.2f}%", f"{mass_drop * 100:.0f}%"
+    b_drop = 1 - Fraction(coarse["B"]) / Fraction(fine["B"])
+    mass_drop = 1 - row_mass(coarse) / row_mass(fine)
+    # Each is an exact rational and each is printed to a couple of figures,
+    # because a couple of figures is the whole point of a percentage. That is a
+    # rounding, so both go out marked.
+    return nearly(f"{float(b_drop) * 100:.2f}%"), nearly(f"{float(mass_drop) * 100:.0f}%")
 
 
 def number_line(facts: Facts) -> dict[str, str]:
-    """Positions on the 3.75-3.90 axis the header draws."""
+    """Positions on the 3.75-3.90 axis the header draws.
+
+    These are pixels, not quantities: the axis is 660 of them wide, so a
+    rounded coordinate is a rounded coordinate and not a rounded bound.
+    """
     low, high, x0, x1 = 3.75, 3.90, 20.0, 680.0
     place = lambda v: x0 + (v - low) / (high - low) * (x1 - x0)  # noqa: E731
     bound = float(facts.outer_side)
@@ -601,6 +773,22 @@ def number_line(facts: Facts) -> dict[str, str]:
         "BOUND_X": f"{place(bound):.0f}",
         "BEST_X": f"{place(float(BEST_PACKING)):.0f}",
         "BAND_W": f"{place(float(BEST_PACKING)) - place(bound):.0f}",
+    }
+
+
+def bound_substitutions() -> dict[str, str]:
+    """The two irrational bounds, in the forms the page is allowed to print them.
+
+    Neither has a bare form, and that is the point: a template that reaches for
+    `{{BEST_PACKING}}` fails the render rather than printing six digits that
+    look exact. `_DEC` is what prose, an aria-label and an SVG label carry;
+    `_TEX` is the same truncation with KaTeX's ellipsis, so it can stand on
+    either side of a relation without claiming to be the whole number.
+    """
+    return {
+        "PRIOR_LOWER_DEC": truncated(PRIOR_LOWER),
+        "BEST_PACKING_DEC": truncated(BEST_PACKING),
+        "BEST_PACKING_TEX": truncated(BEST_PACKING, tex=True),
     }
 
 
@@ -625,11 +813,10 @@ def shared_substitutions(static: Path, headline: Facts, default: Facts) -> dict[
         "DEFAULT_L_DEC": decimal(default.outer_side),
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "PRIOR_YEAR": str(PRIOR_YEAR),
-        "PRIOR_LOWER": PRIOR_LOWER,
+        **bound_substitutions(),
         "PRIOR_SOURCE": PRIOR_SOURCE,
         "PRIOR_URL": PRIOR_URL,
         "PROBLEM_URL": PROBLEM_URL,
-        "BEST_PACKING": BEST_PACKING,
         "BEST_URL": BEST_URL,
         "BEST_RENDER_URL": repo_file(BEST_RENDERING),
         "TRUMP_SVG": best_packing_svg(),
@@ -660,15 +847,17 @@ def certificate_substitutions(
     n = facts.n
     total = facts.total_mass
     shortfall = n - total
-    gap_now = Fraction(BEST_PACKING) - facts.outer_side
-    gap_before = Fraction(BEST_PACKING) - Fraction(PRIOR_LOWER)
-    movement = facts.outer_side - Fraction(PRIOR_LOWER)
+    # Each of these three is a distance from an irrational, so each is a
+    # truncation of one and goes out with the ellipsis that says so.
+    gap_now = BEST_PACKING - facts.outer_side
+    gap_before = BEST_PACKING - PRIOR_LOWER
+    movement = facts.outer_side - PRIOR_LOWER
     margin = facts.least_mass - 1
     rows = coarsening_rows(facts)
     if rows:
         bars, values, labels = coarsening_svg(rows)
         alt = "Least covered mass against net size: " + ", ".join(
-            f"K={row['K']} gives {row['least_mass']}" for row in rows
+            f"K={row['K']} gives {decimal_or_rational(row_mass(row))}" for row in rows
         )
         halving_b, halving_mass = halving_cost(rows)
     else:
@@ -703,18 +892,20 @@ def certificate_substitutions(
         "LEAST_MARGIN": f"{(margin * facts.weight_scale).numerator:,}",
         "SCALE": f"1/{facts.weight_scale}",
         "SCALE_JS": str(facts.weight_scale),
-        "WEIGHT_MIN": decimal(min(a.weight for a in facts.atoms), 5),
-        "WEIGHT_MAX": decimal(max(a.weight for a in facts.atoms), 5),
+        # Weights are whole multiples of 1/weight_scale, so they terminate; the
+        # narrowest one on the 381/100 certificate needs all six places, and
+        # the five the page used to print made it 0.00008.
+        "WEIGHT_MIN": decimal_or_rational(min(a.weight for a in facts.atoms)),
+        "WEIGHT_MAX": decimal_or_rational(max(a.weight for a in facts.atoms)),
         "WITNESS_TEX": (
             f"({facts.witness[0].numerator}/{facts.witness[0].denominator},\\; "
             f"{facts.witness[1].numerator}/{facts.witness[1].denominator})"
         ),
         "WITNESS_X_JS": f"{facts.witness[0].numerator}/{facts.witness[0].denominator}",
         "WITNESS_Y_JS": f"{facts.witness[1].numerator}/{facts.witness[1].denominator}",
-        "PRIOR_LOWER": PRIOR_LOWER,
+        **bound_substitutions(),
         "PRIOR_SOURCE": PRIOR_SOURCE,
         "PRIOR_URL": PRIOR_URL,
-        "BEST_PACKING": BEST_PACKING,
         "BEST_SOURCE": BEST_SOURCE,
         "BEST_URL": BEST_URL,
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
@@ -723,9 +914,11 @@ def certificate_substitutions(
         "VERIFIER_URL": repo_file(VERIFIER),
         "GENERATOR_URL": repo_file(GENERATOR),
         "THIRDPARTY_URL": repo_file(THIRDPARTY),
-        "MOVEMENT": decimal(movement),
-        "GAP_NOW": decimal(gap_now),
-        "GAP_BEFORE": decimal(gap_before),
+        # MOVEMENT is the plain-text form; no figure or sentence reaches for it
+        # today, and a TeX one would have to spell the ellipsis differently.
+        "MOVEMENT": truncated(movement),
+        "GAP_NOW": truncated(gap_now, tex=True),
+        "GAP_BEFORE": truncated(gap_before, tex=True),
         "HALVING_B_DROP": halving_b,
         "HALVING_MASS_DROP": halving_mass,
         "COARSEN_ALT": alt,
