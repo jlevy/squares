@@ -50,11 +50,11 @@ from sqpack.fractional.ceiling import (
     CeilingVerdict,
     Line,
     Placement,
-    _exact_intersection,
-    _float_family,
-    _loose_membership,
     arrangement_lines,
     container_vertices,
+    exact_intersection,
+    float_family,
+    loose_membership,
     verify_ceiling,
 )
 from sqpack.fractional.colgen import (
@@ -253,7 +253,7 @@ def depths_above(
 
     if not vertices:
         return [], Fraction(0), 0
-    normals, offsets, halves, weights = _float_family(certificate)
+    normals, offsets, halves, weights = float_family(certificate)
     points = np.array([[float(x), float(y)] for x, y in vertices])
     placements = certificate.placements
     found: list[tuple[Fraction, Fraction, Fraction]] = []
@@ -264,7 +264,7 @@ def depths_above(
     tight = halves[None, :] - SCREEN_MARGIN
     for start in range(0, points.shape[0], chunk):
         block = points[start : start + chunk]
-        loose = _loose_membership(block, normals, offsets, halves)
+        loose = loose_membership(block, normals, offsets, halves)
         depth = loose.astype(float) @ weights
         candidates = np.flatnonzero(depth >= limit)
         if candidates.size == 0:
@@ -362,7 +362,7 @@ def float_vertices(
         firsts.append(np.full(index.size, i, dtype=np.int64))
         seconds.append(index.astype(np.int64) + i + 1)
         for offset in np.flatnonzero(~far):
-            exact = _exact_intersection(lines[i], lines[i + 1 + int(offset)])
+            exact = exact_intersection(lines[i], lines[i + 1 + int(offset)])
             if exact is None:
                 continue
             if 0 <= exact[0] <= side and 0 <= exact[1] <= side:
@@ -423,14 +423,14 @@ def screened_separation(
     total = int(points.shape[0])
     if total == 0:
         return Separation(Fraction(0), 0, 0, 0, [])
-    normals, offsets, halves, weights = _float_family(certificate)
+    normals, offsets, halves, weights = float_family(certificate)
     placements = certificate.placements
     depth = np.zeros(total)
     chunk = max(1, 2_000_000 // max(1, len(placements)))
     for start in range(0, total, chunk):
         block = points[start : start + chunk]
         depth[start : start + chunk] = (
-            _loose_membership(block, normals, offsets, halves).astype(float) @ weights
+            loose_membership(block, normals, offsets, halves).astype(float) @ weights
         )
     order = np.argsort(-depth, kind="stable")
     floor = float(select_above)
@@ -446,7 +446,7 @@ def screened_separation(
     for start in range(0, total, 256):
         block_index = order[start : start + 256]
         sub = points[block_index]
-        loose = _loose_membership(sub, normals, offsets, halves)
+        loose = loose_membership(sub, normals, offsets, halves)
         first = np.abs(sub @ normals[:, 0, :].T - offsets[None, :, 0]) <= tight
         second = np.abs(sub @ normals[:, 1, :].T - offsets[None, :, 1]) <= tight
         strict = first & second
@@ -473,7 +473,7 @@ def screened_separation(
                     continue
             exact = cache.get(int(index))
             if exact is None:
-                exact = _exact_intersection(
+                exact = exact_intersection(
                     lines[int(pairs[index, 0])], lines[int(pairs[index, 1])]
                 )
             if exact is None or not (0 <= exact[0] <= side and 0 <= exact[1] <= side):
