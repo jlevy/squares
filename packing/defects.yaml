@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 457
+count: 458
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14782,3 +14782,63 @@ defects:
   bead: think-c0qm
   status: contained
   recorded_in: packing/campaign/agendas/agenda-022-the-conditional-route.md
+- id: D-458
+  title: The pull-request tier tripled inside a cap with 3.61x of headroom, and no check could have objected
+  date: '2026-09-05'
+  layer: tooling
+  class: performance
+  detected_by: inspection
+  latent_for: >-
+    six days, from the 2026-08-30 measurement to an operator asking on 2026-09-05 why a
+    wait had got long. Every push in that window paid the full cost, and the pushes were
+    frequent: this branch alone made twelve.
+  severity: medium
+  what: >-
+    `packing-validate --fast`, the tier CI runs on every pull request, went from 499 s to
+    1369.60 s -- 2.65x in six days -- and nothing in the repository objected.
+    Three things had to be true at once, and they were. The baseline lived in a docstring
+    beside `Step.broad`, as prose no machine reads. The cap, FAST_SUITE_BUDGET_SECONDS,
+    was 1800 s, which is 3.61x the only measurement anyone had taken, so a cap that
+    generous cannot detect a regression a third its size. And the tier is effectively one
+    step: `fast behavioral tests` is 1324 s of the 1369.60 s, 96.7 per cent, so its growth
+    is the tier's growth with nothing to average it against.
+    The cap was not missing. It was slack, and slack in a ratio nobody had written down as
+    a thing to check.
+  consequence: >-
+    Twenty-three minutes of CI on every push, paid by every contributor and every agent
+    for six days, on a surface whose whole purpose is to be paid constantly.
+    The compounding cost is worse than the arithmetic. The workflow cancels a run in
+    progress when a newer push arrives, so a push cadence faster than the tier's own wall
+    produces no completed run at all: three runs on this branch were cancelled that way
+    before anyone noticed the pattern. A gate slower than the rate work arrives at does
+    not merely tax development, it stops reporting.
+    No result is wrong and no bound is affected. What was lost is signal and time.
+  fix: >-
+    Fixed on 2026-09-05 by BC-216 of agenda-023, and the fix is the relationship rather
+    than the number. devtools/gate-budgets.yaml declares, per tier, a ceiling, the cost
+    last measured at that tier's declared reference runner, the date and CI run behind it,
+    and the reference shape; sqpack/gate_budgets.py judges a finished run against four
+    rules, and devtools/check_gate_budgets.py enforces the static ones in the records
+    tier.
+    Rule 2 is the one that answers this defect and it needs no clock: a ceiling more than
+    max_headroom times the recorded cost fails the declaration. At the policy's 2.0, the
+    2026-08-30 record of 499 s forces the ceiling to at most 998 s, and the 1369.60 s run
+    fails it. Rule 4 is its mirror and answers the rot: a run far under the record also
+    fails, printing the figure to write, so a record bounded only from above cannot decay
+    into prose the way this one did.
+    The ratio rules enforce only where cpu count, --jobs and --inner-jobs match the
+    reference, because a check that fails on a slow runner is a check people disable.
+  regression: >-
+    packing/tests/test_gate_budgets.py, fifteen tests, and six entries in
+    devtools/controls.yaml. The load-bearing one is
+    test_the_2026_08_30_declaration_would_have_been_refused, which replays this incident
+    in both halves: the 1800-beside-499 declaration is refused statically, and then, with
+    the ceiling tightened to the 998 the rule allows, the real 1324 s run is judged and
+    fails with `fast behavioral tests` named as the step that spent the time.
+    Two limits are stated rather than papered over. A 2.0 headroom means a regression
+    smaller than about 1.5x can still hide, and the rules cannot distinguish a genuinely
+    slower runner of the same shape from a regression, because packing-validate is
+    read-only by contract and cannot keep a run history without becoming a writer.
+  bead: think-86cm
+  status: fixed
+  recorded_in: packing/devtools/gate-budgets.yaml

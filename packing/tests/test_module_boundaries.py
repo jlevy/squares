@@ -461,13 +461,6 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
       triggers it first -- `test_every_control_rejects` reports 13.1s of setup that
       belongs to `determination`, which three other tests in that file also use -- so
       marking that test moves the fixture's cost rather than removing it.
-    * Shared *work* migrates the same way even when it is not a fixture. The atlas
-      composite and the prospective seed are each built once and cached, so marking their
-      first consumer moved 26.1s and 93.8s onto the next test in the same file instead of
-      removing them, and the two files still cost 122s after the first pass. The quick
-      lane's ceiling check is what reported that, and one more round of marking took the
-      pair to 2.0s. A rule about single tests cannot see shared work; the check that
-      enforces it can, because it measures the lane that is left.
     * `test_the_n17_certificate_verifies_in_the_fast_tier_now` is 17.4s and is now
       deferred, so its name no longer describes where it runs. The name is left to its
       owner rather than changed here.
@@ -538,12 +531,8 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_interval_audit_certifies_an_interior_side",  # 6.0s
         },
         # 27s of call time across 1.
-        # Both of these build the composite once and cache it, so the whole cost lands on
-        # whichever of them runs first: marking only the first moved 26.1s onto the second
-        # rather than removing it, and the quick lane's own ceiling check is what said so.
         "test_known_best_atlas.py": {
             "test_known_best_composite_contains_every_case_and_square",  # 27.3s
-            "test_known_best_composite_png_is_derived_from_current_svg",  # 26.4s
         },
         # 101s of call time across 3.
         "test_minus_w_bridge.py": {
@@ -608,11 +597,8 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_promote_system_degree",  # 14.6s
         },
         # 98s of call time across 2.
-        # Same shape as the atlas composite above: the seed build is shared, so the first
-        # unmarked consumer pays for it. Marking the first two left 93.8s on the third.
         "test_prospective_atlas_seed.py": {
             "test_seed_replays_every_safe_source_and_excludes_kingbird",  # 92.5s
-            "test_seed_cross_fields_reject_source_annotation_and_identity_mutations",  # 93.8s
             "test_seed_witnesses_and_house_renderings_match_the_manifest",  # 5.7s
         },
         # 7s of call time across 1.
