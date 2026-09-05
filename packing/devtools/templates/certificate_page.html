@@ -503,7 +503,7 @@ fc.addEventListener('pointerleave', () => {
 /* ---------- Figure 4 ---------- */
 const pv = document.getElementById('prove-{{SLUG}}'), pg = pv.getContext('2d');
 const PS = pv.width, PM = PS * 0.06, PPX = PS - 2 * PM, PSC = PPX / L;
-const RES = 230, TIGHT = 1.12;
+const RES = 230, TIGHT = {{TIGHT_JS}};
 let probe = [{{WITNESS_X_JS}}, {{WITNESS_Y_JS}}], curK = 0, showHeat = true, heat = null;
 /* Handle geometry in container units, so it scales with the drawing. */
 const HGAP = 0.3, HR = 0.075;

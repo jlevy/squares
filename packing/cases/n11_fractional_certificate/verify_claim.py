@@ -52,7 +52,7 @@ def load(path):
     The path is the certificate's JSON file, or a Markdown document carrying it in a
     fenced json block: each verifiable-claim document embeds the certificate it
     decides, so the whole claim travels as one file."""
-    text = Path(path).read_text()
+    text = Path(path).read_text(encoding="utf-8")
     if not text.lstrip().startswith("{"):
         fence = re.search(
             r"^`{3,}json[ \t]*\n(.*?)^`{3,}[ \t]*$", text, re.MULTILINE | re.DOTALL

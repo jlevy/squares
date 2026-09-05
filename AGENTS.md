@@ -87,8 +87,10 @@ Two rules worth knowing before changing any of this:
 
 - **Exclusions are evidence-based, not precautionary.** The policy is to format the
   whole repository and exclude only what we have a tested reason to leave raw.
-  Two exclusions qualify: the literature archive under `packing/resources/`, and the
-  generated `SKILL.md` files.
+  The exclusions, each with its reason in `.flowmarkignore`: the literature archive
+  under `packing/resources/`; generated files, from the `SKILL.md` files to the rendered
+  registers and the claim documents, whose own renderers drift-check them; two dated
+  reviews whose quoted sources the formatter would retype; and the vendored submodules.
   The archive is excluded for two measured reasons: the `.raw.md` extractions are
   byte-level ground truth and the formatter rewrites them (about 2,600 lines across two
   files), and formatting the transcriptions would change transcribed characters — smart

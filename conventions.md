@@ -450,8 +450,8 @@ own only where kpress has none.
 No attribute sugar (`{.class}`, `[text]{.class}`) and no `:::` containers: the div and
 span pass-through is the one kpress guarantees without configuration, it survives its
 sanitized mode, and GitHub renders the same blocks as plain HTML. The explainer template
-([`certificate_page.md`](packing/devtools/templates/certificate_page.md)) is the proof;
-the other documents follow in a later pass.
+([`certificate_page.md`](packing/devtools/templates/certificate_page.md)) is the worked
+example.
 
 **Relative links must resolve.** [checked] The campaign’s checker walks every relative
 Markdown link. This project has needed that twice.

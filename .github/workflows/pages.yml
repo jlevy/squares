@@ -14,6 +14,7 @@ name: Certificate page
     paths:
       - packing/cases/n11_fractional_certificate/**
       - packing/devtools/render_certificate_page.py
+      - packing/devtools/measure_net_coarsening.py
       - packing/src/sqpack/**
       - packing/atlas/known-best/rendering/n-011.svg
       - packing/devtools/templates/certificate_page.html
@@ -30,6 +31,7 @@ name: Certificate page
     paths:
       - packing/cases/n11_fractional_certificate/**
       - packing/devtools/render_certificate_page.py
+      - packing/devtools/measure_net_coarsening.py
       - packing/src/sqpack/**
       - packing/atlas/known-best/rendering/n-011.svg
       - packing/devtools/templates/certificate_page.html
@@ -46,7 +48,8 @@ permissions:
 
 concurrency:
   group: certificate-page-${{ github.ref }}
-  cancel-in-progress: true
+  # A superseded pull-request build is cancelled; a deployment in flight on main is not.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
@@ -79,19 +82,15 @@ jobs:
         run: uv run --frozen --group dev python -m devtools.render_certificate_page
 
       # The page is not checked in, so this is where a render that did not reproduce
-      # itself byte for byte would show: a second render has to match the first.
-      - name: Check the render is deterministic
-        run: uv run --frozen --group dev python -m devtools.render_certificate_page --check
-
-      - name: Check the page is one self-contained file
+      # itself byte for byte would show: a second render has to match the first. The
+      # renderer also refuses a page that references anything outside itself (a script
+      # or stylesheet source, a CSS import, a url() that is not a data URI), so the
+      # self-containment check is the renderer's, not a grep here.
+      - name: Check the render is deterministic and self-contained
         run: |
+          uv run --frozen --group dev python -m devtools.render_certificate_page --check
           test -s site/index.html
-          if grep -Eoq 'src="https?://|href="https?://[^"]*\.css' site/index.html; then
-            echo "the page references an external script or stylesheet" >&2
-            grep -Eo 'src="https?://[^"]*|href="https?://[^"]*\.css' site/index.html >&2
-            exit 1
-          fi
-          echo "self-contained, $(du -h site/index.html | cut -f1)"
+          echo "one file, $(du -h site/index.html | cut -f1)"
 
       - name: Upload the page artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
