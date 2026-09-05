@@ -3,13 +3,13 @@ type: is
 id: is-01m1qn0vdfw1gxdstprre9aqks
 title: "X-015: holistic strategy report — the directions map and the three programs"
 kind: task
-status: closed
+status: in_progress
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
 created_at: 2026-09-05T02:05:37.070Z
-updated_at: 2026-09-05T02:43:12.211Z
+updated_at: 2026-09-05T20:42:07.776Z
 closed_at: 2026-09-05T02:43:12.211Z
 close_reason: null
 resolution: null
