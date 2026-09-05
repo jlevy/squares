@@ -429,6 +429,9 @@ is decided.
 `pyproject.toml`, `.python-version`, Ruff, BasedPyright, CI, and `uv.lock` express one
 runtime policy. Development commands run through the locked uv environment described in
 [`development.md`](development.md).
+The one deliberate exception is the standalone verifiers under
+`packing/cases/n11_fractional_certificate/`, which a reader runs outside this
+environment: they are standard library only and run on CPython 3.12 or later.
 
 **Code is segregated by maturity and consequence.** [checked] Maintained foundations,
 reusable research components, case-specific evidence, developer tooling, and tests live
