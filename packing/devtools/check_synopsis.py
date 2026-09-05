@@ -26,6 +26,7 @@ Thirteen checks:
  11. living reproducibility instructions do not name removed command paths
  12. the cold-start handoff agrees with the latest terminal session and its next entry
  13. the reported covering values it names match `CERTIFICATE-REACH.md`'s own table
+ 14. the `n = 11` fact table's two ends and their gap match the case's own front matter
 
 Check 8 closes a real gap: `packing-ledger check` walks links under `campaign/`
 only, so the root document's forty-odd references were unchecked.
@@ -39,7 +40,7 @@ import re
 import sys
 from collections import Counter
 from collections.abc import Iterable
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal, InvalidOperation, localcontext
 from pathlib import Path
 
 from devtools.check_rung_figures import round_to
@@ -60,6 +61,18 @@ AGENT_SESSIONS = ROOT / "campaign/agent-sessions"
 AGENDAS = ROOT / "campaign/agendas"
 ACTIVE_PLAN = REPO / "docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md"
 DEFECTS = ROOT / "defects.yaml"
+CASE_INTERVAL_ARTIFACT = ROOT / "frontier" / "n-011.md"
+#: The three rows of the `n = 11` fact table under "The Problem", by their row labels.
+#: `gap` is deliberately the term `conventions.md` fixes: the distance between the best
+#: upper and lower bounds, whoever proved them.
+CASE_INTERVAL_LABELS = {
+    "upper": "Best known packing (upper bound)",
+    "lower": "Best certified lower bound",
+    "gap": "Bound gap",
+}
+#: Wide enough for the degree-8 upper bound's thirty-three digits with headroom, for the
+#: same reason `check_rung_figures` carries one.
+_DECIMAL_PRECISION = 60
 READINESS_BEGIN = "<!-- BEGIN CURRENT-RESEARCH-READINESS -->"
 READINESS_END = "<!-- END CURRENT-RESEARCH-READINESS -->"
 READINESS_SOURCES = (
@@ -698,6 +711,97 @@ def check_covering_value_reports(text: str) -> list[str]:
     return problems
 
 
+def fact_row(text: str, label: str) -> str | None:
+    """The value cell of the fact-table row named `label`, or `None` if there is none."""
+    match = re.search(rf"^\| {re.escape(label)} \| (.*?) \|", text, re.M)
+    return None if match is None else match.group(1)
+
+
+def check_case_interval(
+    text: str,
+    front: dict,
+    labels: dict[str, str] = CASE_INTERVAL_LABELS,
+) -> list[str]:
+    """The fact table's two ends and their gap match the case artifact's front matter.
+
+    `D-450`, which is `D-442` one day later. T-018 moved the verified lower bound of
+    `n = 11` to `381/100`, `frontier/n-011.md`'s front matter moved with it, and the
+    fact table under "The Problem" -- the first table a reader meets in this document --
+    kept the displaced `2 + 4/sqrt(5)` and the gap computed from it. `check_case_prose`
+    holds a case *body* to its own front matter and `check_rung_figures` holds the
+    results register to its certificates; the two reader-facing documents were held to
+    nothing, so the class moved to them.
+
+    Three things are required, and each is the shape of the drift that happened:
+
+    * the upper row's digits are the front matter's own, allowing the trailing ellipsis
+      the row writes but not a different value;
+    * the lower row states both the exact form the record carries and its decimal, so a
+      row cannot go stale in one and stay current in the other;
+    * the gap is the difference of the two, at whatever precision the row is written to.
+
+    Pure in its inputs -- `text` and the already-loaded front matter -- so that the
+    negative control can drive it directly rather than doctoring the repository.
+    """
+
+    found = {key: fact_row(text, label) for key, label in labels.items()}
+    if missing := [labels[key] for key, row in found.items() if row is None]:
+        return [f"SYNOPSIS.md: fact table has no '{label}' row" for label in sorted(missing)]
+
+    rows = {key: row for key, row in found.items() if row is not None}
+    figures = {key: re.findall(r"`([^`]*)`", row) for key, row in rows.items()}
+    if empty := [labels[key] for key, found in figures.items() if not found]:
+        return [f"SYNOPSIS.md: '{label}' row states no figure" for label in sorted(empty)]
+
+    upper = str(front["verified_upper_bound"]["value"])
+    lower = str(front["verified_lower_bound"]["value"])
+    exact = str(front["verified_lower_bound"]["exact_form"])
+
+    problems = []
+    written_upper = figures["upper"][0].rstrip("\u2026. ")
+    if not written_upper or not upper.startswith(written_upper):
+        problems.append(
+            f"SYNOPSIS.md: '{labels['upper']}' states '{figures['upper'][0]}', "
+            f"not the case's verified {upper}"
+        )
+
+    lower_cell = figures["lower"][0]
+    absent = [
+        wanted
+        for wanted in (exact, lower)
+        if not re.search(rf"(?<![\w./]){re.escape(wanted)}(?![\w./])", lower_cell)
+    ]
+    if absent:
+        problems.append(
+            f"SYNOPSIS.md: '{labels['lower']}' states '{lower_cell}', which does not "
+            f"carry the case's verified {' and '.join(absent)}"
+        )
+
+    stated_gap = figures["gap"][0]
+    try:
+        stated = Decimal(stated_gap)
+    except InvalidOperation:
+        stated = Decimal("nan")
+    # A non-integer exponent is what a NaN or an infinity carries -- the cell `Decimal`
+    # refused above, and the "nan" or "Infinity" it would have accepted. No gap is one.
+    exponent = stated.as_tuple().exponent
+    if not isinstance(exponent, int):
+        problems.append(f"SYNOPSIS.md: '{labels['gap']}' states no decimal ({stated_gap})")
+        return problems
+    places = -exponent
+    with localcontext() as context:
+        context.prec = _DECIMAL_PRECISION
+        expected = (Decimal(upper) - Decimal(lower)).quantize(
+            Decimal(1).scaleb(-places), rounding=ROUND_HALF_UP
+        )
+    if stated != expected:
+        problems.append(
+            f"SYNOPSIS.md: '{labels['gap']}' states {stated}, "
+            f"not the {expected} the two rows leave between them"
+        )
+    return problems
+
+
 def check_defects(text: str) -> list[str]:
     """The defect count and per-class counts match the dataset."""
     data = safe_load((ROOT / "defects.yaml").read_text())
@@ -784,6 +888,7 @@ def main() -> int:
         + check_current_handoff(text)
         + check_covering_value_reports(text)
         + check_defects(text)
+        + check_case_interval(text, front(CASE_INTERVAL_ARTIFACT)["packing"])
     )
     if problems:
         print("SYNOPSIS.md has drifted from the artifacts:", file=sys.stderr)

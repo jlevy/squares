@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 451
+count: 452
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14464,3 +14464,59 @@ defects:
   recurrence_of: D-442
   status: fixed
   recorded_in: packing/frontier/evidence.yaml
+- id: D-452
+  title: The documents a reader opens first still described the pre-T-018 n = 11 rung
+  date: '2026-09-05'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    one day, from the T-018 retention on 2026-09-04 until this read; and, for the T-017
+    figure, from that result's scoring the same day
+  severity: medium
+  recurrence_of: D-442
+  what: >-
+    T-018 moved the verified lower bound of n = 11 from Stromquist's 2 + 4/sqrt(5) to
+    381/100 = 3.81, and the front matter of packing/frontier/n-011.md was updated with
+    it. Four durable statements outside that file were not.
+    SYNOPSIS.md's n = 11 fact table still gave "Best certified lower bound |
+    2 + 4/sqrt(5) = 3.788854382..." and "Published gap | 0.088229208023", under a
+    sentence saying both ends had barely moved in a generation.
+    TUTORIAL.md's table for the same case gave "best lower bound | 2 + 4/sqrt(5)" and
+    "bound gap 0.088229208023 | open since 2003", and its open-questions section said
+    the interval [3.788854, 3.877084] "has stood since 2003" -- written the day before
+    the lower end moved.
+    packing/campaign/ideas.md pinned s(11) to [3.788854, 3.877084] and said both
+    endpoints had stood for over two decades.
+    And T-017's significance rationale in packing/frontier/results.yaml put the gap to
+    the conjectured 4 at 0.07, the distance from the 393/100 rung, where that result's
+    own claim field gives the retained rung's 0.04.
+  consequence: >-
+    No bound is wrong and no verdict changes; every figure was exact and true of the
+    object it was written about. What drifted is which object. The cost falls on the
+    reader furthest from the artifacts: the synopsis fact table and the tutorial are
+    what a newcomer reads before anything else, and for a day they reported a displaced
+    value as the current one and dated a moving interval to 2003.
+    This is D-442 recurring one day later, on the surfaces beside the ones D-442's
+    detector was built for. check_case_prose holds a case body to its own front matter
+    and check_rung_figures holds the results register to its certificates; nothing held
+    the two reader-facing documents to anything, so the class simply moved to them.
+  fix: >-
+    Fixed on 2026-09-05. Each figure is re-derived from the artifact that owns it:
+    381/100 = 3.81 and 3.87708359002281417730789706010096 from
+    packing/frontier/n-011.md's front matter, their difference 0.067083590023 at the
+    twelve decimals the rows were already written to, and, for T-017, the 0.04 that its
+    retained 99/25 rung leaves below 4. The "has stood since 2003" sentences now say
+    what is true -- the upper end has not moved since 1979, the lower end moved on
+    2026-09-04 -- and the synopsis row is relabelled "Bound gap", since the end it
+    measures from is no longer a published value. The claim that n = 11 carries the
+    fourth-smallest open gap at n <= 100 was re-derived over the sixty-five open cases
+    in the corpus and still holds.
+    The durable part is check_case_interval in packing/devtools/check_synopsis.py, which
+    holds the synopsis fact table to packing/frontier/n-011.md's front matter: the upper
+    figure must be the front matter's own digits, the lower row must state both the
+    exact form and the decimal the record carries, and the gap must equal their
+    difference at the precision it is written to.
+  regression: packing/tests/test_synopsis_handoff.py
+  status: fixed
+  recorded_in: SYNOPSIS.md

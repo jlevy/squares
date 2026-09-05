@@ -70,8 +70,8 @@ structurally unlike the small proved tilted cases at `n = 5` and `n = 10`. Every
 |  | value | status |
 | --- | --- | --- |
 | best known packing (upper bound) | `3.87708359002281417730789706010096…` | Trump 1979, a construction |
-| best lower bound | `2 + 4/√5 = 3.788854382…` | see the note below |
-| bound gap | `0.088229208023` | open since 2003 |
+| best lower bound | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), a verified certificate; see [below](#how-a-weighted-atomic-lower-bound-proof-works) |
+| bound gap | `0.067083590023` | still open |
 
 Two different quantities get called a gap in this subject, and this document keeps them
 apart. The **bound gap** above is the distance between the best upper and lower bounds,
@@ -81,17 +81,20 @@ the best one anybody has published, and it is what [§3](#3-cells-basins-and-two
 onward measures. The first is a property of the problem; the second is a property of a
 run.
 
-**The lower bound carries a story this project produced.** Stromquist’s 2003 Theorem 2
-is the published source, and this repository found that its printed proof is **false as
-printed**: an exact open box of side `10001/10000` fits the claimed container and
-strictly avoids all twelve printed Figure 14 points.
-A separately preregistered, source-distinct repair—moving one point from `(.8, 1.85)` to
-`(.79, 1.85)`—restores the whole argument and certifies the same inequality exactly
+**The value that stood before it carries a story this project produced.** Stromquist’s
+2003 Theorem 2 was the published source for `2 + 4/√5 = 3.788854382…`, and this
+repository found that its printed proof is **false as printed**: an exact open box of
+side `10001/10000` fits the claimed container and strictly avoids all twelve printed
+Figure 14 points. A separately preregistered, source-distinct repair—moving one point
+from `(.8, 1.85)` to `(.79, 1.85)`—restores the whole argument and certifies the same
+inequality exactly
 ([exp-016](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md),
 [exp-017](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md)).
 The inequality stands; the printed derivation of it does not.
 The synopsis records the repair as **T-4** and the falsification as the round that
 terminally refuted the hypothesis it was registered against.
+That value is no longer the best lower bound for `n = 11`; displacing it was the point
+of the certificate below.
 
 Two lessons in that episode generalize: **a published proof is a source, not an
 oracle**, and **the cheapest way to learn something is to try to break a thing you
@@ -1019,10 +1022,9 @@ throughput.
 `4.6755`. What is unknown is whether the named alternatives, none of which is built,
 would do better.
 
-**4. What `s(11)` actually is.** The interval `[3.788854, 3.877084]` has stood since
-2003 and neither end is known to be tight.
-The upper bound is a construction nobody has beaten; the lower bound is now certified
-here but is not claimed to be sharp.
+**4. What `s(11)` actually is.** The interval is `[3.81, 3.877084]`, and neither end is
+known to be tight. The upper end is a construction nobody has beaten since 1979; the
+lower end moved on 2026-09-04, is certified here, and is not claimed to be sharp.
 
 **5. What a floating LP result means below `1e-11`.** The floor comes from HiGHS’s own
 feasibility tolerance—pinned at `1e-10`, the strictest value it accepts—under which

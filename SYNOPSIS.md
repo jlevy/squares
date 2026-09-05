@@ -1865,13 +1865,14 @@ For most `n` the answer is uninteresting: `s(m²) = m` by the grid.
 It becomes interesting just above a perfect square, where the leftovers must be tilted
 in.
 
-At `n = 11` the two ends of the interval have barely moved in a generation:
+At `n = 11` the upper end has not moved since 1979, and the lower end moved on
+2026-09-04 for the first time since 2003:
 
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
-| Best certified lower bound | `2 + 4/√5 = 3.788854382…` | exp-017 exact source-distinct repair; value stated by Stromquist 2003, whose printed proof has gap D-152 |
-| Published gap | `0.088229208023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+| Best certified lower bound | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), a first-party weighted fractional unavoidable-set certificate, decided twice from its frozen bytes |
+| Bound gap | `0.067083590023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
 
 ![Walter Trump’s exact eleven-square packing.](packing/atlas/rendering/trump11-overview.svg)
 
@@ -1879,12 +1880,14 @@ At `n = 11` the two ends of the interval have barely moved in a generation:
 separated from the independently certified lower bound.
 The segment and dot contact marks are exact, not tolerance-based visual guesses.*
 
+The value `T-018` displaces is Stromquist’s `2 + 4/√5 = 3.788854382…`, and that value
+keeps its own place in the record.
 The current audit found an explicit strict box avoiding all twelve printed Figure 14
 points, so the paper’s unavoidability subclaim is false as printed
 ([D-152](defects.md)). Exp-017 independently certifies the same numerical inequality by
 moving only `G=(.8,1.85)` to the source-distinct `G'=(.79,1.85)` and replaying the
-complete finite cover and capacity argument.
-The repaired coordinate and certificate are results of this repository, not claims
+complete finite cover and capacity argument ([T-010](packing/frontier/RESULTS.md)). The
+repaired coordinate and certificate are results of this repository, not claims
 attributed to Stromquist.
 
 Trump’s packing is six axis-aligned squares plus a block of five tilted at
@@ -3180,14 +3183,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 451 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 452 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 93 | asserted something false about the mathematics |
 | validity | 117 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 168 | recorded something its own evidence contradicts |
+| bookkeeping | 169 | recorded something its own evidence contradicts |
 | robustness | 57 | did not finish, or finished only by luck |
 | performance | 16 | worked, but cost far more than it should |
 
@@ -3197,7 +3200,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-five defects in 451, and no soundness defect
+**The automated gate has caught sixty-five defects in 452, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

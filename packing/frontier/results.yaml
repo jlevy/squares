@@ -603,7 +603,7 @@ results:
         counting predates this project, the recent pure-atomic rational direction-net
         architecture follows Burns, the LP parameter line follows Massaccesi, the second
         exact check shares a method family with the first, and the gap to the conjectured
-        4 is 0.07, which this approach does not close.
+        4 is 0.04, which this approach does not close.
       scored: '2026-09-04'
       by: BC-161 (repository; independent evaluator confirmed C4, no external review)
     novelty: apparently-novel
