@@ -5,13 +5,15 @@ title: "Certificate page: apply the common documentation guidelines to the prose
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - explainer
   - pr-79
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m1qetzfmdebbpwyndp0r04bn
 parent_id: is-01m1pnpwvpjydts81pffmp1nt7
 created_at: 2026-09-05T00:00:59.562Z
-updated_at: 2026-09-05T00:41:29.475Z
+updated_at: 2026-09-05T00:41:31.889Z
 ---
 Review feedback on PR #79.
