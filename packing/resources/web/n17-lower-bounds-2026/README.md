@@ -1,15 +1,12 @@
-# 2026 weighted lower-bound sources for 17 unit squares
+# Proposed 2026 Lower Bounds for 17 Unit Squares
 
 Primary-source snapshot of two August 2026 proposals for improving the lower bound on
 the side length needed to pack 17 unit squares in a square.
 
 These sources were retrieved on 31 August 2026. They are retained because they contain
 replayable, exact-rational certificates and because neither proposal was present in the
-repository’s frontier record when found. Neither source is peer reviewed. The repository
-subsequently adopted Massaccesi’s result as T-015 at V4/C3 after source replay, an
-accumulation-independent implementation, two reviews, and a later source-distinct exact
-verifier. T-019’s first-party `s(17) ≥ 4.59` certificate then superseded it numerically.
-The two posts remain method provenance and regression controls.
+repository's frontier record when found. Neither result is peer reviewed or independently
+implemented here yet.
 
 ## Burns: 4.4811
 
@@ -55,14 +52,11 @@ Source URLs:
 The extracted verifier was replayed on 31 August 2026 with the repository's Python 3.14
 environment. It completed in under five seconds and reported 168 atoms, total mass
 `9744 / 576`, a minimum score of `576 / 576` over 181 sampled rational directions, and
-`CERTIFICATE CONDITIONS VERIFIED`. That first replay was only source-backed: the
-verifier is derived from Burns’s and its audit checklist was not retained. Later work
-closed that historical limitation. H-052’s retained repository instrument reproduced
-all 181 rows with source-faithful difference arrays and direct atom-by-atom accumulation;
-BC-150 and BC-151 audited the shared reduction; and the source-distinct exact verifier
-retained for T-017 reproduced Massaccesi’s certificate unchanged in about 30 seconds.
-These checks remain one exact event-cell method family, so they support C3 rather than a
-method-distinct C4 confirmation.
+`CERTIFICATE CONDITIONS VERIFIED`. A manual read-only review reported no issue in the
+angle cover, shrunken-square containment, event-cell sweep, or strict-scaling argument,
+but no replayable audit checklist was retained. The result remains source-backed with a
+reported manual review rather than repository-verified: Massaccesi's verifier is derived
+from Burns's, and no independent implementation has checked the same certificate.
 
 The audit also found source defects that matter when reusing the work:
 

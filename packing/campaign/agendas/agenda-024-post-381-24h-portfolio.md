@@ -377,8 +377,8 @@ The Git commit containing this section binds agenda-024 itself.
 dd03fe3d200cf9f1c2335c40103da45269716d20d7de38cd642d832205e962b2  operating-rules.md
 17df0f04d4759625d18231d5cd1fdc69872367b9d7665b25e8e4c2e76e694011  docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md
 ff5e0c07584a224ff1f28ce030388ed05692b9a5e77a20d0cd47e2628e2cf8f5  packing/resources/README.md
-8dc3dc88e04f2e6e992423136a8b0952c7cd451286dd7a834ce0cb8824d3da82  packing/resources/web/literature-refresh-2026-09-05/README.md
-a641b0e9d95ddc0e4b941eb52df302a6728353d18c82f03fd8ed40a34b3d2df3  packing/resources/web/n17-lower-bounds-2026/README.md
+b9e28065dc76367b5f3fcc4c035a7263c533013dc2ea3f0267976c00e7549f53  packing/resources/web/literature-refresh-2026-09-05/README.md
+b48c0c31cf62366d44cd12f02cf321dd38b5a23391caec95f04445938e0b3d75  packing/resources/web/n17-lower-bounds-2026/README.md
 78782e710ab3058b12e106721447fa2589e7cf525a9085e7ac7ddaa2b27484bf  packing/campaign/explorations/X-014-closing-from-both-ends.md
 6e49cfd993b51f350249d87d31d3d24984e0e942f7660a2e7fa209a747bbd916  packing/campaign/explorations/X-015-the-map-and-the-three-programs.md
 772452abc153410a015b3d32ae1cd9fb0323d62b04134fbee1782610a1bc8629  packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md

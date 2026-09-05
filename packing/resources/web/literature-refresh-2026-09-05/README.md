@@ -133,6 +133,12 @@ were byte-identical to the local copies. UnitSquare still exposes Release 1; no 
 article body is unchanged; only Blogger’s rotating widget/token metadata differs.
 Kingbird’s main and comparison pages are byte-identical to their local captures.
 
+The historical `n17-lower-bounds-2026/README.md` remains byte-identical at SHA-256
+`b48c0c31cf62366d44cd12f02cf321dd38b5a23391caec95f04445938e0b3d75`. The resumable
+n=17 certificate machinery uses that file as a frozen source input. Current adoption
+and supersession status therefore lives in the archive index and this refresh packet;
+do not reword the historical README without versioning the dependent checkpoint.
+
 Arslanov–Bui 2025 remains paywalled. Crossref fixes its online publication date at
 2025-08-03; the source-availability record now carries the new check date. Plakhta 2021
 also remains unretrieved: the tempting institutional PDF is the preceding Bonnot et al.
