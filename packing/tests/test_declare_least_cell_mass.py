@@ -35,7 +35,8 @@ def test_the_declaration_is_the_retained_value_and_nothing_else_moves(tmp_path: 
     accepted, detail = declare(path)
     after = json.loads(path.read_text())
 
-    assert accepted and "accepted=True" in detail
+    assert accepted
+    assert "accepted=True" in detail
     assert Fraction(after["least_cell_mass"]) == Fraction(declared)
     assert {k: v for k, v in after.items() if k != "least_cell_mass"} == {
         k: v for k, v in before.items() if k != "least_cell_mass"
@@ -49,7 +50,8 @@ def test_an_existing_declaration_is_kept_unless_overwrite_is_asked(tmp_path: Pat
     path.write_text(json.dumps(record, indent=1) + "\n")
 
     accepted, detail = declare(path)
-    assert not accepted and "already declares" in detail
+    assert not accepted
+    assert "already declares" in detail
     assert json.loads(path.read_text())["least_cell_mass"] == "1/7"
 
     assert declare(path, overwrite=True)[0]
@@ -78,5 +80,6 @@ def test_a_candidate_the_sweep_refuses_is_left_untouched(tmp_path: Path) -> None
     before = freeze.read_bytes()
 
     accepted, detail = declare(freeze)
-    assert not accepted and "accepted=False" in detail
+    assert not accepted
+    assert "accepted=False" in detail
     assert freeze.read_bytes() == before

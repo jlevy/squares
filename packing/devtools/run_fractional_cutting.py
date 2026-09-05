@@ -27,6 +27,7 @@ import sys
 import time
 from fractions import Fraction
 from pathlib import Path
+from typing import TextIO
 
 from sqpack.fractional.ceiling import verify_ceiling
 from sqpack.fractional.colgen import Rows
@@ -111,7 +112,12 @@ def main(argv: list[str] | None = None) -> int:
         "initial_rows": len(rows),
     }
     print(json.dumps(settings, indent=1), flush=True)
+    # Printing the loop's progress is this tool's interface, so the tool owns the
+    # terminal: `cutting_plane_loop` writes to the sinks it is handed and to nothing
+    # else. `sys.stdout` is always one of them -- a run of this length is watched
+    # while it happens -- and `--log` adds the file alongside it.
     handle = args.log.open("a") if args.log is not None else None
+    sinks: tuple[TextIO, ...] = (sys.stdout,) if handle is None else (sys.stdout, handle)
     started = time.perf_counter()
     try:
         log = cutting_plane_loop(
@@ -128,7 +134,7 @@ def main(argv: list[str] | None = None) -> int:
             deadline=started + 60.0 * args.minutes,
             rows_max_rounds=args.rows_rounds,
             rows_per_direction=args.rows_per_direction,
-            log_handle=handle,
+            log_sinks=sinks,
             state_path=args.state,
         )
     finally:

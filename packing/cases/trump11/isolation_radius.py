@@ -74,7 +74,9 @@ WALLS = ("left", "bottom", "right", "top")
 # `rational_bound_selftest` rather than trusted: 14143^2 >= 2 * 10^8 and 7072^2 >= 5 * 10^7.
 SQRT2_UP = Fraction(14143, 10000)
 INV_SQRT2_UP = Fraction(7072, 10000)
-# Archimedes: 223/71 < pi < 22/7.
+# Archimedes' bracket on pi, from Measurement of a Circle: PI_LO is his lower
+# bound of two hundred twenty-three seventy-firsts, PI_HI his upper bound of
+# twenty-two sevenths, and every use below takes whichever side it needs.
 PI_LO = Fraction(223, 71)
 PI_HI = Fraction(22, 7)
 
@@ -450,7 +452,7 @@ def exact_vertex_refinement(
         )
         for index in active
     )
-    pivots = tc.exact_pivot_rows(system_rows, field)
+    pivots = tc.exact_pivot_rows(system_rows)
     if pivots is None:
         return None
     basis = [active[pivot] for pivot in pivots]
@@ -1048,7 +1050,7 @@ def stress_ratio_identity(witness: Witness, branch: dict, rho: FieldElement) -> 
     rows = branch["rows"]
     far = far_rows(rows)
     target = [field.one - rho if index in far else field.one for index in range(len(rows))]
-    pivots = tc.exact_pivot_rows(rows, field)
+    pivots = tc.exact_pivot_rows(rows)
     if pivots is None:
         message = "branch matrix lost full column rank"
         raise IsolationRadiusError(message)

@@ -177,7 +177,8 @@ def test_a_resumed_run_continues_rather_than_restarting(tmp_path) -> None:
     assert isinstance(second_rounds, list)
     assert second_rounds[0]["rows"] >= held
     lp_rounds = second["lp_rounds"]
-    assert isinstance(lp_rounds, int) and lp_rounds > 2
+    assert isinstance(lp_rounds, int)
+    assert lp_rounds > 2
 
 
 def test_a_deadline_stop_is_never_reported_as_convergence(tmp_path) -> None:
@@ -350,7 +351,8 @@ def test_a_clock_stop_between_column_rounds_keeps_the_converged_optimum(tmp_path
         verify_serial=False,
     )
     full = whole["rounds"]
-    assert isinstance(full, list) and len(full) > 2
+    assert isinstance(full, list)
+    assert len(full) > 2
     elapsed = whole["seconds"]
     assert isinstance(elapsed, float)
 
@@ -371,7 +373,8 @@ def test_a_clock_stop_between_column_rounds_keeps_the_converged_optimum(tmp_path
         if not rounds:
             # Too little clock for even the first row loop: nothing converged,
             # and the result has to say so rather than freeze anything.
-            assert result["converged"] is False and result["frozen"] is None
+            assert result["converged"] is False
+            assert result["frozen"] is None
             continue
         at = result["converged_at_column"]
         assert isinstance(at, int)
@@ -389,7 +392,7 @@ def test_a_clock_stop_between_column_rounds_keeps_the_converged_optimum(tmp_path
     assert stopped_early, "no deadline in the sweep stopped the search early"
 
 
-def test_the_two_convergences_are_reported_apart(tmp_path) -> None:
+def test_the_two_convergences_are_reported_apart() -> None:
     """A column loop that runs out of priced orbits says so; a capped one does not."""
 
     finished = run(
@@ -415,4 +418,5 @@ def test_the_two_convergences_are_reported_apart(tmp_path) -> None:
     )
     assert capped["converged"] is True
     rounds = capped["rounds"]
-    assert isinstance(rounds, list) and len(rounds) == 1
+    assert isinstance(rounds, list)
+    assert len(rounds) == 1

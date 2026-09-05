@@ -97,7 +97,8 @@ def test_the_run_reports_a_row_per_round_and_freezes_what_it_found(tmp_path: Pat
 
     assert result["settings"] == settings.as_dict()
     rounds = result["rounds"]
-    assert isinstance(rounds, list) and rounds
+    assert isinstance(rounds, list)
+    assert rounds
     assert round_table_from(result).count("\n") == len(rounds) + 1
     for entry in rounds:
         assert entry["seconds"] >= 0.0

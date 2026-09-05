@@ -35,6 +35,7 @@ from __future__ import annotations
 import json
 import math
 import time
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from fractions import Fraction
 from pathlib import Path
@@ -568,11 +569,20 @@ class CuttingLog:
     site_weights: np.ndarray | None = None
 
 
-def _write(handle: TextIO | None, text: str) -> None:
-    print(text, flush=True)
-    if handle is not None:
-        handle.write(text + "\n")
-        handle.flush()
+def _write(sinks: Sequence[TextIO], text: str) -> None:
+    """Report one line of the run to each sink the caller gave, flushing every one.
+
+    A library module does not get to decide that a terminal is watching, so the
+    loop writes only where it was told to and is silent when told nowhere. The
+    driver that wants a transcript on the terminal passes ``sys.stdout``; a run
+    that wants a file passes the file; a caller that wants both passes both.
+    Every line is flushed as it is written because the run this reports on can
+    last an hour and a reader watching it has to see each iteration as it lands.
+    """
+
+    for sink in sinks:
+        sink.write(text + "\n")
+        sink.flush()
 
 
 def initial_sites(
@@ -628,7 +638,7 @@ def cutting_plane_loop(
     weight_denominator: int = 10**9,
     select_above: Fraction = Fraction(1000001, 1000000),
     exact_scan: bool = False,
-    log_handle: TextIO | None = None,
+    log_sinks: Sequence[TextIO] = (),
     state_path: Path | None = None,
 ) -> CuttingLog:
     """Alternate row generation with exact vertex separation until the family is
@@ -640,6 +650,10 @@ def cutting_plane_loop(
     ``support_cap`` rows of the dual, symmetrised, and its total divided by its
     exact maximum depth is the iteration's lower bound. The best such family,
     scaled to unit depth exactly, is kept.
+
+    Per-iteration progress goes to every handle in ``log_sinks`` and nowhere
+    else; the default is silence, and a caller wanting a terminal transcript
+    passes ``sys.stdout`` among them.
     """
 
     if n < 1:
@@ -758,7 +772,7 @@ def cutting_plane_loop(
             log.best_family = family if worst <= 1 else family.scaled(1 / worst)
         log.sites = sites
         _write(
-            log_handle,
+            log_sinks,
             f"iteration {index}: sites={sites.size} orbits={len(sites.orbits)} "
             f"rows={len(rows)} "
             f"support={len(entries)} rows_objective={solution.objective:.6f} "
@@ -784,7 +798,7 @@ def cutting_plane_loop(
                 record.note = (
                     f"verify_ceiling: proved={log.verdict.proved} {log.verdict.failures}"
                 )
-                _write(log_handle, "  " + record.note)
+                _write(log_sinks, "  " + record.note)
                 if log.verdict.proved:
                     log.stopped = f"ceiling proved at iteration {index}"
                     break
@@ -813,7 +827,7 @@ def cutting_plane_loop(
             f"added {len(new_orbits)} orbits, deepest {float(selected[0][0]):.6f} "
             f"at ({float(selected[0][1][0][0]):.6f}, {float(selected[0][1][0][1]):.6f})"
         )
-        _write(log_handle, "  " + record.note)
+        _write(log_sinks, "  " + record.note)
         log.sites = sites
     else:
         log.stopped = f"iteration cap {max_iterations} reached"

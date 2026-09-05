@@ -96,7 +96,7 @@ def test_site_counts_hold_the_density_as_the_side_grows() -> None:
 
 
 def test_site_counts_reject_an_inset_that_leaves_no_room() -> None:
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="the inset leaves no room for sites"):
         site_counts_for_side(Fraction(1), B, inset=Fraction(1))
 
 

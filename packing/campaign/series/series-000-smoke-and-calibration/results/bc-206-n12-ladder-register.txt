@@ -530,6 +530,97 @@
     check_ceiling decision -- that is run k-397-100.
   seconds: 395.3 wall, 8 column rounds, 60 LP rounds
 
+- run: k-397-100  [NOT pre-registered: the exact ceiling decision on cc's dual]
+  side: 397/100 = 3.97
+  construction: grids + cc-397-100's frozen 593 atoms (same side, so seed-map
+    scale carries them unchanged), --column-rounds 8
+  scale: 4000000
+  seed: the cc-397-100 freeze
+  rationale: cc-397-100's column loop converged, which makes its dual a candidate
+    lower bound on nu*(3.97) rather than only an upper bound on a site set. Only
+    run_fractional_colgen runs sqpack.fractional.colgen.check_ceiling, which
+    decides that dual's pointwise depth in exact arithmetic, so the way to get
+    the exact number is to re-run through that driver on cc's own site set.
+  note: the row log's round index restarts at 0 at each of the eight column
+    rounds, so the round numbers below repeat; rows= is monotone within a column
+    and the column boundaries are where it jumps back.
+  # round  rows  added  violated  restricted-optimum  rationalisation-loss  cumulative LP seconds
+    round=0   rows=497    added=497  violated=543  optimum=9.717949 loss=n/a elapsed_s=16.4
+    round=1   rows=761    added=264  violated=543  optimum=11.076923 loss=n/a elapsed_s=16.6
+    round=2   rows=1161   added=400  violated=543  optimum=11.429379 loss=n/a elapsed_s=16.9
+    round=3   rows=1475   added=314  violated=543  optimum=11.705882 loss=n/a elapsed_s=17.5
+    round=4   rows=1846   added=371  violated=543  optimum=11.932432 loss=n/a elapsed_s=18.0
+    round=5   rows=2173   added=327  violated=543  optimum=12.013725 loss=n/a elapsed_s=18.8
+    round=6   rows=2466   added=293  violated=543  optimum=12.093574 loss=n/a elapsed_s=19.8
+    round=7   rows=2822   added=356  violated=543  optimum=12.144526 loss=n/a elapsed_s=21.2
+    round=8   rows=3155   added=333  violated=522  optimum=12.174905 loss=n/a elapsed_s=22.7
+    round=9   rows=3418   added=263  violated=540  optimum=12.218719 loss=n/a elapsed_s=24.6
+    round=10  rows=3715   added=297  violated=543  optimum=12.240565 loss=n/a elapsed_s=26.8
+    round=11  rows=4032   added=317  violated=516  optimum=12.250383 loss=n/a elapsed_s=29.1
+    round=12  rows=4264   added=232  violated=525  optimum=12.256881 loss=n/a elapsed_s=32.0
+    round=13  rows=4484   added=220  violated=510  optimum=12.275790 loss=n/a elapsed_s=36.0
+    round=14  rows=4745   added=261  violated=492  optimum=12.283998 loss=n/a elapsed_s=39.8
+    round=15  rows=4922   added=177  violated=417  optimum=12.301619 loss=n/a elapsed_s=45.3
+    round=16  rows=5139   added=217  violated=477  optimum=12.310993 loss=n/a elapsed_s=51.6
+    round=17  rows=5296   added=157  violated=330  optimum=12.312446 loss=n/a elapsed_s=57.8
+    round=18  rows=5376   added=80   violated=150  optimum=12.312566 loss=n/a elapsed_s=64.8
+    round=19  rows=5404   added=28   violated=81   optimum=12.314631 loss=n/a elapsed_s=72.3
+    round=20  rows=5426   added=22   violated=66   optimum=12.314692 loss=n/a elapsed_s=78.8
+    round=21  rows=5483   added=57   violated=96   optimum=12.314708 loss=n/a elapsed_s=84.5
+    round=22  rows=5488   added=5    violated=15   optimum=12.314708 loss=n/a elapsed_s=90.1
+    round=23  rows=5495   added=7    violated=24   optimum=12.314708 loss=n/a elapsed_s=96.4
+    round=24  rows=5548   added=53   violated=96   optimum=12.314708 loss=n/a elapsed_s=103.7
+    round=25  rows=5549   added=1    violated=3    optimum=12.314708 loss=n/a elapsed_s=110.6
+    round=26  rows=5550   added=1    violated=3    optimum=12.314708 loss=n/a elapsed_s=118.4
+    round=27  rows=5550   added=0    violated=0    optimum=12.314708 loss=n/a elapsed_s=123.1
+    round=-1  rows=5550   added=0    violated=0    optimum=12.299301 loss=n/a elapsed_s=124.8
+    round=0   rows=5795   added=245  violated=474  optimum=12.314708 loss=n/a elapsed_s=131.7
+    round=1   rows=5796   added=1    violated=3    optimum=12.314708 loss=n/a elapsed_s=138.5
+    round=2   rows=5796   added=0    violated=0    optimum=12.314708 loss=n/a elapsed_s=143.1
+    round=-1  rows=5796   added=0    violated=0    optimum=12.291303 loss=n/a elapsed_s=145.1
+    round=0   rows=5967   added=171  violated=369  optimum=12.314708 loss=n/a elapsed_s=152.5
+    round=1   rows=5967   added=0    violated=0    optimum=12.314708 loss=n/a elapsed_s=157.9
+    round=-1  rows=5967   added=0    violated=0    optimum=12.314708 loss=n/a elapsed_s=160.5
+    round=0   rows=5967   added=0    violated=0    optimum=12.314708 loss=n/a elapsed_s=164.7
+    round=-1  rows=5967   added=0    violated=0    optimum=12.314152 loss=n/a elapsed_s=166.8
+    round=0   rows=6016   added=49   violated=99   optimum=12.314708 loss=n/a elapsed_s=174.3
+    round=1   rows=6017   added=1    violated=3    optimum=12.314708 loss=n/a elapsed_s=181.1
+    round=2   rows=6017   added=0    violated=0    optimum=12.314708 loss=n/a elapsed_s=185.9
+    round=-1  rows=6017   added=0    violated=0    optimum=12.314708 loss=n/a elapsed_s=188.1
+    round=0   rows=6017   added=0    violated=0    optimum=12.314708 loss=n/a elapsed_s=192.5
+    round=-1  rows=6017   added=0    violated=0    optimum=12.314708 loss=n/a elapsed_s=194.2
+    round=0   rows=6017   added=0    violated=0    optimum=12.314708 loss=n/a elapsed_s=198.9
+    round=-1  rows=6017   added=0    violated=0    optimum=12.311047 loss=n/a elapsed_s=200.8
+    round=0   rows=6041   added=24   violated=57   optimum=12.314708 loss=n/a elapsed_s=208.4
+    round=1   rows=6042   added=1    violated=3    optimum=12.314708 loss=n/a elapsed_s=215.0
+    round=2   rows=6042   added=0    violated=0    optimum=12.314708 loss=n/a elapsed_s=219.5
+    # last optimum 12.314708, margin below twelve -0.314708, crossing at round 5, 49 rounds, 219.5 s in the LP loop
+  converged: True. Row loop and column loop both, reproducing cc-397-100's value
+    to eleven figures from a different starting site set: objective
+    12.314707521999667 against cc's 12.314707521999658.
+  atoms: 597 (seed sites 593)
+  total_mass: 24629581/2000000 = 12.314791
+  rationalisation_loss: 0.000083 (bound atoms/scale = 597/4000000 = 0.000149)
+  ceiling: proved=False. total 9.200381 over 256 squares, max pointwise depth
+    1.082688 decided exactly at 288412 arrangement vertices (420 of them
+    re-decided in Fraction arithmetic), feasible total 8.497721.
+  verdict: the covering value at 3.97 is now bracketed, and the bracket does not
+    close. Above: nu*(3.97) <= 12.314708, from two independent converged column
+    loops that agree to eleven figures. Below: nu*(3.97) >= 8.497721, exactly,
+    from the scaled dual. Twelve sits inside that bracket, so this run does not
+    bar the side on its own -- it is the upper half of the bracket that says the
+    ladder stops, not the lower half.
+  instrument note: the floor is weak for a reason worth recording. check_ceiling
+    reads the dual through dual_squares, which truncates to the heaviest
+    support_cap rows, and the LP's dual support here is about 620 rows against
+    the 256 squares that reached the check. Truncation only discards weight, so
+    9.200381 is sound, but it is 3.11 short of the 12.314708 the LP holds before
+    truncation, and the exact max pointwise depth 1.082688 costs another 0.70.
+    run_fractional_colgen does not expose --support-cap; colgen_checkpoint does
+    and never calls check_ceiling. The two halves of the instrument are in
+    different drivers, which is why the floor here is 8.50 and not near 12.31.
+  seconds: 227.1 wall, 8 column rounds
+
 # ---------------------------------------------------------------------------
 # The pre-registered ladder at a glance. Every entry is a restricted optimum.
 # Rows only raise one, so a value at or above twelve refutes the site set that
@@ -653,8 +744,23 @@
 # The eight pre-registered runs are consistent with that and add nothing to it:
 # each refutes its own site set, and a site set only raises the optimum above
 # the unrestricted covering value, so on their own they say nothing about the
-# side. What decides the side is cc-397-100's column-loop convergence, and its
-# dual's exact status is k-397-100's business.
+# side. What carries the conclusion is cc-397-100's column-loop convergence,
+# reproduced independently by k-397-100 from a different starting site set to
+# eleven figures -- 12.314707521999658 and 12.314707521999667.
+#
+# How hard is that as a bound on nu*(3.97)? The honest answer is a bracket that
+# does not close:
+#
+#   nu*(3.97) <= 12.314708   two converged column loops, agreeing
+#   nu*(3.97) >=  8.497721   k-397-100's exact ceiling decision
+#   nu*(3.97) >=  7.970800   run_fractional_cutting, iteration 0, exact
+#
+# Twelve is inside that bracket. So this block does not bar 3.97 outright; what
+# it establishes is that the generator, run to its own stopping rule, lands
+# 0.31 above twelve there, and that the retained rung's 0.001040 of margin is
+# spent within 0.000033 of side at the slope those two points define. The
+# remaining work to make it a bar is a floor above twelve, which is what
+# devtools.run_fractional_cutting exists for and what run f-397-100 attempts.
 #
 # The best value seen below twelve above the retained rung is 11.989070, at 3.97
 # on the window construction at row 9 of an unconverged loop. It is a climbing

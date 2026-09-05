@@ -69,7 +69,7 @@ def test_a_centre_outside_the_container_is_refused() -> None:
     entry = SupportEntry(0, Fraction(0), Fraction(5, 2), Fraction(1), Fraction(1))
     with pytest.raises(ValueError, match="outside"):
         symmetric_placements([entry], TWO, B)
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="support weights must be non-negative"):
         symmetric_placements(
             [SupportEntry(0, Fraction(0), Fraction(1), Fraction(1), Fraction(-1))], TWO, B
         )
@@ -107,10 +107,8 @@ def test_select_site_orbits_groups_vertices_into_new_d4_orbits() -> None:
     # The centre is already held; the two remaining orbits have four members each.
     assert [len(orbit) for _, orbit in chosen] == [4, 4]
     assert select_site_orbits(deep, held, TWO, cap=1)[0][1] == chosen[0][1]
-    assert (
-        select_site_orbits(deep, SiteSet(TWO, ()), TWO, cap=10)[1:]
-        and len(select_site_orbits(deep, SiteSet(TWO, ()), TWO, cap=10)) == 3
-    )
+    assert select_site_orbits(deep, SiteSet(TWO, ()), TWO, cap=10)[1:]
+    assert len(select_site_orbits(deep, SiteSet(TWO, ()), TWO, cap=10)) == 3
 
 
 def test_the_loop_reaches_the_corner_ceiling_at_side_two(tmp_path: Path) -> None:
@@ -146,7 +144,9 @@ def test_the_loop_reaches_the_corner_ceiling_at_side_two(tmp_path: Path) -> None
     assert len(exact_rows) == len(rows)
     old_side, points, carried = load_state(state)
     assert log.sites is not None
-    assert old_side == TWO and len(points) == log.sites.size and len(carried) == len(rows)
+    assert old_side == TWO
+    assert len(points) == log.sites.size
+    assert len(carried) == len(rows)
     warm_sites, warm_rows = warm_start(
         points,
         carried,
