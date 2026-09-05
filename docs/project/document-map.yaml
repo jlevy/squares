@@ -350,8 +350,3 @@ exclusions:
       Templates for devtools.render_explainer and devtools.render_verifiable_claim:
       Markdown with placeholders and stamping markers, not documents. The rendered page
       and the generated claim documents are the documents.
-  - pattern: vendor/**/*.md
-    reason: >-
-      Vendored upstream repositories, checked out as submodules. Their prose is owned by
-      the upstream project and travels with the recorded submodule commit, so it is not
-      this repository's documentation surface to map, review or format.

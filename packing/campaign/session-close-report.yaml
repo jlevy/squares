@@ -21,19 +21,19 @@ totals:
     one_off_code: 2808
     wall_hours: 170.08
   unattributed:
-    rollups: 10
-    turns: 1460
-    tool_calls: 878
-    tool_errors: 32
-    one_off_code: 173
-    wall_hours: 6.87
+    rollups: 11
+    turns: 4135
+    tool_calls: 2355
+    tool_errors: 83
+    one_off_code: 459
+    wall_hours: 25.86
   measured:
-    rollups: 125
-    turns: 31202
-    tool_calls: 17678
-    tool_errors: 381
-    one_off_code: 2981
-    wall_hours: 176.95
+    rollups: 126
+    turns: 33877
+    tool_calls: 19155
+    tool_errors: 432
+    one_off_code: 3267
+    wall_hours: 195.94
 codex_receipts:
   attributed: 16
   unattributed: 0
