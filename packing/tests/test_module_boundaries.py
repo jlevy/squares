@@ -449,9 +449,10 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
     over the whole non-exhaustive suite: 2,080 tests and 1,038s of recorded phase time,
     of which these 61 functions carry 890s -- 86 per cent of the suite in 2.9 per cent of
     it. The marking threshold is 2s of `call` time, which is what leaves the quick lane
-    inside the 240s ceiling `devtools/gate-budgets.yaml` declares for the `fast` tier;
-    the gate's own failure threshold is higher, so ordinary runner variance cannot turn a
-    passing test into a red pull request.
+    inside the ceiling `devtools/gate-budgets.yaml` declares for the `fast` tier -- the
+    figure is not repeated here, because the register is where it is read and a second
+    copy is the thing that rots. The gate's own failure threshold is higher, so ordinary
+    runner variance cannot turn a passing test into a red pull request.
 
     Three limits of the rule, recorded rather than smoothed over:
 
@@ -596,9 +597,19 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_promote_system_degree.py": {
             "test_promote_system_degree",  # 14.6s
         },
-        # 98s of call time across 2.
+        # 192s of call time across 3, and the third is this registry's own second limit
+        # caught in the act. `expected_outputs()` builds the whole prospective seed once
+        # and caches it, so in the undivided suite its cost was billed to
+        # `test_seed_replays_...`, the first test to ask. Deferring that one did not remove
+        # the build from the quick lane -- it moved the bill to the next test in the file
+        # that calls it, and `test_seed_cross_fields_...` went from cheap to 93.86s
+        # measured serially on a four-core box (`BC-218`), 18.8x the ceiling
+        # `fast behavioral tests` enforces. That is what a shared build looks like when the
+        # lane it is shared across is cut in half, and it is why marking converges by
+        # iteration rather than in one pass.
         "test_prospective_atlas_seed.py": {
             "test_seed_replays_every_safe_source_and_excludes_kingbird",  # 92.5s
+            "test_seed_cross_fields_reject_source_annotation_and_identity_mutations",  # 93.9s
             "test_seed_witnesses_and_house_renderings_match_the_manifest",  # 5.7s
         },
         # 7s of call time across 1.

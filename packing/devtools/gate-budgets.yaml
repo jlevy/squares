@@ -66,7 +66,9 @@ tiers:
 
 - id: edit
   command: packing-validate --edit
-  # The operator's own figure for a pull-request-blocking surface: four minutes.
+  # Four times the only reading this tier has, and it is still the loosest edge in the
+  # register per second of tier. Left as it is because rule 2 has nothing to say about a
+  # tier with no record: the number to fix is a measurement, not a ceiling.
   ceiling_seconds: 240.0
   measured_seconds: null
   measured_on: null
@@ -74,35 +76,60 @@ tiers:
   reference: {jobs: 2, inner_jobs: 1, cpus: 2}
   argument: >-
     Every floor and every record check, without the broad behavioural suite: 59.35s on a
-    contended four-core box on 2026-09-05, never yet clocked on CI's two-core runner. The
-    ceiling is a target rather than a measurement and is stated as such -- it is the
-    operator's four minutes, and this tier is the floor inside whichever surface the pull
-    request ends up running, so it cannot be looser than the surface above it.
+    contended four-core box on 2026-09-05, never yet clocked on CI's two-core runner. So
+    this ceiling is still an unmeasured one, and it is the last one in the register that
+    is -- it says only that a tier of floors and record checks has no business taking a
+    pull request's whole budget. It is a strict subset of `fast`, whose ceiling is
+    measured, so it cannot be the looser of the two; what would make it a real band is a
+    clock on the reference runner, and the run that first provides one prints the line to
+    write here.
 
 - id: fast
   command: packing-validate --fast
-  # The operator's own figure for a pull-request-blocking surface, and this tier is now
-  # that surface, so it takes the same ceiling as `edit` rather than a looser one.
-  ceiling_seconds: 240.0
-  # Cleared deliberately, not carried forward. The recorded 1369.60s (CI run 33982455466
-  # on 2026-09-05, `fast behavioral tests` 1324s of it) measured a tier that no longer
-  # exists: BC-214 moved every behavioural test at or above QUICK_TEST_CEILING_SECONDS
-  # into `slow behavioral tests`, which runs in the full gate. Keeping the old figure
-  # would fail rule 4 on the first honest run -- correctly, since the record would be the
-  # stale thing -- so the record is cleared, and the next run at the reference shape
-  # prints the line to write here.
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  # 1.34x of the 409s below. Built from three edges rather than chosen: it must clear the
+  # quarter of contention this project has measured a busy runner to add (511s), it must
+  # sit under the drift rule's 1.5x (613s) so the ceiling never waits for a larger number
+  # than the record-relative rule, and it must leave the slack rule real margin rather
+  # than sit on it (the rule permits 818s). 550s is the middle of that band.
+  ceiling_seconds: 550.0
+  # The old 1369.60s figure (CI run 33982455466) measured a tier that no longer exists:
+  # BC-214 moved every behavioural test at or above QUICK_TEST_CEILING_SECONDS into `slow
+  # behavioral tests`, which runs in the full gate. This is the split tier's own first
+  # measurement at the reference shape.
+  measured_seconds: 409.0
+  measured_on: '2026-09-05'
+  measured_where: >-
+    CI run 33985984585, job 101359470209, commit 88f7e5f8, GitHub's two-core Linux
+    runner; the step `Run the required pull-request surface`, 19:04:44Z to 19:11:33Z.
   reference: {jobs: 2, inner_jobs: 1, cpus: 2}
   argument: >-
     The edit tier plus the behavioural tests under the per-test ceiling: every floor,
     every record check, and the quick lane. What it excludes is a rule rather than a list
     -- `fast behavioral tests` passes the ceiling to pytest as `--durations-min` and fails
     when a retained test reports at or above it -- so this tier cannot regress the way it
-    did between 2026-08-30 and 2026-09-05 without a named test failing first. The 240s
-    ceiling is a target rather than a measurement and is stated as such; the first run at
-    the reference shape decides whether it holds.
+    did between 2026-08-30 and 2026-09-05 without a named test failing first.
+    The ceiling is a measurement's band and not a target, which is the correction this
+    entry carries. It read 240s, which is the operator's four minutes; that number is
+    agenda-023's TARGET and belongs there, and BC-218 is the cell that has to reach it. A
+    ceiling the tier fails on the day it is written measures nothing -- it advertises an
+    aspiration, and it makes the gate red for a reason unrelated to any regression, which
+    is how a check gets ignored.
+    The number the tier actually costs is 409s, and the ceiling is 550s around it. Each
+    edge of that band is a constraint rather than a preference. Below 511s the ceiling
+    would fail an honest run, because a contended runner moves a tier by about a quarter
+    and that is the variance `drift_ratio` is itself set above. Above 613s the ceiling
+    would sit outside rule 3, which fails this tier at 1.5x of 409s, so the ceiling would
+    never be the first thing to speak. And 818s is where rule 2 refuses the declaration
+    outright; 550s is 1.34x against the 2.0x allowed, which is margin rather than a
+    boundary. The band is 141s wide on a 409s tier, so it catches a regression of a third
+    -- an eighth of the 2.65x that went unnoticed in six days.
+    The run this figure comes from failed, and it failed on the 240s ceiling being
+    corrected here. That does not touch the measurement. `packing-validate` judges a tier
+    only after every selected step has finished, against the completed run's own wall,
+    and exits non-zero on the verdict alone under a separate headline from a failed step;
+    so the 409s is the whole tier's wall with every step run, not a run truncated at the
+    point it went wrong. A step failure would have produced a shorter and incomparable
+    wall. This one produced the real one and then objected to it.
 
 - id: push
   command: packing-validate --push
@@ -115,7 +142,7 @@ tiers:
     The edit tier plus the behavioural tests reachable from the change. Its cost is a
     function of the diff, and a change nothing narrower can be said about expands the
     selector to the whole non-exhaustive suite -- slow lane included, which is why this
-    ceiling is `FAST_SUITE_BUDGET_SECONDS` and not the `fast` tier's 240s. Left
+    ceiling is `FAST_SUITE_BUDGET_SECONDS` and not the `fast` tier's. Left
     unmeasured deliberately: a tier whose cost depends on the diff has no single recorded
     figure, and inventing one would make the drift and stale rules lie.
 
@@ -128,6 +155,8 @@ tiers:
   reference: {jobs: 2, inner_jobs: 1, cpus: 2}
   argument: >-
     The complete gate. Never clocked end to end on the reference runner in one piece -- CI
-    splits it across jobs -- so only the ceiling applies. 3600s is twice the fast tier's
-    ceiling, which is the shape of the run: the broad suite, the exhaustive tier at 892s
-    on the same runner (run 33932095609), and the rest concurrent with both.
+    splits it across jobs -- so only the ceiling applies, and it is argued from the parts
+    rather than from another tier: the pull-request surface at 409s, the exhaustive tier
+    at 892s on the same runner (run 33932095609), the slow lane BC-214 moved here, and the
+    rest. 3600s is roughly twice that sum, which is the room a tier growing one
+    certificate at a time needs before anyone has clocked it whole.

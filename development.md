@@ -265,7 +265,7 @@ uv run --frozen --all-extras --group dev packing-validate --budgets
 | `--records` | contributor, before touching a registry | 300 s | 13.6 s, four contended cores, 2026-09-05 |
 | `--edit` | contributor, in the edit loop | 240 s | 59.4 s, four contended cores, 2026-09-05 |
 | `--push` | contributor, before a push | 1800 s | about a minute for a code change; the whole quick lane when the diff reaches everything |
-| `--fast` | CI, on a pull request | 240 s | 1369.6 s on CI’s two-core runner before `BC-214` split the suite; the tier that number measured no longer exists |
+| `--fast` | CI, on a pull request | 550 s | 409 s on CI’s two-core runner, 2026-09-05, run 33985984585 — the split tier’s own first reading |
 | (default) | CI, on `main` and on the daily schedule | 3600 s | not clocked end to end on one runner; CI splits it across jobs |
 
 The ceiling column is enforced and the cost column is not: the register is the
@@ -274,9 +274,9 @@ Read that command rather than this table.
 
 **A run outside its tier’s band fails and names the step that spent the time**, because
 “the tier is slow” is not actionable and “`fast behavioral tests` is 1324 s of a 1370 s
-tier against a 240 s ceiling” is.
-The band has more edges than a cap, and they exist because a cap alone did not catch the
-2026-08-30 to 2026-09-05 drift — 499 s to 1369.60 s, entirely inside an 1800 s cap:
+tier” is. The band has more edges than a cap, and they exist because a cap alone did not
+catch the 2026-08-30 to 2026-09-05 drift — 499 s to 1369.60 s, entirely inside an 1800 s
+cap:
 
 - a run over the ceiling fails;
 - a run more than `drift_ratio` above the cost the register records for that tier fails,

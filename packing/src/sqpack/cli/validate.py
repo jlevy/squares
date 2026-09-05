@@ -120,6 +120,12 @@ QUICK_TEST_CEILING_SECONDS = 5.0
 #: fails when a test it ran reports a `call` phase below this, naming it, and the fix is to
 #: delete the marker.
 #:
+#: Compared per test *function*, taking its slowest parametrization, because that is the
+#: granularity a marker has: a decorator on a `def` defers every case of a parametrized
+#: test at once, so one cheap case says nothing about whether the marker is still earned.
+#: The ceiling above is compared per node, because there the question is the opposite one
+#: -- what the pull-request surface actually pays for a single test it ran.
+#:
 #: The two numbers leave a band -- 1s to 5s -- where the gate says nothing in either
 #: direction, and the band is the point. Marking is done at 2s, in the middle of it, so a
 #: test near the boundary can move either way under ordinary runner variance without
@@ -129,8 +135,9 @@ QUICK_TEST_CEILING_SECONDS = 5.0
 #:
 #: What stops the quick lane creeping upward *in aggregate*, since a test at 4s passes the
 #: ceiling, is not this pair but `devtools/gate-budgets.yaml`: the `fast` tier declares a
-#: 240s ceiling that the gate reads and enforces against its own wall. One test getting big
-#: is caught here; the tier getting big is caught there; neither is prose.
+#: ceiling there that the gate reads and enforces against its own wall. One test getting
+#: big is caught here; the tier getting big is caught there; neither is prose. The figure
+#: is deliberately not repeated here -- a second copy is the thing that rots.
 SLOW_TEST_FLOOR_SECONDS = 1.0
 #: The budget of the exhaustive exact tier: every complete finite certificate decision
 #: the fast tier defers. Measured on 2026-09-05 at 39 tests: 892s on CI's two-core
@@ -546,6 +553,57 @@ def _call_durations(output: str) -> list[tuple[float, str]]:
     return sorted(calls, reverse=True)
 
 
+#: A node id split into the test function and the parametrization pytest appended to it.
+#:
+#: The shape is `path::[Class::]function[params]`, and the awkward part is `params`, which
+#: pytest writes with `ascii_escaped` and therefore does not escape brackets or colons:
+#: `test_param[with[brackets]]`, `TestClass::test_method[z[1]]` and `test_param[x::y]` are
+#: all real ids this project's own pytest emits, checked rather than assumed. So neither
+#: "cut at the first `[`" nor "split on the last `::`" is safe.
+#:
+#: What is safe is that a function name is a Python identifier and the parametrization is
+#: the whole of the tail. The lazy `.*?::` walks `::`-separated segments from the left and
+#: the greedy `\[.*\]$` swallows the tail whole, so the match lands on the last segment
+#: that is an identifier followed by either nothing or a bracketed suffix reaching the end
+#: of the line -- which is the function, whatever the parameters contain.
+_TEST_NODE = re.compile(r"^(?P<function>.*?::[A-Za-z_]\w*)(?:\[.*\])?$")
+
+
+def _test_function(node: str) -> str:
+    """The node id with its parametrization removed, or the node id if it has none.
+
+    An id this cannot parse is returned whole rather than dropped or raised on. That
+    degrades to one group per node, which is the behaviour this function replaced, so an
+    unfamiliar id makes the floor check stricter than intended rather than blind.
+    """
+    match = _TEST_NODE.match(node)
+    return node if match is None else match["function"]
+
+
+def _slowest_call_per_function(entries: list[tuple[float, str]]) -> list[tuple[float, str]]:
+    """One entry per test function, carrying its slowest parametrization.
+
+    The `slow` marker is per function -- a decorator on a `def`, so a parametrized test
+    moves to the deep surface with all of its cases, which is why the registry in
+    `test_the_slow_marker_is_declared_only_by_measured_nodes` counts 61 functions and 90
+    collected tests. A floor applied per *node* therefore asks a question the marker
+    cannot answer: it reports the cheap case of an expensive function as a marker to
+    delete, and deleting it would drag the expensive case back onto the pull-request
+    surface. The cost of a marker is the cost of its slowest case, so that is what the
+    floor compares.
+
+    Ordering is not assumed: the maximum is taken explicitly rather than relying on the
+    caller having sorted, and the result is sorted slowest first for rendering.
+    """
+    slowest: dict[str, tuple[float, str]] = {}
+    for seconds, node in entries:
+        function = _test_function(node)
+        current = slowest.get(function)
+        if current is None or seconds > current[0]:
+            slowest[function] = (seconds, node)
+    return sorted(slowest.values(), reverse=True)
+
+
 def _require_durations(output: str, lane: str, rule: str) -> None:
     if _DURATION_HEADER not in output:
         raise StepFailureError(
@@ -558,23 +616,60 @@ def _render_durations(entries: list[tuple[float, str]]) -> str:
     return "\n".join(f"    {seconds:7.2f}s  {node}" for seconds, node in entries)
 
 
-def _fast_tests(context: Context) -> str:
-    output = _run(
-        context,
-        (
-            sys.executable,
-            "-m",
-            "pytest",
-            "-q",
-            "tests",
-            "-m",
-            QUICK_TESTS,
-            "--durations=0",
-            f"--durations-min={QUICK_TEST_CEILING_SECONDS:g}",
-        ),
+def _pytest_workers() -> int:
+    """How many pytest processes the quick behavioural lane asks for.
+
+    Deliberately not `--inner-jobs`. That knob is the worker cap *exported to* every step,
+    and the tiers set it to 1 for a good reason: most steps are a single process, the gate
+    runs `--jobs` of them at once, and a cap that made each one greedy would just make
+    them fight. This lane is the exception, and `BC-218` measured why.
+
+    On CI's own runner (run 33985984585, job 101359470209, commit 88f7e5f8) the `--fast`
+    tier's wall was 408.55s and `fast behavioral tests` was 408.09s of it -- 99.9 per
+    cent. That is not a tier whose steps are queued behind each other: `--jobs 2` had
+    already absorbed the other 37 steps into the second lane, where their whole visible
+    cost was 135.17s, and they finished with the wall to spare. So the sequencing was
+    never the cost, and no arrangement of GitHub jobs can shorten a wall that is one step
+    -- a second job would repeat 11s of checkout, uv install and `uv sync` to run work
+    that already costs nothing on the clock. The only parallelism left to buy is inside
+    the step.
+
+    The lane is the right shape for it: 2,012 tests, each held under
+    `QUICK_TEST_CEILING_SECONDS` by the ceiling the step itself enforces, none of them
+    writing anywhere shared. Measured on a four-core box at `PACK_JOBS=1`: 306.4s in one
+    process against 135.04s at `-n 4`, 2,010 passing either way and no failure that
+    appears only under xdist.
+
+    The count is the machine's, not the tier's, because this step is the one thing nothing
+    else is waiting behind. `-n 1` is not asked for: a single xdist worker is a subprocess
+    and a protocol for no concurrency at all, which is slower than not asking.
+    """
+    return max(1, os.process_cpu_count() or DEFAULT_CPU_COUNT)
+
+
+def _quick_lane_command() -> tuple[str, ...]:
+    workers = _pytest_workers()
+    distribution = () if workers == 1 else ("-n", str(workers))
+    return (
+        sys.executable,
+        "-m",
+        "pytest",
+        "-q",
+        "tests",
+        "-m",
+        QUICK_TESTS,
+        *distribution,
+        "--durations=0",
+        f"--durations-min={QUICK_TEST_CEILING_SECONDS:g}",
     )
+
+
+def _fast_tests(context: Context) -> str:
+    output = _run(context, _quick_lane_command())
     _require_durations(output, "quick", f"the {QUICK_TEST_CEILING_SECONDS:g}s per-test ceiling")
-    over = [entry for entry in _call_durations(output) if entry[0] >= QUICK_TEST_CEILING_SECONDS]
+    over = [
+        entry for entry in _call_durations(output) if entry[0] >= QUICK_TEST_CEILING_SECONDS
+    ]
     if over:
         raise StepFailureError(
             f"{len(over)} test(s) ran at or above the pull-request surface's "
@@ -616,11 +711,19 @@ def _slow_tests(context: Context) -> str:
             raise
         return "  no test is deferred by the per-test ceiling; the quick lane runs them all"
     _require_durations(output, "slow", f"the {SLOW_TEST_FLOOR_SECONDS:g}s marker floor")
-    under = [entry for entry in _call_durations(output) if entry[0] < SLOW_TEST_FLOOR_SECONDS]
+    # Per function, not per node, because the marker is per function. `_fast_tests` keeps
+    # the opposite rule for the opposite reason: one node at or above the ceiling is one
+    # node the pull-request surface actually pays for, whatever its siblings cost.
+    under = [
+        entry
+        for entry in _slowest_call_per_function(_call_durations(output))
+        if entry[0] < SLOW_TEST_FLOOR_SECONDS
+    ]
     if under:
         raise StepFailureError(
             f"{len(under)} deferred test(s) ran below the {SLOW_TEST_FLOOR_SECONDS:g}s floor "
-            f"a `slow` marker has to earn:\n{_render_durations(under)}\n"
+            f"a `slow` marker has to earn, each shown at its slowest parametrization:\n"
+            f"{_render_durations(under)}\n"
             "  Delete the marker and its registry entry. OR-13 is a floor on coverage: a "
             "test leaves the pull-request surface by its own measured cost, and one that "
             "no longer costs that has to come back."

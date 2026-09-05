@@ -335,6 +335,8 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         environment=os.environ.copy(),
     )
 
+    monkeypatch.setattr(validate, "_pytest_workers", lambda: 4)
+
     validate._fast_tests(context)
 
     assert observed == (
@@ -345,9 +347,43 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "tests",
         "-m",
         "not exhaustive_exact and not slow",
+        "-n",
+        "4",
         "--durations=0",
         f"--durations-min={validate.QUICK_TEST_CEILING_SECONDS:g}",
     )
+
+
+def test_the_quick_lane_asks_for_no_xdist_worker_on_a_single_core_machine(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """`-n 1` is a subprocess and a protocol for no concurrency, so it is worse than none.
+
+    The lane is the pull-request surface's whole wall (`BC-218`), which is why it gets the
+    machine's cores rather than `--inner-jobs`. On a machine with one core there is
+    nothing to divide, and asking xdist for a single worker would pay the fork and the
+    marshalling for it anyway.
+    """
+    monkeypatch.setattr(validate, "_pytest_workers", lambda: 1)
+
+    command = validate._quick_lane_command()
+
+    assert "-n" not in command
+    assert command[-2:] == (
+        "--durations=0",
+        f"--durations-min={validate.QUICK_TEST_CEILING_SECONDS:g}",
+    )
+
+
+def test_the_quick_lane_worker_count_follows_the_machine_and_is_never_zero(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """It is the machine's count and not the tier's: nothing waits behind this step."""
+    monkeypatch.setattr(os, "process_cpu_count", lambda: 8)
+    assert validate._pytest_workers() == 8
+
+    monkeypatch.setattr(os, "process_cpu_count", lambda: None)
+    assert validate._pytest_workers() == validate.DEFAULT_CPU_COUNT
 
 
 def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
@@ -359,7 +395,7 @@ def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
         del context
         nonlocal observed
         observed = command
-        return ""
+        return "==== slowest durations ====\n(0 durations < 0.005s hidden.)"
 
     monkeypatch.setattr(validate, "_run", capture)
     context = validate.Context(
@@ -380,6 +416,8 @@ def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
         "tests",
         "-m",
         "slow and not exhaustive_exact",
+        "--durations=0",
+        "--durations-min=0",
     )
 
 
@@ -409,6 +447,87 @@ def test_an_empty_slow_lane_passes_and_a_real_failure_does_not(
     monkeypatch.setattr(validate, "_run", broken)
     with pytest.raises(validate.StepFailureError):
         validate._slow_tests(context)
+
+
+#: Node ids taken verbatim from this project's own pytest, not invented: a parametrized
+#: id is `ascii_escaped`, so a parameter carrying `[`, `]` or `::` lands in the id
+#: unchanged. Each one breaks a plausible shortcut -- cutting at the first `[`, cutting at
+#: the last `[`, splitting on the last `::` -- which is why they are pinned here.
+_REAL_NODE_IDS = {
+    "tests/test_probe.py::test_plain": "tests/test_probe.py::test_plain",
+    "tests/test_probe.py::test_param[plain]": "tests/test_probe.py::test_param",
+    "tests/test_probe.py::test_param[a-b]": "tests/test_probe.py::test_param",
+    "tests/test_probe.py::test_param[x::y]": "tests/test_probe.py::test_param",
+    "tests/test_probe.py::test_param[with[brackets]]": "tests/test_probe.py::test_param",
+    "tests/test_probe.py::test_multi[q-1]": "tests/test_probe.py::test_multi",
+    "tests/test_probe.py::TestClass::test_method[z[1]]": (
+        "tests/test_probe.py::TestClass::test_method"
+    ),
+}
+
+
+def test_a_node_id_is_split_from_its_parametrization_however_it_is_spelled() -> None:
+    """The marker floor groups by function, so the grammar of a node id is load-bearing.
+
+    An id that grouped wrongly would either split one function into several -- and then
+    report a case that is not the slowest -- or merge two functions and hide one. Both
+    turn the floor into a coin toss, so the ids are pinned rather than assumed.
+    """
+    for node, function in _REAL_NODE_IDS.items():
+        assert validate._test_function(node) == function
+
+    # An id the grammar does not recognise is its own group rather than a crash or a
+    # silent drop, so an unfamiliar shape makes the floor stricter, never blind.
+    assert validate._test_function("not-a-node-id") == "not-a-node-id"
+
+
+def test_the_marker_floor_is_measured_per_function_and_not_per_parametrization(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A `slow` marker costs what its slowest case costs, because it defers all of them.
+
+    The marker is a decorator on a `def`. A parametrized function therefore leaves the
+    pull-request surface whole, which is why the registry in
+    `test_the_slow_marker_is_declared_only_by_measured_nodes` counts 61 functions and 90
+    collected tests. A floor applied per node asks a question the marker cannot answer:
+    it reports the cheap case of an expensive function as a marker to delete, and
+    deleting it would drag the expensive case back onto the pull-request surface.
+
+    So this is two-sided, and both sides are needed. `test_two_sided` and `test_method`
+    each have a cheap case under the floor and an expensive one far above it, and neither
+    may be reported -- the per-node rule reports both. `test_retired` has no case above
+    the floor and must still be reported -- a rule that simply stopped looking would pass
+    this half of the test while losing the check entirely. Its 2.90s *setup* is over the
+    floor and is ignored, because the floor is a `call`-phase rule.
+    """
+    durations = """
+        ======================== slowest durations ========================
+        12.40s call     tests/test_a.py::test_two_sided[expensive]
+        4.10s call      tests/test_a.py::TestGroup::test_method[z[1]]
+        2.90s setup     tests/test_b.py::test_retired[x::y]
+        0.31s call      tests/test_a.py::test_two_sided[cheap]
+        0.22s call      tests/test_a.py::TestGroup::test_method[z[2]]
+        0.18s call      tests/test_b.py::test_retired[x::y]
+        0.05s call      tests/test_b.py::test_retired[with[brackets]]
+    """
+    monkeypatch.setattr(validate, "_run", lambda *_args, **_kwargs: durations)
+    context = validate.Context(
+        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
+    )
+
+    with pytest.raises(validate.StepFailureError) as raised:
+        validate._slow_tests(context)
+    reported = str(raised.value)
+
+    # The function that is still slow is not reported, though one of its cases is cheap.
+    assert "test_two_sided" not in reported
+    assert "test_method" not in reported
+    # The function that is no longer slow still is, at its slowest case and not its
+    # cheapest, and counted once rather than once per parametrization.
+    assert "1 deferred test(s)" in reported
+    assert "tests/test_b.py::test_retired[x::y]" in reported
+    assert "0.18s" in reported
+    assert "0.05s" not in reported
 
 
 def test_the_behavioral_lanes_partition_every_test() -> None:
@@ -470,10 +589,15 @@ def test_a_test_over_the_per_test_ceiling_fails_the_pull_request_surface(
 
 
 def test_a_quick_lane_under_the_ceiling_passes_and_still_reads_the_durations() -> None:
-    """The check fails closed: no durations section means the ceiling went unchecked."""
+    """A durations section reporting nothing is read, not mistaken for an unread one.
+
+    Both lanes fail closed on a missing section, so the empty-but-present case has to be
+    distinguishable from it: pytest prints the header and a "hidden" line whenever every
+    test is under `--durations-min`, and that is a passing lane rather than a broken one.
+    """
     header = "============================= slowest durations ====================="
-    assert validate._calls_over_ceiling(f"{header}\n(9 durations < 5.00s hidden.)") == []
-    assert validate._calls_over_ceiling(
+    assert validate._call_durations(f"{header}\n(9 durations < 5.00s hidden.)") == []
+    assert validate._call_durations(
         f"{header}\n99.00s call     tests/test_probe.py::test_slow"
     ) == [(99.0, "tests/test_probe.py::test_slow")]
 
