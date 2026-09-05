@@ -1104,17 +1104,16 @@ def drop_block(text: str, name: str) -> str:
     return re.sub(rf"<!--BEGIN:{name}-->.*?<!--END:{name}-->", "", text, flags=re.DOTALL)
 
 
-def wrap_article(body: str, cert: str) -> str:
-    """One certificate's article, as a raw HTML block the Markdown parser keeps whole.
+def wrap_figure(body: str, cert: str) -> str:
+    """One certificate's copy of a figure, in a wrapper the switch can hide.
 
     The blank line on each side of the two wrapper tags is load-bearing: a
-    Markdown HTML block runs to the next blank line, so an `<article>` pressed
-    against the first paragraph would swallow it into the raw block and leave its
+    Markdown HTML block runs to the next blank line, so a wrapper pressed
+    against a paragraph would swallow it into the raw block and leave its
     Markdown unrendered.
     """
     return (
-        f'\n<article class="cert-article" id="cert-{cert}" data-cert="{cert}" hidden>\n\n'
-        f"{body.strip()}\n\n</article>\n\n"
+        f'\n<div class="cert-figure" data-cert="{cert}" hidden>\n\n{body.strip()}\n\n</div>\n\n'
     )
 
 
@@ -1129,16 +1128,22 @@ def expand(
     measurement loses that figure rather than borrowing another's numbers.
     """
     pattern = re.compile(rf"<!--BEGIN:{name}-->(.*?)<!--END:{name}-->", re.DOTALL)
-    match = pattern.search(source)
-    if match is None:
+    if pattern.search(source) is None:
         raise SystemExit(f"there is no {name} block to stamp")
-    block = match.group(1)
-    copies = []
-    for values in per_certificate:
-        copy = block if values["COARSEN_BARS"] else drop_block(block, "COARSENING")
-        copy = fill(copy, values, where=f"{name} {values['SLUG']}")
-        copies.append(wrap_article(copy, values["SLUG"]) if article else copy)
-    return source[: match.start()] + "".join(copies) + source[match.end() :]
+
+    def stamp(match: re.Match[str]) -> str:
+        block = match.group(1)
+        copies = []
+        for values in per_certificate:
+            # The coarsening figure belongs to a measured certificate; a
+            # certificate without a measurement has no copy of it.
+            if "{{COARSEN_BARS}}" in block and not values["COARSEN_BARS"]:
+                continue
+            copy = fill(block, values, where=f"{name} {values['SLUG']}")
+            copies.append(wrap_figure(copy, values["SLUG"]) if article else copy)
+        return "".join(copies)
+
+    return pattern.sub(stamp, source)
 
 
 # Comments in the Markdown source — the contract note at its head, the block
@@ -1148,13 +1153,18 @@ _HTML_COMMENT = re.compile(r"<!--.*?-->", re.DOTALL)
 
 
 def markdown_body(
-    per_certificate: list[dict[str, str]], shared: dict[str, str], *, claimed: bool
+    per_certificate: list[dict[str, str]],
+    headline_values: dict[str, str],
+    shared: dict[str, str],
+    *,
+    claimed: bool,
 ) -> str:
     """The page body: the Markdown source assembled, then rendered once by kpress.
 
-    Order matters twice. The articles are stamped before anything is
-    substituted, so each copy is filled with its own certificate's values and the
-    shared pass then reaches the prose outside them. And every placeholder is
+    Order matters twice. The figures are stamped before anything is
+    substituted, so each copy is filled with its own certificate's values, and
+    the pass that follows fills the prose once, with the headline certificate's
+    values and the shared ones. And every placeholder is
     substituted before the Markdown is parsed, because markdown-it
     percent-encodes a link destination: `[computed]({{RENDERER_URL}})` parsed
     first would leave `href="%7B%7B..."` behind.
@@ -1162,8 +1172,12 @@ def markdown_body(
     source = MARKDOWN.read_text(encoding="utf-8")
     if not claimed:
         source = drop_block(source, "CLAIM")
-    source = expand(source, "ARTICLE", per_certificate, article=True)
-    source = fill(_HTML_COMMENT.sub("", source), shared, where=MARKDOWN.name)
+    if not headline_values["COARSEN_BARS"]:
+        source = drop_block(source, "COARSENING")
+    source = expand(source, "FIGURE", per_certificate, article=True)
+    source = fill(
+        _HTML_COMMENT.sub("", source), {**headline_values, **shared}, where=MARKDOWN.name
+    )
     left = {m.group(1) for m in re.finditer(r"\{\{([A-Z_]+)\}\}", source)}
     if left:
         raise SystemExit(f"{MARKDOWN.name}: a substituted value carried {sorted(left)} into it")
@@ -1205,7 +1219,8 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
     if claim is not None:
         shared["VERIFIABLE_CLAIM"] = claim
     static = kpress_static()
-    prose = markdown_body(per_certificate, shared, claimed=claim is not None)
+    headline_values = per_certificate[facts.index(headline)]
+    prose = markdown_body(per_certificate, headline_values, shared, claimed=claim is not None)
     # The sprite leads the body the way kpress's own renderer places it: the copy
     # button on a code block draws its glyph from a fragment of it.
     body = f"{icon_sprite(static)}\n{prose}"

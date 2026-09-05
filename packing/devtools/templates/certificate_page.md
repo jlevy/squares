@@ -35,12 +35,11 @@ The previous bound, {{PRIOR_LOWER_DEC}}, was set by Stromquist in {{PRIOR_YEAR}}
 
 ## The Square Packing Problem
 
-The square packing problem[^survey] asks, for each $n$, for $s(n)$, the side of the
-smallest square that holds $n$ unit squares with disjoint interiors.
-The unit squares are free to rotate.
-The value is known for every $n \le 10$. The last of those, $s(10) = 3 + 1/\sqrt{2}$,
-was settled by Stromquist in {{PRIOR_YEAR}},[^stromquist] and $s(11)$ is the smallest
-case still open.
+The **square packing problem** asks, for each $n$, for $s(n)$, the side of the smallest
+square that holds $n$ unit squares with disjoint interiors.[^survey] The unit squares
+are free to rotate. The value is known for every $n \le 10$. The last of those,
+$s(10) = 3 + 1/\sqrt{2}$, was settled by Stromquist in {{PRIOR_YEAR}},[^stromquist] and
+$s(11)$ is the smallest case still open.
 
 The best known packing, found by Walter Trump in 1979,[^trump] fits eleven squares in a
 square of side {{BEST_PACKING_DEC}}, so $s(11) \le {{BEST_PACKING_TEX}}$. Whether a
@@ -64,8 +63,8 @@ tighter precision so you can compare the results.
     <span class="fig-title">The best known packings of 1 through 100 squares</span>
   </div>
   <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.png" alt="The best known packings of one through one hundred unit squares, in a ten-by-ten grid" width="2400" height="2676"></a></div>
-  <figcaption class="kpress-figcaption">The best known packings of 1 through 100 unit squares, from the project’s atlas: each cell
-  is the tightest arrangement on record for that <span class="tex">n</span>, drawn from the retained witness. The full
+  <figcaption class="kpress-figcaption">The best known packings of 1 through 100 unit squares. Each cell is the tightest
+  arrangement on record for that <span class="tex">n</span>. The full
   results, with every witness and its provenance, are in
   <a href="https://github.com/jlevy/squares/blob/main/packing/atlas/known-best/">the GitHub repository</a>, and the
   composite is <a href="known-best-1-100.pdf">available as a PDF</a>.</figcaption>
@@ -83,8 +82,41 @@ bound on $s(11)$, and where the upper and lower bounds now stand.
     <span class="fig-title">The best known packing of 11 squares</span>
   </div>
   <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
-  <figcaption class="kpress-figcaption">Trump’s 1979 packing of eleven unit squares in side {{BEST_PACKING_DEC}}, the best known,<sup class="kpress-footnote-ref"><a href="#fn-3" id="fnref-3b" data-kpress-footnote-ref="3">3</a></sup>
-  so <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>. The project’s own rendering, from the retained witness.</figcaption>
+  <figcaption class="kpress-figcaption">Trump’s 1979 packing of eleven unit squares<sup class="kpress-footnote-ref"><a href="#fn-3" id="fnref-3b" data-kpress-footnote-ref="3">3</a></sup> shows
+  <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>.</figcaption>
+</figure>
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 3</span>
+    <span class="fig-title">Bounds on <span class="tex">s({{N}})</span></span>
+  </div>
+  <div class="line-fig kpress-diagram">
+  <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER_DEC}}, the bounds proved here up to {{HEADLINE_L_DEC}}, and the best known packing at {{BEST_PACKING_DEC}}">
+    <rect x="{{BAND_X}}" y="45" width="{{BAND_W}}" height="13" fill="var(--cert-accent-wash)"/>
+    <line x1="20" y1="51.5" x2="680" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1"/>
+    <g stroke="var(--kpress-doc-muted)" stroke-width="1">
+      <line x1="20" y1="47" x2="20" y2="56"/><line x1="460" y1="47" x2="460" y2="56"/>
+      <line x1="680" y1="47" x2="680" y2="56"/>
+    </g>
+    <g font-size="10" fill="var(--kpress-doc-muted)" text-anchor="middle">
+      <text x="20" y="72">3.75</text><text x="460" y="72">3.85</text><text x="680" y="72">3.90</text>
+    </g>
+    <line x1="{{PRIOR_X}}" y1="30" x2="{{PRIOR_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
+    <circle cx="{{PRIOR_X}}" cy="51.5" r="3.2" fill="var(--kpress-doc-muted)"/>
+    <g text-anchor="middle">
+      <text x="{{PRIOR_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{PRIOR_LOWER_DEC}}</text>
+      <text x="{{PRIOR_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{PRIOR_SOURCE}}</text>
+      <text x="{{BEST_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{BEST_PACKING_DEC}}</text>
+      <text x="{{BEST_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{BEST_SOURCE}}</text>
+    </g>
+    <line x1="{{BEST_X}}" y1="30" x2="{{BEST_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
+    <circle cx="{{BEST_X}}" cy="51.5" r="3.2" fill="var(--kpress-doc-muted)"/>
+    {{NUMBER_LINE_MARKS}}
+  </svg>
+  </div>
+  <figcaption class="kpress-figcaption">The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. Below {{HEADLINE_L_FRAC}} it is
+  <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span>.</figcaption>
 </figure>
 
 ## The Five Conditions
@@ -113,8 +145,6 @@ Together the five prove $s(n) \ge L$.
 
 :::
 
-<!--BEGIN:ARTICLE-->
-
 ::: claim
 
 $$
@@ -128,43 +158,6 @@ $$
   <span>{{N_ATOMS}} atoms · {{N_DIRECTIONS}} directions · {{N_ORBITS}} orbits of <span class="tex">\mathbf{D}_4</span></span>
   <span>all arithmetic exact</span>
 </div>
-
-<figure>
-  <div class="fig-head">
-    <span class="caps">Figure 3</span>
-    <span class="fig-title">Bounds on <span class="tex">s({{N}})</span></span>
-    {{CERT_TOGGLE}}
-  </div>
-  <div class="line-fig kpress-diagram">
-  <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER_DEC}}, the new bound {{L_DEC}}, and the best known packing at {{BEST_PACKING_DEC}}">
-    <rect x="{{BOUND_X}}" y="45" width="{{BAND_W}}" height="13" fill="var(--cert-accent-wash)"/>
-    <line x1="20" y1="51.5" x2="680" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1"/>
-    <g stroke="var(--kpress-doc-muted)" stroke-width="1">
-      <line x1="20" y1="47" x2="20" y2="56"/><line x1="460" y1="47" x2="460" y2="56"/>
-      <line x1="680" y1="47" x2="680" y2="56"/>
-    </g>
-    <g font-size="10" fill="var(--kpress-doc-muted)" text-anchor="middle">
-      <text x="20" y="72">3.75</text><text x="460" y="72">3.85</text><text x="680" y="72">3.90</text>
-    </g>
-    <line x1="{{PRIOR_X}}" y1="30" x2="{{PRIOR_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
-    <circle cx="{{PRIOR_X}}" cy="51.5" r="3.2" fill="var(--kpress-doc-muted)"/>
-    <g text-anchor="middle">
-      <text x="{{PRIOR_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{PRIOR_LOWER_DEC}}</text>
-      <text x="{{PRIOR_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{PRIOR_SOURCE}}</text>
-      <text x="{{BEST_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{BEST_PACKING_DEC}}</text>
-      <text x="{{BEST_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{BEST_SOURCE}}</text>
-    </g>
-    <line x1="{{BEST_X}}" y1="30" x2="{{BEST_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
-    <circle cx="{{BEST_X}}" cy="51.5" r="3.2" fill="var(--kpress-doc-muted)"/>
-    <line x1="{{BOUND_X}}" y1="51.5" x2="{{BOUND_X}}" y2="84" stroke="var(--cert-probe)" stroke-width="2"/>
-    <circle cx="{{BOUND_X}}" cy="51.5" r="4.4" fill="var(--cert-probe)"/>
-    <text x="{{BOUND_X}}" y="88" dx="11" font-size="11"
-      font-weight="550" fill="var(--cert-probe)">{{L_FRAC}} = {{L_DEC}}, proved below</text>
-  </svg>
-  </div>
-  <figcaption class="kpress-figcaption">The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. It is
-  <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span>.</figcaption>
-</figure>
 
 ## Atoms, Mass, and the Budget
 
@@ -203,6 +196,8 @@ Condition 1. That invariance lets the proof check angles only up to $\pi/4$: a s
 any other angle is reflected onto that arc, and the reflected square covers the same
 mass as the original.
 
+<!--BEGIN:FIGURE-->
+
 <figure>
   <div class="fig-head">
     <span class="caps">Figure 4</span>
@@ -221,6 +216,8 @@ mass as the original.
   of a covering linear program, rationalized. The board holds less mass than eleven disjoint unit squares would
   need. Condition 2 is that comparison.</figcaption>
 </figure>
+
+<!--END:FIGURE-->
 
 ## Every Placement Covers Mass at Least One
 
@@ -249,6 +246,8 @@ $$
 $$
 
 {{LEAST_MARGIN}} parts in {{SCALE_JS}} above the threshold.
+
+<!--BEGIN:FIGURE-->
 
 <figure>
   <div class="fig-head">
@@ -290,6 +289,8 @@ $$
   <figcaption class="kpress-figcaption">Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
   directions. Outside it the mass falls away at once, which is why the atoms crowd the boundary.</figcaption>
 </figure>
+
+<!--END:FIGURE-->
 
 ## From a Continuum of Angles to {{N_DIRECTIONS}}
 
@@ -335,6 +336,8 @@ $$
 t_K^{\,2} + 2t_K - 1 \;\ge\; 0 \quad\Longleftrightarrow\quad t_K \;\ge\; \tan\frac{\pi}{8}.
 $$
 
+<!--BEGIN:FIGURE-->
+
 <figure>
   <div class="fig-head">
     <span class="caps">Figure 6</span>
@@ -379,6 +382,8 @@ $$
   <span class="tex">\approx 0.999996</span>.</figcaption>
 </figure>
 
+<!--END:FIGURE-->
+
 <!--BEGIN:COARSENING-->
 
 ## Why the Net Has {{N_DIRECTIONS}} Directions
@@ -388,6 +393,8 @@ Hold the {{N_ATOMS}} atoms fixed, coarsen the net, set $B$ to the largest value
 Condition 4 then admits, and decide Condition 5 again.
 Halving the net shrinks $B$ by
 {{HALVING_B_DROP}} and costs {{HALVING_MASS_DROP}} of the least covered mass.
+
+<!--BEGIN:FIGURE-->
 
 <figure>
   <div class="fig-head">
@@ -423,6 +430,8 @@ Halving the net shrinks $B$ by
   <figcaption class="kpress-figcaption">This shows these atoms are tight against their own net, not that no coarser net could be made
   to work. It measures the slope of the trade.</figcaption>
 </figure>
+
+<!--END:FIGURE-->
 
 <!--END:COARSENING-->
 
@@ -491,8 +500,6 @@ ${{LEAST_TEX_PLAIN}}$ at direction $k=0$, center ${{WITNESS_TEX}}$. Every figure
 [computed]({{RENDERER_URL}}) from that atom list.
 Prior lower bound $2 + 4/\sqrt{5}$.[^stromquist] Best known packing
 ${{BEST_PACKING_TEX}}$.[^trump]
-
-<!--END:ARTICLE-->
 
 <!--BEGIN:CLAIM-->
 

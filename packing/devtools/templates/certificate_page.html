@@ -35,8 +35,7 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
 /* Prose keeps the kpress measure; figures are allowed a wider track. The
    Markdown body has no column wrappers, so every direct child of the page and
    of an article takes the measure unless it is a figure. */
-.cert-page > :not(figure, .cert-article, .kpress-figure),
-.cert-article > :not(figure, .kpress-figure),
+.cert-page > :not(figure, .cert-figure, .kpress-figure),
 .col {
   margin-inline: auto;
   max-width: calc(var(--kpress-measure) + 2 * var(--kpress-column-inset));
@@ -109,7 +108,7 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
 .trump svg rect[fill="#ffffff"] { fill: var(--kpress-doc-bg); }
 .trump svg [stroke="#000000"] { stroke: var(--kpress-doc-text); }
 .trump svg text { display: none; }
-.cert-article[hidden] { display: none; }
+.cert-figure[hidden] { display: none; }
 .colophon {
   color: var(--kpress-doc-muted);
   font-family: var(--kpress-font-sans);
@@ -359,7 +358,7 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
 </head>
 <body class="kpress-frame" data-kpress-frame>
 <main class="kpress-page-main kpress-viewport" data-kpress-viewport>
-<div class="kpress kpress-doc cert-page">
+<div class="kpress kpress-doc kpress-prose cert-page">
 {{BODY_HTML}}
 <p class="col colophon">Typeset with <a href="https://github.com/jlevy/kpress"><strong>KPress</strong></a></p>
 </div>
@@ -847,7 +846,7 @@ function shrinkDraw() {
 document.getElementById('phi-{{SLUG}}').addEventListener('input', e => {
   phiVal = (+e.target.value / 10) * Math.PI / 180; phiExact = true; shrinkDraw();
 });
-const knets = document.getElementById('cert-{{SLUG}}').querySelectorAll('.knet');
+const knets = document.querySelectorAll('.cert-figure[data-cert="{{SLUG}}"] .knet');
 knets.forEach(b => b.addEventListener('click', () => {
   knets.forEach(o => o.setAttribute('aria-pressed', 'false'));
   b.setAttribute('aria-pressed', 'true'); KNET = +b.dataset.k; shrinkDraw();
@@ -891,12 +890,13 @@ if (window.matchMedia) {
   if (window.kpressInitTooltips) window.kpressInitTooltips(document, { only: "footnote" });
   if (window.kpressInitCodeCopy) window.kpressInitCodeCopy(document);
 
-  /* One article per certificate. The switch beside every figure shows one and
-     records it in the hash, so a link can open the page on either; the figure
-     the reader switched from stays where it was on screen. */
+  /* One copy of each figure per certificate. The switch beside every figure
+     shows one certificate's copies and records it in the hash, so a link can
+     open the page on either; the figure the reader switched from stays where
+     it was on screen. */
   const switches = [...document.querySelectorAll('.cert-toggle button')];
-  const articles = [...document.querySelectorAll('.cert-article')];
-  const slugs = articles.map(a => a.dataset.cert);
+  const articles = [...document.querySelectorAll('.cert-figure')];
+  const slugs = [...new Set(articles.map(a => a.dataset.cert))];
   const scroller = document.querySelector('[data-kpress-viewport]') || document.scrollingElement;
   const figureKey = el => { const f = el.closest('figure'), c = f && f.querySelector('.caps'); return c ? c.textContent : null; };
   function show(slug, record, from) {
@@ -905,7 +905,7 @@ if (window.matchMedia) {
     for (const a of articles) a.hidden = a.dataset.cert !== slug;
     for (const b of switches) b.setAttribute('aria-pressed', String(b.dataset.cert === slug));
     if (key) {
-      const twin = [...document.querySelectorAll('.cert-article:not([hidden]) figure')].find(f => figureKey(f) === key);
+      const twin = [...document.querySelectorAll('.cert-figure:not([hidden]) figure')].find(f => figureKey(f) === key);
       const button = twin && twin.querySelector('.cert-toggle button');
       if (button) scroller.scrollBy(0, button.getBoundingClientRect().top - top);
     }
