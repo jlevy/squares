@@ -39,14 +39,6 @@ rotate.[^survey] The value is known for every $n \le 10$. Stromquist settled
 $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}},[^stromquist] and $s(11)$ is the smallest
 case still open.
 
-Trump’s 1979 packing[^trump] shows $s(11) \le {{BEST_PACKING_TEX}}$. This page proves
-$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
-
-The proof described here covers a bound of $s({{N}}) \ge {{HEADLINE_L_FRAC}}$. For
-illustration, some of the figures below show a looser bound
-$s({{N}}) \ge {{DEFAULT_L_FRAC}}$, and a toggle on the figure lets you select the
-tighter precision so you can compare the results.
-
 <figure>
   <div class="fig-head">
     <span class="caps">Figure 1</span>
@@ -62,8 +54,13 @@ tighter precision so you can compare the results.
 
 ## Packing 11 Squares
 
-Figure 2 is the best known packing of eleven squares, which sets the upper bound on
-$s(11)$. Figure 3 shows where the bounds stand.
+Trump’s 1979 packing[^trump] shows $s(11) \le {{BEST_PACKING_TEX}}$. This page proves
+$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
+
+The proof described here covers a bound of $s({{N}}) \ge {{HEADLINE_L_FRAC}}$. For
+illustration, some of the figures below show a looser bound
+$s({{N}}) \ge {{DEFAULT_L_FRAC}}$, and a toggle on the figure lets you select the
+tighter precision so you can compare the results.
 
 <figure>
   <div class="fig-head">
