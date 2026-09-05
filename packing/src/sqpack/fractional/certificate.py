@@ -324,8 +324,24 @@ def _condition_containment(certificate: Certificate) -> ConditionReport:
     product = certificate.square_side * (1 + gap)
     return ConditionReport(
         "Condition 4 containment B(1 + D) < 1",
-        f"B = {certificate.square_side}, D = {gap}, B(1 + D) = {float(product):.9f}",
+        f"B = {certificate.square_side}, D = {gap}, B(1 + D) = {product}",
         holds=product < 1,
+    )
+
+
+def closed_form_conditions(certificate: Certificate) -> tuple[ConditionReport, ...]:
+    """Conditions 1 to 4, which cost nothing, so a gate can refuse on them before the sweep.
+
+    ``verify`` decides these and then pays for Condition 5 whatever they said, so that a
+    verdict reports every condition; a gate that is about to spend minutes on the sweep
+    has reason to ask these four first.
+    """
+
+    return (
+        _condition_symmetric_atoms(certificate),
+        _condition_mass_below_n(certificate),
+        _condition_arc_reaches_eighth_turn(certificate),
+        _condition_containment(certificate),
     )
 
 
@@ -385,12 +401,7 @@ def verify(certificate: Certificate, *, workers: int | None = None) -> Verdict:
     Exact, and never short-circuits Condition 2 to Condition 4.
     """
 
-    conditions = [
-        _condition_symmetric_atoms(certificate),
-        _condition_mass_below_n(certificate),
-        _condition_arc_reaches_eighth_turn(certificate),
-        _condition_containment(certificate),
-    ]
+    conditions = list(closed_form_conditions(certificate))
     worst: Fraction | None = None
     worst_label: str | None = None
     for minimum, label in sweep_all_directions(certificate, workers=workers):

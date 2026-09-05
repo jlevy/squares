@@ -338,8 +338,13 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
         # The retention gate's own positive control: both routes on a retained rung,
         # which is the exact sweep's cost plus the interval route's. Its refusals run
         # in the fast tier beside it, since a refusal is decided before either sweep.
+        # The quick-mode control runs the real interval route on the 19/5 rung: 10.6 s on
+        # four cores on 2026-09-05, measured when PR 80's gate tests were ported and it
+        # was the one unmarked test that cost the fast tier anything. Its stubbed twin
+        # holds the same contract in the fast tier.
         "test_decide_certificate.py": {
             "test_a_retained_rung_passes_both_routes_and_they_agree",
+            "test_quick_mode_says_it_cannot_retain",
         },
         "test_exact_jets.py": {
             "test_n5_wall_and_contact_gradients_match_authoritative_source_rows",
