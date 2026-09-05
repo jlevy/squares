@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **11** ready, **5** tentative, **46** blocked, **39** stopped, **104** complete.
+- **11** ready, **5** tentative, **45** blocked, **39** stopped, **105** complete.
 
 - **6 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -35,7 +35,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so 22.7 times… | `think-jgeg` |
 | agenda-019 | `BC-191` | 0 | efficiency | tool_validation | Row generation is between 79 and 94 per cent of every round, the site grids do not scale with the container,… | `think-ji0r` |
 | agenda-021 | `BC-211` | 0 | correctness | measurement_validation | Does the existing generator, run unchanged at n = 13 and side 399/100, converge to a restricted covering… | `think-2ib0` |
-| agenda-021 | `BC-199` | 0 | insight | research | What explicit isolation radius and quadratic constant follow from exp-013's 128 branch certificates at… | `think-ljvz` |
+| agenda-021 | `BC-200` | 1 | correctness | measurement_validation | Is the covering value at n = 11 already at or above eleven at 3.82 and at 3.85, measured from below by an… | `think-1qjs` |
 
 ## Blocked, and on what
 
@@ -77,7 +77,6 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-019 | `BC-195` | 3 | `BC-190`, `BC-191`, `BC-192`, `BC-193`, `BC-194` | no | — |
 | agenda-021 | `BC-197` | 0 | `BC-211` | no | — |
 | agenda-021 | `BC-198` | 1 | `BC-197` | no | — |
-| agenda-021 | `BC-200` | 1 | `BC-199` | no | — |
 | agenda-021 | `BC-202` | 1 | `BC-191` | no | — |
 | agenda-021 | `BC-201` | 2 | `BC-200` | no | — |
 | agenda-021 | `BC-203` | 2 | `BC-197`, `BC-198`, `BC-199`, `BC-200`, `BC-201`, `BC-202`, `BC-211` | no | — |
@@ -129,7 +128,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-018 | paused |  | 2 | 14 |  |  | 16 |
 | agenda-019 | paused | 2 |  | 4 |  |  | 6 |
 | agenda-020 | completed |  |  |  |  | 1 | 1 |
-| agenda-021 | active | 2 |  | 6 |  |  | 8 |
+| agenda-021 | active | 2 |  | 5 |  | 1 | 8 |
 | agenda-022 | paused |  |  | 8 |  |  | 8 |
 
 ## By program
@@ -154,13 +153,13 @@ Open frontier: `BC-204`, `BC-205`, `BC-206`, `BC-211`, `BC-197`, `BC-212`.
 | agenda | id | state | question |
 | --- | --- | --- | --- |
 | agenda-021 | `BC-198` | blocked | Does the two-threshold form of Condition 5 -- per-direction-class thresholds as LP variables,… |
-| agenda-021 | `BC-199` | ready | What explicit isolation radius and quadratic constant follow from exp-013's 128 branch certificates… |
-| agenda-021 | `BC-200` | blocked | Is the covering value at n = 11 already at or above eleven at 3.82 and at 3.85, measured from below… |
+| agenda-021 | `BC-199` | complete | What explicit isolation radius and quadratic constant follow from exp-013's 128 branch certificates… |
+| agenda-021 | `BC-200` | ready | Is the covering value at n = 11 already at or above eleven at 3.82 and at 3.85, measured from below… |
 | agenda-021 | `BC-201` | blocked | How large is the near-tight set on the retained 381/100 certificate -- the reachable event cells… |
 | agenda-022 | `BC-208` | blocked | Does the class-certificate program deliver two statements about n = 11 that stand on their own --… |
 | agenda-022 | `BC-207` | blocked | At the side block one found the n = 11 wall, does an exact cover of the heavy atoms by eleven… |
 
-Open frontier: `BC-198`, `BC-199`, `BC-200`, `BC-201`, `BC-208`, `BC-207`.
+Open frontier: `BC-198`, `BC-200`, `BC-201`, `BC-208`, `BC-207`.
 
 ### `reach-table-ladder`
 

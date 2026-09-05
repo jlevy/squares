@@ -244,7 +244,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       What explicit isolation radius and quadratic constant follow from exp-013's 128
@@ -298,6 +298,42 @@ agenda:
     depends_on: []
     parallel_group: agenda021-lane-b
     program: n11-closure
+    artifacts:
+    - packing/cases/trump11/isolation_radius.py
+    - packing/tests/test_trump_isolation_radius.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-199-trump-isolation-radius.json
+    outcomes:
+    - scope: >-
+        The isolation radius and the quadratic stress constant at Trump's pose, in the
+        anchored centre-angle chart at fixed side, from exp-013's 128 branch
+        certificates; the numbers, not the packet.
+      classification: achieved
+      result: >-
+        rho_0 >= 288616983/125000000000 = 0.0023089 with the uniform curvature bound
+        K = 4972105219/500000000 = 9.944210 on the declared box of sup-radius 1/64, the
+        binding cap being the modulus 2 kappa_b / K itself (the per-feature gap cap is
+        0.0058755, the symmetry cap 1/16, the box 1/64); with per-row curvature the same
+        derivation gives rho_0 >= 808514697/200000000000 = 0.0040426. C <= 22.467763
+        with the uniform K and <= 12.873063 per row. kappa_b takes exactly two values,
+        0.011480272 on 64 branches and 0.016423845 on the other 64, decided by which
+        option of contact (9, 10) the branch takes, with the minimising face theta_10
+        = +-1 in every branch. The stress ratio ||lambda_b||_1 / Lambda_b = 4.518763 is
+        the same in all 128 branches by an exact identity (1 - rho e_far lies in every
+        row space), so the ratio-minimising LP X-014 proposed is empty. The kill
+        (rho_0 below 1e-6) did not fire. Four corrections to X-014's sketch are recorded
+        in the tool: the g_min/Lip cap is far too weak and is replaced by a per-feature
+        cap; the stress bound needs lambda >= 0 and Lambda > 0 rather than strict
+        positivity; the ratio LP is empty; K is a supremum over a box that must be
+        declared first. Every branch row was matched exactly to the gradient of a tied
+        elementary function, so the chart is exp-013's. No result is registered: the
+        theorem form is agenda-018's BC-176 and its review BC-177.
+      evidence:
+      - packing/cases/trump11/isolation_radius.py
+      - packing/tests/test_trump_isolation_radius.py (6 tests, 6.9 s)
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-199-trump-isolation-radius.json (sha256 db124b99...; three independent runs agree)
+      - session-086 Lane B delegation, 3107 s platform-measured, 51 of 120 budgeted minutes
+      disposition: retire-success
+      follow_up: null
     next_evidence: >-
       Whether the local box is reachable by any tree, which BC-203's third doubling-down
       rule reads directly and which decides whether block two opens a conditional lead
@@ -306,7 +342,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       Is the covering value at n = 11 already at or above eleven at 3.82 and at 3.85,

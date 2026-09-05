@@ -164,19 +164,31 @@ session:
       nonzero gap and its Lipschitz constant, rho_0 and C as exact rationals, and the
       claim boundary.
     operator: sub-agent at the thinking level BC-199 declares, one core
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: >-
+      Complete at 51 of 120 minutes; the kill did not fire. rho_0 >= 0.0023089 (uniform
+      K) and >= 0.0040426 (per-row K), C <= 22.467763 and <= 12.873063, kappa_b in
+      {0.011480272, 0.016423845} by contact (9, 10); the stress ratio is an exact
+      constant across the 128 branches; four corrections to X-014's sketch recorded.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-199-trump-isolation-radius.json
+    - packing/tests/test_trump_isolation_radius.py
+    files:
+    - packing/cases/trump11/isolation_radius.py
+    - packing/tests/test_trump_isolation_radius.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-199-trump-isolation-radius.json
+    checks:
+    - 'uv run --frozen --all-extras --group dev pytest tests/test_trump_isolation_radius.py -q: 6 passed'
+    - 'ruff check, ruff format --check, basedpyright: clean on both files'
+    - 'coordinator: rho_0 = 2 kappa_min / K re-derived from the reported kappa and K'
     uncertainty: >-
-      The modulus lemma's derivation is a sketch whose constants had never been computed;
-      a step may need correcting as it is computed.
-    elapsed_seconds: null
-    elapsed_quality: null
+      The uniform K is 85 per cent trigonometric and a box-aware Hessian bound could
+      tighten it by up to 8 per cent on some rows; the numbers are lower bounds either way.
+    elapsed_seconds: 3107
+    elapsed_quality: platform_measured
     next_action: >-
-      Report the two numbers with their tool and test; then BC-200.
+      BC-200 dispatched on the same lane at 07:41 UTC.
     phase: 2
     budget_minutes: 120
     started_at: '2026-09-05T06:47:00Z'
@@ -191,6 +203,45 @@ session:
     fallback: Report the partial computation with the step that refused.
     write_scope:
     - packing/cases/trump11/
+    - packing/devtools/
+    - packing/tests/
+    excluded_commands:
+    - git commit
+    - git push
+  - task: >-
+      Lane B, BC-200: the n = 11 covering value from below at 191/50 and 77/20 by an
+      exact-depth fractional packing, cutting planes on arrangement vertices with the
+      exact depth check (H-064).
+    operator: sub-agent at the thinking level BC-200 declares, one core
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: >-
+      The exact vertex check reached 1650944 vertices on a 608-placement family at 3.82;
+      the loop may pass what the check can carry inside the budget.
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: >-
+      Report the depth-scaled totals; the coordinator decides any frozen ceiling through
+      verify_ceiling; then BC-201.
+    phase: 2
+    budget_minutes: 110
+    started_at: '2026-09-05T07:41:00Z'
+    deadline_at: '2026-09-05T09:31:00Z'
+    expected_output: >-
+      The cutting-plane loop as a tool with a test; per side, the exact depth-scaled
+      total, arrangement vertex count and exact maximum depth, and a frozen family under
+      packing/cases/n11_fractional_certificate/ where verify_ceiling accepts it.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev pytest packing/tests -q -k ceiling
+    kill_condition: The vertex count passing what the exact check can carry inside the budget.
+    fallback: Record the count and the last exact depth; BC-201 follows.
+    write_scope:
+    - packing/cases/n11_fractional_certificate/
+    - packing/src/sqpack/fractional/
     - packing/devtools/
     - packing/tests/
     excluded_commands:
@@ -235,8 +286,11 @@ session:
     excluded_commands:
     - git commit
     - git push
-  outputs: []
-  checks: []
+  outputs:
+  - packing/cases/trump11/isolation_radius.py
+  - packing/campaign/series/series-000-smoke-and-calibration/results/bc-199-trump-isolation-radius.json
+  checks:
+  - 'pytest tests/test_trump_isolation_radius.py: 6 passed'
   resource_rollups: []
   stop_reason: null
   next_action: >-
