@@ -672,6 +672,12 @@ agenda:
         because the cold row loop needed 58 rounds and their cost grows inside the loop;
         warm column rounds then averaged 244.7 s. The checkpoint is resumable and the
         resume path was exercised on the real artifact rather than only in a unit test.
+        One thing the lane started and did not finish is deliberately not on the branch:
+        a test asserting that a resumed leg which runs no round of its own reports an
+        empty round list rather than the checkpoint's. The driver returns the
+        checkpoint's, and changing that would change what the fields of this cell's
+        already retained summary mean, so it is left to think-4in0 with the checkpoint
+        it inherits.
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/results/bc-202-n26-138-25.json
       - session-086 Lane C delegation
