@@ -76,8 +76,8 @@ tiers:
     Every floor and every record check, without the broad behavioural suite: 59.35s on a
     contended four-core box on 2026-09-05, never yet clocked on CI's two-core runner. The
     ceiling is a target rather than a measurement and is stated as such -- it is the
-    surface agenda-023 is moving the pull request onto, and 240s is the number that
-    decides whether that landed.
+    operator's four minutes, and this tier is the floor inside whichever surface the pull
+    request ends up running, so it cannot be looser than the surface above it.
 
 - id: fast
   command: packing-validate --fast

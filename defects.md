@@ -2,7 +2,7 @@
 
 # Defect log
 
-457 defects recorded across the packing toolchain.
+458 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
 | `review` | 275 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
-| `inspection` | 52 | reading the code or the design with intent |
+| `inspection` | 53 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 67 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 67 of 457, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 67 of 458, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 67 of 457, and none of
 | quench | 23 |
 | verifier | 9 |
 | record | 145 |
-| tooling | 160 |
+| tooling | 161 |
 | docs | 109 |
 
 ## By kind
@@ -46,7 +46,7 @@ The line worth reading twice: **the automated gate caught 67 of 457, and none of
 | validity | 117 |
 | bookkeeping | 172 |
 | robustness | 58 |
-| performance | 16 |
+| performance | 17 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -693,6 +693,7 @@ This is the actionable list.
 | [D-455](packing/frontier/covering-values.yaml) | 2026-09-05 | record | bookkeeping |  | `gate` | medium | fixed | A frozen-artifact path named a moving pointer, so a superseded rung quoted its successor's mass |
 | [D-456](development.md) | 2026-09-05 | tooling | robustness |  | `inspection` | low | fixed | A conflicted branch produced no CI at all, and no checks reads as pending rather than red |
 | [D-457](packing/campaign/agendas/agenda-022-the-conditional-route.md) | 2026-09-05 | record | bookkeeping |  | `gate` | low | contained | A research cell with no hypothesis cannot produce a round, and BC-206 was written that way |
+| [D-458](packing/devtools/gate-budgets.yaml) | 2026-09-05 | tooling | performance |  | `inspection` | medium | fixed | The pull-request tier tripled inside a cap with 3.61x of headroom, and no check could have objected |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
