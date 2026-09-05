@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 455
+count: 456
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14691,3 +14691,45 @@ defects:
   recurrence_of: D-443
   status: fixed
   recorded_in: packing/frontier/covering-values.yaml
+- id: D-456
+  title: A conflicted branch produced no CI at all, and no checks reads as pending rather than red
+  date: '2026-09-05'
+  layer: tooling
+  class: robustness
+  detected_by: inspection
+  latent_for: >-
+    twenty-five minutes and five pushes, from the moment main moved under the branch until
+    someone asked why a repository whose other branches were running normally had produced
+    no run for this one.
+  severity: low
+  what: >-
+    PR 83's branch went un-mergeable when main advanced, and GitHub stopped creating
+    workflow runs for it entirely rather than creating one that failed. A pull_request
+    workflow checks out the pull request's merge ref; with a conflict that ref cannot be
+    built, so no run is created, no check appears, and the API reports the pull request as
+    having zero check runs.
+    Five pushes landed into that silence. Each was read as "CI has not started yet",
+    which is what zero check runs also means, and the two are indistinguishable from
+    outside. The branch was in fact carrying validated work the whole time; nothing about
+    it was wrong except that nobody could see a gate result for it.
+  consequence: >-
+    No false claim entered the record, and the cost was twenty-five minutes and five
+    uninformative pushes. The danger is the direction the failure leans: an absent check
+    reads as pending, not as red, so a branch can sit un-gated while looking merely slow,
+    and a reviewer glancing at a green-looking pull request page sees nothing objecting.
+    A conflicted branch that nobody notices is also a branch whose merge gets harder the
+    longer it waits.
+  fix: >-
+    Fixed on 2026-09-05 by merging main into the branch and resolving the two conflicts;
+    CI created a run on the very next push. The durable half is the diagnostic rule, which
+    is written into development.md beside the pull-request section: zero check runs is a
+    mergeability question, not a waiting question, and `git merge-tree --write-tree HEAD
+    origin/main` answers it in one command before another push is spent.
+  regression: >-
+    None automated, and the reason is worth stating rather than leaving as an omission:
+    this repository's gate validates the repository, not GitHub's view of a pull request,
+    and adding a checker that reaches out to the API would make an external service a
+    dependency of a local command. The control is the rule in development.md and the habit
+    of reading an absent check as a question rather than as a wait.
+  status: fixed
+  recorded_in: development.md

@@ -2,7 +2,7 @@
 
 # Defect log
 
-455 defects recorded across the packing toolchain.
+456 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
 | `review` | 275 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
-| `inspection` | 51 | reading the code or the design with intent |
+| `inspection` | 52 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 66 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 66 of 455, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 66 of 456, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 66 of 455, and none of
 | quench | 23 |
 | verifier | 9 |
 | record | 144 |
-| tooling | 159 |
+| tooling | 160 |
 | docs | 109 |
 
 ## By kind
@@ -45,7 +45,7 @@ The line worth reading twice: **the automated gate caught 66 of 455, and none of
 | soundness | 94 |
 | validity | 117 |
 | bookkeeping | 171 |
-| robustness | 57 |
+| robustness | 58 |
 | performance | 16 |
 
 ## Fixed, but nothing stops it coming back
@@ -690,6 +690,7 @@ This is the actionable list.
 | [D-453](packing/devtools/check_case_prose.py) | 2026-09-05 | record | soundness | flattering | `review` | low | fixed | Every open case body rounded its bound to nearest, and so stated one stronger than is proved |
 | [D-454](packing/frontier/results.yaml) | 2026-09-05 | record | bookkeeping |  | `review` | medium | fixed | Four durable records described a rung, a ladder and a count that had already moved |
 | [D-455](packing/frontier/covering-values.yaml) | 2026-09-05 | record | bookkeeping |  | `gate` | medium | fixed | A frozen-artifact path named a moving pointer, so a superseded rung quoted its successor's mass |
+| [D-456](development.md) | 2026-09-05 | tooling | robustness |  | `inspection` | low | fixed | A conflicted branch produced no CI at all, and no checks reads as pending rather than red |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
