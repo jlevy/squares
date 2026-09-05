@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 457
+count: 459
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14804,3 +14804,83 @@ defects:
     touches every retained case rendering and is carried separately (think-igdg).
   status: fixed
   recorded_in: packing/devtools/build_known_best_atlas.py
+- id: D-458
+  title: >-
+    The Pages filter named the composite PNG and PDF but not the SVG the figure shows
+  date: '2026-09-05'
+  layer: tooling
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    since the composite was added to the page; the register and the figure record have
+    been outside the filter for as long as the renderer has read them.
+  severity: low
+  what: >-
+    The explainer republishes on a push touching any input its renderer reads, and that
+    list is written by hand in YAML while the inputs themselves are read in Python. Four
+    had drifted out of it. `known-best-1-100.svg` is what Figure 1 shows, and the filter
+    named the PNG and the PDF beside it but not the SVG; `frontier/results.yaml` is what
+    the opening counts; `composite-figure.json` and the module it is read through are
+    what the drawing is built from.
+  consequence: >-
+    Not a wrong page, a stale one, which is the harder thing to notice: the gate passes,
+    the branch merges, and the deployed site disagrees with the repository until some
+    other input happens to move and republishes everything at once. The composite SVG is
+    the entry that mattered most, being both the largest figure on the page and the file
+    the preceding commits had been changing.
+  fix: >-
+    Fixed on 2026-09-05 by declaring the inputs where the outputs are declared, as
+    RENDER_INPUTS in packing/devtools/render_explainer.py, and adding the four missing
+    patterns to both the push and the pull_request filters. The workflow comment now
+    says not to maintain the list by reading the renderer, because the test names what
+    to add.
+  regression: >-
+    test_the_pages_filter_covers_every_render_input parses the workflow, resolves both
+    filters, and requires every declared input to be matched by each. Checked against
+    the drift by deleting the composite SVG entry, which the test reports by name. A
+    companion requires every declared input to exist, so a rename cannot leave a matched
+    pair of dead entries agreeing with each other.
+  status: fixed
+  recorded_in: packing/tests/test_explainer.py
+  bead: think-bl0n
+- id: D-459
+  title: A plain git clone fails the documentation check
+  date: '2026-09-05'
+  layer: tooling
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    since the vendored exclusion was added; CI never saw it because both workflows pass
+    `submodules: true`.
+  severity: low
+  what: >-
+    The document map excluded vendored prose with the pattern `vendor/**/*.md`, and its
+    loader requires every exclusion to match at least one file. With the submodule
+    declared but not checked out the pattern matches nothing, so the check reported
+    `document exclusion is empty: vendor/**/*.md`. The same question -- which trees are
+    this repository's -- was also answered separately in `check_svg_rendering`, which
+    typed `vendor` into a frozenset of its own; the two answers were maintained by hand
+    in different languages and had already disagreed once, as D-455.
+  consequence: >-
+    A contributor cloning normally and running the documented check gets a failure about
+    a file they have not touched and cannot see, on a repository whose own gate is
+    green. Small in consequence and large in the impression it gives.
+  fix: >-
+    Fixed on 2026-09-05 by answering the question in code rather than in the map.
+    packing/devtools/repo_scope.py reads `.gitmodules`, and both sweeps use it, so the
+    vendored set comes from the declaration rather than from what is on disk and is the
+    same on a clone with submodules and one without. The map pattern is deleted and the
+    frozenset no longer names `vendor` (think-f4vl). Reproduced on a submodule-less
+    clone before the change, which failed exactly as reported, and confirmed passing
+    after.
+  regression: >-
+    test_every_map_pattern_matches_a_file_no_submodule_supplies matches each collection
+    and exclusion pattern the way the loader does and then discards the vendored files,
+    so a pattern satisfied only by a submodule fails here whether or not the submodule
+    is checked out. Matched rather than reasoned about on purpose: `vendor/**/*.md` has
+    the prefix `vendor`, which is not itself a declared submodule path, so prefix
+    arithmetic calls it clean. Checked by reinstating the pattern, which the test
+    reports by name.
+  status: fixed
+  recorded_in: packing/devtools/repo_scope.py
+  bead: think-5e7k

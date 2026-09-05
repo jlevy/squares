@@ -15,17 +15,22 @@ from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
 
+from devtools.repo_scope import is_vendored
+
 ROOT = Path(__file__).resolve().parents[1]
 # The repository root. Document surfaces (TUTORIAL.md, SYNOPSIS.md, README.md) live
 # there; the rendered artifacts they embed live under packing/.
 REPO = ROOT.parent
 #: Directories whose Markdown is not this repository's to police. `resources` is the
 #: literature archive, whose transcriptions are archived source rather than our prose;
-#: `vendor` holds upstream repositories checked out as submodules, the exclusion
-#: `.flowmarkignore` states for the same reason; `node_modules` is installed. A
-#: dot-prefixed directory is tool-owned. Stated here rather than at each sweep: the two
-#: controls below must agree about which documents count, because a target that one
-#: sweep calls unowned and the other cannot see is a contradiction, not a finding.
+#: `node_modules` is installed. A dot-prefixed directory is tool-owned. Stated here
+#: rather than at each sweep: the two controls below must agree about which documents
+#: count, because a target that one sweep calls unowned and the other cannot see is a
+#: contradiction, not a finding.
+#:
+#: `vendor` is not here. Vendored trees are excluded by `devtools.repo_scope`, which
+#: reads `.gitmodules`, so this list and the documentation check answer that question
+#: from one declaration rather than from two hand-typed names (think-f4vl).
 #:
 #: `site` is the explainer's render output. It is this repository's, unlike the rest,
 #: but it is generated: rebuilt by every run, gitignored, and already guaranteed by the
@@ -34,7 +39,7 @@ REPO = ROOT.parent
 #: renderer places beside it, which is not one of the atlas's owned artifacts and never
 #: will be. Being gitignored is not what excludes it: this sweep walks files git does
 #: not track, which is the blind spot D-455 was about.
-FOREIGN_DIRECTORY_NAMES = frozenset({"resources", "vendor", "node_modules", "site"})
+FOREIGN_DIRECTORY_NAMES = frozenset({"resources", "node_modules", "site"})
 
 
 def repository_documents() -> Iterator[Path]:
@@ -42,6 +47,8 @@ def repository_documents() -> Iterator[Path]:
     for document_path in REPO.rglob("*.md"):
         parts = document_path.relative_to(REPO).parts
         if FOREIGN_DIRECTORY_NAMES & set(parts) or any(part.startswith(".") for part in parts):
+            continue
+        if is_vendored(document_path):
             continue
         yield document_path
 

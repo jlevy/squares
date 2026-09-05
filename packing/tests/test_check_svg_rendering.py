@@ -26,6 +26,7 @@ from devtools.check_svg_rendering import (
     REPO,
     repository_documents,
 )
+from devtools.repo_scope import vendored_directories
 
 #: A Markdown file inside the vendored submodule that embeds an SVG of its own. Named
 #: rather than discovered: a test that searches for its own subject passes when the
@@ -81,11 +82,30 @@ def test_a_generated_document_under_site_is_not_swept() -> None:
 
 
 def test_the_exclusion_set_is_the_one_the_formatter_uses() -> None:
-    """`.flowmarkignore` excludes `vendor/` for the same reason, and says so.
+    """`.flowmarkignore` excludes every vendored tree, for the same reason.
 
-    The two lists are maintained by hand in different languages; this holds them to the
-    same answer about the vendored tree, which is the entry that has drifted before.
+    The two lists are maintained by hand in different languages, and the vendored entry
+    is the one that has drifted before. It is no longer hand-typed on this side --
+    `devtools.repo_scope` reads `.gitmodules` -- so what is checked here is the
+    formatter's list against the declaration, which covers a second submodule the day it
+    is added rather than the day someone remembers.
     """
     ignore = (REPO / ".flowmarkignore").read_text(encoding="utf-8")
-    assert "vendor/" in ignore
-    assert "vendor" in FOREIGN_DIRECTORY_NAMES
+    declared = vendored_directories()
+    assert declared, "no submodule is declared; the exclusion would be vacuous"
+    for path in sorted(declared):
+        top = path.split("/")[0]
+        assert f"{top}/" in ignore, f"{top}/ is vendored but the formatter does not skip it"
+    assert "vendor" not in FOREIGN_DIRECTORY_NAMES, "vendored trees come from .gitmodules"
+
+
+def test_a_document_in_a_vendored_tree_is_not_swept() -> None:
+    """The sweep skips submodules by declaration, not by a name someone typed.
+
+    D-455 was the vendored tree being swept at all. What replaced the fix is a weaker
+    thing to get wrong -- a second submodule under a different name -- so the property
+    checked is the general one: nothing under any declared submodule path is swept.
+    """
+    swept = {document.relative_to(REPO).as_posix() for document in repository_documents()}
+    for path in sorted(vendored_directories()):
+        assert not [seen for seen in swept if seen.startswith(f"{path}/")], path

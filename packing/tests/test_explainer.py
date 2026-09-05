@@ -10,6 +10,7 @@ substitution, and nothing in the page is a reference outside it.
 from __future__ import annotations
 
 import re
+from pathlib import Path
 
 import pytest
 
@@ -18,6 +19,8 @@ from devtools.render_explainer import (
     COMPOSITE_ASSETS,
     COMPOSITE_PNG,
     MARKDOWN_OUTPUT,
+    RENDER_INPUTS,
+    REPO,
     RESULT_ID,
     SITE_URL,
     WALKTHROUGH,
@@ -26,6 +29,7 @@ from devtools.render_explainer import (
     render,
 )
 from devtools.render_explainer import load_certificate as load
+from sqpack.yamlio import safe_load
 
 
 @pytest.fixture(scope="module")
@@ -285,3 +289,66 @@ def test_the_md_chip_offers_the_document_by_its_published_name(page: str) -> Non
     writer uses rather than against a name spelled out here.
     """
     assert f'href="{MARKDOWN_OUTPUT.name}"' in page
+
+
+def pages_filters() -> dict[str, list[str]]:
+    """The `paths:` filter of each event the Pages workflow triggers on."""
+    workflow = safe_load((REPO / ".github" / "workflows" / "pages.yml").read_text("utf-8"))
+    triggers = workflow["on" if "on" in workflow else True]
+    return {
+        event: settings["paths"]
+        for event, settings in triggers.items()
+        if isinstance(settings, dict) and "paths" in settings
+    }
+
+
+def covered(path: Path, patterns: list[str]) -> bool:
+    """Whether a GitHub `paths:` filter republishes on a change under `path`.
+
+    A filter entry is matched against files, not directories, so a declared input that
+    is a directory is covered by a pattern that would match a file inside it. `**` and a
+    bare directory name both do that; the comparison below is deliberately the strict
+    one, so an entry that covers the directory only by accident does not pass.
+    """
+    relative = path.relative_to(REPO).as_posix()
+    return any(
+        pattern == relative or pattern.rstrip("/*") in (relative, relative.rstrip("/"))
+        for pattern in patterns
+    )
+
+
+def test_the_pages_filter_covers_every_render_input() -> None:
+    """A render input outside the filter is a page that goes stale with the gate green.
+
+    The workflow's `paths:` list and the renderer's imports are written in two languages
+    and maintained by hand, so nothing but this comparison stops them drifting. They had
+    drifted: the filter named the composite PNG and PDF but not the SVG the figure
+    actually shows, and named neither the frontier register the opening counts nor the
+    figure record the drawing is built from (think-bl0n). Any of those four could have
+    changed on main and left the deployed page showing the previous render, with every
+    check passing, which is the shape of D-455 rather than a new one.
+
+    Both events are checked. A pull request that builds the page is the only review a
+    render change gets, so a filter that publishes on an input but does not build it on
+    the pull request is the same gap seen from the other side.
+    """
+    filters = pages_filters()
+    assert set(filters) == {"push", "pull_request"}, sorted(filters)
+    for event, patterns in filters.items():
+        missing = [
+            declared.relative_to(REPO).as_posix()
+            for declared in RENDER_INPUTS
+            if not covered(declared, patterns)
+        ]
+        assert not missing, f"{event}: RENDER_INPUTS not covered by paths: {missing}"
+
+
+def test_every_declared_render_input_exists() -> None:
+    """A path filter naming a file that is gone republishes on nothing, silently.
+
+    The check above compares two lists to each other, which both of them can satisfy
+    while naming a file the repository no longer has. This is the other half: every
+    declared input resolves, so a rename cannot leave a matched pair of dead entries.
+    """
+    for declared in RENDER_INPUTS:
+        assert declared.exists(), declared.relative_to(REPO).as_posix()

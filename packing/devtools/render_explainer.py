@@ -1461,6 +1461,32 @@ def kerned_math_spans(source: str) -> str:
 MARKDOWN_OUTPUT = PACKING / "site" / f"{RESULT_ID}-explainer.md"
 
 
+#: Every repository path a render reads, repository-relative, stated where the outputs
+#: are. The Pages workflow republishes on a change to any of them, and its `paths:`
+#: filters are a hand-written list in a different language, so the list drifts unless
+#: something compares the two: `test_the_pages_filter_covers_every_render_input` is that
+#: comparison. Four inputs had already drifted out of the filter when this was written
+#: (think-bl0n) -- the composite SVG the figure shows, the frontier register the opening
+#: counts, and the figure record with the module it is read through -- and a change to
+#: any of them would have left the deployed page stale with every gate green.
+RENDER_INPUTS = (
+    CASE,
+    Path(__file__),
+    PACKING / "devtools" / "measure_net_coarsening.py",
+    PACKING / "devtools" / "build_composite_figure_data.py",
+    PACKING / "src" / "sqpack",
+    PACKING / "frontier" / "results.yaml",
+    PACKING / "atlas" / "known-best" / "composite-figure.json",
+    PACKING / "atlas" / "known-best" / "rendering" / "n-011.svg",
+    *COMPOSITE_ASSETS,
+    TEMPLATE,
+    MARKDOWN,
+    REPO / "vendor" / "kpress",
+    PACKING / "pyproject.toml",
+    PACKING / "uv.lock",
+)
+
+
 def _balanced(source: str, start: int, tag: str) -> int:
     """The index just past the `</tag>` that closes the `<tag` opening at `start`."""
     depth = 0

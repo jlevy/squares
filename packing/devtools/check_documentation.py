@@ -10,6 +10,7 @@ from pathlib import Path
 from urllib.parse import unquote
 
 from devtools.render_document_map import MAP, REPO, SYNOPSIS, expected_synopsis, load_map
+from devtools.repo_scope import is_vendored
 from sqpack.yamlio import safe_load
 
 FOOTER = "This document follows common-doc-guidelines.md."
@@ -17,6 +18,14 @@ FOOTER = "This document follows common-doc-guidelines.md."
 # not durable, so it has nothing to be mapped to; the page and the Markdown document
 # beside it are checked by the renderer's own `--check`, which compares them byte for
 # byte against a fresh render.
+#
+# Vendored trees are not here. They are skipped by `devtools.repo_scope`, which reads
+# `.gitmodules`, and they used to be a `vendor/**/*.md` exclusion in the document map
+# instead. That failed on a plain clone: the map's loader requires every exclusion to
+# match a file, and an unchecked-out submodule matches none, so `git clone` without
+# `--recurse-submodules` failed the docs check while CI passed (think-5e7k). Upstream
+# prose is not this repository's surface whether or not it is on disk, which is a
+# statement about the declaration rather than about the working tree.
 IGNORED_PARTS = {
     ".pytest_cache",
     ".venv",
@@ -144,6 +153,7 @@ def check() -> list[str]:
         path.relative_to(REPO).as_posix()
         for path in REPO.rglob("*.md")
         if path.is_file()
+        and not is_vendored(path)
         and not any(
             part in IGNORED_PARTS or part.startswith(".")
             for part in path.relative_to(REPO).parts
