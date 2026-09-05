@@ -254,6 +254,141 @@ values:
       to 27516 over the run. Both readings stay open, a covering value at or above
       eighteen or an optimum on a degenerate vertex, which the collapse of pricing from
       90 s to 1--3 s suggests. No raw run was retained and nothing was frozen.
+  - n: 21
+    side: '997/200'
+    side_decimal: '4.985'
+    objective: '25.000000'
+    site_set: grid
+    sites: 6785
+    rows: 8692
+    rounds: 24
+    converged: false
+    stop_reason: >-
+      Stopped by the ladder inside the row loop at its refutation budget, unconverged;
+      the objective had crossed twenty-one at round 4 (21.179460) and then stood at
+      exactly 25.000000 from round 12 through round 24 with least covered mass 0.841490.
+    least_covered_mass: '0.841490'
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-061-h-062-m5-covering-wall.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-197-ladder-register.txt
+    notes: >-
+      BC-197 of agenda 021 (exp-061). The exactly round value is an artefact with a
+      mechanism at this side: with 5B - L = 0.0035 the twenty-five axis-parallel
+      B-squares overlap only in strips of that width, the restricted dual is checked at
+      sites only, and no uniform inset-1/2 grid the lane could afford puts a site in
+      every strip, so twenty-five unit weights are dual-feasible whatever the covering
+      value is. A second construction, the 24/5 atoms scaled, reached 24.315238 unconverged.
+  - n: 20
+    side: '979/200'
+    side_decimal: '4.895'
+    objective: '20.111615'
+    site_set: grid
+    sites: 6501
+    rows: 3270
+    rounds: 8
+    converged: false
+    stop_reason: >-
+      Stopped by the ladder on the crossing: the objective crossed twenty at LP round 8
+      with least covered mass 0.729083 and placements still violated, and rows only
+      raise a restricted optimum, so the rung walls without convergence.
+    least_covered_mass: '0.729083'
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-061-h-062-m5-covering-wall.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-197-ladder-register.txt
+    notes: >-
+      BC-197 of agenda 021 (exp-061). The seeded construction crossed at round 7
+      (20.006183) and reached 20.070683 at round 9, so both of H-062's constructions
+      wall here.
+  - n: 20
+    side: '97/20'
+    side_decimal: '4.85'
+    objective: '20.000439'
+    site_set: grid
+    sites: 6029
+    rows: 9803
+    rounds: 32
+    converged: false
+    stop_reason: >-
+      Stopped by the ladder on the crossing: 19.999366 at round 30, 20.000166 at 31 and
+      20.000439 at 32, least covered mass 0.984497 with 192 placements still violated.
+    least_covered_mass: '0.984497'
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-061-h-062-m5-covering-wall.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-197-r2t.json
+    notes: >-
+      BC-197 of agenda 021 (exp-061). The grid construction crosses twenty by four parts
+      in ten thousand here; the seeded construction at the same side converged below
+      twenty and its certificate is retained as T-021, which is why the cell's own rule
+      asks for two constructions before a crossing is read as a wall.
+  - n: 20
+    side: '97/20'
+    side_decimal: '4.85'
+    objective: '19.848723'
+    site_set: certificate-seeded
+    sites: 8289
+    rows: null
+    rounds: null
+    converged: true
+    stop_reason: >-
+      The row loop converged -- every placement covers mass one -- on the grids unioned
+      with the 24/5 certificate's 2260 atoms scaled by 97/96, after the 600-second run
+      at the same site set had been time-limited at 19.844457 and a 2400-second rerun
+      carried it to convergence in 1616.5 s.
+    least_covered_mass: '1'
+    frozen_artifact: packing/cases/n20_fractional_certificate/certificate.json
+    recorded_in:
+      - packing/frontier/results.yaml
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-061-h-062-m5-covering-wall.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-197-r2t.json
+    notes: >-
+      BC-197 of agenda 021 (exp-061). Rationalised at scale 4,000,000 to
+      19848723/1000000 over 1680 atoms and retained as T-021's certificate, which the
+      gate accepted on both routes at 200001/200000.
+  - n: 20
+    side: '193/40'
+    side_decimal: '4.825'
+    objective: '19.862092'
+    site_set: grid
+    sites: 6029
+    rows: 11083
+    rounds: 54
+    converged: true
+    stop_reason: >-
+      The row loop converged at LP round 54 -- every placement covers mass one, least
+      covered mass 1.000000 -- with the optimum reached at round 41 and rounds 41 to 54
+      clearing the last violations; 949.4 s of round time, 1008.6 s wall.
+    least_covered_mass: '1'
+    frozen_artifact: packing/cases/n20_fractional_certificate/certificate-193-40.json
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-061-h-062-m5-covering-wall.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-197-r3.json
+    notes: >-
+      BC-197 of agenda 021 (exp-061). Rationalised to 9931121/500000 over 1076 atoms
+      (rounding loss 1.5e-4) and retained as the lower rung beside T-021's; the gate
+      accepted it on both routes at 1000003/1000000.
+  - n: 20
+    side: '39/8'
+    side_decimal: '4.875'
+    objective: '20.016349'
+    site_set: grid
+    sites: 6216
+    rows: 4259
+    rounds: 12
+    converged: false
+    stop_reason: >-
+      Stopped by the ladder on the crossing at LP round 12, least covered mass 0.863635
+      with placements still violated.
+    least_covered_mass: '0.863635'
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-061-h-062-m5-covering-wall.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-197-ladder-register.txt
+    notes: >-
+      BC-197 of agenda 021 (exp-061). The seeded construction walled here too, so this
+      is the bracket's upper end: the m = 5 covering wall lies in [97/20, 39/8].
   - n: 20
     side: '24/5'
     side_decimal: '4.80'
