@@ -272,7 +272,7 @@ class QuotedFigure:
     """Character span of the whole match, so the side-token scan can exclude it."""
 
 
-# Six deliberately narrow, keyword-anchored patterns rather than one generic
+# Seven deliberately narrow, keyword-anchored patterns rather than one generic
 # number-near-a-fraction rule: a bare decimal near a rung reference is often something
 # else entirely (T-019's own next_rung sits a "the movement is +0.0742" a few words from
 # "451/100" with no relation between them), so the keyword requirement is what keeps this
@@ -289,6 +289,15 @@ _RUNG_HAS_TOTAL_AND_MARGIN = re.compile(
     r"\b(\d+)/(\d+)\s+rung\b.{0,60}?\bhas\s+total\s+(\d+\.\d+)\s+and\s+margin\s+(\d+\.\d+)",
     re.DOTALL,
 )
+#: "this certificate's 16.933080 reaching 17, 18 and 19" -- a total mass stated
+#: possessively, with no "total" and no "is" anywhere near it. The six patterns above all
+#: key on a noun or a verb this form omits, so a figure written this way was invisible to
+#: every one of them and a stale one passed (PR 80's F27). The possessive itself is the
+#: keyword here: only a certificate has a mass, so `certificate's DECIMAL reaching` is as
+#: anchored as `total is DECIMAL` and no more likely to cry wolf.
+_CERTIFICATE_REACH_MASS = re.compile(
+    r"\b(?:this|the|retained)\s+certificate(?:'s|\u2019s)\s+(\d+\.\d+)\s+reaching\b"
+)
 
 
 def _rung_pair(sentence: str) -> list[QuotedFigure]:
@@ -302,7 +311,7 @@ def _rung_pair(sentence: str) -> list[QuotedFigure]:
 
 
 def quoted_figures(sentence: str) -> list[QuotedFigure]:
-    """Every figure one of the six anchored patterns recognises in `sentence`."""
+    """Every figure one of the seven anchored patterns recognises in `sentence`."""
     return (
         [
             QuotedFigure("total", match.group(1), None, match.span())
@@ -337,6 +346,10 @@ def quoted_figures(sentence: str) -> list[QuotedFigure]:
                 match.span(),
             )
             for match in _MARGIN_BELOW_AT_SIDE_IS.finditer(sentence)
+        ]
+        + [
+            QuotedFigure("total", match.group(1), None, match.span())
+            for match in _CERTIFICATE_REACH_MASS.finditer(sentence)
         ]
         + _rung_pair(sentence)
     )
