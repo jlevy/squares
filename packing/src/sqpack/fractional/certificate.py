@@ -5,26 +5,27 @@ square side ``B``, rational-weight atoms in the container, and a rational
 direction net reaching pi/4. It proves ``s(n) >= L`` when five conditions
 hold together, so the conditions are named here rather than left to a caller:
 
-``C1``  the total atom mass is strictly below ``n``.
-``C2``  the direction net reaches pi/4, which the container's D4 symmetry needs
-        in order to reduce every angle to the net's arc.
-``C3``  ``B (1 + D) < 1`` for ``D`` the largest half-gap tangent of the net.
-        A unit square at any angle then contains a ``B``-square at some net
+``Condition 2``  the total atom mass is strictly below ``n``.
+``Condition 3``  the direction net reaches pi/4, which the container's D4
+        symmetry needs in order to reduce every angle to the net's arc.
+``Condition 4``  ``B (1 + D) < 1`` for ``D`` the largest half-gap tangent of the
+        net. A unit square at any angle then contains a ``B``-square at some net
         angle, because ``cos d + sin d <= 1 + tan d``.
-``C4``  every event cell the ``B``-square sweep can reach, at every net
+``Condition 5``  every event cell the ``B``-square sweep can reach, at every net
         direction, carries mass at least 1.
 
-``C0``  the atom multiset is invariant under the container's D4 group, which is
-        what lets a square at an angle past pi/4 be reflected onto the net's arc
-        without changing the mass it covers.
+``Condition 1``  the atom multiset is invariant under the container's D4 group,
+        which is what lets a square at an angle past pi/4 be reflected onto the
+        net's arc without changing the mass it covers.
 
 Given all five: each of ``n`` interior-disjoint unit squares contains, about
 its own centre, a closed ``B``-square at some net angle. That ``B``-square lies
-*strictly* inside the unit square's interior because ``C3`` is strict --
+*strictly* inside the unit square's interior because ``Condition 4`` is strict --
 ``B (1 + D) < 1`` leaves room -- so the ``n`` shrunken squares are pairwise
 disjoint as closed sets and no atom is counted twice. Each covers mass at least
-1 by ``C4``, for a total of at least ``n``, which ``C1`` forbids. So ``n`` unit
-squares do not fit in a container of side ``L``, and ``s(n) > L``. The bound is
+1 by ``Condition 5``, for a total of at least ``n``, which ``Condition 2``
+forbids. So ``n`` unit squares do not fit in a container of side ``L``, and
+``s(n) > L``. The bound is
 ``L`` itself; ``B`` rescales nothing (see ``Certificate.bounded_side``).
 
 The arithmetic is exact throughout. Every quantity is a ``Fraction``; nothing
@@ -43,7 +44,12 @@ from fractions import Fraction
 from functools import partial
 from itertools import pairwise
 
-from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
+from sqpack.fractional.model import (
+    Atom,
+    Direction,
+    require_nonnegative_atom_weights,
+    rotation_from_half_tangent,
+)
 from sqpack.fractional.sweep import minimum_covered_mass
 
 
@@ -98,6 +104,11 @@ class Certificate:
             raise ValueError("half-angle tangents must be strictly increasing")
         if self.half_tangents[0] != 0:
             raise ValueError("the direction net must start at angle zero")
+        # Nonnegative weights are a precondition of the theorem, not one of its
+        # five conditions: Condition 2 bounds the total, and the counting step
+        # that turns the total into a bound on the disjoint inner squares is
+        # monotonicity of the measure, which signed weights break.
+        require_nonnegative_atom_weights(self.atoms)
 
     @property
     def total_mass(self) -> Fraction:
@@ -110,7 +121,7 @@ class Certificate:
         ``B`` does not divide out here, and getting that wrong inflates the
         result. The shrunken square is not a rescaling of the container; it
         sits *inside* a unit square that is itself inside the side-``L``
-        container, and it exists only so that ``C3`` can absorb the net's
+        container, and it exists only so that ``Condition 4`` can absorb the net's
         angular gap. So the contradiction is about ``n`` unit squares in side
         ``L``, and what the certificate proves is ``s(n) > L``. Reported as
         ``>= L``, which is what a bound register carries.
@@ -148,11 +159,12 @@ class Certificate:
 def least_size_certified(total_mass: Fraction) -> int:
     """The smallest ``n`` a set of atoms of this mass can certify: ``floor(mass) + 1``.
 
-    ``n`` appears in exactly one of the five conditions. ``C0``, ``C2``, ``C3``
-    and ``C4`` say nothing about it, and the covering linear program behind the
+    ``n`` appears in exactly one of the five conditions. ``Condition 1``,
+    ``Condition 3``, ``Condition 4`` and ``Condition 5`` say nothing about it,
+    and the covering linear program behind the
     search does not contain it either: minimising total mass subject to every
     admissible ``B``-square carrying mass at least 1 is a question about ``L``,
-    ``B`` and the net alone. ``C1`` is where ``n`` enters, and it only asks that
+    ``B`` and the net alone. ``Condition 2`` is where ``n`` enters, and it only asks that
     the mass fall below it.
 
     So one atom set proves ``s(n) >= L`` for *every* integer ``n`` above its
@@ -162,8 +174,9 @@ def least_size_certified(total_mass: Fraction) -> int:
     raises ``n = 18`` and leaves ``n = 17`` where it was.
 
     The claim stays consistent with ``ceiling_side`` automatically. If
-    ``L > ceil(sqrt(n)) B`` then ``C4`` forces the mass to ``ceil(sqrt(n))^2 >= n``,
-    which is exactly what this function then refuses to certify.
+    ``L > ceil(sqrt(n)) B`` then ``Condition 5`` forces the mass to
+    ``ceil(sqrt(n))^2 >= n``, which is exactly what this function then refuses
+    to certify.
     """
 
     return math.floor(total_mass) + 1
@@ -191,20 +204,21 @@ def ceiling_side(n: int, square_side: Fraction) -> Fraction:
     starting at ``(g, g)``. The far edge sits at ``m B + m g < L``, so every
     square lies inside the container; consecutive squares are separated by ``g``,
     so they are pairwise disjoint as closed sets and no atom lies in two of them.
-    Direction ``0`` is always a net direction because ``t_0 = 0``, so ``C4``
+    Direction ``0`` is always a net direction because ``t_0 = 0``, so ``Condition 5``
     applies to each and gives it mass at least ``1``; with non-negative weights
-    the total mass is then at least ``m * m >= n``, and ``C1`` forbids that.
+    the total mass is then at least ``m * m >= n``, and ``Condition 2`` forbids that.
 
-    So a certificate for ``n`` forces ``L <= m B``, and ``C3`` forces
+    So a certificate for ``n`` forces ``L <= m B``, and ``Condition 4`` forces
     ``B < 1 / (1 + D)`` -- see ``ceiling_side_for_net``, which takes the
     supremum over the shrinks a net admits.
 
     The consequence worth carrying: ``s(n) <= ceil(sqrt(n))`` holds trivially by
-    grid packing, and this ceiling sits strictly below ``ceil(sqrt(n))``. The
-    method can therefore approach the grid bound but never reach it, and can
-    never close a case whose value *is* the grid bound. ``n = 12`` is exactly
-    such a case: ``s(12) <= 4`` and 4 is the conjectured value, so no certificate
-    of this shape will ever settle it, however fine the net or the site set.
+    grid packing, and every single certificate on a finite net sits strictly
+    below ``ceil(sqrt(n))``. So no one certificate of this shape certifies the
+    grid value; at ``n = 12`` none reaches the conjectured 4. What this lemma
+    does not exclude is a proved family of certificates whose sides tend to the
+    grid value, followed by a limit argument -- whether such a family exists is
+    a question about the covering value, not about this ceiling.
     """
 
     return grid_refutation_order(n) * square_side
@@ -213,7 +227,7 @@ def ceiling_side(n: int, square_side: Fraction) -> Fraction:
 def ceiling_side_for_net(n: int, half_tangents: tuple[Fraction, ...]) -> Fraction:
     """``ceil(sqrt(n)) / (1 + D)``: the ceiling over every shrink this net admits.
 
-    ``C3`` is strict, so this value is a supremum and not attained; a real
+    ``Condition 4`` is strict, so this value is a supremum and not attained; a real
     certificate sits below it by whatever margin its own ``B`` leaves. Refining
     the net is what raises it, and only slowly -- ``D`` is about ``T / K`` at the
     axis-parallel end, so halving the gap costs twice the directions and twice
@@ -227,7 +241,7 @@ def ceiling_side_for_net(n: int, half_tangents: tuple[Fraction, ...]) -> Fractio
 def _condition_mass_below_n(certificate: Certificate) -> ConditionReport:
     total = certificate.total_mass
     return ConditionReport(
-        "C1 total mass below n",
+        "Condition 2 total mass below n",
         f"total {total} against n = {certificate.n}",
         holds=total < certificate.n,
     )
@@ -242,7 +256,7 @@ def _condition_arc_reaches_eighth_turn(certificate: Certificate) -> ConditionRep
     last = certificate.half_tangents[-1]
     slack = last * last + 2 * last - 1
     return ConditionReport(
-        "C2 net reaches pi/4",
+        "Condition 3 net reaches pi/4",
         f"final half-tangent {last}, t^2 + 2t - 1 = {slack}",
         holds=slack >= 0,
     )
@@ -266,9 +280,9 @@ def d4_images(
 
 
 def _condition_symmetric_atoms(certificate: Certificate) -> ConditionReport:
-    """The atom set must carry the symmetry ``C2`` claims to exploit.
+    """The atom set must carry the symmetry ``Condition 3`` claims to exploit.
 
-    ``C2`` only checks that the net *reaches* pi/4; what makes stopping there
+    ``Condition 3`` only checks that the net *reaches* pi/4; what makes stopping there
     sound is that a square at any angle in (pi/4, pi/2) reflects to one in
     [0, pi/4] across a symmetry of both the container and the atom set. Declare
     that symmetry without holding it and every angle past pi/4 goes unchecked,
@@ -276,7 +290,7 @@ def _condition_symmetric_atoms(certificate: Certificate) -> ConditionReport:
     """
     if certificate.symmetry != "D4":
         return ConditionReport(
-            "C0 atoms carry the declared symmetry",
+            "Condition 1 atoms carry the declared symmetry",
             f"only D4 is supported, not {certificate.symmetry!r}",
             holds=False,
         )
@@ -285,7 +299,7 @@ def _condition_symmetric_atoms(certificate: Certificate) -> ConditionReport:
         key = (atom.x, atom.y)
         if key in weights:
             return ConditionReport(
-                "C0 atoms carry the declared symmetry",
+                "Condition 1 atoms carry the declared symmetry",
                 f"two atoms share the site {key}",
                 holds=False,
             )
@@ -294,12 +308,12 @@ def _condition_symmetric_atoms(certificate: Certificate) -> ConditionReport:
         for image in d4_images(atom.x, atom.y, certificate.outer_side):
             if weights.get(image) != atom.weight:
                 return ConditionReport(
-                    "C0 atoms carry the declared symmetry",
+                    "Condition 1 atoms carry the declared symmetry",
                     f"site ({atom.x}, {atom.y}) has no matching image at {image}",
                     holds=False,
                 )
     return ConditionReport(
-        "C0 atoms carry the declared symmetry",
+        "Condition 1 atoms carry the declared symmetry",
         f"{len(certificate.atoms)} atoms closed under D4 about the centre",
         holds=True,
     )
@@ -309,7 +323,7 @@ def _condition_containment(certificate: Certificate) -> ConditionReport:
     gap = certificate.largest_half_gap_tangent
     product = certificate.square_side * (1 + gap)
     return ConditionReport(
-        "C3 containment B(1 + D) < 1",
+        "Condition 4 containment B(1 + D) < 1",
         f"B = {certificate.square_side}, D = {gap}, B(1 + D) = {float(product):.9f}",
         holds=product < 1,
     )
@@ -366,7 +380,10 @@ def sweep_all_directions(
 
 
 def verify(certificate: Certificate, *, workers: int | None = None) -> Verdict:
-    """Decide all four conditions. Exact, and never short-circuits C1 to C3."""
+    """Decide all four conditions.
+
+    Exact, and never short-circuits Condition 2 to Condition 4.
+    """
 
     conditions = [
         _condition_symmetric_atoms(certificate),
@@ -381,7 +398,7 @@ def verify(certificate: Certificate, *, workers: int | None = None) -> Verdict:
             worst, worst_label = minimum, label
     conditions.append(
         ConditionReport(
-            "C4 every reachable cell carries mass 1",
+            "Condition 5 every reachable cell carries mass 1",
             f"least cell mass {worst} at direction {worst_label}",
             holds=worst is not None and worst >= 1,
         )

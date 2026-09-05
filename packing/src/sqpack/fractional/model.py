@@ -15,12 +15,36 @@ from fractions import Fraction
 
 @dataclass(frozen=True, slots=True)
 class Atom:
-    """A weighted site in the container. Coordinates and weight are exact."""
+    """A weighted site in the container. Coordinates and weight are exact.
+
+    The value type admits any rational weight so that a caller can build a
+    forgery and watch it refused; the theorem does not. Every proof entry
+    point runs ``require_nonnegative_atom_weights`` before it decides anything.
+    """
 
     label: str
     x: Fraction
     y: Fraction
     weight: Fraction
+
+
+def require_nonnegative_atom_weights(atoms: tuple[Atom, ...]) -> None:
+    """Refuse a signed weight: the counting argument needs every weight >= 0.
+
+    The proof bounds the mass of pairwise disjoint inner squares by the total
+    mass of the atoms. That step is monotonicity of the measure, and it fails
+    the moment a weight is negative: five atoms -- +2 at the centre of a side
+    11/10 container and -1 at each corner -- carry total mass -2 < 1, cover
+    every admissible 3/5-square with mass at least 1, and would "prove"
+    s(1) >= 11/10. Found by the adversarial review of PR 78 (its F1).
+    """
+
+    for atom in atoms:
+        if atom.weight < 0:
+            raise ValueError(
+                f"atom {atom.label} has weight {atom.weight} < 0; the certificate theorem "
+                "needs every weight nonnegative"
+            )
 
 
 @dataclass(frozen=True, slots=True)

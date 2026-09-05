@@ -68,7 +68,7 @@ def test_the_retained_certificate_bounds_the_side_its_source_reports() -> None:
 
 
 def test_a_coarse_net_still_accepts_the_retained_atoms() -> None:
-    """C4 on a sub-net of the published one: the atoms cover it too."""
+    """Condition 5 on a sub-net of the published one: the atoms cover it too."""
     verdict = verify(retained_certificate(steps=6))
     assert verdict.minimum_cell_mass is not None
     assert verdict.minimum_cell_mass >= 1
@@ -82,7 +82,7 @@ def test_the_full_retained_certificate_is_accepted() -> None:
 
 
 def test_mass_reaching_n_is_refused() -> None:
-    """C1 is strict: a total that only reaches n proves nothing."""
+    """Condition 2 is strict: a total that only reaches n proves nothing."""
     base = retained_certificate(steps=6)
     inflated = Fraction(17, len(base.atoms))
     heavy = Certificate(
@@ -93,11 +93,11 @@ def test_mass_reaching_n_is_refused() -> None:
         half_tangents=base.half_tangents,
     )
     assert heavy.total_mass == 17
-    assert "C1 total mass below n" in verify(heavy).failures
+    assert "Condition 2 total mass below n" in verify(heavy).failures
 
 
 def test_a_net_short_of_an_eighth_turn_is_refused() -> None:
-    """C2: the D4 reduction needs the arc to reach pi/4, and 0.41 does not."""
+    """Condition 3: the D4 reduction needs the arc to reach pi/4, and 0.41 does not."""
     base = retained_certificate(steps=6)
     short = Certificate(
         n=17,
@@ -106,17 +106,17 @@ def test_a_net_short_of_an_eighth_turn_is_refused() -> None:
         atoms=base.atoms,
         half_tangents=tuple(Fraction(41, 100) * k / 6 for k in range(7)),
     )
-    assert "C2 net reaches pi/4" in verify(short).failures
+    assert "Condition 3 net reaches pi/4" in verify(short).failures
 
 
 def test_a_net_too_coarse_for_containment_is_refused() -> None:
-    """C3: with few directions the angular gap outgrows the shrink."""
+    """Condition 4: with few directions the angular gap outgrows the shrink."""
     base = retained_certificate(steps=2)
-    assert "C3 containment B(1 + D) < 1" in verify(base).failures
+    assert "Condition 4 containment B(1 + D) < 1" in verify(base).failures
 
 
 def test_a_lightened_atom_breaks_the_covering_condition() -> None:
-    """C4 is tight on the retained certificate, so any loss is visible."""
+    """Condition 5 is tight on the retained certificate, so any loss is visible."""
     base = retained_certificate(steps=6)
     lightened = (
         Atom(base.atoms[0].label, base.atoms[0].x, base.atoms[0].y, Fraction(0)),
@@ -132,7 +132,7 @@ def test_a_lightened_atom_breaks_the_covering_condition() -> None:
     verdict = verify(thin)
     assert verdict.minimum_cell_mass is not None
     assert verdict.minimum_cell_mass < 1
-    assert "C4 every reachable cell carries mass 1" in verdict.failures
+    assert "Condition 5 every reachable cell carries mass 1" in verdict.failures
 
 
 def test_the_half_angle_parametrisation_is_exactly_unit_length() -> None:
@@ -202,7 +202,7 @@ def test_the_n12_certificate_improves_the_inherited_bound() -> None:
 
 
 def test_breaking_the_symmetry_of_the_n12_atoms_is_refused() -> None:
-    """C0 is not decoration: drop one orbit member and the reduction is void."""
+    """Condition 1 is not decoration: drop one orbit member and the reduction is void."""
     certificate = load()
     maimed = Certificate(
         n=certificate.n,
@@ -211,7 +211,7 @@ def test_breaking_the_symmetry_of_the_n12_atoms_is_refused() -> None:
         atoms=certificate.atoms[1:],
         half_tangents=certificate.half_tangents[:4],
     )
-    assert "C0 atoms carry the declared symmetry" in verify(maimed).failures
+    assert "Condition 1 atoms carry the declared symmetry" in verify(maimed).failures
 
 
 def test_the_independent_verifier_agrees_on_the_first_rung() -> None:
@@ -231,7 +231,7 @@ def test_the_independent_verifier_agrees_on_the_first_rung() -> None:
 
 
 def test_containment_at_exactly_one_is_refused() -> None:
-    """C3 must be strict: equality leaves the shrunken squares able to touch,
+    """Condition 4 must be strict: equality leaves the shrunken squares able to touch,
     and touching closed squares can share an atom, which breaks the count."""
     base = retained_certificate(steps=180)
     gap = base.largest_half_gap_tangent
@@ -243,7 +243,7 @@ def test_containment_at_exactly_one_is_refused() -> None:
         half_tangents=base.half_tangents,
     )
     assert touching.square_side * (1 + gap) == 1
-    assert "C3 containment B(1 + D) < 1" in verify(touching).failures
+    assert "Condition 4 containment B(1 + D) < 1" in verify(touching).failures
 
 
 def test_rationalise_rounds_weights_up_never_down() -> None:
@@ -269,7 +269,7 @@ def test_rationalise_rounds_weights_up_never_down() -> None:
 def test_the_sweep_scores_every_cell_it_scored_before() -> None:
     """A guard against the verifier being "repaired" by narrowing its cell set.
 
-    C4 is only as strong as the set of placements it quantifies over, and a
+    Condition 5 is only as strong as the set of placements it quantifies over, and a
     change that drops cells makes every certificate easier to accept while
     every retained certificate still passes -- so the retained ones cannot
     catch it. These counts are the exact cell sets the accepted n = 12
@@ -312,7 +312,7 @@ def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> No
     )
     verdict = verify(too_large)
     assert not verdict.accepted
-    assert "C4 every reachable cell carries mass 1" in verdict.failures
+    assert "Condition 5 every reachable cell carries mass 1" in verdict.failures
     assert verdict.minimum_cell_mass is not None
     assert verdict.minimum_cell_mass < 1
 
@@ -372,7 +372,7 @@ def test_the_n11_calibration_rung_below_stromquist_also_verifies() -> None:
     certificate = n11_load(N11_FIRST_RUNG)
     assert certificate.bounded_side == Fraction(189, 50)
     assert (certificate.bounded_side - 2) ** 2 * 5 < 16
-    # C4's value, not the whole verdict: a net this coarse fails C3 by
+    # Condition 5's value, not the whole verdict: a net this coarse fails Condition 4 by
     # construction, since D grows with the gap and B(1 + D) then exceeds 1.
     # What the coarse decision shows is coverage, which is the claim here.
     coarse = Certificate(
@@ -521,18 +521,18 @@ def test_the_n20_certificate_is_accepted() -> None:
 
 
 def test_the_n20_certificate_carries_19_20_and_21_and_stops_there() -> None:
-    """Three sizes out of C1, and the exact point where the reach runs out.
+    """Three sizes out of Condition 2, and the exact point where the reach runs out.
 
     The register already holds 5 from n = 22 on, so the certificate is true
     there and weaker. Below, n = 18 is out of reach in the other direction:
-    these atoms are heavier than eighteen, so C1 refuses them at that size --
+    these atoms are heavier than eighteen, so Condition 2 refuses them at that size --
     which is why T-019 still holds n = 17 and n = 18 alone.
     """
     certificate = n20_load()
     assert least_size_certified(certificate.total_mass) == 19
     for size in (19, 20, 21):
         assert certificate.total_mass < size
-    assert certificate.total_mass > 18, "C1 refuses these atoms at n = 18"
+    assert certificate.total_mass > 18, "Condition 2 refuses these atoms at n = 18"
     assert certificate.bounded_side < 5, "n >= 22 already holds the trivial 5"
 
 
@@ -558,7 +558,7 @@ def test_the_grid_refutation_order_is_the_integer_ceiling_of_the_root() -> None:
 
 
 def test_every_retained_certificate_sits_below_its_own_ceiling() -> None:
-    """``L <= ceil(sqrt(n)) B`` is forced by C1 and C4 together.
+    """``L <= ceil(sqrt(n)) B`` is forced by Condition 2 and Condition 5 together.
 
     A retained certificate above its ceiling would mean one of the two is wrong,
     so this is a check on the record and not only on the arithmetic.
@@ -590,7 +590,7 @@ def test_the_refuting_grid_fits_and_one_of_its_squares_starves() -> None:
     ``B``-squares the ceiling argument builds. They must all lie inside the
     container and be pairwise disjoint; and since the certificate carries mass
     11.97, well under sixteen, at least one of them must cover less than 1 --
-    which is C4 failing, exactly as the argument says it must.
+    which is Condition 5 failing, exactly as the argument says it must.
     """
     certificate = load()
     b = certificate.square_side
@@ -619,11 +619,13 @@ def test_the_refuting_grid_fits_and_one_of_its_squares_starves() -> None:
     ]
     assert sum(covered) <= certificate.total_mass
     assert certificate.total_mass < order * order
-    assert min(covered) < 1, "C4 would have to hold on all sixteen for the mass to reach n"
+    assert min(covered) < 1, (
+        "Condition 5 would have to hold on all sixteen for the mass to reach n"
+    )
 
 
 def test_one_atom_set_certifies_every_size_above_its_mass() -> None:
-    """``n`` lives only in C1, so a certificate is not tied to the ``n`` it declares.
+    """``n`` lives only in Condition 2, so a certificate is not tied to the ``n`` it declares.
 
     The n = 17 record reaches n = 18 and n = 19 through the monotonicity step
     T-016 records, but it does not need it: its own mass is under both, so the
@@ -635,12 +637,60 @@ def test_one_atom_set_certifies_every_size_above_its_mass() -> None:
     assert least_size_certified(certificate.total_mass) == 17
     for size in (17, 18, 19):
         assert certificate.total_mass < size
-    # C1 is strict, so mass exactly n certifies n + 1 and not n.
+    # Condition 2 is strict, so mass exactly n certifies n + 1 and not n.
     assert least_size_certified(Fraction(17)) == 18
     assert least_size_certified(Fraction(203, 12)) == 17
 
     # And the two limits agree without being made to. A side above the ceiling
-    # forces the mass past n by C4, which is exactly the size this then refuses.
+    # forces the mass past n by Condition 5, which is exactly the size this then refuses.
     for n in (11, 12, 17, 20):
         assert grid_refutation_order(n) ** 2 >= n
         assert least_size_certified(Fraction(grid_refutation_order(n) ** 2)) > n
+
+
+def test_a_signed_weight_is_refused_before_anything_is_decided() -> None:
+    """Nonnegative weights are the theorem's precondition, and a forgery shows why.
+
+    Five atoms in a container of side 11/10 with B = 3/5: +2 at the centre and
+    -1 at each corner. Total mass -2 < 1, every admissible B-square covers the
+    centre and at most one corner, so every placement carries mass at least 1.
+    Every one of the five conditions holds, and the object would "prove"
+    s(1) >= 11/10, which is false: s(1) = 1. The counting step that turns a
+    covering into a bound is monotonicity of the measure, and signed weights
+    break it. PR 78's adversarial review found this (its F1); the fixture is
+    retained so that the verifier can never accept it again.
+    """
+    side = Fraction(11, 10)
+    atoms = (
+        Atom("centre", Fraction(11, 20), Fraction(11, 20), Fraction(2)),
+        Atom("c00", Fraction(0), Fraction(0), Fraction(-1)),
+        Atom("c01", Fraction(0), side, Fraction(-1)),
+        Atom("c10", side, Fraction(0), Fraction(-1)),
+        Atom("c11", side, side, Fraction(-1)),
+    )
+    with pytest.raises(ValueError, match="weight -1 < 0"):
+        Certificate(
+            n=1,
+            outer_side=side,
+            square_side=Fraction(3, 5),
+            atoms=atoms,
+            half_tangents=(Fraction(0), Fraction(1, 2)),
+            symmetry="D4",
+        )
+    # The same atoms with the corners lightened to zero are a legal object and
+    # are refused on the theorem's own terms: the total is 2 >= n = 1.
+    legal = tuple(
+        atom if atom.weight > 0 else Atom(atom.label, atom.x, atom.y, Fraction(0))
+        for atom in atoms
+    )
+    certificate = Certificate(
+        n=1,
+        outer_side=side,
+        square_side=Fraction(3, 5),
+        atoms=legal,
+        half_tangents=(Fraction(0), Fraction(1, 2)),
+        symmetry="D4",
+    )
+    verdict = verify(certificate)
+    assert not verdict.accepted
+    assert any("Condition 2" in failure for failure in verdict.failures)

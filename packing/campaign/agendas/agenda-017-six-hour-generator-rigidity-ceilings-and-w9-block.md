@@ -9,7 +9,7 @@ agenda:
   id: agenda-017
   title: Six-Hour Block — the Certificate Generator, Rigidity Readiness, Ten Exact Ceilings, and the W9 Handoff
   updated: '2026-09-04'
-  status: active
+  status: completed
   objective: >-
     Run one six-hour autonomous block from Agenda 016's merged closeout and the
     operator's direction to map the next research strategically, with the operator
@@ -37,7 +37,7 @@ agenda:
     purpose: tool_validation
     owner_focus: process
     instances: [5, 11, 12, 17, 29, 37, 39, 40, 41, 51, 55, 70, 71, 83, 87, 88]
-    state: ready
+    state: stopped
     priority: 0
     question: >-
       Can the merged Agenda 016 handoff, the frozen lane inputs, the live tbd graph,
@@ -79,6 +79,32 @@ agenda:
       target command run. Lanes may read their frozen inputs from 00:05 and may run
       nothing and write nothing before the packet is admitted.
     bead: think-uqgp
+    outcomes:
+      - scope: >-
+          the continuity trigger and the fresh output paths
+        classification: achieved
+        result: >-
+          The hourly check-in trigger was armed before target work and drove every lane of the
+          block to its closing milestone; outputs went to fresh scratchpad paths and every
+          retained artifact was frozen to its own path before it was decided.
+        evidence:
+          - packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md
+          - docs/project/handoff-2026-09-04-block-close.md
+        disposition: retire-success
+        follow_up: null
+      - scope: >-
+          the launch packet -- the 360-minute wall, session-085 opened before target work, think-ldq2 unpaused
+        classification: time-limited
+        result: >-
+          No launch packet was produced and no wall was honoured: the block declared six hours
+          and ran about twenty-two. session-085 was opened at the closing milestone, after the
+          fact, and says so; think-ldq2 was never unpaused. The next block opens its session
+          record before its first target command, which is what this bead now asks for.
+        evidence:
+          - packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md
+          - packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md
+        disposition: continue
+        follow_up: think-uqgp
     depends_on: []
     parallel_group: agenda017-coordinator
     workflows: [process-review]
@@ -90,7 +116,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 12, 17]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Can a first-party generator produce weighted fractional unavoidable-set
@@ -152,6 +178,30 @@ agenda:
       technical failure or time limit -- with the retained state and an explicit
       statement that no target was evaluated.
     bead: think-yw5g
+    artifacts:
+    - packing/src/sqpack/fractional/colgen.py
+    - packing/src/sqpack/fractional/generate.py
+    - packing/devtools/decide_certificate.py
+    - packing/tests/test_decide_certificate.py
+    outcomes:
+      - scope: >-
+          a frozen first-party generator with passing positive, limitation and negative controls
+        classification: achieved
+        result: >-
+          sqpack.fractional gained the covering LP by row generation, dual-driven column
+          generation and the retention gate devtools.decide_certificate. The generator
+          reproduces Massaccesi's published n = 17 optimum 203/12 from zero weights, the
+          verifier refuses every retained forgery fixture, and at a side where twelve unit
+          squares fit the pipeline converges to exactly 16 and certifies nothing. The
+          separation-oracle gap D-434 was found by this block's own controls and closed before
+          any rung above 77/20 was attempted.
+        evidence:
+          - packing/src/sqpack/fractional/colgen.py
+          - packing/devtools/decide_certificate.py
+          - packing/tests/test_decide_certificate.py
+          - packing/defects.yaml
+        disposition: retire-success
+        follow_up: null
     depends_on: [BC-159]
     parallel_group: agenda017-lane-a
     workflows: [pipeline-improvement, factual-review]
@@ -163,7 +213,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [12]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Does the frozen generator produce an exact certificate that s(12) is at least
@@ -198,6 +248,25 @@ agenda:
       with the retained LP state and an explicit canonical-result absence. Nothing in
       the frontier or the result register changes here.
     bead: think-2sh3
+    artifacts:
+    - packing/frontier/results.yaml
+    - packing/cases/n12_fractional_certificate/certificate.json
+    - packing/src/sqpack/fractional/certificate.py
+    outcomes:
+      - scope: >-
+          s(12) >= 19/5 by an exact certificate the frozen verifier accepts
+        classification: achieved
+        result: >-
+          Certified at 19/5 and then climbed to 99/25 across eight retained rungs; registered
+          as T-017 at V4/C4/S4, the first bound specific to n = 12 in the retained corpus,
+          separating s(12) from s(11) strictly. The ceiling proved in this block,
+          L <= ceil(sqrt(n)) B, forecloses the case at 3.9908 against its conjectured 4.
+        evidence:
+          - packing/frontier/results.yaml
+          - packing/cases/n12_fractional_certificate/certificate.json
+          - packing/src/sqpack/fractional/certificate.py
+        disposition: retire-success
+        follow_up: null
     depends_on: [BC-160]
     parallel_group: agenda017-lane-a
     workflows: [research-loop]
@@ -209,7 +278,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [12]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Does an independent Max reviewer reproduce the H-061 certificate and its entire
@@ -248,6 +317,27 @@ agenda:
       with every consumer current, or no frontier change plus the exact caveat,
       discrepancy or cannot-reproduce reason and a named follow-up.
     bead: think-iz5r
+    artifacts:
+    - packing/cases/n12_fractional_certificate/independent_verify.py
+    - packing/src/sqpack/fractional/interval.py
+    - packing/frontier/evidence.yaml
+    outcomes:
+      - scope: >-
+          an independent determination of the n = 12 certificate and a registered result
+        classification: achieved
+        result: >-
+          A second verifier written from the theorem statement with the implementation withheld
+          reproduces Massaccesi's published bound as its control and agrees with the retained
+          certificate; the interval branch and bound decides the same bytes by a method that
+          shares no modelling assumption and encloses the same least covered mass with width
+          zero. T-017 stands at C4 on the strength of both. No reviewer outside the project has
+          looked at it, so C5 is not reached.
+        evidence:
+          - packing/cases/n12_fractional_certificate/independent_verify.py
+          - packing/src/sqpack/fractional/interval.py
+          - packing/frontier/evidence.yaml
+        disposition: retire-success
+        follow_up: null
     depends_on: [BC-161]
     parallel_group: agenda017-review-a
     workflows: [factual-review]
@@ -258,7 +348,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [5, 10, 11, 40]
-    state: blocked
+    state: stopped
     priority: 1
     question: >-
       What general fixed-side local-rigidity theorem does the X-012 method prove, what
@@ -303,6 +393,19 @@ agenda:
       slides and the n = 3 side-2 family are Agenda 018's C9 and C10; or a typed stop
       naming the smallest unresolved question.
     bead: think-87gh
+    outcomes:
+      - scope: >-
+          the general fixed-side local-rigidity theorem and the n = 40 uniform-stress determination
+        classification: never-opened
+        result: >-
+          Lane B never ran: no writer was assigned once the certificate lane began returning
+          rungs, and the block spent itself there. The X-013 identifier this item reserved was
+          taken the same day by the strategy exploration on the certificate's reach, so the
+          rigidity write-up takes the next free number when it is opened.
+        evidence:
+          - packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md
+        disposition: defer-dependency
+        follow_up: think-87gh
     depends_on: [BC-159]
     parallel_group: agenda017-lane-b
     workflows: [insight-iteration, pipeline-improvement]
@@ -316,7 +419,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: blocked
+    state: stopped
     priority: 1
     question: >-
       Does Stromquist 2003's Theorem 3 -- every n = 11 packing whose orientations all
@@ -353,6 +456,17 @@ agenda:
       certificate; or the first typed stop. Registration of any outcome waits for an
       independent review, in BC-169's window if it fits and otherwise in Agenda 018.
     bead: think-plvi
+    outcomes:
+      - scope: >-
+          Stromquist 2003's Theorem 3 certified as printed, or its escape
+        classification: never-opened
+        result: >-
+          Never started, for the same reason as BC-163. The retained repair of Theorem 2's
+          Figure 14 (T-010) is untouched and the question about Theorem 3 stands as written.
+        evidence:
+          - packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md
+        disposition: defer-dependency
+        follow_up: think-plvi
     depends_on: [BC-163]
     parallel_group: agenda017-lane-b
     workflows: [factual-review, research-loop]
@@ -367,7 +481,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [29, 37, 39, 41, 51, 55, 70, 71, 83, 87, 88]
-    state: blocked
+    state: stopped
     priority: 1
     question: >-
       Does the shipped rational promotion certify every one of the ten open cases whose
@@ -417,6 +531,19 @@ agenda:
       passed with each refusal typed; the n = 29 rational certificate registered and
       D-431 repaired; and nothing claimed about any reported decimal.
     bead: think-stb5
+    outcomes:
+      - scope: >-
+          ten verified-upper-bound promotions and T-009's rung change
+        classification: never-opened
+        result: >-
+          Never started. D-431 -- T-009's significance rationale comparing against a rational
+          certificate on a different n = 29 packing -- is the one defect this branch leaves
+          open, and the verified upper bounds of the ten cases sit where they sat.
+        evidence:
+          - packing/defects.yaml
+          - packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md
+        disposition: defer-dependency
+        follow_up: think-stb5
     depends_on: [BC-159]
     parallel_group: agenda017-lane-c
     workflows: [research-loop, factual-review]
@@ -428,7 +555,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [29, 37, 39, 41, 51, 55, 70, 71, 83, 87, 88]
-    state: blocked
+    state: stopped
     priority: 1
     question: >-
       Does an independent reviewer reproduce every rational certificate, confirm that
@@ -453,6 +580,16 @@ agenda:
       cannot-reproduce -- and either a registered family result with every consumer
       current or no frontier change and a named follow-up.
     bead: think-vyff
+    outcomes:
+      - scope: >-
+          independent review of the rational-promotion family
+        classification: never-opened
+        result: >-
+          Nothing to review: BC-165 never ran.
+        evidence:
+          - packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md
+        disposition: defer-dependency
+        follow_up: think-vyff
     depends_on: [BC-165]
     parallel_group: agenda017-review-c
     workflows: [factual-review]
@@ -463,7 +600,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 11, 17]
-    state: blocked
+    state: stopped
     priority: 1
     question: >-
       Can the three D-044 and D-046 source-finding clauses that fit one block -- the
@@ -504,6 +641,17 @@ agenda:
       unit and the D-044 and D-046 `fix` and `regression` prose rewritten against what
       landed; neither defect moves to fixed while W9-2 or W9-5 stands open.
     bead: think-ldq2
+    outcomes:
+      - scope: >-
+          three D-044 and D-046 source-finding clauses repaired with regressions
+        classification: never-opened
+        result: >-
+          think-ldq2 was never unpaused (see BC-159). Both defects remain contained.
+        evidence:
+          - packing/defects.yaml
+          - packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md
+        disposition: defer-dependency
+        follow_up: think-ldq2
     depends_on: [BC-159]
     parallel_group: agenda017-lane-d
     workflows: [remediation, factual-review]
@@ -514,7 +662,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5, 11, 17]
-    state: blocked
+    state: stopped
     priority: 1
     question: >-
       Can the negative-control snapshot cap be made a property of the commit rather
@@ -550,6 +698,27 @@ agenda:
       typed stop naming what still breaches the cap; the reviewer's determination
       recorded for each.
     bead: think-ahyr
+    outcomes:
+      - scope: >-
+          D-422: the negative-control snapshot cap as a property of the commit
+        classification: achieved
+        result: >-
+          Fixed early in the block with a before-and-after byte measurement: the snapshot sits
+          9.48 MB under the cap on a used tree, and the full local gate passed on it.
+        evidence:
+          - packing/defects.yaml
+        disposition: retire-success
+        follow_up: null
+      - scope: >-
+          D-429: the generated-view fold refusing the formatter's own output
+        classification: never-opened
+        result: >-
+          Not attempted; the defect is outstanding and the formatter's output was never seen to
+          trip the fold during this block.
+        evidence:
+          - packing/defects.yaml
+        disposition: defer-dependency
+        follow_up: think-ahyr
     depends_on: [BC-159]
     parallel_group: agenda017-lane-d
     workflows: [pipeline-improvement, factual-review]
@@ -561,7 +730,7 @@ agenda:
     purpose: research
     owner_focus: process
     instances: [11, 12, 29, 37, 39, 40, 41, 51, 55, 70, 71, 83, 87, 88]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       What did Agenda 017 establish, fail to establish or repair, what significance
@@ -608,6 +777,27 @@ agenda:
       tbd is synchronized through the CLI; and SYNOPSIS publishes exactly one
       unexecuted next entry. No merge occurs without the owner.
     bead: think-tkwj
+    artifacts:
+    - packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md
+    - packing/campaign/session-close-report.yaml
+    - docs/project/handoff-2026-09-04-block-close.md
+    outcomes:
+      - scope: >-
+          Agenda 017 and session-085 terminal, every scope dispositioned, one next entry
+        classification: achieved
+        result: >-
+          This closeout. Every item carries an outcome at the smallest scope with one answer; the
+          block's cost is in the record as 24 efficiency receipts; the records tier passes; the
+          pre-push tier's whole-suite step times out at 900 s on a four-core box regardless of
+          the change and is recorded as the blocker, while the suite itself passes end to end
+          in 1031 s; the pull request leads with measured cost. The next entry is BC-191 of
+          Agenda 019, selected in agreement with agenda-020's closeout and session-085.
+        evidence:
+          - packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md
+          - packing/campaign/agendas/agenda-020-efficiency-block-the-exact-sweep.md
+          - packing/campaign/session-close-report.yaml
+        disposition: retire-success
+        follow_up: null
     depends_on: [BC-162, BC-164, BC-166, BC-167, BC-168]
     parallel_group: agenda017-closeout
     workflows: [review-planning-oversight, documentation-pass, process-review]
@@ -615,6 +805,154 @@ agenda:
       The operator's review of the pull request confirms or revises Agenda 018's lane
       order; BC-170 begins only after that review or the declared autonomous fallback,
       never inside this closeout.
+  closeout:
+    documentation_review:
+      - path: README.md
+        decision: updated
+        reason: >-
+          Opening rewritten to three points at the operator's direction; the results
+          section now carries T-017 through T-020 with first-occurrence links to the case
+          files, certificate packages and reach table, split by significance.
+      - path: SYNOPSIS.md
+        decision: updated
+        reason: >-
+          Headline and results views regenerated; the fractional-certificate narrative,
+          the Nagamochi counts, the defect aggregates and the Current Handoff brought to
+          the closing state, the last by session-085.
+      - path: TUTORIAL.md
+        decision: checked-current
+        reason: >-
+          Describes the problem and the method families; it names no bound this block
+          moved and no cost this block changed.
+      - path: conventions.md
+        decision: checked-current
+        reason: >-
+          The presentation and evidence conventions it states were followed, not changed;
+          the D-439 class is recorded in defects and the method document, not here.
+      - path: development.md
+        decision: checked-current
+        reason: >-
+          The validation entry points it documents are unchanged; two new records-tier
+          steps register through validate.py and need no new instructions.
+      - path: operating-rules.md
+        decision: checked-current
+        reason: >-
+          No rule was added; rule seven's fourth instance lives in the method document
+          it points to.
+    changes:
+      - name: fractional-certificate-instrument
+        result: >-
+          A first-party generator, a retention gate that decides frozen bytes by two
+          methods and requires them to agree on the value, the ceiling family and
+          least_size_certified, and the interval route raised to a second decision.
+        paths:
+          - packing/src/sqpack/fractional/
+          - packing/devtools/decide_certificate.py
+      - name: retained-bounds
+        result: >-
+          s(11) >= 381/100, s(12) >= 99/25, s(17), s(18) >= 459/100 and s(19), s(20),
+          s(21) >= 24/5, registered as T-017 through T-020 with their evidence, rungs,
+          case files and third-party package.
+        paths:
+          - packing/frontier/results.yaml
+          - packing/frontier/evidence.yaml
+          - packing/cases/n11_fractional_certificate/
+          - packing/cases/n12_fractional_certificate/
+          - packing/cases/n17_fractional_certificate/
+          - packing/cases/n20_fractional_certificate/
+      - name: record-integrity-detectors
+        result: >-
+          check_rung_figures, check_case_prose and the reach-table renderer, answering
+          D-439, D-442 and D-443; the Nagamochi tests read the record rather than a
+          memory of it (D-444).
+        paths:
+          - packing/devtools/check_rung_figures.py
+          - packing/devtools/check_case_prose.py
+          - packing/devtools/render_certificate_reach.py
+          - packing/tests/test_nagamochi_bounds.py
+      - name: planning-and-handoff
+        result: >-
+          Agenda 019 as the next queue, agenda-020 as the efficiency block, X-013 as the
+          strategy session, session-085 as this block's record with its 24 cost receipts,
+          and the block-close handoff.
+        paths:
+          - packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md
+          - packing/campaign/agendas/agenda-020-efficiency-block-the-exact-sweep.md
+          - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
+          - packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md
+          - docs/project/handoff-2026-09-04-block-close.md
+    validation:
+      - scope: records-tier
+        status: passed
+        evidence: >-
+          packing-validate --records, 29 of 29 steps of the named tier, on the tree that
+          carries session-085 and the closeout, 2026-09-04 22:40 UTC.
+      - scope: fast-suite-end-to-end
+        status: passed
+        evidence: >-
+          pytest -q tests -m "not exhaustive_exact" on the four-core box: 1749 passed in
+          1031 s; the six failures it named (D-444, the marker registry, the consumer
+          declaration, the corpus tripwire) were fixed in 4a1beb1b, 353998ac and
+          04d39b84 and each file re-run green.
+      - scope: pre-push-tier
+        status: failed
+        evidence: >-
+          packing-validate --push: every step passes except the whole-suite step, which
+          times out at its own 900 s cap on this box while the suite it runs passes in
+          1031 s. Recorded as the blocker rather than bypassed; the cap against a suite
+          of this size is BC-195's question.
+      - scope: continuous-integration
+        status: pending
+        evidence: >-
+          validate and packing-required were red on eb1d448a (suite timeout, stale
+          ledger), both fixed in the pushed commits; green on macos-portability at every
+          head; the validate job on the closing head was in progress when this closeout
+          was written.
+    replanning:
+      candidates:
+        - bead: think-ji0r
+          workflow: efficiency-loop
+          priority: 0
+          rationale: >-
+            BC-191. Row generation is 79-94% of every search round, site density has
+            never been set as a function of side, and one untuned grid cost 8.8x at
+            n = 20's own side; with the gate off the critical path this is the binding
+            cost, and everything the retarget needs priced depends on it.
+        - bead: think-jgeg
+          workflow: efficiency-loop
+          priority: 0
+          rationale: >-
+            BC-190, re-based: its premise that the retention gate was the dominant cost
+            is gone since agenda-020, and the question left is whether the generator's
+            inner loop should decide on the interval route, measured against the integer
+            sweep.
+        - bead: think-9pfw
+          workflow: insight-iteration
+          priority: 1
+          rationale: >-
+            BC-192, the retarget from the reach table's predicted-gain ranking; X-013
+            argues for n = 26 first and it needs BC-191's pricing to be honest.
+        - bead: think-48p0
+          workflow: research-loop
+          priority: 1
+          rationale: >-
+            BC-194, the first high-prize run with a cost model written before it; blocked
+            on BC-191 and BC-192.
+      selected:
+        bead: think-ji0r
+        workflow: efficiency-loop
+        rationale: >-
+          The one candidate whose measurement nothing today has already changed the terms
+          of, and the one every later commitment depends on. It agrees with agenda-020's
+          closeout and with session-085's next entry, which the synopsis check holds it to.
+      operator_input:
+        status: revised
+        note: >-
+          The operator was present at the closing milestone and revised the order of what
+          follows twice: directing the efficiency block that became agenda-020 to run at
+          once rather than wait for Agenda 019, and asking for it to be tracked as its own
+          block. The closeout itself is published for confirmation; the ranking above is
+          the frozen one until the operator revises it.
 ---
 # Agenda 017 — Six-Hour Block: the Certificate Generator, Rigidity Readiness, Ten Exact Ceilings, and the W9 Handoff
 
@@ -936,6 +1274,38 @@ words, then why each other scope stopped, what files and interfaces changed, whi
 defects closed or remain, validation, and the one selected next entry.
 The operator alone merges the pull request and confirms or revises Agenda 018 before it
 starts.
+
+## Closeout
+
+The block set out to run six hours across four lanes and to map the next research
+strategically. It ran about twenty-two hours on one lane, and the other three never
+opened.
+That is the first thing to say, because the record would otherwise read as a plan
+that went well.
+
+What the one lane did is the second thing.
+Lane A was to build a certificate generator, prove it on Massaccesi’s published `n = 17`
+certificate as a control, and certify `s(12) ≥ 19/5`. It did that, and then kept
+climbing: `19/5` to `99/25` at `n = 12`, `3.81` at `n = 11` — the smallest open case’s
+first movement since 2003 — `459/100` at `n = 17` and `n = 18`, and `24/5` at `n = 19`,
+`20` and `21`. Seven registered cases moved; Nagamochi’s closed form holds 58 of the 65
+open cases at `n ≤ 100` where it held 60, and every one of the seven exceptions is a
+certificate held here.
+
+Two things it learned were not on the plan.
+No certificate for `n` exists above `⌈√n⌉ · B`, which forecloses `n = 12` against its
+conjectured `4` and says the method approaches the grid value and never reaches it.
+And only `Condition 2` mentions `n`, so one atom set certifies its side for every
+integer above its own mass — which is why one certificate at `24/5` moved three cases,
+and why the reach table now ranks cases the program has never touched above the ones it
+spent itself on.
+
+The cost of the block is in the record as 24 receipts, and the largest single cost — the
+exact sweep at the retention gate, `5378 s` at 2260 atoms — was taken down to `29 s` the
+same evening in a block of its own, agenda-020. Fourteen defects were found and fixed,
+three of them one class recurring: a durable record describing a rung after the rung
+moved. The next entry is BC-191, the search side’s cost against the container side,
+because that is what now binds.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

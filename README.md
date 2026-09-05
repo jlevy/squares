@@ -75,8 +75,8 @@ Results first established here, as far as the recorded source searches show:
   against `n = 17`, least covered mass `200009/200000` — so the repository now carries a
   first-party certificate `0.0842` above the number it had adopted, with the `229/50`
   and `451/100` rungs it climbed through retained below.
-  One certificate covers all three sizes without a monotonicity step: only `C1` mentions
-  `n`, so an atom set certifies its side for every integer above its own mass.
+  One certificate covers all three sizes without a monotonicity step: only `Condition 2`
+  mentions `n`, so an atom set certifies its side for every integer above its own mass.
   `T-020` has since carried `n = 19` past it; `n = 17` and `n = 18` are this result’s
   alone, being too small for the heavier atom set that moved the other three.
 - **T-020: `s(19), s(20), s(21) ≥ 24/5`, displacing a closed form that stood for twenty
@@ -86,7 +86,7 @@ Results first established here, as far as the recorded source searches show:
   — 2260 atoms, total mass `946131/50000`, least covered mass `50007/50000` — moves
   [`n = 20`](packing/frontier/n-020.md) by `0.194449`, `n = 21` by `0.058343`, and
   `n = 19` by `0.21`, the largest single-case movement in the register.
-  The three sizes again come out of `C1` alone.
+  The three sizes again come out of `Condition 2` alone.
   Above them the method has `0.1885` of room at `n = 20` and `n = 21` before
   [its own ceiling](packing/frontier/CERTIFICATE-REACH.md), and `0.0856` at `n = 19`
   before it would contradict the best known packing.
@@ -99,9 +99,11 @@ Results first established here, as far as the recorded source searches show:
   which is why this is scored `S4` as a bound family rather than a case result.
   At `99/25 = 3.96` it also separates the cases: `s(12) > s(11)`, since Trump’s 1979
   packing puts `s(11) ≤ 3.877084`. That did not follow from anything on record before.
-  The case is now `0.04` from its conjectured optimum of `4`, and that gap is where this
-  method stops: no certificate for twelve squares can exist above `3.990816`, which is
-  proved here and is below the conjectured value.
+  The case is now `0.04` from its conjectured optimum of `4`, and no single certificate
+  of this shape can close it: none for twelve squares can exist above `3.990816`, which
+  is proved here and is below the conjectured value.
+  A family of certificates approaching `4` is not ruled out; whether one exists is a
+  question about the covering value.
 - **T-010: `s(11) ≥ 2 + 4/√5`, repaired (`S4`).** The printed 2003 Figure 14
   unavoidability claim has a strict counterexample, so the literature’s standing `s(11)`
   bound rested on a broken step — the

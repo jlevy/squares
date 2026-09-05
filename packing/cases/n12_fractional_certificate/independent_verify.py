@@ -8,7 +8,7 @@
 Written only from the theorem statement.  Exact rational arithmetic throughout.
 Allowed imports only: fractions, itertools, numpy (+ stdlib json/sys/time/bisect).
 
-C4 is decided over the CONTINUUM of placements, not on a sampled grid:
+Condition 5 is decided over the CONTINUUM of placements, not on a sampled grid:
 the covered-mass function is piecewise constant on the arrangement of the
 atom-square edges, so we enumerate every cell of that arrangement (open cells,
 open edges and vertices, in both coordinates) and decide exactly which cells
@@ -40,10 +40,10 @@ def net(cert):
     return [cert["tlim"] * Fr(k, cert["steps"]) for k in range(cert["steps"] + 1)]
 
 # --------------------------------------------------------------------------
-# C0 : D4 invariance of the weighted atom multiset
+# Condition 1 : D4 invariance of the weighted atom multiset
 # --------------------------------------------------------------------------
 
-def c0(cert):
+def condition_1(cert):
     L = cert["L"]
     base = {}
     for x, y, w in cert["atoms"]:
@@ -67,25 +67,25 @@ def c0(cert):
     return (len(bad) == 0), bad
 
 # --------------------------------------------------------------------------
-# C1 / C2 / C3
+# Condition 2 / Condition 3 / Condition 4
 # --------------------------------------------------------------------------
 
-def c1(cert):
+def condition_2(cert):
     W = sum((w for _, _, w in cert["atoms"]), Fr(0))
     return W < cert["n"], W
 
-def c2(cert):
+def condition_3(cert):
     tK = net(cert)[-1]
     return tK * tK + 2 * tK - 1 >= 0, tK
 
-def c3(cert):
+def condition_4(cert):
     ts = net(cert)
     D = max((ts[k + 1] - ts[k]) / (1 + ts[k] * ts[k + 1]) for k in range(len(ts) - 1))
     val = cert["B"] * (1 + D)
     return val < 1, D, val
 
 # --------------------------------------------------------------------------
-# C4 machinery
+# Condition 5 machinery
 # --------------------------------------------------------------------------
 
 def pieces(bps, biglo, bighi):
@@ -236,7 +236,7 @@ def direction_min(cert, t, wint, scale, brute_check=0, rng=None):
     return m_lower, m_rep, arg
 
 
-def c4(cert, ks=None, brute_check=0, seed=1):
+def condition_5(cert, ks=None, brute_check=0, seed=1):
     atoms = cert["atoms"]
     def _gcd(a, b):
         while b:
@@ -273,34 +273,35 @@ def verify(cert, ks=None, label="", brute_check=0):
     print("  n=%d  L=%s  B=%s  t_K=%s  steps=%d  atoms=%d"
           % (cert["n"], cert["L"], cert["B"], net(cert)[-1], cert["steps"], len(cert["atoms"])))
     res = {}
-    ok0, bad = c0(cert)
-    print("  C0 (D4 invariance)      :", "PASS" if ok0 else "FAIL", "" if ok0 else bad[:2])
-    ok1, W = c1(cert)
-    print("  C1 (total mass < n)     :", "PASS" if ok1 else "FAIL",
+    ok0, bad = condition_1(cert)
+    print("  Condition 1 (D4 invariance)      :", "PASS" if ok0 else "FAIL", "" if ok0 else bad[:2])
+    ok1, W = condition_2(cert)
+    print("  Condition 2 (total mass < n)     :", "PASS" if ok1 else "FAIL",
           " sum w = %s = %s  (n = %d)" % (W, float(W), cert["n"]))
-    ok2, tK = c2(cert)
-    print("  C2 (net reaches pi/4)   :", "PASS" if ok2 else "FAIL",
+    ok2, tK = condition_3(cert)
+    print("  Condition 3 (net reaches pi/4)   :", "PASS" if ok2 else "FAIL",
           " t_K^2+2t_K-1 = %s" % (tK * tK + 2 * tK - 1))
-    ok3, D, v3 = c3(cert)
-    print("  C3 (B(1+D) < 1)         :", "PASS" if ok3 else "FAIL",
+    ok3, D, v3 = condition_4(cert)
+    print("  Condition 4 (B(1+D) < 1)         :", "PASS" if ok3 else "FAIL",
           " D = %s = %.12g ; B(1+D) = %s = %.12g" % (D, float(D), v3, float(v3)))
     t0 = time.time()
-    ok4, info, scale = c4(cert, ks=ks, brute_check=brute_check)
+    ok4, info, scale = condition_5(cert, ks=ks, brute_check=brute_check)
     dt = time.time() - t0
     if "reason" in info:
-        print("  C4                      : FAIL", info["reason"])
+        print("  Condition 5                      : FAIL", info["reason"])
     else:
-        print("  C4 (min covered mass>=1):", "PASS" if ok4 else "FAIL",
+        print("  Condition 5 (min covered mass>=1):", "PASS" if ok4 else "FAIL",
               " min = %s = %s  (cell-lower = %s, exact=%s)"
               % (info["min_rep"], float(info["min_rep"]), info["min_lower"], info["exact"]))
         t, x, y = info["arg"]
         print("       attained at k=%d, t=%s, centre (x,y)=(%s, %s) ~ (%.9f, %.9f)"
               % (info["k"], t, x, y, float(x), float(y)))
-    print("  C4 time: %.1fs" % dt)
+    print("  Condition 5 time: %.1fs" % dt)
     allok = ok0 and ok1 and ok2 and ok3 and ok4
     print("  ==> %s : s(%d) >= %s" % ("CERTIFICATE VALID" if allok else "CERTIFICATE REJECTED",
                                       cert["n"], cert["L"]))
-    return allok, dict(C0=ok0, C1=ok1, C2=ok2, C3=ok3, C4=ok4, info=info, time=dt)
+    return allok, dict(condition1=ok0, condition2=ok1, condition3=ok2,
+                       condition4=ok3, condition5=ok4, info=info, time=dt)
 
 
 if __name__ == "__main__":

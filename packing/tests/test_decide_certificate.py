@@ -45,7 +45,7 @@ def test_a_declared_mass_that_disagrees_with_the_atoms_is_refused(
 def test_a_side_above_the_ceiling_is_refused_before_any_sweep_runs(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    """Four B-squares across fit at 4, so C4 would force the mass past eleven."""
+    """Four B-squares across fit at 4, so Condition 5 would force the mass past eleven."""
 
     def widen(record: dict) -> None:
         record["outer_side"] = "4"

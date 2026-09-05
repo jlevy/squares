@@ -185,11 +185,11 @@ agenda:
       90 elapsed minutes, Opus at maximum thinking, insight-iteration, after BC-192.
       The ceiling has one mechanism and it is worth attacking directly: above
       ceil(sqrt(n)) * B a grid of ceil(sqrt(n))^2 pairwise disjoint axis-parallel
-      B-squares fits inside the container, C4 gives each of them mass at least 1, and the
+      B-squares fits inside the container, Condition 5 gives each of them mass at least 1, and the
       total passes n. Every step of that is cheap, which is why the ceiling is sharp.
       Directions worth an hour and a half. The refuting grid is axis-parallel and uses
       direction 0 only; a condition that treated directions unequally would not be refuted
-      by it, but C3's containment argument is what forces every direction to be covered,
+      by it, but Condition 4's containment argument is what forces every direction to be covered,
       so the question is whether a weaker containment step exists. The shrink B is already
       maximal for its net, so raising it needs a finer net and the ceiling rises only as
       fast as D falls, which is about T/K. Whether an unavoidable set of shapes other than
@@ -376,9 +376,9 @@ Three of those are not close calls.
 
 The interval route decides **361 directions where the exact sweep decides 181**, needs
 one fewer hypothesis — deciding on the doubled net it never invokes the `D4` reflection,
-so it does not need `C0` at all — and ran `22.7×` faster at 1184 atoms, `44.2×` at 2097
-and `31×` at 2260. The ratio widens because the two scale differently, quadratic against
-linear, and the certificates are growing.
+so it does not need `Condition 1` at all — and ran `22.7×` faster at 1184 atoms, `44.2×`
+at 2097 and `31×` at 2260. The ratio widens because the two scale differently, quadratic
+against linear, and the certificates are growing.
 Read the 2260 pair with its caveat.
 That certificate is `T-020`, decided after this agenda was drafted; its exact sweep had
 the machine largely to itself and its interval run did not, so the `31×` understates the
