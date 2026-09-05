@@ -710,6 +710,8 @@ results:
       - packing/cases/n11_fractional_certificate/certificate.json
       - packing/cases/n11_fractional_certificate/certificate-19-5.json
       - packing/cases/n11_fractional_certificate/certificate-189-50.json
+      - packing/cases/n11_fractional_certificate/t-018-proof.md
+      - packing/cases/n11_fractional_certificate/t-018-proof-visual.svg
       - packing/src/sqpack/fractional/colgen.py
     controls:
       - packing/tests/test_fractional_certificate.py

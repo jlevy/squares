@@ -226,6 +226,10 @@ documents:
     role: component-guide
     authority: record
     lifecycle: retained
+  - path: packing/cases/n11_fractional_certificate/t-018-proof.md
+    role: component-guide
+    authority: record
+    lifecycle: retained
   - path: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
     role: handoff
     authority: record
