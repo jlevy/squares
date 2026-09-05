@@ -82,7 +82,8 @@ Trump’s 1979 packing shows $s(11) \le {{BEST_PACKING_TEX}}$.[^trump] Here we p
 $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$. The project proves two bounds, and
 the figures below open on the looser one, $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, whose
 smaller numbers are easier to follow.
-The chooser under each figure switches every figure between the two at once.
+<span class="screen-only">The chooser under each figure switches every figure between
+the two at once.</span>
 
 <figure>
   <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
@@ -267,7 +268,7 @@ $$
     </div>
   </div>
   <div class="fig-choose">{{CERT_TOGGLE}}</div>
-  <figcaption><strong>Figure 5. Condition 5.</strong> The prover: drag the square, watch the mass. Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
+  <figcaption><strong>Figure 5. Condition 5.</strong> The prover<span class="screen-only">: drag the square, watch the mass</span>. Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
   directions. Outside it the mass falls away at once, which is why the atoms crowd the boundary.</figcaption>
 </figure>
 
@@ -338,7 +339,7 @@ $$
         <dt><span class="tex">B</span> admitted</dt><dd id="s-B-{{SLUG}}"></dd>
         <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod-{{SLUG}}"></dd>
       </dl>
-      <p class="hint">Opens at <span class="tex">K = 3</span>, the coarsest net the figure offers, where Condition 4 admits only
+      <p class="hint screen-only">Opens at <span class="tex">K = 3</span>, the coarsest net the figure offers, where Condition 4 admits only
       <span class="tex">B \lt {{K3_LIMIT_TEX}}</span> and the shrink is unmistakable. Drag either square by its
       handle. At
       <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, the two squares are

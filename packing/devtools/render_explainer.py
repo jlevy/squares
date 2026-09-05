@@ -1094,6 +1094,8 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "HEADLINE_L_DEC": decimal(headline.outer_side),
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
         "DEFAULT_ID": default.identifier,
+        # Print shows one certificate deterministically, and this names which.
+        "DEFAULT_SLUG": slug(default),
         "DEFAULT_CERT_URL": repo_file(default.source),
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "N_RESULTS": str(registered_results()),
@@ -1300,6 +1302,33 @@ def expand(
 _HTML_COMMENT = re.compile(r"<!--.*?-->", re.DOTALL)
 
 
+#: A function name set in italic leans into the parenthesis that follows it, so `s(n)`
+#: sets the bracket against the letter's terminal. One mu, a thousandth of an em quad,
+#: is the smallest space TeX offers and is what the drawn figures use as an offset.
+#: Applied wherever the page sets mathematics so the spacing is the same in the prose,
+#: the captions and the drawings.
+_FUNCTION_APPLICATION = re.compile(r"(?<![A-Za-z\\])([a-z])\(")
+
+
+def kerned_math(source: str) -> str:
+    """Put a thin space between a one-letter function name and its parenthesis."""
+    return _FUNCTION_APPLICATION.sub(r"\1\\mkern1mu(", source)
+
+
+def kerned_math_spans(source: str) -> str:
+    """Apply that spacing inside every `$...$` span, and nowhere else.
+
+    Markdown prose is full of parentheses that follow a letter; only the maths is
+    typeset, so only the maths is touched.
+    """
+    return re.sub(
+        r"(?<!\\)(\$\$?)(.+?)(?<!\\)\1",
+        lambda m: f"{m.group(1)}{kerned_math(m.group(2))}{m.group(1)}",
+        source,
+        flags=re.DOTALL,
+    )
+
+
 def markdown_body(
     per_certificate: list[dict[str, str]],
     headline_values: dict[str, str],
@@ -1331,6 +1360,7 @@ def markdown_body(
     source = fill(
         _HTML_COMMENT.sub("", source), {**headline_values, **shared}, where=MARKDOWN.name
     )
+    source = kerned_math_spans(source)
     left = {m.group(1) for m in re.finditer(r"\{\{([A-Z_]+)\}\}", source)}
     if left:
         raise SystemExit(f"{MARKDOWN.name}: a substituted value carried {sorted(left)} into it")

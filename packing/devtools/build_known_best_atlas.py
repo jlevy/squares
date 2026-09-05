@@ -257,8 +257,13 @@ SUMMARY_SMALL_FILL = LABEL_MUTED_COLOR
 # Letters sit on their cap height, math symbols on the math axis, so a single
 # baseline cannot center both inside the badge box. Offsets are from the box top.
 SUMMARY_BADGE_FONT_SIZE = Decimal(15)
-SUMMARY_GLYPH_BASELINE = {"O": Decimal("14.9")}
+#: Where a math symbol sits in a badge. `=` and `≈` centre on the math axis rather than
+#: on the cap line, so they are placed by measurement rather than by the rule below.
 SUMMARY_MATH_GLYPH_BASELINE = Decimal(14)
+#: How much of the badge box the star fills. A five-pointed star reads smaller than a
+#: filled square of the same span, so it is drawn larger to carry the same weight in the
+#: row beside the lettered badges.
+SUMMARY_BADGE_STAR_SPAN = Decimal("0.92")
 SUMMARY_CREDIT = "Diagram by Joshua Levy with assistance from Claude and Codex"
 #: The edition stamp, last of the footer lines and in the same voice as the rest of it.
 SUMMARY_RELEASE_STAMP = f"{PUBLICATION_VERSION}, revision {PUBLICATION_REVISION}"
@@ -898,6 +903,20 @@ def _append_star(
     sub(parent, "polygon", attributes)
 
 
+def _badge_baseline(glyph: str) -> Decimal:
+    """Where a badge's glyph sits, so every badge centres its mark the same way.
+
+    A letter is centred on its cap height: the box is `SUMMARY_BADGE_SIZE` tall and the
+    caps are `SUMMARY_LABEL_CAP_RATIO` of the font, so the baseline sits half a cap
+    below the box's middle. Deriving it rather than tabulating it is what keeps `R`
+    level with `O`; `R` used to fall through to the math baseline and rode high.
+    """
+    if not glyph.isalpha():
+        return SUMMARY_MATH_GLYPH_BASELINE
+    cap = SUMMARY_BADGE_FONT_SIZE * SUMMARY_LABEL_CAP_RATIO
+    return (SUMMARY_BADGE_SIZE + cap) / 2
+
+
 def _append_badge(
     parent: ET.Element, glyph: str, style: str, label: str, *, x: Decimal, top: Decimal
 ) -> None:
@@ -916,6 +935,7 @@ def _append_badge(
             center_y=top + SUMMARY_BADGE_SIZE / 2,
             feature="legend-star",
             label=label,
+            scale=SUMMARY_BADGE_SIZE * SUMMARY_BADGE_STAR_SPAN / (SUMMARY_STAR_INSET * 2),
         )
         return
     fill, stroke, glyph_fill = {
@@ -944,9 +964,7 @@ def _append_badge(
         "text",
         {
             "x": format_svg_number(x + SUMMARY_BADGE_SIZE / 2),
-            "y": format_svg_number(
-                top + SUMMARY_GLYPH_BASELINE.get(glyph, SUMMARY_MATH_GLYPH_BASELINE)
-            ),
+            "y": format_svg_number(top + _badge_baseline(glyph)),
             "text-anchor": "middle",
             "font-family": SUMMARY_FONT,
             "font-size": format_svg_number(SUMMARY_BADGE_FONT_SIZE),
