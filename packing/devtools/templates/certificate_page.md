@@ -350,7 +350,8 @@ $$
 
 To price a coarser net, hold a certificate’s atoms fixed, coarsen the net, set $B$ to
 the largest value Condition 4 admits, and decide Condition 5 again.
-Figure 7 does this for each certificate, and its caption says what halving the net costs.
+Figure 7 does this for each certificate, and its caption says what halving the net
+costs.
 
 <!--BEGIN:FIGURE-->
 
