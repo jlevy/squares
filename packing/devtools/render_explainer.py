@@ -54,7 +54,7 @@ from sqpack.fractional.certificate import (
 )
 from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
-from sqpack.release import PUBLICATION_DATE, PUBLICATION_REVISION, PUBLICATION_VERSION
+from sqpack.release import PUBLICATION_DATE, PUBLICATION_EDITION, PUBLICATION_REVISION
 from sqpack.render.style import SQUARE_HUE_PALETTE
 from sqpack.yamlio import safe_load
 
@@ -1068,12 +1068,20 @@ def runtime_phrase(facts: Facts) -> str:
 
 
 def claim_substitutions(headline: Facts, default: Facts) -> dict[str, str]:
-    """The page's list of claim documents: one line per certificate, in both roles."""
+    """What each certificate is, named by the role it plays rather than by its bound.
+
+    The page states the size of a certificate in two places that are not inside its own
+    article -- the opening summary, which describes the headline proof before either
+    article begins, and the list of claim documents, which states both at once. Neither
+    can use the per-certificate values, so both read these; the counts are the same
+    quantities `certificate_substitutions` derives, taken from the same facts.
+    """
     values = {}
     for role, f in (("DEFAULT", default), ("HEADLINE", headline)):
         values[f"{role}_CLAIM_NAME"] = claim_path(f).name
         values[f"{role}_CLAIM_URL"] = repo_file(claim_path(f))
         values[f"{role}_N_ATOMS"] = f"{len(f.atoms):,}"
+        values[f"{role}_N_DIRECTIONS"] = str(f.steps + 1)
         values[f"{role}_RUNTIME"] = runtime_phrase(f)
     return values
 
@@ -1103,7 +1111,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "SOURCE_URL": repo_file(MARKDOWN),
         "REPO_URL": REPO_URL,
         "PUBLISHED": PUBLICATION_DATE,
-        "VERSION": PUBLICATION_VERSION,
+        "EDITION": PUBLICATION_EDITION,
         "REVISION": PUBLICATION_REVISION,
         "PRIOR_YEAR": str(PRIOR_YEAR),
         **bound_substitutions(),

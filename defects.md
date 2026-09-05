@@ -2,7 +2,7 @@
 
 # Defect log
 
-454 defects recorded across the packing toolchain.
+457 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
 | `review` | 275 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
-| `inspection` | 51 | reading the code or the design with intent |
+| `inspection` | 52 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 65 | the automated test suite |
+| `gate` | 67 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 65 of 454, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 67 of 457, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 65 of 454, and none of
 | quench | 23 |
 | verifier | 9 |
 | record | 143 |
-| tooling | 159 |
+| tooling | 162 |
 | docs | 109 |
 
 ## By kind
@@ -44,9 +44,9 @@ The line worth reading twice: **the automated gate caught 65 of 454, and none of
 | --- | ---: |
 | soundness | 94 |
 | validity | 117 |
-| bookkeeping | 170 |
-| robustness | 57 |
-| performance | 16 |
+| bookkeeping | 171 |
+| robustness | 58 |
+| performance | 17 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -689,6 +689,9 @@ This is the actionable list.
 | [D-452](SYNOPSIS.md) | 2026-09-05 | docs | bookkeeping |  | `inspection` | medium | fixed | The documents a reader opens first still described the pre-T-018 n = 11 rung |
 | [D-453](packing/devtools/check_case_prose.py) | 2026-09-05 | record | soundness | flattering | `review` | low | fixed | Every open case body rounded its bound to nearest, and so stated one stronger than is proved |
 | [D-454](packing/frontier/results.yaml) | 2026-09-05 | record | bookkeeping |  | `review` | medium | fixed | Four durable records described a rung, a ladder and a count that had already moved |
+| [D-455](packing/devtools/check_svg_rendering.py) | 2026-09-05 | tooling | robustness |  | `gate` | medium | fixed | The inline-SVG ownership check swept the vendored submodule's own fixtures |
+| [D-456](packing/src/sqpack/cli/validate.py) | 2026-09-05 | tooling | performance |  | `gate` | medium | fixed | The exhaustive exact tier outgrew its budget, and the ceiling cited against raising it never existed |
+| [D-457](packing/devtools/build_known_best_atlas.py) | 2026-09-05 | tooling | bookkeeping |  | `inspection` | low | fixed | The atlas drew one line weight for cairosvg and another for a browser |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

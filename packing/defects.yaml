@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 454
+count: 457
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14632,3 +14632,153 @@ defects:
   recurrence_of: D-442
   status: fixed
   recorded_in: packing/frontier/results.yaml
+- id: D-455
+  title: The inline-SVG ownership check swept the vendored submodule's own fixtures
+  date: '2026-09-05'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: >-
+    three merges to main -- f060b1d7, 1d541077 and 85d1c976, about nine hours on
+    2026-09-05 -- from the commit that vendored kpress. No pull request could have seen
+    it: the step belongs to the complete integration surface, which the workflow runs
+    only on pushes to main.
+  severity: medium
+  what: >-
+    check_svg_rendering's `all_inline_svg_targets_are_owned_artifacts` control asks a
+    question about this repository's prose -- does every SVG a document embeds resolve to
+    an artifact this repository builds and retains? -- and answered it over a document set
+    that was not this repository's. The sweep walked REPO.rglob("*.md") excluding
+    `resources`, `node_modules` and dot-prefixed directories, a list written when those
+    were the only foreign trees in the checkout. kpress is now vendored as a submodule at
+    vendor/kpress, its own test fixtures embed two SVGs of their own, and the control
+    duly reported that an upstream project's fixture is not one of our artifacts. The
+    exclusion existed already in the formatter's list, where `.flowmarkignore` names
+    `vendor/` and states the reason; the Python sweep had not been given it. The same
+    predicate was written out twice in the file, once per sweep, so there were two places
+    to forget it and no single place that decided.
+  consequence: >-
+    No artifact, bound or document is wrong: the finding was about a file this repository
+    does not own, and every one of our own embeds resolves. What broke is the gate. The
+    complete integration surface failed on every push to main from the vendoring commit
+    onward, so the one tier that runs the record and rendering controls reported nothing
+    usable, and a real failure arriving behind this one would have been read as the same
+    known redness.
+  fix: >-
+    Fixed on 2026-09-05. The exclusion is stated once, as FOREIGN_DIRECTORY_NAMES beside
+    REPO, and both sweeps draw their documents from one `repository_documents()`
+    generator, so they cannot disagree about which documents count -- a target that one
+    sweep calls unowned and the other cannot see is a contradiction, not a finding. The
+    set gains `vendor`, matching `.flowmarkignore` and for the reason it records: the
+    Markdown under a vendored submodule is the upstream project's.
+  regression: >-
+    packing/tests/test_check_svg_rendering.py, in the fast tier where the gate that
+    caught this one runs only on main. Four controls: the sweep reaches README.md and
+    AGENTS.md, so a sweep that excluded everything cannot pass the rest; it does not
+    reach the named vendored document that turned main red, skipped rather than passed
+    when the submodule is absent, because a test that searches for its own subject
+    passes once the subject is gone; no swept document lies under any foreign directory,
+    stated over the whole result so a second vendored tree cannot slip in; and
+    `.flowmarkignore` and FOREIGN_DIRECTORY_NAMES agree about `vendor`, since the two
+    lists are maintained by hand in different languages.
+  status: fixed
+  recorded_in: packing/devtools/check_svg_rendering.py
+- id: D-456
+  title: The exhaustive exact tier outgrew its budget, and the ceiling cited against raising it never existed
+  date: '2026-09-05'
+  layer: tooling
+  class: performance
+  detected_by: gate
+  latent_for: >-
+    three merges to main -- f060b1d7, 1d541077 and 85d1c976 -- and unseeable before the
+    first of them, since the step is `fast=False` and the workflow runs the fast tier on
+    every pull request and the complete surface only on pushes to main.
+  severity: medium
+  what: >-
+    The `exhaustive exact behavioral tests` step declared a 1800s budget measured on
+    2026-09-05 at 39 tests, 892s on CI and 930s locally. The tier is now 53 tests and
+    measures 2036s on four cores. It has been killed at the cap on every push to main
+    since. The budget is a hard deadline handed to the subprocess, not a figure compared
+    afterwards, so the 1801.02s the gate reported is 1800s plus the one-second
+    termination grace -- arithmetic, not a reading -- and the step printed nothing at
+    all, because pytest's progress output was well under the pipe's block buffer and
+    SIGTERM does not flush it. Fourteen tests added after the budget was written account
+    for 837s: eleven nodes of test_verify_claim.py at 432s, the D-449 witness walk at
+    321s, test_minimal_verify at 56s and test_n11_thirdparty_verify at 28s.
+    Separately, the reason recorded against ever setting a budget above 1800s does not
+    survive checking. D-432's fix field and the note beside the fast tier's budget both
+    say such a figure "sits above the 1800s CI allows the job". No such limit exists:
+    `timeout-minutes` appears nowhere in `.github/`, and `git log -S` over that path
+    finds no commit that ever added it. The `validate` job inherits GitHub's 360-minute
+    default. A step budget was read as a job limit, and that misreading then argued
+    against the only fix.
+  consequence: >-
+    No verdict, bound or certificate is affected: every test in the tier passes when it
+    is allowed to finish. What was lost is the tier itself. For nine hours the one gate
+    that decides complete finite certificates reported a kill instead of a result, and
+    it reported it with no output, so a real failure arriving behind this one would have
+    looked identical. The false ceiling made that state look permanent rather than
+    fixable.
+  fix: >-
+    Fixed on 2026-09-05. EXHAUSTIVE_SUITE_BUDGET_SECONDS is 3600.0, argued from the 2036s
+    measurement at 1.77 times, the margin the fast tier already carries; doubling is no
+    longer the right rule for a tier this size, since it would put the budget over an
+    hour. The claim about a job ceiling is struck from both places that repeated it, with
+    the check that refutes it recorded beside them.
+    This does not address the trend, and the comment says so: the tier has gone 21 to 25
+    to 39 to 53 nodes in about a week, and more than 1500s of the 2036s is single-process
+    work that no core count reduces, so the budget buys roughly two weeks. The tier
+    already runs only after merge, so the move that scales is its own job rather than a
+    larger share of this one; carried as think-tr2z rather than done here.
+  regression: >-
+    packing/tests/test_validation_cli.py pins the budget table, so the three budgets
+    cannot drift silently. What no test can pin is the tier fitting the budget, since
+    measuring that costs the tier; the gate itself is that check, and it now runs with
+    room to report rather than to be killed.
+  status: fixed
+  recorded_in: packing/src/sqpack/cli/validate.py
+  bead: think-tr2z
+- id: D-457
+  title: The atlas drew one line weight for cairosvg and another for a browser
+  date: '2026-09-05'
+  layer: tooling
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    since the composite was first drawn; invisible until the explainer embedded it,
+    because every artifact this repository builds from the file is drawn by the one
+    renderer that ignores the attribute.
+  severity: low
+  what: >-
+    Every shape in the composite carried `vector-effect="non-scaling-stroke"`, 5,150 of
+    them. The attribute takes a stroke width out of the drawing's own coordinate system
+    and measures it in the viewport instead, so the line no longer shrinks when the
+    figure does. cairosvg ignores it outright -- measured at scale 1, 2 and 4, the
+    rendered stroke is identical with the attribute and without -- so it never affected
+    the PNG or the PDF. Chromium honours it, and the explainer shows this 2400-unit
+    figure in a column about 620 pixels wide. There the container outline's 1.15 stayed
+    1.15 device pixels instead of scaling down with its cell, printing about 3.8 times
+    heavier relative to the drawing than the same file rendered standalone, while the
+    0.42 of the square outlines stayed sub-pixel and did not. One file, two line
+    weights, decided by which program drew it.
+  consequence: >-
+    Nothing the figure asserts is wrong; every bound, colour and star is the record's.
+    What was wrong is that the figure did not look like itself. In the explainer the
+    hundred container boxes read as heavy rules against hairline interiors, an emphasis
+    the drawing never asked for and that the standalone PDF does not show, so a reader
+    comparing the two saw two different figures.
+  fix: >-
+    Fixed on 2026-09-05 by removing the attribute from the composite's container
+    outlines and square fills, with the measurement recorded beside the widths it
+    decides. The change is provably invisible to everything already committed: the
+    regenerated 1x raster is pixel-identical to its predecessor, and only the source
+    receipt differs.
+  regression: >-
+    None added. The property that matters -- the two renderers agreeing -- is not
+    something a unit test can hold without a browser in the suite, and the existing
+    drift check already refuses a raster that disagrees with its SVG. The same attribute
+    is still emitted by the shared packing renderer and the T-018 visual, where it is
+    equally inert under cairosvg and equally wrong under a browser; removing it there
+    touches every retained case rendering and is carried separately (think-igdg).
+  status: fixed
+  recorded_in: packing/devtools/build_known_best_atlas.py

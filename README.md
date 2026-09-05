@@ -23,8 +23,9 @@ Three things here, and each is a reason to look:
 labeled by its best known side upper bound and, where `s(n)` is still open, the best
 proved lower bound beneath it.
 A crimson star marks a lower bound proved here.
-Select the image for the zoomable SVG or use the
-[print-ready PDF](packing/atlas/known-best/known-best-1-100.pdf).*
+Select the image for the zoomable SVG, take the
+[4800 × 5792 raster](packing/atlas/known-best/known-best-1-100@2x.png) to attach or
+downscale, or use the [print-ready PDF](packing/atlas/known-best/known-best-1-100.pdf).*
 
 `s(n)` is the side of the smallest square that holds `n` non-overlapping unit squares.
 The problem is elementary to state and remains open even at small `n`.

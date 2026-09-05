@@ -2,10 +2,18 @@
   "atlas": {
     "composite": {
       "layout": "10 by 10, row-major n=1..100",
+      "png_high_resolution": {
+        "derived_from": "atlas/known-best/known-best-1-100.svg",
+        "height": 5792,
+        "path": "atlas/known-best/known-best-1-100@2x.png",
+        "scale": 2,
+        "width": 4800
+      },
       "png_preview": {
         "derived_from": "atlas/known-best/known-best-1-100.svg",
         "height": 2896,
         "path": "atlas/known-best/known-best-1-100.png",
+        "scale": 1,
         "width": 2400
       },
       "renderer": "sqpack deterministic composite renderer",
