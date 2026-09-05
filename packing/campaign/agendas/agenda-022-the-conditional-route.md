@@ -413,7 +413,7 @@ agenda:
         contract requires at least one, so it could not produce a registrable round. The
         measurements are retained as nine covering-value register rows and the run
         register instead, which is what they are -- data, not a test of a claim made in
-        advance. Recorded as D-457.
+        advance. Recorded as D-460.
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
       - packing/frontier/covering-values.yaml

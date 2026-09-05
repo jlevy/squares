@@ -454,7 +454,7 @@ no column round completed, so neither set grew.
 `exp-062` states this rather than leaving a reader to reconstruct it, because this
 document’s own limits reading had taken the conservative view of the same clause.
 
-**What the block also fixed.** `D-455`: the covering-value register’s `24/5` row named
+**What the block also fixed.** `D-458`: the covering-value register’s `24/5` row named
 the moving `certificate.json` pointer instead of the immutable rung, so promoting
 `T-021` into that pointer made a superseded row quote its own successor’s atoms.
 Nothing unsound — every artifact named exists and every mass quoted is that file’s true
@@ -2681,7 +2681,7 @@ the same archive boundary are named in the record and not closed.
 No live round has passed through the repaired boundary, so admitting it unattended is
 still a review decision rather than a settled one.
 
-`D-457` is the other entry standing `contained`, and it is a contract gap rather than a
+`D-460` is the other entry standing `contained`, and it is a contract gap rather than a
 finding: agenda-022’s `BC-206` declared `purpose: research` with no hypothesis, and the
 experiment contract requires at least one, so a cell could be drafted, budgeted,
 dispatched and completed before anything noticed its output had nowhere to go.
@@ -3198,16 +3198,16 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 457 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 460 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 94 | asserted something false about the mathematics |
 | validity | 117 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 172 | recorded something its own evidence contradicts |
-| robustness | 58 | did not finish, or finished only by luck |
-| performance | 16 | worked, but cost far more than it should |
+| bookkeeping | 173 | recorded something its own evidence contradicts |
+| robustness | 59 | did not finish, or finished only by luck |
+| performance | 17 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
@@ -3215,7 +3215,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-seven defects in 457, and no soundness defect
+**The automated gate has caught sixty-nine defects in 460, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

@@ -64,10 +64,32 @@ FAST_SUITE_BUDGET_SECONDS = 1800.0
 #: the fast tier defers. Measured on 2026-09-05 at 39 tests: 892s on CI's two-core
 #: runner (run 33932095609, eight seconds under the 900s cap it had been inheriting) and
 #: 930s on four cores locally, the interval route's five full-net decisions about 370s
-#: of it. Twice the measurement, for a tier that grows by one certificate at a time; a
-#: 21,600s figure was proposed on a 4,866s exact decision the integer sweep has since
-#: made a 30s one.
-EXHAUSTIVE_SUITE_BUDGET_SECONDS = 1800.0
+#: of it. A 21,600s figure was proposed on a 4,866s exact decision the integer sweep has
+#: since made a 30s one.
+#:
+#: Re-measured on 2026-09-05 at 53 tests, after the tier killed itself on three
+#: consecutive merges to main: 2036s on four cores, against 930s at 39 tests when the
+#: 1800s figure was written. The budget is a hard kill, not a report -- `_execute_step`
+#: hands it to the subprocess as a deadline -- so the 1801.02s the gate printed is
+#: 1800s plus `PROCESS_TERMINATION_GRACE_SECONDS`, arithmetic rather than a reading, and
+#: the step's output died in an unflushed pipe. The fourteen tests added since cost 837s
+#: of the total: `test_verify_claim.py`'s eleven nodes 432s, the D-449 witness walk 321s,
+#: `test_minimal_verify` 56s and `test_n11_thirdparty_verify` 28s. Doubling no longer
+#: applies to a tier this size -- it would put the budget over an hour -- so this is
+#: 1.77x the measurement, the same margin the fast tier carries.
+#:
+#: One reason recorded against a budget above 1800s does not survive checking. Both the
+#: fast tier's note below and D-432 say such a figure "sits above the 1800s CI allows the
+#: job". No such limit exists or ever has: `timeout-minutes` appears nowhere in
+#: `.github/`, and `git log -S` over that path finds no commit that ever added it. The
+#: `validate` job inherits GitHub's 360-minute default. Recorded as D-456.
+#:
+#: What this does not fix is the trend. The tier has gone 21 to 25 to 39 to 53 nodes in
+#: about a week, and over 1500s of the 2036s is single-process work that no core count
+#: reduces, so a larger runner does not help. At the recent rate this buys about two
+#: weeks. The tier already runs only after merge, so the move that scales is to give it
+#: its own job rather than a larger share of this one (think-tr2z).
+EXHAUSTIVE_SUITE_BUDGET_SECONDS = 3600.0
 
 
 class _ProcessRegistry:
@@ -1625,8 +1647,11 @@ STEPS: tuple[Step, ...] = (
     # job on the same tree ran in 996s on its two-core runner (run 33931098324). The 1800s
     # budget stands at about 1.7 times the local reading. A 2700s budget was
     # proposed on a 1791s measurement of the Fraction sweep the same day; that
-    # measurement no longer describes the suite, and 2700s sits above the 1800s CI
-    # allows the job, so a local run could pass a budget CI cannot honour.
+    # measurement no longer describes the suite. The second half of that argument --
+    # that 2700s "sits above the 1800s CI allows the job" -- was wrong and is struck:
+    # the `validate` job declares no `timeout-minutes` and never has, so it inherits
+    # GitHub's 360-minute default and there is no such ceiling (D-456). The budget above
+    # stands on its measurement alone.
     Step(
         "fast behavioral tests",
         _fast_tests,

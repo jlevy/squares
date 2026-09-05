@@ -11,8 +11,10 @@ figure and its exports included.
 uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --update
 ```
 
-That rebuilds 100 witnesses, 100 individual renderings, the composite SVG, its PNG
-preview and its PDF, the manifest, and the frontier back-links.
+That rebuilds 100 witnesses, 100 individual renderings, the composite SVG, both of its
+PNG rasters and its PDF, the manifest, and the frontier back-links.
+The exports are one family: a single run draws all four from the same SVG, and a single
+`--check` reports every one of them that has fallen behind.
 It is idempotent: a second run changes nothing.
 Then confirm nothing drifted:
 
@@ -217,6 +219,10 @@ Changing the canvas size means four edits, not one: the constants in
 in `tests/test_known_best_atlas.py`, and the `width` and `height` on the `img` tag in
 `devtools/templates/explainer-article.md`, which reserves the space the page scrolls
 past. The schema pins the height deliberately, so a silent resize fails the gate.
+The last three now pin both rasters, the 1x preview and the 2x export, so a canvas
+change that moves one and not the other is caught rather than shipped.
+Only the builder needs a single edit: each raster derives its size from the canvas
+constants and its own whole-number scale.
 
 ## Staleness cannot pass quietly
 
@@ -225,8 +231,13 @@ Each derived artifact carries a receipt naming the source it was built from:
 | Artifact | Receipt | Checked by |
 | --- | --- | --- |
 | Composite SVG | rebuilt and compared in full | `build_known_best_atlas --check` |
-| PNG preview | source SVG sha256 in a tEXt chunk | same |
-| PDF export | source SVG sha256 after `%%EOF` | `render_composite_pdf --check` |
+| PNG preview, 1x | source SVG sha256 in a tEXt chunk | same |
+| PNG export, 2x | source SVG sha256 in a tEXt chunk | same |
+| PDF export | source SVG sha256 after `%%EOF` | same, and `render_composite_pdf --check` |
+
+All four receipts are the digest of one SVG, which is what makes “the rasters match the
+PDF” checkable rather than asserted: two rasterisers of one drawing differ only in how
+they antialias an edge, whereas two drawings differ in what they show.
 
 The PDF uses a receipt rather than a byte comparison because cairo assigns font-subset
 tags per process, so two runs of identical input are not byte-identical across
