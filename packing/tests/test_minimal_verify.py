@@ -26,10 +26,20 @@ from pathlib import Path
 
 import pytest
 
+from devtools.check_rung_figures import decimal_matches
+from sqpack.yamlio import safe_load
+
 PACKING = Path(__file__).resolve().parents[1]
 CASE = PACKING / "cases" / "n11_fractional_certificate"
 VERIFIER = CASE / "minimal_verify.py"
 CERTIFICATE = CASE / "certificate.json"
+CARD = CASE / "PROOF-CARD.md"
+RESULTS = PACKING / "frontier" / "results.yaml"
+
+#: The verifier's own count of the cells it scores across the net. The exhaustive node
+#: below re-derives it on every run and the card quotes it; this constant is what holds
+#: those two together. Nothing else in the repository states it.
+REACHABLE_CELLS = 567_131_843
 
 
 def run(*arguments: str | Path) -> subprocess.CompletedProcess[str]:
@@ -112,4 +122,96 @@ def test_the_retained_bytes_are_verified_on_the_full_net() -> None:
     assert "Condition 1  PASS  1121 atoms" in result.stdout
     assert "Condition 2  PASS  total mass 434547/40000" in result.stdout
     assert "Condition 5  PASS  least covered mass 4001/4000" in result.stdout
-    assert "of 181, over" in result.stdout
+    assert f"of 181, over {REACHABLE_CELLS} reachable cells" in result.stdout
+
+
+def stated(pattern: str, text: str, label: str) -> str:
+    """What the card says, where it says it, so the assertion can be against the artifact."""
+
+    match = re.search(pattern, text)
+    assert match is not None, f"the proof card no longer states {label}"
+    return match.group(1)
+
+
+def test_the_proof_card_states_the_certificates_own_figures() -> None:
+    """Every parameter on the card, re-derived from the JSON the card is about.
+
+    This is `D-439`'s shape at a new surface: prose quoting an artifact's figures, left
+    behind when the artifact moves. `check_rung_figures.py` owns that rule for
+    `results.yaml`, `evidence.yaml` and `defects.yaml`, and `check_case_prose.py` for
+    the case bodies. The card is neither, and it is one document about one artifact
+    sitting beside it, so the check lives here rather than in a third corpus-wide tool.
+    """
+
+    record = json.loads(CERTIFICATE.read_text(encoding="utf-8"))
+    text = CARD.read_text(encoding="utf-8")
+    total = sum((Fraction(weight) for _, _, weight in record["atoms"]), Fraction(0))
+    limit, steps = Fraction(record["angle_limit"]), record["direction_steps"]
+    tangents = [limit * step / steps for step in range(steps + 1)]
+    gap = max(
+        (tangents[k + 1] - tangents[k]) / (1 + tangents[k] * tangents[k + 1])
+        for k in range(steps)
+    )
+    shrink = Fraction(record["square_side"])
+
+    figures = {
+        r"atoms\s+(\d+) nonnegative": (Fraction(len(record["atoms"])), "the atom count"),
+        r"total weight\s+(\d+/\d+)": (total, "the total mass"),
+        r"container side\s+L = (\d+/\d+)": (Fraction(record["outer_side"]), "the side"),
+        r"shrink\s+B = (\d+/\d+)": (shrink, "the shrink"),
+        r"net\s+(\d+) directions": (Fraction(steps + 1), "the direction count"),
+        r"t_K\^2 \+ 2 t_K - 1 = (\d+/\d+)": (limit * limit + 2 * limit - 1, "the arc slack"),
+        r"half-gap\s+D = (\d+/\d+)": (gap, "the largest half-gap tangent"),
+        r"containment\s+B\(1 \+ D\) = (\d+/\d+)": (shrink * (1 + gap), "the containment"),
+        r"least cover\s+(\d+/\d+)": (Fraction(record["least_cell_mass"]), "the least cover"),
+        r"over (\d+) reachable event": (Fraction(REACHABLE_CELLS), "the reachable cells"),
+    }
+    for pattern, (value, label) in figures.items():
+        assert Fraction(stated(pattern, text, label)) == value, label
+
+
+def test_the_proof_card_quotes_the_digest_as_a_prefix_rather_than_pinning_it_again() -> None:
+    """One pin, in `minimal_verify.py`; the card carries a prefix and where to get the rest."""
+
+    digest = hashlib.sha256(CERTIFICATE.read_bytes()).hexdigest()
+    text = CARD.read_text(encoding="utf-8")
+    quoted = re.findall(r"sha256 ([0-9a-f]+)", text)
+
+    assert quoted, "the card no longer quotes the certificate's digest at all"
+    for prefix in quoted:
+        assert len(prefix) >= 8
+        assert digest.startswith(prefix)
+    assert digest not in text
+    assert "sha256sum certificate.json" in text
+
+
+def test_every_fraction_equals_decimal_on_the_card_is_arithmetically_true() -> None:
+    """The repository-wide rule applied to the card: `a/b = d.ddd` must be true as written.
+
+    `decimal_matches` is imported rather than reimplemented, so this check and
+    `check_rung_figures` can never disagree about what "true as written" means.
+    """
+
+    text = CARD.read_text(encoding="utf-8")
+    pairs = re.findall(r"(?<![\w.])(\d+)/(\d+)\s*=\s*(-?\d+\.\d+)(?!\d)", text)
+
+    assert pairs, "the card no longer states any fraction with its decimal"
+    assert [
+        f"{numerator}/{denominator} = {decimal}"
+        for numerator, denominator, decimal in pairs
+        if not decimal_matches(Fraction(int(numerator), int(denominator)), decimal)
+    ] == []
+
+
+def test_the_proof_card_reports_the_standing_the_register_holds() -> None:
+    """The rung and the novelty label belong to `results.yaml`; the card only repeats them."""
+
+    entry = next(
+        result
+        for result in safe_load(RESULTS.read_text(encoding="utf-8"))["results"]
+        if result["id"] == "T-018"
+    )
+    text = CARD.read_text(encoding="utf-8")
+
+    assert f"confirmation rung `{entry['confirmation']}`" in text
+    assert f"`{entry['novelty']}`" in text
